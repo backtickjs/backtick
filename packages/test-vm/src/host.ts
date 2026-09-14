@@ -1,9 +1,9 @@
-import type { RendererOptions } from "solid-js/universal";
+import type { RendererOptions } from "@backtickjs/web-vm";
 
 // A host of plain objects: the same ten operations a browser answers with the
-// DOM, answered here with objects a test can read. What the suite exercises is
-// the interpreter — one implementation, the one every target runs — so what
-// this adds is somewhere for it to build, and nothing else.
+// DOM, answered here with objects a test can read. What a test exercises is
+// the interpreter — one implementation, the one a page runs — so what this adds
+// is somewhere for it to build, and nothing else.
 export interface TestNode {
   // The tag, or `#text` for a text node. Text is the one node that isn't an
   // element, and the host is what knows the difference.

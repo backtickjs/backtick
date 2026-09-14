@@ -203,9 +203,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@backtickjs/js-interpreter':
+      '@backtickjs/test-vm':
         specifier: workspace:*
-        version: link:../../packages/js-interpreter
+        version: link:../../packages/test-vm
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../../packages/web-client
@@ -500,25 +500,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/js-interpreter:
-    dependencies:
-      '@backtickjs/language':
-        specifier: workspace:*
-        version: link:../language
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
-    devDependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/language:
     dependencies:
       '@backtickjs/schema':
@@ -613,6 +594,25 @@ importers:
 
   packages/schema:
     devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/test-vm:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@backtickjs/web-vm':
+        specifier: workspace:*
+        version: link:../web-vm
+    devDependencies:
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -717,9 +717,12 @@ importers:
 
   packages/web-vm:
     dependencies:
-      '@backtickjs/js-interpreter':
+      '@backtickjs/language':
         specifier: workspace:*
-        version: link:../js-interpreter
+        version: link:../language
+      solid-js:
+        specifier: ^1.9.14
+        version: 1.9.14
     devDependencies:
       '@backtickjs/core':
         specifier: workspace:*
@@ -751,15 +754,15 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../packages/core
-      '@backtickjs/js-interpreter':
-        specifier: workspace:*
-        version: link:../packages/js-interpreter
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../packages/language
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../packages/prettier-plugin
+      '@backtickjs/test-vm':
+        specifier: workspace:*
+        version: link:../packages/test-vm
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../packages/tsc

@@ -1,4 +1,4 @@
-import type { RendererOptions } from "@backtickjs/js-interpreter";
+import type { RendererOptions } from "./interpreter/index.js";
 
 // SVG's namespace. `createElement` cannot reach it: an element made there
 // draws, and one made with the same tag in HTML's namespace is an

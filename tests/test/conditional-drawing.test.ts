@@ -3,8 +3,8 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isTestNode } from "./test-client/index.ts";
-import type { TestNode } from "./test-client/index.ts";
+import { evaluate, isTestNode } from "@backtickjs/test-vm";
+import type { TestNode } from "@backtickjs/test-vm";
 
 // A block whose drawing is a conditional, and a write that answers it.
 //

@@ -1,0 +1,10 @@
+{
+  "extends": "../../configs/tsconfig.build.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "lib": ["esnext"],
+    // The window's timers are the process's own.
+    "types": ["node"]
+  }
+}

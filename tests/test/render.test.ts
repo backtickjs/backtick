@@ -4,10 +4,9 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
-import { render } from "@backtickjs/js-interpreter";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { testHost } from "./test-client/index.ts";
-import type { TestNode } from "./test-client/index.ts";
+import { render, testHost } from "@backtickjs/test-vm";
+import type { TestNode } from "@backtickjs/test-vm";
 
 // Where a render draws, and what it may move.
 //
@@ -55,7 +54,7 @@ describe("where a render draws", () => {
     const after = node("footer");
     const parent = parentOf(before, ends, after);
 
-    render(await rootList(), { renderer: testHost }, parent, ends);
+    render(await rootList(), parent, { anchor: ends });
 
     assert.deepEqual(
       parent.children.map((child) => child.id),
@@ -71,7 +70,7 @@ describe("where a render draws", () => {
     const ends = node("comment");
     const after = node("footer");
     const parent = parentOf(before, ends, after);
-    render(await rootList(), { renderer: testHost }, parent, ends);
+    render(await rootList(), parent, { anchor: ends });
 
     const clear = parent.children[1];
     assert.ok(clear !== undefined);
@@ -90,7 +89,7 @@ describe("where a render draws", () => {
     // one this cannot take — an empty target holding only the anchor included.
     const ends = node("comment");
     const parent = parentOf(ends);
-    render(await rootList(), { renderer: testHost }, parent, ends);
+    render(await rootList(), parent, { anchor: ends });
 
     const clear = parent.children[0];
     assert.ok(clear !== undefined);
@@ -109,8 +108,8 @@ describe("where a render draws", () => {
     const second = node("comment-2");
     const parent = parentOf(first, second);
 
-    render(await rootList(), { renderer: testHost }, parent, first);
-    render(await rootList(), { renderer: testHost }, parent, second);
+    render(await rootList(), parent, { anchor: first });
+    render(await rootList(), parent, { anchor: second });
 
     assert.deepEqual(
       parent.children.map((child) => child.id),
@@ -152,7 +151,7 @@ describe("a bundle a script runs with vm.eval", () => {
       await importFixture(validDir, "vm-eval.tsx"),
     );
     const parent = node("main");
-    render(bundle, { renderer: testHost }, parent);
+    render(bundle, parent);
 
     const div = parent.children[0];
     assert.ok(div !== undefined);
@@ -169,7 +168,7 @@ describe("a tag naming a function the script holds", () => {
       await importFixture(validDir, "script-bound-tag.tsx"),
     );
     const parent = node("main");
-    render(bundle, { renderer: testHost }, parent);
+    render(bundle, parent);
 
     const [badge, button] = parent.children[0]!.children;
     assert.ok(badge !== undefined && button !== undefined);
@@ -186,7 +185,7 @@ describe("a tag naming a function the script holds", () => {
       await importFixture(validDir, "script-bound-tag-loading.tsx"),
     );
     const parent = node("main");
-    render(bundle, { renderer: testHost }, parent);
+    render(bundle, parent);
     const div = parent.children[0]!;
     assert.equal(div.children[0]?.id, "i");
 
@@ -205,7 +204,7 @@ describe("a tag naming a function the script holds", () => {
       await importFixture(validDir, "script-bound-tag-capture.tsx"),
     );
     const parent = node("main");
-    render(bundle, { renderer: testHost }, parent);
+    render(bundle, parent);
     const badges = findAll(parent, "b");
     const texts = () => findAll(parent, "b").map((b) => b.children[0]?.text);
     assert.deepEqual(texts(), ["n 0", "n 100", "n 1000", "n 0", "n 0"]);
@@ -221,7 +220,7 @@ describe("a tag naming a function the script holds", () => {
       await importFixture(validDir, "script-bound-tag-carried.tsx"),
     );
     const parent = node("main");
-    render(bundle, { renderer: testHost }, parent);
+    render(bundle, parent);
     const [panel] = findAll(parent, "i");
     const [badge] = findAll(parent, "b");
     assert.equal(panel?.children[0]?.text, "panel 0");
@@ -255,7 +254,7 @@ describe("an element's namespace", () => {
       await importFixture(validDir, "svg-namespace.tsx"),
     );
     const { made, host } = recording();
-    render(bundle, { renderer: host }, node("main"));
+    render(bundle, node("main"), { host });
 
     // Sorted: a list builds its rows after the elements beside it, and the
     // order they are made in is not the claim.
@@ -281,7 +280,7 @@ describe("an element's namespace", () => {
     );
     const { made, host } = recording();
     const parent = node("main");
-    render(bundle, { renderer: host }, parent);
+    render(bundle, parent, { host });
     assert.deepEqual(made.sort(), [
       "button",
       "button",

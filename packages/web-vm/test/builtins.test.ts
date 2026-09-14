@@ -16,7 +16,7 @@ const { builtins } = await import("../src/builtins.ts");
 // script may reach. A name declared and not implemented, or implemented and not
 // declared, fails here rather than at the first bundle that reaches it.
 //
-// The language's own names are not checked here: `js-interpreter` answers for
+// The language's own names are not checked here: `src/interpreter` answers for
 // those and its own suite holds it to them. What is this target's is this
 // target's to answer.
 

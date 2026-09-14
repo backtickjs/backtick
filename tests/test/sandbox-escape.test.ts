@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { after, describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import type { ClientUnknown } from "@backtickjs/core";
-import { evaluate } from "./test-client/index.ts";
+import { evaluate } from "@backtickjs/test-vm";
 
 // A guard, not a snapshot. Every other suite here compiles a `.ts` fixture and
 // runs what the compiler emitted; the point of these tests is the opposite — a
@@ -13,10 +13,11 @@ import { evaluate } from "./test-client/index.ts";
 // A bundle must not be able to reach the ambient JavaScript machinery. The
 // classic escape walks `({}).constructor` (Object) to `.constructor`
 // (Function) and runs arbitrary code; the same climb off a cell or the window
-// would do too. `memberOf` in `packages/js-interpreter/src/interpret.ts` treats
-// reading any member inherited from `Object.prototype` or `Function.prototype`
-// as an error, which closes every rung of that ladder while leaving own members
-// and host-prototype members (a DOM event's `preventDefault`) reachable.
+// would do too. `memberOf` in `packages/web-vm/src/interpreter/interpret.ts`
+// treats reading any member inherited from `Object.prototype` or
+// `Function.prototype` as an error, which closes every rung of that ladder while
+// leaving own members and host-prototype members (a DOM event's
+// `preventDefault`) reachable.
 //
 // If any assertion here starts failing, the interpreter's sandbox has
 // regressed: a hand-written bundle can once again reach code execution.

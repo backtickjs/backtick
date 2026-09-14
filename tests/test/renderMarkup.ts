@@ -1,5 +1,5 @@
-import { isTestNode, isText } from "./test-client/host.ts";
-import type { TestNode } from "./test-client/host.ts";
+import { isTestNode, isText } from "@backtickjs/test-vm";
+import type { TestNode } from "@backtickjs/test-vm";
 
 // Renders a built node as JSX-like markup: children render as the node's body,
 // the props render as attributes. The client scripts were already evaluated

@@ -1,4 +1,4 @@
-import { render } from "@backtickjs/js-interpreter";
+import { render } from "@backtickjs/test-vm";
 
 // The driver, as the benchmark's own driver would be if there were no browser:
 // it opens the app, finds elements by selector, and clicks them. What it drives
@@ -158,7 +158,7 @@ export function open(bundle) {
     parent: null,
     text: null,
   };
-  render(bundle, { renderer: host }, root);
+  render(bundle, root, { host });
 
   // The first step is a search — there is no document to descend from, so it
   // runs over every node the host made — and each step after it is a child of

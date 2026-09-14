@@ -3,8 +3,8 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isTestNode, recordingHost } from "./test-client/index.ts";
-import type { TestNode } from "./test-client/index.ts";
+import { evaluate, isTestNode, recordingHost } from "@backtickjs/test-vm";
+import type { TestNode } from "@backtickjs/test-vm";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
 // wire shape, and these drive the reference client through it — a write has to
@@ -185,7 +185,7 @@ describe("local state", () => {
   it("a prop that recomputed to what it held is not set again", async () => {
     const script = await importFixture(validDir, "unmoved-prop.tsx");
     const { options, writes } = recordingHost();
-    const view = evaluate(await bundler.run(script), options);
+    const view = evaluate(await bundler.run(script), { host: options });
     assert.ok(isTestNode(view), "expected a rendered node");
     const [select, list] = children(view);
     assert.ok(select !== undefined && list !== undefined);

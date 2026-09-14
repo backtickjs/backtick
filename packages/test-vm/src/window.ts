@@ -1,15 +1,15 @@
 import type { ClientValue } from "@backtickjs/core";
 
-// A window for the suite, which is the timers and nothing else.
+// A window for a test, which is the timers and nothing else.
 //
-// The language answers for no clock — a timer is the target's, and a script
-// reaches one by splicing the window — so a fixture that waits needs a target
-// to hand it one. `packages/web-vm/src/builtins.ts` is the real target's,
-// and carries the reasoning; what is here is the part a fixture uses.
+// The language answers for no clock — a timer is the client's, and a script
+// reaches one by splicing the window — so a bundle that waits needs a client
+// to hand it one. `packages/web-vm/src/builtins.ts` is the real client's, and
+// carries the reasoning; what is here is the part a test uses.
 //
-// Ids are this table's rather than the host's, which is what the web client
-// does not have to do: a browser's `setTimeout` answers with the number the
-// schema promises, and Node's answers with an object. So the number a fixture
+// Ids are this table's rather than the host's, which is what the web VM does
+// not have to do: a browser's `setTimeout` answers with the number the
+// schema promises, and Node's answers with an object. So the number a bundle
 // sees is minted here, and the handle it stands for stays in the map.
 const pending = new Map<number, ReturnType<typeof globalThis.setTimeout>>();
 let last = 0;

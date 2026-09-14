@@ -18,7 +18,7 @@
   "devDependencies": {
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/js-interpreter": "workspace:*",
+    "@backtickjs/test-vm": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
     "typescript": "^6.0.3"
   }

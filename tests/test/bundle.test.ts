@@ -7,7 +7,7 @@ import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderValue } from "./renderValue.ts";
-import { evaluate } from "./test-client/index.ts";
+import { evaluate } from "@backtickjs/test-vm";
 
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a
 // client — a script or a JSX tree — compiled here with the same transform the
@@ -15,8 +15,8 @@ import { evaluate } from "./test-client/index.ts";
 // module. A `valid/` fixture's bundle payload is snapshotted to a sibling
 // `*.bundle` file (with a human-readable rendering of the same payload in
 // `*.bundle-debug` — see `renderBundleDebug`), then executed by the
-// reference test-client and the resulting runtime value snapshotted to
-// `*.value`. A `bundle-error/`
+// test VM (`@backtickjs/test-vm`) and the resulting runtime value
+// snapshotted to `*.value`. A `bundle-error/`
 // fixture compiles and imports cleanly but exports a client the bundler must
 // reject: its error message is snapshotted to a sibling `*.error` file. Run
 // with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.

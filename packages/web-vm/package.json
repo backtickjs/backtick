@@ -22,7 +22,11 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/js-interpreter": "workspace:*"
+    "@backtickjs/language": "workspace:*",
+    "solid-js": "^1.9.14"
+  },
+  "peerDependencies": {
+    "@backtickjs/core": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",

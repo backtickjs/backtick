@@ -1,9 +1,9 @@
 {
-  "name": "@backtickjs/js-interpreter",
+  "name": "@backtickjs/test-vm",
   "version": "0.1.0",
   "private": true,
-  "description": "Internal: used by `@backtickjs/web-vm`. Evaluates a bundle in JavaScript",
   "type": "module",
+  "description": "The web VM drawing into plain objects, for running Backtick apps in tests",
   "main": "./dist/index.js",
   "exports": {
     ".": {
@@ -19,14 +19,11 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*",
-    "solid-js": "^1.9.14"
-  },
-  "peerDependencies": {
-    "@backtickjs/core": "workspace:*"
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/web-vm": "workspace:*"
   },
   "devDependencies": {
-    "@backtickjs/core": "workspace:*",
+    "@types/node": "^25.9.1",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

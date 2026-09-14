@@ -1,7 +1,7 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
-import { render } from "@backtickjs/js-interpreter";
-import type { RendererOptions } from "@backtickjs/js-interpreter";
+import { render } from "./interpreter/index.js";
+import type { RendererOptions } from "./interpreter/index.js";
 import { builtins as webBuiltins } from "./builtins.js";
 import { dom } from "./dom.js";
 
