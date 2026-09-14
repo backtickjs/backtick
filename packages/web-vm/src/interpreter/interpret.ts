@@ -410,7 +410,11 @@ function buildNode(
         } as unknown as ClientValue;
         return () => vm;
       }
-      const value = instance.builtins[name];
+      // Own names only: the table is a plain object, and what it inherits —
+      // `constructor` is `Object` — is nobody's.
+      const value = Object.hasOwn(instance.builtins, name)
+        ? instance.builtins[name]
+        : undefined;
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }

@@ -84,4 +84,16 @@ describe("sandbox escape (hand-written bundles)", () => {
     const root = [".", ["obj", [[":", "constructor", 7]]], "constructor"];
     assert.equal(evaluate(bundleOf(root)), 7);
   });
+
+  it("refuses a builtin the table only inherits", () => {
+    // The table of names is a plain object, so `constructor` on it is `Object` —
+    // whose `getPrototypeOf` reaches `Function.prototype` and its own
+    // `constructor`, which is `Function`.
+    for (const name of ["constructor", "__proto__", "toString"]) {
+      assert.throws(
+        () => evaluate(bundleOf(["bltn", name])),
+        new RegExp(`unknown builtin ${name}`),
+      );
+    }
+  });
 });
