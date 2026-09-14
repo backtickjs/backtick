@@ -179,6 +179,17 @@ export function builtinsOf(
 // one — and not how to call one, so applying is this client's own knowledge.
 type Applied = (...args: ClientValue[]) => ClientValue;
 
+// The names `Object.prototype` and `Function.prototype` answer for, which a
+// plain object only reaches as its own member — see `memberOf`.
+const MACHINERY = new Set([
+  ...Object.getOwnPropertyNames(Object.prototype),
+  ...Object.getOwnPropertyNames(Function.prototype),
+]);
+
+function isMachinery(name: string): boolean {
+  return MACHINERY.has(name);
+}
+
 // A member access on a primitive reads from the language's table by the whole
 // name rather than from the host's prototypes: a member the schema left out
 // stays left out, where `value[member]` would hand back whatever JavaScript
@@ -214,16 +225,14 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     // the rest live on `Object.prototype` and `Function.prototype`, and none of
     // it is the language's. It is also the way out — `({}).constructor` is
     // `Object`, whose `.constructor` is `Function`, which runs arbitrary code —
-    // so a member inherited from either prototype reads as absent. What a host
+    // so reading a member inherited from either prototype throws. What a host
     // puts on its own prototypes (a DOM event's `preventDefault`) is not on
     // these two and is read as before; an own member always wins, so a data
     // object whose own key happens to be `constructor` still answers with it.
-    const machinery =
-      !Object.hasOwn(object as object, name) &&
-      (name in Object.prototype || name in Function.prototype);
-    const held = machinery
-      ? undefined
-      : (object as { readonly [name: string]: ClientValue })[name];
+    if (isMachinery(name) && !Object.hasOwn(object as object, name)) {
+      throw new Error(`an object has no \`${name}\` in this language`);
+    }
+    const held = (object as { readonly [name: string]: ClientValue })[name];
     // Bound, because some of these objects are the host's own. A cell's members
     // are closures and do not care, but an event's are methods that read the
     // event through `this` — and `preventDefault` reached off one and called

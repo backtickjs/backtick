@@ -14,9 +14,9 @@ import { evaluate } from "./test-client/index.ts";
 // classic escape walks `({}).constructor` (Object) to `.constructor`
 // (Function) and runs arbitrary code; the same climb off a cell or the window
 // would do too. `memberOf` in `packages/js-interpreter/src/interpret.ts` treats
-// any member inherited from `Object.prototype` or `Function.prototype` as
-// absent, which closes every rung of that ladder while leaving own members and
-// host-prototype members (a DOM event's `preventDefault`) reachable.
+// reading any member inherited from `Object.prototype` or `Function.prototype`
+// as an error, which closes every rung of that ladder while leaving own members
+// and host-prototype members (a DOM event's `preventDefault`) reachable.
 //
 // If any assertion here starts failing, the interpreter's sandbox has
 // regressed: a hand-written bundle can once again reach code execution.
@@ -30,19 +30,31 @@ const OBJECT_CTOR = [".", EMPTY, "constructor"];
 const FUNCTION_CTOR = [".", OBJECT_CTOR, "constructor"];
 
 describe("sandbox escape (hand-written bundles)", () => {
-  it("does not leak `constructor` off an object literal", () => {
+  it("refuses `constructor` off an object literal", () => {
     // `{}` holds no `constructor`; the inherited one from Object.prototype is
-    // machinery, so it reads as absent.
-    assert.equal(evaluate(bundleOf(OBJECT_CTOR)), undefined);
+    // machinery, so reading it throws.
+    assert.throws(
+      () => evaluate(bundleOf(OBJECT_CTOR)),
+      /an object has no `constructor` in this language/,
+    );
   });
 
-  it("does not leak `__proto__` off an object literal", () => {
-    assert.equal(evaluate(bundleOf([".", EMPTY, "__proto__"])), undefined);
+  it("refuses `__proto__` off an object literal", () => {
+    assert.throws(
+      () => evaluate(bundleOf([".", EMPTY, "__proto__"])),
+      /an object has no `__proto__` in this language/,
+    );
+  });
+
+  it("refuses a machinery method call", () => {
+    const root = ["()", [".", EMPTY, "toString"], []];
+    assert.throws(
+      () => evaluate(bundleOf(root)),
+      /an object has no `toString` in this language/,
+    );
   });
 
   it("cannot reach the Function constructor", () => {
-    // `{}.constructor` is absent, so `.constructor` on it is a member read of
-    // `undefined` — a runtime error, not a climb to Function.
     assert.throws(() => evaluate(bundleOf(FUNCTION_CTOR)));
   });
 
