@@ -4,7 +4,7 @@ import type {
   BundleArrayElement,
   BundleElement,
   BundleComponentCall,
-} from "@backtickjs/bundler";
+} from "@backtickjs/language";
 import {
   createMemo,
   createRoot,

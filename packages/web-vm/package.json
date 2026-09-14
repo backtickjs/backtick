@@ -25,7 +25,6 @@
     "@backtickjs/js-interpreter": "workspace:*"
   },
   "devDependencies": {
-    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
     "esbuild": "0.28.0",

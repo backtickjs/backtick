@@ -19,7 +19,6 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/language": "workspace:*",
     "solid-js": "^1.9.14"
   },

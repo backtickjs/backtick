@@ -502,9 +502,6 @@ importers:
 
   packages/js-interpreter:
     dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -724,9 +721,6 @@ importers:
         specifier: workspace:*
         version: link:../js-interpreter
     devDependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core

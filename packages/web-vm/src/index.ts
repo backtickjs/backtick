@@ -11,6 +11,6 @@
  */
 export { defineClient } from "./defineClient.js";
 export type { Draw, Vocabulary } from "./defineClient.js";
-export type { Bundle } from "@backtickjs/bundler";
+export type { Bundle } from "@backtickjs/core";
 export { builtins } from "./builtins.js";
 export { dom } from "./dom.js";
