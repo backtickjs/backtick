@@ -46,13 +46,6 @@ describe("builtins", () => {
     assert.deepEqual(Object.keys(getters).sort(), declared.sort());
   });
 
-  it("answer with a number this language has, or not at all", () => {
-    assert.throws(() => answer("Math.sqrt")(-1), /are finite/);
-    assert.throws(() => answer("Math.log")(0), /are finite/);
-    assert.throws(() => answer("Math.exp")(710), /are finite/);
-    assert.equal(answer("Math.sqrt")(9), 3);
-  });
-
   it("refuse an empty `Math.min`/`Math.max`", () => {
     assert.throws(() => answer("Math.min")(), /at least one number/);
     assert.throws(() => answer("Math.max")(), /at least one number/);

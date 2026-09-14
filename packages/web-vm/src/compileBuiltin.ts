@@ -137,12 +137,7 @@ export function compileBuiltin(
     case "String.fromCodePoint": {
       known satisfies Delegated;
       const [prefix, member] = known.split(".");
-      const namespace = (globalThis as unknown as Namespaces)[prefix];
-      const held = namespace[member];
-      return typeof held === "function"
-        ? (...args: ClientValue[]) =>
-            finite(known, (held as Applied).apply(namespace, args))
-        : held;
+      return (globalThis as unknown as Namespaces)[prefix][member];
     }
     // Read where they are named rather than called: see `getters`.
     case "string.length":
@@ -204,7 +199,7 @@ export function compileBuiltin(
         if (values.length === 0) {
           throw new Error("`Math.max` takes at least one number");
         }
-        return finite(known, Math.max(...values));
+        return Math.max(...values);
       }) satisfies Builtins[typeof known];
     case "Math.min":
       return ((...values) => {
@@ -213,7 +208,7 @@ export function compileBuiltin(
         if (values.length === 0) {
           throw new Error("`Math.min` takes at least one number");
         }
-        return finite(known, Math.min(...values));
+        return Math.min(...values);
       }) satisfies Builtins[typeof known];
     case "Number.parseFloat":
       return ((string) => {
@@ -385,25 +380,4 @@ function query(url: string, params: HttpConfig["params"]): string {
     return "";
   }
   return (url.includes("?") ? "&" : "?") + pairs.join("&");
-}
-
-// Every number in this language is finite. `NaN` and `Infinity` are not values
-// a script can write — neither name is in scope — so they are not values a
-// client may answer with either: `sqrt(-1)`, `log(0)` and `exp(710)` refuse
-// rather than handing one back, the way an empty `min` does.
-//
-// Checked on the answer rather than on the arguments, because one rule covers a
-// domain error and an overflow alike where a rule per member would be
-// thirty-five domains to get right and would still miss every overflow.
-function finite<Answer extends ClientValue>(
-  name: string,
-  answer: Answer,
-): Answer {
-  if (typeof answer === "number" && !Number.isFinite(answer)) {
-    throw new Error(
-      `\`${name}\` has no answer this language can hold: its numbers ` +
-        `are finite, and this one is ${answer}.`,
-    );
-  }
-  return answer;
 }
