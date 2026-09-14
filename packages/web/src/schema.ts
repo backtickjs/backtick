@@ -3053,19 +3053,10 @@ export const schema: Schema = {
 
     // ---- SVG --------------------------------------------------------------
     //
-    // A namespace of its own, and the ids say so: `svg:path` is a path in the
-    // SVG namespace, where a bare `path` would be an HTML element no browser
-    // knows. The prefix is what a client dispatches on — nothing else in the
-    // format carries a namespace, and an id's meaning is the client's.
-    //
-    // Every tag is prefixed, the root included. One rule with no exception is
-    // worth more than the four characters `svg:svg` costs: a client tests a
-    // prefix and is done, and no reader has to remember which tag is special.
-    //
-    // It also settles the four names both languages use. React declares no SVG
-    // `a`, `title`, `script` or `style` — its keys are flat, so HTML wins them
-    // and its renderer sorts the namespace out at runtime. Prefixed, both are
-    // sayable and nothing has to be resolved later.
+    // A namespace of its own, which an element takes from where it is drawn,
+    // as the DOM's parser decides: an `svg` enters SVG's namespace, everything
+    // inside it is SVG's, and a `foreignObject`'s children are HTML's again.
+    // So no tag carries a prefix, and a pasted `.svg` draws as it is.
 
     /** What every SVG element accepts.
      *
@@ -3357,7 +3348,7 @@ export const schema: Schema = {
   },
 
   // Keyed by the name a script writes, which is also the id the wire carries
-  // and the string `createElement` receives. What each holds is what it
+  // and, prefixed `svg:` inside an `svg`, the string `createElement` receives. What each holds is what it
   // accepts, and most of them accept the same shape — which is why this is a
   // map onto interfaces rather than 175 declarations.
   elements: {
@@ -3487,81 +3478,73 @@ export const schema: Schema = {
     video: Type.Ref("VideoProps"),
     wbr: Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLElement")]),
 
-    // SVG, prefixed. A client reads the prefix and puts the element in the SVG
-    // namespace; without it `document.createElement("path")` is an unknown
-    // element that draws nothing.
-    // SVG, every tag prefixed — the root included. One rule with no
-    // exception is worth more than the four characters `svg:svg` costs: a
-    // client tests a prefix and is done, and no reader has to remember which
-    // tag is special.
-    //
-    // It also settles the four names both languages use. React declares no SVG
-    // `a`, `title`, `script` or `style` — its keys are flat, so HTML wins them
-    // and its renderer sorts the namespace out while walking the tree. A
-    // prefix says it in the bundle instead, where a client that never walks
-    // one can still read it.
-    "svg:a": Type.Ref("SvgProps"),
-    "svg:animate": Type.Ref("SvgProps"),
-    "svg:animateMotion": Type.Ref("SvgProps"),
-    "svg:animateTransform": Type.Ref("SvgProps"),
-    "svg:circle": Type.Ref("SvgProps"),
-    "svg:clipPath": Type.Ref("SvgProps"),
-    "svg:defs": Type.Ref("SvgProps"),
-    "svg:desc": Type.Ref("SvgProps"),
-    "svg:ellipse": Type.Ref("SvgProps"),
-    "svg:feBlend": Type.Ref("SvgProps"),
-    "svg:feColorMatrix": Type.Ref("SvgProps"),
-    "svg:feComponentTransfer": Type.Ref("SvgProps"),
-    "svg:feComposite": Type.Ref("SvgProps"),
-    "svg:feConvolveMatrix": Type.Ref("SvgProps"),
-    "svg:feDiffuseLighting": Type.Ref("SvgProps"),
-    "svg:feDisplacementMap": Type.Ref("SvgProps"),
-    "svg:feDistantLight": Type.Ref("SvgProps"),
-    "svg:feDropShadow": Type.Ref("SvgProps"),
-    "svg:feFlood": Type.Ref("SvgProps"),
-    "svg:feFuncA": Type.Ref("SvgProps"),
-    "svg:feFuncB": Type.Ref("SvgProps"),
-    "svg:feFuncG": Type.Ref("SvgProps"),
-    "svg:feFuncR": Type.Ref("SvgProps"),
-    "svg:feGaussianBlur": Type.Ref("SvgProps"),
-    "svg:feImage": Type.Ref("SvgProps"),
-    "svg:feMerge": Type.Ref("SvgProps"),
-    "svg:feMergeNode": Type.Ref("SvgProps"),
-    "svg:feMorphology": Type.Ref("SvgProps"),
-    "svg:feOffset": Type.Ref("SvgProps"),
-    "svg:fePointLight": Type.Ref("SvgProps"),
-    "svg:feSpecularLighting": Type.Ref("SvgProps"),
-    "svg:feSpotLight": Type.Ref("SvgProps"),
-    "svg:feTile": Type.Ref("SvgProps"),
-    "svg:feTurbulence": Type.Ref("SvgProps"),
-    "svg:filter": Type.Ref("SvgProps"),
-    "svg:foreignObject": Type.Ref("SvgProps"),
-    "svg:g": Type.Ref("SvgProps"),
-    "svg:image": Type.Ref("SvgProps"),
-    "svg:line": Type.Ref("SvgProps"),
-    "svg:linearGradient": Type.Ref("SvgProps"),
-    "svg:marker": Type.Ref("SvgProps"),
-    "svg:mask": Type.Ref("SvgProps"),
-    "svg:metadata": Type.Ref("SvgProps"),
-    "svg:mpath": Type.Ref("SvgProps"),
-    "svg:path": Type.Ref("SvgProps"),
-    "svg:pattern": Type.Ref("SvgProps"),
-    "svg:polygon": Type.Ref("SvgProps"),
-    "svg:polyline": Type.Ref("SvgProps"),
-    "svg:radialGradient": Type.Ref("SvgProps"),
-    "svg:rect": Type.Ref("SvgProps"),
-    "svg:set": Type.Ref("SvgProps"),
-    "svg:stop": Type.Ref("SvgProps"),
-    "svg:style": Type.Ref("SvgProps"),
-    "svg:svg": Type.Ref("SvgProps"),
-    "svg:switch": Type.Ref("SvgProps"),
-    "svg:symbol": Type.Ref("SvgProps"),
-    "svg:text": Type.Ref("SvgProps"),
-    "svg:textPath": Type.Ref("SvgProps"),
-    "svg:title": Type.Ref("SvgProps"),
-    "svg:tspan": Type.Ref("SvgProps"),
-    "svg:use": Type.Ref("SvgProps"),
-    "svg:view": Type.Ref("SvgProps"),
+    // SVG. An element is in SVG's namespace when it is drawn inside an `svg`
+    // and in HTML's otherwise, whatever its name; a `foreignObject` holds HTML
+    // again. The names both languages use — `a`, `style` and `title` — are
+    // declared once, above, and are SVG's inside an `svg`.
+
+    // a: Type.Ref("SvgProps"),
+    animate: Type.Ref("SvgProps"),
+    animateMotion: Type.Ref("SvgProps"),
+    animateTransform: Type.Ref("SvgProps"),
+    circle: Type.Ref("SvgProps"),
+    clipPath: Type.Ref("SvgProps"),
+    defs: Type.Ref("SvgProps"),
+    desc: Type.Ref("SvgProps"),
+    ellipse: Type.Ref("SvgProps"),
+    feBlend: Type.Ref("SvgProps"),
+    feColorMatrix: Type.Ref("SvgProps"),
+    feComponentTransfer: Type.Ref("SvgProps"),
+    feComposite: Type.Ref("SvgProps"),
+    feConvolveMatrix: Type.Ref("SvgProps"),
+    feDiffuseLighting: Type.Ref("SvgProps"),
+    feDisplacementMap: Type.Ref("SvgProps"),
+    feDistantLight: Type.Ref("SvgProps"),
+    feDropShadow: Type.Ref("SvgProps"),
+    feFlood: Type.Ref("SvgProps"),
+    feFuncA: Type.Ref("SvgProps"),
+    feFuncB: Type.Ref("SvgProps"),
+    feFuncG: Type.Ref("SvgProps"),
+    feFuncR: Type.Ref("SvgProps"),
+    feGaussianBlur: Type.Ref("SvgProps"),
+    feImage: Type.Ref("SvgProps"),
+    feMerge: Type.Ref("SvgProps"),
+    feMergeNode: Type.Ref("SvgProps"),
+    feMorphology: Type.Ref("SvgProps"),
+    feOffset: Type.Ref("SvgProps"),
+    fePointLight: Type.Ref("SvgProps"),
+    feSpecularLighting: Type.Ref("SvgProps"),
+    feSpotLight: Type.Ref("SvgProps"),
+    feTile: Type.Ref("SvgProps"),
+    feTurbulence: Type.Ref("SvgProps"),
+    filter: Type.Ref("SvgProps"),
+    foreignObject: Type.Ref("SvgProps"),
+    g: Type.Ref("SvgProps"),
+    image: Type.Ref("SvgProps"),
+    line: Type.Ref("SvgProps"),
+    linearGradient: Type.Ref("SvgProps"),
+    marker: Type.Ref("SvgProps"),
+    mask: Type.Ref("SvgProps"),
+    metadata: Type.Ref("SvgProps"),
+    mpath: Type.Ref("SvgProps"),
+    path: Type.Ref("SvgProps"),
+    pattern: Type.Ref("SvgProps"),
+    polygon: Type.Ref("SvgProps"),
+    polyline: Type.Ref("SvgProps"),
+    radialGradient: Type.Ref("SvgProps"),
+    rect: Type.Ref("SvgProps"),
+    set: Type.Ref("SvgProps"),
+    stop: Type.Ref("SvgProps"),
+    // style: Type.Ref("SvgProps"),
+    svg: Type.Ref("SvgProps"),
+    switch: Type.Ref("SvgProps"),
+    symbol: Type.Ref("SvgProps"),
+    text: Type.Ref("SvgProps"),
+    textPath: Type.Ref("SvgProps"),
+    // title: Type.Ref("SvgProps"),
+    tspan: Type.Ref("SvgProps"),
+    use: Type.Ref("SvgProps"),
+    view: Type.Ref("SvgProps"),
   },
 
   /**

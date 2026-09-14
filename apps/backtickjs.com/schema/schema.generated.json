@@ -2194,6 +2194,7 @@
         "extends": [],
         "properties": {
           "each": {
+            "readOnly": true,
             "description": "The array to draw one thing per member of.",
             "type": "array",
             "items": {
@@ -14288,251 +14289,239 @@
         }
       ]
     },
-    "svg:a": {
+    "animate": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:animate": {
+    "animateMotion": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:animateMotion": {
+    "animateTransform": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:animateTransform": {
+    "circle": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:circle": {
+    "clipPath": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:clipPath": {
+    "defs": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:defs": {
+    "desc": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:desc": {
+    "ellipse": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:ellipse": {
+    "feBlend": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feBlend": {
+    "feColorMatrix": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feColorMatrix": {
+    "feComponentTransfer": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feComponentTransfer": {
+    "feComposite": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feComposite": {
+    "feConvolveMatrix": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feConvolveMatrix": {
+    "feDiffuseLighting": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDiffuseLighting": {
+    "feDisplacementMap": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDisplacementMap": {
+    "feDistantLight": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDistantLight": {
+    "feDropShadow": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDropShadow": {
+    "feFlood": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFlood": {
+    "feFuncA": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncA": {
+    "feFuncB": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncB": {
+    "feFuncG": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncG": {
+    "feFuncR": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncR": {
+    "feGaussianBlur": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feGaussianBlur": {
+    "feImage": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feImage": {
+    "feMerge": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feMerge": {
+    "feMergeNode": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feMergeNode": {
+    "feMorphology": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feMorphology": {
+    "feOffset": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feOffset": {
+    "fePointLight": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:fePointLight": {
+    "feSpecularLighting": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feSpecularLighting": {
+    "feSpotLight": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feSpotLight": {
+    "feTile": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feTile": {
+    "feTurbulence": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feTurbulence": {
+    "filter": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:filter": {
+    "foreignObject": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:foreignObject": {
+    "g": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:g": {
+    "image": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:image": {
+    "line": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:line": {
+    "linearGradient": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:linearGradient": {
+    "marker": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:marker": {
+    "mask": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:mask": {
+    "metadata": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:metadata": {
+    "mpath": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:mpath": {
+    "path": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:path": {
+    "pattern": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:pattern": {
+    "polygon": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:polygon": {
+    "polyline": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:polyline": {
+    "radialGradient": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:radialGradient": {
+    "rect": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:rect": {
+    "set": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:set": {
+    "stop": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:stop": {
+    "svg": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:style": {
+    "switch": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:svg": {
+    "symbol": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:switch": {
+    "text": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:symbol": {
+    "textPath": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:text": {
+    "tspan": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:textPath": {
+    "use": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:title": {
-      "type": "ref",
-      "$ref": "SvgProps"
-    },
-    "svg:tspan": {
-      "type": "ref",
-      "$ref": "SvgProps"
-    },
-    "svg:use": {
-      "type": "ref",
-      "$ref": "SvgProps"
-    },
-    "svg:view": {
+    "view": {
       "type": "ref",
       "$ref": "SvgProps"
     }
@@ -14739,6 +14728,39 @@
         "type": "number"
       }
     },
+    "string.codePointAt": {
+      "description": "Returns a nonnegative integer Number less than 1114112 (0x110000) that is the code point value of the UTF-16 encoded code point starting at the string element at position pos. If there is no element at that position, the result is undefined. If a valid UTF-16 surrogate pair does not begin at pos, the result is the code unit at pos.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The index of the element to read the code point at.",
+          "type": "functionParameter",
+          "name": "pos",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "union",
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "undefined"
+          }
+        ]
+      }
+    },
     "string.concat": {
       "description": "Returns a string that contains the concatenation of two or more strings.",
       "type": "function",
@@ -14833,6 +14855,101 @@
         "type": "number"
       }
     },
+    "string.includes": {
+      "description": "Returns true if searchString appears as a substring of this string, at one or more positions that are greater than or equal to position; otherwise, returns false.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "search string",
+          "type": "functionParameter",
+          "name": "searchString",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "If position is undefined, 0 is assumed, so as to search all of the String.",
+          "type": "functionParameter",
+          "name": "position",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
+    "string.startsWith": {
+      "description": "Returns true if the sequence of elements of searchString is the same as the corresponding elements of this string starting at position. Otherwise returns false.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "searchString",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "position",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
+    "string.endsWith": {
+      "description": "Returns true if the sequence of elements of searchString is the same as the corresponding elements of this string starting at endPosition – length(this). Otherwise returns false.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "searchString",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "endPosition",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
     "string.localeCompare": {
       "description": "Determines whether two strings are equivalent in the current locale.",
       "type": "function",
@@ -14918,6 +15035,31 @@
                 }
               }
             ]
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.repeat": {
+      "description": "Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "number of copies to append",
+          "type": "functionParameter",
+          "name": "count",
+          "holds": {
+            "type": "number"
           }
         }
       ],
@@ -15488,6 +15630,143 @@
         ],
         "returnType": {
           "type": "boolean"
+        }
+      }
+    },
+    "array.find": {
+      "description": "Returns the value of the first element in the array where predicate is true, and undefined otherwise.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Called once for each element of the array, in ascending order, until it returns true. If such an element is found, find immediately returns that element value.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "ref",
+              "$ref": "T"
+            },
+            {
+              "type": "undefined"
+            }
+          ]
+        }
+      }
+    },
+    "array.findIndex": {
+      "description": "Returns the index of the first element in the array where predicate is true, and -1 otherwise.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Called once for each element of the array, in ascending order, until it returns true. If such an element is found, findIndex immediately returns that element index.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "number"
         }
       }
     },
@@ -17004,6 +17283,34 @@
             "type": "ref",
             "$ref": "T"
           }
+        }
+      }
+    },
+    "Object.keys": {
+      "description": "Returns the names of an object's members, in the order `JSON.stringify` writes them.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "An object whose keys to list.",
+          "type": "functionParameter",
+          "name": "o",
+          "holds": {
+            "readOnly": true,
+            "type": "record",
+            "keys": {
+              "type": "string"
+            },
+            "values": {
+              "type": "ref",
+              "$ref": "ClientValue"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "array",
+        "items": {
+          "type": "string"
         }
       }
     },

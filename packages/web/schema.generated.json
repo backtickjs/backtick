@@ -14253,251 +14253,239 @@
         }
       ]
     },
-    "svg:a": {
+    "animate": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:animate": {
+    "animateMotion": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:animateMotion": {
+    "animateTransform": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:animateTransform": {
+    "circle": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:circle": {
+    "clipPath": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:clipPath": {
+    "defs": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:defs": {
+    "desc": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:desc": {
+    "ellipse": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:ellipse": {
+    "feBlend": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feBlend": {
+    "feColorMatrix": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feColorMatrix": {
+    "feComponentTransfer": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feComponentTransfer": {
+    "feComposite": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feComposite": {
+    "feConvolveMatrix": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feConvolveMatrix": {
+    "feDiffuseLighting": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDiffuseLighting": {
+    "feDisplacementMap": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDisplacementMap": {
+    "feDistantLight": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDistantLight": {
+    "feDropShadow": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feDropShadow": {
+    "feFlood": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFlood": {
+    "feFuncA": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncA": {
+    "feFuncB": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncB": {
+    "feFuncG": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncG": {
+    "feFuncR": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feFuncR": {
+    "feGaussianBlur": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feGaussianBlur": {
+    "feImage": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feImage": {
+    "feMerge": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feMerge": {
+    "feMergeNode": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feMergeNode": {
+    "feMorphology": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feMorphology": {
+    "feOffset": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feOffset": {
+    "fePointLight": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:fePointLight": {
+    "feSpecularLighting": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feSpecularLighting": {
+    "feSpotLight": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feSpotLight": {
+    "feTile": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feTile": {
+    "feTurbulence": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:feTurbulence": {
+    "filter": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:filter": {
+    "foreignObject": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:foreignObject": {
+    "g": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:g": {
+    "image": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:image": {
+    "line": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:line": {
+    "linearGradient": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:linearGradient": {
+    "marker": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:marker": {
+    "mask": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:mask": {
+    "metadata": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:metadata": {
+    "mpath": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:mpath": {
+    "path": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:path": {
+    "pattern": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:pattern": {
+    "polygon": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:polygon": {
+    "polyline": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:polyline": {
+    "radialGradient": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:radialGradient": {
+    "rect": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:rect": {
+    "set": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:set": {
+    "stop": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:stop": {
+    "svg": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:style": {
+    "switch": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:svg": {
+    "symbol": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:switch": {
+    "text": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:symbol": {
+    "textPath": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:text": {
+    "tspan": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:textPath": {
+    "use": {
       "type": "ref",
       "$ref": "SvgProps"
     },
-    "svg:title": {
-      "type": "ref",
-      "$ref": "SvgProps"
-    },
-    "svg:tspan": {
-      "type": "ref",
-      "$ref": "SvgProps"
-    },
-    "svg:use": {
-      "type": "ref",
-      "$ref": "SvgProps"
-    },
-    "svg:view": {
+    "view": {
       "type": "ref",
       "$ref": "SvgProps"
     }

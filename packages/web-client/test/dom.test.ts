@@ -45,8 +45,8 @@ describe("writing a style", () => {
 
 describe("an svg tag", () => {
   // `document.createElement("path")` is an `HTMLUnknownElement`: it parses, it
-  // inserts, and it draws nothing. The prefix is the only thing in a bundle
-  // that says which namespace a tag is from.
+  // inserts, and it draws nothing. The prefix, which the interpreter adds to a
+  // tag drawn inside an `svg`, is what says which namespace it is from.
   it("is made in the SVG namespace, without its prefix", () => {
     const made: { ns: string | null; tag: string }[] = [];
     const global = globalThis as unknown as { document: unknown };

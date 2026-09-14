@@ -1,0 +1,188 @@
+cs.lift(cs.const(       → cs`
+<                       → <
+circle                  → circle
+                        →  
+cx                      → cx
+={cs.lift(              → =
+"5"                     → "5"
+)}                      → 
+                        →  
+cy                      → cy
+={cs.lift(              → =
+"5"                     → "5"
+)}                      → 
+                        →  
+r                       → r
+={cs.lift(              → =
+"4"                     → "4"
+)}                      → 
+                        →  
+fill                    → fill
+={cs.lift(              → =
+"none"                  → "none"
+)}                      → 
+                        →  
+stroke                  → stroke
+={cs.lift(              → =
+"currentColor"          → "currentColor"
+)}                      → 
+/>                      →  />
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_Dot                → Dot
+ = cs.const(            →  = 
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+x                       → x
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → (\n    <
+circle                  → circle
+                        →  
+cx                      → cx
+={cs.lift(              → ={
+cs.receiver(            → 
+__cs_props              → props
+)                       → 
+.                       → .
+x                       → x
+)}                      → }
+                        →  
+cy                      → cy
+={cs.lift(              → =
+"5"                     → "5"
+)}                      → 
+                        →  
+r                       → r
+={cs.lift(              → =
+"2"                     → "2"
+)}                      → 
+>{cs.lift(              → >\n      
+<                       → <
+title                   → title
+>{cs.lift(              → >{
+"dot "                  → "dot "
+ +                      →  + 
+cs.receiver(            → 
+__cs_props              → props
+)                       → 
+.                       → .
+x                       → x
+)}</                    → }</
+title                   → title
+>                       → >
+)}</                    → \n    </
+circle                  → circle
+>                       → >\n  )
+);                      → ;
+\n                      → \n\n  
+return cs.const(        → return 
+<                       → (\n    <
+div                     → div
+>{cs.lift(              → >\n      
+<                       → <
+a                       → a
+                        →  
+href                    → href
+={cs.lift(              → =
+"/shapes"               → "/shapes"
+)}                      → 
+>{cs.lift(              → >{
+"shapes"                → "shapes"
+)}</                    → }</
+a                       → a
+>                       → >
+)}{cs.lift(             → \n      
+<                       → <
+svg                     → svg
+                        →  
+viewBox                 → viewBox
+={cs.lift(              → =
+"0 0 30 10"             → "0 0 30 10"
+)}                      → 
+                        →  
+width                   → width
+={cs.lift(              → =
+"120"                   → "120"
+)}                      → 
+>{cs.lift(              → >\n        
+<                       → <
+Ring                    → Ring
+ />                     →  />
+)}{cs.lift(             → \n        
+<                       → <
+For                     → For
+                        →  
+each                    → each
+={cs.lift(              → ={
+[                       → [
+10                      → 10
+,                       → , 
+20                      → 20
+]                       → ]
+)}                      → }
+>{cs.lift(              → >{
+(                       → (
+__cs_x                  → x
+:                       → : 
+number                  → number
+) =>                    → ) => 
+<                       → <
+__cs_Dot                → Dot
+                        →  
+x                       → x
+={                      → ={
+__cs_x                  → x
+}                       → }
+/>                      →  />
+)}</                    → }</
+For                     → For
+>                       → >
+)}{cs.lift(             → \n        
+<                       → <
+foreignObject           → foreignObject
+                        →  
+x                       → x
+={cs.lift(              → =
+"0"                     → "0"
+)}                      → 
+                        →  
+y                       → y
+={cs.lift(              → =
+"0"                     → "0"
+)}                      → 
+                        →  
+width                   → width
+={cs.lift(              → =
+"10"                    → "10"
+)}                      → 
+                        →  
+height                  → height
+={cs.lift(              → =
+"10"                    → "10"
+)}                      → 
+>{cs.lift(              → >\n          
+<                       → <
+p                       → p
+>{cs.lift(              → >{
+"html again"            → "html again"
+)}</                    → }</
+p                       → p
+>                       → >
+)}</                    → \n        </
+foreignObject           → foreignObject
+>                       → >
+)}</                    → \n      </
+svg                     → svg
+>                       → >
+)}</                    → \n    </
+div                     → div
+>                       → >\n  )
+);                      → ;
+\n})())                 → \n}`

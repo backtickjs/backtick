@@ -8,10 +8,8 @@ const SVG = "http://www.w3.org/2000/svg";
 // The DOM, as the ten operations a host answers. Nine are the DOM's own words;
 // `setProperty` is the only decision here, because what a prop means is ours.
 export const dom: RendererOptions<Node> = {
-  // An id carrying a namespace is this target's own vocabulary, which the
-  // format leaves to it: `svg:path` is a path in SVG's namespace, and an id
-  // with no prefix is HTML's. Nothing else in a bundle says which language a
-  // tag is from.
+  // The interpreter prefixes a tag drawn inside an `svg`: `svg:path` is a path
+  // in SVG's namespace, and a tag with no prefix is HTML's.
   createElement: (tag) => {
     const isSvg = tag.startsWith("svg:");
     tag = isSvg ? tag.slice(4) : tag.toLowerCase();

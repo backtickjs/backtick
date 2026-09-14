@@ -236,6 +236,69 @@ describe("a tag naming a function the script holds", () => {
   });
 });
 
+describe("an element's namespace", () => {
+  // The host hears an element drawn inside an `svg` as `svg:<tag>`.
+  function recording(): { made: string[]; host: typeof testHost } {
+    const made: string[] = [];
+    const host = {
+      ...testHost,
+      createElement: (id: string) => {
+        made.push(id);
+        return testHost.createElement(id);
+      },
+    };
+    return { made, host };
+  }
+
+  it("is where the element is drawn", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "svg-namespace.tsx"),
+    );
+    const { made, host } = recording();
+    render(bundle, { renderer: host }, node("main"));
+
+    // Sorted: a list builds its rows after the elements beside it, and the
+    // order they are made in is not the claim.
+    assert.deepEqual(made.sort(), [
+      "a",
+      "div",
+      "p",
+      "svg:circle",
+      "svg:circle",
+      "svg:circle",
+      "svg:foreignObject",
+      "svg:svg",
+      "svg:title",
+      "svg:title",
+    ]);
+  });
+
+  // Nothing walks down from the top when a list or a condition draws again, so
+  // what it draws has to have kept the namespace from the first pass.
+  it("is kept by what draws again later", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "svg-namespace-later.tsx"),
+    );
+    const { made, host } = recording();
+    const parent = node("main");
+    render(bundle, { renderer: host }, parent);
+    assert.deepEqual(made.sort(), [
+      "button",
+      "button",
+      "div",
+      "svg:svg",
+      "svg:title",
+      "title",
+    ]);
+
+    made.length = 0;
+    const [add, show] = findAll(parent, "button");
+    handler(add!)();
+    handler(show!)();
+    assert.deepEqual(made, ["svg:title", "svg:title"]);
+  });
+});
+
 // Every node under `from` with this id, in document order.
 function findAll(from: TestNode, id: string): TestNode[] {
   return [

@@ -1,0 +1,23 @@
+<div>
+  <a href="/shapes">
+    {"shapes"}
+  </a>
+  <svg:svg viewBox="0 0 30 10" width="120">
+    <svg:circle cx="5" cy="5" r="4" fill="none" stroke="currentColor" />
+    <svg:circle cx={10} cy="5" r="2">
+      <svg:title>
+        {"dot 10"}
+      </svg:title>
+    </svg:circle>
+    <svg:circle cx={20} cy="5" r="2">
+      <svg:title>
+        {"dot 20"}
+      </svg:title>
+    </svg:circle>
+    <svg:foreignObject x="0" y="0" width="10" height="10">
+      <p>
+        {"html again"}
+      </p>
+    </svg:foreignObject>
+  </svg:svg>
+</div>

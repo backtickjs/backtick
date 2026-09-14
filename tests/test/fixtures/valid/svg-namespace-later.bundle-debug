@@ -1,0 +1,39 @@
+#f0 = ($0, $1) => {
+  const xs = $0()([10]);
+  const shown = $0()(false);
+  return <div>
+    {<svg
+      viewBox={"0 0 30 10"}
+    >
+      {<{$1()}
+        each={() => xs.read()}
+      >
+        {() => (x) => <title>
+          {"dot " + x}
+        </title>}
+      </{$1()}>}
+      {shown.read() ? <title>
+        {"shown"}
+      </title> : null}
+    </svg>}
+    {<title>
+      {"after"}
+    </title>}
+    {<button
+      onclick={() => xs.write([10, 20])}
+    >
+      {"add"}
+    </button>}
+    {<button
+      onclick={() => shown.write(true)}
+    >
+      {"show"}
+    </button>}
+  </div>;
+}
+
+root = #f0(() => state, () => ($0) => <for
+  each={$0.each()}
+>
+  {$0.children()}
+</for>)

@@ -1,0 +1,147 @@
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_xs                              → xs
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+[                                    → [
+10                                   → 10
+]                                    → ]
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+const                                → const 
+__cs_shown                           → shown
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+false                                → false
+)                                    → )
+);                                   → ;
+\n                                   → \n\n  
+return cs.const(                     → return 
+<                                    → (\n    <
+div                                  → div
+>{cs.lift(                           → >\n      
+<                                    → <
+svg                                  → svg
+                                     →  
+viewBox                              → viewBox
+={cs.lift(                           → =
+"0 0 30 10"                          → "0 0 30 10"
+)}                                   → 
+>{cs.lift(                           → >\n        
+<                                    → <
+For                                  → For
+                                     →  
+each                                 → each
+={cs.lift(                           → ={
+cs.receiver(                         → 
+__cs_xs                              → xs
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+)}                                   → }
+>{cs.lift(                           → >{
+(                                    → (
+__cs_x                               → x
+:                                    → : 
+number                               → number
+) =>                                 → ) => 
+<                                    → <
+title                                → title
+>{cs.lift(                           → >{
+"dot "                               → "dot "
+ +                                   →  + 
+__cs_x                               → x
+)}</                                 → }</
+title                                → title
+>                                    → >
+)}</                                 → }</
+For                                  → For
+>                                    → >
+)}{cs.lift(                          → \n        {
+(cs.condition(                       → 
+cs.receiver(                         → 
+__cs_shown                           → shown
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+) &&                                 → 
+cs.receiver(__cs_shown).read()       → shown.read() [-semantic -completion -navigation -verification]
+) ?                                  →  ? 
+<                                    → <
+title                                → title
+>{cs.lift(                           → >{
+"shown"                              → "shown"
+)}</                                 → }</
+title                                → title
+>                                    → >
+ :                                   →  : 
+null                                 → null
+)}</                                 → }\n      </
+svg                                  → svg
+>                                    → >
+)}{cs.lift(                          → \n      
+<                                    → <
+title                                → title
+>{cs.lift(                           → >{
+"after"                              → "after"
+)}</                                 → }</
+title                                → title
+>                                    → >
+)}{cs.lift(                          → \n      
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_xs                              → xs
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+[                                    → [
+10                                   → 10
+,                                    → , 
+20                                   → 20
+]                                    → ]
+)                                    → )
+)}                                   → }
+>add</                               → >add</
+button                               → button
+>                                    → >
+)}{cs.lift(                          → \n      
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_shown                           → shown
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+true                                 → true
+)                                    → )
+)}                                   → }
+>show</                              → >show</
+button                               → button
+>                                    → >
+)}</                                 → \n    </
+div                                  → div
+>                                    → >\n  )
+);                                   → ;
+\n})())                              → \n}`

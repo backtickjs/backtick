@@ -134,17 +134,18 @@ describe("a handler that is not a function", () => {
 // The rule is one name, so what can go wrong is the schema growing it back:
 // declared and refused is a tag a drawing may write and no client will draw.
 describe("the vocabulary and the schema", () => {
+  // In either language: a tag drawn inside an `svg` arrives prefixed.
   it("declares no tag that would be refused", () => {
     const declared = Object.keys(schema.elements);
     const { asked } = documented();
     for (const tag of declared) {
       dom.createElement(tag);
+      dom.createElement(`svg:${tag}`);
     }
-    assert.equal(asked.length, declared.length);
+    assert.equal(asked.length, declared.length * 2);
   });
 
-  it("declares neither spelling of the one that executes", () => {
+  it("declares no `script`", () => {
     assert.ok(!("script" in schema.elements));
-    assert.ok(!("svg:script" in schema.elements));
   });
 });

@@ -3,6 +3,7 @@
 // it. The reactive graph behind these calls is an implementation detail of the
 // interpreter, and the shape is checked structurally where the two meet.
 export interface RendererOptions<NodeType> {
+  // A tag drawn inside an `svg` arrives as `svg:<tag>`
   createElement(tag: string): NodeType;
   createTextNode(value: string): NodeType;
   replaceText(textNode: NodeType, value: string): void;

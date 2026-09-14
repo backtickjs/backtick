@@ -9,6 +9,7 @@ import {
   createMemo,
   createRoot,
   createSignal,
+  getOwner,
   mapArray,
   untrack,
 } from "solid-js";
@@ -123,6 +124,30 @@ function rendererOf<N extends object>(
   return createRenderer(options as RendererOptions<object>);
 }
 
+// The language an element is drawn in: HTML's unless it stands inside an `svg`,
+// and HTML's again inside a `foreignObject`, as the DOM's parser decides. Read
+// where the element is drawn rather than where it was written, so a component
+// or a `<For>` row drawing `<circle>` inside an `svg` gets SVG.
+//
+// A key on the owner's context rather than `createContext`, which brings
+// Solid's Provider and its `children` helper into the client for nothing.
+const NAMESPACE = Symbol("namespace");
+type Namespace = "html" | "svg";
+
+// Draws with the namespace flipped, and flips it back after. What draws again
+// later — a list's rows, a position's `insert` — keeps the flipped one: an
+// owner copies the context it was made under.
+function withNamespace(namespace: Namespace, draw: () => void): void {
+  const owner = getOwner()!;
+  const outer = owner.context;
+  owner.context = { ...outer, [NAMESPACE]: namespace };
+  try {
+    draw();
+  } finally {
+    owner.context = outer;
+  }
+}
+
 // Whether the Solid in the graph is the reactive one.
 //
 // Node resolves `solid-js` to the server build, where a computation runs once
@@ -187,7 +212,14 @@ export function compileElement(
   const draw = children === null ? null : compileChildren(instance, children);
   return (scope) => {
     const renderer = instance.renderer;
-    const node = renderer.createElement(id);
+    // Where it stands, what it is made in, and what its children are drawn in:
+    // an `svg` enters SVG, and a `foreignObject`'s children are HTML again.
+    const owner = getOwner()!;
+    const outerNamespace: Namespace = owner.context?.[NAMESPACE] ?? "html";
+    const namespace = id === "svg" ? "svg" : outerNamespace;
+    const innerNamespace = id === "foreignObject" ? "html" : namespace;
+    // The host hears SVG's as `svg:<tag>`; the wire carries no prefix.
+    const node = renderer.createElement(namespace === "svg" ? `svg:${id}` : id);
     for (const [prop, read, fixed] of props) {
       // It cannot change, so set it and be done: no computation to make, and
       // none held for as long as the element is.
@@ -213,7 +245,11 @@ export function compileElement(
       });
     }
     if (draw !== null) {
-      renderer.insert(node, draw(scope));
+      if (innerNamespace === outerNamespace) {
+        renderer.insert(node, draw(scope));
+      } else {
+        withNamespace(innerNamespace, () => renderer.insert(node, draw(scope)));
+      }
     }
     return node as ClientValue;
   };
