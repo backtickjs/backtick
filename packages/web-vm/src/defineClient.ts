@@ -2,7 +2,6 @@ import type { ClientUnknown } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
 import type { RendererOptions } from "./interpreter/index.js";
-import { builtins as webBuiltins } from "./builtins.js";
 import { dom } from "./dom.js";
 
 /**
@@ -43,9 +42,8 @@ export type Draw = (
  * Defined unguarded: two clients on one page is a mistake, and the registry
  * throwing is how anyone finds out.
  *
- * `builtins` is what a target adds to the web's own table, read after the
- * language's names, so a target may add and may not replace — which is why this
- * takes a table rather than letting one be handed in whole.
+ * `builtins` is what a target adds to the web's own names, read after them, so
+ * a target may add and may not replace.
  */
 export function defineClient({
   builtins = {},
@@ -55,9 +53,6 @@ export function defineClient({
     ...dom,
     createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
   };
-  // The table beside the renderer is this target's own, read after the
-  // language's names, so a bundle means the same thing wherever it is drawn.
-  const allBuiltins = { ...webBuiltins, ...builtins };
   // Every bundle the document carried, drawn where its script stands.
   //
   // Found here rather than announced from the page: a document that carried a
@@ -75,7 +70,7 @@ export function defineClient({
       // front of. The script is that, and shows nothing.
       render(
         JSON.parse(data.textContent ?? "") as Bundle<ClientUnknown>,
-        { renderer, builtins: allBuiltins },
+        { renderer, window, builtins },
         parent,
         data,
       );

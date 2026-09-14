@@ -1,6 +1,5 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
-  Builtins,
   Bundle,
   Http,
   HttpConfig,
@@ -8,12 +7,13 @@ import type {
   State,
   Vm,
 } from "@backtickjs/language";
+import type { Builtins, Window } from "@backtickjs/web-client";
 import { createSignal, untrack } from "solid-js";
 import type { Instance } from "./interpreter/Instance.js";
 import type { Applied } from "./interpreter/interpret.js";
 import { evaluated } from "./interpreter/view.js";
 
-// What this client answers for each name the language provides. A switch rather
+// What this client answers for each name the web provides. A switch rather
 // than a table, because an object also answers for names nobody wrote —
 // `constructor` is `Object`'s — and only a `case` answers here. Most names are
 // the host's own member of the same name; a member of a value takes the value
@@ -172,10 +172,96 @@ export function compileBuiltin(
     case "vm":
       return {
         eval: (bundle: Bundle<ClientUnknown>) =>
-          untrack(() =>
-            evaluated(bundle, instance.renderer, instance.builtins),
-          ),
+          untrack(() => evaluated(bundle, instance)),
       } as unknown as Vm;
+
+    // Written out rather than the host's window handed over, so a member the
+    // schema left out stays left out: a script reading `document` off this
+    // finds nothing.
+    case "window": {
+      return {
+        // Only `now`. What ports is the difference between two readings, not the
+        // time of day.
+        performance: {
+          now: () => instance.window.performance.now(),
+        },
+        // Bound to the host's, so the browser reports the line a call came from
+        // rather than this file.
+        console: {
+          log: (...values: unknown[]) => {
+            instance.window.console.log(...values);
+          },
+          warn: (...values: unknown[]) => {
+            instance.window.console.warn(...values);
+          },
+          error: (...values: unknown[]) => {
+            instance.window.console.error(...values);
+          },
+        },
+        // Matched by identity, as in a browser: a closure held in a name and
+        // passed twice removes what it added.
+        addEventListener: (type: string, listener: unknown) => {
+          instance.window.addEventListener(type, listener as never);
+        },
+        removeEventListener: (type: string, listener: unknown) => {
+          instance.window.removeEventListener(type, listener as never);
+        },
+        postMessage: (message: unknown, targetOrigin: string) => {
+          instance.window.postMessage(message, targetOrigin);
+        },
+        // Read through, so what a script reads is where the document is now
+        // rather than where it was when this was built.
+        location: {
+          get href() {
+            return instance.window.location.href;
+          },
+          get origin() {
+            return instance.window.location.origin;
+          },
+          get protocol() {
+            return instance.window.location.protocol;
+          },
+          get host() {
+            return instance.window.location.host;
+          },
+          get hostname() {
+            return instance.window.location.hostname;
+          },
+          get port() {
+            return instance.window.location.port;
+          },
+          get pathname() {
+            return instance.window.location.pathname;
+          },
+          get search() {
+            return instance.window.location.search;
+          },
+          get hash() {
+            return instance.window.location.hash;
+          },
+          assign: (url: string) => {
+            instance.window.location.assign(url);
+          },
+          replace: (url: string) => {
+            instance.window.location.replace(url);
+          },
+          reload: () => {
+            instance.window.location.reload();
+          },
+        },
+        setTimeout: (handler: () => void, timeout?: number) =>
+          instance.window.setTimeout(handler, timeout),
+        clearTimeout: (id: number) => {
+          instance.window.clearTimeout(id);
+        },
+        setInterval: (handler: () => void, timeout?: number) =>
+          instance.window.setInterval(handler, timeout),
+        clearInterval: (id: number) => {
+          instance.window.clearInterval(id);
+        },
+        // Cast through the brand, the way `state` is.
+      } as unknown as Window;
+    }
 
     default:
       known satisfies never;

@@ -83,23 +83,23 @@ function materialize<NodeType extends object>(
   options: ClientOptions<NodeType>,
   renderer: Renderer<NodeType>,
 ): unknown {
-  return evaluated(bundle, renderer, options.builtins);
+  const { window, builtins } = options;
+  return evaluated(bundle, { renderer, window, builtins });
 }
 
 /**
- * A bundle, drawn with a renderer and a table of names.
+ * A bundle, drawn with a host's renderer, window and names.
  *
  * A `functions` table per bundle, because the labels are per bundle: two
  * bundles both holding a `0` mean two different functions.
  */
 export function evaluated(
   bundle: Bundle<ClientUnknown>,
-  renderer: Renderer<object>,
-  builtins: Instance["builtins"],
+  { renderer, window, builtins }: Omit<Instance, "bundle" | "functions">,
 ): unknown {
   // Built once: nothing above the root can hand it anything new later.
   return evaluateNode(
-    { bundle, renderer, builtins, functions: new Map() },
+    { bundle, renderer, window, builtins, functions: new Map() },
     bundle.root,
     scopeOf(null),
   );

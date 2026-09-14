@@ -1,46 +1,39 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-client/schema";
+import { compileBuiltin } from "../dist/compileBuiltin.js";
+import type { HostWindow } from "../dist/interpreter/ClientOptions.js";
+import type { Instance } from "../dist/interpreter/Instance.js";
 
-// A window for a suite that runs under Node. This client reaches the page's
-// window by name — `window.setTimeout`, not `globalThis.setTimeout` — because
-// it is the window that hands these over, so a process without one has to put
-// something there before anything here can be called through. Node's own
-// globals are enough: what is exercised below is that a name is answered, not
-// what a browser does with it.
-globalThis.window = globalThis as unknown as Window & typeof globalThis;
+// What this client answers with, against what the web's schema says a script
+// may reach: the language's names and the window. A name declared and not
+// answered fails here rather than at the first bundle that reaches it; one
+// answered and not declared does not build.
 
-const { builtins } = await import("../src/builtins.ts");
+// Node's own globals are enough for a window: what is exercised below is that
+// a name is answered, not what a browser does with it.
+const instance = {
+  window: globalThis as unknown as HostWindow,
+} as Instance;
 
-// What this client answers with, against what this target's schema says a
-// script may reach. A name declared and not implemented, or implemented and not
-// declared, fails here rather than at the first bundle that reaches it.
-//
-// The language's own names are not checked here: `src/interpreter` answers for
-// those and its own suite holds it to them. What is this target's is this
-// target's to answer.
-
-describe("what this target adds", () => {
+describe("what the web answers for", () => {
   it("answers for every name its schema declares", () => {
-    const held = builtins as unknown as Record<string, unknown>;
     for (const name of Object.keys(schema.builtins)) {
-      assert.ok(name in held, `\`${name}\` is declared and not answered`);
-    }
-  });
-
-  it("declares every name it answers for", () => {
-    for (const name of Object.keys(builtins)) {
-      assert.ok(
-        name in schema.builtins,
-        `\`${name}\` is answered and not declared`,
+      assert.notEqual(
+        compileBuiltin(instance, name),
+        undefined,
+        `\`${name}\` is declared and not answered`,
       );
     }
   });
 
   // One name, and everything else read off it — the way the DOM keeps them,
   // and the way a frame's `contentWindow` hands over the same interface.
-  it("hands over what the name stands for", () => {
-    const held = builtins as unknown as { window: Record<string, unknown> };
+  it("hands over what the window stands for", () => {
+    const window = compileBuiltin(instance, "window") as unknown as Record<
+      string,
+      unknown
+    >;
     for (const name of [
       "addEventListener",
       "removeEventListener",
@@ -50,13 +43,22 @@ describe("what this target adds", () => {
       "setInterval",
       "clearInterval",
     ]) {
-      assert.equal(typeof held.window[name], "function", name);
+      assert.equal(typeof window[name], "function", name);
     }
-    const clock = held.window["performance"] as { now: () => number };
+    const clock = window["performance"] as { now: () => number };
     assert.equal(typeof clock.now(), "number");
-    const said = held.window["console"] as Record<string, unknown>;
+    const said = window["console"] as Record<string, unknown>;
     for (const name of ["log", "warn", "error"]) {
       assert.equal(typeof said[name], "function", `console.${name}`);
     }
+  });
+
+  it("reads through to the host's window, and hands over nothing else", () => {
+    const window = compileBuiltin(instance, "window") as unknown as Record<
+      string,
+      unknown
+    >;
+    assert.equal(window["document"], undefined);
+    assert.equal(window["fetch"], undefined);
   });
 });

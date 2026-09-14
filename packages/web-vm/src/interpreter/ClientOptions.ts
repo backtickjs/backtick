@@ -1,36 +1,70 @@
-import type { WebBuiltins } from "@backtickjs/web-client";
 import type { RendererOptions } from "./RendererOptions.js";
 
 /**
- * What a target hands this interpreter: how to build its nodes, and what it
- * answers for beyond the names the language provides itself.
+ * What a target hands this interpreter: how to build its nodes, the window a
+ * script reaches through `$window`, and what it answers for beyond the names
+ * the language provides itself.
  *
- * Two halves rather than one, because they are answered by different things. A
- * renderer is how a host draws, and every target has one. A table of builtins
- * is what a target offers a script that the language does not — storage, a
- * clock, a way out to the network.
+ * Apart rather than one, because they are answered by different things. A
+ * renderer is how a host draws and a window is what it offers a script, and
+ * every target has both. A table of builtins is what a target adds beside them.
  */
 export interface ClientOptions<
   NodeType extends object,
-  Builtins extends WebBuiltins = WebBuiltins,
+  Builtins extends object = object,
 > {
   /** How this host builds, moves and reads its own nodes. */
   readonly renderer: RendererOptions<NodeType>;
 
   /**
-   * What this client answers for, beside the language's own.
+   * The host's window, which the client reads from to answer `window`. Never
+   * handed to a script itself: what a script reaches is the list the client
+   * writes out, read through to this.
+   */
+  readonly window: HostWindow;
+
+  /**
+   * What this target answers for, beside the language's own names and the
+   * window. Keyed by the whole name, as the schema writes it and as the wire
+   * carries it.
    *
-   * Keyed by the whole name, as the schema writes it and as the wire carries
-   * it: a bundle reaches a builtin by its name alone, and there is one lookup
-   * for the language's names and a target's alike.
-   *
-   * At least the web's, because a bundle written against the web schema splices
-   * `window` wherever it is drawn. A target whose schema extends the web's hands
-   * over its own generated contract as it is.
-   *
-   * A name the language already answers for is never reached here: what
-   * `state` means is not a target's to redecide, and a client where it meant
-   * something else is a bundle that means something else everywhere it runs.
+   * A name the client already answers for is never reached here: what `state`
+   * means is not a target's to redecide, and a client where it meant something
+   * else is a bundle that means something else everywhere it runs.
    */
   readonly builtins: Builtins;
+}
+
+/**
+ * What the client reads off a host's window. Written out rather than the DOM's
+ * `Window`, so a host with no DOM — a test under Node — can hand one over.
+ */
+export interface HostWindow {
+  readonly performance: { now(): number };
+  readonly console: {
+    log(...values: unknown[]): void;
+    warn(...values: unknown[]): void;
+    error(...values: unknown[]): void;
+  };
+  addEventListener(type: string, listener: (event: unknown) => void): void;
+  removeEventListener(type: string, listener: (event: unknown) => void): void;
+  postMessage(message: unknown, targetOrigin: string): void;
+  readonly location: {
+    readonly href: string;
+    readonly origin: string;
+    readonly protocol: string;
+    readonly host: string;
+    readonly hostname: string;
+    readonly port: string;
+    readonly pathname: string;
+    readonly search: string;
+    readonly hash: string;
+    assign(url: string): void;
+    replace(url: string): void;
+    reload(): void;
+  };
+  setTimeout(handler: () => void, timeout?: number): number;
+  clearTimeout(id: number): void;
+  setInterval(handler: () => void, timeout?: number): number;
+  clearInterval(id: number): void;
 }

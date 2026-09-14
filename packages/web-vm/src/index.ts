@@ -12,10 +12,13 @@
 export { defineClient } from "./defineClient.js";
 export type { Draw, Vocabulary } from "./defineClient.js";
 export type { Bundle } from "@backtickjs/core";
-export { builtins } from "./builtins.js";
 export { dom } from "./dom.js";
 
 // The interpreter beneath it, which draws through any renderer rather than only
 // the DOM: what `@backtickjs/test-vm` drives with a host of plain objects.
 export { evaluate, render } from "./interpreter/index.js";
-export type { ClientOptions, RendererOptions } from "./interpreter/index.js";
+export type {
+  ClientOptions,
+  HostWindow,
+  RendererOptions,
+} from "./interpreter/index.js";

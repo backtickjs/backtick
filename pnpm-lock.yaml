@@ -606,9 +606,6 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../web-client
       '@backtickjs/web-vm':
         specifier: workspace:*
         version: link:../web-vm

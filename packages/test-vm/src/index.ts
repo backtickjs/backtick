@@ -31,8 +31,8 @@ export interface TestOptions {
   readonly host?: RendererOptions<TestNode>;
 
   /**
-   * Names beside the language's and the window, for a test about a client
-   * adding one of its own. A name here wins over the window's.
+   * Names beside the client's own, for a test about a target adding one of
+   * its own.
    */
   readonly builtins?: Readonly<Record<string, ClientValue>>;
 }
@@ -46,9 +46,9 @@ export interface RenderOptions extends TestOptions {
 // language's and a bundle that waits splices one.
 function clientOptions({
   host = testHost,
-  builtins,
+  builtins = {},
 }: TestOptions): ClientOptions<TestNode> {
-  return { renderer: host, builtins: { window, ...builtins } };
+  return { renderer: host, window, builtins };
 }
 
 /**
