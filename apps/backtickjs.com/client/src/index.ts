@@ -9,4 +9,4 @@
 import { defineClient } from "@backtickjs/web-vm";
 import { builtins } from "./builtins.js";
 
-defineClient({ builtins: builtins as never });
+defineClient({ builtins });

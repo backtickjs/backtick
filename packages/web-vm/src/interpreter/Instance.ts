@@ -11,6 +11,9 @@ import type { Renderer } from "solid-js/universal";
 // bindings in its call, so nothing here differs between two of them.
 export interface Instance {
   readonly bundle: Bundle<ClientUnknown>;
+  // `object` rather than the target's node type: every node this holds came
+  // from the target and goes back to it untouched, so what it is, is the
+  // target's business throughout.
   readonly renderer: Renderer<object>;
   // Every name this client answers for, the language's own included, keyed
   // whole as the wire carries it. Built once here rather than merged at each

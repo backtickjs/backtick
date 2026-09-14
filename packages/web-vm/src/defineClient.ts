@@ -1,4 +1,4 @@
-import type { ClientUnknown, ClientValue } from "@backtickjs/core";
+import type { ClientUnknown } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
 import type { RendererOptions } from "./interpreter/index.js";
@@ -16,7 +16,7 @@ import { dom } from "./dom.js";
  * which is the latitude `createElement` already takes for `svg:`.
  */
 export interface Vocabulary {
-  readonly builtins?: Readonly<Record<string, ClientValue>>;
+  readonly builtins?: object;
   readonly elements?: Readonly<Record<string, () => Node>>;
 }
 
@@ -59,10 +59,7 @@ export function defineClient({
   // The table beside the renderer is this target's own: `builtinsOf` merges it
   // with the language's and throws if a name here shadows one of those, so a
   // bundle means the same thing wherever it is drawn.
-  const allBuiltins = {
-    ...(webBuiltins as unknown as Record<string, ClientValue>),
-    ...builtins,
-  };
+  const allBuiltins = { ...webBuiltins, ...builtins };
   // Every bundle the document carried, drawn where its script stands.
   //
   // Found here rather than announced from the page: a document that carried a
@@ -81,7 +78,7 @@ export function defineClient({
       render(
         JSON.parse(data.textContent ?? "") as Bundle<ClientUnknown>,
         { renderer, builtins: allBuiltins },
-        parent as Element,
+        parent,
         data,
       );
     }

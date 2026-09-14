@@ -606,6 +606,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      '@backtickjs/web-client':
+        specifier: workspace:*
+        version: link:../web-client
       '@backtickjs/web-vm':
         specifier: workspace:*
         version: link:../web-vm
@@ -720,6 +723,9 @@ importers:
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
+      '@backtickjs/web-client':
+        specifier: workspace:*
+        version: link:../web-client
       solid-js:
         specifier: ^1.9.14
         version: 1.9.14
@@ -727,9 +733,6 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../web-client
       esbuild:
         specifier: 0.28.0
         version: 0.28.0

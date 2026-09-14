@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@backtickjs/language": "workspace:*",
+    "@backtickjs/web-client": "workspace:*",
     "solid-js": "^1.9.14"
   },
   "peerDependencies": {
@@ -30,7 +31,6 @@
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-client": "workspace:*",
     "esbuild": "0.28.0",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"

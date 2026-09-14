@@ -1,4 +1,4 @@
-import type { ClientValue } from "@backtickjs/core";
+import type { Window } from "@backtickjs/web-client";
 
 // A window for a test, which is the timers and nothing else.
 //
@@ -43,4 +43,5 @@ export const window = {
     return id;
   },
   clearInterval: cancel,
-} as unknown as ClientValue;
+  // Cast through the brand, as the web VM's window is.
+} as unknown as Window;

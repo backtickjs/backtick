@@ -53,11 +53,11 @@ import type { Scope } from "./interpret.js";
  * it is what says where the drawing ends. Left out where the target holds only
  * this, which is every case with nothing to stay after.
  */
-export function render<N extends object>(
+export function render<NodeType extends object>(
   bundle: Bundle<ClientUnknown>,
-  options: ClientOptions<N>,
-  parent: N,
-  anchor?: N,
+  options: ClientOptions<NodeType>,
+  parent: NodeType,
+  anchor?: NodeType,
 ): () => void {
   const renderer = rendererOf(options.renderer);
   return createRoot((dispose) => {
@@ -74,19 +74,19 @@ export function render<N extends object>(
  * a mount lasts as long as whoever asked for it, and there is no unmounting
  * this to be the other half of.
  */
-export function evaluate<N extends object>(
+export function evaluate<NodeType extends object>(
   bundle: Bundle<ClientUnknown>,
-  options: ClientOptions<N>,
+  options: ClientOptions<NodeType>,
 ): unknown {
   return createRoot(() =>
     materialize(bundle, options, rendererOf(options.renderer)),
   );
 }
 
-function materialize<N extends object>(
+function materialize<NodeType extends object>(
   bundle: Bundle<ClientUnknown>,
-  options: ClientOptions<N>,
-  renderer: Renderer<object>,
+  options: ClientOptions<NodeType>,
+  renderer: Renderer<NodeType>,
 ): unknown {
   // Merged once per mount, because merging is what refuses a name a target
   // took twice. A bundle drawn inside this one is handed the result rather
@@ -113,15 +113,12 @@ export function evaluated(
   );
 }
 
-// A renderer per set of target operations. The cast is the one place the
-// interpreter's `object` meets the target's own node type: every node this
-// holds came from the target and goes back to it untouched, so what it is, is
-// the target's business throughout.
-function rendererOf<N extends object>(
-  options: RendererOptions<N>,
-): Renderer<object> {
+// A renderer per set of target operations.
+function rendererOf<NodeType extends object>(
+  options: RendererOptions<NodeType>,
+): Renderer<NodeType> {
   requireReactivity();
-  return createRenderer(options as RendererOptions<object>);
+  return createRenderer(options);
 }
 
 // The language an element is drawn in: HTML's unless it stands inside an `svg`,

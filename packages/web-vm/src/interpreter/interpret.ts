@@ -11,6 +11,7 @@ import type {
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/language";
+import type { WebBuiltins } from "@backtickjs/web-client";
 import { untrack } from "solid-js";
 import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
@@ -159,13 +160,12 @@ const language = globals as unknown as Readonly<Record<string, ClientValue>>;
  * Adding is a target's to do; replacing is not.
  */
 export function builtinsOf(
-  handed: Readonly<Record<string, ClientValue>> | undefined,
+  handed: WebBuiltins,
 ): Readonly<Record<string, ClientValue>> {
-  if (handed === undefined) {
-    return language;
-  }
   const table: Record<string, ClientValue> = { ...language };
-  for (const [name, value] of Object.entries(handed)) {
+  // Widened here and nowhere else, as the language's table is above.
+  const names = handed as unknown as Readonly<Record<string, ClientValue>>;
+  for (const [name, value] of Object.entries(names)) {
     if (name in table) {
       throw new Error(`the language already answers for \`${name}\``);
     }
