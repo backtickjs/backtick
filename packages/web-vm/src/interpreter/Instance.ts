@@ -1,5 +1,6 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle, BundleFunctionLabel } from "@backtickjs/language";
+import type { WebBuiltins } from "@backtickjs/web-client";
 import type { Renderer } from "solid-js/universal";
 
 // A bundle paired with a host: what is needed to draw one, which neither of
@@ -15,11 +16,10 @@ export interface Instance {
   // from the target and goes back to it untouched, so what it is, is the
   // target's business throughout.
   readonly renderer: Renderer<object>;
-  // Every name this client answers for, the language's own included, keyed
-  // whole as the wire carries it. Built once here rather than merged at each
-  // lookup: what a name means is settled before a bundle asks for it, and a
-  // target colliding with the language is refused when its client is made.
-  readonly builtins: Readonly<Record<string, ClientValue>>;
+  // What the target handed over, beside the language's own names. Read only
+  // after those have not answered, and never replacing them: a target naming
+  // one is refused when its client is made.
+  readonly builtins: WebBuiltins;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per
   // reference would be a fresh identity, and a prop holding one would be set

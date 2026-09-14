@@ -3,30 +3,39 @@ import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/language/schema";
-import { getters, globals } from "../src/interpreter/globals.ts";
+import type { Builtins } from "@backtickjs/language";
+import { compileBuiltin, getters } from "../dist/compileBuiltin.js";
+import type { Instance } from "../dist/interpreter/Instance.js";
 
 // What the interpreter answers with, against what the schema says a script may
-// reach. A name declared and not implemented, or implemented and not declared,
-// fails here rather than at the first bundle that reaches it.
+// reach. A name declared and not answered fails here rather than at the first
+// bundle that reaches it; one answered and not declared does not build.
+
+// No bundle here is drawn inside another, so what `vm` would draw with is never
+// read.
+const instance = {} as Instance;
+
+function answer<Name extends keyof Builtins>(name: Name): Builtins[Name] {
+  return compileBuiltin(instance, name) as unknown as Builtins[Name];
+}
 
 describe("builtins", () => {
   it("the client answers for every name in scope", () => {
     // Read off the schema and not off a list beside it, whether the host's lib
     // declares the name or the framework does: a name added there is checked
     // here without anything being told about it twice.
-    //
-    // One lookup, and nothing to unwrap: a name is whole on both sides — the
-    // key the schema writes, the key this table holds, and the name the wire
-    // carries are one string.
-    const held = globals as unknown as Record<string, unknown>;
     for (const name of Object.keys(schema.builtins)) {
-      assert.ok(name in held, `\`${name}\` is declared and not answered`);
+      assert.notEqual(
+        compileBuiltin(instance, name),
+        undefined,
+        `\`${name}\` is declared and not answered`,
+      );
     }
   });
 
   it("reads exactly the names the schema calls getters", () => {
     // The client acts on `getter` without reading the schema — nothing in its
-    // table tells `length` from `trim` — so the two lists are held together
+    // answers tells `length` from `trim` — so the two lists are held together
     // here. A name that starts or stops being a getter fails on this line.
     const declared = Object.entries(schema.builtins)
       .filter(([, node]) => {
@@ -34,61 +43,58 @@ describe("builtins", () => {
         return written.type === "function" && written.getter === true;
       })
       .map(([name]) => name);
-    assert.deepEqual([...getters].sort(), declared.sort());
+    assert.deepEqual(Object.keys(getters).sort(), declared.sort());
   });
 
   it("answer with a number this language has, or not at all", () => {
-    assert.throws(() => globals["Math.sqrt"](-1), /are finite/);
-    assert.throws(() => globals["Math.log"](0), /are finite/);
-    assert.throws(() => globals["Math.exp"](710), /are finite/);
-    assert.equal(globals["Math.sqrt"](9), 3);
+    assert.throws(() => answer("Math.sqrt")(-1), /are finite/);
+    assert.throws(() => answer("Math.log")(0), /are finite/);
+    assert.throws(() => answer("Math.exp")(710), /are finite/);
+    assert.equal(answer("Math.sqrt")(9), 3);
   });
 
   it("refuse an empty `Math.min`/`Math.max`", () => {
-    assert.throws(() => globals["Math.min"](), /at least one number/);
-    assert.throws(() => globals["Math.max"](), /at least one number/);
+    assert.throws(() => answer("Math.min")(), /at least one number/);
+    assert.throws(() => answer("Math.max")(), /at least one number/);
   });
 
   it("read a string as a number, or not at all", () => {
-    assert.equal(globals["Number.parseInt"]("42"), 42);
-    assert.equal(globals["Number.parseInt"]("42px"), 42);
-    assert.equal(globals["Number.parseInt"]("ff", 16), 255);
-    assert.equal(globals["Number.parseFloat"]("1.5"), 1.5);
+    assert.equal(answer("Number.parseInt")("42"), 42);
+    assert.equal(answer("Number.parseInt")("42px"), 42);
+    assert.equal(answer("Number.parseInt")("ff", 16), 255);
+    assert.equal(answer("Number.parseFloat")("1.5"), 1.5);
     // `NaN` is what the host answers and not a value this language has, so the
     // name refuses rather than handing one back.
-    assert.throws(() => globals["Number.parseInt"]("abc"), /read this string/);
-    assert.throws(() => globals["Number.parseInt"](""), /read this string/);
-    assert.throws(
-      () => globals["Number.parseFloat"]("abc"),
-      /read this string/,
-    );
+    assert.throws(() => answer("Number.parseInt")("abc"), /read this string/);
+    assert.throws(() => answer("Number.parseInt")(""), /read this string/);
+    assert.throws(() => answer("Number.parseFloat")("abc"), /read this string/);
   });
 
   it("hold a value beside the functions of a namespace", () => {
-    assert.equal(globals["Number.EPSILON"], Number.EPSILON);
+    assert.equal(answer("Number.EPSILON"), Number.EPSILON);
   });
 
   it("tell what a number is without converting to one", () => {
-    assert.equal(globals["Number.isInteger"](2), true);
-    assert.equal(globals["Number.isInteger"](2.5), false);
-    assert.equal(globals["Number.isFinite"](2), true);
+    assert.equal(answer("Number.isInteger")(2), true);
+    assert.equal(answer("Number.isInteger")(2.5), false);
+    assert.equal(answer("Number.isFinite")(2), true);
     // Unconverted, so a string that reads as a number is still not one.
-    assert.equal(globals["Number.isFinite"]("2"), false);
-    assert.equal(globals["Number.isInteger"]("2"), false);
+    assert.equal(answer("Number.isFinite")("2"), false);
+    assert.equal(answer("Number.isInteger")("2"), false);
   });
 
   it("write a string from the code points it is handed", () => {
-    assert.equal(globals["String.fromCodePoint"](72, 105), "Hi");
+    assert.equal(answer("String.fromCodePoint")(72, 105), "Hi");
     // The schema says none is the empty string, where an empty `Math.min` has
     // no answer to give.
-    assert.equal(globals["String.fromCodePoint"](), "");
+    assert.equal(answer("String.fromCodePoint")(), "");
   });
 });
 
 describe("http", () => {
   const get = (url: string, onResponse: (response: unknown) => void) =>
     new Promise<string>((resolve) => {
-      globals.http.get(url, onResponse, resolve);
+      answer("http").get(url, onResponse, resolve);
     });
 
   it("answers with the status and the body as text", async () => {
@@ -118,7 +124,7 @@ describe("http", () => {
     await new Promise<void>((resolve) => server.listen(0, resolve));
     const { port } = server.address() as AddressInfo;
     const asked = await new Promise<string>((resolve, reject) => {
-      globals.http.get(
+      answer("http").get(
         `http://localhost:${port}/at`,
         (response) => resolve(response.data),
         reject,

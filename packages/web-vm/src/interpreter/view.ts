@@ -18,7 +18,7 @@ import type { RendererOptions } from "./RendererOptions.js";
 import type { ClientOptions } from "./ClientOptions.js";
 import type { Instance } from "./Instance.js";
 import {
-  builtinsOf,
+  refuseCollisions,
   compile,
   evaluate as evaluateNode,
   scopeOf,
@@ -88,10 +88,11 @@ function materialize<NodeType extends object>(
   options: ClientOptions<NodeType>,
   renderer: Renderer<NodeType>,
 ): unknown {
-  // Merged once per mount, because merging is what refuses a name a target
-  // took twice. A bundle drawn inside this one is handed the result rather
-  // than merging again.
-  return evaluated(bundle, renderer, builtinsOf(options.builtins));
+  const instance = instanceOf(bundle, renderer, options.builtins);
+  // Checked once per mount. A bundle drawn inside this one is handed the same
+  // table, which was checked here already.
+  refuseCollisions(instance);
+  return evaluateNode(instance, bundle.root, scopeOf(null));
 }
 
 /**
@@ -105,12 +106,20 @@ export function evaluated(
   renderer: Renderer<object>,
   builtins: Instance["builtins"],
 ): unknown {
-  // Built once: nothing above the root can hand it anything new later.
   return evaluateNode(
-    { bundle, renderer, builtins, functions: new Map() },
+    instanceOf(bundle, renderer, builtins),
     bundle.root,
     scopeOf(null),
   );
+}
+
+// Built once: nothing above the root can hand it anything new later.
+function instanceOf(
+  bundle: Bundle<ClientUnknown>,
+  renderer: Renderer<object>,
+  builtins: Instance["builtins"],
+): Instance {
+  return { bundle, renderer, builtins, functions: new Map() };
 }
 
 // A renderer per set of target operations.

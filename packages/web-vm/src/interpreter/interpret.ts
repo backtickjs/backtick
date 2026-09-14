@@ -4,18 +4,15 @@
 // what it needs from the format is the format, not a package.
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
-  Bundle,
   BundleArrayElement,
   BundleArrowFunction,
   BundleSpreadElement,
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/language";
-import type { WebBuiltins } from "@backtickjs/web-client";
-import { untrack } from "solid-js";
-import { getters, globals } from "./globals.js";
+import { compileBuiltin, getters } from "../compileBuiltin.js";
 import type { Instance } from "./Instance.js";
-import { compileComponentCall, compileElement, evaluated } from "./view.js";
+import { compileComponentCall, compileElement } from "./view.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `language/src/schema.ts`). It evaluates a bundle's `root`
@@ -136,48 +133,35 @@ function compileFunction(
 // evaluating yields is the only thing that differs between them — a value, a
 // statement's completion, a list's members — so that is the return type and
 // nothing else is.
-// `Builtins` says what each name holds; a bundle reaches one by the name alone,
-// so the table is widened once, here, to be read that way.
-//
-// The language's own and nothing else. What a target adds joins this at the
-// lookup below, in a table built per mount — but not here, and not for a member
-// of a value: `string.slice` is the language's, and a name read off a string is
-// read from this table alone whatever a target handed over.
-const language = globals as unknown as Readonly<Record<string, ClientValue>>;
+// What the target handed over under a name. Own names only: its table is a
+// plain object, and what it inherits — `constructor` is `Object` — is nobody's.
+function handedOver(instance: Instance, name: string): ClientValue | undefined {
+  const handed = instance.builtins;
+  return Object.hasOwn(handed, name)
+    ? (handed as unknown as Readonly<Record<string, ClientValue>>)[name]
+    : undefined;
+}
 
 /**
- * The names one client answers for: the language's own, and what its target
- * handed over beside them.
+ * Refuses a target that names what the language already answers for.
  *
- * Built once per mount rather than read from two tables at every lookup, so
- * what a name means is settled before a bundle asks — and so a target that
- * collides with the language finds out when its client is made rather than at
- * the first bundle that happens to reach the name.
- *
- * A collision throws rather than winning. The curated list is what keeps every
- * member meaning the same thing everywhere, and a target quietly redefining
- * `state` would be one client answering a bundle differently from every other.
- * Adding is a target's to do; replacing is not.
+ * The language's names are read first, so such a name would never be reached —
+ * but a target that thinks it redefined `state` is wrong about what its client
+ * does, and finds out when its client is made rather than never. Adding is a
+ * target's to do; replacing is not.
  */
-export function builtinsOf(
-  handed: WebBuiltins,
-): Readonly<Record<string, ClientValue>> {
-  const table: Record<string, ClientValue> = { ...language };
-  // Widened here and nowhere else, as the language's table is above.
-  const names = handed as unknown as Readonly<Record<string, ClientValue>>;
-  for (const [name, value] of Object.entries(names)) {
-    if (name in table) {
+export function refuseCollisions(instance: Instance): void {
+  for (const name of Object.keys(instance.builtins)) {
+    if (compileBuiltin(instance, name) !== undefined) {
       throw new Error(`the language already answers for \`${name}\``);
     }
-    table[name] = value;
   }
-  return table;
 }
 
 // A client function as this client applies one. `ClientFunction` says which
 // values are functions — its parameters are `never`, so that every function is
 // one — and not how to call one, so applying is this client's own knowledge.
-type Applied = (...args: ClientValue[]) => ClientValue;
+export type Applied = (...args: ClientValue[]) => ClientValue;
 
 // The names `Object.prototype` and `Function.prototype` answer for, which a
 // plain object only reaches as its own member — see `memberOf`.
@@ -190,8 +174,8 @@ function isMachinery(name: string): boolean {
   return MACHINERY.has(name);
 }
 
-// A member access on a primitive reads from the language's table by the whole
-// name rather than from the host's prototypes: a member the schema left out
+// A member access on a primitive is answered by the language's switch by the
+// whole name rather than by the host's prototypes: a member the schema left out
 // stays left out, where `value[member]` would hand back whatever JavaScript
 // happens to have.
 //
@@ -203,7 +187,11 @@ function isMachinery(name: string): boolean {
 //
 // Which name a value is reached under is this client's own decision, and the
 // four are named here as the schema writes them.
-function memberOf(object: ClientValue, name: string): ClientValue {
+function memberOf(
+  instance: Instance,
+  object: ClientValue,
+  name: string,
+): ClientValue {
   const boxed =
     typeof object === "string"
       ? "string"
@@ -242,7 +230,7 @@ function memberOf(object: ClientValue, name: string): ClientValue {
       : held;
   }
   const whole = `${boxed}.${name}`;
-  const found: ClientValue | undefined = language[whole];
+  const found = compileBuiltin(instance, whole);
   if (found === undefined) {
     // Not absent: a value's members are the schema's to say, and an undeclared
     // one is a name this language has no meaning for. Reading it as null would
@@ -253,7 +241,7 @@ function memberOf(object: ClientValue, name: string): ClientValue {
   // reads the same document and answers the same way. A getter is applied
   // here, where its name is read, because that is where the language puts the
   // call a script does not write.
-  if (getters.has(whole)) {
+  if (Object.hasOwn(getters, whole)) {
     return (found as Applied)(object);
   }
   // The rest are bound and not called: binding here rather than at the call is
@@ -386,35 +374,19 @@ function buildNode(
     case "comp": {
       return compileComponentCall(instance, node);
     }
-    // A whole name the format carries and this client answers. The language's
-    // own and what this target added beside them, in one table under one
-    // lookup — because the format has one node for a name it carries, and where
-    // a name came from is not something a bundle says.
+    // A whole name the format carries and this client answers: the language's
+    // own first, then what this target added beside them — because the format
+    // has one node for a name it carries, and where a name came from is not
+    // something a bundle says.
     //
     // Never the host's own objects, and never a name that replaced one of the
-    // language's: `builtinsOf` refused that when the table was built. A
+    // language's: `refuseCollisions` refused that when the client was made. A
     // curated list is what keeps every member meaning the same thing
     // everywhere, and a target may lengthen it but not edit it.
     case "bltn": {
       const name = node[1];
-      // The one name that needs the instance: a bundle drawn with this one's
-      // renderer, and reaching the names this one does. Untracked, as Solid
-      // runs a component: what the bundle reads while its root is evaluated is
-      // its own setup, and a write to it runs nothing of the caller's again.
-      if (name === "vm") {
-        const vm = {
-          eval: (bundle: Bundle<ClientUnknown>) =>
-            untrack(() =>
-              evaluated(bundle, instance.renderer, instance.builtins),
-            ),
-        } as unknown as ClientValue;
-        return () => vm;
-      }
-      // Own names only: the table is a plain object, and what it inherits —
-      // `constructor` is `Object` — is nobody's.
-      const value = Object.hasOwn(instance.builtins, name)
-        ? instance.builtins[name]
-        : undefined;
+      const value =
+        compileBuiltin(instance, name) ?? handedOver(instance, name);
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }
@@ -440,7 +412,7 @@ function buildNode(
           if (optionalReceiver && object == null) {
             return undefined;
           }
-          const method = memberOf(object, name);
+          const method = memberOf(instance, object, name);
           // An optional call (`a.b?.(…)`) short-circuits a nullish method the
           // same way, arguments unevaluated.
           if (optionalCall && method == null) {
@@ -480,7 +452,7 @@ function buildNode(
           return undefined;
         }
         // An absent member reads as `undefined`.
-        return memberOf(object, member);
+        return memberOf(instance, object, member);
       };
     }
     case "[]": {
