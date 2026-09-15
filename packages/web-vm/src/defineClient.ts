@@ -1,7 +1,6 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
-import type { Window as ClientWindow } from "@backtickjs/web-client";
 import type { Renderer } from "./Renderer.js";
 
 /**
@@ -18,11 +17,11 @@ export interface ClientOptions<NodeType extends object> {
   readonly renderer: Renderer<NodeType>;
 
   /**
-   * What a script reaches through `$window`, handed over as it is: what may be
-   * read off it is decided where one is made. Branded, so a page's own window
-   * is not one without a cast — `windowOf` makes one from a page's.
+   * The host's window, which the client reads from to answer `window`. Never
+   * handed to a script itself: what a script reaches is the list the client
+   * writes out, read through to this.
    */
-  readonly window: ClientWindow;
+  readonly window: typeof window;
 
   /**
    * What this target answers for, beside the language's own names and the

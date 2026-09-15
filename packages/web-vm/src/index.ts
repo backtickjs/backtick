@@ -11,7 +11,6 @@
  */
 export { defineClient } from "./defineClient.js";
 export type { ClientOptions, Draw } from "./defineClient.js";
-export { windowOf } from "./windowOf.js";
 export type { Bundle } from "@backtickjs/core";
 export { dom } from "./dom.js";
 

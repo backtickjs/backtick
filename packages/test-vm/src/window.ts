@@ -1,4 +1,4 @@
-import type { HostWindow } from "@backtickjs/web-vm";
+import type { ClientOptions } from "@backtickjs/web-vm";
 
 // A window for a test: the process's clock and console, and nothing a page
 // has. What a script reaches through `$window` is the web VM's to write out;
@@ -25,7 +25,7 @@ function absent(what: string): never {
   throw new Error(`a test has no ${what}`);
 }
 
-export const window: HostWindow = {
+export const window = {
   performance: globalThis.performance,
   console: globalThis.console,
   addEventListener: () => absent("window events"),
@@ -34,7 +34,7 @@ export const window: HostWindow = {
   get location(): never {
     return absent("location");
   },
-  setTimeout: (handler, timeout) => {
+  setTimeout: (handler: () => void, timeout?: number) => {
     const id = ++last;
     pending.set(
       id,
@@ -46,10 +46,11 @@ export const window: HostWindow = {
     return id;
   },
   clearTimeout: cancel,
-  setInterval: (handler, timeout) => {
+  setInterval: (handler: () => void, timeout?: number) => {
     const id = ++last;
     pending.set(id, globalThis.setInterval(handler, timeout));
     return id;
   },
   clearInterval: cancel,
-};
+  // Only the part a test uses, where a page's window is the whole of one.
+} as unknown as ClientOptions<object>["window"];

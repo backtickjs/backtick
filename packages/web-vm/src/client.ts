@@ -6,6 +6,5 @@
 // table — see `./parts` — rather than loading this beside it.
 import { defineClient } from "./defineClient.js";
 import { dom } from "./dom.js";
-import { windowOf } from "./windowOf.js";
 
-defineClient({ renderer: dom, window: windowOf(window) });
+defineClient({ renderer: dom, window });
