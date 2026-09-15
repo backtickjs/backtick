@@ -64,8 +64,8 @@ function materialize<NodeType extends object>(
   options: ClientOptions<NodeType>,
   renderer: SolidRenderer<NodeType>,
 ): unknown {
-  const { window, builtins } = options;
-  return evaluated(bundle, { renderer, window, builtins });
+  const { window, compileBuiltin } = options;
+  return evaluated(bundle, { renderer, window, compileBuiltin });
 }
 
 /**
@@ -76,11 +76,11 @@ function materialize<NodeType extends object>(
  */
 export function evaluated(
   bundle: Bundle<ClientUnknown>,
-  { renderer, window, builtins }: Omit<Instance, "bundle" | "functions">,
+  { renderer, window, compileBuiltin }: Omit<Instance, "bundle" | "functions">,
 ): unknown {
   // Built once: nothing above the root can hand it anything new later.
   return evaluateNode(
-    { bundle, renderer, window, builtins, functions: new Map() },
+    { bundle, renderer, window, compileBuiltin, functions: new Map() },
     bundle.root,
     scopeOf(null),
   );

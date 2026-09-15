@@ -17,11 +17,8 @@ import { evaluated } from "./interpreter/view.js";
 // than a table, because an object also answers for names nobody wrote —
 // `constructor` is `Object`'s — and only a `case` answers here. Most names are
 // the host's own member of the same name; a member of a value takes the value
-// first. What an app adds is read after these, at the lookup.
-export function compileBuiltin(
-  instance: Instance,
-  name: string,
-): ClientValue | undefined {
+// first. What a target adds is asked for in `default`, after these.
+export function compileBuiltin(instance: Instance, name: string): ClientValue {
   // A wire name may be anything; `default` is where the rest land.
   const known = name as keyof Builtins;
   switch (known) {
@@ -271,9 +268,23 @@ export function compileBuiltin(
       } as unknown as Window;
     }
 
-    default:
+    default: {
       known satisfies never;
-      return undefined;
+      const [kind, member] = name.split(".");
+      // A member of a string, number, boolean or array is a language construct:
+      // one belongs in the language's schema, so every client answers it, and
+      // never in a target's. Refused rather than read as null, which would let
+      // a bundle ask for `padStart` and carry on.
+      if (
+        kind === "string" ||
+        kind === "number" ||
+        kind === "boolean" ||
+        kind === "array"
+      ) {
+        throw new Error(`a ${kind} has no \`${member}\` in this language`);
+      }
+      return instance.compileBuiltin?.(name);
+    }
   }
 }
 

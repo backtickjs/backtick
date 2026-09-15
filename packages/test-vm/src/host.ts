@@ -28,7 +28,7 @@ export function isText(node: TestNode): boolean {
   return node.id === "#text";
 }
 
-export const testHost: Renderer<TestNode> = {
+export const testRenderer: Renderer<TestNode> = {
   createElement: (id) => ({
     id,
     props: {},
@@ -107,7 +107,7 @@ export function recordingHost(): {
   const writes: Write[] = [];
   return {
     options: {
-      ...testHost,
+      ...testRenderer,
       setProperty: (node, prop, value) => {
         writes.push({ node, prop, value });
         node.props[prop] = value;

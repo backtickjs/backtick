@@ -1,4 +1,4 @@
-import type { ClientUnknown } from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
 import type { Renderer } from "./Renderer.js";
@@ -8,14 +8,14 @@ import { dom } from "./dom.js";
  * A target's own vocabulary: names a script may call, and tags a bundle may
  * draw.
  *
- * Two tables because a schema declares two things. `builtins` are read after
- * the language's, so a name the language answers is never reached — adding is
- * a target's to do and replacing is not. `elements` are consulted before the
+ * Two because a schema declares two things. `compileBuiltin` is asked after
+ * the client's own names, so a name the client answers is never reached —
+ * adding is a target's to do and replacing is not. `elements` are consulted before the
  * document is asked, so a target may name a tag the browser has never heard of,
  * which is the latitude `createElement` already takes for `svg:`.
  */
 export interface Vocabulary {
-  readonly builtins?: object;
+  readonly compileBuiltin?: (name: string) => ClientValue;
   readonly elements?: Readonly<Record<string, () => Node>>;
 }
 
@@ -42,11 +42,11 @@ export type Draw = (
  * Defined unguarded: two clients on one page is a mistake, and the registry
  * throwing is how anyone finds out.
  *
- * `builtins` is what a target adds to the web's own names, read after them, so
- * a target may add and may not replace.
+ * `compileBuiltin` answers for what a target adds to the web's own names,
+ * asked after them, so a target may add and may not replace.
  */
 export function defineClient({
-  builtins = {},
+  compileBuiltin,
   elements = {},
 }: Vocabulary = {}): void {
   const renderer: Renderer<Node> = {
@@ -69,8 +69,8 @@ export function defineClient({
       // it is first made and needs something that holds still to insert in
       // front of. The script is that, and shows nothing.
       render(
-        JSON.parse(data.textContent ?? "") as Bundle<ClientUnknown>,
-        { renderer, window, builtins },
+        JSON.parse(data.textContent),
+        { renderer, window, compileBuiltin },
         parent,
         data,
       );

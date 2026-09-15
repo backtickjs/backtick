@@ -133,14 +133,6 @@ function compileFunction(
 // evaluating yields is the only thing that differs between them — a value, a
 // statement's completion, a list's members — so that is the return type and
 // nothing else is.
-// What the target handed over under a name. Own names only: its table is a
-// plain object, and what it inherits — `constructor` is `Object` — is nobody's.
-function handedOver(instance: Instance, name: string): ClientValue | undefined {
-  const handed = instance.builtins;
-  return Object.hasOwn(handed, name)
-    ? (handed as unknown as Readonly<Record<string, ClientValue>>)[name]
-    : undefined;
-}
 
 // A client function as this client applies one. `ClientFunction` says which
 // values are functions — its parameters are `never`, so that every function is
@@ -214,13 +206,8 @@ function memberOf(
       : held;
   }
   const whole = `${boxed}.${name}`;
+  // Answered, or refused there: a member a kind of value does not have throws.
   const found = compileBuiltin(instance, whole);
-  if (found === undefined) {
-    // Not absent: a value's members are the schema's to say, and an undeclared
-    // one is a name this language has no meaning for. Reading it as null would
-    // let a bundle ask for `padStart` and carry on.
-    throw new Error(`a ${boxed} has no \`${name}\` in this language`);
-  }
   // Every member takes its receiver first, because a client with no `this`
   // reads the same document and answers the same way. A getter is applied
   // here, where its name is read, because that is where the language puts the
@@ -350,8 +337,7 @@ export function compile(
     // everywhere, and a target may lengthen it but not edit it.
     case "bltn": {
       const name = node[1];
-      const value =
-        compileBuiltin(instance, name) ?? handedOver(instance, name);
+      const value = compileBuiltin(instance, name);
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }

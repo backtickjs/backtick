@@ -18,9 +18,9 @@ export interface Instance {
   readonly renderer: SolidRenderer<object>;
   // The host's window, which `window` is read through.
   readonly window: HostWindow;
-  // What the target handed over, beside the client's own names. Read only
-  // after those have not answered, so a target naming one is never reached.
-  readonly builtins: object;
+  // What the target answers for beside the client's own names, asked only after
+  // those have not answered.
+  readonly compileBuiltin?: (name: string) => ClientValue;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per
   // reference would be a fresh identity, and a prop holding one would be set

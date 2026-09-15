@@ -9,17 +9,17 @@
  * Reactive only where Solid resolves to its browser build, which is what
  * `--conditions=browser` asks Node for.
  */
-import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
+import type { Bundle, ClientUnknown } from "@backtickjs/core";
 import {
   evaluate as evaluateBundle,
   render as renderBundle,
 } from "@backtickjs/web-vm";
 import type { ClientOptions, Renderer } from "@backtickjs/web-vm";
-import { testHost } from "./host.js";
+import { testRenderer } from "./host.js";
 import type { TestNode } from "./host.js";
 import { window } from "./window.js";
 
-export { isTestNode, isText, recordingHost, testHost } from "./host.js";
+export { isTestNode, isText, recordingHost, testRenderer } from "./host.js";
 export type { TestNode, Write } from "./host.js";
 
 /** What a test changes about the VM a bundle runs in. */
@@ -28,13 +28,7 @@ export interface TestOptions {
    * How nodes are built: `testHost` unless a test watches how the host is
    * spoken to rather than what it ends up holding.
    */
-  readonly host?: Renderer<TestNode>;
-
-  /**
-   * Names beside the client's own, for a test about a target adding one of
-   * its own.
-   */
-  readonly builtins?: Readonly<Record<string, ClientValue>>;
+  readonly renderer?: Renderer<TestNode>;
 }
 
 export interface RenderOptions extends TestOptions {
@@ -45,10 +39,12 @@ export interface RenderOptions extends TestOptions {
 // A window under every bundle, because a timer is the client's rather than the
 // language's and a bundle that waits splices one.
 function clientOptions({
-  host = testHost,
-  builtins = {},
+  renderer = testRenderer,
 }: TestOptions): ClientOptions<TestNode> {
-  return { renderer: host, window, builtins };
+  return {
+    renderer,
+    window,
+  };
 }
 
 /**

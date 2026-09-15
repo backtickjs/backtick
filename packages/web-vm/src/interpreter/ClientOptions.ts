@@ -1,3 +1,4 @@
+import type { ClientValue } from "@backtickjs/core";
 import type { Renderer } from "../Renderer.js";
 
 /**
@@ -7,12 +8,9 @@ import type { Renderer } from "../Renderer.js";
  *
  * Apart rather than one, because they are answered by different things. A
  * renderer is how a host draws and a window is what it offers a script, and
- * every target has both. A table of builtins is what a target adds beside them.
+ * every target has both. What a target adds beside them it answers for itself.
  */
-export interface ClientOptions<
-  NodeType extends object,
-  Builtins extends object = object,
-> {
+export interface ClientOptions<NodeType extends object> {
   /** How this host builds, moves and reads its own nodes. */
   readonly renderer: Renderer<NodeType>;
 
@@ -25,14 +23,14 @@ export interface ClientOptions<
 
   /**
    * What this target answers for, beside the language's own names and the
-   * window. Keyed by the whole name, as the schema writes it and as the wire
-   * carries it.
+   * window: asked by the whole name, as the schema writes it and as the wire
+   * carries it, and answering with nothing for a name it does not have.
    *
-   * A name the client already answers for is never reached here: what `state`
-   * means is not a target's to redecide, and a client where it meant something
-   * else is a bundle that means something else everywhere it runs.
+   * Asked only after the client has not answered, so a name the client already
+   * answers for is never reached here: what `state` means is not a target's to
+   * redecide.
    */
-  readonly builtins: Builtins;
+  readonly compileBuiltin?: (name: string) => ClientValue;
 }
 
 /**
