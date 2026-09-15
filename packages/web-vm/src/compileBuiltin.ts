@@ -252,12 +252,18 @@ export function compileBuiltin(
         // A function and nothing else: a browser handed a string compiles it
         // and runs it, which is `eval` by another name.
         setTimeout: (handler: unknown, timeout?: number) =>
-          instance.window.setTimeout(timed("setTimeout", handler), timeout),
+          instance.window.setTimeout(
+            assertFunction("setTimeout", handler),
+            timeout,
+          ),
         clearTimeout: (id: number) => {
           instance.window.clearTimeout(id);
         },
         setInterval: (handler: unknown, timeout?: number) =>
-          instance.window.setInterval(timed("setInterval", handler), timeout),
+          instance.window.setInterval(
+            assertFunction("setInterval", handler),
+            timeout,
+          ),
         clearInterval: (id: number) => {
           instance.window.clearInterval(id);
         },
@@ -272,7 +278,7 @@ export function compileBuiltin(
 }
 
 // A timer's handler, refused where it is not a function.
-function timed(name: string, handler: unknown): () => void {
+function assertFunction(name: string, handler: unknown): () => void {
   if (typeof handler !== "function") {
     throw new Error(`\`window.${name}\` takes a function`);
   }
