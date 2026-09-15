@@ -12,7 +12,7 @@ import type {
 } from "@backtickjs/language";
 import { compileBuiltin, getters } from "../compileBuiltin.js";
 import type { Instance } from "./Instance.js";
-import { compileComponentCall, compileElement } from "./view.js";
+import { compileComponentCall, compileElement } from "../compileElement.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `language/src/schema.ts`). It evaluates a bundle's `root`
@@ -21,8 +21,8 @@ import { compileComponentCall, compileElement } from "./view.js";
 // behavior rather than only snapshotting shape.
 //
 // This half is evaluation alone. What a drawing function builds — and what
-// keeps it current afterwards — is `view.ts`, which is the only part that knows
-// a host exists.
+// keeps it current afterwards — is `compileElement.ts`, which is the only part
+// that knows a host exists.
 
 // Everything the compiler reads. A tree expression and a body node are one
 // grammar with two ends: the shared middle is literals, containers, names and
