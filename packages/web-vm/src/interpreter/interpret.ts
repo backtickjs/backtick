@@ -272,7 +272,7 @@ export function compile(
   const node = source;
   switch (node[0]) {
     case "arr": {
-      const members = compileElements(instance, node[1]);
+      const members = compileArrayElements(instance, node[1]);
       return (scope) => members(scope);
     }
     // An object literal a spread runs through. A literal without one is data
@@ -364,7 +364,7 @@ export function compile(
       // decided here rather than on every call.
       const callee = node[1];
       const optionalCall = node[0] === "?.()";
-      const args = compileElements(instance, node[2]);
+      const args = compileArrayElements(instance, node[2]);
       if (Array.isArray(callee) && (callee[0] === "." || callee[0] === "?.")) {
         const receiver = compile(instance, callee[1]);
         const optionalReceiver = callee[0] === "?.";
@@ -892,7 +892,7 @@ function isSpread(element: BundleArrayElement): element is BundleSpreadElement {
 // members of an array, and the list is what they add up to. A list with no
 // spread in it compiles to a plain map — the flattening is a cost only where
 // something is actually spread.
-function compileElements(
+function compileArrayElements(
   instance: Instance,
   elements: readonly BundleArrayElement[],
 ): (scope: Scope | null) => ClientValue[] {
