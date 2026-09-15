@@ -12,10 +12,10 @@
 export { defineClient } from "./defineClient.js";
 export type { ClientOptions, Draw } from "./defineClient.js";
 export type { Bundle } from "@backtickjs/core";
-export { dom } from "./dom.js";
+export { renderer } from "./renderer.js";
 
 // The interpreter beneath it, which draws through any renderer rather than only
 // the DOM: what `@backtickjs/test-vm` drives with a host of plain objects.
 export { render } from "./render.js";
 export { compile, scopeOf } from "./compile.js";
-export type { Renderer } from "./Renderer.js";
+export type { Renderer } from "./renderer.js";

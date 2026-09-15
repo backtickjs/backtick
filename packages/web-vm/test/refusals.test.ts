@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-client/schema";
-import { dom } from "../src/dom.ts";
+import { renderer } from "../src/renderer.ts";
+
+// Built when called: a test puts its own document in place first.
+const dom = () => renderer(globalThis.document);
 
 // The two ways a bundle could run what wrote it, each held to not happening.
 //
@@ -49,7 +52,7 @@ describe("a tag that would execute", () => {
     for (const tag of ["script", "SCRIPT", "Script", "svg:script"]) {
       const { asked } = documented();
       assert.throws(
-        () => dom.createElement(tag),
+        () => dom().createElement(tag),
         /may not draw/,
         `\`${tag}\` was drawn`,
       );
@@ -62,7 +65,7 @@ describe("a tag that would execute", () => {
   it("does not stop a tag that only looks like one", () => {
     const { asked } = documented();
     for (const tag of ["svg:SCRIPT", "script-viewer", "marquee"]) {
-      dom.createElement(tag);
+      dom().createElement(tag);
     }
     assert.deepEqual(asked, ["svg:SCRIPT", "script-viewer", "marquee"]);
   });
@@ -75,7 +78,7 @@ describe("a handler that is not a function", () => {
     for (const prop of ["onerror", "onclick", "onError", "ONCLICK"]) {
       const el = node();
       assert.throws(
-        () => dom.setProperty(el as never, prop, "alert(1)"),
+        () => dom().setProperty(el as never, prop, "alert(1)"),
         /takes a function/,
         `\`${prop}\` was allowed`,
       );
@@ -86,14 +89,14 @@ describe("a handler that is not a function", () => {
   it("is refused whatever kind of value it is", () => {
     const el = node();
     for (const value of ["alert(1)", true, 1]) {
-      assert.throws(() => dom.setProperty(el as never, "onclick", value));
+      assert.throws(() => dom().setProperty(el as never, "onclick", value));
     }
     assert.deepEqual(el.attrs, {});
   });
 
   it("leaves a function alone", () => {
     const el = node();
-    dom.setProperty(el as never, "onclick", () => {});
+    dom().setProperty(el as never, "onclick", () => {});
     assert.deepEqual(el.attrs, {});
   });
 
@@ -103,7 +106,7 @@ describe("a handler that is not a function", () => {
   it("is refused the other way round too", () => {
     const el = node();
     assert.throws(
-      () => dom.setProperty(el as never, "title", () => {}),
+      () => dom().setProperty(el as never, "title", () => {}),
       /takes a value, not a function/,
     );
     assert.deepEqual(el.attrs, {});
@@ -113,8 +116,8 @@ describe("a handler that is not a function", () => {
   // that went away rather than becoming an error a drawing has to survive.
   it("lets an absent handler stay absent", () => {
     const el = node();
-    dom.setProperty(el as never, "onclick", null);
-    dom.setProperty(el as never, "onclick", undefined);
+    dom().setProperty(el as never, "onclick", null);
+    dom().setProperty(el as never, "onclick", undefined);
     assert.deepEqual(el.attrs, {});
   });
 
@@ -126,7 +129,7 @@ describe("a handler that is not a function", () => {
   // handler, so what this costs is a name nobody has.
   it("refuses a name that merely starts the same", () => {
     const el = node();
-    assert.throws(() => dom.setProperty(el as never, "one", "1"));
+    assert.throws(() => dom().setProperty(el as never, "one", "1"));
     assert.deepEqual(el.attrs, {});
   });
 });
@@ -139,8 +142,8 @@ describe("the vocabulary and the schema", () => {
     const declared = Object.keys(schema.elements);
     const { asked } = documented();
     for (const tag of declared) {
-      dom.createElement(tag);
-      dom.createElement(`svg:${tag}`);
+      dom().createElement(tag);
+      dom().createElement(`svg:${tag}`);
     }
     assert.equal(asked.length, declared.length * 2);
   });

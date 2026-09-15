@@ -1,7 +1,7 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./render.js";
-import type { Renderer } from "./Renderer.js";
+import type { Renderer } from "./renderer.js";
 
 /**
  * What a target hands this interpreter: how to build its nodes, the window a

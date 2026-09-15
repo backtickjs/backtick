@@ -1,4 +1,20 @@
-import type { Renderer } from "./Renderer.js";
+// Declared here rather than imported from Solid, though Solid is what consumes
+// it: a target implements this package's contract and carries no dependency for
+// it. The reactive graph behind these calls is an implementation detail of the
+// interpreter, and the shape is checked structurally where the two meet.
+export interface Renderer<NodeType> {
+  // A tag drawn inside an `svg` arrives as `svg:<tag>`
+  createElement(tag: string): NodeType;
+  createTextNode(value: string): NodeType;
+  replaceText(textNode: NodeType, value: string): void;
+  isTextNode(node: NodeType): boolean;
+  setProperty<T>(node: NodeType, name: string, value: T, prev?: T): void;
+  insertNode(parent: NodeType, node: NodeType, anchor?: NodeType): void;
+  removeNode(parent: NodeType, node: NodeType): void;
+  getParentNode(node: NodeType): NodeType | undefined;
+  getFirstChild(node: NodeType): NodeType | undefined;
+  getNextSibling(node: NodeType): NodeType | undefined;
+}
 
 // SVG's namespace. `createElement` cannot reach it: an element made there
 // draws, and one made with the same tag in HTML's namespace is an
@@ -7,36 +23,40 @@ const SVG = "http://www.w3.org/2000/svg";
 
 // The DOM, as the ten operations a host answers. Nine are the DOM's own words;
 // `setProperty` is the only decision here, because what a prop means is ours.
-export const dom: Renderer<Node> = {
-  // The interpreter prefixes a tag drawn inside an `svg`: `svg:path` is a path
-  // in SVG's namespace, and a tag with no prefix is HTML's.
-  createElement: (tag) => {
-    const isSvg = tag.startsWith("svg:");
-    tag = isSvg ? tag.slice(4) : tag.toLowerCase();
-    // The one tag a bundle may not draw
-    if (tag === "script") {
-      throw new Error(`backtick: a bundle may not draw a \`${tag}\``);
-    }
-    return isSvg
-      ? document.createElementNS(SVG, tag)
-      : document.createElement(tag);
-  },
-  createTextNode: (value) => document.createTextNode(value),
-  replaceText: (node, value) => {
-    node.nodeValue = value;
-  },
-  isTextNode: (node) => node.nodeType === 3,
-  setProperty: (node, name, value) => attribute(node as Element, name, value),
-  insertNode: (parent, node, anchor) => {
-    parent.insertBefore(node, anchor ?? null);
-  },
-  removeNode: (parent, node) => {
-    parent.removeChild(node);
-  },
-  getParentNode: (node) => node.parentNode ?? undefined,
-  getFirstChild: (node) => node.firstChild ?? undefined,
-  getNextSibling: (node) => node.nextSibling ?? undefined,
-};
+// Built over the document it is handed, so what draws into a page can draw into
+// any document.
+export function renderer(document: Document): Renderer<Node> {
+  return {
+    // The interpreter prefixes a tag drawn inside an `svg`: `svg:path` is a path
+    // in SVG's namespace, and a tag with no prefix is HTML's.
+    createElement: (tag) => {
+      const isSvg = tag.startsWith("svg:");
+      tag = isSvg ? tag.slice(4) : tag.toLowerCase();
+      // The one tag a bundle may not draw
+      if (tag === "script") {
+        throw new Error(`backtick: a bundle may not draw a \`${tag}\``);
+      }
+      return isSvg
+        ? document.createElementNS(SVG, tag)
+        : document.createElement(tag);
+    },
+    createTextNode: (value) => document.createTextNode(value),
+    replaceText: (node, value) => {
+      node.nodeValue = value;
+    },
+    isTextNode: (node) => node.nodeType === 3,
+    setProperty: (node, name, value) => attribute(node as Element, name, value),
+    insertNode: (parent, node, anchor) => {
+      parent.insertBefore(node, anchor ?? null);
+    },
+    removeNode: (parent, node) => {
+      parent.removeChild(node);
+    },
+    getParentNode: (node) => node.parentNode ?? undefined,
+    getFirstChild: (node) => node.firstChild ?? undefined,
+    getNextSibling: (node) => node.nextSibling ?? undefined,
+  };
+}
 
 // One registration per event, reading whatever the prop holds now: a handler is
 // a new closure whenever what it captured changed, and a listener each would run
