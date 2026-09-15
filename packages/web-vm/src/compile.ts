@@ -12,7 +12,8 @@ import type {
 } from "@backtickjs/language";
 import { compileBuiltin, getters } from "./compileBuiltin.js";
 import type { Instance } from "./Instance.js";
-import { compileComponentCall, compileElement } from "./compileElement.js";
+import { compileComponentCall } from "./compileComponentCall.js";
+import { compileElement } from "./compileElement.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `language/src/schema.ts`). It evaluates a bundle's `root`
