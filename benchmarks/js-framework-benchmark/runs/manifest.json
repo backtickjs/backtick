@@ -548,6 +548,14 @@
       "keyed": true,
       "dir": "3ca45e6d",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "edabac79",
+      "label": "no reactivity check",
+      "date": "2026-09-14",
+      "keyed": true,
+      "dir": "edabac79",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
