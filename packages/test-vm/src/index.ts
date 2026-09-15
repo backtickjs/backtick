@@ -9,11 +9,10 @@
  * Reactive only where Solid resolves to its browser build, which is what
  * `--conditions=browser` asks Node for.
  */
-import type { Bundle, ClientUnknown } from "@backtickjs/core";
-import {
-  evaluate as evaluateBundle,
-  render as renderBundle,
-} from "@backtickjs/web-vm";
+import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
+import { compile, render as renderBundle, scopeOf } from "@backtickjs/web-vm";
+import { createRoot } from "solid-js";
+import { createRenderer } from "solid-js/universal";
 import type { ClientOptions, Renderer } from "@backtickjs/web-vm";
 import { testRenderer } from "./host.js";
 import type { TestNode } from "./host.js";
@@ -57,8 +56,17 @@ function clientOptions({
 export function evaluate(
   bundle: Bundle<ClientUnknown>,
   options: TestOptions = {},
-): unknown {
-  return evaluateBundle(bundle, clientOptions(options));
+): ClientValue {
+  const { window, renderer: host } = clientOptions(options);
+  const renderer = createRenderer(host);
+  // An owner for whatever it builds, and nothing to drop it with: a test's
+  // drawing lasts as long as the test.
+  return createRoot(() =>
+    compile(
+      { bundle, renderer, window, functions: new Map() },
+      bundle.root,
+    )(scopeOf(null)),
+  );
 }
 
 /**

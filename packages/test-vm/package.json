@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-vm": "workspace:*"
+    "@backtickjs/web-vm": "workspace:*",
+    "solid-js": "^1.9.14"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",

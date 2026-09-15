@@ -609,6 +609,9 @@ importers:
       '@backtickjs/web-vm':
         specifier: workspace:*
         version: link:../web-vm
+      solid-js:
+        specifier: ^1.9.14
+        version: 1.9.14
     devDependencies:
       '@types/node':
         specifier: ^25.9.1
