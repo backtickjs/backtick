@@ -1,4 +1,4 @@
-import type { RendererOptions } from "./interpreter/index.js";
+import type { Renderer } from "./Renderer.js";
 
 // SVG's namespace. `createElement` cannot reach it: an element made there
 // draws, and one made with the same tag in HTML's namespace is an
@@ -7,7 +7,7 @@ const SVG = "http://www.w3.org/2000/svg";
 
 // The DOM, as the ten operations a host answers. Nine are the DOM's own words;
 // `setProperty` is the only decision here, because what a prop means is ours.
-export const dom: RendererOptions<Node> = {
+export const dom: Renderer<Node> = {
   // The interpreter prefixes a tag drawn inside an `svg`: `svg:path` is a path
   // in SVG's namespace, and a tag with no prefix is HTML's.
   createElement: (tag) => {

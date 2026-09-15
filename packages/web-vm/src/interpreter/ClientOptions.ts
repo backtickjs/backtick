@@ -1,4 +1,4 @@
-import type { RendererOptions } from "./RendererOptions.js";
+import type { Renderer } from "../Renderer.js";
 
 /**
  * What a target hands this interpreter: how to build its nodes, the window a
@@ -14,7 +14,7 @@ export interface ClientOptions<
   Builtins extends object = object,
 > {
   /** How this host builds, moves and reads its own nodes. */
-  readonly renderer: RendererOptions<NodeType>;
+  readonly renderer: Renderer<NodeType>;
 
   /**
    * The host's window, which the client reads from to answer `window`. Never

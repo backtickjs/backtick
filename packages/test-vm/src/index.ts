@@ -14,7 +14,7 @@ import {
   evaluate as evaluateBundle,
   render as renderBundle,
 } from "@backtickjs/web-vm";
-import type { ClientOptions, RendererOptions } from "@backtickjs/web-vm";
+import type { ClientOptions, Renderer } from "@backtickjs/web-vm";
 import { testHost } from "./host.js";
 import type { TestNode } from "./host.js";
 import { window } from "./window.js";
@@ -28,7 +28,7 @@ export interface TestOptions {
    * How nodes are built: `testHost` unless a test watches how the host is
    * spoken to rather than what it ends up holding.
    */
-  readonly host?: RendererOptions<TestNode>;
+  readonly host?: Renderer<TestNode>;
 
   /**
    * Names beside the client's own, for a test about a target adding one of

@@ -1,7 +1,7 @@
 import type { ClientUnknown } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
-import type { RendererOptions } from "./interpreter/index.js";
+import type { Renderer } from "./Renderer.js";
 import { dom } from "./dom.js";
 
 /**
@@ -49,7 +49,7 @@ export function defineClient({
   builtins = {},
   elements = {},
 }: Vocabulary = {}): void {
-  const renderer: RendererOptions<Node> = {
+  const renderer: Renderer<Node> = {
     ...dom,
     createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
   };

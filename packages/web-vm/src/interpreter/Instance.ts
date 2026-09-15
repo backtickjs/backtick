@@ -1,6 +1,6 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle, BundleFunctionLabel } from "@backtickjs/language";
-import type { Renderer } from "solid-js/universal";
+import type { Renderer as SolidRenderer } from "solid-js/universal";
 import type { HostWindow } from "./ClientOptions.js";
 
 // A bundle paired with a host: what is needed to draw one, which neither of
@@ -15,7 +15,7 @@ export interface Instance {
   // `object` rather than the target's node type: every node this holds came
   // from the target and goes back to it untouched, so what it is, is the
   // target's business throughout.
-  readonly renderer: Renderer<object>;
+  readonly renderer: SolidRenderer<object>;
   // The host's window, which `window` is read through.
   readonly window: HostWindow;
   // What the target handed over, beside the client's own names. Read only

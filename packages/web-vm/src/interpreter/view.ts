@@ -1,8 +1,11 @@
 import type { ClientUnknown } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/language";
 import { createRoot } from "solid-js";
-import { createRenderer, type Renderer } from "solid-js/universal";
-import type { RendererOptions } from "./RendererOptions.js";
+import {
+  createRenderer,
+  type Renderer as SolidRenderer,
+} from "solid-js/universal";
+import type { Renderer } from "../Renderer.js";
 import type { ClientOptions } from "./ClientOptions.js";
 import type { Instance } from "./Instance.js";
 import { evaluate as evaluateNode, scopeOf } from "./interpret.js";
@@ -59,7 +62,7 @@ export function evaluate<NodeType extends object>(
 function materialize<NodeType extends object>(
   bundle: Bundle<ClientUnknown>,
   options: ClientOptions<NodeType>,
-  renderer: Renderer<NodeType>,
+  renderer: SolidRenderer<NodeType>,
 ): unknown {
   const { window, builtins } = options;
   return evaluated(bundle, { renderer, window, builtins });
@@ -85,7 +88,7 @@ export function evaluated(
 
 // A renderer per set of target operations.
 function rendererOf<NodeType extends object>(
-  options: RendererOptions<NodeType>,
-): Renderer<NodeType> {
+  options: Renderer<NodeType>,
+): SolidRenderer<NodeType> {
   return createRenderer(options);
 }
