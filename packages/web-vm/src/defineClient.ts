@@ -1,6 +1,6 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
-import { render } from "./interpreter/index.js";
+import { render } from "./render.js";
 import type { Renderer } from "./Renderer.js";
 
 /**

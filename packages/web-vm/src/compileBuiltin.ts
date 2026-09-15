@@ -10,8 +10,8 @@ import type {
 import type { Builtins, Window } from "@backtickjs/web-client";
 import { createSignal, untrack } from "solid-js";
 import type { Instance } from "./Instance.js";
+import { compile, scopeOf } from "./compile.js";
 import type { Applied } from "./compile.js";
-import { evaluated } from "./interpreter/view.js";
 
 // What this client answers for each name the web provides. A switch rather
 // than a table, because an object also answers for names nobody wrote —
@@ -163,13 +163,19 @@ export function compileBuiltin(instance: Instance, name: string): ClientValue {
       } as unknown as Http;
 
     // A bundle drawn with this instance's renderer, and reaching the names this
-    // one does. Untracked, as Solid runs a component: what the bundle reads while
-    // its root is evaluated is its own setup, and a write to it runs nothing of
-    // the caller's again.
+    // one does, in a new instance of its own: the labels are per bundle, so its
+    // `functions` are too. Untracked, as Solid runs a component: what the
+    // bundle reads while its root is evaluated is its own setup, and a write to
+    // it runs nothing of the caller's again.
     case "vm":
       return {
         eval: (bundle: Bundle<ClientUnknown>) =>
-          untrack(() => evaluated(bundle, instance)),
+          untrack(() =>
+            compile(
+              { ...instance, bundle, functions: new Map() },
+              bundle.root,
+            )(scopeOf(null)),
+          ),
       } as unknown as Vm;
 
     // Written out rather than the host's window handed over, so a member the
