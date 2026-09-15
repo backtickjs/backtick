@@ -1,22 +1,18 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
-import type { Renderer } from "./Renderer.js";
 import { dom } from "./dom.js";
 
 /**
- * A target's own vocabulary: names a script may call, and tags a bundle may
- * draw.
+ * A target's own vocabulary: the names a script may call beside the web's.
  *
- * Two because a schema declares two things. `compileBuiltin` is asked after
- * the client's own names, so a name the client answers is never reached —
- * adding is a target's to do and replacing is not. `elements` are consulted before the
- * document is asked, so a target may name a tag the browser has never heard of,
- * which is the latitude `createElement` already takes for `svg:`.
+ * `compileBuiltin` is asked after the client's own names, so a name the client
+ * answers is never reached — adding is a target's to do and replacing is not.
+ * A tag a target adds is one it registers with the browser, which the document
+ * then builds itself.
  */
 export interface Vocabulary {
   readonly compileBuiltin?: (name: string) => ClientValue;
-  readonly elements?: Readonly<Record<string, () => Node>>;
 }
 
 /**
@@ -45,14 +41,7 @@ export type Draw = (
  * `compileBuiltin` answers for what a target adds to the web's own names,
  * asked after them, so a target may add and may not replace.
  */
-export function defineClient({
-  compileBuiltin,
-  elements = {},
-}: Vocabulary = {}): void {
-  const renderer: Renderer<Node> = {
-    ...dom,
-    createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
-  };
+export function defineClient({ compileBuiltin }: Vocabulary = {}): void {
   // Every bundle the document carried, drawn where its script stands.
   //
   // Found here rather than announced from the page: a document that carried a
@@ -70,7 +59,7 @@ export function defineClient({
       // front of. The script is that, and shows nothing.
       render(
         JSON.parse(data.textContent),
-        { renderer, window, compileBuiltin },
+        { renderer: dom, window, compileBuiltin },
         parent,
         data,
       );
