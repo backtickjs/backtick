@@ -245,16 +245,6 @@ export function evaluate(
   return compile(instance, node)(scope);
 }
 
-function compileStatement(
-  instance: Instance,
-  node: BundleStatement,
-): (scope: Scope | null) => Completion {
-  if (node === null || typeof node !== "object") {
-    return () => advanced;
-  }
-  return buildStatement(instance, node);
-}
-
 // A literal carries itself. Past that, what is left has a shape to read: an
 // object of data, or a node. A node is an array and nothing else in a value
 // slot is — an array of data travels under an `arr` node — so `Array.isArray`
@@ -708,10 +698,13 @@ function guardTurns(turns: number, keyword: string): void {
   }
 }
 
-function buildStatement(
+function compileStatement(
   instance: Instance,
   node: BundleStatement,
 ): (scope: Scope | null) => Completion {
+  if (node === null || typeof node !== "object") {
+    return () => advanced;
+  }
   if (!Array.isArray(node)) {
     // Plain JSON in statement position is an expression evaluated for its
     // effect.
