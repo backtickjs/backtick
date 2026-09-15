@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-client/schema";
 import { compileBuiltin } from "../dist/compileBuiltin.js";
-import type { Instance } from "../dist/interpreter/Instance.js";
+import type { Instance } from "../dist/Instance.js";
 
 // What this client answers with, against what the web's schema says a script
 // may reach: the language's names and the window. A name declared and not

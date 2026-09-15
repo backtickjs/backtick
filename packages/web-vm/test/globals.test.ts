@@ -5,7 +5,7 @@ import { describe, it } from "node:test";
 import { schema } from "@backtickjs/language/schema";
 import type { Builtins } from "@backtickjs/language";
 import { compileBuiltin, getters } from "../dist/compileBuiltin.js";
-import type { Instance } from "../dist/interpreter/Instance.js";
+import type { Instance } from "../dist/Instance.js";
 
 // What the interpreter answers with, against what the schema says a script may
 // reach. A name declared and not answered fails here rather than at the first

@@ -9,8 +9,8 @@ import type {
 } from "@backtickjs/language";
 import type { Builtins, Window } from "@backtickjs/web-client";
 import { createSignal, untrack } from "solid-js";
-import type { Instance } from "./interpreter/Instance.js";
-import type { Applied } from "./interpreter/interpret.js";
+import type { Instance } from "./Instance.js";
+import type { Applied } from "./compile.js";
 import { evaluated } from "./interpreter/view.js";
 
 // What this client answers for each name the web provides. A switch rather

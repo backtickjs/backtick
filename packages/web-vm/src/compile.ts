@@ -10,9 +10,9 @@ import type {
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/language";
-import { compileBuiltin, getters } from "../compileBuiltin.js";
+import { compileBuiltin, getters } from "./compileBuiltin.js";
 import type { Instance } from "./Instance.js";
-import { compileComponentCall, compileElement } from "../compileElement.js";
+import { compileComponentCall, compileElement } from "./compileElement.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `language/src/schema.ts`). It evaluates a bundle's `root`
@@ -222,14 +222,6 @@ function memberOf(
   return typeof found === "function"
     ? (...args: ClientValue[]) => (found as Applied)(object, ...args)
     : found;
-}
-
-export function evaluate(
-  instance: Instance,
-  node: Source,
-  scope: Scope | null,
-): ClientValue {
-  return compile(instance, node)(scope);
 }
 
 // A literal carries itself. Past that, what is left has a shape to read: an

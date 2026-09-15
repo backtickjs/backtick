@@ -5,9 +5,9 @@ import type {
   BundleComponentCall,
 } from "@backtickjs/language";
 import { createMemo, getOwner, mapArray, untrack } from "solid-js";
-import type { Instance } from "./interpreter/Instance.js";
-import { compile } from "./interpreter/interpret.js";
-import type { Scope } from "./interpreter/interpret.js";
+import type { Instance } from "./Instance.js";
+import { compile } from "./compile.js";
+import type { Scope } from "./compile.js";
 
 // Turning a drawing into the host's own nodes, once, and keeping them current
 // through the reactive graph rather than by building them again.

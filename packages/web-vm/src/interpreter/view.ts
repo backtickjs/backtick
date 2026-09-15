@@ -7,8 +7,8 @@ import {
 } from "solid-js/universal";
 import type { Renderer } from "../Renderer.js";
 import type { ClientOptions } from "../defineClient.js";
-import type { Instance } from "./Instance.js";
-import { evaluate as evaluateNode, scopeOf } from "./interpret.js";
+import type { Instance } from "../Instance.js";
+import { compile, scopeOf } from "../compile.js";
 
 // Mounting: a bundle evaluated under a root of its own, drawing through a
 // renderer made from the target's operations. What an element becomes is
@@ -79,11 +79,14 @@ export function evaluated(
   { renderer, window, compileBuiltin }: Omit<Instance, "bundle" | "functions">,
 ): unknown {
   // Built once: nothing above the root can hand it anything new later.
-  return evaluateNode(
-    { bundle, renderer, window, compileBuiltin, functions: new Map() },
-    bundle.root,
-    scopeOf(null),
-  );
+  const instance = {
+    bundle,
+    renderer,
+    window,
+    compileBuiltin,
+    functions: new Map(),
+  };
+  return compile(instance, bundle.root)(scopeOf(null));
 }
 
 // A renderer per set of target operations.
