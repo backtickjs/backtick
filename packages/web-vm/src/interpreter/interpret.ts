@@ -237,17 +237,6 @@ function memberOf(
     : found;
 }
 
-export function compile(
-  instance: Instance,
-  node: Source,
-): (scope: Scope | null) => ClientValue {
-  if (node === null || typeof node !== "object") {
-    const literal = node;
-    return () => literal;
-  }
-  return buildNode(instance, node);
-}
-
 export function evaluate(
   instance: Instance,
   node: Source,
@@ -266,16 +255,18 @@ function compileStatement(
   return buildStatement(instance, node);
 }
 
-// A node is an array and nothing else in a value slot is — an array of data
-// travels under a `ArrayLiteralExpression` node — so `Array.isArray` is the whole test, here
-// and everywhere below.
-//
-// A literal carries itself and is answered by `compile`, so what reaches here
-// is what has a shape to read: an object of data, or a node.
-function buildNode(
+// A literal carries itself. Past that, what is left has a shape to read: an
+// object of data, or a node. A node is an array and nothing else in a value
+// slot is — an array of data travels under an `arr` node — so `Array.isArray`
+// is the whole test, here and everywhere below.
+export function compile(
   instance: Instance,
-  source: Extract<Source, object>,
+  source: Source,
 ): (scope: Scope | null) => ClientValue {
+  if (source === null || typeof source !== "object") {
+    const literal = source;
+    return () => literal;
+  }
   if (!Array.isArray(source)) {
     const data = source;
     const keys = Object.keys(data);
