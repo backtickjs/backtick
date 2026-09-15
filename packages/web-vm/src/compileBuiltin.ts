@@ -249,13 +249,15 @@ export function compileBuiltin(
             instance.window.location.reload();
           },
         },
-        setTimeout: (handler: () => void, timeout?: number) =>
-          instance.window.setTimeout(handler, timeout),
+        // A function and nothing else: a browser handed a string compiles it
+        // and runs it, which is `eval` by another name.
+        setTimeout: (handler: unknown, timeout?: number) =>
+          instance.window.setTimeout(timed("setTimeout", handler), timeout),
         clearTimeout: (id: number) => {
           instance.window.clearTimeout(id);
         },
-        setInterval: (handler: () => void, timeout?: number) =>
-          instance.window.setInterval(handler, timeout),
+        setInterval: (handler: unknown, timeout?: number) =>
+          instance.window.setInterval(timed("setInterval", handler), timeout),
         clearInterval: (id: number) => {
           instance.window.clearInterval(id);
         },
@@ -267,6 +269,14 @@ export function compileBuiltin(
       known satisfies never;
       return undefined;
   }
+}
+
+// A timer's handler, refused where it is not a function.
+function timed(name: string, handler: unknown): () => void {
+  if (typeof handler !== "function") {
+    throw new Error(`\`window.${name}\` takes a function`);
+  }
+  return handler as () => void;
 }
 
 // A receiver as a forwarded member reads it: by the member's name, on the

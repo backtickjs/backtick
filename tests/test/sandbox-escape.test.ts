@@ -85,6 +85,26 @@ describe("sandbox escape (hand-written bundles)", () => {
     assert.equal(evaluate(bundleOf(root)), 7);
   });
 
+  it("refuses a timer handed a string, which a browser runs as code", () => {
+    // Named directly, or handed to a host function that calls it with a
+    // member of an array: either way the handler never reaches the host.
+    const window = ["bltn", "window"];
+    const named = ["()", [".", window, "setTimeout"], ["globalThis.x = 1", 0]];
+    assert.throws(
+      () => evaluate(bundleOf(named)),
+      /`window.setTimeout` takes a function/,
+    );
+    const mapped = [
+      "()",
+      [".", ["arr", ["globalThis.x = 1"]], "map"],
+      [[".", window, "setInterval"]],
+    ];
+    assert.throws(
+      () => evaluate(bundleOf(mapped)),
+      /`window.setInterval` takes a function/,
+    );
+  });
+
   it("refuses a builtin the table only inherits", () => {
     // The table of names is a plain object, so `constructor` on it is `Object` —
     // whose `getPrototypeOf` reaches `Function.prototype` and its own
