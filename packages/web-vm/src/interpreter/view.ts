@@ -6,7 +6,7 @@ import {
   type Renderer as SolidRenderer,
 } from "solid-js/universal";
 import type { Renderer } from "../Renderer.js";
-import type { ClientOptions } from "./ClientOptions.js";
+import type { ClientOptions } from "../defineClient.js";
 import type { Instance } from "./Instance.js";
 import { evaluate as evaluateNode, scopeOf } from "./interpret.js";
 

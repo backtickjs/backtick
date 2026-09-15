@@ -1,17 +1,38 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./interpreter/index.js";
-import { dom } from "./dom.js";
+import type { Window as ClientWindow } from "@backtickjs/web-client";
+import type { Renderer } from "./Renderer.js";
 
 /**
- * A target's own vocabulary: the names a script may call beside the web's.
+ * What a target hands this interpreter: how to build its nodes, the window a
+ * script reaches through `$window`, and what it answers for beyond the names
+ * the language provides itself.
  *
- * `compileBuiltin` is asked after the client's own names, so a name the client
- * answers is never reached — adding is a target's to do and replacing is not.
- * A tag a target adds is one it registers with the browser, which the document
- * then builds itself.
+ * Apart rather than one, because they are answered by different things. A
+ * renderer is how a host draws and a window is what it offers a script, and
+ * every target has both. What a target adds beside them it answers for itself.
  */
-export interface Vocabulary {
+export interface ClientOptions<NodeType extends object> {
+  /** How this host builds, moves and reads its own nodes. */
+  readonly renderer: Renderer<NodeType>;
+
+  /**
+   * What a script reaches through `$window`, handed over as it is: what may be
+   * read off it is decided where one is made. Branded, so a page's own window
+   * is not one without a cast — `windowOf` makes one from a page's.
+   */
+  readonly window: ClientWindow;
+
+  /**
+   * What this target answers for, beside the language's own names and the
+   * window: asked by the whole name, as the schema writes it and as the wire
+   * carries it, and answering with nothing for a name it does not have.
+   *
+   * Asked only after the client has not answered, so a name the client already
+   * answers for is never reached here: what `state` means is not a target's to
+   * redecide.
+   */
   readonly compileBuiltin?: (name: string) => ClientValue;
 }
 
@@ -19,8 +40,8 @@ export interface Vocabulary {
  * Draws a bundle where it is told, and hands back what takes it down again.
  *
  * Returned rather than only used here, because a target that draws a bundle of
- * its own — one it was handed rather than one a page wrote — needs this
- * vocabulary to draw it with, and building a second table beside it is how the
+ * its own — one it was handed rather than one a page wrote — needs these
+ * options to draw it with, and building a second set beside them is how the
  * two drift.
  */
 export type Draw = (
@@ -38,10 +59,12 @@ export type Draw = (
  * Defined unguarded: two clients on one page is a mistake, and the registry
  * throwing is how anyone finds out.
  *
- * `compileBuiltin` answers for what a target adds to the web's own names,
- * asked after them, so a target may add and may not replace.
+ * Every bundle on the page is drawn with `options`: the DOM's renderer and the
+ * page's window for the web's own client, and a target's `compileBuiltin`
+ * beside them. A tag a target adds is one it registers with the browser, which
+ * the document then builds itself.
  */
-export function defineClient({ compileBuiltin }: Vocabulary = {}): void {
+export function defineClient(options: ClientOptions<Node>): void {
   // Every bundle the document carried, drawn where its script stands.
   //
   // Found here rather than announced from the page: a document that carried a
@@ -57,12 +80,7 @@ export function defineClient({ compileBuiltin }: Vocabulary = {}): void {
       // In front of the script, which stays: a drawing goes on inserting after
       // it is first made and needs something that holds still to insert in
       // front of. The script is that, and shows nothing.
-      render(
-        JSON.parse(data.textContent),
-        { renderer: dom, window, compileBuiltin },
-        parent,
-        data,
-      );
+      render(JSON.parse(data.textContent), options, parent, data);
     }
   };
 

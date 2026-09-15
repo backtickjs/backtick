@@ -5,5 +5,7 @@
 // A target with a name of its own registers the same element with its own
 // table — see `./parts` — rather than loading this beside it.
 import { defineClient } from "./defineClient.js";
+import { dom } from "./dom.js";
+import { windowOf } from "./windowOf.js";
 
-defineClient();
+defineClient({ renderer: dom, window: windowOf(window) });
