@@ -1,5 +1,5 @@
 import { renderMarkup } from "./renderMarkup.ts";
-import { isNode } from "@backtickjs/web-testing";
+import { isNode } from "./node.ts";
 
 // Renders a runtime value produced by `@backtickjs/web-testing` into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,

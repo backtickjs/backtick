@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { after, describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import type { ClientUnknown } from "@backtickjs/core";
-import { evaluate } from "@backtickjs/web-testing";
+import { evaluateUntrustedBundle } from "@backtickjs/web-testing";
 
 // A guard, not a snapshot. Every other suite here compiles a `.ts` fixture and
 // runs what the compiler emitted; the point of these tests is the opposite — a
@@ -35,14 +35,14 @@ describe("sandbox escape (hand-written bundles)", () => {
     // `{}` holds no `constructor`; the inherited one from Object.prototype is
     // machinery, so reading it throws.
     assert.throws(
-      () => evaluate(bundleOf(OBJECT_CTOR)),
+      () => evaluateUntrustedBundle(bundleOf(OBJECT_CTOR)),
       /an object has no `constructor` in this language/,
     );
   });
 
   it("refuses `__proto__` off an object literal", () => {
     assert.throws(
-      () => evaluate(bundleOf([".", EMPTY, "__proto__"])),
+      () => evaluateUntrustedBundle(bundleOf([".", EMPTY, "__proto__"])),
       /an object has no `__proto__` in this language/,
     );
   });
@@ -50,18 +50,18 @@ describe("sandbox escape (hand-written bundles)", () => {
   it("refuses a machinery method call", () => {
     const root = ["()", [".", EMPTY, "toString"], []];
     assert.throws(
-      () => evaluate(bundleOf(root)),
+      () => evaluateUntrustedBundle(bundleOf(root)),
       /an object has no `toString` in this language/,
     );
   });
 
   it("cannot reach the Function constructor", () => {
-    assert.throws(() => evaluate(bundleOf(FUNCTION_CTOR)));
+    assert.throws(() => evaluateUntrustedBundle(bundleOf(FUNCTION_CTOR)));
   });
 
   it("cannot run arbitrary code through a reached Function", () => {
     const built = ["()", FUNCTION_CTOR, ["return 1337 + 1"]];
-    assert.throws(() => evaluate(bundleOf(["()", built, []])));
+    assert.throws(() => evaluateUntrustedBundle(bundleOf(["()", built, []])));
   });
 
   it("cannot reach the host realm via a global side effect", () => {
@@ -72,7 +72,7 @@ describe("sandbox escape (hand-written bundles)", () => {
 
     const source = `globalThis[${JSON.stringify(MARKER)}] = 42`;
     const built = ["()", FUNCTION_CTOR, [source]];
-    assert.throws(() => evaluate(bundleOf(["()", built, []])));
+    assert.throws(() => evaluateUntrustedBundle(bundleOf(["()", built, []])));
 
     // The write must never have happened.
     assert.equal((globalThis as Record<string, unknown>)[MARKER], undefined);
@@ -82,7 +82,7 @@ describe("sandbox escape (hand-written bundles)", () => {
     // A data object may legitimately hold a key called `constructor`; an own
     // member always wins over the inherited-machinery rule.
     const root = [".", ["obj", [[":", "constructor", 7]]], "constructor"];
-    assert.equal(evaluate(bundleOf(root)), 7);
+    assert.equal(evaluateUntrustedBundle(bundleOf(root)), 7);
   });
 
   it("refuses a timer handed a string, which a browser runs as code", () => {
@@ -91,7 +91,7 @@ describe("sandbox escape (hand-written bundles)", () => {
     const window = ["bltn", "window"];
     const named = ["()", [".", window, "setTimeout"], ["globalThis.x = 1", 0]];
     assert.throws(
-      () => evaluate(bundleOf(named)),
+      () => evaluateUntrustedBundle(bundleOf(named)),
       /`window.setTimeout` takes a function/,
     );
     const mapped = [
@@ -100,7 +100,7 @@ describe("sandbox escape (hand-written bundles)", () => {
       [[".", window, "setInterval"]],
     ];
     assert.throws(
-      () => evaluate(bundleOf(mapped)),
+      () => evaluateUntrustedBundle(bundleOf(mapped)),
       /`window.setInterval` takes a function/,
     );
   });
@@ -111,7 +111,7 @@ describe("sandbox escape (hand-written bundles)", () => {
     // `constructor`, which is `Function`.
     for (const name of ["constructor", "__proto__", "toString"]) {
       assert.throws(
-        () => evaluate(bundleOf(["bltn", name])),
+        () => evaluateUntrustedBundle(bundleOf(["bltn", name])),
         new RegExp(`unknown builtin ${name}`),
       );
     }

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { render, userEvent } from "@backtickjs/web-testing";
+import { render } from "@backtickjs/web-testing";
+import { userEvent } from "@testing-library/user-event";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the

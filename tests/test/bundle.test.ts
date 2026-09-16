@@ -8,7 +8,8 @@ import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
-import { evaluate, isNode, render } from "@backtickjs/web-testing";
+import { evaluate, render } from "@backtickjs/web-testing";
+import { isNode } from "./node.ts";
 
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a
 // client — a script or a JSX tree — compiled here with the same transform the
@@ -58,7 +59,7 @@ describe("bundle", () => {
           renderBundleDebug(bundle),
           join(dir, `${base}.bundle-debug`),
         );
-        const value = evaluate(bundle);
+        const value = await evaluate(script);
         const snapshot = draws(value)
           ? renderDrawing((await render(script)).container)
           : renderValue(value);

@@ -1,86 +1,76 @@
-import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
+import type { ClientValue } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { evaluate } from "@backtickjs/web-testing";
+import type { EvaluateOptions } from "@backtickjs/web-testing";
+import { createSourceLoader } from "./importFixture.ts";
 
 // What a client answers for beside the language's own names, and what it may
 // not: a member the schema leaves out, and a name a client adds.
+//
+// The sources are compiled without typechecking, so a member the typechecker
+// would refuse still reaches the client.
+const importSource = createSourceLoader("builtins");
+
+// A script's value, with `names` declared as builtins an SDK would add.
+async function run(
+  body: string,
+  names: string[] = [],
+  options: EvaluateOptions = {},
+): Promise<unknown> {
+  const declared = names
+    .map((name) => `const ${name} = createBuiltin(${JSON.stringify(name)});`)
+    .join("\n");
+  return evaluate(
+    await importSource(
+      `import { cs } from "@backtickjs/core";
+      import { createBuiltin } from "@backtickjs/platform-sdk";
+      ${declared}
+      export default cs\`${body}\`;`,
+    ),
+    options,
+  );
+}
+
+const greet = (name: string) => (name === "greet" ? () => "hello" : undefined);
 
 describe("a member the schema leaves out", () => {
-  // Written by hand because nothing else can reach it: the typechecker rejects
-  // `padStart` where a fixture would declare one, so this is the bundle a
-  // bundler that had not rejected it would have written.
-  const bundle = {
-    functions: {
-      "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
-    },
-    root: ["()", ["fn", "0"], []],
-  } as unknown as Bundle<ClientUnknown>;
-
-  it("is a name this language has no meaning for", () => {
+  it("is a name this language has no meaning for", async () => {
     // Not absent, and not the host's: reading it as null would let a bundle ask
     // for a member the schema left out and carry on, and the client answers
     // every name a value has — so nothing answering is the whole answer.
-    assert.throws(
-      () => evaluate(bundle),
+    await assert.rejects(
+      run(`"abc".padStart`),
       /a string has no `padStart` in this language/,
     );
   });
 });
 
 describe("a name a target answers for", () => {
-  // What an SDK or an app adds: a whole name, reached by splicing the value it
-  // is imported as, which lands on the wire as the same node `Math.floor` does.
-  // The bundle a schema's generated `createBuiltin("greet")` would be spliced
-  // into, written by hand because no schema here declares the name.
-  const bundle = {
-    functions: {
-      "0": ["=>", [], ["{}", [["return", ["()", ["bltn", "greet"], []]]]]],
-    },
-    root: ["()", ["fn", "0"], []],
-  } as unknown as Bundle<ClientUnknown>;
-
-  it("is answered by the function its target handed over", () => {
+  // What an SDK or an app adds: a whole name, reached by splicing the value
+  // `createBuiltin` made, which lands on the wire as the same node `Math.floor`
+  // does.
+  it("is answered by the function its target handed over", async () => {
     assert.equal(
-      evaluate(bundle, {
-        builtinOf: (name) => (name === "greet" ? () => "hello" : undefined),
-      }),
+      await run(`$greet()`, ["greet"], { builtinOf: greet }),
       "hello",
     );
   });
 
-  it("is not answered by a client whose target added nothing", () => {
+  it("is not answered by a client whose target added nothing", async () => {
     // The language's list is every client's floor, and a name beyond it is a
     // name that target never offered — so a bundle built against one client
     // says so on another rather than reading as absent.
-    assert.throws(() => evaluate(bundle), /unknown builtin greet/);
+    await assert.rejects(run(`$greet()`, ["greet"]), /unknown builtin greet/);
   });
 
-  it("holds what a target handed over, whatever kind of value that is", () => {
+  it("holds what a target handed over, whatever kind of value that is", async () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object this answered
     // with, which is the same path a cell's `read` is reached by.
-    const held = {
-      functions: {
-        "0": [
-          "=>",
-          [],
-          [
-            "{}",
-            [
-              [
-                "return",
-                ["()", [".", ["bltn", "storage"], "get"], ["greeting"]],
-              ],
-            ],
-          ],
-        ],
-      },
-      root: ["()", ["fn", "0"], []],
-    } as unknown as Bundle<ClientUnknown>;
     const storage = { greeting: "hei" } as Record<string, string>;
     assert.equal(
-      evaluate(held, {
+      await run(`$storage.get("greeting")`, ["storage"], {
         builtinOf: (name) =>
           name === "storage"
             ? { get: (key: ClientValue) => storage[key as string] ?? null }
@@ -90,39 +80,26 @@ describe("a name a target answers for", () => {
     );
   });
 
-  it("may lengthen the language's list and never edit it", () => {
+  it("may lengthen the language's list and never edit it", async () => {
     // The language's names are read first, so a target naming one is never
     // reached: redefining `Math.floor` would be one client answering a bundle
     // differently from every other.
-    const floored = {
-      functions: {},
-      root: ["()", ["bltn", "Math.floor"], [2.7]],
-    } as unknown as Bundle<ClientUnknown>;
     assert.equal(
-      evaluate(floored, {
+      await run(`Math.floor(2.7)`, [], {
         builtinOf: (name) => (name === "Math.floor" ? () => 0 : undefined),
       }),
       2,
     );
   });
 
-  it("may not add a member to a kind of value", () => {
+  it("may not add a member to a kind of value", async () => {
     // A member of a string is the language's, so a target naming one adds a
     // whole name nothing reads: `"abc".padStart` still finds nothing.
-    const padded = {
-      functions: {
-        "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
-      },
-      root: ["()", ["fn", "0"], []],
-    } as unknown as Bundle<ClientUnknown>;
-    assert.throws(
-      () =>
-        evaluate(padded, {
-          builtinOf: (name) =>
-            name === "string.padStart"
-              ? (self: ClientValue) => self
-              : undefined,
-        }),
+    await assert.rejects(
+      run(`"abc".padStart`, [], {
+        builtinOf: (name) =>
+          name === "string.padStart" ? (self: ClientValue) => self : undefined,
+      }),
       /a string has no `padStart` in this language/,
     );
   });

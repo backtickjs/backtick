@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
-import { describe, it } from "node:test";
-import { render, screen, userEvent } from "@backtickjs/web-testing";
+import { afterEach, describe, it } from "node:test";
+import type { Spliceable } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
+import { createInterpreter } from "@backtickjs/web-interpreter";
+import { render, screen } from "@backtickjs/web-testing";
+import { userEvent } from "@testing-library/user-event";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 
 // Where a render draws, and what it may move.
@@ -34,13 +38,46 @@ const rootList = () => importFixture(validDir, "root-list.tsx");
 // The first drawing's button that empties its list.
 const clear = () => screen.getAllByText("clear")[0]!;
 
+// What each test drew and added to the page, taken down after it, last first.
+const undo: (() => void)[] = [];
+
+afterEach(() => {
+  for (const step of undo.splice(0).reverse()) {
+    step();
+  }
+});
+
+// A target in the page holding the markup given, as a page's own would.
+function target(html: string): Element {
+  const main = document.createElement("main");
+  main.innerHTML = html;
+  document.body.append(main);
+  undo.push(() => main.remove());
+  return main;
+}
+
+// Draws in front of the anchor `selector` names. `render` takes no anchor —
+// where a drawing goes among a page's own nodes is the interpreter's business —
+// so these ask the interpreter directly.
+async function drawAt(
+  value: Spliceable,
+  parent: Element,
+  selector: string,
+): Promise<void> {
+  const unmount = createInterpreter({ window }).render(
+    await bundler.run(value),
+    parent,
+    parent.querySelector(selector)!,
+  );
+  undo.push(unmount);
+}
+
 describe("where a render draws", () => {
   it("draws in front of its anchor", async () => {
-    const { container } = await render(await rootList(), {
-      html: "<main><header></header><comment></comment><footer></footer></main>",
-      container: "main",
-      anchor: "comment",
-    });
+    const container = target(
+      "<header></header><comment></comment><footer></footer>",
+    );
+    await drawAt(await rootList(), container, "comment");
 
     assert.deepEqual(tags(container), [
       "header",
@@ -57,11 +94,10 @@ describe("where a render draws", () => {
     // A root that is a list, emptied. A render that claimed its target would
     // take every child the target has, the host's own included; what is drawn
     // is what goes.
-    const { container } = await render(await rootList(), {
-      html: "<main><header></header><comment></comment><footer></footer></main>",
-      container: "main",
-      anchor: "comment",
-    });
+    const container = target(
+      "<header></header><comment></comment><footer></footer>",
+    );
+    await drawAt(await rootList(), container, "comment");
     const [before] = held(container);
     const after = held(container).at(-1);
 
@@ -75,11 +111,8 @@ describe("where a render draws", () => {
   it("never claims a target it was given nothing else of", async () => {
     // An anchor is always a node, so the path that empties a whole target is
     // one this cannot take — an empty target holding only the anchor included.
-    const { container } = await render(await rootList(), {
-      html: "<main><comment></comment></main>",
-      container: "main",
-      anchor: "comment",
-    });
+    const container = target("<comment></comment>");
+    await drawAt(await rootList(), container, "comment");
 
     await userEvent.click(clear());
 
@@ -89,16 +122,9 @@ describe("where a render draws", () => {
   it("holds two drawings apart in one target", async () => {
     // One page, two drawings: each at its own anchor, and a write to one leaves
     // the other where it is.
-    const page = await render(await rootList(), {
-      html: "<main><comment-1></comment-1><comment-2></comment-2></main>",
-      container: "main",
-      anchor: "comment-1",
-    });
-    await page.render(await rootList(), {
-      container: "main",
-      anchor: "comment-2",
-    });
-    const { container } = page;
+    const container = target("<comment-1></comment-1><comment-2></comment-2>");
+    await drawAt(await rootList(), container, "comment-1");
+    await drawAt(await rootList(), container, "comment-2");
 
     assert.deepEqual(tags(container), [
       "span",

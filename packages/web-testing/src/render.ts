@@ -1,116 +1,128 @@
-import type { ClientValue, Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
 import { createInterpreter } from "@backtickjs/web-interpreter";
-import { getQueriesForElement, queries } from "@testing-library/dom";
-import type { BoundFunctions } from "@testing-library/dom";
-import { Window as Page } from "happy-dom";
-import { afterEach } from "node:test";
-import { windowOf } from "./window.js";
+import { getQueriesForElement, prettyDOM } from "@testing-library/dom";
+import type {
+  BoundFunctions,
+  PrettyDOMOptions,
+  Queries,
+  queries,
+} from "@testing-library/dom";
+import { mounted } from "./cleanup.js";
+import type { EvaluateOptions } from "./evaluate.js";
 
-/** What a test changes about the page a script is drawn into. */
-export interface RenderOptions extends DrawOptions {
-  /** Names beside the client's own, for a test about a target adding one. */
-  readonly builtinOf?: (name: string) => ClientValue;
-  /** Markup the body holds before anything is drawn, as a page's own does. */
-  readonly html?: string;
-}
-
-/** Where in the page a drawing goes. */
-export interface DrawOptions {
-  /** A selector for the element drawn into; the body where none is given. */
-  readonly container?: string;
+/** Where and how a value is drawn. */
+export interface RenderOptions<
+  Q extends Queries = typeof queries,
+  Container extends Element = HTMLElement,
+  BaseElement extends Element = Container,
+> extends EvaluateOptions {
   /**
-   * A selector for one of the container's children to draw in front of, as a
-   * page's own script element is for a bundle it carries.
+   * The element to draw into. A new `<div>` appended to `baseElement` where
+   * none is given. Drawing into a container again replaces what was drawn
+   * there.
    */
-  readonly anchor?: string;
+  readonly container?: Container;
+  /**
+   * What the queries and `debug` read: `container` where one is given, the
+   * body otherwise.
+   */
+  readonly baseElement?: BaseElement;
+  /** The queries to bind, in place of Testing Library's own. */
+  readonly queries?: Q;
 }
 
-/** A script drawn into a page. */
-export interface Rendered {
-  /** The element the script was drawn into. */
-  readonly container: Element;
-  /** Takes this drawing down, leaving the rest of the page. */
+/** What `render` drew, and the queries over the element it reads. */
+export type RenderResult<
+  Q extends Queries = typeof queries,
+  Container extends Element = HTMLElement,
+  BaseElement extends Element = Container,
+> = BoundFunctions<Q> & {
+  /** The element the value was drawn into. */
+  readonly container: Container;
+  /** The element the queries read. */
+  readonly baseElement: BaseElement;
+  /** Prints an element, `baseElement` where none is given. */
+  debug(
+    element?: Element | Element[],
+    maxLength?: number,
+    options?: PrettyDOMOptions,
+  ): void;
+  /** Draws another value in place of this one, in the same container. */
+  rerender(value: Spliceable): Promise<void>;
+  /** Takes this drawing down, leaving the container. */
   unmount(): void;
-  /** Draws another script into the same page. */
-  render(script: Spliceable, options?: DrawOptions): Promise<Rendered>;
-}
-
-// Every page `render` opened, closed after each test the way Testing Library
-// cleans up: a timer a drawing started never outlives its test.
-const opened: Page[] = [];
-
-afterEach(() => {
-  for (const page of opened.splice(0)) {
-    void page.happyDOM.close();
-  }
-});
+  /** What the container holds now, as a fragment. */
+  asFragment(): DocumentFragment;
+};
 
 /**
- * Bundles a script and draws it into a page of its own, which {@link screen}
- * then reads.
+ * Bundles a value and draws it into the global document, as Testing Library's
+ * `render` mounts a component.
  *
- * One page behind both the document and `$window`: a timer a script started is
- * this page's, and the page is closed after the test.
+ * The document is the test environment's: jsdom through `global-jsdom`, Jest's
+ * or Vitest's `jsdom` environment, or a browser.
  */
-export async function render(
-  script: Spliceable,
-  { builtinOf, html, ...options }: RenderOptions = {},
-): Promise<Rendered> {
-  const page = new Page();
-  opened.push(page);
-  const document = page.document as unknown as Document;
-  if (html !== undefined) {
-    document.body.innerHTML = html;
-  }
+export async function render<
+  Q extends Queries = typeof queries,
+  Container extends Element = HTMLElement,
+  BaseElement extends Element = Container,
+>(
+  value: Spliceable,
+  options: RenderOptions<Q, Container, BaseElement> = {},
+): Promise<RenderResult<Q, Container, BaseElement>> {
+  const baseElement = (options.baseElement ??
+    options.container ??
+    document.body) as BaseElement;
+  const container = (options.container ??
+    baseElement.appendChild(document.createElement("div"))) as Container;
   const interpreter = createInterpreter({
-    window: windowOf(page),
-    builtinOf,
+    window,
+    builtinOf: options.builtinOf,
   });
 
-  const draw = async (
-    script: Spliceable,
-    { container, anchor }: DrawOptions = {},
-  ): Promise<Rendered> => {
-    const bundle = await bundler.run(script);
-    const parent = container === undefined ? document.body : find(container);
-    const unmount = interpreter.render(
-      bundle,
-      parent,
-      anchor === undefined ? undefined : find(anchor),
-    );
-    return { container: parent, unmount, render: draw };
+  // Taken down between drawings, and kept for `cleanup` even when a drawing
+  // throws, so its container still leaves the body.
+  const takeDown = (): void => {
+    mounted.get(container)?.();
+    mounted.set(container, () => {});
+  };
+  takeDown();
+
+  const draw = async (value: Spliceable): Promise<void> => {
+    const bundle = await bundler.run(value);
+    takeDown();
+    const dispose = interpreter.render(bundle, container);
+    // The interpreter stops what it drew but leaves the nodes, so the
+    // container is emptied here, as React's `unmount` and Solid's own `render`
+    // do.
+    mounted.set(container, () => {
+      dispose();
+      container.replaceChildren();
+    });
   };
 
-  const find = (selector: string): Element => {
-    const found = document.querySelector(selector);
-    if (found === null) {
-      throw new Error(`backtick: nothing in the page matches \`${selector}\``);
-    }
-    return found;
-  };
+  await draw(value);
 
-  return draw(script, options);
-}
-
-/**
- * Testing Library's queries over the body of the page `render` opened last.
- *
- * Resolved on each call rather than bound once, so the one `screen` follows
- * every test's own page.
- */
-export const screen = Object.fromEntries(
-  Object.keys(queries).map((name) => [
-    name,
-    (...args: unknown[]) => {
-      const page = opened.at(-1);
-      if (page === undefined) {
-        throw new Error("backtick: `screen` read before anything was rendered");
+  const bound = getQueriesForElement<Q>(
+    baseElement as unknown as HTMLElement,
+    options.queries,
+  );
+  return {
+    ...bound,
+    container,
+    baseElement,
+    debug: (element = baseElement, maxLength, prettyOptions) => {
+      for (const each of Array.isArray(element) ? element : [element]) {
+        console.log(prettyDOM(each, maxLength, prettyOptions));
       }
-      const bound = getQueriesForElement(
-        page.document.body as unknown as HTMLElement,
-      );
-      return (bound[name as keyof typeof bound] as Function)(...args);
     },
-  ]),
-) as BoundFunctions<typeof queries>;
+    rerender: draw,
+    unmount: takeDown,
+    asFragment: () => {
+      const template = document.createElement("template");
+      template.innerHTML = container.innerHTML;
+      return template.content;
+    },
+  };
+}

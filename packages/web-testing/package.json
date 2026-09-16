@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "The web interpreter drawing into a happy-dom page, for rendering Backtick apps in tests",
+  "description": "Testing Library for Backtick on the web: render a value into the test environment's document",
   "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./pure": {
+      "types": "./dist/pure.d.ts",
+      "default": "./dist/pure.js"
     }
   },
   "scripts": {
@@ -22,12 +26,9 @@
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/web-interpreter": "workspace:*",
-    "@testing-library/dom": "^10.4.2",
-    "@testing-library/user-event": "^14.6.7",
-    "happy-dom": "^20.14.5"
+    "@testing-library/dom": "^10.4.2"
   },
   "devDependencies": {
-    "@types/node": "^25.9.1",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

@@ -1,7 +1,7 @@
 import type { Bundle, ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { evaluate, render } from "@backtickjs/web-testing";
+import { evaluateUntrustedBundle, render } from "@backtickjs/web-testing";
 import { createSourceLoader } from "./importFixture.ts";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
@@ -14,13 +14,17 @@ import { createSourceLoader } from "./importFixture.ts";
 // bundle a server that skipped it would send.
 const importSource = createSourceLoader("refusals");
 
-// A page a refused source was drawn into, read after the refusal: the body
-// holds what was there before, and nothing the source asked for.
+// A container a refused source was drawn into, read after the refusal: it
+// holds what the page put there before, and nothing the source asked for.
 async function refused(source: string, message: RegExp): Promise<Element> {
-  const page = await render(await importSource("export default <main />;"));
-  await assert.rejects(page.render(await importSource(source)), message);
-  assert.equal(page.container.innerHTML, "<main></main>");
-  return page.container;
+  const container = document.body.appendChild(document.createElement("div"));
+  container.innerHTML = "<main></main>";
+  await assert.rejects(
+    render(await importSource(source), { container }),
+    message,
+  );
+  assert.equal(container.innerHTML, "<main></main>");
+  return container;
 }
 
 // A drawing and the one element it put in the page.
@@ -55,14 +59,20 @@ describe("a tag that would execute", () => {
   // HTML folds a tag name, so every spelling of it is the element.
   it("is refused in HTML whatever its case", () => {
     for (const tag of ["SCRIPT", "Script"]) {
-      assert.throws(() => evaluate(element(tag)), /may not draw/, tag);
+      assert.throws(
+        () => evaluateUntrustedBundle(element(tag)),
+        /may not draw/,
+        tag,
+      );
     }
   });
 
   // SVG does not fold, so `svg:SCRIPT` is an unknown element rather than the
   // one that runs. Verified in Chrome rather than read off the spec.
   it("does not stop a tag that only looks like one", async () => {
-    const drawn = evaluate(element("svg:SCRIPT")) as unknown as Element;
+    const drawn = evaluateUntrustedBundle(
+      element("svg:SCRIPT"),
+    ) as unknown as Element;
     assert.equal(drawn.localName, "SCRIPT");
     const { container } = await render(
       await importSource(

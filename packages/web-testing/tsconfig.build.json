@@ -4,7 +4,6 @@
     "emitDeclarationOnly": false,
     "sourceMap": true,
     "lib": ["esnext", "dom", "dom.iterable"],
-    // The window's timers are the process's own.
-    "types": ["node"]
+    "types": []
   }
 }
