@@ -1,7 +1,7 @@
 import { renderMarkup } from "./renderMarkup.ts";
-import { isNode } from "@backtickjs/test-vm";
+import { isNode } from "@backtickjs/web-testing";
 
-// Renders a runtime value produced by the test VM into a stable textual
+// Renders a runtime value produced by `@backtickjs/web-testing` into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,
 // undefined, circular references) rendered as bracketed placeholders, and the
 // nodes a tree built rendered as markup.

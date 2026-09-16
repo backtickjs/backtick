@@ -14,7 +14,7 @@
     { "path": "packages/language-server" },
     { "path": "packages/language-service" },
     { "path": "packages/prettier-plugin" },
-    { "path": "packages/test-vm" },
+    { "path": "packages/web-testing" },
     { "path": "packages/tsc" },
     { "path": "packages/tspatch-plugin" },
     { "path": "packages/typescript-plugin" },

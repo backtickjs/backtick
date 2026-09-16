@@ -1,9 +1,9 @@
 {
-  "name": "@backtickjs/test-vm",
+  "name": "@backtickjs/web-testing",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "The web VM drawing into a happy-dom page, for rendering Backtick apps in tests",
+  "description": "The web interpreter drawing into a happy-dom page, for rendering Backtick apps in tests",
   "main": "./dist/index.js",
   "exports": {
     ".": {

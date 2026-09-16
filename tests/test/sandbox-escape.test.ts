@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { after, describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import type { ClientUnknown } from "@backtickjs/core";
-import { evaluate } from "@backtickjs/test-vm";
+import { evaluate } from "@backtickjs/web-testing";
 
 // A guard, not a snapshot. Every other suite here compiles a `.ts` fixture and
 // runs what the compiler emitted; the point of these tests is the opposite — a

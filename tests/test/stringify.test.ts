@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { render, screen } from "@backtickjs/test-vm";
+import { render, screen } from "@backtickjs/web-testing";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 
 // A bundle written into a page's `<script>`, which must not end it early.

@@ -17,7 +17,7 @@
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/client-script": "workspace:*",
-    "@backtickjs/test-vm": "workspace:*",
+    "@backtickjs/web-testing": "workspace:*",
     "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",

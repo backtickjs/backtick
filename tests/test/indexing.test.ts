@@ -2,7 +2,7 @@ import type { ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { type Bundle } from "@backtickjs/bundler";
-import { evaluate } from "@backtickjs/test-vm";
+import { evaluate } from "@backtickjs/web-testing";
 
 // What `a[k]` does with a key of the wrong type.
 //

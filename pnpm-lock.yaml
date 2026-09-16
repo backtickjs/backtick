@@ -203,12 +203,12 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@backtickjs/test-vm':
-        specifier: workspace:*
-        version: link:../../packages/test-vm
       '@backtickjs/web-sdk':
         specifier: workspace:*
         version: link:../../packages/web-sdk
+      '@backtickjs/web-testing':
+        specifier: workspace:*
+        version: link:../../packages/web-testing
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -601,37 +601,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/test-vm:
-    dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@backtickjs/web-interpreter':
-        specifier: workspace:*
-        version: link:../web-interpreter
-      '@testing-library/dom':
-        specifier: ^10.4.2
-        version: 10.4.2
-      '@testing-library/user-event':
-        specifier: ^14.6.7
-        version: 14.6.7(@testing-library/dom@10.4.2)
-      happy-dom:
-        specifier: ^20.14.5
-        version: 20.14.5
-    devDependencies:
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/tsc:
     dependencies:
       '@backtickjs/compiler':
@@ -768,6 +737,37 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/web-testing:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../bundler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@backtickjs/web-interpreter':
+        specifier: workspace:*
+        version: link:../web-interpreter
+      '@testing-library/dom':
+        specifier: ^10.4.2
+        version: 10.4.2
+      '@testing-library/user-event':
+        specifier: ^14.6.7
+        version: 14.6.7(@testing-library/dom@10.4.2)
+      happy-dom:
+        specifier: ^20.14.5
+        version: 20.14.5
+    devDependencies:
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   tests:
     devDependencies:
       '@backtickjs/bundler':
@@ -788,15 +788,15 @@ importers:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../packages/prettier-plugin
-      '@backtickjs/test-vm':
-        specifier: workspace:*
-        version: link:../packages/test-vm
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../packages/tsc
       '@backtickjs/web-sdk':
         specifier: workspace:*
         version: link:../packages/web-sdk
+      '@backtickjs/web-testing':
+        specifier: workspace:*
+        version: link:../packages/web-testing
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

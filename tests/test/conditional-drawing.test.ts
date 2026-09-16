@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { render, screen } from "@backtickjs/test-vm";
+import { render, screen } from "@backtickjs/web-testing";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 
 // A block whose drawing is a conditional, and a write that answers it.

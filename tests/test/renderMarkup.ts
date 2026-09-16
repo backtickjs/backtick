@@ -1,4 +1,4 @@
-import { isNode, isText, listenersOf } from "@backtickjs/test-vm";
+import { isNode, isText, listenersOf } from "@backtickjs/web-testing";
 
 // Renders a drawn node as JSX-like markup: children render as the node's body,
 // the attributes it carries render as attributes, and an event it was given a

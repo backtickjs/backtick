@@ -1,4 +1,4 @@
-import { render } from "@backtickjs/test-vm";
+import { render } from "@backtickjs/web-testing";
 
 // The driver, as the benchmark's own driver would be if there were no browser:
 // it opens the app, finds elements by selector, and clicks them. What it drives

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { render } from "@backtickjs/test-vm";
+import { render } from "@backtickjs/web-testing";
 import { createSourceLoader } from "./importFixture.ts";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's

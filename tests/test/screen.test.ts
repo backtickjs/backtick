@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { render, screen, userEvent } from "@backtickjs/test-vm";
+import { render, screen, userEvent } from "@backtickjs/web-testing";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 
 // A drawing read the way Testing Library reads one: by role and by text, with

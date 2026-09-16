@@ -1,5 +1,5 @@
 /**
- * The web VM, drawing into a document of its own: a script rendered in a test,
+ * The web interpreter, drawing into a document of its own: a script rendered in a test,
  * read the way Testing Library reads a page — `screen.getByRole`,
  * `userEvent.click`.
  *
@@ -21,7 +21,7 @@ export { render, screen } from "./render.js";
 export type { DrawOptions, Rendered, RenderOptions } from "./render.js";
 export { userEvent } from "@testing-library/user-event";
 
-/** What a test changes about the VM a bundle runs in. */
+/** What a test changes about the interpreter a bundle runs in. */
 export interface TestOptions {
   /**
    * Names beside the client's own, as a target answers for its own: asked by

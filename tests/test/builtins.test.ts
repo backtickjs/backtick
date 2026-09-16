@@ -1,7 +1,7 @@
 import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { evaluate } from "@backtickjs/test-vm";
+import { evaluate } from "@backtickjs/web-testing";
 
 // What a client answers for beside the language's own names, and what it may
 // not: a member the schema leaves out, and a name a client adds.

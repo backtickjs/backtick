@@ -1,7 +1,7 @@
 import type { Bundle, ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { evaluate, render } from "@backtickjs/test-vm";
+import { evaluate, render } from "@backtickjs/web-testing";
 import { createSourceLoader } from "./importFixture.ts";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
