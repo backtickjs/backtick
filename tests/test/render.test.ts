@@ -5,8 +5,8 @@ import { describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { render, testRenderer } from "@backtickjs/test-vm";
-import type { TestNode } from "@backtickjs/test-vm";
+import { openPage } from "@backtickjs/test-vm";
+import type { Element, Node } from "@backtickjs/test-vm";
 
 // Where a render draws, and what it may move.
 //
@@ -21,18 +21,41 @@ import type { TestNode } from "@backtickjs/test-vm";
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("render");
 
-function node(id: string): TestNode {
-  return { id, props: {}, children: [], parent: null, text: null };
+// One page for the file: each test draws into a target of its own inside it,
+// so what a drawing may touch is bounded by that target rather than by the page.
+const site = openPage();
+const { document } = site;
+
+function render(
+  bundle: Bundle<ClientUnknown>,
+  parent: Element,
+  options: { anchor?: Node } = {},
+): () => void {
+  return site.render(bundle, parent, options.anchor);
+}
+
+function node(tag: string): Element {
+  return document.createElement(tag);
 }
 
 // A target holding the nodes named, in that order, as a parsed document would.
-function parentOf(...held: TestNode[]): TestNode {
+function parentOf(...held: Element[]): Element {
   const parent = node("main");
   for (const child of held) {
-    child.parent = parent;
-    parent.children.push(child);
+    parent.appendChild(child);
   }
   return parent;
+}
+
+// What a target holds, by tag — `#text` for the text nodes a drawing inserted,
+// as a document names them.
+function tags(parent: Node): string[] {
+  return [...parent.childNodes].map((child) => child.nodeName.toLowerCase());
+}
+
+// What a drawing put in a target, as the nodes themselves.
+function held(parent: Node): Node[] {
+  return [...parent.childNodes];
 }
 
 // A list at the root, so a write moves children of the target itself.
@@ -40,11 +63,12 @@ async function rootList(): Promise<Bundle<ClientUnknown>> {
   return bundler.run(await importFixture(validDir, "root-list.tsx"));
 }
 
-// The handler a prop holds, as the host would invoke it.
-function handler(on: TestNode): () => void {
-  const onclick = on.props.onclick;
-  assert.equal(typeof onclick, "function", "expected an onclick handler");
-  return onclick as () => void;
+// A click, as a page makes one: the drawing registered a listener, so what a
+// test does is fire the event rather than reach for what was registered.
+function click(on: Node): void {
+  (on as unknown as Element).dispatchEvent(
+    new site.page.MouseEvent("click", { bubbles: true }),
+  );
 }
 
 describe("where a render draws", () => {
@@ -57,7 +81,7 @@ describe("where a render draws", () => {
     render(await rootList(), parent, { anchor: ends });
 
     assert.deepEqual(
-      parent.children.map((child) => child.id),
+      tags(parent),
       ["header", "span", "span", "span", "span", "comment", "footer"],
     );
   });
@@ -72,16 +96,16 @@ describe("where a render draws", () => {
     const parent = parentOf(before, ends, after);
     render(await rootList(), parent, { anchor: ends });
 
-    const clear = parent.children[1];
+    const clear = held(parent)[1];
     assert.ok(clear !== undefined);
-    handler(clear)();
+    click(clear);
 
     assert.deepEqual(
-      parent.children.map((child) => child.id),
+      tags(parent),
       ["header", "span", "comment", "footer"],
     );
-    assert.equal(parent.children[0], before);
-    assert.equal(parent.children.at(-1), after);
+    assert.equal(held(parent)[0], before);
+    assert.equal(held(parent).at(-1), after);
   });
 
   it("never claims a target it was given nothing else of", async () => {
@@ -91,12 +115,12 @@ describe("where a render draws", () => {
     const parent = parentOf(ends);
     render(await rootList(), parent, { anchor: ends });
 
-    const clear = parent.children[0];
+    const clear = held(parent)[0];
     assert.ok(clear !== undefined);
-    handler(clear)();
+    click(clear);
 
     assert.deepEqual(
-      parent.children.map((child) => child.id),
+      tags(parent),
       ["span", "comment"],
     );
   });
@@ -112,7 +136,7 @@ describe("where a render draws", () => {
     render(await rootList(), parent, { anchor: second });
 
     assert.deepEqual(
-      parent.children.map((child) => child.id),
+      tags(parent),
       [
         "span",
         "span",
@@ -128,18 +152,18 @@ describe("where a render draws", () => {
     );
 
     // Everything from the first anchor onwards, as the nodes it is.
-    const tail = parent.children.slice(parent.children.indexOf(first));
-    const clear = parent.children[0];
+    const tail = held(parent).slice(held(parent).indexOf(first));
+    const clear = held(parent)[0];
     assert.ok(clear !== undefined);
-    handler(clear)();
+    click(clear);
 
     // The first drawing shrank and the second is the nodes it was, in order.
     assert.deepEqual(
-      parent.children.map((child) => child.id),
+      tags(parent),
       ["span", "comment-1", "span", "span", "span", "span", "comment-2"],
     );
     assert.deepEqual(
-      parent.children.slice(parent.children.indexOf(first)),
+      held(parent).slice(held(parent).indexOf(first)),
       tail,
     );
   });
@@ -153,10 +177,10 @@ describe("a bundle a script runs with vm.eval", () => {
     const parent = node("main");
     render(bundle, parent);
 
-    const div = parent.children[0];
+    const div = held(parent)[0] as unknown as Element;
     assert.ok(div !== undefined);
     assert.deepEqual(
-      div.children.map((child) => child.children[0]?.text),
+      [...div.childNodes].map((child) => child.firstChild?.nodeValue),
       ["item 1", "item 2", "item 3", "42"],
     );
   });
@@ -170,15 +194,15 @@ describe("a tag naming a function the script holds", () => {
     const parent = node("main");
     render(bundle, parent);
 
-    const [badge, button] = parent.children[0]!.children;
+    const [badge, button] = [...held(parent)[0]!.childNodes];
     assert.ok(badge !== undefined && button !== undefined);
-    assert.equal(badge.children[0]?.text, "count 0");
+    assert.equal(badge.firstChild?.nodeValue, "count 0");
 
-    handler(button)();
+    click(button);
 
-    const [after] = parent.children[0]!.children;
+    const [after] = [...held(parent)[0]!.childNodes];
     assert.equal(after, badge, "the same <b>, updated rather than drawn again");
-    assert.equal(badge.children[0]?.text, "count 1");
+    assert.equal(badge.firstChild?.nodeValue, "count 1");
   });
   it("draws one that arrives later, and keeps its prop live", async () => {
     const bundle = await bundler.run(
@@ -186,17 +210,17 @@ describe("a tag naming a function the script holds", () => {
     );
     const parent = node("main");
     render(bundle, parent);
-    const div = parent.children[0]!;
-    assert.equal(div.children[0]?.id, "i");
+    const div = held(parent)[0]!;
+    assert.equal((div.childNodes[0] as unknown as Element)?.tagName.toLowerCase(), "i");
 
-    handler(div.children[1]!)(); // load
-    const badge = div.children[0]!;
-    assert.equal(badge.id, "b");
-    assert.equal(badge.children[0]?.text, "count 0");
+    click(div.childNodes[1]!); // load
+    const badge = div.childNodes[0]! as unknown as Element;
+    assert.equal(badge.tagName.toLowerCase(), "b");
+    assert.equal(badge.firstChild?.nodeValue, "count 0");
 
-    handler(div.children[2]!)(); // more
-    assert.equal(div.children[0], badge, "the same <b>, updated in place");
-    assert.equal(badge.children[0]?.text, "count 1");
+    click(div.childNodes[2]!); // more
+    assert.equal(div.childNodes[0], badge, "the same <b>, updated in place");
+    assert.equal(badge.firstChild?.nodeValue, "count 1");
   });
 
   it("calls one an enclosing script holds, however the call is nested", async () => {
@@ -206,10 +230,10 @@ describe("a tag naming a function the script holds", () => {
     const parent = node("main");
     render(bundle, parent);
     const badges = findAll(parent, "b");
-    const texts = () => findAll(parent, "b").map((b) => b.children[0]?.text);
+    const texts = () => findAll(parent, "b").map((b) => b.firstChild?.nodeValue);
     assert.deepEqual(texts(), ["n 0", "n 100", "n 1000", "n 0", "n 0"]);
 
-    handler(findAll(parent, "button")[0]!)();
+    click(findAll(parent, "button")[0]!);
 
     assert.deepEqual(texts(), ["n 1", "n 101", "n 1001", "n 1", "n 2"]);
     assert.deepEqual(findAll(parent, "b"), badges, "the same <b>s");
@@ -223,42 +247,48 @@ describe("a tag naming a function the script holds", () => {
     render(bundle, parent);
     const [panel] = findAll(parent, "i");
     const [badge] = findAll(parent, "b");
-    assert.equal(panel?.children[0]?.text, "panel 0");
-    assert.equal(badge?.children[0]?.text, "outer 0");
+    assert.equal(panel?.firstChild?.nodeValue, "panel 0");
+    assert.equal(badge?.firstChild?.nodeValue, "outer 0");
 
-    handler(findAll(parent, "button")[0]!)();
+    click(findAll(parent, "button")[0]!);
 
     assert.equal(findAll(parent, "b")[0], badge, "the same <b>");
-    assert.equal(badge?.children[0]?.text, "outer 1");
-    assert.equal(findAll(parent, "u")[0]?.children[0]?.text, "kid 1");
+    assert.equal(badge?.firstChild?.nodeValue, "outer 1");
+    assert.equal(findAll(parent, "u")[0]?.firstChild?.nodeValue, "kid 1");
     assert.equal(findAll(parent, "i")[0], panel, "the panel's own, untouched");
   });
 });
 
 describe("an element's namespace", () => {
-  // The host hears an element drawn inside an `svg` as `svg:<tag>`.
-  function recording(): { made: string[]; renderer: typeof testRenderer } {
-    const made: string[] = [];
-    const renderer = {
-      ...testRenderer,
-      createElement: (id: string) => {
-        made.push(id);
-        return testRenderer.createElement(id);
-      },
-    };
-    return { made, renderer };
+  // What an element ended up in, read off the document rather than off what the
+  // renderer was asked for: a tag in SVG's namespace is written `svg:<tag>`, as
+  // the interpreter names one, and a tag in HTML's is written bare.
+  const SVG = "http://www.w3.org/2000/svg";
+
+  function namespaced(parent: Node): string[] {
+    return [...parent.childNodes].flatMap((child) => {
+      const element = child as unknown as Element;
+      if (element.tagName === undefined) {
+        return namespaced(child);
+      }
+      const tag =
+        element.namespaceURI === SVG
+          ? `svg:${element.tagName}`
+          : element.tagName.toLowerCase();
+      return [tag, ...namespaced(child)];
+    });
   }
 
   it("is where the element is drawn", async () => {
     const bundle = await bundler.run(
       await importFixture(validDir, "svg-namespace.tsx"),
     );
-    const { made, renderer } = recording();
-    render(bundle, node("main"), { renderer });
+    const parent = node("main");
+    render(bundle, parent);
 
     // Sorted: a list builds its rows after the elements beside it, and the
     // order they are made in is not the claim.
-    assert.deepEqual(made.sort(), [
+    assert.deepEqual(namespaced(parent).sort(), [
       "a",
       "div",
       "p",
@@ -278,10 +308,9 @@ describe("an element's namespace", () => {
     const bundle = await bundler.run(
       await importFixture(validDir, "svg-namespace-later.tsx"),
     );
-    const { made, renderer } = recording();
     const parent = node("main");
-    render(bundle, parent, { renderer });
-    assert.deepEqual(made.sort(), [
+    render(bundle, parent);
+    assert.deepEqual(namespaced(parent).sort(), [
       "button",
       "button",
       "div",
@@ -290,18 +319,37 @@ describe("an element's namespace", () => {
       "title",
     ]);
 
-    made.length = 0;
+    // What the two writes added, which is the claim: a title drawn later is
+    // still SVG's, and the one beside it is still HTML's.
+    const before = namespaced(parent).sort();
     const [add, show] = findAll(parent, "button");
-    handler(add!)();
-    handler(show!)();
-    assert.deepEqual(made, ["svg:title", "svg:title"]);
+    click(add!);
+    click(show!);
+    assert.deepEqual(added(before, namespaced(parent).sort()), [
+      "svg:title",
+      "svg:title",
+    ]);
   });
+
+  // What the second list holds that the first did not, counting duplicates.
+  function added(before: string[], after: string[]): string[] {
+    const held = [...before];
+    return after.filter((tag) => {
+      const at = held.indexOf(tag);
+      if (at === -1) {
+        return true;
+      }
+      held.splice(at, 1);
+      return false;
+    });
+  }
 });
 
-// Every node under `from` with this id, in document order.
-function findAll(from: TestNode, id: string): TestNode[] {
+// Every element under `from` with this tag, in document order.
+function findAll(from: Node, tag: string): Element[] {
+  const element = from as unknown as Element;
   return [
-    ...(from.id === id ? [from] : []),
-    ...from.children.flatMap((child) => findAll(child, id)),
+    ...(element.tagName?.toLowerCase() === tag ? [element] : []),
+    ...[...from.childNodes].flatMap((child) => findAll(child, tag)),
   ];
 }

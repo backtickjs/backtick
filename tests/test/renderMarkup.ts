@@ -1,40 +1,39 @@
-import { isTestNode, isText } from "@backtickjs/test-vm";
-import type { TestNode } from "@backtickjs/test-vm";
+import { isNode, isText, listenersOf } from "@backtickjs/test-vm";
+import type { Node } from "@backtickjs/test-vm";
 
-// Renders a built node as JSX-like markup: children render as the node's body,
-// the props render as attributes. The client scripts were already evaluated
-// when the node was built, so a script prop holds the script's value — a
-// handler stays a function and renders as `[function]`; rendering never invokes
-// it.
-export function renderMarkup(node: TestNode, indent = ""): string {
+// Renders a drawn node as JSX-like markup: children render as the node's body,
+// the attributes it carries render as attributes, and an event it was given a
+// handler for renders as `on<event>={[function]}`.
+//
+// What is read is a real DOM — the drawing went through the same renderer a
+// page uses — so a value the bundle computed is here as the document kept it: a
+// number is the string it was written as, and a handler is a registration
+// rather than a value. Rendering never fires one.
+export function renderMarkup(node: Node, indent = ""): string {
   if (isText(node)) {
-    return `{${JSON.stringify(node.text)}}`;
+    return `{${JSON.stringify(node.nodeValue ?? "")}}`;
   }
-  const attributes = Object.entries(node.props).map(
-    ([prop, value]) => ` ${prop}=${renderAttribute(value, indent)}`,
+  const element = node as unknown as Element;
+  const written = [...element.attributes].map(
+    (attribute) => ` ${attribute.name}=${JSON.stringify(attribute.value)}`,
   );
-  const opening = `<${node.id}${attributes.join("")}`;
-  if (node.children.length === 0) {
+  const handlers = listenersOf(node).map((event) => ` on${event}={[function]}`);
+  const tag = element.tagName.toLowerCase();
+  const opening = `<${tag}${written.join("")}${handlers.join("")}`;
+  const children = [...element.childNodes] as unknown as Node[];
+  if (children.length === 0) {
     return `${opening} />`;
   }
   const inner = `${indent}  `;
-  const body = node.children
+  const body = children
     .map((child) => `${inner}${renderMarkup(child, inner)}`)
     .join("\n");
-  return `${opening}>\n${body}\n${indent}</${node.id}>`;
+  return `${opening}>\n${body}\n${indent}</${tag}>`;
 }
 
-function renderAttribute(value: unknown, indent: string): string {
-  if (typeof value === "string") {
-    return JSON.stringify(value);
-  }
-  if (isTestNode(value)) {
-    return `{${renderMarkup(value, indent)}}`;
-  }
-  return `{${renderInline(value)}}`;
-}
-
-function renderInline(value: unknown): string {
+// A value a bundle answered with that was not drawn: what `evaluate` hands back
+// where the root is data rather than an element.
+export function renderInline(value: unknown): string {
   if (value === undefined) {
     return "undefined";
   }
@@ -50,7 +49,7 @@ function renderInline(value: unknown): string {
   if (Array.isArray(value)) {
     return `[${value.map(renderInline).join(", ")}]`;
   }
-  if (isTestNode(value)) {
+  if (isNode(value)) {
     return renderMarkup(value);
   }
   if (typeof value === "object") {

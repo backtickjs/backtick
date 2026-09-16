@@ -58,6 +58,12 @@ export function windowOf(page: Page): ScriptWindow {
   } as unknown as ScriptWindow;
 }
 
-// The window under a bundle drawn into plain objects, which has no document of
-// its own to answer for. A page of its own, so a test that waits has a clock.
-export const window = windowOf(new Page());
+// The page every unmounted drawing is built with: a bundle evaluated rather
+// than mounted still builds the target's nodes, so it needs a document, and one
+// page is enough where nothing is ever inserted into it.
+//
+// A page rather than a bare window, so a test that waits has a clock.
+export const page = new Page();
+
+// What a script evaluated against that page reaches through `$window`.
+export const window = windowOf(page);

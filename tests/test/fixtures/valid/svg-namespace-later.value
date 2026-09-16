@@ -1,9 +1,9 @@
 <div>
-  <svg:svg viewBox="0 0 30 10">
-    <svg:title>
+  <svg viewBox="0 0 30 10">
+    <title>
       {"dot 10"}
-    </svg:title>
-  </svg:svg>
+    </title>
+  </svg>
   <title>
     {"after"}
   </title>

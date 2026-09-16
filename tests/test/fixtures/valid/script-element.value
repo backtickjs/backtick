@@ -1,12 +1,12 @@
-<div style="padding: 0">
-  <div style="font-size: 12px">
-    <span style="font-size: 12px" onclick={[function]}>
+<div style="padding: 0px;">
+  <div style="font-size: 12px;">
+    <span style="font-size: 12px;" onclick={[function]}>
       {"hi"}
     </span>
-    <span style="font-size: 8px">
+    <span style="font-size: 8px;">
       {"fixed"}
     </span>
-    <span style="font-size: 12px" onclick={[function]}>
+    <span style="font-size: 12px;" onclick={[function]}>
       {"held"}
     </span>
   </div>

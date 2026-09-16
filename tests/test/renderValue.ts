@@ -1,5 +1,5 @@
 import { renderMarkup } from "./renderMarkup.ts";
-import { isTestNode } from "@backtickjs/test-vm";
+import { isNode } from "@backtickjs/test-vm";
 
 // Renders a runtime value produced by the test VM into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,
@@ -22,7 +22,7 @@ function render(value: unknown, indent: string, seen: Set<object>): string {
   if (typeof value === "function") {
     return "[function]";
   }
-  if (isTestNode(value)) {
+  if (isNode(value)) {
     return renderMarkup(value, indent);
   }
   if (typeof value !== "object") {

@@ -2,7 +2,7 @@ import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/language";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
-import type { RendererOptions } from "./rendererOptions.js";
+import { rendererOptions } from "./rendererOptions.js";
 import { compile, scopeOf } from "./compile.js";
 
 /**
@@ -68,18 +68,23 @@ export interface Interpreter<NodeType extends object> {
 }
 
 /**
- * The interpreter, wired to one target: its renderer, and the names a script
- * reaches through it.
+ * The interpreter, wired to a document: it draws with that document's nodes,
+ * and a script reaches the names `client` hands over.
+ *
+ * A document and nothing else, because a drawing is a DOM wherever one runs —
+ * a page's, or one a test made. A target of its own would be a second set of
+ * behaviours to keep true to this one, and the difference between them is
+ * exactly what a test would stop catching.
  *
  * Built the way Solid builds one — options in, functions out — because what is
  * under this is Solid's own `createRenderer`. Once here rather than once per
- * drawing, so every bundle a target draws is drawn through the same one.
+ * drawing, so every bundle a document draws is drawn through the same one.
  */
-export function createInterpreter<NodeType extends object>(
-  options: RendererOptions<NodeType>,
+export function createInterpreter(
+  document: Document,
   client: ClientOptions,
-): Interpreter<NodeType> {
-  const renderer = createRenderer(options);
+): Interpreter<Node> {
+  const renderer = createRenderer(rendererOptions(document));
 
   // One per mount: what a bundle compiled to is a closure over this, so two
   // drawings of the same bundle share nothing but the renderer.

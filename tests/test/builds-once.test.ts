@@ -3,8 +3,8 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isTestNode } from "@backtickjs/test-vm";
-import type { TestNode } from "@backtickjs/test-vm";
+import { evaluate, isNode } from "@backtickjs/test-vm";
+import type { Element, Node } from "@backtickjs/test-vm";
 
 // A component is built once, however what it drew changes afterwards.
 //
@@ -23,35 +23,32 @@ import type { TestNode } from "@backtickjs/test-vm";
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("backtick");
 
-function find(node: TestNode, id: string): TestNode | undefined {
-  if (node.id === id) {
-    return node;
-  }
-  for (const child of node.children) {
-    const found = find(child, id);
-    if (found !== undefined) {
-      return found;
-    }
-  }
-  return undefined;
+// Read off the drawing the way a page would: by tag, in document order.
+function find(node: Node, tag: string): Element | undefined {
+  return all(node, tag)[0];
 }
 
-function text(node: TestNode | undefined): unknown {
-  return node?.children[0]?.text;
+function all(node: Node, tag: string): Element[] {
+  const element = node as unknown as Element;
+  return [
+    ...(element.tagName?.toLowerCase() === tag ? [element] : []),
+    ...[...node.childNodes].flatMap((child) => all(child, tag)),
+  ];
 }
 
-function count(node: TestNode, id: string): number {
-  return (
-    (node.id === id ? 1 : 0) +
-    node.children.reduce((seen, child) => seen + count(child, id), 0)
-  );
+function text(node: Node | undefined): unknown {
+  return node?.firstChild?.nodeValue;
+}
+
+function count(node: Node, tag: string): number {
+  return all(node, tag).length;
 }
 
 describe("a component that draws a bundle", () => {
   it("is built once, and draws what arrives", async () => {
     const script = await importFixture(validDir, "vm-eval-builds-once.tsx");
     const drawn = evaluate(await bundler.run(script));
-    assert.ok(isTestNode(drawn), "expected a rendered node");
+    assert.ok(isNode(drawn), "expected a rendered node");
 
     // Nothing to draw yet, and the wait has not been made twice.
     assert.equal(text(find(drawn, "span")), "asked 0");
@@ -76,7 +73,7 @@ describe("a component that draws a list", () => {
   it("is built once, and draws what arrives", async () => {
     const script = await importFixture(validDir, "for-builds-once.tsx");
     const drawn = evaluate(await bundler.run(script));
-    assert.ok(isTestNode(drawn), "expected a rendered node");
+    assert.ok(isNode(drawn), "expected a rendered node");
 
     assert.equal(text(find(drawn, "span")), "asked 0");
 

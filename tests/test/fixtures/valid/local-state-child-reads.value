@@ -3,7 +3,7 @@
     {"select"}
   </span>
   <div>
-    <span style="font-size: 20px">
+    <span style="font-size: 20px;">
       {"row 0 of 0"}
     </span>
     <span>
@@ -11,7 +11,7 @@
     </span>
   </div>
   <div>
-    <span style="font-size: 16px">
+    <span style="font-size: 16px;">
       {"row 1 of 0"}
     </span>
   </div>
