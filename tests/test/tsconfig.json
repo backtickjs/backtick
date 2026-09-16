@@ -1,7 +1,8 @@
 {
   // The `.tsx` tests, which only Backtick's tooling can check: `backtick-tsc`
   // in the typecheck suite, and the editor extension. Nothing references it, so
-  // `tsc -b` never builds it.
+  // `tsc -b` never builds it. The compile errors are left out: the compiler's
+  // own errors can't be suppressed, and `compiler.test.ts` records them.
   "extends": "../../configs/tsconfig.test.json",
   "compilerOptions": {
     "jsx": "react-jsx",
@@ -10,5 +11,5 @@
     "composite": false
   },
   "include": ["./**/*.test.tsx", "./prettier.d.ts"],
-  "exclude": ["./fixtures/**/*"]
+  "exclude": ["./fixtures/**/*", "./compile-errors/**/*"]
 }

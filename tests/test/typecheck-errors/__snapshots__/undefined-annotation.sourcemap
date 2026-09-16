@@ -1,0 +1,40 @@
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_x                                    → x
+:                                         → : 
+Maybe                                     → Maybe
+) => {\n                                  → ) => {\n  
+const                                     → const 
+__cs_y                                    → y
+ = cs.const(                              →  = 
+__cs_x                                    → x
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+1                                         → 1
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_x                                    → x
+:                                         → : 
+Maybe                                     → Maybe
+) => {\n                                  → ) => {\n  
+let                                       → let 
+__cs_y                                    → y
+ =                                        →  = 
+""                                        → ""
+;                                         → ;
+\n    // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.\n    → \n  // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.\n  
+__cs_y                                    → y
+ = cs.const(                              →  = 
+__cs_x                                    → x
+)                                         → 
+;                                         → ;
+\n                                        → \n  
+return cs.const(                          → return 
+1                                         → 1
+);                                        → ;
+\n}                                       → \n}
+))                                        → `

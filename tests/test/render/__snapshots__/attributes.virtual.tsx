@@ -2,13 +2,9 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import type { BacktickElement } from "@backtickjs/core";
 import { render } from "@backtickjs/web-testing";
-import { createSourceLoader } from "../importFixture.ts";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
-
-// For the one drawing the schema's types do not accept: `tabIndex` on a `div`.
-const importSource = createSourceLoader("attributes");
 
 const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
@@ -101,11 +97,8 @@ describe("an attribute's case", () => {
   });
 
   it("is still folded down in HTML", async () => {
-    const div = await drawn(
-      await importSource<BacktickElement>(
-        `export default <div tabIndex={2} />;`,
-      ),
-    );
+    // @ts-expect-error: the schema declares no `tabIndex` on a `div`
+    const div = await drawn(<div tabIndex={2} />);
     assert.deepEqual(attributes(div), { tabindex: "2" });
   });
 });

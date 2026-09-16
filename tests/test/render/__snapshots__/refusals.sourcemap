@@ -1,0 +1,47 @@
+cs.lift(cs.const(  → cs`
+<                  → <
+div                → div
+                   →  
+onclick            → onclick
+={cs.lift(         → ={
+() => {\n}         → () => {}
+)}                 → }
+/>                 →  />
+))                 → `
+cs.lift(cs.const(  → cs`
+<                  → <
+div                → div
+                   →  
+title              → title
+={cs.lift(         → ={
+() => {\n}         → () => {}
+)}                 → }
+/>                 →  />
+))                 → `
+cs.lift(cs.const(  → cs`
+<                  → <
+div                → div
+                   →  
+onclick            → onclick
+={cs.lift(         → ={
+null               → null
+)}                 → }
+/>                 →  />
+))                 → `
+cs.lift(cs.const(  → cs`
+<                  → <
+div                → div
+                   →  
+onclick            → onclick
+={cs.lift(         → ={
+cs.receiver(       → 
+[                  → [
+() => {\n    }     → () => {}
+]                  → ]
+)                  → 
+[                  → [
+1                  → 1
+]                  → ]
+)}                 → }
+/>                 →  />
+))                 → `

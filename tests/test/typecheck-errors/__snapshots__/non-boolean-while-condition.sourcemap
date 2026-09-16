@@ -1,0 +1,32 @@
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_n                                    → n
+:                                         → : 
+number                                    → number
+) => {\n                                  → ) => {\n  
+let                                       → let 
+__cs_left                                 → left
+ =                                        →  = 
+__cs_n                                    → n
+;                                         → ;
+\n    // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'boolean'.\n    → \n  // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'boolean'.\n  
+while ((cs.condition(                     → while (
+__cs_left                                 → left
+) &&                                      → 
+__cs_left                                 → left [-semantic -completion -navigation -verification]
+))                                        → ) 
+{\n                                       → {\n    
+__cs_left                                 → left
+ = cs.const(                              →  = 
+__cs_left                                 → left
+ -                                        →  - 
+1                                         → 1
+)                                         → 
+;                                         → ;
+\n    }                                   → \n  }
+\n                                        → \n  
+return cs.const(                          → return 
+__cs_left                                 → left
+);                                        → ;
+\n}                                       → \n}
+))                                        → `

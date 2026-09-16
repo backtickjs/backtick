@@ -1,0 +1,22 @@
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_name                                 → name
+:                                         → : 
+string                                    → string
+) => {\n    // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'boolean'.\n    → ) => {\n  // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'boolean'.\n  
+if ((cs.condition(                        → if (
+__cs_name                                 → name
+) &&                                      → 
+__cs_name                                 → name [-semantic -completion -navigation -verification]
+))                                        → ) 
+{\n                                       → {\n    
+return cs.const(                          → return 
+__cs_name                                 → name
+);                                        → ;
+\n    }                                   → \n  }
+\n                                        → \n  
+return cs.const(                          → return 
+"anonymous"                               → "anonymous"
+);                                        → ;
+\n}                                       → \n}
+))                                        → `

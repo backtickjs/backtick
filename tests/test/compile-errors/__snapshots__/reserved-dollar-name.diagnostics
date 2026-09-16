@@ -1,0 +1,1 @@
+9:9-9:11 error TS0: `$`-prefixed names are reserved for unbraced splices in a `cs` client script.

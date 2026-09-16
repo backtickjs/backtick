@@ -1,0 +1,43 @@
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_count                                → count
+:                                         → : 
+number                                    → number
+) => {\n                                  → ) => {\n  
+const                                     → const 
+__cs_keep                                 → keep
+ = cs.const(                              →  = 
+(                                         → (
+__cs_on                                   → on
+:                                         → : 
+boolean                                   → boolean
+) =>                                      → ) => 
+__cs_on                                   → on
+);                                        → ;
+\n    // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'boolean'.\n    → \n  // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'boolean'.\n  
+if ((cs.condition(                        → if (
+__cs_keep                                 → keep
+(                                         → (
+(cs.condition(                            → 
+__cs_count                                → count
+) &&                                      → 
+__cs_count                                → count [-semantic -completion -navigation -verification]
+) &&                                      →  && 
+__cs_count                                → count
+ >                                        →  > 
+0                                         → 0
+)                                         → )
+) &&                                      → 
+__cs_keep(__cs_count && __cs_count > 0)   → keep(count && count > 0) [-semantic -completion -navigation -verification]
+))                                        → ) 
+{\n                                       → {\n    
+return cs.const(                          → return 
+"kept"                                    → "kept"
+);                                        → ;
+\n    }                                   → \n  }
+\n                                        → \n  
+return cs.const(                          → return 
+"dropped"                                 → "dropped"
+);                                        → ;
+\n}                                       → \n}
+))                                        → `

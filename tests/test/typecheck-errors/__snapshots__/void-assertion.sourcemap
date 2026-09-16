@@ -1,0 +1,17 @@
+cs.lift((() => {\n    // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.\n    → cs`{\n  // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.\n  
+const                                     → const 
+__cs_a                                    → a
+ = cs.const(                              →  = 
+cs.splice(                                →  [-semantic]
+(one)                                     → $one
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
+ as                                       →  as 
+void                                      → void
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+""                                        → ""
+ +                                        →  + 
+__cs_a                                    → a
+);                                        → ;
+\n})())                                   → \n}`

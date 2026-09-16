@@ -1,2 +1,0 @@
-21:3 error TS2322: Type 'Maybe' is not assignable to type 'string'.
-  Type 'undefined' is not assignable to type 'string'.

@@ -2,11 +2,8 @@ import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { render } from "@backtickjs/web-testing";
-import { createSourceLoader } from "../importFixture.ts";
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
-// For the one drawing the schema's types do not accept: `tabIndex` on a `div`.
-const importSource = createSourceLoader("attributes");
 const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
 async function drawn(value) {
@@ -88,9 +85,8 @@ describe("an attribute's case", () => {
     assert.deepEqual(attributes(svg.children[1]), { numOctaves: "3" });
   });
   it("is still folded down in HTML", async () => {
-    const div = await drawn(
-      await importSource(`export default <div tabIndex={2} />;`),
-    );
+    // @ts-expect-error: the schema declares no `tabIndex` on a `div`
+    const div = await drawn(_jsx("div", { tabIndex: 2 }));
     assert.deepEqual(attributes(div), { tabindex: "2" });
   });
 });
