@@ -2,11 +2,17 @@ import assert from "node:assert";
 import { mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { describe, it } from "node:test";
-import { virtualize } from "@backtickjs/compiler";
+import { transpile, virtualize } from "@backtickjs/compiler";
+// Prettier by the path rather than the name. This suite runs under
+// `--conditions=browser`, which is what makes Solid resolve to its reactive
+// build rather than the inert server one, and under that condition `prettier`
+// resolves to the standalone bundle — which carries no parsers and can't format
+// TypeScript. The condition is the interpreter's, so the name it breaks names
+// its build instead.
+import prettier from "prettier/index.mjs";
 import ts from "typescript";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
-import { transpileFixture } from "./transpileFixture.ts";
 
 // Every `.test.tsx`, compiled whole under the name `tsxHooks.ts` gives it, so
 // what is recorded is the module the test runs as. Recorded per file, next to
@@ -17,7 +23,6 @@ const testFiles = readdirSync(testsRoot, { recursive: true, encoding: "utf8" })
   .filter(
     (file) =>
       file.endsWith(".test.tsx") &&
-      !file.startsWith("fixtures") &&
       !file.startsWith("node_modules") &&
       !file.includes("__snapshots__"),
   )
@@ -26,6 +31,22 @@ const testFiles = readdirSync(testsRoot, { recursive: true, encoding: "utf8" })
 // The files whose scripts the compiler must refuse. Only their diagnostics are
 // recorded: what a refused script compiles to means nothing.
 const compileErrorsDir = "compile-errors";
+
+// What `tsxHooks.ts` runs the file as, made readable.
+async function emit(fileName: string, sourceText: string): Promise<string> {
+  const outputText = transpile(ts, fileName, sourceText, "@backtickjs/web-sdk");
+  // Every script's metadata carries the toolchain version, which would rewrite
+  // all of these snapshots on each release. Pinned to one value so a version
+  // bump doesn't bury the diff that release actually made. Matched on a semver
+  // shape so a case of its own with a `version` property is left alone.
+  const pinned = outputText.replace(
+    /version: "\d+\.\d+\.\d+[^"]*"/g,
+    'version: "0.0.0"',
+  );
+  // The emitted runtime tree prints as one long line per script; formatted,
+  // the snapshot reads like code.
+  return prettier.format(pinned, { parser: "typescript" });
+}
 
 // Written as given: each artifact is text meant to be read in its own file.
 const verbatim = [(value: unknown) => value as string];
@@ -70,7 +91,7 @@ describe("compile the .tsx tests", () => {
         renderMappings(fileName, virtualCode, sourceText, mappings),
         "sourcemap",
       );
-      record(await transpileFixture(fileName, sourceText), "js");
+      record(await emit(fileName, sourceText), "js");
     });
   }
 });

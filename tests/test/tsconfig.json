@@ -10,6 +10,6 @@
     "noEmit": true,
     "composite": false
   },
-  "include": ["./**/*.test.tsx", "./prettier.d.ts"],
-  "exclude": ["./fixtures/**/*", "./compile-errors/**/*"]
+  "include": ["./**/*.test.tsx"],
+  "exclude": ["./compile-errors/**/*"]
 }
