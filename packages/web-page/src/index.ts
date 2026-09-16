@@ -1,0 +1,17 @@
+/**
+ * The client a page loads: what finds the bundles a document carries and draws
+ * each one where its script stands.
+ *
+ * The machine under it is `@backtickjs/web-vm` — the interpreter, the browser's
+ * renderer, and the names a script may call. What is here is the page half: a
+ * document is what says which bundles there are, and where they go.
+ *
+ * An app with a name of its own — a schema declaring something the web client
+ * cannot answer — hands `defineClient` its own `compileBuiltin` rather than
+ * writing a second client beside this one.
+ *
+ * What `./bundle` publishes is this, bundled and self-starting, for a page to
+ * ask for over the network.
+ */
+export { defineClient } from "./defineClient.js";
+export type { ClientOptions } from "@backtickjs/web-vm";

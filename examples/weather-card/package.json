@@ -14,8 +14,8 @@
     "@backtickjs/bun-plugin": "^0.1.0",
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "^0.1.0",
-    "@backtickjs/web-vm": "workspace:*",
-    "@backtickjs/web-client": "workspace:*"
+    "@backtickjs/web-client": "workspace:*",
+    "@backtickjs/web-page": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",

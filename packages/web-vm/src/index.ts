@@ -1,22 +1,17 @@
 /**
- * A client: a renderer, the names a script may call, and what draws the bundles
- * a page carries.
+ * The browser machine: the interpreter that runs a bundle, the renderer that
+ * draws one into a document, and the names a script may call.
  *
- * An app with a name of its own — a schema declaring something this cannot
- * answer — hands `defineClient` its own `compileBuiltin` rather than writing a
- * second client beside this one.
+ * Wired to a target with `createInterpreter`, which takes a renderer and the
+ * names a script reaches through it — so the same interpreter draws into a page
+ * and into anything else. `@backtickjs/test-vm` drives it with a host of plain
+ * objects, and with a document of its own through `renderer`.
  *
- * What `./bundle` publishes is this, bundled and self-starting, for a page to
- * ask for over the network.
+ * Finding the bundles a document carries is a page's own half, and is
+ * `@backtickjs/web-page`.
  */
-export { defineClient } from "./defineClient.js";
-export type { ClientOptions } from "./defineClient.js";
-export type { Bundle } from "@backtickjs/core";
-export { renderer } from "./renderer.js";
-
-// The interpreter beneath it, which draws through any renderer rather than only
-// a page's: `@backtickjs/test-vm` drives it with a host of plain objects, and
-// with a document of its own through `renderer`.
 export { createInterpreter } from "./createInterpreter.js";
-export type { Interpreter } from "./createInterpreter.js";
+export type { ClientOptions, Interpreter } from "./createInterpreter.js";
+export { renderer } from "./renderer.js";
 export type { RendererOptions } from "./renderer.js";
+export type { Bundle } from "@backtickjs/core";

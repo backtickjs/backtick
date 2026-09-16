@@ -6,7 +6,7 @@
  * that a client must answer for is names a script may call: its one tag is
  * named as the browser registers it, so the document builds that one itself.
  */
-import { defineClient } from "@backtickjs/web-vm";
+import { defineClient } from "@backtickjs/web-page";
 import { compileBuiltin } from "./compileBuiltin.js";
 
 defineClient({ window, compileBuiltin });

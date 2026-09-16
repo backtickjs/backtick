@@ -1,32 +1,35 @@
 {
-  "name": "@backtickjs/web-vm",
+  "name": "@backtickjs/web-page",
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "description": "The client a page loads: it draws every bundle a document carries",
   "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./bundle": {
+      "types": "./dist/bundle.d.ts",
+      "default": "./dist/bundle.js"
     }
   },
   "scripts": {
-    "build": "tsc -b",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "build": "tsc -b && node scripts/build.mjs",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*",
-    "@backtickjs/web-client": "workspace:*",
-    "solid-js": "^1.9.14"
+    "@backtickjs/web-vm": "workspace:*"
   },
   "peerDependencies": {
     "@backtickjs/core": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
+    "esbuild": "0.28.0",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

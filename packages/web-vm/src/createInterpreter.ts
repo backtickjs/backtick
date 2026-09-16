@@ -1,10 +1,37 @@
-import type { ClientUnknown } from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/language";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
-import type { ClientOptions } from "./defineClient.js";
 import type { RendererOptions } from "./renderer.js";
 import { compile, scopeOf } from "./compile.js";
+
+/**
+ * The names a script may reach: the window it reaches them through, and what a
+ * target answers for beyond the names the language provides itself.
+ *
+ * Beside the renderer rather than holding it, because the two are answered by
+ * different things — how a target draws, and what it lets a script say — and a
+ * bundle drawn through a second renderer still says the same names.
+ */
+export interface ClientOptions {
+  /**
+   * The host's window, which the client reads from to answer `window`. Never
+   * handed to a script itself: what a script reaches is the list the client
+   * writes out, read through to this.
+   */
+  readonly window: typeof window;
+
+  /**
+   * What this target answers for, beside the language's own names and the
+   * window: asked by the whole name, as the schema writes it and as the wire
+   * carries it, and answering with nothing for a name it does not have.
+   *
+   * Asked only after the client has not answered, so a name the client already
+   * answers for is never reached here: what `state` means is not a target's to
+   * redecide.
+   */
+  readonly compileBuiltin?: (name: string) => ClientValue;
+}
 
 /** What the interpreter does with a bundle, once it has a target to do it on. */
 export interface Interpreter<NodeType extends object> {

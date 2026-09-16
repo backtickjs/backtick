@@ -25,8 +25,8 @@
     "@backtickjs.com/compiler": "workspace:*",
     "@backtickjs.com/schema": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-vm": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
+    "@backtickjs/web-page": "workspace:*",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

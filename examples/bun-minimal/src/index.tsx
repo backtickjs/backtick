@@ -1,7 +1,7 @@
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
-import * as client from "@backtickjs/web-vm/bundle";
+import * as client from "@backtickjs/web-page/bundle";
 import { Counter } from "./Counter.js";
 
 // Runs an element here on the server. What comes back is a bundle: data, not
