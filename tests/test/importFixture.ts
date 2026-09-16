@@ -35,3 +35,25 @@ export function createFixtureLoader(
     return script;
   };
 }
+
+// As `createFixtureLoader`, for a source written inline in a test: one that
+// only makes sense beside its assertion, like a drawing a client must refuse.
+// Not typechecked, so it can say what a fixture's types would not let it.
+export function createSourceLoader(
+  suite: string,
+): (sourceText: string) => Promise<Spliceable> {
+  const cacheDir = join(import.meta.dirname, "../.cache", suite);
+  rmSync(cacheDir, { recursive: true, force: true });
+  mkdirSync(cacheDir, { recursive: true });
+  let count = 0;
+  return async function importSource(sourceText) {
+    const file = `source-${++count}.tsx`;
+    const outputText = await transpileFixture(file, sourceText);
+    const compiled = join(cacheDir, file.replace(/\.tsx$/, ".js"));
+    writeFileSync(compiled, outputText);
+    const { default: script } = (await import(
+      pathToFileURL(compiled).href
+    )) as { default: Spliceable };
+    return script;
+  };
+}

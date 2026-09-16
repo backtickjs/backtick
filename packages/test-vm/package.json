@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "The web VM drawing into plain objects, for running Backtick apps in tests",
+  "description": "The web VM drawing into a happy-dom page, for rendering Backtick apps in tests",
   "main": "./dist/index.js",
   "exports": {
     ".": {
@@ -19,8 +19,11 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
+    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/web-vm": "workspace:*",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/user-event": "^14.6.7",
     "happy-dom": "^20.14.5"
   },
   "devDependencies": {

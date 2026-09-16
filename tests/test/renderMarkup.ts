@@ -1,5 +1,4 @@
 import { isNode, isText, listenersOf } from "@backtickjs/test-vm";
-import type { Node } from "@backtickjs/test-vm";
 
 // Renders a drawn node as JSX-like markup: children render as the node's body,
 // the attributes it carries render as attributes, and an event it was given a
@@ -20,7 +19,7 @@ export function renderMarkup(node: Node, indent = ""): string {
   const handlers = listenersOf(node).map((event) => ` on${event}={[function]}`);
   const tag = element.tagName.toLowerCase();
   const opening = `<${tag}${written.join("")}${handlers.join("")}`;
-  const children = [...element.childNodes] as unknown as Node[];
+  const children = [...element.childNodes];
   if (children.length === 0) {
     return `${opening} />`;
   }
@@ -29,6 +28,11 @@ export function renderMarkup(node: Node, indent = ""): string {
     .map((child) => `${inner}${renderMarkup(child, inner)}`)
     .join("\n");
   return `${opening}>\n${body}\n${indent}</${tag}>`;
+}
+
+// What a render put in its container, one top-level node after another.
+export function renderDrawing(container: Element): string {
+  return [...container.childNodes].map((node) => renderMarkup(node)).join("\n");
 }
 
 // A value a bundle answered with that was not drawn: what `evaluate` hands back

@@ -1,10 +1,8 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
+import { render, screen } from "@backtickjs/test-vm";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isNode } from "@backtickjs/test-vm";
-import type { Element, Node } from "@backtickjs/test-vm";
 
 // A component is built once, however what it drew changes afterwards.
 //
@@ -23,45 +21,23 @@ import type { Element, Node } from "@backtickjs/test-vm";
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("backtick");
 
-// Read off the drawing the way a page would: by tag, in document order.
-function find(node: Node, tag: string): Element | undefined {
-  return all(node, tag)[0];
-}
-
-function all(node: Node, tag: string): Element[] {
-  const element = node as unknown as Element;
-  return [
-    ...(element.tagName?.toLowerCase() === tag ? [element] : []),
-    ...[...node.childNodes].flatMap((child) => all(child, tag)),
-  ];
-}
-
-function text(node: Node | undefined): unknown {
-  return node?.firstChild?.nodeValue;
-}
-
-function count(node: Node, tag: string): number {
-  return all(node, tag).length;
-}
+// Long enough for the timer the component set, and for a component built
+// again to have set another.
+const settled = () => new Promise((settle) => setTimeout(settle, 100));
 
 describe("a component that draws a bundle", () => {
   it("is built once, and draws what arrives", async () => {
-    const script = await importFixture(validDir, "vm-eval-builds-once.tsx");
-    const drawn = evaluate(await bundler.run(script));
-    assert.ok(isNode(drawn), "expected a rendered node");
+    await render(await importFixture(validDir, "vm-eval-builds-once.tsx"));
 
     // Nothing to draw yet, and the wait has not been made twice.
-    assert.equal(text(find(drawn, "span")), "asked 0");
-    assert.equal(find(drawn, "em"), undefined);
+    assert.ok(screen.getByText("asked 0"));
+    assert.equal(screen.queryByText("answered"), null);
 
-    // Long enough for the timer the component set, and for a component built
-    // again to have set another.
-    await new Promise((settle) => setTimeout(settle, 100));
+    await settled();
 
-    assert.equal(text(find(drawn, "em")), "answered");
-    assert.equal(
-      text(find(drawn, "span")),
-      "asked 1",
+    assert.ok(screen.getByText("answered"));
+    assert.ok(
+      screen.queryByText("asked 1"),
       "the component was built again for what it drew",
     );
   });
@@ -71,18 +47,17 @@ describe("a component that draws a list", () => {
   // The same claim with no bundle in it: `<For />` answers with a way of asking
   // too, so a fault in what draws a bundle would leave this alone.
   it("is built once, and draws what arrives", async () => {
-    const script = await importFixture(validDir, "for-builds-once.tsx");
-    const drawn = evaluate(await bundler.run(script));
-    assert.ok(isNode(drawn), "expected a rendered node");
+    const { container } = await render(
+      await importFixture(validDir, "for-builds-once.tsx"),
+    );
 
-    assert.equal(text(find(drawn, "span")), "asked 0");
+    assert.ok(screen.getByText("asked 0"));
 
-    await new Promise((settle) => setTimeout(settle, 100));
+    await settled();
 
-    assert.equal(count(drawn, "em"), 2);
-    assert.equal(
-      text(find(drawn, "span")),
-      "asked 1",
+    assert.equal(container.querySelectorAll("em").length, 2);
+    assert.ok(
+      screen.queryByText("asked 1"),
       "the component was built again for what it drew",
     );
   });

@@ -1,6 +1,7 @@
 /**
- * The web VM, drawing into a document of its own: a bundle run in a test, read
- * the way a page would read it — `querySelector`, `textContent`, `click`.
+ * The web VM, drawing into a document of its own: a script rendered in a test,
+ * read the way Testing Library reads a page — `screen.getByRole`,
+ * `userEvent.click`.
  *
  * The interpreter is `@backtickjs/web-vm`'s own and the DOM is happy-dom's, so
  * what a test exercises is what a page runs, down to what a real `insertBefore`
@@ -16,9 +17,9 @@ import { createInterpreter } from "@backtickjs/web-vm";
 import { page, window } from "./window.js";
 
 export { isNode, isText, listenersOf } from "./node.js";
-export type { Document, Element, Node } from "./node.js";
-export { openPage, renderDocument } from "./renderDocument.js";
-export type { DocumentOptions, Drawn, OpenPage } from "./renderDocument.js";
+export { render, screen } from "./render.js";
+export type { DrawOptions, Rendered, RenderOptions } from "./render.js";
+export { userEvent } from "@testing-library/user-event";
 
 /** What a test changes about the VM a bundle runs in. */
 export interface TestOptions {
@@ -35,14 +36,14 @@ export interface TestOptions {
  *
  * Nothing is mounted: a root is as often a value as a tree, and a value has
  * nowhere to be mounted. What comes back is what the root is — the node it
- * drew, or the data it evaluated to. `openPage` is what a drawing that has to
+ * drew, or the data it evaluated to. `render` is what a drawing that has to
  * stand in a page and answer to events wants instead.
  */
 export function evaluate<Value extends ClientUnknown>(
   bundle: Bundle<Value>,
   { builtinOf }: TestOptions = {},
 ): Value {
-  return createInterpreter(page.document as never, {
+  return createInterpreter(page.document as unknown as Document, {
     window,
     builtinOf,
   }).eval(bundle);

@@ -4,13 +4,9 @@
 // A drawing is a real DOM — happy-dom's — so a test reads it the way a page
 // would. These are the two questions a page never has to ask and a test does.
 //
-// The node types come from happy-dom rather than being written again here: what
-// a test holds is one of its nodes, and a shape of our own would be a second
-// answer to what a node is.
-
-import type { Node } from "happy-dom";
-
-export type { Document, Element, Node } from "happy-dom";
+// Typed as the DOM's own nodes rather than happy-dom's: what a test holds is
+// what `screen` and `userEvent` take, and which DOM stands behind it is this
+// package's business.
 
 /**
  * Whether a value a bundle answered with is one of the document's nodes.
@@ -46,7 +42,7 @@ let symbol: symbol | undefined;
 
 function listenerSymbol(node: Node): symbol {
   if (symbol === undefined) {
-    const probe = node.ownerDocument.createElement("div");
+    const probe = node.ownerDocument!.createElement("div");
     probe.addEventListener("backtick:probe", () => {});
     const found = Object.getOwnPropertySymbols(probe).find(
       (held) => held.description === "listeners",

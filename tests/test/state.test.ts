@@ -1,10 +1,8 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
-import { after, describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
+import { describe, it } from "node:test";
+import { render, userEvent } from "@backtickjs/test-vm";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isNode, openPage } from "@backtickjs/test-vm";
-import type { Element, Node } from "@backtickjs/test-vm";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
 // wire shape, and these drive the reference client through it — a write has to
@@ -17,17 +15,12 @@ import type { Element, Node } from "@backtickjs/test-vm";
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("state");
 
-async function render(file: string): Promise<Element> {
-  const script = await importFixture(validDir, file);
-  const node = evaluate(await bundler.run(script));
-  assert.ok(isNode(node), "expected a rendered node");
-  return node as unknown as Element;
-}
-
-// A click, as a page makes one: the drawing registered a listener, so a test
-// fires the event rather than reaching for what was registered.
-function click(node: Element): void {
-  node.dispatchEvent(new node.ownerDocument.defaultView!.MouseEvent("click"));
+// What a fixture drew, as the one element it put in the page.
+async function drawn(file: string): Promise<Element> {
+  const { container } = await render(await importFixture(validDir, file));
+  const node = container.firstElementChild;
+  assert.ok(node !== null, "expected a rendered element");
+  return node;
 }
 
 // The size a node's style names. The web's `style` is the attribute HTML has —
@@ -53,69 +46,69 @@ function children(node: Element): Element[] {
 
 describe("local state", () => {
   it("renders the cell's initial value", async () => {
-    const text = await render("local-state.tsx");
+    const text = await drawn("local-state.tsx");
     assert.equal(fontSize(text), 16);
   });
 
   it("a write persists and re-renders the instance", async () => {
-    const text = await render("local-state.tsx");
-    click(text);
+    const text = await drawn("local-state.tsx");
+    await userEvent.click(text);
     assert.equal(fontSize(text), 17);
   });
 
   it("the display and the handler share one cell", async () => {
-    const text = await render("local-state.tsx");
+    const text = await drawn("local-state.tsx");
     // Each write reads the value the previous one stored — the handler's
     // `read()` and the display's are the same cell, not two snapshots.
-    click(text);
-    click(text);
-    click(text);
+    await userEvent.click(text);
+    await userEvent.click(text);
+    await userEvent.click(text);
     assert.equal(fontSize(text), 19);
   });
 
   it("a handle captured before a write keeps working after it", async () => {
-    const text = await render("local-state.tsx");
+    const text = await drawn("local-state.tsx");
     // The host holds the handler across re-renders; the handle resolves its
     // cell by name at call time, so the stale closure still writes the
     // instance's live storage.
     // One registration per event, reading whatever the prop holds now — so the
     // click after a write runs the handler the write left behind, not the one
     // that was registered first.
-    click(text);
-    click(text);
+    await userEvent.click(text);
+    await userEvent.click(text);
     assert.equal(fontSize(text), 18);
   });
 
   it("two invocations of one component hold independent cells", async () => {
-    const view = await render("local-state-instances.tsx");
+    const view = await drawn("local-state-instances.tsx");
     const [first, second] = children(view);
     assert.ok(first !== undefined && second !== undefined);
     assert.equal(fontSize(first), 16);
     assert.equal(fontSize(second), 16);
-    click(first);
+    await userEvent.click(first);
     assert.equal(fontSize(first), 17);
     assert.equal(fontSize(second), 16);
   });
 
   it("a cell passed as a prop is one storage, shared by both children", async () => {
-    const view = await render("local-state-prop.tsx");
+    const view = await drawn("local-state-prop.tsx");
     const [first, second] = children(view);
     assert.ok(first !== undefined && second !== undefined);
     assert.equal(fontSize(first), 16);
     assert.equal(fontSize(second), 16);
     // The parent declared the cell and handed it to both, so a write through
     // one child's handle moves the other's display too.
-    click(first);
+    await userEvent.click(first);
     assert.equal(fontSize(first), 17);
     assert.equal(fontSize(second), 17);
   });
 
   it("`update` derives the next value from the current one", async () => {
-    const text = await render("local-state-update.tsx");
+    const text = await drawn("local-state-update.tsx");
     assert.equal(fontSize(text), 16);
-    click(text);
+    await userEvent.click(text);
     assert.equal(fontSize(text), 17);
-    click(text);
+    await userEvent.click(text);
     assert.equal(fontSize(text), 18);
   });
 
@@ -125,12 +118,12 @@ describe("local state", () => {
   // it — neither is anything a snapshot of the drawn markup can see, so both
   // are asserted on the nodes these hold across the write.
   it("a reordered list moves the rows it already built", async () => {
-    const view = await render("keyed-rows.tsx");
+    const view = await drawn("keyed-rows.tsx");
     const [swap, , list] = children(view);
     assert.ok(swap !== undefined && list !== undefined);
     assert.deepEqual([...list.children].map(text), ["row 1", "row 2", "row 3"]);
     const [first, , third] = [...list.children];
-    click(swap);
+    await userEvent.click(swap);
     assert.deepEqual([...list.children].map(text), ["row 3", "row 2", "row 1"]);
     // The two that swapped are the nodes they were, at each other's places.
     assert.equal([...list.children][0], third);
@@ -138,18 +131,18 @@ describe("local state", () => {
   });
 
   it("a list a row was dropped from draws the rest", async () => {
-    const view = await render("keyed-rows.tsx");
+    const view = await drawn("keyed-rows.tsx");
     const [, drop, list] = children(view);
     assert.ok(drop !== undefined && list !== undefined);
     const [first, , third] = [...list.children];
-    click(drop);
+    await userEvent.click(drop);
     assert.deepEqual([...list.children].map(text), ["row 1", "row 3"]);
     // Only the row that went was touched; the rest kept their nodes.
     assert.deepEqual([...list.children], [first, third]);
   });
 
   it("a moved row keeps its node and reads its new index", async () => {
-    const view = await render("for-index.tsx");
+    const view = await drawn("for-index.tsx");
     const [rotate, list] = children(view);
     assert.ok(rotate !== undefined && list !== undefined);
     assert.deepEqual([...list.children].map(text), [
@@ -158,7 +151,7 @@ describe("local state", () => {
       "c at 2",
     ]);
     const held = [...list.children][0];
-    click(rotate);
+    await userEvent.click(rotate);
     // Nothing about a member changed, so every row is the node it was — and
     // the index each one draws is the position it now sits at.
     assert.deepEqual([...list.children].map(text), [
@@ -170,7 +163,7 @@ describe("local state", () => {
   });
 
   it("a child redraws everything it read of a cell it was handed", async () => {
-    const view = await render("local-state-child-reads.tsx");
+    const view = await drawn("local-state-child-reads.tsx");
     const [button, ...rows] = children(view);
     assert.ok(button !== undefined && rows.length === 2);
     // Nothing either row was given changes across the write — the same handle
@@ -180,7 +173,7 @@ describe("local state", () => {
       { size: 20, text: "row 0 of 0", marked: true },
       { size: 16, text: "row 1 of 0", marked: false },
     ]);
-    click(button);
+    await userEvent.click(button);
     assert.deepEqual(rows.map(readRow), [
       { size: 16, text: "row 0 of 1", marked: false },
       { size: 20, text: "row 1 of 1", marked: true },
@@ -193,32 +186,31 @@ describe("local state", () => {
   // the two that moved and nothing else — a write per row per selection is what
   // a list of any size would otherwise cost.
   it("a prop that recomputed to what it held is not set again", async () => {
-    const script = await importFixture(validDir, "unmoved-prop.tsx");
-    const site = openPage();
-    site.render(await bundler.run(script));
-    const view = site.document.body.children[0]!;
+    const view = await drawn("unmoved-prop.tsx");
     const [select, list] = children(view);
     assert.ok(select !== undefined && list !== undefined);
 
     // What the drawing wrote, watched the way a page watches itself: an
     // observer reports a write even where what it wrote is what the attribute
-    // already held, which is the whole question here.
-    const watching = new site.page.MutationObserver(() => {});
+    // already held, which is the whole question here. Records are kept as
+    // they arrive, since a click is awaited and the observer reports meanwhile.
+    const records: MutationRecord[] = [];
+    const watching = new view.ownerDocument.defaultView!.MutationObserver(
+      (arrived) => records.push(...arrived),
+    );
     watching.observe(view, { attributes: true, subtree: true });
     const written = (): unknown[][] =>
-      watching
-        .takeRecords()
-        .map((record) => [
-          [...list.children].indexOf(record.target as Element),
-          record.attributeName,
-          (record.target as Element).getAttribute(record.attributeName!),
-        ]);
+      [...records.splice(0), ...watching.takeRecords()].map((record) => [
+        [...list.children].indexOf(record.target as Element),
+        record.attributeName,
+        (record.target as Element).getAttribute(record.attributeName!),
+      ]);
 
     const href = (): unknown[] =>
       [...list.children].map((row) => row.getAttribute("href"));
     assert.deepEqual(href(), ["#open", "#closed", "#closed"]);
     written();
-    click(select);
+    await userEvent.click(select);
     assert.deepEqual(href(), ["#closed", "#open", "#closed"]);
     // The row that was selected and the row now selected, in the order they
     // were built. The third row read the cell too, and had nothing to say.

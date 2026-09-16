@@ -6,8 +6,9 @@ import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
+import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
-import { evaluate } from "@backtickjs/test-vm";
+import { evaluate, isNode, render } from "@backtickjs/test-vm";
 
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a
 // client — a script or a JSX tree — compiled here with the same transform the
@@ -15,8 +16,9 @@ import { evaluate } from "@backtickjs/test-vm";
 // module. A `valid/` fixture's bundle payload is snapshotted to a sibling
 // `*.bundle` file (with a human-readable rendering of the same payload in
 // `*.bundle-debug` — see `renderBundleDebug`), then executed by the
-// test VM (`@backtickjs/test-vm`) and the resulting runtime value
-// snapshotted to `*.value`. A `bundle-error/`
+// test VM (`@backtickjs/test-vm`) and what it produced snapshotted to
+// `*.value`: the page a fixture that draws was rendered into, or the value one
+// that does not answered with. A `bundle-error/`
 // fixture compiles and imports cleanly but exports a client the bundler must
 // reject: its error message is snapshotted to a sibling `*.error` file. Run
 // with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
@@ -32,6 +34,12 @@ function listFixtures(dir: string): string[] {
         !file.includes(".virtual.tsx"),
     )
     .sort();
+}
+
+// Whether a root is a drawing: an element, or a stretch of them beside the
+// lists and conditions that draw more.
+function draws(value: unknown): boolean {
+  return isNode(value) || (Array.isArray(value) && value.some(isNode));
 }
 
 describe("bundle", () => {
@@ -50,10 +58,11 @@ describe("bundle", () => {
           renderBundleDebug(bundle),
           join(dir, `${base}.bundle-debug`),
         );
-        matchFileSnapshot(
-          `${renderValue(evaluate(bundle))}\n`,
-          join(dir, `${base}.value`),
-        );
+        const value = evaluate(bundle);
+        const snapshot = draws(value)
+          ? renderDrawing((await render(script)).container)
+          : renderValue(value);
+        matchFileSnapshot(`${snapshot}\n`, join(dir, `${base}.value`));
       });
     }
   });

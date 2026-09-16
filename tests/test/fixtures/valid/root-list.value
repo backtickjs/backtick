@@ -1,6 +1,12 @@
-[
-  <span onclick={[function]}>
-    {"clear"}
-  </span>,
-  [function]
-]
+<span onclick={[function]}>
+  {"clear"}
+</span>
+<span>
+  {"row 1"}
+</span>
+<span>
+  {"row 2"}
+</span>
+<span>
+  {"row 3"}
+</span>
