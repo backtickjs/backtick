@@ -556,6 +556,14 @@
       "keyed": true,
       "dir": "edabac79",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "de8f087d",
+      "label": "createInterpreter",
+      "date": "2026-09-16",
+      "keyed": true,
+      "dir": "de8f087d",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
