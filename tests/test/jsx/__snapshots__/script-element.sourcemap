@@ -1,136 +1,136 @@
-cs.lift((() => {\n                   → cs`{\n    
-const                                → const 
-__cs_label                           → label
- = cs.const(                         →  = 
-(                                    → 
-cs.splice(                           →  [-semantic]
-(state)                              → $state
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)(                                   → (
-"hi"                                 → "hi"
-)                                    → )
-);                                   → ;
-\n                                   → \n\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    
-const                                → const 
-__cs_row                             → row
- = cs.const(                         →  = 
-(                                    → (
-__cs_size                            → size
-:                                    → : 
-number                               → number
-) => {\n                             → ) => {\n      
-const                                → const 
-__cs_css                             → css
- = cs.const(                         →  = 
-"font-size: "                        → "font-size: "
- +                                   →  + 
-__cs_size                            → size
- +                                   →  + 
-"px"                                 → "px"
-);                                   → ;
-\n                                   → \n      
-const                                → const 
-__cs_press                           → press
- = cs.const(                         →  = 
-() =>                                → () => 
-cs.receiver(                         → 
-__cs_label                           → label
-)                                    → 
-.                                    → .
-write                                → write
-(                                    → (
-"held"                               → "held"
-)                                    → )
-);                                   → ;
-\n                                   → \n      
-return cs.const(                     → return 
-<                                    → (\n        <
-div                                  → div
-                                     →  
-style                                → style
-={cs.lift(                           → ={
-__cs_css                             → css
-)}                                   → }
->{cs.lift(                           → >\n          
-<                                    → <
-span                                 → span
-                                     →  
-style                                → style
-={cs.lift(                           → ={
-__cs_css                             → css
-)}                                   → }
-                                     →  
-onclick                              → onclick
-={cs.lift(                           → ={
-() =>                                → () => 
-cs.receiver(                         → 
-__cs_label                           → label
-)                                    → 
-.                                    → .
-write                                → write
-(                                    → (
-"pressed"                            → "pressed"
-)                                    → )
-)}                                   → }
->{cs.lift(                           → >\n            {
-cs.receiver(                         → 
-__cs_label                           → label
-)                                    → 
-.                                    → .
-read                                 → read
-()                                   → ()
-)}</                                 → }\n          </
-span                                 → span
->                                    → >
-)}{cs.lift(                          → \n          
-<                                    → <
-span                                 → span
-                                     →  
-style                                → style
-={cs.lift(                           → =
-"font-size: 8px"                     → "font-size: 8px"
-)}                                   → 
->fixed</                             → >fixed</
-span                                 → span
->                                    → >
-)}{cs.lift(                          → \n          
-<                                    → <
-span                                 → span
-                                     →  
-style                                → style
-={cs.lift(                           → ={
-__cs_css                             → css
-)}                                   → }
-                                     →  
-onclick                              → onclick
-={cs.lift(                           → ={
-__cs_press                           → press
-)}                                   → }
->\n            held\n          </    → >\n            held\n          </
-span                                 → span
->                                    → >
-)}</                                 → \n        </
-div                                  → div
->                                    → >\n      )
-);                                   → ;
-\n    }                              → \n    }
-);                                   → ;
-\n                                   → \n\n    
-return cs.const(                     → return 
-<                                    → <
-div                                  → div
-                                     →  
-style                                → style
-={cs.lift(                           → =
-"padding: 0"                         → "padding: 0"
-)}                                   → 
->{cs.lift(                           → >{
-__cs_row                             → row
-(                                    → (
-12                                   → 12
-)                                    → )
-)}</                                 → }</
-div                                  → div
->                                    → >
-);                                   → ;
-\n})())                              → \n  }`
+cs.lift((() => {\n                        → cs`{\n    
+const                                     → const 
+__cs_label                                → label
+ = cs.const(                              →  = 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(state)                                   → $state
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
+)(                                        → (
+"hi"                                      → "hi"
+)                                         → )
+);                                        → ;
+\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    → \n\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    
+const                                     → const 
+__cs_row                                  → row
+ = cs.const(                              →  = 
+(                                         → (
+__cs_size                                 → size
+:                                         → : 
+number                                    → number
+) => {\n                                  → ) => {\n      
+const                                     → const 
+__cs_css                                  → css
+ = cs.const(                              →  = 
+"font-size: "                             → "font-size: "
+ +                                        →  + 
+__cs_size                                 → size
+ +                                        →  + 
+"px"                                      → "px"
+);                                        → ;
+\n                                        → \n      
+const                                     → const 
+__cs_press                                → press
+ = cs.const(                              →  = 
+() =>                                     → () => 
+cs.receiver(                              → 
+__cs_label                                → label
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+"held"                                    → "held"
+)                                         → )
+);                                        → ;
+\n                                        → \n      
+return cs.const(                          → return 
+<                                         → (\n        <
+div                                       → div
+                                          →  
+style                                     → style
+={cs.lift(                                → ={
+__cs_css                                  → css
+)}                                        → }
+>{cs.lift(                                → >\n          
+<                                         → <
+span                                      → span
+                                          →  
+style                                     → style
+={cs.lift(                                → ={
+__cs_css                                  → css
+)}                                        → }
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+cs.receiver(                              → 
+__cs_label                                → label
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+"pressed"                                 → "pressed"
+)                                         → )
+)}                                        → }
+>{cs.lift(                                → >\n            {
+cs.receiver(                              → 
+__cs_label                                → label
+)                                         → 
+.                                         → .
+read                                      → read
+()                                        → ()
+)}</                                      → }\n          </
+span                                      → span
+>                                         → >
+)}{cs.lift(                               → \n          
+<                                         → <
+span                                      → span
+                                          →  
+style                                     → style
+={cs.lift(                                → =
+"font-size: 8px"                          → "font-size: 8px"
+)}                                        → 
+>fixed</                                  → >fixed</
+span                                      → span
+>                                         → >
+)}{cs.lift(                               → \n          
+<                                         → <
+span                                      → span
+                                          →  
+style                                     → style
+={cs.lift(                                → ={
+__cs_css                                  → css
+)}                                        → }
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+__cs_press                                → press
+)}                                        → }
+>\n            held\n          </         → >\n            held\n          </
+span                                      → span
+>                                         → >
+)}</                                      → \n        </
+div                                       → div
+>                                         → >\n      )
+);                                        → ;
+\n    }                                   → \n    }
+);                                        → ;
+\n                                        → \n\n    
+return cs.const(                          → return 
+<                                         → <
+div                                       → div
+                                          →  
+style                                     → style
+={cs.lift(                                → =
+"padding: 0"                              → "padding: 0"
+)}                                        → 
+>{cs.lift(                                → >{
+__cs_row                                  → row
+(                                         → (
+12                                        → 12
+)                                         → )
+)}</                                      → }</
+div                                       → div
+>                                         → >
+);                                        → ;
+\n})())                                   → \n  }`

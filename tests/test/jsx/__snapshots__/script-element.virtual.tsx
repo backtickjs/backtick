@@ -9,6 +9,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Card() {
   return cs.lift((() => {
     const __cs_label = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("hi"));
+    // A handler written inline and one held under a name: both are client code,
+    // and a handler prop takes a function and nothing else.
     const __cs_row = cs.const((__cs_size: number) => {
         const __cs_css = cs.const("font-size: " + __cs_size + "px");
         const __cs_press = cs.const(() => cs.receiver(__cs_label).write("held"));

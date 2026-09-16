@@ -9,10 +9,16 @@ it("comments", async (t) => {
     t,
     "comments",
     cs.lift((() => {
-    const __cs_count = cs.const(1);
+    // leading line comment
+    const __cs_count = cs.const(1); // trailing line comment
+    /* block comment */
     if (__cs_count === 1) {
+        // branch comment
         return cs.const("one");
     }
+    /**
+     * doc comment
+     */
     return cs.const("many");
 })()),
   );

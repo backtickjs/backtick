@@ -10,6 +10,7 @@ async function Checked() {
     const __cs_positive = cs.const(cs.receiver(Number).EPSILON > 0);
     const __cs_whole = cs.const(cs.receiver(Number).isInteger(2));
     const __cs_fractional = cs.const(cs.receiver(Number).isInteger(2.5));
+    // Unconverted, so a string that reads as a number is still not one.
     const __cs_written = cs.const(cs.receiver(Number).isFinite("2"));
     return cs.const(<span>{cs.lift(__cs_whole + " " + __cs_fractional + " " + __cs_written + " " + __cs_positive)}</span>);
 })());

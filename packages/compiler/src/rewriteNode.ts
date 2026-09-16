@@ -352,8 +352,12 @@ export function rewriteNode(
   node: ts.Node,
 ): RewrittenNode {
   const rewritten = rewriteNodeImpl(ts, state, node);
-  if (rewritten.virtual.pos < 0) {
-    state.mappings.set(rewritten.virtual, node);
+  const { virtual } = rewritten;
+  if (virtual !== node && ts.getCommentRange(virtual) === virtual) {
+    ts.setCommentRange(virtual, node);
+  }
+  if (virtual.pos < 0) {
+    state.mappings.set(virtual, node);
   }
   return rewritten;
 }

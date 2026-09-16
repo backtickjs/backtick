@@ -1,0 +1,13 @@
+cs.lift((() => {\n    // @ts-expect-error: a string is not a number\n    → cs`{\n      // @ts-expect-error: a string is not a number\n      
+const                                     → const 
+__cs_count                                → count
+:                                         → : 
+number                                    → number
+ = cs.const(                              →  = 
+"one"                                     → "one"
+);                                        → ;
+\n                                        → \n      
+return cs.const(                          → return 
+__cs_count                                → count
+);                                        → ;
+\n})())                                   → \n    }`
