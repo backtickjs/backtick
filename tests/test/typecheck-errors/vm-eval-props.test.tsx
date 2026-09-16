@@ -40,12 +40,6 @@ export default cs`{
   // @ts-expect-error: JSX element type 'Empty' does not have any construct or call signatures.
   const called = <Empty count={1} />;
 
-  // Only a bundle: not nothing, and not the text one came as.
-  // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-  const fromNull = $vm.eval(null);
-  // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-  const fromText = $vm.eval(JSON.stringify({}));
-
   return (
     <div>
       {/* Right: what the bundle takes, and a drawing, placed as one. */}
@@ -55,6 +49,15 @@ export default cs`{
       {unknownName}
       {missing}
       {called}
+      {/* Only a bundle: not nothing, and not the text one came as. */}
+      {
+        // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
+        $vm.eval(null)
+      }
+      {
+        // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
+        $vm.eval(JSON.stringify({}))
+      }
     </div>
   );
 }`;

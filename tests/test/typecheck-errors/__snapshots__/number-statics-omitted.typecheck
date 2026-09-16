@@ -1,0 +1,2 @@
+8:34 error TS2339: Property 'MAX_SAFE_INTEGER' does not exist on type 'NumberConstructor'.
+11:37 error TS2550: Property 'isNaN' does not exist on type 'NumberConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.

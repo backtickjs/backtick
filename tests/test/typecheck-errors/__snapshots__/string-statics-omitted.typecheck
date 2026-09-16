@@ -1,0 +1,1 @@
+6:34 error TS2339: Property 'fromCharCode' does not exist on type 'StringConstructor'.

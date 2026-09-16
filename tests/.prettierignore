@@ -4,3 +4,6 @@
 # every snapshot beside it.
 test/fixtures/
 **/__snapshots__/
+
+# Scratch copies the suites write while they run.
+.cache/

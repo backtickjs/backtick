@@ -10,7 +10,7 @@ async function Row({ count }) {
     {
       version: "0.0.0",
       filePath: "typecheck-errors/vm-eval-props.test.tsx",
-      fileHash: "2rbj2uf483so0",
+      fileHash: "vvfnmeuqv3tm",
       splices: { $count: { value: count, params: [] } },
       captures: [],
     },
@@ -49,7 +49,7 @@ async function Nothing() {
     {
       version: "0.0.0",
       filePath: "typecheck-errors/vm-eval-props.test.tsx",
-      fileHash: "2rbj2uf483so0",
+      fileHash: "vvfnmeuqv3tm",
       splices: {},
       captures: [],
     },
@@ -78,7 +78,7 @@ const rows = await bundler.run(
     {
       version: "0.0.0",
       filePath: "typecheck-errors/vm-eval-props.test.tsx",
-      fileHash: "2rbj2uf483so0",
+      fileHash: "vvfnmeuqv3tm",
       splices: {
         $0splice0: {
           value: _jsx(Row, {
@@ -87,9 +87,9 @@ const rows = await bundler.run(
               {
                 version: "0.0.0",
                 filePath: "typecheck-errors/vm-eval-props.test.tsx",
-                fileHash: "2rbj2uf483so0",
+                fileHash: "vvfnmeuqv3tm",
                 splices: {},
-                captures: ["props$2rbj2uf483so0$0"],
+                captures: ["props$vvfnmeuqv3tm$0"],
               },
               () => ({
                 kind: ".",
@@ -98,13 +98,13 @@ const rows = await bundler.run(
                   kind: "id",
                   loc: [22, 54, 22, 59],
                   text: "props",
-                  bindingKey: "props$2rbj2uf483so0$0",
+                  bindingKey: "props$vvfnmeuqv3tm$0",
                 },
                 name: "count",
               }),
             ),
           }),
-          params: ["props$2rbj2uf483so0$0"],
+          params: ["props$vvfnmeuqv3tm$0"],
         },
       },
       captures: [],
@@ -120,7 +120,7 @@ const rows = await bundler.run(
             kind: "id",
             loc: [22, 7, 22, 12],
             text: "props",
-            bindingKey: "props$2rbj2uf483so0$0",
+            bindingKey: "props$vvfnmeuqv3tm$0",
           },
         },
       ],
@@ -134,11 +134,11 @@ const rows = await bundler.run(
 );
 const empty = await bundler.run(_jsx(Nothing, {}));
 export default cs.create(
-  [27, 16, 60, 3],
+  [27, 16, 63, 3],
   {
     version: "0.0.0",
     filePath: "typecheck-errors/vm-eval-props.test.tsx",
-    fileHash: "2rbj2uf483so0",
+    fileHash: "vvfnmeuqv3tm",
     splices: {
       $vm: { value: vm, params: [] },
       $rows: { value: rows, params: [] },
@@ -148,7 +148,7 @@ export default cs.create(
   },
   () => ({
     kind: "{}",
-    loc: [27, 19, 60, 2],
+    loc: [27, 19, 63, 2],
     statements: [
       {
         kind: "const",
@@ -157,7 +157,7 @@ export default cs.create(
           kind: "id",
           loc: [28, 9, 28, 13],
           text: "Rows",
-          bindingKey: "Rows$2rbj2uf483so0$1",
+          bindingKey: "Rows$vvfnmeuqv3tm$1",
         },
         initializer: {
           kind: "()",
@@ -188,7 +188,7 @@ export default cs.create(
           kind: "id",
           loc: [29, 9, 29, 14],
           text: "Empty",
-          bindingKey: "Empty$2rbj2uf483so0$2",
+          bindingKey: "Empty$vvfnmeuqv3tm$2",
         },
         initializer: {
           kind: "()",
@@ -219,7 +219,7 @@ export default cs.create(
           kind: "id",
           loc: [33, 9, 33, 18],
           text: "wrongType",
-          bindingKey: "wrongType$2rbj2uf483so0$3",
+          bindingKey: "wrongType$vvfnmeuqv3tm$3",
         },
         initializer: {
           kind: "jsx",
@@ -228,7 +228,7 @@ export default cs.create(
             kind: "id",
             loc: [33, 22, 33, 26],
             text: "Rows",
-            bindingKey: "Rows$2rbj2uf483so0$1",
+            bindingKey: "Rows$vvfnmeuqv3tm$1",
           },
           attributes: [
             {
@@ -250,7 +250,7 @@ export default cs.create(
           kind: "id",
           loc: [35, 9, 35, 20],
           text: "unknownName",
-          bindingKey: "unknownName$2rbj2uf483so0$4",
+          bindingKey: "unknownName$vvfnmeuqv3tm$4",
         },
         initializer: {
           kind: "jsx",
@@ -259,7 +259,7 @@ export default cs.create(
             kind: "id",
             loc: [35, 24, 35, 28],
             text: "Rows",
-            bindingKey: "Rows$2rbj2uf483so0$1",
+            bindingKey: "Rows$vvfnmeuqv3tm$1",
           },
           attributes: [
             {
@@ -281,7 +281,7 @@ export default cs.create(
           kind: "id",
           loc: [37, 9, 37, 16],
           text: "missing",
-          bindingKey: "missing$2rbj2uf483so0$5",
+          bindingKey: "missing$vvfnmeuqv3tm$5",
         },
         initializer: {
           kind: "jsx",
@@ -290,7 +290,7 @@ export default cs.create(
             kind: "id",
             loc: [37, 20, 37, 24],
             text: "Rows",
-            bindingKey: "Rows$2rbj2uf483so0$1",
+            bindingKey: "Rows$vvfnmeuqv3tm$1",
           },
           attributes: [],
           children: [],
@@ -303,7 +303,7 @@ export default cs.create(
           kind: "id",
           loc: [41, 9, 41, 15],
           text: "called",
-          bindingKey: "called$2rbj2uf483so0$6",
+          bindingKey: "called$vvfnmeuqv3tm$6",
         },
         initializer: {
           kind: "jsx",
@@ -312,7 +312,7 @@ export default cs.create(
             kind: "id",
             loc: [41, 19, 41, 24],
             text: "Empty",
-            bindingKey: "Empty$2rbj2uf483so0$2",
+            bindingKey: "Empty$vvfnmeuqv3tm$2",
           },
           attributes: [
             {
@@ -328,105 +328,33 @@ export default cs.create(
         },
       },
       {
-        kind: "const",
-        loc: [45, 3, 45, 35],
-        name: {
-          kind: "id",
-          loc: [45, 9, 45, 17],
-          text: "fromNull",
-          bindingKey: "fromNull$2rbj2uf483so0$7",
-        },
-        initializer: {
-          kind: "()",
-          loc: [45, 20, 45, 34],
-          expression: {
-            kind: ".",
-            loc: [45, 20, 45, 28],
-            expression: {
-              kind: "splice",
-              loc: [45, 20, 45, 23],
-              key: "$vm",
-            },
-            name: "eval",
-          },
-          arguments: [
-            {
-              kind: "null",
-              loc: [45, 29, 45, 33],
-            },
-          ],
-        },
-      },
-      {
-        kind: "const",
-        loc: [47, 3, 47, 49],
-        name: {
-          kind: "id",
-          loc: [47, 9, 47, 17],
-          text: "fromText",
-          bindingKey: "fromText$2rbj2uf483so0$8",
-        },
-        initializer: {
-          kind: "()",
-          loc: [47, 20, 47, 48],
-          expression: {
-            kind: ".",
-            loc: [47, 20, 47, 28],
-            expression: {
-              kind: "splice",
-              loc: [47, 20, 47, 23],
-              key: "$vm",
-            },
-            name: "eval",
-          },
-          arguments: [
-            {
-              kind: "()",
-              loc: [47, 29, 47, 47],
-              expression: {
-                kind: "bltn",
-                loc: [47, 29, 47, 43],
-                name: "JSON.stringify",
-              },
-              arguments: [
-                {
-                  kind: "obj",
-                  loc: [47, 44, 47, 46],
-                  properties: [],
-                },
-              ],
-            },
-          ],
-        },
-      },
-      {
         kind: "return",
-        loc: [49, 3, 59, 5],
+        loc: [43, 3, 62, 5],
         expression: {
           kind: "jsx",
-          loc: [50, 5, 58, 11],
+          loc: [44, 5, 61, 11],
           type: {
             kind: "string",
-            loc: [50, 6, 50, 9],
+            loc: [44, 6, 44, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
               kind: "jsx",
-              loc: [52, 7, 52, 25],
+              loc: [46, 7, 46, 25],
               type: {
                 kind: "id",
-                loc: [52, 8, 52, 12],
+                loc: [46, 8, 46, 12],
                 text: "Rows",
-                bindingKey: "Rows$2rbj2uf483so0$1",
+                bindingKey: "Rows$vvfnmeuqv3tm$1",
               },
               attributes: [
                 {
                   name: "count",
                   initializer: {
                     kind: "number",
-                    loc: [52, 20, 52, 21],
+                    loc: [46, 20, 46, 21],
                     value: 1,
                   },
                 },
@@ -435,33 +363,85 @@ export default cs.create(
             },
             {
               kind: "id",
-              loc: [53, 8, 53, 13],
+              loc: [47, 8, 47, 13],
               text: "Empty",
-              bindingKey: "Empty$2rbj2uf483so0$2",
+              bindingKey: "Empty$vvfnmeuqv3tm$2",
             },
             {
               kind: "id",
-              loc: [54, 8, 54, 17],
+              loc: [48, 8, 48, 17],
               text: "wrongType",
-              bindingKey: "wrongType$2rbj2uf483so0$3",
+              bindingKey: "wrongType$vvfnmeuqv3tm$3",
             },
             {
               kind: "id",
-              loc: [55, 8, 55, 19],
+              loc: [49, 8, 49, 19],
               text: "unknownName",
-              bindingKey: "unknownName$2rbj2uf483so0$4",
+              bindingKey: "unknownName$vvfnmeuqv3tm$4",
             },
             {
               kind: "id",
-              loc: [56, 8, 56, 15],
+              loc: [50, 8, 50, 15],
               text: "missing",
-              bindingKey: "missing$2rbj2uf483so0$5",
+              bindingKey: "missing$vvfnmeuqv3tm$5",
             },
             {
               kind: "id",
-              loc: [57, 8, 57, 14],
+              loc: [51, 8, 51, 14],
               text: "called",
-              bindingKey: "called$2rbj2uf483so0$6",
+              bindingKey: "called$vvfnmeuqv3tm$6",
+            },
+            {
+              kind: "()",
+              loc: [55, 9, 55, 23],
+              expression: {
+                kind: ".",
+                loc: [55, 9, 55, 17],
+                expression: {
+                  kind: "splice",
+                  loc: [55, 9, 55, 12],
+                  key: "$vm",
+                },
+                name: "eval",
+              },
+              arguments: [
+                {
+                  kind: "null",
+                  loc: [55, 18, 55, 22],
+                },
+              ],
+            },
+            {
+              kind: "()",
+              loc: [59, 9, 59, 37],
+              expression: {
+                kind: ".",
+                loc: [59, 9, 59, 17],
+                expression: {
+                  kind: "splice",
+                  loc: [59, 9, 59, 12],
+                  key: "$vm",
+                },
+                name: "eval",
+              },
+              arguments: [
+                {
+                  kind: "()",
+                  loc: [59, 18, 59, 36],
+                  expression: {
+                    kind: "bltn",
+                    loc: [59, 18, 59, 32],
+                    name: "JSON.stringify",
+                  },
+                  arguments: [
+                    {
+                      kind: "obj",
+                      loc: [59, 33, 59, 35],
+                      properties: [],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

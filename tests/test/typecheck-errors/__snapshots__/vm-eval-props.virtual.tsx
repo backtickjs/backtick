@@ -39,10 +39,9 @@ export default cs.lift((() => {
     // A drawing is finished: there is no call for props to reach.
     // @ts-expect-error: JSX element type 'Empty' does not have any construct or call signatures.
     const __cs_called = cs.const(<__cs_Empty count={1}/>);
-    // Only a bundle: not nothing, and not the text one came as.
+    return cs.const(<div>{cs.lift(<__cs_Rows count={1}/>)}{cs.lift(__cs_Empty)}{cs.lift(__cs_wrongType)}{cs.lift(__cs_unknownName)}{cs.lift(__cs_missing)}{cs.lift(__cs_called)}{cs.lift(
     // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-    const __cs_fromNull = cs.const(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(null));
+    cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(null))}{cs.lift(
     // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-    const __cs_fromText = cs.const(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.receiver(JSON).stringify({})));
-    return cs.const(<div>{cs.lift(<__cs_Rows count={1}/>)}{cs.lift(__cs_Empty)}{cs.lift(__cs_wrongType)}{cs.lift(__cs_unknownName)}{cs.lift(__cs_missing)}{cs.lift(__cs_called)}</div>);
+    cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.receiver(JSON).stringify({})))}</div>);
 })());

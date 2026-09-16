@@ -125,43 +125,6 @@ count                                     → count
 }                                         → }
 />                                        →  />
 );                                        → ;
-\n    // Only a bundle: not nothing, and not the text one came as.\n    // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n    → \n\n  // Only a bundle: not nothing, and not the text one came as.\n  // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n  
-const                                     → const 
-__cs_fromNull                             → fromNull
- = cs.const(                              →  = 
-cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
-(vm)                                      → $vm
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)                                         → 
-.                                         → .
-eval                                      → eval
-(                                         → (
-null                                      → null
-)                                         → )
-);                                        → ;
-\n    // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n    → \n  // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n  
-const                                     → const 
-__cs_fromText                             → fromText
- = cs.const(                              →  = 
-cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
-(vm)                                      → $vm
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)                                         → 
-.                                         → .
-eval                                      → eval
-(                                         → (
-cs.receiver(                              → 
-JSON                                      → JSON
-)                                         → 
-.                                         → .
-stringify                                 → stringify
-(                                         → (
-{}                                        → {}
-)                                         → )
-)                                         → )
-);                                        → ;
 \n                                        → \n\n  
 return cs.const(                          → return 
 <                                         → (\n    <
@@ -185,7 +148,36 @@ __cs_unknownName                          → unknownName
 __cs_missing                              → missing
 )}{cs.lift(                               → }\n      {
 __cs_called                               → called
-)}</                                      → }\n    </
+)}{cs.lift(\n    // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n    → }\n      {/* Only a bundle: not nothing, and not the text one came as. */}\n      {\n        // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n        
+cs.receiver(                              → 
+cs.splice(                                →  [-semantic]
+(vm)                                      → $vm
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
+)                                         → 
+.                                         → .
+eval                                      → eval
+(                                         → (
+null                                      → null
+)                                         → )
+)}{cs.lift(\n    // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n    → \n      }\n      {\n        // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n        
+cs.receiver(                              → 
+cs.splice(                                →  [-semantic]
+(vm)                                      → $vm
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
+)                                         → 
+.                                         → .
+eval                                      → eval
+(                                         → (
+cs.receiver(                              → 
+JSON                                      → JSON
+)                                         → 
+.                                         → .
+stringify                                 → stringify
+(                                         → (
+{}                                        → {}
+)                                         → )
+)                                         → )
+)}</                                      → \n      }\n    </
 div                                       → div
 >                                         → >\n  )
 );                                        → ;
