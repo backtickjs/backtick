@@ -1,4 +1,4 @@
-import type { ClientUnknown, ClientValue } from "@backtickjs/core";
+import type { ClientUnknown } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/language";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
@@ -13,13 +13,13 @@ import { compile, scopeOf } from "./compile.js";
  * a mount lasts as long as whoever asked for it, and there is no unmounting
  * this to be the other half of.
  */
-export function evaluate<NodeType extends object>(
-  bundle: Bundle<ClientUnknown>,
+export function evaluate<T extends ClientUnknown, NodeType extends object>(
+  bundle: Bundle<T>,
   options: ClientOptions<NodeType>,
-): ClientValue {
+): T {
   const renderer = createRenderer(options.renderer);
   return createRoot(() => {
     const instance = { ...options, renderer, bundle, functions: new Map() };
-    return compile(instance, bundle.root)(scopeOf(null));
+    return compile(instance, bundle.root)(scopeOf(null)) as T;
   });
 }
