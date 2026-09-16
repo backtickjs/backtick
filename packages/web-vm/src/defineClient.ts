@@ -36,18 +36,13 @@ export interface ClientOptions<NodeType extends object> {
 }
 
 /**
- * The client, registered.
+ * Draws every bundle a page carries, where its script stands.
  *
- * An element, so the browser reports each drawing and upgrades the ones already
- * there — a page can ask for the file holding this from anywhere.
- *
- * Defined unguarded: two clients on one page is a mistake, and the registry
- * throwing is how anyone finds out.
- *
- * Every bundle on the page is drawn with `options`: the DOM's renderer and the
- * page's window for the web's own client, and a target's `compileBuiltin`
- * beside them. A tag a target adds is one it registers with the browser, which
- * the document then builds itself.
+ * A window is all a page hands over: its document is what is drawn into, and a
+ * script reaches the window itself through `$window`. `compileBuiltin` answers
+ * for what an app adds to the web's own names, asked after them, so an app may
+ * add and may not replace. A tag an app adds is one it registers with the
+ * browser, which the document then builds itself.
  */
 export function defineClient({
   window,
