@@ -1,0 +1,51 @@
+cs.lift((() => {\n      → cs`{\n      
+let                     → let 
+__cs_i                  → i
+ =                      →  = 
+0                       → 0
+;                       → ;
+\n                      → \n      
+let                     → let 
+__cs_total              → total
+ =                      →  = 
+0                       → 0
+;                       → ;
+\n                      → \n      
+while (                 → while (
+__cs_i                  → i
+ <                      →  < 
+5                       → 5
+)                       → ) 
+{\n                     → {\n        
+__cs_total              → total
+ = cs.const(            →  = 
+__cs_total              → total
+ +                      →  + 
+__cs_i                  → i
+)                       → 
+;                       → ;
+\n                      → \n        
+if (                    → if (
+__cs_i                  → i
+ ===                    →  === 
+3                       → 3
+)                       → ) 
+{\n                     → {\n          
+return cs.const(        → return 
+__cs_total              → total
+);                      → ;
+\n        }             → \n        }
+\n                      → \n        
+__cs_i                  → i
+ = cs.const(            →  = 
+__cs_i                  → i
+ +                      →  + 
+1                       → 1
+)                       → 
+;                       → ;
+\n    }                 → \n      }
+\n                      → \n      
+return cs.const(        → return 
+__cs_total              → total
+);                      → ;
+\n})())                 → \n    }`

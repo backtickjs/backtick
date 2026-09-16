@@ -1,0 +1,47 @@
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_currency                        → currency
+:                                    → : 
+string                               → string
+) => {\n                             → ) => {\n      
+const                                → const 
+__cs_table                           → table
+ = cs.const(                         →  = 
+cs.splice(                           →  [-semantic]
+(rates)                              → $rates
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+);                                   → ;
+\n                                   → \n      
+const                                → const 
+__cs_asked                           → asked
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+__cs_table                           → table
+)                                    → 
+[                                    → [
+__cs_currency                        → currency
+]                                    → ]
+ ??                                  →  ?? 
+0                                    → 0
+);                                   → ;
+\n                                   → \n      
+const                                → const 
+__cs_usd                             → usd
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+__cs_table                           → table
+)                                    → 
+[                                    → [
+"usd"                                → "usd"
+]                                    → ]
+ ??                                  →  ?? 
+0                                    → 0
+);                                   → ;
+\n                                   → \n      
+return cs.const(                     → return 
+__cs_asked                           → asked
+ +                                   →  + 
+__cs_usd                             → usd
+);                                   → ;
+\n}                                  → \n    }
+))                                   → `

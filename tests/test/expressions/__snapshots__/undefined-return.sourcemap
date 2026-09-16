@@ -1,0 +1,27 @@
+cs.lift(cs.const(                    → cs`
+() =>                                → () => 
+"hi"                                 → "hi"
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n      
+const                                → const 
+__cs_stored                          → stored
+ = cs.const(                         →  = 
+cs.splice(                           →  [-semantic]
+(lying)                              → $lying
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+);                                   → ;
+\n                                   → \n      
+const                                → const 
+__cs_caught                          → caught
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(lying)                              → $lying
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)()                                  → ()
+);                                   → ;
+\n                                   → \n      
+return cs.const(                     → return 
+1                                    → 1
+);                                   → ;
+\n})())                              → \n    }`

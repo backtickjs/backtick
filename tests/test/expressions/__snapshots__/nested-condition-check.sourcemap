@@ -1,0 +1,75 @@
+cs.lift(cs.const(                    → cs`
+(                                    → (\n  
+__cs_a                               → a
+:                                    → : 
+boolean                              → boolean
+,                                    → ,\n  
+__cs_b                               → b
+:                                    → : 
+boolean                              → boolean
+) => {\n                             → ,\n) => {\n  
+const                                → const 
+__cs_keep                            → keep
+ = cs.const(                         →  = 
+(                                    → (
+__cs_on                              → on
+:                                    → : 
+boolean                              → boolean
+) =>                                 → ) => 
+__cs_on                              → on
+);                                   → ;
+\n                                   → \n  
+if ((cs.condition(                   → if (
+__cs_keep                            → keep
+(                                    → (
+(cs.condition(                       → 
+__cs_a                               → a
+) &&                                 → 
+__cs_a                               → a [-semantic -completion -navigation -verification]
+) && (cs.condition(                  →  && 
+__cs_b                               → b
+) &&                                 → 
+__cs_b                               → b [-semantic -completion -navigation -verification]
+)                                    → 
+)                                    → )
+) &&                                 → 
+__cs_keep(__cs_a && __cs_b)          → keep(a && b) [-semantic -completion -navigation -verification]
+))                                   → ) 
+{\n                                  → {\n    
+return cs.const(                     → return 
+"kept"                               → "kept"
+);                                   → ;
+\n    }                              → \n  }
+\n                                   → \n  
+return cs.const(                     → return 
+"dropped"                            → "dropped"
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+{                                    → ({\n      
+both                                 → both
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(gate)                               → $gate
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+true                                 → true
+,                                    → , 
+true                                 → true
+)                                    → )
+,                                    → ,\n      
+one                                  → one
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(gate)                               → $gate
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+true                                 → true
+,                                    → , 
+false                                → false
+)                                    → )
+ }                                   → ,\n    })
+))                                   → `

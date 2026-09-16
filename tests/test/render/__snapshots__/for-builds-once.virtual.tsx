@@ -1,0 +1,60 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { cs, For, state } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/core";
+import { window } from "@backtickjs/web-sdk";
+import { render, screen } from "@backtickjs/web-testing";
+import { snapshotCase } from "../snapshotCase.ts";
+import { settled } from "./dom.ts";
+
+// The same claim as `vmEvalBuildsOnce`, with no bundle in it.
+//
+// A component is built once, however what it drew changes afterwards. `<For />`
+// answers with a way of asking, the way a drawn bundle does, so if the fault
+// were the drawn bundle's this would be untouched — and it is not.
+//
+// `asked` is the page's, so it survives a rebuild and counts them, and it ends
+// one: once it stops saying yes, nothing is written and nothing runs again.
+const answerItems = ["one", "two"];
+
+async function WaitingList({ more }: { more: Prop<() => boolean> }) {
+  return cs.lift((() => {
+    const __cs_items = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>([]));
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
+        if ((cs.condition((cs.splice((more)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((more)) satisfies typeof cs.ClientUnknown)())) {
+            cs.statement(cs.receiver(__cs_items).write(cs.splice((answerItems)) satisfies typeof cs.ClientUnknown));
+        }
+    }, 0));
+    return cs.const(<For each={cs.lift(cs.receiver(__cs_items).read())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>);
+})());
+}
+
+const forBuildsOnce = cs.lift((() => {
+    const __cs_asked = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
+    return cs.const(<div>{cs.lift(<span>{cs.lift("asked " + cs.receiver(__cs_asked).read())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
+        cs.statement(cs.receiver(__cs_asked).write(cs.receiver(__cs_asked).read() + 1));
+        return cs.const(cs.receiver(__cs_asked).read() < 5);
+    })}/>)}</div>);
+})());
+
+it("forBuildsOnce", async (t) => {
+  await snapshotCase(t, "forBuildsOnce", forBuildsOnce);
+});
+
+describe("a component that draws a list", () => {
+  // The same claim with no bundle in it: `<For />` answers with a way of asking
+  // too, so a fault in what draws a bundle would leave this alone.
+  it("is built once, and draws what arrives", async () => {
+    const { container } = await render(forBuildsOnce);
+
+    assert.ok(screen.getByText("asked 0"));
+
+    await settled();
+
+    assert.equal(container.querySelectorAll("em").length, 2);
+    assert.ok(
+      screen.queryByText("asked 1"),
+      "the component was built again for what it drew",
+    );
+  });
+});

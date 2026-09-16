@@ -1,6 +1,6 @@
 import assert from "node:assert";
-import { readdirSync, readFileSync } from "node:fs";
-import { extname, join } from "node:path";
+import { mkdirSync, readdirSync, readFileSync } from "node:fs";
+import { basename, dirname, extname, join } from "node:path";
 import { describe, it } from "node:test";
 import { virtualize } from "@backtickjs/compiler";
 import ts from "typescript";
@@ -98,4 +98,58 @@ describe("compile", () => {
       });
     }
   });
+});
+
+// Every `.test.tsx`, compiled whole under the name `tsxHooks.ts` gives it, so
+// what is recorded is the module the test runs as. Recorded per file, next to
+// it: `__snapshots__/<file>.<artifact>`. The file's hash and positions stay in,
+// which is why test files are kept small — an edit rewrites only its own.
+const testsRoot = import.meta.dirname;
+const testFiles = readdirSync(testsRoot, { recursive: true, encoding: "utf8" })
+  .filter(
+    (file) =>
+      file.endsWith(".test.tsx") &&
+      !file.startsWith("fixtures") &&
+      !file.startsWith("node_modules") &&
+      !file.includes("__snapshots__"),
+  )
+  .sort();
+
+// Written as given: each artifact is text meant to be read in its own file.
+const verbatim = [(value: unknown) => value as string];
+
+describe("compile the .tsx tests", () => {
+  for (const fileName of testFiles) {
+    it(fileName, async (t) => {
+      const sourceText = readFileSync(join(testsRoot, fileName), "utf8");
+      const { virtualCode, mappings, diagnostics } = virtualize(
+        ts,
+        fileName,
+        sourceText,
+      );
+      assert.ok(
+        !diagnostics.some(
+          (diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error,
+        ),
+        renderDiagnostics(fileName, sourceText, diagnostics),
+      );
+      const base = join(
+        testsRoot,
+        dirname(fileName),
+        "__snapshots__",
+        basename(fileName, ".test.tsx"),
+      );
+      mkdirSync(dirname(base), { recursive: true });
+      const record = (text: string, artifact: string) =>
+        t.assert.fileSnapshot(text, `${base}.${artifact}`, {
+          serializers: verbatim,
+        });
+      record(virtualCode, "virtual.tsx");
+      record(
+        renderMappings(fileName, virtualCode, sourceText, mappings),
+        "sourcemap",
+      );
+      record(await transpileFixture(fileName, sourceText), "js");
+    });
+  }
 });

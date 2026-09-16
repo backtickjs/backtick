@@ -1,0 +1,44 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { cs, state } from "@backtickjs/core";
+import { userEvent } from "@testing-library/user-event";
+import { snapshotCase } from "../snapshotCase.ts";
+import { children, drawn, fontSize } from "./dom.ts";
+
+// State belongs to the script that declares it, and a script entry is applied
+// once per place that reaches it — so two `<OwnCounter />` tags are two
+// applications of one entry, and each declares a cell of its own.
+async function OwnCounter() {
+  return cs.lift((() => {
+    const __cs_size = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(16));
+    return cs.const(<span style={cs.lift("font-size: " + cs.receiver(__cs_size).read() + "px")} onclick={cs.lift(() => {
+        cs.statement(cs.receiver(__cs_size).write(cs.receiver(__cs_size).read() + 1));
+    })}>
+        press
+      </span>);
+})());
+}
+
+const instances = (
+  <div>
+    <OwnCounter />
+    <OwnCounter />
+  </div>
+);
+
+describe("local state", () => {
+  it("two invocations of one component hold independent cells", async () => {
+    const view = await drawn(instances);
+    const [first, second] = children(view);
+    assert.ok(first !== undefined && second !== undefined);
+    assert.equal(fontSize(first), 16);
+    assert.equal(fontSize(second), 16);
+    await userEvent.click(first);
+    assert.equal(fontSize(first), 17);
+    assert.equal(fontSize(second), 16);
+  });
+});
+
+it("instances", async (t) => {
+  await snapshotCase(t, "instances", instances);
+});

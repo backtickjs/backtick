@@ -1,0 +1,29 @@
+import { it } from "node:test";
+import { cs } from "@backtickjs/core";
+import { snapshotCase } from "../snapshotCase.ts";
+
+// The members ES2015 added that this language answers for: a search that
+// finds nothing reads as `undefined`, as a read past the end does, and
+// everything else is what the standard library says it is.
+it("stdlibEs2015", async (t) => {
+  await snapshotCase(
+    t,
+    "stdlibEs2015",
+    cs`{
+      const xs = [3, 8, 12, 5];
+      const word = "backtick";
+      return {
+        found: xs.find((x) => x > 7),
+        missing: xs.find((x) => x > 100) === undefined,
+        at: xs.findIndex((x) => x > 7),
+        nowhere: xs.findIndex((x) => x > 100),
+        includes: word.includes("tick"),
+        startsWith: word.startsWith("back"),
+        endsWith: word.endsWith("tick", 4),
+        repeated: "ab".repeat(3),
+        codePoint: "\u{1F600}".codePointAt(0),
+        keys: Object.keys({ a: 1, b: 2 }),
+      };
+    }`,
+  );
+});

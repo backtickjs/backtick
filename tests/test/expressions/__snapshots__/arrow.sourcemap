@@ -1,0 +1,24 @@
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_base               → base
+ = cs.const(            →  = 
+10                      → 10
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+(                       → (
+__cs_one                → one
+:                       → : 
+number                  → number
+,                       → , 
+__cs_two                → two
+:                       → : 
+number                  → number
+) =>                    → ) => 
+__cs_one                → one
+ +                      →  + 
+__cs_two                → two
+ +                      →  + 
+__cs_base               → base
+);                      → ;
+\n})())                 → \n    }`

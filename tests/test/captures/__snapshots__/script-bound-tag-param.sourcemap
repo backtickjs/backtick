@@ -1,0 +1,81 @@
+cs.lift((() => {\n                   → cs`{\n      
+const                                → const 
+__cs_twice                           → twice
+ = cs.const(                         →  = 
+(                                    → (
+__cs_Row                             → Row
+:                                    → : 
+(                                    → (
+p                                    → p
+:                                    → : 
+{\n                                  → { 
+n                                    → n
+:                                    → : 
+number                               → number
+;                                    → 
+\n    }                              →  }
+) =>                                 → ) => 
+BacktickElement                      → BacktickElement
+) =>                                 → ) => 
+<                                    → (\n        <
+ul                                   → ul
+>{cs.lift(                           → >\n          {
+cs.splice(                           → ${ [-semantic]
+cs.lift(cs.const(                    → cs`
+<                                    → <
+__cs_Row                             → Row
+                                     →  
+n                                    → n
+={                                   → ={
+1                                    → 1
+}                                    → }
+/>                                   →  />
+))                                   → `
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)}{cs.lift(                          → }\n          {
+cs.splice(                           → ${ [-semantic]
+cs.lift(cs.const(                    → cs`
+<                                    → <
+__cs_Row                             → Row
+                                     →  
+n                                    → n
+={                                   → ={
+2                                    → 2
+}                                    → }
+/>                                   →  />
+))                                   → `
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)}</                                 → }\n        </
+ul                                   → ul
+>                                    → >\n      )
+);                                   → ;
+\n                                   → \n      
+return cs.const(                     → return 
+__cs_twice                           → twice
+(                                    → (
+(                                    → (
+__cs_p                               → p
+:                                    → : 
+{\n                                  → { 
+n                                    → n
+:                                    → : 
+number                               → number
+;                                    → 
+\n    }                              →  }
+) =>                                 → ) => 
+<                                    → <
+li                                   → li
+>{cs.lift(                           → >{
+"row "                               → "row "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_p                               → p
+)                                    → 
+.                                    → .
+n                                    → n
+)}</                                 → }</
+li                                   → li
+>                                    → >
+)                                    → )
+);                                   → ;
+\n})())                              → \n    }`

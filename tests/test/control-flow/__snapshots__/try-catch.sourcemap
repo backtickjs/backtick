@@ -1,0 +1,33 @@
+cs.lift((() => {\n       → cs`{\n      
+const                    → const 
+__cs_message             → message
+ = cs.const(             →  = 
+"boom"                   → "boom"
+);                       → ;
+\n                       → \n      
+try                      → try 
+{\n                      → {\n        
+throw                    → throw 
+__cs_message             → message
+;                        → ;
+\n    }                  → \n      }
+\n    catch (            →  catch (
+__cs_error               → error
+)                        → ) 
+{\n                      → {\n        
+if (                     → if (
+__cs_error               → error
+ ===                     →  === 
+__cs_message             → message
+)                        → ) 
+{\n                      → {\n          
+return cs.const(         → return 
+"caught boom"            → "caught boom"
+);                       → ;
+\n        }              → \n        }
+\n                       → \n        
+return cs.const(         → return 
+"caught something else"  → "caught something else"
+);                       → ;
+\n    }                  → \n      }
+\n})())                  → \n    }`

@@ -12,6 +12,9 @@
     "test/**/*.virtual.tsx"
   ],
   "exclude": [
+    // What the `.tsx` tests compile to, recorded whole: its relative imports
+    // point at files beside the test, not beside the snapshot.
+    "test/**/__snapshots__/**",
     "test/fixtures/valid/*.ts",
     "test/fixtures/compile-error/*.ts",
     "test/fixtures/bundle-error/*.ts",

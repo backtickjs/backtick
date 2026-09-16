@@ -1,0 +1,14 @@
+cs.lift(cs.const(  → cs`
+<                  → <
+Greeting           → Greeting
+                   →  
+person             → person
+={cs.lift(         → ={
+{                  → { 
+firstName          → firstName
+:                  → : 
+"ada"              → "ada"
+ }                 →  }
+)}                 → }
+/>                 →  />
+))                 → `

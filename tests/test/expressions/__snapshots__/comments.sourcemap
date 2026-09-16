@@ -1,0 +1,22 @@
+cs.lift((() => {\n      → cs`{\n      // leading line comment\n      
+const                   → const 
+__cs_count              → count
+ = cs.const(            →  = 
+1                       → 1
+);                      → ;
+\n                      →  // trailing line comment\n      /* block comment */\n      
+if (                    → if (
+__cs_count              → count
+ ===                    →  === 
+1                       → 1
+)                       → ) 
+{\n                     → {\n        // branch comment\n        
+return cs.const(        → return 
+"one"                   → "one"
+);                      → ;
+\n    }                 → \n      }
+\n                      → \n      /**\n       * doc comment\n       */\n      
+return cs.const(        → return 
+"many"                  → "many"
+);                      → ;
+\n})())                 → \n    }`
