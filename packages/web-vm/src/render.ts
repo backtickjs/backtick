@@ -5,10 +5,6 @@ import { createRenderer } from "solid-js/universal";
 import type { ClientOptions } from "./defineClient.js";
 import { compile, scopeOf } from "./compile.js";
 
-// Running a bundle under a root of its own, drawing through a renderer made
-// from the target's operations. `$vm` runs one under its caller's instead: see
-// `compileBuiltin`. What an element becomes is `compileElement.ts`'s.
-
 /**
  * Renders a bundle into one of the host's nodes, and keeps it there: a write to
  * a state cell re-runs the props and the lists that read it, and the target
@@ -32,8 +28,12 @@ export function render<NodeType extends object>(
 ): () => void {
   const renderer = createRenderer(options.renderer);
   return createRoot((dispose) => {
-    // A new instance: the labels are per bundle, so its `functions` are too.
-    const instance = { ...options, renderer, bundle, functions: new Map() };
+    const instance = {
+      renderer,
+      bundle,
+      window: options.window,
+      functions: new Map(),
+    };
     renderer.insert(
       parent,
       compile(instance, bundle.root)(scopeOf(null)),

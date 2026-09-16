@@ -20,6 +20,8 @@ import { window } from "./window.js";
 
 export { isTestNode, isText, recordingHost, testRenderer } from "./host.js";
 export type { TestNode, Write } from "./host.js";
+export { renderDocument } from "./renderDocument.js";
+export type { DocumentOptions, Drawn } from "./renderDocument.js";
 
 /** What a test changes about the VM a bundle runs in. */
 export interface TestOptions {
