@@ -14,7 +14,7 @@
  */
 import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
 import { createInterpreter } from "@backtickjs/web-interpreter";
-import { page, window } from "./window.js";
+import { window } from "./window.js";
 
 export { isNode, isText, listenersOf } from "./node.js";
 export { render, screen } from "./render.js";
@@ -43,8 +43,5 @@ export function evaluate<Value extends ClientUnknown>(
   bundle: Bundle<Value>,
   { builtinOf }: TestOptions = {},
 ): Value {
-  return createInterpreter(page.document as unknown as Document, {
-    window,
-    builtinOf,
-  }).eval(bundle);
+  return createInterpreter({ window, builtinOf }).eval(bundle);
 }

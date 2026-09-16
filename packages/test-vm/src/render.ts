@@ -63,7 +63,7 @@ export async function render(
   if (html !== undefined) {
     document.body.innerHTML = html;
   }
-  const interpreter = createInterpreter(document, {
+  const interpreter = createInterpreter({
     window: windowOf(page),
     builtinOf,
   });

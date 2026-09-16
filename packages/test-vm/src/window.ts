@@ -30,9 +30,11 @@ export function windowOf(page: Page): ScriptWindow {
     }
   };
 
-  // Written out rather than the page's window handed over, the way the web VM
-  // writes out a page's: what a script reaches is these names and no more.
+  // Written out rather than the page's window handed over, so its timers can
+  // answer as a browser's do. The document is the one the interpreter draws
+  // into; a script never reaches it, since the client writes out its own list.
   return {
+    document: page.document,
     performance: page.performance,
     console: page.console,
     location: page.location,
@@ -63,7 +65,7 @@ export function windowOf(page: Page): ScriptWindow {
 // page is enough where nothing is ever inserted into it.
 //
 // A page rather than a bare window, so a test that waits has a clock.
-export const page = new Page();
+const page = new Page();
 
 // What a script evaluated against that page reaches through `$window`.
 export const window = windowOf(page);

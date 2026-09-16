@@ -13,7 +13,7 @@ import type { InterpreterOptions } from "@backtickjs/web-interpreter";
 export function defineClient(options: InterpreterOptions): void {
   // A window carries the document it is of, so a page hands over one thing.
   const document = options.window.document;
-  const { render } = createInterpreter(document, options);
+  const { render } = createInterpreter(options);
 
   // Every bundle the document carried, drawn where its script stands.
   //
@@ -22,15 +22,15 @@ export function defineClient(options: InterpreterOptions): void {
   // `script-src`, and a bundle is data. So the client does the finding, and a
   // page carrying one carries no code.
   const drawEach = (): void => {
-    for (const data of document.querySelectorAll("script[data-backtick]")) {
-      const parent = data.parentNode;
+    for (const script of document.querySelectorAll("script[data-backtick]")) {
+      const parent = script.parentNode;
       if (parent === null) {
         continue;
       }
       // In front of the script, which stays: a drawing goes on inserting after
       // it is first made and needs something that holds still to insert in
       // front of. The script is that, and shows nothing.
-      render(JSON.parse(data.textContent), parent, data);
+      render(JSON.parse(script.textContent), parent, script);
     }
   };
 

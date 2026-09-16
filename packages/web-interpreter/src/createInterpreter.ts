@@ -6,18 +6,16 @@ import { rendererOptions } from "./rendererOptions.js";
 import { compile, scopeOf } from "./compile.js";
 
 /**
- * The names a script may reach: the window it reaches them through, and what a
- * target answers for beyond the names the language provides itself.
- *
- * Beside the renderer rather than holding it, because the two are answered by
- * different things — how a target draws, and what it lets a script say — and a
- * bundle drawn through a second renderer still says the same names.
+ * What an interpreter is wired to: the window whose document it draws into and
+ * whose names a script reaches, and what a page answers for beyond the names
+ * the language provides itself.
  */
 export interface InterpreterOptions {
   /**
-   * The page's window, which the client reads from to answer `window`. Never
-   * handed to a script itself: what a script reaches is the list the client
-   * writes out, read through to this.
+   * The page's window. Its document is what every bundle is drawn with, and
+   * the client reads from it to answer `window`. Never handed to a script
+   * itself: what a script reaches is the list the client writes out, read
+   * through to this.
    */
   readonly window: typeof window;
 
@@ -68,8 +66,8 @@ export interface Interpreter<NodeType extends object> {
 }
 
 /**
- * The interpreter, wired to a document: it draws with that document's nodes,
- * and a script reaches the names `options` hands over.
+ * The interpreter, wired to a window: it draws with its document's nodes, and a
+ * script reaches the names `options` hands over.
  *
  * A document and nothing else, because a drawing is a DOM wherever one runs —
  * a page's, or one a test made. A target of its own would be a second set of
@@ -81,10 +79,9 @@ export interface Interpreter<NodeType extends object> {
  * drawing, so every bundle a document draws is drawn through the same one.
  */
 export function createInterpreter(
-  document: Document,
   options: InterpreterOptions,
 ): Interpreter<Node> {
-  const renderer = createRenderer(rendererOptions(document));
+  const renderer = createRenderer(rendererOptions(options.window.document));
 
   // One per mount: what a bundle compiled to is a closure over this, so two
   // drawings of the same bundle share nothing but the renderer.

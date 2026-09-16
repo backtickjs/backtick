@@ -2,8 +2,8 @@
  * The browser machine: the interpreter that runs a bundle, the renderer that
  * draws one into a document, and the names a script may call.
  *
- * Wired to a document with `createInterpreter`, which takes it and the names a
- * script reaches through it. A document is the only target: what a page draws
+ * Wired to a window with `createInterpreter`: its document is drawn into, and
+ * its names are what a script reaches. A document is the only target: what a page draws
  * into and what a test draws into are one implementation, so a behaviour a test
  * relies on is a behaviour a browser has. `@backtickjs/test-vm` drives it with
  * a document of its own.
