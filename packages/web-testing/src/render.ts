@@ -1,4 +1,4 @@
-import type { Spliceable } from "@backtickjs/core";
+import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
 import { createInterpreter } from "@backtickjs/web-interpreter";
 import { getQueriesForElement, prettyDOM } from "@testing-library/dom";
@@ -49,7 +49,7 @@ export type RenderResult<
     options?: PrettyDOMOptions,
   ): void;
   /** Draws another value in place of this one, in the same container. */
-  rerender(value: Spliceable): Promise<void>;
+  rerender(value: Spliceable<BacktickElement>): Promise<void>;
   /** Takes this drawing down, leaving the container. */
   unmount(): void;
   /** What the container holds now, as a fragment. */
@@ -68,7 +68,7 @@ export async function render<
   Container extends Element = HTMLElement,
   BaseElement extends Element = Container,
 >(
-  value: Spliceable,
+  value: Spliceable<BacktickElement>,
   options: RenderOptions<Q, Container, BaseElement> = {},
 ): Promise<RenderResult<Q, Container, BaseElement>> {
   const baseElement = (options.baseElement ??
@@ -89,7 +89,7 @@ export async function render<
   };
   takeDown();
 
-  const draw = async (value: Spliceable): Promise<void> => {
+  const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
     const bundle = await bundler.run(value);
     takeDown();
     const dispose = interpreter.render(bundle, container);

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { render } from "@backtickjs/web-testing";
 import { createSourceLoader } from "./importFixture.ts";
+import type { BacktickElement } from "@backtickjs/core";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
@@ -11,7 +12,9 @@ const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
 
 async function drawn(source: string): Promise<Element> {
-  const { container } = await render(await importSource(source));
+  const { container } = await render(
+    await importSource<BacktickElement>(source),
+  );
   return container.firstElementChild!;
 }
 

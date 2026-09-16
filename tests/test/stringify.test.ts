@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { render, screen } from "@backtickjs/web-testing";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
+import type { BacktickElement } from "@backtickjs/core";
 
 // A bundle written into a page's `<script>`, which must not end it early.
 const validDir = join(fixturesRoot, "valid");
@@ -28,7 +29,9 @@ describe("bundler.stringify", () => {
   });
 
   it("draws the text as written", async () => {
-    await render(await importFixture(validDir, "script-close-text.tsx"));
+    await render(
+      await importFixture<BacktickElement>(validDir, "script-close-text.tsx"),
+    );
     assert.ok(screen.getByText(text));
   });
 });

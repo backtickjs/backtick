@@ -16,10 +16,16 @@ export const fixturesRoot = join(import.meta.dirname, "fixtures");
 // its `node_modules`.
 export function createFixtureLoader(
   suite: string,
-): (dir: string, file: string) => Promise<Spliceable> {
+): <T extends Spliceable = Spliceable>(
+  dir: string,
+  file: string,
+) => Promise<T> {
   const cacheDir = join(import.meta.dirname, "../.cache", suite);
   rmSync(cacheDir, { recursive: true, force: true });
-  return async function importFixture(dir, file) {
+  return async function importFixture<T extends Spliceable = Spliceable>(
+    dir: string,
+    file: string,
+  ): Promise<T> {
     const sourceText = readFileSync(join(dir, file), "utf8");
     const outputText = await transpileFixture(file, sourceText);
     const base = file.slice(0, -extname(file).length);
@@ -27,11 +33,11 @@ export function createFixtureLoader(
     mkdirSync(join(cacheDir, basename(dir)), { recursive: true });
     writeFileSync(compiled, outputText);
     // A fixture's default export is whatever it bundles — a `cs` script, an
-    // action, or a JSX tree. `Spliceable` is all three, so nothing here has to
-    // claim one of them and be wrong about the others.
+    // action, or a JSX tree. `Spliceable` is all three; a caller that knows
+    // which it loaded says so.
     const { default: script } = (await import(
       pathToFileURL(compiled).href
-    )) as { default: Spliceable };
+    )) as { default: T };
     return script;
   };
 }
@@ -41,19 +47,21 @@ export function createFixtureLoader(
 // Not typechecked, so it can say what a fixture's types would not let it.
 export function createSourceLoader(
   suite: string,
-): (sourceText: string) => Promise<Spliceable> {
+): <T extends Spliceable = Spliceable>(sourceText: string) => Promise<T> {
   const cacheDir = join(import.meta.dirname, "../.cache", suite);
   rmSync(cacheDir, { recursive: true, force: true });
   mkdirSync(cacheDir, { recursive: true });
   let count = 0;
-  return async function importSource(sourceText) {
+  return async function importSource<T extends Spliceable = Spliceable>(
+    sourceText: string,
+  ): Promise<T> {
     const file = `source-${++count}.tsx`;
     const outputText = await transpileFixture(file, sourceText);
     const compiled = join(cacheDir, file.replace(/\.tsx$/, ".js"));
     writeFileSync(compiled, outputText);
     const { default: script } = (await import(
       pathToFileURL(compiled).href
-    )) as { default: Spliceable };
+    )) as { default: T };
     return script;
   };
 }

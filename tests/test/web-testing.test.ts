@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import type { BacktickElement } from "@backtickjs/core";
 import { describe, it } from "node:test";
 import {
   cleanup,
@@ -13,7 +14,9 @@ import { createSourceLoader } from "./importFixture.ts";
 // queries read, and what `cleanup` takes away.
 const importSource = createSourceLoader("web-testing");
 const paragraph = (text: string) =>
-  importSource(`export default <p>{${JSON.stringify(text)}}</p>;`);
+  importSource<BacktickElement>(
+    `export default <p>{${JSON.stringify(text)}}</p>;`,
+  );
 
 describe("render", () => {
   it("draws into a new div in the body, and queries the body", async () => {

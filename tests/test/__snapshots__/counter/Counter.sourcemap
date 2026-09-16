@@ -1,0 +1,62 @@
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_count                           → count
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+0                                    → 0
+)                                    → )
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+<                                    → (\n      <
+div                                  → div
+>{cs.lift(                           → >\n        
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+)                                    → )
+)}                                   → }
+>Add</                               → >Add</
+button                               → button
+>                                    → >
+)}{cs.lift(                          → \n        
+<                                    → <
+p                                    → p
+>{cs.lift(                           → >{
+"Count: "                            → "Count: "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+)}</                                 → }</
+p                                    → p
+>                                    → >
+)}</                                 → \n      </
+div                                  → div
+>                                    → >\n    )
+);                                   → ;
+\n})())                              → \n  }`

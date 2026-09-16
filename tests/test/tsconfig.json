@@ -1,0 +1,14 @@
+{
+  // The `.tsx` tests, which only Backtick's tooling can check: `backtick-tsc`
+  // in the typecheck suite, and the editor extension. Nothing references it, so
+  // `tsc -b` never builds it.
+  "extends": "../../configs/tsconfig.test.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/web-sdk",
+    "noEmit": true,
+    "composite": false
+  },
+  "include": ["./**/*.test.tsx", "./prettier.d.ts"],
+  "exclude": ["./fixtures/**/*"]
+}

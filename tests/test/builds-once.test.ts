@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { render, screen } from "@backtickjs/web-testing";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
+import type { BacktickElement } from "@backtickjs/core";
 
 // A component is built once, however what it drew changes afterwards.
 //
@@ -27,7 +28,9 @@ const settled = () => new Promise((settle) => setTimeout(settle, 100));
 
 describe("a component that draws a bundle", () => {
   it("is built once, and draws what arrives", async () => {
-    await render(await importFixture(validDir, "vm-eval-builds-once.tsx"));
+    await render(
+      await importFixture<BacktickElement>(validDir, "vm-eval-builds-once.tsx"),
+    );
 
     // Nothing to draw yet, and the wait has not been made twice.
     assert.ok(screen.getByText("asked 0"));
@@ -48,7 +51,7 @@ describe("a component that draws a list", () => {
   // too, so a fault in what draws a bundle would leave this alone.
   it("is built once, and draws what arrives", async () => {
     const { container } = await render(
-      await importFixture(validDir, "for-builds-once.tsx"),
+      await importFixture<BacktickElement>(validDir, "for-builds-once.tsx"),
     );
 
     assert.ok(screen.getByText("asked 0"));

@@ -1,0 +1,8 @@
+<div>
+  <button onclick={[function]}>
+    {"Add"}
+  </button>
+  <p>
+    {"Count: 0"}
+  </p>
+</div>

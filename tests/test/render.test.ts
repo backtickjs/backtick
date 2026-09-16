@@ -7,6 +7,7 @@ import { createInterpreter } from "@backtickjs/web-interpreter";
 import { render, screen } from "@backtickjs/web-testing";
 import { userEvent } from "@testing-library/user-event";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
+import type { BacktickElement } from "@backtickjs/core";
 
 // Where a render draws, and what it may move.
 //
@@ -164,7 +165,7 @@ describe("where a render draws", () => {
 describe("a bundle a script runs with vm.eval", () => {
   it("draws one whose root is a <For />, and answers one that is a value", async () => {
     const { container } = await render(
-      await importFixture(validDir, "vm-eval.tsx"),
+      await importFixture<BacktickElement>(validDir, "vm-eval.tsx"),
     );
 
     const div = container.firstElementChild!;
@@ -177,7 +178,9 @@ describe("a bundle a script runs with vm.eval", () => {
 
 describe("a tag naming a function the script holds", () => {
   it("keeps a prop live without drawing the function again", async () => {
-    await render(await importFixture(validDir, "script-bound-tag.tsx"));
+    await render(
+      await importFixture<BacktickElement>(validDir, "script-bound-tag.tsx"),
+    );
 
     const badge = screen.getByText("count 0");
 
@@ -191,7 +194,12 @@ describe("a tag naming a function the script holds", () => {
   });
 
   it("draws one that arrives later, and keeps its prop live", async () => {
-    await render(await importFixture(validDir, "script-bound-tag-loading.tsx"));
+    await render(
+      await importFixture<BacktickElement>(
+        validDir,
+        "script-bound-tag-loading.tsx",
+      ),
+    );
     assert.equal(screen.getByText("loading").tagName.toLowerCase(), "i");
 
     await userEvent.click(screen.getByRole("button", { name: "load" }));
@@ -209,7 +217,10 @@ describe("a tag naming a function the script holds", () => {
 
   it("calls one an enclosing script holds, however the call is nested", async () => {
     const { container } = await render(
-      await importFixture(validDir, "script-bound-tag-capture.tsx"),
+      await importFixture<BacktickElement>(
+        validDir,
+        "script-bound-tag-capture.tsx",
+      ),
     );
     const badges = () => [...container.querySelectorAll("b")];
     const before = badges();
@@ -223,7 +234,12 @@ describe("a tag naming a function the script holds", () => {
   });
 
   it("calls the one it was written under, drawn where another is in scope", async () => {
-    await render(await importFixture(validDir, "script-bound-tag-carried.tsx"));
+    await render(
+      await importFixture<BacktickElement>(
+        validDir,
+        "script-bound-tag-carried.tsx",
+      ),
+    );
     const panel = screen.getByText("panel 0");
     const badge = screen.getByText("outer 0");
     assert.equal(badge.tagName.toLowerCase(), "b");
@@ -262,7 +278,7 @@ describe("an element's namespace", () => {
 
   it("is where the element is drawn", async () => {
     const { container } = await render(
-      await importFixture(validDir, "svg-namespace.tsx"),
+      await importFixture<BacktickElement>(validDir, "svg-namespace.tsx"),
     );
 
     // Sorted: a list builds its rows after the elements beside it, and the
@@ -285,7 +301,7 @@ describe("an element's namespace", () => {
   // what it draws has to have kept the namespace from the first pass.
   it("is kept by what draws again later", async () => {
     const { container } = await render(
-      await importFixture(validDir, "svg-namespace-later.tsx"),
+      await importFixture<BacktickElement>(validDir, "svg-namespace-later.tsx"),
     );
     assert.deepEqual(namespaced(container).sort(), [
       "button",

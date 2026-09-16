@@ -3,6 +3,7 @@ import { readdirSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import type { BacktickElement } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
@@ -60,8 +61,9 @@ describe("bundle", () => {
           join(dir, `${base}.bundle-debug`),
         );
         const value = await evaluate(script);
+        // Rendered only once evaluating it showed it draws.
         const snapshot = draws(value)
-          ? renderDrawing((await render(script)).container)
+          ? renderDrawing((await render(script as BacktickElement)).container)
           : renderValue(value);
         matchFileSnapshot(`${snapshot}\n`, join(dir, `${base}.value`));
       });

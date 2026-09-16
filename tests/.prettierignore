@@ -1,4 +1,6 @@
-# The fixture corpus is what the suites compare against, byte for byte: a
-# snapshot reformatted is a snapshot that no longer says what was emitted, and
-# a reformatted input changes its own `fileHash` and every snapshot beside it.
+# The fixture corpus and the recorded snapshots are what the suites compare
+# against, byte for byte: a snapshot reformatted is a snapshot that no longer
+# says what was emitted, and a reformatted input changes its own `fileHash` and
+# every snapshot beside it.
 test/fixtures/
+test/__snapshots__/

@@ -1,0 +1,15 @@
+#f0 = ($0) => {
+  const count = $0()(0);
+  return <div>
+    {<button
+      onclick={() => count.write(count.read() + 1)}
+    >
+      {"Add"}
+    </button>}
+    {<p>
+      {"Count: " + count.read()}
+    </p>}
+  </div>;
+}
+
+root = <{() => #f0(() => state)} />

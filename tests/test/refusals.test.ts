@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { evaluateUntrustedBundle, render } from "@backtickjs/web-testing";
 import { createSourceLoader } from "./importFixture.ts";
+import type { BacktickElement } from "@backtickjs/core";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
 //
@@ -20,7 +21,7 @@ async function refused(source: string, message: RegExp): Promise<Element> {
   const container = document.body.appendChild(document.createElement("div"));
   container.innerHTML = "<main></main>";
   await assert.rejects(
-    render(await importSource(source), { container }),
+    render(await importSource<BacktickElement>(source), { container }),
     message,
   );
   assert.equal(container.innerHTML, "<main></main>");
@@ -29,7 +30,9 @@ async function refused(source: string, message: RegExp): Promise<Element> {
 
 // A drawing and the one element it put in the page.
 async function drawn(source: string): Promise<Element> {
-  const { container } = await render(await importSource(source));
+  const { container } = await render(
+    await importSource<BacktickElement>(source),
+  );
   return container.firstElementChild!;
 }
 
@@ -75,7 +78,7 @@ describe("a tag that would execute", () => {
     ) as unknown as Element;
     assert.equal(drawn.localName, "SCRIPT");
     const { container } = await render(
-      await importSource(
+      await importSource<BacktickElement>(
         "export default <div><script-viewer /><marquee /></div>;",
       ),
     );

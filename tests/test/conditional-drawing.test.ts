@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { render, screen } from "@backtickjs/web-testing";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
+import type { BacktickElement } from "@backtickjs/core";
 
 // A block whose drawing is a conditional, and a write that answers it.
 //
@@ -15,7 +16,9 @@ const importFixture = createFixtureLoader("backtick");
 
 describe("a component whose drawing is a conditional", () => {
   it("is built once, and draws the branch the write chose", async () => {
-    await render(await importFixture(validDir, "conditional-drawing.tsx"));
+    await render(
+      await importFixture<BacktickElement>(validDir, "conditional-drawing.tsx"),
+    );
 
     // Nothing has answered the condition yet: the count is of blocks that have
     // reached their timer, and the first has not.
