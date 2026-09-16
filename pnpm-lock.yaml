@@ -197,23 +197,7 @@ importers:
         specifier: ^0.1.3
         version: 0.1.3
 
-  benchmarks/js-framework-benchmark:
-    devDependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../../packages/bundler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../../packages/core
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../../packages/web-sdk
-      '@backtickjs/web-testing':
-        specifier: workspace:*
-        version: link:../../packages/web-testing
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
+  benchmarks/js-framework-benchmark: {}
 
   benchmarks/js-framework-benchmark/frameworks/keyed/backtick:
     dependencies:

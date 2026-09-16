@@ -1,0 +1,49 @@
+import assert from "node:assert/strict";
+import { it } from "node:test";
+import { cs, For, state, type State } from "@backtickjs/core";
+import { render, screen } from "@backtickjs/web-testing";
+import { userEvent } from "@testing-library/user-event";
+import { watchWrites } from "./writes.ts";
+
+// js-framework-benchmark's "partial update": every other row's label grows,
+// and each label is a cell of its own. Writing one is a write to that row's
+// text, and nothing else: no row is rebuilt, and no other row hears of it.
+async function Labels() {
+  return cs`{
+    const rows = [1, 2, 3, 4].map((id: number) => ({
+      id: id,
+      label: $state("row " + id),
+    }));
+    const update = () => {
+      for (let index = 0; index < rows.length; index = index + 2) {
+        rows[index].label.update((label: string) => label + " !!!");
+      }
+    };
+    return (
+      <div>
+        <button onclick={update}>update</button>
+        <table>
+          <tbody>
+            <For each={rows}>
+              {(row: { id: number; label: State<string> }) => (
+                <tr id={"row-" + row.id}>
+                  <td>{row.label.read()}</td>
+                </tr>
+              )}
+            </For>
+          </tbody>
+        </table>
+      </div>
+    );
+  }`;
+}
+
+it("a label written changes that label's text and nothing else", async () => {
+  const { container } = await render(<Labels />);
+  const written = watchWrites(container);
+  await userEvent.click(screen.getByRole("button", { name: "update" }));
+  assert.deepEqual(written(), [
+    'text: "row 1" → "row 1 !!!"',
+    'text: "row 3" → "row 3 !!!"',
+  ]);
+});
