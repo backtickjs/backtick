@@ -2,7 +2,7 @@ import type { ClientOptions } from "@backtickjs/web-vm";
 import { Window as Page } from "happy-dom";
 
 /** What a script reaches through `$window`, as the client reads one. */
-export type ScriptWindow = ClientOptions<object>["window"];
+export type ScriptWindow = ClientOptions["window"];
 
 // A page's window, as a script reaches it.
 //

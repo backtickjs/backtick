@@ -1,8 +1,12 @@
+// The ten operations a target answers, under the name Solid gives them: these
+// are what `createRenderer` is handed, and what it answers with is a
+// `Renderer`. Two things, two names, as there.
+//
 // Declared here rather than imported from Solid, though Solid is what consumes
 // it: a target implements this package's contract and carries no dependency for
 // it. The reactive graph behind these calls is an implementation detail of the
 // interpreter, and the shape is checked structurally where the two meet.
-export interface Renderer<NodeType> {
+export interface RendererOptions<NodeType> {
   // A tag drawn inside an `svg` arrives as `svg:<tag>`
   createElement(tag: string): NodeType;
   createTextNode(value: string): NodeType;
@@ -25,7 +29,7 @@ const SVG = "http://www.w3.org/2000/svg";
 // `setProperty` is the only decision here, because what a prop means is ours.
 // Built over the document it is handed, so what draws into a page can draw into
 // any document.
-export function renderer(document: Document): Renderer<Node> {
+export function renderer(document: Document): RendererOptions<Node> {
   return {
     // The interpreter prefixes a tag drawn inside an `svg`: `svg:path` is a path
     // in SVG's namespace, and a tag with no prefix is HTML's.

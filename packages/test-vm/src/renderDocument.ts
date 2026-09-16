@@ -1,5 +1,5 @@
 import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
-import { render, renderer } from "@backtickjs/web-vm";
+import { createInterpreter, renderer } from "@backtickjs/web-vm";
 import { Window as Page } from "happy-dom";
 import { windowOf } from "./window.js";
 
@@ -33,15 +33,11 @@ export function renderDocument(
 ): Drawn {
   const page = new Page();
   const document = page.document;
-  const dispose = render(
-    bundle,
-    {
-      renderer: renderer(document as never),
-      window: windowOf(page),
-      compileBuiltin: options.compileBuiltin,
-    },
-    document.body as never,
-  );
+  const { render } = createInterpreter(renderer(document as never), {
+    window: windowOf(page),
+    compileBuiltin: options.compileBuiltin,
+  });
+  const dispose = render(bundle, document.body as never);
   return {
     document,
     page,

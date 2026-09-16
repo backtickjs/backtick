@@ -17,6 +17,6 @@ export { renderer } from "./renderer.js";
 // The interpreter beneath it, which draws through any renderer rather than only
 // a page's: `@backtickjs/test-vm` drives it with a host of plain objects, and
 // with a document of its own through `renderer`.
-export { evaluate } from "./evaluate.js";
-export { render } from "./render.js";
-export type { Renderer } from "./renderer.js";
+export { createInterpreter } from "./createInterpreter.js";
+export type { Interpreter } from "./createInterpreter.js";
+export type { RendererOptions } from "./renderer.js";

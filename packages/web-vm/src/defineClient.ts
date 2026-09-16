@@ -1,21 +1,16 @@
 import type { ClientValue } from "@backtickjs/core";
-import { render } from "./render.js";
+import { createInterpreter } from "./createInterpreter.js";
 import { renderer } from "./renderer.js";
-import type { Renderer } from "./renderer.js";
 
 /**
- * What a target hands this interpreter: how to build its nodes, the window a
- * script reaches through `$window`, and what it answers for beyond the names
- * the language provides itself.
+ * The names a script may reach: the window it reaches them through, and what a
+ * target answers for beyond the names the language provides itself.
  *
- * Apart rather than one, because they are answered by different things. A
- * renderer is how a host draws and a window is what it offers a script, and
- * every target has both. What a target adds beside them it answers for itself.
+ * Beside the renderer rather than holding it, because the two are answered by
+ * different things — how a target draws, and what it lets a script say — and a
+ * bundle drawn through a second renderer still says the same names.
  */
-export interface ClientOptions<NodeType extends object> {
-  /** How this host builds, moves and reads its own nodes. */
-  readonly renderer: Renderer<NodeType>;
-
+export interface ClientOptions {
   /**
    * The host's window, which the client reads from to answer `window`. Never
    * handed to a script itself: what a script reaches is the list the client
@@ -44,13 +39,10 @@ export interface ClientOptions<NodeType extends object> {
  * add and may not replace. A tag an app adds is one it registers with the
  * browser, which the document then builds itself.
  */
-export function defineClient({
-  window,
-  compileBuiltin,
-}: Omit<ClientOptions<Node>, "renderer">): void {
+export function defineClient(options: ClientOptions): void {
   // A window carries the document it is of, so a page hands over one thing.
-  const document = window.document;
-  const options = { renderer: renderer(document), window, compileBuiltin };
+  const document = options.window.document;
+  const { render } = createInterpreter(renderer(document), options);
 
   // Every bundle the document carried, drawn where its script stands.
   //
@@ -67,7 +59,7 @@ export function defineClient({
       // In front of the script, which stays: a drawing goes on inserting after
       // it is first made and needs something that holds still to insert in
       // front of. The script is that, and shows nothing.
-      render(JSON.parse(data.textContent), options, parent, data);
+      render(JSON.parse(data.textContent), parent, data);
     }
   };
 

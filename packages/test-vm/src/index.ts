@@ -9,12 +9,9 @@
  * Reactive only where Solid resolves to its browser build, which is what
  * `--conditions=browser` asks Node for.
  */
-import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
-import {
-  evaluate as evaluateBundle,
-  render as renderBundle,
-} from "@backtickjs/web-vm";
-import type { ClientOptions, Renderer } from "@backtickjs/web-vm";
+import type { Bundle, ClientUnknown } from "@backtickjs/core";
+import { createInterpreter } from "@backtickjs/web-vm";
+import type { RendererOptions } from "@backtickjs/web-vm";
 import { testRenderer } from "./host.js";
 import type { TestNode } from "./host.js";
 import { window } from "./window.js";
@@ -30,23 +27,12 @@ export interface TestOptions {
    * How nodes are built: `testHost` unless a test watches how the host is
    * spoken to rather than what it ends up holding.
    */
-  readonly renderer?: Renderer<TestNode>;
+  readonly renderer?: RendererOptions<TestNode>;
 }
 
 export interface RenderOptions extends TestOptions {
   /** One of the parent's children to draw in front of, as a page's script is. */
   readonly anchor?: TestNode;
-}
-
-// A window under every bundle, because a timer is the client's rather than the
-// language's and a bundle that waits splices one.
-function clientOptions({
-  renderer = testRenderer,
-}: TestOptions): ClientOptions<TestNode> {
-  return {
-    renderer,
-    window,
-  };
 }
 
 /**
@@ -56,11 +42,11 @@ function clientOptions({
  * nowhere to be mounted. What comes back is what the root is — the node it
  * drew, or the data it evaluated to.
  */
-export function evaluate(
-  bundle: Bundle<ClientUnknown>,
-  options: TestOptions = {},
-): ClientValue {
-  return evaluateBundle(bundle, clientOptions(options));
+export function evaluate<Value extends ClientUnknown>(
+  bundle: Bundle<Value>,
+  { renderer = testRenderer }: TestOptions = {},
+): Value {
+  return createInterpreter(renderer, { window }).eval(bundle);
 }
 
 /**
@@ -70,7 +56,7 @@ export function evaluate(
 export function render(
   bundle: Bundle<ClientUnknown>,
   parent: TestNode,
-  options: RenderOptions = {},
+  { renderer = testRenderer, anchor }: RenderOptions = {},
 ): () => void {
-  return renderBundle(bundle, clientOptions(options), parent, options.anchor);
+  return createInterpreter(renderer, { window }).render(bundle, parent, anchor);
 }

@@ -1,6 +1,6 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle, BundleFunctionLabel } from "@backtickjs/language";
-import type { Renderer as SolidRenderer } from "solid-js/universal";
+import type { Renderer } from "solid-js/universal";
 
 // A bundle paired with a host: what is needed to draw one, which neither of
 // them holds alone. A bundle says what to draw and a host knows how, and an
@@ -14,7 +14,7 @@ export interface Instance {
   // `object` rather than the target's node type: every node this holds came
   // from the target and goes back to it untouched, so what it is, is the
   // target's business throughout.
-  readonly renderer: SolidRenderer<object>;
+  readonly renderer: Renderer<object>;
   // The host's window, which `window` is read through.
   readonly window: typeof window;
   // What the target answers for beside the client's own names, asked only after

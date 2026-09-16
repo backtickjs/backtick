@@ -1,4 +1,4 @@
-import type { Renderer } from "@backtickjs/web-vm";
+import type { RendererOptions } from "@backtickjs/web-vm";
 
 // A host of plain objects: the same ten operations a browser answers with the
 // DOM, answered here with objects a test can read. What a test exercises is
@@ -28,7 +28,7 @@ export function isText(node: TestNode): boolean {
   return node.id === "#text";
 }
 
-export const testRenderer: Renderer<TestNode> = {
+export const testRenderer: RendererOptions<TestNode> = {
   createElement: (id) => ({
     id,
     props: {},
@@ -101,7 +101,7 @@ export interface Write {
  * about.
  */
 export function recordingHost(): {
-  options: Renderer<TestNode>;
+  options: RendererOptions<TestNode>;
   writes: Write[];
 } {
   const writes: Write[] = [];
