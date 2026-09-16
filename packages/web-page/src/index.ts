@@ -2,7 +2,7 @@
  * The client a page loads: what finds the bundles a document carries and draws
  * each one where its script stands.
  *
- * The machine under it is `@backtickjs/web-vm` — the interpreter, the browser's
+ * The machine under it is `@backtickjs/web-interpreter` — the interpreter, the browser's
  * renderer, and the names a script may call. What is here is the page half: a
  * document is what says which bundles there are, and where they go.
  *
@@ -14,4 +14,4 @@
  * ask for over the network.
  */
 export { defineClient } from "./defineClient.js";
-export type { ClientOptions } from "@backtickjs/web-vm";
+export type { InterpreterOptions } from "@backtickjs/web-interpreter";

@@ -1,6 +1,6 @@
 import type { ClientValue, Spliceable } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { createInterpreter } from "@backtickjs/web-vm";
+import { createInterpreter } from "@backtickjs/web-interpreter";
 import { getQueriesForElement, queries } from "@testing-library/dom";
 import type { BoundFunctions } from "@testing-library/dom";
 import { Window as Page } from "happy-dom";

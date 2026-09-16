@@ -1,5 +1,5 @@
-import { createInterpreter } from "@backtickjs/web-vm";
-import type { ClientOptions } from "@backtickjs/web-vm";
+import { createInterpreter } from "@backtickjs/web-interpreter";
+import type { InterpreterOptions } from "@backtickjs/web-interpreter";
 
 /**
  * Draws every bundle a page carries, where its script stands.
@@ -10,7 +10,7 @@ import type { ClientOptions } from "@backtickjs/web-vm";
  * add and may not replace. A tag an app adds is one it registers with the
  * browser, which the document then builds itself.
  */
-export function defineClient(options: ClientOptions): void {
+export function defineClient(options: InterpreterOptions): void {
   // A window carries the document it is of, so a page hands over one thing.
   const document = options.window.document;
   const { render } = createInterpreter(document, options);

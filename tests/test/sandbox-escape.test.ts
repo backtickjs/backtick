@@ -13,7 +13,7 @@ import { evaluate } from "@backtickjs/test-vm";
 // A bundle must not be able to reach the ambient JavaScript machinery. The
 // classic escape walks `({}).constructor` (Object) to `.constructor`
 // (Function) and runs arbitrary code; the same climb off a cell or the window
-// would do too. `memberOf` in `packages/web-vm/src/compile.ts`
+// would do too. `memberOf` in `packages/web-interpreter/src/compile.ts`
 // treats reading any member inherited from `Object.prototype` or
 // `Function.prototype` as an error, which closes every rung of that ladder while
 // leaving own members and host-prototype members (a DOM event's

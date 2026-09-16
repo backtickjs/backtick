@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/web-vm",
+  "name": "@backtickjs/web-interpreter",
   "version": "0.1.0",
   "private": true,
   "type": "module",

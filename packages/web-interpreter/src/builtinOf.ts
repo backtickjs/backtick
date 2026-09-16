@@ -178,7 +178,7 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
           ),
       } as unknown as Vm;
 
-    // Written out rather than the host's window handed over, so a member the
+    // Written out rather than the page's window handed over, so a member the
     // schema left out stays left out: a script reading `document` off this
     // finds nothing.
     case "window": {

@@ -609,9 +609,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/web-vm':
+      '@backtickjs/web-interpreter':
         specifier: workspace:*
-        version: link:../web-vm
+        version: link:../web-interpreter
       '@testing-library/dom':
         specifier: ^10.4.2
         version: 10.4.2
@@ -727,26 +727,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/web-page:
-    dependencies:
-      '@backtickjs/web-vm':
-        specifier: workspace:*
-        version: link:../web-vm
-    devDependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/web-vm:
+  packages/web-interpreter:
     dependencies:
       '@backtickjs/language':
         specifier: workspace:*
@@ -761,6 +742,25 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/web-page:
+    dependencies:
+      '@backtickjs/web-interpreter':
+        specifier: workspace:*
+        version: link:../web-interpreter
+    devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      esbuild:
+        specifier: 0.28.0
+        version: 0.28.0
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

@@ -3,7 +3,7 @@
  * read the way Testing Library reads a page — `screen.getByRole`,
  * `userEvent.click`.
  *
- * The interpreter is `@backtickjs/web-vm`'s own and the DOM is happy-dom's, so
+ * The interpreter is `@backtickjs/web-interpreter`'s own and the DOM is happy-dom's, so
  * what a test exercises is what a page runs, down to what a real `insertBefore`
  * does. A target of plain objects would be a second set of behaviours to keep
  * true to a browser's, and the difference between them is what a test would
@@ -13,7 +13,7 @@
  * `--conditions=browser` asks Node for.
  */
 import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
-import { createInterpreter } from "@backtickjs/web-vm";
+import { createInterpreter } from "@backtickjs/web-interpreter";
 import { page, window } from "./window.js";
 
 export { isNode, isText, listenersOf } from "./node.js";

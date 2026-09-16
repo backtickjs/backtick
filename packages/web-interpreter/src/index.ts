@@ -12,5 +12,5 @@
  * `@backtickjs/web-page`.
  */
 export { createInterpreter } from "./createInterpreter.js";
-export type { ClientOptions, Interpreter } from "./createInterpreter.js";
+export type { InterpreterOptions, Interpreter } from "./createInterpreter.js";
 export type { Bundle } from "@backtickjs/core";

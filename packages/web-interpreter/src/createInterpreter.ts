@@ -13,9 +13,9 @@ import { compile, scopeOf } from "./compile.js";
  * different things — how a target draws, and what it lets a script say — and a
  * bundle drawn through a second renderer still says the same names.
  */
-export interface ClientOptions {
+export interface InterpreterOptions {
   /**
-   * The host's window, which the client reads from to answer `window`. Never
+   * The page's window, which the client reads from to answer `window`. Never
    * handed to a script itself: what a script reaches is the list the client
    * writes out, read through to this.
    */
@@ -69,7 +69,7 @@ export interface Interpreter<NodeType extends object> {
 
 /**
  * The interpreter, wired to a document: it draws with that document's nodes,
- * and a script reaches the names `client` hands over.
+ * and a script reaches the names `options` hands over.
  *
  * A document and nothing else, because a drawing is a DOM wherever one runs —
  * a page's, or one a test made. A target of its own would be a second set of
@@ -82,14 +82,14 @@ export interface Interpreter<NodeType extends object> {
  */
 export function createInterpreter(
   document: Document,
-  client: ClientOptions,
+  options: InterpreterOptions,
 ): Interpreter<Node> {
   const renderer = createRenderer(rendererOptions(document));
 
   // One per mount: what a bundle compiled to is a closure over this, so two
   // drawings of the same bundle share nothing but the renderer.
   const instanceOf = (bundle: Bundle<ClientUnknown>) => ({
-    ...client,
+    ...options,
     renderer,
     bundle,
     functions: new Map(),

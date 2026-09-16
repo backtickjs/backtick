@@ -15,7 +15,7 @@ export interface Instance {
   // from the target and goes back to it untouched, so what it is, is the
   // target's business throughout.
   readonly renderer: Renderer<object>;
-  // The host's window, which `window` is read through.
+  // The page's window, which `window` is read through.
   readonly window: typeof window;
   // What the target answers for beside the client's own names, asked only after
   // those have not answered.
