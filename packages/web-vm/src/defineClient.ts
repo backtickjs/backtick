@@ -1,5 +1,4 @@
-import type { ClientUnknown, ClientValue } from "@backtickjs/core";
-import type { Bundle } from "@backtickjs/core";
+import type { ClientValue } from "@backtickjs/core";
 import { render } from "./render.js";
 import { renderer } from "./renderer.js";
 import type { Renderer } from "./renderer.js";
@@ -35,20 +34,6 @@ export interface ClientOptions<NodeType extends object> {
    */
   readonly compileBuiltin?: (name: string) => ClientValue;
 }
-
-/**
- * Draws a bundle where it is told, and hands back what takes it down again.
- *
- * Returned rather than only used here, because a target that draws a bundle of
- * its own — one it was handed rather than one a page wrote — needs these
- * options to draw it with, and building a second set beside them is how the
- * two drift.
- */
-export type Draw = (
-  bundle: Bundle<ClientUnknown>,
-  target: Element,
-  anchor?: Node,
-) => () => void;
 
 /**
  * The client, registered.

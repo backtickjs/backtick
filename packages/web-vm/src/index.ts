@@ -10,7 +10,7 @@
  * ask for over the network.
  */
 export { defineClient } from "./defineClient.js";
-export type { ClientOptions, Draw } from "./defineClient.js";
+export type { ClientOptions } from "./defineClient.js";
 export type { Bundle } from "@backtickjs/core";
 export { renderer } from "./renderer.js";
 
