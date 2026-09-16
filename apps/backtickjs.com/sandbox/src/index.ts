@@ -1,12 +1,12 @@
 import * as core from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import * as webSchema from "@backtickjs/web-client";
-import * as jsxRuntime from "@backtickjs/web-client/jsx-runtime";
+import * as webSchema from "@backtickjs/web-sdk";
+import * as jsxRuntime from "@backtickjs/web-sdk/jsx-runtime";
 
 const MODULES: Readonly<Record<string, unknown>> = {
   "@backtickjs/core": core,
-  "@backtickjs/web-client": webSchema,
-  "@backtickjs/web-client/jsx-runtime": jsxRuntime,
+  "@backtickjs/web-sdk": webSchema,
+  "@backtickjs/web-sdk/jsx-runtime": jsxRuntime,
 };
 
 function evaluate(javascript: string): unknown {
@@ -15,7 +15,7 @@ function evaluate(javascript: string): unknown {
     const held = MODULES[specifier];
     if (held === undefined) {
       throw new Error(
-        "this answers for `@backtickjs/core` and `@backtickjs/web-client` and" +
+        "this answers for `@backtickjs/core` and `@backtickjs/web-sdk` and" +
           ` nothing else, and this asked for \`${specifier}\``,
       );
     }

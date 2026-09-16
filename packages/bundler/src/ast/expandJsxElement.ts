@@ -1,5 +1,5 @@
-import { type Spliceable } from "@backtickjs/language";
-import { type JsxElement } from "@backtickjs/ui";
+import { type Spliceable } from "@backtickjs/platform-sdk";
+import { type JsxElement } from "@backtickjs/ui-platform-sdk";
 import type { Ast } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 

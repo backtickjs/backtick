@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // An element a script writes, rather than one the host wrote and the script
 // spliced in. What it lowers to is the node a tree entry builds, so the two

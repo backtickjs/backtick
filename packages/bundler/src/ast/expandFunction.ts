@@ -1,4 +1,4 @@
-import type { Client, Spliceable } from "@backtickjs/language";
+import type { Client, Spliceable } from "@backtickjs/platform-sdk";
 import type { Ast, AstExpansion } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";

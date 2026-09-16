@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@backtickjs/client-script": "workspace:*",
-    "@backtickjs/language": "workspace:*",
-    "@backtickjs/ui": "workspace:*"
+    "@backtickjs/platform-sdk": "workspace:*",
+    "@backtickjs/ui-platform-sdk": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

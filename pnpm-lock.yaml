@@ -32,12 +32,12 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../../packages/core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../../packages/web-sdk
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -73,9 +73,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../../packages/core
-      '@backtickjs/web-client':
+      '@backtickjs/web-sdk':
         specifier: workspace:*
-        version: link:../../../packages/web-client
+        version: link:../../../packages/web-sdk
     devDependencies:
       esbuild:
         specifier: ^0.25.0
@@ -89,18 +89,18 @@ importers:
 
   apps/backtickjs.com/schema:
     dependencies:
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../../../packages/language
+        version: link:../../../packages/platform-sdk
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../../../packages/schema
-      '@backtickjs/ui':
+      '@backtickjs/ui-platform-sdk':
         specifier: workspace:*
-        version: link:../../../packages/ui
-      '@backtickjs/web-client':
+        version: link:../../../packages/ui-platform-sdk
+      '@backtickjs/web-sdk':
         specifier: workspace:*
-        version: link:../../../packages/web-client
+        version: link:../../../packages/web-sdk
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -135,9 +135,9 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: workspace:*
         version: link:../../../packages/tspatch-plugin
-      '@backtickjs/web-client':
+      '@backtickjs/web-sdk':
         specifier: workspace:*
-        version: link:../../../packages/web-client
+        version: link:../../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
@@ -206,9 +206,9 @@ importers:
       '@backtickjs/test-vm':
         specifier: workspace:*
         version: link:../../packages/test-vm
-      '@backtickjs/web-client':
+      '@backtickjs/web-sdk':
         specifier: workspace:*
-        version: link:../../packages/web-client
+        version: link:../../packages/web-sdk
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -224,12 +224,12 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../../../../packages/tspatch-plugin
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../../../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../../../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../../../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -261,12 +261,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -295,12 +295,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -329,12 +329,12 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -363,12 +363,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -397,12 +397,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../../packages/web-client
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -441,12 +441,12 @@ importers:
       '@backtickjs/client-script':
         specifier: workspace:*
         version: link:../client-script
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../language
-      '@backtickjs/ui':
+        version: link:../platform-sdk
+      '@backtickjs/ui-platform-sdk':
         specifier: workspace:*
-        version: link:../ui
+        version: link:../ui-platform-sdk
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -457,9 +457,9 @@ importers:
 
   packages/client-script:
     dependencies:
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../language
+        version: link:../platform-sdk
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -486,25 +486,12 @@ importers:
       '@backtickjs/client-script':
         specifier: workspace:*
         version: link:../client-script
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../language
-      '@backtickjs/ui':
+        version: link:../platform-sdk
+      '@backtickjs/ui-platform-sdk':
         specifier: workspace:*
-        version: link:../ui
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language:
-    dependencies:
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
+        version: link:../ui-platform-sdk
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -565,6 +552,19 @@ importers:
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/platform-sdk:
+    dependencies:
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -692,33 +692,14 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/ui:
+  packages/ui-platform-sdk:
     dependencies:
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../language
+        version: link:../platform-sdk
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/web-client:
-    dependencies:
-      '@backtickjs/language':
-        specifier: workspace:*
-        version: link:../language
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
-      '@backtickjs/ui':
-        specifier: workspace:*
-        version: link:../ui
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -729,12 +710,12 @@ importers:
 
   packages/web-interpreter:
     dependencies:
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../language
-      '@backtickjs/web-client':
+        version: link:../platform-sdk
+      '@backtickjs/web-sdk':
         specifier: workspace:*
-        version: link:../web-client
+        version: link:../web-sdk
       solid-js:
         specifier: ^1.9.14
         version: 1.9.14
@@ -768,6 +749,25 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/web-sdk:
+    dependencies:
+      '@backtickjs/platform-sdk':
+        specifier: workspace:*
+        version: link:../platform-sdk
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@backtickjs/ui-platform-sdk':
+        specifier: workspace:*
+        version: link:../ui-platform-sdk
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   tests:
     devDependencies:
       '@backtickjs/bundler':
@@ -782,9 +782,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../packages/core
-      '@backtickjs/language':
+      '@backtickjs/platform-sdk':
         specifier: workspace:*
-        version: link:../packages/language
+        version: link:../packages/platform-sdk
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../packages/prettier-plugin
@@ -794,9 +794,9 @@ importers:
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../packages/tsc
-      '@backtickjs/web-client':
+      '@backtickjs/web-sdk':
         specifier: workspace:*
-        version: link:../packages/web-client
+        version: link:../packages/web-sdk
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

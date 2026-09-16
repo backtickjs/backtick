@@ -6,8 +6,8 @@ import type {
   HttpResponse,
   State,
   Vm,
-} from "@backtickjs/language";
-import type { Builtins, Window } from "@backtickjs/web-client";
+} from "@backtickjs/platform-sdk";
+import type { Builtins, Window } from "@backtickjs/web-sdk";
 import { createSignal, untrack } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile, scopeOf } from "./compile.js";

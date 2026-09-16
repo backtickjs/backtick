@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs } from "@backtickjs/core";
 export default _jsxs("div", {
   style: "padding: 8px",

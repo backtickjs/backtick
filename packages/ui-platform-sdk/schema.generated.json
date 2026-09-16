@@ -1,6 +1,6 @@
 {
-  "package": "@backtickjs/ui",
-  "namespace": "Ui",
+  "package": "@backtickjs/ui-platform-sdk",
+  "namespace": "UiPlatform",
   "extends": [],
   "types": {
     "ReadonlyState": {

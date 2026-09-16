@@ -1,5 +1,8 @@
 import type { ClientValue } from "@backtickjs/core";
-import type { BundleArrayElement, BundleElement } from "@backtickjs/language";
+import type {
+  BundleArrayElement,
+  BundleElement,
+} from "@backtickjs/platform-sdk";
 import { createMemo, getOwner, mapArray } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile } from "./compile.js";

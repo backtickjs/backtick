@@ -15,10 +15,10 @@ export const schema: Schema = {
   // Where what this comes to is published, which is not where this is: a
   // schema is a declaration and needs nothing, where the declarations it
   // generates are written beside `Client` and `Prop`, which no schema says.
-  // See `@backtickjs/language`.
-  package: "@backtickjs/language",
+  // See `@backtickjs/platform-sdk`.
+  package: "@backtickjs/platform-sdk",
 
-  namespace: "Language",
+  namespace: "Platform",
 
   extends: [],
 

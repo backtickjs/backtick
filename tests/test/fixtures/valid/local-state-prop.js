@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A cell crossing a component boundary: declared once by the script that draws
 // the pair, handed to each child as a prop, so both read one storage. The cell

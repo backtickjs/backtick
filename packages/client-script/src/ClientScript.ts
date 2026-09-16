@@ -1,5 +1,5 @@
 import { assertVersion } from "./assertVersion.js";
-import type { Spliceable } from "@backtickjs/language";
+import type { Spliceable } from "@backtickjs/platform-sdk";
 import type { SourceLocation } from "./SourceLocation.js";
 import type { ClientScriptBody } from "./Ast.js";
 

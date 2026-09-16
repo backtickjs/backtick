@@ -1,7 +1,7 @@
-import type { JsxElementType } from "@backtickjs/ui";
-import { createFragment, createJsxElement } from "@backtickjs/ui";
-import type { Elements as Ui } from "@backtickjs/ui";
-import type { BacktickElement } from "@backtickjs/ui";
+import type { JsxElementType } from "@backtickjs/ui-platform-sdk";
+import { createFragment, createJsxElement } from "@backtickjs/ui-platform-sdk";
+import type { Elements as Ui } from "@backtickjs/ui-platform-sdk";
+import type { BacktickElement } from "@backtickjs/ui-platform-sdk";
 
 // What the JSX transform reaches for, for the language's own elements and no
 // target's.

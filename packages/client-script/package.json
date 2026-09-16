@@ -12,7 +12,7 @@
     }
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*"
+    "@backtickjs/platform-sdk": "workspace:*"
   },
   "scripts": {
     "build": "tsc -b",

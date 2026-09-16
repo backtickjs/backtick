@@ -24,7 +24,7 @@
   "dependencies": {
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-client": "workspace:*"
+    "@backtickjs/web-sdk": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // One script body (one source location) instantiated with different splices —
 // the JSX analogue of the `splice-sharing` fixture. The entry takes a thunk

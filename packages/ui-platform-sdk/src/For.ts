@@ -1,6 +1,6 @@
-import { type ClientValue } from "@backtickjs/language";
-import { createJsxElement } from "@backtickjs/ui";
-import type { BacktickElement } from "@backtickjs/ui";
+import { type ClientValue } from "@backtickjs/platform-sdk";
+import { createJsxElement } from "@backtickjs/ui-platform-sdk";
+import type { BacktickElement } from "@backtickjs/ui-platform-sdk";
 import type { ForProps } from "./declarations.generated.js";
 
 /**

@@ -1,5 +1,5 @@
 import type { ClientValue } from "@backtickjs/core";
-import type { BundleComponentCall } from "@backtickjs/language";
+import type { BundleComponentCall } from "@backtickjs/platform-sdk";
 import { untrack } from "solid-js";
 import { compile } from "./compile.js";
 import type { Scope } from "./compile.js";

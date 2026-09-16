@@ -1,7 +1,7 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
 import { cs, state, vm } from "@backtickjs/core";
-import { window } from "@backtickjs/web-client";
+import { window } from "@backtickjs/web-sdk";
 // A component that draws a bundle it is still waiting for.
 //
 // What this pins is that it is built once. `insert` reads what it was given
@@ -22,7 +22,7 @@ async function Answer() {
     {
       version: "0.0.0",
       filePath: "vm-eval-builds-once.tsx",
-      fileHash: "1q18fk5xf5fa4",
+      fileHash: "1tx9cp7jr1n3",
       splices: {},
       captures: [],
     },
@@ -52,7 +52,7 @@ async function Waiting({ ask }) {
     {
       version: "0.0.0",
       filePath: "vm-eval-builds-once.tsx",
-      fileHash: "1q18fk5xf5fa4",
+      fileHash: "1tx9cp7jr1n3",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -72,7 +72,7 @@ async function Waiting({ ask }) {
             kind: "id",
             loc: [32, 11, 32, 16],
             text: "drawn",
-            bindingKey: "drawn$1q18fk5xf5fa4$0",
+            bindingKey: "drawn$1tx9cp7jr1n3$0",
           },
           initializer: {
             kind: "()",
@@ -97,7 +97,7 @@ async function Waiting({ ask }) {
             kind: "id",
             loc: [33, 11, 33, 18],
             text: "started",
-            bindingKey: "started$1q18fk5xf5fa4$1",
+            bindingKey: "started$1tx9cp7jr1n3$1",
           },
           initializer: {
             kind: "()",
@@ -127,7 +127,7 @@ async function Waiting({ ask }) {
                       kind: "id",
                       loc: [33, 46, 33, 51],
                       text: "drawn",
-                      bindingKey: "drawn$1q18fk5xf5fa4$0",
+                      bindingKey: "drawn$1tx9cp7jr1n3$0",
                     },
                     name: "write",
                   },
@@ -182,7 +182,7 @@ async function Waiting({ ask }) {
                         kind: "id",
                         loc: [36, 10, 36, 15],
                         text: "drawn",
-                        bindingKey: "drawn$1q18fk5xf5fa4$0",
+                        bindingKey: "drawn$1tx9cp7jr1n3$0",
                       },
                       name: "read",
                     },
@@ -222,7 +222,7 @@ async function Waiting({ ask }) {
                           kind: "id",
                           loc: [38, 22, 38, 27],
                           text: "drawn",
-                          bindingKey: "drawn$1q18fk5xf5fa4$0",
+                          bindingKey: "drawn$1tx9cp7jr1n3$0",
                         },
                         name: "read",
                       },
@@ -243,7 +243,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "vm-eval-builds-once.tsx",
-    fileHash: "1q18fk5xf5fa4",
+    fileHash: "1tx9cp7jr1n3",
     splices: {
       $state: { value: state, params: [] },
       $answer: { value: answer, params: [] },
@@ -262,7 +262,7 @@ export default cs.create(
           kind: "id",
           loc: [45, 9, 45, 14],
           text: "asked",
-          bindingKey: "asked$1q18fk5xf5fa4$2",
+          bindingKey: "asked$1tx9cp7jr1n3$2",
         },
         initializer: {
           kind: "()",
@@ -323,7 +323,7 @@ export default cs.create(
                         kind: "id",
                         loc: [49, 25, 49, 30],
                         text: "asked",
-                        bindingKey: "asked$1q18fk5xf5fa4$2",
+                        bindingKey: "asked$1tx9cp7jr1n3$2",
                       },
                       name: "read",
                     },
@@ -361,7 +361,7 @@ export default cs.create(
                               kind: "id",
                               loc: [52, 11, 52, 16],
                               text: "asked",
-                              bindingKey: "asked$1q18fk5xf5fa4$2",
+                              bindingKey: "asked$1tx9cp7jr1n3$2",
                             },
                             name: "write",
                           },
@@ -379,7 +379,7 @@ export default cs.create(
                                     kind: "id",
                                     loc: [52, 23, 52, 28],
                                     text: "asked",
-                                    bindingKey: "asked$1q18fk5xf5fa4$2",
+                                    bindingKey: "asked$1tx9cp7jr1n3$2",
                                   },
                                   name: "read",
                                 },
@@ -413,7 +413,7 @@ export default cs.create(
                                     kind: "id",
                                     loc: [53, 18, 53, 23],
                                     text: "asked",
-                                    bindingKey: "asked$1q18fk5xf5fa4$2",
+                                    bindingKey: "asked$1tx9cp7jr1n3$2",
                                   },
                                   name: "read",
                                 },

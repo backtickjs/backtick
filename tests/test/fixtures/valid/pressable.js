@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // `Pressable` is the row that responds as one thing: `View` lays children out
 // and `Text` takes a press, and this takes both — so a checkbox and a label are

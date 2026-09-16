@@ -1,5 +1,5 @@
 import { cs, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web-client";
+import { window } from "@backtickjs/web-sdk";
 // A component whose whole drawing is a conditional on a cell of its own, which
 // something writes once from outside the block.
 //
@@ -20,7 +20,7 @@ async function Held({ again }) {
     {
       version: "0.0.0",
       filePath: "conditional-drawing.tsx",
-      fileHash: "3gy3511s8nfw7",
+      fileHash: "2dvf87kg3qr6s",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -39,7 +39,7 @@ async function Held({ again }) {
             kind: "id",
             loc: [21, 11, 21, 16],
             text: "shown",
-            bindingKey: "shown$3gy3511s8nfw7$0",
+            bindingKey: "shown$2dvf87kg3qr6s$0",
           },
           initializer: {
             kind: "()",
@@ -64,7 +64,7 @@ async function Held({ again }) {
             kind: "id",
             loc: [23, 11, 23, 18],
             text: "started",
-            bindingKey: "started$3gy3511s8nfw7$1",
+            bindingKey: "started$2dvf87kg3qr6s$1",
           },
           initializer: {
             kind: "()",
@@ -115,7 +115,7 @@ async function Held({ again }) {
                                 kind: "id",
                                 loc: [25, 9, 25, 14],
                                 text: "shown",
-                                bindingKey: "shown$3gy3511s8nfw7$0",
+                                bindingKey: "shown$2dvf87kg3qr6s$0",
                               },
                               name: "write",
                             },
@@ -167,7 +167,7 @@ async function Held({ again }) {
                       kind: "id",
                       loc: [29, 15, 29, 20],
                       text: "shown",
-                      bindingKey: "shown$3gy3511s8nfw7$0",
+                      bindingKey: "shown$2dvf87kg3qr6s$0",
                     },
                     name: "read",
                   },
@@ -220,7 +220,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "conditional-drawing.tsx",
-    fileHash: "3gy3511s8nfw7",
+    fileHash: "2dvf87kg3qr6s",
     splices: {
       $state: { value: state, params: [] },
       $Held: { value: Held, params: [] },
@@ -238,7 +238,7 @@ export default cs.create(
           kind: "id",
           loc: [34, 9, 34, 15],
           text: "builds",
-          bindingKey: "builds$3gy3511s8nfw7$2",
+          bindingKey: "builds$2dvf87kg3qr6s$2",
         },
         initializer: {
           kind: "()",
@@ -299,7 +299,7 @@ export default cs.create(
                         kind: "id",
                         loc: [38, 26, 38, 32],
                         text: "builds",
-                        bindingKey: "builds$3gy3511s8nfw7$2",
+                        bindingKey: "builds$2dvf87kg3qr6s$2",
                       },
                       name: "read",
                     },
@@ -347,7 +347,7 @@ export default cs.create(
                                   kind: "id",
                                   loc: [42, 13, 42, 19],
                                   text: "builds",
-                                  bindingKey: "builds$3gy3511s8nfw7$2",
+                                  bindingKey: "builds$2dvf87kg3qr6s$2",
                                 },
                                 name: "write",
                               },
@@ -365,7 +365,7 @@ export default cs.create(
                                         kind: "id",
                                         loc: [42, 26, 42, 32],
                                         text: "builds",
-                                        bindingKey: "builds$3gy3511s8nfw7$2",
+                                        bindingKey: "builds$2dvf87kg3qr6s$2",
                                       },
                                       name: "read",
                                     },
@@ -396,7 +396,7 @@ export default cs.create(
                                       kind: "id",
                                       loc: [43, 20, 43, 26],
                                       text: "builds",
-                                      bindingKey: "builds$3gy3511s8nfw7$2",
+                                      bindingKey: "builds$2dvf87kg3qr6s$2",
                                     },
                                     name: "read",
                                   },

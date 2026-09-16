@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Fragment } from "@backtickjs/web-client";
+import { Fragment } from "@backtickjs/web-sdk";
 
 // `<Fragment>` written out inside a script, where `<>` is the shorthand. A
 // fragment is a component — it answers with its children — so a tag naming one

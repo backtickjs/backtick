@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // Which tag names a function the script holds is the scope rule every name
 // follows. Inside the arrow, `Card` is its parameter; outside it, the same name

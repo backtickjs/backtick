@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 // A list whose drawing reads where a member sits as well as what it is.
 //

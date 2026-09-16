@@ -30,13 +30,13 @@ import type { Schema } from "../Schema.js";
 // schema generated into either package writes the name relative instead — see
 // `schema.package` below.
 const wrapping: ReadonlyMap<string, string> = new Map([
-  ["Client", "@backtickjs/language"],
-  ["Prop", "@backtickjs/ui"],
-  ["Children", "@backtickjs/ui"],
+  ["Client", "@backtickjs/platform-sdk"],
+  ["Prop", "@backtickjs/ui-platform-sdk"],
+  ["Children", "@backtickjs/ui-platform-sdk"],
 ]);
 
 /** Where a builtin's `Client` and `createBuiltin` come from. */
-export const holder = "@backtickjs/language";
+export const holder = "@backtickjs/platform-sdk";
 import type { TNode } from "../TNode.js";
 
 // A schema to the names it declares, as the host language declares them.

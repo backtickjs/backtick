@@ -18,8 +18,8 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*",
-    "@backtickjs/web-client": "workspace:*",
+    "@backtickjs/platform-sdk": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*",
     "solid-js": "^1.9.14"
   },
   "peerDependencies": {

@@ -89,11 +89,11 @@ describe("declarations", () => {
     // for it — so no line here says `Drawing`, and an import would read nothing.
     assert.doesNotMatch(written, /import type \{[^}]*\bDrawing\b[^}]*\}/);
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
-    // `Prop` is the ui schema's, wherever it is named, so it comes from one place
+    // `Prop` is the UI platform schema's, wherever it is named, so it comes from one place
     // every layer rather than being handed up like the rest.
     assert.match(
       written,
-      /import type \{[^}]*\bProp,[^}]*\} from "@backtickjs\/ui";/,
+      /import type \{[^}]*\bProp,[^}]*\} from "@backtickjs\/ui-platform-sdk";/,
     );
   });
 
@@ -113,7 +113,7 @@ describe("declarations", () => {
     const written = declarations(root);
     assert.match(
       written,
-      /import type \{[^}]*\bProp,[^}]*\} from "@backtickjs\/ui";/,
+      /import type \{[^}]*\bProp,[^}]*\} from "@backtickjs\/ui-platform-sdk";/,
       "a root reaches the wrapping's names the same way every layer above does",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);

@@ -1,7 +1,15 @@
+/**
+ * What every client answers for: the declaration, and what it comes to.
+ *
+ * The schema is the document — `./schema` reaches it, and
+ * `schema.generated.json` beside this is what a reader outside TypeScript
+ * gets. This is the rest: the types generated from it, and the few a schema
+ * never says. A builtin is a `Client<…>`, and `Client` is how a host language
+ * spells "a script standing in for a value" — nothing a client has a version
+ * of, so nothing a document declares.
+ */
 export type {
   ArrayLike,
-  BacktickElement,
-  BacktickNode,
   Builtins,
   Bundle,
   BundleAddition,
@@ -62,34 +70,33 @@ export type {
   ClientUnknown,
   ClientValue,
   Elements,
-  ForProps,
-  FragmentProps,
   Http,
   HttpConfig,
   HttpResponse,
+  PlatformBuiltins,
+  PlatformElements,
   ReadonlyState,
   State,
-  UiBuiltins,
-  UiElements,
   Vm,
 } from "./declarations.generated.js";
+export { http, state, vm } from "./builtins.generated.js";
+export type {
+  Array,
+  ArrayConstructor,
+  Boolean,
+  JSON,
+  Math,
+  Number,
+  NumberConstructor,
+  ObjectConstructor,
+  String,
+  StringConstructor,
+} from "./receivers.generated.js";
 
-// A component, because a tag has nowhere to bind a type parameter: it checks a
-// list's child against its array. The tag stays writable on its own, unchecked.
-export { For } from "./For.js";
-
-// A drawing as a host builds one: the runtime a target's JSX compiles to, and
-// what a component is. Here rather than below, because what these are made of
-// is what this schema declares.
-export {
-  createJsxElement,
-  isJsxElement,
-  type JsxElement,
-  type JsxElementType,
-} from "./JsxElement.js";
-export { createFragment, type Fragment } from "./Fragment.js";
-
-// What a prop admits. Here rather than with the language, because a prop is a
-// position in a drawing: the wrapper is JSX's rule, and JSX is what this is.
-export type { Prop } from "./Prop.js";
-export type { Children } from "./Children.js";
+// Written by hand, because a schema never says it: `Client` is how a host
+// language spells "a script standing in for a value", which a client has no
+// version of. `Prop` is the same idea in a drawing's position, and lives with
+// drawings — see `@backtickjs/ui-platform-sdk`.
+export type { Client } from "./Client.js";
+export type { Spliceable, Spliced } from "./Spliceable.js";
+export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";

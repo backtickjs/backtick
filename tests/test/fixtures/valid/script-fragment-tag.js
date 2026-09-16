@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { Fragment } from "@backtickjs/web-client";
+import { Fragment } from "@backtickjs/web-sdk";
 // `<Fragment>` written out inside a script, where `<>` is the shorthand. A
 // fragment is a component — it answers with its children — so a tag naming one
 // splices it and is a call of it, like any other component tag.
@@ -11,7 +11,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "script-fragment-tag.tsx",
-    fileHash: "1trfkozlq9knd",
+    fileHash: "3aaxnzed3k5hi",
     splices: {},
     captures: [],
   },

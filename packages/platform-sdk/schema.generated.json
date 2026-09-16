@@ -1,6 +1,6 @@
 {
-  "package": "@backtickjs/language",
-  "namespace": "Language",
+  "package": "@backtickjs/platform-sdk",
+  "namespace": "Platform",
   "extends": [],
   "types": {
     "ReadonlyState": {

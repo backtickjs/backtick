@@ -26,7 +26,7 @@ export function browserTranspile(
     ts,
     fileName,
     sourceText,
-    "@backtickjs/web-client",
+    "@backtickjs/web-sdk",
     addDiagnostic,
   );
 

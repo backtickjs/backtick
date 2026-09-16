@@ -1,11 +1,11 @@
-import { schema as language } from "@backtickjs/language/schema";
+import { schema as language } from "@backtickjs/platform-sdk/schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 
 export const schema: Schema = {
-  package: "@backtickjs/ui",
+  package: "@backtickjs/ui-platform-sdk",
 
-  namespace: "Ui",
+  namespace: "UiPlatform",
 
   extends: [language],
 

@@ -189,7 +189,7 @@ const views = [
   ]),
 ] as [string, TNode][];
 
-// A name a view reaches for and no view declares is the language schema's, and
+// A name a view reaches for and no view declares is the platform schema's, and
 // is imported rather than written again: `Array.from` takes an `ArrayLike<T>`,
 // which is a shape a signature mentions and so a type the schema keeps.
 const own = views.reduce(

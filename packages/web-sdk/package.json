@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/web-client",
+  "name": "@backtickjs/web-sdk",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -35,8 +35,8 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*",
+    "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/schema": "workspace:*",
-    "@backtickjs/ui": "workspace:*"
+    "@backtickjs/ui-platform-sdk": "workspace:*"
   }
 }

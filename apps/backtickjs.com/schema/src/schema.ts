@@ -1,4 +1,4 @@
-import { schema as web } from "@backtickjs/web-client/schema";
+import { schema as web } from "@backtickjs/web-sdk/schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 

@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // State belongs to the script that declares it, and a script entry is applied
 // once per place that reaches it — so two `<Counter />` tags are two

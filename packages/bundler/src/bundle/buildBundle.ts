@@ -9,10 +9,10 @@ import type {
   BundleExpression,
   BundleIdentifier,
   BundleFunctionLabel,
-} from "@backtickjs/language";
+} from "@backtickjs/platform-sdk";
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
-import type { ClientUnknown } from "@backtickjs/language";
+import type { ClientUnknown } from "@backtickjs/platform-sdk";
 
 // Builds the bundle `{ functions, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation

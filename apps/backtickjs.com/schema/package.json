@@ -31,10 +31,10 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*",
+    "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/schema": "workspace:*",
-    "@backtickjs/ui": "workspace:*",
-    "@backtickjs/web-client": "workspace:*"
+    "@backtickjs/ui-platform-sdk": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

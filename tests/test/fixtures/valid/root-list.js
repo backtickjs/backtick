@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 // A list at the root, with nothing wrapping it. What that makes the root is a
 // stretch of the target rather than one node of it: emptying the list takes

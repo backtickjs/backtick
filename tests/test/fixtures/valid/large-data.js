@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-client/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, For } from "@backtickjs/core";
 const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,

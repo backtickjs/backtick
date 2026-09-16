@@ -1,5 +1,5 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
-import type { Bundle } from "@backtickjs/language";
+import type { Bundle } from "@backtickjs/platform-sdk";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import { rendererOptions } from "./rendererOptions.js";
@@ -103,7 +103,8 @@ export function createInterpreter(
         return dispose;
       }),
     eval: <T extends ClientUnknown>(bundle: Bundle<T>) =>
-      createRoot(() => compile(instanceOf(bundle), bundle.root)(scopeOf(null))
+      createRoot(() =>
+        compile(instanceOf(bundle), bundle.root)(scopeOf(null)),
       ) as T,
   };
 }

@@ -2,7 +2,7 @@ import {
   jsx as _jsx,
   Fragment as _Fragment,
   jsxs as _jsxs,
-} from "@backtickjs/web-client/jsx-runtime";
+} from "@backtickjs/web-sdk/jsx-runtime";
 // `<>…</>` and `<Fragment>` are one component: the JSX transform imports
 // `Fragment` from the configured `jsxImportSource`, and the jsx-runtime
 // re-exports the core component under that name. The shorthand needs no import.

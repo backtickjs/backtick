@@ -9,9 +9,9 @@ import type {
   ObjectConstructor,
   String,
   StringConstructor,
-} from "@backtickjs/language";
-import type { ClientFunction } from "@backtickjs/language";
-import type { ClientValue } from "@backtickjs/language";
+} from "@backtickjs/platform-sdk";
+import type { ClientFunction } from "@backtickjs/platform-sdk";
+import type { ClientValue } from "@backtickjs/platform-sdk";
 
 // A built-in receiver autoboxes to its client type.
 //

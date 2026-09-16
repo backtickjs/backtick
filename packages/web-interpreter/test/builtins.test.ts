@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { schema } from "@backtickjs/web-client/schema";
+import { schema } from "@backtickjs/web-sdk/schema";
 import { builtinOf } from "../dist/builtinOf.js";
 import type { Instance } from "../dist/Instance.js";
 

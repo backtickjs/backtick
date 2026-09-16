@@ -14,7 +14,7 @@
     "@backtickjs/bun-plugin": "^0.1.0",
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "^0.1.0",
-    "@backtickjs/web-client": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*",
     "@backtickjs/web-page": "workspace:*"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import { For } from "@backtickjs/core";
-import { Fragment } from "@backtickjs/web-client";
+import { Fragment } from "@backtickjs/web-sdk";
 
 // What the JSX namespace admits, and what it refuses.
 //

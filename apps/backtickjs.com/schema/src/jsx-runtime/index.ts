@@ -1,11 +1,11 @@
-import type { JsxElementType } from "@backtickjs/ui";
-import { createFragment, createJsxElement } from "@backtickjs/ui";
-import type { BacktickElement } from "@backtickjs/ui";
+import type { JsxElementType } from "@backtickjs/ui-platform-sdk";
+import { createFragment, createJsxElement } from "@backtickjs/ui-platform-sdk";
+import type { BacktickElement } from "@backtickjs/ui-platform-sdk";
 import type { Elements as Site } from "../declarations.generated.js";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //
-// This site's rather than `@backtickjs/web-client`'s, because this site's
+// This site's rather than `@backtickjs/web-sdk`'s, because this site's
 // declares a tag of its own. Everything else is that one's, verbatim: only the
 // `Elements` differ.
 //

@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { describe, it } from "node:test";
-import { schema } from "@backtickjs/language/schema";
-import type { Builtins } from "@backtickjs/language";
+import { schema } from "@backtickjs/platform-sdk/schema";
+import type { Builtins } from "@backtickjs/platform-sdk";
 import { builtinOf, getters } from "../dist/builtinOf.js";
 import type { Instance } from "../dist/Instance.js";
 

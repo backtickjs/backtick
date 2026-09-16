@@ -10,7 +10,7 @@
  * are one thing said at two moments.
  *
  * What a script may *hold* is not here. `ClientValue` and the rest are
- * `@backtickjs/language`, which is generated from a schema; this names one of
+ * `@backtickjs/platform-sdk`, which is generated from a schema; this names one of
  * them, `Spliceable`, to say what a host may put in a hole.
  */
 export {

@@ -21,7 +21,7 @@
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/tspatch-plugin": "workspace:*",
-    "@backtickjs/web-client": "workspace:*"
+    "@backtickjs/web-sdk": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "workspace:*",

@@ -9,7 +9,7 @@ import type {
   BundleSpreadElement,
   BundleStatement,
   BundleFunctionLabel,
-} from "@backtickjs/language";
+} from "@backtickjs/platform-sdk";
 import { builtinOf, getters } from "./builtinOf.js";
 import type { Instance } from "./Instance.js";
 import { compileComponentCall } from "./compileComponentCall.js";

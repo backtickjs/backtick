@@ -123,14 +123,14 @@ describe("builtins", () => {
     assert.doesNotMatch(written, /\bstate\b/);
   });
 
-  it("reads what may cross the boundary from `language`, at every layer", () => {
-    // `createBuiltin` and `Client` are the language schema's, not a layer's, so the root
+  it("reads what may cross the boundary from `platform-sdk`, at every layer", () => {
+    // `createBuiltin` and `Client` are the platform schema's, not a layer's, so the root
     // and a target above it read them the same way. What a layer declares is
     // still read through that layer's own artifact.
     for (const schema of [core, target]) {
       assert.match(
         builtins(schema),
-        /import \{ createBuiltin, type Client \} from "@backtickjs\/language";/,
+        /import \{ createBuiltin, type Client \} from "@backtickjs\/platform-sdk";/,
       );
     }
     assert.match(
@@ -149,12 +149,12 @@ describe("builtins", () => {
     assert.doesNotMatch(builtins(core), /^ {2}T,$/m);
   });
 
-  it("reaches for what a value reads as, which is the language schema's", () => {
-    // Not a layer's to publish: `Client` comes from `@backtickjs/language`
+  it("reaches for what a value reads as, which is the platform schema's", () => {
+    // Not a layer's to publish: `Client` comes from `@backtickjs/platform-sdk`
     // wherever it is written, so a root has nothing of its own to hand on.
     assert.match(
       builtins(core),
-      /import \{ createBuiltin, type Client \} from "@backtickjs\/language";/,
+      /import \{ createBuiltin, type Client \} from "@backtickjs\/platform-sdk";/,
     );
   });
 });
