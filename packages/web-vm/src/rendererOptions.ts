@@ -29,7 +29,7 @@ const SVG = "http://www.w3.org/2000/svg";
 // `setProperty` is the only decision here, because what a prop means is ours.
 // Built over the document it is handed, so what draws into a page can draw into
 // any document.
-export function renderer(document: Document): RendererOptions<Node> {
+export function rendererOptions(document: Document): RendererOptions<Node> {
   return {
     // The interpreter prefixes a tag drawn inside an `svg`: `svg:path` is a path
     // in SVG's namespace, and a tag with no prefix is HTML's.

@@ -1,4 +1,4 @@
-import { createInterpreter, renderer } from "@backtickjs/web-vm";
+import { createInterpreter, rendererOptions } from "@backtickjs/web-vm";
 import type { ClientOptions } from "@backtickjs/web-vm";
 
 /**
@@ -13,7 +13,7 @@ import type { ClientOptions } from "@backtickjs/web-vm";
 export function defineClient(options: ClientOptions): void {
   // A window carries the document it is of, so a page hands over one thing.
   const document = options.window.document;
-  const { render } = createInterpreter(renderer(document), options);
+  const { render } = createInterpreter(rendererOptions(document), options);
 
   // Every bundle the document carried, drawn where its script stands.
   //

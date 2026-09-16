@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { renderer } from "../src/renderer.ts";
+import { rendererOptions } from "../src/rendererOptions.ts";
 
 // Built when called: a test puts its own document in place first.
-const dom = () => renderer(globalThis.document);
+const dom = () => rendererOptions(globalThis.document);
 
 // A node that records which route a value took onto it.
 function node(namespace = "http://www.w3.org/1999/xhtml") {

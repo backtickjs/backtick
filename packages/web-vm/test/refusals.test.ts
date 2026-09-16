@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-client/schema";
-import { renderer } from "../src/renderer.ts";
+import { rendererOptions } from "../src/rendererOptions.ts";
 
 // Built when called: a test puts its own document in place first.
-const dom = () => renderer(globalThis.document);
+const dom = () => rendererOptions(globalThis.document);
 
 // The two ways a bundle could run what wrote it, each held to not happening.
 //

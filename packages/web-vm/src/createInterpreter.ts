@@ -2,7 +2,7 @@ import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/language";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
-import type { RendererOptions } from "./renderer.js";
+import type { RendererOptions } from "./rendererOptions.js";
 import { compile, scopeOf } from "./compile.js";
 
 /**
