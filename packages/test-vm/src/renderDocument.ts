@@ -6,7 +6,7 @@ import { windowOf } from "./window.js";
 /** What a test changes about the page a bundle is drawn into. */
 export interface DocumentOptions {
   /** Names beside the client's own, for a test about a target adding one. */
-  readonly compileBuiltin?: (name: string) => ClientValue;
+  readonly builtinOf?: (name: string) => ClientValue;
 }
 
 /** A page a bundle was drawn into, and what closes it again. */
@@ -35,7 +35,7 @@ export function renderDocument(
   const document = page.document;
   const { render } = createInterpreter(renderer(document as never), {
     window: windowOf(page),
-    compileBuiltin: options.compileBuiltin,
+    builtinOf: options.builtinOf,
   });
   const dispose = render(bundle, document.body as never);
   return {

@@ -19,7 +19,7 @@ export interface Instance {
   readonly window: typeof window;
   // What the target answers for beside the client's own names, asked only after
   // those have not answered.
-  readonly compileBuiltin?: (name: string) => ClientValue;
+  readonly builtinOf?: (name: string) => ClientValue;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per
   // reference would be a fresh identity, and a prop holding one would be set

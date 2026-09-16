@@ -18,7 +18,7 @@ import type { Applied } from "./compile.js";
 // `constructor` is `Object`'s — and only a `case` answers here. Most names are
 // the host's own member of the same name; a member of a value takes the value
 // first. What a target adds is asked for in `default`, after these.
-export function compileBuiltin(instance: Instance, name: string): ClientValue {
+export function builtinOf(instance: Instance, name: string): ClientValue {
   // A wire name may be anything; `default` is where the rest land.
   const known = name as keyof Builtins;
   switch (known) {
@@ -289,7 +289,7 @@ export function compileBuiltin(instance: Instance, name: string): ClientValue {
       ) {
         throw new Error(`a ${kind} has no \`${member}\` in this language`);
       }
-      return instance.compileBuiltin?.(name);
+      return instance.builtinOf?.(name);
     }
   }
 }

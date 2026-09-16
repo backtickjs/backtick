@@ -112,7 +112,7 @@ function normalizeDiagnostic(diagnostic: ts.Diagnostic): Diagnostic {
 // This site's names, answered the way the client answers the web's: a `case`
 // per name, each checked against the contract, and nothing an object would
 // answer for besides.
-export function compileBuiltin(name: string): ClientValue {
+export function builtinOf(name: string): ClientValue {
   const known = name as keyof SiteBuiltins;
   switch (known) {
     case "compile":

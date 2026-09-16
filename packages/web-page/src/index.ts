@@ -7,7 +7,7 @@
  * document is what says which bundles there are, and where they go.
  *
  * An app with a name of its own — a schema declaring something the web client
- * cannot answer — hands `defineClient` its own `compileBuiltin` rather than
+ * cannot answer — hands `defineClient` its own `builtinOf` rather than
  * writing a second client beside this one.
  *
  * What `./bundle` publishes is this, bundled and self-starting, for a page to

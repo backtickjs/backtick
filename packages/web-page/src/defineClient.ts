@@ -5,7 +5,7 @@ import type { ClientOptions } from "@backtickjs/web-vm";
  * Draws every bundle a page carries, where its script stands.
  *
  * A window is all a page hands over: its document is what is drawn into, and a
- * script reaches the window itself through `$window`. `compileBuiltin` answers
+ * script reaches the window itself through `$window`. `builtinOf` answers
  * for what an app adds to the web's own names, asked after them, so an app may
  * add and may not replace. A tag an app adds is one it registers with the
  * browser, which the document then builds itself.

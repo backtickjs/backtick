@@ -3,7 +3,7 @@
 // for the web and for nothing else.
 //
 // An app with a name of its own calls `defineClient` with its own
-// `compileBuiltin` rather than loading this beside it.
+// `builtinOf` rather than loading this beside it.
 import { defineClient } from "./defineClient.js";
 
 defineClient({ window });

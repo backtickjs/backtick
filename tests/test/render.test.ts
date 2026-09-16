@@ -5,7 +5,7 @@ import { describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { render, testHost } from "@backtickjs/test-vm";
+import { render, testRenderer } from "@backtickjs/test-vm";
 import type { TestNode } from "@backtickjs/test-vm";
 
 // Where a render draws, and what it may move.
@@ -237,24 +237,24 @@ describe("a tag naming a function the script holds", () => {
 
 describe("an element's namespace", () => {
   // The host hears an element drawn inside an `svg` as `svg:<tag>`.
-  function recording(): { made: string[]; host: typeof testHost } {
+  function recording(): { made: string[]; renderer: typeof testRenderer } {
     const made: string[] = [];
-    const host = {
-      ...testHost,
+    const renderer = {
+      ...testRenderer,
       createElement: (id: string) => {
         made.push(id);
-        return testHost.createElement(id);
+        return testRenderer.createElement(id);
       },
     };
-    return { made, host };
+    return { made, renderer };
   }
 
   it("is where the element is drawn", async () => {
     const bundle = await bundler.run(
       await importFixture(validDir, "svg-namespace.tsx"),
     );
-    const { made, host } = recording();
-    render(bundle, node("main"), { host });
+    const { made, renderer } = recording();
+    render(bundle, node("main"), { renderer });
 
     // Sorted: a list builds its rows after the elements beside it, and the
     // order they are made in is not the claim.
@@ -278,9 +278,9 @@ describe("an element's namespace", () => {
     const bundle = await bundler.run(
       await importFixture(validDir, "svg-namespace-later.tsx"),
     );
-    const { made, host } = recording();
+    const { made, renderer } = recording();
     const parent = node("main");
-    render(bundle, parent, { host });
+    render(bundle, parent, { renderer });
     assert.deepEqual(made.sort(), [
       "button",
       "button",

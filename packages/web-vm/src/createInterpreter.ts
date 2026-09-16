@@ -30,7 +30,7 @@ export interface ClientOptions {
    * answers for is never reached here: what `state` means is not a target's to
    * redecide.
    */
-  readonly compileBuiltin?: (name: string) => ClientValue;
+  readonly builtinOf?: (name: string) => ClientValue;
 }
 
 /** What the interpreter does with a bundle, once it has a target to do it on. */

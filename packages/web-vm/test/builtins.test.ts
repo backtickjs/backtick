@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-client/schema";
-import { compileBuiltin } from "../dist/compileBuiltin.js";
+import { builtinOf } from "../dist/builtinOf.js";
 import type { Instance } from "../dist/Instance.js";
 
 // What this client answers with, against what the web's schema says a script
@@ -19,7 +19,7 @@ describe("what the web answers for", () => {
   it("answers for every name its schema declares", () => {
     for (const name of Object.keys(schema.builtins)) {
       assert.notEqual(
-        compileBuiltin(instance, name),
+        builtinOf(instance, name),
         undefined,
         `\`${name}\` is declared and not answered`,
       );
@@ -29,7 +29,7 @@ describe("what the web answers for", () => {
   // One name, and everything else read off it — the way the DOM keeps them,
   // and the way a frame's `contentWindow` hands over the same interface.
   it("hands over what the window stands for", () => {
-    const window = compileBuiltin(instance, "window") as unknown as Record<
+    const window = builtinOf(instance, "window") as unknown as Record<
       string,
       unknown
     >;
@@ -53,7 +53,7 @@ describe("what the web answers for", () => {
   });
 
   it("reads through to the host's window, and hands over nothing else", () => {
-    const window = compileBuiltin(instance, "window") as unknown as Record<
+    const window = builtinOf(instance, "window") as unknown as Record<
       string,
       unknown
     >;

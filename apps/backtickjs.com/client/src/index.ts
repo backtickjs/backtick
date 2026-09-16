@@ -7,6 +7,6 @@
  * named as the browser registers it, so the document builds that one itself.
  */
 import { defineClient } from "@backtickjs/web-page";
-import { compileBuiltin } from "./compileBuiltin.js";
+import { builtinOf } from "./builtinOf.js";
 
-defineClient({ window, compileBuiltin });
+defineClient({ window, builtinOf });

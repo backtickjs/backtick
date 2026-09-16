@@ -10,7 +10,7 @@ import type {
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/language";
-import { compileBuiltin, getters } from "./compileBuiltin.js";
+import { builtinOf, getters } from "./builtinOf.js";
 import type { Instance } from "./Instance.js";
 import { compileComponentCall } from "./compileComponentCall.js";
 import { compileElement } from "./compileElement.js";
@@ -208,7 +208,7 @@ function memberOf(
   }
   const whole = `${boxed}.${name}`;
   // Answered, or refused there: a member a kind of value does not have throws.
-  const found = compileBuiltin(instance, whole);
+  const found = builtinOf(instance, whole);
   // Every member takes its receiver first, because a client with no `this`
   // reads the same document and answers the same way. A getter is applied
   // here, where its name is read, because that is where the language puts the
@@ -330,7 +330,7 @@ export function compile(
     // everywhere, and a target may lengthen it but not edit it.
     case "bltn": {
       const name = node[1];
-      const value = compileBuiltin(instance, name);
+      const value = builtinOf(instance, name);
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }

@@ -9,7 +9,7 @@
  * Reactive only where Solid resolves to its browser build, which is what
  * `--conditions=browser` asks Node for.
  */
-import type { Bundle, ClientUnknown } from "@backtickjs/core";
+import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
 import { createInterpreter } from "@backtickjs/web-vm";
 import type { RendererOptions } from "@backtickjs/web-vm";
 import { testRenderer } from "./host.js";
@@ -24,10 +24,16 @@ export type { DocumentOptions, Drawn } from "./renderDocument.js";
 /** What a test changes about the VM a bundle runs in. */
 export interface TestOptions {
   /**
-   * How nodes are built: `testHost` unless a test watches how the host is
+   * How nodes are built: `testRenderer` unless a test watches how the host is
    * spoken to rather than what it ends up holding.
    */
   readonly renderer?: RendererOptions<TestNode>;
+
+  /**
+   * Names beside the client's own, as a target answers for its own: asked by
+   * the whole name, and answering with nothing for one it does not have.
+   */
+  readonly builtinOf?: (name: string) => ClientValue;
 }
 
 export interface RenderOptions extends TestOptions {
@@ -44,9 +50,9 @@ export interface RenderOptions extends TestOptions {
  */
 export function evaluate<Value extends ClientUnknown>(
   bundle: Bundle<Value>,
-  { renderer = testRenderer }: TestOptions = {},
+  { renderer = testRenderer, builtinOf }: TestOptions = {},
 ): Value {
-  return createInterpreter(renderer, { window }).eval(bundle);
+  return createInterpreter(renderer, { window, builtinOf }).eval(bundle);
 }
 
 /**
@@ -56,7 +62,11 @@ export function evaluate<Value extends ClientUnknown>(
 export function render(
   bundle: Bundle<ClientUnknown>,
   parent: TestNode,
-  { renderer = testRenderer, anchor }: RenderOptions = {},
+  { renderer = testRenderer, anchor, builtinOf }: RenderOptions = {},
 ): () => void {
-  return createInterpreter(renderer, { window }).render(bundle, parent, anchor);
+  return createInterpreter(renderer, { window, builtinOf }).render(
+    bundle,
+    parent,
+    anchor,
+  );
 }

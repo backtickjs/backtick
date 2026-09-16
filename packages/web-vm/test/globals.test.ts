@@ -4,7 +4,7 @@ import type { AddressInfo } from "node:net";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/language/schema";
 import type { Builtins } from "@backtickjs/language";
-import { compileBuiltin, getters } from "../dist/compileBuiltin.js";
+import { builtinOf, getters } from "../dist/builtinOf.js";
 import type { Instance } from "../dist/Instance.js";
 
 // What the interpreter answers with, against what the schema says a script may
@@ -16,7 +16,7 @@ import type { Instance } from "../dist/Instance.js";
 const instance = {} as Instance;
 
 function answer<Name extends keyof Builtins>(name: Name): Builtins[Name] {
-  return compileBuiltin(instance, name) as unknown as Builtins[Name];
+  return builtinOf(instance, name) as unknown as Builtins[Name];
 }
 
 describe("builtins", () => {
@@ -26,7 +26,7 @@ describe("builtins", () => {
     // here without anything being told about it twice.
     for (const name of Object.keys(schema.builtins)) {
       assert.notEqual(
-        compileBuiltin(instance, name),
+        builtinOf(instance, name),
         undefined,
         `\`${name}\` is declared and not answered`,
       );

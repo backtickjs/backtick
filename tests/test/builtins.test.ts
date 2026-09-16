@@ -19,7 +19,7 @@ describe("a member the schema leaves out", () => {
 
   it("is a name this language has no meaning for", () => {
     // Not absent, and not the host's: reading it as null would let a bundle ask
-    // for a member the schema left out and carry on, and the flat table holds
+    // for a member the schema left out and carry on, and the client answers
     // every name a value has — so nothing answering is the whole answer.
     assert.throws(
       () => evaluate(bundle),
@@ -40,9 +40,11 @@ describe("a name a target answers for", () => {
     root: ["()", ["fn", "0"], []],
   } as unknown as Bundle<ClientUnknown>;
 
-  it("is answered by the table its target handed over", () => {
+  it("is answered by the function its target handed over", () => {
     assert.equal(
-      evaluate(bundle, { builtins: { greet: () => "hello" } }),
+      evaluate(bundle, {
+        builtinOf: (name) => (name === "greet" ? () => "hello" : undefined),
+      }),
       "hello",
     );
   });
@@ -79,11 +81,10 @@ describe("a name a target answers for", () => {
     const storage = { greeting: "hei" } as Record<string, string>;
     assert.equal(
       evaluate(held, {
-        builtins: {
-          storage: {
-            get: (key: ClientValue) => storage[key as string] ?? null,
-          },
-        },
+        builtinOf: (name) =>
+          name === "storage"
+            ? { get: (key: ClientValue) => storage[key as string] ?? null }
+            : undefined,
       }),
       "hei",
     );
@@ -97,11 +98,16 @@ describe("a name a target answers for", () => {
       functions: {},
       root: ["()", ["bltn", "Math.floor"], [2.7]],
     } as unknown as Bundle<ClientUnknown>;
-    assert.equal(evaluate(floored, { builtins: { "Math.floor": () => 0 } }), 2);
+    assert.equal(
+      evaluate(floored, {
+        builtinOf: (name) => (name === "Math.floor" ? () => 0 : undefined),
+      }),
+      2,
+    );
   });
 
   it("may not add a member to a kind of value", () => {
-    // A member of a string is the language's, so a table naming one adds a
+    // A member of a string is the language's, so a target naming one adds a
     // whole name nothing reads: `"abc".padStart` still finds nothing.
     const padded = {
       functions: {
@@ -112,7 +118,10 @@ describe("a name a target answers for", () => {
     assert.throws(
       () =>
         evaluate(padded, {
-          builtins: { "string.padStart": (self) => self },
+          builtinOf: (name) =>
+            name === "string.padStart"
+              ? (self: ClientValue) => self
+              : undefined,
         }),
       /a string has no `padStart` in this language/,
     );

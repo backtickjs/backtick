@@ -185,7 +185,7 @@ describe("local state", () => {
   it("a prop that recomputed to what it held is not set again", async () => {
     const script = await importFixture(validDir, "unmoved-prop.tsx");
     const { options, writes } = recordingHost();
-    const view = evaluate(await bundler.run(script), { host: options });
+    const view = evaluate(await bundler.run(script), { renderer: options });
     assert.ok(isTestNode(view), "expected a rendered node");
     const [select, list] = children(view);
     assert.ok(select !== undefined && list !== undefined);
