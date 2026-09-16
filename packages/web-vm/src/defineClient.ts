@@ -1,6 +1,7 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/core";
 import { render } from "./render.js";
+import { renderer } from "./renderer.js";
 import type { Renderer } from "./renderer.js";
 
 /**
@@ -63,7 +64,14 @@ export type Draw = (
  * beside them. A tag a target adds is one it registers with the browser, which
  * the document then builds itself.
  */
-export function defineClient(options: ClientOptions<Node>): void {
+export function defineClient({
+  window,
+  compileBuiltin,
+}: Omit<ClientOptions<Node>, "renderer">): void {
+  // A window carries the document it is of, so a page hands over one thing.
+  const document = window.document;
+  const options = { renderer: renderer(document), window, compileBuiltin };
+
   // Every bundle the document carried, drawn where its script stands.
   //
   // Found here rather than announced from the page: a document that carried a
