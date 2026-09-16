@@ -1,0 +1,84 @@
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_name                            → name
+:                                    → ?: 
+string                               → string
+ | undefined                         → 
+) => {\n                             → ) => {\n  
+return cs.const(                     → return 
+cs.receiver(                         → 
+__cs_name                            → name
+)                                    → 
+?.                                   → ?.
+concat                               → concat
+(                                    → (
+"!"                                  → "!"
+)                                    → )
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+() =>                                → () => 
+2                                    → 2
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_cb                              → cb
+: (                                  → ?: 
+() =>                                → () => 
+number                               → number
+) | undefined                        → 
+) => {\n                             → ) => {\n  
+return cs.const(                     → return 
+__cs_cb                              → cb
+?.()                                 → ?.()
+ ??                                  →  ?? 
+0                                    → 0
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+{                                    → ({\n  
+named                                → named
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(greet)                              → $greet
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+"hi"                                 → "hi"
+)                                    → )
+,                                    → ,\n  
+explicit                             → explicit
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(greet)                              → $greet
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+undefined                            → undefined
+)                                    → )
+,                                    → ,\n  
+supplied                             → supplied
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(callIfGiven)                        → $callIfGiven
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+cs.splice(                           →  [-semantic]
+(double)                             → $double
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → )
+,                                    → ,\n  
+fallback                             → fallback
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(callIfGiven)                        → $callIfGiven
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+undefined                            → undefined
+)                                    → )
+ }                                   → ,\n})
+))                                   → `

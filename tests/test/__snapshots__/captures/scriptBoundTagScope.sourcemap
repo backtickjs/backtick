@@ -1,0 +1,88 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_twice              → twice
+ = cs.const(            →  = 
+(                       → (
+__cs_Card               → Card
+:                       → : 
+(                       → (
+props                   → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+BacktickElement         → BacktickElement
+) =>                    → ) => 
+<                       → (\n    <
+div                     → div
+>{cs.lift(              → >\n      
+<                       → <
+__cs_Card               → Card
+                        →  
+n                       → n
+={                      → ={
+1                       → 1
+}                       → }
+/>                      →  />
+)}{cs.lift(             → \n      
+<                       → <
+__cs_Card               → Card
+                        →  
+n                       → n
+={                      → ={
+2                       → 2
+}                       → }
+/>                      →  />
+)}</                    → \n    </
+div                     → div
+>                       → >\n  )
+);                      → ;
+\n                      → \n\n  
+return cs.const(        → return 
+<                       → (\n    <
+section                 → section
+>{cs.lift(              → >\n      
+<                       → <
+Card                    → Card
+                        →  
+title                   → title
+={cs.lift(              → =
+"host"                  → "host"
+)}                      → 
+/>                      →  />
+)}{cs.lift(             → \n      {
+__cs_twice              → twice
+(                       → (
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → (\n        <
+i                       → i
+>{cs.lift(              → >{
+"row "                  → "row "
+ +                      →  + 
+cs.receiver(            → 
+__cs_props              → props
+)                       → 
+.                       → .
+n                       → n
+)}</                    → }</
+i                       → i
+>                       → >\n      )
+)                       → )
+)}</                    → }\n    </
+section                 → section
+>                       → >\n  )
+);                      → ;
+\n})())                 → \n}`

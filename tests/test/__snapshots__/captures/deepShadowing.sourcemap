@@ -1,0 +1,49 @@
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_base                            → base
+ = cs.const(                         →  = 
+10                                   → 10
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+cs.splice(                           → ${ [-semantic]
+outerBase(                           → outerBase(
+cs.lift(cs.const(                    → cs`
+__cs_base                            → base
+))                                   → `
+)                                    → )
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+);                                   → ;
+\n})())                              → \n}`
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_base                            → base
+ = cs.const(                         →  = 
+1                                    → 1
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+__cs_base                            → base
+ + (                                 →  + 
+cs.splice(                           → ${ [-semantic]
+middleBase(inner)                    → middleBase(inner)
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)                                    → 
+);                                   → ;
+\n})())                              → \n  }`
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_base                            → base
+ = cs.const(                         →  = 
+2                                    → 2
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+__cs_base                            → base
+ * (                                 →  * 
+cs.splice(                           →  [-semantic]
+(inner)                              → $inner
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+);                                   → ;
+\n})())                              → \n  }`

@@ -1,0 +1,199 @@
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n                                  → { 
+count                                → count
+:                                    → : 
+number                               → number
+;                                    → 
+\n}                                  →  }
+) =>                                 → ) => 
+<                                    → <
+b                                    → b
+>{cs.lift(                           → >{
+"count "                             → "count "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_props                           → props
+)                                    → 
+.                                    → .
+count                                → count
+)}</                                 → }</
+b                                    → b
+>                                    → >
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_count                           → count
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+0                                    → 0
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+const                                → const 
+__cs_drawn                           → drawn
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)<                                   → <
+Bundle                               → Bundle
+<                                    → <\n    
+(                                    → (
+props                                → props
+:                                    → : 
+{\n                                  → { 
+count                                → count
+:                                    → : 
+number                               → number
+;                                    → 
+\n    }                              →  }
+) =>                                 → ) => 
+BacktickElement                      → BacktickElement
+>                                    → \n  >
+ |                                   →  | 
+null                                 → null
+>(                                   → >(
+null                                 → null
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+const                                → const 
+__cs_Badge                           → Badge
+ = cs.const(                         →  = 
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n                                  → { 
+count                                → count
+:                                    → : 
+number                               → number
+;                                    → 
+\n    }                              →  }
+) => {\n                             → ) => {\n    
+const                                → const 
+__cs_held                            → held
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+__cs_drawn                           → drawn
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+__cs_held                            → held
+ ===                                 →  === 
+null                                 → null
+ ?                                   →  ? 
+null                                 → null
+ :                                   →  : 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+__cs_held                            → held
+)                                    → )
+(                                    → (
+__cs_props                           → props
+)                                    → )
+);                                   → ;
+\n    }                              → \n  }
+);                                   → ;
+\n                                   → \n\n  
+return cs.const(                     → return 
+<                                    → (\n    <
+div                                  → div
+>{cs.lift(                           → >\n      {
+cs.receiver(                         → 
+__cs_drawn                           → drawn
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ ===                                 →  === 
+null                                 → null
+ ?                                   →  ? 
+<                                    → <
+i                                    → i
+>loading</                           → >loading</
+i                                    → i
+>                                    → >
+ :                                   →  : 
+<                                    → <
+__cs_Badge                           → Badge
+                                     →  
+count                                → count
+={                                   → ={
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+}                                    → }
+/>                                   →  />
+)}{cs.lift(                          → }\n      
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_drawn                           → drawn
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.splice(                           →  [-semantic]
+(loadedBadge)                        → $loadedBadge
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → )
+)}                                   → }
+>load</                              → >load</
+button                               → button
+>                                    → >
+)}{cs.lift(                          → \n      
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+)                                    → )
+)}                                   → }
+>more</                              → >more</
+button                               → button
+>                                    → >
+)}</                                 → \n    </
+div                                  → div
+>                                    → >\n  )
+);                                   → ;
+\n})())                              → \n}`

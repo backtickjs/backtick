@@ -226,6 +226,156 @@ async function SelectableRows() {
   }`;
 }
 
+type Row = {
+  readonly id: number;
+  readonly label: State<string>;
+};
+
+// A list whose members carry storage of their own: `build` declares a cell per
+// row, and the cell the list reads holds those cells along with the rows. A
+// press writes into one row's cell, so only what read that cell runs again —
+// the array is the array it was, and no other row moves.
+//
+// What a cell starts at is the other half of this: the initial is a call here,
+// not data, which is what a cell declared where it is evaluated allows.
+async function MemberRows() {
+  return cs`{
+    const build = (from: number) => {
+      return Array.from({ length: 3 }, (_, at) => {
+        return { id: from + at, label: $state("row " + (from + at)) };
+      });
+    };
+
+    const held = $state(build(1));
+
+    return (
+      <div>
+        <ul class="rows">
+          <For each={held.read()}>
+            {(row: Row) => (
+              <li onclick={() => row.label.write("pressed")}>
+                {row.label.read()}
+              </li>
+            )}
+          </For>
+        </ul>
+      </div>
+    );
+  }`;
+}
+
+// Storage a script declares for itself, rather than one a component owns and
+// splices in. `$state(...)` is an ordinary call of an imported value, and the
+// cell is what the call answers with: each time it is evaluated there is
+// another cell, which is what lets a script build a row that carries its own.
+async function ScriptRows() {
+  const build = cs`(label: string) => {
+    return { label: $state(label) };
+  }`;
+
+  return (
+    <span
+      style={cs`"font-size: 16px"`}
+      onclick={cs`() => {
+        const row = $build("one");
+        row.label.write(row.label.read() + " !!!");
+      }`}
+    >
+      {cs`$build("one").label.read()`}
+    </span>
+  );
+}
+
+// A cell holding an enum, handed to a function whose parameter is that enum.
+//
+// The member is spliced as itself and the cell holds `Color` rather than
+// `Color.Red`, so the other member is a value it takes. What a splice hands
+// over keeps the width the host gave it: `cs.splice` reads it back unbound, and
+// the binding it lands in decides the width the way TypeScript decides every
+// other one — a member to its enum, as a `let` would.
+enum Color {
+  Red = 0,
+  Blue = 1,
+}
+
+const colorName: Client<(c: Color) => string> = cs`(c: Color) => {
+  return c === ${Color.Blue} ? "blue" : "red";
+}`;
+
+async function Swatch() {
+  return cs`{
+    const held = $state(${Color.Red});
+    return (
+      <span onclick={() => held.write(${Color.Blue})}>
+        {$colorName(held.read())}
+      </span>
+    );
+  }`;
+}
+
+// What a cell holds is the initial widened, so a second value of the same kind
+// goes in after it. Each write is the assertion — every one is an error the
+// moment `$state` reads its initial narrowly.
+//
+// A function is the one initial that does not widen on its own: what an arrow
+// answers with widens only against a contextual type, and `$state` takes its
+// initial unbound so that every other kind does widen. Written out, the type
+// argument is the contextual type — `$state<() => number>` holds a function
+// answering with any number rather than only the one it was built from.
+//
+// `Stepper` covers a number, and `Swatch` a numeric enum handed to a function
+// typed as it.
+enum Tone {
+  Warm = "warm",
+  Cool = "cool",
+}
+
+async function Widened() {
+  return cs`{
+    const flag = $state(true);
+    const tone = $state(${Tone.Warm});
+    const step = $state<() => number>(() => 0);
+    return (
+      <span
+        onclick={() => {
+          flag.write(false);
+          tone.write(${Tone.Cool});
+          step.write(() => 1);
+        }}
+      >
+        {flag.read() + " " + tone.read() + " " + step.read()()}
+      </span>
+    );
+  }`;
+}
+
+// An object with storage of its own, made by a client function: `state` holds
+// what it is, arrows are what may be done to it, and the object hands them over
+// together. Reading is a value, so it stands in a children position; writing is
+// an action, so it stands in a handler.
+const counter = cs`(initial: number) => {
+  const count = $state(initial);
+  return {
+    read: () => count.read(),
+    add: (n: number) => {
+      count.write(count.read() + n);
+    },
+  };
+}`;
+
+const statefulObject = cs`{
+  const c = $counter(10);
+  return (
+    <button
+      onclick={() => {
+        c.add(5);
+      }}
+    >
+      {c.read()}
+    </button>
+  );
+}`;
+
 // What an element drew, as the one element it put in the page.
 async function drawn(value: BacktickElement): Promise<Element> {
   const { container } = await render(value);
@@ -478,5 +628,25 @@ describe("what each case compiles and bundles to", () => {
 
   it("SelectableRows", async (t) => {
     await snapshotCase(t, "SelectableRows", <SelectableRows />);
+  });
+
+  it("MemberRows", async (t) => {
+    await snapshotCase(t, "MemberRows", <MemberRows />);
+  });
+
+  it("ScriptRows", async (t) => {
+    await snapshotCase(t, "ScriptRows", <ScriptRows />);
+  });
+
+  it("Swatch", async (t) => {
+    await snapshotCase(t, "Swatch", <Swatch />);
+  });
+
+  it("Widened", async (t) => {
+    await snapshotCase(t, "Widened", <Widened />);
+  });
+
+  it("statefulObject", async (t) => {
+    await snapshotCase(t, "statefulObject", statefulObject);
   });
 });

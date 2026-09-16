@@ -78,8 +78,7 @@ export async function snapshotCase(
 }
 
 // The source of one case: the declaration `name`, every top-level declaration
-// it reaches by name — in its code or in a script's, where `$row` reaches
-// `row` — and the imports those use, in file order.
+// it uses, and the imports those use, in file order.
 function caseSource(sourceText: string, name: string): string {
   const file = ts.createSourceFile(
     "case.tsx",
@@ -105,19 +104,19 @@ function caseSource(sourceText: string, name: string): string {
       return;
     }
     reached.add(statement);
-    const text = statement.getText(file);
-    for (const [other, declaration] of declared) {
-      if (mentions(text, other)) {
+    for (const used of namesUsedBy(statement)) {
+      const declaration = declared.get(used);
+      if (declaration) {
         reach(declaration);
       }
     }
   };
   reach(root);
 
-  const reachedText = [...reached].map((each) => each.getText(file)).join("\n");
+  const used = new Set([...reached].flatMap((each) => [...namesUsedBy(each)]));
   const imports = file.statements.flatMap((statement) =>
     ts.isImportDeclaration(statement)
-      ? importOf(statement, file, (name) => mentions(reachedText, name))
+      ? importOf(statement, file, (name) => used.has(name))
       : [],
   );
   const declarations = file.statements
@@ -162,8 +161,51 @@ function attached(statement: ts.Statement, file: ts.SourceFile): string {
     : `${last}\n${statement.getText(file)}`;
 }
 
-function mentions(text: string, name: string): boolean {
-  return new RegExp(`(?<![\\w$])\\$?${name}(?![\\w$])`).test(text);
+// The names a statement uses. In code, every identifier that is not a
+// member's name. Inside a script, which the host sees as template text, what
+// reaches a host declaration: a `$name` splice, and a capitalised name — a
+// component's tag or a type — since a script's own bindings and members are
+// written in lower case.
+function namesUsedBy(statement: ts.Statement): Set<string> {
+  const names = new Set<string>();
+  const visit = (node: ts.Node): void => {
+    if (ts.isIdentifier(node) && !isMemberName(node)) {
+      names.add(node.text);
+    } else if (
+      ts.isNoSubstitutionTemplateLiteral(node) ||
+      ts.isTemplateHead(node) ||
+      ts.isTemplateMiddle(node) ||
+      ts.isTemplateTail(node)
+    ) {
+      for (const [, name] of node.text.matchAll(/\$([A-Za-z_][\w$]*)/g)) {
+        names.add(name!);
+      }
+      for (const [name] of node.text.matchAll(/(?<![\w$.])[A-Z][\w$]*/g)) {
+        names.add(name);
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(statement);
+  return names;
+}
+
+// A name that belongs to a member rather than naming a binding: `row.label`,
+// `{ label: … }`, or a declared property or method.
+function isMemberName(node: ts.Identifier): boolean {
+  const parent = node.parent;
+  return (
+    ((ts.isPropertyAccessExpression(parent) ||
+      ts.isPropertyAssignment(parent) ||
+      ts.isPropertySignature(parent) ||
+      ts.isPropertyDeclaration(parent) ||
+      ts.isMethodDeclaration(parent) ||
+      ts.isMethodSignature(parent) ||
+      ts.isEnumMember(parent) ||
+      ts.isJsxAttribute(parent)) &&
+      parent.name === node) ||
+    (ts.isQualifiedName(parent) && parent.right === node)
+  );
 }
 
 function namesOf(statement: ts.Statement): string[] {
@@ -188,6 +230,7 @@ function namesOf(statement: ts.Statement): string[] {
   if (
     (ts.isFunctionDeclaration(statement) ||
       ts.isClassDeclaration(statement) ||
+      ts.isEnumDeclaration(statement) ||
       ts.isInterfaceDeclaration(statement) ||
       ts.isTypeAliasDeclaration(statement)) &&
     statement.name

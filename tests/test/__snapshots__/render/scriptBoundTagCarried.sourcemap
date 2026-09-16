@@ -1,0 +1,182 @@
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_Badge                           → Badge
+ = cs.const(                         →  = 
+(                                    → (
+__cs_p                               → p
+:                                    → : 
+{\n                                  → { 
+n                                    → n
+:                                    → : 
+number                               → number
+;                                    → 
+\n    }                              →  }
+) =>                                 → ) => 
+<                                    → <
+i                                    → i
+>{cs.lift(                           → >{
+"panel "                             → "panel "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_p                               → p
+)                                    → 
+.                                    → .
+n                                    → n
+)}</                                 → }</
+i                                    → i
+>                                    → >
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+<                                    → (\n      <
+section                              → section
+>{cs.lift(                           → >\n        
+<                                    → <
+__cs_Badge                           → Badge
+                                     →  
+n                                    → n
+={                                   → ={
+0                                    → 0
+}                                    → }
+/>                                   →  />
+)}{cs.lift(                          → \n        {
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(props)                              → $props
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+body                                 → body
+)}</                                 → }\n      </
+section                              → section
+>                                    → >\n    )
+);                                   → ;
+\n})())                              → \n  }`
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_count                           → count
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+0                                    → 0
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+const                                → const 
+__cs_Badge                           → Badge
+ = cs.const(                         →  = 
+(                                    → (
+__cs_p                               → p
+:                                    → : 
+{\n                                  → { 
+n                                    → n
+:                                    → : 
+number                               → number
+;                                    → ;
+\n                                   →  
+children                             → children
+:                                    → : 
+BacktickElement                      → BacktickElement
+;                                    → 
+\n    }                              →  }
+) =>                                 → ) => 
+<                                    → (\n    <
+b                                    → b
+>{cs.lift(                           → >\n      {
+"outer "                             → "outer "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_p                               → p
+)                                    → 
+.                                    → .
+n                                    → n
+)}{cs.lift(                          → }\n      {
+cs.receiver(                         → 
+__cs_p                               → p
+)                                    → 
+.                                    → .
+children                             → children
+)}</                                 → }\n    </
+b                                    → b
+>                                    → >\n  )
+);                                   → ;
+\n                                   → \n\n  
+return cs.const(                     → return 
+<                                    → (\n    <
+div                                  → div
+>{cs.lift(                           → >\n      
+<                                    → <
+Panel                                → Panel
+                                     → \n        
+body                                 → body
+={cs.lift(                           → ={\n          
+cs.splice(                           → ${ [-semantic]
+cs.lift(cs.const(                    → cs`
+<                                    → <
+__cs_Badge                           → Badge
+                                     →  
+n                                    → n
+={                                   → ={
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+}                                    → }
+>{                                   → >\n            
+<                                    → <
+u                                    → u
+>{cs.lift(                           → >{
+"kid "                               → "kid "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+)}</                                 → }</
+u                                    → u
+>                                    → >
+}</                                  → \n          </
+__cs_Badge                           → Badge
+>                                    → >
+))                                   → `
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)}                                   → \n        }
+/>                                   → \n      />
+)}{cs.lift(                          → \n      
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+)                                    → )
+)}                                   → }
+>more</                              → >more</
+button                               → button
+>                                    → >
+)}</                                 → \n    </
+div                                  → div
+>                                    → >\n  )
+);                                   → ;
+\n})())                              → \n}`

@@ -1,0 +1,66 @@
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_x                               → x
+ = cs.const(                         →  = 
+1                                    → 1
+);                                   → ;
+\n})())                              → \n}`
+cs.lift(cs.const(                    → cs`
+() => {\n                            → () => {\n  
+let                                  → let 
+__cs_n                               → n
+ =                                   →  = 
+0                                    → 0
+;                                    → ;
+\n                                   → \n  
+__cs_n                               → n
+ = cs.const(                         →  = 
+1                                    → 1
+)                                    → 
+;                                    → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_b                               → b
+:                                    → : 
+boolean                              → boolean
+) => {\n                             → ) => {\n  
+let                                  → let 
+__cs_n                               → n
+ =                                   →  = 
+0                                    → 0
+;                                    → ;
+\n                                   → \n  
+cs.statement(                        → 
+cs.splice(                           →  [-semantic]
+(valueScriptEffects)                 → $valueScriptEffects
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+);                                   → ;
+\n                                   → \n  
+if ((cs.condition(                   → if (
+__cs_b                               → b
+) &&                                 → 
+__cs_b                               → b [-semantic -completion -navigation -verification]
+))                                   → ) 
+{\n                                  → {\n    
+cs.statement(                        → 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(ping)                               → $ping
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)()                                  → ()
+);                                   → ;
+\n                                   → \n    
+__cs_n                               → n
+ = cs.const(                         →  = 
+1                                    → 1
+)                                    → 
+;                                    → ;
+\n    }                              → \n  }
+\n                                   → \n  
+return cs.const(                     → return 
+__cs_n                               → n
+);                                   → ;
+\n}                                  → \n}
+))                                   → `

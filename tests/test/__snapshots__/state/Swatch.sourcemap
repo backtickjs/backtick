@@ -1,0 +1,70 @@
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_c                               → c
+:                                    → : 
+Color                                → Color
+) => {\n                             → ) => {\n  
+return cs.const(                     → return 
+__cs_c                               → c
+ ===                                 →  === 
+cs.splice(                           → ${ [-semantic]
+Color.Blue                           → Color.Blue
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+ ?                                   →  ? 
+"blue"                               → "blue"
+ :                                   →  : 
+"red"                                → "red"
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_held                            → held
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+cs.splice(                           → ${ [-semantic]
+Color.Red                            → Color.Red
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)                                    → )
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+<                                    → (\n      <
+span                                 → span
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_held                            → held
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.splice(                           → ${ [-semantic]
+Color.Blue                           → Color.Blue
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)                                    → )
+)}                                   → }
+>{cs.lift(                           → >\n        {
+(                                    → 
+cs.splice(                           →  [-semantic]
+(colorName)                          → $colorName
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+cs.receiver(                         → 
+__cs_held                            → held
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+)                                    → )
+)}</                                 → }\n      </
+span                                 → span
+>                                    → >\n    )
+);                                   → ;
+\n})())                              → \n  }`
