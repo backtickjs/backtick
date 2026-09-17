@@ -6,7 +6,7 @@ import type {
   ClientHandle,
   ClientValue,
   Elements as PlatformElements,
-  ReadonlyState,
+  Signal,
 } from "@backtickjs/platform-sdk";
 import type { Children } from "./Children.js";
 import type { Prop } from "./Prop.js";
@@ -74,7 +74,7 @@ export type {
   Http,
   HttpConfig,
   HttpResponse,
-  ReadonlyState,
+  Signal,
   State,
   Vm,
 } from "@backtickjs/platform-sdk";
@@ -119,9 +119,7 @@ export interface ForProps<T extends ClientValue> {
    * position moves without the member changing, so a number read once would go
    * stale.
    */
-  children: Client<
-    (member: T, index: ReadonlyState<number>) => BacktickElement
-  >;
+  children: Client<(member: T, index: Signal<number>) => BacktickElement>;
 }
 
 export interface FragmentProps {

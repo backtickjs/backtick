@@ -98,7 +98,7 @@ string                               → string
 ,                                    → , 
 __cs_index                           → index
 :                                    → : 
-ReadonlyState                        → ReadonlyState
+Signal                               → Signal
 <                                    → <
 number                               → number
 >                                    → >

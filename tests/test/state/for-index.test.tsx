@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, For, state } from "@backtickjs/core";
-import type { ReadonlyState } from "@backtickjs/core";
+import type { Signal } from "@backtickjs/core";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
@@ -23,7 +23,7 @@ async function RotatingRows() {
         <span onclick={rotate}>rotate</span>
         <div>
           <For each={names.read()}>
-            {(name: string, index: ReadonlyState<number>) => (
+            {(name: string, index: Signal<number>) => (
               <span>{name + " at " + index.read()}</span>
             )}
           </For>

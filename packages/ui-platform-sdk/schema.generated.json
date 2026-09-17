@@ -3,7 +3,7 @@
   "namespace": "UiPlatform",
   "extends": [],
   "types": {
-    "ReadonlyState": {
+    "Signal": {
       "description": "Storage a script may read but not replace.\n\nWhat a position is in a list is one of these, and so is a cell handed to a component that only displays it: the signature says which way the value travels, and a `State` goes wherever one of these is wanted.",
       "type": "generic",
       "parameters": [
@@ -61,7 +61,7 @@
             "type": "apply",
             "target": {
               "type": "ref",
-              "$ref": "ReadonlyState"
+              "$ref": "Signal"
             },
             "arguments": [
               {
@@ -2221,7 +2221,7 @@
                   "type": "apply",
                   "target": {
                     "type": "ref",
-                    "$ref": "ReadonlyState"
+                    "$ref": "Signal"
                   },
                   "arguments": [
                     {

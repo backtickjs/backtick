@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, For, state } from "@backtickjs/core";
-import type { ReadonlyState } from "@backtickjs/core";
+import type { Signal } from "@backtickjs/core";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
@@ -18,7 +18,7 @@ async function RotatingRows() {
     const __cs_rotate = cs.const(() => {
         cs.statement(cs.receiver(__cs_names).update(__cs_held => [cs.receiver(__cs_held)[2], cs.receiver(__cs_held)[0], cs.receiver(__cs_held)[1]]));
     });
-    return cs.const(<div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(cs.receiver(__cs_names).read())}>{cs.lift((__cs_name: string, __cs_index: ReadonlyState<number>) => <span>{cs.lift(__cs_name + " at " + cs.receiver(__cs_index).read())}</span>)}</For>)}</div>)}</div>);
+    return cs.const(<div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(cs.receiver(__cs_names).read())}>{cs.lift((__cs_name: string, __cs_index: Signal<number>) => <span>{cs.lift(__cs_name + " at " + cs.receiver(__cs_index).read())}</span>)}</For>)}</div>)}</div>);
 })());
 }
 

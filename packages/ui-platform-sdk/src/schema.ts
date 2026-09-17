@@ -45,7 +45,7 @@ export const schema: Schema = {
             Type.FunctionParameter("member", Type.Ref("T")),
             Type.FunctionParameter(
               "index",
-              Type.Apply(Type.Ref("ReadonlyState"), [Type.Number()]),
+              Type.Apply(Type.Ref("Signal"), [Type.Number()]),
               {
                 description:
                   "Where the member is, as storage rather than a number: a position moves without the member changing, so a number read once would go stale.",

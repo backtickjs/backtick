@@ -70,7 +70,7 @@ export type {
   Http,
   HttpConfig,
   HttpResponse,
-  ReadonlyState,
+  Signal,
   State,
   UiPlatformBuiltins,
   UiPlatformElements,

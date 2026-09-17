@@ -23,7 +23,7 @@ export const schema: Schema = {
   extends: [],
 
   types: {
-    ReadonlyState: Type.Generic(
+    Signal: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([Type.Ref("ClientHandle")], {
         read: Type.Function([], Type.Ref("T")),
@@ -37,7 +37,7 @@ export const schema: Schema = {
 
     State: Type.Generic(
       [Type.GenericParameter("T")],
-      Type.Interface([Type.Apply(Type.Ref("ReadonlyState"), [Type.Ref("T")])], {
+      Type.Interface([Type.Apply(Type.Ref("Signal"), [Type.Ref("T")])], {
         write: Type.Function(
           [Type.FunctionParameter("value", Type.Ref("T"))],
           Type.Void(),

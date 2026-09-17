@@ -75,7 +75,7 @@ export type {
   HttpResponse,
   PlatformBuiltins,
   PlatformElements,
-  ReadonlyState,
+  Signal,
   State,
   Vm,
 } from "./declarations.generated.js";

@@ -76,7 +76,7 @@ export type {
   Http,
   HttpConfig,
   HttpResponse,
-  ReadonlyState,
+  Signal,
   State,
   Vm,
 } from "@backtickjs/ui-platform-sdk";

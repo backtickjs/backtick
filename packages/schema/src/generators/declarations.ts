@@ -58,7 +58,7 @@ export function declarations(schema: Schema): string {
    * script may stand in.
    *
    * Reached from an element and through what such an interface extends, and no
-   * further: `ForProps` is props where the `ReadonlyState<number>` inside its
+   * further: `ForProps` is props where the `Signal<number>` inside its
    * child's signature is not, so one is wrapped and the other is the plain
    * type a client answers with.
    */
@@ -93,7 +93,7 @@ export function declarations(schema: Schema): string {
    *
    * A brand is how TypeScript says a value came from the client, since who
    * made one is not in its shape. Each carries its own rather than only its
-   * base's — `State` and `ReadonlyState` are two types, and an interface
+   * base's — `State` and `Signal` are two types, and an interface
    * holding just the brand it inherited would be every other one that did.
    */
   const brandedOf = (): ReadonlySet<string> => {
@@ -134,7 +134,7 @@ export function declarations(schema: Schema): string {
       node.forEach((one) => declares(one, bound));
       return;
     }
-    // A parameter is a name too — `ReadonlyState<T>` refs its own `T` — and it
+    // A parameter is a name too — `Signal<T>` refs its own `T` — and it
     // is in scope only inside what declared it, so an enclosing generic's
     // parameters are carried down and a ref to one is not a name to find.
     const held = IsGeneric(node)
