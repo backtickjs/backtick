@@ -212,7 +212,11 @@ it("vmEvalFunction", async (t) => {
                   {
                     kind: ":",
                     loc: [20, 27, 20, 35],
-                    name: "count",
+                    name: {
+                      kind: "string",
+                      loc: [20, 27, 20, 32],
+                      text: "count",
+                    },
                     initializer: {
                       kind: "number",
                       loc: [20, 34, 20, 35],

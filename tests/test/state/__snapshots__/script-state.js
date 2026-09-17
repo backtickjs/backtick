@@ -45,7 +45,11 @@ async function ScriptRows() {
                 {
                   kind: ":",
                   loc: [11, 14, 11, 34],
-                  name: "label",
+                  name: {
+                    kind: "string",
+                    loc: [11, 14, 11, 19],
+                    text: "label",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [11, 21, 11, 34],

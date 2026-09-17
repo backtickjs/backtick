@@ -140,7 +140,11 @@ it("spliceLaziness", async (t) => {
           {
             kind: ":",
             loc: [32, 7, 32, 32],
-            name: "taken",
+            name: {
+              kind: "string",
+              loc: [32, 7, 32, 12],
+              text: "taken",
+            },
             initializer: {
               kind: "()",
               loc: [32, 14, 32, 32],
@@ -160,7 +164,11 @@ it("spliceLaziness", async (t) => {
           {
             kind: ":",
             loc: [33, 7, 33, 39],
-            name: "skipped",
+            name: {
+              kind: "string",
+              loc: [33, 7, 33, 14],
+              text: "skipped",
+            },
             initializer: {
               kind: "()",
               loc: [33, 16, 33, 39],

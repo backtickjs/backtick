@@ -122,7 +122,11 @@ it("spliceSharing", async (t) => {
           {
             kind: ":",
             loc: [14, 7, 14, 30],
-            name: "x",
+            name: {
+              kind: "string",
+              loc: [14, 7, 14, 8],
+              text: "x",
+            },
             initializer: {
               kind: "splice",
               loc: [14, 10, 14, 30],
@@ -132,7 +136,11 @@ it("spliceSharing", async (t) => {
           {
             kind: ":",
             loc: [15, 7, 15, 30],
-            name: "y",
+            name: {
+              kind: "string",
+              loc: [15, 7, 15, 8],
+              text: "y",
+            },
             initializer: {
               kind: "splice",
               loc: [15, 10, 15, 30],

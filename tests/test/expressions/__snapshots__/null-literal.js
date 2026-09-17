@@ -100,7 +100,11 @@ it("nullLiteral", async (t) => {
           {
             kind: ":",
             loc: [21, 7, 21, 29],
-            name: "missing",
+            name: {
+              kind: "string",
+              loc: [21, 7, 21, 14],
+              text: "missing",
+            },
             initializer: {
               kind: "()",
               loc: [21, 16, 21, 29],
@@ -120,7 +124,11 @@ it("nullLiteral", async (t) => {
           {
             kind: ":",
             loc: [22, 7, 22, 29],
-            name: "present",
+            name: {
+              kind: "string",
+              loc: [22, 7, 22, 14],
+              text: "present",
+            },
             initializer: {
               kind: "()",
               loc: [22, 16, 22, 29],
@@ -141,7 +149,11 @@ it("nullLiteral", async (t) => {
           {
             kind: ":",
             loc: [23, 7, 23, 17],
-            name: "bare",
+            name: {
+              kind: "string",
+              loc: [23, 7, 23, 11],
+              text: "bare",
+            },
             initializer: {
               kind: "null",
               loc: [23, 13, 23, 17],

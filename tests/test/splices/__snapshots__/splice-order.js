@@ -28,7 +28,11 @@ it("spliceOrder", async (t) => {
           {
             kind: ":",
             loc: [11, 46, 11, 55],
-            name: "a",
+            name: {
+              kind: "string",
+              loc: [11, 46, 11, 47],
+              text: "a",
+            },
             initializer: {
               kind: "splice",
               loc: [11, 49, 11, 55],
@@ -38,7 +42,11 @@ it("spliceOrder", async (t) => {
           {
             kind: ":",
             loc: [11, 57, 11, 70],
-            name: "b",
+            name: {
+              kind: "string",
+              loc: [11, 57, 11, 58],
+              text: "b",
+            },
             initializer: {
               kind: "splice",
               loc: [11, 60, 11, 70],

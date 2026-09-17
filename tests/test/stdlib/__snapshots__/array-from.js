@@ -50,7 +50,11 @@ it("arrayFrom", async (t) => {
                     {
                       kind: ":",
                       loc: [17, 36, 17, 45],
-                      name: "length",
+                      name: {
+                        kind: "string",
+                        loc: [17, 36, 17, 42],
+                        text: "length",
+                      },
                       initializer: {
                         kind: "number",
                         loc: [17, 44, 17, 45],
@@ -129,7 +133,11 @@ it("arrayFrom", async (t) => {
                     {
                       kind: ":",
                       loc: [18, 34, 18, 43],
-                      name: "length",
+                      name: {
+                        kind: "string",
+                        loc: [18, 34, 18, 40],
+                        text: "length",
+                      },
                       initializer: {
                         kind: "number",
                         loc: [18, 42, 18, 43],
@@ -198,7 +206,11 @@ it("arrayFrom", async (t) => {
                     {
                       kind: ":",
                       loc: [19, 35, 19, 44],
-                      name: "length",
+                      name: {
+                        kind: "string",
+                        loc: [19, 35, 19, 41],
+                        text: "length",
+                      },
                       initializer: {
                         kind: "number",
                         loc: [19, 43, 19, 44],

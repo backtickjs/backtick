@@ -251,7 +251,11 @@ it("conditionNarrowing", async (t) => {
           {
             kind: ":",
             loc: [32, 7, 32, 34],
-            name: "missing",
+            name: {
+              kind: "string",
+              loc: [32, 7, 32, 14],
+              text: "missing",
+            },
             initializer: {
               kind: "()",
               loc: [32, 16, 32, 34],
@@ -275,7 +279,11 @@ it("conditionNarrowing", async (t) => {
           {
             kind: ":",
             loc: [33, 7, 33, 32],
-            name: "loud",
+            name: {
+              kind: "string",
+              loc: [33, 7, 33, 11],
+              text: "loud",
+            },
             initializer: {
               kind: "()",
               loc: [33, 13, 33, 32],
@@ -300,7 +308,11 @@ it("conditionNarrowing", async (t) => {
           {
             kind: ":",
             loc: [34, 7, 34, 34],
-            name: "quiet",
+            name: {
+              kind: "string",
+              loc: [34, 7, 34, 12],
+              text: "quiet",
+            },
             initializer: {
               kind: "()",
               loc: [34, 14, 34, 34],
@@ -325,7 +337,11 @@ it("conditionNarrowing", async (t) => {
           {
             kind: ":",
             loc: [35, 7, 35, 33],
-            name: "plain",
+            name: {
+              kind: "string",
+              loc: [35, 7, 35, 12],
+              text: "plain",
+            },
             initializer: {
               kind: "()",
               loc: [35, 14, 35, 33],

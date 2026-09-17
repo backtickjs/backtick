@@ -76,7 +76,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [15, 9, 15, 28],
-                  name: "count",
+                  name: {
+                    kind: "string",
+                    loc: [15, 9, 15, 14],
+                    text: "count",
+                  },
                   initializer: {
                     kind: ".",
                     loc: [15, 16, 15, 28],
@@ -92,7 +96,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [16, 9, 16, 34],
-                  name: "all",
+                  name: {
+                    kind: "string",
+                    loc: [16, 9, 16, 12],
+                    text: "all",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [16, 14, 16, 34],
@@ -126,7 +134,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [17, 9, 17, 32],
-                  name: "part",
+                  name: {
+                    kind: "string",
+                    loc: [17, 9, 17, 13],
+                    text: "part",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [17, 15, 17, 32],
@@ -158,7 +170,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [18, 9, 18, 32],
-                  name: "where",
+                  name: {
+                    kind: "string",
+                    loc: [18, 9, 18, 14],
+                    text: "where",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [18, 16, 18, 32],
@@ -185,7 +201,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [19, 9, 19, 31],
-                  name: "has",
+                  name: {
+                    kind: "string",
+                    loc: [19, 9, 19, 12],
+                    text: "has",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [19, 14, 19, 31],
@@ -212,7 +232,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [20, 9, 20, 30],
-                  name: "text",
+                  name: {
+                    kind: "string",
+                    loc: [20, 9, 20, 13],
+                    text: "text",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [20, 15, 20, 30],
@@ -239,7 +263,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [21, 9, 21, 41],
-                  name: "doubled",
+                  name: {
+                    kind: "string",
+                    loc: [21, 9, 21, 16],
+                    text: "doubled",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [21, 18, 21, 41],
@@ -293,7 +321,11 @@ it("arrayMembers", async (t) => {
                 {
                   kind: ":",
                   loc: [22, 9, 22, 42],
-                  name: "small",
+                  name: {
+                    kind: "string",
+                    loc: [22, 9, 22, 14],
+                    text: "small",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [22, 16, 22, 42],

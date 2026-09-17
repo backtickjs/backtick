@@ -255,33 +255,39 @@ export function compile(
       const members = compileArrayElements(instance, node[1]);
       return (scope) => members(scope);
     }
-    // An object literal a spread runs through. A literal without one is data
-    // and never reaches here — this is only for the case the format has no key
-    // to say, which is "and every key of that one".
+    // An object literal a spread or a computed key runs through. A literal
+    // without either is data and never reaches here.
     case "obj": {
-      // A spread carries only what to merge; a property carries its name too.
+      // A spread carries only what to merge; a property carries its key too.
       const entries = node[1].map((entry) =>
         entry[0] === ":"
-          ? { name: entry[1], part: compile(instance, entry[2]) }
-          : { name: null, part: compile(instance, entry[1]) },
+          ? {
+              key: compile(instance, entry[1]),
+              part: compile(instance, entry[2]),
+            }
+          : { key: null, part: compile(instance, entry[1]) },
       );
       return (scope) => {
-        const object: { [key: string]: ClientValue } = {};
-        for (const { name, part } of entries) {
-          const held = part(scope);
-          if (name !== null) {
-            object[name] = held;
+        // Collected in a map, so a key of `__proto__` is a key like any other
+        // rather than a write to the prototype. Later keys win, in the place
+        // the first one took, the way they do in the source.
+        const object = new Map<string, ClientValue>();
+        for (const { key, part } of entries) {
+          if (key === null) {
+            for (const [name, one] of Object.entries(
+              part(scope) as { [key: string]: ClientValue },
+            )) {
+              object.set(name, one);
+            }
             continue;
           }
-          // Later keys win, the way they do in the source — so the object is
-          // built in the order it was written and nothing is merged twice.
-          for (const [key, one] of Object.entries(
-            held as { [key: string]: ClientValue },
-          )) {
-            object[key] = one;
+          const name = key(scope);
+          if (typeof name !== "string") {
+            throw new TypeError("an object key must be a string");
           }
+          object.set(name, part(scope));
         }
-        return object;
+        return Object.fromEntries(object);
       };
     }
     // Storage, made where this stands: evaluating it twice is two storages,

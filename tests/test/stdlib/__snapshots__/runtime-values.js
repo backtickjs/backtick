@@ -24,7 +24,11 @@ it("runtimeValues", async (t) => {
           {
             kind: ":",
             loc: [10, 7, 10, 38],
-            name: "list",
+            name: {
+              kind: "string",
+              loc: [10, 7, 10, 11],
+              text: "list",
+            },
             initializer: {
               kind: "splice",
               loc: [10, 13, 10, 38],
@@ -34,7 +38,11 @@ it("runtimeValues", async (t) => {
           {
             kind: ":",
             loc: [11, 7, 11, 23],
-            name: "obj",
+            name: {
+              kind: "string",
+              loc: [11, 7, 11, 10],
+              text: "obj",
+            },
             initializer: {
               kind: "splice",
               loc: [11, 12, 11, 23],

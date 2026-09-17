@@ -35,7 +35,11 @@ export const counted = cs.create(
             {
               kind: ":",
               loc: [11, 40, 11, 49],
-              name: "length",
+              name: {
+                kind: "string",
+                loc: [11, 40, 11, 46],
+                text: "length",
+              },
               initializer: {
                 kind: "number",
                 loc: [11, 48, 11, 49],

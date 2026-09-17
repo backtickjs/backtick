@@ -93,7 +93,11 @@ describe("equals", () => {
                         {
                           kind: ":",
                           loc: [29, 41, 29, 59],
-                          name: "isBig",
+                          name: {
+                            kind: "string",
+                            loc: [29, 41, 29, 46],
+                            text: "isBig",
+                          },
                           initializer: {
                             kind: "binop",
                             loc: [29, 48, 29, 59],
@@ -124,7 +128,11 @@ describe("equals", () => {
                         {
                           kind: ":",
                           loc: [29, 61, 29, 71],
-                          name: "n",
+                          name: {
+                            kind: "string",
+                            loc: [29, 61, 29, 62],
+                            text: "n",
+                          },
                           initializer: {
                             kind: "()",
                             loc: [29, 64, 29, 71],
@@ -152,7 +160,11 @@ describe("equals", () => {
                       {
                         kind: ":",
                         loc: [30, 11, 30, 68],
-                        name: "equals",
+                        name: {
+                          kind: "string",
+                          loc: [30, 11, 30, 17],
+                          text: "equals",
+                        },
                         initializer: {
                           kind: "=>",
                           loc: [30, 19, 30, 68],
@@ -455,7 +467,11 @@ describe("equals", () => {
                       {
                         kind: ":",
                         loc: [59, 13, 59, 17],
-                        name: "x",
+                        name: {
+                          kind: "string",
+                          loc: [59, 13, 59, 14],
+                          text: "x",
+                        },
                         initializer: {
                           kind: "number",
                           loc: [59, 16, 59, 17],
@@ -471,7 +487,11 @@ describe("equals", () => {
                       {
                         kind: ":",
                         loc: [60, 13, 60, 62],
-                        name: "equals",
+                        name: {
+                          kind: "string",
+                          loc: [60, 13, 60, 19],
+                          text: "equals",
+                        },
                         initializer: {
                           kind: "=>",
                           loc: [60, 21, 60, 62],
@@ -657,7 +677,11 @@ describe("equals", () => {
                                   {
                                     kind: ":",
                                     loc: [68, 48, 68, 64],
-                                    name: "x",
+                                    name: {
+                                      kind: "string",
+                                      loc: [68, 48, 68, 49],
+                                      text: "x",
+                                    },
                                     initializer: {
                                       kind: ".",
                                       loc: [68, 51, 68, 64],
@@ -776,7 +800,11 @@ describe("equals", () => {
                       {
                         kind: ":",
                         loc: [84, 11, 87, 12],
-                        name: "equals",
+                        name: {
+                          kind: "string",
+                          loc: [84, 11, 84, 17],
+                          text: "equals",
+                        },
                         initializer: {
                           kind: "=>",
                           loc: [84, 19, 87, 12],
@@ -1202,7 +1230,11 @@ describe("equals", () => {
                       {
                         kind: ":",
                         loc: [120, 32, 120, 36],
-                        name: "x",
+                        name: {
+                          kind: "string",
+                          loc: [120, 32, 120, 33],
+                          text: "x",
+                        },
                         initializer: {
                           kind: "number",
                           loc: [120, 35, 120, 36],
@@ -1340,7 +1372,11 @@ describe("equals", () => {
                                   {
                                     kind: ":",
                                     loc: [127, 48, 127, 64],
-                                    name: "x",
+                                    name: {
+                                      kind: "string",
+                                      loc: [127, 48, 127, 49],
+                                      text: "x",
+                                    },
                                     initializer: {
                                       kind: ".",
                                       loc: [127, 51, 127, 64],

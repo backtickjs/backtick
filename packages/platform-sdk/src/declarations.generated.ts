@@ -136,9 +136,13 @@ export type BundleArrayElement = BundleExpression | BundleSpreadElement;
 
 export type BundleObjectLiteral = [kind: "obj", entries: BundleObjectEntry[]];
 
+/**
+ * One key of an object literal and its value. The key is an expression that
+ * must evaluate to a string; a key written in the source is a string literal.
+ */
 export type BundlePropertyAssignment = [
   kind: ":",
-  name: string,
+  name: BundleExpression,
   value: BundleExpression,
 ];
 

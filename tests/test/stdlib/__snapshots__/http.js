@@ -278,7 +278,11 @@ it("httpRequests", async (t) => {
                     {
                       kind: ":",
                       loc: [29, 11, 29, 24],
-                      name: "timeout",
+                      name: {
+                        kind: "string",
+                        loc: [29, 11, 29, 18],
+                        text: "timeout",
+                      },
                       initializer: {
                         kind: "number",
                         loc: [29, 20, 29, 24],
@@ -324,7 +328,11 @@ it("httpRequests", async (t) => {
                         {
                           kind: ":",
                           loc: [34, 26, 34, 44],
-                          name: "name",
+                          name: {
+                            kind: "string",
+                            loc: [34, 26, 34, 30],
+                            text: "name",
+                          },
                           initializer: {
                             kind: "string",
                             loc: [34, 32, 34, 44],
@@ -334,7 +342,11 @@ it("httpRequests", async (t) => {
                         {
                           kind: ":",
                           loc: [34, 46, 34, 58],
-                          name: "passed",
+                          name: {
+                            kind: "string",
+                            loc: [34, 46, 34, 52],
+                            text: "passed",
+                          },
                           initializer: {
                             kind: "true",
                             loc: [34, 54, 34, 58],
@@ -446,7 +458,11 @@ it("httpRequests", async (t) => {
                     {
                       kind: ":",
                       loc: [41, 11, 41, 58],
-                      name: "headers",
+                      name: {
+                        kind: "string",
+                        loc: [41, 11, 41, 18],
+                        text: "headers",
+                      },
                       initializer: {
                         kind: "obj",
                         loc: [41, 20, 41, 58],
@@ -454,7 +470,11 @@ it("httpRequests", async (t) => {
                           {
                             kind: ":",
                             loc: [41, 22, 41, 56],
-                            name: "content-type",
+                            name: {
+                              kind: "string",
+                              loc: [41, 22, 41, 36],
+                              text: "content-type",
+                            },
                             initializer: {
                               kind: "string",
                               loc: [41, 38, 41, 56],

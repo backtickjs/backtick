@@ -185,7 +185,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [25, 7, 25, 29],
-            name: "found",
+            name: {
+              kind: "string",
+              loc: [25, 7, 25, 12],
+              text: "found",
+            },
             initializer: {
               kind: "()",
               loc: [25, 14, 25, 29],
@@ -202,7 +206,11 @@ it("optionalChain", async (t) => {
                     {
                       kind: ":",
                       loc: [25, 22, 25, 26],
-                      name: "x",
+                      name: {
+                        kind: "string",
+                        loc: [25, 22, 25, 23],
+                        text: "x",
+                      },
                       initializer: {
                         kind: "number",
                         loc: [25, 25, 25, 26],
@@ -217,7 +225,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [26, 7, 26, 27],
-            name: "missing",
+            name: {
+              kind: "string",
+              loc: [26, 7, 26, 14],
+              text: "missing",
+            },
             initializer: {
               kind: "()",
               loc: [26, 16, 26, 27],
@@ -237,7 +249,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [27, 7, 27, 39],
-            name: "deep",
+            name: {
+              kind: "string",
+              loc: [27, 7, 27, 11],
+              text: "deep",
+            },
             initializer: {
               kind: "()",
               loc: [27, 13, 27, 39],
@@ -254,7 +270,11 @@ it("optionalChain", async (t) => {
                     {
                       kind: ":",
                       loc: [27, 21, 27, 36],
-                      name: "inner",
+                      name: {
+                        kind: "string",
+                        loc: [27, 21, 27, 26],
+                        text: "inner",
+                      },
                       initializer: {
                         kind: "obj",
                         loc: [27, 28, 27, 36],
@@ -262,7 +282,11 @@ it("optionalChain", async (t) => {
                           {
                             kind: ":",
                             loc: [27, 30, 27, 34],
-                            name: "z",
+                            name: {
+                              kind: "string",
+                              loc: [27, 30, 27, 31],
+                              text: "z",
+                            },
                             initializer: {
                               kind: "number",
                               loc: [27, 33, 27, 34],
@@ -280,7 +304,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [28, 7, 28, 34],
-            name: "cut",
+            name: {
+              kind: "string",
+              loc: [28, 7, 28, 10],
+              text: "cut",
+            },
             initializer: {
               kind: "()",
               loc: [28, 12, 28, 34],
@@ -297,7 +325,11 @@ it("optionalChain", async (t) => {
                     {
                       kind: ":",
                       loc: [28, 20, 28, 31],
-                      name: "inner",
+                      name: {
+                        kind: "string",
+                        loc: [28, 20, 28, 25],
+                        text: "inner",
+                      },
                       initializer: {
                         kind: "null",
                         loc: [28, 27, 28, 31],
@@ -311,7 +343,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [29, 7, 29, 23],
-            name: "top",
+            name: {
+              kind: "string",
+              loc: [29, 7, 29, 10],
+              text: "top",
+            },
             initializer: {
               kind: "()",
               loc: [29, 12, 29, 23],
@@ -331,7 +367,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [30, 7, 30, 25],
-            name: "loud",
+            name: {
+              kind: "string",
+              loc: [30, 7, 30, 11],
+              text: "loud",
+            },
             initializer: {
               kind: "()",
               loc: [30, 13, 30, 25],
@@ -352,7 +392,11 @@ it("optionalChain", async (t) => {
           {
             kind: ":",
             loc: [31, 7, 31, 27],
-            name: "silent",
+            name: {
+              kind: "string",
+              loc: [31, 7, 31, 13],
+              text: "silent",
+            },
             initializer: {
               kind: "()",
               loc: [31, 15, 31, 27],

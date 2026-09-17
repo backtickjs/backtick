@@ -47,7 +47,11 @@ it("scriptComponentNestedProp", async (t) => {
                 {
                   kind: ":",
                   loc: [27, 28, 27, 44],
-                  name: "firstName",
+                  name: {
+                    kind: "string",
+                    loc: [27, 28, 27, 37],
+                    text: "firstName",
+                  },
                   initializer: {
                     kind: "string",
                     loc: [27, 39, 27, 44],

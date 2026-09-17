@@ -478,6 +478,7 @@
       ]
     },
     "BundlePropertyAssignment": {
+      "description": "One key of an object literal and its value. The key is an expression that must evaluate to a string; a key written in the source is a string literal.",
       "type": "tuple",
       "items": [
         {
@@ -492,7 +493,8 @@
           "type": "tupleElement",
           "name": "name",
           "holds": {
-            "type": "string"
+            "type": "ref",
+            "$ref": "BundleExpression"
           }
         },
         {

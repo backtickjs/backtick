@@ -337,18 +337,18 @@ export interface ClientScriptParameterDeclaration {
   readonly name: ClientScriptIdentifier;
 }
 
-// One `a: 4` of an object literal. A key is always a plain name here, so
-// `name` is that name rather than the `PropertyName` node TypeScript holds.
 // A pair, or a spread of another object — the two things an object literal's
 // list admits, the way an array's admits an element or a spread of one.
 export type ClientScriptObjectMember =
   | ClientScriptPropertyAssignment
   | ClientScriptSpreadElement;
 
+// One `a: 4` or `[key]: 4` of an object literal. The key is an expression
+// that yields a string either way; a written one is a string literal.
 export interface ClientScriptPropertyAssignment {
   readonly kind: ":";
   readonly loc: SourceLocation;
-  readonly name: string;
+  readonly name: ClientScriptExpression;
   readonly initializer: ClientScriptExpression;
 }
 

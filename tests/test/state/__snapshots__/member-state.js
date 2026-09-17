@@ -73,7 +73,11 @@ async function MemberRows() {
                           {
                             kind: ":",
                             loc: [21, 27, 21, 36],
-                            name: "length",
+                            name: {
+                              kind: "string",
+                              loc: [21, 27, 21, 33],
+                              text: "length",
+                            },
                             initializer: {
                               kind: "number",
                               loc: [21, 35, 21, 36],
@@ -121,7 +125,11 @@ async function MemberRows() {
                                   {
                                     kind: ":",
                                     loc: [22, 18, 22, 31],
-                                    name: "id",
+                                    name: {
+                                      kind: "string",
+                                      loc: [22, 18, 22, 20],
+                                      text: "id",
+                                    },
                                     initializer: {
                                       kind: "binop",
                                       loc: [22, 22, 22, 31],
@@ -143,7 +151,11 @@ async function MemberRows() {
                                   {
                                     kind: ":",
                                     loc: [22, 33, 22, 68],
-                                    name: "label",
+                                    name: {
+                                      kind: "string",
+                                      loc: [22, 33, 22, 38],
+                                      text: "label",
+                                    },
                                     initializer: {
                                       kind: "()",
                                       loc: [22, 40, 22, 68],

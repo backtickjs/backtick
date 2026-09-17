@@ -99,7 +99,11 @@ it("ternary", async (t) => {
           {
             kind: ":",
             loc: [16, 7, 16, 26],
-            name: "absent",
+            name: {
+              kind: "string",
+              loc: [16, 7, 16, 13],
+              text: "absent",
+            },
             initializer: {
               kind: "()",
               loc: [16, 15, 16, 26],
@@ -119,7 +123,11 @@ it("ternary", async (t) => {
           {
             kind: ":",
             loc: [17, 7, 17, 24],
-            name: "present",
+            name: {
+              kind: "string",
+              loc: [17, 7, 17, 14],
+              text: "present",
+            },
             initializer: {
               kind: "()",
               loc: [17, 16, 17, 24],

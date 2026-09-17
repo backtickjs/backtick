@@ -38,6 +38,15 @@ function _number(_: number): number {
   );
 }
 
+// Used to keep computed keys strings. TypeScript also takes a number or a
+// symbol there, and JavaScript would convert either one; nothing does here.
+function _string(_: string): string {
+  throw new Error(
+    "Don't call `cs.string` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 // A value with `const` semantics
 function _const<T extends ClientValue>(_: T): T {
   throw new Error(
@@ -69,6 +78,7 @@ const members = {
   splice: _splice,
   condition: _condition,
   number: _number,
+  string: _string,
   const: _const,
   statement: _statement,
   receiver: _receiver,

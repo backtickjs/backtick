@@ -85,6 +85,30 @@ describe("sandbox escape (hand-written bundles)", () => {
     assert.equal(evaluateUntrustedBundle(bundleOf(root)), 7);
   });
 
+  it("keeps a computed `__proto__` key an own member", () => {
+    // Assigned into an object, this key would replace the prototype with the
+    // value; kept as data, it is only a key.
+    const key = ["+", "__pro", "to__"];
+    const made = ["obj", [[":", key, ["obj", [[":", "x", 1]]]]]];
+    assert.deepEqual(
+      evaluateUntrustedBundle(
+        bundleOf(["()", ["bltn", "Object.keys"], [made]]),
+      ),
+      ["__proto__"],
+    );
+    assert.equal(
+      evaluateUntrustedBundle(bundleOf([".", made, "x"])),
+      undefined,
+    );
+  });
+
+  it("refuses a computed key that isn't a string", () => {
+    assert.throws(
+      () => evaluateUntrustedBundle(bundleOf(["obj", [[":", 1, 2]]])),
+      /an object key must be a string/,
+    );
+  });
+
   it("refuses a timer handed a string, which a browser runs as code", () => {
     // Named directly, or handed to a host function that calls it with a
     // member of an array: either way the handler never reaches the host.

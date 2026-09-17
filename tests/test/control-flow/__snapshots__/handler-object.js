@@ -120,7 +120,11 @@ it("handlerObject", async (t) => {
                 {
                   kind: ":",
                   loc: [23, 9, 23, 20],
-                  name: "tap",
+                  name: {
+                    kind: "string",
+                    loc: [23, 9, 23, 12],
+                    text: "tap",
+                  },
                   initializer: {
                     kind: "splice",
                     loc: [23, 14, 23, 20],
@@ -130,7 +134,11 @@ it("handlerObject", async (t) => {
                 {
                   kind: ":",
                   loc: [24, 9, 24, 21],
-                  name: "hold",
+                  name: {
+                    kind: "string",
+                    loc: [24, 9, 24, 13],
+                    text: "hold",
+                  },
                   initializer: {
                     kind: "splice",
                     loc: [24, 15, 24, 21],

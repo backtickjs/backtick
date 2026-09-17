@@ -70,7 +70,11 @@ const counter = cs.create(
               {
                 kind: ":",
                 loc: [12, 5, 12, 27],
-                name: "get",
+                name: {
+                  kind: "string",
+                  loc: [12, 5, 12, 8],
+                  text: "get",
+                },
                 initializer: {
                   kind: "=>",
                   loc: [12, 10, 12, 27],
@@ -96,7 +100,11 @@ const counter = cs.create(
               {
                 kind: ":",
                 loc: [13, 5, 15, 6],
-                name: "add",
+                name: {
+                  kind: "string",
+                  loc: [13, 5, 13, 8],
+                  text: "add",
+                },
                 initializer: {
                   kind: "=>",
                   loc: [13, 10, 15, 6],

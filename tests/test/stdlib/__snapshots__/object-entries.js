@@ -36,7 +36,11 @@ it("objectEntries", async (t) => {
                 {
                   kind: ":",
                   loc: [12, 22, 12, 26],
-                  name: "n",
+                  name: {
+                    kind: "string",
+                    loc: [12, 22, 12, 23],
+                    text: "n",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [12, 25, 12, 26],
@@ -46,7 +50,11 @@ it("objectEntries", async (t) => {
                 {
                   kind: ":",
                   loc: [12, 28, 12, 36],
-                  name: "q",
+                  name: {
+                    kind: "string",
+                    loc: [12, 28, 12, 29],
+                    text: "q",
+                  },
                   initializer: {
                     kind: "string",
                     loc: [12, 31, 12, 36],

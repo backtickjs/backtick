@@ -245,25 +245,23 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         // untouched — every key of it, the format reserving none.
         //
         // Which is why a spread cannot ship that way: there is no key to write
-        // "and every key of that one" under. One reaching here makes the whole
-        // literal a node instead, where a name slot of `null` says spread. A
-        // literal without one is unchanged, so nothing already written moves.
-        if (node.properties.some((property) => property.kind === "...")) {
-          return [
-            "obj",
-            node.properties.map((property) =>
-              property.kind === "..."
-                ? ["...", e(property.expression)]
-                : [":", property.name, e(property.initializer)],
-            ),
-          ];
-        }
+        // "and every key of that one" under, and a computed key has no text
+        // to write at all. Either one makes the whole literal a node instead,
+        // whose entries are a spread or a key expression and its value. A
+        // literal with neither is unchanged, so nothing already written moves.
         const entries: { [key: string]: BundleExpression } = {};
         for (const property of node.properties) {
-          if (property.kind === "...") {
-            continue;
+          if (property.kind === "..." || property.name.kind !== "string") {
+            return [
+              "obj",
+              node.properties.map((property) =>
+                property.kind === "..."
+                  ? ["...", e(property.expression)]
+                  : [":", e(property.name), e(property.initializer)],
+              ),
+            ];
           }
-          entries[property.name] = e(property.initializer);
+          entries[property.name.text] = e(property.initializer);
         }
         return entries;
       }

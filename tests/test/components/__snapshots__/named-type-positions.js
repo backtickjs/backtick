@@ -198,7 +198,11 @@ async function Rows() {
                               {
                                 kind: ":",
                                 loc: [28, 36, 28, 41],
-                                name: "id",
+                                name: {
+                                  kind: "string",
+                                  loc: [28, 36, 28, 38],
+                                  text: "id",
+                                },
                                 initializer: {
                                   kind: "number",
                                   loc: [28, 40, 28, 41],
@@ -208,7 +212,11 @@ async function Rows() {
                               {
                                 kind: ":",
                                 loc: [28, 43, 28, 55],
-                                name: "label",
+                                name: {
+                                  kind: "string",
+                                  loc: [28, 43, 28, 48],
+                                  text: "label",
+                                },
                                 initializer: {
                                   kind: "string",
                                   loc: [28, 50, 28, 55],

@@ -159,7 +159,11 @@ it("nestedConditionCheck", async (t) => {
           {
             kind: ":",
             loc: [27, 7, 27, 30],
-            name: "both",
+            name: {
+              kind: "string",
+              loc: [27, 7, 27, 11],
+              text: "both",
+            },
             initializer: {
               kind: "()",
               loc: [27, 13, 27, 30],
@@ -183,7 +187,11 @@ it("nestedConditionCheck", async (t) => {
           {
             kind: ":",
             loc: [28, 7, 28, 30],
-            name: "one",
+            name: {
+              kind: "string",
+              loc: [28, 7, 28, 10],
+              text: "one",
+            },
             initializer: {
               kind: "()",
               loc: [28, 12, 28, 30],

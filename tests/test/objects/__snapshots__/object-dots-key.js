@@ -38,7 +38,11 @@ it("objectDotsKey", async (t) => {
                 {
                   kind: ":",
                   loc: [14, 22, 14, 26],
-                  name: "a",
+                  name: {
+                    kind: "string",
+                    loc: [14, 22, 14, 23],
+                    text: "a",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [14, 25, 14, 26],
@@ -68,7 +72,11 @@ it("objectDotsKey", async (t) => {
                 {
                   kind: ":",
                   loc: [15, 25, 15, 33],
-                  name: "...",
+                  name: {
+                    kind: "string",
+                    loc: [15, 25, 15, 30],
+                    text: "...",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [15, 32, 15, 33],

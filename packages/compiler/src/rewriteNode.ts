@@ -1501,7 +1501,7 @@ function rewriteNodeImpl(
       if (ts.isSpreadAssignment(property)) {
         return {
           name: null,
-          text: null,
+          key: null,
           source: property,
           value: rewriteNode(ts, state, property.expression),
         };
@@ -1516,7 +1516,25 @@ function rewriteNodeImpl(
         state.mappings.set(name, property.name);
         return {
           name,
-          text: property.name.text,
+          key: astNode(ts, "string", {
+            loc: loc(property.name),
+            text: ts.factory.createStringLiteral(property.name.text),
+          }),
+          source: property,
+          value: rewriteNode(ts, state, property.initializer),
+        };
+      }
+      if (
+        ts.isPropertyAssignment(property) &&
+        ts.isComputedPropertyName(property.name)
+      ) {
+        const key = rewriteNode(ts, state, property.name.expression);
+        const name = ts.factory.createComputedPropertyName(
+          call(ts, "cs", "string", [key.virtual as ts.Expression]),
+        );
+        return {
+          name,
+          key: key.runtime as ts.Expression,
           source: property,
           value: rewriteNode(ts, state, property.initializer),
         };
@@ -1547,14 +1565,14 @@ function rewriteNodeImpl(
           loc: loc(node),
           properties: ts.factory.createArrayLiteralExpression(
             properties.map((property) =>
-              property.text === null
+              property.key === null
                 ? astNode(ts, "...", {
                     loc: loc(property.source),
                     expression: property.value.runtime as ts.Expression,
                   })
                 : astNode(ts, ":", {
                     loc: loc(property.source),
-                    name: ts.factory.createStringLiteral(property.text),
+                    name: property.key,
                     initializer: property.value.runtime as ts.Expression,
                   }),
             ),

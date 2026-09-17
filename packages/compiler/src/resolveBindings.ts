@@ -496,7 +496,11 @@ export function resolveBindings(
     } else if (ts.isObjectLiteralExpression(node)) {
       for (const property of node.properties) {
         if (ts.isPropertyAssignment(property)) {
-          walkExpression(script, property.initializer, scopes); // key isn't a variable
+          // A written key isn't a variable; a computed one is an expression.
+          if (ts.isComputedPropertyName(property.name)) {
+            walkExpression(script, property.name.expression, scopes);
+          }
+          walkExpression(script, property.initializer, scopes);
         } else if (ts.isShorthandPropertyAssignment(property)) {
           reference(property.name, script, scopes);
         } else if (ts.isSpreadAssignment(property)) {

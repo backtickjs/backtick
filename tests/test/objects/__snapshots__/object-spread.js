@@ -42,7 +42,11 @@ it("objectSpread", async (t) => {
                 {
                   kind: ":",
                   loc: [18, 22, 18, 26],
-                  name: "a",
+                  name: {
+                    kind: "string",
+                    loc: [18, 22, 18, 23],
+                    text: "a",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [18, 25, 18, 26],
@@ -52,7 +56,11 @@ it("objectSpread", async (t) => {
                 {
                   kind: ":",
                   loc: [18, 28, 18, 32],
-                  name: "b",
+                  name: {
+                    kind: "string",
+                    loc: [18, 28, 18, 29],
+                    text: "b",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [18, 31, 18, 32],
@@ -78,7 +86,11 @@ it("objectSpread", async (t) => {
                 {
                   kind: ":",
                   loc: [19, 22, 19, 26],
-                  name: "b",
+                  name: {
+                    kind: "string",
+                    loc: [19, 22, 19, 23],
+                    text: "b",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [19, 25, 19, 26],
@@ -118,7 +130,11 @@ it("objectSpread", async (t) => {
                 {
                   kind: ":",
                   loc: [23, 9, 23, 13],
-                  name: "c",
+                  name: {
+                    kind: "string",
+                    loc: [23, 9, 23, 10],
+                    text: "c",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [23, 12, 23, 13],

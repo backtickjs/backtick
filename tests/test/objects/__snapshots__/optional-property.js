@@ -103,7 +103,11 @@ it("optionalProperty", async (t) => {
           {
             kind: ":",
             loc: [17, 7, 17, 54],
-            name: "present",
+            name: {
+              kind: "string",
+              loc: [17, 7, 17, 14],
+              text: "present",
+            },
             initializer: {
               kind: "()",
               loc: [17, 16, 17, 54],
@@ -120,7 +124,11 @@ it("optionalProperty", async (t) => {
                     {
                       kind: ":",
                       loc: [17, 24, 17, 34],
-                      name: "label",
+                      name: {
+                        kind: "string",
+                        loc: [17, 24, 17, 29],
+                        text: "label",
+                      },
                       initializer: {
                         kind: "string",
                         loc: [17, 31, 17, 34],
@@ -130,7 +138,11 @@ it("optionalProperty", async (t) => {
                     {
                       kind: ":",
                       loc: [17, 36, 17, 51],
-                      name: "inner",
+                      name: {
+                        kind: "string",
+                        loc: [17, 36, 17, 41],
+                        text: "inner",
+                      },
                       initializer: {
                         kind: "obj",
                         loc: [17, 43, 17, 51],
@@ -138,7 +150,11 @@ it("optionalProperty", async (t) => {
                           {
                             kind: ":",
                             loc: [17, 45, 17, 49],
-                            name: "z",
+                            name: {
+                              kind: "string",
+                              loc: [17, 45, 17, 46],
+                              text: "z",
+                            },
                             initializer: {
                               kind: "number",
                               loc: [17, 48, 17, 49],
@@ -156,7 +172,11 @@ it("optionalProperty", async (t) => {
           {
             kind: ":",
             loc: [18, 7, 18, 48],
-            name: "partial",
+            name: {
+              kind: "string",
+              loc: [18, 7, 18, 14],
+              text: "partial",
+            },
             initializer: {
               kind: "()",
               loc: [18, 16, 18, 48],
@@ -173,7 +193,11 @@ it("optionalProperty", async (t) => {
                     {
                       kind: ":",
                       loc: [18, 24, 18, 34],
-                      name: "label",
+                      name: {
+                        kind: "string",
+                        loc: [18, 24, 18, 29],
+                        text: "label",
+                      },
                       initializer: {
                         kind: "string",
                         loc: [18, 31, 18, 34],
@@ -183,7 +207,11 @@ it("optionalProperty", async (t) => {
                     {
                       kind: ":",
                       loc: [18, 36, 18, 45],
-                      name: "inner",
+                      name: {
+                        kind: "string",
+                        loc: [18, 36, 18, 41],
+                        text: "inner",
+                      },
                       initializer: {
                         kind: "obj",
                         loc: [18, 43, 18, 45],
@@ -198,7 +226,11 @@ it("optionalProperty", async (t) => {
           {
             kind: ":",
             loc: [19, 7, 19, 37],
-            name: "omitted",
+            name: {
+              kind: "string",
+              loc: [19, 7, 19, 14],
+              text: "omitted",
+            },
             initializer: {
               kind: "()",
               loc: [19, 16, 19, 37],
@@ -215,7 +247,11 @@ it("optionalProperty", async (t) => {
                     {
                       kind: ":",
                       loc: [19, 24, 19, 34],
-                      name: "label",
+                      name: {
+                        kind: "string",
+                        loc: [19, 24, 19, 29],
+                        text: "label",
+                      },
                       initializer: {
                         kind: "string",
                         loc: [19, 31, 19, 34],

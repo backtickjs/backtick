@@ -23,7 +23,11 @@ it("reservedKeyScript", async (t) => {
           {
             kind: ":",
             loc: [8, 52, 8, 64],
-            name: "#",
+            name: {
+              kind: "string",
+              loc: [8, 52, 8, 55],
+              text: "#",
+            },
             initializer: {
               kind: "string",
               loc: [8, 57, 8, 64],

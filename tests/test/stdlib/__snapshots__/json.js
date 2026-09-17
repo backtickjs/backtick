@@ -139,7 +139,11 @@ it("jsonRoundTrip", async (t) => {
                     {
                       kind: ":",
                       loc: [16, 37, 16, 41],
-                      name: "a",
+                      name: {
+                        kind: "string",
+                        loc: [16, 37, 16, 38],
+                        text: "a",
+                      },
                       initializer: {
                         kind: "number",
                         loc: [16, 40, 16, 41],
@@ -149,7 +153,11 @@ it("jsonRoundTrip", async (t) => {
                     {
                       kind: ":",
                       loc: [16, 43, 16, 51],
-                      name: "b",
+                      name: {
+                        kind: "string",
+                        loc: [16, 43, 16, 44],
+                        text: "b",
+                      },
                       initializer: {
                         kind: "string",
                         loc: [16, 46, 16, 51],

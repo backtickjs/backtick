@@ -91,7 +91,11 @@ async function Labels() {
                     {
                       kind: ":",
                       loc: [14, 7, 14, 13],
-                      name: "id",
+                      name: {
+                        kind: "string",
+                        loc: [14, 7, 14, 9],
+                        text: "id",
+                      },
                       initializer: {
                         kind: "id",
                         loc: [14, 11, 14, 13],
@@ -102,7 +106,11 @@ async function Labels() {
                     {
                       kind: ":",
                       loc: [15, 7, 15, 33],
-                      name: "label",
+                      name: {
+                        kind: "string",
+                        loc: [15, 7, 15, 12],
+                        text: "label",
+                      },
                       initializer: {
                         kind: "()",
                         loc: [15, 14, 15, 33],

@@ -165,7 +165,11 @@ it("optionalParameter", async (t) => {
           {
             kind: ":",
             loc: [25, 7, 25, 26],
-            name: "named",
+            name: {
+              kind: "string",
+              loc: [25, 7, 25, 12],
+              text: "named",
+            },
             initializer: {
               kind: "()",
               loc: [25, 14, 25, 26],
@@ -186,7 +190,11 @@ it("optionalParameter", async (t) => {
           {
             kind: ":",
             loc: [26, 7, 26, 34],
-            name: "explicit",
+            name: {
+              kind: "string",
+              loc: [26, 7, 26, 15],
+              text: "explicit",
+            },
             initializer: {
               kind: "()",
               loc: [26, 17, 26, 34],
@@ -206,7 +214,11 @@ it("optionalParameter", async (t) => {
           {
             kind: ":",
             loc: [27, 7, 27, 38],
-            name: "supplied",
+            name: {
+              kind: "string",
+              loc: [27, 7, 27, 15],
+              text: "supplied",
+            },
             initializer: {
               kind: "()",
               loc: [27, 17, 27, 38],
@@ -227,7 +239,11 @@ it("optionalParameter", async (t) => {
           {
             kind: ":",
             loc: [28, 7, 28, 40],
-            name: "fallback",
+            name: {
+              kind: "string",
+              loc: [28, 7, 28, 15],
+              text: "fallback",
+            },
             initializer: {
               kind: "()",
               loc: [28, 17, 28, 40],

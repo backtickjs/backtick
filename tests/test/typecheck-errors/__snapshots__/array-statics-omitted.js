@@ -64,7 +64,11 @@ export const holes = cs.create(
           {
             kind: ":",
             loc: [13, 38, 13, 47],
-            name: "length",
+            name: {
+              kind: "string",
+              loc: [13, 38, 13, 44],
+              text: "length",
+            },
             initializer: {
               kind: "number",
               loc: [13, 46, 13, 47],

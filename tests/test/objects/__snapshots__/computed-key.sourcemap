@@ -1,0 +1,41 @@
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_base               → base
+ = cs.const(            →  = 
+{                       → { 
+a                       → a
+:                       → : 
+1                       → 1
+,                       → , 
+b                       → b
+:                       → : 
+2                       → 2
+ }                      →  }
+);                      → ;
+\n                      → \n      
+const                   → const 
+__cs_name               → name
+ = cs.const(            →  = 
+"b"                     → "b"
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+{ ...                   → {\n        ...
+__cs_base               → base
+, [cs.string(           → ,\n        [
+__cs_name               → name
+)]:                     → ]: 
+9                       → 9
+, [cs.string(           → ,\n        [
+"c"                     → "c"
+ +                      →  + 
+"d"                     → "d"
+)]:                     → ]: 
+3                       → 3
+,                       → ,\n        
+a                       → a
+:                       → : 
+4                       → 4
+ }                      → ,\n      }
+);                      → ;
+\n})())                 → \n    }`

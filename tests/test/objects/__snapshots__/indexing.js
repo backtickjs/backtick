@@ -115,7 +115,11 @@ describe("a read by key", () => {
                 {
                   kind: ":",
                   loc: [36, 22, 36, 26],
-                  name: "x",
+                  name: {
+                    kind: "string",
+                    loc: [36, 22, 36, 23],
+                    text: "x",
+                  },
                   initializer: {
                     kind: "number",
                     loc: [36, 25, 36, 26],
@@ -314,7 +318,11 @@ describe("a read by key", () => {
               {
                 kind: ":",
                 loc: [55, 14, 55, 18],
-                name: "x",
+                name: {
+                  kind: "string",
+                  loc: [55, 14, 55, 15],
+                  text: "x",
+                },
                 initializer: {
                   kind: "number",
                   loc: [55, 17, 55, 18],

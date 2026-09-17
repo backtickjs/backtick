@@ -82,7 +82,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [16, 9, 16, 37],
-                  name: "found",
+                  name: {
+                    kind: "string",
+                    loc: [16, 9, 16, 14],
+                    text: "found",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [16, 16, 16, 37],
@@ -136,7 +140,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [17, 9, 17, 55],
-                  name: "missing",
+                  name: {
+                    kind: "string",
+                    loc: [17, 9, 17, 16],
+                    text: "missing",
+                  },
                   initializer: {
                     kind: "binop",
                     loc: [17, 18, 17, 55],
@@ -199,7 +207,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [18, 9, 18, 39],
-                  name: "at",
+                  name: {
+                    kind: "string",
+                    loc: [18, 9, 18, 11],
+                    text: "at",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [18, 13, 18, 39],
@@ -253,7 +265,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [19, 9, 19, 46],
-                  name: "nowhere",
+                  name: {
+                    kind: "string",
+                    loc: [19, 9, 19, 16],
+                    text: "nowhere",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [19, 18, 19, 46],
@@ -307,7 +323,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [20, 9, 20, 40],
-                  name: "includes",
+                  name: {
+                    kind: "string",
+                    loc: [20, 9, 20, 17],
+                    text: "includes",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [20, 19, 20, 40],
@@ -334,7 +354,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [21, 9, 21, 44],
-                  name: "startsWith",
+                  name: {
+                    kind: "string",
+                    loc: [21, 9, 21, 19],
+                    text: "startsWith",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [21, 21, 21, 44],
@@ -361,7 +385,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [22, 9, 22, 43],
-                  name: "endsWith",
+                  name: {
+                    kind: "string",
+                    loc: [22, 9, 22, 17],
+                    text: "endsWith",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [22, 19, 22, 43],
@@ -393,7 +421,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [23, 9, 23, 33],
-                  name: "repeated",
+                  name: {
+                    kind: "string",
+                    loc: [23, 9, 23, 17],
+                    text: "repeated",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [23, 19, 23, 33],
@@ -419,7 +451,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [24, 9, 24, 46],
-                  name: "codePoint",
+                  name: {
+                    kind: "string",
+                    loc: [24, 9, 24, 18],
+                    text: "codePoint",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [24, 20, 24, 46],
@@ -445,7 +481,11 @@ it("stdlibEs2015", async (t) => {
                 {
                   kind: ":",
                   loc: [25, 9, 25, 42],
-                  name: "keys",
+                  name: {
+                    kind: "string",
+                    loc: [25, 9, 25, 13],
+                    text: "keys",
+                  },
                   initializer: {
                     kind: "()",
                     loc: [25, 15, 25, 42],
@@ -462,7 +502,11 @@ it("stdlibEs2015", async (t) => {
                           {
                             kind: ":",
                             loc: [25, 29, 25, 33],
-                            name: "a",
+                            name: {
+                              kind: "string",
+                              loc: [25, 29, 25, 30],
+                              text: "a",
+                            },
                             initializer: {
                               kind: "number",
                               loc: [25, 32, 25, 33],
@@ -472,7 +516,11 @@ it("stdlibEs2015", async (t) => {
                           {
                             kind: ":",
                             loc: [25, 35, 25, 39],
-                            name: "b",
+                            name: {
+                              kind: "string",
+                              loc: [25, 35, 25, 36],
+                              text: "b",
+                            },
                             initializer: {
                               kind: "number",
                               loc: [25, 38, 25, 39],

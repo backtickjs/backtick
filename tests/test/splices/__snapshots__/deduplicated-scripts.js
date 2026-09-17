@@ -38,7 +38,11 @@ it("deduplicatedScripts", async (t) => {
           {
             kind: ":",
             loc: [10, 54, 10, 62],
-            name: "a",
+            name: {
+              kind: "string",
+              loc: [10, 54, 10, 55],
+              text: "a",
+            },
             initializer: {
               kind: "splice",
               loc: [10, 57, 10, 62],
@@ -48,7 +52,11 @@ it("deduplicatedScripts", async (t) => {
           {
             kind: ":",
             loc: [10, 64, 10, 72],
-            name: "b",
+            name: {
+              kind: "string",
+              loc: [10, 64, 10, 65],
+              text: "b",
+            },
             initializer: {
               kind: "splice",
               loc: [10, 67, 10, 72],

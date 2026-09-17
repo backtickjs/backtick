@@ -412,6 +412,9 @@ importers:
         specifier: workspace:*
         version: link:../compiler
     devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
       '@types/bun':
         specifier: ^1.3.14
         version: 1.3.14
