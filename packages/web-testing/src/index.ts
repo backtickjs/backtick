@@ -12,9 +12,6 @@
  * `cleanup` runs after each test where the runner provides a global
  * `afterEach` or `teardown`. Import `@backtickjs/web-testing/pure`, or set
  * `BACKTICK_SKIP_AUTO_CLEANUP`, to register it yourself.
- *
- * Reactive only where Solid resolves to its browser build, which is what
- * `--conditions=browser` asks Node for.
  */
 import { cleanup } from "./cleanup.js";
 

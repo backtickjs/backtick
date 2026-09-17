@@ -8,8 +8,8 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "node --conditions=browser --import ./test/setup.ts --test \"test/**/*.test.ts\" \"test/**/*.test.tsx\"",
-    "test:update": "node --conditions=browser --import ./test/setup.ts --test --test-update-snapshots \"test/**/*.test.ts\" \"test/**/*.test.tsx\"",
+    "test": "node --import ./test/setup.ts --test \"test/**/*.test.ts\" \"test/**/*.test.tsx\"",
+    "test:update": "node --import ./test/setup.ts --test --test-update-snapshots \"test/**/*.test.ts\" \"test/**/*.test.tsx\"",
     "clean": "rm -rf node_modules .cache .turbo"
   },
   "devDependencies": {

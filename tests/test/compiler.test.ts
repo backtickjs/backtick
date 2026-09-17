@@ -3,13 +3,7 @@ import { mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { describe, it } from "node:test";
 import { transpile, virtualize } from "@backtickjs/compiler";
-// Prettier by the path rather than the name. This suite runs under
-// `--conditions=browser`, which is what makes Solid resolve to its reactive
-// build rather than the inert server one, and under that condition `prettier`
-// resolves to the standalone bundle — which carries no parsers and can't format
-// TypeScript. The condition is the interpreter's, so the name it breaks names
-// its build instead.
-import prettier from "prettier/index.mjs";
+import prettier from "prettier";
 import ts from "typescript";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";

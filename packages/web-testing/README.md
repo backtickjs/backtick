@@ -39,19 +39,16 @@ files through the compiler does it; this repository's `tests/test/tsxHooks.ts`
 is one.
 
 web-testing brings no DOM of its own. Your test runner provides one, as it
-does for React Testing Library. Two more things must hold: Solid has to resolve
-to its browser build, and `cleanup` has to run after each test.
+does for React Testing Library, and `cleanup` has to run after each test.
 
-**Jest**: set `testEnvironment: "jsdom"`. The jsdom environment resolves the
-`browser` export condition, and `cleanup` registers itself on Jest's global
-`afterEach`.
+**Jest**: set `testEnvironment: "jsdom"`. `cleanup` registers itself on Jest's
+global `afterEach`.
 
 **Vitest**:
 
 ```ts
 // vitest.config.ts
 export default defineConfig({
-  resolve: { conditions: ["browser"] },
   test: { environment: "jsdom", globals: true },
 });
 ```
@@ -70,7 +67,7 @@ afterEach(cleanup);
 ```
 
 ```sh
-node --conditions=browser --import ./test/setup.ts --test
+node --import ./test/setup.ts --test
 ```
 
 It has to be preloaded with `--import`: `@testing-library/dom` binds `screen`

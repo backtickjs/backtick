@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc -b && node scripts/build.mjs",
     "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
@@ -19,15 +19,16 @@
   },
   "dependencies": {
     "@backtickjs/platform-sdk": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*",
-    "solid-js": "^1.9.14"
+    "@backtickjs/web-sdk": "workspace:*"
   },
   "peerDependencies": {
     "@backtickjs/core": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
+    "esbuild": "0.28.0",
     "prettier": "^3.6.2",
+    "solid-js": "^1.9.14",
     "typescript": "^6.0.3"
   }
 }

@@ -671,16 +671,19 @@ importers:
       '@backtickjs/web-sdk':
         specifier: workspace:*
         version: link:../web-sdk
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
     devDependencies:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      esbuild:
+        specifier: 0.28.0
+        version: 0.28.0
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      solid-js:
+        specifier: ^1.9.14
+        version: 1.9.14
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
