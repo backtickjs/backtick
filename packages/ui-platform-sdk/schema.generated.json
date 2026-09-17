@@ -5130,6 +5130,27 @@
       "type": "ref",
       "$ref": "Vm"
     },
+    "onCleanup": {
+      "description": "Registers a cleanup function on the current scope: the drawing the calling script belongs to, or the `computed` it is called in. The cleanup runs when that scope is disposed, as when the drawing is removed, or refreshed, as when the computed calculates again.\n\nCalled from a handler, there is no current scope, and the cleanup never runs.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The cleanup to run.",
+          "type": "functionParameter",
+          "name": "fn",
+          "holds": {
+            "type": "function",
+            "parameters": [],
+            "returnType": {
+              "type": "void"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "void"
+      }
+    },
     "onMount": {
       "description": "Runs something once, after the drawing the calling script belongs to is in place — the moment to start a timer or listen on the window.\n\nCalled from a script that draws, as a statement before its `return`. Called from a handler, the drawing is already in place and it runs straight away.",
       "type": "function",

@@ -88,6 +88,19 @@ export const schema: Schema = {
   },
 
   builtins: {
+    onCleanup: Type.Function(
+      [
+        Type.FunctionParameter("fn", Type.Function([], Type.Void()), {
+          description: "The cleanup to run.",
+        }),
+      ],
+      Type.Void(),
+      {
+        description:
+          "Registers a cleanup function on the current scope: the drawing the calling script belongs to, or the `computed` it is called in. The cleanup runs when that scope is disposed, as when the drawing is removed, or refreshed, as when the computed calculates again.\n\n" +
+          "Called from a handler, there is no current scope, and the cleanup never runs.",
+      },
+    ),
     onMount: Type.Function(
       [
         Type.FunctionParameter("fn", Type.Function([], Type.Void()), {

@@ -9,7 +9,13 @@ import type {
   Vm,
 } from "@backtickjs/platform-sdk";
 import type { Builtins, Window } from "@backtickjs/web-sdk";
-import { createMemo, createSignal, onMount, untrack } from "solid-js";
+import {
+  createMemo,
+  createSignal,
+  onCleanup,
+  onMount,
+  untrack,
+} from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile, scopeOf } from "./compile.js";
 import type { Applied } from "./compile.js";
@@ -158,6 +164,9 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
 
     case "onMount":
       return onMount satisfies Builtins[typeof known];
+
+    case "onCleanup":
+      return onCleanup satisfies Builtins[typeof known];
 
     case "http":
       return {

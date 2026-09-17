@@ -14,6 +14,7 @@ export type {
 export type { Bundle } from "@backtickjs/platform-sdk";
 
 export { cs } from "@backtickjs/client-script";
-// `For` and `onMount` are the language's, not a target's: every client that
-// draws answers for them. A target's own vocabulary lives in that target's SDK.
-export { For, onMount } from "@backtickjs/ui-platform-sdk";
+// `For`, `onMount` and `onCleanup` are the language's, not a target's: every
+// client that draws answers for them. A target's own vocabulary lives in that
+// target's SDK.
+export { For, onCleanup, onMount } from "@backtickjs/ui-platform-sdk";
