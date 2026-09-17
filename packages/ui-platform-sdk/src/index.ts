@@ -1,3 +1,6 @@
+// The values a script splices, the same way the layer below exposes its own.
+export { onMount } from "./builtins.generated.js";
+
 export type {
   ArrayLike,
   BacktickElement,

@@ -8,7 +8,7 @@ import type {
   Vm,
 } from "@backtickjs/platform-sdk";
 import type { Builtins, Window } from "@backtickjs/web-sdk";
-import { createSignal, untrack } from "solid-js";
+import { createSignal, onMount, untrack } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile, scopeOf } from "./compile.js";
 import type { Applied } from "./compile.js";
@@ -151,6 +151,9 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
         // here, at the one place entitled to.
         return { read, write, update } as unknown as State<typeof initial>;
       }) satisfies Builtins[typeof known];
+
+    case "onMount":
+      return onMount satisfies Builtins[typeof known];
 
     case "http":
       return {

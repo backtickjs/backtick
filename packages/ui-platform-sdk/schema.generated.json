@@ -5109,6 +5109,27 @@
     "vm": {
       "type": "ref",
       "$ref": "Vm"
+    },
+    "onMount": {
+      "description": "Runs something once, after the drawing the calling script belongs to is in place — the moment to start a timer or listen on the window.\n\nCalled from a script that draws, as a statement before its `return`. Called from a handler, the drawing is already in place and it runs straight away.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "What to run once the drawing is in place.",
+          "type": "functionParameter",
+          "name": "fn",
+          "holds": {
+            "type": "function",
+            "parameters": [],
+            "returnType": {
+              "type": "void"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "void"
+      }
     }
   }
 }

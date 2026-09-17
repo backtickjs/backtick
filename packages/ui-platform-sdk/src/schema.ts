@@ -87,5 +87,19 @@ export const schema: Schema = {
     }),
   },
 
-  builtins: {},
+  builtins: {
+    onMount: Type.Function(
+      [
+        Type.FunctionParameter("fn", Type.Function([], Type.Void()), {
+          description: "What to run once the drawing is in place.",
+        }),
+      ],
+      Type.Void(),
+      {
+        description:
+          "Runs something once, after the drawing the calling script belongs to is in place — the moment to start a timer or listen on the window.\n\n" +
+          "Called from a script that draws, as a statement before its `return`. Called from a handler, the drawing is already in place and it runs straight away.",
+      },
+    ),
+  },
 };

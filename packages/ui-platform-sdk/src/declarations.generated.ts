@@ -163,7 +163,19 @@ export interface UiPlatformElements {
 export interface Elements extends PlatformElements, UiPlatformElements {}
 
 /** What this schema declares, which is what its own client answers for. */
-export interface UiPlatformBuiltins {}
+export interface UiPlatformBuiltins {
+  /**
+   * Runs something once, after the drawing the calling script belongs to is in
+   * place — the moment to start a timer or listen on the window.
+   *
+   * Called from a script that draws, as a statement before its `return`.
+   * Called from a handler, the drawing is already in place and it runs
+   * straight away.
+   *
+   * @param fn What to run once the drawing is in place.
+   */
+  onMount(fn: () => void): void;
+}
 
 /** What a client must answer with, for every name in scope. */
 export interface Builtins extends PlatformBuiltins, UiPlatformBuiltins {}
