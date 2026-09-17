@@ -1,0 +1,70 @@
+import { bundler } from "@backtickjs/bundler";
+import type { BacktickElement } from "@backtickjs/core";
+import * as client from "@backtickjs/web-page/bundle";
+import { Scoreboard } from "./Scoreboard.js";
+import { load, SLATE_PATH } from "./scores.js";
+
+// The client is asked for at a name that says what it holds, so a rebuilt client
+// is a name no cache has an old answer for — which is what makes the year this
+// server promises for it below safe.
+const clientUrl = `/_backtick/client-${client.sha256.slice(0, 16)}.js`;
+
+// The document this app serves. Its head is its own — a charset, a viewport, and
+// the one script that draws the bundle carried in the body.
+//
+// `charset` is not decoration: a bundle is UTF-8 text read back with
+// `JSON.parse`, and a document decoded as anything else is every string in the
+// app quietly mangled. It counts only in the first 1024 bytes of a document, and
+// only while it is being parsed.
+async function toHtml(element: BacktickElement): Promise<string> {
+  const json = bundler.stringify(await bundler.run(element));
+  return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script defer src="${clientUrl}"></script>
+  </head>
+  <body>
+    <script type="application/json" data-backtick>${json}</script>
+  </body>
+</html>
+`;
+}
+
+const server = Bun.serve({
+  port: 5177,
+  routes: {
+    "/": async () => {
+      const html = await toHtml(<Scoreboard />);
+      return new Response(html, {
+        headers: {
+          "content-type": "text/html",
+          "content-security-policy": "default-src 'self'",
+        },
+      });
+    },
+
+    // What the drawing polls. The scores it answers with are the scores the
+    // bundle above was built from, read the same way — the page and its
+    // refreshes agree because they call one function.
+    [SLATE_PATH]: async () =>
+      new Response(JSON.stringify(await load()), {
+        headers: {
+          "content-type": "application/json",
+          "cache-control": "no-store",
+        },
+      }),
+
+    // The name the document above asks for, answered here.
+    [clientUrl]: () =>
+      new Response(client.source, {
+        headers: {
+          "content-type": "text/javascript",
+          "cache-control": "public, max-age=31536000, immutable",
+        },
+      }),
+  },
+});
+
+console.log(`Preview on ${server.url}`);
