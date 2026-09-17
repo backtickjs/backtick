@@ -119,6 +119,16 @@ function attribute(node: Element, prop: string, value: unknown): void {
     (node as HTMLElement | SVGElement).style.cssText = String(value);
     return;
   }
+  // Through the property: once a field is edited, its `value` and `checked`
+  // attributes are only defaults and writing them changes nothing it shows.
+  if (name === "value" && name in node) {
+    (node as HTMLInputElement).value = String(value);
+    return;
+  }
+  if (name === "checked" && name in node) {
+    (node as HTMLInputElement).checked = value === true;
+    return;
+  }
   // A boolean attribute is there or it isn't — `disabled="false"` disables. ARIA
   // is the exception: its values are the words themselves.
   if (typeof value === "boolean" && !prop.startsWith("aria-")) {

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import type { BacktickElement } from "@backtickjs/core";
-import { render } from "@backtickjs/web-testing";
+import { type BacktickElement, cs, state } from "@backtickjs/core";
+import { fireEvent, render, screen } from "@backtickjs/web-testing";
+import { userEvent } from "@testing-library/user-event";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
@@ -100,5 +101,35 @@ describe("an attribute's case", () => {
     // @ts-expect-error: the schema declares no `tabIndex` on a `div`
     const div = await drawn(<div tabIndex={2} />);
     assert.deepEqual(attributes(div), { tabindex: "2" });
+  });
+});
+
+describe("a field's value", () => {
+  // Once a field is edited, its `value` and `checked` attributes are only its
+  // defaults, so a write that reaches the attribute changes nothing shown.
+  async function Field() {
+    return cs.lift((() => {
+    const __cs_text = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("first"));
+    const __cs_isOn = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
+    return cs.const(<div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(cs.receiver(__cs_text).read())}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(cs.receiver(__cs_isOn).read())}/>)}{cs.lift(<button onclick={cs.lift(() => {
+        cs.statement(cs.receiver(__cs_text).write("second"));
+        cs.statement(cs.receiver(__cs_isOn).write(true));
+    })}>
+            write
+          </button>)}</div>);
+})());
+  }
+
+  it("follows a write after the field was edited", async () => {
+    await render(<Field />);
+    const text = screen.getByLabelText<HTMLInputElement>("text");
+    const on = screen.getByLabelText<HTMLInputElement>("on");
+    fireEvent.input(text, { target: { value: "typed" } });
+    await userEvent.click(on);
+    await userEvent.click(on);
+
+    await userEvent.click(screen.getByRole("button", { name: "write" }));
+    assert.equal(text.value, "second");
+    assert.equal(on.checked, true);
   });
 });
