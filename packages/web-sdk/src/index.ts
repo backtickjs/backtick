@@ -197,6 +197,7 @@ export type {
   ProgressEvent,
   ProgressProps,
   QuoteProps,
+  RefProps,
   ReferrerPolicy,
   SVGElement,
   SelectProps,

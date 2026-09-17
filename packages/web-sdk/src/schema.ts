@@ -2350,12 +2350,35 @@ export const schema: Schema = {
         ),
       }),
     ),
+    // Here beside the elements that take it: a schema wraps props in `Prop`
+    // only where one of its own elements reaches them.
+    RefProps: Type.Generic(
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
+      Type.Interface([], {
+        ref: Type.Optional(
+          Type.Function(
+            [
+              Type.FunctionParameter("element", Type.Ref("T"), {
+                description: "The element this prop is on.",
+              }),
+            ],
+            Type.Void(),
+            {
+              description:
+                "Called once with the element when it is created, before it is in place. Keep it in a `state` to reach it from a handler, or call `onMount` in here to use it once it is in place.",
+            },
+          ),
+        ),
+      }),
+    ),
+
     GlobalAttributes: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface(
         [
           Type.Ref("AriaAttributes"),
           Type.Apply(Type.Ref("Events"), [Type.Ref("T")]),
+          Type.Apply(Type.Ref("RefProps"), [Type.Ref("T")]),
         ],
         {
           accesskey: Type.Optional(Type.String()),
@@ -3078,6 +3101,7 @@ export const schema: Schema = {
       [
         Type.Ref("AriaAttributes"),
         Type.Apply(Type.Ref("Events"), [Type.Ref("SVGElement")]),
+        Type.Apply(Type.Ref("RefProps"), [Type.Ref("SVGElement")]),
       ],
       {
         children: Type.Optional(Type.Ref("BacktickNode")),

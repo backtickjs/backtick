@@ -1,0 +1,226 @@
+cs.lift((() => {\n                   → cs`{\n        
+const                                → const 
+__cs_field                           → field
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)<                                   → <
+HTMLInputElement                     → HTMLInputElement
+ |                                   →  | 
+null                                 → null
+>(                                   → >(
+null                                 → null
+)                                    → )
+);                                   → ;
+\n                                   → \n        
+return cs.const(                     → return 
+<                                    → (\n          <
+div                                  → div
+>{cs.lift(                           → >\n            
+<                                    → <
+input                                → input
+                                     →  
+aria-label                           → aria-label
+={cs.lift(                           → =
+"name"                               → "name"
+)}                                   → 
+                                     →  
+ref                                  → ref
+={cs.lift(                           → ={
+__cs_element                         → element
+ =>                                  → ) => 
+cs.receiver(                         → 
+__cs_field                           → field
+)                                    → 
+.                                    → .
+set                                  → set
+(                                    → (
+__cs_element                         → element
+)                                    → )
+)}                                   → }
+/>                                   →  />
+)}{cs.lift(                          → \n            
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+cs.receiver(                         → 
+__cs_field                           → field
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+)                                    → 
+?.                                   → ?.
+focus                                → focus
+()                                   → ()
+)}                                   → }
+>edit</                              → >edit</
+button                               → button
+>                                    → >
+)}</                                 → \n          </
+div                                  → div
+>                                    → >\n        )
+);                                   → ;
+\n})())                              → \n      }`
+cs.lift((() => {\n                   → cs`{\n        
+return cs.const(                     → return 
+<                                    → (\n          <
+input                                → input
+                                     → \n            
+aria-label                           → aria-label
+={cs.lift(                           → =
+"name"                               → "name"
+)}                                   → 
+                                     → \n            
+ref                                  → ref
+={cs.lift(                           → ={
+__cs_element                         → element
+ =>                                  → ) => 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(onMount)                            → $onMount
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_element                         → element
+)                                    → 
+.                                    → .
+focus                                → focus
+()                                   → ()
+)                                    → )
+)}                                   → }
+/>                                   → \n          />\n        )
+);                                   → ;
+\n})())                              → \n      }`
+cs.lift(cs.const(                    → cs`
+<                                    → <
+input                                → input
+                                     →  
+aria-label                           → aria-label
+={cs.lift(                           → =
+"name"                               → "name"
+)}                                   → 
+                                     →  
+ref                                  → ref
+={cs.lift(                           → ={
+() => {\n}                           → () => {}
+)}                                   → }
+/>                                   →  />
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n          
+const                                → const 
+__cs_shown                           → shown
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+true                                 → true
+)                                    → )
+);                                   → ;
+\n                                   → \n          
+const                                → const 
+__cs_n                               → n
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+0                                    → 0
+)                                    → )
+);                                   → ;
+\n                                   → \n          
+return cs.const(                     → return 
+<                                    → (\n            <
+div                                  → div
+>{cs.lift(                           → >\n              
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_n                               → n
+)                                    → 
+.                                    → .
+set                                  → set
+(                                    → (
+cs.receiver(                         → 
+__cs_n                               → n
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+)                                    → )
+)}                                   → }
+>{cs.lift(                           → >\n                {
+"n "                                 → "n "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_n                               → n
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+)}</                                 → }\n              </
+button                               → button
+>                                    → >
+)}{cs.lift(                          → \n              {
+(cs.condition(                       → 
+cs.receiver(                         → 
+__cs_shown                           → shown
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+) &&                                 → 
+cs.receiver(__cs_shown).get()        → shown.get() [-semantic -completion -navigation -verification]
+) ?                                  →  ? 
+<                                    → (\n                <
+p                                    → p
+                                     →  
+ref                                  → ref
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(window)                             → $window
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+console                              → console
+)                                    → 
+.                                    → .
+log                                  → log
+(                                    → (
+cs.receiver(                         → 
+__cs_n                               → n
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+)                                    → )
+)}                                   → }
+>shown</                             → >shown</
+p                                    → p
+>                                    → >\n              )
+ :                                   →  : 
+null                                 → null
+)}</                                 → }\n            </
+div                                  → div
+>                                    → >\n          )
+);                                   → ;
+\n})())                              → \n        }`

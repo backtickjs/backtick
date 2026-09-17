@@ -57,7 +57,7 @@ plugin({
       const errors = diagnostics.filter(
         (diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error,
       );
-      
+
       if (errors.length > 0) {
         throw new Error(
           ts.formatDiagnostics(errors, {

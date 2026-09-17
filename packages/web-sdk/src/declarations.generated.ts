@@ -1545,8 +1545,19 @@ export interface Events<T extends ClientValue> {
   ontoggle?: Prop<(event: ToggleEvent<T>) => void>;
 }
 
+export interface RefProps<T extends ClientValue> {
+  /**
+   * Called once with the element when it is created, before it is in place.
+   * Keep it in a `state` to reach it from a handler, or call `onMount` in here
+   * to use it once it is in place.
+   *
+   * @param element The element this prop is on.
+   */
+  ref?: Prop<(element: T) => void>;
+}
+
 export interface GlobalAttributes<T extends ClientValue>
-  extends AriaAttributes, Events<T> {
+  extends AriaAttributes, Events<T>, RefProps<T> {
   accesskey?: Prop<string>;
   autocapitalize?: Prop<
     "off" | "none" | "on" | "sentences" | "words" | "characters"
@@ -1982,7 +1993,8 @@ export interface VideoProps extends MediaProps {
   width?: Prop<Numeric>;
 }
 
-export interface SvgProps extends AriaAttributes, Events<SVGElement> {
+export interface SvgProps
+  extends AriaAttributes, Events<SVGElement>, RefProps<SVGElement> {
   children?: Children;
   id?: Prop<string>;
   class?: Prop<string>;

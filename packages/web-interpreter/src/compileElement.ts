@@ -3,7 +3,7 @@ import type {
   BundleArrayElement,
   BundleElement,
 } from "@backtickjs/platform-sdk";
-import { createMemo, getOwner, mapArray } from "solid-js";
+import { createMemo, getOwner, mapArray, untrack } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile } from "./compile.js";
 import type { Scope } from "./compile.js";
@@ -85,7 +85,14 @@ export function compileElement(
     const innerNamespace = id === "foreignObject" ? "html" : namespace;
     // The host hears SVG's as `svg:<tag>`; the wire carries no prefix.
     const node = renderer.createElement(namespace === "svg" ? `svg:${id}` : id);
+    let ref: ClientValue = null;
     for (const [prop, read, fixed] of props) {
+      // The language's, not an attribute: the element is handed to the
+      // script once it is built.
+      if (prop === "ref") {
+        ref = read(scope);
+        continue;
+      }
       // It cannot change, so set it and be done: no computation to make, and
       // none held for as long as the element is.
       if (fixed) {
@@ -115,6 +122,11 @@ export function compileElement(
       } else {
         withNamespace(innerNamespace, () => renderer.insert(node, draw(scope)));
       }
+    }
+    // Untracked, so what the callback reads never calls it again.
+    if (typeof ref === "function") {
+      const handOver = ref as (element: ClientValue) => void;
+      untrack(() => handOver(node as ClientValue));
     }
     return node as ClientValue;
   };

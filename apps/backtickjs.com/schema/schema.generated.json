@@ -9669,6 +9669,48 @@
         "required": []
       }
     },
+    "RefProps": {
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [],
+        "properties": {
+          "ref": {
+            "description": "Called once with the element when it is created, before it is in place. Keep it in a `state` to reach it from a handler, or call `onMount` in here to use it once it is in place.",
+            "type": "function",
+            "parameters": [
+              {
+                "description": "The element this prop is on.",
+                "type": "functionParameter",
+                "name": "element",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              }
+            ],
+            "returnType": {
+              "type": "void"
+            }
+          }
+        },
+        "required": []
+      }
+    },
     "GlobalAttributes": {
       "type": "generic",
       "parameters": [
@@ -9697,6 +9739,19 @@
             "target": {
               "type": "ref",
               "$ref": "Events"
+            },
+            "arguments": [
+              {
+                "type": "ref",
+                "$ref": "T"
+              }
+            ]
+          },
+          {
+            "type": "apply",
+            "target": {
+              "type": "ref",
+              "$ref": "RefProps"
             },
             "arguments": [
               {
@@ -12178,6 +12233,19 @@
           "target": {
             "type": "ref",
             "$ref": "Events"
+          },
+          "arguments": [
+            {
+              "type": "ref",
+              "$ref": "SVGElement"
+            }
+          ]
+        },
+        {
+          "type": "apply",
+          "target": {
+            "type": "ref",
+            "$ref": "RefProps"
           },
           "arguments": [
             {
