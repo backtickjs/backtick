@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 // Where the two rules part company, pinned so a client implementer can see
 // it: `names[9]` types as `string`, because TypeScript's indexed access says
-// the element type, and reads as null, because the runtime read is total.
+// the element type, and reads as `undefined`, because the runtime read is total.
 // Nothing faults; the type simply doesn't mention the floor under it.
 it("indexPastEnd", async (t) => {
   await snapshotCase(
@@ -14,7 +14,7 @@ it("indexPastEnd", async (t) => {
       {
         version: "0.0.0",
         filePath: "objects/index-past-end.test.tsx",
-        fileHash: "htnzquslk7a0",
+        fileHash: "3821as72cvvin",
         splices: {},
         captures: [],
       },
@@ -29,7 +29,7 @@ it("indexPastEnd", async (t) => {
               kind: "id",
               loc: [14, 13, 14, 18],
               text: "names",
-              bindingKey: "names$htnzquslk7a0$0",
+              bindingKey: "names$3821as72cvvin$0",
             },
             initializer: {
               kind: "arr",
@@ -58,7 +58,7 @@ it("indexPastEnd", async (t) => {
                 kind: "id",
                 loc: [15, 14, 15, 19],
                 text: "names",
-                bindingKey: "names$htnzquslk7a0$0",
+                bindingKey: "names$3821as72cvvin$0",
               },
               argumentExpression: {
                 kind: "number",

@@ -132,4 +132,32 @@ describe("a field's value", () => {
     assert.equal(text.value, "second");
     assert.equal(on.checked, true);
   });
+
+  // A read past the end types as the element and reads as `undefined`, so
+  // nothing reaches a field without a cast.
+  async function Clearable() {
+    return cs.lift((() => {
+    const __cs_texts = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(["typed by the script"]));
+    const __cs_flags = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)([true]));
+    return cs.const(<div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(cs.receiver(cs.receiver(__cs_texts).read())[0])}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(cs.receiver(cs.receiver(__cs_flags).read())[0])}/>)}{cs.lift(<button onclick={cs.lift(() => {
+        cs.statement(cs.receiver(__cs_texts).write([]));
+        cs.statement(cs.receiver(__cs_flags).write([]));
+    })}>
+            clear
+          </button>)}</div>);
+})());
+  }
+
+  it("is cleared by nothing, after the field was edited", async () => {
+    await render(<Clearable />);
+    const text = screen.getByLabelText<HTMLInputElement>("text");
+    const on = screen.getByLabelText<HTMLInputElement>("on");
+    fireEvent.input(text, { target: { value: "typed" } });
+    await userEvent.click(on);
+    await userEvent.click(on);
+
+    await userEvent.click(screen.getByRole("button", { name: "clear" }));
+    assert.equal(text.value, "");
+    assert.equal(on.checked, false);
+  });
 });

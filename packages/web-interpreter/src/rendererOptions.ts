@@ -100,6 +100,17 @@ function attribute(node: Element, prop: string, value: unknown): void {
   // is not `viewbox`, and `gradientTransform` is not `gradienttransform` — so
   // in that namespace the same line is what breaks them.
   const name = node.namespaceURI === SVG ? prop : prop.toLowerCase();
+  // Through the property: once a field is edited, its `value` and `checked`
+  // attributes are only defaults and writing them changes nothing it shows.
+  // Nothing is an empty field and an unchecked box.
+  if (name === "value" && isField(node)) {
+    (node as HTMLInputElement).value = String(value ?? "");
+    return;
+  }
+  if (name === "checked" && node.localName === "input") {
+    (node as HTMLInputElement).checked = value === true;
+    return;
+  }
   if (value === null || value === undefined) {
     node.removeAttribute(name);
     return;
@@ -119,16 +130,6 @@ function attribute(node: Element, prop: string, value: unknown): void {
     (node as HTMLElement | SVGElement).style.cssText = String(value);
     return;
   }
-  // Through the property: once a field is edited, its `value` and `checked`
-  // attributes are only defaults and writing them changes nothing it shows.
-  if (name === "value" && name in node) {
-    (node as HTMLInputElement).value = String(value);
-    return;
-  }
-  if (name === "checked" && name in node) {
-    (node as HTMLInputElement).checked = value === true;
-    return;
-  }
   // A boolean attribute is there or it isn't — `disabled="false"` disables. ARIA
   // is the exception: its values are the words themselves.
   if (typeof value === "boolean" && !prop.startsWith("aria-")) {
@@ -140,4 +141,13 @@ function attribute(node: Element, prop: string, value: unknown): void {
     return;
   }
   node.setAttribute(name, String(value));
+}
+
+// By tag rather than `instanceof`: the document may be another window's.
+function isField(node: Element): boolean {
+  return (
+    node.localName === "input" ||
+    node.localName === "textarea" ||
+    node.localName === "select"
+  );
 }

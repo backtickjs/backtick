@@ -101,7 +101,7 @@ describe("a field's value", () => {
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
-        fileHash: "2clp1jg90dm69",
+        fileHash: "2zaogzi40us1o",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
@@ -116,7 +116,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [112, 13, 112, 17],
               text: "text",
-              bindingKey: "text$2clp1jg90dm69$0",
+              bindingKey: "text$2zaogzi40us1o$0",
             },
             initializer: {
               kind: "()",
@@ -142,7 +142,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [113, 13, 113, 17],
               text: "isOn",
-              bindingKey: "isOn$2clp1jg90dm69$1",
+              bindingKey: "isOn$2zaogzi40us1o$1",
             },
             initializer: {
               kind: "()",
@@ -202,7 +202,7 @@ describe("a field's value", () => {
                             kind: "id",
                             loc: [116, 43, 116, 47],
                             text: "text",
-                            bindingKey: "text$2clp1jg90dm69$0",
+                            bindingKey: "text$2zaogzi40us1o$0",
                           },
                           name: "read",
                         },
@@ -249,7 +249,7 @@ describe("a field's value", () => {
                             kind: "id",
                             loc: [117, 59, 117, 63],
                             text: "isOn",
-                            bindingKey: "isOn$2clp1jg90dm69$1",
+                            bindingKey: "isOn$2zaogzi40us1o$1",
                           },
                           name: "read",
                         },
@@ -288,7 +288,7 @@ describe("a field's value", () => {
                                   kind: "id",
                                   loc: [120, 15, 120, 19],
                                   text: "text",
-                                  bindingKey: "text$2clp1jg90dm69$0",
+                                  bindingKey: "text$2zaogzi40us1o$0",
                                 },
                                 name: "write",
                               },
@@ -310,7 +310,7 @@ describe("a field's value", () => {
                                   kind: "id",
                                   loc: [121, 15, 121, 19],
                                   text: "isOn",
-                                  bindingKey: "isOn$2clp1jg90dm69$1",
+                                  bindingKey: "isOn$2zaogzi40us1o$1",
                                 },
                                 name: "write",
                               },
@@ -351,5 +351,295 @@ describe("a field's value", () => {
     await userEvent.click(screen.getByRole("button", { name: "write" }));
     assert.equal(text.value, "second");
     assert.equal(on.checked, true);
+  });
+  // A read past the end types as the element and reads as `undefined`, so
+  // nothing reaches a field without a cast.
+  async function Clearable() {
+    return cs.create(
+      [147, 12, 164, 7],
+      {
+        version: "0.0.0",
+        filePath: "render/attributes.test.tsx",
+        fileHash: "2zaogzi40us1o",
+        splices: { $state: { value: state, params: [] } },
+        captures: [],
+      },
+      () => ({
+        kind: "{}",
+        loc: [147, 15, 164, 6],
+        statements: [
+          {
+            kind: "const",
+            loc: [148, 7, 148, 53],
+            name: {
+              kind: "id",
+              loc: [148, 13, 148, 18],
+              text: "texts",
+              bindingKey: "texts$2zaogzi40us1o$2",
+            },
+            initializer: {
+              kind: "()",
+              loc: [148, 21, 148, 52],
+              expression: {
+                kind: "splice",
+                loc: [148, 21, 148, 27],
+                key: "$state",
+              },
+              arguments: [
+                {
+                  kind: "arr",
+                  loc: [148, 28, 148, 51],
+                  elements: [
+                    {
+                      kind: "string",
+                      loc: [148, 29, 148, 50],
+                      text: "typed by the script",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+          {
+            kind: "const",
+            loc: [149, 7, 149, 36],
+            name: {
+              kind: "id",
+              loc: [149, 13, 149, 18],
+              text: "flags",
+              bindingKey: "flags$2zaogzi40us1o$3",
+            },
+            initializer: {
+              kind: "()",
+              loc: [149, 21, 149, 35],
+              expression: {
+                kind: "splice",
+                loc: [149, 21, 149, 27],
+                key: "$state",
+              },
+              arguments: [
+                {
+                  kind: "arr",
+                  loc: [149, 28, 149, 34],
+                  elements: [
+                    {
+                      kind: "true",
+                      loc: [149, 29, 149, 33],
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+          {
+            kind: "return",
+            loc: [150, 7, 163, 9],
+            expression: {
+              kind: "jsx",
+              loc: [151, 9, 162, 15],
+              type: {
+                kind: "string",
+                loc: [151, 10, 151, 13],
+                text: "div",
+              },
+              attributes: [],
+              children: [
+                {
+                  kind: "jsx",
+                  loc: [152, 11, 152, 62],
+                  type: {
+                    kind: "string",
+                    loc: [152, 12, 152, 17],
+                    text: "input",
+                  },
+                  attributes: [
+                    {
+                      name: "aria-label",
+                      initializer: {
+                        kind: "string",
+                        loc: [152, 29, 152, 35],
+                        text: "text",
+                      },
+                    },
+                    {
+                      name: "value",
+                      initializer: {
+                        kind: "[]",
+                        loc: [152, 43, 152, 58],
+                        expression: {
+                          kind: "()",
+                          loc: [152, 43, 152, 55],
+                          expression: {
+                            kind: ".",
+                            loc: [152, 43, 152, 53],
+                            expression: {
+                              kind: "id",
+                              loc: [152, 43, 152, 48],
+                              text: "texts",
+                              bindingKey: "texts$2zaogzi40us1o$2",
+                            },
+                            name: "read",
+                          },
+                          arguments: [],
+                        },
+                        argumentExpression: {
+                          kind: "number",
+                          loc: [152, 56, 152, 57],
+                          value: 0,
+                        },
+                      },
+                    },
+                  ],
+                  children: [],
+                },
+                {
+                  kind: "jsx",
+                  loc: [153, 11, 153, 78],
+                  type: {
+                    kind: "string",
+                    loc: [153, 12, 153, 17],
+                    text: "input",
+                  },
+                  attributes: [
+                    {
+                      name: "type",
+                      initializer: {
+                        kind: "string",
+                        loc: [153, 23, 153, 33],
+                        text: "checkbox",
+                      },
+                    },
+                    {
+                      name: "aria-label",
+                      initializer: {
+                        kind: "string",
+                        loc: [153, 45, 153, 49],
+                        text: "on",
+                      },
+                    },
+                    {
+                      name: "checked",
+                      initializer: {
+                        kind: "[]",
+                        loc: [153, 59, 153, 74],
+                        expression: {
+                          kind: "()",
+                          loc: [153, 59, 153, 71],
+                          expression: {
+                            kind: ".",
+                            loc: [153, 59, 153, 69],
+                            expression: {
+                              kind: "id",
+                              loc: [153, 59, 153, 64],
+                              text: "flags",
+                              bindingKey: "flags$2zaogzi40us1o$3",
+                            },
+                            name: "read",
+                          },
+                          arguments: [],
+                        },
+                        argumentExpression: {
+                          kind: "number",
+                          loc: [153, 72, 153, 73],
+                          value: 0,
+                        },
+                      },
+                    },
+                  ],
+                  children: [],
+                },
+                {
+                  kind: "jsx",
+                  loc: [154, 11, 161, 20],
+                  type: {
+                    kind: "string",
+                    loc: [154, 12, 154, 18],
+                    text: "button",
+                  },
+                  attributes: [
+                    {
+                      name: "onclick",
+                      initializer: {
+                        kind: "=>",
+                        loc: [155, 22, 158, 14],
+                        parameters: [],
+                        body: {
+                          kind: "{}",
+                          loc: [155, 28, 158, 14],
+                          statements: [
+                            {
+                              kind: "()",
+                              loc: [156, 15, 156, 30],
+                              expression: {
+                                kind: ".",
+                                loc: [156, 15, 156, 26],
+                                expression: {
+                                  kind: "id",
+                                  loc: [156, 15, 156, 20],
+                                  text: "texts",
+                                  bindingKey: "texts$2zaogzi40us1o$2",
+                                },
+                                name: "write",
+                              },
+                              arguments: [
+                                {
+                                  kind: "arr",
+                                  loc: [156, 27, 156, 29],
+                                  elements: [],
+                                },
+                              ],
+                            },
+                            {
+                              kind: "()",
+                              loc: [157, 15, 157, 30],
+                              expression: {
+                                kind: ".",
+                                loc: [157, 15, 157, 26],
+                                expression: {
+                                  kind: "id",
+                                  loc: [157, 15, 157, 20],
+                                  text: "flags",
+                                  bindingKey: "flags$2zaogzi40us1o$3",
+                                },
+                                name: "write",
+                              },
+                              arguments: [
+                                {
+                                  kind: "arr",
+                                  loc: [157, 27, 157, 29],
+                                  elements: [],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                  children: [
+                    {
+                      kind: "string",
+                      loc: [160, 13, 161, 11],
+                      text: "clear",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+      }),
+    );
+  }
+  it("is cleared by nothing, after the field was edited", async () => {
+    await render(_jsx(Clearable, {}));
+    const text = screen.getByLabelText("text");
+    const on = screen.getByLabelText("on");
+    fireEvent.input(text, { target: { value: "typed" } });
+    await userEvent.click(on);
+    await userEvent.click(on);
+    await userEvent.click(screen.getByRole("button", { name: "clear" }));
+    assert.equal(text.value, "");
+    assert.equal(on.checked, false);
   });
 });

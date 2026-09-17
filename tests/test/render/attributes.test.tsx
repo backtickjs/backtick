@@ -140,4 +140,40 @@ describe("a field's value", () => {
     assert.equal(text.value, "second");
     assert.equal(on.checked, true);
   });
+
+  // A read past the end types as the element and reads as `undefined`, so
+  // nothing reaches a field without a cast.
+  async function Clearable() {
+    return cs`{
+      const texts = $state(["typed by the script"]);
+      const flags = $state([true]);
+      return (
+        <div>
+          <input aria-label="text" value={texts.read()[0]} />
+          <input type="checkbox" aria-label="on" checked={flags.read()[0]} />
+          <button
+            onclick={() => {
+              texts.write([]);
+              flags.write([]);
+            }}
+          >
+            clear
+          </button>
+        </div>
+      );
+    }`;
+  }
+
+  it("is cleared by nothing, after the field was edited", async () => {
+    await render(<Clearable />);
+    const text = screen.getByLabelText<HTMLInputElement>("text");
+    const on = screen.getByLabelText<HTMLInputElement>("on");
+    fireEvent.input(text, { target: { value: "typed" } });
+    await userEvent.click(on);
+    await userEvent.click(on);
+
+    await userEvent.click(screen.getByRole("button", { name: "clear" }));
+    assert.equal(text.value, "");
+    assert.equal(on.checked, false);
+  });
 });
