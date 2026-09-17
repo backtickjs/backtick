@@ -2,7 +2,13 @@
 
 import { createBuiltin } from "./Builtin.js";
 import type { Client } from "./Client.js";
-import type { Http, Signal, State, Vm } from "./declarations.generated.js";
+import type {
+  Http,
+  Signal,
+  SignalOptions,
+  State,
+  Vm,
+} from "./declarations.generated.js";
 
 /**
  * Creates a `State`, a `Signal` a script can both `get` and `set`, and the
@@ -15,22 +21,24 @@ import type { Http, Signal, State, Vm } from "./declarations.generated.js";
  *
  * @param initial The value it holds until the first `set`.
  */
-export const state: Client<<T>(initial: T) => State<T>> =
-  createBuiltin("state");
+export const state: Client<
+  <T>(initial: T, options?: SignalOptions<T>) => State<T>
+> = createBuiltin("state");
 
 /**
  * Creates a read-only `Signal` that derives its value from other signals. The
  * calculated value is memoized: `fn` runs when the computed is created and
  * again only when a signal it read changes, and every `get` reuses the result.
- * If the new result is `===` to the previous one, the computed doesn't update
- * whatever reads it.
+ * If the new result equals the previous one (`===`, or `options.equals`), the
+ * computed doesn't update whatever reads it.
  *
  * Created while a script draws, it lasts as long as that drawing.
  *
  * @param fn Calculates the value from the signals it reads.
  */
-export const computed: Client<<T>(fn: () => T) => Signal<T>> =
-  createBuiltin("computed");
+export const computed: Client<
+  <T>(fn: () => T, options?: SignalOptions<T>) => Signal<T>
+> = createBuiltin("computed");
 
 export const http: Client<Http> = createBuiltin("http");
 

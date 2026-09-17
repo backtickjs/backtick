@@ -92,6 +92,54 @@
         "required": ["set"]
       }
     },
+    "SignalOptions": {
+      "description": "How a signal decides that a new value is a change.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [],
+        "properties": {
+          "equals": {
+            "description": "Whether `next` counts as the same value as `previous`. When it does, whatever reads the signal isn't updated. Compared with `===` when left out.",
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "previous",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              },
+              {
+                "type": "functionParameter",
+                "name": "next",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              }
+            ],
+            "returnType": {
+              "type": "boolean"
+            }
+          }
+        },
+        "required": []
+      }
+    },
     "ClientHandle": {
       "description": "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `State` is a handle, and so is anything a client answers with that this format does not describe.",
       "type": "interface",
@@ -17343,6 +17391,23 @@
               "type": "ref",
               "$ref": "T"
             }
+          },
+          {
+            "type": "functionParameter",
+            "name": "options",
+            "holds": {
+              "type": "apply",
+              "target": {
+                "type": "ref",
+                "$ref": "SignalOptions"
+              },
+              "arguments": [
+                {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              ]
+            }
           }
         ],
         "returnType": {
@@ -17361,7 +17426,7 @@
       }
     },
     "computed": {
-      "description": "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result is `===` to the previous one, the computed doesn't update whatever reads it.\n\nCreated while a script draws, it lasts as long as that drawing.",
+      "description": "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result equals the previous one (`===`, or `options.equals`), the computed doesn't update whatever reads it.\n\nCreated while a script draws, it lasts as long as that drawing.",
       "type": "generic",
       "parameters": [
         {
@@ -17389,6 +17454,23 @@
                 "type": "ref",
                 "$ref": "T"
               }
+            }
+          },
+          {
+            "type": "functionParameter",
+            "name": "options",
+            "holds": {
+              "type": "apply",
+              "target": {
+                "type": "ref",
+                "$ref": "SignalOptions"
+              },
+              "arguments": [
+                {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              ]
             }
           }
         ],

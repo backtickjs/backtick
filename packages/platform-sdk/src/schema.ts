@@ -51,6 +51,28 @@ export const schema: Schema = {
       },
     ),
 
+    SignalOptions: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([], {
+        equals: Type.Optional(
+          Type.Function(
+            [
+              Type.FunctionParameter("previous", Type.Ref("T")),
+              Type.FunctionParameter("next", Type.Ref("T")),
+            ],
+            Type.Boolean(),
+            {
+              description:
+                "Whether `next` counts as the same value as `previous`. When it does, whatever reads the signal isn't updated. Compared with `===` when left out.",
+            },
+          ),
+        ),
+      }),
+      {
+        description: "How a signal decides that a new value is a change.",
+      },
+    ),
+
     ClientHandle: Type.Interface(
       [],
       {},
@@ -2045,6 +2067,12 @@ export const schema: Schema = {
           Type.FunctionParameter("initial", Type.Ref("T"), {
             description: "The value it holds until the first `set`.",
           }),
+          Type.Optional(
+            Type.FunctionParameter(
+              "options",
+              Type.Apply(Type.Ref("SignalOptions"), [Type.Ref("T")]),
+            ),
+          ),
         ],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
       ),
@@ -2061,12 +2089,18 @@ export const schema: Schema = {
           Type.FunctionParameter("fn", Type.Function([], Type.Ref("T")), {
             description: "Calculates the value from the signals it reads.",
           }),
+          Type.Optional(
+            Type.FunctionParameter(
+              "options",
+              Type.Apply(Type.Ref("SignalOptions"), [Type.Ref("T")]),
+            ),
+          ),
         ],
         Type.Apply(Type.Ref("Signal"), [Type.Ref("T")]),
       ),
       {
         description:
-          "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result is `===` to the previous one, the computed doesn't update whatever reads it.\n\n" +
+          "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result equals the previous one (`===`, or `options.equals`), the computed doesn't update whatever reads it.\n\n" +
           "Created while a script draws, it lasts as long as that drawing.",
       },
     ),

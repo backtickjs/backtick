@@ -5,6 +5,7 @@ import type {
   HttpConfig,
   HttpResponse,
   Signal,
+  SignalOptions,
   State,
   Vm,
 } from "@backtickjs/platform-sdk";
@@ -141,8 +142,8 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     }
 
     case "state":
-      return ((initial) => {
-        const [get, store] = createSignal(initial);
+      return ((initial, options) => {
+        const [get, store] = createSignal(initial, equalsOf(options));
         // Through Solid's updater form, so a function is stored rather than
         // called.
         const set = (value: typeof initial) => {
@@ -157,8 +158,8 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     // Solid's memo: computed at once, shared by every reader, and passed on
     // only when it changes.
     case "computed":
-      return ((fn) => {
-        const get = createMemo(fn);
+      return ((fn, options) => {
+        const get = createMemo(fn, undefined, equalsOf(options));
         return { get } as unknown as Signal<ReturnType<typeof fn>>;
       }) satisfies Builtins[typeof known];
 
@@ -373,4 +374,10 @@ function query(url: string, params: HttpConfig["params"]): string {
     return "";
   }
   return (url.includes("?") ? "&" : "?") + pairs.join("&");
+}
+
+// Only when there is one: Solid merges the options over its own, so an
+// `equals` of `undefined` would replace its `===` rather than keep it.
+function equalsOf<T>(options: SignalOptions<T> | undefined) {
+  return options?.equals ? { equals: options.equals } : undefined;
 }

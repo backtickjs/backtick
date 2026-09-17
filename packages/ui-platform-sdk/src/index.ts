@@ -71,6 +71,7 @@ export type {
   HttpConfig,
   HttpResponse,
   Signal,
+  SignalOptions,
   State,
   UiPlatformBuiltins,
   UiPlatformElements,

@@ -207,6 +207,7 @@ export type {
   SVGElement,
   SelectProps,
   Signal,
+  SignalOptions,
   SiteBuiltins,
   SiteElements,
   SlotProps,

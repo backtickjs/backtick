@@ -206,6 +206,7 @@ export type {
   SVGElement,
   SelectProps,
   Signal,
+  SignalOptions,
   SlotProps,
   SourceProps,
   State,

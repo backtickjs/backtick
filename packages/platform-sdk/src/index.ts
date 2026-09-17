@@ -76,6 +76,7 @@ export type {
   PlatformBuiltins,
   PlatformElements,
   Signal,
+  SignalOptions,
   State,
   Vm,
 } from "./declarations.generated.js";

@@ -75,6 +75,7 @@ export type {
   HttpConfig,
   HttpResponse,
   Signal,
+  SignalOptions,
   State,
   Vm,
 } from "@backtickjs/platform-sdk";

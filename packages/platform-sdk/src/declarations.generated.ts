@@ -28,6 +28,18 @@ export interface State<T> extends Signal<T> {
   set(value: T): void;
 }
 
+/**
+ * How a signal decides that a new value is a change.
+ */
+export interface SignalOptions<T> {
+  /**
+   * Whether `next` counts as the same value as `previous`. When it does,
+   * whatever reads the signal isn't updated. Compared with `===` when left
+   * out.
+   */
+  equals?(previous: T, next: T): boolean;
+}
+
 declare const ClientHandleBrand: unique symbol;
 /**
  * Something the client owns, and that nothing here reads into.
@@ -1301,19 +1313,19 @@ export interface PlatformBuiltins {
    *
    * @param initial The value it holds until the first `set`.
    */
-  state<T>(initial: T): State<T>;
+  state<T>(initial: T, options?: SignalOptions<T>): State<T>;
   /**
    * Creates a read-only `Signal` that derives its value from other signals.
    * The calculated value is memoized: `fn` runs when the computed is created
    * and again only when a signal it read changes, and every `get` reuses the
-   * result. If the new result is `===` to the previous one, the computed
-   * doesn't update whatever reads it.
+   * result. If the new result equals the previous one (`===`, or
+   * `options.equals`), the computed doesn't update whatever reads it.
    *
    * Created while a script draws, it lasts as long as that drawing.
    *
    * @param fn Calculates the value from the signals it reads.
    */
-  computed<T>(fn: () => T): Signal<T>;
+  computed<T>(fn: () => T, options?: SignalOptions<T>): Signal<T>;
   http: Http;
   vm: Vm;
 }
