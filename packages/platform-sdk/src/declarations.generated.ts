@@ -57,10 +57,6 @@ export type ClientUnknown = ClientValue | void;
 /**
  * What may cross between a host and a client: data, a function, or a handle to
  * something the client owns.
- *
- * `null` is what a script writes for nothing and `undefined` is what a total
- * read answers with where there is none — an index past the end, a member a
- * value does not hold. Neither can be spliced: `null` is what crosses.
  */
 export type ClientValue =
   | null

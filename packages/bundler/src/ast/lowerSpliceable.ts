@@ -34,12 +34,9 @@ export async function lowerSpliceable<T extends ClientUnknown>(
   if (value === null) {
     return { kind: "AstNull" };
   }
-  // Not carried yet: a spliced `undefined` would need the bundle's `undef`
-  // node, including inside data. An element's `undefined` prop never gets
-  // here. Refused by name, since everything past here reads the value as an
-  // object.
+  // Checked by name, since everything past here reads the value as an object.
   if (value === undefined) {
-    throw new Error("Can't splice `undefined`. Use `null` for nothing.");
+    return { kind: "AstUndefined" };
   }
   if (typeof value === "number") {
     return { kind: "AstNumber", value };

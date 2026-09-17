@@ -22,7 +22,8 @@ export type Ast =
   | AstNull
   | AstNumber
   | AstObject
-  | AstString;
+  | AstString
+  | AstUndefined;
 
 // `Metadata`'s splice, lowered.
 export interface AstSplice {
@@ -98,6 +99,11 @@ export interface AstHole {
 
 export interface AstNull {
   readonly kind: "AstNull";
+}
+
+// Written as the bundle's `undef` node, because JSON has no form for it.
+export interface AstUndefined {
+  readonly kind: "AstUndefined";
 }
 
 export interface AstNumber {

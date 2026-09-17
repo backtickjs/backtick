@@ -1,0 +1,38 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { cs } from "@backtickjs/core";
+import { evaluate } from "@backtickjs/web-testing";
+
+// `null` and `undefined` are two values, each equal only to itself.
+describe("null and undefined", () => {
+  it("are each equal to themselves", async () => {
+    assert.equal(await evaluate(cs`null === null`), true);
+    assert.equal(await evaluate(cs`undefined === undefined`), true);
+  });
+
+  it("are not equal to each other", async () => {
+    assert.equal(await evaluate(cs`null !== undefined`), true);
+    assert.equal(await evaluate(cs`null === undefined`), false);
+  });
+
+  // The same holds wherever the value came from: a splice, or a read past
+  // the end of an array.
+  it("compare the same when they arrive another way", async () => {
+    const nothing: number | undefined = undefined;
+    const empty = null;
+    assert.deepEqual(
+      await evaluate(cs`{
+        const names = ["a"];
+        return [
+          $nothing === undefined,
+          $nothing !== null,
+          $empty === null,
+          $empty !== undefined,
+          names[1] === undefined,
+          names[1] !== null,
+        ];
+      }`),
+      [true, true, true, true, true, true],
+    );
+  });
+});

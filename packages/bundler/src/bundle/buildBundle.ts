@@ -196,6 +196,7 @@ export function buildBundle(
       case "AstString":
       case "AstBoolean":
       case "AstNull":
+      case "AstUndefined":
         return [];
     }
   };
@@ -307,6 +308,8 @@ export function buildBundle(
         return value.value;
       case "AstNull":
         return null;
+      case "AstUndefined":
+        return ["undef"];
       // An expansion is written out as the arrow it is, its holes the
       // parameters and the call the tag wrote binding them. Compiling it to a
       // `functions` entry instead is possible — `FunctionReference` is an entry as a

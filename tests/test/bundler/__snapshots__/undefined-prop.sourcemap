@@ -15,10 +15,3 @@ focus                                → focus
 ()                                   → ()
 )                                    → )
 ))                                   → `
-cs.lift((() => {\n                   → cs`{\n      
-return cs.const(                     → return 
-cs.splice(                           →  [-semantic]
-(nothing)                            → $nothing
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-);                                   → ;
-\n})())                              → \n    }`

@@ -36,14 +36,3 @@ describe("an undefined prop", () => {
     assert.equal(document.activeElement, screen.getByRole("button"));
   });
 });
-
-// Anywhere else, a spliced `undefined` has no form in the bundle yet.
-it("refuses an undefined splice", async () => {
-  const nothing: number | undefined = undefined;
-  await assert.rejects(
-    bundler.run(cs.lift((() => {
-    return cs.const(cs.splice((nothing)) satisfies typeof cs.ClientUnknown);
-})())),
-    { message: "Can't splice `undefined`. Use `null` for nothing." },
-  );
-});

@@ -30,7 +30,7 @@ describe("an undefined prop", () => {
           {
             version: "0.0.0",
             filePath: "bundler/undefined-prop.test.tsx",
-            fileHash: "15hktgoqk111j",
+            fileHash: "1bhwkpx1jeq5t",
             splices: { $onMount: { value: onMount, params: [] } },
             captures: [],
           },
@@ -45,7 +45,7 @@ describe("an undefined prop", () => {
                   kind: "id",
                   loc: [34, 38, 34, 40],
                   text: "el",
-                  bindingKey: "el$15hktgoqk111j$0",
+                  bindingKey: "el$1bhwkpx1jeq5t$0",
                 },
               },
             ],
@@ -72,7 +72,7 @@ describe("an undefined prop", () => {
                         kind: "id",
                         loc: [34, 60, 34, 62],
                         text: "el",
-                        bindingKey: "el$15hktgoqk111j$0",
+                        bindingKey: "el$1bhwkpx1jeq5t$0",
                       },
                       name: "focus",
                     },
@@ -87,38 +87,4 @@ describe("an undefined prop", () => {
     );
     assert.equal(document.activeElement, screen.getByRole("button"));
   });
-});
-// Anywhere else, a spliced `undefined` has no form in the bundle yet.
-it("refuses an undefined splice", async () => {
-  const nothing = undefined;
-  await assert.rejects(
-    bundler.run(
-      cs.create(
-        [44, 17, 46, 7],
-        {
-          version: "0.0.0",
-          filePath: "bundler/undefined-prop.test.tsx",
-          fileHash: "15hktgoqk111j",
-          splices: { $nothing: { value: nothing, params: [] } },
-          captures: [],
-        },
-        () => ({
-          kind: "{}",
-          loc: [44, 20, 46, 6],
-          statements: [
-            {
-              kind: "return",
-              loc: [45, 7, 45, 23],
-              expression: {
-                kind: "splice",
-                loc: [45, 14, 45, 22],
-                key: "$nothing",
-              },
-            },
-          ],
-        }),
-      ),
-    ),
-    { message: "Can't splice `undefined`. Use `null` for nothing." },
-  );
 });

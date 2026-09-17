@@ -1,0 +1,75 @@
+cs.lift(cs.const(                    → cs`
+null                                 → null
+ ===                                 →  === 
+null                                 → null
+))                                   → `
+cs.lift(cs.const(                    → cs`
+undefined                            → undefined
+ ===                                 →  === 
+undefined                            → undefined
+))                                   → `
+cs.lift(cs.const(                    → cs`
+null                                 → null
+ !==                                 →  !== 
+undefined                            → undefined
+))                                   → `
+cs.lift(cs.const(                    → cs`
+null                                 → null
+ ===                                 →  === 
+undefined                            → undefined
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n        
+const                                → const 
+__cs_names                           → names
+ = cs.const(                         →  = 
+[                                    → [
+"a"                                  → "a"
+]                                    → ]
+);                                   → ;
+\n                                   → \n        
+return cs.const(                     → return 
+[                                    → [\n          
+cs.splice(                           →  [-semantic]
+(nothing)                            → $nothing
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+ ===                                 →  === 
+undefined                            → undefined
+,                                    → ,\n          
+cs.splice(                           →  [-semantic]
+(nothing)                            → $nothing
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+ !==                                 →  !== 
+null                                 → null
+,                                    → ,\n          
+cs.splice(                           →  [-semantic]
+(empty)                              → $empty
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+ ===                                 →  === 
+null                                 → null
+,                                    → ,\n          
+cs.splice(                           →  [-semantic]
+(empty)                              → $empty
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+ !==                                 →  !== 
+undefined                            → undefined
+,                                    → ,\n          
+cs.receiver(                         → 
+__cs_names                           → names
+)                                    → 
+[                                    → [
+1                                    → 1
+]                                    → ]
+ ===                                 →  === 
+undefined                            → undefined
+,                                    → ,\n          
+cs.receiver(                         → 
+__cs_names                           → names
+)                                    → 
+[                                    → [
+1                                    → 1
+]                                    → ]
+ !==                                 →  !== 
+null                                 → null
+]                                    → ,\n        ]
+);                                   → ;
+\n})())                              → \n      }`
