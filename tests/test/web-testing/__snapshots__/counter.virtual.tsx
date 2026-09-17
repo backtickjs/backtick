@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Counter() {
   return cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).write(cs.receiver(__cs_count).read() + 1))}>Add</button>)}{cs.lift(<p>{cs.lift("Count: " + cs.receiver(__cs_count).read())}</p>)}</div>);
+    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>Add</button>)}{cs.lift(<p>{cs.lift("Count: " + cs.receiver(__cs_count).get())}</p>)}</div>);
 })());
 }
 

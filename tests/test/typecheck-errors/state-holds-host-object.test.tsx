@@ -17,5 +17,5 @@ export default cs`{
   // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
   const held = $state($host);
   // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
-  held.write($host);
+  held.set($host);
 }`;

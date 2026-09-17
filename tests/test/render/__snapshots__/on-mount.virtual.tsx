@@ -29,9 +29,9 @@ describe("onMount", () => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     cs.statement((cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => {
         cs.statement(cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log());
-        cs.statement(cs.receiver(__cs_count).update(__cs_n => __cs_n + 1));
+        cs.statement(cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1));
     }));
-    return cs.const(<p>{cs.lift("mounted " + cs.receiver(__cs_count).read())}</p>);
+    return cs.const(<p>{cs.lift("mounted " + cs.receiver(__cs_count).get())}</p>);
 })()),
       ),
     );
@@ -43,7 +43,7 @@ describe("onMount", () => {
     await render(
       cs.lift((() => {
     const __cs_said = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("not yet"));
-    return cs.const(<button onclick={cs.lift(() => (cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(__cs_said).write("ran")))}>{cs.lift(cs.receiver(__cs_said).read())}</button>);
+    return cs.const(<button onclick={cs.lift(() => (cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(__cs_said).set("ran")))}>{cs.lift(cs.receiver(__cs_said).get())}</button>);
 })()),
     );
     await userEvent.click(screen.getByRole("button"));

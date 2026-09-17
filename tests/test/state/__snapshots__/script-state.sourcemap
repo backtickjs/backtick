@@ -45,7 +45,7 @@ __cs_row                             → row
 label                                → label
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 cs.receiver(                         → 
@@ -55,7 +55,7 @@ __cs_row                             → row
 label                                → label
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 " !!!"                               → " !!!"
@@ -78,6 +78,6 @@ cs.splice(                           →  [-semantic]
 label                                → label
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 ))                                   → `

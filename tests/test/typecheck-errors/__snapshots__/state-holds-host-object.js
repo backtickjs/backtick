@@ -16,7 +16,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "typecheck-errors/state-holds-host-object.test.tsx",
-    fileHash: "1x4hgyu7lmb12",
+    fileHash: "1601kcqqso40z",
     splices: {
       $state: { value: state, params: [] },
       $host: { value: host, params: [] },
@@ -34,7 +34,7 @@ export default cs.create(
           kind: "id",
           loc: [18, 9, 18, 13],
           text: "held",
-          bindingKey: "held$1x4hgyu7lmb12$0",
+          bindingKey: "held$1601kcqqso40z$0",
         },
         initializer: {
           kind: "()",
@@ -55,22 +55,22 @@ export default cs.create(
       },
       {
         kind: "()",
-        loc: [20, 3, 20, 20],
+        loc: [20, 3, 20, 18],
         expression: {
           kind: ".",
-          loc: [20, 3, 20, 13],
+          loc: [20, 3, 20, 11],
           expression: {
             kind: "id",
             loc: [20, 3, 20, 7],
             text: "held",
-            bindingKey: "held$1x4hgyu7lmb12$0",
+            bindingKey: "held$1601kcqqso40z$0",
           },
-          name: "write",
+          name: "set",
         },
         arguments: [
           {
             kind: "splice",
-            loc: [20, 14, 20, 19],
+            loc: [20, 12, 20, 17],
             key: "$host",
           },
         ],

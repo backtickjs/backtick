@@ -16,7 +16,7 @@ async function Row() {
     {
       version: "0.0.0",
       filePath: "components/pressable.test.tsx",
-      fileHash: "3dph23q87lvhg",
+      fileHash: "7huprcub5nk3",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -31,7 +31,7 @@ async function Row() {
             kind: "id",
             loc: [16, 11, 16, 16],
             text: "count",
-            bindingKey: "count$3dph23q87lvhg$0",
+            bindingKey: "count$7huprcub5nk3$0",
           },
           initializer: {
             kind: "()",
@@ -82,46 +82,46 @@ async function Row() {
                 name: "onclick",
                 initializer: {
                   kind: "=>",
-                  loc: [21, 18, 21, 53],
+                  loc: [21, 18, 21, 50],
                   parameters: [],
                   body: {
                     kind: "()",
-                    loc: [21, 24, 21, 53],
+                    loc: [21, 24, 21, 50],
                     expression: {
                       kind: ".",
-                      loc: [21, 24, 21, 35],
+                      loc: [21, 24, 21, 33],
                       expression: {
                         kind: "id",
                         loc: [21, 24, 21, 29],
                         text: "count",
-                        bindingKey: "count$3dph23q87lvhg$0",
+                        bindingKey: "count$7huprcub5nk3$0",
                       },
-                      name: "write",
+                      name: "set",
                     },
                     arguments: [
                       {
                         kind: "binop",
-                        loc: [21, 36, 21, 52],
+                        loc: [21, 34, 21, 49],
                         left: {
                           kind: "()",
-                          loc: [21, 36, 21, 48],
+                          loc: [21, 34, 21, 45],
                           expression: {
                             kind: ".",
-                            loc: [21, 36, 21, 46],
+                            loc: [21, 34, 21, 43],
                             expression: {
                               kind: "id",
-                              loc: [21, 36, 21, 41],
+                              loc: [21, 34, 21, 39],
                               text: "count",
-                              bindingKey: "count$3dph23q87lvhg$0",
+                              bindingKey: "count$7huprcub5nk3$0",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
                         operatorToken: "+",
                         right: {
                           kind: "number",
-                          loc: [21, 51, 21, 52],
+                          loc: [21, 48, 21, 49],
                           value: 1,
                         },
                       },
@@ -133,7 +133,7 @@ async function Row() {
             children: [
               {
                 kind: "jsx",
-                loc: [23, 9, 23, 77],
+                loc: [23, 9, 23, 76],
                 type: {
                   kind: "string",
                   loc: [23, 10, 23, 14],
@@ -152,41 +152,41 @@ async function Row() {
                 children: [
                   {
                     kind: "?:",
-                    loc: [23, 41, 23, 69],
+                    loc: [23, 41, 23, 68],
                     condition: {
                       kind: "binop",
-                      loc: [23, 41, 23, 57],
+                      loc: [23, 41, 23, 56],
                       left: {
                         kind: "()",
-                        loc: [23, 41, 23, 53],
+                        loc: [23, 41, 23, 52],
                         expression: {
                           kind: ".",
-                          loc: [23, 41, 23, 51],
+                          loc: [23, 41, 23, 50],
                           expression: {
                             kind: "id",
                             loc: [23, 41, 23, 46],
                             text: "count",
-                            bindingKey: "count$3dph23q87lvhg$0",
+                            bindingKey: "count$7huprcub5nk3$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
                       operatorToken: ">",
                       right: {
                         kind: "number",
-                        loc: [23, 56, 23, 57],
+                        loc: [23, 55, 23, 56],
                         value: 0,
                       },
                     },
                     whenTrue: {
                       kind: "string",
-                      loc: [23, 60, 23, 63],
+                      loc: [23, 59, 23, 62],
                       text: "\u2611",
                     },
                     whenFalse: {
                       kind: "string",
-                      loc: [23, 66, 23, 69],
+                      loc: [23, 65, 23, 68],
                       text: "\u2610",
                     },
                   },
@@ -194,7 +194,7 @@ async function Row() {
               },
               {
                 kind: "jsx",
-                loc: [24, 9, 24, 60],
+                loc: [24, 9, 24, 59],
                 type: {
                   kind: "string",
                   loc: [24, 10, 24, 14],
@@ -204,10 +204,10 @@ async function Row() {
                 children: [
                   {
                     kind: "binop",
-                    loc: [24, 16, 24, 52],
+                    loc: [24, 16, 24, 51],
                     left: {
                       kind: "binop",
-                      loc: [24, 16, 24, 41],
+                      loc: [24, 16, 24, 40],
                       left: {
                         kind: "string",
                         loc: [24, 16, 24, 26],
@@ -216,17 +216,17 @@ async function Row() {
                       operatorToken: "+",
                       right: {
                         kind: "()",
-                        loc: [24, 29, 24, 41],
+                        loc: [24, 29, 24, 40],
                         expression: {
                           kind: ".",
-                          loc: [24, 29, 24, 39],
+                          loc: [24, 29, 24, 38],
                           expression: {
                             kind: "id",
                             loc: [24, 29, 24, 34],
                             text: "count",
-                            bindingKey: "count$3dph23q87lvhg$0",
+                            bindingKey: "count$7huprcub5nk3$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
@@ -234,7 +234,7 @@ async function Row() {
                     operatorToken: "+",
                     right: {
                       kind: "string",
-                      loc: [24, 44, 24, 52],
+                      loc: [24, 43, 24, 51],
                       text: " times",
                     },
                   },

@@ -135,21 +135,16 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
 
     case "state":
       return ((initial) => {
-        const [read, store] = createSignal(initial);
-        const write = (value: typeof initial): ClientValue => {
+        const [get, store] = createSignal(initial);
+        // Through Solid's updater form, so a function is stored rather than
+        // called.
+        const set = (value: typeof initial) => {
           store(() => value);
-          return null;
-        };
-        const update = (
-          updater: (current: typeof initial) => typeof initial,
-        ) => {
-          store((previous) => updater(previous));
-          return null;
         };
         // The brand cannot be built by writing the members — that is what stops
         // a script passing a record off as storage — so the client asserts it
         // here, at the one place entitled to.
-        return { read, write, update } as unknown as State<typeof initial>;
+        return { get, set } as unknown as State<typeof initial>;
       }) satisfies Builtins[typeof known];
 
     case "onMount":

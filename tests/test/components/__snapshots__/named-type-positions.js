@@ -4,11 +4,11 @@ import { cs, For, state } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 async function Rows() {
   return cs.create(
-    [18, 10, 36, 5],
+    [18, 10, 34, 5],
     {
       version: "0.0.0",
       filePath: "components/named-type-positions.test.tsx",
-      fileHash: "2pelpbh8omet0",
+      fileHash: "1xb9ns0x2f3vb",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -17,7 +17,7 @@ async function Rows() {
     },
     () => ({
       kind: "{}",
-      loc: [18, 13, 36, 4],
+      loc: [18, 13, 34, 4],
       statements: [
         {
           kind: "const",
@@ -26,7 +26,7 @@ async function Rows() {
             kind: "id",
             loc: [19, 11, 19, 15],
             text: "rows",
-            bindingKey: "rows$2pelpbh8omet0$0",
+            bindingKey: "rows$1xb9ns0x2f3vb$0",
           },
           initializer: {
             kind: "()",
@@ -52,7 +52,7 @@ async function Rows() {
             kind: "id",
             loc: [20, 11, 20, 14],
             text: "add",
-            bindingKey: "add$2pelpbh8omet0$1",
+            bindingKey: "add$1xb9ns0x2f3vb$1",
           },
           initializer: {
             kind: "=>",
@@ -65,7 +65,7 @@ async function Rows() {
                   kind: "id",
                   loc: [20, 18, 20, 21],
                   text: "row",
-                  bindingKey: "row$2pelpbh8omet0$3",
+                  bindingKey: "row$1xb9ns0x2f3vb$3",
                 },
               },
             ],
@@ -75,28 +75,28 @@ async function Rows() {
               statements: [
                 {
                   kind: "()",
-                  loc: [21, 7, 21, 24],
+                  loc: [21, 7, 21, 22],
                   expression: {
                     kind: ".",
-                    loc: [21, 7, 21, 17],
+                    loc: [21, 7, 21, 15],
                     expression: {
                       kind: "id",
                       loc: [21, 7, 21, 11],
                       text: "rows",
-                      bindingKey: "rows$2pelpbh8omet0$0",
+                      bindingKey: "rows$1xb9ns0x2f3vb$0",
                     },
-                    name: "write",
+                    name: "set",
                   },
                   arguments: [
                     {
                       kind: "arr",
-                      loc: [21, 18, 21, 23],
+                      loc: [21, 16, 21, 21],
                       elements: [
                         {
                           kind: "id",
-                          loc: [21, 19, 21, 22],
+                          loc: [21, 17, 21, 20],
                           text: "row",
-                          bindingKey: "row$2pelpbh8omet0$3",
+                          bindingKey: "row$1xb9ns0x2f3vb$3",
                         },
                       ],
                     },
@@ -113,7 +113,7 @@ async function Rows() {
             kind: "id",
             loc: [23, 11, 23, 16],
             text: "label",
-            bindingKey: "label$2pelpbh8omet0$2",
+            bindingKey: "label$1xb9ns0x2f3vb$2",
           },
           initializer: {
             kind: "=>",
@@ -126,7 +126,7 @@ async function Rows() {
                   kind: "id",
                   loc: [23, 20, 23, 23],
                   text: "row",
-                  bindingKey: "row$2pelpbh8omet0$4",
+                  bindingKey: "row$1xb9ns0x2f3vb$4",
                 },
               },
             ],
@@ -144,7 +144,7 @@ async function Rows() {
                       kind: "id",
                       loc: [24, 14, 24, 17],
                       text: "row",
-                      bindingKey: "row$2pelpbh8omet0$4",
+                      bindingKey: "row$1xb9ns0x2f3vb$4",
                     },
                     name: "label",
                   },
@@ -155,10 +155,10 @@ async function Rows() {
         },
         {
           kind: "return",
-          loc: [26, 5, 35, 7],
+          loc: [26, 5, 33, 7],
           expression: {
             kind: "jsx",
-            loc: [27, 7, 34, 13],
+            loc: [27, 7, 32, 13],
             type: {
               kind: "string",
               loc: [27, 8, 27, 11],
@@ -188,7 +188,7 @@ async function Rows() {
                           kind: "id",
                           loc: [28, 30, 28, 33],
                           text: "add",
-                          bindingKey: "add$2pelpbh8omet0$1",
+                          bindingKey: "add$1xb9ns0x2f3vb$1",
                         },
                         arguments: [
                           {
@@ -232,7 +232,7 @@ async function Rows() {
               },
               {
                 kind: "jsx",
-                loc: [29, 9, 33, 15],
+                loc: [29, 9, 31, 15],
                 type: {
                   kind: "string",
                   loc: [29, 10, 29, 13],
@@ -242,7 +242,7 @@ async function Rows() {
                 children: [
                   {
                     kind: "jsx",
-                    loc: [30, 11, 32, 17],
+                    loc: [30, 11, 30, 81],
                     type: {
                       kind: "splice",
                       loc: [30, 12, 30, 15],
@@ -253,17 +253,17 @@ async function Rows() {
                         name: "each",
                         initializer: {
                           kind: "()",
-                          loc: [30, 22, 30, 33],
+                          loc: [30, 22, 30, 32],
                           expression: {
                             kind: ".",
-                            loc: [30, 22, 30, 31],
+                            loc: [30, 22, 30, 30],
                             expression: {
                               kind: "id",
                               loc: [30, 22, 30, 26],
                               text: "rows",
-                              bindingKey: "rows$2pelpbh8omet0$0",
+                              bindingKey: "rows$1xb9ns0x2f3vb$0",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
@@ -272,44 +272,44 @@ async function Rows() {
                     children: [
                       {
                         kind: "=>",
-                        loc: [31, 14, 31, 53],
+                        loc: [30, 35, 30, 74],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [31, 15, 31, 23],
+                            loc: [30, 36, 30, 44],
                             name: {
                               kind: "id",
-                              loc: [31, 15, 31, 18],
+                              loc: [30, 36, 30, 39],
                               text: "row",
-                              bindingKey: "row$2pelpbh8omet0$5",
+                              bindingKey: "row$1xb9ns0x2f3vb$5",
                             },
                           },
                         ],
                         body: {
                           kind: "jsx",
-                          loc: [31, 28, 31, 53],
+                          loc: [30, 49, 30, 74],
                           type: {
                             kind: "string",
-                            loc: [31, 29, 31, 33],
+                            loc: [30, 50, 30, 54],
                             text: "span",
                           },
                           attributes: [],
                           children: [
                             {
                               kind: "()",
-                              loc: [31, 35, 31, 45],
+                              loc: [30, 56, 30, 66],
                               expression: {
                                 kind: "id",
-                                loc: [31, 35, 31, 40],
+                                loc: [30, 56, 30, 61],
                                 text: "label",
-                                bindingKey: "label$2pelpbh8omet0$2",
+                                bindingKey: "label$1xb9ns0x2f3vb$2",
                               },
                               arguments: [
                                 {
                                   kind: "id",
-                                  loc: [31, 41, 31, 44],
+                                  loc: [30, 62, 30, 65],
                                   text: "row",
-                                  bindingKey: "row$2pelpbh8omet0$5",
+                                  bindingKey: "row$1xb9ns0x2f3vb$5",
                                 },
                               ],
                             },

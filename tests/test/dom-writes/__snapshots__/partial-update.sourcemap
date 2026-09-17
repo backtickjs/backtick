@@ -68,8 +68,9 @@ __cs_index                           → index
 )                                    → 
 )                                    → ) 
 {\n                                  → {\n        
-cs.statement(                        → 
-cs.receiver(                         → 
+const                                → const 
+__cs_label                           → label
+ = cs.const(                         →  = 
 cs.receiver(                         → 
 cs.receiver(                         → 
 __cs_rows                            → rows
@@ -80,16 +81,21 @@ __cs_index                           → index
 )                                    → 
 .                                    → .
 label                                → label
+);                                   → ;
+\n                                   → \n        
+cs.statement(                        → 
+cs.receiver(                         → 
+__cs_label                           → label
 )                                    → 
 .                                    → .
-update                               → update
+set                                  → set
 (                                    → (
-(                                    → (
+cs.receiver(                         → 
 __cs_label                           → label
-:                                    → : 
-string                               → string
-) =>                                 → ) => 
-__cs_label                           → label
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
  +                                   →  + 
 " !!!"                               → " !!!"
 )                                    → )
@@ -170,7 +176,7 @@ __cs_row                             → row
 label                                → label
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }</
 td                                   → td

@@ -15,7 +15,7 @@ async function Stepper() {
     {
       version: "0.0.0",
       filePath: "state/local-state.test.tsx",
-      fileHash: "ij35a03b1h8",
+      fileHash: "2gygj47yf1nf5",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -30,7 +30,7 @@ async function Stepper() {
             kind: "id",
             loc: [14, 11, 14, 15],
             text: "size",
-            bindingKey: "size$ij35a03b1h8$0",
+            bindingKey: "size$2gygj47yf1nf5$0",
           },
           initializer: {
             kind: "()",
@@ -65,10 +65,10 @@ async function Stepper() {
                 name: "style",
                 initializer: {
                   kind: "binop",
-                  loc: [17, 16, 17, 50],
+                  loc: [17, 16, 17, 49],
                   left: {
                     kind: "binop",
-                    loc: [17, 16, 17, 43],
+                    loc: [17, 16, 17, 42],
                     left: {
                       kind: "string",
                       loc: [17, 16, 17, 29],
@@ -77,17 +77,17 @@ async function Stepper() {
                     operatorToken: "+",
                     right: {
                       kind: "()",
-                      loc: [17, 32, 17, 43],
+                      loc: [17, 32, 17, 42],
                       expression: {
                         kind: ".",
-                        loc: [17, 32, 17, 41],
+                        loc: [17, 32, 17, 40],
                         expression: {
                           kind: "id",
                           loc: [17, 32, 17, 36],
                           text: "size",
-                          bindingKey: "size$ij35a03b1h8$0",
+                          bindingKey: "size$2gygj47yf1nf5$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -95,7 +95,7 @@ async function Stepper() {
                   operatorToken: "+",
                   right: {
                     kind: "string",
-                    loc: [17, 46, 17, 50],
+                    loc: [17, 45, 17, 49],
                     text: "px",
                   },
                 },
@@ -112,42 +112,42 @@ async function Stepper() {
                     statements: [
                       {
                         kind: "()",
-                        loc: [19, 11, 19, 38],
+                        loc: [19, 11, 19, 35],
                         expression: {
                           kind: ".",
-                          loc: [19, 11, 19, 21],
+                          loc: [19, 11, 19, 19],
                           expression: {
                             kind: "id",
                             loc: [19, 11, 19, 15],
                             text: "size",
-                            bindingKey: "size$ij35a03b1h8$0",
+                            bindingKey: "size$2gygj47yf1nf5$0",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "binop",
-                            loc: [19, 22, 19, 37],
+                            loc: [19, 20, 19, 34],
                             left: {
                               kind: "()",
-                              loc: [19, 22, 19, 33],
+                              loc: [19, 20, 19, 30],
                               expression: {
                                 kind: ".",
-                                loc: [19, 22, 19, 31],
+                                loc: [19, 20, 19, 28],
                                 expression: {
                                   kind: "id",
-                                  loc: [19, 22, 19, 26],
+                                  loc: [19, 20, 19, 24],
                                   text: "size",
-                                  bindingKey: "size$ij35a03b1h8$0",
+                                  bindingKey: "size$2gygj47yf1nf5$0",
                                 },
-                                name: "read",
+                                name: "get",
                               },
                               arguments: [],
                             },
                             operatorToken: "+",
                             right: {
                               kind: "number",
-                              loc: [19, 36, 19, 37],
+                              loc: [19, 33, 19, 34],
                               value: 1,
                             },
                           },

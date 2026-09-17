@@ -6,7 +6,7 @@ import { cs, state } from "@backtickjs/core";
 async function Panel() {
   return cs`{
     const n = $state(2);
-    n.write(3);
+    n.set(3);
   }`;
 }
 

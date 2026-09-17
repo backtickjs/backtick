@@ -12,17 +12,17 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs.create(
-      [15, 5, 38, 7],
+      [15, 5, 36, 7],
       {
         version: "0.0.0",
         filePath: "components/event-handlers.test.tsx",
-        fileHash: "15h39nxs8s3ee",
+        fileHash: "33yj2jmcqxbde",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
       () => ({
         kind: "{}",
-        loc: [15, 8, 38, 6],
+        loc: [15, 8, 36, 6],
         statements: [
           {
             kind: "const",
@@ -31,7 +31,7 @@ it("eventHandlers", async (t) => {
               kind: "id",
               loc: [16, 13, 16, 17],
               text: "said",
-              bindingKey: "said$15h39nxs8s3ee$0",
+              bindingKey: "said$33yj2jmcqxbde$0",
             },
             initializer: {
               kind: "()",
@@ -52,10 +52,10 @@ it("eventHandlers", async (t) => {
           },
           {
             kind: "return",
-            loc: [18, 7, 37, 9],
+            loc: [18, 7, 35, 9],
             expression: {
               kind: "jsx",
-              loc: [19, 9, 36, 16],
+              loc: [19, 9, 34, 16],
               type: {
                 kind: "string",
                 loc: [19, 10, 19, 14],
@@ -75,7 +75,7 @@ it("eventHandlers", async (t) => {
                           kind: "id",
                           loc: [20, 22, 20, 27],
                           text: "event",
-                          bindingKey: "event$15h39nxs8s3ee$1",
+                          bindingKey: "event$33yj2jmcqxbde$1",
                         },
                       },
                     ],
@@ -93,7 +93,7 @@ it("eventHandlers", async (t) => {
                               kind: "id",
                               loc: [21, 13, 21, 18],
                               text: "event",
-                              bindingKey: "event$15h39nxs8s3ee$1",
+                              bindingKey: "event$33yj2jmcqxbde$1",
                             },
                             name: "preventDefault",
                           },
@@ -101,52 +101,52 @@ it("eventHandlers", async (t) => {
                         },
                         {
                           kind: "()",
-                          loc: [22, 13, 22, 60],
+                          loc: [22, 13, 22, 58],
                           expression: {
                             kind: ".",
-                            loc: [22, 13, 22, 23],
+                            loc: [22, 13, 22, 21],
                             expression: {
                               kind: "id",
                               loc: [22, 13, 22, 17],
                               text: "said",
-                              bindingKey: "said$15h39nxs8s3ee$0",
+                              bindingKey: "said$33yj2jmcqxbde$0",
                             },
-                            name: "write",
+                            name: "set",
                           },
                           arguments: [
                             {
                               kind: "binop",
-                              loc: [22, 24, 22, 59],
+                              loc: [22, 22, 22, 57],
                               left: {
                                 kind: "binop",
-                                loc: [22, 24, 22, 40],
+                                loc: [22, 22, 22, 38],
                                 left: {
                                   kind: ".",
-                                  loc: [22, 24, 22, 34],
+                                  loc: [22, 22, 22, 32],
                                   expression: {
                                     kind: "id",
-                                    loc: [22, 24, 22, 29],
+                                    loc: [22, 22, 22, 27],
                                     text: "event",
-                                    bindingKey: "event$15h39nxs8s3ee$1",
+                                    bindingKey: "event$33yj2jmcqxbde$1",
                                   },
                                   name: "type",
                                 },
                                 operatorToken: "+",
                                 right: {
                                   kind: "string",
-                                  loc: [22, 37, 22, 40],
+                                  loc: [22, 35, 22, 38],
                                   text: " ",
                                 },
                               },
                               operatorToken: "+",
                               right: {
                                 kind: ".",
-                                loc: [22, 43, 22, 59],
+                                loc: [22, 41, 22, 57],
                                 expression: {
                                   kind: "id",
-                                  loc: [22, 43, 22, 48],
+                                  loc: [22, 41, 22, 46],
                                   text: "event",
-                                  bindingKey: "event$15h39nxs8s3ee$1",
+                                  bindingKey: "event$33yj2jmcqxbde$1",
                                 },
                                 name: "cancelable",
                               },
@@ -161,7 +161,7 @@ it("eventHandlers", async (t) => {
               children: [
                 {
                   kind: "jsx",
-                  loc: [25, 11, 27, 13],
+                  loc: [25, 11, 25, 80],
                   type: {
                     kind: "string",
                     loc: [25, 12, 25, 20],
@@ -172,45 +172,45 @@ it("eventHandlers", async (t) => {
                       name: "oninput",
                       initializer: {
                         kind: "=>",
-                        loc: [26, 22, 26, 70],
+                        loc: [25, 30, 25, 76],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [26, 23, 26, 28],
+                            loc: [25, 31, 25, 36],
                             name: {
                               kind: "id",
-                              loc: [26, 23, 26, 28],
+                              loc: [25, 31, 25, 36],
                               text: "event",
-                              bindingKey: "event$15h39nxs8s3ee$2",
+                              bindingKey: "event$33yj2jmcqxbde$2",
                             },
                           },
                         ],
                         body: {
                           kind: "()",
-                          loc: [26, 33, 26, 70],
+                          loc: [25, 41, 25, 76],
                           expression: {
                             kind: ".",
-                            loc: [26, 33, 26, 43],
+                            loc: [25, 41, 25, 49],
                             expression: {
                               kind: "id",
-                              loc: [26, 33, 26, 37],
+                              loc: [25, 41, 25, 45],
                               text: "said",
-                              bindingKey: "said$15h39nxs8s3ee$0",
+                              bindingKey: "said$33yj2jmcqxbde$0",
                             },
-                            name: "write",
+                            name: "set",
                           },
                           arguments: [
                             {
                               kind: ".",
-                              loc: [26, 44, 26, 69],
+                              loc: [25, 50, 25, 75],
                               expression: {
                                 kind: ".",
-                                loc: [26, 44, 26, 63],
+                                loc: [25, 50, 25, 69],
                                 expression: {
                                   kind: "id",
-                                  loc: [26, 44, 26, 49],
+                                  loc: [25, 50, 25, 55],
                                   text: "event",
-                                  bindingKey: "event$15h39nxs8s3ee$2",
+                                  bindingKey: "event$33yj2jmcqxbde$2",
                                 },
                                 name: "currentTarget",
                               },
@@ -225,10 +225,10 @@ it("eventHandlers", async (t) => {
                 },
                 {
                   kind: "jsx",
-                  loc: [28, 11, 28, 79],
+                  loc: [26, 11, 26, 77],
                   type: {
                     kind: "string",
-                    loc: [28, 12, 28, 17],
+                    loc: [26, 12, 26, 17],
                     text: "input",
                   },
                   attributes: [
@@ -236,45 +236,45 @@ it("eventHandlers", async (t) => {
                       name: "oninput",
                       initializer: {
                         kind: "=>",
-                        loc: [28, 27, 28, 75],
+                        loc: [26, 27, 26, 73],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [28, 28, 28, 33],
+                            loc: [26, 28, 26, 33],
                             name: {
                               kind: "id",
-                              loc: [28, 28, 28, 33],
+                              loc: [26, 28, 26, 33],
                               text: "event",
-                              bindingKey: "event$15h39nxs8s3ee$3",
+                              bindingKey: "event$33yj2jmcqxbde$3",
                             },
                           },
                         ],
                         body: {
                           kind: "()",
-                          loc: [28, 38, 28, 75],
+                          loc: [26, 38, 26, 73],
                           expression: {
                             kind: ".",
-                            loc: [28, 38, 28, 48],
+                            loc: [26, 38, 26, 46],
                             expression: {
                               kind: "id",
-                              loc: [28, 38, 28, 42],
+                              loc: [26, 38, 26, 42],
                               text: "said",
-                              bindingKey: "said$15h39nxs8s3ee$0",
+                              bindingKey: "said$33yj2jmcqxbde$0",
                             },
-                            name: "write",
+                            name: "set",
                           },
                           arguments: [
                             {
                               kind: ".",
-                              loc: [28, 49, 28, 74],
+                              loc: [26, 47, 26, 72],
                               expression: {
                                 kind: ".",
-                                loc: [28, 49, 28, 68],
+                                loc: [26, 47, 26, 66],
                                 expression: {
                                   kind: "id",
-                                  loc: [28, 49, 28, 54],
+                                  loc: [26, 47, 26, 52],
                                   text: "event",
-                                  bindingKey: "event$15h39nxs8s3ee$3",
+                                  bindingKey: "event$33yj2jmcqxbde$3",
                                 },
                                 name: "currentTarget",
                               },
@@ -289,10 +289,10 @@ it("eventHandlers", async (t) => {
                 },
                 {
                   kind: "jsx",
-                  loc: [29, 11, 35, 20],
+                  loc: [27, 11, 33, 20],
                   type: {
                     kind: "string",
-                    loc: [29, 12, 29, 18],
+                    loc: [27, 12, 27, 18],
                     text: "button",
                   },
                   attributes: [
@@ -300,70 +300,70 @@ it("eventHandlers", async (t) => {
                       name: "onclick",
                       initializer: {
                         kind: "=>",
-                        loc: [30, 22, 31, 76],
+                        loc: [28, 22, 29, 74],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [30, 23, 30, 28],
+                            loc: [28, 23, 28, 28],
                             name: {
                               kind: "id",
-                              loc: [30, 23, 30, 28],
+                              loc: [28, 23, 28, 28],
                               text: "event",
-                              bindingKey: "event$15h39nxs8s3ee$4",
+                              bindingKey: "event$33yj2jmcqxbde$4",
                             },
                           },
                         ],
                         body: {
                           kind: "()",
-                          loc: [31, 15, 31, 76],
+                          loc: [29, 15, 29, 74],
                           expression: {
                             kind: ".",
-                            loc: [31, 15, 31, 25],
+                            loc: [29, 15, 29, 23],
                             expression: {
                               kind: "id",
-                              loc: [31, 15, 31, 19],
+                              loc: [29, 15, 29, 19],
                               text: "said",
-                              bindingKey: "said$15h39nxs8s3ee$0",
+                              bindingKey: "said$33yj2jmcqxbde$0",
                             },
-                            name: "write",
+                            name: "set",
                           },
                           arguments: [
                             {
                               kind: "binop",
-                              loc: [31, 26, 31, 75],
+                              loc: [29, 24, 29, 73],
                               left: {
                                 kind: "binop",
-                                loc: [31, 26, 31, 45],
+                                loc: [29, 24, 29, 43],
                                 left: {
                                   kind: ".",
-                                  loc: [31, 26, 31, 39],
+                                  loc: [29, 24, 29, 37],
                                   expression: {
                                     kind: "id",
-                                    loc: [31, 26, 31, 31],
+                                    loc: [29, 24, 29, 29],
                                     text: "event",
-                                    bindingKey: "event$15h39nxs8s3ee$4",
+                                    bindingKey: "event$33yj2jmcqxbde$4",
                                   },
                                   name: "clientX",
                                 },
                                 operatorToken: "+",
                                 right: {
                                   kind: "string",
-                                  loc: [31, 42, 31, 45],
+                                  loc: [29, 40, 29, 43],
                                   text: " ",
                                 },
                               },
                               operatorToken: "+",
                               right: {
                                 kind: ".",
-                                loc: [31, 48, 31, 75],
+                                loc: [29, 46, 29, 73],
                                 expression: {
                                   kind: ".",
-                                  loc: [31, 48, 31, 67],
+                                  loc: [29, 46, 29, 65],
                                   expression: {
                                     kind: "id",
-                                    loc: [31, 48, 31, 53],
+                                    loc: [29, 46, 29, 51],
                                     text: "event",
-                                    bindingKey: "event$15h39nxs8s3ee$4",
+                                    bindingKey: "event$33yj2jmcqxbde$4",
                                   },
                                   name: "currentTarget",
                                 },
@@ -378,17 +378,17 @@ it("eventHandlers", async (t) => {
                   children: [
                     {
                       kind: "()",
-                      loc: [34, 14, 34, 25],
+                      loc: [32, 14, 32, 24],
                       expression: {
                         kind: ".",
-                        loc: [34, 14, 34, 23],
+                        loc: [32, 14, 32, 22],
                         expression: {
                           kind: "id",
-                          loc: [34, 14, 34, 18],
+                          loc: [32, 14, 32, 18],
                           text: "said",
-                          bindingKey: "said$15h39nxs8s3ee$0",
+                          bindingKey: "said$33yj2jmcqxbde$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },

@@ -18,7 +18,7 @@ cs.receiver(                         →
 __cs_n                               → n
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 6                                    → 6
 )                                    → )
@@ -43,7 +43,7 @@ cs.receiver(                         →
 __cs_c                               → c
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.splice(                           → ${ [-semantic]
 Color.Blue                           → Color.Blue

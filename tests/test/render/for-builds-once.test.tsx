@@ -23,11 +23,11 @@ async function WaitingList({ more }: { more: Prop<() => boolean> }) {
 
     const started = $window.setTimeout(() => {
       if ($more()) {
-        items.write($answerItems);
+        items.set($answerItems);
       }
     }, 0);
 
-    return <For each={items.read()}>{(item: string) => <em>{item}</em>}</For>;
+    return <For each={items.get()}>{(item: string) => <em>{item}</em>}</For>;
   }`;
 }
 
@@ -36,11 +36,11 @@ const forBuildsOnce = cs`{
 
   return (
     <div>
-      <span>{"asked " + asked.read()}</span>
+      <span>{"asked " + asked.get()}</span>
       <WaitingList
         more={() => {
-          asked.write(asked.read() + 1);
-          return asked.read() < 5;
+          asked.set(asked.get() + 1);
+          return asked.get() < 5;
         }}
       />
     </div>

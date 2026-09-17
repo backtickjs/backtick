@@ -33,7 +33,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 __cs_event                           → event
@@ -55,7 +55,7 @@ cancelable                           → cancelable
 >{cs.lift(                           → \n        >\n          
 <                                    → <
 textarea                             → textarea
-                                     → \n            
+                                     →  
 oninput                              → oninput
 ={cs.lift(                           → ={
 __cs_event                           → event
@@ -64,7 +64,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 cs.receiver(                         → 
@@ -77,7 +77,7 @@ currentTarget                        → currentTarget
 value                                → value
 )                                    → )
 )}                                   → }
-/>                                   → \n          />
+/>                                   →  />
 )}{cs.lift(                          → \n          
 <                                    → <
 input                                → input
@@ -90,7 +90,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 cs.receiver(                         → 
@@ -116,7 +116,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 __cs_event                           → event
@@ -142,7 +142,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }\n          </
 button                               → button

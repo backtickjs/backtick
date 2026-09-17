@@ -16,15 +16,16 @@ async function RotatingRows() {
   return cs`{
     const names = $state<string[]>(["a", "b", "c"]);
     const rotate = () => {
-      names.update((held) => [held[2], held[0], held[1]]);
+      const held = names.get();
+      names.set([held[2], held[0], held[1]]);
     };
     return (
       <div>
         <span onclick={rotate}>rotate</span>
         <div>
-          <For each={names.read()}>
+          <For each={names.get()}>
             {(name: string, index: Signal<number>) => (
-              <span>{name + " at " + index.read()}</span>
+              <span>{name + " at " + index.get()}</span>
             )}
           </For>
         </div>

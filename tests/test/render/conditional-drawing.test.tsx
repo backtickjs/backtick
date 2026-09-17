@@ -33,11 +33,11 @@ async function Held({ again }: { again: Prop<() => boolean> }) {
 
     const started = $window.setTimeout(() => {
       if ($again()) {
-        shown.write(true);
+        shown.set(true);
       }
     }, 0);
 
-    return <>{shown.read() ? <em>shown</em> : <i>waiting</i>}</>;
+    return <>{shown.get() ? <em>shown</em> : <i>waiting</i>}</>;
   }`;
 }
 
@@ -46,12 +46,12 @@ const conditionalDrawing = cs`{
 
   return (
     <div>
-      <span>{"builds " + builds.read()}</span>
+      <span>{"builds " + builds.get()}</span>
       <section>
         <Held
           again={() => {
-            builds.write(builds.read() + 1);
-            return builds.read() < 5;
+            builds.set(builds.get() + 1);
+            return builds.get() < 5;
           }}
         />
       </section>

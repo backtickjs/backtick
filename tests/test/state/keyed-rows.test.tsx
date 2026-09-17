@@ -12,17 +12,18 @@ async function SwappableRows() {
   return cs`{
     const ids = $state<number[]>([1, 2, 3]);
     const swap = () => {
-      ids.update((held) => held.with(0, held[2]).with(2, held[0]));
+      const held = ids.get();
+      ids.set(held.with(0, held[2]).with(2, held[0]));
     };
     const drop = () => {
-      ids.update((held) => held.filter((id) => id !== 2));
+      ids.set(ids.get().filter((id) => id !== 2));
     };
     return (
       <div>
         <span onclick={swap}>swap</span>
         <span onclick={drop}>drop</span>
         <div>
-          <For each={ids.read()}>
+          <For each={ids.get()}>
             {(id: number) => <span>{"row " + id}</span>}
           </For>
         </div>

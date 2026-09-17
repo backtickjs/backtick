@@ -29,9 +29,9 @@ describe("onMount", () => {
           const count = $state(0);
           $onMount(() => {
             $window.console.log();
-            count.update((n) => n + 1);
+            count.set(count.get() + 1);
           });
-          return <p>{"mounted " + count.read()}</p>;
+          return <p>{"mounted " + count.get()}</p>;
         }`,
       ),
     );
@@ -44,8 +44,8 @@ describe("onMount", () => {
       cs`{
         const said = $state("not yet");
         return (
-          <button onclick={() => $onMount(() => said.write("ran"))}>
-            {said.read()}
+          <button onclick={() => $onMount(() => said.set("ran"))}>
+            {said.get()}
           </button>
         );
       }`,

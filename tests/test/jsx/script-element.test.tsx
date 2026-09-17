@@ -14,11 +14,11 @@ async function Card() {
     // and a handler prop takes a function and nothing else.
     const row = (size: number) => {
       const css = "font-size: " + size + "px";
-      const press = () => label.write("held");
+      const press = () => label.set("held");
       return (
         <div style={css}>
-          <span style={css} onclick={() => label.write("pressed")}>
-            {label.read()}
+          <span style={css} onclick={() => label.set("pressed")}>
+            {label.get()}
           </span>
           <span style="font-size: 8px">fixed</span>
           <span style={css} onclick={press}>

@@ -20,7 +20,7 @@ async function WaitingList({ more }) {
     {
       version: "0.0.0",
       filePath: "render/for-builds-once.test.tsx",
-      fileHash: "2uiczo0t7m5x7",
+      fileHash: "bv4vczxvw8r3",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -41,7 +41,7 @@ async function WaitingList({ more }) {
             kind: "id",
             loc: [22, 11, 22, 16],
             text: "items",
-            bindingKey: "items$2uiczo0t7m5x7$0",
+            bindingKey: "items$bv4vczxvw8r3$0",
           },
           initializer: {
             kind: "()",
@@ -67,7 +67,7 @@ async function WaitingList({ more }) {
             kind: "id",
             loc: [24, 11, 24, 18],
             text: "started",
-            bindingKey: "started$2uiczo0t7m5x7$1",
+            bindingKey: "started$bv4vczxvw8r3$1",
           },
           initializer: {
             kind: "()",
@@ -110,22 +110,22 @@ async function WaitingList({ more }) {
                         statements: [
                           {
                             kind: "()",
-                            loc: [26, 9, 26, 34],
+                            loc: [26, 9, 26, 32],
                             expression: {
                               kind: ".",
-                              loc: [26, 9, 26, 20],
+                              loc: [26, 9, 26, 18],
                               expression: {
                                 kind: "id",
                                 loc: [26, 9, 26, 14],
                                 text: "items",
-                                bindingKey: "items$2uiczo0t7m5x7$0",
+                                bindingKey: "items$bv4vczxvw8r3$0",
                               },
-                              name: "write",
+                              name: "set",
                             },
                             arguments: [
                               {
                                 kind: "splice",
-                                loc: [26, 21, 26, 33],
+                                loc: [26, 19, 26, 31],
                                 key: "$answerItems",
                               },
                             ],
@@ -147,10 +147,10 @@ async function WaitingList({ more }) {
         },
         {
           kind: "return",
-          loc: [30, 5, 30, 79],
+          loc: [30, 5, 30, 78],
           expression: {
             kind: "jsx",
-            loc: [30, 12, 30, 78],
+            loc: [30, 12, 30, 77],
             type: {
               kind: "splice",
               loc: [30, 13, 30, 16],
@@ -161,17 +161,17 @@ async function WaitingList({ more }) {
                 name: "each",
                 initializer: {
                   kind: "()",
-                  loc: [30, 23, 30, 35],
+                  loc: [30, 23, 30, 34],
                   expression: {
                     kind: ".",
-                    loc: [30, 23, 30, 33],
+                    loc: [30, 23, 30, 32],
                     expression: {
                       kind: "id",
                       loc: [30, 23, 30, 28],
                       text: "items",
-                      bindingKey: "items$2uiczo0t7m5x7$0",
+                      bindingKey: "items$bv4vczxvw8r3$0",
                     },
-                    name: "read",
+                    name: "get",
                   },
                   arguments: [],
                 },
@@ -180,34 +180,34 @@ async function WaitingList({ more }) {
             children: [
               {
                 kind: "=>",
-                loc: [30, 38, 30, 71],
+                loc: [30, 37, 30, 70],
                 parameters: [
                   {
                     kind: "param",
-                    loc: [30, 39, 30, 51],
+                    loc: [30, 38, 30, 50],
                     name: {
                       kind: "id",
-                      loc: [30, 39, 30, 43],
+                      loc: [30, 38, 30, 42],
                       text: "item",
-                      bindingKey: "item$2uiczo0t7m5x7$2",
+                      bindingKey: "item$bv4vczxvw8r3$2",
                     },
                   },
                 ],
                 body: {
                   kind: "jsx",
-                  loc: [30, 56, 30, 71],
+                  loc: [30, 55, 30, 70],
                   type: {
                     kind: "string",
-                    loc: [30, 57, 30, 59],
+                    loc: [30, 56, 30, 58],
                     text: "em",
                   },
                   attributes: [],
                   children: [
                     {
                       kind: "id",
-                      loc: [30, 61, 30, 65],
+                      loc: [30, 60, 30, 64],
                       text: "item",
-                      bindingKey: "item$2uiczo0t7m5x7$2",
+                      bindingKey: "item$bv4vczxvw8r3$2",
                     },
                   ],
                 },
@@ -224,7 +224,7 @@ const forBuildsOnce = cs.create(
   {
     version: "0.0.0",
     filePath: "render/for-builds-once.test.tsx",
-    fileHash: "2uiczo0t7m5x7",
+    fileHash: "bv4vczxvw8r3",
     splices: {
       $state: { value: state, params: [] },
       $WaitingList: { value: WaitingList, params: [] },
@@ -242,7 +242,7 @@ const forBuildsOnce = cs.create(
           kind: "id",
           loc: [35, 9, 35, 14],
           text: "asked",
-          bindingKey: "asked$2uiczo0t7m5x7$3",
+          bindingKey: "asked$bv4vczxvw8r3$3",
         },
         initializer: {
           kind: "()",
@@ -276,7 +276,7 @@ const forBuildsOnce = cs.create(
           children: [
             {
               kind: "jsx",
-              loc: [39, 7, 39, 45],
+              loc: [39, 7, 39, 44],
               type: {
                 kind: "string",
                 loc: [39, 8, 39, 12],
@@ -286,7 +286,7 @@ const forBuildsOnce = cs.create(
               children: [
                 {
                   kind: "binop",
-                  loc: [39, 14, 39, 37],
+                  loc: [39, 14, 39, 36],
                   left: {
                     kind: "string",
                     loc: [39, 14, 39, 22],
@@ -295,17 +295,17 @@ const forBuildsOnce = cs.create(
                   operatorToken: "+",
                   right: {
                     kind: "()",
-                    loc: [39, 25, 39, 37],
+                    loc: [39, 25, 39, 36],
                     expression: {
                       kind: ".",
-                      loc: [39, 25, 39, 35],
+                      loc: [39, 25, 39, 34],
                       expression: {
                         kind: "id",
                         loc: [39, 25, 39, 30],
                         text: "asked",
-                        bindingKey: "asked$2uiczo0t7m5x7$3",
+                        bindingKey: "asked$bv4vczxvw8r3$3",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
@@ -333,42 +333,42 @@ const forBuildsOnce = cs.create(
                       statements: [
                         {
                           kind: "()",
-                          loc: [42, 11, 42, 40],
+                          loc: [42, 11, 42, 37],
                           expression: {
                             kind: ".",
-                            loc: [42, 11, 42, 22],
+                            loc: [42, 11, 42, 20],
                             expression: {
                               kind: "id",
                               loc: [42, 11, 42, 16],
                               text: "asked",
-                              bindingKey: "asked$2uiczo0t7m5x7$3",
+                              bindingKey: "asked$bv4vczxvw8r3$3",
                             },
-                            name: "write",
+                            name: "set",
                           },
                           arguments: [
                             {
                               kind: "binop",
-                              loc: [42, 23, 42, 39],
+                              loc: [42, 21, 42, 36],
                               left: {
                                 kind: "()",
-                                loc: [42, 23, 42, 35],
+                                loc: [42, 21, 42, 32],
                                 expression: {
                                   kind: ".",
-                                  loc: [42, 23, 42, 33],
+                                  loc: [42, 21, 42, 30],
                                   expression: {
                                     kind: "id",
-                                    loc: [42, 23, 42, 28],
+                                    loc: [42, 21, 42, 26],
                                     text: "asked",
-                                    bindingKey: "asked$2uiczo0t7m5x7$3",
+                                    bindingKey: "asked$bv4vczxvw8r3$3",
                                   },
-                                  name: "read",
+                                  name: "get",
                                 },
                                 arguments: [],
                               },
                               operatorToken: "+",
                               right: {
                                 kind: "number",
-                                loc: [42, 38, 42, 39],
+                                loc: [42, 35, 42, 36],
                                 value: 1,
                               },
                             },
@@ -376,30 +376,30 @@ const forBuildsOnce = cs.create(
                         },
                         {
                           kind: "return",
-                          loc: [43, 11, 43, 35],
+                          loc: [43, 11, 43, 34],
                           expression: {
                             kind: "binop",
-                            loc: [43, 18, 43, 34],
+                            loc: [43, 18, 43, 33],
                             left: {
                               kind: "()",
-                              loc: [43, 18, 43, 30],
+                              loc: [43, 18, 43, 29],
                               expression: {
                                 kind: ".",
-                                loc: [43, 18, 43, 28],
+                                loc: [43, 18, 43, 27],
                                 expression: {
                                   kind: "id",
                                   loc: [43, 18, 43, 23],
                                   text: "asked",
-                                  bindingKey: "asked$2uiczo0t7m5x7$3",
+                                  bindingKey: "asked$bv4vczxvw8r3$3",
                                 },
-                                name: "read",
+                                name: "get",
                               },
                               arguments: [],
                             },
                             operatorToken: "<",
                             right: {
                               kind: "number",
-                              loc: [43, 33, 43, 34],
+                              loc: [43, 32, 43, 33],
                               value: 5,
                             },
                           },

@@ -28,7 +28,7 @@ describe("onMount", () => {
           {
             version: "0.0.0",
             filePath: "render/on-mount.test.tsx",
-            fileHash: "tuknevzfkeo4",
+            fileHash: "1vhzpl5t5wcnc",
             splices: {
               $state: { value: state, params: [] },
               $onMount: { value: onMount, params: [] },
@@ -47,7 +47,7 @@ describe("onMount", () => {
                   kind: "id",
                   loc: [29, 17, 29, 22],
                   text: "count",
-                  bindingKey: "count$tuknevzfkeo4$0",
+                  bindingKey: "count$1vhzpl5t5wcnc$0",
                 },
                 initializer: {
                   kind: "()",
@@ -108,46 +108,40 @@ describe("onMount", () => {
                           loc: [32, 13, 32, 39],
                           expression: {
                             kind: ".",
-                            loc: [32, 13, 32, 25],
+                            loc: [32, 13, 32, 22],
                             expression: {
                               kind: "id",
                               loc: [32, 13, 32, 18],
                               text: "count",
-                              bindingKey: "count$tuknevzfkeo4$0",
+                              bindingKey: "count$1vhzpl5t5wcnc$0",
                             },
-                            name: "update",
+                            name: "set",
                           },
                           arguments: [
                             {
-                              kind: "=>",
-                              loc: [32, 26, 32, 38],
-                              parameters: [
-                                {
-                                  kind: "param",
-                                  loc: [32, 27, 32, 28],
-                                  name: {
+                              kind: "binop",
+                              loc: [32, 23, 32, 38],
+                              left: {
+                                kind: "()",
+                                loc: [32, 23, 32, 34],
+                                expression: {
+                                  kind: ".",
+                                  loc: [32, 23, 32, 32],
+                                  expression: {
                                     kind: "id",
-                                    loc: [32, 27, 32, 28],
-                                    text: "n",
-                                    bindingKey: "n$tuknevzfkeo4$1",
+                                    loc: [32, 23, 32, 28],
+                                    text: "count",
+                                    bindingKey: "count$1vhzpl5t5wcnc$0",
                                   },
+                                  name: "get",
                                 },
-                              ],
-                              body: {
-                                kind: "binop",
-                                loc: [32, 33, 32, 38],
-                                left: {
-                                  kind: "id",
-                                  loc: [32, 33, 32, 34],
-                                  text: "n",
-                                  bindingKey: "n$tuknevzfkeo4$1",
-                                },
-                                operatorToken: "+",
-                                right: {
-                                  kind: "number",
-                                  loc: [32, 37, 32, 38],
-                                  value: 1,
-                                },
+                                arguments: [],
+                              },
+                              operatorToken: "+",
+                              right: {
+                                kind: "number",
+                                loc: [32, 37, 32, 38],
+                                value: 1,
                               },
                             },
                           ],
@@ -159,10 +153,10 @@ describe("onMount", () => {
               },
               {
                 kind: "return",
-                loc: [34, 11, 34, 53],
+                loc: [34, 11, 34, 52],
                 expression: {
                   kind: "jsx",
-                  loc: [34, 18, 34, 52],
+                  loc: [34, 18, 34, 51],
                   type: {
                     kind: "string",
                     loc: [34, 19, 34, 20],
@@ -172,7 +166,7 @@ describe("onMount", () => {
                   children: [
                     {
                       kind: "binop",
-                      loc: [34, 22, 34, 47],
+                      loc: [34, 22, 34, 46],
                       left: {
                         kind: "string",
                         loc: [34, 22, 34, 32],
@@ -181,17 +175,17 @@ describe("onMount", () => {
                       operatorToken: "+",
                       right: {
                         kind: "()",
-                        loc: [34, 35, 34, 47],
+                        loc: [34, 35, 34, 46],
                         expression: {
                           kind: ".",
-                          loc: [34, 35, 34, 45],
+                          loc: [34, 35, 34, 44],
                           expression: {
                             kind: "id",
                             loc: [34, 35, 34, 40],
                             text: "count",
-                            bindingKey: "count$tuknevzfkeo4$0",
+                            bindingKey: "count$1vhzpl5t5wcnc$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
@@ -214,7 +208,7 @@ describe("onMount", () => {
         {
           version: "0.0.0",
           filePath: "render/on-mount.test.tsx",
-          fileHash: "tuknevzfkeo4",
+          fileHash: "1vhzpl5t5wcnc",
           splices: {
             $state: { value: state, params: [] },
             $onMount: { value: onMount, params: [] },
@@ -232,7 +226,7 @@ describe("onMount", () => {
                 kind: "id",
                 loc: [45, 15, 45, 19],
                 text: "said",
-                bindingKey: "said$tuknevzfkeo4$2",
+                bindingKey: "said$1vhzpl5t5wcnc$1",
               },
               initializer: {
                 kind: "()",
@@ -267,11 +261,11 @@ describe("onMount", () => {
                     name: "onclick",
                     initializer: {
                       kind: "=>",
-                      loc: [47, 28, 47, 67],
+                      loc: [47, 28, 47, 65],
                       parameters: [],
                       body: {
                         kind: "()",
-                        loc: [47, 34, 47, 67],
+                        loc: [47, 34, 47, 65],
                         expression: {
                           kind: "splice",
                           loc: [47, 34, 47, 42],
@@ -280,26 +274,26 @@ describe("onMount", () => {
                         arguments: [
                           {
                             kind: "=>",
-                            loc: [47, 43, 47, 66],
+                            loc: [47, 43, 47, 64],
                             parameters: [],
                             body: {
                               kind: "()",
-                              loc: [47, 49, 47, 66],
+                              loc: [47, 49, 47, 64],
                               expression: {
                                 kind: ".",
-                                loc: [47, 49, 47, 59],
+                                loc: [47, 49, 47, 57],
                                 expression: {
                                   kind: "id",
                                   loc: [47, 49, 47, 53],
                                   text: "said",
-                                  bindingKey: "said$tuknevzfkeo4$2",
+                                  bindingKey: "said$1vhzpl5t5wcnc$1",
                                 },
-                                name: "write",
+                                name: "set",
                               },
                               arguments: [
                                 {
                                   kind: "string",
-                                  loc: [47, 60, 47, 65],
+                                  loc: [47, 58, 47, 63],
                                   text: "ran",
                                 },
                               ],
@@ -313,17 +307,17 @@ describe("onMount", () => {
                 children: [
                   {
                     kind: "()",
-                    loc: [48, 14, 48, 25],
+                    loc: [48, 14, 48, 24],
                     expression: {
                       kind: ".",
-                      loc: [48, 14, 48, 23],
+                      loc: [48, 14, 48, 22],
                       expression: {
                         kind: "id",
                         loc: [48, 14, 48, 18],
                         text: "said",
-                        bindingKey: "said$tuknevzfkeo4$2",
+                        bindingKey: "said$1vhzpl5t5wcnc$1",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },

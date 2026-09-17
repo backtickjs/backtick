@@ -1,7 +1,7 @@
 #f0 = ($0, $1) => {
   const ids = $0()([1, 2, 3]);
   const clear = () => {
-    ids.update(() => []);
+    ids.set([]);
   };
   return <Fragment>
     {<span
@@ -10,7 +10,7 @@
       {"clear"}
     </span>}
     {<{$1()}
-      each={() => ids.read()}
+      each={() => ids.get()}
     >
       {() => (id) => <span>
         {"row " + id}

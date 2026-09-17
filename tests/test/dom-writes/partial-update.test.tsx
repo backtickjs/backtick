@@ -16,7 +16,8 @@ async function Labels() {
     }));
     const update = () => {
       for (let index = 0; index < rows.length; index = index + 2) {
-        rows[index].label.update((label: string) => label + " !!!");
+        const label = rows[index].label;
+        label.set(label.get() + " !!!");
       }
     };
     return (
@@ -27,7 +28,7 @@ async function Labels() {
             <For each={rows}>
               {(row: { id: number; label: State<string> }) => (
                 <tr id={"row-" + row.id}>
-                  <td>{row.label.read()}</td>
+                  <td>{row.label.get()}</td>
                 </tr>
               )}
             </For>

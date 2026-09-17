@@ -18,16 +18,16 @@ it("httpRequests", async (t) => {
         if (cs.receiver(__cs_response).status !== 200) {
             throw "answered " + cs.receiver(__cs_response).status;
         }
-        cs.statement(cs.receiver(__cs_held).write(cs.receiver(JSON).parse(cs.receiver(__cs_response).data) === null ? "null" : "a value"));
+        cs.statement(cs.receiver(__cs_held).set(cs.receiver(JSON).parse(cs.receiver(__cs_response).data) === null ? "null" : "a value"));
     }, (__cs_message: string) => {
-        cs.statement(cs.receiver(__cs_held).write("failed \u2014 " + __cs_message));
+        cs.statement(cs.receiver(__cs_held).set("failed \u2014 " + __cs_message));
     }, { timeout: 3000 }));
     cs.statement(cs.receiver(cs.splice((http)) satisfies typeof cs.ClientUnknown).post("/cases", cs.receiver(JSON).stringify({ name: "Math.trunc", passed: true }), (__cs_response: HttpResponse) => {
-        cs.statement(cs.receiver(__cs_held).write(cs.receiver(__cs_response).data));
+        cs.statement(cs.receiver(__cs_held).set(cs.receiver(__cs_response).data));
     }, (__cs_message: string) => {
-        cs.statement(cs.receiver(__cs_held).write(__cs_message));
+        cs.statement(cs.receiver(__cs_held).set(__cs_message));
     }, { headers: { "content-type": "application/json" } }));
-    return cs.const(cs.receiver(__cs_held).read());
+    return cs.const(cs.receiver(__cs_held).get());
 })),
   );
 });

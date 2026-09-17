@@ -37,12 +37,12 @@ const scriptBoundTagCarried = cs`{
     <div>
       <Panel
         body={
-          ${cs`<Badge n={count.read()}>
-            <u>{"kid " + count.read()}</u>
+          ${cs`<Badge n={count.get()}>
+            <u>{"kid " + count.get()}</u>
           </Badge>`}
         }
       />
-      <button onclick={() => count.write(count.read() + 1)}>more</button>
+      <button onclick={() => count.set(count.get() + 1)}>more</button>
     </div>
   );
 }`;

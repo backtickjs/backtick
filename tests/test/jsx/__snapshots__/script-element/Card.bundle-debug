@@ -2,15 +2,15 @@
   const label = $0()("hi");
   const row = (size) => {
     const css = "font-size: " + size + "px";
-    const press = () => label.write("held");
+    const press = () => label.set("held");
     return <div
       style={css}
     >
       {<span
         style={css}
-        onclick={() => label.write("pressed")}
+        onclick={() => label.set("pressed")}
       >
-        {label.read()}
+        {label.get()}
       </span>}
       {<span
         style={"font-size: 8px"}

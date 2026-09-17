@@ -25,13 +25,13 @@ cs.receiver(                         →
 __cs_count                           → count
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 __cs_count                           → count
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 1                                    → 1
@@ -50,7 +50,7 @@ cs.receiver(                         →
 __cs_count                           → count
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }</
 p                                    → p

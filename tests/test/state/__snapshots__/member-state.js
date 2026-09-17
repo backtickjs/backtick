@@ -15,7 +15,7 @@ async function MemberRows() {
     {
       version: "0.0.0",
       filePath: "state/member-state.test.tsx",
-      fileHash: "2e304knf472ev",
+      fileHash: "30ur5mgzea4v6",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -33,7 +33,7 @@ async function MemberRows() {
             kind: "id",
             loc: [20, 11, 20, 16],
             text: "build",
-            bindingKey: "build$2e304knf472ev$0",
+            bindingKey: "build$30ur5mgzea4v6$0",
           },
           initializer: {
             kind: "=>",
@@ -46,7 +46,7 @@ async function MemberRows() {
                   kind: "id",
                   loc: [20, 20, 20, 24],
                   text: "from",
-                  bindingKey: "from$2e304knf472ev$2",
+                  bindingKey: "from$30ur5mgzea4v6$2",
                 },
               },
             ],
@@ -93,7 +93,7 @@ async function MemberRows() {
                               kind: "id",
                               loc: [21, 41, 21, 42],
                               text: "_",
-                              bindingKey: "_$2e304knf472ev$3",
+                              bindingKey: "_$30ur5mgzea4v6$3",
                             },
                           },
                           {
@@ -103,7 +103,7 @@ async function MemberRows() {
                               kind: "id",
                               loc: [21, 44, 21, 46],
                               text: "at",
-                              bindingKey: "at$2e304knf472ev$4",
+                              bindingKey: "at$30ur5mgzea4v6$4",
                             },
                           },
                         ],
@@ -129,14 +129,14 @@ async function MemberRows() {
                                         kind: "id",
                                         loc: [22, 22, 22, 26],
                                         text: "from",
-                                        bindingKey: "from$2e304knf472ev$2",
+                                        bindingKey: "from$30ur5mgzea4v6$2",
                                       },
                                       operatorToken: "+",
                                       right: {
                                         kind: "id",
                                         loc: [22, 29, 22, 31],
                                         text: "at",
-                                        bindingKey: "at$2e304knf472ev$4",
+                                        bindingKey: "at$30ur5mgzea4v6$4",
                                       },
                                     },
                                   },
@@ -170,14 +170,14 @@ async function MemberRows() {
                                               loc: [22, 57, 22, 61],
                                               text: "from",
                                               bindingKey:
-                                                "from$2e304knf472ev$2",
+                                                "from$30ur5mgzea4v6$2",
                                             },
                                             operatorToken: "+",
                                             right: {
                                               kind: "id",
                                               loc: [22, 64, 22, 66],
                                               text: "at",
-                                              bindingKey: "at$2e304knf472ev$4",
+                                              bindingKey: "at$30ur5mgzea4v6$4",
                                             },
                                           },
                                         },
@@ -204,7 +204,7 @@ async function MemberRows() {
             kind: "id",
             loc: [26, 11, 26, 15],
             text: "held",
-            bindingKey: "held$2e304knf472ev$1",
+            bindingKey: "held$30ur5mgzea4v6$1",
           },
           initializer: {
             kind: "()",
@@ -222,7 +222,7 @@ async function MemberRows() {
                   kind: "id",
                   loc: [26, 25, 26, 30],
                   text: "build",
-                  bindingKey: "build$2e304knf472ev$0",
+                  bindingKey: "build$30ur5mgzea4v6$0",
                 },
                 arguments: [
                   {
@@ -280,17 +280,17 @@ async function MemberRows() {
                         name: "each",
                         initializer: {
                           kind: "()",
-                          loc: [31, 22, 31, 33],
+                          loc: [31, 22, 31, 32],
                           expression: {
                             kind: ".",
-                            loc: [31, 22, 31, 31],
+                            loc: [31, 22, 31, 30],
                             expression: {
                               kind: "id",
                               loc: [31, 22, 31, 26],
                               text: "held",
-                              bindingKey: "held$2e304knf472ev$1",
+                              bindingKey: "held$30ur5mgzea4v6$1",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
@@ -308,7 +308,7 @@ async function MemberRows() {
                               kind: "id",
                               loc: [32, 15, 32, 18],
                               text: "row",
-                              bindingKey: "row$2e304knf472ev$5",
+                              bindingKey: "row$30ur5mgzea4v6$5",
                             },
                           },
                         ],
@@ -325,14 +325,14 @@ async function MemberRows() {
                               name: "onclick",
                               initializer: {
                                 kind: "=>",
-                                loc: [33, 28, 33, 60],
+                                loc: [33, 28, 33, 58],
                                 parameters: [],
                                 body: {
                                   kind: "()",
-                                  loc: [33, 34, 33, 60],
+                                  loc: [33, 34, 33, 58],
                                   expression: {
                                     kind: ".",
-                                    loc: [33, 34, 33, 49],
+                                    loc: [33, 34, 33, 47],
                                     expression: {
                                       kind: ".",
                                       loc: [33, 34, 33, 43],
@@ -340,16 +340,16 @@ async function MemberRows() {
                                         kind: "id",
                                         loc: [33, 34, 33, 37],
                                         text: "row",
-                                        bindingKey: "row$2e304knf472ev$5",
+                                        bindingKey: "row$30ur5mgzea4v6$5",
                                       },
                                       name: "label",
                                     },
-                                    name: "write",
+                                    name: "set",
                                   },
                                   arguments: [
                                     {
                                       kind: "string",
-                                      loc: [33, 50, 33, 59],
+                                      loc: [33, 48, 33, 57],
                                       text: "pressed",
                                     },
                                   ],
@@ -360,10 +360,10 @@ async function MemberRows() {
                           children: [
                             {
                               kind: "()",
-                              loc: [34, 18, 34, 34],
+                              loc: [34, 18, 34, 33],
                               expression: {
                                 kind: ".",
-                                loc: [34, 18, 34, 32],
+                                loc: [34, 18, 34, 31],
                                 expression: {
                                   kind: ".",
                                   loc: [34, 18, 34, 27],
@@ -371,11 +371,11 @@ async function MemberRows() {
                                     kind: "id",
                                     loc: [34, 18, 34, 21],
                                     text: "row",
-                                    bindingKey: "row$2e304knf472ev$5",
+                                    bindingKey: "row$30ur5mgzea4v6$5",
                                   },
                                   name: "label",
                                 },
-                                name: "read",
+                                name: "get",
                               },
                               arguments: [],
                             },

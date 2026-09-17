@@ -38,7 +38,7 @@ cs.receiver(                              →
 __cs_shown                                → shown
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 true                                      → true
 )                                         → )
@@ -57,10 +57,10 @@ cs.receiver(                              →
 __cs_shown                                → shown
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
 ) &&                                      → 
-cs.receiver(__cs_shown).read()            → shown.read() [-semantic -completion -navigation -verification]
+cs.receiver(__cs_shown).get()             → shown.get() [-semantic -completion -navigation -verification]
 ) ?                                       →  ? 
 <                                         → <
 em                                        → em
@@ -102,7 +102,7 @@ cs.receiver(                              →
 __cs_builds                               → builds
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
 )}</                                      → }</
 span                                      → span
@@ -122,13 +122,13 @@ cs.receiver(                              →
 __cs_builds                               → builds
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 cs.receiver(                              → 
 __cs_builds                               → builds
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
  +                                        →  + 
 1                                         → 1
@@ -140,7 +140,7 @@ cs.receiver(                              →
 __cs_builds                               → builds
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
  <                                        →  < 
 5                                         → 5

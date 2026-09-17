@@ -24,15 +24,24 @@ const                                → const
 __cs_rotate                          → rotate
  = cs.const(                         →  = 
 () => {\n                            → () => {\n      
+const                                → const 
+__cs_held                            → held
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+__cs_names                           → names
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+);                                   → ;
+\n                                   → \n      
 cs.statement(                        → 
 cs.receiver(                         → 
 __cs_names                           → names
 )                                    → 
 .                                    → .
-update                               → update
+set                                  → set
 (                                    → (
-__cs_held                            → held
- =>                                  → ) => 
 [                                    → [
 cs.receiver(                         → 
 __cs_held                            → held
@@ -87,7 +96,7 @@ cs.receiver(                         →
 __cs_names                           → names
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
 >{cs.lift(                           → >\n            {
@@ -114,7 +123,7 @@ cs.receiver(                         →
 __cs_index                           → index
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }</
 span                                 → span

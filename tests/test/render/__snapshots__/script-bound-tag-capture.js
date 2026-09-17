@@ -13,44 +13,44 @@ const scriptBoundTagCapture = cs.create(
   {
     version: "0.0.0",
     filePath: "render/script-bound-tag-capture.test.tsx",
-    fileHash: "295ul1svvcohm",
+    fileHash: "h5jruxcfnavr",
     splices: {
       $state: { value: state, params: [] },
       $0splice0: {
         value: cs.create(
-          [17, 10, 17, 40],
+          [17, 10, 17, 39],
           {
             version: "0.0.0",
             filePath: "render/script-bound-tag-capture.test.tsx",
-            fileHash: "295ul1svvcohm",
+            fileHash: "h5jruxcfnavr",
             splices: {},
-            captures: ["Badge$295ul1svvcohm$1", "count$295ul1svvcohm$0"],
+            captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
           },
           () => ({
             kind: "jsx",
-            loc: [17, 13, 17, 39],
+            loc: [17, 13, 17, 38],
             type: {
               kind: "id",
               loc: [17, 14, 17, 19],
               text: "Badge",
-              bindingKey: "Badge$295ul1svvcohm$1",
+              bindingKey: "Badge$h5jruxcfnavr$1",
             },
             attributes: [
               {
                 name: "n",
                 initializer: {
                   kind: "()",
-                  loc: [17, 23, 17, 35],
+                  loc: [17, 23, 17, 34],
                   expression: {
                     kind: ".",
-                    loc: [17, 23, 17, 33],
+                    loc: [17, 23, 17, 32],
                     expression: {
                       kind: "id",
                       loc: [17, 23, 17, 28],
                       text: "count",
-                      bindingKey: "count$295ul1svvcohm$0",
+                      bindingKey: "count$h5jruxcfnavr$0",
                     },
-                    name: "read",
+                    name: "get",
                   },
                   arguments: [],
                 },
@@ -59,7 +59,7 @@ const scriptBoundTagCapture = cs.create(
             children: [],
           }),
         ),
-        params: ["count$295ul1svvcohm$0", "Badge$295ul1svvcohm$1"],
+        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
       $0splice1: {
         value: cs.create(
@@ -67,56 +67,53 @@ const scriptBoundTagCapture = cs.create(
           {
             version: "0.0.0",
             filePath: "render/script-bound-tag-capture.test.tsx",
-            fileHash: "295ul1svvcohm",
+            fileHash: "h5jruxcfnavr",
             splices: {
               $0splice0: {
                 value: cs.create(
-                  [21, 20, 21, 56],
+                  [21, 20, 21, 55],
                   {
                     version: "0.0.0",
                     filePath: "render/script-bound-tag-capture.test.tsx",
-                    fileHash: "295ul1svvcohm",
+                    fileHash: "h5jruxcfnavr",
                     splices: {},
-                    captures: [
-                      "Badge$295ul1svvcohm$1",
-                      "count$295ul1svvcohm$0",
-                    ],
+                    captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
                   },
                   () => ({
                     kind: "jsx",
-                    loc: [21, 23, 21, 55],
+                    loc: [21, 23, 21, 54],
                     type: {
                       kind: "id",
                       loc: [21, 24, 21, 29],
                       text: "Badge",
-                      bindingKey: "Badge$295ul1svvcohm$1",
+                      bindingKey: "Badge$h5jruxcfnavr$1",
                     },
                     attributes: [
                       {
                         name: "n",
                         initializer: {
                           kind: "binop",
-                          loc: [21, 33, 21, 51],
+                          loc: [21, 33, 21, 50],
                           left: {
                             kind: "()",
-                            loc: [21, 33, 21, 45],
+                            loc: [21, 33, 21, 44],
                             expression: {
                               kind: ".",
-                              loc: [21, 33, 21, 43],
+                              loc: [21, 33, 21, 42],
                               expression: {
                                 kind: "id",
                                 loc: [21, 33, 21, 38],
                                 text: "count",
-                                bindingKey: "count$295ul1svvcohm$0",
+                                bindingKey: "count$h5jruxcfnavr$0",
                               },
-                              name: "read",
+                              name: "get",
                             },
                             arguments: [],
                           },
                           operatorToken: "+",
                           right: {
                             kind: "number",
-                            loc: [21, 48, 21, 51],
+                            loc: [21, 47, 21, 50],
                             value: 100,
                           },
                         },
@@ -128,7 +125,7 @@ const scriptBoundTagCapture = cs.create(
                 params: [],
               },
             },
-            captures: ["Badge$295ul1svvcohm$1", "count$295ul1svvcohm$0"],
+            captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
           },
           () => ({
             kind: "{}",
@@ -141,7 +138,7 @@ const scriptBoundTagCapture = cs.create(
                   kind: "id",
                   loc: [20, 17, 20, 24],
                   text: "skipped",
-                  bindingKey: "skipped$295ul1svvcohm$3",
+                  bindingKey: "skipped$h5jruxcfnavr$3",
                 },
                 initializer: {
                   kind: "number",
@@ -151,64 +148,64 @@ const scriptBoundTagCapture = cs.create(
               },
               {
                 kind: "return",
-                loc: [21, 11, 21, 58],
+                loc: [21, 11, 21, 57],
                 expression: {
                   kind: "splice",
-                  loc: [21, 18, 21, 57],
+                  loc: [21, 18, 21, 56],
                   key: "$0splice0",
                 },
               },
             ],
           }),
         ),
-        params: ["count$295ul1svvcohm$0", "Badge$295ul1svvcohm$1"],
+        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
       $0splice2: {
         value: _jsx("section", {
           children: cs.create(
-            [24, 21, 24, 58],
+            [24, 21, 24, 57],
             {
               version: "0.0.0",
               filePath: "render/script-bound-tag-capture.test.tsx",
-              fileHash: "295ul1svvcohm",
+              fileHash: "h5jruxcfnavr",
               splices: {},
-              captures: ["Badge$295ul1svvcohm$1", "count$295ul1svvcohm$0"],
+              captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
             },
             () => ({
               kind: "jsx",
-              loc: [24, 24, 24, 57],
+              loc: [24, 24, 24, 56],
               type: {
                 kind: "id",
                 loc: [24, 25, 24, 30],
                 text: "Badge",
-                bindingKey: "Badge$295ul1svvcohm$1",
+                bindingKey: "Badge$h5jruxcfnavr$1",
               },
               attributes: [
                 {
                   name: "n",
                   initializer: {
                     kind: "binop",
-                    loc: [24, 34, 24, 53],
+                    loc: [24, 34, 24, 52],
                     left: {
                       kind: "()",
-                      loc: [24, 34, 24, 46],
+                      loc: [24, 34, 24, 45],
                       expression: {
                         kind: ".",
-                        loc: [24, 34, 24, 44],
+                        loc: [24, 34, 24, 43],
                         expression: {
                           kind: "id",
                           loc: [24, 34, 24, 39],
                           text: "count",
-                          bindingKey: "count$295ul1svvcohm$0",
+                          bindingKey: "count$h5jruxcfnavr$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
                     operatorToken: "+",
                     right: {
                       kind: "number",
-                      loc: [24, 49, 24, 53],
+                      loc: [24, 48, 24, 52],
                       value: 1000,
                     },
                   },
@@ -218,7 +215,7 @@ const scriptBoundTagCapture = cs.create(
             }),
           ),
         }),
-        params: ["count$295ul1svvcohm$0", "Badge$295ul1svvcohm$1"],
+        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
       $0splice3: {
         value: cs.create(
@@ -226,9 +223,9 @@ const scriptBoundTagCapture = cs.create(
           {
             version: "0.0.0",
             filePath: "render/script-bound-tag-capture.test.tsx",
-            fileHash: "295ul1svvcohm",
+            fileHash: "h5jruxcfnavr",
             splices: { $For: { value: For, params: [] } },
-            captures: ["Badge$295ul1svvcohm$1", "count$295ul1svvcohm$0"],
+            captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
           },
           () => ({
             kind: "jsx",
@@ -262,7 +259,7 @@ const scriptBoundTagCapture = cs.create(
             children: [
               {
                 kind: "=>",
-                loc: [27, 12, 27, 57],
+                loc: [27, 12, 27, 56],
                 parameters: [
                   {
                     kind: "param",
@@ -271,45 +268,45 @@ const scriptBoundTagCapture = cs.create(
                       kind: "id",
                       loc: [27, 13, 27, 14],
                       text: "m",
-                      bindingKey: "m$295ul1svvcohm$4",
+                      bindingKey: "m$h5jruxcfnavr$4",
                     },
                   },
                 ],
                 body: {
                   kind: "jsx",
-                  loc: [27, 27, 27, 57],
+                  loc: [27, 27, 27, 56],
                   type: {
                     kind: "id",
                     loc: [27, 28, 27, 33],
                     text: "Badge",
-                    bindingKey: "Badge$295ul1svvcohm$1",
+                    bindingKey: "Badge$h5jruxcfnavr$1",
                   },
                   attributes: [
                     {
                       name: "n",
                       initializer: {
                         kind: "binop",
-                        loc: [27, 37, 27, 53],
+                        loc: [27, 37, 27, 52],
                         left: {
                           kind: "id",
                           loc: [27, 37, 27, 38],
                           text: "m",
-                          bindingKey: "m$295ul1svvcohm$4",
+                          bindingKey: "m$h5jruxcfnavr$4",
                         },
                         operatorToken: "*",
                         right: {
                           kind: "()",
-                          loc: [27, 41, 27, 53],
+                          loc: [27, 41, 27, 52],
                           expression: {
                             kind: ".",
-                            loc: [27, 41, 27, 51],
+                            loc: [27, 41, 27, 50],
                             expression: {
                               kind: "id",
                               loc: [27, 41, 27, 46],
                               text: "count",
-                              bindingKey: "count$295ul1svvcohm$0",
+                              bindingKey: "count$h5jruxcfnavr$0",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
@@ -322,7 +319,7 @@ const scriptBoundTagCapture = cs.create(
             ],
           }),
         ),
-        params: ["count$295ul1svvcohm$0", "Badge$295ul1svvcohm$1"],
+        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
     },
     captures: [],
@@ -338,7 +335,7 @@ const scriptBoundTagCapture = cs.create(
           kind: "id",
           loc: [12, 9, 12, 14],
           text: "count",
-          bindingKey: "count$295ul1svvcohm$0",
+          bindingKey: "count$h5jruxcfnavr$0",
         },
         initializer: {
           kind: "()",
@@ -364,7 +361,7 @@ const scriptBoundTagCapture = cs.create(
           kind: "id",
           loc: [13, 9, 13, 14],
           text: "Badge",
-          bindingKey: "Badge$295ul1svvcohm$1",
+          bindingKey: "Badge$h5jruxcfnavr$1",
         },
         initializer: {
           kind: "=>",
@@ -377,7 +374,7 @@ const scriptBoundTagCapture = cs.create(
                 kind: "id",
                 loc: [13, 18, 13, 23],
                 text: "props",
-                bindingKey: "props$295ul1svvcohm$2",
+                bindingKey: "props$h5jruxcfnavr$2",
               },
             },
           ],
@@ -407,7 +404,7 @@ const scriptBoundTagCapture = cs.create(
                     kind: "id",
                     loc: [13, 54, 13, 59],
                     text: "props",
-                    bindingKey: "props$295ul1svvcohm$2",
+                    bindingKey: "props$h5jruxcfnavr$2",
                   },
                   name: "n",
                 },
@@ -431,7 +428,7 @@ const scriptBoundTagCapture = cs.create(
           children: [
             {
               kind: "splice",
-              loc: [17, 8, 17, 41],
+              loc: [17, 8, 17, 40],
               key: "$0splice0",
             },
             {
@@ -441,7 +438,7 @@ const scriptBoundTagCapture = cs.create(
             },
             {
               kind: "splice",
-              loc: [24, 8, 24, 71],
+              loc: [24, 8, 24, 70],
               key: "$0splice2",
             },
             {
@@ -451,7 +448,7 @@ const scriptBoundTagCapture = cs.create(
             },
             {
               kind: "jsx",
-              loc: [30, 7, 30, 74],
+              loc: [30, 7, 30, 71],
               type: {
                 kind: "string",
                 loc: [30, 8, 30, 14],
@@ -462,46 +459,46 @@ const scriptBoundTagCapture = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [30, 24, 30, 59],
+                    loc: [30, 24, 30, 56],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [30, 30, 30, 59],
+                      loc: [30, 30, 30, 56],
                       expression: {
                         kind: ".",
-                        loc: [30, 30, 30, 41],
+                        loc: [30, 30, 30, 39],
                         expression: {
                           kind: "id",
                           loc: [30, 30, 30, 35],
                           text: "count",
-                          bindingKey: "count$295ul1svvcohm$0",
+                          bindingKey: "count$h5jruxcfnavr$0",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "binop",
-                          loc: [30, 42, 30, 58],
+                          loc: [30, 40, 30, 55],
                           left: {
                             kind: "()",
-                            loc: [30, 42, 30, 54],
+                            loc: [30, 40, 30, 51],
                             expression: {
                               kind: ".",
-                              loc: [30, 42, 30, 52],
+                              loc: [30, 40, 30, 49],
                               expression: {
                                 kind: "id",
-                                loc: [30, 42, 30, 47],
+                                loc: [30, 40, 30, 45],
                                 text: "count",
-                                bindingKey: "count$295ul1svvcohm$0",
+                                bindingKey: "count$h5jruxcfnavr$0",
                               },
-                              name: "read",
+                              name: "get",
                             },
                             arguments: [],
                           },
                           operatorToken: "+",
                           right: {
                             kind: "number",
-                            loc: [30, 57, 30, 58],
+                            loc: [30, 54, 30, 55],
                             value: 1,
                           },
                         },
@@ -513,7 +510,7 @@ const scriptBoundTagCapture = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [30, 61, 30, 65],
+                  loc: [30, 58, 30, 62],
                   text: "more",
                 },
               ],

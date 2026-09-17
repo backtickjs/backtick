@@ -41,7 +41,7 @@ cs.receiver(                         →
 __cs_text                            → text
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
 />                                   →  />
@@ -65,7 +65,7 @@ cs.receiver(                         →
 __cs_isOn                            → isOn
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
 />                                   →  />
@@ -81,7 +81,7 @@ cs.receiver(                         →
 __cs_text                            → text
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 "second"                             → "second"
 )                                    → )
@@ -92,7 +92,7 @@ cs.receiver(                         →
 __cs_isOn                            → isOn
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 true                                 → true
 )                                    → )
@@ -155,7 +155,7 @@ cs.receiver(                         →
 __cs_texts                           → texts
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )                                    → 
 [                                    → [
@@ -184,7 +184,7 @@ cs.receiver(                         →
 __cs_flags                           → flags
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )                                    → 
 [                                    → [
@@ -204,7 +204,7 @@ cs.receiver(                         →
 __cs_texts                           → texts
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 []                                   → []
 )                                    → )
@@ -215,7 +215,7 @@ cs.receiver(                         →
 __cs_flags                           → flags
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 []                                   → []
 )                                    → )

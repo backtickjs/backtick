@@ -57,7 +57,7 @@
                             "id",
                             "builds"
                           ],
-                          "read"
+                          "get"
                         ],
                         []
                       ]
@@ -95,7 +95,7 @@
                                       "id",
                                       "builds"
                                     ],
-                                    "write"
+                                    "set"
                                   ],
                                   [
                                     [
@@ -108,7 +108,7 @@
                                             "id",
                                             "builds"
                                           ],
-                                          "read"
+                                          "get"
                                         ],
                                         []
                                       ],
@@ -128,7 +128,7 @@
                                           "id",
                                           "builds"
                                         ],
-                                        "read"
+                                        "get"
                                       ],
                                       []
                                     ],
@@ -236,7 +236,7 @@
                                   "id",
                                   "shown"
                                 ],
-                                "write"
+                                "set"
                               ],
                               [
                                 true
@@ -269,7 +269,7 @@
                       "id",
                       "shown"
                     ],
-                    "read"
+                    "get"
                   ],
                   []
                 ],

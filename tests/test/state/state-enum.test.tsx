@@ -23,8 +23,8 @@ async function Swatch() {
   return cs`{
     const held = $state(${Color.Red});
     return (
-      <span onclick={() => held.write(${Color.Blue})}>
-        {$colorName(held.read())}
+      <span onclick={() => held.set(${Color.Blue})}>
+        {$colorName(held.get())}
       </span>
     );
   }`;

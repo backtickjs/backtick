@@ -30,7 +30,7 @@ async function Held({ again }) {
     {
       version: "0.0.0",
       filePath: "render/conditional-drawing.test.tsx",
-      fileHash: "3j6zwb92hg5s",
+      fileHash: "t2scjfff5u22",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -49,7 +49,7 @@ async function Held({ again }) {
             kind: "id",
             loc: [32, 11, 32, 16],
             text: "shown",
-            bindingKey: "shown$3j6zwb92hg5s$0",
+            bindingKey: "shown$t2scjfff5u22$0",
           },
           initializer: {
             kind: "()",
@@ -74,7 +74,7 @@ async function Held({ again }) {
             kind: "id",
             loc: [34, 11, 34, 18],
             text: "started",
-            bindingKey: "started$3j6zwb92hg5s$1",
+            bindingKey: "started$t2scjfff5u22$1",
           },
           initializer: {
             kind: "()",
@@ -117,22 +117,22 @@ async function Held({ again }) {
                         statements: [
                           {
                             kind: "()",
-                            loc: [36, 9, 36, 26],
+                            loc: [36, 9, 36, 24],
                             expression: {
                               kind: ".",
-                              loc: [36, 9, 36, 20],
+                              loc: [36, 9, 36, 18],
                               expression: {
                                 kind: "id",
                                 loc: [36, 9, 36, 14],
                                 text: "shown",
-                                bindingKey: "shown$3j6zwb92hg5s$0",
+                                bindingKey: "shown$t2scjfff5u22$0",
                               },
-                              name: "write",
+                              name: "set",
                             },
                             arguments: [
                               {
                                 kind: "true",
-                                loc: [36, 21, 36, 25],
+                                loc: [36, 19, 36, 23],
                               },
                             ],
                           },
@@ -153,66 +153,66 @@ async function Held({ again }) {
         },
         {
           kind: "return",
-          loc: [40, 5, 40, 66],
+          loc: [40, 5, 40, 65],
           expression: {
             kind: "jsx",
-            loc: [40, 12, 40, 65],
+            loc: [40, 12, 40, 64],
             type: {
               kind: "string",
-              loc: [40, 12, 40, 65],
+              loc: [40, 12, 40, 64],
               text: "Fragment",
             },
             attributes: [],
             children: [
               {
                 kind: "?:",
-                loc: [40, 15, 40, 61],
+                loc: [40, 15, 40, 60],
                 condition: {
                   kind: "()",
-                  loc: [40, 15, 40, 27],
+                  loc: [40, 15, 40, 26],
                   expression: {
                     kind: ".",
-                    loc: [40, 15, 40, 25],
+                    loc: [40, 15, 40, 24],
                     expression: {
                       kind: "id",
                       loc: [40, 15, 40, 20],
                       text: "shown",
-                      bindingKey: "shown$3j6zwb92hg5s$0",
+                      bindingKey: "shown$t2scjfff5u22$0",
                     },
-                    name: "read",
+                    name: "get",
                   },
                   arguments: [],
                 },
                 whenTrue: {
                   kind: "jsx",
-                  loc: [40, 30, 40, 44],
+                  loc: [40, 29, 40, 43],
                   type: {
                     kind: "string",
-                    loc: [40, 31, 40, 33],
+                    loc: [40, 30, 40, 32],
                     text: "em",
                   },
                   attributes: [],
                   children: [
                     {
                       kind: "string",
-                      loc: [40, 34, 40, 39],
+                      loc: [40, 33, 40, 38],
                       text: "shown",
                     },
                   ],
                 },
                 whenFalse: {
                   kind: "jsx",
-                  loc: [40, 47, 40, 61],
+                  loc: [40, 46, 40, 60],
                   type: {
                     kind: "string",
-                    loc: [40, 48, 40, 49],
+                    loc: [40, 47, 40, 48],
                     text: "i",
                   },
                   attributes: [],
                   children: [
                     {
                       kind: "string",
-                      loc: [40, 50, 40, 57],
+                      loc: [40, 49, 40, 56],
                       text: "waiting",
                     },
                   ],
@@ -230,7 +230,7 @@ const conditionalDrawing = cs.create(
   {
     version: "0.0.0",
     filePath: "render/conditional-drawing.test.tsx",
-    fileHash: "3j6zwb92hg5s",
+    fileHash: "t2scjfff5u22",
     splices: {
       $state: { value: state, params: [] },
       $Held: { value: Held, params: [] },
@@ -248,7 +248,7 @@ const conditionalDrawing = cs.create(
           kind: "id",
           loc: [45, 9, 45, 15],
           text: "builds",
-          bindingKey: "builds$3j6zwb92hg5s$2",
+          bindingKey: "builds$t2scjfff5u22$2",
         },
         initializer: {
           kind: "()",
@@ -282,7 +282,7 @@ const conditionalDrawing = cs.create(
           children: [
             {
               kind: "jsx",
-              loc: [49, 7, 49, 47],
+              loc: [49, 7, 49, 46],
               type: {
                 kind: "string",
                 loc: [49, 8, 49, 12],
@@ -292,7 +292,7 @@ const conditionalDrawing = cs.create(
               children: [
                 {
                   kind: "binop",
-                  loc: [49, 14, 49, 39],
+                  loc: [49, 14, 49, 38],
                   left: {
                     kind: "string",
                     loc: [49, 14, 49, 23],
@@ -301,17 +301,17 @@ const conditionalDrawing = cs.create(
                   operatorToken: "+",
                   right: {
                     kind: "()",
-                    loc: [49, 26, 49, 39],
+                    loc: [49, 26, 49, 38],
                     expression: {
                       kind: ".",
-                      loc: [49, 26, 49, 37],
+                      loc: [49, 26, 49, 36],
                       expression: {
                         kind: "id",
                         loc: [49, 26, 49, 32],
                         text: "builds",
-                        bindingKey: "builds$3j6zwb92hg5s$2",
+                        bindingKey: "builds$t2scjfff5u22$2",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
@@ -349,42 +349,42 @@ const conditionalDrawing = cs.create(
                           statements: [
                             {
                               kind: "()",
-                              loc: [53, 13, 53, 44],
+                              loc: [53, 13, 53, 41],
                               expression: {
                                 kind: ".",
-                                loc: [53, 13, 53, 25],
+                                loc: [53, 13, 53, 23],
                                 expression: {
                                   kind: "id",
                                   loc: [53, 13, 53, 19],
                                   text: "builds",
-                                  bindingKey: "builds$3j6zwb92hg5s$2",
+                                  bindingKey: "builds$t2scjfff5u22$2",
                                 },
-                                name: "write",
+                                name: "set",
                               },
                               arguments: [
                                 {
                                   kind: "binop",
-                                  loc: [53, 26, 53, 43],
+                                  loc: [53, 24, 53, 40],
                                   left: {
                                     kind: "()",
-                                    loc: [53, 26, 53, 39],
+                                    loc: [53, 24, 53, 36],
                                     expression: {
                                       kind: ".",
-                                      loc: [53, 26, 53, 37],
+                                      loc: [53, 24, 53, 34],
                                       expression: {
                                         kind: "id",
-                                        loc: [53, 26, 53, 32],
+                                        loc: [53, 24, 53, 30],
                                         text: "builds",
-                                        bindingKey: "builds$3j6zwb92hg5s$2",
+                                        bindingKey: "builds$t2scjfff5u22$2",
                                       },
-                                      name: "read",
+                                      name: "get",
                                     },
                                     arguments: [],
                                   },
                                   operatorToken: "+",
                                   right: {
                                     kind: "number",
-                                    loc: [53, 42, 53, 43],
+                                    loc: [53, 39, 53, 40],
                                     value: 1,
                                   },
                                 },
@@ -392,30 +392,30 @@ const conditionalDrawing = cs.create(
                             },
                             {
                               kind: "return",
-                              loc: [54, 13, 54, 38],
+                              loc: [54, 13, 54, 37],
                               expression: {
                                 kind: "binop",
-                                loc: [54, 20, 54, 37],
+                                loc: [54, 20, 54, 36],
                                 left: {
                                   kind: "()",
-                                  loc: [54, 20, 54, 33],
+                                  loc: [54, 20, 54, 32],
                                   expression: {
                                     kind: ".",
-                                    loc: [54, 20, 54, 31],
+                                    loc: [54, 20, 54, 30],
                                     expression: {
                                       kind: "id",
                                       loc: [54, 20, 54, 26],
                                       text: "builds",
-                                      bindingKey: "builds$3j6zwb92hg5s$2",
+                                      bindingKey: "builds$t2scjfff5u22$2",
                                     },
-                                    name: "read",
+                                    name: "get",
                                   },
                                   arguments: [],
                                 },
                                 operatorToken: "<",
                                 right: {
                                   kind: "number",
-                                  loc: [54, 36, 54, 37],
+                                  loc: [54, 35, 54, 36],
                                   value: 5,
                                 },
                               },

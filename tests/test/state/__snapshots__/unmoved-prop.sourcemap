@@ -25,7 +25,7 @@ cs.receiver(                         →
 __cs_selected                        → selected
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 1                                    → 1
 )                                    → )
@@ -65,7 +65,7 @@ cs.receiver(                         →
 __cs_selected                        → selected
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  ===                                 →  === 
 __cs_id                              → id

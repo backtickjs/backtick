@@ -2,7 +2,7 @@
   const selected = $0()(0);
   return <div>
     {<span
-      onclick={() => selected.write(1)}
+      onclick={() => selected.set(1)}
     >
       {"select"}
     </span>}
@@ -17,11 +17,11 @@
   </div>;
 }
 
-#f1 = ($0, $1) => "font-size: " + $0().read() === $1() ? 20 : 16 + "px"
+#f1 = ($0, $1) => "font-size: " + $0().get() === $1() ? 20 : 16 + "px"
 
-#f2 = ($0, $1) => "row " + $0() + " of " + $1().read()
+#f2 = ($0, $1) => "row " + $0() + " of " + $1().get()
 
-#f3 = ($0, $1, $2) => $0().read() === $1() ? $2() : null
+#f3 = ($0, $1, $2) => $0().get() === $1() ? $2() : null
 
 root = <{() => #f0(() => state, () => ($0) => <div>
   {<span

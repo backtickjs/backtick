@@ -13,16 +13,16 @@ export default async function Wave() {
       " background: linear-gradient(#f472b6,#7c3aed); height: ";
     const t = $state(0);
     const id = $state(0);
-    const tick = () => t.update((v) => v + 1);
+    const tick = () => t.set(t.get() + 1);
     const run = () => {
-      $window.clearInterval(id.read());
-      id.write(id.read() === 0 ? $window.setInterval(tick, 90) : 0);
+      $window.clearInterval(id.get());
+      id.set(id.get() === 0 ? $window.setInterval(tick, 90) : 0);
     };
     return (
       <div style={card} onclick={run}>
         <For each={[0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5]}>
           {(p: number) => (
-            <div style={bar + (65 + 55 * Math.sin(t.read() / 3 + p)) + "px"} />
+            <div style={bar + (65 + 55 * Math.sin(t.get() / 3 + p)) + "px"} />
           )}
         </For>
       </div>

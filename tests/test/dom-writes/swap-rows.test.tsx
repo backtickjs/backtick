@@ -12,14 +12,15 @@ async function SwappableRows() {
   return cs`{
     const ids = $state<number[]>([1, 2, 3, 4, 5]);
     const swap = () => {
-      ids.update((held) => held.with(1, held[3]).with(3, held[1]));
+      const held = ids.get();
+      ids.set(held.with(1, held[3]).with(3, held[1]));
     };
     return (
       <div>
         <button onclick={swap}>swap</button>
         <table>
           <tbody>
-            <For each={ids.read()}>
+            <For each={ids.get()}>
               {(id: number) => (
                 <tr id={"row-" + id}>
                   <td>{"row " + id}</td>

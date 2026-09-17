@@ -10,11 +10,11 @@ import { children, drawn, text } from "./dom.ts";
 // thing saying which row is which.
 async function SwappableRows() {
   return cs.create(
-    [12, 10, 31, 5],
+    [12, 10, 32, 5],
     {
       version: "0.0.0",
       filePath: "state/keyed-rows.test.tsx",
-      fileHash: "m2di04fk3sw4",
+      fileHash: "89rxx0ivccc7",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -23,7 +23,7 @@ async function SwappableRows() {
     },
     () => ({
       kind: "{}",
-      loc: [12, 13, 31, 4],
+      loc: [12, 13, 32, 4],
       statements: [
         {
           kind: "const",
@@ -32,7 +32,7 @@ async function SwappableRows() {
             kind: "id",
             loc: [13, 11, 13, 14],
             text: "ids",
-            bindingKey: "ids$m2di04fk3sw4$0",
+            bindingKey: "ids$89rxx0ivccc7$0",
           },
           initializer: {
             kind: "()",
@@ -69,119 +69,129 @@ async function SwappableRows() {
         },
         {
           kind: "const",
-          loc: [14, 5, 16, 7],
+          loc: [14, 5, 17, 7],
           name: {
             kind: "id",
             loc: [14, 11, 14, 15],
             text: "swap",
-            bindingKey: "swap$m2di04fk3sw4$1",
+            bindingKey: "swap$89rxx0ivccc7$1",
           },
           initializer: {
             kind: "=>",
-            loc: [14, 18, 16, 6],
+            loc: [14, 18, 17, 6],
             parameters: [],
             body: {
               kind: "{}",
-              loc: [14, 24, 16, 6],
+              loc: [14, 24, 17, 6],
               statements: [
                 {
+                  kind: "const",
+                  loc: [15, 7, 15, 30],
+                  name: {
+                    kind: "id",
+                    loc: [15, 13, 15, 17],
+                    text: "held",
+                    bindingKey: "held$89rxx0ivccc7$3",
+                  },
+                  initializer: {
+                    kind: "()",
+                    loc: [15, 20, 15, 29],
+                    expression: {
+                      kind: ".",
+                      loc: [15, 20, 15, 27],
+                      expression: {
+                        kind: "id",
+                        loc: [15, 20, 15, 23],
+                        text: "ids",
+                        bindingKey: "ids$89rxx0ivccc7$0",
+                      },
+                      name: "get",
+                    },
+                    arguments: [],
+                  },
+                },
+                {
                   kind: "()",
-                  loc: [15, 7, 15, 67],
+                  loc: [16, 7, 16, 54],
                   expression: {
                     kind: ".",
-                    loc: [15, 7, 15, 17],
+                    loc: [16, 7, 16, 14],
                     expression: {
                       kind: "id",
-                      loc: [15, 7, 15, 10],
+                      loc: [16, 7, 16, 10],
                       text: "ids",
-                      bindingKey: "ids$m2di04fk3sw4$0",
+                      bindingKey: "ids$89rxx0ivccc7$0",
                     },
-                    name: "update",
+                    name: "set",
                   },
                   arguments: [
                     {
-                      kind: "=>",
-                      loc: [15, 18, 15, 66],
-                      parameters: [
+                      kind: "()",
+                      loc: [16, 15, 16, 53],
+                      expression: {
+                        kind: ".",
+                        loc: [16, 15, 16, 41],
+                        expression: {
+                          kind: "()",
+                          loc: [16, 15, 16, 36],
+                          expression: {
+                            kind: ".",
+                            loc: [16, 15, 16, 24],
+                            expression: {
+                              kind: "id",
+                              loc: [16, 15, 16, 19],
+                              text: "held",
+                              bindingKey: "held$89rxx0ivccc7$3",
+                            },
+                            name: "with",
+                          },
+                          arguments: [
+                            {
+                              kind: "number",
+                              loc: [16, 25, 16, 26],
+                              value: 0,
+                            },
+                            {
+                              kind: "[]",
+                              loc: [16, 28, 16, 35],
+                              expression: {
+                                kind: "id",
+                                loc: [16, 28, 16, 32],
+                                text: "held",
+                                bindingKey: "held$89rxx0ivccc7$3",
+                              },
+                              argumentExpression: {
+                                kind: "number",
+                                loc: [16, 33, 16, 34],
+                                value: 2,
+                              },
+                            },
+                          ],
+                        },
+                        name: "with",
+                      },
+                      arguments: [
                         {
-                          kind: "param",
-                          loc: [15, 19, 15, 23],
-                          name: {
+                          kind: "number",
+                          loc: [16, 42, 16, 43],
+                          value: 2,
+                        },
+                        {
+                          kind: "[]",
+                          loc: [16, 45, 16, 52],
+                          expression: {
                             kind: "id",
-                            loc: [15, 19, 15, 23],
+                            loc: [16, 45, 16, 49],
                             text: "held",
-                            bindingKey: "held$m2di04fk3sw4$3",
+                            bindingKey: "held$89rxx0ivccc7$3",
+                          },
+                          argumentExpression: {
+                            kind: "number",
+                            loc: [16, 50, 16, 51],
+                            value: 0,
                           },
                         },
                       ],
-                      body: {
-                        kind: "()",
-                        loc: [15, 28, 15, 66],
-                        expression: {
-                          kind: ".",
-                          loc: [15, 28, 15, 54],
-                          expression: {
-                            kind: "()",
-                            loc: [15, 28, 15, 49],
-                            expression: {
-                              kind: ".",
-                              loc: [15, 28, 15, 37],
-                              expression: {
-                                kind: "id",
-                                loc: [15, 28, 15, 32],
-                                text: "held",
-                                bindingKey: "held$m2di04fk3sw4$3",
-                              },
-                              name: "with",
-                            },
-                            arguments: [
-                              {
-                                kind: "number",
-                                loc: [15, 38, 15, 39],
-                                value: 0,
-                              },
-                              {
-                                kind: "[]",
-                                loc: [15, 41, 15, 48],
-                                expression: {
-                                  kind: "id",
-                                  loc: [15, 41, 15, 45],
-                                  text: "held",
-                                  bindingKey: "held$m2di04fk3sw4$3",
-                                },
-                                argumentExpression: {
-                                  kind: "number",
-                                  loc: [15, 46, 15, 47],
-                                  value: 2,
-                                },
-                              },
-                            ],
-                          },
-                          name: "with",
-                        },
-                        arguments: [
-                          {
-                            kind: "number",
-                            loc: [15, 55, 15, 56],
-                            value: 2,
-                          },
-                          {
-                            kind: "[]",
-                            loc: [15, 58, 15, 65],
-                            expression: {
-                              kind: "id",
-                              loc: [15, 58, 15, 62],
-                              text: "held",
-                              bindingKey: "held$m2di04fk3sw4$3",
-                            },
-                            argumentExpression: {
-                              kind: "number",
-                              loc: [15, 63, 15, 64],
-                              value: 0,
-                            },
-                          },
-                        ],
-                      },
                     },
                   ],
                 },
@@ -191,100 +201,94 @@ async function SwappableRows() {
         },
         {
           kind: "const",
-          loc: [17, 5, 19, 7],
+          loc: [18, 5, 20, 7],
           name: {
             kind: "id",
-            loc: [17, 11, 17, 15],
+            loc: [18, 11, 18, 15],
             text: "drop",
-            bindingKey: "drop$m2di04fk3sw4$2",
+            bindingKey: "drop$89rxx0ivccc7$2",
           },
           initializer: {
             kind: "=>",
-            loc: [17, 18, 19, 6],
+            loc: [18, 18, 20, 6],
             parameters: [],
             body: {
               kind: "{}",
-              loc: [17, 24, 19, 6],
+              loc: [18, 24, 20, 6],
               statements: [
                 {
                   kind: "()",
-                  loc: [18, 7, 18, 58],
+                  loc: [19, 7, 19, 50],
                   expression: {
                     kind: ".",
-                    loc: [18, 7, 18, 17],
+                    loc: [19, 7, 19, 14],
                     expression: {
                       kind: "id",
-                      loc: [18, 7, 18, 10],
+                      loc: [19, 7, 19, 10],
                       text: "ids",
-                      bindingKey: "ids$m2di04fk3sw4$0",
+                      bindingKey: "ids$89rxx0ivccc7$0",
                     },
-                    name: "update",
+                    name: "set",
                   },
                   arguments: [
                     {
-                      kind: "=>",
-                      loc: [18, 18, 18, 57],
-                      parameters: [
+                      kind: "()",
+                      loc: [19, 15, 19, 49],
+                      expression: {
+                        kind: ".",
+                        loc: [19, 15, 19, 31],
+                        expression: {
+                          kind: "()",
+                          loc: [19, 15, 19, 24],
+                          expression: {
+                            kind: ".",
+                            loc: [19, 15, 19, 22],
+                            expression: {
+                              kind: "id",
+                              loc: [19, 15, 19, 18],
+                              text: "ids",
+                              bindingKey: "ids$89rxx0ivccc7$0",
+                            },
+                            name: "get",
+                          },
+                          arguments: [],
+                        },
+                        name: "filter",
+                      },
+                      arguments: [
                         {
-                          kind: "param",
-                          loc: [18, 19, 18, 23],
-                          name: {
-                            kind: "id",
-                            loc: [18, 19, 18, 23],
-                            text: "held",
-                            bindingKey: "held$m2di04fk3sw4$4",
+                          kind: "=>",
+                          loc: [19, 32, 19, 48],
+                          parameters: [
+                            {
+                              kind: "param",
+                              loc: [19, 33, 19, 35],
+                              name: {
+                                kind: "id",
+                                loc: [19, 33, 19, 35],
+                                text: "id",
+                                bindingKey: "id$89rxx0ivccc7$4",
+                              },
+                            },
+                          ],
+                          body: {
+                            kind: "binop",
+                            loc: [19, 40, 19, 48],
+                            left: {
+                              kind: "id",
+                              loc: [19, 40, 19, 42],
+                              text: "id",
+                              bindingKey: "id$89rxx0ivccc7$4",
+                            },
+                            operatorToken: "!==",
+                            right: {
+                              kind: "number",
+                              loc: [19, 47, 19, 48],
+                              value: 2,
+                            },
                           },
                         },
                       ],
-                      body: {
-                        kind: "()",
-                        loc: [18, 28, 18, 57],
-                        expression: {
-                          kind: ".",
-                          loc: [18, 28, 18, 39],
-                          expression: {
-                            kind: "id",
-                            loc: [18, 28, 18, 32],
-                            text: "held",
-                            bindingKey: "held$m2di04fk3sw4$4",
-                          },
-                          name: "filter",
-                        },
-                        arguments: [
-                          {
-                            kind: "=>",
-                            loc: [18, 40, 18, 56],
-                            parameters: [
-                              {
-                                kind: "param",
-                                loc: [18, 41, 18, 43],
-                                name: {
-                                  kind: "id",
-                                  loc: [18, 41, 18, 43],
-                                  text: "id",
-                                  bindingKey: "id$m2di04fk3sw4$5",
-                                },
-                              },
-                            ],
-                            body: {
-                              kind: "binop",
-                              loc: [18, 48, 18, 56],
-                              left: {
-                                kind: "id",
-                                loc: [18, 48, 18, 50],
-                                text: "id",
-                                bindingKey: "id$m2di04fk3sw4$5",
-                              },
-                              operatorToken: "!==",
-                              right: {
-                                kind: "number",
-                                loc: [18, 55, 18, 56],
-                                value: 2,
-                              },
-                            },
-                          },
-                        ],
-                      },
                     },
                   ],
                 },
@@ -294,44 +298,17 @@ async function SwappableRows() {
         },
         {
           kind: "return",
-          loc: [20, 5, 30, 7],
+          loc: [21, 5, 31, 7],
           expression: {
             kind: "jsx",
-            loc: [21, 7, 29, 13],
+            loc: [22, 7, 30, 13],
             type: {
               kind: "string",
-              loc: [21, 8, 21, 11],
+              loc: [22, 8, 22, 11],
               text: "div",
             },
             attributes: [],
             children: [
-              {
-                kind: "jsx",
-                loc: [22, 9, 22, 41],
-                type: {
-                  kind: "string",
-                  loc: [22, 10, 22, 14],
-                  text: "span",
-                },
-                attributes: [
-                  {
-                    name: "onclick",
-                    initializer: {
-                      kind: "id",
-                      loc: [22, 24, 22, 28],
-                      text: "swap",
-                      bindingKey: "swap$m2di04fk3sw4$1",
-                    },
-                  },
-                ],
-                children: [
-                  {
-                    kind: "string",
-                    loc: [22, 30, 22, 34],
-                    text: "swap",
-                  },
-                ],
-              },
               {
                 kind: "jsx",
                 loc: [23, 9, 23, 41],
@@ -346,8 +323,8 @@ async function SwappableRows() {
                     initializer: {
                       kind: "id",
                       loc: [23, 24, 23, 28],
-                      text: "drop",
-                      bindingKey: "drop$m2di04fk3sw4$2",
+                      text: "swap",
+                      bindingKey: "swap$89rxx0ivccc7$1",
                     },
                   },
                 ],
@@ -355,26 +332,53 @@ async function SwappableRows() {
                   {
                     kind: "string",
                     loc: [23, 30, 23, 34],
+                    text: "swap",
+                  },
+                ],
+              },
+              {
+                kind: "jsx",
+                loc: [24, 9, 24, 41],
+                type: {
+                  kind: "string",
+                  loc: [24, 10, 24, 14],
+                  text: "span",
+                },
+                attributes: [
+                  {
+                    name: "onclick",
+                    initializer: {
+                      kind: "id",
+                      loc: [24, 24, 24, 28],
+                      text: "drop",
+                      bindingKey: "drop$89rxx0ivccc7$2",
+                    },
+                  },
+                ],
+                children: [
+                  {
+                    kind: "string",
+                    loc: [24, 30, 24, 34],
                     text: "drop",
                   },
                 ],
               },
               {
                 kind: "jsx",
-                loc: [24, 9, 28, 15],
+                loc: [25, 9, 29, 15],
                 type: {
                   kind: "string",
-                  loc: [24, 10, 24, 13],
+                  loc: [25, 10, 25, 13],
                   text: "div",
                 },
                 attributes: [],
                 children: [
                   {
                     kind: "jsx",
-                    loc: [25, 11, 27, 17],
+                    loc: [26, 11, 28, 17],
                     type: {
                       kind: "splice",
-                      loc: [25, 12, 25, 15],
+                      loc: [26, 12, 26, 15],
                       key: "$For",
                     },
                     attributes: [
@@ -382,17 +386,17 @@ async function SwappableRows() {
                         name: "each",
                         initializer: {
                           kind: "()",
-                          loc: [25, 22, 25, 32],
+                          loc: [26, 22, 26, 31],
                           expression: {
                             kind: ".",
-                            loc: [25, 22, 25, 30],
+                            loc: [26, 22, 26, 29],
                             expression: {
                               kind: "id",
-                              loc: [25, 22, 25, 25],
+                              loc: [26, 22, 26, 25],
                               text: "ids",
-                              bindingKey: "ids$m2di04fk3sw4$0",
+                              bindingKey: "ids$89rxx0ivccc7$0",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
@@ -401,43 +405,43 @@ async function SwappableRows() {
                     children: [
                       {
                         kind: "=>",
-                        loc: [26, 14, 26, 56],
+                        loc: [27, 14, 27, 56],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [26, 15, 26, 25],
+                            loc: [27, 15, 27, 25],
                             name: {
                               kind: "id",
-                              loc: [26, 15, 26, 17],
+                              loc: [27, 15, 27, 17],
                               text: "id",
-                              bindingKey: "id$m2di04fk3sw4$6",
+                              bindingKey: "id$89rxx0ivccc7$5",
                             },
                           },
                         ],
                         body: {
                           kind: "jsx",
-                          loc: [26, 30, 26, 56],
+                          loc: [27, 30, 27, 56],
                           type: {
                             kind: "string",
-                            loc: [26, 31, 26, 35],
+                            loc: [27, 31, 27, 35],
                             text: "span",
                           },
                           attributes: [],
                           children: [
                             {
                               kind: "binop",
-                              loc: [26, 37, 26, 48],
+                              loc: [27, 37, 27, 48],
                               left: {
                                 kind: "string",
-                                loc: [26, 37, 26, 43],
+                                loc: [27, 37, 27, 43],
                                 text: "row ",
                               },
                               operatorToken: "+",
                               right: {
                                 kind: "id",
-                                loc: [26, 46, 26, 48],
+                                loc: [27, 46, 27, 48],
                                 text: "id",
-                                bindingKey: "id$m2di04fk3sw4$6",
+                                bindingKey: "id$89rxx0ivccc7$5",
                               },
                             },
                           ],

@@ -91,7 +91,7 @@ cs.receiver(                         →
 __cs_held                            → held
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
 >{cs.lift(                           → >\n            {
@@ -114,7 +114,7 @@ __cs_row                             → row
 label                                → label
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 "pressed"                            → "pressed"
 )                                    → )
@@ -128,7 +128,7 @@ __cs_row                             → row
 label                                → label
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }\n              </
 li                                   → li

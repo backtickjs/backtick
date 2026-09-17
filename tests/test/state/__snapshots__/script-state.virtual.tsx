@@ -16,10 +16,10 @@ async function ScriptRows() {
       style={cs.lift(cs.const("font-size: 16px"))}
       onclick={cs.lift(cs.const(() => {
     const __cs_row = cs.const((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one"));
-    cs.statement(cs.receiver(cs.receiver(__cs_row).label).write(cs.receiver(cs.receiver(__cs_row).label).read() + " !!!"));
+    cs.statement(cs.receiver(cs.receiver(__cs_row).label).set(cs.receiver(cs.receiver(__cs_row).label).get() + " !!!"));
 }))}
     >
-      {cs.lift(cs.const(cs.receiver(cs.receiver((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one")).label).read()))}
+      {cs.lift(cs.const(cs.receiver(cs.receiver((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one")).label).get()))}
     </span>
   );
 }

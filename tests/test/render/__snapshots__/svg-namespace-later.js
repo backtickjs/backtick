@@ -13,7 +13,7 @@ const svgNamespaceLater = cs.create(
   {
     version: "0.0.0",
     filePath: "render/svg-namespace-later.test.tsx",
-    fileHash: "pkpgemweira2",
+    fileHash: "1brs7fv34j5dk",
     splices: {
       $state: { value: state, params: [] },
       $For: { value: For, params: [] },
@@ -31,7 +31,7 @@ const svgNamespaceLater = cs.create(
           kind: "id",
           loc: [13, 9, 13, 11],
           text: "xs",
-          bindingKey: "xs$pkpgemweira2$0",
+          bindingKey: "xs$1brs7fv34j5dk$0",
         },
         initializer: {
           kind: "()",
@@ -63,7 +63,7 @@ const svgNamespaceLater = cs.create(
           kind: "id",
           loc: [14, 9, 14, 14],
           text: "shown",
-          bindingKey: "shown$pkpgemweira2$1",
+          bindingKey: "shown$1brs7fv34j5dk$1",
         },
         initializer: {
           kind: "()",
@@ -115,7 +115,7 @@ const svgNamespaceLater = cs.create(
               children: [
                 {
                   kind: "jsx",
-                  loc: [19, 9, 19, 81],
+                  loc: [19, 9, 19, 80],
                   type: {
                     kind: "splice",
                     loc: [19, 10, 19, 13],
@@ -126,17 +126,17 @@ const svgNamespaceLater = cs.create(
                       name: "each",
                       initializer: {
                         kind: "()",
-                        loc: [19, 20, 19, 29],
+                        loc: [19, 20, 19, 28],
                         expression: {
                           kind: ".",
-                          loc: [19, 20, 19, 27],
+                          loc: [19, 20, 19, 26],
                           expression: {
                             kind: "id",
                             loc: [19, 20, 19, 22],
                             text: "xs",
-                            bindingKey: "xs$pkpgemweira2$0",
+                            bindingKey: "xs$1brs7fv34j5dk$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
@@ -145,43 +145,43 @@ const svgNamespaceLater = cs.create(
                   children: [
                     {
                       kind: "=>",
-                      loc: [19, 32, 19, 74],
+                      loc: [19, 31, 19, 73],
                       parameters: [
                         {
                           kind: "param",
-                          loc: [19, 33, 19, 42],
+                          loc: [19, 32, 19, 41],
                           name: {
                             kind: "id",
-                            loc: [19, 33, 19, 34],
+                            loc: [19, 32, 19, 33],
                             text: "x",
-                            bindingKey: "x$pkpgemweira2$2",
+                            bindingKey: "x$1brs7fv34j5dk$2",
                           },
                         },
                       ],
                       body: {
                         kind: "jsx",
-                        loc: [19, 47, 19, 74],
+                        loc: [19, 46, 19, 73],
                         type: {
                           kind: "string",
-                          loc: [19, 48, 19, 53],
+                          loc: [19, 47, 19, 52],
                           text: "title",
                         },
                         attributes: [],
                         children: [
                           {
                             kind: "binop",
-                            loc: [19, 55, 19, 65],
+                            loc: [19, 54, 19, 64],
                             left: {
                               kind: "string",
-                              loc: [19, 55, 19, 61],
+                              loc: [19, 54, 19, 60],
                               text: "dot ",
                             },
                             operatorToken: "+",
                             right: {
                               kind: "id",
-                              loc: [19, 64, 19, 65],
+                              loc: [19, 63, 19, 64],
                               text: "x",
-                              bindingKey: "x$pkpgemweira2$2",
+                              bindingKey: "x$1brs7fv34j5dk$2",
                             },
                           },
                         ],
@@ -191,43 +191,43 @@ const svgNamespaceLater = cs.create(
                 },
                 {
                   kind: "?:",
-                  loc: [20, 10, 20, 56],
+                  loc: [20, 10, 20, 55],
                   condition: {
                     kind: "()",
-                    loc: [20, 10, 20, 22],
+                    loc: [20, 10, 20, 21],
                     expression: {
                       kind: ".",
-                      loc: [20, 10, 20, 20],
+                      loc: [20, 10, 20, 19],
                       expression: {
                         kind: "id",
                         loc: [20, 10, 20, 15],
                         text: "shown",
-                        bindingKey: "shown$pkpgemweira2$1",
+                        bindingKey: "shown$1brs7fv34j5dk$1",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
                   whenTrue: {
                     kind: "jsx",
-                    loc: [20, 25, 20, 49],
+                    loc: [20, 24, 20, 48],
                     type: {
                       kind: "string",
-                      loc: [20, 26, 20, 31],
+                      loc: [20, 25, 20, 30],
                       text: "title",
                     },
                     attributes: [],
                     children: [
                       {
                         kind: "string",
-                        loc: [20, 33, 20, 40],
+                        loc: [20, 32, 20, 39],
                         text: "shown",
                       },
                     ],
                   },
                   whenFalse: {
                     kind: "null",
-                    loc: [20, 52, 20, 56],
+                    loc: [20, 51, 20, 55],
                   },
                 },
               ],
@@ -251,7 +251,7 @@ const svgNamespaceLater = cs.create(
             },
             {
               kind: "jsx",
-              loc: [23, 7, 23, 62],
+              loc: [23, 7, 23, 60],
               type: {
                 kind: "string",
                 loc: [23, 8, 23, 14],
@@ -262,35 +262,35 @@ const svgNamespaceLater = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [23, 24, 23, 48],
+                    loc: [23, 24, 23, 46],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [23, 30, 23, 48],
+                      loc: [23, 30, 23, 46],
                       expression: {
                         kind: ".",
-                        loc: [23, 30, 23, 38],
+                        loc: [23, 30, 23, 36],
                         expression: {
                           kind: "id",
                           loc: [23, 30, 23, 32],
                           text: "xs",
-                          bindingKey: "xs$pkpgemweira2$0",
+                          bindingKey: "xs$1brs7fv34j5dk$0",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "arr",
-                          loc: [23, 39, 23, 47],
+                          loc: [23, 37, 23, 45],
                           elements: [
                             {
                               kind: "number",
-                              loc: [23, 40, 23, 42],
+                              loc: [23, 38, 23, 40],
                               value: 10,
                             },
                             {
                               kind: "number",
-                              loc: [23, 44, 23, 46],
+                              loc: [23, 42, 23, 44],
                               value: 20,
                             },
                           ],
@@ -303,14 +303,14 @@ const svgNamespaceLater = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [23, 50, 23, 53],
+                  loc: [23, 48, 23, 51],
                   text: "add",
                 },
               ],
             },
             {
               kind: "jsx",
-              loc: [24, 7, 24, 62],
+              loc: [24, 7, 24, 60],
               type: {
                 kind: "string",
                 loc: [24, 8, 24, 14],
@@ -321,26 +321,26 @@ const svgNamespaceLater = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [24, 24, 24, 47],
+                    loc: [24, 24, 24, 45],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [24, 30, 24, 47],
+                      loc: [24, 30, 24, 45],
                       expression: {
                         kind: ".",
-                        loc: [24, 30, 24, 41],
+                        loc: [24, 30, 24, 39],
                         expression: {
                           kind: "id",
                           loc: [24, 30, 24, 35],
                           text: "shown",
-                          bindingKey: "shown$pkpgemweira2$1",
+                          bindingKey: "shown$1brs7fv34j5dk$1",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "true",
-                          loc: [24, 42, 24, 46],
+                          loc: [24, 40, 24, 44],
                         },
                       ],
                     },
@@ -350,7 +350,7 @@ const svgNamespaceLater = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [24, 49, 24, 53],
+                  loc: [24, 47, 24, 51],
                   text: "show",
                 },
               ],

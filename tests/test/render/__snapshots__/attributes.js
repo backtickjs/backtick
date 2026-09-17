@@ -101,7 +101,7 @@ describe("a field's value", () => {
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
-        fileHash: "2zaogzi40us1o",
+        fileHash: "2nnba74xugz2e",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
@@ -116,7 +116,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [112, 13, 112, 17],
               text: "text",
-              bindingKey: "text$2zaogzi40us1o$0",
+              bindingKey: "text$2nnba74xugz2e$0",
             },
             initializer: {
               kind: "()",
@@ -142,7 +142,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [113, 13, 113, 17],
               text: "isOn",
-              bindingKey: "isOn$2zaogzi40us1o$1",
+              bindingKey: "isOn$2nnba74xugz2e$1",
             },
             initializer: {
               kind: "()",
@@ -175,7 +175,7 @@ describe("a field's value", () => {
               children: [
                 {
                   kind: "jsx",
-                  loc: [116, 11, 116, 58],
+                  loc: [116, 11, 116, 57],
                   type: {
                     kind: "string",
                     loc: [116, 12, 116, 17],
@@ -194,17 +194,17 @@ describe("a field's value", () => {
                       name: "value",
                       initializer: {
                         kind: "()",
-                        loc: [116, 43, 116, 54],
+                        loc: [116, 43, 116, 53],
                         expression: {
                           kind: ".",
-                          loc: [116, 43, 116, 52],
+                          loc: [116, 43, 116, 51],
                           expression: {
                             kind: "id",
                             loc: [116, 43, 116, 47],
                             text: "text",
-                            bindingKey: "text$2zaogzi40us1o$0",
+                            bindingKey: "text$2nnba74xugz2e$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
@@ -214,7 +214,7 @@ describe("a field's value", () => {
                 },
                 {
                   kind: "jsx",
-                  loc: [117, 11, 117, 74],
+                  loc: [117, 11, 117, 73],
                   type: {
                     kind: "string",
                     loc: [117, 12, 117, 17],
@@ -241,17 +241,17 @@ describe("a field's value", () => {
                       name: "checked",
                       initializer: {
                         kind: "()",
-                        loc: [117, 59, 117, 70],
+                        loc: [117, 59, 117, 69],
                         expression: {
                           kind: ".",
-                          loc: [117, 59, 117, 68],
+                          loc: [117, 59, 117, 67],
                           expression: {
                             kind: "id",
                             loc: [117, 59, 117, 63],
                             text: "isOn",
-                            bindingKey: "isOn$2zaogzi40us1o$1",
+                            bindingKey: "isOn$2nnba74xugz2e$1",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
@@ -280,44 +280,44 @@ describe("a field's value", () => {
                           statements: [
                             {
                               kind: "()",
-                              loc: [120, 15, 120, 35],
+                              loc: [120, 15, 120, 33],
                               expression: {
                                 kind: ".",
-                                loc: [120, 15, 120, 25],
+                                loc: [120, 15, 120, 23],
                                 expression: {
                                   kind: "id",
                                   loc: [120, 15, 120, 19],
                                   text: "text",
-                                  bindingKey: "text$2zaogzi40us1o$0",
+                                  bindingKey: "text$2nnba74xugz2e$0",
                                 },
-                                name: "write",
+                                name: "set",
                               },
                               arguments: [
                                 {
                                   kind: "string",
-                                  loc: [120, 26, 120, 34],
+                                  loc: [120, 24, 120, 32],
                                   text: "second",
                                 },
                               ],
                             },
                             {
                               kind: "()",
-                              loc: [121, 15, 121, 31],
+                              loc: [121, 15, 121, 29],
                               expression: {
                                 kind: ".",
-                                loc: [121, 15, 121, 25],
+                                loc: [121, 15, 121, 23],
                                 expression: {
                                   kind: "id",
                                   loc: [121, 15, 121, 19],
                                   text: "isOn",
-                                  bindingKey: "isOn$2zaogzi40us1o$1",
+                                  bindingKey: "isOn$2nnba74xugz2e$1",
                                 },
-                                name: "write",
+                                name: "set",
                               },
                               arguments: [
                                 {
                                   kind: "true",
-                                  loc: [121, 26, 121, 30],
+                                  loc: [121, 24, 121, 28],
                                 },
                               ],
                             },
@@ -360,7 +360,7 @@ describe("a field's value", () => {
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
-        fileHash: "2zaogzi40us1o",
+        fileHash: "2nnba74xugz2e",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
@@ -375,7 +375,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [148, 13, 148, 18],
               text: "texts",
-              bindingKey: "texts$2zaogzi40us1o$2",
+              bindingKey: "texts$2nnba74xugz2e$2",
             },
             initializer: {
               kind: "()",
@@ -407,7 +407,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [149, 13, 149, 18],
               text: "flags",
-              bindingKey: "flags$2zaogzi40us1o$3",
+              bindingKey: "flags$2nnba74xugz2e$3",
             },
             initializer: {
               kind: "()",
@@ -446,7 +446,7 @@ describe("a field's value", () => {
               children: [
                 {
                   kind: "jsx",
-                  loc: [152, 11, 152, 62],
+                  loc: [152, 11, 152, 61],
                   type: {
                     kind: "string",
                     loc: [152, 12, 152, 17],
@@ -465,26 +465,26 @@ describe("a field's value", () => {
                       name: "value",
                       initializer: {
                         kind: "[]",
-                        loc: [152, 43, 152, 58],
+                        loc: [152, 43, 152, 57],
                         expression: {
                           kind: "()",
-                          loc: [152, 43, 152, 55],
+                          loc: [152, 43, 152, 54],
                           expression: {
                             kind: ".",
-                            loc: [152, 43, 152, 53],
+                            loc: [152, 43, 152, 52],
                             expression: {
                               kind: "id",
                               loc: [152, 43, 152, 48],
                               text: "texts",
-                              bindingKey: "texts$2zaogzi40us1o$2",
+                              bindingKey: "texts$2nnba74xugz2e$2",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
                         argumentExpression: {
                           kind: "number",
-                          loc: [152, 56, 152, 57],
+                          loc: [152, 55, 152, 56],
                           value: 0,
                         },
                       },
@@ -494,7 +494,7 @@ describe("a field's value", () => {
                 },
                 {
                   kind: "jsx",
-                  loc: [153, 11, 153, 78],
+                  loc: [153, 11, 153, 77],
                   type: {
                     kind: "string",
                     loc: [153, 12, 153, 17],
@@ -521,26 +521,26 @@ describe("a field's value", () => {
                       name: "checked",
                       initializer: {
                         kind: "[]",
-                        loc: [153, 59, 153, 74],
+                        loc: [153, 59, 153, 73],
                         expression: {
                           kind: "()",
-                          loc: [153, 59, 153, 71],
+                          loc: [153, 59, 153, 70],
                           expression: {
                             kind: ".",
-                            loc: [153, 59, 153, 69],
+                            loc: [153, 59, 153, 68],
                             expression: {
                               kind: "id",
                               loc: [153, 59, 153, 64],
                               text: "flags",
-                              bindingKey: "flags$2zaogzi40us1o$3",
+                              bindingKey: "flags$2nnba74xugz2e$3",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
                         argumentExpression: {
                           kind: "number",
-                          loc: [153, 72, 153, 73],
+                          loc: [153, 71, 153, 72],
                           value: 0,
                         },
                       },
@@ -569,44 +569,44 @@ describe("a field's value", () => {
                           statements: [
                             {
                               kind: "()",
-                              loc: [156, 15, 156, 30],
+                              loc: [156, 15, 156, 28],
                               expression: {
                                 kind: ".",
-                                loc: [156, 15, 156, 26],
+                                loc: [156, 15, 156, 24],
                                 expression: {
                                   kind: "id",
                                   loc: [156, 15, 156, 20],
                                   text: "texts",
-                                  bindingKey: "texts$2zaogzi40us1o$2",
+                                  bindingKey: "texts$2nnba74xugz2e$2",
                                 },
-                                name: "write",
+                                name: "set",
                               },
                               arguments: [
                                 {
                                   kind: "arr",
-                                  loc: [156, 27, 156, 29],
+                                  loc: [156, 25, 156, 27],
                                   elements: [],
                                 },
                               ],
                             },
                             {
                               kind: "()",
-                              loc: [157, 15, 157, 30],
+                              loc: [157, 15, 157, 28],
                               expression: {
                                 kind: ".",
-                                loc: [157, 15, 157, 26],
+                                loc: [157, 15, 157, 24],
                                 expression: {
                                   kind: "id",
                                   loc: [157, 15, 157, 20],
                                   text: "flags",
-                                  bindingKey: "flags$2zaogzi40us1o$3",
+                                  bindingKey: "flags$2nnba74xugz2e$3",
                                 },
-                                name: "write",
+                                name: "set",
                               },
                               arguments: [
                                 {
                                   kind: "arr",
-                                  loc: [157, 27, 157, 29],
+                                  loc: [157, 25, 157, 27],
                                   elements: [],
                                 },
                               ],

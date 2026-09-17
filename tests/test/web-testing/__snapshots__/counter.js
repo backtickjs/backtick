@@ -12,7 +12,7 @@ async function Counter() {
     {
       version: "0.0.0",
       filePath: "web-testing/counter.test.tsx",
-      fileHash: "1mkfpekdj7tcq",
+      fileHash: "2x6geiwtygybj",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -27,7 +27,7 @@ async function Counter() {
             kind: "id",
             loc: [11, 11, 11, 16],
             text: "count",
-            bindingKey: "count$1mkfpekdj7tcq$0",
+            bindingKey: "count$2x6geiwtygybj$0",
           },
           initializer: {
             kind: "()",
@@ -61,7 +61,7 @@ async function Counter() {
             children: [
               {
                 kind: "jsx",
-                loc: [14, 9, 14, 75],
+                loc: [14, 9, 14, 72],
                 type: {
                   kind: "string",
                   loc: [14, 10, 14, 16],
@@ -72,46 +72,46 @@ async function Counter() {
                     name: "onclick",
                     initializer: {
                       kind: "=>",
-                      loc: [14, 26, 14, 61],
+                      loc: [14, 26, 14, 58],
                       parameters: [],
                       body: {
                         kind: "()",
-                        loc: [14, 32, 14, 61],
+                        loc: [14, 32, 14, 58],
                         expression: {
                           kind: ".",
-                          loc: [14, 32, 14, 43],
+                          loc: [14, 32, 14, 41],
                           expression: {
                             kind: "id",
                             loc: [14, 32, 14, 37],
                             text: "count",
-                            bindingKey: "count$1mkfpekdj7tcq$0",
+                            bindingKey: "count$2x6geiwtygybj$0",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "binop",
-                            loc: [14, 44, 14, 60],
+                            loc: [14, 42, 14, 57],
                             left: {
                               kind: "()",
-                              loc: [14, 44, 14, 56],
+                              loc: [14, 42, 14, 53],
                               expression: {
                                 kind: ".",
-                                loc: [14, 44, 14, 54],
+                                loc: [14, 42, 14, 51],
                                 expression: {
                                   kind: "id",
-                                  loc: [14, 44, 14, 49],
+                                  loc: [14, 42, 14, 47],
                                   text: "count",
-                                  bindingKey: "count$1mkfpekdj7tcq$0",
+                                  bindingKey: "count$2x6geiwtygybj$0",
                                 },
-                                name: "read",
+                                name: "get",
                               },
                               arguments: [],
                             },
                             operatorToken: "+",
                             right: {
                               kind: "number",
-                              loc: [14, 59, 14, 60],
+                              loc: [14, 56, 14, 57],
                               value: 1,
                             },
                           },
@@ -123,14 +123,14 @@ async function Counter() {
                 children: [
                   {
                     kind: "string",
-                    loc: [14, 63, 14, 66],
+                    loc: [14, 60, 14, 63],
                     text: "Add",
                   },
                 ],
               },
               {
                 kind: "jsx",
-                loc: [15, 9, 15, 42],
+                loc: [15, 9, 15, 41],
                 type: {
                   kind: "string",
                   loc: [15, 10, 15, 11],
@@ -140,7 +140,7 @@ async function Counter() {
                 children: [
                   {
                     kind: "binop",
-                    loc: [15, 13, 15, 37],
+                    loc: [15, 13, 15, 36],
                     left: {
                       kind: "string",
                       loc: [15, 13, 15, 22],
@@ -149,17 +149,17 @@ async function Counter() {
                     operatorToken: "+",
                     right: {
                       kind: "()",
-                      loc: [15, 25, 15, 37],
+                      loc: [15, 25, 15, 36],
                       expression: {
                         kind: ".",
-                        loc: [15, 25, 15, 35],
+                        loc: [15, 25, 15, 34],
                         expression: {
                           kind: "id",
                           loc: [15, 25, 15, 30],
                           text: "count",
-                          bindingKey: "count$1mkfpekdj7tcq$0",
+                          bindingKey: "count$2x6geiwtygybj$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },

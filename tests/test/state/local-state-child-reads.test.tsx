@@ -24,11 +24,11 @@ const ReadingRow = async ({
 }) => (
   <div>
     <span
-      style={cs`"font-size: " + ($selected.read() === $id ? 20 : 16) + "px"`}
+      style={cs`"font-size: " + ($selected.get() === $id ? 20 : 16) + "px"`}
     >
-      {cs`"row " + $id + " of " + $selected.read()`}
+      {cs`"row " + $id + " of " + $selected.get()`}
     </span>
-    {cs`$selected.read() === $id ? ${(<span>marker</span>)} : null`}
+    {cs`$selected.get() === $id ? ${(<span>marker</span>)} : null`}
   </div>
 );
 
@@ -37,7 +37,7 @@ async function ReadingPanel() {
     const selected = $state(0);
     return (
       <div>
-        <span onclick={() => selected.write(1)}>select</span>
+        <span onclick={() => selected.set(1)}>select</span>
         <ReadingRow id={0} selected={selected} />
         <ReadingRow id={1} selected={selected} />
       </div>

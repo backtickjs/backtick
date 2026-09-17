@@ -1,0 +1,59 @@
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_greet                           → greet
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)<                                   → <
+(                                    → (
+name                                 → name
+:                                    → : 
+string                               → string
+) =>                                 → ) => 
+string                               → string
+>(                                   → >(
+__cs_name                            → name
+ =>                                  → ) => 
+"hi "                                → "hi "
+ +                                   →  + 
+__cs_name                            → name
+)                                    → )
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+<                                    → (\n      <
+span                                 → span
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_greet                           → greet
+)                                    → 
+.                                    → .
+set                                  → set
+(                                    → (
+__cs_name                            → name
+ =>                                  → ) => 
+"bye "                               → "bye "
+ +                                   →  + 
+__cs_name                            → name
+)                                    → )
+)}                                   → }
+>{cs.lift(                           → >\n        {
+cs.receiver(                         → 
+__cs_greet                           → greet
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
+(                                    → (
+"ada"                                → "ada"
+)                                    → )
+)}</                                 → }\n      </
+span                                 → span
+>                                    → >\n    )
+);                                   → ;
+\n})())                              → \n  }`

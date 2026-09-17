@@ -14,7 +14,7 @@ async function OwnCounter() {
     {
       version: "0.0.0",
       filePath: "state/local-state-instances.test.tsx",
-      fileHash: "bdk1wwrsnmai",
+      fileHash: "4rab33ccyjy9",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -29,7 +29,7 @@ async function OwnCounter() {
             kind: "id",
             loc: [13, 11, 13, 15],
             text: "size",
-            bindingKey: "size$bdk1wwrsnmai$0",
+            bindingKey: "size$4rab33ccyjy9$0",
           },
           initializer: {
             kind: "()",
@@ -64,10 +64,10 @@ async function OwnCounter() {
                 name: "style",
                 initializer: {
                   kind: "binop",
-                  loc: [16, 16, 16, 50],
+                  loc: [16, 16, 16, 49],
                   left: {
                     kind: "binop",
-                    loc: [16, 16, 16, 43],
+                    loc: [16, 16, 16, 42],
                     left: {
                       kind: "string",
                       loc: [16, 16, 16, 29],
@@ -76,17 +76,17 @@ async function OwnCounter() {
                     operatorToken: "+",
                     right: {
                       kind: "()",
-                      loc: [16, 32, 16, 43],
+                      loc: [16, 32, 16, 42],
                       expression: {
                         kind: ".",
-                        loc: [16, 32, 16, 41],
+                        loc: [16, 32, 16, 40],
                         expression: {
                           kind: "id",
                           loc: [16, 32, 16, 36],
                           text: "size",
-                          bindingKey: "size$bdk1wwrsnmai$0",
+                          bindingKey: "size$4rab33ccyjy9$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -94,7 +94,7 @@ async function OwnCounter() {
                   operatorToken: "+",
                   right: {
                     kind: "string",
-                    loc: [16, 46, 16, 50],
+                    loc: [16, 45, 16, 49],
                     text: "px",
                   },
                 },
@@ -111,42 +111,42 @@ async function OwnCounter() {
                     statements: [
                       {
                         kind: "()",
-                        loc: [18, 11, 18, 38],
+                        loc: [18, 11, 18, 35],
                         expression: {
                           kind: ".",
-                          loc: [18, 11, 18, 21],
+                          loc: [18, 11, 18, 19],
                           expression: {
                             kind: "id",
                             loc: [18, 11, 18, 15],
                             text: "size",
-                            bindingKey: "size$bdk1wwrsnmai$0",
+                            bindingKey: "size$4rab33ccyjy9$0",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "binop",
-                            loc: [18, 22, 18, 37],
+                            loc: [18, 20, 18, 34],
                             left: {
                               kind: "()",
-                              loc: [18, 22, 18, 33],
+                              loc: [18, 20, 18, 30],
                               expression: {
                                 kind: ".",
-                                loc: [18, 22, 18, 31],
+                                loc: [18, 20, 18, 28],
                                 expression: {
                                   kind: "id",
-                                  loc: [18, 22, 18, 26],
+                                  loc: [18, 20, 18, 24],
                                   text: "size",
-                                  bindingKey: "size$bdk1wwrsnmai$0",
+                                  bindingKey: "size$4rab33ccyjy9$0",
                                 },
-                                name: "read",
+                                name: "get",
                               },
                               arguments: [],
                             },
                             operatorToken: "+",
                             right: {
                               kind: "number",
-                              loc: [18, 36, 18, 37],
+                              loc: [18, 33, 18, 34],
                               value: 1,
                             },
                           },

@@ -18,7 +18,7 @@ async function Rows() {
   return cs`{
     const rows = $state<Row[]>([]);
     const add = (row: Row) => {
-      rows.write([row]);
+      rows.set([row]);
     };
     const label = (row: Row) => {
       return row.label;
@@ -27,9 +27,7 @@ async function Rows() {
       <div>
         <span onclick={() => add({ id: 1, label: "one" })}>add</span>
         <div>
-          <For each={rows.read()}>
-            {(row: Row) => <span>{label(row)}</span>}
-          </For>
+          <For each={rows.get()}>{(row: Row) => <span>{label(row)}</span>}</For>
         </div>
       </div>
     );

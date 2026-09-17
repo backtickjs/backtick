@@ -16,7 +16,7 @@ export default async function Pointer() {
       <div
         style={$pad}
         onclick={(e) =>
-          at.write(
+          at.set(
             e.clientX +
               " , " +
               e.clientY +
@@ -27,7 +27,7 @@ export default async function Pointer() {
           )
         }
       >
-        {at.read()}
+        {at.get()}
       </div>
     );
   }`;

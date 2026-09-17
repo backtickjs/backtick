@@ -7,7 +7,7 @@ const make = (f) =>
     {
       version: "0.0.0",
       filePath: "stdlib/builtin-hole-sharing.test.tsx",
-      fileHash: "xbqnol5ifohi",
+      fileHash: "3vatah1osfcoe",
       splices: { $f: { value: f, params: [] } },
       captures: [],
     },
@@ -17,13 +17,13 @@ const make = (f) =>
       statements: [
         {
           kind: "return",
-          loc: [8, 5, 8, 25],
+          loc: [8, 5, 8, 24],
           expression: {
             kind: "()",
-            loc: [8, 12, 8, 24],
+            loc: [8, 12, 8, 23],
             expression: {
               kind: ".",
-              loc: [8, 12, 8, 22],
+              loc: [8, 12, 8, 21],
               expression: {
                 kind: "()",
                 loc: [8, 12, 8, 17],
@@ -40,7 +40,7 @@ const make = (f) =>
                   },
                 ],
               },
-              name: "read",
+              name: "get",
             },
             arguments: [],
           },
@@ -53,7 +53,7 @@ const wrapped = cs.create(
   {
     version: "0.0.0",
     filePath: "stdlib/builtin-hole-sharing.test.tsx",
-    fileHash: "xbqnol5ifohi",
+    fileHash: "3vatah1osfcoe",
     splices: { $state: { value: state, params: [] } },
     captures: [],
   },
@@ -68,7 +68,7 @@ const wrapped = cs.create(
           kind: "id",
           loc: [11, 21, 11, 22],
           text: "n",
-          bindingKey: "n$xbqnol5ifohi$0",
+          bindingKey: "n$3vatah1osfcoe$0",
         },
       },
     ],
@@ -88,7 +88,7 @@ const wrapped = cs.create(
             kind: "id",
             loc: [11, 42, 11, 43],
             text: "n",
-            bindingKey: "n$xbqnol5ifohi$0",
+            bindingKey: "n$3vatah1osfcoe$0",
           },
           operatorToken: "+",
           right: {
@@ -110,7 +110,7 @@ it("builtinHoleSharing", async (t) => {
       {
         version: "0.0.0",
         filePath: "stdlib/builtin-hole-sharing.test.tsx",
-        fileHash: "xbqnol5ifohi",
+        fileHash: "3vatah1osfcoe",
         splices: {
           $0splice0: { value: make(state), params: [] },
           $0splice1: { value: make(wrapped), params: [] },

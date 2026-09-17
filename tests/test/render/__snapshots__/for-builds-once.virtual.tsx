@@ -22,18 +22,18 @@ async function WaitingList({ more }: { more: Prop<() => boolean> }) {
     const __cs_items = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>([]));
     const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
         if ((cs.condition((cs.splice((more)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((more)) satisfies typeof cs.ClientUnknown)())) {
-            cs.statement(cs.receiver(__cs_items).write(cs.splice((answerItems)) satisfies typeof cs.ClientUnknown));
+            cs.statement(cs.receiver(__cs_items).set(cs.splice((answerItems)) satisfies typeof cs.ClientUnknown));
         }
     }, 0));
-    return cs.const(<For each={cs.lift(cs.receiver(__cs_items).read())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>);
+    return cs.const(<For each={cs.lift(cs.receiver(__cs_items).get())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>);
 })());
 }
 
 const forBuildsOnce = cs.lift((() => {
     const __cs_asked = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<span>{cs.lift("asked " + cs.receiver(__cs_asked).read())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_asked).write(cs.receiver(__cs_asked).read() + 1));
-        return cs.const(cs.receiver(__cs_asked).read() < 5);
+    return cs.const(<div>{cs.lift(<span>{cs.lift("asked " + cs.receiver(__cs_asked).get())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
+        cs.statement(cs.receiver(__cs_asked).set(cs.receiver(__cs_asked).get() + 1));
+        return cs.const(cs.receiver(__cs_asked).get() < 5);
     })}/>)}</div>);
 })());
 

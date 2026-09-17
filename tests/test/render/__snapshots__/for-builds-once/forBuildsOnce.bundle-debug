@@ -2,12 +2,12 @@
   const asked = $0()(0);
   return <div>
     {<span>
-      {"asked " + asked.read()}
+      {"asked " + asked.get()}
     </span>}
     {<{$1()}
       more={() => () => {
-        asked.write(asked.read() + 1);
-        return asked.read() < 5;
+        asked.set(asked.get() + 1);
+        return asked.get() < 5;
       }}
     />}
   </div>;
@@ -17,11 +17,11 @@
   const items = $0()([]);
   const started = $1().setTimeout(() => {
     if ($2()()) {
-      items.write($3());
+      items.set($3());
     }
   }, 0);
   return <{$4()}
-    each={() => items.read()}
+    each={() => items.get()}
   >
     {() => (item) => <em>
       {item}

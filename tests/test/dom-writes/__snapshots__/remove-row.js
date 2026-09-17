@@ -14,7 +14,7 @@ async function RemovableRows() {
     {
       version: "0.0.0",
       filePath: "dom-writes/remove-row.test.tsx",
-      fileHash: "2smzj2vxbnzqc",
+      fileHash: "1dh0kxf6cd5v6",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -32,7 +32,7 @@ async function RemovableRows() {
             kind: "id",
             loc: [13, 11, 13, 14],
             text: "ids",
-            bindingKey: "ids$2smzj2vxbnzqc$0",
+            bindingKey: "ids$1dh0kxf6cd5v6$0",
           },
           initializer: {
             kind: "()",
@@ -113,17 +113,17 @@ async function RemovableRows() {
                         name: "each",
                         initializer: {
                           kind: "()",
-                          loc: [17, 22, 17, 32],
+                          loc: [17, 22, 17, 31],
                           expression: {
                             kind: ".",
-                            loc: [17, 22, 17, 30],
+                            loc: [17, 22, 17, 29],
                             expression: {
                               kind: "id",
                               loc: [17, 22, 17, 25],
                               text: "ids",
-                              bindingKey: "ids$2smzj2vxbnzqc$0",
+                              bindingKey: "ids$1dh0kxf6cd5v6$0",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
@@ -141,7 +141,7 @@ async function RemovableRows() {
                               kind: "id",
                               loc: [18, 15, 18, 17],
                               text: "id",
-                              bindingKey: "id$2smzj2vxbnzqc$1",
+                              bindingKey: "id$1dh0kxf6cd5v6$1",
                             },
                           },
                         ],
@@ -169,7 +169,7 @@ async function RemovableRows() {
                                   kind: "id",
                                   loc: [19, 32, 19, 34],
                                   text: "id",
-                                  bindingKey: "id$2smzj2vxbnzqc$1",
+                                  bindingKey: "id$1dh0kxf6cd5v6$1",
                                 },
                               },
                             },
@@ -198,93 +198,86 @@ async function RemovableRows() {
                                       name: "onclick",
                                       initializer: {
                                         kind: "=>",
-                                        loc: [22, 30, 23, 79],
+                                        loc: [22, 30, 23, 71],
                                         parameters: [],
                                         body: {
                                           kind: "()",
-                                          loc: [23, 23, 23, 79],
+                                          loc: [23, 23, 23, 71],
                                           expression: {
                                             kind: ".",
-                                            loc: [23, 23, 23, 33],
+                                            loc: [23, 23, 23, 30],
                                             expression: {
                                               kind: "id",
                                               loc: [23, 23, 23, 26],
                                               text: "ids",
-                                              bindingKey: "ids$2smzj2vxbnzqc$0",
+                                              bindingKey: "ids$1dh0kxf6cd5v6$0",
                                             },
-                                            name: "update",
+                                            name: "set",
                                           },
                                           arguments: [
                                             {
-                                              kind: "=>",
-                                              loc: [23, 34, 23, 78],
-                                              parameters: [
+                                              kind: "()",
+                                              loc: [23, 31, 23, 70],
+                                              expression: {
+                                                kind: ".",
+                                                loc: [23, 31, 23, 47],
+                                                expression: {
+                                                  kind: "()",
+                                                  loc: [23, 31, 23, 40],
+                                                  expression: {
+                                                    kind: ".",
+                                                    loc: [23, 31, 23, 38],
+                                                    expression: {
+                                                      kind: "id",
+                                                      loc: [23, 31, 23, 34],
+                                                      text: "ids",
+                                                      bindingKey:
+                                                        "ids$1dh0kxf6cd5v6$0",
+                                                    },
+                                                    name: "get",
+                                                  },
+                                                  arguments: [],
+                                                },
+                                                name: "filter",
+                                              },
+                                              arguments: [
                                                 {
-                                                  kind: "param",
-                                                  loc: [23, 35, 23, 39],
-                                                  name: {
-                                                    kind: "id",
-                                                    loc: [23, 35, 23, 39],
-                                                    text: "held",
-                                                    bindingKey:
-                                                      "held$2smzj2vxbnzqc$2",
+                                                  kind: "=>",
+                                                  loc: [23, 48, 23, 69],
+                                                  parameters: [
+                                                    {
+                                                      kind: "param",
+                                                      loc: [23, 49, 23, 53],
+                                                      name: {
+                                                        kind: "id",
+                                                        loc: [23, 49, 23, 53],
+                                                        text: "each",
+                                                        bindingKey:
+                                                          "each$1dh0kxf6cd5v6$2",
+                                                      },
+                                                    },
+                                                  ],
+                                                  body: {
+                                                    kind: "binop",
+                                                    loc: [23, 58, 23, 69],
+                                                    left: {
+                                                      kind: "id",
+                                                      loc: [23, 58, 23, 62],
+                                                      text: "each",
+                                                      bindingKey:
+                                                        "each$1dh0kxf6cd5v6$2",
+                                                    },
+                                                    operatorToken: "!==",
+                                                    right: {
+                                                      kind: "id",
+                                                      loc: [23, 67, 23, 69],
+                                                      text: "id",
+                                                      bindingKey:
+                                                        "id$1dh0kxf6cd5v6$1",
+                                                    },
                                                   },
                                                 },
                                               ],
-                                              body: {
-                                                kind: "()",
-                                                loc: [23, 44, 23, 78],
-                                                expression: {
-                                                  kind: ".",
-                                                  loc: [23, 44, 23, 55],
-                                                  expression: {
-                                                    kind: "id",
-                                                    loc: [23, 44, 23, 48],
-                                                    text: "held",
-                                                    bindingKey:
-                                                      "held$2smzj2vxbnzqc$2",
-                                                  },
-                                                  name: "filter",
-                                                },
-                                                arguments: [
-                                                  {
-                                                    kind: "=>",
-                                                    loc: [23, 56, 23, 77],
-                                                    parameters: [
-                                                      {
-                                                        kind: "param",
-                                                        loc: [23, 57, 23, 61],
-                                                        name: {
-                                                          kind: "id",
-                                                          loc: [23, 57, 23, 61],
-                                                          text: "each",
-                                                          bindingKey:
-                                                            "each$2smzj2vxbnzqc$3",
-                                                        },
-                                                      },
-                                                    ],
-                                                    body: {
-                                                      kind: "binop",
-                                                      loc: [23, 66, 23, 77],
-                                                      left: {
-                                                        kind: "id",
-                                                        loc: [23, 66, 23, 70],
-                                                        text: "each",
-                                                        bindingKey:
-                                                          "each$2smzj2vxbnzqc$3",
-                                                      },
-                                                      operatorToken: "!==",
-                                                      right: {
-                                                        kind: "id",
-                                                        loc: [23, 75, 23, 77],
-                                                        text: "id",
-                                                        bindingKey:
-                                                          "id$2smzj2vxbnzqc$1",
-                                                      },
-                                                    },
-                                                  },
-                                                ],
-                                              },
                                             },
                                           ],
                                         },
@@ -305,7 +298,7 @@ async function RemovableRows() {
                                         kind: "id",
                                         loc: [26, 34, 26, 36],
                                         text: "id",
-                                        bindingKey: "id$2smzj2vxbnzqc$1",
+                                        bindingKey: "id$1dh0kxf6cd5v6$1",
                                       },
                                     },
                                   ],

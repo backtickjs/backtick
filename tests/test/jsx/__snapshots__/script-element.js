@@ -12,7 +12,7 @@ async function Card() {
     {
       version: "0.0.0",
       filePath: "jsx/script-element.test.tsx",
-      fileHash: "3hkmsn4zssih0",
+      fileHash: "mvahdj0e0ick",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -27,7 +27,7 @@ async function Card() {
             kind: "id",
             loc: [11, 11, 11, 16],
             text: "label",
-            bindingKey: "label$3hkmsn4zssih0$0",
+            bindingKey: "label$mvahdj0e0ick$0",
           },
           initializer: {
             kind: "()",
@@ -53,7 +53,7 @@ async function Card() {
             kind: "id",
             loc: [15, 11, 15, 14],
             text: "row",
-            bindingKey: "row$3hkmsn4zssih0$1",
+            bindingKey: "row$mvahdj0e0ick$1",
           },
           initializer: {
             kind: "=>",
@@ -66,7 +66,7 @@ async function Card() {
                   kind: "id",
                   loc: [15, 18, 15, 22],
                   text: "size",
-                  bindingKey: "size$3hkmsn4zssih0$2",
+                  bindingKey: "size$mvahdj0e0ick$2",
                 },
               },
             ],
@@ -81,7 +81,7 @@ async function Card() {
                     kind: "id",
                     loc: [16, 13, 16, 16],
                     text: "css",
-                    bindingKey: "css$3hkmsn4zssih0$3",
+                    bindingKey: "css$mvahdj0e0ick$3",
                   },
                   initializer: {
                     kind: "binop",
@@ -99,7 +99,7 @@ async function Card() {
                         kind: "id",
                         loc: [16, 35, 16, 39],
                         text: "size",
-                        bindingKey: "size$3hkmsn4zssih0$2",
+                        bindingKey: "size$mvahdj0e0ick$2",
                       },
                     },
                     operatorToken: "+",
@@ -112,35 +112,35 @@ async function Card() {
                 },
                 {
                   kind: "const",
-                  loc: [17, 7, 17, 47],
+                  loc: [17, 7, 17, 45],
                   name: {
                     kind: "id",
                     loc: [17, 13, 17, 18],
                     text: "press",
-                    bindingKey: "press$3hkmsn4zssih0$4",
+                    bindingKey: "press$mvahdj0e0ick$4",
                   },
                   initializer: {
                     kind: "=>",
-                    loc: [17, 21, 17, 46],
+                    loc: [17, 21, 17, 44],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [17, 27, 17, 46],
+                      loc: [17, 27, 17, 44],
                       expression: {
                         kind: ".",
-                        loc: [17, 27, 17, 38],
+                        loc: [17, 27, 17, 36],
                         expression: {
                           kind: "id",
                           loc: [17, 27, 17, 32],
                           text: "label",
-                          bindingKey: "label$3hkmsn4zssih0$0",
+                          bindingKey: "label$mvahdj0e0ick$0",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "string",
-                          loc: [17, 39, 17, 45],
+                          loc: [17, 37, 17, 43],
                           text: "held",
                         },
                       ],
@@ -165,7 +165,7 @@ async function Card() {
                           kind: "id",
                           loc: [19, 21, 19, 24],
                           text: "css",
-                          bindingKey: "css$3hkmsn4zssih0$3",
+                          bindingKey: "css$mvahdj0e0ick$3",
                         },
                       },
                     ],
@@ -185,33 +185,33 @@ async function Card() {
                               kind: "id",
                               loc: [20, 24, 20, 27],
                               text: "css",
-                              bindingKey: "css$3hkmsn4zssih0$3",
+                              bindingKey: "css$mvahdj0e0ick$3",
                             },
                           },
                           {
                             name: "onclick",
                             initializer: {
                               kind: "=>",
-                              loc: [20, 38, 20, 66],
+                              loc: [20, 38, 20, 64],
                               parameters: [],
                               body: {
                                 kind: "()",
-                                loc: [20, 44, 20, 66],
+                                loc: [20, 44, 20, 64],
                                 expression: {
                                   kind: ".",
-                                  loc: [20, 44, 20, 55],
+                                  loc: [20, 44, 20, 53],
                                   expression: {
                                     kind: "id",
                                     loc: [20, 44, 20, 49],
                                     text: "label",
-                                    bindingKey: "label$3hkmsn4zssih0$0",
+                                    bindingKey: "label$mvahdj0e0ick$0",
                                   },
-                                  name: "write",
+                                  name: "set",
                                 },
                                 arguments: [
                                   {
                                     kind: "string",
-                                    loc: [20, 56, 20, 65],
+                                    loc: [20, 54, 20, 63],
                                     text: "pressed",
                                   },
                                 ],
@@ -222,17 +222,17 @@ async function Card() {
                         children: [
                           {
                             kind: "()",
-                            loc: [21, 14, 21, 26],
+                            loc: [21, 14, 21, 25],
                             expression: {
                               kind: ".",
-                              loc: [21, 14, 21, 24],
+                              loc: [21, 14, 21, 23],
                               expression: {
                                 kind: "id",
                                 loc: [21, 14, 21, 19],
                                 text: "label",
-                                bindingKey: "label$3hkmsn4zssih0$0",
+                                bindingKey: "label$mvahdj0e0ick$0",
                               },
-                              name: "read",
+                              name: "get",
                             },
                             arguments: [],
                           },
@@ -279,7 +279,7 @@ async function Card() {
                               kind: "id",
                               loc: [24, 24, 24, 27],
                               text: "css",
-                              bindingKey: "css$3hkmsn4zssih0$3",
+                              bindingKey: "css$mvahdj0e0ick$3",
                             },
                           },
                           {
@@ -288,7 +288,7 @@ async function Card() {
                               kind: "id",
                               loc: [24, 38, 24, 43],
                               text: "press",
-                              bindingKey: "press$3hkmsn4zssih0$4",
+                              bindingKey: "press$mvahdj0e0ick$4",
                             },
                           },
                         ],
@@ -336,7 +336,7 @@ async function Card() {
                   kind: "id",
                   loc: [31, 37, 31, 40],
                   text: "row",
-                  bindingKey: "row$3hkmsn4zssih0$1",
+                  bindingKey: "row$mvahdj0e0ick$1",
                 },
                 arguments: [
                   {

@@ -57,7 +57,7 @@
                               "id",
                               "selected"
                             ],
-                            "write"
+                            "set"
                           ],
                           [
                             1
@@ -122,7 +122,7 @@
                                         "id",
                                         "selected"
                                       ],
-                                      "read"
+                                      "get"
                                     ],
                                     []
                                   ],

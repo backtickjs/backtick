@@ -14,13 +14,13 @@ async function RemovableRows() {
     return (
       <table>
         <tbody>
-          <For each={ids.read()}>
+          <For each={ids.get()}>
             {(id: number) => (
               <tr id={"row-" + id}>
                 <td>
                   <button
                     onclick={() =>
-                      ids.update((held) => held.filter((each) => each !== id))
+                      ids.set(ids.get().filter((each) => each !== id))
                     }
                   >
                     {"remove " + id}

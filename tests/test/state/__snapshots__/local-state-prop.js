@@ -12,20 +12,20 @@ import { children, drawn, fontSize } from "./dom.ts";
 const SharedCounter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
-      [15, 12, 15, 51],
+      [15, 12, 15, 50],
       {
         version: "0.0.0",
         filePath: "state/local-state-prop.test.tsx",
-        fileHash: "1rx4ylseg7d72",
+        fileHash: "1myb4rrcna327",
         splices: { $size: { value: size, params: [] } },
         captures: [],
       },
       () => ({
         kind: "binop",
-        loc: [15, 15, 15, 50],
+        loc: [15, 15, 15, 49],
         left: {
           kind: "binop",
-          loc: [15, 15, 15, 43],
+          loc: [15, 15, 15, 42],
           left: {
             kind: "string",
             loc: [15, 15, 15, 28],
@@ -34,16 +34,16 @@ const SharedCounter = async ({ size }) =>
           operatorToken: "+",
           right: {
             kind: "()",
-            loc: [15, 31, 15, 43],
+            loc: [15, 31, 15, 42],
             expression: {
               kind: ".",
-              loc: [15, 31, 15, 41],
+              loc: [15, 31, 15, 40],
               expression: {
                 kind: "splice",
                 loc: [15, 31, 15, 36],
                 key: "$size",
               },
-              name: "read",
+              name: "get",
             },
             arguments: [],
           },
@@ -51,7 +51,7 @@ const SharedCounter = async ({ size }) =>
         operatorToken: "+",
         right: {
           kind: "string",
-          loc: [15, 46, 15, 50],
+          loc: [15, 45, 15, 49],
           text: "px",
         },
       }),
@@ -61,7 +61,7 @@ const SharedCounter = async ({ size }) =>
       {
         version: "0.0.0",
         filePath: "state/local-state-prop.test.tsx",
-        fileHash: "1rx4ylseg7d72",
+        fileHash: "1myb4rrcna327",
         splices: { $size: { value: size, params: [] } },
         captures: [],
       },
@@ -75,40 +75,40 @@ const SharedCounter = async ({ size }) =>
           statements: [
             {
               kind: "()",
-              loc: [17, 7, 17, 36],
+              loc: [17, 7, 17, 33],
               expression: {
                 kind: ".",
-                loc: [17, 7, 17, 18],
+                loc: [17, 7, 17, 16],
                 expression: {
                   kind: "splice",
                   loc: [17, 7, 17, 12],
                   key: "$size",
                 },
-                name: "write",
+                name: "set",
               },
               arguments: [
                 {
                   kind: "binop",
-                  loc: [17, 19, 17, 35],
+                  loc: [17, 17, 17, 32],
                   left: {
                     kind: "()",
-                    loc: [17, 19, 17, 31],
+                    loc: [17, 17, 17, 28],
                     expression: {
                       kind: ".",
-                      loc: [17, 19, 17, 29],
+                      loc: [17, 17, 17, 26],
                       expression: {
                         kind: "splice",
-                        loc: [17, 19, 17, 24],
+                        loc: [17, 17, 17, 22],
                         key: "$size",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
                   operatorToken: "+",
                   right: {
                     kind: "number",
-                    loc: [17, 34, 17, 35],
+                    loc: [17, 31, 17, 32],
                     value: 1,
                   },
                 },
@@ -126,7 +126,7 @@ async function SharingPanel() {
     {
       version: "0.0.0",
       filePath: "state/local-state-prop.test.tsx",
-      fileHash: "1rx4ylseg7d72",
+      fileHash: "1myb4rrcna327",
       splices: {
         $state: { value: state, params: [] },
         $SharedCounter: { value: SharedCounter, params: [] },
@@ -144,7 +144,7 @@ async function SharingPanel() {
             kind: "id",
             loc: [26, 11, 26, 15],
             text: "size",
-            bindingKey: "size$1rx4ylseg7d72$0",
+            bindingKey: "size$1myb4rrcna327$0",
           },
           initializer: {
             kind: "()",
@@ -191,7 +191,7 @@ async function SharingPanel() {
                       kind: "id",
                       loc: [29, 30, 29, 34],
                       text: "size",
-                      bindingKey: "size$1rx4ylseg7d72$0",
+                      bindingKey: "size$1myb4rrcna327$0",
                     },
                   },
                 ],
@@ -212,7 +212,7 @@ async function SharingPanel() {
                       kind: "id",
                       loc: [30, 30, 30, 34],
                       text: "size",
-                      bindingKey: "size$1rx4ylseg7d72$0",
+                      bindingKey: "size$1myb4rrcna327$0",
                     },
                   },
                 ],

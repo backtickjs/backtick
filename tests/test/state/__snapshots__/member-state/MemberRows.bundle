@@ -171,7 +171,7 @@
                             "id",
                             "held"
                           ],
-                          "read"
+                          "get"
                         ],
                         []
                       ]
@@ -207,7 +207,7 @@
                                   ],
                                   "label"
                                 ],
-                                "write"
+                                "set"
                               ],
                               [
                                 "pressed"
@@ -227,7 +227,7 @@
                               ],
                               "label"
                             ],
-                            "read"
+                            "get"
                           ],
                           []
                         ]

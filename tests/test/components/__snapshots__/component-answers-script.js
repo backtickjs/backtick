@@ -15,7 +15,7 @@ async function Panel() {
     {
       version: "0.0.0",
       filePath: "components/component-answers-script.test.tsx",
-      fileHash: "2umhl19mvnbwa",
+      fileHash: "2g65d04vf49d2",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -30,7 +30,7 @@ async function Panel() {
             kind: "id",
             loc: [14, 11, 14, 12],
             text: "n",
-            bindingKey: "n$2umhl19mvnbwa$0",
+            bindingKey: "n$2g65d04vf49d2$0",
           },
           initializer: {
             kind: "()",
@@ -51,10 +51,10 @@ async function Panel() {
         },
         {
           kind: "return",
-          loc: [15, 5, 15, 32],
+          loc: [15, 5, 15, 31],
           expression: {
             kind: "jsx",
-            loc: [15, 12, 15, 31],
+            loc: [15, 12, 15, 30],
             type: {
               kind: "string",
               loc: [15, 13, 15, 15],
@@ -64,17 +64,17 @@ async function Panel() {
             children: [
               {
                 kind: "()",
-                loc: [15, 17, 15, 25],
+                loc: [15, 17, 15, 24],
                 expression: {
                   kind: ".",
-                  loc: [15, 17, 15, 23],
+                  loc: [15, 17, 15, 22],
                   expression: {
                     kind: "id",
                     loc: [15, 17, 15, 18],
                     text: "n",
-                    bindingKey: "n$2umhl19mvnbwa$0",
+                    bindingKey: "n$2g65d04vf49d2$0",
                   },
-                  name: "read",
+                  name: "get",
                 },
                 arguments: [],
               },

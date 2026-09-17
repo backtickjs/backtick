@@ -9,7 +9,7 @@
       body={() => $1(count, Badge)}
     />}
     {<button
-      onclick={() => count.write(count.read() + 1)}
+      onclick={() => count.set(count.get() + 1)}
     >
       {"more"}
     </button>}
@@ -17,10 +17,10 @@
 }
 
 #f1 = ($0, $1) => <$0
-  n={$1.read()}
+  n={$1.get()}
 >
   {<u>
-    {"kid " + $1.read()}
+    {"kid " + $1.get()}
   </u>}
 </$0>
 

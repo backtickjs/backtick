@@ -2,12 +2,12 @@
   const count = $0()(0);
   return <div>
     {<button
-      onclick={() => count.write(count.read() + 1)}
+      onclick={() => count.set(count.get() + 1)}
     >
       {"Add"}
     </button>}
     {<p>
-      {"Count: " + count.read()}
+      {"Count: " + count.get()}
     </p>}
   </div>;
 }

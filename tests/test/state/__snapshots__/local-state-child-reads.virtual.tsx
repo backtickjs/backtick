@@ -24,18 +24,18 @@ const ReadingRow = async ({
 }) => (
   <div>
     <span
-      style={cs.lift(cs.const("font-size: " + (cs.receiver(cs.splice((selected)) satisfies typeof cs.ClientUnknown).read() === cs.splice((id)) satisfies typeof cs.ClientUnknown ? 20 : 16) + "px"))}
+      style={cs.lift(cs.const("font-size: " + (cs.receiver(cs.splice((selected)) satisfies typeof cs.ClientUnknown).get() === cs.splice((id)) satisfies typeof cs.ClientUnknown ? 20 : 16) + "px"))}
     >
-      {cs.lift(cs.const("row " + (cs.splice((id)) satisfies typeof cs.ClientUnknown) + " of " + cs.receiver(cs.splice((selected)) satisfies typeof cs.ClientUnknown).read()))}
+      {cs.lift(cs.const("row " + (cs.splice((id)) satisfies typeof cs.ClientUnknown) + " of " + cs.receiver(cs.splice((selected)) satisfies typeof cs.ClientUnknown).get()))}
     </span>
-    {cs.lift(cs.const(cs.receiver(cs.splice((selected)) satisfies typeof cs.ClientUnknown).read() === cs.splice((id)) satisfies typeof cs.ClientUnknown ? cs.splice((<span>marker</span>)) satisfies typeof cs.ClientUnknown : null))}
+    {cs.lift(cs.const(cs.receiver(cs.splice((selected)) satisfies typeof cs.ClientUnknown).get() === cs.splice((id)) satisfies typeof cs.ClientUnknown ? cs.splice((<span>marker</span>)) satisfies typeof cs.ClientUnknown : null))}
   </div>
 );
 
 async function ReadingPanel() {
   return cs.lift((() => {
     const __cs_selected = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<span onclick={cs.lift(() => cs.receiver(__cs_selected).write(1))}>select</span>)}{cs.lift(<ReadingRow id={cs.lift(0)} selected={cs.lift(__cs_selected)}/>)}{cs.lift(<ReadingRow id={cs.lift(1)} selected={cs.lift(__cs_selected)}/>)}</div>);
+    return cs.const(<div>{cs.lift(<span onclick={cs.lift(() => cs.receiver(__cs_selected).set(1))}>select</span>)}{cs.lift(<ReadingRow id={cs.lift(0)} selected={cs.lift(__cs_selected)}/>)}{cs.lift(<ReadingRow id={cs.lift(1)} selected={cs.lift(__cs_selected)}/>)}</div>);
 })());
 }
 

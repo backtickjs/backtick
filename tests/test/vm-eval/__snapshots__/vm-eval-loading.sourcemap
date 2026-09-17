@@ -26,7 +26,7 @@ cs.receiver(                         →
 __cs_held                            → held
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  ===                                 →  === 
 null                                 → null
@@ -49,7 +49,7 @@ cs.receiver(                         →
 __cs_held                            → held
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  as                                  →  as 
 Bundle                               → Bundle

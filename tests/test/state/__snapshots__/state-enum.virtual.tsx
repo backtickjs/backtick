@@ -22,7 +22,7 @@ const colorName: Client<(c: Color) => string> = cs.lift(cs.const((__cs_c: Color)
 async function Swatch() {
   return cs.lift((() => {
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(cs.splice(Color.Red) satisfies typeof cs.ClientUnknown));
-    return cs.const(<span onclick={cs.lift(() => cs.receiver(__cs_held).write(cs.splice(Color.Blue) satisfies typeof cs.ClientUnknown))}>{cs.lift((cs.splice((colorName)) satisfies typeof cs.ClientUnknown)(cs.receiver(__cs_held).read()))}</span>);
+    return cs.const(<span onclick={cs.lift(() => cs.receiver(__cs_held).set(cs.splice(Color.Blue) satisfies typeof cs.ClientUnknown))}>{cs.lift((cs.splice((colorName)) satisfies typeof cs.ClientUnknown)(cs.receiver(__cs_held).get()))}</span>);
 })());
 }
 

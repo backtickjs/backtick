@@ -14,7 +14,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Row() {
   return cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => cs.receiver(__cs_count).write(cs.receiver(__cs_count).read() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(cs.receiver(__cs_count).read() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + cs.receiver(__cs_count).read() + " times")}</span>)}</button>);
+    return cs.const(<button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(cs.receiver(__cs_count).get() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + cs.receiver(__cs_count).get() + " times")}</span>)}</button>);
 })());
 }
 

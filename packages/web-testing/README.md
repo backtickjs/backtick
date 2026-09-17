@@ -15,8 +15,8 @@ async function Counter() {
     const count = $state(0);
     return (
       <div>
-        <button onclick={() => count.write(count.read() + 1)}>Add</button>
-        <p>{"Count: " + count.read()}</p>
+        <button onclick={() => count.set(count.get() + 1)}>Add</button>
+        <p>{"Count: " + count.get()}</p>
       </div>
     );
   }`;

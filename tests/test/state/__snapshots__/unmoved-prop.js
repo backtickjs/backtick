@@ -15,7 +15,7 @@ async function SelectableRows() {
     {
       version: "0.0.0",
       filePath: "state/unmoved-prop.test.tsx",
-      fileHash: "10sk3wfrc0dvh",
+      fileHash: "2i3sz19b0mqz4",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -33,7 +33,7 @@ async function SelectableRows() {
             kind: "id",
             loc: [14, 11, 14, 19],
             text: "selected",
-            bindingKey: "selected$10sk3wfrc0dvh$0",
+            bindingKey: "selected$2i3sz19b0mqz4$0",
           },
           initializer: {
             kind: "()",
@@ -67,7 +67,7 @@ async function SelectableRows() {
             children: [
               {
                 kind: "jsx",
-                loc: [17, 9, 17, 62],
+                loc: [17, 9, 17, 60],
                 type: {
                   kind: "string",
                   loc: [17, 10, 17, 14],
@@ -78,26 +78,26 @@ async function SelectableRows() {
                     name: "onclick",
                     initializer: {
                       kind: "=>",
-                      loc: [17, 24, 17, 47],
+                      loc: [17, 24, 17, 45],
                       parameters: [],
                       body: {
                         kind: "()",
-                        loc: [17, 30, 17, 47],
+                        loc: [17, 30, 17, 45],
                         expression: {
                           kind: ".",
-                          loc: [17, 30, 17, 44],
+                          loc: [17, 30, 17, 42],
                           expression: {
                             kind: "id",
                             loc: [17, 30, 17, 38],
                             text: "selected",
-                            bindingKey: "selected$10sk3wfrc0dvh$0",
+                            bindingKey: "selected$2i3sz19b0mqz4$0",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "number",
-                            loc: [17, 45, 17, 46],
+                            loc: [17, 43, 17, 44],
                             value: 1,
                           },
                         ],
@@ -108,7 +108,7 @@ async function SelectableRows() {
                 children: [
                   {
                     kind: "string",
-                    loc: [17, 49, 17, 55],
+                    loc: [17, 47, 17, 53],
                     text: "select",
                   },
                 ],
@@ -169,7 +169,7 @@ async function SelectableRows() {
                               kind: "id",
                               loc: [20, 15, 20, 17],
                               text: "id",
-                              bindingKey: "id$10sk3wfrc0dvh$1",
+                              bindingKey: "id$2i3sz19b0mqz4$1",
                             },
                           },
                         ],
@@ -186,42 +186,42 @@ async function SelectableRows() {
                               name: "href",
                               initializer: {
                                 kind: "?:",
-                                loc: [21, 24, 21, 68],
+                                loc: [21, 24, 21, 67],
                                 condition: {
                                   kind: "binop",
-                                  loc: [21, 24, 21, 46],
+                                  loc: [21, 24, 21, 45],
                                   left: {
                                     kind: "()",
-                                    loc: [21, 24, 21, 39],
+                                    loc: [21, 24, 21, 38],
                                     expression: {
                                       kind: ".",
-                                      loc: [21, 24, 21, 37],
+                                      loc: [21, 24, 21, 36],
                                       expression: {
                                         kind: "id",
                                         loc: [21, 24, 21, 32],
                                         text: "selected",
-                                        bindingKey: "selected$10sk3wfrc0dvh$0",
+                                        bindingKey: "selected$2i3sz19b0mqz4$0",
                                       },
-                                      name: "read",
+                                      name: "get",
                                     },
                                     arguments: [],
                                   },
                                   operatorToken: "===",
                                   right: {
                                     kind: "id",
-                                    loc: [21, 44, 21, 46],
+                                    loc: [21, 43, 21, 45],
                                     text: "id",
-                                    bindingKey: "id$10sk3wfrc0dvh$1",
+                                    bindingKey: "id$2i3sz19b0mqz4$1",
                                   },
                                 },
                                 whenTrue: {
                                   kind: "string",
-                                  loc: [21, 49, 21, 56],
+                                  loc: [21, 48, 21, 55],
                                   text: "#open",
                                 },
                                 whenFalse: {
                                   kind: "string",
-                                  loc: [21, 59, 21, 68],
+                                  loc: [21, 58, 21, 67],
                                   text: "#closed",
                                 },
                               },
@@ -241,7 +241,7 @@ async function SelectableRows() {
                                 kind: "id",
                                 loc: [22, 27, 22, 29],
                                 text: "id",
-                                bindingKey: "id$10sk3wfrc0dvh$1",
+                                bindingKey: "id$2i3sz19b0mqz4$1",
                               },
                             },
                           ],

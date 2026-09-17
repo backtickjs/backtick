@@ -17,7 +17,7 @@ it("vmEvalLoading", async (t) => {
       {
         version: "0.0.0",
         filePath: "vm-eval/vm-eval-loading.test.tsx",
-        fileHash: "10wzlq5fbzq35",
+        fileHash: "3qcsrcmbmc0rd",
         splices: {
           $state: { value: state, params: [] },
           $vm: { value: vm, params: [] },
@@ -35,7 +35,7 @@ it("vmEvalLoading", async (t) => {
               kind: "id",
               loc: [18, 13, 18, 17],
               text: "held",
-              bindingKey: "held$10wzlq5fbzq35$0",
+              bindingKey: "held$3qcsrcmbmc0rd$0",
             },
             initializer: {
               kind: "()",
@@ -71,27 +71,27 @@ it("vmEvalLoading", async (t) => {
                   loc: [22, 12, 26, 12],
                   condition: {
                     kind: "binop",
-                    loc: [22, 12, 22, 32],
+                    loc: [22, 12, 22, 31],
                     left: {
                       kind: "()",
-                      loc: [22, 12, 22, 23],
+                      loc: [22, 12, 22, 22],
                       expression: {
                         kind: ".",
-                        loc: [22, 12, 22, 21],
+                        loc: [22, 12, 22, 20],
                         expression: {
                           kind: "id",
                           loc: [22, 12, 22, 16],
                           text: "held",
-                          bindingKey: "held$10wzlq5fbzq35$0",
+                          bindingKey: "held$3qcsrcmbmc0rd$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
                     operatorToken: "===",
                     right: {
                       kind: "null",
-                      loc: [22, 28, 22, 32],
+                      loc: [22, 27, 22, 31],
                     },
                   },
                   whenTrue: {
@@ -113,7 +113,7 @@ it("vmEvalLoading", async (t) => {
                   },
                   whenFalse: {
                     kind: "()",
-                    loc: [25, 13, 25, 61],
+                    loc: [25, 13, 25, 60],
                     expression: {
                       kind: ".",
                       loc: [25, 13, 25, 21],
@@ -127,17 +127,17 @@ it("vmEvalLoading", async (t) => {
                     arguments: [
                       {
                         kind: "()",
-                        loc: [25, 22, 25, 33],
+                        loc: [25, 22, 25, 32],
                         expression: {
                           kind: ".",
-                          loc: [25, 22, 25, 31],
+                          loc: [25, 22, 25, 30],
                           expression: {
                             kind: "id",
                             loc: [25, 22, 25, 26],
                             text: "held",
-                            bindingKey: "held$10wzlq5fbzq35$0",
+                            bindingKey: "held$3qcsrcmbmc0rd$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },

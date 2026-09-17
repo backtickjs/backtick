@@ -27,12 +27,12 @@ async function Widened() {
     return (
       <span
         onclick={() => {
-          flag.write(false);
-          tone.write(${Tone.Cool});
-          step.write(() => 1);
+          flag.set(false);
+          tone.set(${Tone.Cool});
+          step.set(() => 1);
         }}
       >
-        {flag.read() + " " + tone.read() + " " + step.read()()}
+        {flag.get() + " " + tone.get() + " " + step.get()()}
       </span>
     );
   }`;

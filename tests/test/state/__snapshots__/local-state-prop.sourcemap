@@ -7,7 +7,7 @@ cs.splice(                           →  [-semantic]
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 "px"                                 → "px"
@@ -21,7 +21,7 @@ cs.splice(                           →  [-semantic]
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 cs.splice(                           →  [-semantic]
@@ -29,7 +29,7 @@ cs.splice(                           →  [-semantic]
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 1                                    → 1

@@ -1,9 +1,9 @@
 #f0 = ($0, $1) => {
   const held = $0()(null);
   return <div>
-    {held.read() === null ? <span>
+    {held.get() === null ? <span>
       {"loading…"}
-    </span> : $1().eval(held.read())}
+    </span> : $1().eval(held.get())}
   </div>;
 }
 

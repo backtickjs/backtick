@@ -53,7 +53,7 @@ cs.receiver(                         →
 __cs_flag                            → flag
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 false                                → false
 )                                    → )
@@ -64,7 +64,7 @@ cs.receiver(                         →
 __cs_tone                            → tone
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.splice(                           → ${ [-semantic]
 Tone.Cool                            → Tone.Cool
@@ -77,7 +77,7 @@ cs.receiver(                         →
 __cs_step                            → step
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 () =>                                → () => 
 1                                    → 1
@@ -90,7 +90,7 @@ cs.receiver(                         →
 __cs_flag                            → flag
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 " "                                  → " "
@@ -99,7 +99,7 @@ cs.receiver(                         →
 __cs_tone                            → tone
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 " "                                  → " "
@@ -108,7 +108,7 @@ cs.receiver(                         →
 __cs_step                            → step
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 ()                                   → ()
 )}</                                 → }\n      </

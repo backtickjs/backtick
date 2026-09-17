@@ -9,7 +9,7 @@ async function Panel() {
     {
       version: "0.0.0",
       filePath: "typecheck-errors/component-answers-action.test.tsx",
-      fileHash: "2xpciw8esthj0",
+      fileHash: "1y32lnuqpkjgj",
       splices: { $state: { value: state, params: [] } },
       captures: [],
     },
@@ -24,7 +24,7 @@ async function Panel() {
             kind: "id",
             loc: [8, 11, 8, 12],
             text: "n",
-            bindingKey: "n$2xpciw8esthj0$0",
+            bindingKey: "n$1y32lnuqpkjgj$0",
           },
           initializer: {
             kind: "()",
@@ -45,22 +45,22 @@ async function Panel() {
         },
         {
           kind: "()",
-          loc: [9, 5, 9, 15],
+          loc: [9, 5, 9, 13],
           expression: {
             kind: ".",
-            loc: [9, 5, 9, 12],
+            loc: [9, 5, 9, 10],
             expression: {
               kind: "id",
               loc: [9, 5, 9, 6],
               text: "n",
-              bindingKey: "n$2xpciw8esthj0$0",
+              bindingKey: "n$1y32lnuqpkjgj$0",
             },
-            name: "write",
+            name: "set",
           },
           arguments: [
             {
               kind: "number",
-              loc: [9, 13, 9, 14],
+              loc: [9, 11, 9, 12],
               value: 3,
             },
           ],

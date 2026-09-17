@@ -54,7 +54,7 @@ cs.receiver(                              →
 __cs_held                                 → held
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 cs.receiver(                              → 
 JSON                                      → JSON
@@ -88,7 +88,7 @@ cs.receiver(                              →
 __cs_held                                 → held
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 "failed \\u2014 "                         → "failed — "
  +                                        →  + 
@@ -143,7 +143,7 @@ cs.receiver(                              →
 __cs_held                                 → held
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 cs.receiver(                              → 
 __cs_response                             → response
@@ -164,7 +164,7 @@ cs.receiver(                              →
 __cs_held                                 → held
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 __cs_message                              → message
 )                                         → )
@@ -188,7 +188,7 @@ cs.receiver(                              →
 __cs_held                                 → held
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
 );                                        → ;
 \n}                                       → \n    }

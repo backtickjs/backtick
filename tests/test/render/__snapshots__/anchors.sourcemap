@@ -29,9 +29,8 @@ cs.receiver(                         →
 __cs_ids                             → ids
 )                                    → 
 .                                    → .
-update                               → update
+set                                  → set
 (                                    → (
-() =>                                → () => 
 []                                   → []
 )                                    → )
 );                                   → ;
@@ -60,10 +59,10 @@ cs.receiver(                         →
 __cs_ids                             → ids
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
->{cs.lift(                           → >\n          {
+>{cs.lift(                           → >{
 (                                    → (
 __cs_id                              → id
 :                                    → : 
@@ -78,7 +77,7 @@ __cs_id                              → id
 )}</                                 → }</
 span                                 → span
 >                                    → >
-)}</                                 → }\n        </
+)}</                                 → }</
 For                                  → For
 >                                    → >
 )}</>                                → \n      </>\n    )

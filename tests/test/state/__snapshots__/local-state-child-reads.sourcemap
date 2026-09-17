@@ -7,7 +7,7 @@ cs.splice(                           →  [-semantic]
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  ===                                 →  === 
 cs.splice(                           →  [-semantic]
@@ -37,7 +37,7 @@ cs.splice(                           →  [-semantic]
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 ))                                   → `
 cs.lift(cs.const(                    → cs`
@@ -47,7 +47,7 @@ cs.splice(                           →  [-semantic]
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  ===                                 →  === 
 cs.splice(                           →  [-semantic]
@@ -87,7 +87,7 @@ cs.receiver(                         →
 __cs_selected                        → selected
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 1                                    → 1
 )                                    → )

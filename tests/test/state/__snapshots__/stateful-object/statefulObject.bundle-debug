@@ -5,16 +5,16 @@
       c.add(5);
     }}
   >
-    {c.read()}
+    {c.get()}
   </button>;
 }
 
 #f1 = ($0) => (initial) => {
   const count = $0()(initial);
   return {
-    "read": () => count.read(),
+    "get": () => count.get(),
     "add": (n) => {
-      count.write(count.read() + n);
+      count.set(count.get() + n);
     }
   };
 }

@@ -18,10 +18,10 @@ async function Row() {
       <button
         id="row"
         style="display: flex; gap: 8px"
-        onclick={() => count.write(count.read() + 1)}
+        onclick={() => count.set(count.get() + 1)}
       >
-        <span style="font-weight: 700">{count.read() > 0 ? "☑" : "☐"}</span>
-        <span>{"pressed " + count.read() + " times"}</span>
+        <span style="font-weight: 700">{count.get() > 0 ? "☑" : "☐"}</span>
+        <span>{"pressed " + count.get() + " times"}</span>
       </button>
     );
   }`;

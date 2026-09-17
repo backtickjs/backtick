@@ -27,11 +27,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    [31, 10, 44, 5],
+    [31, 10, 42, 5],
     {
       version: "0.0.0",
       filePath: "render/anchors.test.tsx",
-      fileHash: "3qcdy4p4pwxfx",
+      fileHash: "3obo1rlt5auy4",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -40,7 +40,7 @@ async function Rows() {
     },
     () => ({
       kind: "{}",
-      loc: [31, 13, 44, 4],
+      loc: [31, 13, 42, 4],
       statements: [
         {
           kind: "const",
@@ -49,7 +49,7 @@ async function Rows() {
             kind: "id",
             loc: [32, 11, 32, 14],
             text: "ids",
-            bindingKey: "ids$3qcdy4p4pwxfx$0",
+            bindingKey: "ids$3obo1rlt5auy4$0",
           },
           initializer: {
             kind: "()",
@@ -91,7 +91,7 @@ async function Rows() {
             kind: "id",
             loc: [33, 11, 33, 16],
             text: "clear",
-            bindingKey: "clear$3qcdy4p4pwxfx$1",
+            bindingKey: "clear$3obo1rlt5auy4$1",
           },
           initializer: {
             kind: "=>",
@@ -103,28 +103,23 @@ async function Rows() {
               statements: [
                 {
                   kind: "()",
-                  loc: [34, 7, 34, 27],
+                  loc: [34, 7, 34, 18],
                   expression: {
                     kind: ".",
-                    loc: [34, 7, 34, 17],
+                    loc: [34, 7, 34, 14],
                     expression: {
                       kind: "id",
                       loc: [34, 7, 34, 10],
                       text: "ids",
-                      bindingKey: "ids$3qcdy4p4pwxfx$0",
+                      bindingKey: "ids$3obo1rlt5auy4$0",
                     },
-                    name: "update",
+                    name: "set",
                   },
                   arguments: [
                     {
-                      kind: "=>",
-                      loc: [34, 18, 34, 26],
-                      parameters: [],
-                      body: {
-                        kind: "arr",
-                        loc: [34, 24, 34, 26],
-                        elements: [],
-                      },
+                      kind: "arr",
+                      loc: [34, 15, 34, 17],
+                      elements: [],
                     },
                   ],
                 },
@@ -134,13 +129,13 @@ async function Rows() {
         },
         {
           kind: "return",
-          loc: [36, 5, 43, 7],
+          loc: [36, 5, 41, 7],
           expression: {
             kind: "jsx",
-            loc: [37, 7, 42, 10],
+            loc: [37, 7, 40, 10],
             type: {
               kind: "string",
-              loc: [37, 7, 42, 10],
+              loc: [37, 7, 40, 10],
               text: "Fragment",
             },
             attributes: [],
@@ -160,7 +155,7 @@ async function Rows() {
                       kind: "id",
                       loc: [38, 24, 38, 29],
                       text: "clear",
-                      bindingKey: "clear$3qcdy4p4pwxfx$1",
+                      bindingKey: "clear$3obo1rlt5auy4$1",
                     },
                   },
                 ],
@@ -174,7 +169,7 @@ async function Rows() {
               },
               {
                 kind: "jsx",
-                loc: [39, 9, 41, 15],
+                loc: [39, 9, 39, 81],
                 type: {
                   kind: "splice",
                   loc: [39, 10, 39, 13],
@@ -185,17 +180,17 @@ async function Rows() {
                     name: "each",
                     initializer: {
                       kind: "()",
-                      loc: [39, 20, 39, 30],
+                      loc: [39, 20, 39, 29],
                       expression: {
                         kind: ".",
-                        loc: [39, 20, 39, 28],
+                        loc: [39, 20, 39, 27],
                         expression: {
                           kind: "id",
                           loc: [39, 20, 39, 23],
                           text: "ids",
-                          bindingKey: "ids$3qcdy4p4pwxfx$0",
+                          bindingKey: "ids$3obo1rlt5auy4$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -204,43 +199,43 @@ async function Rows() {
                 children: [
                   {
                     kind: "=>",
-                    loc: [40, 12, 40, 54],
+                    loc: [39, 32, 39, 74],
                     parameters: [
                       {
                         kind: "param",
-                        loc: [40, 13, 40, 23],
+                        loc: [39, 33, 39, 43],
                         name: {
                           kind: "id",
-                          loc: [40, 13, 40, 15],
+                          loc: [39, 33, 39, 35],
                           text: "id",
-                          bindingKey: "id$3qcdy4p4pwxfx$2",
+                          bindingKey: "id$3obo1rlt5auy4$2",
                         },
                       },
                     ],
                     body: {
                       kind: "jsx",
-                      loc: [40, 28, 40, 54],
+                      loc: [39, 48, 39, 74],
                       type: {
                         kind: "string",
-                        loc: [40, 29, 40, 33],
+                        loc: [39, 49, 39, 53],
                         text: "span",
                       },
                       attributes: [],
                       children: [
                         {
                           kind: "binop",
-                          loc: [40, 35, 40, 46],
+                          loc: [39, 55, 39, 66],
                           left: {
                             kind: "string",
-                            loc: [40, 35, 40, 41],
+                            loc: [39, 55, 39, 61],
                             text: "row ",
                           },
                           operatorToken: "+",
                           right: {
                             kind: "id",
-                            loc: [40, 44, 40, 46],
+                            loc: [39, 64, 39, 66],
                             text: "id",
-                            bindingKey: "id$3qcdy4p4pwxfx$2",
+                            bindingKey: "id$3obo1rlt5auy4$2",
                           },
                         },
                       ],

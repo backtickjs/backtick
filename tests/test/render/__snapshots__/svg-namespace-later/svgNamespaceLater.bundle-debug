@@ -6,13 +6,13 @@
       viewBox={"0 0 30 10"}
     >
       {<{$1()}
-        each={() => xs.read()}
+        each={() => xs.get()}
       >
         {() => (x) => <title>
           {"dot " + x}
         </title>}
       </{$1()}>}
-      {shown.read() ? <title>
+      {shown.get() ? <title>
         {"shown"}
       </title> : null}
     </svg>}
@@ -20,12 +20,12 @@
       {"after"}
     </title>}
     {<button
-      onclick={() => xs.write([10, 20])}
+      onclick={() => xs.set([10, 20])}
     >
       {"add"}
     </button>}
     {<button
-      onclick={() => shown.write(true)}
+      onclick={() => shown.set(true)}
     >
       {"show"}
     </button>}

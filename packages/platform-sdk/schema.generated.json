@@ -27,7 +27,7 @@
           }
         ],
         "properties": {
-          "read": {
+          "get": {
             "type": "function",
             "parameters": [],
             "returnType": {
@@ -36,11 +36,11 @@
             }
           }
         },
-        "required": ["read"]
+        "required": ["get"]
       }
     },
     "State": {
-      "description": "A cell as a script reads it.\n\nWhat makes one is not here: `state` is a client function a script imports and splices, so a cell is what calling it answers with. This is the half that reaches the client.",
+      "description": "A cell as a script reads it.\n\nWhat makes one is not here: `state` is a client function a script imports and splices, so a cell is what calling it answers with. This is the half that reaches the client.\n\n`set` stores what it is given, a function included: it never calls it.",
       "type": "generic",
       "parameters": [
         {
@@ -72,7 +72,7 @@
           }
         ],
         "properties": {
-          "write": {
+          "set": {
             "type": "function",
             "parameters": [
               {
@@ -87,38 +87,9 @@
             "returnType": {
               "type": "void"
             }
-          },
-          "update": {
-            "type": "function",
-            "parameters": [
-              {
-                "type": "functionParameter",
-                "name": "updater",
-                "holds": {
-                  "type": "function",
-                  "parameters": [
-                    {
-                      "type": "functionParameter",
-                      "name": "value",
-                      "holds": {
-                        "type": "ref",
-                        "$ref": "T"
-                      }
-                    }
-                  ],
-                  "returnType": {
-                    "type": "ref",
-                    "$ref": "T"
-                  }
-                }
-              }
-            ],
-            "returnType": {
-              "type": "void"
-            }
           }
         },
-        "required": ["write", "update"]
+        "required": ["set"]
       }
     },
     "ClientHandle": {

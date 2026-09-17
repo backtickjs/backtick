@@ -512,7 +512,7 @@ export async function Playground({
         <div style={$PANEL + "; " + $WRITING}>
           <div style={$HEAD_ROW}>
             <p style={$HEAD}>{"01 · TRY EDITING"}</p>
-            <p style={$STATUS}>{status.read()}</p>
+            <p style={$STATUS}>{status.get()}</p>
           </div>
 
           <div style={$WELL}>
@@ -522,15 +522,15 @@ export async function Playground({
               style={
                 $INK +
                 "; transform: translate(" +
-                (0 - across.read()) +
+                (0 - across.get()) +
                 "px, " +
-                (0 - down.read()) +
+                (0 - down.get()) +
                 "px)"
               }
               aria-hidden="true"
             >
               <code>
-                <For each={tokensOf(source.read())}>
+                <For each={tokensOf(source.get())}>
                   {(t: { text: string; colour: string }) => (
                     <span style={"color: " + t.colour}>{t.text}</span>
                   )}
@@ -547,38 +547,38 @@ export async function Playground({
               wrap="off"
               rows={20}
               onscroll={(e) => {
-                down.write(e.currentTarget.scrollTop);
-                across.write(e.currentTarget.scrollLeft);
+                down.set(e.currentTarget.scrollTop);
+                across.set(e.currentTarget.scrollLeft);
               }}
               oninput={(e) => {
-                source.write(e.currentTarget.value);
-                const id = asked.read() + 1;
-                asked.write(id);
-                status.write("compiling\u2026");
+                source.set(e.currentTarget.value);
+                const id = asked.get() + 1;
+                asked.set(id);
+                status.set("compiling\u2026");
                 const said = (diagnostic: Said[]) => {
-                  if (id === asked.read()) {
-                    status.write("");
-                    bundle.write(null);
-                    diagnostics.write(diagnostic);
+                  if (id === asked.get()) {
+                    status.set("");
+                    bundle.set(null);
+                    diagnostics.set(diagnostic);
                   }
                 };
                 $compile(
                   $example.files[0].fileName,
-                  source.read(),
+                  source.get(),
                   (javascript) => {
                     // Compiled. Whether it draws anything is the next question,
                     // and a later keystroke may have made this answer stale
                     // before it is asked.
-                    if (id !== asked.read()) {
+                    if (id !== asked.get()) {
                       return;
                     }
                     $bundle(
                       javascript,
                       (drawn) => {
-                        if (id === asked.read()) {
-                          status.write("");
-                          diagnostics.write($noDiagnostics);
-                          bundle.write(drawn);
+                        if (id === asked.get()) {
+                          status.set("");
+                          diagnostics.set($noDiagnostics);
+                          bundle.set(drawn);
                         }
                       },
                       said,
@@ -598,7 +598,7 @@ export async function Playground({
           </div>
 
           <div style={$COMPLAINTS}>
-            <For each={diagnostics.read()}>
+            <For each={diagnostics.get()}>
               {(said: Said) => <p style={$COMPLAINT}>{said.message}</p>}
             </For>
           </div>
@@ -611,20 +611,20 @@ export async function Playground({
                 value here rather than a style somebody reaches in and sets. */}
             <div>
               <button
-                style={showing.read() === "screen" ? $TAB_ON : $TAB_OFF}
-                onclick={() => showing.write("screen")}
+                style={showing.get() === "screen" ? $TAB_ON : $TAB_OFF}
+                onclick={() => showing.set("screen")}
               >
                 {"PREVIEW"}
               </button>
               <button
-                style={showing.read() === "bundle" ? $TAB_ON : $TAB_OFF}
-                onclick={() => showing.write("bundle")}
+                style={showing.get() === "bundle" ? $TAB_ON : $TAB_OFF}
+                onclick={() => showing.set("bundle")}
               >
                 {"BUNDLE" +
                   sized(
-                    bundle.read() === null
+                    bundle.get() === null
                       ? 0
-                      : JSON.stringify(bundle.read()).length,
+                      : JSON.stringify(bundle.get()).length,
                   )}
               </button>
             </div>
@@ -634,13 +634,13 @@ export async function Playground({
             style={
               $DEVICE +
               "; display: " +
-              (showing.read() === "screen" ? "grid" : "none")
+              (showing.get() === "screen" ? "grid" : "none")
             }
           >
             <div style={$SCREEN}>
-              {bundle.read() === null
+              {bundle.get() === null
                 ? null
-                : $vm.eval(bundle.read() as Bundle<BacktickElement>)}
+                : $vm.eval(bundle.get() as Bundle<BacktickElement>)}
             </div>
             <div style={$ISLAND} />
           </div>
@@ -649,10 +649,10 @@ export async function Playground({
             style={
               $BUNDLE +
               "; display: " +
-              (showing.read() === "bundle" ? "block" : "none")
+              (showing.get() === "bundle" ? "block" : "none")
             }
           >
-            {bundle.read() === null ? "" : JSON.stringify(bundle.read())}
+            {bundle.get() === null ? "" : JSON.stringify(bundle.get())}
           </pre>
         </div>
       </div>

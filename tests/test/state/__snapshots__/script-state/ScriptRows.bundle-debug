@@ -2,14 +2,14 @@
 
 #f1 = ($0) => () => {
   const row = $0()("one");
-  row.label.write(row.label.read() + " !!!");
+  row.label.set(row.label.get() + " !!!");
 }
 
 #f2 = ($0) => (label) => {
   return { "label": $0()(label) };
 }
 
-#f3 = ($0) => $0()("one").label.read()
+#f3 = ($0) => $0()("one").label.get()
 
 root = <span
   style={#f0()}

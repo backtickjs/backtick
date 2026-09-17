@@ -10,7 +10,7 @@ cs.splice(                           →  [-semantic]
 )                                    → )
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 );                                   → ;
 \n})())                              → \n  }`

@@ -5,7 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 const make = (f: Client<(n: number) => State<number>>) =>
   cs`{
-    return $f(1).read();
+    return $f(1).get();
   }`;
 
 const wrapped = cs`(n: number) => $state(n + 10)`;

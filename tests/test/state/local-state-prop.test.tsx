@@ -12,9 +12,9 @@ import { children, drawn, fontSize } from "./dom.ts";
 // which is what makes a write through either child reach the same storage.
 const SharedCounter = async ({ size }: { size: Client<State<number>> }) => (
   <span
-    style={cs`"font-size: " + $size.read() + "px"`}
+    style={cs`"font-size: " + $size.get() + "px"`}
     onclick={cs`() => {
-      $size.write($size.read() + 1);
+      $size.set($size.get() + 1);
     }`}
   >
     press

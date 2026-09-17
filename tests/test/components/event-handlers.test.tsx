@@ -19,19 +19,17 @@ it("eventHandlers", async (t) => {
         <form
           onsubmit={(event) => {
             event.preventDefault();
-            said.write(event.type + " " + event.cancelable);
+            said.set(event.type + " " + event.cancelable);
           }}
         >
-          <textarea
-            oninput={(event) => said.write(event.currentTarget.value)}
-          />
-          <input oninput={(event) => said.write(event.currentTarget.value)} />
+          <textarea oninput={(event) => said.set(event.currentTarget.value)} />
+          <input oninput={(event) => said.set(event.currentTarget.value)} />
           <button
             onclick={(event) =>
-              said.write(event.clientX + " " + event.currentTarget.tagName)
+              said.set(event.clientX + " " + event.currentTarget.tagName)
             }
           >
-            {said.read()}
+            {said.get()}
           </button>
         </form>
       );

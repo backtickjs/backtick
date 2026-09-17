@@ -11,7 +11,7 @@ import { watchWrites } from "./writes.ts";
 async function RemovableRows() {
   return cs.lift((() => {
     const __cs_ids = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3, 4, 5]));
-    return cs.const(<table>{cs.lift(<tbody>{cs.lift(<For each={cs.lift(cs.receiver(__cs_ids).read())}>{cs.lift((__cs_id: number) => <tr id={cs.lift("row-" + __cs_id)}>{cs.lift(<td>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_ids).update(__cs_held => cs.receiver(__cs_held).filter(__cs_each => __cs_each !== __cs_id)))}>{cs.lift("remove " + __cs_id)}</button>)}</td>)}</tr>)}</For>)}</tbody>)}</table>);
+    return cs.const(<table>{cs.lift(<tbody>{cs.lift(<For each={cs.lift(cs.receiver(__cs_ids).get())}>{cs.lift((__cs_id: number) => <tr id={cs.lift("row-" + __cs_id)}>{cs.lift(<td>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_ids).set(cs.receiver(cs.receiver(__cs_ids).get()).filter(__cs_each => __cs_each !== __cs_id)))}>{cs.lift("remove " + __cs_id)}</button>)}</td>)}</tr>)}</For>)}</tbody>)}</table>);
 })());
 }
 

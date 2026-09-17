@@ -14,9 +14,9 @@ async function Stepper() {
     const size = $state(16);
     return (
       <span
-        style={"font-size: " + size.read() + "px"}
+        style={"font-size: " + size.get() + "px"}
         onclick={() => {
-          size.write(size.read() + 1);
+          size.set(size.get() + 1);
         }}
       >
         press

@@ -27,7 +27,7 @@ it("splicedLiteralWidens", async (t) => {
       {
         version: "0.0.0",
         filePath: "splices/spliced-literal-widens.test.tsx",
-        fileHash: "v9pwfk0rq8l0",
+        fileHash: "323oescdizqb0",
         splices: {
           $state: { value: state, params: [] },
           $five: { value: five, params: [] },
@@ -47,7 +47,7 @@ it("splicedLiteralWidens", async (t) => {
               kind: "id",
               loc: [28, 13, 28, 14],
               text: "n",
-              bindingKey: "n$v9pwfk0rq8l0$0",
+              bindingKey: "n$323oescdizqb0$0",
             },
             initializer: {
               kind: "()",
@@ -68,22 +68,22 @@ it("splicedLiteralWidens", async (t) => {
           },
           {
             kind: "()",
-            loc: [29, 7, 29, 17],
+            loc: [29, 7, 29, 15],
             expression: {
               kind: ".",
-              loc: [29, 7, 29, 14],
+              loc: [29, 7, 29, 12],
               expression: {
                 kind: "id",
                 loc: [29, 7, 29, 8],
                 text: "n",
-                bindingKey: "n$v9pwfk0rq8l0$0",
+                bindingKey: "n$323oescdizqb0$0",
               },
-              name: "write",
+              name: "set",
             },
             arguments: [
               {
                 kind: "number",
-                loc: [29, 15, 29, 16],
+                loc: [29, 13, 29, 14],
                 value: 6,
               },
             ],
@@ -95,7 +95,7 @@ it("splicedLiteralWidens", async (t) => {
               kind: "id",
               loc: [30, 13, 30, 14],
               text: "c",
-              bindingKey: "c$v9pwfk0rq8l0$1",
+              bindingKey: "c$323oescdizqb0$1",
             },
             initializer: {
               kind: "()",
@@ -116,22 +116,22 @@ it("splicedLiteralWidens", async (t) => {
           },
           {
             kind: "()",
-            loc: [31, 7, 31, 29],
+            loc: [31, 7, 31, 27],
             expression: {
               kind: ".",
-              loc: [31, 7, 31, 14],
+              loc: [31, 7, 31, 12],
               expression: {
                 kind: "id",
                 loc: [31, 7, 31, 8],
                 text: "c",
-                bindingKey: "c$v9pwfk0rq8l0$1",
+                bindingKey: "c$323oescdizqb0$1",
               },
-              name: "write",
+              name: "set",
             },
             arguments: [
               {
                 kind: "splice",
-                loc: [31, 15, 31, 28],
+                loc: [31, 13, 31, 26],
                 key: "$0splice1",
               },
             ],

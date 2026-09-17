@@ -16,10 +16,10 @@ async function ScriptRows() {
       style={cs`"font-size: 16px"`}
       onclick={cs`() => {
         const row = $build("one");
-        row.label.write(row.label.read() + " !!!");
+        row.label.set(row.label.get() + " !!!");
       }`}
     >
-      {cs`$build("one").label.read()`}
+      {cs`$build("one").label.get()`}
     </span>
   );
 }

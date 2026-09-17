@@ -10,7 +10,7 @@ declare const SignalBrand: unique symbol;
  */
 export interface Signal<T> extends ClientHandle {
   readonly [SignalBrand]: never;
-  read(): T;
+  get(): T;
 }
 
 declare const StateBrand: unique symbol;
@@ -20,11 +20,12 @@ declare const StateBrand: unique symbol;
  * What makes one is not here: `state` is a client function a script imports
  * and splices, so a cell is what calling it answers with. This is the half
  * that reaches the client.
+ *
+ * `set` stores what it is given, a function included: it never calls it.
  */
 export interface State<T> extends Signal<T> {
   readonly [StateBrand]: never;
-  write(value: T): void;
-  update(updater: (value: T) => T): void;
+  set(value: T): void;
 }
 
 declare const ClientHandleBrand: unique symbol;

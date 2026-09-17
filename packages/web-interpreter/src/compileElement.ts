@@ -221,6 +221,6 @@ function compileFor(
     // The index is `mapArray`'s own signal, handed over as storage rather than
     // as the number it holds: whoever reads it is reading where the member sits
     // now.
-    return mapArray(members, (member, at) => one(member, { read: at }));
+    return mapArray(members, (member, at) => one(member, { get: at }));
   };
 }

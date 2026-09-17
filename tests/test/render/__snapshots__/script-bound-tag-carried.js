@@ -12,7 +12,7 @@ async function Panel(props) {
     {
       version: "0.0.0",
       filePath: "render/script-bound-tag-carried.test.tsx",
-      fileHash: "3723ffpdtnwyt",
+      fileHash: "2nh9ihk3oddge",
       splices: { $props: { value: props, params: [] } },
       captures: [],
     },
@@ -27,7 +27,7 @@ async function Panel(props) {
             kind: "id",
             loc: [13, 11, 13, 16],
             text: "Badge",
-            bindingKey: "Badge$3723ffpdtnwyt$0",
+            bindingKey: "Badge$2nh9ihk3oddge$0",
           },
           initializer: {
             kind: "=>",
@@ -40,7 +40,7 @@ async function Panel(props) {
                   kind: "id",
                   loc: [13, 20, 13, 21],
                   text: "p",
-                  bindingKey: "p$3723ffpdtnwyt$1",
+                  bindingKey: "p$2nh9ihk3oddge$1",
                 },
               },
             ],
@@ -70,7 +70,7 @@ async function Panel(props) {
                       kind: "id",
                       loc: [13, 56, 13, 57],
                       text: "p",
-                      bindingKey: "p$3723ffpdtnwyt$1",
+                      bindingKey: "p$2nh9ihk3oddge$1",
                     },
                     name: "n",
                   },
@@ -99,7 +99,7 @@ async function Panel(props) {
                   kind: "id",
                   loc: [16, 10, 16, 15],
                   text: "Badge",
-                  bindingKey: "Badge$3723ffpdtnwyt$0",
+                  bindingKey: "Badge$2nh9ihk3oddge$0",
                 },
                 attributes: [
                   {
@@ -139,7 +139,7 @@ const scriptBoundTagCarried = cs.create(
   {
     version: "0.0.0",
     filePath: "render/script-bound-tag-carried.test.tsx",
-    fileHash: "3723ffpdtnwyt",
+    fileHash: "2nh9ihk3oddge",
     splices: {
       $state: { value: state, params: [] },
       $0splice0: {
@@ -148,9 +148,9 @@ const scriptBoundTagCarried = cs.create(
           {
             version: "0.0.0",
             filePath: "render/script-bound-tag-carried.test.tsx",
-            fileHash: "3723ffpdtnwyt",
+            fileHash: "2nh9ihk3oddge",
             splices: {},
-            captures: ["Badge$3723ffpdtnwyt$3", "count$3723ffpdtnwyt$2"],
+            captures: ["Badge$2nh9ihk3oddge$3", "count$2nh9ihk3oddge$2"],
           },
           () => ({
             kind: "jsx",
@@ -159,24 +159,24 @@ const scriptBoundTagCarried = cs.create(
               kind: "id",
               loc: [40, 17, 40, 22],
               text: "Badge",
-              bindingKey: "Badge$3723ffpdtnwyt$3",
+              bindingKey: "Badge$2nh9ihk3oddge$3",
             },
             attributes: [
               {
                 name: "n",
                 initializer: {
                   kind: "()",
-                  loc: [40, 26, 40, 38],
+                  loc: [40, 26, 40, 37],
                   expression: {
                     kind: ".",
-                    loc: [40, 26, 40, 36],
+                    loc: [40, 26, 40, 35],
                     expression: {
                       kind: "id",
                       loc: [40, 26, 40, 31],
                       text: "count",
-                      bindingKey: "count$3723ffpdtnwyt$2",
+                      bindingKey: "count$2nh9ihk3oddge$2",
                     },
-                    name: "read",
+                    name: "get",
                   },
                   arguments: [],
                 },
@@ -185,7 +185,7 @@ const scriptBoundTagCarried = cs.create(
             children: [
               {
                 kind: "jsx",
-                loc: [41, 13, 41, 43],
+                loc: [41, 13, 41, 42],
                 type: {
                   kind: "string",
                   loc: [41, 14, 41, 15],
@@ -195,7 +195,7 @@ const scriptBoundTagCarried = cs.create(
                 children: [
                   {
                     kind: "binop",
-                    loc: [41, 17, 41, 38],
+                    loc: [41, 17, 41, 37],
                     left: {
                       kind: "string",
                       loc: [41, 17, 41, 23],
@@ -204,17 +204,17 @@ const scriptBoundTagCarried = cs.create(
                     operatorToken: "+",
                     right: {
                       kind: "()",
-                      loc: [41, 26, 41, 38],
+                      loc: [41, 26, 41, 37],
                       expression: {
                         kind: ".",
-                        loc: [41, 26, 41, 36],
+                        loc: [41, 26, 41, 35],
                         expression: {
                           kind: "id",
                           loc: [41, 26, 41, 31],
                           text: "count",
-                          bindingKey: "count$3723ffpdtnwyt$2",
+                          bindingKey: "count$2nh9ihk3oddge$2",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -224,7 +224,7 @@ const scriptBoundTagCarried = cs.create(
             ],
           }),
         ),
-        params: ["count$3723ffpdtnwyt$2", "Badge$3723ffpdtnwyt$3"],
+        params: ["count$2nh9ihk3oddge$2", "Badge$2nh9ihk3oddge$3"],
       },
       $Panel: { value: Panel, params: [] },
     },
@@ -241,7 +241,7 @@ const scriptBoundTagCarried = cs.create(
           kind: "id",
           loc: [28, 9, 28, 14],
           text: "count",
-          bindingKey: "count$3723ffpdtnwyt$2",
+          bindingKey: "count$2nh9ihk3oddge$2",
         },
         initializer: {
           kind: "()",
@@ -267,7 +267,7 @@ const scriptBoundTagCarried = cs.create(
           kind: "id",
           loc: [29, 9, 29, 14],
           text: "Badge",
-          bindingKey: "Badge$3723ffpdtnwyt$3",
+          bindingKey: "Badge$2nh9ihk3oddge$3",
         },
         initializer: {
           kind: "=>",
@@ -280,7 +280,7 @@ const scriptBoundTagCarried = cs.create(
                 kind: "id",
                 loc: [29, 18, 29, 19],
                 text: "p",
-                bindingKey: "p$3723ffpdtnwyt$4",
+                bindingKey: "p$2nh9ihk3oddge$4",
               },
             },
           ],
@@ -310,7 +310,7 @@ const scriptBoundTagCarried = cs.create(
                     kind: "id",
                     loc: [31, 19, 31, 20],
                     text: "p",
-                    bindingKey: "p$3723ffpdtnwyt$4",
+                    bindingKey: "p$2nh9ihk3oddge$4",
                   },
                   name: "n",
                 },
@@ -322,7 +322,7 @@ const scriptBoundTagCarried = cs.create(
                   kind: "id",
                   loc: [32, 8, 32, 9],
                   text: "p",
-                  bindingKey: "p$3723ffpdtnwyt$4",
+                  bindingKey: "p$2nh9ihk3oddge$4",
                 },
                 name: "children",
               },
@@ -365,7 +365,7 @@ const scriptBoundTagCarried = cs.create(
             },
             {
               kind: "jsx",
-              loc: [45, 7, 45, 74],
+              loc: [45, 7, 45, 71],
               type: {
                 kind: "string",
                 loc: [45, 8, 45, 14],
@@ -376,46 +376,46 @@ const scriptBoundTagCarried = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [45, 24, 45, 59],
+                    loc: [45, 24, 45, 56],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [45, 30, 45, 59],
+                      loc: [45, 30, 45, 56],
                       expression: {
                         kind: ".",
-                        loc: [45, 30, 45, 41],
+                        loc: [45, 30, 45, 39],
                         expression: {
                           kind: "id",
                           loc: [45, 30, 45, 35],
                           text: "count",
-                          bindingKey: "count$3723ffpdtnwyt$2",
+                          bindingKey: "count$2nh9ihk3oddge$2",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "binop",
-                          loc: [45, 42, 45, 58],
+                          loc: [45, 40, 45, 55],
                           left: {
                             kind: "()",
-                            loc: [45, 42, 45, 54],
+                            loc: [45, 40, 45, 51],
                             expression: {
                               kind: ".",
-                              loc: [45, 42, 45, 52],
+                              loc: [45, 40, 45, 49],
                               expression: {
                                 kind: "id",
-                                loc: [45, 42, 45, 47],
+                                loc: [45, 40, 45, 45],
                                 text: "count",
-                                bindingKey: "count$3723ffpdtnwyt$2",
+                                bindingKey: "count$2nh9ihk3oddge$2",
                               },
-                              name: "read",
+                              name: "get",
                             },
                             arguments: [],
                           },
                           operatorToken: "+",
                           right: {
                             kind: "number",
-                            loc: [45, 57, 45, 58],
+                            loc: [45, 54, 45, 55],
                             value: 1,
                           },
                         },
@@ -427,7 +427,7 @@ const scriptBoundTagCarried = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [45, 61, 45, 65],
+                  loc: [45, 58, 45, 62],
                   text: "more",
                 },
               ],

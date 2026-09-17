@@ -43,7 +43,7 @@ cs.receiver(                         →
 __cs_held                            → held
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.splice(                           → ${ [-semantic]
 Color.Blue                           → Color.Blue
@@ -60,7 +60,7 @@ cs.receiver(                         →
 __cs_held                            → held
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )                                    → )
 )}</                                 → }\n      </

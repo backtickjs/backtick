@@ -75,8 +75,8 @@ export async function Main(): Promise<Client<JSX.Element>> {
     };
 
     const buildData = (count: number) => {
-      const from = rowId.read();
-      rowId.write(from + count);
+      const from = rowId.get();
+      rowId.set(from + count);
       return Array.from({ length: count }, (_, index) => {
         return {
           id: from + index,
@@ -88,41 +88,42 @@ export async function Main(): Promise<Client<JSX.Element>> {
     };
 
     const run = () => {
-      data.write(buildData(1000));
+      data.set(buildData(1000));
     };
 
     const runLots = () => {
-      data.write(buildData(10000));
+      data.set(buildData(10000));
     };
 
     const add = () => {
-      data.write([...data.read(), ...buildData(1000)]);
+      data.set([...data.get(), ...buildData(1000)]);
     };
 
     const partialUpdate = () => {
-      const rows = data.read();
+      const rows = data.get();
       for (let index = 0; index < rows.length; index = index + 10) {
-        rows[index].label.update((label: string) => label + " !!!");
+        const label = rows[index].label;
+        label.set(label.get() + " !!!");
       }
     };
 
     const clear = () => {
-      data.write([]);
+      data.set([]);
     };
 
     const swapRows = () => {
-      const rows = data.read();
+      const rows = data.get();
       if (rows.length > 998) {
-        data.write(rows.with(1, rows[998]).with(998, rows[1]));
+        data.set(rows.with(1, rows[998]).with(998, rows[1]));
       }
     };
 
     const select = (id: number) => {
-      selected.write(id);
+      selected.set(id);
     };
 
     const remove = (id: number) => {
-      data.update((rows) => rows.filter((row) => row.id !== id));
+      data.set(data.get().filter((row) => row.id !== id));
     };
 
     return (
@@ -200,12 +201,12 @@ export async function Main(): Promise<Client<JSX.Element>> {
         </div>
         <table class="table table-hover table-striped test-data">
           <tbody>
-            <For each={data.read()}>
+            <For each={data.get()}>
               {(row: Row) => (
-                <tr class={selected.read() === row.id ? "danger" : ""}>
+                <tr class={selected.get() === row.id ? "danger" : ""}>
                   <td class="col-md-1">{row.id}</td>
                   <td class="col-md-4">
-                    <a onclick={() => select(row.id)}>{row.label.read()}</a>
+                    <a onclick={() => select(row.id)}>{row.label.get()}</a>
                   </td>
                   <td class="col-md-1">
                     <a onclick={() => remove(row.id)}>

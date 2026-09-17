@@ -1,6 +1,6 @@
 18:28 error TS1360: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
   Type 'Date' is not assignable to type '{ readonly [key: string]: ClientValue; }'.
     Index signature for type 'string' is missing in type 'Date'.
-20:19 error TS1360: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
+20:17 error TS1360: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
   Type 'Date' is not assignable to type '{ readonly [key: string]: ClientValue; }'.
     Index signature for type 'string' is missing in type 'Date'.

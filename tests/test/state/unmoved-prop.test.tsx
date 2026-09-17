@@ -14,11 +14,11 @@ async function SelectableRows() {
     const selected = $state(0);
     return (
       <div>
-        <span onclick={() => selected.write(1)}>select</span>
+        <span onclick={() => selected.set(1)}>select</span>
         <div>
           <For each={[0, 1, 2]}>
             {(id: number) => (
-              <a href={selected.read() === id ? "#open" : "#closed"}>
+              <a href={selected.get() === id ? "#open" : "#closed"}>
                 {"row " + id}
               </a>
             )}

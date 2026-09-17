@@ -9,9 +9,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const counter = cs`(initial: number) => {
   const count = $state(initial);
   return {
-    read: () => count.read(),
+    get: () => count.get(),
     add: (n: number) => {
-      count.write(count.read() + n);
+      count.set(count.get() + n);
     },
   };
 }`;
@@ -28,7 +28,7 @@ it("statefulObject", async (t) => {
             c.add(5);
           }}
         >
-          {c.read()}
+          {c.get()}
         </button>
       );
     }`,

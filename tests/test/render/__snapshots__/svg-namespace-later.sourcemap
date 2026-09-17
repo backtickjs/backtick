@@ -46,7 +46,7 @@ cs.receiver(                         →
 __cs_xs                              → xs
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
 >{cs.lift(                           → >{
@@ -73,10 +73,10 @@ cs.receiver(                         →
 __cs_shown                           → shown
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 ) &&                                 → 
-cs.receiver(__cs_shown).read()       → shown.read() [-semantic -completion -navigation -verification]
+cs.receiver(__cs_shown).get()        → shown.get() [-semantic -completion -navigation -verification]
 ) ?                                  →  ? 
 <                                    → <
 title                                → title
@@ -109,7 +109,7 @@ cs.receiver(                         →
 __cs_xs                              → xs
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 [                                    → [
 10                                   → 10
@@ -132,7 +132,7 @@ cs.receiver(                         →
 __cs_shown                           → shown
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 true                                 → true
 )                                    → )

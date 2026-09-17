@@ -40,7 +40,7 @@ cs.receiver(                         →
 __cs_ids                             → ids
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
 >{cs.lift(                           → >\n            {
@@ -72,12 +72,15 @@ cs.receiver(                         →
 __cs_ids                             → ids
 )                                    → 
 .                                    → .
-update                               → update
+set                                  → set
 (                                    → (
-__cs_held                            → held
- =>                                  → ) => 
 cs.receiver(                         → 
-__cs_held                            → held
+cs.receiver(                         → 
+__cs_ids                             → ids
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
 )                                    → 
 .                                    → .
 filter                               → filter

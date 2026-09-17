@@ -184,7 +184,7 @@ function memberOf(
     // hold reads as `undefined`.
     //
     // The cast reads through a brand: a handle's type says opaque, and a cell
-    // being `{ read, write, update }` underneath is this client's knowledge.
+    // being `{ get, set }` underneath is this client's knowledge.
     //
     // Except the ambient machinery: `constructor`, `__proto__`, `toString` and
     // the rest live on `Object.prototype` and `Function.prototype`, and none of

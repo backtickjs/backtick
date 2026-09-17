@@ -113,12 +113,12 @@ describe("a field's value", () => {
       const isOn = $state(false);
       return (
         <div>
-          <input aria-label="text" value={text.read()} />
-          <input type="checkbox" aria-label="on" checked={isOn.read()} />
+          <input aria-label="text" value={text.get()} />
+          <input type="checkbox" aria-label="on" checked={isOn.get()} />
           <button
             onclick={() => {
-              text.write("second");
-              isOn.write(true);
+              text.set("second");
+              isOn.set(true);
             }}
           >
             write
@@ -149,12 +149,12 @@ describe("a field's value", () => {
       const flags = $state([true]);
       return (
         <div>
-          <input aria-label="text" value={texts.read()[0]} />
-          <input type="checkbox" aria-label="on" checked={flags.read()[0]} />
+          <input aria-label="text" value={texts.get()[0]} />
+          <input type="checkbox" aria-label="on" checked={flags.get()[0]} />
           <button
             onclick={() => {
-              texts.write([]);
-              flags.write([]);
+              texts.set([]);
+              flags.set([]);
             }}
           >
             clear

@@ -16,8 +16,8 @@ it("eventHandlers", async (t) => {
     const __cs_said = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(""));
     return cs.const(<form onsubmit={cs.lift(__cs_event => {
         cs.statement(cs.receiver(__cs_event).preventDefault());
-        cs.statement(cs.receiver(__cs_said).write(cs.receiver(__cs_event).type + " " + cs.receiver(__cs_event).cancelable));
-    })}>{cs.lift(<textarea oninput={cs.lift(__cs_event => cs.receiver(__cs_said).write(cs.receiver(cs.receiver(__cs_event).currentTarget).value))}/>)}{cs.lift(<input oninput={cs.lift(__cs_event => cs.receiver(__cs_said).write(cs.receiver(cs.receiver(__cs_event).currentTarget).value))}/>)}{cs.lift(<button onclick={cs.lift(__cs_event => cs.receiver(__cs_said).write(cs.receiver(__cs_event).clientX + " " + cs.receiver(cs.receiver(__cs_event).currentTarget).tagName))}>{cs.lift(cs.receiver(__cs_said).read())}</button>)}</form>);
+        cs.statement(cs.receiver(__cs_said).set(cs.receiver(__cs_event).type + " " + cs.receiver(__cs_event).cancelable));
+    })}>{cs.lift(<textarea oninput={cs.lift(__cs_event => cs.receiver(__cs_said).set(cs.receiver(cs.receiver(__cs_event).currentTarget).value))}/>)}{cs.lift(<input oninput={cs.lift(__cs_event => cs.receiver(__cs_said).set(cs.receiver(cs.receiver(__cs_event).currentTarget).value))}/>)}{cs.lift(<button onclick={cs.lift(__cs_event => cs.receiver(__cs_said).set(cs.receiver(__cs_event).clientX + " " + cs.receiver(cs.receiver(__cs_event).currentTarget).tagName))}>{cs.lift(cs.receiver(__cs_said).get())}</button>)}</form>);
 })()),
   );
 });

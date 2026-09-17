@@ -42,7 +42,7 @@ async function Answer() {
     {
       version: "0.0.0",
       filePath: "vm-eval/vm-eval-builds-once.test.tsx",
-      fileHash: "28j8sepcm44da",
+      fileHash: "1fnjq82l0oo0w",
       splices: {},
       captures: [],
     },
@@ -72,7 +72,7 @@ async function Waiting({ ask }) {
     {
       version: "0.0.0",
       filePath: "vm-eval/vm-eval-builds-once.test.tsx",
-      fileHash: "28j8sepcm44da",
+      fileHash: "1fnjq82l0oo0w",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -92,7 +92,7 @@ async function Waiting({ ask }) {
             kind: "id",
             loc: [53, 11, 53, 16],
             text: "drawn",
-            bindingKey: "drawn$28j8sepcm44da$0",
+            bindingKey: "drawn$1fnjq82l0oo0w$0",
           },
           initializer: {
             kind: "()",
@@ -112,16 +112,16 @@ async function Waiting({ ask }) {
         },
         {
           kind: "const",
-          loc: [54, 5, 54, 70],
+          loc: [54, 5, 54, 68],
           name: {
             kind: "id",
             loc: [54, 11, 54, 18],
             text: "started",
-            bindingKey: "started$28j8sepcm44da$1",
+            bindingKey: "started$1fnjq82l0oo0w$1",
           },
           initializer: {
             kind: "()",
-            loc: [54, 21, 54, 69],
+            loc: [54, 21, 54, 67],
             expression: {
               kind: ".",
               loc: [54, 21, 54, 39],
@@ -135,29 +135,29 @@ async function Waiting({ ask }) {
             arguments: [
               {
                 kind: "=>",
-                loc: [54, 40, 54, 65],
+                loc: [54, 40, 54, 63],
                 parameters: [],
                 body: {
                   kind: "()",
-                  loc: [54, 46, 54, 65],
+                  loc: [54, 46, 54, 63],
                   expression: {
                     kind: ".",
-                    loc: [54, 46, 54, 57],
+                    loc: [54, 46, 54, 55],
                     expression: {
                       kind: "id",
                       loc: [54, 46, 54, 51],
                       text: "drawn",
-                      bindingKey: "drawn$28j8sepcm44da$0",
+                      bindingKey: "drawn$1fnjq82l0oo0w$0",
                     },
-                    name: "write",
+                    name: "set",
                   },
                   arguments: [
                     {
                       kind: "()",
-                      loc: [54, 58, 54, 64],
+                      loc: [54, 56, 54, 62],
                       expression: {
                         kind: "splice",
-                        loc: [54, 58, 54, 62],
+                        loc: [54, 56, 54, 60],
                         key: "$ask",
                       },
                       arguments: [],
@@ -167,7 +167,7 @@ async function Waiting({ ask }) {
               },
               {
                 kind: "number",
-                loc: [54, 67, 54, 68],
+                loc: [54, 65, 54, 66],
                 value: 0,
               },
             ],
@@ -188,30 +188,30 @@ async function Waiting({ ask }) {
             children: [
               {
                 kind: "?:",
-                loc: [57, 10, 59, 62],
+                loc: [57, 10, 59, 61],
                 condition: {
                   kind: "binop",
-                  loc: [57, 10, 57, 31],
+                  loc: [57, 10, 57, 30],
                   left: {
                     kind: "()",
-                    loc: [57, 10, 57, 22],
+                    loc: [57, 10, 57, 21],
                     expression: {
                       kind: ".",
-                      loc: [57, 10, 57, 20],
+                      loc: [57, 10, 57, 19],
                       expression: {
                         kind: "id",
                         loc: [57, 10, 57, 15],
                         text: "drawn",
-                        bindingKey: "drawn$28j8sepcm44da$0",
+                        bindingKey: "drawn$1fnjq82l0oo0w$0",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
                   operatorToken: "===",
                   right: {
                     kind: "null",
-                    loc: [57, 27, 57, 31],
+                    loc: [57, 26, 57, 30],
                   },
                 },
                 whenTrue: {
@@ -220,7 +220,7 @@ async function Waiting({ ask }) {
                 },
                 whenFalse: {
                   kind: "()",
-                  loc: [59, 13, 59, 62],
+                  loc: [59, 13, 59, 61],
                   expression: {
                     kind: ".",
                     loc: [59, 13, 59, 21],
@@ -234,17 +234,17 @@ async function Waiting({ ask }) {
                   arguments: [
                     {
                       kind: "()",
-                      loc: [59, 22, 59, 34],
+                      loc: [59, 22, 59, 33],
                       expression: {
                         kind: ".",
-                        loc: [59, 22, 59, 32],
+                        loc: [59, 22, 59, 31],
                         expression: {
                           kind: "id",
                           loc: [59, 22, 59, 27],
                           text: "drawn",
-                          bindingKey: "drawn$28j8sepcm44da$0",
+                          bindingKey: "drawn$1fnjq82l0oo0w$0",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -263,7 +263,7 @@ const vmEvalBuildsOnce = cs.create(
   {
     version: "0.0.0",
     filePath: "vm-eval/vm-eval-builds-once.test.tsx",
-    fileHash: "28j8sepcm44da",
+    fileHash: "1fnjq82l0oo0w",
     splices: {
       $state: { value: state, params: [] },
       $answer: { value: answer, params: [] },
@@ -282,7 +282,7 @@ const vmEvalBuildsOnce = cs.create(
           kind: "id",
           loc: [66, 9, 66, 14],
           text: "asked",
-          bindingKey: "asked$28j8sepcm44da$2",
+          bindingKey: "asked$1fnjq82l0oo0w$2",
         },
         initializer: {
           kind: "()",
@@ -316,7 +316,7 @@ const vmEvalBuildsOnce = cs.create(
           children: [
             {
               kind: "jsx",
-              loc: [70, 7, 70, 45],
+              loc: [70, 7, 70, 44],
               type: {
                 kind: "string",
                 loc: [70, 8, 70, 12],
@@ -326,7 +326,7 @@ const vmEvalBuildsOnce = cs.create(
               children: [
                 {
                   kind: "binop",
-                  loc: [70, 14, 70, 37],
+                  loc: [70, 14, 70, 36],
                   left: {
                     kind: "string",
                     loc: [70, 14, 70, 22],
@@ -335,17 +335,17 @@ const vmEvalBuildsOnce = cs.create(
                   operatorToken: "+",
                   right: {
                     kind: "()",
-                    loc: [70, 25, 70, 37],
+                    loc: [70, 25, 70, 36],
                     expression: {
                       kind: ".",
-                      loc: [70, 25, 70, 35],
+                      loc: [70, 25, 70, 34],
                       expression: {
                         kind: "id",
                         loc: [70, 25, 70, 30],
                         text: "asked",
-                        bindingKey: "asked$28j8sepcm44da$2",
+                        bindingKey: "asked$1fnjq82l0oo0w$2",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
@@ -373,42 +373,42 @@ const vmEvalBuildsOnce = cs.create(
                       statements: [
                         {
                           kind: "()",
-                          loc: [73, 11, 73, 40],
+                          loc: [73, 11, 73, 37],
                           expression: {
                             kind: ".",
-                            loc: [73, 11, 73, 22],
+                            loc: [73, 11, 73, 20],
                             expression: {
                               kind: "id",
                               loc: [73, 11, 73, 16],
                               text: "asked",
-                              bindingKey: "asked$28j8sepcm44da$2",
+                              bindingKey: "asked$1fnjq82l0oo0w$2",
                             },
-                            name: "write",
+                            name: "set",
                           },
                           arguments: [
                             {
                               kind: "binop",
-                              loc: [73, 23, 73, 39],
+                              loc: [73, 21, 73, 36],
                               left: {
                                 kind: "()",
-                                loc: [73, 23, 73, 35],
+                                loc: [73, 21, 73, 32],
                                 expression: {
                                   kind: ".",
-                                  loc: [73, 23, 73, 33],
+                                  loc: [73, 21, 73, 30],
                                   expression: {
                                     kind: "id",
-                                    loc: [73, 23, 73, 28],
+                                    loc: [73, 21, 73, 26],
                                     text: "asked",
-                                    bindingKey: "asked$28j8sepcm44da$2",
+                                    bindingKey: "asked$1fnjq82l0oo0w$2",
                                   },
-                                  name: "read",
+                                  name: "get",
                                 },
                                 arguments: [],
                               },
                               operatorToken: "+",
                               right: {
                                 kind: "number",
-                                loc: [73, 38, 73, 39],
+                                loc: [73, 35, 73, 36],
                                 value: 1,
                               },
                             },
@@ -416,43 +416,43 @@ const vmEvalBuildsOnce = cs.create(
                         },
                         {
                           kind: "return",
-                          loc: [74, 11, 74, 52],
+                          loc: [74, 11, 74, 51],
                           expression: {
                             kind: "?:",
-                            loc: [74, 18, 74, 51],
+                            loc: [74, 18, 74, 50],
                             condition: {
                               kind: "binop",
-                              loc: [74, 18, 74, 34],
+                              loc: [74, 18, 74, 33],
                               left: {
                                 kind: "()",
-                                loc: [74, 18, 74, 30],
+                                loc: [74, 18, 74, 29],
                                 expression: {
                                   kind: ".",
-                                  loc: [74, 18, 74, 28],
+                                  loc: [74, 18, 74, 27],
                                   expression: {
                                     kind: "id",
                                     loc: [74, 18, 74, 23],
                                     text: "asked",
-                                    bindingKey: "asked$28j8sepcm44da$2",
+                                    bindingKey: "asked$1fnjq82l0oo0w$2",
                                   },
-                                  name: "read",
+                                  name: "get",
                                 },
                                 arguments: [],
                               },
                               operatorToken: ">",
                               right: {
                                 kind: "number",
-                                loc: [74, 33, 74, 34],
+                                loc: [74, 32, 74, 33],
                                 value: 4,
                               },
                             },
                             whenTrue: {
                               kind: "null",
-                              loc: [74, 37, 74, 41],
+                              loc: [74, 36, 74, 40],
                             },
                             whenFalse: {
                               kind: "splice",
-                              loc: [74, 44, 74, 51],
+                              loc: [74, 43, 74, 50],
                               key: "$answer",
                             },
                           },

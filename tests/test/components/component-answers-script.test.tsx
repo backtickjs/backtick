@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Panel() {
   return cs`{
     const n = $state(2);
-    return <em>{n.read()}</em>;
+    return <em>{n.get()}</em>;
   }`;
 }
 

@@ -19,11 +19,11 @@ const ReadingRow = async ({ id, selected }) =>
     children: [
       _jsx("span", {
         style: cs.create(
-          [27, 14, 27, 77],
+          [27, 14, 27, 76],
           {
             version: "0.0.0",
             filePath: "state/local-state-child-reads.test.tsx",
-            fileHash: "2u1y4xp6zos4q",
+            fileHash: "asvx80rnl1z5",
             splices: {
               $selected: { value: selected, params: [] },
               $id: { value: id, params: [] },
@@ -32,10 +32,10 @@ const ReadingRow = async ({ id, selected }) =>
           },
           () => ({
             kind: "binop",
-            loc: [27, 17, 27, 76],
+            loc: [27, 17, 27, 75],
             left: {
               kind: "binop",
-              loc: [27, 17, 27, 69],
+              loc: [27, 17, 27, 68],
               left: {
                 kind: "string",
                 loc: [27, 17, 27, 30],
@@ -44,40 +44,40 @@ const ReadingRow = async ({ id, selected }) =>
               operatorToken: "+",
               right: {
                 kind: "?:",
-                loc: [27, 34, 27, 68],
+                loc: [27, 34, 27, 67],
                 condition: {
                   kind: "binop",
-                  loc: [27, 34, 27, 58],
+                  loc: [27, 34, 27, 57],
                   left: {
                     kind: "()",
-                    loc: [27, 34, 27, 50],
+                    loc: [27, 34, 27, 49],
                     expression: {
                       kind: ".",
-                      loc: [27, 34, 27, 48],
+                      loc: [27, 34, 27, 47],
                       expression: {
                         kind: "splice",
                         loc: [27, 34, 27, 43],
                         key: "$selected",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
                   operatorToken: "===",
                   right: {
                     kind: "splice",
-                    loc: [27, 55, 27, 58],
+                    loc: [27, 54, 27, 57],
                     key: "$id",
                   },
                 },
                 whenTrue: {
                   kind: "number",
-                  loc: [27, 61, 27, 63],
+                  loc: [27, 60, 27, 62],
                   value: 20,
                 },
                 whenFalse: {
                   kind: "number",
-                  loc: [27, 66, 27, 68],
+                  loc: [27, 65, 27, 67],
                   value: 16,
                 },
               },
@@ -85,17 +85,17 @@ const ReadingRow = async ({ id, selected }) =>
             operatorToken: "+",
             right: {
               kind: "string",
-              loc: [27, 72, 27, 76],
+              loc: [27, 71, 27, 75],
               text: "px",
             },
           }),
         ),
         children: cs.create(
-          [29, 8, 29, 52],
+          [29, 8, 29, 51],
           {
             version: "0.0.0",
             filePath: "state/local-state-child-reads.test.tsx",
-            fileHash: "2u1y4xp6zos4q",
+            fileHash: "asvx80rnl1z5",
             splices: {
               $id: { value: id, params: [] },
               $selected: { value: selected, params: [] },
@@ -104,7 +104,7 @@ const ReadingRow = async ({ id, selected }) =>
           },
           () => ({
             kind: "binop",
-            loc: [29, 11, 29, 51],
+            loc: [29, 11, 29, 50],
             left: {
               kind: "binop",
               loc: [29, 11, 29, 32],
@@ -133,16 +133,16 @@ const ReadingRow = async ({ id, selected }) =>
             operatorToken: "+",
             right: {
               kind: "()",
-              loc: [29, 35, 29, 51],
+              loc: [29, 35, 29, 50],
               expression: {
                 kind: ".",
-                loc: [29, 35, 29, 49],
+                loc: [29, 35, 29, 48],
                 expression: {
                   kind: "splice",
                   loc: [29, 35, 29, 44],
                   key: "$selected",
                 },
-                name: "read",
+                name: "get",
               },
               arguments: [],
             },
@@ -150,11 +150,11 @@ const ReadingRow = async ({ id, selected }) =>
         ),
       }),
       cs.create(
-        [31, 6, 31, 68],
+        [31, 6, 31, 67],
         {
           version: "0.0.0",
           filePath: "state/local-state-child-reads.test.tsx",
-          fileHash: "2u1y4xp6zos4q",
+          fileHash: "asvx80rnl1z5",
           splices: {
             $selected: { value: selected, params: [] },
             $id: { value: id, params: [] },
@@ -167,40 +167,40 @@ const ReadingRow = async ({ id, selected }) =>
         },
         () => ({
           kind: "?:",
-          loc: [31, 9, 31, 67],
+          loc: [31, 9, 31, 66],
           condition: {
             kind: "binop",
-            loc: [31, 9, 31, 33],
+            loc: [31, 9, 31, 32],
             left: {
               kind: "()",
-              loc: [31, 9, 31, 25],
+              loc: [31, 9, 31, 24],
               expression: {
                 kind: ".",
-                loc: [31, 9, 31, 23],
+                loc: [31, 9, 31, 22],
                 expression: {
                   kind: "splice",
                   loc: [31, 9, 31, 18],
                   key: "$selected",
                 },
-                name: "read",
+                name: "get",
               },
               arguments: [],
             },
             operatorToken: "===",
             right: {
               kind: "splice",
-              loc: [31, 30, 31, 33],
+              loc: [31, 29, 31, 32],
               key: "$id",
             },
           },
           whenTrue: {
             kind: "splice",
-            loc: [31, 36, 31, 60],
+            loc: [31, 35, 31, 59],
             key: "$0splice0",
           },
           whenFalse: {
             kind: "null",
-            loc: [31, 63, 31, 67],
+            loc: [31, 62, 31, 66],
           },
         }),
       ),
@@ -212,7 +212,7 @@ async function ReadingPanel() {
     {
       version: "0.0.0",
       filePath: "state/local-state-child-reads.test.tsx",
-      fileHash: "2u1y4xp6zos4q",
+      fileHash: "asvx80rnl1z5",
       splices: {
         $state: { value: state, params: [] },
         $ReadingRow: { value: ReadingRow, params: [] },
@@ -230,7 +230,7 @@ async function ReadingPanel() {
             kind: "id",
             loc: [37, 11, 37, 19],
             text: "selected",
-            bindingKey: "selected$2u1y4xp6zos4q$0",
+            bindingKey: "selected$asvx80rnl1z5$0",
           },
           initializer: {
             kind: "()",
@@ -264,7 +264,7 @@ async function ReadingPanel() {
             children: [
               {
                 kind: "jsx",
-                loc: [40, 9, 40, 62],
+                loc: [40, 9, 40, 60],
                 type: {
                   kind: "string",
                   loc: [40, 10, 40, 14],
@@ -275,26 +275,26 @@ async function ReadingPanel() {
                     name: "onclick",
                     initializer: {
                       kind: "=>",
-                      loc: [40, 24, 40, 47],
+                      loc: [40, 24, 40, 45],
                       parameters: [],
                       body: {
                         kind: "()",
-                        loc: [40, 30, 40, 47],
+                        loc: [40, 30, 40, 45],
                         expression: {
                           kind: ".",
-                          loc: [40, 30, 40, 44],
+                          loc: [40, 30, 40, 42],
                           expression: {
                             kind: "id",
                             loc: [40, 30, 40, 38],
                             text: "selected",
-                            bindingKey: "selected$2u1y4xp6zos4q$0",
+                            bindingKey: "selected$asvx80rnl1z5$0",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "number",
-                            loc: [40, 45, 40, 46],
+                            loc: [40, 43, 40, 44],
                             value: 1,
                           },
                         ],
@@ -305,7 +305,7 @@ async function ReadingPanel() {
                 children: [
                   {
                     kind: "string",
-                    loc: [40, 49, 40, 55],
+                    loc: [40, 47, 40, 53],
                     text: "select",
                   },
                 ],
@@ -333,7 +333,7 @@ async function ReadingPanel() {
                       kind: "id",
                       loc: [41, 38, 41, 46],
                       text: "selected",
-                      bindingKey: "selected$2u1y4xp6zos4q$0",
+                      bindingKey: "selected$asvx80rnl1z5$0",
                     },
                   },
                 ],
@@ -362,7 +362,7 @@ async function ReadingPanel() {
                       kind: "id",
                       loc: [42, 38, 42, 46],
                       text: "selected",
-                      bindingKey: "selected$2u1y4xp6zos4q$0",
+                      bindingKey: "selected$asvx80rnl1z5$0",
                     },
                   },
                 ],

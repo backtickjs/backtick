@@ -85,7 +85,7 @@ cs.receiver(                         →
 __cs_drawn                           → drawn
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 );                                   → ;
 \n                                   → \n    
@@ -121,7 +121,7 @@ cs.receiver(                         →
 __cs_drawn                           → drawn
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  ===                                 →  === 
 null                                 → null
@@ -141,7 +141,7 @@ cs.receiver(                         →
 __cs_count                           → count
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 }                                    → }
 />                                   →  />
@@ -156,7 +156,7 @@ cs.receiver(                         →
 __cs_drawn                           → drawn
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.splice(                           →  [-semantic]
 (loadedBadge)                        → $loadedBadge
@@ -177,13 +177,13 @@ cs.receiver(                         →
 __cs_count                           → count
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 cs.receiver(                         → 
 __cs_count                           → count
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
  +                                   →  + 
 1                                    → 1

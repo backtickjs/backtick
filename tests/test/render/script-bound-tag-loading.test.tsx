@@ -22,15 +22,15 @@ const scriptBoundTagLoading = cs`{
     (props: { count: number }) => BacktickElement
   > | null>(null);
   const Badge = (props: { count: number }) => {
-    const held = drawn.read();
+    const held = drawn.get();
     return held === null ? null : $vm.eval(held)(props);
   };
 
   return (
     <div>
-      {drawn.read() === null ? <i>loading</i> : <Badge count={count.read()} />}
-      <button onclick={() => drawn.write($loadedBadge)}>load</button>
-      <button onclick={() => count.write(count.read() + 1)}>more</button>
+      {drawn.get() === null ? <i>loading</i> : <Badge count={count.get()} />}
+      <button onclick={() => drawn.set($loadedBadge)}>load</button>
+      <button onclick={() => count.set(count.get() + 1)}>more</button>
     </div>
   );
 }`;

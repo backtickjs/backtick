@@ -27,7 +27,7 @@ cs.receiver(                         →
 __cs_rows                            → rows
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 [                                    → [
 __cs_row                             → row
@@ -94,10 +94,10 @@ cs.receiver(                         →
 __cs_rows                            → rows
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}                                   → }
->{cs.lift(                           → >\n            {
+>{cs.lift(                           → >{
 (                                    → (
 __cs_row                             → row
 :                                    → : 
@@ -113,7 +113,7 @@ __cs_row                             → row
 )}</                                 → }</
 span                                 → span
 >                                    → >
-)}</                                 → }\n          </
+)}</                                 → }</
 For                                  → For
 >                                    → >
 )}</                                 → \n        </

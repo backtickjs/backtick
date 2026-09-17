@@ -10,12 +10,12 @@
       class={"rows"}
     >
       {<{$1()}
-        each={() => held.read()}
+        each={() => held.get()}
       >
         {() => (row) => <li
-          onclick={() => row.label.write("pressed")}
+          onclick={() => row.label.set("pressed")}
         >
-          {row.label.read()}
+          {row.label.get()}
         </li>}
       </{$1()}>}
     </ul>}

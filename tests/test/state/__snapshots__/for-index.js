@@ -13,11 +13,11 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs.create(
-    [16, 10, 33, 5],
+    [16, 10, 34, 5],
     {
       version: "0.0.0",
       filePath: "state/for-index.test.tsx",
-      fileHash: "28nxslpikd4m7",
+      fileHash: "3hac73x1hhg8m",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -26,7 +26,7 @@ async function RotatingRows() {
     },
     () => ({
       kind: "{}",
-      loc: [16, 13, 33, 4],
+      loc: [16, 13, 34, 4],
       statements: [
         {
           kind: "const",
@@ -35,7 +35,7 @@ async function RotatingRows() {
             kind: "id",
             loc: [17, 11, 17, 16],
             text: "names",
-            bindingKey: "names$28nxslpikd4m7$0",
+            bindingKey: "names$3hac73x1hhg8m$0",
           },
           initializer: {
             kind: "()",
@@ -72,102 +72,112 @@ async function RotatingRows() {
         },
         {
           kind: "const",
-          loc: [18, 5, 20, 7],
+          loc: [18, 5, 21, 7],
           name: {
             kind: "id",
             loc: [18, 11, 18, 17],
             text: "rotate",
-            bindingKey: "rotate$28nxslpikd4m7$1",
+            bindingKey: "rotate$3hac73x1hhg8m$1",
           },
           initializer: {
             kind: "=>",
-            loc: [18, 20, 20, 6],
+            loc: [18, 20, 21, 6],
             parameters: [],
             body: {
               kind: "{}",
-              loc: [18, 26, 20, 6],
+              loc: [18, 26, 21, 6],
               statements: [
                 {
+                  kind: "const",
+                  loc: [19, 7, 19, 32],
+                  name: {
+                    kind: "id",
+                    loc: [19, 13, 19, 17],
+                    text: "held",
+                    bindingKey: "held$3hac73x1hhg8m$2",
+                  },
+                  initializer: {
+                    kind: "()",
+                    loc: [19, 20, 19, 31],
+                    expression: {
+                      kind: ".",
+                      loc: [19, 20, 19, 29],
+                      expression: {
+                        kind: "id",
+                        loc: [19, 20, 19, 25],
+                        text: "names",
+                        bindingKey: "names$3hac73x1hhg8m$0",
+                      },
+                      name: "get",
+                    },
+                    arguments: [],
+                  },
+                },
+                {
                   kind: "()",
-                  loc: [19, 7, 19, 58],
+                  loc: [20, 7, 20, 45],
                   expression: {
                     kind: ".",
-                    loc: [19, 7, 19, 19],
+                    loc: [20, 7, 20, 16],
                     expression: {
                       kind: "id",
-                      loc: [19, 7, 19, 12],
+                      loc: [20, 7, 20, 12],
                       text: "names",
-                      bindingKey: "names$28nxslpikd4m7$0",
+                      bindingKey: "names$3hac73x1hhg8m$0",
                     },
-                    name: "update",
+                    name: "set",
                   },
                   arguments: [
                     {
-                      kind: "=>",
-                      loc: [19, 20, 19, 57],
-                      parameters: [
+                      kind: "arr",
+                      loc: [20, 17, 20, 44],
+                      elements: [
                         {
-                          kind: "param",
-                          loc: [19, 21, 19, 25],
-                          name: {
+                          kind: "[]",
+                          loc: [20, 18, 20, 25],
+                          expression: {
                             kind: "id",
-                            loc: [19, 21, 19, 25],
+                            loc: [20, 18, 20, 22],
                             text: "held",
-                            bindingKey: "held$28nxslpikd4m7$2",
+                            bindingKey: "held$3hac73x1hhg8m$2",
+                          },
+                          argumentExpression: {
+                            kind: "number",
+                            loc: [20, 23, 20, 24],
+                            value: 2,
+                          },
+                        },
+                        {
+                          kind: "[]",
+                          loc: [20, 27, 20, 34],
+                          expression: {
+                            kind: "id",
+                            loc: [20, 27, 20, 31],
+                            text: "held",
+                            bindingKey: "held$3hac73x1hhg8m$2",
+                          },
+                          argumentExpression: {
+                            kind: "number",
+                            loc: [20, 32, 20, 33],
+                            value: 0,
+                          },
+                        },
+                        {
+                          kind: "[]",
+                          loc: [20, 36, 20, 43],
+                          expression: {
+                            kind: "id",
+                            loc: [20, 36, 20, 40],
+                            text: "held",
+                            bindingKey: "held$3hac73x1hhg8m$2",
+                          },
+                          argumentExpression: {
+                            kind: "number",
+                            loc: [20, 41, 20, 42],
+                            value: 1,
                           },
                         },
                       ],
-                      body: {
-                        kind: "arr",
-                        loc: [19, 30, 19, 57],
-                        elements: [
-                          {
-                            kind: "[]",
-                            loc: [19, 31, 19, 38],
-                            expression: {
-                              kind: "id",
-                              loc: [19, 31, 19, 35],
-                              text: "held",
-                              bindingKey: "held$28nxslpikd4m7$2",
-                            },
-                            argumentExpression: {
-                              kind: "number",
-                              loc: [19, 36, 19, 37],
-                              value: 2,
-                            },
-                          },
-                          {
-                            kind: "[]",
-                            loc: [19, 40, 19, 47],
-                            expression: {
-                              kind: "id",
-                              loc: [19, 40, 19, 44],
-                              text: "held",
-                              bindingKey: "held$28nxslpikd4m7$2",
-                            },
-                            argumentExpression: {
-                              kind: "number",
-                              loc: [19, 45, 19, 46],
-                              value: 0,
-                            },
-                          },
-                          {
-                            kind: "[]",
-                            loc: [19, 49, 19, 56],
-                            expression: {
-                              kind: "id",
-                              loc: [19, 49, 19, 53],
-                              text: "held",
-                              bindingKey: "held$28nxslpikd4m7$2",
-                            },
-                            argumentExpression: {
-                              kind: "number",
-                              loc: [19, 54, 19, 55],
-                              value: 1,
-                            },
-                          },
-                        ],
-                      },
                     },
                   ],
                 },
@@ -177,23 +187,23 @@ async function RotatingRows() {
         },
         {
           kind: "return",
-          loc: [21, 5, 32, 7],
+          loc: [22, 5, 33, 7],
           expression: {
             kind: "jsx",
-            loc: [22, 7, 31, 13],
+            loc: [23, 7, 32, 13],
             type: {
               kind: "string",
-              loc: [22, 8, 22, 11],
+              loc: [23, 8, 23, 11],
               text: "div",
             },
             attributes: [],
             children: [
               {
                 kind: "jsx",
-                loc: [23, 9, 23, 45],
+                loc: [24, 9, 24, 45],
                 type: {
                   kind: "string",
-                  loc: [23, 10, 23, 14],
+                  loc: [24, 10, 24, 14],
                   text: "span",
                 },
                 attributes: [
@@ -201,36 +211,36 @@ async function RotatingRows() {
                     name: "onclick",
                     initializer: {
                       kind: "id",
-                      loc: [23, 24, 23, 30],
+                      loc: [24, 24, 24, 30],
                       text: "rotate",
-                      bindingKey: "rotate$28nxslpikd4m7$1",
+                      bindingKey: "rotate$3hac73x1hhg8m$1",
                     },
                   },
                 ],
                 children: [
                   {
                     kind: "string",
-                    loc: [23, 32, 23, 38],
+                    loc: [24, 32, 24, 38],
                     text: "rotate",
                   },
                 ],
               },
               {
                 kind: "jsx",
-                loc: [24, 9, 30, 15],
+                loc: [25, 9, 31, 15],
                 type: {
                   kind: "string",
-                  loc: [24, 10, 24, 13],
+                  loc: [25, 10, 25, 13],
                   text: "div",
                 },
                 attributes: [],
                 children: [
                   {
                     kind: "jsx",
-                    loc: [25, 11, 29, 17],
+                    loc: [26, 11, 30, 17],
                     type: {
                       kind: "splice",
-                      loc: [25, 12, 25, 15],
+                      loc: [26, 12, 26, 15],
                       key: "$For",
                     },
                     attributes: [
@@ -238,17 +248,17 @@ async function RotatingRows() {
                         name: "each",
                         initializer: {
                           kind: "()",
-                          loc: [25, 22, 25, 34],
+                          loc: [26, 22, 26, 33],
                           expression: {
                             kind: ".",
-                            loc: [25, 22, 25, 32],
+                            loc: [26, 22, 26, 31],
                             expression: {
                               kind: "id",
-                              loc: [25, 22, 25, 27],
+                              loc: [26, 22, 26, 27],
                               text: "names",
-                              bindingKey: "names$28nxslpikd4m7$0",
+                              bindingKey: "names$3hac73x1hhg8m$0",
                             },
-                            name: "read",
+                            name: "get",
                           },
                           arguments: [],
                         },
@@ -257,72 +267,72 @@ async function RotatingRows() {
                     children: [
                       {
                         kind: "=>",
-                        loc: [26, 14, 28, 14],
+                        loc: [27, 14, 29, 14],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [26, 15, 26, 27],
+                            loc: [27, 15, 27, 27],
                             name: {
                               kind: "id",
-                              loc: [26, 15, 26, 19],
+                              loc: [27, 15, 27, 19],
                               text: "name",
-                              bindingKey: "name$28nxslpikd4m7$3",
+                              bindingKey: "name$3hac73x1hhg8m$3",
                             },
                           },
                           {
                             kind: "param",
-                            loc: [26, 29, 26, 50],
+                            loc: [27, 29, 27, 50],
                             name: {
                               kind: "id",
-                              loc: [26, 29, 26, 34],
+                              loc: [27, 29, 27, 34],
                               text: "index",
-                              bindingKey: "index$28nxslpikd4m7$4",
+                              bindingKey: "index$3hac73x1hhg8m$4",
                             },
                           },
                         ],
                         body: {
                           kind: "jsx",
-                          loc: [27, 15, 27, 58],
+                          loc: [28, 15, 28, 57],
                           type: {
                             kind: "string",
-                            loc: [27, 16, 27, 20],
+                            loc: [28, 16, 28, 20],
                             text: "span",
                           },
                           attributes: [],
                           children: [
                             {
                               kind: "binop",
-                              loc: [27, 22, 27, 50],
+                              loc: [28, 22, 28, 49],
                               left: {
                                 kind: "binop",
-                                loc: [27, 22, 27, 35],
+                                loc: [28, 22, 28, 35],
                                 left: {
                                   kind: "id",
-                                  loc: [27, 22, 27, 26],
+                                  loc: [28, 22, 28, 26],
                                   text: "name",
-                                  bindingKey: "name$28nxslpikd4m7$3",
+                                  bindingKey: "name$3hac73x1hhg8m$3",
                                 },
                                 operatorToken: "+",
                                 right: {
                                   kind: "string",
-                                  loc: [27, 29, 27, 35],
+                                  loc: [28, 29, 28, 35],
                                   text: " at ",
                                 },
                               },
                               operatorToken: "+",
                               right: {
                                 kind: "()",
-                                loc: [27, 38, 27, 50],
+                                loc: [28, 38, 28, 49],
                                 expression: {
                                   kind: ".",
-                                  loc: [27, 38, 27, 48],
+                                  loc: [28, 38, 28, 47],
                                   expression: {
                                     kind: "id",
-                                    loc: [27, 38, 27, 43],
+                                    loc: [28, 38, 28, 43],
                                     text: "index",
-                                    bindingKey: "index$28nxslpikd4m7$4",
+                                    bindingKey: "index$3hac73x1hhg8m$4",
                                   },
-                                  name: "read",
+                                  name: "get",
                                 },
                                 arguments: [],
                               },

@@ -16,7 +16,7 @@ const loadedBadge = await bundler.run(
     {
       version: "0.0.0",
       filePath: "render/script-bound-tag-loading.test.tsx",
-      fileHash: "3kh72s2w14tai",
+      fileHash: "13m3r5187pmvw",
       splices: {},
       captures: [],
     },
@@ -31,7 +31,7 @@ const loadedBadge = await bundler.run(
             kind: "id",
             loc: [16, 7, 16, 12],
             text: "props",
-            bindingKey: "props$3kh72s2w14tai$0",
+            bindingKey: "props$13m3r5187pmvw$0",
           },
         },
       ],
@@ -61,7 +61,7 @@ const loadedBadge = await bundler.run(
                 kind: "id",
                 loc: [16, 51, 16, 56],
                 text: "props",
-                bindingKey: "props$3kh72s2w14tai$0",
+                bindingKey: "props$13m3r5187pmvw$0",
               },
               name: "count",
             },
@@ -76,7 +76,7 @@ const scriptBoundTagLoading = cs.create(
   {
     version: "0.0.0",
     filePath: "render/script-bound-tag-loading.test.tsx",
-    fileHash: "3kh72s2w14tai",
+    fileHash: "13m3r5187pmvw",
     splices: {
       $state: { value: state, params: [] },
       $vm: { value: vm, params: [] },
@@ -95,7 +95,7 @@ const scriptBoundTagLoading = cs.create(
           kind: "id",
           loc: [20, 9, 20, 14],
           text: "count",
-          bindingKey: "count$3kh72s2w14tai$1",
+          bindingKey: "count$13m3r5187pmvw$1",
         },
         initializer: {
           kind: "()",
@@ -121,7 +121,7 @@ const scriptBoundTagLoading = cs.create(
           kind: "id",
           loc: [21, 9, 21, 14],
           text: "drawn",
-          bindingKey: "drawn$3kh72s2w14tai$2",
+          bindingKey: "drawn$13m3r5187pmvw$2",
         },
         initializer: {
           kind: "()",
@@ -146,7 +146,7 @@ const scriptBoundTagLoading = cs.create(
           kind: "id",
           loc: [24, 9, 24, 14],
           text: "Badge",
-          bindingKey: "Badge$3kh72s2w14tai$3",
+          bindingKey: "Badge$13m3r5187pmvw$3",
         },
         initializer: {
           kind: "=>",
@@ -159,7 +159,7 @@ const scriptBoundTagLoading = cs.create(
                 kind: "id",
                 loc: [24, 18, 24, 23],
                 text: "props",
-                bindingKey: "props$3kh72s2w14tai$4",
+                bindingKey: "props$13m3r5187pmvw$4",
               },
             },
           ],
@@ -169,26 +169,26 @@ const scriptBoundTagLoading = cs.create(
             statements: [
               {
                 kind: "const",
-                loc: [25, 5, 25, 31],
+                loc: [25, 5, 25, 30],
                 name: {
                   kind: "id",
                   loc: [25, 11, 25, 15],
                   text: "held",
-                  bindingKey: "held$3kh72s2w14tai$5",
+                  bindingKey: "held$13m3r5187pmvw$5",
                 },
                 initializer: {
                   kind: "()",
-                  loc: [25, 18, 25, 30],
+                  loc: [25, 18, 25, 29],
                   expression: {
                     kind: ".",
-                    loc: [25, 18, 25, 28],
+                    loc: [25, 18, 25, 27],
                     expression: {
                       kind: "id",
                       loc: [25, 18, 25, 23],
                       text: "drawn",
-                      bindingKey: "drawn$3kh72s2w14tai$2",
+                      bindingKey: "drawn$13m3r5187pmvw$2",
                     },
-                    name: "read",
+                    name: "get",
                   },
                   arguments: [],
                 },
@@ -206,7 +206,7 @@ const scriptBoundTagLoading = cs.create(
                       kind: "id",
                       loc: [26, 12, 26, 16],
                       text: "held",
-                      bindingKey: "held$3kh72s2w14tai$5",
+                      bindingKey: "held$13m3r5187pmvw$5",
                     },
                     operatorToken: "===",
                     right: {
@@ -239,7 +239,7 @@ const scriptBoundTagLoading = cs.create(
                           kind: "id",
                           loc: [26, 44, 26, 48],
                           text: "held",
-                          bindingKey: "held$3kh72s2w14tai$5",
+                          bindingKey: "held$13m3r5187pmvw$5",
                         },
                       ],
                     },
@@ -248,7 +248,7 @@ const scriptBoundTagLoading = cs.create(
                         kind: "id",
                         loc: [26, 50, 26, 55],
                         text: "props",
-                        bindingKey: "props$3kh72s2w14tai$4",
+                        bindingKey: "props$13m3r5187pmvw$4",
                       },
                     ],
                   },
@@ -273,74 +273,74 @@ const scriptBoundTagLoading = cs.create(
           children: [
             {
               kind: "?:",
-              loc: [31, 8, 31, 79],
+              loc: [31, 8, 31, 77],
               condition: {
                 kind: "binop",
-                loc: [31, 8, 31, 29],
+                loc: [31, 8, 31, 28],
                 left: {
                   kind: "()",
-                  loc: [31, 8, 31, 20],
+                  loc: [31, 8, 31, 19],
                   expression: {
                     kind: ".",
-                    loc: [31, 8, 31, 18],
+                    loc: [31, 8, 31, 17],
                     expression: {
                       kind: "id",
                       loc: [31, 8, 31, 13],
                       text: "drawn",
-                      bindingKey: "drawn$3kh72s2w14tai$2",
+                      bindingKey: "drawn$13m3r5187pmvw$2",
                     },
-                    name: "read",
+                    name: "get",
                   },
                   arguments: [],
                 },
                 operatorToken: "===",
                 right: {
                   kind: "null",
-                  loc: [31, 25, 31, 29],
+                  loc: [31, 24, 31, 28],
                 },
               },
               whenTrue: {
                 kind: "jsx",
-                loc: [31, 32, 31, 46],
+                loc: [31, 31, 31, 45],
                 type: {
                   kind: "string",
-                  loc: [31, 33, 31, 34],
+                  loc: [31, 32, 31, 33],
                   text: "i",
                 },
                 attributes: [],
                 children: [
                   {
                     kind: "string",
-                    loc: [31, 35, 31, 42],
+                    loc: [31, 34, 31, 41],
                     text: "loading",
                   },
                 ],
               },
               whenFalse: {
                 kind: "jsx",
-                loc: [31, 49, 31, 79],
+                loc: [31, 48, 31, 77],
                 type: {
                   kind: "id",
-                  loc: [31, 50, 31, 55],
+                  loc: [31, 49, 31, 54],
                   text: "Badge",
-                  bindingKey: "Badge$3kh72s2w14tai$3",
+                  bindingKey: "Badge$13m3r5187pmvw$3",
                 },
                 attributes: [
                   {
                     name: "count",
                     initializer: {
                       kind: "()",
-                      loc: [31, 63, 31, 75],
+                      loc: [31, 62, 31, 73],
                       expression: {
                         kind: ".",
-                        loc: [31, 63, 31, 73],
+                        loc: [31, 62, 31, 71],
                         expression: {
                           kind: "id",
-                          loc: [31, 63, 31, 68],
+                          loc: [31, 62, 31, 67],
                           text: "count",
-                          bindingKey: "count$3kh72s2w14tai$1",
+                          bindingKey: "count$13m3r5187pmvw$1",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -351,7 +351,7 @@ const scriptBoundTagLoading = cs.create(
             },
             {
               kind: "jsx",
-              loc: [32, 7, 32, 70],
+              loc: [32, 7, 32, 68],
               type: {
                 kind: "string",
                 loc: [32, 8, 32, 14],
@@ -362,26 +362,26 @@ const scriptBoundTagLoading = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [32, 24, 32, 55],
+                    loc: [32, 24, 32, 53],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [32, 30, 32, 55],
+                      loc: [32, 30, 32, 53],
                       expression: {
                         kind: ".",
-                        loc: [32, 30, 32, 41],
+                        loc: [32, 30, 32, 39],
                         expression: {
                           kind: "id",
                           loc: [32, 30, 32, 35],
                           text: "drawn",
-                          bindingKey: "drawn$3kh72s2w14tai$2",
+                          bindingKey: "drawn$13m3r5187pmvw$2",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "splice",
-                          loc: [32, 42, 32, 54],
+                          loc: [32, 40, 32, 52],
                           key: "$loadedBadge",
                         },
                       ],
@@ -392,14 +392,14 @@ const scriptBoundTagLoading = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [32, 57, 32, 61],
+                  loc: [32, 55, 32, 59],
                   text: "load",
                 },
               ],
             },
             {
               kind: "jsx",
-              loc: [33, 7, 33, 74],
+              loc: [33, 7, 33, 71],
               type: {
                 kind: "string",
                 loc: [33, 8, 33, 14],
@@ -410,46 +410,46 @@ const scriptBoundTagLoading = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [33, 24, 33, 59],
+                    loc: [33, 24, 33, 56],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [33, 30, 33, 59],
+                      loc: [33, 30, 33, 56],
                       expression: {
                         kind: ".",
-                        loc: [33, 30, 33, 41],
+                        loc: [33, 30, 33, 39],
                         expression: {
                           kind: "id",
                           loc: [33, 30, 33, 35],
                           text: "count",
-                          bindingKey: "count$3kh72s2w14tai$1",
+                          bindingKey: "count$13m3r5187pmvw$1",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "binop",
-                          loc: [33, 42, 33, 58],
+                          loc: [33, 40, 33, 55],
                           left: {
                             kind: "()",
-                            loc: [33, 42, 33, 54],
+                            loc: [33, 40, 33, 51],
                             expression: {
                               kind: ".",
-                              loc: [33, 42, 33, 52],
+                              loc: [33, 40, 33, 49],
                               expression: {
                                 kind: "id",
-                                loc: [33, 42, 33, 47],
+                                loc: [33, 40, 33, 45],
                                 text: "count",
-                                bindingKey: "count$3kh72s2w14tai$1",
+                                bindingKey: "count$13m3r5187pmvw$1",
                               },
-                              name: "read",
+                              name: "get",
                             },
                             arguments: [],
                           },
                           operatorToken: "+",
                           right: {
                             kind: "number",
-                            loc: [33, 57, 33, 58],
+                            loc: [33, 54, 33, 55],
                             value: 1,
                           },
                         },
@@ -461,7 +461,7 @@ const scriptBoundTagLoading = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [33, 61, 33, 65],
+                  loc: [33, 58, 33, 62],
                   text: "more",
                 },
               ],

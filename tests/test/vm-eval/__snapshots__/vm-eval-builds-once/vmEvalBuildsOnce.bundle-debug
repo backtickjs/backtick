@@ -2,12 +2,12 @@
   const asked = $0()(0);
   return <div>
     {<span>
-      {"asked " + asked.read()}
+      {"asked " + asked.get()}
     </span>}
     {<{$2()}
       ask={() => () => {
-        asked.write(asked.read() + 1);
-        return asked.read() > 4 ? null : $1();
+        asked.set(asked.get() + 1);
+        return asked.get() > 4 ? null : $1();
       }}
     />}
   </div>;
@@ -15,9 +15,9 @@
 
 #f1 = ($0, $1, $2, $3) => {
   const drawn = $0()(null);
-  const started = $1().setTimeout(() => drawn.write($2()()), 0);
+  const started = $1().setTimeout(() => drawn.set($2()()), 0);
   return <Fragment>
-    {drawn.read() === null ? null : $3().eval(drawn.read())}
+    {drawn.get() === null ? null : $3().eval(drawn.get())}
   </Fragment>;
 }
 

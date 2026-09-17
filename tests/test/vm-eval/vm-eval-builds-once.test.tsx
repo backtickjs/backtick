@@ -51,12 +51,12 @@ async function Waiting({
 }) {
   return cs`{
     const drawn = $state<Bundle<BacktickElement> | null>(null);
-    const started = $window.setTimeout(() => drawn.write($ask()), 0);
+    const started = $window.setTimeout(() => drawn.set($ask()), 0);
     return (
       <>
-        {drawn.read() === null
+        {drawn.get() === null
           ? null
-          : $vm.eval(drawn.read() as Bundle<BacktickElement>)}
+          : $vm.eval(drawn.get() as Bundle<BacktickElement>)}
       </>
     );
   }`;
@@ -67,11 +67,11 @@ const vmEvalBuildsOnce = cs`{
 
   return (
     <div>
-      <span>{"asked " + asked.read()}</span>
+      <span>{"asked " + asked.get()}</span>
       <Waiting
         ask={() => {
-          asked.write(asked.read() + 1);
-          return asked.read() > 4 ? null : $answer;
+          asked.set(asked.get() + 1);
+          return asked.get() > 4 ? null : $answer;
         }}
       />
     </div>

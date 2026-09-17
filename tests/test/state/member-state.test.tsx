@@ -28,10 +28,10 @@ async function MemberRows() {
     return (
       <div>
         <ul class="rows">
-          <For each={held.read()}>
+          <For each={held.get()}>
             {(row: Row) => (
-              <li onclick={() => row.label.write("pressed")}>
-                {row.label.read()}
+              <li onclick={() => row.label.set("pressed")}>
+                {row.label.get()}
               </li>
             )}
           </For>

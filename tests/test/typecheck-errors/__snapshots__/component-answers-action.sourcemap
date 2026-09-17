@@ -16,7 +16,7 @@ cs.receiver(                         →
 __cs_n                               → n
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 3                                    → 3
 )                                    → )

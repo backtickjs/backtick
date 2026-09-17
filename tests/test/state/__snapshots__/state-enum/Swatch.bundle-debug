@@ -1,9 +1,9 @@
 #f0 = ($0, $1, $2, $3) => {
   const held = $0()($1());
   return <span
-    onclick={() => held.write($2())}
+    onclick={() => held.set($2())}
   >
-    {$3()(held.read())}
+    {$3()(held.get())}
   </span>;
 }
 

@@ -19,10 +19,10 @@ it("vmEvalLoading", async (t) => {
 
       return (
         <div>
-          {held.read() === null ? (
+          {held.get() === null ? (
             <span>loading…</span>
           ) : (
-            $vm.eval(held.read() as Bundle<BacktickElement>)
+            $vm.eval(held.get() as Bundle<BacktickElement>)
           )}
         </div>
       );

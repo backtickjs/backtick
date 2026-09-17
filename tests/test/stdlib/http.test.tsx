@@ -21,10 +21,10 @@ it("httpRequests", async (t) => {
           if (response.status !== 200) {
             throw "answered " + response.status;
           }
-          held.write(JSON.parse(response.data) === null ? "null" : "a value");
+          held.set(JSON.parse(response.data) === null ? "null" : "a value");
         },
         (message: string) => {
-          held.write("failed — " + message);
+          held.set("failed — " + message);
         },
         { timeout: 3000 },
       );
@@ -33,15 +33,15 @@ it("httpRequests", async (t) => {
         "/cases",
         JSON.stringify({ name: "Math.trunc", passed: true }),
         (response: HttpResponse) => {
-          held.write(response.data);
+          held.set(response.data);
         },
         (message: string) => {
-          held.write(message);
+          held.set(message);
         },
         { headers: { "content-type": "application/json" } },
       );
 
-      return held.read();
+      return held.get();
     }`,
   );
 });

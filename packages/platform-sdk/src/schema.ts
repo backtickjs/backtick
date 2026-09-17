@@ -26,7 +26,7 @@ export const schema: Schema = {
     Signal: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([Type.Ref("ClientHandle")], {
-        read: Type.Function([], Type.Ref("T")),
+        get: Type.Function([], Type.Ref("T")),
       }),
       {
         description:
@@ -38,27 +38,16 @@ export const schema: Schema = {
     State: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([Type.Apply(Type.Ref("Signal"), [Type.Ref("T")])], {
-        write: Type.Function(
+        set: Type.Function(
           [Type.FunctionParameter("value", Type.Ref("T"))],
-          Type.Void(),
-        ),
-        update: Type.Function(
-          [
-            Type.FunctionParameter(
-              "updater",
-              Type.Function(
-                [Type.FunctionParameter("value", Type.Ref("T"))],
-                Type.Ref("T"),
-              ),
-            ),
-          ],
           Type.Void(),
         ),
       }),
       {
         description:
           "A cell as a script reads it.\n\n" +
-          "What makes one is not here: `state` is a client function a script imports and splices, so a cell is what calling it answers with. This is the half that reaches the client.",
+          "What makes one is not here: `state` is a client function a script imports and splices, so a cell is what calling it answers with. This is the half that reaches the client.\n\n" +
+          "`set` stores what it is given, a function included: it never calls it.",
       },
     ),
 

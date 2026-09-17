@@ -18,7 +18,7 @@ cs.receiver(                              →
 __cs_held                                 → held
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 cs.splice(                                →  [-semantic]
 (host)                                    → $host

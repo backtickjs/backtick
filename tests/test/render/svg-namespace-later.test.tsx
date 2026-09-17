@@ -16,12 +16,12 @@ const svgNamespaceLater = cs`{
   return (
     <div>
       <svg viewBox="0 0 30 10">
-        <For each={xs.read()}>{(x: number) => <title>{"dot " + x}</title>}</For>
-        {shown.read() ? <title>{"shown"}</title> : null}
+        <For each={xs.get()}>{(x: number) => <title>{"dot " + x}</title>}</For>
+        {shown.get() ? <title>{"shown"}</title> : null}
       </svg>
       <title>{"after"}</title>
-      <button onclick={() => xs.write([10, 20])}>add</button>
-      <button onclick={() => shown.write(true)}>show</button>
+      <button onclick={() => xs.set([10, 20])}>add</button>
+      <button onclick={() => shown.set(true)}>show</button>
     </div>
   );
 }`;

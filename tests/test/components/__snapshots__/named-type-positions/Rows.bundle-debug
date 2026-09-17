@@ -1,7 +1,7 @@
 #f0 = ($0, $1) => {
   const rows = $0()([]);
   const add = (row) => {
-    rows.write([row]);
+    rows.set([row]);
   };
   const label = (row) => {
     return row.label;
@@ -14,7 +14,7 @@
     </span>}
     {<div>
       {<{$1()}
-        each={() => rows.read()}
+        each={() => rows.get()}
       >
         {() => (row) => <span>
           {label(row)}

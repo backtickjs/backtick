@@ -38,11 +38,14 @@ cs.receiver(                         →
 __cs_count                           → count
 )                                    → 
 .                                    → .
-update                               → update
+set                                  → set
 (                                    → (
-__cs_n                               → n
- =>                                  → ) => 
-__cs_n                               → n
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+get                                  → get
+()                                   → ()
  +                                   →  + 
 1                                    → 1
 )                                    → )
@@ -61,7 +64,7 @@ cs.receiver(                         →
 __cs_count                           → count
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }</
 p                                    → p
@@ -98,7 +101,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-write                                → write
+set                                  → set
 (                                    → (
 "ran"                                → "ran"
 )                                    → )
@@ -109,7 +112,7 @@ cs.receiver(                         →
 __cs_said                            → said
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }\n          </
 button                               → button

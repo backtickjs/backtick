@@ -18,12 +18,12 @@ async function Rows() {
   return cs.lift((() => {
     const __cs_rows = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<Row[]>([]));
     const __cs_add = cs.const((__cs_row: Row) => {
-        cs.statement(cs.receiver(__cs_rows).write([__cs_row]));
+        cs.statement(cs.receiver(__cs_rows).set([__cs_row]));
     });
     const __cs_label = cs.const((__cs_row: Row) => {
         return cs.const(cs.receiver(__cs_row).label);
     });
-    return cs.const(<div>{cs.lift(<span onclick={cs.lift(() => __cs_add({ id: 1, label: "one" }))}>add</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(cs.receiver(__cs_rows).read())}>{cs.lift((__cs_row: Row) => <span>{cs.lift(__cs_label(__cs_row))}</span>)}</For>)}</div>)}</div>);
+    return cs.const(<div>{cs.lift(<span onclick={cs.lift(() => __cs_add({ id: 1, label: "one" }))}>add</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(cs.receiver(__cs_rows).get())}>{cs.lift((__cs_row: Row) => <span>{cs.lift(__cs_label(__cs_row))}</span>)}</For>)}</div>)}</div>);
 })());
 }
 

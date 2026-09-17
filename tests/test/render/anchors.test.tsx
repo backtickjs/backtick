@@ -31,14 +31,12 @@ async function Rows() {
   return cs`{
     const ids = $state<number[]>([1, 2, 3]);
     const clear = () => {
-      ids.update(() => []);
+      ids.set([]);
     };
     return (
       <>
         <span onclick={clear}>clear</span>
-        <For each={ids.read()}>
-          {(id: number) => <span>{"row " + id}</span>}
-        </For>
+        <For each={ids.get()}>{(id: number) => <span>{"row " + id}</span>}</For>
       </>
     );
   }`;

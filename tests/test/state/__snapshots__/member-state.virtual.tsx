@@ -23,7 +23,7 @@ async function MemberRows() {
         }));
     });
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_build(1)));
-    return cs.const(<div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(cs.receiver(__cs_held).read())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => cs.receiver(cs.receiver(__cs_row).label).write("pressed"))}>{cs.lift(cs.receiver(cs.receiver(__cs_row).label).read())}</li>)}</For>)}</ul>)}</div>);
+    return cs.const(<div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(cs.receiver(__cs_held).get())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => cs.receiver(cs.receiver(__cs_row).label).set("pressed"))}>{cs.lift(cs.receiver(cs.receiver(__cs_row).label).get())}</li>)}</For>)}</ul>)}</div>);
 })());
 }
 

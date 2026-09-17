@@ -1,10 +1,11 @@
 #f0 = ($0, $1) => {
   const ids = $0()([1, 2, 3]);
   const swap = () => {
-    ids.update((held) => held.with(0, held[2]).with(2, held[0]));
+    const held = ids.get();
+    ids.set(held.with(0, held[2]).with(2, held[0]));
   };
   const drop = () => {
-    ids.update((held) => held.filter((id) => id !== 2));
+    ids.set(ids.get().filter((id) => id !== 2));
   };
   return <div>
     {<span
@@ -19,7 +20,7 @@
     </span>}
     {<div>
       {<{$1()}
-        each={() => ids.read()}
+        each={() => ids.get()}
       >
         {() => (id) => <span>
           {"row " + id}

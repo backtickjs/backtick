@@ -19,8 +19,8 @@ const scriptBoundTag = cs`{
 
   return (
     <div>
-      <Badge count={count.read()} />
-      <button onclick={() => count.write(count.read() + 1)}>more</button>
+      <Badge count={count.get()} />
+      <button onclick={() => count.set(count.get() + 1)}>more</button>
     </div>
   );
 }`;

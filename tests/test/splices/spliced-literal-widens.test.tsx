@@ -26,9 +26,9 @@ it("splicedLiteralWidens", async (t) => {
     "splicedLiteralWidens",
     cs`{
       const n = $state($five);
-      n.write(6);
+      n.set(6);
       const c = $state(${Color.Red});
-      c.write(${Color.Blue});
+      c.set(${Color.Blue});
     }`,
   );
 });

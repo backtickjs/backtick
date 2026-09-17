@@ -13,9 +13,9 @@ export default async function Counter() {
     return (
       <div style={$card}>
         <p style="margin: 0; font-size: 34px; font-weight: 700">
-          {count.read()}
+          {count.get()}
         </p>
-        <button style={$press} onclick={() => count.write(count.read() + 1)}>
+        <button style={$press} onclick={() => count.set(count.get() + 1)}>
           {"Press me"}
         </button>
       </div>

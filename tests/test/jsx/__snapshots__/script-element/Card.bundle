@@ -73,7 +73,7 @@
                             "id",
                             "label"
                           ],
-                          "write"
+                          "set"
                         ],
                         [
                           "held"
@@ -114,7 +114,7 @@
                                       "id",
                                       "label"
                                     ],
-                                    "write"
+                                    "set"
                                   ],
                                   [
                                     "pressed"
@@ -130,7 +130,7 @@
                                   "id",
                                   "label"
                                 ],
-                                "read"
+                                "get"
                               ],
                               []
                             ]

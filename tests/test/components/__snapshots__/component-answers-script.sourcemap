@@ -19,7 +19,7 @@ cs.receiver(                         →
 __cs_n                               → n
 )                                    → 
 .                                    → .
-read                                 → read
+get                                  → get
 ()                                   → ()
 )}</                                 → }</
 em                                   → em

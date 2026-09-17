@@ -14,7 +14,7 @@ const badge = await bundler.run(
     {
       version: "0.0.0",
       filePath: "render/script-bound-tag.test.tsx",
-      fileHash: "cps5qme0xuqv",
+      fileHash: "msywqhchpxfk",
       splices: {},
       captures: [],
     },
@@ -29,7 +29,7 @@ const badge = await bundler.run(
             kind: "id",
             loc: [13, 7, 13, 12],
             text: "props",
-            bindingKey: "props$cps5qme0xuqv$0",
+            bindingKey: "props$msywqhchpxfk$0",
           },
         },
       ],
@@ -59,7 +59,7 @@ const badge = await bundler.run(
                 kind: "id",
                 loc: [13, 51, 13, 56],
                 text: "props",
-                bindingKey: "props$cps5qme0xuqv$0",
+                bindingKey: "props$msywqhchpxfk$0",
               },
               name: "count",
             },
@@ -74,7 +74,7 @@ const scriptBoundTag = cs.create(
   {
     version: "0.0.0",
     filePath: "render/script-bound-tag.test.tsx",
-    fileHash: "cps5qme0xuqv",
+    fileHash: "msywqhchpxfk",
     splices: {
       $state: { value: state, params: [] },
       $vm: { value: vm, params: [] },
@@ -93,7 +93,7 @@ const scriptBoundTag = cs.create(
           kind: "id",
           loc: [17, 9, 17, 14],
           text: "count",
-          bindingKey: "count$cps5qme0xuqv$1",
+          bindingKey: "count$msywqhchpxfk$1",
         },
         initializer: {
           kind: "()",
@@ -119,7 +119,7 @@ const scriptBoundTag = cs.create(
           kind: "id",
           loc: [18, 9, 18, 14],
           text: "Badge",
-          bindingKey: "Badge$cps5qme0xuqv$2",
+          bindingKey: "Badge$msywqhchpxfk$2",
         },
         initializer: {
           kind: "()",
@@ -158,29 +158,29 @@ const scriptBoundTag = cs.create(
           children: [
             {
               kind: "jsx",
-              loc: [22, 7, 22, 37],
+              loc: [22, 7, 22, 36],
               type: {
                 kind: "id",
                 loc: [22, 8, 22, 13],
                 text: "Badge",
-                bindingKey: "Badge$cps5qme0xuqv$2",
+                bindingKey: "Badge$msywqhchpxfk$2",
               },
               attributes: [
                 {
                   name: "count",
                   initializer: {
                     kind: "()",
-                    loc: [22, 21, 22, 33],
+                    loc: [22, 21, 22, 32],
                     expression: {
                       kind: ".",
-                      loc: [22, 21, 22, 31],
+                      loc: [22, 21, 22, 30],
                       expression: {
                         kind: "id",
                         loc: [22, 21, 22, 26],
                         text: "count",
-                        bindingKey: "count$cps5qme0xuqv$1",
+                        bindingKey: "count$msywqhchpxfk$1",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },
@@ -190,7 +190,7 @@ const scriptBoundTag = cs.create(
             },
             {
               kind: "jsx",
-              loc: [23, 7, 23, 74],
+              loc: [23, 7, 23, 71],
               type: {
                 kind: "string",
                 loc: [23, 8, 23, 14],
@@ -201,46 +201,46 @@ const scriptBoundTag = cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [23, 24, 23, 59],
+                    loc: [23, 24, 23, 56],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [23, 30, 23, 59],
+                      loc: [23, 30, 23, 56],
                       expression: {
                         kind: ".",
-                        loc: [23, 30, 23, 41],
+                        loc: [23, 30, 23, 39],
                         expression: {
                           kind: "id",
                           loc: [23, 30, 23, 35],
                           text: "count",
-                          bindingKey: "count$cps5qme0xuqv$1",
+                          bindingKey: "count$msywqhchpxfk$1",
                         },
-                        name: "write",
+                        name: "set",
                       },
                       arguments: [
                         {
                           kind: "binop",
-                          loc: [23, 42, 23, 58],
+                          loc: [23, 40, 23, 55],
                           left: {
                             kind: "()",
-                            loc: [23, 42, 23, 54],
+                            loc: [23, 40, 23, 51],
                             expression: {
                               kind: ".",
-                              loc: [23, 42, 23, 52],
+                              loc: [23, 40, 23, 49],
                               expression: {
                                 kind: "id",
-                                loc: [23, 42, 23, 47],
+                                loc: [23, 40, 23, 45],
                                 text: "count",
-                                bindingKey: "count$cps5qme0xuqv$1",
+                                bindingKey: "count$msywqhchpxfk$1",
                               },
-                              name: "read",
+                              name: "get",
                             },
                             arguments: [],
                           },
                           operatorToken: "+",
                           right: {
                             kind: "number",
-                            loc: [23, 57, 23, 58],
+                            loc: [23, 54, 23, 55],
                             value: 1,
                           },
                         },
@@ -252,7 +252,7 @@ const scriptBoundTag = cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [23, 61, 23, 65],
+                  loc: [23, 58, 23, 62],
                   text: "more",
                 },
               ],

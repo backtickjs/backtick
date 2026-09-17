@@ -25,7 +25,7 @@ async function Widened() {
     {
       version: "0.0.0",
       filePath: "state/state-widening.test.tsx",
-      fileHash: "1tovtvu7ffqaa",
+      fileHash: "2832bhm4681w5",
       splices: {
         $state: { value: state, params: [] },
         $0splice0: { value: Tone.Warm, params: [] },
@@ -44,7 +44,7 @@ async function Widened() {
             kind: "id",
             loc: [24, 11, 24, 15],
             text: "flag",
-            bindingKey: "flag$1tovtvu7ffqaa$0",
+            bindingKey: "flag$2832bhm4681w5$0",
           },
           initializer: {
             kind: "()",
@@ -69,7 +69,7 @@ async function Widened() {
             kind: "id",
             loc: [25, 11, 25, 15],
             text: "tone",
-            bindingKey: "tone$1tovtvu7ffqaa$1",
+            bindingKey: "tone$2832bhm4681w5$1",
           },
           initializer: {
             kind: "()",
@@ -95,7 +95,7 @@ async function Widened() {
             kind: "id",
             loc: [26, 11, 26, 15],
             text: "step",
-            bindingKey: "step$1tovtvu7ffqaa$2",
+            bindingKey: "step$2832bhm4681w5$2",
           },
           initializer: {
             kind: "()",
@@ -143,69 +143,69 @@ async function Widened() {
                     statements: [
                       {
                         kind: "()",
-                        loc: [30, 11, 30, 28],
+                        loc: [30, 11, 30, 26],
                         expression: {
                           kind: ".",
-                          loc: [30, 11, 30, 21],
+                          loc: [30, 11, 30, 19],
                           expression: {
                             kind: "id",
                             loc: [30, 11, 30, 15],
                             text: "flag",
-                            bindingKey: "flag$1tovtvu7ffqaa$0",
+                            bindingKey: "flag$2832bhm4681w5$0",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "false",
-                            loc: [30, 22, 30, 27],
+                            loc: [30, 20, 30, 25],
                           },
                         ],
                       },
                       {
                         kind: "()",
-                        loc: [31, 11, 31, 35],
+                        loc: [31, 11, 31, 33],
                         expression: {
                           kind: ".",
-                          loc: [31, 11, 31, 21],
+                          loc: [31, 11, 31, 19],
                           expression: {
                             kind: "id",
                             loc: [31, 11, 31, 15],
                             text: "tone",
-                            bindingKey: "tone$1tovtvu7ffqaa$1",
+                            bindingKey: "tone$2832bhm4681w5$1",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "splice",
-                            loc: [31, 22, 31, 34],
+                            loc: [31, 20, 31, 32],
                             key: "$0splice1",
                           },
                         ],
                       },
                       {
                         kind: "()",
-                        loc: [32, 11, 32, 30],
+                        loc: [32, 11, 32, 28],
                         expression: {
                           kind: ".",
-                          loc: [32, 11, 32, 21],
+                          loc: [32, 11, 32, 19],
                           expression: {
                             kind: "id",
                             loc: [32, 11, 32, 15],
                             text: "step",
-                            bindingKey: "step$1tovtvu7ffqaa$2",
+                            bindingKey: "step$2832bhm4681w5$2",
                           },
-                          name: "write",
+                          name: "set",
                         },
                         arguments: [
                           {
                             kind: "=>",
-                            loc: [32, 22, 32, 29],
+                            loc: [32, 20, 32, 27],
                             parameters: [],
                             body: {
                               kind: "number",
-                              loc: [32, 28, 32, 29],
+                              loc: [32, 26, 32, 27],
                               value: 1,
                             },
                           },
@@ -219,53 +219,53 @@ async function Widened() {
             children: [
               {
                 kind: "binop",
-                loc: [35, 10, 35, 63],
+                loc: [35, 10, 35, 60],
                 left: {
                   kind: "binop",
-                  loc: [35, 10, 35, 47],
+                  loc: [35, 10, 35, 45],
                   left: {
                     kind: "binop",
-                    loc: [35, 10, 35, 41],
+                    loc: [35, 10, 35, 39],
                     left: {
                       kind: "binop",
-                      loc: [35, 10, 35, 27],
+                      loc: [35, 10, 35, 26],
                       left: {
                         kind: "()",
-                        loc: [35, 10, 35, 21],
+                        loc: [35, 10, 35, 20],
                         expression: {
                           kind: ".",
-                          loc: [35, 10, 35, 19],
+                          loc: [35, 10, 35, 18],
                           expression: {
                             kind: "id",
                             loc: [35, 10, 35, 14],
                             text: "flag",
-                            bindingKey: "flag$1tovtvu7ffqaa$0",
+                            bindingKey: "flag$2832bhm4681w5$0",
                           },
-                          name: "read",
+                          name: "get",
                         },
                         arguments: [],
                       },
                       operatorToken: "+",
                       right: {
                         kind: "string",
-                        loc: [35, 24, 35, 27],
+                        loc: [35, 23, 35, 26],
                         text: " ",
                       },
                     },
                     operatorToken: "+",
                     right: {
                       kind: "()",
-                      loc: [35, 30, 35, 41],
+                      loc: [35, 29, 35, 39],
                       expression: {
                         kind: ".",
-                        loc: [35, 30, 35, 39],
+                        loc: [35, 29, 35, 37],
                         expression: {
                           kind: "id",
-                          loc: [35, 30, 35, 34],
+                          loc: [35, 29, 35, 33],
                           text: "tone",
-                          bindingKey: "tone$1tovtvu7ffqaa$1",
+                          bindingKey: "tone$2832bhm4681w5$1",
                         },
-                        name: "read",
+                        name: "get",
                       },
                       arguments: [],
                     },
@@ -273,27 +273,27 @@ async function Widened() {
                   operatorToken: "+",
                   right: {
                     kind: "string",
-                    loc: [35, 44, 35, 47],
+                    loc: [35, 42, 35, 45],
                     text: " ",
                   },
                 },
                 operatorToken: "+",
                 right: {
                   kind: "()",
-                  loc: [35, 50, 35, 63],
+                  loc: [35, 48, 35, 60],
                   expression: {
                     kind: "()",
-                    loc: [35, 50, 35, 61],
+                    loc: [35, 48, 35, 58],
                     expression: {
                       kind: ".",
-                      loc: [35, 50, 35, 59],
+                      loc: [35, 48, 35, 56],
                       expression: {
                         kind: "id",
-                        loc: [35, 50, 35, 54],
+                        loc: [35, 48, 35, 52],
                         text: "step",
-                        bindingKey: "step$1tovtvu7ffqaa$2",
+                        bindingKey: "step$2832bhm4681w5$2",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },

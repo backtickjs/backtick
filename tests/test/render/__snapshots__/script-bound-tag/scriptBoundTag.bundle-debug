@@ -3,10 +3,10 @@
   const Badge = $1().eval($2());
   return <div>
     {<Badge
-      count={count.read()}
+      count={count.get()}
     />}
     {<button
-      onclick={() => count.write(count.read() + 1)}
+      onclick={() => count.set(count.get() + 1)}
     >
       {"more"}
     </button>}

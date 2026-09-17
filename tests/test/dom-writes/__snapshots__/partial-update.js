@@ -10,11 +10,11 @@ import { watchWrites } from "./writes.ts";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.create(
-    [12, 10, 38, 5],
+    [12, 10, 39, 5],
     {
       version: "0.0.0",
       filePath: "dom-writes/partial-update.test.tsx",
-      fileHash: "prx1kiebqh13",
+      fileHash: "2tlccuo5yvrz7",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -23,7 +23,7 @@ async function Labels() {
     },
     () => ({
       kind: "{}",
-      loc: [12, 13, 38, 4],
+      loc: [12, 13, 39, 4],
       statements: [
         {
           kind: "const",
@@ -32,7 +32,7 @@ async function Labels() {
             kind: "id",
             loc: [13, 11, 13, 15],
             text: "rows",
-            bindingKey: "rows$prx1kiebqh13$0",
+            bindingKey: "rows$2tlccuo5yvrz7$0",
           },
           initializer: {
             kind: "()",
@@ -80,7 +80,7 @@ async function Labels() {
                       kind: "id",
                       loc: [13, 36, 13, 38],
                       text: "id",
-                      bindingKey: "id$prx1kiebqh13$2",
+                      bindingKey: "id$2tlccuo5yvrz7$2",
                     },
                   },
                 ],
@@ -96,7 +96,7 @@ async function Labels() {
                         kind: "id",
                         loc: [14, 11, 14, 13],
                         text: "id",
-                        bindingKey: "id$prx1kiebqh13$2",
+                        bindingKey: "id$2tlccuo5yvrz7$2",
                       },
                     },
                     {
@@ -125,7 +125,7 @@ async function Labels() {
                               kind: "id",
                               loc: [15, 30, 15, 32],
                               text: "id",
-                              bindingKey: "id$prx1kiebqh13$2",
+                              bindingKey: "id$2tlccuo5yvrz7$2",
                             },
                           },
                         ],
@@ -139,24 +139,24 @@ async function Labels() {
         },
         {
           kind: "const",
-          loc: [17, 5, 21, 7],
+          loc: [17, 5, 22, 7],
           name: {
             kind: "id",
             loc: [17, 11, 17, 17],
             text: "update",
-            bindingKey: "update$prx1kiebqh13$1",
+            bindingKey: "update$2tlccuo5yvrz7$1",
           },
           initializer: {
             kind: "=>",
-            loc: [17, 20, 21, 6],
+            loc: [17, 20, 22, 6],
             parameters: [],
             body: {
               kind: "{}",
-              loc: [17, 26, 21, 6],
+              loc: [17, 26, 22, 6],
               statements: [
                 {
                   kind: "for",
-                  loc: [18, 7, 20, 8],
+                  loc: [18, 7, 21, 8],
                   initializer: {
                     kind: "let",
                     loc: [18, 12, 18, 25],
@@ -164,7 +164,7 @@ async function Labels() {
                       kind: "id",
                       loc: [18, 16, 18, 21],
                       text: "index",
-                      bindingKey: "index$prx1kiebqh13$3",
+                      bindingKey: "index$2tlccuo5yvrz7$3",
                     },
                     initializer: {
                       kind: "number",
@@ -179,7 +179,7 @@ async function Labels() {
                       kind: "id",
                       loc: [18, 27, 18, 32],
                       text: "index",
-                      bindingKey: "index$prx1kiebqh13$3",
+                      bindingKey: "index$2tlccuo5yvrz7$3",
                     },
                     operatorToken: "<",
                     right: {
@@ -189,7 +189,7 @@ async function Labels() {
                         kind: "id",
                         loc: [18, 35, 18, 39],
                         text: "rows",
-                        bindingKey: "rows$prx1kiebqh13$0",
+                        bindingKey: "rows$2tlccuo5yvrz7$0",
                       },
                       name: "length",
                     },
@@ -201,7 +201,7 @@ async function Labels() {
                       kind: "id",
                       loc: [18, 48, 18, 53],
                       text: "index",
-                      bindingKey: "index$prx1kiebqh13$3",
+                      bindingKey: "index$2tlccuo5yvrz7$3",
                     },
                     operatorToken: "=",
                     right: {
@@ -211,7 +211,7 @@ async function Labels() {
                         kind: "id",
                         loc: [18, 56, 18, 61],
                         text: "index",
-                        bindingKey: "index$prx1kiebqh13$3",
+                        bindingKey: "index$2tlccuo5yvrz7$3",
                       },
                       operatorToken: "+",
                       right: {
@@ -223,68 +223,78 @@ async function Labels() {
                   },
                   statement: {
                     kind: "{}",
-                    loc: [18, 67, 20, 8],
+                    loc: [18, 67, 21, 8],
                     statements: [
                       {
+                        kind: "const",
+                        loc: [19, 9, 19, 41],
+                        name: {
+                          kind: "id",
+                          loc: [19, 15, 19, 20],
+                          text: "label",
+                          bindingKey: "label$2tlccuo5yvrz7$4",
+                        },
+                        initializer: {
+                          kind: ".",
+                          loc: [19, 23, 19, 40],
+                          expression: {
+                            kind: "[]",
+                            loc: [19, 23, 19, 34],
+                            expression: {
+                              kind: "id",
+                              loc: [19, 23, 19, 27],
+                              text: "rows",
+                              bindingKey: "rows$2tlccuo5yvrz7$0",
+                            },
+                            argumentExpression: {
+                              kind: "id",
+                              loc: [19, 28, 19, 33],
+                              text: "index",
+                              bindingKey: "index$2tlccuo5yvrz7$3",
+                            },
+                          },
+                          name: "label",
+                        },
+                      },
+                      {
                         kind: "()",
-                        loc: [19, 9, 19, 68],
+                        loc: [20, 9, 20, 40],
                         expression: {
                           kind: ".",
-                          loc: [19, 9, 19, 33],
+                          loc: [20, 9, 20, 18],
                           expression: {
-                            kind: ".",
-                            loc: [19, 9, 19, 26],
-                            expression: {
-                              kind: "[]",
-                              loc: [19, 9, 19, 20],
-                              expression: {
-                                kind: "id",
-                                loc: [19, 9, 19, 13],
-                                text: "rows",
-                                bindingKey: "rows$prx1kiebqh13$0",
-                              },
-                              argumentExpression: {
-                                kind: "id",
-                                loc: [19, 14, 19, 19],
-                                text: "index",
-                                bindingKey: "index$prx1kiebqh13$3",
-                              },
-                            },
-                            name: "label",
+                            kind: "id",
+                            loc: [20, 9, 20, 14],
+                            text: "label",
+                            bindingKey: "label$2tlccuo5yvrz7$4",
                           },
-                          name: "update",
+                          name: "set",
                         },
                         arguments: [
                           {
-                            kind: "=>",
-                            loc: [19, 34, 19, 67],
-                            parameters: [
-                              {
-                                kind: "param",
-                                loc: [19, 35, 19, 48],
-                                name: {
+                            kind: "binop",
+                            loc: [20, 19, 20, 39],
+                            left: {
+                              kind: "()",
+                              loc: [20, 19, 20, 30],
+                              expression: {
+                                kind: ".",
+                                loc: [20, 19, 20, 28],
+                                expression: {
                                   kind: "id",
-                                  loc: [19, 35, 19, 40],
+                                  loc: [20, 19, 20, 24],
                                   text: "label",
-                                  bindingKey: "label$prx1kiebqh13$4",
+                                  bindingKey: "label$2tlccuo5yvrz7$4",
                                 },
+                                name: "get",
                               },
-                            ],
-                            body: {
-                              kind: "binop",
-                              loc: [19, 53, 19, 67],
-                              left: {
-                                kind: "id",
-                                loc: [19, 53, 19, 58],
-                                text: "label",
-                                bindingKey: "label$prx1kiebqh13$4",
-                              },
-                              operatorToken: "+",
-                              right: {
-                                kind: "string",
-                                loc: [19, 61, 19, 67],
-                                text: " !!!",
-                              },
+                              arguments: [],
+                            },
+                            operatorToken: "+",
+                            right: {
+                              kind: "string",
+                              loc: [20, 33, 20, 39],
+                              text: " !!!",
                             },
                           },
                         ],
@@ -298,23 +308,23 @@ async function Labels() {
         },
         {
           kind: "return",
-          loc: [22, 5, 37, 7],
+          loc: [23, 5, 38, 7],
           expression: {
             kind: "jsx",
-            loc: [23, 7, 36, 13],
+            loc: [24, 7, 37, 13],
             type: {
               kind: "string",
-              loc: [23, 8, 23, 11],
+              loc: [24, 8, 24, 11],
               text: "div",
             },
             attributes: [],
             children: [
               {
                 kind: "jsx",
-                loc: [24, 9, 24, 49],
+                loc: [25, 9, 25, 49],
                 type: {
                   kind: "string",
-                  loc: [24, 10, 24, 16],
+                  loc: [25, 10, 25, 16],
                   text: "button",
                 },
                 attributes: [
@@ -322,46 +332,46 @@ async function Labels() {
                     name: "onclick",
                     initializer: {
                       kind: "id",
-                      loc: [24, 26, 24, 32],
+                      loc: [25, 26, 25, 32],
                       text: "update",
-                      bindingKey: "update$prx1kiebqh13$1",
+                      bindingKey: "update$2tlccuo5yvrz7$1",
                     },
                   },
                 ],
                 children: [
                   {
                     kind: "string",
-                    loc: [24, 34, 24, 40],
+                    loc: [25, 34, 25, 40],
                     text: "update",
                   },
                 ],
               },
               {
                 kind: "jsx",
-                loc: [25, 9, 35, 17],
+                loc: [26, 9, 36, 17],
                 type: {
                   kind: "string",
-                  loc: [25, 10, 25, 15],
+                  loc: [26, 10, 26, 15],
                   text: "table",
                 },
                 attributes: [],
                 children: [
                   {
                     kind: "jsx",
-                    loc: [26, 11, 34, 19],
+                    loc: [27, 11, 35, 19],
                     type: {
                       kind: "string",
-                      loc: [26, 12, 26, 17],
+                      loc: [27, 12, 27, 17],
                       text: "tbody",
                     },
                     attributes: [],
                     children: [
                       {
                         kind: "jsx",
-                        loc: [27, 13, 33, 19],
+                        loc: [28, 13, 34, 19],
                         type: {
                           kind: "splice",
-                          loc: [27, 14, 27, 17],
+                          loc: [28, 14, 28, 17],
                           key: "$For",
                         },
                         attributes: [
@@ -369,34 +379,34 @@ async function Labels() {
                             name: "each",
                             initializer: {
                               kind: "id",
-                              loc: [27, 24, 27, 28],
+                              loc: [28, 24, 28, 28],
                               text: "rows",
-                              bindingKey: "rows$prx1kiebqh13$0",
+                              bindingKey: "rows$2tlccuo5yvrz7$0",
                             },
                           },
                         ],
                         children: [
                           {
                             kind: "=>",
-                            loc: [28, 16, 32, 16],
+                            loc: [29, 16, 33, 16],
                             parameters: [
                               {
                                 kind: "param",
-                                loc: [28, 17, 28, 58],
+                                loc: [29, 17, 29, 58],
                                 name: {
                                   kind: "id",
-                                  loc: [28, 17, 28, 20],
+                                  loc: [29, 17, 29, 20],
                                   text: "row",
-                                  bindingKey: "row$prx1kiebqh13$5",
+                                  bindingKey: "row$2tlccuo5yvrz7$5",
                                 },
                               },
                             ],
                             body: {
                               kind: "jsx",
-                              loc: [29, 17, 31, 22],
+                              loc: [30, 17, 32, 22],
                               type: {
                                 kind: "string",
-                                loc: [29, 18, 29, 20],
+                                loc: [30, 18, 30, 20],
                                 text: "tr",
                               },
                               attributes: [
@@ -404,21 +414,21 @@ async function Labels() {
                                   name: "id",
                                   initializer: {
                                     kind: "binop",
-                                    loc: [29, 25, 29, 40],
+                                    loc: [30, 25, 30, 40],
                                     left: {
                                       kind: "string",
-                                      loc: [29, 25, 29, 31],
+                                      loc: [30, 25, 30, 31],
                                       text: "row-",
                                     },
                                     operatorToken: "+",
                                     right: {
                                       kind: ".",
-                                      loc: [29, 34, 29, 40],
+                                      loc: [30, 34, 30, 40],
                                       expression: {
                                         kind: "id",
-                                        loc: [29, 34, 29, 37],
+                                        loc: [30, 34, 30, 37],
                                         text: "row",
-                                        bindingKey: "row$prx1kiebqh13$5",
+                                        bindingKey: "row$2tlccuo5yvrz7$5",
                                       },
                                       name: "id",
                                     },
@@ -428,32 +438,32 @@ async function Labels() {
                               children: [
                                 {
                                   kind: "jsx",
-                                  loc: [30, 19, 30, 46],
+                                  loc: [31, 19, 31, 45],
                                   type: {
                                     kind: "string",
-                                    loc: [30, 20, 30, 22],
+                                    loc: [31, 20, 31, 22],
                                     text: "td",
                                   },
                                   attributes: [],
                                   children: [
                                     {
                                       kind: "()",
-                                      loc: [30, 24, 30, 40],
+                                      loc: [31, 24, 31, 39],
                                       expression: {
                                         kind: ".",
-                                        loc: [30, 24, 30, 38],
+                                        loc: [31, 24, 31, 37],
                                         expression: {
                                           kind: ".",
-                                          loc: [30, 24, 30, 33],
+                                          loc: [31, 24, 31, 33],
                                           expression: {
                                             kind: "id",
-                                            loc: [30, 24, 30, 27],
+                                            loc: [31, 24, 31, 27],
                                             text: "row",
-                                            bindingKey: "row$prx1kiebqh13$5",
+                                            bindingKey: "row$2tlccuo5yvrz7$5",
                                           },
                                           name: "label",
                                         },
-                                        name: "read",
+                                        name: "get",
                                       },
                                       arguments: [],
                                     },

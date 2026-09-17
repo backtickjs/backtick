@@ -19,7 +19,7 @@ const colorName = cs.create(
   {
     version: "0.0.0",
     filePath: "state/state-enum.test.tsx",
-    fileHash: "1ijxyonbv587v",
+    fileHash: "30a9wee2eidm4",
     splices: { $0splice0: { value: Color.Blue, params: [] } },
     captures: [],
   },
@@ -34,7 +34,7 @@ const colorName = cs.create(
           kind: "id",
           loc: [18, 53, 18, 54],
           text: "c",
-          bindingKey: "c$1ijxyonbv587v$0",
+          bindingKey: "c$30a9wee2eidm4$0",
         },
       },
     ],
@@ -55,7 +55,7 @@ const colorName = cs.create(
                 kind: "id",
                 loc: [19, 10, 19, 11],
                 text: "c",
-                bindingKey: "c$1ijxyonbv587v$0",
+                bindingKey: "c$30a9wee2eidm4$0",
               },
               operatorToken: "===",
               right: {
@@ -86,7 +86,7 @@ async function Swatch() {
     {
       version: "0.0.0",
       filePath: "state/state-enum.test.tsx",
-      fileHash: "1ijxyonbv587v",
+      fileHash: "30a9wee2eidm4",
       splices: {
         $state: { value: state, params: [] },
         $0splice0: { value: Color.Red, params: [] },
@@ -106,7 +106,7 @@ async function Swatch() {
             kind: "id",
             loc: [24, 11, 24, 15],
             text: "held",
-            bindingKey: "held$1ijxyonbv587v$1",
+            bindingKey: "held$30a9wee2eidm4$1",
           },
           initializer: {
             kind: "()",
@@ -141,26 +141,26 @@ async function Swatch() {
                 name: "onclick",
                 initializer: {
                   kind: "=>",
-                  loc: [26, 22, 26, 53],
+                  loc: [26, 22, 26, 51],
                   parameters: [],
                   body: {
                     kind: "()",
-                    loc: [26, 28, 26, 53],
+                    loc: [26, 28, 26, 51],
                     expression: {
                       kind: ".",
-                      loc: [26, 28, 26, 38],
+                      loc: [26, 28, 26, 36],
                       expression: {
                         kind: "id",
                         loc: [26, 28, 26, 32],
                         text: "held",
-                        bindingKey: "held$1ijxyonbv587v$1",
+                        bindingKey: "held$30a9wee2eidm4$1",
                       },
-                      name: "write",
+                      name: "set",
                     },
                     arguments: [
                       {
                         kind: "splice",
-                        loc: [26, 39, 26, 52],
+                        loc: [26, 37, 26, 50],
                         key: "$0splice1",
                       },
                     ],
@@ -171,7 +171,7 @@ async function Swatch() {
             children: [
               {
                 kind: "()",
-                loc: [27, 10, 27, 33],
+                loc: [27, 10, 27, 32],
                 expression: {
                   kind: "splice",
                   loc: [27, 10, 27, 20],
@@ -180,17 +180,17 @@ async function Swatch() {
                 arguments: [
                   {
                     kind: "()",
-                    loc: [27, 21, 27, 32],
+                    loc: [27, 21, 27, 31],
                     expression: {
                       kind: ".",
-                      loc: [27, 21, 27, 30],
+                      loc: [27, 21, 27, 29],
                       expression: {
                         kind: "id",
                         loc: [27, 21, 27, 25],
                         text: "held",
-                        bindingKey: "held$1ijxyonbv587v$1",
+                        bindingKey: "held$30a9wee2eidm4$1",
                       },
-                      name: "read",
+                      name: "get",
                     },
                     arguments: [],
                   },

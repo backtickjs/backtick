@@ -14,20 +14,20 @@ const scriptBoundTagCapture = cs`{
 
   return (
     <div>
-      {${cs`<Badge n={count.read()} />`}}
+      {${cs`<Badge n={count.get()} />`}}
       {
         ${cs`{
           const skipped = 10;
-          return ${cs`<Badge n={count.read() + 100} />`};
+          return ${cs`<Badge n={count.get() + 100} />`};
         }`}
       }
-      {${(<section>{cs`<Badge n={count.read() + 1000} />`}</section>)}}
+      {${(<section>{cs`<Badge n={count.get() + 1000} />`}</section>)}}
       {
         ${cs`<For each={[1, 2]}>
-          {(m: number) => <Badge n={m * count.read()} />}
+          {(m: number) => <Badge n={m * count.get()} />}
         </For>`}
       }
-      <button onclick={() => count.write(count.read() + 1)}>more</button>
+      <button onclick={() => count.set(count.get() + 1)}>more</button>
     </div>
   );
 }`;

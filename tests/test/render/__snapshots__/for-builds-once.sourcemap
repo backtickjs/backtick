@@ -41,7 +41,7 @@ cs.receiver(                              →
 __cs_items                                → items
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 cs.splice(                                →  [-semantic]
 (answerItems)                             → $answerItems
@@ -65,7 +65,7 @@ cs.receiver(                              →
 __cs_items                                → items
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
 )}                                        → }
 >{cs.lift(                                → >{
@@ -112,7 +112,7 @@ cs.receiver(                              →
 __cs_asked                                → asked
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
 )}</                                      → }</
 span                                      → span
@@ -129,13 +129,13 @@ cs.receiver(                              →
 __cs_asked                                → asked
 )                                         → 
 .                                         → .
-write                                     → write
+set                                       → set
 (                                         → (
 cs.receiver(                              → 
 __cs_asked                                → asked
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
  +                                        →  + 
 1                                         → 1
@@ -147,7 +147,7 @@ cs.receiver(                              →
 __cs_asked                                → asked
 )                                         → 
 .                                         → .
-read                                      → read
+get                                       → get
 ()                                        → ()
  <                                        →  < 
 5                                         → 5
