@@ -55,6 +55,26 @@ export default defineConfig({
 
 With `globals: false`, call `afterEach(cleanup)` in a setup file instead.
 
+**Bun**: install `jsdom` and `global-jsdom`, then preload a setup file after
+`@backtickjs/bun-plugin`:
+
+```toml
+# bunfig.toml
+[test]
+preload = ["@backtickjs/bun-plugin", "./test/setup.ts"]
+```
+
+```ts
+// test/setup.ts
+import "global-jsdom/register";
+import { afterEach } from "bun:test";
+
+// Loaded once jsdom is registered: Testing Library binds `screen` on import,
+// and Bun runs a CommonJS import before the imports written above it.
+const { cleanup } = await import("@backtickjs/web-testing");
+afterEach(cleanup);
+```
+
 **`node:test`**: install `jsdom` and `global-jsdom`, then preload a setup file:
 
 ```ts
