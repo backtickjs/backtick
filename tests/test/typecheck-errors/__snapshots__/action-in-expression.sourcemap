@@ -9,9 +9,9 @@ cs.lift((() => {\n    // @ts-expect-error: Argument of type 'void' is not assign
 const                                     → const 
 __cs_captured                             → captured
  = cs.const(                              →  = 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (action)                                  → $action
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
@@ -20,9 +20,9 @@ return cs.const(                          → return
 \n})())                                   → \n}`
 cs.lift((() => {\n    // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.\n    → cs`{\n  // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.\n  
 return cs.const(                          → return 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (action)                                  → $action
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 );                                        → ;
 \n})())                                   → \n}`
 cs.lift((() => {\n                        → cs`{\n  
@@ -38,9 +38,9 @@ __cs_e                                    → e
 {\n        // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.\n        → {\n    // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.\n    
 __cs_e                                    → e
  = cs.const(                              →  = 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (action)                                  → $action
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 ;                                         → ;
 \n                                        → \n    

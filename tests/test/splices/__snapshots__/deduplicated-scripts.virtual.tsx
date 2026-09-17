@@ -7,5 +7,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 const leaf = cs.lift(cs.const(7));
 
 it("deduplicatedScripts", async (t) => {
-  await snapshotCase(t, "deduplicatedScripts", cs.lift(cs.const({ a: cs.splice((leaf)) satisfies typeof cs.ClientUnknown, b: cs.splice((leaf)) satisfies typeof cs.ClientUnknown })));
+  await snapshotCase(t, "deduplicatedScripts", cs.lift(cs.const({ a: (cs.splice((leaf)) satisfies typeof cs.ClientUnknown), b: (cs.splice((leaf)) satisfies typeof cs.ClientUnknown) })));
 });

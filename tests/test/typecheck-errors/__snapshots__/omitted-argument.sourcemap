@@ -19,10 +19,9 @@ concat                                    → concat
 ))                                        → `
 cs.lift((() => {\n    // @ts-expect-error: Expected 1 arguments, but got 0.\n    → cs`{\n  // @ts-expect-error: Expected 1 arguments, but got 0.\n  
 return cs.const(                          → return 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (greet)                                   → $greet
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n})())                                   → \n}`

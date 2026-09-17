@@ -17,7 +17,7 @@ const badge = await bundler.run(
 
 const scriptBoundTag = cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    const __cs_Badge = cs.const(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((badge)) satisfies typeof cs.ClientUnknown));
+    const __cs_Badge = cs.const(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((badge)) satisfies typeof cs.ClientUnknown)));
     return cs.const(<div>{cs.lift(<__cs_Badge count={cs.receiver(__cs_count).get()}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>more</button>)}</div>);
 })());
 

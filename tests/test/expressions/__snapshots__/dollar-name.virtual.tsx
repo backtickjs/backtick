@@ -16,7 +16,7 @@ it("dollarName", async (t) => {
     "dollarName",
     cs.lift((() => {
     const __cs_foo$ = cs.const(1);
-    return cs.const(cs.splice(add(cs.lift(cs.const(__cs_foo$)))) satisfies typeof cs.ClientUnknown);
+    return cs.const((cs.splice(add(cs.lift(cs.const(__cs_foo$)))) satisfies typeof cs.ClientUnknown));
 })()),
   );
 });

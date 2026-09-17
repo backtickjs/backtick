@@ -9,19 +9,19 @@ import { evaluate } from "@backtickjs/web-testing";
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
     const nothing: number | undefined = undefined;
-    assert.equal(await evaluate(cs.lift(cs.const(cs.splice((nothing)) satisfies typeof cs.ClientUnknown))), undefined);
+    assert.equal(await evaluate(cs.lift(cs.const((cs.splice((nothing)) satisfies typeof cs.ClientUnknown)))), undefined);
   });
 
   it("keeps its key in an object", async () => {
     const data = { missing: undefined, kept: 1 };
-    const arrived = await evaluate(cs.lift(cs.const(cs.splice((data)) satisfies typeof cs.ClientUnknown)));
+    const arrived = await evaluate(cs.lift(cs.const((cs.splice((data)) satisfies typeof cs.ClientUnknown))));
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
     assert.ok("missing" in (arrived as object));
   });
 
   it("stays undefined in an array", async () => {
     const data = [1, undefined, 3];
-    assert.deepEqual(await evaluate(cs.lift(cs.const(cs.splice((data)) satisfies typeof cs.ClientUnknown))), [1, undefined, 3]);
+    assert.deepEqual(await evaluate(cs.lift(cs.const((cs.splice((data)) satisfies typeof cs.ClientUnknown)))), [1, undefined, 3]);
   });
 
   it("is written as an undef node", async () => {

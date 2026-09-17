@@ -25,7 +25,7 @@ describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = await render(
       cs.lift((() => {
-    cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log()));
+    cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log()));
     return cs.const(<p>drawn</p>);
 })()),
     );
@@ -39,7 +39,7 @@ describe("onCleanup", () => {
       cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1));
     const __cs_doubled = cs.const((cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => {
-        cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log()));
+        cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log()));
         return cs.const(cs.receiver(__cs_n).get() * 2);
     }));
     return cs.const(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(cs.receiver(__cs_n).get() + 1))}>{cs.lift(cs.receiver(__cs_doubled).get())}</button>);
@@ -71,9 +71,9 @@ describe("onCleanup", () => {
       cs.lift((() => {
     const __cs_timer = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     cs.statement((cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => {
-        cs.statement(cs.receiver(__cs_timer).set(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setInterval(() => cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log(), 5)));
+        cs.statement(cs.receiver(__cs_timer).set(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).setInterval(() => cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log(), 5)));
     }));
-    cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).clearInterval(cs.receiver(__cs_timer).get())));
+    cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).clearInterval(cs.receiver(__cs_timer).get())));
     return cs.const(<p>ticking</p>);
 })()),
     );
@@ -89,7 +89,7 @@ describe("onCleanup", () => {
   it("never runs when called from a handler", async () => {
     const { unmount } = await render(
       cs.lift((() => {
-    return cs.const(<button onclick={cs.lift(() => (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log()))}>
+    return cs.const(<button onclick={cs.lift(() => (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log()))}>
             press
           </button>);
 })()),

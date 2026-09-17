@@ -21,14 +21,14 @@ async function Nothing() {
 const rows = (await bundler.run(
   cs.lift(cs.const((__cs_props: {
     count: number;
-}) => cs.splice((<Row count={cs.lift(cs.const(cs.receiver(__cs_props).count))} />)) satisfies typeof cs.ClientUnknown)),
+}) => (cs.splice((<Row count={cs.lift(cs.const(cs.receiver(__cs_props).count))} />)) satisfies typeof cs.ClientUnknown))),
 )) as Bundle<Rows>;
 
 const empty = (await bundler.run(<Nothing />)) as Bundle<BacktickElement>;
 
 export default cs.lift((() => {
-    const __cs_Rows = cs.const(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((rows)) satisfies typeof cs.ClientUnknown));
-    const __cs_Empty = cs.const(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((empty)) satisfies typeof cs.ClientUnknown));
+    const __cs_Rows = cs.const(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((rows)) satisfies typeof cs.ClientUnknown)));
+    const __cs_Empty = cs.const(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((empty)) satisfies typeof cs.ClientUnknown)));
     // Wrong: the wrong type, a name it hasn't got, and none at all.
     // @ts-expect-error: Type 'string' is not assignable to type 'number'.
     const __cs_wrongType = cs.const(<__cs_Rows count={"one"}/>);
@@ -41,7 +41,7 @@ export default cs.lift((() => {
     const __cs_called = cs.const(<__cs_Empty count={1}/>);
     return cs.const(<div>{cs.lift(<__cs_Rows count={1}/>)}{cs.lift(__cs_Empty)}{cs.lift(__cs_wrongType)}{cs.lift(__cs_unknownName)}{cs.lift(__cs_missing)}{cs.lift(__cs_called)}{cs.lift(
     // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-    cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(null))}{cs.lift(
+    cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval(null))}{cs.lift(
     // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-    cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.receiver(JSON).stringify({})))}</div>);
+    cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval(cs.receiver(JSON).stringify({})))}</div>);
 })());

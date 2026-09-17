@@ -13,7 +13,7 @@ async function Panel(props: { body: Prop<BacktickElement> }) {
     const __cs_Badge = cs.const((__cs_p: {
         n: number;
     }) => <i>{cs.lift("panel " + cs.receiver(__cs_p).n)}</i>);
-    return cs.const(<section>{cs.lift(<__cs_Badge n={0}/>)}{cs.lift(cs.receiver(cs.splice((props)) satisfies typeof cs.ClientUnknown).body)}</section>);
+    return cs.const(<section>{cs.lift(<__cs_Badge n={0}/>)}{cs.lift(cs.receiver((cs.splice((props)) satisfies typeof cs.ClientUnknown)).body)}</section>);
 })());
 }
 
@@ -27,7 +27,7 @@ const scriptBoundTagCarried = cs.lift((() => {
         n: number;
         children: BacktickElement;
     }) => <b>{cs.lift("outer " + cs.receiver(__cs_p).n)}{cs.lift(cs.receiver(__cs_p).children)}</b>);
-    return cs.const(<div>{cs.lift(<Panel body={cs.lift(cs.splice(cs.lift(cs.const(<__cs_Badge n={cs.receiver(__cs_count).get()}>{<u>{cs.lift("kid " + cs.receiver(__cs_count).get())}</u>}</__cs_Badge>))) satisfies typeof cs.ClientUnknown)}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>more</button>)}</div>);
+    return cs.const(<div>{cs.lift(<Panel body={cs.lift((cs.splice(cs.lift(cs.const(<__cs_Badge n={cs.receiver(__cs_count).get()}>{<u>{cs.lift("kid " + cs.receiver(__cs_count).get())}</u>}</__cs_Badge>))) satisfies typeof cs.ClientUnknown))}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>more</button>)}</div>);
 })());
 
 it("scriptBoundTagCarried", async (t) => {

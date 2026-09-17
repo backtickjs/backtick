@@ -3,11 +3,10 @@ cs.lift(cs.const(                         → cs`
 em                                        → em
 >{cs.lift(                                → >{
 "rows "                                   → "rows "
- + (                                      →  + 
-cs.splice(                                →  [-semantic]
+ +                                        →  + 
+(cs.splice(                               →  [-semantic]
 (count)                                   → $count
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)                                         → 
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )}</                                      → }</
 em                                        → em
 >                                         → >
@@ -32,7 +31,7 @@ number                                    → number
 ;                                         → 
 \n}                                       →  }
 ) =>                                      → ) => 
-cs.splice(                                → ${ [-semantic]
+(cs.splice(                               → ${ [-semantic]
 (<Row count={                             → (<Row count={
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
@@ -42,23 +41,23 @@ __cs_props                                → props
 count                                     → count
 ))                                        → `
 } />)                                     → } />)
-) satisfies typeof cs.ClientUnknown       → } [-semantic]
+) satisfies typeof cs.ClientUnknown)      → } [-semantic]
 ))                                        → `
 cs.lift((() => {\n                        → cs`{\n  
 const                                     → const 
 __cs_Rows                                 → Rows
  = cs.const(                              →  = 
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (vm)                                      → $vm
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 eval                                      → eval
 (                                         → (
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (rows)                                    → $rows
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → )
 );                                        → ;
 \n                                        → \n  
@@ -66,16 +65,16 @@ const                                     → const
 __cs_Empty                                → Empty
  = cs.const(                              →  = 
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (vm)                                      → $vm
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 eval                                      → eval
 (                                         → (
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (empty)                                   → $empty
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → )
 );                                        → ;
 \n    // Wrong: the wrong type, a name it hasn't got, and none at all.\n    // @ts-expect-error: Type 'string' is not assignable to type 'number'.\n    → \n\n  // Wrong: the wrong type, a name it hasn't got, and none at all.\n  // @ts-expect-error: Type 'string' is not assignable to type 'number'.\n  
@@ -150,9 +149,9 @@ __cs_missing                              → missing
 __cs_called                               → called
 )}{cs.lift(\n    // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n    → }\n      {/* Only a bundle: not nothing, and not the text one came as. */}\n      {\n        // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n        
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (vm)                                      → $vm
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 eval                                      → eval
@@ -161,9 +160,9 @@ null                                      → null
 )                                         → )
 )}{cs.lift(\n    // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n    → \n      }\n      {\n        // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.\n        
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (vm)                                      → $vm
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 eval                                      → eval

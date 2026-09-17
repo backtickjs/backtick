@@ -1,78 +1,77 @@
-cs.lift(cs.const(                    → cs`
-"font-size: "                        → "font-size: "
- +                                   →  + 
-cs.receiver(                         → 
-cs.splice(                           →  [-semantic]
-(size)                               → $size
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-.                                    → .
-get                                  → get
-()                                   → ()
- +                                   →  + 
-"px"                                 → "px"
-))                                   → `
-cs.lift(cs.const(                    → cs`
-() => {\n                            → () => {\n      
-cs.statement(                        → 
-cs.receiver(                         → 
-cs.splice(                           →  [-semantic]
-(size)                               → $size
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-.                                    → .
-set                                  → set
-(                                    → (
-cs.receiver(                         → 
-cs.splice(                           →  [-semantic]
-(size)                               → $size
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-.                                    → .
-get                                  → get
-()                                   → ()
- +                                   →  + 
-1                                    → 1
-)                                    → )
-);                                   → ;
-\n}                                  → \n    }
-))                                   → `
-cs.lift((() => {\n                   → cs`{\n    
-const                                → const 
-__cs_size                            → size
- = cs.const(                         →  = 
-(                                    → 
-cs.splice(                           →  [-semantic]
-(state)                              → $state
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)(                                   → (
-16                                   → 16
-)                                    → )
-);                                   → ;
-\n                                   → \n    
-return cs.const(                     → return 
-<                                    → (\n      <
-div                                  → div
->{cs.lift(                           → >\n        
-<                                    → <
-SharedCounter                        → SharedCounter
-                                     →  
-size                                 → size
-={cs.lift(                           → ={
-__cs_size                            → size
-)}                                   → }
-/>                                   →  />
-)}{cs.lift(                          → \n        
-<                                    → <
-SharedCounter                        → SharedCounter
-                                     →  
-size                                 → size
-={cs.lift(                           → ={
-__cs_size                            → size
-)}                                   → }
-/>                                   →  />
-)}</                                 → \n      </
-div                                  → div
->                                    → >\n    )
-);                                   → ;
-\n})())                              → \n  }`
+cs.lift(cs.const(                     → cs`
+"font-size: "                         → "font-size: "
+ +                                    →  + 
+cs.receiver(                          → 
+(cs.splice(                           →  [-semantic]
+(size)                                → $size
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+ +                                    →  + 
+"px"                                  → "px"
+))                                    → `
+cs.lift(cs.const(                     → cs`
+() => {\n                             → () => {\n      
+cs.statement(                         → 
+cs.receiver(                          → 
+(cs.splice(                           →  [-semantic]
+(size)                                → $size
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → 
+.                                     → .
+set                                   → set
+(                                     → (
+cs.receiver(                          → 
+(cs.splice(                           →  [-semantic]
+(size)                                → $size
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+ +                                    →  + 
+1                                     → 1
+)                                     → )
+);                                    → ;
+\n}                                   → \n    }
+))                                    → `
+cs.lift((() => {\n                    → cs`{\n    
+const                                 → const 
+__cs_size                             → size
+ = cs.const(                          →  = 
+(cs.splice(                           →  [-semantic]
+(state)                               → $state
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+(                                     → (
+16                                    → 16
+)                                     → )
+);                                    → ;
+\n                                    → \n    
+return cs.const(                      → return 
+<                                     → (\n      <
+div                                   → div
+>{cs.lift(                            → >\n        
+<                                     → <
+SharedCounter                         → SharedCounter
+                                      →  
+size                                  → size
+={cs.lift(                            → ={
+__cs_size                             → size
+)}                                    → }
+/>                                    →  />
+)}{cs.lift(                           → \n        
+<                                     → <
+SharedCounter                         → SharedCounter
+                                      →  
+size                                  → size
+={cs.lift(                            → ={
+__cs_size                             → size
+)}                                    → }
+/>                                    →  />
+)}</                                  → \n      </
+div                                   → div
+>                                     → >\n    )
+);                                    → ;
+\n})())                               → \n  }`

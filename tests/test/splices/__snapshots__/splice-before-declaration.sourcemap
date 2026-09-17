@@ -1,48 +1,46 @@
-cs.lift((() => {\n                   → cs`{\n    
-const                                → const 
-__cs_before                          → before
- = cs.const(                         →  = 
-1                                    → 1
-);                                   → ;
-\n                                   → \n    
-const                                → const 
-__cs_spliced                         → spliced
- = cs.const(                         →  = 
-cs.splice(                           →  [-semantic]
-(fragment)                           → $fragment
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-);                                   → ;
-\n                                   → \n    
-const                                → const 
-__cs_after                           → after
- = cs.const(                         →  = 
-2                                    → 2
-);                                   → ;
-\n                                   → \n    
-return cs.const(                     → return 
-__cs_before                          → before
- +                                   →  + 
-__cs_spliced                         → spliced
- +                                   →  + 
-__cs_after                           → after
-);                                   → ;
-\n})())                              → \n  }`
-cs.lift(cs.const(                    → cs`
-(                                    → 
-cs.splice(                           → ${ [-semantic]
-sandwich(                            → sandwich(
-cs.lift(cs.const(                    → cs`
-10                                   → 10
-))                                   → `
-)                                    → )
-) satisfies typeof cs.ClientUnknown  → } [-semantic]
-) + (                                →  + 
-cs.splice(                           → ${ [-semantic]
-sandwich(                            → sandwich(
-cs.lift(cs.const(                    → cs`
-20                                   → 20
-))                                   → `
-)                                    → )
-) satisfies typeof cs.ClientUnknown  → } [-semantic]
-)                                    → 
-))                                   → `
+cs.lift((() => {\n                    → cs`{\n    
+const                                 → const 
+__cs_before                           → before
+ = cs.const(                          →  = 
+1                                     → 1
+);                                    → ;
+\n                                    → \n    
+const                                 → const 
+__cs_spliced                          → spliced
+ = cs.const(                          →  = 
+(cs.splice(                           →  [-semantic]
+(fragment)                            → $fragment
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+);                                    → ;
+\n                                    → \n    
+const                                 → const 
+__cs_after                            → after
+ = cs.const(                          →  = 
+2                                     → 2
+);                                    → ;
+\n                                    → \n    
+return cs.const(                      → return 
+__cs_before                           → before
+ +                                    →  + 
+__cs_spliced                          → spliced
+ +                                    →  + 
+__cs_after                            → after
+);                                    → ;
+\n})())                               → \n  }`
+cs.lift(cs.const(                     → cs`
+(cs.splice(                           → ${ [-semantic]
+sandwich(                             → sandwich(
+cs.lift(cs.const(                     → cs`
+10                                    → 10
+))                                    → `
+)                                     → )
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+ +                                    →  + 
+(cs.splice(                           → ${ [-semantic]
+sandwich(                             → sandwich(
+cs.lift(cs.const(                     → cs`
+20                                    → 20
+))                                    → `
+)                                     → )
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+))                                    → `

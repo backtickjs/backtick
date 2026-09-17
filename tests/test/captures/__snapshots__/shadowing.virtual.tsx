@@ -18,7 +18,7 @@ it("shadowing", async (t) => {
     "shadowing",
     cs.lift((() => {
     const __cs_total = cs.const(1);
-    return cs.const(cs.splice(addOwnTotal(cs.lift(cs.const(__cs_total)), 100)) satisfies typeof cs.ClientUnknown);
+    return cs.const((cs.splice(addOwnTotal(cs.lift(cs.const(__cs_total)), 100)) satisfies typeof cs.ClientUnknown));
 })()),
   );
 });

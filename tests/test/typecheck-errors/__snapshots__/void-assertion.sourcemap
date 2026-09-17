@@ -2,9 +2,9 @@ cs.lift((() => {\n    // @ts-expect-error: Argument of type 'void' is not assign
 const                                     → const 
 __cs_a                                    → a
  = cs.const(                              →  = 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (one)                                     → $one
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
  as                                       →  as 
 void                                      → void
 );                                        → ;

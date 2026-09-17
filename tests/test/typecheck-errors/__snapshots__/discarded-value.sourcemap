@@ -22,36 +22,32 @@ __cs_n                                    → n
 ))                                        → `
 cs.lift((() => {\n                        → cs`{\n  
 cs.statement(                             → 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (ping)                                    → $ping
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n    // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'void'.\n    → \n  // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'void'.\n  
 cs.statement(                             → 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (getValue)                                → $getValue
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n})())                                   → \n}`
 cs.lift((() => {\n                        → cs`{\n  
 cs.statement(                             → 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (ping)                                    → $ping
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n    // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'void'.\n    → \n  // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'void'.\n  
 cs.statement(                             → 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (getValue)                                → $getValue
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 

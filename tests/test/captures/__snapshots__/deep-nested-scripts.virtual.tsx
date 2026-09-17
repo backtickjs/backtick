@@ -8,5 +8,5 @@ function add(lhs: Client<number>, rhs: Client<number>): Client<number> {
 }
 
 it("deepNestedScripts", async (t) => {
-  await snapshotCase(t, "deepNestedScripts", cs.lift(cs.const(cs.splice(add(cs.lift(cs.const(1)), cs.lift(cs.const(2)))) satisfies typeof cs.ClientUnknown)));
+  await snapshotCase(t, "deepNestedScripts", cs.lift(cs.const((cs.splice(add(cs.lift(cs.const(1)), cs.lift(cs.const(2)))) satisfies typeof cs.ClientUnknown))));
 });

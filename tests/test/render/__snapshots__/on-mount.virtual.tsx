@@ -28,7 +28,7 @@ describe("onMount", () => {
         cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     cs.statement((cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => {
-        cs.statement(cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log());
+        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
         cs.statement(cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1));
     }));
     return cs.const(<p>{cs.lift("mounted " + cs.receiver(__cs_count).get())}</p>);

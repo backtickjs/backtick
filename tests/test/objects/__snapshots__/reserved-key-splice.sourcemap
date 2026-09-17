@@ -1,5 +1,5 @@
-cs.lift(cs.const(                    → cs`
-cs.splice(                           → ${ [-semantic]
-{ "#": "value" }                     → { "#": "value" }
-) satisfies typeof cs.ClientUnknown  → } [-semantic]
-))                                   → `
+cs.lift(cs.const(                     → cs`
+(cs.splice(                           → ${ [-semantic]
+{ "#": "value" }                      → { "#": "value" }
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+))                                    → `

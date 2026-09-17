@@ -2,11 +2,10 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_items                                → items
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (state)                                   → $state
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)<                                        → <
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+<                                         → <
 string                                    → string
 []                                        → []
 >(                                        → >(
@@ -18,20 +17,19 @@ const                                     → const
 __cs_started                              → started
  = cs.const(                              →  = 
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (window)                                  → $window
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 setTimeout                                → setTimeout
 (                                         → (
 () => {\n                                 → () => {\n      
 if ((cs.condition(                        → if (
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (more)                                    → $more
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 ) &&                                      → 
 (cs.splice((more)) satisfies typeof cs.ClientUnknown)()→ $more() [-semantic -completion -navigation -verification]
 ))                                        → ) 
@@ -43,9 +41,9 @@ __cs_items                                → items
 .                                         → .
 set                                       → set
 (                                         → (
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (answerItems)                             → $answerItems
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → )
 );                                        → ;
 \n        }                               → \n      }
@@ -90,11 +88,10 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_asked                                → asked
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (state)                                   → $state
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+(                                         → (
 0                                         → 0
 )                                         → )
 );                                        → ;

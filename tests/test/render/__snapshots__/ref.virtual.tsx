@@ -54,7 +54,7 @@ describe("ref", () => {
         cs.lift((() => {
     const __cs_shown = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(true));
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(cs.receiver(__cs_n).get() + 1))}>{cs.lift("n " + cs.receiver(__cs_n).get())}</button>)}{cs.lift((cs.condition(cs.receiver(__cs_shown).get()) && cs.receiver(__cs_shown).get()) ? <p ref={cs.lift(() => cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log(cs.receiver(__cs_n).get()))}>shown</p> : null)}</div>);
+    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(cs.receiver(__cs_n).get() + 1))}>{cs.lift("n " + cs.receiver(__cs_n).get())}</button>)}{cs.lift((cs.condition(cs.receiver(__cs_shown).get()) && cs.receiver(__cs_shown).get()) ? <p ref={cs.lift(() => cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log(cs.receiver(__cs_n).get()))}>shown</p> : null)}</div>);
 })()),
       );
       const shownText = screen.getByText("shown");

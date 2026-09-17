@@ -54,7 +54,7 @@ describe("a name a target answers for", () => {
     // with, which is the same path a cell's `read` is reached by.
     const held = { greeting: "hei" } as Record<string, string>;
     assert.equal(
-      await evaluate(cs.lift(cs.const(cs.receiver(cs.splice((storage)) satisfies typeof cs.ClientUnknown).get("greeting"))), {
+      await evaluate(cs.lift(cs.const(cs.receiver((cs.splice((storage)) satisfies typeof cs.ClientUnknown)).get("greeting"))), {
         builtinOf: (name) =>
           name === "storage"
             ? { get: (key: ClientValue) => held[key as string] ?? null }

@@ -1,119 +1,118 @@
-cs.lift((() => {\n                   → cs`{\n    
-const                                → const 
-__cs_ids                             → ids
- = cs.const(                         →  = 
-(                                    → 
-cs.splice(                           →  [-semantic]
-(state)                              → $state
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)<                                   → <
-number                               → number
-[]                                   → []
->(                                   → >(
-[                                    → [
-1                                    → 1
-,                                    → , 
-2                                    → 2
-,                                    → , 
-3                                    → 3
-,                                    → , 
-4                                    → 4
-,                                    → , 
-5                                    → 5
-]                                    → ]
-)                                    → )
-);                                   → ;
-\n                                   → \n    
-return cs.const(                     → return 
-<                                    → (\n      <
-table                                → table
->{cs.lift(                           → >\n        
-<                                    → <
-tbody                                → tbody
->{cs.lift(                           → >\n          
-<                                    → <
-For                                  → For
-                                     →  
-each                                 → each
-={cs.lift(                           → ={
-cs.receiver(                         → 
-__cs_ids                             → ids
-)                                    → 
-.                                    → .
-get                                  → get
-()                                   → ()
-)}                                   → }
->{cs.lift(                           → >\n            {
-(                                    → (
-__cs_id                              → id
-:                                    → : 
-number                               → number
-) =>                                 → ) => 
-<                                    → (\n              <
-tr                                   → tr
-                                     →  
-id                                   → id
-={cs.lift(                           → ={
-"row-"                               → "row-"
- +                                   →  + 
-__cs_id                              → id
-)}                                   → }
->{cs.lift(                           → >\n                
-<                                    → <
-td                                   → td
->{cs.lift(                           → >\n                  
-<                                    → <
-button                               → button
-                                     → \n                    
-onclick                              → onclick
-={cs.lift(                           → ={
-() =>                                → () =>\n                      
-cs.receiver(                         → 
-__cs_ids                             → ids
-)                                    → 
-.                                    → .
-set                                  → set
-(                                    → (
-cs.receiver(                         → 
-cs.receiver(                         → 
-__cs_ids                             → ids
-)                                    → 
-.                                    → .
-get                                  → get
-()                                   → ()
-)                                    → 
-.                                    → .
-filter                               → filter
-(                                    → (
-__cs_each                            → each
- =>                                  → ) => 
-__cs_each                            → each
- !==                                 →  !== 
-__cs_id                              → id
-)                                    → )
-)                                    → )
-)}                                   → \n                    }
->{cs.lift(                           → \n                  >\n                    {
-"remove "                            → "remove "
- +                                   →  + 
-__cs_id                              → id
-)}</                                 → }\n                  </
-button                               → button
->                                    → >
-)}</                                 → \n                </
-td                                   → td
->                                    → >
-)}</                                 → \n              </
-tr                                   → tr
->                                    → >\n            )
-)}</                                 → }\n          </
-For                                  → For
->                                    → >
-)}</                                 → \n        </
-tbody                                → tbody
->                                    → >
-)}</                                 → \n      </
-table                                → table
->                                    → >\n    )
-);                                   → ;
-\n})())                              → \n  }`
+cs.lift((() => {\n                    → cs`{\n    
+const                                 → const 
+__cs_ids                              → ids
+ = cs.const(                          →  = 
+(cs.splice(                           →  [-semantic]
+(state)                               → $state
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+<                                     → <
+number                                → number
+[]                                    → []
+>(                                    → >(
+[                                     → [
+1                                     → 1
+,                                     → , 
+2                                     → 2
+,                                     → , 
+3                                     → 3
+,                                     → , 
+4                                     → 4
+,                                     → , 
+5                                     → 5
+]                                     → ]
+)                                     → )
+);                                    → ;
+\n                                    → \n    
+return cs.const(                      → return 
+<                                     → (\n      <
+table                                 → table
+>{cs.lift(                            → >\n        
+<                                     → <
+tbody                                 → tbody
+>{cs.lift(                            → >\n          
+<                                     → <
+For                                   → For
+                                      →  
+each                                  → each
+={cs.lift(                            → ={
+cs.receiver(                          → 
+__cs_ids                              → ids
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+)}                                    → }
+>{cs.lift(                            → >\n            {
+(                                     → (
+__cs_id                               → id
+:                                     → : 
+number                                → number
+) =>                                  → ) => 
+<                                     → (\n              <
+tr                                    → tr
+                                      →  
+id                                    → id
+={cs.lift(                            → ={
+"row-"                                → "row-"
+ +                                    →  + 
+__cs_id                               → id
+)}                                    → }
+>{cs.lift(                            → >\n                
+<                                     → <
+td                                    → td
+>{cs.lift(                            → >\n                  
+<                                     → <
+button                                → button
+                                      → \n                    
+onclick                               → onclick
+={cs.lift(                            → ={
+() =>                                 → () =>\n                      
+cs.receiver(                          → 
+__cs_ids                              → ids
+)                                     → 
+.                                     → .
+set                                   → set
+(                                     → (
+cs.receiver(                          → 
+cs.receiver(                          → 
+__cs_ids                              → ids
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+)                                     → 
+.                                     → .
+filter                                → filter
+(                                     → (
+__cs_each                             → each
+ =>                                   → ) => 
+__cs_each                             → each
+ !==                                  →  !== 
+__cs_id                               → id
+)                                     → )
+)                                     → )
+)}                                    → \n                    }
+>{cs.lift(                            → \n                  >\n                    {
+"remove "                             → "remove "
+ +                                    →  + 
+__cs_id                               → id
+)}</                                  → }\n                  </
+button                                → button
+>                                     → >
+)}</                                  → \n                </
+td                                    → td
+>                                     → >
+)}</                                  → \n              </
+tr                                    → tr
+>                                     → >\n            )
+)}</                                  → }\n          </
+For                                   → For
+>                                     → >
+)}</                                  → \n        </
+tbody                                 → tbody
+>                                     → >
+)}</                                  → \n      </
+table                                 → table
+>                                     → >\n    )
+);                                    → ;
+\n})())                               → \n  }`

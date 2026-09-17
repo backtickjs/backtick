@@ -21,6 +21,6 @@ it("optionalParameter", async (t) => {
   await snapshotCase(
     t,
     "optionalParameter",
-    cs.lift(cs.const({ named: (cs.splice((greet)) satisfies typeof cs.ClientUnknown)("hi"), explicit: (cs.splice((greet)) satisfies typeof cs.ClientUnknown)(undefined), supplied: (cs.splice((callIfGiven)) satisfies typeof cs.ClientUnknown)(cs.splice((double)) satisfies typeof cs.ClientUnknown), fallback: (cs.splice((callIfGiven)) satisfies typeof cs.ClientUnknown)(undefined) })),
+    cs.lift(cs.const({ named: (cs.splice((greet)) satisfies typeof cs.ClientUnknown)("hi"), explicit: (cs.splice((greet)) satisfies typeof cs.ClientUnknown)(undefined), supplied: (cs.splice((callIfGiven)) satisfies typeof cs.ClientUnknown)((cs.splice((double)) satisfies typeof cs.ClientUnknown)), fallback: (cs.splice((callIfGiven)) satisfies typeof cs.ClientUnknown)(undefined) })),
   );
 });

@@ -42,9 +42,9 @@ const                                     → const
 __cs_which                                → which
  = cs.const(                              →  = 
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (point)                                   → $point
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 [                                         → [
 __cs_name                                 → name

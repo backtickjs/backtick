@@ -15,6 +15,6 @@ it("vmEvalSiblings", async (t) => {
   await snapshotCase(
     t,
     "vmEvalSiblings",
-    cs.lift(cs.const(<div>{cs.lift(<span>before</span>)}{cs.lift(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((otherBundle)) satisfies typeof cs.ClientUnknown))}{cs.lift(<span>after</span>)}</div>)),
+    cs.lift(cs.const(<div>{cs.lift(<span>before</span>)}{cs.lift(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((otherBundle)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<span>after</span>)}</div>)),
   );
 });

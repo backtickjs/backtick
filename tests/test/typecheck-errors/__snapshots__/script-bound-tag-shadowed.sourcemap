@@ -28,7 +28,7 @@ b                                         → b
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
-cs.splice(                                → ${ [-semantic]
+(cs.splice(                               → ${ [-semantic]
 cs.lift((() => {\n                        → cs`{\n    
 const                                     → const 
 __cs_Badge                                → Badge
@@ -37,7 +37,7 @@ __cs_Badge                                → Badge
 );                                        → ;
 \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    → \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    
 return cs.const(                          → return 
-cs.splice(                                → ${ [-semantic]
+(cs.splice(                               → ${ [-semantic]
 cs.lift(cs.const(                         → cs`
 <                                         → <
 __cs_Badge                                → Badge
@@ -48,9 +48,9 @@ n                                         → n
 }                                         → }
 />                                        →  />
 ))                                        → `
-) satisfies typeof cs.ClientUnknown       → } [-semantic]
+) satisfies typeof cs.ClientUnknown)      → } [-semantic]
 );                                        → ;
 \n})())                                   → \n  }`
-) satisfies typeof cs.ClientUnknown       → } [-semantic]
+) satisfies typeof cs.ClientUnknown)      → } [-semantic]
 );                                        → ;
 \n})())                                   → \n}`

@@ -15,7 +15,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function sandwich(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_before = cs.const(1);
-    const __cs_spliced = cs.const(cs.splice((fragment)) satisfies typeof cs.ClientUnknown);
+    const __cs_spliced = cs.const((cs.splice((fragment)) satisfies typeof cs.ClientUnknown));
     const __cs_after = cs.const(2);
     return cs.const(__cs_before + __cs_spliced + __cs_after);
 })());

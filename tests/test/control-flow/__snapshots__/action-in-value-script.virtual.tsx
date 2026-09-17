@@ -25,7 +25,7 @@ it("actionInValueScript", async (t) => {
     "actionInValueScript",
     cs.lift(cs.const((__cs_b: boolean) => {
     let __cs_n = 0;
-    cs.statement(cs.splice((valueScriptEffects)) satisfies typeof cs.ClientUnknown);
+    cs.statement((cs.splice((valueScriptEffects)) satisfies typeof cs.ClientUnknown));
     if ((cs.condition(__cs_b) && __cs_b)) {
         cs.statement((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
         __cs_n = cs.const(1);

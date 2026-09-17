@@ -15,11 +15,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // wrong.
 function wrap(start: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_outer = cs.const(cs.splice((start)) satisfies typeof cs.ClientUnknown);
-    return cs.const(cs.splice(foo(cs.lift((() => {
+    const __cs_outer = cs.const((cs.splice((start)) satisfies typeof cs.ClientUnknown));
+    return cs.const((cs.splice(foo(cs.lift((() => {
     const __cs_middle = cs.const(10);
     return cs.const(__cs_middle + (cs.splice(same(cs.lift(cs.const(__cs_outer)))) satisfies typeof cs.ClientUnknown));
-})()))) satisfies typeof cs.ClientUnknown);
+})()))) satisfies typeof cs.ClientUnknown));
 })());
 }
 

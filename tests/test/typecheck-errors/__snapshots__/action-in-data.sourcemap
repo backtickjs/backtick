@@ -9,9 +9,9 @@ cs.lift((() => {\n    // @ts-expect-error: Argument of type 'Client<void>[]' is 
 const                                     → const 
 __cs_list                                 → list
  = cs.const(                              →  = 
-cs.splice(                                → ${ [-semantic]
+(cs.splice(                               → ${ [-semantic]
 [action]                                  → [action]
-) satisfies typeof cs.ClientUnknown       → } [-semantic]
+) satisfies typeof cs.ClientUnknown)      → } [-semantic]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
@@ -22,9 +22,9 @@ cs.lift((() => {\n    // @ts-expect-error: Argument of type '{ press: Client<voi
 const                                     → const 
 __cs_map                                  → map
  = cs.const(                              →  = 
-cs.splice(                                → ${ [-semantic]
+(cs.splice(                               → ${ [-semantic]
 { press: action }                         → { press: action }
-) satisfies typeof cs.ClientUnknown       → } [-semantic]
+) satisfies typeof cs.ClientUnknown)      → } [-semantic]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 

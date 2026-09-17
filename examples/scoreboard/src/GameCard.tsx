@@ -44,14 +44,14 @@ export async function GameCard({
           name={awayName}
           score={awayScore}
           hasBall={cs`$possession === "away"`}
-          isTrailing={cs`$homeScore > $awayScore`}
+          isTrailing={cs`$awayScore < $homeScore`}
         />
         <TeamLine
           rank={homeRank}
           name={homeName}
           score={homeScore}
           hasBall={cs`$possession === "home"`}
-          isTrailing={cs`$awayScore > $homeScore`}
+          isTrailing={cs`$homeScore < $awayScore`}
         />
       </div>
 

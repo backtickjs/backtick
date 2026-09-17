@@ -15,7 +15,7 @@ it("undefinedReturn", async (t) => {
     t,
     "undefinedReturn",
     cs.lift((() => {
-    const __cs_stored = cs.const(cs.splice((lying)) satisfies typeof cs.ClientUnknown);
+    const __cs_stored = cs.const((cs.splice((lying)) satisfies typeof cs.ClientUnknown));
     const __cs_caught = cs.const((cs.splice((lying)) satisfies typeof cs.ClientUnknown)());
     return cs.const(1);
 })()),

@@ -3,11 +3,11 @@ cs.lift(cs.const(                         → cs`
 ))                                        → `
 cs.lift(cs.const(                         → cs`
 (cs.condition(                            → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (count)                                   → $count
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 ) &&                                      → 
-cs.splice((count)) satisfies typeof cs.ClientUnknown→ $count [-semantic -completion -navigation -verification]
+(cs.splice((count)) satisfies typeof cs.ClientUnknown)→ $count [-semantic -completion -navigation -verification]
 ) ?                                       →  ? 
 "some"                                    → "some"
  :                                        →  : 

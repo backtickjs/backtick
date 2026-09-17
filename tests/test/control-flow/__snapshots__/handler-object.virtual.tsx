@@ -11,7 +11,7 @@ const beep: Client<void> = cs.lift((() => {
 })());
 
 const onTap: Client<(id: number) => void> = cs.lift(cs.const((__cs_id: number) => {
-    cs.statement(cs.splice((beep)) satisfies typeof cs.ClientUnknown);
+    cs.statement((cs.splice((beep)) satisfies typeof cs.ClientUnknown));
 }));
 
 it("handlerObject", async (t) => {
@@ -19,7 +19,7 @@ it("handlerObject", async (t) => {
     t,
     "handlerObject",
     cs.lift((() => {
-    const __cs_handlers = cs.const({ tap: cs.splice((onTap)) satisfies typeof cs.ClientUnknown, hold: cs.splice((onTap)) satisfies typeof cs.ClientUnknown });
+    const __cs_handlers = cs.const({ tap: (cs.splice((onTap)) satisfies typeof cs.ClientUnknown), hold: (cs.splice((onTap)) satisfies typeof cs.ClientUnknown) });
     return cs.const(__cs_handlers);
 })()),
   );

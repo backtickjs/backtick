@@ -27,7 +27,7 @@ it("deepShadowing", async (t) => {
     "deepShadowing",
     cs.lift((() => {
     const __cs_base = cs.const(10);
-    return cs.const(cs.splice(outerBase(cs.lift(cs.const(__cs_base)))) satisfies typeof cs.ClientUnknown);
+    return cs.const((cs.splice(outerBase(cs.lift(cs.const(__cs_base)))) satisfies typeof cs.ClientUnknown));
 })()),
   );
 });

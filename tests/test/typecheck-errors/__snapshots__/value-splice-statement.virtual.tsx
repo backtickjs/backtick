@@ -6,5 +6,5 @@ const count = cs.lift(cs.const(1));
 
 export const script = cs.lift((() => {
     // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'void'.
-    cs.statement(cs.splice((count)) satisfies typeof cs.ClientUnknown);
+    cs.statement((cs.splice((count)) satisfies typeof cs.ClientUnknown));
 })());

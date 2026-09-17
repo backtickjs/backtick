@@ -20,9 +20,9 @@ const answerItems = ["one", "two"];
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_items = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>([]));
-    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
+    const __cs_started = cs.const(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).setTimeout(() => {
         if ((cs.condition((cs.splice((more)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((more)) satisfies typeof cs.ClientUnknown)())) {
-            cs.statement(cs.receiver(__cs_items).set(cs.splice((answerItems)) satisfies typeof cs.ClientUnknown));
+            cs.statement(cs.receiver(__cs_items).set((cs.splice((answerItems)) satisfies typeof cs.ClientUnknown)));
         }
     }, 0));
     return cs.const(<For each={cs.lift(cs.receiver(__cs_items).get())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>);

@@ -3,20 +3,19 @@ cs.lift(cs.const(                         → cs`
 const                                     → const 
 __cs_held                                 → held
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (state)                                   → $state
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+(                                         → (
 "waiting"                                 → "waiting"
 )                                         → )
 );                                        → ;
 \n                                        → \n\n      
 cs.statement(                             → 
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (http)                                    → $http
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 get                                       → get
@@ -107,9 +106,9 @@ timeout                                   → timeout
 \n                                        → \n\n      
 cs.statement(                             → 
 cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (http)                                    → $http
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
 post                                      → post

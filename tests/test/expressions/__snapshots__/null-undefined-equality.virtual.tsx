@@ -23,7 +23,7 @@ describe("null and undefined", () => {
     assert.deepEqual(
       await evaluate(cs.lift((() => {
     const __cs_names = cs.const(["a"]);
-    return cs.const([cs.splice((nothing)) satisfies typeof cs.ClientUnknown === undefined, cs.splice((nothing)) satisfies typeof cs.ClientUnknown !== null, cs.splice((empty)) satisfies typeof cs.ClientUnknown === null, cs.splice((empty)) satisfies typeof cs.ClientUnknown !== undefined, cs.receiver(__cs_names)[1] === undefined, cs.receiver(__cs_names)[1] !== null]);
+    return cs.const([(cs.splice((nothing)) satisfies typeof cs.ClientUnknown) === undefined, (cs.splice((nothing)) satisfies typeof cs.ClientUnknown) !== null, (cs.splice((empty)) satisfies typeof cs.ClientUnknown) === null, (cs.splice((empty)) satisfies typeof cs.ClientUnknown) !== undefined, cs.receiver(__cs_names)[1] === undefined, cs.receiver(__cs_names)[1] !== null]);
 })())),
       [true, true, true, true, true, true],
     );

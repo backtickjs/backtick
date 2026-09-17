@@ -14,7 +14,7 @@ it("httpRequests", async (t) => {
     "httpRequests",
     cs.lift(cs.const(() => {
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("waiting"));
-    cs.statement(cs.receiver(cs.splice((http)) satisfies typeof cs.ClientUnknown).get("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: HttpResponse) => {
+    cs.statement(cs.receiver((cs.splice((http)) satisfies typeof cs.ClientUnknown)).get("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: HttpResponse) => {
         if (cs.receiver(__cs_response).status !== 200) {
             throw "answered " + cs.receiver(__cs_response).status;
         }
@@ -22,7 +22,7 @@ it("httpRequests", async (t) => {
     }, (__cs_message: string) => {
         cs.statement(cs.receiver(__cs_held).set("failed \u2014 " + __cs_message));
     }, { timeout: 3000 }));
-    cs.statement(cs.receiver(cs.splice((http)) satisfies typeof cs.ClientUnknown).post("/cases", cs.receiver(JSON).stringify({ name: "Math.trunc", passed: true }), (__cs_response: HttpResponse) => {
+    cs.statement(cs.receiver((cs.splice((http)) satisfies typeof cs.ClientUnknown)).post("/cases", cs.receiver(JSON).stringify({ name: "Math.trunc", passed: true }), (__cs_response: HttpResponse) => {
         cs.statement(cs.receiver(__cs_held).set(cs.receiver(__cs_response).data));
     }, (__cs_message: string) => {
         cs.statement(cs.receiver(__cs_held).set(__cs_message));

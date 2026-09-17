@@ -9,6 +9,6 @@ const one = 1;
 // because an annotation is not a value and reaches no boundary at all.
 const asserted = cs.lift((() => {
     // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
-    const __cs_a = cs.const(cs.splice((one)) satisfies typeof cs.ClientUnknown as void);
+    const __cs_a = cs.const((cs.splice((one)) satisfies typeof cs.ClientUnknown) as void);
     return cs.const("" + __cs_a);
 })());

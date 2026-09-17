@@ -823,7 +823,11 @@ function rewriteNodeImpl(
       // `typeof cs.ClientUnknown` rather than a module, because this has to resolve
       // in the file the template was written in — and naming a package would
       // put that package in front of every user of the transform.
-      const virtual = ts.factory.createSatisfiesExpression(
+      //
+      // Parenthesized because this otherwise ends in a type, which is open to
+      // what follows it: `$a < $b` reads as an instantiation. Parenthesizing
+      // the type only moves that — `(T)[0]` is an indexed access.
+      const satisfies = ts.factory.createSatisfiesExpression(
         call(ts, "cs", "splice", [argument]),
         ts.factory.createTypeQueryNode(
           ts.factory.createQualifiedName(
@@ -832,6 +836,8 @@ function rewriteNodeImpl(
           ),
         ),
       );
+      const virtual = ts.factory.createParenthesizedExpression(satisfies);
+      // On the outer node, so the parentheses fall inside the splice's span.
       state.codeInformation.set(virtual, { semantic: false });
       return {
         virtual,

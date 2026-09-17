@@ -17,7 +17,7 @@ function labelled(label: Client<string>) {
     const __cs_Card = cs.const((__cs_props: {
         n: number;
     }) => <i>{cs.lift((cs.splice((label)) satisfies typeof cs.ClientUnknown) + cs.receiver(__cs_props).n)}</i>);
-    return cs.const(<p>{cs.lift(cs.splice(cs.lift(cs.const(<__cs_Card n={1}/>))) satisfies typeof cs.ClientUnknown)}</p>);
+    return cs.const(<p>{cs.lift((cs.splice(cs.lift(cs.const(<__cs_Card n={1}/>))) satisfies typeof cs.ClientUnknown))}</p>);
 })());
 }
 
@@ -25,7 +25,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs.lift(cs.const(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(cs.splice(labelled(cs.lift(cs.const("a")))) satisfies typeof cs.ClientUnknown)}{cs.lift(cs.splice(labelled(cs.lift(cs.const("b")))) satisfies typeof cs.ClientUnknown)}</div>)),
+    cs.lift(cs.const(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift((cs.splice(labelled(cs.lift(cs.const("a")))) satisfies typeof cs.ClientUnknown))}{cs.lift((cs.splice(labelled(cs.lift(cs.const("b")))) satisfies typeof cs.ClientUnknown))}</div>)),
   );
 });
 

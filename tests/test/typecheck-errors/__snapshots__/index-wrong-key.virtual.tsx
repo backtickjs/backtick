@@ -16,6 +16,6 @@ export default cs.lift(cs.const((__cs_name: string) => {
     // @ts-expect-error: Element implicitly has an 'any' type because index expression is not of type 'number'.
     const __cs_wrong = cs.const(cs.receiver(__cs_coins)[__cs_name]);
     // @ts-expect-error: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'ReadMembers<{ x: number; y: number; }>'.
-    const __cs_which = cs.const(cs.receiver(cs.splice((point)) satisfies typeof cs.ClientUnknown)[__cs_name]);
+    const __cs_which = cs.const(cs.receiver((cs.splice((point)) satisfies typeof cs.ClientUnknown))[__cs_name]);
     return cs.const(__cs_first + __cs_wrong + __cs_which);
 }));

@@ -2,11 +2,10 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_label                                → label
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (state)                                   → $state
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+(                                         → (
 "hi"                                      → "hi"
 )                                         → )
 );                                        → ;

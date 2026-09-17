@@ -1,50 +1,48 @@
-cs.lift((() => {\n                   → cs`{\n    
-let                                  → let 
-__cs_total                           → total
- =                                   →  = 
-0                                    → 0
-;                                    → ;
-\n                                   → \n    
-__cs_total                           → total
- = cs.const(                         →  = 
-__cs_total                           → total
- + (                                 →  + 
-cs.splice(                           →  [-semantic]
-(lhs)                                → $lhs
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-)                                    → 
-;                                    → ;
-\n                                   → \n    
-__cs_total                           → total
- = cs.const(                         →  = 
-__cs_total                           → total
- + (                                 →  + 
-cs.splice(                           →  [-semantic]
-(rhs)                                → $rhs
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-)                                    → 
-;                                    → ;
-\n                                   → \n    
-return cs.const(                     → return 
-__cs_total                           → total
-);                                   → ;
-\n})())                              → \n  }`
-cs.lift((() => {\n                   → cs`{\n      
-const                                → const 
-__cs_total                           → total
- = cs.const(                         →  = 
-1                                    → 1
-);                                   → ;
-\n                                   → \n      
-return cs.const(                     → return 
-cs.splice(                           → ${ [-semantic]
-addOwnTotal(                         → addOwnTotal(
-cs.lift(cs.const(                    → cs`
-__cs_total                           → total
-))                                   → `
-, 100)                               → , 100)
-) satisfies typeof cs.ClientUnknown  → } [-semantic]
-);                                   → ;
-\n})())                              → \n    }`
+cs.lift((() => {\n                    → cs`{\n    
+let                                   → let 
+__cs_total                            → total
+ =                                    →  = 
+0                                     → 0
+;                                     → ;
+\n                                    → \n    
+__cs_total                            → total
+ = cs.const(                          →  = 
+__cs_total                            → total
+ +                                    →  + 
+(cs.splice(                           →  [-semantic]
+(lhs)                                 → $lhs
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → 
+;                                     → ;
+\n                                    → \n    
+__cs_total                            → total
+ = cs.const(                          →  = 
+__cs_total                            → total
+ +                                    →  + 
+(cs.splice(                           →  [-semantic]
+(rhs)                                 → $rhs
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → 
+;                                     → ;
+\n                                    → \n    
+return cs.const(                      → return 
+__cs_total                            → total
+);                                    → ;
+\n})())                               → \n  }`
+cs.lift((() => {\n                    → cs`{\n      
+const                                 → const 
+__cs_total                            → total
+ = cs.const(                          →  = 
+1                                     → 1
+);                                    → ;
+\n                                    → \n      
+return cs.const(                      → return 
+(cs.splice(                           → ${ [-semantic]
+addOwnTotal(                          → addOwnTotal(
+cs.lift(cs.const(                     → cs`
+__cs_total                            → total
+))                                    → `
+, 100)                                → , 100)
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+);                                    → ;
+\n})())                               → \n    }`

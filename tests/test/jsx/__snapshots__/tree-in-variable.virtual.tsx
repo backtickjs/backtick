@@ -13,12 +13,12 @@ import { snapshotCase } from "../snapshotCase.ts";
 const HeldRow = async () => <span>x</span>;
 
 const heldElement = cs.lift(cs.const(() => {
-    const __cs_tree = cs.const(cs.splice((<div />)) satisfies typeof cs.ClientUnknown);
+    const __cs_tree = cs.const((cs.splice((<div />)) satisfies typeof cs.ClientUnknown));
     return cs.const(__cs_tree);
 }));
 
 const heldComponent = cs.lift(cs.const(() => {
-    const __cs_tree = cs.const(cs.splice((<HeldRow />)) satisfies typeof cs.ClientUnknown);
+    const __cs_tree = cs.const((cs.splice((<HeldRow />)) satisfies typeof cs.ClientUnknown));
     return cs.const(__cs_tree);
 }));
 

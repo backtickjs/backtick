@@ -8,6 +8,6 @@ const action = cs.lift((() => {
 
 export default cs.lift((() => {
     // @ts-expect-error: Argument of type 'Client<void>[]' is not assignable to parameter of type 'ClientValue'.
-    const __cs_list = cs.const(cs.splice([action]) satisfies typeof cs.ClientUnknown);
+    const __cs_list = cs.const((cs.splice([action]) satisfies typeof cs.ClientUnknown));
     return cs.const(1);
 })());

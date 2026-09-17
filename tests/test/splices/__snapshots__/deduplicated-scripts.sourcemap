@@ -1,18 +1,18 @@
-cs.lift(cs.const(                    → cs`
-7                                    → 7
-))                                   → `
-cs.lift(cs.const(                    → cs`
-{                                    → ({ 
-a                                    → a
-:                                    → : 
-cs.splice(                           →  [-semantic]
-(leaf)                               → $leaf
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-,                                    → , 
-b                                    → b
-:                                    → : 
-cs.splice(                           →  [-semantic]
-(leaf)                               → $leaf
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
- }                                   →  })
-))                                   → `
+cs.lift(cs.const(                     → cs`
+7                                     → 7
+))                                    → `
+cs.lift(cs.const(                     → cs`
+{                                     → ({ 
+a                                     → a
+:                                     → : 
+(cs.splice(                           →  [-semantic]
+(leaf)                                → $leaf
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+,                                     → , 
+b                                     → b
+:                                     → : 
+(cs.splice(                           →  [-semantic]
+(leaf)                                → $leaf
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+ }                                    →  })
+))                                    → `

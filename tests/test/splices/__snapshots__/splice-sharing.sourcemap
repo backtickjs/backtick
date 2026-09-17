@@ -1,42 +1,40 @@
-cs.lift(cs.const(                    → cs`
-(                                    → 
-cs.splice(                           →  [-semantic]
-(lhs)                                → $lhs
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-) + (                                →  + 
-cs.splice(                           →  [-semantic]
-(rhs)                                → $rhs
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-))                                   → `
-cs.lift(cs.const(                    → cs`
-{                                    → ({\n      
-x                                    → x
-:                                    → : 
-cs.splice(                           → ${ [-semantic]
-add(                                 → add(
-cs.lift(cs.const(                    → cs`
-1                                    → 1
-))                                   → `
-,                                    → , 
-cs.lift(cs.const(                    → cs`
-2                                    → 2
-))                                   → `
-)                                    → )
-) satisfies typeof cs.ClientUnknown  → } [-semantic]
-,                                    → ,\n      
-y                                    → y
-:                                    → : 
-cs.splice(                           → ${ [-semantic]
-add(                                 → add(
-cs.lift(cs.const(                    → cs`
-3                                    → 3
-))                                   → `
-,                                    → , 
-cs.lift(cs.const(                    → cs`
-4                                    → 4
-))                                   → `
-)                                    → )
-) satisfies typeof cs.ClientUnknown  → } [-semantic]
- }                                   → ,\n    })
-))                                   → `
+cs.lift(cs.const(                     → cs`
+(cs.splice(                           →  [-semantic]
+(lhs)                                 → $lhs
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+ +                                    →  + 
+(cs.splice(                           →  [-semantic]
+(rhs)                                 → $rhs
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+))                                    → `
+cs.lift(cs.const(                     → cs`
+{                                     → ({\n      
+x                                     → x
+:                                     → : 
+(cs.splice(                           → ${ [-semantic]
+add(                                  → add(
+cs.lift(cs.const(                     → cs`
+1                                     → 1
+))                                    → `
+,                                     → , 
+cs.lift(cs.const(                     → cs`
+2                                     → 2
+))                                    → `
+)                                     → )
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+,                                     → ,\n      
+y                                     → y
+:                                     → : 
+(cs.splice(                           → ${ [-semantic]
+add(                                  → add(
+cs.lift(cs.const(                     → cs`
+3                                     → 3
+))                                    → `
+,                                     → , 
+cs.lift(cs.const(                     → cs`
+4                                     → 4
+))                                    → `
+)                                     → )
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+ }                                    → ,\n    })
+))                                    → `

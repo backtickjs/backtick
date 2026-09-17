@@ -9,13 +9,13 @@ const action = cs.lift((() => {
 
 export const stored = cs.lift((() => {
     // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
-    const __cs_captured = cs.const(cs.splice((action)) satisfies typeof cs.ClientUnknown);
+    const __cs_captured = cs.const((cs.splice((action)) satisfies typeof cs.ClientUnknown));
     return cs.const(1);
 })());
 
 export const returned = cs.lift((() => {
     // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
-    return cs.const(cs.splice((action)) satisfies typeof cs.ClientUnknown);
+    return cs.const((cs.splice((action)) satisfies typeof cs.ClientUnknown));
 })());
 
 export const assigned = cs.lift((() => {
@@ -24,7 +24,7 @@ export const assigned = cs.lift((() => {
     }
     catch (__cs_e) {
         // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
-        __cs_e = cs.const(cs.splice((action)) satisfies typeof cs.ClientUnknown);
+        __cs_e = cs.const((cs.splice((action)) satisfies typeof cs.ClientUnknown));
         return cs.const(2);
     }
 })());

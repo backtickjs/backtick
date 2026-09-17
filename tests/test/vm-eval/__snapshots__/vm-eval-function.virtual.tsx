@@ -17,6 +17,6 @@ it("vmEvalFunction", async (t) => {
   await snapshotCase(
     t,
     "vmEvalFunction",
-    cs.lift(cs.const(<div>{cs.lift(<span>{cs.lift(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((greet)) satisfies typeof cs.ClientUnknown)("ada"))}</span>)}{cs.lift(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((badge)) satisfies typeof cs.ClientUnknown)({ count: 3 }))}</div>)),
+    cs.lift(cs.const(<div>{cs.lift(<span>{cs.lift(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((greet)) satisfies typeof cs.ClientUnknown))("ada"))}</span>)}{cs.lift(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((badge)) satisfies typeof cs.ClientUnknown))({ count: 3 }))}</div>)),
   );
 });

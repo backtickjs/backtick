@@ -1,28 +1,27 @@
-cs.lift((() => {\n                   → cs`{\n    
-const                                → const 
-__cs_n                               → n
- = cs.const(                         →  = 
-(                                    → 
-cs.splice(                           →  [-semantic]
-(state)                              → $state
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)(                                   → (
-2                                    → 2
-)                                    → )
-);                                   → ;
-\n                                   → \n    
-return cs.const(                     → return 
-<                                    → <
-em                                   → em
->{cs.lift(                           → >{
-cs.receiver(                         → 
-__cs_n                               → n
-)                                    → 
-.                                    → .
-get                                  → get
-()                                   → ()
-)}</                                 → }</
-em                                   → em
->                                    → >
-);                                   → ;
-\n})())                              → \n  }`
+cs.lift((() => {\n                    → cs`{\n    
+const                                 → const 
+__cs_n                                → n
+ = cs.const(                          →  = 
+(cs.splice(                           →  [-semantic]
+(state)                               → $state
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+(                                     → (
+2                                     → 2
+)                                     → )
+);                                    → ;
+\n                                    → \n    
+return cs.const(                      → return 
+<                                     → <
+em                                    → em
+>{cs.lift(                            → >{
+cs.receiver(                          → 
+__cs_n                                → n
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+)}</                                  → }</
+em                                    → em
+>                                     → >
+);                                    → ;
+\n})())                               → \n  }`

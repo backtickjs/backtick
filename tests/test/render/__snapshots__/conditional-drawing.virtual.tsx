@@ -30,7 +30,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_shown = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
-    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
+    const __cs_started = cs.const(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).setTimeout(() => {
         if ((cs.condition((cs.splice((again)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((again)) satisfies typeof cs.ClientUnknown)())) {
             cs.statement(cs.receiver(__cs_shown).set(true));
         }

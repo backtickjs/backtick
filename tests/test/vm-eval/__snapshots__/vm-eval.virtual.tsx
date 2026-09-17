@@ -14,7 +14,7 @@ async function Items() {
 const items = await bundler.run(<Items />);
 const total = await bundler.run(41);
 
-const vmEval = cs.lift(cs.const(<div>{cs.lift(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((items)) satisfies typeof cs.ClientUnknown))}{cs.lift(<b>{cs.lift(cs.receiver(cs.splice((vm)) satisfies typeof cs.ClientUnknown).eval(cs.splice((total)) satisfies typeof cs.ClientUnknown) + 1)}</b>)}</div>));
+const vmEval = cs.lift(cs.const(<div>{cs.lift(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((items)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<b>{cs.lift(cs.receiver((cs.splice((vm)) satisfies typeof cs.ClientUnknown)).eval((cs.splice((total)) satisfies typeof cs.ClientUnknown)) + 1)}</b>)}</div>));
 
 it("vmEval", async (t) => {
   await snapshotCase(t, "vmEval", vmEval);

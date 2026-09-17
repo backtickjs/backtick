@@ -1,50 +1,48 @@
-cs.lift(cs.const(                    → cs`
-cs.receiver(                         → 
-"abc"                                → "abc"
-)                                    → 
-.                                    → .
-padStart                             → padStart
-))                                   → `
-cs.lift(cs.const(                    → cs`
-(                                    → 
-cs.splice(                           →  [-semantic]
-(greet)                              → $greet
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)()                                  → ()
-))                                   → `
-cs.lift(cs.const(                    → cs`
-(                                    → 
-cs.splice(                           →  [-semantic]
-(greet)                              → $greet
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)()                                  → ()
-))                                   → `
-cs.lift(cs.const(                    → cs`
-cs.receiver(                         → 
-cs.splice(                           →  [-semantic]
-(storage)                            → $storage
-) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)                                    → 
-.                                    → .
-get                                  → get
-(                                    → (
-"greeting"                           → "greeting"
-)                                    → )
-))                                   → `
-cs.lift(cs.const(                    → cs`
-cs.receiver(                         → 
-Math                                 → Math
-)                                    → 
-.                                    → .
-floor                                → floor
-(                                    → (
-2.7                                  → 2.7
-)                                    → )
-))                                   → `
-cs.lift(cs.const(                    → cs`
-cs.receiver(                         → 
-"abc"                                → "abc"
-)                                    → 
-.                                    → .
-padStart                             → padStart
-))                                   → `
+cs.lift(cs.const(                     → cs`
+cs.receiver(                          → 
+"abc"                                 → "abc"
+)                                     → 
+.                                     → .
+padStart                              → padStart
+))                                    → `
+cs.lift(cs.const(                     → cs`
+(cs.splice(                           →  [-semantic]
+(greet)                               → $greet
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+()                                    → ()
+))                                    → `
+cs.lift(cs.const(                     → cs`
+(cs.splice(                           →  [-semantic]
+(greet)                               → $greet
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+()                                    → ()
+))                                    → `
+cs.lift(cs.const(                     → cs`
+cs.receiver(                          → 
+(cs.splice(                           →  [-semantic]
+(storage)                             → $storage
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → 
+.                                     → .
+get                                   → get
+(                                     → (
+"greeting"                            → "greeting"
+)                                     → )
+))                                    → `
+cs.lift(cs.const(                     → cs`
+cs.receiver(                          → 
+Math                                  → Math
+)                                     → 
+.                                     → .
+floor                                 → floor
+(                                     → (
+2.7                                   → 2.7
+)                                     → )
+))                                    → `
+cs.lift(cs.const(                     → cs`
+cs.receiver(                          → 
+"abc"                                 → "abc"
+)                                     → 
+.                                     → .
+padStart                              → padStart
+))                                    → `

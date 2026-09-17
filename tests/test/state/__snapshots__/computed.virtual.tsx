@@ -25,7 +25,7 @@ describe("computed", () => {
       cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1));
     const __cs_doubled = cs.const((cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => {
-        cs.statement(cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log());
+        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
         return cs.const(cs.receiver(__cs_n).get() * 2);
     }));
     return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(cs.receiver(__cs_n).get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift("a " + cs.receiver(__cs_doubled).get())}</p>)}{cs.lift(<p>{cs.lift("b " + cs.receiver(__cs_doubled).get())}</p>)}{cs.lift(<p>{cs.lift("c " + cs.receiver(__cs_doubled).get())}</p>)}</div>);
@@ -45,7 +45,7 @@ describe("computed", () => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1));
     const __cs_isBig = cs.const((cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => cs.receiver(__cs_n).get() > 2));
     const __cs_label = cs.const(() => {
-        cs.statement(cs.receiver(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).console).log());
+        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
         return cs.const((cs.condition(cs.receiver(__cs_isBig).get()) && cs.receiver(__cs_isBig).get()) ? "big" : "small");
     });
     return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(cs.receiver(__cs_n).get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);

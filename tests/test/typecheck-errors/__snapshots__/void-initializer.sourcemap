@@ -17,11 +17,10 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_x                                    → x
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (ping)                                    → $ping
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
@@ -32,11 +31,10 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_x                                    → x
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (ping)                                    → $ping
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)()                                       → ()
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+()                                        → ()
 );                                        → ;
 \n})())                                   → \n}`
 cs.lift(cs.const(                         → cs`
@@ -54,11 +52,10 @@ cs.lift((() => {\n    // @ts-expect-error: Argument of type 'boolean' is not ass
 const                                     → const 
 __cs_x                                    → x
  = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
+(cs.splice(                               →  [-semantic]
 (label)                                   → $label
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+(                                         → (
 true                                      → true
 )                                         → )
 );                                        → ;

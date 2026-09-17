@@ -13,7 +13,7 @@ it("objectIndex", async (t) => {
     t,
     "objectIndex",
     cs.lift(cs.const((__cs_currency: string) => {
-    const __cs_table = cs.const(cs.splice((rates)) satisfies typeof cs.ClientUnknown);
+    const __cs_table = cs.const((cs.splice((rates)) satisfies typeof cs.ClientUnknown));
     const __cs_asked = cs.const(cs.receiver(__cs_table)[__cs_currency] ?? 0);
     const __cs_usd = cs.const(cs.receiver(__cs_table)["usd"] ?? 0);
     return cs.const(__cs_asked + __cs_usd);

@@ -10,6 +10,6 @@ it("spliceSharing", async (t) => {
   await snapshotCase(
     t,
     "spliceSharing",
-    cs.lift(cs.const({ x: cs.splice(add(cs.lift(cs.const(1)), cs.lift(cs.const(2)))) satisfies typeof cs.ClientUnknown, y: cs.splice(add(cs.lift(cs.const(3)), cs.lift(cs.const(4)))) satisfies typeof cs.ClientUnknown })),
+    cs.lift(cs.const({ x: (cs.splice(add(cs.lift(cs.const(1)), cs.lift(cs.const(2)))) satisfies typeof cs.ClientUnknown), y: (cs.splice(add(cs.lift(cs.const(3)), cs.lift(cs.const(4)))) satisfies typeof cs.ClientUnknown) })),
   );
 });
