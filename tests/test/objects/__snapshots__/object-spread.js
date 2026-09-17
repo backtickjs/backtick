@@ -1,12 +1,12 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-// A spread in an object literal, which is the one place the format cannot
-// ship an object as the data it spells: an object in a value slot *is* its
-// own keys and none of them is reserved, so there is nowhere to write "and
-// every key of that one". A literal a spread runs through is a node instead —
-// a name slot of `null` marking the spread — and a literal without one is
-// data still.
+// A spread in an object literal, which the format cannot ship as the data it
+// spells: an object in a value slot *is* its own keys and none of them is
+// reserved, so there is nowhere to write "and every key of that one". A
+// literal a spread runs through is `Object.fromEntries` over its pairs
+// instead, the spread being `Object.entries` of what it spreads; a literal
+// without one is data still.
 //
 // Later wins, both ways round, the way it does in the language this mirrors.
 it("objectSpread", async (t) => {
@@ -18,7 +18,7 @@ it("objectSpread", async (t) => {
       {
         version: "0.0.0",
         filePath: "objects/object-spread.test.tsx",
-        fileHash: "3jf5cgjhw3sl1",
+        fileHash: "31uvwz3g4bdt1",
         splices: {},
         captures: [],
       },
@@ -33,7 +33,7 @@ it("objectSpread", async (t) => {
               kind: "id",
               loc: [18, 13, 18, 17],
               text: "base",
-              bindingKey: "base$3jf5cgjhw3sl1$0",
+              bindingKey: "base$31uvwz3g4bdt1$0",
             },
             initializer: {
               kind: "obj",
@@ -77,7 +77,7 @@ it("objectSpread", async (t) => {
               kind: "id",
               loc: [19, 13, 19, 17],
               text: "over",
-              bindingKey: "over$3jf5cgjhw3sl1$1",
+              bindingKey: "over$31uvwz3g4bdt1$1",
             },
             initializer: {
               kind: "obj",
@@ -114,7 +114,7 @@ it("objectSpread", async (t) => {
                     kind: "id",
                     loc: [21, 12, 21, 16],
                     text: "base",
-                    bindingKey: "base$3jf5cgjhw3sl1$0",
+                    bindingKey: "base$31uvwz3g4bdt1$0",
                   },
                 },
                 {
@@ -124,7 +124,7 @@ it("objectSpread", async (t) => {
                     kind: "id",
                     loc: [22, 12, 22, 16],
                     text: "over",
-                    bindingKey: "over$3jf5cgjhw3sl1$1",
+                    bindingKey: "over$31uvwz3g4bdt1$1",
                   },
                 },
                 {

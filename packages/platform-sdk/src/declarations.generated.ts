@@ -134,20 +134,6 @@ export type BundleBuiltin = [kind: "bltn", name: string];
 
 export type BundleArrayElement = BundleExpression | BundleSpreadElement;
 
-export type BundleObjectLiteral = [kind: "obj", entries: BundleObjectEntry[]];
-
-/**
- * One key of an object literal and its value. The key is an expression that
- * must evaluate to a string; a key written in the source is a string literal.
- */
-export type BundlePropertyAssignment = [
-  kind: ":",
-  name: BundleExpression,
-  value: BundleExpression,
-];
-
-export type BundleObjectEntry = BundlePropertyAssignment | BundleSpreadElement;
-
 export type BundleExpression =
   | null
   | boolean
@@ -184,7 +170,6 @@ export type BundleExpression =
   | BundleNegation
   | BundleConditional
   | BundleArrowFunction
-  | BundleObjectLiteral
   | BundleBuiltin;
 
 export type BundleStatement =

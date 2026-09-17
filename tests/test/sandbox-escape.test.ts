@@ -25,8 +25,8 @@ import { evaluateUntrustedBundle } from "@backtickjs/web-testing";
 const bundleOf = (root: unknown): Bundle<ClientUnknown> =>
   ({ functions: {}, root }) as Bundle<ClientUnknown>;
 
-// ["obj", []] is the empty object literal; ["."] reads a member; ["()"] calls.
-const EMPTY = ["obj", []];
+// {} is the empty object; ["."] reads a member; ["()"] calls.
+const EMPTY = {};
 const OBJECT_CTOR = [".", EMPTY, "constructor"];
 const FUNCTION_CTOR = [".", OBJECT_CTOR, "constructor"];
 
@@ -81,15 +81,21 @@ describe("sandbox escape (hand-written bundles)", () => {
   it("still reads an own member whose name shadows the machinery", () => {
     // A data object may legitimately hold a key called `constructor`; an own
     // member always wins over the inherited-machinery rule.
-    const root = [".", ["obj", [[":", "constructor", 7]]], "constructor"];
+    const root = [".", { constructor: 7 }, "constructor"];
     assert.equal(evaluateUntrustedBundle(bundleOf(root)), 7);
   });
 
+  // What `{ [key]: value }` bundles to.
+  const fromEntries = (key: unknown, value: unknown) => [
+    "()",
+    ["bltn", "Object.fromEntries"],
+    [["arr", [["arr", [key, value]]]]],
+  ];
+
   it("keeps a computed `__proto__` key an own member", () => {
     // Assigned into an object, this key would replace the prototype with the
-    // value; kept as data, it is only a key.
-    const key = ["+", "__pro", "to__"];
-    const made = ["obj", [[":", key, ["obj", [[":", "x", 1]]]]]];
+    // value; made an entry, it is only a key.
+    const made = fromEntries(["+", "__pro", "to__"], { x: 1 });
     assert.deepEqual(
       evaluateUntrustedBundle(
         bundleOf(["()", ["bltn", "Object.keys"], [made]]),
@@ -99,13 +105,6 @@ describe("sandbox escape (hand-written bundles)", () => {
     assert.equal(
       evaluateUntrustedBundle(bundleOf([".", made, "x"])),
       undefined,
-    );
-  });
-
-  it("refuses a computed key that isn't a string", () => {
-    assert.throws(
-      () => evaluateUntrustedBundle(bundleOf(["obj", [[":", 1, 2]]])),
-      /an object key must be a string/,
     );
   });
 

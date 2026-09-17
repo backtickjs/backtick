@@ -81,20 +81,6 @@ function renderNode(
     // Data, which a node kind carries only so it is not read as a node.
     case "arr":
       return renderData<BundleArrayElement[]>(node[1], indent, renderNode);
-    // A literal a spread or a computed key runs through. A key that is a
-    // string is written as a name; any other expression is computed.
-    case "obj":
-      return `{ ${node[1]
-        .map((entry) =>
-          entry[0] === ":"
-            ? `${
-                typeof entry[1] === "string"
-                  ? entry[1]
-                  : `[${renderNode(entry[1], indent)}]`
-              }: ${renderNode(entry[2], indent)}`
-            : `...${renderNode(entry[1], indent)}`,
-        )
-        .join(", ")} }`;
     case "id":
       return node[1];
     case "fn":

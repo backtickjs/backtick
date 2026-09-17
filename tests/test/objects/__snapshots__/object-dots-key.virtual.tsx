@@ -3,9 +3,8 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A property literally named `...`, in a literal a spread also runs through —
-// which is the one shape where both are entries of the same node. The format
-// tells them apart by the entry's first slot, and `...` is a name a property
-// may have, so this is where the two could be confused.
+// which is the one shape where a spread and a pair holding `...` sit in the
+// same list. A pair is an array of its own, so its `...` is only a string.
 it("objectDotsKey", async (t) => {
   await snapshotCase(
     t,

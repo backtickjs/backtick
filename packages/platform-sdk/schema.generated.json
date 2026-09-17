@@ -453,73 +453,6 @@
         }
       ]
     },
-    "BundleObjectLiteral": {
-      "type": "tuple",
-      "items": [
-        {
-          "type": "tupleElement",
-          "name": "kind",
-          "holds": {
-            "type": "string",
-            "const": "obj"
-          }
-        },
-        {
-          "type": "tupleElement",
-          "name": "entries",
-          "holds": {
-            "type": "array",
-            "items": {
-              "type": "ref",
-              "$ref": "BundleObjectEntry"
-            }
-          }
-        }
-      ]
-    },
-    "BundlePropertyAssignment": {
-      "description": "One key of an object literal and its value. The key is an expression that must evaluate to a string; a key written in the source is a string literal.",
-      "type": "tuple",
-      "items": [
-        {
-          "type": "tupleElement",
-          "name": "kind",
-          "holds": {
-            "type": "string",
-            "const": ":"
-          }
-        },
-        {
-          "type": "tupleElement",
-          "name": "name",
-          "holds": {
-            "type": "ref",
-            "$ref": "BundleExpression"
-          }
-        },
-        {
-          "type": "tupleElement",
-          "name": "value",
-          "holds": {
-            "type": "ref",
-            "$ref": "BundleExpression"
-          }
-        }
-      ]
-    },
-    "BundleObjectEntry": {
-      "type": "union",
-      "anyOf": [
-        {
-          "type": "ref",
-          "$ref": "BundlePropertyAssignment"
-        },
-        {
-          "type": "ref",
-          "$ref": "BundleSpreadElement"
-        }
-      ]
-    },
     "BundleExpression": {
       "type": "union",
       "anyOf": [
@@ -665,10 +598,6 @@
         {
           "type": "ref",
           "$ref": "BundleArrowFunction"
-        },
-        {
-          "type": "ref",
-          "$ref": "BundleObjectLiteral"
         },
         {
           "type": "ref",

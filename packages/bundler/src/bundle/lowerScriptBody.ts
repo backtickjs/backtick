@@ -239,26 +239,37 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
       case "number":
         return node.value;
       case "obj": {
-        // An object literal serializes as the plain object it spells. Its
-        // property assignments are the source's shape, not the wire's: what
+        // An object literal serializes as the plain object it spells: what
         // ships is data, which is what lets a spliced object pass through
         // untouched — every key of it, the format reserving none.
         //
-        // Which is why a spread cannot ship that way: there is no key to write
-        // "and every key of that one" under, and a computed key has no text
-        // to write at all. Either one makes the whole literal a node instead,
-        // whose entries are a spread or a key expression and its value. A
-        // literal with neither is unchanged, so nothing already written moves.
+        // A spread has no key to write "and every key of that one" under, and
+        // a computed key has no text to write at all. Either one makes the
+        // literal what it means, `Object.fromEntries` over its pairs, with a
+        // spread standing for `Object.entries` of what it spreads.
         const entries: { [key: string]: BundleExpression } = {};
         for (const property of node.properties) {
           if (property.kind === "..." || property.name.kind !== "string") {
             return [
-              "obj",
-              node.properties.map((property) =>
-                property.kind === "..."
-                  ? ["...", e(property.expression)]
-                  : [":", e(property.name), e(property.initializer)],
-              ),
+              "()",
+              ["bltn", "Object.fromEntries"],
+              [
+                [
+                  "arr",
+                  node.properties.map((property) =>
+                    property.kind === "..."
+                      ? [
+                          "...",
+                          [
+                            "()",
+                            ["bltn", "Object.entries"],
+                            [e(property.expression)],
+                          ],
+                        ]
+                      : ["arr", [e(property.name), e(property.initializer)]],
+                  ),
+                ],
+              ],
             ];
           }
           entries[property.name.text] = e(property.initializer);

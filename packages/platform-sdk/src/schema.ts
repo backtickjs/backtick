@@ -167,25 +167,6 @@ export const schema: Schema = {
       Type.Ref("BundleExpression"),
       Type.Ref("BundleSpreadElement"),
     ]),
-    BundleObjectLiteral: Type.Tuple({
-      kind: Type.Literal("obj"),
-      entries: Type.Array(Type.Ref("BundleObjectEntry")),
-    }),
-    BundlePropertyAssignment: Type.Tuple(
-      {
-        kind: Type.Literal(":"),
-        name: Type.Ref("BundleExpression"),
-        value: Type.Ref("BundleExpression"),
-      },
-      {
-        description:
-          "One key of an object literal and its value. The key is an expression that must evaluate to a string; a key written in the source is a string literal.",
-      },
-    ),
-    BundleObjectEntry: Type.Union([
-      Type.Ref("BundlePropertyAssignment"),
-      Type.Ref("BundleSpreadElement"),
-    ]),
     BundleExpression: Type.Union([
       Type.Null(),
       Type.Boolean(),
@@ -224,7 +205,6 @@ export const schema: Schema = {
       Type.Ref("BundleNegation"),
       Type.Ref("BundleConditional"),
       Type.Ref("BundleArrowFunction"),
-      Type.Ref("BundleObjectLiteral"),
       Type.Ref("BundleBuiltin"),
     ]),
     BundleStatement: Type.Union([
