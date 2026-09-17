@@ -242,16 +242,16 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
       '@backtickjs/bundler':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/web-page':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-page
       '@backtickjs/web-sdk':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -276,16 +276,16 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
       '@backtickjs/bundler':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/web-page':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-page
       '@backtickjs/web-sdk':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -307,7 +307,7 @@ importers:
   examples/node-minimal:
     dependencies:
       '@backtickjs/bundler':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
@@ -316,10 +316,10 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
       '@backtickjs/web-page':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-page
       '@backtickjs/web-sdk':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -344,16 +344,16 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
       '@backtickjs/bundler':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/web-page':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-page
       '@backtickjs/web-sdk':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -378,16 +378,16 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
       '@backtickjs/bundler':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/web-page':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-page
       '@backtickjs/web-sdk':
-        specifier: workspace:*
+        specifier: ^0.1.0
         version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':

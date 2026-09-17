@@ -12,11 +12,11 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
-    "@backtickjs/bundler": "workspace:*",
+    "@backtickjs/bundler": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/tspatch-plugin": "^0.1.0",
-    "@backtickjs/web-sdk": "workspace:*",
-    "@backtickjs/web-page": "workspace:*"
+    "@backtickjs/web-sdk": "^0.1.0",
+    "@backtickjs/web-page": "^0.1.0"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",
