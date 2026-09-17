@@ -8,7 +8,7 @@
     "format:check": "prettier --check src",
     "typecheck": "backtick-tsc --noEmit",
     "start": "bun src/index.tsx",
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
     "@backtickjs/bun-plugin": "^0.1.0",
