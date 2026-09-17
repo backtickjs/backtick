@@ -1,1 +1,24 @@
-
+cs.lift(cs.const(                    → cs`
+__cs_el                              → el
+ =>                                  → ) => 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(onMount)                            → $onMount
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_el                              → el
+)                                    → 
+.                                    → .
+focus                                → focus
+()                                   → ()
+)                                    → )
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n      
+return cs.const(                     → return 
+cs.splice(                           →  [-semantic]
+(nothing)                            → $nothing
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+);                                   → ;
+\n})())                              → \n    }`

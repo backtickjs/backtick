@@ -1,14 +1,49 @@
 import assert from "node:assert/strict";
-import { it } from "node:test";
+import { describe, it } from "node:test";
+import { cs, onMount, type Prop } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
+import { render, screen } from "@backtickjs/web-testing";
+import type { HTMLButtonElement } from "@backtickjs/web-sdk";
 
-// `undefined` has no form on the wire: a key nobody wrote reads as absent, and
-// this language has no value that says otherwise. An optional prop's type lets
-// it through, so the refusal is the bundler's, and names the element and the
-// prop it came from.
-it("refuses an undefined prop", async () => {
-  await assert.rejects(bundler.run(<div class={undefined} />), {
-    message:
-      "In the `class` prop of <div />: Can't splice `undefined`: this language has no such value. Use `null` for nothing.",
+// An element's prop that is `undefined` is left out, as an optional prop reads
+// in JSX and TypeScript. That is what lets a component forward an optional
+// prop it wasn't given.
+async function Pill({
+  label,
+  ref,
+}: {
+  label: string;
+  ref?: Prop<(element: HTMLButtonElement) => void>;
+}) {
+  return <button ref={ref}>{label}</button>;
+}
+
+describe("an undefined prop", () => {
+  it("is left out of the element", async () => {
+    const bundle = await bundler.run(<div class={undefined} id="kept" />);
+    assert.deepEqual(bundle.root, ["el", "div", { id: "kept" }, null]);
   });
+
+  it("lets a component forward an optional prop it wasn't given", async () => {
+    await render(<Pill label="plain" />);
+    assert.ok(screen.getByRole("button", { name: "plain" }));
+  });
+
+  it("still reaches the element when it is given", async () => {
+    await render(
+      <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />,
+    );
+    assert.equal(document.activeElement, screen.getByRole("button"));
+  });
+});
+
+// Anywhere else, a spliced `undefined` has no form in the bundle yet.
+it("refuses an undefined splice", async () => {
+  const nothing: number | undefined = undefined;
+  await assert.rejects(
+    bundler.run(cs`{
+      return $nothing;
+    }`),
+    { message: "Can't splice `undefined`. Use `null` for nothing." },
+  );
 });

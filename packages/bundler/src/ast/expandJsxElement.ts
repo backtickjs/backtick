@@ -24,11 +24,16 @@ export function expandJsxElement(value: JsxElement): Promise<Ast> {
 // `lowerSpliceable`'s to say — it refuses by dispatching on what it was handed,
 // where a check here could only predict the same answer — so this adds where a
 // failure happened and claims nothing about why.
+//
+// A prop that is `undefined` is left out, as JSX and TypeScript's optional
+// props read it: a component forwarding an optional prop it wasn't given writes
+// nothing.
 async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
   const props = Object.fromEntries(
     await Promise.all(
-      Object.entries(jsx.props).map(
-        async ([key, entry]): Promise<[string, Ast]> => {
+      Object.entries(jsx.props)
+        .filter(([, entry]) => entry !== undefined)
+        .map(async ([key, entry]): Promise<[string, Ast]> => {
           try {
             return [key, await lowerSpliceable(entry as Spliceable)];
           } catch (cause) {
@@ -40,8 +45,7 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
               cause,
             });
           }
-        },
-      ),
+        }),
     ),
   );
 
