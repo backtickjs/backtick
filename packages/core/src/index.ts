@@ -5,7 +5,7 @@ export type {
   Spliceable,
 } from "@backtickjs/platform-sdk";
 export type { HttpResponse, Signal, State } from "@backtickjs/platform-sdk";
-export { http, state, vm } from "@backtickjs/platform-sdk";
+export { computed, http, state, vm } from "@backtickjs/platform-sdk";
 export type { Prop } from "@backtickjs/ui-platform-sdk";
 export type {
   BacktickElement,

@@ -10,12 +10,12 @@ export async function Counter({ from }: { from: number }) {
 
     return (
       <div style="padding: 48px; font-family: system-ui">
-        <h1>{"Pressed " + count.read() + " times"}</h1>
+        <h1>{"Pressed " + count.get() + " times"}</h1>
 
         <button
           id="press"
           style="font: inherit; padding: 8px 16px; cursor: pointer; border: 0; border-radius: 8px; background: black; color: white"
-          onclick={() => count.write(count.read() + 1)}
+          onclick={() => count.set(count.get() + 1)}
         >
           Press me
         </button>

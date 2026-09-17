@@ -15,12 +15,12 @@ export async function Report({ of }: { of: string }) {
       <div style="padding: 48px; font-family: system-ui">
         <h1>{$of}</h1>
 
-        <p>{shown.read() ? "nothing to report yet" : ""}</p>
+        <p>{shown.get() ? "nothing to report yet" : ""}</p>
 
         <button
           id="show"
           style="font: inherit; padding: 8px 16px; cursor: pointer; border: 0; border-radius: 8px; background: black; color: white"
-          onclick={() => shown.write(!shown.read())}
+          onclick={() => shown.set(!shown.get())}
         >
           Show
         </button>

@@ -79,7 +79,7 @@ export type {
   State,
   Vm,
 } from "./declarations.generated.js";
-export { http, state, vm } from "./builtins.generated.js";
+export { computed, http, state, vm } from "./builtins.generated.js";
 export type {
   Array,
   ArrayConstructor,

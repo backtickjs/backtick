@@ -4895,11 +4895,8 @@
         }
       }
     },
-    "http": {
-      "type": "ref",
-      "$ref": "Http"
-    },
     "state": {
+      "description": "Creates a `State`, a `Signal` a script can both `get` and `set`, and the foundation of Backtick's reactivity. Whatever reads it with `get` follows it — a prop, a child, a `computed` — and a `set` runs those readers again and nothing else. Reading is cheap and setting does the work, so a state suits values read often and set less often.\n\nCreated while a script draws, it lasts as long as that drawing.",
       "type": "generic",
       "parameters": [
         {
@@ -4917,6 +4914,7 @@
         "type": "function",
         "parameters": [
           {
+            "description": "The value it holds until the first `set`.",
             "type": "functionParameter",
             "name": "initial",
             "holds": {
@@ -4939,6 +4937,57 @@
           ]
         }
       }
+    },
+    "computed": {
+      "description": "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result is `===` to the previous one, the computed doesn't update whatever reads it.\n\nCreated while a script draws, it lasts as long as that drawing.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "Calculates the value from the signals it reads.",
+            "type": "functionParameter",
+            "name": "fn",
+            "holds": {
+              "type": "function",
+              "parameters": [],
+              "returnType": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "apply",
+          "target": {
+            "type": "ref",
+            "$ref": "Signal"
+          },
+          "arguments": [
+            {
+              "type": "ref",
+              "$ref": "T"
+            }
+          ]
+        }
+      }
+    },
+    "http": {
+      "type": "ref",
+      "$ref": "Http"
     },
     "vm": {
       "type": "ref",

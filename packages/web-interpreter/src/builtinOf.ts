@@ -4,11 +4,12 @@ import type {
   Http,
   HttpConfig,
   HttpResponse,
+  Signal,
   State,
   Vm,
 } from "@backtickjs/platform-sdk";
 import type { Builtins, Window } from "@backtickjs/web-sdk";
-import { createSignal, onMount, untrack } from "solid-js";
+import { createMemo, createSignal, onMount, untrack } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile, scopeOf } from "./compile.js";
 import type { Applied } from "./compile.js";
@@ -145,6 +146,14 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
         // a script passing a record off as storage — so the client asserts it
         // here, at the one place entitled to.
         return { get, set } as unknown as State<typeof initial>;
+      }) satisfies Builtins[typeof known];
+
+    // Solid's memo: computed at once, shared by every reader, and passed on
+    // only when it changes.
+    case "computed":
+      return ((fn) => {
+        const get = createMemo(fn);
+        return { get } as unknown as Signal<ReturnType<typeof fn>>;
       }) satisfies Builtins[typeof known];
 
     case "onMount":

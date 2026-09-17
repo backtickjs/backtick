@@ -27,7 +27,7 @@ export async function WeatherCard() {
     // Only Celsius crosses the wire. Fahrenheit is arithmetic on numbers the
     // client already holds, so the toggle costs no request.
     const show = (celsius: number) => {
-      return unit.read() === "F"
+      return unit.get() === "F"
         ? Math.round((celsius * 9) / 5 + 32)
         : Math.round(celsius);
     };
@@ -43,13 +43,13 @@ export async function WeatherCard() {
             {(value: string) => (
               <button
                 id={"unit-" + value}
-                onclick={() => unit.write(value)}
+                onclick={() => unit.set(value)}
                 style={
                   "background: none; border: 0; padding: 0; cursor: pointer;" +
                   " font-size: 15px; font-weight: " +
-                  (unit.read() === value ? "700" : "400") +
+                  (unit.get() === value ? "700" : "400") +
                   "; color: " +
-                  (unit.read() === value ? "#18181b" : "#71717a")
+                  (unit.get() === value ? "#18181b" : "#71717a")
                 }
               >
                 {"°" + value}

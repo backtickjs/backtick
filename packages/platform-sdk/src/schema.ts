@@ -2038,14 +2038,39 @@ export const schema: Schema = {
           "Returns the names of an object's members, in the order `JSON.stringify` writes them.",
       },
     ),
-    http: Type.Ref("Http"),
     state: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Function(
-        [Type.FunctionParameter("initial", Type.Ref("T"))],
+        [
+          Type.FunctionParameter("initial", Type.Ref("T"), {
+            description: "The value it holds until the first `set`.",
+          }),
+        ],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
       ),
+      {
+        description:
+          "Creates a `State`, a `Signal` a script can both `get` and `set`, and the foundation of Backtick's reactivity. Whatever reads it with `get` follows it — a prop, a child, a `computed` — and a `set` runs those readers again and nothing else. Reading is cheap and setting does the work, so a state suits values read often and set less often.\n\n" +
+          "Created while a script draws, it lasts as long as that drawing.",
+      },
     ),
+    computed: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("fn", Type.Function([], Type.Ref("T")), {
+            description: "Calculates the value from the signals it reads.",
+          }),
+        ],
+        Type.Apply(Type.Ref("Signal"), [Type.Ref("T")]),
+      ),
+      {
+        description:
+          "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result is `===` to the previous one, the computed doesn't update whatever reads it.\n\n" +
+          "Created while a script draws, it lasts as long as that drawing.",
+      },
+    ),
+    http: Type.Ref("Http"),
     vm: Type.Ref("Vm"),
   },
 };
