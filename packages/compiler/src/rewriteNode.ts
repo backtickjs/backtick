@@ -509,6 +509,10 @@ function rewriteNodeImpl(
         }),
       };
     }
+    if (declaration) {
+      destructuring(state, declaration.name);
+      return unsupported();
+    }
   }
 
   if (ts.isIfStatement(node)) {
@@ -730,10 +734,7 @@ function rewriteNodeImpl(
     }
     const declaration = clause.variableDeclaration;
     if (declaration && !ts.isIdentifier(declaration.name)) {
-      state.errors.set(
-        declaration,
-        "This catch binding isn't supported in a `cs` client script.",
-      );
+      destructuring(state, declaration.name);
       return unsupported();
     }
     if (declaration && ts.isIdentifier(declaration.name)) {
@@ -1393,10 +1394,7 @@ function rewriteNodeImpl(
           optional: param.questionToken != null,
         };
       }
-      state.errors.set(
-        param,
-        "This parameter isn't supported in a `cs` client script.",
-      );
+      destructuring(state, param.name);
       return null;
     });
 
@@ -1752,4 +1750,13 @@ function rewriteNodeImpl(
     "This syntax isn't supported in a `cs` client script.",
   );
   return unsupported();
+}
+
+// A name that unpacks a value: `const [a, b] = …`, `({ a }) => …`, `catch ({ message })`.
+function destructuring(state: RewriteState, name: ts.BindingName): void {
+  state.errors.set(
+    name,
+    "Destructuring isn't supported in a `cs` client script; declare each " +
+      "variable on its own.",
+  );
 }
