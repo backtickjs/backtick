@@ -40,11 +40,33 @@ plugin({
         path.relative(process.cwd(), args.path).split(path.sep).join("/") ||
         args.path;
 
+      const diagnostics: ts.Diagnostic[] = [];
       const { outputText } = ts.transpileModule(source, {
         fileName,
         compilerOptions,
-        transformers: { before: [transform(ts), addBunPragma(ts)] },
+        transformers: {
+          before: [
+            transform(ts, (diagnostic) => diagnostics.push(diagnostic)),
+            addBunPragma(ts),
+          ],
+        },
       });
+
+      // A script the compiler refused is emitted with `null` where the refused
+      // code was, so it must not load.
+      const errors = diagnostics.filter(
+        (diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error,
+      );
+      
+      if (errors.length > 0) {
+        throw new Error(
+          ts.formatDiagnostics(errors, {
+            getCanonicalFileName: (name) => name,
+            getCurrentDirectory: () => process.cwd(),
+            getNewLine: () => "\n",
+          }),
+        );
+      }
 
       return {
         contents: outputText,
