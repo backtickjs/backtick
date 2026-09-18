@@ -2,9 +2,17 @@ import type { Diagnostic, SiteBuiltins } from "@backtickjs.com/schema";
 import type { BacktickElement, Bundle, ClientValue } from "@backtickjs/core";
 import type ts from "typescript";
 
-const currentScript = document.currentScript as HTMLScriptElement;
-const compilerUrl = currentScript.dataset["compiler"] as string;
-const sandboxUrl = currentScript.dataset["sandbox"] as string;
+// Hashed by the server when it builds the site, so the page says where they are.
+const compilerUrl = urlOf("compiler");
+const sandboxUrl = urlOf("sandbox");
+
+function urlOf(name: string): string {
+  const meta = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+  if (meta === null) {
+    throw new Error(`backtick: the page has no \`<meta name="${name}">\``);
+  }
+  return meta.content;
+}
 
 type Compile = (
   fileName: string,

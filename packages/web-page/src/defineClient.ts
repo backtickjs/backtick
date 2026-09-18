@@ -27,6 +27,8 @@ export function defineClient(options: InterpreterOptions): void {
       if (parent === null) {
         continue;
       }
+      // Taken, so a second client on the page leaves it to this one.
+      script.removeAttribute("data-backtick");
       // In front of the script, which stays: a drawing goes on inserting after
       // it is first made and needs something that holds still to insert in
       // front of. The script is that, and shows nothing.

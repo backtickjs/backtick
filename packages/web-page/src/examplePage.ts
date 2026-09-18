@@ -1,5 +1,4 @@
 import type { BacktickElement } from "@backtickjs/core";
-import { clientScript } from "./clientScript.js";
 import { renderToScript } from "./renderToScript.js";
 
 /**
@@ -15,10 +14,9 @@ export async function examplePage(
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    ${clientScript(clientUrl)}
   </head>
   <body>
-    ${await renderToScript(element)}
+    ${await renderToScript(element, clientUrl)}
   </body>
 </html>`;
 }

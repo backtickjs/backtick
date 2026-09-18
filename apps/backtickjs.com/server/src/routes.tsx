@@ -29,15 +29,11 @@ async function toHtml(element: BacktickElement): Promise<string> {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-security-policy" content="default-src 'self'">
     <meta name="color-scheme" content="light dark">
-    <script 
-      defer
-      src="${clientUrl}"
-      data-compiler="${compilerUrl}"
-      data-sandbox="${sandboxUrl}">
-    </script>
+    <meta name="compiler" content="${compilerUrl}">
+    <meta name="sandbox" content="${sandboxUrl}">
   </head>
   <body>
-    ${await renderToScript(element)}
+    ${await renderToScript(element, clientUrl)}
   </body>
 </html>`;
 }

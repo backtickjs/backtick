@@ -1,0 +1,26 @@
+import assert from "node:assert/strict";
+import { afterEach, describe, it } from "node:test";
+import { defineClient } from "@backtickjs/web-page/client";
+import { renderToScript } from "@backtickjs/web-page/server";
+
+afterEach(() => {
+  document.body.replaceChildren();
+});
+
+describe("defineClient", () => {
+  it("draws every bundle on the page", async () => {
+    document.body.innerHTML =
+      (await renderToScript(<p>first</p>, "/client.js")) +
+      (await renderToScript(<p>second</p>, "/client.js"));
+    defineClient({ window });
+    const drawn = [...document.querySelectorAll("p")].map((p) => p.textContent);
+    assert.deepEqual(drawn, ["first", "second"]);
+  });
+
+  it("leaves a bundle another client already drew", async () => {
+    document.body.innerHTML = await renderToScript(<p>once</p>, "/client.js");
+    defineClient({ window });
+    defineClient({ window });
+    assert.equal(document.querySelectorAll("p").length, 1);
+  });
+});
