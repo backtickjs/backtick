@@ -564,6 +564,14 @@
       "keyed": true,
       "dir": "de8f087d",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "10783163",
+      "label": "hashed client",
+      "date": "2026-09-18",
+      "keyed": true,
+      "dir": "10783163",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
