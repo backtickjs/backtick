@@ -3,7 +3,7 @@ import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
 import type { BacktickElement } from "@backtickjs/core";
-import { renderToScript } from "@backtickjs/web-page/server";
+import { renderToString } from "@backtickjs/web-page/server";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;
 const compilerUrl = `/compiler-${compiler.sha256.slice(0, 16)}.js`;
@@ -33,7 +33,7 @@ async function toHtml(element: BacktickElement): Promise<string> {
     <meta name="sandbox" content="${sandboxUrl}">
   </head>
   <body>
-    ${await renderToScript(element, clientUrl)}
+    ${await renderToString(element, clientUrl)}
   </body>
 </html>`;
 }

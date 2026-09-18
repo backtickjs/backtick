@@ -1,4 +1,4 @@
-import { renderToScript } from "@backtickjs/web-page/server";
+import { renderToString } from "@backtickjs/web-page/server";
 import { Main } from "./Main.js";
 
 export const html = `<!doctype html>
@@ -10,7 +10,7 @@ export const html = `<!doctype html>
   </head>
   <body>
     <div id="main" class="container">
-      ${await renderToScript(<Main />, "./client.js")}
+      ${await renderToString(<Main />, "./client.js")}
     </div>
   </body>
 </html>

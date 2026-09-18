@@ -1,5 +1,5 @@
 import type { BacktickElement } from "@backtickjs/core";
-import { renderToScript } from "./renderToScript.js";
+import { renderToString } from "./renderToString.js";
 
 /**
  * A whole page drawing `element`, loading the client from `clientUrl`.
@@ -16,7 +16,7 @@ export async function examplePage(
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    ${await renderToScript(element, clientUrl)}
+    ${await renderToString(element, clientUrl)}
   </body>
 </html>`;
 }

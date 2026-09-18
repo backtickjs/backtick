@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { renderToScript } from "@backtickjs/web-page/server";
+import { renderToString } from "@backtickjs/web-page/server";
 import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -16,23 +16,23 @@ const text = `& < > " ' </script> <!-- -->`;
 const open = `<script type="application/json" data-backtick>`;
 const close = `</script><script type="module" src="/client.js"></script>`;
 
-// What `renderToScript` put in its bundle script, checking the client follows.
+// What `renderToString` put in its bundle script, checking the client follows.
 function contentOf(scripts: string): string {
   assert.ok(scripts.startsWith(open) && scripts.endsWith(close));
   return scripts.slice(open.length, -close.length);
 }
 
-describe("renderToScript", () => {
+describe("renderToString", () => {
   it("writes no `<` a script's parser could read", async () => {
     const bundle = await bundler.run(scriptCloseText);
     // The text is in there to escape, or this proves nothing.
     assert.ok(JSON.stringify(bundle).includes("</script>"));
-    const scripts = await renderToScript(scriptCloseText, "/client.js");
+    const scripts = await renderToString(scriptCloseText, "/client.js");
     assert.ok(!contentOf(scripts).includes("<"));
   });
 
   it("parses back to the same bundle", async () => {
-    const json = contentOf(await renderToScript(scriptCloseText, "/client.js"));
+    const json = contentOf(await renderToString(scriptCloseText, "/client.js"));
     assert.deepEqual(JSON.parse(json), await bundler.run(scriptCloseText));
   });
 

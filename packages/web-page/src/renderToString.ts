@@ -5,7 +5,7 @@ import type { BacktickElement } from "@backtickjs/core";
  * Runs `element` and returns its bundle as a `<script>`, followed by the client
  * that draws it.
  */
-export async function renderToScript(
+export async function renderToString(
   element: BacktickElement,
   clientUrl: string,
 ): Promise<string> {
