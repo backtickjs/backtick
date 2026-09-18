@@ -1,4 +1,5 @@
-import { examplePage } from "@backtickjs/web-page/server";
+import type { BacktickElement } from "@backtickjs/core";
+import { renderToString } from "@backtickjs/web-page/server";
 import { Report } from "./Report.js";
 
 // Bundle the client once at startup.
@@ -8,6 +9,21 @@ const build = await Bun.build({
 });
 const [client] = build.outputs;
 
+// Runs an element here on the server. What comes back is a bundle: data, not
+// HTML, which the client draws in front of the script that carries it.
+async function toHtml(element: BacktickElement): Promise<string> {
+  return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    ${await renderToString(element, "/client.js")}
+  </body>
+</html>`;
+}
+
 const server = Bun.serve({
   port: 5176,
   routes: {
@@ -16,7 +32,7 @@ const server = Bun.serve({
       const report = <Report of="conformance" />;
 
       // A document carrying what it drew, with the client that draws it.
-      const html = await examplePage(report, "/client.js");
+      const html = await toHtml(report);
 
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });

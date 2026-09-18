@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
-import { examplePage } from "@backtickjs/web-page/server";
+import type { BacktickElement } from "@backtickjs/core";
+import { renderToString } from "@backtickjs/web-page/server";
 import { build } from "esbuild";
 import { Counter } from "./Counter.js";
 
@@ -12,6 +13,21 @@ const result = await build({
 });
 const client = result.outputFiles[0].text;
 
+// Runs an element here on the server. What comes back is a bundle: data, not
+// HTML, which the client draws in front of the script that carries it.
+async function toHtml(element: BacktickElement): Promise<string> {
+  return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    ${await renderToString(element, "/client.js")}
+  </body>
+</html>`;
+}
+
 const server = createServer(async (incoming, outgoing) => {
   if (incoming.url === "/client.js") {
     outgoing.writeHead(200, { "content-type": "text/javascript" });
@@ -23,7 +39,7 @@ const server = createServer(async (incoming, outgoing) => {
   const counter = <Counter from={0} />;
 
   // A document carrying what it drew, with the client that draws it.
-  const html = await examplePage(counter, "/client.js");
+  const html = await toHtml(counter);
 
   // Ordinary HTTP from here
   outgoing.writeHead(200, { "content-type": "text/html" });
