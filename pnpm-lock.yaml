@@ -278,12 +278,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/ui-platform-sdk':
+        specifier: ^0.1.0
+        version: link:../../packages/ui-platform-sdk
       '@backtickjs/web-page':
         specifier: ^0.1.0
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: ^0.1.0
-        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0

@@ -16,8 +16,9 @@ async function toHtml(element: BacktickElement): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Backtick conformance</title>
   </head>
-  <body>
+  <body style="margin: 32px; font: 14px/1.5 ui-monospace, monospace; white-space: pre-wrap">
     ${await renderToString(element, clientUrl)}
   </body>
 </html>`;
@@ -26,9 +27,12 @@ async function toHtml(element: BacktickElement): Promise<string> {
 const server = Bun.serve({
   port: 5176,
   routes: {
-    "/": async () => {
+    "/": async (request) => {
+      // `?grep=` runs only the cases whose name holds it.
+      const grep = new URL(request.url).searchParams.get("grep") ?? "";
+
       // An element saying what to draw. The component has not run yet.
-      const report = <Report of="conformance" />;
+      const report = <Report grep={grep} />;
 
       // A document carrying what it drew, with the client that draws it.
       const html = await toHtml(report);
