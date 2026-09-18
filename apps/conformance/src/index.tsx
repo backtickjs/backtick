@@ -1,5 +1,7 @@
+import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
 import { renderToString } from "@backtickjs/web-page/server";
+import { casesOf, groupNames } from "./groups.js";
 import { Report } from "./Report.js";
 
 // Bundle the client once at startup.
@@ -24,21 +26,59 @@ async function toHtml(element: BacktickElement): Promise<string> {
 </html>`;
 }
 
+// A group is compiled and bundled once, the first time a client asks for it.
+const bundles = new Map<string, Promise<string>>();
+
+async function bundleOf(group: string): Promise<string | null> {
+  if (!bundles.has(group)) {
+    const cases = casesOf(group);
+    if (cases === null) return null;
+    // A bundle each, so a case a client can't build fails alone.
+    bundles.set(
+      group,
+      Promise.all(
+        cases.map(async ({ name, script }) => ({
+          name,
+          bundle: await bundler.run(script),
+        })),
+      ).then((held) => JSON.stringify(held)),
+    );
+  }
+  return bundles.get(group)!;
+}
+
 const server = Bun.serve({
   port: 5176,
   routes: {
     "/": async (request) => {
-      // `?grep=` runs only the cases whose name holds it.
-      const grep = new URL(request.url).searchParams.get("grep") ?? "";
+      // `?group=` runs only the groups under it, and lists what did not pass.
+      const url = new URL(request.url);
+      const group = url.searchParams.get("group");
+      const groups = groupNames.filter((name) => name.startsWith(group ?? ""));
 
       // An element saying what to draw. The component has not run yet.
-      const report = <Report grep={grep} />;
+      const report = (
+        <Report groups={groups} base={url.origin} detailed={group !== null} />
+      );
 
       // A document carrying what it drew, with the client that draws it.
       const html = await toHtml(report);
 
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });
+    },
+
+    // One group's cases, each as a bundle whose root is its verdict.
+    "/group/*": async (request) => {
+      const group = decodeURIComponent(
+        new URL(request.url).pathname.slice("/group/".length),
+      );
+      const bundle = await bundleOf(group);
+      return bundle === null
+        ? new Response("no such group", { status: 404 })
+        : new Response(bundle, {
+            headers: { "content-type": "application/json" },
+          });
     },
 
     // The hash changes with the client, so the browser can keep this forever.

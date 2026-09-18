@@ -1,31 +1,127 @@
-import { cs, For } from "@backtickjs/core";
-import { verdict, type Verdict } from "./Case.js";
-import { cases } from "./cases/index.js";
+import { cs, For, http, onMount, state, vm } from "@backtickjs/core";
+import type { Bundle, ClientValue, State } from "@backtickjs/core";
+import { shown, type Verdict } from "./Case.js";
 
-// A server component: it picks the cases and wraps each in its verdict. The
-// client under test runs them and judges them, so what this draws is that
-// client's answer.
+// A group as the page holds it: nothing, then its verdicts or why there are none.
+type Row = {
+  name: string;
+  verdicts: State<readonly Verdict[] | null>;
+  problem: State<string | null>;
+};
+
+// A server component: it names the groups and nothing more. The client under
+// test fetches each one's bundle from `base`, runs it and judges it, so what
+// this draws is that client's answer — group by group, as each arrives.
 //
-// Drawn with text, `<>` and `<For>` alone — no client's own elements — so any
-// client that draws text draws this.
-export async function Report({ grep }: { grep: string }) {
-  const verdicts = cases
-    .filter((test) => test.name.includes(grep))
-    .map((test) => verdict(test));
-
+// Drawn with text, `<>` and `<For>` alone, and fetched with `http` and `vm`,
+// which are the language's — so any client that draws text draws this.
+export async function Report({
+  groups,
+  base,
+  detailed,
+}: {
+  groups: string[];
+  base: string;
+  detailed: boolean;
+}) {
   return cs`{
-    const results = $verdicts;
-    const failed = results.filter((result) => !result.ok);
+    const rows: readonly Row[] = $groups.map((name: string) => ({
+      name: name,
+      verdicts: $state<readonly Verdict[] | null>(null),
+      problem: $state<string | null>(null),
+    }));
+
+    $onMount(() => {
+      for (let i = 0; i < rows.length; i = i + 1) {
+        const row = rows[i];
+        $http.get(
+          $base + "/group/" + row.name,
+          (response) => {
+            if (response.status !== 200) {
+              row.problem.set("answered " + response.status);
+            } else {
+              try {
+                const cases = JSON.parse(response.data) as readonly {
+                  name: string;
+                  bundle: Bundle<Verdict>;
+                }[];
+                row.verdicts.set(
+                  cases.map((held) => {
+                    try {
+                      return $vm.eval(held.bundle);
+                    } catch (error) {
+                      return {
+                        name: held.name,
+                        outcome: "fail",
+                        detail: "did not run: " + $shown(error as ClientValue),
+                      };
+                    }
+                  }),
+                );
+              } catch (error) {
+                row.problem.set("did not run: " + $shown(error as ClientValue));
+              }
+            }
+          },
+          (message) => row.problem.set(message),
+        );
+      }
+    });
+
+    const count = (verdicts: readonly Verdict[] | null, outcome: string) =>
+      (verdicts ?? []).filter((verdict) => verdict.outcome === outcome).length;
+    const total = (outcome: string) =>
+      rows.reduce((sum, row) => sum + count(row.verdicts.get(), outcome), 0);
+    const loaded = () =>
+      rows.filter(
+        (row) => row.verdicts.get() !== null || row.problem.get() !== null,
+      ).length;
 
     return (
       <>
-        {results.length - failed.length + " of " + results.length + " passed"}
-        {failed.length === 0 ? "\n\n" : ", " + failed.length + " failed\n\n"}
-        <For each={results}>
-          {(result: Verdict) => (
+        {total("pass") +
+          " passed, " +
+          total("fail") +
+          " failed, " +
+          total("unsupported") +
+          " not client script"}
+        {"  (" + loaded() + " of " + rows.length + " groups)\n\n"}
+        <For each={rows}>
+          {(row: Row) => (
             <>
-              {(result.ok ? "pass  " : "FAIL  ") + result.name}
-              {result.ok ? "\n" : "\n      " + result.detail + "\n"}
+              {row.problem.get() !== null
+                ? row.name + "  " + row.problem.get() + "\n"
+                : row.verdicts.get() === null
+                  ? row.name + "  ...\n"
+                  : row.name +
+                    "  " +
+                    count(row.verdicts.get(), "pass") +
+                    " passed, " +
+                    count(row.verdicts.get(), "fail") +
+                    " failed, " +
+                    count(row.verdicts.get(), "unsupported") +
+                    " not client script\n"}
+              <For
+                each={
+                  $detailed
+                    ? (row.verdicts.get() ?? []).filter(
+                        (v: Verdict) => v.outcome !== "pass",
+                      )
+                    : []
+                }
+              >
+                {(verdict: Verdict) => (
+                  <>
+                    {(verdict.outcome === "fail"
+                      ? "    FAIL  "
+                      : "    ----  ") +
+                      verdict.name +
+                      "  " +
+                      verdict.detail +
+                      "\n"}
+                  </>
+                )}
+              </For>
             </>
           )}
         </For>

@@ -4,14 +4,10 @@ import { expressions } from "./expressions.js";
 import { objects } from "./objects.js";
 import { stdlib } from "./stdlib.js";
 
-const topics: Record<string, Case[]> = {
+/** Backtick's own cases, by topic. */
+export const topics: Record<string, Case[]> = {
   expressions,
-  "control flow": controlFlow,
+  "control-flow": controlFlow,
   objects,
   stdlib,
 };
-
-/** Every case, named `<topic>: <case>`. */
-export const cases: Case[] = Object.entries(topics).flatMap(([topic, list]) =>
-  list.map((test) => ({ ...test, name: `${topic}: ${test.name}` })),
-);

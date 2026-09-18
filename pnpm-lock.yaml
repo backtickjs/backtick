@@ -171,6 +171,12 @@ importers:
       '@backtickjs/bun-plugin':
         specifier: workspace:*
         version: link:../../packages/bun-plugin
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../../packages/bundler
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../../packages/compiler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -180,6 +186,9 @@ importers:
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
@@ -193,9 +202,6 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
 
   apps/vscode-extension:
     dependencies:
