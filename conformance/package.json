@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/conformance",
+  "name": "@backtickjs/test262",
   "version": "0.1.0",
   "private": true,
   "type": "module",
