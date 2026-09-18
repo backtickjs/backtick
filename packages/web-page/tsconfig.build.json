@@ -1,8 +1,8 @@
 {
   "extends": "../../configs/tsconfig.build.json",
   "compilerOptions": {
-    // A browser's globals, and nothing else's: what is here runs in a page, so
-    // reaching for `node:http` is a mistake the types catch.
+    // A browser's globals, and nothing else's: `./server` writes pages from any
+    // runtime, so neither half may reach for `node:http`.
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": [],
     "emitDeclarationOnly": false

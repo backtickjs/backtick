@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "The client a page loads: it draws every bundle a document carries",
-  "main": "./dist/index.js",
+  "description": "The page both halves agree on: the server writes bundles into it, the client draws them",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
     }
   },
   "scripts": {
@@ -18,6 +21,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
+    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/web-interpreter": "workspace:*"
   },
   "peerDependencies": {

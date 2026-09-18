@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@backtickjs/bun-plugin": "^0.1.0",
-    "@backtickjs/bundler": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/web-sdk": "^0.1.0",
     "@backtickjs/web-page": "^0.1.0"

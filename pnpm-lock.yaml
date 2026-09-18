@@ -244,9 +244,6 @@ importers:
       '@backtickjs/bun-plugin':
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
-      '@backtickjs/bundler':
-        specifier: ^0.1.0
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
@@ -278,9 +275,6 @@ importers:
       '@backtickjs/bun-plugin':
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
-      '@backtickjs/bundler':
-        specifier: ^0.1.0
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
@@ -309,9 +303,6 @@ importers:
 
   examples/node-minimal:
     dependencies:
-      '@backtickjs/bundler':
-        specifier: ^0.1.0
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
@@ -349,9 +340,6 @@ importers:
       '@backtickjs/bun-plugin':
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
-      '@backtickjs/bundler':
-        specifier: ^0.1.0
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
@@ -383,9 +371,6 @@ importers:
       '@backtickjs/bun-plugin':
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
-      '@backtickjs/bundler':
-        specifier: ^0.1.0
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
@@ -417,9 +402,6 @@ importers:
       '@backtickjs/bun-plugin':
         specifier: ^0.1.0
         version: link:../../packages/bun-plugin
-      '@backtickjs/bundler':
-        specifier: ^0.1.0
-        version: link:../../packages/bundler
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
@@ -733,6 +715,9 @@ importers:
 
   packages/web-page:
     dependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../bundler
       '@backtickjs/web-interpreter':
         specifier: workspace:*
         version: link:../web-interpreter

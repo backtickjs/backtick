@@ -12,7 +12,6 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
-    "@backtickjs/bundler": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/tspatch-plugin": "^0.1.0",
     "@backtickjs/web-sdk": "^0.1.0",

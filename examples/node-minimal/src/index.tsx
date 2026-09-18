@@ -1,6 +1,5 @@
 import { createServer } from "node:http";
-import { bundler } from "@backtickjs/bundler";
-import type { BacktickElement } from "@backtickjs/core";
+import { examplePage } from "@backtickjs/web-page/server";
 import { build } from "esbuild";
 import { Counter } from "./Counter.js";
 
@@ -13,23 +12,6 @@ const result = await build({
 });
 const client = result.outputFiles[0].text;
 
-// Runs an element here on the server. What comes back is a bundle: data, not
-// HTML, which the client draws in front of the script that carries it.
-async function toHtml(element: BacktickElement): Promise<string> {
-  const json = bundler.stringify(await bundler.run(element));
-  return `<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="/client.js"></script>
-  </head>
-  <body>
-    <script type="application/json" data-backtick>${json}</script>
-  </body>
-</html>`;
-}
-
 const server = createServer(async (incoming, outgoing) => {
   if (incoming.url === "/client.js") {
     outgoing.writeHead(200, { "content-type": "text/javascript" });
@@ -41,7 +23,7 @@ const server = createServer(async (incoming, outgoing) => {
   const counter = <Counter from={0} />;
 
   // A document carrying what it drew, with the client that draws it.
-  const html = await toHtml(counter);
+  const html = await examplePage(counter, "/client.js");
 
   // Ordinary HTTP from here
   outgoing.writeHead(200, { "content-type": "text/html" });
