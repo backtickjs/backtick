@@ -1,13 +1,13 @@
 packages:
   # What is published.
   - "packages/*"
-  # Built here and never published to npm: a website and an editor extension.
+  # Built here and never published to npm: a website, an editor extension and
+  # the conformance app.
   - "apps/*"
   - "apps/backtickjs.com/*"
   - "tests"
   - "examples/*"
   - "benchmarks/*"
-  - "conformance"
   - "benchmarks/js-framework-benchmark/frameworks/keyed/backtick"
 
 linkWorkspacePackages: true
