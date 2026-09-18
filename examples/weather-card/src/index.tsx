@@ -8,8 +8,8 @@ const build = await Bun.build({
   minify: true,
 });
 const [client] = build.outputs;
+const clientUrl = `/client-${client.hash}.js`;
 
-// The page: the bundle in the body, followed by the client that draws it.
 async function toHtml(element: BacktickElement): Promise<string> {
   return `<!doctype html>
 <html>
@@ -18,7 +18,7 @@ async function toHtml(element: BacktickElement): Promise<string> {
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    ${await renderToString(element, "/client.js")}
+    ${await renderToString(element, clientUrl)}
   </body>
 </html>`;
 }
@@ -36,7 +36,11 @@ const server = Bun.serve({
       });
     },
 
-    "/client.js": () => new Response(client),
+    // The hash changes with the client, so the browser can keep this forever.
+    [clientUrl]: () =>
+      new Response(client, {
+        headers: { "cache-control": "public, max-age=31536000, immutable" },
+      }),
   },
 });
 

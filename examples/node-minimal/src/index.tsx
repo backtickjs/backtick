@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { basename } from "node:path";
 import type { BacktickElement } from "@backtickjs/core";
 import { renderToString } from "@backtickjs/web-page/server";
 import { build } from "esbuild";
@@ -7,14 +8,15 @@ import { Counter } from "./Counter.js";
 // Bundle the client once at startup.
 const result = await build({
   entryPoints: ["./src/client.ts"],
+  entryNames: "client-[hash]",
+  outdir: "/",
   bundle: true,
   minify: true,
   write: false,
 });
-const client = result.outputFiles[0].text;
+const [client] = result.outputFiles;
+const clientUrl = `/${basename(client.path)}`;
 
-// Runs an element here on the server. What comes back is a bundle: data, not
-// HTML, which the client draws in front of the script that carries it.
 async function toHtml(element: BacktickElement): Promise<string> {
   return `<!doctype html>
 <html>
@@ -23,15 +25,19 @@ async function toHtml(element: BacktickElement): Promise<string> {
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    ${await renderToString(element, "/client.js")}
+    ${await renderToString(element, clientUrl)}
   </body>
 </html>`;
 }
 
 const server = createServer(async (incoming, outgoing) => {
-  if (incoming.url === "/client.js") {
-    outgoing.writeHead(200, { "content-type": "text/javascript" });
-    outgoing.end(client);
+  if (incoming.url === clientUrl) {
+    // The hash changes with the client, so the browser can keep this forever.
+    outgoing.writeHead(200, {
+      "content-type": "text/javascript",
+      "cache-control": "public, max-age=31536000, immutable",
+    });
+    outgoing.end(client.text);
     return;
   }
 
