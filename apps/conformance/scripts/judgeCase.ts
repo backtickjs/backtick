@@ -1,9 +1,15 @@
-import * as core from "@backtickjs/core";
-import type { Client } from "@backtickjs/core";
 import { transpile } from "@backtickjs/compiler";
 import ts from "typescript";
-import { decided, verdict, type Verdict } from "../Case.js";
-import { assert, compareArray, Test262Error } from "./harness.js";
+
+type Outcome = "pass" | "fail" | "unsupported";
+
+/**
+ * What the host makes of a case: a verdict it reached itself, or the client
+ * script a client has to run to reach one.
+ */
+export type Judgement =
+  | { verdict: { outcome: Outcome; detail: string } }
+  | { script: string; negative: boolean };
 
 /** The frontmatter keys a host has to act on. The rest is prose. */
 interface Meta {
@@ -16,17 +22,18 @@ interface Meta {
 const HARNESS = ["compareArray.js"];
 
 /**
- * A Test262 case, as a verdict: compiled here as the client script it is
- * written as, so a refusal is the host's answer and a script is the client's.
+ * A Test262 case, judged as the client script it is written as: a refusal is
+ * the host's answer, and a script is the client's to run.
  *
- * Nothing about the case is changed except how it reaches the harness — see
+ * Nothing about the case is changed except how it reaches the harness: see
  * `adapt`.
  */
-export function compileCase(name: string, source: string): Client<Verdict> {
+export function judgeCase(name: string, source: string): Judgement {
   const meta = frontmatter(source);
   const flags = meta.flags ?? [];
-  const unsupported = (detail: string) =>
-    decided({ name, outcome: "unsupported", detail });
+  const unsupported = (detail: string): Judgement => ({
+    verdict: { outcome: "unsupported", detail },
+  });
 
   if (flags.includes("async")) {
     return unsupported("finishes through `$DONE`, which needs promises");
@@ -48,20 +55,21 @@ export function compileCase(name: string, source: string): Client<Verdict> {
       (meta.includes?.includes("compareArray.js")
         ? "const compareArray = $compareArray;\n"
         : "");
+  const block = `{\n${prefix}${script}\n}`;
+  // Compiled as a module of its own only to hear what the compiler refuses.
   const module =
     'import { cs } from "@backtickjs/core";\n' +
-    `export default cs\`{\n${prefix}${script}\n}\`;\n`;
+    `export default cs\`${block}\`;\n`;
 
   // A case ECMAScript rejects before running passes by being refused.
   const early =
     meta.negative?.phase === "parse" || meta.negative?.phase === "resolution";
 
-  let refusal = syntaxError(name, `{\n${prefix}${script}\n}`);
-  let javascript = "";
+  let refusal = syntaxError(name, block);
   if (refusal === null) {
     const errors: ts.Diagnostic[] = [];
     try {
-      javascript = transpile(
+      transpile(
         ts,
         `${name}.ts`,
         module,
@@ -90,24 +98,19 @@ export function compileCase(name: string, source: string): Client<Verdict> {
 
   if (refusal !== null) {
     return early
-      ? decided({ name, outcome: "pass", detail: "" })
+      ? { verdict: { outcome: "pass", detail: "" } }
       : unsupported(refusal);
   }
   if (early) {
-    return decided({
-      name,
-      outcome: "fail",
-      detail: `compiled, where ECMAScript rejects it with a ${meta.negative!.type}`,
-    });
+    return {
+      verdict: {
+        outcome: "fail",
+        detail: `compiled, where ECMAScript rejects it with a ${meta.negative!.type}`,
+      },
+    };
   }
 
-  let run: Client<void>;
-  try {
-    run = evaluate(javascript);
-  } catch (error) {
-    return unsupported(`did not load: ${(error as Error).message}`);
-  }
-  return verdict({ name, run, negative: meta.negative?.phase === "runtime" });
+  return { script: block, negative: meta.negative?.phase === "runtime" };
 }
 
 function frontmatter(source: string): Meta {
@@ -237,29 +240,4 @@ function describe(error: ts.Diagnostic, module: string): string {
   const lineStart = module.lastIndexOf("\n", error.start) + 1;
   const lineEnd = module.indexOf("\n", error.start);
   return `${message}: ${module.slice(lineStart, lineEnd).trim()}`;
-}
-
-// What the compiler wrote builds the script's syntax tree and nothing else:
-// the case itself runs on the client, never here.
-function evaluate(javascript: string): Client<void> {
-  const { outputText } = ts.transpileModule(javascript, {
-    compilerOptions: { module: ts.ModuleKind.CommonJS },
-  });
-  const module = { exports: {} as { default?: Client<void> } };
-  const require = (specifier: string) => {
-    if (specifier !== "@backtickjs/core") {
-      throw new Error(`nothing answers for ${specifier}`);
-    }
-    return core;
-  };
-  new Function(
-    "require",
-    "exports",
-    "module",
-    "assert",
-    "Test262Error",
-    "compareArray",
-    outputText,
-  )(require, module.exports, module, assert, Test262Error, compareArray);
-  return module.exports.default!;
 }

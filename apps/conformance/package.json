@@ -5,11 +5,12 @@
   "type": "module",
   "description": "The page a client passes by drawing it: one row per case, judged by the client under test",
   "scripts": {
-    "format": "prettier --write src",
-    "format:check": "prettier --check src",
+    "generate": "bun scripts/generate.ts",
+    "start": "bun scripts/generate.ts && bun src/index.tsx",
+    "format": "prettier --write src scripts",
+    "format:check": "prettier --check src scripts",
     "typecheck": "backtick-tsc --noEmit",
-    "start": "bun src/index.tsx",
-    "clean": "rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist .cache"
   },
   "dependencies": {
     "@backtickjs/bun-plugin": "workspace:*",

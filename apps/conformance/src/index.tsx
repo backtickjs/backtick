@@ -26,22 +26,25 @@ async function toHtml(element: BacktickElement): Promise<string> {
 </html>`;
 }
 
-// A group is compiled and bundled once, the first time a client asks for it.
+// A group is bundled once, the first time a client asks for it.
 const bundles = new Map<string, Promise<string>>();
 
-async function bundleOf(group: string): Promise<string | null> {
+function bundleOf(group: string): Promise<string> | null {
+  if (!groupNames.includes(group)) return null;
   if (!bundles.has(group)) {
-    const cases = casesOf(group);
-    if (cases === null) return null;
     // A bundle each, so a case a client can't build fails alone.
     bundles.set(
       group,
-      Promise.all(
-        cases.map(async ({ name, script }) => ({
-          name,
-          bundle: await bundler.run(script),
-        })),
-      ).then((held) => JSON.stringify(held)),
+      casesOf(group).then(async (cases) =>
+        JSON.stringify(
+          await Promise.all(
+            cases!.map(async ({ name, script }) => ({
+              name,
+              bundle: await bundler.run(script),
+            })),
+          ),
+        ),
+      ),
     );
   }
   return bundles.get(group)!;
@@ -73,10 +76,10 @@ const server = Bun.serve({
       const group = decodeURIComponent(
         new URL(request.url).pathname.slice("/group/".length),
       );
-      const bundle = await bundleOf(group);
+      const bundle = bundleOf(group);
       return bundle === null
         ? new Response("no such group", { status: 404 })
-        : new Response(bundle, {
+        : new Response(await bundle, {
             headers: { "content-type": "application/json" },
           });
     },

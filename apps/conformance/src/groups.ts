@@ -1,49 +1,29 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { join, relative } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { Client } from "@backtickjs/core";
-import { verdict, type Verdict } from "./Case.js";
-import { topics } from "./cases/index.js";
-import { compileCase } from "./test262/compileCase.js";
+import type { Verdict } from "./Case.js";
 
-// Test262 as TC39 wrote it: a directory is a group, a file a case.
-const TEST262 = join(import.meta.dir, "../test262");
-
-function test262Groups(): Map<string, string[]> {
-  const groups = new Map<string, string[]>();
-  for (const entry of readdirSync(TEST262, {
-    recursive: true,
-    withFileTypes: true,
-  })) {
-    if (!entry.isFile() || !entry.name.endsWith(".js")) continue;
-    const group = `test262/${relative(TEST262, entry.parentPath)}`;
-    groups.set(group, [...(groups.get(group) ?? []), entry.name].sort());
-  }
-  return groups;
+// Test262 as `pnpm generate` wrote it: a directory is a group, a file a case.
+const GENERATED = join(import.meta.dir, "../.cache/test262");
+if (!existsSync(join(GENERATED, "groups.json"))) {
+  throw new Error("run `pnpm generate` to write the Test262 groups");
 }
-
-const test262 = test262Groups();
+const test262: string[] = JSON.parse(
+  readFileSync(join(GENERATED, "groups.json"), "utf8"),
+);
 
 /** Every group's name, in the order a page lists them. */
-export const groupNames: string[] = [
-  ...Object.keys(topics).map((topic) => `backtick/${topic}`),
-  ...[...test262.keys()].sort(),
-];
+export const groupNames: string[] = test262.map((group) => `test262/${group}`);
 
 /** A case as its verdict script, and the name to report if that won't run. */
 export type Judged = { name: string; script: Client<Verdict> };
 
 /** A group's cases, or `null` for a group there is not. */
-export function casesOf(group: string): Judged[] | null {
-  const topic = topics[group.replace(/^backtick\//, "")];
-  if (group.startsWith("backtick/") && topic) {
-    return topic.map((test) => ({ name: test.name, script: verdict(test) }));
-  }
-  const files = test262.get(group);
-  if (!files) return null;
-  const dir = join(TEST262, group.replace(/^test262\//, ""));
-  return files.map((file) => {
-    const name = file.replace(/\.js$/, "");
-    const source = readFileSync(join(dir, file), "utf8");
-    return { name, script: compileCase(name, source) };
-  });
+export async function casesOf(group: string): Promise<Judged[] | null> {
+  const held = group.replace(/^test262\//, "");
+  if (!group.startsWith("test262/") || !test262.includes(held)) return null;
+  // By a path the type checker doesn't follow: what it holds is untyped.
+  const path = join(GENERATED, `${held}.ts`);
+  const { cases } = (await import(path)) as { cases: Judged[] };
+  return cases;
 }

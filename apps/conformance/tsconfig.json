@@ -12,6 +12,7 @@
     "jsxImportSource": "@backtickjs/ui-platform-sdk"
   },
   "include": [
-    "src"
+    "src",
+    "scripts"
   ]
 }
