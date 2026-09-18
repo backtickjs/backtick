@@ -1,8 +1,14 @@
-import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
-import * as client from "@backtickjs/web-page/bundle";
 import { Counter } from "./Counter.js";
+
+// Bundle the client once at startup.
+const build = await Bun.build({
+  entrypoints: ["./src/client.ts"],
+  target: "browser",
+  minify: true,
+});
+const [client] = build.outputs;
 
 // Runs an element here on the server. What comes back is a bundle: data, not
 // HTML, which the client draws in front of the script that carries it.
@@ -13,7 +19,7 @@ async function toHtml(element: BacktickElement): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module">${client.source}</script>
+    <script defer src="/client.js"></script>
   </head>
   <body>
     <script type="application/json" data-backtick>${json}</script>
@@ -34,6 +40,8 @@ const server = Bun.serve({
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });
     },
+
+    "/client.js": () => new Response(client),
   },
 });
 

@@ -1,9 +1,17 @@
 import { createServer } from "node:http";
-import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
-import * as client from "@backtickjs/web-page/bundle";
+import { build } from "esbuild";
 import { Counter } from "./Counter.js";
+
+// Bundle the client once at startup.
+const result = await build({
+  entryPoints: ["./src/client.ts"],
+  bundle: true,
+  minify: true,
+  write: false,
+});
+const client = result.outputFiles[0].text;
 
 // Runs an element here on the server. What comes back is a bundle: data, not
 // HTML, which the client draws in front of the script that carries it.
@@ -14,7 +22,7 @@ async function toHtml(element: BacktickElement): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module">${client.source}</script>
+    <script defer src="/client.js"></script>
   </head>
   <body>
     <script type="application/json" data-backtick>${json}</script>
@@ -23,6 +31,12 @@ async function toHtml(element: BacktickElement): Promise<string> {
 }
 
 const server = createServer(async (incoming, outgoing) => {
+  if (incoming.url === "/client.js") {
+    outgoing.writeHead(200, { "content-type": "text/javascript" });
+    outgoing.end(client);
+    return;
+  }
+
   // An element saying what to draw. The component has not run yet.
   const counter = <Counter from={0} />;
 

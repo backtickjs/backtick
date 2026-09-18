@@ -1,20 +1,16 @@
 import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
-import * as client from "@backtickjs/web-page/bundle";
 import { TodoList } from "./TodoList.js";
 
-// The client is asked for at a name that says what it holds, so a rebuilt client
-// is a name no cache has an old answer for — which is what makes the year this
-// server promises for it below safe.
-const clientUrl = `/_backtick/client-${client.sha256.slice(0, 16)}.js`;
+// Bundle the client once at startup.
+const build = await Bun.build({
+  entrypoints: ["./src/client.ts"],
+  target: "browser",
+  minify: true,
+});
+const [client] = build.outputs;
 
-// The document this app serves. Its head is its own — a charset, a viewport, and
-// the one script that draws the bundle carried in the body.
-//
-// `charset` is not decoration: a bundle is UTF-8 text read back with
-// `JSON.parse`, and a document decoded as anything else is every string in the
-// app quietly mangled. It counts only in the first 1024 bytes of a document, and
-// only while it is being parsed.
+// The page: the client in the head, the bundle in the body.
 async function toHtml(element: BacktickElement): Promise<string> {
   const json = bundler.stringify(await bundler.run(element));
   return `<!doctype html>
@@ -22,7 +18,7 @@ async function toHtml(element: BacktickElement): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="${clientUrl}"></script>
+    <script defer src="/client.js"></script>
   </head>
   <body>
     <script type="application/json" data-backtick>${json}</script>
@@ -44,14 +40,7 @@ const server = Bun.serve({
       });
     },
 
-    // The name the document above asks for, answered here.
-    [clientUrl]: () =>
-      new Response(client.source, {
-        headers: {
-          "content-type": "text/javascript",
-          "cache-control": "public, max-age=31536000, immutable",
-        },
-      }),
+    "/client.js": () => new Response(client),
   },
 });
 
