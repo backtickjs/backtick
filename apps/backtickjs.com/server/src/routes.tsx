@@ -2,8 +2,8 @@ import * as client from "@backtickjs.com/client/bundle";
 import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
-import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
+import { renderToScript } from "@backtickjs/web-page/server";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;
 const compilerUrl = `/compiler-${compiler.sha256.slice(0, 16)}.js`;
@@ -22,7 +22,6 @@ const sandboxDocument = `<!doctype html>
 // Runs an element here on the server. What comes back is a bundle: data, not
 // HTML, which the client draws in front of the script that carries it.
 async function toHtml(element: BacktickElement): Promise<string> {
-  const json = bundler.stringify(await bundler.run(element));
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -38,7 +37,7 @@ async function toHtml(element: BacktickElement): Promise<string> {
     </script>
   </head>
   <body>
-    <script type="application/json" data-backtick>${json}</script>
+    ${await renderToScript(element)}
   </body>
 </html>`;
 }

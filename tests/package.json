@@ -21,6 +21,7 @@
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",
     "@backtickjs/web-interpreter": "workspace:*",
+    "@backtickjs/web-page": "workspace:*",
     "@backtickjs/web-sdk": "workspace:*",
     "@backtickjs/web-testing": "workspace:*",
     "@testing-library/user-event": "^14.6.7",

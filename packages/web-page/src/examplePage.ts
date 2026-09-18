@@ -1,5 +1,6 @@
-import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
+import { clientScript } from "./clientScript.js";
+import { renderToScript } from "./renderToScript.js";
 
 /**
  * A whole page drawing `element`, loading the client from `clientUrl`.
@@ -9,16 +10,15 @@ export async function examplePage(
   element: BacktickElement,
   clientUrl: string,
 ): Promise<string> {
-  const json = bundler.stringify(await bundler.run(element));
   return `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="${clientUrl}"></script>
+    ${clientScript(clientUrl)}
   </head>
   <body>
-    <script type="application/json" data-backtick>${json}</script>
+    ${await renderToScript(element)}
   </body>
 </html>`;
 }

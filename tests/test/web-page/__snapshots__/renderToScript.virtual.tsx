@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { renderToScript } from "@backtickjs/web-page/server";
 import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -12,17 +13,27 @@ const scriptCloseText = <p>{`& < > " ' </script> <!-- -->`}</p>;
 
 const text = `& < > " ' </script> <!-- -->`;
 
-describe("bundler.stringify", () => {
+const open = `<script type="application/json" data-backtick>`;
+const close = `</script>`;
+
+// What `renderToScript` put between its own tags.
+function contentOf(script: string): string {
+  assert.ok(script.startsWith(open) && script.endsWith(close));
+  return script.slice(open.length, -close.length);
+}
+
+describe("renderToScript", () => {
   it("writes no `<` a script's parser could read", async () => {
     const bundle = await bundler.run(scriptCloseText);
     // The text is in there to escape, or this proves nothing.
     assert.ok(JSON.stringify(bundle).includes("</script>"));
-    assert.ok(!bundler.stringify(bundle).includes("<"));
+    const script = await renderToScript(scriptCloseText);
+    assert.ok(!contentOf(script).includes("<"));
   });
 
   it("parses back to the same bundle", async () => {
-    const bundle = await bundler.run(scriptCloseText);
-    assert.deepEqual(JSON.parse(bundler.stringify(bundle)), bundle);
+    const json = contentOf(await renderToScript(scriptCloseText));
+    assert.deepEqual(JSON.parse(json), await bundler.run(scriptCloseText));
   });
 
   it("draws the text as written", async () => {
