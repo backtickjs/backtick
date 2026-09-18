@@ -1,5 +1,6 @@
 import { transpile } from "@backtickjs/compiler";
 import ts from "typescript";
+import YAML from "yaml";
 
 type Outcome = "pass" | "fail" | "unsupported";
 
@@ -35,6 +36,9 @@ export function judgeCase(name: string, source: string): Judgement {
     verdict: { outcome: "unsupported", detail },
   });
 
+  if (flags.includes("module")) {
+    return unsupported("is a module, and a client script is not one");
+  }
   if (flags.includes("async")) {
     return unsupported("finishes through `$DONE`, which needs promises");
   }
@@ -115,7 +119,10 @@ export function judgeCase(name: string, source: string): Judgement {
 
 function frontmatter(source: string): Meta {
   const block = /\/\*---([\s\S]*?)---\*\//.exec(source);
-  return block ? (Bun.YAML.parse(block[1]!) as Meta) : {};
+  // `yaml`, not `Bun.YAML`: Bun refuses a `[` inside a plain scalar. Line
+  // breaks made `\n`, since `yaml` misses a lone `\r`, and a case about line
+  // terminators writes its frontmatter in the one it is about.
+  return block ? (YAML.parse(block[1]!.replace(/\r\n?/g, "\n")) as Meta) : {};
 }
 
 interface Token {
@@ -224,12 +231,21 @@ function adapt(source: string, harnessed: boolean): string {
  * `backtick-tsc` does: checked on the script alone, where offsets are its own.
  */
 function syntaxError(name: string, script: string): string | null {
-  const { diagnostics } = ts.transpileModule(script, {
-    fileName: `${name}.js`,
-    reportDiagnostics: true,
-    compilerOptions: { allowJs: true },
+  // A program of one file, asked only for syntax: nothing is emitted, since
+  // TypeScript's emitter crashes on some of what Test262 writes.
+  const fileName = `${name}.js`;
+  const file = ts.createSourceFile(fileName, script, ts.ScriptTarget.ESNext);
+  const program = ts.createProgram({
+    rootNames: [fileName],
+    options: { allowJs: true, noLib: true, noResolve: true },
+    host: {
+      ...ts.createCompilerHost({}),
+      getSourceFile: (asked) => (asked === fileName ? file : undefined),
+      fileExists: (asked) => asked === fileName,
+    },
   });
-  return diagnostics?.[0] ? describe(diagnostics[0], script) : null;
+  const [first] = program.getSyntacticDiagnostics(file);
+  return first ? describe(first, script) : null;
 }
 
 // The compiler's message, and the line of the case it is about. ASCII only:

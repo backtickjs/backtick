@@ -31,9 +31,19 @@ export async function Report({
       problem: $state<string | null>(null),
     }));
 
+    // A few groups at a time, each starting the next as it settles: a
+    // browser turns away a page that asks for them all at once. next is kept
+    // in storage because a function cannot name itself where it is declared.
     $onMount(() => {
-      for (let i = 0; i < rows.length; i = i + 1) {
-        const row = rows[i];
+      const cursor = $state(0);
+      const next = $state<() => boolean>(() => false);
+      next.set(() => {
+        const at = cursor.get();
+        if (at >= rows.length) {
+          return false;
+        }
+        cursor.set(at + 1);
+        const row = rows[at];
         $http.get(
           $base + "/group/" + row.name,
           (response) => {
@@ -62,9 +72,18 @@ export async function Report({
                 row.problem.set("did not run: " + $shown(error as ClientValue));
               }
             }
+            const started = next.get()();
           },
-          (message) => row.problem.set(message),
+          (message) => {
+            row.problem.set(message);
+            const started = next.get()();
+          },
         );
+        return true;
+      });
+      // Six: as many connections as a browser keeps open to one host.
+      for (let lane = 0; lane < 6; lane = lane + 1) {
+        const started = next.get()();
       }
     });
 

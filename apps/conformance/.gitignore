@@ -1,0 +1,2 @@
+# A clone of tc39/test262, made by `pnpm build`: see scripts/fetchTest262.ts.
+test262/

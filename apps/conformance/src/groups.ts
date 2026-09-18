@@ -3,10 +3,10 @@ import { join } from "node:path";
 import type { Client } from "@backtickjs/core";
 import type { Verdict } from "./Case.js";
 
-// Test262 as `pnpm generate` wrote it: a directory is a group, a file a case.
+// Test262 as `pnpm build` wrote it: a directory is a group, a file a case.
 const GENERATED = join(import.meta.dir, "../.cache/test262");
 if (!existsSync(join(GENERATED, "groups.json"))) {
-  throw new Error("run `pnpm generate` to write the Test262 groups");
+  throw new Error("run `pnpm build` to fetch Test262 and write its groups");
 }
 const test262: string[] = JSON.parse(
   readFileSync(join(GENERATED, "groups.json"), "utf8"),
