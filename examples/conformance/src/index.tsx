@@ -5,7 +5,6 @@ import { Report } from "./Report.js";
 // Bundle the client once at startup.
 const build = await Bun.build({
   entrypoints: ["./src/client.ts"],
-  target: "browser",
   minify: true,
 });
 const [client] = build.outputs;
