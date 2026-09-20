@@ -26,7 +26,7 @@ export async function evaluate<T extends ClientUnknown>(
   { builtinOf }: EvaluateOptions = {},
 ): Promise<T> {
   const bundle = await bundler.run(value);
-  return createInterpreter({ window, builtinOf }).eval(bundle);
+  return createInterpreter({ window, builtinOf }).evaluate(bundle);
 }
 
 /**
@@ -40,5 +40,5 @@ export function evaluateUntrustedBundle<T extends ClientUnknown>(
   bundle: Bundle<T>,
   { builtinOf }: EvaluateOptions = {},
 ): T {
-  return createInterpreter({ window, builtinOf }).eval(bundle);
+  return createInterpreter({ window, builtinOf }).evaluate(bundle);
 }

@@ -62,7 +62,7 @@ export interface Interpreter<NodeType extends object> {
    * with: a mount lasts as long as whoever asked for it, and there is no
    * unmounting this to be the other half of.
    */
-  eval<T extends ClientUnknown>(bundle: Bundle<T>): T;
+  evaluate<T extends ClientUnknown>(bundle: Bundle<T>): T;
 }
 
 /**
@@ -102,7 +102,7 @@ export function createInterpreter(
         );
         return dispose;
       }),
-    eval: <T extends ClientUnknown>(bundle: Bundle<T>) =>
+    evaluate: <T extends ClientUnknown>(bundle: Bundle<T>) =>
       createRoot(() =>
         compile(instanceOf(bundle), bundle.root)(scopeOf(null)),
       ) as T,
