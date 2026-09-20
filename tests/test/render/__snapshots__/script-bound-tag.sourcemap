@@ -38,13 +38,9 @@ __cs_count                            → count
 const                                 → const 
 __cs_Badge                            → Badge
  = cs.const(                          →  = 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
-(vm)                                  → $vm
+(evaluate)                            → $evaluate
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
-.                                     → .
-eval                                  → eval
 (                                     → (
 (cs.splice(                           →  [-semantic]
 (badge)                               → $badge

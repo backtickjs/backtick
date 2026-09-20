@@ -1,0 +1,59 @@
+cs.lift((() => {\n                    → cs`{\n      
+const                                 → const 
+__cs_held                             → held
+ = cs.const(                          →  = 
+(cs.splice(                           →  [-semantic]
+(state)                               → $state
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+<                                     → <
+Bundle                                → Bundle
+<                                     → <
+BacktickElement                       → BacktickElement
+>                                     → >
+ |                                    →  | 
+null                                  → null
+>(                                    → >(
+null                                  → null
+)                                     → )
+);                                    → ;
+\n                                    → \n\n      
+return cs.const(                      → return 
+<                                     → (\n        <
+div                                   → div
+>{cs.lift(                            → >\n          {
+cs.receiver(                          → 
+__cs_held                             → held
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+ ===                                  →  === 
+null                                  → null
+ ?                                    →  ? 
+<                                     → (\n            <
+span                                  → span
+>loading…</                           → >loading…</
+span                                  → span
+>                                     → >\n          )
+ :                                    →  : 
+(cs.splice(                           →  [-semantic]
+(evaluate)                            → $evaluate
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+(                                     → (
+cs.receiver(                          → 
+__cs_held                             → held
+)                                     → 
+.                                     → .
+get                                   → get
+()                                    → ()
+ as                                   →  as 
+Bundle                                → Bundle
+<                                     → <
+BacktickElement                       → BacktickElement
+>                                     → >
+)                                     → )\n          )
+)}</                                  → }\n        </
+div                                   → div
+>                                     → >\n      )
+);                                    → ;
+\n})())                               → \n    }`

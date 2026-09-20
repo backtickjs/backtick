@@ -75,9 +75,8 @@ export type {
   Signal,
   SignalOptions,
   State,
-  Vm,
 } from "./declarations.generated.js";
-export { computed, http, state, vm } from "./builtins.generated.js";
+export { computed, evaluate, http, state } from "./builtins.generated.js";
 export type {
   Array,
   ArrayConstructor,

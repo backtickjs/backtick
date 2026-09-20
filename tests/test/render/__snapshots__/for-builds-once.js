@@ -5,7 +5,7 @@ import { window } from "@backtickjs/web-sdk";
 import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
-// The same claim as `vmEvalBuildsOnce`, with no bundle in it.
+// The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //
 // A component is built once, however what it drew changes afterwards. `<For />`
 // answers with a way of asking, the way a drawn bundle does, so if the fault
@@ -20,7 +20,7 @@ async function WaitingList({ more }) {
     {
       version: "0.0.0",
       filePath: "render/for-builds-once.test.tsx",
-      fileHash: "bv4vczxvw8r3",
+      fileHash: "2rcdi8lc8fedv",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -41,7 +41,7 @@ async function WaitingList({ more }) {
             kind: "id",
             loc: [22, 11, 22, 16],
             text: "items",
-            bindingKey: "items$bv4vczxvw8r3$0",
+            bindingKey: "items$2rcdi8lc8fedv$0",
           },
           initializer: {
             kind: "()",
@@ -67,7 +67,7 @@ async function WaitingList({ more }) {
             kind: "id",
             loc: [24, 11, 24, 18],
             text: "started",
-            bindingKey: "started$bv4vczxvw8r3$1",
+            bindingKey: "started$2rcdi8lc8fedv$1",
           },
           initializer: {
             kind: "()",
@@ -118,7 +118,7 @@ async function WaitingList({ more }) {
                                 kind: "id",
                                 loc: [26, 9, 26, 14],
                                 text: "items",
-                                bindingKey: "items$bv4vczxvw8r3$0",
+                                bindingKey: "items$2rcdi8lc8fedv$0",
                               },
                               name: "set",
                             },
@@ -169,7 +169,7 @@ async function WaitingList({ more }) {
                       kind: "id",
                       loc: [30, 23, 30, 28],
                       text: "items",
-                      bindingKey: "items$bv4vczxvw8r3$0",
+                      bindingKey: "items$2rcdi8lc8fedv$0",
                     },
                     name: "get",
                   },
@@ -189,7 +189,7 @@ async function WaitingList({ more }) {
                       kind: "id",
                       loc: [30, 38, 30, 42],
                       text: "item",
-                      bindingKey: "item$bv4vczxvw8r3$2",
+                      bindingKey: "item$2rcdi8lc8fedv$2",
                     },
                   },
                 ],
@@ -207,7 +207,7 @@ async function WaitingList({ more }) {
                       kind: "id",
                       loc: [30, 60, 30, 64],
                       text: "item",
-                      bindingKey: "item$bv4vczxvw8r3$2",
+                      bindingKey: "item$2rcdi8lc8fedv$2",
                     },
                   ],
                 },
@@ -224,7 +224,7 @@ const forBuildsOnce = cs.create(
   {
     version: "0.0.0",
     filePath: "render/for-builds-once.test.tsx",
-    fileHash: "bv4vczxvw8r3",
+    fileHash: "2rcdi8lc8fedv",
     splices: {
       $state: { value: state, params: [] },
       $WaitingList: { value: WaitingList, params: [] },
@@ -242,7 +242,7 @@ const forBuildsOnce = cs.create(
           kind: "id",
           loc: [35, 9, 35, 14],
           text: "asked",
-          bindingKey: "asked$bv4vczxvw8r3$3",
+          bindingKey: "asked$2rcdi8lc8fedv$3",
         },
         initializer: {
           kind: "()",
@@ -303,7 +303,7 @@ const forBuildsOnce = cs.create(
                         kind: "id",
                         loc: [39, 25, 39, 30],
                         text: "asked",
-                        bindingKey: "asked$bv4vczxvw8r3$3",
+                        bindingKey: "asked$2rcdi8lc8fedv$3",
                       },
                       name: "get",
                     },
@@ -341,7 +341,7 @@ const forBuildsOnce = cs.create(
                               kind: "id",
                               loc: [42, 11, 42, 16],
                               text: "asked",
-                              bindingKey: "asked$bv4vczxvw8r3$3",
+                              bindingKey: "asked$2rcdi8lc8fedv$3",
                             },
                             name: "set",
                           },
@@ -359,7 +359,7 @@ const forBuildsOnce = cs.create(
                                     kind: "id",
                                     loc: [42, 21, 42, 26],
                                     text: "asked",
-                                    bindingKey: "asked$bv4vczxvw8r3$3",
+                                    bindingKey: "asked$2rcdi8lc8fedv$3",
                                   },
                                   name: "get",
                                 },
@@ -390,7 +390,7 @@ const forBuildsOnce = cs.create(
                                   kind: "id",
                                   loc: [43, 18, 43, 23],
                                   text: "asked",
-                                  bindingKey: "asked$bv4vczxvw8r3$3",
+                                  bindingKey: "asked$2rcdi8lc8fedv$3",
                                 },
                                 name: "get",
                               },

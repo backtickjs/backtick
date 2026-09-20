@@ -72,7 +72,6 @@ export type {
   State,
   UiPlatformBuiltins,
   UiPlatformElements,
-  Vm,
 } from "./declarations.generated.js";
 
 // A component, because a tag has nowhere to bind a type parameter: it checks a

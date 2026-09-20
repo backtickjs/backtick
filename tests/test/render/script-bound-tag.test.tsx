@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, state, vm } from "@backtickjs/core";
+import { cs, evaluate, state } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/web-testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -15,7 +15,7 @@ const badge = await bundler.run(
 
 const scriptBoundTag = cs`{
   const count = $state(0);
-  const Badge = $vm.eval($badge);
+  const Badge = $evaluate($badge);
 
   return (
     <div>

@@ -10,7 +10,7 @@ export type {
   SignalOptions,
   State,
 } from "@backtickjs/platform-sdk";
-export { computed, http, state, vm } from "@backtickjs/platform-sdk";
+export { computed, evaluate, http, state } from "@backtickjs/platform-sdk";
 export type { Prop } from "@backtickjs/ui-platform-sdk";
 export type {
   BacktickElement,

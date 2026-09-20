@@ -7,7 +7,6 @@ import type {
   Signal,
   SignalOptions,
   State,
-  Vm,
 } from "@backtickjs/platform-sdk";
 import type { Builtins, Window } from "@backtickjs/web-sdk";
 import {
@@ -184,16 +183,14 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     // `functions` are too. Untracked, as Solid runs a component: what the
     // bundle reads while its root is evaluated is its own setup, and a write to
     // it runs nothing of the caller's again.
-    case "vm":
-      return {
-        eval: (bundle: Bundle<ClientUnknown>) =>
-          untrack(() =>
-            compile(
-              { ...instance, bundle, functions: new Map() },
-              bundle.root,
-            )(scopeOf(null)),
-          ),
-      } as unknown as Vm;
+    case "evaluate":
+      return ((bundle: Bundle<ClientUnknown>) =>
+        untrack(() =>
+          compile(
+            { ...instance, bundle, functions: new Map() },
+            bundle.root,
+          )(scopeOf(null)),
+        )) as ClientValue;
 
     // Written out rather than the page's window handed over, so a member the
     // schema left out stays left out: a script reading `document` off this

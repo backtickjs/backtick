@@ -76,7 +76,6 @@ export type {
   Signal,
   SignalOptions,
   State,
-  Vm,
 } from "@backtickjs/ui-platform-sdk";
 
 declare const EventTargetBrand: unique symbol;

@@ -1,0 +1,10 @@
+#f0 = ($0, $1) => {
+  const held = $0()(null);
+  return <div>
+    {held.get() === null ? <span>
+      {"loading…"}
+    </span> : $1()(held.get())}
+  </div>;
+}
+
+root = #f0(() => state, () => evaluate)

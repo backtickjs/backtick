@@ -3,7 +3,7 @@
   const drawn = $0()(null);
   const Badge = (props) => {
     const held = drawn.get();
-    return held === null ? null : $1().eval(held)(props);
+    return held === null ? null : $1()(held)(props);
   };
   return <div>
     {drawn.get() === null ? <i>
@@ -24,7 +24,7 @@
   </div>;
 }
 
-root = #f0(() => state, () => vm, () => {
+root = #f0(() => state, () => evaluate, () => {
   "functions": {
     "0": [
       "=>",

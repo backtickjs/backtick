@@ -7,7 +7,7 @@ import { evaluateUntrustedBundle } from "@backtickjs/web-testing";
 // A guard, not a snapshot. Every other suite here compiles a `.ts` fixture and
 // runs what the compiler emitted; the point of these tests is the opposite — a
 // bundle the compiler would never emit, handed straight to the interpreter.
-// That is the threat model for `vm.eval`, an untrusted server, or a tampered
+// That is the threat model for `evaluate`, an untrusted server, or a tampered
 // response: bytes that reach a client without passing through the compiler.
 //
 // A bundle must not be able to reach the ambient JavaScript machinery. The

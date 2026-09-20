@@ -89,7 +89,7 @@ declare const BundleBrand: unique symbol;
  * here needs a JavaScript parser.
  *
  * Opaque to a script, which is a different question from what it is made of: a
- * script may hold one and hand it back — to `vm.eval`, which evaluates it —
+ * script may hold one and hand it back — to `evaluate`, which evaluates it —
  * and never read into it. What a client keeps behind one is the client's.
  *
  * What it comes to is carried and never read. A client has nothing to check it
@@ -403,28 +403,6 @@ export type HttpConfig = {
  * What answered, body and all.
  */
 export type HttpResponse = { readonly status: number; readonly data: string };
-
-declare const VmBrand: unique symbol;
-/**
- * The machine a client runs bundles on. A bundle is data — a program for this
- * — and nothing here reads JavaScript.
- */
-export interface Vm extends ClientHandle {
-  readonly [VmBrand]: never;
-  /**
-   * What a bundle holds: its `root` evaluated against its `functions`, here.
-   *
-   * Each call evaluates it again, so two calls are two drawings with cells of
-   * their own. Evaluated untracked, as a component is run: what the bundle
-   * reads while its root is evaluated is read once, so a write to it evaluates
-   * nothing again. A caller that reads a cell to choose the bundle still
-   * follows that cell.
-   *
-   * @param bundle A script that fetched the text writes `JSON.parse(text) as
-   * Bundle<BacktickElement>`, which is what an assertion is for.
-   */
-  eval<T extends ClientUnknown>(bundle: Bundle<T>): T;
-}
 
 declare const HttpBrand: unique symbol;
 /**
@@ -1316,7 +1294,21 @@ export interface PlatformBuiltins {
    */
   computed<T>(fn: () => T, options?: SignalOptions<T>): Signal<T>;
   http: Http;
-  vm: Vm;
+  /**
+   * What a bundle holds: its `root` evaluated against its `functions`, here. A
+   * bundle is data — a program a client runs — and running one reads no
+   * JavaScript.
+   *
+   * Each call evaluates it again, so two calls are two drawings with cells of
+   * their own. Evaluated untracked, as a component is run: what the bundle
+   * reads while its root is evaluated is read once, so a write to it evaluates
+   * nothing again. A caller that reads a cell to choose the bundle still
+   * follows that cell.
+   *
+   * @param bundle A script that fetched the text writes `JSON.parse(text) as
+   * Bundle<BacktickElement>`, which is what an assertion is for.
+   */
+  evaluate<T extends ClientUnknown>(bundle: Bundle<T>): T;
 }
 
 /** What a client must answer with, for every name in scope. */

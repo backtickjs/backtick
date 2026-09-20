@@ -1,9 +1,0 @@
-33:27 error TS2322: Type 'string' is not assignable to type 'number'.
-35:29 error TS2322: Type '{ nope: number; }' is not assignable to type '{ count: number; }'.
-  Property 'nope' does not exist on type '{ count: number; }'.
-37:20 error TS2741: Property 'count' is missing in type '{}' but required in type '{ count: number; }'.
-41:19 error TS2604: JSX element type 'Empty' does not have any construct or call signatures.
-41:19 error TS2786: 'Empty' cannot be used as a JSX component.
-  Its type 'BacktickElement' is not a valid JSX element type.
-55:18 error TS2345: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-59:18 error TS2345: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.

@@ -222,7 +222,6 @@ export type {
   TransitionEvent,
   UIEvent,
   VideoProps,
-  Vm,
   VoidProps,
   WheelEvent,
   Window,

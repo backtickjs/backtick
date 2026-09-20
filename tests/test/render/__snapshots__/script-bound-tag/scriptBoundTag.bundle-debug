@@ -1,6 +1,6 @@
 #f0 = ($0, $1, $2) => {
   const count = $0()(0);
-  const Badge = $1().eval($2());
+  const Badge = $1()($2());
   return <div>
     {<Badge
       count={count.get()}
@@ -13,7 +13,7 @@
   </div>;
 }
 
-root = #f0(() => state, () => vm, () => {
+root = #f0(() => state, () => evaluate, () => {
   "functions": {
     "0": [
       "=>",

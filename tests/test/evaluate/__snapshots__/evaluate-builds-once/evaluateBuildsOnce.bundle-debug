@@ -1,0 +1,27 @@
+#f0 = ($0, $1, $2) => {
+  const asked = $0()(0);
+  return <div>
+    {<span>
+      {"asked " + asked.get()}
+    </span>}
+    {<{$2()}
+      ask={() => () => {
+        asked.set(asked.get() + 1);
+        return asked.get() > 4 ? null : $1();
+      }}
+    />}
+  </div>;
+}
+
+#f1 = ($0, $1, $2, $3) => {
+  const drawn = $0()(null);
+  const started = $1().setTimeout(() => drawn.set($2()()), 0);
+  return <Fragment>
+    {drawn.get() === null ? null : $3()(drawn.get())}
+  </Fragment>;
+}
+
+root = #f0(() => state, () => {
+  "functions": { "0": ["=>", [], ["el", "em", {}, "answered"]] },
+  "root": ["comp", ["=>", [], ["()", ["fn", "0"], []]], {}, null]
+}, () => ($0) => #f1(() => state, () => window, () => $0.ask(), () => evaluate))

@@ -1,4 +1,4 @@
-import { For, cs, state, vm } from "@backtickjs/core";
+import { cs, evaluate, For, state } from "@backtickjs/core";
 import type { BacktickElement, Client, Bundle } from "@backtickjs/core";
 import type { Example } from "../examples/Example.js";
 import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
@@ -640,7 +640,7 @@ export async function Playground({
             <div style={$SCREEN}>
               {bundle.get() === null
                 ? null
-                : $vm.eval(bundle.get() as Bundle<BacktickElement>)}
+                : $evaluate(bundle.get() as Bundle<BacktickElement>)}
             </div>
             <div style={$ISLAND} />
           </div>

@@ -229,7 +229,7 @@
       ]
     },
     "Bundle": {
-      "description": "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `vm.eval`, which evaluates it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
+      "description": "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `evaluate`, which evaluates it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
       "type": "generic",
       "parameters": [
         {
@@ -1836,64 +1836,6 @@
         }
       },
       "required": ["status", "data"]
-    },
-    "Vm": {
-      "description": "The machine a client runs bundles on. A bundle is data — a program for this — and nothing here reads JavaScript.",
-      "type": "interface",
-      "extends": [
-        {
-          "type": "ref",
-          "$ref": "ClientHandle"
-        }
-      ],
-      "properties": {
-        "eval": {
-          "description": "What a bundle holds: its `root` evaluated against its `functions`, here.\n\nEach call evaluates it again, so two calls are two drawings with cells of their own. Evaluated untracked, as a component is run: what the bundle reads while its root is evaluated is read once, so a write to it evaluates nothing again. A caller that reads a cell to choose the bundle still follows that cell.",
-          "type": "generic",
-          "parameters": [
-            {
-              "type": "genericParameter",
-              "name": "T",
-              "extends": {
-                "type": "ref",
-                "$ref": "ClientUnknown"
-              },
-              "equals": {
-                "type": "ref",
-                "$ref": "ClientUnknown"
-              }
-            }
-          ],
-          "expression": {
-            "type": "function",
-            "parameters": [
-              {
-                "description": "A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.",
-                "type": "functionParameter",
-                "name": "bundle",
-                "holds": {
-                  "type": "apply",
-                  "target": {
-                    "type": "ref",
-                    "$ref": "Bundle"
-                  },
-                  "arguments": [
-                    {
-                      "type": "ref",
-                      "$ref": "T"
-                    }
-                  ]
-                }
-              }
-            ],
-            "returnType": {
-              "type": "ref",
-              "$ref": "T"
-            }
-          }
-        }
-      },
-      "required": ["eval"]
     },
     "Http": {
       "description": "Requests the way axios makes them, answering through handlers because a script has no `await`.\n\n`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\nRedirects are followed, and the body is read before either handler is called.",
@@ -17424,9 +17366,50 @@
       "type": "ref",
       "$ref": "Http"
     },
-    "vm": {
-      "type": "ref",
-      "$ref": "Vm"
+    "evaluate": {
+      "description": "What a bundle holds: its `root` evaluated against its `functions`, here. A bundle is data — a program a client runs — and running one reads no JavaScript.\n\nEach call evaluates it again, so two calls are two drawings with cells of their own. Evaluated untracked, as a component is run: what the bundle reads while its root is evaluated is read once, so a write to it evaluates nothing again. A caller that reads a cell to choose the bundle still follows that cell.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientUnknown"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientUnknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.",
+            "type": "functionParameter",
+            "name": "bundle",
+            "holds": {
+              "type": "apply",
+              "target": {
+                "type": "ref",
+                "$ref": "Bundle"
+              },
+              "arguments": [
+                {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              ]
+            }
+          }
+        ],
+        "returnType": {
+          "type": "ref",
+          "$ref": "T"
+        }
+      }
     },
     "onCleanup": {
       "description": "Registers a cleanup function on the current scope: the drawing the calling script belongs to, or the `computed` it is called in. The cleanup runs when that scope is disposed, as when the drawing is removed, or refreshed, as when the computed calculates again.\n\nCalled from a handler, there is no current scope, and the cleanup never runs.",

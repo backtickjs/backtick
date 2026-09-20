@@ -7,7 +7,7 @@ import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
 
-// The same claim as `vmEvalBuildsOnce`, with no bundle in it.
+// The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //
 // A component is built once, however what it drew changes afterwards. `<For />`
 // answers with a way of asking, the way a drawn bundle does, so if the fault

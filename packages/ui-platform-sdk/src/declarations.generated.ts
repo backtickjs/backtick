@@ -74,7 +74,6 @@ export type {
   Signal,
   SignalOptions,
   State,
-  Vm,
 } from "@backtickjs/platform-sdk";
 
 declare const BacktickElementBrand: unique symbol;

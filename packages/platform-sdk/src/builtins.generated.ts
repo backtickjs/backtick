@@ -3,11 +3,12 @@
 import { createBuiltin } from "./Builtin.js";
 import type { Client } from "./Client.js";
 import type {
+  Bundle,
+  ClientUnknown,
   Http,
   Signal,
   SignalOptions,
   State,
-  Vm,
 } from "./declarations.generated.js";
 
 /**
@@ -42,4 +43,20 @@ export const computed: Client<
 
 export const http: Client<Http> = createBuiltin("http");
 
-export const vm: Client<Vm> = createBuiltin("vm");
+/**
+ * What a bundle holds: its `root` evaluated against its `functions`, here. A
+ * bundle is data — a program a client runs — and running one reads no
+ * JavaScript.
+ *
+ * Each call evaluates it again, so two calls are two drawings with cells of
+ * their own. Evaluated untracked, as a component is run: what the bundle reads
+ * while its root is evaluated is read once, so a write to it evaluates nothing
+ * again. A caller that reads a cell to choose the bundle still follows that
+ * cell.
+ *
+ * @param bundle A script that fetched the text writes `JSON.parse(text) as
+ * Bundle<BacktickElement>`, which is what an assertion is for.
+ */
+export const evaluate: Client<
+  <T extends ClientUnknown>(bundle: Bundle<T>) => T
+> = createBuiltin("evaluate");
