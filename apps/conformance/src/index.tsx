@@ -1,7 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
 import { renderToString } from "@backtickjs/web-page/server";
-import { casesOf, groupNames } from "./groups.js";
+import { casesOf, groupNames, skipped } from "./groups.js";
 import { Report } from "./Report.js";
 
 // Bundle the client once at startup.
@@ -58,10 +58,25 @@ const server = Bun.serve({
       const url = new URL(request.url);
       const group = url.searchParams.get("group");
       const groups = groupNames.filter((name) => name.startsWith(group ?? ""));
+      // Each skip, counting only the cases under `?group=`.
+      const skips = skipped
+        .map(({ key, reason, cases }) => ({
+          key,
+          reason,
+          count: cases.filter((path) =>
+            `test262/${path}`.startsWith(group ?? ""),
+          ).length,
+        }))
+        .filter((skip) => skip.count > 0);
 
       // An element saying what to draw. The component has not run yet.
       const report = (
-        <Report groups={groups} base={url.origin} detailed={group !== null} />
+        <Report
+          groups={groups}
+          skips={skips}
+          base={url.origin}
+          detailed={group !== null}
+        />
       );
 
       // A document carrying what it drew, with the client that draws it.

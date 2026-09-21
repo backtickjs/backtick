@@ -24,8 +24,9 @@ const SUITES = ["annexB", "built-ins", "language"];
 const OUT = join(ROOT, ".cache/test262");
 
 const groups = new Map<string, string[]>();
-const skipped = new Map<string, number>(
-  Object.keys(skips).map((key) => [key, 0]),
+// What each entry of the skip list took out, by path.
+const skipped = new Map<string, string[]>(
+  Object.keys(skips).map((key) => [key, []]),
 );
 const entries = SUITES.flatMap((suite) =>
   readdirSync(join(CORPUS, suite), { recursive: true, withFileTypes: true }),
@@ -39,13 +40,13 @@ for (const entry of entries) {
     (key) => path === key || path.startsWith(`${key}/`),
   );
   if (skip !== undefined) {
-    skipped.set(skip, skipped.get(skip)! + 1);
+    skipped.get(skip)!.push(path);
     continue;
   }
   const group = relative(CORPUS, entry.parentPath);
   groups.set(group, [...(groups.get(group) ?? []), entry.name]);
 }
-const stale = [...skipped].filter(([, count]) => count === 0);
+const stale = [...skipped].filter(([, cases]) => cases.length === 0);
 if (stale.length > 0) {
   throw new Error(
     `skips.ts names what Test262 doesn't have: ${stale.map(([key]) => key).join(", ")}`,
@@ -206,7 +207,19 @@ writeFileSync(
   join(OUT, "groups.json"),
   `${JSON.stringify([...groups.keys()].sort(), null, 2)}\n`,
 );
-const skippedCount = [...skipped.values()].reduce((sum, n) => sum + n, 0);
+// Beside the groups, so a page can say what it left out and why.
+writeFileSync(
+  join(OUT, "skipped.json"),
+  `${JSON.stringify(
+    [...skipped].map(([key, cases]) => ({ key, reason: skips[key], cases })),
+    null,
+    2,
+  )}\n`,
+);
+const skippedCount = [...skipped.values()].reduce(
+  (sum, cases) => sum + cases.length,
+  0,
+);
 console.log(
   `${groups.size} groups written to ${relative(ROOT, OUT)}, ` +
     `${skippedCount} cases skipped`,
