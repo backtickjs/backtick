@@ -179,6 +179,11 @@ function memberOf(
           : Array.isArray(object)
             ? "array"
             : null;
+  // A function has no members in this language. Its own `length` and `name`
+  // are the host's, and would pass the own-member rule below.
+  if (typeof object === "function") {
+    throw new Error(`a function has no \`${name}\` in this language`);
+  }
   if (boxed === null) {
     // A plain object is reached by the names it holds, and one it does not
     // hold reads as `undefined`.

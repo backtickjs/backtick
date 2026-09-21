@@ -64,6 +64,34 @@ describe("sandbox escape (hand-written bundles)", () => {
     assert.throws(() => evaluateUntrustedBundle(bundleOf(["()", built, []])));
   });
 
+  it("refuses a member read off a function", () => {
+    // A function's own `length` and `name` are the host's: its arity and what
+    // the host called it. Not the language's, and own, so the machinery rule
+    // alone would let them through.
+    const readOff = (fn: unknown, name: string, functions = {}) =>
+      evaluateUntrustedBundle({
+        functions,
+        root: [".", fn, name],
+      } as Bundle<ClientUnknown>);
+    const builtin = ["bltn", "Math.max"];
+    const method = [".", "word", "includes"];
+    const arrow = { "0": ["=>", [["param", "$0"]], ["id", "$0"]] };
+    for (const name of ["length", "name", "prototype"]) {
+      assert.throws(
+        () => readOff(builtin, name),
+        new RegExp(`a function has no \\\`${name}\\\` in this language`),
+      );
+      assert.throws(
+        () => readOff(method, name),
+        /a function has no .* in this language/,
+      );
+      assert.throws(
+        () => readOff(["fn", "0"], name, arrow),
+        /a function has no .* in this language/,
+      );
+    }
+  });
+
   it("cannot reach the host realm via a global side effect", () => {
     const MARKER = "__backtick_sandbox_escape__";
     after(() => {
