@@ -203,6 +203,10 @@ export const schema: Schema = {
       Type.Ref("BundleGreaterThanOrEqual"),
       Type.Ref("BundleLogicalNot"),
       Type.Ref("BundleNegation"),
+      Type.Ref("BundlePrefixIncrement"),
+      Type.Ref("BundlePrefixDecrement"),
+      Type.Ref("BundlePostfixIncrement"),
+      Type.Ref("BundlePostfixDecrement"),
       Type.Ref("BundleConditional"),
       Type.Ref("BundleArrowFunction"),
       Type.Ref("BundleBuiltin"),
@@ -340,6 +344,24 @@ export const schema: Schema = {
     BundleNegation: Type.Tuple({
       kind: Type.Literal("-x"),
       operand: Type.Ref("BundleExpression"),
+    }),
+    // A variable stepped by one. A prefix step answers the value after the
+    // step, and a postfix step the value before it.
+    BundlePrefixIncrement: Type.Tuple({
+      kind: Type.Literal("++x"),
+      target: Type.Ref("BundleIdentifier"),
+    }),
+    BundlePrefixDecrement: Type.Tuple({
+      kind: Type.Literal("--x"),
+      target: Type.Ref("BundleIdentifier"),
+    }),
+    BundlePostfixIncrement: Type.Tuple({
+      kind: Type.Literal("x++"),
+      target: Type.Ref("BundleIdentifier"),
+    }),
+    BundlePostfixDecrement: Type.Tuple({
+      kind: Type.Literal("x--"),
+      target: Type.Ref("BundleIdentifier"),
     }),
     BundleConditional: Type.Tuple({
       kind: Type.Literal("?:"),

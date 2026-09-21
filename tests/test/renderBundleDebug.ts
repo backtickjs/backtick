@@ -151,6 +151,14 @@ function renderNode(
         isNode(operand) && (isBinary(operand[0]) || operand[0] === "?:");
       return `${node[0] === "!" ? "!" : "-"}${looser ? `(${text})` : text}`;
     }
+    case "++x":
+      return `++${renderNode(node[1], indent)}`;
+    case "--x":
+      return `--${renderNode(node[1], indent)}`;
+    case "x++":
+      return `${renderNode(node[1], indent)}++`;
+    case "x--":
+      return `${renderNode(node[1], indent)}--`;
     case "?:":
       return `${renderNode(node[1], indent)} ? ${renderNode(
         node[2],

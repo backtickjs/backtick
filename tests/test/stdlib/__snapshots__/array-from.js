@@ -269,7 +269,7 @@ it("arrayFrom", async (t) => {
                       bindingKey: "index$3pi2uzl7sovgc$8",
                     },
                     whenFalse: {
-                      kind: "unop",
+                      kind: "prefixop",
                       loc: [20, 39, 20, 41],
                       operator: "-",
                       operand: {

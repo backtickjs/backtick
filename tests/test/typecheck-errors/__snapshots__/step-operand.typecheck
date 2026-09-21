@@ -1,0 +1,2 @@
+8:3 error TS2588: Cannot assign to 'i' because it is a constant.
+15:3 error TS2356: An arithmetic operand must be of type 'any', 'number', 'bigint' or an enum type.

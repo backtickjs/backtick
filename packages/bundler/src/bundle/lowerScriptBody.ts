@@ -15,6 +15,7 @@ import type {
   BundleBlock,
   BundleBody,
   BundleExpression,
+  BundleIdentifier,
   BundleParameter,
   BundleStatement,
 } from "@backtickjs/platform-sdk";
@@ -167,6 +168,14 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
     }
   }
 
+  // A step names the variable it writes, as an assignment does.
+  function stepTarget(operand: ClientScriptExpression): BundleIdentifier {
+    if (operand.kind !== "id") {
+      throw new Error("A step's operand must be an identifier.");
+    }
+    return ["id", sourceName(operand.bindingKey)];
+  }
+
   function buildExpression(node: ClientScriptExpression): BundleExpression {
     const e = (child: ClientScriptExpression): BundleExpression =>
       buildExpression(child);
@@ -203,7 +212,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           e(node.right),
         ] as BundleExpression;
       }
-      case "unop":
+      case "prefixop":
         // A negative literal carries itself, like every other literal here: the
         // node is TypeScript's way of writing one, not something to evaluate.
         // Except `-0`, which JSON writes as `0`: it travels as a negation.
@@ -214,9 +223,19 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         ) {
           return -node.operand.value;
         }
+        if (node.operator === "++") {
+          return ["++x", stepTarget(node.operand)];
+        }
+        if (node.operator === "--") {
+          return ["--x", stepTarget(node.operand)];
+        }
         return node.operator === "!"
           ? ["!", e(node.operand)]
           : ["-x", e(node.operand)];
+      case "postfixop":
+        return node.operator === "++"
+          ? ["x++", stepTarget(node.operand)]
+          : ["x--", stepTarget(node.operand)];
       case "?:":
         return ["?:", e(node.condition), e(node.whenTrue), e(node.whenFalse)];
       case "true":

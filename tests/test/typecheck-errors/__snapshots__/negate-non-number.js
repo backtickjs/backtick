@@ -27,7 +27,7 @@ export default cs.create(
       },
     ],
     body: {
-      kind: "unop",
+      kind: "prefixop",
       loc: [6, 37, 6, 42],
       operator: "-",
       operand: {

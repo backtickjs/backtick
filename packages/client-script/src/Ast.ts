@@ -1,4 +1,5 @@
 import type { BinaryOperator } from "./BinaryOperator.js";
+import type { PostfixUnaryOperator } from "./PostfixUnaryOperator.js";
 import type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
 import type { SourceLocation } from "./SourceLocation.js";
 
@@ -13,6 +14,7 @@ export type ClientScriptExpression =
   | ClientScriptArrowFunction
   | ClientScriptBinaryExpression
   | ClientScriptPrefixUnaryExpression
+  | ClientScriptPostfixUnaryExpression
   | ClientScriptTrueLiteral
   | ClientScriptFalseLiteral
   | ClientScriptCall
@@ -128,11 +130,19 @@ export interface ClientScriptBinaryExpression {
 }
 
 // `!x`, whose operand is boolean like every other tested position: there is no
-// truthiness for it to negate.
+// truthiness for it to negate. `++x` and `--x`, whose operand is a variable.
 export interface ClientScriptPrefixUnaryExpression {
-  readonly kind: "unop";
+  readonly kind: "prefixop";
   readonly loc: SourceLocation;
   readonly operator: PrefixUnaryOperator;
+  readonly operand: ClientScriptExpression;
+}
+
+// `x++` and `x--`, whose operand is a variable.
+export interface ClientScriptPostfixUnaryExpression {
+  readonly kind: "postfixop";
+  readonly loc: SourceLocation;
+  readonly operator: PostfixUnaryOperator;
   readonly operand: ClientScriptExpression;
 }
 

@@ -48,7 +48,7 @@ it("negation", async (t) => {
                 bindingKey: "floor$31nhc0aoqh9gi$1",
               },
               initializer: {
-                kind: "unop",
+                kind: "prefixop",
                 loc: [15, 21, 15, 23],
                 operator: "-",
                 operand: {
@@ -68,7 +68,7 @@ it("negation", async (t) => {
                 bindingKey: "step$31nhc0aoqh9gi$2",
               },
               initializer: {
-                kind: "unop",
+                kind: "prefixop",
                 loc: [16, 20, 16, 26],
                 operator: "-",
                 operand: {
@@ -104,7 +104,7 @@ it("negation", async (t) => {
                 },
                 operatorToken: "+",
                 right: {
-                  kind: "unop",
+                  kind: "prefixop",
                   loc: [17, 29, 17, 31],
                   operator: "-",
                   operand: {
@@ -152,7 +152,7 @@ it("negativeZero", async (t) => {
               },
               operatorToken: "/",
               right: {
-                kind: "unop",
+                kind: "prefixop",
                 loc: [25, 16, 25, 18],
                 operator: "-",
                 operand: {

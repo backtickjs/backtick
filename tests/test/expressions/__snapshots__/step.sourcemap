@@ -1,0 +1,71 @@
+cs.lift((() => {\n      → cs`{\n      
+let                     → let 
+__cs_total              → total
+ =                      →  = 
+0                       → 0
+;                       → ;
+\n                      → \n      
+for (                   → for (
+let                     → let 
+__cs_i                  → i
+ =                      →  = 
+0                       → 0
+;                       → ; 
+__cs_i                  → i
+ <                      →  < 
+3                       → 3
+;                       → ; 
+__cs_i                  → i
+++                      → ++
+)                       → ) 
+{\n                     → {\n        
+__cs_total              → total
+ = cs.const(            →  = 
+__cs_total              → total
+ +                      →  + 
+__cs_i                  → i
+)                       → 
+;                       → ;
+\n    }                 → \n      }
+\n                      → \n      
+let                     → let 
+__cs_n                  → n
+ =                      →  = 
+0.1                     → 0.1
+;                       → ;
+\n                      → \n      
+const                   → const 
+__cs_before             → before
+ = cs.const(            →  = 
+__cs_n                  → n
+++                      → ++
+);                      → ;
+\n                      → \n      
+const                   → const 
+__cs_after              → after
+ = cs.const(            →  = 
+++                      → ++
+__cs_n                  → n
+);                      → ;
+\n                      → \n      
+const                   → const 
+__cs_down               → down
+ = cs.const(            →  = 
+__cs_n                  → n
+--                      → --
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+[                       → [
+__cs_total              → total
+,                       → , 
+__cs_before             → before
+,                       → , 
+__cs_after              → after
+,                       → , 
+__cs_down               → down
+,                       → , 
+__cs_n                  → n
+]                       → ]
+);                      → ;
+\n})())                 → \n    }`

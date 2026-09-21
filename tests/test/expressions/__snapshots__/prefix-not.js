@@ -49,7 +49,7 @@ it("prefixNot", async (t) => {
               kind: "if",
               loc: [12, 7, 14, 8],
               expression: {
-                kind: "unop",
+                kind: "prefixop",
                 loc: [12, 11, 12, 17],
                 operator: "!",
                 operand: {
@@ -83,7 +83,7 @@ it("prefixNot", async (t) => {
                 kind: "?:",
                 loc: [15, 14, 15, 49],
                 condition: {
-                  kind: "unop",
+                  kind: "prefixop",
                   loc: [15, 14, 15, 26],
                   operator: "!",
                   operand: {

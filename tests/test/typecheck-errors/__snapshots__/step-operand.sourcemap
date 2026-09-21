@@ -1,0 +1,30 @@
+cs.lift((() => {\n                        → cs`{\n  
+const                                     → const 
+__cs_i                                    → i
+ = cs.const(                              →  = 
+0                                         → 0
+);                                        → ;
+\n    // @ts-expect-error: Cannot assign to 'i' because it is a constant.\n    → \n  // @ts-expect-error: Cannot assign to 'i' because it is a constant.\n  
+__cs_i                                    → i
+++                                        → ++
+;                                         → ;
+\n                                        → \n  
+return cs.const(                          → return 
+__cs_i                                    → i
+);                                        → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+let                                       → let 
+__cs_s                                    → s
+ =                                        →  = 
+"a"                                       → "a"
+;                                         → ;
+\n    // @ts-expect-error: An arithmetic operand must be of type 'any', 'number', 'bigint' or an enum type.\n    → \n  // @ts-expect-error: An arithmetic operand must be of type 'any', 'number', 'bigint' or an enum type.\n  
+__cs_s                                    → s
+++                                        → ++
+;                                         → ;
+\n                                        → \n  
+return cs.const(                          → return 
+__cs_s                                    → s
+);                                        → ;
+\n})())                                   → \n}`

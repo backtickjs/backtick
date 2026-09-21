@@ -593,6 +593,22 @@
         },
         {
           "type": "ref",
+          "$ref": "BundlePrefixIncrement"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundlePrefixDecrement"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundlePostfixIncrement"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundlePostfixDecrement"
+        },
+        {
+          "type": "ref",
           "$ref": "BundleConditional"
         },
         {
@@ -1334,6 +1350,90 @@
           "holds": {
             "type": "ref",
             "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundlePrefixIncrement": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "++x"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        }
+      ]
+    },
+    "BundlePrefixDecrement": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "--x"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        }
+      ]
+    },
+    "BundlePostfixIncrement": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "x++"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        }
+      ]
+    },
+    "BundlePostfixDecrement": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "x--"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
           }
         }
       ]

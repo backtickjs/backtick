@@ -288,7 +288,7 @@ describe("a read by key", () => {
             ],
           },
           argumentExpression: {
-            kind: "unop",
+            kind: "prefixop",
             loc: [54, 21, 54, 23],
             operator: "-",
             operand: {

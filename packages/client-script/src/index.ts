@@ -54,6 +54,7 @@ export type {
   ClientScriptOptionalCallExpression,
   ClientScriptOptionalPropertyAccessExpression,
   ClientScriptParameterDeclaration,
+  ClientScriptPostfixUnaryExpression,
   ClientScriptPrefixUnaryExpression,
   ClientScriptPropertyAccess,
   ClientScriptPropertyAccessExpression,
@@ -70,6 +71,7 @@ export type {
   ClientScriptWhileStatement,
 } from "./Ast.js";
 export type { BinaryOperator } from "./BinaryOperator.js";
+export type { PostfixUnaryOperator } from "./PostfixUnaryOperator.js";
 export type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export { version } from "./version.js";

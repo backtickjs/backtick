@@ -652,8 +652,9 @@ function rewriteNodeImpl(
       inner = inner.expression;
     }
     const assignment =
-      ts.isBinaryExpression(inner) &&
-      inner.operatorToken.kind === ts.SyntaxKind.EqualsToken;
+      (ts.isBinaryExpression(inner) &&
+        inner.operatorToken.kind === ts.SyntaxKind.EqualsToken) ||
+      isStep(ts, inner);
     const expression = rewriteNode(ts, state, node.expression);
     // A statement discards its expression, which is only silent for
     // `void`. Assignments are language statements.
@@ -1632,6 +1633,35 @@ function rewriteNodeImpl(
     };
   }
 
+  // `++` and `--` step a variable by one. `++i` answers the value after the
+  // step, and `i++` the value before it.
+  if (isStep(ts, node)) {
+    const operator = node.operator === ts.SyntaxKind.PlusPlusToken ? "++" : "--";
+    if (!assignable(ts, state, node.operand)) {
+      return unsupported();
+    }
+    const postfix = ts.isPostfixUnaryExpression(node);
+    const operand = rewriteNode(ts, state, node.operand);
+    return {
+      // As written, so TypeScript checks it as a step: a number, and a
+      // variable that isn't `const`.
+      virtual: postfix
+        ? ts.factory.createPostfixUnaryExpression(
+            operand.virtual as ts.Expression,
+            node.operator,
+          )
+        : ts.factory.createPrefixUnaryExpression(
+            node.operator,
+            operand.virtual as ts.Expression,
+          ),
+      runtime: astNode(ts, postfix ? "postfixop" : "prefixop", {
+        loc: loc(node),
+        operator: ts.factory.createStringLiteral(operator),
+        operand: operand.runtime as ts.Expression,
+      }),
+    };
+  }
+
   if (ts.isPrefixUnaryExpression(node)) {
     const negation = node.operator === ts.SyntaxKind.MinusToken;
     if (node.operator !== ts.SyntaxKind.ExclamationToken && !negation) {
@@ -1658,7 +1688,7 @@ function rewriteNodeImpl(
               operand.virtual as ts.Expression,
             ),
       ),
-      runtime: astNode(ts, "unop", {
+      runtime: astNode(ts, "prefixop", {
         loc: loc(node),
         operator: ts.factory.createStringLiteral(negation ? "-" : "!"),
         operand: operand.runtime as ts.Expression,
@@ -1671,27 +1701,9 @@ function rewriteNodeImpl(
     const rhs = rewriteNode(ts, state, node.right);
 
     if (node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
-      // An assignment is a binary expression over `=`, as it is in TypeScript,
-      // but only a variable can be assigned to: a member and an element are
-      // both reads here, since an object and an array are values.
-      if (!ts.isIdentifier(node.left)) {
-        state.errors.set(
-          node.left,
-          "Only a variable can be assigned to in a `cs` client script.",
-        );
+      // An assignment is a binary expression over `=`, as it is in TypeScript.
+      if (!assignable(ts, state, node.left)) {
         return unsupported();
-      }
-      // A script's own variables are assignable anywhere within it, but a
-      // captured one isn't: the write would mutate the nested script's
-      // copy and silently not propagate. An unresolved target keeps the
-      // resolver's own "Cannot find name".
-      const target = state.bindings.get(node.left);
-      if (target != null && state.captures?.has(target)) {
-        state.errors.set(
-          node.left,
-          "Can't assign to a variable captured from an enclosing script: " +
-            "a nested script captures the value, not the variable.",
-        );
       }
       return {
         virtual: ts.factory.createBinaryExpression(
@@ -1789,6 +1801,47 @@ function rewriteNodeImpl(
     "This syntax isn't supported in a `cs` client script.",
   );
   return unsupported();
+}
+
+// Whether an assignment may write here, reporting why not where it may not.
+// Only a variable can be assigned to: a member and an element are both reads
+// here, since an object and an array are values. A script's own variables are
+// assignable anywhere within it, but a captured one isn't: the write would
+// mutate the nested script's copy and silently not propagate. An unresolved
+// target keeps the resolver's own "Cannot find name".
+function assignable(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  left: ts.Expression,
+): left is ts.Identifier {
+  if (!ts.isIdentifier(left)) {
+    state.errors.set(
+      left,
+      "Only a variable can be assigned to in a `cs` client script.",
+    );
+    return false;
+  }
+  const target = state.bindings.get(left);
+  if (target != null && state.captures?.has(target)) {
+    state.errors.set(
+      left,
+      "Can't assign to a variable captured from an enclosing script: " +
+        "a nested script captures the value, not the variable.",
+    );
+  }
+  return true;
+}
+
+// `++` or `--`, before a variable or after it.
+function isStep(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+): node is ts.PrefixUnaryExpression | ts.PostfixUnaryExpression {
+  return (
+    (ts.isPrefixUnaryExpression(node) || ts.isPostfixUnaryExpression(node)) &&
+    (node.operator === ts.SyntaxKind.PlusPlusToken ||
+      node.operator === ts.SyntaxKind.MinusMinusToken)
+  );
 }
 
 // A name that unpacks a value: `const [a, b] = …`, `({ a }) => …`, `catch ({ message })`.

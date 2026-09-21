@@ -76,7 +76,7 @@ it("math", async (t) => {
                     },
                     arguments: [
                       {
-                        kind: "unop",
+                        kind: "prefixop",
                         loc: [14, 44, 14, 48],
                         operator: "-",
                         operand: {
@@ -106,7 +106,7 @@ it("math", async (t) => {
                 },
                 arguments: [
                   {
-                    kind: "unop",
+                    kind: "prefixop",
                     loc: [14, 69, 14, 73],
                     operator: "-",
                     operand: {
@@ -150,7 +150,7 @@ it("math", async (t) => {
                       },
                       arguments: [
                         {
-                          kind: "unop",
+                          kind: "prefixop",
                           loc: [16, 20, 16, 24],
                           operator: "-",
                           operand: {
@@ -179,7 +179,7 @@ it("math", async (t) => {
                     },
                     arguments: [
                       {
-                        kind: "unop",
+                        kind: "prefixop",
                         loc: [16, 44, 16, 48],
                         operator: "-",
                         operand: {
@@ -209,7 +209,7 @@ it("math", async (t) => {
                 },
                 arguments: [
                   {
-                    kind: "unop",
+                    kind: "prefixop",
                     loc: [16, 69, 16, 73],
                     operator: "-",
                     operand: {
@@ -322,7 +322,7 @@ it("math", async (t) => {
                 },
                 arguments: [
                   {
-                    kind: "unop",
+                    kind: "prefixop",
                     loc: [18, 70, 18, 72],
                     operator: "-",
                     operand: {
@@ -459,7 +459,7 @@ it("math", async (t) => {
                             },
                             arguments: [
                               {
-                                kind: "unop",
+                                kind: "prefixop",
                                 loc: [28, 19, 28, 21],
                                 operator: "-",
                                 operand: {

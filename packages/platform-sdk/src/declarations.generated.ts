@@ -168,6 +168,10 @@ export type BundleExpression =
   | BundleGreaterThanOrEqual
   | BundleLogicalNot
   | BundleNegation
+  | BundlePrefixIncrement
+  | BundlePrefixDecrement
+  | BundlePostfixIncrement
+  | BundlePostfixDecrement
   | BundleConditional
   | BundleArrowFunction
   | BundleBuiltin;
@@ -315,6 +319,14 @@ export type BundleGreaterThanOrEqual = [
 export type BundleLogicalNot = [kind: "!", operand: BundleExpression];
 
 export type BundleNegation = [kind: "-x", operand: BundleExpression];
+
+export type BundlePrefixIncrement = [kind: "++x", target: BundleIdentifier];
+
+export type BundlePrefixDecrement = [kind: "--x", target: BundleIdentifier];
+
+export type BundlePostfixIncrement = [kind: "x++", target: BundleIdentifier];
+
+export type BundlePostfixDecrement = [kind: "x--", target: BundleIdentifier];
 
 export type BundleConditional = [
   kind: "?:",

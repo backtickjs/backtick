@@ -6,6 +6,7 @@ import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
   BundleArrayElement,
   BundleArrowFunction,
+  BundleIdentifier,
   BundleSpreadElement,
   BundleStatement,
   BundleFunctionLabel,
@@ -228,6 +229,31 @@ function memberOf(
   return typeof found === "function"
     ? (...args: ClientValue[]) => (found as Applied)(object, ...args)
     : found;
+}
+
+// A step reads a variable and writes it back one further. A prefix step answers
+// the value after the step, and a postfix step the value before it.
+function compileStep(
+  target: BundleIdentifier,
+  delta: 1 | -1,
+  position: "prefix" | "postfix",
+): (scope: Scope | null) => ClientValue {
+  // Only a variable is stepped, which the compiler enforces; a bundle saying
+  // otherwise was not written by it.
+  if (!Array.isArray(target) || target[0] !== "id") {
+    throw new Error("a step target must be an identifier");
+  }
+  const name = target[1];
+  return (scope) => {
+    const frame = lookup(scope, name);
+    if (frame === null) {
+      throw new Error(`unknown assignment target ${name}`);
+    }
+    const before = read(frame, name) as number;
+    const after = before + delta;
+    bind(frame, name, after);
+    return position === "prefix" ? after : before;
+  };
 }
 
 // A literal carries itself. Past that, what is left has a shape to read: an
@@ -569,6 +595,14 @@ export function compile(
       const operand = compile(instance, node[1]);
       return (scope) => -(operand(scope) as number);
     }
+    case "++x":
+      return compileStep(node[1], 1, "prefix");
+    case "--x":
+      return compileStep(node[1], -1, "prefix");
+    case "x++":
+      return compileStep(node[1], 1, "postfix");
+    case "x--":
+      return compileStep(node[1], -1, "postfix");
     case "?:": {
       const test = compile(instance, node[1]);
       const whenTrue = compile(instance, node[2]);

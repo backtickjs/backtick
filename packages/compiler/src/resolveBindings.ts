@@ -457,7 +457,10 @@ export function resolveBindings(
       for (const arg of node.arguments) {
         walkExpression(script, arg, scopes);
       }
-    } else if (ts.isPrefixUnaryExpression(node)) {
+    } else if (
+      ts.isPrefixUnaryExpression(node) ||
+      ts.isPostfixUnaryExpression(node)
+    ) {
       walkExpression(script, node.operand, scopes);
     } else if (ts.isBinaryExpression(node)) {
       // A bare identifier on either side is a reference, read (`a + b`) or
