@@ -184,19 +184,26 @@ function tokenize(source: string): { tokens: Token[]; comments: Token[] } {
 
 /**
  * The case as its script, and nothing else changed but how it reaches the
- * harness. Comments go, lines kept, since the frontmatter is one and prose may
- * hold a backtick. And the two places a case reaches its harness in a way
+ * harness. A comment goes, lines kept, only where it holds what a `cs`
+ * template can't — a backtick or `${` — and only once closed: an unclosed one
+ * is what some cases test. And the two places a case reaches its harness in a way
  * client script cannot: `assert(…)` becomes `assert.ok(…)`, and
  * `new Test262Error(…)` loses its `new`.
  */
 function adapt(source: string, harnessed: boolean): string {
   const { tokens, comments } = tokenize(source);
-  const edits: { start: number; end: number; text: string }[] = comments.map(
-    (comment) => ({
+  const edits: { start: number; end: number; text: string }[] = comments
+    .filter(
+      (comment) =>
+        /`|\$\{/.test(comment.text) &&
+        (comment.kind === ts.SyntaxKind.SingleLineCommentTrivia ||
+          // At least `/**/`: `/*/` ends in `*/` and is still open.
+          (comment.text.length >= 4 && comment.text.endsWith("*/"))),
+    )
+    .map((comment) => ({
       ...comment,
       text: comment.text.replace(/[^\n]/g, ""),
-    }),
-  );
+    }));
   tokens.forEach((token, i) => {
     if (!harnessed) return;
     const next = tokens[i + 1];
