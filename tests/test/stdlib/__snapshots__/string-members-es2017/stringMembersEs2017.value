@@ -1,0 +1,11 @@
+{
+  "padded": "  ab|ab-=-",
+  "trimmed": "x  |  x|",
+  "at": [
+    "a",
+    "b",
+    undefined
+  ],
+  "replaced": "a/b/c",
+  "replacedBy": "a1b"
+}

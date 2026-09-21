@@ -1,0 +1,56 @@
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_prices             → prices
+ = cs.const(            →  = 
+{                       → { 
+apple                   → apple
+:                       → : 
+1                       → 1
+,                       → , 
+pear                    → pear
+:                       → : 
+2                       → 2
+ }                      →  }
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+{                       → {\n        
+values                  → values
+:                       → : 
+cs.receiver(            → 
+Object                  → Object
+)                       → 
+.                       → .
+values                  → values
+(                       → (
+__cs_prices             → prices
+)                       → )
+,                       → ,\n        
+holds                   → holds
+:                       → : 
+[                       → [
+cs.receiver(            → 
+Object                  → Object
+)                       → 
+.                       → .
+hasOwn                  → hasOwn
+(                       → (
+__cs_prices             → prices
+,                       → , 
+"pear"                  → "pear"
+)                       → )
+,                       → , 
+cs.receiver(            → 
+Object                  → Object
+)                       → 
+.                       → .
+hasOwn                  → hasOwn
+(                       → (
+__cs_prices             → prices
+,                       → , 
+"plum"                  → "plum"
+)                       → )
+]                       → ]
+ }                      → ,\n      }
+);                      → ;
+\n})())                 → \n    }`

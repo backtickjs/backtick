@@ -7,17 +7,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 // answers rather than a member read off a `Number` there is no value for.
 async function Checked() {
   return cs.create(
-    [9, 10, 29, 5],
+    [9, 10, 37, 5],
     {
       version: "0.0.0",
       filePath: "stdlib/number-statics.test.tsx",
-      fileHash: "2nrwvnc0tmqsw",
+      fileHash: "1o8290c5hfi65",
       splices: {},
       captures: [],
     },
     () => ({
       kind: "{}",
-      loc: [9, 13, 29, 4],
+      loc: [9, 13, 37, 4],
       statements: [
         {
           kind: "const",
@@ -26,7 +26,7 @@ async function Checked() {
             kind: "id",
             loc: [10, 11, 10, 19],
             text: "positive",
-            bindingKey: "positive$2nrwvnc0tmqsw$0",
+            bindingKey: "positive$1o8290c5hfi65$0",
           },
           initializer: {
             kind: "binop",
@@ -51,7 +51,7 @@ async function Checked() {
             kind: "id",
             loc: [11, 11, 11, 18],
             text: "largest",
-            bindingKey: "largest$2nrwvnc0tmqsw$1",
+            bindingKey: "largest$1o8290c5hfi65$1",
           },
           initializer: {
             kind: "binop",
@@ -71,25 +71,152 @@ async function Checked() {
         },
         {
           kind: "const",
-          loc: [12, 5, 12, 39],
+          loc: [12, 5, 17, 58],
           name: {
             kind: "id",
-            loc: [12, 11, 12, 16],
+            loc: [12, 11, 12, 15],
+            text: "safe",
+            bindingKey: "safe$1o8290c5hfi65$2",
+          },
+          initializer: {
+            kind: "binop",
+            loc: [13, 7, 17, 57],
+            left: {
+              kind: "binop",
+              loc: [13, 7, 16, 30],
+              left: {
+                kind: "binop",
+                loc: [13, 7, 15, 27],
+                left: {
+                  kind: "binop",
+                  loc: [13, 7, 14, 52],
+                  left: {
+                    kind: "binop",
+                    loc: [13, 7, 13, 51],
+                    left: {
+                      kind: "bltn",
+                      loc: [13, 7, 13, 30],
+                      name: "Number.MAX_SAFE_INTEGER",
+                    },
+                    operatorToken: "===",
+                    right: {
+                      kind: "number",
+                      loc: [13, 35, 13, 51],
+                      value: 9007199254740991,
+                    },
+                  },
+                  operatorToken: "&&",
+                  right: {
+                    kind: "binop",
+                    loc: [14, 7, 14, 52],
+                    left: {
+                      kind: "bltn",
+                      loc: [14, 7, 14, 30],
+                      name: "Number.MIN_SAFE_INTEGER",
+                    },
+                    operatorToken: "===",
+                    right: {
+                      kind: "prefixop",
+                      loc: [14, 35, 14, 52],
+                      operator: "-",
+                      operand: {
+                        kind: "number",
+                        loc: [14, 36, 14, 52],
+                        value: 9007199254740991,
+                      },
+                    },
+                  },
+                },
+                operatorToken: "&&",
+                right: {
+                  kind: "binop",
+                  loc: [15, 7, 15, 27],
+                  left: {
+                    kind: "bltn",
+                    loc: [15, 7, 15, 23],
+                    name: "Number.MIN_VALUE",
+                  },
+                  operatorToken: ">",
+                  right: {
+                    kind: "number",
+                    loc: [15, 26, 15, 27],
+                    value: 0,
+                  },
+                },
+              },
+              operatorToken: "&&",
+              right: {
+                kind: "()",
+                loc: [16, 7, 16, 30],
+                expression: {
+                  kind: "bltn",
+                  loc: [16, 7, 16, 27],
+                  name: "Number.isSafeInteger",
+                },
+                arguments: [
+                  {
+                    kind: "number",
+                    loc: [16, 28, 16, 29],
+                    value: 3,
+                  },
+                ],
+              },
+            },
+            operatorToken: "&&",
+            right: {
+              kind: "prefixop",
+              loc: [17, 7, 17, 57],
+              operator: "!",
+              operand: {
+                kind: "()",
+                loc: [17, 8, 17, 57],
+                expression: {
+                  kind: "bltn",
+                  loc: [17, 8, 17, 28],
+                  name: "Number.isSafeInteger",
+                },
+                arguments: [
+                  {
+                    kind: "binop",
+                    loc: [17, 29, 17, 56],
+                    left: {
+                      kind: "bltn",
+                      loc: [17, 29, 17, 52],
+                      name: "Number.MAX_SAFE_INTEGER",
+                    },
+                    operatorToken: "+",
+                    right: {
+                      kind: "number",
+                      loc: [17, 55, 17, 56],
+                      value: 1,
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+        {
+          kind: "const",
+          loc: [18, 5, 18, 39],
+          name: {
+            kind: "id",
+            loc: [18, 11, 18, 16],
             text: "whole",
-            bindingKey: "whole$2nrwvnc0tmqsw$2",
+            bindingKey: "whole$1o8290c5hfi65$3",
           },
           initializer: {
             kind: "()",
-            loc: [12, 19, 12, 38],
+            loc: [18, 19, 18, 38],
             expression: {
               kind: "bltn",
-              loc: [12, 19, 12, 35],
+              loc: [18, 19, 18, 35],
               name: "Number.isInteger",
             },
             arguments: [
               {
                 kind: "number",
-                loc: [12, 36, 12, 37],
+                loc: [18, 36, 18, 37],
                 value: 2,
               },
             ],
@@ -97,25 +224,25 @@ async function Checked() {
         },
         {
           kind: "const",
-          loc: [13, 5, 13, 46],
+          loc: [19, 5, 19, 46],
           name: {
             kind: "id",
-            loc: [13, 11, 13, 21],
+            loc: [19, 11, 19, 21],
             text: "fractional",
-            bindingKey: "fractional$2nrwvnc0tmqsw$3",
+            bindingKey: "fractional$1o8290c5hfi65$4",
           },
           initializer: {
             kind: "()",
-            loc: [13, 24, 13, 45],
+            loc: [19, 24, 19, 45],
             expression: {
               kind: "bltn",
-              loc: [13, 24, 13, 40],
+              loc: [19, 24, 19, 40],
               name: "Number.isInteger",
             },
             arguments: [
               {
                 kind: "number",
-                loc: [13, 41, 13, 44],
+                loc: [19, 41, 19, 44],
                 value: 2.5,
               },
             ],
@@ -123,25 +250,25 @@ async function Checked() {
         },
         {
           kind: "const",
-          loc: [15, 5, 15, 42],
+          loc: [21, 5, 21, 42],
           name: {
             kind: "id",
-            loc: [15, 11, 15, 18],
+            loc: [21, 11, 21, 18],
             text: "written",
-            bindingKey: "written$2nrwvnc0tmqsw$4",
+            bindingKey: "written$1o8290c5hfi65$5",
           },
           initializer: {
             kind: "()",
-            loc: [15, 21, 15, 41],
+            loc: [21, 21, 21, 41],
             expression: {
               kind: "bltn",
-              loc: [15, 21, 15, 36],
+              loc: [21, 21, 21, 36],
               name: "Number.isFinite",
             },
             arguments: [
               {
                 kind: "string",
-                loc: [15, 37, 15, 40],
+                loc: [21, 37, 21, 40],
                 text: "2",
               },
             ],
@@ -149,105 +276,126 @@ async function Checked() {
         },
         {
           kind: "return",
-          loc: [16, 5, 28, 7],
+          loc: [22, 5, 36, 7],
           expression: {
             kind: "jsx",
-            loc: [17, 7, 27, 14],
+            loc: [23, 7, 35, 14],
             type: {
               kind: "string",
-              loc: [17, 8, 17, 12],
+              loc: [23, 8, 23, 12],
               text: "span",
             },
             attributes: [],
             children: [
               {
                 kind: "binop",
-                loc: [18, 10, 26, 18],
+                loc: [24, 10, 34, 15],
                 left: {
                   kind: "binop",
-                  loc: [18, 10, 25, 14],
+                  loc: [24, 10, 33, 14],
                   left: {
                     kind: "binop",
-                    loc: [18, 10, 24, 19],
+                    loc: [24, 10, 32, 18],
                     left: {
                       kind: "binop",
-                      loc: [18, 10, 23, 14],
+                      loc: [24, 10, 31, 14],
                       left: {
                         kind: "binop",
-                        loc: [18, 10, 22, 18],
+                        loc: [24, 10, 30, 19],
                         left: {
                           kind: "binop",
-                          loc: [18, 10, 21, 14],
+                          loc: [24, 10, 29, 14],
                           left: {
                             kind: "binop",
-                            loc: [18, 10, 20, 21],
+                            loc: [24, 10, 28, 18],
                             left: {
                               kind: "binop",
-                              loc: [18, 10, 19, 14],
+                              loc: [24, 10, 27, 14],
                               left: {
-                                kind: "id",
-                                loc: [18, 10, 18, 15],
-                                text: "whole",
-                                bindingKey: "whole$2nrwvnc0tmqsw$2",
+                                kind: "binop",
+                                loc: [24, 10, 26, 21],
+                                left: {
+                                  kind: "binop",
+                                  loc: [24, 10, 25, 14],
+                                  left: {
+                                    kind: "id",
+                                    loc: [24, 10, 24, 15],
+                                    text: "whole",
+                                    bindingKey: "whole$1o8290c5hfi65$3",
+                                  },
+                                  operatorToken: "+",
+                                  right: {
+                                    kind: "string",
+                                    loc: [25, 11, 25, 14],
+                                    text: " ",
+                                  },
+                                },
+                                operatorToken: "+",
+                                right: {
+                                  kind: "id",
+                                  loc: [26, 11, 26, 21],
+                                  text: "fractional",
+                                  bindingKey: "fractional$1o8290c5hfi65$4",
+                                },
                               },
                               operatorToken: "+",
                               right: {
                                 kind: "string",
-                                loc: [19, 11, 19, 14],
+                                loc: [27, 11, 27, 14],
                                 text: " ",
                               },
                             },
                             operatorToken: "+",
                             right: {
                               kind: "id",
-                              loc: [20, 11, 20, 21],
-                              text: "fractional",
-                              bindingKey: "fractional$2nrwvnc0tmqsw$3",
+                              loc: [28, 11, 28, 18],
+                              text: "written",
+                              bindingKey: "written$1o8290c5hfi65$5",
                             },
                           },
                           operatorToken: "+",
                           right: {
                             kind: "string",
-                            loc: [21, 11, 21, 14],
+                            loc: [29, 11, 29, 14],
                             text: " ",
                           },
                         },
                         operatorToken: "+",
                         right: {
                           kind: "id",
-                          loc: [22, 11, 22, 18],
-                          text: "written",
-                          bindingKey: "written$2nrwvnc0tmqsw$4",
+                          loc: [30, 11, 30, 19],
+                          text: "positive",
+                          bindingKey: "positive$1o8290c5hfi65$0",
                         },
                       },
                       operatorToken: "+",
                       right: {
                         kind: "string",
-                        loc: [23, 11, 23, 14],
+                        loc: [31, 11, 31, 14],
                         text: " ",
                       },
                     },
                     operatorToken: "+",
                     right: {
                       kind: "id",
-                      loc: [24, 11, 24, 19],
-                      text: "positive",
-                      bindingKey: "positive$2nrwvnc0tmqsw$0",
+                      loc: [32, 11, 32, 18],
+                      text: "largest",
+                      bindingKey: "largest$1o8290c5hfi65$1",
                     },
                   },
                   operatorToken: "+",
                   right: {
                     kind: "string",
-                    loc: [25, 11, 25, 14],
+                    loc: [33, 11, 33, 14],
                     text: " ",
                   },
                 },
                 operatorToken: "+",
                 right: {
                   kind: "id",
-                  loc: [26, 11, 26, 18],
-                  text: "largest",
-                  bindingKey: "largest$2nrwvnc0tmqsw$1",
+                  loc: [34, 11, 34, 15],
+                  text: "safe",
+                  bindingKey: "safe$1o8290c5hfi65$2",
                 },
               },
             ],

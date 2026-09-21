@@ -209,6 +209,44 @@ export interface String extends StringUnsupportedBuiltins {
    */
   toLocaleUpperCase(locales?: string | string[]): string;
   /**
+   * @param index The zero-based index of the desired code unit. A negative
+   * index will count back from the last item.
+   */
+  at(index: number): string | undefined;
+  /**
+   * @param maxLength The length of the resulting string once the current
+   * string has been padded. If this parameter is smaller than the current
+   * string's length, the current string will be returned as it is.
+   * @param fillString The string to pad the current string with. If this
+   * string is too long, it will be truncated and the left-most part will be
+   * applied. The default value for this parameter is " " (U+0020).
+   */
+  padStart(maxLength: number, fillString?: string): string;
+  /**
+   * @param maxLength The length of the resulting string once the current
+   * string has been padded. If this parameter is smaller than the current
+   * string's length, the current string will be returned as it is.
+   * @param fillString The string to pad the current string with. If this
+   * string is too long, it will be truncated and the left-most part will be
+   * applied. The default value for this parameter is " " (U+0020).
+   */
+  padEnd(maxLength: number, fillString?: string): string;
+  trimStart(): string;
+  trimEnd(): string;
+  /**
+   * Replaces every occurrence of a search string.
+   *
+   * @param searchValue A string to search for.
+   * @param replaceValue The text to replace it with, or a function answering
+   * with that text. Only the first match of `searchValue` is replaced.
+   */
+  replaceAll(
+    searchValue: string,
+    replaceValue:
+      | string
+      | ((substring: string, offset: number, string: string) => string),
+  ): string;
+  /**
    * Removes the leading and trailing white space and line terminator
    * characters from a string.
    */
@@ -330,6 +368,76 @@ export interface Array<T> extends ArrayUnsupportedBuiltins {
    * value as an argument instead of an array value.
    */
   reduce<U>(
+    callbackfn: (previousValue: U, currentValue: T, currentIndex: number) => U,
+    initialValue: U,
+  ): U;
+  /**
+   * Returns the item located at the specified index.
+   *
+   * @param index The zero-based index of the desired element. A negative index
+   * will count back from the last item.
+   */
+  at(index: number): T | undefined;
+  /**
+   * Determines whether all the members of an array satisfy the specified test.
+   *
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns false.
+   */
+  every(predicate: (value: T, index: number) => boolean): boolean;
+  /**
+   * Determines whether the specified callback function returns true for any
+   * element of an array.
+   *
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns true.
+   */
+  some(predicate: (value: T, index: number) => boolean): boolean;
+  /**
+   * Returns the value of the last element in the array where predicate is
+   * true, and undefined otherwise.
+   *
+   * @param predicate Called once for each element of the array, in descending
+   * order, until it returns true.
+   */
+  findLast(predicate: (value: T, index: number) => boolean): T | undefined;
+  /**
+   * Returns the index of the last element in the array where predicate is
+   * true, and -1 otherwise.
+   *
+   * @param predicate Called once for each element of the array, in descending
+   * order, until it returns true.
+   */
+  findLastIndex(predicate: (value: T, index: number) => boolean): number;
+  /**
+   * Calls a defined callback function on each element of an array. Then,
+   * flattens the result into a new array. This is identical to a map followed
+   * by flat with depth 1.
+   *
+   * @param callback A function that accepts up to two arguments. The flatMap
+   * method calls the callback function one time for each element in the array.
+   */
+  flatMap<U>(callback: (value: T, index: number) => U | U[]): U[];
+  /**
+   * Calls the specified callback function for all the elements in an array, in
+   * descending order. The return value of the callback function is the
+   * accumulated result, and is provided as an argument in the next call to the
+   * callback function.
+   *
+   * The initial value is required, where the standard library makes it
+   * optional: without one the first call is handed an element rather than an
+   * accumulator, and an empty array has nothing to hand it and throws. Both
+   * are rules a host would have to reproduce exactly to agree, and naming the
+   * starting value is the same work.
+   *
+   * @param callbackfn A function that accepts up to three arguments. The
+   * reduceRight method calls the callbackfn function one time for each element
+   * in the array.
+   * @param initialValue It is used as the initial value to start the
+   * accumulation. The first call to the callbackfn function provides this
+   * value as an argument instead of an array value.
+   */
+  reduceRight<U>(
     callbackfn: (previousValue: U, currentValue: T, currentIndex: number) => U,
     initialValue: U,
   ): U;
@@ -713,6 +821,29 @@ export interface NumberConstructor extends NumberConstructorUnsupportedBuiltins 
    */
   readonly MAX_VALUE: number;
   /**
+   * The value of the largest integer n such that n and n + 1 are both exactly
+   * representable as a Number value. The value of Number.MAX_SAFE_INTEGER is
+   * 9007199254740991 2^53 − 1.
+   */
+  readonly MAX_SAFE_INTEGER: number;
+  /**
+   * The value of the smallest integer n such that n and n − 1 are both exactly
+   * representable as a Number value. The value of Number.MIN_SAFE_INTEGER is
+   * −9007199254740991 (−(2^53 − 1)).
+   */
+  readonly MIN_SAFE_INTEGER: number;
+  /**
+   * The closest number to zero that can be represented in JavaScript. Equal to
+   * approximately 5.00E-324.
+   */
+  readonly MIN_VALUE: number;
+  /**
+   * Returns true if the value passed is a safe integer.
+   *
+   * @param number A numeric value.
+   */
+  isSafeInteger(number: ClientValue): boolean;
+  /**
    * Returns true if passed value is finite. Unlike the global isFinite,
    * Number.isFinite doesn't forcibly convert the parameter to a number. Only
    * finite values of the type number, result in true.
@@ -763,6 +894,20 @@ export interface ObjectConstructor extends ObjectConstructorUnsupportedBuiltins 
   fromEntries<T extends ClientValue>(
     entries: readonly [key: string, value: T][],
   ): { [key: string]: T };
+  /**
+   * Returns the values of an object's members, in the order `JSON.stringify`
+   * writes them.
+   *
+   * @param o An object whose values to list.
+   */
+  values<T extends ClientValue>(o: { readonly [key: string]: T }): T[];
+  /**
+   * Determines whether an object holds a member of that name.
+   *
+   * @param o An object that may hold the key.
+   * @param key A key the object may hold.
+   */
+  hasOwn(o: { readonly [key: string]: ClientValue }, key: string): boolean;
   /**
    * Returns the names of an object's members, in the order `JSON.stringify`
    * writes them.

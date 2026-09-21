@@ -55,11 +55,24 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     case "string.toUpperCase":
     case "string.toLocaleUpperCase":
     case "string.trim":
+    case "string.trimStart":
+    case "string.trimEnd":
+    case "string.padStart":
+    case "string.padEnd":
+    case "string.at":
+    case "string.replaceAll":
     case "string.valueOf":
     case "array.concat":
     case "array.join":
     case "array.slice":
     case "array.indexOf":
+    case "array.at":
+    case "array.every":
+    case "array.some":
+    case "array.findLast":
+    case "array.findLastIndex":
+    case "array.flatMap":
+    case "array.reduceRight":
     case "array.lastIndexOf":
     case "array.includes":
     case "array.with":
@@ -126,11 +139,17 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     case "Array.of":
     case "Number.EPSILON":
     case "Number.MAX_VALUE":
+    case "Number.MAX_SAFE_INTEGER":
+    case "Number.MIN_SAFE_INTEGER":
+    case "Number.MIN_VALUE":
+    case "Number.isSafeInteger":
     case "Number.isFinite":
     case "Number.isInteger":
     case "Object.entries":
     case "Object.fromEntries":
     case "Object.keys":
+    case "Object.values":
+    case "Object.hasOwn":
     case "String.fromCharCode":
     case "String.fromCodePoint":
     case "Array.from":

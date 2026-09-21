@@ -24,6 +24,67 @@ MAX_VALUE                                 → MAX_VALUE
 );                                        → ;
 \n                                        → \n    
 const                                     → const 
+__cs_safe                                 → safe
+ = cs.const(                              →  =\n      
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
+ ===                                      →  === 
+9007199254740991                          → 9007199254740991
+ &&                                       →  &&\n      
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
+ ===                                      →  === 
+-cs.number(                               → -
+9007199254740991                          → 9007199254740991
+)                                         → 
+ &&                                       →  &&\n      
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+MIN_VALUE                                 → MIN_VALUE
+ >                                        →  > 
+0                                         → 0
+ && (cs.condition(                        →  &&\n      
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+isSafeInteger                             → isSafeInteger
+(                                         → (
+3                                         → 3
+)                                         → )
+) &&                                      → 
+cs.receiver(Number).isSafeInteger(3)      → Number.isSafeInteger(3) [-semantic -completion -navigation -verification]
+)                                         → 
+ &&                                       →  &&\n      
+!(cs.condition(                           → !
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+isSafeInteger                             → isSafeInteger
+(                                         → (
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
+ +                                        →  + 
+1                                         → 1
+)                                         → )
+) &&                                      → 
+cs.receiver(Number).isSafeInteger(cs.receiver(Number).MAX_SAFE_INTEGER + 1)→ Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1) [-semantic -completion -navigation -verification]
+)                                         → 
+);                                        → ;
+\n                                        → \n    
+const                                     → const 
 __cs_whole                                → whole
  = cs.const(                              →  = 
 cs.receiver(                              → 
@@ -83,6 +144,10 @@ __cs_positive                             → positive
 " "                                       → " "
  +                                        →  +\n          
 __cs_largest                              → largest
+ +                                        →  +\n          
+" "                                       → " "
+ +                                        →  +\n          
+__cs_safe                                 → safe
 )}</                                      → }\n      </
 span                                      → span
 >                                         → >\n    )

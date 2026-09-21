@@ -3,7 +3,7 @@ cs.receiver(                          →
 "abc"                                 → "abc"
 )                                     → 
 .                                     → .
-padStart                              → padStart
+normalize                             → normalize
 ))                                    → `
 cs.lift(cs.const(                     → cs`
 (cs.splice(                           →  [-semantic]
@@ -44,5 +44,5 @@ cs.receiver(                          →
 "abc"                                 → "abc"
 )                                     → 
 .                                     → .
-padStart                              → padStart
+normalize                             → normalize
 ))                                    → `

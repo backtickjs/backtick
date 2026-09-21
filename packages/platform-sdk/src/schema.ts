@@ -1058,6 +1058,100 @@ export const schema: Schema = {
           "Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale.",
       },
     ),
+    "string.at": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("index", Type.Number(), {
+          description:
+            "The zero-based index of the desired code unit. A negative index will count back from the last item.",
+        }),
+      ],
+      Type.Union([Type.String(), Type.Undefined()]),
+    ),
+    "string.padStart": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("maxLength", Type.Number(), {
+          description:
+            "The length of the resulting string once the current string has been padded. If this parameter is smaller than the current string's length, the current string will be returned as it is.",
+        }),
+        Type.Optional(
+          Type.FunctionParameter("fillString", Type.String(), {
+            description:
+              'The string to pad the current string with. If this string is too long, it will be truncated and the left-most part will be applied. The default value for this parameter is " " (U+0020).',
+          }),
+        ),
+      ],
+      Type.String(),
+    ),
+    "string.padEnd": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("maxLength", Type.Number(), {
+          description:
+            "The length of the resulting string once the current string has been padded. If this parameter is smaller than the current string's length, the current string will be returned as it is.",
+        }),
+        Type.Optional(
+          Type.FunctionParameter("fillString", Type.String(), {
+            description:
+              'The string to pad the current string with. If this string is too long, it will be truncated and the left-most part will be applied. The default value for this parameter is " " (U+0020).',
+          }),
+        ),
+      ],
+      Type.String(),
+    ),
+    "string.trimStart": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+      ],
+      Type.String(),
+    ),
+    "string.trimEnd": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+      ],
+      Type.String(),
+    ),
+    "string.replaceAll": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("searchValue", Type.String(), {
+          description: "A string to search for.",
+        }),
+        Type.FunctionParameter(
+          "replaceValue",
+          Type.Union([
+            Type.String(),
+            Type.Function(
+              [
+                Type.FunctionParameter("substring", Type.String()),
+                Type.FunctionParameter("offset", Type.Number()),
+                Type.FunctionParameter("string", Type.String()),
+              ],
+              Type.String(),
+            ),
+          ]),
+          {
+            description:
+              "The text to replace it with, or a function answering with that text. Only the first match of `searchValue` is replaced.",
+          },
+        ),
+      ],
+      Type.String(),
+      { description: "Replaces every occurrence of a search string." },
+    ),
     "string.trim": Type.Function(
       [
         Type.FunctionParameter("self", Type.String(), {
@@ -1371,6 +1465,203 @@ export const schema: Schema = {
       {
         description:
           "Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.\n\nThe initial value is required, where the standard library makes it optional: without one the first call is handed an element rather than an accumulator, and an empty array has nothing to hand it and throws. Both are rules a host would have to reproduce exactly to agree, and naming the starting value is the same work.",
+      },
+    ),
+    "array.at": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter("index", Type.Number(), {
+            description:
+              "The zero-based index of the desired element. A negative index will count back from the last item.",
+          }),
+        ],
+        Type.Union([Type.Ref("T"), Type.Undefined()]),
+      ),
+      {
+        description: "Returns the item located at the specified index.",
+      },
+    ),
+    "array.every": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "predicate",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Boolean(),
+            ),
+            {
+              description:
+                "Called once for each element of the array, in ascending order, until it returns false.",
+            },
+          ),
+        ],
+        Type.Boolean(),
+      ),
+      {
+        description:
+          "Determines whether all the members of an array satisfy the specified test.",
+      },
+    ),
+    "array.some": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "predicate",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Boolean(),
+            ),
+            {
+              description:
+                "Called once for each element of the array, in ascending order, until it returns true.",
+            },
+          ),
+        ],
+        Type.Boolean(),
+      ),
+      {
+        description:
+          "Determines whether the specified callback function returns true for any element of an array.",
+      },
+    ),
+    "array.findLast": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "predicate",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Boolean(),
+            ),
+            {
+              description:
+                "Called once for each element of the array, in descending order, until it returns true.",
+            },
+          ),
+        ],
+        Type.Union([Type.Ref("T"), Type.Undefined()]),
+      ),
+      {
+        description:
+          "Returns the value of the last element in the array where predicate is true, and undefined otherwise.",
+      },
+    ),
+    "array.findLastIndex": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "predicate",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Boolean(),
+            ),
+            {
+              description:
+                "Called once for each element of the array, in descending order, until it returns true.",
+            },
+          ),
+        ],
+        Type.Number(),
+      ),
+      {
+        description:
+          "Returns the index of the last element in the array where predicate is true, and -1 otherwise.",
+      },
+    ),
+    "array.flatMap": Type.Generic(
+      [Type.GenericParameter("T"), Type.GenericParameter("U")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "callback",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Union([Type.Ref("U"), Type.Array(Type.Ref("U"))]),
+            ),
+            {
+              description:
+                "A function that accepts up to two arguments. The flatMap method calls the callback function one time for each element in the array.",
+            },
+          ),
+        ],
+        Type.Array(Type.Ref("U")),
+      ),
+      {
+        description:
+          "Calls a defined callback function on each element of an array. Then, flattens the result into a new array. This is identical to a map followed by flat with depth 1.",
+      },
+    ),
+    "array.reduceRight": Type.Generic(
+      [Type.GenericParameter("T"), Type.GenericParameter("U")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "callbackfn",
+            Type.Function(
+              [
+                Type.FunctionParameter("previousValue", Type.Ref("U")),
+                Type.FunctionParameter("currentValue", Type.Ref("T")),
+                Type.FunctionParameter("currentIndex", Type.Number()),
+              ],
+              Type.Ref("U"),
+            ),
+            {
+              description:
+                "A function that accepts up to three arguments. The reduceRight method calls the callbackfn function one time for each element in the array.",
+            },
+          ),
+          Type.FunctionParameter("initialValue", Type.Ref("U"), {
+            description:
+              "It is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.",
+          }),
+        ],
+        Type.Ref("U"),
+      ),
+      {
+        description:
+          "Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.\n\nThe initial value is required, where the standard library makes it optional: without one the first call is handed an element rather than an accumulator, and an empty array has nothing to hand it and throws. Both are rules a host would have to reproduce exactly to agree, and naming the starting value is the same work.",
       },
     ),
     "array.filter": Type.Generic(
@@ -2013,6 +2304,29 @@ export const schema: Schema = {
       description:
         "The largest number that can be represented in JavaScript. Equal to approximately 1.79E+308.",
     }),
+    "Number.MAX_SAFE_INTEGER": Type.Number({
+      description:
+        "The value of the largest integer n such that n and n + 1 are both exactly representable as a Number value. The value of Number.MAX_SAFE_INTEGER is 9007199254740991 2^53 − 1.",
+    }),
+    "Number.MIN_SAFE_INTEGER": Type.Number({
+      description:
+        "The value of the smallest integer n such that n and n − 1 are both exactly representable as a Number value. The value of Number.MIN_SAFE_INTEGER is −9007199254740991 (−(2^53 − 1)).",
+    }),
+    "Number.MIN_VALUE": Type.Number({
+      description:
+        "The closest number to zero that can be represented in JavaScript. Equal to approximately 5.00E-324.",
+    }),
+    "Number.isSafeInteger": Type.Function(
+      [
+        Type.FunctionParameter("number", Type.Ref("ClientValue"), {
+          description: "A numeric value.",
+        }),
+      ],
+      Type.Boolean(),
+      {
+        description: "Returns true if the value passed is a safe integer.",
+      },
+    ),
     "Number.isFinite": Type.Function(
       [
         Type.FunctionParameter("number", Type.Ref("ClientValue"), {
@@ -2112,6 +2426,42 @@ export const schema: Schema = {
       {
         description:
           "Returns an object holding each key with its value. A key written twice holds the later value.",
+      },
+    ),
+    "Object.values": Type.Generic(
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
+      Type.Function(
+        [
+          Type.FunctionParameter(
+            "o",
+            Type.Record(Type.String(), Type.Ref("T"), { readOnly: true }),
+            { description: "An object whose values to list." },
+          ),
+        ],
+        Type.Array(Type.Ref("T")),
+      ),
+      {
+        description:
+          "Returns the values of an object's members, in the order `JSON.stringify` writes them.",
+      },
+    ),
+    "Object.hasOwn": Type.Function(
+      [
+        Type.FunctionParameter(
+          "o",
+          Type.Record(Type.String(), Type.Ref("ClientValue"), {
+            readOnly: true,
+          }),
+          { description: "An object that may hold the key." },
+        ),
+        Type.FunctionParameter("key", Type.String(), {
+          description: "A key the object may hold.",
+        }),
+      ],
+      Type.Boolean(),
+      {
+        description:
+          "Determines whether an object holds a member of that name.",
       },
     ),
     "Object.keys": Type.Function(

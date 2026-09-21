@@ -15,30 +15,30 @@ describe("a member the schema leaves out", () => {
     // for a member the schema left out and carry on, and the client answers
     // every name a value has — so nothing answering is the whole answer.
     await assert.rejects(
-      // @ts-expect-error: the schema leaves `padStart` out
+      // @ts-expect-error: the schema leaves `normalize` out
       evaluate(
         cs.create(
-          [27, 16, 27, 34],
+          [27, 16, 27, 35],
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "q3np02ewpjzw",
+            fileHash: "20tgf6g4m3c3u",
             splices: {},
             captures: [],
           },
           () => ({
             kind: ".",
-            loc: [27, 19, 27, 33],
+            loc: [27, 19, 27, 34],
             expression: {
               kind: "string",
               loc: [27, 19, 27, 24],
               text: "abc",
             },
-            name: "padStart",
+            name: "normalize",
           }),
         ),
       ),
-      /a string has no `padStart` in this language/,
+      /a string has no `normalize` in this language/,
     );
   });
 });
@@ -54,7 +54,7 @@ describe("a name a target answers for", () => {
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "q3np02ewpjzw",
+            fileHash: "20tgf6g4m3c3u",
             splices: { $greet: { value: greet, params: [] } },
             captures: [],
           },
@@ -85,7 +85,7 @@ describe("a name a target answers for", () => {
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "q3np02ewpjzw",
+            fileHash: "20tgf6g4m3c3u",
             splices: { $greet: { value: greet, params: [] } },
             captures: [],
           },
@@ -116,7 +116,7 @@ describe("a name a target answers for", () => {
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "q3np02ewpjzw",
+            fileHash: "20tgf6g4m3c3u",
             splices: { $storage: { value: storage, params: [] } },
             captures: [],
           },
@@ -163,7 +163,7 @@ describe("a name a target answers for", () => {
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "q3np02ewpjzw",
+            fileHash: "20tgf6g4m3c3u",
             splices: {},
             captures: [],
           },
@@ -193,36 +193,36 @@ describe("a name a target answers for", () => {
   });
   it("may not add a member to a kind of value", async () => {
     // A member of a string is the language's, so a target naming one adds a
-    // whole name nothing reads: `"abc".padStart` still finds nothing.
+    // whole name nothing reads: `"abc".normalize` still finds nothing.
     await assert.rejects(
-      // @ts-expect-error: the schema leaves `padStart` out
+      // @ts-expect-error: the schema leaves `normalize` out
       evaluate(
         cs.create(
-          [84, 16, 84, 34],
+          [84, 16, 84, 35],
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "q3np02ewpjzw",
+            fileHash: "20tgf6g4m3c3u",
             splices: {},
             captures: [],
           },
           () => ({
             kind: ".",
-            loc: [84, 19, 84, 33],
+            loc: [84, 19, 84, 34],
             expression: {
               kind: "string",
               loc: [84, 19, 84, 24],
               text: "abc",
             },
-            name: "padStart",
+            name: "normalize",
           }),
         ),
         {
           builtinOf: (name) =>
-            name === "string.padStart" ? (self) => self : undefined,
+            name === "string.normalize" ? (self) => self : undefined,
         },
       ),
-      /a string has no `padStart` in this language/,
+      /a string has no `normalize` in this language/,
     );
   });
 });

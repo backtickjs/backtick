@@ -755,6 +755,59 @@ export interface PlatformBuiltins {
    */
   "string.toLocaleUpperCase"(self: string, locales?: string | string[]): string;
   /**
+   * @param self The value the member is reached off.
+   * @param index The zero-based index of the desired code unit. A negative
+   * index will count back from the last item.
+   */
+  "string.at"(self: string, index: number): string | undefined;
+  /**
+   * @param self The value the member is reached off.
+   * @param maxLength The length of the resulting string once the current
+   * string has been padded. If this parameter is smaller than the current
+   * string's length, the current string will be returned as it is.
+   * @param fillString The string to pad the current string with. If this
+   * string is too long, it will be truncated and the left-most part will be
+   * applied. The default value for this parameter is " " (U+0020).
+   */
+  "string.padStart"(
+    self: string,
+    maxLength: number,
+    fillString?: string,
+  ): string;
+  /**
+   * @param self The value the member is reached off.
+   * @param maxLength The length of the resulting string once the current
+   * string has been padded. If this parameter is smaller than the current
+   * string's length, the current string will be returned as it is.
+   * @param fillString The string to pad the current string with. If this
+   * string is too long, it will be truncated and the left-most part will be
+   * applied. The default value for this parameter is " " (U+0020).
+   */
+  "string.padEnd"(self: string, maxLength: number, fillString?: string): string;
+  /**
+   * @param self The value the member is reached off.
+   */
+  "string.trimStart"(self: string): string;
+  /**
+   * @param self The value the member is reached off.
+   */
+  "string.trimEnd"(self: string): string;
+  /**
+   * Replaces every occurrence of a search string.
+   *
+   * @param self The value the member is reached off.
+   * @param searchValue A string to search for.
+   * @param replaceValue The text to replace it with, or a function answering
+   * with that text. Only the first match of `searchValue` is replaced.
+   */
+  "string.replaceAll"(
+    self: string,
+    searchValue: string,
+    replaceValue:
+      | string
+      | ((substring: string, offset: number, string: string) => string),
+  ): string;
+  /**
    * Removes the leading and trailing white space and line terminator
    * characters from a string.
    *
@@ -900,6 +953,99 @@ export interface PlatformBuiltins {
    * value as an argument instead of an array value.
    */
   "array.reduce"<T, U>(
+    self: T[],
+    callbackfn: (previousValue: U, currentValue: T, currentIndex: number) => U,
+    initialValue: U,
+  ): U;
+  /**
+   * Returns the item located at the specified index.
+   *
+   * @param self The value the member is reached off.
+   * @param index The zero-based index of the desired element. A negative index
+   * will count back from the last item.
+   */
+  "array.at"<T>(self: T[], index: number): T | undefined;
+  /**
+   * Determines whether all the members of an array satisfy the specified test.
+   *
+   * @param self The value the member is reached off.
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns false.
+   */
+  "array.every"<T>(
+    self: T[],
+    predicate: (value: T, index: number) => boolean,
+  ): boolean;
+  /**
+   * Determines whether the specified callback function returns true for any
+   * element of an array.
+   *
+   * @param self The value the member is reached off.
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns true.
+   */
+  "array.some"<T>(
+    self: T[],
+    predicate: (value: T, index: number) => boolean,
+  ): boolean;
+  /**
+   * Returns the value of the last element in the array where predicate is
+   * true, and undefined otherwise.
+   *
+   * @param self The value the member is reached off.
+   * @param predicate Called once for each element of the array, in descending
+   * order, until it returns true.
+   */
+  "array.findLast"<T>(
+    self: T[],
+    predicate: (value: T, index: number) => boolean,
+  ): T | undefined;
+  /**
+   * Returns the index of the last element in the array where predicate is
+   * true, and -1 otherwise.
+   *
+   * @param self The value the member is reached off.
+   * @param predicate Called once for each element of the array, in descending
+   * order, until it returns true.
+   */
+  "array.findLastIndex"<T>(
+    self: T[],
+    predicate: (value: T, index: number) => boolean,
+  ): number;
+  /**
+   * Calls a defined callback function on each element of an array. Then,
+   * flattens the result into a new array. This is identical to a map followed
+   * by flat with depth 1.
+   *
+   * @param self The value the member is reached off.
+   * @param callback A function that accepts up to two arguments. The flatMap
+   * method calls the callback function one time for each element in the array.
+   */
+  "array.flatMap"<T, U>(
+    self: T[],
+    callback: (value: T, index: number) => U | U[],
+  ): U[];
+  /**
+   * Calls the specified callback function for all the elements in an array, in
+   * descending order. The return value of the callback function is the
+   * accumulated result, and is provided as an argument in the next call to the
+   * callback function.
+   *
+   * The initial value is required, where the standard library makes it
+   * optional: without one the first call is handed an element rather than an
+   * accumulator, and an empty array has nothing to hand it and throws. Both
+   * are rules a host would have to reproduce exactly to agree, and naming the
+   * starting value is the same work.
+   *
+   * @param self The value the member is reached off.
+   * @param callbackfn A function that accepts up to three arguments. The
+   * reduceRight method calls the callbackfn function one time for each element
+   * in the array.
+   * @param initialValue It is used as the initial value to start the
+   * accumulation. The first call to the callbackfn function provides this
+   * value as an argument instead of an array value.
+   */
+  "array.reduceRight"<T, U>(
     self: T[],
     callbackfn: (previousValue: U, currentValue: T, currentIndex: number) => U,
     initialValue: U,
@@ -1285,6 +1431,29 @@ export interface PlatformBuiltins {
    */
   readonly "Number.MAX_VALUE": number;
   /**
+   * The value of the largest integer n such that n and n + 1 are both exactly
+   * representable as a Number value. The value of Number.MAX_SAFE_INTEGER is
+   * 9007199254740991 2^53 − 1.
+   */
+  readonly "Number.MAX_SAFE_INTEGER": number;
+  /**
+   * The value of the smallest integer n such that n and n − 1 are both exactly
+   * representable as a Number value. The value of Number.MIN_SAFE_INTEGER is
+   * −9007199254740991 (−(2^53 − 1)).
+   */
+  readonly "Number.MIN_SAFE_INTEGER": number;
+  /**
+   * The closest number to zero that can be represented in JavaScript. Equal to
+   * approximately 5.00E-324.
+   */
+  readonly "Number.MIN_VALUE": number;
+  /**
+   * Returns true if the value passed is a safe integer.
+   *
+   * @param number A numeric value.
+   */
+  "Number.isSafeInteger"(number: ClientValue): boolean;
+  /**
    * Returns true if passed value is finite. Unlike the global isFinite,
    * Number.isFinite doesn't forcibly convert the parameter to a number. Only
    * finite values of the type number, result in true.
@@ -1342,6 +1511,23 @@ export interface PlatformBuiltins {
   "Object.fromEntries"<T extends ClientValue>(
     entries: readonly [key: string, value: T][],
   ): { [key: string]: T };
+  /**
+   * Returns the values of an object's members, in the order `JSON.stringify`
+   * writes them.
+   *
+   * @param o An object whose values to list.
+   */
+  "Object.values"<T extends ClientValue>(o: { readonly [key: string]: T }): T[];
+  /**
+   * Determines whether an object holds a member of that name.
+   *
+   * @param o An object that may hold the key.
+   * @param key A key the object may hold.
+   */
+  "Object.hasOwn"(
+    o: { readonly [key: string]: ClientValue },
+    key: string,
+  ): boolean;
   /**
    * Returns the names of an object's members, in the order `JSON.stringify`
    * writes them.

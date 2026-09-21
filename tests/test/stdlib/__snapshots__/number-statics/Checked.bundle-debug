@@ -1,11 +1,12 @@
 #f0 = () => {
   const positive = Number.EPSILON > 0;
   const largest = Number.MAX_VALUE > 1e+308;
+  const safe = Number.MAX_SAFE_INTEGER === 9007199254740991 && Number.MIN_SAFE_INTEGER === -9007199254740991 && Number.MIN_VALUE > 0 && Number.isSafeInteger(3) && !Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1);
   const whole = Number.isInteger(2);
   const fractional = Number.isInteger(2.5);
   const written = Number.isFinite("2");
   return <span>
-    {whole + " " + fractional + " " + written + " " + positive + " " + largest}
+    {whole + " " + fractional + " " + written + " " + positive + " " + largest + " " + safe}
   </span>;
 }
 

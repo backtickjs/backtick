@@ -1,0 +1,28 @@
+{
+  "at": [
+    1,
+    4,
+    undefined
+  ],
+  "every": true,
+  "some": true,
+  "findLast": 2,
+  "findLastIndex": 1,
+  "flatMap": [
+    1,
+    10,
+    2,
+    20,
+    3,
+    30,
+    4,
+    40
+  ],
+  "reduceRight": "4321",
+  "unchanged": [
+    1,
+    2,
+    3,
+    4
+  ]
+}

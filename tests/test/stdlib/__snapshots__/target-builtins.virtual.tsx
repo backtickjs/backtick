@@ -23,9 +23,9 @@ describe("a member the schema leaves out", () => {
     // for a member the schema left out and carry on, and the client answers
     // every name a value has — so nothing answering is the whole answer.
     await assert.rejects(
-      // @ts-expect-error: the schema leaves `padStart` out
-      evaluate(cs.lift(cs.const(cs.receiver("abc").padStart))),
-      /a string has no `padStart` in this language/,
+      // @ts-expect-error: the schema leaves `normalize` out
+      evaluate(cs.lift(cs.const(cs.receiver("abc").normalize))),
+      /a string has no `normalize` in this language/,
     );
   });
 });
@@ -78,14 +78,14 @@ describe("a name a target answers for", () => {
 
   it("may not add a member to a kind of value", async () => {
     // A member of a string is the language's, so a target naming one adds a
-    // whole name nothing reads: `"abc".padStart` still finds nothing.
+    // whole name nothing reads: `"abc".normalize` still finds nothing.
     await assert.rejects(
-      // @ts-expect-error: the schema leaves `padStart` out
-      evaluate(cs.lift(cs.const(cs.receiver("abc").padStart)), {
+      // @ts-expect-error: the schema leaves `normalize` out
+      evaluate(cs.lift(cs.const(cs.receiver("abc").normalize)), {
         builtinOf: (name) =>
-          name === "string.padStart" ? (self: ClientValue) => self : undefined,
+          name === "string.normalize" ? (self: ClientValue) => self : undefined,
       }),
-      /a string has no `padStart` in this language/,
+      /a string has no `normalize` in this language/,
     );
   });
 });

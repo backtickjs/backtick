@@ -1,0 +1,121 @@
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_word               → word
+ = cs.const(            →  = 
+"ab"                    → "ab"
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+{                       → {\n        
+padded                  → padded
+:                       → : 
+cs.receiver(            → 
+__cs_word               → word
+)                       → 
+.                       → .
+padStart                → padStart
+(                       → (
+4                       → 4
+)                       → )
+ +                      →  + 
+"|"                     → "|"
+ +                      →  + 
+cs.receiver(            → 
+__cs_word               → word
+)                       → 
+.                       → .
+padEnd                  → padEnd
+(                       → (
+5                       → 5
+,                       → , 
+"-="                    → "-="
+)                       → )
+,                       → ,\n        
+trimmed                 → trimmed
+:                       → : 
+cs.receiver(            → 
+"  x  "                 → "  x  "
+)                       → 
+.                       → .
+trimStart               → trimStart
+()                      → ()
+ +                      →  + 
+"|"                     → "|"
+ +                      →  + 
+cs.receiver(            → 
+"  x  "                 → "  x  "
+)                       → 
+.                       → .
+trimEnd                 → trimEnd
+()                      → ()
+ +                      →  + 
+"|"                     → "|"
+,                       → ,\n        
+at                      → at
+:                       → : 
+[                       → [
+cs.receiver(            → 
+__cs_word               → word
+)                       → 
+.                       → .
+at                      → at
+(                       → (
+0                       → 0
+)                       → )
+,                       → , 
+cs.receiver(            → 
+__cs_word               → word
+)                       → 
+.                       → .
+at                      → at
+(                       → (
+-cs.number(             → -
+1                       → 1
+)                       → 
+)                       → )
+,                       → , 
+cs.receiver(            → 
+__cs_word               → word
+)                       → 
+.                       → .
+at                      → at
+(                       → (
+5                       → 5
+)                       → )
+]                       → ]
+,                       → ,\n        
+replaced                → replaced
+:                       → : 
+cs.receiver(            → 
+"a.b.c"                 → "a.b.c"
+)                       → 
+.                       → .
+replaceAll              → replaceAll
+(                       → (
+"."                     → "."
+,                       → , 
+"/"                     → "/"
+)                       → )
+,                       → ,\n        
+replacedBy              → replacedBy
+:                       → : 
+cs.receiver(            → 
+"a.b"                   → "a.b"
+)                       → 
+.                       → .
+replaceAll              → replaceAll
+(                       → (
+"."                     → "."
+,                       → , 
+(                       → (
+__cs_found              → found
+,                       → , 
+__cs_offset             → offset
+) =>                    → ) => 
+""                      → ""
+ +                      →  + 
+__cs_offset             → offset
+)                       → )
+ }                      → ,\n      }
+);                      → ;
+\n})())                 → \n    }`

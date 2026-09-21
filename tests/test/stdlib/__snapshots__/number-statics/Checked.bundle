@@ -32,6 +32,76 @@
           ],
           [
             "const",
+            "safe",
+            [
+              "&&",
+              [
+                "&&",
+                [
+                  "&&",
+                  [
+                    "&&",
+                    [
+                      "===",
+                      [
+                        "bltn",
+                        "Number.MAX_SAFE_INTEGER"
+                      ],
+                      9007199254740991
+                    ],
+                    [
+                      "===",
+                      [
+                        "bltn",
+                        "Number.MIN_SAFE_INTEGER"
+                      ],
+                      -9007199254740991
+                    ]
+                  ],
+                  [
+                    ">",
+                    [
+                      "bltn",
+                      "Number.MIN_VALUE"
+                    ],
+                    0
+                  ]
+                ],
+                [
+                  "()",
+                  [
+                    "bltn",
+                    "Number.isSafeInteger"
+                  ],
+                  [
+                    3
+                  ]
+                ]
+              ],
+              [
+                "!",
+                [
+                  "()",
+                  [
+                    "bltn",
+                    "Number.isSafeInteger"
+                  ],
+                  [
+                    [
+                      "+",
+                      [
+                        "bltn",
+                        "Number.MAX_SAFE_INTEGER"
+                      ],
+                      1
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "const",
             "whole",
             [
               "()",
@@ -95,35 +165,46 @@
                             [
                               "+",
                               [
-                                "id",
-                                "whole"
+                                "+",
+                                [
+                                  "+",
+                                  [
+                                    "id",
+                                    "whole"
+                                  ],
+                                  " "
+                                ],
+                                [
+                                  "id",
+                                  "fractional"
+                                ]
                               ],
                               " "
                             ],
                             [
                               "id",
-                              "fractional"
+                              "written"
                             ]
                           ],
                           " "
                         ],
                         [
                           "id",
-                          "written"
+                          "positive"
                         ]
                       ],
                       " "
                     ],
                     [
                       "id",
-                      "positive"
+                      "largest"
                     ]
                   ],
                   " "
                 ],
                 [
                   "id",
-                  "largest"
+                  "safe"
                 ]
               ]
             ]

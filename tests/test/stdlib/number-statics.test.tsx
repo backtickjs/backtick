@@ -9,6 +9,12 @@ async function Checked() {
   return cs`{
     const positive = Number.EPSILON > 0;
     const largest = Number.MAX_VALUE > 1e308;
+    const safe =
+      Number.MAX_SAFE_INTEGER === 9007199254740991 &&
+      Number.MIN_SAFE_INTEGER === -9007199254740991 &&
+      Number.MIN_VALUE > 0 &&
+      Number.isSafeInteger(3) &&
+      !Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1);
     const whole = Number.isInteger(2);
     const fractional = Number.isInteger(2.5);
     // Unconverted, so a string that reads as a number is still not one.
@@ -23,7 +29,9 @@ async function Checked() {
           " " +
           positive +
           " " +
-          largest}
+          largest +
+          " " +
+          safe}
       </span>
     );
   }`;

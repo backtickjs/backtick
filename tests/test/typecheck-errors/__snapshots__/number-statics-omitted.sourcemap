@@ -3,7 +3,7 @@ cs.receiver(       →
 Number             → Number
 )                  → 
 .                  → .
-MAX_SAFE_INTEGER   → MAX_SAFE_INTEGER
+POSITIVE_INFINITY  → POSITIVE_INFINITY
 ))                 → `
 cs.lift(cs.const(  → cs`
 cs.receiver(       → 

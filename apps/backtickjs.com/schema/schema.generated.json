@@ -15523,6 +15523,201 @@
         "type": "string"
       }
     },
+    "string.at": {
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The zero-based index of the desired code unit. A negative index will count back from the last item.",
+          "type": "functionParameter",
+          "name": "index",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "union",
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "undefined"
+          }
+        ]
+      }
+    },
+    "string.padStart": {
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The length of the resulting string once the current string has been padded. If this parameter is smaller than the current string's length, the current string will be returned as it is.",
+          "type": "functionParameter",
+          "name": "maxLength",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "The string to pad the current string with. If this string is too long, it will be truncated and the left-most part will be applied. The default value for this parameter is \" \" (U+0020).",
+          "type": "functionParameter",
+          "name": "fillString",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.padEnd": {
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The length of the resulting string once the current string has been padded. If this parameter is smaller than the current string's length, the current string will be returned as it is.",
+          "type": "functionParameter",
+          "name": "maxLength",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "The string to pad the current string with. If this string is too long, it will be truncated and the left-most part will be applied. The default value for this parameter is \" \" (U+0020).",
+          "type": "functionParameter",
+          "name": "fillString",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.trimStart": {
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.trimEnd": {
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.replaceAll": {
+      "description": "Replaces every occurrence of a search string.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "A string to search for.",
+          "type": "functionParameter",
+          "name": "searchValue",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The text to replace it with, or a function answering with that text. Only the first match of `searchValue` is replaced.",
+          "type": "functionParameter",
+          "name": "replaceValue",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "substring",
+                    "holds": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "functionParameter",
+                    "name": "offset",
+                    "holds": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "functionParameter",
+                    "name": "string",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
     "string.trim": {
       "description": "Removes the leading and trailing white space and line terminator characters from a string.",
       "type": "function",
@@ -16194,6 +16389,508 @@
           },
           {
             "description": "A function that accepts up to three arguments. The reduce method calls the callbackfn function one time for each element in the array.",
+            "type": "functionParameter",
+            "name": "callbackfn",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "previousValue",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "U"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "currentValue",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "currentIndex",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "ref",
+                "$ref": "U"
+              }
+            }
+          },
+          {
+            "description": "It is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.",
+            "type": "functionParameter",
+            "name": "initialValue",
+            "holds": {
+              "type": "ref",
+              "$ref": "U"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "ref",
+          "$ref": "U"
+        }
+      }
+    },
+    "array.at": {
+      "description": "Returns the item located at the specified index.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The zero-based index of the desired element. A negative index will count back from the last item.",
+            "type": "functionParameter",
+            "name": "index",
+            "holds": {
+              "type": "number"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "ref",
+              "$ref": "T"
+            },
+            {
+              "type": "undefined"
+            }
+          ]
+        }
+      }
+    },
+    "array.every": {
+      "description": "Determines whether all the members of an array satisfy the specified test.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Called once for each element of the array, in ascending order, until it returns false.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "boolean"
+        }
+      }
+    },
+    "array.some": {
+      "description": "Determines whether the specified callback function returns true for any element of an array.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Called once for each element of the array, in ascending order, until it returns true.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "boolean"
+        }
+      }
+    },
+    "array.findLast": {
+      "description": "Returns the value of the last element in the array where predicate is true, and undefined otherwise.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Called once for each element of the array, in descending order, until it returns true.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "ref",
+              "$ref": "T"
+            },
+            {
+              "type": "undefined"
+            }
+          ]
+        }
+      }
+    },
+    "array.findLastIndex": {
+      "description": "Returns the index of the last element in the array where predicate is true, and -1 otherwise.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Called once for each element of the array, in descending order, until it returns true.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "number"
+        }
+      }
+    },
+    "array.flatMap": {
+      "description": "Calls a defined callback function on each element of an array. Then, flattens the result into a new array. This is identical to a map followed by flat with depth 1.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        },
+        {
+          "type": "genericParameter",
+          "name": "U",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "A function that accepts up to two arguments. The flatMap method calls the callback function one time for each element in the array.",
+            "type": "functionParameter",
+            "name": "callback",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "union",
+                "anyOf": [
+                  {
+                    "type": "ref",
+                    "$ref": "U"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "ref",
+                      "$ref": "U"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "U"
+          }
+        }
+      }
+    },
+    "array.reduceRight": {
+      "description": "Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.\n\nThe initial value is required, where the standard library makes it optional: without one the first call is handed an element rather than an accumulator, and an empty array has nothing to hand it and throws. Both are rules a host would have to reproduce exactly to agree, and naming the starting value is the same work.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        },
+        {
+          "type": "genericParameter",
+          "name": "U",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "A function that accepts up to three arguments. The reduceRight method calls the callbackfn function one time for each element in the array.",
             "type": "functionParameter",
             "name": "callbackfn",
             "holds": {
@@ -17390,6 +18087,36 @@
       "description": "The largest number that can be represented in JavaScript. Equal to approximately 1.79E+308.",
       "type": "number"
     },
+    "Number.MAX_SAFE_INTEGER": {
+      "description": "The value of the largest integer n such that n and n + 1 are both exactly representable as a Number value. The value of Number.MAX_SAFE_INTEGER is 9007199254740991 2^53 − 1.",
+      "type": "number"
+    },
+    "Number.MIN_SAFE_INTEGER": {
+      "description": "The value of the smallest integer n such that n and n − 1 are both exactly representable as a Number value. The value of Number.MIN_SAFE_INTEGER is −9007199254740991 (−(2^53 − 1)).",
+      "type": "number"
+    },
+    "Number.MIN_VALUE": {
+      "description": "The closest number to zero that can be represented in JavaScript. Equal to approximately 5.00E-324.",
+      "type": "number"
+    },
+    "Number.isSafeInteger": {
+      "description": "Returns true if the value passed is a safe integer.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric value.",
+          "type": "functionParameter",
+          "name": "number",
+          "holds": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
     "Number.isFinite": {
       "description": "Returns true if passed value is finite. Unlike the global isFinite, Number.isFinite doesn't forcibly convert the parameter to a number. Only finite values of the type number, result in true.",
       "type": "function",
@@ -17628,6 +18355,85 @@
             "$ref": "T"
           }
         }
+      }
+    },
+    "Object.values": {
+      "description": "Returns the values of an object's members, in the order `JSON.stringify` writes them.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "An object whose values to list.",
+            "type": "functionParameter",
+            "name": "o",
+            "holds": {
+              "readOnly": true,
+              "type": "record",
+              "keys": {
+                "type": "string"
+              },
+              "values": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "Object.hasOwn": {
+      "description": "Determines whether an object holds a member of that name.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "An object that may hold the key.",
+          "type": "functionParameter",
+          "name": "o",
+          "holds": {
+            "readOnly": true,
+            "type": "record",
+            "keys": {
+              "type": "string"
+            },
+            "values": {
+              "type": "ref",
+              "$ref": "ClientValue"
+            }
+          }
+        },
+        {
+          "description": "A key the object may hold.",
+          "type": "functionParameter",
+          "name": "key",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
       }
     },
     "Object.keys": {
