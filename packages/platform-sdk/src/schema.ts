@@ -187,6 +187,11 @@ export const schema: Schema = {
       Type.Ref("BundleOptionalPropertyAccess"),
       Type.Ref("BundleElementAccess"),
       Type.Ref("BundleAssignment"),
+      Type.Ref("BundleAdditionAssignment"),
+      Type.Ref("BundleSubtractionAssignment"),
+      Type.Ref("BundleMultiplicationAssignment"),
+      Type.Ref("BundleDivisionAssignment"),
+      Type.Ref("BundleRemainderAssignment"),
       Type.Ref("BundleLogicalAnd"),
       Type.Ref("BundleLogicalOr"),
       Type.Ref("BundleNullishCoalescing"),
@@ -265,6 +270,33 @@ export const schema: Schema = {
     }),
     BundleAssignment: Type.Tuple({
       kind: Type.Literal("="),
+      target: Type.Ref("BundleIdentifier"),
+      value: Type.Ref("BundleExpression"),
+    }),
+    // A compound assignment: `x += y` assigns what `x + y` answers, with `x`
+    // read before `y` is evaluated, and answers the value assigned.
+    BundleAdditionAssignment: Type.Tuple({
+      kind: Type.Literal("+="),
+      target: Type.Ref("BundleIdentifier"),
+      value: Type.Ref("BundleExpression"),
+    }),
+    BundleSubtractionAssignment: Type.Tuple({
+      kind: Type.Literal("-="),
+      target: Type.Ref("BundleIdentifier"),
+      value: Type.Ref("BundleExpression"),
+    }),
+    BundleMultiplicationAssignment: Type.Tuple({
+      kind: Type.Literal("*="),
+      target: Type.Ref("BundleIdentifier"),
+      value: Type.Ref("BundleExpression"),
+    }),
+    BundleDivisionAssignment: Type.Tuple({
+      kind: Type.Literal("/="),
+      target: Type.Ref("BundleIdentifier"),
+      value: Type.Ref("BundleExpression"),
+    }),
+    BundleRemainderAssignment: Type.Tuple({
+      kind: Type.Literal("%="),
       target: Type.Ref("BundleIdentifier"),
       value: Type.Ref("BundleExpression"),
     }),

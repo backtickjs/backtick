@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import { isSupportedBinop } from "./binop.js";
+import { isCompoundAssignment, isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
 import { bodyKind } from "./bodyKind.js";
@@ -653,7 +653,8 @@ function rewriteNodeImpl(
     }
     const assignment =
       (ts.isBinaryExpression(inner) &&
-        inner.operatorToken.kind === ts.SyntaxKind.EqualsToken) ||
+        (inner.operatorToken.kind === ts.SyntaxKind.EqualsToken ||
+          isCompoundAssignment(ts.tokenToString(inner.operatorToken.kind)))) ||
       isStep(ts, inner);
     const expression = rewriteNode(ts, state, node.expression);
     // A statement discards its expression, which is only silent for
@@ -1736,6 +1737,14 @@ function rewriteNodeImpl(
     }
 
     const operator = ts.tokenToString(node.operatorToken.kind);
+    if (
+      operator != null &&
+      isSupportedBinop(operator) &&
+      isCompoundAssignment(operator) &&
+      !assignable(ts, state, node.left)
+    ) {
+      return unsupported();
+    }
     if (operator != null && isSupportedBinop(operator)) {
       let virtualLeft = lhs.virtual as ts.Expression;
       let virtualRight = rhs.virtual as ts.Expression;

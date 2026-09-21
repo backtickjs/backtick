@@ -168,10 +168,13 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
     }
   }
 
-  // A step names the variable it writes, as an assignment does.
-  function stepTarget(operand: ClientScriptExpression): BundleIdentifier {
+  // What an assignment or a step writes: only a variable, which the compiler
+  // enforces and the wire type states; this is where the two meet.
+  function assignmentTarget(
+    operand: ClientScriptExpression,
+  ): BundleIdentifier {
     if (operand.kind !== "id") {
-      throw new Error("A step's operand must be an identifier.");
+      throw new Error("An assignment target must be an identifier.");
     }
     return ["id", sourceName(operand.bindingKey)];
   }
@@ -195,13 +198,19 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         return ["=>", parameterNodes(params), buildBody(node.body)];
       }
       case "binop": {
-        if (node.operatorToken === "=") {
-          // Only a variable can be assigned to, which the compiler enforces
-          // and the wire type states; this is where the two meet.
-          if (node.left.kind !== "id") {
-            throw new Error("An assignment target must be an identifier.");
-          }
-          return ["=", ["id", sourceName(node.left.bindingKey)], e(node.right)];
+        switch (node.operatorToken) {
+          case "=":
+            return ["=", assignmentTarget(node.left), e(node.right)];
+          case "+=":
+            return ["+=", assignmentTarget(node.left), e(node.right)];
+          case "-=":
+            return ["-=", assignmentTarget(node.left), e(node.right)];
+          case "*=":
+            return ["*=", assignmentTarget(node.left), e(node.right)];
+          case "/=":
+            return ["/=", assignmentTarget(node.left), e(node.right)];
+          case "%=":
+            return ["%=", assignmentTarget(node.left), e(node.right)];
         }
         // A tuple whose first slot holds a union of operators is not the
         // union of tuples the fifteen kinds spell, and TypeScript will not
@@ -224,10 +233,10 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           return -node.operand.value;
         }
         if (node.operator === "++") {
-          return ["++x", stepTarget(node.operand)];
+          return ["++x", assignmentTarget(node.operand)];
         }
         if (node.operator === "--") {
-          return ["--x", stepTarget(node.operand)];
+          return ["--x", assignmentTarget(node.operand)];
         }
         return node.operator === "!"
           ? ["!", e(node.operand)]
@@ -236,8 +245,8 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         return ["typeof", e(node.operand)];
       case "postfixop":
         return node.operator === "++"
-          ? ["x++", stepTarget(node.operand)]
-          : ["x--", stepTarget(node.operand)];
+          ? ["x++", assignmentTarget(node.operand)]
+          : ["x--", assignmentTarget(node.operand)];
       case "?:":
         return ["?:", e(node.condition), e(node.whenTrue), e(node.whenFalse)];
       case "true":

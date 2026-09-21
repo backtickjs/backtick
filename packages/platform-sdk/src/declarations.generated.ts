@@ -152,6 +152,11 @@ export type BundleExpression =
   | BundleOptionalPropertyAccess
   | BundleElementAccess
   | BundleAssignment
+  | BundleAdditionAssignment
+  | BundleSubtractionAssignment
+  | BundleMultiplicationAssignment
+  | BundleDivisionAssignment
+  | BundleRemainderAssignment
   | BundleLogicalAnd
   | BundleLogicalOr
   | BundleNullishCoalescing
@@ -229,6 +234,36 @@ export type BundleElementAccess = [
 
 export type BundleAssignment = [
   kind: "=",
+  target: BundleIdentifier,
+  value: BundleExpression,
+];
+
+export type BundleAdditionAssignment = [
+  kind: "+=",
+  target: BundleIdentifier,
+  value: BundleExpression,
+];
+
+export type BundleSubtractionAssignment = [
+  kind: "-=",
+  target: BundleIdentifier,
+  value: BundleExpression,
+];
+
+export type BundleMultiplicationAssignment = [
+  kind: "*=",
+  target: BundleIdentifier,
+  value: BundleExpression,
+];
+
+export type BundleDivisionAssignment = [
+  kind: "/=",
+  target: BundleIdentifier,
+  value: BundleExpression,
+];
+
+export type BundleRemainderAssignment = [
+  kind: "%=",
   target: BundleIdentifier,
   value: BundleExpression,
 ];

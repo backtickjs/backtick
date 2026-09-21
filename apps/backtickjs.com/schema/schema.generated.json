@@ -529,6 +529,26 @@
         },
         {
           "type": "ref",
+          "$ref": "BundleAdditionAssignment"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleSubtractionAssignment"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleMultiplicationAssignment"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleDivisionAssignment"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleRemainderAssignment"
+        },
+        {
+          "type": "ref",
           "$ref": "BundleLogicalAnd"
         },
         {
@@ -890,6 +910,151 @@
           "holds": {
             "type": "string",
             "const": "="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleAdditionAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "+="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleSubtractionAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "-="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleMultiplicationAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "*="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleDivisionAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "/="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleRemainderAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "%="
           }
         },
         {

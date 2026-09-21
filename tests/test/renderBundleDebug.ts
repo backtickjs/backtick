@@ -123,6 +123,11 @@ function renderNode(
     case "[]":
       return `${renderNode(node[1], indent)}[${renderNode(node[2], indent)}]`;
     case "=":
+    case "+=":
+    case "-=":
+    case "*=":
+    case "/=":
+    case "%=":
     case "&&":
     case "||":
     case "??":

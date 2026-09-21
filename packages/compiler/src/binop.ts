@@ -4,6 +4,11 @@ export function isSupportedBinop(operator: string): operator is BinaryOperator {
   const candidate = operator as BinaryOperator;
   switch (candidate) {
     case "=":
+    case "+=":
+    case "-=":
+    case "*=":
+    case "/=":
+    case "%=":
     case "&&":
     case "||":
     case "??":
@@ -28,4 +33,15 @@ export function isSupportedBinop(operator: string): operator is BinaryOperator {
       return false;
     }
   }
+}
+
+// An assignment that computes what it assigns from the variable: `x += y`.
+export function isCompoundAssignment(operator: string | undefined): boolean {
+  return (
+    operator === "+=" ||
+    operator === "-=" ||
+    operator === "*=" ||
+    operator === "/=" ||
+    operator === "%="
+  );
 }

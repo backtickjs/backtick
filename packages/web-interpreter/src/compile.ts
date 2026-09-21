@@ -6,6 +6,7 @@ import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
   BundleArrayElement,
   BundleArrowFunction,
+  BundleExpression,
   BundleIdentifier,
   BundleSpreadElement,
   BundleStatement,
@@ -229,6 +230,67 @@ function memberOf(
   return typeof found === "function"
     ? (...args: ClientValue[]) => (found as Applied)(object, ...args)
     : found;
+}
+
+// Two numbers add; a string on either side concatenates. Written out because
+// the cast the other arithmetic uses would be a lie here: it erases, and
+// JavaScript's `+` then does whichever the operands imply. A client not written
+// in JavaScript has to make the same choice, so the choice belongs in the open.
+function add(a: ClientValue, b: ClientValue): ClientValue {
+  if (typeof a === "number" && typeof b === "number") {
+    return a + b;
+  }
+  if (typeof a === "string" || typeof b === "string") {
+    return `${a as string | number}${b as string | number}`;
+  }
+  throw new Error(
+    "`+` adds two numbers or concatenates with a string; this bundle " +
+      `produced ${typeof a} + ${typeof b}.`,
+  );
+}
+
+// The rest take numbers, which the compiler checks as arithmetic.
+function subtract(a: ClientValue, b: ClientValue): ClientValue {
+  return (a as number) - (b as number);
+}
+
+function multiply(a: ClientValue, b: ClientValue): ClientValue {
+  return (a as number) * (b as number);
+}
+
+function divide(a: ClientValue, b: ClientValue): ClientValue {
+  return (a as number) / (b as number);
+}
+
+function remainder(a: ClientValue, b: ClientValue): ClientValue {
+  return (a as number) % (b as number);
+}
+
+// `x += y`: the variable read, then the value evaluated, as JavaScript orders
+// them, and what the operator answers written back and answered.
+function compileCompoundAssignment(
+  instance: Instance,
+  target: BundleIdentifier,
+  value: BundleExpression,
+  operate: (a: ClientValue, b: ClientValue) => ClientValue,
+): (scope: Scope | null) => ClientValue {
+  // Only a variable can be assigned to, which the compiler enforces; a bundle
+  // saying otherwise was not written by it.
+  if (!Array.isArray(target) || target[0] !== "id") {
+    throw new Error("an assignment target must be an identifier");
+  }
+  const name = target[1];
+  const right = compile(instance, value);
+  return (scope) => {
+    const frame = lookup(scope, name);
+    if (frame === null) {
+      throw new Error(`unknown assignment target ${name}`);
+    }
+    const before = read(frame, name);
+    const after = operate(before, right(scope));
+    bind(frame, name, after);
+    return after;
+  };
 }
 
 // A step reads a variable and writes it back one further. A prefix step answers
@@ -506,49 +568,41 @@ export function compile(
         return value != null ? value : right(scope);
       };
     }
-    // Two numbers add; a string on either side concatenates. Written out
-    // because the cast the other arithmetic uses would be a lie here: it
-    // erases, and JavaScript's `+` then does whichever the operands imply. A
-    // client not written in JavaScript has to make the same choice, so the
-    // choice belongs in the open.
     case "+": {
       const left = compile(instance, node[1]);
       const right = compile(instance, node[2]);
-      return (scope) => {
-        const a = left(scope);
-        const b = right(scope);
-        if (typeof a === "number" && typeof b === "number") {
-          return a + b;
-        }
-        if (typeof a === "string" || typeof b === "string") {
-          return `${a as string | number}${b as string | number}`;
-        }
-        throw new Error(
-          "`+` adds two numbers or concatenates with a string; this bundle " +
-            `produced ${typeof a} + ${typeof b}.`,
-        );
-      };
+      return (scope) => add(left(scope), right(scope));
     }
     case "-": {
       const left = compile(instance, node[1]);
       const right = compile(instance, node[2]);
-      return (scope) => (left(scope) as number) - (right(scope) as number);
+      return (scope) => subtract(left(scope), right(scope));
     }
     case "*": {
       const left = compile(instance, node[1]);
       const right = compile(instance, node[2]);
-      return (scope) => (left(scope) as number) * (right(scope) as number);
+      return (scope) => multiply(left(scope), right(scope));
     }
     case "/": {
       const left = compile(instance, node[1]);
       const right = compile(instance, node[2]);
-      return (scope) => (left(scope) as number) / (right(scope) as number);
+      return (scope) => divide(left(scope), right(scope));
     }
     case "%": {
       const left = compile(instance, node[1]);
       const right = compile(instance, node[2]);
-      return (scope) => (left(scope) as number) % (right(scope) as number);
+      return (scope) => remainder(left(scope), right(scope));
     }
+    case "+=":
+      return compileCompoundAssignment(instance, node[1], node[2], add);
+    case "-=":
+      return compileCompoundAssignment(instance, node[1], node[2], subtract);
+    case "*=":
+      return compileCompoundAssignment(instance, node[1], node[2], multiply);
+    case "/=":
+      return compileCompoundAssignment(instance, node[1], node[2], divide);
+    case "%=":
+      return compileCompoundAssignment(instance, node[1], node[2], remainder);
     // Identity: the same primitive or the same object, never a deep walk.
     case "===": {
       const left = compile(instance, node[1]);
