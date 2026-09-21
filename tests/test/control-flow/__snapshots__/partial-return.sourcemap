@@ -1,0 +1,54 @@
+cs.lift((() => {\n      → cs`{\n      
+let                     → let 
+__cs_n                  → n
+ =                      →  = 
+1                       → 1
+;                       → ;
+\n                      → \n      
+if (                    → if (
+__cs_n                  → n
+ ===                    →  === 
+2                       → 2
+)                       → ) 
+{\n                     → {\n        
+return cs.const(        → return 
+"some"                  → "some"
+);                      → ;
+\n    }                 → \n      }
+\n})())                 → \n    }`
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_pick               → pick
+ = cs.const(            →  = 
+(                       → (
+__cs_b                  → b
+:                       → : 
+boolean                 → boolean
+) => {\n                → ) => {\n        
+if ((cs.condition(      → if (
+__cs_b                  → b
+) &&                    → 
+__cs_b                  → b [-semantic -completion -navigation -verification]
+))                      → ) 
+{\n                     → {\n          
+return cs.const(        → return 
+"taken"                 → "taken"
+);                      → ;
+\n        }             → \n        }
+\n    }                 → \n      }
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+[                       → [
+__cs_pick               → pick
+(                       → (
+true                    → true
+)                       → )
+,                       → , 
+__cs_pick               → pick
+(                       → (
+false                   → false
+)                       → )
+]                       → ]
+);                      → ;
+\n})())                 → \n    }`

@@ -1,0 +1,1 @@
+9:3-9:10 error TS0: A script that returns a value can't `return` without one.

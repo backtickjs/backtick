@@ -2,7 +2,7 @@ import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
-import { bodyKind, partialReturn } from "./bodyKind.js";
+import { bodyKind } from "./bodyKind.js";
 import { isComponentTag } from "./isComponentTag.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -378,12 +378,6 @@ function rewriteNodeImpl(
     sourceLoc(ts, state.script.toSourceLocation(target));
 
   if (ts.isBlock(node)) {
-    if (
-      (ts.isSourceFile(node.parent) || ts.isArrowFunction(node.parent)) &&
-      partialReturn(ts, node)
-    ) {
-      state.errors.set(node, "Not all code paths return a value.");
-    }
     const statements = node.statements.map((statement) =>
       rewriteNode(ts, state, statement),
     );

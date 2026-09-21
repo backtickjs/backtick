@@ -66,13 +66,3 @@ export function bodyKind(
   const exits = terminates(ts, body);
   return valued || (exits && !returns) ? "value" : "action";
 }
-
-// A body with a valued `return` that doesn't return on every path — the
-// "Not all code paths return a value" hole. A throw-only value body has
-// no valued return, so it doesn't read as partial.
-export function partialReturn(
-  ts: typeof import("typescript"),
-  block: ts.Block,
-): boolean {
-  return ownReturn(ts, block, true) && !terminates(ts, block);
-}
