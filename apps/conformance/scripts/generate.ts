@@ -14,6 +14,7 @@ import {
 import { dirname, join, relative } from "node:path";
 import { judgeCase } from "./judgeCase.js";
 import type { Judgement } from "./judgeCase.js";
+import { skips } from "../skips.js";
 
 const ROOT = join(import.meta.dir, "..");
 const CORPUS = join(ROOT, "test262/test");
@@ -23,6 +24,9 @@ const SUITES = ["annexB", "built-ins", "language"];
 const OUT = join(ROOT, ".cache/test262");
 
 const groups = new Map<string, string[]>();
+const skipped = new Map<string, number>(
+  Object.keys(skips).map((key) => [key, 0]),
+);
 const entries = SUITES.flatMap((suite) =>
   readdirSync(join(CORPUS, suite), { recursive: true, withFileTypes: true }),
 );
@@ -30,8 +34,22 @@ for (const entry of entries) {
   // A fixture is imported by the case beside it, not run on its own.
   if (!entry.isFile() || !entry.name.endsWith(".js")) continue;
   if (entry.name.endsWith("_FIXTURE.js")) continue;
+  const path = relative(CORPUS, join(entry.parentPath, entry.name));
+  const skip = Object.keys(skips).find(
+    (key) => path === key || path.startsWith(`${key}/`),
+  );
+  if (skip !== undefined) {
+    skipped.set(skip, skipped.get(skip)! + 1);
+    continue;
+  }
   const group = relative(CORPUS, entry.parentPath);
   groups.set(group, [...(groups.get(group) ?? []), entry.name]);
+}
+const stale = [...skipped].filter(([, count]) => count === 0);
+if (stale.length > 0) {
+  throw new Error(
+    `skips.ts names what Test262 doesn't have: ${stale.map(([key]) => key).join(", ")}`,
+  );
 }
 
 // JSON, with anything past ASCII escaped: the plugin garbles it in host code.
@@ -188,4 +206,8 @@ writeFileSync(
   join(OUT, "groups.json"),
   `${JSON.stringify([...groups.keys()].sort(), null, 2)}\n`,
 );
-console.log(`${groups.size} groups written to ${relative(ROOT, OUT)}`);
+const skippedCount = [...skipped.values()].reduce((sum, n) => sum + n, 0);
+console.log(
+  `${groups.size} groups written to ${relative(ROOT, OUT)}, ` +
+    `${skippedCount} cases skipped`,
+);
