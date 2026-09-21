@@ -43,6 +43,14 @@ export const Test262Error = cs`(message?: string) =>
   "Test262Error: " + (message ?? "")`;
 
 /**
+ * What a case ECMAScript rejects before running calls first, as
+ * `$DONOTEVALUATE()`: that `$` makes it a splice of this.
+ */
+export const DONOTEVALUATE = cs`() => {
+  throw "Test262: This statement should not be evaluated.";
+}`;
+
+/**
  * `assert(value)` is written `assert.ok(value)`: a function that also has
  * members is not something a client script can make.
  *

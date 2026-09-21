@@ -6,11 +6,13 @@ type Outcome = "pass" | "fail" | "unsupported";
 
 /**
  * What the host makes of a case: a verdict it reached itself, or the client
- * script a client has to run to reach one.
+ * script it compiled to. A script is the client's to run once the type checker
+ * accepts it; `early` names the error ECMAScript rejects it with before
+ * running, so a script that has one is refused rather than run.
  */
 export type Judgement =
   | { verdict: { outcome: Outcome; detail: string } }
-  | { script: string; negative: boolean };
+  | { script: string; negative: boolean; early: string | null };
 
 /** The frontmatter keys a host has to act on. The rest is prose. */
 interface Meta {
@@ -105,16 +107,11 @@ export function judgeCase(name: string, source: string): Judgement {
       ? { verdict: { outcome: "pass", detail: "" } }
       : unsupported(refusal);
   }
-  if (early) {
-    return {
-      verdict: {
-        outcome: "fail",
-        detail: `compiled, where ECMAScript rejects it with a ${meta.negative!.type}`,
-      },
-    };
-  }
-
-  return { script: block, negative: meta.negative?.phase === "runtime" };
+  return {
+    script: block,
+    negative: meta.negative?.phase === "runtime",
+    early: early ? meta.negative!.type : null,
+  };
 }
 
 function frontmatter(source: string): Meta {
