@@ -89,6 +89,11 @@ export type {
   String,
   StringConstructor,
 } from "./receivers.generated.js";
+export type {
+  UnsupportedBuiltin,
+  FunctionUnsupportedBuiltins,
+  ObjectUnsupportedBuiltins,
+} from "./unsupportedBuiltins.js";
 
 // Written by hand, because a schema never says it: `Client` is how a host
 // language spells "a script standing in for a value", which a client has no

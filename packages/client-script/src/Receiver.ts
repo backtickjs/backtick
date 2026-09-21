@@ -10,7 +10,11 @@ import type {
   String,
   StringConstructor,
 } from "@backtickjs/platform-sdk";
-import type { ClientFunction } from "@backtickjs/platform-sdk";
+import type {
+  ClientFunction,
+  FunctionUnsupportedBuiltins,
+  ObjectUnsupportedBuiltins,
+} from "@backtickjs/platform-sdk";
 import type { ClientValue } from "@backtickjs/platform-sdk";
 
 // A built-in receiver autoboxes to its client type.
@@ -64,7 +68,8 @@ export type ClientGlobal =
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
-//   plain object                    -> ReadMembers<T>
+//   function                        -> T & FunctionUnsupportedBuiltins
+//   plain object                    -> ReadMembers<T> & ObjectUnsupportedBuiltins
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
   T extends typeof globalThis.JSON
@@ -82,7 +87,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
               : T extends string | number | boolean | readonly ClientValue[]
                 ? Autoboxed<T>
                 : T extends ClientFunction
-                  ? T
+                  ? T & FunctionUnsupportedBuiltins
                   : T extends object
-                    ? ReadMembers<T>
+                    ? ReadMembers<T> & ObjectUnsupportedBuiltins
                     : T;

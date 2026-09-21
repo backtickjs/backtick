@@ -39,7 +39,9 @@ receiver(point.label).concat("!") satisfies string;
 // @ts-expect-error — `padStart` isn't part of the client string API.
 receiver(point.label).padStart;
 receiver(point.x).toString(2) satisfies string;
-receiver(true).toString() satisfies string;
+// @ts-expect-error — a boolean has `valueOf` alone; `toString` is what
+// TypeScript lends every object, and no client answers it.
+receiver(true).toString();
 
 // An array reads as the client array API.
 receiver([1, 2, 3]) satisfies Array<number>;

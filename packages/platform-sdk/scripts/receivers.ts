@@ -144,8 +144,15 @@ function unbound(node: TNode): { member: TNode; carried: Parameter[] } {
   };
 }
 
+/**
+ * The hand-written interface naming what TypeScript would lend a view and no
+ * client answers: see `unsupportedBuiltins.ts`.
+ */
+const unsupported = (as: string) => `${as}UnsupportedBuiltins`;
+
 /** One view: the names under a prefix, as the interface they are read through. */
 function view(
+  as: string,
   prefix: string,
   value: boolean,
   indexed: TNode | undefined,
@@ -163,7 +170,7 @@ function view(
       }
     }
   }
-  const held = Type.Interface([], {
+  const held = Type.Interface([Type.Ref(unsupported(as))], {
     ...properties,
     // Last, and under no name of its own: what stands where a name would go is
     // the operator a script writes there.
@@ -181,11 +188,11 @@ function view(
 const views = [
   ...Object.entries(boxed).map(([prefix, { as, indexed }]) => [
     as,
-    view(prefix, true, indexed),
+    view(as, prefix, true, indexed),
   ]),
   ...Object.entries(named).map(([prefix, { as }]) => [
     as,
-    view(prefix, false, undefined),
+    view(as, prefix, false, undefined),
   ]),
 ] as [string, TNode][];
 
@@ -196,10 +203,11 @@ const own = views.reduce(
   (found, [, node]) => bound(node, found),
   new Set(views.map(([name]) => name)),
 );
+const extended = new Set(views.map(([name]) => unsupported(name)));
 const wanted = [
   ...views.reduce((found, [, node]) => refs(node, found), new Set<string>()),
 ]
-  .filter((name) => !own.has(name))
+  .filter((name) => !own.has(name) && !extended.has(name))
   .sort();
 
 const lines = [
@@ -212,8 +220,9 @@ const lines = [
     ? []
     : [
         `import type { ${wanted.join(", ")} } from "./declarations.generated.js";`,
-        "",
       ]),
+  `import type { ${[...extended].sort().join(", ")} } from "./unsupportedBuiltins.js";`,
+  "",
   ...views.flatMap(([name, node]) => [
     ...typescript.interfaceLines(name, node),
     "",
