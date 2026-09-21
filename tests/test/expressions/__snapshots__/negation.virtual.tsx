@@ -18,3 +18,10 @@ it("negation", async (t) => {
 })),
   );
 });
+
+// `-0` stays a negation on the wire: JSON writes the number `-0` as `0`.
+it("negativeZero", async (t) => {
+  await snapshotCase(t, "negativeZero", cs.lift((() => {
+    return cs.const(1 / -cs.number(0));
+})()));
+});

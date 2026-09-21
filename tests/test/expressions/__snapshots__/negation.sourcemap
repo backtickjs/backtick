@@ -1,33 +1,42 @@
-cs.lift(cs.const(  → cs`
-(                  → (
-__cs_count         → count
-:                  → : 
-number             → number
-) => {\n           → ) => {\n      
-const              → const 
-__cs_floor         → floor
- = cs.const(       →  = 
--cs.number(        → -
-1                  → 1
-)                  → 
-);                 → ;
-\n                 → \n      
-const              → const 
-__cs_step          → step
- = cs.const(       →  = 
--cs.number(        → -
-__cs_count         → count
-)                  → 
-);                 → ;
-\n                 → \n      
-return cs.const(   → return 
-__cs_floor         → floor
- +                 →  + 
-__cs_step          → step
- +                 →  + 
--cs.number(        → -
-2                  → 2
-)                  → 
-);                 → ;
-\n}                → \n    }
-))                 → `
+cs.lift(cs.const(       → cs`
+(                       → (
+__cs_count              → count
+:                       → : 
+number                  → number
+) => {\n                → ) => {\n      
+const                   → const 
+__cs_floor              → floor
+ = cs.const(            →  = 
+-cs.number(             → -
+1                       → 1
+)                       → 
+);                      → ;
+\n                      → \n      
+const                   → const 
+__cs_step               → step
+ = cs.const(            →  = 
+-cs.number(             → -
+__cs_count              → count
+)                       → 
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+__cs_floor              → floor
+ +                      →  + 
+__cs_step               → step
+ +                      →  + 
+-cs.number(             → -
+2                       → 2
+)                       → 
+);                      → ;
+\n}                     → \n    }
+))                      → `
+cs.lift((() => {\n      → cs`{\n    
+return cs.const(        → return 
+1                       → 1
+ /                      →  / 
+-cs.number(             → -
+0                       → 0
+)                       → 
+);                      → ;
+\n})())                 → \n  }`

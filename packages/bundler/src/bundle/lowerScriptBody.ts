@@ -206,7 +206,12 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
       case "unop":
         // A negative literal carries itself, like every other literal here: the
         // node is TypeScript's way of writing one, not something to evaluate.
-        if (node.operator === "-" && node.operand.kind === "number") {
+        // Except `-0`, which JSON writes as `0`: it travels as a negation.
+        if (
+          node.operator === "-" &&
+          node.operand.kind === "number" &&
+          node.operand.value !== 0
+        ) {
           return -node.operand.value;
         }
         return node.operator === "!"
