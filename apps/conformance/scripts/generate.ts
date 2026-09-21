@@ -145,7 +145,7 @@ function scriptOf(
   const decide = (outcome: string, detail: string) =>
     `decided(${literal({ name, outcome, detail })})`;
   if ("verdict" in judgement) {
-    return `decided(${literal({ name, ...judgement.verdict })})`;
+    return decide(judgement.verdict.outcome, judgement.verdict.detail);
   }
   const messages = refused?.get(key);
   const refusal =

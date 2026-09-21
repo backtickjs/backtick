@@ -11,6 +11,10 @@ export const skips: Record<string, string> = {
     "a client script has no global code: its top level is a function body, where `return` is legal",
   "language/statements/return/S12.9_A1_T4.js":
     "a client script has no global code: its top level is a function body, where `return` is legal",
+  "language/statements/variable/S12.2_A4.js":
+    "client script has no `var`: the case uses a variable before its declaration, which only `var` allows",
+  "language/types/boolean/S8.3_A1_T1.js":
+    "client script has no `var`: the case uses a variable before its declaration, which only `var` allows",
 };
 
 // By what the compiler or the type checker refuses: a construct client script

@@ -1,6 +1,16 @@
 import { transpile } from "@backtickjs/compiler";
 import ts from "typescript";
 import YAML from "yaml";
+import { applyEdits } from "./transforms/Edit.js";
+import { assertToAssertOk } from "./transforms/assertToAssertOk.js";
+import {
+  harnessClash,
+  harnessNames,
+  harnessPrefix,
+} from "./transforms/bindHarness.js";
+import { dropBacktickComments } from "./transforms/dropBacktickComments.js";
+import { dropNewOnTest262Error } from "./transforms/dropNewOnTest262Error.js";
+import { varAsLet } from "./transforms/varAsLet.js";
 
 type Outcome = "pass" | "fail" | "unsupported";
 
@@ -12,7 +22,11 @@ type Outcome = "pass" | "fail" | "unsupported";
  */
 export type Judgement =
   | { verdict: { outcome: Outcome; detail: string }; refusals?: string[] }
-  | { script: string; negative: boolean; early: string | null };
+  | {
+      script: string;
+      negative: boolean;
+      early: string | null;
+    };
 
 /** The frontmatter keys a host has to act on. The rest is prose. */
 interface Meta {
@@ -28,8 +42,8 @@ const HARNESS = ["compareArray.js"];
  * A Test262 case, judged as the client script it is written as: a refusal is
  * the host's answer, and a script is the client's to run.
  *
- * Nothing about the case is changed except how it reaches the harness: see
- * `adapt`.
+ * Nothing about the case is changed but what `transforms/` changes, each
+ * transform saying why it has to.
  */
 export function judgeCase(name: string, source: string): Judgement {
   const meta = frontmatter(source);
@@ -49,27 +63,33 @@ export function judgeCase(name: string, source: string): Judgement {
     return unsupported(`needs the harness's ${missing}`);
   }
   const raw = flags.includes("raw");
-  const script = adapt(source, !raw);
+  const bound = harnessNames(raw, meta.includes ?? []);
+  const clash = harnessClash(source, bound);
+  if (clash !== undefined) {
+    return unsupported(
+      `declares \`${clash}\`, which the harness binds for every case`,
+    );
+  }
+  // A case ECMAScript rejects before running passes by being refused.
+  const early =
+    meta.negative?.phase === "parse" || meta.negative?.phase === "resolution";
+  const script = applyEdits(source, [
+    ...dropBacktickComments(source),
+    ...(raw ? [] : assertToAssertOk(source)),
+    ...(raw ? [] : dropNewOnTest262Error(source)),
+    // Not in a case ECMAScript rejects before running: see `varAsLet`.
+    ...(early ? [] : (varAsLet(source) ?? [])),
+  ]);
   // Not a refusal of the case: a `cs` template ends at its first backtick.
   if (script.includes("`") || script.includes("${")) {
     return unsupported("holds a backtick, which a `cs` template cannot");
   }
 
-  const prefix = raw
-    ? ""
-    : "const assert = $assert;\nconst Test262Error = $Test262Error;\n" +
-      (meta.includes?.includes("compareArray.js")
-        ? "const compareArray = $compareArray;\n"
-        : "");
-  const block = `{\n${prefix}${script}\n}`;
+  const block = `{\n${harnessPrefix(bound)}${script}\n}`;
   // Compiled as a module of its own only to hear what the compiler refuses.
   const module =
     'import { cs } from "@backtickjs/core";\n' +
     `export default cs\`${block}\`;\n`;
-
-  // A case ECMAScript rejects before running passes by being refused.
-  const early =
-    meta.negative?.phase === "parse" || meta.negative?.phase === "resolution";
 
   // Each message as the compiler wrote it, for the skip list to match.
   let refusals: string[] = [];
@@ -127,114 +147,6 @@ function frontmatter(source: string): Meta {
   // breaks made `\n`, since `yaml` misses a lone `\r`, and a case about line
   // terminators writes its frontmatter in the one it is about.
   return block ? (YAML.parse(block[1]!.replace(/\r\n?/g, "\n")) as Meta) : {};
-}
-
-interface Token {
-  kind: ts.SyntaxKind;
-  start: number;
-  end: number;
-  text: string;
-}
-
-// After these a `/` divides; anywhere else it starts a regular expression.
-const OPERANDS = new Set([
-  ts.SyntaxKind.Identifier,
-  ts.SyntaxKind.NumericLiteral,
-  ts.SyntaxKind.StringLiteral,
-  ts.SyntaxKind.CloseParenToken,
-  ts.SyntaxKind.CloseBracketToken,
-  ts.SyntaxKind.CloseBraceToken,
-  ts.SyntaxKind.ThisKeyword,
-  ts.SyntaxKind.TrueKeyword,
-  ts.SyntaxKind.FalseKeyword,
-  ts.SyntaxKind.NullKeyword,
-]);
-
-/** The source's tokens, and its comments apart from them. */
-function tokenize(source: string): { tokens: Token[]; comments: Token[] } {
-  const scanner = ts.createScanner(ts.ScriptTarget.ESNext, false);
-  scanner.setText(source);
-  const tokens: Token[] = [];
-  const comments: Token[] = [];
-  for (
-    let kind = scanner.scan();
-    kind !== ts.SyntaxKind.EndOfFileToken;
-    kind = scanner.scan()
-  ) {
-    if (
-      (kind === ts.SyntaxKind.SlashToken ||
-        kind === ts.SyntaxKind.SlashEqualsToken) &&
-      !OPERANDS.has(tokens.at(-1)?.kind ?? ts.SyntaxKind.Unknown)
-    ) {
-      kind = scanner.reScanSlashToken();
-    }
-    const token = {
-      kind,
-      start: scanner.getTokenStart(),
-      end: scanner.getTokenEnd(),
-      text: scanner.getTokenText(),
-    };
-    if (
-      kind === ts.SyntaxKind.SingleLineCommentTrivia ||
-      kind === ts.SyntaxKind.MultiLineCommentTrivia
-    ) {
-      comments.push(token);
-    } else if (
-      kind !== ts.SyntaxKind.WhitespaceTrivia &&
-      kind !== ts.SyntaxKind.NewLineTrivia
-    ) {
-      tokens.push(token);
-    }
-  }
-  return { tokens, comments };
-}
-
-/**
- * The case as its script, and nothing else changed but how it reaches the
- * harness. A comment goes, lines kept, only where it holds what a `cs`
- * template can't — a backtick or `${` — and only once closed: an unclosed one
- * is what some cases test. And the two places a case reaches its harness in a way
- * client script cannot: `assert(…)` becomes `assert.ok(…)`, and
- * `new Test262Error(…)` loses its `new`.
- */
-function adapt(source: string, harnessed: boolean): string {
-  const { tokens, comments } = tokenize(source);
-  const edits: { start: number; end: number; text: string }[] = comments
-    .filter(
-      (comment) =>
-        /`|\$\{/.test(comment.text) &&
-        (comment.kind === ts.SyntaxKind.SingleLineCommentTrivia ||
-          // At least `/**/`: `/*/` ends in `*/` and is still open.
-          (comment.text.length >= 4 && comment.text.endsWith("*/"))),
-    )
-    .map((comment) => ({
-      ...comment,
-      text: comment.text.replace(/[^\n]/g, ""),
-    }));
-  tokens.forEach((token, i) => {
-    if (!harnessed) return;
-    const next = tokens[i + 1];
-    if (
-      token.text === "assert" &&
-      next?.kind === ts.SyntaxKind.OpenParenToken &&
-      tokens[i - 1]?.kind !== ts.SyntaxKind.DotToken
-    ) {
-      edits.push({ start: token.end, end: token.end, text: ".ok" });
-    } else if (
-      token.kind === ts.SyntaxKind.NewKeyword &&
-      next?.text === "Test262Error"
-    ) {
-      edits.push({ start: token.start, end: next.start, text: "" });
-    }
-  });
-  edits.sort((a, b) => a.start - b.start);
-  let adapted = "";
-  let from = 0;
-  for (const edit of edits) {
-    adapted += source.slice(from, edit.start) + edit.text;
-    from = edit.end;
-  }
-  return adapted + source.slice(from);
 }
 
 /**
