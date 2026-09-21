@@ -14,7 +14,7 @@ import {
 import { dirname, join, relative } from "node:path";
 import { judgeCase } from "./judgeCase.js";
 import type { Judgement } from "./judgeCase.js";
-import { skips } from "../skips.js";
+import { skippedRefusals, skips } from "../skips.js";
 
 const ROOT = join(import.meta.dir, "..");
 const CORPUS = join(ROOT, "test262/test");
@@ -26,7 +26,10 @@ const OUT = join(ROOT, ".cache/test262");
 const groups = new Map<string, string[]>();
 // What each entry of the skip list took out, by path.
 const skipped = new Map<string, string[]>(
-  Object.keys(skips).map((key) => [key, []]),
+  [...Object.keys(skips), ...Object.keys(skippedRefusals)].map((key) => [
+    key,
+    [],
+  ]),
 );
 const entries = SUITES.flatMap((suite) =>
   readdirSync(join(CORPUS, suite), { recursive: true, withFileTypes: true }),
@@ -45,12 +48,6 @@ for (const entry of entries) {
   }
   const group = relative(CORPUS, entry.parentPath);
   groups.set(group, [...(groups.get(group) ?? []), entry.name]);
-}
-const stale = [...skipped].filter(([, cases]) => cases.length === 0);
-if (stale.length > 0) {
-  throw new Error(
-    `skips.ts names what Test262 doesn't have: ${stale.map(([key]) => key).join(", ")}`,
-  );
 }
 
 // JSON, with anything past ASCII escaped: the plugin garbles it in host code.
@@ -76,12 +73,29 @@ for (const [group, files] of groups) {
 // checker to read, then with what it refused decided rather than run.
 rmSync(OUT, { recursive: true, force: true });
 const refused = typecheck(write(null));
-write(refused);
+const written = write(refused);
+
+const stale = [...skipped].filter(([, cases]) => cases.length === 0);
+if (stale.length > 0) {
+  throw new Error(
+    `skips.ts names what Test262 doesn't have: ${stale.map(([key]) => key).join(", ")}`,
+  );
+}
 
 /** A group's module, as the lines it wrote and the line each case starts at. */
 type Written = { lines: string[]; starts: { name: string; line: number }[] };
 
-function write(refused: Map<string, string> | null): Map<string, Written> {
+// The entry of `skippedRefusals` one of these refusals matches, if any.
+function skippedBy(refusals: Iterable<string>): string | undefined {
+  const all = [...refusals];
+  return Object.keys(skippedRefusals).find((key) =>
+    all.some((refusal) => skippedRefusals[key]!.refusal.test(refusal)),
+  );
+}
+
+function write(
+  refused: Map<string, Map<string, string>> | null,
+): Map<string, Written> {
   const written = new Map<string, Written>();
   for (const [group, cases] of judged) {
     const out = join(OUT, `${group}.ts`);
@@ -95,11 +109,24 @@ function write(refused: Map<string, string> | null): Map<string, Written> {
       "export const cases = [\n";
     const starts: Written["starts"] = [];
     for (const { name, judgement } of cases) {
+      // Only once the type checker has spoken, so every refusal is known.
+      if (refused !== null) {
+        const skip = skippedBy([
+          ...(("refusals" in judgement && judgement.refusals) || []),
+          ...(refused.get(`${group}/${name}`)?.keys() ?? []),
+        ]);
+        if (skip !== undefined) {
+          skipped.get(skip)!.push(`${group}/${name}.js`);
+          continue;
+        }
+      }
       starts.push({ name, line: text.split("\n").length });
       const script = scriptOf(name, judgement, refused, `${group}/${name}`);
       text += `  { name: ${literal(name)}, script: ${script} },\n`;
     }
     text += "];\n";
+    // A group the skip list emptied is not one to list.
+    if (starts.length === 0) continue;
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, text);
     written.set(group, { lines: text.split("\n"), starts });
@@ -112,7 +139,7 @@ function write(refused: Map<string, string> | null): Map<string, Written> {
 function scriptOf(
   name: string,
   judgement: Judgement,
-  refused: Map<string, string> | null,
+  refused: Map<string, Map<string, string>> | null,
   key: string,
 ): string {
   const decide = (outcome: string, detail: string) =>
@@ -120,7 +147,9 @@ function scriptOf(
   if ("verdict" in judgement) {
     return `decided(${literal({ name, ...judgement.verdict })})`;
   }
-  const refusal = refused?.get(key);
+  const messages = refused?.get(key);
+  const refusal =
+    messages === undefined ? undefined : [...messages.values()].join("; ");
   if (refused !== null && judgement.early !== null) {
     // Refused by the checker is refused by the language: what an early error
     // asks for.
@@ -142,7 +171,9 @@ function scriptOf(
  * message once, at the first line it is about. Strict, since a lax checker
  * widens \`null\` to \`any\` and passes what a client refuses.
  */
-function typecheck(written: Map<string, Written>): Map<string, string> {
+function typecheck(
+  written: Map<string, Written>,
+): Map<string, Map<string, string>> {
   const config = join(OUT, "tsconfig.json");
   writeFileSync(
     config,
@@ -195,23 +226,22 @@ function typecheck(written: Map<string, Written>): Map<string, string> {
     if (!messages.has(message)) messages.set(message, `${message}: ${text}`);
     found.set(key, messages);
   }
-  return new Map(
-    [...found].map(([key, messages]) => [
-      key,
-      [...messages.values()].join("; "),
-    ]),
-  );
+  return found;
 }
 
 writeFileSync(
   join(OUT, "groups.json"),
-  `${JSON.stringify([...groups.keys()].sort(), null, 2)}\n`,
+  `${JSON.stringify([...written.keys()].sort(), null, 2)}\n`,
 );
 // Beside the groups, so a page can say what it left out and why.
 writeFileSync(
   join(OUT, "skipped.json"),
   `${JSON.stringify(
-    [...skipped].map(([key, cases]) => ({ key, reason: skips[key], cases })),
+    [...skipped].map(([key, cases]) => ({
+      key,
+      reason: skips[key] ?? skippedRefusals[key]!.reason,
+      cases,
+    })),
     null,
     2,
   )}\n`,

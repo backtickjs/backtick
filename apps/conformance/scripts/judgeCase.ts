@@ -11,7 +11,7 @@ type Outcome = "pass" | "fail" | "unsupported";
  * running, so a script that has one is refused rather than run.
  */
 export type Judgement =
-  | { verdict: { outcome: Outcome; detail: string } }
+  | { verdict: { outcome: Outcome; detail: string }; refusals?: string[] }
   | { script: string; negative: boolean; early: string | null };
 
 /** The frontmatter keys a host has to act on. The rest is prose. */
@@ -71,8 +71,14 @@ export function judgeCase(name: string, source: string): Judgement {
   const early =
     meta.negative?.phase === "parse" || meta.negative?.phase === "resolution";
 
-  let refusal = syntaxError(name, block);
-  if (refusal === null) {
+  // Each message as the compiler wrote it, for the skip list to match.
+  let refusals: string[] = [];
+  const syntax = syntaxError(name, block);
+  let refusal: string | null = null;
+  if (syntax !== null) {
+    refusal = describe(syntax, block);
+    refusals = [ts.flattenDiagnosticMessageText(syntax.messageText, " ")];
+  } else {
     const errors: ts.Diagnostic[] = [];
     try {
       transpile(
@@ -100,12 +106,13 @@ export function judgeCase(name: string, source: string): Judgement {
     refusal = first.size
       ? [...first.values()].map((error) => describe(error, module)).join("; ")
       : null;
+    refusals = [...first.keys()];
   }
 
   if (refusal !== null) {
     return early
-      ? { verdict: { outcome: "pass", detail: "" } }
-      : unsupported(refusal);
+      ? { verdict: { outcome: "pass", detail: "" }, refusals }
+      : { ...unsupported(refusal), refusals };
   }
   return {
     script: block,
@@ -234,7 +241,7 @@ function adapt(source: string, harnessed: boolean): string {
  * What the parser refuses, which the transform does not report and
  * `backtick-tsc` does: checked on the script alone, where offsets are its own.
  */
-function syntaxError(name: string, script: string): string | null {
+function syntaxError(name: string, script: string): ts.Diagnostic | null {
   // A program of one file, asked only for syntax: nothing is emitted, since
   // TypeScript's emitter crashes on some of what Test262 writes.
   const fileName = `${name}.js`;
@@ -249,7 +256,7 @@ function syntaxError(name: string, script: string): string | null {
     },
   });
   const [first] = program.getSyntacticDiagnostics(file);
-  return first ? describe(first, script) : null;
+  return first ?? null;
 }
 
 // The compiler's message, and the line of the case it is about. ASCII only:
