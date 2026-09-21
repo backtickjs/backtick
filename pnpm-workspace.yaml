@@ -2,17 +2,18 @@ packages:
   # What is published.
   - "packages/*"
   # Built here and never published to npm: a website, an editor extension and
-  # the conformance app.
+  # the conformance and benchmark apps.
   - "apps/*"
   - "apps/backtickjs.com/*"
   - "tests"
   - "examples/*"
-  - "benchmarks/*"
-  - "benchmarks/js-framework-benchmark/frameworks/keyed/backtick"
 
 linkWorkspacePackages: true
 preferWorkspacePackages: true
 saveWorkspaceProtocol: false # `pnpm add` writes "^2.16.9", not "workspace:^"
+# `pnpm run` installs first by default, and under `turbo run clean` one
+# package's install re-links the others while they are being deleted.
+verifyDepsBeforeRun: false
 allowBuilds:
   esbuild: true
 # `bun-types` imports `undici-types` in its declarations without depending on

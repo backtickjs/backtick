@@ -244,7 +244,7 @@ pnpm isKeyed keyed/backtick      # the classification
 
 commit=$(git rev-parse --short HEAD)
 mkdir -p runs/$commit
-cp ../../../js-framework-benchmark/webdriver-ts/results/backtick-*.json runs/$commit/
+cp js-framework-benchmark/webdriver-ts/results/backtick-*.json runs/$commit/
 # add it to runs/manifest.json, then:
 pnpm table</pre>
     </footer>

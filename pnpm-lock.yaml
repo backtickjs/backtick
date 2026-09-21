@@ -206,6 +206,37 @@ importers:
         specifier: ^2.9.1
         version: 2.9.1
 
+  apps/js-framework-benchmark:
+    dependencies:
+      '@backtickjs/core':
+        specifier: ^0.1.0
+        version: link:../../packages/core
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.1.0
+        version: link:../../packages/tspatch-plugin
+      '@backtickjs/web-page':
+        specifier: workspace:*
+        version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.1.0
+        version: link:../../packages/tsc
+      esbuild:
+        specifier: 0.28.0
+        version: 0.28.0
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   apps/vscode-extension:
     dependencies:
       '@backtickjs/typescript-plugin':
@@ -239,39 +270,6 @@ importers:
       vscode-tmgrammar-test:
         specifier: ^0.1.3
         version: 0.1.3
-
-  benchmarks/js-framework-benchmark: {}
-
-  benchmarks/js-framework-benchmark/frameworks/keyed/backtick:
-    dependencies:
-      '@backtickjs/core':
-        specifier: ^0.1.0
-        version: link:../../../../../packages/core
-      '@backtickjs/tspatch-plugin':
-        specifier: ^0.1.0
-        version: link:../../../../../packages/tspatch-plugin
-      '@backtickjs/web-page':
-        specifier: workspace:*
-        version: link:../../../../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../../../../../packages/web-sdk
-    devDependencies:
-      '@backtickjs/prettier-plugin':
-        specifier: ^0.1.0
-        version: link:../../../../../packages/prettier-plugin
-      '@backtickjs/tsc':
-        specifier: ^0.1.0
-        version: link:../../../../../packages/tsc
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
-      ts-patch:
-        specifier: ^4.0.1
-        version: 4.0.1
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
 
   examples/bun-minimal:
     dependencies:
