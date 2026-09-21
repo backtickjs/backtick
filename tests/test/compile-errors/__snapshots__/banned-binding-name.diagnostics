@@ -1,0 +1,36 @@
+6:9-6:13 error TS0: `eval` is not allowed as a variable declaration name: strict mode forbids binding it.
+7:9-7:18 error TS0: `arguments` is not allowed as a variable declaration name: strict mode forbids binding it.
+8:9-8:12 error TS0: `let` is not allowed as a variable declaration name: it is reserved in strict mode.
+9:9-9:15 error TS0: `static` is not allowed as a variable declaration name: it is reserved in strict mode.
+10:9-10:14 error TS0: `yield` is not allowed as a variable declaration name: it is reserved in strict mode.
+11:9-11:19 error TS0: `implements` is not allowed as a variable declaration name: it is reserved in strict mode.
+12:9-12:18 error TS0: `interface` is not allowed as a variable declaration name: it is reserved in strict mode.
+13:9-13:16 error TS0: `package` is not allowed as a variable declaration name: it is reserved in strict mode.
+14:9-14:16 error TS0: `private` is not allowed as a variable declaration name: it is reserved in strict mode.
+15:9-15:18 error TS0: `protected` is not allowed as a variable declaration name: it is reserved in strict mode.
+16:9-16:15 error TS0: `public` is not allowed as a variable declaration name: it is reserved in strict mode.
+17:9-17:14 error TS0: `await` is not allowed as a variable declaration name: it is reserved in module code.
+22:3-22:7 error TS0: `eval` is not allowed as a parameter name: strict mode forbids binding it.
+23:3-23:12 error TS0: `arguments` is not allowed as a parameter name: strict mode forbids binding it.
+24:3-24:6 error TS0: `let` is not allowed as a parameter name: it is reserved in strict mode.
+25:3-25:9 error TS0: `static` is not allowed as a parameter name: it is reserved in strict mode.
+26:3-26:8 error TS0: `yield` is not allowed as a parameter name: it is reserved in strict mode.
+27:3-27:13 error TS0: `implements` is not allowed as a parameter name: it is reserved in strict mode.
+28:3-28:12 error TS0: `interface` is not allowed as a parameter name: it is reserved in strict mode.
+29:3-29:10 error TS0: `package` is not allowed as a parameter name: it is reserved in strict mode.
+30:3-30:10 error TS0: `private` is not allowed as a parameter name: it is reserved in strict mode.
+31:3-31:12 error TS0: `protected` is not allowed as a parameter name: it is reserved in strict mode.
+32:3-32:9 error TS0: `public` is not allowed as a parameter name: it is reserved in strict mode.
+33:3-33:8 error TS0: `await` is not allowed as a parameter name: it is reserved in module code.
+39:12-39:16 error TS0: `eval` is not allowed as a variable declaration name: strict mode forbids binding it.
+44:12-44:21 error TS0: `arguments` is not allowed as a variable declaration name: strict mode forbids binding it.
+49:12-49:15 error TS0: `let` is not allowed as a variable declaration name: it is reserved in strict mode.
+54:12-54:18 error TS0: `static` is not allowed as a variable declaration name: it is reserved in strict mode.
+59:12-59:17 error TS0: `yield` is not allowed as a variable declaration name: it is reserved in strict mode.
+64:12-64:22 error TS0: `implements` is not allowed as a variable declaration name: it is reserved in strict mode.
+69:12-69:21 error TS0: `interface` is not allowed as a variable declaration name: it is reserved in strict mode.
+74:12-74:19 error TS0: `package` is not allowed as a variable declaration name: it is reserved in strict mode.
+79:12-79:19 error TS0: `private` is not allowed as a variable declaration name: it is reserved in strict mode.
+84:12-84:21 error TS0: `protected` is not allowed as a variable declaration name: it is reserved in strict mode.
+89:12-89:18 error TS0: `public` is not allowed as a variable declaration name: it is reserved in strict mode.
+94:12-94:17 error TS0: `await` is not allowed as a variable declaration name: it is reserved in module code.

@@ -264,21 +264,47 @@ function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
   return state.bindings.get(identifier) ?? identifier.text;
 }
 
-// `undefined` is a value, but not a name to bind: shadowing it would leave the
-// literal unreachable in that scope.
-function bannedUndefined(
+// Why a script may not bind a name, or null where it may. Checked here rather
+// than left to TypeScript: the virtual code binds mangled names, so its
+// strict-mode checks never see these.
+function bannedReason(name: string): string | null {
+  switch (name) {
+    case "undefined":
+      return "it would hide the `undefined` value in that scope";
+    case "eval":
+    case "arguments":
+      return "strict mode forbids binding it";
+    case "let":
+    case "static":
+    case "yield":
+    case "implements":
+    case "interface":
+    case "package":
+    case "private":
+    case "protected":
+    case "public":
+      return "it is reserved in strict mode";
+    case "await":
+      return "it is reserved in module code";
+    default:
+      return null;
+  }
+}
+
+function bannedName(
   state: RewriteState,
   name: ts.Identifier,
   position: "declaration" | "parameter",
 ): boolean {
-  if (name.text !== "undefined") {
+  const reason = bannedReason(name.text);
+  if (reason === null) {
     return false;
   }
   state.errors.set(
     name,
-    `\`undefined\` is not allowed as a ${
+    `\`${name.text}\` is not allowed as a ${
       position === "declaration" ? "variable declaration" : "parameter"
-    } name.`,
+    } name: ${reason}.`,
   );
   return true;
 }
@@ -454,7 +480,7 @@ function rewriteNodeImpl(
         );
         return unsupported();
       }
-      bannedUndefined(state, name, "declaration");
+      bannedName(state, name, "declaration");
       // The declaration still rewrites: self-reference produces valid
       // virtual code, so the one error stands alone.
       const reference = selfReference(
@@ -732,7 +758,7 @@ function rewriteNodeImpl(
       return unsupported();
     }
     if (declaration && ts.isIdentifier(declaration.name)) {
-      bannedUndefined(state, declaration.name, "declaration");
+      bannedName(state, declaration.name, "declaration");
     }
     const block = rewriteNode(ts, state, node.tryBlock);
     let param: { virtual: ts.Identifier; runtime: ts.Expression } | null = null;
@@ -1380,7 +1406,7 @@ function rewriteNodeImpl(
         );
       }
       if (ts.isIdentifier(param.name)) {
-        bannedUndefined(state, param.name, "parameter");
+        bannedName(state, param.name, "parameter");
         let type = param.type;
         // Rewritten as `any` — the keyword error stands alone; the
         // `ClientValue` boundary check would otherwise repeat it coarsely.
