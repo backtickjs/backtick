@@ -1,0 +1,58 @@
+cs.lift((() => {\n      → cs`{\n      
+return cs.const(        → return 
+[                       → [\n        
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+isArray                 → isArray
+(                       → (
+[]                      → []
+)                       → )
+,                       → ,\n        
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+isArray                 → isArray
+(                       → (
+[                       → [
+1                       → 1
+,                       → , 
+2                       → 2
+]                       → ]
+)                       → )
+,                       → ,\n        
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+isArray                 → isArray
+(                       → (
+"ab"                    → "ab"
+)                       → )
+,                       → ,\n        
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+isArray                 → isArray
+(                       → (
+{                       → { 
+length                  → length
+:                       → : 
+0                       → 0
+ }                      →  }
+)                       → )
+,                       → ,\n        
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+isArray                 → isArray
+(                       → (
+null                    → null
+)                       → )
+]                       → ,\n      ]
+);                      → ;
+\n})())                 → \n    }`

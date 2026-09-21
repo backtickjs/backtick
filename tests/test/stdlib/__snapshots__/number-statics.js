@@ -7,17 +7,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 // answers rather than a member read off a `Number` there is no value for.
 async function Checked() {
   return cs.create(
-    [9, 10, 18, 5],
+    [9, 10, 29, 5],
     {
       version: "0.0.0",
       filePath: "stdlib/number-statics.test.tsx",
-      fileHash: "1odtlacqmaaab",
+      fileHash: "2nrwvnc0tmqsw",
       splices: {},
       captures: [],
     },
     () => ({
       kind: "{}",
-      loc: [9, 13, 18, 4],
+      loc: [9, 13, 29, 4],
       statements: [
         {
           kind: "const",
@@ -26,7 +26,7 @@ async function Checked() {
             kind: "id",
             loc: [10, 11, 10, 19],
             text: "positive",
-            bindingKey: "positive$1odtlacqmaaab$0",
+            bindingKey: "positive$2nrwvnc0tmqsw$0",
           },
           initializer: {
             kind: "binop",
@@ -46,25 +46,50 @@ async function Checked() {
         },
         {
           kind: "const",
-          loc: [11, 5, 11, 39],
+          loc: [11, 5, 11, 46],
           name: {
             kind: "id",
-            loc: [11, 11, 11, 16],
+            loc: [11, 11, 11, 18],
+            text: "largest",
+            bindingKey: "largest$2nrwvnc0tmqsw$1",
+          },
+          initializer: {
+            kind: "binop",
+            loc: [11, 21, 11, 45],
+            left: {
+              kind: "bltn",
+              loc: [11, 21, 11, 37],
+              name: "Number.MAX_VALUE",
+            },
+            operatorToken: ">",
+            right: {
+              kind: "number",
+              loc: [11, 40, 11, 45],
+              value: 1e308,
+            },
+          },
+        },
+        {
+          kind: "const",
+          loc: [12, 5, 12, 39],
+          name: {
+            kind: "id",
+            loc: [12, 11, 12, 16],
             text: "whole",
-            bindingKey: "whole$1odtlacqmaaab$1",
+            bindingKey: "whole$2nrwvnc0tmqsw$2",
           },
           initializer: {
             kind: "()",
-            loc: [11, 19, 11, 38],
+            loc: [12, 19, 12, 38],
             expression: {
               kind: "bltn",
-              loc: [11, 19, 11, 35],
+              loc: [12, 19, 12, 35],
               name: "Number.isInteger",
             },
             arguments: [
               {
                 kind: "number",
-                loc: [11, 36, 11, 37],
+                loc: [12, 36, 12, 37],
                 value: 2,
               },
             ],
@@ -72,25 +97,25 @@ async function Checked() {
         },
         {
           kind: "const",
-          loc: [12, 5, 12, 46],
+          loc: [13, 5, 13, 46],
           name: {
             kind: "id",
-            loc: [12, 11, 12, 21],
+            loc: [13, 11, 13, 21],
             text: "fractional",
-            bindingKey: "fractional$1odtlacqmaaab$2",
+            bindingKey: "fractional$2nrwvnc0tmqsw$3",
           },
           initializer: {
             kind: "()",
-            loc: [12, 24, 12, 45],
+            loc: [13, 24, 13, 45],
             expression: {
               kind: "bltn",
-              loc: [12, 24, 12, 40],
+              loc: [13, 24, 13, 40],
               name: "Number.isInteger",
             },
             arguments: [
               {
                 kind: "number",
-                loc: [12, 41, 12, 44],
+                loc: [13, 41, 13, 44],
                 value: 2.5,
               },
             ],
@@ -98,25 +123,25 @@ async function Checked() {
         },
         {
           kind: "const",
-          loc: [14, 5, 14, 42],
+          loc: [15, 5, 15, 42],
           name: {
             kind: "id",
-            loc: [14, 11, 14, 18],
+            loc: [15, 11, 15, 18],
             text: "written",
-            bindingKey: "written$1odtlacqmaaab$3",
+            bindingKey: "written$2nrwvnc0tmqsw$4",
           },
           initializer: {
             kind: "()",
-            loc: [14, 21, 14, 41],
+            loc: [15, 21, 15, 41],
             expression: {
               kind: "bltn",
-              loc: [14, 21, 14, 36],
+              loc: [15, 21, 15, 36],
               name: "Number.isFinite",
             },
             arguments: [
               {
                 kind: "string",
-                loc: [14, 37, 14, 40],
+                loc: [15, 37, 15, 40],
                 text: "2",
               },
             ],
@@ -124,84 +149,105 @@ async function Checked() {
         },
         {
           kind: "return",
-          loc: [15, 5, 17, 7],
+          loc: [16, 5, 28, 7],
           expression: {
             kind: "jsx",
-            loc: [16, 7, 16, 79],
+            loc: [17, 7, 27, 14],
             type: {
               kind: "string",
-              loc: [16, 8, 16, 12],
+              loc: [17, 8, 17, 12],
               text: "span",
             },
             attributes: [],
             children: [
               {
                 kind: "binop",
-                loc: [16, 14, 16, 71],
+                loc: [18, 10, 26, 18],
                 left: {
                   kind: "binop",
-                  loc: [16, 14, 16, 60],
+                  loc: [18, 10, 25, 14],
                   left: {
                     kind: "binop",
-                    loc: [16, 14, 16, 54],
+                    loc: [18, 10, 24, 19],
                     left: {
                       kind: "binop",
-                      loc: [16, 14, 16, 44],
+                      loc: [18, 10, 23, 14],
                       left: {
                         kind: "binop",
-                        loc: [16, 14, 16, 38],
+                        loc: [18, 10, 22, 18],
                         left: {
                           kind: "binop",
-                          loc: [16, 14, 16, 25],
+                          loc: [18, 10, 21, 14],
                           left: {
-                            kind: "id",
-                            loc: [16, 14, 16, 19],
-                            text: "whole",
-                            bindingKey: "whole$1odtlacqmaaab$1",
+                            kind: "binop",
+                            loc: [18, 10, 20, 21],
+                            left: {
+                              kind: "binop",
+                              loc: [18, 10, 19, 14],
+                              left: {
+                                kind: "id",
+                                loc: [18, 10, 18, 15],
+                                text: "whole",
+                                bindingKey: "whole$2nrwvnc0tmqsw$2",
+                              },
+                              operatorToken: "+",
+                              right: {
+                                kind: "string",
+                                loc: [19, 11, 19, 14],
+                                text: " ",
+                              },
+                            },
+                            operatorToken: "+",
+                            right: {
+                              kind: "id",
+                              loc: [20, 11, 20, 21],
+                              text: "fractional",
+                              bindingKey: "fractional$2nrwvnc0tmqsw$3",
+                            },
                           },
                           operatorToken: "+",
                           right: {
                             kind: "string",
-                            loc: [16, 22, 16, 25],
+                            loc: [21, 11, 21, 14],
                             text: " ",
                           },
                         },
                         operatorToken: "+",
                         right: {
                           kind: "id",
-                          loc: [16, 28, 16, 38],
-                          text: "fractional",
-                          bindingKey: "fractional$1odtlacqmaaab$2",
+                          loc: [22, 11, 22, 18],
+                          text: "written",
+                          bindingKey: "written$2nrwvnc0tmqsw$4",
                         },
                       },
                       operatorToken: "+",
                       right: {
                         kind: "string",
-                        loc: [16, 41, 16, 44],
+                        loc: [23, 11, 23, 14],
                         text: " ",
                       },
                     },
                     operatorToken: "+",
                     right: {
                       kind: "id",
-                      loc: [16, 47, 16, 54],
-                      text: "written",
-                      bindingKey: "written$1odtlacqmaaab$3",
+                      loc: [24, 11, 24, 19],
+                      text: "positive",
+                      bindingKey: "positive$2nrwvnc0tmqsw$0",
                     },
                   },
                   operatorToken: "+",
                   right: {
                     kind: "string",
-                    loc: [16, 57, 16, 60],
+                    loc: [25, 11, 25, 14],
                     text: " ",
                   },
                 },
                 operatorToken: "+",
                 right: {
                   kind: "id",
-                  loc: [16, 63, 16, 71],
-                  text: "positive",
-                  bindingKey: "positive$1odtlacqmaaab$0",
+                  loc: [26, 11, 26, 18],
+                  text: "largest",
+                  bindingKey: "largest$2nrwvnc0tmqsw$1",
                 },
               },
             ],

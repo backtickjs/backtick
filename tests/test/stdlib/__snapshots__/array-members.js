@@ -8,17 +8,17 @@ it("arrayMembers", async (t) => {
     t,
     "arrayMembers",
     cs.create(
-      [11, 5, 24, 7],
+      [11, 5, 25, 7],
       {
         version: "0.0.0",
         filePath: "stdlib/array-members.test.tsx",
-        fileHash: "1al17bnhsosx2",
+        fileHash: "139y0n5fpgs82",
         splices: {},
         captures: [],
       },
       () => ({
         kind: "{}",
-        loc: [11, 8, 24, 6],
+        loc: [11, 8, 25, 6],
         statements: [
           {
             kind: "const",
@@ -27,7 +27,7 @@ it("arrayMembers", async (t) => {
               kind: "id",
               loc: [12, 13, 12, 18],
               text: "coins",
-              bindingKey: "coins$1al17bnhsosx2$0",
+              bindingKey: "coins$139y0n5fpgs82$0",
             },
             initializer: {
               kind: "arr",
@@ -58,7 +58,7 @@ it("arrayMembers", async (t) => {
               kind: "id",
               loc: [13, 13, 13, 17],
               text: "four",
-              bindingKey: "four$1al17bnhsosx2$1",
+              bindingKey: "four$139y0n5fpgs82$1",
             },
             initializer: {
               kind: "number",
@@ -68,10 +68,10 @@ it("arrayMembers", async (t) => {
           },
           {
             kind: "return",
-            loc: [14, 7, 23, 9],
+            loc: [14, 7, 24, 9],
             expression: {
               kind: "obj",
-              loc: [14, 14, 23, 8],
+              loc: [14, 14, 24, 8],
               properties: [
                 {
                   kind: ":",
@@ -88,7 +88,7 @@ it("arrayMembers", async (t) => {
                       kind: "id",
                       loc: [15, 16, 15, 21],
                       text: "coins",
-                      bindingKey: "coins$1al17bnhsosx2$0",
+                      bindingKey: "coins$139y0n5fpgs82$0",
                     },
                     name: "length",
                   },
@@ -111,7 +111,7 @@ it("arrayMembers", async (t) => {
                         kind: "id",
                         loc: [16, 14, 16, 19],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "concat",
                     },
@@ -124,7 +124,7 @@ it("arrayMembers", async (t) => {
                             kind: "id",
                             loc: [16, 28, 16, 32],
                             text: "four",
-                            bindingKey: "four$1al17bnhsosx2$1",
+                            bindingKey: "four$139y0n5fpgs82$1",
                           },
                         ],
                       },
@@ -149,7 +149,7 @@ it("arrayMembers", async (t) => {
                         kind: "id",
                         loc: [17, 15, 17, 20],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "slice",
                     },
@@ -185,7 +185,7 @@ it("arrayMembers", async (t) => {
                         kind: "id",
                         loc: [18, 16, 18, 21],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "indexOf",
                     },
@@ -200,30 +200,83 @@ it("arrayMembers", async (t) => {
                 },
                 {
                   kind: ":",
-                  loc: [19, 9, 19, 31],
+                  loc: [19, 9, 19, 52],
                   name: {
                     kind: "string",
-                    loc: [19, 9, 19, 12],
+                    loc: [19, 9, 19, 18],
+                    text: "lastWhere",
+                  },
+                  initializer: {
+                    kind: "()",
+                    loc: [19, 20, 19, 52],
+                    expression: {
+                      kind: ".",
+                      loc: [19, 20, 19, 49],
+                      expression: {
+                        kind: "()",
+                        loc: [19, 20, 19, 37],
+                        expression: {
+                          kind: ".",
+                          loc: [19, 20, 19, 32],
+                          expression: {
+                            kind: "id",
+                            loc: [19, 20, 19, 25],
+                            text: "coins",
+                            bindingKey: "coins$139y0n5fpgs82$0",
+                          },
+                          name: "concat",
+                        },
+                        arguments: [
+                          {
+                            kind: "arr",
+                            loc: [19, 33, 19, 36],
+                            elements: [
+                              {
+                                kind: "number",
+                                loc: [19, 34, 19, 35],
+                                value: 2,
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      name: "lastIndexOf",
+                    },
+                    arguments: [
+                      {
+                        kind: "number",
+                        loc: [19, 50, 19, 51],
+                        value: 2,
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: ":",
+                  loc: [20, 9, 20, 31],
+                  name: {
+                    kind: "string",
+                    loc: [20, 9, 20, 12],
                     text: "has",
                   },
                   initializer: {
                     kind: "()",
-                    loc: [19, 14, 19, 31],
+                    loc: [20, 14, 20, 31],
                     expression: {
                       kind: ".",
-                      loc: [19, 14, 19, 28],
+                      loc: [20, 14, 20, 28],
                       expression: {
                         kind: "id",
-                        loc: [19, 14, 19, 19],
+                        loc: [20, 14, 20, 19],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "includes",
                     },
                     arguments: [
                       {
                         kind: "number",
-                        loc: [19, 29, 19, 30],
+                        loc: [20, 29, 20, 30],
                         value: 3,
                       },
                     ],
@@ -231,30 +284,30 @@ it("arrayMembers", async (t) => {
                 },
                 {
                   kind: ":",
-                  loc: [20, 9, 20, 30],
+                  loc: [21, 9, 21, 30],
                   name: {
                     kind: "string",
-                    loc: [20, 9, 20, 13],
+                    loc: [21, 9, 21, 13],
                     text: "text",
                   },
                   initializer: {
                     kind: "()",
-                    loc: [20, 15, 20, 30],
+                    loc: [21, 15, 21, 30],
                     expression: {
                       kind: ".",
-                      loc: [20, 15, 20, 25],
+                      loc: [21, 15, 21, 25],
                       expression: {
                         kind: "id",
-                        loc: [20, 15, 20, 20],
+                        loc: [21, 15, 21, 20],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "join",
                     },
                     arguments: [
                       {
                         kind: "string",
-                        loc: [20, 26, 20, 29],
+                        loc: [21, 26, 21, 29],
                         text: "-",
                       },
                     ],
@@ -262,55 +315,55 @@ it("arrayMembers", async (t) => {
                 },
                 {
                   kind: ":",
-                  loc: [21, 9, 21, 41],
+                  loc: [22, 9, 22, 41],
                   name: {
                     kind: "string",
-                    loc: [21, 9, 21, 16],
+                    loc: [22, 9, 22, 16],
                     text: "doubled",
                   },
                   initializer: {
                     kind: "()",
-                    loc: [21, 18, 21, 41],
+                    loc: [22, 18, 22, 41],
                     expression: {
                       kind: ".",
-                      loc: [21, 18, 21, 27],
+                      loc: [22, 18, 22, 27],
                       expression: {
                         kind: "id",
-                        loc: [21, 18, 21, 23],
+                        loc: [22, 18, 22, 23],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "map",
                     },
                     arguments: [
                       {
                         kind: "=>",
-                        loc: [21, 28, 21, 40],
+                        loc: [22, 28, 22, 40],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [21, 29, 21, 30],
+                            loc: [22, 29, 22, 30],
                             name: {
                               kind: "id",
-                              loc: [21, 29, 21, 30],
+                              loc: [22, 29, 22, 30],
                               text: "n",
-                              bindingKey: "n$1al17bnhsosx2$2",
+                              bindingKey: "n$139y0n5fpgs82$2",
                             },
                           },
                         ],
                         body: {
                           kind: "binop",
-                          loc: [21, 35, 21, 40],
+                          loc: [22, 35, 22, 40],
                           left: {
                             kind: "id",
-                            loc: [21, 35, 21, 36],
+                            loc: [22, 35, 22, 36],
                             text: "n",
-                            bindingKey: "n$1al17bnhsosx2$2",
+                            bindingKey: "n$139y0n5fpgs82$2",
                           },
                           operatorToken: "*",
                           right: {
                             kind: "number",
-                            loc: [21, 39, 21, 40],
+                            loc: [22, 39, 22, 40],
                             value: 2,
                           },
                         },
@@ -320,55 +373,55 @@ it("arrayMembers", async (t) => {
                 },
                 {
                   kind: ":",
-                  loc: [22, 9, 22, 42],
+                  loc: [23, 9, 23, 42],
                   name: {
                     kind: "string",
-                    loc: [22, 9, 22, 14],
+                    loc: [23, 9, 23, 14],
                     text: "small",
                   },
                   initializer: {
                     kind: "()",
-                    loc: [22, 16, 22, 42],
+                    loc: [23, 16, 23, 42],
                     expression: {
                       kind: ".",
-                      loc: [22, 16, 22, 28],
+                      loc: [23, 16, 23, 28],
                       expression: {
                         kind: "id",
-                        loc: [22, 16, 22, 21],
+                        loc: [23, 16, 23, 21],
                         text: "coins",
-                        bindingKey: "coins$1al17bnhsosx2$0",
+                        bindingKey: "coins$139y0n5fpgs82$0",
                       },
                       name: "filter",
                     },
                     arguments: [
                       {
                         kind: "=>",
-                        loc: [22, 29, 22, 41],
+                        loc: [23, 29, 23, 41],
                         parameters: [
                           {
                             kind: "param",
-                            loc: [22, 30, 22, 31],
+                            loc: [23, 30, 23, 31],
                             name: {
                               kind: "id",
-                              loc: [22, 30, 22, 31],
+                              loc: [23, 30, 23, 31],
                               text: "n",
-                              bindingKey: "n$1al17bnhsosx2$3",
+                              bindingKey: "n$139y0n5fpgs82$3",
                             },
                           },
                         ],
                         body: {
                           kind: "binop",
-                          loc: [22, 36, 22, 41],
+                          loc: [23, 36, 23, 41],
                           left: {
                             kind: "id",
-                            loc: [22, 36, 22, 37],
+                            loc: [23, 36, 23, 37],
                             text: "n",
-                            bindingKey: "n$1al17bnhsosx2$3",
+                            bindingKey: "n$139y0n5fpgs82$3",
                           },
                           operatorToken: "<",
                           right: {
                             kind: "number",
-                            loc: [22, 40, 22, 41],
+                            loc: [23, 40, 23, 41],
                             value: 3,
                           },
                         },

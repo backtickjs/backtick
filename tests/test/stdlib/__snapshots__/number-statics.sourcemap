@@ -12,6 +12,18 @@ EPSILON                                   → EPSILON
 );                                        → ;
 \n                                        → \n    
 const                                     → const 
+__cs_largest                              → largest
+ = cs.const(                              →  = 
+cs.receiver(                              → 
+Number                                    → Number
+)                                         → 
+.                                         → .
+MAX_VALUE                                 → MAX_VALUE
+ >                                        →  > 
+1e+308                                    → 1e308
+);                                        → ;
+\n                                        → \n    
+const                                     → const 
 __cs_whole                                → whole
  = cs.const(                              →  = 
 cs.receiver(                              → 
@@ -53,21 +65,25 @@ isFinite                                  → isFinite
 return cs.const(                          → return 
 <                                         → (\n      <
 span                                      → span
->{cs.lift(                                → >{
+>{cs.lift(                                → >\n        {
 __cs_whole                                → whole
- +                                        →  + 
+ +                                        →  +\n          
 " "                                       → " "
- +                                        →  + 
+ +                                        →  +\n          
 __cs_fractional                           → fractional
- +                                        →  + 
+ +                                        →  +\n          
 " "                                       → " "
- +                                        →  + 
+ +                                        →  +\n          
 __cs_written                              → written
- +                                        →  + 
+ +                                        →  +\n          
 " "                                       → " "
- +                                        →  + 
+ +                                        →  +\n          
 __cs_positive                             → positive
-)}</                                      → }</
+ +                                        →  +\n          
+" "                                       → " "
+ +                                        →  +\n          
+__cs_largest                              → largest
+)}</                                      → }\n      </
 span                                      → span
 >                                         → >\n    )
 );                                        → ;

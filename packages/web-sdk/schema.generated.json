@@ -15504,6 +15504,59 @@
         }
       }
     },
+    "array.lastIndexOf": {
+      "description": "Returns the index of the last occurrence of a specified value in an array, or -1 if it is not present.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The value to locate in the array.",
+            "type": "functionParameter",
+            "name": "searchElement",
+            "holds": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          },
+          {
+            "description": "The array index at which to begin searching backward. If fromIndex is omitted, the search starts at the last index in the array.",
+            "type": "functionParameter",
+            "name": "fromIndex",
+            "holds": {
+              "type": "number"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "number"
+        }
+      }
+    },
     "array.includes": {
       "description": "Determines whether an array includes a certain element, returning true or false as appropriate.",
       "type": "generic",
@@ -16943,6 +16996,24 @@
         }
       }
     },
+    "Array.isArray": {
+      "description": "Returns true if the value is an array.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value to test.",
+          "type": "functionParameter",
+          "name": "arg",
+          "holds": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
     "Array.of": {
       "description": "Returns a new array from a set of elements.",
       "type": "generic",
@@ -16987,6 +17058,10 @@
     },
     "Number.EPSILON": {
       "description": "The value of Number.EPSILON is the difference between 1 and the smallest value greater than 1 that is representable as a Number value, which is approximately: 2.2204460492503130808472633361816 x 10−16.",
+      "type": "number"
+    },
+    "Number.MAX_VALUE": {
+      "description": "The largest number that can be represented in JavaScript. Equal to approximately 1.79E+308.",
       "type": "number"
     },
     "Number.isFinite": {
@@ -17065,6 +17140,25 @@
       ],
       "returnType": {
         "type": "number"
+      }
+    },
+    "String.fromCharCode": {
+      "description": "Returns the String value whose elements are, in order, the UTF-16 code units given.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "rest",
+          "items": {
+            "type": "functionParameter",
+            "name": "codes",
+            "holds": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
       }
     },
     "String.fromCodePoint": {

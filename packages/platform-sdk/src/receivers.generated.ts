@@ -255,6 +255,15 @@ export interface Array<T> {
    */
   indexOf(searchElement: T, fromIndex?: number): number;
   /**
+   * Returns the index of the last occurrence of a specified value in an array,
+   * or -1 if it is not present.
+   *
+   * @param searchElement The value to locate in the array.
+   * @param fromIndex The array index at which to begin searching backward. If
+   * fromIndex is omitted, the search starts at the last index in the array.
+   */
+  lastIndexOf(searchElement: T, fromIndex?: number): number;
+  /**
    * Determines whether an array includes a certain element, returning true or
    * false as appropriate.
    *
@@ -666,6 +675,12 @@ export interface ArrayConstructor {
     mapfn: (v: T, k: number) => U,
   ): U[];
   /**
+   * Returns true if the value is an array.
+   *
+   * @param arg The value to test.
+   */
+  isArray(arg: ClientValue): boolean;
+  /**
    * Returns a new array from a set of elements.
    *
    * @param items A set of elements to include in the new array object.
@@ -680,6 +695,11 @@ export interface NumberConstructor {
    * approximately: 2.2204460492503130808472633361816 x 10−16.
    */
   readonly EPSILON: number;
+  /**
+   * The largest number that can be represented in JavaScript. Equal to
+   * approximately 1.79E+308.
+   */
+  readonly MAX_VALUE: number;
   /**
    * Returns true if passed value is finite. Unlike the global isFinite,
    * Number.isFinite doesn't forcibly convert the parameter to a number. Only
@@ -741,6 +761,11 @@ export interface ObjectConstructor {
 }
 
 export interface StringConstructor {
+  /**
+   * Returns the String value whose elements are, in order, the UTF-16 code
+   * units given.
+   */
+  fromCharCode(...codes: number[]): string;
   /**
    * Return the String value whose elements are, in order, the elements in the
    * List elements. If length is 0, the empty string is returned.

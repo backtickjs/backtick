@@ -8,12 +8,23 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Checked() {
   return cs`{
     const positive = Number.EPSILON > 0;
+    const largest = Number.MAX_VALUE > 1e308;
     const whole = Number.isInteger(2);
     const fractional = Number.isInteger(2.5);
     // Unconverted, so a string that reads as a number is still not one.
     const written = Number.isFinite("2");
     return (
-      <span>{whole + " " + fractional + " " + written + " " + positive}</span>
+      <span>
+        {whole +
+          " " +
+          fractional +
+          " " +
+          written +
+          " " +
+          positive +
+          " " +
+          largest}
+      </span>
     );
   }`;
 }

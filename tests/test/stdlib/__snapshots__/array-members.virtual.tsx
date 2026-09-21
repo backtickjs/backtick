@@ -11,7 +11,7 @@ it("arrayMembers", async (t) => {
     cs.lift((() => {
     const __cs_coins = cs.const([1, 2, 3]);
     const __cs_four = cs.const(4);
-    return cs.const({ count: cs.receiver(__cs_coins).length, all: cs.receiver(__cs_coins).concat([__cs_four]), part: cs.receiver(__cs_coins).slice(0, 2), where: cs.receiver(__cs_coins).indexOf(2), has: cs.receiver(__cs_coins).includes(3), text: cs.receiver(__cs_coins).join("-"), doubled: cs.receiver(__cs_coins).map(__cs_n => __cs_n * 2), small: cs.receiver(__cs_coins).filter(__cs_n => __cs_n < 3) });
+    return cs.const({ count: cs.receiver(__cs_coins).length, all: cs.receiver(__cs_coins).concat([__cs_four]), part: cs.receiver(__cs_coins).slice(0, 2), where: cs.receiver(__cs_coins).indexOf(2), lastWhere: cs.receiver(cs.receiver(__cs_coins).concat([2])).lastIndexOf(2), has: cs.receiver(__cs_coins).includes(3), text: cs.receiver(__cs_coins).join("-"), doubled: cs.receiver(__cs_coins).map(__cs_n => __cs_n * 2), small: cs.receiver(__cs_coins).filter(__cs_n => __cs_n < 3) });
 })()),
   );
 });

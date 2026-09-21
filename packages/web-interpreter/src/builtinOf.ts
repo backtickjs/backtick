@@ -60,6 +60,7 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     case "array.join":
     case "array.slice":
     case "array.indexOf":
+    case "array.lastIndexOf":
     case "array.includes":
     case "array.with":
     case "array.toSorted":
@@ -121,13 +122,16 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
     case "Math.trunc":
     case "Math.fround":
     case "Math.cbrt":
+    case "Array.isArray":
     case "Array.of":
     case "Number.EPSILON":
+    case "Number.MAX_VALUE":
     case "Number.isFinite":
     case "Number.isInteger":
     case "Object.entries":
     case "Object.fromEntries":
     case "Object.keys":
+    case "String.fromCharCode":
     case "String.fromCodePoint":
     case "Array.from":
     case "JSON.parse":

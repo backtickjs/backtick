@@ -1,29 +1,51 @@
 import { cs } from "@backtickjs/core";
-// `String` is reachable only as the schema fixes it: `fromCodePoint`, and
-// nothing else. `fromCharCode` predates it and `raw` takes a template.
-// @ts-expect-error: Property 'fromCharCode' does not exist on type 'StringConstructor'.
+// `String` is reachable only as the schema fixes it: `fromCharCode` and
+// `fromCodePoint`, and nothing else. `raw` takes a template, which a client
+// script can't hold.
+// @ts-expect-error: Property 'raw' does not exist on type 'StringConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.
 export const written = cs.create(
-  [6, 24, 6, 51],
+  [7, 24, 7, 54],
   {
     version: "0.0.0",
     filePath: "typecheck-errors/string-statics-omitted.test.tsx",
-    fileHash: "1eej1hy8ykrhd",
+    fileHash: "1y8lclmcnvsl5",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "()",
-    loc: [6, 27, 6, 50],
+    loc: [7, 27, 7, 53],
     expression: {
       kind: "bltn",
-      loc: [6, 27, 6, 46],
-      name: "String.fromCharCode",
+      loc: [7, 27, 7, 37],
+      name: "String.raw",
     },
     arguments: [
       {
-        kind: "number",
-        loc: [6, 47, 6, 49],
-        value: 72,
+        kind: "obj",
+        loc: [7, 38, 7, 52],
+        properties: [
+          {
+            kind: ":",
+            loc: [7, 40, 7, 50],
+            name: {
+              kind: "string",
+              loc: [7, 40, 7, 43],
+              text: "raw",
+            },
+            initializer: {
+              kind: "arr",
+              loc: [7, 45, 7, 50],
+              elements: [
+                {
+                  kind: "string",
+                  loc: [7, 46, 7, 49],
+                  text: "a",
+                },
+              ],
+            },
+          },
+        ],
       },
     ],
   }),

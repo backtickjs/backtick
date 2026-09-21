@@ -20,6 +20,18 @@
           ],
           [
             "const",
+            "largest",
+            [
+              ">",
+              [
+                "bltn",
+                "Number.MAX_VALUE"
+              ],
+              1e+308
+            ]
+          ],
+          [
+            "const",
             "whole",
             [
               "()",
@@ -79,28 +91,39 @@
                         [
                           "+",
                           [
-                            "id",
-                            "whole"
+                            "+",
+                            [
+                              "+",
+                              [
+                                "id",
+                                "whole"
+                              ],
+                              " "
+                            ],
+                            [
+                              "id",
+                              "fractional"
+                            ]
                           ],
                           " "
                         ],
                         [
                           "id",
-                          "fractional"
+                          "written"
                         ]
                       ],
                       " "
                     ],
                     [
                       "id",
-                      "written"
+                      "positive"
                     ]
                   ],
                   " "
                 ],
                 [
                   "id",
-                  "positive"
+                  "largest"
                 ]
               ]
             ]

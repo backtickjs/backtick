@@ -3,8 +3,14 @@ cs.receiver(       →
 String             → String
 )                  → 
 .                  → .
-fromCharCode       → fromCharCode
+raw                → raw
 (                  → (
-72                 → 72
+{                  → { 
+raw                → raw
+:                  → : 
+[                  → [
+"a"                → "a"
+]                  → ]
+ }                 →  }
 )                  → )
 ))                 → `

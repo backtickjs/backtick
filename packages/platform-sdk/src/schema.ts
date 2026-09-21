@@ -1134,6 +1134,30 @@ export const schema: Schema = {
           "Returns the index of the first occurrence of a value in an array, or -1 if it is not present.",
       },
     ),
+    "array.lastIndexOf": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter("searchElement", Type.Ref("T"), {
+            description: "The value to locate in the array.",
+          }),
+          Type.Optional(
+            Type.FunctionParameter("fromIndex", Type.Number(), {
+              description:
+                "The array index at which to begin searching backward. If fromIndex is omitted, the search starts at the last index in the array.",
+            }),
+          ),
+        ],
+        Type.Number(),
+      ),
+      {
+        description:
+          "Returns the index of the last occurrence of a specified value in an array, or -1 if it is not present.",
+      },
+    ),
     "array.includes": Type.Generic(
       [Type.GenericParameter("T")],
       Type.Function(
@@ -1885,6 +1909,15 @@ export const schema: Schema = {
           "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` — which this language has no value for.",
       },
     ),
+    "Array.isArray": Type.Function(
+      [
+        Type.FunctionParameter("arg", Type.Ref("ClientValue"), {
+          description: "The value to test.",
+        }),
+      ],
+      Type.Boolean(),
+      { description: "Returns true if the value is an array." },
+    ),
     "Array.of": Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Function(
@@ -1905,6 +1938,10 @@ export const schema: Schema = {
     "Number.EPSILON": Type.Number({
       description:
         "The value of Number.EPSILON is the difference between 1 and the smallest value greater than 1 that is representable as a Number value, which is approximately: 2.2204460492503130808472633361816 x 10−16.",
+    }),
+    "Number.MAX_VALUE": Type.Number({
+      description:
+        "The largest number that can be represented in JavaScript. Equal to approximately 1.79E+308.",
     }),
     "Number.isFinite": Type.Function(
       [
@@ -1953,6 +1990,14 @@ export const schema: Schema = {
       ],
       Type.Number(),
       { description: "Converts A string to an integer." },
+    ),
+    "String.fromCharCode": Type.Function(
+      [Type.Rest(Type.FunctionParameter("codes", Type.Number()))],
+      Type.String(),
+      {
+        description:
+          "Returns the String value whose elements are, in order, the UTF-16 code units given.",
+      },
     ),
     "String.fromCodePoint": Type.Function(
       [Type.Rest(Type.FunctionParameter("codePoints", Type.Number()))],

@@ -64,6 +64,26 @@ indexOf                 → indexOf
 2                       → 2
 )                       → )
 ,                       → ,\n        
+lastWhere               → lastWhere
+:                       → : 
+cs.receiver(            → 
+cs.receiver(            → 
+__cs_coins              → coins
+)                       → 
+.                       → .
+concat                  → concat
+(                       → (
+[                       → [
+2                       → 2
+]                       → ]
+)                       → )
+)                       → 
+.                       → .
+lastIndexOf             → lastIndexOf
+(                       → (
+2                       → 2
+)                       → )
+,                       → ,\n        
 has                     → has
 :                       → : 
 cs.receiver(            → 

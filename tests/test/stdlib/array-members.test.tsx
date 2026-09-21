@@ -16,6 +16,7 @@ it("arrayMembers", async (t) => {
         all: coins.concat([four]),
         part: coins.slice(0, 2),
         where: coins.indexOf(2),
+        lastWhere: coins.concat([2]).lastIndexOf(2),
         has: coins.includes(3),
         text: coins.join("-"),
         doubled: coins.map((n) => n * 2),
