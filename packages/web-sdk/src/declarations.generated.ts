@@ -66,6 +66,7 @@ export type {
   BundleSubtraction,
   BundleThrow,
   BundleTry,
+  BundleTypeOf,
   BundleUndefined,
   BundleWhile,
   ClientFunction,

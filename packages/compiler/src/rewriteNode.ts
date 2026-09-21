@@ -1662,6 +1662,21 @@ function rewriteNodeImpl(
     };
   }
 
+  // `typeof x`, kept as written in the virtual code so that TypeScript narrows
+  // by it, which is why its answers are JavaScript's own.
+  if (ts.isTypeOfExpression(node)) {
+    const operand = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createTypeOfExpression(
+        operand.virtual as ts.Expression,
+      ),
+      runtime: astNode(ts, "typeof", {
+        loc: loc(node),
+        operand: operand.runtime as ts.Expression,
+      }),
+    };
+  }
+
   if (ts.isPrefixUnaryExpression(node)) {
     const negation = node.operator === ts.SyntaxKind.MinusToken;
     if (node.operator !== ts.SyntaxKind.ExclamationToken && !negation) {

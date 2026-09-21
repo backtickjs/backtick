@@ -1,1 +1,1 @@
-3:19-3:27 error TS0: This syntax isn't supported in a `cs` client script.
+3:19-3:23 error TS0: This syntax isn't supported in a `cs` client script.

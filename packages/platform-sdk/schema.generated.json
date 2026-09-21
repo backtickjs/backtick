@@ -593,6 +593,10 @@
         },
         {
           "type": "ref",
+          "$ref": "BundleTypeOf"
+        },
+        {
+          "type": "ref",
           "$ref": "BundlePrefixIncrement"
         },
         {
@@ -1342,6 +1346,27 @@
           "holds": {
             "type": "string",
             "const": "-x"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "operand",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleTypeOf": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "typeof"
           }
         },
         {

@@ -595,6 +595,12 @@ export function compile(
       const operand = compile(instance, node[1]);
       return (scope) => -(operand(scope) as number);
     }
+    // JavaScript's own, which the wire format's table is: every value a script
+    // holds is one it names, so no answer falls outside the table.
+    case "typeof": {
+      const operand = compile(instance, node[1]);
+      return (scope) => typeof operand(scope);
+    }
     case "++x":
       return compileStep(node[1], 1, "prefix");
     case "--x":

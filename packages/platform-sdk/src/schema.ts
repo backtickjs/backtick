@@ -203,6 +203,7 @@ export const schema: Schema = {
       Type.Ref("BundleGreaterThanOrEqual"),
       Type.Ref("BundleLogicalNot"),
       Type.Ref("BundleNegation"),
+      Type.Ref("BundleTypeOf"),
       Type.Ref("BundlePrefixIncrement"),
       Type.Ref("BundlePrefixDecrement"),
       Type.Ref("BundlePostfixIncrement"),
@@ -343,6 +344,21 @@ export const schema: Schema = {
     }),
     BundleNegation: Type.Tuple({
       kind: Type.Literal("-x"),
+      operand: Type.Ref("BundleExpression"),
+    }),
+    // The name of the kind of value the operand holds, as JavaScript names it,
+    // since TypeScript narrows a script's types by those names:
+    //
+    //   undefined                     "undefined"
+    //   null                          "object"
+    //   a boolean                     "boolean"
+    //   a number                      "number"
+    //   a string                      "string"
+    //   an array, an object           "object"
+    //   anything a script can call    "function"
+    //   any other value a host hands  "object"
+    BundleTypeOf: Type.Tuple({
+      kind: Type.Literal("typeof"),
       operand: Type.Ref("BundleExpression"),
     }),
     // A variable stepped by one. A prefix step answers the value after the

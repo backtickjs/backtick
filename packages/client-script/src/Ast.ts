@@ -15,6 +15,7 @@ export type ClientScriptExpression =
   | ClientScriptBinaryExpression
   | ClientScriptPrefixUnaryExpression
   | ClientScriptPostfixUnaryExpression
+  | ClientScriptTypeOfExpression
   | ClientScriptTrueLiteral
   | ClientScriptFalseLiteral
   | ClientScriptCall
@@ -135,6 +136,13 @@ export interface ClientScriptPrefixUnaryExpression {
   readonly kind: "prefixop";
   readonly loc: SourceLocation;
   readonly operator: PrefixUnaryOperator;
+  readonly operand: ClientScriptExpression;
+}
+
+// `typeof x`: the name of the kind of value `x` holds, as JavaScript names it.
+export interface ClientScriptTypeOfExpression {
+  readonly kind: "typeof";
+  readonly loc: SourceLocation;
   readonly operand: ClientScriptExpression;
 }
 

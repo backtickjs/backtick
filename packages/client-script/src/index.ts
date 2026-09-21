@@ -67,6 +67,7 @@ export type {
   ClientScriptThrowStatement,
   ClientScriptTrueLiteral,
   ClientScriptTryStatement,
+  ClientScriptTypeOfExpression,
   ClientScriptUndefinedLiteral,
   ClientScriptWhileStatement,
 } from "./Ast.js";

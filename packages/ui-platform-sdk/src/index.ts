@@ -45,6 +45,7 @@ export type {
   BundlePostfixIncrement,
   BundlePrefixDecrement,
   BundlePrefixIncrement,
+  BundleTypeOf,
   BundleNullishCoalescing,
   BundleOptionalCall,
   BundleOptionalPropertyAccess,

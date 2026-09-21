@@ -1,0 +1,6 @@
+#f0 = () => {
+  const measure = (v) => typeof v === "string" ? v.length : v * 2;
+  return [measure("abc"), measure(4)];
+}
+
+root = #f0()

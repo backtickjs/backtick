@@ -232,6 +232,8 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         return node.operator === "!"
           ? ["!", e(node.operand)]
           : ["-x", e(node.operand)];
+      case "typeof":
+        return ["typeof", e(node.operand)];
       case "postfixop":
         return node.operator === "++"
           ? ["x++", stepTarget(node.operand)]
