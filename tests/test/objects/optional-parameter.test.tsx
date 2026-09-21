@@ -2,9 +2,9 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// `?` marks an optional parameter — sugar for `T | undefined`. A caller may
-// pass `undefined` where the argument is not supplied; `null` is a value of
-// its own and not accepted here.
+// `?` marks an optional parameter: a caller may omit it or pass `undefined`,
+// and either way it binds `undefined`. `null` is a value of its own and not
+// accepted here.
 const greet = cs`(name?: string) => {
   return name?.concat("!");
 }`;
@@ -24,8 +24,10 @@ it("optionalParameter", async (t) => {
     cs`({
       named: $greet("hi"),
       explicit: $greet(undefined),
+      omitted: $greet(),
       supplied: $callIfGiven($double),
       fallback: $callIfGiven(undefined),
+      omittedCallback: $callIfGiven(),
     })`,
   );
 });

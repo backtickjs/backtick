@@ -1,15 +1,15 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-// `?` marks an optional parameter — sugar for `T | undefined`. A caller may
-// pass `undefined` where the argument is not supplied; `null` is a value of
-// its own and not accepted here.
+// `?` marks an optional parameter: a caller may omit it or pass `undefined`,
+// and either way it binds `undefined`. `null` is a value of its own and not
+// accepted here.
 const greet = cs.create(
   [8, 15, 10, 3],
   {
     version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
-    fileHash: "9e5jt4ky6olv",
+    fileHash: "1i6s8vesd5nbi",
     splices: {},
     captures: [],
   },
@@ -24,7 +24,7 @@ const greet = cs.create(
           kind: "id",
           loc: [8, 19, 8, 23],
           text: "name",
-          bindingKey: "name$9e5jt4ky6olv$0",
+          bindingKey: "name$1i6s8vesd5nbi$0",
         },
       },
     ],
@@ -45,7 +45,7 @@ const greet = cs.create(
                 kind: "id",
                 loc: [9, 10, 9, 14],
                 text: "name",
-                bindingKey: "name$9e5jt4ky6olv$0",
+                bindingKey: "name$1i6s8vesd5nbi$0",
               },
               name: "concat",
             },
@@ -69,7 +69,7 @@ const double = cs.create(
   {
     version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
-    fileHash: "9e5jt4ky6olv",
+    fileHash: "1i6s8vesd5nbi",
     splices: {},
     captures: [],
   },
@@ -89,7 +89,7 @@ const callIfGiven = cs.create(
   {
     version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
-    fileHash: "9e5jt4ky6olv",
+    fileHash: "1i6s8vesd5nbi",
     splices: {},
     captures: [],
   },
@@ -104,7 +104,7 @@ const callIfGiven = cs.create(
           kind: "id",
           loc: [16, 25, 16, 27],
           text: "cb",
-          bindingKey: "cb$9e5jt4ky6olv$1",
+          bindingKey: "cb$1i6s8vesd5nbi$1",
         },
       },
     ],
@@ -125,7 +125,7 @@ const callIfGiven = cs.create(
                 kind: "id",
                 loc: [17, 10, 17, 12],
                 text: "cb",
-                bindingKey: "cb$9e5jt4ky6olv$1",
+                bindingKey: "cb$1i6s8vesd5nbi$1",
               },
               arguments: [],
             },
@@ -146,11 +146,11 @@ it("optionalParameter", async (t) => {
     t,
     "optionalParameter",
     cs.create(
-      [24, 5, 29, 8],
+      [24, 5, 31, 8],
       {
         version: "0.0.0",
         filePath: "objects/optional-parameter.test.tsx",
-        fileHash: "9e5jt4ky6olv",
+        fileHash: "1i6s8vesd5nbi",
         splices: {
           $greet: { value: greet, params: [] },
           $callIfGiven: { value: callIfGiven, params: [] },
@@ -160,7 +160,7 @@ it("optionalParameter", async (t) => {
       },
       () => ({
         kind: "obj",
-        loc: [24, 9, 29, 6],
+        loc: [24, 9, 31, 6],
         properties: [
           {
             kind: ":",
@@ -213,40 +213,34 @@ it("optionalParameter", async (t) => {
           },
           {
             kind: ":",
-            loc: [27, 7, 27, 38],
+            loc: [27, 7, 27, 24],
             name: {
               kind: "string",
-              loc: [27, 7, 27, 15],
-              text: "supplied",
+              loc: [27, 7, 27, 14],
+              text: "omitted",
             },
             initializer: {
               kind: "()",
-              loc: [27, 17, 27, 38],
+              loc: [27, 16, 27, 24],
               expression: {
                 kind: "splice",
-                loc: [27, 17, 27, 29],
-                key: "$callIfGiven",
+                loc: [27, 16, 27, 22],
+                key: "$greet",
               },
-              arguments: [
-                {
-                  kind: "splice",
-                  loc: [27, 30, 27, 37],
-                  key: "$double",
-                },
-              ],
+              arguments: [],
             },
           },
           {
             kind: ":",
-            loc: [28, 7, 28, 40],
+            loc: [28, 7, 28, 38],
             name: {
               kind: "string",
               loc: [28, 7, 28, 15],
-              text: "fallback",
+              text: "supplied",
             },
             initializer: {
               kind: "()",
-              loc: [28, 17, 28, 40],
+              loc: [28, 17, 28, 38],
               expression: {
                 kind: "splice",
                 loc: [28, 17, 28, 29],
@@ -254,10 +248,54 @@ it("optionalParameter", async (t) => {
               },
               arguments: [
                 {
-                  kind: "undefined",
-                  loc: [28, 30, 28, 39],
+                  kind: "splice",
+                  loc: [28, 30, 28, 37],
+                  key: "$double",
                 },
               ],
+            },
+          },
+          {
+            kind: ":",
+            loc: [29, 7, 29, 40],
+            name: {
+              kind: "string",
+              loc: [29, 7, 29, 15],
+              text: "fallback",
+            },
+            initializer: {
+              kind: "()",
+              loc: [29, 17, 29, 40],
+              expression: {
+                kind: "splice",
+                loc: [29, 17, 29, 29],
+                key: "$callIfGiven",
+              },
+              arguments: [
+                {
+                  kind: "undefined",
+                  loc: [29, 30, 29, 39],
+                },
+              ],
+            },
+          },
+          {
+            kind: ":",
+            loc: [30, 7, 30, 38],
+            name: {
+              kind: "string",
+              loc: [30, 7, 30, 22],
+              text: "omittedCallback",
+            },
+            initializer: {
+              kind: "()",
+              loc: [30, 24, 30, 38],
+              expression: {
+                kind: "splice",
+                loc: [30, 24, 30, 36],
+                key: "$callIfGiven",
+              },
+              arguments: [],
             },
           },
         ],

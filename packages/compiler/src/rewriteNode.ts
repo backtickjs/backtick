@@ -1434,21 +1434,16 @@ function rewriteNodeImpl(
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
-        // `?` marks an optional parameter — sugar for `T | undefined`, which
-        // is what a call site omitting it binds
+        // `?` marks an optional parameter: a call may omit it, and it binds
+        // `undefined`.
         const declaration = ts.factory.createParameterDeclaration(
           undefined,
           undefined,
           identifier,
-          undefined,
-          param.optional && param.type
-            ? ts.factory.createUnionTypeNode([
-                mapType(state, param.type),
-                ts.factory.createKeywordTypeNode(
-                  ts.SyntaxKind.UndefinedKeyword,
-                ),
-              ])
-            : mapType(state, param.type),
+          param.optional
+            ? ts.factory.createToken(ts.SyntaxKind.QuestionToken)
+            : undefined,
+          mapType(state, param.type),
           undefined,
         );
         state.mappings.set(declaration, param.source);
