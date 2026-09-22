@@ -186,6 +186,9 @@ importers:
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

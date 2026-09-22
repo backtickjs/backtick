@@ -488,109 +488,6 @@ export const schema: Schema = {
       name: Type.String(),
     }),
 
-    HttpConfig: Type.Object(
-      {
-        headers: Type.Optional(Type.Record(Type.String(), Type.String())),
-        params: Type.Optional(
-          Type.Record(Type.String(), Type.String(), {
-            description:
-              "Added to the URL's query, in order. Each key and value is percent-encoded as UTF-8, everything but `A-Z a-z 0-9 - _ . ! ~ * ' ( )`.",
-          }),
-        ),
-        timeout: Type.Optional(
-          Type.Number({
-            description:
-              "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits.",
-          }),
-        ),
-      },
-      { description: "How to make an `http` request." },
-    ),
-
-    HttpResponse: Type.Object(
-      {
-        status: Type.Number({ readOnly: true }),
-        data: Type.String({
-          readOnly: true,
-          description:
-            "The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte order mark is dropped. A script reads JSON with `JSON.parse`.",
-        }),
-      },
-      { description: "What answered, body and all." },
-    ),
-
-    Http: Type.Interface(
-      [Type.Ref("ClientHandle")],
-      {
-        get: Type.Function(
-          [
-            Type.FunctionParameter("url", Type.String()),
-            Type.FunctionParameter(
-              "onResponse",
-              Type.Function(
-                [Type.FunctionParameter("response", Type.Ref("HttpResponse"))],
-                Type.Void(),
-              ),
-            ),
-            Type.FunctionParameter(
-              "onFailure",
-              Type.Function(
-                [Type.FunctionParameter("message", Type.String())],
-                Type.Void(),
-              ),
-              {
-                description:
-                  "Called with why nothing answered, or with the string `onResponse` threw.",
-              },
-            ),
-            Type.Optional(
-              Type.FunctionParameter("config", Type.Ref("HttpConfig")),
-            ),
-          ],
-          Type.Void(),
-          { description: "Asks for what is at `url`." },
-        ),
-        post: Type.Function(
-          [
-            Type.FunctionParameter("url", Type.String()),
-            Type.FunctionParameter("data", Type.String(), {
-              description:
-                "Sent as it is, encoded as UTF-8. A script sends JSON with `JSON.stringify` and a `content-type` header.",
-            }),
-            Type.FunctionParameter(
-              "onResponse",
-              Type.Function(
-                [Type.FunctionParameter("response", Type.Ref("HttpResponse"))],
-                Type.Void(),
-              ),
-            ),
-            Type.FunctionParameter(
-              "onFailure",
-              Type.Function(
-                [Type.FunctionParameter("message", Type.String())],
-                Type.Void(),
-              ),
-              {
-                description:
-                  "Called with why nothing answered, or with the string `onResponse` threw.",
-              },
-            ),
-            Type.Optional(
-              Type.FunctionParameter("config", Type.Ref("HttpConfig")),
-            ),
-          ],
-          Type.Void(),
-          { description: "Sends `data` to `url`." },
-        ),
-      },
-      {
-        description:
-          "Requests the way axios makes them, answering through handlers because a script has no `await`.\n\n" +
-          "`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\n" +
-          "Redirects are followed, and the body is read before either handler is called.",
-      },
-    ),
-
     ArrayLike: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
@@ -2391,6 +2288,31 @@ export const schema: Schema = {
           "Return the String value whose elements are, in order, the elements in the List elements. If length is 0, the empty string is returned.",
       },
     ),
+    encodeURIComponent: Type.Function(
+      [
+        Type.FunctionParameter(
+          "uriComponent",
+          Type.Union([Type.String(), Type.Number(), Type.Boolean()]),
+          {
+            description:
+              "A number or a boolean is written as a string first, as `String` writes it.",
+          },
+        ),
+      ],
+      Type.String(),
+      {
+        description:
+          "Encodes a string as UTF-8 and percent-encodes every byte but `A-Z a-z 0-9 - _ . ! ~ * ' ( )`, so it can stand as one part of a URL — a query key or value, a path segment. Throws on a lone surrogate, which has no UTF-8.",
+      },
+    ),
+    decodeURIComponent: Type.Function(
+      [Type.FunctionParameter("encodedURIComponent", Type.String())],
+      Type.String(),
+      {
+        description:
+          "Reads back what `encodeURIComponent` wrote: every `%` and two hex digits is a byte, and the bytes are read as UTF-8. Anything else is left as it is, `+` included. Throws on a `%` without two hex digits after it, or on bytes that are not UTF-8.",
+      },
+    ),
     "Object.entries": Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Function(
@@ -2524,7 +2446,6 @@ export const schema: Schema = {
           "Created while a script draws, it lasts as long as that drawing.",
       },
     ),
-    http: Type.Ref("Http"),
     evaluate: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientUnknown"))],
       Type.Function(

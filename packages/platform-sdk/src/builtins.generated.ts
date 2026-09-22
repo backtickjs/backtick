@@ -5,7 +5,6 @@ import type { Client } from "./Client.js";
 import type {
   Bundle,
   ClientUnknown,
-  Http,
   Signal,
   SignalOptions,
   State,
@@ -40,8 +39,6 @@ export const state: Client<
 export const computed: Client<
   <T>(fn: () => T, options?: SignalOptions<T>) => Signal<T>
 > = createBuiltin("computed");
-
-export const http: Client<Http> = createBuiltin("http");
 
 /**
  * What a bundle holds: its `root` evaluated against its `functions`, here. A

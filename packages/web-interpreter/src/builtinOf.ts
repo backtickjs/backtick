@@ -1,14 +1,16 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
   Bundle,
-  Http,
-  HttpConfig,
-  HttpResponse,
   Signal,
   SignalOptions,
   State,
 } from "@backtickjs/platform-sdk";
-import type { Builtins, Window } from "@backtickjs/web-sdk";
+import type {
+  Builtins,
+  RequestInit,
+  Response,
+  Window,
+} from "@backtickjs/web-sdk";
 import {
   createMemo,
   createSignal,
@@ -163,6 +165,12 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
       return (globalThis as unknown as Namespaces)[prefix][member];
     }
 
+    case "encodeURIComponent":
+      return encodeURIComponent satisfies Builtins[typeof known];
+
+    case "decodeURIComponent":
+      return decodeURIComponent satisfies Builtins[typeof known];
+
     case "state":
       return ((initial, options) => {
         const [get, store] = createSignal(initial, equalsOf(options));
@@ -190,16 +198,6 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
 
     case "onCleanup":
       return onCleanup satisfies Builtins[typeof known];
-
-    case "http":
-      return {
-        get: ((url, onResponse, onFailure, config) => {
-          void send("GET", url, undefined, onResponse, onFailure, config);
-        }) satisfies Http["get"],
-        post: ((url, data, onResponse, onFailure, config) => {
-          void send("POST", url, data, onResponse, onFailure, config);
-        }) satisfies Http["post"],
-      } as unknown as Http;
 
     // A bundle drawn with this instance's renderer, and reaching the names this
     // one does, in a new instance of its own: the labels are per bundle, so its
@@ -249,6 +247,9 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
         postMessage: (message: unknown, targetOrigin: string) => {
           instance.window.postMessage(message, targetOrigin);
         },
+        fetch: ((url, onResponse, onFailure, init) => {
+          void send(instance, url, onResponse, onFailure, init);
+        }) satisfies Window["fetch"],
         // Read through, so what a script reads is where the document is now
         // rather than where it was when this was built.
         location: {
@@ -364,36 +365,25 @@ export const getters: { readonly [Name in keyof Builtins]?: true } = {
 
 // Inside the `try`, so a throw from `onResponse` reaches `onFailure`.
 async function send(
-  method: string,
+  instance: Instance,
   url: string,
-  body: string | undefined,
-  onResponse: (response: HttpResponse) => void,
+  onResponse: (response: Response) => void,
   onFailure: (message: string) => void,
-  { headers, params, timeout }: HttpConfig = {},
+  { method, headers, body, timeout }: RequestInit = {},
 ): Promise<void> {
   try {
     const signal = timeout === undefined ? null : AbortSignal.timeout(timeout);
-    const response = await fetch(url + query(url, params), {
+    const response = await instance.window.fetch(url, {
       method,
       headers,
       body,
       signal,
     });
-    onResponse({ status: response.status, data: await response.text() });
+    const text = await response.text();
+    onResponse({ status: response.status, text } as unknown as Response);
   } catch (error) {
     onFailure(error instanceof Error ? error.message : String(error));
   }
-}
-
-// `encodeURIComponent` and not `URLSearchParams`, which writes a space as `+`.
-function query(url: string, params: HttpConfig["params"]): string {
-  const pairs = Object.entries(params ?? {}).map(
-    ([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
-  );
-  if (pairs.length === 0) {
-    return "";
-  }
-  return (url.includes("?") ? "&" : "?") + pairs.join("&");
 }
 
 // Only when there is one: Solid merges the options over its own, so an

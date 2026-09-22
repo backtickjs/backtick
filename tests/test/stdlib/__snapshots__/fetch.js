@@ -1,56 +1,57 @@
 import { it } from "node:test";
-import { cs, http, state } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
+import { window } from "@backtickjs/web-sdk";
 import { snapshotCase } from "../snapshotCase.ts";
 // Every answer reaches `onResponse`, and a throw from it reaches `onFailure`:
 // a status is failed on by throwing, and so is a body that is not JSON.
 //
 // An arrow rather than a call, so what this pins is the bundling and the
 // typechecking: nothing is asked of a network to snapshot a value.
-it("httpRequests", async (t) => {
+it("fetchRequests", async (t) => {
   await snapshotCase(
     t,
-    "httpRequests",
+    "fetchRequests",
     cs.create(
-      [15, 5, 45, 7],
+      [16, 5, 49, 7],
       {
         version: "0.0.0",
-        filePath: "stdlib/http.test.tsx",
-        fileHash: "349zba2rn0t2v",
+        filePath: "stdlib/fetch.test.tsx",
+        fileHash: "2oxvexs6ogdoj",
         splices: {
           $state: { value: state, params: [] },
-          $http: { value: http, params: [] },
+          $window: { value: window, params: [] },
         },
         captures: [],
       },
       () => ({
         kind: "=>",
-        loc: [15, 8, 45, 6],
+        loc: [16, 8, 49, 6],
         parameters: [],
         body: {
           kind: "{}",
-          loc: [15, 14, 45, 6],
+          loc: [16, 14, 49, 6],
           statements: [
             {
               kind: "const",
-              loc: [16, 7, 16, 38],
+              loc: [17, 7, 17, 38],
               name: {
                 kind: "id",
-                loc: [16, 13, 16, 17],
+                loc: [17, 13, 17, 17],
                 text: "held",
-                bindingKey: "held$349zba2rn0t2v$0",
+                bindingKey: "held$2oxvexs6ogdoj$0",
               },
               initializer: {
                 kind: "()",
-                loc: [16, 20, 16, 37],
+                loc: [17, 20, 17, 37],
                 expression: {
                   kind: "splice",
-                  loc: [16, 20, 16, 26],
+                  loc: [17, 20, 17, 26],
                   key: "$state",
                 },
                 arguments: [
                   {
                     kind: "string",
-                    loc: [16, 27, 16, 36],
+                    loc: [17, 27, 17, 36],
                     text: "waiting",
                   },
                 ],
@@ -58,90 +59,90 @@ it("httpRequests", async (t) => {
             },
             {
               kind: "()",
-              loc: [18, 7, 30, 8],
+              loc: [19, 7, 31, 8],
               expression: {
                 kind: ".",
-                loc: [18, 7, 18, 16],
+                loc: [19, 7, 19, 20],
                 expression: {
                   kind: "splice",
-                  loc: [18, 7, 18, 12],
-                  key: "$http",
+                  loc: [19, 7, 19, 14],
+                  key: "$window",
                 },
-                name: "get",
+                name: "fetch",
               },
               arguments: [
                 {
                   kind: "string",
-                  loc: [19, 9, 19, 57],
+                  loc: [20, 9, 20, 57],
                   text: "/cases/built-ins/Math/trunc/Math.trunc_Success",
                 },
                 {
                   kind: "=>",
-                  loc: [20, 9, 25, 10],
+                  loc: [21, 9, 26, 10],
                   parameters: [
                     {
                       kind: "param",
-                      loc: [20, 10, 20, 32],
+                      loc: [21, 10, 21, 28],
                       name: {
                         kind: "id",
-                        loc: [20, 10, 20, 18],
+                        loc: [21, 10, 21, 18],
                         text: "response",
-                        bindingKey: "response$349zba2rn0t2v$1",
+                        bindingKey: "response$2oxvexs6ogdoj$1",
                       },
                     },
                   ],
                   body: {
                     kind: "{}",
-                    loc: [20, 37, 25, 10],
+                    loc: [21, 33, 26, 10],
                     statements: [
                       {
                         kind: "if",
-                        loc: [21, 11, 23, 12],
+                        loc: [22, 11, 24, 12],
                         expression: {
                           kind: "binop",
-                          loc: [21, 15, 21, 38],
+                          loc: [22, 15, 22, 38],
                           left: {
                             kind: ".",
-                            loc: [21, 15, 21, 30],
+                            loc: [22, 15, 22, 30],
                             expression: {
                               kind: "id",
-                              loc: [21, 15, 21, 23],
+                              loc: [22, 15, 22, 23],
                               text: "response",
-                              bindingKey: "response$349zba2rn0t2v$1",
+                              bindingKey: "response$2oxvexs6ogdoj$1",
                             },
                             name: "status",
                           },
                           operatorToken: "!==",
                           right: {
                             kind: "number",
-                            loc: [21, 35, 21, 38],
+                            loc: [22, 35, 22, 38],
                             value: 200,
                           },
                         },
                         thenStatement: {
                           kind: "{}",
-                          loc: [21, 40, 23, 12],
+                          loc: [22, 40, 24, 12],
                           statements: [
                             {
                               kind: "throw",
-                              loc: [22, 13, 22, 49],
+                              loc: [23, 13, 23, 49],
                               expression: {
                                 kind: "binop",
-                                loc: [22, 19, 22, 48],
+                                loc: [23, 19, 23, 48],
                                 left: {
                                   kind: "string",
-                                  loc: [22, 19, 22, 30],
+                                  loc: [23, 19, 23, 30],
                                   text: "answered ",
                                 },
                                 operatorToken: "+",
                                 right: {
                                   kind: ".",
-                                  loc: [22, 33, 22, 48],
+                                  loc: [23, 33, 23, 48],
                                   expression: {
                                     kind: "id",
-                                    loc: [22, 33, 22, 41],
+                                    loc: [23, 33, 23, 41],
                                     text: "response",
-                                    bindingKey: "response$349zba2rn0t2v$1",
+                                    bindingKey: "response$2oxvexs6ogdoj$1",
                                   },
                                   name: "status",
                                 },
@@ -153,61 +154,61 @@ it("httpRequests", async (t) => {
                       },
                       {
                         kind: "()",
-                        loc: [24, 11, 24, 76],
+                        loc: [25, 11, 25, 76],
                         expression: {
                           kind: ".",
-                          loc: [24, 11, 24, 19],
+                          loc: [25, 11, 25, 19],
                           expression: {
                             kind: "id",
-                            loc: [24, 11, 24, 15],
+                            loc: [25, 11, 25, 15],
                             text: "held",
-                            bindingKey: "held$349zba2rn0t2v$0",
+                            bindingKey: "held$2oxvexs6ogdoj$0",
                           },
                           name: "set",
                         },
                         arguments: [
                           {
                             kind: "?:",
-                            loc: [24, 20, 24, 75],
+                            loc: [25, 20, 25, 75],
                             condition: {
                               kind: "binop",
-                              loc: [24, 20, 24, 54],
+                              loc: [25, 20, 25, 54],
                               left: {
                                 kind: "()",
-                                loc: [24, 20, 24, 45],
+                                loc: [25, 20, 25, 45],
                                 expression: {
                                   kind: "bltn",
-                                  loc: [24, 20, 24, 30],
+                                  loc: [25, 20, 25, 30],
                                   name: "JSON.parse",
                                 },
                                 arguments: [
                                   {
                                     kind: ".",
-                                    loc: [24, 31, 24, 44],
+                                    loc: [25, 31, 25, 44],
                                     expression: {
                                       kind: "id",
-                                      loc: [24, 31, 24, 39],
+                                      loc: [25, 31, 25, 39],
                                       text: "response",
-                                      bindingKey: "response$349zba2rn0t2v$1",
+                                      bindingKey: "response$2oxvexs6ogdoj$1",
                                     },
-                                    name: "data",
+                                    name: "text",
                                   },
                                 ],
                               },
                               operatorToken: "===",
                               right: {
                                 kind: "null",
-                                loc: [24, 50, 24, 54],
+                                loc: [25, 50, 25, 54],
                               },
                             },
                             whenTrue: {
                               kind: "string",
-                              loc: [24, 57, 24, 63],
+                              loc: [25, 57, 25, 63],
                               text: "null",
                             },
                             whenFalse: {
                               kind: "string",
-                              loc: [24, 66, 24, 75],
+                              loc: [25, 66, 25, 75],
                               text: "a value",
                             },
                           },
@@ -218,52 +219,52 @@ it("httpRequests", async (t) => {
                 },
                 {
                   kind: "=>",
-                  loc: [26, 9, 28, 10],
+                  loc: [27, 9, 29, 10],
                   parameters: [
                     {
                       kind: "param",
-                      loc: [26, 10, 26, 25],
+                      loc: [27, 10, 27, 25],
                       name: {
                         kind: "id",
-                        loc: [26, 10, 26, 17],
+                        loc: [27, 10, 27, 17],
                         text: "message",
-                        bindingKey: "message$349zba2rn0t2v$2",
+                        bindingKey: "message$2oxvexs6ogdoj$2",
                       },
                     },
                   ],
                   body: {
                     kind: "{}",
-                    loc: [26, 30, 28, 10],
+                    loc: [27, 30, 29, 10],
                     statements: [
                       {
                         kind: "()",
-                        loc: [27, 11, 27, 42],
+                        loc: [28, 11, 28, 42],
                         expression: {
                           kind: ".",
-                          loc: [27, 11, 27, 19],
+                          loc: [28, 11, 28, 19],
                           expression: {
                             kind: "id",
-                            loc: [27, 11, 27, 15],
+                            loc: [28, 11, 28, 15],
                             text: "held",
-                            bindingKey: "held$349zba2rn0t2v$0",
+                            bindingKey: "held$2oxvexs6ogdoj$0",
                           },
                           name: "set",
                         },
                         arguments: [
                           {
                             kind: "binop",
-                            loc: [27, 20, 27, 41],
+                            loc: [28, 20, 28, 41],
                             left: {
                               kind: "string",
-                              loc: [27, 20, 27, 31],
+                              loc: [28, 20, 28, 31],
                               text: "failed \u2014 ",
                             },
                             operatorToken: "+",
                             right: {
                               kind: "id",
-                              loc: [27, 34, 27, 41],
+                              loc: [28, 34, 28, 41],
                               text: "message",
-                              bindingKey: "message$349zba2rn0t2v$2",
+                              bindingKey: "message$2oxvexs6ogdoj$2",
                             },
                           },
                         ],
@@ -273,19 +274,19 @@ it("httpRequests", async (t) => {
                 },
                 {
                   kind: "obj",
-                  loc: [29, 9, 29, 26],
+                  loc: [30, 9, 30, 26],
                   properties: [
                     {
                       kind: ":",
-                      loc: [29, 11, 29, 24],
+                      loc: [30, 11, 30, 24],
                       name: {
                         kind: "string",
-                        loc: [29, 11, 29, 18],
+                        loc: [30, 11, 30, 18],
                         text: "timeout",
                       },
                       initializer: {
                         kind: "number",
-                        loc: [29, 20, 29, 24],
+                        loc: [30, 20, 30, 24],
                         value: 3000,
                       },
                     },
@@ -295,66 +296,22 @@ it("httpRequests", async (t) => {
             },
             {
               kind: "()",
-              loc: [32, 7, 42, 8],
+              loc: [33, 7, 46, 8],
               expression: {
                 kind: ".",
-                loc: [32, 7, 32, 17],
+                loc: [33, 7, 33, 20],
                 expression: {
                   kind: "splice",
-                  loc: [32, 7, 32, 12],
-                  key: "$http",
+                  loc: [33, 7, 33, 14],
+                  key: "$window",
                 },
-                name: "post",
+                name: "fetch",
               },
               arguments: [
                 {
                   kind: "string",
-                  loc: [33, 9, 33, 17],
+                  loc: [34, 9, 34, 17],
                   text: "/cases",
-                },
-                {
-                  kind: "()",
-                  loc: [34, 9, 34, 61],
-                  expression: {
-                    kind: "bltn",
-                    loc: [34, 9, 34, 23],
-                    name: "JSON.stringify",
-                  },
-                  arguments: [
-                    {
-                      kind: "obj",
-                      loc: [34, 24, 34, 60],
-                      properties: [
-                        {
-                          kind: ":",
-                          loc: [34, 26, 34, 44],
-                          name: {
-                            kind: "string",
-                            loc: [34, 26, 34, 30],
-                            text: "name",
-                          },
-                          initializer: {
-                            kind: "string",
-                            loc: [34, 32, 34, 44],
-                            text: "Math.trunc",
-                          },
-                        },
-                        {
-                          kind: ":",
-                          loc: [34, 46, 34, 58],
-                          name: {
-                            kind: "string",
-                            loc: [34, 46, 34, 52],
-                            text: "passed",
-                          },
-                          initializer: {
-                            kind: "true",
-                            loc: [34, 54, 34, 58],
-                          },
-                        },
-                      ],
-                    },
-                  ],
                 },
                 {
                   kind: "=>",
@@ -362,18 +319,18 @@ it("httpRequests", async (t) => {
                   parameters: [
                     {
                       kind: "param",
-                      loc: [35, 10, 35, 32],
+                      loc: [35, 10, 35, 28],
                       name: {
                         kind: "id",
                         loc: [35, 10, 35, 18],
                         text: "response",
-                        bindingKey: "response$349zba2rn0t2v$3",
+                        bindingKey: "response$2oxvexs6ogdoj$3",
                       },
                     },
                   ],
                   body: {
                     kind: "{}",
-                    loc: [35, 37, 37, 10],
+                    loc: [35, 33, 37, 10],
                     statements: [
                       {
                         kind: "()",
@@ -385,7 +342,7 @@ it("httpRequests", async (t) => {
                             kind: "id",
                             loc: [36, 11, 36, 15],
                             text: "held",
-                            bindingKey: "held$349zba2rn0t2v$0",
+                            bindingKey: "held$2oxvexs6ogdoj$0",
                           },
                           name: "set",
                         },
@@ -397,9 +354,9 @@ it("httpRequests", async (t) => {
                               kind: "id",
                               loc: [36, 20, 36, 28],
                               text: "response",
-                              bindingKey: "response$349zba2rn0t2v$3",
+                              bindingKey: "response$2oxvexs6ogdoj$3",
                             },
-                            name: "data",
+                            name: "text",
                           },
                         ],
                       },
@@ -417,7 +374,7 @@ it("httpRequests", async (t) => {
                         kind: "id",
                         loc: [38, 10, 38, 17],
                         text: "message",
-                        bindingKey: "message$349zba2rn0t2v$4",
+                        bindingKey: "message$2oxvexs6ogdoj$4",
                       },
                     },
                   ],
@@ -435,7 +392,7 @@ it("httpRequests", async (t) => {
                             kind: "id",
                             loc: [39, 11, 39, 15],
                             text: "held",
-                            bindingKey: "held$349zba2rn0t2v$0",
+                            bindingKey: "held$2oxvexs6ogdoj$0",
                           },
                           name: "set",
                         },
@@ -444,7 +401,7 @@ it("httpRequests", async (t) => {
                             kind: "id",
                             loc: [39, 20, 39, 27],
                             text: "message",
-                            bindingKey: "message$349zba2rn0t2v$4",
+                            bindingKey: "message$2oxvexs6ogdoj$4",
                           },
                         ],
                       },
@@ -453,33 +410,100 @@ it("httpRequests", async (t) => {
                 },
                 {
                   kind: "obj",
-                  loc: [41, 9, 41, 60],
+                  loc: [41, 9, 45, 10],
                   properties: [
                     {
                       kind: ":",
-                      loc: [41, 11, 41, 58],
+                      loc: [42, 11, 42, 25],
                       name: {
                         kind: "string",
-                        loc: [41, 11, 41, 18],
+                        loc: [42, 11, 42, 17],
+                        text: "method",
+                      },
+                      initializer: {
+                        kind: "string",
+                        loc: [42, 19, 42, 25],
+                        text: "POST",
+                      },
+                    },
+                    {
+                      kind: ":",
+                      loc: [43, 11, 43, 58],
+                      name: {
+                        kind: "string",
+                        loc: [43, 11, 43, 18],
                         text: "headers",
                       },
                       initializer: {
                         kind: "obj",
-                        loc: [41, 20, 41, 58],
+                        loc: [43, 20, 43, 58],
                         properties: [
                           {
                             kind: ":",
-                            loc: [41, 22, 41, 56],
+                            loc: [43, 22, 43, 56],
                             name: {
                               kind: "string",
-                              loc: [41, 22, 41, 36],
+                              loc: [43, 22, 43, 36],
                               text: "content-type",
                             },
                             initializer: {
                               kind: "string",
-                              loc: [41, 38, 41, 56],
+                              loc: [43, 38, 43, 56],
                               text: "application/json",
                             },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      kind: ":",
+                      loc: [44, 11, 44, 69],
+                      name: {
+                        kind: "string",
+                        loc: [44, 11, 44, 15],
+                        text: "body",
+                      },
+                      initializer: {
+                        kind: "()",
+                        loc: [44, 17, 44, 69],
+                        expression: {
+                          kind: "bltn",
+                          loc: [44, 17, 44, 31],
+                          name: "JSON.stringify",
+                        },
+                        arguments: [
+                          {
+                            kind: "obj",
+                            loc: [44, 32, 44, 68],
+                            properties: [
+                              {
+                                kind: ":",
+                                loc: [44, 34, 44, 52],
+                                name: {
+                                  kind: "string",
+                                  loc: [44, 34, 44, 38],
+                                  text: "name",
+                                },
+                                initializer: {
+                                  kind: "string",
+                                  loc: [44, 40, 44, 52],
+                                  text: "Math.trunc",
+                                },
+                              },
+                              {
+                                kind: ":",
+                                loc: [44, 54, 44, 66],
+                                name: {
+                                  kind: "string",
+                                  loc: [44, 54, 44, 60],
+                                  text: "passed",
+                                },
+                                initializer: {
+                                  kind: "true",
+                                  loc: [44, 62, 44, 66],
+                                },
+                              },
+                            ],
                           },
                         ],
                       },
@@ -490,18 +514,18 @@ it("httpRequests", async (t) => {
             },
             {
               kind: "return",
-              loc: [44, 7, 44, 25],
+              loc: [48, 7, 48, 25],
               expression: {
                 kind: "()",
-                loc: [44, 14, 44, 24],
+                loc: [48, 14, 48, 24],
                 expression: {
                   kind: ".",
-                  loc: [44, 14, 44, 22],
+                  loc: [48, 14, 48, 22],
                   expression: {
                     kind: "id",
-                    loc: [44, 14, 44, 18],
+                    loc: [48, 14, 48, 18],
                     text: "held",
-                    bindingKey: "held$349zba2rn0t2v$0",
+                    bindingKey: "held$2oxvexs6ogdoj$0",
                   },
                   name: "get",
                 },

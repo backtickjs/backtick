@@ -19,6 +19,7 @@
     "@backtickjs/core": "workspace:*",
     "@backtickjs/ui-platform-sdk": "workspace:*",
     "@backtickjs/web-page": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

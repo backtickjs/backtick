@@ -1,5 +1,6 @@
-import { cs, evaluate, For, http, onMount, state } from "@backtickjs/core";
+import { cs, evaluate, For, onMount, state } from "@backtickjs/core";
 import type { Bundle, ClientValue, State } from "@backtickjs/core";
+import { window } from "@backtickjs/web-sdk";
 import { shown, type Verdict } from "./Case.js";
 
 // A group as the page holds it: nothing, then its verdicts or why there are none.
@@ -17,8 +18,8 @@ type Skip = { key: string; reason: string; count: number };
 // test fetches each one's bundle from `base`, runs it and judges it, so what
 // this draws is that client's answer — group by group, as each arrives.
 //
-// Drawn with text, `<>` and `<For>` alone, and fetched with `http` and `vm`,
-// which are the language's — so any client that draws text draws this.
+// Drawn with text, `<>` and `<For>` alone, which are the language's, and
+// fetched with the web's `window.fetch` — so any web client draws this.
 export async function Report({
   groups,
   skips,
@@ -50,14 +51,14 @@ export async function Report({
         }
         cursor.set(at + 1);
         const row = rows[at];
-        $http.get(
+        $window.fetch(
           $base + "/group/" + row.name,
           (response) => {
             if (response.status !== 200) {
               row.problem.set("answered " + response.status);
             } else {
               try {
-                const cases = JSON.parse(response.data) as readonly {
+                const cases = JSON.parse(response.text) as readonly {
                   name: string;
                   bundle: Bundle<Verdict>;
                 }[];

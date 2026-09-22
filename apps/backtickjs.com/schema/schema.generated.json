@@ -2081,201 +2081,6 @@
         }
       ]
     },
-    "HttpConfig": {
-      "description": "How to make an `http` request.",
-      "type": "object",
-      "properties": {
-        "headers": {
-          "type": "record",
-          "keys": {
-            "type": "string"
-          },
-          "values": {
-            "type": "string"
-          }
-        },
-        "params": {
-          "description": "Added to the URL's query, in order. Each key and value is percent-encoded as UTF-8, everything but `A-Z a-z 0-9 - _ . ! ~ * ' ( )`.",
-          "type": "record",
-          "keys": {
-            "type": "string"
-          },
-          "values": {
-            "type": "string"
-          }
-        },
-        "timeout": {
-          "description": "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits.",
-          "type": "number"
-        }
-      },
-      "required": []
-    },
-    "HttpResponse": {
-      "description": "What answered, body and all.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "readOnly": true,
-          "type": "number"
-        },
-        "data": {
-          "readOnly": true,
-          "description": "The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte order mark is dropped. A script reads JSON with `JSON.parse`.",
-          "type": "string"
-        }
-      },
-      "required": ["status", "data"]
-    },
-    "Http": {
-      "description": "Requests the way axios makes them, answering through handlers because a script has no `await`.\n\n`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\nRedirects are followed, and the body is read before either handler is called.",
-      "type": "interface",
-      "extends": [
-        {
-          "type": "ref",
-          "$ref": "ClientHandle"
-        }
-      ],
-      "properties": {
-        "get": {
-          "description": "Asks for what is at `url`.",
-          "type": "function",
-          "parameters": [
-            {
-              "type": "functionParameter",
-              "name": "url",
-              "holds": {
-                "type": "string"
-              }
-            },
-            {
-              "type": "functionParameter",
-              "name": "onResponse",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "response",
-                    "holds": {
-                      "type": "ref",
-                      "$ref": "HttpResponse"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            },
-            {
-              "description": "Called with why nothing answered, or with the string `onResponse` threw.",
-              "type": "functionParameter",
-              "name": "onFailure",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "message",
-                    "holds": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            },
-            {
-              "type": "functionParameter",
-              "name": "config",
-              "holds": {
-                "type": "ref",
-                "$ref": "HttpConfig"
-              }
-            }
-          ],
-          "returnType": {
-            "type": "void"
-          }
-        },
-        "post": {
-          "description": "Sends `data` to `url`.",
-          "type": "function",
-          "parameters": [
-            {
-              "type": "functionParameter",
-              "name": "url",
-              "holds": {
-                "type": "string"
-              }
-            },
-            {
-              "description": "Sent as it is, encoded as UTF-8. A script sends JSON with `JSON.stringify` and a `content-type` header.",
-              "type": "functionParameter",
-              "name": "data",
-              "holds": {
-                "type": "string"
-              }
-            },
-            {
-              "type": "functionParameter",
-              "name": "onResponse",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "response",
-                    "holds": {
-                      "type": "ref",
-                      "$ref": "HttpResponse"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            },
-            {
-              "description": "Called with why nothing answered, or with the string `onResponse` threw.",
-              "type": "functionParameter",
-              "name": "onFailure",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "message",
-                    "holds": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            },
-            {
-              "type": "functionParameter",
-              "name": "config",
-              "holds": {
-                "type": "ref",
-                "$ref": "HttpConfig"
-              }
-            }
-          ],
-          "returnType": {
-            "type": "void"
-          }
-        }
-      },
-      "required": ["get", "post"]
-    },
     "ArrayLike": {
       "type": "generic",
       "parameters": [
@@ -2469,6 +2274,70 @@
           "description": "Where the document came from, and how to go somewhere else.",
           "type": "ref",
           "$ref": "Location"
+        },
+        "fetch": {
+          "description": "Asks for what is at `url`, answering through handlers because a script has no `await`.\n\n`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\nRedirects are followed, and the body is read before either handler is called.",
+          "type": "function",
+          "parameters": [
+            {
+              "type": "functionParameter",
+              "name": "url",
+              "holds": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "onResponse",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "response",
+                    "holds": {
+                      "type": "ref",
+                      "$ref": "Response"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "description": "Called with why nothing answered, or with the string `onResponse` threw.",
+              "type": "functionParameter",
+              "name": "onFailure",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "message",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "init",
+              "holds": {
+                "type": "ref",
+                "$ref": "RequestInit"
+              }
+            }
+          ],
+          "returnType": {
+            "type": "void"
+          }
         },
         "setTimeout": {
           "description": "Runs something once, later, and answers with a number to cancel it by.\n\nNothing cancels it for you. A timer outlives the drawing that made one, so a script that may go away first keeps its id and clears it.",
@@ -2753,6 +2622,7 @@
         "performance",
         "console",
         "location",
+        "fetch",
         "setTimeout",
         "clearTimeout",
         "setInterval",
@@ -4377,6 +4247,56 @@
         "replace",
         "reload"
       ]
+    },
+    "RequestInit": {
+      "description": "How to make a `fetch` request.",
+      "type": "object",
+      "properties": {
+        "method": {
+          "description": "Named as HTTP names it. Where omitted, `GET`.",
+          "type": "string"
+        },
+        "headers": {
+          "type": "record",
+          "keys": {
+            "type": "string"
+          },
+          "values": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "description": "Sent as it is, encoded as UTF-8. A script sends JSON with `JSON.stringify` and a `content-type` header.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits. The DOM's is a `signal`, which a script has no way to make.",
+          "type": "number"
+        }
+      },
+      "required": []
+    },
+    "Response": {
+      "description": "What answered, body and all.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "number"
+        },
+        "text": {
+          "readOnly": true,
+          "description": "The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte order mark is dropped. A script reads JSON with `JSON.parse`. The DOM's is a method answering a promise; here it is read before either handler is called.",
+          "type": "string"
+        }
+      },
+      "required": ["status", "text"]
     },
     "SVGElement": {
       "type": "interface",
@@ -18233,6 +18153,50 @@
         "type": "string"
       }
     },
+    "encodeURIComponent": {
+      "description": "Encodes a string as UTF-8 and percent-encodes every byte but `A-Z a-z 0-9 - _ . ! ~ * ' ( )`, so it can stand as one part of a URL — a query key or value, a path segment. Throws on a lone surrogate, which has no UTF-8.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A number or a boolean is written as a string first, as `String` writes it.",
+          "type": "functionParameter",
+          "name": "uriComponent",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "decodeURIComponent": {
+      "description": "Reads back what `encodeURIComponent` wrote: every `%` and two hex digits is a byte, and the bytes are read as UTF-8. Anything else is left as it is, `+` included. Throws on a `%` without two hex digits after it, or on bytes that are not UTF-8.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "functionParameter",
+          "name": "encodedURIComponent",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
     "Object.entries": {
       "description": "Returns an array of an object's members, each as a key and its value, in the order `JSON.stringify` writes them.",
       "type": "generic",
@@ -18587,10 +18551,6 @@
           ]
         }
       }
-    },
-    "http": {
-      "type": "ref",
-      "$ref": "Http"
     },
     "evaluate": {
       "description": "What a bundle holds: its `root` evaluated against its `functions`, here. A bundle is data — a program a client runs — and running one reads no JavaScript.\n\nEach call evaluates it again, so two calls are two drawings with cells of their own. Evaluated untracked, as a component is run: what the bundle reads while its root is evaluated is read once, so a write to it evaluates nothing again. A caller that reads a cell to choose the bundle still follows that cell.",

@@ -80,9 +80,6 @@ export type {
   ClientValue,
   ForProps,
   FragmentProps,
-  Http,
-  HttpConfig,
-  HttpResponse,
   Signal,
   SignalOptions,
   State,
@@ -115,6 +112,27 @@ export interface Window extends ClientHandle {
    * Where the document came from, and how to go somewhere else.
    */
   readonly location: Location;
+  /**
+   * Asks for what is at `url`, answering through handlers because a script has
+   * no `await`.
+   *
+   * `onResponse` is called with every answer, whatever its status, and a throw
+   * from it is handed to `onFailure` — so a script fails on a status by
+   * throwing. `onFailure` is also called where nothing answered. Neither is
+   * called before the call returns, or more than once.
+   *
+   * Redirects are followed, and the body is read before either handler is
+   * called.
+   *
+   * @param onFailure Called with why nothing answered, or with the string
+   * `onResponse` threw.
+   */
+  fetch(
+    url: string,
+    onResponse: (response: Response) => void,
+    onFailure: (message: string) => void,
+    init?: RequestInit,
+  ): void;
   /**
    * Runs something once, later, and answers with a number to cancel it by.
    *
@@ -532,6 +550,32 @@ export interface Location extends ClientHandle {
    * Asks for this one again.
    */
   reload(): void;
+}
+
+/**
+ * How to make a `fetch` request.
+ */
+export type RequestInit = {
+  method?: string;
+  headers?: { [key: string]: string };
+  body?: string;
+  timeout?: number;
+};
+
+declare const ResponseBrand: unique symbol;
+/**
+ * What answered, body and all.
+ */
+export interface Response extends ClientHandle {
+  readonly [ResponseBrand]: never;
+  readonly status: number;
+  /**
+   * The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte
+   * order mark is dropped. A script reads JSON with `JSON.parse`. The DOM's is
+   * a method answering a promise; here it is read before either handler is
+   * called.
+   */
+  readonly text: string;
 }
 
 declare const SVGElementBrand: unique symbol;

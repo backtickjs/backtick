@@ -4,13 +4,8 @@ export type {
   ClientValue,
   Spliceable,
 } from "@backtickjs/platform-sdk";
-export type {
-  HttpResponse,
-  Signal,
-  SignalOptions,
-  State,
-} from "@backtickjs/platform-sdk";
-export { computed, evaluate, http, state } from "@backtickjs/platform-sdk";
+export type { Signal, SignalOptions, State } from "@backtickjs/platform-sdk";
+export { computed, evaluate, state } from "@backtickjs/platform-sdk";
 export type { Prop } from "@backtickjs/ui-platform-sdk";
 export type {
   BacktickElement,

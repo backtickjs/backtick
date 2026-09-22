@@ -77,16 +77,13 @@ export type {
   ClientUnknown,
   ClientValue,
   Elements,
-  Http,
-  HttpConfig,
-  HttpResponse,
   PlatformBuiltins,
   PlatformElements,
   Signal,
   SignalOptions,
   State,
 } from "./declarations.generated.js";
-export { computed, evaluate, http, state } from "./builtins.generated.js";
+export { computed, evaluate, state } from "./builtins.generated.js";
 export type {
   Array,
   ArrayConstructor,

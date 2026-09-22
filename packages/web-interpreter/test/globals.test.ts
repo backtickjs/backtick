@@ -4,6 +4,7 @@ import type { AddressInfo } from "node:net";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/platform-sdk/schema";
 import type { Builtins } from "@backtickjs/platform-sdk";
+import type { Response, Window } from "@backtickjs/web-sdk";
 import { builtinOf, getters } from "../dist/builtinOf.js";
 import type { Instance } from "../dist/Instance.js";
 
@@ -66,6 +67,19 @@ describe("builtins", () => {
     assert.equal(answer("Number.isInteger")("2"), false);
   });
 
+  it("percent-encode a string as UTF-8", () => {
+    assert.equal(
+      answer("encodeURIComponent")("a b+c&d#e%é"),
+      "a%20b%2Bc%26d%23e%25%C3%A9",
+    );
+    assert.equal(answer("encodeURIComponent")(true), "true");
+  });
+
+  it("read a percent-encoded string back", () => {
+    assert.equal(answer("decodeURIComponent")("a%20b+%C3%A9"), "a b+é");
+    assert.throws(() => answer("decodeURIComponent")("%E"));
+  });
+
   it("write a string from the code points it is handed", () => {
     assert.equal(answer("String.fromCodePoint")(72, 105), "Hi");
     // The schema says none is the empty string, where an empty `Math.min` has
@@ -74,10 +88,18 @@ describe("builtins", () => {
   });
 });
 
-describe("http", () => {
-  const get = (url: string, onResponse: (response: unknown) => void) =>
+describe("window.fetch", () => {
+  // Node's globals answer for the browser's: `fetch` and `AbortSignal` are
+  // all this reaches.
+  const fetch = (
+    builtinOf({ window: globalThis } as unknown as Instance, "window") as {
+      fetch: Window["fetch"];
+    }
+  ).fetch;
+
+  const get = (url: string, onResponse: (response: Response) => void) =>
     new Promise<string>((resolve) => {
-      answer("http").get(url, onResponse, resolve);
+      fetch(url, onResponse, resolve);
     });
 
   it("answers with the status and the body as text", async () => {
@@ -86,7 +108,7 @@ describe("http", () => {
       answered = response;
       throw "done";
     });
-    assert.deepEqual(answered, { status: 200, data: '{"a":1}' });
+    assert.deepEqual(answered, { status: 200, text: '{"a":1}' });
   });
 
   it("hands a throw from onResponse to onFailure", async () => {
@@ -100,21 +122,26 @@ describe("http", () => {
     assert.ok((await get("not a url", () => {})).length > 0);
   });
 
-  it("adds params to the query, percent-encoded", async () => {
+  it("sends the method, headers and body it is handed", async () => {
     const server = createServer((request, response) => {
-      response.end(request.url);
+      let body = "";
+      request.setEncoding("utf8");
+      request.on("data", (chunk: string) => (body += chunk));
+      request.on("end", () => {
+        response.end(`${request.method} ${request.headers["x-asked"]} ${body}`);
+      });
     });
     await new Promise<void>((resolve) => server.listen(0, resolve));
     const { port } = server.address() as AddressInfo;
     const asked = await new Promise<string>((resolve, reject) => {
-      answer("http").get(
+      fetch(
         `http://localhost:${port}/at`,
-        (response) => resolve(response.data),
+        (response) => resolve(response.text),
         reject,
-        { params: { q: "a b+c&d#e%", "k=": "é" } },
+        { method: "POST", headers: { "x-asked": "yes" }, body: "é" },
       );
     });
     server.close();
-    assert.equal(asked, "/at?q=a%20b%2Bc%26d%23e%25&k%3D=%C3%A9");
+    assert.equal(asked, "POST yes é");
   });
 });

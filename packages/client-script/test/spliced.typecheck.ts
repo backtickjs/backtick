@@ -36,8 +36,8 @@ spliced([1, [true, null]]) satisfies (number | (boolean | null)[])[];
 // the receiver only — a primitive VALUE crosses unchanged — so re-virtualizing
 // stays idempotent.
 receiver(point.label).concat("!") satisfies string;
-// @ts-expect-error — `padStart` isn't part of the client string API.
-receiver(point.label).padStart;
+// @ts-expect-error — `normalize` isn't part of the client string API.
+receiver(point.label).normalize;
 receiver(point.x).toString(2) satisfies string;
 // @ts-expect-error — a boolean has `valueOf` alone; `toString` is what
 // TypeScript lends every object, and no client answers it.

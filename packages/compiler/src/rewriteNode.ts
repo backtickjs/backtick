@@ -25,8 +25,8 @@ import { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 // A front is only the front of a name: a script writes `Math.floor`, which is a
 // single name the client answers, and there is no `Math` for a read to yield —
 // so an access folds into the whole name, and the front standing alone is an
-// error. Every name here is one, which is what the language turned out to be:
-// the statics, and nothing a script calls bare. A timer is the target's —
+// error. Nearly every name here is one: the statics, and the two URI
+// component functions a script calls bare. A timer is the target's —
 // `$window.setTimeout` — because a clock is the host's and not the language's.
 //
 // The four kinds a member is read off — `string.`, `array.` and the rest — are
@@ -39,6 +39,8 @@ const language = new Set([
   "Number.",
   "Object.",
   "String.",
+  "decodeURIComponent",
+  "encodeURIComponent",
 ]);
 
 export interface RewriteState {
@@ -1637,7 +1639,8 @@ function rewriteNodeImpl(
   // `++` and `--` step a variable by one. `++i` answers the value after the
   // step, and `i++` the value before it.
   if (isStep(ts, node)) {
-    const operator = node.operator === ts.SyntaxKind.PlusPlusToken ? "++" : "--";
+    const operator =
+      node.operator === ts.SyntaxKind.PlusPlusToken ? "++" : "--";
     if (!assignable(ts, state, node.operand)) {
       return unsupported();
     }

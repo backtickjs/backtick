@@ -14,18 +14,18 @@ __cs_held                                 → held
 cs.statement(                             → 
 cs.receiver(                              → 
 (cs.splice(                               →  [-semantic]
-(http)                                    → $http
+(window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
-get                                       → get
+fetch                                     → fetch
 (                                         → (\n        
 "/cases/built-ins/Math/trunc/Math.trunc_Success"→ "/cases/built-ins/Math/trunc/Math.trunc_Success"
 ,                                         → ,\n        
 (                                         → (
 __cs_response                             → response
 :                                         → : 
-HttpResponse                              → HttpResponse
+Response                                  → Response
 ) => {\n                                  → ) => {\n          
 if (                                      → if (
 cs.receiver(                              → 
@@ -65,7 +65,7 @@ cs.receiver(                              →
 __cs_response                             → response
 )                                         → 
 .                                         → .
-data                                      → data
+text                                      → text
 )                                         → )
  ===                                      →  === 
 null                                      → null
@@ -107,35 +107,18 @@ timeout                                   → timeout
 cs.statement(                             → 
 cs.receiver(                              → 
 (cs.splice(                               →  [-semantic]
-(http)                                    → $http
+(window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → 
 .                                         → .
-post                                      → post
+fetch                                     → fetch
 (                                         → (\n        
 "/cases"                                  → "/cases"
-,                                         → ,\n        
-cs.receiver(                              → 
-JSON                                      → JSON
-)                                         → 
-.                                         → .
-stringify                                 → stringify
-(                                         → (
-{                                         → { 
-name                                      → name
-:                                         → : 
-"Math.trunc"                              → "Math.trunc"
-,                                         → , 
-passed                                    → passed
-:                                         → : 
-true                                      → true
- }                                        →  }
-)                                         → )
 ,                                         → ,\n        
 (                                         → (
 __cs_response                             → response
 :                                         → : 
-HttpResponse                              → HttpResponse
+Response                                  → Response
 ) => {\n                                  → ) => {\n          
 cs.statement(                             → 
 cs.receiver(                              → 
@@ -148,7 +131,7 @@ cs.receiver(                              →
 __cs_response                             → response
 )                                         → 
 .                                         → .
-data                                      → data
+text                                      → text
 )                                         → )
 );                                        → ;
 \n    }                                   → \n        }
@@ -170,7 +153,11 @@ __cs_message                              → message
 );                                        → ;
 \n    }                                   → \n        }
 ,                                         → ,\n        
-{                                         → { 
+{                                         → {\n          
+method                                    → method
+:                                         → : 
+"POST"                                    → "POST"
+,                                         → ,\n          
 headers                                   → headers
 :                                         → : 
 {                                         → { 
@@ -178,7 +165,26 @@ headers                                   → headers
 :                                         → : 
 "application/json"                        → "application/json"
  }                                        →  }
+,                                         → ,\n          
+body                                      → body
+:                                         → : 
+cs.receiver(                              → 
+JSON                                      → JSON
+)                                         → 
+.                                         → .
+stringify                                 → stringify
+(                                         → (
+{                                         → { 
+name                                      → name
+:                                         → : 
+"Math.trunc"                              → "Math.trunc"
+,                                         → , 
+passed                                    → passed
+:                                         → : 
+true                                      → true
  }                                        →  }
+)                                         → )
+ }                                        → ,\n        }
 )                                         → ,\n      )
 );                                        → ;
 \n                                        → \n\n      

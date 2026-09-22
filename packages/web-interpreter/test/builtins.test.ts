@@ -58,6 +58,6 @@ describe("what the web answers for", () => {
       unknown
     >;
     assert.equal(window["document"], undefined);
-    assert.equal(window["fetch"], undefined);
+    assert.equal(window["localStorage"], undefined);
   });
 });

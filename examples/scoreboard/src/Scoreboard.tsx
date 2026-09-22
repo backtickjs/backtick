@@ -1,6 +1,6 @@
-import { cs, For, http, onCleanup, onMount, state } from "@backtickjs/core";
-import type { HttpResponse } from "@backtickjs/core";
+import { cs, For, onCleanup, onMount, state } from "@backtickjs/core";
 import { window } from "@backtickjs/web-sdk";
+import type { Response } from "@backtickjs/web-sdk";
 import { GameCard } from "./GameCard.js";
 import { load, POLL_MS, SLATE_PATH } from "./scores.js";
 import type { Game, Slate } from "./scores.js";
@@ -30,13 +30,13 @@ export async function Scoreboard() {
     // A script has no \`await\`: an answer arrives at a handler, and a status
     // this cannot use is failed by throwing, which reaches the other one.
     const refresh = () => {
-      $http.get(
+      $window.fetch(
         $SLATE_PATH,
-        (response: HttpResponse) => {
+        (response: Response) => {
           if (response.status !== 200) {
             throw "the host answered " + response.status;
           }
-          const slate = JSON.parse(response.data) as Slate;
+          const slate = JSON.parse(response.text) as Slate;
           rows.set(slate.games);
           stamp.set(slate.asOf);
           trouble.set("");

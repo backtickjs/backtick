@@ -440,64 +440,6 @@ export type BundleCatchClause = [
 
 export type BundleParameter = [kind: "param", name: string];
 
-/**
- * How to make an `http` request.
- */
-export type HttpConfig = {
-  headers?: { [key: string]: string };
-  params?: { [key: string]: string };
-  timeout?: number;
-};
-
-/**
- * What answered, body and all.
- */
-export type HttpResponse = { readonly status: number; readonly data: string };
-
-declare const HttpBrand: unique symbol;
-/**
- * Requests the way axios makes them, answering through handlers because a
- * script has no `await`.
- *
- * `onResponse` is called with every answer, whatever its status, and a throw
- * from it is handed to `onFailure` — so a script fails on a status by
- * throwing. `onFailure` is also called where nothing answered. Neither is
- * called before the call returns, or more than once.
- *
- * Redirects are followed, and the body is read before either handler is
- * called.
- */
-export interface Http extends ClientHandle {
-  readonly [HttpBrand]: never;
-  /**
-   * Asks for what is at `url`.
-   *
-   * @param onFailure Called with why nothing answered, or with the string
-   * `onResponse` threw.
-   */
-  get(
-    url: string,
-    onResponse: (response: HttpResponse) => void,
-    onFailure: (message: string) => void,
-    config?: HttpConfig,
-  ): void;
-  /**
-   * Sends `data` to `url`.
-   *
-   * @param data Sent as it is, encoded as UTF-8. A script sends JSON with
-   * `JSON.stringify` and a `content-type` header.
-   * @param onFailure Called with why nothing answered, or with the string
-   * `onResponse` threw.
-   */
-  post(
-    url: string,
-    data: string,
-    onResponse: (response: HttpResponse) => void,
-    onFailure: (message: string) => void,
-    config?: HttpConfig,
-  ): void;
-}
-
 export interface ArrayLike<T extends ClientValue> {
   readonly length: number;
   readonly [n: number]: T;
@@ -1494,6 +1436,22 @@ export interface PlatformBuiltins {
    */
   "String.fromCodePoint"(...codePoints: number[]): string;
   /**
+   * Encodes a string as UTF-8 and percent-encodes every byte but `A-Z a-z 0-9
+   * - _ . ! ~ * ' ( )`, so it can stand as one part of a URL — a query key or
+   * value, a path segment. Throws on a lone surrogate, which has no UTF-8.
+   *
+   * @param uriComponent A number or a boolean is written as a string first, as
+   * `String` writes it.
+   */
+  encodeURIComponent(uriComponent: string | number | boolean): string;
+  /**
+   * Reads back what `encodeURIComponent` wrote: every `%` and two hex digits
+   * is a byte, and the bytes are read as UTF-8. Anything else is left as it
+   * is, `+` included. Throws on a `%` without two hex digits after it, or on
+   * bytes that are not UTF-8.
+   */
+  decodeURIComponent(encodedURIComponent: string): string;
+  /**
    * Returns an array of an object's members, each as a key and its value, in
    * the order `JSON.stringify` writes them.
    *
@@ -1559,7 +1517,6 @@ export interface PlatformBuiltins {
    * @param fn Calculates the value from the signals it reads.
    */
   computed<T>(fn: () => T, options?: SignalOptions<T>): Signal<T>;
-  http: Http;
   /**
    * What a bundle holds: its `root` evaluated against its `functions`, here. A
    * bundle is data — a program a client runs — and running one reads no

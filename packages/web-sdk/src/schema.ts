@@ -53,6 +53,39 @@ export const schema: Schema = {
           description:
             "Where the document came from, and how to go somewhere else.",
         }),
+        fetch: Type.Function(
+          [
+            Type.FunctionParameter("url", Type.String()),
+            Type.FunctionParameter(
+              "onResponse",
+              Type.Function(
+                [Type.FunctionParameter("response", Type.Ref("Response"))],
+                Type.Void(),
+              ),
+            ),
+            Type.FunctionParameter(
+              "onFailure",
+              Type.Function(
+                [Type.FunctionParameter("message", Type.String())],
+                Type.Void(),
+              ),
+              {
+                description:
+                  "Called with why nothing answered, or with the string `onResponse` threw.",
+              },
+            ),
+            Type.Optional(
+              Type.FunctionParameter("init", Type.Ref("RequestInit")),
+            ),
+          ],
+          Type.Void(),
+          {
+            description:
+              "Asks for what is at `url`, answering through handlers because a script has no `await`.\n\n" +
+              "`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\n" +
+              "Redirects are followed, and the body is read before either handler is called.",
+          },
+        ),
         setTimeout: Type.Function(
           [
             Type.FunctionParameter("handler", Type.Function([], Type.Void()), {
@@ -571,6 +604,43 @@ export const schema: Schema = {
           "Where the document came from, and how to go somewhere else.\n\n" +
           "Every part is read-only, and going somewhere is a call. The DOM lets a write to `href` — or to `pathname`, or to `hash` — navigate, which is nine names for one act and an assignment that does not assign; a client with no DOM would have to answer for each of them separately. `assign` says it once.",
       },
+    ),
+
+    RequestInit: Type.Object(
+      {
+        method: Type.Optional(
+          Type.String({
+            description: "Named as HTTP names it. Where omitted, `GET`.",
+          }),
+        ),
+        headers: Type.Optional(Type.Record(Type.String(), Type.String())),
+        body: Type.Optional(
+          Type.String({
+            description:
+              "Sent as it is, encoded as UTF-8. A script sends JSON with `JSON.stringify` and a `content-type` header.",
+          }),
+        ),
+        timeout: Type.Optional(
+          Type.Number({
+            description:
+              "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits. The DOM's is a `signal`, which a script has no way to make.",
+          }),
+        ),
+      },
+      { description: "How to make a `fetch` request." },
+    ),
+
+    Response: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {
+        status: Type.Number({ readOnly: true }),
+        text: Type.String({
+          readOnly: true,
+          description:
+            "The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte order mark is dropped. A script reads JSON with `JSON.parse`. The DOM's is a method answering a promise; here it is read before either handler is called.",
+        }),
+      },
+      { description: "What answered, body and all." },
     ),
 
     SVGElement: Type.Interface([Type.Ref("Element")], {}),

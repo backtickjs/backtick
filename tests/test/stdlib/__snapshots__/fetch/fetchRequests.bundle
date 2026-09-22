@@ -48,7 +48,7 @@
                   ],
                   []
                 ],
-                "get"
+                "fetch"
               ],
               [
                 "/cases/built-ins/Math/trunc/Math.trunc_Success",
@@ -127,7 +127,7 @@
                                       "id",
                                       "response"
                                     ],
-                                    "data"
+                                    "text"
                                   ]
                                 ]
                               ],
@@ -193,23 +193,10 @@
                   ],
                   []
                 ],
-                "post"
+                "fetch"
               ],
               [
                 "/cases",
-                [
-                  "()",
-                  [
-                    "bltn",
-                    "JSON.stringify"
-                  ],
-                  [
-                    {
-                      "name": "Math.trunc",
-                      "passed": true
-                    }
-                  ]
-                ],
                 [
                   "=>",
                   [
@@ -238,7 +225,7 @@
                               "id",
                               "response"
                             ],
-                            "data"
+                            "text"
                           ]
                         ]
                       ]
@@ -277,9 +264,23 @@
                   ]
                 ],
                 {
+                  "method": "POST",
                   "headers": {
                     "content-type": "application/json"
-                  }
+                  },
+                  "body": [
+                    "()",
+                    [
+                      "bltn",
+                      "JSON.stringify"
+                    ],
+                    [
+                      {
+                        "name": "Math.trunc",
+                        "passed": true
+                      }
+                    ]
+                  ]
                 }
               ]
             ],
@@ -323,7 +324,7 @@
         [],
         [
           "bltn",
-          "http"
+          "window"
         ]
       ]
     ]

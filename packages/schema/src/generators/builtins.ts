@@ -28,10 +28,10 @@ import type { TNode } from "../TNode.js";
  * imports.
  *
  * A script reaches one by writing it — `Math.floor`, `"x".trim()` — so there is
- * no value for an app to import it through, and nothing here to write. All ten
+ * no value for an app to import it through, and nothing here to write. Ten
  * are fronts, dot and all: six a place statics hang off and four a kind of
- * value a member is read off. Nothing the language provides is a whole name a
- * script calls bare; a target's own arrives as a value, `$window` and the rest.
+ * value a member is read off. `encodeURIComponent` and `decodeURIComponent`
+ * are whole names a script calls bare; a target's own arrives as a value, `$window` and the rest.
  *
  * Written out rather than read off the dot, because the two are not the same
  * question. A name is skipped here because the language answers for it, and a
@@ -56,6 +56,8 @@ const language: readonly string[] = [
   "boolean.",
   "number.",
   "string.",
+  "decodeURIComponent",
+  "encodeURIComponent",
 ];
 
 /** The values a script splices to reach the builtins a schema declares. */
