@@ -21,7 +21,7 @@ type Outcome = "pass" | "fail" | "unsupported";
  * running, so a script that has one is refused rather than run.
  */
 export type Judgement =
-  | { verdict: { outcome: Outcome; detail: string }; refusals?: string[] }
+  | { verdict: { outcome: Outcome; detail: string } }
   | {
       script: string;
       negative: boolean;
@@ -91,13 +91,10 @@ export function judgeCase(name: string, source: string): Judgement {
     'import { cs } from "@backtickjs/core";\n' +
     `export default cs\`${block}\`;\n`;
 
-  // Each message as the compiler wrote it, for the skip list to match.
-  let refusals: string[] = [];
   const syntax = syntaxError(name, block);
   let refusal: string | null = null;
   if (syntax !== null) {
     refusal = describe(syntax, block);
-    refusals = [ts.flattenDiagnosticMessageText(syntax.messageText, " ")];
   } else {
     const errors: ts.Diagnostic[] = [];
     try {
@@ -126,13 +123,12 @@ export function judgeCase(name: string, source: string): Judgement {
     refusal = first.size
       ? [...first.values()].map((error) => describe(error, module)).join("; ")
       : null;
-    refusals = [...first.keys()];
   }
 
   if (refusal !== null) {
     return early
-      ? { verdict: { outcome: "pass", detail: "" }, refusals }
-      : { ...unsupported(refusal), refusals };
+      ? { verdict: { outcome: "pass", detail: "" } }
+      : unsupported(refusal);
   }
   return {
     script: block,

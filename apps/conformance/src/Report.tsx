@@ -10,11 +10,7 @@ type Row = {
   problem: State<string | null>;
 };
 
-// A skip-list entry, and how many of the cases asked for it took out.
-type Skip = { key: string; reason: string; count: number };
-
-// A server component: it names the groups and what was skipped, and nothing
-// more. The client under
+// A server component: it names the groups, and nothing more. The client under
 // test fetches each one's bundle from `base`, runs it and judges it, so what
 // this draws is that client's answer — group by group, as each arrives.
 //
@@ -22,12 +18,10 @@ type Skip = { key: string; reason: string; count: number };
 // fetched with the web's `window.fetch` — so any web client draws this.
 export async function Report({
   groups,
-  skips,
   base,
   detailed,
 }: {
   groups: string[];
-  skips: Skip[];
   base: string;
   detailed: boolean;
 }) {
@@ -110,25 +104,8 @@ export async function Report({
           total("fail") +
           " failed, " +
           total("unsupported") +
-          " not client script, " +
-          $skips.reduce((sum: number, skip: Skip) => sum + skip.count, 0) +
-          " skipped"}
+          " not client script"}
         {"  (" + loaded() + " of " + rows.length + " groups)\n\n"}
-        <For each={$skips}>
-          {(skip: Skip) => (
-            <>
-              {"skipped  " +
-                skip.key +
-                "  " +
-                skip.count +
-                (skip.count === 1 ? " case" : " cases") +
-                ": " +
-                skip.reason +
-                "\n"}
-            </>
-          )}
-        </For>
-        {$skips.length > 0 ? "\n" : ""}
         <For each={rows}>
           {(row: Row) => (
             <>

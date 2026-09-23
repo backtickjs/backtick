@@ -7,8 +7,8 @@
   "scripts": {
     "build": "bun scripts/fetchTest262.ts && bun scripts/generate.ts",
     "start": "bun src/index.tsx",
-    "format": "prettier --write src scripts skips.ts",
-    "format:check": "prettier --check src scripts skips.ts",
+    "format": "prettier --write src scripts",
+    "format:check": "prettier --check src scripts",
     "typecheck": "backtick-tsc --noEmit",
     "clean": "rm -rf node_modules dist .cache test262"
   },

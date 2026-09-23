@@ -15,14 +15,6 @@ const test262: string[] = JSON.parse(
 /** Every group's name, in the order a page lists them. */
 export const groupNames: string[] = test262.map((group) => `test262/${group}`);
 
-/** An entry of `skips.ts`, and the cases under `test262/test/` it took out. */
-export type Skip = { key: string; reason: string; cases: string[] };
-
-/** Every entry of the skip list, as the build found it. */
-export const skipped: Skip[] = JSON.parse(
-  readFileSync(join(GENERATED, "skipped.json"), "utf8"),
-);
-
 /** A case as its verdict script, and the name to report if that won't run. */
 export type Judged = { name: string; script: Client<Verdict> };
 

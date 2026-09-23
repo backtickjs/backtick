@@ -14,7 +14,6 @@ import {
 import { dirname, join, relative } from "node:path";
 import { judgeCase } from "./judgeCase.js";
 import type { Judgement } from "./judgeCase.js";
-import { skippedRefusals, skips } from "../skips.js";
 
 const ROOT = join(import.meta.dir, "..");
 const CORPUS = join(ROOT, "test262/test");
@@ -24,13 +23,6 @@ const SUITES = ["annexB", "built-ins", "language"];
 const OUT = join(ROOT, ".cache/test262");
 
 const groups = new Map<string, string[]>();
-// What each entry of the skip list took out, by path.
-const skipped = new Map<string, string[]>(
-  [...Object.keys(skips), ...Object.keys(skippedRefusals)].map((key) => [
-    key,
-    [],
-  ]),
-);
 const entries = SUITES.flatMap((suite) =>
   readdirSync(join(CORPUS, suite), { recursive: true, withFileTypes: true }),
 );
@@ -38,14 +30,6 @@ for (const entry of entries) {
   // A fixture is imported by the case beside it, not run on its own.
   if (!entry.isFile() || !entry.name.endsWith(".js")) continue;
   if (entry.name.endsWith("_FIXTURE.js")) continue;
-  const path = relative(CORPUS, join(entry.parentPath, entry.name));
-  const skip = Object.keys(skips).find(
-    (key) => path === key || path.startsWith(`${key}/`),
-  );
-  if (skip !== undefined) {
-    skipped.get(skip)!.push(path);
-    continue;
-  }
   const group = relative(CORPUS, entry.parentPath);
   groups.set(group, [...(groups.get(group) ?? []), entry.name]);
 }
@@ -75,23 +59,8 @@ rmSync(OUT, { recursive: true, force: true });
 const refused = typecheck(write(null));
 const written = write(refused);
 
-const stale = [...skipped].filter(([, cases]) => cases.length === 0);
-if (stale.length > 0) {
-  throw new Error(
-    `skips.ts names what Test262 doesn't have: ${stale.map(([key]) => key).join(", ")}`,
-  );
-}
-
 /** A group's module, as the lines it wrote and the line each case starts at. */
 type Written = { lines: string[]; starts: { name: string; line: number }[] };
-
-// The entry of `skippedRefusals` one of these refusals matches, if any.
-function skippedBy(refusals: Iterable<string>): string | undefined {
-  const all = [...refusals];
-  return Object.keys(skippedRefusals).find((key) =>
-    all.some((refusal) => skippedRefusals[key]!.refusal.test(refusal)),
-  );
-}
 
 function write(
   refused: Map<string, Map<string, string>> | null,
@@ -109,24 +78,11 @@ function write(
       "export const cases = [\n";
     const starts: Written["starts"] = [];
     for (const { name, judgement } of cases) {
-      // Only once the type checker has spoken, so every refusal is known.
-      if (refused !== null) {
-        const skip = skippedBy([
-          ...(("refusals" in judgement && judgement.refusals) || []),
-          ...(refused.get(`${group}/${name}`)?.keys() ?? []),
-        ]);
-        if (skip !== undefined) {
-          skipped.get(skip)!.push(`${group}/${name}.js`);
-          continue;
-        }
-      }
       starts.push({ name, line: text.split("\n").length });
       const script = scriptOf(name, judgement, refused, `${group}/${name}`);
       text += `  { name: ${literal(name)}, script: ${script} },\n`;
     }
     text += "];\n";
-    // A group the skip list emptied is not one to list.
-    if (starts.length === 0) continue;
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, text);
     written.set(group, { lines: text.split("\n"), starts });
@@ -233,24 +189,4 @@ writeFileSync(
   join(OUT, "groups.json"),
   `${JSON.stringify([...written.keys()].sort(), null, 2)}\n`,
 );
-// Beside the groups, so a page can say what it left out and why.
-writeFileSync(
-  join(OUT, "skipped.json"),
-  `${JSON.stringify(
-    [...skipped].map(([key, cases]) => ({
-      key,
-      reason: skips[key] ?? skippedRefusals[key]!.reason,
-      cases,
-    })),
-    null,
-    2,
-  )}\n`,
-);
-const skippedCount = [...skipped.values()].reduce(
-  (sum, cases) => sum + cases.length,
-  0,
-);
-console.log(
-  `${groups.size} groups written to ${relative(ROOT, OUT)}, ` +
-    `${skippedCount} cases skipped`,
-);
+console.log(`${groups.size} groups written to ${relative(ROOT, OUT)}`);

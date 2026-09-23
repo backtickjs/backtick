@@ -13,7 +13,6 @@
   },
   "include": [
     "src",
-    "scripts",
-    "skips.ts"
+    "scripts"
   ]
 }
