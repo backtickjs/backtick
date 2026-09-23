@@ -3,45 +3,11 @@ import type {
   BundleArrayElement,
   BundleElement,
 } from "@backtickjs/platform-sdk";
-import { createMemo, getOwner, mapArray, untrack } from "solid-js";
+import { createMemo } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile } from "./compile.js";
 import type { Scope } from "./compile.js";
-
-// Turning a drawing into the host's own nodes, once, and keeping them current
-// through the reactive graph rather than by building them again.
-//
-// Nothing here is redrawn. An element becomes a node when its instance is
-// created, and every part of it that can change is a computation of its own: a
-// prop is an effect that sets that one prop, and a children position is an
-// `insert` that reconciles what it evaluates to. So a write moves exactly the
-// props and the lists that read what was written, and everything above and
-// around them is untouched — there is no pass over the tree to find out what
-// changed, because whatever changed said so.
-
-// The language an element is drawn in: HTML's unless it stands inside an `svg`,
-// and HTML's again inside a `foreignObject`, as the DOM's parser decides. Read
-// where the element is drawn rather than where it was written, so a component
-// or a `<For>` row drawing `<circle>` inside an `svg` gets SVG.
-//
-// A key on the owner's context rather than `createContext`, which brings
-// Solid's Provider and its `children` helper into the client for nothing.
-const NAMESPACE = Symbol("namespace");
-type Namespace = "html" | "svg";
-
-// Draws with the namespace flipped, and flips it back after. What draws again
-// later — a list's rows, a position's `insert` — keeps the flipped one: an
-// owner copies the context it was made under.
-function withNamespace(namespace: Namespace, draw: () => void): void {
-  const owner = getOwner()!;
-  const outer = owner.context;
-  owner.context = { ...outer, [NAMESPACE]: namespace };
-  try {
-    draw();
-  } finally {
-    owner.context = outer;
-  }
-}
+import { drawElement, drawList } from "./draw.js";
 
 /**
  * An inline element, as the closure that builds one.
@@ -75,61 +41,13 @@ export function compileElement(
   });
   const children = element[3];
   const draw = children === null ? null : compileChildren(instance, children);
-  return (scope) => {
-    const renderer = instance.renderer;
-    // Where it stands, what it is made in, and what its children are drawn in:
-    // an `svg` enters SVG, and a `foreignObject`'s children are HTML again.
-    const owner = getOwner()!;
-    const outerNamespace: Namespace = owner.context?.[NAMESPACE] ?? "html";
-    const namespace = id === "svg" ? "svg" : outerNamespace;
-    const innerNamespace = id === "foreignObject" ? "html" : namespace;
-    // The host hears SVG's as `svg:<tag>`; the wire carries no prefix.
-    const node = renderer.createElement(namespace === "svg" ? `svg:${id}` : id);
-    let ref: ClientValue = null;
-    for (const [prop, read, fixed] of props) {
-      // The language's, not an attribute: the element is handed to the
-      // script once it is built.
-      if (prop === "ref") {
-        ref = read(scope);
-        continue;
-      }
-      // It cannot change, so set it and be done: no computation to make, and
-      // none held for as long as the element is.
-      if (fixed) {
-        renderer.setProp(node, prop, read(scope));
-        continue;
-      }
-      // One effect per prop, so a write moves that one prop of that one node.
-      // It re-runs only when something the expression itself read has changed;
-      // nothing tells it to look.
-      //
-      // Re-running is not the same as changing: a state a whole list reads is
-      // what decides one row's class, and every other row recomputes the class
-      // it already has. The host hears about a prop when the prop moved, so
-      // that is a comparison here rather than a write per row per selection.
-      // A handler is a new closure whenever what it captured changed, so it
-      // compares unequal and is registered again, as before.
-      renderer.effect((previous) => {
-        const value = read(scope);
-        return value === previous
-          ? previous
-          : renderer.setProp(node, prop, value, previous);
-      });
-    }
-    if (draw !== null) {
-      if (innerNamespace === outerNamespace) {
-        renderer.insert(node, draw(scope));
-      } else {
-        withNamespace(innerNamespace, () => renderer.insert(node, draw(scope)));
-      }
-    }
-    // Untracked, so what the callback reads never calls it again.
-    if (typeof ref === "function") {
-      const handOver = ref as (element: ClientValue) => void;
-      untrack(() => handOver(node as ClientValue));
-    }
-    return node as ClientValue;
-  };
+  return (scope) =>
+    drawElement(
+      instance.renderer,
+      id,
+      props.map(([prop, read, fixed]) => [prop, () => read(scope), fixed]),
+      draw === null ? null : () => draw(scope),
+    );
 }
 
 // Whether what a position holds can change after it has first been read.
@@ -206,33 +124,14 @@ function compileFragment(
   return (scope) => draw(scope) as ClientValue;
 }
 
-/**
- * A list: one drawing per member of the array its `each` prop holds.
- *
- * The client walks the array itself, so `mapArray` keeps the drawing of a
- * member that is still there, drops what a member that has gone drew, and draws
- * only what is new. Identity is the member's own — nothing here extracts a key.
- *
- * An element whose children are applied rather than drawn, so nothing here
- * reaches for the renderer: what a list contributes is what its child drew per
- * member, and the position it stands in inserts that as it would any list.
- */
+// A list: one drawing per member of the array its `each` prop holds. See
+// `drawList`.
 function compileFor(
   instance: Instance,
   element: BundleElement,
 ): (scope: Scope | null) => ClientValue {
   const each = compile(instance, element[2]["each"] ?? null);
   const children = compile(instance, element[3]);
-  return (scope) => {
-    const members = createMemo(() => {
-      const value = each(scope);
-      return Array.isArray(value) ? value : [];
-    });
-    // Made once: the member arrives as an argument.
-    const one = children(scope) as (...args: ClientValue[]) => ClientValue;
-    // The index is `mapArray`'s own signal, handed over as storage rather than
-    // as the number it holds: whoever reads it is reading where the member sits
-    // now.
-    return mapArray(members, (member, at) => one(member, { get: at }));
-  };
+  // Made once per list: the member arrives as an argument.
+  return (scope) => drawList(() => each(scope), children(scope));
 }

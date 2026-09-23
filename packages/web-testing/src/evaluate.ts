@@ -6,6 +6,7 @@ import type {
 } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
 import { createInterpreter } from "@backtickjs/web-interpreter";
+import { testClient } from "./client.js";
 
 /** What a test changes about the interpreter a value runs in. */
 export interface EvaluateOptions {
@@ -25,8 +26,7 @@ export async function evaluate<T extends ClientUnknown>(
   value: Spliceable<T>,
   { builtinOf }: EvaluateOptions = {},
 ): Promise<T> {
-  const bundle = await bundler.run(value);
-  return createInterpreter({ window, builtinOf }).evaluate(bundle);
+  return testClient(builtinOf).evaluate(await bundler.run(value));
 }
 
 /**

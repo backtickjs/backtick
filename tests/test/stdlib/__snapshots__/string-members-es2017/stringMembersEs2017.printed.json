@@ -1,0 +1,20 @@
+[
+  "ab",
+  "padded",
+  4,
+  "|",
+  5,
+  "-=",
+  "trimmed",
+  "  x  ",
+  "at",
+  0,
+  -1,
+  "replaced",
+  "a.b.c",
+  ".",
+  "/",
+  "replacedBy",
+  "a.b",
+  ""
+]

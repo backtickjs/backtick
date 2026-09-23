@@ -1,6 +1,5 @@
 import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { createInterpreter } from "@backtickjs/web-interpreter";
 import { getQueriesForElement, prettyDOM } from "@testing-library/dom";
 import type {
   BoundFunctions,
@@ -10,6 +9,7 @@ import type {
 } from "@testing-library/dom";
 import { mounted } from "./cleanup.js";
 import type { EvaluateOptions } from "./evaluate.js";
+import { testClient } from "./client.js";
 
 /** Where and how a value is drawn. */
 export interface RenderOptions<
@@ -76,10 +76,7 @@ export async function render<
     document.body) as BaseElement;
   const container = (options.container ??
     baseElement.appendChild(document.createElement("div"))) as Container;
-  const interpreter = createInterpreter({
-    window,
-    builtinOf: options.builtinOf,
-  });
+  const client = testClient(options.builtinOf);
 
   // Taken down between drawings, and kept for `cleanup` even when a drawing
   // throws, so its container still leaves the body.
@@ -92,7 +89,7 @@ export async function render<
   const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
     const bundle = await bundler.run(value);
     takeDown();
-    const dispose = interpreter.render(bundle, container);
+    const dispose = await client.render(bundle, container);
     // The interpreter stops what it drew but leaves the nodes, so the
     // container is emptied here, as React's `unmount` and Solid's own `render`
     // do.

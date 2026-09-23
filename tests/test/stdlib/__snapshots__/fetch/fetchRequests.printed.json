@@ -1,0 +1,22 @@
+[
+  "waiting",
+  "/cases/built-ins/Math/trunc/Math.trunc_Success",
+  200,
+  "answered ",
+  "null",
+  "a value",
+  "failed — ",
+  "timeout",
+  3000,
+  "/cases",
+  "method",
+  "POST",
+  "headers",
+  "content-type",
+  "application/json",
+  "body",
+  "name",
+  "Math.trunc",
+  "passed",
+  true
+]

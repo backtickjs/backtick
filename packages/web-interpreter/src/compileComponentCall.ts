@@ -1,15 +1,11 @@
 import type { ClientValue } from "@backtickjs/core";
 import type { BundleComponentCall } from "@backtickjs/platform-sdk";
-import { untrack } from "solid-js";
 import { compile } from "./compile.js";
 import type { Scope } from "./compile.js";
+import { callComponent } from "./draw.js";
 import type { Instance } from "./Instance.js";
 
-/**
- * A call of a component a script holds: called once, untracked, with its
- * props as a record whose members are read again on every access — what keeps
- * a prop live for a function the bundler never saw.
- */
+/** A call of a component a script holds: see `callComponent`. */
 export function compileComponentCall(
   instance: Instance,
   node: BundleComponentCall,
@@ -21,20 +17,9 @@ export function compileComponentCall(
   if (node[3] !== null) {
     props.push(["children", compile(instance, node[3])]);
   }
-  return (scope) => {
-    const record: { [key: string]: ClientValue } = {};
-    for (const [name, read] of props) {
-      Object.defineProperty(record, name, {
-        get: () => read(scope),
-        enumerable: true,
-      });
-    }
-    const called = callee(scope);
-    if (typeof called !== "function") {
-      throw new Error("a component call names a function, and this is not one");
-    }
-    return untrack(() =>
-      (called as (props: ClientValue) => ClientValue)(record),
+  return (scope) =>
+    callComponent(
+      callee(scope),
+      props.map(([name, read]) => [name, () => read(scope)] as const),
     );
-  };
 }

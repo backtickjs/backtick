@@ -1,9 +1,10 @@
 import { mkdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
-import { bundler } from "@backtickjs/bundler";
+import { bundler, printBundle } from "@backtickjs/bundler";
 import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import { evaluate, render } from "@backtickjs/web-testing";
+import prettier from "prettier";
 import { isNode } from "./node.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderDrawing } from "./renderMarkup.ts";
@@ -13,8 +14,8 @@ import { renderValue } from "./renderValue.ts";
 const verbatim = [(value: unknown) => value as string];
 
 /**
- * Records what `value` bundles to, and what it draws or evaluates to, next to
- * the test: `__snapshots__/<test file>/<name>.<artifact>`.
+ * Records what `value` bundles to, what that bundle prints as, and what it
+ * draws or evaluates to, next to the test: `__snapshots__/<test file>/<name>.<artifact>`.
  *
  * None of it records a source position. What the test file compiles to is
  * recorded once for the whole file, by `compiler.test.ts`.
@@ -39,6 +40,13 @@ export async function snapshotCase(
   const bundle = await bundler.run(value);
   record(JSON.stringify(bundle, null, 2), "bundle");
   record(renderBundleDebug(bundle), "bundle-debug");
+  // Formatted, so a change to what is printed reads as the code it changed.
+  const printed = printBundle(bundle);
+  record(
+    await prettier.format(printed.code, { parser: "babel" }),
+    "printed.js",
+  );
+  record(`${JSON.stringify(printed.data, null, 2)}\n`, "printed.json");
   const evaluated = await evaluate(value);
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));

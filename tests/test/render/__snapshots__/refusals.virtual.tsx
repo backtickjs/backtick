@@ -72,11 +72,7 @@ describe("a tag that would execute", () => {
   // HTML folds a tag name, so every spelling of it is the element.
   it("is refused in HTML whatever its case", () => {
     for (const tag of ["SCRIPT", "Script"]) {
-      assert.throws(
-        () => evaluateBundle(element(tag)),
-        /may not draw/,
-        tag,
-      );
+      assert.throws(() => evaluateBundle(element(tag)), /may not draw/, tag);
     }
   });
 

@@ -51,3 +51,4 @@ export type {
   BundleFunctionLabel,
 } from "@backtickjs/platform-sdk";
 export { bundler } from "./bundler.js";
+export { printBundle, type PrintedBundle } from "./print/printBundle.js";
