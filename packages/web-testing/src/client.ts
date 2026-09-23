@@ -1,7 +1,7 @@
 import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
 import { printBundle } from "@backtickjs/bundler";
 import { createInterpreter, createRuntime } from "@backtickjs/web-interpreter";
-import type { PrintedModule, Program } from "@backtickjs/web-interpreter";
+import type { Program } from "@backtickjs/web-interpreter";
 
 /** What a test draws a bundle with: the bundle printed, or the interpreter. */
 export interface TestClient {
@@ -16,12 +16,14 @@ const scope = globalThis as {
 };
 const printed = scope.process?.env?.["BACKTICK_BACKEND"] !== "interpreter";
 
-async function load(bundle: Bundle<ClientUnknown>): Promise<PrintedModule> {
-  const { code, data, globals } = printBundle(bundle);
+// As a module rather than through `eval`: what a page with a strict Content
+// Security Policy will load.
+async function load(bundle: Bundle<ClientUnknown>): Promise<Program> {
+  const { code, globals } = printBundle(bundle);
   const module = (await import(
-    `data:text/javascript,${encodeURIComponent(code)}`
-  )) as { default: Program };
-  return { program: module.default, data, globals };
+    `data:text/javascript,${encodeURIComponent(`export default () => ${code};`)}`
+  )) as { default: Program["run"] };
+  return { globals, run: module.default };
 }
 
 export function testClient(
@@ -34,7 +36,9 @@ export function testClient(
       evaluate: async (bundle) => interpreter.evaluate(bundle),
     };
   }
-  const runtime = createRuntime({ window, builtinOf });
+  // The module runs in this realm, not the document's, so the globals it
+  // reads are this realm's.
+  const runtime = createRuntime({ window, builtinOf, global: globalThis });
   return {
     render: async (bundle, parent) =>
       runtime.render(await load(bundle), parent),

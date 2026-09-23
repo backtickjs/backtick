@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const rows = $0()([]);
     const add = (row) => {
@@ -35,4 +35,4 @@ export default ($d) => {
       ),
     [],
   );
-};
+})([]);

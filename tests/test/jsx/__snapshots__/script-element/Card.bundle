@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const label = $0()("hi");
     const row = (size) => {
@@ -35,4 +35,4 @@ export default ($d) => {
     );
   };
   return component(() => f1(() => state), []);
-};
+})([]);

@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const count = $0()(0);
     return element("div", [], () => [
@@ -11,4 +11,4 @@ export default ($d) => {
     ]);
   };
   return component(() => f1(() => state), []);
-};
+})([]);

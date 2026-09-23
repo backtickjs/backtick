@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     let count = 0;
     const bump = () => {
@@ -8,4 +8,4 @@ export default ($d) => {
     return bump() + bump();
   };
   return f1();
-};
+})([]);

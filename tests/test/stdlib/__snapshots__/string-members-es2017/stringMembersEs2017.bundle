@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const word = "ab";
     return {
@@ -10,4 +10,4 @@ export default ($d) => {
     };
   };
   return f1();
-};
+})([]);

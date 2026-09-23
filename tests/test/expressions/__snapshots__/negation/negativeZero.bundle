@@ -1,6 +1,6 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     return 1 / -0;
   };
   return f1();
-};
+})([]);

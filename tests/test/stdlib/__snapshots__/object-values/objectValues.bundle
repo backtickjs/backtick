@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const prices = { apple: 1, pear: 2 };
     return {
@@ -7,4 +7,4 @@ export default ($d) => {
     };
   };
   return f1();
-};
+})([]);

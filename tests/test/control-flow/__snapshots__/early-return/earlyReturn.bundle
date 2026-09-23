@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     let n = 0;
     if (n === 0) {
@@ -9,4 +9,4 @@ export default ($d) => {
     n = 1;
   };
   return f1();
-};
+})([]);

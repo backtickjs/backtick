@@ -1,7 +1,7 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const measure = (v) => (typeof v === "string" ? v.length : v * 2);
     return [measure("abc"), measure(4)];
   };
   return f1();
-};
+})([]);

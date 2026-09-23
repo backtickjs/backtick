@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const builds = $0()(0);
     return element("div", [], () => [
@@ -43,4 +43,4 @@ export default ($d) => {
         () => $0.again(),
       ),
   );
-};
+})([]);

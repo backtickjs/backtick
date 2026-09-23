@@ -1,7 +1,7 @@
-export default ($d) => {
+(($d) => {
   return element("div", [], () => [
     element("span", [], () => "alpha"),
     element("span", [], () => "beta"),
     element("span", [], () => "gamma"),
   ]);
-};
+})([]);

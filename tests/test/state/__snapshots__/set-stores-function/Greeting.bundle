@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const greet = $0()((name) => "hi " + name);
     return element(
@@ -8,4 +8,4 @@ export default ($d) => {
     );
   };
   return component(() => f1(() => state), []);
-};
+})([]);

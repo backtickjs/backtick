@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const xs = $0()([10]);
     const shown = $0()(false);
@@ -32,4 +32,4 @@ export default ($d) => {
     () => state,
     () => ($0) => list(() => $0.each(), $0.children()),
   );
-};
+})([]);

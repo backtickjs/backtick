@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const handlers = { tap: $0(), hold: $0() };
     return handlers;
@@ -11,4 +11,4 @@ export default ($d) => {
     n = 1;
   };
   return f1(() => f2(f3));
-};
+})([]);

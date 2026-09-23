@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const whole = Number.parseInt("42px");
     const based = Number.parseInt("ff", 16);
@@ -6,4 +6,4 @@ export default ($d) => {
     return element("span", [], () => () => whole + based + fractional + "");
   };
   return component(() => f1(), []);
-};
+})([]);

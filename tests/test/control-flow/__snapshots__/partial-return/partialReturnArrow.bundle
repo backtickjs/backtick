@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const pick = (b) => {
       if (b) {
@@ -10,4 +10,4 @@ export default ($d) => {
     return [pick(true), pick(false)];
   };
   return f1();
-};
+})([]);

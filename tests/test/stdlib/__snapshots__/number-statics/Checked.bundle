@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const positive = Number.EPSILON > 0;
     const largest = Number.MAX_VALUE > 1e308;
@@ -29,4 +29,4 @@ export default ($d) => {
     );
   };
   return component(() => f1(), []);
-};
+})([]);

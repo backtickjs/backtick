@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => ({
     present: $0()({ label: "a", inner: { z: 3 } }),
     partial: $0()({ label: "b", inner: {} }),
@@ -8,4 +8,4 @@ export default ($d) => {
     return [o.label, o.inner?.z ?? 0];
   };
   return f1(f2);
-};
+})([]);

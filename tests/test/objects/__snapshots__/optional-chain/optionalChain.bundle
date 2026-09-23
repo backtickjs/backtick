@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1, $2) => ({
     found: $0()({ x: 5 }),
     missing: $0()(null),
@@ -18,4 +18,4 @@ export default ($d) => {
     return s?.concat("!");
   };
   return f1(f2, f3, f4);
-};
+})([]);

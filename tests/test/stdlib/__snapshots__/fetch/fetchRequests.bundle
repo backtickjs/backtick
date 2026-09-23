@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => () => {
     const held = $0()("waiting");
     $1().fetch(
@@ -36,4 +36,4 @@ export default ($d) => {
     () => state,
     () => window,
   );
-};
+})([]);

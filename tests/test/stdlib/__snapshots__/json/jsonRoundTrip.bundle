@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const numbers = JSON.stringify([1, 2, 3]);
     const text = JSON.stringify("hi");
@@ -20,4 +20,4 @@ export default ($d) => {
     );
   };
   return f1();
-};
+})([]);

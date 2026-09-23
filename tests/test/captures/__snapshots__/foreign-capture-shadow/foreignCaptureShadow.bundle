@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const base = 1;
     return $0(base);
@@ -10,4 +10,4 @@ export default ($d) => {
   const f3 = ($0, $1) => $1 + $0($1);
   const f4 = ($0) => $0;
   return f1((base) => f2((base2) => f3((base2) => f4(base), base2)));
-};
+})([]);

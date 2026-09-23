@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const names = $0()(["a", "b", "c"]);
     const rotate = () => {
@@ -30,4 +30,4 @@ export default ($d) => {
       ),
     [],
   );
-};
+})([]);

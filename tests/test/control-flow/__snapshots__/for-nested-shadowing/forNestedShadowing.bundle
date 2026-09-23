@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     let out = "";
     for (let i = 0; i < 2; i = i + 1) {
@@ -10,4 +10,4 @@ export default ($d) => {
     return out;
   };
   return f1();
-};
+})([]);

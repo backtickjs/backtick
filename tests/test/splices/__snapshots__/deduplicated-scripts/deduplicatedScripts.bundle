@@ -1,5 +1,5 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => ({ a: $0(), b: $0() });
   const f2 = () => 7;
   return f1(f2);
-};
+})([]);

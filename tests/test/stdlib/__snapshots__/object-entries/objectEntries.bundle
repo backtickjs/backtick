@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const held = { n: 1, q: "ada" };
     const written = Object.fromEntries(
@@ -7,4 +7,4 @@ export default ($d) => {
     return written.n + " " + written.q;
   };
   return f1();
-};
+})([]);

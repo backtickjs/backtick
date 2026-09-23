@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1, $2) =>
     element("div", [], () => [
       memo(() => $0()($1())),
@@ -59,4 +59,4 @@ export default ($d) => {
     }),
     () => ({ functions: {}, root: 41 }),
   );
-};
+})([]);

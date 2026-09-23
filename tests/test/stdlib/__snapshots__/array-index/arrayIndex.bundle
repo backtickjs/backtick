@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const coins = [5, 31, 7];
     let total = 0;
@@ -8,4 +8,4 @@ export default ($d) => {
     return total;
   };
   return f1();
-};
+})([]);

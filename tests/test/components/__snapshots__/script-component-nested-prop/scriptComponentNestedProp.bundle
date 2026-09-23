@@ -1,5 +1,5 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) =>
     component($0(), [["person", () => () => ({ firstName: "ada" })]]);
   return f1(() => ($0) => element("h2", [], () => () => $0.person().firstName));
-};
+})([]);

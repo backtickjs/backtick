@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => $0()();
   const f2 = ($0) => () => {
     const tree = $0();
@@ -13,4 +13,4 @@ export default ($d) => {
     memo(() => f1(() => f2(() => element("div", [], null)))),
     memo(() => f3(() => f4(() => element("span", [], () => "x")))),
   ]);
-};
+})([]);

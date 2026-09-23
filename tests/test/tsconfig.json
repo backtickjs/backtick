@@ -10,6 +10,6 @@
     "noEmit": true,
     "composite": false
   },
-  "include": ["./**/*.test.tsx"],
+  "include": ["./**/*.test.tsx", "./jsdom.d.ts"],
   "exclude": ["./compile-errors/**/*"]
 }

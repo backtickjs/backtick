@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     return element(
       "span",
@@ -13,4 +13,4 @@ export default ($d) => {
     );
   };
   return component(() => f1(), []);
-};
+})([]);

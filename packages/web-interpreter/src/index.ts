@@ -15,8 +15,8 @@ export { createInterpreter } from "./createInterpreter.js";
 export type { InterpreterOptions, Interpreter } from "./createInterpreter.js";
 export { createRuntime } from "./createRuntime.js";
 export type {
-  PrintedModule,
   PrintedRuntime,
   Program,
+  RuntimeOptions,
 } from "./createRuntime.js";
 export type { Bundle } from "@backtickjs/core";

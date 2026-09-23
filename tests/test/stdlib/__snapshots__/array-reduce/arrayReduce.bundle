@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const prices = [4.5, 3.25, 2];
     const total = prices.reduce((sum, price) => sum + price, 0);
@@ -14,4 +14,4 @@ export default ($d) => {
     );
   };
   return f1();
-};
+})([]);

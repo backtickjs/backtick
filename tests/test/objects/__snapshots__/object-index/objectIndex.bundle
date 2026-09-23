@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => (currency) => {
     const table = $0();
     const asked = table[currency] ?? 0;
@@ -6,4 +6,4 @@ export default ($d) => {
     return asked + usd;
   };
   return f1(() => ({ usd: 3, eur: 4 }));
-};
+})([]);

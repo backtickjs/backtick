@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => (ready, count) => {
     if (!ready) {
       {
@@ -8,4 +8,4 @@ export default ($d) => {
     return !(count > 3) ? "room left" : "full";
   };
   return f1();
-};
+})([]);

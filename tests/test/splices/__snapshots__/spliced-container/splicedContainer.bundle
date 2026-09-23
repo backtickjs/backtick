@@ -1,6 +1,6 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => $0().x + 1;
   const f2 = () => 1;
   const f3 = () => "origin";
   return f1(() => ({ x: f2(), label: f3() }));
-};
+})([]);

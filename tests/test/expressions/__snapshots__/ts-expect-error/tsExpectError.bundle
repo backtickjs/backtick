@@ -1,7 +1,7 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const count = "one";
     return count;
   };
   return f1();
-};
+})([]);

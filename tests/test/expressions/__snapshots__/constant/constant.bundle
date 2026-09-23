@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => 1;
   return f1();
-};
+})([]);

@@ -1,7 +1,7 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => ({ list: $0(), obj: $1() });
   return f1(
     () => [1, "two", true, null],
     () => ({ k: 3 }),
   );
-};
+})([]);

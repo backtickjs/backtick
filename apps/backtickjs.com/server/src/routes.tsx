@@ -27,7 +27,6 @@ async function toHtml(element: BacktickElement): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="content-security-policy" content="default-src 'self'">
     <meta name="color-scheme" content="light dark">
     <meta name="compiler" content="${compilerUrl}">
     <meta name="sandbox" content="${sandboxUrl}">

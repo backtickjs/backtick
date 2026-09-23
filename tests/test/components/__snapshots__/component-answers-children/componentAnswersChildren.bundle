@@ -1,6 +1,6 @@
-export default ($d) => {
+(($d) => {
   return element("div", [], () => [
     "counted",
     [element("em", [], () => "one"), element("em", [], () => "two")],
   ]);
-};
+})([]);

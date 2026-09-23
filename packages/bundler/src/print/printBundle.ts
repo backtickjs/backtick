@@ -10,22 +10,21 @@ import type {
 } from "@backtickjs/platform-sdk";
 
 /**
- * A bundle as JavaScript: a module whose default export takes `data` and
- * answers with what the bundle's root evaluates to.
+ * A bundle as JavaScript: one expression that answers with what the bundle's
+ * root evaluates to.
  *
  * Literals are printed as literals, strings escaped so that no `</script>`
  * or `<!--` appears. The bundle does not yet tell a value the host computed
  * from one a script wrote, so both are printed that way for now. An
- * element's tag or prop name that is not a plain name is read from `data`,
- * as `$d[i]`.
+ * element's tag or prop name that is not a plain name is data: the
+ * expression carries its data in one `JSON.parse`, and reads it as `$d[i]`.
  *
  * A builtin is read as the global of its name, and so are the runtime's
- * `element`, `list`, `component` and `memo`: the client puts them on
- * `globalThis` before it runs the module.
+ * `element`, `list`, `component` and `memo`: the client puts them on the
+ * global object before it evaluates the expression.
  */
 export interface PrintedBundle {
   readonly code: string;
-  readonly data: readonly string[];
   /** The builtins the code reads as globals, which the client provides. */
   readonly globals: readonly string[];
 }
@@ -360,14 +359,17 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
     ([name, node]) => `const ${label(name)} = ${arrow(node)};`,
   );
   const root = expression(bundle.root);
+  const carried =
+    data.length === 0
+      ? "[]"
+      : `JSON.parse(${stringLiteral(JSON.stringify(data))})`;
   const code = [
-    "export default ($d) => {",
+    "(($d) => {",
     ...functions,
     `return ${root};`,
-    "};",
-    "",
+    `})(${carried})`,
   ].join("\n");
-  return { code, data, globals: [...read] };
+  return { code, globals: [...read] };
 }
 
 // Whether what a position holds can change after it has first been read: the

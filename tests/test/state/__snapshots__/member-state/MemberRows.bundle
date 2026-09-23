@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const build = (from) => {
       return Array.from({ length: 3 }, (_, at) => {
@@ -34,4 +34,4 @@ export default ($d) => {
       ),
     [],
   );
-};
+})([]);

@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const Dot = (props) =>
       element(
@@ -56,4 +56,4 @@ export default ($d) => {
     () => () => f2(),
     () => ($0) => list(() => $0.each(), $0.children()),
   );
-};
+})([]);

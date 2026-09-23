@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const base = { a: 1, b: 2 };
     const over = { b: 9 };
@@ -9,4 +9,4 @@ export default ($d) => {
     ]);
   };
   return f1();
-};
+})([]);

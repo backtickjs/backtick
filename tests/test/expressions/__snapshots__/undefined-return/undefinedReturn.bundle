@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const stored = $0();
     const caught = $0()();
@@ -6,4 +6,4 @@ export default ($d) => {
   };
   const f2 = () => () => "hi";
   return f1(f2);
-};
+})([]);

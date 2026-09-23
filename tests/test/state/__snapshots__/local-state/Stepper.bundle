@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => {
     const size = $0()(16);
     return element(
@@ -17,4 +17,4 @@ export default ($d) => {
     );
   };
   return component(() => f1(() => state), []);
-};
+})([]);

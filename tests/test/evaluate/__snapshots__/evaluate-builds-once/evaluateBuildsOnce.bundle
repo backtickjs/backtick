@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1, $2) => {
     const asked = $0()(0);
     return element("div", [], () => [
@@ -35,4 +35,4 @@ export default ($d) => {
         () => evaluate,
       ),
   );
-};
+})([]);

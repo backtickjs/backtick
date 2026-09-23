@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const held = $0()(null);
     return element(
@@ -14,4 +14,4 @@ export default ($d) => {
     () => state,
     () => evaluate,
   );
-};
+})([]);

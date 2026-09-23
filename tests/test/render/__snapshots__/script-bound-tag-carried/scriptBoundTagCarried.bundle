@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1, $2) => {
     const count = $0()(0);
     const Badge = (p) =>
@@ -32,4 +32,4 @@ export default ($d) => {
     (count, Badge) => f2(Badge, count),
     () => ($0) => f3(() => $0),
   );
-};
+})([]);

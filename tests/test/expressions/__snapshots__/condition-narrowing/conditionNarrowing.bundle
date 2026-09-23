@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => ({
     missing: $0()(null, true),
     loud: $0()("!hi", true),
@@ -20,4 +20,4 @@ export default ($d) => {
   };
   const f3 = () => true;
   return f1(() => f2(f3));
-};
+})([]);

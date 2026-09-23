@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => ({ both: $0()(true, true), one: $0()(true, false) });
   const f2 = () => (a, b) => {
     const keep = (on) => on;
@@ -10,4 +10,4 @@ export default ($d) => {
     return "dropped";
   };
   return f1(f2);
-};
+})([]);

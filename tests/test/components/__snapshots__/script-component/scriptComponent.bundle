@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     return element("div", [], () => [
       memo(() => component($0(), [["title", () => () => "totals"]])),
@@ -9,4 +9,4 @@ export default ($d) => {
     () => ($0) => element("h2", [], () => () => $0.title()),
     () => () => element("span", [], () => "new"),
   );
-};
+})([]);

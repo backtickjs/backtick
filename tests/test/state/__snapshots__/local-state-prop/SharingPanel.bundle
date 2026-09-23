@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const size = $0()(16);
     return element("div", [], () => [
@@ -26,4 +26,4 @@ export default ($d) => {
       ),
     [],
   );
-};
+})([]);

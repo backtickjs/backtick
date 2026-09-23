@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const count = 1;
     if (count === 1) {
@@ -9,4 +9,4 @@ export default ($d) => {
     return "many";
   };
   return f1();
-};
+})([]);

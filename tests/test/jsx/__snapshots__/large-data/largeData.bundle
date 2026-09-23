@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => $0();
   const f2 = ($0) => (order) => $0(order);
   const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
@@ -79,4 +79,4 @@ export default ($d) => {
       ),
     ),
   );
-};
+})([]);

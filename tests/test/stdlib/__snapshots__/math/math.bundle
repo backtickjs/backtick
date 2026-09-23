@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = () => {
     const rounded =
       Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
@@ -25,4 +25,4 @@ export default ($d) => {
     );
   };
   return f1();
-};
+})([]);

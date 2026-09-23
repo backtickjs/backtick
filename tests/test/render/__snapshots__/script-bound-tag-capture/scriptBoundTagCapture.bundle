@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1, $2, $3, $4) => {
     const count = $0()(0);
     const Badge = (props) => element("b", [], () => () => "n " + props.n);
@@ -41,4 +41,4 @@ export default ($d) => {
         count,
       ),
   );
-};
+})([]);

@@ -13,8 +13,8 @@ import { renderValue } from "./renderValue.ts";
 const verbatim = [(value: unknown) => value as string];
 
 /**
- * Records what `value` prints as — the bundle's code and its data — and what it
- * draws or evaluates to, next to the test: `__snapshots__/<test file>/<name>.<artifact>`.
+ * Records what `value` prints as, and what it draws or evaluates to, next to
+ * the test: `__snapshots__/<test file>/<name>.<artifact>`.
  *
  * None of it records a source position. What the test file compiles to is
  * recorded once for the whole file, by `compiler.test.ts`.
@@ -39,7 +39,6 @@ export async function snapshotCase(
   // Formatted, so a change to what is printed reads as the code it changed.
   const printed = printBundle(await bundler.run(value));
   record(await prettier.format(printed.code, { parser: "babel" }), "bundle");
-  record(`${JSON.stringify(printed.data, null, 2)}\n`, "data.json");
   const evaluated = await evaluate(value);
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));

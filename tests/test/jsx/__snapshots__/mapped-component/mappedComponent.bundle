@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0) => $0();
   const f2 = ($0) => (row) => $0(row);
   const f3 = ($0) => "row " + $0;
@@ -8,4 +8,4 @@ export default ($d) => {
       f2((row) => element("span", [], () => () => f3(row))),
     ),
   );
-};
+})([]);

@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => {
     const ids = $0()([1, 2, 3]);
     const swap = () => {
@@ -33,4 +33,4 @@ export default ($d) => {
       ),
     [],
   );
-};
+})([]);

@@ -1,4 +1,4 @@
-export default ($d) => {
+(($d) => {
   const f1 = ($0, $1) => $0() + $1();
   const f2 = ($0) => {
     const total = 1;
@@ -13,4 +13,4 @@ export default ($d) => {
     () => f2(f3),
     () => f2(f4),
   );
-};
+})([]);
