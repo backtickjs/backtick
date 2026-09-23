@@ -9,7 +9,7 @@ it("arrayIsArray", async (t) => {
     t,
     "arrayIsArray",
     cs.lift((() => {
-    return cs.const([cs.receiver(Array).isArray([]), cs.receiver(Array).isArray([1, 2]), cs.receiver(Array).isArray("ab"), cs.receiver(Array).isArray({ length: 0 }), cs.receiver(Array).isArray(null)]);
+    return cs.const([Array.isArray([]), Array.isArray([1, 2]), Array.isArray("ab"), Array.isArray({ length: 0 }), Array.isArray(null)]);
 })()),
   );
 });

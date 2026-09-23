@@ -12,13 +12,13 @@ import { snapshotCase } from "../snapshotCase.ts";
 const badge = await bundler.run(
   cs.lift(cs.const((__cs_props: {
     count: number;
-}) => <b>{cs.lift("count " + cs.receiver(__cs_props).count)}</b>)),
+}) => <b>{cs.lift("count " + __cs_props.count)}</b>)),
 );
 
 const scriptBoundTag = cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     const __cs_Badge = cs.const((cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)((cs.splice((badge)) satisfies typeof cs.ClientUnknown)));
-    return cs.const(<div>{cs.lift(<__cs_Badge count={cs.receiver(__cs_count).get()}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>more</button>)}</div>);
+    return cs.const(<div>{cs.lift(<__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>);
 })());
 
 it("scriptBoundTag", async (t) => {

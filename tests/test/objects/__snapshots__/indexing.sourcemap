@@ -1,5 +1,4 @@
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 [                  → [
 5                  → 5
 ,                  → , 
@@ -7,46 +6,39 @@ cs.receiver(       →
 ,                  → , 
 7                  → 7
 ]                  → ]
-)                  → 
 [                  → [
 "0"                → "0"
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 "abc"              → "abc"
-)                  → 
 [                  → [
 "0"                → "0"
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 {                  → ({ 
 x                  → x
 :                  → : 
 1                  → 1
  }                 →  })
-)                  → 
 [                  → [
 0                  → 0
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
+(                  → 
 7                  → 7
  as                →  as 
 unknown            → unknown
  as                →  as 
 number             → number
 []                 → []
-)                  → 
-[                  → [
+)[                 → [
 0                  → 0
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 [                  → [
 5                  → 5
 ,                  → , 
@@ -54,13 +46,11 @@ cs.receiver(       →
 ,                  → , 
 7                  → 7
 ]                  → ]
-)                  → 
 [                  → [
 9                  → 9
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 [                  → [
 5                  → 5
 ,                  → , 
@@ -68,13 +58,11 @@ cs.receiver(       →
 ,                  → , 
 7                  → 7
 ]                  → ]
-)                  → 
 [                  → [
 1.5                → 1.5
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 [                  → [
 5                  → 5
 ,                  → , 
@@ -82,7 +70,6 @@ cs.receiver(       →
 ,                  → , 
 7                  → 7
 ]                  → ]
-)                  → 
 [                  → [
 -cs.number(        → -
 1                  → 1
@@ -90,7 +77,7 @@ cs.receiver(       →
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
+(                  → 
 {                  → ({ 
 x                  → x
 :                  → : 
@@ -106,15 +93,12 @@ string             → string
 number             → number
 ;                  → 
 \n}                →  }
-)                  → 
-[                  → [
+)[                 → [
 "y"                → "y"
 ]                  → ]
 ))                 → `
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 "abc"              → "abc"
-)                  → 
 [                  → [
 9                  → 9
 ]                  → ]

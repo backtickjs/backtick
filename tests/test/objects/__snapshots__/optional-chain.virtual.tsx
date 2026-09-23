@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const pick = cs.lift(cs.const((__cs_p: {
     x: number;
 } | null) => {
-    return cs.const(cs.receiver(__cs_p)?.x);
+    return cs.const(__cs_p?.x);
 }));
 
 const deep = cs.lift(cs.const((__cs_o: {
@@ -16,11 +16,11 @@ const deep = cs.lift(cs.const((__cs_o: {
         z: number;
     } | null;
 } | null) => {
-    return cs.const(cs.receiver(cs.receiver(__cs_o)?.inner)?.z);
+    return cs.const(__cs_o?.inner?.z);
 }));
 
 const shout = cs.lift(cs.const((__cs_s: string | null) => {
-    return cs.const(cs.receiver(__cs_s)?.concat("!"));
+    return cs.const(__cs_s?.concat("!"));
 }));
 
 it("optionalChain", async (t) => {

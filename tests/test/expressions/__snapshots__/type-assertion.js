@@ -40,9 +40,14 @@ it("typeAssertion", async (t) => {
               kind: "()",
               loc: [20, 20, 20, 41],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [20, 20, 20, 30],
-                name: "JSON.parse",
+                expression: {
+                  kind: "bltn",
+                  loc: [20, 20, 20, 24],
+                  name: "JSON",
+                },
+                name: "parse",
               },
               arguments: [
                 {

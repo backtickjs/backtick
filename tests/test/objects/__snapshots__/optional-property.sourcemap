@@ -23,19 +23,13 @@ number                                → number
 ) => {\n                              → ) => {\n  
 return cs.const(                      → return 
 [                                     → [
-cs.receiver(                          → 
 __cs_o                                → o
-)                                     → 
 .                                     → .
 label                                 → label
 ,                                     → , 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_o                                → o
-)                                     → 
 .                                     → .
 inner                                 → inner
-)                                     → 
 ?.                                    → ?.
 z                                     → z
  ??                                   →  ?? 

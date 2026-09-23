@@ -40,9 +40,7 @@ For                                   → For
                                       →  
 each                                  → each
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_xs                               → xs
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -67,14 +65,12 @@ For                                   → For
 >                                     → >
 )}{cs.lift(                           → \n        {
 (cs.condition(                        → 
-cs.receiver(                          → 
 __cs_shown                            → shown
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
 ) &&                                  → 
-cs.receiver(__cs_shown).get()         → shown.get() [-semantic -completion -navigation -verification]
+__cs_shown.get()                      → shown.get() [-semantic -completion -navigation -verification]
 ) ?                                   →  ? 
 <                                     → <
 title                                 → title
@@ -103,9 +99,7 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_xs                               → xs
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -126,9 +120,7 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_shown                            → shown
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (

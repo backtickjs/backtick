@@ -53,18 +53,14 @@ null                                  → null
  !==                                  →  !== 
 undefined                             → undefined
 ,                                     → ,\n          
-cs.receiver(                          → 
 __cs_names                            → names
-)                                     → 
 [                                     → [
 1                                     → 1
 ]                                     → ]
  ===                                  →  === 
 undefined                             → undefined
 ,                                     → ,\n          
-cs.receiver(                          → 
 __cs_names                            → names
-)                                     → 
 [                                     → [
 1                                     → 1
 ]                                     → ]

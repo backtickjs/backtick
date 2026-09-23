@@ -30,9 +30,7 @@ ref                                   → ref
 ={cs.lift(                            → ={
 __cs_element                          → element
  =>                                   → ) => 
-cs.receiver(                          → 
 __cs_field                            → field
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -47,14 +45,10 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_field                            → field
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
-)                                     → 
 ?.                                    → ?.
 focus                                 → focus
 ()                                    → ()
@@ -86,9 +80,7 @@ __cs_element                          → element
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_element                          → element
-)                                     → 
 .                                     → .
 focus                                 → focus
 ()                                    → ()
@@ -145,15 +137,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -164,9 +152,7 @@ get                                   → get
 >{cs.lift(                            → >\n                {
 "n "                                  → "n "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -175,14 +161,12 @@ button                                → button
 >                                     → >
 )}{cs.lift(                           → \n              {
 (cs.condition(                        → 
-cs.receiver(                          → 
 __cs_shown                            → shown
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
 ) &&                                  → 
-cs.receiver(__cs_shown).get()         → shown.get() [-semantic -completion -navigation -verification]
+__cs_shown.get()                      → shown.get() [-semantic -completion -navigation -verification]
 ) ?                                   →  ? 
 <                                     → (\n                <
 p                                     → p
@@ -190,21 +174,15 @@ p                                     → p
 ref                                   → ref
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 (                                     → (
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

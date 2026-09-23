@@ -1,13 +1,11 @@
 cs.lift((() => {\n                    → cs`{\n    
 return cs.const(                      → return 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (f)                                   → $f
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 1                                     → 1
 )                                     → )
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

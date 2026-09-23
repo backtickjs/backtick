@@ -28,9 +28,7 @@ span                                  → span
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_greet                            → greet
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -42,9 +40,7 @@ __cs_name                             → name
 )                                     → )
 )}                                    → }
 >{cs.lift(                            → >\n        {
-cs.receiver(                          → 
 __cs_greet                            → greet
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

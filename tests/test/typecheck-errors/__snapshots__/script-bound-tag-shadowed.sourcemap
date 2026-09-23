@@ -17,9 +17,7 @@ b                                         → b
 >{cs.lift(                                → >{
 "n "                                      → "n "
  +                                        →  + 
-cs.receiver(                              → 
 __cs_p                                    → p
-)                                         → 
 .                                         → .
 n                                         → n
 )}</                                      → }</

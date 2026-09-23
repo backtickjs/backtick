@@ -7,7 +7,7 @@ import type {
   ClientUnknown,
   Spliceable,
 } from "@backtickjs/core";
-import { evaluateUntrustedBundle, render } from "@backtickjs/web-testing";
+import { evaluateBundle, render } from "@backtickjs/web-testing";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
 //
@@ -72,18 +72,14 @@ describe("a tag that would execute", () => {
   // HTML folds a tag name, so every spelling of it is the element.
   it("is refused in HTML whatever its case", () => {
     for (const tag of ["SCRIPT", "Script"]) {
-      assert.throws(
-        () => evaluateUntrustedBundle(element(tag)),
-        /may not draw/,
-        tag,
-      );
+      assert.throws(() => evaluateBundle(element(tag)), /may not draw/, tag);
     }
   });
 
   // SVG does not fold, so `svg:SCRIPT` is an unknown element rather than the
   // one that runs. Verified in Chrome rather than read off the spec.
   it("does not stop a tag that only looks like one", async () => {
-    const svgScript = evaluateUntrustedBundle(
+    const svgScript = evaluateBundle(
       element("svg:SCRIPT"),
     ) as unknown as Element;
     assert.equal(svgScript.localName, "SCRIPT");

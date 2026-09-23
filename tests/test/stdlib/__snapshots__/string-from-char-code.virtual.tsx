@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // arguments, where `String.fromCodePoint` takes the one code point.
 async function Written() {
   return cs.lift((() => {
-    return cs.const(<span>{cs.lift(cs.receiver(String).fromCharCode(72, 105) + cs.receiver(String).fromCharCode(55357, 56832))}</span>);
+    return cs.const(<span>{cs.lift(String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832))}</span>);
 })());
 }
 

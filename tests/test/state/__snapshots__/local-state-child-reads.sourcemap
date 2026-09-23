@@ -1,11 +1,9 @@
 cs.lift(cs.const(                     → cs`
 "font-size: "                         → "font-size: "
  + (                                  →  + 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (selected)                            → $selected
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -30,21 +28,17 @@ cs.lift(cs.const(                     → cs`
  +                                    →  + 
 " of "                                → " of "
  +                                    →  + 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (selected)                            → $selected
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
 ))                                    → `
 cs.lift(cs.const(                     → cs`
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (selected)                            → $selected
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -81,9 +75,7 @@ span                                  → span
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_selected                         → selected
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (

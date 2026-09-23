@@ -490,9 +490,14 @@ it("stdlibEs2015", async (t) => {
                     kind: "()",
                     loc: [25, 15, 25, 42],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [25, 15, 25, 26],
-                      name: "Object.keys",
+                      expression: {
+                        kind: "bltn",
+                        loc: [25, 15, 25, 21],
+                        name: "Object",
+                      },
+                      name: "keys",
                     },
                     arguments: [
                       {

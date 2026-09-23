@@ -15,7 +15,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const loadedBadge = await bundler.run(
   cs.lift(cs.const((__cs_props: {
     count: number;
-}) => <b>{cs.lift("count " + cs.receiver(__cs_props).count)}</b>)),
+}) => <b>{cs.lift("count " + __cs_props.count)}</b>)),
 );
 
 const scriptBoundTagLoading = cs.lift((() => {
@@ -26,10 +26,10 @@ const scriptBoundTagLoading = cs.lift((() => {
     const __cs_Badge = cs.const((__cs_props: {
         count: number;
     }) => {
-        const __cs_held = cs.const(cs.receiver(__cs_drawn).get());
+        const __cs_held = cs.const(__cs_drawn.get());
         return cs.const(__cs_held === null ? null : (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(__cs_held)(__cs_props));
     });
-    return cs.const(<div>{cs.lift(cs.receiver(__cs_drawn).get() === null ? <i>loading</i> : <__cs_Badge count={cs.receiver(__cs_count).get()}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_drawn).set((cs.splice((loadedBadge)) satisfies typeof cs.ClientUnknown)))}>load</button>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + 1))}>more</button>)}</div>);
+    return cs.const(<div>{cs.lift(__cs_drawn.get() === null ? <i>loading</i> : <__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_drawn.set((cs.splice((loadedBadge)) satisfies typeof cs.ClientUnknown)))}>load</button>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>);
 })());
 
 it("scriptBoundTagLoading", async (t) => {

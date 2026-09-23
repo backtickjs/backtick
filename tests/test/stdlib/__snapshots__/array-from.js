@@ -38,9 +38,14 @@ it("arrayFrom", async (t) => {
               kind: "()",
               loc: [17, 23, 17, 73],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [17, 23, 17, 33],
-                name: "Array.from",
+                expression: {
+                  kind: "bltn",
+                  loc: [17, 23, 17, 28],
+                  name: "Array",
+                },
+                name: "from",
               },
               arguments: [
                 {
@@ -121,9 +126,14 @@ it("arrayFrom", async (t) => {
               kind: "()",
               loc: [18, 21, 18, 67],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [18, 21, 18, 31],
-                name: "Array.from",
+                expression: {
+                  kind: "bltn",
+                  loc: [18, 21, 18, 26],
+                  name: "Array",
+                },
+                name: "from",
               },
               arguments: [
                 {
@@ -194,9 +204,14 @@ it("arrayFrom", async (t) => {
               kind: "()",
               loc: [19, 22, 21, 8],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [19, 22, 19, 32],
-                name: "Array.from",
+                expression: {
+                  kind: "bltn",
+                  loc: [19, 22, 19, 27],
+                  name: "Array",
+                },
+                name: "from",
               },
               arguments: [
                 {

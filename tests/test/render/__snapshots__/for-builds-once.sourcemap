@@ -16,11 +16,9 @@ string                                    → string
 const                                     → const 
 __cs_started                              → started
  = cs.const(                              →  = 
-cs.receiver(                              → 
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-)                                         → 
 .                                         → .
 setTimeout                                → setTimeout
 (                                         → (
@@ -35,9 +33,7 @@ if ((cs.condition(                        → if (
 ))                                        → ) 
 {\n                                       → {\n        
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_items                                → items
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
@@ -59,9 +55,7 @@ For                                       → For
                                           →  
 each                                      → each
 ={cs.lift(                                → ={
-cs.receiver(                              → 
 __cs_items                                → items
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()
@@ -105,9 +99,7 @@ span                                      → span
 >{cs.lift(                                → >{
 "asked "                                  → "asked "
  +                                        →  + 
-cs.receiver(                              → 
 __cs_asked                                → asked
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()
@@ -122,15 +114,11 @@ more                                      → more
 ={cs.lift(                                → ={
 () => {\n                                 → () => {\n          
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_asked                                → asked
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
-cs.receiver(                              → 
 __cs_asked                                → asked
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()
@@ -140,9 +128,7 @@ get                                       → get
 );                                        → ;
 \n                                        → \n          
 return cs.const(                          → return 
-cs.receiver(                              → 
 __cs_asked                                → asked
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()

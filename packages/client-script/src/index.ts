@@ -79,4 +79,3 @@ export { version } from "./version.js";
 
 // The tag itself, and how a script reads what it is handed.
 export { cs } from "./cs.js";
-export type { ClientGlobal, Receiver } from "./Receiver.js";

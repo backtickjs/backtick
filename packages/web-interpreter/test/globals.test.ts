@@ -3,9 +3,8 @@ import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/platform-sdk/schema";
-import type { Builtins } from "@backtickjs/platform-sdk";
 import type { Response, Window } from "@backtickjs/web-sdk";
-import { builtinOf, getters } from "../dist/builtinOf.js";
+import { builtinOf } from "../dist/builtinOf.js";
 import type { Instance } from "../dist/Instance.js";
 
 // What the interpreter answers with, against what the schema says a script may
@@ -16,15 +15,8 @@ import type { Instance } from "../dist/Instance.js";
 // read.
 const instance = {} as Instance;
 
-function answer<Name extends keyof Builtins>(name: Name): Builtins[Name] {
-  return builtinOf(instance, name) as unknown as Builtins[Name];
-}
-
 describe("builtins", () => {
   it("the client answers for every name in scope", () => {
-    // Read off the schema and not off a list beside it, whether the host's lib
-    // declares the name or the framework does: a name added there is checked
-    // here without anything being told about it twice.
     for (const name of Object.keys(schema.builtins)) {
       assert.notEqual(
         builtinOf(instance, name),
@@ -34,57 +26,9 @@ describe("builtins", () => {
     }
   });
 
-  it("reads exactly the names the schema calls getters", () => {
-    // The client acts on `getter` without reading the schema — nothing in its
-    // answers tells `length` from `trim` — so the two lists are held together
-    // here. A name that starts or stops being a getter fails on this line.
-    const declared = Object.entries(schema.builtins)
-      .filter(([, node]) => {
-        const written = node.type === "generic" ? node.expression : node;
-        return written.type === "function" && written.getter === true;
-      })
-      .map(([name]) => name);
-    assert.deepEqual(Object.keys(getters).sort(), declared.sort());
-  });
-
-  it("read a string as a number", () => {
-    assert.equal(answer("Number.parseInt")("42"), 42);
-    assert.equal(answer("Number.parseInt")("42px"), 42);
-    assert.equal(answer("Number.parseInt")("ff", 16), 255);
-    assert.equal(answer("Number.parseFloat")("1.5"), 1.5);
-  });
-
-  it("hold a value beside the functions of a namespace", () => {
-    assert.equal(answer("Number.EPSILON"), Number.EPSILON);
-  });
-
-  it("tell what a number is without converting to one", () => {
-    assert.equal(answer("Number.isInteger")(2), true);
-    assert.equal(answer("Number.isInteger")(2.5), false);
-    assert.equal(answer("Number.isFinite")(2), true);
-    // Unconverted, so a string that reads as a number is still not one.
-    assert.equal(answer("Number.isFinite")("2"), false);
-    assert.equal(answer("Number.isInteger")("2"), false);
-  });
-
-  it("percent-encode a string as UTF-8", () => {
-    assert.equal(
-      answer("encodeURIComponent")("a b+c&d#e%é"),
-      "a%20b%2Bc%26d%23e%25%C3%A9",
-    );
-    assert.equal(answer("encodeURIComponent")(true), "true");
-  });
-
-  it("read a percent-encoded string back", () => {
-    assert.equal(answer("decodeURIComponent")("a%20b+%C3%A9"), "a b+é");
-    assert.throws(() => answer("decodeURIComponent")("%E"));
-  });
-
-  it("write a string from the code points it is handed", () => {
-    assert.equal(answer("String.fromCodePoint")(72, 105), "Hi");
-    // The schema says none is the empty string, where an empty `Math.min` has
-    // no answer to give.
-    assert.equal(answer("String.fromCodePoint")(), "");
+  it("answers an ECMAScript global with the client's own", () => {
+    assert.equal(builtinOf(instance, "Math"), Math);
+    assert.equal(builtinOf(instance, "encodeURIComponent"), encodeURIComponent);
   });
 });
 

@@ -2,9 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_floor              → floor
  = cs.const(            →  = 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 floor                   → floor
 );                      → ;
@@ -40,9 +38,7 @@ __cs_floor              → floor
  +                      →  + 
 __cs_apply              → apply
 (                       → (
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 ceil                    → ceil
 ,                       → , 

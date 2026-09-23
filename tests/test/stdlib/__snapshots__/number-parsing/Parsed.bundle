@@ -12,8 +12,12 @@
             [
               "()",
               [
-                "bltn",
-                "Number.parseInt"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "parseInt"
               ],
               [
                 "42px"
@@ -26,8 +30,12 @@
             [
               "()",
               [
-                "bltn",
-                "Number.parseInt"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "parseInt"
               ],
               [
                 "ff",
@@ -41,8 +49,12 @@
             [
               "()",
               [
-                "bltn",
-                "Number.parseFloat"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "parseFloat"
               ],
               [
                 "1.5"

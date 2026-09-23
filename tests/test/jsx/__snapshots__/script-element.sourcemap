@@ -32,9 +32,7 @@ const                                     → const
 __cs_press                                → press
  = cs.const(                              →  = 
 () =>                                     → () => 
-cs.receiver(                              → 
 __cs_label                                → label
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
@@ -62,9 +60,7 @@ __cs_css                                  → css
 onclick                                   → onclick
 ={cs.lift(                                → ={
 () =>                                     → () => 
-cs.receiver(                              → 
 __cs_label                                → label
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
@@ -72,9 +68,7 @@ set                                       → set
 )                                         → )
 )}                                        → }
 >{cs.lift(                                → >\n            {
-cs.receiver(                              → 
 __cs_label                                → label
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()

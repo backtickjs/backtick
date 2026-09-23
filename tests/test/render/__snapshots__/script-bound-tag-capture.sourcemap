@@ -28,9 +28,7 @@ b                                     → b
 >{cs.lift(                            → >{
 "n "                                  → "n "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_props                            → props
-)                                     → 
 .                                     → .
 n                                     → n
 )}</                                  → }</
@@ -49,9 +47,7 @@ __cs_Badge                            → Badge
                                       →  
 n                                     → n
 ={                                    → ={
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -76,9 +72,7 @@ __cs_Badge                            → Badge
                                       →  
 n                                     → n
 ={                                    → ={
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -100,9 +94,7 @@ __cs_Badge                            → Badge
                                       →  
 n                                     → n
 ={                                    → ={
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -140,9 +132,7 @@ n                                     → n
 ={                                    → ={
 __cs_m                                → m
  *                                    →  * 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -160,15 +150,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

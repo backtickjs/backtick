@@ -11,7 +11,7 @@ it("stringMembersEs2017", async (t) => {
     "stringMembersEs2017",
     cs.lift((() => {
     const __cs_word = cs.const("ab");
-    return cs.const({ padded: cs.receiver(__cs_word).padStart(4) + "|" + cs.receiver(__cs_word).padEnd(5, "-="), trimmed: cs.receiver("  x  ").trimStart() + "|" + cs.receiver("  x  ").trimEnd() + "|", at: [cs.receiver(__cs_word).at(0), cs.receiver(__cs_word).at(-cs.number(1)), cs.receiver(__cs_word).at(5)], replaced: cs.receiver("a.b.c").replaceAll(".", "/"), replacedBy: cs.receiver("a.b").replaceAll(".", (__cs_found, __cs_offset) => "" + __cs_offset) });
+    return cs.const({ padded: __cs_word.padStart(4) + "|" + __cs_word.padEnd(5, "-="), trimmed: "  x  ".trimStart() + "|" + "  x  ".trimEnd() + "|", at: [__cs_word.at(0), __cs_word.at(-cs.number(1)), __cs_word.at(5)], replaced: "a.b.c".replaceAll(".", "/"), replacedBy: "a.b".replaceAll(".", (__cs_found, __cs_offset) => "" + __cs_offset) });
 })()),
   );
 });

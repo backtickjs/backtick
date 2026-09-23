@@ -18,8 +18,12 @@
             [
               "()",
               [
-                "bltn",
-                "Object.fromEntries"
+                ".",
+                [
+                  "bltn",
+                  "Object"
+                ],
+                "fromEntries"
               ],
               [
                 [
@@ -30,8 +34,12 @@
                       [
                         "()",
                         [
-                          "bltn",
-                          "Object.entries"
+                          ".",
+                          [
+                            "bltn",
+                            "Object"
+                          ],
+                          "entries"
                         ],
                         [
                           [

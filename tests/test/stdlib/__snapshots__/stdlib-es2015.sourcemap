@@ -23,9 +23,7 @@ return cs.const(        → return
 {                       → {\n        
 found                   → found
 :                       → : 
-cs.receiver(            → 
 __cs_xs                 → xs
-)                       → 
 .                       → .
 find                    → find
 (                       → (
@@ -38,9 +36,7 @@ __cs_x                  → x
 ,                       → ,\n        
 missing                 → missing
 :                       → : 
-cs.receiver(            → 
 __cs_xs                 → xs
-)                       → 
 .                       → .
 find                    → find
 (                       → (
@@ -55,9 +51,7 @@ undefined               → undefined
 ,                       → ,\n        
 at                      → at
 :                       → : 
-cs.receiver(            → 
 __cs_xs                 → xs
-)                       → 
 .                       → .
 findIndex               → findIndex
 (                       → (
@@ -70,9 +64,7 @@ __cs_x                  → x
 ,                       → ,\n        
 nowhere                 → nowhere
 :                       → : 
-cs.receiver(            → 
 __cs_xs                 → xs
-)                       → 
 .                       → .
 findIndex               → findIndex
 (                       → (
@@ -85,9 +77,7 @@ __cs_x                  → x
 ,                       → ,\n        
 includes                → includes
 :                       → : 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 includes                → includes
 (                       → (
@@ -96,9 +86,7 @@ includes                → includes
 ,                       → ,\n        
 startsWith              → startsWith
 :                       → : 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 startsWith              → startsWith
 (                       → (
@@ -107,9 +95,7 @@ startsWith              → startsWith
 ,                       → ,\n        
 endsWith                → endsWith
 :                       → : 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 endsWith                → endsWith
 (                       → (
@@ -120,9 +106,7 @@ endsWith                → endsWith
 ,                       → ,\n        
 repeated                → repeated
 :                       → : 
-cs.receiver(            → 
 "ab"                    → "ab"
-)                       → 
 .                       → .
 repeat                  → repeat
 (                       → (
@@ -131,9 +115,7 @@ repeat                  → repeat
 ,                       → ,\n        
 codePoint               → codePoint
 :                       → : 
-cs.receiver(            → 
 "\\uD83D\\uDE00"        → "\\u{1F600}"
-)                       → 
 .                       → .
 codePointAt             → codePointAt
 (                       → (
@@ -142,9 +124,7 @@ codePointAt             → codePointAt
 ,                       → ,\n        
 keys                    → keys
 :                       → : 
-cs.receiver(            → 
 Object                  → Object
-)                       → 
 .                       → .
 keys                    → keys
 (                       → (

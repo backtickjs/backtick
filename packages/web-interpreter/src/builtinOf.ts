@@ -20,157 +20,13 @@ import {
 } from "solid-js";
 import type { Instance } from "./Instance.js";
 import { compile, scopeOf } from "./compile.js";
-import type { Applied } from "./compile.js";
 
-// What this client answers for each name the web provides. A switch rather
-// than a table, because an object also answers for names nobody wrote —
-// `constructor` is `Object`'s — and only a `case` answers here. Most names are
-// the host's own member of the same name; a member of a value takes the value
-// first. What a target adds is asked for in `default`, after these.
+// What this client answers for each name the framework and the web provide,
+// then what a target adds, then the client's own global.
 export function builtinOf(instance: Instance, name: string): ClientValue {
   // A wire name may be anything; `default` is where the rest land.
   const known = name as keyof Builtins;
   switch (known) {
-    case "boolean.valueOf":
-    case "number.toString":
-    case "number.toFixed":
-    case "number.toExponential":
-    case "number.toPrecision":
-    case "number.valueOf":
-    case "string.toString":
-    case "string.charAt":
-    case "string.charCodeAt":
-    case "string.codePointAt":
-    case "string.concat":
-    case "string.indexOf":
-    case "string.lastIndexOf":
-    case "string.includes":
-    case "string.startsWith":
-    case "string.endsWith":
-    case "string.localeCompare":
-    case "string.repeat":
-    case "string.slice":
-    case "string.split":
-    case "string.substring":
-    case "string.toLowerCase":
-    case "string.toLocaleLowerCase":
-    case "string.toUpperCase":
-    case "string.toLocaleUpperCase":
-    case "string.trim":
-    case "string.trimStart":
-    case "string.trimEnd":
-    case "string.padStart":
-    case "string.padEnd":
-    case "string.at":
-    case "string.replaceAll":
-    case "string.valueOf":
-    case "array.concat":
-    case "array.join":
-    case "array.slice":
-    case "array.indexOf":
-    case "array.at":
-    case "array.every":
-    case "array.some":
-    case "array.findLast":
-    case "array.findLastIndex":
-    case "array.flatMap":
-    case "array.reduceRight":
-    case "array.lastIndexOf":
-    case "array.includes":
-    case "array.with":
-    case "array.toSorted":
-    case "array.toReversed":
-    case "array.toSpliced":
-    case "string.replace":
-    case "array.find":
-    case "array.findIndex":
-    case "array.map":
-    case "array.reduce":
-    case "array.filter": {
-      const member = known.split(".")[1];
-      return (self: Receiver, ...args: ClientValue[]) => self[member](...args);
-    }
-
-    // Read where they are named rather than called: see `getters`.
-    case "string.length":
-    case "array.length":
-      return (self: { readonly length: number }) => self.length;
-
-    case "Math.E":
-    case "Math.LN10":
-    case "Math.LN2":
-    case "Math.LOG2E":
-    case "Math.LOG10E":
-    case "Math.PI":
-    case "Math.SQRT1_2":
-    case "Math.SQRT2":
-    case "Math.abs":
-    case "Math.acos":
-    case "Math.asin":
-    case "Math.atan":
-    case "Math.atan2":
-    case "Math.ceil":
-    case "Math.cos":
-    case "Math.exp":
-    case "Math.floor":
-    case "Math.log":
-    case "Math.pow":
-    case "Math.random":
-    case "Math.round":
-    case "Math.sin":
-    case "Math.sqrt":
-    case "Math.tan":
-    case "Math.clz32":
-    case "Math.imul":
-    case "Math.sign":
-    case "Math.log10":
-    case "Math.log2":
-    case "Math.log1p":
-    case "Math.expm1":
-    case "Math.cosh":
-    case "Math.sinh":
-    case "Math.tanh":
-    case "Math.acosh":
-    case "Math.asinh":
-    case "Math.atanh":
-    case "Math.hypot":
-    case "Math.trunc":
-    case "Math.fround":
-    case "Math.cbrt":
-    case "Array.isArray":
-    case "Array.of":
-    case "Number.EPSILON":
-    case "Number.MAX_VALUE":
-    case "Number.MAX_SAFE_INTEGER":
-    case "Number.MIN_SAFE_INTEGER":
-    case "Number.MIN_VALUE":
-    case "Number.isSafeInteger":
-    case "Number.isFinite":
-    case "Number.isInteger":
-    case "Object.entries":
-    case "Object.fromEntries":
-    case "Object.keys":
-    case "Object.values":
-    case "Object.hasOwn":
-    case "String.fromCharCode":
-    case "String.fromCodePoint":
-    case "Array.from":
-    case "JSON.parse":
-    case "JSON.stringify":
-    case "Math.max":
-    case "Math.min":
-    case "Number.parseFloat":
-    case "Number.parseInt": {
-      const [prefix, member] = known.split(".");
-      return (globalThis as unknown as Namespaces)[prefix][member];
-    }
-
-    case "encodeURIComponent":
-      return encodeURIComponent satisfies Builtins[typeof known];
-
-    case "decodeURIComponent":
-      return decodeURIComponent satisfies Builtins[typeof known];
-
     case "state":
       return ((initial, options) => {
         const [get, store] = createSignal(initial, equalsOf(options));
@@ -314,20 +170,12 @@ export function builtinOf(instance: Instance, name: string): ClientValue {
 
     default: {
       known satisfies never;
-      const [kind, member] = name.split(".");
-      // A member of a string, number, boolean or array is a language construct:
-      // one belongs in the language's schema, so every client answers it, and
-      // never in a target's. Refused rather than read as null, which would let
-      // a bundle ask for `padStart` and carry on.
-      if (
-        kind === "string" ||
-        kind === "number" ||
-        kind === "boolean" ||
-        kind === "array"
-      ) {
-        throw new Error(`a ${kind} has no \`${member}\` in this language`);
-      }
-      return instance.builtinOf?.(name);
+      return (
+        instance.builtinOf?.(name) ??
+        (globalThis as unknown as { readonly [name: string]: ClientValue })[
+          name
+        ]
+      );
     }
   }
 }
@@ -339,29 +187,6 @@ function assertFunction(name: string, handler: unknown): () => void {
   }
   return handler as () => void;
 }
-
-// A receiver as a forwarded member reads it: by the member's name, on the
-// host's own value.
-type Receiver = { readonly [member: string]: Applied };
-
-// The namespaces a name may start with, whose members are delegated to.
-interface Namespaces {
-  readonly [prefix: string]: { readonly [member: string]: ClientValue };
-}
-
-/**
- * The names this client reads rather than calls.
- *
- * Every answer above takes its receiver and answers with a value, so nothing in
- * the switch tells `length` from `trim`. What tells them apart is the schema,
- * which says a getter is applied where its name is read — and how a client acts
- * on that is its own to write down. `globals.test.ts` holds this to the
- * schema, so a name that starts or stops being one is caught there.
- */
-export const getters: { readonly [Name in keyof Builtins]?: true } = {
-  "string.length": true,
-  "array.length": true,
-};
 
 // Inside the `try`, so a throw from `onResponse` reaches `onFailure`.
 async function send(

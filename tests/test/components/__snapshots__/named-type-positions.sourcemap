@@ -22,9 +22,7 @@ __cs_row                              → row
 Row                                   → Row
 ) => {\n                              → ) => {\n      
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_rows                             → rows
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -45,9 +43,7 @@ __cs_row                              → row
 Row                                   → Row
 ) => {\n                              → ) => {\n      
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 label                                 → label
 );                                    → ;
@@ -89,9 +85,7 @@ For                                   → For
                                       →  
 each                                  → each
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_rows                             → rows
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

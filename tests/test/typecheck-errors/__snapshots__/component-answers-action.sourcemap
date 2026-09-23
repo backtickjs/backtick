@@ -11,9 +11,7 @@ __cs_n                                → n
 );                                    → ;
 \n                                    → \n    
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (

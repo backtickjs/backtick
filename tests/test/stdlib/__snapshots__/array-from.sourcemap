@@ -2,9 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_doubled            → doubled
  = cs.const(            →  = 
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 from                    → from
 (                       → (
@@ -28,9 +26,7 @@ __cs_index              → index
 const                   → const 
 __cs_empty              → empty
  = cs.const(            →  = 
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 from                    → from
 (                       → (
@@ -52,9 +48,7 @@ __cs_index              → index
 const                   → const 
 __cs_absent             → absent
  = cs.const(            →  = 
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 from                    → from
 (                       → (
@@ -82,9 +76,7 @@ __cs_index              → index
 );                      → ;
 \n                      → \n      
 return cs.const(        → return 
-cs.receiver(            → 
 __cs_doubled            → doubled
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -93,17 +85,13 @@ join                    → join
  +                      →  + 
 "|"                     → "|"
  +                      →  + 
-cs.receiver(            → 
 __cs_empty              → empty
-)                       → 
 .                       → .
 length                  → length
  +                      →  + 
 "|"                     → "|"
  +                      →  + 
-cs.receiver(            → 
 __cs_absent             → absent
-)                       → 
 .                       → .
 join                    → join
 (                       → (

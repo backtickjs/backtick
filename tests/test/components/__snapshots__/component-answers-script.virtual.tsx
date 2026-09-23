@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Panel() {
   return cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(2));
-    return cs.const(<em>{cs.lift(cs.receiver(__cs_n).get())}</em>);
+    return cs.const(<em>{cs.lift(__cs_n.get())}</em>);
 })());
 }
 

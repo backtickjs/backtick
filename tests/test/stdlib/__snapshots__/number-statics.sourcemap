@@ -2,9 +2,7 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_positive                             → positive
  = cs.const(                              →  = 
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 EPSILON                                   → EPSILON
  >                                        →  > 
@@ -14,9 +12,7 @@ EPSILON                                   → EPSILON
 const                                     → const 
 __cs_largest                              → largest
  = cs.const(                              →  = 
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 MAX_VALUE                                 → MAX_VALUE
  >                                        →  > 
@@ -26,17 +22,13 @@ MAX_VALUE                                 → MAX_VALUE
 const                                     → const 
 __cs_safe                                 → safe
  = cs.const(                              →  =\n      
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
  ===                                      →  === 
 9007199254740991                          → 9007199254740991
  &&                                       →  &&\n      
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
  ===                                      →  === 
@@ -44,52 +36,42 @@ MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
 9007199254740991                          → 9007199254740991
 )                                         → 
  &&                                       →  &&\n      
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 MIN_VALUE                                 → MIN_VALUE
  >                                        →  > 
 0                                         → 0
  && (cs.condition(                        →  &&\n      
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 isSafeInteger                             → isSafeInteger
 (                                         → (
 3                                         → 3
 )                                         → )
 ) &&                                      → 
-cs.receiver(Number).isSafeInteger(3)      → Number.isSafeInteger(3) [-semantic -completion -navigation -verification]
+Number.isSafeInteger(3)                   → Number.isSafeInteger(3) [-semantic -completion -navigation -verification]
 )                                         → 
  &&                                       →  &&\n      
 !(cs.condition(                           → !
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 isSafeInteger                             → isSafeInteger
 (                                         → (
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
  +                                        →  + 
 1                                         → 1
 )                                         → )
 ) &&                                      → 
-cs.receiver(Number).isSafeInteger(cs.receiver(Number).MAX_SAFE_INTEGER + 1)→ Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1) [-semantic -completion -navigation -verification]
+Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1)→ Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1) [-semantic -completion -navigation -verification]
 )                                         → 
 );                                        → ;
 \n                                        → \n    
 const                                     → const 
 __cs_whole                                → whole
  = cs.const(                              →  = 
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 isInteger                                 → isInteger
 (                                         → (
@@ -100,9 +82,7 @@ isInteger                                 → isInteger
 const                                     → const 
 __cs_fractional                           → fractional
  = cs.const(                              →  = 
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 isInteger                                 → isInteger
 (                                         → (
@@ -113,9 +93,7 @@ isInteger                                 → isInteger
 const                                     → const 
 __cs_written                              → written
  = cs.const(                              →  = 
-cs.receiver(                              → 
 Number                                    → Number
-)                                         → 
 .                                         → .
 isFinite                                  → isFinite
 (                                         → (

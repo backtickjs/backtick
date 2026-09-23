@@ -10,7 +10,7 @@ const greet = await bundler.run(cs.lift(cs.const((__cs_name: string) => "hello "
 const badge = await bundler.run(
   cs.lift(cs.const((__cs_props: {
     count: number;
-}) => <b>{cs.lift("count " + cs.receiver(__cs_props).count)}</b>)),
+}) => <b>{cs.lift("count " + __cs_props.count)}</b>)),
 );
 
 it("evaluateFunction", async (t) => {

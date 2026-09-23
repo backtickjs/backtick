@@ -11,7 +11,7 @@ const read = cs.lift(cs.const((__cs_o: {
         z?: number;
     };
 }) => {
-    return cs.const([cs.receiver(__cs_o).label, cs.receiver(cs.receiver(__cs_o).inner)?.z ?? 0]);
+    return cs.const([__cs_o.label, __cs_o.inner?.z ?? 0]);
 }));
 
 it("optionalProperty", async (t) => {

@@ -18,12 +18,12 @@ type Row = {
 async function MemberRows() {
   return cs.lift((() => {
     const __cs_build = cs.const((__cs_from: number) => {
-        return cs.const(cs.receiver(Array).from({ length: 3 }, (__cs__, __cs_at) => {
+        return cs.const(Array.from({ length: 3 }, (__cs__, __cs_at) => {
             return cs.const({ id: __cs_from + __cs_at, label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)("row " + (__cs_from + __cs_at)) });
         }));
     });
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_build(1)));
-    return cs.const(<div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(cs.receiver(__cs_held).get())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => cs.receiver(cs.receiver(__cs_row).label).set("pressed"))}>{cs.lift(cs.receiver(cs.receiver(__cs_row).label).get())}</li>)}</For>)}</ul>)}</div>);
+    return cs.const(<div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(__cs_held.get())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => __cs_row.label.set("pressed"))}>{cs.lift(__cs_row.label.get())}</li>)}</For>)}</ul>)}</div>);
 })());
 }
 

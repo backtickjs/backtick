@@ -40,9 +40,14 @@ async function Written() {
                   kind: "()",
                   loc: [12, 14, 12, 43],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [12, 14, 12, 34],
-                    name: "String.fromCodePoint",
+                    expression: {
+                      kind: "bltn",
+                      loc: [12, 14, 12, 20],
+                      name: "String",
+                    },
+                    name: "fromCodePoint",
                   },
                   arguments: [
                     {
@@ -62,9 +67,14 @@ async function Written() {
                   kind: "()",
                   loc: [12, 46, 12, 68],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [12, 46, 12, 66],
-                    name: "String.fromCodePoint",
+                    expression: {
+                      kind: "bltn",
+                      loc: [12, 46, 12, 52],
+                      name: "String",
+                    },
+                    name: "fromCodePoint",
                   },
                   arguments: [],
                 },

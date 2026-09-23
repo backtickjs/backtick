@@ -10,7 +10,7 @@ it("typeofTable", async (t) => {
     "typeofTable",
     cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const([typeof undefined, typeof null, typeof true, typeof 1, typeof "a", typeof [1], typeof { a: 1 }, typeof ((__cs_n: number) => __cs_n), typeof cs.receiver(Math).floor, typeof __cs_count]);
+    return cs.const([typeof undefined, typeof null, typeof true, typeof 1, typeof "a", typeof [1], typeof { a: 1 }, typeof ((__cs_n: number) => __cs_n), typeof Math.floor, typeof __cs_count]);
 })()),
   );
 });
@@ -21,7 +21,7 @@ it("typeofNarrows", async (t) => {
     t,
     "typeofNarrows",
     cs.lift((() => {
-    const __cs_measure = cs.const((__cs_v: string | number) => typeof __cs_v === "string" ? cs.receiver(__cs_v).length : __cs_v * 2);
+    const __cs_measure = cs.const((__cs_v: string | number) => typeof __cs_v === "string" ? __cs_v.length : __cs_v * 2);
     return cs.const([__cs_measure("abc"), __cs_measure(4)]);
 })()),
   );

@@ -12,11 +12,9 @@ __cs_names                            → names
 const                                 → const 
 __cs_missing                          → missing
  = cs.const(                          →  = 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (answers)                             → $answers
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 [                                     → [
 "nowhere"                             → "nowhere"
 ]                                     → ]
@@ -25,9 +23,7 @@ cs.receiver(                          →
 );                                    → ;
 \n                                    → \n      
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_names                            → names
-)                                     → 
 [                                     → [
 1                                     → 1
 ]                                     → ]

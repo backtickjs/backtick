@@ -31,9 +31,14 @@ it("arrayIsArray", async (t) => {
                   kind: "()",
                   loc: [13, 9, 13, 26],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [13, 9, 13, 22],
-                    name: "Array.isArray",
+                    expression: {
+                      kind: "bltn",
+                      loc: [13, 9, 13, 14],
+                      name: "Array",
+                    },
+                    name: "isArray",
                   },
                   arguments: [
                     {
@@ -47,9 +52,14 @@ it("arrayIsArray", async (t) => {
                   kind: "()",
                   loc: [14, 9, 14, 30],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [14, 9, 14, 22],
-                    name: "Array.isArray",
+                    expression: {
+                      kind: "bltn",
+                      loc: [14, 9, 14, 14],
+                      name: "Array",
+                    },
+                    name: "isArray",
                   },
                   arguments: [
                     {
@@ -74,9 +84,14 @@ it("arrayIsArray", async (t) => {
                   kind: "()",
                   loc: [15, 9, 15, 28],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [15, 9, 15, 22],
-                    name: "Array.isArray",
+                    expression: {
+                      kind: "bltn",
+                      loc: [15, 9, 15, 14],
+                      name: "Array",
+                    },
+                    name: "isArray",
                   },
                   arguments: [
                     {
@@ -90,9 +105,14 @@ it("arrayIsArray", async (t) => {
                   kind: "()",
                   loc: [16, 9, 16, 37],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [16, 9, 16, 22],
-                    name: "Array.isArray",
+                    expression: {
+                      kind: "bltn",
+                      loc: [16, 9, 16, 14],
+                      name: "Array",
+                    },
+                    name: "isArray",
                   },
                   arguments: [
                     {
@@ -121,9 +141,14 @@ it("arrayIsArray", async (t) => {
                   kind: "()",
                   loc: [17, 9, 17, 28],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [17, 9, 17, 22],
-                    name: "Array.isArray",
+                    expression: {
+                      kind: "bltn",
+                      loc: [17, 9, 17, 14],
+                      name: "Array",
+                    },
+                    name: "isArray",
                   },
                   arguments: [
                     {

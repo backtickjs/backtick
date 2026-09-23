@@ -13,11 +13,9 @@ false                                     → false
 const                                     → const 
 __cs_started                              → started
  = cs.const(                              →  = 
-cs.receiver(                              → 
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-)                                         → 
 .                                         → .
 setTimeout                                → setTimeout
 (                                         → (
@@ -32,9 +30,7 @@ if ((cs.condition(                        → if (
 ))                                        → ) 
 {\n                                       → {\n        
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_shown                                → shown
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
@@ -51,14 +47,12 @@ true                                      → true
 return cs.const(                          → return 
 <>{cs.lift(                               → <>{
 (cs.condition(                            → 
-cs.receiver(                              → 
 __cs_shown                                → shown
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()
 ) &&                                      → 
-cs.receiver(__cs_shown).get()             → shown.get() [-semantic -completion -navigation -verification]
+__cs_shown.get()                          → shown.get() [-semantic -completion -navigation -verification]
 ) ?                                       →  ? 
 <                                         → <
 em                                        → em
@@ -95,9 +89,7 @@ span                                      → span
 >{cs.lift(                                → >{
 "builds "                                 → "builds "
  +                                        →  + 
-cs.receiver(                              → 
 __cs_builds                               → builds
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()
@@ -115,15 +107,11 @@ again                                     → again
 ={cs.lift(                                → ={
 () => {\n                                 → () => {\n            
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_builds                               → builds
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
-cs.receiver(                              → 
 __cs_builds                               → builds
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()
@@ -133,9 +121,7 @@ get                                       → get
 );                                        → ;
 \n                                        → \n            
 return cs.const(                          → return 
-cs.receiver(                              → 
 __cs_builds                               → builds
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()

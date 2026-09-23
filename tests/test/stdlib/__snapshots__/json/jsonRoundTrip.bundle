@@ -12,8 +12,12 @@
             [
               "()",
               [
-                "bltn",
-                "JSON.stringify"
+                ".",
+                [
+                  "bltn",
+                  "JSON"
+                ],
+                "stringify"
               ],
               [
                 [
@@ -33,8 +37,12 @@
             [
               "()",
               [
-                "bltn",
-                "JSON.stringify"
+                ".",
+                [
+                  "bltn",
+                  "JSON"
+                ],
+                "stringify"
               ],
               [
                 "hi"
@@ -47,8 +55,12 @@
             [
               "()",
               [
-                "bltn",
-                "JSON.stringify"
+                ".",
+                [
+                  "bltn",
+                  "JSON"
+                ],
+                "stringify"
               ],
               [
                 true
@@ -61,8 +73,12 @@
             [
               "()",
               [
-                "bltn",
-                "JSON.stringify"
+                ".",
+                [
+                  "bltn",
+                  "JSON"
+                ],
+                "stringify"
               ],
               [
                 {
@@ -78,8 +94,12 @@
             [
               "()",
               [
-                "bltn",
-                "JSON.parse"
+                ".",
+                [
+                  "bltn",
+                  "JSON"
+                ],
+                "parse"
               ],
               [
                 [
@@ -141,8 +161,12 @@
                   [
                     "()",
                     [
-                      "bltn",
-                      "JSON.stringify"
+                      ".",
+                      [
+                        "bltn",
+                        "JSON"
+                      ],
+                      "stringify"
                     ],
                     [
                       [
@@ -157,15 +181,23 @@
               [
                 "()",
                 [
-                  "bltn",
-                  "JSON.stringify"
+                  ".",
+                  [
+                    "bltn",
+                    "JSON"
+                  ],
+                  "stringify"
                 ],
                 [
                   [
                     "()",
                     [
-                      "bltn",
-                      "JSON.parse"
+                      ".",
+                      [
+                        "bltn",
+                        "JSON"
+                      ],
+                      "parse"
                     ],
                     [
                       [

@@ -409,9 +409,14 @@ export default cs.create(
                   kind: "()",
                   loc: [59, 19, 59, 37],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [59, 19, 59, 33],
-                    name: "JSON.stringify",
+                    expression: {
+                      kind: "bltn",
+                      loc: [59, 19, 59, 23],
+                      name: "JSON",
+                    },
+                    name: "stringify",
                   },
                   arguments: [
                     {

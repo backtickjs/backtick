@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and either way it binds `undefined`. `null` is a value of its own and not
 // accepted here.
 const greet = cs.lift(cs.const((__cs_name?: string) => {
-    return cs.const(cs.receiver(__cs_name)?.concat("!"));
+    return cs.const(__cs_name?.concat("!"));
 }));
 
 // A function-typed annotation unions parenthesized: `(() => number) |

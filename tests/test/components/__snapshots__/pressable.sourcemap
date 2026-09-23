@@ -27,15 +27,11 @@ style                                 → style
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -52,9 +48,7 @@ style                                 → style
 "font-weight: 700"                    → "font-weight: 700"
 )}                                    → 
 >{cs.lift(                            → >{
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -73,9 +67,7 @@ span                                  → span
 >{cs.lift(                            → >{
 "pressed "                            → "pressed "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

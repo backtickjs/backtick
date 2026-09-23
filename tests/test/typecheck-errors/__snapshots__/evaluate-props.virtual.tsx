@@ -21,7 +21,7 @@ async function Nothing() {
 const rows = (await bundler.run(
   cs.lift(cs.const((__cs_props: {
     count: number;
-}) => (cs.splice((<Row count={cs.lift(cs.const(cs.receiver(__cs_props).count))} />)) satisfies typeof cs.ClientUnknown))),
+}) => (cs.splice((<Row count={cs.lift(cs.const(__cs_props.count))} />)) satisfies typeof cs.ClientUnknown))),
 )) as Bundle<Rows>;
 
 const empty = (await bundler.run(<Nothing />)) as Bundle<BacktickElement>;
@@ -43,5 +43,5 @@ export default cs.lift((() => {
     // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
     (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(null))}{cs.lift(
     // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Bundle<string | number | BacktickElement | null>'.
-    (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(cs.receiver(JSON).stringify({})))}</div>);
+    (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(JSON.stringify({})))}</div>);
 })());

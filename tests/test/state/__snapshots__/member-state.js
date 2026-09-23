@@ -61,9 +61,14 @@ async function MemberRows() {
                     kind: "()",
                     loc: [21, 14, 23, 9],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [21, 14, 21, 24],
-                      name: "Array.from",
+                      expression: {
+                        kind: "bltn",
+                        loc: [21, 14, 21, 19],
+                        name: "Array",
+                      },
+                      name: "from",
                     },
                     arguments: [
                       {

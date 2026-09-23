@@ -10,8 +10,12 @@
             "const",
             "floor",
             [
-              "bltn",
-              "Math.floor"
+              ".",
+              [
+                "bltn",
+                "Math"
+              ],
+              "floor"
             ]
           ],
           [
@@ -66,8 +70,12 @@
                 ],
                 [
                   [
-                    "bltn",
-                    "Math.ceil"
+                    ".",
+                    [
+                      "bltn",
+                      "Math"
+                    ],
+                    "ceil"
                   ],
                   3.5
                 ]

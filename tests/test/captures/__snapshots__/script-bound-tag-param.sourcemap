@@ -68,9 +68,7 @@ li                                    → li
 >{cs.lift(                            → >{
 "row "                                → "row "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_p                                → p
-)                                     → 
 .                                     → .
 n                                     → n
 )}</                                  → }</

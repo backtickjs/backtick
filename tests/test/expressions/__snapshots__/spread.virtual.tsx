@@ -15,7 +15,7 @@ it("spread", async (t) => {
     const __cs_none = cs.const([]);
     const __cs_all = cs.const([0, ...__cs_front, ...__cs_none, ...__cs_back, 4]);
     const __cs_twice = cs.const([...__cs_all, ...__cs_all]);
-    return cs.const(cs.receiver(__cs_all).join(",") + "|" + cs.receiver(__cs_twice).length);
+    return cs.const(__cs_all.join(",") + "|" + __cs_twice.length);
 })()),
   );
 });

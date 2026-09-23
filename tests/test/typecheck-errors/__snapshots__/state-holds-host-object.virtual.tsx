@@ -17,5 +17,5 @@ export default cs.lift((() => {
     // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice((host)) satisfies typeof cs.ClientUnknown)));
     // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
-    cs.statement(cs.receiver(__cs_held).set((cs.splice((host)) satisfies typeof cs.ClientUnknown)));
+    cs.statement(__cs_held.set((cs.splice((host)) satisfies typeof cs.ClientUnknown)));
 })());

@@ -32,9 +32,14 @@ async function Parsed() {
             kind: "()",
             loc: [10, 19, 10, 42],
             expression: {
-              kind: "bltn",
+              kind: ".",
               loc: [10, 19, 10, 34],
-              name: "Number.parseInt",
+              expression: {
+                kind: "bltn",
+                loc: [10, 19, 10, 25],
+                name: "Number",
+              },
+              name: "parseInt",
             },
             arguments: [
               {
@@ -58,9 +63,14 @@ async function Parsed() {
             kind: "()",
             loc: [11, 19, 11, 44],
             expression: {
-              kind: "bltn",
+              kind: ".",
               loc: [11, 19, 11, 34],
-              name: "Number.parseInt",
+              expression: {
+                kind: "bltn",
+                loc: [11, 19, 11, 25],
+                name: "Number",
+              },
+              name: "parseInt",
             },
             arguments: [
               {
@@ -89,9 +99,14 @@ async function Parsed() {
             kind: "()",
             loc: [12, 24, 12, 48],
             expression: {
-              kind: "bltn",
+              kind: ".",
               loc: [12, 24, 12, 41],
-              name: "Number.parseFloat",
+              expression: {
+                kind: "bltn",
+                loc: [12, 24, 12, 30],
+                name: "Number",
+              },
+              name: "parseFloat",
             },
             arguments: [
               {

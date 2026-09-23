@@ -23,10 +23,4 @@ export const skips: Record<string, string> = {
 export const skippedRefusals: Record<
   string,
   { refusal: RegExp; reason: string }
-> = {
-  "X.prototype": {
-    refusal: /^Property 'prototype' does not exist on type '\w+Constructor'/,
-    reason:
-      "client script has no prototypes: a built-in's members are reached off its values, never through its constructor",
-  },
-};
+> = {};

@@ -6,9 +6,7 @@ __cs_el                               → el
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_el                               → el
-)                                     → 
 .                                     → .
 focus                                 → focus
 ()                                    → ()

@@ -117,8 +117,12 @@
                               [
                                 "()",
                                 [
-                                  "bltn",
-                                  "JSON.parse"
+                                  ".",
+                                  [
+                                    "bltn",
+                                    "JSON"
+                                  ],
+                                  "parse"
                                 ],
                                 [
                                   [
@@ -271,8 +275,12 @@
                   "body": [
                     "()",
                     [
-                      "bltn",
-                      "JSON.stringify"
+                      ".",
+                      [
+                        "bltn",
+                        "JSON"
+                      ],
+                      "stringify"
                     ],
                     [
                       {

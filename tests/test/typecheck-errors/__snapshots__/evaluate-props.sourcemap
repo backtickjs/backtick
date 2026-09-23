@@ -34,9 +34,7 @@ number                                    → number
 (cs.splice(                               → ${ [-semantic]
 (<Row count={                             → (<Row count={
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
 __cs_props                                → props
-)                                         → 
 .                                         → .
 count                                     → count
 ))                                        → `
@@ -151,9 +149,7 @@ null                                      → null
 (evaluate)                                → $evaluate
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 (                                         → (
-cs.receiver(                              → 
 JSON                                      → JSON
-)                                         → 
 .                                         → .
 stringify                                 → stringify
 (                                         → (

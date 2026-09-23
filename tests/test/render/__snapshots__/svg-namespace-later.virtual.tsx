@@ -12,7 +12,7 @@ import { namespaced } from "./dom.ts";
 const svgNamespaceLater = cs.lift((() => {
     const __cs_xs = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)([10]));
     const __cs_shown = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
-    return cs.const(<div>{cs.lift(<svg viewBox={cs.lift("0 0 30 10")}>{cs.lift(<For each={cs.lift(cs.receiver(__cs_xs).get())}>{cs.lift((__cs_x: number) => <title>{cs.lift("dot " + __cs_x)}</title>)}</For>)}{cs.lift((cs.condition(cs.receiver(__cs_shown).get()) && cs.receiver(__cs_shown).get()) ? <title>{cs.lift("shown")}</title> : null)}</svg>)}{cs.lift(<title>{cs.lift("after")}</title>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_xs).set([10, 20]))}>add</button>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_shown).set(true))}>show</button>)}</div>);
+    return cs.const(<div>{cs.lift(<svg viewBox={cs.lift("0 0 30 10")}>{cs.lift(<For each={cs.lift(__cs_xs.get())}>{cs.lift((__cs_x: number) => <title>{cs.lift("dot " + __cs_x)}</title>)}</For>)}{cs.lift((cs.condition(__cs_shown.get()) && __cs_shown.get()) ? <title>{cs.lift("shown")}</title> : null)}</svg>)}{cs.lift(<title>{cs.lift("after")}</title>)}{cs.lift(<button onclick={cs.lift(() => __cs_xs.set([10, 20]))}>add</button>)}{cs.lift(<button onclick={cs.lift(() => __cs_shown.set(true))}>show</button>)}</div>);
 })());
 
 it("svgNamespaceLater", async (t) => {

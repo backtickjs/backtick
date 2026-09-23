@@ -5,15 +5,11 @@ cs.statement(                         →
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()
@@ -54,15 +50,11 @@ cs.statement(                         →
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()
@@ -70,9 +62,7 @@ log                                   → log
 );                                    → ;
 \n                                    → \n          
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -90,15 +80,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -107,9 +93,7 @@ get                                   → get
 )                                     → )
 )}                                    → }
 >{cs.lift(                            → >{
-cs.receiver(                          → 
 __cs_doubled                          → doubled
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -137,30 +121,22 @@ cs.statement(                         →
 (                                     → (
 () => {\n                             → () => {\n          
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_timer                            → timer
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 setInterval                           → setInterval
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()
@@ -179,17 +155,13 @@ cs.statement(                         →
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 clearInterval                         → clearInterval
 (                                     → (
-cs.receiver(                          → 
 __cs_timer                            → timer
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -218,15 +190,11 @@ onclick                               → onclick
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()

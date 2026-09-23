@@ -25,10 +25,10 @@ async function Widened() {
     const __cs_tone = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice(Tone.Warm) satisfies typeof cs.ClientUnknown)));
     const __cs_step = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<() => number>(() => 0));
     return cs.const(<span onclick={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_flag).set(false));
-        cs.statement(cs.receiver(__cs_tone).set((cs.splice(Tone.Cool) satisfies typeof cs.ClientUnknown)));
-        cs.statement(cs.receiver(__cs_step).set(() => 1));
-    })}>{cs.lift(cs.receiver(__cs_flag).get() + " " + cs.receiver(__cs_tone).get() + " " + cs.receiver(__cs_step).get()())}</span>);
+        cs.statement(__cs_flag.set(false));
+        cs.statement(__cs_tone.set((cs.splice(Tone.Cool) satisfies typeof cs.ClientUnknown)));
+        cs.statement(__cs_step.set(() => 1));
+    })}>{cs.lift(__cs_flag.get() + " " + __cs_tone.get() + " " + __cs_step.get()())}</span>);
 })());
 }
 

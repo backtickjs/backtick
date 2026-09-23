@@ -8,8 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // an action, so it stands in a handler.
 const counter = cs.lift(cs.const((__cs_initial: number) => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_initial));
-    return cs.const({ get: () => cs.receiver(__cs_count).get(), add: (__cs_n: number) => {
-            cs.statement(cs.receiver(__cs_count).set(cs.receiver(__cs_count).get() + __cs_n));
+    return cs.const({ get: () => __cs_count.get(), add: (__cs_n: number) => {
+            cs.statement(__cs_count.set(__cs_count.get() + __cs_n));
         } });
 }));
 
@@ -20,8 +20,8 @@ it("statefulObject", async (t) => {
     cs.lift((() => {
     const __cs_c = cs.const((cs.splice((counter)) satisfies typeof cs.ClientUnknown)(10));
     return cs.const(<button onclick={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_c).add(5));
-    })}>{cs.lift(cs.receiver(__cs_c).get())}</button>);
+        cs.statement(__cs_c.add(5));
+    })}>{cs.lift(__cs_c.get())}</button>);
 })()),
   );
 });

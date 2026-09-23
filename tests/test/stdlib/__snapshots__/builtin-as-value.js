@@ -35,9 +35,14 @@ it("builtinAsValue", async (t) => {
               bindingKey: "floor$1n7k5w76rpsyr$0",
             },
             initializer: {
-              kind: "bltn",
+              kind: ".",
               loc: [17, 21, 17, 31],
-              name: "Math.floor",
+              expression: {
+                kind: "bltn",
+                loc: [17, 21, 17, 25],
+                name: "Math",
+              },
+              name: "floor",
             },
           },
           {
@@ -129,9 +134,14 @@ it("builtinAsValue", async (t) => {
                 },
                 arguments: [
                   {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [19, 33, 19, 42],
-                    name: "Math.ceil",
+                    expression: {
+                      kind: "bltn",
+                      loc: [19, 33, 19, 37],
+                      name: "Math",
+                    },
+                    name: "ceil",
                   },
                   {
                     kind: "number",

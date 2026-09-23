@@ -170,9 +170,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
 
   // What an assignment or a step writes: only a variable, which the compiler
   // enforces and the wire type states; this is where the two meet.
-  function assignmentTarget(
-    operand: ClientScriptExpression,
-  ): BundleIdentifier {
+  function assignmentTarget(operand: ClientScriptExpression): BundleIdentifier {
     if (operand.kind !== "id") {
       throw new Error("An assignment target must be an identifier.");
     }
@@ -287,7 +285,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           if (property.kind === "..." || property.name.kind !== "string") {
             return [
               "()",
-              ["bltn", "Object.fromEntries"],
+              [".", ["bltn", "Object"], "fromEntries"],
               [
                 [
                   "arr",
@@ -297,7 +295,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
                           "...",
                           [
                             "()",
-                            ["bltn", "Object.entries"],
+                            [".", ["bltn", "Object"], "entries"],
                             [e(property.expression)],
                           ],
                         ]

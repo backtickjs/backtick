@@ -1,11 +1,9 @@
 cs.lift(cs.const(                     → cs`
 "font-size: "                         → "font-size: "
  +                                    →  + 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (size)                                → $size
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -15,19 +13,15 @@ get                                   → get
 cs.lift(cs.const(                     → cs`
 () => {\n                             → () => {\n      
 cs.statement(                         → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (size)                                → $size
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (size)                                → $size
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

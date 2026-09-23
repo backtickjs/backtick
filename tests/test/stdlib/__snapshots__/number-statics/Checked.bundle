@@ -12,8 +12,12 @@
             [
               ">",
               [
-                "bltn",
-                "Number.EPSILON"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "EPSILON"
               ],
               0
             ]
@@ -24,8 +28,12 @@
             [
               ">",
               [
-                "bltn",
-                "Number.MAX_VALUE"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "MAX_VALUE"
               ],
               1e+308
             ]
@@ -44,16 +52,24 @@
                     [
                       "===",
                       [
-                        "bltn",
-                        "Number.MAX_SAFE_INTEGER"
+                        ".",
+                        [
+                          "bltn",
+                          "Number"
+                        ],
+                        "MAX_SAFE_INTEGER"
                       ],
                       9007199254740991
                     ],
                     [
                       "===",
                       [
-                        "bltn",
-                        "Number.MIN_SAFE_INTEGER"
+                        ".",
+                        [
+                          "bltn",
+                          "Number"
+                        ],
+                        "MIN_SAFE_INTEGER"
                       ],
                       -9007199254740991
                     ]
@@ -61,8 +77,12 @@
                   [
                     ">",
                     [
-                      "bltn",
-                      "Number.MIN_VALUE"
+                      ".",
+                      [
+                        "bltn",
+                        "Number"
+                      ],
+                      "MIN_VALUE"
                     ],
                     0
                   ]
@@ -70,8 +90,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Number.isSafeInteger"
+                    ".",
+                    [
+                      "bltn",
+                      "Number"
+                    ],
+                    "isSafeInteger"
                   ],
                   [
                     3
@@ -83,15 +107,23 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Number.isSafeInteger"
+                    ".",
+                    [
+                      "bltn",
+                      "Number"
+                    ],
+                    "isSafeInteger"
                   ],
                   [
                     [
                       "+",
                       [
-                        "bltn",
-                        "Number.MAX_SAFE_INTEGER"
+                        ".",
+                        [
+                          "bltn",
+                          "Number"
+                        ],
+                        "MAX_SAFE_INTEGER"
                       ],
                       1
                     ]
@@ -106,8 +138,12 @@
             [
               "()",
               [
-                "bltn",
-                "Number.isInteger"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "isInteger"
               ],
               [
                 2
@@ -120,8 +156,12 @@
             [
               "()",
               [
-                "bltn",
-                "Number.isInteger"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "isInteger"
               ],
               [
                 2.5
@@ -134,8 +174,12 @@
             [
               "()",
               [
-                "bltn",
-                "Number.isFinite"
+                ".",
+                [
+                  "bltn",
+                  "Number"
+                ],
+                "isFinite"
               ],
               [
                 "2"

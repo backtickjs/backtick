@@ -17,8 +17,12 @@
             [
               "()",
               [
-                "bltn",
-                "JSON.parse"
+                ".",
+                [
+                  "bltn",
+                  "JSON"
+                ],
+                "parse"
               ],
               [
                 [

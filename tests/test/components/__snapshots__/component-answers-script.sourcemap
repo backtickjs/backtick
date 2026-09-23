@@ -14,9 +14,7 @@ return cs.const(                      → return
 <                                     → <
 em                                    → em
 >{cs.lift(                            → >{
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

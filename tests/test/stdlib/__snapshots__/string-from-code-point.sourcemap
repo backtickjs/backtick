@@ -3,9 +3,7 @@ return cs.const(        → return
 <                       → (\n      <
 span                    → span
 >{cs.lift(              → >{
-cs.receiver(            → 
 String                  → String
-)                       → 
 .                       → .
 fromCodePoint           → fromCodePoint
 (                       → (
@@ -14,9 +12,7 @@ fromCodePoint           → fromCodePoint
 105                     → 105
 )                       → )
  +                      →  + 
-cs.receiver(            → 
 String                  → String
-)                       → 
 .                       → .
 fromCodePoint           → fromCodePoint
 ()                      → ()

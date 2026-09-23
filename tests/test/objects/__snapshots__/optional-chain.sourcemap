@@ -12,9 +12,7 @@ number                                → number
 null                                  → null
 ) => {\n                              → ) => {\n  
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_p                                → p
-)                                     → 
 ?.                                    → ?.
 x                                     → x
 );                                    → ;
@@ -41,13 +39,9 @@ null                                  → null
 null                                  → null
 ) => {\n                              → ) => {\n  
 return cs.const(                      → return 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_o                                → o
-)                                     → 
 ?.                                    → ?.
 inner                                 → inner
-)                                     → 
 ?.                                    → ?.
 z                                     → z
 );                                    → ;
@@ -62,9 +56,7 @@ string                                → string
 null                                  → null
 ) => {\n                              → ) => {\n  
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_s                                → s
-)                                     → 
 ?.                                    → ?.
 concat                                → concat
 (                                     → (

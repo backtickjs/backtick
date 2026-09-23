@@ -21,9 +21,7 @@ return cs.const(                      → return
 <                                     → (\n        <
 div                                   → div
 >{cs.lift(                            → >\n          {
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -40,9 +38,7 @@ span                                  → span
 (evaluate)                            → $evaluate
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

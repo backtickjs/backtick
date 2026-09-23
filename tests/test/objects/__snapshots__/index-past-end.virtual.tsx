@@ -12,7 +12,7 @@ it("indexPastEnd", async (t) => {
     "indexPastEnd",
     cs.lift((() => {
     const __cs_names = cs.const(["zero", "one"]);
-    return cs.const(cs.receiver(__cs_names)[9]);
+    return cs.const(__cs_names[9]);
 })()),
   );
 });

@@ -14,9 +14,7 @@ __cs_rows               → rows
 const                   → const 
 __cs_sorted             → sorted
  = cs.const(            →  = 
-cs.receiver(            → 
 __cs_rows               → rows
-)                       → 
 .                       → .
 toSorted                → toSorted
 (                       → (
@@ -34,9 +32,7 @@ __cs_b                  → b
 const                   → const 
 __cs_reversed           → reversed
  = cs.const(            →  = 
-cs.receiver(            → 
 __cs_rows               → rows
-)                       → 
 .                       → .
 toReversed              → toReversed
 ()                      → ()
@@ -45,9 +41,7 @@ toReversed              → toReversed
 const                   → const 
 __cs_spliced            → spliced
  = cs.const(            →  = 
-cs.receiver(            → 
 __cs_rows               → rows
-)                       → 
 .                       → .
 toSpliced               → toSpliced
 (                       → (
@@ -60,9 +54,7 @@ toSpliced               → toSpliced
 const                   → const 
 __cs_inserted           → inserted
  = cs.const(            →  = 
-cs.receiver(            → 
 __cs_rows               → rows
-)                       → 
 .                       → .
 toSpliced               → toSpliced
 (                       → (
@@ -75,9 +67,7 @@ toSpliced               → toSpliced
 );                      → ;
 \n                      → \n      
 return cs.const(        → return 
-cs.receiver(            → 
 __cs_sorted             → sorted
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -86,9 +76,7 @@ join                    → join
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 __cs_reversed           → reversed
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -97,9 +85,7 @@ join                    → join
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 __cs_spliced            → spliced
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -108,9 +94,7 @@ join                    → join
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 __cs_inserted           → inserted
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -119,9 +103,7 @@ join                    → join
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 __cs_rows               → rows
-)                       → 
 .                       → .
 join                    → join
 (                       → (

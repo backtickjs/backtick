@@ -14,9 +14,7 @@ Order                                     → Order
 cs.lift(cs.const(                         → cs`
 "https://img.example.com/"                → "https://img.example.com/"
  +                                        →  + 
-cs.receiver(                              → 
 __cs_order                                → order
-)                                         → 
 .                                         → .
 id                                        → id
  +                                        →  + 
@@ -24,33 +22,23 @@ id                                        → id
 ))                                        → `
 }\n                alt=""\n              />\n              <span>{→ }\n                alt=""\n              />\n              <span>{
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-cs.receiver(                              → 
 __cs_order                                → order
-)                                         → 
 .                                         → .
 customer                                  → customer
-)                                         → 
 .                                         → .
 name                                      → name
 ))                                        → `
 }</span>\n              <span>{           → }</span>\n              <span>{
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-cs.receiver(                              → 
 __cs_order                                → order
-)                                         → 
 .                                         → .
 customer                                  → customer
-)                                         → 
 .                                         → .
 city                                      → city
 ))                                        → `
 }</span>\n              <For each={       → }</span>\n              <For each={
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
 __cs_order                                → order
-)                                         → 
 .                                         → .
 items                                     → items
 ))                                        → `
@@ -64,17 +52,13 @@ Item                                      → Item
 (cs.splice(                               → ${ [-semantic]
 (<span>{                                  → (<span>{
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
 __cs_item                                 → item
-)                                         → 
 .                                         → .
 sku                                       → sku
  +                                        →  + 
 " x"                                      → " x"
  +                                        →  + 
-cs.receiver(                              → 
 __cs_item                                 → item
-)                                         → 
 .                                         → .
 qty                                       → qty
 ))                                        → `
@@ -85,9 +69,7 @@ qty                                       → qty
 cs.lift(cs.const(                         → cs`
 "$"                                       → "$"
  +                                        →  + 
-cs.receiver(                              → 
 __cs_order                                → order
-)                                         → 
 .                                         → .
 total                                     → total
 ))                                        → `

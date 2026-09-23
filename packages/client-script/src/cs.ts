@@ -3,7 +3,6 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "@backtickjs/platform-sdk";
 import type { ClientValue } from "@backtickjs/platform-sdk";
 import type { Spliced } from "@backtickjs/platform-sdk";
-import type { ClientGlobal, Receiver } from "./Receiver.js";
 
 // The root of a script
 function _lift<T extends ClientUnknown>(_: T): Client<T> {
@@ -64,13 +63,6 @@ function _statement(_: void): void {
   );
 }
 
-function _receiver<T extends ClientValue | ClientGlobal>(_: T): Receiver<T> {
-  throw new Error(
-    "Don't call `cs.receiver` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
 // What hangs off the tag.
 const members = {
   create,
@@ -81,7 +73,6 @@ const members = {
   string: _string,
   const: _const,
   statement: _statement,
-  receiver: _receiver,
 };
 
 // `ClientUnknown`, for the `satisfies` the transform writes beside a splice.

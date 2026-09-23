@@ -3,67 +3,34 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createBuiltin } from "@backtickjs/platform-sdk";
 import { evaluate } from "@backtickjs/web-testing";
-// What a client answers for beside the language's own names, and what it may
-// not: a member the schema leaves out, and a name a client adds.
+// What a client answers for beside the ECMAScript globals: a name a target
+// adds.
 // Names an SDK or an app adds, as its generated code declares them.
 const greet = createBuiltin("greet");
 const storage = createBuiltin("storage");
 const answersGreet = (name) => (name === "greet" ? () => "hello" : undefined);
-describe("a member the schema leaves out", () => {
-  it("is a name this language has no meaning for", async () => {
-    // Not absent, and not the host's: reading it as null would let a bundle ask
-    // for a member the schema left out and carry on, and the client answers
-    // every name a value has — so nothing answering is the whole answer.
-    await assert.rejects(
-      // @ts-expect-error: the schema leaves `normalize` out
-      evaluate(
-        cs.create(
-          [27, 16, 27, 35],
-          {
-            version: "0.0.0",
-            filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "20tgf6g4m3c3u",
-            splices: {},
-            captures: [],
-          },
-          () => ({
-            kind: ".",
-            loc: [27, 19, 27, 34],
-            expression: {
-              kind: "string",
-              loc: [27, 19, 27, 24],
-              text: "abc",
-            },
-            name: "normalize",
-          }),
-        ),
-      ),
-      /a string has no `normalize` in this language/,
-    );
-  });
-});
 describe("a name a target answers for", () => {
   // What an SDK or an app adds: a whole name, reached by splicing the value
-  // `createBuiltin` made, which lands on the wire as the same node `Math.floor`
+  // `createBuiltin` made, which lands on the wire as the same node `Math`
   // does.
   it("is answered by the function its target handed over", async () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [39, 22, 39, 34],
+          [26, 22, 26, 34],
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "20tgf6g4m3c3u",
+            fileHash: "2kb7nxcl47bpi",
             splices: { $greet: { value: greet, params: [] } },
             captures: [],
           },
           () => ({
             kind: "()",
-            loc: [39, 25, 39, 33],
+            loc: [26, 25, 26, 33],
             expression: {
               kind: "splice",
-              loc: [39, 25, 39, 31],
+              loc: [26, 25, 26, 31],
               key: "$greet",
             },
             arguments: [],
@@ -81,20 +48,20 @@ describe("a name a target answers for", () => {
     await assert.rejects(
       evaluate(
         cs.create(
-          [48, 35, 48, 47],
+          [35, 35, 35, 47],
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "20tgf6g4m3c3u",
+            fileHash: "2kb7nxcl47bpi",
             splices: { $greet: { value: greet, params: [] } },
             captures: [],
           },
           () => ({
             kind: "()",
-            loc: [48, 38, 48, 46],
+            loc: [35, 38, 35, 46],
             expression: {
               kind: "splice",
-              loc: [48, 38, 48, 44],
+              loc: [35, 38, 35, 44],
               key: "$greet",
             },
             arguments: [],
@@ -112,23 +79,23 @@ describe("a name a target answers for", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [57, 22, 57, 50],
+          [44, 22, 44, 50],
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "20tgf6g4m3c3u",
+            fileHash: "2kb7nxcl47bpi",
             splices: { $storage: { value: storage, params: [] } },
             captures: [],
           },
           () => ({
             kind: "()",
-            loc: [57, 25, 57, 49],
+            loc: [44, 25, 44, 49],
             expression: {
               kind: ".",
-              loc: [57, 25, 57, 37],
+              loc: [44, 25, 44, 37],
               expression: {
                 kind: "splice",
-                loc: [57, 25, 57, 33],
+                loc: [44, 25, 44, 33],
                 key: "$storage",
               },
               name: "get",
@@ -136,7 +103,7 @@ describe("a name a target answers for", () => {
             arguments: [
               {
                 kind: "string",
-                loc: [57, 38, 57, 48],
+                loc: [44, 38, 44, 48],
                 text: "greeting",
               },
             ],
@@ -150,79 +117,6 @@ describe("a name a target answers for", () => {
         },
       ),
       "hei",
-    );
-  });
-  it("may lengthen the language's list and never edit it", async () => {
-    // The language's names are read first, so a target naming one is never
-    // reached: redefining `Math.floor` would be one client answering a bundle
-    // differently from every other.
-    assert.equal(
-      await evaluate(
-        cs.create(
-          [72, 22, 72, 41],
-          {
-            version: "0.0.0",
-            filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "20tgf6g4m3c3u",
-            splices: {},
-            captures: [],
-          },
-          () => ({
-            kind: "()",
-            loc: [72, 25, 72, 40],
-            expression: {
-              kind: "bltn",
-              loc: [72, 25, 72, 35],
-              name: "Math.floor",
-            },
-            arguments: [
-              {
-                kind: "number",
-                loc: [72, 36, 72, 39],
-                value: 2.7,
-              },
-            ],
-          }),
-        ),
-        {
-          builtinOf: (name) => (name === "Math.floor" ? () => 0 : undefined),
-        },
-      ),
-      2,
-    );
-  });
-  it("may not add a member to a kind of value", async () => {
-    // A member of a string is the language's, so a target naming one adds a
-    // whole name nothing reads: `"abc".normalize` still finds nothing.
-    await assert.rejects(
-      // @ts-expect-error: the schema leaves `normalize` out
-      evaluate(
-        cs.create(
-          [84, 16, 84, 35],
-          {
-            version: "0.0.0",
-            filePath: "stdlib/target-builtins.test.tsx",
-            fileHash: "20tgf6g4m3c3u",
-            splices: {},
-            captures: [],
-          },
-          () => ({
-            kind: ".",
-            loc: [84, 19, 84, 34],
-            expression: {
-              kind: "string",
-              loc: [84, 19, 84, 24],
-              text: "abc",
-            },
-            name: "normalize",
-          }),
-        ),
-        {
-          builtinOf: (name) =>
-            name === "string.normalize" ? (self) => self : undefined,
-        },
-      ),
-      /a string has no `normalize` in this language/,
     );
   });
 });

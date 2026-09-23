@@ -2,9 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_numbers            → numbers
  = cs.const(            →  = 
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 stringify               → stringify
 (                       → (
@@ -21,9 +19,7 @@ stringify               → stringify
 const                   → const 
 __cs_text               → text
  = cs.const(            →  = 
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 stringify               → stringify
 (                       → (
@@ -34,9 +30,7 @@ stringify               → stringify
 const                   → const 
 __cs_flag               → flag
  = cs.const(            →  = 
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 stringify               → stringify
 (                       → (
@@ -47,9 +41,7 @@ true                    → true
 const                   → const 
 __cs_held               → held
  = cs.const(            →  = 
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 stringify               → stringify
 (                       → (
@@ -68,9 +60,7 @@ b                       → b
 const                   → const 
 __cs_back               → back
  = cs.const(            →  = 
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 parse                   → parse
 (                       → (
@@ -95,9 +85,7 @@ __cs_held               → held
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 stringify               → stringify
 (                       → (
@@ -106,15 +94,11 @@ __cs_back               → back
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 stringify               → stringify
 (                       → (
-cs.receiver(            → 
 JSON                    → JSON
-)                       → 
 .                       → .
 parse                   → parse
 (                       → (

@@ -14,8 +14,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Array.isArray"
+                    ".",
+                    [
+                      "bltn",
+                      "Array"
+                    ],
+                    "isArray"
                   ],
                   [
                     [
@@ -27,8 +31,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Array.isArray"
+                    ".",
+                    [
+                      "bltn",
+                      "Array"
+                    ],
+                    "isArray"
                   ],
                   [
                     [
@@ -43,8 +51,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Array.isArray"
+                    ".",
+                    [
+                      "bltn",
+                      "Array"
+                    ],
+                    "isArray"
                   ],
                   [
                     "ab"
@@ -53,8 +65,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Array.isArray"
+                    ".",
+                    [
+                      "bltn",
+                      "Array"
+                    ],
+                    "isArray"
                   ],
                   [
                     {
@@ -65,8 +81,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "Array.isArray"
+                    ".",
+                    [
+                      "bltn",
+                      "Array"
+                    ],
+                    "isArray"
                   ],
                   [
                     null

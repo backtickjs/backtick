@@ -10,10 +10,10 @@ it("math", async (t) => {
     t,
     "math",
     cs.lift((() => {
-    const __cs_rounded = cs.const(cs.receiver(Math).round(2.5) + "," + cs.receiver(Math).round(-cs.number(2.5)) + "," + cs.receiver(Math).round(-cs.number(0.5)));
-    const __cs_edges = cs.const(cs.receiver(Math).floor(-cs.number(1.5)) + "," + cs.receiver(Math).ceil(-cs.number(1.5)) + "," + cs.receiver(Math).trunc(-cs.number(1.5)));
-    const __cs_picks = cs.const(cs.receiver(Math).min(3, 1, 2) + "," + cs.receiver(Math).max(3, 1, 2) + "," + cs.receiver(Math).abs(-cs.number(4)));
-    return cs.const(__cs_rounded + "|" + __cs_edges + "|" + __cs_picks + "|" + cs.receiver(Math).sqrt(9) + "," + cs.receiver(Math).sign(-cs.number(8)) + "," + cs.receiver(Math).fround(1.5) + "|" + (cs.receiver(Math).PI > 3.14) + "," + (cs.receiver(Math).E > 2.71));
+    const __cs_rounded = cs.const(Math.round(2.5) + "," + Math.round(-cs.number(2.5)) + "," + Math.round(-cs.number(0.5)));
+    const __cs_edges = cs.const(Math.floor(-cs.number(1.5)) + "," + Math.ceil(-cs.number(1.5)) + "," + Math.trunc(-cs.number(1.5)));
+    const __cs_picks = cs.const(Math.min(3, 1, 2) + "," + Math.max(3, 1, 2) + "," + Math.abs(-cs.number(4)));
+    return cs.const(__cs_rounded + "|" + __cs_edges + "|" + __cs_picks + "|" + Math.sqrt(9) + "," + Math.sign(-cs.number(8)) + "," + Math.fround(1.5) + "|" + (Math.PI > 3.14) + "," + (Math.E > 2.71));
 })()),
   );
 });

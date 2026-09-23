@@ -17,7 +17,7 @@ import { isFragmentTag } from "./isFragmentTag.js";
  *    itself declare — the values it must capture from the enclosing scope, as
  *    binding keys. They are ordered by first use, which falls out of the
  *    source-order walk. A name bound by no script at all is not a capture:
- *    there are no globals, and the rewrite reports it as unresolvable.
+ *    the rewrite reads it as a global or reports it as unresolvable.
  *
  *  - `spliceParams`: for each splice, the script's own bindings a fragment
  *    landing at that hole can reach — what the hole must hand whatever arrives.
@@ -138,7 +138,7 @@ export function resolveBindings(
 
   // `scopes` is the chain from the current scope out to the file root, innermost
   // last. A reference bound by any of them uses that binding's unique name; one
-  // bound by none returns null (unresolvable — there are no globals).
+  // bound by none returns null (a global, or unresolvable).
   const resolve = (name: string, scopes: Scope[]): string | null => {
     for (let i = scopes.length - 1; i >= 0; i--) {
       const found = scopes[i].get(name);
@@ -159,8 +159,8 @@ export function resolveBindings(
   ): void => {
     const bound = resolve(node.text, scopes);
     if (bound == null) {
-      // Bound by nothing: there are no globals, so the rewrite reports
-      // "Cannot find name" — nothing to capture.
+      // Bound by nothing: a global or a "Cannot find name", which the rewrite
+      // decides — nothing to capture.
       return;
     }
     bindings.set(node, bound);

@@ -19,24 +19,18 @@ __cs_doubled                          → doubled
 (                                     → (
 () => {\n                             → () => {\n          
 cs.statement(                         → 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()
 );                                    → ;
 \n                                    → \n          
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -57,15 +51,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -82,9 +72,7 @@ p                                     → p
 >{cs.lift(                            → >{
 "a "                                  → "a "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_doubled                          → doubled
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -97,9 +85,7 @@ p                                     → p
 >{cs.lift(                            → >{
 "b "                                  → "b "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_doubled                          → doubled
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -112,9 +98,7 @@ p                                     → p
 >{cs.lift(                            → >{
 "c "                                  → "c "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_doubled                          → doubled
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -146,9 +130,7 @@ __cs_isBig                            → isBig
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -162,15 +144,11 @@ __cs_label                            → label
  = cs.const(                          →  = 
 () => {\n                             → () => {\n          
 cs.statement(                         → 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()
@@ -178,14 +156,12 @@ log                                   → log
 \n                                    → \n          
 return cs.const(                      → return 
 (cs.condition(                        → 
-cs.receiver(                          → 
 __cs_isBig                            → isBig
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
 ) &&                                  → 
-cs.receiver(__cs_isBig).get()         → isBig.get() [-semantic -completion -navigation -verification]
+__cs_isBig.get()                      → isBig.get() [-semantic -completion -navigation -verification]
 ) ?                                   →  ? 
 "big"                                 → "big"
  :                                    →  : 
@@ -204,15 +180,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_n                                → n
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

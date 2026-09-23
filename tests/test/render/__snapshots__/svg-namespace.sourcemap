@@ -47,9 +47,7 @@ circle                  → circle
                         →  
 cx                      → cx
 ={cs.lift(              → ={
-cs.receiver(            → 
 __cs_props              → props
-)                       → 
 .                       → .
 x                       → x
 )}                      → }
@@ -69,9 +67,7 @@ title                   → title
 >{cs.lift(              → >{
 "dot "                  → "dot "
  +                      →  + 
-cs.receiver(            → 
 __cs_props              → props
-)                       → 
 .                       → .
 x                       → x
 )}</                    → }</

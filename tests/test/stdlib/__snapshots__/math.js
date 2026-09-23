@@ -46,9 +46,14 @@ it("math", async (t) => {
                       kind: "()",
                       loc: [14, 9, 14, 24],
                       expression: {
-                        kind: "bltn",
+                        kind: ".",
                         loc: [14, 9, 14, 19],
-                        name: "Math.round",
+                        expression: {
+                          kind: "bltn",
+                          loc: [14, 9, 14, 13],
+                          name: "Math",
+                        },
+                        name: "round",
                       },
                       arguments: [
                         {
@@ -70,9 +75,14 @@ it("math", async (t) => {
                     kind: "()",
                     loc: [14, 33, 14, 49],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [14, 33, 14, 43],
-                      name: "Math.round",
+                      expression: {
+                        kind: "bltn",
+                        loc: [14, 33, 14, 37],
+                        name: "Math",
+                      },
+                      name: "round",
                     },
                     arguments: [
                       {
@@ -100,9 +110,14 @@ it("math", async (t) => {
                 kind: "()",
                 loc: [14, 58, 14, 74],
                 expression: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [14, 58, 14, 68],
-                  name: "Math.round",
+                  expression: {
+                    kind: "bltn",
+                    loc: [14, 58, 14, 62],
+                    name: "Math",
+                  },
+                  name: "round",
                 },
                 arguments: [
                   {
@@ -144,9 +159,14 @@ it("math", async (t) => {
                       kind: "()",
                       loc: [16, 9, 16, 25],
                       expression: {
-                        kind: "bltn",
+                        kind: ".",
                         loc: [16, 9, 16, 19],
-                        name: "Math.floor",
+                        expression: {
+                          kind: "bltn",
+                          loc: [16, 9, 16, 13],
+                          name: "Math",
+                        },
+                        name: "floor",
                       },
                       arguments: [
                         {
@@ -173,9 +193,14 @@ it("math", async (t) => {
                     kind: "()",
                     loc: [16, 34, 16, 49],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [16, 34, 16, 43],
-                      name: "Math.ceil",
+                      expression: {
+                        kind: "bltn",
+                        loc: [16, 34, 16, 38],
+                        name: "Math",
+                      },
+                      name: "ceil",
                     },
                     arguments: [
                       {
@@ -203,9 +228,14 @@ it("math", async (t) => {
                 kind: "()",
                 loc: [16, 58, 16, 74],
                 expression: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [16, 58, 16, 68],
-                  name: "Math.trunc",
+                  expression: {
+                    kind: "bltn",
+                    loc: [16, 58, 16, 62],
+                    name: "Math",
+                  },
+                  name: "trunc",
                 },
                 arguments: [
                   {
@@ -247,9 +277,14 @@ it("math", async (t) => {
                       kind: "()",
                       loc: [18, 9, 18, 26],
                       expression: {
-                        kind: "bltn",
+                        kind: ".",
                         loc: [18, 9, 18, 17],
-                        name: "Math.min",
+                        expression: {
+                          kind: "bltn",
+                          loc: [18, 9, 18, 13],
+                          name: "Math",
+                        },
+                        name: "min",
                       },
                       arguments: [
                         {
@@ -281,9 +316,14 @@ it("math", async (t) => {
                     kind: "()",
                     loc: [18, 35, 18, 52],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [18, 35, 18, 43],
-                      name: "Math.max",
+                      expression: {
+                        kind: "bltn",
+                        loc: [18, 35, 18, 39],
+                        name: "Math",
+                      },
+                      name: "max",
                     },
                     arguments: [
                       {
@@ -316,9 +356,14 @@ it("math", async (t) => {
                 kind: "()",
                 loc: [18, 61, 18, 73],
                 expression: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [18, 61, 18, 69],
-                  name: "Math.abs",
+                  expression: {
+                    kind: "bltn",
+                    loc: [18, 61, 18, 65],
+                    name: "Math",
+                  },
+                  name: "abs",
                 },
                 arguments: [
                   {
@@ -428,9 +473,14 @@ it("math", async (t) => {
                                 kind: "()",
                                 loc: [26, 9, 26, 21],
                                 expression: {
-                                  kind: "bltn",
+                                  kind: ".",
                                   loc: [26, 9, 26, 18],
-                                  name: "Math.sqrt",
+                                  expression: {
+                                    kind: "bltn",
+                                    loc: [26, 9, 26, 13],
+                                    name: "Math",
+                                  },
+                                  name: "sqrt",
                                 },
                                 arguments: [
                                   {
@@ -453,9 +503,14 @@ it("math", async (t) => {
                             kind: "()",
                             loc: [28, 9, 28, 22],
                             expression: {
-                              kind: "bltn",
+                              kind: ".",
                               loc: [28, 9, 28, 18],
-                              name: "Math.sign",
+                              expression: {
+                                kind: "bltn",
+                                loc: [28, 9, 28, 13],
+                                name: "Math",
+                              },
+                              name: "sign",
                             },
                             arguments: [
                               {
@@ -483,9 +538,14 @@ it("math", async (t) => {
                         kind: "()",
                         loc: [30, 9, 30, 25],
                         expression: {
-                          kind: "bltn",
+                          kind: ".",
                           loc: [30, 9, 30, 20],
-                          name: "Math.fround",
+                          expression: {
+                            kind: "bltn",
+                            loc: [30, 9, 30, 13],
+                            name: "Math",
+                          },
+                          name: "fround",
                         },
                         arguments: [
                           {
@@ -508,9 +568,14 @@ it("math", async (t) => {
                     kind: "binop",
                     loc: [32, 10, 32, 24],
                     left: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [32, 10, 32, 17],
-                      name: "Math.PI",
+                      expression: {
+                        kind: "bltn",
+                        loc: [32, 10, 32, 14],
+                        name: "Math",
+                      },
+                      name: "PI",
                     },
                     operatorToken: ">",
                     right: {
@@ -532,9 +597,14 @@ it("math", async (t) => {
                 kind: "binop",
                 loc: [34, 10, 34, 23],
                 left: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [34, 10, 34, 16],
-                  name: "Math.E",
+                  expression: {
+                    kind: "bltn",
+                    loc: [34, 10, 34, 14],
+                    name: "Math",
+                  },
+                  name: "E",
                 },
                 operatorToken: ">",
                 right: {

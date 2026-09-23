@@ -83,9 +83,14 @@ it("objectValues", async (t) => {
                     kind: "()",
                     loc: [14, 17, 14, 38],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [14, 17, 14, 30],
-                      name: "Object.values",
+                      expression: {
+                        kind: "bltn",
+                        loc: [14, 17, 14, 23],
+                        name: "Object",
+                      },
+                      name: "values",
                     },
                     arguments: [
                       {
@@ -113,9 +118,14 @@ it("objectValues", async (t) => {
                         kind: "()",
                         loc: [15, 17, 15, 46],
                         expression: {
-                          kind: "bltn",
+                          kind: ".",
                           loc: [15, 17, 15, 30],
-                          name: "Object.hasOwn",
+                          expression: {
+                            kind: "bltn",
+                            loc: [15, 17, 15, 23],
+                            name: "Object",
+                          },
+                          name: "hasOwn",
                         },
                         arguments: [
                           {
@@ -135,9 +145,14 @@ it("objectValues", async (t) => {
                         kind: "()",
                         loc: [15, 48, 15, 77],
                         expression: {
-                          kind: "bltn",
+                          kind: ".",
                           loc: [15, 48, 15, 61],
-                          name: "Object.hasOwn",
+                          expression: {
+                            kind: "bltn",
+                            loc: [15, 48, 15, 54],
+                            name: "Object",
+                          },
+                          name: "hasOwn",
                         },
                         arguments: [
                           {

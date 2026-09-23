@@ -16,7 +16,7 @@ it("evaluateLoading", async (t) => {
     "evaluateLoading",
     cs.lift((() => {
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<Bundle<BacktickElement> | null>(null));
-    return cs.const(<div>{cs.lift(cs.receiver(__cs_held).get() === null ? <span>loading…</span> : (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(cs.receiver(__cs_held).get() as Bundle<BacktickElement>))}</div>);
+    return cs.const(<div>{cs.lift(__cs_held.get() === null ? <span>loading…</span> : (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(__cs_held.get() as Bundle<BacktickElement>))}</div>);
 })()),
   );
 });

@@ -17,9 +17,7 @@ i                                     → i
 >{cs.lift(                            → >{
 "panel "                              → "panel "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_p                                → p
-)                                     → 
 .                                     → .
 n                                     → n
 )}</                                  → }</
@@ -40,11 +38,9 @@ n                                     → n
 }                                     → }
 />                                    →  />
 )}{cs.lift(                           → \n        {
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (props)                               → $props
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 body                                  → body
 )}</                                  → }\n      </
@@ -87,15 +83,11 @@ b                                     → b
 >{cs.lift(                            → >\n      {
 "outer "                              → "outer "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_p                                → p
-)                                     → 
 .                                     → .
 n                                     → n
 )}{cs.lift(                           → }\n      {
-cs.receiver(                          → 
 __cs_p                                → p
-)                                     → 
 .                                     → .
 children                              → children
 )}</                                  → }\n    </
@@ -119,9 +111,7 @@ __cs_Badge                            → Badge
                                       →  
 n                                     → n
 ={                                    → ={
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -132,9 +122,7 @@ u                                     → u
 >{cs.lift(                            → >{
 "kid "                                → "kid "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -155,15 +143,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

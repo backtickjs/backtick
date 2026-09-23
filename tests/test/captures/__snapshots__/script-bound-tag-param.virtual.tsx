@@ -16,7 +16,7 @@ it("scriptBoundTagParam", async (t) => {
     }) => BacktickElement) => <ul>{cs.lift((cs.splice(cs.lift(cs.const(<__cs_Row n={1}/>))) satisfies typeof cs.ClientUnknown))}{cs.lift((cs.splice(cs.lift(cs.const(<__cs_Row n={2}/>))) satisfies typeof cs.ClientUnknown))}</ul>);
     return cs.const(__cs_twice((__cs_p: {
         n: number;
-    }) => <li>{cs.lift("row " + cs.receiver(__cs_p).n)}</li>));
+    }) => <li>{cs.lift("row " + __cs_p.n)}</li>));
 })()),
   );
 });

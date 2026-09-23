@@ -35,9 +35,7 @@ aria-label                            → aria-label
                                       →  
 value                                 → value
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_text                             → text
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -59,9 +57,7 @@ aria-label                            → aria-label
                                       →  
 checked                               → checked
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_isOn                             → isOn
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -75,9 +71,7 @@ onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n              
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_text                             → text
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -86,9 +80,7 @@ set                                   → set
 );                                    → ;
 \n                                    → \n              
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_isOn                             → isOn
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -146,14 +138,10 @@ aria-label                            → aria-label
                                       →  
 value                                 → value
 ={cs.lift(                            → ={
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_texts                            → texts
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
-)                                     → 
 [                                     → [
 0                                     → 0
 ]                                     → ]
@@ -175,14 +163,10 @@ aria-label                            → aria-label
                                       →  
 checked                               → checked
 ={cs.lift(                            → ={
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_flags                            → flags
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
-)                                     → 
 [                                     → [
 0                                     → 0
 ]                                     → ]
@@ -196,9 +180,7 @@ onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n              
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_texts                            → texts
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -207,9 +189,7 @@ set                                   → set
 );                                    → ;
 \n                                    → \n              
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_flags                            → flags
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (

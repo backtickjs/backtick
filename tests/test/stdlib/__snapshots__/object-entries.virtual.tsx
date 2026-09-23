@@ -10,8 +10,8 @@ it("objectEntries", async (t) => {
     "objectEntries",
     cs.lift((() => {
     const __cs_held = cs.const({ n: 1, q: "ada" });
-    const __cs_written = cs.const(cs.receiver(Object).fromEntries(cs.receiver(cs.receiver(Object).entries(__cs_held)).map(__cs_pair => [cs.receiver(__cs_pair)[0], cs.receiver(JSON).stringify(cs.receiver(__cs_pair)[1])])));
-    return cs.const(cs.receiver(__cs_written).n + " " + cs.receiver(__cs_written).q);
+    const __cs_written = cs.const(Object.fromEntries(Object.entries(__cs_held).map(__cs_pair => [__cs_pair[0], JSON.stringify(__cs_pair[1])])));
+    return cs.const(__cs_written.n + " " + __cs_written.q);
 })()),
   );
 });

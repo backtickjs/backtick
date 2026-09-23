@@ -1,6 +1,0 @@
-7:24-7:28 error TS0: `Math` is a namespace, not a value: a client script can only write it followed by a member.
-10:13-10:17 error TS0: `Math` is a namespace, not a value: a client script can only write it followed by a member.
-14:58-14:63 error TS0: `Array` is a namespace, not a value: a client script can only write it followed by a member.
-18:27-18:31 error TS0: `Math` is a namespace, not a value: a client script can only write it followed by a member.
-21:27-21:38 error TS0: `Math` is never null, so `?.` has nothing to check here; use a plain `.`.
-23:24-23:32 error TS0: `Math` is never null, so `?.` has nothing to check here; use a plain `.`.

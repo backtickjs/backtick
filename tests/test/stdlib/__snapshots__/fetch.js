@@ -177,9 +177,14 @@ it("fetchRequests", async (t) => {
                                 kind: "()",
                                 loc: [25, 20, 25, 45],
                                 expression: {
-                                  kind: "bltn",
+                                  kind: ".",
                                   loc: [25, 20, 25, 30],
-                                  name: "JSON.parse",
+                                  expression: {
+                                    kind: "bltn",
+                                    loc: [25, 20, 25, 24],
+                                    name: "JSON",
+                                  },
+                                  name: "parse",
                                 },
                                 arguments: [
                                   {
@@ -467,9 +472,14 @@ it("fetchRequests", async (t) => {
                         kind: "()",
                         loc: [44, 17, 44, 69],
                         expression: {
-                          kind: "bltn",
+                          kind: ".",
                           loc: [44, 17, 44, 31],
-                          name: "JSON.stringify",
+                          expression: {
+                            kind: "bltn",
+                            loc: [44, 17, 44, 21],
+                            name: "JSON",
+                          },
+                          name: "stringify",
                         },
                         arguments: [
                           {

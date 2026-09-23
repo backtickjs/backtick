@@ -9,38 +9,68 @@ import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
 import { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 
-// Every name the language provides, written here rather than read off a
-// schema: the compiler's vocabulary is its own and closed, and it is the host
-// lib's and nothing else. What the framework or an app provides arrives as a
-// value an app splices — `$state`, imported and handed to the script — and
-// never as a name recognised here. What may be read off one of these is not
-// this question: `Receiver` narrows the members, from the schema.
-//
-// Written in the shape `schema/src/generators/builtins.ts` writes its own: a
-// trailing dot is a front, and a name without one is already whole. The two are
-// one list read for different purposes — this one says what a script may write,
-// that one says what needs a value to import — and keeping them the same shape
-// is what makes a name added to one visibly missing from the other.
-//
-// A front is only the front of a name: a script writes `Math.floor`, which is a
-// single name the client answers, and there is no `Math` for a read to yield —
-// so an access folds into the whole name, and the front standing alone is an
-// error. Nearly every name here is one: the statics, and the two URI
-// component functions a script calls bare. A timer is the target's —
-// `$window.setTimeout` — because a clock is the host's and not the language's.
-//
-// The four kinds a member is read off — `string.`, `array.` and the rest — are
-// not here: those are reached off a value rather than written, so they are
-// `receivers.ts`'s and never an identifier this resolves.
-const language = new Set([
-  "Array.",
-  "JSON.",
-  "Math.",
-  "Number.",
-  "Object.",
-  "String.",
+// The global object's names from ECMA-262 and ECMA-402, which a script reads
+// off the client's own global. What a target adds, like `window`, is spliced.
+// `eval` is left out: a client can only run it indirectly, which is not the
+// call a script would have written.
+const globals = new Set([
+  "AggregateError",
+  "Array",
+  "ArrayBuffer",
+  "Atomics",
+  "BigInt",
+  "BigInt64Array",
+  "BigUint64Array",
+  "Boolean",
+  "DataView",
+  "Date",
+  "Error",
+  "EvalError",
+  "FinalizationRegistry",
+  "Float32Array",
+  "Float64Array",
+  "Function",
+  "Infinity",
+  "Int16Array",
+  "Int32Array",
+  "Int8Array",
+  "Intl",
+  "Iterator",
+  "JSON",
+  "Map",
+  "Math",
+  "NaN",
+  "Number",
+  "Object",
+  "Promise",
+  "Proxy",
+  "RangeError",
+  "ReferenceError",
+  "Reflect",
+  "RegExp",
+  "Set",
+  "SharedArrayBuffer",
+  "String",
+  "Symbol",
+  "SyntaxError",
+  "TypeError",
+  "URIError",
+  "Uint16Array",
+  "Uint32Array",
+  "Uint8Array",
+  "Uint8ClampedArray",
+  "WeakMap",
+  "WeakRef",
+  "WeakSet",
+  "decodeURI",
   "decodeURIComponent",
+  "encodeURI",
   "encodeURIComponent",
+  "globalThis",
+  "isFinite",
+  "isNaN",
+  "parseFloat",
+  "parseInt",
 ]);
 
 export interface RewriteState {
@@ -61,32 +91,8 @@ export interface RewriteState {
   captures?: Set<string>;
 }
 
-// The front of a whole builtin name, where a script wrote one: `Math` in
-// `Math.floor`. A bound name is the script's own and shadows the namespace.
-function namespaceOf(
-  ts: typeof import("typescript"),
-  state: RewriteState,
-  node: ts.Expression,
-): string | undefined {
-  return ts.isIdentifier(node) &&
-    !state.bindings.has(node) &&
-    language.has(`${node.text}.`)
-    ? node.text
-    : undefined;
-}
-
-/**
- * One member read, as the runtime carries it.
- *
- * A member of a namespace is a whole name the client answers — `Math.floor` —
- * so the front and the member travel as that one name rather than as a read of
- * something and a member of it. Anything else is the read it looks like.
- *
- * Built here because a property access and a method call reach the same read
- * by different routes — a call consumes its access inline, to keep the virtual
- * code a call on a member rather than a call on a parenthesised one — and what
- * the wire gets has to be the same either way.
- */
+// Built here because a property access and a method call reach the same read
+// by different routes, and what the wire gets has to be the same either way.
 function accessNode(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -95,26 +101,10 @@ function accessNode(
   receiver: ts.Expression,
   optional: boolean,
 ): ts.Expression {
-  const at = sourceLoc(ts, state.script.toSourceLocation(access));
-  const namespace = namespaceOf(ts, state, access.expression);
-  if (namespace === undefined) {
-    return astNode(ts, optional ? "?." : ".", {
-      loc: at,
-      expression: receiver,
-      name: ts.factory.createStringLiteral(name),
-    });
-  }
-  // A namespace is never null, so `?.` has nothing to short-circuit.
-  if (optional) {
-    state.errors.set(
-      access,
-      `\`${namespace}\` is never null, so \`?.\` has nothing to check ` +
-        "here; use a plain `.`.",
-    );
-  }
-  return astNode(ts, "bltn", {
-    loc: at,
-    name: ts.factory.createStringLiteral(`${namespace}.${name}`),
+  return astNode(ts, optional ? "?." : ".", {
+    loc: sourceLoc(ts, state.script.toSourceLocation(access)),
+    expression: receiver,
+    name: ts.factory.createStringLiteral(name),
   });
 }
 
@@ -152,21 +142,6 @@ function mapType<T extends ts.TypeNode | undefined>(
     map(type);
   }
   return type;
-}
-
-// Whether an access has already taken this name as its front, which is the one
-// place a namespace may be written: `Math.floor` names something and `Math`
-// alone names nothing.
-function isNamespaceFront(
-  ts: typeof import("typescript"),
-  node: ts.Identifier,
-): boolean {
-  const parent = node.parent;
-  return (
-    ts.isPropertyAccessExpression(parent) &&
-    parent.expression === node &&
-    ts.isIdentifier(parent.name)
-  );
 }
 
 // Boolean by construction, so no check needed: a comparison yields boolean,
@@ -883,26 +858,8 @@ function rewriteNodeImpl(
       };
     }
 
-    // One exception to "there are no globals", and it is a list rather than a
-    // rule: a name here is one this language provides itself, and what it means
-    // is written down rather than inherited from whatever the host's own
-    // happens to be.
-    //
-    // A front reaching here has not been taken by an access, and there is
-    // nothing for it to be: the name the client answers is the whole of
-    // `Math.floor`, so a front on its own reads no value the format can carry.
-    // The virtual code still names the host's lib plainly — narrowing it is
-    // `Receiver`'s job, where the access reads it — so the one error stands
-    // alone.
-    if (!state.bindings.has(node) && language.has(`${node.text}.`)) {
-      if (!isNamespaceFront(ts, node)) {
-        state.errors.set(
-          node,
-          `\`${node.text}\` is a namespace, not a value: a client script can ` +
-            "only write it followed by a member.",
-        );
-      }
-      // Named plainly, as the lib global it is; narrowing it is the access's.
+    // Read off the client's global, as the name it is.
+    if (!state.bindings.has(node) && globals.has(node.text)) {
       const virtual = ts.factory.createIdentifier(node.text);
       state.mappings.set(virtual, node);
       return {
@@ -914,28 +871,8 @@ function rewriteNodeImpl(
       };
     }
 
-    // The same exception said for a whole name rather than a front. Nothing
-    // folds in below one, so it needs no check that something did — and it has
-    // no access to be narrowed at either, which is why this one carries
-    // `cs.receiver` itself. Without it a script typechecks against whichever
-    // timer the project's lib happens to declare, and node's answers with a
-    // `Timeout`, which is no value this format can carry.
-    if (!state.bindings.has(node) && language.has(node.text)) {
-      const named = ts.factory.createIdentifier(node.text);
-      state.mappings.set(named, node);
-      const virtual = call(ts, "cs", "receiver", [named]);
-      state.mappings.set(virtual, node);
-      return {
-        virtual,
-        runtime: astNode(ts, "bltn", {
-          loc: loc(node),
-          name: ts.factory.createStringLiteral(node.text),
-        }),
-      };
-    }
-
-    // There are no globals: a name the resolver didn't bind belongs to no
-    // scope, whether it's a host binding or a lib global like `String`.
+    // Any other name the resolver didn't bind is a host binding the script
+    // forgot to splice, or a global a target provides.
     if (!state.bindings.has(node)) {
       state.errors.set(
         node,
@@ -973,15 +910,9 @@ function rewriteNodeImpl(
     const optional = ts.isOptionalChain(node);
 
     const expression = rewriteNode(ts, state, node.expression);
-    // The receiver reads as its client-side view (`Receiver<T>`), while the
-    // access stays a real property access so hover, rename, and completions
-    // on the name keep working.
     const propertyName = ts.factory.createIdentifier(name);
     state.mappings.set(propertyName, node.name);
-    const virtualReceiver = call(ts, "cs", "receiver", [
-      expression.virtual as ts.Expression,
-    ]);
-    state.mappings.set(virtualReceiver, node.expression);
+    const virtualReceiver = expression.virtual as ts.Expression;
     const access = optional
       ? ts.factory.createPropertyAccessChain(
           virtualReceiver,
@@ -994,9 +925,6 @@ function rewriteNodeImpl(
         );
     return {
       virtual: access,
-      // Only the runtime node folds: the virtual code still writes the access
-      // out, which is what keeps hover, rename and completion on the member
-      // working and leaves `Receiver` to narrow what may be read off the name.
       runtime: accessNode(
         ts,
         state,
@@ -1022,16 +950,9 @@ function rewriteNodeImpl(
     }
     const expression = rewriteNode(ts, state, node.expression);
     const key = rewriteNode(ts, state, node.argumentExpression);
-    // The receiver reads as its client-side view (`Receiver<T>`), while the
-    // access stays a real `a[i]` so the key is checked by TypeScript's own
-    // indexing rule and hover and rename keep working.
-    const indexReceiver = call(ts, "cs", "receiver", [
-      expression.virtual as ts.Expression,
-    ]);
-    state.mappings.set(indexReceiver, node.expression);
     return {
       virtual: ts.factory.createElementAccessExpression(
-        indexReceiver,
+        expression.virtual as ts.Expression,
         key.virtual as ts.Expression,
       ),
       runtime: astNode(ts, "[]", {
@@ -1305,16 +1226,9 @@ function rewriteNodeImpl(
       const optional = ts.isOptionalChain(access);
       const receiver = rewriteNode(ts, state, access.expression);
       const name = access.name.text;
-      // A method call reads the member off `cs.receiver(...)`; the runtime
-      // keeps the direct property call, so receiver binding is unchanged.
-      // An optional receiver or callee short-circuits null, so the call
-      // carries `?? null` like an optional access.
       const propertyName = ts.factory.createIdentifier(name);
       state.mappings.set(propertyName, access.name);
-      const virtualReceiver = call(ts, "cs", "receiver", [
-        receiver.virtual as ts.Expression,
-      ]);
-      state.mappings.set(virtualReceiver, access.expression);
+      const virtualReceiver = receiver.virtual as ts.Expression;
 
       const calleeAccess = optional
         ? ts.factory.createPropertyAccessChain(

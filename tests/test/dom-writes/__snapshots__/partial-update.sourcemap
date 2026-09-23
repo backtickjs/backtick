@@ -2,7 +2,6 @@ cs.lift((() => {\n                    → cs`{\n
 const                                 → const 
 __cs_rows                             → rows
  = cs.const(                          →  = 
-cs.receiver(                          → 
 [                                     → [
 1                                     → 1
 ,                                     → , 
@@ -12,7 +11,6 @@ cs.receiver(                          →
 ,                                     → , 
 4                                     → 4
 ]                                     → ]
-)                                     → 
 .                                     → .
 map                                   → map
 (                                     → (
@@ -53,9 +51,7 @@ __cs_index                            → index
 ;                                     → ; 
 __cs_index                            → index
  <                                    →  < 
-cs.receiver(                          → 
 __cs_rows                             → rows
-)                                     → 
 .                                     → .
 length                                → length
 ;                                     → ; 
@@ -70,28 +66,20 @@ __cs_index                            → index
 const                                 → const 
 __cs_label                            → label
  = cs.const(                          →  = 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_rows                             → rows
-)                                     → 
 [                                     → [
 __cs_index                            → index
 ]                                     → ]
-)                                     → 
 .                                     → .
 label                                 → label
 );                                    → ;
 \n                                    → \n        
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_label                            → label
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_label                            → label
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -157,9 +145,7 @@ id                                    → id
 ={cs.lift(                            → ={
 "row-"                                → "row-"
  +                                    →  + 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 id                                    → id
 )}                                    → }
@@ -167,13 +153,9 @@ id                                    → id
 <                                     → <
 td                                    → td
 >{cs.lift(                            → >{
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 label                                 → label
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

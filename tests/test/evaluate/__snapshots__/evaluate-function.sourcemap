@@ -24,9 +24,7 @@ b                                     → b
 >{cs.lift(                            → >{
 "count "                              → "count "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_props                            → props
-)                                     → 
 .                                     → .
 count                                 → count
 )}</                                  → }</

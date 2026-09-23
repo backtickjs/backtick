@@ -46,9 +46,7 @@ onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n          
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_flag                             → flag
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -57,9 +55,7 @@ false                                 → false
 );                                    → ;
 \n                                    → \n          
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_tone                             → tone
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -70,9 +66,7 @@ Tone.Cool                             → Tone.Cool
 );                                    → ;
 \n                                    → \n          
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_step                             → step
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -83,27 +77,21 @@ set                                   → set
 \n    }                               → \n        }
 )}                                    → }
 >{cs.lift(                            → \n      >\n        {
-cs.receiver(                          → 
 __cs_flag                             → flag
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
  +                                    →  + 
 " "                                   → " "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_tone                             → tone
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
  +                                    →  + 
 " "                                   → " "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_step                             → step
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

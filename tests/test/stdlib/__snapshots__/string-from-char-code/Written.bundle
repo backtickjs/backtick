@@ -17,8 +17,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "String.fromCharCode"
+                    ".",
+                    [
+                      "bltn",
+                      "String"
+                    ],
+                    "fromCharCode"
                   ],
                   [
                     72,
@@ -28,8 +32,12 @@
                 [
                   "()",
                   [
-                    "bltn",
-                    "String.fromCharCode"
+                    ".",
+                    [
+                      "bltn",
+                      "String"
+                    ],
+                    "fromCharCode"
                   ],
                   [
                     55357,

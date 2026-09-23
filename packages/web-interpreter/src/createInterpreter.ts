@@ -20,9 +20,9 @@ export interface InterpreterOptions {
   readonly window: typeof window;
 
   /**
-   * What this target answers for, beside the language's own names and the
-   * window: asked by the whole name, as the schema writes it and as the wire
-   * carries it, and answering with nothing for a name it does not have.
+   * What this target answers for, beside the framework's names and the window:
+   * asked by the name the wire carries, and answering with nothing for a name
+   * it does not have, which is then read off the client's global.
    *
    * Asked only after the client has not answered, so a name the client already
    * answers for is never reached here: what `state` means is not a target's to

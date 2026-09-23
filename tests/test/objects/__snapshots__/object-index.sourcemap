@@ -15,9 +15,7 @@ __cs_table                            → table
 const                                 → const 
 __cs_asked                            → asked
  = cs.const(                          →  = 
-cs.receiver(                          → 
 __cs_table                            → table
-)                                     → 
 [                                     → [
 __cs_currency                         → currency
 ]                                     → ]
@@ -28,9 +26,7 @@ __cs_currency                         → currency
 const                                 → const 
 __cs_usd                              → usd
  = cs.const(                          →  = 
-cs.receiver(                          → 
 __cs_table                            → table
-)                                     → 
 [                                     → [
 "usd"                                 → "usd"
 ]                                     → ]

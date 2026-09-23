@@ -19,9 +19,7 @@ i                                     → i
 (label)                               → $label
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
  +                                    →  + 
-cs.receiver(                          → 
 __cs_props                            → props
-)                                     → 
 .                                     → .
 n                                     → n
 )}</                                  → }</
@@ -156,9 +154,7 @@ i                                     → i
 >{cs.lift(                            → >{
 "row "                                → "row "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_props                            → props
-)                                     → 
 .                                     → .
 n                                     → n
 )}</                                  → }</

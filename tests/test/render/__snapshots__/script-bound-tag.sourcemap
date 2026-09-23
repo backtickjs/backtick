@@ -14,9 +14,7 @@ b                                     → b
 >{cs.lift(                            → >{
 "count "                              → "count "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_props                            → props
-)                                     → 
 .                                     → .
 count                                 → count
 )}</                                  → }</
@@ -57,9 +55,7 @@ __cs_Badge                            → Badge
                                       →  
 count                                 → count
 ={                                    → ={
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -72,15 +68,11 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

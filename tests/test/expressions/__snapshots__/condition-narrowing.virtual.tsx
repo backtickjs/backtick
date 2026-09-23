@@ -13,10 +13,10 @@ const flags = { strict: cs.lift(cs.const(true)) };
 
 const label: Client<(text: string | null, upper: boolean) => string> = cs.lift(cs.const((__cs_text: string | null, __cs_upper: boolean) => {
     if ((cs.condition(__cs_upper) && __cs_upper) && __cs_text !== null) {
-        return cs.const(cs.receiver(__cs_text).toUpperCase());
+        return cs.const(__cs_text.toUpperCase());
     }
-    if ((cs.condition((cs.splice(flags.strict) satisfies typeof cs.ClientUnknown)) && (cs.splice(flags.strict) satisfies typeof cs.ClientUnknown)) && __cs_text !== null && cs.receiver(__cs_text).charAt(0) === "!") {
-        return cs.const(cs.receiver(__cs_text).concat("?"));
+    if ((cs.condition((cs.splice(flags.strict) satisfies typeof cs.ClientUnknown)) && (cs.splice(flags.strict) satisfies typeof cs.ClientUnknown)) && __cs_text !== null && __cs_text.charAt(0) === "!") {
+        return cs.const(__cs_text.concat("?"));
     }
     return cs.const("none");
 }));

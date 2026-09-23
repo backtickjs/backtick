@@ -2,9 +2,7 @@ cs.lift((() => {\n                    → cs`{\n
 const                                 → const 
 __cs_page                             → page
  = cs.const(                          →  = 
-cs.receiver(                          → 
 JSON                                  → JSON
-)                                     → 
 .                                     → .
 parse                                 → parse
 (                                     → (
@@ -28,22 +26,16 @@ number                                → number
 );                                    → ;
 \n                                    → \n\n      
 return cs.const(                      → return 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_page                             → page
-)                                     → 
 .                                     → .
 rows                                  → rows
-)                                     → 
 [                                     → [
 0                                     → 0
 ]                                     → ]
  +                                    →  + 
 " of "                                → " of "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_page                             → page
-)                                     → 
 .                                     → .
 count                                 → count
 );                                    → ;

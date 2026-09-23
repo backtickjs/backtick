@@ -2,9 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_rounded            → rounded
  = cs.const(            →  =\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 round                   → round
 (                       → (
@@ -13,9 +11,7 @@ round                   → round
  +                      →  + 
 ","                     → ","
  +                      →  + 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 round                   → round
 (                       → (
@@ -26,9 +22,7 @@ round                   → round
  +                      →  + 
 ","                     → ","
  +                      →  + 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 round                   → round
 (                       → (
@@ -41,9 +35,7 @@ round                   → round
 const                   → const 
 __cs_edges              → edges
  = cs.const(            →  =\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 floor                   → floor
 (                       → (
@@ -54,9 +46,7 @@ floor                   → floor
  +                      →  + 
 ","                     → ","
  +                      →  + 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 ceil                    → ceil
 (                       → (
@@ -67,9 +57,7 @@ ceil                    → ceil
  +                      →  + 
 ","                     → ","
  +                      →  + 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 trunc                   → trunc
 (                       → (
@@ -82,9 +70,7 @@ trunc                   → trunc
 const                   → const 
 __cs_picks              → picks
  = cs.const(            →  =\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 min                     → min
 (                       → (
@@ -97,9 +83,7 @@ min                     → min
  +                      →  + 
 ","                     → ","
  +                      →  + 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 max                     → max
 (                       → (
@@ -112,9 +96,7 @@ max                     → max
  +                      →  + 
 ","                     → ","
  +                      →  + 
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 abs                     → abs
 (                       → (
@@ -137,9 +119,7 @@ __cs_picks              → picks
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 sqrt                    → sqrt
 (                       → (
@@ -148,9 +128,7 @@ sqrt                    → sqrt
  +                      →  +\n        
 ","                     → ","
  +                      →  +\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 sign                    → sign
 (                       → (
@@ -161,9 +139,7 @@ sign                    → sign
  +                      →  +\n        
 ","                     → ","
  +                      →  +\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 fround                  → fround
 (                       → (
@@ -172,9 +148,7 @@ fround                  → fround
  +                      →  +\n        
 "|"                     → "|"
  + (                    →  +\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 PI                      → PI
  >                      →  > 
@@ -183,9 +157,7 @@ PI                      → PI
  +                      →  +\n        
 ","                     → ","
  + (                    →  +\n        
-cs.receiver(            → 
 Math                    → Math
-)                       → 
 .                       → .
 E                       → E
  >                      →  > 

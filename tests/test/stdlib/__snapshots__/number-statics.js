@@ -32,9 +32,14 @@ async function Checked() {
             kind: "binop",
             loc: [10, 22, 10, 40],
             left: {
-              kind: "bltn",
+              kind: ".",
               loc: [10, 22, 10, 36],
-              name: "Number.EPSILON",
+              expression: {
+                kind: "bltn",
+                loc: [10, 22, 10, 28],
+                name: "Number",
+              },
+              name: "EPSILON",
             },
             operatorToken: ">",
             right: {
@@ -57,9 +62,14 @@ async function Checked() {
             kind: "binop",
             loc: [11, 21, 11, 45],
             left: {
-              kind: "bltn",
+              kind: ".",
               loc: [11, 21, 11, 37],
-              name: "Number.MAX_VALUE",
+              expression: {
+                kind: "bltn",
+                loc: [11, 21, 11, 27],
+                name: "Number",
+              },
+              name: "MAX_VALUE",
             },
             operatorToken: ">",
             right: {
@@ -94,9 +104,14 @@ async function Checked() {
                     kind: "binop",
                     loc: [13, 7, 13, 51],
                     left: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [13, 7, 13, 30],
-                      name: "Number.MAX_SAFE_INTEGER",
+                      expression: {
+                        kind: "bltn",
+                        loc: [13, 7, 13, 13],
+                        name: "Number",
+                      },
+                      name: "MAX_SAFE_INTEGER",
                     },
                     operatorToken: "===",
                     right: {
@@ -110,9 +125,14 @@ async function Checked() {
                     kind: "binop",
                     loc: [14, 7, 14, 52],
                     left: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [14, 7, 14, 30],
-                      name: "Number.MIN_SAFE_INTEGER",
+                      expression: {
+                        kind: "bltn",
+                        loc: [14, 7, 14, 13],
+                        name: "Number",
+                      },
+                      name: "MIN_SAFE_INTEGER",
                     },
                     operatorToken: "===",
                     right: {
@@ -132,9 +152,14 @@ async function Checked() {
                   kind: "binop",
                   loc: [15, 7, 15, 27],
                   left: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [15, 7, 15, 23],
-                    name: "Number.MIN_VALUE",
+                    expression: {
+                      kind: "bltn",
+                      loc: [15, 7, 15, 13],
+                      name: "Number",
+                    },
+                    name: "MIN_VALUE",
                   },
                   operatorToken: ">",
                   right: {
@@ -149,9 +174,14 @@ async function Checked() {
                 kind: "()",
                 loc: [16, 7, 16, 30],
                 expression: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [16, 7, 16, 27],
-                  name: "Number.isSafeInteger",
+                  expression: {
+                    kind: "bltn",
+                    loc: [16, 7, 16, 13],
+                    name: "Number",
+                  },
+                  name: "isSafeInteger",
                 },
                 arguments: [
                   {
@@ -171,18 +201,28 @@ async function Checked() {
                 kind: "()",
                 loc: [17, 8, 17, 57],
                 expression: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [17, 8, 17, 28],
-                  name: "Number.isSafeInteger",
+                  expression: {
+                    kind: "bltn",
+                    loc: [17, 8, 17, 14],
+                    name: "Number",
+                  },
+                  name: "isSafeInteger",
                 },
                 arguments: [
                   {
                     kind: "binop",
                     loc: [17, 29, 17, 56],
                     left: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [17, 29, 17, 52],
-                      name: "Number.MAX_SAFE_INTEGER",
+                      expression: {
+                        kind: "bltn",
+                        loc: [17, 29, 17, 35],
+                        name: "Number",
+                      },
+                      name: "MAX_SAFE_INTEGER",
                     },
                     operatorToken: "+",
                     right: {
@@ -209,9 +249,14 @@ async function Checked() {
             kind: "()",
             loc: [18, 19, 18, 38],
             expression: {
-              kind: "bltn",
+              kind: ".",
               loc: [18, 19, 18, 35],
-              name: "Number.isInteger",
+              expression: {
+                kind: "bltn",
+                loc: [18, 19, 18, 25],
+                name: "Number",
+              },
+              name: "isInteger",
             },
             arguments: [
               {
@@ -235,9 +280,14 @@ async function Checked() {
             kind: "()",
             loc: [19, 24, 19, 45],
             expression: {
-              kind: "bltn",
+              kind: ".",
               loc: [19, 24, 19, 40],
-              name: "Number.isInteger",
+              expression: {
+                kind: "bltn",
+                loc: [19, 24, 19, 30],
+                name: "Number",
+              },
+              name: "isInteger",
             },
             arguments: [
               {
@@ -261,9 +311,14 @@ async function Checked() {
             kind: "()",
             loc: [21, 21, 21, 41],
             expression: {
-              kind: "bltn",
+              kind: ".",
               loc: [21, 21, 21, 36],
-              name: "Number.isFinite",
+              expression: {
+                kind: "bltn",
+                loc: [21, 21, 21, 27],
+                name: "Number",
+              },
+              name: "isFinite",
             },
             arguments: [
               {

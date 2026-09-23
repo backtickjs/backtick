@@ -19,32 +19,24 @@ onsubmit                              → onsubmit
 __cs_event                            → event
  => {\n                               → ) => {\n            
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 preventDefault                        → preventDefault
 ()                                    → ()
 );                                    → ;
 \n                                    → \n            
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 type                                  → type
  +                                    →  + 
 " "                                   → " "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 cancelable                            → cancelable
 )                                     → )
@@ -59,19 +51,13 @@ oninput                               → oninput
 ={cs.lift(                            → ={
 __cs_event                            → event
  =>                                   → ) => 
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 currentTarget                         → currentTarget
-)                                     → 
 .                                     → .
 value                                 → value
 )                                     → )
@@ -85,19 +71,13 @@ oninput                               → oninput
 ={cs.lift(                            → ={
 __cs_event                            → event
  =>                                   → ) => 
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 currentTarget                         → currentTarget
-)                                     → 
 .                                     → .
 value                                 → value
 )                                     → )
@@ -111,35 +91,25 @@ onclick                               → onclick
 ={cs.lift(                            → ={
 __cs_event                            → event
  =>                                   → ) =>\n              
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 clientX                               → clientX
  +                                    →  + 
 " "                                   → " "
  +                                    →  + 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_event                            → event
-)                                     → 
 .                                     → .
 currentTarget                         → currentTarget
-)                                     → 
 .                                     → .
 tagName                               → tagName
 )                                     → )
 )}                                    → \n            }
 >{cs.lift(                            → \n          >\n            {
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

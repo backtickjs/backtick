@@ -164,9 +164,14 @@ it("typeofTable", async (t) => {
                   kind: "typeof",
                   loc: [22, 9, 22, 26],
                   operand: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [22, 16, 22, 26],
-                    name: "Math.floor",
+                    expression: {
+                      kind: "bltn",
+                      loc: [22, 16, 22, 20],
+                      name: "Math",
+                    },
+                    name: "floor",
                   },
                 },
                 {

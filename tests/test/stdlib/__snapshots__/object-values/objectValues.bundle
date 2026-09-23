@@ -20,8 +20,12 @@
               "values": [
                 "()",
                 [
-                  "bltn",
-                  "Object.values"
+                  ".",
+                  [
+                    "bltn",
+                    "Object"
+                  ],
+                  "values"
                 ],
                 [
                   [
@@ -36,8 +40,12 @@
                   [
                     "()",
                     [
-                      "bltn",
-                      "Object.hasOwn"
+                      ".",
+                      [
+                        "bltn",
+                        "Object"
+                      ],
+                      "hasOwn"
                     ],
                     [
                       [
@@ -50,8 +58,12 @@
                   [
                     "()",
                     [
-                      "bltn",
-                      "Object.hasOwn"
+                      ".",
+                      [
+                        "bltn",
+                        "Object"
+                      ],
+                      "hasOwn"
                     ],
                     [
                       [

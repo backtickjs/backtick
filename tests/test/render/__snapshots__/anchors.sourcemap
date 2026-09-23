@@ -24,9 +24,7 @@ __cs_clear                            → clear
  = cs.const(                          →  = 
 () => {\n                             → () => {\n      
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -54,9 +52,7 @@ For                                   → For
                                       →  
 each                                  → each
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

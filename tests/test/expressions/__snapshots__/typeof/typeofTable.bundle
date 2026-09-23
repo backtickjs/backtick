@@ -90,8 +90,12 @@
                 [
                   "typeof",
                   [
-                    "bltn",
-                    "Math.floor"
+                    ".",
+                    [
+                      "bltn",
+                      "Math"
+                    ],
+                    "floor"
                   ]
                 ],
                 [

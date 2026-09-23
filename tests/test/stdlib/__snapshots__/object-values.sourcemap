@@ -17,9 +17,7 @@ return cs.const(        → return
 {                       → {\n        
 values                  → values
 :                       → : 
-cs.receiver(            → 
 Object                  → Object
-)                       → 
 .                       → .
 values                  → values
 (                       → (
@@ -29,9 +27,7 @@ __cs_prices             → prices
 holds                   → holds
 :                       → : 
 [                       → [
-cs.receiver(            → 
 Object                  → Object
-)                       → 
 .                       → .
 hasOwn                  → hasOwn
 (                       → (
@@ -40,9 +36,7 @@ __cs_prices             → prices
 "pear"                  → "pear"
 )                       → )
 ,                       → , 
-cs.receiver(            → 
 Object                  → Object
-)                       → 
 .                       → .
 hasOwn                  → hasOwn
 (                       → (

@@ -111,9 +111,9 @@ describe("a field's value", () => {
     return cs.lift((() => {
     const __cs_text = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("first"));
     const __cs_isOn = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
-    return cs.const(<div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(cs.receiver(__cs_text).get())}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(cs.receiver(__cs_isOn).get())}/>)}{cs.lift(<button onclick={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_text).set("second"));
-        cs.statement(cs.receiver(__cs_isOn).set(true));
+    return cs.const(<div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(__cs_text.get())}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(__cs_isOn.get())}/>)}{cs.lift(<button onclick={cs.lift(() => {
+        cs.statement(__cs_text.set("second"));
+        cs.statement(__cs_isOn.set(true));
     })}>
             write
           </button>)}</div>);
@@ -139,9 +139,9 @@ describe("a field's value", () => {
     return cs.lift((() => {
     const __cs_texts = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(["typed by the script"]));
     const __cs_flags = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)([true]));
-    return cs.const(<div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(cs.receiver(cs.receiver(__cs_texts).get())[0])}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(cs.receiver(cs.receiver(__cs_flags).get())[0])}/>)}{cs.lift(<button onclick={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_texts).set([]));
-        cs.statement(cs.receiver(__cs_flags).set([]));
+    return cs.const(<div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(__cs_texts.get()[0])}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(__cs_flags.get()[0])}/>)}{cs.lift(<button onclick={cs.lift(() => {
+        cs.statement(__cs_texts.set([]));
+        cs.statement(__cs_flags.set([]));
     })}>
             clear
           </button>)}</div>);

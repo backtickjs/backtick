@@ -35,9 +35,7 @@ For                                   → For
                                       →  
 each                                  → each
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -67,20 +65,14 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () =>\n                      
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
-)                                     → 
 .                                     → .
 filter                                → filter
 (                                     → (

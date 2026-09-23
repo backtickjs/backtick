@@ -49,9 +49,7 @@ __cs_n                                → n
 )                                     → 
 ,                                     → ,\n        
 typeof                                → typeof 
-cs.receiver(                          → 
 Math                                  → Math
-)                                     → 
 .                                     → .
 floor                                 → floor
 ,                                     → ,\n        
@@ -76,9 +74,7 @@ __cs_v                                → v
  ===                                  →  === 
 "string"                              → "string"
  ?                                    →  ? 
-cs.receiver(                          → 
 __cs_v                                → v
-)                                     → 
 .                                     → .
 length                                → length
  :                                    →  : 

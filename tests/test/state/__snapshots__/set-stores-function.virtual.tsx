@@ -10,7 +10,7 @@ import { drawn } from "./dom.ts";
 async function Greeting() {
   return cs.lift((() => {
     const __cs_greet = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<(name: string) => string>(__cs_name => "hi " + __cs_name));
-    return cs.const(<span onclick={cs.lift(() => cs.receiver(__cs_greet).set(__cs_name => "bye " + __cs_name))}>{cs.lift(cs.receiver(__cs_greet).get()("ada"))}</span>);
+    return cs.const(<span onclick={cs.lift(() => __cs_greet.set(__cs_name => "bye " + __cs_name))}>{cs.lift(__cs_greet.get()("ada"))}</span>);
 })());
 }
 

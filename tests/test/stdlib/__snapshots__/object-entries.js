@@ -77,9 +77,14 @@ it("objectEntries", async (t) => {
               kind: "()",
               loc: [13, 23, 15, 8],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [13, 23, 13, 41],
-                name: "Object.fromEntries",
+                expression: {
+                  kind: "bltn",
+                  loc: [13, 23, 13, 29],
+                  name: "Object",
+                },
+                name: "fromEntries",
               },
               arguments: [
                 {
@@ -92,9 +97,14 @@ it("objectEntries", async (t) => {
                       kind: "()",
                       loc: [14, 9, 14, 29],
                       expression: {
-                        kind: "bltn",
+                        kind: ".",
                         loc: [14, 9, 14, 23],
-                        name: "Object.entries",
+                        expression: {
+                          kind: "bltn",
+                          loc: [14, 9, 14, 15],
+                          name: "Object",
+                        },
+                        name: "entries",
                       },
                       arguments: [
                         {
@@ -146,9 +156,14 @@ it("objectEntries", async (t) => {
                             kind: "()",
                             loc: [14, 54, 14, 77],
                             expression: {
-                              kind: "bltn",
+                              kind: ".",
                               loc: [14, 54, 14, 68],
-                              name: "JSON.stringify",
+                              expression: {
+                                kind: "bltn",
+                                loc: [14, 54, 14, 58],
+                                name: "JSON",
+                              },
+                              name: "stringify",
                             },
                             arguments: [
                               {

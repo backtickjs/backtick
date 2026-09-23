@@ -6,7 +6,7 @@ import { cs, state } from "@backtickjs/core";
 async function Panel() {
   return cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(2));
-    cs.statement(cs.receiver(__cs_n).set(3));
+    cs.statement(__cs_n.set(3));
 })());
 }
 

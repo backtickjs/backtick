@@ -30,13 +30,11 @@ export async function evaluate<T extends ClientUnknown>(
 }
 
 /**
- * Evaluates a bundle that did not come from the bundler: bytes an untrusted
- * server or a tampered response could send.
- *
- * For security tests only. Every other test evaluates a value with
- * {@link evaluate}.
+ * Evaluates a bundle that did not come from the bundler, for a test about a
+ * bundle the bundler would never write. Every other test evaluates a value
+ * with {@link evaluate}.
  */
-export function evaluateUntrustedBundle<T extends ClientUnknown>(
+export function evaluateBundle<T extends ClientUnknown>(
   bundle: Bundle<T>,
   { builtinOf }: EvaluateOptions = {},
 ): T {

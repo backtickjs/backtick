@@ -16,7 +16,7 @@ function labelled(label: Client<string>) {
   return cs.lift((() => {
     const __cs_Card = cs.const((__cs_props: {
         n: number;
-    }) => <i>{cs.lift((cs.splice((label)) satisfies typeof cs.ClientUnknown) + cs.receiver(__cs_props).n)}</i>);
+    }) => <i>{cs.lift((cs.splice((label)) satisfies typeof cs.ClientUnknown) + __cs_props.n)}</i>);
     return cs.const(<p>{cs.lift((cs.splice(cs.lift(cs.const(<__cs_Card n={1}/>))) satisfies typeof cs.ClientUnknown))}</p>);
 })());
 }
@@ -42,7 +42,7 @@ it("scriptBoundTagScope", async (t) => {
     }) => BacktickElement) => <div>{cs.lift(<__cs_Card n={1}/>)}{cs.lift(<__cs_Card n={2}/>)}</div>);
     return cs.const(<section>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(__cs_twice((__cs_props: {
         n: number;
-    }) => <i>{cs.lift("row " + cs.receiver(__cs_props).n)}</i>))}</section>);
+    }) => <i>{cs.lift("row " + __cs_props.n)}</i>))}</section>);
 })()),
   );
 });

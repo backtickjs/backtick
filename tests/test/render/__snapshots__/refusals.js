@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { evaluateUntrustedBundle, render } from "@backtickjs/web-testing";
+import { evaluateBundle, render } from "@backtickjs/web-testing";
 // The two ways a bundle could run what wrote it, each held to not happening.
 //
 // A bundle is walked node by node by the renderer rather than parsed as markup,
@@ -46,17 +46,13 @@ describe("a tag that would execute", () => {
   // HTML folds a tag name, so every spelling of it is the element.
   it("is refused in HTML whatever its case", () => {
     for (const tag of ["SCRIPT", "Script"]) {
-      assert.throws(
-        () => evaluateUntrustedBundle(element(tag)),
-        /may not draw/,
-        tag,
-      );
+      assert.throws(() => evaluateBundle(element(tag)), /may not draw/, tag);
     }
   });
   // SVG does not fold, so `svg:SCRIPT` is an unknown element rather than the
   // one that runs. Verified in Chrome rather than read off the spec.
   it("does not stop a tag that only looks like one", async () => {
-    const svgScript = evaluateUntrustedBundle(element("svg:SCRIPT"));
+    const svgScript = evaluateBundle(element("svg:SCRIPT"));
     assert.equal(svgScript.localName, "SCRIPT");
     const { container } = await render(
       _jsxs("div", {
@@ -98,7 +94,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "2b8eeaba0ce3d",
+          fileHash: "38rcck1b2wapl",
           splices: {},
           captures: [],
         },
@@ -141,7 +137,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "2b8eeaba0ce3d",
+          fileHash: "38rcck1b2wapl",
           splices: {},
           captures: [],
         },
@@ -184,7 +180,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "2b8eeaba0ce3d",
+          fileHash: "38rcck1b2wapl",
           splices: {},
           captures: [],
         },
@@ -213,7 +209,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "2b8eeaba0ce3d",
+          fileHash: "38rcck1b2wapl",
           splices: {},
           captures: [],
         },

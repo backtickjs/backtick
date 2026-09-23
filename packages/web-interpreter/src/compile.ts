@@ -12,7 +12,7 @@ import type {
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/platform-sdk";
-import { builtinOf, getters } from "./builtinOf.js";
+import { builtinOf } from "./builtinOf.js";
 import type { Instance } from "./Instance.js";
 import { compileComponentCall } from "./compileComponentCall.js";
 import { compileElement } from "./compileElement.js";
@@ -35,7 +35,7 @@ import { compileElement } from "./compileElement.js";
 type Source = BundleArrayElement | BundleStatement;
 
 // One frame per arrow application or block. Names are pre-resolved by the
-// bundler and there are no globals: a name no frame binds is a malformed
+// bundler and a global travels as `bltn`: a name no frame binds is a malformed
 // bundle.
 export interface Scope {
   parent: Scope | null;
@@ -142,94 +142,10 @@ function compileFunction(
 // one — and not how to call one, so applying is this client's own knowledge.
 export type Applied = (...args: ClientValue[]) => ClientValue;
 
-// The names `Object.prototype` and `Function.prototype` answer for, which a
-// plain object only reaches as its own member — see `memberOf`.
-const MACHINERY = new Set([
-  ...Object.getOwnPropertyNames(Object.prototype),
-  ...Object.getOwnPropertyNames(Function.prototype),
-]);
-
-function isMachinery(name: string): boolean {
-  return MACHINERY.has(name);
-}
-
-// A member access on a primitive is answered by the language's switch by the
-// whole name rather than by the host's prototypes: a member the schema left out
-// stays left out, where `value[member]` would hand back whatever JavaScript
-// happens to have.
-//
-// The language's and not the instance's, so what a string is remains one thing
-// wherever a bundle runs. A target adds whole names a script splices; what may
-// be read off a value is the language's alone, and grouping what a target
-// offers is done by the value a name holds rather than by adding a member to a
-// kind of value.
-//
-// Which name a value is reached under is this client's own decision, and the
-// four are named here as the schema writes them.
-function memberOf(
-  instance: Instance,
-  object: ClientValue,
-  name: string,
-): ClientValue {
-  const boxed =
-    typeof object === "string"
-      ? "string"
-      : typeof object === "number"
-        ? "number"
-        : typeof object === "boolean"
-          ? "boolean"
-          : Array.isArray(object)
-            ? "array"
-            : null;
-  // A function has no members in this language. Its own `length` and `name`
-  // are the host's, and would pass the own-member rule below.
-  if (typeof object === "function") {
-    throw new Error(`a function has no \`${name}\` in this language`);
-  }
-  if (boxed === null) {
-    // A plain object is reached by the names it holds, and one it does not
-    // hold reads as `undefined`.
-    //
-    // The cast reads through a brand: a handle's type says opaque, and a cell
-    // being `{ get, set }` underneath is this client's knowledge.
-    //
-    // Except the ambient machinery: `constructor`, `__proto__`, `toString` and
-    // the rest live on `Object.prototype` and `Function.prototype`, and none of
-    // it is the language's. It is also the way out — `({}).constructor` is
-    // `Object`, whose `.constructor` is `Function`, which runs arbitrary code —
-    // so reading a member inherited from either prototype throws. What a host
-    // puts on its own prototypes (a DOM event's `preventDefault`) is not on
-    // these two and is read as before; an own member always wins, so a data
-    // object whose own key happens to be `constructor` still answers with it.
-    if (isMachinery(name) && !Object.hasOwn(object as object, name)) {
-      throw new Error(`an object has no \`${name}\` in this language`);
-    }
-    const held = (object as { readonly [name: string]: ClientValue })[name];
-    // Bound, because some of these objects are the host's own. A cell's members
-    // are closures and do not care, but an event's are methods that read the
-    // event through `this` — and `preventDefault` reached off one and called
-    // without it throws rather than answering.
-    return typeof held === "function"
-      ? (held.bind(object) as ClientValue)
-      : held;
-  }
-  const whole = `${boxed}.${name}`;
-  // Answered, or refused there: a member a kind of value does not have throws.
-  const found = builtinOf(instance, whole);
-  // Every member takes its receiver first, because a client with no `this`
-  // reads the same document and answers the same way. A getter is applied
-  // here, where its name is read, because that is where the language puts the
-  // call a script does not write.
-  if (Object.hasOwn(getters, whole)) {
-    return (found as Applied)(object);
-  }
-  // The rest are bound and not called: binding here rather than at the call is
-  // what makes one rule cover a member called now, a member called later and a
-  // member passed on — at a closure per access, which is what a receiver costs
-  // when it is not carried by the language.
-  return typeof found === "function"
-    ? (...args: ClientValue[]) => (found as Applied)(object, ...args)
-    : found;
+// A member read, as JavaScript reads one: a primitive through its wrapper's
+// prototype, an object through its own chain.
+function memberOf(object: ClientValue, name: string): ClientValue {
+  return (object as { readonly [name: string]: ClientValue })[name];
 }
 
 // Two numbers add; a string on either side concatenates. Written out because
@@ -383,15 +299,8 @@ export function compile(
     case "comp": {
       return compileComponentCall(instance, node);
     }
-    // A whole name the format carries and this client answers: the language's
-    // own first, then what this target added beside them — because the format
-    // has one node for a name it carries, and where a name came from is not
-    // something a bundle says.
-    //
-    // Never the host's own objects, and never a target's answer for a name the
-    // language answers: those are read first, so a target naming one is never
-    // reached. A curated list is what keeps every member meaning the same thing
-    // everywhere, and a target may lengthen it but not edit it.
+    // A whole name the format carries: the framework's, a target's, or a
+    // global of the client's own.
     case "bltn": {
       const name = node[1];
       const value = builtinOf(instance, name);
@@ -420,7 +329,7 @@ export function compile(
           if (optionalReceiver && object == null) {
             return undefined;
           }
-          const method = memberOf(instance, object, name);
+          const method = memberOf(object, name);
           // An optional call (`a.b?.(…)`) short-circuits a nullish method the
           // same way, arguments unevaluated.
           if (optionalCall && method == null) {
@@ -429,9 +338,7 @@ export function compile(
           if (typeof method !== "function") {
             throw new Error(`${name} is not a function`);
           }
-          // The receiver is already bound: `memberOf` closed over it, so a
-          // method reached by `.` and one passed on are the same value.
-          return (method as Applied)(...args(scope));
+          return Reflect.apply(method as Applied, object, args(scope));
         };
       }
       const target = compile(instance, callee);
@@ -459,8 +366,7 @@ export function compile(
         if (optional && object == null) {
           return undefined;
         }
-        // An absent member reads as `undefined`.
-        return memberOf(instance, object, member);
+        return memberOf(object, member);
       };
     }
     case "[]": {
@@ -469,54 +375,7 @@ export function compile(
       return (scope) => {
         const reached = target(scope);
         const key = argument(scope);
-        // A key of the wrong type is not a place the value has nothing — it
-        // is a read this language has no meaning for, so it stops here rather
-        // than answering. JavaScript would coerce `["0"]` to `[0]`; nothing
-        // does that here, which is why saying so out loud matters.
-        if (Array.isArray(reached)) {
-          if (typeof key !== "number") {
-            throw new Error(
-              "an array is read by a number: this bundle produced " +
-                `${JSON.stringify(key) ?? typeof key}.`,
-            );
-          }
-          // In range or not is the data's business, and a place the array has
-          // nothing reads as `undefined`.
-          return Number.isInteger(key) && key >= 0 && key < reached.length
-            ? reached[key]
-            : undefined;
-        }
-        // A string is read by whole numbers too, which is what its class
-        // declares an index signature for.
-        if (typeof reached === "string") {
-          if (typeof key !== "number") {
-            throw new Error(
-              "a string is read by a number: this bundle produced " +
-                `${JSON.stringify(key) ?? typeof key}.`,
-            );
-          }
-          return Number.isInteger(key) && key >= 0 && key < reached.length
-            ? reached[key]
-            : undefined;
-        }
-        // An object is reached by the names it holds itself: an inherited one
-        // (`toString`) is not a member of the value, so it reads as absent
-        // rather than handing back something from the host's prototypes.
-        if (reached !== null && typeof reached === "object") {
-          if (typeof key !== "string") {
-            throw new Error(
-              "an object is read by a string: this bundle produced " +
-                `${JSON.stringify(key) ?? typeof key}.`,
-            );
-          }
-          return Object.prototype.hasOwnProperty.call(reached, key)
-            ? (reached as { readonly [name: string]: ClientValue })[key]
-            : undefined;
-        }
-        throw new Error(
-          "only an array, a string or an object can be read by key: this " +
-            `bundle produced ${JSON.stringify(reached) ?? typeof reached}.`,
-        );
+        return memberOf(reached, key as string);
       };
     }
     // Assignment binds its left rather than evaluating it, which is why it is

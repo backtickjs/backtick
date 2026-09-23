@@ -84,23 +84,6 @@ export type {
   State,
 } from "./declarations.generated.js";
 export { computed, evaluate, state } from "./builtins.generated.js";
-export type {
-  Array,
-  ArrayConstructor,
-  Boolean,
-  JSON,
-  Math,
-  Number,
-  NumberConstructor,
-  ObjectConstructor,
-  String,
-  StringConstructor,
-} from "./receivers.generated.js";
-export type {
-  UnsupportedBuiltin,
-  FunctionUnsupportedBuiltins,
-  ObjectUnsupportedBuiltins,
-} from "./unsupportedBuiltins.js";
 
 // Written by hand, because a schema never says it: `Client` is how a host
 // language spells "a script standing in for a value", which a client has no

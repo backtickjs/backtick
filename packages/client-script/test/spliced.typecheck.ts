@@ -1,16 +1,8 @@
-// Type-level assertions for `Spliced` and the member-access view.
+// Type-level assertions for `Spliced`.
 // Never executed — typechecked by `tsc -b`.
-import type { Array } from "@backtickjs/platform-sdk";
-import type { Receiver } from "../src/Receiver.js";
-import type {
-  Client,
-  ClientValue,
-  Spliceable,
-  Spliced,
-} from "@backtickjs/platform-sdk";
+import type { Client, Spliceable, Spliced } from "@backtickjs/platform-sdk";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
-declare function receiver<T extends ClientValue>(value: T): Receiver<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -30,29 +22,3 @@ list satisfies number[];
 // Plain data crosses unchanged.
 spliced("host label") satisfies string;
 spliced([1, [true, null]]) satisfies (number | (boolean | null)[])[];
-
-// A primitive receiver autoboxes to its client wrapper's view: members resolve
-// against the explicit client API, not the host lib's. The wrapper applies to
-// the receiver only — a primitive VALUE crosses unchanged — so re-virtualizing
-// stays idempotent.
-receiver(point.label).concat("!") satisfies string;
-// @ts-expect-error — `normalize` isn't part of the client string API.
-receiver(point.label).normalize;
-receiver(point.x).toString(2) satisfies string;
-// @ts-expect-error — a boolean has `valueOf` alone; `toString` is what
-// TypeScript lends every object, and no client answers it.
-receiver(true).toString();
-
-// An array reads as the client array API.
-receiver([1, 2, 3]) satisfies Array<number>;
-
-// A plain object reads its own members, and an optional one reads as `null`
-// rather than as `undefined`, which this language has no value for.
-declare const held: { a: number; b?: string };
-receiver(held).a satisfies number;
-receiver(held).b satisfies string | null;
-
-// Member access on a free host reference is outside `ClientUnknown`, so it has
-// no receiver view: a script may call a host global but not reach into one.
-// @ts-expect-error — `console` is a host interface, not a client value.
-receiver(console);

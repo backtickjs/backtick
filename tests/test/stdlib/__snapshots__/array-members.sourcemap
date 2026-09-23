@@ -21,17 +21,13 @@ return cs.const(        → return
 {                       → {\n        
 count                   → count
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 length                  → length
 ,                       → ,\n        
 all                     → all
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 concat                  → concat
 (                       → (
@@ -42,9 +38,7 @@ __cs_four               → four
 ,                       → ,\n        
 part                    → part
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 slice                   → slice
 (                       → (
@@ -55,9 +49,7 @@ slice                   → slice
 ,                       → ,\n        
 where                   → where
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 indexOf                 → indexOf
 (                       → (
@@ -66,10 +58,7 @@ indexOf                 → indexOf
 ,                       → ,\n        
 lastWhere               → lastWhere
 :                       → : 
-cs.receiver(            → 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 concat                  → concat
 (                       → (
@@ -77,7 +66,6 @@ concat                  → concat
 2                       → 2
 ]                       → ]
 )                       → )
-)                       → 
 .                       → .
 lastIndexOf             → lastIndexOf
 (                       → (
@@ -86,9 +74,7 @@ lastIndexOf             → lastIndexOf
 ,                       → ,\n        
 has                     → has
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 includes                → includes
 (                       → (
@@ -97,9 +83,7 @@ includes                → includes
 ,                       → ,\n        
 text                    → text
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -108,9 +92,7 @@ join                    → join
 ,                       → ,\n        
 doubled                 → doubled
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 map                     → map
 (                       → (
@@ -123,9 +105,7 @@ __cs_n                  → n
 ,                       → ,\n        
 small                   → small
 :                       → : 
-cs.receiver(            → 
 __cs_coins              → coins
-)                       → 
 .                       → .
 filter                  → filter
 (                       → (

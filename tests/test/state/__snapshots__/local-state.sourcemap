@@ -18,9 +18,7 @@ style                                 → style
 ={cs.lift(                            → ={
 "font-size: "                         → "font-size: "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_size                             → size
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -32,15 +30,11 @@ onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n          
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_size                             → size
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_size                             → size
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

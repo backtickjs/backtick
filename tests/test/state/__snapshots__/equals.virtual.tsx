@@ -26,12 +26,12 @@ describe("equals", () => {
     await render(
       cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1));
-    const __cs_size = cs.const((cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => ({ isBig: cs.receiver(__cs_n).get() > 2, n: cs.receiver(__cs_n).get() }), { equals: (__cs_previous, __cs_next) => cs.receiver(__cs_previous).isBig === cs.receiver(__cs_next).isBig }));
+    const __cs_size = cs.const((cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => ({ isBig: __cs_n.get() > 2, n: __cs_n.get() }), { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig }));
     const __cs_label = cs.const(() => {
-        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
-        return cs.const((cs.condition(cs.receiver(cs.receiver(__cs_size).get()).isBig) && cs.receiver(cs.receiver(__cs_size).get()).isBig) ? "big" : "small");
+        cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log());
+        return cs.const((cs.condition(__cs_size.get().isBig) && __cs_size.get().isBig) ? "big" : "small");
     });
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(cs.receiver(__cs_n).get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);
+    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);
 })()),
     );
     assert.equal(logged.length, 1);
@@ -48,12 +48,12 @@ describe("equals", () => {
   it("keeps a state's readers from updating for an equal value", async () => {
     await render(
       cs.lift((() => {
-    const __cs_point = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)({ x: 1 }, { equals: (__cs_previous, __cs_next) => cs.receiver(__cs_previous).x === cs.receiver(__cs_next).x }));
+    const __cs_point = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x }));
     const __cs_label = cs.const(() => {
-        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
-        return cs.const("x " + cs.receiver(cs.receiver(__cs_point).get()).x);
+        cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log());
+        return cs.const("x " + __cs_point.get().x);
     });
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_point).set({ x: cs.receiver(cs.receiver(__cs_point).get()).x }))}>
+    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => __cs_point.set({ x: __cs_point.get().x }))}>
               same
             </button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);
 })()),
@@ -66,10 +66,10 @@ describe("equals", () => {
     await render(
       cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1, { equals: (__cs_previous, __cs_next) => {
-            cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log(__cs_previous, __cs_next));
+            cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log(__cs_previous, __cs_next));
             return cs.const(__cs_previous === __cs_next);
         } }));
-    return cs.const(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(2))}>{cs.lift("n " + cs.receiver(__cs_n).get())}</button>);
+    return cs.const(<button onclick={cs.lift(() => __cs_n.set(2))}>{cs.lift("n " + __cs_n.get())}</button>);
 })()),
     );
     await press();
@@ -82,10 +82,10 @@ describe("equals", () => {
       cs.lift((() => {
     const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1));
     const __cs_label = cs.const(() => {
-        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
-        return cs.const("n " + cs.receiver(__cs_n).get());
+        cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log());
+        return cs.const("n " + __cs_n.get());
     });
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_n).set(1))}>same</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);
+    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(1))}>same</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);
 })()),
     );
     await press();
@@ -97,10 +97,10 @@ describe("equals", () => {
       cs.lift((() => {
     const __cs_point = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)({ x: 1 }));
     const __cs_label = cs.const(() => {
-        cs.statement(cs.receiver(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).console).log());
-        return cs.const("x " + cs.receiver(cs.receiver(__cs_point).get()).x);
+        cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log());
+        return cs.const("x " + __cs_point.get().x);
     });
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_point).set({ x: cs.receiver(cs.receiver(__cs_point).get()).x }))}>
+    return cs.const(<div>{cs.lift(<button onclick={cs.lift(() => __cs_point.set({ x: __cs_point.get().x }))}>
               same
             </button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>);
 })()),

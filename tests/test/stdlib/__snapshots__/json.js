@@ -34,9 +34,14 @@ it("jsonRoundTrip", async (t) => {
               kind: "()",
               loc: [13, 23, 13, 48],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [13, 23, 13, 37],
-                name: "JSON.stringify",
+                expression: {
+                  kind: "bltn",
+                  loc: [13, 23, 13, 27],
+                  name: "JSON",
+                },
+                name: "stringify",
               },
               arguments: [
                 {
@@ -76,9 +81,14 @@ it("jsonRoundTrip", async (t) => {
               kind: "()",
               loc: [14, 20, 14, 40],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [14, 20, 14, 34],
-                name: "JSON.stringify",
+                expression: {
+                  kind: "bltn",
+                  loc: [14, 20, 14, 24],
+                  name: "JSON",
+                },
+                name: "stringify",
               },
               arguments: [
                 {
@@ -102,9 +112,14 @@ it("jsonRoundTrip", async (t) => {
               kind: "()",
               loc: [15, 20, 15, 40],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [15, 20, 15, 34],
-                name: "JSON.stringify",
+                expression: {
+                  kind: "bltn",
+                  loc: [15, 20, 15, 24],
+                  name: "JSON",
+                },
+                name: "stringify",
               },
               arguments: [
                 {
@@ -127,9 +142,14 @@ it("jsonRoundTrip", async (t) => {
               kind: "()",
               loc: [16, 20, 16, 54],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [16, 20, 16, 34],
-                name: "JSON.stringify",
+                expression: {
+                  kind: "bltn",
+                  loc: [16, 20, 16, 24],
+                  name: "JSON",
+                },
+                name: "stringify",
               },
               arguments: [
                 {
@@ -182,9 +202,14 @@ it("jsonRoundTrip", async (t) => {
               kind: "()",
               loc: [17, 20, 17, 39],
               expression: {
-                kind: "bltn",
+                kind: ".",
                 loc: [17, 20, 17, 30],
-                name: "JSON.parse",
+                expression: {
+                  kind: "bltn",
+                  loc: [17, 20, 17, 24],
+                  name: "JSON",
+                },
+                name: "parse",
               },
               arguments: [
                 {
@@ -292,9 +317,14 @@ it("jsonRoundTrip", async (t) => {
                     kind: "()",
                     loc: [27, 9, 27, 29],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [27, 9, 27, 23],
-                      name: "JSON.stringify",
+                      expression: {
+                        kind: "bltn",
+                        loc: [27, 9, 27, 13],
+                        name: "JSON",
+                      },
+                      name: "stringify",
                     },
                     arguments: [
                       {
@@ -318,18 +348,28 @@ it("jsonRoundTrip", async (t) => {
                 kind: "()",
                 loc: [29, 9, 29, 41],
                 expression: {
-                  kind: "bltn",
+                  kind: ".",
                   loc: [29, 9, 29, 23],
-                  name: "JSON.stringify",
+                  expression: {
+                    kind: "bltn",
+                    loc: [29, 9, 29, 13],
+                    name: "JSON",
+                  },
+                  name: "stringify",
                 },
                 arguments: [
                   {
                     kind: "()",
                     loc: [29, 24, 29, 40],
                     expression: {
-                      kind: "bltn",
+                      kind: ".",
                       loc: [29, 24, 29, 34],
-                      name: "JSON.parse",
+                      expression: {
+                        kind: "bltn",
+                        loc: [29, 24, 29, 28],
+                        name: "JSON",
+                      },
+                      name: "parse",
                     },
                     arguments: [
                       {

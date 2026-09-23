@@ -13,8 +13,8 @@ async function Card() {
     // and a handler prop takes a function and nothing else.
     const __cs_row = cs.const((__cs_size: number) => {
         const __cs_css = cs.const("font-size: " + __cs_size + "px");
-        const __cs_press = cs.const(() => cs.receiver(__cs_label).set("held"));
-        return cs.const(<div style={cs.lift(__cs_css)}>{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(() => cs.receiver(__cs_label).set("pressed"))}>{cs.lift(cs.receiver(__cs_label).get())}</span>)}{cs.lift(<span style={cs.lift("font-size: 8px")}>fixed</span>)}{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(__cs_press)}>
+        const __cs_press = cs.const(() => __cs_label.set("held"));
+        return cs.const(<div style={cs.lift(__cs_css)}>{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(() => __cs_label.set("pressed"))}>{cs.lift(__cs_label.get())}</span>)}{cs.lift(<span style={cs.lift("font-size: 8px")}>fixed</span>)}{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(__cs_press)}>
             held
           </span>)}</div>);
     });

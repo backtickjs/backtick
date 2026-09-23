@@ -1,67 +1,62 @@
 import { cs } from "@backtickjs/core";
-// The client view decides what may index a value, exactly as it decides what
-// may be read off it with `.`: an array takes a number, and a plain object
-// takes only a key its type names.
-//
-// `coins["0"]` is the one TypeScript lets through — it reads a numeric string
-// literal as a numeric index — and the runtime, which takes only a number,
-// answers `undefined`. Left here beside the two that are caught so the gap is
-// visible where it lives.
+// TypeScript decides what may index a value: an array takes a number, and a
+// plain object takes only a key its type names. `coins["0"]` passes, because
+// TypeScript reads a numeric string literal as a numeric index.
 const point = { x: 1, y: 2 };
 export default cs.create(
-  [13, 16, 21, 3],
+  [8, 16, 16, 3],
   {
     version: "0.0.0",
     filePath: "typecheck-errors/index-wrong-key.test.tsx",
-    fileHash: "221m46vqk9vc3",
+    fileHash: "2p3ed6wqsrdah",
     splices: { $point: { value: point, params: [] } },
     captures: [],
   },
   () => ({
     kind: "=>",
-    loc: [13, 19, 21, 2],
+    loc: [8, 19, 16, 2],
     parameters: [
       {
         kind: "param",
-        loc: [13, 20, 13, 32],
+        loc: [8, 20, 8, 32],
         name: {
           kind: "id",
-          loc: [13, 20, 13, 24],
+          loc: [8, 20, 8, 24],
           text: "name",
-          bindingKey: "name$221m46vqk9vc3$0",
+          bindingKey: "name$2p3ed6wqsrdah$0",
         },
       },
     ],
     body: {
       kind: "{}",
-      loc: [13, 37, 21, 2],
+      loc: [8, 37, 16, 2],
       statements: [
         {
           kind: "const",
-          loc: [14, 3, 14, 28],
+          loc: [9, 3, 9, 28],
           name: {
             kind: "id",
-            loc: [14, 9, 14, 14],
+            loc: [9, 9, 9, 14],
             text: "coins",
-            bindingKey: "coins$221m46vqk9vc3$1",
+            bindingKey: "coins$2p3ed6wqsrdah$1",
           },
           initializer: {
             kind: "arr",
-            loc: [14, 17, 14, 27],
+            loc: [9, 17, 9, 27],
             elements: [
               {
                 kind: "number",
-                loc: [14, 18, 14, 19],
+                loc: [9, 18, 9, 19],
                 value: 5,
               },
               {
                 kind: "number",
-                loc: [14, 21, 14, 23],
+                loc: [9, 21, 9, 23],
                 value: 31,
               },
               {
                 kind: "number",
-                loc: [14, 25, 14, 26],
+                loc: [9, 25, 9, 26],
                 value: 7,
               },
             ],
@@ -69,109 +64,109 @@ export default cs.create(
         },
         {
           kind: "const",
-          loc: [15, 3, 15, 28],
+          loc: [10, 3, 10, 28],
           name: {
             kind: "id",
-            loc: [15, 9, 15, 14],
+            loc: [10, 9, 10, 14],
             text: "first",
-            bindingKey: "first$221m46vqk9vc3$2",
+            bindingKey: "first$2p3ed6wqsrdah$2",
           },
           initializer: {
             kind: "[]",
-            loc: [15, 17, 15, 27],
+            loc: [10, 17, 10, 27],
             expression: {
               kind: "id",
-              loc: [15, 17, 15, 22],
+              loc: [10, 17, 10, 22],
               text: "coins",
-              bindingKey: "coins$221m46vqk9vc3$1",
+              bindingKey: "coins$2p3ed6wqsrdah$1",
             },
             argumentExpression: {
               kind: "string",
-              loc: [15, 23, 15, 26],
+              loc: [10, 23, 10, 26],
               text: "0",
             },
           },
         },
         {
           kind: "const",
-          loc: [17, 3, 17, 29],
+          loc: [12, 3, 12, 29],
           name: {
             kind: "id",
-            loc: [17, 9, 17, 14],
+            loc: [12, 9, 12, 14],
             text: "wrong",
-            bindingKey: "wrong$221m46vqk9vc3$3",
+            bindingKey: "wrong$2p3ed6wqsrdah$3",
           },
           initializer: {
             kind: "[]",
-            loc: [17, 17, 17, 28],
+            loc: [12, 17, 12, 28],
             expression: {
               kind: "id",
-              loc: [17, 17, 17, 22],
+              loc: [12, 17, 12, 22],
               text: "coins",
-              bindingKey: "coins$221m46vqk9vc3$1",
+              bindingKey: "coins$2p3ed6wqsrdah$1",
             },
             argumentExpression: {
               kind: "id",
-              loc: [17, 23, 17, 27],
+              loc: [12, 23, 12, 27],
               text: "name",
-              bindingKey: "name$221m46vqk9vc3$0",
+              bindingKey: "name$2p3ed6wqsrdah$0",
             },
           },
         },
         {
           kind: "const",
-          loc: [19, 3, 19, 30],
+          loc: [14, 3, 14, 30],
           name: {
             kind: "id",
-            loc: [19, 9, 19, 14],
+            loc: [14, 9, 14, 14],
             text: "which",
-            bindingKey: "which$221m46vqk9vc3$4",
+            bindingKey: "which$2p3ed6wqsrdah$4",
           },
           initializer: {
             kind: "[]",
-            loc: [19, 17, 19, 29],
+            loc: [14, 17, 14, 29],
             expression: {
               kind: "splice",
-              loc: [19, 17, 19, 23],
+              loc: [14, 17, 14, 23],
               key: "$point",
             },
             argumentExpression: {
               kind: "id",
-              loc: [19, 24, 19, 28],
+              loc: [14, 24, 14, 28],
               text: "name",
-              bindingKey: "name$221m46vqk9vc3$0",
+              bindingKey: "name$2p3ed6wqsrdah$0",
             },
           },
         },
         {
           kind: "return",
-          loc: [20, 3, 20, 32],
+          loc: [15, 3, 15, 32],
           expression: {
             kind: "binop",
-            loc: [20, 10, 20, 31],
+            loc: [15, 10, 15, 31],
             left: {
               kind: "binop",
-              loc: [20, 10, 20, 23],
+              loc: [15, 10, 15, 23],
               left: {
                 kind: "id",
-                loc: [20, 10, 20, 15],
+                loc: [15, 10, 15, 15],
                 text: "first",
-                bindingKey: "first$221m46vqk9vc3$2",
+                bindingKey: "first$2p3ed6wqsrdah$2",
               },
               operatorToken: "+",
               right: {
                 kind: "id",
-                loc: [20, 18, 20, 23],
+                loc: [15, 18, 15, 23],
                 text: "wrong",
-                bindingKey: "wrong$221m46vqk9vc3$3",
+                bindingKey: "wrong$2p3ed6wqsrdah$3",
               },
             },
             operatorToken: "+",
             right: {
               kind: "id",
-              loc: [20, 26, 20, 31],
+              loc: [15, 26, 15, 31],
               text: "which",
-              bindingKey: "which$221m46vqk9vc3$4",
+              bindingKey: "which$2p3ed6wqsrdah$4",
             },
           },
         },

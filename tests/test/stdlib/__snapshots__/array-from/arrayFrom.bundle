@@ -12,8 +12,12 @@
             [
               "()",
               [
-                "bltn",
-                "Array.from"
+                ".",
+                [
+                  "bltn",
+                  "Array"
+                ],
+                "from"
               ],
               [
                 {
@@ -49,8 +53,12 @@
             [
               "()",
               [
-                "bltn",
-                "Array.from"
+                ".",
+                [
+                  "bltn",
+                  "Array"
+                ],
+                "from"
               ],
               [
                 {
@@ -82,8 +90,12 @@
             [
               "()",
               [
-                "bltn",
-                "Array.from"
+                ".",
+                [
+                  "bltn",
+                  "Array"
+                ],
+                "from"
               ],
               [
                 {

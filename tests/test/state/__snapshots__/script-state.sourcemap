@@ -35,23 +35,15 @@ __cs_row                              → row
 );                                    → ;
 \n                                    → \n        
 cs.statement(                         → 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 label                                 → label
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 label                                 → label
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -62,18 +54,14 @@ get                                   → get
 \n}                                   → \n      }
 ))                                    → `
 cs.lift(cs.const(                     → cs`
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (build)                               → $build
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 "one"                                 → "one"
 )                                     → )
-)                                     → 
 .                                     → .
 label                                 → label
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

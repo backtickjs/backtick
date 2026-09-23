@@ -26,46 +26,34 @@ __cs_swap                             → swap
 const                                 → const 
 __cs_held                             → held
  = cs.const(                          →  = 
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
 );                                    → ;
 \n                                    → \n      
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 .                                     → .
 with                                  → with
 (                                     → (
 0                                     → 0
 ,                                     → , 
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 [                                     → [
 2                                     → 2
 ]                                     → ]
 )                                     → )
-)                                     → 
 .                                     → .
 with                                  → with
 (                                     → (
 2                                     → 2
 ,                                     → , 
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 [                                     → [
 0                                     → 0
 ]                                     → ]
@@ -80,20 +68,14 @@ __cs_drop                             → drop
  = cs.const(                          →  = 
 () => {\n                             → () => {\n      
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
-)                                     → 
 .                                     → .
 filter                                → filter
 (                                     → (
@@ -142,9 +124,7 @@ For                                   → For
                                       →  
 each                                  → each
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_ids                              → ids
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

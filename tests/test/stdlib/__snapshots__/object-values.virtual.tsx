@@ -10,7 +10,7 @@ it("objectValues", async (t) => {
     "objectValues",
     cs.lift((() => {
     const __cs_prices = cs.const({ apple: 1, pear: 2 });
-    return cs.const({ values: cs.receiver(Object).values(__cs_prices), holds: [cs.receiver(Object).hasOwn(__cs_prices, "pear"), cs.receiver(Object).hasOwn(__cs_prices, "plum")] });
+    return cs.const({ values: Object.values(__cs_prices), holds: [Object.hasOwn(__cs_prices, "pear"), Object.hasOwn(__cs_prices, "plum")] });
 })()),
   );
 });

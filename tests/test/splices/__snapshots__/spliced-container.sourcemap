@@ -5,11 +5,9 @@ cs.lift(cs.const(                     → cs`
 "origin"                              → "origin"
 ))                                    → `
 cs.lift(cs.const(                     → cs`
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (point)                               → $point
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 x                                     → x
  +                                    →  + 

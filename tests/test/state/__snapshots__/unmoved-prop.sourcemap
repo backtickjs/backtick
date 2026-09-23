@@ -20,9 +20,7 @@ span                                  → span
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_selected                         → selected
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -60,9 +58,7 @@ a                                     → a
                                       →  
 href                                  → href
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_selected                         → selected
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

@@ -10,12 +10,12 @@ it("jsonRoundTrip", async (t) => {
     t,
     "jsonRoundTrip",
     cs.lift((() => {
-    const __cs_numbers = cs.const(cs.receiver(JSON).stringify([1, 2, 3]));
-    const __cs_text = cs.const(cs.receiver(JSON).stringify("hi"));
-    const __cs_flag = cs.const(cs.receiver(JSON).stringify(true));
-    const __cs_held = cs.const(cs.receiver(JSON).stringify({ a: 1, b: "two" }));
-    const __cs_back = cs.const(cs.receiver(JSON).parse(__cs_numbers));
-    return cs.const(__cs_numbers + "|" + __cs_text + "|" + __cs_flag + "|" + __cs_held + "|" + cs.receiver(JSON).stringify(__cs_back) + "|" + cs.receiver(JSON).stringify(cs.receiver(JSON).parse(__cs_held)));
+    const __cs_numbers = cs.const(JSON.stringify([1, 2, 3]));
+    const __cs_text = cs.const(JSON.stringify("hi"));
+    const __cs_flag = cs.const(JSON.stringify(true));
+    const __cs_held = cs.const(JSON.stringify({ a: 1, b: "two" }));
+    const __cs_back = cs.const(JSON.parse(__cs_numbers));
+    return cs.const(__cs_numbers + "|" + __cs_text + "|" + __cs_flag + "|" + __cs_held + "|" + JSON.stringify(__cs_back) + "|" + JSON.stringify(JSON.parse(__cs_held)));
 })()),
   );
 });

@@ -221,8 +221,12 @@
               "keys": [
                 "()",
                 [
-                  "bltn",
-                  "Object.keys"
+                  ".",
+                  [
+                    "bltn",
+                    "Object"
+                  ],
+                  "keys"
                 ],
                 [
                   {

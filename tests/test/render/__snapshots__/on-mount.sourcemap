@@ -17,30 +17,22 @@ cs.statement(                         →
 (                                     → (
 () => {\n                             → () => {\n            
 cs.statement(                         → 
-cs.receiver(                          → 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 console                               → console
-)                                     → 
 .                                     → .
 log                                   → log
 ()                                    → ()
 );                                    → ;
 \n                                    → \n            
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -58,9 +50,7 @@ p                                     → p
 >{cs.lift(                            → >{
 "mounted "                            → "mounted "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_count                            → count
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -93,9 +83,7 @@ onclick                               → onclick
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -104,9 +92,7 @@ set                                   → set
 )                                     → )
 )}                                    → }
 >{cs.lift(                            → >\n            {
-cs.receiver(                          → 
 __cs_said                             → said
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

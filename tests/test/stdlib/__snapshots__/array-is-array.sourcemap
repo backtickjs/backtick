@@ -1,18 +1,14 @@
 cs.lift((() => {\n      → cs`{\n      
 return cs.const(        → return 
 [                       → [\n        
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 isArray                 → isArray
 (                       → (
 []                      → []
 )                       → )
 ,                       → ,\n        
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 isArray                 → isArray
 (                       → (
@@ -23,18 +19,14 @@ isArray                 → isArray
 ]                       → ]
 )                       → )
 ,                       → ,\n        
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 isArray                 → isArray
 (                       → (
 "ab"                    → "ab"
 )                       → )
 ,                       → ,\n        
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 isArray                 → isArray
 (                       → (
@@ -45,9 +37,7 @@ length                  → length
  }                      →  }
 )                       → )
 ,                       → ,\n        
-cs.receiver(            → 
 Array                   → Array
-)                       → 
 .                       → .
 isArray                 → isArray
 (                       → (

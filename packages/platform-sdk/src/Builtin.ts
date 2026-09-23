@@ -4,9 +4,10 @@ import type { ClientValue } from "./declarations.generated.js";
 /**
  * A name the client answers for, held as a value.
  *
- * A builtin is reached by writing it — `Math.floor` — and that is the whole of
- * what a script may write bare. Everything else is imported and spliced, so a
- * name the framework or an app provides needs a host value to be imported as.
+ * An ECMAScript global is reached by writing it — `Math` — and that is the
+ * whole of what a script may write bare. Everything else is imported and
+ * spliced, so a name the framework or an app provides needs a host value to be
+ * imported as.
  * This is that value, and it carries the name and nothing else, as the
  * `Builtin` node it stands for does.
  *

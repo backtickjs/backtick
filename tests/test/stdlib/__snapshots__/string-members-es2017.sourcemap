@@ -9,9 +9,7 @@ return cs.const(        → return
 {                       → {\n        
 padded                  → padded
 :                       → : 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 padStart                → padStart
 (                       → (
@@ -20,9 +18,7 @@ padStart                → padStart
  +                      →  + 
 "|"                     → "|"
  +                      →  + 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 padEnd                  → padEnd
 (                       → (
@@ -33,18 +29,14 @@ padEnd                  → padEnd
 ,                       → ,\n        
 trimmed                 → trimmed
 :                       → : 
-cs.receiver(            → 
 "  x  "                 → "  x  "
-)                       → 
 .                       → .
 trimStart               → trimStart
 ()                      → ()
  +                      →  + 
 "|"                     → "|"
  +                      →  + 
-cs.receiver(            → 
 "  x  "                 → "  x  "
-)                       → 
 .                       → .
 trimEnd                 → trimEnd
 ()                      → ()
@@ -54,18 +46,14 @@ trimEnd                 → trimEnd
 at                      → at
 :                       → : 
 [                       → [
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 at                      → at
 (                       → (
 0                       → 0
 )                       → )
 ,                       → , 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 at                      → at
 (                       → (
@@ -74,9 +62,7 @@ at                      → at
 )                       → 
 )                       → )
 ,                       → , 
-cs.receiver(            → 
 __cs_word               → word
-)                       → 
 .                       → .
 at                      → at
 (                       → (
@@ -86,9 +72,7 @@ at                      → at
 ,                       → ,\n        
 replaced                → replaced
 :                       → : 
-cs.receiver(            → 
 "a.b.c"                 → "a.b.c"
-)                       → 
 .                       → .
 replaceAll              → replaceAll
 (                       → (
@@ -99,9 +83,7 @@ replaceAll              → replaceAll
 ,                       → ,\n        
 replacedBy              → replacedBy
 :                       → : 
-cs.receiver(            → 
 "a.b"                   → "a.b"
-)                       → 
 .                       → .
 replaceAll              → replaceAll
 (                       → (

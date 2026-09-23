@@ -29,18 +29,14 @@ null                                  → null
 const                                 → const 
 __cs_started                          → started
  = cs.const(                          →  = 
-cs.receiver(                          → 
 (cs.splice(                           →  [-semantic]
 (window)                              → $window
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → 
 .                                     → .
 setTimeout                            → setTimeout
 (                                     → (
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_drawn                            → drawn
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -56,9 +52,7 @@ set                                   → set
 \n                                    → \n    
 return cs.const(                      → return 
 <>{cs.lift(                           → (\n      <>\n        {
-cs.receiver(                          → 
 __cs_drawn                            → drawn
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -71,9 +65,7 @@ null                                  → null
 (evaluate)                            → $evaluate
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
-cs.receiver(                          → 
 __cs_drawn                            → drawn
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -107,9 +99,7 @@ span                                  → span
 >{cs.lift(                            → >{
 "asked "                              → "asked "
  +                                    →  + 
-cs.receiver(                          → 
 __cs_asked                            → asked
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -124,15 +114,11 @@ ask                                   → ask
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n          
 cs.statement(                         → 
-cs.receiver(                          → 
 __cs_asked                            → asked
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
-cs.receiver(                          → 
 __cs_asked                            → asked
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -142,9 +128,7 @@ get                                   → get
 );                                    → ;
 \n                                    → \n          
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_asked                            → asked
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

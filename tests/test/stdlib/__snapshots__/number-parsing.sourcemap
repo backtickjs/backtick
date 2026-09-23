@@ -2,9 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_whole              → whole
  = cs.const(            →  = 
-cs.receiver(            → 
 Number                  → Number
-)                       → 
 .                       → .
 parseInt                → parseInt
 (                       → (
@@ -15,9 +13,7 @@ parseInt                → parseInt
 const                   → const 
 __cs_based              → based
  = cs.const(            →  = 
-cs.receiver(            → 
 Number                  → Number
-)                       → 
 .                       → .
 parseInt                → parseInt
 (                       → (
@@ -30,9 +26,7 @@ parseInt                → parseInt
 const                   → const 
 __cs_fractional         → fractional
  = cs.const(            →  = 
-cs.receiver(            → 
 Number                  → Number
-)                       → 
 .                       → .
 parseFloat              → parseFloat
 (                       → (

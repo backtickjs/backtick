@@ -30,20 +30,20 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_shown = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
-    const __cs_started = cs.const(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).setTimeout(() => {
+    const __cs_started = cs.const((cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
         if ((cs.condition((cs.splice((again)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((again)) satisfies typeof cs.ClientUnknown)())) {
-            cs.statement(cs.receiver(__cs_shown).set(true));
+            cs.statement(__cs_shown.set(true));
         }
     }, 0));
-    return cs.const(<>{cs.lift((cs.condition(cs.receiver(__cs_shown).get()) && cs.receiver(__cs_shown).get()) ? <em>shown</em> : <i>waiting</i>)}</>);
+    return cs.const(<>{cs.lift((cs.condition(__cs_shown.get()) && __cs_shown.get()) ? <em>shown</em> : <i>waiting</i>)}</>);
 })());
 }
 
 const conditionalDrawing = cs.lift((() => {
     const __cs_builds = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<span>{cs.lift("builds " + cs.receiver(__cs_builds).get())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_builds).set(cs.receiver(__cs_builds).get() + 1));
-        return cs.const(cs.receiver(__cs_builds).get() < 5);
+    return cs.const(<div>{cs.lift(<span>{cs.lift("builds " + __cs_builds.get())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
+        cs.statement(__cs_builds.set(__cs_builds.get() + 1));
+        return cs.const(__cs_builds.get() < 5);
     })}/>)}</section>)}</div>);
 })());
 

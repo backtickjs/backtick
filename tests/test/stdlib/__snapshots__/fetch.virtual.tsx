@@ -15,20 +15,20 @@ it("fetchRequests", async (t) => {
     "fetchRequests",
     cs.lift(cs.const(() => {
     const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("waiting"));
-    cs.statement(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: Response) => {
-        if (cs.receiver(__cs_response).status !== 200) {
-            throw "answered " + cs.receiver(__cs_response).status;
+    cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: Response) => {
+        if (__cs_response.status !== 200) {
+            throw "answered " + __cs_response.status;
         }
-        cs.statement(cs.receiver(__cs_held).set(cs.receiver(JSON).parse(cs.receiver(__cs_response).text) === null ? "null" : "a value"));
+        cs.statement(__cs_held.set(JSON.parse(__cs_response.text) === null ? "null" : "a value"));
     }, (__cs_message: string) => {
-        cs.statement(cs.receiver(__cs_held).set("failed \u2014 " + __cs_message));
+        cs.statement(__cs_held.set("failed \u2014 " + __cs_message));
     }, { timeout: 3000 }));
-    cs.statement(cs.receiver((cs.splice((window)) satisfies typeof cs.ClientUnknown)).fetch("/cases", (__cs_response: Response) => {
-        cs.statement(cs.receiver(__cs_held).set(cs.receiver(__cs_response).text));
+    cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).fetch("/cases", (__cs_response: Response) => {
+        cs.statement(__cs_held.set(__cs_response.text));
     }, (__cs_message: string) => {
-        cs.statement(cs.receiver(__cs_held).set(__cs_message));
-    }, { method: "POST", headers: { "content-type": "application/json" }, body: cs.receiver(JSON).stringify({ name: "Math.trunc", passed: true }) }));
-    return cs.const(cs.receiver(__cs_held).get());
+        cs.statement(__cs_held.set(__cs_message));
+    }, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: "Math.trunc", passed: true }) }));
+    return cs.const(__cs_held.get());
 })),
   );
 });

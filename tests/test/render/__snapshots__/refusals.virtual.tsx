@@ -7,7 +7,7 @@ import type {
   ClientUnknown,
   Spliceable,
 } from "@backtickjs/core";
-import { evaluateUntrustedBundle, render } from "@backtickjs/web-testing";
+import { evaluateBundle, render } from "@backtickjs/web-testing";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
 //
@@ -73,7 +73,7 @@ describe("a tag that would execute", () => {
   it("is refused in HTML whatever its case", () => {
     for (const tag of ["SCRIPT", "Script"]) {
       assert.throws(
-        () => evaluateUntrustedBundle(element(tag)),
+        () => evaluateBundle(element(tag)),
         /may not draw/,
         tag,
       );
@@ -83,7 +83,7 @@ describe("a tag that would execute", () => {
   // SVG does not fold, so `svg:SCRIPT` is an unknown element rather than the
   // one that runs. Verified in Chrome rather than read off the spec.
   it("does not stop a tag that only looks like one", async () => {
-    const svgScript = evaluateUntrustedBundle(
+    const svgScript = evaluateBundle(
       element("svg:SCRIPT"),
     ) as unknown as Element;
     assert.equal(svgScript.localName, "SCRIPT");
@@ -162,8 +162,8 @@ describe("a handler that is not a function", () => {
     const absent: Spliceable<BacktickElement>[] = [
       // @ts-expect-error: a handler takes a function, not `null`
       cs.lift(cs.const(<div onclick={cs.lift(null)}/>)),
-      cs.lift(cs.const(<div onclick={cs.lift(cs.receiver([() => {
-    }])[1])}/>)),
+      cs.lift(cs.const(<div onclick={cs.lift([() => {
+    }][1])}/>)),
     ];
     for (const value of absent) {
       const div = await drawn(value);

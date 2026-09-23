@@ -11,8 +11,8 @@ it("arrayIndex", async (t) => {
     cs.lift((() => {
     const __cs_coins = cs.const([5, 31, 7]);
     let __cs_total = 0;
-    for (let __cs_i = 0; __cs_i < cs.receiver(__cs_coins).length; __cs_i = cs.const(__cs_i + 1)) {
-        __cs_total = cs.const(__cs_total + cs.receiver(__cs_coins)[__cs_i]);
+    for (let __cs_i = 0; __cs_i < __cs_coins.length; __cs_i = cs.const(__cs_i + 1)) {
+        __cs_total = cs.const(__cs_total + __cs_coins[__cs_i]);
     }
     return cs.const(__cs_total);
 })()),

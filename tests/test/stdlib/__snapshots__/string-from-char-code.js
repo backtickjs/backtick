@@ -38,9 +38,14 @@ async function Written() {
                   kind: "()",
                   loc: [11, 10, 11, 38],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [11, 10, 11, 29],
-                    name: "String.fromCharCode",
+                    expression: {
+                      kind: "bltn",
+                      loc: [11, 10, 11, 16],
+                      name: "String",
+                    },
+                    name: "fromCharCode",
                   },
                   arguments: [
                     {
@@ -60,9 +65,14 @@ async function Written() {
                   kind: "()",
                   loc: [11, 41, 11, 76],
                   expression: {
-                    kind: "bltn",
+                    kind: ".",
                     loc: [11, 41, 11, 60],
-                    name: "String.fromCharCode",
+                    expression: {
+                      kind: "bltn",
+                      loc: [11, 41, 11, 47],
+                      name: "String",
+                    },
+                    name: "fromCharCode",
                   },
                   arguments: [
                     {

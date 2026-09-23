@@ -12,13 +12,13 @@ async function SwappableRows() {
   return cs.lift((() => {
     const __cs_ids = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3]));
     const __cs_swap = cs.const(() => {
-        const __cs_held = cs.const(cs.receiver(__cs_ids).get());
-        cs.statement(cs.receiver(__cs_ids).set(cs.receiver(cs.receiver(__cs_held).with(0, cs.receiver(__cs_held)[2])).with(2, cs.receiver(__cs_held)[0])));
+        const __cs_held = cs.const(__cs_ids.get());
+        cs.statement(__cs_ids.set(__cs_held.with(0, __cs_held[2]).with(2, __cs_held[0])));
     });
     const __cs_drop = cs.const(() => {
-        cs.statement(cs.receiver(__cs_ids).set(cs.receiver(cs.receiver(__cs_ids).get()).filter(__cs_id => __cs_id !== 2)));
+        cs.statement(__cs_ids.set(__cs_ids.get().filter(__cs_id => __cs_id !== 2)));
     });
-    return cs.const(<div>{cs.lift(<span onclick={cs.lift(__cs_swap)}>swap</span>)}{cs.lift(<span onclick={cs.lift(__cs_drop)}>drop</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(cs.receiver(__cs_ids).get())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</div>)}</div>);
+    return cs.const(<div>{cs.lift(<span onclick={cs.lift(__cs_swap)}>swap</span>)}{cs.lift(<span onclick={cs.lift(__cs_drop)}>drop</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</div>)}</div>);
 })());
 }
 

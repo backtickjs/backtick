@@ -2,127 +2,113 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "@backtickjs/web-testing";
-// What `a[k]` does with a key of the wrong type.
-//
-// TypeScript reads a numeric string literal as a numeric index, so `coins["0"]`
-// passes the typechecker — it is `5` in JavaScript, where an array is an object
-// and every key is a string. Nothing coerces here, so the read has no meaning
-// and says so. The reads the typechecker refuses are written anyway, under
-// `@ts-expect-error`, since what the client does with them is the question.
-//
-// A key that is not a place the value has anything is the other case, and it
-// stays `undefined`: `indexPastEnd` and `indexAbsent` pin that, and the two
-// must not be told apart by the same rule.
+// What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {
-  it("refuses a string where an array takes a number", async () => {
-    await assert.rejects(
-      evaluate(
+  it("reads a key of another type as JavaScript does", async () => {
+    assert.equal(
+      await evaluate(
         cs.create(
-          [21, 16, 21, 35],
+          [10, 33, 10, 52],
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
-            fileHash: "3dgkmki4ysav0",
+            fileHash: "kbv0csg6ys4h",
             splices: {},
             captures: [],
           },
           () => ({
             kind: "[]",
-            loc: [21, 19, 21, 34],
+            loc: [10, 36, 10, 51],
             expression: {
               kind: "arr",
-              loc: [21, 19, 21, 29],
+              loc: [10, 36, 10, 46],
               elements: [
                 {
                   kind: "number",
-                  loc: [21, 20, 21, 21],
+                  loc: [10, 37, 10, 38],
                   value: 5,
                 },
                 {
                   kind: "number",
-                  loc: [21, 23, 21, 25],
+                  loc: [10, 40, 10, 42],
                   value: 31,
                 },
                 {
                   kind: "number",
-                  loc: [21, 27, 21, 28],
+                  loc: [10, 44, 10, 45],
                   value: 7,
                 },
               ],
             },
             argumentExpression: {
               kind: "string",
-              loc: [21, 30, 21, 33],
+              loc: [10, 47, 10, 50],
               text: "0",
             },
           }),
         ),
       ),
-      /an array is read by a number: this bundle produced "0"\./,
+      5,
     );
-  });
-  it("refuses a string where a string takes a number", async () => {
-    await assert.rejects(
-      evaluate(
+    assert.equal(
+      await evaluate(
         cs.create(
-          [28, 16, 28, 30],
+          [11, 33, 11, 47],
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
-            fileHash: "3dgkmki4ysav0",
+            fileHash: "kbv0csg6ys4h",
             splices: {},
             captures: [],
           },
           () => ({
             kind: "[]",
-            loc: [28, 19, 28, 29],
+            loc: [11, 36, 11, 46],
             expression: {
               kind: "string",
-              loc: [28, 19, 28, 24],
+              loc: [11, 36, 11, 41],
               text: "abc",
             },
             argumentExpression: {
               kind: "string",
-              loc: [28, 25, 28, 28],
+              loc: [11, 42, 11, 45],
               text: "0",
             },
           }),
         ),
       ),
-      /a string is read by a number: this bundle produced "0"\./,
+      "a",
     );
-  });
-  it("refuses a number where an object takes a string", async () => {
-    await assert.rejects(
-      // @ts-expect-error: an object is read by a string
-      evaluate(
+    // @ts-expect-error: an object's type names its keys
+    assert.equal(
+      await evaluate(
         cs.create(
-          [36, 16, 36, 33],
+          [13, 33, 13, 50],
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
-            fileHash: "3dgkmki4ysav0",
+            fileHash: "kbv0csg6ys4h",
             splices: {},
             captures: [],
           },
           () => ({
             kind: "[]",
-            loc: [36, 19, 36, 32],
+            loc: [13, 36, 13, 49],
             expression: {
               kind: "obj",
-              loc: [36, 20, 36, 28],
+              loc: [13, 37, 13, 45],
               properties: [
                 {
                   kind: ":",
-                  loc: [36, 22, 36, 26],
+                  loc: [13, 39, 13, 43],
                   name: {
                     kind: "string",
-                    loc: [36, 22, 36, 23],
+                    loc: [13, 39, 13, 40],
                     text: "x",
                   },
                   initializer: {
                     kind: "number",
-                    loc: [36, 25, 36, 26],
+                    loc: [13, 42, 13, 43],
                     value: 1,
                   },
                 },
@@ -130,202 +116,199 @@ describe("a read by key", () => {
             },
             argumentExpression: {
               kind: "number",
-              loc: [36, 30, 36, 31],
+              loc: [13, 47, 13, 48],
               value: 0,
             },
           }),
         ),
       ),
-      /an object is read by a string: this bundle produced 0\./,
+      undefined,
     );
-  });
-  it("refuses a target that holds nothing by key at all", async () => {
-    await assert.rejects(
-      evaluate(
+    assert.equal(
+      await evaluate(
         cs.create(
-          [43, 16, 43, 49],
+          [14, 33, 14, 66],
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
-            fileHash: "3dgkmki4ysav0",
+            fileHash: "kbv0csg6ys4h",
             splices: {},
             captures: [],
           },
           () => ({
             kind: "[]",
-            loc: [43, 19, 43, 48],
+            loc: [14, 36, 14, 65],
             expression: {
               kind: "number",
-              loc: [43, 20, 43, 21],
+              loc: [14, 37, 14, 38],
               value: 7,
             },
             argumentExpression: {
               kind: "number",
-              loc: [43, 46, 43, 47],
+              loc: [14, 63, 14, 64],
               value: 0,
             },
           }),
         ),
       ),
-      /only an array, a string or an object can be read by key/,
+      undefined,
     );
   });
-  // The other half of the rule, so the two cases are pinned together: a
-  // well-typed key that finds nothing is absent, not an error.
+  // A well-typed key that finds nothing is absent, not an error.
   it("answers `undefined` for a well-typed key that finds nothing", async () => {
     const reads = [
       cs.create(
-        [52, 7, 52, 24],
+        [20, 7, 20, 24],
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
-          fileHash: "3dgkmki4ysav0",
+          fileHash: "kbv0csg6ys4h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "[]",
-          loc: [52, 10, 52, 23],
+          loc: [20, 10, 20, 23],
           expression: {
             kind: "arr",
-            loc: [52, 10, 52, 20],
+            loc: [20, 10, 20, 20],
             elements: [
               {
                 kind: "number",
-                loc: [52, 11, 52, 12],
+                loc: [20, 11, 20, 12],
                 value: 5,
               },
               {
                 kind: "number",
-                loc: [52, 14, 52, 16],
+                loc: [20, 14, 20, 16],
                 value: 31,
               },
               {
                 kind: "number",
-                loc: [52, 18, 52, 19],
+                loc: [20, 18, 20, 19],
                 value: 7,
               },
             ],
           },
           argumentExpression: {
             kind: "number",
-            loc: [52, 21, 52, 22],
+            loc: [20, 21, 20, 22],
             value: 9,
           },
         }),
       ),
       cs.create(
-        [53, 7, 53, 26],
+        [21, 7, 21, 26],
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
-          fileHash: "3dgkmki4ysav0",
+          fileHash: "kbv0csg6ys4h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "[]",
-          loc: [53, 10, 53, 25],
+          loc: [21, 10, 21, 25],
           expression: {
             kind: "arr",
-            loc: [53, 10, 53, 20],
+            loc: [21, 10, 21, 20],
             elements: [
               {
                 kind: "number",
-                loc: [53, 11, 53, 12],
+                loc: [21, 11, 21, 12],
                 value: 5,
               },
               {
                 kind: "number",
-                loc: [53, 14, 53, 16],
+                loc: [21, 14, 21, 16],
                 value: 31,
               },
               {
                 kind: "number",
-                loc: [53, 18, 53, 19],
+                loc: [21, 18, 21, 19],
                 value: 7,
               },
             ],
           },
           argumentExpression: {
             kind: "number",
-            loc: [53, 21, 53, 24],
+            loc: [21, 21, 21, 24],
             value: 1.5,
           },
         }),
       ),
       cs.create(
-        [54, 7, 54, 25],
+        [22, 7, 22, 25],
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
-          fileHash: "3dgkmki4ysav0",
+          fileHash: "kbv0csg6ys4h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "[]",
-          loc: [54, 10, 54, 24],
+          loc: [22, 10, 22, 24],
           expression: {
             kind: "arr",
-            loc: [54, 10, 54, 20],
+            loc: [22, 10, 22, 20],
             elements: [
               {
                 kind: "number",
-                loc: [54, 11, 54, 12],
+                loc: [22, 11, 22, 12],
                 value: 5,
               },
               {
                 kind: "number",
-                loc: [54, 14, 54, 16],
+                loc: [22, 14, 22, 16],
                 value: 31,
               },
               {
                 kind: "number",
-                loc: [54, 18, 54, 19],
+                loc: [22, 18, 22, 19],
                 value: 7,
               },
             ],
           },
           argumentExpression: {
             kind: "prefixop",
-            loc: [54, 21, 54, 23],
+            loc: [22, 21, 22, 23],
             operator: "-",
             operand: {
               kind: "number",
-              loc: [54, 22, 54, 23],
+              loc: [22, 22, 22, 23],
               value: 1,
             },
           },
         }),
       ),
       cs.create(
-        [55, 7, 55, 57],
+        [23, 7, 23, 57],
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
-          fileHash: "3dgkmki4ysav0",
+          fileHash: "kbv0csg6ys4h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "[]",
-          loc: [55, 10, 55, 56],
+          loc: [23, 10, 23, 56],
           expression: {
             kind: "obj",
-            loc: [55, 12, 55, 20],
+            loc: [23, 12, 23, 20],
             properties: [
               {
                 kind: ":",
-                loc: [55, 14, 55, 18],
+                loc: [23, 14, 23, 18],
                 name: {
                   kind: "string",
-                  loc: [55, 14, 55, 15],
+                  loc: [23, 14, 23, 15],
                   text: "x",
                 },
                 initializer: {
                   kind: "number",
-                  loc: [55, 17, 55, 18],
+                  loc: [23, 17, 23, 18],
                   value: 1,
                 },
               },
@@ -333,31 +316,31 @@ describe("a read by key", () => {
           },
           argumentExpression: {
             kind: "string",
-            loc: [55, 52, 55, 55],
+            loc: [23, 52, 23, 55],
             text: "y",
           },
         }),
       ),
       cs.create(
-        [56, 7, 56, 19],
+        [24, 7, 24, 19],
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
-          fileHash: "3dgkmki4ysav0",
+          fileHash: "kbv0csg6ys4h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "[]",
-          loc: [56, 10, 56, 18],
+          loc: [24, 10, 24, 18],
           expression: {
             kind: "string",
-            loc: [56, 10, 56, 15],
+            loc: [24, 10, 24, 15],
             text: "abc",
           },
           argumentExpression: {
             kind: "number",
-            loc: [56, 16, 56, 17],
+            loc: [24, 16, 24, 17],
             value: 9,
           },
         }),

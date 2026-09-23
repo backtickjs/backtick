@@ -12,11 +12,9 @@ __cs_held                                 → held
 );                                        → ;
 \n                                        → \n\n      
 cs.statement(                             → 
-cs.receiver(                              → 
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-)                                         → 
 .                                         → .
 fetch                                     → fetch
 (                                         → (\n        
@@ -28,9 +26,7 @@ __cs_response                             → response
 Response                                  → Response
 ) => {\n                                  → ) => {\n          
 if (                                      → if (
-cs.receiver(                              → 
 __cs_response                             → response
-)                                         → 
 .                                         → .
 status                                    → status
  !==                                      →  !== 
@@ -40,30 +36,22 @@ status                                    → status
 throw                                     → throw 
 "answered "                               → "answered "
  +                                        →  + 
-cs.receiver(                              → 
 __cs_response                             → response
-)                                         → 
 .                                         → .
 status                                    → status
 ;                                         → ;
 \n        }                               → \n          }
 \n                                        → \n          
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_held                                 → held
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
-cs.receiver(                              → 
 JSON                                      → JSON
-)                                         → 
 .                                         → .
 parse                                     → parse
 (                                         → (
-cs.receiver(                              → 
 __cs_response                             → response
-)                                         → 
 .                                         → .
 text                                      → text
 )                                         → )
@@ -83,9 +71,7 @@ __cs_message                              → message
 string                                    → string
 ) => {\n                                  → ) => {\n          
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_held                                 → held
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
@@ -105,11 +91,9 @@ timeout                                   → timeout
 );                                        → ;
 \n                                        → \n\n      
 cs.statement(                             → 
-cs.receiver(                              → 
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-)                                         → 
 .                                         → .
 fetch                                     → fetch
 (                                         → (\n        
@@ -121,15 +105,11 @@ __cs_response                             → response
 Response                                  → Response
 ) => {\n                                  → ) => {\n          
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_held                                 → held
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
-cs.receiver(                              → 
 __cs_response                             → response
-)                                         → 
 .                                         → .
 text                                      → text
 )                                         → )
@@ -142,9 +122,7 @@ __cs_message                              → message
 string                                    → string
 ) => {\n                                  → ) => {\n          
 cs.statement(                             → 
-cs.receiver(                              → 
 __cs_held                                 → held
-)                                         → 
 .                                         → .
 set                                       → set
 (                                         → (
@@ -168,9 +146,7 @@ headers                                   → headers
 ,                                         → ,\n          
 body                                      → body
 :                                         → : 
-cs.receiver(                              → 
 JSON                                      → JSON
-)                                         → 
 .                                         → .
 stringify                                 → stringify
 (                                         → (
@@ -189,9 +165,7 @@ true                                      → true
 );                                        → ;
 \n                                        → \n\n      
 return cs.const(                          → return 
-cs.receiver(                              → 
 __cs_held                                 → held
-)                                         → 
 .                                         → .
 get                                       → get
 ()                                        → ()

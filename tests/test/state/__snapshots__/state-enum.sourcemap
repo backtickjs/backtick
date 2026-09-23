@@ -38,9 +38,7 @@ span                                  → span
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -54,9 +52,7 @@ Color.Blue                            → Color.Blue
 (colorName)                           → $colorName
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()

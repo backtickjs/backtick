@@ -5,7 +5,7 @@ import { cs } from "@backtickjs/core";
 export default cs.lift((() => {
     const __cs_Badge = cs.const((__cs_p: {
         n: number;
-    }) => <b>{cs.lift("n " + cs.receiver(__cs_p).n)}</b>);
+    }) => <b>{cs.lift("n " + __cs_p.n)}</b>);
     return cs.const((cs.splice(cs.lift((() => {
     const __cs_Badge = cs.const(5);
     // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.

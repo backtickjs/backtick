@@ -25,9 +25,7 @@ null                                  → null
 )                                     → ) 
 {\n                                   → {\n    
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_text                             → text
-)                                     → 
 .                                     → .
 toUpperCase                           → toUpperCase
 ()                                    → ()
@@ -48,9 +46,7 @@ __cs_text                             → text
  !==                                  →  !== 
 null                                  → null
  &&                                   →  && 
-cs.receiver(                          → 
 __cs_text                             → text
-)                                     → 
 .                                     → .
 charAt                                → charAt
 (                                     → (
@@ -61,9 +57,7 @@ charAt                                → charAt
 )                                     → ) 
 {\n                                   → {\n    
 return cs.const(                      → return 
-cs.receiver(                          → 
 __cs_text                             → text
-)                                     → 
 .                                     → .
 concat                                → concat
 (                                     → (

@@ -12,8 +12,8 @@ import { drawn, fontSize } from "./dom.ts";
 async function Stepper() {
   return cs.lift((() => {
     const __cs_size = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(16));
-    return cs.const(<span style={cs.lift("font-size: " + cs.receiver(__cs_size).get() + "px")} onclick={cs.lift(() => {
-        cs.statement(cs.receiver(__cs_size).set(cs.receiver(__cs_size).get() + 1));
+    return cs.const(<span style={cs.lift("font-size: " + __cs_size.get() + "px")} onclick={cs.lift(() => {
+        cs.statement(__cs_size.set(__cs_size.get() + 1));
     })}>
         press
       </span>);

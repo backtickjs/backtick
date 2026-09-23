@@ -106,8 +106,8 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
 - `evaluate(value, { builtinOf? })`: resolves to what any value or script
   evaluates to, without mounting it. It plays the part of React Testing Library's
   `renderHook`.
-- `evaluateUntrustedBundle(bundle)`: evaluates a hand-written bundle. For
-  security tests only.
+- `evaluateBundle(bundle)`: evaluates a hand-written bundle, for a bundle the
+  bundler would never write.
 - `cleanup()`: takes down everything `render` drew.
 - Everything from `@testing-library/dom`: `screen`, `within`, `fireEvent`,
   `waitFor`, and the rest.

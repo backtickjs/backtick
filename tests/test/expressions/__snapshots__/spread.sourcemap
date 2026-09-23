@@ -55,9 +55,7 @@ __cs_all                → all
 );                      → ;
 \n                      → \n      
 return cs.const(        → return 
-cs.receiver(            → 
 __cs_all                → all
-)                       → 
 .                       → .
 join                    → join
 (                       → (
@@ -66,9 +64,7 @@ join                    → join
  +                      →  + 
 "|"                     → "|"
  +                      →  + 
-cs.receiver(            → 
 __cs_twice              → twice
-)                       → 
 .                       → .
 length                  → length
 );                      → ;

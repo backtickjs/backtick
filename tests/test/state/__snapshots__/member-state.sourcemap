@@ -8,9 +8,7 @@ __cs_from                             → from
 number                                → number
 ) => {\n                              → ) => {\n      
 return cs.const(                      → return 
-cs.receiver(                          → 
 Array                                 → Array
-)                                     → 
 .                                     → .
 from                                  → from
 (                                     → (
@@ -85,9 +83,7 @@ For                                   → For
                                       →  
 each                                  → each
 ={cs.lift(                            → ={
-cs.receiver(                          → 
 __cs_held                             → held
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
@@ -104,13 +100,9 @@ li                                    → li
 onclick                               → onclick
 ={cs.lift(                            → ={
 () =>                                 → () => 
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 label                                 → label
-)                                     → 
 .                                     → .
 set                                   → set
 (                                     → (
@@ -118,13 +110,9 @@ set                                   → set
 )                                     → )
 )}                                    → }
 >{cs.lift(                            → >\n                {
-cs.receiver(                          → 
-cs.receiver(                          → 
 __cs_row                              → row
-)                                     → 
 .                                     → .
 label                                 → label
-)                                     → 
 .                                     → .
 get                                   → get
 ()                                    → ()
