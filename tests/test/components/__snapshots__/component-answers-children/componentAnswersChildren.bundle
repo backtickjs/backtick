@@ -1,41 +1,6 @@
-{
-  "functions": {},
-  "root": [
-    "el",
-    "div",
-    {},
-    [
-      "arr",
-      [
-        [
-          "el",
-          "Fragment",
-          {},
-          "counted"
-        ],
-        [
-          "el",
-          "Fragment",
-          {},
-          [
-            "arr",
-            [
-              [
-                "el",
-                "em",
-                {},
-                "one"
-              ],
-              [
-                "el",
-                "em",
-                {},
-                "two"
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  ]
-}
+export default ($d) => {
+  return element("div", [], () => [
+    "counted",
+    [element("em", [], () => "one"), element("em", [], () => "two")],
+  ]);
+};

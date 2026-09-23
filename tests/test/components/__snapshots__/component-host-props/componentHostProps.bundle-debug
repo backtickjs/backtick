@@ -1,7 +1,0 @@
-root = <div>
-  {<span
-    class={"danger"}
-  >
-    {"one"}
-  </span>}
-</div>

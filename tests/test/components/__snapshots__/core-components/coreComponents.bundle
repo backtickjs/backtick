@@ -1,52 +1,14 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
+export default ($d) => {
+  const f1 = () => () => {};
+  return element("div", [["style", () => "padding: 8px", true]], () => [
+    element(
+      "span",
       [
-        "=>",
-        [],
-        [
-          "{}",
-          []
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "el",
-    "div",
-    {
-      "style": "padding: 8px"
-    },
-    [
-      "arr",
-      [
-        [
-          "el",
-          "span",
-          {
-            "style": "font-size: 12px",
-            "onclick": [
-              "()",
-              [
-                "fn",
-                "0"
-              ],
-              []
-            ]
-          },
-          "hi"
-        ],
-        [
-          "el",
-          "img",
-          {
-            "src": "https://example.com/a.png"
-          },
-          null
-        ]
-      ]
-    ]
-  ]
-}
+        ["style", () => "font-size: 12px", true],
+        ["onclick", () => f1(), false],
+      ],
+      () => "hi",
+    ),
+    element("img", [["src", () => "https://example.com/a.png", true]], null),
+  ]);
+};

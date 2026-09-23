@@ -1,60 +1,7 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "base",
-            10
-          ],
-          [
-            "return",
-            [
-              "=>",
-              [
-                [
-                  "param",
-                  "one"
-                ],
-                [
-                  "param",
-                  "two"
-                ]
-              ],
-              [
-                "+",
-                [
-                  "+",
-                  [
-                    "id",
-                    "one"
-                  ],
-                  [
-                    "id",
-                    "two"
-                  ]
-                ],
-                [
-                  "id",
-                  "base"
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const base = 10;
+    return (one, two) => one + two + base;
+  };
+  return f1();
+};

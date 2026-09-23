@@ -1,83 +1,11 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "let",
-            "count",
-            0
-          ],
-          [
-            "const",
-            "bump",
-            [
-              "=>",
-              [],
-              [
-                "{}",
-                [
-                  [
-                    "=",
-                    [
-                      "id",
-                      "count"
-                    ],
-                    [
-                      "+",
-                      [
-                        "id",
-                        "count"
-                      ],
-                      1
-                    ]
-                  ],
-                  [
-                    "return",
-                    [
-                      "id",
-                      "count"
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ],
-          [
-            "return",
-            [
-              "+",
-              [
-                "()",
-                [
-                  "id",
-                  "bump"
-                ],
-                []
-              ],
-              [
-                "()",
-                [
-                  "id",
-                  "bump"
-                ],
-                []
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    let count = 0;
+    const bump = () => {
+      count = count + 1;
+      return count;
+    };
+    return bump() + bump();
+  };
+  return f1();
+};

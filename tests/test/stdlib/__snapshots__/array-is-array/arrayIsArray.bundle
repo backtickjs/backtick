@@ -1,110 +1,12 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "return",
-            [
-              "arr",
-              [
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "Array"
-                    ],
-                    "isArray"
-                  ],
-                  [
-                    [
-                      "arr",
-                      []
-                    ]
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "Array"
-                    ],
-                    "isArray"
-                  ],
-                  [
-                    [
-                      "arr",
-                      [
-                        1,
-                        2
-                      ]
-                    ]
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "Array"
-                    ],
-                    "isArray"
-                  ],
-                  [
-                    "ab"
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "Array"
-                    ],
-                    "isArray"
-                  ],
-                  [
-                    {
-                      "length": 0
-                    }
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "Array"
-                    ],
-                    "isArray"
-                  ],
-                  [
-                    null
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    return [
+      Array.isArray([]),
+      Array.isArray([1, 2]),
+      Array.isArray("ab"),
+      Array.isArray({ length: 0 }),
+      Array.isArray(null),
+    ];
+  };
+  return f1();
+};

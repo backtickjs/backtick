@@ -1,51 +1,12 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "count",
-            1
-          ],
-          [
-            "if",
-            [
-              "===",
-              [
-                "id",
-                "count"
-              ],
-              1
-            ],
-            [
-              "{}",
-              [
-                [
-                  "return",
-                  "one"
-                ]
-              ]
-            ],
-            null
-          ],
-          [
-            "return",
-            "many"
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const count = 1;
+    if (count === 1) {
+      {
+        return "one";
+      }
+    }
+    return "many";
+  };
+  return f1();
+};

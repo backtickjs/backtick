@@ -1,92 +1,10 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "prices",
-            {
-              "apple": 1,
-              "pear": 2
-            }
-          ],
-          [
-            "return",
-            {
-              "values": [
-                "()",
-                [
-                  ".",
-                  [
-                    "bltn",
-                    "Object"
-                  ],
-                  "values"
-                ],
-                [
-                  [
-                    "id",
-                    "prices"
-                  ]
-                ]
-              ],
-              "holds": [
-                "arr",
-                [
-                  [
-                    "()",
-                    [
-                      ".",
-                      [
-                        "bltn",
-                        "Object"
-                      ],
-                      "hasOwn"
-                    ],
-                    [
-                      [
-                        "id",
-                        "prices"
-                      ],
-                      "pear"
-                    ]
-                  ],
-                  [
-                    "()",
-                    [
-                      ".",
-                      [
-                        "bltn",
-                        "Object"
-                      ],
-                      "hasOwn"
-                    ],
-                    [
-                      [
-                        "id",
-                        "prices"
-                      ],
-                      "plum"
-                    ]
-                  ]
-                ]
-              ]
-            }
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const prices = { apple: 1, pear: 2 };
+    return {
+      values: Object.values(prices),
+      holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
+    };
+  };
+  return f1();
+};

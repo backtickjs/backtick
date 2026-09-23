@@ -1,164 +1,22 @@
-{
-  "functions": {
-    "0": [
-      "=>",
+export default ($d) => {
+  const f1 = ($0) => {
+    const count = $0()(0);
+    return element(
+      "button",
       [
-        [
-          "param",
-          "$0"
-        ]
+        ["id", () => "row", true],
+        ["style", () => "display: flex; gap: 8px", true],
+        ["onclick", () => () => count.set(count.get() + 1), true],
       ],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "count",
-            [
-              "()",
-              [
-                "()",
-                [
-                  "id",
-                  "$0"
-                ],
-                []
-              ],
-              [
-                0
-              ]
-            ]
-          ],
-          [
-            "return",
-            [
-              "el",
-              "button",
-              {
-                "id": "row",
-                "style": "display: flex; gap: 8px",
-                "onclick": [
-                  "=>",
-                  [],
-                  [
-                    "()",
-                    [
-                      ".",
-                      [
-                        "id",
-                        "count"
-                      ],
-                      "set"
-                    ],
-                    [
-                      [
-                        "+",
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "count"
-                            ],
-                            "get"
-                          ],
-                          []
-                        ],
-                        1
-                      ]
-                    ]
-                  ]
-                ]
-              },
-              [
-                "arr",
-                [
-                  [
-                    "el",
-                    "span",
-                    {
-                      "style": "font-weight: 700"
-                    },
-                    [
-                      "?:",
-                      [
-                        ">",
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "count"
-                            ],
-                            "get"
-                          ],
-                          []
-                        ],
-                        0
-                      ],
-                      "☑",
-                      "☐"
-                    ]
-                  ],
-                  [
-                    "el",
-                    "span",
-                    {},
-                    [
-                      "+",
-                      [
-                        "+",
-                        "pressed ",
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "count"
-                            ],
-                            "get"
-                          ],
-                          []
-                        ]
-                      ],
-                      " times"
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "comp",
-    [
-      "=>",
-      [],
-      [
-        "()",
-        [
-          "fn",
-          "0"
-        ],
-        [
-          [
-            "=>",
-            [],
-            [
-              "bltn",
-              "state"
-            ]
-          ]
-        ]
-      ]
-    ],
-    {},
-    null
-  ]
-}
+      () => [
+        element(
+          "span",
+          [["style", () => "font-weight: 700", true]],
+          () => () => (count.get() > 0 ? "☑" : "☐"),
+        ),
+        element("span", [], () => () => "pressed " + count.get() + " times"),
+      ],
+    );
+  };
+  return component(() => f1(() => state), []);
+};

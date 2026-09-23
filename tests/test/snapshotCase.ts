@@ -6,7 +6,6 @@ import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import { evaluate, render } from "@backtickjs/web-testing";
 import prettier from "prettier";
 import { isNode } from "./node.ts";
-import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
 
@@ -14,7 +13,7 @@ import { renderValue } from "./renderValue.ts";
 const verbatim = [(value: unknown) => value as string];
 
 /**
- * Records what `value` bundles to, what that bundle prints as, and what it
+ * Records what `value` prints as — the bundle's code and its data — and what it
  * draws or evaluates to, next to the test: `__snapshots__/<test file>/<name>.<artifact>`.
  *
  * None of it records a source position. What the test file compiles to is
@@ -37,16 +36,10 @@ export async function snapshotCase(
       serializers: verbatim,
     });
 
-  const bundle = await bundler.run(value);
-  record(JSON.stringify(bundle, null, 2), "bundle");
-  record(renderBundleDebug(bundle), "bundle-debug");
   // Formatted, so a change to what is printed reads as the code it changed.
-  const printed = printBundle(bundle);
-  record(
-    await prettier.format(printed.code, { parser: "babel" }),
-    "printed.js",
-  );
-  record(`${JSON.stringify(printed.data, null, 2)}\n`, "printed.json");
+  const printed = printBundle(await bundler.run(value));
+  record(await prettier.format(printed.code, { parser: "babel" }), "bundle");
+  record(`${JSON.stringify(printed.data, null, 2)}\n`, "data.json");
   const evaluated = await evaluate(value);
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));

@@ -1,71 +1,11 @@
-{
-  "functions": {
-    "0": [
-      "=>",
+export default ($d) => {
+  const f1 = () => {
+    return element(
+      "span",
       [],
-      [
-        "{}",
-        [
-          [
-            "return",
-            [
-              "el",
-              "span",
-              {},
-              [
-                "+",
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "String"
-                    ],
-                    "fromCharCode"
-                  ],
-                  [
-                    72,
-                    105
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "String"
-                    ],
-                    "fromCharCode"
-                  ],
-                  [
-                    55357,
-                    56832
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "comp",
-    [
-      "=>",
-      [],
-      [
-        "()",
-        [
-          "fn",
-          "0"
-        ],
-        []
-      ]
-    ],
-    {},
-    null
-  ]
-}
+      () => () =>
+        String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832),
+    );
+  };
+  return component(() => f1(), []);
+};

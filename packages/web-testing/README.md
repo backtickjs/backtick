@@ -110,9 +110,9 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
   bundler would never write.
 - `cleanup()`: takes down everything `render` drew.
 
-`BACKTICK_BACKEND=printed` makes `render` and `evaluate` print each bundle as
-JavaScript with `printBundle` and run it on `web-interpreter`'s `createRuntime`,
-instead of interpreting it.
+`render` and `evaluate` print each bundle as JavaScript with `printBundle` and
+run it on `web-interpreter`'s `createRuntime`. `BACKTICK_BACKEND=interpreter`
+interprets the bundle instead.
 - Everything from `@testing-library/dom`: `screen`, `within`, `fireEvent`,
   `waitFor`, and the rest.
 

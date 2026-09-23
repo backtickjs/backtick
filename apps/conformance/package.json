@@ -5,7 +5,6 @@
   "type": "module",
   "description": "The page a client passes by drawing it: one row per case, judged by the client under test",
   "scripts": {
-    "build": "bun scripts/fetchTest262.ts && bun scripts/generate.ts",
     "start": "bun src/index.tsx",
     "format": "prettier --write src scripts",
     "format:check": "prettier --check src scripts",

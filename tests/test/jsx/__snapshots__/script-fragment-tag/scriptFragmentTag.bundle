@@ -1,67 +1,9 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "return",
-            [
-              "el",
-              "div",
-              {},
-              [
-                "arr",
-                [
-                  [
-                    "el",
-                    "Fragment",
-                    {},
-                    [
-                      "arr",
-                      [
-                        [
-                          "el",
-                          "span",
-                          {},
-                          "a"
-                        ],
-                        [
-                          "el",
-                          "span",
-                          {},
-                          "b"
-                        ]
-                      ]
-                    ]
-                  ],
-                  [
-                    "el",
-                    "Fragment",
-                    {},
-                    [
-                      "el",
-                      "em",
-                      {},
-                      "c"
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    return element("div", [], () => [
+      [element("span", [], () => "a"), element("span", [], () => "b")],
+      element("em", [], () => "c"),
+    ]);
+  };
+  return f1();
+};

@@ -1,64 +1,8 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "=>",
-        [
-          [
-            "param",
-            "count"
-          ]
-        ],
-        [
-          "{}",
-          [
-            [
-              "const",
-              "floor",
-              -1
-            ],
-            [
-              "const",
-              "step",
-              [
-                "-x",
-                [
-                  "id",
-                  "count"
-                ]
-              ]
-            ],
-            [
-              "return",
-              [
-                "+",
-                [
-                  "+",
-                  [
-                    "id",
-                    "floor"
-                  ],
-                  [
-                    "id",
-                    "step"
-                  ]
-                ],
-                -2
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => (count) => {
+    const floor = -1;
+    const step = -count;
+    return floor + step + -2;
+  };
+  return f1();
+};

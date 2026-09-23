@@ -1,159 +1,19 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ],
-        [
-          "param",
-          "$1"
-        ]
-      ],
+export default ($d) => {
+  const f1 = ($0, $1) => ({ taken: $0()(true), skipped: $1()(false) });
+  const f2 = ($0) => (flag) => {
+    if (flag) {
       {
-        "taken": [
-          "()",
-          [
-            "()",
-            [
-              "id",
-              "$0"
-            ],
-            []
-          ],
-          [
-            true
-          ]
-        ],
-        "skipped": [
-          "()",
-          [
-            "()",
-            [
-              "id",
-              "$1"
-            ],
-            []
-          ],
-          [
-            false
-          ]
-        ]
+        return $0();
       }
-    ],
-    "1": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "=>",
-        [
-          [
-            "param",
-            "flag"
-          ]
-        ],
-        [
-          "{}",
-          [
-            [
-              "if",
-              [
-                "id",
-                "flag"
-              ],
-              [
-                "{}",
-                [
-                  [
-                    "return",
-                    [
-                      "()",
-                      [
-                        "id",
-                        "$0"
-                      ],
-                      []
-                    ]
-                  ]
-                ]
-              ],
-              null
-            ],
-            [
-              "return",
-              "skipped"
-            ]
-          ]
-        ]
-      ]
-    ],
-    "2": [
-      "=>",
-      [],
-      "evaluated"
-    ],
-    "3": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "throw",
-            "the guarded fragment must never evaluate"
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    [
-      [
-        "=>",
-        [],
-        [
-          "()",
-          [
-            "fn",
-            "1"
-          ],
-          [
-            [
-              "fn",
-              "2"
-            ]
-          ]
-        ]
-      ],
-      [
-        "=>",
-        [],
-        [
-          "()",
-          [
-            "fn",
-            "1"
-          ],
-          [
-            [
-              "fn",
-              "3"
-            ]
-          ]
-        ]
-      ]
-    ]
-  ]
-}
+    }
+    return "skipped";
+  };
+  const f3 = () => "evaluated";
+  const f4 = () => {
+    throw "the guarded fragment must never evaluate";
+  };
+  return f1(
+    () => f2(f3),
+    () => f2(f4),
+  );
+};

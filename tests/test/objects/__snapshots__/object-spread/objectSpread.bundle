@@ -1,104 +1,12 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "base",
-            {
-              "a": 1,
-              "b": 2
-            }
-          ],
-          [
-            "const",
-            "over",
-            {
-              "b": 9
-            }
-          ],
-          [
-            "return",
-            [
-              "()",
-              [
-                ".",
-                [
-                  "bltn",
-                  "Object"
-                ],
-                "fromEntries"
-              ],
-              [
-                [
-                  "arr",
-                  [
-                    [
-                      "...",
-                      [
-                        "()",
-                        [
-                          ".",
-                          [
-                            "bltn",
-                            "Object"
-                          ],
-                          "entries"
-                        ],
-                        [
-                          [
-                            "id",
-                            "base"
-                          ]
-                        ]
-                      ]
-                    ],
-                    [
-                      "...",
-                      [
-                        "()",
-                        [
-                          ".",
-                          [
-                            "bltn",
-                            "Object"
-                          ],
-                          "entries"
-                        ],
-                        [
-                          [
-                            "id",
-                            "over"
-                          ]
-                        ]
-                      ]
-                    ],
-                    [
-                      "arr",
-                      [
-                        "c",
-                        3
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const base = { a: 1, b: 2 };
+    const over = { b: 9 };
+    return Object.fromEntries([
+      ...Object.entries(base),
+      ...Object.entries(over),
+      ["c", 3],
+    ]);
+  };
+  return f1();
+};

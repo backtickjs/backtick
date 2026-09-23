@@ -1,16 +1,5 @@
-{
-  "functions": {},
-  "root": [
-    "el",
-    "div",
-    {},
-    [
-      "el",
-      "span",
-      {
-        "class": "danger"
-      },
-      "one"
-    ]
-  ]
-}
+export default ($d) => {
+  return element("div", [], () =>
+    element("span", [["class", () => "danger", true]], () => "one"),
+  );
+};

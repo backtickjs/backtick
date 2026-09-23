@@ -1,6 +1,0 @@
-#f0 = () => {
-  const count = "one";
-  return count;
-}
-
-root = #f0()

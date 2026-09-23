@@ -1,7 +1,0 @@
-#f0 = () => {
-  const base = { "a": 1, "b": 2 };
-  const over = { "b": 9 };
-  return Object.fromEntries([...Object.entries(base), ...Object.entries(over), ["c", 3]]);
-}
-
-root = #f0()

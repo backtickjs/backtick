@@ -3,17 +3,18 @@ import { printBundle } from "@backtickjs/bundler";
 import { createInterpreter, createRuntime } from "@backtickjs/web-interpreter";
 import type { PrintedModule, Program } from "@backtickjs/web-interpreter";
 
-/** What a test draws a bundle with: the interpreter, or the bundle printed. */
+/** What a test draws a bundle with: the bundle printed, or the interpreter. */
 export interface TestClient {
   render(bundle: Bundle<ClientUnknown>, parent: Node): Promise<() => void>;
   evaluate<T extends ClientUnknown>(bundle: Bundle<T>): Promise<T>;
 }
 
-// `BACKTICK_BACKEND=printed` runs every test through `printBundle` instead.
+// `BACKTICK_BACKEND=interpreter` runs every test through the interpreter
+// instead.
 const scope = globalThis as {
   process?: { env?: Record<string, string | undefined> };
 };
-const printed = scope.process?.env?.["BACKTICK_BACKEND"] === "printed";
+const printed = scope.process?.env?.["BACKTICK_BACKEND"] !== "interpreter";
 
 async function load(bundle: Bundle<ClientUnknown>): Promise<PrintedModule> {
   const { code, data, globals } = printBundle(bundle);

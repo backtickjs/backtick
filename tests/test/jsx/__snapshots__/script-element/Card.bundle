@@ -1,219 +1,38 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "{}",
-        [
+export default ($d) => {
+  const f1 = ($0) => {
+    const label = $0()("hi");
+    const row = (size) => {
+      const css = "font-size: " + size + "px";
+      const press = () => label.set("held");
+      return element("div", [["style", () => css, false]], () => [
+        element(
+          "span",
           [
-            "const",
-            "label",
-            [
-              "()",
-              [
-                "()",
-                [
-                  "id",
-                  "$0"
-                ],
-                []
-              ],
-              [
-                "hi"
-              ]
-            ]
+            ["style", () => css, false],
+            ["onclick", () => () => label.set("pressed"), true],
           ],
+          () => () => label.get(),
+        ),
+        element(
+          "span",
+          [["style", () => "font-size: 8px", true]],
+          () => "fixed",
+        ),
+        element(
+          "span",
           [
-            "const",
-            "row",
-            [
-              "=>",
-              [
-                [
-                  "param",
-                  "size"
-                ]
-              ],
-              [
-                "{}",
-                [
-                  [
-                    "const",
-                    "css",
-                    [
-                      "+",
-                      [
-                        "+",
-                        "font-size: ",
-                        [
-                          "id",
-                          "size"
-                        ]
-                      ],
-                      "px"
-                    ]
-                  ],
-                  [
-                    "const",
-                    "press",
-                    [
-                      "=>",
-                      [],
-                      [
-                        "()",
-                        [
-                          ".",
-                          [
-                            "id",
-                            "label"
-                          ],
-                          "set"
-                        ],
-                        [
-                          "held"
-                        ]
-                      ]
-                    ]
-                  ],
-                  [
-                    "return",
-                    [
-                      "el",
-                      "div",
-                      {
-                        "style": [
-                          "id",
-                          "css"
-                        ]
-                      },
-                      [
-                        "arr",
-                        [
-                          [
-                            "el",
-                            "span",
-                            {
-                              "style": [
-                                "id",
-                                "css"
-                              ],
-                              "onclick": [
-                                "=>",
-                                [],
-                                [
-                                  "()",
-                                  [
-                                    ".",
-                                    [
-                                      "id",
-                                      "label"
-                                    ],
-                                    "set"
-                                  ],
-                                  [
-                                    "pressed"
-                                  ]
-                                ]
-                              ]
-                            },
-                            [
-                              "()",
-                              [
-                                ".",
-                                [
-                                  "id",
-                                  "label"
-                                ],
-                                "get"
-                              ],
-                              []
-                            ]
-                          ],
-                          [
-                            "el",
-                            "span",
-                            {
-                              "style": "font-size: 8px"
-                            },
-                            "fixed"
-                          ],
-                          [
-                            "el",
-                            "span",
-                            {
-                              "style": [
-                                "id",
-                                "css"
-                              ],
-                              "onclick": [
-                                "id",
-                                "press"
-                              ]
-                            },
-                            "held"
-                          ]
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
+            ["style", () => css, false],
+            ["onclick", () => press, false],
           ],
-          [
-            "return",
-            [
-              "el",
-              "div",
-              {
-                "style": "padding: 0"
-              },
-              [
-                "()",
-                [
-                  "id",
-                  "row"
-                ],
-                [
-                  12
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "comp",
-    [
-      "=>",
-      [],
-      [
-        "()",
-        [
-          "fn",
-          "0"
-        ],
-        [
-          [
-            "=>",
-            [],
-            [
-              "bltn",
-              "state"
-            ]
-          ]
-        ]
-      ]
-    ],
-    {},
-    null
-  ]
-}
+          () => "held",
+        ),
+      ]);
+    };
+    return element(
+      "div",
+      [["style", () => "padding: 0", true]],
+      () => () => row(12),
+    );
+  };
+  return component(() => f1(() => state), []);
+};

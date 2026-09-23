@@ -1,52 +1,7 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "greeting",
-            "Hello"
-          ],
-          [
-            "return",
-            [
-              "()",
-              [
-                ".",
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "id",
-                      "greeting"
-                    ],
-                    "concat"
-                  ],
-                  [
-                    ", ",
-                    "World"
-                  ]
-                ],
-                "toUpperCase"
-              ],
-              []
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const greeting = "Hello";
+    return greeting.concat(", ", "World").toUpperCase();
+  };
+  return f1();
+};

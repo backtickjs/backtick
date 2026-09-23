@@ -1,9 +1,0 @@
-#f0 = ($0) => {
-  const stored = $0();
-  const caught = $0()();
-  return 1;
-}
-
-#f1 = () => () => "hi"
-
-root = #f0(#f1)

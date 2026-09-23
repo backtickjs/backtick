@@ -1,6 +1,0 @@
-#f0 = () => {
-  const names = ["zero", "one"];
-  return names[9];
-}
-
-root = #f0()

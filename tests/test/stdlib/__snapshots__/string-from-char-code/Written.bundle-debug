@@ -1,7 +1,0 @@
-#f0 = () => {
-  return <span>
-    {String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832)}
-  </span>;
-}
-
-root = <{() => #f0()} />

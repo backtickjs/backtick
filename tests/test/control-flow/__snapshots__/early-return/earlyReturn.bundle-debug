@@ -1,9 +1,0 @@
-#f0 = () => {
-  let n = 0;
-  if (n === 0) {
-    return undefined;
-  }
-  n = 1;
-}
-
-root = #f0()

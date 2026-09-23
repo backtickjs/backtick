@@ -1,31 +1,7 @@
-{
-  "functions": {},
-  "root": [
-    "el",
-    "div",
-    {},
-    [
-      "arr",
-      [
-        [
-          "el",
-          "span",
-          {},
-          "alpha"
-        ],
-        [
-          "el",
-          "span",
-          {},
-          "beta"
-        ],
-        [
-          "el",
-          "span",
-          {},
-          "gamma"
-        ]
-      ]
-    ]
-  ]
-}
+export default ($d) => {
+  return element("div", [], () => [
+    element("span", [], () => "alpha"),
+    element("span", [], () => "beta"),
+    element("span", [], () => "gamma"),
+  ]);
+};

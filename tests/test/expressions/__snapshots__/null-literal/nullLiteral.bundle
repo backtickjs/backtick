@@ -1,103 +1,12 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
+export default ($d) => {
+  const f1 = ($0) => ({ missing: $0()(null), present: $0()("hi"), bare: null });
+  const f2 = () => (value) => {
+    if (value === null) {
       {
-        "missing": [
-          "()",
-          [
-            "()",
-            [
-              "id",
-              "$0"
-            ],
-            []
-          ],
-          [
-            null
-          ]
-        ],
-        "present": [
-          "()",
-          [
-            "()",
-            [
-              "id",
-              "$0"
-            ],
-            []
-          ],
-          [
-            "hi"
-          ]
-        ],
-        "bare": null
+        return "-";
       }
-    ],
-    "1": [
-      "=>",
-      [],
-      [
-        "=>",
-        [
-          [
-            "param",
-            "value"
-          ]
-        ],
-        [
-          "{}",
-          [
-            [
-              "if",
-              [
-                "===",
-                [
-                  "id",
-                  "value"
-                ],
-                null
-              ],
-              [
-                "{}",
-                [
-                  [
-                    "return",
-                    "-"
-                  ]
-                ]
-              ],
-              null
-            ],
-            [
-              "return",
-              [
-                "id",
-                "value"
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    [
-      [
-        "fn",
-        "1"
-      ]
-    ]
-  ]
-}
+    }
+    return value;
+  };
+  return f1(f2);
+};

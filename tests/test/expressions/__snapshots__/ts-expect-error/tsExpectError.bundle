@@ -1,33 +1,7 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "count",
-            "one"
-          ],
-          [
-            "return",
-            [
-              "id",
-              "count"
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const count = "one";
+    return count;
+  };
+  return f1();
+};

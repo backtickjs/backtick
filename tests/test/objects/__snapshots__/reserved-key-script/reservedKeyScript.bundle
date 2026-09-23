@@ -1,19 +1,4 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      {
-        "#": "value"
-      }
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => ({ "#": "value" });
+  return f1();
+};

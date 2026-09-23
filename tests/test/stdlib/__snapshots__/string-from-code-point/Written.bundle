@@ -1,68 +1,10 @@
-{
-  "functions": {
-    "0": [
-      "=>",
+export default ($d) => {
+  const f1 = () => {
+    return element(
+      "span",
       [],
-      [
-        "{}",
-        [
-          [
-            "return",
-            [
-              "el",
-              "span",
-              {},
-              [
-                "+",
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "String"
-                    ],
-                    "fromCodePoint"
-                  ],
-                  [
-                    72,
-                    105
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "String"
-                    ],
-                    "fromCodePoint"
-                  ],
-                  []
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "comp",
-    [
-      "=>",
-      [],
-      [
-        "()",
-        [
-          "fn",
-          "0"
-        ],
-        []
-      ]
-    ],
-    {},
-    null
-  ]
-}
+      () => () => String.fromCodePoint(72, 105) + String.fromCodePoint(),
+    );
+  };
+  return component(() => f1(), []);
+};

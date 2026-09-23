@@ -1,73 +1,11 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "=>",
-        [
-          [
-            "param",
-            "ready"
-          ],
-          [
-            "param",
-            "count"
-          ]
-        ],
-        [
-          "{}",
-          [
-            [
-              "if",
-              [
-                "!",
-                [
-                  "id",
-                  "ready"
-                ]
-              ],
-              [
-                "{}",
-                [
-                  [
-                    "return",
-                    "waiting"
-                  ]
-                ]
-              ],
-              null
-            ],
-            [
-              "return",
-              [
-                "?:",
-                [
-                  "!",
-                  [
-                    ">",
-                    [
-                      "id",
-                      "count"
-                    ],
-                    3
-                  ]
-                ],
-                "room left",
-                "full"
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => (ready, count) => {
+    if (!ready) {
+      {
+        return "waiting";
+      }
+    }
+    return !(count > 3) ? "room left" : "full";
+  };
+  return f1();
+};

@@ -1,278 +1,55 @@
-{
-  "functions": {
-    "0": [
-      "=>",
+export default ($d) => {
+  const f1 = ($0) => {
+    const said = $0()("");
+    return element(
+      "form",
       [
         [
-          "param",
-          "$0"
-        ]
+          "onsubmit",
+          () => (event) => {
+            event.preventDefault();
+            said.set(event.type + " " + event.cancelable);
+          },
+          true,
+        ],
       ],
-      [
-        "{}",
-        [
+      () => [
+        element(
+          "textarea",
           [
-            "const",
-            "said",
             [
-              "()",
-              [
-                "()",
-                [
-                  "id",
-                  "$0"
-                ],
-                []
-              ],
-              [
-                ""
-              ]
-            ]
+              "oninput",
+              () => (event) => said.set(event.currentTarget.value),
+              true,
+            ],
           ],
+          null,
+        ),
+        element(
+          "input",
           [
-            "return",
             [
-              "el",
-              "form",
-              {
-                "onsubmit": [
-                  "=>",
-                  [
-                    [
-                      "param",
-                      "event"
-                    ]
-                  ],
-                  [
-                    "{}",
-                    [
-                      [
-                        "()",
-                        [
-                          ".",
-                          [
-                            "id",
-                            "event"
-                          ],
-                          "preventDefault"
-                        ],
-                        []
-                      ],
-                      [
-                        "()",
-                        [
-                          ".",
-                          [
-                            "id",
-                            "said"
-                          ],
-                          "set"
-                        ],
-                        [
-                          [
-                            "+",
-                            [
-                              "+",
-                              [
-                                ".",
-                                [
-                                  "id",
-                                  "event"
-                                ],
-                                "type"
-                              ],
-                              " "
-                            ],
-                            [
-                              ".",
-                              [
-                                "id",
-                                "event"
-                              ],
-                              "cancelable"
-                            ]
-                          ]
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              },
-              [
-                "arr",
-                [
-                  [
-                    "el",
-                    "textarea",
-                    {
-                      "oninput": [
-                        "=>",
-                        [
-                          [
-                            "param",
-                            "event"
-                          ]
-                        ],
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "said"
-                            ],
-                            "set"
-                          ],
-                          [
-                            [
-                              ".",
-                              [
-                                ".",
-                                [
-                                  "id",
-                                  "event"
-                                ],
-                                "currentTarget"
-                              ],
-                              "value"
-                            ]
-                          ]
-                        ]
-                      ]
-                    },
-                    null
-                  ],
-                  [
-                    "el",
-                    "input",
-                    {
-                      "oninput": [
-                        "=>",
-                        [
-                          [
-                            "param",
-                            "event"
-                          ]
-                        ],
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "said"
-                            ],
-                            "set"
-                          ],
-                          [
-                            [
-                              ".",
-                              [
-                                ".",
-                                [
-                                  "id",
-                                  "event"
-                                ],
-                                "currentTarget"
-                              ],
-                              "value"
-                            ]
-                          ]
-                        ]
-                      ]
-                    },
-                    null
-                  ],
-                  [
-                    "el",
-                    "button",
-                    {
-                      "onclick": [
-                        "=>",
-                        [
-                          [
-                            "param",
-                            "event"
-                          ]
-                        ],
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "said"
-                            ],
-                            "set"
-                          ],
-                          [
-                            [
-                              "+",
-                              [
-                                "+",
-                                [
-                                  ".",
-                                  [
-                                    "id",
-                                    "event"
-                                  ],
-                                  "clientX"
-                                ],
-                                " "
-                              ],
-                              [
-                                ".",
-                                [
-                                  ".",
-                                  [
-                                    "id",
-                                    "event"
-                                  ],
-                                  "currentTarget"
-                                ],
-                                "tagName"
-                              ]
-                            ]
-                          ]
-                        ]
-                      ]
-                    },
-                    [
-                      "()",
-                      [
-                        ".",
-                        [
-                          "id",
-                          "said"
-                        ],
-                        "get"
-                      ],
-                      []
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    [
-      [
-        "=>",
-        [],
-        [
-          "bltn",
-          "state"
-        ]
-      ]
-    ]
-  ]
-}
+              "oninput",
+              () => (event) => said.set(event.currentTarget.value),
+              true,
+            ],
+          ],
+          null,
+        ),
+        element(
+          "button",
+          [
+            [
+              "onclick",
+              () => (event) =>
+                said.set(event.clientX + " " + event.currentTarget.tagName),
+              true,
+            ],
+          ],
+          () => () => said.get(),
+        ),
+      ],
+    );
+  };
+  return f1(() => state);
+};

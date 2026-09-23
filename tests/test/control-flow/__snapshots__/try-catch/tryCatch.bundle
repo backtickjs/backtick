@@ -1,78 +1,16 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "message",
-            "boom"
-          ],
-          [
-            "try",
-            [
-              "{}",
-              [
-                [
-                  "throw",
-                  [
-                    "id",
-                    "message"
-                  ]
-                ]
-              ]
-            ],
-            [
-              "catch",
-              "error",
-              [
-                "{}",
-                [
-                  [
-                    "if",
-                    [
-                      "===",
-                      [
-                        "id",
-                        "error"
-                      ],
-                      [
-                        "id",
-                        "message"
-                      ]
-                    ],
-                    [
-                      "{}",
-                      [
-                        [
-                          "return",
-                          "caught boom"
-                        ]
-                      ]
-                    ],
-                    null
-                  ],
-                  [
-                    "return",
-                    "caught something else"
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const message = "boom";
+    try {
+      throw message;
+    } catch (error) {
+      if (error === message) {
+        {
+          return "caught boom";
+        }
+      }
+      return "caught something else";
+    }
+  };
+  return f1();
+};

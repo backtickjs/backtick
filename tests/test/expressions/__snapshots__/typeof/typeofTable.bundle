@@ -1,132 +1,18 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "count",
-            [
-              "()",
-              [
-                "()",
-                [
-                  "id",
-                  "$0"
-                ],
-                []
-              ],
-              [
-                0
-              ]
-            ]
-          ],
-          [
-            "return",
-            [
-              "arr",
-              [
-                [
-                  "typeof",
-                  [
-                    "undef"
-                  ]
-                ],
-                [
-                  "typeof",
-                  null
-                ],
-                [
-                  "typeof",
-                  true
-                ],
-                [
-                  "typeof",
-                  1
-                ],
-                [
-                  "typeof",
-                  "a"
-                ],
-                [
-                  "typeof",
-                  [
-                    "arr",
-                    [
-                      1
-                    ]
-                  ]
-                ],
-                [
-                  "typeof",
-                  {
-                    "a": 1
-                  }
-                ],
-                [
-                  "typeof",
-                  [
-                    "=>",
-                    [
-                      [
-                        "param",
-                        "n"
-                      ]
-                    ],
-                    [
-                      "id",
-                      "n"
-                    ]
-                  ]
-                ],
-                [
-                  "typeof",
-                  [
-                    ".",
-                    [
-                      "bltn",
-                      "Math"
-                    ],
-                    "floor"
-                  ]
-                ],
-                [
-                  "typeof",
-                  [
-                    "id",
-                    "count"
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    [
-      [
-        "=>",
-        [],
-        [
-          "bltn",
-          "state"
-        ]
-      ]
-    ]
-  ]
-}
+export default ($d) => {
+  const f1 = ($0) => {
+    const count = $0()(0);
+    return [
+      typeof void 0,
+      typeof null,
+      typeof true,
+      typeof 1,
+      typeof "a",
+      typeof [1],
+      typeof { a: 1 },
+      typeof ((n) => n),
+      typeof Math.floor,
+      typeof count,
+    ];
+  };
+  return f1(() => state);
+};

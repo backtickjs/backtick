@@ -1,9 +1,0 @@
-#f0 = () => {
-  try {
-    throw "boom";
-  } catch {
-    return "caught";
-  }
-}
-
-root = #f0()

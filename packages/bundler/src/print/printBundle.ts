@@ -13,12 +13,11 @@ import type {
  * A bundle as JavaScript: a module whose default export takes `data` and
  * answers with what the bundle's root evaluates to.
  *
- * Data never becomes code. Every literal the bundle holds — every spliced
- * value among them — is an entry of `data`, and the code reads it as `$d[i]`.
- * The only text the code takes from the bundle is a name that matches the
- * identifier grammar; any other name is read from `data` too. Nothing is
- * escaped, because nothing from the bundle is printed where escaping would
- * matter.
+ * Literals are printed as literals, strings escaped so that no `</script>`
+ * or `<!--` appears. The bundle does not yet tell a value the host computed
+ * from one a script wrote, so both are printed that way for now. An
+ * element's tag or prop name that is not a plain name is read from `data`,
+ * as `$d[i]`.
  *
  * A builtin is read as the global of its name, and so are the runtime's
  * `element`, `list`, `component` and `memo`: the client puts them on
@@ -26,12 +25,21 @@ import type {
  */
 export interface PrintedBundle {
   readonly code: string;
-  readonly data: readonly (string | number | boolean)[];
+  readonly data: readonly string[];
   /** The builtins the code reads as globals, which the client provides. */
   readonly globals: readonly string[];
 }
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
+
+// A tag or prop name that can be printed as a string without escaping.
+const NAME = /^[A-Za-z][A-Za-z0-9_:-]*$/;
+
+// A string a script wrote, as a literal: `<` escaped, so no `</script>` or
+// `<!--` appears when the module is inlined in a page.
+function stringLiteral(value: string): string {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
 
 // What the module itself names, beside the builtins it reads.
 const RUNTIME = ["$d", "element", "list", "component", "memo", "globalThis"];
@@ -72,8 +80,7 @@ function namesOf(node: unknown, bound: Set<string>, read: Set<string>): void {
 }
 
 export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
-  const data: (string | number | boolean)[] = [];
-  const indexes = new Map<string, number>();
+  const data: string[] = [];
   const bindings = new Map<string, string>();
   const labels = new Map<string, string>();
 
@@ -92,16 +99,23 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
     return `${base}_${at}`;
   };
 
-  const literal = (value: string | number | boolean): string => {
-    const key = `${typeof value}:${String(value)}`;
-    let index = indexes.get(key);
-    if (index === undefined) {
-      index = data.length;
-      data.push(value);
-      indexes.set(key, index);
-    }
-    return `$d[${index}]`;
+  const read$d = (value: string): string => {
+    data.push(value);
+    return `$d[${data.length - 1}]`;
   };
+
+  const literal = (value: string | number | boolean): string => {
+    if (typeof value === "string") {
+      return stringLiteral(value);
+    }
+    if (typeof value === "number" && !Number.isFinite(value)) {
+      throw new Error(`${value} has no literal`);
+    }
+    return Object.is(value, -0) ? "-0" : String(value);
+  };
+
+  const name = (text: string): string =>
+    NAME.test(text) ? `"${text}"` : read$d(text);
 
   // The name as written, unless the module needs it or may not bind it.
   const binding = (name: string): string => {
@@ -131,12 +145,12 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
   };
 
   const builtin = (name: string): string =>
-    IDENTIFIER.test(name) ? name : `globalThis[${literal(name)}]`;
+    IDENTIFIER.test(name) ? name : `globalThis[${stringLiteral(name)}]`;
 
   const member = (name: string, optional: boolean): string =>
     IDENTIFIER.test(name)
       ? `${optional ? "?." : "."}${name}`
-      : `${optional ? "?." : ""}[${literal(name)}]`;
+      : `${optional ? "?." : ""}[${stringLiteral(name)}]`;
 
   const target = (node: BundleIdentifier): string => {
     if (!Array.isArray(node) || node[0] !== "id") {
@@ -186,11 +200,11 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
       return drawn === null ? "null" : children(drawn, true);
     }
     const printed = Object.entries(props).map(
-      ([name, value]) =>
-        `[${literal(name)}, () => ${expression(value)}, ${isFixed(value)}]`,
+      ([prop, value]) =>
+        `[${name(prop)}, () => ${expression(value)}, ${isFixed(value)}]`,
     );
     const draw = drawn === null ? "null" : `() => ${children(drawn, false)}`;
-    return `element(${literal(id)}, [${printed.join(", ")}], ${draw})`;
+    return `element(${name(id)}, [${printed.join(", ")}], ${draw})`;
   };
 
   function expression(node: BundleExpression): string {
@@ -202,7 +216,8 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
     }
     if (!Array.isArray(node)) {
       const members = Object.entries(node).map(
-        ([key, value]) => `[${literal(key)}]: ${expression(value)}`,
+        ([key, value]) =>
+          `${IDENTIFIER.test(key) ? key : stringLiteral(key)}: ${expression(value)}`,
       );
       return `({ ${members.join(", ")} })`;
     }
@@ -221,10 +236,10 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
         return element(node);
       case "comp": {
         const props = Object.entries(node[2]).map(
-          ([name, value]) => `[${literal(name)}, () => ${expression(value)}]`,
+          ([prop, value]) => `[${name(prop)}, () => ${expression(value)}]`,
         );
         if (node[3] !== null) {
-          props.push(`[${literal("children")}, () => ${expression(node[3])}]`);
+          props.push(`["children", () => ${expression(node[3])}]`);
         }
         return `component(${expression(node[1])}, [${props.join(", ")}])`;
       }

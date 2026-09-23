@@ -1,43 +1,7 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "names",
-            [
-              "arr",
-              [
-                "zero",
-                "one"
-              ]
-            ]
-          ],
-          [
-            "return",
-            [
-              "[]",
-              [
-                "id",
-                "names"
-              ],
-              9
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const names = ["zero", "one"];
+    return names[9];
+  };
+  return f1();
+};

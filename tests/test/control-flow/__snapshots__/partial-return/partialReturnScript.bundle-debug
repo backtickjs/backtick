@@ -1,8 +1,0 @@
-#f0 = () => {
-  let n = 1;
-  if (n === 2) {
-    return "some";
-  }
-}
-
-root = #f0()

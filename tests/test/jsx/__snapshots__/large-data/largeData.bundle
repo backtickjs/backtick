@@ -1,512 +1,82 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "()",
-        [
-          "id",
-          "$0"
-        ],
-        []
-      ]
-    ],
-    "1": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "=>",
-        [
-          [
-            "param",
-            "order"
-          ]
-        ],
-        [
-          "()",
-          [
-            "id",
-            "$0"
-          ],
-          [
-            [
-              "id",
-              "order"
-            ]
-          ]
-        ]
-      ]
-    ],
-    "2": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "+",
-        [
-          "+",
-          "https://img.example.com/",
-          [
-            ".",
-            [
-              "id",
-              "$0"
+export default ($d) => {
+  const f1 = ($0) => $0();
+  const f2 = ($0) => (order) => $0(order);
+  const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
+  const f4 = ($0) => $0.customer.name;
+  const f5 = ($0) => $0.customer.city;
+  const f6 = ($0) => $0.items;
+  const f7 = ($0) => (item) => $0(item);
+  const f8 = ($0) => $0.sku + " x" + $0.qty;
+  const f9 = ($0) => "$" + $0.total;
+  return element("div", [], () =>
+    list(
+      () =>
+        f1(() => [
+          {
+            id: "ord-1000",
+            customer: { name: "Customer 0", city: "Montréal" },
+            items: [
+              { sku: "SKU-0-A", qty: 1 },
+              { sku: "SKU-0-B", qty: 1 },
             ],
-            "id"
-          ]
-        ],
-        ".png"
-      ]
-    ],
-    "3": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        ".",
-        [
-          ".",
-          [
-            "id",
-            "$0"
-          ],
-          "customer"
-        ],
-        "name"
-      ]
-    ],
-    "4": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        ".",
-        [
-          ".",
-          [
-            "id",
-            "$0"
-          ],
-          "customer"
-        ],
-        "city"
-      ]
-    ],
-    "5": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        ".",
-        [
-          "id",
-          "$0"
-        ],
-        "items"
-      ]
-    ],
-    "6": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "=>",
-        [
-          [
-            "param",
-            "item"
-          ]
-        ],
-        [
-          "()",
-          [
-            "id",
-            "$0"
-          ],
-          [
-            [
-              "id",
-              "item"
-            ]
-          ]
-        ]
-      ]
-    ],
-    "7": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "+",
-        [
-          "+",
-          [
-            ".",
-            [
-              "id",
-              "$0"
+            total: 45.23,
+          },
+          {
+            id: "ord-1001",
+            customer: { name: "Customer 1", city: "Toronto" },
+            items: [
+              { sku: "SKU-1-A", qty: 2 },
+              { sku: "SKU-1-B", qty: 1 },
             ],
-            "sku"
-          ],
-          " x"
-        ],
-        [
-          ".",
-          [
-            "id",
-            "$0"
-          ],
-          "qty"
-        ]
-      ]
-    ],
-    "8": [
-      "=>",
-      [
-        [
-          "param",
-          "$0"
-        ]
-      ],
-      [
-        "+",
-        "$",
-        [
-          ".",
-          [
-            "id",
-            "$0"
-          ],
-          "total"
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "el",
-    "div",
-    {},
-    [
-      "el",
-      "for",
-      {
-        "each": [
-          "()",
-          [
-            "fn",
-            "0"
-          ],
-          [
-            [
-              "=>",
-              [],
-              [
-                "arr",
-                [
-                  {
-                    "id": "ord-1000",
-                    "customer": {
-                      "name": "Customer 0",
-                      "city": "Montréal"
-                    },
-                    "items": [
-                      "arr",
-                      [
-                        {
-                          "sku": "SKU-0-A",
-                          "qty": 1
-                        },
-                        {
-                          "sku": "SKU-0-B",
-                          "qty": 1
-                        }
-                      ]
-                    ],
-                    "total": 45.23
-                  },
-                  {
-                    "id": "ord-1001",
-                    "customer": {
-                      "name": "Customer 1",
-                      "city": "Toronto"
-                    },
-                    "items": [
-                      "arr",
-                      [
-                        {
-                          "sku": "SKU-1-A",
-                          "qty": 2
-                        },
-                        {
-                          "sku": "SKU-1-B",
-                          "qty": 1
-                        }
-                      ]
-                    ],
-                    "total": 46.23
-                  },
-                  {
-                    "id": "ord-1002",
-                    "customer": {
-                      "name": "Customer 2",
-                      "city": "Montréal"
-                    },
-                    "items": [
-                      "arr",
-                      [
-                        {
-                          "sku": "SKU-2-A",
-                          "qty": 3
-                        },
-                        {
-                          "sku": "SKU-2-B",
-                          "qty": 1
-                        }
-                      ]
-                    ],
-                    "total": 47.23
-                  },
-                  {
-                    "id": "ord-1003",
-                    "customer": {
-                      "name": "Customer 3",
-                      "city": "Toronto"
-                    },
-                    "items": [
-                      "arr",
-                      [
-                        {
-                          "sku": "SKU-3-A",
-                          "qty": 1
-                        },
-                        {
-                          "sku": "SKU-3-B",
-                          "qty": 1
-                        }
-                      ]
-                    ],
-                    "total": 48.23
-                  },
-                  {
-                    "id": "ord-1004",
-                    "customer": {
-                      "name": "Customer 4",
-                      "city": "Montréal"
-                    },
-                    "items": [
-                      "arr",
-                      [
-                        {
-                          "sku": "SKU-4-A",
-                          "qty": 2
-                        },
-                        {
-                          "sku": "SKU-4-B",
-                          "qty": 1
-                        }
-                      ]
-                    ],
-                    "total": 49.23
-                  }
-                ]
-              ]
-            ]
-          ]
-        ]
-      },
-      [
-        "()",
-        [
-          "fn",
-          "1"
-        ],
-        [
-          [
-            "=>",
-            [
-              [
-                "param",
-                "order"
-              ]
+            total: 46.23,
+          },
+          {
+            id: "ord-1002",
+            customer: { name: "Customer 2", city: "Montréal" },
+            items: [
+              { sku: "SKU-2-A", qty: 3 },
+              { sku: "SKU-2-B", qty: 1 },
             ],
+            total: 47.23,
+          },
+          {
+            id: "ord-1003",
+            customer: { name: "Customer 3", city: "Toronto" },
+            items: [
+              { sku: "SKU-3-A", qty: 1 },
+              { sku: "SKU-3-B", qty: 1 },
+            ],
+            total: 48.23,
+          },
+          {
+            id: "ord-1004",
+            customer: { name: "Customer 4", city: "Montréal" },
+            items: [
+              { sku: "SKU-4-A", qty: 2 },
+              { sku: "SKU-4-B", qty: 1 },
+            ],
+            total: 49.23,
+          },
+        ]),
+      f2((order) =>
+        element("div", [], () => [
+          element(
+            "img",
             [
-              "el",
-              "div",
-              {},
-              [
-                "arr",
-                [
-                  [
-                    "el",
-                    "img",
-                    {
-                      "src": [
-                        "()",
-                        [
-                          "fn",
-                          "2"
-                        ],
-                        [
-                          [
-                            "id",
-                            "order"
-                          ]
-                        ]
-                      ],
-                      "alt": ""
-                    },
-                    null
-                  ],
-                  [
-                    "el",
-                    "span",
-                    {},
-                    [
-                      "()",
-                      [
-                        "fn",
-                        "3"
-                      ],
-                      [
-                        [
-                          "id",
-                          "order"
-                        ]
-                      ]
-                    ]
-                  ],
-                  [
-                    "el",
-                    "span",
-                    {},
-                    [
-                      "()",
-                      [
-                        "fn",
-                        "4"
-                      ],
-                      [
-                        [
-                          "id",
-                          "order"
-                        ]
-                      ]
-                    ]
-                  ],
-                  [
-                    "el",
-                    "for",
-                    {
-                      "each": [
-                        "()",
-                        [
-                          "fn",
-                          "5"
-                        ],
-                        [
-                          [
-                            "id",
-                            "order"
-                          ]
-                        ]
-                      ]
-                    },
-                    [
-                      "()",
-                      [
-                        "fn",
-                        "6"
-                      ],
-                      [
-                        [
-                          "=>",
-                          [
-                            [
-                              "param",
-                              "item"
-                            ]
-                          ],
-                          [
-                            "el",
-                            "span",
-                            {},
-                            [
-                              "()",
-                              [
-                                "fn",
-                                "7"
-                              ],
-                              [
-                                [
-                                  "id",
-                                  "item"
-                                ]
-                              ]
-                            ]
-                          ]
-                        ]
-                      ]
-                    ]
-                  ],
-                  [
-                    "el",
-                    "span",
-                    {},
-                    [
-                      "()",
-                      [
-                        "fn",
-                        "8"
-                      ],
-                      [
-                        [
-                          "id",
-                          "order"
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  ]
-}
+              ["src", () => f3(order), false],
+              ["alt", () => "", true],
+            ],
+            null,
+          ),
+          element("span", [], () => () => f4(order)),
+          element("span", [], () => () => f5(order)),
+          list(
+            () => f6(order),
+            f7((item) => element("span", [], () => () => f8(item))),
+          ),
+          element("span", [], () => () => f9(order)),
+        ]),
+      ),
+    ),
+  );
+};

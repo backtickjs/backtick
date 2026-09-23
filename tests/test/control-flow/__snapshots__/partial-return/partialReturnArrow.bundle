@@ -1,84 +1,13 @@
-{
-  "functions": {
-    "0": [
-      "=>",
-      [],
-      [
-        "{}",
-        [
-          [
-            "const",
-            "pick",
-            [
-              "=>",
-              [
-                [
-                  "param",
-                  "b"
-                ]
-              ],
-              [
-                "{}",
-                [
-                  [
-                    "if",
-                    [
-                      "id",
-                      "b"
-                    ],
-                    [
-                      "{}",
-                      [
-                        [
-                          "return",
-                          "taken"
-                        ]
-                      ]
-                    ],
-                    null
-                  ]
-                ]
-              ]
-            ]
-          ],
-          [
-            "return",
-            [
-              "arr",
-              [
-                [
-                  "()",
-                  [
-                    "id",
-                    "pick"
-                  ],
-                  [
-                    true
-                  ]
-                ],
-                [
-                  "()",
-                  [
-                    "id",
-                    "pick"
-                  ],
-                  [
-                    false
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  },
-  "root": [
-    "()",
-    [
-      "fn",
-      "0"
-    ],
-    []
-  ]
-}
+export default ($d) => {
+  const f1 = () => {
+    const pick = (b) => {
+      if (b) {
+        {
+          return "taken";
+        }
+      }
+    };
+    return [pick(true), pick(false)];
+  };
+  return f1();
+};
