@@ -50,7 +50,6 @@ export function rewriteScript(
     errors: new Map(),
     mappings: new Map(),
     codeInformation: new Map(),
-    captures: new Set(captures),
   };
 
   const rewritten = rewriteNode(ts, state, scriptNode);

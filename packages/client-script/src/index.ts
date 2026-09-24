@@ -24,7 +24,6 @@ export type { Splice } from "./Splice.js";
 export { isComponentTag } from "./isComponentTag.js";
 export { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 export { jsxText } from "./jsxText.js";
-export type { BinaryOperator } from "./BinaryOperator.js";
 export { version } from "./version.js";
 
 // The tag itself, and how a script reads what it is handed.

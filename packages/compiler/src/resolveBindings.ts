@@ -462,7 +462,11 @@ export function resolveBindings(
       ts.isPostfixUnaryExpression(node)
     ) {
       walkExpression(script, node.operand, scopes);
-    } else if (ts.isTypeOfExpression(node)) {
+    } else if (
+      ts.isTypeOfExpression(node) ||
+      ts.isVoidExpression(node) ||
+      ts.isDeleteExpression(node)
+    ) {
       walkExpression(script, node.expression, scopes);
     } else if (ts.isBinaryExpression(node)) {
       // A bare identifier on either side is a reference, read (`a + b`) or

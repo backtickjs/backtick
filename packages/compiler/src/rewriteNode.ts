@@ -1,11 +1,9 @@
 import type ts from "typescript";
 import type * as ES from "estree";
 import type * as JSX from "estree-jsx";
-import { isCompoundAssignment, isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { call, varDeclList } from "./nodeFactory.js";
 import {
-  type BinaryOperator,
   isComponentTag,
   isFragmentTag,
   jsxText,
@@ -86,9 +84,6 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
-  // the binding keys this script captures from enclosing scripts — not
-  // assignable: a nested script captures the value, not the variable
-  captures?: Set<string>;
 }
 
 // Built here because a property access and a method call reach the same read
@@ -1468,9 +1463,6 @@ function rewriteNodeImpl(
   if (isStep(ts, node)) {
     const operator =
       node.operator === ts.SyntaxKind.PlusPlusToken ? "++" : "--";
-    if (!assignable(ts, state, node.operand)) {
-      return unsupported();
-    }
     const postfix = ts.isPostfixUnaryExpression(node);
     const operand = rewriteNode(ts, state, node.operand);
     return {
@@ -1514,14 +1506,6 @@ function rewriteNodeImpl(
   }
 
   if (ts.isPrefixUnaryExpression(node)) {
-    const negation = node.operator === ts.SyntaxKind.MinusToken;
-    if (node.operator !== ts.SyntaxKind.ExclamationToken && !negation) {
-      state.errors.set(
-        node,
-        "This operator isn't supported in a `cs` client script.",
-      );
-      return unsupported();
-    }
     const operand = rewriteNode(ts, state, node.operand);
     return {
       virtual: ts.factory.createPrefixUnaryExpression(
@@ -1531,7 +1515,39 @@ function rewriteNodeImpl(
       runtime: {
         type: "UnaryExpression",
         loc: loc(node),
-        operator: negation ? "-" : "!",
+        operator: ts.tokenToString(node.operator) as ES.UnaryOperator,
+        prefix: true,
+        argument: operand.runtime as ES.Expression,
+      },
+    };
+  }
+
+  if (ts.isVoidExpression(node)) {
+    const operand = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createVoidExpression(
+        operand.virtual as ts.Expression,
+      ),
+      runtime: {
+        type: "UnaryExpression",
+        loc: loc(node),
+        operator: "void",
+        prefix: true,
+        argument: operand.runtime as ES.Expression,
+      },
+    };
+  }
+
+  if (ts.isDeleteExpression(node)) {
+    const operand = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createDeleteExpression(
+        operand.virtual as ts.Expression,
+      ),
+      runtime: {
+        type: "UnaryExpression",
+        loc: loc(node),
+        operator: "delete",
         prefix: true,
         argument: operand.runtime as ES.Expression,
       },
@@ -1539,54 +1555,27 @@ function rewriteNodeImpl(
   }
 
   if (ts.isBinaryExpression(node)) {
+    const kind = node.operatorToken.kind;
+    // An assignment is a binary expression, as it is in TypeScript.
+    const assignment =
+      kind >= ts.SyntaxKind.FirstAssignment &&
+      kind <= ts.SyntaxKind.LastAssignment;
     const lhs = rewriteNode(ts, state, node.left);
     const rhs = rewriteNode(ts, state, node.right);
-
-    if (node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
-      // An assignment is a binary expression over `=`, as it is in TypeScript.
-      if (!assignable(ts, state, node.left)) {
-        return unsupported();
-      }
-      return {
-        virtual: ts.factory.createBinaryExpression(
-          lhs.virtual as ts.Expression,
-          ts.SyntaxKind.EqualsToken,
-          rhs.virtual as ts.Expression,
-        ),
-        runtime: {
-          type: "AssignmentExpression",
-          loc: loc(node),
-          operator: "=",
-          left: lhs.runtime as ES.Identifier,
-          right: rhs.runtime as ES.Expression,
-        },
-      };
-    }
-
-    const operator = ts.tokenToString(node.operatorToken.kind);
-    if (
-      operator != null &&
-      isSupportedBinop(operator) &&
-      isCompoundAssignment(operator) &&
-      !assignable(ts, state, node.left)
-    ) {
-      return unsupported();
-    }
-    if (operator != null && isSupportedBinop(operator)) {
-      return {
-        virtual: ts.factory.createBinaryExpression(
-          lhs.virtual as ts.Expression,
-          node.operatorToken.kind,
-          rhs.virtual as ts.Expression,
-        ),
-        runtime: binary(loc(node), operator, lhs.runtime, rhs.runtime),
-      };
-    }
-    state.errors.set(
-      node,
-      "This operator isn't supported in a `cs` client script.",
-    );
-    return unsupported();
+    return {
+      virtual: ts.factory.createBinaryExpression(
+        lhs.virtual as ts.Expression,
+        kind,
+        rhs.virtual as ts.Expression,
+      ),
+      runtime: binary(
+        loc(node),
+        ts.tokenToString(kind)!,
+        assignment,
+        lhs.runtime as ES.Expression,
+        rhs.runtime as ES.Expression,
+      ),
+    };
   }
 
   if (node.kind === ts.SyntaxKind.NullKeyword) {
@@ -1631,35 +1620,6 @@ function rewriteNodeImpl(
   return unsupported();
 }
 
-// Whether an assignment may write here, reporting why not where it may not.
-// Only a variable can be assigned to: a member and an element are both reads
-// here, since an object and an array are values. A script's own variables are
-// assignable anywhere within it, but a captured one isn't: the write would
-// mutate the nested script's copy and silently not propagate. An unresolved
-// target keeps the resolver's own "Cannot find name".
-function assignable(
-  ts: typeof import("typescript"),
-  state: RewriteState,
-  left: ts.Expression,
-): left is ts.Identifier {
-  if (!ts.isIdentifier(left)) {
-    state.errors.set(
-      left,
-      "Only a variable can be assigned to in a `cs` client script.",
-    );
-    return false;
-  }
-  const target = state.bindings.get(left);
-  if (target != null && state.captures?.has(target)) {
-    state.errors.set(
-      left,
-      "Can't assign to a variable captured from an enclosing script: " +
-        "a nested script captures the value, not the variable.",
-    );
-  }
-  return true;
-}
-
 // `++` or `--`, before a variable or after it.
 function isStep(
   ts: typeof import("typescript"),
@@ -1682,44 +1642,37 @@ function destructuring(state: RewriteState, name: ts.BindingName): void {
 }
 
 // ESTree splits the operators by what they do: an assignment, a logical
-// operator, or a binary one.
+// operator, a sequence, or a binary one.
 function binary(
   loc: ES.SourceLocation,
-  operator: BinaryOperator,
-  left: ES.Node,
-  right: ES.Node,
+  operator: string,
+  assignment: boolean,
+  left: ES.Expression,
+  right: ES.Expression,
 ): ES.Expression {
+  if (assignment) {
+    return {
+      type: "AssignmentExpression",
+      loc,
+      operator: operator as ES.AssignmentOperator,
+      left: left as ES.Pattern,
+      right,
+    };
+  }
   switch (operator) {
-    case "=":
-    case "+=":
-    case "-=":
-    case "*=":
-    case "/=":
-    case "%=":
-      return {
-        type: "AssignmentExpression",
-        loc,
-        operator,
-        left: left as ES.Identifier,
-        right: right as ES.Expression,
-      };
     case "&&":
     case "||":
     case "??":
-      return {
-        type: "LogicalExpression",
-        loc,
-        operator,
-        left: left as ES.Expression,
-        right: right as ES.Expression,
-      };
+      return { type: "LogicalExpression", loc, operator, left, right };
+    case ",":
+      return { type: "SequenceExpression", loc, expressions: [left, right] };
     default:
       return {
         type: "BinaryExpression",
         loc,
-        operator,
-        left: left as ES.Expression,
-        right: right as ES.Expression,
+        operator: operator as ES.BinaryOperator,
+        left,
+        right,
       };
   }
 }

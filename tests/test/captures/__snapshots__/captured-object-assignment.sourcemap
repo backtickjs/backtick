@@ -1,0 +1,42 @@
+cs.lift((() => {\n                    → cs`{\n      
+const                                 → const 
+__cs_counter                          → counter
+ =                                    →  = 
+{                                     → { 
+count                                 → count
+:                                     → : 
+0                                     → 0
+ }                                    →  }
+;                                     → ;
+\n                                    → \n      
+const                                 → const 
+__cs_bump                             → bump
+ =                                    →  = 
+(cs.splice(                           → ${ [-semantic]
+cs.lift(                              → cs`
+() => {\n                             → () => {\n        
+__cs_counter                          → counter
+.                                     → .
+count                                 → count
+ +=                                   →  += 
+1                                     → 1
+;                                     → ;
+\n}                                   → \n      }
+)                                     → `
+) satisfies typeof cs.ClientUnknown)  → } [-semantic]
+;                                     → ;
+\n                                    → \n      
+__cs_bump                             → bump
+()                                    → ()
+;                                     → ;
+\n                                    → \n      
+__cs_bump                             → bump
+()                                    → ()
+;                                     → ;
+\n                                    → \n      
+return                                → return 
+__cs_counter                          → counter
+.                                     → .
+count                                 → count
+;                                     → ;
+\n})())                               → \n    }`

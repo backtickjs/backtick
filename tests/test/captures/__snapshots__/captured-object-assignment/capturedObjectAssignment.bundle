@@ -1,0 +1,15 @@
+(($d) => {
+  const f1 = ($0) => {
+    const counter = {
+      count: 0,
+    };
+    const bump = $0(counter);
+    bump();
+    bump();
+    return counter.count;
+  };
+  const f2 = ($0) => () => {
+    $0.count += 1;
+  };
+  return f1(f2);
+})([]);

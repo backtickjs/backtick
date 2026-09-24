@@ -1,0 +1,8 @@
+(($d) => {
+  const f1 = () => {
+    let n = 0;
+    const last = (n++, n + 10);
+    return [n, last];
+  };
+  return f1();
+})([]);

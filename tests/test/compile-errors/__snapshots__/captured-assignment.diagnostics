@@ -1,1 +1,0 @@
-11:5-11:10 error TS0: Can't assign to a variable captured from an enclosing script: a nested script captures the value, not the variable.
