@@ -4,7 +4,7 @@
       children: [
         () =>
           jsx($2(), {
-            title: () => "host",
+            title: "host",
           }),
         () => $0(),
         () => $1(),
@@ -13,14 +13,10 @@
   const f2 = ($0, $1) => {
     const Card = (props) =>
       jsx("i", {
-        get children() {
-          return $0() + props.n;
-        },
+        children: () => $0() + props.n,
       });
     return jsx("p", {
-      get children() {
-        return $1(Card);
-      },
+      children: () => $1(Card),
     });
   };
   const f3 = () => "a";
@@ -34,9 +30,7 @@
     () => f2(f5, f4),
     () => ($0) =>
       jsx("h2", {
-        get children() {
-          return $0.title();
-        },
+        children: () => $0.title,
       }),
   );
 })([]);

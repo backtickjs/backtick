@@ -4,24 +4,20 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          onclick: () => selected.set(1),
+          onclick: fixed(() => selected.set(1)),
           children: "select",
         }),
         jsx("div", {
-          get children() {
-            return jsx($1(), {
-              each: () => [0, 1, 2],
-              children: () => (id) =>
+          children: () =>
+            jsx($1(), {
+              each: [0, 1, 2],
+              children: fixed((id) =>
                 jsx("a", {
-                  get href() {
-                    return selected.get() === id ? "#open" : "#closed";
-                  },
-                  get children() {
-                    return "row " + id;
-                  },
+                  href: () => (selected.get() === id ? "#open" : "#closed"),
+                  children: () => "row " + id,
                 }),
-            });
-          },
+              ),
+            }),
         }),
       ],
     });
@@ -32,12 +28,8 @@
         () => state,
         () => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
       ),
     {},

@@ -4,17 +4,17 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          onclick: () => selected.set(1),
+          onclick: fixed(() => selected.set(1)),
           children: "select",
         }),
         () =>
           jsx($1(), {
-            id: () => 0,
+            id: 0,
             selected: () => selected,
           }),
         () =>
           jsx($1(), {
-            id: () => 1,
+            id: 1,
             selected: () => selected,
           }),
       ],
@@ -31,23 +31,21 @@
           jsx("div", {
             children: [
               jsx("span", {
-                get style() {
-                  return f2(
-                    () => $0.selected(),
-                    () => $0.id(),
-                  );
-                },
-                get children() {
-                  return f3(
-                    () => $0.id(),
-                    () => $0.selected(),
-                  );
-                },
+                style: () =>
+                  f2(
+                    () => $0.selected,
+                    () => $0.id,
+                  ),
+                children: () =>
+                  f3(
+                    () => $0.id,
+                    () => $0.selected,
+                  ),
               }),
               () =>
                 f4(
-                  () => $0.selected(),
-                  () => $0.id(),
+                  () => $0.selected,
+                  () => $0.id,
                   () =>
                     jsx("span", {
                       children: "marker",

@@ -54,22 +54,35 @@ export function createJsx(
         : drawElement(renderer, type as string, props);
 }
 
-// Whether a prop can change: a bundle writes one that can as a getter.
-function isGetter(props: Props, name: string): boolean {
-  return Object.getOwnPropertyDescriptor(props, name)?.get !== undefined;
+// The functions a bundle hands over as values, marked by `fixed`. Known by
+// identity, so a copy of one is still one.
+const fixedFunctions = new WeakSet<object>();
+
+/** The client's `fixed`: marks a function that is itself the value. */
+export function fixed<T extends object>(value: T): T {
+  fixedFunctions.add(value);
+  return value;
 }
 
-// What `insert` takes for children that arrived as a value: a child that can
-// change arrives as a function of nothing, and is kept as the one drawing it
-// answered, so a component among them is built once rather than again each
-// time `insert` reads the array.
+// A value that can change, as a bundle writes one: any function it did not mark
+// `fixed`, which reads the value when called.
+function isThunk(value: unknown): value is () => ClientValue {
+  return typeof value === "function" && !fixedFunctions.has(value);
+}
+
+// What a value holds now.
+function valueOf(value: ClientValue): ClientValue {
+  return isThunk(value) ? value() : value;
+}
+
+// What `insert` takes for children: a child that can change is kept as the one
+// drawing it answered, so a component among them is built once rather than
+// again each time `insert` reads the array.
 function childrenOf(value: ClientValue): unknown {
   if (Array.isArray(value)) {
     return value.map(childrenOf);
   }
-  return typeof value === "function" && value.length === 0
-    ? createMemo(() => childrenOf((value as () => ClientValue)()))
-    : value;
+  return isThunk(value) ? createMemo(() => childrenOf(value())) : value;
 }
 
 /** An element, built as a node of the renderer's, with its props and children. */
@@ -92,36 +105,38 @@ function drawElement(
     if (prop === "ref" || prop === "children") {
       continue;
     }
+    const read = props[prop];
     // It cannot change, so set it and be done: no computation to make, and
     // none held for as long as the element is.
-    if (!isGetter(props, prop)) {
-      renderer.setProp(node, prop, props[prop]);
+    if (!isThunk(read)) {
+      renderer.setProp(node, prop, read);
       continue;
     }
     // One effect per prop, so a write moves that one prop of that one node.
-    // It re-runs only when something the getter read has changed.
+    // It re-runs only when something the value read has changed.
     //
     // Re-running is not the same as changing: a state a whole list reads is
     // what decides one row's class, and every other row recomputes the class
     // it already has. The host hears about a prop when the prop moved, so
     // that is a comparison here rather than a write per row per selection.
     renderer.effect((previous) => {
-      const value = props[prop];
+      const value = read();
       return value === previous
         ? previous
         : renderer.setProp(node, prop, value, previous);
     });
   }
-  // Read here, inside the namespace they are drawn in. A child that can
-  // change runs this memo again; what can change in an array of them is a
-  // function, memoized on its own, so its siblings are not built again.
+  // Inserted inside the namespace they are drawn in. Children that can change
+  // alone are watched by `insert`; in an array, each that can is memoized on
+  // its own, so its siblings are not built again.
   if ("children" in props) {
+    const children = props["children"];
     const insert = () =>
       renderer.insert(
         node,
-        isGetter(props, "children")
-          ? () => childrenOf(props["children"])
-          : childrenOf(props["children"]),
+        isThunk(children)
+          ? () => childrenOf(children())
+          : childrenOf(children),
       );
     if (innerNamespace === outerNamespace) {
       insert();
@@ -130,7 +145,7 @@ function drawElement(
     }
   }
   // Untracked, so what the callback reads never calls it again.
-  const ref = props["ref"];
+  const ref = untrack(() => valueOf(props["ref"]!));
   if (typeof ref === "function") {
     const handOver = ref as (element: ClientValue) => void;
     untrack(() => handOver(node as ClientValue));
@@ -148,10 +163,13 @@ function drawElement(
  */
 function drawList(props: Props): ClientValue {
   const members = createMemo(() => {
-    const value = props["each"];
+    const value = valueOf(props["each"]!);
     return Array.isArray(value) ? value : [];
   });
-  const draw = props["children"] as (...args: ClientValue[]) => ClientValue;
+  // Read once: what draws a member is a function, and the list keeps it.
+  const draw = untrack(() => valueOf(props["children"]!)) as (
+    ...args: ClientValue[]
+  ) => ClientValue;
   // The index is `mapArray`'s own signal, handed over as storage rather than
   // as the number it holds: whoever reads it is reading where the member sits
   // now.
@@ -161,12 +179,22 @@ function drawList(props: Props): ClientValue {
 }
 
 /**
- * A component: called once, untracked, with its props, whose getters are read
- * again on every access — what keeps a prop live for a function the bundler
- * never saw.
+ * A component: called once, untracked, with its props. A prop that can change
+ * is a getter, read again on every access — what keeps a prop live for a
+ * function the bundler never saw.
  */
 function callComponent(callee: ClientValue, props: Props): ClientValue {
-  return untrack(() => (callee as (props: Props) => ClientValue)(props));
+  const record: { [name: string]: ClientValue } = {};
+  for (const [name, value] of Object.entries(props)) {
+    Object.defineProperty(
+      record,
+      name,
+      isThunk(value)
+        ? { get: value, enumerable: true }
+        : { value, enumerable: true },
+    );
+  }
+  return untrack(() => (callee as (props: Props) => ClientValue)(record));
 }
 
 /** What `render` inserts for a bundle's root: see `childrenOf`. */

@@ -4,16 +4,14 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          get children() {
-            return "asked " + asked.get();
-          },
+          children: () => "asked " + asked.get(),
         }),
         () =>
           jsx($2(), {
-            ask: () => () => {
+            ask: fixed(() => {
               asked.set(asked.get() + 1);
               return asked.get() > 4 ? null : $1();
-            },
+            }),
           }),
       ],
     });
@@ -31,7 +29,7 @@
       f2(
         () => state,
         () => window,
-        () => $0.ask(),
+        () => $0.ask,
       ),
   );
 })([]);

@@ -6,9 +6,7 @@
       });
     return twice((p) =>
       jsx("li", {
-        get children() {
-          return "row " + p.n;
-        },
+        children: () => "row " + p.n,
       }),
     );
   };

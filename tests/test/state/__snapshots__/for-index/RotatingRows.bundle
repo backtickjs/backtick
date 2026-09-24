@@ -8,23 +8,19 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          get onclick() {
-            return rotate;
-          },
+          onclick: () => rotate,
           children: "rotate",
         }),
         jsx("div", {
-          get children() {
-            return jsx($1(), {
+          children: () =>
+            jsx($1(), {
               each: () => names.get(),
-              children: () => (name, index) =>
+              children: fixed((name, index) =>
                 jsx("span", {
-                  get children() {
-                    return name + " at " + index.get();
-                  },
+                  children: () => name + " at " + index.get(),
                 }),
-            });
-          },
+              ),
+            }),
         }),
       ],
     });
@@ -35,12 +31,8 @@
         () => state,
         () => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
       ),
     {},

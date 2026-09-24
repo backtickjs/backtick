@@ -22,7 +22,7 @@ import { arrow, call, identifier, member, stringLiteral } from "../estree.js";
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
 // What the bundle itself names, beside the builtins it reads.
-const RUNTIME = ["$d", "globalThis", "jsx"];
+const RUNTIME = ["$d", "fixed", "globalThis", "jsx"];
 
 // Names a bundle may not bind: it is strict code, and `await` is reserved in a
 // module.

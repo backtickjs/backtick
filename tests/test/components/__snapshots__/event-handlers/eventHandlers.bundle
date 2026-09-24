@@ -2,23 +2,22 @@
   const f1 = ($0) => {
     const said = $0()("");
     return jsx("form", {
-      onsubmit: (event) => {
+      onsubmit: fixed((event) => {
         event.preventDefault();
         said.set(event.type + " " + event.cancelable);
-      },
+      }),
       children: [
         jsx("textarea", {
-          oninput: (event) => said.set(event.currentTarget.value),
+          oninput: fixed((event) => said.set(event.currentTarget.value)),
         }),
         jsx("input", {
-          oninput: (event) => said.set(event.currentTarget.value),
+          oninput: fixed((event) => said.set(event.currentTarget.value)),
         }),
         jsx("button", {
-          onclick: (event) =>
+          onclick: fixed((event) =>
             said.set(event.clientX + " " + event.currentTarget.tagName),
-          get children() {
-            return said.get();
-          },
+          ),
+          children: () => said.get(),
         }),
       ],
     });

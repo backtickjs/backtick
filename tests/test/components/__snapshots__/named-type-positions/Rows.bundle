@@ -10,25 +10,24 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          onclick: () =>
+          onclick: fixed(() =>
             add({
               id: 1,
               label: "one",
             }),
+          ),
           children: "add",
         }),
         jsx("div", {
-          get children() {
-            return jsx($1(), {
+          children: () =>
+            jsx($1(), {
               each: () => rows.get(),
-              children: () => (row) =>
+              children: fixed((row) =>
                 jsx("span", {
-                  get children() {
-                    return label(row);
-                  },
+                  children: () => label(row),
                 }),
-            });
-          },
+              ),
+            }),
         }),
       ],
     });
@@ -39,12 +38,8 @@
         () => state,
         () => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
       ),
     {},

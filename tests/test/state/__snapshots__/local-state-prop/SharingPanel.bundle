@@ -24,12 +24,8 @@
         () => state,
         () => ($0) =>
           jsx("span", {
-            get style() {
-              return f2(() => $0.size());
-            },
-            get onclick() {
-              return f3(() => $0.size());
-            },
+            style: () => f2(() => $0.size),
+            onclick: () => f3(() => $0.size),
             children: "press",
           }),
       ),

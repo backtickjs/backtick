@@ -10,12 +10,11 @@
             () =>
               jsx($1(), {
                 each: () => xs.get(),
-                children: () => (x) =>
+                children: fixed((x) =>
                   jsx("title", {
-                    get children() {
-                      return "dot " + x;
-                    },
+                    children: () => "dot " + x,
                   }),
+                ),
               }),
             () =>
               shown.get()
@@ -29,11 +28,11 @@
           children: "after",
         }),
         jsx("button", {
-          onclick: () => xs.set([10, 20]),
+          onclick: fixed(() => xs.set([10, 20])),
           children: "add",
         }),
         jsx("button", {
-          onclick: () => shown.set(true),
+          onclick: fixed(() => shown.set(true)),
           children: "show",
         }),
       ],
@@ -43,12 +42,8 @@
     () => state,
     () => ($0) =>
       jsx("for", {
-        get each() {
-          return $0.each();
-        },
-        get children() {
-          return $0.children();
-        },
+        each: () => $0.each,
+        children: () => $0.children,
       }),
   );
 })([]);

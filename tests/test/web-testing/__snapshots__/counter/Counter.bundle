@@ -4,13 +4,11 @@
     return jsx("div", {
       children: [
         jsx("button", {
-          onclick: () => count.set(count.get() + 1),
+          onclick: fixed(() => count.set(count.get() + 1)),
           children: "Add",
         }),
         jsx("p", {
-          get children() {
-            return "Count: " + count.get();
-          },
+          children: () => "Count: " + count.get(),
         }),
       ],
     });

@@ -2,7 +2,7 @@ import type { Signal, SignalOptions, State } from "@backtickjs/platform-sdk";
 import type { Builtins } from "@backtickjs/web-sdk";
 import { createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import type { Renderer } from "solid-js/universal";
-import { createJsx } from "./draw.js";
+import { createJsx, fixed } from "./draw.js";
 
 /** What a client is wired to. */
 export interface ClientOptions {
@@ -24,8 +24,9 @@ export interface ClientOptions {
 
 /**
  * Defines the web client's globals on `global`: the framework's builtins,
- * `jsx`, which is what a bundle draws with, and the app's own. Everything else a bundle
- * names, `window` and ECMAScript's among it, is the realm's.
+ * `jsx`, which is what a bundle draws with, `fixed`, which marks a function it
+ * hands over as a value, and the app's own. Everything else a bundle names,
+ * `window` and ECMAScript's among it, is the realm's.
  */
 export function defineGlobals(
   renderer: Renderer<object>,
@@ -56,6 +57,7 @@ export function defineGlobals(
     onCleanup: onCleanup satisfies Builtins["onCleanup"],
 
     jsx: createJsx(renderer),
+    fixed,
   };
   Object.assign(global, web, globals);
 }

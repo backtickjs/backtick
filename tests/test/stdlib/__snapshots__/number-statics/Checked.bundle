@@ -12,21 +12,18 @@
     const fractional = Number.isInteger(2.5);
     const written = Number.isFinite("2");
     return jsx("span", {
-      get children() {
-        return (
-          whole +
-          " " +
-          fractional +
-          " " +
-          written +
-          " " +
-          positive +
-          " " +
-          largest +
-          " " +
-          safe
-        );
-      },
+      children: () =>
+        whole +
+        " " +
+        fractional +
+        " " +
+        written +
+        " " +
+        positive +
+        " " +
+        largest +
+        " " +
+        safe,
     });
   };
   return jsx(() => f1(), {});

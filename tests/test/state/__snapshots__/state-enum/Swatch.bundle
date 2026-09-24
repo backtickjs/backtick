@@ -2,10 +2,8 @@
   const f1 = ($0, $1, $2, $3) => {
     const held = $0()($1());
     return jsx("span", {
-      onclick: () => held.set($2()),
-      get children() {
-        return $3()(held.get());
-      },
+      onclick: fixed(() => held.set($2())),
+      children: () => $3()(held.get()),
     });
   };
   const f2 = ($0) => (c) => {

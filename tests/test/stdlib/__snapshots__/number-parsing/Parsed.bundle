@@ -4,9 +4,7 @@
     const based = Number.parseInt("ff", 16);
     const fractional = Number.parseFloat("1.5");
     return jsx("span", {
-      get children() {
-        return whole + based + fractional + "";
-      },
+      children: () => whole + based + fractional + "",
     });
   };
   return jsx(() => f1(), {});

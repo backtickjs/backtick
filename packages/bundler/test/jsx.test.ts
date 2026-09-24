@@ -10,7 +10,7 @@ const text = (value: string) => estree.stringLiteral(value);
 
 const element = (
   tag: string,
-  attributes: readonly (readonly [string, ReturnType<typeof text>])[],
+  attributes: Parameters<typeof estree.jsxElement>[2],
   children: ReturnType<typeof estree.jsxElement> | null,
 ): string =>
   generate(estree.jsxElement(null, tag, attributes, children)).replace(
@@ -36,19 +36,33 @@ test("one literal child stands in the children prop itself", () => {
   );
 });
 
-test("several children are an array, read when the client asks", () => {
+test("several children are an array", () => {
   assert.equal(
     element("tr", [], {
       type: "ArrayExpression",
-      elements: [text("one"), text("two")],
+      elements: [text("one"), estree.identifier("two")],
     }),
-    'jsx("tr", { get children() { return ["one", "two"]; } })',
+    'jsx("tr", { children: ["one", () => two] })',
   );
 });
 
-test("an element holds an element, read when the client asks", () => {
+test("a prop that can change is a function that reads it", () => {
+  assert.equal(
+    element("td", [["class", estree.identifier("name")]], null),
+    'jsx("td", { class: () => name })',
+  );
+});
+
+test("a function that is the value is marked fixed", () => {
+  assert.equal(
+    element("a", [["onclick", estree.thunk(text("go"))]], null),
+    'jsx("a", { onclick: fixed(() => "go") })',
+  );
+});
+
+test("an element holds an element as it is", () => {
   assert.equal(
     element("tr", [], estree.jsxElement(null, "td", [], null)),
-    'jsx("tr", { get children() { return jsx("td", {}); } })',
+    'jsx("tr", { children: jsx("td", {}) })',
   );
 });

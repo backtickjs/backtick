@@ -4,16 +4,14 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          get children() {
-            return "asked " + asked.get();
-          },
+          children: () => "asked " + asked.get(),
         }),
         () =>
           jsx($1(), {
-            more: () => () => {
+            more: fixed(() => {
               asked.set(asked.get() + 1);
               return asked.get() < 5;
-            },
+            }),
           }),
       ],
     });
@@ -27,12 +25,11 @@
     }, 0);
     return jsx($4(), {
       each: () => items.get(),
-      children: () => (item) =>
+      children: fixed((item) =>
         jsx("em", {
-          get children() {
-            return item;
-          },
+          children: () => item,
         }),
+      ),
     });
   };
   return f1(
@@ -41,16 +38,12 @@
       f2(
         () => state,
         () => window,
-        () => $0.more(),
+        () => $0.more,
         () => ["one", "two"],
         () => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
       ),
   );

@@ -4,19 +4,16 @@
     return jsx("div", {
       children: [
         jsx("span", {
-          get children() {
-            return "builds " + builds.get();
-          },
+          children: () => "builds " + builds.get(),
         }),
         jsx("section", {
-          get children() {
-            return jsx($1(), {
-              again: () => () => {
+          children: () =>
+            jsx($1(), {
+              again: fixed(() => {
                 builds.set(builds.get() + 1);
                 return builds.get() < 5;
-              },
-            });
-          },
+              }),
+            }),
         }),
       ],
     });
@@ -43,7 +40,7 @@
       f2(
         () => state,
         () => window,
-        () => $0.again(),
+        () => $0.again,
       ),
   );
 })([]);

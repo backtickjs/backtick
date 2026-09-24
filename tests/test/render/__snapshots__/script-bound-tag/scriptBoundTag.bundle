@@ -6,12 +6,10 @@
       children: [
         () =>
           jsx(Badge, {
-            get count() {
-              return count.get();
-            },
+            count: () => count.get(),
           }),
         jsx("button", {
-          onclick: () => count.set(count.get() + 1),
+          onclick: fixed(() => count.set(count.get() + 1)),
           children: "more",
         }),
       ],
@@ -20,6 +18,6 @@
   return f1(
     () => state,
     () =>
-      '($d => {\n  const f1 = () => props => jsx("b", {\n    get children() {\n      return "count " + props.count;\n    }\n  });\n  return f1();\n})([])',
+      '($d => {\n  const f1 = () => props => jsx("b", {\n    children: () => "count " + props.count\n  });\n  return f1();\n})([])',
   );
 })([]);

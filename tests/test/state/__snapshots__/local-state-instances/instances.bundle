@@ -2,12 +2,10 @@
   const f1 = ($0) => {
     const size = $0()(16);
     return jsx("span", {
-      get style() {
-        return "font-size: " + size.get() + "px";
-      },
-      onclick: () => {
+      style: () => "font-size: " + size.get() + "px",
+      onclick: fixed(() => {
         size.set(size.get() + 1);
-      },
+      }),
       children: "press",
     });
   };

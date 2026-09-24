@@ -2,10 +2,8 @@
   const f1 = ($0) => {
     const greet = $0()((name) => "hi " + name);
     return jsx("span", {
-      onclick: () => greet.set((name) => "bye " + name),
-      get children() {
-        return greet.get()("ada");
-      },
+      onclick: fixed(() => greet.set((name) => "bye " + name)),
+      children: () => greet.get()("ada"),
     });
   };
   return jsx(() => f1(() => state), {});

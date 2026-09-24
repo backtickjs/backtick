@@ -9,8 +9,6 @@
     }),
   ];
   return jsx("div", {
-    get children() {
-      return f1(f2);
-    },
+    children: () => f1(f2),
   });
 })([]);

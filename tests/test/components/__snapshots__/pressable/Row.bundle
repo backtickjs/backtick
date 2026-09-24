@@ -4,18 +4,14 @@
     return jsx("button", {
       id: "row",
       style: "display: flex; gap: 8px",
-      onclick: () => count.set(count.get() + 1),
+      onclick: fixed(() => count.set(count.get() + 1)),
       children: [
         jsx("span", {
           style: "font-weight: 700",
-          get children() {
-            return count.get() > 0 ? "☑" : "☐";
-          },
+          children: () => (count.get() > 0 ? "☑" : "☐"),
         }),
         jsx("span", {
-          get children() {
-            return "pressed " + count.get() + " times";
-          },
+          children: () => "pressed " + count.get() + " times",
         }),
       ],
     });

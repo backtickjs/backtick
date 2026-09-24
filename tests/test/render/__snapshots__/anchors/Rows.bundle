@@ -6,20 +6,17 @@
     };
     return [
       jsx("span", {
-        get onclick() {
-          return clear;
-        },
+        onclick: () => clear,
         children: "clear",
       }),
       () =>
         jsx($1(), {
           each: () => ids.get(),
-          children: () => (id) =>
+          children: fixed((id) =>
             jsx("span", {
-              get children() {
-                return "row " + id;
-              },
+              children: () => "row " + id,
             }),
+          ),
         }),
     ];
   };
@@ -29,12 +26,8 @@
         () => state,
         () => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
       ),
     {},

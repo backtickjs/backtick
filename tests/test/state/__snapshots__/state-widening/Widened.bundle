@@ -4,14 +4,12 @@
     const tone = $0()($1());
     const step = $0()(() => 0);
     return jsx("span", {
-      onclick: () => {
+      onclick: fixed(() => {
         flag.set(false);
         tone.set($2());
         step.set(() => 1);
-      },
-      get children() {
-        return flag.get() + " " + tone.get() + " " + step.get()();
-      },
+      }),
+      children: () => flag.get() + " " + tone.get() + " " + step.get()(),
     });
   };
   return jsx(

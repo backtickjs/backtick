@@ -5,30 +5,20 @@
       const css = "font-size: " + size + "px";
       const press = () => label.set("held");
       return jsx("div", {
-        get style() {
-          return css;
-        },
+        style: () => css,
         children: [
           jsx("span", {
-            get style() {
-              return css;
-            },
-            onclick: () => label.set("pressed"),
-            get children() {
-              return label.get();
-            },
+            style: () => css,
+            onclick: fixed(() => label.set("pressed")),
+            children: () => label.get(),
           }),
           jsx("span", {
             style: "font-size: 8px",
             children: "fixed",
           }),
           jsx("span", {
-            get style() {
-              return css;
-            },
-            get onclick() {
-              return press;
-            },
+            style: () => css,
+            onclick: () => press,
             children: "held",
           }),
         ],
@@ -36,9 +26,7 @@
     };
     return jsx("div", {
       style: "padding: 0",
-      get children() {
-        return row(12);
-      },
+      children: () => row(12),
     });
   };
   return jsx(() => f1(() => state), {});

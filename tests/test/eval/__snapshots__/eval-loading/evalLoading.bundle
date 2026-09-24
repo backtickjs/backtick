@@ -2,13 +2,12 @@
   const f1 = ($0) => {
     const held = $0()(null);
     return jsx("div", {
-      get children() {
-        return held.get() === null
+      children: () =>
+        held.get() === null
           ? jsx("span", {
               children: "loading…",
             })
-          : (0, eval)(held.get());
-      },
+          : (0, eval)(held.get()),
     });
   };
   return f1(() => state);

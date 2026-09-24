@@ -12,7 +12,7 @@
             body: () => $1(count, Badge),
           }),
         jsx("button", {
-          onclick: () => count.set(count.get() + 1),
+          onclick: fixed(() => count.set(count.get() + 1)),
           children: "more",
         }),
       ],
@@ -20,21 +20,15 @@
   };
   const f2 = ($0, $1) =>
     jsx($0, {
-      get n() {
-        return $1.get();
-      },
+      n: () => $1.get(),
       children: jsx("u", {
-        get children() {
-          return "kid " + $1.get();
-        },
+        children: () => "kid " + $1.get(),
       }),
     });
   const f3 = ($0) => {
     const Badge = (p) =>
       jsx("i", {
-        get children() {
-          return "panel " + p.n;
-        },
+        children: () => "panel " + p.n,
       });
     return jsx("section", {
       children: [

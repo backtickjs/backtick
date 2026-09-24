@@ -6,9 +6,7 @@
   const f2 = ($0) => () => $0;
   return f1((x) =>
     jsx("span", {
-      get onclick() {
-        return f2(x);
-      },
+      onclick: () => f2(x),
     }),
   );
 })([]);

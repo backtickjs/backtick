@@ -17,18 +17,16 @@
     return jsx("div", {
       children: jsx("ul", {
         class: "rows",
-        get children() {
-          return jsx($1(), {
+        children: () =>
+          jsx($1(), {
             each: () => held.get(),
-            children: () => (row) =>
+            children: fixed((row) =>
               jsx("li", {
-                onclick: () => row.label.set("pressed"),
-                get children() {
-                  return row.label.get();
-                },
+                onclick: fixed(() => row.label.set("pressed")),
+                children: () => row.label.get(),
               }),
-          });
-        },
+            ),
+          }),
       }),
     });
   };
@@ -38,12 +36,8 @@
         () => state,
         () => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
       ),
     {},

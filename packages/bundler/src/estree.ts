@@ -210,31 +210,30 @@ export function property(
   };
 }
 
-function getter(
-  key: ES.Expression,
-  value: ES.Expression,
-  computed: boolean,
-): ES.Property {
-  return {
-    type: "Property",
-    key,
-    value: {
-      type: "FunctionExpression",
-      params: [],
-      body: {
-        type: "BlockStatement",
-        body: [{ type: "ReturnStatement", argument: value }],
-      },
-    },
-    kind: "get",
-    computed,
-    method: false,
-    shorthand: false,
-  };
-}
+// The calls that never answer anything new: one that builds an element, which
+// is made once, and one that marks a function as a value.
+const fixedCalls = new WeakSet<ES.Node>();
 
-// The calls that build an element, which are made once and never change.
-const elements = new WeakSet<ES.Node>();
+/**
+ * A value as a client reads it. One that cannot change is written as it is. A
+ * function that is itself the value is marked `fixed(fn)`, since any other
+ * function stands for a value that can change: it reads it, and the client
+ * calls it to find out.
+ */
+function marked(value: ES.Expression): ES.Expression {
+  if (!isFixed(value)) {
+    return thunk(value);
+  }
+  if (
+    value.type === "ArrowFunctionExpression" ||
+    value.type === "FunctionExpression"
+  ) {
+    const node = call(identifier("fixed"), [value]);
+    fixedCalls.add(node);
+    return node;
+  }
+  return value;
+}
 
 /**
  * Whether what a position holds can change after it has first been read: a
@@ -264,12 +263,12 @@ export function isFixed(node: ES.Node): boolean {
           isFixed(member.value),
       );
     default:
-      return elements.has(node);
+      return fixedCalls.has(node);
   }
 }
 
-// A child that can change is a function of nothing, so the client decides
-// when to read it.
+// Children, each child marked on its own, so one that changes leaves its
+// siblings alone.
 function child(node: ES.Expression): ES.Expression {
   return node.type === "ArrayExpression"
     ? {
@@ -278,9 +277,7 @@ function child(node: ES.Expression): ES.Expression {
           one === null || one.type === "SpreadElement" ? one : child(one),
         ),
       }
-    : isFixed(node)
-      ? node
-      : thunk(node);
+    : marked(node);
 }
 
 // A prop's key: bare where it can be, a string where it is a plain name, and
@@ -297,10 +294,8 @@ function propKey(
 }
 
 /**
- * The props `jsx` is handed: what cannot change is a property, what can is a
- * getter. `children` is a getter unless it is a literal, so a client reads it
- * where it draws, and in an array of them what can change is a function of
- * nothing.
+ * The props `jsx` is handed, a plain object, each prop marked as a client reads
+ * it (see `marked`). Children are marked child by child.
  */
 function props(
   names: Names | null,
@@ -309,21 +304,14 @@ function props(
 ): ES.ObjectExpression {
   const members = written.map(([name, value]) => {
     const { key, computed } = propKey(names, name);
-    return isFixed(value)
-      ? property(key, value, computed)
-      : getter(key, value, computed);
+    return property(key, marked(value), computed);
   });
   // A `null` child is no children at all.
   if (
     children !== null &&
     !(children.type === "Literal" && children.value === null)
   ) {
-    const key = identifier("children");
-    const drawn =
-      children.type === "ArrayExpression" ? child(children) : children;
-    members.push(
-      isFixed(drawn) ? property(key, drawn) : getter(key, drawn, false),
-    );
+    members.push(property(identifier("children"), child(children)));
   }
   return { type: "ObjectExpression", properties: members };
 }
@@ -342,7 +330,7 @@ export function jsxElement(
     tagName(names, tag),
     props(names, written, children),
   ]);
-  elements.add(node);
+  fixedCalls.add(node);
   return node;
 }
 

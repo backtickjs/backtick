@@ -3,9 +3,7 @@
     const count = $0()(0);
     const Badge = (props) =>
       jsx("b", {
-        get children() {
-          return "n " + props.n;
-        },
+        children: () => "n " + props.n,
       });
     return jsx("div", {
       children: [
@@ -14,7 +12,7 @@
         () => $3(count, Badge),
         () => $4(count, Badge),
         jsx("button", {
-          onclick: () => count.set(count.get() + 1),
+          onclick: fixed(() => count.set(count.get() + 1)),
           children: "more",
         }),
       ],
@@ -22,9 +20,7 @@
   };
   const f2 = ($0, $1) =>
     jsx($0, {
-      get n() {
-        return $1.get();
-      },
+      n: () => $1.get(),
     });
   const f3 = ($0, $1, $2) => {
     const skipped = 10;
@@ -32,25 +28,20 @@
   };
   const f4 = ($0, $1) =>
     jsx($0, {
-      get n() {
-        return $1.get() + 100;
-      },
+      n: () => $1.get() + 100,
     });
   const f5 = ($0, $1) =>
     jsx($0, {
-      get n() {
-        return $1.get() + 1000;
-      },
+      n: () => $1.get() + 1000,
     });
   const f6 = ($0, $1, $2) =>
     jsx($0($1, $2), {
-      each: () => [1, 2],
-      children: () => (m) =>
+      each: [1, 2],
+      children: fixed((m) =>
         jsx($1, {
-          get n() {
-            return m * $2.get();
-          },
+          n: () => m * $2.get(),
         }),
+      ),
     });
   return f1(
     () => state,
@@ -58,20 +49,14 @@
     (count, Badge) => f3(f4, Badge, count),
     (count, Badge) =>
       jsx("section", {
-        get children() {
-          return f5(Badge, count);
-        },
+        children: () => f5(Badge, count),
       }),
     (count, Badge) =>
       f6(
         (Badge, count) => ($0) =>
           jsx("for", {
-            get each() {
-              return $0.each();
-            },
-            get children() {
-              return $0.children();
-            },
+            each: () => $0.each,
+            children: () => $0.children,
           }),
         Badge,
         count,

@@ -2,12 +2,10 @@
   const f1 = ($0) => {
     const c = $0()(10);
     return jsx("button", {
-      onclick: () => {
+      onclick: fixed(() => {
         c.add(5);
-      },
-      get children() {
-        return c.get();
-      },
+      }),
+      children: () => c.get(),
     });
   };
   const f2 = ($0) => (initial) => {

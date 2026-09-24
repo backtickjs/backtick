@@ -1,9 +1,7 @@
 (($d) => {
   const f1 = () => {
     return jsx("span", {
-      get children() {
-        return String.fromCodePoint(72, 105) + String.fromCodePoint();
-      },
+      children: () => String.fromCodePoint(72, 105) + String.fromCodePoint(),
     });
   };
   return jsx(() => f1(), {});

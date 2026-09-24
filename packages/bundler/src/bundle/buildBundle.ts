@@ -147,24 +147,11 @@ export async function buildBundle<T extends ClientUnknown>(
   };
 
   // How a hole is reached. Its name is the path the function read: `$0` is the
-  // parameter itself, and `$0.title` is a field of it.
-  //
-  // A field is *called*, where the parameter is not. What binds a field is a
-  // thunk written at the tag, because a prop has to be re-read whenever what it
-  // names changes, where an argument is evaluated once where it is passed.
+  // parameter itself, and `$0.title` is a field of it, read where the drawing
+  // reads it.
   const holeRead = (name: string): ES.Expression => {
-    const [param, prop, ...path] = name.split(".");
-    if (prop === undefined) {
-      return binding(names, param);
-    }
-    // The parameter is a thunk the tag wrote, so it is called where the drawing
-    // reads it: an argument is evaluated once where it is passed, and a prop has
-    // to be re-read whenever what it names changes. What the call answers with
-    // is an ordinary value, so the whole path off it is ordinary reads.
-    let read: ES.Expression = call(
-      member(binding(names, param), prop, false),
-      [],
-    );
+    const [param, ...path] = name.split(".");
+    let read: ES.Expression = binding(names, param!);
     for (const step of path) {
       read = member(read, step, false);
     }

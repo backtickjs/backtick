@@ -3,14 +3,10 @@
   return jsx("div", {
     children: [
       jsx("span", {
-        get onclick() {
-          return f1(() => 1);
-        },
+        onclick: () => f1(() => 1),
       }),
       jsx("span", {
-        get onclick() {
-          return f1(() => 2);
-        },
+        onclick: () => f1(() => 2),
       }),
     ],
   });

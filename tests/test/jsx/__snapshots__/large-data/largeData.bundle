@@ -10,8 +10,8 @@
   const f9 = ($0) => "$" + $0.total;
   return jsx("div", {
     children: jsx("for", {
-      get each() {
-        return f1(() => [
+      each: () =>
+        f1(() => [
           {
             id: "ord-1000",
             customer: {
@@ -102,51 +102,36 @@
             ],
             total: 49.23,
           },
-        ]);
-      },
-      get children() {
-        return f2((order) =>
+        ]),
+      children: () =>
+        f2((order) =>
           jsx("div", {
             children: [
               jsx("img", {
-                get src() {
-                  return f3(order);
-                },
+                src: () => f3(order),
                 alt: "",
               }),
               jsx("span", {
-                get children() {
-                  return f4(order);
-                },
+                children: () => f4(order),
               }),
               jsx("span", {
-                get children() {
-                  return f5(order);
-                },
+                children: () => f5(order),
               }),
               jsx("for", {
-                get each() {
-                  return f6(order);
-                },
-                get children() {
-                  return f7((item) =>
+                each: () => f6(order),
+                children: () =>
+                  f7((item) =>
                     jsx("span", {
-                      get children() {
-                        return f8(item);
-                      },
+                      children: () => f8(item),
                     }),
-                  );
-                },
+                  ),
               }),
               jsx("span", {
-                get children() {
-                  return f9(order);
-                },
+                children: () => f9(order),
               }),
             ],
           }),
-        );
-      },
+        ),
     }),
   });
 })([]);

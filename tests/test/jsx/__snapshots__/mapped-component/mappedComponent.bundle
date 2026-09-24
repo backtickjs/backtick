@@ -4,18 +4,13 @@
   const f3 = ($0) => "row " + $0;
   return jsx("div", {
     children: jsx("for", {
-      get each() {
-        return f1(() => [1, 2, 3]);
-      },
-      get children() {
-        return f2((row) =>
+      each: () => f1(() => [1, 2, 3]),
+      children: () =>
+        f2((row) =>
           jsx("span", {
-            get children() {
-              return f3(row);
-            },
+            children: () => f3(row),
           }),
-        );
-      },
+        ),
     }),
   });
 })([]);

@@ -12,12 +12,14 @@ import {
   jsxComponent,
   jsxElement,
   stringLiteral,
-  thunk,
 } from "../estree.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 
 type Body = ES.Expression | ES.BlockStatement;
+
+// The client's names a bundle calls, which a script's own binding must not hide.
+const RUNTIME = new Set(["fixed", "jsx"]);
 
 // A binding annotated by the compiler with the key it resolved it to.
 type Bound = { readonly key?: string };
@@ -35,7 +37,8 @@ type Bound = { readonly key?: string };
  * - JSX is a call of the client's `jsx`, and its text reads as JSX reads it.
  * - `eval` is called indirectly, so a bundle it runs sees globals and nothing
  *   of this one's scope.
- * - A binding named `jsx` is renamed, so it cannot hide the client's.
+ * - A binding named `jsx` or `fixed` is renamed, so it cannot hide the
+ *   client's.
  */
 export function lowerScriptBody(script: ScriptEntry): Body {
   const captureIndex = new Map(
@@ -56,7 +59,7 @@ export function lowerScriptBody(script: ScriptEntry): Body {
     const at = captureIndex.get(key);
     return {
       ...identifier(
-        at !== undefined ? `$${at}` : name === "jsx" ? "$jsx" : name,
+        at !== undefined ? `$${at}` : RUNTIME.has(name) ? `$${name}` : name,
       ),
       loc,
     };
@@ -139,15 +142,13 @@ export function lowerScriptBody(script: ScriptEntry): Body {
         );
       }
       // A component tag naming a host binding reaches it by splice, under
-      // `$<name>`. What it splices is the expansion of a host component, which
-      // reads each prop by calling it, so there each prop, and the children,
-      // are a function of nothing.
+      // `$<name>`.
       if (isComponentTag(tag.name)) {
         return jsxComponent(
           null,
           splice(`$${tag.name}`, tag.loc),
-          written.map(([name, value]) => [name, thunk(value)] as const),
-          drawn === null ? null : thunk(drawn),
+          written,
+          drawn,
         );
       }
       return jsxElement(null, tag.name, written, drawn);

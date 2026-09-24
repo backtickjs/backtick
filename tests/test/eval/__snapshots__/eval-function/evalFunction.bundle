@@ -3,9 +3,7 @@
     jsx("div", {
       children: [
         jsx("span", {
-          get children() {
-            return (0, eval)($0())("ada");
-          },
+          children: () => (0, eval)($0())("ada"),
         }),
         () =>
           (0, eval)($1())({
@@ -17,6 +15,6 @@
     () =>
       '($d => {\n  const f1 = () => name => "hello " + name;\n  return f1();\n})([])',
     () =>
-      '($d => {\n  const f1 = () => props => jsx("b", {\n    get children() {\n      return "count " + props.count;\n    }\n  });\n  return f1();\n})([])',
+      '($d => {\n  const f1 = () => props => jsx("b", {\n    children: () => "count " + props.count\n  });\n  return f1();\n})([])',
   );
 })([]);

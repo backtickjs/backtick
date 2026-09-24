@@ -11,14 +11,8 @@
   };
   const f4 = ($0) => $0()("one").label.get();
   return jsx("span", {
-    get style() {
-      return f1();
-    },
-    get onclick() {
-      return f2(() => f3(() => state));
-    },
-    get children() {
-      return f4(() => f3(() => state));
-    },
+    style: () => f1(),
+    onclick: () => f2(() => f3(() => state)),
+    children: () => f4(() => f3(() => state)),
   });
 })([]);

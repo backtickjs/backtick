@@ -17,14 +17,12 @@
       children: [
         () =>
           jsx($0(), {
-            title: () => "host",
+            title: "host",
           }),
         () =>
           twice((props) =>
             jsx("i", {
-              get children() {
-                return "row " + props.n;
-              },
+              children: () => "row " + props.n,
             }),
           ),
       ],
@@ -33,9 +31,7 @@
   return f1(
     () => ($0) =>
       jsx("h2", {
-        get children() {
-          return $0.title();
-        },
+        children: () => $0.title,
       }),
   );
 })([]);
