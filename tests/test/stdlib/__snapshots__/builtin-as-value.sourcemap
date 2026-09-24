@@ -1,15 +1,15 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_floor              → floor
- = cs.const(            →  = 
+ =                      →  = 
 Math                    → Math
 .                       → .
 floor                   → floor
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_apply              → apply
- = cs.const(            →  = 
+ =                      →  = 
 (                       → (
 __cs_f                  → f
 :                       → : 
@@ -28,9 +28,9 @@ __cs_f                  → f
 (                       → (
 __cs_n                  → n
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_floor              → floor
 (                       → (
 3.5                     → 3.5
@@ -44,5 +44,5 @@ ceil                    → ceil
 ,                       → , 
 3.5                     → 3.5
 )                       → )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

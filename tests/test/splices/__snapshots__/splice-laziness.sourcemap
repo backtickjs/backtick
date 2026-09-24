@@ -1,36 +1,34 @@
-cs.lift(cs.const(                         → cs`
+cs.lift(                                  → cs`
 (                                         → (
 __cs_flag                                 → flag
 :                                         → : 
 boolean                                   → boolean
 ) => {\n                                  → ) => {\n    
-if ((cs.condition(                        → if (
+if (                                      → if (
 __cs_flag                                 → flag
-) &&                                      → 
-__cs_flag                                 → flag [-semantic -completion -navigation -verification]
-))                                        → ) 
+)                                         → ) 
 {\n                                       → {\n      
-return cs.const(                          → return 
+return                                    → return 
 (cs.splice(                               →  [-semantic]
 (fragment)                                → $fragment
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-);                                        → ;
+;                                         → ;
 \n    }                                   → \n    }
 \n                                        → \n    
-return cs.const(                          → return 
+return                                    → return 
 "skipped"                                 → "skipped"
-);                                        → ;
+;                                         → ;
 \n}                                       → \n  }
-))                                        → `
-cs.lift(cs.const(                         → cs`
+)                                         → `
+cs.lift(                                  → cs`
 "evaluated"                               → "evaluated"
-))                                        → `
+)                                         → `
 cs.lift((() => {\n                        → cs`{\n  
 throw                                     → throw 
 "the guarded fragment must never evaluate"→ "the guarded fragment must never evaluate"
 ;                                         → ;
 \n})())                                   → \n}`
-cs.lift(cs.const(                         → cs`
+cs.lift(                                  → cs`
 {                                         → ({\n      
 taken                                     → taken
 :                                         → : 
@@ -50,4 +48,4 @@ guard(broken)                             → guard(broken)
 false                                     → false
 )                                         → )
  }                                        → ,\n    })
-))                                        → `
+)                                         → `

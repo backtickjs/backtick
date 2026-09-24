@@ -1,11 +1,11 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_word               → word
- = cs.const(            →  = 
+ =                      →  = 
 "ab"                    → "ab"
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 {                       → {\n        
 padded                  → padded
 :                       → : 
@@ -57,9 +57,8 @@ __cs_word               → word
 .                       → .
 at                      → at
 (                       → (
--cs.number(             → -
+-                       → -
 1                       → 1
-)                       → 
 )                       → )
 ,                       → , 
 __cs_word               → word
@@ -99,5 +98,5 @@ __cs_offset             → offset
 __cs_offset             → offset
 )                       → )
  }                      → ,\n      }
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_n                                → n
 :                                     → : 
@@ -6,7 +6,7 @@ number                                → number
  |                                    →  | 
 null                                  → null
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_n                                → n
  ===                                  →  === 
 null                                  → null
@@ -16,10 +16,10 @@ null                                  → null
 __cs_n                                → n
  +                                    →  + 
 1                                     → 1
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 {                                     → ({\n      
 absent                                → absent
 :                                     → : 
@@ -39,4 +39,4 @@ present                               → present
 4                                     → 4
 )                                     → )
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

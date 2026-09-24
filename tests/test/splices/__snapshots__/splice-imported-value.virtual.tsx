@@ -20,5 +20,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A value rather than a function, so the `.value` snapshot beside this is the
 // spliced value itself.
 it("spliceImportedValue", async (t) => {
-  await snapshotCase(t, "spliceImportedValue", cs.lift(cs.const((cs.splice((version)) satisfies typeof cs.ClientUnknown))));
+  await snapshotCase(t, "spliceImportedValue", cs.lift((cs.splice((version)) satisfies typeof cs.ClientUnknown)));
 });

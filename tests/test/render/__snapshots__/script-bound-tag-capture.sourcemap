@@ -1,18 +1,18 @@
 cs.lift((() => {\n                    → cs`{\n  
 const                                 → const 
 __cs_count                            → count
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n  
 const                                 → const 
 __cs_Badge                            → Badge
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_props                            → props
 :                                     → : 
@@ -34,14 +34,14 @@ n                                     → n
 )}</                                  → }</
 b                                     → b
 >                                     → >
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n  
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n    <
 div                                   → div
 >{cs.lift(                            → >\n      {
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Badge                            → Badge
                                       →  
@@ -53,20 +53,20 @@ get                                   → get
 ()                                    → ()
 }                                     → }
 />                                    →  />
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}{cs.lift(                           → }\n      {\n        
 (cs.splice(                           → ${ [-semantic]
 cs.lift((() => {\n                    → cs`{\n          
 const                                 → const 
 __cs_skipped                          → skipped
- = cs.const(                          →  = 
+ =                                    →  = 
 10                                    → 10
-);                                    → ;
+;                                     → ;
 \n                                    → \n          
-return cs.const(                      → return 
+return                                → return 
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Badge                            → Badge
                                       →  
@@ -80,15 +80,15 @@ get                                   → get
 100                                   → 100
 }                                     → }
 />                                    →  />
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n})())                               → \n        }`
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}{cs.lift(                           → \n      }\n      {
 (cs.splice(                           → ${ [-semantic]
 (<section>{                           → (<section>{
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Badge                            → Badge
                                       →  
@@ -102,12 +102,12 @@ get                                   → get
 1000                                  → 1000
 }                                     → }
 />                                    →  />
-))                                    → `
+)                                     → `
 }</section>)                          → }</section>)
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}{cs.lift(                           → }\n      {\n        
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 For                                   → For
                                       →  
@@ -141,7 +141,7 @@ get                                   → get
 )}</                                  → }\n        </
 For                                   → For
 >                                     → >
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}{cs.lift(                           → \n      }\n      
 <                                     → <
@@ -168,5 +168,5 @@ button                                → button
 )}</                                  → \n    </
 div                                   → div
 >                                     → >\n  )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n}`

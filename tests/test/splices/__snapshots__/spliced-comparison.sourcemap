@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 {                                     → ({\n      
 under                                 → under
 :                                     → : 
@@ -48,4 +48,4 @@ between                               → between
 (low)                                 → $low
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

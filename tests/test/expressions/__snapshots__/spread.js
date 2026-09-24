@@ -13,7 +13,7 @@ it("spread", async (t) => {
       {
         version: "0.0.0",
         filePath: "expressions/spread.test.tsx",
-        fileHash: "2b1hzyqftxgza",
+        fileHash: "umu4jsb4aovz",
         splices: {},
         captures: [],
       },
@@ -42,7 +42,7 @@ it("spread", async (t) => {
                     end: { line: 13, column: 17 },
                   },
                   name: "front",
-                  bindingKey: "front$2b1hzyqftxgza$0",
+                  bindingKey: "front$umu4jsb4aovz$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -93,7 +93,7 @@ it("spread", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "back",
-                  bindingKey: "back$2b1hzyqftxgza$1",
+                  bindingKey: "back$umu4jsb4aovz$1",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -119,7 +119,7 @@ it("spread", async (t) => {
             type: "VariableDeclaration",
             loc: {
               start: { line: 15, column: 6 },
-              end: { line: 15, column: 22 },
+              end: { line: 15, column: 32 },
             },
             kind: "const",
             declarations: [
@@ -127,7 +127,7 @@ it("spread", async (t) => {
                 type: "VariableDeclarator",
                 loc: {
                   start: { line: 15, column: 12 },
-                  end: { line: 15, column: 21 },
+                  end: { line: 15, column: 31 },
                 },
                 id: {
                   type: "Identifier",
@@ -136,13 +136,13 @@ it("spread", async (t) => {
                     end: { line: 15, column: 16 },
                   },
                   name: "none",
-                  bindingKey: "none$2b1hzyqftxgza$2",
+                  bindingKey: "none$umu4jsb4aovz$2",
                 },
                 init: {
                   type: "ArrayExpression",
                   loc: {
-                    start: { line: 15, column: 19 },
-                    end: { line: 15, column: 21 },
+                    start: { line: 15, column: 29 },
+                    end: { line: 15, column: 31 },
                   },
                   elements: [],
                 },
@@ -170,7 +170,7 @@ it("spread", async (t) => {
                     end: { line: 16, column: 15 },
                   },
                   name: "all",
-                  bindingKey: "all$2b1hzyqftxgza$3",
+                  bindingKey: "all$umu4jsb4aovz$3",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -200,7 +200,7 @@ it("spread", async (t) => {
                           end: { line: 16, column: 30 },
                         },
                         name: "front",
-                        bindingKey: "front$2b1hzyqftxgza$0",
+                        bindingKey: "front$umu4jsb4aovz$0",
                       },
                     },
                     {
@@ -216,7 +216,7 @@ it("spread", async (t) => {
                           end: { line: 16, column: 39 },
                         },
                         name: "none",
-                        bindingKey: "none$2b1hzyqftxgza$2",
+                        bindingKey: "none$umu4jsb4aovz$2",
                       },
                     },
                     {
@@ -232,7 +232,7 @@ it("spread", async (t) => {
                           end: { line: 16, column: 48 },
                         },
                         name: "back",
-                        bindingKey: "back$2b1hzyqftxgza$1",
+                        bindingKey: "back$umu4jsb4aovz$1",
                       },
                     },
                     {
@@ -269,7 +269,7 @@ it("spread", async (t) => {
                     end: { line: 17, column: 17 },
                   },
                   name: "twice",
-                  bindingKey: "twice$2b1hzyqftxgza$4",
+                  bindingKey: "twice$umu4jsb4aovz$4",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -291,7 +291,7 @@ it("spread", async (t) => {
                           end: { line: 17, column: 27 },
                         },
                         name: "all",
-                        bindingKey: "all$2b1hzyqftxgza$3",
+                        bindingKey: "all$umu4jsb4aovz$3",
                       },
                     },
                     {
@@ -307,7 +307,7 @@ it("spread", async (t) => {
                           end: { line: 17, column: 35 },
                         },
                         name: "all",
-                        bindingKey: "all$2b1hzyqftxgza$3",
+                        bindingKey: "all$umu4jsb4aovz$3",
                       },
                     },
                   ],
@@ -354,7 +354,7 @@ it("spread", async (t) => {
                         end: { line: 18, column: 16 },
                       },
                       name: "all",
-                      bindingKey: "all$2b1hzyqftxgza$3",
+                      bindingKey: "all$umu4jsb4aovz$3",
                     },
                     property: {
                       type: "Identifier",
@@ -401,7 +401,7 @@ it("spread", async (t) => {
                     end: { line: 18, column: 40 },
                   },
                   name: "twice",
-                  bindingKey: "twice$2b1hzyqftxgza$4",
+                  bindingKey: "twice$umu4jsb4aovz$4",
                 },
                 property: {
                   type: "Identifier",

@@ -19,10 +19,10 @@ it("compoundAssignment", async (t) => {
     let __cs_text = "a";
     __cs_text += "b";
     let __cs_total = 1;
-    const __cs_answered = cs.const(__cs_total += 2);
+    const __cs_answered = __cs_total += 2;
     let __cs_x = 1;
-    __cs_x += __cs_x = cs.const(5);
-    return cs.const([__cs_n, __cs_text, __cs_answered, __cs_total, __cs_x]);
+    __cs_x += __cs_x = 5;
+    return [__cs_n, __cs_text, __cs_answered, __cs_total, __cs_x];
 })()),
   );
 });

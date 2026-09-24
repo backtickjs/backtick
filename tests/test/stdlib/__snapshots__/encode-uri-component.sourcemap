@@ -1,5 +1,5 @@
 cs.lift((() => {\n        → cs`{\n    
-return cs.const(          → return 
+return                    → return 
 <                         → (\n      <
 span                      → span
 >{cs.lift(                → >\n        {
@@ -26,5 +26,5 @@ decodeURIComponent        → decodeURIComponent
 )}</                      → }\n      </
 span                      → span
 >                         → >\n    )
-);                        → ;
+;                         → ;
 \n})())                   → \n  }`

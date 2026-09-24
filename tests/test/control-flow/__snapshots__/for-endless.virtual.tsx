@@ -13,9 +13,9 @@ it("forEndless", async (t) => {
         if (__cs_i === 4) {
             break;
         }
-        __cs_i = cs.const(__cs_i + 1);
+        __cs_i = __cs_i + 1;
     }
-    return cs.const(__cs_i);
+    return __cs_i;
 })()),
   );
 });

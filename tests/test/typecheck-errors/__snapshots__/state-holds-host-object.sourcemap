@@ -1,7 +1,7 @@
 cs.lift((() => {\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n    → cs`{\n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n  
 const                                     → const 
 __cs_held                                 → held
- = cs.const(                              →  = 
+ =                                        →  = 
 (cs.splice(                               →  [-semantic]
 (state)                                   → $state
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
@@ -10,9 +10,8 @@ __cs_held                                 → held
 (host)                                    → $host
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n    → \n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n  
-cs.statement(                             → 
 __cs_held                                 → held
 .                                         → .
 set                                       → set
@@ -21,5 +20,5 @@ set                                       → set
 (host)                                    → $host
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n}`

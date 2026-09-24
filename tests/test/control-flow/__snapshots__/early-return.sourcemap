@@ -15,8 +15,7 @@ return;                 → return;
 \n    }                 → \n      }
 \n                      → \n      
 __cs_n                  → n
- = cs.const(            →  = 
+ =                      →  = 
 1                       → 1
-)                       → 
 ;                       → ;
 \n})())                 → \n    }`

@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_coins              → coins
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 5                       → 5
 ,                       → , 
@@ -9,7 +9,7 @@ __cs_coins              → coins
 ,                       → , 
 7                       → 7
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 let                     → let 
 __cs_total              → total
@@ -30,26 +30,24 @@ __cs_coins              → coins
 length                  → length
 ;                       → ; 
 __cs_i                  → i
- = cs.const(            →  = 
+ =                      →  = 
 __cs_i                  → i
  +                      →  + 
 1                       → 1
-)                       → 
 )                       → ) 
 {\n                     → {\n        
 __cs_total              → total
- = cs.const(            →  = 
+ =                      →  = 
 __cs_total              → total
  +                      →  + 
 __cs_coins              → coins
 [                       → [
 __cs_i                  → i
 ]                       → ]
-)                       → 
 ;                       → ;
 \n    }                 → \n      }
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_total              → total
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -17,13 +17,13 @@ type Row = {
 // not data, which is what a cell declared where it is evaluated allows.
 async function MemberRows() {
   return cs.lift((() => {
-    const __cs_build = cs.const((__cs_from: number) => {
-        return cs.const(Array.from({ length: 3 }, (__cs__, __cs_at) => {
-            return cs.const({ id: __cs_from + __cs_at, label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)("row " + (__cs_from + __cs_at)) });
-        }));
-    });
-    const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_build(1)));
-    return cs.const(<div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(__cs_held.get())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => __cs_row.label.set("pressed"))}>{cs.lift(__cs_row.label.get())}</li>)}</For>)}</ul>)}</div>);
+    const __cs_build = (__cs_from: number) => {
+        return Array.from({ length: 3 }, (__cs__, __cs_at) => {
+            return { id: __cs_from + __cs_at, label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)("row " + (__cs_from + __cs_at)) };
+        });
+    };
+    const __cs_held = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_build(1));
+    return <div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(__cs_held.get())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => __cs_row.label.set("pressed"))}>{cs.lift(__cs_row.label.get())}</li>)}</For>)}</ul>)}</div>;
 })());
 }
 

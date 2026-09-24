@@ -131,8 +131,8 @@ describe("a handler that is not a function", () => {
   });
 
   it("leaves a function alone", async () => {
-    const div = await drawn(cs.lift(cs.const(<div onclick={cs.lift(() => {
-})}/>)));
+    const div = await drawn(cs.lift(<div onclick={cs.lift(() => {
+})}/>));
     assert.equal(div.attributes.length, 0);
   });
 
@@ -142,8 +142,8 @@ describe("a handler that is not a function", () => {
   it("is refused the other way round too", async () => {
     await refused(
       // @ts-expect-error: `title` takes a value, not a function
-      cs.lift(cs.const(<div title={cs.lift(() => {
-})}/>)),
+      cs.lift(<div title={cs.lift(() => {
+})}/>),
       /takes a value, not a function/,
     );
   });
@@ -154,9 +154,9 @@ describe("a handler that is not a function", () => {
   it("lets an absent handler stay absent", async () => {
     const absent: Spliceable<BacktickElement>[] = [
       // @ts-expect-error: a handler takes a function, not `null`
-      cs.lift(cs.const(<div onclick={cs.lift(null)}/>)),
-      cs.lift(cs.const(<div onclick={cs.lift([() => {
-    }][1])}/>)),
+      cs.lift(<div onclick={cs.lift(null)}/>),
+      cs.lift(<div onclick={cs.lift([() => {
+    }][1])}/>),
     ];
     for (const value of absent) {
       const div = await drawn(value);

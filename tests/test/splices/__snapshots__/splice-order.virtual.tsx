@@ -8,5 +8,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 let count = 0;
 
 it("spliceOrder", async (t) => {
-  await snapshotCase(t, "spliceOrder", cs.lift(cs.const({ a: (cs.splice((count)) satisfies typeof cs.ClientUnknown), b: (cs.splice(++count) satisfies typeof cs.ClientUnknown) })));
+  await snapshotCase(t, "spliceOrder", cs.lift({ a: (cs.splice((count)) satisfies typeof cs.ClientUnknown), b: (cs.splice(++count) satisfies typeof cs.ClientUnknown) }));
 });

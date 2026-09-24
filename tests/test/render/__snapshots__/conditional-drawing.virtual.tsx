@@ -29,22 +29,22 @@ import { snapshotCase } from "../snapshotCase.ts";
 // again. Without that, this case does not stop.
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_shown = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
-    const __cs_started = cs.const((cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
-        if ((cs.condition((cs.splice((again)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((again)) satisfies typeof cs.ClientUnknown)())) {
-            cs.statement(__cs_shown.set(true));
+    const __cs_shown = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(false);
+    const __cs_started = (cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
+        if ((cs.splice((again)) satisfies typeof cs.ClientUnknown)()) {
+            __cs_shown.set(true);
         }
-    }, 0));
-    return cs.const(<>{cs.lift((cs.condition(__cs_shown.get()) && __cs_shown.get()) ? <em>shown</em> : <i>waiting</i>)}</>);
+    }, 0);
+    return <>{cs.lift(__cs_shown.get() ? <em>shown</em> : <i>waiting</i>)}</>;
 })());
 }
 
 const conditionalDrawing = cs.lift((() => {
-    const __cs_builds = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<span>{cs.lift("builds " + __cs_builds.get())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
-        cs.statement(__cs_builds.set(__cs_builds.get() + 1));
-        return cs.const(__cs_builds.get() < 5);
-    })}/>)}</section>)}</div>);
+    const __cs_builds = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    return <div>{cs.lift(<span>{cs.lift("builds " + __cs_builds.get())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
+        __cs_builds.set(__cs_builds.get() + 1);
+        return __cs_builds.get() < 5;
+    })}/>)}</section>)}</div>;
 })());
 
 describe("a component whose drawing is a conditional", () => {

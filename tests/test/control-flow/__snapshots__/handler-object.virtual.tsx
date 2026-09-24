@@ -7,20 +7,20 @@ import { snapshotCase } from "../snapshotCase.ts";
 // storing one is not calling it.
 const beep: Client<void> = cs.lift((() => {
     let __cs_n = 0;
-    __cs_n = cs.const(1);
+    __cs_n = 1;
 })());
 
-const onTap: Client<(id: number) => void> = cs.lift(cs.const((__cs_id: number) => {
-    cs.statement((cs.splice((beep)) satisfies typeof cs.ClientUnknown));
-}));
+const onTap: Client<(id: number) => void> = cs.lift((__cs_id: number) => {
+    (cs.splice((beep)) satisfies typeof cs.ClientUnknown);
+});
 
 it("handlerObject", async (t) => {
   await snapshotCase(
     t,
     "handlerObject",
     cs.lift((() => {
-    const __cs_handlers = cs.const({ tap: (cs.splice((onTap)) satisfies typeof cs.ClientUnknown), hold: (cs.splice((onTap)) satisfies typeof cs.ClientUnknown) });
-    return cs.const(__cs_handlers);
+    const __cs_handlers = { tap: (cs.splice((onTap)) satisfies typeof cs.ClientUnknown), hold: (cs.splice((onTap)) satisfies typeof cs.ClientUnknown) };
+    return __cs_handlers;
 })()),
   );
 });

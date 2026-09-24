@@ -1,11 +1,11 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_greeting           → greeting
- = cs.const(            →  = 
+ =                      →  = 
 "Hello"                 → "Hello"
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_greeting           → greeting
 .                       → .
 concat                  → concat
@@ -17,5 +17,5 @@ concat                  → concat
 .                       → .
 toUpperCase             → toUpperCase
 ()                      → ()
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

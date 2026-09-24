@@ -1,7 +1,7 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 7                                     → 7
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 {                                     → ({ 
 a                                     → a
 :                                     → : 
@@ -15,4 +15,4 @@ b                                     → b
 (leaf)                                → $leaf
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
  }                                    →  })
-))                                    → `
+)                                     → `

@@ -11,8 +11,8 @@ it("splicedFunctionParam", async (t) => {
     t,
     "splicedFunctionParam",
     cs.lift((() => {
-    const __cs_apply = cs.const((__cs_f: () => number) => __cs_f() + 1);
-    return cs.const(__cs_apply((cs.splice(cs.lift(cs.const(() => 2))) satisfies typeof cs.ClientUnknown)));
+    const __cs_apply = (__cs_f: () => number) => __cs_f() + 1;
+    return __cs_apply((cs.splice(cs.lift(() => 2)) satisfies typeof cs.ClientUnknown));
 })()),
   );
 });

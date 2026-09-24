@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `<name>$<fileHash>$<n>` binding key still parses from the right, and the
 // threaded capture's display name recovers `foo$` intact.
 function add(lhs: Client<number>): Client<number> {
-  return cs.lift(cs.const((cs.splice((lhs)) satisfies typeof cs.ClientUnknown) + 2));
+  return cs.lift((cs.splice((lhs)) satisfies typeof cs.ClientUnknown) + 2);
 }
 
 it("dollarName", async (t) => {
@@ -15,8 +15,8 @@ it("dollarName", async (t) => {
     t,
     "dollarName",
     cs.lift((() => {
-    const __cs_foo$ = cs.const(1);
-    return cs.const((cs.splice(add(cs.lift(cs.const(__cs_foo$)))) satisfies typeof cs.ClientUnknown));
+    const __cs_foo$ = 1;
+    return (cs.splice(add(cs.lift(__cs_foo$))) satisfies typeof cs.ClientUnknown);
 })()),
   );
 });

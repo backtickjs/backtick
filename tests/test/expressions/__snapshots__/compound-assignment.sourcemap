@@ -49,11 +49,11 @@ __cs_total              → total
 \n                      → \n      
 const                   → const 
 __cs_answered           → answered
- = cs.const(            →  = 
+ =                      →  = 
 __cs_total              → total
  +=                     →  += 
 2                       → 2
-);                      → ;
+;                       → ;
 \n                      → \n      
 let                     → let 
 __cs_x                  → x
@@ -64,12 +64,11 @@ __cs_x                  → x
 __cs_x                  → x
  +=                     →  += 
 __cs_x                  → x
- = cs.const(            →  = 
+ =                      →  = 
 5                       → 5
-)                       → 
 ;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 [                       → [
 __cs_n                  → n
 ,                       → , 
@@ -81,5 +80,5 @@ __cs_total              → total
 ,                       → , 
 __cs_x                  → x
 ]                       → ]
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

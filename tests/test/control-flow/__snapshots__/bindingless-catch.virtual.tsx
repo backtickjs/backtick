@@ -13,7 +13,7 @@ it("bindinglessCatch", async (t) => {
         throw "boom";
     }
     catch {
-        return cs.const("caught");
+        return "caught";
     }
 })()),
   );

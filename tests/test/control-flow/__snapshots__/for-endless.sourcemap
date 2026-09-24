@@ -17,15 +17,14 @@ break;                  → break;
 \n        }             → \n        }
 \n                      → \n        
 __cs_i                  → i
- = cs.const(            →  = 
+ =                      →  = 
 __cs_i                  → i
  +                      →  + 
 1                       → 1
-)                       → 
 ;                       → ;
 \n    }                 → \n      }
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_i                  → i
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -1,30 +1,30 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_total                            → total
- = cs.const(                          →  = 
+ =                                    →  = 
 1                                     → 1
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
 const                                 → const 
 __cs_first                            → first
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           → ${ [-semantic]
 keep(                                 → keep(
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 __cs_total                            → total
-))                                    → `
+)                                     → `
 )                                     → )
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
 {\n                                   → {\n        
 const                                 → const 
 __cs_total                            → total
- = cs.const(                          →  = 
+ =                                    →  = 
 2                                     → 2
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-return cs.const(                      → return 
+return                                → return 
 __cs_first                            → first
  +                                    →  + 
 __cs_total                            → total
@@ -32,6 +32,6 @@ __cs_total                            → total
 (cs.splice(                           → ${ [-semantic]
 again()                               → again()
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n    }                               → \n      }
 \n})())                               → \n    }`

@@ -1,18 +1,18 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_names              → names
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 "zero"                  → "zero"
 ,                       → , 
 "one"                   → "one"
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_names              → names
 [                       → [
 9                       → 9
 ]                       → ]
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

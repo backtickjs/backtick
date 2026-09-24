@@ -1,8 +1,7 @@
 import { cs } from "@backtickjs/core";
 
-// A host alias smuggles `undefined` past the syntactic keyword ban; the
-// value-position checks reject the parameter at its first use — `cs.const`
-// constrains initializers and assignment right-hand sides to `ClientValue`.
+// A host alias smuggles `undefined` past the syntactic keyword ban; it is
+// rejected only where a use meets a type without `undefined`.
 //
 // First use and not the signature: `ClientFunction` stands over `never`
 // parameters so that every client function is one, which is what lets the
@@ -11,14 +10,14 @@ import { cs } from "@backtickjs/core";
 // are the uses, and there is deliberately none for the arrow itself.
 type Maybe = string | undefined;
 
-const stored = cs.lift(cs.const((__cs_x: Maybe) => {
-    const __cs_y = cs.const(__cs_x);
-    return cs.const(1);
-}));
+const stored = cs.lift((__cs_x: Maybe) => {
+    const __cs_y = __cs_x;
+    return 1;
+});
 
-const written = cs.lift(cs.const((__cs_x: Maybe) => {
+const written = cs.lift((__cs_x: Maybe) => {
     let __cs_y = "";
     // @ts-expect-error: Type 'Maybe' is not assignable to type 'string'.
-    __cs_y = cs.const(__cs_x);
-    return cs.const(1);
-}));
+    __cs_y = __cs_x;
+    return 1;
+});

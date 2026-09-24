@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_held               → held
- = cs.const(            →  = 
+ =                      →  = 
 {                       → { 
 n                       → n
 :                       → : 
@@ -11,11 +11,11 @@ q                       → q
 :                       → : 
 "ada"                   → "ada"
  }                      →  }
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_written            → written
- = cs.const(            →  = 
+ =                      →  = 
 Object                  → Object
 .                       → .
 fromEntries             → fromEntries
@@ -49,9 +49,9 @@ __cs_pair               → pair
 ]                       → ]
 )                       → )
 )                       → ,\n      )
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_written            → written
 .                       → .
 n                       → n
@@ -61,5 +61,5 @@ n                       → n
 __cs_written            → written
 .                       → .
 q                       → q
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -18,6 +18,6 @@ it("splicedFunction", async (t) => {
   await snapshotCase(
     t,
     "splicedFunction",
-    cs.lift(cs.const(() => (cs.splice(((n: never) => n) as unknown as Spliceable) satisfies typeof cs.ClientUnknown))),
+    cs.lift(() => (cs.splice(((n: never) => n) as unknown as Spliceable) satisfies typeof cs.ClientUnknown)),
   );
 });

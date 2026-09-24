@@ -1,9 +1,9 @@
 cs.lift((() => {\n       → cs`{\n      
 const                    → const 
 __cs_message             → message
- = cs.const(             →  = 
+ =                       →  = 
 "boom"                   → "boom"
-);                       → ;
+;                        → ;
 \n                       → \n      
 try                      → try 
 {\n                      → {\n        
@@ -21,13 +21,13 @@ __cs_error               → error
 __cs_message             → message
 )                        → ) 
 {\n                      → {\n          
-return cs.const(         → return 
+return                   → return 
 "caught boom"            → "caught boom"
-);                       → ;
+;                        → ;
 \n        }              → \n        }
 \n                       → \n        
-return cs.const(         → return 
+return                   → return 
 "caught something else"  → "caught something else"
-);                       → ;
+;                        → ;
 \n    }                  → \n      }
 \n})())                  → \n    }`

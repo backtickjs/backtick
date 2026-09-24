@@ -10,15 +10,15 @@ import { snapshotCase } from "../snapshotCase.ts";
 // evaluated. It is called with its props read on access, the way a component's
 // are, so `count` follows the cell without the badge being drawn again.
 const badge = await bundler.run(
-  cs.lift(cs.const((__cs_props: {
+  cs.lift((__cs_props: {
     count: number;
-}) => <b>{cs.lift("count " + __cs_props.count)}</b>)),
+}) => <b>{cs.lift("count " + __cs_props.count)}</b>),
 );
 
 const scriptBoundTag = cs.lift((() => {
-    const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    const __cs_Badge = cs.const(eval((cs.splice((badge)) satisfies typeof cs.ClientUnknown)));
-    return cs.const(<div>{cs.lift(<__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>);
+    const __cs_count = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_Badge = eval((cs.splice((badge)) satisfies typeof cs.ClientUnknown));
+    return <div>{cs.lift(<__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>;
 })());
 
 it("scriptBoundTag", async (t) => {

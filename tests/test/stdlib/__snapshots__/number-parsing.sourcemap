@@ -1,18 +1,18 @@
 cs.lift((() => {\n      → cs`{\n    
 const                   → const 
 __cs_whole              → whole
- = cs.const(            →  = 
+ =                      →  = 
 Number                  → Number
 .                       → .
 parseInt                → parseInt
 (                       → (
 "42px"                  → "42px"
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n    
 const                   → const 
 __cs_based              → based
- = cs.const(            →  = 
+ =                      →  = 
 Number                  → Number
 .                       → .
 parseInt                → parseInt
@@ -21,20 +21,20 @@ parseInt                → parseInt
 ,                       → , 
 16                      → 16
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n    
 const                   → const 
 __cs_fractional         → fractional
- = cs.const(            →  = 
+ =                      →  = 
 Number                  → Number
 .                       → .
 parseFloat              → parseFloat
 (                       → (
 "1.5"                   → "1.5"
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n    
-return cs.const(        → return 
+return                  → return 
 <                       → <
 span                    → span
 >{cs.lift(              → >{
@@ -48,5 +48,5 @@ __cs_fractional         → fractional
 )}</                    → }</
 span                    → span
 >                       → >
-);                      → ;
+;                       → ;
 \n})())                 → \n  }`

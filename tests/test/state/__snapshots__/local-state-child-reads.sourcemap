@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 "font-size: "                         → "font-size: "
  + (                                  →  + 
 (cs.splice(                           →  [-semantic]
@@ -18,8 +18,8 @@ get                                   → get
 )                                     → 
  +                                    →  + 
 "px"                                  → "px"
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 "row "                                → "row "
  +                                    →  + 
 (cs.splice(                           →  [-semantic]
@@ -34,8 +34,8 @@ cs.lift(cs.const(                     → cs`
 .                                     → .
 get                                   → get
 ()                                    → ()
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (cs.splice(                           →  [-semantic]
 (selected)                            → $selected
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -52,20 +52,20 @@ get                                   → get
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
  :                                    →  : 
 null                                  → null
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_selected                         → selected
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 div                                   → div
 >{cs.lift(                            → >\n        
@@ -116,5 +116,5 @@ __cs_selected                         → selected
 )}</                                  → \n      </
 div                                   → div
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

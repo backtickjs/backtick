@@ -6,7 +6,7 @@ const action = cs.create(
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-member.test.tsx",
-    fileHash: "o6lq8vbi43ci",
+    fileHash: "wf1ni21eddai",
     splices: {},
     captures: [],
   },
@@ -32,7 +32,7 @@ const action = cs.create(
                 end: { line: 6, column: 9 },
               },
               name: "x",
-              bindingKey: "x$o6lq8vbi43ci$0",
+              bindingKey: "x$wf1ni21eddai$0",
             },
             init: {
               type: "Literal",
@@ -53,7 +53,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-member.test.tsx",
-    fileHash: "o6lq8vbi43ci",
+    fileHash: "wf1ni21eddai",
     splices: { $0splice0: { value: [action], params: [] } },
     captures: [],
   },
@@ -79,7 +79,7 @@ export default cs.create(
                 end: { line: 11, column: 12 },
               },
               name: "list",
-              bindingKey: "list$o6lq8vbi43ci$1",
+              bindingKey: "list$wf1ni21eddai$1",
             },
             init: {
               type: "Splice",

@@ -86,9 +86,6 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
-  // set while rewriting a condition's bare duplicate, so nested conditions
-  // aren't re-duplicated (the copy would otherwise grow exponentially)
-  dup?: boolean;
   // the binding keys this script captures from enclosing scripts — not
   // assignable: a nested script captures the value, not the variable
   captures?: Set<string>;
@@ -170,97 +167,6 @@ function mapType<T extends ts.TypeNode | undefined>(
     map(type);
   }
   return type;
-}
-
-// Boolean by construction, so no check needed: a comparison yields boolean,
-// `&&`/`||` check their own operands, and a boolean literal is one. `??` is
-// absent — its type is the union of its operands.
-function isBooleanByConstruction(
-  ts: typeof import("typescript"),
-  node: ts.Node,
-): boolean {
-  while (ts.isParenthesizedExpression(node)) {
-    node = node.expression;
-  }
-  if (
-    node.kind === ts.SyntaxKind.TrueKeyword ||
-    node.kind === ts.SyntaxKind.FalseKeyword
-  ) {
-    return true;
-  }
-  if (
-    ts.isPrefixUnaryExpression(node) &&
-    node.operator === ts.SyntaxKind.ExclamationToken
-  ) {
-    return true;
-  }
-  if (ts.isBinaryExpression(node)) {
-    switch (ts.tokenToString(node.operatorToken.kind)) {
-      case "&&":
-      case "||":
-      case "===":
-      case "!==":
-      case "<":
-      case "<=":
-      case ">":
-      case ">=": {
-        return true;
-      }
-      default: {
-        return false;
-      }
-    }
-  }
-  return false;
-}
-
-// A tested position — an `if` condition, an operand of `&&`/`||` — must be
-// boolean: the language has no truthiness. Wrapping the condition in the
-// check would defeat the checker's narrowing in the code it guards, so the
-// position becomes `(cs.condition(<condition>) && <dup>)`: the checked real
-// copy, then a bare duplicate whose conjunct carries the narrowing. The
-// duplicate sits second because a leading always-truthy operand (a spliced
-// `true`, say) would draw TS2872; a trailing operand isn't flagged.
-function checkedCondition(
-  ts: typeof import("typescript"),
-  state: RewriteState,
-  source: ts.Expression,
-  virtual: ts.Expression,
-): ts.Expression {
-  // A source-positioned virtual is the unsupported-syntax fallback, already
-  // carrying its own error.
-  if (state.dup || isBooleanByConstruction(ts, source) || virtual.pos >= 0) {
-    return virtual;
-  }
-  const dupState: RewriteState = {
-    ...state,
-    dup: true,
-    errors: new Map(),
-    mappings: new Map(),
-    codeInformation: new Map(),
-  };
-  const dup = rewriteNode(ts, dupState, source).virtual as ts.Expression;
-  if (dup.pos >= 0) {
-    return virtual;
-  }
-  // The duplicate's shield: unmapped text is attributed to the enclosing
-  // frame's leftover source — the duplicate's diagnostics would pin just
-  // after the condition — so one all-off mapping claims the whole copy and
-  // drops them; the real copy's own mappings report each diagnostic once.
-  state.mappings.set(dup, source);
-  state.codeInformation.set(dup, {
-    semantic: false,
-    completion: false,
-    navigation: false,
-    verification: false,
-  });
-  return ts.factory.createParenthesizedExpression(
-    ts.factory.createBinaryExpression(
-      call(ts, "cs", "condition", [virtual]),
-      ts.SyntaxKind.AmpersandAmpersandToken,
-      dup,
-    ),
-  );
 }
 
 // The globally unique binding key the resolver assigned this identifier. An
@@ -481,13 +387,7 @@ function rewriteNodeImpl(
           ts,
           node.flags,
           identifier,
-          // A value position must hold a value — a call can produce `void` —
-          // and a `const` is where that is checked. A `let` is left as it was
-          // written: an unbound wrapper checked nothing, and what the initial
-          // widens to is the declaration's to decide, as it is in TypeScript.
-          keyword === "const"
-            ? call(ts, "cs", keyword, [initializer.virtual as ts.Expression])
-            : (initializer.virtual as ts.Expression),
+          initializer.virtual as ts.Expression,
           // What the script said it was. Written by hand or not at all: a
           // script is checked as the code it looks like, and dropping this
           // would leave `let rows: Row[] = []` holding nothing it can hold.
@@ -529,12 +429,7 @@ function rewriteNodeImpl(
       : null;
     return {
       virtual: ts.factory.createIfStatement(
-        checkedCondition(
-          ts,
-          state,
-          node.expression,
-          condition.virtual as ts.Expression,
-        ),
+        condition.virtual as ts.Expression,
         consequent.virtual as ts.Statement,
         alternate ? (alternate.virtual as ts.Statement) : undefined,
       ),
@@ -553,12 +448,7 @@ function rewriteNodeImpl(
     const body = rewriteNode(ts, state, node.statement);
     return {
       virtual: ts.factory.createWhileStatement(
-        checkedCondition(
-          ts,
-          state,
-          node.expression,
-          condition.virtual as ts.Expression,
-        ),
+        condition.virtual as ts.Expression,
         body.virtual as ts.Statement,
       ),
       runtime: {
@@ -574,12 +464,11 @@ function rewriteNodeImpl(
     // Each header part is optional, and the virtual `for` keeps them where the
     // source put them: the initializer's binding scopes over the header and the
     // body, which a rewrite into a block would have to reproduce by hand.
-    const conditionNode = node.condition;
     const initializer = node.initializer
       ? rewriteNode(ts, state, node.initializer)
       : null;
-    const condition = conditionNode
-      ? rewriteNode(ts, state, conditionNode)
+    const condition = node.condition
+      ? rewriteNode(ts, state, node.condition)
       : null;
     const update = node.incrementor
       ? rewriteNode(ts, state, node.incrementor)
@@ -590,14 +479,7 @@ function rewriteNodeImpl(
     return {
       virtual: ts.factory.createForStatement(
         initializer ? (initializer.virtual as ts.ForInitializer) : undefined,
-        condition && conditionNode
-          ? checkedCondition(
-              ts,
-              state,
-              conditionNode,
-              condition.virtual as ts.Expression,
-            )
-          : undefined,
+        condition ? (condition.virtual as ts.Expression) : undefined,
         update ? (update.virtual as ts.Expression) : undefined,
         body.virtual as ts.Statement,
       ),
@@ -634,23 +516,11 @@ function rewriteNodeImpl(
   }
 
   if (ts.isExpressionStatement(node)) {
-    let inner = node.expression;
-    while (ts.isParenthesizedExpression(inner)) {
-      inner = inner.expression;
-    }
-    const assignment =
-      (ts.isBinaryExpression(inner) &&
-        (inner.operatorToken.kind === ts.SyntaxKind.EqualsToken ||
-          isCompoundAssignment(ts.tokenToString(inner.operatorToken.kind)))) ||
-      isStep(ts, inner);
     const expression = rewriteNode(ts, state, node.expression);
-    // A statement discards its expression, which is only silent for
-    // `void`. Assignments are language statements.
-    const checked = assignment
-      ? (expression.virtual as ts.Expression)
-      : call(ts, "cs", "statement", [expression.virtual as ts.Expression]);
     return {
-      virtual: ts.factory.createExpressionStatement(checked),
+      virtual: ts.factory.createExpressionStatement(
+        expression.virtual as ts.Expression,
+      ),
       runtime: {
         type: "ExpressionStatement",
         loc: loc(node),
@@ -686,7 +556,7 @@ function rewriteNodeImpl(
     const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
-        call(ts, "cs", "const", [expression.virtual as ts.Expression]),
+        expression.virtual as ts.Expression,
       ),
       runtime: {
         type: "ReturnStatement",
@@ -1510,7 +1380,7 @@ function rewriteNodeImpl(
       ) {
         const key = rewriteNode(ts, state, property.name.expression);
         const name = ts.factory.createComputedPropertyName(
-          call(ts, "cs", "string", [key.virtual as ts.Expression]),
+          key.virtual as ts.Expression,
         );
         return {
           name,
@@ -1577,12 +1447,7 @@ function rewriteNodeImpl(
     const alternate = rewriteNode(ts, state, node.whenFalse);
     return {
       virtual: ts.factory.createConditionalExpression(
-        checkedCondition(
-          ts,
-          state,
-          node.condition,
-          condition.virtual as ts.Expression,
-        ),
+        condition.virtual as ts.Expression,
         ts.factory.createToken(ts.SyntaxKind.QuestionToken),
         consequent.virtual as ts.Expression,
         ts.factory.createToken(ts.SyntaxKind.ColonToken),
@@ -1661,18 +1526,7 @@ function rewriteNodeImpl(
     return {
       virtual: ts.factory.createPrefixUnaryExpression(
         node.operator,
-        // `!` tests its operand, so it takes the boolean check every tested
-        // position takes. `-` takes one of its own: TypeScript checks a binary
-        // arithmetic operand but not a prefixed one, so `-name` would type as a
-        // number and coerce at runtime.
-        negation
-          ? call(ts, "cs", "number", [operand.virtual as ts.Expression])
-          : checkedCondition(
-              ts,
-              state,
-              node.operand,
-              operand.virtual as ts.Expression,
-            ),
+        operand.virtual as ts.Expression,
       ),
       runtime: {
         type: "UnaryExpression",
@@ -1697,7 +1551,7 @@ function rewriteNodeImpl(
         virtual: ts.factory.createBinaryExpression(
           lhs.virtual as ts.Expression,
           ts.SyntaxKind.EqualsToken,
-          call(ts, "cs", "const", [rhs.virtual as ts.Expression]),
+          rhs.virtual as ts.Expression,
         ),
         runtime: {
           type: "AssignmentExpression",
@@ -1719,17 +1573,11 @@ function rewriteNodeImpl(
       return unsupported();
     }
     if (operator != null && isSupportedBinop(operator)) {
-      let virtualLeft = lhs.virtual as ts.Expression;
-      let virtualRight = rhs.virtual as ts.Expression;
-      if (operator === "&&" || operator === "||") {
-        virtualLeft = checkedCondition(ts, state, node.left, virtualLeft);
-        virtualRight = checkedCondition(ts, state, node.right, virtualRight);
-      }
       return {
         virtual: ts.factory.createBinaryExpression(
-          virtualLeft,
+          lhs.virtual as ts.Expression,
           node.operatorToken.kind,
-          virtualRight,
+          rhs.virtual as ts.Expression,
         ),
         runtime: binary(loc(node), operator, lhs.runtime, rhs.runtime),
       };

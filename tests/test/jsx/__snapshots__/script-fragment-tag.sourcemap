@@ -1,5 +1,5 @@
 cs.lift((() => {\n      → cs`{\n      
-return cs.const(        → return 
+return                  → return 
 <                       → (\n        <
 div                     → div
 >{cs.lift(              → >\n          {\n            
@@ -31,5 +31,5 @@ em                      → em
 )}</                    → \n          }\n        </
 div                     → div
 >                       → >\n      )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

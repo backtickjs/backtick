@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_xs                 → xs
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 3                       → 3
 ,                       → , 
@@ -11,15 +11,15 @@ __cs_xs                 → xs
 ,                       → , 
 5                       → 5
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_word               → word
- = cs.const(            →  = 
+ =                      →  = 
 "backtick"              → "backtick"
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 {                       → {\n        
 found                   → found
 :                       → : 
@@ -139,5 +139,5 @@ b                       → b
  }                      →  }
 )                       → )
  }                      → ,\n      }
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

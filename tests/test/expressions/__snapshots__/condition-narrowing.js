@@ -1,100 +1,96 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-// Narrowing must survive the boolean-condition checks: the tested condition
-// stays in place in the virtual code (its check reads a sequenced
-// duplicate), so `text !== null` still narrows `text` in the branch it
-// guards and from a `&&` left operand into the right. The conditions cover
-// each checked shape: a bare boolean identifier, a braced splice (whose
-// duplicate re-renders the host expression), and comparison/`&&` forms that
-// are boolean by construction and need no check.
+// A condition narrows in the virtual code: `text !== null` narrows `text` in
+// the branch it guards and from a `&&` left operand into the right, a braced
+// splice included.
 const flags = {
   strict: cs.create(
-    { start: { line: 12, column: 24 }, end: { line: 12, column: 32 } },
+    { start: { line: 8, column: 24 }, end: { line: 8, column: 32 } },
     {
       version: "0.0.0",
       filePath: "expressions/condition-narrowing.test.tsx",
-      fileHash: "2dyt2z4zc0eux",
+      fileHash: "g29mnwu0pbnr",
       splices: {},
       captures: [],
     },
     () => ({
       type: "Literal",
-      loc: { start: { line: 12, column: 27 }, end: { line: 12, column: 31 } },
+      loc: { start: { line: 8, column: 27 }, end: { line: 8, column: 31 } },
       value: true,
     }),
   ),
 };
 const label = cs.create(
-  { start: { line: 14, column: 71 }, end: { line: 25, column: 2 } },
+  { start: { line: 10, column: 71 }, end: { line: 21, column: 2 } },
   {
     version: "0.0.0",
     filePath: "expressions/condition-narrowing.test.tsx",
-    fileHash: "2dyt2z4zc0eux",
+    fileHash: "g29mnwu0pbnr",
     splices: { $0splice0: { value: flags.strict, params: [] } },
     captures: [],
   },
   () => ({
     type: "ArrowFunctionExpression",
-    loc: { start: { line: 14, column: 74 }, end: { line: 25, column: 1 } },
+    loc: { start: { line: 10, column: 74 }, end: { line: 21, column: 1 } },
     params: [
       {
         type: "Identifier",
-        loc: { start: { line: 15, column: 2 }, end: { line: 15, column: 6 } },
+        loc: { start: { line: 11, column: 2 }, end: { line: 11, column: 6 } },
         name: "text",
-        bindingKey: "text$2dyt2z4zc0eux$0",
+        bindingKey: "text$g29mnwu0pbnr$0",
       },
       {
         type: "Identifier",
-        loc: { start: { line: 16, column: 2 }, end: { line: 16, column: 7 } },
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 7 } },
         name: "upper",
-        bindingKey: "upper$2dyt2z4zc0eux$1",
+        bindingKey: "upper$g29mnwu0pbnr$1",
       },
     ],
     body: {
       type: "BlockStatement",
-      loc: { start: { line: 17, column: 5 }, end: { line: 25, column: 1 } },
+      loc: { start: { line: 13, column: 5 }, end: { line: 21, column: 1 } },
       body: [
         {
           type: "IfStatement",
-          loc: { start: { line: 18, column: 2 }, end: { line: 20, column: 3 } },
+          loc: { start: { line: 14, column: 2 }, end: { line: 16, column: 3 } },
           test: {
             type: "LogicalExpression",
             loc: {
-              start: { line: 18, column: 6 },
-              end: { line: 18, column: 28 },
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 28 },
             },
             operator: "&&",
             left: {
               type: "Identifier",
               loc: {
-                start: { line: 18, column: 6 },
-                end: { line: 18, column: 11 },
+                start: { line: 14, column: 6 },
+                end: { line: 14, column: 11 },
               },
               name: "upper",
-              bindingKey: "upper$2dyt2z4zc0eux$1",
+              bindingKey: "upper$g29mnwu0pbnr$1",
             },
             right: {
               type: "BinaryExpression",
               loc: {
-                start: { line: 18, column: 15 },
-                end: { line: 18, column: 28 },
+                start: { line: 14, column: 15 },
+                end: { line: 14, column: 28 },
               },
               operator: "!==",
               left: {
                 type: "Identifier",
                 loc: {
-                  start: { line: 18, column: 15 },
-                  end: { line: 18, column: 19 },
+                  start: { line: 14, column: 15 },
+                  end: { line: 14, column: 19 },
                 },
                 name: "text",
-                bindingKey: "text$2dyt2z4zc0eux$0",
+                bindingKey: "text$g29mnwu0pbnr$0",
               },
               right: {
                 type: "Literal",
                 loc: {
-                  start: { line: 18, column: 24 },
-                  end: { line: 18, column: 28 },
+                  start: { line: 14, column: 24 },
+                  end: { line: 14, column: 28 },
                 },
                 value: null,
               },
@@ -103,42 +99,42 @@ const label = cs.create(
           consequent: {
             type: "BlockStatement",
             loc: {
-              start: { line: 18, column: 30 },
-              end: { line: 20, column: 3 },
+              start: { line: 14, column: 30 },
+              end: { line: 16, column: 3 },
             },
             body: [
               {
                 type: "ReturnStatement",
                 loc: {
-                  start: { line: 19, column: 4 },
-                  end: { line: 19, column: 30 },
+                  start: { line: 15, column: 4 },
+                  end: { line: 15, column: 30 },
                 },
                 argument: {
                   type: "CallExpression",
                   loc: {
-                    start: { line: 19, column: 11 },
-                    end: { line: 19, column: 29 },
+                    start: { line: 15, column: 11 },
+                    end: { line: 15, column: 29 },
                   },
                   callee: {
                     type: "MemberExpression",
                     loc: {
-                      start: { line: 19, column: 11 },
-                      end: { line: 19, column: 27 },
+                      start: { line: 15, column: 11 },
+                      end: { line: 15, column: 27 },
                     },
                     object: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 19, column: 11 },
-                        end: { line: 19, column: 15 },
+                        start: { line: 15, column: 11 },
+                        end: { line: 15, column: 15 },
                       },
                       name: "text",
-                      bindingKey: "text$2dyt2z4zc0eux$0",
+                      bindingKey: "text$g29mnwu0pbnr$0",
                     },
                     property: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 19, column: 16 },
-                        end: { line: 19, column: 27 },
+                        start: { line: 15, column: 16 },
+                        end: { line: 15, column: 27 },
                       },
                       name: "toUpperCase",
                     },
@@ -155,50 +151,50 @@ const label = cs.create(
         },
         {
           type: "IfStatement",
-          loc: { start: { line: 21, column: 2 }, end: { line: 23, column: 3 } },
+          loc: { start: { line: 17, column: 2 }, end: { line: 19, column: 3 } },
           test: {
             type: "LogicalExpression",
             loc: {
-              start: { line: 21, column: 6 },
-              end: { line: 21, column: 64 },
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 64 },
             },
             operator: "&&",
             left: {
               type: "LogicalExpression",
               loc: {
-                start: { line: 21, column: 6 },
-                end: { line: 21, column: 38 },
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 38 },
               },
               operator: "&&",
               left: {
                 type: "Splice",
                 loc: {
-                  start: { line: 21, column: 6 },
-                  end: { line: 21, column: 21 },
+                  start: { line: 17, column: 6 },
+                  end: { line: 17, column: 21 },
                 },
                 key: "$0splice0",
               },
               right: {
                 type: "BinaryExpression",
                 loc: {
-                  start: { line: 21, column: 25 },
-                  end: { line: 21, column: 38 },
+                  start: { line: 17, column: 25 },
+                  end: { line: 17, column: 38 },
                 },
                 operator: "!==",
                 left: {
                   type: "Identifier",
                   loc: {
-                    start: { line: 21, column: 25 },
-                    end: { line: 21, column: 29 },
+                    start: { line: 17, column: 25 },
+                    end: { line: 17, column: 29 },
                   },
                   name: "text",
-                  bindingKey: "text$2dyt2z4zc0eux$0",
+                  bindingKey: "text$g29mnwu0pbnr$0",
                 },
                 right: {
                   type: "Literal",
                   loc: {
-                    start: { line: 21, column: 34 },
-                    end: { line: 21, column: 38 },
+                    start: { line: 17, column: 34 },
+                    end: { line: 17, column: 38 },
                   },
                   value: null,
                 },
@@ -207,36 +203,36 @@ const label = cs.create(
             right: {
               type: "BinaryExpression",
               loc: {
-                start: { line: 21, column: 42 },
-                end: { line: 21, column: 64 },
+                start: { line: 17, column: 42 },
+                end: { line: 17, column: 64 },
               },
               operator: "===",
               left: {
                 type: "CallExpression",
                 loc: {
-                  start: { line: 21, column: 42 },
-                  end: { line: 21, column: 56 },
+                  start: { line: 17, column: 42 },
+                  end: { line: 17, column: 56 },
                 },
                 callee: {
                   type: "MemberExpression",
                   loc: {
-                    start: { line: 21, column: 42 },
-                    end: { line: 21, column: 53 },
+                    start: { line: 17, column: 42 },
+                    end: { line: 17, column: 53 },
                   },
                   object: {
                     type: "Identifier",
                     loc: {
-                      start: { line: 21, column: 42 },
-                      end: { line: 21, column: 46 },
+                      start: { line: 17, column: 42 },
+                      end: { line: 17, column: 46 },
                     },
                     name: "text",
-                    bindingKey: "text$2dyt2z4zc0eux$0",
+                    bindingKey: "text$g29mnwu0pbnr$0",
                   },
                   property: {
                     type: "Identifier",
                     loc: {
-                      start: { line: 21, column: 47 },
-                      end: { line: 21, column: 53 },
+                      start: { line: 17, column: 47 },
+                      end: { line: 17, column: 53 },
                     },
                     name: "charAt",
                   },
@@ -247,8 +243,8 @@ const label = cs.create(
                   {
                     type: "Literal",
                     loc: {
-                      start: { line: 21, column: 54 },
-                      end: { line: 21, column: 55 },
+                      start: { line: 17, column: 54 },
+                      end: { line: 17, column: 55 },
                     },
                     value: 0,
                   },
@@ -258,8 +254,8 @@ const label = cs.create(
               right: {
                 type: "Literal",
                 loc: {
-                  start: { line: 21, column: 61 },
-                  end: { line: 21, column: 64 },
+                  start: { line: 17, column: 61 },
+                  end: { line: 17, column: 64 },
                 },
                 value: "!",
               },
@@ -268,42 +264,42 @@ const label = cs.create(
           consequent: {
             type: "BlockStatement",
             loc: {
-              start: { line: 21, column: 66 },
-              end: { line: 23, column: 3 },
+              start: { line: 17, column: 66 },
+              end: { line: 19, column: 3 },
             },
             body: [
               {
                 type: "ReturnStatement",
                 loc: {
-                  start: { line: 22, column: 4 },
-                  end: { line: 22, column: 28 },
+                  start: { line: 18, column: 4 },
+                  end: { line: 18, column: 28 },
                 },
                 argument: {
                   type: "CallExpression",
                   loc: {
-                    start: { line: 22, column: 11 },
-                    end: { line: 22, column: 27 },
+                    start: { line: 18, column: 11 },
+                    end: { line: 18, column: 27 },
                   },
                   callee: {
                     type: "MemberExpression",
                     loc: {
-                      start: { line: 22, column: 11 },
-                      end: { line: 22, column: 22 },
+                      start: { line: 18, column: 11 },
+                      end: { line: 18, column: 22 },
                     },
                     object: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 22, column: 11 },
-                        end: { line: 22, column: 15 },
+                        start: { line: 18, column: 11 },
+                        end: { line: 18, column: 15 },
                       },
                       name: "text",
-                      bindingKey: "text$2dyt2z4zc0eux$0",
+                      bindingKey: "text$g29mnwu0pbnr$0",
                     },
                     property: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 22, column: 16 },
-                        end: { line: 22, column: 22 },
+                        start: { line: 18, column: 16 },
+                        end: { line: 18, column: 22 },
                       },
                       name: "concat",
                     },
@@ -314,8 +310,8 @@ const label = cs.create(
                     {
                       type: "Literal",
                       loc: {
-                        start: { line: 22, column: 23 },
-                        end: { line: 22, column: 26 },
+                        start: { line: 18, column: 23 },
+                        end: { line: 18, column: 26 },
                       },
                       value: "?",
                     },
@@ -330,14 +326,14 @@ const label = cs.create(
         {
           type: "ReturnStatement",
           loc: {
-            start: { line: 24, column: 2 },
-            end: { line: 24, column: 16 },
+            start: { line: 20, column: 2 },
+            end: { line: 20, column: 16 },
           },
           argument: {
             type: "Literal",
             loc: {
-              start: { line: 24, column: 9 },
-              end: { line: 24, column: 15 },
+              start: { line: 20, column: 9 },
+              end: { line: 20, column: 15 },
             },
             value: "none",
           },
@@ -352,43 +348,43 @@ it("conditionNarrowing", async (t) => {
     t,
     "conditionNarrowing",
     cs.create(
-      { start: { line: 31, column: 4 }, end: { line: 36, column: 7 } },
+      { start: { line: 27, column: 4 }, end: { line: 32, column: 7 } },
       {
         version: "0.0.0",
         filePath: "expressions/condition-narrowing.test.tsx",
-        fileHash: "2dyt2z4zc0eux",
+        fileHash: "g29mnwu0pbnr",
         splices: { $label: { value: label, params: [] } },
         captures: [],
       },
       () => ({
         type: "ObjectExpression",
-        loc: { start: { line: 31, column: 8 }, end: { line: 36, column: 5 } },
+        loc: { start: { line: 27, column: 8 }, end: { line: 32, column: 5 } },
         properties: [
           {
             type: "Property",
             loc: {
-              start: { line: 32, column: 6 },
-              end: { line: 32, column: 33 },
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 33 },
             },
             key: {
               type: "Identifier",
               loc: {
-                start: { line: 32, column: 6 },
-                end: { line: 32, column: 13 },
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 13 },
               },
               name: "missing",
             },
             value: {
               type: "CallExpression",
               loc: {
-                start: { line: 32, column: 15 },
-                end: { line: 32, column: 33 },
+                start: { line: 28, column: 15 },
+                end: { line: 28, column: 33 },
               },
               callee: {
                 type: "Splice",
                 loc: {
-                  start: { line: 32, column: 15 },
-                  end: { line: 32, column: 21 },
+                  start: { line: 28, column: 15 },
+                  end: { line: 28, column: 21 },
                 },
                 key: "$label",
               },
@@ -396,16 +392,16 @@ it("conditionNarrowing", async (t) => {
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 32, column: 22 },
-                    end: { line: 32, column: 26 },
+                    start: { line: 28, column: 22 },
+                    end: { line: 28, column: 26 },
                   },
                   value: null,
                 },
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 32, column: 28 },
-                    end: { line: 32, column: 32 },
+                    start: { line: 28, column: 28 },
+                    end: { line: 28, column: 32 },
                   },
                   value: true,
                 },
@@ -420,28 +416,28 @@ it("conditionNarrowing", async (t) => {
           {
             type: "Property",
             loc: {
-              start: { line: 33, column: 6 },
-              end: { line: 33, column: 31 },
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 31 },
             },
             key: {
               type: "Identifier",
               loc: {
-                start: { line: 33, column: 6 },
-                end: { line: 33, column: 10 },
+                start: { line: 29, column: 6 },
+                end: { line: 29, column: 10 },
               },
               name: "loud",
             },
             value: {
               type: "CallExpression",
               loc: {
-                start: { line: 33, column: 12 },
-                end: { line: 33, column: 31 },
+                start: { line: 29, column: 12 },
+                end: { line: 29, column: 31 },
               },
               callee: {
                 type: "Splice",
                 loc: {
-                  start: { line: 33, column: 12 },
-                  end: { line: 33, column: 18 },
+                  start: { line: 29, column: 12 },
+                  end: { line: 29, column: 18 },
                 },
                 key: "$label",
               },
@@ -449,16 +445,16 @@ it("conditionNarrowing", async (t) => {
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 33, column: 19 },
-                    end: { line: 33, column: 24 },
+                    start: { line: 29, column: 19 },
+                    end: { line: 29, column: 24 },
                   },
                   value: "!hi",
                 },
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 33, column: 26 },
-                    end: { line: 33, column: 30 },
+                    start: { line: 29, column: 26 },
+                    end: { line: 29, column: 30 },
                   },
                   value: true,
                 },
@@ -473,28 +469,28 @@ it("conditionNarrowing", async (t) => {
           {
             type: "Property",
             loc: {
-              start: { line: 34, column: 6 },
-              end: { line: 34, column: 33 },
+              start: { line: 30, column: 6 },
+              end: { line: 30, column: 33 },
             },
             key: {
               type: "Identifier",
               loc: {
-                start: { line: 34, column: 6 },
-                end: { line: 34, column: 11 },
+                start: { line: 30, column: 6 },
+                end: { line: 30, column: 11 },
               },
               name: "quiet",
             },
             value: {
               type: "CallExpression",
               loc: {
-                start: { line: 34, column: 13 },
-                end: { line: 34, column: 33 },
+                start: { line: 30, column: 13 },
+                end: { line: 30, column: 33 },
               },
               callee: {
                 type: "Splice",
                 loc: {
-                  start: { line: 34, column: 13 },
-                  end: { line: 34, column: 19 },
+                  start: { line: 30, column: 13 },
+                  end: { line: 30, column: 19 },
                 },
                 key: "$label",
               },
@@ -502,16 +498,16 @@ it("conditionNarrowing", async (t) => {
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 34, column: 20 },
-                    end: { line: 34, column: 25 },
+                    start: { line: 30, column: 20 },
+                    end: { line: 30, column: 25 },
                   },
                   value: "!hi",
                 },
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 34, column: 27 },
-                    end: { line: 34, column: 32 },
+                    start: { line: 30, column: 27 },
+                    end: { line: 30, column: 32 },
                   },
                   value: false,
                 },
@@ -526,28 +522,28 @@ it("conditionNarrowing", async (t) => {
           {
             type: "Property",
             loc: {
-              start: { line: 35, column: 6 },
-              end: { line: 35, column: 32 },
+              start: { line: 31, column: 6 },
+              end: { line: 31, column: 32 },
             },
             key: {
               type: "Identifier",
               loc: {
-                start: { line: 35, column: 6 },
-                end: { line: 35, column: 11 },
+                start: { line: 31, column: 6 },
+                end: { line: 31, column: 11 },
               },
               name: "plain",
             },
             value: {
               type: "CallExpression",
               loc: {
-                start: { line: 35, column: 13 },
-                end: { line: 35, column: 32 },
+                start: { line: 31, column: 13 },
+                end: { line: 31, column: 32 },
               },
               callee: {
                 type: "Splice",
                 loc: {
-                  start: { line: 35, column: 13 },
-                  end: { line: 35, column: 19 },
+                  start: { line: 31, column: 13 },
+                  end: { line: 31, column: 19 },
                 },
                 key: "$label",
               },
@@ -555,16 +551,16 @@ it("conditionNarrowing", async (t) => {
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 35, column: 20 },
-                    end: { line: 35, column: 24 },
+                    start: { line: 31, column: 20 },
+                    end: { line: 31, column: 24 },
                   },
                   value: "zz",
                 },
                 {
                   type: "Literal",
                   loc: {
-                    start: { line: 35, column: 26 },
-                    end: { line: 35, column: 31 },
+                    start: { line: 31, column: 26 },
+                    end: { line: 31, column: 31 },
                   },
                   value: false,
                 },

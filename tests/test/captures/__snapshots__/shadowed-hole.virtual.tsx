@@ -13,10 +13,10 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `$0` upward, and `$` starts no name a script can write.
 function wrapShadowed(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_total = cs.const(1);
+    const __cs_total = 1;
     {
-        const __cs_total = cs.const(2);
-        return cs.const(__cs_total + (cs.splice((fragment)) satisfies typeof cs.ClientUnknown));
+        const __cs_total = 2;
+        return __cs_total + (cs.splice((fragment)) satisfies typeof cs.ClientUnknown);
     }
 })());
 }
@@ -25,6 +25,6 @@ it("shadowedHole", async (t) => {
   await snapshotCase(
     t,
     "shadowedHole",
-    cs.lift(cs.const((cs.splice(wrapShadowed(cs.lift(cs.const(10)))) satisfies typeof cs.ClientUnknown) + (cs.splice(wrapShadowed(cs.lift(cs.const(20)))) satisfies typeof cs.ClientUnknown))),
+    cs.lift((cs.splice(wrapShadowed(cs.lift(10))) satisfies typeof cs.ClientUnknown) + (cs.splice(wrapShadowed(cs.lift(20))) satisfies typeof cs.ClientUnknown)),
   );
 });

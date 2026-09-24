@@ -12,6 +12,6 @@ it("splicedComparison", async (t) => {
   await snapshotCase(
     t,
     "splicedComparison",
-    cs.lift(cs.const({ under: (cs.splice((low)) satisfies typeof cs.ClientUnknown) < (cs.splice((high)) satisfies typeof cs.ClientUnknown), atMost: (cs.splice((low)) satisfies typeof cs.ClientUnknown) <= (cs.splice((high)) satisfies typeof cs.ClientUnknown), over: (cs.splice((high)) satisfies typeof cs.ClientUnknown) > (cs.splice((low)) satisfies typeof cs.ClientUnknown), between: (cs.splice((low)) satisfies typeof cs.ClientUnknown) < (cs.splice((high)) satisfies typeof cs.ClientUnknown) && (cs.splice((high)) satisfies typeof cs.ClientUnknown) > (cs.splice((low)) satisfies typeof cs.ClientUnknown) })),
+    cs.lift({ under: (cs.splice((low)) satisfies typeof cs.ClientUnknown) < (cs.splice((high)) satisfies typeof cs.ClientUnknown), atMost: (cs.splice((low)) satisfies typeof cs.ClientUnknown) <= (cs.splice((high)) satisfies typeof cs.ClientUnknown), over: (cs.splice((high)) satisfies typeof cs.ClientUnknown) > (cs.splice((low)) satisfies typeof cs.ClientUnknown), between: (cs.splice((low)) satisfies typeof cs.ClientUnknown) < (cs.splice((high)) satisfies typeof cs.ClientUnknown) && (cs.splice((high)) satisfies typeof cs.ClientUnknown) > (cs.splice((low)) satisfies typeof cs.ClientUnknown) }),
   );
 });

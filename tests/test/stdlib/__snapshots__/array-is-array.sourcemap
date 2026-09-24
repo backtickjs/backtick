@@ -1,5 +1,5 @@
 cs.lift((() => {\n      → cs`{\n      
-return cs.const(        → return 
+return                  → return 
 [                       → [\n        
 Array                   → Array
 .                       → .
@@ -44,5 +44,5 @@ isArray                 → isArray
 null                    → null
 )                       → )
 ]                       → ,\n      ]
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

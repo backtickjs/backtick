@@ -1,39 +1,39 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_name                             → name
 ?:                                    → ?: 
 string                                → string
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_name                             → name
 ?.                                    → ?.
 concat                                → concat
 (                                     → (
 "!"                                   → "!"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 () =>                                 → () => 
 2                                     → 2
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (                                     → (
 __cs_cb                               → cb
 ?:                                    → ?: 
 () =>                                 → () => 
 number                                → number
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_cb                               → cb
 ?.()                                  → ?.()
  ??                                   →  ?? 
 0                                     → 0
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 {                                     → ({\n      
 named                                 → named
 :                                     → : 
@@ -87,4 +87,4 @@ omittedCallback                       → omittedCallback
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 ()                                    → ()
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

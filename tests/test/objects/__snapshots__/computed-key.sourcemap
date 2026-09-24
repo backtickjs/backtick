@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_base               → base
- = cs.const(            →  = 
+ =                      →  = 
 {                       → { 
 a                       → a
 :                       → : 
@@ -11,31 +11,31 @@ b                       → b
 :                       → : 
 2                       → 2
  }                      →  }
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_name               → name
- = cs.const(            →  = 
+ =                      →  = 
 "b"                     → "b"
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 { ...                   → {\n        ...
 __cs_base               → base
-, [cs.string(           → ,\n        [
+, [                     → ,\n        [
 __cs_name               → name
-)]:                     → ]: 
+]:                      → ]: 
 9                       → 9
-, [cs.string(           → ,\n        [
+, [                     → ,\n        [
 "c"                     → "c"
  +                      →  + 
 "d"                     → "d"
-)]:                     → ]: 
+]:                      → ]: 
 3                       → 3
 ,                       → ,\n        
 a                       → a
 :                       → : 
 4                       → 4
  }                      → ,\n      }
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -25,7 +25,7 @@ it("scriptComponent", async (t) => {
     t,
     "scriptComponent",
     cs.lift((() => {
-    return cs.const(<div>{cs.lift(<Card title={cs.lift("totals")}/>)}{cs.lift(<Badge />)}</div>);
+    return <div>{cs.lift(<Card title={cs.lift("totals")}/>)}{cs.lift(<Badge />)}</div>;
 })()),
   );
 });

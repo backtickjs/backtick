@@ -7,15 +7,15 @@ it("tryCatch", async (t) => {
     t,
     "tryCatch",
     cs.lift((() => {
-    const __cs_message = cs.const("boom");
+    const __cs_message = "boom";
     try {
         throw __cs_message;
     }
     catch (__cs_error) {
         if (__cs_error === __cs_message) {
-            return cs.const("caught boom");
+            return "caught boom";
         }
-        return cs.const("caught something else");
+        return "caught something else";
     }
 })()),
   );

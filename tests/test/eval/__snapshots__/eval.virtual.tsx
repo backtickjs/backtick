@@ -8,13 +8,13 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A bundle evaluated where a script stands, and used by its type: a drawing
 // whose root is a list, placed as a child, and a number, added to.
 async function Items() {
-  return cs.lift(cs.const(<For each={cs.lift([1, 2, 3])}>{cs.lift((__cs_n: number) => <span>{cs.lift("item " + __cs_n)}</span>)}</For>));
+  return cs.lift(<For each={cs.lift([1, 2, 3])}>{cs.lift((__cs_n: number) => <span>{cs.lift("item " + __cs_n)}</span>)}</For>);
 }
 
 const items = await bundler.run(<Items />);
 const total = await bundler.run(41);
 
-const evaluated = cs.lift(cs.const(<div>{cs.lift(eval((cs.splice((items)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<b>{cs.lift(eval((cs.splice((total)) satisfies typeof cs.ClientUnknown)) + 1)}</b>)}</div>));
+const evaluated = cs.lift(<div>{cs.lift(eval((cs.splice((items)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<b>{cs.lift(eval((cs.splice((total)) satisfies typeof cs.ClientUnknown)) + 1)}</b>)}</div>);
 
 it("eval", async (t) => {
   await snapshotCase(t, "eval", evaluated);

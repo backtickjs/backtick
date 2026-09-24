@@ -1,27 +1,27 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_text                             → text
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 "first"                               → "first"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
 const                                 → const 
 __cs_isOn                             → isOn
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 false                                 → false
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n        <
 div                                   → div
 >{cs.lift(                            → >\n          
@@ -70,23 +70,21 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n              
-cs.statement(                         → 
 __cs_text                             → text
 .                                     → .
 set                                   → set
 (                                     → (
 "second"                              → "second"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n              
-cs.statement(                         → 
 __cs_isOn                             → isOn
 .                                     → .
 set                                   → set
 (                                     → (
 true                                  → true
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n            }
 )}                                    → }
 >\n            write\n          </    → \n          >\n            write\n          </
@@ -95,12 +93,12 @@ button                                → button
 )}</                                  → \n        </
 div                                   → div
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_texts                            → texts
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -109,11 +107,11 @@ __cs_texts                            → texts
 "typed by the script"                 → "typed by the script"
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
 const                                 → const 
 __cs_flags                            → flags
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -122,9 +120,9 @@ __cs_flags                            → flags
 true                                  → true
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n        <
 div                                   → div
 >{cs.lift(                            → >\n          
@@ -179,23 +177,21 @@ button                                → button
 onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n              
-cs.statement(                         → 
 __cs_texts                            → texts
 .                                     → .
 set                                   → set
 (                                     → (
 []                                    → []
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n              
-cs.statement(                         → 
 __cs_flags                            → flags
 .                                     → .
 set                                   → set
 (                                     → (
 []                                    → []
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n            }
 )}                                    → }
 >\n            clear\n          </    → \n          >\n            clear\n          </
@@ -204,5 +200,5 @@ button                                → button
 )}</                                  → \n        </
 div                                   → div
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

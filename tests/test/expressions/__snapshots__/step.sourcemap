@@ -20,11 +20,10 @@ __cs_i                  → i
 )                       → ) 
 {\n                     → {\n        
 __cs_total              → total
- = cs.const(            →  = 
+ =                      →  = 
 __cs_total              → total
  +                      →  + 
 __cs_i                  → i
-)                       → 
 ;                       → ;
 \n    }                 → \n      }
 \n                      → \n      
@@ -36,26 +35,26 @@ __cs_n                  → n
 \n                      → \n      
 const                   → const 
 __cs_before             → before
- = cs.const(            →  = 
+ =                      →  = 
 __cs_n                  → n
 ++                      → ++
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_after              → after
- = cs.const(            →  = 
+ =                      →  = 
 ++                      → ++
 __cs_n                  → n
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_down               → down
- = cs.const(            →  = 
+ =                      →  = 
 __cs_n                  → n
 --                      → --
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 [                       → [
 __cs_total              → total
 ,                       → , 
@@ -67,5 +66,5 @@ __cs_down               → down
 ,                       → , 
 __cs_n                  → n
 ]                       → ]
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

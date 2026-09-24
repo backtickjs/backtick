@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_rounded            → rounded
- = cs.const(            →  =\n        
+ =                      →  =\n        
 Math                    → Math
 .                       → .
 round                   → round
@@ -15,9 +15,8 @@ Math                    → Math
 .                       → .
 round                   → round
 (                       → (
--cs.number(             → -
+-                       → -
 2.5                     → 2.5
-)                       → 
 )                       → )
  +                      →  + 
 ","                     → ","
@@ -26,22 +25,20 @@ Math                    → Math
 .                       → .
 round                   → round
 (                       → (
--cs.number(             → -
+-                       → -
 0.5                     → 0.5
-)                       → 
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_edges              → edges
- = cs.const(            →  =\n        
+ =                      →  =\n        
 Math                    → Math
 .                       → .
 floor                   → floor
 (                       → (
--cs.number(             → -
+-                       → -
 1.5                     → 1.5
-)                       → 
 )                       → )
  +                      →  + 
 ","                     → ","
@@ -50,9 +47,8 @@ Math                    → Math
 .                       → .
 ceil                    → ceil
 (                       → (
--cs.number(             → -
+-                       → -
 1.5                     → 1.5
-)                       → 
 )                       → )
  +                      →  + 
 ","                     → ","
@@ -61,15 +57,14 @@ Math                    → Math
 .                       → .
 trunc                   → trunc
 (                       → (
--cs.number(             → -
+-                       → -
 1.5                     → 1.5
-)                       → 
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_picks              → picks
- = cs.const(            →  =\n        
+ =                      →  =\n        
 Math                    → Math
 .                       → .
 min                     → min
@@ -100,13 +95,12 @@ Math                    → Math
 .                       → .
 abs                     → abs
 (                       → (
--cs.number(             → -
+-                       → -
 4                       → 4
-)                       → 
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_rounded            → rounded
  +                      →  +\n        
 "|"                     → "|"
@@ -132,9 +126,8 @@ Math                    → Math
 .                       → .
 sign                    → sign
 (                       → (
--cs.number(             → -
+-                       → -
 8                       → 8
-)                       → 
 )                       → )
  +                      →  +\n        
 ","                     → ","
@@ -163,5 +156,5 @@ E                       → E
  >                      →  > 
 2.71                    → 2.71
 )                       → \n      )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

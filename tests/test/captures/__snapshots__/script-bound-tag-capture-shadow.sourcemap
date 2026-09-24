@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_Card                             → Card
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_props                            → props
 :                                     → : 
@@ -25,14 +25,14 @@ n                                     → n
 )}</                                  → }</
 i                                     → i
 >                                     → >
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → <
 p                                     → p
 >{cs.lift(                            → >{
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Card                             → Card
                                       →  
@@ -41,14 +41,14 @@ n                                     → n
 1                                     → 1
 }                                     → }
 />                                    →  />
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}</                                  → }</
 p                                     → p
 >                                     → >
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 div                                   → div
 >{cs.lift(                            → >\n      
@@ -63,27 +63,27 @@ title                                 → title
 )}{cs.lift(                           → \n      {
 (cs.splice(                           → ${ [-semantic]
 labelled(                             → labelled(
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 "a"                                   → "a"
-))                                    → `
+)                                     → `
 )                                     → )
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}{cs.lift(                           → }\n      {
 (cs.splice(                           → ${ [-semantic]
 labelled(                             → labelled(
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 "b"                                   → "b"
-))                                    → `
+)                                     → `
 )                                     → )
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}</                                  → }\n    </
 div                                   → div
 >                                     → >
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_twice                            → twice
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_Card                             → Card
 :                                     → : 
@@ -122,9 +122,9 @@ n                                     → n
 )}</                                  → \n        </
 div                                   → div
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n      
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n        <
 section                               → section
 >{cs.lift(                            → >\n          
@@ -164,5 +164,5 @@ i                                     → i
 )}</                                  → }\n        </
 section                               → section
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

@@ -15,9 +15,9 @@ it("objectSpread", async (t) => {
     t,
     "objectSpread",
     cs.lift((() => {
-    const __cs_base = cs.const({ a: 1, b: 2 });
-    const __cs_over = cs.const({ b: 9 });
-    return cs.const({ ...__cs_base, ...__cs_over, c: 3 });
+    const __cs_base = { a: 1, b: 2 };
+    const __cs_over = { b: 9 };
+    return { ...__cs_base, ...__cs_over, c: 3 };
 })()),
   );
 });

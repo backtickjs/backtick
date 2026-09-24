@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_n                                → n
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -10,20 +10,19 @@ __cs_n                                → n
 (five)                                → $five
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-cs.statement(                         → 
 __cs_n                                → n
 .                                     → .
 set                                   → set
 (                                     → (
 6                                     → 6
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
 const                                 → const 
 __cs_c                                → c
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -32,9 +31,8 @@ __cs_c                                → c
 Color.Red                             → Color.Red
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-cs.statement(                         → 
 __cs_c                                → c
 .                                     → .
 set                                   → set
@@ -43,5 +41,5 @@ set                                   → set
 Color.Blue                            → Color.Blue
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

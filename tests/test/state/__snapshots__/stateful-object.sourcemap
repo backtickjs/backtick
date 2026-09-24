@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_initial                          → initial
 :                                     → : 
@@ -6,16 +6,16 @@ number                                → number
 ) => {\n                              → ) => {\n  
 const                                 → const 
 __cs_count                            → count
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 __cs_initial                          → initial
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n  
-return cs.const(                      → return 
+return                                → return 
 {                                     → {\n    
 get                                   → get
 :                                     → : 
@@ -32,7 +32,6 @@ __cs_n                                → n
 :                                     → : 
 number                                → number
 ) => {\n                              → ) => {\n      
-cs.statement(                         → 
 __cs_count                            → count
 .                                     → .
 set                                   → set
@@ -44,39 +43,38 @@ get                                   → get
  +                                    →  + 
 __cs_n                                → n
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n        }                           → \n    }
  }                                    → ,\n  }
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_c                                → c
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (counter)                             → $counter
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 10                                    → 10
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n        <
 button                                → button
                                       → \n          
 onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n            
-cs.statement(                         → 
 __cs_c                                → c
 .                                     → .
 add                                   → add
 (                                     → (
 5                                     → 5
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n          }
 )}                                    → }
 >{cs.lift(                            → \n        >\n          {
@@ -87,5 +85,5 @@ get                                   → get
 )}</                                  → }\n        </
 button                                → button
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

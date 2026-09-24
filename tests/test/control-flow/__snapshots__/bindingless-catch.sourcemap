@@ -7,8 +7,8 @@ throw                   → throw
 \n    }                 → \n      }
 \n    catch             →  catch 
 {\n                     → {\n        
-return cs.const(        → return 
+return                  → return 
 "caught"                → "caught"
-);                      → ;
+;                       → ;
 \n    }                 → \n      }
 \n})())                 → \n    }`

@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_props                            → props
 :                                     → : 
@@ -20,22 +20,22 @@ count                                 → count
 )}</                                  → }</
 b                                     → b
 >                                     → >
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n  
 const                                 → const 
 __cs_count                            → count
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n  
 const                                 → const 
 __cs_drawn                            → drawn
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -59,11 +59,11 @@ null                                  → null
 >(                                    → >(
 null                                  → null
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n  
 const                                 → const 
 __cs_Badge                            → Badge
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_props                            → props
 :                                     → : 
@@ -76,14 +76,14 @@ number                                → number
 ) => {\n                              → ) => {\n    
 const                                 → const 
 __cs_held                             → held
- = cs.const(                          →  = 
+ =                                    →  = 
 __cs_drawn                            → drawn
 .                                     → .
 get                                   → get
 ()                                    → ()
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 __cs_held                             → held
  ===                                  →  === 
 null                                  → null
@@ -97,11 +97,11 @@ __cs_held                             → held
 (                                     → (
 __cs_props                            → props
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n  }
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n  
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n    <
 div                                   → div
 >{cs.lift(                            → >\n      {
@@ -173,5 +173,5 @@ button                                → button
 )}</                                  → \n    </
 div                                   → div
 >                                     → >\n  )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n}`

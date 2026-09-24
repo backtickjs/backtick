@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_rows                             → rows
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -11,17 +11,16 @@ Row                                   → Row
 >(                                    → >(
 []                                    → []
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_add                              → add
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_row                              → row
 :                                     → : 
 Row                                   → Row
 ) => {\n                              → ) => {\n      
-cs.statement(                         → 
 __cs_rows                             → rows
 .                                     → .
 set                                   → set
@@ -30,27 +29,27 @@ set                                   → set
 __cs_row                              → row
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n    }
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_label                            → label
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_row                              → row
 :                                     → : 
 Row                                   → Row
 ) => {\n                              → ) => {\n      
-return cs.const(                      → return 
+return                                → return 
 __cs_row                              → row
 .                                     → .
 label                                 → label
-);                                    → ;
+;                                     → ;
 \n    }                               → \n    }
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 div                                   → div
 >{cs.lift(                            → >\n        
@@ -115,5 +114,5 @@ div                                   → div
 )}</                                  → \n      </
 div                                   → div
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

@@ -13,22 +13,22 @@ it("fetchRequests", async (t) => {
   await snapshotCase(
     t,
     "fetchRequests",
-    cs.lift(cs.const(() => {
-    const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("waiting"));
-    cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: Response) => {
+    cs.lift(() => {
+    const __cs_held = (cs.splice((state)) satisfies typeof cs.ClientUnknown)("waiting");
+    (cs.splice((window)) satisfies typeof cs.ClientUnknown).fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: Response) => {
         if (__cs_response.status !== 200) {
             throw "answered " + __cs_response.status;
         }
-        cs.statement(__cs_held.set(JSON.parse(__cs_response.text) === null ? "null" : "a value"));
+        __cs_held.set(JSON.parse(__cs_response.text) === null ? "null" : "a value");
     }, (__cs_message: string) => {
-        cs.statement(__cs_held.set("failed \u2014 " + __cs_message));
-    }, { timeout: 3000 }));
-    cs.statement((cs.splice((window)) satisfies typeof cs.ClientUnknown).fetch("/cases", (__cs_response: Response) => {
-        cs.statement(__cs_held.set(__cs_response.text));
+        __cs_held.set("failed \u2014 " + __cs_message);
+    }, { timeout: 3000 });
+    (cs.splice((window)) satisfies typeof cs.ClientUnknown).fetch("/cases", (__cs_response: Response) => {
+        __cs_held.set(__cs_response.text);
     }, (__cs_message: string) => {
-        cs.statement(__cs_held.set(__cs_message));
-    }, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: "Math.trunc", passed: true }) }));
-    return cs.const(__cs_held.get());
-})),
+        __cs_held.set(__cs_message);
+    }, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: "Math.trunc", passed: true }) });
+    return __cs_held.get();
+}),
   );
 });

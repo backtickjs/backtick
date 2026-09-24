@@ -11,9 +11,9 @@ it("computedKey", async (t) => {
     t,
     "computedKey",
     cs.lift((() => {
-    const __cs_base = cs.const({ a: 1, b: 2 });
-    const __cs_name = cs.const("b");
-    return cs.const({ ...__cs_base, [cs.string(__cs_name)]: 9, [cs.string("c" + "d")]: 3, a: 4 });
+    const __cs_base = { a: 1, b: 2 };
+    const __cs_name = "b";
+    return { ...__cs_base, [__cs_name]: 9, ["c" + "d"]: 3, a: 4 };
 })()),
   );
 });

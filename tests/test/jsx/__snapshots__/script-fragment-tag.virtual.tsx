@@ -15,7 +15,7 @@ it("scriptFragmentTag", async (t) => {
     t,
     "scriptFragmentTag",
     cs.lift((() => {
-    return cs.const(<div>{cs.lift(<Fragment>{cs.lift(<span>a</span>)}{cs.lift(<span>b</span>)}</Fragment>)}{cs.lift(<>{cs.lift(<em>c</em>)}</>)}</div>);
+    return <div>{cs.lift(<Fragment>{cs.lift(<span>a</span>)}{cs.lift(<span>b</span>)}</Fragment>)}{cs.lift(<>{cs.lift(<em>c</em>)}</>)}</div>;
 })()),
   );
 });

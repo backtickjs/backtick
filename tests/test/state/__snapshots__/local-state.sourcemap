@@ -1,16 +1,16 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_size                             → size
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 16                                    → 16
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 span                                  → span
                                       → \n        
@@ -29,7 +29,6 @@ get                                   → get
 onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n          
-cs.statement(                         → 
 __cs_size                             → size
 .                                     → .
 set                                   → set
@@ -41,11 +40,11 @@ get                                   → get
  +                                    →  + 
 1                                     → 1
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n        }
 )}                                    → }
 >\n        press\n      </            → \n      >\n        press\n      </
 span                                  → span
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

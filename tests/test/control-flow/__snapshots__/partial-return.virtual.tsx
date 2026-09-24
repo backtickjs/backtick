@@ -10,7 +10,7 @@ it("partialReturnScript", async (t) => {
     cs.lift((() => {
     let __cs_n = 1;
     if (__cs_n === 2) {
-        return cs.const("some");
+        return "some";
     }
 })()),
   );
@@ -21,12 +21,12 @@ it("partialReturnArrow", async (t) => {
     t,
     "partialReturnArrow",
     cs.lift((() => {
-    const __cs_pick = cs.const((__cs_b: boolean) => {
-        if ((cs.condition(__cs_b) && __cs_b)) {
-            return cs.const("taken");
+    const __cs_pick = (__cs_b: boolean) => {
+        if (__cs_b) {
+            return "taken";
         }
-    });
-    return cs.const([__cs_pick(true), __cs_pick(false)]);
+    };
+    return [__cs_pick(true), __cs_pick(false)];
 })()),
   );
 });

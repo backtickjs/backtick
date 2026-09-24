@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_Badge                            → Badge
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_p                                → p
 :                                     → : 
@@ -23,9 +23,9 @@ n                                     → n
 )}</                                  → }</
 i                                     → i
 >                                     → >
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 section                               → section
 >{cs.lift(                            → >\n        
@@ -46,23 +46,23 @@ body                                  → body
 )}</                                  → }\n      </
 section                               → section
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`
 cs.lift((() => {\n                    → cs`{\n  
 const                                 → const 
 __cs_count                            → count
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n  
 const                                 → const 
 __cs_Badge                            → Badge
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_p                                → p
 :                                     → : 
@@ -93,9 +93,9 @@ children                              → children
 )}</                                  → }\n    </
 b                                     → b
 >                                     → >\n  )
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n  
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n    <
 div                                   → div
 >{cs.lift(                            → >\n      
@@ -105,7 +105,7 @@ Panel                                 → Panel
 body                                  → body
 ={cs.lift(                            → ={\n          
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Badge                            → Badge
                                       →  
@@ -132,7 +132,7 @@ u                                     → u
 }</                                   → \n          </
 __cs_Badge                            → Badge
 >                                     → >
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}                                    → \n        }
 />                                    → \n      />
@@ -161,5 +161,5 @@ button                                → button
 )}</                                  → \n    </
 div                                   → div
 >                                     → >\n  )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n}`

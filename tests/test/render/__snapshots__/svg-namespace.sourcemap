@@ -1,4 +1,4 @@
-cs.lift(cs.const(       → cs`
+cs.lift(                → cs`
 <                       → <
 circle                  → circle
                         →  
@@ -27,11 +27,11 @@ stroke                  → stroke
 "currentColor"          → "currentColor"
 )}                      → 
 />                      →  />
-))                      → `
+)                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_Dot                → Dot
- = cs.const(            →  = 
+ =                      →  = 
 (                       → (
 __cs_props              → props
 :                       → : 
@@ -76,9 +76,9 @@ title                   → title
 )}</                    → \n    </
 circle                  → circle
 >                       → >\n  )
-);                      → ;
+;                       → ;
 \n                      → \n\n  
-return cs.const(        → return 
+return                  → return 
 <                       → (\n    <
 div                     → div
 >{cs.lift(              → >\n      
@@ -180,5 +180,5 @@ svg                     → svg
 )}</                    → \n    </
 div                     → div
 >                       → >\n  )
-);                      → ;
+;                       → ;
 \n})())                 → \n}`

@@ -1,18 +1,18 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_flag                             → flag
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 true                                  → true
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_tone                             → tone
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -21,11 +21,11 @@ __cs_tone                             → tone
 Tone.Warm                             → Tone.Warm
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_step                             → step
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -36,25 +36,23 @@ number                                → number
 () =>                                 → () => 
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 span                                  → span
                                       → \n        
 onclick                               → onclick
 ={cs.lift(                            → ={
 () => {\n                             → () => {\n          
-cs.statement(                         → 
 __cs_flag                             → flag
 .                                     → .
 set                                   → set
 (                                     → (
 false                                 → false
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n          
-cs.statement(                         → 
 __cs_tone                             → tone
 .                                     → .
 set                                   → set
@@ -63,9 +61,8 @@ set                                   → set
 Tone.Cool                             → Tone.Cool
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n          
-cs.statement(                         → 
 __cs_step                             → step
 .                                     → .
 set                                   → set
@@ -73,7 +70,7 @@ set                                   → set
 () =>                                 → () => 
 1                                     → 1
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n        }
 )}                                    → }
 >{cs.lift(                            → \n      >\n        {
@@ -99,5 +96,5 @@ get                                   → get
 )}</                                  → }\n      </
 span                                  → span
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

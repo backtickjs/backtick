@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_prices             → prices
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 4.5                     → 4.5
 ,                       → , 
@@ -9,11 +9,11 @@ __cs_prices             → prices
 ,                       → , 
 2                       → 2
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_total              → total
- = cs.const(            →  = 
+ =                      →  = 
 __cs_prices             → prices
 .                       → .
 reduce                  → reduce
@@ -29,11 +29,11 @@ __cs_price              → price
 ,                       → , 
 0                       → 0
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_names              → names
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 "a"                     → "a"
 ,                       → , 
@@ -41,11 +41,11 @@ __cs_names              → names
 ,                       → , 
 "c"                     → "c"
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_joined             → joined
- = cs.const(            →  = 
+ =                      →  = 
 __cs_names              → names
 .                       → .
 reduce                  → reduce
@@ -65,18 +65,18 @@ __cs_one                → one
 ,                       → , 
 ""                      → ""
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_empty              → empty
 :                       → : 
 number                  → number
 []                      → []
- = cs.const(            →  = 
+ =                      →  = 
 []                      → []
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_total              → total
 .                       → .
 toFixed                 → toFixed
@@ -105,5 +105,5 @@ __cs_one                → one
 ,                       → , 
 0                       → 0
 )                       → )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

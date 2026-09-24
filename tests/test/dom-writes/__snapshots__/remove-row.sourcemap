@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_ids                              → ids
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -21,9 +21,9 @@ number                                → number
 5                                     → 5
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 table                                 → table
 >{cs.lift(                            → >\n        
@@ -106,5 +106,5 @@ tbody                                 → tbody
 )}</                                  → \n      </
 table                                 → table
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

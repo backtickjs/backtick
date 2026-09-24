@@ -1,31 +1,34 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_front              → front
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 1                       → 1
 ,                       → , 
 2                       → 2
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_back               → back
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 3                       → 3
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_none               → none
- = cs.const(            →  = 
+:                       → : 
+number                  → number
 []                      → []
-);                      → ;
+ =                      →  = 
+[]                      → []
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_all                → all
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 0                       → 0
 ,                       → , 
@@ -40,11 +43,11 @@ __cs_back               → back
 ,                       → , 
 4                       → 4
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_twice              → twice
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 ...                     → ...
 __cs_all                → all
@@ -52,9 +55,9 @@ __cs_all                → all
 ...                     → ...
 __cs_all                → all
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_all                → all
 .                       → .
 join                    → join
@@ -67,5 +70,5 @@ join                    → join
 __cs_twice              → twice
 .                       → .
 length                  → length
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -1,5 +1,5 @@
 cs.lift((() => {\n      → cs`{\n    
-return cs.const(        → return 
+return                  → return 
 <                       → (\n      <
 span                    → span
 >{cs.lift(              → >\n        {
@@ -23,5 +23,5 @@ fromCharCode            → fromCharCode
 )}</                    → }\n      </
 span                    → span
 >                       → >\n    )
-);                      → ;
+;                       → ;
 \n})())                 → \n  }`

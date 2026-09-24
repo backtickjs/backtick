@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_ids                              → ids
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -17,22 +17,21 @@ number                                → number
 3                                     → 3
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_swap                             → swap
- = cs.const(                          →  = 
+ =                                    →  = 
 () => {\n                             → () => {\n      
 const                                 → const 
 __cs_held                             → held
- = cs.const(                          →  = 
+ =                                    →  = 
 __cs_ids                              → ids
 .                                     → .
 get                                   → get
 ()                                    → ()
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-cs.statement(                         → 
 __cs_ids                              → ids
 .                                     → .
 set                                   → set
@@ -59,15 +58,14 @@ __cs_held                             → held
 ]                                     → ]
 )                                     → )
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n    }
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_drop                             → drop
- = cs.const(                          →  = 
+ =                                    →  = 
 () => {\n                             → () => {\n      
-cs.statement(                         → 
 __cs_ids                              → ids
 .                                     → .
 set                                   → set
@@ -86,11 +84,11 @@ __cs_id                               → id
 2                                     → 2
 )                                     → )
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n    }
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 div                                   → div
 >{cs.lift(                            → >\n        
@@ -153,5 +151,5 @@ div                                   → div
 )}</                                  → \n      </
 div                                   → div
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

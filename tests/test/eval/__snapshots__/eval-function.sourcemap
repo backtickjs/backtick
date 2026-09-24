@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_name                             → name
 :                                     → : 
@@ -7,8 +7,8 @@ string                                → string
 "hello "                              → "hello "
  +                                    →  + 
 __cs_name                             → name
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (                                     → (
 __cs_props                            → props
 :                                     → : 
@@ -30,8 +30,8 @@ count                                 → count
 )}</                                  → }</
 b                                     → b
 >                                     → >
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 <                                     → <
 div                                   → div
 >{cs.lift(                            → >\n      
@@ -67,4 +67,4 @@ count                                 → count
 )}</                                  → }\n    </
 div                                   → div
 >                                     → >
-))                                    → `
+)                                     → `

@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (\n  
 __cs_value                            → value
 :                                     → : 
@@ -12,17 +12,17 @@ __cs_value                            → value
 null                                  → null
 )                                     → ) 
 {\n                                   → {\n    
-return cs.const(                      → return 
+return                                → return 
 "-"                                   → "-"
-);                                    → ;
+;                                     → ;
 \n    }                               → \n  }
 \n                                    → \n  
-return cs.const(                      → return 
+return                                → return 
 __cs_value                            → value
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 {                                     → ({\n      
 missing                               → missing
 :                                     → : 
@@ -46,4 +46,4 @@ bare                                  → bare
 :                                     → : 
 null                                  → null
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

@@ -1,21 +1,20 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_n                                → n
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 2                                     → 2
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-cs.statement(                         → 
 __cs_n                                → n
 .                                     → .
 set                                   → set
 (                                     → (
 3                                     → 3
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

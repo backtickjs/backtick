@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_rows                             → rows
- = cs.const(                          →  = 
+ =                                    →  = 
 [                                     → [
 1                                     → 1
 ,                                     → , 
@@ -37,11 +37,11 @@ __cs_id                               → id
  }                                    → ,\n    })
 )                                     → 
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_update                           → update
- = cs.const(                          →  = 
+ =                                    →  = 
 () => {\n                             → () => {\n      
 for (                                 → for (
 let                                   → let 
@@ -56,25 +56,23 @@ __cs_rows                             → rows
 length                                → length
 ;                                     → ; 
 __cs_index                            → index
- = cs.const(                          →  = 
+ =                                    →  = 
 __cs_index                            → index
  +                                    →  + 
 2                                     → 2
-)                                     → 
 )                                     → ) 
 {\n                                   → {\n        
 const                                 → const 
 __cs_label                            → label
- = cs.const(                          →  = 
+ =                                    →  = 
 __cs_rows                             → rows
 [                                     → [
 __cs_index                            → index
 ]                                     → ]
 .                                     → .
 label                                 → label
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-cs.statement(                         → 
 __cs_label                            → label
 .                                     → .
 set                                   → set
@@ -86,12 +84,12 @@ get                                   → get
  +                                    →  + 
 " !!!"                                → " !!!"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n        }                           → \n      }
 \n    }                               → \n    }
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 div                                   → div
 >{cs.lift(                            → >\n        
@@ -177,5 +175,5 @@ table                                 → table
 )}</                                  → \n      </
 div                                   → div
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

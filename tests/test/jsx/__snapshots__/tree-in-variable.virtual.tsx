@@ -12,23 +12,23 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and calling what that named — and this is the case it existed for.
 const HeldRow = async () => <span>x</span>;
 
-const heldElement = cs.lift(cs.const(() => {
-    const __cs_tree = cs.const((cs.splice((<div />)) satisfies typeof cs.ClientUnknown));
-    return cs.const(__cs_tree);
-}));
+const heldElement = cs.lift(() => {
+    const __cs_tree = (cs.splice((<div />)) satisfies typeof cs.ClientUnknown);
+    return __cs_tree;
+});
 
-const heldComponent = cs.lift(cs.const(() => {
-    const __cs_tree = cs.const((cs.splice((<HeldRow />)) satisfies typeof cs.ClientUnknown));
-    return cs.const(__cs_tree);
-}));
+const heldComponent = cs.lift(() => {
+    const __cs_tree = (cs.splice((<HeldRow />)) satisfies typeof cs.ClientUnknown);
+    return __cs_tree;
+});
 
 it("treeInVariable", async (t) => {
   await snapshotCase(
     t,
     "treeInVariable",
     <div>
-      {cs.lift(cs.const((cs.splice((heldElement)) satisfies typeof cs.ClientUnknown)()))}
-      {cs.lift(cs.const((cs.splice((heldComponent)) satisfies typeof cs.ClientUnknown)()))}
+      {cs.lift((cs.splice((heldElement)) satisfies typeof cs.ClientUnknown)())}
+      {cs.lift((cs.splice((heldComponent)) satisfies typeof cs.ClientUnknown)())}
     </div>,
   );
 });

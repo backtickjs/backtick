@@ -10,12 +10,12 @@ it("spread", async (t) => {
     t,
     "spread",
     cs.lift((() => {
-    const __cs_front = cs.const([1, 2]);
-    const __cs_back = cs.const([3]);
-    const __cs_none = cs.const([]);
-    const __cs_all = cs.const([0, ...__cs_front, ...__cs_none, ...__cs_back, 4]);
-    const __cs_twice = cs.const([...__cs_all, ...__cs_all]);
-    return cs.const(__cs_all.join(",") + "|" + __cs_twice.length);
+    const __cs_front = [1, 2];
+    const __cs_back = [3];
+    const __cs_none: number[] = [];
+    const __cs_all = [0, ...__cs_front, ...__cs_none, ...__cs_back, 4];
+    const __cs_twice = [...__cs_all, ...__cs_all];
+    return __cs_all.join(",") + "|" + __cs_twice.length;
 })()),
   );
 });

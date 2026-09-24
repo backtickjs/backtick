@@ -29,11 +29,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3]));
-    const __cs_clear = cs.const(() => {
-        cs.statement(__cs_ids.set([]));
-    });
-    return cs.const(<>{cs.lift(<span onclick={cs.lift(__cs_clear)}>clear</span>)}{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</>);
+    const __cs_ids = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3]);
+    const __cs_clear = () => {
+        __cs_ids.set([]);
+    };
+    return <>{cs.lift(<span onclick={cs.lift(__cs_clear)}>clear</span>)}{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</>;
 })());
 }
 

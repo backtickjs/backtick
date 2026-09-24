@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_p                                → p
 :                                     → : 
@@ -11,14 +11,14 @@ number                                → number
  |                                    →  | 
 null                                  → null
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_p                                → p
 ?.                                    → ?.
 x                                     → x
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (                                     → (
 __cs_o                                → o
 :                                     → : 
@@ -38,16 +38,16 @@ null                                  → null
  |                                    →  | 
 null                                  → null
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_o                                → o
 ?.                                    → ?.
 inner                                 → inner
 ?.                                    → ?.
 z                                     → z
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (                                     → (
 __cs_s                                → s
 :                                     → : 
@@ -55,17 +55,17 @@ string                                → string
  |                                    →  | 
 null                                  → null
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_s                                → s
 ?.                                    → ?.
 concat                                → concat
 (                                     → (
 "!"                                   → "!"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 {                                     → ({\n      
 found                                 → found
 :                                     → : 
@@ -146,4 +146,4 @@ silent                                → silent
 null                                  → null
 )                                     → )
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

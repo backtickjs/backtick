@@ -1,18 +1,18 @@
 cs.lift((() => {\n                        → cs`{\n    
 const                                     → const 
 __cs_label                                → label
- = cs.const(                              →  = 
+ =                                        →  = 
 (cs.splice(                               →  [-semantic]
 (state)                                   → $state
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 (                                         → (
 "hi"                                      → "hi"
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    → \n\n    // A handler written inline and one held under a name: both are client code,\n    // and a handler prop takes a function and nothing else.\n    
 const                                     → const 
 __cs_row                                  → row
- = cs.const(                              →  = 
+ =                                        →  = 
 (                                         → (
 __cs_size                                 → size
 :                                         → : 
@@ -20,17 +20,17 @@ number                                    → number
 ) => {\n                                  → ) => {\n      
 const                                     → const 
 __cs_css                                  → css
- = cs.const(                              →  = 
+ =                                        →  = 
 "font-size: "                             → "font-size: "
  +                                        →  + 
 __cs_size                                 → size
  +                                        →  + 
 "px"                                      → "px"
-);                                        → ;
+;                                         → ;
 \n                                        → \n      
 const                                     → const 
 __cs_press                                → press
- = cs.const(                              →  = 
+ =                                        →  = 
 () =>                                     → () => 
 __cs_label                                → label
 .                                         → .
@@ -38,9 +38,9 @@ set                                       → set
 (                                         → (
 "held"                                    → "held"
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n                                        → \n      
-return cs.const(                          → return 
+return                                    → return 
 <                                         → (\n        <
 div                                       → div
                                           →  
@@ -105,11 +105,11 @@ span                                      → span
 )}</                                      → \n        </
 div                                       → div
 >                                         → >\n      )
-);                                        → ;
+;                                         → ;
 \n    }                                   → \n    }
-);                                        → ;
+;                                         → ;
 \n                                        → \n\n    
-return cs.const(                          → return 
+return                                    → return 
 <                                         → <
 div                                       → div
                                           →  
@@ -125,5 +125,5 @@ __cs_row                                  → row
 )}</                                      → }</
 div                                       → div
 >                                         → >
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n  }`

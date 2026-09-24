@@ -11,8 +11,8 @@ it("tsExpectError", async (t) => {
     "tsExpectError",
     cs.lift((() => {
     // @ts-expect-error: a string is not a number
-    const __cs_count: number = cs.const("one");
-    return cs.const(__cs_count);
+    const __cs_count: number = "one";
+    return __cs_count;
 })()),
   );
 });

@@ -1,48 +1,48 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_outer                            → outer
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (start)                               → $start
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 (cs.splice(                           → ${ [-semantic]
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_middle                           → middle
- = cs.const(                          →  = 
+ =                                    →  = 
 10                                    → 10
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 __cs_middle                           → middle
  +                                    →  + 
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 __cs_outer                            → outer
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (cs.splice(                           → ${ [-semantic]
 wrap(                                 → wrap(
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 1                                     → 1
-))                                    → `
+)                                     → `
 )                                     → )
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
  +                                    →  + 
 (cs.splice(                           → ${ [-semantic]
 wrap(                                 → wrap(
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 2                                     → 2
-))                                    → `
+)                                     → `
 )                                     → )
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-))                                    → `
+)                                     → `

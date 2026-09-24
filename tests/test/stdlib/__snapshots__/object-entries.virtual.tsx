@@ -9,9 +9,9 @@ it("objectEntries", async (t) => {
     t,
     "objectEntries",
     cs.lift((() => {
-    const __cs_held = cs.const({ n: 1, q: "ada" });
-    const __cs_written = cs.const(Object.fromEntries(Object.entries(__cs_held).map(__cs_pair => [__cs_pair[0], JSON.stringify(__cs_pair[1])])));
-    return cs.const(__cs_written.n + " " + __cs_written.q);
+    const __cs_held = { n: 1, q: "ada" };
+    const __cs_written = Object.fromEntries(Object.entries(__cs_held).map(__cs_pair => [__cs_pair[0], JSON.stringify(__cs_pair[1])]));
+    return __cs_written.n + " " + __cs_written.q;
 })()),
   );
 });

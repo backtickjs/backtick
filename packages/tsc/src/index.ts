@@ -81,7 +81,7 @@ function unmangleDeclarations(
     });
 }
 
-// The JavaScript this would write is the virtual code — `cs.lift(cs.const(…))`,
+// The JavaScript this would write is the virtual code — `cs.lift(…)`,
 // which throws where it is called. Refused rather than emitted, because the
 // output would look like a build that worked.
 function refuseJavaScriptEmit(options: {

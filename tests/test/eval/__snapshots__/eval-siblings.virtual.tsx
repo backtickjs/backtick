@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A bundle evaluated among siblings. What it draws goes where the call stands,
 // and nothing of its own does: the spans either side keep their order.
 async function Other() {
-  return cs.lift(cs.const(<em>{cs.lift("from another bundle")}</em>));
+  return cs.lift(<em>{cs.lift("from another bundle")}</em>);
 }
 
 const otherBundle = await bundler.run(<Other />);
@@ -15,6 +15,6 @@ it("evalSiblings", async (t) => {
   await snapshotCase(
     t,
     "evalSiblings",
-    cs.lift(cs.const(<div>{cs.lift(<span>before</span>)}{cs.lift(eval((cs.splice((otherBundle)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<span>after</span>)}</div>)),
+    cs.lift(<div>{cs.lift(<span>before</span>)}{cs.lift(eval((cs.splice((otherBundle)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<span>after</span>)}</div>),
   );
 });

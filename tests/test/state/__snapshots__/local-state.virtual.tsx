@@ -11,12 +11,12 @@ import { drawn, fontSize } from "./dom.ts";
 // cell changes — and `write` is an effect, which only an action can perform.
 async function Stepper() {
   return cs.lift((() => {
-    const __cs_size = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(16));
-    return cs.const(<span style={cs.lift("font-size: " + __cs_size.get() + "px")} onclick={cs.lift(() => {
-        cs.statement(__cs_size.set(__cs_size.get() + 1));
+    const __cs_size = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(16);
+    return <span style={cs.lift("font-size: " + __cs_size.get() + "px")} onclick={cs.lift(() => {
+        __cs_size.set(__cs_size.get() + 1);
     })}>
         press
-      </span>);
+      </span>;
 })());
 }
 

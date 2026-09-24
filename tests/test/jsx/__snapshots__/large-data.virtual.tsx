@@ -34,21 +34,21 @@ it("largeData", async (t) => {
     t,
     "largeData",
     <div>
-      <For each={cs.lift(cs.const((cs.splice((orders)) satisfies typeof cs.ClientUnknown)))}>
-        {cs.lift(cs.const((__cs_order: Order) => (cs.splice((
+      <For each={cs.lift((cs.splice((orders)) satisfies typeof cs.ClientUnknown))}>
+        {cs.lift((__cs_order: Order) => (cs.splice((
             <div>
               <img
-                src={cs.lift(cs.const("https://img.example.com/" + __cs_order.id + ".png"))}
+                src={cs.lift("https://img.example.com/" + __cs_order.id + ".png")}
                 alt=""
               />
-              <span>{cs.lift(cs.const(__cs_order.customer.name))}</span>
-              <span>{cs.lift(cs.const(__cs_order.customer.city))}</span>
-              <For each={cs.lift(cs.const(__cs_order.items))}>
-                {cs.lift(cs.const((__cs_item: Item) => (cs.splice((<span>{cs.lift(cs.const(__cs_item.sku + " x" + __cs_item.qty))}</span>)) satisfies typeof cs.ClientUnknown)))}
+              <span>{cs.lift(__cs_order.customer.name)}</span>
+              <span>{cs.lift(__cs_order.customer.city)}</span>
+              <For each={cs.lift(__cs_order.items)}>
+                {cs.lift((__cs_item: Item) => (cs.splice((<span>{cs.lift(__cs_item.sku + " x" + __cs_item.qty)}</span>)) satisfies typeof cs.ClientUnknown))}
               </For>
-              <span>{cs.lift(cs.const("$" + __cs_order.total))}</span>
+              <span>{cs.lift("$" + __cs_order.total)}</span>
             </div>
-          )) satisfies typeof cs.ClientUnknown)))}
+          )) satisfies typeof cs.ClientUnknown))}
       </For>
     </div>,
   );

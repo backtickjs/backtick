@@ -1,7 +1,7 @@
 cs.lift((() => {\n                        → cs`{\n  
 const                                     → const 
 __cs_Badge                                → Badge
- = cs.const(                              →  = 
+ =                                        →  = 
 (                                         → (
 __cs_p                                    → p
 :                                         → : 
@@ -23,20 +23,20 @@ n                                         → n
 )}</                                      → }</
 b                                         → b
 >                                         → >
-);                                        → ;
+;                                         → ;
 \n                                        → \n  
-return cs.const(                          → return 
+return                                    → return 
 (cs.splice(                               → ${ [-semantic]
 cs.lift((() => {\n                        → cs`{\n    
 const                                     → const 
 __cs_Badge                                → Badge
- = cs.const(                              →  = 
+ =                                        →  = 
 5                                         → 5
-);                                        → ;
+;                                         → ;
 \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    → \n    // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.\n    
-return cs.const(                          → return 
+return                                    → return 
 (cs.splice(                               → ${ [-semantic]
-cs.lift(cs.const(                         → cs`
+cs.lift(                                  → cs`
 <                                         → <
 __cs_Badge                                → Badge
                                           →  
@@ -45,10 +45,10 @@ n                                         → n
 1                                         → 1
 }                                         → }
 />                                        →  />
-))                                        → `
+)                                         → `
 ) satisfies typeof cs.ClientUnknown)      → } [-semantic]
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n  }`
 ) satisfies typeof cs.ClientUnknown)      → } [-semantic]
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n}`

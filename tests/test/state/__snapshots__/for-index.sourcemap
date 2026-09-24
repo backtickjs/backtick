@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_names                            → names
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -17,22 +17,21 @@ string                                → string
 "c"                                   → "c"
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
 const                                 → const 
 __cs_rotate                           → rotate
- = cs.const(                          →  = 
+ =                                    →  = 
 () => {\n                             → () => {\n      
 const                                 → const 
 __cs_held                             → held
- = cs.const(                          →  = 
+ =                                    →  = 
 __cs_names                            → names
 .                                     → .
 get                                   → get
 ()                                    → ()
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-cs.statement(                         → 
 __cs_names                            → names
 .                                     → .
 set                                   → set
@@ -54,11 +53,11 @@ __cs_held                             → held
 ]                                     → ]
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n    }
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 div                                   → div
 >{cs.lift(                            → >\n        
@@ -122,5 +121,5 @@ div                                   → div
 )}</                                  → \n      </
 div                                   → div
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

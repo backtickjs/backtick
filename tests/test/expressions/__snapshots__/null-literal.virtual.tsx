@@ -4,17 +4,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 // `null` written in the script itself — bare, compared against, and as an
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).
-const orDash: Client<(value: string | null) => string> = cs.lift(cs.const((__cs_value: string | null) => {
+const orDash: Client<(value: string | null) => string> = cs.lift((__cs_value: string | null) => {
     if (__cs_value === null) {
-        return cs.const("-");
+        return "-";
     }
-    return cs.const(__cs_value);
-}));
+    return __cs_value;
+});
 
 it("nullLiteral", async (t) => {
   await snapshotCase(
     t,
     "nullLiteral",
-    cs.lift(cs.const({ missing: (cs.splice((orDash)) satisfies typeof cs.ClientUnknown)(null), present: (cs.splice((orDash)) satisfies typeof cs.ClientUnknown)("hi"), bare: null })),
+    cs.lift({ missing: (cs.splice((orDash)) satisfies typeof cs.ClientUnknown)(null), present: (cs.splice((orDash)) satisfies typeof cs.ClientUnknown)("hi"), bare: null }),
   );
 });

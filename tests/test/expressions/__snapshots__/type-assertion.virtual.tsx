@@ -17,11 +17,11 @@ it("typeAssertion", async (t) => {
     t,
     "typeAssertion",
     cs.lift((() => {
-    const __cs_page = cs.const(JSON.parse((cs.splice((answered)) satisfies typeof cs.ClientUnknown)) as {
+    const __cs_page = JSON.parse((cs.splice((answered)) satisfies typeof cs.ClientUnknown)) as {
         rows: string[];
         count: number;
-    });
-    return cs.const(__cs_page.rows[0] + " of " + __cs_page.count);
+    };
+    return __cs_page.rows[0] + " of " + __cs_page.count;
 })()),
   );
 });

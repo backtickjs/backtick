@@ -18,7 +18,7 @@ function scriptRanges(
 
 // A mapping's non-default editor behavior, rendered as `[-flag …]`: `-` is
 // the flag off, `+` on. A `cs.splice(...)` wrapper hides hover
-// (`[-semantic]`); a condition's bare duplicate turns every feature off.
+// (`[-semantic]`).
 // Rows without data carry the defaults (everything on) and render bare.
 function renderData(data: SourceMapping["data"]): string {
   if (!data) {

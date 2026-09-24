@@ -39,7 +39,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one: once it stops answering, a write of `null` over `null` changes nothing
 // and nothing runs again — a loop that would otherwise have no end.
 async function Answer() {
-  return cs.lift(cs.const(<em>{cs.lift("answered")}</em>));
+  return cs.lift(<em>{cs.lift("answered")}</em>);
 }
 
 const answer = await bundler.run(<Answer />);
@@ -50,18 +50,18 @@ async function Waiting({
   ask: Prop<() => Bundle<BacktickElement> | null>;
 }) {
   return cs.lift((() => {
-    const __cs_drawn = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<Bundle<BacktickElement> | null>(null));
-    const __cs_started = cs.const((cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => __cs_drawn.set((cs.splice((ask)) satisfies typeof cs.ClientUnknown)()), 0));
-    return cs.const(<>{cs.lift(__cs_drawn.get() === null ? null : eval(__cs_drawn.get() as Bundle<BacktickElement>))}</>);
+    const __cs_drawn = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<Bundle<BacktickElement> | null>(null);
+    const __cs_started = (cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => __cs_drawn.set((cs.splice((ask)) satisfies typeof cs.ClientUnknown)()), 0);
+    return <>{cs.lift(__cs_drawn.get() === null ? null : eval(__cs_drawn.get() as Bundle<BacktickElement>))}</>;
 })());
 }
 
 const evalBuildsOnce = cs.lift((() => {
-    const __cs_asked = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<span>{cs.lift("asked " + __cs_asked.get())}</span>)}{cs.lift(<Waiting ask={cs.lift(() => {
-        cs.statement(__cs_asked.set(__cs_asked.get() + 1));
-        return cs.const(__cs_asked.get() > 4 ? null : (cs.splice((answer)) satisfies typeof cs.ClientUnknown));
-    })}/>)}</div>);
+    const __cs_asked = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked.get())}</span>)}{cs.lift(<Waiting ask={cs.lift(() => {
+        __cs_asked.set(__cs_asked.get() + 1);
+        return __cs_asked.get() > 4 ? null : (cs.splice((answer)) satisfies typeof cs.ClientUnknown);
+    })}/>)}</div>;
 })());
 
 it("evalBuildsOnce", async (t) => {

@@ -1,33 +1,33 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 null                                  → null
  ===                                  →  === 
 null                                  → null
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 undefined                             → undefined
  ===                                  →  === 
 undefined                             → undefined
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 null                                  → null
  !==                                  →  !== 
 undefined                             → undefined
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 null                                  → null
  ===                                  →  === 
 undefined                             → undefined
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n        
 const                                 → const 
 __cs_names                            → names
- = cs.const(                          →  = 
+ =                                    →  = 
 [                                     → [
 "a"                                   → "a"
 ]                                     → ]
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-return cs.const(                      → return 
+return                                → return 
 [                                     → [\n          
 (cs.splice(                           →  [-semantic]
 (nothing)                             → $nothing
@@ -67,5 +67,5 @@ __cs_names                            → names
  !==                                  →  !== 
 null                                  → null
 ]                                     → ,\n        ]
-);                                    → ;
+;                                     → ;
 \n})())                               → \n      }`

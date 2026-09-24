@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 "font-size: "                         → "font-size: "
  +                                    →  + 
 (cs.splice(                           →  [-semantic]
@@ -9,10 +9,9 @@ get                                   → get
 ()                                    → ()
  +                                    →  + 
 "px"                                  → "px"
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 () => {\n                             → () => {\n      
-cs.statement(                         → 
 (cs.splice(                           →  [-semantic]
 (size)                                → $size
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -28,22 +27,22 @@ get                                   → get
  +                                    →  + 
 1                                     → 1
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n}                                   → \n    }
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_size                             → size
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 16                                    → 16
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 div                                   → div
 >{cs.lift(                            → >\n        
@@ -67,5 +66,5 @@ __cs_size                             → size
 )}</                                  → \n      </
 div                                   → div
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

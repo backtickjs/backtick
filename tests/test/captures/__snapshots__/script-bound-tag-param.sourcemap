@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_twice                            → twice
- = cs.const(                          →  = 
+ =                                    →  = 
 (                                     → (
 __cs_Row                              → Row
 :                                     → : 
@@ -21,7 +21,7 @@ BacktickElement                       → BacktickElement
 ul                                    → ul
 >{cs.lift(                            → >\n          {
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Row                              → Row
                                       →  
@@ -30,11 +30,11 @@ n                                     → n
 1                                     → 1
 }                                     → }
 />                                    →  />
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}{cs.lift(                           → }\n          {
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 __cs_Row                              → Row
                                       →  
@@ -43,14 +43,14 @@ n                                     → n
 2                                     → 2
 }                                     → }
 />                                    →  />
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )}</                                  → }\n        </
 ul                                    → ul
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 __cs_twice                            → twice
 (                                     → (
 (                                     → (
@@ -75,5 +75,5 @@ n                                     → n
 li                                    → li
 >                                     → >
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

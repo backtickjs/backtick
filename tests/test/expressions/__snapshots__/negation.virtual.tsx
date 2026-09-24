@@ -11,17 +11,17 @@ it("negation", async (t) => {
   await snapshotCase(
     t,
     "negation",
-    cs.lift(cs.const((__cs_count: number) => {
-    const __cs_floor = cs.const(-cs.number(1));
-    const __cs_step = cs.const(-cs.number(__cs_count));
-    return cs.const(__cs_floor + __cs_step + -cs.number(2));
-})),
+    cs.lift((__cs_count: number) => {
+    const __cs_floor = -1;
+    const __cs_step = -__cs_count;
+    return __cs_floor + __cs_step + -2;
+}),
   );
 });
 
 // `-0` stays a negation on the wire: JSON writes the number `-0` as `0`.
 it("negativeZero", async (t) => {
   await snapshotCase(t, "negativeZero", cs.lift((() => {
-    return cs.const(1 / -cs.number(0));
+    return 1 / -0;
 })()));
 });

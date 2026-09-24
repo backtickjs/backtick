@@ -5,15 +5,15 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 function outerBase(inner: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_base = cs.const(1);
-    return cs.const(__cs_base + (cs.splice(middleBase(inner)) satisfies typeof cs.ClientUnknown));
+    const __cs_base = 1;
+    return __cs_base + (cs.splice(middleBase(inner)) satisfies typeof cs.ClientUnknown);
 })());
 }
 
 function middleBase(inner: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_base = cs.const(2);
-    return cs.const(__cs_base * (cs.splice((inner)) satisfies typeof cs.ClientUnknown));
+    const __cs_base = 2;
+    return __cs_base * (cs.splice((inner)) satisfies typeof cs.ClientUnknown);
 })());
 }
 
@@ -26,8 +26,8 @@ it("deepShadowing", async (t) => {
     t,
     "deepShadowing",
     cs.lift((() => {
-    const __cs_base = cs.const(10);
-    return cs.const((cs.splice(outerBase(cs.lift(cs.const(__cs_base)))) satisfies typeof cs.ClientUnknown));
+    const __cs_base = 10;
+    return (cs.splice(outerBase(cs.lift(__cs_base))) satisfies typeof cs.ClientUnknown);
 })()),
   );
 });

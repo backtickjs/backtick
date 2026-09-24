@@ -14,10 +14,10 @@ async function Card(props: { title: Prop<string> }) {
 // polymorphic and its nested script's captures arrive through a thunk.
 function labelled(label: Client<string>) {
   return cs.lift((() => {
-    const __cs_Card = cs.const((__cs_props: {
+    const __cs_Card = (__cs_props: {
         n: number;
-    }) => <i>{cs.lift((cs.splice((label)) satisfies typeof cs.ClientUnknown) + __cs_props.n)}</i>);
-    return cs.const(<p>{cs.lift((cs.splice(cs.lift(cs.const(<__cs_Card n={1}/>))) satisfies typeof cs.ClientUnknown))}</p>);
+    }) => <i>{cs.lift((cs.splice((label)) satisfies typeof cs.ClientUnknown) + __cs_props.n)}</i>;
+    return <p>{cs.lift((cs.splice(cs.lift(<__cs_Card n={1}/>)) satisfies typeof cs.ClientUnknown))}</p>;
 })());
 }
 
@@ -25,7 +25,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs.lift(cs.const(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift((cs.splice(labelled(cs.lift(cs.const("a")))) satisfies typeof cs.ClientUnknown))}{cs.lift((cs.splice(labelled(cs.lift(cs.const("b")))) satisfies typeof cs.ClientUnknown))}</div>)),
+    cs.lift(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift((cs.splice(labelled(cs.lift("a"))) satisfies typeof cs.ClientUnknown))}{cs.lift((cs.splice(labelled(cs.lift("b"))) satisfies typeof cs.ClientUnknown))}</div>),
   );
 });
 
@@ -37,12 +37,12 @@ it("scriptBoundTagScope", async (t) => {
     t,
     "scriptBoundTagScope",
     cs.lift((() => {
-    const __cs_twice = cs.const((__cs_Card: (props: {
+    const __cs_twice = (__cs_Card: (props: {
         n: number;
-    }) => BacktickElement) => <div>{cs.lift(<__cs_Card n={1}/>)}{cs.lift(<__cs_Card n={2}/>)}</div>);
-    return cs.const(<section>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(__cs_twice((__cs_props: {
+    }) => BacktickElement) => <div>{cs.lift(<__cs_Card n={1}/>)}{cs.lift(<__cs_Card n={2}/>)}</div>;
+    return <section>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(__cs_twice((__cs_props: {
         n: number;
-    }) => <i>{cs.lift("row " + __cs_props.n)}</i>))}</section>);
+    }) => <i>{cs.lift("row " + __cs_props.n)}</i>))}</section>;
 })()),
   );
 });

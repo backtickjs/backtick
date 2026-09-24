@@ -25,8 +25,8 @@ describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = await render(
       cs.lift((() => {
-    cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log()));
-    return cs.const(<p>drawn</p>);
+    (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log());
+    return <p>drawn</p>;
 })()),
     );
     assert.equal(runs, 0);
@@ -37,12 +37,12 @@ describe("onCleanup", () => {
   it("runs before a computed calculates again", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(1));
-    const __cs_doubled = cs.const((cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => {
-        cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log()));
-        return cs.const(__cs_n.get() * 2);
-    }));
-    return cs.const(<button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>{cs.lift(__cs_doubled.get())}</button>);
+    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(1);
+    const __cs_doubled = (cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => {
+        (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log());
+        return __cs_n.get() * 2;
+    });
+    return <button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>{cs.lift(__cs_doubled.get())}</button>;
 })()),
     );
     assert.equal(runs, 0);
@@ -69,12 +69,12 @@ describe("onCleanup", () => {
 
     const { unmount } = await render(
       cs.lift((() => {
-    const __cs_timer = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
-    cs.statement((cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => {
-        cs.statement(__cs_timer.set((cs.splice((window)) satisfies typeof cs.ClientUnknown).setInterval(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log(), 5)));
-    }));
-    cs.statement((cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).clearInterval(__cs_timer.get())));
-    return cs.const(<p>ticking</p>);
+    const __cs_timer = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    (cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => {
+        __cs_timer.set((cs.splice((window)) satisfies typeof cs.ClientUnknown).setInterval(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log(), 5));
+    });
+    (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).clearInterval(__cs_timer.get()));
+    return <p>ticking</p>;
 })()),
     );
     await wait(40);
@@ -89,9 +89,9 @@ describe("onCleanup", () => {
   it("never runs when called from a handler", async () => {
     const { unmount } = await render(
       cs.lift((() => {
-    return cs.const(<button onclick={cs.lift(() => (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log()))}>
+    return <button onclick={cs.lift(() => (cs.splice((onCleanup)) satisfies typeof cs.ClientUnknown)(() => (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log()))}>
             press
-          </button>);
+          </button>;
 })()),
     );
     await userEvent.click(screen.getByRole("button"));

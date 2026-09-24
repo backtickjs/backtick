@@ -9,8 +9,8 @@ it("objectValues", async (t) => {
     t,
     "objectValues",
     cs.lift((() => {
-    const __cs_prices = cs.const({ apple: 1, pear: 2 });
-    return cs.const({ values: Object.values(__cs_prices), holds: [Object.hasOwn(__cs_prices, "pear"), Object.hasOwn(__cs_prices, "plum")] });
+    const __cs_prices = { apple: 1, pear: 2 };
+    return { values: Object.values(__cs_prices), holds: [Object.hasOwn(__cs_prices, "pear"), Object.hasOwn(__cs_prices, "plum")] };
 })()),
   );
 });

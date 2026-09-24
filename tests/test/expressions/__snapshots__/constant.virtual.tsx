@@ -3,5 +3,5 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 it("constant", async (t) => {
-  await snapshotCase(t, "constant", cs.lift(cs.const(1)));
+  await snapshotCase(t, "constant", cs.lift(1));
 });

@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_prices             → prices
- = cs.const(            →  = 
+ =                      →  = 
 {                       → { 
 apple                   → apple
 :                       → : 
@@ -11,9 +11,9 @@ pear                    → pear
 :                       → : 
 2                       → 2
  }                      →  }
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 {                       → {\n        
 values                  → values
 :                       → : 
@@ -46,5 +46,5 @@ __cs_prices             → prices
 )                       → )
 ]                       → ]
  }                      → ,\n      }
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

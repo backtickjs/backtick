@@ -10,17 +10,17 @@ import { watchWrites } from "./writes.ts";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.lift((() => {
-    const __cs_rows = cs.const([1, 2, 3, 4].map((__cs_id: number) => ({ id: __cs_id, label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)("row " + __cs_id) })));
-    const __cs_update = cs.const(() => {
-        for (let __cs_index = 0; __cs_index < __cs_rows.length; __cs_index = cs.const(__cs_index + 2)) {
-            const __cs_label = cs.const(__cs_rows[__cs_index].label);
-            cs.statement(__cs_label.set(__cs_label.get() + " !!!"));
+    const __cs_rows = [1, 2, 3, 4].map((__cs_id: number) => ({ id: __cs_id, label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)("row " + __cs_id) }));
+    const __cs_update = () => {
+        for (let __cs_index = 0; __cs_index < __cs_rows.length; __cs_index = __cs_index + 2) {
+            const __cs_label = __cs_rows[__cs_index].label;
+            __cs_label.set(__cs_label.get() + " !!!");
         }
-    });
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(__cs_update)}>update</button>)}{cs.lift(<table>{cs.lift(<tbody>{cs.lift(<For each={cs.lift(__cs_rows)}>{cs.lift((__cs_row: {
+    };
+    return <div>{cs.lift(<button onclick={cs.lift(__cs_update)}>update</button>)}{cs.lift(<table>{cs.lift(<tbody>{cs.lift(<For each={cs.lift(__cs_rows)}>{cs.lift((__cs_row: {
         id: number;
         label: State<string>;
-    }) => <tr id={cs.lift("row-" + __cs_row.id)}>{cs.lift(<td>{cs.lift(__cs_row.label.get())}</td>)}</tr>)}</For>)}</tbody>)}</table>)}</div>);
+    }) => <tr id={cs.lift("row-" + __cs_row.id)}>{cs.lift(<td>{cs.lift(__cs_row.label.get())}</td>)}</tr>)}</For>)}</tbody>)}</table>)}</div>;
 })());
 }
 

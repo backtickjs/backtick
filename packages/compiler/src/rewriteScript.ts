@@ -150,7 +150,7 @@ export function rewriteScript(
   const virtual = call(ts, "cs", "lift", [
     ts.isBlock(rewritten.virtual)
       ? iife(ts, rewritten.virtual)
-      : call(ts, "cs", "const", [rewritten.virtual as ts.Expression]),
+      : (rewritten.virtual as ts.Expression),
   ]);
 
   sourceMaps.set(virtual, scriptRange);

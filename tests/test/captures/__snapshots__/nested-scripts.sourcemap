@@ -1,15 +1,15 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_x                                → x
- = cs.const(                          →  = 
+ =                                    →  = 
 0                                     → 0
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 (cs.splice(                           → ${ [-semantic]
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 __cs_x                                → x
-))                                    → `
+)                                     → `
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

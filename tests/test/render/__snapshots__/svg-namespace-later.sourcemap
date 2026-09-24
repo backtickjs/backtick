@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n  
 const                                 → const 
 __cs_xs                               → xs
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -10,20 +10,20 @@ __cs_xs                               → xs
 10                                    → 10
 ]                                     → ]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n  
 const                                 → const 
 __cs_shown                            → shown
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 false                                 → false
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n  
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n    <
 div                                   → div
 >{cs.lift(                            → >\n      
@@ -64,14 +64,11 @@ title                                 → title
 For                                   → For
 >                                     → >
 )}{cs.lift(                           → \n        {
-(cs.condition(                        → 
 __cs_shown                            → shown
 .                                     → .
 get                                   → get
 ()                                    → ()
-) &&                                  → 
-__cs_shown.get()                      → shown.get() [-semantic -completion -navigation -verification]
-) ?                                   →  ? 
+ ?                                    →  ? 
 <                                     → <
 title                                 → title
 >{cs.lift(                            → >{
@@ -133,5 +130,5 @@ button                                → button
 )}</                                  → \n    </
 div                                   → div
 >                                     → >\n  )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n}`

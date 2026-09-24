@@ -2,28 +2,28 @@ import { cs } from "@backtickjs/core";
 
 // An action call produces no value: its `void` result can't initialize a
 // variable — in a value script or an action.
-const ping = cs.lift(cs.const(() => {
+const ping = cs.lift(() => {
     let __cs_n = 0;
-    __cs_n = cs.const(1);
-}));
+    __cs_n = 1;
+});
 
 const script = cs.lift((() => {
-    const __cs_x = cs.const((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
-    return cs.const(1);
+    const __cs_x = (cs.splice((ping)) satisfies typeof cs.ClientUnknown)();
+    return 1;
 })());
 
 const action = cs.lift((() => {
-    const __cs_x = cs.const((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
+    const __cs_x = (cs.splice((ping)) satisfies typeof cs.ClientUnknown)();
 })());
 
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
-const label = cs.lift(cs.const((__cs_text: string) => {
-    return cs.const(__cs_text);
-}));
+const label = cs.lift((__cs_text: string) => {
+    return __cs_text;
+});
 
 const wrongArgument = cs.lift((() => {
     // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'string'.
-    const __cs_x = cs.const((cs.splice((label)) satisfies typeof cs.ClientUnknown)(true));
-    return cs.const(1);
+    const __cs_x = (cs.splice((label)) satisfies typeof cs.ClientUnknown)(true);
+    return 1;
 })());

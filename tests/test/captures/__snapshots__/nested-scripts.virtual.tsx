@@ -7,8 +7,8 @@ it("nestedScripts", async (t) => {
     t,
     "nestedScripts",
     cs.lift((() => {
-    const __cs_x = cs.const(0);
-    return cs.const((cs.splice(cs.lift(cs.const(__cs_x))) satisfies typeof cs.ClientUnknown));
+    const __cs_x = 0;
+    return (cs.splice(cs.lift(__cs_x)) satisfies typeof cs.ClientUnknown);
 })()),
   );
 });

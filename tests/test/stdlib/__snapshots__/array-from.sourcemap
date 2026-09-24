@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_doubled            → doubled
- = cs.const(            →  = 
+ =                      →  = 
 Array                   → Array
 .                       → .
 from                    → from
@@ -21,11 +21,11 @@ __cs_index              → index
  *                      →  * 
 2                       → 2
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_empty              → empty
- = cs.const(            →  = 
+ =                      →  = 
 Array                   → Array
 .                       → .
 from                    → from
@@ -43,11 +43,11 @@ __cs_index              → index
 ) =>                    → ) => 
 __cs_index              → index
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_absent             → absent
- = cs.const(            →  = 
+ =                      →  = 
 Array                   → Array
 .                       → .
 from                    → from
@@ -69,13 +69,12 @@ undefined               → undefined
  ?                      →  ? 
 __cs_index              → index
  :                      →  : 
--cs.number(             → -
+-                       → -
 1                       → 1
-)                       → 
 )                       → ,\n      )
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_doubled            → doubled
 .                       → .
 join                    → join
@@ -97,5 +96,5 @@ join                    → join
 (                       → (
 ","                     → ","
 )                       → )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

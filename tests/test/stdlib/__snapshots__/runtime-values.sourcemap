@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 {                                     → ({\n      
 list                                  → list
 :                                     → : 
@@ -12,4 +12,4 @@ obj                                   → obj
 { k: 3 }                              → { k: 3 }
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

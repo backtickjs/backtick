@@ -1,18 +1,18 @@
 cs.lift((() => {\n                        → cs`{\n  
 const                                     → const 
 __cs_n                                    → n
- = cs.const(                              →  = 
+ =                                        →  = 
 0                                         → 0
-);                                        → ;
+;                                         → ;
 \n    // @ts-expect-error: Cannot assign to 'n' because it is a constant.\n    → \n  // @ts-expect-error: Cannot assign to 'n' because it is a constant.\n  
 __cs_n                                    → n
  +=                                       →  += 
 1                                         → 1
 ;                                         → ;
 \n                                        → \n  
-return cs.const(                          → return 
+return                                    → return 
 __cs_n                                    → n
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n}`
 cs.lift((() => {\n                        → cs`{\n  
 let                                       → let 
@@ -26,7 +26,7 @@ __cs_n                                    → n
 "a"                                       → "a"
 ;                                         → ;
 \n                                        → \n  
-return cs.const(                          → return 
+return                                    → return 
 __cs_n                                    → n
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n}`

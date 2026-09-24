@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 <                                     → <
 For                                   → For
                                       →  
@@ -30,8 +30,8 @@ span                                  → span
 )}</                                  → }\n  </
 For                                   → For
 >                                     → >
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 <                                     → <
 div                                   → div
 >{cs.lift(                            → >\n  {
@@ -59,4 +59,4 @@ b                                     → b
 )}</                                  → \n</
 div                                   → div
 >                                     → >
-))                                    → `
+)                                     → `

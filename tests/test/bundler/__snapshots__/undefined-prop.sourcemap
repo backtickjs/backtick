@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 __cs_el                               → el
  =>                                   → ) => 
 (cs.splice(                           →  [-semantic]
@@ -11,4 +11,4 @@ __cs_el                               → el
 focus                                 → focus
 ()                                    → ()
 )                                     → )
-))                                    → `
+)                                     → `

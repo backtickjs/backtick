@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_numbers            → numbers
- = cs.const(            →  = 
+ =                      →  = 
 JSON                    → JSON
 .                       → .
 stringify               → stringify
@@ -14,33 +14,33 @@ stringify               → stringify
 3                       → 3
 ]                       → ]
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_text               → text
- = cs.const(            →  = 
+ =                      →  = 
 JSON                    → JSON
 .                       → .
 stringify               → stringify
 (                       → (
 "hi"                    → "hi"
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_flag               → flag
- = cs.const(            →  = 
+ =                      →  = 
 JSON                    → JSON
 .                       → .
 stringify               → stringify
 (                       → (
 true                    → true
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_held               → held
- = cs.const(            →  = 
+ =                      →  = 
 JSON                    → JSON
 .                       → .
 stringify               → stringify
@@ -55,20 +55,20 @@ b                       → b
 "two"                   → "two"
  }                      →  }
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_back               → back
- = cs.const(            →  = 
+ =                      →  = 
 JSON                    → JSON
 .                       → .
 parse                   → parse
 (                       → (
 __cs_numbers            → numbers
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_numbers            → numbers
  +                      →  +\n        
 "|"                     → "|"
@@ -105,5 +105,5 @@ parse                   → parse
 __cs_held               → held
 )                       → )
 )                       → )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

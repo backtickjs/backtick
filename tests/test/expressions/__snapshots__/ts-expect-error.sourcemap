@@ -3,11 +3,11 @@ const                                     → const
 __cs_count                                → count
 :                                         → : 
 number                                    → number
- = cs.const(                              →  = 
+ =                                        →  = 
 "one"                                     → "one"
-);                                        → ;
+;                                         → ;
 \n                                        → \n      
-return cs.const(                          → return 
+return                                    → return 
 __cs_count                                → count
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n    }`

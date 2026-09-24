@@ -5,19 +5,19 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `?` on a property means omittable: an absent member reads as null — the
 // language's absent value; `undefined` never arises — and `?.` composes on
 // top for the nullable reads.
-const read = cs.lift(cs.const((__cs_o: {
+const read = cs.lift((__cs_o: {
     label: string;
     inner?: {
         z?: number;
     };
 }) => {
-    return cs.const([__cs_o.label, __cs_o.inner?.z ?? 0]);
-}));
+    return [__cs_o.label, __cs_o.inner?.z ?? 0];
+});
 
 it("optionalProperty", async (t) => {
   await snapshotCase(
     t,
     "optionalProperty",
-    cs.lift(cs.const({ present: (cs.splice((read)) satisfies typeof cs.ClientUnknown)({ label: "a", inner: { z: 3 } }), partial: (cs.splice((read)) satisfies typeof cs.ClientUnknown)({ label: "b", inner: {} }), omitted: (cs.splice((read)) satisfies typeof cs.ClientUnknown)({ label: "c" }) })),
+    cs.lift({ present: (cs.splice((read)) satisfies typeof cs.ClientUnknown)({ label: "a", inner: { z: 3 } }), partial: (cs.splice((read)) satisfies typeof cs.ClientUnknown)({ label: "b", inner: {} }), omitted: (cs.splice((read)) satisfies typeof cs.ClientUnknown)({ label: "c" }) }),
   );
 });

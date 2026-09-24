@@ -16,8 +16,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // enclose is a different error.
 function innerBase(carried: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_base = cs.const(100);
-    return cs.const((cs.splice(cs.lift(cs.const(__cs_base + (cs.splice((carried)) satisfies typeof cs.ClientUnknown)))) satisfies typeof cs.ClientUnknown));
+    const __cs_base = 100;
+    return (cs.splice(cs.lift(__cs_base + (cs.splice((carried)) satisfies typeof cs.ClientUnknown))) satisfies typeof cs.ClientUnknown);
 })());
 }
 
@@ -26,8 +26,8 @@ it("foreignCaptureShadow", async (t) => {
     t,
     "foreignCaptureShadow",
     cs.lift((() => {
-    const __cs_base = cs.const(1);
-    return cs.const((cs.splice(innerBase(cs.lift(cs.const(__cs_base)))) satisfies typeof cs.ClientUnknown));
+    const __cs_base = 1;
+    return (cs.splice(innerBase(cs.lift(__cs_base))) satisfies typeof cs.ClientUnknown);
 })()),
   );
 });

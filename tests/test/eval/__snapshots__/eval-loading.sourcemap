@@ -1,7 +1,7 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_held                             → held
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -15,9 +15,9 @@ null                                  → null
 >(                                    → >(
 null                                  → null
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n      
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n        <
 div                                   → div
 >{cs.lift(                            → >\n          {
@@ -49,5 +49,5 @@ BacktickElement                       → BacktickElement
 )}</                                  → }\n        </
 div                                   → div
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

@@ -14,12 +14,12 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs.lift((() => {
-    const __cs_names = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>(["a", "b", "c"]));
-    const __cs_rotate = cs.const(() => {
-        const __cs_held = cs.const(__cs_names.get());
-        cs.statement(__cs_names.set([__cs_held[2], __cs_held[0], __cs_held[1]]));
-    });
-    return cs.const(<div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_names.get())}>{cs.lift((__cs_name: string, __cs_index: Signal<number>) => <span>{cs.lift(__cs_name + " at " + __cs_index.get())}</span>)}</For>)}</div>)}</div>);
+    const __cs_names = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>(["a", "b", "c"]);
+    const __cs_rotate = () => {
+        const __cs_held = __cs_names.get();
+        __cs_names.set([__cs_held[2], __cs_held[0], __cs_held[1]]);
+    };
+    return <div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_names.get())}>{cs.lift((__cs_name: string, __cs_index: Signal<number>) => <span>{cs.lift(__cs_name + " at " + __cs_index.get())}</span>)}</For>)}</div>)}</div>;
 })());
 }
 

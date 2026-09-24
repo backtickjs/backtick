@@ -24,6 +24,6 @@ it("scriptComponentNestedProp", async (t) => {
   await snapshotCase(
     t,
     "scriptComponentNestedProp",
-    cs.lift(cs.const(<Greeting person={cs.lift({ firstName: "ada" })}/>)),
+    cs.lift(<Greeting person={cs.lift({ firstName: "ada" })}/>),
   );
 });

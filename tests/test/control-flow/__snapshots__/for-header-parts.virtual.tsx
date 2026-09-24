@@ -12,10 +12,10 @@ it("forHeaderParts", async (t) => {
     let __cs_i = 0;
     let __cs_seen = "";
     for (; __cs_i < 3;) {
-        __cs_seen = cs.const(__cs_seen + __cs_i);
-        __cs_i = cs.const(__cs_i + 1);
+        __cs_seen = __cs_seen + __cs_i;
+        __cs_i = __cs_i + 1;
     }
-    return cs.const(__cs_seen);
+    return __cs_seen;
 })()),
   );
 });

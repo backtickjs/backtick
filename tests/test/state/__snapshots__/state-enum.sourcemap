@@ -1,10 +1,10 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_c                                → c
 :                                     → : 
 Color                                 → Color
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 __cs_c                                → c
  ===                                  →  === 
 (cs.splice(                           → ${ [-semantic]
@@ -14,13 +14,13 @@ Color.Blue                            → Color.Blue
 "blue"                                → "blue"
  :                                    →  : 
 "red"                                 → "red"
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_held                             → held
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -29,9 +29,9 @@ __cs_held                             → held
 Color.Red                             → Color.Red
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 span                                  → span
                                       →  
@@ -60,5 +60,5 @@ get                                   → get
 )}</                                  → }\n      </
 span                                  → span
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

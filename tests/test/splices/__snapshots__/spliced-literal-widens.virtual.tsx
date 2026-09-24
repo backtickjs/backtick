@@ -25,10 +25,10 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.lift((() => {
-    const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice((five)) satisfies typeof cs.ClientUnknown)));
-    cs.statement(__cs_n.set(6));
-    const __cs_c = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice(Color.Red) satisfies typeof cs.ClientUnknown)));
-    cs.statement(__cs_c.set((cs.splice(Color.Blue) satisfies typeof cs.ClientUnknown)));
+    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice((five)) satisfies typeof cs.ClientUnknown));
+    __cs_n.set(6);
+    const __cs_c = (cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice(Color.Red) satisfies typeof cs.ClientUnknown));
+    __cs_c.set((cs.splice(Color.Blue) satisfies typeof cs.ClientUnknown));
 })()),
   );
 });

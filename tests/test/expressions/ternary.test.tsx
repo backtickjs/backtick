@@ -2,8 +2,8 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// `?:` tests a boolean — no truthiness — evaluates only the taken branch,
-// and its condition narrows like an `if`'s.
+// `?:` evaluates only the taken branch, and its condition narrows like an
+// `if`'s.
 const pick = cs`(n: number | null) => {
   return n === null ? 0 : n + 1;
 }`;

@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_name                             → name
 :                                     → : 
@@ -21,12 +21,12 @@ __cs_name                             → name
 span                                  → span
 >                                     → >
 )}</>                                 → \n  </>\n)
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (cs.splice(                           →  [-semantic]
 (listed)                              → $listed
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 "x"                                   → "x"
 )                                     → )
-))                                    → `
+)                                     → `

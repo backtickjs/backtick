@@ -1,17 +1,16 @@
-cs.lift(cs.const(                         → cs`
+cs.lift(                                  → cs`
 () => {\n                                 → () => {\n      
 const                                     → const 
 __cs_held                                 → held
- = cs.const(                              →  = 
+ =                                        →  = 
 (cs.splice(                               →  [-semantic]
 (state)                                   → $state
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
 (                                         → (
 "waiting"                                 → "waiting"
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n                                        → \n\n      
-cs.statement(                             → 
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
@@ -42,7 +41,6 @@ status                                    → status
 ;                                         → ;
 \n        }                               → \n          }
 \n                                        → \n          
-cs.statement(                             → 
 __cs_held                                 → held
 .                                         → .
 set                                       → set
@@ -62,7 +60,7 @@ null                                      → null
  :                                        →  : 
 "a value"                                 → "a value"
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    }                                   → \n        }
 ,                                         → ,\n        
 (                                         → (
@@ -70,7 +68,6 @@ __cs_message                              → message
 :                                         → : 
 string                                    → string
 ) => {\n                                  → ) => {\n          
-cs.statement(                             → 
 __cs_held                                 → held
 .                                         → .
 set                                       → set
@@ -79,7 +76,7 @@ set                                       → set
  +                                        →  + 
 __cs_message                              → message
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    }                                   → \n        }
 ,                                         → ,\n        
 {                                         → { 
@@ -88,9 +85,8 @@ timeout                                   → timeout
 3000                                      → 3000
  }                                        →  }
 )                                         → ,\n      )
-);                                        → ;
+;                                         → ;
 \n                                        → \n\n      
-cs.statement(                             → 
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
@@ -104,7 +100,6 @@ __cs_response                             → response
 :                                         → : 
 Response                                  → Response
 ) => {\n                                  → ) => {\n          
-cs.statement(                             → 
 __cs_held                                 → held
 .                                         → .
 set                                       → set
@@ -113,7 +108,7 @@ __cs_response                             → response
 .                                         → .
 text                                      → text
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    }                                   → \n        }
 ,                                         → ,\n        
 (                                         → (
@@ -121,14 +116,13 @@ __cs_message                              → message
 :                                         → : 
 string                                    → string
 ) => {\n                                  → ) => {\n          
-cs.statement(                             → 
 __cs_held                                 → held
 .                                         → .
 set                                       → set
 (                                         → (
 __cs_message                              → message
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    }                                   → \n        }
 ,                                         → ,\n        
 {                                         → {\n          
@@ -162,13 +156,13 @@ true                                      → true
 )                                         → )
  }                                        → ,\n        }
 )                                         → ,\n      )
-);                                        → ;
+;                                         → ;
 \n                                        → \n\n      
-return cs.const(                          → return 
+return                                    → return 
 __cs_held                                 → held
 .                                         → .
 get                                       → get
 ()                                        → ()
-);                                        → ;
+;                                         → ;
 \n}                                       → \n    }
-))                                        → `
+)                                         → `

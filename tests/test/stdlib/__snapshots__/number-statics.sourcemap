@@ -1,27 +1,27 @@
 cs.lift((() => {\n                        → cs`{\n    
 const                                     → const 
 __cs_positive                             → positive
- = cs.const(                              →  = 
+ =                                        →  = 
 Number                                    → Number
 .                                         → .
 EPSILON                                   → EPSILON
  >                                        →  > 
 0                                         → 0
-);                                        → ;
+;                                         → ;
 \n                                        → \n    
 const                                     → const 
 __cs_largest                              → largest
- = cs.const(                              →  = 
+ =                                        →  = 
 Number                                    → Number
 .                                         → .
 MAX_VALUE                                 → MAX_VALUE
  >                                        →  > 
 1e+308                                    → 1e308
-);                                        → ;
+;                                         → ;
 \n                                        → \n    
 const                                     → const 
 __cs_safe                                 → safe
- = cs.const(                              →  =\n      
+ =                                        →  =\n      
 Number                                    → Number
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
@@ -32,27 +32,23 @@ Number                                    → Number
 .                                         → .
 MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
  ===                                      →  === 
--cs.number(                               → -
+-                                         → -
 9007199254740991                          → 9007199254740991
-)                                         → 
  &&                                       →  &&\n      
 Number                                    → Number
 .                                         → .
 MIN_VALUE                                 → MIN_VALUE
  >                                        →  > 
 0                                         → 0
- && (cs.condition(                        →  &&\n      
+ &&                                       →  &&\n      
 Number                                    → Number
 .                                         → .
 isSafeInteger                             → isSafeInteger
 (                                         → (
 3                                         → 3
 )                                         → )
-) &&                                      → 
-Number.isSafeInteger(3)                   → Number.isSafeInteger(3) [-semantic -completion -navigation -verification]
-)                                         → 
  &&                                       →  &&\n      
-!(cs.condition(                           → !
+!                                         → !
 Number                                    → Number
 .                                         → .
 isSafeInteger                             → isSafeInteger
@@ -63,45 +59,42 @@ MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
  +                                        →  + 
 1                                         → 1
 )                                         → )
-) &&                                      → 
-Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1)→ Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1) [-semantic -completion -navigation -verification]
-)                                         → 
-);                                        → ;
+;                                         → ;
 \n                                        → \n    
 const                                     → const 
 __cs_whole                                → whole
- = cs.const(                              →  = 
+ =                                        →  = 
 Number                                    → Number
 .                                         → .
 isInteger                                 → isInteger
 (                                         → (
 2                                         → 2
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n                                        → \n    
 const                                     → const 
 __cs_fractional                           → fractional
- = cs.const(                              →  = 
+ =                                        →  = 
 Number                                    → Number
 .                                         → .
 isInteger                                 → isInteger
 (                                         → (
 2.5                                       → 2.5
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n    // Unconverted, so a string that reads as a number is still not one.\n    → \n    // Unconverted, so a string that reads as a number is still not one.\n    
 const                                     → const 
 __cs_written                              → written
- = cs.const(                              →  = 
+ =                                        →  = 
 Number                                    → Number
 .                                         → .
 isFinite                                  → isFinite
 (                                         → (
 "2"                                       → "2"
 )                                         → )
-);                                        → ;
+;                                         → ;
 \n                                        → \n    
-return cs.const(                          → return 
+return                                    → return 
 <                                         → (\n      <
 span                                      → span
 >{cs.lift(                                → >\n        {
@@ -129,5 +122,5 @@ __cs_safe                                 → safe
 )}</                                      → }\n      </
 span                                      → span
 >                                         → >\n    )
-);                                        → ;
+;                                         → ;
 \n})())                                   → \n  }`

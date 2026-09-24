@@ -1,10 +1,10 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_label                            → label
 :                                     → : 
 string                                → string
 ) => {\n                              → ) => {\n    
-return cs.const(                      → return 
+return                                → return 
 {                                     → { 
 label                                 → label
 :                                     → : 
@@ -15,26 +15,25 @@ label                                 → label
 __cs_label                            → label
 )                                     → )
  }                                    →  }
-);                                    → ;
+;                                     → ;
 \n}                                   → \n  }
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 "font-size: 16px"                     → "font-size: 16px"
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 () => {\n                             → () => {\n        
 const                                 → const 
 __cs_row                              → row
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (build)                               → $build
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 "one"                                 → "one"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-cs.statement(                         → 
 __cs_row                              → row
 .                                     → .
 label                                 → label
@@ -50,10 +49,10 @@ get                                   → get
  +                                    →  + 
 " !!!"                                → " !!!"
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n}                                   → \n      }
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 (cs.splice(                           →  [-semantic]
 (build)                               → $build
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -65,4 +64,4 @@ label                                 → label
 .                                     → .
 get                                   → get
 ()                                    → ()
-))                                    → `
+)                                     → `

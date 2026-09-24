@@ -1,5 +1,5 @@
 cs.lift((() => {\n                    → cs`{\n    
-return cs.const(                      → return 
+return                                → return 
 (cs.splice(                           →  [-semantic]
 (f)                                   → $f
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -9,9 +9,9 @@ return cs.const(                      → return
 .                                     → .
 get                                   → get
 ()                                    → ()
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_n                                → n
 :                                     → : 
@@ -25,9 +25,9 @@ __cs_n                                → n
  +                                    →  + 
 10                                    → 10
 )                                     → )
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n      
-return cs.const(                      → return 
+return                                → return 
 (cs.splice(                           → ${ [-semantic]
 make(state)                           → make(state)
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
@@ -35,5 +35,5 @@ make(state)                           → make(state)
 (cs.splice(                           → ${ [-semantic]
 make(wrapped)                         → make(wrapped)
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

@@ -12,7 +12,7 @@ it("earlyReturn", async (t) => {
     if (__cs_n === 0) {
         return;
     }
-    __cs_n = cs.const(1);
+    __cs_n = 1;
 })()),
   );
 });

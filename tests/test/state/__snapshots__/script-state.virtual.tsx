@@ -7,19 +7,19 @@ import { snapshotCase } from "../snapshotCase.ts";
 // cell is what the call answers with: each time it is evaluated there is
 // another cell, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
-  const build = cs.lift(cs.const((__cs_label: string) => {
-    return cs.const({ label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_label) });
-}));
+  const build = cs.lift((__cs_label: string) => {
+    return { label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_label) };
+});
 
   return (
     <span
-      style={cs.lift(cs.const("font-size: 16px"))}
-      onclick={cs.lift(cs.const(() => {
-    const __cs_row = cs.const((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one"));
-    cs.statement(__cs_row.label.set(__cs_row.label.get() + " !!!"));
-}))}
+      style={cs.lift("font-size: 16px")}
+      onclick={cs.lift(() => {
+    const __cs_row = (cs.splice((build)) satisfies typeof cs.ClientUnknown)("one");
+    __cs_row.label.set(__cs_row.label.get() + " !!!");
+})}
     >
-      {cs.lift(cs.const((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one").label.get()))}
+      {cs.lift((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one").label.get())}
     </span>
   );
 }

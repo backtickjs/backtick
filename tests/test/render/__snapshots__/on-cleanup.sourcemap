@@ -1,5 +1,4 @@
 cs.lift((() => {\n                    → cs`{\n        
-cs.statement(                         → 
 (cs.splice(                           →  [-semantic]
 (onCleanup)                           → $onCleanup
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -14,37 +13,36 @@ console                               → console
 log                                   → log
 ()                                    → ()
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-return cs.const(                      → return 
+return                                → return 
 <                                     → <
 p                                     → p
 >drawn</                              → >drawn</
 p                                     → p
 >                                     → >
-);                                    → ;
+;                                     → ;
 \n})())                               → \n      }`
 cs.lift((() => {\n                    → cs`{\n        
 const                                 → const 
 __cs_n                                → n
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 1                                     → 1
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
 const                                 → const 
 __cs_doubled                          → doubled
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (computed)                            → $computed
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () => {\n                             → () => {\n          
-cs.statement(                         → 
 (cs.splice(                           →  [-semantic]
 (onCleanup)                           → $onCleanup
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -59,21 +57,21 @@ console                               → console
 log                                   → log
 ()                                    → ()
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n          
-return cs.const(                      → return 
+return                                → return 
 __cs_n                                → n
 .                                     → .
 get                                   → get
 ()                                    → ()
  *                                    →  * 
 2                                     → 2
-);                                    → ;
+;                                     → ;
 \n    }                               → \n        }
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n          <
 button                                → button
                                       →  
@@ -100,27 +98,25 @@ get                                   → get
 )}</                                  → }</
 button                                → button
 >                                     → >\n        )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n      }`
 cs.lift((() => {\n                    → cs`{\n        
 const                                 → const 
 __cs_timer                            → timer
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-cs.statement(                         → 
 (cs.splice(                           →  [-semantic]
 (onMount)                             → $onMount
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 () => {\n                             → () => {\n          
-cs.statement(                         → 
 __cs_timer                            → timer
 .                                     → .
 set                                   → set
@@ -144,12 +140,11 @@ log                                   → log
 5                                     → 5
 )                                     → )
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n        }
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-cs.statement(                         → 
 (cs.splice(                           →  [-semantic]
 (onCleanup)                           → $onCleanup
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
@@ -167,18 +162,18 @@ get                                   → get
 ()                                    → ()
 )                                     → )
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n        
-return cs.const(                      → return 
+return                                → return 
 <                                     → <
 p                                     → p
 >ticking</                            → >ticking</
 p                                     → p
 >                                     → >
-);                                    → ;
+;                                     → ;
 \n})())                               → \n      }`
 cs.lift((() => {\n                    → cs`{\n        
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n          <
 button                                → button
                                       →  
@@ -203,5 +198,5 @@ log                                   → log
 >\n            press\n          </    → >\n            press\n          </
 button                                → button
 >                                     → >\n        )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n      }`

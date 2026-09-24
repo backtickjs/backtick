@@ -7,27 +7,26 @@ __cs_count              → count
 \n                      → \n      
 const                   → const 
 __cs_bump               → bump
- = cs.const(            →  = 
+ =                      →  = 
 () => {\n               → () => {\n        
 __cs_count              → count
- = cs.const(            →  = 
+ =                      →  = 
 __cs_count              → count
  +                      →  + 
 1                       → 1
-)                       → 
 ;                       → ;
 \n                      → \n        
-return cs.const(        → return 
+return                  → return 
 __cs_count              → count
-);                      → ;
+;                       → ;
 \n    }                 → \n      }
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_bump               → bump
 ()                      → ()
  +                      →  + 
 __cs_bump               → bump
 ()                      → ()
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

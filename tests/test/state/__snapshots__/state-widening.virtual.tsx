@@ -21,14 +21,14 @@ enum Tone {
 
 async function Widened() {
   return cs.lift((() => {
-    const __cs_flag = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(true));
-    const __cs_tone = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice(Tone.Warm) satisfies typeof cs.ClientUnknown)));
-    const __cs_step = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<() => number>(() => 0));
-    return cs.const(<span onclick={cs.lift(() => {
-        cs.statement(__cs_flag.set(false));
-        cs.statement(__cs_tone.set((cs.splice(Tone.Cool) satisfies typeof cs.ClientUnknown)));
-        cs.statement(__cs_step.set(() => 1));
-    })}>{cs.lift(__cs_flag.get() + " " + __cs_tone.get() + " " + __cs_step.get()())}</span>);
+    const __cs_flag = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(true);
+    const __cs_tone = (cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice(Tone.Warm) satisfies typeof cs.ClientUnknown));
+    const __cs_step = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<() => number>(() => 0);
+    return <span onclick={cs.lift(() => {
+        __cs_flag.set(false);
+        __cs_tone.set((cs.splice(Tone.Cool) satisfies typeof cs.ClientUnknown));
+        __cs_step.set(() => 1);
+    })}>{cs.lift(__cs_flag.get() + " " + __cs_tone.get() + " " + __cs_step.get()())}</span>;
 })());
 }
 

@@ -16,11 +16,10 @@ __cs_i                  → i
 5                       → 5
 ;                       → ; 
 __cs_i                  → i
- = cs.const(            →  = 
+ =                      →  = 
 __cs_i                  → i
  +                      →  + 
 1                       → 1
-)                       → 
 )                       → ) 
 {\n                     → {\n        
 if (                    → if (
@@ -37,11 +36,10 @@ true                    → true
 )                       → ) 
 {\n                     → {\n          
 __cs_out                → out
- = cs.const(            →  = 
+ =                      →  = 
 __cs_out                → out
  +                      →  + 
 __cs_i                  → i
-)                       → 
 ;                       → ;
 \n                      → \n          
 break;                  → break;
@@ -57,7 +55,7 @@ break;                  → break;
 \n        }             → \n        }
 \n    }                 → \n      }
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_out                → out
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

@@ -7,7 +7,7 @@ const action = cs`{
 }`;
 
 export default cs`{
-  // @ts-expect-error: Argument of type 'Client<void>[]' is not assignable to parameter of type 'ClientValue'.
+  // @ts-expect-error: Type 'Client<void>[]' does not satisfy the expected type 'ClientUnknown'.
   const list = ${[action]};
   return 1;
 }`;

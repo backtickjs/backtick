@@ -12,10 +12,10 @@ import { children, drawn, fontSize } from "./dom.ts";
 // which is what makes a write through either child reach the same storage.
 const SharedCounter = async ({ size }: { size: Client<State<number>> }) => (
   <span
-    style={cs.lift(cs.const("font-size: " + (cs.splice((size)) satisfies typeof cs.ClientUnknown).get() + "px"))}
-    onclick={cs.lift(cs.const(() => {
-    cs.statement((cs.splice((size)) satisfies typeof cs.ClientUnknown).set((cs.splice((size)) satisfies typeof cs.ClientUnknown).get() + 1));
-}))}
+    style={cs.lift("font-size: " + (cs.splice((size)) satisfies typeof cs.ClientUnknown).get() + "px")}
+    onclick={cs.lift(() => {
+    (cs.splice((size)) satisfies typeof cs.ClientUnknown).set((cs.splice((size)) satisfies typeof cs.ClientUnknown).get() + 1);
+})}
   >
     press
   </span>
@@ -23,8 +23,8 @@ const SharedCounter = async ({ size }: { size: Client<State<number>> }) => (
 
 async function SharingPanel() {
   return cs.lift((() => {
-    const __cs_size = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(16));
-    return cs.const(<div>{cs.lift(<SharedCounter size={cs.lift(__cs_size)}/>)}{cs.lift(<SharedCounter size={cs.lift(__cs_size)}/>)}</div>);
+    const __cs_size = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(16);
+    return <div>{cs.lift(<SharedCounter size={cs.lift(__cs_size)}/>)}{cs.lift(<SharedCounter size={cs.lift(__cs_size)}/>)}</div>;
 })());
 }
 

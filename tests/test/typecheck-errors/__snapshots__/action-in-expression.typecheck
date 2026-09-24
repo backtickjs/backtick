@@ -1,3 +1,0 @@
-12:20 error TS2345: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
-18:10 error TS2345: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
-26:9 error TS2345: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.

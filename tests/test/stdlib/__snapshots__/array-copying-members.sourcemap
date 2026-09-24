@@ -1,7 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 const                   → const 
 __cs_rows               → rows
- = cs.const(            →  = 
+ =                      →  = 
 [                       → [
 3                       → 3
 ,                       → , 
@@ -9,11 +9,11 @@ __cs_rows               → rows
 ,                       → , 
 2                       → 2
 ]                       → ]
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_sorted             → sorted
- = cs.const(            →  = 
+ =                      →  = 
 __cs_rows               → rows
 .                       → .
 toSorted                → toSorted
@@ -27,20 +27,20 @@ __cs_a                  → a
  -                      →  - 
 __cs_b                  → b
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_reversed           → reversed
- = cs.const(            →  = 
+ =                      →  = 
 __cs_rows               → rows
 .                       → .
 toReversed              → toReversed
 ()                      → ()
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_spliced            → spliced
- = cs.const(            →  = 
+ =                      →  = 
 __cs_rows               → rows
 .                       → .
 toSpliced               → toSpliced
@@ -49,11 +49,11 @@ toSpliced               → toSpliced
 ,                       → , 
 1                       → 1
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
 const                   → const 
 __cs_inserted           → inserted
- = cs.const(            →  = 
+ =                      →  = 
 __cs_rows               → rows
 .                       → .
 toSpliced               → toSpliced
@@ -64,9 +64,9 @@ toSpliced               → toSpliced
 ,                       → , 
 9                       → 9
 )                       → )
-);                      → ;
+;                       → ;
 \n                      → \n      
-return cs.const(        → return 
+return                  → return 
 __cs_sorted             → sorted
 .                       → .
 join                    → join
@@ -109,5 +109,5 @@ join                    → join
 (                       → (
 ","                     → ","
 )                       → )
-);                      → ;
+;                       → ;
 \n})())                 → \n    }`

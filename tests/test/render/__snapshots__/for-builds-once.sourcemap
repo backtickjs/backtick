@@ -1,145 +1,141 @@
-cs.lift((() => {\n                        → cs`{\n    
-const                                     → const 
-__cs_items                                → items
- = cs.const(                              →  = 
-(cs.splice(                               →  [-semantic]
-(state)                                   → $state
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-<                                         → <
-string                                    → string
-[]                                        → []
->(                                        → >(
-[]                                        → []
-)                                         → )
-);                                        → ;
-\n                                        → \n\n    
-const                                     → const 
-__cs_started                              → started
- = cs.const(                              →  = 
-(cs.splice(                               →  [-semantic]
-(window)                                  → $window
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-.                                         → .
-setTimeout                                → setTimeout
-(                                         → (
-() => {\n                                 → () => {\n      
-if ((cs.condition(                        → if (
-(cs.splice(                               →  [-semantic]
-(more)                                    → $more
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-()                                        → ()
-) &&                                      → 
-(cs.splice((more)) satisfies typeof cs.ClientUnknown)()→ $more() [-semantic -completion -navigation -verification]
-))                                        → ) 
-{\n                                       → {\n        
-cs.statement(                             → 
-__cs_items                                → items
-.                                         → .
-set                                       → set
-(                                         → (
-(cs.splice(                               →  [-semantic]
-(answerItems)                             → $answerItems
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-)                                         → )
-);                                        → ;
-\n        }                               → \n      }
-\n    }                                   → \n    }
-,                                         → , 
-0                                         → 0
-)                                         → )
-);                                        → ;
-\n                                        → \n\n    
-return cs.const(                          → return 
-<                                         → <
-For                                       → For
-                                          →  
-each                                      → each
-={cs.lift(                                → ={
-__cs_items                                → items
-.                                         → .
-get                                       → get
-()                                        → ()
-)}                                        → }
->{cs.lift(                                → >{
-(                                         → (
-__cs_item                                 → item
-:                                         → : 
-string                                    → string
-) =>                                      → ) => 
-<                                         → <
-em                                        → em
->{cs.lift(                                → >{
-__cs_item                                 → item
-)}</                                      → }</
-em                                        → em
->                                         → >
-)}</                                      → }</
-For                                       → For
->                                         → >
-);                                        → ;
-\n})())                                   → \n  }`
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_asked                                → asked
- = cs.const(                              →  = 
-(cs.splice(                               →  [-semantic]
-(state)                                   → $state
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-(                                         → (
-0                                         → 0
-)                                         → )
-);                                        → ;
-\n                                        → \n\n  
-return cs.const(                          → return 
-<                                         → (\n    <
-div                                       → div
->{cs.lift(                                → >\n      
-<                                         → <
-span                                      → span
->{cs.lift(                                → >{
-"asked "                                  → "asked "
- +                                        →  + 
-__cs_asked                                → asked
-.                                         → .
-get                                       → get
-()                                        → ()
-)}</                                      → }</
-span                                      → span
->                                         → >
-)}{cs.lift(                               → \n      
-<                                         → <
-WaitingList                               → WaitingList
-                                          → \n        
-more                                      → more
-={cs.lift(                                → ={
-() => {\n                                 → () => {\n          
-cs.statement(                             → 
-__cs_asked                                → asked
-.                                         → .
-set                                       → set
-(                                         → (
-__cs_asked                                → asked
-.                                         → .
-get                                       → get
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-)                                         → )
-);                                        → ;
-\n                                        → \n          
-return cs.const(                          → return 
-__cs_asked                                → asked
-.                                         → .
-get                                       → get
-()                                        → ()
- <                                        →  < 
-5                                         → 5
-);                                        → ;
-\n    }                                   → \n        }
-)}                                        → }
-/>                                        → \n      />
-)}</                                      → \n    </
-div                                       → div
->                                         → >\n  )
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift((() => {\n                    → cs`{\n    
+const                                 → const 
+__cs_items                            → items
+ =                                    →  = 
+(cs.splice(                           →  [-semantic]
+(state)                               → $state
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+<                                     → <
+string                                → string
+[]                                    → []
+>(                                    → >(
+[]                                    → []
+)                                     → )
+;                                     → ;
+\n                                    → \n\n    
+const                                 → const 
+__cs_started                          → started
+ =                                    →  = 
+(cs.splice(                           →  [-semantic]
+(window)                              → $window
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+.                                     → .
+setTimeout                            → setTimeout
+(                                     → (
+() => {\n                             → () => {\n      
+if (                                  → if (
+(cs.splice(                           →  [-semantic]
+(more)                                → $more
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+()                                    → ()
+)                                     → ) 
+{\n                                   → {\n        
+__cs_items                            → items
+.                                     → .
+set                                   → set
+(                                     → (
+(cs.splice(                           →  [-semantic]
+(answerItems)                         → $answerItems
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+)                                     → )
+;                                     → ;
+\n        }                           → \n      }
+\n    }                               → \n    }
+,                                     → , 
+0                                     → 0
+)                                     → )
+;                                     → ;
+\n                                    → \n\n    
+return                                → return 
+<                                     → <
+For                                   → For
+                                      →  
+each                                  → each
+={cs.lift(                            → ={
+__cs_items                            → items
+.                                     → .
+get                                   → get
+()                                    → ()
+)}                                    → }
+>{cs.lift(                            → >{
+(                                     → (
+__cs_item                             → item
+:                                     → : 
+string                                → string
+) =>                                  → ) => 
+<                                     → <
+em                                    → em
+>{cs.lift(                            → >{
+__cs_item                             → item
+)}</                                  → }</
+em                                    → em
+>                                     → >
+)}</                                  → }</
+For                                   → For
+>                                     → >
+;                                     → ;
+\n})())                               → \n  }`
+cs.lift((() => {\n                    → cs`{\n  
+const                                 → const 
+__cs_asked                            → asked
+ =                                    →  = 
+(cs.splice(                           →  [-semantic]
+(state)                               → $state
+) satisfies typeof cs.ClientUnknown)  →  [-semantic]
+(                                     → (
+0                                     → 0
+)                                     → )
+;                                     → ;
+\n                                    → \n\n  
+return                                → return 
+<                                     → (\n    <
+div                                   → div
+>{cs.lift(                            → >\n      
+<                                     → <
+span                                  → span
+>{cs.lift(                            → >{
+"asked "                              → "asked "
+ +                                    →  + 
+__cs_asked                            → asked
+.                                     → .
+get                                   → get
+()                                    → ()
+)}</                                  → }</
+span                                  → span
+>                                     → >
+)}{cs.lift(                           → \n      
+<                                     → <
+WaitingList                           → WaitingList
+                                      → \n        
+more                                  → more
+={cs.lift(                            → ={
+() => {\n                             → () => {\n          
+__cs_asked                            → asked
+.                                     → .
+set                                   → set
+(                                     → (
+__cs_asked                            → asked
+.                                     → .
+get                                   → get
+()                                    → ()
+ +                                    →  + 
+1                                     → 1
+)                                     → )
+;                                     → ;
+\n                                    → \n          
+return                                → return 
+__cs_asked                            → asked
+.                                     → .
+get                                   → get
+()                                    → ()
+ <                                    →  < 
+5                                     → 5
+;                                     → ;
+\n    }                               → \n        }
+)}                                    → }
+/>                                    → \n      />
+)}</                                  → \n    </
+div                                   → div
+>                                     → >\n  )
+;                                     → ;
+\n})())                               → \n}`

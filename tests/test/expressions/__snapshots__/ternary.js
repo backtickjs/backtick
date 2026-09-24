@@ -1,14 +1,14 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-// `?:` tests a boolean — no truthiness — evaluates only the taken branch,
-// and its condition narrows like an `if`'s.
+// `?:` evaluates only the taken branch, and its condition narrows like an
+// `if`'s.
 const pick = cs.create(
   { start: { line: 7, column: 13 }, end: { line: 9, column: 2 } },
   {
     version: "0.0.0",
     filePath: "expressions/ternary.test.tsx",
-    fileHash: "27ii4cz5ah9i8",
+    fileHash: "uekyc2sf8mzc",
     splices: {},
     captures: [],
   },
@@ -20,7 +20,7 @@ const pick = cs.create(
         type: "Identifier",
         loc: { start: { line: 7, column: 17 }, end: { line: 7, column: 18 } },
         name: "n",
-        bindingKey: "n$27ii4cz5ah9i8$0",
+        bindingKey: "n$uekyc2sf8mzc$0",
       },
     ],
     body: {
@@ -50,7 +50,7 @@ const pick = cs.create(
                   end: { line: 8, column: 10 },
                 },
                 name: "n",
-                bindingKey: "n$27ii4cz5ah9i8$0",
+                bindingKey: "n$uekyc2sf8mzc$0",
               },
               right: {
                 type: "Literal",
@@ -83,7 +83,7 @@ const pick = cs.create(
                   end: { line: 8, column: 27 },
                 },
                 name: "n",
-                bindingKey: "n$27ii4cz5ah9i8$0",
+                bindingKey: "n$uekyc2sf8mzc$0",
               },
               right: {
                 type: "Literal",
@@ -110,7 +110,7 @@ it("ternary", async (t) => {
       {
         version: "0.0.0",
         filePath: "expressions/ternary.test.tsx",
-        fileHash: "27ii4cz5ah9i8",
+        fileHash: "uekyc2sf8mzc",
         splices: { $pick: { value: pick, params: [] } },
         captures: [],
       },

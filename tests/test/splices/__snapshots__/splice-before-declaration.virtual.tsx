@@ -14,10 +14,10 @@ import { snapshotCase } from "../snapshotCase.ts";
 // where they do not exist.
 function sandwich(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_before = cs.const(1);
-    const __cs_spliced = cs.const((cs.splice((fragment)) satisfies typeof cs.ClientUnknown));
-    const __cs_after = cs.const(2);
-    return cs.const(__cs_before + __cs_spliced + __cs_after);
+    const __cs_before = 1;
+    const __cs_spliced = (cs.splice((fragment)) satisfies typeof cs.ClientUnknown);
+    const __cs_after = 2;
+    return __cs_before + __cs_spliced + __cs_after;
 })());
 }
 
@@ -25,6 +25,6 @@ it("spliceBeforeDeclaration", async (t) => {
   await snapshotCase(
     t,
     "spliceBeforeDeclaration",
-    cs.lift(cs.const((cs.splice(sandwich(cs.lift(cs.const(10)))) satisfies typeof cs.ClientUnknown) + (cs.splice(sandwich(cs.lift(cs.const(20)))) satisfies typeof cs.ClientUnknown))),
+    cs.lift((cs.splice(sandwich(cs.lift(10))) satisfies typeof cs.ClientUnknown) + (cs.splice(sandwich(cs.lift(20))) satisfies typeof cs.ClientUnknown)),
   );
 });

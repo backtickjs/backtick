@@ -1,10 +1,10 @@
-cs.lift(cs.const(  → cs`
-(                  → (
-__cs_Tag           → Tag
-:                  → : 
-number             → number
-) =>               → ) => 
-<                  → <
-__cs_Tag           → Tag
- />                →  />
-))                 → `
+cs.lift(  → cs`
+(         → (
+__cs_Tag  → Tag
+:         → : 
+number    → number
+) =>      → ) => 
+<         → <
+__cs_Tag  → Tag
+ />       →  />
+)         → `

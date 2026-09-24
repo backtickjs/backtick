@@ -5,5 +5,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `#` is the bundle's one reserved key — the discriminant of every node — so
 // a plain data object can't carry it.
 it("reservedKey", async (t) => {
-  await snapshotCase(t, "reservedKey", cs.lift(cs.const(() => (cs.splice({ "#": "value" }) satisfies typeof cs.ClientUnknown))));
+  await snapshotCase(t, "reservedKey", cs.lift(() => (cs.splice({ "#": "value" }) satisfies typeof cs.ClientUnknown)));
 });

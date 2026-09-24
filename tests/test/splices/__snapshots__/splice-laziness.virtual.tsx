@@ -10,15 +10,15 @@ import { snapshotCase } from "../snapshotCase.ts";
 // eagerly (by value instead of by thunk) it would throw before `flag` was
 // even tested.
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
-  return cs.lift(cs.const((__cs_flag: boolean) => {
-    if ((cs.condition(__cs_flag) && __cs_flag)) {
-        return cs.const((cs.splice((fragment)) satisfies typeof cs.ClientUnknown));
+  return cs.lift((__cs_flag: boolean) => {
+    if (__cs_flag) {
+        return (cs.splice((fragment)) satisfies typeof cs.ClientUnknown);
     }
-    return cs.const("skipped");
-}));
+    return "skipped";
+});
 }
 
-const ok = cs.lift(cs.const("evaluated"));
+const ok = cs.lift("evaluated");
 
 const broken = cs.lift((() => {
     throw "the guarded fragment must never evaluate";
@@ -28,6 +28,6 @@ it("spliceLaziness", async (t) => {
   await snapshotCase(
     t,
     "spliceLaziness",
-    cs.lift(cs.const({ taken: (cs.splice(guard(ok)) satisfies typeof cs.ClientUnknown)(true), skipped: (cs.splice(guard(broken)) satisfies typeof cs.ClientUnknown)(false) })),
+    cs.lift({ taken: (cs.splice(guard(ok)) satisfies typeof cs.ClientUnknown)(true), skipped: (cs.splice(guard(broken)) satisfies typeof cs.ClientUnknown)(false) }),
   );
 });

@@ -1,4 +1,4 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_o                                → o
 :                                     → : 
@@ -21,7 +21,7 @@ number                                → number
 ;                                     → 
 \n}                                   →  }
 ) => {\n                              → ) => {\n  
-return cs.const(                      → return 
+return                                → return 
 [                                     → [
 __cs_o                                → o
 .                                     → .
@@ -35,10 +35,10 @@ z                                     → z
  ??                                   →  ?? 
 0                                     → 0
 ]                                     → ]
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
-cs.lift(cs.const(                     → cs`
+)                                     → `
+cs.lift(                              → cs`
 {                                     → ({\n      
 present                               → present
 :                                     → : 
@@ -91,4 +91,4 @@ label                                 → label
  }                                    →  }
 )                                     → )
  }                                    → ,\n    })
-))                                    → `
+)                                     → `

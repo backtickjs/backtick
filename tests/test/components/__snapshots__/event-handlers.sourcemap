@@ -1,16 +1,16 @@
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_said                             → said
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 ""                                    → ""
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n\n      
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n        <
 form                                  → form
                                       → \n          
@@ -18,14 +18,12 @@ onsubmit                              → onsubmit
 ={cs.lift(                            → ={
 __cs_event                            → event
  => {\n                               → ) => {\n            
-cs.statement(                         → 
 __cs_event                            → event
 .                                     → .
 preventDefault                        → preventDefault
 ()                                    → ()
-);                                    → ;
+;                                     → ;
 \n                                    → \n            
-cs.statement(                         → 
 __cs_said                             → said
 .                                     → .
 set                                   → set
@@ -40,7 +38,7 @@ __cs_event                            → event
 .                                     → .
 cancelable                            → cancelable
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n    }                               → \n          }
 )}                                    → }
 >{cs.lift(                            → \n        >\n          
@@ -119,5 +117,5 @@ button                                → button
 )}</                                  → \n        </
 form                                  → form
 >                                     → >\n      )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

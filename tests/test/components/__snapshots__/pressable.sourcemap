@@ -1,16 +1,16 @@
 cs.lift((() => {\n                    → cs`{\n    
 const                                 → const 
 __cs_count                            → count
- = cs.const(                          →  = 
+ =                                    →  = 
 (cs.splice(                           →  [-semantic]
 (state)                               → $state
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 (                                     → (
 0                                     → 0
 )                                     → )
-);                                    → ;
+;                                     → ;
 \n                                    → \n    
-return cs.const(                      → return 
+return                                → return 
 <                                     → (\n      <
 button                                → button
                                       → \n        
@@ -79,5 +79,5 @@ span                                  → span
 )}</                                  → \n      </
 button                                → button
 >                                     → >\n    )
-);                                    → ;
+;                                     → ;
 \n})())                               → \n  }`

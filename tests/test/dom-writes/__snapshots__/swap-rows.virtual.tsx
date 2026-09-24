@@ -10,12 +10,12 @@ import { watchWrites } from "./writes.ts";
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs.lift((() => {
-    const __cs_ids = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3, 4, 5]));
-    const __cs_swap = cs.const(() => {
-        const __cs_held = cs.const(__cs_ids.get());
-        cs.statement(__cs_ids.set(__cs_held.with(1, __cs_held[3]).with(3, __cs_held[1])));
-    });
-    return cs.const(<div>{cs.lift(<button onclick={cs.lift(__cs_swap)}>swap</button>)}{cs.lift(<table>{cs.lift(<tbody>{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <tr id={cs.lift("row-" + __cs_id)}>{cs.lift(<td>{cs.lift("row " + __cs_id)}</td>)}</tr>)}</For>)}</tbody>)}</table>)}</div>);
+    const __cs_ids = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3, 4, 5]);
+    const __cs_swap = () => {
+        const __cs_held = __cs_ids.get();
+        __cs_ids.set(__cs_held.with(1, __cs_held[3]).with(3, __cs_held[1]));
+    };
+    return <div>{cs.lift(<button onclick={cs.lift(__cs_swap)}>swap</button>)}{cs.lift(<table>{cs.lift(<tbody>{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <tr id={cs.lift("row-" + __cs_id)}>{cs.lift(<td>{cs.lift("row " + __cs_id)}</td>)}</tr>)}</For>)}</tbody>)}</table>)}</div>;
 })());
 }
 

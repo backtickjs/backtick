@@ -1,8 +1,7 @@
 import { cs } from "@backtickjs/core";
 
-// A host alias smuggles `undefined` past the syntactic keyword ban; the
-// value-position checks reject the parameter at its first use — `cs.const`
-// constrains initializers and assignment right-hand sides to `ClientValue`.
+// A host alias smuggles `undefined` past the syntactic keyword ban; it is
+// rejected only where a use meets a type without `undefined`.
 //
 // First use and not the signature: `ClientFunction` stands over `never`
 // parameters so that every client function is one, which is what lets the

@@ -6,28 +6,26 @@ __cs_n                                → n
 ;                                     → ;
 \n                                    → \n  
 __cs_n                                → n
- = cs.const(                          →  = 
+ =                                    →  = 
 1                                     → 1
-)                                     → 
 ;                                     → ;
 \n})())                               → \n}`
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 (                                     → (
 __cs_id                               → id
 :                                     → : 
 number                                → number
 ) => {\n                              → ) => {\n  
-cs.statement(                         → 
 (cs.splice(                           →  [-semantic]
 (beep)                                → $beep
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-);                                    → ;
+;                                     → ;
 \n}                                   → \n}
-))                                    → `
+)                                     → `
 cs.lift((() => {\n                    → cs`{\n      
 const                                 → const 
 __cs_handlers                         → handlers
- = cs.const(                          →  = 
+ =                                    →  = 
 {                                     → {\n        
 tap                                   → tap
 :                                     → : 
@@ -41,9 +39,9 @@ hold                                  → hold
 (onTap)                               → $onTap
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
  }                                    → ,\n      }
-);                                    → ;
+;                                     → ;
 \n                                    → \n      
-return cs.const(                      → return 
+return                                → return 
 __cs_handlers                         → handlers
-);                                    → ;
+;                                     → ;
 \n})())                               → \n    }`

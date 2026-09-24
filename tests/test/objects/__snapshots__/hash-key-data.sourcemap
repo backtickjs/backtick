@@ -1,6 +1,6 @@
-cs.lift(cs.const(                     → cs`
+cs.lift(                              → cs`
 () =>                                 → () => 
 (cs.splice(                           → ${ [-semantic]
 { "#call": "#f0" }                    → { "#call": "#f0" }
 ) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-))                                    → `
+)                                     → `
