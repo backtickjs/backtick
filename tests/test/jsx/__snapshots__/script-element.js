@@ -10,7 +10,6 @@ async function Card() {
   return cs.create(
     { start: { line: 10, column: 9 }, end: { line: 32, column: 4 } },
     {
-      filePath: "jsx/script-element.test.tsx",
       fileHash: "mvahdj0e0ick",
       splices: { $state: { value: state, params: [] } },
       captures: [],

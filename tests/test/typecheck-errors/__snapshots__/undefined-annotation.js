@@ -1,12 +1,7 @@
 import { cs } from "@backtickjs/core";
 const stored = cs.create(
   { start: { line: 13, column: 15 }, end: { line: 16, column: 2 } },
-  {
-    filePath: "typecheck-errors/undefined-annotation.test.tsx",
-    fileHash: "2ybl4zwhlhjta",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2ybl4zwhlhjta", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 13, column: 18 }, end: { line: 16, column: 1 } },
@@ -81,12 +76,7 @@ const stored = cs.create(
 );
 const written = cs.create(
   { start: { line: 18, column: 16 }, end: { line: 23, column: 2 } },
-  {
-    filePath: "typecheck-errors/undefined-annotation.test.tsx",
-    fileHash: "2ybl4zwhlhjta",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2ybl4zwhlhjta", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 18, column: 19 }, end: { line: 23, column: 1 } },

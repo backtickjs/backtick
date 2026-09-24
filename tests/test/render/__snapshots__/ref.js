@@ -11,7 +11,6 @@ describe("ref", () => {
       cs.create(
         { start: { line: 13, column: 6 }, end: { line: 21, column: 8 } },
         {
-          filePath: "render/ref.test.tsx",
           fileHash: "1ig5nq86fb7c4",
           splices: { $state: { value: state, params: [] } },
           captures: [],
@@ -447,7 +446,6 @@ describe("ref", () => {
       cs.create(
         { start: { line: 29, column: 6 }, end: { line: 36, column: 8 } },
         {
-          filePath: "render/ref.test.tsx",
           fileHash: "1ig5nq86fb7c4",
           splices: { $onMount: { value: onMount, params: [] } },
           captures: [],
@@ -628,12 +626,7 @@ describe("ref", () => {
     await render(
       cs.create(
         { start: { line: 42, column: 17 }, end: { line: 42, column: 63 } },
-        {
-          filePath: "render/ref.test.tsx",
-          fileHash: "1ig5nq86fb7c4",
-          splices: {},
-          captures: [],
-        },
+        { fileHash: "1ig5nq86fb7c4", splices: {}, captures: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -749,7 +742,6 @@ describe("ref", () => {
         cs.create(
           { start: { line: 64, column: 8 }, end: { line: 77, column: 10 } },
           {
-            filePath: "render/ref.test.tsx",
             fileHash: "1ig5nq86fb7c4",
             splices: {
               $state: { value: state, params: [] },

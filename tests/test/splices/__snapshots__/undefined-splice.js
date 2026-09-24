@@ -13,7 +13,6 @@ describe("a spliced undefined", () => {
         cs.create(
           { start: { line: 12, column: 32 }, end: { line: 12, column: 44 } },
           {
-            filePath: "splices/undefined-splice.test.tsx",
             fileHash: "3f9luoncz9vrv",
             splices: { $nothing: { value: nothing, params: [] } },
             captures: [],
@@ -39,7 +38,6 @@ describe("a spliced undefined", () => {
       cs.create(
         { start: { line: 17, column: 35 }, end: { line: 17, column: 44 } },
         {
-          filePath: "splices/undefined-splice.test.tsx",
           fileHash: "3f9luoncz9vrv",
           splices: { $data: { value: data, params: [] } },
           captures: [],
@@ -66,7 +64,6 @@ describe("a spliced undefined", () => {
         cs.create(
           { start: { line: 24, column: 36 }, end: { line: 24, column: 45 } },
           {
-            filePath: "splices/undefined-splice.test.tsx",
             fileHash: "3f9luoncz9vrv",
             splices: { $data: { value: data, params: [] } },
             captures: [],

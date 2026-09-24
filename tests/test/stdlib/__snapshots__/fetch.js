@@ -14,7 +14,6 @@ it("fetchRequests", async (t) => {
     cs.create(
       { start: { line: 15, column: 4 }, end: { line: 52, column: 6 } },
       {
-        filePath: "stdlib/fetch.test.tsx",
         fileHash: "32y7bkpf4sqjs",
         splices: {
           $state: { value: state, params: [] },

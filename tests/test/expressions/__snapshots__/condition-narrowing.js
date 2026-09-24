@@ -7,12 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const flags = {
   strict: cs.create(
     { start: { line: 8, column: 24 }, end: { line: 8, column: 32 } },
-    {
-      filePath: "expressions/condition-narrowing.test.tsx",
-      fileHash: "g29mnwu0pbnr",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "g29mnwu0pbnr", splices: {}, captures: [] },
     () => ({
       type: "Literal",
       loc: { start: { line: 8, column: 27 }, end: { line: 8, column: 31 } },
@@ -25,7 +20,6 @@ const flags = {
 const label = cs.create(
   { start: { line: 10, column: 71 }, end: { line: 21, column: 2 } },
   {
-    filePath: "expressions/condition-narrowing.test.tsx",
     fileHash: "g29mnwu0pbnr",
     splices: { $0splice0: { value: flags.strict, params: [] } },
     captures: [],
@@ -352,7 +346,6 @@ it("conditionNarrowing", async (t) => {
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 32, column: 7 } },
       {
-        filePath: "expressions/condition-narrowing.test.tsx",
         fileHash: "g29mnwu0pbnr",
         splices: { $label: { value: label, params: [] } },
         captures: [],

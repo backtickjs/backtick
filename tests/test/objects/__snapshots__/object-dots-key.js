@@ -10,12 +10,7 @@ it("objectDotsKey", async (t) => {
     "objectDotsKey",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 15, column: 6 } },
-      {
-        filePath: "objects/object-dots-key.test.tsx",
-        fileHash: "13e6vrhonm3wb",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "13e6vrhonm3wb", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 15, column: 5 } },

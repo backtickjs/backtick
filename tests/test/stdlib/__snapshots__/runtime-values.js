@@ -8,7 +8,6 @@ it("runtimeValues", async (t) => {
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 12, column: 7 } },
       {
-        filePath: "stdlib/runtime-values.test.tsx",
         fileHash: "1eany0mypxz6m",
         splices: {
           $0splice0: { value: [1, "two", true, null], params: [] },

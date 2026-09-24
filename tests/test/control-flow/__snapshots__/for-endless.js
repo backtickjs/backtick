@@ -8,12 +8,7 @@ it("forEndless", async (t) => {
     "forEndless",
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 19, column: 6 } },
-      {
-        filePath: "control-flow/for-endless.test.tsx",
-        fileHash: "3voddrkfnxnd9",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3voddrkfnxnd9", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 19, column: 5 } },

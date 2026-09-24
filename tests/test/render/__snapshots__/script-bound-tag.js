@@ -11,12 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const badge = await bundler.run(
   cs.create(
     { start: { line: 13, column: 2 }, end: { line: 13, column: 67 } },
-    {
-      filePath: "render/script-bound-tag.test.tsx",
-      fileHash: "1g4jdt9f1nmyq",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "1g4jdt9f1nmyq", splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 13, column: 5 }, end: { line: 13, column: 66 } },
@@ -127,7 +122,6 @@ const badge = await bundler.run(
 const scriptBoundTag = cs.create(
   { start: { line: 16, column: 23 }, end: { line: 26, column: 2 } },
   {
-    filePath: "render/script-bound-tag.test.tsx",
     fileHash: "1g4jdt9f1nmyq",
     splices: {
       $state: { value: state, params: [] },

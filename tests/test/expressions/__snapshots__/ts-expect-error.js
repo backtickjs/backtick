@@ -10,12 +10,7 @@ it("tsExpectError", async (t) => {
     "tsExpectError",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 16, column: 6 } },
-      {
-        filePath: "expressions/ts-expect-error.test.tsx",
-        fileHash: "353rib4gy05pn",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "353rib4gy05pn", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 16, column: 5 } },

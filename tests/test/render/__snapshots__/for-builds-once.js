@@ -18,7 +18,6 @@ async function WaitingList({ more }) {
   return cs.create(
     { start: { line: 21, column: 9 }, end: { line: 31, column: 4 } },
     {
-      filePath: "render/for-builds-once.test.tsx",
       fileHash: "3l16jad540350",
       splices: {
         $state: { value: state, params: [] },
@@ -455,7 +454,6 @@ async function WaitingList({ more }) {
 const forBuildsOnce = cs.create(
   { start: { line: 34, column: 22 }, end: { line: 48, column: 2 } },
   {
-    filePath: "render/for-builds-once.test.tsx",
     fileHash: "3l16jad540350",
     splices: {
       $state: { value: state, params: [] },

@@ -1,10 +1,10 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
-import { type EmittedScript, emitScript } from "./emitScript.js";
+import { type EmittedScript, emitScript, scriptEdits } from "./emitScript.js";
 import { arrow, call, iife, object } from "./nodeFactory.js";
 import { type ClientScript, sourceLocation } from "./parseFile.js";
-import type { BindingResolution } from "./resolveBindings.js";
+import type { BindingResolution, ResolvedSplice } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
 
@@ -26,8 +26,7 @@ export function rewriteScript(
   fileHash: string,
   bindings: BindingResolution,
   captures: string[] = [],
-  spliceParams: { [splice: string]: string[] } = {},
-  hostTags: ReadonlySet<string> = new Set(),
+  splices: ReadonlyMap<string, ResolvedSplice> = new Map(),
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -74,21 +73,6 @@ export function rewriteScript(
     });
   }
 
-  // The metadata's splices: each one the text spells, then each host component
-  // a tag names, under the key `$Card` would use — so a script writing both
-  // spellings claims it once.
-  const splices = new Map<string, ts.Expression>(
-    Object.values(clientScript.splices).map((splice) => [
-      splice.key,
-      splice.expression,
-    ]),
-  );
-  for (const name of hostTags) {
-    if (!splices.has(`$${name}`)) {
-      splices.set(`$${name}`, ts.factory.createIdentifier(name));
-    }
-  }
-
   const scriptRange: SourceRange = {
     start: sourceNode.getStart(sourceFile),
     end: sourceNode.getEnd(),
@@ -102,26 +86,28 @@ export function rewriteScript(
   const metadata = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
-        "filePath",
-        ts.factory.createStringLiteral(sourceFile.fileName),
-      ),
-      ts.factory.createPropertyAssignment(
         "fileHash",
         ts.factory.createStringLiteral(fileHash),
       ),
       ts.factory.createPropertyAssignment(
         "splices",
         ts.factory.createObjectLiteralExpression(
-          Array.from(splices, ([key, value]) =>
+          // A splice the text spells is the host expression written there, and
+          // a host tag the host binding it names.
+          Array.from(splices, ([key, splice]) =>
             ts.factory.createPropertyAssignment(
               key,
               ts.factory.createObjectLiteralExpression(
                 [
-                  ts.factory.createPropertyAssignment("value", value),
+                  ts.factory.createPropertyAssignment(
+                    "value",
+                    clientScript.splices[key]?.expression ??
+                      ts.factory.createIdentifier(key.slice(1)),
+                  ),
                   ts.factory.createPropertyAssignment(
                     "params",
                     ts.factory.createArrayLiteralExpression(
-                      (spliceParams[key] ?? []).map((name) =>
+                      splice.params.map((name) =>
                         ts.factory.createStringLiteral(name),
                       ),
                       false,
@@ -157,11 +143,8 @@ export function rewriteScript(
   const emitted = emitScript(
     ts,
     clientScript,
-    bindings,
-    Array.from(splices.keys()),
-    captures,
-    spliceParams,
-    hostTags,
+    splices.size + captures.length,
+    scriptEdits(clientScript, bindings, splices, captures),
   );
 
   const runtime = call(ts, "cs", "create", [

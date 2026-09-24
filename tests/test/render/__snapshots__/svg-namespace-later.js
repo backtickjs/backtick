@@ -11,7 +11,6 @@ import { namespaced } from "./dom.ts";
 const svgNamespaceLater = cs.create(
   { start: { line: 12, column: 26 }, end: { line: 27, column: 2 } },
   {
-    filePath: "render/svg-namespace-later.test.tsx",
     fileHash: "1brs7fv34j5dk",
     splices: {
       $state: { value: state, params: [] },

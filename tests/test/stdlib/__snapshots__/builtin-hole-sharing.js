@@ -5,7 +5,6 @@ const make = (f) =>
   cs.create(
     { start: { line: 7, column: 2 }, end: { line: 9, column: 4 } },
     {
-      filePath: "stdlib/builtin-hole-sharing.test.tsx",
       fileHash: "3vatah1osfcoe",
       splices: { $f: { value: f, params: [] } },
       captures: [],
@@ -78,7 +77,6 @@ const make = (f) =>
 const wrapped = cs.create(
   { start: { line: 11, column: 16 }, end: { line: 11, column: 49 } },
   {
-    filePath: "stdlib/builtin-hole-sharing.test.tsx",
     fileHash: "3vatah1osfcoe",
     splices: { $state: { value: state, params: [] } },
     captures: [],
@@ -143,7 +141,6 @@ it("builtinHoleSharing", async (t) => {
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 19, column: 6 } },
       {
-        filePath: "stdlib/builtin-hole-sharing.test.tsx",
         fileHash: "3vatah1osfcoe",
         splices: {
           $0splice0: { value: make(state), params: [] },

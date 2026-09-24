@@ -9,7 +9,6 @@ function make(n) {
   return cs.create(
     { start: { line: 9, column: 9 }, end: { line: 9, column: 21 } },
     {
-      filePath: "jsx/jsx-polymorphic-prop.test.tsx",
       fileHash: "9toqhs9m4ayz",
       splices: { $n: { value: n, params: [] } },
       captures: [],

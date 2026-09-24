@@ -9,12 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Written() {
   return cs.create(
     { start: { line: 10, column: 9 }, end: { line: 14, column: 4 } },
-    {
-      filePath: "stdlib/string-from-code-point.test.tsx",
-      fileHash: "7lcft72v2y3x",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "7lcft72v2y3x", splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 14, column: 3 } },

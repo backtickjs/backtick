@@ -15,7 +15,6 @@ function sandwich(fragment) {
   return cs.create(
     { start: { line: 16, column: 9 }, end: { line: 21, column: 4 } },
     {
-      filePath: "splices/splice-before-declaration.test.tsx",
       fileHash: "1xi8jyc89buh5",
       splices: { $fragment: { value: fragment, params: [] } },
       captures: [],
@@ -189,7 +188,6 @@ it("spliceBeforeDeclaration", async (t) => {
     cs.create(
       { start: { line: 28, column: 4 }, end: { line: 28, column: 49 } },
       {
-        filePath: "splices/splice-before-declaration.test.tsx",
         fileHash: "1xi8jyc89buh5",
         splices: {
           $0splice0: {
@@ -199,12 +197,7 @@ it("spliceBeforeDeclaration", async (t) => {
                   start: { line: 28, column: 18 },
                   end: { line: 28, column: 24 },
                 },
-                {
-                  filePath: "splices/splice-before-declaration.test.tsx",
-                  fileHash: "1xi8jyc89buh5",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "1xi8jyc89buh5", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -226,12 +219,7 @@ it("spliceBeforeDeclaration", async (t) => {
                   start: { line: 28, column: 40 },
                   end: { line: 28, column: 46 },
                 },
-                {
-                  filePath: "splices/splice-before-declaration.test.tsx",
-                  fileHash: "1xi8jyc89buh5",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "1xi8jyc89buh5", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

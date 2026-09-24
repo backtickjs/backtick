@@ -9,12 +9,7 @@ it("comments", async (t) => {
     "comments",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 23, column: 6 } },
-      {
-        filePath: "expressions/comments.test.tsx",
-        fileHash: "3lcac8ezsyzi3",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3lcac8ezsyzi3", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 23, column: 5 } },

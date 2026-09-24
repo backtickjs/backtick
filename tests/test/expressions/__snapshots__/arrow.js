@@ -7,12 +7,7 @@ it("arrow", async (t) => {
     "arrow",
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
-      {
-        filePath: "expressions/arrow.test.tsx",
-        fileHash: "1qw9q1toh3rnd",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1qw9q1toh3rnd", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },

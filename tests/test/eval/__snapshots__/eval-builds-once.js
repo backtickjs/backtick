@@ -39,12 +39,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Answer() {
   return cs.create(
     { start: { line: 42, column: 9 }, end: { line: 42, column: 34 } },
-    {
-      filePath: "eval/eval-builds-once.test.tsx",
-      fileHash: "2f6ulv1ojihe6",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "2f6ulv1ojihe6", splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 42, column: 12 }, end: { line: 42, column: 33 } },
@@ -101,7 +96,6 @@ async function Waiting({ ask }) {
   return cs.create(
     { start: { line: 52, column: 9 }, end: { line: 62, column: 4 } },
     {
-      filePath: "eval/eval-builds-once.test.tsx",
       fileHash: "2f6ulv1ojihe6",
       splices: {
         $state: { value: state, params: [] },
@@ -477,7 +471,6 @@ async function Waiting({ ask }) {
 const evalBuildsOnce = cs.create(
   { start: { line: 65, column: 23 }, end: { line: 79, column: 2 } },
   {
-    filePath: "eval/eval-builds-once.test.tsx",
     fileHash: "2f6ulv1ojihe6",
     splices: {
       $state: { value: state, params: [] },

@@ -7,7 +7,6 @@ async function Panel() {
   return cs.create(
     { start: { line: 7, column: 9 }, end: { line: 10, column: 4 } },
     {
-      filePath: "typecheck-errors/component-answers-action.test.tsx",
       fileHash: "1y32lnuqpkjgj",
       splices: { $state: { value: state, params: [] } },
       captures: [],

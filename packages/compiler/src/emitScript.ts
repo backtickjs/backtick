@@ -1,6 +1,6 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
-import type { BindingResolution } from "./resolveBindings.js";
+import type { BindingResolution, ResolvedSplice } from "./resolveBindings.js";
 
 /** A script as the client runs it, and where its code came from. */
 export interface EmittedScript {
@@ -18,6 +18,16 @@ export interface EmittedScript {
   readonly map: string;
 }
 
+/**
+ * What a name the script wrote becomes: one of its entry's parameters, called
+ * with the bindings a hole hands over where it has `args`, read as it is where
+ * not.
+ */
+export interface Edit {
+  readonly param: number;
+  readonly args?: readonly string[];
+}
+
 // A binding key as `resolveBindings` writes it, `<name>$<fileHash>$<n>`, back
 // to the name the script wrote.
 function sourceName(key: string): string {
@@ -25,178 +35,121 @@ function sourceName(key: string): string {
 }
 
 /**
- * Emits a script's code by compiling its own text with TypeScript.
+ * The edits a script's text needs, by the host-file offset of what each
+ * replaces: every splice it reads, host tags among them, and every binding it
+ * captures. What is a reference was decided by `resolveBindings`; this only
+ * numbers the parameters, in `splices`' order and then `captures`'.
+ */
+export function scriptEdits(
+  script: ClientScript,
+  bindings: BindingResolution,
+  splices: ReadonlyMap<string, ResolvedSplice>,
+  captures: readonly string[],
+): Map<number, Edit> {
+  const captureIndex = new Map(
+    captures.map((key, index) => [key, splices.size + index]),
+  );
+  const read = (key: string): string => {
+    const index = captureIndex.get(key);
+    return index === undefined ? sourceName(key) : `$${index}`;
+  };
+
+  const edits = new Map<number, Edit>();
+  const at = (identifier: ts.Identifier) =>
+    script.toSourceRange(identifier).start;
+  let param = 0;
+  for (const splice of splices.values()) {
+    // A tag is handed over as the value it names: it has no bindings to hand
+    // its hole, and JSX cannot write a call where a tag goes.
+    const edit: Edit = splice.tag
+      ? { param }
+      : { param, args: [...splice.params, ...captures].map(read) };
+    for (const ref of splice.refs) {
+      edits.set(at(ref), edit);
+    }
+    param++;
+  }
+  for (const [identifier, key] of bindings) {
+    const index = captureIndex.get(key);
+    if (
+      index !== undefined &&
+      identifier.getSourceFile() === script.fileWithPlaceholders
+    ) {
+      edits.set(at(identifier), { param: index });
+    }
+  }
+  return edits;
+}
+
+/**
+ * Emits a script's code by compiling its own text with TypeScript, with
+ * `edits` applied.
  *
  * TypeScript is handed the host file with everything but the script blanked
- * and every `${…}` hole replaced by a placeholder of the same length, newlines
- * kept, so a position in what it parses is the same position in the host file.
- * Its source map then points into the host file as it stands, and the
- * compiler's own resolution, made on another parse, is matched by position.
+ * and every `${…}` hole replaced by `0` padded to the same length, newlines
+ * kept, so a position in what it parses is the same position in the host file:
+ * its source map points into the host file as it stands, and an edit is found
+ * by where it starts.
  */
 export function emitScript(
   ts: typeof import("typescript"),
   script: ClientScript,
-  bindings: BindingResolution,
-  spliceKeys: readonly string[],
-  captures: readonly string[],
-  spliceParams: { readonly [splice: string]: readonly string[] },
-  hostTags: ReadonlySet<string>,
+  params: number,
+  edits: ReadonlyMap<number, Edit>,
 ): EmittedScript {
   const sourceFile = script.sourceFile;
   const text = sourceFile.text;
   const template = script.sourceNode.template;
   const start = template.getStart(sourceFile) + 1; // past `
   const end = template.getEnd() - 1; // before `
-
-  // Whitespace keeps lines and columns; a hole becomes `0`, which stands
-  // wherever an expression does, and is known by where it starts.
   const blank = (from: number, to: number, fill = ""): string =>
-    fill +
-    text.slice(from + fill.length, to).replace(/[^\r\n]/g, " ");
-  const holes = new Map<number, string>();
+    fill + text.slice(from + fill.length, to).replace(/[^\r\n]/g, " ");
   let aligned = blank(0, start);
   let at = start;
   if (ts.isTemplateExpression(template)) {
-    template.templateSpans.forEach((span, index) => {
+    for (const span of template.templateSpans) {
       const dollarBrace = span.expression.getFullStart() - 2;
       const afterBrace = span.literal.getStart(sourceFile) + 1;
-      aligned += text.slice(at, dollarBrace) + blank(dollarBrace, afterBrace, "0");
-      holes.set(dollarBrace, `$0splice${index}`);
+      aligned +=
+        text.slice(at, dollarBrace) + blank(dollarBrace, afterBrace, "0");
       at = afterBrace;
-    });
-  }
-  aligned += text.slice(at, end) + blank(end, text.length);
-
-  // What the compiler resolved, by where it was written.
-  const keyAt = new Map<number, string>();
-  for (const [identifier, key] of bindings) {
-    if (identifier.getSourceFile() === script.fileWithPlaceholders) {
-      keyAt.set(script.toSourceRange(identifier).start, key);
     }
   }
-
-  const spliceIndex = new Map(spliceKeys.map((key, index) => [key, index]));
-  const captureIndex = new Map(
-    captures.map((key, index) => [key, spliceKeys.length + index]),
-  );
-  // A tag is handed over as the value it names: it has no bindings to hand
-  // its hole, and JSX cannot write a call where a tag goes.
-  const tagKeys = new Set(Array.from(hostTags, (name) => `$${name}`));
+  aligned += text.slice(at, end) + blank(end, text.length);
 
   const transformer: ts.TransformerFactory<ts.SourceFile> =
     (context) => (file) => {
       const f = context.factory;
-      const param = (index: number) => f.createIdentifier(`$${index}`);
-      const at = <T extends ts.Node>(node: T, from: ts.Node): T =>
-        ts.setOriginalNode(ts.setTextRange(node, from), from);
-      const read = (key: string): ts.Identifier => {
-        const index = captureIndex.get(key);
-        return index === undefined
-          ? f.createIdentifier(sourceName(key))
-          : param(index);
+      const edited = (edit: Edit, from: ts.Node): ts.Expression => {
+        const param = f.createIdentifier(`$${edit.param}`);
+        const node =
+          edit.args === undefined
+            ? param
+            : f.createCallExpression(
+                param,
+                undefined,
+                edit.args.map((arg) => f.createIdentifier(arg)),
+              );
+        return ts.setOriginalNode(ts.setTextRange(node, from), from);
       };
-      const splice = (key: string, from: ts.Node): ts.Expression => {
-        const index = spliceIndex.get(key);
-        if (index === undefined) {
-          throw new Error(`This script has no \`${key}\` splice.`);
-        }
-        if (tagKeys.has(key)) {
-          return at(param(index), from);
-        }
-        const args = [...(spliceParams[key] ?? []), ...captures].map(read);
-        return at(f.createCallExpression(param(index), undefined, args), from);
-      };
-      // What a name written here means to the client, or null where it keeps
-      // its own.
-      const rewrite = (identifier: ts.Identifier): ts.Expression | null => {
-        const key = keyAt.get(identifier.getStart(file));
-        if (key !== undefined) {
-          return captureIndex.has(key) ? at(read(key), identifier) : null;
-        }
-        return script.splices[identifier.text]?.kind === "unbraced"
-          ? splice(identifier.text, identifier)
-          : null;
-      };
-      const tag = (name: ts.JsxTagNameExpression): ts.JsxTagNameExpression => {
-        if (!ts.isIdentifier(name)) {
-          return name;
-        }
-        const key = keyAt.get(name.getStart(file));
-        if (key === undefined) {
-          return hostTags.has(name.text)
-            ? (splice(`$${name.text}`, name) as ts.Identifier)
-            : name;
-        }
-        return captureIndex.has(key) ? at(read(key), name) : name;
-      };
-
       const visit = (node: ts.Node): ts.Node => {
         // Types are TypeScript's to strip, after this.
         if (ts.isTypeNode(node)) {
           return node;
         }
-        if (ts.isNumericLiteral(node)) {
-          const hole = holes.get(node.getStart(file));
-          if (hole !== undefined) {
-            return splice(hole, node);
-          }
+        if (ts.isIdentifier(node) || ts.isNumericLiteral(node)) {
+          const edit = edits.get(node.getStart(file));
+          return edit === undefined ? node : edited(edit, node);
         }
-        if (ts.isIdentifier(node)) {
-          return rewrite(node) ?? node;
-        }
-        // A name in these positions is a key, not a reference.
-        if (ts.isPropertyAccessExpression(node)) {
-          return f.updatePropertyAccessExpression(
-            node,
-            ts.visitNode(node.expression, visit, ts.isExpression),
-            node.name,
-          );
-        }
-        if (ts.isPropertyAssignment(node)) {
-          return f.updatePropertyAssignment(
-            node,
-            ts.isComputedPropertyName(node.name)
-              ? ts.visitNode(node.name, visit, ts.isPropertyName)
-              : node.name,
-            ts.visitNode(node.initializer, visit, ts.isExpression),
-          );
-        }
+        // `{ count }` names a key as well as a value.
         if (ts.isShorthandPropertyAssignment(node)) {
-          const value = rewrite(node.name);
-          return value === null
-            ? node
-            : at(f.createPropertyAssignment(node.name.text, value), node);
-        }
-        if (ts.isJsxAttribute(node)) {
-          return f.updateJsxAttribute(
-            node,
-            node.name,
-            node.initializer &&
-              (visit(node.initializer) as ts.JsxAttributeValue),
-          );
-        }
-        if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
-          const attributes = ts.visitNode(
-            node.attributes,
-            visit,
-            ts.isJsxAttributes,
-          );
-          return ts.isJsxOpeningElement(node)
-            ? f.updateJsxOpeningElement(
-                node,
-                tag(node.tagName),
-                node.typeArguments,
-                attributes,
-              )
-            : f.updateJsxSelfClosingElement(
-                node,
-                tag(node.tagName),
-                node.typeArguments,
-                attributes,
-              );
-        }
-        if (ts.isJsxClosingElement(node)) {
-          return f.updateJsxClosingElement(node, tag(node.tagName));
+          const edit = edits.get(node.name.getStart(file));
+          if (edit !== undefined) {
+            return f.createPropertyAssignment(
+              node.name.text,
+              edited(edit, node.name),
+            );
+          }
         }
         return ts.visitEachChild(node, visit, context);
       };
@@ -205,21 +158,23 @@ export function emitScript(
       if (statement === undefined) {
         return file;
       }
-      const body = ts.isExpressionStatement(statement)
-        ? ts.visitNode(statement.expression, visit, ts.isExpression)
-        : ts.visitNode(statement, visit, ts.isBlock);
       const entry = f.createArrowFunction(
         undefined,
         undefined,
-        [...spliceKeys, ...captures].map((_, index) =>
+        Array.from({ length: params }, (_, index) =>
           f.createParameterDeclaration(undefined, undefined, `$${index}`),
         ),
         undefined,
         f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-        body,
+        ts.isExpressionStatement(statement)
+          ? ts.visitNode(statement.expression, visit, ts.isExpression)
+          : ts.visitNode(statement, visit, ts.isBlock),
       );
       return f.updateSourceFile(file, [
-        at(f.createExpressionStatement(entry), statement),
+        ts.setOriginalNode(
+          ts.setTextRange(f.createExpressionStatement(entry), statement),
+          statement,
+        ),
       ]);
     };
 

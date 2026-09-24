@@ -12,12 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // nowhere to name it, since the compiler writes the call.
 const originX = cs.create(
   { start: { line: 14, column: 16 }, end: { line: 14, column: 21 } },
-  {
-    filePath: "splices/spliced-container.test.tsx",
-    fileHash: "3hhvicr225pmx",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3hhvicr225pmx", splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 14, column: 19 }, end: { line: 14, column: 20 } },
@@ -28,12 +23,7 @@ const originX = cs.create(
 );
 const label = cs.create(
   { start: { line: 16, column: 14 }, end: { line: 16, column: 26 } },
-  {
-    filePath: "splices/spliced-container.test.tsx",
-    fileHash: "3hhvicr225pmx",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3hhvicr225pmx", splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 16, column: 17 }, end: { line: 16, column: 25 } },
@@ -50,7 +40,6 @@ it("splicedContainer", async (t) => {
     cs.create(
       { start: { line: 21, column: 44 }, end: { line: 21, column: 60 } },
       {
-        filePath: "splices/spliced-container.test.tsx",
         fileHash: "3hhvicr225pmx",
         splices: { $point: { value: point, params: [] } },
         captures: [],

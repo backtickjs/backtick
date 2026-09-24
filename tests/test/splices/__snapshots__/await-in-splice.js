@@ -14,7 +14,6 @@ it("awaitInSplice", async (t) => {
     cs.create(
       { start: { line: 13, column: 41 }, end: { line: 13, column: 75 } },
       {
-        filePath: "splices/await-in-splice.test.tsx",
         fileHash: "1bxbldnw0mfci",
         splices: { $0splice0: { value: await fetchGreeting(), params: [] } },
         captures: [],

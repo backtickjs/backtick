@@ -8,7 +8,6 @@ it("spliceNumeric", async (t) => {
     cs.create(
       { start: { line: 6, column: 41 }, end: { line: 6, column: 49 } },
       {
-        filePath: "splices/splice-numeric.test.tsx",
         fileHash: "pyy2xapmkswv",
         splices: { $0splice0: { value: 1, params: [] } },
         captures: [],

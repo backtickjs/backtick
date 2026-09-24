@@ -10,12 +10,7 @@ it("math", async (t) => {
     "math",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 36, column: 6 } },
-      {
-        filePath: "stdlib/math.test.tsx",
-        fileHash: "1j4uiiyebx17u",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1j4uiiyebx17u", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 36, column: 5 } },

@@ -13,7 +13,6 @@ async function Panel() {
   return cs.create(
     { start: { line: 13, column: 9 }, end: { line: 16, column: 4 } },
     {
-      filePath: "components/component-answers-script.test.tsx",
       fileHash: "2g65d04vf49d2",
       splices: { $state: { value: state, params: [] } },
       captures: [],

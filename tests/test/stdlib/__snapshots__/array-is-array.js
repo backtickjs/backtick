@@ -9,12 +9,7 @@ it("arrayIsArray", async (t) => {
     "arrayIsArray",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 19, column: 6 } },
-      {
-        filePath: "stdlib/array-is-array.test.tsx",
-        fileHash: "311zee6pw10s9",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "311zee6pw10s9", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 19, column: 5 } },

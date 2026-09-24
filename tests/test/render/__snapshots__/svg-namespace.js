@@ -13,12 +13,7 @@ import { namespaced } from "./dom.ts";
 async function Ring() {
   return cs.create(
     { start: { line: 15, column: 9 }, end: { line: 15, column: 77 } },
-    {
-      filePath: "render/svg-namespace.test.tsx",
-      fileHash: "8n845jjtfvwm",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "8n845jjtfvwm", splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 15, column: 12 }, end: { line: 15, column: 76 } },
@@ -162,7 +157,6 @@ async function Ring() {
 const svgNamespace = cs.create(
   { start: { line: 18, column: 21 }, end: { line: 37, column: 2 } },
   {
-    filePath: "render/svg-namespace.test.tsx",
     fileHash: "8n845jjtfvwm",
     splices: {
       $Ring: { value: Ring, params: [] },

@@ -4,12 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A script that returns a value may still run an action.
 const valueScriptEffects = cs.create(
   { start: { line: 7, column: 41 }, end: { line: 9, column: 2 } },
-  {
-    filePath: "control-flow/action-in-value-script.test.tsx",
-    fileHash: "1zk77nyjrl50d",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "1zk77nyjrl50d", splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 7, column: 44 }, end: { line: 9, column: 1 } },
@@ -52,12 +47,7 @@ const valueScriptEffects = cs.create(
 );
 const ping = cs.create(
   { start: { line: 11, column: 33 }, end: { line: 14, column: 2 } },
-  {
-    filePath: "control-flow/action-in-value-script.test.tsx",
-    fileHash: "1zk77nyjrl50d",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "1zk77nyjrl50d", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 36 }, end: { line: 14, column: 1 } },
@@ -143,7 +133,6 @@ it("actionInValueScript", async (t) => {
     cs.create(
       { start: { line: 20, column: 4 }, end: { line: 28, column: 6 } },
       {
-        filePath: "control-flow/action-in-value-script.test.tsx",
         fileHash: "1zk77nyjrl50d",
         splices: {
           $valueScriptEffects: { value: valueScriptEffects, params: [] },

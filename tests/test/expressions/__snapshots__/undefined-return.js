@@ -3,12 +3,7 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const lying = cs.create(
   { start: { line: 11, column: 35 }, end: { line: 11, column: 49 } },
-  {
-    filePath: "expressions/undefined-return.test.tsx",
-    fileHash: "2qb372nig0g3z",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2qb372nig0g3z", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 38 }, end: { line: 11, column: 48 } },
@@ -30,7 +25,6 @@ it("undefinedReturn", async (t) => {
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 21, column: 6 } },
       {
-        filePath: "expressions/undefined-return.test.tsx",
         fileHash: "2qb372nig0g3z",
         splices: { $lying: { value: lying, params: [] } },
         captures: [],

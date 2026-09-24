@@ -11,12 +11,7 @@ it("arrayCopyingMembers", async (t) => {
     "arrayCopyingMembers",
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 30, column: 6 } },
-      {
-        filePath: "stdlib/array-copying-members.test.tsx",
-        fileHash: "1o1nlczam5nsr",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1o1nlczam5nsr", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 30, column: 5 } },

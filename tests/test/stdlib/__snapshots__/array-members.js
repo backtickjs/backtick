@@ -9,12 +9,7 @@ it("arrayMembers", async (t) => {
     "arrayMembers",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 25, column: 6 } },
-      {
-        filePath: "stdlib/array-members.test.tsx",
-        fileHash: "139y0n5fpgs82",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "139y0n5fpgs82", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 25, column: 5 } },

@@ -14,12 +14,7 @@ it("builtinAsValue", async (t) => {
     "builtinAsValue",
     cs.create(
       { start: { line: 16, column: 4 }, end: { line: 20, column: 6 } },
-      {
-        filePath: "stdlib/builtin-as-value.test.tsx",
-        fileHash: "1n7k5w76rpsyr",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1n7k5w76rpsyr", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 16, column: 7 }, end: { line: 20, column: 5 } },

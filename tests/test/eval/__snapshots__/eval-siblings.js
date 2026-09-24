@@ -8,12 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Other() {
   return cs.create(
     { start: { line: 9, column: 9 }, end: { line: 9, column: 45 } },
-    {
-      filePath: "eval/eval-siblings.test.tsx",
-      fileHash: "1re1jas6fqiey",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "1re1jas6fqiey", splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 44 } },
@@ -64,7 +59,6 @@ it("evalSiblings", async (t) => {
     cs.create(
       { start: { line: 18, column: 4 }, end: { line: 22, column: 11 } },
       {
-        filePath: "eval/eval-siblings.test.tsx",
         fileHash: "1re1jas6fqiey",
         splices: { $otherBundle: { value: otherBundle, params: [] } },
         captures: [],

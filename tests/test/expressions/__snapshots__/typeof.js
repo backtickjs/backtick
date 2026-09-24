@@ -10,7 +10,6 @@ it("typeofTable", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 25, column: 6 } },
       {
-        filePath: "expressions/typeof.test.tsx",
         fileHash: "1jdryi4es12ui",
         splices: { $state: { value: state, params: [] } },
         captures: [],
@@ -346,12 +345,7 @@ it("typeofNarrows", async (t) => {
     "typeofNarrows",
     cs.create(
       { start: { line: 34, column: 4 }, end: { line: 38, column: 6 } },
-      {
-        filePath: "expressions/typeof.test.tsx",
-        fileHash: "1jdryi4es12ui",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1jdryi4es12ui", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 34, column: 7 }, end: { line: 38, column: 5 } },

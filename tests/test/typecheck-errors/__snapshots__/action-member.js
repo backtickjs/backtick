@@ -3,12 +3,7 @@ import { cs } from "@backtickjs/core";
 // untyped caller can; the lowering backstop refuses to ship it.
 const action = cs.create(
   { start: { line: 5, column: 15 }, end: { line: 7, column: 2 } },
-  {
-    filePath: "typecheck-errors/action-member.test.tsx",
-    fileHash: "wf1ni21eddai",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "wf1ni21eddai", splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 18 }, end: { line: 7, column: 1 } },
@@ -52,7 +47,6 @@ const action = cs.create(
 export default cs.create(
   { start: { line: 9, column: 15 }, end: { line: 13, column: 2 } },
   {
-    filePath: "typecheck-errors/action-member.test.tsx",
     fileHash: "wf1ni21eddai",
     splices: { $0splice0: { value: [action], params: [] } },
     captures: [],

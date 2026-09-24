@@ -15,12 +15,7 @@ it("scriptFragmentTag", async (t) => {
     "scriptFragmentTag",
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 33, column: 6 } },
-      {
-        filePath: "jsx/script-fragment-tag.test.tsx",
-        fileHash: "1uevnymojdbzi",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1uevnymojdbzi", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 33, column: 5 } },

@@ -11,7 +11,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const scriptBoundTagCapture = cs.create(
   { start: { line: 11, column: 30 }, end: { line: 33, column: 2 } },
   {
-    filePath: "render/script-bound-tag-capture.test.tsx",
     fileHash: "h5jruxcfnavr",
     splices: {
       $state: { value: state, params: [] },
@@ -19,7 +18,6 @@ const scriptBoundTagCapture = cs.create(
         value: cs.create(
           { start: { line: 17, column: 9 }, end: { line: 17, column: 38 } },
           {
-            filePath: "render/script-bound-tag-capture.test.tsx",
             fileHash: "h5jruxcfnavr",
             splices: {},
             captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
@@ -118,7 +116,6 @@ const scriptBoundTagCapture = cs.create(
         value: cs.create(
           { start: { line: 19, column: 10 }, end: { line: 22, column: 10 } },
           {
-            filePath: "render/script-bound-tag-capture.test.tsx",
             fileHash: "h5jruxcfnavr",
             splices: {
               $0splice0: {
@@ -128,7 +125,6 @@ const scriptBoundTagCapture = cs.create(
                     end: { line: 21, column: 54 },
                   },
                   {
-                    filePath: "render/script-bound-tag-capture.test.tsx",
                     fileHash: "h5jruxcfnavr",
                     splices: {},
                     captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
@@ -310,7 +306,6 @@ const scriptBoundTagCapture = cs.create(
           children: cs.create(
             { start: { line: 24, column: 20 }, end: { line: 24, column: 56 } },
             {
-              filePath: "render/script-bound-tag-capture.test.tsx",
               fileHash: "h5jruxcfnavr",
               splices: {},
               captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
@@ -426,7 +421,6 @@ const scriptBoundTagCapture = cs.create(
         value: cs.create(
           { start: { line: 26, column: 10 }, end: { line: 28, column: 15 } },
           {
-            filePath: "render/script-bound-tag-capture.test.tsx",
             fileHash: "h5jruxcfnavr",
             splices: { $For: { value: For, params: [] } },
             captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],

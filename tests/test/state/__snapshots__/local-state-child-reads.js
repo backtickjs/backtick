@@ -21,7 +21,6 @@ const ReadingRow = async ({ id, selected }) =>
         style: cs.create(
           { start: { line: 27, column: 13 }, end: { line: 27, column: 75 } },
           {
-            filePath: "state/local-state-child-reads.test.tsx",
             fileHash: "asvx80rnl1z5",
             splices: {
               $selected: { value: selected, params: [] },
@@ -140,7 +139,6 @@ const ReadingRow = async ({ id, selected }) =>
         children: cs.create(
           { start: { line: 29, column: 7 }, end: { line: 29, column: 50 } },
           {
-            filePath: "state/local-state-child-reads.test.tsx",
             fileHash: "asvx80rnl1z5",
             splices: {
               $id: { value: id, params: [] },
@@ -237,7 +235,6 @@ const ReadingRow = async ({ id, selected }) =>
       cs.create(
         { start: { line: 31, column: 5 }, end: { line: 31, column: 66 } },
         {
-          filePath: "state/local-state-child-reads.test.tsx",
           fileHash: "asvx80rnl1z5",
           splices: {
             $selected: { value: selected, params: [] },
@@ -331,7 +328,6 @@ async function ReadingPanel() {
   return cs.create(
     { start: { line: 36, column: 9 }, end: { line: 45, column: 4 } },
     {
-      filePath: "state/local-state-child-reads.test.tsx",
       fileHash: "asvx80rnl1z5",
       splices: {
         $state: { value: state, params: [] },

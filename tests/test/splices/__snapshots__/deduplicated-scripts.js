@@ -5,12 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // collapses into a single function-table entry referenced twice.
 const leaf = cs.create(
   { start: { line: 7, column: 13 }, end: { line: 7, column: 18 } },
-  {
-    filePath: "splices/deduplicated-scripts.test.tsx",
-    fileHash: "2g4us6n03x6jl",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2g4us6n03x6jl", splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 7, column: 16 }, end: { line: 7, column: 17 } },
@@ -26,7 +21,6 @@ it("deduplicatedScripts", async (t) => {
     cs.create(
       { start: { line: 10, column: 47 }, end: { line: 10, column: 75 } },
       {
-        filePath: "splices/deduplicated-scripts.test.tsx",
         fileHash: "2g4us6n03x6jl",
         splices: { $leaf: { value: leaf, params: [] } },
         captures: [],

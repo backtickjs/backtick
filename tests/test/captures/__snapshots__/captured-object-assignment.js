@@ -11,14 +11,12 @@ it("capturedObjectAssignment", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 20, column: 6 } },
       {
-        filePath: "captures/captured-object-assignment.test.tsx",
         fileHash: "385xpgt8q0ek2",
         splices: {
           $0splice0: {
             value: cs.create(
               { start: { line: 14, column: 21 }, end: { line: 16, column: 8 } },
               {
-                filePath: "captures/captured-object-assignment.test.tsx",
                 fileHash: "385xpgt8q0ek2",
                 splices: {},
                 captures: ["counter$385xpgt8q0ek2$0"],

@@ -10,12 +10,7 @@ it("stringMembersEs2017", async (t) => {
     "stringMembersEs2017",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 21, column: 6 } },
-      {
-        filePath: "stdlib/string-members-es2017.test.tsx",
-        fileHash: "376ffut9l2xr3",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "376ffut9l2xr3", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 21, column: 5 } },

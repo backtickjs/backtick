@@ -164,7 +164,7 @@ export async function buildBundle<T extends ClientUnknown>(
   // the call site. The body's hole call and every thunk's parameter list read
   // this, so they agree positionally.
   //
-  // Read off the entry's own source (see `spliceParams` in `resolveBindings`),
+  // Read off the entry's own source (see `splices` in `resolveBindings`),
   // not off what the arguments reaching that hole in this bundle happen to
   // capture. That is what lets an entry be compiled from its script alone: a
   // second call site appearing elsewhere in a render cannot change a thunk a

@@ -9,12 +9,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           { start: { line: 10, column: 32 }, end: { line: 10, column: 51 } },
-          {
-            filePath: "objects/indexing.test.tsx",
-            fileHash: "kbv0csg6ys4h",
-            splices: {},
-            captures: [],
-          },
+          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -75,12 +70,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           { start: { line: 11, column: 32 }, end: { line: 11, column: 46 } },
-          {
-            filePath: "objects/indexing.test.tsx",
-            fileHash: "kbv0csg6ys4h",
-            splices: {},
-            captures: [],
-          },
+          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -117,12 +107,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           { start: { line: 13, column: 32 }, end: { line: 13, column: 49 } },
-          {
-            filePath: "objects/indexing.test.tsx",
-            fileHash: "kbv0csg6ys4h",
-            splices: {},
-            captures: [],
-          },
+          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -186,12 +171,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           { start: { line: 14, column: 32 }, end: { line: 14, column: 65 } },
-          {
-            filePath: "objects/indexing.test.tsx",
-            fileHash: "kbv0csg6ys4h",
-            splices: {},
-            captures: [],
-          },
+          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -229,12 +209,7 @@ describe("a read by key", () => {
     const reads = [
       cs.create(
         { start: { line: 20, column: 6 }, end: { line: 20, column: 23 } },
-        {
-          filePath: "objects/indexing.test.tsx",
-          fileHash: "kbv0csg6ys4h",
-          splices: {},
-          captures: [],
-        },
+        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -290,12 +265,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         { start: { line: 21, column: 6 }, end: { line: 21, column: 25 } },
-        {
-          filePath: "objects/indexing.test.tsx",
-          fileHash: "kbv0csg6ys4h",
-          splices: {},
-          captures: [],
-        },
+        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -351,12 +321,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         { start: { line: 22, column: 6 }, end: { line: 22, column: 24 } },
-        {
-          filePath: "objects/indexing.test.tsx",
-          fileHash: "kbv0csg6ys4h",
-          splices: {},
-          captures: [],
-        },
+        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -421,12 +386,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         { start: { line: 23, column: 6 }, end: { line: 23, column: 56 } },
-        {
-          filePath: "objects/indexing.test.tsx",
-          fileHash: "kbv0csg6ys4h",
-          splices: {},
-          captures: [],
-        },
+        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -485,12 +445,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         { start: { line: 24, column: 6 }, end: { line: 24, column: 18 } },
-        {
-          filePath: "objects/indexing.test.tsx",
-          fileHash: "kbv0csg6ys4h",
-          splices: {},
-          captures: [],
-        },
+        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {

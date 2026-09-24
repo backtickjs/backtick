@@ -10,12 +10,7 @@ it("spread", async (t) => {
     "spread",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 19, column: 6 } },
-      {
-        filePath: "expressions/spread.test.tsx",
-        fileHash: "umu4jsb4aovz",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "umu4jsb4aovz", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 19, column: 5 } },

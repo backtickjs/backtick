@@ -5,12 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // composes as a block running it in statement position.
 const effects = cs.create(
   { start: { line: 8, column: 30 }, end: { line: 10, column: 2 } },
-  {
-    filePath: "control-flow/action-composition.test.tsx",
-    fileHash: "3q2gz79xhvvfp",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3q2gz79xhvvfp", splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 8, column: 33 }, end: { line: 10, column: 1 } },
@@ -54,7 +49,6 @@ const effects = cs.create(
 const composed = cs.create(
   { start: { line: 12, column: 31 }, end: { line: 14, column: 2 } },
   {
-    filePath: "control-flow/action-composition.test.tsx",
     fileHash: "3q2gz79xhvvfp",
     splices: { $effects: { value: effects, params: [] } },
     captures: [],
@@ -87,7 +81,6 @@ it("actionComposition", async (t) => {
     cs.create(
       { start: { line: 20, column: 4 }, end: { line: 22, column: 6 } },
       {
-        filePath: "control-flow/action-composition.test.tsx",
         fileHash: "3q2gz79xhvvfp",
         splices: { $composed: { value: composed, params: [] } },
         captures: [],

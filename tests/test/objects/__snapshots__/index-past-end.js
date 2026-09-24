@@ -11,12 +11,7 @@ it("indexPastEnd", async (t) => {
     "indexPastEnd",
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 16, column: 6 } },
-      {
-        filePath: "objects/index-past-end.test.tsx",
-        fileHash: "3821as72cvvin",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3821as72cvvin", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 16, column: 5 } },

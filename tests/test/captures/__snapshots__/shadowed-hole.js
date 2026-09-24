@@ -13,7 +13,6 @@ function wrapShadowed(fragment) {
   return cs.create(
     { start: { line: 15, column: 9 }, end: { line: 21, column: 4 } },
     {
-      filePath: "captures/shadowed-hole.test.tsx",
       fileHash: "1wiy7dknp0llv",
       splices: { $fragment: { value: fragment, params: [] } },
       captures: [],
@@ -141,7 +140,6 @@ it("shadowedHole", async (t) => {
     cs.create(
       { start: { line: 28, column: 4 }, end: { line: 28, column: 57 } },
       {
-        filePath: "captures/shadowed-hole.test.tsx",
         fileHash: "1wiy7dknp0llv",
         splices: {
           $0splice0: {
@@ -151,12 +149,7 @@ it("shadowedHole", async (t) => {
                   start: { line: 28, column: 22 },
                   end: { line: 28, column: 28 },
                 },
-                {
-                  filePath: "captures/shadowed-hole.test.tsx",
-                  fileHash: "1wiy7dknp0llv",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "1wiy7dknp0llv", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -178,12 +171,7 @@ it("shadowedHole", async (t) => {
                   start: { line: 28, column: 48 },
                   end: { line: 28, column: 54 },
                 },
-                {
-                  filePath: "captures/shadowed-hole.test.tsx",
-                  fileHash: "1wiy7dknp0llv",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "1wiy7dknp0llv", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

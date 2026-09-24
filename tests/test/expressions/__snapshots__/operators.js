@@ -8,12 +8,7 @@ it("binaryOperators", async (t) => {
     "binaryOperators",
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 25, column: 6 } },
-      {
-        filePath: "expressions/operators.test.tsx",
-        fileHash: "3g7ol1xnrqdpp",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 25, column: 5 } },
@@ -392,12 +387,7 @@ it("unaryOperators", async (t) => {
     "unaryOperators",
     cs.create(
       { start: { line: 33, column: 4 }, end: { line: 38, column: 6 } },
-      {
-        filePath: "expressions/operators.test.tsx",
-        fileHash: "3g7ol1xnrqdpp",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 33, column: 7 }, end: { line: 38, column: 5 } },
@@ -718,12 +708,7 @@ it("assignmentOperators", async (t) => {
     "assignmentOperators",
     cs.create(
       { start: { line: 46, column: 4 }, end: { line: 62, column: 6 } },
-      {
-        filePath: "expressions/operators.test.tsx",
-        fileHash: "3g7ol1xnrqdpp",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 46, column: 7 }, end: { line: 62, column: 5 } },
@@ -1250,12 +1235,7 @@ it("assignmentTargets", async (t) => {
     "assignmentTargets",
     cs.create(
       { start: { line: 71, column: 4 }, end: { line: 80, column: 6 } },
-      {
-        filePath: "expressions/operators.test.tsx",
-        fileHash: "3g7ol1xnrqdpp",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 71, column: 7 }, end: { line: 80, column: 5 } },
@@ -1669,12 +1649,7 @@ it("commaOperator", async (t) => {
     "commaOperator",
     cs.create(
       { start: { line: 89, column: 4 }, end: { line: 93, column: 6 } },
-      {
-        filePath: "expressions/operators.test.tsx",
-        fileHash: "3g7ol1xnrqdpp",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 89, column: 7 }, end: { line: 93, column: 5 } },

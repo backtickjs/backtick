@@ -7,12 +7,7 @@ it("whileLoop", async (t) => {
     "whileLoop",
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 20, column: 6 } },
-      {
-        filePath: "control-flow/while-loop.test.tsx",
-        fileHash: "1qmqxi23sdk0m",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1qmqxi23sdk0m", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 20, column: 5 } },

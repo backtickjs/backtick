@@ -9,12 +9,7 @@ it("forLoop", async (t) => {
     "forLoop",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
-      {
-        filePath: "control-flow/for-loop.test.tsx",
-        fileHash: "1z8sn9rs7fbwb",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1z8sn9rs7fbwb", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

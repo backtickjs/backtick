@@ -10,12 +10,7 @@ it("compoundAssignment", async (t) => {
     "compoundAssignment",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 26, column: 6 } },
-      {
-        filePath: "expressions/compound-assignment.test.tsx",
-        fileHash: "23v4b48bi2lxc",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "23v4b48bi2lxc", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 26, column: 5 } },

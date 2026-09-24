@@ -6,8 +6,10 @@ import { create } from "@backtickjs/client-script";
 // One script, `1`, written at 3:7 of a file hashing to `abc`.
 const script = create(
   { start: { line: 3, column: 7 }, end: { line: 3, column: 8 } },
-  { filePath: "a.tsx", fileHash: "abc", splices: {}, captures: [] },
+  { fileHash: "abc", splices: {}, captures: [] },
   () => ({ type: "Literal", value: 1 }),
+  "() => 1",
+  "",
 ) as never;
 
 const labelsOf = (tree: Awaited<ReturnType<typeof buildBundle>>) =>

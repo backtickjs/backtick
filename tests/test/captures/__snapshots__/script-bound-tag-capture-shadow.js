@@ -14,7 +14,6 @@ function labelled(label) {
   return cs.create(
     { start: { line: 16, column: 9 }, end: { line: 19, column: 4 } },
     {
-      filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
       fileHash: "2mv5sg07ackia",
       splices: {
         $label: { value: label, params: [] },
@@ -22,7 +21,6 @@ function labelled(label) {
           value: cs.create(
             { start: { line: 18, column: 17 }, end: { line: 18, column: 35 } },
             {
-              filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
               fileHash: "2mv5sg07ackia",
               splices: {},
               captures: ["Card$2mv5sg07ackia$0"],
@@ -308,7 +306,6 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     cs.create(
       { start: { line: 26, column: 4 }, end: { line: 30, column: 11 } },
       {
-        filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
         fileHash: "2mv5sg07ackia",
         splices: {
           $0splice0: {
@@ -318,12 +315,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                   start: { line: 28, column: 18 },
                   end: { line: 28, column: 25 },
                 },
-                {
-                  filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
-                  fileHash: "2mv5sg07ackia",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "2mv5sg07ackia", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -345,12 +337,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                   start: { line: 29, column: 18 },
                   end: { line: 29, column: 25 },
                 },
-                {
-                  filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
-                  fileHash: "2mv5sg07ackia",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "2mv5sg07ackia", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -538,7 +525,6 @@ it("scriptBoundTagScope", async (t) => {
     cs.create(
       { start: { line: 41, column: 4 }, end: { line: 57, column: 6 } },
       {
-        filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
         fileHash: "2mv5sg07ackia",
         splices: { $Card: { value: Card, params: [] } },
         captures: [],

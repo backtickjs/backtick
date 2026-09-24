@@ -12,7 +12,6 @@ it("splicedFunctionParam", async (t) => {
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 16, column: 6 } },
       {
-        filePath: "splices/spliced-function-param.test.tsx",
         fileHash: "yz0kiroonaez",
         splices: {
           $0splice0: {
@@ -21,12 +20,7 @@ it("splicedFunctionParam", async (t) => {
                 start: { line: 15, column: 21 },
                 end: { line: 15, column: 32 },
               },
-              {
-                filePath: "splices/spliced-function-param.test.tsx",
-                fileHash: "yz0kiroonaez",
-                splices: {},
-                captures: [],
-              },
+              { fileHash: "yz0kiroonaez", splices: {}, captures: [] },
               () => ({
                 type: "ArrowFunctionExpression",
                 loc: {

@@ -9,12 +9,7 @@ it("reservedKeyScript", async (t) => {
     "reservedKeyScript",
     cs.create(
       { start: { line: 8, column: 45 }, end: { line: 8, column: 67 } },
-      {
-        filePath: "objects/reserved-key-script.test.tsx",
-        fileHash: "28g09xvp2p10c",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "28g09xvp2p10c", splices: {}, captures: [] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 8, column: 49 }, end: { line: 8, column: 65 } },

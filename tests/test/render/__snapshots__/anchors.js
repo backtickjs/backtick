@@ -29,7 +29,6 @@ async function Rows() {
   return cs.create(
     { start: { line: 31, column: 9 }, end: { line: 42, column: 4 } },
     {
-      filePath: "render/anchors.test.tsx",
       fileHash: "1l1sblr1an3g5",
       splices: {
         $state: { value: state, params: [] },

@@ -6,7 +6,6 @@ async function Rows() {
   return cs.create(
     { start: { line: 18, column: 9 }, end: { line: 34, column: 4 } },
     {
-      filePath: "components/named-type-positions.test.tsx",
       fileHash: "1xb9ns0x2f3vb",
       splices: {
         $state: { value: state, params: [] },

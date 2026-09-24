@@ -12,7 +12,6 @@ async function SwappableRows() {
   return cs.create(
     { start: { line: 12, column: 9 }, end: { line: 32, column: 4 } },
     {
-      filePath: "state/keyed-rows.test.tsx",
       fileHash: "89rxx0ivccc7",
       splices: {
         $state: { value: state, params: [] },

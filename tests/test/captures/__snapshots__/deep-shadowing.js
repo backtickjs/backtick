@@ -5,7 +5,6 @@ function outerBase(inner) {
   return cs.create(
     { start: { line: 7, column: 9 }, end: { line: 10, column: 4 } },
     {
-      filePath: "captures/deep-shadowing.test.tsx",
       fileHash: "8up2nb5o0inm",
       splices: { $0splice0: { value: middleBase(inner), params: [] } },
       captures: [],
@@ -84,7 +83,6 @@ function middleBase(inner) {
   return cs.create(
     { start: { line: 14, column: 9 }, end: { line: 17, column: 4 } },
     {
-      filePath: "captures/deep-shadowing.test.tsx",
       fileHash: "8up2nb5o0inm",
       splices: { $inner: { value: inner, params: [] } },
       captures: [],
@@ -176,7 +174,6 @@ it("deepShadowing", async (t) => {
     cs.create(
       { start: { line: 28, column: 4 }, end: { line: 31, column: 6 } },
       {
-        filePath: "captures/deep-shadowing.test.tsx",
         fileHash: "8up2nb5o0inm",
         splices: {
           $0splice0: {
@@ -187,7 +184,6 @@ it("deepShadowing", async (t) => {
                   end: { line: 30, column: 33 },
                 },
                 {
-                  filePath: "captures/deep-shadowing.test.tsx",
                   fileHash: "8up2nb5o0inm",
                   splices: {},
                   captures: ["base$8up2nb5o0inm$2"],

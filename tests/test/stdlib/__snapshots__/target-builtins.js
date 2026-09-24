@@ -16,7 +16,6 @@ describe("a global an app defines", () => {
         cs.create(
           { start: { line: 21, column: 21 }, end: { line: 21, column: 33 } },
           {
-            filePath: "stdlib/target-builtins.test.tsx",
             fileHash: "34nfn77gkxcwe",
             splices: { $greet: { value: greet, params: [] } },
             captures: [],
@@ -54,7 +53,6 @@ describe("a global an app defines", () => {
         cs.create(
           { start: { line: 29, column: 34 }, end: { line: 29, column: 46 } },
           {
-            filePath: "stdlib/target-builtins.test.tsx",
             fileHash: "34nfn77gkxcwe",
             splices: { $greet: { value: greet, params: [] } },
             captures: [],
@@ -92,7 +90,6 @@ describe("a global an app defines", () => {
         cs.create(
           { start: { line: 37, column: 21 }, end: { line: 37, column: 49 } },
           {
-            filePath: "stdlib/target-builtins.test.tsx",
             fileHash: "34nfn77gkxcwe",
             splices: { $storage: { value: storage, params: [] } },
             captures: [],

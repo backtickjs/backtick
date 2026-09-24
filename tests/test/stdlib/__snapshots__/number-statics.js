@@ -8,12 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Checked() {
   return cs.create(
     { start: { line: 9, column: 9 }, end: { line: 37, column: 4 } },
-    {
-      filePath: "stdlib/number-statics.test.tsx",
-      fileHash: "1o8290c5hfi65",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "1o8290c5hfi65", splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 9, column: 12 }, end: { line: 37, column: 3 } },

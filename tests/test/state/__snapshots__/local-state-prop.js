@@ -14,7 +14,6 @@ const SharedCounter = async ({ size }) =>
     style: cs.create(
       { start: { line: 15, column: 11 }, end: { line: 15, column: 49 } },
       {
-        filePath: "state/local-state-prop.test.tsx",
         fileHash: "1myb4rrcna327",
         splices: { $size: { value: size, params: [] } },
         captures: [],
@@ -88,7 +87,6 @@ const SharedCounter = async ({ size }) =>
     onclick: cs.create(
       { start: { line: 16, column: 13 }, end: { line: 18, column: 6 } },
       {
-        filePath: "state/local-state-prop.test.tsx",
         fileHash: "1myb4rrcna327",
         splices: { $size: { value: size, params: [] } },
         captures: [],
@@ -209,7 +207,6 @@ async function SharingPanel() {
   return cs.create(
     { start: { line: 25, column: 9 }, end: { line: 33, column: 4 } },
     {
-      filePath: "state/local-state-prop.test.tsx",
       fileHash: "1myb4rrcna327",
       splices: {
         $state: { value: state, params: [] },

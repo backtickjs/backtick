@@ -16,7 +16,6 @@ function wrap(start) {
   return cs.create(
     { start: { line: 17, column: 9 }, end: { line: 23, column: 4 } },
     {
-      filePath: "splices/host-wrapped-splice.test.tsx",
       fileHash: "zqr0jsdf8ub6",
       splices: {
         $start: { value: start, params: [] },
@@ -25,7 +24,6 @@ function wrap(start) {
             cs.create(
               { start: { line: 19, column: 17 }, end: { line: 22, column: 6 } },
               {
-                filePath: "splices/host-wrapped-splice.test.tsx",
                 fileHash: "zqr0jsdf8ub6",
                 splices: {
                   $0splice0: {
@@ -36,7 +34,6 @@ function wrap(start) {
                           end: { line: 21, column: 38 },
                         },
                         {
-                          filePath: "splices/host-wrapped-splice.test.tsx",
                           fileHash: "zqr0jsdf8ub6",
                           splices: {},
                           captures: ["outer$zqr0jsdf8ub6$0"],
@@ -203,7 +200,6 @@ function foo(start) {
   return cs.create(
     { start: { line: 27, column: 9 }, end: { line: 27, column: 23 } },
     {
-      filePath: "splices/host-wrapped-splice.test.tsx",
       fileHash: "zqr0jsdf8ub6",
       splices: { $start: { value: start, params: [] } },
       captures: [],
@@ -237,7 +233,6 @@ it("hostWrappedSplice", async (t) => {
     cs.create(
       { start: { line: 38, column: 4 }, end: { line: 38, column: 39 } },
       {
-        filePath: "splices/host-wrapped-splice.test.tsx",
         fileHash: "zqr0jsdf8ub6",
         splices: {
           $0splice0: {
@@ -247,12 +242,7 @@ it("hostWrappedSplice", async (t) => {
                   start: { line: 38, column: 14 },
                   end: { line: 38, column: 19 },
                 },
-                {
-                  filePath: "splices/host-wrapped-splice.test.tsx",
-                  fileHash: "zqr0jsdf8ub6",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "zqr0jsdf8ub6", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -274,12 +264,7 @@ it("hostWrappedSplice", async (t) => {
                   start: { line: 38, column: 31 },
                   end: { line: 38, column: 36 },
                 },
-                {
-                  filePath: "splices/host-wrapped-splice.test.tsx",
-                  fileHash: "zqr0jsdf8ub6",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "zqr0jsdf8ub6", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

@@ -23,7 +23,6 @@ describe("computed", () => {
       cs.create(
         { start: { line: 25, column: 6 }, end: { line: 39, column: 8 } },
         {
-          filePath: "state/computed.test.tsx",
           fileHash: "3vk1ks01z9ilh",
           splices: {
             $state: { value: state, params: [] },
@@ -842,7 +841,6 @@ describe("computed", () => {
       cs.create(
         { start: { line: 51, column: 6 }, end: { line: 64, column: 8 } },
         {
-          filePath: "state/computed.test.tsx",
           fileHash: "3vk1ks01z9ilh",
           splices: {
             $state: { value: state, params: [] },

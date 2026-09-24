@@ -7,12 +7,7 @@ it("constant", async (t) => {
     "constant",
     cs.create(
       { start: { line: 6, column: 36 }, end: { line: 6, column: 41 } },
-      {
-        filePath: "expressions/constant.test.tsx",
-        fileHash: "1e4ingeabxazf",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1e4ingeabxazf", splices: {}, captures: [] },
       () => ({
         type: "Literal",
         loc: { start: { line: 6, column: 39 }, end: { line: 6, column: 40 } },

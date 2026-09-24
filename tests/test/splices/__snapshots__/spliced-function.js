@@ -19,7 +19,6 @@ it("splicedFunction", async (t) => {
     cs.create(
       { start: { line: 21, column: 4 }, end: { line: 21, column: 59 } },
       {
-        filePath: "splices/spliced-function.test.tsx",
         fileHash: "1pdv8x4hbo6de",
         splices: { $0splice0: { value: (n) => n, params: [] } },
         captures: [],

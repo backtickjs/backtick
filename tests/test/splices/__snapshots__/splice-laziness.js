@@ -12,7 +12,6 @@ function guard(fragment) {
   return cs.create(
     { start: { line: 13, column: 9 }, end: { line: 18, column: 4 } },
     {
-      filePath: "splices/splice-laziness.test.tsx",
       fileHash: "3cvzb2rrvx0i4",
       splices: { $fragment: { value: fragment, params: [] } },
       captures: [],
@@ -101,12 +100,7 @@ function guard(fragment) {
 }
 const ok = cs.create(
   { start: { line: 21, column: 11 }, end: { line: 21, column: 26 } },
-  {
-    filePath: "splices/splice-laziness.test.tsx",
-    fileHash: "3cvzb2rrvx0i4",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3cvzb2rrvx0i4", splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 21, column: 14 }, end: { line: 21, column: 25 } },
@@ -117,12 +111,7 @@ const ok = cs.create(
 );
 const broken = cs.create(
   { start: { line: 23, column: 15 }, end: { line: 25, column: 2 } },
-  {
-    filePath: "splices/splice-laziness.test.tsx",
-    fileHash: "3cvzb2rrvx0i4",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3cvzb2rrvx0i4", splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 23, column: 18 }, end: { line: 25, column: 1 } },
@@ -151,7 +140,6 @@ it("spliceLaziness", async (t) => {
     cs.create(
       { start: { line: 31, column: 4 }, end: { line: 34, column: 7 } },
       {
-        filePath: "splices/splice-laziness.test.tsx",
         fileHash: "3cvzb2rrvx0i4",
         splices: {
           $0splice0: { value: guard(ok), params: [] },

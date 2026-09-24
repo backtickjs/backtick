@@ -8,12 +8,7 @@ it("earlyReturn", async (t) => {
     "earlyReturn",
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 16, column: 6 } },
-      {
-        filePath: "control-flow/early-return.test.tsx",
-        fileHash: "33mpmt8iae2c7",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "33mpmt8iae2c7", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 16, column: 5 } },

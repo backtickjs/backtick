@@ -6,12 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // accepted here.
 const greet = cs.create(
   { start: { line: 8, column: 14 }, end: { line: 10, column: 2 } },
-  {
-    filePath: "objects/optional-parameter.test.tsx",
-    fileHash: "1i6s8vesd5nbi",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "1i6s8vesd5nbi", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 17 }, end: { line: 10, column: 1 } },
@@ -93,12 +88,7 @@ const greet = cs.create(
 // undefined`.
 const double = cs.create(
   { start: { line: 14, column: 15 }, end: { line: 14, column: 26 } },
-  {
-    filePath: "objects/optional-parameter.test.tsx",
-    fileHash: "1i6s8vesd5nbi",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "1i6s8vesd5nbi", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 14, column: 18 }, end: { line: 14, column: 25 } },
@@ -115,12 +105,7 @@ const double = cs.create(
 );
 const callIfGiven = cs.create(
   { start: { line: 16, column: 20 }, end: { line: 18, column: 2 } },
-  {
-    filePath: "objects/optional-parameter.test.tsx",
-    fileHash: "1i6s8vesd5nbi",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "1i6s8vesd5nbi", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 16, column: 23 }, end: { line: 18, column: 1 } },
@@ -198,7 +183,6 @@ it("optionalParameter", async (t) => {
     cs.create(
       { start: { line: 24, column: 4 }, end: { line: 31, column: 7 } },
       {
-        filePath: "objects/optional-parameter.test.tsx",
         fileHash: "1i6s8vesd5nbi",
         splices: {
           $greet: { value: greet, params: [] },

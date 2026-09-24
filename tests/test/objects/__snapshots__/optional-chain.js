@@ -6,12 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // each access, and a null method receiver skips the call.
 const pick = cs.create(
   { start: { line: 8, column: 13 }, end: { line: 10, column: 2 } },
-  {
-    filePath: "objects/optional-chain.test.tsx",
-    fileHash: "2dtorvijco8u0",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2dtorvijco8u0", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 16 }, end: { line: 10, column: 1 } },
@@ -73,12 +68,7 @@ const pick = cs.create(
 );
 const deep = cs.create(
   { start: { line: 12, column: 13 }, end: { line: 14, column: 2 } },
-  {
-    filePath: "objects/optional-chain.test.tsx",
-    fileHash: "2dtorvijco8u0",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2dtorvijco8u0", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 12, column: 16 }, end: { line: 14, column: 1 } },
@@ -160,12 +150,7 @@ const deep = cs.create(
 );
 const shout = cs.create(
   { start: { line: 16, column: 14 }, end: { line: 18, column: 2 } },
-  {
-    filePath: "objects/optional-chain.test.tsx",
-    fileHash: "2dtorvijco8u0",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2dtorvijco8u0", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 16, column: 17 }, end: { line: 18, column: 1 } },
@@ -253,7 +238,6 @@ it("optionalChain", async (t) => {
     cs.create(
       { start: { line: 24, column: 4 }, end: { line: 32, column: 7 } },
       {
-        filePath: "objects/optional-chain.test.tsx",
         fileHash: "2dtorvijco8u0",
         splices: {
           $pick: { value: pick, params: [] },

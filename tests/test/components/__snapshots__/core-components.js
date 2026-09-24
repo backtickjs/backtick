@@ -13,12 +13,7 @@ it("coreComponents", async (t) => {
           style: "font-size: 12px",
           onclick: cs.create(
             { start: { line: 10, column: 45 }, end: { line: 10, column: 57 } },
-            {
-              filePath: "components/core-components.test.tsx",
-              fileHash: "1dqg1yg283gkk",
-              splices: {},
-              captures: [],
-            },
+            { fileHash: "1dqg1yg283gkk", splices: {}, captures: [] },
             () => ({
               type: "ArrowFunctionExpression",
               loc: {

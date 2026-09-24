@@ -10,12 +10,7 @@ it("stdlibEs2015", async (t) => {
     "stdlibEs2015",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 27, column: 6 } },
-      {
-        filePath: "stdlib/stdlib-es2015.test.tsx",
-        fileHash: "s2q4937fji9l",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "s2q4937fji9l", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 27, column: 5 } },

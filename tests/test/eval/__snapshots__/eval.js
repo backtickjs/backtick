@@ -11,7 +11,6 @@ async function Items() {
   return cs.create(
     { start: { line: 11, column: 9 }, end: { line: 13, column: 9 } },
     {
-      filePath: "eval/eval.test.tsx",
       fileHash: "3crw4saj766qu",
       splices: { $For: { value: For, params: [] } },
       captures: [],
@@ -221,7 +220,6 @@ const total = await bundler.run(41);
 const evaluated = cs.create(
   { start: { line: 19, column: 18 }, end: { line: 22, column: 7 } },
   {
-    filePath: "eval/eval.test.tsx",
     fileHash: "3crw4saj766qu",
     splices: {
       $items: { value: items, params: [] },

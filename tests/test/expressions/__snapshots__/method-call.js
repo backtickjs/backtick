@@ -7,12 +7,7 @@ it("methodCall", async (t) => {
     "methodCall",
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
-      {
-        filePath: "expressions/method-call.test.tsx",
-        fileHash: "163oncfaq7kkj",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "163oncfaq7kkj", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },

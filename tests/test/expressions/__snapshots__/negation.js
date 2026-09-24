@@ -12,12 +12,7 @@ it("negation", async (t) => {
     "negation",
     cs.create(
       { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
-      {
-        filePath: "expressions/negation.test.tsx",
-        fileHash: "3ucocch4sr77y",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3ucocch4sr77y", splices: {}, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },
@@ -200,12 +195,7 @@ it("negativeZero", async (t) => {
     "negativeZero",
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 29, column: 6 } },
-      {
-        filePath: "expressions/negation.test.tsx",
-        fileHash: "3ucocch4sr77y",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3ucocch4sr77y", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 27, column: 7 }, end: { line: 29, column: 5 } },

@@ -11,12 +11,7 @@ it("arrayReduce", async (t) => {
     "arrayReduce",
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 26, column: 6 } },
-      {
-        filePath: "stdlib/array-reduce.test.tsx",
-        fileHash: "32uyy4dbi2509",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "32uyy4dbi2509", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 26, column: 5 } },

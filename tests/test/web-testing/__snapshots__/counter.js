@@ -10,7 +10,6 @@ async function Counter() {
   return cs.create(
     { start: { line: 10, column: 9 }, end: { line: 18, column: 4 } },
     {
-      filePath: "web-testing/counter.test.tsx",
       fileHash: "2x6geiwtygybj",
       splices: { $state: { value: state, params: [] } },
       captures: [],

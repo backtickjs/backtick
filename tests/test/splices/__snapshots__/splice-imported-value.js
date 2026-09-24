@@ -25,7 +25,6 @@ it("spliceImportedValue", async (t) => {
     cs.create(
       { start: { line: 23, column: 47 }, end: { line: 23, column: 64 } },
       {
-        filePath: "splices/splice-imported-value.test.tsx",
         fileHash: "3rujjqwiut9zl",
         splices: { $FRAGMENT_TAG: { value: FRAGMENT_TAG, params: [] } },
         captures: [],

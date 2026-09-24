@@ -9,12 +9,7 @@ it("objectValues", async (t) => {
     "objectValues",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
-      {
-        filePath: "stdlib/object-values.test.tsx",
-        fileHash: "1lmwvcf4zc2ir",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1lmwvcf4zc2ir", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

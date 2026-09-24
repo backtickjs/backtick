@@ -17,7 +17,6 @@ it("typeAssertion", async (t) => {
     cs.create(
       { start: { line: 19, column: 4 }, end: { line: 23, column: 6 } },
       {
-        filePath: "expressions/type-assertion.test.tsx",
         fileHash: "3amzui83z49rq",
         splices: { $answered: { value: answered, params: [] } },
         captures: [],

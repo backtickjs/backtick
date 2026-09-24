@@ -9,8 +9,6 @@ export interface MetadataSplice {
 }
 
 export interface Metadata {
-  // names the source file for humans; identity comes from `fileHash` and `loc`
-  filePath: string;
   // distinguishes same-named files across codebases (see `locKey`)
   fileHash: string;
   // spliced host values, under the keys the body uses (see `ClientScriptSplice`)

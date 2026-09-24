@@ -10,12 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // expressions survives, where trimming would take it.
 const listed = cs.create(
   { start: { line: 11, column: 15 }, end: { line: 18, column: 2 } },
-  {
-    filePath: "jsx/script-fragment.test.tsx",
-    fileHash: "3pjkiwnta5gua",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3pjkiwnta5gua", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 18 }, end: { line: 18, column: 1 } },
@@ -222,7 +217,6 @@ it("scriptFragment", async (t) => {
       children: cs.create(
         { start: { line: 21, column: 48 }, end: { line: 21, column: 64 } },
         {
-          filePath: "jsx/script-fragment.test.tsx",
           fileHash: "3pjkiwnta5gua",
           splices: { $listed: { value: listed, params: [] } },
           captures: [],

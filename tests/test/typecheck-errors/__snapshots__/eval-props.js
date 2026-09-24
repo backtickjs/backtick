@@ -8,7 +8,6 @@ async function Row({ count }) {
   return cs.create(
     { start: { line: 14, column: 9 }, end: { line: 14, column: 40 } },
     {
-      filePath: "typecheck-errors/eval-props.test.tsx",
       fileHash: "3og7hp7gm9m5d",
       splices: { $count: { value: count, params: [] } },
       captures: [],
@@ -83,12 +82,7 @@ async function Row({ count }) {
 async function Nothing() {
   return cs.create(
     { start: { line: 18, column: 9 }, end: { line: 18, column: 44 } },
-    {
-      filePath: "typecheck-errors/eval-props.test.tsx",
-      fileHash: "3og7hp7gm9m5d",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "3og7hp7gm9m5d", splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 18, column: 12 }, end: { line: 18, column: 43 } },
@@ -144,7 +138,6 @@ const rows = await bundler.run(
   cs.create(
     { start: { line: 22, column: 2 }, end: { line: 22, column: 72 } },
     {
-      filePath: "typecheck-errors/eval-props.test.tsx",
       fileHash: "3og7hp7gm9m5d",
       splices: {
         $0splice0: {
@@ -155,7 +148,6 @@ const rows = await bundler.run(
                 end: { line: 22, column: 65 },
               },
               {
-                filePath: "typecheck-errors/eval-props.test.tsx",
                 fileHash: "3og7hp7gm9m5d",
                 splices: {},
                 captures: ["props$3og7hp7gm9m5d$0"],
@@ -224,7 +216,6 @@ const empty = await bundler.run(_jsx(Nothing, {}));
 export default cs.create(
   { start: { line: 27, column: 15 }, end: { line: 59, column: 2 } },
   {
-    filePath: "typecheck-errors/eval-props.test.tsx",
     fileHash: "3og7hp7gm9m5d",
     splices: {
       $rows: { value: rows, params: [] },

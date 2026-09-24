@@ -13,7 +13,6 @@ it("splicedComparison", async (t) => {
     cs.create(
       { start: { line: 15, column: 4 }, end: { line: 20, column: 7 } },
       {
-        filePath: "splices/spliced-comparison.test.tsx",
         fileHash: "3jdm2y7f9tpf",
         splices: {
           $low: { value: low, params: [] },

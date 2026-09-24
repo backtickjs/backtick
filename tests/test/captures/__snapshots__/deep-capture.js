@@ -16,7 +16,6 @@ function wrap(start) {
   return cs.create(
     { start: { line: 18, column: 9 }, end: { line: 24, column: 4 } },
     {
-      filePath: "captures/deep-capture.test.tsx",
       fileHash: "22sufdxid1i7s",
       splices: {
         $start: { value: start, params: [] },
@@ -24,7 +23,6 @@ function wrap(start) {
           value: cs.create(
             { start: { line: 20, column: 13 }, end: { line: 23, column: 6 } },
             {
-              filePath: "captures/deep-capture.test.tsx",
               fileHash: "22sufdxid1i7s",
               splices: {
                 $0splice0: {
@@ -34,7 +32,6 @@ function wrap(start) {
                       end: { line: 22, column: 33 },
                     },
                     {
-                      filePath: "captures/deep-capture.test.tsx",
                       fileHash: "22sufdxid1i7s",
                       splices: {},
                       captures: ["outer$22sufdxid1i7s$0"],
@@ -202,7 +199,6 @@ it("deepCapture", async (t) => {
     cs.create(
       { start: { line: 28, column: 39 }, end: { line: 28, column: 74 } },
       {
-        filePath: "captures/deep-capture.test.tsx",
         fileHash: "22sufdxid1i7s",
         splices: {
           $0splice0: {
@@ -212,12 +208,7 @@ it("deepCapture", async (t) => {
                   start: { line: 28, column: 49 },
                   end: { line: 28, column: 54 },
                 },
-                {
-                  filePath: "captures/deep-capture.test.tsx",
-                  fileHash: "22sufdxid1i7s",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "22sufdxid1i7s", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -239,12 +230,7 @@ it("deepCapture", async (t) => {
                   start: { line: 28, column: 66 },
                   end: { line: 28, column: 71 },
                 },
-                {
-                  filePath: "captures/deep-capture.test.tsx",
-                  fileHash: "22sufdxid1i7s",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "22sufdxid1i7s", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

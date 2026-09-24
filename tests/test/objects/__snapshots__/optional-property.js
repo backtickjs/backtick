@@ -6,12 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // top for the nullable reads.
 const read = cs.create(
   { start: { line: 8, column: 13 }, end: { line: 10, column: 2 } },
-  {
-    filePath: "objects/optional-property.test.tsx",
-    fileHash: "1pn78z89zmc5d",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "1pn78z89zmc5d", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 16 }, end: { line: 10, column: 1 } },
@@ -146,7 +141,6 @@ it("optionalProperty", async (t) => {
     cs.create(
       { start: { line: 16, column: 4 }, end: { line: 20, column: 7 } },
       {
-        filePath: "objects/optional-property.test.tsx",
         fileHash: "1pn78z89zmc5d",
         splices: { $read: { value: read, params: [] } },
         captures: [],

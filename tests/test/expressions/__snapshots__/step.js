@@ -10,12 +10,7 @@ it("step", async (t) => {
     "step",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 22, column: 6 } },
-      {
-        filePath: "expressions/step.test.tsx",
-        fileHash: "l4vdws2hl3xc",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "l4vdws2hl3xc", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 22, column: 5 } },

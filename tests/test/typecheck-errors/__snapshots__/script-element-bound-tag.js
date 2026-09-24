@@ -4,12 +4,7 @@ import { cs } from "@backtickjs/core";
 // @ts-expect-error: JSX element type 'Tag' does not have any construct or call signatures.
 const held = cs.create(
   { start: { line: 6, column: 13 }, end: { line: 6, column: 41 } },
-  {
-    filePath: "typecheck-errors/script-element-bound-tag.test.tsx",
-    fileHash: "xwewmj2gozc5",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "xwewmj2gozc5", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 6, column: 16 }, end: { line: 6, column: 40 } },

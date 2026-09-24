@@ -24,7 +24,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 27, column: 6 }, end: { line: 42, column: 8 } },
         {
-          filePath: "state/equals.test.tsx",
           fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
@@ -904,7 +903,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 57, column: 6 }, end: { line: 74, column: 8 } },
         {
-          filePath: "state/equals.test.tsx",
           fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
@@ -1648,7 +1646,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 82, column: 6 }, end: { line: 90, column: 8 } },
         {
-          filePath: "state/equals.test.tsx",
           fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
@@ -2084,7 +2081,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 99, column: 6 }, end: { line: 111, column: 8 } },
         {
-          filePath: "state/equals.test.tsx",
           fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
@@ -2592,7 +2588,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 119, column: 6 }, end: { line: 133, column: 8 } },
         {
-          filePath: "state/equals.test.tsx",
           fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },

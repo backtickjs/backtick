@@ -24,7 +24,6 @@ it("scriptComponent", async (t) => {
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 34, column: 6 } },
       {
-        filePath: "components/script-component.test.tsx",
         fileHash: "2ielk672xspgd",
         splices: {
           $Card: { value: Card, params: [] },

@@ -14,12 +14,7 @@ it("arrayFrom", async (t) => {
     "arrayFrom",
     cs.create(
       { start: { line: 16, column: 4 }, end: { line: 23, column: 6 } },
-      {
-        filePath: "stdlib/array-from.test.tsx",
-        fileHash: "3pi2uzl7sovgc",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3pi2uzl7sovgc", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 16, column: 7 }, end: { line: 23, column: 5 } },

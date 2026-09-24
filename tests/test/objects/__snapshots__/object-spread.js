@@ -15,12 +15,7 @@ it("objectSpread", async (t) => {
     "objectSpread",
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 25, column: 6 } },
-      {
-        filePath: "objects/object-spread.test.tsx",
-        fileHash: "31uvwz3g4bdt1",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "31uvwz3g4bdt1", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 25, column: 5 } },

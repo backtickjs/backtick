@@ -11,12 +11,7 @@ it("computedKey", async (t) => {
     "computedKey",
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 22, column: 6 } },
-      {
-        filePath: "objects/computed-key.test.tsx",
-        fileHash: "27b2r7injyzq0",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "27b2r7injyzq0", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 22, column: 5 } },

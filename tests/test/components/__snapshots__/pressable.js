@@ -14,7 +14,6 @@ async function Row() {
   return cs.create(
     { start: { line: 15, column: 9 }, end: { line: 27, column: 4 } },
     {
-      filePath: "components/pressable.test.tsx",
       fileHash: "7huprcub5nk3",
       splices: { $state: { value: state, params: [] } },
       captures: [],

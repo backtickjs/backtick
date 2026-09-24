@@ -5,12 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).
 const orDash = cs.create(
   { start: { line: 7, column: 57 }, end: { line: 14, column: 2 } },
-  {
-    filePath: "expressions/null-literal.test.tsx",
-    fileHash: "2nnj6ebvkk8vj",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "2nnj6ebvkk8vj", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 7, column: 60 }, end: { line: 14, column: 1 } },
@@ -110,7 +105,6 @@ it("nullLiteral", async (t) => {
     cs.create(
       { start: { line: 20, column: 4 }, end: { line: 24, column: 7 } },
       {
-        filePath: "expressions/null-literal.test.tsx",
         fileHash: "2nnj6ebvkk8vj",
         splices: { $orDash: { value: orDash, params: [] } },
         captures: [],

@@ -10,12 +10,7 @@ it("arrayQueries", async (t) => {
     "arrayQueries",
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 24, column: 6 } },
-      {
-        filePath: "stdlib/array-queries.test.tsx",
-        fileHash: "25lflsbo2zrha",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "25lflsbo2zrha", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 24, column: 5 } },

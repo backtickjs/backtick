@@ -9,12 +9,7 @@ it("objectEntries", async (t) => {
     "objectEntries",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
-      {
-        filePath: "stdlib/object-entries.test.tsx",
-        fileHash: "txb5yf5uyd2o",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "txb5yf5uyd2o", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

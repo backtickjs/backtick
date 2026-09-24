@@ -8,12 +8,7 @@ it("prefixNot", async (t) => {
     "prefixNot",
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 15, column: 6 } },
-      {
-        filePath: "expressions/prefix-not.test.tsx",
-        fileHash: "3rwumhu91n08h",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "3rwumhu91n08h", splices: {}, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 10, column: 7 }, end: { line: 15, column: 5 } },

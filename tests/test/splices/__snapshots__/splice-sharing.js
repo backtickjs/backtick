@@ -5,7 +5,6 @@ function add(lhs, rhs) {
   return cs.create(
     { start: { line: 6, column: 9 }, end: { line: 6, column: 24 } },
     {
-      filePath: "splices/splice-sharing.test.tsx",
       fileHash: "3cex0hh0qp6qz",
       splices: {
         $lhs: { value: lhs, params: [] },
@@ -39,7 +38,6 @@ it("spliceSharing", async (t) => {
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 16, column: 7 } },
       {
-        filePath: "splices/splice-sharing.test.tsx",
         fileHash: "3cex0hh0qp6qz",
         splices: {
           $0splice0: {
@@ -49,12 +47,7 @@ it("spliceSharing", async (t) => {
                   start: { line: 14, column: 15 },
                   end: { line: 14, column: 20 },
                 },
-                {
-                  filePath: "splices/splice-sharing.test.tsx",
-                  fileHash: "3cex0hh0qp6qz",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -71,12 +64,7 @@ it("spliceSharing", async (t) => {
                   start: { line: 14, column: 22 },
                   end: { line: 14, column: 27 },
                 },
-                {
-                  filePath: "splices/splice-sharing.test.tsx",
-                  fileHash: "3cex0hh0qp6qz",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -98,12 +86,7 @@ it("spliceSharing", async (t) => {
                   start: { line: 15, column: 15 },
                   end: { line: 15, column: 20 },
                 },
-                {
-                  filePath: "splices/splice-sharing.test.tsx",
-                  fileHash: "3cex0hh0qp6qz",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -120,12 +103,7 @@ it("spliceSharing", async (t) => {
                   start: { line: 15, column: 22 },
                   end: { line: 15, column: 27 },
                 },
-                {
-                  filePath: "splices/splice-sharing.test.tsx",
-                  fileHash: "3cex0hh0qp6qz",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

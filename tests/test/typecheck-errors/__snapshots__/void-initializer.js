@@ -3,12 +3,7 @@ import { cs } from "@backtickjs/core";
 // variable — in a value script or an action.
 const ping = cs.create(
   { start: { line: 5, column: 13 }, end: { line: 8, column: 2 } },
-  {
-    filePath: "typecheck-errors/void-initializer.test.tsx",
-    fileHash: "3ch7rgcn8bjeq",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3ch7rgcn8bjeq", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 5, column: 16 }, end: { line: 8, column: 1 } },
@@ -84,7 +79,6 @@ const ping = cs.create(
 const script = cs.create(
   { start: { line: 10, column: 15 }, end: { line: 13, column: 2 } },
   {
-    filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: { $ping: { value: ping, params: [] } },
     captures: [],
@@ -153,7 +147,6 @@ const script = cs.create(
 const action = cs.create(
   { start: { line: 15, column: 15 }, end: { line: 17, column: 2 } },
   {
-    filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: { $ping: { value: ping, params: [] } },
     captures: [],
@@ -211,12 +204,7 @@ const action = cs.create(
 // the check sequences is shielded.
 const label = cs.create(
   { start: { line: 21, column: 14 }, end: { line: 23, column: 2 } },
-  {
-    filePath: "typecheck-errors/void-initializer.test.tsx",
-    fileHash: "3ch7rgcn8bjeq",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3ch7rgcn8bjeq", splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 21, column: 17 }, end: { line: 23, column: 1 } },
@@ -258,7 +246,6 @@ const label = cs.create(
 const wrongArgument = cs.create(
   { start: { line: 25, column: 22 }, end: { line: 29, column: 2 } },
   {
-    filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: { $label: { value: label, params: [] } },
     captures: [],

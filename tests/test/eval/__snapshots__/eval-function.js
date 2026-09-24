@@ -7,12 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const greet = await bundler.run(
   cs.create(
     { start: { line: 8, column: 32 }, end: { line: 8, column: 69 } },
-    {
-      filePath: "eval/eval-function.test.tsx",
-      fileHash: "1061hn7xljcgj",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "1061hn7xljcgj", splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 8, column: 35 }, end: { line: 8, column: 68 } },
@@ -49,12 +44,7 @@ const greet = await bundler.run(
 const badge = await bundler.run(
   cs.create(
     { start: { line: 11, column: 2 }, end: { line: 11, column: 67 } },
-    {
-      filePath: "eval/eval-function.test.tsx",
-      fileHash: "1061hn7xljcgj",
-      splices: {},
-      captures: [],
-    },
+    { fileHash: "1061hn7xljcgj", splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 11, column: 5 }, end: { line: 11, column: 66 } },
@@ -169,7 +159,6 @@ it("evalFunction", async (t) => {
     cs.create(
       { start: { line: 18, column: 4 }, end: { line: 21, column: 11 } },
       {
-        filePath: "eval/eval-function.test.tsx",
         fileHash: "1061hn7xljcgj",
         splices: {
           $greet: { value: greet, params: [] },

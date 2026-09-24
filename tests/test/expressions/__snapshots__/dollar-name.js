@@ -9,7 +9,6 @@ function add(lhs) {
   return cs.create(
     { start: { line: 10, column: 9 }, end: { line: 10, column: 21 } },
     {
-      filePath: "expressions/dollar-name.test.tsx",
       fileHash: "sl458m2swc6c",
       splices: { $lhs: { value: lhs, params: [] } },
       captures: [],
@@ -40,7 +39,6 @@ it("dollarName", async (t) => {
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 20, column: 6 } },
       {
-        filePath: "expressions/dollar-name.test.tsx",
         fileHash: "sl458m2swc6c",
         splices: {
           $0splice0: {
@@ -51,7 +49,6 @@ it("dollarName", async (t) => {
                   end: { line: 19, column: 27 },
                 },
                 {
-                  filePath: "expressions/dollar-name.test.tsx",
                   fileHash: "sl458m2swc6c",
                   splices: {},
                   captures: ["foo$$sl458m2swc6c$0"],

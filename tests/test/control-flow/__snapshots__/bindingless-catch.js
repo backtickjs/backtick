@@ -9,12 +9,7 @@ it("bindinglessCatch", async (t) => {
     "bindinglessCatch",
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
-      {
-        filePath: "control-flow/bindingless-catch.test.tsx",
-        fileHash: "1lr2275tf95wm",
-        splices: {},
-        captures: [],
-      },
+      { fileHash: "1lr2275tf95wm", splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

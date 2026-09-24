@@ -3,12 +3,7 @@ import { cs } from "@backtickjs/core";
 // the operator takes.
 export const constant = cs.create(
   { start: { line: 5, column: 24 }, end: { line: 10, column: 2 } },
-  {
-    filePath: "typecheck-errors/compound-assignment-operand.test.tsx",
-    fileHash: "3586xtu4la89h",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3586xtu4la89h", splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 27 }, end: { line: 10, column: 1 } },
@@ -81,12 +76,7 @@ export const constant = cs.create(
 );
 export const mixed = cs.create(
   { start: { line: 12, column: 21 }, end: { line: 17, column: 2 } },
-  {
-    filePath: "typecheck-errors/compound-assignment-operand.test.tsx",
-    fileHash: "3586xtu4la89h",
-    splices: {},
-    captures: [],
-  },
+  { fileHash: "3586xtu4la89h", splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 24 }, end: { line: 17, column: 1 } },

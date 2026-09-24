@@ -8,7 +8,6 @@ it("nestedScripts", async (t) => {
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
       {
-        filePath: "captures/nested-scripts.test.tsx",
         fileHash: "2jjdjdr7m395y",
         splices: {
           $0splice0: {
@@ -18,7 +17,6 @@ it("nestedScripts", async (t) => {
                 end: { line: 11, column: 20 },
               },
               {
-                filePath: "captures/nested-scripts.test.tsx",
                 fileHash: "2jjdjdr7m395y",
                 splices: {},
                 captures: ["x$2jjdjdr7m395y$0"],

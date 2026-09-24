@@ -15,7 +15,6 @@ async function RotatingRows() {
   return cs.create(
     { start: { line: 16, column: 9 }, end: { line: 34, column: 4 } },
     {
-      filePath: "state/for-index.test.tsx",
       fileHash: "3hac73x1hhg8m",
       splices: {
         $state: { value: state, params: [] },

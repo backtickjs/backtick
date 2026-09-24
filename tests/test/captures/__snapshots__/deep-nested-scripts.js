@@ -5,7 +5,6 @@ function add(lhs, rhs) {
   return cs.create(
     { start: { line: 7, column: 9 }, end: { line: 7, column: 24 } },
     {
-      filePath: "captures/deep-nested-scripts.test.tsx",
       fileHash: "2rqwzcdfi281b",
       splices: {
         $lhs: { value: lhs, params: [] },
@@ -39,7 +38,6 @@ it("deepNestedScripts", async (t) => {
     cs.create(
       { start: { line: 11, column: 45 }, end: { line: 11, column: 69 } },
       {
-        filePath: "captures/deep-nested-scripts.test.tsx",
         fileHash: "2rqwzcdfi281b",
         splices: {
           $0splice0: {
@@ -49,12 +47,7 @@ it("deepNestedScripts", async (t) => {
                   start: { line: 11, column: 54 },
                   end: { line: 11, column: 59 },
                 },
-                {
-                  filePath: "captures/deep-nested-scripts.test.tsx",
-                  fileHash: "2rqwzcdfi281b",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "2rqwzcdfi281b", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -71,12 +64,7 @@ it("deepNestedScripts", async (t) => {
                   start: { line: 11, column: 61 },
                   end: { line: 11, column: 66 },
                 },
-                {
-                  filePath: "captures/deep-nested-scripts.test.tsx",
-                  fileHash: "2rqwzcdfi281b",
-                  splices: {},
-                  captures: [],
-                },
+                { fileHash: "2rqwzcdfi281b", splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

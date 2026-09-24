@@ -19,8 +19,10 @@ import { isFragmentTag } from "@backtickjs/client-script";
  *    source-order walk. A name bound by no script at all is not a capture:
  *    the rewrite reads it as a global or reports it as unresolvable.
  *
- *  - `spliceParams`: for each splice, the script's own bindings a fragment
- *    landing at that hole can reach — what the hole must hand whatever arrives.
+ *  - `splices`: for each script, each splice it reads — every one its text
+ *    spells, then each host tag it writes — with where it reads it, whether it
+ *    is a tag, and `params`: the script's own bindings a fragment landing at
+ *    that hole can reach, what the hole must hand whatever arrives.
  *    Unlike counting what actually reached a hole in one bundle, it is a fact
  *    about the script alone.
  *
@@ -58,10 +60,18 @@ export type BindingResolution = Map<ts.Identifier, string>;
 export interface ResolvedScopes {
   bindings: BindingResolution;
   captures: Map<ClientScript, string[]>;
-  spliceParams: Map<ClientScript, { [splice: string]: string[] }>;
-  // Per script, the component tags no scope binds: host components, the only
-  // tags whose splice a script needs.
-  hostTags: Map<ClientScript, Set<string>>;
+  splices: Map<ClientScript, Map<string, ResolvedSplice>>;
+}
+
+/** A splice as a script reads it. */
+export interface ResolvedSplice {
+  // the bindings its hole hands over (see `splices` above)
+  params: string[];
+  // where the script reads it: a hole's placeholder, an unbraced `$name`, or
+  // a host tag's name, opening and closing
+  refs: ts.Identifier[];
+  // a host tag: a component tag no scope binds, which names a host binding
+  tag: boolean;
 }
 
 // A scope's in-scope names mapped to the binding key of their declaration.
@@ -85,13 +95,12 @@ export function resolveBindings(
   // Per-script declared binding keys, in declaration order. Every `declare`
   // appends the fresh key to its script; keys are unique, so no dedup is needed.
   // Not reported: what a reader needs is which of them a given hole can see,
-  // which is `spliceParams`. They are kept here to build it.
+  // which is each splice's `params`. They are kept here to build them.
   const declarations = new Map<ClientScript, string[]>();
 
   // What each splice hole can hand out, recorded as the walk reaches it and
   // narrowed once the walk is done.
-  const spliceParams = new Map<ClientScript, { [splice: string]: string[] }>();
-  const hostTags = new Map<ClientScript, Set<string>>();
+  const splices = new Map<ClientScript, Map<string, ResolvedSplice>>();
 
   // Every binding some nested script captures, whatever hole it was written at.
   // Narrows the scopes above at the end: a hole only has to hand over bindings
@@ -115,6 +124,18 @@ export function resolveBindings(
         live.delete(key);
       }
     };
+  };
+
+  // The splice `key` of `script`: one the text spells, or a host tag recorded
+  // the first time the walk meets it.
+  const spliceOf = (script: ClientScript, key: string): ResolvedSplice => {
+    const table = splices.get(script)!;
+    let splice = table.get(key);
+    if (splice === undefined) {
+      splice = { params: [], refs: [], tag: false };
+      table.set(key, splice);
+    }
+    return splice;
   };
 
   const capture = (script: ClientScript, name: string): void => {
@@ -219,8 +240,17 @@ export function resolveBindings(
       captures.set(script, []);
       seenCaptures.set(script, new Set());
       declarations.set(script, []);
-      spliceParams.set(script, {});
-      hostTags.set(script, new Set());
+      // Seeded with every splice the text spells, in order, so theirs are the
+      // first parameters; host tags follow as the walk meets them.
+      splices.set(
+        script,
+        new Map(
+          Object.keys(script.splices).map((key) => [
+            key,
+            { params: [], refs: [], tag: false },
+          ]),
+        ),
+      );
     }
     const root = scriptRoot(ts, script);
     if (!root) {
@@ -359,28 +389,27 @@ export function resolveBindings(
         // A splice evaluates host code in the enclosing scope; descend into any
         // nested scripts it contains so their free variables resolve against
         // this scope chain, but the placeholder itself is not a variable.
-        const params = spliceParams.get(script);
-        if (params !== undefined) {
-          // Only what a fragment here could name. A binding an inner scope
-          // shadows is still bound, but unreachable by name from this point —
-          // and reaching it anyway would mean emitting code no one could write,
-          // so it is not offered.
-          const reachable = new Set<string>();
-          const named = new Set<string>();
-          for (let i = scopes.length - 1; i >= 0; i--) {
-            for (const [name, key] of scopes[i]) {
-              // Innermost first, so the first binding a name reaches is the one
-              // it means here; an outer one under the same name is shadowed.
-              if (!named.has(name)) {
-                named.add(name);
-                reachable.add(key);
-              }
+        const resolved = spliceOf(script, node.text);
+        resolved.refs.push(node);
+        // Only what a fragment here could name. A binding an inner scope
+        // shadows is still bound, but unreachable by name from this point —
+        // and reaching it anyway would mean emitting code no one could write,
+        // so it is not offered.
+        const reachable = new Set<string>();
+        const named = new Set<string>();
+        for (let i = scopes.length - 1; i >= 0; i--) {
+          for (const [name, key] of scopes[i]) {
+            // Innermost first, so the first binding a name reaches is the one
+            // it means here; an outer one under the same name is shadowed.
+            if (!named.has(name)) {
+              named.add(name);
+              reachable.add(key);
             }
           }
-          params[node.text] = (declarations.get(script) ?? []).filter(
-            (key) => live.has(key) && reachable.has(key),
-          );
         }
+        resolved.params = (declarations.get(script) ?? []).filter(
+          (key) => live.has(key) && reachable.has(key),
+        );
         for (const nested of splice.scripts) {
           walkScript(nested, scopes);
         }
@@ -422,7 +451,11 @@ export function resolveBindings(
           !isFragmentTag(tag.text)
         ) {
           if (resolve(tag.text, scopes) === null) {
-            hostTags.get(script)?.add(tag.text);
+            // A splice used as a tag anywhere is handed over as its value
+            // everywhere: its one parameter cannot be both.
+            const resolved = spliceOf(script, `$${tag.text}`);
+            resolved.tag = true;
+            resolved.refs.push(tag);
           } else {
             reference(tag, script, scopes);
           }
@@ -528,13 +561,13 @@ export function resolveBindings(
 
   // Narrowed only now: whether anything captures a binding is not known until
   // the walk has passed every script that could.
-  for (const scopes of spliceParams.values()) {
-    for (const [splice, keys] of Object.entries(scopes)) {
-      scopes[splice] = keys.filter((key) => escaped.has(key));
+  for (const table of splices.values()) {
+    for (const resolved of table.values()) {
+      resolved.params = resolved.params.filter((key) => escaped.has(key));
     }
   }
 
-  return { bindings, captures, spliceParams, hostTags };
+  return { bindings, captures, splices };
 }
 
 function scriptRoot(

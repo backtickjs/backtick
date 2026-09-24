@@ -24,7 +24,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 27, column: 6 }, end: { line: 30, column: 8 } },
         {
-          filePath: "render/on-cleanup.test.tsx",
           fileHash: "24mnkvlbr5ln5",
           splices: {
             $onCleanup: { value: onCleanup, params: [] },
@@ -193,7 +192,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 39, column: 6 }, end: { line: 48, column: 8 } },
         {
-          filePath: "render/on-cleanup.test.tsx",
           fileHash: "24mnkvlbr5ln5",
           splices: {
             $state: { value: state, params: [] },
@@ -699,7 +697,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 73, column: 6 }, end: { line: 80, column: 8 } },
         {
-          filePath: "render/on-cleanup.test.tsx",
           fileHash: "24mnkvlbr5ln5",
           splices: {
             $state: { value: state, params: [] },
@@ -1133,7 +1130,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 93, column: 6 }, end: { line: 99, column: 8 } },
         {
-          filePath: "render/on-cleanup.test.tsx",
           fileHash: "24mnkvlbr5ln5",
           splices: {
             $onCleanup: { value: onCleanup, params: [] },

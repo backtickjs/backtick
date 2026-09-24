@@ -23,7 +23,6 @@ async function Widened() {
   return cs.create(
     { start: { line: 23, column: 9 }, end: { line: 38, column: 4 } },
     {
-      filePath: "state/state-widening.test.tsx",
       fileHash: "2832bhm4681w5",
       splices: {
         $state: { value: state, params: [] },

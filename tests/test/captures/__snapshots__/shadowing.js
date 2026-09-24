@@ -5,7 +5,6 @@ function addOwnTotal(lhs, rhs) {
   return cs.create(
     { start: { line: 7, column: 9 }, end: { line: 12, column: 4 } },
     {
-      filePath: "captures/shadowing.test.tsx",
       fileHash: "3ujapqmnmm2ra",
       splices: {
         $lhs: { value: lhs, params: [] },
@@ -172,7 +171,6 @@ it("shadowing", async (t) => {
     cs.create(
       { start: { line: 19, column: 4 }, end: { line: 22, column: 6 } },
       {
-        filePath: "captures/shadowing.test.tsx",
         fileHash: "3ujapqmnmm2ra",
         splices: {
           $0splice0: {
@@ -183,7 +181,6 @@ it("shadowing", async (t) => {
                   end: { line: 21, column: 36 },
                 },
                 {
-                  filePath: "captures/shadowing.test.tsx",
                   fileHash: "3ujapqmnmm2ra",
                   splices: {},
                   captures: ["total$3ujapqmnmm2ra$1"],
