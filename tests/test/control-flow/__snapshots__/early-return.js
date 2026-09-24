@@ -7,8 +7,8 @@ it("earlyReturn", async (t) => {
     t,
     "earlyReturn",
     cs.create(
-      { start: { line: 10, column: 4 }, end: { line: 16, column: 6 } },
-      { fileHash: "33mpmt8iae2c7", splices: {}, captures: [] },
+      "33mpmt8iae2c7:10:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 16, column: 5 } },

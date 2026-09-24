@@ -10,12 +10,8 @@ it("indexAbsent", async (t) => {
     t,
     "indexAbsent",
     cs.create(
-      { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
-      {
-        fileHash: "26sqkhggd8j15",
-        splices: { $answers: { value: answers, params: [] } },
-        captures: [],
-      },
+      "26sqkhggd8j15:14:4",
+      { splices: { $answers: { value: answers, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },

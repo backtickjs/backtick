@@ -9,16 +9,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs.create(
-  { start: { line: 11, column: 30 }, end: { line: 33, column: 2 } },
+  "h5jruxcfnavr:11:30",
   {
-    fileHash: "h5jruxcfnavr",
     splices: {
       $state: { value: state, params: [] },
       $0splice0: {
         value: cs.create(
-          { start: { line: 17, column: 9 }, end: { line: 17, column: 38 } },
+          "h5jruxcfnavr:17:9",
           {
-            fileHash: "h5jruxcfnavr",
             splices: {},
             captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
           },
@@ -114,18 +112,13 @@ const scriptBoundTagCapture = cs.create(
       },
       $0splice1: {
         value: cs.create(
-          { start: { line: 19, column: 10 }, end: { line: 22, column: 10 } },
+          "h5jruxcfnavr:19:10",
           {
-            fileHash: "h5jruxcfnavr",
             splices: {
               $0splice0: {
                 value: cs.create(
+                  "h5jruxcfnavr:21:19",
                   {
-                    start: { line: 21, column: 19 },
-                    end: { line: 21, column: 54 },
-                  },
-                  {
-                    fileHash: "h5jruxcfnavr",
                     splices: {},
                     captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
                   },
@@ -304,9 +297,8 @@ const scriptBoundTagCapture = cs.create(
       $0splice2: {
         value: _jsx("section", {
           children: cs.create(
-            { start: { line: 24, column: 20 }, end: { line: 24, column: 56 } },
+            "h5jruxcfnavr:24:20",
             {
-              fileHash: "h5jruxcfnavr",
               splices: {},
               captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
             },
@@ -419,9 +411,8 @@ const scriptBoundTagCapture = cs.create(
       },
       $0splice3: {
         value: cs.create(
-          { start: { line: 26, column: 10 }, end: { line: 28, column: 15 } },
+          "h5jruxcfnavr:26:10",
           {
-            fileHash: "h5jruxcfnavr",
             splices: { $For: { value: For, params: [] } },
             captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
           },

@@ -7,8 +7,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and nothing of its own does: the spans either side keep their order.
 async function Other() {
   return cs.create(
-    { start: { line: 9, column: 9 }, end: { line: 9, column: 45 } },
-    { fileHash: "1re1jas6fqiey", splices: {}, captures: [] },
+    "1re1jas6fqiey:9:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 44 } },
@@ -57,9 +57,8 @@ it("evalSiblings", async (t) => {
     t,
     "evalSiblings",
     cs.create(
-      { start: { line: 18, column: 4 }, end: { line: 22, column: 11 } },
+      "1re1jas6fqiey:18:4",
       {
-        fileHash: "1re1jas6fqiey",
         splices: { $otherBundle: { value: otherBundle, params: [] } },
         captures: [],
       },

@@ -12,9 +12,8 @@ it("awaitInSplice", async (t) => {
     t,
     "awaitInSplice",
     cs.create(
-      { start: { line: 13, column: 41 }, end: { line: 13, column: 75 } },
+      "1bxbldnw0mfci:13:41",
       {
-        fileHash: "1bxbldnw0mfci",
         splices: { $0splice0: { value: await fetchGreeting(), params: [] } },
         captures: [],
       },

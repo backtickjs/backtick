@@ -8,9 +8,8 @@ it("hashKeyData", async (t) => {
     t,
     "hashKeyData",
     cs.create(
-      { start: { line: 8, column: 39 }, end: { line: 8, column: 70 } },
+      "m50lyvn0wkye:8:39",
       {
-        fileHash: "m50lyvn0wkye",
         splices: { $0splice0: { value: { "#call": "#f0" }, params: [] } },
         captures: [],
       },

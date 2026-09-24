@@ -10,9 +10,8 @@ it("spliceOrder", async (t) => {
     t,
     "spliceOrder",
     cs.create(
-      { start: { line: 11, column: 39 }, end: { line: 11, column: 73 } },
+      "355ehjmpryw82:11:39",
       {
-        fileHash: "355ehjmpryw82",
         splices: {
           $count: { value: count, params: [] },
           $0splice0: { value: ++count, params: [] },

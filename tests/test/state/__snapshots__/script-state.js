@@ -8,12 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // another cell, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs.create(
-    { start: { line: 10, column: 16 }, end: { line: 12, column: 4 } },
-    {
-      fileHash: "3f2468k5dp5lo",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "3f2468k5dp5lo:10:16",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 10, column: 19 }, end: { line: 12, column: 3 } },
@@ -103,8 +99,8 @@ async function ScriptRows() {
   );
   return _jsx("span", {
     style: cs.create(
-      { start: { line: 16, column: 13 }, end: { line: 16, column: 34 } },
-      { fileHash: "3f2468k5dp5lo", splices: {}, captures: [] },
+      "3f2468k5dp5lo:16:13",
+      { splices: {}, captures: [] },
       () => ({
         type: "Literal",
         loc: { start: { line: 16, column: 16 }, end: { line: 16, column: 33 } },
@@ -114,12 +110,8 @@ async function ScriptRows() {
       '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"AAegB,MAAA,iBAAiB,CAAA"}',
     ),
     onclick: cs.create(
-      { start: { line: 17, column: 15 }, end: { line: 20, column: 8 } },
-      {
-        fileHash: "3f2468k5dp5lo",
-        splices: { $build: { value: build, params: [] } },
-        captures: [],
-      },
+      "3f2468k5dp5lo:17:15",
+      { splices: { $build: { value: build, params: [] } }, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 17, column: 18 }, end: { line: 20, column: 7 } },
@@ -319,12 +311,8 @@ async function ScriptRows() {
       '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"AAgBkB,MAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,MAAM,CAAC,CAAC;AAC1C,CAAC,CAAA"}',
     ),
     children: cs.create(
-      { start: { line: 22, column: 7 }, end: { line: 22, column: 36 } },
-      {
-        fileHash: "3f2468k5dp5lo",
-        splices: { $build: { value: build, params: [] } },
-        captures: [],
-      },
+      "3f2468k5dp5lo:22:7",
+      { splices: { $build: { value: build, params: [] } }, captures: [] },
       () => ({
         type: "CallExpression",
         loc: { start: { line: 22, column: 10 }, end: { line: 22, column: 35 } },

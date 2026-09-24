@@ -4,8 +4,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // Handlers — action arrows — are values: an object carries them, and
 // storing one is not calling it.
 const beep = cs.create(
-  { start: { line: 8, column: 27 }, end: { line: 11, column: 2 } },
-  { fileHash: "1dqhax1do6u08", splices: {}, captures: [] },
+  "1dqhax1do6u08:8:27",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 8, column: 30 }, end: { line: 11, column: 1 } },
@@ -73,12 +73,8 @@ const beep = cs.create(
   '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"AAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC,CAAA"}',
 );
 const onTap = cs.create(
-  { start: { line: 13, column: 44 }, end: { line: 15, column: 2 } },
-  {
-    fileHash: "1dqhax1do6u08",
-    splices: { $beep: { value: beep, params: [] } },
-    captures: [],
-  },
+  "1dqhax1do6u08:13:44",
+  { splices: { $beep: { value: beep, params: [] } }, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 13, column: 47 }, end: { line: 15, column: 1 } },
@@ -118,12 +114,8 @@ it("handlerObject", async (t) => {
     t,
     "handlerObject",
     cs.create(
-      { start: { line: 21, column: 4 }, end: { line: 27, column: 6 } },
-      {
-        fileHash: "1dqhax1do6u08",
-        splices: { $onTap: { value: onTap, params: [] } },
-        captures: [],
-      },
+      "1dqhax1do6u08:21:4",
+      { splices: { $onTap: { value: onTap, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 21, column: 7 }, end: { line: 27, column: 5 } },

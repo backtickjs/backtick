@@ -11,9 +11,8 @@ describe("a spliced undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 12, column: 32 }, end: { line: 12, column: 44 } },
+          "3f9luoncz9vrv:12:32",
           {
-            fileHash: "3f9luoncz9vrv",
             splices: { $nothing: { value: nothing, params: [] } },
             captures: [],
           },
@@ -36,12 +35,8 @@ describe("a spliced undefined", () => {
     const data = { missing: undefined, kept: 1 };
     const arrived = await evaluate(
       cs.create(
-        { start: { line: 17, column: 35 }, end: { line: 17, column: 44 } },
-        {
-          fileHash: "3f9luoncz9vrv",
-          splices: { $data: { value: data, params: [] } },
-          captures: [],
-        },
+        "3f9luoncz9vrv:17:35",
+        { splices: { $data: { value: data, params: [] } }, captures: [] },
         () => ({
           type: "Splice",
           loc: {
@@ -62,12 +57,8 @@ describe("a spliced undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          { start: { line: 24, column: 36 }, end: { line: 24, column: 45 } },
-          {
-            fileHash: "3f9luoncz9vrv",
-            splices: { $data: { value: data, params: [] } },
-            captures: [],
-          },
+          "3f9luoncz9vrv:24:36",
+          { splices: { $data: { value: data, params: [] } }, captures: [] },
           () => ({
             type: "Splice",
             loc: {

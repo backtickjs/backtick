@@ -21,9 +21,8 @@ var Tone;
 })(Tone || (Tone = {}));
 async function Widened() {
   return cs.create(
-    { start: { line: 23, column: 9 }, end: { line: 38, column: 4 } },
+    "2832bhm4681w5:23:9",
     {
-      fileHash: "2832bhm4681w5",
       splices: {
         $state: { value: state, params: [] },
         $0splice0: { value: Tone.Warm, params: [] },

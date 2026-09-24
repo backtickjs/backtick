@@ -9,8 +9,8 @@ it("forPerTurnBinding", async (t) => {
     t,
     "forPerTurnBinding",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 18, column: 6 } },
-      { fileHash: "2s6lhx8c4k6ow", splices: {}, captures: [] },
+      "2s6lhx8c4k6ow:12:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 18, column: 5 } },

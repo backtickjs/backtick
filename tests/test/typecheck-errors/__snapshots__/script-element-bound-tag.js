@@ -3,8 +3,8 @@ import { cs } from "@backtickjs/core";
 // binding holds has to be a function: `Tag` here is a number.
 // @ts-expect-error: JSX element type 'Tag' does not have any construct or call signatures.
 const held = cs.create(
-  { start: { line: 6, column: 13 }, end: { line: 6, column: 41 } },
-  { fileHash: "xwewmj2gozc5", splices: {}, captures: [] },
+  "xwewmj2gozc5:6:13",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 6, column: 16 }, end: { line: 6, column: 40 } },

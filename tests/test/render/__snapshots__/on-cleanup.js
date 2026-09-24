@@ -22,9 +22,8 @@ describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = await render(
       cs.create(
-        { start: { line: 27, column: 6 }, end: { line: 30, column: 8 } },
+        "24mnkvlbr5ln5:27:6",
         {
-          fileHash: "24mnkvlbr5ln5",
           splices: {
             $onCleanup: { value: onCleanup, params: [] },
             $window: { value: window, params: [] },
@@ -190,9 +189,8 @@ describe("onCleanup", () => {
   it("runs before a computed calculates again", async () => {
     await render(
       cs.create(
-        { start: { line: 39, column: 6 }, end: { line: 48, column: 8 } },
+        "24mnkvlbr5ln5:39:6",
         {
-          fileHash: "24mnkvlbr5ln5",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -695,9 +693,8 @@ describe("onCleanup", () => {
     t.after(() => started.forEach((id) => globalThis.window.clearInterval(id)));
     const { unmount } = await render(
       cs.create(
-        { start: { line: 73, column: 6 }, end: { line: 80, column: 8 } },
+        "24mnkvlbr5ln5:73:6",
         {
-          fileHash: "24mnkvlbr5ln5",
           splices: {
             $state: { value: state, params: [] },
             $onMount: { value: onMount, params: [] },
@@ -1128,9 +1125,8 @@ describe("onCleanup", () => {
   it("never runs when called from a handler", async () => {
     const { unmount } = await render(
       cs.create(
-        { start: { line: 93, column: 6 }, end: { line: 99, column: 8 } },
+        "24mnkvlbr5ln5:93:6",
         {
-          fileHash: "24mnkvlbr5ln5",
           splices: {
             $onCleanup: { value: onCleanup, params: [] },
             $window: { value: window, params: [] },

@@ -14,12 +14,8 @@ describe("a global an app defines", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 21, column: 21 }, end: { line: 21, column: 33 } },
-          {
-            fileHash: "34nfn77gkxcwe",
-            splices: { $greet: { value: greet, params: [] } },
-            captures: [],
-          },
+          "34nfn77gkxcwe:21:21",
+          { splices: { $greet: { value: greet, params: [] } }, captures: [] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -51,12 +47,8 @@ describe("a global an app defines", () => {
     await assert.rejects(
       evaluate(
         cs.create(
-          { start: { line: 29, column: 34 }, end: { line: 29, column: 46 } },
-          {
-            fileHash: "34nfn77gkxcwe",
-            splices: { $greet: { value: greet, params: [] } },
-            captures: [],
-          },
+          "34nfn77gkxcwe:29:34",
+          { splices: { $greet: { value: greet, params: [] } }, captures: [] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -88,9 +80,8 @@ describe("a global an app defines", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 37, column: 21 }, end: { line: 37, column: 49 } },
+          "34nfn77gkxcwe:37:21",
           {
-            fileHash: "34nfn77gkxcwe",
             splices: { $storage: { value: storage, params: [] } },
             captures: [],
           },

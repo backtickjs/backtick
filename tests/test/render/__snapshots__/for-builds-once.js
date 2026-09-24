@@ -16,9 +16,8 @@ import { settled } from "./dom.ts";
 const answerItems = ["one", "two"];
 async function WaitingList({ more }) {
   return cs.create(
-    { start: { line: 21, column: 9 }, end: { line: 31, column: 4 } },
+    "3l16jad540350:21:9",
     {
-      fileHash: "3l16jad540350",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -452,9 +451,8 @@ async function WaitingList({ more }) {
   );
 }
 const forBuildsOnce = cs.create(
-  { start: { line: 34, column: 22 }, end: { line: 48, column: 2 } },
+  "3l16jad540350:34:22",
   {
-    fileHash: "3l16jad540350",
     splices: {
       $state: { value: state, params: [] },
       $WaitingList: { value: WaitingList, params: [] },

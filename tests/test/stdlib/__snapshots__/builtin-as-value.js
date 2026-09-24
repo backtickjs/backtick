@@ -13,8 +13,8 @@ it("builtinAsValue", async (t) => {
     t,
     "builtinAsValue",
     cs.create(
-      { start: { line: 16, column: 4 }, end: { line: 20, column: 6 } },
-      { fileHash: "1n7k5w76rpsyr", splices: {}, captures: [] },
+      "1n7k5w76rpsyr:16:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 16, column: 7 }, end: { line: 20, column: 5 } },

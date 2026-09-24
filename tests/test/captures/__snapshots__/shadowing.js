@@ -3,9 +3,8 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function addOwnTotal(lhs, rhs) {
   return cs.create(
-    { start: { line: 7, column: 9 }, end: { line: 12, column: 4 } },
+    "3ujapqmnmm2ra:7:9",
     {
-      fileHash: "3ujapqmnmm2ra",
       splices: {
         $lhs: { value: lhs, params: [] },
         $rhs: { value: rhs, params: [] },
@@ -169,22 +168,14 @@ it("shadowing", async (t) => {
     t,
     "shadowing",
     cs.create(
-      { start: { line: 19, column: 4 }, end: { line: 22, column: 6 } },
+      "3ujapqmnmm2ra:19:4",
       {
-        fileHash: "3ujapqmnmm2ra",
         splices: {
           $0splice0: {
             value: addOwnTotal(
               cs.create(
-                {
-                  start: { line: 21, column: 27 },
-                  end: { line: 21, column: 36 },
-                },
-                {
-                  fileHash: "3ujapqmnmm2ra",
-                  splices: {},
-                  captures: ["total$3ujapqmnmm2ra$1"],
-                },
+                "3ujapqmnmm2ra:21:27",
+                { splices: {}, captures: ["total$3ujapqmnmm2ra$1"] },
                 () => ({
                   type: "Identifier",
                   loc: {

@@ -7,12 +7,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // parameter, and each `onPress`'s `#call` passes its own splice as a `#thunk`.
 function make(n) {
   return cs.create(
-    { start: { line: 9, column: 9 }, end: { line: 9, column: 21 } },
-    {
-      fileHash: "9toqhs9m4ayz",
-      splices: { $n: { value: n, params: [] } },
-      captures: [],
-    },
+    "9toqhs9m4ayz:9:9",
+    { splices: { $n: { value: n, params: [] } }, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 20 } },

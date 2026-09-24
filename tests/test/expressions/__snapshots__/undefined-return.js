@@ -2,8 +2,8 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const lying = cs.create(
-  { start: { line: 11, column: 35 }, end: { line: 11, column: 49 } },
-  { fileHash: "2qb372nig0g3z", splices: {}, captures: [] },
+  "2qb372nig0g3z:11:35",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 38 }, end: { line: 11, column: 48 } },
@@ -23,12 +23,8 @@ it("undefinedReturn", async (t) => {
     t,
     "undefinedReturn",
     cs.create(
-      { start: { line: 17, column: 4 }, end: { line: 21, column: 6 } },
-      {
-        fileHash: "2qb372nig0g3z",
-        splices: { $lying: { value: lying, params: [] } },
-        captures: [],
-      },
+      "2qb372nig0g3z:17:4",
+      { splices: { $lying: { value: lying, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 21, column: 5 } },

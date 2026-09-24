@@ -7,8 +7,8 @@ it("prefixNot", async (t) => {
     t,
     "prefixNot",
     cs.create(
-      { start: { line: 10, column: 4 }, end: { line: 15, column: 6 } },
-      { fileHash: "3rwumhu91n08h", splices: {}, captures: [] },
+      "3rwumhu91n08h:10:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 10, column: 7 }, end: { line: 15, column: 5 } },

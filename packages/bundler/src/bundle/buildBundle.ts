@@ -11,7 +11,6 @@ import { expandJsxElement } from "./expandJsxElement.js";
 import { holeName } from "./holes.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
-import { locKey } from "../locKey.js";
 import type * as ES from "estree";
 import type { ExperimentalFeatures } from "../bundler.js";
 import {
@@ -49,10 +48,10 @@ export interface BundleTree {
   readonly names: Names;
 }
 
-// The parsed body for each distinct source location. Two scripts at the same
-// location — a script inside a host function, instantiated with different
-// splices at different call sites — share one parse.
-const parsedByLoc = new Map<string, ES.Expression | ES.BlockStatement>();
+// The parsed body for each script id. Two scripts with one id — a script inside
+// a host function, instantiated with different splices at different call sites
+// — share one parse.
+const parsedById = new Map<string, ES.Expression | ES.BlockStatement>();
 
 // Builds the bundle `{ functions, root }` as ESTree, and documents how it is
 // derived.
@@ -91,21 +90,19 @@ export async function buildBundle<T extends ClientUnknown>(
   // Keyed by entry so a label is a lookup rather than a scan, and ordered by
   // insertion, which is the table order the tail emits in.
   const scripts = new Map<ScriptEntry, number>();
-  const entryByLoc = new Map<string, ScriptEntry>();
+  const entryById = new Map<string, ScriptEntry>();
   const entryFor = (script: ClientScript): ScriptEntry => {
-    const key = locKey(script.metadata.fileHash, script.loc);
-    const existing = entryByLoc.get(key);
+    const existing = entryById.get(script.id);
     if (existing !== undefined) {
       return existing;
     }
-    let body = parsedByLoc.get(key);
+    let body = parsedById.get(script.id);
     if (body === undefined) {
       body = script.body();
-      parsedByLoc.set(key, body);
+      parsedById.set(script.id, body);
     }
     const entry: ScriptEntry = {
-      loc: script.loc,
-      fileHash: script.metadata.fileHash,
+      id: script.id,
       splices: Object.entries(script.metadata.splices).map(([key, splice]) => ({
         key,
         params: splice.params,
@@ -113,7 +110,7 @@ export async function buildBundle<T extends ClientUnknown>(
       captures: script.metadata.captures,
       body,
     };
-    entryByLoc.set(key, entry);
+    entryById.set(script.id, entry);
     scripts.set(entry, scripts.size);
     return entry;
   };
@@ -186,7 +183,7 @@ export async function buildBundle<T extends ClientUnknown>(
   // what a client holding an entry from an earlier response can recognize.
   const fnLabel = (target: ScriptEntry): string =>
     features.stableFunctionLabels === true
-      ? locKey(target.fileHash, target.loc)
+      ? target.id
       : String(scripts.get(target));
 
   // Materializes an entry's arrow node into `bodies` the first time it is

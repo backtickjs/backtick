@@ -12,9 +12,8 @@ it("fetchRequests", async (t) => {
     t,
     "fetchRequests",
     cs.create(
-      { start: { line: 15, column: 4 }, end: { line: 52, column: 6 } },
+      "32y7bkpf4sqjs:15:4",
       {
-        fileHash: "32y7bkpf4sqjs",
         splices: {
           $state: { value: state, params: [] },
           $window: { value: window, params: [] },

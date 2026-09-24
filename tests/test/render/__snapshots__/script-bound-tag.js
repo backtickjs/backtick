@@ -10,8 +10,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // are, so `count` follows the cell without the badge being drawn again.
 const badge = await bundler.run(
   cs.create(
-    { start: { line: 13, column: 2 }, end: { line: 13, column: 67 } },
-    { fileHash: "1g4jdt9f1nmyq", splices: {}, captures: [] },
+    "1g4jdt9f1nmyq:13:2",
+    { splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 13, column: 5 }, end: { line: 13, column: 66 } },
@@ -120,9 +120,8 @@ const badge = await bundler.run(
   ),
 );
 const scriptBoundTag = cs.create(
-  { start: { line: 16, column: 23 }, end: { line: 26, column: 2 } },
+  "1g4jdt9f1nmyq:16:23",
   {
-    fileHash: "1g4jdt9f1nmyq",
     splices: {
       $state: { value: state, params: [] },
       $badge: { value: badge, params: [] },

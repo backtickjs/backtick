@@ -8,8 +8,8 @@ it("arrayIndex", async (t) => {
     t,
     "arrayIndex",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 18, column: 6 } },
-      { fileHash: "2nqckix5uoswz", splices: {}, captures: [] },
+      "2nqckix5uoswz:11:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 18, column: 5 } },

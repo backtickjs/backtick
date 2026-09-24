@@ -12,19 +12,14 @@ async function Card(props) {
 // polymorphic and its nested script's captures arrive through a thunk.
 function labelled(label) {
   return cs.create(
-    { start: { line: 16, column: 9 }, end: { line: 19, column: 4 } },
+    "2mv5sg07ackia:16:9",
     {
-      fileHash: "2mv5sg07ackia",
       splices: {
         $label: { value: label, params: [] },
         $0splice0: {
           value: cs.create(
-            { start: { line: 18, column: 17 }, end: { line: 18, column: 35 } },
-            {
-              fileHash: "2mv5sg07ackia",
-              splices: {},
-              captures: ["Card$2mv5sg07ackia$0"],
-            },
+            "2mv5sg07ackia:18:17",
+            { splices: {}, captures: ["Card$2mv5sg07ackia$0"] },
             () => ({
               type: "JSXElement",
               loc: {
@@ -304,18 +299,14 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     t,
     "scriptBoundTagCaptureShadow",
     cs.create(
-      { start: { line: 26, column: 4 }, end: { line: 30, column: 11 } },
+      "2mv5sg07ackia:26:4",
       {
-        fileHash: "2mv5sg07ackia",
         splices: {
           $0splice0: {
             value: labelled(
               cs.create(
-                {
-                  start: { line: 28, column: 18 },
-                  end: { line: 28, column: 25 },
-                },
-                { fileHash: "2mv5sg07ackia", splices: {}, captures: [] },
+                "2mv5sg07ackia:28:18",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -333,11 +324,8 @@ it("scriptBoundTagCaptureShadow", async (t) => {
           $0splice1: {
             value: labelled(
               cs.create(
-                {
-                  start: { line: 29, column: 18 },
-                  end: { line: 29, column: 25 },
-                },
-                { fileHash: "2mv5sg07ackia", splices: {}, captures: [] },
+                "2mv5sg07ackia:29:18",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -523,12 +511,8 @@ it("scriptBoundTagScope", async (t) => {
     t,
     "scriptBoundTagScope",
     cs.create(
-      { start: { line: 41, column: 4 }, end: { line: 57, column: 6 } },
-      {
-        fileHash: "2mv5sg07ackia",
-        splices: { $Card: { value: Card, params: [] } },
-        captures: [],
-      },
+      "2mv5sg07ackia:41:4",
+      { splices: { $Card: { value: Card, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 41, column: 7 }, end: { line: 57, column: 5 } },

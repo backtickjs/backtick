@@ -8,12 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // handed beside it.
 async function Panel(props) {
   return cs.create(
-    { start: { line: 12, column: 9 }, end: { line: 20, column: 4 } },
-    {
-      fileHash: "2nh9ihk3oddge",
-      splices: { $props: { value: props, params: [] } },
-      captures: [],
-    },
+    "2nh9ihk3oddge:12:9",
+    { splices: { $props: { value: props, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 12, column: 12 }, end: { line: 20, column: 3 } },
@@ -326,16 +322,14 @@ async function Panel(props) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs.create(
-  { start: { line: 27, column: 30 }, end: { line: 48, column: 2 } },
+  "2nh9ihk3oddge:27:30",
   {
-    fileHash: "2nh9ihk3oddge",
     splices: {
       $state: { value: state, params: [] },
       $0splice0: {
         value: cs.create(
-          { start: { line: 40, column: 12 }, end: { line: 42, column: 19 } },
+          "2nh9ihk3oddge:40:12",
           {
-            fileHash: "2nh9ihk3oddge",
             splices: {},
             captures: ["Badge$2nh9ihk3oddge$3", "count$2nh9ihk3oddge$2"],
           },

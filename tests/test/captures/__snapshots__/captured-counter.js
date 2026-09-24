@@ -8,8 +8,8 @@ it("capturedCounter", async (t) => {
     t,
     "capturedCounter",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 18, column: 6 } },
-      { fileHash: "2s7xqailmdcpa", splices: {}, captures: [] },
+      "2s7xqailmdcpa:11:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 18, column: 5 } },

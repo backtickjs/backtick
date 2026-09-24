@@ -9,8 +9,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // sentence; on one line its spaces are its own; and the space between two
 // expressions survives, where trimming would take it.
 const listed = cs.create(
-  { start: { line: 11, column: 15 }, end: { line: 18, column: 2 } },
-  { fileHash: "3pjkiwnta5gua", splices: {}, captures: [] },
+  "3pjkiwnta5gua:11:15",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 18 }, end: { line: 18, column: 1 } },
@@ -215,12 +215,8 @@ it("scriptFragment", async (t) => {
     "scriptFragment",
     _jsx("div", {
       children: cs.create(
-        { start: { line: 21, column: 48 }, end: { line: 21, column: 64 } },
-        {
-          fileHash: "3pjkiwnta5gua",
-          splices: { $listed: { value: listed, params: [] } },
-          captures: [],
-        },
+        "3pjkiwnta5gua:21:48",
+        { splices: { $listed: { value: listed, params: [] } }, captures: [] },
         () => ({
           type: "CallExpression",
           loc: {

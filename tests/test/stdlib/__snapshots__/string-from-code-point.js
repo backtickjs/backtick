@@ -8,8 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // the empty string rather than refusing the way an empty `Math.min` does.
 async function Written() {
   return cs.create(
-    { start: { line: 10, column: 9 }, end: { line: 14, column: 4 } },
-    { fileHash: "7lcft72v2y3x", splices: {}, captures: [] },
+    "7lcft72v2y3x:10:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 14, column: 3 } },

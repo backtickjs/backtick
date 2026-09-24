@@ -8,12 +8,8 @@ it("typeofTable", async (t) => {
     t,
     "typeofTable",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 25, column: 6 } },
-      {
-        fileHash: "1jdryi4es12ui",
-        splices: { $state: { value: state, params: [] } },
-        captures: [],
-      },
+      "1jdryi4es12ui:11:4",
+      { splices: { $state: { value: state, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 25, column: 5 } },
@@ -344,8 +340,8 @@ it("typeofNarrows", async (t) => {
     t,
     "typeofNarrows",
     cs.create(
-      { start: { line: 34, column: 4 }, end: { line: 38, column: 6 } },
-      { fileHash: "1jdryi4es12ui", splices: {}, captures: [] },
+      "1jdryi4es12ui:34:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 34, column: 7 }, end: { line: 38, column: 5 } },

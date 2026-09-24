@@ -4,8 +4,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `null` written in the script itself — bare, compared against, and as an
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).
 const orDash = cs.create(
-  { start: { line: 7, column: 57 }, end: { line: 14, column: 2 } },
-  { fileHash: "2nnj6ebvkk8vj", splices: {}, captures: [] },
+  "2nnj6ebvkk8vj:7:57",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 7, column: 60 }, end: { line: 14, column: 1 } },
@@ -103,12 +103,8 @@ it("nullLiteral", async (t) => {
     t,
     "nullLiteral",
     cs.create(
-      { start: { line: 20, column: 4 }, end: { line: 24, column: 7 } },
-      {
-        fileHash: "2nnj6ebvkk8vj",
-        splices: { $orDash: { value: orDash, params: [] } },
-        captures: [],
-      },
+      "2nnj6ebvkk8vj:20:4",
+      { splices: { $orDash: { value: orDash, params: [] } }, captures: [] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 20, column: 8 }, end: { line: 24, column: 5 } },

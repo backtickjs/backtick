@@ -97,12 +97,8 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.create(
-      { start: { line: 111, column: 11 }, end: { line: 128, column: 6 } },
-      {
-        fileHash: "2pi9tt1octht0",
-        splices: { $state: { value: state, params: [] } },
-        captures: [],
-      },
+      "2pi9tt1octht0:111:11",
+      { splices: { $state: { value: state, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: {
@@ -749,12 +745,8 @@ describe("a field's value", () => {
   // nothing reaches a field without a cast.
   async function Clearable() {
     return cs.create(
-      { start: { line: 147, column: 11 }, end: { line: 164, column: 6 } },
-      {
-        fileHash: "2pi9tt1octht0",
-        splices: { $state: { value: state, params: [] } },
-        captures: [],
-      },
+      "2pi9tt1octht0:147:11",
+      { splices: { $state: { value: state, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: {

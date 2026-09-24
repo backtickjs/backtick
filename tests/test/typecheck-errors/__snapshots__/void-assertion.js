@@ -3,12 +3,8 @@ const one = 1;
 // An assertion needs no check of its own: TypeScript already refuses to
 // assert a value to `void`.
 const asserted = cs.create(
-  { start: { line: 7, column: 17 }, end: { line: 11, column: 2 } },
-  {
-    fileHash: "3mgqg6v7h2mni",
-    splices: { $one: { value: one, params: [] } },
-    captures: [],
-  },
+  "3mgqg6v7h2mni:7:17",
+  { splices: { $one: { value: one, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 7, column: 20 }, end: { line: 11, column: 1 } },

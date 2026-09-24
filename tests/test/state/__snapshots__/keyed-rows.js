@@ -10,9 +10,8 @@ import { children, drawn, text } from "./dom.ts";
 // thing saying which row is which.
 async function SwappableRows() {
   return cs.create(
-    { start: { line: 12, column: 9 }, end: { line: 32, column: 4 } },
+    "89rxx0ivccc7:12:9",
     {
-      fileHash: "89rxx0ivccc7",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

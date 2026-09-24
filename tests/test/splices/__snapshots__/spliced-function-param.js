@@ -10,17 +10,13 @@ it("splicedFunctionParam", async (t) => {
     t,
     "splicedFunctionParam",
     cs.create(
-      { start: { line: 13, column: 4 }, end: { line: 16, column: 6 } },
+      "yz0kiroonaez:13:4",
       {
-        fileHash: "yz0kiroonaez",
         splices: {
           $0splice0: {
             value: cs.create(
-              {
-                start: { line: 15, column: 21 },
-                end: { line: 15, column: 32 },
-              },
-              { fileHash: "yz0kiroonaez", splices: {}, captures: [] },
+              "yz0kiroonaez:15:21",
+              { splices: {}, captures: [] },
               () => ({
                 type: "ArrowFunctionExpression",
                 loc: {

@@ -11,12 +11,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.create(
-    { start: { line: 13, column: 9 }, end: { line: 16, column: 4 } },
-    {
-      fileHash: "2g65d04vf49d2",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "2g65d04vf49d2:13:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 13, column: 12 }, end: { line: 16, column: 3 } },

@@ -4,9 +4,8 @@ import { cs, For, state } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 async function Rows() {
   return cs.create(
-    { start: { line: 18, column: 9 }, end: { line: 34, column: 4 } },
+    "1xb9ns0x2f3vb:18:9",
     {
-      fileHash: "1xb9ns0x2f3vb",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

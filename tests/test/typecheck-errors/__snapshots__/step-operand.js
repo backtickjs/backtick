@@ -2,8 +2,8 @@ import { cs } from "@backtickjs/core";
 // A step is checked as TypeScript checks one: a number, in a variable that
 // isn't `const`.
 export const constant = cs.create(
-  { start: { line: 5, column: 24 }, end: { line: 10, column: 2 } },
-  { fileHash: "3iw6lzhko8e0n", splices: {}, captures: [] },
+  "3iw6lzhko8e0n:5:24",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 27 }, end: { line: 10, column: 1 } },
@@ -71,8 +71,8 @@ export const constant = cs.create(
   '{"version":3,"file":"step-operand.test.jsx","sourceRoot":"","sources":["step-operand.test.tsx"],"names":[],"mappings":"AAI2B;IACzB,MAAM,CAAC,GAAG,CAAC,CAAC;IAEZ,CAAC,EAAE,CAAC;IACJ,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 export const text = cs.create(
-  { start: { line: 12, column: 20 }, end: { line: 17, column: 2 } },
-  { fileHash: "3iw6lzhko8e0n", splices: {}, captures: [] },
+  "3iw6lzhko8e0n:12:20",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 23 }, end: { line: 17, column: 1 } },

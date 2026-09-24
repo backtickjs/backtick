@@ -2,8 +2,8 @@ import { cs } from "@backtickjs/core";
 // Checked as TypeScript checks one: a variable that isn't `const`, and operands
 // the operator takes.
 export const constant = cs.create(
-  { start: { line: 5, column: 24 }, end: { line: 10, column: 2 } },
-  { fileHash: "3586xtu4la89h", splices: {}, captures: [] },
+  "3586xtu4la89h:5:24",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 27 }, end: { line: 10, column: 1 } },
@@ -75,8 +75,8 @@ export const constant = cs.create(
   '{"version":3,"file":"compound-assignment-operand.test.jsx","sourceRoot":"","sources":["compound-assignment-operand.test.tsx"],"names":[],"mappings":"AAI2B;IACzB,MAAM,CAAC,GAAG,CAAC,CAAC;IAEZ,CAAC,IAAI,CAAC,CAAC;IACP,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 export const mixed = cs.create(
-  { start: { line: 12, column: 21 }, end: { line: 17, column: 2 } },
-  { fileHash: "3586xtu4la89h", splices: {}, captures: [] },
+  "3586xtu4la89h:12:21",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 24 }, end: { line: 17, column: 1 } },

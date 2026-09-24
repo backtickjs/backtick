@@ -9,12 +9,8 @@ describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     await render(
       cs.create(
-        { start: { line: 13, column: 6 }, end: { line: 21, column: 8 } },
-        {
-          fileHash: "1ig5nq86fb7c4",
-          splices: { $state: { value: state, params: [] } },
-          captures: [],
-        },
+        "1ig5nq86fb7c4:13:6",
+        { splices: { $state: { value: state, params: [] } }, captures: [] },
         () => ({
           type: "BlockStatement",
           loc: { start: { line: 13, column: 9 }, end: { line: 21, column: 7 } },
@@ -444,12 +440,8 @@ describe("ref", () => {
   it("focuses once in place, through onMount", async () => {
     await render(
       cs.create(
-        { start: { line: 29, column: 6 }, end: { line: 36, column: 8 } },
-        {
-          fileHash: "1ig5nq86fb7c4",
-          splices: { $onMount: { value: onMount, params: [] } },
-          captures: [],
-        },
+        "1ig5nq86fb7c4:29:6",
+        { splices: { $onMount: { value: onMount, params: [] } }, captures: [] },
         () => ({
           type: "BlockStatement",
           loc: { start: { line: 29, column: 9 }, end: { line: 36, column: 7 } },
@@ -625,8 +617,8 @@ describe("ref", () => {
   it("is not written as an attribute", async () => {
     await render(
       cs.create(
-        { start: { line: 42, column: 17 }, end: { line: 42, column: 63 } },
-        { fileHash: "1ig5nq86fb7c4", splices: {}, captures: [] },
+        "1ig5nq86fb7c4:42:17",
+        { splices: {}, captures: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -740,9 +732,8 @@ describe("ref", () => {
     it("even when a signal it read changes", async () => {
       await render(
         cs.create(
-          { start: { line: 64, column: 8 }, end: { line: 77, column: 10 } },
+          "1ig5nq86fb7c4:64:8",
           {
-            fileHash: "1ig5nq86fb7c4",
             splices: {
               $state: { value: state, params: [] },
               $window: { value: window, params: [] },

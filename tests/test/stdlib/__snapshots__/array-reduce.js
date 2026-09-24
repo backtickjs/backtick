@@ -10,8 +10,8 @@ it("arrayReduce", async (t) => {
     t,
     "arrayReduce",
     cs.create(
-      { start: { line: 13, column: 4 }, end: { line: 26, column: 6 } },
-      { fileHash: "32uyy4dbi2509", splices: {}, captures: [] },
+      "32uyy4dbi2509:13:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 26, column: 5 } },

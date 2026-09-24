@@ -2,8 +2,8 @@ import { cs } from "@backtickjs/core";
 // An action call produces no value: its `void` result can't initialize a
 // variable — in a value script or an action.
 const ping = cs.create(
-  { start: { line: 5, column: 13 }, end: { line: 8, column: 2 } },
-  { fileHash: "3ch7rgcn8bjeq", splices: {}, captures: [] },
+  "3ch7rgcn8bjeq:5:13",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 5, column: 16 }, end: { line: 8, column: 1 } },
@@ -77,12 +77,8 @@ const ping = cs.create(
   '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAIgB,MAAA,GAAG,EAAE;IACnB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC,CAAA"}',
 );
 const script = cs.create(
-  { start: { line: 10, column: 15 }, end: { line: 13, column: 2 } },
-  {
-    fileHash: "3ch7rgcn8bjeq",
-    splices: { $ping: { value: ping, params: [] } },
-    captures: [],
-  },
+  "3ch7rgcn8bjeq:10:15",
+  { splices: { $ping: { value: ping, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 10, column: 18 }, end: { line: 13, column: 1 } },
@@ -145,12 +141,8 @@ const script = cs.create(
   '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 const action = cs.create(
-  { start: { line: 15, column: 15 }, end: { line: 17, column: 2 } },
-  {
-    fileHash: "3ch7rgcn8bjeq",
-    splices: { $ping: { value: ping, params: [] } },
-    captures: [],
-  },
+  "3ch7rgcn8bjeq:15:15",
+  { splices: { $ping: { value: ping, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 15, column: 18 }, end: { line: 17, column: 1 } },
@@ -203,8 +195,8 @@ const action = cs.create(
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
 const label = cs.create(
-  { start: { line: 21, column: 14 }, end: { line: 23, column: 2 } },
-  { fileHash: "3ch7rgcn8bjeq", splices: {}, captures: [] },
+  "3ch7rgcn8bjeq:21:14",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 21, column: 17 }, end: { line: 23, column: 1 } },
@@ -244,12 +236,8 @@ const label = cs.create(
   '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAoBiB,MAAA,CAAC,IAAY,EAAE,EAAE;IAChC,OAAO,IAAI,CAAC;AACd,CAAC,CAAA"}',
 );
 const wrongArgument = cs.create(
-  { start: { line: 25, column: 22 }, end: { line: 29, column: 2 } },
-  {
-    fileHash: "3ch7rgcn8bjeq",
-    splices: { $label: { value: label, params: [] } },
-    captures: [],
-  },
+  "3ch7rgcn8bjeq:25:22",
+  { splices: { $label: { value: label, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 25, column: 25 }, end: { line: 29, column: 1 } },

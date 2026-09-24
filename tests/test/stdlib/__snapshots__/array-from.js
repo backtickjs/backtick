@@ -13,8 +13,8 @@ it("arrayFrom", async (t) => {
     t,
     "arrayFrom",
     cs.create(
-      { start: { line: 16, column: 4 }, end: { line: 23, column: 6 } },
-      { fileHash: "3pi2uzl7sovgc", splices: {}, captures: [] },
+      "3pi2uzl7sovgc:16:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 16, column: 7 }, end: { line: 23, column: 5 } },

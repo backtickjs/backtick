@@ -6,12 +6,8 @@ it("spliceNumeric", async (t) => {
     t,
     "spliceNumeric",
     cs.create(
-      { start: { line: 6, column: 41 }, end: { line: 6, column: 49 } },
-      {
-        fileHash: "pyy2xapmkswv",
-        splices: { $0splice0: { value: 1, params: [] } },
-        captures: [],
-      },
+      "pyy2xapmkswv:6:41",
+      { splices: { $0splice0: { value: 1, params: [] } }, captures: [] },
       () => ({
         type: "Splice",
         loc: { start: { line: 6, column: 44 }, end: { line: 6, column: 48 } },

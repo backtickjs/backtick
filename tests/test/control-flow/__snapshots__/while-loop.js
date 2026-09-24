@@ -6,8 +6,8 @@ it("whileLoop", async (t) => {
     t,
     "whileLoop",
     cs.create(
-      { start: { line: 9, column: 4 }, end: { line: 20, column: 6 } },
-      { fileHash: "1qmqxi23sdk0m", splices: {}, captures: [] },
+      "1qmqxi23sdk0m:9:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 20, column: 5 } },

@@ -10,12 +10,8 @@ import { children, drawn, fontSize } from "./dom.ts";
 // applications of one entry, and each declares a cell of its own.
 async function OwnCounter() {
   return cs.create(
-    { start: { line: 12, column: 9 }, end: { line: 24, column: 4 } },
-    {
-      fileHash: "4rab33ccyjy9",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "4rab33ccyjy9:12:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 12, column: 12 }, end: { line: 24, column: 3 } },

@@ -10,12 +10,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // even tested.
 function guard(fragment) {
   return cs.create(
-    { start: { line: 13, column: 9 }, end: { line: 18, column: 4 } },
-    {
-      fileHash: "3cvzb2rrvx0i4",
-      splices: { $fragment: { value: fragment, params: [] } },
-      captures: [],
-    },
+    "3cvzb2rrvx0i4:13:9",
+    { splices: { $fragment: { value: fragment, params: [] } }, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 13, column: 12 }, end: { line: 18, column: 3 } },
@@ -99,8 +95,8 @@ function guard(fragment) {
   );
 }
 const ok = cs.create(
-  { start: { line: 21, column: 11 }, end: { line: 21, column: 26 } },
-  { fileHash: "3cvzb2rrvx0i4", splices: {}, captures: [] },
+  "3cvzb2rrvx0i4:21:11",
+  { splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 21, column: 14 }, end: { line: 21, column: 25 } },
@@ -110,8 +106,8 @@ const ok = cs.create(
   '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"AAoBc,MAAA,WAAW,CAAA"}',
 );
 const broken = cs.create(
-  { start: { line: 23, column: 15 }, end: { line: 25, column: 2 } },
-  { fileHash: "3cvzb2rrvx0i4", splices: {}, captures: [] },
+  "3cvzb2rrvx0i4:23:15",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 23, column: 18 }, end: { line: 25, column: 1 } },
@@ -138,9 +134,8 @@ it("spliceLaziness", async (t) => {
     t,
     "spliceLaziness",
     cs.create(
-      { start: { line: 31, column: 4 }, end: { line: 34, column: 7 } },
+      "3cvzb2rrvx0i4:31:4",
       {
-        fileHash: "3cvzb2rrvx0i4",
         splices: {
           $0splice0: { value: guard(ok), params: [] },
           $0splice1: { value: guard(broken), params: [] },

@@ -8,8 +8,8 @@ it("objectEntries", async (t) => {
     t,
     "objectEntries",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
-      { fileHash: "txb5yf5uyd2o", splices: {}, captures: [] },
+      "txb5yf5uyd2o:11:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

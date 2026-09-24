@@ -10,9 +10,8 @@ import { watchWrites } from "./writes.ts";
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs.create(
-    { start: { line: 12, column: 9 }, end: { line: 34, column: 4 } },
+    "2f4veetc9j0fm:12:9",
     {
-      fileHash: "2f4veetc9j0fm",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

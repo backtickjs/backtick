@@ -9,8 +9,8 @@ it("compoundAssignment", async (t) => {
     t,
     "compoundAssignment",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 26, column: 6 } },
-      { fileHash: "23v4b48bi2lxc", splices: {}, captures: [] },
+      "23v4b48bi2lxc:12:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 26, column: 5 } },

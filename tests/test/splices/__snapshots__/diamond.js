@@ -7,8 +7,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one entry per level (linear) — not one per path, which would blow up as
 // 2^depth.
 const d0 = cs.create(
-  { start: { line: 10, column: 11 }, end: { line: 10, column: 16 } },
-  { fileHash: "23y608t6y2wp3", splices: {}, captures: [] },
+  "23y608t6y2wp3:10:11",
+  { splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 10, column: 14 }, end: { line: 10, column: 15 } },
@@ -18,12 +18,8 @@ const d0 = cs.create(
   '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AASc,MAAA,CAAC,CAAA"}',
 );
 const d1 = cs.create(
-  { start: { line: 12, column: 11 }, end: { line: 14, column: 2 } },
-  {
-    fileHash: "23y608t6y2wp3",
-    splices: { $d0: { value: d0, params: [] } },
-    captures: [],
-  },
+  "23y608t6y2wp3:12:11",
+  { splices: { $d0: { value: d0, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 14 }, end: { line: 14, column: 1 } },
@@ -62,12 +58,8 @@ const d1 = cs.create(
   '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 const d2 = cs.create(
-  { start: { line: 16, column: 11 }, end: { line: 18, column: 2 } },
-  {
-    fileHash: "23y608t6y2wp3",
-    splices: { $d1: { value: d1, params: [] } },
-    captures: [],
-  },
+  "23y608t6y2wp3:16:11",
+  { splices: { $d1: { value: d1, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 16, column: 14 }, end: { line: 18, column: 1 } },
@@ -106,12 +98,8 @@ const d2 = cs.create(
   '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 const d3 = cs.create(
-  { start: { line: 20, column: 11 }, end: { line: 22, column: 2 } },
-  {
-    fileHash: "23y608t6y2wp3",
-    splices: { $d2: { value: d2, params: [] } },
-    captures: [],
-  },
+  "23y608t6y2wp3:20:11",
+  { splices: { $d2: { value: d2, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 20, column: 14 }, end: { line: 22, column: 1 } },
@@ -150,12 +138,8 @@ const d3 = cs.create(
   '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 const d4 = cs.create(
-  { start: { line: 24, column: 11 }, end: { line: 26, column: 2 } },
-  {
-    fileHash: "23y608t6y2wp3",
-    splices: { $d3: { value: d3, params: [] } },
-    captures: [],
-  },
+  "23y608t6y2wp3:24:11",
+  { splices: { $d3: { value: d3, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 24, column: 14 }, end: { line: 26, column: 1 } },

@@ -2,27 +2,18 @@ import { cs } from "@backtickjs/core";
 // The script between them binds `Badge` to a number, and the nearest binding is
 // the one a tag names: the innermost `<Badge />` calls a number.
 export default cs.create(
-  { start: { line: 5, column: 15 }, end: { line: 12, column: 2 } },
+  "83k1lytjebk3:5:15",
   {
-    fileHash: "83k1lytjebk3",
     splices: {
       $0splice0: {
         value: cs.create(
-          { start: { line: 7, column: 11 }, end: { line: 11, column: 4 } },
+          "83k1lytjebk3:7:11",
           {
-            fileHash: "83k1lytjebk3",
             splices: {
               $0splice0: {
                 value: cs.create(
-                  {
-                    start: { line: 10, column: 13 },
-                    end: { line: 10, column: 32 },
-                  },
-                  {
-                    fileHash: "83k1lytjebk3",
-                    splices: {},
-                    captures: ["Badge$83k1lytjebk3$2"],
-                  },
+                  "83k1lytjebk3:10:13",
+                  { splices: {}, captures: ["Badge$83k1lytjebk3$2"] },
                   () => ({
                     type: "JSXElement",
                     loc: {

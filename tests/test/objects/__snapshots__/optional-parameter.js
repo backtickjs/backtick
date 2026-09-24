@@ -5,8 +5,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and either way it binds `undefined`. `null` is a value of its own and not
 // accepted here.
 const greet = cs.create(
-  { start: { line: 8, column: 14 }, end: { line: 10, column: 2 } },
-  { fileHash: "1i6s8vesd5nbi", splices: {}, captures: [] },
+  "1i6s8vesd5nbi:8:14",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 17 }, end: { line: 10, column: 1 } },
@@ -87,8 +87,8 @@ const greet = cs.create(
 // A function-typed annotation unions parenthesized: `(() => number) |
 // undefined`.
 const double = cs.create(
-  { start: { line: 14, column: 15 }, end: { line: 14, column: 26 } },
-  { fileHash: "1i6s8vesd5nbi", splices: {}, captures: [] },
+  "1i6s8vesd5nbi:14:15",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 14, column: 18 }, end: { line: 14, column: 25 } },
@@ -104,8 +104,8 @@ const double = cs.create(
   '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"AAakB,MAAA,GAAG,EAAE,CAAC,CAAC,CAAA"}',
 );
 const callIfGiven = cs.create(
-  { start: { line: 16, column: 20 }, end: { line: 18, column: 2 } },
-  { fileHash: "1i6s8vesd5nbi", splices: {}, captures: [] },
+  "1i6s8vesd5nbi:16:20",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 16, column: 23 }, end: { line: 18, column: 1 } },
@@ -181,9 +181,8 @@ it("optionalParameter", async (t) => {
     t,
     "optionalParameter",
     cs.create(
-      { start: { line: 24, column: 4 }, end: { line: 31, column: 7 } },
+      "1i6s8vesd5nbi:24:4",
       {
-        fileHash: "1i6s8vesd5nbi",
         splices: {
           $greet: { value: greet, params: [] },
           $callIfGiven: { value: callIfGiven, params: [] },

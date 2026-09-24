@@ -3,9 +3,8 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function add(lhs, rhs) {
   return cs.create(
-    { start: { line: 6, column: 9 }, end: { line: 6, column: 24 } },
+    "3cex0hh0qp6qz:6:9",
     {
-      fileHash: "3cex0hh0qp6qz",
       splices: {
         $lhs: { value: lhs, params: [] },
         $rhs: { value: rhs, params: [] },
@@ -36,18 +35,14 @@ it("spliceSharing", async (t) => {
     t,
     "spliceSharing",
     cs.create(
-      { start: { line: 13, column: 4 }, end: { line: 16, column: 7 } },
+      "3cex0hh0qp6qz:13:4",
       {
-        fileHash: "3cex0hh0qp6qz",
         splices: {
           $0splice0: {
             value: add(
               cs.create(
-                {
-                  start: { line: 14, column: 15 },
-                  end: { line: 14, column: 20 },
-                },
-                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
+                "3cex0hh0qp6qz:14:15",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -60,11 +55,8 @@ it("spliceSharing", async (t) => {
                 '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAakB,MAAA,CAAC,CAAA"}',
               ),
               cs.create(
-                {
-                  start: { line: 14, column: 22 },
-                  end: { line: 14, column: 27 },
-                },
-                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
+                "3cex0hh0qp6qz:14:22",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -82,11 +74,8 @@ it("spliceSharing", async (t) => {
           $0splice1: {
             value: add(
               cs.create(
-                {
-                  start: { line: 15, column: 15 },
-                  end: { line: 15, column: 20 },
-                },
-                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
+                "3cex0hh0qp6qz:15:15",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -99,11 +88,8 @@ it("spliceSharing", async (t) => {
                 '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAckB,MAAA,CAAC,CAAA"}',
               ),
               cs.create(
-                {
-                  start: { line: 15, column: 22 },
-                  end: { line: 15, column: 27 },
-                },
-                { fileHash: "3cex0hh0qp6qz", splices: {}, captures: [] },
+                "3cex0hh0qp6qz:15:22",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

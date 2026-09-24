@@ -4,8 +4,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `?:` evaluates only the taken branch, and its condition narrows like an
 // `if`'s.
 const pick = cs.create(
-  { start: { line: 7, column: 13 }, end: { line: 9, column: 2 } },
-  { fileHash: "uekyc2sf8mzc", splices: {}, captures: [] },
+  "uekyc2sf8mzc:7:13",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 7, column: 16 }, end: { line: 9, column: 1 } },
@@ -102,12 +102,8 @@ it("ternary", async (t) => {
     t,
     "ternary",
     cs.create(
-      { start: { line: 15, column: 4 }, end: { line: 18, column: 7 } },
-      {
-        fileHash: "uekyc2sf8mzc",
-        splices: { $pick: { value: pick, params: [] } },
-        captures: [],
-      },
+      "uekyc2sf8mzc:15:4",
+      { splices: { $pick: { value: pick, params: [] } }, captures: [] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 15, column: 8 }, end: { line: 18, column: 5 } },

@@ -11,8 +11,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // may write — this shape is the one TypeScript cannot infer, and a splice has
 // nowhere to name it, since the compiler writes the call.
 const originX = cs.create(
-  { start: { line: 14, column: 16 }, end: { line: 14, column: 21 } },
-  { fileHash: "3hhvicr225pmx", splices: {}, captures: [] },
+  "3hhvicr225pmx:14:16",
+  { splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 14, column: 19 }, end: { line: 14, column: 20 } },
@@ -22,8 +22,8 @@ const originX = cs.create(
   '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"AAamB,MAAA,CAAC,CAAA"}',
 );
 const label = cs.create(
-  { start: { line: 16, column: 14 }, end: { line: 16, column: 26 } },
-  { fileHash: "3hhvicr225pmx", splices: {}, captures: [] },
+  "3hhvicr225pmx:16:14",
+  { splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 16, column: 17 }, end: { line: 16, column: 25 } },
@@ -38,12 +38,8 @@ it("splicedContainer", async (t) => {
     t,
     "splicedContainer",
     cs.create(
-      { start: { line: 21, column: 44 }, end: { line: 21, column: 60 } },
-      {
-        fileHash: "3hhvicr225pmx",
-        splices: { $point: { value: point, params: [] } },
-        captures: [],
-      },
+      "3hhvicr225pmx:21:44",
+      { splices: { $point: { value: point, params: [] } }, captures: [] },
       () => ({
         type: "BinaryExpression",
         loc: { start: { line: 21, column: 47 }, end: { line: 21, column: 59 } },

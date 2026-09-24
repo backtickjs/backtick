@@ -3,9 +3,8 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function add(lhs, rhs) {
   return cs.create(
-    { start: { line: 7, column: 9 }, end: { line: 7, column: 24 } },
+    "2rqwzcdfi281b:7:9",
     {
-      fileHash: "2rqwzcdfi281b",
       splices: {
         $lhs: { value: lhs, params: [] },
         $rhs: { value: rhs, params: [] },
@@ -36,18 +35,14 @@ it("deepNestedScripts", async (t) => {
     t,
     "deepNestedScripts",
     cs.create(
-      { start: { line: 11, column: 45 }, end: { line: 11, column: 69 } },
+      "2rqwzcdfi281b:11:45",
       {
-        fileHash: "2rqwzcdfi281b",
         splices: {
           $0splice0: {
             value: add(
               cs.create(
-                {
-                  start: { line: 11, column: 54 },
-                  end: { line: 11, column: 59 },
-                },
-                { fileHash: "2rqwzcdfi281b", splices: {}, captures: [] },
+                "2rqwzcdfi281b:11:54",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -60,11 +55,8 @@ it("deepNestedScripts", async (t) => {
                 '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUyD,MAAA,CAAC,CAAA"}',
               ),
               cs.create(
-                {
-                  start: { line: 11, column: 61 },
-                  end: { line: 11, column: 66 },
-                },
-                { fileHash: "2rqwzcdfi281b", splices: {}, captures: [] },
+                "2rqwzcdfi281b:11:61",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

@@ -12,9 +12,8 @@ import { cs, state } from "@backtickjs/core";
 // against `ClientUnknown`, which a `Date` is not.
 const host = new Date();
 export default cs.create(
-  { start: { line: 16, column: 15 }, end: { line: 21, column: 2 } },
+  "1601kcqqso40z:16:15",
   {
-    fileHash: "1601kcqqso40z",
     splices: {
       $state: { value: state, params: [] },
       $host: { value: host, params: [] },

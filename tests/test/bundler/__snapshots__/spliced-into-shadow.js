@@ -27,22 +27,14 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.run(
       cs.create(
-        { start: { line: 32, column: 16 }, end: { line: 39, column: 6 } },
+        "1rcr3g75v4qq5:32:16",
         {
-          fileHash: "1rcr3g75v4qq5",
           splices: {
             $0splice0: {
               value: keep(
                 cs.create(
-                  {
-                    start: { line: 34, column: 27 },
-                    end: { line: 34, column: 36 },
-                  },
-                  {
-                    fileHash: "1rcr3g75v4qq5",
-                    splices: {},
-                    captures: ["total$1rcr3g75v4qq5$0"],
-                  },
+                  "1rcr3g75v4qq5:34:27",
+                  { splices: {}, captures: ["total$1rcr3g75v4qq5$0"] },
                   () => ({
                     type: "Identifier",
                     loc: {

@@ -21,9 +21,8 @@ describe("computed", () => {
   it("runs once per change, however many read it", async () => {
     await render(
       cs.create(
-        { start: { line: 25, column: 6 }, end: { line: 39, column: 8 } },
+        "3vk1ks01z9ilh:25:6",
         {
-          fileHash: "3vk1ks01z9ilh",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -839,9 +838,8 @@ describe("computed", () => {
   it("passes a change on only when its value changes", async () => {
     await render(
       cs.create(
-        { start: { line: 51, column: 6 }, end: { line: 64, column: 8 } },
+        "3vk1ks01z9ilh:51:6",
         {
-          fileHash: "3vk1ks01z9ilh",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },

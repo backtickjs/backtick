@@ -22,9 +22,8 @@ it("scriptComponent", async (t) => {
     t,
     "scriptComponent",
     cs.create(
-      { start: { line: 27, column: 4 }, end: { line: 34, column: 6 } },
+      "2ielk672xspgd:27:4",
       {
-        fileHash: "2ielk672xspgd",
         splices: {
           $Card: { value: Card, params: [] },
           $Badge: { value: Badge, params: [] },

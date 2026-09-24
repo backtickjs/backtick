@@ -9,18 +9,13 @@ it("capturedObjectAssignment", async (t) => {
     t,
     "capturedObjectAssignment",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 20, column: 6 } },
+      "385xpgt8q0ek2:12:4",
       {
-        fileHash: "385xpgt8q0ek2",
         splices: {
           $0splice0: {
             value: cs.create(
-              { start: { line: 14, column: 21 }, end: { line: 16, column: 8 } },
-              {
-                fileHash: "385xpgt8q0ek2",
-                splices: {},
-                captures: ["counter$385xpgt8q0ek2$0"],
-              },
+              "385xpgt8q0ek2:14:21",
+              { splices: {}, captures: ["counter$385xpgt8q0ek2$0"] },
               () => ({
                 type: "ArrowFunctionExpression",
                 loc: {

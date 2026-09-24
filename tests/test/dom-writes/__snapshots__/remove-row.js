@@ -10,9 +10,8 @@ import { watchWrites } from "./writes.ts";
 // removal.
 async function RemovableRows() {
   return cs.create(
-    { start: { line: 12, column: 9 }, end: { line: 35, column: 4 } },
+    "1dh0kxf6cd5v6:12:9",
     {
-      fileHash: "1dh0kxf6cd5v6",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

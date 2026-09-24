@@ -6,8 +6,8 @@ it("constant", async (t) => {
     t,
     "constant",
     cs.create(
-      { start: { line: 6, column: 36 }, end: { line: 6, column: 41 } },
-      { fileHash: "1e4ingeabxazf", splices: {}, captures: [] },
+      "1e4ingeabxazf:6:36",
+      { splices: {}, captures: [] },
       () => ({
         type: "Literal",
         loc: { start: { line: 6, column: 39 }, end: { line: 6, column: 40 } },

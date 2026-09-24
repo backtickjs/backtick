@@ -27,9 +27,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    { start: { line: 31, column: 9 }, end: { line: 42, column: 4 } },
+    "1l1sblr1an3g5:31:9",
     {
-      fileHash: "1l1sblr1an3g5",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

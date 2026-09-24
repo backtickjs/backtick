@@ -4,12 +4,8 @@ import { cs } from "@backtickjs/core";
 // TypeScript reads a numeric string literal as a numeric index.
 const point = { x: 1, y: 2 };
 export default cs.create(
-  { start: { line: 8, column: 15 }, end: { line: 16, column: 2 } },
-  {
-    fileHash: "2p3ed6wqsrdah",
-    splices: { $point: { value: point, params: [] } },
-    captures: [],
-  },
+  "2p3ed6wqsrdah:8:15",
+  { splices: { $point: { value: point, params: [] } }, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 18 }, end: { line: 16, column: 1 } },

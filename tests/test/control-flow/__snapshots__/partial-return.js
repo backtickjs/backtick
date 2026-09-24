@@ -7,8 +7,8 @@ it("partialReturnScript", async (t) => {
     t,
     "partialReturnScript",
     cs.create(
-      { start: { line: 10, column: 4 }, end: { line: 15, column: 6 } },
-      { fileHash: "x79h35ggz599", splices: {}, captures: [] },
+      "x79h35ggz599:10:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 15, column: 5 } },
@@ -116,8 +116,8 @@ it("partialReturnArrow", async (t) => {
     t,
     "partialReturnArrow",
     cs.create(
-      { start: { line: 23, column: 4 }, end: { line: 30, column: 6 } },
-      { fileHash: "x79h35ggz599", splices: {}, captures: [] },
+      "x79h35ggz599:23:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 23, column: 7 }, end: { line: 30, column: 5 } },

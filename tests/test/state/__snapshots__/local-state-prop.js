@@ -12,12 +12,8 @@ import { children, drawn, fontSize } from "./dom.ts";
 const SharedCounter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
-      { start: { line: 15, column: 11 }, end: { line: 15, column: 49 } },
-      {
-        fileHash: "1myb4rrcna327",
-        splices: { $size: { value: size, params: [] } },
-        captures: [],
-      },
+      "1myb4rrcna327:15:11",
+      { splices: { $size: { value: size, params: [] } }, captures: [] },
       () => ({
         type: "BinaryExpression",
         loc: { start: { line: 15, column: 14 }, end: { line: 15, column: 48 } },
@@ -85,12 +81,8 @@ const SharedCounter = async ({ size }) =>
       '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"AAcc,MAAA,aAAa,GAAG,IAAK,CAAC,GAAG,EAAE,GAAG,IAAI,CAAA"}',
     ),
     onclick: cs.create(
-      { start: { line: 16, column: 13 }, end: { line: 18, column: 6 } },
-      {
-        fileHash: "1myb4rrcna327",
-        splices: { $size: { value: size, params: [] } },
-        captures: [],
-      },
+      "1myb4rrcna327:16:13",
+      { splices: { $size: { value: size, params: [] } }, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 16, column: 16 }, end: { line: 18, column: 5 } },
@@ -205,9 +197,8 @@ const SharedCounter = async ({ size }) =>
   });
 async function SharingPanel() {
   return cs.create(
-    { start: { line: 25, column: 9 }, end: { line: 33, column: 4 } },
+    "1myb4rrcna327:25:9",
     {
-      fileHash: "1myb4rrcna327",
       splices: {
         $state: { value: state, params: [] },
         $SharedCounter: { value: SharedCounter, params: [] },

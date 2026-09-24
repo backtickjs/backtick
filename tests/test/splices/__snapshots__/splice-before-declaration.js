@@ -13,12 +13,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // where they do not exist.
 function sandwich(fragment) {
   return cs.create(
-    { start: { line: 16, column: 9 }, end: { line: 21, column: 4 } },
-    {
-      fileHash: "1xi8jyc89buh5",
-      splices: { $fragment: { value: fragment, params: [] } },
-      captures: [],
-    },
+    "1xi8jyc89buh5:16:9",
+    { splices: { $fragment: { value: fragment, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 16, column: 12 }, end: { line: 21, column: 3 } },
@@ -186,18 +182,14 @@ it("spliceBeforeDeclaration", async (t) => {
     t,
     "spliceBeforeDeclaration",
     cs.create(
-      { start: { line: 28, column: 4 }, end: { line: 28, column: 49 } },
+      "1xi8jyc89buh5:28:4",
       {
-        fileHash: "1xi8jyc89buh5",
         splices: {
           $0splice0: {
             value: sandwich(
               cs.create(
-                {
-                  start: { line: 28, column: 18 },
-                  end: { line: 28, column: 24 },
-                },
-                { fileHash: "1xi8jyc89buh5", splices: {}, captures: [] },
+                "1xi8jyc89buh5:28:18",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -215,11 +207,8 @@ it("spliceBeforeDeclaration", async (t) => {
           $0splice1: {
             value: sandwich(
               cs.create(
-                {
-                  start: { line: 28, column: 40 },
-                  end: { line: 28, column: 46 },
-                },
-                { fileHash: "1xi8jyc89buh5", splices: {}, captures: [] },
+                "1xi8jyc89buh5:28:40",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

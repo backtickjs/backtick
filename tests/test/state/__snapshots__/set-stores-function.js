@@ -9,12 +9,8 @@ import { drawn } from "./dom.ts";
 // is kept, not called with the previous value.
 async function Greeting() {
   return cs.create(
-    { start: { line: 11, column: 9 }, end: { line: 18, column: 4 } },
-    {
-      fileHash: "1zi7if3ybm5dh",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "1zi7if3ybm5dh:11:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 11, column: 12 }, end: { line: 18, column: 3 } },

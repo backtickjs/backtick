@@ -14,30 +14,21 @@ import { snapshotCase } from "../snapshotCase.ts";
 // wrong.
 function wrap(start) {
   return cs.create(
-    { start: { line: 17, column: 9 }, end: { line: 23, column: 4 } },
+    "zqr0jsdf8ub6:17:9",
     {
-      fileHash: "zqr0jsdf8ub6",
       splices: {
         $start: { value: start, params: [] },
         $0splice0: {
           value: foo(
             cs.create(
-              { start: { line: 19, column: 17 }, end: { line: 22, column: 6 } },
+              "zqr0jsdf8ub6:19:17",
               {
-                fileHash: "zqr0jsdf8ub6",
                 splices: {
                   $0splice0: {
                     value: same(
                       cs.create(
-                        {
-                          start: { line: 21, column: 29 },
-                          end: { line: 21, column: 38 },
-                        },
-                        {
-                          fileHash: "zqr0jsdf8ub6",
-                          splices: {},
-                          captures: ["outer$zqr0jsdf8ub6$0"],
-                        },
+                        "zqr0jsdf8ub6:21:29",
+                        { splices: {}, captures: ["outer$zqr0jsdf8ub6$0"] },
                         () => ({
                           type: "Identifier",
                           loc: {
@@ -198,12 +189,8 @@ function wrap(start) {
 }
 function foo(start) {
   return cs.create(
-    { start: { line: 27, column: 9 }, end: { line: 27, column: 23 } },
-    {
-      fileHash: "zqr0jsdf8ub6",
-      splices: { $start: { value: start, params: [] } },
-      captures: [],
-    },
+    "zqr0jsdf8ub6:27:9",
+    { splices: { $start: { value: start, params: [] } }, captures: [] },
     () => ({
       type: "BinaryExpression",
       loc: { start: { line: 27, column: 12 }, end: { line: 27, column: 22 } },
@@ -231,18 +218,14 @@ it("hostWrappedSplice", async (t) => {
     t,
     "hostWrappedSplice",
     cs.create(
-      { start: { line: 38, column: 4 }, end: { line: 38, column: 39 } },
+      "zqr0jsdf8ub6:38:4",
       {
-        fileHash: "zqr0jsdf8ub6",
         splices: {
           $0splice0: {
             value: wrap(
               cs.create(
-                {
-                  start: { line: 38, column: 14 },
-                  end: { line: 38, column: 19 },
-                },
-                { fileHash: "zqr0jsdf8ub6", splices: {}, captures: [] },
+                "zqr0jsdf8ub6:38:14",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -260,11 +243,8 @@ it("hostWrappedSplice", async (t) => {
           $0splice1: {
             value: wrap(
               cs.create(
-                {
-                  start: { line: 38, column: 31 },
-                  end: { line: 38, column: 36 },
-                },
-                { fileHash: "zqr0jsdf8ub6", splices: {}, captures: [] },
+                "zqr0jsdf8ub6:38:31",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

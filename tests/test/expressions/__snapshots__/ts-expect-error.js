@@ -9,8 +9,8 @@ it("tsExpectError", async (t) => {
     t,
     "tsExpectError",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 16, column: 6 } },
-      { fileHash: "353rib4gy05pn", splices: {}, captures: [] },
+      "353rib4gy05pn:12:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 16, column: 5 } },

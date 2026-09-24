@@ -23,9 +23,8 @@ it("spliceImportedValue", async (t) => {
     t,
     "spliceImportedValue",
     cs.create(
-      { start: { line: 23, column: 47 }, end: { line: 23, column: 64 } },
+      "3rujjqwiut9zl:23:47",
       {
-        fileHash: "3rujjqwiut9zl",
         splices: { $FRAGMENT_TAG: { value: FRAGMENT_TAG, params: [] } },
         captures: [],
       },

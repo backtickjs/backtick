@@ -5,8 +5,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // language's absent value; `undefined` never arises. A chain spells `?.` at
 // each access, and a null method receiver skips the call.
 const pick = cs.create(
-  { start: { line: 8, column: 13 }, end: { line: 10, column: 2 } },
-  { fileHash: "2dtorvijco8u0", splices: {}, captures: [] },
+  "2dtorvijco8u0:8:13",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 16 }, end: { line: 10, column: 1 } },
@@ -67,8 +67,8 @@ const pick = cs.create(
   '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["optional-chain.test.tsx"],"names":[],"mappings":"AAOgB,MAAA,CAAC,CAAuB,EAAE,EAAE;IAC1C,OAAO,CAAC,EAAE,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 const deep = cs.create(
-  { start: { line: 12, column: 13 }, end: { line: 14, column: 2 } },
-  { fileHash: "2dtorvijco8u0", splices: {}, captures: [] },
+  "2dtorvijco8u0:12:13",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 12, column: 16 }, end: { line: 14, column: 1 } },
@@ -149,8 +149,8 @@ const deep = cs.create(
   '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["optional-chain.test.tsx"],"names":[],"mappings":"AAWgB,MAAA,CAAC,CAAyC,EAAE,EAAE;IAC5D,OAAO,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC;AACrB,CAAC,CAAA"}',
 );
 const shout = cs.create(
-  { start: { line: 16, column: 14 }, end: { line: 18, column: 2 } },
-  { fileHash: "2dtorvijco8u0", splices: {}, captures: [] },
+  "2dtorvijco8u0:16:14",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 16, column: 17 }, end: { line: 18, column: 1 } },
@@ -236,9 +236,8 @@ it("optionalChain", async (t) => {
     t,
     "optionalChain",
     cs.create(
-      { start: { line: 24, column: 4 }, end: { line: 32, column: 7 } },
+      "2dtorvijco8u0:24:4",
       {
-        fileHash: "2dtorvijco8u0",
         splices: {
           $pick: { value: pick, params: [] },
           $deep: { value: deep, params: [] },

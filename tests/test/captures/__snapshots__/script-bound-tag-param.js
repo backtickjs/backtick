@@ -9,21 +9,13 @@ it("scriptBoundTagParam", async (t) => {
     t,
     "scriptBoundTagParam",
     cs.create(
-      { start: { line: 13, column: 4 }, end: { line: 21, column: 6 } },
+      "3ehgcl2xwg3z1:13:4",
       {
-        fileHash: "3ehgcl2xwg3z1",
         splices: {
           $0splice0: {
             value: cs.create(
-              {
-                start: { line: 16, column: 13 },
-                end: { line: 16, column: 30 },
-              },
-              {
-                fileHash: "3ehgcl2xwg3z1",
-                splices: {},
-                captures: ["Row$3ehgcl2xwg3z1$1"],
-              },
+              "3ehgcl2xwg3z1:16:13",
+              { splices: {}, captures: ["Row$3ehgcl2xwg3z1$1"] },
               () => ({
                 type: "JSXElement",
                 loc: {
@@ -89,15 +81,8 @@ it("scriptBoundTagParam", async (t) => {
           },
           $0splice1: {
             value: cs.create(
-              {
-                start: { line: 17, column: 13 },
-                end: { line: 17, column: 30 },
-              },
-              {
-                fileHash: "3ehgcl2xwg3z1",
-                splices: {},
-                captures: ["Row$3ehgcl2xwg3z1$1"],
-              },
+              "3ehgcl2xwg3z1:17:13",
+              { splices: {}, captures: ["Row$3ehgcl2xwg3z1$1"] },
               () => ({
                 type: "JSXElement",
                 loc: {

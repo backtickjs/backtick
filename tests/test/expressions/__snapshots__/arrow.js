@@ -6,8 +6,8 @@ it("arrow", async (t) => {
     t,
     "arrow",
     cs.create(
-      { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
-      { fileHash: "1qw9q1toh3rnd", splices: {}, captures: [] },
+      "1qw9q1toh3rnd:9:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },

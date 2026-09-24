@@ -6,12 +6,8 @@ import { cs } from "@backtickjs/core";
 // each takes is still written, because that is what is under test.
 async function Row({ count }) {
   return cs.create(
-    { start: { line: 14, column: 9 }, end: { line: 14, column: 40 } },
-    {
-      fileHash: "3og7hp7gm9m5d",
-      splices: { $count: { value: count, params: [] } },
-      captures: [],
-    },
+    "3og7hp7gm9m5d:14:9",
+    { splices: { $count: { value: count, params: [] } }, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 14, column: 12 }, end: { line: 14, column: 39 } },
@@ -81,8 +77,8 @@ async function Row({ count }) {
 }
 async function Nothing() {
   return cs.create(
-    { start: { line: 18, column: 9 }, end: { line: 18, column: 44 } },
-    { fileHash: "3og7hp7gm9m5d", splices: {}, captures: [] },
+    "3og7hp7gm9m5d:18:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 18, column: 12 }, end: { line: 18, column: 43 } },
@@ -136,22 +132,14 @@ async function Nothing() {
 }
 const rows = await bundler.run(
   cs.create(
-    { start: { line: 22, column: 2 }, end: { line: 22, column: 72 } },
+    "3og7hp7gm9m5d:22:2",
     {
-      fileHash: "3og7hp7gm9m5d",
       splices: {
         $0splice0: {
           value: _jsx(Row, {
             count: cs.create(
-              {
-                start: { line: 22, column: 50 },
-                end: { line: 22, column: 65 },
-              },
-              {
-                fileHash: "3og7hp7gm9m5d",
-                splices: {},
-                captures: ["props$3og7hp7gm9m5d$0"],
-              },
+              "3og7hp7gm9m5d:22:50",
+              { splices: {}, captures: ["props$3og7hp7gm9m5d$0"] },
               () => ({
                 type: "MemberExpression",
                 loc: {
@@ -214,9 +202,8 @@ const rows = await bundler.run(
 );
 const empty = await bundler.run(_jsx(Nothing, {}));
 export default cs.create(
-  { start: { line: 27, column: 15 }, end: { line: 59, column: 2 } },
+  "3og7hp7gm9m5d:27:15",
   {
-    fileHash: "3og7hp7gm9m5d",
     splices: {
       $rows: { value: rows, params: [] },
       $empty: { value: empty, params: [] },

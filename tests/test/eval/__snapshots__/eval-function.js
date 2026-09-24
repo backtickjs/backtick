@@ -6,8 +6,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // One answers a string; the other a drawing, handed its props as a value.
 const greet = await bundler.run(
   cs.create(
-    { start: { line: 8, column: 32 }, end: { line: 8, column: 69 } },
-    { fileHash: "1061hn7xljcgj", splices: {}, captures: [] },
+    "1061hn7xljcgj:8:32",
+    { splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 8, column: 35 }, end: { line: 8, column: 68 } },
@@ -43,8 +43,8 @@ const greet = await bundler.run(
 );
 const badge = await bundler.run(
   cs.create(
-    { start: { line: 11, column: 2 }, end: { line: 11, column: 67 } },
-    { fileHash: "1061hn7xljcgj", splices: {}, captures: [] },
+    "1061hn7xljcgj:11:2",
+    { splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 11, column: 5 }, end: { line: 11, column: 66 } },
@@ -157,9 +157,8 @@ it("evalFunction", async (t) => {
     t,
     "evalFunction",
     cs.create(
-      { start: { line: 18, column: 4 }, end: { line: 21, column: 11 } },
+      "1061hn7xljcgj:18:4",
       {
-        fileHash: "1061hn7xljcgj",
         splices: {
           $greet: { value: greet, params: [] },
           $badge: { value: badge, params: [] },

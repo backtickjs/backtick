@@ -21,12 +21,8 @@ it("scriptComponentNestedProp", async (t) => {
     t,
     "scriptComponentNestedProp",
     cs.create(
-      { start: { line: 27, column: 4 }, end: { line: 27, column: 50 } },
-      {
-        fileHash: "f9eea3gp8wr6",
-        splices: { $Greeting: { value: Greeting, params: [] } },
-        captures: [],
-      },
+      "f9eea3gp8wr6:27:4",
+      { splices: { $Greeting: { value: Greeting, params: [] } }, captures: [] },
       () => ({
         type: "JSXElement",
         loc: { start: { line: 27, column: 7 }, end: { line: 27, column: 49 } },

@@ -9,8 +9,8 @@ it("forNestedShadowing", async (t) => {
     t,
     "forNestedShadowing",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 21, column: 6 } },
-      { fileHash: "lj6vk8127ex6", splices: {}, captures: [] },
+      "lj6vk8127ex6:12:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 21, column: 5 } },

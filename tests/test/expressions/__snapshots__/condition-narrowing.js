@@ -6,8 +6,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // splice included.
 const flags = {
   strict: cs.create(
-    { start: { line: 8, column: 24 }, end: { line: 8, column: 32 } },
-    { fileHash: "g29mnwu0pbnr", splices: {}, captures: [] },
+    "g29mnwu0pbnr:8:24",
+    { splices: {}, captures: [] },
     () => ({
       type: "Literal",
       loc: { start: { line: 8, column: 27 }, end: { line: 8, column: 31 } },
@@ -18,12 +18,8 @@ const flags = {
   ),
 };
 const label = cs.create(
-  { start: { line: 10, column: 71 }, end: { line: 21, column: 2 } },
-  {
-    fileHash: "g29mnwu0pbnr",
-    splices: { $0splice0: { value: flags.strict, params: [] } },
-    captures: [],
-  },
+  "g29mnwu0pbnr:10:71",
+  { splices: { $0splice0: { value: flags.strict, params: [] } }, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 10, column: 74 }, end: { line: 21, column: 1 } },
@@ -344,12 +340,8 @@ it("conditionNarrowing", async (t) => {
     t,
     "conditionNarrowing",
     cs.create(
-      { start: { line: 27, column: 4 }, end: { line: 32, column: 7 } },
-      {
-        fileHash: "g29mnwu0pbnr",
-        splices: { $label: { value: label, params: [] } },
-        captures: [],
-      },
+      "g29mnwu0pbnr:27:4",
+      { splices: { $label: { value: label, params: [] } }, captures: [] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 27, column: 8 }, end: { line: 32, column: 5 } },

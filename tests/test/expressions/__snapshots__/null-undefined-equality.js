@@ -8,8 +8,8 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 9, column: 32 }, end: { line: 9, column: 49 } },
-          { fileHash: "3265muyjx857r", splices: {}, captures: [] },
+          "3265muyjx857r:9:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -43,8 +43,8 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 10, column: 32 }, end: { line: 10, column: 59 } },
-          { fileHash: "3265muyjx857r", splices: {}, captures: [] },
+          "3265muyjx857r:10:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -80,8 +80,8 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 14, column: 32 }, end: { line: 14, column: 54 } },
-          { fileHash: "3265muyjx857r", splices: {}, captures: [] },
+          "3265muyjx857r:14:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -115,8 +115,8 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 15, column: 32 }, end: { line: 15, column: 54 } },
-          { fileHash: "3265muyjx857r", splices: {}, captures: [] },
+          "3265muyjx857r:15:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -156,9 +156,8 @@ describe("null and undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          { start: { line: 24, column: 21 }, end: { line: 34, column: 8 } },
+          "3265muyjx857r:24:21",
           {
-            fileHash: "3265muyjx857r",
             splices: {
               $nothing: { value: nothing, params: [] },
               $empty: { value: empty, params: [] },

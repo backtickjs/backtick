@@ -10,9 +10,8 @@ import { watchWrites } from "./writes.ts";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.create(
-    { start: { line: 12, column: 9 }, end: { line: 39, column: 4 } },
+    "2tlccuo5yvrz7:12:9",
     {
-      fileHash: "2tlccuo5yvrz7",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

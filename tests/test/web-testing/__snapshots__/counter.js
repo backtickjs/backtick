@@ -8,12 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A cell a script declares, and a button that writes it.
 async function Counter() {
   return cs.create(
-    { start: { line: 10, column: 9 }, end: { line: 18, column: 4 } },
-    {
-      fileHash: "2x6geiwtygybj",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "2x6geiwtygybj:10:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 18, column: 3 } },

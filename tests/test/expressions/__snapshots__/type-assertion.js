@@ -15,12 +15,8 @@ it("typeAssertion", async (t) => {
     t,
     "typeAssertion",
     cs.create(
-      { start: { line: 19, column: 4 }, end: { line: 23, column: 6 } },
-      {
-        fileHash: "3amzui83z49rq",
-        splices: { $answered: { value: answered, params: [] } },
-        captures: [],
-      },
+      "3amzui83z49rq:19:4",
+      { splices: { $answered: { value: answered, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 19, column: 7 }, end: { line: 23, column: 5 } },

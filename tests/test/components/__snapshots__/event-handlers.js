@@ -12,12 +12,8 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs.create(
-      { start: { line: 15, column: 4 }, end: { line: 36, column: 6 } },
-      {
-        fileHash: "33yj2jmcqxbde",
-        splices: { $state: { value: state, params: [] } },
-        captures: [],
-      },
+      "33yj2jmcqxbde:15:4",
+      { splices: { $state: { value: state, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 15, column: 7 }, end: { line: 36, column: 5 } },

@@ -87,8 +87,8 @@ describe("a handler that is not a function", () => {
   it("leaves a function alone", async () => {
     const div = await drawn(
       cs.create(
-        { start: { line: 134, column: 28 }, end: { line: 134, column: 58 } },
-        { fileHash: "2i39r1w0584h", splices: {}, captures: [] },
+        "2i39r1w0584h:134:28",
+        { splices: {}, captures: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -167,8 +167,8 @@ describe("a handler that is not a function", () => {
   it("is refused the other way round too", async () => {
     await refused(
       cs.create(
-        { start: { line: 144, column: 6 }, end: { line: 144, column: 34 } },
-        { fileHash: "2i39r1w0584h", splices: {}, captures: [] },
+        "2i39r1w0584h:144:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -247,8 +247,8 @@ describe("a handler that is not a function", () => {
   it("lets an absent handler stay absent", async () => {
     const absent = [
       cs.create(
-        { start: { line: 155, column: 6 }, end: { line: 155, column: 32 } },
-        { fileHash: "2i39r1w0584h", splices: {}, captures: [] },
+        "2i39r1w0584h:155:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -310,8 +310,8 @@ describe("a handler that is not a function", () => {
         '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"AA0JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,EAAG,CAAA"}',
       ),
       cs.create(
-        { start: { line: 156, column: 6 }, end: { line: 156, column: 41 } },
-        { fileHash: "2i39r1w0584h", splices: {}, captures: [] },
+        "2i39r1w0584h:156:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "JSXElement",
           loc: {

@@ -6,8 +6,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // arguments, where `String.fromCodePoint` takes the one code point.
 async function Written() {
   return cs.create(
-    { start: { line: 8, column: 9 }, end: { line: 14, column: 4 } },
-    { fileHash: "rfc8jtzlhm6q", splices: {}, captures: [] },
+    "rfc8jtzlhm6q:8:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 8, column: 12 }, end: { line: 14, column: 3 } },

@@ -11,9 +11,8 @@ import { children, drawn } from "./dom.ts";
 // already had, and the host must not hear about it.
 async function SelectableRows() {
   return cs.create(
-    { start: { line: 13, column: 9 }, end: { line: 29, column: 4 } },
+    "2i3sz19b0mqz4:13:9",
     {
-      fileHash: "2i3sz19b0mqz4",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

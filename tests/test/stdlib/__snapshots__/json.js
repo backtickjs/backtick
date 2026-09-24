@@ -9,8 +9,8 @@ it("jsonRoundTrip", async (t) => {
     t,
     "jsonRoundTrip",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 31, column: 6 } },
-      { fileHash: "1nb9j9gha9a2e", splices: {}, captures: [] },
+      "1nb9j9gha9a2e:12:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 31, column: 5 } },

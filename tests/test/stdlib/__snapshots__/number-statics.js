@@ -7,8 +7,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // answers rather than a member read off a `Number` there is no value for.
 async function Checked() {
   return cs.create(
-    { start: { line: 9, column: 9 }, end: { line: 37, column: 4 } },
-    { fileHash: "1o8290c5hfi65", splices: {}, captures: [] },
+    "1o8290c5hfi65:9:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 9, column: 12 }, end: { line: 37, column: 3 } },

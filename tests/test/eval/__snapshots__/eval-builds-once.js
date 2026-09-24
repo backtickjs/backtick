@@ -38,8 +38,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and nothing runs again — a loop that would otherwise have no end.
 async function Answer() {
   return cs.create(
-    { start: { line: 42, column: 9 }, end: { line: 42, column: 34 } },
-    { fileHash: "2f6ulv1ojihe6", splices: {}, captures: [] },
+    "2f6ulv1ojihe6:42:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 42, column: 12 }, end: { line: 42, column: 33 } },
@@ -94,9 +94,8 @@ async function Answer() {
 const answer = await bundler.run(_jsx(Answer, {}));
 async function Waiting({ ask }) {
   return cs.create(
-    { start: { line: 52, column: 9 }, end: { line: 62, column: 4 } },
+    "2f6ulv1ojihe6:52:9",
     {
-      fileHash: "2f6ulv1ojihe6",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -469,9 +468,8 @@ async function Waiting({ ask }) {
   );
 }
 const evalBuildsOnce = cs.create(
-  { start: { line: 65, column: 23 }, end: { line: 79, column: 2 } },
+  "2f6ulv1ojihe6:65:23",
   {
-    fileHash: "2f6ulv1ojihe6",
     splices: {
       $state: { value: state, params: [] },
       $answer: { value: answer, params: [] },

@@ -3,7 +3,7 @@ import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { type EmittedScript, emitScript, scriptEdits } from "./emitScript.js";
 import { arrow, call, iife, object } from "./nodeFactory.js";
-import { type ClientScript, sourceLocation } from "./parseFile.js";
+import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedSplice } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
@@ -77,18 +77,15 @@ export function rewriteScript(
     start: sourceNode.getStart(sourceFile),
     end: sourceNode.getEnd(),
   };
-  const scriptLocation = sourceLocation(
-    sourceFile,
+  // Which script this is (see `ClientScript.id`): its line from 1, and its
+  // column from 0.
+  const { line, character } = sourceFile.getLineAndCharacterOfPosition(
     scriptRange.start,
-    scriptRange.end,
   );
+  const id = `${fileHash}:${line + 1}:${character}`;
 
   const metadata = ts.factory.createObjectLiteralExpression(
     [
-      ts.factory.createPropertyAssignment(
-        "fileHash",
-        ts.factory.createStringLiteral(fileHash),
-      ),
       ts.factory.createPropertyAssignment(
         "splices",
         ts.factory.createObjectLiteralExpression(
@@ -148,7 +145,7 @@ export function rewriteScript(
   );
 
   const runtime = call(ts, "cs", "create", [
-    object(ts, scriptLocation),
+    ts.factory.createStringLiteral(id),
     metadata,
     // The body behind a thunk: one `cs` inside a host function makes a script
     // per call, and the bundler reads one per source location, so the nodes

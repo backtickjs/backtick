@@ -8,9 +8,8 @@ it("reservedKey", async (t) => {
     t,
     "reservedKey",
     cs.create(
-      { start: { line: 8, column: 39 }, end: { line: 8, column: 68 } },
+      "2a27difszbs8:8:39",
       {
-        fileHash: "2a27difszbs8",
         splices: { $0splice0: { value: { "#": "value" }, params: [] } },
         captures: [],
       },

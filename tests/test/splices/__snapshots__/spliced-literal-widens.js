@@ -23,9 +23,8 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.create(
-      { start: { line: 27, column: 4 }, end: { line: 32, column: 6 } },
+      "323oescdizqb0:27:4",
       {
-        fileHash: "323oescdizqb0",
         splices: {
           $state: { value: state, params: [] },
           $five: { value: five, params: [] },

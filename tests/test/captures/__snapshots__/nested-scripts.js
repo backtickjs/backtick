@@ -6,21 +6,13 @@ it("nestedScripts", async (t) => {
     t,
     "nestedScripts",
     cs.create(
-      { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
+      "2jjdjdr7m395y:9:4",
       {
-        fileHash: "2jjdjdr7m395y",
         splices: {
           $0splice0: {
             value: cs.create(
-              {
-                start: { line: 11, column: 15 },
-                end: { line: 11, column: 20 },
-              },
-              {
-                fileHash: "2jjdjdr7m395y",
-                splices: {},
-                captures: ["x$2jjdjdr7m395y$0"],
-              },
+              "2jjdjdr7m395y:11:15",
+              { splices: {}, captures: ["x$2jjdjdr7m395y$0"] },
               () => ({
                 type: "Identifier",
                 loc: {

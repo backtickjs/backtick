@@ -8,12 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // written, not what it is.
 async function Card() {
   return cs.create(
-    { start: { line: 10, column: 9 }, end: { line: 32, column: 4 } },
-    {
-      fileHash: "mvahdj0e0ick",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "mvahdj0e0ick:10:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 32, column: 3 } },

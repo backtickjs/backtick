@@ -13,12 +13,8 @@ it("evalLoading", async (t) => {
     t,
     "evalLoading",
     cs.create(
-      { start: { line: 17, column: 4 }, end: { line: 29, column: 6 } },
-      {
-        fileHash: "2t6t5dze0269t",
-        splices: { $state: { value: state, params: [] } },
-        captures: [],
-      },
+      "2t6t5dze0269t:17:4",
+      { splices: { $state: { value: state, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 29, column: 5 } },

@@ -11,9 +11,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // not data, which is what a cell declared where it is evaluated allows.
 async function MemberRows() {
   return cs.create(
-    { start: { line: 19, column: 9 }, end: { line: 41, column: 4 } },
+    "30ur5mgzea4v6:19:9",
     {
-      fileHash: "30ur5mgzea4v6",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

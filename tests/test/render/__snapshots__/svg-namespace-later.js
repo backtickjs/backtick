@@ -9,9 +9,8 @@ import { namespaced } from "./dom.ts";
 // condition shows, are SVG's because of where they stand, and the `title` after
 // the `svg` is HTML's again.
 const svgNamespaceLater = cs.create(
-  { start: { line: 12, column: 26 }, end: { line: 27, column: 2 } },
+  "1brs7fv34j5dk:12:26",
   {
-    fileHash: "1brs7fv34j5dk",
     splices: {
       $state: { value: state, params: [] },
       $For: { value: For, params: [] },

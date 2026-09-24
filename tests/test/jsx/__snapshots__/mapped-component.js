@@ -24,12 +24,8 @@ it("mappedComponent", async (t) => {
     _jsx("div", {
       children: _jsx(For, {
         each: cs.create(
-          { start: { line: 26, column: 17 }, end: { line: 26, column: 26 } },
-          {
-            fileHash: "8u2ewdd1g2mk",
-            splices: { $rows: { value: rows, params: [] } },
-            captures: [],
-          },
+          "8u2ewdd1g2mk:26:17",
+          { splices: { $rows: { value: rows, params: [] } }, captures: [] },
           () => ({
             type: "Splice",
             loc: {
@@ -42,22 +38,14 @@ it("mappedComponent", async (t) => {
           '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"AAyBoB,MAAA,IAAK,CAAA"}',
         ),
         children: cs.create(
-          { start: { line: 27, column: 9 }, end: { line: 27, column: 66 } },
+          "8u2ewdd1g2mk:27:9",
           {
-            fileHash: "8u2ewdd1g2mk",
             splices: {
               $0splice0: {
                 value: _jsx("span", {
                   children: cs.create(
-                    {
-                      start: { line: 27, column: 39 },
-                      end: { line: 27, column: 55 },
-                    },
-                    {
-                      fileHash: "8u2ewdd1g2mk",
-                      splices: {},
-                      captures: ["row$8u2ewdd1g2mk$0"],
-                    },
+                    "8u2ewdd1g2mk:27:39",
+                    { splices: {}, captures: ["row$8u2ewdd1g2mk$0"] },
                     () => ({
                       type: "BinaryExpression",
                       loc: {

@@ -24,9 +24,8 @@ describe("onMount", () => {
     const seen = await logged(() =>
       render(
         cs.create(
-          { start: { line: 28, column: 8 }, end: { line: 35, column: 10 } },
+          "1qp1kr79c2kqf:28:8",
           {
-            fileHash: "1qp1kr79c2kqf",
             splices: {
               $state: { value: state, params: [] },
               $onMount: { value: onMount, params: [] },
@@ -407,9 +406,8 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     await render(
       cs.create(
-        { start: { line: 44, column: 6 }, end: { line: 51, column: 8 } },
+        "1qp1kr79c2kqf:44:6",
         {
-          fileHash: "1qp1kr79c2kqf",
           splices: {
             $state: { value: state, params: [] },
             $onMount: { value: onMount, params: [] },

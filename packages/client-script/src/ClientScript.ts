@@ -9,8 +9,6 @@ export interface MetadataSplice {
 }
 
 export interface Metadata {
-  // distinguishes same-named files across codebases (see `locKey`)
-  fileHash: string;
   // spliced host values, under the keys the body uses (see `ClientScriptSplice`)
   splices: { [key: string]: MetadataSplice };
   // binding keys the script captures from an enclosing scope
@@ -19,7 +17,13 @@ export interface Metadata {
 
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
-  readonly loc: ES.SourceLocation;
+  // Which script this is: `<fileHash>:<line>:<column>`, where it was written.
+  // Two scripts with one id are one function-table entry, as a `cs` in a host
+  // function called twice is. The file's hash is part of it because a position
+  // alone recurs across files and codebases: two libraries compiled apart
+  // could both have a script at `1:0`. With the hash, ids collide only when
+  // the files' contents are identical, and then the scripts are the same.
+  readonly id: string;
   readonly metadata: Metadata;
   // The script's syntax, behind a thunk: one `cs` in a host function makes a
   // `ClientScript` per call, and the bundler parses one per source location, so
@@ -42,7 +46,7 @@ export function isClientScript(value: unknown): value is ClientScript {
 }
 
 export function create(
-  loc: ES.SourceLocation,
+  id: string,
   metadata: Metadata,
   body: () => ES.Expression | ES.BlockStatement,
   code: string,
@@ -50,7 +54,7 @@ export function create(
 ): ClientScript {
   return {
     "@backtickjs": "ClientScript",
-    loc,
+    id,
     metadata,
     body,
     code,

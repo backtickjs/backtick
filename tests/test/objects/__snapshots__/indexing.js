@@ -8,8 +8,8 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 10, column: 32 }, end: { line: 10, column: 51 } },
-          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+          "kbv0csg6ys4h:10:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -69,8 +69,8 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 11, column: 32 }, end: { line: 11, column: 46 } },
-          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+          "kbv0csg6ys4h:11:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -106,8 +106,8 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 13, column: 32 }, end: { line: 13, column: 49 } },
-          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+          "kbv0csg6ys4h:13:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -170,8 +170,8 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          { start: { line: 14, column: 32 }, end: { line: 14, column: 65 } },
-          { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+          "kbv0csg6ys4h:14:32",
+          { splices: {}, captures: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -208,8 +208,8 @@ describe("a read by key", () => {
   it("answers `undefined` for a well-typed key that finds nothing", async () => {
     const reads = [
       cs.create(
-        { start: { line: 20, column: 6 }, end: { line: 20, column: 23 } },
-        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+        "kbv0csg6ys4h:20:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -264,8 +264,8 @@ describe("a read by key", () => {
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"AAmBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAA"}',
       ),
       cs.create(
-        { start: { line: 21, column: 6 }, end: { line: 21, column: 25 } },
-        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+        "kbv0csg6ys4h:21:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -320,8 +320,8 @@ describe("a read by key", () => {
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"AAoBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAA"}',
       ),
       cs.create(
-        { start: { line: 22, column: 6 }, end: { line: 22, column: 24 } },
-        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+        "kbv0csg6ys4h:22:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -385,8 +385,8 @@ describe("a read by key", () => {
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"AAqBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAA"}',
       ),
       cs.create(
-        { start: { line: 23, column: 6 }, end: { line: 23, column: 56 } },
-        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+        "kbv0csg6ys4h:23:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -444,8 +444,8 @@ describe("a read by key", () => {
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"AAsBS,MAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAA+B,CAAC,GAAG,CAAC,CAAA"}',
       ),
       cs.create(
-        { start: { line: 24, column: 6 }, end: { line: 24, column: 18 } },
-        { fileHash: "kbv0csg6ys4h", splices: {}, captures: [] },
+        "kbv0csg6ys4h:24:6",
+        { splices: {}, captures: [] },
         () => ({
           type: "MemberExpression",
           loc: {

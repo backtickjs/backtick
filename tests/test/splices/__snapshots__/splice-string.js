@@ -9,12 +9,8 @@ it("spliceString", async (t) => {
     t,
     "spliceString",
     cs.create(
-      { start: { line: 10, column: 40 }, end: { line: 10, column: 50 } },
-      {
-        fileHash: "6r4m74y7k80e",
-        splices: { $value: { value: value, params: [] } },
-        captures: [],
-      },
+      "6r4m74y7k80e:10:40",
+      { splices: { $value: { value: value, params: [] } }, captures: [] },
       () => ({
         type: "Splice",
         loc: { start: { line: 10, column: 43 }, end: { line: 10, column: 49 } },

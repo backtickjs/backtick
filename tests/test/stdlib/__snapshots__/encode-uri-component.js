@@ -8,8 +8,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // as a string first. Decoding reads the same bytes back.
 async function Encoded() {
   return cs.create(
-    { start: { line: 10, column: 9 }, end: { line: 21, column: 4 } },
-    { fileHash: "3tch88psikxru", splices: {}, captures: [] },
+    "3tch88psikxru:10:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 21, column: 3 } },

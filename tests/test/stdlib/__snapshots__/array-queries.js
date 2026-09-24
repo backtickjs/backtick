@@ -9,8 +9,8 @@ it("arrayQueries", async (t) => {
     t,
     "arrayQueries",
     cs.create(
-      { start: { line: 12, column: 4 }, end: { line: 24, column: 6 } },
-      { fileHash: "25lflsbo2zrha", splices: {}, captures: [] },
+      "25lflsbo2zrha:12:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 24, column: 5 } },

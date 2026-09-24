@@ -26,9 +26,8 @@ describe("an undefined prop", () => {
       _jsx(Pill, {
         label: "focused",
         ref: cs.create(
-          { start: { line: 34, column: 33 }, end: { line: 34, column: 71 } },
+          "28eplibrubp3g:34:33",
           {
-            fileHash: "28eplibrubp3g",
             splices: { $onMount: { value: onMount, params: [] } },
             captures: [],
           },

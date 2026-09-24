@@ -3,12 +3,8 @@ import { cs, state } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const make = (f) =>
   cs.create(
-    { start: { line: 7, column: 2 }, end: { line: 9, column: 4 } },
-    {
-      fileHash: "3vatah1osfcoe",
-      splices: { $f: { value: f, params: [] } },
-      captures: [],
-    },
+    "3vatah1osfcoe:7:2",
+    { splices: { $f: { value: f, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 7, column: 5 }, end: { line: 9, column: 3 } },
@@ -75,12 +71,8 @@ const make = (f) =>
     '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAMK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC;AACrB,CAAC,CAAA"}',
   );
 const wrapped = cs.create(
-  { start: { line: 11, column: 16 }, end: { line: 11, column: 49 } },
-  {
-    fileHash: "3vatah1osfcoe",
-    splices: { $state: { value: state, params: [] } },
-    captures: [],
-  },
+  "3vatah1osfcoe:11:16",
+  { splices: { $state: { value: state, params: [] } }, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 19 }, end: { line: 11, column: 48 } },
@@ -139,9 +131,8 @@ it("builtinHoleSharing", async (t) => {
     t,
     "builtinHoleSharing",
     cs.create(
-      { start: { line: 17, column: 4 }, end: { line: 19, column: 6 } },
+      "3vatah1osfcoe:17:4",
       {
-        fileHash: "3vatah1osfcoe",
         splices: {
           $0splice0: { value: make(state), params: [] },
           $0splice1: { value: make(wrapped), params: [] },

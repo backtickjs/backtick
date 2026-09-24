@@ -7,12 +7,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // threaded capture's display name recovers `foo$` intact.
 function add(lhs) {
   return cs.create(
-    { start: { line: 10, column: 9 }, end: { line: 10, column: 21 } },
-    {
-      fileHash: "sl458m2swc6c",
-      splices: { $lhs: { value: lhs, params: [] } },
-      captures: [],
-    },
+    "sl458m2swc6c:10:9",
+    { splices: { $lhs: { value: lhs, params: [] } }, captures: [] },
     () => ({
       type: "BinaryExpression",
       loc: { start: { line: 10, column: 12 }, end: { line: 10, column: 20 } },
@@ -37,22 +33,14 @@ it("dollarName", async (t) => {
     t,
     "dollarName",
     cs.create(
-      { start: { line: 17, column: 4 }, end: { line: 20, column: 6 } },
+      "sl458m2swc6c:17:4",
       {
-        fileHash: "sl458m2swc6c",
         splices: {
           $0splice0: {
             value: add(
               cs.create(
-                {
-                  start: { line: 19, column: 19 },
-                  end: { line: 19, column: 27 },
-                },
-                {
-                  fileHash: "sl458m2swc6c",
-                  splices: {},
-                  captures: ["foo$$sl458m2swc6c$0"],
-                },
+                "sl458m2swc6c:19:19",
+                { splices: {}, captures: ["foo$$sl458m2swc6c$0"] },
                 () => ({
                   type: "Identifier",
                   loc: {

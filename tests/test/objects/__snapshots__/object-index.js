@@ -11,12 +11,8 @@ it("objectIndex", async (t) => {
     t,
     "objectIndex",
     cs.create(
-      { start: { line: 15, column: 4 }, end: { line: 20, column: 6 } },
-      {
-        fileHash: "o3ttyh4dq4dw",
-        splices: { $rates: { value: rates, params: [] } },
-        captures: [],
-      },
+      "o3ttyh4dq4dw:15:4",
+      { splices: { $rates: { value: rates, params: [] } }, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 15, column: 7 }, end: { line: 20, column: 5 } },

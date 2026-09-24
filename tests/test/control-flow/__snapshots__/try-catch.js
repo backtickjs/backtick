@@ -6,8 +6,8 @@ it("tryCatch", async (t) => {
     t,
     "tryCatch",
     cs.create(
-      { start: { line: 9, column: 4 }, end: { line: 19, column: 6 } },
-      { fileHash: "3s3xo1kodgmhm", splices: {}, captures: [] },
+      "3s3xo1kodgmhm:9:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 19, column: 5 } },

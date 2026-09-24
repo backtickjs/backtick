@@ -23,12 +23,8 @@ it("timers", async (t) => {
     t,
     "timers",
     cs.create(
-      { start: { line: 26, column: 4 }, end: { line: 31, column: 6 } },
-      {
-        fileHash: "18988aj10wskx",
-        splices: { $window: { value: window, params: [] } },
-        captures: [],
-      },
+      "18988aj10wskx:26:4",
+      { splices: { $window: { value: window, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 26, column: 7 }, end: { line: 31, column: 5 } },

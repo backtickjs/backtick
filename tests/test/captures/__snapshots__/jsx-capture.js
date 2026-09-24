@@ -7,19 +7,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 // instantiates the tree with `#t0(x)` and the tree wires the capture into the
 // handler with `#slot`.
 const script = cs.create(
-  { start: { line: 11, column: 42 }, end: { line: 14, column: 2 } },
+  "g38hwxw7rhvi:11:42",
   {
-    fileHash: "g38hwxw7rhvi",
     splices: {
       $0splice0: {
         value: _jsx("span", {
           onclick: cs.create(
-            { start: { line: 13, column: 27 }, end: { line: 13, column: 38 } },
-            {
-              fileHash: "g38hwxw7rhvi",
-              splices: {},
-              captures: ["x$g38hwxw7rhvi$0"],
-            },
+            "g38hwxw7rhvi:13:27",
+            { splices: {}, captures: ["x$g38hwxw7rhvi$0"] },
             () => ({
               type: "ArrowFunctionExpression",
               loc: {

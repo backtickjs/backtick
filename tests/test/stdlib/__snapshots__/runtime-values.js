@@ -6,9 +6,8 @@ it("runtimeValues", async (t) => {
     t,
     "runtimeValues",
     cs.create(
-      { start: { line: 9, column: 4 }, end: { line: 12, column: 7 } },
+      "1eany0mypxz6m:9:4",
       {
-        fileHash: "1eany0mypxz6m",
         splices: {
           $0splice0: { value: [1, "two", true, null], params: [] },
           $0splice1: { value: { k: 3 }, params: [] },

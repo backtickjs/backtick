@@ -5,12 +5,8 @@ import { cs, state } from "@backtickjs/core";
 // without returning, has nothing to draw.
 async function Panel() {
   return cs.create(
-    { start: { line: 7, column: 9 }, end: { line: 10, column: 4 } },
-    {
-      fileHash: "1y32lnuqpkjgj",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "1y32lnuqpkjgj:7:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 7, column: 12 }, end: { line: 10, column: 3 } },

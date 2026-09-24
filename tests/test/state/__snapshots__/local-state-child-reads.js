@@ -19,9 +19,8 @@ const ReadingRow = async ({ id, selected }) =>
     children: [
       _jsx("span", {
         style: cs.create(
-          { start: { line: 27, column: 13 }, end: { line: 27, column: 75 } },
+          "asvx80rnl1z5:27:13",
           {
-            fileHash: "asvx80rnl1z5",
             splices: {
               $selected: { value: selected, params: [] },
               $id: { value: id, params: [] },
@@ -137,9 +136,8 @@ const ReadingRow = async ({ id, selected }) =>
           '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"AA0BgB,YAAA,aAAa,GAAG,CAAC,IAAS,CAAC,GAAG,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI,CAAA"}',
         ),
         children: cs.create(
-          { start: { line: 29, column: 7 }, end: { line: 29, column: 50 } },
+          "asvx80rnl1z5:29:7",
           {
-            fileHash: "asvx80rnl1z5",
             splices: {
               $id: { value: id, params: [] },
               $selected: { value: selected, params: [] },
@@ -233,9 +231,8 @@ const ReadingRow = async ({ id, selected }) =>
         ),
       }),
       cs.create(
-        { start: { line: 31, column: 5 }, end: { line: 31, column: 66 } },
+        "asvx80rnl1z5:31:5",
         {
-          fileHash: "asvx80rnl1z5",
           splices: {
             $selected: { value: selected, params: [] },
             $id: { value: id, params: [] },
@@ -326,9 +323,8 @@ const ReadingRow = async ({ id, selected }) =>
   });
 async function ReadingPanel() {
   return cs.create(
-    { start: { line: 36, column: 9 }, end: { line: 45, column: 4 } },
+    "asvx80rnl1z5:36:9",
     {
-      fileHash: "asvx80rnl1z5",
       splices: {
         $state: { value: state, params: [] },
         $ReadingRow: { value: ReadingRow, params: [] },

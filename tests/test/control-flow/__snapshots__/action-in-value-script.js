@@ -3,8 +3,8 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 // A script that returns a value may still run an action.
 const valueScriptEffects = cs.create(
-  { start: { line: 7, column: 41 }, end: { line: 9, column: 2 } },
-  { fileHash: "1zk77nyjrl50d", splices: {}, captures: [] },
+  "1zk77nyjrl50d:7:41",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 7, column: 44 }, end: { line: 9, column: 1 } },
@@ -46,8 +46,8 @@ const valueScriptEffects = cs.create(
   '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"AAM4C;IAC1C,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 const ping = cs.create(
-  { start: { line: 11, column: 33 }, end: { line: 14, column: 2 } },
-  { fileHash: "1zk77nyjrl50d", splices: {}, captures: [] },
+  "1zk77nyjrl50d:11:33",
+  { splices: {}, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 36 }, end: { line: 14, column: 1 } },
@@ -131,9 +131,8 @@ it("actionInValueScript", async (t) => {
     t,
     "actionInValueScript",
     cs.create(
-      { start: { line: 20, column: 4 }, end: { line: 28, column: 6 } },
+      "1zk77nyjrl50d:20:4",
       {
-        fileHash: "1zk77nyjrl50d",
         splices: {
           $valueScriptEffects: { value: valueScriptEffects, params: [] },
           $ping: { value: ping, params: [] },

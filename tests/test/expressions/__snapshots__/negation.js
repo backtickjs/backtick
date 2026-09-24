@@ -11,8 +11,8 @@ it("negation", async (t) => {
     t,
     "negation",
     cs.create(
-      { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
-      { fileHash: "3ucocch4sr77y", splices: {}, captures: [] },
+      "3ucocch4sr77y:14:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },
@@ -194,8 +194,8 @@ it("negativeZero", async (t) => {
     t,
     "negativeZero",
     cs.create(
-      { start: { line: 27, column: 4 }, end: { line: 29, column: 6 } },
-      { fileHash: "3ucocch4sr77y", splices: {}, captures: [] },
+      "3ucocch4sr77y:27:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 27, column: 7 }, end: { line: 29, column: 5 } },

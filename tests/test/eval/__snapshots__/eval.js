@@ -9,12 +9,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // whose root is a list, placed as a child, and a number, added to.
 async function Items() {
   return cs.create(
-    { start: { line: 11, column: 9 }, end: { line: 13, column: 9 } },
-    {
-      fileHash: "3crw4saj766qu",
-      splices: { $For: { value: For, params: [] } },
-      captures: [],
-    },
+    "3crw4saj766qu:11:9",
+    { splices: { $For: { value: For, params: [] } }, captures: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 11, column: 12 }, end: { line: 13, column: 8 } },
@@ -218,9 +214,8 @@ async function Items() {
 const items = await bundler.run(_jsx(Items, {}));
 const total = await bundler.run(41);
 const evaluated = cs.create(
-  { start: { line: 19, column: 18 }, end: { line: 22, column: 7 } },
+  "3crw4saj766qu:19:18",
   {
-    fileHash: "3crw4saj766qu",
     splices: {
       $items: { value: items, params: [] },
       $total: { value: total, params: [] },

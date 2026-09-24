@@ -10,8 +10,8 @@ it("indexPastEnd", async (t) => {
     t,
     "indexPastEnd",
     cs.create(
-      { start: { line: 13, column: 4 }, end: { line: 16, column: 6 } },
-      { fileHash: "3821as72cvvin", splices: {}, captures: [] },
+      "3821as72cvvin:13:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 16, column: 5 } },

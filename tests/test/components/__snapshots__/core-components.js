@@ -12,8 +12,8 @@ it("coreComponents", async (t) => {
         _jsx("span", {
           style: "font-size: 12px",
           onclick: cs.create(
-            { start: { line: 10, column: 45 }, end: { line: 10, column: 57 } },
-            { fileHash: "1dqg1yg283gkk", splices: {}, captures: [] },
+            "1dqg1yg283gkk:10:45",
+            { splices: {}, captures: [] },
             () => ({
               type: "ArrowFunctionExpression",
               loc: {

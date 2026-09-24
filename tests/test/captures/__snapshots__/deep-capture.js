@@ -14,28 +14,19 @@ import { snapshotCase } from "../snapshotCase.ts";
 // a wrong answer would show up.
 function wrap(start) {
   return cs.create(
-    { start: { line: 18, column: 9 }, end: { line: 24, column: 4 } },
+    "22sufdxid1i7s:18:9",
     {
-      fileHash: "22sufdxid1i7s",
       splices: {
         $start: { value: start, params: [] },
         $0splice0: {
           value: cs.create(
-            { start: { line: 20, column: 13 }, end: { line: 23, column: 6 } },
+            "22sufdxid1i7s:20:13",
             {
-              fileHash: "22sufdxid1i7s",
               splices: {
                 $0splice0: {
                   value: cs.create(
-                    {
-                      start: { line: 22, column: 24 },
-                      end: { line: 22, column: 33 },
-                    },
-                    {
-                      fileHash: "22sufdxid1i7s",
-                      splices: {},
-                      captures: ["outer$22sufdxid1i7s$0"],
-                    },
+                    "22sufdxid1i7s:22:24",
+                    { splices: {}, captures: ["outer$22sufdxid1i7s$0"] },
                     () => ({
                       type: "Identifier",
                       loc: {
@@ -197,18 +188,14 @@ it("deepCapture", async (t) => {
     t,
     "deepCapture",
     cs.create(
-      { start: { line: 28, column: 39 }, end: { line: 28, column: 74 } },
+      "22sufdxid1i7s:28:39",
       {
-        fileHash: "22sufdxid1i7s",
         splices: {
           $0splice0: {
             value: wrap(
               cs.create(
-                {
-                  start: { line: 28, column: 49 },
-                  end: { line: 28, column: 54 },
-                },
-                { fileHash: "22sufdxid1i7s", splices: {}, captures: [] },
+                "22sufdxid1i7s:28:49",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -226,11 +213,8 @@ it("deepCapture", async (t) => {
           $0splice1: {
             value: wrap(
               cs.create(
-                {
-                  start: { line: 28, column: 66 },
-                  end: { line: 28, column: 71 },
-                },
-                { fileHash: "22sufdxid1i7s", splices: {}, captures: [] },
+                "22sufdxid1i7s:28:66",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

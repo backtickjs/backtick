@@ -8,8 +8,8 @@ it("arrayMembers", async (t) => {
     t,
     "arrayMembers",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 25, column: 6 } },
-      { fileHash: "139y0n5fpgs82", splices: {}, captures: [] },
+      "139y0n5fpgs82:11:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 25, column: 5 } },

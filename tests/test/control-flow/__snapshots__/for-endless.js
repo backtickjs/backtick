@@ -7,8 +7,8 @@ it("forEndless", async (t) => {
     t,
     "forEndless",
     cs.create(
-      { start: { line: 10, column: 4 }, end: { line: 19, column: 6 } },
-      { fileHash: "3voddrkfnxnd9", splices: {}, captures: [] },
+      "3voddrkfnxnd9:10:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 19, column: 5 } },

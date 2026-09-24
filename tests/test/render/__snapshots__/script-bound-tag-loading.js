@@ -12,8 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // badge reads on access rather than a value handed over once.
 const loadedBadge = await bundler.run(
   cs.create(
-    { start: { line: 16, column: 2 }, end: { line: 16, column: 67 } },
-    { fileHash: "v8fe0e5k2jbe", splices: {}, captures: [] },
+    "v8fe0e5k2jbe:16:2",
+    { splices: {}, captures: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 16, column: 5 }, end: { line: 16, column: 66 } },
@@ -122,9 +122,8 @@ const loadedBadge = await bundler.run(
   ),
 );
 const scriptBoundTagLoading = cs.create(
-  { start: { line: 19, column: 30 }, end: { line: 36, column: 2 } },
+  "v8fe0e5k2jbe:19:30",
   {
-    fileHash: "v8fe0e5k2jbe",
     splices: {
       $state: { value: state, params: [] },
       $loadedBadge: { value: loadedBadge, params: [] },

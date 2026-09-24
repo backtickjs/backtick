@@ -26,12 +26,8 @@ it("largeData", async (t) => {
     _jsx("div", {
       children: _jsx(For, {
         each: cs.create(
-          { start: { line: 37, column: 17 }, end: { line: 37, column: 28 } },
-          {
-            fileHash: "2tquu92zqyse3",
-            splices: { $orders: { value: orders, params: [] } },
-            captures: [],
-          },
+          "2tquu92zqyse3:37:17",
+          { splices: { $orders: { value: orders, params: [] } }, captures: [] },
           () => ({
             type: "Splice",
             loc: {
@@ -44,24 +40,16 @@ it("largeData", async (t) => {
           '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"AAoCoB,MAAA,IAAO,CAAA"}',
         ),
         children: cs.create(
-          { start: { line: 38, column: 9 }, end: { line: 53, column: 13 } },
+          "2tquu92zqyse3:38:9",
           {
-            fileHash: "2tquu92zqyse3",
             splices: {
               $0splice0: {
                 value: _jsxs("div", {
                   children: [
                     _jsx("img", {
                       src: cs.create(
-                        {
-                          start: { line: 42, column: 21 },
-                          end: { line: 42, column: 71 },
-                        },
-                        {
-                          fileHash: "2tquu92zqyse3",
-                          splices: {},
-                          captures: ["order$2tquu92zqyse3$0"],
-                        },
+                        "2tquu92zqyse3:42:21",
+                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
                         () => ({
                           type: "BinaryExpression",
                           loc: {
@@ -127,15 +115,8 @@ it("largeData", async (t) => {
                     }),
                     _jsx("span", {
                       children: cs.create(
-                        {
-                          start: { line: 45, column: 21 },
-                          end: { line: 45, column: 44 },
-                        },
-                        {
-                          fileHash: "2tquu92zqyse3",
-                          splices: {},
-                          captures: ["order$2tquu92zqyse3$0"],
-                        },
+                        "2tquu92zqyse3:45:21",
+                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
                         () => ({
                           type: "MemberExpression",
                           loc: {
@@ -185,15 +166,8 @@ it("largeData", async (t) => {
                     }),
                     _jsx("span", {
                       children: cs.create(
-                        {
-                          start: { line: 46, column: 21 },
-                          end: { line: 46, column: 44 },
-                        },
-                        {
-                          fileHash: "2tquu92zqyse3",
-                          splices: {},
-                          captures: ["order$2tquu92zqyse3$0"],
-                        },
+                        "2tquu92zqyse3:46:21",
+                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
                         () => ({
                           type: "MemberExpression",
                           loc: {
@@ -243,15 +217,8 @@ it("largeData", async (t) => {
                     }),
                     _jsx(For, {
                       each: cs.create(
-                        {
-                          start: { line: 47, column: 25 },
-                          end: { line: 47, column: 40 },
-                        },
-                        {
-                          fileHash: "2tquu92zqyse3",
-                          splices: {},
-                          captures: ["order$2tquu92zqyse3$0"],
-                        },
+                        "2tquu92zqyse3:47:25",
+                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
                         () => ({
                           type: "MemberExpression",
                           loc: {
@@ -282,22 +249,14 @@ it("largeData", async (t) => {
                         '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"AA8C4B,MAAA,EAAK,CAAC,KAAK,CAAA"}',
                       ),
                       children: cs.create(
+                        "2tquu92zqyse3:48:17",
                         {
-                          start: { line: 48, column: 17 },
-                          end: { line: 49, column: 69 },
-                        },
-                        {
-                          fileHash: "2tquu92zqyse3",
                           splices: {
                             $0splice0: {
                               value: _jsx("span", {
                                 children: cs.create(
+                                  "2tquu92zqyse3:49:28",
                                   {
-                                    start: { line: 49, column: 28 },
-                                    end: { line: 49, column: 58 },
-                                  },
-                                  {
-                                    fileHash: "2tquu92zqyse3",
                                     splices: {},
                                     captures: ["item$2tquu92zqyse3$1"],
                                   },
@@ -419,15 +378,8 @@ it("largeData", async (t) => {
                     }),
                     _jsx("span", {
                       children: cs.create(
-                        {
-                          start: { line: 51, column: 21 },
-                          end: { line: 51, column: 42 },
-                        },
-                        {
-                          fileHash: "2tquu92zqyse3",
-                          splices: {},
-                          captures: ["order$2tquu92zqyse3$0"],
-                        },
+                        "2tquu92zqyse3:51:21",
+                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
                         () => ({
                           type: "BinaryExpression",
                           loc: {

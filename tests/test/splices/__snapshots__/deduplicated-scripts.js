@@ -4,8 +4,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // The same `cs\`7\`` literal spliced twice is one client script, so it
 // collapses into a single function-table entry referenced twice.
 const leaf = cs.create(
-  { start: { line: 7, column: 13 }, end: { line: 7, column: 18 } },
-  { fileHash: "2g4us6n03x6jl", splices: {}, captures: [] },
+  "2g4us6n03x6jl:7:13",
+  { splices: {}, captures: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 7, column: 16 }, end: { line: 7, column: 17 } },
@@ -19,12 +19,8 @@ it("deduplicatedScripts", async (t) => {
     t,
     "deduplicatedScripts",
     cs.create(
-      { start: { line: 10, column: 47 }, end: { line: 10, column: 75 } },
-      {
-        fileHash: "2g4us6n03x6jl",
-        splices: { $leaf: { value: leaf, params: [] } },
-        captures: [],
-      },
+      "2g4us6n03x6jl:10:47",
+      { splices: { $leaf: { value: leaf, params: [] } }, captures: [] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 10, column: 51 }, end: { line: 10, column: 73 } },

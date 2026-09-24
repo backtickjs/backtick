@@ -8,8 +8,8 @@ it("forLoop", async (t) => {
     t,
     "forLoop",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
-      { fileHash: "1z8sn9rs7fbwb", splices: {}, captures: [] },
+      "1z8sn9rs7fbwb:11:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

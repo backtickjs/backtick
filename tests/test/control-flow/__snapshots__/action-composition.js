@@ -4,8 +4,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // An action — a block with no `return` — types `Client<void>` natively and
 // composes as a block running it in statement position.
 const effects = cs.create(
-  { start: { line: 8, column: 30 }, end: { line: 10, column: 2 } },
-  { fileHash: "3q2gz79xhvvfp", splices: {}, captures: [] },
+  "3q2gz79xhvvfp:8:30",
+  { splices: {}, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 8, column: 33 }, end: { line: 10, column: 1 } },
@@ -47,12 +47,8 @@ const effects = cs.create(
   '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"AAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 const composed = cs.create(
-  { start: { line: 12, column: 31 }, end: { line: 14, column: 2 } },
-  {
-    fileHash: "3q2gz79xhvvfp",
-    splices: { $effects: { value: effects, params: [] } },
-    captures: [],
-  },
+  "3q2gz79xhvvfp:12:31",
+  { splices: { $effects: { value: effects, params: [] } }, captures: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 34 }, end: { line: 14, column: 1 } },
@@ -79,12 +75,8 @@ it("actionComposition", async (t) => {
     t,
     "actionComposition",
     cs.create(
-      { start: { line: 20, column: 4 }, end: { line: 22, column: 6 } },
-      {
-        fileHash: "3q2gz79xhvvfp",
-        splices: { $composed: { value: composed, params: [] } },
-        captures: [],
-      },
+      "3q2gz79xhvvfp:20:4",
+      { splices: { $composed: { value: composed, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 20, column: 7 }, end: { line: 22, column: 5 } },

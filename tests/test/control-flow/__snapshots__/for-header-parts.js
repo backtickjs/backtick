@@ -8,8 +8,8 @@ it("forHeaderParts", async (t) => {
     t,
     "forHeaderParts",
     cs.create(
-      { start: { line: 11, column: 4 }, end: { line: 19, column: 6 } },
-      { fileHash: "2espgmzktnj99", splices: {}, captures: [] },
+      "2espgmzktnj99:11:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 19, column: 5 } },

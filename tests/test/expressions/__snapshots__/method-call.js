@@ -6,8 +6,8 @@ it("methodCall", async (t) => {
     t,
     "methodCall",
     cs.create(
-      { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
-      { fileHash: "163oncfaq7kkj", splices: {}, captures: [] },
+      "163oncfaq7kkj:9:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },

@@ -12,9 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and calling what that named — and this is the case it existed for.
 const HeldRow = async () => _jsx("span", { children: "x" });
 const heldElement = cs.create(
-  { start: { line: 15, column: 20 }, end: { line: 18, column: 2 } },
+  "224cj4eht1o03:15:20",
   {
-    fileHash: "224cj4eht1o03",
     splices: { $0splice0: { value: _jsx("div", {}), params: [] } },
     captures: [],
   },
@@ -84,9 +83,8 @@ const heldElement = cs.create(
   '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"AAcuB,MAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,IAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC,CAAA"}',
 );
 const heldComponent = cs.create(
-  { start: { line: 20, column: 22 }, end: { line: 23, column: 2 } },
+  "224cj4eht1o03:20:22",
   {
-    fileHash: "224cj4eht1o03",
     splices: { $0splice0: { value: _jsx(HeldRow, {}), params: [] } },
     captures: [],
   },
@@ -162,9 +160,8 @@ it("treeInVariable", async (t) => {
     _jsxs("div", {
       children: [
         cs.create(
-          { start: { line: 30, column: 7 }, end: { line: 30, column: 25 } },
+          "224cj4eht1o03:30:7",
           {
-            fileHash: "224cj4eht1o03",
             splices: { $heldElement: { value: heldElement, params: [] } },
             captures: [],
           },
@@ -189,9 +186,8 @@ it("treeInVariable", async (t) => {
           '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"AA6BU,MAAA,IAAY,EAAE,CAAA"}',
         ),
         cs.create(
-          { start: { line: 31, column: 7 }, end: { line: 31, column: 27 } },
+          "224cj4eht1o03:31:7",
           {
-            fileHash: "224cj4eht1o03",
             splices: { $heldComponent: { value: heldComponent, params: [] } },
             captures: [],
           },

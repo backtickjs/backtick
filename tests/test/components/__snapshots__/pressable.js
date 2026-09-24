@@ -12,12 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.create(
-    { start: { line: 15, column: 9 }, end: { line: 27, column: 4 } },
-    {
-      fileHash: "7huprcub5nk3",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "7huprcub5nk3:15:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 15, column: 12 }, end: { line: 27, column: 3 } },

@@ -22,9 +22,8 @@ describe("equals", () => {
   it("keeps a computed's readers from updating for an equal value", async () => {
     await render(
       cs.create(
-        { start: { line: 27, column: 6 }, end: { line: 42, column: 8 } },
+        "34j4m9r77iqx8:27:6",
         {
-          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -901,9 +900,8 @@ describe("equals", () => {
   it("keeps a state's readers from updating for an equal value", async () => {
     await render(
       cs.create(
-        { start: { line: 57, column: 6 }, end: { line: 74, column: 8 } },
+        "34j4m9r77iqx8:57:6",
         {
-          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -1644,9 +1642,8 @@ describe("equals", () => {
   it("is handed the previous and the next value", async () => {
     await render(
       cs.create(
-        { start: { line: 82, column: 6 }, end: { line: 90, column: 8 } },
+        "34j4m9r77iqx8:82:6",
         {
-          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -2079,9 +2076,8 @@ describe("equals", () => {
   it("is `===` when left out, so the same number doesn't update", async () => {
     await render(
       cs.create(
-        { start: { line: 99, column: 6 }, end: { line: 111, column: 8 } },
+        "34j4m9r77iqx8:99:6",
         {
-          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -2586,9 +2582,8 @@ describe("equals", () => {
   it("is `===` when left out, so a new object always updates", async () => {
     await render(
       cs.create(
-        { start: { line: 119, column: 6 }, end: { line: 133, column: 8 } },
+        "34j4m9r77iqx8:119:6",
         {
-          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },

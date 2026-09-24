@@ -13,9 +13,8 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs.create(
-    { start: { line: 16, column: 9 }, end: { line: 34, column: 4 } },
+    "3hac73x1hhg8m:16:9",
     {
-      fileHash: "3hac73x1hhg8m",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },

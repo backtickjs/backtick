@@ -26,9 +26,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // again. Without that, this case does not stop.
 async function Held({ again }) {
   return cs.create(
-    { start: { line: 31, column: 9 }, end: { line: 41, column: 4 } },
+    "zlju6cob2npz:31:9",
     {
-      fileHash: "zlju6cob2npz",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -450,9 +449,8 @@ async function Held({ again }) {
   );
 }
 const conditionalDrawing = cs.create(
-  { start: { line: 44, column: 27 }, end: { line: 60, column: 2 } },
+  "zlju6cob2npz:44:27",
   {
-    fileHash: "zlju6cob2npz",
     splices: {
       $state: { value: state, params: [] },
       $Held: { value: Held, params: [] },

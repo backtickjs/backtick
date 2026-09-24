@@ -21,8 +21,7 @@ export interface EntrySplice {
 }
 
 export interface ScriptEntry {
-  readonly loc: ES.SourceLocation;
-  readonly fileHash: string;
+  readonly id: string;
   readonly splices: readonly EntrySplice[];
   readonly captures: readonly string[];
   readonly body: ES.Expression | ES.BlockStatement;

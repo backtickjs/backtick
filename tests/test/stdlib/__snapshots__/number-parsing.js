@@ -7,8 +7,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // front rather than a value and nothing is read off it.
 async function Parsed() {
   return cs.create(
-    { start: { line: 9, column: 9 }, end: { line: 14, column: 4 } },
-    { fileHash: "28kni4l69t7vb", splices: {}, captures: [] },
+    "28kni4l69t7vb:9:9",
+    { splices: {}, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 9, column: 12 }, end: { line: 14, column: 3 } },

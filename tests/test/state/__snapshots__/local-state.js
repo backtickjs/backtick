@@ -11,12 +11,8 @@ import { drawn, fontSize } from "./dom.ts";
 // cell changes — and `write` is an effect, which only an action can perform.
 async function Stepper() {
   return cs.create(
-    { start: { line: 13, column: 9 }, end: { line: 25, column: 4 } },
-    {
-      fileHash: "2gygj47yf1nf5",
-      splices: { $state: { value: state, params: [] } },
-      captures: [],
-    },
+    "2gygj47yf1nf5:13:9",
+    { splices: { $state: { value: state, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 13, column: 12 }, end: { line: 25, column: 3 } },

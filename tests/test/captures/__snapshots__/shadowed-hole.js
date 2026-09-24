@@ -11,12 +11,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `$0` upward, and `$` starts no name a script can write.
 function wrapShadowed(fragment) {
   return cs.create(
-    { start: { line: 15, column: 9 }, end: { line: 21, column: 4 } },
-    {
-      fileHash: "1wiy7dknp0llv",
-      splices: { $fragment: { value: fragment, params: [] } },
-      captures: [],
-    },
+    "1wiy7dknp0llv:15:9",
+    { splices: { $fragment: { value: fragment, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 15, column: 12 }, end: { line: 21, column: 3 } },
@@ -138,18 +134,14 @@ it("shadowedHole", async (t) => {
     t,
     "shadowedHole",
     cs.create(
-      { start: { line: 28, column: 4 }, end: { line: 28, column: 57 } },
+      "1wiy7dknp0llv:28:4",
       {
-        fileHash: "1wiy7dknp0llv",
         splices: {
           $0splice0: {
             value: wrapShadowed(
               cs.create(
-                {
-                  start: { line: 28, column: 22 },
-                  end: { line: 28, column: 28 },
-                },
-                { fileHash: "1wiy7dknp0llv", splices: {}, captures: [] },
+                "1wiy7dknp0llv:28:22",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -167,11 +159,8 @@ it("shadowedHole", async (t) => {
           $0splice1: {
             value: wrapShadowed(
               cs.create(
-                {
-                  start: { line: 28, column: 48 },
-                  end: { line: 28, column: 54 },
-                },
-                { fileHash: "1wiy7dknp0llv", splices: {}, captures: [] },
+                "1wiy7dknp0llv:28:48",
+                { splices: {}, captures: [] },
                 () => ({
                   type: "Literal",
                   loc: {

@@ -3,9 +3,8 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function outerBase(inner) {
   return cs.create(
-    { start: { line: 7, column: 9 }, end: { line: 10, column: 4 } },
+    "8up2nb5o0inm:7:9",
     {
-      fileHash: "8up2nb5o0inm",
       splices: { $0splice0: { value: middleBase(inner), params: [] } },
       captures: [],
     },
@@ -81,12 +80,8 @@ function outerBase(inner) {
 }
 function middleBase(inner) {
   return cs.create(
-    { start: { line: 14, column: 9 }, end: { line: 17, column: 4 } },
-    {
-      fileHash: "8up2nb5o0inm",
-      splices: { $inner: { value: inner, params: [] } },
-      captures: [],
-    },
+    "8up2nb5o0inm:14:9",
+    { splices: { $inner: { value: inner, params: [] } }, captures: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 14, column: 12 }, end: { line: 17, column: 3 } },
@@ -172,22 +167,14 @@ it("deepShadowing", async (t) => {
     t,
     "deepShadowing",
     cs.create(
-      { start: { line: 28, column: 4 }, end: { line: 31, column: 6 } },
+      "8up2nb5o0inm:28:4",
       {
-        fileHash: "8up2nb5o0inm",
         splices: {
           $0splice0: {
             value: outerBase(
               cs.create(
-                {
-                  start: { line: 30, column: 25 },
-                  end: { line: 30, column: 33 },
-                },
-                {
-                  fileHash: "8up2nb5o0inm",
-                  splices: {},
-                  captures: ["base$8up2nb5o0inm$2"],
-                },
+                "8up2nb5o0inm:30:25",
+                { splices: {}, captures: ["base$8up2nb5o0inm$2"] },
                 () => ({
                   type: "Identifier",
                   loc: {

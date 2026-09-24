@@ -6,12 +6,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // together. Reading is a value, so it stands in a children position; writing is
 // an action, so it stands in a handler.
 const counter = cs.create(
-  { start: { line: 9, column: 16 }, end: { line: 17, column: 2 } },
-  {
-    fileHash: "2scghcewx41fn",
-    splices: { $state: { value: state, params: [] } },
-    captures: [],
-  },
+  "2scghcewx41fn:9:16",
+  { splices: { $state: { value: state, params: [] } }, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 9, column: 19 }, end: { line: 17, column: 1 } },
@@ -310,12 +306,8 @@ it("statefulObject", async (t) => {
     t,
     "statefulObject",
     cs.create(
-      { start: { line: 23, column: 4 }, end: { line: 34, column: 6 } },
-      {
-        fileHash: "2scghcewx41fn",
-        splices: { $counter: { value: counter, params: [] } },
-        captures: [],
-      },
+      "2scghcewx41fn:23:4",
+      { splices: { $counter: { value: counter, params: [] } }, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 23, column: 7 }, end: { line: 34, column: 5 } },

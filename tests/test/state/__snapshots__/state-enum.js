@@ -15,12 +15,8 @@ var Color;
   Color[(Color["Blue"] = 1)] = "Blue";
 })(Color || (Color = {}));
 const colorName = cs.create(
-  { start: { line: 18, column: 48 }, end: { line: 20, column: 2 } },
-  {
-    fileHash: "30a9wee2eidm4",
-    splices: { $0splice0: { value: Color.Blue, params: [] } },
-    captures: [],
-  },
+  "30a9wee2eidm4:18:48",
+  { splices: { $0splice0: { value: Color.Blue, params: [] } }, captures: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 18, column: 51 }, end: { line: 20, column: 1 } },
@@ -100,9 +96,8 @@ const colorName = cs.create(
 );
 async function Swatch() {
   return cs.create(
-    { start: { line: 23, column: 9 }, end: { line: 30, column: 4 } },
+    "30a9wee2eidm4:23:9",
     {
-      fileHash: "30a9wee2eidm4",
       splices: {
         $state: { value: state, params: [] },
         $0splice0: { value: Color.Red, params: [] },

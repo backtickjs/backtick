@@ -7,8 +7,8 @@ it("binaryOperators", async (t) => {
     t,
     "binaryOperators",
     cs.create(
-      { start: { line: 10, column: 4 }, end: { line: 25, column: 6 } },
-      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
+      "3g7ol1xnrqdpp:10:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 25, column: 5 } },
@@ -386,8 +386,8 @@ it("unaryOperators", async (t) => {
     t,
     "unaryOperators",
     cs.create(
-      { start: { line: 33, column: 4 }, end: { line: 38, column: 6 } },
-      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
+      "3g7ol1xnrqdpp:33:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 33, column: 7 }, end: { line: 38, column: 5 } },
@@ -707,8 +707,8 @@ it("assignmentOperators", async (t) => {
     t,
     "assignmentOperators",
     cs.create(
-      { start: { line: 46, column: 4 }, end: { line: 62, column: 6 } },
-      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
+      "3g7ol1xnrqdpp:46:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 46, column: 7 }, end: { line: 62, column: 5 } },
@@ -1234,8 +1234,8 @@ it("assignmentTargets", async (t) => {
     t,
     "assignmentTargets",
     cs.create(
-      { start: { line: 71, column: 4 }, end: { line: 80, column: 6 } },
-      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
+      "3g7ol1xnrqdpp:71:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 71, column: 7 }, end: { line: 80, column: 5 } },
@@ -1648,8 +1648,8 @@ it("commaOperator", async (t) => {
     t,
     "commaOperator",
     cs.create(
-      { start: { line: 89, column: 4 }, end: { line: 93, column: 6 } },
-      { fileHash: "3g7ol1xnrqdpp", splices: {}, captures: [] },
+      "3g7ol1xnrqdpp:89:4",
+      { splices: {}, captures: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 89, column: 7 }, end: { line: 93, column: 5 } },

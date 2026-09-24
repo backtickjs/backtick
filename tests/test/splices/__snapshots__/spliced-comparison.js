@@ -11,9 +11,8 @@ it("splicedComparison", async (t) => {
     t,
     "splicedComparison",
     cs.create(
-      { start: { line: 15, column: 4 }, end: { line: 20, column: 7 } },
+      "3jdm2y7f9tpf:15:4",
       {
-        fileHash: "3jdm2y7f9tpf",
         splices: {
           $low: { value: low, params: [] },
           $high: { value: high, params: [] },
