@@ -319,14 +319,10 @@ function props(
     !(children.type === "Literal" && children.value === null)
   ) {
     const key = identifier("children");
+    const drawn =
+      children.type === "ArrayExpression" ? child(children) : children;
     members.push(
-      children.type === "Literal"
-        ? property(key, children)
-        : getter(
-            key,
-            children.type === "ArrayExpression" ? child(children) : children,
-            false,
-          ),
+      isFixed(drawn) ? property(key, drawn) : getter(key, drawn, false),
     );
   }
   return { type: "ObjectExpression", properties: members };

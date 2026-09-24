@@ -14,14 +14,12 @@
       () =>
         jsx($1(), {
           each: () => ids.get(),
-          get children() {
-            return () => (id) =>
-              jsx("span", {
-                get children() {
-                  return "row " + id;
-                },
-              });
-          },
+          children: () => (id) =>
+            jsx("span", {
+              get children() {
+                return "row " + id;
+              },
+            }),
         }),
     ];
   };

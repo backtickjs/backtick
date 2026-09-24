@@ -8,18 +8,16 @@
         },
       });
     return jsx("div", {
-      get children() {
-        return [
-          () => $1(count, Badge),
-          () => $2(count, Badge),
-          () => $3(count, Badge),
-          () => $4(count, Badge),
-          jsx("button", {
-            onclick: () => count.set(count.get() + 1),
-            children: "more",
-          }),
-        ];
-      },
+      children: [
+        () => $1(count, Badge),
+        () => $2(count, Badge),
+        () => $3(count, Badge),
+        () => $4(count, Badge),
+        jsx("button", {
+          onclick: () => count.set(count.get() + 1),
+          children: "more",
+        }),
+      ],
     });
   };
   const f2 = ($0, $1) =>
@@ -47,14 +45,12 @@
   const f6 = ($0, $1, $2) =>
     jsx($0($1, $2), {
       each: () => [1, 2],
-      get children() {
-        return () => (m) =>
-          jsx($1, {
-            get n() {
-              return m * $2.get();
-            },
-          });
-      },
+      children: () => (m) =>
+        jsx($1, {
+          get n() {
+            return m * $2.get();
+          },
+        }),
     });
   return f1(
     () => state,

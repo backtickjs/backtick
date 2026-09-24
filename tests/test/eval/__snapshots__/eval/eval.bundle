@@ -1,20 +1,18 @@
 (($d) => {
   const f1 = ($0, $1) =>
     jsx("div", {
-      get children() {
-        return [
-          () => (0, eval)($0()),
-          jsx("b", {
-            get children() {
-              return (0, eval)($1()) + 1;
-            },
-          }),
-        ];
-      },
+      children: [
+        () => (0, eval)($0()),
+        jsx("b", {
+          get children() {
+            return (0, eval)($1()) + 1;
+          },
+        }),
+      ],
     });
   return f1(
     () =>
-      '($d => {\n  const f1 = $0 => jsx($0(), {\n    each: () => [1, 2, 3],\n    get children() {\n      return () => n => jsx("span", {\n        get children() {\n          return "item " + n;\n        }\n      });\n    }\n  });\n  return jsx(() => f1(() => $0 => jsx("for", {\n    get each() {\n      return $0.each();\n    },\n    get children() {\n      return $0.children();\n    }\n  })), {});\n})([])',
+      '($d => {\n  const f1 = $0 => jsx($0(), {\n    each: () => [1, 2, 3],\n    children: () => n => jsx("span", {\n      get children() {\n        return "item " + n;\n      }\n    })\n  });\n  return jsx(() => f1(() => $0 => jsx("for", {\n    get each() {\n      return $0.each();\n    },\n    get children() {\n      return $0.children();\n    }\n  })), {});\n})([])',
     () => "($d => {\n  return 41;\n})([])",
   );
 })([]);

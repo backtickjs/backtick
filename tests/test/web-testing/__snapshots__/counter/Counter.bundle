@@ -2,19 +2,17 @@
   const f1 = ($0) => {
     const count = $0()(0);
     return jsx("div", {
-      get children() {
-        return [
-          jsx("button", {
-            onclick: () => count.set(count.get() + 1),
-            children: "Add",
-          }),
-          jsx("p", {
-            get children() {
-              return "Count: " + count.get();
-            },
-          }),
-        ];
-      },
+      children: [
+        jsx("button", {
+          onclick: () => count.set(count.get() + 1),
+          children: "Add",
+        }),
+        jsx("p", {
+          get children() {
+            return "Count: " + count.get();
+          },
+        }),
+      ],
     });
   };
   return jsx(() => f1(() => state), {});

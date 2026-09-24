@@ -2,32 +2,28 @@
   const f1 = ($0, $1) => {
     const selected = $0()(0);
     return jsx("div", {
-      get children() {
-        return [
-          jsx("span", {
-            onclick: () => selected.set(1),
-            children: "select",
-          }),
-          jsx("div", {
-            get children() {
-              return jsx($1(), {
-                each: () => [0, 1, 2],
-                get children() {
-                  return () => (id) =>
-                    jsx("a", {
-                      get href() {
-                        return selected.get() === id ? "#open" : "#closed";
-                      },
-                      get children() {
-                        return "row " + id;
-                      },
-                    });
-                },
-              });
-            },
-          }),
-        ];
-      },
+      children: [
+        jsx("span", {
+          onclick: () => selected.set(1),
+          children: "select",
+        }),
+        jsx("div", {
+          get children() {
+            return jsx($1(), {
+              each: () => [0, 1, 2],
+              children: () => (id) =>
+                jsx("a", {
+                  get href() {
+                    return selected.get() === id ? "#open" : "#closed";
+                  },
+                  get children() {
+                    return "row " + id;
+                  },
+                }),
+            });
+          },
+        }),
+      ],
     });
   };
   return jsx(

@@ -12,11 +12,9 @@
     });
   };
   return jsx("div", {
-    get children() {
-      return [
-        () => jsx(() => f1(() => state), {}),
-        () => jsx(() => f1(() => state), {}),
-      ];
-    },
+    children: [
+      () => jsx(() => f1(() => state), {}),
+      () => jsx(() => f1(() => state), {}),
+    ],
   });
 })([]);

@@ -10,18 +10,16 @@
     return tree;
   };
   return jsx("div", {
-    get children() {
-      return [
-        () => f1(() => f2(() => jsx("div", {}))),
-        () =>
-          f3(() =>
-            f4(() =>
-              jsx("span", {
-                children: "x",
-              }),
-            ),
+    children: [
+      () => f1(() => f2(() => jsx("div", {}))),
+      () =>
+        f3(() =>
+          f4(() =>
+            jsx("span", {
+              children: "x",
+            }),
           ),
-      ];
-    },
+        ),
+    ],
   });
 })([]);

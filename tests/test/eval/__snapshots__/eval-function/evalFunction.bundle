@@ -1,19 +1,17 @@
 (($d) => {
   const f1 = ($0, $1) =>
     jsx("div", {
-      get children() {
-        return [
-          jsx("span", {
-            get children() {
-              return (0, eval)($0())("ada");
-            },
+      children: [
+        jsx("span", {
+          get children() {
+            return (0, eval)($0())("ada");
+          },
+        }),
+        () =>
+          (0, eval)($1())({
+            count: 3,
           }),
-          () =>
-            (0, eval)($1())({
-              count: 3,
-            }),
-        ];
-      },
+      ],
     });
   return f1(
     () =>

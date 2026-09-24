@@ -5,9 +5,7 @@
       children: "a sentence across lines",
     }),
     jsx("span", {
-      get children() {
-        return [() => name, " ", () => name];
-      },
+      children: [() => name, " ", () => name],
     }),
   ];
   return jsx("div", {

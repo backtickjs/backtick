@@ -2,18 +2,16 @@
   const f1 = ($0, $1) => {
     const size = $0()(16);
     return jsx("div", {
-      get children() {
-        return [
-          () =>
-            jsx($1(), {
-              size: () => size,
-            }),
-          () =>
-            jsx($1(), {
-              size: () => size,
-            }),
-        ];
-      },
+      children: [
+        () =>
+          jsx($1(), {
+            size: () => size,
+          }),
+        () =>
+          jsx($1(), {
+            size: () => size,
+          }),
+      ],
     });
   };
   const f2 = ($0) => "font-size: " + $0().get() + "px";

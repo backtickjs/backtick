@@ -9,148 +9,144 @@
   const f8 = ($0) => $0.sku + " x" + $0.qty;
   const f9 = ($0) => "$" + $0.total;
   return jsx("div", {
-    get children() {
-      return jsx("for", {
-        get each() {
-          return f1(() => [
-            {
-              id: "ord-1000",
-              customer: {
-                name: "Customer 0",
-                city: "Montréal",
-              },
-              items: [
-                {
-                  sku: "SKU-0-A",
-                  qty: 1,
-                },
-                {
-                  sku: "SKU-0-B",
-                  qty: 1,
-                },
-              ],
-              total: 45.23,
+    children: jsx("for", {
+      get each() {
+        return f1(() => [
+          {
+            id: "ord-1000",
+            customer: {
+              name: "Customer 0",
+              city: "Montréal",
             },
-            {
-              id: "ord-1001",
-              customer: {
-                name: "Customer 1",
-                city: "Toronto",
+            items: [
+              {
+                sku: "SKU-0-A",
+                qty: 1,
               },
-              items: [
-                {
-                  sku: "SKU-1-A",
-                  qty: 2,
-                },
-                {
-                  sku: "SKU-1-B",
-                  qty: 1,
-                },
-              ],
-              total: 46.23,
+              {
+                sku: "SKU-0-B",
+                qty: 1,
+              },
+            ],
+            total: 45.23,
+          },
+          {
+            id: "ord-1001",
+            customer: {
+              name: "Customer 1",
+              city: "Toronto",
             },
-            {
-              id: "ord-1002",
-              customer: {
-                name: "Customer 2",
-                city: "Montréal",
+            items: [
+              {
+                sku: "SKU-1-A",
+                qty: 2,
               },
-              items: [
-                {
-                  sku: "SKU-2-A",
-                  qty: 3,
-                },
-                {
-                  sku: "SKU-2-B",
-                  qty: 1,
-                },
-              ],
-              total: 47.23,
+              {
+                sku: "SKU-1-B",
+                qty: 1,
+              },
+            ],
+            total: 46.23,
+          },
+          {
+            id: "ord-1002",
+            customer: {
+              name: "Customer 2",
+              city: "Montréal",
             },
-            {
-              id: "ord-1003",
-              customer: {
-                name: "Customer 3",
-                city: "Toronto",
+            items: [
+              {
+                sku: "SKU-2-A",
+                qty: 3,
               },
-              items: [
-                {
-                  sku: "SKU-3-A",
-                  qty: 1,
-                },
-                {
-                  sku: "SKU-3-B",
-                  qty: 1,
-                },
-              ],
-              total: 48.23,
+              {
+                sku: "SKU-2-B",
+                qty: 1,
+              },
+            ],
+            total: 47.23,
+          },
+          {
+            id: "ord-1003",
+            customer: {
+              name: "Customer 3",
+              city: "Toronto",
             },
-            {
-              id: "ord-1004",
-              customer: {
-                name: "Customer 4",
-                city: "Montréal",
+            items: [
+              {
+                sku: "SKU-3-A",
+                qty: 1,
               },
-              items: [
-                {
-                  sku: "SKU-4-A",
-                  qty: 2,
-                },
-                {
-                  sku: "SKU-4-B",
-                  qty: 1,
-                },
-              ],
-              total: 49.23,
+              {
+                sku: "SKU-3-B",
+                qty: 1,
+              },
+            ],
+            total: 48.23,
+          },
+          {
+            id: "ord-1004",
+            customer: {
+              name: "Customer 4",
+              city: "Montréal",
             },
-          ]);
-        },
-        get children() {
-          return f2((order) =>
-            jsx("div", {
-              get children() {
-                return [
-                  jsx("img", {
-                    get src() {
-                      return f3(order);
-                    },
-                    alt: "",
-                  }),
-                  jsx("span", {
-                    get children() {
-                      return f4(order);
-                    },
-                  }),
-                  jsx("span", {
-                    get children() {
-                      return f5(order);
-                    },
-                  }),
-                  jsx("for", {
-                    get each() {
-                      return f6(order);
-                    },
-                    get children() {
-                      return f7((item) =>
-                        jsx("span", {
-                          get children() {
-                            return f8(item);
-                          },
-                        }),
-                      );
-                    },
-                  }),
-                  jsx("span", {
-                    get children() {
-                      return f9(order);
-                    },
-                  }),
-                ];
+            items: [
+              {
+                sku: "SKU-4-A",
+                qty: 2,
               },
-            }),
-          );
-        },
-      });
-    },
+              {
+                sku: "SKU-4-B",
+                qty: 1,
+              },
+            ],
+            total: 49.23,
+          },
+        ]);
+      },
+      get children() {
+        return f2((order) =>
+          jsx("div", {
+            children: [
+              jsx("img", {
+                get src() {
+                  return f3(order);
+                },
+                alt: "",
+              }),
+              jsx("span", {
+                get children() {
+                  return f4(order);
+                },
+              }),
+              jsx("span", {
+                get children() {
+                  return f5(order);
+                },
+              }),
+              jsx("for", {
+                get each() {
+                  return f6(order);
+                },
+                get children() {
+                  return f7((item) =>
+                    jsx("span", {
+                      get children() {
+                        return f8(item);
+                      },
+                    }),
+                  );
+                },
+              }),
+              jsx("span", {
+                get children() {
+                  return f9(order);
+                },
+              }),
+            ],
+          }),
+        );
+      },
+    }),
   });
 })([]);

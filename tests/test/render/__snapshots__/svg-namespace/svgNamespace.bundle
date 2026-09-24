@@ -7,55 +7,45 @@
         },
         cy: "5",
         r: "2",
-        get children() {
-          return jsx("title", {
-            get children() {
-              return "dot " + props.x;
-            },
-          });
-        },
+        children: jsx("title", {
+          get children() {
+            return "dot " + props.x;
+          },
+        }),
       });
     return jsx("div", {
-      get children() {
-        return [
-          jsx("a", {
-            href: "/shapes",
-            children: "shapes",
-          }),
-          jsx("svg", {
-            viewBox: "0 0 30 10",
-            width: "120",
-            get children() {
-              return [
-                () => jsx($0(), {}),
-                () =>
-                  jsx($1(), {
-                    each: () => [10, 20],
-                    get children() {
-                      return () => (x) =>
-                        jsx(Dot, {
-                          get x() {
-                            return x;
-                          },
-                        });
+      children: [
+        jsx("a", {
+          href: "/shapes",
+          children: "shapes",
+        }),
+        jsx("svg", {
+          viewBox: "0 0 30 10",
+          width: "120",
+          children: [
+            () => jsx($0(), {}),
+            () =>
+              jsx($1(), {
+                each: () => [10, 20],
+                children: () => (x) =>
+                  jsx(Dot, {
+                    get x() {
+                      return x;
                     },
                   }),
-                jsx("foreignObject", {
-                  x: "0",
-                  y: "0",
-                  width: "10",
-                  height: "10",
-                  get children() {
-                    return jsx("p", {
-                      children: "html again",
-                    });
-                  },
-                }),
-              ];
-            },
-          }),
-        ];
-      },
+              }),
+            jsx("foreignObject", {
+              x: "0",
+              y: "0",
+              width: "10",
+              height: "10",
+              children: jsx("p", {
+                children: "html again",
+              }),
+            }),
+          ],
+        }),
+      ],
     });
   };
   const f2 = () =>

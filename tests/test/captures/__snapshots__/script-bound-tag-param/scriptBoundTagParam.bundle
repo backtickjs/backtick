@@ -2,9 +2,7 @@
   const f1 = ($0, $1) => {
     const twice = (Row) =>
       jsx("ul", {
-        get children() {
-          return [() => $0(Row), () => $1(Row)];
-        },
+        children: [() => $0(Row), () => $1(Row)],
       });
     return twice((p) =>
       jsx("li", {

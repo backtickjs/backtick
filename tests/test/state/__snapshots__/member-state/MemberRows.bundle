@@ -15,25 +15,21 @@
     };
     const held = $0()(build(1));
     return jsx("div", {
-      get children() {
-        return jsx("ul", {
-          class: "rows",
-          get children() {
-            return jsx($1(), {
-              each: () => held.get(),
-              get children() {
-                return () => (row) =>
-                  jsx("li", {
-                    onclick: () => row.label.set("pressed"),
-                    get children() {
-                      return row.label.get();
-                    },
-                  });
-              },
-            });
-          },
-        });
-      },
+      children: jsx("ul", {
+        class: "rows",
+        get children() {
+          return jsx($1(), {
+            each: () => held.get(),
+            children: () => (row) =>
+              jsx("li", {
+                onclick: () => row.label.set("pressed"),
+                get children() {
+                  return row.label.get();
+                },
+              }),
+          });
+        },
+      }),
     });
   };
   return jsx(

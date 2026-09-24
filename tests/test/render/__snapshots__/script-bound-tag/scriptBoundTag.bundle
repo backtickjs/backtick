@@ -3,20 +3,18 @@
     const count = $0()(0);
     const Badge = (0, eval)($1());
     return jsx("div", {
-      get children() {
-        return [
-          () =>
-            jsx(Badge, {
-              get count() {
-                return count.get();
-              },
-            }),
-          jsx("button", {
-            onclick: () => count.set(count.get() + 1),
-            children: "more",
+      children: [
+        () =>
+          jsx(Badge, {
+            get count() {
+              return count.get();
+            },
           }),
-        ];
-      },
+        jsx("button", {
+          onclick: () => count.set(count.get() + 1),
+          children: "more",
+        }),
+      ],
     });
   };
   return f1(

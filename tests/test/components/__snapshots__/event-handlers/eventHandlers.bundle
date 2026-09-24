@@ -6,23 +6,21 @@
         event.preventDefault();
         said.set(event.type + " " + event.cancelable);
       },
-      get children() {
-        return [
-          jsx("textarea", {
-            oninput: (event) => said.set(event.currentTarget.value),
-          }),
-          jsx("input", {
-            oninput: (event) => said.set(event.currentTarget.value),
-          }),
-          jsx("button", {
-            onclick: (event) =>
-              said.set(event.clientX + " " + event.currentTarget.tagName),
-            get children() {
-              return said.get();
-            },
-          }),
-        ];
-      },
+      children: [
+        jsx("textarea", {
+          oninput: (event) => said.set(event.currentTarget.value),
+        }),
+        jsx("input", {
+          oninput: (event) => said.set(event.currentTarget.value),
+        }),
+        jsx("button", {
+          onclick: (event) =>
+            said.set(event.clientX + " " + event.currentTarget.tagName),
+          get children() {
+            return said.get();
+          },
+        }),
+      ],
     });
   };
   return f1(() => state);

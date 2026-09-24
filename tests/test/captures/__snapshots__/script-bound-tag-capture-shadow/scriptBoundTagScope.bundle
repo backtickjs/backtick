@@ -2,36 +2,32 @@
   const f1 = ($0) => {
     const twice = (Card) =>
       jsx("div", {
-        get children() {
-          return [
-            () =>
-              jsx(Card, {
-                n: 1,
-              }),
-            () =>
-              jsx(Card, {
-                n: 2,
-              }),
-          ];
-        },
-      });
-    return jsx("section", {
-      get children() {
-        return [
+        children: [
           () =>
-            jsx($0(), {
-              title: () => "host",
+            jsx(Card, {
+              n: 1,
             }),
           () =>
-            twice((props) =>
-              jsx("i", {
-                get children() {
-                  return "row " + props.n;
-                },
-              }),
-            ),
-        ];
-      },
+            jsx(Card, {
+              n: 2,
+            }),
+        ],
+      });
+    return jsx("section", {
+      children: [
+        () =>
+          jsx($0(), {
+            title: () => "host",
+          }),
+        () =>
+          twice((props) =>
+            jsx("i", {
+              get children() {
+                return "row " + props.n;
+              },
+            }),
+          ),
+      ],
     });
   };
   return f1(

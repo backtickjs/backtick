@@ -8,32 +8,30 @@
         get style() {
           return css;
         },
-        get children() {
-          return [
-            jsx("span", {
-              get style() {
-                return css;
-              },
-              onclick: () => label.set("pressed"),
-              get children() {
-                return label.get();
-              },
-            }),
-            jsx("span", {
-              style: "font-size: 8px",
-              children: "fixed",
-            }),
-            jsx("span", {
-              get style() {
-                return css;
-              },
-              get onclick() {
-                return press;
-              },
-              children: "held",
-            }),
-          ];
-        },
+        children: [
+          jsx("span", {
+            get style() {
+              return css;
+            },
+            onclick: () => label.set("pressed"),
+            get children() {
+              return label.get();
+            },
+          }),
+          jsx("span", {
+            style: "font-size: 8px",
+            children: "fixed",
+          }),
+          jsx("span", {
+            get style() {
+              return css;
+            },
+            get onclick() {
+              return press;
+            },
+            children: "held",
+          }),
+        ],
       });
     };
     return jsx("div", {

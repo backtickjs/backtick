@@ -2,19 +2,17 @@
   const f1 = () => () => {};
   return jsx("div", {
     style: "padding: 8px",
-    get children() {
-      return [
-        jsx("span", {
-          style: "font-size: 12px",
-          get onclick() {
-            return f1();
-          },
-          children: "hi",
-        }),
-        jsx("img", {
-          src: "https://example.com/a.png",
-        }),
-      ];
-    },
+    children: [
+      jsx("span", {
+        style: "font-size: 12px",
+        get onclick() {
+          return f1();
+        },
+        children: "hi",
+      }),
+      jsx("img", {
+        src: "https://example.com/a.png",
+      }),
+    ],
   });
 })([]);

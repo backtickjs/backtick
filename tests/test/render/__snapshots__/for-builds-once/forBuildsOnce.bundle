@@ -2,22 +2,20 @@
   const f1 = ($0, $1) => {
     const asked = $0()(0);
     return jsx("div", {
-      get children() {
-        return [
-          jsx("span", {
-            get children() {
-              return "asked " + asked.get();
+      children: [
+        jsx("span", {
+          get children() {
+            return "asked " + asked.get();
+          },
+        }),
+        () =>
+          jsx($1(), {
+            more: () => () => {
+              asked.set(asked.get() + 1);
+              return asked.get() < 5;
             },
           }),
-          () =>
-            jsx($1(), {
-              more: () => () => {
-                asked.set(asked.get() + 1);
-                return asked.get() < 5;
-              },
-            }),
-        ];
-      },
+      ],
     });
   };
   const f2 = ($0, $1, $2, $3, $4) => {
@@ -29,14 +27,12 @@
     }, 0);
     return jsx($4(), {
       each: () => items.get(),
-      get children() {
-        return () => (item) =>
-          jsx("em", {
-            get children() {
-              return item;
-            },
-          });
-      },
+      children: () => (item) =>
+        jsx("em", {
+          get children() {
+            return item;
+          },
+        }),
     });
   };
   return f1(

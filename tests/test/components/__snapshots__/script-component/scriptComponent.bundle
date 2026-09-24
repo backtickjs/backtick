@@ -1,15 +1,13 @@
 (($d) => {
   const f1 = ($0, $1) => {
     return jsx("div", {
-      get children() {
-        return [
-          () =>
-            jsx($0(), {
-              title: () => "totals",
-            }),
-          () => jsx($1(), {}),
-        ];
-      },
+      children: [
+        () =>
+          jsx($0(), {
+            title: () => "totals",
+          }),
+        () => jsx($1(), {}),
+      ],
     });
   };
   return f1(

@@ -1,16 +1,14 @@
 (($d) => {
   const f1 = ($0, $1, $2) =>
     jsx("div", {
-      get children() {
-        return [
-          () =>
-            jsx($2(), {
-              title: () => "host",
-            }),
-          () => $0(),
-          () => $1(),
-        ];
-      },
+      children: [
+        () =>
+          jsx($2(), {
+            title: () => "host",
+          }),
+        () => $0(),
+        () => $1(),
+      ],
     });
   const f2 = ($0, $1) => {
     const Card = (props) =>

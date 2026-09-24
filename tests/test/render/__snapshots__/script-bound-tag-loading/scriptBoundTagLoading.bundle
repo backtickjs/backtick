@@ -7,28 +7,26 @@
       return held === null ? null : (0, eval)(held)(props);
     };
     return jsx("div", {
-      get children() {
-        return [
-          () =>
-            drawn.get() === null
-              ? jsx("i", {
-                  children: "loading",
-                })
-              : jsx(Badge, {
-                  get count() {
-                    return count.get();
-                  },
-                }),
-          jsx("button", {
-            onclick: () => drawn.set($1()),
-            children: "load",
-          }),
-          jsx("button", {
-            onclick: () => count.set(count.get() + 1),
-            children: "more",
-          }),
-        ];
-      },
+      children: [
+        () =>
+          drawn.get() === null
+            ? jsx("i", {
+                children: "loading",
+              })
+            : jsx(Badge, {
+                get count() {
+                  return count.get();
+                },
+              }),
+        jsx("button", {
+          onclick: () => drawn.set($1()),
+          children: "load",
+        }),
+        jsx("button", {
+          onclick: () => count.set(count.get() + 1),
+          children: "more",
+        }),
+      ],
     });
   };
   return f1(

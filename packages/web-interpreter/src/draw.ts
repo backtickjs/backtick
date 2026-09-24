@@ -119,7 +119,9 @@ function drawElement(
     const insert = () =>
       renderer.insert(
         node,
-        createMemo(() => childrenOf(props["children"])),
+        isGetter(props, "children")
+          ? () => childrenOf(props["children"])
+          : childrenOf(props["children"]),
       );
     if (innerNamespace === outerNamespace) {
       insert();

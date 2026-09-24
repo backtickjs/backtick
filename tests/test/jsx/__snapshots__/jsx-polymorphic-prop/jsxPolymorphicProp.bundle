@@ -1,19 +1,17 @@
 (($d) => {
   const f1 = ($0) => () => $0();
   return jsx("div", {
-    get children() {
-      return [
-        jsx("span", {
-          get onclick() {
-            return f1(() => 1);
-          },
-        }),
-        jsx("span", {
-          get onclick() {
-            return f1(() => 2);
-          },
-        }),
-      ];
-    },
+    children: [
+      jsx("span", {
+        get onclick() {
+          return f1(() => 1);
+        },
+      }),
+      jsx("span", {
+        get onclick() {
+          return f1(() => 2);
+        },
+      }),
+    ],
   });
 })([]);

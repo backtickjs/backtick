@@ -1,17 +1,15 @@
 (($d) => {
   return jsx("div", {
-    get children() {
-      return [
-        "counted",
-        [
-          jsx("em", {
-            children: "one",
-          }),
-          jsx("em", {
-            children: "two",
-          }),
-        ],
-      ];
-    },
+    children: [
+      "counted",
+      [
+        jsx("em", {
+          children: "one",
+        }),
+        jsx("em", {
+          children: "two",
+        }),
+      ],
+    ],
   });
 })([]);

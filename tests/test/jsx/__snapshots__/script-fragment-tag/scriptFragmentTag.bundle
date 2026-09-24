@@ -1,21 +1,19 @@
 (($d) => {
   const f1 = () => {
     return jsx("div", {
-      get children() {
-        return [
-          [
-            jsx("span", {
-              children: "a",
-            }),
-            jsx("span", {
-              children: "b",
-            }),
-          ],
-          jsx("em", {
-            children: "c",
+      children: [
+        [
+          jsx("span", {
+            children: "a",
           }),
-        ];
-      },
+          jsx("span", {
+            children: "b",
+          }),
+        ],
+        jsx("em", {
+          children: "c",
+        }),
+      ],
     });
   };
   return f1();

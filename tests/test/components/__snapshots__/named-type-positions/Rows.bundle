@@ -8,33 +8,29 @@
       return row.label;
     };
     return jsx("div", {
-      get children() {
-        return [
-          jsx("span", {
-            onclick: () =>
-              add({
-                id: 1,
-                label: "one",
-              }),
-            children: "add",
-          }),
-          jsx("div", {
-            get children() {
-              return jsx($1(), {
-                each: () => rows.get(),
-                get children() {
-                  return () => (row) =>
-                    jsx("span", {
-                      get children() {
-                        return label(row);
-                      },
-                    });
-                },
-              });
-            },
-          }),
-        ];
-      },
+      children: [
+        jsx("span", {
+          onclick: () =>
+            add({
+              id: 1,
+              label: "one",
+            }),
+          children: "add",
+        }),
+        jsx("div", {
+          get children() {
+            return jsx($1(), {
+              each: () => rows.get(),
+              children: () => (row) =>
+                jsx("span", {
+                  get children() {
+                    return label(row);
+                  },
+                }),
+            });
+          },
+        }),
+      ],
     });
   };
   return jsx(

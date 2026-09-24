@@ -1,17 +1,15 @@
 (($d) => {
   return jsx("div", {
-    get children() {
-      return [
-        jsx("span", {
-          children: "alpha",
-        }),
-        jsx("span", {
-          children: "beta",
-        }),
-        jsx("span", {
-          children: "gamma",
-        }),
-      ];
-    },
+    children: [
+      jsx("span", {
+        children: "alpha",
+      }),
+      jsx("span", {
+        children: "beta",
+      }),
+      jsx("span", {
+        children: "gamma",
+      }),
+    ],
   });
 })([]);

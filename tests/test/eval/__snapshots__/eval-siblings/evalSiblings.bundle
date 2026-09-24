@@ -1,17 +1,15 @@
 (($d) => {
   const f1 = ($0) =>
     jsx("div", {
-      get children() {
-        return [
-          jsx("span", {
-            children: "before",
-          }),
-          () => (0, eval)($0()),
-          jsx("span", {
-            children: "after",
-          }),
-        ];
-      },
+      children: [
+        jsx("span", {
+          children: "before",
+        }),
+        () => (0, eval)($0()),
+        jsx("span", {
+          children: "after",
+        }),
+      ],
     });
   return f1(
     () =>

@@ -3,21 +3,19 @@
   const f2 = ($0) => (row) => $0(row);
   const f3 = ($0) => "row " + $0;
   return jsx("div", {
-    get children() {
-      return jsx("for", {
-        get each() {
-          return f1(() => [1, 2, 3]);
-        },
-        get children() {
-          return f2((row) =>
-            jsx("span", {
-              get children() {
-                return f3(row);
-              },
-            }),
-          );
-        },
-      });
-    },
+    children: jsx("for", {
+      get each() {
+        return f1(() => [1, 2, 3]);
+      },
+      get children() {
+        return f2((row) =>
+          jsx("span", {
+            get children() {
+              return f3(row);
+            },
+          }),
+        );
+      },
+    }),
   });
 })([]);

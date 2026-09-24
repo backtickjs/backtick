@@ -2,24 +2,22 @@
   const f1 = ($0, $1) => {
     const selected = $0()(0);
     return jsx("div", {
-      get children() {
-        return [
-          jsx("span", {
-            onclick: () => selected.set(1),
-            children: "select",
+      children: [
+        jsx("span", {
+          onclick: () => selected.set(1),
+          children: "select",
+        }),
+        () =>
+          jsx($1(), {
+            id: () => 0,
+            selected: () => selected,
           }),
-          () =>
-            jsx($1(), {
-              id: () => 0,
-              selected: () => selected,
-            }),
-          () =>
-            jsx($1(), {
-              id: () => 1,
-              selected: () => selected,
-            }),
-        ];
-      },
+        () =>
+          jsx($1(), {
+            id: () => 1,
+            selected: () => selected,
+          }),
+      ],
     });
   };
   const f2 = ($0, $1) => "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";
@@ -31,33 +29,31 @@
         () => state,
         () => ($0) =>
           jsx("div", {
-            get children() {
-              return [
-                jsx("span", {
-                  get style() {
-                    return f2(
-                      () => $0.selected(),
-                      () => $0.id(),
-                    );
-                  },
-                  get children() {
-                    return f3(
-                      () => $0.id(),
-                      () => $0.selected(),
-                    );
-                  },
-                }),
-                () =>
-                  f4(
+            children: [
+              jsx("span", {
+                get style() {
+                  return f2(
                     () => $0.selected(),
                     () => $0.id(),
-                    () =>
-                      jsx("span", {
-                        children: "marker",
-                      }),
-                  ),
-              ];
-            },
+                  );
+                },
+                get children() {
+                  return f3(
+                    () => $0.id(),
+                    () => $0.selected(),
+                  );
+                },
+              }),
+              () =>
+                f4(
+                  () => $0.selected(),
+                  () => $0.id(),
+                  () =>
+                    jsx("span", {
+                      children: "marker",
+                    }),
+                ),
+            ],
           }),
       ),
     {},
