@@ -101,9 +101,9 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
 - `render(element, options?)`: draws an element, or a script that evaluates to
   one (`Spliceable<BacktickElement>`), and resolves to `container`,
   `baseElement`, `rerender`, `unmount`, `asFragment`, `debug` and the queries.
-  Options are `container`, `baseElement`, `queries` and `builtinOf`. It is
+  Options are `container`, `baseElement`, `queries` and `globals`. It is
   async, because bundling is, and so is `rerender`.
-- `evaluate(value, { builtinOf? })`: resolves to what any value or script
+- `evaluate(value, { globals? })`: resolves to what any value or script
   evaluates to, without mounting it. It plays the part of React Testing Library's
   `renderHook`.
 - `evaluateBundle(bundle)`: evaluates a hand-written bundle, for a bundle the
@@ -113,6 +113,7 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
 `render` and `evaluate` print each bundle as JavaScript with `printBundle` and
 run it on `web-interpreter`'s `createRuntime`. `BACKTICK_BACKEND=interpreter`
 interprets the bundle instead.
+
 - Everything from `@testing-library/dom`: `screen`, `within`, `fireEvent`,
   `waitFor`, and the rest.
 

@@ -15,11 +15,9 @@ export interface Instance {
   // from the target and goes back to it untouched, so what it is, is the
   // target's business throughout.
   readonly renderer: Renderer<object>;
-  // The page's window, which `window` is read through.
-  readonly window: typeof window;
-  // What the target answers for beside the client's own names, asked only after
-  // those have not answered.
-  readonly builtinOf?: (name: string) => ClientValue;
+  // The global object a bundle's names are read off: the client's globals,
+  // and the realm's own.
+  readonly global: object;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per
   // reference would be a fresh identity, and a prop holding one would be set

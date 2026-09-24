@@ -1,33 +1,27 @@
 import type { ClientValue } from "@backtickjs/core";
 import { createRuntime } from "@backtickjs/web-interpreter";
-import type { InterpreterOptions } from "@backtickjs/web-interpreter";
+import type { ClientOptions } from "@backtickjs/web-interpreter";
 
 // What a page's script queues: see `renderToString`.
-type Queued = readonly [
-  script: Node,
-  globals: readonly string[],
-  run: () => ClientValue,
-];
+type Queued = readonly [script: Node, run: () => ClientValue];
 
 /**
  * Draws every bundle a page carries, where its script stands, and every one
  * queued after.
  *
- * A window is all a page hands over: its document is what is drawn into, and a
- * script reaches the window itself through `$window`. `builtinOf` answers
- * for what an app adds to the web's own names, asked after them, so an app may
- * add and may not replace. A tag an app adds is one it registers with the
+ * Defining a client is defining its globals: the web's, and the app's own
+ * `globals` beside them. A tag an app adds is one it registers with the
  * browser, which the document then builds itself.
  */
-export function defineClient(options: InterpreterOptions): void {
+export function defineClient(options: ClientOptions): void {
   const { render } = createRuntime(options);
   const page = options.window as unknown as { __backtick?: Queued[] };
   const queue = (page.__backtick ??= []);
 
-  const draw = ([script, globals, run]: Queued): void => {
+  const draw = ([script, run]: Queued): void => {
     const parent = script.parentNode;
     if (parent !== null) {
-      render({ globals, run }, parent, script);
+      render(run, parent, script);
     }
   };
 

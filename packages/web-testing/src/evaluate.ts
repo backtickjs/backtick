@@ -1,17 +1,11 @@
-import type {
-  Bundle,
-  ClientUnknown,
-  ClientValue,
-  Spliceable,
-} from "@backtickjs/core";
-import { bundler } from "@backtickjs/bundler";
+import type { Bundle, ClientUnknown, Spliceable } from "@backtickjs/core";
 import { createInterpreter } from "@backtickjs/web-interpreter";
-import { testClient } from "./client.js";
+import { prepare } from "./client.js";
 
 /** What a test changes about the interpreter a value runs in. */
 export interface EvaluateOptions {
-  /** Names beside the client's own, for a test about a target adding one. */
-  readonly builtinOf?: (name: string) => ClientValue;
+  /** Globals beside the web's, for a test about an app adding one. */
+  readonly globals?: { readonly [name: string]: unknown };
 }
 
 /**
@@ -24,9 +18,9 @@ export interface EvaluateOptions {
  */
 export async function evaluate<T extends ClientUnknown>(
   value: Spliceable<T>,
-  { builtinOf }: EvaluateOptions = {},
+  { globals }: EvaluateOptions = {},
 ): Promise<T> {
-  return testClient(builtinOf).evaluate(await bundler.run(value));
+  return (await prepare(value, globals)).evaluate();
 }
 
 /**
@@ -36,7 +30,9 @@ export async function evaluate<T extends ClientUnknown>(
  */
 export function evaluateBundle<T extends ClientUnknown>(
   bundle: Bundle<T>,
-  { builtinOf }: EvaluateOptions = {},
+  { globals }: EvaluateOptions = {},
 ): T {
-  return createInterpreter({ window, builtinOf }).evaluate(bundle);
+  return createInterpreter({ window, globals, global: globalThis }).evaluate(
+    bundle,
+  );
 }

@@ -5,8 +5,7 @@ import type { ClientValue } from "@backtickjs/core";
 import { createBuiltin } from "@backtickjs/platform-sdk";
 import { evaluate } from "@backtickjs/web-testing";
 
-// What a client answers for beside the ECMAScript globals: a name a target
-// adds.
+// What a client defines beside the web's globals: a name an app adds.
 
 // Names an SDK or an app adds, as its generated code declares them.
 const greet = createBuiltin<() => string>("greet");
@@ -14,38 +13,31 @@ const storage = createBuiltin<{ get: (key: string) => string | null }>(
   "storage",
 );
 
-const answersGreet = (name: string) =>
-  name === "greet" ? () => "hello" : undefined;
-
-describe("a name a target answers for", () => {
-  // What an SDK or an app adds: a whole name, reached by splicing the value
-  // `createBuiltin` made, which lands on the wire as the same node `Math`
-  // does.
-  it("is answered by the function its target handed over", async () => {
+describe("a global an app defines", () => {
+  // What an SDK or an app adds: a name, reached by splicing the value
+  // `createBuiltin` made, which a bundle reads as the global of that name.
+  it("is what the client defined under that name", async () => {
     assert.equal(
-      await evaluate(cs.lift(cs.const((cs.splice((greet)) satisfies typeof cs.ClientUnknown)())), { builtinOf: answersGreet }),
+      await evaluate(cs.lift(cs.const((cs.splice((greet)) satisfies typeof cs.ClientUnknown)())), { globals: { greet: () => "hello" } }),
       "hello",
     );
   });
 
-  it("is not answered by a client whose target added nothing", async () => {
-    // The language's list is every client's floor, and a name beyond it is a
-    // name that target never offered — so a bundle built against one client
-    // says so on another rather than reading as absent.
-    await assert.rejects(evaluate(cs.lift(cs.const((cs.splice((greet)) satisfies typeof cs.ClientUnknown)()))), /unknown builtin greet/);
+  it("is not defined by a client that did not define it", async () => {
+    // A bundle built against one client says so on another rather than
+    // reading as absent, as a name nothing defined does in JavaScript.
+    await assert.rejects(evaluate(cs.lift(cs.const((cs.splice((greet)) satisfies typeof cs.ClientUnknown)()))), /greet is not defined/);
   });
 
-  it("holds what a target handed over, whatever kind of value that is", async () => {
+  it("holds what the client defined, whatever kind of value that is", async () => {
     // Grouping is done by the value a name holds rather than by a dot in the
-    // name: `$storage.get(…)` is a member read on a plain object this answered
-    // with, which is the same path a cell's `read` is reached by.
+    // name: `$storage.get(…)` is a member read on a plain object.
     const held = { greeting: "hei" } as Record<string, string>;
     assert.equal(
       await evaluate(cs.lift(cs.const((cs.splice((storage)) satisfies typeof cs.ClientUnknown).get("greeting"))), {
-        builtinOf: (name) =>
-          name === "storage"
-            ? { get: (key: ClientValue) => held[key as string] ?? null }
-            : undefined,
+        globals: {
+          storage: { get: (key: ClientValue) => held[key as string] ?? null },
+        },
       }),
       "hei",
     );

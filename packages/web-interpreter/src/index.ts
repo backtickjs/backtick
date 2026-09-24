@@ -12,11 +12,8 @@
  * `@backtickjs/web-page`.
  */
 export { createInterpreter } from "./createInterpreter.js";
-export type { InterpreterOptions, Interpreter } from "./createInterpreter.js";
+export type { Interpreter } from "./createInterpreter.js";
 export { createRuntime } from "./createRuntime.js";
-export type {
-  PrintedRuntime,
-  Program,
-  RuntimeOptions,
-} from "./createRuntime.js";
+export type { PrintedRuntime, Program } from "./createRuntime.js";
+export type { ClientOptions } from "./globals.js";
 export type { Bundle } from "@backtickjs/core";

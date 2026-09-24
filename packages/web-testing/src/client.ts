@@ -1,12 +1,13 @@
-import type { Bundle, ClientUnknown, ClientValue } from "@backtickjs/core";
-import { printBundle } from "@backtickjs/bundler";
+import type { ClientUnknown, Spliceable } from "@backtickjs/core";
+import { bundler, printBundle } from "@backtickjs/bundler";
 import { createInterpreter, createRuntime } from "@backtickjs/web-interpreter";
 import type { Program } from "@backtickjs/web-interpreter";
+import { defined } from "./cleanup.js";
 
-/** What a test draws a bundle with: the bundle printed, or the interpreter. */
-export interface TestClient {
-  render(bundle: Bundle<ClientUnknown>, parent: Node): Promise<() => void>;
-  evaluate<T extends ClientUnknown>(bundle: Bundle<T>): Promise<T>;
+/** A value bundled and ready to run: drawn into a node, or evaluated. */
+export interface Prepared<T extends ClientUnknown> {
+  render(parent: Node): () => void;
+  evaluate(): T;
 }
 
 // `BACKTICK_BACKEND=interpreter` runs every test through the interpreter
@@ -18,31 +19,38 @@ const printed = scope.process?.env?.["BACKTICK_BACKEND"] !== "interpreter";
 
 // As a module rather than through `eval`: what a page with a strict Content
 // Security Policy will load.
-async function load(bundle: Bundle<ClientUnknown>): Promise<Program> {
-  const { code, globals } = printBundle(bundle);
+async function load(code: string): Promise<Program> {
   const module = (await import(
     `data:text/javascript,${encodeURIComponent(`export default () => ${code};`)}`
-  )) as { default: Program["run"] };
-  return { globals, run: module.default };
+  )) as { default: Program };
+  return module.default;
 }
 
-export function testClient(
-  builtinOf: ((name: string) => ClientValue) | undefined,
-): TestClient {
+/**
+ * Bundles `value` for the client a test draws with. A bundle runs in this
+ * realm, not the document's, so the client's globals are this realm's.
+ */
+export async function prepare<T extends ClientUnknown>(
+  value: Spliceable<T>,
+  globals: { readonly [name: string]: unknown } = {},
+): Promise<Prepared<T>> {
+  for (const name of Object.keys(globals)) {
+    defined.add(name);
+  }
+  const options = { window, globals, global: globalThis };
   if (!printed) {
-    const interpreter = createInterpreter({ window, builtinOf });
+    const interpreter = createInterpreter(options);
+    const bundle = await bundler.run(value);
     return {
-      render: async (bundle, parent) => interpreter.render(bundle, parent),
-      evaluate: async (bundle) => interpreter.evaluate(bundle),
+      render: (parent) => interpreter.render(bundle, parent),
+      evaluate: () => interpreter.evaluate(bundle),
     };
   }
-  // The module runs in this realm, not the document's, so the globals it
-  // reads are this realm's.
-  const runtime = createRuntime({ window, builtinOf, global: globalThis });
+  const runtime = createRuntime(options);
+  const code = printBundle(await bundler.run(value));
+  const program = await load(code);
   return {
-    render: async (bundle, parent) =>
-      runtime.render(await load(bundle), parent),
-    evaluate: async <T extends ClientUnknown>(bundle: Bundle<T>) =>
-      runtime.evaluate<T>(await load(bundle)),
+    render: (parent) => runtime.render(program, parent),
+    evaluate: () => runtime.evaluate(program as () => T),
   };
 }

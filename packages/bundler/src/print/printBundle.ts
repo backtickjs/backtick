@@ -19,15 +19,10 @@ import type {
  * element's tag or prop name that is not a plain name is data: the
  * expression carries its data in one `JSON.parse`, and reads it as `$d[i]`.
  *
- * A builtin is read as the global of its name, and so are the runtime's
- * `element`, `list`, `component` and `memo`: the client puts them on the
- * global object before it evaluates the expression.
+ * A builtin is read as the global of its name, and so are the client's
+ * `element`, `list`, `component` and `memo`: defining a client is putting them
+ * on the global object before any bundle runs.
  */
-export interface PrintedBundle {
-  readonly code: string;
-  /** The builtins the code reads as globals, which the client provides. */
-  readonly globals: readonly string[];
-}
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
@@ -78,7 +73,7 @@ function namesOf(node: unknown, bound: Set<string>, read: Set<string>): void {
   }
 }
 
-export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
+export function printBundle(bundle: Bundle<ClientUnknown>): string {
   const data: string[] = [];
   const bindings = new Map<string, string>();
   const labels = new Map<string, string>();
@@ -369,7 +364,7 @@ export function printBundle(bundle: Bundle<ClientUnknown>): PrintedBundle {
     `return ${root};`,
     `})(${carried})`,
   ].join("\n");
-  return { code, globals: [...read] };
+  return code;
 }
 
 // Whether what a position holds can change after it has first been read: the

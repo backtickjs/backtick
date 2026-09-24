@@ -12,7 +12,7 @@ import type {
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/platform-sdk";
-import { builtinOf } from "./builtinOf.js";
+import { globalOf } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileComponentCall } from "./compileComponentCall.js";
 import { compileElement } from "./compileElement.js";
@@ -299,14 +299,10 @@ export function compile(
     case "comp": {
       return compileComponentCall(instance, node);
     }
-    // A whole name the format carries: the framework's, a target's, or a
-    // global of the client's own.
+    // A global the bundle names, read off the global object the client
+    // defined its globals on.
     case "bltn": {
-      const name = node[1];
-      const value = builtinOf(instance, name);
-      if (value === undefined) {
-        throw new Error(`unknown builtin ${name}`);
-      }
+      const value = globalOf(instance, node[1]);
       return () => value;
     }
     case "()":

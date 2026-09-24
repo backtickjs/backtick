@@ -1,5 +1,5 @@
 import type { Diagnostic, SiteBuiltins } from "@backtickjs.com/schema";
-import type { BacktickElement, Bundle, ClientValue } from "@backtickjs/core";
+import type { BacktickElement, Bundle } from "@backtickjs/core";
 import type ts from "typescript";
 
 // Hashed by the server when it builds the site, so the page says where they are.
@@ -117,52 +117,38 @@ function normalizeDiagnostic(diagnostic: ts.Diagnostic): Diagnostic {
   };
 }
 
-// This site's names, answered the way the client answers the web's: a `case`
-// per name, each checked against the contract, and nothing an object would
-// answer for besides.
-export function builtinOf(name: string): ClientValue {
-  const known = name as keyof SiteBuiltins;
-  switch (known) {
-    case "compile":
-      return ((fileName, sourceText, onJavascript, onDiagnostics) => {
-        void fetchCompile().then(
-          (compile) => {
-            const diagnostics: ts.Diagnostic[] = [];
-            const javascript = compile(fileName, sourceText, (one) =>
-              diagnostics.push(one),
-            );
-            if (diagnostics.length > 0) {
-              onDiagnostics(diagnostics.map(normalizeDiagnostic));
-              return;
-            }
-            onJavascript(javascript);
-          },
-          (error: unknown) => {
-            onDiagnostics([
-              { message: String(error), start: null, length: null },
-            ]);
-          },
+// This site's names, defined as globals beside the web's, each checked
+// against the contract.
+export const globals = {
+  compile: ((fileName, sourceText, onJavascript, onDiagnostics) => {
+    void fetchCompile().then(
+      (compile) => {
+        const diagnostics: ts.Diagnostic[] = [];
+        const javascript = compile(fileName, sourceText, (one) =>
+          diagnostics.push(one),
         );
-      }) satisfies SiteBuiltins[typeof known];
+        if (diagnostics.length > 0) {
+          onDiagnostics(diagnostics.map(normalizeDiagnostic));
+          return;
+        }
+        onJavascript(javascript);
+      },
+      (error: unknown) => {
+        onDiagnostics([{ message: String(error), start: null, length: null }]);
+      },
+    );
+  }) satisfies SiteBuiltins["compile"],
 
-    case "bundle":
-      return ((javascript, onBundle, onDiagnostics) => {
-        const id = ++asked;
-        waiting.set(id, { onBundle, onDiagnostics });
-        void fetchSandbox().then(
-          // `*` because the sandbox has an origin of its own and no name to give.
-          (into) => into.postMessage({ id, javascript }, "*"),
-          (error: unknown) => {
-            waiting.delete(id);
-            onDiagnostics([
-              { message: String(error), start: null, length: null },
-            ]);
-          },
-        );
-      }) satisfies SiteBuiltins[typeof known];
-
-    default:
-      known satisfies never;
-      return undefined;
-  }
-}
+  bundle: ((javascript, onBundle, onDiagnostics) => {
+    const id = ++asked;
+    waiting.set(id, { onBundle, onDiagnostics });
+    void fetchSandbox().then(
+      // `*` because the sandbox has an origin of its own and no name to give.
+      (into) => into.postMessage({ id, javascript }, "*"),
+      (error: unknown) => {
+        waiting.delete(id);
+        onDiagnostics([{ message: String(error), start: null, length: null }]);
+      },
+    );
+  }) satisfies SiteBuiltins["bundle"],
+};

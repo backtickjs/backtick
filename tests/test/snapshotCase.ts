@@ -37,8 +37,8 @@ export async function snapshotCase(
     });
 
   // Formatted, so a change to what is printed reads as the code it changed.
-  const printed = printBundle(await bundler.run(value));
-  record(await prettier.format(printed.code, { parser: "babel" }), "bundle");
+  const code = printBundle(await bundler.run(value));
+  record(await prettier.format(code, { parser: "babel" }), "bundle");
   const evaluated = await evaluate(value);
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));

@@ -1,35 +1,12 @@
-import type { ClientUnknown, ClientValue } from "@backtickjs/core";
+import type { ClientUnknown } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/platform-sdk";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import { rendererOptions } from "./rendererOptions.js";
 import { compile, scopeOf } from "./compile.js";
-
-/**
- * What an interpreter is wired to: the window whose document it draws into and
- * whose names a script reaches, and what a page answers for beyond the names
- * the language provides itself.
- */
-export interface InterpreterOptions {
-  /**
-   * The page's window. Its document is what every bundle is drawn with, and
-   * the client reads from it to answer `window`. Never handed to a script
-   * itself: what a script reaches is the list the client writes out, read
-   * through to this.
-   */
-  readonly window: typeof window;
-
-  /**
-   * What this target answers for, beside the framework's names and the window:
-   * asked by the name the wire carries, and answering with nothing for a name
-   * it does not have, which is then read off the client's global.
-   *
-   * Asked only after the client has not answered, so a name the client already
-   * answers for is never reached here: what `state` means is not a target's to
-   * redecide.
-   */
-  readonly builtinOf?: (name: string) => ClientValue;
-}
+import { defineGlobals } from "./globals.js";
+import type { ClientOptions } from "./globals.js";
+import type { Instance } from "./Instance.js";
 
 /** What the interpreter does with a bundle, once it has a target to do it on. */
 export interface Interpreter<NodeType extends object> {
@@ -66,8 +43,8 @@ export interface Interpreter<NodeType extends object> {
 }
 
 /**
- * The interpreter, wired to a window: it draws with its document's nodes, and a
- * script reaches the names `options` hands over.
+ * The interpreter, wired to a window: it draws with its document's nodes, and
+ * a bundle reads the globals it defines.
  *
  * A document and nothing else, because a drawing is a DOM wherever one runs —
  * a page's, or one a test made. A target of its own would be a second set of
@@ -78,16 +55,20 @@ export interface Interpreter<NodeType extends object> {
  * under this is Solid's own `createRenderer`. Once here rather than once per
  * drawing, so every bundle a document draws is drawn through the same one.
  */
-export function createInterpreter(
-  options: InterpreterOptions,
-): Interpreter<Node> {
+export function createInterpreter(options: ClientOptions): Interpreter<Node> {
   const renderer = createRenderer(rendererOptions(options.window.document));
+  const base: Instance = {
+    renderer,
+    global: options.global ?? options.window,
+    bundle: { functions: {}, root: null } as unknown as Bundle<ClientUnknown>,
+    functions: new Map(),
+  };
+  defineGlobals(base, options.globals);
 
   // One per mount: what a bundle compiled to is a closure over this, so two
   // drawings of the same bundle share nothing but the renderer.
-  const instanceOf = (bundle: Bundle<ClientUnknown>) => ({
-    ...options,
-    renderer,
+  const instanceOf = (bundle: Bundle<ClientUnknown>): Instance => ({
+    ...base,
     bundle,
     functions: new Map(),
   });
