@@ -1,4 +1,4 @@
-import { bundler, printBundle } from "@backtickjs/bundler";
+import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
 
 /**
@@ -13,7 +13,7 @@ export async function renderToString(
   element: BacktickElement,
   clientUrl: string,
 ): Promise<string> {
-  const code = printBundle(await bundler.run(element));
+  const code = await bundler.run(element);
   const script = `(self.__backtick ??= []).push([document.currentScript, () => ${code}]);`;
   // The printer escapes every `<` a string holds; this is what would end the
   // element early if it ever did not.

@@ -1,82 +1,83 @@
-(($d) => {
-  const f1 = ($0) => $0();
-  const f2 = ($0) => (order) => $0(order);
-  const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
-  const f4 = ($0) => $0.customer.name;
-  const f5 = ($0) => $0.customer.city;
-  const f6 = ($0) => $0.items;
-  const f7 = ($0) => (item) => $0(item);
-  const f8 = ($0) => $0.sku + " x" + $0.qty;
-  const f9 = ($0) => "$" + $0.total;
-  return element("div", [], () =>
-    list(
-      () =>
-        f1(() => [
-          {
-            id: "ord-1000",
-            customer: { name: "Customer 0", city: "Montréal" },
-            items: [
-              { sku: "SKU-0-A", qty: 1 },
-              { sku: "SKU-0-B", qty: 1 },
-            ],
-            total: 45.23,
-          },
-          {
-            id: "ord-1001",
-            customer: { name: "Customer 1", city: "Toronto" },
-            items: [
-              { sku: "SKU-1-A", qty: 2 },
-              { sku: "SKU-1-B", qty: 1 },
-            ],
-            total: 46.23,
-          },
-          {
-            id: "ord-1002",
-            customer: { name: "Customer 2", city: "Montréal" },
-            items: [
-              { sku: "SKU-2-A", qty: 3 },
-              { sku: "SKU-2-B", qty: 1 },
-            ],
-            total: 47.23,
-          },
-          {
-            id: "ord-1003",
-            customer: { name: "Customer 3", city: "Toronto" },
-            items: [
-              { sku: "SKU-3-A", qty: 1 },
-              { sku: "SKU-3-B", qty: 1 },
-            ],
-            total: 48.23,
-          },
-          {
-            id: "ord-1004",
-            customer: { name: "Customer 4", city: "Montréal" },
-            items: [
-              { sku: "SKU-4-A", qty: 2 },
-              { sku: "SKU-4-B", qty: 1 },
-            ],
-            total: 49.23,
-          },
-        ]),
-      f2((order) =>
-        element("div", [], () => [
-          element(
-            "img",
-            [
-              ["src", () => f3(order), false],
-              ["alt", () => "", true],
-            ],
-            null,
-          ),
-          element("span", [], () => () => f4(order)),
-          element("span", [], () => () => f5(order)),
-          list(
-            () => f6(order),
-            f7((item) => element("span", [], () => () => f8(item))),
-          ),
-          element("span", [], () => () => f9(order)),
-        ]),
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => $0();
+    const f2 = ($0) => (order) => $0(order);
+    const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
+    const f4 = ($0) => $0.customer.name;
+    const f5 = ($0) => $0.customer.city;
+    const f6 = ($0) => $0.items;
+    const f7 = ($0) => (item) => $0(item);
+    const f8 = ($0) => $0.sku + " x" + $0.qty;
+    const f9 = ($0) => "$" + $0.total;
+    return element("div", [], () =>
+      list(
+        () =>
+          f1(() => [
+            {
+              id: "ord-1000",
+              customer: { name: "Customer 0", city: "Montréal" },
+              items: [
+                { sku: "SKU-0-A", qty: 1 },
+                { sku: "SKU-0-B", qty: 1 },
+              ],
+              total: 45.23,
+            },
+            {
+              id: "ord-1001",
+              customer: { name: "Customer 1", city: "Toronto" },
+              items: [
+                { sku: "SKU-1-A", qty: 2 },
+                { sku: "SKU-1-B", qty: 1 },
+              ],
+              total: 46.23,
+            },
+            {
+              id: "ord-1002",
+              customer: { name: "Customer 2", city: "Montréal" },
+              items: [
+                { sku: "SKU-2-A", qty: 3 },
+                { sku: "SKU-2-B", qty: 1 },
+              ],
+              total: 47.23,
+            },
+            {
+              id: "ord-1003",
+              customer: { name: "Customer 3", city: "Toronto" },
+              items: [
+                { sku: "SKU-3-A", qty: 1 },
+                { sku: "SKU-3-B", qty: 1 },
+              ],
+              total: 48.23,
+            },
+            {
+              id: "ord-1004",
+              customer: { name: "Customer 4", city: "Montréal" },
+              items: [
+                { sku: "SKU-4-A", qty: 2 },
+                { sku: "SKU-4-B", qty: 1 },
+              ],
+              total: 49.23,
+            },
+          ]),
+        f2((order) =>
+          element("div", [], () => [
+            element(
+              "img",
+              [
+                ["src", () => f3(order), false],
+                ["alt", () => "", true],
+              ],
+              null,
+            ),
+            element("span", [], () => () => f4(order)),
+            element("span", [], () => () => f5(order)),
+            list(
+              () => f6(order),
+              f7((item) => element("span", [], () => () => f8(item))),
+            ),
+            element("span", [], () => () => f9(order)),
+          ]),
+        ),
       ),
-    ),
-  );
-})([]);
+    );
+  }))([]);

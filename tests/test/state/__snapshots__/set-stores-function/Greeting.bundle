@@ -1,11 +1,12 @@
-(($d) => {
-  const f1 = ($0) => {
-    const greet = $0()((name) => "hi " + name);
-    return element(
-      "span",
-      [["onclick", () => () => greet.set((name) => "bye " + name), true]],
-      () => () => greet.get()("ada"),
-    );
-  };
-  return component(() => f1(() => state), []);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const greet = $0()((name) => "hi " + name);
+      return element(
+        "span",
+        [["onclick", () => () => greet.set((name) => "bye " + name), true]],
+        () => () => greet.get()("ada"),
+      );
+    };
+    return component(() => f1(() => state), []);
+  }))([]);

@@ -1,6 +1,7 @@
 import { lowerSpliceable } from "./ast/lowerSpliceable.js";
-import type { Bundle } from "@backtickjs/platform-sdk";
+import type { Bundle, BundleTree } from "@backtickjs/platform-sdk";
 import { buildBundle } from "./bundle/buildBundle.js";
+import { printBundle } from "./print/printBundle.js";
 import type { ClientUnknown, Spliceable } from "@backtickjs/platform-sdk";
 
 /**
@@ -32,15 +33,23 @@ export interface ExperimentalFeatures {
  *     const bundle = await bundler.run(<Home />);
  *
  * A namespace rather than a bare function, so `bundle` stays a name a caller
- * can give what comes back. The bundle is plain data.
+ * can give what comes back. The bundle is JavaScript, which a client runs with
+ * `eval`.
  */
 export const bundler = {
   async run<T extends ClientUnknown>(value: Spliceable<T>): Promise<Bundle<T>> {
+    return printBundle(await bundler.tree(value));
+  },
+
+  /** What `run` prints, for a caller that reads the tree itself. */
+  async tree<T extends ClientUnknown>(
+    value: Spliceable<T>,
+  ): Promise<BundleTree<T>> {
     return await bundler.runWithExperimentalFeatures(value, {});
   },
 
   /**
-   * As {@link bundler.run}, with features that are being tried.
+   * As {@link bundler.tree}, with features that are being tried.
    *
    *     await bundler.runWithExperimentalFeatures(<Home />, {
    *       stableFunctionLabels: true,
@@ -52,8 +61,8 @@ export const bundler = {
   async runWithExperimentalFeatures<T extends ClientUnknown>(
     value: Spliceable<T>,
     features: ExperimentalFeatures,
-  ): Promise<Bundle<T>> {
+  ): Promise<BundleTree<T>> {
     const ast = await lowerSpliceable(value);
-    return buildBundle(ast, features) as Bundle<T>;
+    return buildBundle(ast, features) as BundleTree<T>;
   },
 };

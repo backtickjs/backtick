@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, evaluate, state } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import type { BacktickElement, Bundle } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/web-testing";
 import { userEvent } from "@testing-library/user-event";
@@ -27,7 +27,7 @@ const scriptBoundTagLoading = cs.lift((() => {
         count: number;
     }) => {
         const __cs_held = cs.const(__cs_drawn.get());
-        return cs.const(__cs_held === null ? null : (cs.splice((evaluate)) satisfies typeof cs.ClientUnknown)(__cs_held)(__cs_props));
+        return cs.const(__cs_held === null ? null : eval(__cs_held)(__cs_props));
     });
     return cs.const(<div>{cs.lift(__cs_drawn.get() === null ? <i>loading</i> : <__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_drawn.set((cs.splice((loadedBadge)) satisfies typeof cs.ClientUnknown)))}>load</button>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>);
 })());

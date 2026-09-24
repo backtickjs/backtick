@@ -49,6 +49,7 @@ export type {
   BundleTry,
   BundleWhile,
   BundleFunctionLabel,
+  BundleTree,
 } from "@backtickjs/platform-sdk";
 export { bundler } from "./bundler.js";
 export { printBundle } from "./print/printBundle.js";

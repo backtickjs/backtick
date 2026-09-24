@@ -5,7 +5,7 @@
  *
  * A thin layer, as `@testing-library/react` is: the document comes from the
  * test environment (jsdom through `global-jsdom`, Jest's or Vitest's `jsdom`
- * environment, or a browser), and the interpreter is
+ * environment, or a browser), and the runtime is
  * `@backtickjs/web-interpreter`'s own, so what a test exercises is what a page
  * runs.
  *

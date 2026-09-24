@@ -41,7 +41,7 @@ window.addEventListener("message", (event: MessageEvent) => {
       const { default: draw } = evaluate(javascript) as {
         default: (props: object) => Promise<never>;
       };
-      back({ bundle: JSON.stringify(await bundler.run(await draw({}))) });
+      back({ bundle: await bundler.run(await draw({})) });
     } catch (thrown: unknown) {
       back({ message: String(thrown) });
     }

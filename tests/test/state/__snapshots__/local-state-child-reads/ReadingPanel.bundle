@@ -1,63 +1,65 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const selected = $0()(0);
-    return element("div", [], () => [
-      element(
-        "span",
-        [["onclick", () => () => selected.set(1), true]],
-        () => "select",
-      ),
-      memo(() =>
-        component($1(), [
-          ["id", () => () => 0],
-          ["selected", () => () => selected],
-        ]),
-      ),
-      memo(() =>
-        component($1(), [
-          ["id", () => () => 1],
-          ["selected", () => () => selected],
-        ]),
-      ),
-    ]);
-  };
-  const f2 = ($0, $1) => "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";
-  const f3 = ($0, $1) => "row " + $0() + " of " + $1().get();
-  const f4 = ($0, $1, $2) => ($0().get() === $1() ? $2() : null);
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => ($0) =>
-          element("div", [], () => [
-            element(
-              "span",
-              [
-                [
-                  "style",
-                  () =>
-                    f2(
-                      () => $0.selected(),
-                      () => $0.id(),
-                    ),
-                  false,
-                ],
-              ],
-              () => () =>
-                f3(
-                  () => $0.id(),
-                  () => $0.selected(),
-                ),
-            ),
-            memo(() =>
-              f4(
-                () => $0.selected(),
-                () => $0.id(),
-                () => element("span", [], () => "marker"),
-              ),
-            ),
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const selected = $0()(0);
+      return element("div", [], () => [
+        element(
+          "span",
+          [["onclick", () => () => selected.set(1), true]],
+          () => "select",
+        ),
+        memo(() =>
+          component($1(), [
+            ["id", () => () => 0],
+            ["selected", () => () => selected],
           ]),
-      ),
-    [],
-  );
-})([]);
+        ),
+        memo(() =>
+          component($1(), [
+            ["id", () => () => 1],
+            ["selected", () => () => selected],
+          ]),
+        ),
+      ]);
+    };
+    const f2 = ($0, $1) =>
+      "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";
+    const f3 = ($0, $1) => "row " + $0() + " of " + $1().get();
+    const f4 = ($0, $1, $2) => ($0().get() === $1() ? $2() : null);
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => ($0) =>
+            element("div", [], () => [
+              element(
+                "span",
+                [
+                  [
+                    "style",
+                    () =>
+                      f2(
+                        () => $0.selected(),
+                        () => $0.id(),
+                      ),
+                    false,
+                  ],
+                ],
+                () => () =>
+                  f3(
+                    () => $0.id(),
+                    () => $0.selected(),
+                  ),
+              ),
+              memo(() =>
+                f4(
+                  () => $0.selected(),
+                  () => $0.id(),
+                  () => element("span", [], () => "marker"),
+                ),
+              ),
+            ]),
+        ),
+      [],
+    );
+  }))([]);

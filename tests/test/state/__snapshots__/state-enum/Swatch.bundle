@@ -1,23 +1,24 @@
-(($d) => {
-  const f1 = ($0, $1, $2, $3) => {
-    const held = $0()($1());
-    return element(
-      "span",
-      [["onclick", () => () => held.set($2()), true]],
-      () => () => $3()(held.get()),
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1, $2, $3) => {
+      const held = $0()($1());
+      return element(
+        "span",
+        [["onclick", () => () => held.set($2()), true]],
+        () => () => $3()(held.get()),
+      );
+    };
+    const f2 = ($0) => (c) => {
+      return c === $0() ? "blue" : "red";
+    };
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => 0,
+          () => 1,
+          () => f2(() => 1),
+        ),
+      [],
     );
-  };
-  const f2 = ($0) => (c) => {
-    return c === $0() ? "blue" : "red";
-  };
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => 0,
-        () => 1,
-        () => f2(() => 1),
-      ),
-    [],
-  );
-})([]);
+  }))([]);

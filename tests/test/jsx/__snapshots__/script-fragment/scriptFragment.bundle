@@ -1,8 +1,9 @@
-(($d) => {
-  const f1 = ($0) => $0()("x");
-  const f2 = () => (name) => [
-    element("span", [], () => "a sentence across lines"),
-    element("span", [], () => [memo(() => name), " ", memo(() => name)]),
-  ];
-  return element("div", [], () => () => f1(f2));
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => $0()("x");
+    const f2 = () => (name) => [
+      element("span", [], () => "a sentence across lines"),
+      element("span", [], () => [memo(() => name), " ", memo(() => name)]),
+    ];
+    return element("div", [], () => () => f1(f2));
+  }))([]);

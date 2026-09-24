@@ -1,8 +1,9 @@
-(($d) => {
-  const f1 = ($0) => {
-    const x = 0;
-    return $0(x);
-  };
-  const f2 = ($0) => $0;
-  return f1(f2);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const x = 0;
+      return $0(x);
+    };
+    const f2 = ($0) => $0;
+    return f1(f2);
+  }))([]);

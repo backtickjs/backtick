@@ -20,7 +20,7 @@ async function Pill({
 
 describe("an undefined prop", () => {
   it("is left out of the element", async () => {
-    const bundle = await bundler.run(<div class={undefined} id="kept" />);
+    const bundle = await bundler.tree(<div class={undefined} id="kept" />);
     assert.deepEqual(bundle.root, ["el", "div", { id: "kept" }, null]);
   });
 

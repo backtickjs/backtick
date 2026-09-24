@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, evaluate, state } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/web-testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -16,7 +16,7 @@ const loadedBadge = await bundler.run(
     {
       version: "0.0.0",
       filePath: "render/script-bound-tag-loading.test.tsx",
-      fileHash: "1urfcbdx87m7k",
+      fileHash: "v8fe0e5k2jbe",
       splices: {},
       captures: [],
     },
@@ -31,7 +31,7 @@ const loadedBadge = await bundler.run(
             kind: "id",
             loc: [16, 7, 16, 12],
             text: "props",
-            bindingKey: "props$1urfcbdx87m7k$0",
+            bindingKey: "props$v8fe0e5k2jbe$0",
           },
         },
       ],
@@ -61,7 +61,7 @@ const loadedBadge = await bundler.run(
                 kind: "id",
                 loc: [16, 51, 16, 56],
                 text: "props",
-                bindingKey: "props$1urfcbdx87m7k$0",
+                bindingKey: "props$v8fe0e5k2jbe$0",
               },
               name: "count",
             },
@@ -76,10 +76,9 @@ const scriptBoundTagLoading = cs.create(
   {
     version: "0.0.0",
     filePath: "render/script-bound-tag-loading.test.tsx",
-    fileHash: "1urfcbdx87m7k",
+    fileHash: "v8fe0e5k2jbe",
     splices: {
       $state: { value: state, params: [] },
-      $evaluate: { value: evaluate, params: [] },
       $loadedBadge: { value: loadedBadge, params: [] },
     },
     captures: [],
@@ -95,7 +94,7 @@ const scriptBoundTagLoading = cs.create(
           kind: "id",
           loc: [20, 9, 20, 14],
           text: "count",
-          bindingKey: "count$1urfcbdx87m7k$1",
+          bindingKey: "count$v8fe0e5k2jbe$1",
         },
         initializer: {
           kind: "()",
@@ -121,7 +120,7 @@ const scriptBoundTagLoading = cs.create(
           kind: "id",
           loc: [21, 9, 21, 14],
           text: "drawn",
-          bindingKey: "drawn$1urfcbdx87m7k$2",
+          bindingKey: "drawn$v8fe0e5k2jbe$2",
         },
         initializer: {
           kind: "()",
@@ -146,7 +145,7 @@ const scriptBoundTagLoading = cs.create(
           kind: "id",
           loc: [24, 9, 24, 14],
           text: "Badge",
-          bindingKey: "Badge$1urfcbdx87m7k$3",
+          bindingKey: "Badge$v8fe0e5k2jbe$3",
         },
         initializer: {
           kind: "=>",
@@ -159,7 +158,7 @@ const scriptBoundTagLoading = cs.create(
                 kind: "id",
                 loc: [24, 18, 24, 23],
                 text: "props",
-                bindingKey: "props$1urfcbdx87m7k$4",
+                bindingKey: "props$v8fe0e5k2jbe$4",
               },
             },
           ],
@@ -174,7 +173,7 @@ const scriptBoundTagLoading = cs.create(
                   kind: "id",
                   loc: [25, 11, 25, 15],
                   text: "held",
-                  bindingKey: "held$1urfcbdx87m7k$5",
+                  bindingKey: "held$v8fe0e5k2jbe$5",
                 },
                 initializer: {
                   kind: "()",
@@ -186,7 +185,7 @@ const scriptBoundTagLoading = cs.create(
                       kind: "id",
                       loc: [25, 18, 25, 23],
                       text: "drawn",
-                      bindingKey: "drawn$1urfcbdx87m7k$2",
+                      bindingKey: "drawn$v8fe0e5k2jbe$2",
                     },
                     name: "get",
                   },
@@ -195,10 +194,10 @@ const scriptBoundTagLoading = cs.create(
               },
               {
                 kind: "return",
-                loc: [26, 5, 26, 58],
+                loc: [26, 5, 26, 53],
                 expression: {
                   kind: "?:",
-                  loc: [26, 12, 26, 57],
+                  loc: [26, 12, 26, 52],
                   condition: {
                     kind: "binop",
                     loc: [26, 12, 26, 25],
@@ -206,7 +205,7 @@ const scriptBoundTagLoading = cs.create(
                       kind: "id",
                       loc: [26, 12, 26, 16],
                       text: "held",
-                      bindingKey: "held$1urfcbdx87m7k$5",
+                      bindingKey: "held$v8fe0e5k2jbe$5",
                     },
                     operatorToken: "===",
                     right: {
@@ -220,30 +219,30 @@ const scriptBoundTagLoading = cs.create(
                   },
                   whenFalse: {
                     kind: "()",
-                    loc: [26, 35, 26, 57],
+                    loc: [26, 35, 26, 52],
                     expression: {
                       kind: "()",
-                      loc: [26, 35, 26, 50],
+                      loc: [26, 35, 26, 45],
                       expression: {
-                        kind: "splice",
-                        loc: [26, 35, 26, 44],
-                        key: "$evaluate",
+                        kind: "bltn",
+                        loc: [26, 35, 26, 39],
+                        name: "eval",
                       },
                       arguments: [
                         {
                           kind: "id",
-                          loc: [26, 45, 26, 49],
+                          loc: [26, 40, 26, 44],
                           text: "held",
-                          bindingKey: "held$1urfcbdx87m7k$5",
+                          bindingKey: "held$v8fe0e5k2jbe$5",
                         },
                       ],
                     },
                     arguments: [
                       {
                         kind: "id",
-                        loc: [26, 51, 26, 56],
+                        loc: [26, 46, 26, 51],
                         text: "props",
-                        bindingKey: "props$1urfcbdx87m7k$4",
+                        bindingKey: "props$v8fe0e5k2jbe$4",
                       },
                     ],
                   },
@@ -282,7 +281,7 @@ const scriptBoundTagLoading = cs.create(
                       kind: "id",
                       loc: [31, 8, 31, 13],
                       text: "drawn",
-                      bindingKey: "drawn$1urfcbdx87m7k$2",
+                      bindingKey: "drawn$v8fe0e5k2jbe$2",
                     },
                     name: "get",
                   },
@@ -318,7 +317,7 @@ const scriptBoundTagLoading = cs.create(
                   kind: "id",
                   loc: [31, 49, 31, 54],
                   text: "Badge",
-                  bindingKey: "Badge$1urfcbdx87m7k$3",
+                  bindingKey: "Badge$v8fe0e5k2jbe$3",
                 },
                 attributes: [
                   {
@@ -333,7 +332,7 @@ const scriptBoundTagLoading = cs.create(
                           kind: "id",
                           loc: [31, 62, 31, 67],
                           text: "count",
-                          bindingKey: "count$1urfcbdx87m7k$1",
+                          bindingKey: "count$v8fe0e5k2jbe$1",
                         },
                         name: "get",
                       },
@@ -369,7 +368,7 @@ const scriptBoundTagLoading = cs.create(
                           kind: "id",
                           loc: [32, 30, 32, 35],
                           text: "drawn",
-                          bindingKey: "drawn$1urfcbdx87m7k$2",
+                          bindingKey: "drawn$v8fe0e5k2jbe$2",
                         },
                         name: "set",
                       },
@@ -417,7 +416,7 @@ const scriptBoundTagLoading = cs.create(
                           kind: "id",
                           loc: [33, 30, 33, 35],
                           text: "count",
-                          bindingKey: "count$1urfcbdx87m7k$1",
+                          bindingKey: "count$v8fe0e5k2jbe$1",
                         },
                         name: "set",
                       },
@@ -435,7 +434,7 @@ const scriptBoundTagLoading = cs.create(
                                 kind: "id",
                                 loc: [33, 40, 33, 45],
                                 text: "count",
-                                bindingKey: "count$1urfcbdx87m7k$1",
+                                bindingKey: "count$v8fe0e5k2jbe$1",
                               },
                               name: "get",
                             },

@@ -1,19 +1,20 @@
-(($d) => {
-  const f1 = ($0, $1) => ({ taken: $0()(true), skipped: $1()(false) });
-  const f2 = ($0) => (flag) => {
-    if (flag) {
-      {
-        return $0();
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => ({ taken: $0()(true), skipped: $1()(false) });
+    const f2 = ($0) => (flag) => {
+      if (flag) {
+        {
+          return $0();
+        }
       }
-    }
-    return "skipped";
-  };
-  const f3 = () => "evaluated";
-  const f4 = () => {
-    throw "the guarded fragment must never evaluate";
-  };
-  return f1(
-    () => f2(f3),
-    () => f2(f4),
-  );
-})([]);
+      return "skipped";
+    };
+    const f3 = () => "evaluated";
+    const f4 = () => {
+      throw "the guarded fragment must never evaluate";
+    };
+    return f1(
+      () => f2(f3),
+      () => f2(f4),
+    );
+  }))([]);

@@ -1,11 +1,12 @@
-(($d) => {
-  const f1 = () => {
-    let n = 1;
-    if (n === 2) {
-      {
-        return "some";
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      let n = 1;
+      if (n === 2) {
+        {
+          return "some";
+        }
       }
-    }
-  };
-  return f1();
-})([]);
+    };
+    return f1();
+  }))([]);

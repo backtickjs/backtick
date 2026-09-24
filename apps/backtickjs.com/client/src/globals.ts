@@ -1,5 +1,4 @@
 import type { Diagnostic, SiteBuiltins } from "@backtickjs.com/schema";
-import type { BacktickElement, Bundle } from "@backtickjs/core";
 import type ts from "typescript";
 
 // Hashed by the server when it builds the site, so the page says where they are.
@@ -77,7 +76,7 @@ let asked = 0;
 const waiting = new Map<
   number,
   {
-    onBundle: (bundle: Bundle<BacktickElement>) => void;
+    onBundle: (bundle: string) => void;
     onDiagnostics: (diagnostics: Diagnostic[]) => void;
   }
 >();
@@ -98,7 +97,7 @@ window.addEventListener("message", (event: MessageEvent) => {
   }
   waiting.delete(answer.id);
   if (typeof answer.bundle === "string") {
-    back.onBundle(JSON.parse(answer.bundle));
+    back.onBundle(answer.bundle);
     return;
   }
   back.onDiagnostics([

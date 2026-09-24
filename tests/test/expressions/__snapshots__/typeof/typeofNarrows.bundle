@@ -1,7 +1,8 @@
-(($d) => {
-  const f1 = () => {
-    const measure = (v) => (typeof v === "string" ? v.length : v * 2);
-    return [measure("abc"), measure(4)];
-  };
-  return f1();
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      const measure = (v) => (typeof v === "string" ? v.length : v * 2);
+      return [measure("abc"), measure(4)];
+    };
+    return f1();
+  }))([]);

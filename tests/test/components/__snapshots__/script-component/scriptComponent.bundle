@@ -1,12 +1,13 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    return element("div", [], () => [
-      memo(() => component($0(), [["title", () => () => "totals"]])),
-      memo(() => component($1(), [])),
-    ]);
-  };
-  return f1(
-    () => ($0) => element("h2", [], () => () => $0.title()),
-    () => () => element("span", [], () => "new"),
-  );
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      return element("div", [], () => [
+        memo(() => component($0(), [["title", () => () => "totals"]])),
+        memo(() => component($1(), [])),
+      ]);
+    };
+    return f1(
+      () => ($0) => element("h2", [], () => () => $0.title()),
+      () => () => element("span", [], () => "new"),
+    );
+  }))([]);

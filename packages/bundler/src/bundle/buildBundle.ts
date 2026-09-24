@@ -3,7 +3,7 @@ import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
 import type {
-  Bundle,
+  BundleTree,
   BundleArrowFunction,
   BundleElement,
   BundleExpression,
@@ -45,7 +45,7 @@ import type { ClientUnknown } from "@backtickjs/platform-sdk";
 export function buildBundle(
   ast: Ast,
   features: ExperimentalFeatures = {},
-): Bundle<ClientUnknown> {
+): BundleTree<ClientUnknown> {
   // The `functions` table, filled as rendering reaches each script. Two scripts
   // written at one source location are one entry, so this is what makes a
   // reference to a shared script a reference to the same object — the one thing
@@ -439,5 +439,5 @@ export function buildBundle(
   // Minted here, which is the one place it can be. A bundle is a handle the
   // client owns and its brands are keys nothing can write — so what makes one
   // says so, the way a client says it when it hands a script a `State`.
-  return { functions, root } as Bundle<ClientUnknown>;
+  return { functions, root } as BundleTree<ClientUnknown>;
 }

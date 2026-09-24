@@ -12,9 +12,6 @@ import type { Renderer } from "solid-js/universal";
 // props and the lists that read what was written, and everything above and
 // around them is untouched — there is no pass over the tree to find out what
 // changed, because whatever changed said so.
-//
-// Shared by the interpreter and by printed bundles, which hand over the same
-// reads as closures.
 
 /** A position's value, read again whenever what it read changes. */
 export type Read = () => ClientValue;

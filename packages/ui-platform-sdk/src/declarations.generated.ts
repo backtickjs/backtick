@@ -13,7 +13,6 @@ import type { Prop } from "./Prop.js";
 
 export type {
   ArrayLike,
-  Bundle,
   BundleAddition,
   BundleAdditionAssignment,
   BundleArrayElement,
@@ -70,6 +69,7 @@ export type {
   BundleSubtraction,
   BundleSubtractionAssignment,
   BundleThrow,
+  BundleTree,
   BundleTry,
   BundleTypeOf,
   BundleUndefined,

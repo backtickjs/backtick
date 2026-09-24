@@ -106,13 +106,12 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
 - `evaluate(value, { globals? })`: resolves to what any value or script
   evaluates to, without mounting it. It plays the part of React Testing Library's
   `renderHook`.
-- `evaluateBundle(bundle)`: evaluates a hand-written bundle, for a bundle the
-  bundler would never write.
+- `evaluateBundle(tree)`: prints and evaluates a hand-written bundle tree, for
+  a tree the bundler would never build.
 - `cleanup()`: takes down everything `render` drew.
 
-`render` and `evaluate` print each bundle as JavaScript with `printBundle` and
-run it on `web-interpreter`'s `createRuntime`. `BACKTICK_BACKEND=interpreter`
-interprets the bundle instead.
+`render` and `evaluate` run each bundle with `eval` on `web-interpreter`'s
+`createRuntime`.
 
 - Everything from `@testing-library/dom`: `screen`, `within`, `fireEvent`,
   `waitFor`, and the rest.

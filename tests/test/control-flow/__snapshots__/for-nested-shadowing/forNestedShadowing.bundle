@@ -1,13 +1,14 @@
-(($d) => {
-  const f1 = () => {
-    let out = "";
-    for (let i = 0; i < 2; i = i + 1) {
-      const i = "-";
-      for (let j = 0; j < 2; j = j + 1) {
-        out = out + i + j;
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      let out = "";
+      for (let i = 0; i < 2; i = i + 1) {
+        const i = "-";
+        for (let j = 0; j < 2; j = j + 1) {
+          out = out + i + j;
+        }
       }
-    }
-    return out;
-  };
-  return f1();
-})([]);
+      return out;
+    };
+    return f1();
+  }))([]);

@@ -1,8 +1,9 @@
-import type { Bundle, ClientUnknown, Spliceable } from "@backtickjs/core";
-import { createInterpreter } from "@backtickjs/web-interpreter";
-import { prepare } from "./client.js";
+import type { ClientUnknown, Spliceable } from "@backtickjs/core";
+import { bundler, printBundle } from "@backtickjs/bundler";
+import type { BundleTree } from "@backtickjs/bundler";
+import { runOf, testRuntime } from "./client.js";
 
-/** What a test changes about the interpreter a value runs in. */
+/** What a test changes about the runtime a value runs in. */
 export interface EvaluateOptions {
   /** Globals beside the web's, for a test about an app adding one. */
   readonly globals?: { readonly [name: string]: unknown };
@@ -20,19 +21,18 @@ export async function evaluate<T extends ClientUnknown>(
   value: Spliceable<T>,
   { globals }: EvaluateOptions = {},
 ): Promise<T> {
-  return (await prepare(value, globals)).evaluate();
+  const code = await bundler.run(value);
+  return testRuntime(globals).evaluate(runOf(code));
 }
 
 /**
- * Evaluates a bundle that did not come from the bundler, for a test about a
- * bundle the bundler would never write. Every other test evaluates a value
- * with {@link evaluate}.
+ * Prints and evaluates a tree that did not come from the bundler, for a test
+ * about a tree the bundler would never build. Every other test evaluates a
+ * value with {@link evaluate}.
  */
 export function evaluateBundle<T extends ClientUnknown>(
-  bundle: Bundle<T>,
+  tree: BundleTree<T>,
   { globals }: EvaluateOptions = {},
 ): T {
-  return createInterpreter({ window, globals, global: globalThis }).evaluate(
-    bundle,
-  );
+  return testRuntime(globals).evaluate(runOf(printBundle(tree)));
 }

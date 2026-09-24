@@ -1,16 +1,17 @@
-(($d) => {
-  const f1 = () => {
-    return element(
-      "span",
-      [],
-      () => () =>
-        "/at?q=" +
-        encodeURIComponent("a b+c&d#é") +
-        "&page=" +
-        encodeURIComponent(2.5) +
-        " " +
-        decodeURIComponent("a%20b%2Bc%26d%23%C3%A9"),
-    );
-  };
-  return component(() => f1(), []);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      return element(
+        "span",
+        [],
+        () => () =>
+          "/at?q=" +
+          encodeURIComponent("a b+c&d#é") +
+          "&page=" +
+          encodeURIComponent(2.5) +
+          " " +
+          decodeURIComponent("a%20b%2Bc%26d%23%C3%A9"),
+      );
+    };
+    return component(() => f1(), []);
+  }))([]);

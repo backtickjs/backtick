@@ -1,0 +1,14 @@
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) =>
+      element("div", [], () => [
+        element("span", [], () => () => (0, eval)($0())("ada")),
+        memo(() => (0, eval)($1())({ count: 3 })),
+      ]);
+    return f1(
+      () =>
+        '(($d) => untrack(() => {\nconst f1 = (() => ((name) => ("hello " + name)));\nreturn (f1());\n}))([])',
+      () =>
+        '(($d) => untrack(() => {\nconst f1 = (() => ((props) => element("b", [], () => (() => ("count " + (props.count))))));\nreturn (f1());\n}))([])',
+    );
+  }))([]);

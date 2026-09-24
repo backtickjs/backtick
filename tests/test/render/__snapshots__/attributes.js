@@ -31,7 +31,7 @@ describe("a prop", () => {
 });
 describe("an svg tag", () => {
   // `document.createElement("path")` is an `HTMLUnknownElement`: it parses, it
-  // inserts, and it draws nothing. The prefix, which the interpreter adds to a
+  // inserts, and it draws nothing. The prefix, which the runtime adds to a
   // tag drawn inside an `svg`, is what says which namespace it is from.
   it("is made in the SVG namespace, without its prefix", async () => {
     const root = await drawn(
@@ -101,7 +101,7 @@ describe("a field's value", () => {
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
-        fileHash: "2nnba74xugz2e",
+        fileHash: "2pi9tt1octht0",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
@@ -116,7 +116,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [112, 13, 112, 17],
               text: "text",
-              bindingKey: "text$2nnba74xugz2e$0",
+              bindingKey: "text$2pi9tt1octht0$0",
             },
             initializer: {
               kind: "()",
@@ -142,7 +142,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [113, 13, 113, 17],
               text: "isOn",
-              bindingKey: "isOn$2nnba74xugz2e$1",
+              bindingKey: "isOn$2pi9tt1octht0$1",
             },
             initializer: {
               kind: "()",
@@ -202,7 +202,7 @@ describe("a field's value", () => {
                             kind: "id",
                             loc: [116, 43, 116, 47],
                             text: "text",
-                            bindingKey: "text$2nnba74xugz2e$0",
+                            bindingKey: "text$2pi9tt1octht0$0",
                           },
                           name: "get",
                         },
@@ -249,7 +249,7 @@ describe("a field's value", () => {
                             kind: "id",
                             loc: [117, 59, 117, 63],
                             text: "isOn",
-                            bindingKey: "isOn$2nnba74xugz2e$1",
+                            bindingKey: "isOn$2pi9tt1octht0$1",
                           },
                           name: "get",
                         },
@@ -288,7 +288,7 @@ describe("a field's value", () => {
                                   kind: "id",
                                   loc: [120, 15, 120, 19],
                                   text: "text",
-                                  bindingKey: "text$2nnba74xugz2e$0",
+                                  bindingKey: "text$2pi9tt1octht0$0",
                                 },
                                 name: "set",
                               },
@@ -310,7 +310,7 @@ describe("a field's value", () => {
                                   kind: "id",
                                   loc: [121, 15, 121, 19],
                                   text: "isOn",
-                                  bindingKey: "isOn$2nnba74xugz2e$1",
+                                  bindingKey: "isOn$2pi9tt1octht0$1",
                                 },
                                 name: "set",
                               },
@@ -360,7 +360,7 @@ describe("a field's value", () => {
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
-        fileHash: "2nnba74xugz2e",
+        fileHash: "2pi9tt1octht0",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
@@ -375,7 +375,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [148, 13, 148, 18],
               text: "texts",
-              bindingKey: "texts$2nnba74xugz2e$2",
+              bindingKey: "texts$2pi9tt1octht0$2",
             },
             initializer: {
               kind: "()",
@@ -407,7 +407,7 @@ describe("a field's value", () => {
               kind: "id",
               loc: [149, 13, 149, 18],
               text: "flags",
-              bindingKey: "flags$2nnba74xugz2e$3",
+              bindingKey: "flags$2pi9tt1octht0$3",
             },
             initializer: {
               kind: "()",
@@ -476,7 +476,7 @@ describe("a field's value", () => {
                               kind: "id",
                               loc: [152, 43, 152, 48],
                               text: "texts",
-                              bindingKey: "texts$2nnba74xugz2e$2",
+                              bindingKey: "texts$2pi9tt1octht0$2",
                             },
                             name: "get",
                           },
@@ -532,7 +532,7 @@ describe("a field's value", () => {
                               kind: "id",
                               loc: [153, 59, 153, 64],
                               text: "flags",
-                              bindingKey: "flags$2nnba74xugz2e$3",
+                              bindingKey: "flags$2pi9tt1octht0$3",
                             },
                             name: "get",
                           },
@@ -577,7 +577,7 @@ describe("a field's value", () => {
                                   kind: "id",
                                   loc: [156, 15, 156, 20],
                                   text: "texts",
-                                  bindingKey: "texts$2nnba74xugz2e$2",
+                                  bindingKey: "texts$2pi9tt1octht0$2",
                                 },
                                 name: "set",
                               },
@@ -599,7 +599,7 @@ describe("a field's value", () => {
                                   kind: "id",
                                   loc: [157, 15, 157, 20],
                                   text: "flags",
-                                  bindingKey: "flags$2nnba74xugz2e$3",
+                                  bindingKey: "flags$2pi9tt1octht0$3",
                                 },
                                 name: "set",
                               },

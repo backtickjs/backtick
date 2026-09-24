@@ -1,14 +1,15 @@
-(($d) => {
-  const f1 = ($0) => {
-    const count = $0()(0);
-    return element("div", [], () => [
-      element(
-        "button",
-        [["onclick", () => () => count.set(count.get() + 1), true]],
-        () => "Add",
-      ),
-      element("p", [], () => () => "Count: " + count.get()),
-    ]);
-  };
-  return component(() => f1(() => state), []);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const count = $0()(0);
+      return element("div", [], () => [
+        element(
+          "button",
+          [["onclick", () => () => count.set(count.get() + 1), true]],
+          () => "Add",
+        ),
+        element("p", [], () => () => "Count: " + count.get()),
+      ]);
+    };
+    return component(() => f1(() => state), []);
+  }))([]);

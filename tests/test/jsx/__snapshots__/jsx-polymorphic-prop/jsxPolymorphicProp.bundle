@@ -1,7 +1,8 @@
-(($d) => {
-  const f1 = ($0) => () => $0();
-  return element("div", [], () => [
-    element("span", [["onclick", () => f1(() => 1), false]], null),
-    element("span", [["onclick", () => f1(() => 2), false]], null),
-  ]);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => () => $0();
+    return element("div", [], () => [
+      element("span", [["onclick", () => f1(() => 1), false]], null),
+      element("span", [["onclick", () => f1(() => 2), false]], null),
+    ]);
+  }))([]);

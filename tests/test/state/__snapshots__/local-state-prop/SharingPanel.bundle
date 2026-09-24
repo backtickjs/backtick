@@ -1,29 +1,30 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const size = $0()(16);
-    return element("div", [], () => [
-      memo(() => component($1(), [["size", () => () => size]])),
-      memo(() => component($1(), [["size", () => () => size]])),
-    ]);
-  };
-  const f2 = ($0) => "font-size: " + $0().get() + "px";
-  const f3 = ($0) => () => {
-    $0().set($0().get() + 1);
-  };
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => ($0) =>
-          element(
-            "span",
-            [
-              ["style", () => f2(() => $0.size()), false],
-              ["onclick", () => f3(() => $0.size()), false],
-            ],
-            () => "press",
-          ),
-      ),
-    [],
-  );
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const size = $0()(16);
+      return element("div", [], () => [
+        memo(() => component($1(), [["size", () => () => size]])),
+        memo(() => component($1(), [["size", () => () => size]])),
+      ]);
+    };
+    const f2 = ($0) => "font-size: " + $0().get() + "px";
+    const f3 = ($0) => () => {
+      $0().set($0().get() + 1);
+    };
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => ($0) =>
+            element(
+              "span",
+              [
+                ["style", () => f2(() => $0.size()), false],
+                ["onclick", () => f3(() => $0.size()), false],
+              ],
+              () => "press",
+            ),
+        ),
+      [],
+    );
+  }))([]);

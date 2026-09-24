@@ -6,7 +6,7 @@ export type {
   BacktickElement,
   BacktickNode,
   Builtins,
-  Bundle,
+  BundleTree,
   BundleAddition,
   BundleArrayElement,
   BundleArrayLiteral,

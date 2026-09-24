@@ -1,16 +1,17 @@
-(($d) => {
-  const f1 = ($0) => {
-    const twice = (Card) =>
-      element("div", [], () => [
-        memo(() => component(Card, [["n", () => 1]])),
-        memo(() => component(Card, [["n", () => 2]])),
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const twice = (Card) =>
+        element("div", [], () => [
+          memo(() => component(Card, [["n", () => 1]])),
+          memo(() => component(Card, [["n", () => 2]])),
+        ]);
+      return element("section", [], () => [
+        memo(() => component($0(), [["title", () => () => "host"]])),
+        memo(() =>
+          twice((props) => element("i", [], () => () => "row " + props.n)),
+        ),
       ]);
-    return element("section", [], () => [
-      memo(() => component($0(), [["title", () => () => "host"]])),
-      memo(() =>
-        twice((props) => element("i", [], () => () => "row " + props.n)),
-      ),
-    ]);
-  };
-  return f1(() => ($0) => element("h2", [], () => () => $0.title()));
-})([]);
+    };
+    return f1(() => ($0) => element("h2", [], () => () => $0.title()));
+  }))([]);

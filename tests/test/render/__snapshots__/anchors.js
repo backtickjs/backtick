@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs, For, state } from "@backtickjs/core";
-import { createInterpreter } from "@backtickjs/web-interpreter";
+import { createRuntime } from "@backtickjs/web-interpreter";
 import { screen } from "@backtickjs/web-testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -31,7 +31,7 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "render/anchors.test.tsx",
-      fileHash: "3obo1rlt5auy4",
+      fileHash: "1l1sblr1an3g5",
       splices: {
         $state: { value: state, params: [] },
         $For: { value: For, params: [] },
@@ -49,7 +49,7 @@ async function Rows() {
             kind: "id",
             loc: [32, 11, 32, 14],
             text: "ids",
-            bindingKey: "ids$3obo1rlt5auy4$0",
+            bindingKey: "ids$1l1sblr1an3g5$0",
           },
           initializer: {
             kind: "()",
@@ -91,7 +91,7 @@ async function Rows() {
             kind: "id",
             loc: [33, 11, 33, 16],
             text: "clear",
-            bindingKey: "clear$3obo1rlt5auy4$1",
+            bindingKey: "clear$1l1sblr1an3g5$1",
           },
           initializer: {
             kind: "=>",
@@ -111,7 +111,7 @@ async function Rows() {
                       kind: "id",
                       loc: [34, 7, 34, 10],
                       text: "ids",
-                      bindingKey: "ids$3obo1rlt5auy4$0",
+                      bindingKey: "ids$1l1sblr1an3g5$0",
                     },
                     name: "set",
                   },
@@ -155,7 +155,7 @@ async function Rows() {
                       kind: "id",
                       loc: [38, 24, 38, 29],
                       text: "clear",
-                      bindingKey: "clear$3obo1rlt5auy4$1",
+                      bindingKey: "clear$1l1sblr1an3g5$1",
                     },
                   },
                 ],
@@ -188,7 +188,7 @@ async function Rows() {
                           kind: "id",
                           loc: [39, 20, 39, 23],
                           text: "ids",
-                          bindingKey: "ids$3obo1rlt5auy4$0",
+                          bindingKey: "ids$1l1sblr1an3g5$0",
                         },
                         name: "get",
                       },
@@ -208,7 +208,7 @@ async function Rows() {
                           kind: "id",
                           loc: [39, 33, 39, 35],
                           text: "id",
-                          bindingKey: "id$3obo1rlt5auy4$2",
+                          bindingKey: "id$1l1sblr1an3g5$2",
                         },
                       },
                     ],
@@ -235,7 +235,7 @@ async function Rows() {
                             kind: "id",
                             loc: [39, 64, 39, 66],
                             text: "id",
-                            bindingKey: "id$3obo1rlt5auy4$2",
+                            bindingKey: "id$1l1sblr1an3g5$2",
                           },
                         },
                       ],
@@ -280,11 +280,12 @@ function target(html) {
   return main;
 }
 // Draws in front of the anchor `selector` names. `render` takes no anchor —
-// where a drawing goes among a page's own nodes is the interpreter's business —
-// so these ask the interpreter directly.
+// where a drawing goes among a page's own nodes is the runtime's business —
+// so these ask the runtime directly.
 async function drawAt(value, parent, selector) {
-  const unmount = createInterpreter({ window }).render(
-    await bundler.run(value),
+  const code = await bundler.run(value);
+  const unmount = createRuntime({ window, global: globalThis }).render(
+    () => (0, eval)(code),
     parent,
     parent.querySelector(selector),
   );

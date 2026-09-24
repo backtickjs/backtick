@@ -1,33 +1,34 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const names = $0()(["a", "b", "c"]);
-    const rotate = () => {
-      const held = names.get();
-      names.set([held[2], held[0], held[1]]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const names = $0()(["a", "b", "c"]);
+      const rotate = () => {
+        const held = names.get();
+        names.set([held[2], held[0], held[1]]);
+      };
+      return element("div", [], () => [
+        element("span", [["onclick", () => rotate, false]], () => "rotate"),
+        element(
+          "div",
+          [],
+          () => () =>
+            component($1(), [
+              ["each", () => () => names.get()],
+              [
+                "children",
+                () => () => (name, index) =>
+                  element("span", [], () => () => name + " at " + index.get()),
+              ],
+            ]),
+        ),
+      ]);
     };
-    return element("div", [], () => [
-      element("span", [["onclick", () => rotate, false]], () => "rotate"),
-      element(
-        "div",
-        [],
-        () => () =>
-          component($1(), [
-            ["each", () => () => names.get()],
-            [
-              "children",
-              () => () => (name, index) =>
-                element("span", [], () => () => name + " at " + index.get()),
-            ],
-          ]),
-      ),
-    ]);
-  };
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => ($0) => list(() => $0.each(), $0.children()),
-      ),
-    [],
-  );
-})([]);
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => ($0) => list(() => $0.each(), $0.children()),
+        ),
+      [],
+    );
+  }))([]);

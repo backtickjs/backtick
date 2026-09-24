@@ -1,7 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
-import { bundler, printBundle } from "@backtickjs/bundler";
+import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import { evaluate, render } from "@backtickjs/web-testing";
 import prettier from "prettier";
@@ -37,7 +37,7 @@ export async function snapshotCase(
     });
 
   // Formatted, so a change to what is printed reads as the code it changed.
-  const code = printBundle(await bundler.run(value));
+  const code = await bundler.run(value);
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   const evaluated = await evaluate(value);
   const drawn =

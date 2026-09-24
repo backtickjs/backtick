@@ -1,32 +1,20 @@
-(($d) => {
-  const f1 = ($0, $1, $2) => {
-    const count = $0()(0);
-    const Badge = $1()($2());
-    return element("div", [], () => [
-      memo(() => component(Badge, [["count", () => count.get()]])),
-      element(
-        "button",
-        [["onclick", () => () => count.set(count.get() + 1), true]],
-        () => "more",
-      ),
-    ]);
-  };
-  return f1(
-    () => state,
-    () => evaluate,
-    () => ({
-      functions: {
-        0: [
-          "=>",
-          [],
-          [
-            "=>",
-            [["param", "props"]],
-            ["el", "b", {}, ["+", "count ", [".", ["id", "props"], "count"]]],
-          ],
-        ],
-      },
-      root: ["()", ["fn", "0"], []],
-    }),
-  );
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const count = $0()(0);
+      const Badge = (0, eval)($1());
+      return element("div", [], () => [
+        memo(() => component(Badge, [["count", () => count.get()]])),
+        element(
+          "button",
+          [["onclick", () => () => count.set(count.get() + 1), true]],
+          () => "more",
+        ),
+      ]);
+    };
+    return f1(
+      () => state,
+      () =>
+        '(($d) => untrack(() => {\nconst f1 = (() => ((props) => element("b", [], () => (() => ("count " + (props.count))))));\nreturn (f1());\n}))([])',
+    );
+  }))([]);

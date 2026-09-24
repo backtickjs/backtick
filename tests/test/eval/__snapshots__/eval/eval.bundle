@@ -1,0 +1,13 @@
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) =>
+      element("div", [], () => [
+        memo(() => (0, eval)($0())),
+        element("b", [], () => () => (0, eval)($1()) + 1),
+      ]);
+    return f1(
+      () =>
+        '(($d) => untrack(() => {\nconst f1 = (($0) => component(($0()), [["each", () => (() => [1, 2, 3])], ["children", () => (() => ((n) => element("span", [], () => (() => ("item " + n)))))]]));\nreturn component((() => (f1((() => (($0) => list(() => ($0.each()), ($0.children()))))))), []);\n}))([])',
+      () => "(($d) => untrack(() => {\nreturn 41;\n}))([])",
+    );
+  }))([]);

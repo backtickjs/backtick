@@ -1,4 +1,5 @@
-(($d) => {
-  const f1 = () => 1;
-  return f1();
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => 1;
+    return f1();
+  }))([]);

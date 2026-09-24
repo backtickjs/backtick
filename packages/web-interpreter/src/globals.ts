@@ -1,10 +1,4 @@
-import type { ClientUnknown, ClientValue } from "@backtickjs/core";
-import type {
-  Bundle,
-  Signal,
-  SignalOptions,
-  State,
-} from "@backtickjs/platform-sdk";
+import type { Signal, SignalOptions, State } from "@backtickjs/platform-sdk";
 import type { Builtins } from "@backtickjs/web-sdk";
 import {
   createMemo,
@@ -13,10 +7,9 @@ import {
   onMount,
   untrack,
 } from "solid-js";
-import { compile, scopeOf } from "./compile.js";
+import type { Renderer } from "solid-js/universal";
 import { callComponent, drawElement, drawList, memo } from "./draw.js";
 import type { DrawnProp } from "./draw.js";
-import type { Instance } from "./Instance.js";
 
 /** What a client is wired to. */
 export interface ClientOptions {
@@ -37,16 +30,15 @@ export interface ClientOptions {
 }
 
 /**
- * Defines the web client's globals on `instance.global`: the framework's
- * builtins, the bindings a printed bundle draws with, and the app's own.
- * Everything else a bundle names, `window` and ECMAScript's among it, is the
- * realm's.
+ * Defines the web client's globals on `global`: the framework's builtins, the
+ * bindings a bundle draws with, and the app's own. Everything else a bundle
+ * names, `window` and ECMAScript's among it, is the realm's.
  */
 export function defineGlobals(
-  instance: Instance,
+  renderer: Renderer<object>,
+  global: object,
   globals: { readonly [name: string]: unknown } = {},
 ): void {
-  const { renderer } = instance;
   const web = {
     // Through Solid's updater form, so a function is stored rather than
     // called. The brand cannot be built by writing the members — that is what
@@ -70,19 +62,6 @@ export function defineGlobals(
     onMount: onMount satisfies Builtins["onMount"],
     onCleanup: onCleanup satisfies Builtins["onCleanup"],
 
-    // A bundle drawn with this instance's renderer in a new instance of its
-    // own: the labels are per bundle, so its `functions` are too. Untracked,
-    // as Solid runs a component: what the bundle reads while its root is
-    // evaluated is its own setup, and a write to it runs nothing of the
-    // caller's again.
-    evaluate: (bundle: Bundle<ClientUnknown>) =>
-      untrack(() =>
-        compile(
-          { ...instance, bundle, functions: new Map() },
-          bundle.root,
-        )(scopeOf(null)),
-      ),
-
     element: (
       id: string,
       props: readonly DrawnProp[],
@@ -91,21 +70,13 @@ export function defineGlobals(
     list: drawList,
     component: callComponent,
     memo,
+    untrack,
   };
-  Object.assign(instance.global, web, globals);
+  Object.assign(global, web, globals);
 }
 
 // Only when there is one: Solid merges the options over its own, so an
 // `equals` of `undefined` would replace its `===` rather than keep it.
 function equalsOf<T>(options: SignalOptions<T> | undefined) {
   return options?.equals ? { equals: options.equals } : undefined;
-}
-
-/** A global a bundle names, or the `ReferenceError` JavaScript would throw. */
-export function globalOf(instance: Instance, name: string): ClientValue {
-  const scope = instance.global as { readonly [name: string]: ClientValue };
-  if (!(name in scope)) {
-    throw new ReferenceError(`${name} is not defined`);
-  }
-  return scope[name];
 }

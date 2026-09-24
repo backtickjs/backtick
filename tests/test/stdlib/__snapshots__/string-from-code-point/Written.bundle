@@ -1,10 +1,11 @@
-(($d) => {
-  const f1 = () => {
-    return element(
-      "span",
-      [],
-      () => () => String.fromCodePoint(72, 105) + String.fromCodePoint(),
-    );
-  };
-  return component(() => f1(), []);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      return element(
+        "span",
+        [],
+        () => () => String.fromCodePoint(72, 105) + String.fromCodePoint(),
+      );
+    };
+    return component(() => f1(), []);
+  }))([]);

@@ -1,43 +1,44 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const selected = $0()(0);
-    return element("div", [], () => [
-      element(
-        "span",
-        [["onclick", () => () => selected.set(1), true]],
-        () => "select",
-      ),
-      element(
-        "div",
-        [],
-        () => () =>
-          component($1(), [
-            ["each", () => () => [0, 1, 2]],
-            [
-              "children",
-              () => () => (id) =>
-                element(
-                  "a",
-                  [
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const selected = $0()(0);
+      return element("div", [], () => [
+        element(
+          "span",
+          [["onclick", () => () => selected.set(1), true]],
+          () => "select",
+        ),
+        element(
+          "div",
+          [],
+          () => () =>
+            component($1(), [
+              ["each", () => () => [0, 1, 2]],
+              [
+                "children",
+                () => () => (id) =>
+                  element(
+                    "a",
                     [
-                      "href",
-                      () => (selected.get() === id ? "#open" : "#closed"),
-                      false,
+                      [
+                        "href",
+                        () => (selected.get() === id ? "#open" : "#closed"),
+                        false,
+                      ],
                     ],
-                  ],
-                  () => () => "row " + id,
-                ),
-            ],
-          ]),
-      ),
-    ]);
-  };
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => ($0) => list(() => $0.each(), $0.children()),
-      ),
-    [],
-  );
-})([]);
+                    () => () => "row " + id,
+                  ),
+              ],
+            ]),
+        ),
+      ]);
+    };
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => ($0) => list(() => $0.each(), $0.children()),
+        ),
+      [],
+    );
+  }))([]);

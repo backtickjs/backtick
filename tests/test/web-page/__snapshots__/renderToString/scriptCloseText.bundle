@@ -1,3 +1,8 @@
-(($d) => {
-  return element("p", [], () => "& \u003c > \" ' \u003c/script> \u003c!-- -->");
-})([]);
+(($d) =>
+  untrack(() => {
+    return element(
+      "p",
+      [],
+      () => "& \u003c > \" ' \u003c/script> \u003c!-- -->",
+    );
+  }))([]);

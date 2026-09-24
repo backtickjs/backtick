@@ -94,7 +94,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "1exqazqy3dpmb",
+          fileHash: "3b1d6kjqn8mk7",
           splices: {},
           captures: [],
         },
@@ -137,7 +137,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "1exqazqy3dpmb",
+          fileHash: "3b1d6kjqn8mk7",
           splices: {},
           captures: [],
         },
@@ -180,7 +180,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "1exqazqy3dpmb",
+          fileHash: "3b1d6kjqn8mk7",
           splices: {},
           captures: [],
         },
@@ -209,7 +209,7 @@ describe("a handler that is not a function", () => {
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "1exqazqy3dpmb",
+          fileHash: "3b1d6kjqn8mk7",
           splices: {},
           captures: [],
         },

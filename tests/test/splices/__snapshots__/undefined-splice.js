@@ -15,7 +15,7 @@ describe("a spliced undefined", () => {
           {
             version: "0.0.0",
             filePath: "splices/undefined-splice.test.tsx",
-            fileHash: "v2dgxvkd8042",
+            fileHash: "oeybv5lkrw7v",
             splices: { $nothing: { value: nothing, params: [] } },
             captures: [],
           },
@@ -37,7 +37,7 @@ describe("a spliced undefined", () => {
         {
           version: "0.0.0",
           filePath: "splices/undefined-splice.test.tsx",
-          fileHash: "v2dgxvkd8042",
+          fileHash: "oeybv5lkrw7v",
           splices: { $data: { value: data, params: [] } },
           captures: [],
         },
@@ -60,7 +60,7 @@ describe("a spliced undefined", () => {
           {
             version: "0.0.0",
             filePath: "splices/undefined-splice.test.tsx",
-            fileHash: "v2dgxvkd8042",
+            fileHash: "oeybv5lkrw7v",
             splices: { $data: { value: data, params: [] } },
             captures: [],
           },
@@ -75,7 +75,7 @@ describe("a spliced undefined", () => {
     );
   });
   it("is written as an undef node", async () => {
-    const bundle = await bundler.run([undefined]);
+    const bundle = await bundler.tree([undefined]);
     assert.deepEqual(bundle.root, ["arr", [["undef"]]]);
   });
 });

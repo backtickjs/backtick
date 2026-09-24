@@ -1,4 +1,4 @@
-import { cs, evaluate, For, onMount, state } from "@backtickjs/core";
+import { cs, For, onMount, state } from "@backtickjs/core";
 import type { Bundle, ClientValue, State } from "@backtickjs/core";
 import { window } from "@backtickjs/web-sdk";
 import { shown, type Verdict } from "./Case.js";
@@ -59,7 +59,7 @@ export async function Report({
                 row.verdicts.set(
                   cases.map((held) => {
                     try {
-                      return $evaluate(held.bundle);
+                      return eval(held.bundle);
                     } catch (error) {
                       return {
                         name: held.name,

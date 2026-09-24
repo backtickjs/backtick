@@ -11,7 +11,6 @@
 export type {
   ArrayLike,
   Builtins,
-  Bundle,
   BundleAddition,
   BundleArrayElement,
   BundleArrayLiteral,
@@ -69,6 +68,7 @@ export type {
   BundleStrictInequality,
   BundleSubtraction,
   BundleThrow,
+  BundleTree,
   BundleTry,
   BundleUndefined,
   BundleWhile,
@@ -83,7 +83,7 @@ export type {
   SignalOptions,
   State,
 } from "./declarations.generated.js";
-export { computed, evaluate, state } from "./builtins.generated.js";
+export { computed, state } from "./builtins.generated.js";
 
 // Written by hand, because a schema never says it: `Client` is how a host
 // language spells "a script standing in for a value", which a client has no
@@ -92,3 +92,4 @@ export { computed, evaluate, state } from "./builtins.generated.js";
 export type { Client } from "./Client.js";
 export type { Spliceable, Spliced } from "./Spliceable.js";
 export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
+export type { Bundle } from "./Bundle.js";

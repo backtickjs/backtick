@@ -1,10 +1,11 @@
-(($d) => {
-  const f1 = () => {
-    let last = () => 0;
-    for (let i = 0; i < 3; i = i + 1) {
-      last = () => i;
-    }
-    return last();
-  };
-  return f1();
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      let last = () => 0;
+      for (let i = 0; i < 3; i = i + 1) {
+        last = () => i;
+      }
+      return last();
+    };
+    return f1();
+  }))([]);

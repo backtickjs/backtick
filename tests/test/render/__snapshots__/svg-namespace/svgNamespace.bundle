@@ -1,59 +1,63 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const Dot = (props) =>
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const Dot = (props) =>
+        element(
+          "circle",
+          [
+            ["cx", () => props.x, false],
+            ["cy", () => "5", true],
+            ["r", () => "2", true],
+          ],
+          () => element("title", [], () => () => "dot " + props.x),
+        );
+      return element("div", [], () => [
+        element("a", [["href", () => "/shapes", true]], () => "shapes"),
+        element(
+          "svg",
+          [
+            ["viewBox", () => "0 0 30 10", true],
+            ["width", () => "120", true],
+          ],
+          () => [
+            memo(() => component($0(), [])),
+            memo(() =>
+              component($1(), [
+                ["each", () => () => [10, 20]],
+                [
+                  "children",
+                  () => () => (x) => component(Dot, [["x", () => x]]),
+                ],
+              ]),
+            ),
+            element(
+              "foreignObject",
+              [
+                ["x", () => "0", true],
+                ["y", () => "0", true],
+                ["width", () => "10", true],
+                ["height", () => "10", true],
+              ],
+              () => element("p", [], () => "html again"),
+            ),
+          ],
+        ),
+      ]);
+    };
+    const f2 = () =>
       element(
         "circle",
         [
-          ["cx", () => props.x, false],
+          ["cx", () => "5", true],
           ["cy", () => "5", true],
-          ["r", () => "2", true],
+          ["r", () => "4", true],
+          ["fill", () => "none", true],
+          ["stroke", () => "currentColor", true],
         ],
-        () => element("title", [], () => () => "dot " + props.x),
+        null,
       );
-    return element("div", [], () => [
-      element("a", [["href", () => "/shapes", true]], () => "shapes"),
-      element(
-        "svg",
-        [
-          ["viewBox", () => "0 0 30 10", true],
-          ["width", () => "120", true],
-        ],
-        () => [
-          memo(() => component($0(), [])),
-          memo(() =>
-            component($1(), [
-              ["each", () => () => [10, 20]],
-              ["children", () => () => (x) => component(Dot, [["x", () => x]])],
-            ]),
-          ),
-          element(
-            "foreignObject",
-            [
-              ["x", () => "0", true],
-              ["y", () => "0", true],
-              ["width", () => "10", true],
-              ["height", () => "10", true],
-            ],
-            () => element("p", [], () => "html again"),
-          ),
-        ],
-      ),
-    ]);
-  };
-  const f2 = () =>
-    element(
-      "circle",
-      [
-        ["cx", () => "5", true],
-        ["cy", () => "5", true],
-        ["r", () => "4", true],
-        ["fill", () => "none", true],
-        ["stroke", () => "currentColor", true],
-      ],
-      null,
+    return f1(
+      () => () => f2(),
+      () => ($0) => list(() => $0.each(), $0.children()),
     );
-  return f1(
-    () => () => f2(),
-    () => ($0) => list(() => $0.each(), $0.children()),
-  );
-})([]);
+  }))([]);

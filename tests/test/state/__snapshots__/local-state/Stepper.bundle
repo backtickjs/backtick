@@ -1,20 +1,21 @@
-(($d) => {
-  const f1 = ($0) => {
-    const size = $0()(16);
-    return element(
-      "span",
-      [
-        ["style", () => "font-size: " + size.get() + "px", false],
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const size = $0()(16);
+      return element(
+        "span",
         [
-          "onclick",
-          () => () => {
-            size.set(size.get() + 1);
-          },
-          true,
+          ["style", () => "font-size: " + size.get() + "px", false],
+          [
+            "onclick",
+            () => () => {
+              size.set(size.get() + 1);
+            },
+            true,
+          ],
         ],
-      ],
-      () => "press",
-    );
-  };
-  return component(() => f1(() => state), []);
-})([]);
+        () => "press",
+      );
+    };
+    return component(() => f1(() => state), []);
+  }))([]);

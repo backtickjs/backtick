@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, evaluate, state } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import type { BacktickElement, Bundle } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/web-testing";
 import { userEvent } from "@testing-library/user-event";
@@ -23,7 +23,7 @@ const scriptBoundTagLoading = cs`{
   > | null>(null);
   const Badge = (props: { count: number }) => {
     const held = drawn.get();
-    return held === null ? null : $evaluate(held)(props);
+    return held === null ? null : eval(held)(props);
   };
 
   return (

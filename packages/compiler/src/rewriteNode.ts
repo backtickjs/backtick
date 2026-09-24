@@ -11,8 +11,7 @@ import { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 
 // The global object's names from ECMA-262 and ECMA-402, which a script reads
 // off the client's own global. What a target adds, like `window`, is spliced.
-// `eval` is left out: a client can only run it indirectly, which is not the
-// call a script would have written.
+// `eval` is how a script runs a bundle, and a client calls it indirectly.
 const globals = new Set([
   "AggregateError",
   "Array",
@@ -66,6 +65,7 @@ const globals = new Set([
   "decodeURIComponent",
   "encodeURI",
   "encodeURIComponent",
+  "eval",
   "globalThis",
   "isFinite",
   "isNaN",

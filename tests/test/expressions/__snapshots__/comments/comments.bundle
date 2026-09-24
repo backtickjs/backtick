@@ -1,12 +1,13 @@
-(($d) => {
-  const f1 = () => {
-    const count = 1;
-    if (count === 1) {
-      {
-        return "one";
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      const count = 1;
+      if (count === 1) {
+        {
+          return "one";
+        }
       }
-    }
-    return "many";
-  };
-  return f1();
-})([]);
+      return "many";
+    };
+    return f1();
+  }))([]);

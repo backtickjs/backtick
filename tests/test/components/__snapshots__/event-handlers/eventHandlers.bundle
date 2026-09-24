@@ -1,55 +1,56 @@
-(($d) => {
-  const f1 = ($0) => {
-    const said = $0()("");
-    return element(
-      "form",
-      [
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const said = $0()("");
+      return element(
+        "form",
         [
-          "onsubmit",
-          () => (event) => {
-            event.preventDefault();
-            said.set(event.type + " " + event.cancelable);
-          },
-          true,
+          [
+            "onsubmit",
+            () => (event) => {
+              event.preventDefault();
+              said.set(event.type + " " + event.cancelable);
+            },
+            true,
+          ],
         ],
-      ],
-      () => [
-        element(
-          "textarea",
-          [
+        () => [
+          element(
+            "textarea",
             [
-              "oninput",
-              () => (event) => said.set(event.currentTarget.value),
-              true,
+              [
+                "oninput",
+                () => (event) => said.set(event.currentTarget.value),
+                true,
+              ],
             ],
-          ],
-          null,
-        ),
-        element(
-          "input",
-          [
+            null,
+          ),
+          element(
+            "input",
             [
-              "oninput",
-              () => (event) => said.set(event.currentTarget.value),
-              true,
+              [
+                "oninput",
+                () => (event) => said.set(event.currentTarget.value),
+                true,
+              ],
             ],
-          ],
-          null,
-        ),
-        element(
-          "button",
-          [
+            null,
+          ),
+          element(
+            "button",
             [
-              "onclick",
-              () => (event) =>
-                said.set(event.clientX + " " + event.currentTarget.tagName),
-              true,
+              [
+                "onclick",
+                () => (event) =>
+                  said.set(event.clientX + " " + event.currentTarget.tagName),
+                true,
+              ],
             ],
-          ],
-          () => () => said.get(),
-        ),
-      ],
-    );
-  };
-  return f1(() => state);
-})([]);
+            () => () => said.get(),
+          ),
+        ],
+      );
+    };
+    return f1(() => state);
+  }))([]);

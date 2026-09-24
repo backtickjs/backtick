@@ -1,11 +1,12 @@
-(($d) => {
-  const f1 = () => (ready, count) => {
-    if (!ready) {
-      {
-        return "waiting";
+(($d) =>
+  untrack(() => {
+    const f1 = () => (ready, count) => {
+      if (!ready) {
+        {
+          return "waiting";
+        }
       }
-    }
-    return !(count > 3) ? "room left" : "full";
-  };
-  return f1();
-})([]);
+      return !(count > 3) ? "room left" : "full";
+    };
+    return f1();
+  }))([]);

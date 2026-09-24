@@ -1,11 +1,12 @@
-(($d) => {
-  const f1 = ($0) => $0();
-  const f2 = ($0) => (row) => $0(row);
-  const f3 = ($0) => "row " + $0;
-  return element("div", [], () =>
-    list(
-      () => f1(() => [1, 2, 3]),
-      f2((row) => element("span", [], () => () => f3(row))),
-    ),
-  );
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => $0();
+    const f2 = ($0) => (row) => $0(row);
+    const f3 = ($0) => "row " + $0;
+    return element("div", [], () =>
+      list(
+        () => f1(() => [1, 2, 3]),
+        f2((row) => element("span", [], () => () => f3(row))),
+      ),
+    );
+  }))([]);

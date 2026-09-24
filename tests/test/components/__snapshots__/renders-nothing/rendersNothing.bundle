@@ -1,3 +1,4 @@
-(($d) => {
-  return element("div", [], null);
-})([]);
+(($d) =>
+  untrack(() => {
+    return element("div", [], null);
+  }))([]);

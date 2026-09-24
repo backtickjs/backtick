@@ -1,6 +1,7 @@
-(($d) => {
-  return element("div", [], () => [
-    element("span", [], () => "hi"),
-    element("span", [], () => "hi"),
-  ]);
-})([]);
+(($d) =>
+  untrack(() => {
+    return element("div", [], () => [
+      element("span", [], () => "hi"),
+      element("span", [], () => "hi"),
+    ]);
+  }))([]);

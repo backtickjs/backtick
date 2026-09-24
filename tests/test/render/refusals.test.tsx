@@ -3,10 +3,10 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import type {
   BacktickElement,
-  Bundle,
   ClientUnknown,
   Spliceable,
 } from "@backtickjs/core";
+import type { BundleTree } from "@backtickjs/bundler";
 import { evaluateBundle, render } from "@backtickjs/web-testing";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
@@ -38,11 +38,11 @@ async function drawn(value: Spliceable<BacktickElement>): Promise<Element> {
 
 // An element whose tag no source can spell: JSX reads a capital as a
 // component, so this is the bundle written by hand.
-const element = (tag: string): Bundle<ClientUnknown> =>
+const element = (tag: string): BundleTree<ClientUnknown> =>
   ({
     functions: {},
     root: ["el", tag, {}],
-  }) as unknown as Bundle<ClientUnknown>;
+  }) as unknown as BundleTree<ClientUnknown>;
 
 describe("a tag that would execute", () => {
   it("is refused in HTML", async () => {

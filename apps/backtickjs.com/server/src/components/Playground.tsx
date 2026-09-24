@@ -1,4 +1,4 @@
-import { cs, evaluate, For, state } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 import type { BacktickElement, Client, Bundle } from "@backtickjs/core";
 import type { Example } from "../examples/Example.js";
 import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
@@ -578,7 +578,7 @@ export async function Playground({
                         if (id === asked.get()) {
                           status.set("");
                           diagnostics.set($noDiagnostics);
-                          bundle.set(drawn);
+                          bundle.set(drawn as Bundle<BacktickElement>);
                         }
                       },
                       said,
@@ -622,9 +622,7 @@ export async function Playground({
               >
                 {"BUNDLE" +
                   sized(
-                    bundle.get() === null
-                      ? 0
-                      : JSON.stringify(bundle.get()).length,
+                    bundle.get() === null ? 0 : (bundle.get() as string).length,
                   )}
               </button>
             </div>
@@ -640,7 +638,7 @@ export async function Playground({
             <div style={$SCREEN}>
               {bundle.get() === null
                 ? null
-                : $evaluate(bundle.get() as Bundle<BacktickElement>)}
+                : eval(bundle.get() as Bundle<BacktickElement>)}
             </div>
             <div style={$ISLAND} />
           </div>
@@ -652,7 +650,7 @@ export async function Playground({
               (showing.get() === "bundle" ? "block" : "none")
             }
           >
-            {bundle.get() === null ? "" : JSON.stringify(bundle.get())}
+            {bundle.get() ?? ""}
           </pre>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type {
   Bundle,
   BundleArrayElement,
+  BundleTree,
   BundleArrowFunction,
   BundleElement,
   BundleExpression,
@@ -10,8 +11,9 @@ import type {
 } from "@backtickjs/platform-sdk";
 
 /**
- * A bundle as JavaScript: one expression that answers with what the bundle's
- * root evaluates to.
+ * A bundle tree as JavaScript: one expression that answers with what the
+ * tree's root evaluates to, built under the client's `untrack`, so nothing it
+ * reads while it is built subscribes whoever evaluated it.
  *
  * Literals are printed as literals, strings escaped so that no `</script>`
  * or `<!--` appears. The bundle does not yet tell a value the host computed
@@ -36,7 +38,15 @@ function stringLiteral(value: string): string {
 }
 
 // What the module itself names, beside the builtins it reads.
-const RUNTIME = ["$d", "element", "list", "component", "memo", "globalThis"];
+const RUNTIME = [
+  "$d",
+  "component",
+  "element",
+  "globalThis",
+  "list",
+  "memo",
+  "untrack",
+];
 
 // Names a module may not bind: it is strict code, and `await` is reserved in
 // a module.
@@ -73,7 +83,9 @@ function namesOf(node: unknown, bound: Set<string>, read: Set<string>): void {
   }
 }
 
-export function printBundle(bundle: Bundle<ClientUnknown>): string {
+export function printBundle<T extends ClientUnknown>(
+  bundle: BundleTree<T>,
+): Bundle<T> {
   const data: string[] = [];
   const bindings = new Map<string, string>();
   const labels = new Map<string, string>();
@@ -138,8 +150,14 @@ export function printBundle(bundle: Bundle<ClientUnknown>): string {
     return printed;
   };
 
+  // `eval` read as a value, so a call of it is indirect: a bundle closes over
+  // nothing, and a direct call would hand it this one's scope.
   const builtin = (name: string): string =>
-    IDENTIFIER.test(name) ? name : `globalThis[${stringLiteral(name)}]`;
+    name === "eval"
+      ? "(0, eval)"
+      : IDENTIFIER.test(name)
+        ? name
+        : `globalThis[${stringLiteral(name)}]`;
 
   const member = (name: string, optional: boolean): string =>
     IDENTIFIER.test(name)
@@ -359,12 +377,12 @@ export function printBundle(bundle: Bundle<ClientUnknown>): string {
       ? "[]"
       : `JSON.parse(${stringLiteral(JSON.stringify(data))})`;
   const code = [
-    "(($d) => {",
+    "(($d) => untrack(() => {",
     ...functions,
     `return ${root};`,
-    `})(${carried})`,
+    `}))(${carried})`,
   ].join("\n");
-  return code;
+  return code as Bundle<T>;
 }
 
 // Whether what a position holds can change after it has first been read: the

@@ -1,28 +1,29 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const ids = $0()([1, 2, 3]);
-    const clear = () => {
-      ids.set([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const ids = $0()([1, 2, 3]);
+      const clear = () => {
+        ids.set([]);
+      };
+      return [
+        element("span", [["onclick", () => clear, false]], () => "clear"),
+        memo(() =>
+          component($1(), [
+            ["each", () => () => ids.get()],
+            [
+              "children",
+              () => () => (id) => element("span", [], () => () => "row " + id),
+            ],
+          ]),
+        ),
+      ];
     };
-    return [
-      element("span", [["onclick", () => clear, false]], () => "clear"),
-      memo(() =>
-        component($1(), [
-          ["each", () => () => ids.get()],
-          [
-            "children",
-            () => () => (id) => element("span", [], () => () => "row " + id),
-          ],
-        ]),
-      ),
-    ];
-  };
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => ($0) => list(() => $0.each(), $0.children()),
-      ),
-    [],
-  );
-})([]);
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => ($0) => list(() => $0.each(), $0.children()),
+        ),
+      [],
+    );
+  }))([]);

@@ -1,10 +1,11 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const twice = (Row) =>
-      element("ul", [], () => [memo(() => $0(Row)), memo(() => $1(Row))]);
-    return twice((p) => element("li", [], () => () => "row " + p.n));
-  };
-  const f2 = ($0) => component($0, [["n", () => 1]]);
-  const f3 = ($0) => component($0, [["n", () => 2]]);
-  return f1(f2, f3);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const twice = (Row) =>
+        element("ul", [], () => [memo(() => $0(Row)), memo(() => $1(Row))]);
+      return twice((p) => element("li", [], () => () => "row " + p.n));
+    };
+    const f2 = ($0) => component($0, [["n", () => 1]]);
+    const f3 = ($0) => component($0, [["n", () => 2]]);
+    return f1(f2, f3);
+  }))([]);

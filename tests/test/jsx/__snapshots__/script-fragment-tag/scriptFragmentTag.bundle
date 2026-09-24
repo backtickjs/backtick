@@ -1,9 +1,10 @@
-(($d) => {
-  const f1 = () => {
-    return element("div", [], () => [
-      [element("span", [], () => "a"), element("span", [], () => "b")],
-      element("em", [], () => "c"),
-    ]);
-  };
-  return f1();
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      return element("div", [], () => [
+        [element("span", [], () => "a"), element("span", [], () => "b")],
+        element("em", [], () => "c"),
+      ]);
+    };
+    return f1();
+  }))([]);

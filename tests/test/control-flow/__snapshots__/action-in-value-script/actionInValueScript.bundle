@@ -1,21 +1,22 @@
-(($d) => {
-  const f1 = ($0, $1) => (b) => {
-    let n = 0;
-    $0();
-    if (b) {
-      {
-        $1()();
-        n = 1;
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => (b) => {
+      let n = 0;
+      $0();
+      if (b) {
+        {
+          $1()();
+          n = 1;
+        }
       }
-    }
-    return n;
-  };
-  const f2 = () => {
-    const x = 1;
-  };
-  const f3 = () => () => {
-    let n = 0;
-    n = 1;
-  };
-  return f1(f2, f3);
-})([]);
+      return n;
+    };
+    const f2 = () => {
+      const x = 1;
+    };
+    const f3 = () => () => {
+      let n = 0;
+      n = 1;
+    };
+    return f1(f2, f3);
+  }))([]);

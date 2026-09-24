@@ -38,7 +38,7 @@ describe("a prop", () => {
 
 describe("an svg tag", () => {
   // `document.createElement("path")` is an `HTMLUnknownElement`: it parses, it
-  // inserts, and it draws nothing. The prefix, which the interpreter adds to a
+  // inserts, and it draws nothing. The prefix, which the runtime adds to a
   // tag drawn inside an `svg`, is what says which namespace it is from.
   it("is made in the SVG namespace, without its prefix", async () => {
     const root = await drawn(

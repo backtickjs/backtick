@@ -1,37 +1,38 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const build = (from) => {
-      return Array.from({ length: 3 }, (_, at) => {
-        return { id: from + at, label: $0()("row " + (from + at)) };
-      });
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const build = (from) => {
+        return Array.from({ length: 3 }, (_, at) => {
+          return { id: from + at, label: $0()("row " + (from + at)) };
+        });
+      };
+      const held = $0()(build(1));
+      return element("div", [], () =>
+        element(
+          "ul",
+          [["class", () => "rows", true]],
+          () => () =>
+            component($1(), [
+              ["each", () => () => held.get()],
+              [
+                "children",
+                () => () => (row) =>
+                  element(
+                    "li",
+                    [["onclick", () => () => row.label.set("pressed"), true]],
+                    () => () => row.label.get(),
+                  ),
+              ],
+            ]),
+        ),
+      );
     };
-    const held = $0()(build(1));
-    return element("div", [], () =>
-      element(
-        "ul",
-        [["class", () => "rows", true]],
-        () => () =>
-          component($1(), [
-            ["each", () => () => held.get()],
-            [
-              "children",
-              () => () => (row) =>
-                element(
-                  "li",
-                  [["onclick", () => () => row.label.set("pressed"), true]],
-                  () => () => row.label.get(),
-                ),
-            ],
-          ]),
-      ),
+    return component(
+      () =>
+        f1(
+          () => state,
+          () => ($0) => list(() => $0.each(), $0.children()),
+        ),
+      [],
     );
-  };
-  return component(
-    () =>
-      f1(
-        () => state,
-        () => ($0) => list(() => $0.each(), $0.children()),
-      ),
-    [],
-  );
-})([]);
+  }))([]);

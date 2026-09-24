@@ -8,7 +8,8 @@ import type {
 } from "@testing-library/dom";
 import { mounted } from "./cleanup.js";
 import type { EvaluateOptions } from "./evaluate.js";
-import { prepare } from "./client.js";
+import { bundler } from "@backtickjs/bundler";
+import { runOf, testRuntime } from "./client.js";
 
 /** Where and how a value is drawn. */
 export interface RenderOptions<
@@ -85,10 +86,10 @@ export async function render<
   takeDown();
 
   const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
-    const prepared = await prepare(value, options.globals);
+    const code = await bundler.run(value);
     takeDown();
-    const dispose = prepared.render(container);
-    // The interpreter stops what it drew but leaves the nodes, so the
+    const dispose = testRuntime(options.globals).render(runOf(code), container);
+    // The runtime stops what it drew but leaves the nodes, so the
     // container is emptied here, as React's `unmount` and Solid's own `render`
     // do.
     mounted.set(container, () => {

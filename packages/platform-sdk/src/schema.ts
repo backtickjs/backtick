@@ -111,7 +111,7 @@ export const schema: Schema = {
       },
     ),
 
-    Bundle: Type.Generic(
+    BundleTree: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientUnknown"))],
       Type.Interface([Type.Ref("ClientHandle")], {
         functions: Type.Record(
@@ -122,7 +122,7 @@ export const schema: Schema = {
       }),
       {
         description:
-          "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `evaluate`, which evaluates it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
+          "What the bundler builds and prints: `root` evaluated against the `functions` table. A client never sees one; what it receives is the `Bundle` printed from it.\n\nWhat it comes to is carried and never read: it is what a host writes down so that what the printed bundle answers with is known.",
       },
     ),
 
@@ -544,27 +544,6 @@ export const schema: Schema = {
         description:
           "Creates a read-only `Signal` that derives its value from other signals. The calculated value is memoized: `fn` runs when the computed is created and again only when a signal it read changes, and every `get` reuses the result. If the new result equals the previous one (`===`, or `options.equals`), the computed doesn't update whatever reads it.\n\n" +
           "Created while a script draws, it lasts as long as that drawing.",
-      },
-    ),
-    evaluate: Type.Generic(
-      [Type.GenericParameter("T", Type.Ref("ClientUnknown"))],
-      Type.Function(
-        [
-          Type.FunctionParameter(
-            "bundle",
-            Type.Apply(Type.Ref("Bundle"), [Type.Ref("T")]),
-            {
-              description:
-                "A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.",
-            },
-          ),
-        ],
-        Type.Ref("T"),
-      ),
-      {
-        description:
-          "What a bundle holds: its `root` evaluated against its `functions`, here. A bundle is data — a program a client runs — and running one reads no JavaScript.\n\n" +
-          "Each call evaluates it again, so two calls are two drawings with cells of their own. Evaluated untracked, as a component is run: what the bundle reads while its root is evaluated is read once, so a write to it evaluates nothing again. A caller that reads a cell to choose the bundle still follows that cell.",
       },
     ),
   },

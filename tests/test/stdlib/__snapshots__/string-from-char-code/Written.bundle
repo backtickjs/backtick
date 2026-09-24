@@ -1,11 +1,12 @@
-(($d) => {
-  const f1 = () => {
-    return element(
-      "span",
-      [],
-      () => () =>
-        String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832),
-    );
-  };
-  return component(() => f1(), []);
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = () => {
+      return element(
+        "span",
+        [],
+        () => () =>
+          String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832),
+      );
+    };
+    return component(() => f1(), []);
+  }))([]);

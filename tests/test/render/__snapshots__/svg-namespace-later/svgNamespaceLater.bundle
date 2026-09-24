@@ -1,35 +1,38 @@
-(($d) => {
-  const f1 = ($0, $1) => {
-    const xs = $0()([10]);
-    const shown = $0()(false);
-    return element("div", [], () => [
-      element("svg", [["viewBox", () => "0 0 30 10", true]], () => [
-        memo(() =>
-          component($1(), [
-            ["each", () => () => xs.get()],
-            [
-              "children",
-              () => () => (x) => element("title", [], () => () => "dot " + x),
-            ],
-          ]),
+(($d) =>
+  untrack(() => {
+    const f1 = ($0, $1) => {
+      const xs = $0()([10]);
+      const shown = $0()(false);
+      return element("div", [], () => [
+        element("svg", [["viewBox", () => "0 0 30 10", true]], () => [
+          memo(() =>
+            component($1(), [
+              ["each", () => () => xs.get()],
+              [
+                "children",
+                () => () => (x) => element("title", [], () => () => "dot " + x),
+              ],
+            ]),
+          ),
+          memo(() =>
+            shown.get() ? element("title", [], () => "shown") : null,
+          ),
+        ]),
+        element("title", [], () => "after"),
+        element(
+          "button",
+          [["onclick", () => () => xs.set([10, 20]), true]],
+          () => "add",
         ),
-        memo(() => (shown.get() ? element("title", [], () => "shown") : null)),
-      ]),
-      element("title", [], () => "after"),
-      element(
-        "button",
-        [["onclick", () => () => xs.set([10, 20]), true]],
-        () => "add",
-      ),
-      element(
-        "button",
-        [["onclick", () => () => shown.set(true), true]],
-        () => "show",
-      ),
-    ]);
-  };
-  return f1(
-    () => state,
-    () => ($0) => list(() => $0.each(), $0.children()),
-  );
-})([]);
+        element(
+          "button",
+          [["onclick", () => () => shown.set(true), true]],
+          () => "show",
+        ),
+      ]);
+    };
+    return f1(
+      () => state,
+      () => ($0) => list(() => $0.each(), $0.children()),
+    );
+  }))([]);

@@ -1,4 +1,5 @@
-(($d) => {
-  const f1 = ($0) => $0();
-  return f1(() => 'say "hi"\n\\done');
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => $0();
+    return f1(() => 'say "hi"\n\\done');
+  }))([]);

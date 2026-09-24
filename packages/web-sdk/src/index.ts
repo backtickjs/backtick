@@ -14,7 +14,7 @@ export type {
   BlockquoteProps,
   Booleanish,
   Builtins,
-  Bundle,
+  BundleTree,
   BundleAddition,
   BundleArrayElement,
   BundleArrayLiteral,

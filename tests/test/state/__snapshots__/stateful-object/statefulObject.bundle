@@ -1,28 +1,29 @@
-(($d) => {
-  const f1 = ($0) => {
-    const c = $0()(10);
-    return element(
-      "button",
-      [
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => {
+      const c = $0()(10);
+      return element(
+        "button",
         [
-          "onclick",
-          () => () => {
-            c.add(5);
-          },
-          true,
+          [
+            "onclick",
+            () => () => {
+              c.add(5);
+            },
+            true,
+          ],
         ],
-      ],
-      () => () => c.get(),
-    );
-  };
-  const f2 = ($0) => (initial) => {
-    const count = $0()(initial);
-    return {
-      get: () => count.get(),
-      add: (n) => {
-        count.set(count.get() + n);
-      },
+        () => () => c.get(),
+      );
     };
-  };
-  return f1(() => f2(() => state));
-})([]);
+    const f2 = ($0) => (initial) => {
+      const count = $0()(initial);
+      return {
+        get: () => count.get(),
+        add: (n) => {
+          count.set(count.get() + n);
+        },
+      };
+    };
+    return f1(() => f2(() => state));
+  }))([]);

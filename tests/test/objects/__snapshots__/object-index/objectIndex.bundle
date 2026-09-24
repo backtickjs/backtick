@@ -1,9 +1,10 @@
-(($d) => {
-  const f1 = ($0) => (currency) => {
-    const table = $0();
-    const asked = table[currency] ?? 0;
-    const usd = table["usd"] ?? 0;
-    return asked + usd;
-  };
-  return f1(() => ({ usd: 3, eur: 4 }));
-})([]);
+(($d) =>
+  untrack(() => {
+    const f1 = ($0) => (currency) => {
+      const table = $0();
+      const asked = table[currency] ?? 0;
+      const usd = table["usd"] ?? 0;
+      return asked + usd;
+    };
+    return f1(() => ({ usd: 3, eur: 4 }));
+  }))([]);
