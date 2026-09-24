@@ -76,6 +76,8 @@ function outerBase(inner) {
         },
       ],
     }),
+    "$0 => {\n    const base = 1;\n    return base + $0();\n}",
+    '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"AAMY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAC,CAAoB;AACrC,CAAC,CAAA"}',
   );
 }
 function middleBase(inner) {
@@ -159,6 +161,8 @@ function middleBase(inner) {
         },
       ],
     }),
+    "$0 => {\n    const base = 2;\n    return base * $0();\n}",
+    '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAM,CAAC;AACvB,CAAC,CAAA"}',
   );
 }
 // `cs`base`` is written under the outer `base`, but is threaded through two
@@ -197,6 +201,8 @@ it("deepShadowing", async (t) => {
                   name: "base",
                   key: "base$8up2nb5o0inm$2",
                 }),
+                "$0 => $0",
+                '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"AA6B4B,MAAA,EAAI,CAAA"}',
               ),
             ),
             params: ["base$8up2nb5o0inm$2"],
@@ -259,6 +265,8 @@ it("deepShadowing", async (t) => {
           },
         ],
       }),
+      "$0 => {\n    const base = 10;\n    return $0(base);\n}",
+      '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"AA2BO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,QAAC,CAAsB;AAChC,CAAC,CAAA"}',
     ),
   );
 });

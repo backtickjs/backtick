@@ -36,6 +36,8 @@ it("coreComponents", async (t) => {
               },
               expression: false,
             }),
+            "() => () => { }",
+            '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["core-components.test.tsx"],"names":[],"mappings":"AASgD,MAAA,GAAG,EAAE,GAAE,CAAC,CAAA"}',
           ),
           children: "hi",
         }),

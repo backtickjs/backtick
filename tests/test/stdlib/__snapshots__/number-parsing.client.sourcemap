@@ -1,0 +1,52 @@
+// 9:10
+() => {     → 9:13 {
+const       → 10:5 const 
+whole       → 10:11 whole
+ =          → 10:16  = 
+Number      → 10:19 Number
+.           → 10:25 .
+parseInt    → 10:26 parseInt
+(           → 10:34 (
+"42px"      → 10:35 "42px"
+)           → 10:41 )
+;           → 10:42 ;
+const       → 11:5 const 
+based       → 11:11 based
+ =          → 11:16  = 
+Number      → 11:19 Number
+.           → 11:25 .
+parseInt    → 11:26 parseInt
+(           → 11:34 (
+"ff"        → 11:35 "ff"
+,           → 11:39 , 
+16          → 11:41 16
+)           → 11:43 )
+;           → 11:44 ;
+const       → 12:5 const 
+fractional  → 12:11 fractional
+ =          → 12:21  = 
+Number      → 12:24 Number
+.           → 12:30 .
+parseFloat  → 12:31 parseFloat
+(           → 12:41 (
+"1.5"       → 12:42 "1.5"
+)           → 12:47 )
+;           → 12:48 ;
+return      → 13:5 return 
+<           → 13:12 <
+span        → 13:13 span
+>           → 13:17 >
+{           → 13:18 {
+whole       → 13:19 whole
+ +          → 13:24  + 
+based       → 13:27 based
+ +          → 13:32  + 
+fractional  → 13:35 fractional
+ +          → 13:45  + 
+""          → 13:48 ""
+}           → 13:50 }
+</          → 13:51 </
+span        → 13:53 span
+>           → 13:57 >
+;           → 13:58 ;
+}           → 14:3 }

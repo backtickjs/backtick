@@ -413,6 +413,8 @@ async function Counter() {
         },
       ],
     }),
+    '$0 => {\n    const count = $0()(0);\n    return (<div>\n        <button onclick={() => count.set(count.get() + 1)}>Add</button>\n        <p>{"Count: " + count.get()}</p>\n      </div>);\n}',
+    '{"version":3,"file":"counter.test.jsx","sourceRoot":"","sources":["counter.test.tsx"],"names":[],"mappings":"AASY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CAC9D;QAAA,CAAC,CAAC,CAAC,CAAC,SAAS,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,CACjC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
   );
 }
 describe("a counter", () => {

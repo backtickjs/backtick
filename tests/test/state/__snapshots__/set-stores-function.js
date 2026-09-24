@@ -345,6 +345,8 @@ async function Greeting() {
         },
       ],
     }),
+    '$0 => {\n    const greet = $0()((name) => "hi " + name);\n    return (<span onclick={() => greet.set((name) => "bye " + name)}>\n        {greet.get()("ada")}\n      </span>);\n}',
+    '{"version":3,"file":"set-stores-function.test.jsx","sourceRoot":"","sources":["set-stores-function.test.tsx"],"names":[],"mappings":"AAUY;IACR,MAAM,KAAK,GAAG,IAAM,CAA2B,CAAC,IAAI,EAAE,EAAE,CAAC,KAAK,GAAG,IAAI,CAAC,CAAC;IACvE,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,MAAM,GAAG,IAAI,CAAC,CAAC,CACtD;QAAA,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CACrB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC,CAAA"}',
   );
 }
 it("`set` stores a function without calling it", async () => {

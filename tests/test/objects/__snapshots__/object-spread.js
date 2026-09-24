@@ -253,6 +253,8 @@ it("objectSpread", async (t) => {
           },
         ],
       }),
+      "() => {\n    const base = { a: 1, b: 2 };\n    const over = { b: 9 };\n    return {\n        ...base,\n        ...over,\n        c: 3,\n    };\n}",
+      '{"version":3,"file":"object-spread.test.jsx","sourceRoot":"","sources":["object-spread.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IAC5B,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO;QACL,GAAG,IAAI;QACP,GAAG,IAAI;QACP,CAAC,EAAE,CAAC;KACL,CAAC;AACJ,CAAC,CAAA"}',
     ),
   );
 });

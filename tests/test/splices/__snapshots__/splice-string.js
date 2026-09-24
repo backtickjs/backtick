@@ -21,6 +21,8 @@ it("spliceString", async (t) => {
         loc: { start: { line: 10, column: 43 }, end: { line: 10, column: 49 } },
         key: "$value",
       }),
+      "$0 => $0()",
+      '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splice-string.test.tsx"],"names":[],"mappings":"AAS2C,MAAA,IAAM,CAAA"}',
     ),
   );
 });

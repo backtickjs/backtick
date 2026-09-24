@@ -46,6 +46,8 @@ const action = cs.create(
       },
     ],
   }),
+  "() => {\n    const x = 1;\n}",
+  '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["action-in-data.test.tsx"],"names":[],"mappings":"AAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 export const listed = cs.create(
   { start: { line: 9, column: 22 }, end: { line: 13, column: 2 } },
@@ -104,6 +106,8 @@ export const listed = cs.create(
       },
     ],
   }),
+  "$0 => {\n    const list = $0();\n    return 1;\n}",
+  '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["action-in-data.test.tsx"],"names":[],"mappings":"AAQyB;IAEvB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 export const keyed = cs.create(
   { start: { line: 15, column: 21 }, end: { line: 19, column: 2 } },
@@ -162,4 +166,6 @@ export const keyed = cs.create(
       },
     ],
   }),
+  "$0 => {\n    const map = $0();\n    return 1;\n}",
+  '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["action-in-data.test.tsx"],"names":[],"mappings":"AAcwB;IAEtB,MAAM,GAAG,GAAG,IAAC,CAAoB;IACjC,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );

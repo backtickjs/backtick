@@ -85,6 +85,8 @@ it("bindinglessCatch", async (t) => {
           },
         ],
       }),
+      '() => {\n    try {\n        throw "boom";\n    }\n    catch {\n        return "caught";\n    }\n}',
+      '{"version":3,"file":"bindingless-catch.test.jsx","sourceRoot":"","sources":["bindingless-catch.test.tsx"],"names":[],"mappings":"AAUO;IACD,IAAI,CAAC;QACH,MAAM,MAAM,CAAC;IACf,CAAC;IAAC,MAAM,CAAC;QACP,OAAO,QAAQ,CAAC;IAClB,CAAC;AACH,CAAC,CAAA"}',
     ),
   );
 });

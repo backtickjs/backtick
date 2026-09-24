@@ -1,0 +1,21 @@
+// 9:5
+() => {      → 9:8 {
+const        → 10:7 const 
+greeting     → 10:13 greeting
+ =           → 10:21  = 
+"Hello"      → 10:24 "Hello"
+;            → 10:31 ;
+return       → 11:7 return 
+greeting     → 11:14 greeting
+.            → 11:22 .
+concat       → 11:23 concat
+(            → 11:29 (
+", "         → 11:30 ", "
+,            → 11:34 , 
+"World"      → 11:36 "World"
+)            → 11:43 )
+.            → 11:44 .
+toUpperCase  → 11:45 toUpperCase
+()           → 11:56 ()
+;            → 11:58 ;
+}            → 12:5 }

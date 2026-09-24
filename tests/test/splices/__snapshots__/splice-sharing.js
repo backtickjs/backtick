@@ -28,6 +28,8 @@ function add(lhs, rhs) {
         key: "$rhs",
       },
     }),
+    "($0, $1) => $0() + $1()",
+    '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAKY,YAAA,IAAI,GAAG,IAAI,CAAA"}',
   );
 }
 it("spliceSharing", async (t) => {
@@ -61,6 +63,8 @@ it("spliceSharing", async (t) => {
                   },
                   value: 1,
                 }),
+                "() => 1",
+                '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAakB,MAAA,CAAC,CAAA"}',
               ),
               cs.create(
                 {
@@ -81,6 +85,8 @@ it("spliceSharing", async (t) => {
                   },
                   value: 2,
                 }),
+                "() => 2",
+                '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAayB,MAAA,CAAC,CAAA"}',
               ),
             ),
             params: [],
@@ -106,6 +112,8 @@ it("spliceSharing", async (t) => {
                   },
                   value: 3,
                 }),
+                "() => 3",
+                '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAckB,MAAA,CAAC,CAAA"}',
               ),
               cs.create(
                 {
@@ -126,6 +134,8 @@ it("spliceSharing", async (t) => {
                   },
                   value: 4,
                 }),
+                "() => 4",
+                '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAcyB,MAAA,CAAC,CAAA"}',
               ),
             ),
             params: [],
@@ -193,6 +203,8 @@ it("spliceSharing", async (t) => {
           },
         ],
       }),
+      "($0, $1) => ({\n    x: $0(),\n    y: $1(),\n})",
+      '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAYO,YAAA,CAAC;IACF,CAAC,EAAE,IAAC;IACJ,CAAC,EAAE,IAAC;CACL,CAAC,CAAA"}',
     ),
   );
 });

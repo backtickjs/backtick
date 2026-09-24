@@ -1,0 +1,14 @@
+// 15:5
+$0 => {
+    const said = $0()("");
+    return (<form onsubmit={(event) => {
+            event.preventDefault();
+            said.set(event.type + " " + event.cancelable);
+        }}>
+          <textarea oninput={(event) => said.set(event.currentTarget.value)}/>
+          <input oninput={(event) => said.set(event.currentTarget.value)}/>
+          <button onclick={(event) => said.set(event.clientX + " " + event.currentTarget.tagName)}>
+            {said.get()}
+          </button>
+        </form>);
+}

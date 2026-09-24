@@ -1,0 +1,32 @@
+// 9:5
+() => {                  → 9:8 {
+const                    → 10:7 const 
+message                  → 10:13 message
+ =                       → 10:20  = 
+"boom"                   → 10:23 "boom"
+;                        → 10:29 ;
+try                      → 11:7 try 
+{                        → 11:11 {
+throw                    → 12:9 throw 
+message                  → 12:15 message
+;                        → 12:22 ;
+}                        → 13:7 }
+catch (                  → 13:9 catch (
+error                    → 13:16 error
+)                        → 13:21 ) 
+{                        → 13:23 {
+if (                     → 14:9 if (
+error                    → 14:13 error
+ ===                     → 14:18  === 
+message                  → 14:23 message
+)                        → 14:30 ) 
+{                        → 14:32 {
+return                   → 15:11 return 
+"caught boom"            → 15:18 "caught boom"
+;                        → 15:31 ;
+}                        → 16:9 }
+return                   → 17:9 return 
+"caught something else"  → 17:16 "caught something else"
+;                        → 17:39 ;
+}                        → 18:7 }
+}                        → 19:5 }

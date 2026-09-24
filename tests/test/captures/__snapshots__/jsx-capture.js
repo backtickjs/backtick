@@ -40,6 +40,8 @@ const script = cs.create(
               },
               expression: true,
             }),
+            "$0 => () => $0",
+            '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"AAY8B,MAAA,GAAG,EAAE,CAAC,EAAC,CAAA"}',
           ),
         }),
         params: ["x$g38hwxw7rhvi$0"],
@@ -108,6 +110,8 @@ const script = cs.create(
     },
     expression: false,
   }),
+  "$0 => () => {\n    const x = 1;\n    return $0(x);\n}",
+  '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"AAU6C,MAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC,CAAA"}',
 );
 it("jsxCapture", async (t) => {
   await snapshotCase(t, "jsxCapture", script);

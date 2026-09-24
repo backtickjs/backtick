@@ -1,0 +1,11 @@
+// 12:5
+() => {  → 12:8 {
+const    → 14:7 const 
+count    → 14:13 count
+ =       → 14:18 : n
+"one"    → 14:29 "one"
+;        → 14:34 ;
+return   → 15:7 return 
+count    → 15:14 count
+;        → 15:19 ;
+}        → 16:5 }

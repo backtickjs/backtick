@@ -130,6 +130,8 @@ function wrapShadowed(fragment) {
         },
       ],
     }),
+    "$0 => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $0();\n    }\n}",
+    '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"AAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,IAAS,CAAC;IAC3B,CAAC;AACH,CAAC,CAAA"}',
   );
 }
 it("shadowedHole", async (t) => {
@@ -163,6 +165,8 @@ it("shadowedHole", async (t) => {
                   },
                   value: 10,
                 }),
+                "() => 10",
+                '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"AA2ByB,MAAA,EAAE,CAAA"}',
               ),
             ),
             params: [],
@@ -188,6 +192,8 @@ it("shadowedHole", async (t) => {
                   },
                   value: 20,
                 }),
+                "() => 20",
+                '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BmD,MAAA,EAAE,CAAA"}',
               ),
             ),
             params: [],
@@ -216,6 +222,8 @@ it("shadowedHole", async (t) => {
           key: "$0splice1",
         },
       }),
+      "($0, $1) => $0() + $1()",
+      '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BO,YAAA,IAAC,GAAyB,IAAC,CAAA"}',
     ),
   );
 });

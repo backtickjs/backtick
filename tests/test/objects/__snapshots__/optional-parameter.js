@@ -86,6 +86,8 @@ const greet = cs.create(
     },
     expression: false,
   }),
+  '() => (name) => {\n    return name?.concat("!");\n}',
+  '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"AAOiB,MAAA,CAAC,IAAa,EAAE,EAAE;IACjC,OAAO,IAAI,EAAE,MAAM,CAAC,GAAG,CAAC,CAAC;AAC3B,CAAC,CAAA"}',
 );
 // A function-typed annotation unions parenthesized: `(() => number) |
 // undefined`.
@@ -108,6 +110,8 @@ const double = cs.create(
     },
     expression: true,
   }),
+  "() => () => 2",
+  '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"AAakB,MAAA,GAAG,EAAE,CAAC,CAAC,CAAA"}',
 );
 const callIfGiven = cs.create(
   { start: { line: 16, column: 20 }, end: { line: 18, column: 2 } },
@@ -184,6 +188,8 @@ const callIfGiven = cs.create(
     },
     expression: false,
   }),
+  "() => (cb) => {\n    return cb?.() ?? 0;\n}",
+  '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"AAeuB,MAAA,CAAC,EAAiB,EAAE,EAAE;IAC3C,OAAO,EAAE,EAAE,EAAE,IAAI,CAAC,CAAC;AACrB,CAAC,CAAA"}',
 );
 it("optionalParameter", async (t) => {
   await snapshotCase(
@@ -459,6 +465,8 @@ it("optionalParameter", async (t) => {
           },
         ],
       }),
+      '($0, $1, $2) => ({\n    named: $0()("hi"),\n    explicit: $0()(undefined),\n    omitted: $0()(),\n    supplied: $1()($2()),\n    fallback: $1()(undefined),\n    omittedCallback: $1()(),\n})',
+      '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"AAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAM,CAAC,IAAI,CAAC;IACnB,QAAQ,EAAE,IAAM,CAAC,SAAS,CAAC;IAC3B,OAAO,EAAE,IAAM,EAAE;IACjB,QAAQ,EAAE,IAAY,CAAC,IAAO,CAAC;IAC/B,QAAQ,EAAE,IAAY,CAAC,SAAS,CAAC;IACjC,eAAe,EAAE,IAAY,EAAE;CAChC,CAAC,CAAA"}',
     ),
   );
 });

@@ -819,6 +819,8 @@ async function RotatingRows() {
         },
       ],
     }),
+    '($0, $1) => {\n    const names = $0()(["a", "b", "c"]);\n    const rotate = () => {\n        const held = names.get();\n        names.set([held[2], held[0], held[1]]);\n    };\n    return (<div>\n        <span onclick={rotate}>rotate</span>\n        <div>\n          <$1 each={names.get()}>\n            {(name, index) => (<span>{name + " at " + index.get()}</span>)}\n          </$1>\n        </div>\n      </div>);\n}',
+    '{"version":3,"file":"for-index.test.jsx","sourceRoot":"","sources":["for-index.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,KAAK,GAAG,IAAM,CAAW,CAAC,GAAG,EAAE,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;IAChD,MAAM,MAAM,GAAG,GAAG,EAAE;QAClB,MAAM,IAAI,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC;QACzB,KAAK,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACzC,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,MAAM,CAAC,CAAC,MAAM,EAAE,IAAI,CACnC;QAAA,CAAC,GAAG,CACF;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CACrB;YAAA,CAAC,CAAC,IAAY,EAAE,KAAqB,EAAE,EAAE,CAAC,CACxC,CAAC,IAAI,CAAC,CAAC,IAAI,GAAG,MAAM,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAC3C,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,GAAG,CACP;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
   );
 }
 describe("local state", () => {

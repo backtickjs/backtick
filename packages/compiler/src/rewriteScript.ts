@@ -1,6 +1,7 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
+import { type EmittedScript, emitScript } from "./emitScript.js";
 import { arrow, call, iife, object } from "./nodeFactory.js";
 import { type ClientScript, sourceLocation } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -10,6 +11,9 @@ import type { SourceRange } from "./SourceRange.js";
 export interface RewrittenScript {
   virtual: ts.Node;
   runtime: ts.Node;
+  // what the client runs, as `runtime` carries it (null where the script did
+  // not parse)
+  emitted: EmittedScript | null;
   sourceMaps: Map<ts.Node, SourceRange>; // virtual -> source range
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
@@ -37,6 +41,7 @@ export function rewriteScript(
     return {
       virtual: sourceNode,
       runtime: sourceNode,
+      emitted: null,
       sourceMaps: new Map(),
       codeInformation: new Map(),
       diagnostics: [],
@@ -149,6 +154,16 @@ export function rewriteScript(
 
   sourceMaps.set(virtual, scriptRange);
 
+  const emitted = emitScript(
+    ts,
+    clientScript,
+    bindings,
+    Array.from(splices.keys()),
+    captures,
+    spliceParams,
+    hostTags,
+  );
+
   const runtime = call(ts, "cs", "create", [
     object(ts, scriptLocation),
     metadata,
@@ -156,11 +171,14 @@ export function rewriteScript(
     // per call, and the bundler reads one per source location, so the nodes
     // are built when they are first read rather than at every call.
     arrow(ts, [], object(ts, rewritten.runtime)),
+    ts.factory.createStringLiteral(emitted.code),
+    ts.factory.createStringLiteral(emitted.map),
   ]);
 
   return {
     virtual,
     runtime,
+    emitted,
     sourceMaps,
     codeInformation: state.codeInformation,
     diagnostics,

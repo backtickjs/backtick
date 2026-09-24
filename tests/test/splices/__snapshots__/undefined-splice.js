@@ -26,6 +26,8 @@ describe("a spliced undefined", () => {
             },
             key: "$nothing",
           }),
+          "$0 => $0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"AAWmC,MAAA,IAAQ,CAAA"}',
         ),
       ),
       undefined,
@@ -50,6 +52,8 @@ describe("a spliced undefined", () => {
           },
           key: "$data",
         }),
+        "$0 => $0()",
+        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"AAgBsC,MAAA,IAAK,CAAA"}',
       ),
     );
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
@@ -75,6 +79,8 @@ describe("a spliced undefined", () => {
             },
             key: "$data",
           }),
+          "$0 => $0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"AAuBuC,MAAA,IAAK,CAAA"}',
         ),
       ),
       [1, undefined, 3],

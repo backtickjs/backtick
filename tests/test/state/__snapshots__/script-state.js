@@ -99,6 +99,8 @@ async function ScriptRows() {
       },
       expression: false,
     }),
+    "$0 => (label) => {\n    return { label: $0()(label) };\n}",
+    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"AASmB,MAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAM,CAAC,KAAK,CAAC,EAAE,CAAC;AAClC,CAAC,CAAA"}',
   );
   return _jsx("span", {
     style: cs.create(
@@ -114,6 +116,8 @@ async function ScriptRows() {
         loc: { start: { line: 16, column: 16 }, end: { line: 16, column: 33 } },
         value: "font-size: 16px",
       }),
+      '() => "font-size: 16px"',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"AAegB,MAAA,iBAAiB,CAAA"}',
     ),
     onclick: cs.create(
       { start: { line: 17, column: 15 }, end: { line: 20, column: 8 } },
@@ -318,6 +322,8 @@ async function ScriptRows() {
         },
         expression: false,
       }),
+      '$0 => () => {\n    const row = $0()("one");\n    row.label.set(row.label.get() + " !!!");\n}',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"AAgBkB,MAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,MAAM,CAAC,CAAC;AAC1C,CAAC,CAAA"}',
     ),
     children: cs.create(
       { start: { line: 22, column: 7 }, end: { line: 22, column: 36 } },
@@ -393,6 +399,8 @@ async function ScriptRows() {
         arguments: [],
         optional: false,
       }),
+      '$0 => $0()("one").label.get()',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"AAqBU,MAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAA"}',
     ),
   });
 }

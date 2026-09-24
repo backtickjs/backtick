@@ -95,6 +95,8 @@ function guard(fragment) {
       },
       expression: false,
     }),
+    '$0 => (flag) => {\n    if (flag) {\n        return $0();\n    }\n    return "skipped";\n}',
+    '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"AAYY,MAAA,CAAC,IAAa,EAAE,EAAE;IAC1B,IAAI,IAAI,EAAE,CAAC;QACT,OAAO,IAAS,CAAC;IACnB,CAAC;IACD,OAAO,SAAS,CAAC;AACnB,CAAC,CAAA"}',
   );
 }
 const ok = cs.create(
@@ -110,6 +112,8 @@ const ok = cs.create(
     loc: { start: { line: 21, column: 14 }, end: { line: 21, column: 25 } },
     value: "evaluated",
   }),
+  '() => "evaluated"',
+  '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"AAoBc,MAAA,WAAW,CAAA"}',
 );
 const broken = cs.create(
   { start: { line: 23, column: 15 }, end: { line: 25, column: 2 } },
@@ -137,6 +141,8 @@ const broken = cs.create(
       },
     ],
   }),
+  '() => {\n    throw "the guarded fragment must never evaluate";\n}',
+  '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"AAsBkB;IAChB,MAAM,0CAA0C,CAAC;AACnD,CAAC,CAAA"}',
 );
 it("spliceLaziness", async (t) => {
   await snapshotCase(
@@ -249,6 +255,8 @@ it("spliceLaziness", async (t) => {
           },
         ],
       }),
+      "($0, $1) => ({\n    taken: $0()(true),\n    skipped: $1()(false),\n})",
+      '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"AA8BO,YAAA,CAAC;IACF,KAAK,EAAE,IAAC,CAAY,IAAI,CAAC;IACzB,OAAO,EAAE,IAAC,CAAgB,KAAK,CAAC;CACjC,CAAC,CAAA"}',
     ),
   );
 });

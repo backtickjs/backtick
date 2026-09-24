@@ -155,6 +155,8 @@ async function Ring() {
       children: [],
       closingElement: null,
     }),
+    '() => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>',
+    '{"version":3,"file":"svg-namespace.test.jsx","sourceRoot":"","sources":["svg-namespace.test.tsx"],"names":[],"mappings":"AAcY,MAAA,CAAC,MAAM,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,IAAI,CAAC,MAAM,CAAC,MAAM,CAAC,cAAc,EAAG,CAAA"}',
   );
 }
 const svgNamespace = cs.create(
@@ -1144,6 +1146,8 @@ const svgNamespace = cs.create(
       },
     ],
   }),
+  '($0, $1) => {\n    const Dot = (props) => (<circle cx={props.x} cy="5" r="2">\n      <title>{"dot " + props.x}</title>\n    </circle>);\n    return (<div>\n      <a href="/shapes">{"shapes"}</a>\n      <svg viewBox="0 0 30 10" width="120">\n        <$0 />\n        <$1 each={[10, 20]}>{(x) => <Dot x={x}/>}</$1>\n        <foreignObject x="0" y="0" width="10" height="10">\n          <p>{"html again"}</p>\n        </foreignObject>\n      </svg>\n    </div>);\n}',
+  '{"version":3,"file":"svg-namespace.test.jsx","sourceRoot":"","sources":["svg-namespace.test.tsx"],"names":[],"mappings":"AAiBwB;IACtB,MAAM,GAAG,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CACpC,CAAC,MAAM,CAAC,EAAE,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAC/B;MAAA,CAAC,KAAK,CAAC,CAAC,MAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,CAClC;IAAA,EAAE,MAAM,CAAC,CACV,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,CAAC,CAAC,IAAI,CAAC,SAAS,CAAC,CAAC,QAAQ,CAAC,EAAE,CAAC,CAC/B;MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,WAAW,CAAC,KAAK,CAAC,KAAK,CAClC;QAAA,CAAC,EAAI,CAAC,AAAD,EACL;QAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC,EAAE,EAAG,CACxD;QAAA,CAAC,aAAa,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,IAAI,CAAC,MAAM,CAAC,IAAI,CAC/C;UAAA,CAAC,CAAC,CAAC,CAAC,YAAY,CAAC,EAAE,CAAC,CACtB;QAAA,EAAE,aAAa,CACjB;MAAA,EAAE,GAAG,CACP;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
 );
 it("svgNamespace", async (t) => {
   await snapshotCase(t, "svgNamespace", svgNamespace);

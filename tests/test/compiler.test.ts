@@ -2,9 +2,10 @@ import assert from "node:assert";
 import { mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { describe, it } from "node:test";
-import { transpile, virtualize } from "@backtickjs/compiler";
+import { emitScripts, transpile, virtualize } from "@backtickjs/compiler";
 import prettier from "prettier";
 import ts from "typescript";
+import { renderClientCode, renderClientMappings } from "./renderClient.ts";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
 
@@ -78,6 +79,11 @@ describe("compile the .tsx tests", () => {
         "sourcemap",
       );
       record(await emit(fileName, sourceText), "js");
+      // What each script compiles to for the client, and where its code maps
+      // back to in this file.
+      const scripts = emitScripts(ts, fileName, sourceText);
+      record(renderClientCode(sourceText, scripts), "client.js");
+      record(renderClientMappings(sourceText, scripts), "client.sourcemap");
     });
   }
 });

@@ -1,0 +1,107 @@
+// 12:5
+() => {    → 12:8 {
+const      → 13:7 const 
+numbers    → 13:13 numbers
+ =         → 13:20  = 
+JSON       → 13:23 JSON
+.          → 13:27 .
+stringify  → 13:28 stringify
+(          → 13:37 (
+[          → 13:38 [
+1          → 13:39 1
+,          → 13:40 , 
+2          → 13:42 2
+,          → 13:43 , 
+3          → 13:45 3
+]          → 13:46 ]
+)          → 13:47 )
+;          → 13:48 ;
+const      → 14:7 const 
+text       → 14:13 text
+ =         → 14:17  = 
+JSON       → 14:20 JSON
+.          → 14:24 .
+stringify  → 14:25 stringify
+(          → 14:34 (
+"hi"       → 14:35 "hi"
+)          → 14:39 )
+;          → 14:40 ;
+const      → 15:7 const 
+flag       → 15:13 flag
+ =         → 15:17  = 
+JSON       → 15:20 JSON
+.          → 15:24 .
+stringify  → 15:25 stringify
+(          → 15:34 (
+true       → 15:35 true
+)          → 15:39 )
+;          → 15:40 ;
+const      → 16:7 const 
+held       → 16:13 held
+ =         → 16:17  = 
+JSON       → 16:20 JSON
+.          → 16:24 .
+stringify  → 16:25 stringify
+(          → 16:34 (
+{          → 16:35 { 
+a          → 16:37 a
+:          → 16:38 : 
+1          → 16:40 1
+,          → 16:41 , 
+b          → 16:43 b
+:          → 16:44 : 
+"two"      → 16:46 "two"
+ }         → 16:51  }
+)          → 16:53 )
+;          → 16:54 ;
+const      → 17:7 const 
+back       → 17:13 back
+ =         → 17:17  = 
+JSON       → 17:20 JSON
+.          → 17:24 .
+parse      → 17:25 parse
+(          → 17:30 (
+numbers    → 17:31 numbers
+)          → 17:38 )
+;          → 17:39 ;
+return     → 18:7 return 
+(          → 18:14 (
+numbers    → 19:9 numbers
+ +         → 19:16  +
+"|"        → 20:9 "|"
+ +         → 20:12  +
+text       → 21:9 text
+ +         → 21:13  +
+"|"        → 22:9 "|"
+ +         → 22:12  +
+flag       → 23:9 flag
+ +         → 23:13  +
+"|"        → 24:9 "|"
+ +         → 24:12  +
+held       → 25:9 held
+ +         → 25:13  +
+"|"        → 26:9 "|"
+ +         → 26:12  +
+JSON       → 27:9 JSON
+.          → 27:13 .
+stringify  → 27:14 stringify
+(          → 27:23 (
+back       → 27:24 back
+)          → 27:28 )
+ +         → 27:29  +
+"|"        → 28:9 "|"
+ +         → 28:12  +
+JSON       → 29:9 JSON
+.          → 29:13 .
+stringify  → 29:14 stringify
+(          → 29:23 (
+JSON       → 29:24 JSON
+.          → 29:28 .
+parse      → 29:29 parse
+(          → 29:34 (
+held       → 29:35 held
+)          → 29:39 )
+)          → 29:40 )
+)          → 29:41 
+;          → 30:8 ;
+}          → 31:5 }

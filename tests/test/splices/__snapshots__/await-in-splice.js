@@ -40,6 +40,8 @@ it("awaitInSplice", async (t) => {
           value: "!",
         },
       }),
+      '$0 => $0() + "!"',
+      '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["await-in-splice.test.tsx"],"names":[],"mappings":"AAY4C,MAAA,IAAC,GAA0B,GAAG,CAAA"}',
     ),
   );
 });

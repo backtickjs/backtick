@@ -1,0 +1,9 @@
+// 11:5
+() => {
+    const coins = [5, 31, 7];
+    let total = 0;
+    for (let i = 0; i < coins.length; i = i + 1) {
+        total = total + coins[i];
+    }
+    return total;
+}

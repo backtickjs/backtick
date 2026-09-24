@@ -188,6 +188,8 @@ it("negation", async (t) => {
         },
         expression: false,
       }),
+      "() => (count) => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n}",
+      '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["negation.test.tsx"],"names":[],"mappings":"AAaO,MAAA,CAAC,KAAa,EAAE,EAAE;IACnB,MAAM,KAAK,GAAG,CAAC,CAAC,CAAC;IACjB,MAAM,IAAI,GAAG,CAAC,KAAK,CAAC;IACpB,OAAO,KAAK,GAAG,IAAI,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC,CAAA"}',
     ),
   );
 });
@@ -250,6 +252,8 @@ it("negativeZero", async (t) => {
           },
         ],
       }),
+      "() => {\n    return 1 / -0;\n}",
+      '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["negation.test.tsx"],"names":[],"mappings":"AA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC;AAChB,CAAC,CAAA"}',
     ),
   );
 });

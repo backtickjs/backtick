@@ -48,6 +48,8 @@ function wrap(start) {
                       name: "outer",
                       key: "outer$22sufdxid1i7s$0",
                     }),
+                    "$0 => $0",
+                    '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AAqB2B,MAAA,EAAK,CAAA"}',
                   ),
                   params: [],
                 },
@@ -129,6 +131,8 @@ function wrap(start) {
                 },
               ],
             }),
+            "($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n}",
+            '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AAmBgB;IACV,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAY;AAC/B,CAAC,CAAA"}',
           ),
           params: ["outer$22sufdxid1i7s$0"],
         },
@@ -187,6 +191,8 @@ function wrap(start) {
         },
       ],
     }),
+    "($0, $1) => {\n    const outer = $0();\n    return $1(outer);\n}",
+    '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AAiBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGJ;AACN,CAAC,CAAA"}',
   );
 }
 it("deepCapture", async (t) => {
@@ -220,6 +226,8 @@ it("deepCapture", async (t) => {
                   },
                   value: 1,
                 }),
+                "() => 1",
+                '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AA2BoD,MAAA,CAAC,CAAA"}',
               ),
             ),
             params: [],
@@ -245,6 +253,8 @@ it("deepCapture", async (t) => {
                   },
                   value: 2,
                 }),
+                "() => 2",
+                '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AA2BqE,MAAA,CAAC,CAAA"}',
               ),
             ),
             params: [],
@@ -273,6 +283,8 @@ it("deepCapture", async (t) => {
           key: "$0splice1",
         },
       }),
+      "($0, $1) => $0() + $1()",
+      '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AA2B0C,YAAA,IAAC,GAAgB,IAAC,CAAA"}',
     ),
   );
 });

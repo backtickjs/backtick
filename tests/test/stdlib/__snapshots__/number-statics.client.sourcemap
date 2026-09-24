@@ -1,0 +1,125 @@
+// 9:10
+() => {           → 9:13 {
+const             → 10:5 const 
+positive          → 10:11 positive
+ =                → 10:19  = 
+Number            → 10:22 Number
+.                 → 10:28 .
+EPSILON           → 10:29 EPSILON
+ >                → 10:36  > 
+0                 → 10:39 0
+;                 → 10:40 ;
+const             → 11:5 const 
+largest           → 11:11 largest
+ =                → 11:18  = 
+Number            → 11:21 Number
+.                 → 11:27 .
+MAX_VALUE         → 11:28 MAX_VALUE
+ >                → 11:37  > 
+1e308             → 11:40 1e308
+;                 → 11:45 ;
+const             → 12:5 const 
+safe              → 12:11 safe
+ =                → 12:15  =
+Number            → 13:7 Number
+.                 → 13:13 .
+MAX_SAFE_INTEGER  → 13:14 MAX_SAFE_INTEGER
+ ===              → 13:30  === 
+9007199254740991  → 13:35 9007199254740991
+ &&               → 13:51  &&
+Number            → 14:7 Number
+.                 → 14:13 .
+MIN_SAFE_INTEGER  → 14:14 MIN_SAFE_INTEGER
+ ===              → 14:30  === 
+-                 → 14:35 -
+9007199254740991  → 14:36 9007199254740991
+ &&               → 14:52  &&
+Number            → 15:7 Number
+.                 → 15:13 .
+MIN_VALUE         → 15:14 MIN_VALUE
+ >                → 15:23  > 
+0                 → 15:26 0
+ &&               → 15:27  &&
+Number            → 16:7 Number
+.                 → 16:13 .
+isSafeInteger     → 16:14 isSafeInteger
+(                 → 16:27 (
+3                 → 16:28 3
+)                 → 16:29 )
+ &&               → 16:30  &&
+!                 → 17:7 !
+Number            → 17:8 Number
+.                 → 17:14 .
+isSafeInteger     → 17:15 isSafeInteger
+(                 → 17:28 (
+Number            → 17:29 Number
+.                 → 17:35 .
+MAX_SAFE_INTEGER  → 17:36 MAX_SAFE_INTEGER
+ +                → 17:52  + 
+1                 → 17:55 1
+)                 → 17:56 )
+;                 → 17:57 ;
+const             → 18:5 const 
+whole             → 18:11 whole
+ =                → 18:16  = 
+Number            → 18:19 Number
+.                 → 18:25 .
+isInteger         → 18:26 isInteger
+(                 → 18:35 (
+2                 → 18:36 2
+)                 → 18:37 )
+;                 → 18:38 ;
+const             → 19:5 const 
+fractional        → 19:11 fractional
+ =                → 19:21  = 
+Number            → 19:24 Number
+.                 → 19:30 .
+isInteger         → 19:31 isInteger
+(                 → 19:40 (
+2.5               → 19:41 2.5
+)                 → 19:44 )
+;                 → 19:45 ;
+const             → 21:5 const 
+written           → 21:11 written
+ =                → 21:18  = 
+Number            → 21:21 Number
+.                 → 21:27 .
+isFinite          → 21:28 isFinite
+(                 → 21:36 (
+"2"               → 21:37 "2"
+)                 → 21:40 )
+;                 → 21:41 ;
+return            → 22:5 return 
+(                 → 22:12 (
+<                 → 23:7 <
+span              → 23:8 span
+>                 → 23:12 >
+{                 → 24:9 {
+whole             → 24:10 whole
+ +                → 24:15  +
+" "               → 25:11 " "
+ +                → 25:14  +
+fractional        → 26:11 fractional
+ +                → 26:21  +
+" "               → 27:11 " "
+ +                → 27:14  +
+written           → 28:11 written
+ +                → 28:18  +
+" "               → 29:11 " "
+ +                → 29:14  +
+positive          → 30:11 positive
+ +                → 30:19  +
+" "               → 31:11 " "
+ +                → 31:14  +
+largest           → 32:11 largest
+ +                → 32:18  +
+" "               → 33:11 " "
+ +                → 33:14  +
+safe              → 34:11 safe
+}                 → 34:15 }
+</                → 35:7 </
+span              → 35:9 span
+>                 → 35:13 >
+)                 → 35:14 
+;                 → 36:6 ;
+}                 → 37:3 }

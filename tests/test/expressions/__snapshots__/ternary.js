@@ -99,6 +99,8 @@ const pick = cs.create(
     },
     expression: false,
   }),
+  "() => (n) => {\n    return n === null ? 0 : n + 1;\n}",
+  '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["ternary.test.tsx"],"names":[],"mappings":"AAMgB,MAAA,CAAC,CAAgB,EAAE,EAAE;IACnC,OAAO,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC;AAChC,CAAC,CAAA"}',
 );
 it("ternary", async (t) => {
   await snapshotCase(
@@ -208,6 +210,8 @@ it("ternary", async (t) => {
           },
         ],
       }),
+      "$0 => ({\n    absent: $0()(null),\n    present: $0()(4),\n})",
+      '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["ternary.test.tsx"],"names":[],"mappings":"AAcO,MAAA,CAAC;IACF,MAAM,EAAE,IAAK,CAAC,IAAI,CAAC;IACnB,OAAO,EAAE,IAAK,CAAC,CAAC,CAAC;CAClB,CAAC,CAAA"}',
     ),
   );
 });

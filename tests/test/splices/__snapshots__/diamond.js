@@ -19,6 +19,8 @@ const d0 = cs.create(
     loc: { start: { line: 10, column: 14 }, end: { line: 10, column: 15 } },
     value: 1,
   }),
+  "() => 1",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AASc,MAAA,CAAC,CAAA"}',
 );
 const d1 = cs.create(
   { start: { line: 12, column: 11 }, end: { line: 14, column: 2 } },
@@ -62,6 +64,8 @@ const d1 = cs.create(
       },
     ],
   }),
+  "$0 => {\n    return $0() + $0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 const d2 = cs.create(
   { start: { line: 16, column: 11 }, end: { line: 18, column: 2 } },
@@ -105,6 +109,8 @@ const d2 = cs.create(
       },
     ],
   }),
+  "$0 => {\n    return $0() + $0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 const d3 = cs.create(
   { start: { line: 20, column: 11 }, end: { line: 22, column: 2 } },
@@ -148,6 +154,8 @@ const d3 = cs.create(
       },
     ],
   }),
+  "$0 => {\n    return $0() + $0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 const d4 = cs.create(
   { start: { line: 24, column: 11 }, end: { line: 26, column: 2 } },
@@ -191,6 +199,8 @@ const d4 = cs.create(
       },
     ],
   }),
+  "$0 => {\n    return $0() + $0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAuBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
 );
 it("diamond", async (t) => {
   await snapshotCase(t, "diamond", d4);

@@ -72,6 +72,8 @@ export const constant = cs.create(
       },
     ],
   }),
+  "() => {\n    const i = 0;\n    i++;\n    return i;\n}",
+  '{"version":3,"file":"step-operand.test.jsx","sourceRoot":"","sources":["step-operand.test.tsx"],"names":[],"mappings":"AAI2B;IACzB,MAAM,CAAC,GAAG,CAAC,CAAC;IAEZ,CAAC,EAAE,CAAC;IACJ,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 export const text = cs.create(
   { start: { line: 12, column: 20 }, end: { line: 17, column: 2 } },
@@ -150,4 +152,6 @@ export const text = cs.create(
       },
     ],
   }),
+  '() => {\n    let s = "a";\n    s++;\n    return s;\n}',
+  '{"version":3,"file":"step-operand.test.jsx","sourceRoot":"","sources":["step-operand.test.tsx"],"names":[],"mappings":"AAWuB;IACrB,IAAI,CAAC,GAAG,GAAG,CAAC;IAEZ,CAAC,EAAE,CAAC;IACJ,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );

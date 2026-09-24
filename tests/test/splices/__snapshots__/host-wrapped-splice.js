@@ -50,6 +50,8 @@ function wrap(start) {
                           name: "outer",
                           key: "outer$zqr0jsdf8ub6$0",
                         }),
+                        "$0 => $0",
+                        '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAoBgC,MAAA,EAAK,CAAA"}',
                       ),
                     ),
                     params: [],
@@ -132,6 +134,8 @@ function wrap(start) {
                   },
                 ],
               }),
+              "($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n}",
+              '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAkBoB;IACd,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAkB;AACrC,CAAC,CAAA"}',
             ),
           ),
           params: ["outer$zqr0jsdf8ub6$0"],
@@ -191,6 +195,8 @@ function wrap(start) {
         },
       ],
     }),
+    "($0, $1) => {\n    const outer = $0();\n    return $1(outer);\n}",
+    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAgBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGH;AACP,CAAC,CAAA"}',
   );
 }
 function foo(start) {
@@ -217,6 +223,8 @@ function foo(start) {
         value: 1,
       },
     }),
+    "$0 => $0() + 1",
+    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AA0BY,MAAA,IAAM,GAAG,CAAC,CAAA"}',
   );
 }
 function same(script) {
@@ -253,6 +261,8 @@ it("hostWrappedSplice", async (t) => {
                   },
                   value: 1,
                 }),
+                "() => 1",
+                '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCiB,MAAA,CAAC,CAAA"}',
               ),
             ),
             params: [],
@@ -278,6 +288,8 @@ it("hostWrappedSplice", async (t) => {
                   },
                   value: 2,
                 }),
+                "() => 2",
+                '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCkC,MAAA,CAAC,CAAA"}',
               ),
             ),
             params: [],
@@ -306,6 +318,8 @@ it("hostWrappedSplice", async (t) => {
           key: "$0splice1",
         },
       }),
+      "($0, $1) => $0() + $1()",
+      '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCO,YAAA,IAAC,GAAgB,IAAC,CAAA"}',
     ),
   );
 });

@@ -211,6 +211,8 @@ const listed = cs.create(
     },
     expression: true,
   }),
+  "() => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>)",
+  '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"AAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ,CAAA"}',
 );
 it("scriptFragment", async (t) => {
   await snapshotCase(
@@ -251,6 +253,8 @@ it("scriptFragment", async (t) => {
           ],
           optional: false,
         }),
+        '$0 => $0()("x")',
+        '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"AAoBmD,MAAA,IAAO,CAAC,GAAG,CAAC,CAAA"}',
       ),
     }),
   );

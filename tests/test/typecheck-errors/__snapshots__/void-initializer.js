@@ -78,6 +78,8 @@ const ping = cs.create(
     },
     expression: false,
   }),
+  "() => () => {\n    let n = 0;\n    n = 1;\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAIgB,MAAA,GAAG,EAAE;IACnB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC,CAAA"}',
 );
 const script = cs.create(
   { start: { line: 10, column: 15 }, end: { line: 13, column: 2 } },
@@ -145,6 +147,8 @@ const script = cs.create(
       },
     ],
   }),
+  "$0 => {\n    const x = $0()();\n    return 1;\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 const action = cs.create(
   { start: { line: 15, column: 15 }, end: { line: 17, column: 2 } },
@@ -200,6 +204,8 @@ const action = cs.create(
       },
     ],
   }),
+  "$0 => {\n    const x = $0()();\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAckB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;AACpB,CAAC,CAAA"}',
 );
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
@@ -246,6 +252,8 @@ const label = cs.create(
     },
     expression: false,
   }),
+  "() => (text) => {\n    return text;\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAoBiB,MAAA,CAAC,IAAY,EAAE,EAAE;IAChC,OAAO,IAAI,CAAC;AACd,CAAC,CAAA"}',
 );
 const wrongArgument = cs.create(
   { start: { line: 25, column: 22 }, end: { line: 29, column: 2 } },
@@ -322,4 +330,6 @@ const wrongArgument = cs.create(
       },
     ],
   }),
+  "$0 => {\n    const x = $0()(true);\n    return 1;\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAwByB;IAEvB,MAAM,CAAC,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );

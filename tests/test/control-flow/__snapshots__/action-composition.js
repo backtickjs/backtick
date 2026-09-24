@@ -48,6 +48,8 @@ const effects = cs.create(
       },
     ],
   }),
+  "() => {\n    const x = 1;\n}",
+  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"AAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 const composed = cs.create(
   { start: { line: 12, column: 31 }, end: { line: 14, column: 2 } },
@@ -75,6 +77,8 @@ const composed = cs.create(
       },
     ],
   }),
+  "$0 => {\n    $0();\n}",
+  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"AAWkC;IAChC,IAAQ,CAAC;AACX,CAAC,CAAA"}',
 );
 it("actionComposition", async (t) => {
   await snapshotCase(
@@ -109,6 +113,8 @@ it("actionComposition", async (t) => {
           },
         ],
       }),
+      "$0 => {\n    $0();\n}",
+      '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"AAmBO;IACD,IAAS,CAAC;AACZ,CAAC,CAAA"}',
     ),
   );
 });

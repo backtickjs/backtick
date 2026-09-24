@@ -134,6 +134,8 @@ const ReadingRow = async ({ id, selected }) =>
               value: "px",
             },
           }),
+          '($0, $1) => "font-size: " + ($0().get() === $1() ? 20 : 16) + "px"',
+          '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"AA0BgB,YAAA,aAAa,GAAG,CAAC,IAAS,CAAC,GAAG,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI,CAAA"}',
         ),
         children: cs.create(
           { start: { line: 29, column: 7 }, end: { line: 29, column: 50 } },
@@ -228,6 +230,8 @@ const ReadingRow = async ({ id, selected }) =>
               optional: false,
             },
           }),
+          '($0, $1) => "row " + $0() + " of " + $1().get()',
+          '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"AA4BU,YAAA,MAAM,GAAG,IAAG,GAAG,MAAM,GAAG,IAAS,CAAC,GAAG,EAAE,CAAA"}',
         ),
       }),
       cs.create(
@@ -318,6 +322,8 @@ const ReadingRow = async ({ id, selected }) =>
             value: null,
           },
         }),
+        "($0, $1, $2) => $0().get() === $1() ? $2() : null",
+        '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"AA8BQ,gBAAA,IAAS,CAAC,GAAG,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,IAAC,CAAwB,CAAC,CAAC,IAAI,CAAA"}',
       ),
     ],
   });
@@ -774,6 +780,8 @@ async function ReadingPanel() {
         },
       ],
     }),
+    "($0, $1) => {\n    const selected = $0()(0);\n    return (<div>\n        <span onclick={() => selected.set(1)}>select</span>\n        <$1 id={0} selected={selected}/>\n        <$1 id={1} selected={selected}/>\n      </div>);\n}",
+    '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"AAmCY;IACR,MAAM,QAAQ,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CAClD;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
   );
 }
 // What one `ReadingRow` draws, in the three positions it read the cell from: a

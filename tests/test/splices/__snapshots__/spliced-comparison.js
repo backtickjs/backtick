@@ -231,6 +231,8 @@ it("splicedComparison", async (t) => {
           },
         ],
       }),
+      "($0, $1) => ({\n    under: $0() < $1(),\n    atMost: $0() <= $1(),\n    over: $1() > $0(),\n    between: $0() < $1() && $1() > $0(),\n})",
+      '{"version":3,"file":"spliced-comparison.test.jsx","sourceRoot":"","sources":["spliced-comparison.test.tsx"],"names":[],"mappings":"AAcO,YAAA,CAAC;IACF,KAAK,EAAE,IAAI,GAAG,IAAK;IACnB,MAAM,EAAE,IAAI,IAAI,IAAK;IACrB,IAAI,EAAE,IAAK,GAAG,IAAI;IAClB,OAAO,EAAE,IAAI,GAAG,IAAK,IAAI,IAAK,GAAG,IAAI;CACtC,CAAC,CAAA"}',
     ),
   );
 });

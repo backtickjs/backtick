@@ -38,6 +38,8 @@ it("splicedFunction", async (t) => {
         },
         expression: true,
       }),
+      "$0 => () => $0()",
+      '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["spliced-function.test.tsx"],"names":[],"mappings":"AAoBO,MAAA,GAAG,EAAE,CAAC,IAAC,CAAA"}',
     ),
   );
 });

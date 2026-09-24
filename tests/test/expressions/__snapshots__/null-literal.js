@@ -100,6 +100,8 @@ const orDash = cs.create(
     },
     expression: false,
   }),
+  '() => (value) => {\n    if (value === null) {\n        return "-";\n    }\n    return value;\n}',
+  '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["null-literal.test.tsx"],"names":[],"mappings":"AAM4D,MAAA,CAC1D,KAAoB,EACpB,EAAE;IACF,IAAI,KAAK,KAAK,IAAI,EAAE,CAAC;QACnB,OAAO,GAAG,CAAC;IACb,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC,CAAA"}',
 );
 it("nullLiteral", async (t) => {
   await snapshotCase(
@@ -236,6 +238,8 @@ it("nullLiteral", async (t) => {
           },
         ],
       }),
+      '$0 => ({\n    missing: $0()(null),\n    present: $0()("hi"),\n    bare: null,\n})',
+      '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["null-literal.test.tsx"],"names":[],"mappings":"AAmBO,MAAA,CAAC;IACF,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,IAAI,EAAE,IAAI;CACX,CAAC,CAAA"}',
     ),
   );
 });

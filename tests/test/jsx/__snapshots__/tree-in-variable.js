@@ -81,6 +81,8 @@ const heldElement = cs.create(
     },
     expression: false,
   }),
+  "$0 => () => {\n    const tree = $0();\n    return tree;\n}",
+  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"AAcuB,MAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,IAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC,CAAA"}',
 );
 const heldComponent = cs.create(
   { start: { line: 20, column: 22 }, end: { line: 23, column: 2 } },
@@ -152,6 +154,8 @@ const heldComponent = cs.create(
     },
     expression: false,
   }),
+  "$0 => () => {\n    const tree = $0();\n    return tree;\n}",
+  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"AAmByB,MAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,IAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC,CAAA"}',
 );
 it("treeInVariable", async (t) => {
   await snapshotCase(
@@ -184,6 +188,8 @@ it("treeInVariable", async (t) => {
             arguments: [],
             optional: false,
           }),
+          "$0 => $0()()",
+          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"AA6BU,MAAA,IAAY,EAAE,CAAA"}',
         ),
         cs.create(
           { start: { line: 31, column: 7 }, end: { line: 31, column: 27 } },
@@ -210,6 +216,8 @@ it("treeInVariable", async (t) => {
             arguments: [],
             optional: false,
           }),
+          "$0 => $0()()",
+          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"AA8BU,MAAA,IAAc,EAAE,CAAA"}',
         ),
       ],
     }),

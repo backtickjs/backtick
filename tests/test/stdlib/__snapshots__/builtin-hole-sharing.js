@@ -72,6 +72,8 @@ const make = (f) =>
         },
       ],
     }),
+    "$0 => {\n    return $0()(1).get();\n}",
+    '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAMK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC;AACrB,CAAC,CAAA"}',
   );
 const wrapped = cs.create(
   { start: { line: 11, column: 16 }, end: { line: 11, column: 49 } },
@@ -131,6 +133,8 @@ const wrapped = cs.create(
     },
     expression: true,
   }),
+  "$0 => (n) => $0()(n + 10)",
+  '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAUmB,MAAA,CAAC,CAAS,EAAE,EAAE,CAAC,IAAM,CAAC,CAAC,GAAG,EAAE,CAAC,CAAA"}',
 );
 it("builtinHoleSharing", async (t) => {
   await snapshotCase(
@@ -184,6 +188,8 @@ it("builtinHoleSharing", async (t) => {
           },
         ],
       }),
+      "($0, $1) => {\n    return $0() + $1();\n}",
+      '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAgBO;IACD,OAAO,IAAC,GAAgB,IAAC,CAAgB;AAC3C,CAAC,CAAA"}',
     ),
   );
 });

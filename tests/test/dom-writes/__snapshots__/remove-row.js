@@ -909,6 +909,8 @@ async function RemovableRows() {
         },
       ],
     }),
+    '($0, $1) => {\n    const ids = $0()([1, 2, 3, 4, 5]);\n    return (<table>\n        <tbody>\n          <$1 each={ids.get()}>\n            {(id) => (<tr id={"row-" + id}>\n                <td>\n                  <button onclick={() => ids.set(ids.get().filter((each) => each !== id))}>\n                    {"remove " + id}\n                  </button>\n                </td>\n              </tr>)}\n          </$1>\n        </tbody>\n      </table>);\n}',
+    '{"version":3,"file":"remove-row.test.jsx","sourceRoot":"","sources":["remove-row.test.tsx"],"names":[],"mappings":"AAWY;IACR,MAAM,GAAG,GAAG,IAAM,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC9C,OAAO,CACL,CAAC,KAAK,CACJ;QAAA,CAAC,KAAK,CACJ;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,CACnB;YAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CACf,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,CAClB;gBAAA,CAAC,EAAE,CACD;kBAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE,CACZ,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,IAAI,KAAK,EAAE,CAAC,CACjD,CAAC,CAED;oBAAA,CAAC,SAAS,GAAG,EAAE,CACjB;kBAAA,EAAE,MAAM,CACV;gBAAA,EAAE,EAAE,CACN;cAAA,EAAE,EAAE,CAAC,CACN,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,KAAK,CACT;MAAA,EAAE,KAAK,CAAC,CACT,CAAC;AACJ,CAAC,CAAA"}',
   );
 }
 it("a removal takes out the one row", async () => {

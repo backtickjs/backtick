@@ -131,6 +131,8 @@ it("arrow", async (t) => {
           },
         ],
       }),
+      "() => {\n    const base = 10;\n    return (one, two) => one + two + base;\n}",
+      '{"version":3,"file":"arrow.test.jsx","sourceRoot":"","sources":["arrow.test.tsx"],"names":[],"mappings":"AAQO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,CAAC,GAAW,EAAE,GAAW,EAAE,EAAE,CAAC,GAAG,GAAG,GAAG,GAAG,IAAI,CAAC;AACxD,CAAC,CAAA"}',
     ),
   );
 });

@@ -1,0 +1,10 @@
+// 11:5
+() => {
+    let i = 0;
+    let seen = "";
+    for (; i < 3;) {
+        seen = seen + i;
+        i = i + 1;
+    }
+    return seen;
+}

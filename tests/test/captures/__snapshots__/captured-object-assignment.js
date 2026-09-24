@@ -90,6 +90,8 @@ it("capturedObjectAssignment", async (t) => {
                 },
                 expression: false,
               }),
+              "$0 => () => {\n    $0.count += 1;\n}",
+              '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"AAawB,MAAA,GAAG,EAAE;IACrB,EAAO,CAAC,KAAK,IAAI,CAAC,CAAC;AACrB,CAAC,CAAA"}',
             ),
             params: ["counter$385xpgt8q0ek2$0"],
           },
@@ -281,6 +283,8 @@ it("capturedObjectAssignment", async (t) => {
           },
         ],
       }),
+      "$0 => {\n    const counter = { count: 0 };\n    const bump = $0(counter);\n    bump();\n    bump();\n    return counter.count;\n}",
+      '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"AAWO;IACD,MAAM,OAAO,GAAG,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;IAC7B,MAAM,IAAI,GAAG,WAAC,CAEV;IACJ,IAAI,EAAE,CAAC;IACP,IAAI,EAAE,CAAC;IACP,OAAO,OAAO,CAAC,KAAK,CAAC;AACvB,CAAC,CAAA"}',
     ),
   );
 });

@@ -122,6 +122,8 @@ const loadedBadge = await bundler.run(
       },
       expression: true,
     }),
+    '() => (props) => <b>{"count " + props.count}</b>',
+    '{"version":3,"file":"script-bound-tag-loading.test.jsx","sourceRoot":"","sources":["script-bound-tag-loading.test.tsx"],"names":[],"mappings":"AAeK,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,CAAC,CAAA"}',
   ),
 );
 const scriptBoundTagLoading = cs.create(
@@ -1020,6 +1022,8 @@ const scriptBoundTagLoading = cs.create(
       },
     ],
   }),
+  "($0, $1) => {\n    const count = $0()(0);\n    const drawn = $0()(null);\n    const Badge = (props) => {\n        const held = drawn.get();\n        return held === null ? null : eval(held)(props);\n    };\n    return (<div>\n      {drawn.get() === null ? <i>loading</i> : <Badge count={count.get()}/>}\n      <button onclick={() => drawn.set($1())}>load</button>\n      <button onclick={() => count.set(count.get() + 1)}>more</button>\n    </div>);\n}",
+  '{"version":3,"file":"script-bound-tag-loading.test.jsx","sourceRoot":"","sources":["script-bound-tag-loading.test.tsx"],"names":[],"mappings":"AAkBiC;IAC/B,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,MAAM,KAAK,GAAG,IAAM,CAEV,IAAI,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,CAAC,KAAwB,EAAE,EAAE;QACzC,MAAM,IAAI,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC;QACzB,OAAO,IAAI,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC;IAClD,CAAC,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,KAAK,CAAC,GAAG,EAAE,KAAK,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,EAAG,CACtE;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,IAAY,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC5D;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CACjE;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
 );
 it("scriptBoundTagLoading", async (t) => {
   await snapshotCase(t, "scriptBoundTagLoading", scriptBoundTagLoading);

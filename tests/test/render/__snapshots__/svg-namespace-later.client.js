@@ -1,0 +1,14 @@
+// 12:27
+($0, $1) => {
+    const xs = $0()([10]);
+    const shown = $0()(false);
+    return (<div>
+      <svg viewBox="0 0 30 10">
+        <$1 each={xs.get()}>{(x) => <title>{"dot " + x}</title>}</$1>
+        {shown.get() ? <title>{"shown"}</title> : null}
+      </svg>
+      <title>{"after"}</title>
+      <button onclick={() => xs.set([10, 20])}>add</button>
+      <button onclick={() => shown.set(true)}>show</button>
+    </div>);
+}

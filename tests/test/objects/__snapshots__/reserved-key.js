@@ -26,6 +26,8 @@ it("reservedKey", async (t) => {
         },
         expression: true,
       }),
+      "$0 => () => $0()",
+      '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["reserved-key.test.tsx"],"names":[],"mappings":"AAO0C,MAAA,GAAG,EAAE,CAAC,IAAC,CAAA"}',
     ),
   );
 });

@@ -46,6 +46,8 @@ const action = cs.create(
       },
     ],
   }),
+  "() => {\n    const x = 1;\n}",
+  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"AAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 export default cs.create(
   { start: { line: 9, column: 15 }, end: { line: 13, column: 2 } },
@@ -104,4 +106,6 @@ export default cs.create(
       },
     ],
   }),
+  "$0 => {\n    const list = $0();\n    return 1;\n}",
+  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"AAQkB;IAEhB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );

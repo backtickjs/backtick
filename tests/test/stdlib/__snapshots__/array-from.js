@@ -662,6 +662,8 @@ it("arrayFrom", async (t) => {
           },
         ],
       }),
+      '() => {\n    const doubled = Array.from({ length: 4 }, (_, index) => index * 2);\n    const empty = Array.from({ length: 0 }, (_, index) => index);\n    const absent = Array.from({ length: 2 }, (value, index) => value === undefined ? index : -1);\n    return doubled.join(",") + "|" + empty.length + "|" + absent.join(",");\n}',
+      '{"version":3,"file":"array-from.test.jsx","sourceRoot":"","sources":["array-from.test.tsx"],"names":[],"mappings":"AAeO;IACD,MAAM,OAAO,GAAG,KAAK,CAAC,IAAI,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,EAAE,CAAC,KAAK,GAAG,CAAC,CAAC,CAAC;IACnE,MAAM,KAAK,GAAG,KAAK,CAAC,IAAI,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,EAAE,CAAC,KAAK,CAAC,CAAC;IAC7D,MAAM,MAAM,GAAG,KAAK,CAAC,IAAI,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,EAAE,CAAC,KAAK,EAAE,KAAK,EAAE,EAAE,CACxD,KAAK,KAAK,SAAS,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CACjC,CAAC;IACF,OAAO,OAAO,CAAC,IAAI,CAAC,GAAG,CAAC,GAAG,GAAG,GAAG,KAAK,CAAC,MAAM,GAAG,GAAG,GAAG,MAAM,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC;AACzE,CAAC,CAAA"}',
     ),
   );
 });

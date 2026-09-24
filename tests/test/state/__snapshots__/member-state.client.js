@@ -1,0 +1,18 @@
+// 19:10
+($0, $1) => {
+    const build = (from) => {
+        return Array.from({ length: 3 }, (_, at) => {
+            return { id: from + at, label: $0()("row " + (from + at)) };
+        });
+    };
+    const held = $0()(build(1));
+    return (<div>
+        <ul class="rows">
+          <$1 each={held.get()}>
+            {(row) => (<li onclick={() => row.label.set("pressed")}>
+                {row.label.get()}
+              </li>)}
+          </$1>
+        </ul>
+      </div>);
+}

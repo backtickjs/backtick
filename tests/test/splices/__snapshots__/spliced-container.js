@@ -23,6 +23,8 @@ const originX = cs.create(
     loc: { start: { line: 14, column: 19 }, end: { line: 14, column: 20 } },
     value: 1,
   }),
+  "() => 1",
+  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"AAamB,MAAA,CAAC,CAAA"}',
 );
 const label = cs.create(
   { start: { line: 16, column: 14 }, end: { line: 16, column: 26 } },
@@ -37,6 +39,8 @@ const label = cs.create(
     loc: { start: { line: 16, column: 17 }, end: { line: 16, column: 25 } },
     value: "origin",
   }),
+  '() => "origin"',
+  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"AAeiB,MAAA,QAAQ,CAAA"}',
 );
 const point = { x: originX, label };
 it("splicedContainer", async (t) => {
@@ -89,6 +93,8 @@ it("splicedContainer", async (t) => {
           value: 1,
         },
       }),
+      "$0 => $0().x + 1",
+      '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"AAoB+C,MAAA,IAAM,CAAC,CAAC,GAAG,CAAC,CAAA"}',
     ),
   );
 });

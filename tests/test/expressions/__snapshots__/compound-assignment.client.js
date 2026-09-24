@@ -1,0 +1,16 @@
+// 12:5
+() => {
+    let n = 10;
+    n += 5;
+    n -= 3;
+    n *= 2;
+    n /= 4;
+    n %= 4;
+    let text = "a";
+    text += "b";
+    let total = 1;
+    const answered = (total += 2);
+    let x = 1;
+    x += x = 5;
+    return [n, text, answered, total, x];
+}

@@ -127,6 +127,8 @@ it("comments", async (t) => {
           },
         ],
       }),
+      '() => {\n    const count = 1;\n    if (count === 1) {\n        return "one";\n    }\n    return "many";\n}',
+      '{"version":3,"file":"comments.test.jsx","sourceRoot":"","sources":["comments.test.tsx"],"names":[],"mappings":"AAUO;IAED,MAAM,KAAK,GAAG,CAAC,CAAC;IAEhB,IAAI,KAAK,KAAK,CAAC,EAAE,CAAC;QAEhB,OAAO,KAAK,CAAC;IACf,CAAC;IAID,OAAO,MAAM,CAAC;AAChB,CAAC,CAAA"}',
     ),
   );
 });

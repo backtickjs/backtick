@@ -76,6 +76,8 @@ const stored = cs.create(
     },
     expression: false,
   }),
+  "() => (x) => {\n    const y = x;\n    return 1;\n}",
+  '{"version":3,"file":"undefined-annotation.test.jsx","sourceRoot":"","sources":["undefined-annotation.test.tsx"],"names":[],"mappings":"AAYkB,MAAA,CAAC,CAAQ,EAAE,EAAE;IAC7B,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 const written = cs.create(
   { start: { line: 18, column: 16 }, end: { line: 23, column: 2 } },
@@ -183,4 +185,6 @@ const written = cs.create(
     },
     expression: false,
   }),
+  '() => (x) => {\n    let y = "";\n    y = x;\n    return 1;\n}',
+  '{"version":3,"file":"undefined-annotation.test.jsx","sourceRoot":"","sources":["undefined-annotation.test.tsx"],"names":[],"mappings":"AAiBmB,MAAA,CAAC,CAAQ,EAAE,EAAE;IAC9B,IAAI,CAAC,GAAG,EAAE,CAAC;IAEX,CAAC,GAAG,CAAC,CAAC;IACN,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );

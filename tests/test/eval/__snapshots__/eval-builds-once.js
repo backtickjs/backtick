@@ -92,6 +92,8 @@ async function Answer() {
         },
       },
     }),
+    '() => <em>{"answered"}</em>',
+    '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"AAyCY,MAAA,CAAC,EAAE,CAAC,CAAC,UAAU,CAAC,EAAE,EAAE,CAAC,CAAA"}',
   );
 }
 const answer = await bundler.run(_jsx(Answer, {}));
@@ -468,6 +470,8 @@ async function Waiting({ ask }) {
         },
       ],
     }),
+    "($0, $1, $2) => {\n    const drawn = $0()(null);\n    const started = $1().setTimeout(() => drawn.set($2()()), 0);\n    return (<>\n        {drawn.get() === null\n            ? null\n            : eval(drawn.get())}\n      </>);\n}",
+    '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"AAmDY;IACR,MAAM,KAAK,GAAG,IAAM,CAAiC,IAAI,CAAC,CAAC;IAC3D,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,IAAI,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IAC/D,OAAO,CACL,EACE;QAAA,CAAC,KAAK,CAAC,GAAG,EAAE,KAAK,IAAI;YACnB,CAAC,CAAC,IAAI;YACN,CAAC,CAAC,IAAI,CAAC,KAAK,CAAC,GAAG,EAA6B,CAAC,CAClD;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC,CAAA"}',
   );
 }
 const evalBuildsOnce = cs.create(
@@ -950,6 +954,8 @@ const evalBuildsOnce = cs.create(
       },
     ],
   }),
+  '($0, $1, $2) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked.get()}</span>\n      <$2 ask={() => {\n            asked.set(asked.get() + 1);\n            return asked.get() > 4 ? null : $1();\n        }}/>\n    </div>);\n}',
+  '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"AAgE0B;IACxB,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAExB,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,IAAI,CACpC;MAAA,CAAC,EAAO,CACN,GAAG,CAAC,CAAC,GAAG,EAAE;YACR,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;YAC3B,OAAO,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAO,CAAC;QAC1C,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
 );
 it("evalBuildsOnce", async (t) => {
   await snapshotCase(t, "evalBuildsOnce", evalBuildsOnce);

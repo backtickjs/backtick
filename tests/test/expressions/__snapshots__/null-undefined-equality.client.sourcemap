@@ -1,0 +1,67 @@
+// 9:33
+() =>   → 9:36 null =
+null    → 9:36 null
+ ===    → 9:40  === 
+null    → 9:45 null
+
+// 10:33
+() =>      → 10:36 undefi
+undefined  → 10:36 undefined
+ ===       → 10:45  === 
+undefined  → 10:50 undefined
+
+// 14:33
+() =>      → 14:36 null !
+null       → 14:36 null
+ !==       → 14:40  !== 
+undefined  → 14:45 undefined
+
+// 15:33
+() =>      → 15:36 null =
+null       → 15:36 null
+ ===       → 15:40  === 
+undefined  → 15:45 undefined
+
+// 24:22
+($0, $1) => {  → 24:25 {
+const          → 25:9 const 
+names          → 25:15 names
+ =             → 25:20  = 
+[              → 25:23 [
+"a"            → 25:24 "a"
+]              → 25:27 ]
+;              → 25:28 ;
+return         → 26:9 return 
+[              → 26:16 [
+$0()           → 27:11 $not
+ ===           → 27:19  === 
+undefined      → 27:24 undefined
+,              → 27:33 ,
+$0()           → 28:11 $not
+ !==           → 28:19  !== 
+null           → 28:24 null
+,              → 28:28 ,
+$1()           → 29:11 $emp
+ ===           → 29:17  === 
+null           → 29:22 null
+,              → 29:26 ,
+$1()           → 30:11 $emp
+ !==           → 30:17  !== 
+undefined      → 30:22 undefined
+,              → 30:31 ,
+names          → 31:11 names
+[              → 31:16 [
+1              → 31:17 1
+]              → 31:18 ]
+ ===           → 31:19  === 
+undefined      → 31:24 undefined
+,              → 31:33 ,
+names          → 32:11 names
+[              → 32:16 [
+1              → 32:17 1
+]              → 32:18 ]
+ !==           → 32:19  !== 
+null           → 32:24 null
+,              → 32:28 ,
+;              → 33:10 ;
+}              → 34:7 }

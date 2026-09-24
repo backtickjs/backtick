@@ -18,6 +18,8 @@ const flags = {
       loc: { start: { line: 8, column: 27 }, end: { line: 8, column: 31 } },
       value: true,
     }),
+    "() => true",
+    '{"version":3,"file":"condition-narrowing.test.jsx","sourceRoot":"","sources":["condition-narrowing.test.tsx"],"names":[],"mappings":"AAO2B,MAAA,IAAI,CAAA"}',
   ),
 };
 const label = cs.create(
@@ -340,6 +342,8 @@ const label = cs.create(
     },
     expression: false,
   }),
+  '$0 => (text, upper) => {\n    if (upper && text !== null) {\n        return text.toUpperCase();\n    }\n    if ($0() && text !== null && text.charAt(0) === "!") {\n        return text.concat("?");\n    }\n    return "none";\n}',
+  '{"version":3,"file":"condition-narrowing.test.jsx","sourceRoot":"","sources":["condition-narrowing.test.tsx"],"names":[],"mappings":"AAS0E,MAAA,CACxE,IAAmB,EACnB,KAAc,EACd,EAAE;IACF,IAAI,KAAK,IAAI,IAAI,KAAK,IAAI,EAAE,CAAC;QAC3B,OAAO,IAAI,CAAC,WAAW,EAAE,CAAC;IAC5B,CAAC;IACD,IAAI,IAAC,IAAkB,IAAI,KAAK,IAAI,IAAI,IAAI,CAAC,MAAM,CAAC,CAAC,CAAC,KAAK,GAAG,EAAE,CAAC;QAC/D,OAAO,IAAI,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC;IAC1B,CAAC;IACD,OAAO,MAAM,CAAC;AAChB,CAAC,CAAA"}',
 );
 it("conditionNarrowing", async (t) => {
   await snapshotCase(
@@ -571,6 +575,8 @@ it("conditionNarrowing", async (t) => {
           },
         ],
       }),
+      '$0 => ({\n    missing: $0()(null, true),\n    loud: $0()("!hi", true),\n    quiet: $0()("!hi", false),\n    plain: $0()("zz", false),\n})',
+      '{"version":3,"file":"condition-narrowing.test.jsx","sourceRoot":"","sources":["condition-narrowing.test.tsx"],"names":[],"mappings":"AA0BO,MAAA,CAAC;IACF,OAAO,EAAE,IAAM,CAAC,IAAI,EAAE,IAAI,CAAC;IAC3B,IAAI,EAAE,IAAM,CAAC,KAAK,EAAE,IAAI,CAAC;IACzB,KAAK,EAAE,IAAM,CAAC,KAAK,EAAE,KAAK,CAAC;IAC3B,KAAK,EAAE,IAAM,CAAC,IAAI,EAAE,KAAK,CAAC;CAC3B,CAAC,CAAA"}',
     ),
   );
 });

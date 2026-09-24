@@ -27,6 +27,11 @@ export interface ClientScript {
   // `ClientScript` per call, and the bundler parses one per source location, so
   // the nodes are built when they are first read rather than at every call.
   readonly body: () => ES.Expression | ES.BlockStatement;
+  // The script as its bundle entry, `($0, …) => body`, compiled when the host
+  // was: splices and captures are its parameters, and JSX is as written.
+  readonly code: string;
+  // The code's source map, as JSON, into the host file.
+  readonly map: string;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -42,11 +47,15 @@ export function create(
   loc: ES.SourceLocation,
   metadata: Metadata,
   body: () => ES.Expression | ES.BlockStatement,
+  code: string,
+  map: string,
 ): ClientScript {
   return {
     "@backtickjs": "ClientScript",
     loc,
     metadata,
     body,
+    code,
+    map,
   };
 }

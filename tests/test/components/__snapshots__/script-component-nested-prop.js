@@ -110,6 +110,8 @@ it("scriptComponentNestedProp", async (t) => {
         children: [],
         closingElement: null,
       }),
+      '$0 => <$0 person={{ firstName: "ada" }}/>',
+      '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["script-component-nested-prop.test.tsx"],"names":[],"mappings":"AA0BO,MAAA,CAAC,EAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG,CAAA"}',
     ),
   );
 });
