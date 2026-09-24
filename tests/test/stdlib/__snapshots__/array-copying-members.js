@@ -43,7 +43,7 @@ it("arrayCopyingMembers", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "rows",
-                  bindingKey: "rows$1o1nlczam5nsr$0",
+                  key: "rows$1o1nlczam5nsr$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -102,7 +102,7 @@ it("arrayCopyingMembers", async (t) => {
                     end: { line: 15, column: 18 },
                   },
                   name: "sorted",
-                  bindingKey: "sorted$1o1nlczam5nsr$1",
+                  key: "sorted$1o1nlczam5nsr$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -123,7 +123,7 @@ it("arrayCopyingMembers", async (t) => {
                         end: { line: 15, column: 25 },
                       },
                       name: "rows",
-                      bindingKey: "rows$1o1nlczam5nsr$0",
+                      key: "rows$1o1nlczam5nsr$0",
                     },
                     property: {
                       type: "Identifier",
@@ -151,7 +151,7 @@ it("arrayCopyingMembers", async (t) => {
                             end: { line: 15, column: 37 },
                           },
                           name: "a",
-                          bindingKey: "a$1o1nlczam5nsr$5",
+                          key: "a$1o1nlczam5nsr$5",
                         },
                         {
                           type: "Identifier",
@@ -160,7 +160,7 @@ it("arrayCopyingMembers", async (t) => {
                             end: { line: 15, column: 40 },
                           },
                           name: "b",
-                          bindingKey: "b$1o1nlczam5nsr$6",
+                          key: "b$1o1nlczam5nsr$6",
                         },
                       ],
                       body: {
@@ -177,7 +177,7 @@ it("arrayCopyingMembers", async (t) => {
                             end: { line: 15, column: 46 },
                           },
                           name: "a",
-                          bindingKey: "a$1o1nlczam5nsr$5",
+                          key: "a$1o1nlczam5nsr$5",
                         },
                         right: {
                           type: "Identifier",
@@ -186,7 +186,7 @@ it("arrayCopyingMembers", async (t) => {
                             end: { line: 15, column: 50 },
                           },
                           name: "b",
-                          bindingKey: "b$1o1nlczam5nsr$6",
+                          key: "b$1o1nlczam5nsr$6",
                         },
                       },
                       expression: true,
@@ -218,7 +218,7 @@ it("arrayCopyingMembers", async (t) => {
                     end: { line: 16, column: 20 },
                   },
                   name: "reversed",
-                  bindingKey: "reversed$1o1nlczam5nsr$2",
+                  key: "reversed$1o1nlczam5nsr$2",
                 },
                 init: {
                   type: "CallExpression",
@@ -239,7 +239,7 @@ it("arrayCopyingMembers", async (t) => {
                         end: { line: 16, column: 27 },
                       },
                       name: "rows",
-                      bindingKey: "rows$1o1nlczam5nsr$0",
+                      key: "rows$1o1nlczam5nsr$0",
                     },
                     property: {
                       type: "Identifier",
@@ -279,7 +279,7 @@ it("arrayCopyingMembers", async (t) => {
                     end: { line: 17, column: 19 },
                   },
                   name: "spliced",
-                  bindingKey: "spliced$1o1nlczam5nsr$3",
+                  key: "spliced$1o1nlczam5nsr$3",
                 },
                 init: {
                   type: "CallExpression",
@@ -300,7 +300,7 @@ it("arrayCopyingMembers", async (t) => {
                         end: { line: 17, column: 26 },
                       },
                       name: "rows",
-                      bindingKey: "rows$1o1nlczam5nsr$0",
+                      key: "rows$1o1nlczam5nsr$0",
                     },
                     property: {
                       type: "Identifier",
@@ -357,7 +357,7 @@ it("arrayCopyingMembers", async (t) => {
                     end: { line: 18, column: 20 },
                   },
                   name: "inserted",
-                  bindingKey: "inserted$1o1nlczam5nsr$4",
+                  key: "inserted$1o1nlczam5nsr$4",
                 },
                 init: {
                   type: "CallExpression",
@@ -378,7 +378,7 @@ it("arrayCopyingMembers", async (t) => {
                         end: { line: 18, column: 27 },
                       },
                       name: "rows",
-                      bindingKey: "rows$1o1nlczam5nsr$0",
+                      key: "rows$1o1nlczam5nsr$0",
                     },
                     property: {
                       type: "Identifier",
@@ -503,7 +503,7 @@ it("arrayCopyingMembers", async (t) => {
                                     end: { line: 20, column: 14 },
                                   },
                                   name: "sorted",
-                                  bindingKey: "sorted$1o1nlczam5nsr$1",
+                                  key: "sorted$1o1nlczam5nsr$1",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -556,7 +556,7 @@ it("arrayCopyingMembers", async (t) => {
                                   end: { line: 22, column: 16 },
                                 },
                                 name: "reversed",
-                                bindingKey: "reversed$1o1nlczam5nsr$2",
+                                key: "reversed$1o1nlczam5nsr$2",
                               },
                               property: {
                                 type: "Identifier",
@@ -610,7 +610,7 @@ it("arrayCopyingMembers", async (t) => {
                               end: { line: 24, column: 15 },
                             },
                             name: "spliced",
-                            bindingKey: "spliced$1o1nlczam5nsr$3",
+                            key: "spliced$1o1nlczam5nsr$3",
                           },
                           property: {
                             type: "Identifier",
@@ -664,7 +664,7 @@ it("arrayCopyingMembers", async (t) => {
                           end: { line: 26, column: 16 },
                         },
                         name: "inserted",
-                        bindingKey: "inserted$1o1nlczam5nsr$4",
+                        key: "inserted$1o1nlczam5nsr$4",
                       },
                       property: {
                         type: "Identifier",
@@ -718,7 +718,7 @@ it("arrayCopyingMembers", async (t) => {
                       end: { line: 28, column: 12 },
                     },
                     name: "rows",
-                    bindingKey: "rows$1o1nlczam5nsr$0",
+                    key: "rows$1o1nlczam5nsr$0",
                   },
                   property: {
                     type: "Identifier",

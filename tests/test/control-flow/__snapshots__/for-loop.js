@@ -41,7 +41,7 @@ it("forLoop", async (t) => {
                     end: { line: 12, column: 15 },
                   },
                   name: "total",
-                  bindingKey: "total$1z8sn9rs7fbwb$0",
+                  key: "total$1z8sn9rs7fbwb$0",
                 },
                 init: {
                   type: "Literal",
@@ -81,7 +81,7 @@ it("forLoop", async (t) => {
                       end: { line: 13, column: 16 },
                     },
                     name: "i",
-                    bindingKey: "i$1z8sn9rs7fbwb$1",
+                    key: "i$1z8sn9rs7fbwb$1",
                   },
                   init: {
                     type: "Literal",
@@ -108,7 +108,7 @@ it("forLoop", async (t) => {
                   end: { line: 13, column: 23 },
                 },
                 name: "i",
-                bindingKey: "i$1z8sn9rs7fbwb$1",
+                key: "i$1z8sn9rs7fbwb$1",
               },
               right: {
                 type: "Literal",
@@ -133,7 +133,7 @@ it("forLoop", async (t) => {
                   end: { line: 13, column: 30 },
                 },
                 name: "i",
-                bindingKey: "i$1z8sn9rs7fbwb$1",
+                key: "i$1z8sn9rs7fbwb$1",
               },
               right: {
                 type: "BinaryExpression",
@@ -149,7 +149,7 @@ it("forLoop", async (t) => {
                     end: { line: 13, column: 34 },
                   },
                   name: "i",
-                  bindingKey: "i$1z8sn9rs7fbwb$1",
+                  key: "i$1z8sn9rs7fbwb$1",
                 },
                 right: {
                   type: "Literal",
@@ -188,7 +188,7 @@ it("forLoop", async (t) => {
                         end: { line: 14, column: 13 },
                       },
                       name: "total",
-                      bindingKey: "total$1z8sn9rs7fbwb$0",
+                      key: "total$1z8sn9rs7fbwb$0",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -204,7 +204,7 @@ it("forLoop", async (t) => {
                           end: { line: 14, column: 21 },
                         },
                         name: "total",
-                        bindingKey: "total$1z8sn9rs7fbwb$0",
+                        key: "total$1z8sn9rs7fbwb$0",
                       },
                       right: {
                         type: "Identifier",
@@ -213,7 +213,7 @@ it("forLoop", async (t) => {
                           end: { line: 14, column: 25 },
                         },
                         name: "i",
-                        bindingKey: "i$1z8sn9rs7fbwb$1",
+                        key: "i$1z8sn9rs7fbwb$1",
                       },
                     },
                   },
@@ -234,7 +234,7 @@ it("forLoop", async (t) => {
                 end: { line: 16, column: 18 },
               },
               name: "total",
-              bindingKey: "total$1z8sn9rs7fbwb$0",
+              key: "total$1z8sn9rs7fbwb$0",
             },
           },
         ],

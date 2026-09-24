@@ -47,7 +47,7 @@ it("objectSpread", async (t) => {
                     end: { line: 18, column: 16 },
                   },
                   name: "base",
-                  bindingKey: "base$31uvwz3g4bdt1$0",
+                  key: "base$31uvwz3g4bdt1$0",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -136,7 +136,7 @@ it("objectSpread", async (t) => {
                     end: { line: 19, column: 16 },
                   },
                   name: "over",
-                  bindingKey: "over$31uvwz3g4bdt1$1",
+                  key: "over$31uvwz3g4bdt1$1",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -203,7 +203,7 @@ it("objectSpread", async (t) => {
                       end: { line: 21, column: 15 },
                     },
                     name: "base",
-                    bindingKey: "base$31uvwz3g4bdt1$0",
+                    key: "base$31uvwz3g4bdt1$0",
                   },
                 },
                 {
@@ -219,7 +219,7 @@ it("objectSpread", async (t) => {
                       end: { line: 22, column: 15 },
                     },
                     name: "over",
-                    bindingKey: "over$31uvwz3g4bdt1$1",
+                    key: "over$31uvwz3g4bdt1$1",
                   },
                 },
                 {

@@ -39,7 +39,7 @@ it("methodCall", async (t) => {
                     end: { line: 10, column: 20 },
                   },
                   name: "greeting",
-                  bindingKey: "greeting$163oncfaq7kkj$0",
+                  key: "greeting$163oncfaq7kkj$0",
                 },
                 init: {
                   type: "Literal",
@@ -89,7 +89,7 @@ it("methodCall", async (t) => {
                         end: { line: 11, column: 21 },
                       },
                       name: "greeting",
-                      bindingKey: "greeting$163oncfaq7kkj$0",
+                      key: "greeting$163oncfaq7kkj$0",
                     },
                     property: {
                       type: "Identifier",

@@ -41,7 +41,7 @@ it("arrayIndex", async (t) => {
                     end: { line: 12, column: 17 },
                   },
                   name: "coins",
-                  bindingKey: "coins$2nqckix5uoswz$0",
+                  key: "coins$2nqckix5uoswz$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -100,7 +100,7 @@ it("arrayIndex", async (t) => {
                     end: { line: 13, column: 15 },
                   },
                   name: "total",
-                  bindingKey: "total$2nqckix5uoswz$1",
+                  key: "total$2nqckix5uoswz$1",
                 },
                 init: {
                   type: "Literal",
@@ -140,7 +140,7 @@ it("arrayIndex", async (t) => {
                       end: { line: 14, column: 16 },
                     },
                     name: "i",
-                    bindingKey: "i$2nqckix5uoswz$2",
+                    key: "i$2nqckix5uoswz$2",
                   },
                   init: {
                     type: "Literal",
@@ -167,7 +167,7 @@ it("arrayIndex", async (t) => {
                   end: { line: 14, column: 23 },
                 },
                 name: "i",
-                bindingKey: "i$2nqckix5uoswz$2",
+                key: "i$2nqckix5uoswz$2",
               },
               right: {
                 type: "MemberExpression",
@@ -182,7 +182,7 @@ it("arrayIndex", async (t) => {
                     end: { line: 14, column: 31 },
                   },
                   name: "coins",
-                  bindingKey: "coins$2nqckix5uoswz$0",
+                  key: "coins$2nqckix5uoswz$0",
                 },
                 property: {
                   type: "Identifier",
@@ -210,7 +210,7 @@ it("arrayIndex", async (t) => {
                   end: { line: 14, column: 41 },
                 },
                 name: "i",
-                bindingKey: "i$2nqckix5uoswz$2",
+                key: "i$2nqckix5uoswz$2",
               },
               right: {
                 type: "BinaryExpression",
@@ -226,7 +226,7 @@ it("arrayIndex", async (t) => {
                     end: { line: 14, column: 45 },
                   },
                   name: "i",
-                  bindingKey: "i$2nqckix5uoswz$2",
+                  key: "i$2nqckix5uoswz$2",
                 },
                 right: {
                   type: "Literal",
@@ -265,7 +265,7 @@ it("arrayIndex", async (t) => {
                         end: { line: 15, column: 13 },
                       },
                       name: "total",
-                      bindingKey: "total$2nqckix5uoswz$1",
+                      key: "total$2nqckix5uoswz$1",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -281,7 +281,7 @@ it("arrayIndex", async (t) => {
                           end: { line: 15, column: 21 },
                         },
                         name: "total",
-                        bindingKey: "total$2nqckix5uoswz$1",
+                        key: "total$2nqckix5uoswz$1",
                       },
                       right: {
                         type: "MemberExpression",
@@ -296,7 +296,7 @@ it("arrayIndex", async (t) => {
                             end: { line: 15, column: 29 },
                           },
                           name: "coins",
-                          bindingKey: "coins$2nqckix5uoswz$0",
+                          key: "coins$2nqckix5uoswz$0",
                         },
                         property: {
                           type: "Identifier",
@@ -305,7 +305,7 @@ it("arrayIndex", async (t) => {
                             end: { line: 15, column: 31 },
                           },
                           name: "i",
-                          bindingKey: "i$2nqckix5uoswz$2",
+                          key: "i$2nqckix5uoswz$2",
                         },
                         computed: true,
                         optional: false,
@@ -329,7 +329,7 @@ it("arrayIndex", async (t) => {
                 end: { line: 17, column: 18 },
               },
               name: "total",
-              bindingKey: "total$2nqckix5uoswz$1",
+              key: "total$2nqckix5uoswz$1",
             },
           },
         ],

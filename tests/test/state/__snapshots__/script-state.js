@@ -27,7 +27,7 @@ async function ScriptRows() {
             end: { line: 10, column: 25 },
           },
           name: "label",
-          bindingKey: "label$3f2468k5dp5lo$0",
+          key: "label$3f2468k5dp5lo$0",
         },
       ],
       body: {
@@ -83,7 +83,7 @@ async function ScriptRows() {
                           end: { line: 11, column: 32 },
                         },
                         name: "label",
-                        bindingKey: "label$3f2468k5dp5lo$0",
+                        key: "label$3f2468k5dp5lo$0",
                       },
                     ],
                     optional: false,
@@ -158,7 +158,7 @@ async function ScriptRows() {
                       end: { line: 18, column: 17 },
                     },
                     name: "row",
-                    bindingKey: "row$3f2468k5dp5lo$1",
+                    key: "row$3f2468k5dp5lo$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -220,7 +220,7 @@ async function ScriptRows() {
                         end: { line: 19, column: 11 },
                       },
                       name: "row",
-                      bindingKey: "row$3f2468k5dp5lo$1",
+                      key: "row$3f2468k5dp5lo$1",
                     },
                     property: {
                       type: "Identifier",
@@ -277,7 +277,7 @@ async function ScriptRows() {
                               end: { line: 19, column: 25 },
                             },
                             name: "row",
-                            bindingKey: "row$3f2468k5dp5lo$1",
+                            key: "row$3f2468k5dp5lo$1",
                           },
                           property: {
                             type: "Identifier",

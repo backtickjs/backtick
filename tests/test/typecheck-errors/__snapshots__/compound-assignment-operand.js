@@ -32,7 +32,7 @@ export const constant = cs.create(
                 end: { line: 6, column: 9 },
               },
               name: "n",
-              bindingKey: "n$3586xtu4la89h$0",
+              key: "n$3586xtu4la89h$0",
             },
             init: {
               type: "Literal",
@@ -56,7 +56,7 @@ export const constant = cs.create(
             type: "Identifier",
             loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 3 } },
             name: "n",
-            bindingKey: "n$3586xtu4la89h$0",
+            key: "n$3586xtu4la89h$0",
           },
           right: {
             type: "Literal",
@@ -72,7 +72,7 @@ export const constant = cs.create(
           type: "Identifier",
           loc: { start: { line: 9, column: 9 }, end: { line: 9, column: 10 } },
           name: "n",
-          bindingKey: "n$3586xtu4la89h$0",
+          key: "n$3586xtu4la89h$0",
         },
       },
     ],
@@ -109,7 +109,7 @@ export const mixed = cs.create(
                 end: { line: 13, column: 7 },
               },
               name: "n",
-              bindingKey: "n$3586xtu4la89h$1",
+              key: "n$3586xtu4la89h$1",
             },
             init: {
               type: "Literal",
@@ -139,7 +139,7 @@ export const mixed = cs.create(
               end: { line: 15, column: 3 },
             },
             name: "n",
-            bindingKey: "n$3586xtu4la89h$1",
+            key: "n$3586xtu4la89h$1",
           },
           right: {
             type: "Literal",
@@ -161,7 +161,7 @@ export const mixed = cs.create(
             end: { line: 16, column: 10 },
           },
           name: "n",
-          bindingKey: "n$3586xtu4la89h$1",
+          key: "n$3586xtu4la89h$1",
         },
       },
     ],

@@ -21,7 +21,7 @@ const pick = cs.create(
         type: "Identifier",
         loc: { start: { line: 8, column: 17 }, end: { line: 8, column: 18 } },
         name: "p",
-        bindingKey: "p$2dtorvijco8u0$0",
+        key: "p$2dtorvijco8u0$0",
       },
     ],
     body: {
@@ -50,7 +50,7 @@ const pick = cs.create(
                   end: { line: 9, column: 10 },
                 },
                 name: "p",
-                bindingKey: "p$2dtorvijco8u0$0",
+                key: "p$2dtorvijco8u0$0",
               },
               property: {
                 type: "Identifier",
@@ -87,7 +87,7 @@ const deep = cs.create(
         type: "Identifier",
         loc: { start: { line: 12, column: 17 }, end: { line: 12, column: 18 } },
         name: "o",
-        bindingKey: "o$2dtorvijco8u0$1",
+        key: "o$2dtorvijco8u0$1",
       },
     ],
     body: {
@@ -125,7 +125,7 @@ const deep = cs.create(
                     end: { line: 13, column: 10 },
                   },
                   name: "o",
-                  bindingKey: "o$2dtorvijco8u0$1",
+                  key: "o$2dtorvijco8u0$1",
                 },
                 property: {
                   type: "Identifier",
@@ -173,7 +173,7 @@ const shout = cs.create(
         type: "Identifier",
         loc: { start: { line: 16, column: 18 }, end: { line: 16, column: 19 } },
         name: "s",
-        bindingKey: "s$2dtorvijco8u0$2",
+        key: "s$2dtorvijco8u0$2",
       },
     ],
     body: {
@@ -211,7 +211,7 @@ const shout = cs.create(
                     end: { line: 17, column: 10 },
                   },
                   name: "s",
-                  bindingKey: "s$2dtorvijco8u0$2",
+                  key: "s$2dtorvijco8u0$2",
                 },
                 property: {
                   type: "Identifier",

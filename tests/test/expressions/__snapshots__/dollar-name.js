@@ -64,7 +64,7 @@ it("dollarName", async (t) => {
                     end: { line: 19, column: 26 },
                   },
                   name: "foo$",
-                  bindingKey: "foo$$sl458m2swc6c$0",
+                  key: "foo$$sl458m2swc6c$0",
                 }),
               ),
             ),
@@ -98,7 +98,7 @@ it("dollarName", async (t) => {
                     end: { line: 18, column: 16 },
                   },
                   name: "foo$",
-                  bindingKey: "foo$$sl458m2swc6c$0",
+                  key: "foo$$sl458m2swc6c$0",
                 },
                 init: {
                   type: "Literal",

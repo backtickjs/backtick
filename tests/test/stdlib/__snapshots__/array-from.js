@@ -46,7 +46,7 @@ it("arrayFrom", async (t) => {
                     end: { line: 17, column: 19 },
                   },
                   name: "doubled",
-                  bindingKey: "doubled$3pi2uzl7sovgc$0",
+                  key: "doubled$3pi2uzl7sovgc$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -130,7 +130,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 17, column: 50 },
                           },
                           name: "_",
-                          bindingKey: "_$3pi2uzl7sovgc$3",
+                          key: "_$3pi2uzl7sovgc$3",
                         },
                         {
                           type: "Identifier",
@@ -139,7 +139,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 17, column: 57 },
                           },
                           name: "index",
-                          bindingKey: "index$3pi2uzl7sovgc$4",
+                          key: "index$3pi2uzl7sovgc$4",
                         },
                       ],
                       body: {
@@ -156,7 +156,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 17, column: 67 },
                           },
                           name: "index",
-                          bindingKey: "index$3pi2uzl7sovgc$4",
+                          key: "index$3pi2uzl7sovgc$4",
                         },
                         right: {
                           type: "Literal",
@@ -196,7 +196,7 @@ it("arrayFrom", async (t) => {
                     end: { line: 18, column: 17 },
                   },
                   name: "empty",
-                  bindingKey: "empty$3pi2uzl7sovgc$1",
+                  key: "empty$3pi2uzl7sovgc$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -280,7 +280,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 18, column: 48 },
                           },
                           name: "_",
-                          bindingKey: "_$3pi2uzl7sovgc$5",
+                          key: "_$3pi2uzl7sovgc$5",
                         },
                         {
                           type: "Identifier",
@@ -289,7 +289,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 18, column: 55 },
                           },
                           name: "index",
-                          bindingKey: "index$3pi2uzl7sovgc$6",
+                          key: "index$3pi2uzl7sovgc$6",
                         },
                       ],
                       body: {
@@ -299,7 +299,7 @@ it("arrayFrom", async (t) => {
                           end: { line: 18, column: 65 },
                         },
                         name: "index",
-                        bindingKey: "index$3pi2uzl7sovgc$6",
+                        key: "index$3pi2uzl7sovgc$6",
                       },
                       expression: true,
                     },
@@ -330,7 +330,7 @@ it("arrayFrom", async (t) => {
                     end: { line: 19, column: 18 },
                   },
                   name: "absent",
-                  bindingKey: "absent$3pi2uzl7sovgc$2",
+                  key: "absent$3pi2uzl7sovgc$2",
                 },
                 init: {
                   type: "CallExpression",
@@ -414,7 +414,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 19, column: 53 },
                           },
                           name: "value",
-                          bindingKey: "value$3pi2uzl7sovgc$7",
+                          key: "value$3pi2uzl7sovgc$7",
                         },
                         {
                           type: "Identifier",
@@ -423,7 +423,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 19, column: 60 },
                           },
                           name: "index",
-                          bindingKey: "index$3pi2uzl7sovgc$8",
+                          key: "index$3pi2uzl7sovgc$8",
                         },
                       ],
                       body: {
@@ -446,7 +446,7 @@ it("arrayFrom", async (t) => {
                               end: { line: 20, column: 13 },
                             },
                             name: "value",
-                            bindingKey: "value$3pi2uzl7sovgc$7",
+                            key: "value$3pi2uzl7sovgc$7",
                           },
                           right: {
                             type: "Identifier",
@@ -464,7 +464,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 20, column: 35 },
                           },
                           name: "index",
-                          bindingKey: "index$3pi2uzl7sovgc$8",
+                          key: "index$3pi2uzl7sovgc$8",
                         },
                         alternate: {
                           type: "UnaryExpression",
@@ -545,7 +545,7 @@ it("arrayFrom", async (t) => {
                             end: { line: 22, column: 20 },
                           },
                           name: "doubled",
-                          bindingKey: "doubled$3pi2uzl7sovgc$0",
+                          key: "doubled$3pi2uzl7sovgc$0",
                         },
                         property: {
                           type: "Identifier",
@@ -592,7 +592,7 @@ it("arrayFrom", async (t) => {
                         end: { line: 22, column: 44 },
                       },
                       name: "empty",
-                      bindingKey: "empty$3pi2uzl7sovgc$1",
+                      key: "empty$3pi2uzl7sovgc$1",
                     },
                     property: {
                       type: "Identifier",
@@ -634,7 +634,7 @@ it("arrayFrom", async (t) => {
                       end: { line: 22, column: 66 },
                     },
                     name: "absent",
-                    bindingKey: "absent$3pi2uzl7sovgc$2",
+                    key: "absent$3pi2uzl7sovgc$2",
                   },
                   property: {
                     type: "Identifier",

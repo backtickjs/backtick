@@ -42,7 +42,7 @@ it("arrayQueries", async (t) => {
                     end: { line: 13, column: 17 },
                   },
                   name: "coins",
-                  bindingKey: "coins$25lflsbo2zrha$0",
+                  key: "coins$25lflsbo2zrha$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -141,7 +141,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 15, column: 18 },
                             },
                             name: "coins",
-                            bindingKey: "coins$25lflsbo2zrha$0",
+                            key: "coins$25lflsbo2zrha$0",
                           },
                           property: {
                             type: "Identifier",
@@ -185,7 +185,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 15, column: 31 },
                             },
                             name: "coins",
-                            bindingKey: "coins$25lflsbo2zrha$0",
+                            key: "coins$25lflsbo2zrha$0",
                           },
                           property: {
                             type: "Identifier",
@@ -238,7 +238,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 15, column: 45 },
                             },
                             name: "coins",
-                            bindingKey: "coins$25lflsbo2zrha$0",
+                            key: "coins$25lflsbo2zrha$0",
                           },
                           property: {
                             type: "Identifier",
@@ -303,7 +303,7 @@ it("arrayQueries", async (t) => {
                           end: { line: 16, column: 20 },
                         },
                         name: "coins",
-                        bindingKey: "coins$25lflsbo2zrha$0",
+                        key: "coins$25lflsbo2zrha$0",
                       },
                       property: {
                         type: "Identifier",
@@ -331,7 +331,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 16, column: 29 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$1",
+                            key: "n$25lflsbo2zrha$1",
                           },
                         ],
                         body: {
@@ -348,7 +348,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 16, column: 35 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$1",
+                            key: "n$25lflsbo2zrha$1",
                           },
                           right: {
                             type: "Literal",
@@ -402,7 +402,7 @@ it("arrayQueries", async (t) => {
                           end: { line: 17, column: 19 },
                         },
                         name: "coins",
-                        bindingKey: "coins$25lflsbo2zrha$0",
+                        key: "coins$25lflsbo2zrha$0",
                       },
                       property: {
                         type: "Identifier",
@@ -430,7 +430,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 17, column: 27 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$2",
+                            key: "n$25lflsbo2zrha$2",
                           },
                         ],
                         body: {
@@ -447,7 +447,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 17, column: 33 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$2",
+                            key: "n$25lflsbo2zrha$2",
                           },
                           right: {
                             type: "Literal",
@@ -501,7 +501,7 @@ it("arrayQueries", async (t) => {
                           end: { line: 18, column: 23 },
                         },
                         name: "coins",
-                        bindingKey: "coins$25lflsbo2zrha$0",
+                        key: "coins$25lflsbo2zrha$0",
                       },
                       property: {
                         type: "Identifier",
@@ -529,7 +529,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 18, column: 35 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$3",
+                            key: "n$25lflsbo2zrha$3",
                           },
                         ],
                         body: {
@@ -546,7 +546,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 18, column: 41 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$3",
+                            key: "n$25lflsbo2zrha$3",
                           },
                           right: {
                             type: "Literal",
@@ -600,7 +600,7 @@ it("arrayQueries", async (t) => {
                           end: { line: 19, column: 28 },
                         },
                         name: "coins",
-                        bindingKey: "coins$25lflsbo2zrha$0",
+                        key: "coins$25lflsbo2zrha$0",
                       },
                       property: {
                         type: "Identifier",
@@ -628,7 +628,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 19, column: 45 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$4",
+                            key: "n$25lflsbo2zrha$4",
                           },
                         ],
                         body: {
@@ -645,7 +645,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 19, column: 51 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$4",
+                            key: "n$25lflsbo2zrha$4",
                           },
                           right: {
                             type: "Literal",
@@ -699,7 +699,7 @@ it("arrayQueries", async (t) => {
                           end: { line: 20, column: 22 },
                         },
                         name: "coins",
-                        bindingKey: "coins$25lflsbo2zrha$0",
+                        key: "coins$25lflsbo2zrha$0",
                       },
                       property: {
                         type: "Identifier",
@@ -727,7 +727,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 20, column: 33 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$5",
+                            key: "n$25lflsbo2zrha$5",
                           },
                         ],
                         body: {
@@ -744,7 +744,7 @@ it("arrayQueries", async (t) => {
                                 end: { line: 20, column: 40 },
                               },
                               name: "n",
-                              bindingKey: "n$25lflsbo2zrha$5",
+                              key: "n$25lflsbo2zrha$5",
                             },
                             {
                               type: "BinaryExpression",
@@ -760,7 +760,7 @@ it("arrayQueries", async (t) => {
                                   end: { line: 20, column: 43 },
                                 },
                                 name: "n",
-                                bindingKey: "n$25lflsbo2zrha$5",
+                                key: "n$25lflsbo2zrha$5",
                               },
                               right: {
                                 type: "Literal",
@@ -816,7 +816,7 @@ it("arrayQueries", async (t) => {
                           end: { line: 21, column: 26 },
                         },
                         name: "coins",
-                        bindingKey: "coins$25lflsbo2zrha$0",
+                        key: "coins$25lflsbo2zrha$0",
                       },
                       property: {
                         type: "Identifier",
@@ -844,7 +844,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 21, column: 44 },
                             },
                             name: "text",
-                            bindingKey: "text$25lflsbo2zrha$6",
+                            key: "text$25lflsbo2zrha$6",
                           },
                           {
                             type: "Identifier",
@@ -853,7 +853,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 21, column: 47 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$7",
+                            key: "n$25lflsbo2zrha$7",
                           },
                         ],
                         body: {
@@ -870,7 +870,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 21, column: 56 },
                             },
                             name: "text",
-                            bindingKey: "text$25lflsbo2zrha$6",
+                            key: "text$25lflsbo2zrha$6",
                           },
                           right: {
                             type: "Identifier",
@@ -879,7 +879,7 @@ it("arrayQueries", async (t) => {
                               end: { line: 21, column: 60 },
                             },
                             name: "n",
-                            bindingKey: "n$25lflsbo2zrha$7",
+                            key: "n$25lflsbo2zrha$7",
                           },
                         },
                         expression: true,
@@ -921,7 +921,7 @@ it("arrayQueries", async (t) => {
                       end: { line: 22, column: 24 },
                     },
                     name: "coins",
-                    bindingKey: "coins$25lflsbo2zrha$0",
+                    key: "coins$25lflsbo2zrha$0",
                   },
                   kind: "init",
                   computed: false,

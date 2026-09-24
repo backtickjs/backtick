@@ -173,7 +173,7 @@ const rows = await bundler.run(
                     end: { line: 22, column: 58 },
                   },
                   name: "props",
-                  bindingKey: "props$3og7hp7gm9m5d$0",
+                  key: "props$3og7hp7gm9m5d$0",
                 },
                 property: {
                   type: "Identifier",
@@ -204,7 +204,7 @@ const rows = await bundler.run(
             end: { line: 22, column: 11 },
           },
           name: "props",
-          bindingKey: "props$3og7hp7gm9m5d$0",
+          key: "props$3og7hp7gm9m5d$0",
         },
       ],
       body: {
@@ -251,7 +251,7 @@ export default cs.create(
                 end: { line: 28, column: 12 },
               },
               name: "Rows",
-              bindingKey: "Rows$3og7hp7gm9m5d$1",
+              key: "Rows$3og7hp7gm9m5d$1",
             },
             init: {
               type: "CallExpression",
@@ -300,7 +300,7 @@ export default cs.create(
                 end: { line: 29, column: 13 },
               },
               name: "Empty",
-              bindingKey: "Empty$3og7hp7gm9m5d$2",
+              key: "Empty$3og7hp7gm9m5d$2",
             },
             init: {
               type: "CallExpression",
@@ -349,7 +349,7 @@ export default cs.create(
                 end: { line: 33, column: 17 },
               },
               name: "wrongType",
-              bindingKey: "wrongType$3og7hp7gm9m5d$3",
+              key: "wrongType$3og7hp7gm9m5d$3",
             },
             init: {
               type: "JSXElement",
@@ -370,7 +370,7 @@ export default cs.create(
                     end: { line: 33, column: 25 },
                   },
                   name: "Rows",
-                  bindingKey: "Rows$3og7hp7gm9m5d$1",
+                  key: "Rows$3og7hp7gm9m5d$1",
                 },
                 attributes: [
                   {
@@ -430,7 +430,7 @@ export default cs.create(
                 end: { line: 35, column: 19 },
               },
               name: "unknownName",
-              bindingKey: "unknownName$3og7hp7gm9m5d$4",
+              key: "unknownName$3og7hp7gm9m5d$4",
             },
             init: {
               type: "JSXElement",
@@ -451,7 +451,7 @@ export default cs.create(
                     end: { line: 35, column: 27 },
                   },
                   name: "Rows",
-                  bindingKey: "Rows$3og7hp7gm9m5d$1",
+                  key: "Rows$3og7hp7gm9m5d$1",
                 },
                 attributes: [
                   {
@@ -511,7 +511,7 @@ export default cs.create(
                 end: { line: 37, column: 15 },
               },
               name: "missing",
-              bindingKey: "missing$3og7hp7gm9m5d$5",
+              key: "missing$3og7hp7gm9m5d$5",
             },
             init: {
               type: "JSXElement",
@@ -532,7 +532,7 @@ export default cs.create(
                     end: { line: 37, column: 23 },
                   },
                   name: "Rows",
-                  bindingKey: "Rows$3og7hp7gm9m5d$1",
+                  key: "Rows$3og7hp7gm9m5d$1",
                 },
                 attributes: [],
                 selfClosing: true,
@@ -561,7 +561,7 @@ export default cs.create(
                 end: { line: 41, column: 14 },
               },
               name: "called",
-              bindingKey: "called$3og7hp7gm9m5d$6",
+              key: "called$3og7hp7gm9m5d$6",
             },
             init: {
               type: "JSXElement",
@@ -582,7 +582,7 @@ export default cs.create(
                     end: { line: 41, column: 23 },
                   },
                   name: "Empty",
-                  bindingKey: "Empty$3og7hp7gm9m5d$2",
+                  key: "Empty$3og7hp7gm9m5d$2",
                 },
                 attributes: [
                   {
@@ -702,7 +702,7 @@ export default cs.create(
                     end: { line: 46, column: 11 },
                   },
                   name: "Rows",
-                  bindingKey: "Rows$3og7hp7gm9m5d$1",
+                  key: "Rows$3og7hp7gm9m5d$1",
                 },
                 attributes: [
                   {
@@ -763,7 +763,7 @@ export default cs.create(
                   end: { line: 47, column: 12 },
                 },
                 name: "Empty",
-                bindingKey: "Empty$3og7hp7gm9m5d$2",
+                key: "Empty$3og7hp7gm9m5d$2",
               },
             },
             {
@@ -788,7 +788,7 @@ export default cs.create(
                   end: { line: 48, column: 16 },
                 },
                 name: "wrongType",
-                bindingKey: "wrongType$3og7hp7gm9m5d$3",
+                key: "wrongType$3og7hp7gm9m5d$3",
               },
             },
             {
@@ -813,7 +813,7 @@ export default cs.create(
                   end: { line: 49, column: 18 },
                 },
                 name: "unknownName",
-                bindingKey: "unknownName$3og7hp7gm9m5d$4",
+                key: "unknownName$3og7hp7gm9m5d$4",
               },
             },
             {
@@ -838,7 +838,7 @@ export default cs.create(
                   end: { line: 50, column: 14 },
                 },
                 name: "missing",
-                bindingKey: "missing$3og7hp7gm9m5d$5",
+                key: "missing$3og7hp7gm9m5d$5",
               },
             },
             {
@@ -863,7 +863,7 @@ export default cs.create(
                   end: { line: 51, column: 13 },
                 },
                 name: "called",
-                bindingKey: "called$3og7hp7gm9m5d$6",
+                key: "called$3og7hp7gm9m5d$6",
               },
             },
             {

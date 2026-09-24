@@ -40,7 +40,7 @@ it("earlyReturn", async (t) => {
                     end: { line: 11, column: 11 },
                   },
                   name: "n",
-                  bindingKey: "n$33mpmt8iae2c7$0",
+                  key: "n$33mpmt8iae2c7$0",
                 },
                 init: {
                   type: "Literal",
@@ -73,7 +73,7 @@ it("earlyReturn", async (t) => {
                   end: { line: 12, column: 11 },
                 },
                 name: "n",
-                bindingKey: "n$33mpmt8iae2c7$0",
+                key: "n$33mpmt8iae2c7$0",
               },
               right: {
                 type: "Literal",
@@ -123,7 +123,7 @@ it("earlyReturn", async (t) => {
                   end: { line: 15, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$33mpmt8iae2c7$0",
+                key: "n$33mpmt8iae2c7$0",
               },
               right: {
                 type: "Literal",

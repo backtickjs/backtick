@@ -21,7 +21,7 @@ const greet = cs.create(
         type: "Identifier",
         loc: { start: { line: 8, column: 18 }, end: { line: 8, column: 22 } },
         name: "name",
-        bindingKey: "name$1i6s8vesd5nbi$0",
+        key: "name$1i6s8vesd5nbi$0",
       },
     ],
     body: {
@@ -56,7 +56,7 @@ const greet = cs.create(
                     end: { line: 9, column: 13 },
                   },
                   name: "name",
-                  bindingKey: "name$1i6s8vesd5nbi$0",
+                  key: "name$1i6s8vesd5nbi$0",
                 },
                 property: {
                   type: "Identifier",
@@ -128,7 +128,7 @@ const callIfGiven = cs.create(
         type: "Identifier",
         loc: { start: { line: 16, column: 24 }, end: { line: 16, column: 26 } },
         name: "cb",
-        bindingKey: "cb$1i6s8vesd5nbi$1",
+        key: "cb$1i6s8vesd5nbi$1",
       },
     ],
     body: {
@@ -167,7 +167,7 @@ const callIfGiven = cs.create(
                     end: { line: 17, column: 11 },
                   },
                   name: "cb",
-                  bindingKey: "cb$1i6s8vesd5nbi$1",
+                  key: "cb$1i6s8vesd5nbi$1",
                 },
                 arguments: [],
                 optional: true,

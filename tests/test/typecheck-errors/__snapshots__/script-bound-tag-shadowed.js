@@ -49,7 +49,7 @@ export default cs.create(
                           end: { line: 10, column: 22 },
                         },
                         name: "Badge",
-                        bindingKey: "Badge$83k1lytjebk3$2",
+                        key: "Badge$83k1lytjebk3$2",
                       },
                       attributes: [
                         {
@@ -122,7 +122,7 @@ export default cs.create(
                         end: { line: 8, column: 15 },
                       },
                       name: "Badge",
-                      bindingKey: "Badge$83k1lytjebk3$2",
+                      key: "Badge$83k1lytjebk3$2",
                     },
                     init: {
                       type: "Literal",
@@ -180,7 +180,7 @@ export default cs.create(
                 end: { line: 6, column: 13 },
               },
               name: "Badge",
-              bindingKey: "Badge$83k1lytjebk3$0",
+              key: "Badge$83k1lytjebk3$0",
             },
             init: {
               type: "ArrowFunctionExpression",
@@ -196,7 +196,7 @@ export default cs.create(
                     end: { line: 6, column: 18 },
                   },
                   name: "p",
-                  bindingKey: "p$83k1lytjebk3$1",
+                  key: "p$83k1lytjebk3$1",
                 },
               ],
               body: {
@@ -257,7 +257,7 @@ export default cs.create(
                             end: { line: 6, column: 50 },
                           },
                           name: "p",
-                          bindingKey: "p$83k1lytjebk3$1",
+                          key: "p$83k1lytjebk3$1",
                         },
                         property: {
                           type: "Identifier",

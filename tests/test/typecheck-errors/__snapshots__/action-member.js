@@ -32,7 +32,7 @@ const action = cs.create(
                 end: { line: 6, column: 9 },
               },
               name: "x",
-              bindingKey: "x$wf1ni21eddai$0",
+              key: "x$wf1ni21eddai$0",
             },
             init: {
               type: "Literal",
@@ -79,7 +79,7 @@ export default cs.create(
                 end: { line: 11, column: 12 },
               },
               name: "list",
-              bindingKey: "list$wf1ni21eddai$1",
+              key: "list$wf1ni21eddai$1",
             },
             init: {
               type: "Splice",

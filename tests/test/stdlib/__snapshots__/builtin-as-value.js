@@ -46,7 +46,7 @@ it("builtinAsValue", async (t) => {
                     end: { line: 17, column: 17 },
                   },
                   name: "floor",
-                  bindingKey: "floor$1n7k5w76rpsyr$0",
+                  key: "floor$1n7k5w76rpsyr$0",
                 },
                 init: {
                   type: "MemberExpression",
@@ -97,7 +97,7 @@ it("builtinAsValue", async (t) => {
                     end: { line: 18, column: 17 },
                   },
                   name: "apply",
-                  bindingKey: "apply$1n7k5w76rpsyr$1",
+                  key: "apply$1n7k5w76rpsyr$1",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -113,7 +113,7 @@ it("builtinAsValue", async (t) => {
                         end: { line: 18, column: 22 },
                       },
                       name: "f",
-                      bindingKey: "f$1n7k5w76rpsyr$2",
+                      key: "f$1n7k5w76rpsyr$2",
                     },
                     {
                       type: "Identifier",
@@ -122,7 +122,7 @@ it("builtinAsValue", async (t) => {
                         end: { line: 18, column: 48 },
                       },
                       name: "n",
-                      bindingKey: "n$1n7k5w76rpsyr$3",
+                      key: "n$1n7k5w76rpsyr$3",
                     },
                   ],
                   body: {
@@ -138,7 +138,7 @@ it("builtinAsValue", async (t) => {
                         end: { line: 18, column: 62 },
                       },
                       name: "f",
-                      bindingKey: "f$1n7k5w76rpsyr$2",
+                      key: "f$1n7k5w76rpsyr$2",
                     },
                     arguments: [
                       {
@@ -148,7 +148,7 @@ it("builtinAsValue", async (t) => {
                           end: { line: 18, column: 64 },
                         },
                         name: "n",
-                        bindingKey: "n$1n7k5w76rpsyr$3",
+                        key: "n$1n7k5w76rpsyr$3",
                       },
                     ],
                     optional: false,
@@ -184,7 +184,7 @@ it("builtinAsValue", async (t) => {
                     end: { line: 19, column: 18 },
                   },
                   name: "floor",
-                  bindingKey: "floor$1n7k5w76rpsyr$0",
+                  key: "floor$1n7k5w76rpsyr$0",
                 },
                 arguments: [
                   {
@@ -211,7 +211,7 @@ it("builtinAsValue", async (t) => {
                     end: { line: 19, column: 31 },
                   },
                   name: "apply",
-                  bindingKey: "apply$1n7k5w76rpsyr$1",
+                  key: "apply$1n7k5w76rpsyr$1",
                 },
                 arguments: [
                   {

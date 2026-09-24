@@ -29,7 +29,7 @@ const badge = await bundler.run(
             end: { line: 13, column: 11 },
           },
           name: "props",
-          bindingKey: "props$1g4jdt9f1nmyq$0",
+          key: "props$1g4jdt9f1nmyq$0",
         },
       ],
       body: {
@@ -87,7 +87,7 @@ const badge = await bundler.run(
                     end: { line: 13, column: 55 },
                   },
                   name: "props",
-                  bindingKey: "props$1g4jdt9f1nmyq$0",
+                  key: "props$1g4jdt9f1nmyq$0",
                 },
                 property: {
                   type: "Identifier",
@@ -157,7 +157,7 @@ const scriptBoundTag = cs.create(
                 end: { line: 17, column: 13 },
               },
               name: "count",
-              bindingKey: "count$1g4jdt9f1nmyq$1",
+              key: "count$1g4jdt9f1nmyq$1",
             },
             init: {
               type: "CallExpression",
@@ -206,7 +206,7 @@ const scriptBoundTag = cs.create(
                 end: { line: 18, column: 13 },
               },
               name: "Badge",
-              bindingKey: "Badge$1g4jdt9f1nmyq$2",
+              key: "Badge$1g4jdt9f1nmyq$2",
             },
             init: {
               type: "CallExpression",
@@ -292,7 +292,7 @@ const scriptBoundTag = cs.create(
                     end: { line: 22, column: 12 },
                   },
                   name: "Badge",
-                  bindingKey: "Badge$1g4jdt9f1nmyq$2",
+                  key: "Badge$1g4jdt9f1nmyq$2",
                 },
                 attributes: [
                   {
@@ -334,7 +334,7 @@ const scriptBoundTag = cs.create(
                               end: { line: 22, column: 25 },
                             },
                             name: "count",
-                            bindingKey: "count$1g4jdt9f1nmyq$1",
+                            key: "count$1g4jdt9f1nmyq$1",
                           },
                           property: {
                             type: "Identifier",
@@ -434,7 +434,7 @@ const scriptBoundTag = cs.create(
                                 end: { line: 23, column: 34 },
                               },
                               name: "count",
-                              bindingKey: "count$1g4jdt9f1nmyq$1",
+                              key: "count$1g4jdt9f1nmyq$1",
                             },
                             property: {
                               type: "Identifier",
@@ -474,7 +474,7 @@ const scriptBoundTag = cs.create(
                                       end: { line: 23, column: 44 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$1g4jdt9f1nmyq$1",
+                                    key: "count$1g4jdt9f1nmyq$1",
                                   },
                                   property: {
                                     type: "Identifier",

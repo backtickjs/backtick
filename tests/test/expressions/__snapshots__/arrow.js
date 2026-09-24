@@ -39,7 +39,7 @@ it("arrow", async (t) => {
                     end: { line: 10, column: 16 },
                   },
                   name: "base",
-                  bindingKey: "base$1qw9q1toh3rnd$0",
+                  key: "base$1qw9q1toh3rnd$0",
                 },
                 init: {
                   type: "Literal",
@@ -72,7 +72,7 @@ it("arrow", async (t) => {
                     end: { line: 11, column: 17 },
                   },
                   name: "one",
-                  bindingKey: "one$1qw9q1toh3rnd$1",
+                  key: "one$1qw9q1toh3rnd$1",
                 },
                 {
                   type: "Identifier",
@@ -81,7 +81,7 @@ it("arrow", async (t) => {
                     end: { line: 11, column: 30 },
                   },
                   name: "two",
-                  bindingKey: "two$1qw9q1toh3rnd$2",
+                  key: "two$1qw9q1toh3rnd$2",
                 },
               ],
               body: {
@@ -105,7 +105,7 @@ it("arrow", async (t) => {
                       end: { line: 11, column: 46 },
                     },
                     name: "one",
-                    bindingKey: "one$1qw9q1toh3rnd$1",
+                    key: "one$1qw9q1toh3rnd$1",
                   },
                   right: {
                     type: "Identifier",
@@ -114,7 +114,7 @@ it("arrow", async (t) => {
                       end: { line: 11, column: 52 },
                     },
                     name: "two",
-                    bindingKey: "two$1qw9q1toh3rnd$2",
+                    key: "two$1qw9q1toh3rnd$2",
                   },
                 },
                 right: {
@@ -124,7 +124,7 @@ it("arrow", async (t) => {
                     end: { line: 11, column: 59 },
                   },
                   name: "base",
-                  bindingKey: "base$1qw9q1toh3rnd$0",
+                  key: "base$1qw9q1toh3rnd$0",
                 },
               },
               expression: true,

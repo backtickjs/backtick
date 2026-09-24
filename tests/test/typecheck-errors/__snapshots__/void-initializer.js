@@ -36,7 +36,7 @@ const ping = cs.create(
                   end: { line: 6, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3ch7rgcn8bjeq$0",
+                key: "n$3ch7rgcn8bjeq$0",
               },
               init: {
                 type: "Literal",
@@ -63,7 +63,7 @@ const ping = cs.create(
                 end: { line: 7, column: 3 },
               },
               name: "n",
-              bindingKey: "n$3ch7rgcn8bjeq$0",
+              key: "n$3ch7rgcn8bjeq$0",
             },
             right: {
               type: "Literal",
@@ -111,7 +111,7 @@ const script = cs.create(
                 end: { line: 11, column: 9 },
               },
               name: "x",
-              bindingKey: "x$3ch7rgcn8bjeq$1",
+              key: "x$3ch7rgcn8bjeq$1",
             },
             init: {
               type: "CallExpression",
@@ -179,7 +179,7 @@ const action = cs.create(
                 end: { line: 16, column: 9 },
               },
               name: "x",
-              bindingKey: "x$3ch7rgcn8bjeq$2",
+              key: "x$3ch7rgcn8bjeq$2",
             },
             init: {
               type: "CallExpression",
@@ -223,7 +223,7 @@ const label = cs.create(
         type: "Identifier",
         loc: { start: { line: 21, column: 18 }, end: { line: 21, column: 22 } },
         name: "text",
-        bindingKey: "text$3ch7rgcn8bjeq$3",
+        key: "text$3ch7rgcn8bjeq$3",
       },
     ],
     body: {
@@ -243,7 +243,7 @@ const label = cs.create(
               end: { line: 22, column: 13 },
             },
             name: "text",
-            bindingKey: "text$3ch7rgcn8bjeq$3",
+            key: "text$3ch7rgcn8bjeq$3",
           },
         },
       ],
@@ -282,7 +282,7 @@ const wrongArgument = cs.create(
                 end: { line: 27, column: 9 },
               },
               name: "x",
-              bindingKey: "x$3ch7rgcn8bjeq$4",
+              key: "x$3ch7rgcn8bjeq$4",
             },
             init: {
               type: "CallExpression",

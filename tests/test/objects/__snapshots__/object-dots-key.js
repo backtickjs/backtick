@@ -42,7 +42,7 @@ it("objectDotsKey", async (t) => {
                     end: { line: 13, column: 16 },
                   },
                   name: "base",
-                  bindingKey: "base$13e6vrhonm3wb$0",
+                  key: "base$13e6vrhonm3wb$0",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -109,7 +109,7 @@ it("objectDotsKey", async (t) => {
                       end: { line: 14, column: 22 },
                     },
                     name: "base",
-                    bindingKey: "base$13e6vrhonm3wb$0",
+                    key: "base$13e6vrhonm3wb$0",
                   },
                 },
                 {

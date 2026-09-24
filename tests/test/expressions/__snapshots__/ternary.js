@@ -20,7 +20,7 @@ const pick = cs.create(
         type: "Identifier",
         loc: { start: { line: 7, column: 17 }, end: { line: 7, column: 18 } },
         name: "n",
-        bindingKey: "n$uekyc2sf8mzc$0",
+        key: "n$uekyc2sf8mzc$0",
       },
     ],
     body: {
@@ -50,7 +50,7 @@ const pick = cs.create(
                   end: { line: 8, column: 10 },
                 },
                 name: "n",
-                bindingKey: "n$uekyc2sf8mzc$0",
+                key: "n$uekyc2sf8mzc$0",
               },
               right: {
                 type: "Literal",
@@ -83,7 +83,7 @@ const pick = cs.create(
                   end: { line: 8, column: 27 },
                 },
                 name: "n",
-                bindingKey: "n$uekyc2sf8mzc$0",
+                key: "n$uekyc2sf8mzc$0",
               },
               right: {
                 type: "Literal",

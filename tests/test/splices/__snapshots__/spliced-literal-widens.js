@@ -61,7 +61,7 @@ it("splicedLiteralWidens", async (t) => {
                     end: { line: 28, column: 13 },
                   },
                   name: "n",
-                  bindingKey: "n$323oescdizqb0$0",
+                  key: "n$323oescdizqb0$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -117,7 +117,7 @@ it("splicedLiteralWidens", async (t) => {
                     end: { line: 29, column: 7 },
                   },
                   name: "n",
-                  bindingKey: "n$323oescdizqb0$0",
+                  key: "n$323oescdizqb0$0",
                 },
                 property: {
                   type: "Identifier",
@@ -164,7 +164,7 @@ it("splicedLiteralWidens", async (t) => {
                     end: { line: 30, column: 13 },
                   },
                   name: "c",
-                  bindingKey: "c$323oescdizqb0$1",
+                  key: "c$323oescdizqb0$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -220,7 +220,7 @@ it("splicedLiteralWidens", async (t) => {
                     end: { line: 31, column: 7 },
                   },
                   name: "c",
-                  bindingKey: "c$323oescdizqb0$1",
+                  key: "c$323oescdizqb0$1",
                 },
                 property: {
                   type: "Identifier",

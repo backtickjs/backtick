@@ -46,7 +46,7 @@ it("evalLoading", async (t) => {
                     end: { line: 18, column: 16 },
                   },
                   name: "held",
-                  bindingKey: "held$2t6t5dze0269t$0",
+                  key: "held$2t6t5dze0269t$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -154,7 +154,7 @@ it("evalLoading", async (t) => {
                               end: { line: 22, column: 15 },
                             },
                             name: "held",
-                            bindingKey: "held$2t6t5dze0269t$0",
+                            key: "held$2t6t5dze0269t$0",
                           },
                           property: {
                             type: "Identifier",
@@ -263,7 +263,7 @@ it("evalLoading", async (t) => {
                                 end: { line: 25, column: 21 },
                               },
                               name: "held",
-                              bindingKey: "held$2t6t5dze0269t$0",
+                              key: "held$2t6t5dze0269t$0",
                             },
                             property: {
                               type: "Identifier",

@@ -45,7 +45,7 @@ async function Row() {
                   end: { line: 16, column: 15 },
                 },
                 name: "count",
-                bindingKey: "count$7huprcub5nk3$0",
+                key: "count$7huprcub5nk3$0",
               },
               init: {
                 type: "CallExpression",
@@ -192,7 +192,7 @@ async function Row() {
                               end: { line: 21, column: 28 },
                             },
                             name: "count",
-                            bindingKey: "count$7huprcub5nk3$0",
+                            key: "count$7huprcub5nk3$0",
                           },
                           property: {
                             type: "Identifier",
@@ -232,7 +232,7 @@ async function Row() {
                                     end: { line: 21, column: 38 },
                                   },
                                   name: "count",
-                                  bindingKey: "count$7huprcub5nk3$0",
+                                  key: "count$7huprcub5nk3$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -363,7 +363,7 @@ async function Row() {
                                 end: { line: 23, column: 45 },
                               },
                               name: "count",
-                              bindingKey: "count$7huprcub5nk3$0",
+                              key: "count$7huprcub5nk3$0",
                             },
                             property: {
                               type: "Identifier",
@@ -503,7 +503,7 @@ async function Row() {
                                 end: { line: 24, column: 33 },
                               },
                               name: "count",
-                              bindingKey: "count$7huprcub5nk3$0",
+                              key: "count$7huprcub5nk3$0",
                             },
                             property: {
                               type: "Identifier",

@@ -42,7 +42,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 13, column: 11 },
                   },
                   name: "n",
-                  bindingKey: "n$23v4b48bi2lxc$0",
+                  key: "n$23v4b48bi2lxc$0",
                 },
                 init: {
                   type: "Literal",
@@ -75,7 +75,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 14, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$23v4b48bi2lxc$0",
+                key: "n$23v4b48bi2lxc$0",
               },
               right: {
                 type: "Literal",
@@ -107,7 +107,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 15, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$23v4b48bi2lxc$0",
+                key: "n$23v4b48bi2lxc$0",
               },
               right: {
                 type: "Literal",
@@ -139,7 +139,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 16, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$23v4b48bi2lxc$0",
+                key: "n$23v4b48bi2lxc$0",
               },
               right: {
                 type: "Literal",
@@ -171,7 +171,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 17, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$23v4b48bi2lxc$0",
+                key: "n$23v4b48bi2lxc$0",
               },
               right: {
                 type: "Literal",
@@ -203,7 +203,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 18, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$23v4b48bi2lxc$0",
+                key: "n$23v4b48bi2lxc$0",
               },
               right: {
                 type: "Literal",
@@ -236,7 +236,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 19, column: 14 },
                   },
                   name: "text",
-                  bindingKey: "text$23v4b48bi2lxc$1",
+                  key: "text$23v4b48bi2lxc$1",
                 },
                 init: {
                   type: "Literal",
@@ -269,7 +269,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 20, column: 10 },
                 },
                 name: "text",
-                bindingKey: "text$23v4b48bi2lxc$1",
+                key: "text$23v4b48bi2lxc$1",
               },
               right: {
                 type: "Literal",
@@ -302,7 +302,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 21, column: 15 },
                   },
                   name: "total",
-                  bindingKey: "total$23v4b48bi2lxc$2",
+                  key: "total$23v4b48bi2lxc$2",
                 },
                 init: {
                   type: "Literal",
@@ -336,7 +336,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 22, column: 20 },
                   },
                   name: "answered",
-                  bindingKey: "answered$23v4b48bi2lxc$3",
+                  key: "answered$23v4b48bi2lxc$3",
                 },
                 init: {
                   type: "AssignmentExpression",
@@ -352,7 +352,7 @@ it("compoundAssignment", async (t) => {
                       end: { line: 22, column: 29 },
                     },
                     name: "total",
-                    bindingKey: "total$23v4b48bi2lxc$2",
+                    key: "total$23v4b48bi2lxc$2",
                   },
                   right: {
                     type: "Literal",
@@ -387,7 +387,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 23, column: 11 },
                   },
                   name: "x",
-                  bindingKey: "x$23v4b48bi2lxc$4",
+                  key: "x$23v4b48bi2lxc$4",
                 },
                 init: {
                   type: "Literal",
@@ -420,7 +420,7 @@ it("compoundAssignment", async (t) => {
                   end: { line: 24, column: 7 },
                 },
                 name: "x",
-                bindingKey: "x$23v4b48bi2lxc$4",
+                key: "x$23v4b48bi2lxc$4",
               },
               right: {
                 type: "AssignmentExpression",
@@ -436,7 +436,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 24, column: 12 },
                   },
                   name: "x",
-                  bindingKey: "x$23v4b48bi2lxc$4",
+                  key: "x$23v4b48bi2lxc$4",
                 },
                 right: {
                   type: "Literal",
@@ -469,7 +469,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 25, column: 15 },
                   },
                   name: "n",
-                  bindingKey: "n$23v4b48bi2lxc$0",
+                  key: "n$23v4b48bi2lxc$0",
                 },
                 {
                   type: "Identifier",
@@ -478,7 +478,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 25, column: 21 },
                   },
                   name: "text",
-                  bindingKey: "text$23v4b48bi2lxc$1",
+                  key: "text$23v4b48bi2lxc$1",
                 },
                 {
                   type: "Identifier",
@@ -487,7 +487,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 25, column: 31 },
                   },
                   name: "answered",
-                  bindingKey: "answered$23v4b48bi2lxc$3",
+                  key: "answered$23v4b48bi2lxc$3",
                 },
                 {
                   type: "Identifier",
@@ -496,7 +496,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 25, column: 38 },
                   },
                   name: "total",
-                  bindingKey: "total$23v4b48bi2lxc$2",
+                  key: "total$23v4b48bi2lxc$2",
                 },
                 {
                   type: "Identifier",
@@ -505,7 +505,7 @@ it("compoundAssignment", async (t) => {
                     end: { line: 25, column: 41 },
                   },
                   name: "x",
-                  bindingKey: "x$23v4b48bi2lxc$4",
+                  key: "x$23v4b48bi2lxc$4",
                 },
               ],
             },

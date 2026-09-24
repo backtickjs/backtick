@@ -46,7 +46,7 @@ function sandwich(fragment) {
                   end: { line: 17, column: 16 },
                 },
                 name: "before",
-                bindingKey: "before$1xi8jyc89buh5$0",
+                key: "before$1xi8jyc89buh5$0",
               },
               init: {
                 type: "Literal",
@@ -80,7 +80,7 @@ function sandwich(fragment) {
                   end: { line: 18, column: 17 },
                 },
                 name: "spliced",
-                bindingKey: "spliced$1xi8jyc89buh5$1",
+                key: "spliced$1xi8jyc89buh5$1",
               },
               init: {
                 type: "Splice",
@@ -114,7 +114,7 @@ function sandwich(fragment) {
                   end: { line: 19, column: 15 },
                 },
                 name: "after",
-                bindingKey: "after$1xi8jyc89buh5$2",
+                key: "after$1xi8jyc89buh5$2",
               },
               init: {
                 type: "Literal",
@@ -154,7 +154,7 @@ function sandwich(fragment) {
                   end: { line: 20, column: 17 },
                 },
                 name: "before",
-                bindingKey: "before$1xi8jyc89buh5$0",
+                key: "before$1xi8jyc89buh5$0",
               },
               right: {
                 type: "Identifier",
@@ -163,7 +163,7 @@ function sandwich(fragment) {
                   end: { line: 20, column: 27 },
                 },
                 name: "spliced",
-                bindingKey: "spliced$1xi8jyc89buh5$1",
+                key: "spliced$1xi8jyc89buh5$1",
               },
             },
             right: {
@@ -173,7 +173,7 @@ function sandwich(fragment) {
                 end: { line: 20, column: 35 },
               },
               name: "after",
-              bindingKey: "after$1xi8jyc89buh5$2",
+              key: "after$1xi8jyc89buh5$2",
             },
           },
         },

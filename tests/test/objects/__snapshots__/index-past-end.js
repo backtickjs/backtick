@@ -43,7 +43,7 @@ it("indexPastEnd", async (t) => {
                     end: { line: 14, column: 17 },
                   },
                   name: "names",
-                  bindingKey: "names$3821as72cvvin$0",
+                  key: "names$3821as72cvvin$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -92,7 +92,7 @@ it("indexPastEnd", async (t) => {
                   end: { line: 15, column: 18 },
                 },
                 name: "names",
-                bindingKey: "names$3821as72cvvin$0",
+                key: "names$3821as72cvvin$0",
               },
               property: {
                 type: "Literal",

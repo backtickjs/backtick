@@ -84,7 +84,7 @@ it("mappedComponent", async (t) => {
                           end: { line: 27, column: 54 },
                         },
                         name: "row",
-                        bindingKey: "row$8u2ewdd1g2mk$0",
+                        key: "row$8u2ewdd1g2mk$0",
                       },
                     }),
                   ),
@@ -108,7 +108,7 @@ it("mappedComponent", async (t) => {
                   end: { line: 27, column: 16 },
                 },
                 name: "row",
-                bindingKey: "row$8u2ewdd1g2mk$0",
+                key: "row$8u2ewdd1g2mk$0",
               },
             ],
             body: {

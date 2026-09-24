@@ -45,7 +45,7 @@ const scriptBoundTagCapture = cs.create(
                   end: { line: 17, column: 18 },
                 },
                 name: "Badge",
-                bindingKey: "Badge$h5jruxcfnavr$1",
+                key: "Badge$h5jruxcfnavr$1",
               },
               attributes: [
                 {
@@ -87,7 +87,7 @@ const scriptBoundTagCapture = cs.create(
                             end: { line: 17, column: 27 },
                           },
                           name: "count",
-                          bindingKey: "count$h5jruxcfnavr$0",
+                          key: "count$h5jruxcfnavr$0",
                         },
                         property: {
                           type: "Identifier",
@@ -154,7 +154,7 @@ const scriptBoundTagCapture = cs.create(
                           end: { line: 21, column: 28 },
                         },
                         name: "Badge",
-                        bindingKey: "Badge$h5jruxcfnavr$1",
+                        key: "Badge$h5jruxcfnavr$1",
                       },
                       attributes: [
                         {
@@ -203,7 +203,7 @@ const scriptBoundTagCapture = cs.create(
                                       end: { line: 21, column: 37 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$h5jruxcfnavr$0",
+                                    key: "count$h5jruxcfnavr$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -270,7 +270,7 @@ const scriptBoundTagCapture = cs.create(
                         end: { line: 20, column: 23 },
                       },
                       name: "skipped",
-                      bindingKey: "skipped$h5jruxcfnavr$3",
+                      key: "skipped$h5jruxcfnavr$3",
                     },
                     init: {
                       type: "Literal",
@@ -333,7 +333,7 @@ const scriptBoundTagCapture = cs.create(
                     end: { line: 24, column: 29 },
                   },
                   name: "Badge",
-                  bindingKey: "Badge$h5jruxcfnavr$1",
+                  key: "Badge$h5jruxcfnavr$1",
                 },
                 attributes: [
                   {
@@ -382,7 +382,7 @@ const scriptBoundTagCapture = cs.create(
                                 end: { line: 24, column: 38 },
                               },
                               name: "count",
-                              bindingKey: "count$h5jruxcfnavr$0",
+                              key: "count$h5jruxcfnavr$0",
                             },
                             property: {
                               type: "Identifier",
@@ -530,7 +530,7 @@ const scriptBoundTagCapture = cs.create(
                         end: { line: 27, column: 13 },
                       },
                       name: "m",
-                      bindingKey: "m$h5jruxcfnavr$4",
+                      key: "m$h5jruxcfnavr$4",
                     },
                   ],
                   body: {
@@ -552,7 +552,7 @@ const scriptBoundTagCapture = cs.create(
                           end: { line: 27, column: 32 },
                         },
                         name: "Badge",
-                        bindingKey: "Badge$h5jruxcfnavr$1",
+                        key: "Badge$h5jruxcfnavr$1",
                       },
                       attributes: [
                         {
@@ -589,7 +589,7 @@ const scriptBoundTagCapture = cs.create(
                                   end: { line: 27, column: 37 },
                                 },
                                 name: "m",
-                                bindingKey: "m$h5jruxcfnavr$4",
+                                key: "m$h5jruxcfnavr$4",
                               },
                               right: {
                                 type: "CallExpression",
@@ -610,7 +610,7 @@ const scriptBoundTagCapture = cs.create(
                                       end: { line: 27, column: 45 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$h5jruxcfnavr$0",
+                                    key: "count$h5jruxcfnavr$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -692,7 +692,7 @@ const scriptBoundTagCapture = cs.create(
                 end: { line: 12, column: 13 },
               },
               name: "count",
-              bindingKey: "count$h5jruxcfnavr$0",
+              key: "count$h5jruxcfnavr$0",
             },
             init: {
               type: "CallExpression",
@@ -741,7 +741,7 @@ const scriptBoundTagCapture = cs.create(
                 end: { line: 13, column: 13 },
               },
               name: "Badge",
-              bindingKey: "Badge$h5jruxcfnavr$1",
+              key: "Badge$h5jruxcfnavr$1",
             },
             init: {
               type: "ArrowFunctionExpression",
@@ -757,7 +757,7 @@ const scriptBoundTagCapture = cs.create(
                     end: { line: 13, column: 22 },
                   },
                   name: "props",
-                  bindingKey: "props$h5jruxcfnavr$2",
+                  key: "props$h5jruxcfnavr$2",
                 },
               ],
               body: {
@@ -818,7 +818,7 @@ const scriptBoundTagCapture = cs.create(
                             end: { line: 13, column: 58 },
                           },
                           name: "props",
-                          bindingKey: "props$h5jruxcfnavr$2",
+                          key: "props$h5jruxcfnavr$2",
                         },
                         property: {
                           type: "Identifier",
@@ -1054,7 +1054,7 @@ const scriptBoundTagCapture = cs.create(
                                 end: { line: 30, column: 34 },
                               },
                               name: "count",
-                              bindingKey: "count$h5jruxcfnavr$0",
+                              key: "count$h5jruxcfnavr$0",
                             },
                             property: {
                               type: "Identifier",
@@ -1094,7 +1094,7 @@ const scriptBoundTagCapture = cs.create(
                                       end: { line: 30, column: 44 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$h5jruxcfnavr$0",
+                                    key: "count$h5jruxcfnavr$0",
                                   },
                                   property: {
                                     type: "Identifier",

@@ -19,7 +19,7 @@ const held = cs.create(
         type: "Identifier",
         loc: { start: { line: 6, column: 17 }, end: { line: 6, column: 20 } },
         name: "Tag",
-        bindingKey: "Tag$xwewmj2gozc5$0",
+        key: "Tag$xwewmj2gozc5$0",
       },
     ],
     body: {
@@ -32,7 +32,7 @@ const held = cs.create(
           type: "JSXIdentifier",
           loc: { start: { line: 6, column: 34 }, end: { line: 6, column: 37 } },
           name: "Tag",
-          bindingKey: "Tag$xwewmj2gozc5$0",
+          key: "Tag$xwewmj2gozc5$0",
         },
         attributes: [],
         selfClosing: true,

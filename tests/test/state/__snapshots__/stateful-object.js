@@ -22,7 +22,7 @@ const counter = cs.create(
         type: "Identifier",
         loc: { start: { line: 9, column: 20 }, end: { line: 9, column: 27 } },
         name: "initial",
-        bindingKey: "initial$2scghcewx41fn$0",
+        key: "initial$2scghcewx41fn$0",
       },
     ],
     body: {
@@ -50,7 +50,7 @@ const counter = cs.create(
                   end: { line: 10, column: 13 },
                 },
                 name: "count",
-                bindingKey: "count$2scghcewx41fn$1",
+                key: "count$2scghcewx41fn$1",
               },
               init: {
                 type: "CallExpression",
@@ -74,7 +74,7 @@ const counter = cs.create(
                       end: { line: 10, column: 30 },
                     },
                     name: "initial",
-                    bindingKey: "initial$2scghcewx41fn$0",
+                    key: "initial$2scghcewx41fn$0",
                   },
                 ],
                 optional: false,
@@ -132,7 +132,7 @@ const counter = cs.create(
                           end: { line: 12, column: 20 },
                         },
                         name: "count",
-                        bindingKey: "count$2scghcewx41fn$1",
+                        key: "count$2scghcewx41fn$1",
                       },
                       property: {
                         type: "Identifier",
@@ -183,7 +183,7 @@ const counter = cs.create(
                         end: { line: 13, column: 11 },
                       },
                       name: "n",
-                      bindingKey: "n$2scghcewx41fn$2",
+                      key: "n$2scghcewx41fn$2",
                     },
                   ],
                   body: {
@@ -218,7 +218,7 @@ const counter = cs.create(
                                 end: { line: 14, column: 11 },
                               },
                               name: "count",
-                              bindingKey: "count$2scghcewx41fn$1",
+                              key: "count$2scghcewx41fn$1",
                             },
                             property: {
                               type: "Identifier",
@@ -258,7 +258,7 @@ const counter = cs.create(
                                       end: { line: 14, column: 21 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$2scghcewx41fn$1",
+                                    key: "count$2scghcewx41fn$1",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -281,7 +281,7 @@ const counter = cs.create(
                                   end: { line: 14, column: 31 },
                                 },
                                 name: "n",
-                                bindingKey: "n$2scghcewx41fn$2",
+                                key: "n$2scghcewx41fn$2",
                               },
                             },
                           ],
@@ -343,7 +343,7 @@ it("statefulObject", async (t) => {
                     end: { line: 24, column: 13 },
                   },
                   name: "c",
-                  bindingKey: "c$2scghcewx41fn$3",
+                  key: "c$2scghcewx41fn$3",
                 },
                 init: {
                   type: "CallExpression",
@@ -460,7 +460,7 @@ it("statefulObject", async (t) => {
                                       end: { line: 28, column: 13 },
                                     },
                                     name: "c",
-                                    bindingKey: "c$2scghcewx41fn$3",
+                                    key: "c$2scghcewx41fn$3",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -530,7 +530,7 @@ it("statefulObject", async (t) => {
                           end: { line: 31, column: 12 },
                         },
                         name: "c",
-                        bindingKey: "c$2scghcewx41fn$3",
+                        key: "c$2scghcewx41fn$3",
                       },
                       property: {
                         type: "Identifier",

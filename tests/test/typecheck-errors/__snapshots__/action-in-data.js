@@ -32,7 +32,7 @@ const action = cs.create(
                 end: { line: 6, column: 9 },
               },
               name: "x",
-              bindingKey: "x$23leqy4opwht7$0",
+              key: "x$23leqy4opwht7$0",
             },
             init: {
               type: "Literal",
@@ -79,7 +79,7 @@ export const listed = cs.create(
                 end: { line: 11, column: 12 },
               },
               name: "list",
-              bindingKey: "list$23leqy4opwht7$1",
+              key: "list$23leqy4opwht7$1",
             },
             init: {
               type: "Splice",
@@ -138,7 +138,7 @@ export const keyed = cs.create(
                 end: { line: 17, column: 11 },
               },
               name: "map",
-              bindingKey: "map$23leqy4opwht7$2",
+              key: "map$23leqy4opwht7$2",
             },
             init: {
               type: "Splice",

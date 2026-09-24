@@ -40,7 +40,7 @@ async function Checked() {
                   end: { line: 10, column: 18 },
                 },
                 name: "positive",
-                bindingKey: "positive$1o8290c5hfi65$0",
+                key: "positive$1o8290c5hfi65$0",
               },
               init: {
                 type: "BinaryExpression",
@@ -107,7 +107,7 @@ async function Checked() {
                   end: { line: 11, column: 17 },
                 },
                 name: "largest",
-                bindingKey: "largest$1o8290c5hfi65$1",
+                key: "largest$1o8290c5hfi65$1",
               },
               init: {
                 type: "BinaryExpression",
@@ -174,7 +174,7 @@ async function Checked() {
                   end: { line: 12, column: 14 },
                 },
                 name: "safe",
-                bindingKey: "safe$1o8290c5hfi65$2",
+                key: "safe$1o8290c5hfi65$2",
               },
               init: {
                 type: "LogicalExpression",
@@ -492,7 +492,7 @@ async function Checked() {
                   end: { line: 18, column: 15 },
                 },
                 name: "whole",
-                bindingKey: "whole$1o8290c5hfi65$3",
+                key: "whole$1o8290c5hfi65$3",
               },
               init: {
                 type: "CallExpression",
@@ -561,7 +561,7 @@ async function Checked() {
                   end: { line: 19, column: 20 },
                 },
                 name: "fractional",
-                bindingKey: "fractional$1o8290c5hfi65$4",
+                key: "fractional$1o8290c5hfi65$4",
               },
               init: {
                 type: "CallExpression",
@@ -630,7 +630,7 @@ async function Checked() {
                   end: { line: 21, column: 17 },
                 },
                 name: "written",
-                bindingKey: "written$1o8290c5hfi65$5",
+                key: "written$1o8290c5hfi65$5",
               },
               init: {
                 type: "CallExpression",
@@ -797,7 +797,7 @@ async function Checked() {
                                         end: { line: 24, column: 14 },
                                       },
                                       name: "whole",
-                                      bindingKey: "whole$1o8290c5hfi65$3",
+                                      key: "whole$1o8290c5hfi65$3",
                                     },
                                     right: {
                                       type: "Literal",
@@ -815,7 +815,7 @@ async function Checked() {
                                       end: { line: 26, column: 20 },
                                     },
                                     name: "fractional",
-                                    bindingKey: "fractional$1o8290c5hfi65$4",
+                                    key: "fractional$1o8290c5hfi65$4",
                                   },
                                 },
                                 right: {
@@ -834,7 +834,7 @@ async function Checked() {
                                   end: { line: 28, column: 17 },
                                 },
                                 name: "written",
-                                bindingKey: "written$1o8290c5hfi65$5",
+                                key: "written$1o8290c5hfi65$5",
                               },
                             },
                             right: {
@@ -853,7 +853,7 @@ async function Checked() {
                               end: { line: 30, column: 18 },
                             },
                             name: "positive",
-                            bindingKey: "positive$1o8290c5hfi65$0",
+                            key: "positive$1o8290c5hfi65$0",
                           },
                         },
                         right: {
@@ -872,7 +872,7 @@ async function Checked() {
                           end: { line: 32, column: 17 },
                         },
                         name: "largest",
-                        bindingKey: "largest$1o8290c5hfi65$1",
+                        key: "largest$1o8290c5hfi65$1",
                       },
                     },
                     right: {
@@ -891,7 +891,7 @@ async function Checked() {
                       end: { line: 34, column: 14 },
                     },
                     name: "safe",
-                    bindingKey: "safe$1o8290c5hfi65$2",
+                    key: "safe$1o8290c5hfi65$2",
                   },
                 },
               },

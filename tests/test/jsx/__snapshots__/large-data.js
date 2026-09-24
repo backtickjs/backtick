@@ -101,7 +101,7 @@ it("largeData", async (t) => {
                                   end: { line: 42, column: 58 },
                                 },
                                 name: "order",
-                                bindingKey: "order$2tquu92zqyse3$0",
+                                key: "order$2tquu92zqyse3$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -159,7 +159,7 @@ it("largeData", async (t) => {
                                 end: { line: 45, column: 29 },
                               },
                               name: "order",
-                              bindingKey: "order$2tquu92zqyse3$0",
+                              key: "order$2tquu92zqyse3$0",
                             },
                             property: {
                               type: "Identifier",
@@ -217,7 +217,7 @@ it("largeData", async (t) => {
                                 end: { line: 46, column: 29 },
                               },
                               name: "order",
-                              bindingKey: "order$2tquu92zqyse3$0",
+                              key: "order$2tquu92zqyse3$0",
                             },
                             property: {
                               type: "Identifier",
@@ -269,7 +269,7 @@ it("largeData", async (t) => {
                               end: { line: 47, column: 33 },
                             },
                             name: "order",
-                            bindingKey: "order$2tquu92zqyse3$0",
+                            key: "order$2tquu92zqyse3$0",
                           },
                           property: {
                             type: "Identifier",
@@ -334,7 +334,7 @@ it("largeData", async (t) => {
                                             end: { line: 49, column: 35 },
                                           },
                                           name: "item",
-                                          bindingKey: "item$2tquu92zqyse3$1",
+                                          key: "item$2tquu92zqyse3$1",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -369,7 +369,7 @@ it("largeData", async (t) => {
                                           end: { line: 49, column: 53 },
                                         },
                                         name: "item",
-                                        bindingKey: "item$2tquu92zqyse3$1",
+                                        key: "item$2tquu92zqyse3$1",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -404,7 +404,7 @@ it("largeData", async (t) => {
                                 end: { line: 48, column: 25 },
                               },
                               name: "item",
-                              bindingKey: "item$2tquu92zqyse3$1",
+                              key: "item$2tquu92zqyse3$1",
                             },
                           ],
                           body: {
@@ -460,7 +460,7 @@ it("largeData", async (t) => {
                                 end: { line: 51, column: 35 },
                               },
                               name: "order",
-                              bindingKey: "order$2tquu92zqyse3$0",
+                              key: "order$2tquu92zqyse3$0",
                             },
                             property: {
                               type: "Identifier",
@@ -497,7 +497,7 @@ it("largeData", async (t) => {
                   end: { line: 38, column: 18 },
                 },
                 name: "order",
-                bindingKey: "order$2tquu92zqyse3$0",
+                key: "order$2tquu92zqyse3$0",
               },
             ],
             body: {

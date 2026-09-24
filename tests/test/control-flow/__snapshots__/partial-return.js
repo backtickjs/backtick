@@ -40,7 +40,7 @@ it("partialReturnScript", async (t) => {
                     end: { line: 11, column: 11 },
                   },
                   name: "n",
-                  bindingKey: "n$x79h35ggz599$0",
+                  key: "n$x79h35ggz599$0",
                 },
                 init: {
                   type: "Literal",
@@ -73,7 +73,7 @@ it("partialReturnScript", async (t) => {
                   end: { line: 12, column: 11 },
                 },
                 name: "n",
-                bindingKey: "n$x79h35ggz599$0",
+                key: "n$x79h35ggz599$0",
               },
               right: {
                 type: "Literal",
@@ -153,7 +153,7 @@ it("partialReturnArrow", async (t) => {
                     end: { line: 24, column: 16 },
                   },
                   name: "pick",
-                  bindingKey: "pick$x79h35ggz599$1",
+                  key: "pick$x79h35ggz599$1",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -169,7 +169,7 @@ it("partialReturnArrow", async (t) => {
                         end: { line: 24, column: 21 },
                       },
                       name: "b",
-                      bindingKey: "b$x79h35ggz599$2",
+                      key: "b$x79h35ggz599$2",
                     },
                   ],
                   body: {
@@ -192,7 +192,7 @@ it("partialReturnArrow", async (t) => {
                             end: { line: 25, column: 13 },
                           },
                           name: "b",
-                          bindingKey: "b$x79h35ggz599$2",
+                          key: "b$x79h35ggz599$2",
                         },
                         consequent: {
                           type: "BlockStatement",
@@ -253,7 +253,7 @@ it("partialReturnArrow", async (t) => {
                       end: { line: 29, column: 18 },
                     },
                     name: "pick",
-                    bindingKey: "pick$x79h35ggz599$1",
+                    key: "pick$x79h35ggz599$1",
                   },
                   arguments: [
                     {
@@ -280,7 +280,7 @@ it("partialReturnArrow", async (t) => {
                       end: { line: 29, column: 30 },
                     },
                     name: "pick",
-                    bindingKey: "pick$x79h35ggz599$1",
+                    key: "pick$x79h35ggz599$1",
                   },
                   arguments: [
                     {

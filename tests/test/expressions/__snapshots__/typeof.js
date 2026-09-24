@@ -41,7 +41,7 @@ it("typeofTable", async (t) => {
                     end: { line: 12, column: 17 },
                   },
                   name: "count",
-                  bindingKey: "count$1jdryi4es12ui$0",
+                  key: "count$1jdryi4es12ui$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -263,7 +263,7 @@ it("typeofTable", async (t) => {
                           end: { line: 21, column: 18 },
                         },
                         name: "n",
-                        bindingKey: "n$1jdryi4es12ui$1",
+                        key: "n$1jdryi4es12ui$1",
                       },
                     ],
                     body: {
@@ -273,7 +273,7 @@ it("typeofTable", async (t) => {
                         end: { line: 21, column: 32 },
                       },
                       name: "n",
-                      bindingKey: "n$1jdryi4es12ui$1",
+                      key: "n$1jdryi4es12ui$1",
                     },
                     expression: true,
                   },
@@ -327,7 +327,7 @@ it("typeofTable", async (t) => {
                       end: { line: 23, column: 20 },
                     },
                     name: "count",
-                    bindingKey: "count$1jdryi4es12ui$0",
+                    key: "count$1jdryi4es12ui$0",
                   },
                 },
               ],
@@ -377,7 +377,7 @@ it("typeofNarrows", async (t) => {
                     end: { line: 35, column: 19 },
                   },
                   name: "measure",
-                  bindingKey: "measure$1jdryi4es12ui$2",
+                  key: "measure$1jdryi4es12ui$2",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -393,7 +393,7 @@ it("typeofNarrows", async (t) => {
                         end: { line: 35, column: 24 },
                       },
                       name: "v",
-                      bindingKey: "v$1jdryi4es12ui$3",
+                      key: "v$1jdryi4es12ui$3",
                     },
                   ],
                   body: {
@@ -424,7 +424,7 @@ it("typeofNarrows", async (t) => {
                             end: { line: 36, column: 16 },
                           },
                           name: "v",
-                          bindingKey: "v$1jdryi4es12ui$3",
+                          key: "v$1jdryi4es12ui$3",
                         },
                       },
                       right: {
@@ -449,7 +449,7 @@ it("typeofNarrows", async (t) => {
                           end: { line: 36, column: 33 },
                         },
                         name: "v",
-                        bindingKey: "v$1jdryi4es12ui$3",
+                        key: "v$1jdryi4es12ui$3",
                       },
                       property: {
                         type: "Identifier",
@@ -476,7 +476,7 @@ it("typeofNarrows", async (t) => {
                           end: { line: 36, column: 44 },
                         },
                         name: "v",
-                        bindingKey: "v$1jdryi4es12ui$3",
+                        key: "v$1jdryi4es12ui$3",
                       },
                       right: {
                         type: "Literal",
@@ -519,7 +519,7 @@ it("typeofNarrows", async (t) => {
                       end: { line: 37, column: 21 },
                     },
                     name: "measure",
-                    bindingKey: "measure$1jdryi4es12ui$2",
+                    key: "measure$1jdryi4es12ui$2",
                   },
                   arguments: [
                     {
@@ -546,7 +546,7 @@ it("typeofNarrows", async (t) => {
                       end: { line: 37, column: 37 },
                     },
                     name: "measure",
-                    bindingKey: "measure$1jdryi4es12ui$2",
+                    key: "measure$1jdryi4es12ui$2",
                   },
                   arguments: [
                     {

@@ -43,7 +43,7 @@ async function OwnCounter() {
                   end: { line: 13, column: 14 },
                 },
                 name: "size",
-                bindingKey: "size$4rab33ccyjy9$0",
+                key: "size$4rab33ccyjy9$0",
               },
               init: {
                 type: "CallExpression",
@@ -159,7 +159,7 @@ async function OwnCounter() {
                                 end: { line: 16, column: 35 },
                               },
                               name: "size",
-                              bindingKey: "size$4rab33ccyjy9$0",
+                              key: "size$4rab33ccyjy9$0",
                             },
                             property: {
                               type: "Identifier",
@@ -246,7 +246,7 @@ async function OwnCounter() {
                                     end: { line: 18, column: 14 },
                                   },
                                   name: "size",
-                                  bindingKey: "size$4rab33ccyjy9$0",
+                                  key: "size$4rab33ccyjy9$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -286,7 +286,7 @@ async function OwnCounter() {
                                           end: { line: 18, column: 23 },
                                         },
                                         name: "size",
-                                        bindingKey: "size$4rab33ccyjy9$0",
+                                        key: "size$4rab33ccyjy9$0",
                                       },
                                       property: {
                                         type: "Identifier",

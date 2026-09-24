@@ -133,7 +133,7 @@ describe("a field's value", () => {
                     end: { line: 112, column: 16 },
                   },
                   name: "text",
-                  bindingKey: "text$2pi9tt1octht0$0",
+                  key: "text$2pi9tt1octht0$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -185,7 +185,7 @@ describe("a field's value", () => {
                     end: { line: 113, column: 16 },
                   },
                   name: "isOn",
-                  bindingKey: "isOn$2pi9tt1octht0$1",
+                  key: "isOn$2pi9tt1octht0$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -338,7 +338,7 @@ describe("a field's value", () => {
                                   end: { line: 116, column: 46 },
                                 },
                                 name: "text",
-                                bindingKey: "text$2pi9tt1octht0$0",
+                                key: "text$2pi9tt1octht0$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -477,7 +477,7 @@ describe("a field's value", () => {
                                   end: { line: 117, column: 62 },
                                 },
                                 name: "isOn",
-                                bindingKey: "isOn$2pi9tt1octht0$1",
+                                key: "isOn$2pi9tt1octht0$1",
                               },
                               property: {
                                 type: "Identifier",
@@ -590,7 +590,7 @@ describe("a field's value", () => {
                                           end: { line: 120, column: 18 },
                                         },
                                         name: "text",
-                                        bindingKey: "text$2pi9tt1octht0$0",
+                                        key: "text$2pi9tt1octht0$0",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -641,7 +641,7 @@ describe("a field's value", () => {
                                           end: { line: 121, column: 18 },
                                         },
                                         name: "isOn",
-                                        bindingKey: "isOn$2pi9tt1octht0$1",
+                                        key: "isOn$2pi9tt1octht0$1",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -785,7 +785,7 @@ describe("a field's value", () => {
                     end: { line: 148, column: 17 },
                   },
                   name: "texts",
-                  bindingKey: "texts$2pi9tt1octht0$2",
+                  key: "texts$2pi9tt1octht0$2",
                 },
                 init: {
                   type: "CallExpression",
@@ -846,7 +846,7 @@ describe("a field's value", () => {
                     end: { line: 149, column: 17 },
                   },
                   name: "flags",
-                  bindingKey: "flags$2pi9tt1octht0$3",
+                  key: "flags$2pi9tt1octht0$3",
                 },
                 init: {
                   type: "CallExpression",
@@ -1014,7 +1014,7 @@ describe("a field's value", () => {
                                     end: { line: 152, column: 47 },
                                   },
                                   name: "texts",
-                                  bindingKey: "texts$2pi9tt1octht0$2",
+                                  key: "texts$2pi9tt1octht0$2",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -1170,7 +1170,7 @@ describe("a field's value", () => {
                                     end: { line: 153, column: 63 },
                                   },
                                   name: "flags",
-                                  bindingKey: "flags$2pi9tt1octht0$3",
+                                  key: "flags$2pi9tt1octht0$3",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -1294,7 +1294,7 @@ describe("a field's value", () => {
                                           end: { line: 156, column: 19 },
                                         },
                                         name: "texts",
-                                        bindingKey: "texts$2pi9tt1octht0$2",
+                                        key: "texts$2pi9tt1octht0$2",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -1345,7 +1345,7 @@ describe("a field's value", () => {
                                           end: { line: 157, column: 19 },
                                         },
                                         name: "flags",
-                                        bindingKey: "flags$2pi9tt1octht0$3",
+                                        key: "flags$2pi9tt1octht0$3",
                                       },
                                       property: {
                                         type: "Identifier",

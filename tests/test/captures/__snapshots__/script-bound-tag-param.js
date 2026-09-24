@@ -47,7 +47,7 @@ it("scriptBoundTagParam", async (t) => {
                       end: { line: 16, column: 20 },
                     },
                     name: "Row",
-                    bindingKey: "Row$3ehgcl2xwg3z1$1",
+                    key: "Row$3ehgcl2xwg3z1$1",
                   },
                   attributes: [
                     {
@@ -121,7 +121,7 @@ it("scriptBoundTagParam", async (t) => {
                       end: { line: 17, column: 20 },
                     },
                     name: "Row",
-                    bindingKey: "Row$3ehgcl2xwg3z1$1",
+                    key: "Row$3ehgcl2xwg3z1$1",
                   },
                   attributes: [
                     {
@@ -191,7 +191,7 @@ it("scriptBoundTagParam", async (t) => {
                     end: { line: 14, column: 17 },
                   },
                   name: "twice",
-                  bindingKey: "twice$3ehgcl2xwg3z1$0",
+                  key: "twice$3ehgcl2xwg3z1$0",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -207,7 +207,7 @@ it("scriptBoundTagParam", async (t) => {
                         end: { line: 14, column: 24 },
                       },
                       name: "Row",
-                      bindingKey: "Row$3ehgcl2xwg3z1$1",
+                      key: "Row$3ehgcl2xwg3z1$1",
                     },
                   ],
                   body: {
@@ -332,7 +332,7 @@ it("scriptBoundTagParam", async (t) => {
                   end: { line: 20, column: 18 },
                 },
                 name: "twice",
-                bindingKey: "twice$3ehgcl2xwg3z1$0",
+                key: "twice$3ehgcl2xwg3z1$0",
               },
               arguments: [
                 {
@@ -349,7 +349,7 @@ it("scriptBoundTagParam", async (t) => {
                         end: { line: 20, column: 21 },
                       },
                       name: "p",
-                      bindingKey: "p$3ehgcl2xwg3z1$2",
+                      key: "p$3ehgcl2xwg3z1$2",
                     },
                   ],
                   body: {
@@ -410,7 +410,7 @@ it("scriptBoundTagParam", async (t) => {
                                 end: { line: 20, column: 56 },
                               },
                               name: "p",
-                              bindingKey: "p$3ehgcl2xwg3z1$2",
+                              key: "p$3ehgcl2xwg3z1$2",
                             },
                             property: {
                               type: "Identifier",

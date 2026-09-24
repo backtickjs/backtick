@@ -40,7 +40,7 @@ async function Parsed() {
                   end: { line: 10, column: 15 },
                 },
                 name: "whole",
-                bindingKey: "whole$28kni4l69t7vb$0",
+                key: "whole$28kni4l69t7vb$0",
               },
               init: {
                 type: "CallExpression",
@@ -109,7 +109,7 @@ async function Parsed() {
                   end: { line: 11, column: 15 },
                 },
                 name: "based",
-                bindingKey: "based$28kni4l69t7vb$1",
+                key: "based$28kni4l69t7vb$1",
               },
               init: {
                 type: "CallExpression",
@@ -186,7 +186,7 @@ async function Parsed() {
                   end: { line: 12, column: 20 },
                 },
                 name: "fractional",
-                bindingKey: "fractional$28kni4l69t7vb$2",
+                key: "fractional$28kni4l69t7vb$2",
               },
               init: {
                 type: "CallExpression",
@@ -298,7 +298,7 @@ async function Parsed() {
                           end: { line: 13, column: 23 },
                         },
                         name: "whole",
-                        bindingKey: "whole$28kni4l69t7vb$0",
+                        key: "whole$28kni4l69t7vb$0",
                       },
                       right: {
                         type: "Identifier",
@@ -307,7 +307,7 @@ async function Parsed() {
                           end: { line: 13, column: 31 },
                         },
                         name: "based",
-                        bindingKey: "based$28kni4l69t7vb$1",
+                        key: "based$28kni4l69t7vb$1",
                       },
                     },
                     right: {
@@ -317,7 +317,7 @@ async function Parsed() {
                         end: { line: 13, column: 44 },
                       },
                       name: "fractional",
-                      bindingKey: "fractional$28kni4l69t7vb$2",
+                      key: "fractional$28kni4l69t7vb$2",
                     },
                   },
                   right: {

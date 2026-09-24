@@ -41,7 +41,7 @@ it("arrayMembers", async (t) => {
                     end: { line: 12, column: 17 },
                   },
                   name: "coins",
-                  bindingKey: "coins$139y0n5fpgs82$0",
+                  key: "coins$139y0n5fpgs82$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -100,7 +100,7 @@ it("arrayMembers", async (t) => {
                     end: { line: 13, column: 16 },
                   },
                   name: "four",
-                  bindingKey: "four$139y0n5fpgs82$1",
+                  key: "four$139y0n5fpgs82$1",
                 },
                 init: {
                   type: "Literal",
@@ -153,7 +153,7 @@ it("arrayMembers", async (t) => {
                         end: { line: 15, column: 20 },
                       },
                       name: "coins",
-                      bindingKey: "coins$139y0n5fpgs82$0",
+                      key: "coins$139y0n5fpgs82$0",
                     },
                     property: {
                       type: "Identifier",
@@ -204,7 +204,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 16, column: 18 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -232,7 +232,7 @@ it("arrayMembers", async (t) => {
                               end: { line: 16, column: 31 },
                             },
                             name: "four",
-                            bindingKey: "four$139y0n5fpgs82$1",
+                            key: "four$139y0n5fpgs82$1",
                           },
                         ],
                       },
@@ -277,7 +277,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 17, column: 19 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -348,7 +348,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 18, column: 20 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -423,7 +423,7 @@ it("arrayMembers", async (t) => {
                               end: { line: 19, column: 24 },
                             },
                             name: "coins",
-                            bindingKey: "coins$139y0n5fpgs82$0",
+                            key: "coins$139y0n5fpgs82$0",
                           },
                           property: {
                             type: "Identifier",
@@ -518,7 +518,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 20, column: 18 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -581,7 +581,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 21, column: 19 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -644,7 +644,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 22, column: 22 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -672,7 +672,7 @@ it("arrayMembers", async (t) => {
                               end: { line: 22, column: 29 },
                             },
                             name: "n",
-                            bindingKey: "n$139y0n5fpgs82$2",
+                            key: "n$139y0n5fpgs82$2",
                           },
                         ],
                         body: {
@@ -689,7 +689,7 @@ it("arrayMembers", async (t) => {
                               end: { line: 22, column: 35 },
                             },
                             name: "n",
-                            bindingKey: "n$139y0n5fpgs82$2",
+                            key: "n$139y0n5fpgs82$2",
                           },
                           right: {
                             type: "Literal",
@@ -743,7 +743,7 @@ it("arrayMembers", async (t) => {
                           end: { line: 23, column: 20 },
                         },
                         name: "coins",
-                        bindingKey: "coins$139y0n5fpgs82$0",
+                        key: "coins$139y0n5fpgs82$0",
                       },
                       property: {
                         type: "Identifier",
@@ -771,7 +771,7 @@ it("arrayMembers", async (t) => {
                               end: { line: 23, column: 30 },
                             },
                             name: "n",
-                            bindingKey: "n$139y0n5fpgs82$3",
+                            key: "n$139y0n5fpgs82$3",
                           },
                         ],
                         body: {
@@ -788,7 +788,7 @@ it("arrayMembers", async (t) => {
                               end: { line: 23, column: 36 },
                             },
                             name: "n",
-                            bindingKey: "n$139y0n5fpgs82$3",
+                            key: "n$139y0n5fpgs82$3",
                           },
                           right: {
                             type: "Literal",

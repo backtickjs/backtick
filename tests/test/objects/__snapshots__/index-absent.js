@@ -43,7 +43,7 @@ it("indexAbsent", async (t) => {
                     end: { line: 15, column: 17 },
                   },
                   name: "names",
-                  bindingKey: "names$26sqkhggd8j15$0",
+                  key: "names$26sqkhggd8j15$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -94,7 +94,7 @@ it("indexAbsent", async (t) => {
                     end: { line: 16, column: 19 },
                   },
                   name: "missing",
-                  bindingKey: "missing$26sqkhggd8j15$1",
+                  key: "missing$26sqkhggd8j15$1",
                 },
                 init: {
                   type: "LogicalExpression",
@@ -173,7 +173,7 @@ it("indexAbsent", async (t) => {
                       end: { line: 17, column: 18 },
                     },
                     name: "names",
-                    bindingKey: "names$26sqkhggd8j15$0",
+                    key: "names$26sqkhggd8j15$0",
                   },
                   property: {
                     type: "Literal",
@@ -202,7 +202,7 @@ it("indexAbsent", async (t) => {
                   end: { line: 17, column: 37 },
                 },
                 name: "missing",
-                bindingKey: "missing$26sqkhggd8j15$1",
+                key: "missing$26sqkhggd8j15$1",
               },
             },
           },

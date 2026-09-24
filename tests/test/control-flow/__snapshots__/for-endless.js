@@ -40,7 +40,7 @@ it("forEndless", async (t) => {
                     end: { line: 11, column: 11 },
                   },
                   name: "i",
-                  bindingKey: "i$3voddrkfnxnd9$0",
+                  key: "i$3voddrkfnxnd9$0",
                 },
                 init: {
                   type: "Literal",
@@ -89,7 +89,7 @@ it("forEndless", async (t) => {
                         end: { line: 13, column: 13 },
                       },
                       name: "i",
-                      bindingKey: "i$3voddrkfnxnd9$0",
+                      key: "i$3voddrkfnxnd9$0",
                     },
                     right: {
                       type: "Literal",
@@ -139,7 +139,7 @@ it("forEndless", async (t) => {
                         end: { line: 16, column: 9 },
                       },
                       name: "i",
-                      bindingKey: "i$3voddrkfnxnd9$0",
+                      key: "i$3voddrkfnxnd9$0",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -155,7 +155,7 @@ it("forEndless", async (t) => {
                           end: { line: 16, column: 13 },
                         },
                         name: "i",
-                        bindingKey: "i$3voddrkfnxnd9$0",
+                        key: "i$3voddrkfnxnd9$0",
                       },
                       right: {
                         type: "Literal",
@@ -184,7 +184,7 @@ it("forEndless", async (t) => {
                 end: { line: 18, column: 14 },
               },
               name: "i",
-              bindingKey: "i$3voddrkfnxnd9$0",
+              key: "i$3voddrkfnxnd9$0",
             },
           },
         ],

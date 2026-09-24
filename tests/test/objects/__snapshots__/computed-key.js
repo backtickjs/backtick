@@ -43,7 +43,7 @@ it("computedKey", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "base",
-                  bindingKey: "base$27b2r7injyzq0$0",
+                  key: "base$27b2r7injyzq0$0",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -132,7 +132,7 @@ it("computedKey", async (t) => {
                     end: { line: 15, column: 16 },
                   },
                   name: "name",
-                  bindingKey: "name$27b2r7injyzq0$1",
+                  key: "name$27b2r7injyzq0$1",
                 },
                 init: {
                   type: "Literal",
@@ -171,7 +171,7 @@ it("computedKey", async (t) => {
                       end: { line: 17, column: 15 },
                     },
                     name: "base",
-                    bindingKey: "base$27b2r7injyzq0$0",
+                    key: "base$27b2r7injyzq0$0",
                   },
                 },
                 {
@@ -187,7 +187,7 @@ it("computedKey", async (t) => {
                       end: { line: 18, column: 13 },
                     },
                     name: "name",
-                    bindingKey: "name$27b2r7injyzq0$1",
+                    key: "name$27b2r7injyzq0$1",
                   },
                   value: {
                     type: "Literal",

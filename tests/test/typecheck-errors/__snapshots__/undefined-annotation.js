@@ -16,7 +16,7 @@ const stored = cs.create(
         type: "Identifier",
         loc: { start: { line: 13, column: 19 }, end: { line: 13, column: 20 } },
         name: "x",
-        bindingKey: "x$2ybl4zwhlhjta$0",
+        key: "x$2ybl4zwhlhjta$0",
       },
     ],
     body: {
@@ -44,7 +44,7 @@ const stored = cs.create(
                   end: { line: 14, column: 9 },
                 },
                 name: "y",
-                bindingKey: "y$2ybl4zwhlhjta$1",
+                key: "y$2ybl4zwhlhjta$1",
               },
               init: {
                 type: "Identifier",
@@ -53,7 +53,7 @@ const stored = cs.create(
                   end: { line: 14, column: 13 },
                 },
                 name: "x",
-                bindingKey: "x$2ybl4zwhlhjta$0",
+                key: "x$2ybl4zwhlhjta$0",
               },
             },
           ],
@@ -95,7 +95,7 @@ const written = cs.create(
         type: "Identifier",
         loc: { start: { line: 18, column: 20 }, end: { line: 18, column: 21 } },
         name: "x",
-        bindingKey: "x$2ybl4zwhlhjta$2",
+        key: "x$2ybl4zwhlhjta$2",
       },
     ],
     body: {
@@ -123,7 +123,7 @@ const written = cs.create(
                   end: { line: 19, column: 7 },
                 },
                 name: "y",
-                bindingKey: "y$2ybl4zwhlhjta$3",
+                key: "y$2ybl4zwhlhjta$3",
               },
               init: {
                 type: "Literal",
@@ -153,7 +153,7 @@ const written = cs.create(
                 end: { line: 21, column: 3 },
               },
               name: "y",
-              bindingKey: "y$2ybl4zwhlhjta$3",
+              key: "y$2ybl4zwhlhjta$3",
             },
             right: {
               type: "Identifier",
@@ -162,7 +162,7 @@ const written = cs.create(
                 end: { line: 21, column: 7 },
               },
               name: "x",
-              bindingKey: "x$2ybl4zwhlhjta$2",
+              key: "x$2ybl4zwhlhjta$2",
             },
           },
         },

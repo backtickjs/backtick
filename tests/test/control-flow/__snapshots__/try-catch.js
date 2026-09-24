@@ -39,7 +39,7 @@ it("tryCatch", async (t) => {
                     end: { line: 10, column: 19 },
                   },
                   name: "message",
-                  bindingKey: "message$3s3xo1kodgmhm$0",
+                  key: "message$3s3xo1kodgmhm$0",
                 },
                 init: {
                   type: "Literal",
@@ -78,7 +78,7 @@ it("tryCatch", async (t) => {
                       end: { line: 12, column: 21 },
                     },
                     name: "message",
-                    bindingKey: "message$3s3xo1kodgmhm$0",
+                    key: "message$3s3xo1kodgmhm$0",
                   },
                 },
               ],
@@ -96,7 +96,7 @@ it("tryCatch", async (t) => {
                   end: { line: 13, column: 20 },
                 },
                 name: "error",
-                bindingKey: "error$3s3xo1kodgmhm$1",
+                key: "error$3s3xo1kodgmhm$1",
               },
               body: {
                 type: "BlockStatement",
@@ -125,7 +125,7 @@ it("tryCatch", async (t) => {
                           end: { line: 14, column: 17 },
                         },
                         name: "error",
-                        bindingKey: "error$3s3xo1kodgmhm$1",
+                        key: "error$3s3xo1kodgmhm$1",
                       },
                       right: {
                         type: "Identifier",
@@ -134,7 +134,7 @@ it("tryCatch", async (t) => {
                           end: { line: 14, column: 29 },
                         },
                         name: "message",
-                        bindingKey: "message$3s3xo1kodgmhm$0",
+                        key: "message$3s3xo1kodgmhm$0",
                       },
                     },
                     consequent: {

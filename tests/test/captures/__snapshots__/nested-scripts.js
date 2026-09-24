@@ -32,7 +32,7 @@ it("nestedScripts", async (t) => {
                   end: { line: 11, column: 19 },
                 },
                 name: "x",
-                bindingKey: "x$2jjdjdr7m395y$0",
+                key: "x$2jjdjdr7m395y$0",
               }),
             ),
             params: ["x$2jjdjdr7m395y$0"],
@@ -65,7 +65,7 @@ it("nestedScripts", async (t) => {
                     end: { line: 10, column: 13 },
                   },
                   name: "x",
-                  bindingKey: "x$2jjdjdr7m395y$0",
+                  key: "x$2jjdjdr7m395y$0",
                 },
                 init: {
                   type: "Literal",

@@ -44,7 +44,7 @@ function innerBase(carried) {
                   end: { line: 20, column: 20 },
                 },
                 name: "base",
-                bindingKey: "base$bphb1svo1jv3$0",
+                key: "base$bphb1svo1jv3$0",
               },
               right: {
                 type: "Splice",
@@ -86,7 +86,7 @@ function innerBase(carried) {
                   end: { line: 19, column: 14 },
                 },
                 name: "base",
-                bindingKey: "base$bphb1svo1jv3$0",
+                key: "base$bphb1svo1jv3$0",
               },
               init: {
                 type: "Literal",
@@ -150,7 +150,7 @@ it("foreignCaptureShadow", async (t) => {
                     end: { line: 30, column: 32 },
                   },
                   name: "base",
-                  bindingKey: "base$bphb1svo1jv3$1",
+                  key: "base$bphb1svo1jv3$1",
                 }),
               ),
             ),
@@ -184,7 +184,7 @@ it("foreignCaptureShadow", async (t) => {
                     end: { line: 29, column: 16 },
                   },
                   name: "base",
-                  bindingKey: "base$bphb1svo1jv3$1",
+                  key: "base$bphb1svo1jv3$1",
                 },
                 init: {
                   type: "Literal",

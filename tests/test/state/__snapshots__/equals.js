@@ -59,7 +59,7 @@ describe("equals", () => {
                       end: { line: 28, column: 15 },
                     },
                     name: "n",
-                    bindingKey: "n$96w30i9eqr9l$0",
+                    key: "n$96w30i9eqr9l$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -111,7 +111,7 @@ describe("equals", () => {
                       end: { line: 29, column: 18 },
                     },
                     name: "size",
-                    bindingKey: "size$96w30i9eqr9l$1",
+                    key: "size$96w30i9eqr9l$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -182,7 +182,7 @@ describe("equals", () => {
                                         end: { line: 29, column: 48 },
                                       },
                                       name: "n",
-                                      bindingKey: "n$96w30i9eqr9l$0",
+                                      key: "n$96w30i9eqr9l$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -245,7 +245,7 @@ describe("equals", () => {
                                       end: { line: 29, column: 64 },
                                     },
                                     name: "n",
-                                    bindingKey: "n$96w30i9eqr9l$0",
+                                    key: "n$96w30i9eqr9l$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -305,7 +305,7 @@ describe("equals", () => {
                                     end: { line: 30, column: 27 },
                                   },
                                   name: "previous",
-                                  bindingKey: "previous$96w30i9eqr9l$3",
+                                  key: "previous$96w30i9eqr9l$3",
                                 },
                                 {
                                   type: "Identifier",
@@ -314,7 +314,7 @@ describe("equals", () => {
                                     end: { line: 30, column: 33 },
                                   },
                                   name: "next",
-                                  bindingKey: "next$96w30i9eqr9l$4",
+                                  key: "next$96w30i9eqr9l$4",
                                 },
                               ],
                               body: {
@@ -337,7 +337,7 @@ describe("equals", () => {
                                       end: { line: 30, column: 46 },
                                     },
                                     name: "previous",
-                                    bindingKey: "previous$96w30i9eqr9l$3",
+                                    key: "previous$96w30i9eqr9l$3",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -363,7 +363,7 @@ describe("equals", () => {
                                       end: { line: 30, column: 61 },
                                     },
                                     name: "next",
-                                    bindingKey: "next$96w30i9eqr9l$4",
+                                    key: "next$96w30i9eqr9l$4",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -413,7 +413,7 @@ describe("equals", () => {
                       end: { line: 32, column: 19 },
                     },
                     name: "label",
-                    bindingKey: "label$96w30i9eqr9l$2",
+                    key: "label$96w30i9eqr9l$2",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -524,7 +524,7 @@ describe("equals", () => {
                                       end: { line: 34, column: 21 },
                                     },
                                     name: "size",
-                                    bindingKey: "size$96w30i9eqr9l$1",
+                                    key: "size$96w30i9eqr9l$1",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -682,7 +682,7 @@ describe("equals", () => {
                                       end: { line: 38, column: 36 },
                                     },
                                     name: "n",
-                                    bindingKey: "n$96w30i9eqr9l$0",
+                                    key: "n$96w30i9eqr9l$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -722,7 +722,7 @@ describe("equals", () => {
                                             end: { line: 38, column: 42 },
                                           },
                                           name: "n",
-                                          bindingKey: "n$96w30i9eqr9l$0",
+                                          key: "n$96w30i9eqr9l$0",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -836,7 +836,7 @@ describe("equals", () => {
                               end: { line: 39, column: 21 },
                             },
                             name: "label",
-                            bindingKey: "label$96w30i9eqr9l$2",
+                            key: "label$96w30i9eqr9l$2",
                           },
                           arguments: [],
                           optional: false,
@@ -937,7 +937,7 @@ describe("equals", () => {
                       end: { line: 58, column: 19 },
                     },
                     name: "point",
-                    bindingKey: "point$96w30i9eqr9l$5",
+                    key: "point$96w30i9eqr9l$5",
                   },
                   init: {
                     type: "CallExpression",
@@ -1025,7 +1025,7 @@ describe("equals", () => {
                                     end: { line: 60, column: 29 },
                                   },
                                   name: "previous",
-                                  bindingKey: "previous$96w30i9eqr9l$7",
+                                  key: "previous$96w30i9eqr9l$7",
                                 },
                                 {
                                   type: "Identifier",
@@ -1034,7 +1034,7 @@ describe("equals", () => {
                                     end: { line: 60, column: 35 },
                                   },
                                   name: "next",
-                                  bindingKey: "next$96w30i9eqr9l$8",
+                                  key: "next$96w30i9eqr9l$8",
                                 },
                               ],
                               body: {
@@ -1057,7 +1057,7 @@ describe("equals", () => {
                                       end: { line: 60, column: 48 },
                                     },
                                     name: "previous",
-                                    bindingKey: "previous$96w30i9eqr9l$7",
+                                    key: "previous$96w30i9eqr9l$7",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1083,7 +1083,7 @@ describe("equals", () => {
                                       end: { line: 60, column: 59 },
                                     },
                                     name: "next",
-                                    bindingKey: "next$96w30i9eqr9l$8",
+                                    key: "next$96w30i9eqr9l$8",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1133,7 +1133,7 @@ describe("equals", () => {
                       end: { line: 62, column: 19 },
                     },
                     name: "label",
-                    bindingKey: "label$96w30i9eqr9l$6",
+                    key: "label$96w30i9eqr9l$6",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -1253,7 +1253,7 @@ describe("equals", () => {
                                       end: { line: 64, column: 29 },
                                     },
                                     name: "point",
-                                    bindingKey: "point$96w30i9eqr9l$5",
+                                    key: "point$96w30i9eqr9l$5",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1395,7 +1395,7 @@ describe("equals", () => {
                                       end: { line: 68, column: 40 },
                                     },
                                     name: "point",
-                                    bindingKey: "point$96w30i9eqr9l$5",
+                                    key: "point$96w30i9eqr9l$5",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1458,8 +1458,7 @@ describe("equals", () => {
                                                   end: { line: 68, column: 55 },
                                                 },
                                                 name: "point",
-                                                bindingKey:
-                                                  "point$96w30i9eqr9l$5",
+                                                key: "point$96w30i9eqr9l$5",
                                               },
                                               property: {
                                                 type: "Identifier",
@@ -1585,7 +1584,7 @@ describe("equals", () => {
                               end: { line: 71, column: 21 },
                             },
                             name: "label",
-                            bindingKey: "label$96w30i9eqr9l$6",
+                            key: "label$96w30i9eqr9l$6",
                           },
                           arguments: [],
                           optional: false,
@@ -1681,7 +1680,7 @@ describe("equals", () => {
                       end: { line: 83, column: 15 },
                     },
                     name: "n",
-                    bindingKey: "n$96w30i9eqr9l$9",
+                    key: "n$96w30i9eqr9l$9",
                   },
                   init: {
                     type: "CallExpression",
@@ -1741,7 +1740,7 @@ describe("equals", () => {
                                     end: { line: 84, column: 27 },
                                   },
                                   name: "previous",
-                                  bindingKey: "previous$96w30i9eqr9l$10",
+                                  key: "previous$96w30i9eqr9l$10",
                                 },
                                 {
                                   type: "Identifier",
@@ -1750,7 +1749,7 @@ describe("equals", () => {
                                     end: { line: 84, column: 33 },
                                   },
                                   name: "next",
-                                  bindingKey: "next$96w30i9eqr9l$11",
+                                  key: "next$96w30i9eqr9l$11",
                                 },
                               ],
                               body: {
@@ -1822,8 +1821,7 @@ describe("equals", () => {
                                             end: { line: 85, column: 40 },
                                           },
                                           name: "previous",
-                                          bindingKey:
-                                            "previous$96w30i9eqr9l$10",
+                                          key: "previous$96w30i9eqr9l$10",
                                         },
                                         {
                                           type: "Identifier",
@@ -1832,7 +1830,7 @@ describe("equals", () => {
                                             end: { line: 85, column: 46 },
                                           },
                                           name: "next",
-                                          bindingKey: "next$96w30i9eqr9l$11",
+                                          key: "next$96w30i9eqr9l$11",
                                         },
                                       ],
                                       optional: false,
@@ -1858,7 +1856,7 @@ describe("equals", () => {
                                           end: { line: 86, column: 27 },
                                         },
                                         name: "previous",
-                                        bindingKey: "previous$96w30i9eqr9l$10",
+                                        key: "previous$96w30i9eqr9l$10",
                                       },
                                       right: {
                                         type: "Identifier",
@@ -1867,7 +1865,7 @@ describe("equals", () => {
                                           end: { line: 86, column: 36 },
                                         },
                                         name: "next",
-                                        bindingKey: "next$96w30i9eqr9l$11",
+                                        key: "next$96w30i9eqr9l$11",
                                       },
                                     },
                                   },
@@ -1961,7 +1959,7 @@ describe("equals", () => {
                                   end: { line: 89, column: 39 },
                                 },
                                 name: "n",
-                                bindingKey: "n$96w30i9eqr9l$9",
+                                key: "n$96w30i9eqr9l$9",
                               },
                               property: {
                                 type: "Identifier",
@@ -2034,7 +2032,7 @@ describe("equals", () => {
                               end: { line: 89, column: 57 },
                             },
                             name: "n",
-                            bindingKey: "n$96w30i9eqr9l$9",
+                            key: "n$96w30i9eqr9l$9",
                           },
                           property: {
                             type: "Identifier",
@@ -2120,7 +2118,7 @@ describe("equals", () => {
                       end: { line: 100, column: 15 },
                     },
                     name: "n",
-                    bindingKey: "n$96w30i9eqr9l$12",
+                    key: "n$96w30i9eqr9l$12",
                   },
                   init: {
                     type: "CallExpression",
@@ -2172,7 +2170,7 @@ describe("equals", () => {
                       end: { line: 101, column: 19 },
                     },
                     name: "label",
-                    bindingKey: "label$96w30i9eqr9l$13",
+                    key: "label$96w30i9eqr9l$13",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -2286,7 +2284,7 @@ describe("equals", () => {
                                     end: { line: 103, column: 25 },
                                   },
                                   name: "n",
-                                  bindingKey: "n$96w30i9eqr9l$12",
+                                  key: "n$96w30i9eqr9l$12",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -2417,7 +2415,7 @@ describe("equals", () => {
                                       end: { line: 107, column: 36 },
                                     },
                                     name: "n",
-                                    bindingKey: "n$96w30i9eqr9l$12",
+                                    key: "n$96w30i9eqr9l$12",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -2528,7 +2526,7 @@ describe("equals", () => {
                               end: { line: 108, column: 21 },
                             },
                             name: "label",
-                            bindingKey: "label$96w30i9eqr9l$13",
+                            key: "label$96w30i9eqr9l$13",
                           },
                           arguments: [],
                           optional: false,
@@ -2627,7 +2625,7 @@ describe("equals", () => {
                       end: { line: 120, column: 19 },
                     },
                     name: "point",
-                    bindingKey: "point$96w30i9eqr9l$14",
+                    key: "point$96w30i9eqr9l$14",
                   },
                   init: {
                     type: "CallExpression",
@@ -2707,7 +2705,7 @@ describe("equals", () => {
                       end: { line: 121, column: 19 },
                     },
                     name: "label",
-                    bindingKey: "label$96w30i9eqr9l$15",
+                    key: "label$96w30i9eqr9l$15",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -2827,7 +2825,7 @@ describe("equals", () => {
                                       end: { line: 123, column: 29 },
                                     },
                                     name: "point",
-                                    bindingKey: "point$96w30i9eqr9l$14",
+                                    key: "point$96w30i9eqr9l$14",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -2969,7 +2967,7 @@ describe("equals", () => {
                                       end: { line: 127, column: 40 },
                                     },
                                     name: "point",
-                                    bindingKey: "point$96w30i9eqr9l$14",
+                                    key: "point$96w30i9eqr9l$14",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -3038,8 +3036,7 @@ describe("equals", () => {
                                                   },
                                                 },
                                                 name: "point",
-                                                bindingKey:
-                                                  "point$96w30i9eqr9l$14",
+                                                key: "point$96w30i9eqr9l$14",
                                               },
                                               property: {
                                                 type: "Identifier",
@@ -3168,7 +3165,7 @@ describe("equals", () => {
                               end: { line: 130, column: 21 },
                             },
                             name: "label",
-                            bindingKey: "label$96w30i9eqr9l$15",
+                            key: "label$96w30i9eqr9l$15",
                           },
                           arguments: [],
                           optional: false,

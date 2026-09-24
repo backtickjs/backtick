@@ -33,7 +33,7 @@ const valueScriptEffects = cs.create(
                 end: { line: 8, column: 9 },
               },
               name: "x",
-              bindingKey: "x$1zk77nyjrl50d$0",
+              key: "x$1zk77nyjrl50d$0",
             },
             init: {
               type: "Literal",
@@ -87,7 +87,7 @@ const ping = cs.create(
                   end: { line: 12, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$1zk77nyjrl50d$1",
+                key: "n$1zk77nyjrl50d$1",
               },
               init: {
                 type: "Literal",
@@ -117,7 +117,7 @@ const ping = cs.create(
                 end: { line: 13, column: 3 },
               },
               name: "n",
-              bindingKey: "n$1zk77nyjrl50d$1",
+              key: "n$1zk77nyjrl50d$1",
             },
             right: {
               type: "Literal",
@@ -161,7 +161,7 @@ it("actionInValueScript", async (t) => {
               end: { line: 20, column: 9 },
             },
             name: "b",
-            bindingKey: "b$1zk77nyjrl50d$2",
+            key: "b$1zk77nyjrl50d$2",
           },
         ],
         body: {
@@ -192,7 +192,7 @@ it("actionInValueScript", async (t) => {
                       end: { line: 21, column: 11 },
                     },
                     name: "n",
-                    bindingKey: "n$1zk77nyjrl50d$3",
+                    key: "n$1zk77nyjrl50d$3",
                   },
                   init: {
                     type: "Literal",
@@ -233,7 +233,7 @@ it("actionInValueScript", async (t) => {
                   end: { line: 23, column: 11 },
                 },
                 name: "b",
-                bindingKey: "b$1zk77nyjrl50d$2",
+                key: "b$1zk77nyjrl50d$2",
               },
               consequent: {
                 type: "BlockStatement",
@@ -286,7 +286,7 @@ it("actionInValueScript", async (t) => {
                           end: { line: 25, column: 9 },
                         },
                         name: "n",
-                        bindingKey: "n$1zk77nyjrl50d$3",
+                        key: "n$1zk77nyjrl50d$3",
                       },
                       right: {
                         type: "Literal",
@@ -315,7 +315,7 @@ it("actionInValueScript", async (t) => {
                   end: { line: 27, column: 14 },
                 },
                 name: "n",
-                bindingKey: "n$1zk77nyjrl50d$3",
+                key: "n$1zk77nyjrl50d$3",
               },
             },
           ],

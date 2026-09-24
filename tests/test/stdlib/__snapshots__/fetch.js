@@ -55,7 +55,7 @@ it("fetchRequests", async (t) => {
                       end: { line: 17, column: 16 },
                     },
                     name: "held",
-                    bindingKey: "held$2oxvexs6ogdoj$0",
+                    key: "held$2oxvexs6ogdoj$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -146,7 +146,7 @@ it("fetchRequests", async (t) => {
                           end: { line: 21, column: 17 },
                         },
                         name: "response",
-                        bindingKey: "response$2oxvexs6ogdoj$1",
+                        key: "response$2oxvexs6ogdoj$1",
                       },
                     ],
                     body: {
@@ -182,7 +182,7 @@ it("fetchRequests", async (t) => {
                                   end: { line: 22, column: 22 },
                                 },
                                 name: "response",
-                                bindingKey: "response$2oxvexs6ogdoj$1",
+                                key: "response$2oxvexs6ogdoj$1",
                               },
                               property: {
                                 type: "Identifier",
@@ -245,7 +245,7 @@ it("fetchRequests", async (t) => {
                                         end: { line: 23, column: 40 },
                                       },
                                       name: "response",
-                                      bindingKey: "response$2oxvexs6ogdoj$1",
+                                      key: "response$2oxvexs6ogdoj$1",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -289,7 +289,7 @@ it("fetchRequests", async (t) => {
                                   end: { line: 25, column: 14 },
                                 },
                                 name: "held",
-                                bindingKey: "held$2oxvexs6ogdoj$0",
+                                key: "held$2oxvexs6ogdoj$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -361,8 +361,7 @@ it("fetchRequests", async (t) => {
                                             end: { line: 25, column: 38 },
                                           },
                                           name: "response",
-                                          bindingKey:
-                                            "response$2oxvexs6ogdoj$1",
+                                          key: "response$2oxvexs6ogdoj$1",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -426,7 +425,7 @@ it("fetchRequests", async (t) => {
                           end: { line: 27, column: 16 },
                         },
                         name: "message",
-                        bindingKey: "message$2oxvexs6ogdoj$2",
+                        key: "message$2oxvexs6ogdoj$2",
                       },
                     ],
                     body: {
@@ -461,7 +460,7 @@ it("fetchRequests", async (t) => {
                                   end: { line: 28, column: 14 },
                                 },
                                 name: "held",
-                                bindingKey: "held$2oxvexs6ogdoj$0",
+                                key: "held$2oxvexs6ogdoj$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -497,7 +496,7 @@ it("fetchRequests", async (t) => {
                                     end: { line: 28, column: 40 },
                                   },
                                   name: "message",
-                                  bindingKey: "message$2oxvexs6ogdoj$2",
+                                  key: "message$2oxvexs6ogdoj$2",
                                 },
                               },
                             ],
@@ -608,7 +607,7 @@ it("fetchRequests", async (t) => {
                           end: { line: 35, column: 17 },
                         },
                         name: "response",
-                        bindingKey: "response$2oxvexs6ogdoj$3",
+                        key: "response$2oxvexs6ogdoj$3",
                       },
                     ],
                     body: {
@@ -643,7 +642,7 @@ it("fetchRequests", async (t) => {
                                   end: { line: 36, column: 14 },
                                 },
                                 name: "held",
-                                bindingKey: "held$2oxvexs6ogdoj$0",
+                                key: "held$2oxvexs6ogdoj$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -670,7 +669,7 @@ it("fetchRequests", async (t) => {
                                     end: { line: 36, column: 27 },
                                   },
                                   name: "response",
-                                  bindingKey: "response$2oxvexs6ogdoj$3",
+                                  key: "response$2oxvexs6ogdoj$3",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -705,7 +704,7 @@ it("fetchRequests", async (t) => {
                           end: { line: 38, column: 16 },
                         },
                         name: "message",
-                        bindingKey: "message$2oxvexs6ogdoj$4",
+                        key: "message$2oxvexs6ogdoj$4",
                       },
                     ],
                     body: {
@@ -740,7 +739,7 @@ it("fetchRequests", async (t) => {
                                   end: { line: 39, column: 14 },
                                 },
                                 name: "held",
-                                bindingKey: "held$2oxvexs6ogdoj$0",
+                                key: "held$2oxvexs6ogdoj$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -761,7 +760,7 @@ it("fetchRequests", async (t) => {
                                   end: { line: 39, column: 26 },
                                 },
                                 name: "message",
-                                bindingKey: "message$2oxvexs6ogdoj$4",
+                                key: "message$2oxvexs6ogdoj$4",
                               },
                             ],
                             optional: false,
@@ -1008,7 +1007,7 @@ it("fetchRequests", async (t) => {
                       end: { line: 48, column: 17 },
                     },
                     name: "held",
-                    bindingKey: "held$2oxvexs6ogdoj$0",
+                    key: "held$2oxvexs6ogdoj$0",
                   },
                   property: {
                     type: "Identifier",

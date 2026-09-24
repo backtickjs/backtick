@@ -55,7 +55,7 @@ it("timers", async (t) => {
                     end: { line: 26, column: 16 },
                   },
                   name: "stop",
-                  bindingKey: "stop$ujjuhj1csnkk$0",
+                  key: "stop$ujjuhj1csnkk$0",
                 },
                 init: {
                   type: "MemberExpression",
@@ -106,7 +106,7 @@ it("timers", async (t) => {
                     end: { line: 27, column: 21 },
                   },
                   name: "repeating",
-                  bindingKey: "repeating$ujjuhj1csnkk$1",
+                  key: "repeating$ujjuhj1csnkk$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -190,7 +190,7 @@ it("timers", async (t) => {
                   end: { line: 28, column: 10 },
                 },
                 name: "stop",
-                bindingKey: "stop$ujjuhj1csnkk$0",
+                key: "stop$ujjuhj1csnkk$0",
               },
               arguments: [
                 {
@@ -200,7 +200,7 @@ it("timers", async (t) => {
                     end: { line: 28, column: 20 },
                   },
                   name: "repeating",
-                  bindingKey: "repeating$ujjuhj1csnkk$1",
+                  key: "repeating$ujjuhj1csnkk$1",
                 },
               ],
               optional: false,

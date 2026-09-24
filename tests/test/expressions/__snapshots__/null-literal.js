@@ -20,7 +20,7 @@ const orDash = cs.create(
         type: "Identifier",
         loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 7 } },
         name: "value",
-        bindingKey: "value$2nnj6ebvkk8vj$0",
+        key: "value$2nnj6ebvkk8vj$0",
       },
     ],
     body: {
@@ -44,7 +44,7 @@ const orDash = cs.create(
                 end: { line: 10, column: 11 },
               },
               name: "value",
-              bindingKey: "value$2nnj6ebvkk8vj$0",
+              key: "value$2nnj6ebvkk8vj$0",
             },
             right: {
               type: "Literal",
@@ -94,7 +94,7 @@ const orDash = cs.create(
               end: { line: 13, column: 14 },
             },
             name: "value",
-            bindingKey: "value$2nnj6ebvkk8vj$0",
+            key: "value$2nnj6ebvkk8vj$0",
           },
         },
       ],

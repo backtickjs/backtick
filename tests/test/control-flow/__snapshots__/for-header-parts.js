@@ -41,7 +41,7 @@ it("forHeaderParts", async (t) => {
                     end: { line: 12, column: 11 },
                   },
                   name: "i",
-                  bindingKey: "i$2espgmzktnj99$0",
+                  key: "i$2espgmzktnj99$0",
                 },
                 init: {
                   type: "Literal",
@@ -75,7 +75,7 @@ it("forHeaderParts", async (t) => {
                     end: { line: 13, column: 14 },
                   },
                   name: "seen",
-                  bindingKey: "seen$2espgmzktnj99$1",
+                  key: "seen$2espgmzktnj99$1",
                 },
                 init: {
                   type: "Literal",
@@ -109,7 +109,7 @@ it("forHeaderParts", async (t) => {
                   end: { line: 14, column: 14 },
                 },
                 name: "i",
-                bindingKey: "i$2espgmzktnj99$0",
+                key: "i$2espgmzktnj99$0",
               },
               right: {
                 type: "Literal",
@@ -148,7 +148,7 @@ it("forHeaderParts", async (t) => {
                         end: { line: 15, column: 12 },
                       },
                       name: "seen",
-                      bindingKey: "seen$2espgmzktnj99$1",
+                      key: "seen$2espgmzktnj99$1",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -164,7 +164,7 @@ it("forHeaderParts", async (t) => {
                           end: { line: 15, column: 19 },
                         },
                         name: "seen",
-                        bindingKey: "seen$2espgmzktnj99$1",
+                        key: "seen$2espgmzktnj99$1",
                       },
                       right: {
                         type: "Identifier",
@@ -173,7 +173,7 @@ it("forHeaderParts", async (t) => {
                           end: { line: 15, column: 23 },
                         },
                         name: "i",
-                        bindingKey: "i$2espgmzktnj99$0",
+                        key: "i$2espgmzktnj99$0",
                       },
                     },
                   },
@@ -198,7 +198,7 @@ it("forHeaderParts", async (t) => {
                         end: { line: 16, column: 9 },
                       },
                       name: "i",
-                      bindingKey: "i$2espgmzktnj99$0",
+                      key: "i$2espgmzktnj99$0",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -214,7 +214,7 @@ it("forHeaderParts", async (t) => {
                           end: { line: 16, column: 13 },
                         },
                         name: "i",
-                        bindingKey: "i$2espgmzktnj99$0",
+                        key: "i$2espgmzktnj99$0",
                       },
                       right: {
                         type: "Literal",
@@ -243,7 +243,7 @@ it("forHeaderParts", async (t) => {
                 end: { line: 18, column: 17 },
               },
               name: "seen",
-              bindingKey: "seen$2espgmzktnj99$1",
+              key: "seen$2espgmzktnj99$1",
             },
           },
         ],

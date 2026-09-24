@@ -42,7 +42,7 @@ const svgNamespaceLater = cs.create(
                 end: { line: 13, column: 10 },
               },
               name: "xs",
-              bindingKey: "xs$1brs7fv34j5dk$0",
+              key: "xs$1brs7fv34j5dk$0",
             },
             init: {
               type: "CallExpression",
@@ -100,7 +100,7 @@ const svgNamespaceLater = cs.create(
                 end: { line: 14, column: 13 },
               },
               name: "shown",
-              bindingKey: "shown$1brs7fv34j5dk$1",
+              key: "shown$1brs7fv34j5dk$1",
             },
             init: {
               type: "CallExpression",
@@ -284,7 +284,7 @@ const svgNamespaceLater = cs.create(
                                   end: { line: 19, column: 21 },
                                 },
                                 name: "xs",
-                                bindingKey: "xs$1brs7fv34j5dk$0",
+                                key: "xs$1brs7fv34j5dk$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -326,7 +326,7 @@ const svgNamespaceLater = cs.create(
                               end: { line: 19, column: 32 },
                             },
                             name: "x",
-                            bindingKey: "x$1brs7fv34j5dk$2",
+                            key: "x$1brs7fv34j5dk$2",
                           },
                         ],
                         body: {
@@ -381,7 +381,7 @@ const svgNamespaceLater = cs.create(
                                     end: { line: 19, column: 63 },
                                   },
                                   name: "x",
-                                  bindingKey: "x$1brs7fv34j5dk$2",
+                                  key: "x$1brs7fv34j5dk$2",
                                 },
                               },
                             },
@@ -462,7 +462,7 @@ const svgNamespaceLater = cs.create(
                             end: { line: 20, column: 14 },
                           },
                           name: "shown",
-                          bindingKey: "shown$1brs7fv34j5dk$1",
+                          key: "shown$1brs7fv34j5dk$1",
                         },
                         property: {
                           type: "Identifier",
@@ -711,7 +711,7 @@ const svgNamespaceLater = cs.create(
                                 end: { line: 23, column: 31 },
                               },
                               name: "xs",
-                              bindingKey: "xs$1brs7fv34j5dk$0",
+                              key: "xs$1brs7fv34j5dk$0",
                             },
                             property: {
                               type: "Identifier",
@@ -863,7 +863,7 @@ const svgNamespaceLater = cs.create(
                                 end: { line: 24, column: 34 },
                               },
                               name: "shown",
-                              bindingKey: "shown$1brs7fv34j5dk$1",
+                              key: "shown$1brs7fv34j5dk$1",
                             },
                             property: {
                               type: "Identifier",

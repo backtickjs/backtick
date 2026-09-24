@@ -42,7 +42,7 @@ it("forPerTurnBinding", async (t) => {
                     end: { line: 13, column: 14 },
                   },
                   name: "last",
-                  bindingKey: "last$2s6lhx8c4k6ow$0",
+                  key: "last$2s6lhx8c4k6ow$0",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -91,7 +91,7 @@ it("forPerTurnBinding", async (t) => {
                       end: { line: 14, column: 16 },
                     },
                     name: "i",
-                    bindingKey: "i$2s6lhx8c4k6ow$1",
+                    key: "i$2s6lhx8c4k6ow$1",
                   },
                   init: {
                     type: "Literal",
@@ -118,7 +118,7 @@ it("forPerTurnBinding", async (t) => {
                   end: { line: 14, column: 23 },
                 },
                 name: "i",
-                bindingKey: "i$2s6lhx8c4k6ow$1",
+                key: "i$2s6lhx8c4k6ow$1",
               },
               right: {
                 type: "Literal",
@@ -143,7 +143,7 @@ it("forPerTurnBinding", async (t) => {
                   end: { line: 14, column: 30 },
                 },
                 name: "i",
-                bindingKey: "i$2s6lhx8c4k6ow$1",
+                key: "i$2s6lhx8c4k6ow$1",
               },
               right: {
                 type: "BinaryExpression",
@@ -159,7 +159,7 @@ it("forPerTurnBinding", async (t) => {
                     end: { line: 14, column: 34 },
                   },
                   name: "i",
-                  bindingKey: "i$2s6lhx8c4k6ow$1",
+                  key: "i$2s6lhx8c4k6ow$1",
                 },
                 right: {
                   type: "Literal",
@@ -198,7 +198,7 @@ it("forPerTurnBinding", async (t) => {
                         end: { line: 15, column: 12 },
                       },
                       name: "last",
-                      bindingKey: "last$2s6lhx8c4k6ow$0",
+                      key: "last$2s6lhx8c4k6ow$0",
                     },
                     right: {
                       type: "ArrowFunctionExpression",
@@ -214,7 +214,7 @@ it("forPerTurnBinding", async (t) => {
                           end: { line: 15, column: 22 },
                         },
                         name: "i",
-                        bindingKey: "i$2s6lhx8c4k6ow$1",
+                        key: "i$2s6lhx8c4k6ow$1",
                       },
                       expression: true,
                     },
@@ -242,7 +242,7 @@ it("forPerTurnBinding", async (t) => {
                   end: { line: 17, column: 17 },
                 },
                 name: "last",
-                bindingKey: "last$2s6lhx8c4k6ow$0",
+                key: "last$2s6lhx8c4k6ow$0",
               },
               arguments: [],
               optional: false,

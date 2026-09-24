@@ -20,7 +20,7 @@ export default cs.create(
         type: "Identifier",
         loc: { start: { line: 8, column: 19 }, end: { line: 8, column: 23 } },
         name: "name",
-        bindingKey: "name$2p3ed6wqsrdah$0",
+        key: "name$2p3ed6wqsrdah$0",
       },
     ],
     body: {
@@ -45,7 +45,7 @@ export default cs.create(
                   end: { line: 9, column: 13 },
                 },
                 name: "coins",
-                bindingKey: "coins$2p3ed6wqsrdah$1",
+                key: "coins$2p3ed6wqsrdah$1",
               },
               init: {
                 type: "ArrayExpression",
@@ -104,7 +104,7 @@ export default cs.create(
                   end: { line: 10, column: 13 },
                 },
                 name: "first",
-                bindingKey: "first$2p3ed6wqsrdah$2",
+                key: "first$2p3ed6wqsrdah$2",
               },
               init: {
                 type: "MemberExpression",
@@ -119,7 +119,7 @@ export default cs.create(
                     end: { line: 10, column: 21 },
                   },
                   name: "coins",
-                  bindingKey: "coins$2p3ed6wqsrdah$1",
+                  key: "coins$2p3ed6wqsrdah$1",
                 },
                 property: {
                   type: "Literal",
@@ -156,7 +156,7 @@ export default cs.create(
                   end: { line: 12, column: 13 },
                 },
                 name: "wrong",
-                bindingKey: "wrong$2p3ed6wqsrdah$3",
+                key: "wrong$2p3ed6wqsrdah$3",
               },
               init: {
                 type: "MemberExpression",
@@ -171,7 +171,7 @@ export default cs.create(
                     end: { line: 12, column: 21 },
                   },
                   name: "coins",
-                  bindingKey: "coins$2p3ed6wqsrdah$1",
+                  key: "coins$2p3ed6wqsrdah$1",
                 },
                 property: {
                   type: "Identifier",
@@ -180,7 +180,7 @@ export default cs.create(
                     end: { line: 12, column: 26 },
                   },
                   name: "name",
-                  bindingKey: "name$2p3ed6wqsrdah$0",
+                  key: "name$2p3ed6wqsrdah$0",
                 },
                 computed: true,
                 optional: false,
@@ -209,7 +209,7 @@ export default cs.create(
                   end: { line: 14, column: 13 },
                 },
                 name: "which",
-                bindingKey: "which$2p3ed6wqsrdah$4",
+                key: "which$2p3ed6wqsrdah$4",
               },
               init: {
                 type: "MemberExpression",
@@ -232,7 +232,7 @@ export default cs.create(
                     end: { line: 14, column: 27 },
                   },
                   name: "name",
-                  bindingKey: "name$2p3ed6wqsrdah$0",
+                  key: "name$2p3ed6wqsrdah$0",
                 },
                 computed: true,
                 optional: false,
@@ -267,7 +267,7 @@ export default cs.create(
                   end: { line: 15, column: 14 },
                 },
                 name: "first",
-                bindingKey: "first$2p3ed6wqsrdah$2",
+                key: "first$2p3ed6wqsrdah$2",
               },
               right: {
                 type: "Identifier",
@@ -276,7 +276,7 @@ export default cs.create(
                   end: { line: 15, column: 22 },
                 },
                 name: "wrong",
-                bindingKey: "wrong$2p3ed6wqsrdah$3",
+                key: "wrong$2p3ed6wqsrdah$3",
               },
             },
             right: {
@@ -286,7 +286,7 @@ export default cs.create(
                 end: { line: 15, column: 30 },
               },
               name: "which",
-              bindingKey: "which$2p3ed6wqsrdah$4",
+              key: "which$2p3ed6wqsrdah$4",
             },
           },
         },

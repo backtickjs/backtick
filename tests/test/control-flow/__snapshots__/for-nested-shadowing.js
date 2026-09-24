@@ -42,7 +42,7 @@ it("forNestedShadowing", async (t) => {
                     end: { line: 13, column: 13 },
                   },
                   name: "out",
-                  bindingKey: "out$lj6vk8127ex6$0",
+                  key: "out$lj6vk8127ex6$0",
                 },
                 init: {
                   type: "Literal",
@@ -82,7 +82,7 @@ it("forNestedShadowing", async (t) => {
                       end: { line: 14, column: 16 },
                     },
                     name: "i",
-                    bindingKey: "i$lj6vk8127ex6$1",
+                    key: "i$lj6vk8127ex6$1",
                   },
                   init: {
                     type: "Literal",
@@ -109,7 +109,7 @@ it("forNestedShadowing", async (t) => {
                   end: { line: 14, column: 23 },
                 },
                 name: "i",
-                bindingKey: "i$lj6vk8127ex6$1",
+                key: "i$lj6vk8127ex6$1",
               },
               right: {
                 type: "Literal",
@@ -134,7 +134,7 @@ it("forNestedShadowing", async (t) => {
                   end: { line: 14, column: 30 },
                 },
                 name: "i",
-                bindingKey: "i$lj6vk8127ex6$1",
+                key: "i$lj6vk8127ex6$1",
               },
               right: {
                 type: "BinaryExpression",
@@ -150,7 +150,7 @@ it("forNestedShadowing", async (t) => {
                     end: { line: 14, column: 34 },
                   },
                   name: "i",
-                  bindingKey: "i$lj6vk8127ex6$1",
+                  key: "i$lj6vk8127ex6$1",
                 },
                 right: {
                   type: "Literal",
@@ -190,7 +190,7 @@ it("forNestedShadowing", async (t) => {
                           end: { line: 15, column: 15 },
                         },
                         name: "i",
-                        bindingKey: "i$lj6vk8127ex6$2",
+                        key: "i$lj6vk8127ex6$2",
                       },
                       init: {
                         type: "Literal",
@@ -230,7 +230,7 @@ it("forNestedShadowing", async (t) => {
                             end: { line: 16, column: 18 },
                           },
                           name: "j",
-                          bindingKey: "j$lj6vk8127ex6$3",
+                          key: "j$lj6vk8127ex6$3",
                         },
                         init: {
                           type: "Literal",
@@ -257,7 +257,7 @@ it("forNestedShadowing", async (t) => {
                         end: { line: 16, column: 25 },
                       },
                       name: "j",
-                      bindingKey: "j$lj6vk8127ex6$3",
+                      key: "j$lj6vk8127ex6$3",
                     },
                     right: {
                       type: "Literal",
@@ -282,7 +282,7 @@ it("forNestedShadowing", async (t) => {
                         end: { line: 16, column: 32 },
                       },
                       name: "j",
-                      bindingKey: "j$lj6vk8127ex6$3",
+                      key: "j$lj6vk8127ex6$3",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -298,7 +298,7 @@ it("forNestedShadowing", async (t) => {
                           end: { line: 16, column: 36 },
                         },
                         name: "j",
-                        bindingKey: "j$lj6vk8127ex6$3",
+                        key: "j$lj6vk8127ex6$3",
                       },
                       right: {
                         type: "Literal",
@@ -337,7 +337,7 @@ it("forNestedShadowing", async (t) => {
                               end: { line: 17, column: 13 },
                             },
                             name: "out",
-                            bindingKey: "out$lj6vk8127ex6$0",
+                            key: "out$lj6vk8127ex6$0",
                           },
                           right: {
                             type: "BinaryExpression",
@@ -360,7 +360,7 @@ it("forNestedShadowing", async (t) => {
                                   end: { line: 17, column: 19 },
                                 },
                                 name: "out",
-                                bindingKey: "out$lj6vk8127ex6$0",
+                                key: "out$lj6vk8127ex6$0",
                               },
                               right: {
                                 type: "Identifier",
@@ -369,7 +369,7 @@ it("forNestedShadowing", async (t) => {
                                   end: { line: 17, column: 23 },
                                 },
                                 name: "i",
-                                bindingKey: "i$lj6vk8127ex6$2",
+                                key: "i$lj6vk8127ex6$2",
                               },
                             },
                             right: {
@@ -379,7 +379,7 @@ it("forNestedShadowing", async (t) => {
                                 end: { line: 17, column: 27 },
                               },
                               name: "j",
-                              bindingKey: "j$lj6vk8127ex6$3",
+                              key: "j$lj6vk8127ex6$3",
                             },
                           },
                         },
@@ -403,7 +403,7 @@ it("forNestedShadowing", async (t) => {
                 end: { line: 20, column: 16 },
               },
               name: "out",
-              bindingKey: "out$lj6vk8127ex6$0",
+              key: "out$lj6vk8127ex6$0",
             },
           },
         ],

@@ -36,7 +36,7 @@ function addOwnTotal(lhs, rhs) {
                   end: { line: 8, column: 13 },
                 },
                 name: "total",
-                bindingKey: "total$3ujapqmnmm2ra$0",
+                key: "total$3ujapqmnmm2ra$0",
               },
               init: {
                 type: "Literal",
@@ -66,7 +66,7 @@ function addOwnTotal(lhs, rhs) {
                 end: { line: 9, column: 9 },
               },
               name: "total",
-              bindingKey: "total$3ujapqmnmm2ra$0",
+              key: "total$3ujapqmnmm2ra$0",
             },
             right: {
               type: "BinaryExpression",
@@ -82,7 +82,7 @@ function addOwnTotal(lhs, rhs) {
                   end: { line: 9, column: 17 },
                 },
                 name: "total",
-                bindingKey: "total$3ujapqmnmm2ra$0",
+                key: "total$3ujapqmnmm2ra$0",
               },
               right: {
                 type: "Splice",
@@ -115,7 +115,7 @@ function addOwnTotal(lhs, rhs) {
                 end: { line: 10, column: 9 },
               },
               name: "total",
-              bindingKey: "total$3ujapqmnmm2ra$0",
+              key: "total$3ujapqmnmm2ra$0",
             },
             right: {
               type: "BinaryExpression",
@@ -131,7 +131,7 @@ function addOwnTotal(lhs, rhs) {
                   end: { line: 10, column: 17 },
                 },
                 name: "total",
-                bindingKey: "total$3ujapqmnmm2ra$0",
+                key: "total$3ujapqmnmm2ra$0",
               },
               right: {
                 type: "Splice",
@@ -157,7 +157,7 @@ function addOwnTotal(lhs, rhs) {
               end: { line: 11, column: 16 },
             },
             name: "total",
-            bindingKey: "total$3ujapqmnmm2ra$0",
+            key: "total$3ujapqmnmm2ra$0",
           },
         },
       ],
@@ -196,7 +196,7 @@ it("shadowing", async (t) => {
                     end: { line: 21, column: 35 },
                   },
                   name: "total",
-                  bindingKey: "total$3ujapqmnmm2ra$1",
+                  key: "total$3ujapqmnmm2ra$1",
                 }),
               ),
               100,
@@ -231,7 +231,7 @@ it("shadowing", async (t) => {
                     end: { line: 20, column: 17 },
                   },
                   name: "total",
-                  bindingKey: "total$3ujapqmnmm2ra$1",
+                  key: "total$3ujapqmnmm2ra$1",
                 },
                 init: {
                   type: "Literal",

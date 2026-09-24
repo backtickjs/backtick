@@ -44,7 +44,7 @@ function wrapShadowed(fragment) {
                   end: { line: 16, column: 15 },
                 },
                 name: "total",
-                bindingKey: "total$1wiy7dknp0llv$0",
+                key: "total$1wiy7dknp0llv$0",
               },
               init: {
                 type: "Literal",
@@ -82,7 +82,7 @@ function wrapShadowed(fragment) {
                       end: { line: 18, column: 17 },
                     },
                     name: "total",
-                    bindingKey: "total$1wiy7dknp0llv$1",
+                    key: "total$1wiy7dknp0llv$1",
                   },
                   init: {
                     type: "Literal",
@@ -115,7 +115,7 @@ function wrapShadowed(fragment) {
                     end: { line: 19, column: 18 },
                   },
                   name: "total",
-                  bindingKey: "total$1wiy7dknp0llv$1",
+                  key: "total$1wiy7dknp0llv$1",
                 },
                 right: {
                   type: "Splice",

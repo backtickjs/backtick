@@ -41,7 +41,7 @@ it("objectEntries", async (t) => {
                     end: { line: 12, column: 16 },
                   },
                   name: "held",
-                  bindingKey: "held$txb5yf5uyd2o$0",
+                  key: "held$txb5yf5uyd2o$0",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -130,7 +130,7 @@ it("objectEntries", async (t) => {
                     end: { line: 13, column: 19 },
                   },
                   name: "written",
-                  bindingKey: "written$txb5yf5uyd2o$1",
+                  key: "written$txb5yf5uyd2o$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -215,7 +215,7 @@ it("objectEntries", async (t) => {
                                 end: { line: 14, column: 27 },
                               },
                               name: "held",
-                              bindingKey: "held$txb5yf5uyd2o$0",
+                              key: "held$txb5yf5uyd2o$0",
                             },
                           ],
                           optional: false,
@@ -246,7 +246,7 @@ it("objectEntries", async (t) => {
                                 end: { line: 14, column: 38 },
                               },
                               name: "pair",
-                              bindingKey: "pair$txb5yf5uyd2o$2",
+                              key: "pair$txb5yf5uyd2o$2",
                             },
                           ],
                           body: {
@@ -269,7 +269,7 @@ it("objectEntries", async (t) => {
                                     end: { line: 14, column: 48 },
                                   },
                                   name: "pair",
-                                  bindingKey: "pair$txb5yf5uyd2o$2",
+                                  key: "pair$txb5yf5uyd2o$2",
                                 },
                                 property: {
                                   type: "Literal",
@@ -327,7 +327,7 @@ it("objectEntries", async (t) => {
                                         end: { line: 14, column: 72 },
                                       },
                                       name: "pair",
-                                      bindingKey: "pair$txb5yf5uyd2o$2",
+                                      key: "pair$txb5yf5uyd2o$2",
                                     },
                                     property: {
                                       type: "Literal",
@@ -389,7 +389,7 @@ it("objectEntries", async (t) => {
                       end: { line: 16, column: 20 },
                     },
                     name: "written",
-                    bindingKey: "written$txb5yf5uyd2o$1",
+                    key: "written$txb5yf5uyd2o$1",
                   },
                   property: {
                     type: "Identifier",
@@ -424,7 +424,7 @@ it("objectEntries", async (t) => {
                     end: { line: 16, column: 38 },
                   },
                   name: "written",
-                  bindingKey: "written$txb5yf5uyd2o$1",
+                  key: "written$txb5yf5uyd2o$1",
                 },
                 property: {
                   type: "Identifier",

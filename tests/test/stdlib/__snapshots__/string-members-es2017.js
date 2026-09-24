@@ -42,7 +42,7 @@ it("stringMembersEs2017", async (t) => {
                     end: { line: 13, column: 16 },
                   },
                   name: "word",
-                  bindingKey: "word$376ffut9l2xr3$0",
+                  key: "word$376ffut9l2xr3$0",
                 },
                 init: {
                   type: "Literal",
@@ -115,7 +115,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 15, column: 20 },
                             },
                             name: "word",
-                            bindingKey: "word$376ffut9l2xr3$0",
+                            key: "word$376ffut9l2xr3$0",
                           },
                           property: {
                             type: "Identifier",
@@ -168,7 +168,7 @@ it("stringMembersEs2017", async (t) => {
                             end: { line: 15, column: 45 },
                           },
                           name: "word",
-                          bindingKey: "word$376ffut9l2xr3$0",
+                          key: "word$376ffut9l2xr3$0",
                         },
                         property: {
                           type: "Identifier",
@@ -374,7 +374,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 17, column: 17 },
                             },
                             name: "word",
-                            bindingKey: "word$376ffut9l2xr3$0",
+                            key: "word$376ffut9l2xr3$0",
                           },
                           property: {
                             type: "Identifier",
@@ -418,7 +418,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 17, column: 29 },
                             },
                             name: "word",
-                            bindingKey: "word$376ffut9l2xr3$0",
+                            key: "word$376ffut9l2xr3$0",
                           },
                           property: {
                             type: "Identifier",
@@ -471,7 +471,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 17, column: 42 },
                             },
                             name: "word",
-                            bindingKey: "word$376ffut9l2xr3$0",
+                            key: "word$376ffut9l2xr3$0",
                           },
                           property: {
                             type: "Identifier",
@@ -641,7 +641,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 19, column: 48 },
                             },
                             name: "found",
-                            bindingKey: "found$376ffut9l2xr3$1",
+                            key: "found$376ffut9l2xr3$1",
                           },
                           {
                             type: "Identifier",
@@ -650,7 +650,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 19, column: 56 },
                             },
                             name: "offset",
-                            bindingKey: "offset$376ffut9l2xr3$2",
+                            key: "offset$376ffut9l2xr3$2",
                           },
                         ],
                         body: {
@@ -675,7 +675,7 @@ it("stringMembersEs2017", async (t) => {
                               end: { line: 19, column: 72 },
                             },
                             name: "offset",
-                            bindingKey: "offset$376ffut9l2xr3$2",
+                            key: "offset$376ffut9l2xr3$2",
                           },
                         },
                         expression: true,

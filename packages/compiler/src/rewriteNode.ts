@@ -402,7 +402,7 @@ function rewriteNodeImpl(
                 type: "Identifier",
                 loc: loc(declaration.name),
                 name: name.text,
-                bindingKey: bindingKey(state, name),
+                key: bindingKey(state, name),
               } as ES.Identifier,
               init: initializer.runtime as ES.Expression,
             },
@@ -612,7 +612,7 @@ function rewriteNodeImpl(
           type: "Identifier",
           loc: loc(name),
           name: name.text,
-          bindingKey: bindingKey(state, name),
+          key: bindingKey(state, name),
         } as ES.Identifier,
       };
     }
@@ -752,7 +752,7 @@ function rewriteNodeImpl(
         type: "Identifier",
         loc: loc(node),
         name: node.text,
-        bindingKey: bindingKey(state, node),
+        key: bindingKey(state, node),
       } as ES.Identifier,
     };
   }
@@ -1065,7 +1065,7 @@ function rewriteNodeImpl(
                   name: tagName,
                   ...(held
                     ? {
-                        bindingKey: bindingKey(
+                        key: bindingKey(
                           state,
                           opening.tagName as ts.Identifier,
                         ),
@@ -1086,7 +1086,7 @@ function rewriteNodeImpl(
                       name: tagName,
                       ...(held
                         ? {
-                            bindingKey: bindingKey(
+                            key: bindingKey(
                               state,
                               node.closingElement.tagName as ts.Identifier,
                             ),
@@ -1286,7 +1286,7 @@ function rewriteNodeImpl(
                 type: "Identifier",
                 loc: loc(param.name),
                 name: param.name.text,
-                bindingKey: bindingKey(state, param.name),
+                key: bindingKey(state, param.name),
               }) as ES.Identifier,
           ),
           body: body.runtime as ES.Expression | ES.BlockStatement,

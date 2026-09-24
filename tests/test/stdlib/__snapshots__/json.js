@@ -42,7 +42,7 @@ it("jsonRoundTrip", async (t) => {
                     end: { line: 13, column: 19 },
                   },
                   name: "numbers",
-                  bindingKey: "numbers$1nb9j9gha9a2e$0",
+                  key: "numbers$1nb9j9gha9a2e$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -136,7 +136,7 @@ it("jsonRoundTrip", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "text",
-                  bindingKey: "text$1nb9j9gha9a2e$1",
+                  key: "text$1nb9j9gha9a2e$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -205,7 +205,7 @@ it("jsonRoundTrip", async (t) => {
                     end: { line: 15, column: 16 },
                   },
                   name: "flag",
-                  bindingKey: "flag$1nb9j9gha9a2e$2",
+                  key: "flag$1nb9j9gha9a2e$2",
                 },
                 init: {
                   type: "CallExpression",
@@ -274,7 +274,7 @@ it("jsonRoundTrip", async (t) => {
                     end: { line: 16, column: 16 },
                   },
                   name: "held",
-                  bindingKey: "held$1nb9j9gha9a2e$3",
+                  key: "held$1nb9j9gha9a2e$3",
                 },
                 init: {
                   type: "CallExpression",
@@ -398,7 +398,7 @@ it("jsonRoundTrip", async (t) => {
                     end: { line: 17, column: 16 },
                   },
                   name: "back",
-                  bindingKey: "back$1nb9j9gha9a2e$4",
+                  key: "back$1nb9j9gha9a2e$4",
                 },
                 init: {
                   type: "CallExpression",
@@ -439,7 +439,7 @@ it("jsonRoundTrip", async (t) => {
                         end: { line: 17, column: 37 },
                       },
                       name: "numbers",
-                      bindingKey: "numbers$1nb9j9gha9a2e$0",
+                      key: "numbers$1nb9j9gha9a2e$0",
                     },
                   ],
                   optional: false,
@@ -530,7 +530,7 @@ it("jsonRoundTrip", async (t) => {
                                     end: { line: 19, column: 15 },
                                   },
                                   name: "numbers",
-                                  bindingKey: "numbers$1nb9j9gha9a2e$0",
+                                  key: "numbers$1nb9j9gha9a2e$0",
                                 },
                                 right: {
                                   type: "Literal",
@@ -548,7 +548,7 @@ it("jsonRoundTrip", async (t) => {
                                   end: { line: 21, column: 12 },
                                 },
                                 name: "text",
-                                bindingKey: "text$1nb9j9gha9a2e$1",
+                                key: "text$1nb9j9gha9a2e$1",
                               },
                             },
                             right: {
@@ -567,7 +567,7 @@ it("jsonRoundTrip", async (t) => {
                               end: { line: 23, column: 12 },
                             },
                             name: "flag",
-                            bindingKey: "flag$1nb9j9gha9a2e$2",
+                            key: "flag$1nb9j9gha9a2e$2",
                           },
                         },
                         right: {
@@ -586,7 +586,7 @@ it("jsonRoundTrip", async (t) => {
                           end: { line: 25, column: 12 },
                         },
                         name: "held",
-                        bindingKey: "held$1nb9j9gha9a2e$3",
+                        key: "held$1nb9j9gha9a2e$3",
                       },
                     },
                     right: {
@@ -637,7 +637,7 @@ it("jsonRoundTrip", async (t) => {
                           end: { line: 27, column: 27 },
                         },
                         name: "back",
-                        bindingKey: "back$1nb9j9gha9a2e$4",
+                        key: "back$1nb9j9gha9a2e$4",
                       },
                     ],
                     optional: false,
@@ -723,7 +723,7 @@ it("jsonRoundTrip", async (t) => {
                           end: { line: 29, column: 38 },
                         },
                         name: "held",
-                        bindingKey: "held$1nb9j9gha9a2e$3",
+                        key: "held$1nb9j9gha9a2e$3",
                       },
                     ],
                     optional: false,

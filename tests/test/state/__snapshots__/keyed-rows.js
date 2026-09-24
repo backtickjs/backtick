@@ -46,7 +46,7 @@ async function SwappableRows() {
                   end: { line: 13, column: 13 },
                 },
                 name: "ids",
-                bindingKey: "ids$89rxx0ivccc7$0",
+                key: "ids$89rxx0ivccc7$0",
               },
               init: {
                 type: "CallExpression",
@@ -120,7 +120,7 @@ async function SwappableRows() {
                   end: { line: 14, column: 14 },
                 },
                 name: "swap",
-                bindingKey: "swap$89rxx0ivccc7$1",
+                key: "swap$89rxx0ivccc7$1",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -157,7 +157,7 @@ async function SwappableRows() {
                               end: { line: 15, column: 16 },
                             },
                             name: "held",
-                            bindingKey: "held$89rxx0ivccc7$3",
+                            key: "held$89rxx0ivccc7$3",
                           },
                           init: {
                             type: "CallExpression",
@@ -178,7 +178,7 @@ async function SwappableRows() {
                                   end: { line: 15, column: 22 },
                                 },
                                 name: "ids",
-                                bindingKey: "ids$89rxx0ivccc7$0",
+                                key: "ids$89rxx0ivccc7$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -222,7 +222,7 @@ async function SwappableRows() {
                               end: { line: 16, column: 9 },
                             },
                             name: "ids",
-                            bindingKey: "ids$89rxx0ivccc7$0",
+                            key: "ids$89rxx0ivccc7$0",
                           },
                           property: {
                             type: "Identifier",
@@ -267,7 +267,7 @@ async function SwappableRows() {
                                       end: { line: 16, column: 18 },
                                     },
                                     name: "held",
-                                    bindingKey: "held$89rxx0ivccc7$3",
+                                    key: "held$89rxx0ivccc7$3",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -302,7 +302,7 @@ async function SwappableRows() {
                                         end: { line: 16, column: 31 },
                                       },
                                       name: "held",
-                                      bindingKey: "held$89rxx0ivccc7$3",
+                                      key: "held$89rxx0ivccc7$3",
                                     },
                                     property: {
                                       type: "Literal",
@@ -351,7 +351,7 @@ async function SwappableRows() {
                                     end: { line: 16, column: 48 },
                                   },
                                   name: "held",
-                                  bindingKey: "held$89rxx0ivccc7$3",
+                                  key: "held$89rxx0ivccc7$3",
                                 },
                                 property: {
                                   type: "Literal",
@@ -396,7 +396,7 @@ async function SwappableRows() {
                   end: { line: 18, column: 14 },
                 },
                 name: "drop",
-                bindingKey: "drop$89rxx0ivccc7$2",
+                key: "drop$89rxx0ivccc7$2",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -437,7 +437,7 @@ async function SwappableRows() {
                               end: { line: 19, column: 9 },
                             },
                             name: "ids",
-                            bindingKey: "ids$89rxx0ivccc7$0",
+                            key: "ids$89rxx0ivccc7$0",
                           },
                           property: {
                             type: "Identifier",
@@ -482,7 +482,7 @@ async function SwappableRows() {
                                       end: { line: 19, column: 17 },
                                     },
                                     name: "ids",
-                                    bindingKey: "ids$89rxx0ivccc7$0",
+                                    key: "ids$89rxx0ivccc7$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -524,7 +524,7 @@ async function SwappableRows() {
                                       end: { line: 19, column: 34 },
                                     },
                                     name: "id",
-                                    bindingKey: "id$89rxx0ivccc7$4",
+                                    key: "id$89rxx0ivccc7$4",
                                   },
                                 ],
                                 body: {
@@ -541,7 +541,7 @@ async function SwappableRows() {
                                       end: { line: 19, column: 41 },
                                     },
                                     name: "id",
-                                    bindingKey: "id$89rxx0ivccc7$4",
+                                    key: "id$89rxx0ivccc7$4",
                                   },
                                   right: {
                                     type: "Literal",
@@ -652,7 +652,7 @@ async function SwappableRows() {
                             end: { line: 23, column: 27 },
                           },
                           name: "swap",
-                          bindingKey: "swap$89rxx0ivccc7$1",
+                          key: "swap$89rxx0ivccc7$1",
                         },
                       },
                     },
@@ -743,7 +743,7 @@ async function SwappableRows() {
                             end: { line: 24, column: 27 },
                           },
                           name: "drop",
-                          bindingKey: "drop$89rxx0ivccc7$2",
+                          key: "drop$89rxx0ivccc7$2",
                         },
                       },
                     },
@@ -879,7 +879,7 @@ async function SwappableRows() {
                                     end: { line: 26, column: 24 },
                                   },
                                   name: "ids",
-                                  bindingKey: "ids$89rxx0ivccc7$0",
+                                  key: "ids$89rxx0ivccc7$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -930,7 +930,7 @@ async function SwappableRows() {
                                 end: { line: 27, column: 16 },
                               },
                               name: "id",
-                              bindingKey: "id$89rxx0ivccc7$5",
+                              key: "id$89rxx0ivccc7$5",
                             },
                           ],
                           body: {
@@ -985,7 +985,7 @@ async function SwappableRows() {
                                       end: { line: 27, column: 47 },
                                     },
                                     name: "id",
-                                    bindingKey: "id$89rxx0ivccc7$5",
+                                    key: "id$89rxx0ivccc7$5",
                                   },
                                 },
                               },

@@ -117,7 +117,7 @@ async function Items() {
                   end: { line: 12, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3crw4saj766qu$0",
+                key: "n$3crw4saj766qu$0",
               },
             ],
             body: {
@@ -172,7 +172,7 @@ async function Items() {
                         end: { line: 12, column: 38 },
                       },
                       name: "n",
-                      bindingKey: "n$3crw4saj766qu$0",
+                      key: "n$3crw4saj766qu$0",
                     },
                   },
                 },

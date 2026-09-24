@@ -21,7 +21,7 @@ const read = cs.create(
         type: "Identifier",
         loc: { start: { line: 8, column: 17 }, end: { line: 8, column: 18 } },
         name: "o",
-        bindingKey: "o$1pn78z89zmc5d$0",
+        key: "o$1pn78z89zmc5d$0",
       },
     ],
     body: {
@@ -51,7 +51,7 @@ const read = cs.create(
                     end: { line: 9, column: 11 },
                   },
                   name: "o",
-                  bindingKey: "o$1pn78z89zmc5d$0",
+                  key: "o$1pn78z89zmc5d$0",
                 },
                 property: {
                   type: "Identifier",
@@ -96,7 +96,7 @@ const read = cs.create(
                           end: { line: 9, column: 20 },
                         },
                         name: "o",
-                        bindingKey: "o$1pn78z89zmc5d$0",
+                        key: "o$1pn78z89zmc5d$0",
                       },
                       property: {
                         type: "Identifier",

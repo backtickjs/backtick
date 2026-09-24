@@ -54,7 +54,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                       end: { line: 34, column: 35 },
                     },
                     name: "total",
-                    bindingKey: "total$1rcr3g75v4qq5$0",
+                    key: "total$1rcr3g75v4qq5$0",
                   }),
                 ),
               ),
@@ -92,7 +92,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                       end: { line: 33, column: 17 },
                     },
                     name: "total",
-                    bindingKey: "total$1rcr3g75v4qq5$0",
+                    key: "total$1rcr3g75v4qq5$0",
                   },
                   init: {
                     type: "Literal",
@@ -126,7 +126,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                       end: { line: 34, column: 17 },
                     },
                     name: "first",
-                    bindingKey: "first$1rcr3g75v4qq5$1",
+                    key: "first$1rcr3g75v4qq5$1",
                   },
                   init: {
                     type: "Splice",
@@ -167,7 +167,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                           end: { line: 36, column: 19 },
                         },
                         name: "total",
-                        bindingKey: "total$1rcr3g75v4qq5$2",
+                        key: "total$1rcr3g75v4qq5$2",
                       },
                       init: {
                         type: "Literal",
@@ -207,7 +207,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                           end: { line: 37, column: 20 },
                         },
                         name: "first",
-                        bindingKey: "first$1rcr3g75v4qq5$1",
+                        key: "first$1rcr3g75v4qq5$1",
                       },
                       right: {
                         type: "Identifier",
@@ -216,7 +216,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                           end: { line: 37, column: 28 },
                         },
                         name: "total",
-                        bindingKey: "total$1rcr3g75v4qq5$2",
+                        key: "total$1rcr3g75v4qq5$2",
                       },
                     },
                     right: {

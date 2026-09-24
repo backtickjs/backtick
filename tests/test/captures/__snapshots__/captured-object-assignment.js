@@ -65,7 +65,7 @@ it("capturedObjectAssignment", async (t) => {
                               end: { line: 15, column: 15 },
                             },
                             name: "counter",
-                            bindingKey: "counter$385xpgt8q0ek2$0",
+                            key: "counter$385xpgt8q0ek2$0",
                           },
                           property: {
                             type: "Identifier",
@@ -123,7 +123,7 @@ it("capturedObjectAssignment", async (t) => {
                     end: { line: 13, column: 19 },
                   },
                   name: "counter",
-                  bindingKey: "counter$385xpgt8q0ek2$0",
+                  key: "counter$385xpgt8q0ek2$0",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -185,7 +185,7 @@ it("capturedObjectAssignment", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "bump",
-                  bindingKey: "bump$385xpgt8q0ek2$1",
+                  key: "bump$385xpgt8q0ek2$1",
                 },
                 init: {
                   type: "Splice",
@@ -217,7 +217,7 @@ it("capturedObjectAssignment", async (t) => {
                   end: { line: 17, column: 10 },
                 },
                 name: "bump",
-                bindingKey: "bump$385xpgt8q0ek2$1",
+                key: "bump$385xpgt8q0ek2$1",
               },
               arguments: [],
               optional: false,
@@ -242,7 +242,7 @@ it("capturedObjectAssignment", async (t) => {
                   end: { line: 18, column: 10 },
                 },
                 name: "bump",
-                bindingKey: "bump$385xpgt8q0ek2$1",
+                key: "bump$385xpgt8q0ek2$1",
               },
               arguments: [],
               optional: false,
@@ -267,7 +267,7 @@ it("capturedObjectAssignment", async (t) => {
                   end: { line: 19, column: 20 },
                 },
                 name: "counter",
-                bindingKey: "counter$385xpgt8q0ek2$0",
+                key: "counter$385xpgt8q0ek2$0",
               },
               property: {
                 type: "Identifier",

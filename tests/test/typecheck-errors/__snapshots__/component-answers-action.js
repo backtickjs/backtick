@@ -35,7 +35,7 @@ async function Panel() {
                   end: { line: 8, column: 11 },
                 },
                 name: "n",
-                bindingKey: "n$1y32lnuqpkjgj$0",
+                key: "n$1y32lnuqpkjgj$0",
               },
               init: {
                 type: "CallExpression",
@@ -88,7 +88,7 @@ async function Panel() {
                   end: { line: 9, column: 5 },
                 },
                 name: "n",
-                bindingKey: "n$1y32lnuqpkjgj$0",
+                key: "n$1y32lnuqpkjgj$0",
               },
               property: {
                 type: "Identifier",

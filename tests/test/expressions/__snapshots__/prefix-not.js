@@ -26,7 +26,7 @@ it("prefixNot", async (t) => {
               end: { line: 10, column: 13 },
             },
             name: "ready",
-            bindingKey: "ready$3rwumhu91n08h$0",
+            key: "ready$3rwumhu91n08h$0",
           },
           {
             type: "Identifier",
@@ -35,7 +35,7 @@ it("prefixNot", async (t) => {
               end: { line: 10, column: 29 },
             },
             name: "count",
-            bindingKey: "count$3rwumhu91n08h$1",
+            key: "count$3rwumhu91n08h$1",
           },
         ],
         body: {
@@ -66,7 +66,7 @@ it("prefixNot", async (t) => {
                     end: { line: 11, column: 16 },
                   },
                   name: "ready",
-                  bindingKey: "ready$3rwumhu91n08h$0",
+                  key: "ready$3rwumhu91n08h$0",
                 },
               },
               consequent: {
@@ -129,7 +129,7 @@ it("prefixNot", async (t) => {
                         end: { line: 14, column: 20 },
                       },
                       name: "count",
-                      bindingKey: "count$3rwumhu91n08h$1",
+                      key: "count$3rwumhu91n08h$1",
                     },
                     right: {
                       type: "Literal",

@@ -30,7 +30,7 @@ it("negation", async (t) => {
               end: { line: 14, column: 13 },
             },
             name: "count",
-            bindingKey: "count$31nhc0aoqh9gi$0",
+            key: "count$31nhc0aoqh9gi$0",
           },
         ],
         body: {
@@ -61,7 +61,7 @@ it("negation", async (t) => {
                       end: { line: 15, column: 17 },
                     },
                     name: "floor",
-                    bindingKey: "floor$31nhc0aoqh9gi$1",
+                    key: "floor$31nhc0aoqh9gi$1",
                   },
                   init: {
                     type: "UnaryExpression",
@@ -104,7 +104,7 @@ it("negation", async (t) => {
                       end: { line: 16, column: 16 },
                     },
                     name: "step",
-                    bindingKey: "step$31nhc0aoqh9gi$2",
+                    key: "step$31nhc0aoqh9gi$2",
                   },
                   init: {
                     type: "UnaryExpression",
@@ -121,7 +121,7 @@ it("negation", async (t) => {
                         end: { line: 16, column: 25 },
                       },
                       name: "count",
-                      bindingKey: "count$31nhc0aoqh9gi$0",
+                      key: "count$31nhc0aoqh9gi$0",
                     },
                   },
                 },
@@ -154,7 +154,7 @@ it("negation", async (t) => {
                       end: { line: 17, column: 18 },
                     },
                     name: "floor",
-                    bindingKey: "floor$31nhc0aoqh9gi$1",
+                    key: "floor$31nhc0aoqh9gi$1",
                   },
                   right: {
                     type: "Identifier",
@@ -163,7 +163,7 @@ it("negation", async (t) => {
                       end: { line: 17, column: 25 },
                     },
                     name: "step",
-                    bindingKey: "step$31nhc0aoqh9gi$2",
+                    key: "step$31nhc0aoqh9gi$2",
                   },
                 },
                 right: {

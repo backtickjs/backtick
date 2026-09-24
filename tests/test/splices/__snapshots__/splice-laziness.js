@@ -29,7 +29,7 @@ function guard(fragment) {
             end: { line: 13, column: 17 },
           },
           name: "flag",
-          bindingKey: "flag$3cvzb2rrvx0i4$0",
+          key: "flag$3cvzb2rrvx0i4$0",
         },
       ],
       body: {
@@ -49,7 +49,7 @@ function guard(fragment) {
                 end: { line: 14, column: 12 },
               },
               name: "flag",
-              bindingKey: "flag$3cvzb2rrvx0i4$0",
+              key: "flag$3cvzb2rrvx0i4$0",
             },
             consequent: {
               type: "BlockStatement",

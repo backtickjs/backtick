@@ -33,7 +33,7 @@ const asserted = cs.create(
                 end: { line: 9, column: 9 },
               },
               name: "a",
-              bindingKey: "a$3mgqg6v7h2mni$0",
+              key: "a$3mgqg6v7h2mni$0",
             },
             init: {
               type: "Splice",
@@ -71,7 +71,7 @@ const asserted = cs.create(
               end: { line: 10, column: 15 },
             },
             name: "a",
-            bindingKey: "a$3mgqg6v7h2mni$0",
+            key: "a$3mgqg6v7h2mni$0",
           },
         },
       },

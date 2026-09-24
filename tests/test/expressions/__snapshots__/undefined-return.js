@@ -60,7 +60,7 @@ it("undefinedReturn", async (t) => {
                     end: { line: 18, column: 18 },
                   },
                   name: "stored",
-                  bindingKey: "stored$2qb372nig0g3z$0",
+                  key: "stored$2qb372nig0g3z$0",
                 },
                 init: {
                   type: "Splice",
@@ -94,7 +94,7 @@ it("undefinedReturn", async (t) => {
                     end: { line: 19, column: 18 },
                   },
                   name: "caught",
-                  bindingKey: "caught$2qb372nig0g3z$1",
+                  key: "caught$2qb372nig0g3z$1",
                 },
                 init: {
                   type: "CallExpression",

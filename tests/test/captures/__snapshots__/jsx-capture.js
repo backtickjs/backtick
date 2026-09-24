@@ -38,7 +38,7 @@ const script = cs.create(
                   end: { line: 13, column: 37 },
                 },
                 name: "x",
-                bindingKey: "x$g38hwxw7rhvi$0",
+                key: "x$g38hwxw7rhvi$0",
               },
               expression: true,
             }),
@@ -78,7 +78,7 @@ const script = cs.create(
                   end: { line: 12, column: 9 },
                 },
                 name: "x",
-                bindingKey: "x$g38hwxw7rhvi$0",
+                key: "x$g38hwxw7rhvi$0",
               },
               init: {
                 type: "Literal",

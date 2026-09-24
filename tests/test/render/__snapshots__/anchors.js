@@ -63,7 +63,7 @@ async function Rows() {
                   end: { line: 32, column: 13 },
                 },
                 name: "ids",
-                bindingKey: "ids$1l1sblr1an3g5$0",
+                key: "ids$1l1sblr1an3g5$0",
               },
               init: {
                 type: "CallExpression",
@@ -137,7 +137,7 @@ async function Rows() {
                   end: { line: 33, column: 15 },
                 },
                 name: "clear",
-                bindingKey: "clear$1l1sblr1an3g5$1",
+                key: "clear$1l1sblr1an3g5$1",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -178,7 +178,7 @@ async function Rows() {
                               end: { line: 34, column: 9 },
                             },
                             name: "ids",
-                            bindingKey: "ids$1l1sblr1an3g5$0",
+                            key: "ids$1l1sblr1an3g5$0",
                           },
                           property: {
                             type: "Identifier",
@@ -285,7 +285,7 @@ async function Rows() {
                             end: { line: 38, column: 28 },
                           },
                           name: "clear",
-                          bindingKey: "clear$1l1sblr1an3g5$1",
+                          key: "clear$1l1sblr1an3g5$1",
                         },
                       },
                     },
@@ -388,7 +388,7 @@ async function Rows() {
                                 end: { line: 39, column: 22 },
                               },
                               name: "ids",
-                              bindingKey: "ids$1l1sblr1an3g5$0",
+                              key: "ids$1l1sblr1an3g5$0",
                             },
                             property: {
                               type: "Identifier",
@@ -430,7 +430,7 @@ async function Rows() {
                             end: { line: 39, column: 34 },
                           },
                           name: "id",
-                          bindingKey: "id$1l1sblr1an3g5$2",
+                          key: "id$1l1sblr1an3g5$2",
                         },
                       ],
                       body: {
@@ -485,7 +485,7 @@ async function Rows() {
                                   end: { line: 39, column: 65 },
                                 },
                                 name: "id",
-                                bindingKey: "id$1l1sblr1an3g5$2",
+                                key: "id$1l1sblr1an3g5$2",
                               },
                             },
                           },

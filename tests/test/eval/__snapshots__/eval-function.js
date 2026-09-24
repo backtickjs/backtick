@@ -22,7 +22,7 @@ const greet = await bundler.run(
           type: "Identifier",
           loc: { start: { line: 8, column: 36 }, end: { line: 8, column: 40 } },
           name: "name",
-          bindingKey: "name$1061hn7xljcgj$0",
+          key: "name$1061hn7xljcgj$0",
         },
       ],
       body: {
@@ -38,7 +38,7 @@ const greet = await bundler.run(
           type: "Identifier",
           loc: { start: { line: 8, column: 64 }, end: { line: 8, column: 68 } },
           name: "name",
-          bindingKey: "name$1061hn7xljcgj$0",
+          key: "name$1061hn7xljcgj$0",
         },
       },
       expression: true,
@@ -66,7 +66,7 @@ const badge = await bundler.run(
             end: { line: 11, column: 11 },
           },
           name: "props",
-          bindingKey: "props$1061hn7xljcgj$1",
+          key: "props$1061hn7xljcgj$1",
         },
       ],
       body: {
@@ -124,7 +124,7 @@ const badge = await bundler.run(
                     end: { line: 11, column: 55 },
                   },
                   name: "props",
-                  bindingKey: "props$1061hn7xljcgj$1",
+                  key: "props$1061hn7xljcgj$1",
                 },
                 property: {
                   type: "Identifier",

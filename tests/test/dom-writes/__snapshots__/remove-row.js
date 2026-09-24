@@ -46,7 +46,7 @@ async function RemovableRows() {
                   end: { line: 13, column: 13 },
                 },
                 name: "ids",
-                bindingKey: "ids$1dh0kxf6cd5v6$0",
+                key: "ids$1dh0kxf6cd5v6$0",
               },
               init: {
                 type: "CallExpression",
@@ -247,7 +247,7 @@ async function RemovableRows() {
                                     end: { line: 17, column: 24 },
                                   },
                                   name: "ids",
-                                  bindingKey: "ids$1dh0kxf6cd5v6$0",
+                                  key: "ids$1dh0kxf6cd5v6$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -298,7 +298,7 @@ async function RemovableRows() {
                                 end: { line: 18, column: 16 },
                               },
                               name: "id",
-                              bindingKey: "id$1dh0kxf6cd5v6$1",
+                              key: "id$1dh0kxf6cd5v6$1",
                             },
                           ],
                           body: {
@@ -364,7 +364,7 @@ async function RemovableRows() {
                                           end: { line: 19, column: 33 },
                                         },
                                         name: "id",
-                                        bindingKey: "id$1dh0kxf6cd5v6$1",
+                                        key: "id$1dh0kxf6cd5v6$1",
                                       },
                                     },
                                   },
@@ -497,8 +497,7 @@ async function RemovableRows() {
                                                       },
                                                     },
                                                     name: "ids",
-                                                    bindingKey:
-                                                      "ids$1dh0kxf6cd5v6$0",
+                                                    key: "ids$1dh0kxf6cd5v6$0",
                                                   },
                                                   property: {
                                                     type: "Identifier",
@@ -579,8 +578,7 @@ async function RemovableRows() {
                                                               },
                                                             },
                                                             name: "ids",
-                                                            bindingKey:
-                                                              "ids$1dh0kxf6cd5v6$0",
+                                                            key: "ids$1dh0kxf6cd5v6$0",
                                                           },
                                                           property: {
                                                             type: "Identifier",
@@ -646,8 +644,7 @@ async function RemovableRows() {
                                                               },
                                                             },
                                                             name: "each",
-                                                            bindingKey:
-                                                              "each$1dh0kxf6cd5v6$2",
+                                                            key: "each$1dh0kxf6cd5v6$2",
                                                           },
                                                         ],
                                                         body: {
@@ -676,8 +673,7 @@ async function RemovableRows() {
                                                               },
                                                             },
                                                             name: "each",
-                                                            bindingKey:
-                                                              "each$1dh0kxf6cd5v6$2",
+                                                            key: "each$1dh0kxf6cd5v6$2",
                                                           },
                                                           right: {
                                                             type: "Identifier",
@@ -692,8 +688,7 @@ async function RemovableRows() {
                                                               },
                                                             },
                                                             name: "id",
-                                                            bindingKey:
-                                                              "id$1dh0kxf6cd5v6$1",
+                                                            key: "id$1dh0kxf6cd5v6$1",
                                                           },
                                                         },
                                                         expression: true,
@@ -749,7 +744,7 @@ async function RemovableRows() {
                                               end: { line: 26, column: 35 },
                                             },
                                             name: "id",
-                                            bindingKey: "id$1dh0kxf6cd5v6$1",
+                                            key: "id$1dh0kxf6cd5v6$1",
                                           },
                                         },
                                       },

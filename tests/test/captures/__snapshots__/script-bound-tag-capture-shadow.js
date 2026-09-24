@@ -48,7 +48,7 @@ function labelled(label) {
                     end: { line: 18, column: 25 },
                   },
                   name: "Card",
-                  bindingKey: "Card$2mv5sg07ackia$0",
+                  key: "Card$2mv5sg07ackia$0",
                 },
                 attributes: [
                   {
@@ -118,7 +118,7 @@ function labelled(label) {
                   end: { line: 17, column: 14 },
                 },
                 name: "Card",
-                bindingKey: "Card$2mv5sg07ackia$0",
+                key: "Card$2mv5sg07ackia$0",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -134,7 +134,7 @@ function labelled(label) {
                       end: { line: 17, column: 23 },
                     },
                     name: "props",
-                    bindingKey: "props$2mv5sg07ackia$1",
+                    key: "props$2mv5sg07ackia$1",
                   },
                 ],
                 body: {
@@ -195,7 +195,7 @@ function labelled(label) {
                               end: { line: 17, column: 61 },
                             },
                             name: "props",
-                            bindingKey: "props$2mv5sg07ackia$1",
+                            key: "props$2mv5sg07ackia$1",
                           },
                           property: {
                             type: "Identifier",
@@ -564,7 +564,7 @@ it("scriptBoundTagScope", async (t) => {
                     end: { line: 42, column: 17 },
                   },
                   name: "twice",
-                  bindingKey: "twice$2mv5sg07ackia$2",
+                  key: "twice$2mv5sg07ackia$2",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -580,7 +580,7 @@ it("scriptBoundTagScope", async (t) => {
                         end: { line: 42, column: 25 },
                       },
                       name: "Card",
-                      bindingKey: "Card$2mv5sg07ackia$3",
+                      key: "Card$2mv5sg07ackia$3",
                     },
                   ],
                   body: {
@@ -635,7 +635,7 @@ it("scriptBoundTagScope", async (t) => {
                               end: { line: 44, column: 15 },
                             },
                             name: "Card",
-                            bindingKey: "Card$2mv5sg07ackia$3",
+                            key: "Card$2mv5sg07ackia$3",
                           },
                           attributes: [
                             {
@@ -702,7 +702,7 @@ it("scriptBoundTagScope", async (t) => {
                               end: { line: 45, column: 15 },
                             },
                             name: "Card",
-                            bindingKey: "Card$2mv5sg07ackia$3",
+                            key: "Card$2mv5sg07ackia$3",
                           },
                           attributes: [
                             {
@@ -889,7 +889,7 @@ it("scriptBoundTagScope", async (t) => {
                         end: { line: 52, column: 16 },
                       },
                       name: "twice",
-                      bindingKey: "twice$2mv5sg07ackia$2",
+                      key: "twice$2mv5sg07ackia$2",
                     },
                     arguments: [
                       {
@@ -906,7 +906,7 @@ it("scriptBoundTagScope", async (t) => {
                               end: { line: 52, column: 23 },
                             },
                             name: "props",
-                            bindingKey: "props$2mv5sg07ackia$4",
+                            key: "props$2mv5sg07ackia$4",
                           },
                         ],
                         body: {
@@ -967,7 +967,7 @@ it("scriptBoundTagScope", async (t) => {
                                       end: { line: 53, column: 30 },
                                     },
                                     name: "props",
-                                    bindingKey: "props$2mv5sg07ackia$4",
+                                    key: "props$2mv5sg07ackia$4",
                                   },
                                   property: {
                                     type: "Identifier",

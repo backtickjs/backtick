@@ -34,7 +34,7 @@ const beep = cs.create(
                 end: { line: 9, column: 7 },
               },
               name: "n",
-              bindingKey: "n$1dqhax1do6u08$0",
+              key: "n$1dqhax1do6u08$0",
             },
             init: {
               type: "Literal",
@@ -61,7 +61,7 @@ const beep = cs.create(
               end: { line: 10, column: 3 },
             },
             name: "n",
-            bindingKey: "n$1dqhax1do6u08$0",
+            key: "n$1dqhax1do6u08$0",
           },
           right: {
             type: "Literal",
@@ -93,7 +93,7 @@ const onTap = cs.create(
         type: "Identifier",
         loc: { start: { line: 13, column: 48 }, end: { line: 13, column: 50 } },
         name: "id",
-        bindingKey: "id$1dqhax1do6u08$1",
+        key: "id$1dqhax1do6u08$1",
       },
     ],
     body: {
@@ -155,7 +155,7 @@ it("handlerObject", async (t) => {
                     end: { line: 22, column: 20 },
                   },
                   name: "handlers",
-                  bindingKey: "handlers$1dqhax1do6u08$2",
+                  key: "handlers$1dqhax1do6u08$2",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -236,7 +236,7 @@ it("handlerObject", async (t) => {
                 end: { line: 26, column: 21 },
               },
               name: "handlers",
-              bindingKey: "handlers$1dqhax1do6u08$2",
+              key: "handlers$1dqhax1do6u08$2",
             },
           },
         ],

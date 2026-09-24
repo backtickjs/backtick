@@ -42,7 +42,7 @@ describe("ref", () => {
                       end: { line: 13, column: 19 },
                     },
                     name: "field",
-                    bindingKey: "field$1omn3ou0fqxtc$0",
+                    key: "field$1omn3ou0fqxtc$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -190,7 +190,7 @@ describe("ref", () => {
                                     end: { line: 16, column: 50 },
                                   },
                                   name: "element",
-                                  bindingKey: "element$1omn3ou0fqxtc$1",
+                                  key: "element$1omn3ou0fqxtc$1",
                                 },
                               ],
                               body: {
@@ -212,7 +212,7 @@ describe("ref", () => {
                                       end: { line: 16, column: 60 },
                                     },
                                     name: "field",
-                                    bindingKey: "field$1omn3ou0fqxtc$0",
+                                    key: "field$1omn3ou0fqxtc$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -233,7 +233,7 @@ describe("ref", () => {
                                       end: { line: 16, column: 72 },
                                     },
                                     name: "element",
-                                    bindingKey: "element$1omn3ou0fqxtc$1",
+                                    key: "element$1omn3ou0fqxtc$1",
                                   },
                                 ],
                                 optional: false,
@@ -342,7 +342,7 @@ describe("ref", () => {
                                             end: { line: 17, column: 40 },
                                           },
                                           name: "field",
-                                          bindingKey: "field$1omn3ou0fqxtc$0",
+                                          key: "field$1omn3ou0fqxtc$0",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -540,7 +540,7 @@ describe("ref", () => {
                                 end: { line: 32, column: 25 },
                               },
                               name: "element",
-                              bindingKey: "element$1omn3ou0fqxtc$2",
+                              key: "element$1omn3ou0fqxtc$2",
                             },
                           ],
                           body: {
@@ -584,7 +584,7 @@ describe("ref", () => {
                                         end: { line: 32, column: 52 },
                                       },
                                       name: "element",
-                                      bindingKey: "element$1omn3ou0fqxtc$2",
+                                      key: "element$1omn3ou0fqxtc$2",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -783,7 +783,7 @@ describe("ref", () => {
                         end: { line: 64, column: 21 },
                       },
                       name: "shown",
-                      bindingKey: "shown$1omn3ou0fqxtc$3",
+                      key: "shown$1omn3ou0fqxtc$3",
                     },
                     init: {
                       type: "CallExpression",
@@ -835,7 +835,7 @@ describe("ref", () => {
                         end: { line: 65, column: 17 },
                       },
                       name: "n",
-                      bindingKey: "n$1omn3ou0fqxtc$4",
+                      key: "n$1omn3ou0fqxtc$4",
                     },
                     init: {
                       type: "CallExpression",
@@ -972,7 +972,7 @@ describe("ref", () => {
                                         end: { line: 68, column: 38 },
                                       },
                                       name: "n",
-                                      bindingKey: "n$1omn3ou0fqxtc$4",
+                                      key: "n$1omn3ou0fqxtc$4",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -1012,7 +1012,7 @@ describe("ref", () => {
                                               end: { line: 68, column: 44 },
                                             },
                                             name: "n",
-                                            bindingKey: "n$1omn3ou0fqxtc$4",
+                                            key: "n$1omn3ou0fqxtc$4",
                                           },
                                           property: {
                                             type: "Identifier",
@@ -1097,7 +1097,7 @@ describe("ref", () => {
                                     end: { line: 69, column: 25 },
                                   },
                                   name: "n",
-                                  bindingKey: "n$1omn3ou0fqxtc$4",
+                                  key: "n$1omn3ou0fqxtc$4",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -1181,7 +1181,7 @@ describe("ref", () => {
                                 end: { line: 71, column: 20 },
                               },
                               name: "shown",
-                              bindingKey: "shown$1omn3ou0fqxtc$3",
+                              key: "shown$1omn3ou0fqxtc$3",
                             },
                             property: {
                               type: "Identifier",
@@ -1313,7 +1313,7 @@ describe("ref", () => {
                                                 end: { line: 72, column: 51 },
                                               },
                                               name: "n",
-                                              bindingKey: "n$1omn3ou0fqxtc$4",
+                                              key: "n$1omn3ou0fqxtc$4",
                                             },
                                             property: {
                                               type: "Identifier",

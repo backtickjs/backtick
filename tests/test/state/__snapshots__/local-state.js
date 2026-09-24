@@ -44,7 +44,7 @@ async function Stepper() {
                   end: { line: 14, column: 14 },
                 },
                 name: "size",
-                bindingKey: "size$2gygj47yf1nf5$0",
+                key: "size$2gygj47yf1nf5$0",
               },
               init: {
                 type: "CallExpression",
@@ -160,7 +160,7 @@ async function Stepper() {
                                 end: { line: 17, column: 35 },
                               },
                               name: "size",
-                              bindingKey: "size$2gygj47yf1nf5$0",
+                              key: "size$2gygj47yf1nf5$0",
                             },
                             property: {
                               type: "Identifier",
@@ -247,7 +247,7 @@ async function Stepper() {
                                     end: { line: 19, column: 14 },
                                   },
                                   name: "size",
-                                  bindingKey: "size$2gygj47yf1nf5$0",
+                                  key: "size$2gygj47yf1nf5$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -287,7 +287,7 @@ async function Stepper() {
                                           end: { line: 19, column: 23 },
                                         },
                                         name: "size",
-                                        bindingKey: "size$2gygj47yf1nf5$0",
+                                        key: "size$2gygj47yf1nf5$0",
                                       },
                                       property: {
                                         type: "Identifier",

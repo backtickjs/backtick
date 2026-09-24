@@ -40,7 +40,7 @@ async function Rows() {
                   end: { line: 19, column: 14 },
                 },
                 name: "rows",
-                bindingKey: "rows$1xb9ns0x2f3vb$0",
+                key: "rows$1xb9ns0x2f3vb$0",
               },
               init: {
                 type: "CallExpression",
@@ -89,7 +89,7 @@ async function Rows() {
                   end: { line: 20, column: 13 },
                 },
                 name: "add",
-                bindingKey: "add$1xb9ns0x2f3vb$1",
+                key: "add$1xb9ns0x2f3vb$1",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -105,7 +105,7 @@ async function Rows() {
                       end: { line: 20, column: 20 },
                     },
                     name: "row",
-                    bindingKey: "row$1xb9ns0x2f3vb$3",
+                    key: "row$1xb9ns0x2f3vb$3",
                   },
                 ],
                 body: {
@@ -140,7 +140,7 @@ async function Rows() {
                               end: { line: 21, column: 10 },
                             },
                             name: "rows",
-                            bindingKey: "rows$1xb9ns0x2f3vb$0",
+                            key: "rows$1xb9ns0x2f3vb$0",
                           },
                           property: {
                             type: "Identifier",
@@ -168,7 +168,7 @@ async function Rows() {
                                   end: { line: 21, column: 19 },
                                 },
                                 name: "row",
-                                bindingKey: "row$1xb9ns0x2f3vb$3",
+                                key: "row$1xb9ns0x2f3vb$3",
                               },
                             ],
                           },
@@ -201,7 +201,7 @@ async function Rows() {
                   end: { line: 23, column: 15 },
                 },
                 name: "label",
-                bindingKey: "label$1xb9ns0x2f3vb$2",
+                key: "label$1xb9ns0x2f3vb$2",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -217,7 +217,7 @@ async function Rows() {
                       end: { line: 23, column: 22 },
                     },
                     name: "row",
-                    bindingKey: "row$1xb9ns0x2f3vb$4",
+                    key: "row$1xb9ns0x2f3vb$4",
                   },
                 ],
                 body: {
@@ -246,7 +246,7 @@ async function Rows() {
                             end: { line: 24, column: 16 },
                           },
                           name: "row",
-                          bindingKey: "row$1xb9ns0x2f3vb$4",
+                          key: "row$1xb9ns0x2f3vb$4",
                         },
                         property: {
                           type: "Identifier",
@@ -364,7 +364,7 @@ async function Rows() {
                                 end: { line: 28, column: 32 },
                               },
                               name: "add",
-                              bindingKey: "add$1xb9ns0x2f3vb$1",
+                              key: "add$1xb9ns0x2f3vb$1",
                             },
                             arguments: [
                               {
@@ -569,7 +569,7 @@ async function Rows() {
                                     end: { line: 30, column: 25 },
                                   },
                                   name: "rows",
-                                  bindingKey: "rows$1xb9ns0x2f3vb$0",
+                                  key: "rows$1xb9ns0x2f3vb$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -611,7 +611,7 @@ async function Rows() {
                                 end: { line: 30, column: 38 },
                               },
                               name: "row",
-                              bindingKey: "row$1xb9ns0x2f3vb$5",
+                              key: "row$1xb9ns0x2f3vb$5",
                             },
                           ],
                           body: {
@@ -657,7 +657,7 @@ async function Rows() {
                                       end: { line: 30, column: 60 },
                                     },
                                     name: "label",
-                                    bindingKey: "label$1xb9ns0x2f3vb$2",
+                                    key: "label$1xb9ns0x2f3vb$2",
                                   },
                                   arguments: [
                                     {
@@ -667,7 +667,7 @@ async function Rows() {
                                         end: { line: 30, column: 64 },
                                       },
                                       name: "row",
-                                      bindingKey: "row$1xb9ns0x2f3vb$5",
+                                      key: "row$1xb9ns0x2f3vb$5",
                                     },
                                   ],
                                   optional: false,

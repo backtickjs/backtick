@@ -30,7 +30,7 @@ it("objectIndex", async (t) => {
               end: { line: 15, column: 16 },
             },
             name: "currency",
-            bindingKey: "currency$o3ttyh4dq4dw$0",
+            key: "currency$o3ttyh4dq4dw$0",
           },
         ],
         body: {
@@ -61,7 +61,7 @@ it("objectIndex", async (t) => {
                       end: { line: 16, column: 17 },
                     },
                     name: "table",
-                    bindingKey: "table$o3ttyh4dq4dw$1",
+                    key: "table$o3ttyh4dq4dw$1",
                   },
                   init: {
                     type: "Splice",
@@ -95,7 +95,7 @@ it("objectIndex", async (t) => {
                       end: { line: 17, column: 17 },
                     },
                     name: "asked",
-                    bindingKey: "asked$o3ttyh4dq4dw$2",
+                    key: "asked$o3ttyh4dq4dw$2",
                   },
                   init: {
                     type: "LogicalExpression",
@@ -117,7 +117,7 @@ it("objectIndex", async (t) => {
                           end: { line: 17, column: 25 },
                         },
                         name: "table",
-                        bindingKey: "table$o3ttyh4dq4dw$1",
+                        key: "table$o3ttyh4dq4dw$1",
                       },
                       property: {
                         type: "Identifier",
@@ -126,7 +126,7 @@ it("objectIndex", async (t) => {
                           end: { line: 17, column: 34 },
                         },
                         name: "currency",
-                        bindingKey: "currency$o3ttyh4dq4dw$0",
+                        key: "currency$o3ttyh4dq4dw$0",
                       },
                       computed: true,
                       optional: false,
@@ -164,7 +164,7 @@ it("objectIndex", async (t) => {
                       end: { line: 18, column: 15 },
                     },
                     name: "usd",
-                    bindingKey: "usd$o3ttyh4dq4dw$3",
+                    key: "usd$o3ttyh4dq4dw$3",
                   },
                   init: {
                     type: "LogicalExpression",
@@ -186,7 +186,7 @@ it("objectIndex", async (t) => {
                           end: { line: 18, column: 23 },
                         },
                         name: "table",
-                        bindingKey: "table$o3ttyh4dq4dw$1",
+                        key: "table$o3ttyh4dq4dw$1",
                       },
                       property: {
                         type: "Literal",
@@ -231,7 +231,7 @@ it("objectIndex", async (t) => {
                     end: { line: 19, column: 18 },
                   },
                   name: "asked",
-                  bindingKey: "asked$o3ttyh4dq4dw$2",
+                  key: "asked$o3ttyh4dq4dw$2",
                 },
                 right: {
                   type: "Identifier",
@@ -240,7 +240,7 @@ it("objectIndex", async (t) => {
                     end: { line: 19, column: 24 },
                   },
                   name: "usd",
-                  bindingKey: "usd$o3ttyh4dq4dw$3",
+                  key: "usd$o3ttyh4dq4dw$3",
                 },
               },
             },

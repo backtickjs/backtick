@@ -33,7 +33,7 @@ function outerBase(inner) {
                   end: { line: 8, column: 14 },
                 },
                 name: "base",
-                bindingKey: "base$8up2nb5o0inm$0",
+                key: "base$8up2nb5o0inm$0",
               },
               init: {
                 type: "Literal",
@@ -63,7 +63,7 @@ function outerBase(inner) {
                 end: { line: 9, column: 15 },
               },
               name: "base",
-              bindingKey: "base$8up2nb5o0inm$0",
+              key: "base$8up2nb5o0inm$0",
             },
             right: {
               type: "Splice",
@@ -114,7 +114,7 @@ function middleBase(inner) {
                   end: { line: 15, column: 14 },
                 },
                 name: "base",
-                bindingKey: "base$8up2nb5o0inm$1",
+                key: "base$8up2nb5o0inm$1",
               },
               init: {
                 type: "Literal",
@@ -147,7 +147,7 @@ function middleBase(inner) {
                 end: { line: 16, column: 15 },
               },
               name: "base",
-              bindingKey: "base$8up2nb5o0inm$1",
+              key: "base$8up2nb5o0inm$1",
             },
             right: {
               type: "Splice",
@@ -199,7 +199,7 @@ it("deepShadowing", async (t) => {
                     end: { line: 30, column: 32 },
                   },
                   name: "base",
-                  bindingKey: "base$8up2nb5o0inm$2",
+                  key: "base$8up2nb5o0inm$2",
                 }),
               ),
             ),
@@ -233,7 +233,7 @@ it("deepShadowing", async (t) => {
                     end: { line: 29, column: 16 },
                   },
                   name: "base",
-                  bindingKey: "base$8up2nb5o0inm$2",
+                  key: "base$8up2nb5o0inm$2",
                 },
                 init: {
                   type: "Literal",

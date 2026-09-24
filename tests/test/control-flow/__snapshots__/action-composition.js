@@ -34,7 +34,7 @@ const effects = cs.create(
                 end: { line: 9, column: 9 },
               },
               name: "x",
-              bindingKey: "x$3q2gz79xhvvfp$0",
+              key: "x$3q2gz79xhvvfp$0",
             },
             init: {
               type: "Literal",

@@ -48,7 +48,7 @@ it("typeAssertion", async (t) => {
                     end: { line: 20, column: 16 },
                   },
                   name: "page",
-                  bindingKey: "page$3amzui83z49rq$0",
+                  key: "page$3amzui83z49rq$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -135,7 +135,7 @@ it("typeAssertion", async (t) => {
                         end: { line: 22, column: 17 },
                       },
                       name: "page",
-                      bindingKey: "page$3amzui83z49rq$0",
+                      key: "page$3amzui83z49rq$0",
                     },
                     property: {
                       type: "Identifier",
@@ -181,7 +181,7 @@ it("typeAssertion", async (t) => {
                     end: { line: 22, column: 41 },
                   },
                   name: "page",
-                  bindingKey: "page$3amzui83z49rq$0",
+                  key: "page$3amzui83z49rq$0",
                 },
                 property: {
                   type: "Identifier",

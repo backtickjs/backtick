@@ -48,7 +48,7 @@ describe("an undefined prop", () => {
                   end: { line: 34, column: 39 },
                 },
                 name: "el",
-                bindingKey: "el$28eplibrubp3g$0",
+                key: "el$28eplibrubp3g$0",
               },
             ],
             body: {
@@ -92,7 +92,7 @@ describe("an undefined prop", () => {
                           end: { line: 34, column: 61 },
                         },
                         name: "el",
-                        bindingKey: "el$28eplibrubp3g$0",
+                        key: "el$28eplibrubp3g$0",
                       },
                       property: {
                         type: "Identifier",

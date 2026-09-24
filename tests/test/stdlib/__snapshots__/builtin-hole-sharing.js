@@ -91,7 +91,7 @@ const wrapped = cs.create(
         type: "Identifier",
         loc: { start: { line: 11, column: 20 }, end: { line: 11, column: 21 } },
         name: "n",
-        bindingKey: "n$3vatah1osfcoe$0",
+        key: "n$3vatah1osfcoe$0",
       },
     ],
     body: {
@@ -117,7 +117,7 @@ const wrapped = cs.create(
               end: { line: 11, column: 42 },
             },
             name: "n",
-            bindingKey: "n$3vatah1osfcoe$0",
+            key: "n$3vatah1osfcoe$0",
           },
           right: {
             type: "Literal",

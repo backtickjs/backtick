@@ -41,7 +41,7 @@ async function Counter() {
                   end: { line: 11, column: 15 },
                 },
                 name: "count",
-                bindingKey: "count$2x6geiwtygybj$0",
+                key: "count$2x6geiwtygybj$0",
               },
               init: {
                 type: "CallExpression",
@@ -175,7 +175,7 @@ async function Counter() {
                                   end: { line: 14, column: 36 },
                                 },
                                 name: "count",
-                                bindingKey: "count$2x6geiwtygybj$0",
+                                key: "count$2x6geiwtygybj$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -215,7 +215,7 @@ async function Counter() {
                                         end: { line: 14, column: 46 },
                                       },
                                       name: "count",
-                                      bindingKey: "count$2x6geiwtygybj$0",
+                                      key: "count$2x6geiwtygybj$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -350,7 +350,7 @@ async function Counter() {
                               end: { line: 15, column: 29 },
                             },
                             name: "count",
-                            bindingKey: "count$2x6geiwtygybj$0",
+                            key: "count$2x6geiwtygybj$0",
                           },
                           property: {
                             type: "Identifier",

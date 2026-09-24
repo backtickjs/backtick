@@ -44,7 +44,7 @@ async function Panel() {
                   end: { line: 14, column: 11 },
                 },
                 name: "n",
-                bindingKey: "n$2g65d04vf49d2$0",
+                key: "n$2g65d04vf49d2$0",
               },
               init: {
                 type: "CallExpression",
@@ -130,7 +130,7 @@ async function Panel() {
                         end: { line: 15, column: 17 },
                       },
                       name: "n",
-                      bindingKey: "n$2g65d04vf49d2$0",
+                      key: "n$2g65d04vf49d2$0",
                     },
                     property: {
                       type: "Identifier",

@@ -41,7 +41,7 @@ it("objectValues", async (t) => {
                     end: { line: 12, column: 18 },
                   },
                   name: "prices",
-                  bindingKey: "prices$1lmwvcf4zc2ir$0",
+                  key: "prices$1lmwvcf4zc2ir$0",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -175,7 +175,7 @@ it("objectValues", async (t) => {
                           end: { line: 14, column: 36 },
                         },
                         name: "prices",
-                        bindingKey: "prices$1lmwvcf4zc2ir$0",
+                        key: "prices$1lmwvcf4zc2ir$0",
                       },
                     ],
                     optional: false,
@@ -245,7 +245,7 @@ it("objectValues", async (t) => {
                               end: { line: 15, column: 36 },
                             },
                             name: "prices",
-                            bindingKey: "prices$1lmwvcf4zc2ir$0",
+                            key: "prices$1lmwvcf4zc2ir$0",
                           },
                           {
                             type: "Literal",
@@ -297,7 +297,7 @@ it("objectValues", async (t) => {
                               end: { line: 15, column: 67 },
                             },
                             name: "prices",
-                            bindingKey: "prices$1lmwvcf4zc2ir$0",
+                            key: "prices$1lmwvcf4zc2ir$0",
                           },
                           {
                             type: "Literal",

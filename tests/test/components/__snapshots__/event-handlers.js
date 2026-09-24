@@ -45,7 +45,7 @@ it("eventHandlers", async (t) => {
                     end: { line: 16, column: 16 },
                   },
                   name: "said",
-                  bindingKey: "said$33yj2jmcqxbde$0",
+                  key: "said$33yj2jmcqxbde$0",
                 },
                 init: {
                   type: "CallExpression",
@@ -137,7 +137,7 @@ it("eventHandlers", async (t) => {
                               end: { line: 20, column: 26 },
                             },
                             name: "event",
-                            bindingKey: "event$33yj2jmcqxbde$1",
+                            key: "event$33yj2jmcqxbde$1",
                           },
                         ],
                         body: {
@@ -172,7 +172,7 @@ it("eventHandlers", async (t) => {
                                       end: { line: 21, column: 17 },
                                     },
                                     name: "event",
-                                    bindingKey: "event$33yj2jmcqxbde$1",
+                                    key: "event$33yj2jmcqxbde$1",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -214,7 +214,7 @@ it("eventHandlers", async (t) => {
                                       end: { line: 22, column: 16 },
                                     },
                                     name: "said",
-                                    bindingKey: "said$33yj2jmcqxbde$0",
+                                    key: "said$33yj2jmcqxbde$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -255,7 +255,7 @@ it("eventHandlers", async (t) => {
                                             end: { line: 22, column: 26 },
                                           },
                                           name: "event",
-                                          bindingKey: "event$33yj2jmcqxbde$1",
+                                          key: "event$33yj2jmcqxbde$1",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -290,7 +290,7 @@ it("eventHandlers", async (t) => {
                                           end: { line: 22, column: 45 },
                                         },
                                         name: "event",
-                                        bindingKey: "event$33yj2jmcqxbde$1",
+                                        key: "event$33yj2jmcqxbde$1",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -382,7 +382,7 @@ it("eventHandlers", async (t) => {
                                   end: { line: 25, column: 35 },
                                 },
                                 name: "event",
-                                bindingKey: "event$33yj2jmcqxbde$2",
+                                key: "event$33yj2jmcqxbde$2",
                               },
                             ],
                             body: {
@@ -404,7 +404,7 @@ it("eventHandlers", async (t) => {
                                     end: { line: 25, column: 44 },
                                   },
                                   name: "said",
-                                  bindingKey: "said$33yj2jmcqxbde$0",
+                                  key: "said$33yj2jmcqxbde$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -437,7 +437,7 @@ it("eventHandlers", async (t) => {
                                         end: { line: 25, column: 54 },
                                       },
                                       name: "event",
-                                      bindingKey: "event$33yj2jmcqxbde$2",
+                                      key: "event$33yj2jmcqxbde$2",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -538,7 +538,7 @@ it("eventHandlers", async (t) => {
                                   end: { line: 26, column: 32 },
                                 },
                                 name: "event",
-                                bindingKey: "event$33yj2jmcqxbde$3",
+                                key: "event$33yj2jmcqxbde$3",
                               },
                             ],
                             body: {
@@ -560,7 +560,7 @@ it("eventHandlers", async (t) => {
                                     end: { line: 26, column: 41 },
                                   },
                                   name: "said",
-                                  bindingKey: "said$33yj2jmcqxbde$0",
+                                  key: "said$33yj2jmcqxbde$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -593,7 +593,7 @@ it("eventHandlers", async (t) => {
                                         end: { line: 26, column: 51 },
                                       },
                                       name: "event",
-                                      bindingKey: "event$33yj2jmcqxbde$3",
+                                      key: "event$33yj2jmcqxbde$3",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -694,7 +694,7 @@ it("eventHandlers", async (t) => {
                                   end: { line: 28, column: 27 },
                                 },
                                 name: "event",
-                                bindingKey: "event$33yj2jmcqxbde$4",
+                                key: "event$33yj2jmcqxbde$4",
                               },
                             ],
                             body: {
@@ -716,7 +716,7 @@ it("eventHandlers", async (t) => {
                                     end: { line: 29, column: 18 },
                                   },
                                   name: "said",
-                                  bindingKey: "said$33yj2jmcqxbde$0",
+                                  key: "said$33yj2jmcqxbde$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -757,7 +757,7 @@ it("eventHandlers", async (t) => {
                                           end: { line: 29, column: 28 },
                                         },
                                         name: "event",
-                                        bindingKey: "event$33yj2jmcqxbde$4",
+                                        key: "event$33yj2jmcqxbde$4",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -798,7 +798,7 @@ it("eventHandlers", async (t) => {
                                           end: { line: 29, column: 50 },
                                         },
                                         name: "event",
-                                        bindingKey: "event$33yj2jmcqxbde$4",
+                                        key: "event$33yj2jmcqxbde$4",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -868,7 +868,7 @@ it("eventHandlers", async (t) => {
                               end: { line: 32, column: 17 },
                             },
                             name: "said",
-                            bindingKey: "said$33yj2jmcqxbde$0",
+                            key: "said$33yj2jmcqxbde$0",
                           },
                           property: {
                             type: "Identifier",

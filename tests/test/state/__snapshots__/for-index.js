@@ -49,7 +49,7 @@ async function RotatingRows() {
                   end: { line: 17, column: 15 },
                 },
                 name: "names",
-                bindingKey: "names$3hac73x1hhg8m$0",
+                key: "names$3hac73x1hhg8m$0",
               },
               init: {
                 type: "CallExpression",
@@ -123,7 +123,7 @@ async function RotatingRows() {
                   end: { line: 18, column: 16 },
                 },
                 name: "rotate",
-                bindingKey: "rotate$3hac73x1hhg8m$1",
+                key: "rotate$3hac73x1hhg8m$1",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -160,7 +160,7 @@ async function RotatingRows() {
                               end: { line: 19, column: 16 },
                             },
                             name: "held",
-                            bindingKey: "held$3hac73x1hhg8m$2",
+                            key: "held$3hac73x1hhg8m$2",
                           },
                           init: {
                             type: "CallExpression",
@@ -181,7 +181,7 @@ async function RotatingRows() {
                                   end: { line: 19, column: 24 },
                                 },
                                 name: "names",
-                                bindingKey: "names$3hac73x1hhg8m$0",
+                                key: "names$3hac73x1hhg8m$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -225,7 +225,7 @@ async function RotatingRows() {
                               end: { line: 20, column: 11 },
                             },
                             name: "names",
-                            bindingKey: "names$3hac73x1hhg8m$0",
+                            key: "names$3hac73x1hhg8m$0",
                           },
                           property: {
                             type: "Identifier",
@@ -259,7 +259,7 @@ async function RotatingRows() {
                                     end: { line: 20, column: 21 },
                                   },
                                   name: "held",
-                                  bindingKey: "held$3hac73x1hhg8m$2",
+                                  key: "held$3hac73x1hhg8m$2",
                                 },
                                 property: {
                                   type: "Literal",
@@ -285,7 +285,7 @@ async function RotatingRows() {
                                     end: { line: 20, column: 30 },
                                   },
                                   name: "held",
-                                  bindingKey: "held$3hac73x1hhg8m$2",
+                                  key: "held$3hac73x1hhg8m$2",
                                 },
                                 property: {
                                   type: "Literal",
@@ -311,7 +311,7 @@ async function RotatingRows() {
                                     end: { line: 20, column: 39 },
                                   },
                                   name: "held",
-                                  bindingKey: "held$3hac73x1hhg8m$2",
+                                  key: "held$3hac73x1hhg8m$2",
                                 },
                                 property: {
                                   type: "Literal",
@@ -421,7 +421,7 @@ async function RotatingRows() {
                             end: { line: 24, column: 29 },
                           },
                           name: "rotate",
-                          bindingKey: "rotate$3hac73x1hhg8m$1",
+                          key: "rotate$3hac73x1hhg8m$1",
                         },
                       },
                     },
@@ -557,7 +557,7 @@ async function RotatingRows() {
                                     end: { line: 26, column: 26 },
                                   },
                                   name: "names",
-                                  bindingKey: "names$3hac73x1hhg8m$0",
+                                  key: "names$3hac73x1hhg8m$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -608,7 +608,7 @@ async function RotatingRows() {
                                 end: { line: 27, column: 18 },
                               },
                               name: "name",
-                              bindingKey: "name$3hac73x1hhg8m$3",
+                              key: "name$3hac73x1hhg8m$3",
                             },
                             {
                               type: "Identifier",
@@ -617,7 +617,7 @@ async function RotatingRows() {
                                 end: { line: 27, column: 33 },
                               },
                               name: "index",
-                              bindingKey: "index$3hac73x1hhg8m$4",
+                              key: "index$3hac73x1hhg8m$4",
                             },
                           ],
                           body: {
@@ -671,7 +671,7 @@ async function RotatingRows() {
                                         end: { line: 28, column: 25 },
                                       },
                                       name: "name",
-                                      bindingKey: "name$3hac73x1hhg8m$3",
+                                      key: "name$3hac73x1hhg8m$3",
                                     },
                                     right: {
                                       type: "Literal",
@@ -701,7 +701,7 @@ async function RotatingRows() {
                                           end: { line: 28, column: 42 },
                                         },
                                         name: "index",
-                                        bindingKey: "index$3hac73x1hhg8m$4",
+                                        key: "index$3hac73x1hhg8m$4",
                                       },
                                       property: {
                                         type: "Identifier",

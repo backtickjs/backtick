@@ -43,7 +43,7 @@ async function Labels() {
                   end: { line: 13, column: 14 },
                 },
                 name: "rows",
-                bindingKey: "rows$2tlccuo5yvrz7$0",
+                key: "rows$2tlccuo5yvrz7$0",
               },
               init: {
                 type: "CallExpression",
@@ -124,7 +124,7 @@ async function Labels() {
                           end: { line: 13, column: 37 },
                         },
                         name: "id",
-                        bindingKey: "id$2tlccuo5yvrz7$2",
+                        key: "id$2tlccuo5yvrz7$2",
                       },
                     ],
                     body: {
@@ -155,7 +155,7 @@ async function Labels() {
                               end: { line: 14, column: 12 },
                             },
                             name: "id",
-                            bindingKey: "id$2tlccuo5yvrz7$2",
+                            key: "id$2tlccuo5yvrz7$2",
                           },
                           kind: "init",
                           computed: false,
@@ -213,7 +213,7 @@ async function Labels() {
                                     end: { line: 15, column: 31 },
                                   },
                                   name: "id",
-                                  bindingKey: "id$2tlccuo5yvrz7$2",
+                                  key: "id$2tlccuo5yvrz7$2",
                                 },
                               },
                             ],
@@ -252,7 +252,7 @@ async function Labels() {
                   end: { line: 17, column: 16 },
                 },
                 name: "update",
-                bindingKey: "update$2tlccuo5yvrz7$1",
+                key: "update$2tlccuo5yvrz7$1",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -295,7 +295,7 @@ async function Labels() {
                                 end: { line: 18, column: 20 },
                               },
                               name: "index",
-                              bindingKey: "index$2tlccuo5yvrz7$3",
+                              key: "index$2tlccuo5yvrz7$3",
                             },
                             init: {
                               type: "Literal",
@@ -322,7 +322,7 @@ async function Labels() {
                             end: { line: 18, column: 31 },
                           },
                           name: "index",
-                          bindingKey: "index$2tlccuo5yvrz7$3",
+                          key: "index$2tlccuo5yvrz7$3",
                         },
                         right: {
                           type: "MemberExpression",
@@ -337,7 +337,7 @@ async function Labels() {
                               end: { line: 18, column: 38 },
                             },
                             name: "rows",
-                            bindingKey: "rows$2tlccuo5yvrz7$0",
+                            key: "rows$2tlccuo5yvrz7$0",
                           },
                           property: {
                             type: "Identifier",
@@ -365,7 +365,7 @@ async function Labels() {
                             end: { line: 18, column: 52 },
                           },
                           name: "index",
-                          bindingKey: "index$2tlccuo5yvrz7$3",
+                          key: "index$2tlccuo5yvrz7$3",
                         },
                         right: {
                           type: "BinaryExpression",
@@ -381,7 +381,7 @@ async function Labels() {
                               end: { line: 18, column: 60 },
                             },
                             name: "index",
-                            bindingKey: "index$2tlccuo5yvrz7$3",
+                            key: "index$2tlccuo5yvrz7$3",
                           },
                           right: {
                             type: "Literal",
@@ -421,7 +421,7 @@ async function Labels() {
                                     end: { line: 19, column: 19 },
                                   },
                                   name: "label",
-                                  bindingKey: "label$2tlccuo5yvrz7$4",
+                                  key: "label$2tlccuo5yvrz7$4",
                                 },
                                 init: {
                                   type: "MemberExpression",
@@ -442,7 +442,7 @@ async function Labels() {
                                         end: { line: 19, column: 26 },
                                       },
                                       name: "rows",
-                                      bindingKey: "rows$2tlccuo5yvrz7$0",
+                                      key: "rows$2tlccuo5yvrz7$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -451,7 +451,7 @@ async function Labels() {
                                         end: { line: 19, column: 32 },
                                       },
                                       name: "index",
-                                      bindingKey: "index$2tlccuo5yvrz7$3",
+                                      key: "index$2tlccuo5yvrz7$3",
                                     },
                                     computed: true,
                                     optional: false,
@@ -495,7 +495,7 @@ async function Labels() {
                                     end: { line: 20, column: 13 },
                                   },
                                   name: "label",
-                                  bindingKey: "label$2tlccuo5yvrz7$4",
+                                  key: "label$2tlccuo5yvrz7$4",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -535,7 +535,7 @@ async function Labels() {
                                           end: { line: 20, column: 23 },
                                         },
                                         name: "label",
-                                        bindingKey: "label$2tlccuo5yvrz7$4",
+                                        key: "label$2tlccuo5yvrz7$4",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -658,7 +658,7 @@ async function Labels() {
                             end: { line: 25, column: 31 },
                           },
                           name: "update",
-                          bindingKey: "update$2tlccuo5yvrz7$1",
+                          key: "update$2tlccuo5yvrz7$1",
                         },
                       },
                     },
@@ -815,7 +815,7 @@ async function Labels() {
                                     end: { line: 28, column: 27 },
                                   },
                                   name: "rows",
-                                  bindingKey: "rows$2tlccuo5yvrz7$0",
+                                  key: "rows$2tlccuo5yvrz7$0",
                                 },
                               },
                             },
@@ -852,7 +852,7 @@ async function Labels() {
                                     end: { line: 29, column: 19 },
                                   },
                                   name: "row",
-                                  bindingKey: "row$2tlccuo5yvrz7$5",
+                                  key: "row$2tlccuo5yvrz7$5",
                                 },
                               ],
                               body: {
@@ -924,7 +924,7 @@ async function Labels() {
                                                 end: { line: 30, column: 36 },
                                               },
                                               name: "row",
-                                              bindingKey: "row$2tlccuo5yvrz7$5",
+                                              key: "row$2tlccuo5yvrz7$5",
                                             },
                                             property: {
                                               type: "Identifier",
@@ -1011,8 +1011,7 @@ async function Labels() {
                                                   end: { line: 31, column: 26 },
                                                 },
                                                 name: "row",
-                                                bindingKey:
-                                                  "row$2tlccuo5yvrz7$5",
+                                                key: "row$2tlccuo5yvrz7$5",
                                               },
                                               property: {
                                                 type: "Identifier",

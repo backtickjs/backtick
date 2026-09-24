@@ -42,7 +42,7 @@ async function Greeting() {
                   end: { line: 12, column: 15 },
                 },
                 name: "greet",
-                bindingKey: "greet$1zi7if3ybm5dh$0",
+                key: "greet$1zi7if3ybm5dh$0",
               },
               init: {
                 type: "CallExpression",
@@ -73,7 +73,7 @@ async function Greeting() {
                           end: { line: 12, column: 56 },
                         },
                         name: "name",
-                        bindingKey: "name$1zi7if3ybm5dh$1",
+                        key: "name$1zi7if3ybm5dh$1",
                       },
                     ],
                     body: {
@@ -98,7 +98,7 @@ async function Greeting() {
                           end: { line: 12, column: 73 },
                         },
                         name: "name",
-                        bindingKey: "name$1zi7if3ybm5dh$1",
+                        key: "name$1zi7if3ybm5dh$1",
                       },
                     },
                     expression: true,
@@ -179,7 +179,7 @@ async function Greeting() {
                               end: { line: 14, column: 32 },
                             },
                             name: "greet",
-                            bindingKey: "greet$1zi7if3ybm5dh$0",
+                            key: "greet$1zi7if3ybm5dh$0",
                           },
                           property: {
                             type: "Identifier",
@@ -207,7 +207,7 @@ async function Greeting() {
                                   end: { line: 14, column: 42 },
                                 },
                                 name: "name",
-                                bindingKey: "name$1zi7if3ybm5dh$2",
+                                key: "name$1zi7if3ybm5dh$2",
                               },
                             ],
                             body: {
@@ -232,7 +232,7 @@ async function Greeting() {
                                   end: { line: 14, column: 60 },
                                 },
                                 name: "name",
-                                bindingKey: "name$1zi7if3ybm5dh$2",
+                                key: "name$1zi7if3ybm5dh$2",
                               },
                             },
                             expression: true,
@@ -288,7 +288,7 @@ async function Greeting() {
                           end: { line: 15, column: 14 },
                         },
                         name: "greet",
-                        bindingKey: "greet$1zi7if3ybm5dh$0",
+                        key: "greet$1zi7if3ybm5dh$0",
                       },
                       property: {
                         type: "Identifier",

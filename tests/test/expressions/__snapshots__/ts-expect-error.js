@@ -42,7 +42,7 @@ it("tsExpectError", async (t) => {
                     end: { line: 14, column: 17 },
                   },
                   name: "count",
-                  bindingKey: "count$353rib4gy05pn$0",
+                  key: "count$353rib4gy05pn$0",
                 },
                 init: {
                   type: "Literal",
@@ -68,7 +68,7 @@ it("tsExpectError", async (t) => {
                 end: { line: 15, column: 18 },
               },
               name: "count",
-              bindingKey: "count$353rib4gy05pn$0",
+              key: "count$353rib4gy05pn$0",
             },
           },
         ],

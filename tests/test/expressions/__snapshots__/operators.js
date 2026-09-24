@@ -40,7 +40,7 @@ it("binaryOperators", async (t) => {
                     end: { line: 11, column: 13 },
                   },
                   name: "n",
-                  bindingKey: "n$3g7ol1xnrqdpp$0",
+                  key: "n$3g7ol1xnrqdpp$0",
                 },
                 init: {
                   type: "Literal",
@@ -80,7 +80,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 13, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -105,7 +105,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 14, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -130,7 +130,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 15, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -155,7 +155,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 16, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -180,7 +180,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 17, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -213,7 +213,7 @@ it("binaryOperators", async (t) => {
                         end: { line: 18, column: 10 },
                       },
                       name: "n",
-                      bindingKey: "n$3g7ol1xnrqdpp$0",
+                      key: "n$3g7ol1xnrqdpp$0",
                     },
                   },
                   right: {
@@ -247,7 +247,7 @@ it("binaryOperators", async (t) => {
                         end: { line: 19, column: 10 },
                       },
                       name: "n",
-                      bindingKey: "n$3g7ol1xnrqdpp$0",
+                      key: "n$3g7ol1xnrqdpp$0",
                     },
                   },
                   right: {
@@ -273,7 +273,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 20, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -298,7 +298,7 @@ it("binaryOperators", async (t) => {
                       end: { line: 21, column: 9 },
                     },
                     name: "n",
-                    bindingKey: "n$3g7ol1xnrqdpp$0",
+                    key: "n$3g7ol1xnrqdpp$0",
                   },
                   right: {
                     type: "Literal",
@@ -338,7 +338,7 @@ it("binaryOperators", async (t) => {
                           end: { line: 22, column: 22 },
                         },
                         name: "n",
-                        bindingKey: "n$3g7ol1xnrqdpp$0",
+                        key: "n$3g7ol1xnrqdpp$0",
                       },
                     ],
                   },
@@ -364,7 +364,7 @@ it("binaryOperators", async (t) => {
                           end: { line: 23, column: 10 },
                         },
                         name: "n",
-                        bindingKey: "n$3g7ol1xnrqdpp$0",
+                        key: "n$3g7ol1xnrqdpp$0",
                       },
                     ],
                   },
@@ -423,7 +423,7 @@ it("unaryOperators", async (t) => {
                     end: { line: 34, column: 13 },
                   },
                   name: "s",
-                  bindingKey: "s$3g7ol1xnrqdpp$1",
+                  key: "s$3g7ol1xnrqdpp$1",
                 },
                 init: {
                   type: "Literal",
@@ -457,7 +457,7 @@ it("unaryOperators", async (t) => {
                     end: { line: 35, column: 13 },
                   },
                   name: "o",
-                  bindingKey: "o$3g7ol1xnrqdpp$2",
+                  key: "o$3g7ol1xnrqdpp$2",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -546,7 +546,7 @@ it("unaryOperators", async (t) => {
                     end: { line: 36, column: 19 },
                   },
                   name: "deleted",
-                  bindingKey: "deleted$3g7ol1xnrqdpp$3",
+                  key: "deleted$3g7ol1xnrqdpp$3",
                 },
                 init: {
                   type: "UnaryExpression",
@@ -569,7 +569,7 @@ it("unaryOperators", async (t) => {
                         end: { line: 36, column: 30 },
                       },
                       name: "o",
-                      bindingKey: "o$3g7ol1xnrqdpp$2",
+                      key: "o$3g7ol1xnrqdpp$2",
                     },
                     property: {
                       type: "Identifier",
@@ -614,7 +614,7 @@ it("unaryOperators", async (t) => {
                       end: { line: 37, column: 16 },
                     },
                     name: "s",
-                    bindingKey: "s$3g7ol1xnrqdpp$1",
+                    key: "s$3g7ol1xnrqdpp$1",
                   },
                 },
                 {
@@ -656,7 +656,7 @@ it("unaryOperators", async (t) => {
                         end: { line: 37, column: 28 },
                       },
                       name: "s",
-                      bindingKey: "s$3g7ol1xnrqdpp$1",
+                      key: "s$3g7ol1xnrqdpp$1",
                     },
                   },
                   right: {
@@ -675,7 +675,7 @@ it("unaryOperators", async (t) => {
                     end: { line: 37, column: 46 },
                   },
                   name: "deleted",
-                  bindingKey: "deleted$3g7ol1xnrqdpp$3",
+                  key: "deleted$3g7ol1xnrqdpp$3",
                 },
                 {
                   type: "BinaryExpression",
@@ -699,7 +699,7 @@ it("unaryOperators", async (t) => {
                       end: { line: 37, column: 56 },
                     },
                     name: "o",
-                    bindingKey: "o$3g7ol1xnrqdpp$2",
+                    key: "o$3g7ol1xnrqdpp$2",
                   },
                 },
               ],
@@ -748,7 +748,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 47, column: 11 },
                   },
                   name: "n",
-                  bindingKey: "n$3g7ol1xnrqdpp$4",
+                  key: "n$3g7ol1xnrqdpp$4",
                 },
                 init: {
                   type: "Literal",
@@ -781,7 +781,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 48, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -813,7 +813,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 49, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -845,7 +845,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 50, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -877,7 +877,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 51, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -909,7 +909,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 52, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -941,7 +941,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 53, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -973,7 +973,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 54, column: 7 },
                 },
                 name: "n",
-                bindingKey: "n$3g7ol1xnrqdpp$4",
+                key: "n$3g7ol1xnrqdpp$4",
               },
               right: {
                 type: "Literal",
@@ -1006,7 +1006,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 55, column: 11 },
                   },
                   name: "a",
-                  bindingKey: "a$3g7ol1xnrqdpp$5",
+                  key: "a$3g7ol1xnrqdpp$5",
                 },
                 init: {
                   type: "Literal",
@@ -1039,7 +1039,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 56, column: 7 },
                 },
                 name: "a",
-                bindingKey: "a$3g7ol1xnrqdpp$5",
+                key: "a$3g7ol1xnrqdpp$5",
               },
               right: {
                 type: "Literal",
@@ -1072,7 +1072,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 57, column: 11 },
                   },
                   name: "b",
-                  bindingKey: "b$3g7ol1xnrqdpp$6",
+                  key: "b$3g7ol1xnrqdpp$6",
                 },
                 init: {
                   type: "Literal",
@@ -1105,7 +1105,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 58, column: 7 },
                 },
                 name: "b",
-                bindingKey: "b$3g7ol1xnrqdpp$6",
+                key: "b$3g7ol1xnrqdpp$6",
               },
               right: {
                 type: "Literal",
@@ -1138,7 +1138,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 59, column: 11 },
                   },
                   name: "c",
-                  bindingKey: "c$3g7ol1xnrqdpp$7",
+                  key: "c$3g7ol1xnrqdpp$7",
                 },
                 init: {
                   type: "Literal",
@@ -1171,7 +1171,7 @@ it("assignmentOperators", async (t) => {
                   end: { line: 60, column: 7 },
                 },
                 name: "c",
-                bindingKey: "c$3g7ol1xnrqdpp$7",
+                key: "c$3g7ol1xnrqdpp$7",
               },
               right: {
                 type: "Literal",
@@ -1203,7 +1203,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 61, column: 15 },
                   },
                   name: "n",
-                  bindingKey: "n$3g7ol1xnrqdpp$4",
+                  key: "n$3g7ol1xnrqdpp$4",
                 },
                 {
                   type: "Identifier",
@@ -1212,7 +1212,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 61, column: 18 },
                   },
                   name: "a",
-                  bindingKey: "a$3g7ol1xnrqdpp$5",
+                  key: "a$3g7ol1xnrqdpp$5",
                 },
                 {
                   type: "Identifier",
@@ -1221,7 +1221,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 61, column: 21 },
                   },
                   name: "b",
-                  bindingKey: "b$3g7ol1xnrqdpp$6",
+                  key: "b$3g7ol1xnrqdpp$6",
                 },
                 {
                   type: "Identifier",
@@ -1230,7 +1230,7 @@ it("assignmentOperators", async (t) => {
                     end: { line: 61, column: 24 },
                   },
                   name: "c",
-                  bindingKey: "c$3g7ol1xnrqdpp$7",
+                  key: "c$3g7ol1xnrqdpp$7",
                 },
               ],
             },
@@ -1279,7 +1279,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 72, column: 13 },
                   },
                   name: "o",
-                  bindingKey: "o$3g7ol1xnrqdpp$8",
+                  key: "o$3g7ol1xnrqdpp$8",
                 },
                 init: {
                   type: "ObjectExpression",
@@ -1341,7 +1341,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 73, column: 16 },
                   },
                   name: "list",
-                  bindingKey: "list$3g7ol1xnrqdpp$9",
+                  key: "list$3g7ol1xnrqdpp$9",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -1397,7 +1397,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 74, column: 7 },
                   },
                   name: "o",
-                  bindingKey: "o$3g7ol1xnrqdpp$8",
+                  key: "o$3g7ol1xnrqdpp$8",
                 },
                 property: {
                   type: "Identifier",
@@ -1447,7 +1447,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 75, column: 7 },
                   },
                   name: "o",
-                  bindingKey: "o$3g7ol1xnrqdpp$8",
+                  key: "o$3g7ol1xnrqdpp$8",
                 },
                 property: {
                   type: "Identifier",
@@ -1488,7 +1488,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 76, column: 10 },
                   },
                   name: "list",
-                  bindingKey: "list$3g7ol1xnrqdpp$9",
+                  key: "list$3g7ol1xnrqdpp$9",
                 },
                 property: {
                   type: "Literal",
@@ -1537,7 +1537,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 77, column: 10 },
                   },
                   name: "list",
-                  bindingKey: "list$3g7ol1xnrqdpp$9",
+                  key: "list$3g7ol1xnrqdpp$9",
                 },
                 property: {
                   type: "Literal",
@@ -1587,7 +1587,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 78, column: 12 },
                   },
                   name: "list",
-                  bindingKey: "list$3g7ol1xnrqdpp$9",
+                  key: "list$3g7ol1xnrqdpp$9",
                 },
                 property: {
                   type: "Literal",
@@ -1628,7 +1628,7 @@ it("assignmentTargets", async (t) => {
                       end: { line: 79, column: 15 },
                     },
                     name: "o",
-                    bindingKey: "o$3g7ol1xnrqdpp$8",
+                    key: "o$3g7ol1xnrqdpp$8",
                   },
                   property: {
                     type: "Identifier",
@@ -1648,7 +1648,7 @@ it("assignmentTargets", async (t) => {
                     end: { line: 79, column: 23 },
                   },
                   name: "list",
-                  bindingKey: "list$3g7ol1xnrqdpp$9",
+                  key: "list$3g7ol1xnrqdpp$9",
                 },
               ],
             },
@@ -1697,7 +1697,7 @@ it("commaOperator", async (t) => {
                     end: { line: 90, column: 11 },
                   },
                   name: "n",
-                  bindingKey: "n$3g7ol1xnrqdpp$10",
+                  key: "n$3g7ol1xnrqdpp$10",
                 },
                 init: {
                   type: "Literal",
@@ -1731,7 +1731,7 @@ it("commaOperator", async (t) => {
                     end: { line: 91, column: 16 },
                   },
                   name: "last",
-                  bindingKey: "last$3g7ol1xnrqdpp$11",
+                  key: "last$3g7ol1xnrqdpp$11",
                 },
                 init: {
                   type: "SequenceExpression",
@@ -1755,7 +1755,7 @@ it("commaOperator", async (t) => {
                           end: { line: 91, column: 21 },
                         },
                         name: "n",
-                        bindingKey: "n$3g7ol1xnrqdpp$10",
+                        key: "n$3g7ol1xnrqdpp$10",
                       },
                     },
                     {
@@ -1772,7 +1772,7 @@ it("commaOperator", async (t) => {
                           end: { line: 91, column: 26 },
                         },
                         name: "n",
-                        bindingKey: "n$3g7ol1xnrqdpp$10",
+                        key: "n$3g7ol1xnrqdpp$10",
                       },
                       right: {
                         type: "Literal",
@@ -1808,7 +1808,7 @@ it("commaOperator", async (t) => {
                     end: { line: 92, column: 15 },
                   },
                   name: "n",
-                  bindingKey: "n$3g7ol1xnrqdpp$10",
+                  key: "n$3g7ol1xnrqdpp$10",
                 },
                 {
                   type: "Identifier",
@@ -1817,7 +1817,7 @@ it("commaOperator", async (t) => {
                     end: { line: 92, column: 21 },
                   },
                   name: "last",
-                  bindingKey: "last$3g7ol1xnrqdpp$11",
+                  key: "last$3g7ol1xnrqdpp$11",
                 },
               ],
             },

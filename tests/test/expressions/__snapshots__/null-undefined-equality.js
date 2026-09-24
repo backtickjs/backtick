@@ -211,7 +211,7 @@ describe("null and undefined", () => {
                         end: { line: 25, column: 19 },
                       },
                       name: "names",
-                      bindingKey: "names$3265muyjx857r$0",
+                      key: "names$3265muyjx857r$0",
                     },
                     init: {
                       type: "ArrayExpression",
@@ -362,7 +362,7 @@ describe("null and undefined", () => {
                             end: { line: 31, column: 15 },
                           },
                           name: "names",
-                          bindingKey: "names$3265muyjx857r$0",
+                          key: "names$3265muyjx857r$0",
                         },
                         property: {
                           type: "Literal",
@@ -404,7 +404,7 @@ describe("null and undefined", () => {
                             end: { line: 32, column: 15 },
                           },
                           name: "names",
-                          bindingKey: "names$3265muyjx857r$0",
+                          key: "names$3265muyjx857r$0",
                         },
                         property: {
                           type: "Literal",

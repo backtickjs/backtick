@@ -64,7 +64,7 @@ describe("onMount", () => {
                         end: { line: 29, column: 21 },
                       },
                       name: "count",
-                      bindingKey: "count$1vhzpl5t5wcnc$0",
+                      key: "count$1vhzpl5t5wcnc$0",
                     },
                     init: {
                       type: "CallExpression",
@@ -213,7 +213,7 @@ describe("onMount", () => {
                                     end: { line: 32, column: 17 },
                                   },
                                   name: "count",
-                                  bindingKey: "count$1vhzpl5t5wcnc$0",
+                                  key: "count$1vhzpl5t5wcnc$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -253,7 +253,7 @@ describe("onMount", () => {
                                           end: { line: 32, column: 27 },
                                         },
                                         name: "count",
-                                        bindingKey: "count$1vhzpl5t5wcnc$0",
+                                        key: "count$1vhzpl5t5wcnc$0",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -360,7 +360,7 @@ describe("onMount", () => {
                                 end: { line: 34, column: 39 },
                               },
                               name: "count",
-                              bindingKey: "count$1vhzpl5t5wcnc$0",
+                              key: "count$1vhzpl5t5wcnc$0",
                             },
                             property: {
                               type: "Identifier",
@@ -443,7 +443,7 @@ describe("onMount", () => {
                       end: { line: 45, column: 18 },
                     },
                     name: "said",
-                    bindingKey: "said$1vhzpl5t5wcnc$1",
+                    key: "said$1vhzpl5t5wcnc$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -569,7 +569,7 @@ describe("onMount", () => {
                                         end: { line: 47, column: 52 },
                                       },
                                       name: "said",
-                                      bindingKey: "said$1vhzpl5t5wcnc$1",
+                                      key: "said$1vhzpl5t5wcnc$1",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -641,7 +641,7 @@ describe("onMount", () => {
                             end: { line: 48, column: 17 },
                           },
                           name: "said",
-                          bindingKey: "said$1vhzpl5t5wcnc$1",
+                          key: "said$1vhzpl5t5wcnc$1",
                         },
                         property: {
                           type: "Identifier",

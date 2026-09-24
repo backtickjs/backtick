@@ -192,7 +192,7 @@ const svgNamespace = cs.create(
                 end: { line: 19, column: 11 },
               },
               name: "Dot",
-              bindingKey: "Dot$8n845jjtfvwm$0",
+              key: "Dot$8n845jjtfvwm$0",
             },
             init: {
               type: "ArrowFunctionExpression",
@@ -208,7 +208,7 @@ const svgNamespace = cs.create(
                     end: { line: 19, column: 20 },
                   },
                   name: "props",
-                  bindingKey: "props$8n845jjtfvwm$1",
+                  key: "props$8n845jjtfvwm$1",
                 },
               ],
               body: {
@@ -265,7 +265,7 @@ const svgNamespace = cs.create(
                               end: { line: 20, column: 21 },
                             },
                             name: "props",
-                            bindingKey: "props$8n845jjtfvwm$1",
+                            key: "props$8n845jjtfvwm$1",
                           },
                           property: {
                             type: "Identifier",
@@ -397,7 +397,7 @@ const svgNamespace = cs.create(
                                 end: { line: 21, column: 28 },
                               },
                               name: "props",
-                              bindingKey: "props$8n845jjtfvwm$1",
+                              key: "props$8n845jjtfvwm$1",
                             },
                             property: {
                               type: "Identifier",
@@ -792,7 +792,7 @@ const svgNamespace = cs.create(
                               end: { line: 30, column: 32 },
                             },
                             name: "x",
-                            bindingKey: "x$8n845jjtfvwm$2",
+                            key: "x$8n845jjtfvwm$2",
                           },
                         ],
                         body: {
@@ -814,7 +814,7 @@ const svgNamespace = cs.create(
                                 end: { line: 30, column: 49 },
                               },
                               name: "Dot",
-                              bindingKey: "Dot$8n845jjtfvwm$0",
+                              key: "Dot$8n845jjtfvwm$0",
                             },
                             attributes: [
                               {
@@ -844,7 +844,7 @@ const svgNamespace = cs.create(
                                       end: { line: 30, column: 54 },
                                     },
                                     name: "x",
-                                    bindingKey: "x$8n845jjtfvwm$2",
+                                    key: "x$8n845jjtfvwm$2",
                                   },
                                 },
                               },

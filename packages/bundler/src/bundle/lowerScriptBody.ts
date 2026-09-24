@@ -20,7 +20,7 @@ import { sourceName } from "./bindingKey.js";
 type Body = ES.Expression | ES.BlockStatement;
 
 // A binding annotated by the compiler with the key it resolved it to.
-type Bound = { readonly bindingKey?: string };
+type Bound = { readonly key?: string };
 
 /**
  * A script's body, as the compiler wrote it, lowered to the entry it is in a
@@ -130,10 +130,10 @@ export function lowerScriptBody(script: ScriptEntry): Body {
           ] as const,
       );
       // A component the script holds is called with its props.
-      if (tag.bindingKey !== undefined) {
+      if (tag.key !== undefined) {
         return jsxComponent(
           null,
-          read(tag.bindingKey, tag.name, tag.loc),
+          read(tag.key, tag.name, tag.loc),
           written,
           drawn,
         );
@@ -169,8 +169,8 @@ export function lowerScriptBody(script: ScriptEntry): Body {
       case "Splice":
         return splice((held as unknown as Splice).key, held.loc);
       case "Identifier":
-        if (held.bindingKey !== undefined) {
-          return read(held.bindingKey, held.name, held.loc);
+        if (held.key !== undefined) {
+          return read(held.key, held.name, held.loc);
         }
         return held.name === "eval"
           ? {

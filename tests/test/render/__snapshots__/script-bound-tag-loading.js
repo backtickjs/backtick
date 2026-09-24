@@ -31,7 +31,7 @@ const loadedBadge = await bundler.run(
             end: { line: 16, column: 11 },
           },
           name: "props",
-          bindingKey: "props$v8fe0e5k2jbe$0",
+          key: "props$v8fe0e5k2jbe$0",
         },
       ],
       body: {
@@ -89,7 +89,7 @@ const loadedBadge = await bundler.run(
                     end: { line: 16, column: 55 },
                   },
                   name: "props",
-                  bindingKey: "props$v8fe0e5k2jbe$0",
+                  key: "props$v8fe0e5k2jbe$0",
                 },
                 property: {
                   type: "Identifier",
@@ -159,7 +159,7 @@ const scriptBoundTagLoading = cs.create(
                 end: { line: 20, column: 13 },
               },
               name: "count",
-              bindingKey: "count$v8fe0e5k2jbe$1",
+              key: "count$v8fe0e5k2jbe$1",
             },
             init: {
               type: "CallExpression",
@@ -208,7 +208,7 @@ const scriptBoundTagLoading = cs.create(
                 end: { line: 21, column: 13 },
               },
               name: "drawn",
-              bindingKey: "drawn$v8fe0e5k2jbe$2",
+              key: "drawn$v8fe0e5k2jbe$2",
             },
             init: {
               type: "CallExpression",
@@ -257,7 +257,7 @@ const scriptBoundTagLoading = cs.create(
                 end: { line: 24, column: 13 },
               },
               name: "Badge",
-              bindingKey: "Badge$v8fe0e5k2jbe$3",
+              key: "Badge$v8fe0e5k2jbe$3",
             },
             init: {
               type: "ArrowFunctionExpression",
@@ -273,7 +273,7 @@ const scriptBoundTagLoading = cs.create(
                     end: { line: 24, column: 22 },
                   },
                   name: "props",
-                  bindingKey: "props$v8fe0e5k2jbe$4",
+                  key: "props$v8fe0e5k2jbe$4",
                 },
               ],
               body: {
@@ -304,7 +304,7 @@ const scriptBoundTagLoading = cs.create(
                             end: { line: 25, column: 14 },
                           },
                           name: "held",
-                          bindingKey: "held$v8fe0e5k2jbe$5",
+                          key: "held$v8fe0e5k2jbe$5",
                         },
                         init: {
                           type: "CallExpression",
@@ -325,7 +325,7 @@ const scriptBoundTagLoading = cs.create(
                                 end: { line: 25, column: 22 },
                               },
                               name: "drawn",
-                              bindingKey: "drawn$v8fe0e5k2jbe$2",
+                              key: "drawn$v8fe0e5k2jbe$2",
                             },
                             property: {
                               type: "Identifier",
@@ -370,7 +370,7 @@ const scriptBoundTagLoading = cs.create(
                             end: { line: 26, column: 15 },
                           },
                           name: "held",
-                          bindingKey: "held$v8fe0e5k2jbe$5",
+                          key: "held$v8fe0e5k2jbe$5",
                         },
                         right: {
                           type: "Literal",
@@ -417,7 +417,7 @@ const scriptBoundTagLoading = cs.create(
                                 end: { line: 26, column: 43 },
                               },
                               name: "held",
-                              bindingKey: "held$v8fe0e5k2jbe$5",
+                              key: "held$v8fe0e5k2jbe$5",
                             },
                           ],
                           optional: false,
@@ -430,7 +430,7 @@ const scriptBoundTagLoading = cs.create(
                               end: { line: 26, column: 50 },
                             },
                             name: "props",
-                            bindingKey: "props$v8fe0e5k2jbe$4",
+                            key: "props$v8fe0e5k2jbe$4",
                           },
                         ],
                         optional: false,
@@ -518,7 +518,7 @@ const scriptBoundTagLoading = cs.create(
                           end: { line: 31, column: 12 },
                         },
                         name: "drawn",
-                        bindingKey: "drawn$v8fe0e5k2jbe$2",
+                        key: "drawn$v8fe0e5k2jbe$2",
                       },
                       property: {
                         type: "Identifier",
@@ -612,7 +612,7 @@ const scriptBoundTagLoading = cs.create(
                         end: { line: 31, column: 53 },
                       },
                       name: "Badge",
-                      bindingKey: "Badge$v8fe0e5k2jbe$3",
+                      key: "Badge$v8fe0e5k2jbe$3",
                     },
                     attributes: [
                       {
@@ -654,7 +654,7 @@ const scriptBoundTagLoading = cs.create(
                                   end: { line: 31, column: 66 },
                                 },
                                 name: "count",
-                                bindingKey: "count$v8fe0e5k2jbe$1",
+                                key: "count$v8fe0e5k2jbe$1",
                               },
                               property: {
                                 type: "Identifier",
@@ -756,7 +756,7 @@ const scriptBoundTagLoading = cs.create(
                                 end: { line: 32, column: 34 },
                               },
                               name: "drawn",
-                              bindingKey: "drawn$v8fe0e5k2jbe$2",
+                              key: "drawn$v8fe0e5k2jbe$2",
                             },
                             property: {
                               type: "Identifier",
@@ -891,7 +891,7 @@ const scriptBoundTagLoading = cs.create(
                                 end: { line: 33, column: 34 },
                               },
                               name: "count",
-                              bindingKey: "count$v8fe0e5k2jbe$1",
+                              key: "count$v8fe0e5k2jbe$1",
                             },
                             property: {
                               type: "Identifier",
@@ -931,7 +931,7 @@ const scriptBoundTagLoading = cs.create(
                                       end: { line: 33, column: 44 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$v8fe0e5k2jbe$1",
+                                    key: "count$v8fe0e5k2jbe$1",
                                   },
                                   property: {
                                     type: "Identifier",

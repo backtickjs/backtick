@@ -41,7 +41,7 @@ async function Panel(props) {
                   end: { line: 13, column: 15 },
                 },
                 name: "Badge",
-                bindingKey: "Badge$2nh9ihk3oddge$0",
+                key: "Badge$2nh9ihk3oddge$0",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -57,7 +57,7 @@ async function Panel(props) {
                       end: { line: 13, column: 20 },
                     },
                     name: "p",
-                    bindingKey: "p$2nh9ihk3oddge$1",
+                    key: "p$2nh9ihk3oddge$1",
                   },
                 ],
                 body: {
@@ -118,7 +118,7 @@ async function Panel(props) {
                               end: { line: 13, column: 56 },
                             },
                             name: "p",
-                            bindingKey: "p$2nh9ihk3oddge$1",
+                            key: "p$2nh9ihk3oddge$1",
                           },
                           property: {
                             type: "Identifier",
@@ -210,7 +210,7 @@ async function Panel(props) {
                       end: { line: 16, column: 14 },
                     },
                     name: "Badge",
-                    bindingKey: "Badge$2nh9ihk3oddge$0",
+                    key: "Badge$2nh9ihk3oddge$0",
                   },
                   attributes: [
                     {
@@ -362,7 +362,7 @@ const scriptBoundTagCarried = cs.create(
                   end: { line: 40, column: 21 },
                 },
                 name: "Badge",
-                bindingKey: "Badge$2nh9ihk3oddge$3",
+                key: "Badge$2nh9ihk3oddge$3",
               },
               attributes: [
                 {
@@ -404,7 +404,7 @@ const scriptBoundTagCarried = cs.create(
                             end: { line: 40, column: 30 },
                           },
                           name: "count",
-                          bindingKey: "count$2nh9ihk3oddge$2",
+                          key: "count$2nh9ihk3oddge$2",
                         },
                         property: {
                           type: "Identifier",
@@ -499,7 +499,7 @@ const scriptBoundTagCarried = cs.create(
                               end: { line: 41, column: 30 },
                             },
                             name: "count",
-                            bindingKey: "count$2nh9ihk3oddge$2",
+                            key: "count$2nh9ihk3oddge$2",
                           },
                           property: {
                             type: "Identifier",
@@ -557,7 +557,7 @@ const scriptBoundTagCarried = cs.create(
                   end: { line: 42, column: 17 },
                 },
                 name: "Badge",
-                bindingKey: "Badge$2nh9ihk3oddge$3",
+                key: "Badge$2nh9ihk3oddge$3",
               },
             },
           }),
@@ -590,7 +590,7 @@ const scriptBoundTagCarried = cs.create(
                 end: { line: 28, column: 13 },
               },
               name: "count",
-              bindingKey: "count$2nh9ihk3oddge$2",
+              key: "count$2nh9ihk3oddge$2",
             },
             init: {
               type: "CallExpression",
@@ -639,7 +639,7 @@ const scriptBoundTagCarried = cs.create(
                 end: { line: 29, column: 13 },
               },
               name: "Badge",
-              bindingKey: "Badge$2nh9ihk3oddge$3",
+              key: "Badge$2nh9ihk3oddge$3",
             },
             init: {
               type: "ArrowFunctionExpression",
@@ -655,7 +655,7 @@ const scriptBoundTagCarried = cs.create(
                     end: { line: 29, column: 18 },
                   },
                   name: "p",
-                  bindingKey: "p$2nh9ihk3oddge$4",
+                  key: "p$2nh9ihk3oddge$4",
                 },
               ],
               body: {
@@ -725,7 +725,7 @@ const scriptBoundTagCarried = cs.create(
                             end: { line: 31, column: 19 },
                           },
                           name: "p",
-                          bindingKey: "p$2nh9ihk3oddge$4",
+                          key: "p$2nh9ihk3oddge$4",
                         },
                         property: {
                           type: "Identifier",
@@ -768,7 +768,7 @@ const scriptBoundTagCarried = cs.create(
                           end: { line: 32, column: 8 },
                         },
                         name: "p",
-                        bindingKey: "p$2nh9ihk3oddge$4",
+                        key: "p$2nh9ihk3oddge$4",
                       },
                       property: {
                         type: "Identifier",
@@ -982,7 +982,7 @@ const scriptBoundTagCarried = cs.create(
                                 end: { line: 45, column: 34 },
                               },
                               name: "count",
-                              bindingKey: "count$2nh9ihk3oddge$2",
+                              key: "count$2nh9ihk3oddge$2",
                             },
                             property: {
                               type: "Identifier",
@@ -1022,7 +1022,7 @@ const scriptBoundTagCarried = cs.create(
                                       end: { line: 45, column: 44 },
                                     },
                                     name: "count",
-                                    bindingKey: "count$2nh9ihk3oddge$2",
+                                    key: "count$2nh9ihk3oddge$2",
                                   },
                                   property: {
                                     type: "Identifier",

@@ -58,7 +58,7 @@ async function Widened() {
                   end: { line: 24, column: 14 },
                 },
                 name: "flag",
-                bindingKey: "flag$2832bhm4681w5$0",
+                key: "flag$2832bhm4681w5$0",
               },
               init: {
                 type: "CallExpression",
@@ -110,7 +110,7 @@ async function Widened() {
                   end: { line: 25, column: 14 },
                 },
                 name: "tone",
-                bindingKey: "tone$2832bhm4681w5$1",
+                key: "tone$2832bhm4681w5$1",
               },
               init: {
                 type: "CallExpression",
@@ -162,7 +162,7 @@ async function Widened() {
                   end: { line: 26, column: 14 },
                 },
                 name: "step",
-                bindingKey: "step$2832bhm4681w5$2",
+                key: "step$2832bhm4681w5$2",
               },
               init: {
                 type: "CallExpression",
@@ -285,7 +285,7 @@ async function Widened() {
                                     end: { line: 30, column: 14 },
                                   },
                                   name: "flag",
-                                  bindingKey: "flag$2832bhm4681w5$0",
+                                  key: "flag$2832bhm4681w5$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -336,7 +336,7 @@ async function Widened() {
                                     end: { line: 31, column: 14 },
                                   },
                                   name: "tone",
-                                  bindingKey: "tone$2832bhm4681w5$1",
+                                  key: "tone$2832bhm4681w5$1",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -387,7 +387,7 @@ async function Widened() {
                                     end: { line: 32, column: 14 },
                                   },
                                   name: "step",
-                                  bindingKey: "step$2832bhm4681w5$2",
+                                  key: "step$2832bhm4681w5$2",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -494,7 +494,7 @@ async function Widened() {
                                 end: { line: 35, column: 13 },
                               },
                               name: "flag",
-                              bindingKey: "flag$2832bhm4681w5$0",
+                              key: "flag$2832bhm4681w5$0",
                             },
                             property: {
                               type: "Identifier",
@@ -538,7 +538,7 @@ async function Widened() {
                               end: { line: 35, column: 32 },
                             },
                             name: "tone",
-                            bindingKey: "tone$2832bhm4681w5$1",
+                            key: "tone$2832bhm4681w5$1",
                           },
                           property: {
                             type: "Identifier",
@@ -589,7 +589,7 @@ async function Widened() {
                             end: { line: 35, column: 51 },
                           },
                           name: "step",
-                          bindingKey: "step$2832bhm4681w5$2",
+                          key: "step$2832bhm4681w5$2",
                         },
                         property: {
                           type: "Identifier",

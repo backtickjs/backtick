@@ -31,7 +31,7 @@ const colorName = cs.create(
         type: "Identifier",
         loc: { start: { line: 18, column: 52 }, end: { line: 18, column: 53 } },
         name: "c",
-        bindingKey: "c$30a9wee2eidm4$0",
+        key: "c$30a9wee2eidm4$0",
       },
     ],
     body: {
@@ -64,7 +64,7 @@ const colorName = cs.create(
                   end: { line: 19, column: 10 },
                 },
                 name: "c",
-                bindingKey: "c$30a9wee2eidm4$0",
+                key: "c$30a9wee2eidm4$0",
               },
               right: {
                 type: "Splice",
@@ -138,7 +138,7 @@ async function Swatch() {
                   end: { line: 24, column: 14 },
                 },
                 name: "held",
-                bindingKey: "held$30a9wee2eidm4$1",
+                key: "held$30a9wee2eidm4$1",
               },
               init: {
                 type: "CallExpression",
@@ -239,7 +239,7 @@ async function Swatch() {
                               end: { line: 26, column: 31 },
                             },
                             name: "held",
-                            bindingKey: "held$30a9wee2eidm4$1",
+                            key: "held$30a9wee2eidm4$1",
                           },
                           property: {
                             type: "Identifier",
@@ -321,7 +321,7 @@ async function Swatch() {
                             end: { line: 27, column: 24 },
                           },
                           name: "held",
-                          bindingKey: "held$30a9wee2eidm4$1",
+                          key: "held$30a9wee2eidm4$1",
                         },
                         property: {
                           type: "Identifier",

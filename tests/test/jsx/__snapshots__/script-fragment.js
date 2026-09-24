@@ -25,7 +25,7 @@ const listed = cs.create(
         type: "Identifier",
         loc: { start: { line: 11, column: 19 }, end: { line: 11, column: 23 } },
         name: "name",
-        bindingKey: "name$3pjkiwnta5gua$0",
+        key: "name$3pjkiwnta5gua$0",
       },
     ],
     body: {
@@ -144,7 +144,7 @@ const listed = cs.create(
                   end: { line: 15, column: 11 },
                 },
                 name: "name",
-                bindingKey: "name$3pjkiwnta5gua$0",
+                key: "name$3pjkiwnta5gua$0",
               },
             },
             {
@@ -169,7 +169,7 @@ const listed = cs.create(
                   end: { line: 15, column: 18 },
                 },
                 name: "name",
-                bindingKey: "name$3pjkiwnta5gua$0",
+                key: "name$3pjkiwnta5gua$0",
               },
             },
             {

@@ -38,13 +38,13 @@ const label = cs.create(
         type: "Identifier",
         loc: { start: { line: 11, column: 2 }, end: { line: 11, column: 6 } },
         name: "text",
-        bindingKey: "text$g29mnwu0pbnr$0",
+        key: "text$g29mnwu0pbnr$0",
       },
       {
         type: "Identifier",
         loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 7 } },
         name: "upper",
-        bindingKey: "upper$g29mnwu0pbnr$1",
+        key: "upper$g29mnwu0pbnr$1",
       },
     ],
     body: {
@@ -68,7 +68,7 @@ const label = cs.create(
                 end: { line: 14, column: 11 },
               },
               name: "upper",
-              bindingKey: "upper$g29mnwu0pbnr$1",
+              key: "upper$g29mnwu0pbnr$1",
             },
             right: {
               type: "BinaryExpression",
@@ -84,7 +84,7 @@ const label = cs.create(
                   end: { line: 14, column: 19 },
                 },
                 name: "text",
-                bindingKey: "text$g29mnwu0pbnr$0",
+                key: "text$g29mnwu0pbnr$0",
               },
               right: {
                 type: "Literal",
@@ -128,7 +128,7 @@ const label = cs.create(
                         end: { line: 15, column: 15 },
                       },
                       name: "text",
-                      bindingKey: "text$g29mnwu0pbnr$0",
+                      key: "text$g29mnwu0pbnr$0",
                     },
                     property: {
                       type: "Identifier",
@@ -188,7 +188,7 @@ const label = cs.create(
                     end: { line: 17, column: 29 },
                   },
                   name: "text",
-                  bindingKey: "text$g29mnwu0pbnr$0",
+                  key: "text$g29mnwu0pbnr$0",
                 },
                 right: {
                   type: "Literal",
@@ -226,7 +226,7 @@ const label = cs.create(
                       end: { line: 17, column: 46 },
                     },
                     name: "text",
-                    bindingKey: "text$g29mnwu0pbnr$0",
+                    key: "text$g29mnwu0pbnr$0",
                   },
                   property: {
                     type: "Identifier",
@@ -293,7 +293,7 @@ const label = cs.create(
                         end: { line: 18, column: 15 },
                       },
                       name: "text",
-                      bindingKey: "text$g29mnwu0pbnr$0",
+                      key: "text$g29mnwu0pbnr$0",
                     },
                     property: {
                       type: "Identifier",

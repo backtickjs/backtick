@@ -45,7 +45,7 @@ export default cs.create(
                 end: { line: 18, column: 12 },
               },
               name: "held",
-              bindingKey: "held$1601kcqqso40z$0",
+              key: "held$1601kcqqso40z$0",
             },
             init: {
               type: "CallExpression",
@@ -98,7 +98,7 @@ export default cs.create(
                 end: { line: 20, column: 6 },
               },
               name: "held",
-              bindingKey: "held$1601kcqqso40z$0",
+              key: "held$1601kcqqso40z$0",
             },
             property: {
               type: "Identifier",

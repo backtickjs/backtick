@@ -55,7 +55,7 @@ async function WaitingList({ more }) {
                   end: { line: 22, column: 15 },
                 },
                 name: "items",
-                bindingKey: "items$2rcdi8lc8fedv$0",
+                key: "items$2rcdi8lc8fedv$0",
               },
               init: {
                 type: "CallExpression",
@@ -107,7 +107,7 @@ async function WaitingList({ more }) {
                   end: { line: 24, column: 17 },
                 },
                 name: "started",
-                bindingKey: "started$2rcdi8lc8fedv$1",
+                key: "started$2rcdi8lc8fedv$1",
               },
               init: {
                 type: "CallExpression",
@@ -210,7 +210,7 @@ async function WaitingList({ more }) {
                                         end: { line: 26, column: 13 },
                                       },
                                       name: "items",
-                                      bindingKey: "items$2rcdi8lc8fedv$0",
+                                      key: "items$2rcdi8lc8fedv$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -324,7 +324,7 @@ async function WaitingList({ more }) {
                             end: { line: 30, column: 27 },
                           },
                           name: "items",
-                          bindingKey: "items$2rcdi8lc8fedv$0",
+                          key: "items$2rcdi8lc8fedv$0",
                         },
                         property: {
                           type: "Identifier",
@@ -366,7 +366,7 @@ async function WaitingList({ more }) {
                         end: { line: 30, column: 41 },
                       },
                       name: "item",
-                      bindingKey: "item$2rcdi8lc8fedv$2",
+                      key: "item$2rcdi8lc8fedv$2",
                     },
                   ],
                   body: {
@@ -406,7 +406,7 @@ async function WaitingList({ more }) {
                             end: { line: 30, column: 63 },
                           },
                           name: "item",
-                          bindingKey: "item$2rcdi8lc8fedv$2",
+                          key: "item$2rcdi8lc8fedv$2",
                         },
                       },
                     ],
@@ -485,7 +485,7 @@ const forBuildsOnce = cs.create(
                 end: { line: 35, column: 13 },
               },
               name: "asked",
-              bindingKey: "asked$2rcdi8lc8fedv$3",
+              key: "asked$2rcdi8lc8fedv$3",
             },
             init: {
               type: "CallExpression",
@@ -616,7 +616,7 @@ const forBuildsOnce = cs.create(
                             end: { line: 39, column: 29 },
                           },
                           name: "asked",
-                          bindingKey: "asked$2rcdi8lc8fedv$3",
+                          key: "asked$2rcdi8lc8fedv$3",
                         },
                         property: {
                           type: "Identifier",
@@ -740,7 +740,7 @@ const forBuildsOnce = cs.create(
                                       end: { line: 42, column: 15 },
                                     },
                                     name: "asked",
-                                    bindingKey: "asked$2rcdi8lc8fedv$3",
+                                    key: "asked$2rcdi8lc8fedv$3",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -780,7 +780,7 @@ const forBuildsOnce = cs.create(
                                             end: { line: 42, column: 25 },
                                           },
                                           name: "asked",
-                                          bindingKey: "asked$2rcdi8lc8fedv$3",
+                                          key: "asked$2rcdi8lc8fedv$3",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -841,7 +841,7 @@ const forBuildsOnce = cs.create(
                                         end: { line: 43, column: 22 },
                                       },
                                       name: "asked",
-                                      bindingKey: "asked$2rcdi8lc8fedv$3",
+                                      key: "asked$2rcdi8lc8fedv$3",
                                     },
                                     property: {
                                       type: "Identifier",

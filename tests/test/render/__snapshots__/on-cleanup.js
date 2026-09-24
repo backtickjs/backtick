@@ -228,7 +228,7 @@ describe("onCleanup", () => {
                       end: { line: 40, column: 15 },
                     },
                     name: "n",
-                    bindingKey: "n$29e3pjiy23pgm$0",
+                    key: "n$29e3pjiy23pgm$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -280,7 +280,7 @@ describe("onCleanup", () => {
                       end: { line: 41, column: 21 },
                     },
                     name: "doubled",
-                    bindingKey: "doubled$29e3pjiy23pgm$1",
+                    key: "doubled$29e3pjiy23pgm$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -428,7 +428,7 @@ describe("onCleanup", () => {
                                         end: { line: 43, column: 18 },
                                       },
                                       name: "n",
-                                      bindingKey: "n$29e3pjiy23pgm$0",
+                                      key: "n$29e3pjiy23pgm$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -537,7 +537,7 @@ describe("onCleanup", () => {
                                   end: { line: 46, column: 34 },
                                 },
                                 name: "n",
-                                bindingKey: "n$29e3pjiy23pgm$0",
+                                key: "n$29e3pjiy23pgm$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -577,7 +577,7 @@ describe("onCleanup", () => {
                                         end: { line: 46, column: 40 },
                                       },
                                       name: "n",
-                                      bindingKey: "n$29e3pjiy23pgm$0",
+                                      key: "n$29e3pjiy23pgm$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -638,7 +638,7 @@ describe("onCleanup", () => {
                             end: { line: 46, column: 61 },
                           },
                           name: "doubled",
-                          bindingKey: "doubled$29e3pjiy23pgm$1",
+                          key: "doubled$29e3pjiy23pgm$1",
                         },
                         property: {
                           type: "Identifier",
@@ -733,7 +733,7 @@ describe("onCleanup", () => {
                       end: { line: 74, column: 19 },
                     },
                     name: "timer",
-                    bindingKey: "timer$29e3pjiy23pgm$2",
+                    key: "timer$29e3pjiy23pgm$2",
                   },
                   init: {
                     type: "CallExpression",
@@ -824,7 +824,7 @@ describe("onCleanup", () => {
                                   end: { line: 76, column: 15 },
                                 },
                                 name: "timer",
-                                bindingKey: "timer$29e3pjiy23pgm$2",
+                                key: "timer$29e3pjiy23pgm$2",
                               },
                               property: {
                                 type: "Identifier",
@@ -1032,7 +1032,7 @@ describe("onCleanup", () => {
                                 end: { line: 78, column: 52 },
                               },
                               name: "timer",
-                              bindingKey: "timer$29e3pjiy23pgm$2",
+                              key: "timer$29e3pjiy23pgm$2",
                             },
                             property: {
                               type: "Identifier",

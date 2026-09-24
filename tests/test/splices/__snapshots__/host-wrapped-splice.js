@@ -51,7 +51,7 @@ function wrap(start) {
                             end: { line: 21, column: 37 },
                           },
                           name: "outer",
-                          bindingKey: "outer$zqr0jsdf8ub6$0",
+                          key: "outer$zqr0jsdf8ub6$0",
                         }),
                       ),
                     ),
@@ -88,7 +88,7 @@ function wrap(start) {
                             end: { line: 20, column: 18 },
                           },
                           name: "middle",
-                          bindingKey: "middle$zqr0jsdf8ub6$1",
+                          key: "middle$zqr0jsdf8ub6$1",
                         },
                         init: {
                           type: "Literal",
@@ -121,7 +121,7 @@ function wrap(start) {
                           end: { line: 21, column: 19 },
                         },
                         name: "middle",
-                        bindingKey: "middle$zqr0jsdf8ub6$1",
+                        key: "middle$zqr0jsdf8ub6$1",
                       },
                       right: {
                         type: "Splice",
@@ -167,7 +167,7 @@ function wrap(start) {
                   end: { line: 18, column: 15 },
                 },
                 name: "outer",
-                bindingKey: "outer$zqr0jsdf8ub6$0",
+                key: "outer$zqr0jsdf8ub6$0",
               },
               init: {
                 type: "Splice",

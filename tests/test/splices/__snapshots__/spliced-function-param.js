@@ -77,7 +77,7 @@ it("splicedFunctionParam", async (t) => {
                     end: { line: 14, column: 17 },
                   },
                   name: "apply",
-                  bindingKey: "apply$yz0kiroonaez$0",
+                  key: "apply$yz0kiroonaez$0",
                 },
                 init: {
                   type: "ArrowFunctionExpression",
@@ -93,7 +93,7 @@ it("splicedFunctionParam", async (t) => {
                         end: { line: 14, column: 22 },
                       },
                       name: "f",
-                      bindingKey: "f$yz0kiroonaez$1",
+                      key: "f$yz0kiroonaez$1",
                     },
                   ],
                   body: {
@@ -116,7 +116,7 @@ it("splicedFunctionParam", async (t) => {
                           end: { line: 14, column: 42 },
                         },
                         name: "f",
-                        bindingKey: "f$yz0kiroonaez$1",
+                        key: "f$yz0kiroonaez$1",
                       },
                       arguments: [],
                       optional: false,
@@ -154,7 +154,7 @@ it("splicedFunctionParam", async (t) => {
                   end: { line: 15, column: 18 },
                 },
                 name: "apply",
-                bindingKey: "apply$yz0kiroonaez$0",
+                key: "apply$yz0kiroonaez$0",
               },
               arguments: [
                 {

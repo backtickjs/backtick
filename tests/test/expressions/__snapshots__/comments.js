@@ -41,7 +41,7 @@ it("comments", async (t) => {
                     end: { line: 13, column: 17 },
                   },
                   name: "count",
-                  bindingKey: "count$3lcac8ezsyzi3$0",
+                  key: "count$3lcac8ezsyzi3$0",
                 },
                 init: {
                   type: "Literal",
@@ -74,7 +74,7 @@ it("comments", async (t) => {
                   end: { line: 15, column: 15 },
                 },
                 name: "count",
-                bindingKey: "count$3lcac8ezsyzi3$0",
+                key: "count$3lcac8ezsyzi3$0",
               },
               right: {
                 type: "Literal",

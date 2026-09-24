@@ -47,7 +47,7 @@ async function SelectableRows() {
                   end: { line: 14, column: 18 },
                 },
                 name: "selected",
-                bindingKey: "selected$2i3sz19b0mqz4$0",
+                key: "selected$2i3sz19b0mqz4$0",
               },
               init: {
                 type: "CallExpression",
@@ -181,7 +181,7 @@ async function SelectableRows() {
                                   end: { line: 17, column: 37 },
                                 },
                                 name: "selected",
-                                bindingKey: "selected$2i3sz19b0mqz4$0",
+                                key: "selected$2i3sz19b0mqz4$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -391,7 +391,7 @@ async function SelectableRows() {
                                 end: { line: 20, column: 16 },
                               },
                               name: "id",
-                              bindingKey: "id$2i3sz19b0mqz4$1",
+                              key: "id$2i3sz19b0mqz4$1",
                             },
                           ],
                           body: {
@@ -467,8 +467,7 @@ async function SelectableRows() {
                                                 end: { line: 21, column: 31 },
                                               },
                                               name: "selected",
-                                              bindingKey:
-                                                "selected$2i3sz19b0mqz4$0",
+                                              key: "selected$2i3sz19b0mqz4$0",
                                             },
                                             property: {
                                               type: "Identifier",
@@ -491,7 +490,7 @@ async function SelectableRows() {
                                             end: { line: 21, column: 44 },
                                           },
                                           name: "id",
-                                          bindingKey: "id$2i3sz19b0mqz4$1",
+                                          key: "id$2i3sz19b0mqz4$1",
                                         },
                                       },
                                       consequent: {
@@ -554,7 +553,7 @@ async function SelectableRows() {
                                       end: { line: 22, column: 28 },
                                     },
                                     name: "id",
-                                    bindingKey: "id$2i3sz19b0mqz4$1",
+                                    key: "id$2i3sz19b0mqz4$1",
                                   },
                                 },
                               },

@@ -42,7 +42,7 @@ it("spread", async (t) => {
                     end: { line: 13, column: 17 },
                   },
                   name: "front",
-                  bindingKey: "front$umu4jsb4aovz$0",
+                  key: "front$umu4jsb4aovz$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -93,7 +93,7 @@ it("spread", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "back",
-                  bindingKey: "back$umu4jsb4aovz$1",
+                  key: "back$umu4jsb4aovz$1",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -136,7 +136,7 @@ it("spread", async (t) => {
                     end: { line: 15, column: 16 },
                   },
                   name: "none",
-                  bindingKey: "none$umu4jsb4aovz$2",
+                  key: "none$umu4jsb4aovz$2",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -170,7 +170,7 @@ it("spread", async (t) => {
                     end: { line: 16, column: 15 },
                   },
                   name: "all",
-                  bindingKey: "all$umu4jsb4aovz$3",
+                  key: "all$umu4jsb4aovz$3",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -200,7 +200,7 @@ it("spread", async (t) => {
                           end: { line: 16, column: 30 },
                         },
                         name: "front",
-                        bindingKey: "front$umu4jsb4aovz$0",
+                        key: "front$umu4jsb4aovz$0",
                       },
                     },
                     {
@@ -216,7 +216,7 @@ it("spread", async (t) => {
                           end: { line: 16, column: 39 },
                         },
                         name: "none",
-                        bindingKey: "none$umu4jsb4aovz$2",
+                        key: "none$umu4jsb4aovz$2",
                       },
                     },
                     {
@@ -232,7 +232,7 @@ it("spread", async (t) => {
                           end: { line: 16, column: 48 },
                         },
                         name: "back",
-                        bindingKey: "back$umu4jsb4aovz$1",
+                        key: "back$umu4jsb4aovz$1",
                       },
                     },
                     {
@@ -269,7 +269,7 @@ it("spread", async (t) => {
                     end: { line: 17, column: 17 },
                   },
                   name: "twice",
-                  bindingKey: "twice$umu4jsb4aovz$4",
+                  key: "twice$umu4jsb4aovz$4",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -291,7 +291,7 @@ it("spread", async (t) => {
                           end: { line: 17, column: 27 },
                         },
                         name: "all",
-                        bindingKey: "all$umu4jsb4aovz$3",
+                        key: "all$umu4jsb4aovz$3",
                       },
                     },
                     {
@@ -307,7 +307,7 @@ it("spread", async (t) => {
                           end: { line: 17, column: 35 },
                         },
                         name: "all",
-                        bindingKey: "all$umu4jsb4aovz$3",
+                        key: "all$umu4jsb4aovz$3",
                       },
                     },
                   ],
@@ -354,7 +354,7 @@ it("spread", async (t) => {
                         end: { line: 18, column: 16 },
                       },
                       name: "all",
-                      bindingKey: "all$umu4jsb4aovz$3",
+                      key: "all$umu4jsb4aovz$3",
                     },
                     property: {
                       type: "Identifier",
@@ -401,7 +401,7 @@ it("spread", async (t) => {
                     end: { line: 18, column: 40 },
                   },
                   name: "twice",
-                  bindingKey: "twice$umu4jsb4aovz$4",
+                  key: "twice$umu4jsb4aovz$4",
                 },
                 property: {
                   type: "Identifier",

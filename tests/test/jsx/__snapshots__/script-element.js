@@ -41,7 +41,7 @@ async function Card() {
                   end: { line: 11, column: 15 },
                 },
                 name: "label",
-                bindingKey: "label$mvahdj0e0ick$0",
+                key: "label$mvahdj0e0ick$0",
               },
               init: {
                 type: "CallExpression",
@@ -90,7 +90,7 @@ async function Card() {
                   end: { line: 15, column: 13 },
                 },
                 name: "row",
-                bindingKey: "row$mvahdj0e0ick$1",
+                key: "row$mvahdj0e0ick$1",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -106,7 +106,7 @@ async function Card() {
                       end: { line: 15, column: 21 },
                     },
                     name: "size",
-                    bindingKey: "size$mvahdj0e0ick$2",
+                    key: "size$mvahdj0e0ick$2",
                   },
                 ],
                 body: {
@@ -137,7 +137,7 @@ async function Card() {
                               end: { line: 16, column: 15 },
                             },
                             name: "css",
-                            bindingKey: "css$mvahdj0e0ick$3",
+                            key: "css$mvahdj0e0ick$3",
                           },
                           init: {
                             type: "BinaryExpression",
@@ -168,7 +168,7 @@ async function Card() {
                                   end: { line: 16, column: 38 },
                                 },
                                 name: "size",
-                                bindingKey: "size$mvahdj0e0ick$2",
+                                key: "size$mvahdj0e0ick$2",
                               },
                             },
                             right: {
@@ -204,7 +204,7 @@ async function Card() {
                               end: { line: 17, column: 17 },
                             },
                             name: "press",
-                            bindingKey: "press$mvahdj0e0ick$4",
+                            key: "press$mvahdj0e0ick$4",
                           },
                           init: {
                             type: "ArrowFunctionExpression",
@@ -232,7 +232,7 @@ async function Card() {
                                     end: { line: 17, column: 31 },
                                   },
                                   name: "label",
-                                  bindingKey: "label$mvahdj0e0ick$0",
+                                  key: "label$mvahdj0e0ick$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -316,7 +316,7 @@ async function Card() {
                                     end: { line: 19, column: 23 },
                                   },
                                   name: "css",
-                                  bindingKey: "css$mvahdj0e0ick$3",
+                                  key: "css$mvahdj0e0ick$3",
                                 },
                               },
                             },
@@ -381,7 +381,7 @@ async function Card() {
                                         end: { line: 20, column: 26 },
                                       },
                                       name: "css",
-                                      bindingKey: "css$mvahdj0e0ick$3",
+                                      key: "css$mvahdj0e0ick$3",
                                     },
                                   },
                                 },
@@ -431,7 +431,7 @@ async function Card() {
                                               end: { line: 20, column: 48 },
                                             },
                                             name: "label",
-                                            bindingKey: "label$mvahdj0e0ick$0",
+                                            key: "label$mvahdj0e0ick$0",
                                           },
                                           property: {
                                             type: "Identifier",
@@ -498,7 +498,7 @@ async function Card() {
                                         end: { line: 21, column: 18 },
                                       },
                                       name: "label",
-                                      bindingKey: "label$mvahdj0e0ick$0",
+                                      key: "label$mvahdj0e0ick$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -681,7 +681,7 @@ async function Card() {
                                         end: { line: 24, column: 26 },
                                       },
                                       name: "css",
-                                      bindingKey: "css$mvahdj0e0ick$3",
+                                      key: "css$mvahdj0e0ick$3",
                                     },
                                   },
                                 },
@@ -712,7 +712,7 @@ async function Card() {
                                         end: { line: 24, column: 42 },
                                       },
                                       name: "press",
-                                      bindingKey: "press$mvahdj0e0ick$4",
+                                      key: "press$mvahdj0e0ick$4",
                                     },
                                   },
                                 },
@@ -853,7 +853,7 @@ async function Card() {
                       end: { line: 31, column: 39 },
                     },
                     name: "row",
-                    bindingKey: "row$mvahdj0e0ick$1",
+                    key: "row$mvahdj0e0ick$1",
                   },
                   arguments: [
                     {

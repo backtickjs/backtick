@@ -43,7 +43,7 @@ it("arrayReduce", async (t) => {
                     end: { line: 14, column: 18 },
                   },
                   name: "prices",
-                  bindingKey: "prices$32uyy4dbi2509$0",
+                  key: "prices$32uyy4dbi2509$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -102,7 +102,7 @@ it("arrayReduce", async (t) => {
                     end: { line: 15, column: 17 },
                   },
                   name: "total",
-                  bindingKey: "total$32uyy4dbi2509$1",
+                  key: "total$32uyy4dbi2509$1",
                 },
                 init: {
                   type: "CallExpression",
@@ -123,7 +123,7 @@ it("arrayReduce", async (t) => {
                         end: { line: 15, column: 26 },
                       },
                       name: "prices",
-                      bindingKey: "prices$32uyy4dbi2509$0",
+                      key: "prices$32uyy4dbi2509$0",
                     },
                     property: {
                       type: "Identifier",
@@ -151,7 +151,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 15, column: 38 },
                           },
                           name: "sum",
-                          bindingKey: "sum$32uyy4dbi2509$5",
+                          key: "sum$32uyy4dbi2509$5",
                         },
                         {
                           type: "Identifier",
@@ -160,7 +160,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 15, column: 45 },
                           },
                           name: "price",
-                          bindingKey: "price$32uyy4dbi2509$6",
+                          key: "price$32uyy4dbi2509$6",
                         },
                       ],
                       body: {
@@ -177,7 +177,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 15, column: 53 },
                           },
                           name: "sum",
-                          bindingKey: "sum$32uyy4dbi2509$5",
+                          key: "sum$32uyy4dbi2509$5",
                         },
                         right: {
                           type: "Identifier",
@@ -186,7 +186,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 15, column: 61 },
                           },
                           name: "price",
-                          bindingKey: "price$32uyy4dbi2509$6",
+                          key: "price$32uyy4dbi2509$6",
                         },
                       },
                       expression: true,
@@ -226,7 +226,7 @@ it("arrayReduce", async (t) => {
                     end: { line: 16, column: 17 },
                   },
                   name: "names",
-                  bindingKey: "names$32uyy4dbi2509$2",
+                  key: "names$32uyy4dbi2509$2",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -285,7 +285,7 @@ it("arrayReduce", async (t) => {
                     end: { line: 17, column: 18 },
                   },
                   name: "joined",
-                  bindingKey: "joined$32uyy4dbi2509$3",
+                  key: "joined$32uyy4dbi2509$3",
                 },
                 init: {
                   type: "CallExpression",
@@ -306,7 +306,7 @@ it("arrayReduce", async (t) => {
                         end: { line: 17, column: 26 },
                       },
                       name: "names",
-                      bindingKey: "names$32uyy4dbi2509$2",
+                      key: "names$32uyy4dbi2509$2",
                     },
                     property: {
                       type: "Identifier",
@@ -334,7 +334,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 17, column: 38 },
                           },
                           name: "all",
-                          bindingKey: "all$32uyy4dbi2509$7",
+                          key: "all$32uyy4dbi2509$7",
                         },
                         {
                           type: "Identifier",
@@ -343,7 +343,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 17, column: 43 },
                           },
                           name: "one",
-                          bindingKey: "one$32uyy4dbi2509$8",
+                          key: "one$32uyy4dbi2509$8",
                         },
                         {
                           type: "Identifier",
@@ -352,7 +352,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 17, column: 50 },
                           },
                           name: "index",
-                          bindingKey: "index$32uyy4dbi2509$9",
+                          key: "index$32uyy4dbi2509$9",
                         },
                       ],
                       body: {
@@ -376,7 +376,7 @@ it("arrayReduce", async (t) => {
                               end: { line: 17, column: 58 },
                             },
                             name: "all",
-                            bindingKey: "all$32uyy4dbi2509$7",
+                            key: "all$32uyy4dbi2509$7",
                           },
                           right: {
                             type: "Identifier",
@@ -385,7 +385,7 @@ it("arrayReduce", async (t) => {
                               end: { line: 17, column: 66 },
                             },
                             name: "index",
-                            bindingKey: "index$32uyy4dbi2509$9",
+                            key: "index$32uyy4dbi2509$9",
                           },
                         },
                         right: {
@@ -395,7 +395,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 17, column: 72 },
                           },
                           name: "one",
-                          bindingKey: "one$32uyy4dbi2509$8",
+                          key: "one$32uyy4dbi2509$8",
                         },
                       },
                       expression: true,
@@ -435,7 +435,7 @@ it("arrayReduce", async (t) => {
                     end: { line: 18, column: 17 },
                   },
                   name: "empty",
-                  bindingKey: "empty$32uyy4dbi2509$4",
+                  key: "empty$32uyy4dbi2509$4",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -501,7 +501,7 @@ it("arrayReduce", async (t) => {
                             end: { line: 20, column: 13 },
                           },
                           name: "total",
-                          bindingKey: "total$32uyy4dbi2509$1",
+                          key: "total$32uyy4dbi2509$1",
                         },
                         property: {
                           type: "Identifier",
@@ -542,7 +542,7 @@ it("arrayReduce", async (t) => {
                       end: { line: 22, column: 14 },
                     },
                     name: "joined",
-                    bindingKey: "joined$32uyy4dbi2509$3",
+                    key: "joined$32uyy4dbi2509$3",
                   },
                 },
                 right: {
@@ -573,7 +573,7 @@ it("arrayReduce", async (t) => {
                       end: { line: 24, column: 13 },
                     },
                     name: "empty",
-                    bindingKey: "empty$32uyy4dbi2509$4",
+                    key: "empty$32uyy4dbi2509$4",
                   },
                   property: {
                     type: "Identifier",
@@ -601,7 +601,7 @@ it("arrayReduce", async (t) => {
                           end: { line: 24, column: 25 },
                         },
                         name: "sum",
-                        bindingKey: "sum$32uyy4dbi2509$10",
+                        key: "sum$32uyy4dbi2509$10",
                       },
                       {
                         type: "Identifier",
@@ -610,7 +610,7 @@ it("arrayReduce", async (t) => {
                           end: { line: 24, column: 30 },
                         },
                         name: "one",
-                        bindingKey: "one$32uyy4dbi2509$11",
+                        key: "one$32uyy4dbi2509$11",
                       },
                     ],
                     body: {
@@ -627,7 +627,7 @@ it("arrayReduce", async (t) => {
                           end: { line: 24, column: 38 },
                         },
                         name: "sum",
-                        bindingKey: "sum$32uyy4dbi2509$10",
+                        key: "sum$32uyy4dbi2509$10",
                       },
                       right: {
                         type: "Identifier",
@@ -636,7 +636,7 @@ it("arrayReduce", async (t) => {
                           end: { line: 24, column: 44 },
                         },
                         name: "one",
-                        bindingKey: "one$32uyy4dbi2509$11",
+                        key: "one$32uyy4dbi2509$11",
                       },
                     },
                     expression: true,

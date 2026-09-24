@@ -135,7 +135,7 @@ async function Waiting({ ask }) {
                   end: { line: 53, column: 15 },
                 },
                 name: "drawn",
-                bindingKey: "drawn$35g1z58j10rir$0",
+                key: "drawn$35g1z58j10rir$0",
               },
               init: {
                 type: "CallExpression",
@@ -187,7 +187,7 @@ async function Waiting({ ask }) {
                   end: { line: 54, column: 17 },
                 },
                 name: "started",
-                bindingKey: "started$35g1z58j10rir$1",
+                key: "started$35g1z58j10rir$1",
               },
               init: {
                 type: "CallExpression",
@@ -247,7 +247,7 @@ async function Waiting({ ask }) {
                             end: { line: 54, column: 50 },
                           },
                           name: "drawn",
-                          bindingKey: "drawn$35g1z58j10rir$0",
+                          key: "drawn$35g1z58j10rir$0",
                         },
                         property: {
                           type: "Identifier",
@@ -361,7 +361,7 @@ async function Waiting({ ask }) {
                             end: { line: 57, column: 14 },
                           },
                           name: "drawn",
-                          bindingKey: "drawn$35g1z58j10rir$0",
+                          key: "drawn$35g1z58j10rir$0",
                         },
                         property: {
                           type: "Identifier",
@@ -428,7 +428,7 @@ async function Waiting({ ask }) {
                               end: { line: 59, column: 22 },
                             },
                             name: "drawn",
-                            bindingKey: "drawn$35g1z58j10rir$0",
+                            key: "drawn$35g1z58j10rir$0",
                           },
                           property: {
                             type: "Identifier",
@@ -507,7 +507,7 @@ const evalBuildsOnce = cs.create(
                 end: { line: 66, column: 13 },
               },
               name: "asked",
-              bindingKey: "asked$35g1z58j10rir$2",
+              key: "asked$35g1z58j10rir$2",
             },
             init: {
               type: "CallExpression",
@@ -638,7 +638,7 @@ const evalBuildsOnce = cs.create(
                             end: { line: 70, column: 29 },
                           },
                           name: "asked",
-                          bindingKey: "asked$35g1z58j10rir$2",
+                          key: "asked$35g1z58j10rir$2",
                         },
                         property: {
                           type: "Identifier",
@@ -762,7 +762,7 @@ const evalBuildsOnce = cs.create(
                                       end: { line: 73, column: 15 },
                                     },
                                     name: "asked",
-                                    bindingKey: "asked$35g1z58j10rir$2",
+                                    key: "asked$35g1z58j10rir$2",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -802,7 +802,7 @@ const evalBuildsOnce = cs.create(
                                             end: { line: 73, column: 25 },
                                           },
                                           name: "asked",
-                                          bindingKey: "asked$35g1z58j10rir$2",
+                                          key: "asked$35g1z58j10rir$2",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -869,7 +869,7 @@ const evalBuildsOnce = cs.create(
                                           end: { line: 74, column: 22 },
                                         },
                                         name: "asked",
-                                        bindingKey: "asked$35g1z58j10rir$2",
+                                        key: "asked$35g1z58j10rir$2",
                                       },
                                       property: {
                                         type: "Identifier",

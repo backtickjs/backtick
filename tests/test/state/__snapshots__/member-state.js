@@ -44,7 +44,7 @@ async function MemberRows() {
                   end: { line: 20, column: 15 },
                 },
                 name: "build",
-                bindingKey: "build$30ur5mgzea4v6$0",
+                key: "build$30ur5mgzea4v6$0",
               },
               init: {
                 type: "ArrowFunctionExpression",
@@ -60,7 +60,7 @@ async function MemberRows() {
                       end: { line: 20, column: 23 },
                     },
                     name: "from",
-                    bindingKey: "from$30ur5mgzea4v6$2",
+                    key: "from$30ur5mgzea4v6$2",
                   },
                 ],
                 body: {
@@ -158,7 +158,7 @@ async function MemberRows() {
                                   end: { line: 21, column: 41 },
                                 },
                                 name: "_",
-                                bindingKey: "_$30ur5mgzea4v6$3",
+                                key: "_$30ur5mgzea4v6$3",
                               },
                               {
                                 type: "Identifier",
@@ -167,7 +167,7 @@ async function MemberRows() {
                                   end: { line: 21, column: 45 },
                                 },
                                 name: "at",
-                                bindingKey: "at$30ur5mgzea4v6$4",
+                                key: "at$30ur5mgzea4v6$4",
                               },
                             ],
                             body: {
@@ -218,7 +218,7 @@ async function MemberRows() {
                                               end: { line: 22, column: 25 },
                                             },
                                             name: "from",
-                                            bindingKey: "from$30ur5mgzea4v6$2",
+                                            key: "from$30ur5mgzea4v6$2",
                                           },
                                           right: {
                                             type: "Identifier",
@@ -227,7 +227,7 @@ async function MemberRows() {
                                               end: { line: 22, column: 30 },
                                             },
                                             name: "at",
-                                            bindingKey: "at$30ur5mgzea4v6$4",
+                                            key: "at$30ur5mgzea4v6$4",
                                           },
                                         },
                                         kind: "init",
@@ -305,8 +305,7 @@ async function MemberRows() {
                                                     },
                                                   },
                                                   name: "from",
-                                                  bindingKey:
-                                                    "from$30ur5mgzea4v6$2",
+                                                  key: "from$30ur5mgzea4v6$2",
                                                 },
                                                 right: {
                                                   type: "Identifier",
@@ -321,8 +320,7 @@ async function MemberRows() {
                                                     },
                                                   },
                                                   name: "at",
-                                                  bindingKey:
-                                                    "at$30ur5mgzea4v6$4",
+                                                  key: "at$30ur5mgzea4v6$4",
                                                 },
                                               },
                                             },
@@ -373,7 +371,7 @@ async function MemberRows() {
                   end: { line: 26, column: 14 },
                 },
                 name: "held",
-                bindingKey: "held$30ur5mgzea4v6$1",
+                key: "held$30ur5mgzea4v6$1",
               },
               init: {
                 type: "CallExpression",
@@ -403,7 +401,7 @@ async function MemberRows() {
                         end: { line: 26, column: 29 },
                       },
                       name: "build",
-                      bindingKey: "build$30ur5mgzea4v6$0",
+                      key: "build$30ur5mgzea4v6$0",
                     },
                     arguments: [
                       {
@@ -576,7 +574,7 @@ async function MemberRows() {
                                     end: { line: 31, column: 25 },
                                   },
                                   name: "held",
-                                  bindingKey: "held$30ur5mgzea4v6$1",
+                                  key: "held$30ur5mgzea4v6$1",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -627,7 +625,7 @@ async function MemberRows() {
                                 end: { line: 32, column: 17 },
                               },
                               name: "row",
-                              bindingKey: "row$30ur5mgzea4v6$5",
+                              key: "row$30ur5mgzea4v6$5",
                             },
                           ],
                           body: {
@@ -703,7 +701,7 @@ async function MemberRows() {
                                                 end: { line: 33, column: 36 },
                                               },
                                               name: "row",
-                                              bindingKey: "row$30ur5mgzea4v6$5",
+                                              key: "row$30ur5mgzea4v6$5",
                                             },
                                             property: {
                                               type: "Identifier",
@@ -787,7 +785,7 @@ async function MemberRows() {
                                           end: { line: 34, column: 20 },
                                         },
                                         name: "row",
-                                        bindingKey: "row$30ur5mgzea4v6$5",
+                                        key: "row$30ur5mgzea4v6$5",
                                       },
                                       property: {
                                         type: "Identifier",

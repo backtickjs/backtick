@@ -63,7 +63,7 @@ async function Held({ again }) {
                   end: { line: 32, column: 15 },
                 },
                 name: "shown",
-                bindingKey: "shown$t2scjfff5u22$0",
+                key: "shown$t2scjfff5u22$0",
               },
               init: {
                 type: "CallExpression",
@@ -115,7 +115,7 @@ async function Held({ again }) {
                   end: { line: 34, column: 17 },
                 },
                 name: "started",
-                bindingKey: "started$t2scjfff5u22$1",
+                key: "started$t2scjfff5u22$1",
               },
               init: {
                 type: "CallExpression",
@@ -218,7 +218,7 @@ async function Held({ again }) {
                                         end: { line: 36, column: 13 },
                                       },
                                       name: "shown",
-                                      bindingKey: "shown$t2scjfff5u22$0",
+                                      key: "shown$t2scjfff5u22$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -317,7 +317,7 @@ async function Held({ again }) {
                           end: { line: 40, column: 19 },
                         },
                         name: "shown",
-                        bindingKey: "shown$t2scjfff5u22$0",
+                        key: "shown$t2scjfff5u22$0",
                       },
                       property: {
                         type: "Identifier",
@@ -483,7 +483,7 @@ const conditionalDrawing = cs.create(
                 end: { line: 45, column: 14 },
               },
               name: "builds",
-              bindingKey: "builds$t2scjfff5u22$2",
+              key: "builds$t2scjfff5u22$2",
             },
             init: {
               type: "CallExpression",
@@ -614,7 +614,7 @@ const conditionalDrawing = cs.create(
                             end: { line: 49, column: 31 },
                           },
                           name: "builds",
-                          bindingKey: "builds$t2scjfff5u22$2",
+                          key: "builds$t2scjfff5u22$2",
                         },
                         property: {
                           type: "Identifier",
@@ -771,7 +771,7 @@ const conditionalDrawing = cs.create(
                                           end: { line: 53, column: 18 },
                                         },
                                         name: "builds",
-                                        bindingKey: "builds$t2scjfff5u22$2",
+                                        key: "builds$t2scjfff5u22$2",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -811,8 +811,7 @@ const conditionalDrawing = cs.create(
                                                 end: { line: 53, column: 29 },
                                               },
                                               name: "builds",
-                                              bindingKey:
-                                                "builds$t2scjfff5u22$2",
+                                              key: "builds$t2scjfff5u22$2",
                                             },
                                             property: {
                                               type: "Identifier",
@@ -873,7 +872,7 @@ const conditionalDrawing = cs.create(
                                             end: { line: 54, column: 25 },
                                           },
                                           name: "builds",
-                                          bindingKey: "builds$t2scjfff5u22$2",
+                                          key: "builds$t2scjfff5u22$2",
                                         },
                                         property: {
                                           type: "Identifier",

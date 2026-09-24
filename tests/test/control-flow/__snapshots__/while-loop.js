@@ -39,7 +39,7 @@ it("whileLoop", async (t) => {
                     end: { line: 10, column: 11 },
                   },
                   name: "i",
-                  bindingKey: "i$1qmqxi23sdk0m$0",
+                  key: "i$1qmqxi23sdk0m$0",
                 },
                 init: {
                   type: "Literal",
@@ -73,7 +73,7 @@ it("whileLoop", async (t) => {
                     end: { line: 11, column: 15 },
                   },
                   name: "total",
-                  bindingKey: "total$1qmqxi23sdk0m$1",
+                  key: "total$1qmqxi23sdk0m$1",
                 },
                 init: {
                   type: "Literal",
@@ -106,7 +106,7 @@ it("whileLoop", async (t) => {
                   end: { line: 12, column: 14 },
                 },
                 name: "i",
-                bindingKey: "i$1qmqxi23sdk0m$0",
+                key: "i$1qmqxi23sdk0m$0",
               },
               right: {
                 type: "Literal",
@@ -144,7 +144,7 @@ it("whileLoop", async (t) => {
                         end: { line: 13, column: 13 },
                       },
                       name: "total",
-                      bindingKey: "total$1qmqxi23sdk0m$1",
+                      key: "total$1qmqxi23sdk0m$1",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -160,7 +160,7 @@ it("whileLoop", async (t) => {
                           end: { line: 13, column: 21 },
                         },
                         name: "total",
-                        bindingKey: "total$1qmqxi23sdk0m$1",
+                        key: "total$1qmqxi23sdk0m$1",
                       },
                       right: {
                         type: "Identifier",
@@ -169,7 +169,7 @@ it("whileLoop", async (t) => {
                           end: { line: 13, column: 25 },
                         },
                         name: "i",
-                        bindingKey: "i$1qmqxi23sdk0m$0",
+                        key: "i$1qmqxi23sdk0m$0",
                       },
                     },
                   },
@@ -194,7 +194,7 @@ it("whileLoop", async (t) => {
                         end: { line: 14, column: 13 },
                       },
                       name: "i",
-                      bindingKey: "i$1qmqxi23sdk0m$0",
+                      key: "i$1qmqxi23sdk0m$0",
                     },
                     right: {
                       type: "Literal",
@@ -225,7 +225,7 @@ it("whileLoop", async (t) => {
                             end: { line: 15, column: 22 },
                           },
                           name: "total",
-                          bindingKey: "total$1qmqxi23sdk0m$1",
+                          key: "total$1qmqxi23sdk0m$1",
                         },
                       },
                     ],
@@ -252,7 +252,7 @@ it("whileLoop", async (t) => {
                         end: { line: 17, column: 9 },
                       },
                       name: "i",
-                      bindingKey: "i$1qmqxi23sdk0m$0",
+                      key: "i$1qmqxi23sdk0m$0",
                     },
                     right: {
                       type: "BinaryExpression",
@@ -268,7 +268,7 @@ it("whileLoop", async (t) => {
                           end: { line: 17, column: 13 },
                         },
                         name: "i",
-                        bindingKey: "i$1qmqxi23sdk0m$0",
+                        key: "i$1qmqxi23sdk0m$0",
                       },
                       right: {
                         type: "Literal",
@@ -297,7 +297,7 @@ it("whileLoop", async (t) => {
                 end: { line: 19, column: 18 },
               },
               name: "total",
-              bindingKey: "total$1qmqxi23sdk0m$1",
+              key: "total$1qmqxi23sdk0m$1",
             },
           },
         ],

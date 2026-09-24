@@ -42,7 +42,7 @@ it("math", async (t) => {
                     end: { line: 13, column: 19 },
                   },
                   name: "rounded",
-                  bindingKey: "rounded$1j4uiiyebx17u$0",
+                  key: "rounded$1j4uiiyebx17u$0",
                 },
                 init: {
                   type: "BinaryExpression",
@@ -263,7 +263,7 @@ it("math", async (t) => {
                     end: { line: 15, column: 17 },
                   },
                   name: "edges",
-                  bindingKey: "edges$1j4uiiyebx17u$1",
+                  key: "edges$1j4uiiyebx17u$1",
                 },
                 init: {
                   type: "BinaryExpression",
@@ -493,7 +493,7 @@ it("math", async (t) => {
                     end: { line: 17, column: 17 },
                   },
                   name: "picks",
-                  bindingKey: "picks$1j4uiiyebx17u$2",
+                  key: "picks$1j4uiiyebx17u$2",
                 },
                 init: {
                   type: "BinaryExpression",
@@ -827,7 +827,7 @@ it("math", async (t) => {
                                             end: { line: 20, column: 15 },
                                           },
                                           name: "rounded",
-                                          bindingKey: "rounded$1j4uiiyebx17u$0",
+                                          key: "rounded$1j4uiiyebx17u$0",
                                         },
                                         right: {
                                           type: "Literal",
@@ -845,7 +845,7 @@ it("math", async (t) => {
                                           end: { line: 22, column: 13 },
                                         },
                                         name: "edges",
-                                        bindingKey: "edges$1j4uiiyebx17u$1",
+                                        key: "edges$1j4uiiyebx17u$1",
                                       },
                                     },
                                     right: {
@@ -864,7 +864,7 @@ it("math", async (t) => {
                                       end: { line: 24, column: 13 },
                                     },
                                     name: "picks",
-                                    bindingKey: "picks$1j4uiiyebx17u$2",
+                                    key: "picks$1j4uiiyebx17u$2",
                                   },
                                 },
                                 right: {

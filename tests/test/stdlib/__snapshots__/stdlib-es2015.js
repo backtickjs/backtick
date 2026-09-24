@@ -42,7 +42,7 @@ it("stdlibEs2015", async (t) => {
                     end: { line: 13, column: 14 },
                   },
                   name: "xs",
-                  bindingKey: "xs$s2q4937fji9l$0",
+                  key: "xs$s2q4937fji9l$0",
                 },
                 init: {
                   type: "ArrayExpression",
@@ -109,7 +109,7 @@ it("stdlibEs2015", async (t) => {
                     end: { line: 14, column: 16 },
                   },
                   name: "word",
-                  bindingKey: "word$s2q4937fji9l$1",
+                  key: "word$s2q4937fji9l$1",
                 },
                 init: {
                   type: "Literal",
@@ -168,7 +168,7 @@ it("stdlibEs2015", async (t) => {
                           end: { line: 16, column: 17 },
                         },
                         name: "xs",
-                        bindingKey: "xs$s2q4937fji9l$0",
+                        key: "xs$s2q4937fji9l$0",
                       },
                       property: {
                         type: "Identifier",
@@ -196,7 +196,7 @@ it("stdlibEs2015", async (t) => {
                               end: { line: 16, column: 25 },
                             },
                             name: "x",
-                            bindingKey: "x$s2q4937fji9l$2",
+                            key: "x$s2q4937fji9l$2",
                           },
                         ],
                         body: {
@@ -213,7 +213,7 @@ it("stdlibEs2015", async (t) => {
                               end: { line: 16, column: 31 },
                             },
                             name: "x",
-                            bindingKey: "x$s2q4937fji9l$2",
+                            key: "x$s2q4937fji9l$2",
                           },
                           right: {
                             type: "Literal",
@@ -274,7 +274,7 @@ it("stdlibEs2015", async (t) => {
                             end: { line: 17, column: 19 },
                           },
                           name: "xs",
-                          bindingKey: "xs$s2q4937fji9l$0",
+                          key: "xs$s2q4937fji9l$0",
                         },
                         property: {
                           type: "Identifier",
@@ -302,7 +302,7 @@ it("stdlibEs2015", async (t) => {
                                 end: { line: 17, column: 27 },
                               },
                               name: "x",
-                              bindingKey: "x$s2q4937fji9l$3",
+                              key: "x$s2q4937fji9l$3",
                             },
                           ],
                           body: {
@@ -319,7 +319,7 @@ it("stdlibEs2015", async (t) => {
                                 end: { line: 17, column: 33 },
                               },
                               name: "x",
-                              bindingKey: "x$s2q4937fji9l$3",
+                              key: "x$s2q4937fji9l$3",
                             },
                             right: {
                               type: "Literal",
@@ -382,7 +382,7 @@ it("stdlibEs2015", async (t) => {
                           end: { line: 18, column: 14 },
                         },
                         name: "xs",
-                        bindingKey: "xs$s2q4937fji9l$0",
+                        key: "xs$s2q4937fji9l$0",
                       },
                       property: {
                         type: "Identifier",
@@ -410,7 +410,7 @@ it("stdlibEs2015", async (t) => {
                               end: { line: 18, column: 27 },
                             },
                             name: "x",
-                            bindingKey: "x$s2q4937fji9l$4",
+                            key: "x$s2q4937fji9l$4",
                           },
                         ],
                         body: {
@@ -427,7 +427,7 @@ it("stdlibEs2015", async (t) => {
                               end: { line: 18, column: 33 },
                             },
                             name: "x",
-                            bindingKey: "x$s2q4937fji9l$4",
+                            key: "x$s2q4937fji9l$4",
                           },
                           right: {
                             type: "Literal",
@@ -481,7 +481,7 @@ it("stdlibEs2015", async (t) => {
                           end: { line: 19, column: 19 },
                         },
                         name: "xs",
-                        bindingKey: "xs$s2q4937fji9l$0",
+                        key: "xs$s2q4937fji9l$0",
                       },
                       property: {
                         type: "Identifier",
@@ -509,7 +509,7 @@ it("stdlibEs2015", async (t) => {
                               end: { line: 19, column: 32 },
                             },
                             name: "x",
-                            bindingKey: "x$s2q4937fji9l$5",
+                            key: "x$s2q4937fji9l$5",
                           },
                         ],
                         body: {
@@ -526,7 +526,7 @@ it("stdlibEs2015", async (t) => {
                               end: { line: 19, column: 38 },
                             },
                             name: "x",
-                            bindingKey: "x$s2q4937fji9l$5",
+                            key: "x$s2q4937fji9l$5",
                           },
                           right: {
                             type: "Literal",
@@ -580,7 +580,7 @@ it("stdlibEs2015", async (t) => {
                           end: { line: 20, column: 22 },
                         },
                         name: "word",
-                        bindingKey: "word$s2q4937fji9l$1",
+                        key: "word$s2q4937fji9l$1",
                       },
                       property: {
                         type: "Identifier",
@@ -643,7 +643,7 @@ it("stdlibEs2015", async (t) => {
                           end: { line: 21, column: 24 },
                         },
                         name: "word",
-                        bindingKey: "word$s2q4937fji9l$1",
+                        key: "word$s2q4937fji9l$1",
                       },
                       property: {
                         type: "Identifier",
@@ -706,7 +706,7 @@ it("stdlibEs2015", async (t) => {
                           end: { line: 22, column: 22 },
                         },
                         name: "word",
-                        bindingKey: "word$s2q4937fji9l$1",
+                        key: "word$s2q4937fji9l$1",
                       },
                       property: {
                         type: "Identifier",

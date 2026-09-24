@@ -42,7 +42,7 @@ it("loopJumps", async (t) => {
                     end: { line: 13, column: 13 },
                   },
                   name: "out",
-                  bindingKey: "out$28bjtc1esuow3$0",
+                  key: "out$28bjtc1esuow3$0",
                 },
                 init: {
                   type: "Literal",
@@ -82,7 +82,7 @@ it("loopJumps", async (t) => {
                       end: { line: 14, column: 16 },
                     },
                     name: "i",
-                    bindingKey: "i$28bjtc1esuow3$1",
+                    key: "i$28bjtc1esuow3$1",
                   },
                   init: {
                     type: "Literal",
@@ -109,7 +109,7 @@ it("loopJumps", async (t) => {
                   end: { line: 14, column: 23 },
                 },
                 name: "i",
-                bindingKey: "i$28bjtc1esuow3$1",
+                key: "i$28bjtc1esuow3$1",
               },
               right: {
                 type: "Literal",
@@ -134,7 +134,7 @@ it("loopJumps", async (t) => {
                   end: { line: 14, column: 30 },
                 },
                 name: "i",
-                bindingKey: "i$28bjtc1esuow3$1",
+                key: "i$28bjtc1esuow3$1",
               },
               right: {
                 type: "BinaryExpression",
@@ -150,7 +150,7 @@ it("loopJumps", async (t) => {
                     end: { line: 14, column: 34 },
                   },
                   name: "i",
-                  bindingKey: "i$28bjtc1esuow3$1",
+                  key: "i$28bjtc1esuow3$1",
                 },
                 right: {
                   type: "Literal",
@@ -189,7 +189,7 @@ it("loopJumps", async (t) => {
                         end: { line: 15, column: 13 },
                       },
                       name: "i",
-                      bindingKey: "i$28bjtc1esuow3$1",
+                      key: "i$28bjtc1esuow3$1",
                     },
                     right: {
                       type: "Literal",
@@ -260,7 +260,7 @@ it("loopJumps", async (t) => {
                               end: { line: 19, column: 13 },
                             },
                             name: "out",
-                            bindingKey: "out$28bjtc1esuow3$0",
+                            key: "out$28bjtc1esuow3$0",
                           },
                           right: {
                             type: "BinaryExpression",
@@ -276,7 +276,7 @@ it("loopJumps", async (t) => {
                                 end: { line: 19, column: 19 },
                               },
                               name: "out",
-                              bindingKey: "out$28bjtc1esuow3$0",
+                              key: "out$28bjtc1esuow3$0",
                             },
                             right: {
                               type: "Identifier",
@@ -285,7 +285,7 @@ it("loopJumps", async (t) => {
                                 end: { line: 19, column: 23 },
                               },
                               name: "i",
-                              bindingKey: "i$28bjtc1esuow3$1",
+                              key: "i$28bjtc1esuow3$1",
                             },
                           },
                         },
@@ -321,7 +321,7 @@ it("loopJumps", async (t) => {
                         end: { line: 22, column: 13 },
                       },
                       name: "i",
-                      bindingKey: "i$28bjtc1esuow3$1",
+                      key: "i$28bjtc1esuow3$1",
                     },
                     right: {
                       type: "Literal",
@@ -367,7 +367,7 @@ it("loopJumps", async (t) => {
                 end: { line: 26, column: 16 },
               },
               name: "out",
-              bindingKey: "out$28bjtc1esuow3$0",
+              key: "out$28bjtc1esuow3$0",
             },
           },
         ],
