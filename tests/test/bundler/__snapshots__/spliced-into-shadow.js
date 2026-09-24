@@ -27,7 +27,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.run(
       cs.create(
-        [32, 17, 39, 7],
+        { start: { line: 32, column: 16 }, end: { line: 39, column: 6 } },
         {
           version: "0.0.0",
           filePath: "bundler/spliced-into-shadow.test.tsx",
@@ -36,7 +36,10 @@ it("refuses a capture spliced where it is shadowed", async () => {
             $0splice0: {
               value: keep(
                 cs.create(
-                  [34, 28, 34, 37],
+                  {
+                    start: { line: 34, column: 27 },
+                    end: { line: 34, column: 36 },
+                  },
                   {
                     version: "0.0.0",
                     filePath: "bundler/spliced-into-shadow.test.tsx",
@@ -45,9 +48,12 @@ it("refuses a capture spliced where it is shadowed", async () => {
                     captures: ["total$1rcr3g75v4qq5$0"],
                   },
                   () => ({
-                    kind: "id",
-                    loc: [34, 31, 34, 36],
-                    text: "total",
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 34, column: 30 },
+                      end: { line: 34, column: 35 },
+                    },
+                    name: "total",
                     bindingKey: "total$1rcr3g75v4qq5$0",
                   }),
                 ),
@@ -59,85 +65,166 @@ it("refuses a capture spliced where it is shadowed", async () => {
           captures: [],
         },
         () => ({
-          kind: "{}",
-          loc: [32, 20, 39, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 32, column: 19 },
+            end: { line: 39, column: 5 },
+          },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 33, column: 6 },
+                end: { line: 33, column: 22 },
+              },
               kind: "const",
-              loc: [33, 7, 33, 23],
-              name: {
-                kind: "id",
-                loc: [33, 13, 33, 18],
-                text: "total",
-                bindingKey: "total$1rcr3g75v4qq5$0",
-              },
-              initializer: {
-                kind: "number",
-                loc: [33, 21, 33, 22],
-                value: 1,
-              },
-            },
-            {
-              kind: "const",
-              loc: [34, 7, 34, 40],
-              name: {
-                kind: "id",
-                loc: [34, 13, 34, 18],
-                text: "first",
-                bindingKey: "first$1rcr3g75v4qq5$1",
-              },
-              initializer: {
-                kind: "splice",
-                loc: [34, 21, 34, 39],
-                key: "$0splice0",
-              },
-            },
-            {
-              kind: "{}",
-              loc: [35, 7, 38, 8],
-              statements: [
+              declarations: [
                 {
-                  kind: "const",
-                  loc: [36, 9, 36, 25],
-                  name: {
-                    kind: "id",
-                    loc: [36, 15, 36, 20],
-                    text: "total",
-                    bindingKey: "total$1rcr3g75v4qq5$2",
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 33, column: 12 },
+                    end: { line: 33, column: 21 },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [36, 23, 36, 24],
-                    value: 2,
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 33, column: 12 },
+                      end: { line: 33, column: 17 },
+                    },
+                    name: "total",
+                    bindingKey: "total$1rcr3g75v4qq5$0",
+                  },
+                  init: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 33, column: 20 },
+                      end: { line: 33, column: 21 },
+                    },
+                    value: 1,
                   },
                 },
+              ],
+            },
+            {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 34, column: 6 },
+                end: { line: 34, column: 39 },
+              },
+              kind: "const",
+              declarations: [
                 {
-                  kind: "return",
-                  loc: [37, 9, 37, 43],
-                  expression: {
-                    kind: "binop",
-                    loc: [37, 16, 37, 42],
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 34, column: 12 },
+                    end: { line: 34, column: 38 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 34, column: 12 },
+                      end: { line: 34, column: 17 },
+                    },
+                    name: "first",
+                    bindingKey: "first$1rcr3g75v4qq5$1",
+                  },
+                  init: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 34, column: 20 },
+                      end: { line: 34, column: 38 },
+                    },
+                    key: "$0splice0",
+                  },
+                },
+              ],
+            },
+            {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 35, column: 6 },
+                end: { line: 38, column: 7 },
+              },
+              body: [
+                {
+                  type: "VariableDeclaration",
+                  loc: {
+                    start: { line: 36, column: 8 },
+                    end: { line: 36, column: 24 },
+                  },
+                  kind: "const",
+                  declarations: [
+                    {
+                      type: "VariableDeclarator",
+                      loc: {
+                        start: { line: 36, column: 14 },
+                        end: { line: 36, column: 23 },
+                      },
+                      id: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 36, column: 14 },
+                          end: { line: 36, column: 19 },
+                        },
+                        name: "total",
+                        bindingKey: "total$1rcr3g75v4qq5$2",
+                      },
+                      init: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 36, column: 22 },
+                          end: { line: 36, column: 23 },
+                        },
+                        value: 2,
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: "ReturnStatement",
+                  loc: {
+                    start: { line: 37, column: 8 },
+                    end: { line: 37, column: 42 },
+                  },
+                  argument: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 37, column: 15 },
+                      end: { line: 37, column: 41 },
+                    },
+                    operator: "+",
                     left: {
-                      kind: "binop",
-                      loc: [37, 16, 37, 29],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 37, column: 15 },
+                        end: { line: 37, column: 28 },
+                      },
+                      operator: "+",
                       left: {
-                        kind: "id",
-                        loc: [37, 16, 37, 21],
-                        text: "first",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 37, column: 15 },
+                          end: { line: 37, column: 20 },
+                        },
+                        name: "first",
                         bindingKey: "first$1rcr3g75v4qq5$1",
                       },
-                      operatorToken: "+",
                       right: {
-                        kind: "id",
-                        loc: [37, 24, 37, 29],
-                        text: "total",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 37, column: 23 },
+                          end: { line: 37, column: 28 },
+                        },
+                        name: "total",
                         bindingKey: "total$1rcr3g75v4qq5$2",
                       },
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "splice",
-                      loc: [37, 32, 37, 42],
+                      type: "Splice",
+                      loc: {
+                        start: { line: 37, column: 31 },
+                        end: { line: 37, column: 41 },
+                      },
                       key: "$0splice1",
                     },
                   },

@@ -10,7 +10,7 @@ it("indexPastEnd", async (t) => {
     t,
     "indexPastEnd",
     cs.create(
-      [13, 5, 16, 7],
+      { start: { line: 13, column: 4 }, end: { line: 16, column: 6 } },
       {
         version: "0.0.0",
         filePath: "objects/index-past-end.test.tsx",
@@ -19,52 +19,91 @@ it("indexPastEnd", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [13, 8, 16, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 13, column: 7 }, end: { line: 16, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 36 },
+            },
             kind: "const",
-            loc: [14, 7, 14, 37],
-            name: {
-              kind: "id",
-              loc: [14, 13, 14, 18],
-              text: "names",
-              bindingKey: "names$3821as72cvvin$0",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [14, 21, 14, 36],
-              elements: [
-                {
-                  kind: "string",
-                  loc: [14, 22, 14, 28],
-                  text: "zero",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 14, column: 12 },
+                  end: { line: 14, column: 35 },
                 },
-                {
-                  kind: "string",
-                  loc: [14, 30, 14, 35],
-                  text: "one",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 17 },
+                  },
+                  name: "names",
+                  bindingKey: "names$3821as72cvvin$0",
                 },
-              ],
-            },
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 14, column: 20 },
+                    end: { line: 14, column: 35 },
+                  },
+                  elements: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 21 },
+                        end: { line: 14, column: 27 },
+                      },
+                      value: "zero",
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 29 },
+                        end: { line: 14, column: 34 },
+                      },
+                      value: "one",
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [15, 7, 15, 23],
-            expression: {
-              kind: "[]",
-              loc: [15, 14, 15, 22],
-              expression: {
-                kind: "id",
-                loc: [15, 14, 15, 19],
-                text: "names",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 22 },
+            },
+            argument: {
+              type: "MemberExpression",
+              loc: {
+                start: { line: 15, column: 13 },
+                end: { line: 15, column: 21 },
+              },
+              object: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 13 },
+                  end: { line: 15, column: 18 },
+                },
+                name: "names",
                 bindingKey: "names$3821as72cvvin$0",
               },
-              argumentExpression: {
-                kind: "number",
-                loc: [15, 20, 15, 21],
+              property: {
+                type: "Literal",
+                loc: {
+                  start: { line: 15, column: 19 },
+                  end: { line: 15, column: 20 },
+                },
                 value: 9,
               },
+              computed: true,
+              optional: false,
             },
           },
         ],

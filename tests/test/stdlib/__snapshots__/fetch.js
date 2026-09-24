@@ -12,7 +12,7 @@ it("fetchRequests", async (t) => {
     t,
     "fetchRequests",
     cs.create(
-      [16, 5, 49, 7],
+      { start: { line: 16, column: 4 }, end: { line: 49, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/fetch.test.tsx",
@@ -24,526 +24,1010 @@ it("fetchRequests", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [16, 8, 49, 6],
-        parameters: [],
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 16, column: 7 }, end: { line: 49, column: 5 } },
+        params: [],
         body: {
-          kind: "{}",
-          loc: [16, 14, 49, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 16, column: 13 },
+            end: { line: 49, column: 5 },
+          },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 37 },
+              },
               kind: "const",
-              loc: [17, 7, 17, 38],
-              name: {
-                kind: "id",
-                loc: [17, 13, 17, 17],
-                text: "held",
-                bindingKey: "held$2oxvexs6ogdoj$0",
-              },
-              initializer: {
-                kind: "()",
-                loc: [17, 20, 17, 37],
-                expression: {
-                  kind: "splice",
-                  loc: [17, 20, 17, 26],
-                  key: "$state",
-                },
-                arguments: [
-                  {
-                    kind: "string",
-                    loc: [17, 27, 17, 36],
-                    text: "waiting",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 36 },
                   },
-                ],
-              },
-            },
-            {
-              kind: "()",
-              loc: [19, 7, 31, 8],
-              expression: {
-                kind: ".",
-                loc: [19, 7, 19, 20],
-                expression: {
-                  kind: "splice",
-                  loc: [19, 7, 19, 14],
-                  key: "$window",
-                },
-                name: "fetch",
-              },
-              arguments: [
-                {
-                  kind: "string",
-                  loc: [20, 9, 20, 57],
-                  text: "/cases/built-ins/Math/trunc/Math.trunc_Success",
-                },
-                {
-                  kind: "=>",
-                  loc: [21, 9, 26, 10],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [21, 10, 21, 28],
-                      name: {
-                        kind: "id",
-                        loc: [21, 10, 21, 18],
-                        text: "response",
-                        bindingKey: "response$2oxvexs6ogdoj$1",
-                      },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 12 },
+                      end: { line: 17, column: 16 },
                     },
-                  ],
-                  body: {
-                    kind: "{}",
-                    loc: [21, 33, 26, 10],
-                    statements: [
-                      {
-                        kind: "if",
-                        loc: [22, 11, 24, 12],
-                        expression: {
-                          kind: "binop",
-                          loc: [22, 15, 22, 38],
-                          left: {
-                            kind: ".",
-                            loc: [22, 15, 22, 30],
-                            expression: {
-                              kind: "id",
-                              loc: [22, 15, 22, 23],
-                              text: "response",
-                              bindingKey: "response$2oxvexs6ogdoj$1",
-                            },
-                            name: "status",
-                          },
-                          operatorToken: "!==",
-                          right: {
-                            kind: "number",
-                            loc: [22, 35, 22, 38],
-                            value: 200,
-                          },
-                        },
-                        thenStatement: {
-                          kind: "{}",
-                          loc: [22, 40, 24, 12],
-                          statements: [
-                            {
-                              kind: "throw",
-                              loc: [23, 13, 23, 49],
-                              expression: {
-                                kind: "binop",
-                                loc: [23, 19, 23, 48],
-                                left: {
-                                  kind: "string",
-                                  loc: [23, 19, 23, 30],
-                                  text: "answered ",
-                                },
-                                operatorToken: "+",
-                                right: {
-                                  kind: ".",
-                                  loc: [23, 33, 23, 48],
-                                  expression: {
-                                    kind: "id",
-                                    loc: [23, 33, 23, 41],
-                                    text: "response",
-                                    bindingKey: "response$2oxvexs6ogdoj$1",
-                                  },
-                                  name: "status",
-                                },
-                              },
-                            },
-                          ],
-                        },
-                        elseStatement: null,
+                    name: "held",
+                    bindingKey: "held$2oxvexs6ogdoj$0",
+                  },
+                  init: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 17, column: 19 },
+                      end: { line: 17, column: 36 },
+                    },
+                    callee: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 17, column: 19 },
+                        end: { line: 17, column: 25 },
                       },
+                      key: "$state",
+                    },
+                    arguments: [
                       {
-                        kind: "()",
-                        loc: [25, 11, 25, 76],
-                        expression: {
-                          kind: ".",
-                          loc: [25, 11, 25, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [25, 11, 25, 15],
-                            text: "held",
-                            bindingKey: "held$2oxvexs6ogdoj$0",
-                          },
-                          name: "set",
+                        type: "Literal",
+                        loc: {
+                          start: { line: 17, column: 26 },
+                          end: { line: 17, column: 35 },
                         },
-                        arguments: [
-                          {
-                            kind: "?:",
-                            loc: [25, 20, 25, 75],
-                            condition: {
-                              kind: "binop",
-                              loc: [25, 20, 25, 54],
-                              left: {
-                                kind: "()",
-                                loc: [25, 20, 25, 45],
-                                expression: {
-                                  kind: ".",
-                                  loc: [25, 20, 25, 30],
-                                  expression: {
-                                    kind: "bltn",
-                                    loc: [25, 20, 25, 24],
-                                    name: "JSON",
-                                  },
-                                  name: "parse",
-                                },
-                                arguments: [
-                                  {
-                                    kind: ".",
-                                    loc: [25, 31, 25, 44],
-                                    expression: {
-                                      kind: "id",
-                                      loc: [25, 31, 25, 39],
-                                      text: "response",
-                                      bindingKey: "response$2oxvexs6ogdoj$1",
-                                    },
-                                    name: "text",
-                                  },
-                                ],
-                              },
-                              operatorToken: "===",
-                              right: {
-                                kind: "null",
-                                loc: [25, 50, 25, 54],
-                              },
-                            },
-                            whenTrue: {
-                              kind: "string",
-                              loc: [25, 57, 25, 63],
-                              text: "null",
-                            },
-                            whenFalse: {
-                              kind: "string",
-                              loc: [25, 66, 25, 75],
-                              text: "a value",
-                            },
-                          },
-                        ],
+                        value: "waiting",
                       },
                     ],
+                    optional: false,
                   },
-                },
-                {
-                  kind: "=>",
-                  loc: [27, 9, 29, 10],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [27, 10, 27, 25],
-                      name: {
-                        kind: "id",
-                        loc: [27, 10, 27, 17],
-                        text: "message",
-                        bindingKey: "message$2oxvexs6ogdoj$2",
-                      },
-                    },
-                  ],
-                  body: {
-                    kind: "{}",
-                    loc: [27, 30, 29, 10],
-                    statements: [
-                      {
-                        kind: "()",
-                        loc: [28, 11, 28, 42],
-                        expression: {
-                          kind: ".",
-                          loc: [28, 11, 28, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [28, 11, 28, 15],
-                            text: "held",
-                            bindingKey: "held$2oxvexs6ogdoj$0",
-                          },
-                          name: "set",
-                        },
-                        arguments: [
-                          {
-                            kind: "binop",
-                            loc: [28, 20, 28, 41],
-                            left: {
-                              kind: "string",
-                              loc: [28, 20, 28, 31],
-                              text: "failed \u2014 ",
-                            },
-                            operatorToken: "+",
-                            right: {
-                              kind: "id",
-                              loc: [28, 34, 28, 41],
-                              text: "message",
-                              bindingKey: "message$2oxvexs6ogdoj$2",
-                            },
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: "obj",
-                  loc: [30, 9, 30, 26],
-                  properties: [
-                    {
-                      kind: ":",
-                      loc: [30, 11, 30, 24],
-                      name: {
-                        kind: "string",
-                        loc: [30, 11, 30, 18],
-                        text: "timeout",
-                      },
-                      initializer: {
-                        kind: "number",
-                        loc: [30, 20, 30, 24],
-                        value: 3000,
-                      },
-                    },
-                  ],
                 },
               ],
             },
             {
-              kind: "()",
-              loc: [33, 7, 46, 8],
-              expression: {
-                kind: ".",
-                loc: [33, 7, 33, 20],
-                expression: {
-                  kind: "splice",
-                  loc: [33, 7, 33, 14],
-                  key: "$window",
-                },
-                name: "fetch",
+              type: "ExpressionStatement",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 31, column: 8 },
               },
-              arguments: [
-                {
-                  kind: "string",
-                  loc: [34, 9, 34, 17],
-                  text: "/cases",
+              expression: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 19, column: 6 },
+                  end: { line: 31, column: 7 },
                 },
-                {
-                  kind: "=>",
-                  loc: [35, 9, 37, 10],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [35, 10, 35, 28],
-                      name: {
-                        kind: "id",
-                        loc: [35, 10, 35, 18],
-                        text: "response",
-                        bindingKey: "response$2oxvexs6ogdoj$3",
-                      },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 19, column: 6 },
+                    end: { line: 19, column: 19 },
+                  },
+                  object: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 19, column: 6 },
+                      end: { line: 19, column: 13 },
                     },
-                  ],
-                  body: {
-                    kind: "{}",
-                    loc: [35, 33, 37, 10],
-                    statements: [
+                    key: "$window",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 19, column: 14 },
+                      end: { line: 19, column: 19 },
+                    },
+                    name: "fetch",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 20, column: 8 },
+                      end: { line: 20, column: 56 },
+                    },
+                    value: "/cases/built-ins/Math/trunc/Math.trunc_Success",
+                  },
+                  {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 21, column: 8 },
+                      end: { line: 26, column: 9 },
+                    },
+                    params: [
                       {
-                        kind: "()",
-                        loc: [36, 11, 36, 34],
-                        expression: {
-                          kind: ".",
-                          loc: [36, 11, 36, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [36, 11, 36, 15],
-                            text: "held",
-                            bindingKey: "held$2oxvexs6ogdoj$0",
-                          },
-                          name: "set",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 21, column: 9 },
+                          end: { line: 21, column: 17 },
                         },
-                        arguments: [
-                          {
-                            kind: ".",
-                            loc: [36, 20, 36, 33],
-                            expression: {
-                              kind: "id",
-                              loc: [36, 20, 36, 28],
-                              text: "response",
-                              bindingKey: "response$2oxvexs6ogdoj$3",
-                            },
-                            name: "text",
-                          },
-                        ],
+                        name: "response",
+                        bindingKey: "response$2oxvexs6ogdoj$1",
                       },
                     ],
-                  },
-                },
-                {
-                  kind: "=>",
-                  loc: [38, 9, 40, 10],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [38, 10, 38, 25],
-                      name: {
-                        kind: "id",
-                        loc: [38, 10, 38, 17],
-                        text: "message",
-                        bindingKey: "message$2oxvexs6ogdoj$4",
+                    body: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 21, column: 32 },
+                        end: { line: 26, column: 9 },
                       },
-                    },
-                  ],
-                  body: {
-                    kind: "{}",
-                    loc: [38, 30, 40, 10],
-                    statements: [
-                      {
-                        kind: "()",
-                        loc: [39, 11, 39, 28],
-                        expression: {
-                          kind: ".",
-                          loc: [39, 11, 39, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [39, 11, 39, 15],
-                            text: "held",
-                            bindingKey: "held$2oxvexs6ogdoj$0",
+                      body: [
+                        {
+                          type: "IfStatement",
+                          loc: {
+                            start: { line: 22, column: 10 },
+                            end: { line: 24, column: 11 },
                           },
-                          name: "set",
-                        },
-                        arguments: [
-                          {
-                            kind: "id",
-                            loc: [39, 20, 39, 27],
-                            text: "message",
-                            bindingKey: "message$2oxvexs6ogdoj$4",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: "obj",
-                  loc: [41, 9, 45, 10],
-                  properties: [
-                    {
-                      kind: ":",
-                      loc: [42, 11, 42, 25],
-                      name: {
-                        kind: "string",
-                        loc: [42, 11, 42, 17],
-                        text: "method",
-                      },
-                      initializer: {
-                        kind: "string",
-                        loc: [42, 19, 42, 25],
-                        text: "POST",
-                      },
-                    },
-                    {
-                      kind: ":",
-                      loc: [43, 11, 43, 58],
-                      name: {
-                        kind: "string",
-                        loc: [43, 11, 43, 18],
-                        text: "headers",
-                      },
-                      initializer: {
-                        kind: "obj",
-                        loc: [43, 20, 43, 58],
-                        properties: [
-                          {
-                            kind: ":",
-                            loc: [43, 22, 43, 56],
-                            name: {
-                              kind: "string",
-                              loc: [43, 22, 43, 36],
-                              text: "content-type",
+                          test: {
+                            type: "BinaryExpression",
+                            loc: {
+                              start: { line: 22, column: 14 },
+                              end: { line: 22, column: 37 },
                             },
-                            initializer: {
-                              kind: "string",
-                              loc: [43, 38, 43, 56],
-                              text: "application/json",
-                            },
-                          },
-                        ],
-                      },
-                    },
-                    {
-                      kind: ":",
-                      loc: [44, 11, 44, 69],
-                      name: {
-                        kind: "string",
-                        loc: [44, 11, 44, 15],
-                        text: "body",
-                      },
-                      initializer: {
-                        kind: "()",
-                        loc: [44, 17, 44, 69],
-                        expression: {
-                          kind: ".",
-                          loc: [44, 17, 44, 31],
-                          expression: {
-                            kind: "bltn",
-                            loc: [44, 17, 44, 21],
-                            name: "JSON",
-                          },
-                          name: "stringify",
-                        },
-                        arguments: [
-                          {
-                            kind: "obj",
-                            loc: [44, 32, 44, 68],
-                            properties: [
-                              {
-                                kind: ":",
-                                loc: [44, 34, 44, 52],
-                                name: {
-                                  kind: "string",
-                                  loc: [44, 34, 44, 38],
-                                  text: "name",
-                                },
-                                initializer: {
-                                  kind: "string",
-                                  loc: [44, 40, 44, 52],
-                                  text: "Math.trunc",
-                                },
+                            operator: "!==",
+                            left: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 22, column: 14 },
+                                end: { line: 22, column: 29 },
                               },
-                              {
-                                kind: ":",
-                                loc: [44, 54, 44, 66],
-                                name: {
-                                  kind: "string",
-                                  loc: [44, 54, 44, 60],
-                                  text: "passed",
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 22, column: 14 },
+                                  end: { line: 22, column: 22 },
                                 },
-                                initializer: {
-                                  kind: "true",
-                                  loc: [44, 62, 44, 66],
+                                name: "response",
+                                bindingKey: "response$2oxvexs6ogdoj$1",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 22, column: 23 },
+                                  end: { line: 22, column: 29 },
+                                },
+                                name: "status",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            right: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 22, column: 34 },
+                                end: { line: 22, column: 37 },
+                              },
+                              value: 200,
+                            },
+                          },
+                          consequent: {
+                            type: "BlockStatement",
+                            loc: {
+                              start: { line: 22, column: 39 },
+                              end: { line: 24, column: 11 },
+                            },
+                            body: [
+                              {
+                                type: "ThrowStatement",
+                                loc: {
+                                  start: { line: 23, column: 12 },
+                                  end: { line: 23, column: 48 },
+                                },
+                                argument: {
+                                  type: "BinaryExpression",
+                                  loc: {
+                                    start: { line: 23, column: 18 },
+                                    end: { line: 23, column: 47 },
+                                  },
+                                  operator: "+",
+                                  left: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 23, column: 18 },
+                                      end: { line: 23, column: 29 },
+                                    },
+                                    value: "answered ",
+                                  },
+                                  right: {
+                                    type: "MemberExpression",
+                                    loc: {
+                                      start: { line: 23, column: 32 },
+                                      end: { line: 23, column: 47 },
+                                    },
+                                    object: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 23, column: 32 },
+                                        end: { line: 23, column: 40 },
+                                      },
+                                      name: "response",
+                                      bindingKey: "response$2oxvexs6ogdoj$1",
+                                    },
+                                    property: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 23, column: 41 },
+                                        end: { line: 23, column: 47 },
+                                      },
+                                      name: "status",
+                                    },
+                                    computed: false,
+                                    optional: false,
+                                  },
                                 },
                               },
                             ],
                           },
-                        ],
-                      },
+                          alternate: null,
+                        },
+                        {
+                          type: "ExpressionStatement",
+                          loc: {
+                            start: { line: 25, column: 10 },
+                            end: { line: 25, column: 76 },
+                          },
+                          expression: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 25, column: 10 },
+                              end: { line: 25, column: 75 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 25, column: 10 },
+                                end: { line: 25, column: 18 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 25, column: 10 },
+                                  end: { line: 25, column: 14 },
+                                },
+                                name: "held",
+                                bindingKey: "held$2oxvexs6ogdoj$0",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 25, column: 15 },
+                                  end: { line: 25, column: 18 },
+                                },
+                                name: "set",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            arguments: [
+                              {
+                                type: "ConditionalExpression",
+                                loc: {
+                                  start: { line: 25, column: 19 },
+                                  end: { line: 25, column: 74 },
+                                },
+                                test: {
+                                  type: "BinaryExpression",
+                                  loc: {
+                                    start: { line: 25, column: 19 },
+                                    end: { line: 25, column: 53 },
+                                  },
+                                  operator: "===",
+                                  left: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 25, column: 19 },
+                                      end: { line: 25, column: 44 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 25, column: 19 },
+                                        end: { line: 25, column: 29 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 25, column: 19 },
+                                          end: { line: 25, column: 23 },
+                                        },
+                                        name: "JSON",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 25, column: 24 },
+                                          end: { line: 25, column: 29 },
+                                        },
+                                        name: "parse",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [
+                                      {
+                                        type: "MemberExpression",
+                                        loc: {
+                                          start: { line: 25, column: 30 },
+                                          end: { line: 25, column: 43 },
+                                        },
+                                        object: {
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 25, column: 30 },
+                                            end: { line: 25, column: 38 },
+                                          },
+                                          name: "response",
+                                          bindingKey:
+                                            "response$2oxvexs6ogdoj$1",
+                                        },
+                                        property: {
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 25, column: 39 },
+                                            end: { line: 25, column: 43 },
+                                          },
+                                          name: "text",
+                                        },
+                                        computed: false,
+                                        optional: false,
+                                      },
+                                    ],
+                                    optional: false,
+                                  },
+                                  right: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 25, column: 49 },
+                                      end: { line: 25, column: 53 },
+                                    },
+                                    value: null,
+                                  },
+                                },
+                                consequent: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 25, column: 56 },
+                                    end: { line: 25, column: 62 },
+                                  },
+                                  value: "null",
+                                },
+                                alternate: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 25, column: 65 },
+                                    end: { line: 25, column: 74 },
+                                  },
+                                  value: "a value",
+                                },
+                              },
+                            ],
+                            optional: false,
+                          },
+                        },
+                      ],
                     },
-                  ],
-                },
-              ],
+                    expression: false,
+                  },
+                  {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 27, column: 8 },
+                      end: { line: 29, column: 9 },
+                    },
+                    params: [
+                      {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 27, column: 9 },
+                          end: { line: 27, column: 16 },
+                        },
+                        name: "message",
+                        bindingKey: "message$2oxvexs6ogdoj$2",
+                      },
+                    ],
+                    body: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 27, column: 29 },
+                        end: { line: 29, column: 9 },
+                      },
+                      body: [
+                        {
+                          type: "ExpressionStatement",
+                          loc: {
+                            start: { line: 28, column: 10 },
+                            end: { line: 28, column: 42 },
+                          },
+                          expression: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 28, column: 10 },
+                              end: { line: 28, column: 41 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 28, column: 10 },
+                                end: { line: 28, column: 18 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 28, column: 10 },
+                                  end: { line: 28, column: 14 },
+                                },
+                                name: "held",
+                                bindingKey: "held$2oxvexs6ogdoj$0",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 28, column: 15 },
+                                  end: { line: 28, column: 18 },
+                                },
+                                name: "set",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            arguments: [
+                              {
+                                type: "BinaryExpression",
+                                loc: {
+                                  start: { line: 28, column: 19 },
+                                  end: { line: 28, column: 40 },
+                                },
+                                operator: "+",
+                                left: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 28, column: 19 },
+                                    end: { line: 28, column: 30 },
+                                  },
+                                  value: "failed \u2014 ",
+                                },
+                                right: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 28, column: 33 },
+                                    end: { line: 28, column: 40 },
+                                  },
+                                  name: "message",
+                                  bindingKey: "message$2oxvexs6ogdoj$2",
+                                },
+                              },
+                            ],
+                            optional: false,
+                          },
+                        },
+                      ],
+                    },
+                    expression: false,
+                  },
+                  {
+                    type: "ObjectExpression",
+                    loc: {
+                      start: { line: 30, column: 8 },
+                      end: { line: 30, column: 25 },
+                    },
+                    properties: [
+                      {
+                        type: "Property",
+                        loc: {
+                          start: { line: 30, column: 10 },
+                          end: { line: 30, column: 23 },
+                        },
+                        key: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 30, column: 10 },
+                            end: { line: 30, column: 17 },
+                          },
+                          name: "timeout",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 30, column: 19 },
+                            end: { line: 30, column: 23 },
+                          },
+                          value: 3000,
+                        },
+                        kind: "init",
+                        computed: false,
+                        method: false,
+                        shorthand: false,
+                      },
+                    ],
+                  },
+                ],
+                optional: false,
+              },
             },
             {
-              kind: "return",
-              loc: [48, 7, 48, 25],
+              type: "ExpressionStatement",
+              loc: {
+                start: { line: 33, column: 6 },
+                end: { line: 46, column: 8 },
+              },
               expression: {
-                kind: "()",
-                loc: [48, 14, 48, 24],
-                expression: {
-                  kind: ".",
-                  loc: [48, 14, 48, 22],
-                  expression: {
-                    kind: "id",
-                    loc: [48, 14, 48, 18],
-                    text: "held",
+                type: "CallExpression",
+                loc: {
+                  start: { line: 33, column: 6 },
+                  end: { line: 46, column: 7 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 33, column: 6 },
+                    end: { line: 33, column: 19 },
+                  },
+                  object: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 33, column: 6 },
+                      end: { line: 33, column: 13 },
+                    },
+                    key: "$window",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 33, column: 14 },
+                      end: { line: 33, column: 19 },
+                    },
+                    name: "fetch",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 34, column: 8 },
+                      end: { line: 34, column: 16 },
+                    },
+                    value: "/cases",
+                  },
+                  {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 35, column: 8 },
+                      end: { line: 37, column: 9 },
+                    },
+                    params: [
+                      {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 35, column: 9 },
+                          end: { line: 35, column: 17 },
+                        },
+                        name: "response",
+                        bindingKey: "response$2oxvexs6ogdoj$3",
+                      },
+                    ],
+                    body: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 35, column: 32 },
+                        end: { line: 37, column: 9 },
+                      },
+                      body: [
+                        {
+                          type: "ExpressionStatement",
+                          loc: {
+                            start: { line: 36, column: 10 },
+                            end: { line: 36, column: 34 },
+                          },
+                          expression: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 36, column: 10 },
+                              end: { line: 36, column: 33 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 36, column: 10 },
+                                end: { line: 36, column: 18 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 36, column: 10 },
+                                  end: { line: 36, column: 14 },
+                                },
+                                name: "held",
+                                bindingKey: "held$2oxvexs6ogdoj$0",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 36, column: 15 },
+                                  end: { line: 36, column: 18 },
+                                },
+                                name: "set",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            arguments: [
+                              {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 36, column: 19 },
+                                  end: { line: 36, column: 32 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 36, column: 19 },
+                                    end: { line: 36, column: 27 },
+                                  },
+                                  name: "response",
+                                  bindingKey: "response$2oxvexs6ogdoj$3",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 36, column: 28 },
+                                    end: { line: 36, column: 32 },
+                                  },
+                                  name: "text",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                            ],
+                            optional: false,
+                          },
+                        },
+                      ],
+                    },
+                    expression: false,
+                  },
+                  {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 38, column: 8 },
+                      end: { line: 40, column: 9 },
+                    },
+                    params: [
+                      {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 38, column: 9 },
+                          end: { line: 38, column: 16 },
+                        },
+                        name: "message",
+                        bindingKey: "message$2oxvexs6ogdoj$4",
+                      },
+                    ],
+                    body: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 38, column: 29 },
+                        end: { line: 40, column: 9 },
+                      },
+                      body: [
+                        {
+                          type: "ExpressionStatement",
+                          loc: {
+                            start: { line: 39, column: 10 },
+                            end: { line: 39, column: 28 },
+                          },
+                          expression: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 39, column: 10 },
+                              end: { line: 39, column: 27 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 39, column: 10 },
+                                end: { line: 39, column: 18 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 39, column: 10 },
+                                  end: { line: 39, column: 14 },
+                                },
+                                name: "held",
+                                bindingKey: "held$2oxvexs6ogdoj$0",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 39, column: 15 },
+                                  end: { line: 39, column: 18 },
+                                },
+                                name: "set",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            arguments: [
+                              {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 39, column: 19 },
+                                  end: { line: 39, column: 26 },
+                                },
+                                name: "message",
+                                bindingKey: "message$2oxvexs6ogdoj$4",
+                              },
+                            ],
+                            optional: false,
+                          },
+                        },
+                      ],
+                    },
+                    expression: false,
+                  },
+                  {
+                    type: "ObjectExpression",
+                    loc: {
+                      start: { line: 41, column: 8 },
+                      end: { line: 45, column: 9 },
+                    },
+                    properties: [
+                      {
+                        type: "Property",
+                        loc: {
+                          start: { line: 42, column: 10 },
+                          end: { line: 42, column: 24 },
+                        },
+                        key: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 42, column: 10 },
+                            end: { line: 42, column: 16 },
+                          },
+                          name: "method",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 42, column: 18 },
+                            end: { line: 42, column: 24 },
+                          },
+                          value: "POST",
+                        },
+                        kind: "init",
+                        computed: false,
+                        method: false,
+                        shorthand: false,
+                      },
+                      {
+                        type: "Property",
+                        loc: {
+                          start: { line: 43, column: 10 },
+                          end: { line: 43, column: 57 },
+                        },
+                        key: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 43, column: 10 },
+                            end: { line: 43, column: 17 },
+                          },
+                          name: "headers",
+                        },
+                        value: {
+                          type: "ObjectExpression",
+                          loc: {
+                            start: { line: 43, column: 19 },
+                            end: { line: 43, column: 57 },
+                          },
+                          properties: [
+                            {
+                              type: "Property",
+                              loc: {
+                                start: { line: 43, column: 21 },
+                                end: { line: 43, column: 55 },
+                              },
+                              key: {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 43, column: 21 },
+                                  end: { line: 43, column: 35 },
+                                },
+                                value: "content-type",
+                              },
+                              value: {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 43, column: 37 },
+                                  end: { line: 43, column: 55 },
+                                },
+                                value: "application/json",
+                              },
+                              kind: "init",
+                              computed: false,
+                              method: false,
+                              shorthand: false,
+                            },
+                          ],
+                        },
+                        kind: "init",
+                        computed: false,
+                        method: false,
+                        shorthand: false,
+                      },
+                      {
+                        type: "Property",
+                        loc: {
+                          start: { line: 44, column: 10 },
+                          end: { line: 44, column: 68 },
+                        },
+                        key: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 44, column: 10 },
+                            end: { line: 44, column: 14 },
+                          },
+                          name: "body",
+                        },
+                        value: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 44, column: 16 },
+                            end: { line: 44, column: 68 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 44, column: 16 },
+                              end: { line: 44, column: 30 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 44, column: 16 },
+                                end: { line: 44, column: 20 },
+                              },
+                              name: "JSON",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 44, column: 21 },
+                                end: { line: 44, column: 30 },
+                              },
+                              name: "stringify",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [
+                            {
+                              type: "ObjectExpression",
+                              loc: {
+                                start: { line: 44, column: 31 },
+                                end: { line: 44, column: 67 },
+                              },
+                              properties: [
+                                {
+                                  type: "Property",
+                                  loc: {
+                                    start: { line: 44, column: 33 },
+                                    end: { line: 44, column: 51 },
+                                  },
+                                  key: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 44, column: 33 },
+                                      end: { line: 44, column: 37 },
+                                    },
+                                    name: "name",
+                                  },
+                                  value: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 44, column: 39 },
+                                      end: { line: 44, column: 51 },
+                                    },
+                                    value: "Math.trunc",
+                                  },
+                                  kind: "init",
+                                  computed: false,
+                                  method: false,
+                                  shorthand: false,
+                                },
+                                {
+                                  type: "Property",
+                                  loc: {
+                                    start: { line: 44, column: 53 },
+                                    end: { line: 44, column: 65 },
+                                  },
+                                  key: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 44, column: 53 },
+                                      end: { line: 44, column: 59 },
+                                    },
+                                    name: "passed",
+                                  },
+                                  value: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 44, column: 61 },
+                                      end: { line: 44, column: 65 },
+                                    },
+                                    value: true,
+                                  },
+                                  kind: "init",
+                                  computed: false,
+                                  method: false,
+                                  shorthand: false,
+                                },
+                              ],
+                            },
+                          ],
+                          optional: false,
+                        },
+                        kind: "init",
+                        computed: false,
+                        method: false,
+                        shorthand: false,
+                      },
+                    ],
+                  },
+                ],
+                optional: false,
+              },
+            },
+            {
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 48, column: 6 },
+                end: { line: 48, column: 24 },
+              },
+              argument: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 48, column: 13 },
+                  end: { line: 48, column: 23 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 48, column: 13 },
+                    end: { line: 48, column: 21 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 48, column: 13 },
+                      end: { line: 48, column: 17 },
+                    },
+                    name: "held",
                     bindingKey: "held$2oxvexs6ogdoj$0",
                   },
-                  name: "get",
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 48, column: 18 },
+                      end: { line: 48, column: 21 },
+                    },
+                    name: "get",
+                  },
+                  computed: false,
+                  optional: false,
                 },
                 arguments: [],
+                optional: false,
               },
             },
           ],
         },
+        expression: false,
       }),
     ),
   );

@@ -4,7 +4,7 @@
     const word = "backtick";
     return {
       found: xs.find((x) => x > 7),
-      missing: xs.find((x) => x > 100) === void 0,
+      missing: xs.find((x) => x > 100) === undefined,
       at: xs.findIndex((x) => x > 7),
       nowhere: xs.findIndex((x) => x > 100),
       includes: word.includes("tick"),

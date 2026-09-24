@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `$0` upward, and `$` starts no name a script can write.
 function wrapShadowed(fragment) {
   return cs.create(
-    [15, 10, 21, 5],
+    { start: { line: 15, column: 9 }, end: { line: 21, column: 4 } },
     {
       version: "0.0.0",
       filePath: "captures/shadowed-hole.test.tsx",
@@ -20,59 +20,109 @@ function wrapShadowed(fragment) {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [15, 13, 21, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 15, column: 12 }, end: { line: 21, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 16, column: 4 },
+            end: { line: 16, column: 20 },
+          },
           kind: "const",
-          loc: [16, 5, 16, 21],
-          name: {
-            kind: "id",
-            loc: [16, 11, 16, 16],
-            text: "total",
-            bindingKey: "total$1wiy7dknp0llv$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [16, 19, 16, 20],
-            value: 1,
-          },
-        },
-        {
-          kind: "{}",
-          loc: [17, 5, 20, 6],
-          statements: [
+          declarations: [
             {
-              kind: "const",
-              loc: [18, 7, 18, 23],
-              name: {
-                kind: "id",
-                loc: [18, 13, 18, 18],
-                text: "total",
-                bindingKey: "total$1wiy7dknp0llv$1",
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 16, column: 10 },
+                end: { line: 16, column: 19 },
               },
-              initializer: {
-                kind: "number",
-                loc: [18, 21, 18, 22],
-                value: 2,
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 16, column: 10 },
+                  end: { line: 16, column: 15 },
+                },
+                name: "total",
+                bindingKey: "total$1wiy7dknp0llv$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 16, column: 18 },
+                  end: { line: 16, column: 19 },
+                },
+                value: 1,
               },
             },
+          ],
+        },
+        {
+          type: "BlockStatement",
+          loc: { start: { line: 17, column: 4 }, end: { line: 20, column: 5 } },
+          body: [
             {
-              kind: "return",
-              loc: [19, 7, 19, 32],
-              expression: {
-                kind: "binop",
-                loc: [19, 14, 19, 31],
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 18, column: 22 },
+              },
+              kind: "const",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 21 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 12 },
+                      end: { line: 18, column: 17 },
+                    },
+                    name: "total",
+                    bindingKey: "total$1wiy7dknp0llv$1",
+                  },
+                  init: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 18, column: 20 },
+                      end: { line: 18, column: 21 },
+                    },
+                    value: 2,
+                  },
+                },
+              ],
+            },
+            {
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 19, column: 31 },
+              },
+              argument: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 19, column: 13 },
+                  end: { line: 19, column: 30 },
+                },
+                operator: "+",
                 left: {
-                  kind: "id",
-                  loc: [19, 14, 19, 19],
-                  text: "total",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 13 },
+                    end: { line: 19, column: 18 },
+                  },
+                  name: "total",
                   bindingKey: "total$1wiy7dknp0llv$1",
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "splice",
-                  loc: [19, 22, 19, 31],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 19, column: 21 },
+                    end: { line: 19, column: 30 },
+                  },
                   key: "$fragment",
                 },
               },
@@ -88,7 +138,7 @@ it("shadowedHole", async (t) => {
     t,
     "shadowedHole",
     cs.create(
-      [28, 5, 28, 58],
+      { start: { line: 28, column: 4 }, end: { line: 28, column: 57 } },
       {
         version: "0.0.0",
         filePath: "captures/shadowed-hole.test.tsx",
@@ -97,7 +147,10 @@ it("shadowedHole", async (t) => {
           $0splice0: {
             value: wrapShadowed(
               cs.create(
-                [28, 23, 28, 29],
+                {
+                  start: { line: 28, column: 22 },
+                  end: { line: 28, column: 28 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "captures/shadowed-hole.test.tsx",
@@ -106,8 +159,11 @@ it("shadowedHole", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [28, 26, 28, 28],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 28, column: 25 },
+                    end: { line: 28, column: 27 },
+                  },
                   value: 10,
                 }),
               ),
@@ -117,7 +173,10 @@ it("shadowedHole", async (t) => {
           $0splice1: {
             value: wrapShadowed(
               cs.create(
-                [28, 49, 28, 55],
+                {
+                  start: { line: 28, column: 48 },
+                  end: { line: 28, column: 54 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "captures/shadowed-hole.test.tsx",
@@ -126,8 +185,11 @@ it("shadowedHole", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [28, 52, 28, 54],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 28, column: 51 },
+                    end: { line: 28, column: 53 },
+                  },
                   value: 20,
                 }),
               ),
@@ -138,17 +200,23 @@ it("shadowedHole", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "binop",
-        loc: [28, 8, 28, 57],
+        type: "BinaryExpression",
+        loc: { start: { line: 28, column: 7 }, end: { line: 28, column: 56 } },
+        operator: "+",
         left: {
-          kind: "splice",
-          loc: [28, 8, 28, 31],
+          type: "Splice",
+          loc: {
+            start: { line: 28, column: 7 },
+            end: { line: 28, column: 30 },
+          },
           key: "$0splice0",
         },
-        operatorToken: "+",
         right: {
-          kind: "splice",
-          loc: [28, 34, 28, 57],
+          type: "Splice",
+          loc: {
+            start: { line: 28, column: 33 },
+            end: { line: 28, column: 56 },
+          },
           key: "$0splice1",
         },
       }),

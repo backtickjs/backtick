@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // not data, which is what a cell declared where it is evaluated allows.
 async function MemberRows() {
   return cs.create(
-    [19, 10, 41, 5],
+    { start: { line: 19, column: 9 }, end: { line: 41, column: 4 } },
     {
       version: "0.0.0",
       filePath: "state/member-state.test.tsx",
@@ -23,387 +23,904 @@ async function MemberRows() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [19, 13, 41, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 19, column: 12 }, end: { line: 41, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 20, column: 4 }, end: { line: 24, column: 6 } },
           kind: "const",
-          loc: [20, 5, 24, 7],
-          name: {
-            kind: "id",
-            loc: [20, 11, 20, 16],
-            text: "build",
-            bindingKey: "build$30ur5mgzea4v6$0",
-          },
-          initializer: {
-            kind: "=>",
-            loc: [20, 19, 24, 6],
-            parameters: [
-              {
-                kind: "param",
-                loc: [20, 20, 20, 32],
-                name: {
-                  kind: "id",
-                  loc: [20, 20, 20, 24],
-                  text: "from",
-                  bindingKey: "from$30ur5mgzea4v6$2",
-                },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 20, column: 10 },
+                end: { line: 24, column: 5 },
               },
-            ],
-            body: {
-              kind: "{}",
-              loc: [20, 37, 24, 6],
-              statements: [
-                {
-                  kind: "return",
-                  loc: [21, 7, 23, 10],
-                  expression: {
-                    kind: "()",
-                    loc: [21, 14, 23, 9],
-                    expression: {
-                      kind: ".",
-                      loc: [21, 14, 21, 24],
-                      expression: {
-                        kind: "bltn",
-                        loc: [21, 14, 21, 19],
-                        name: "Array",
-                      },
-                      name: "from",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 20, column: 10 },
+                  end: { line: 20, column: 15 },
+                },
+                name: "build",
+                bindingKey: "build$30ur5mgzea4v6$0",
+              },
+              init: {
+                type: "ArrowFunctionExpression",
+                loc: {
+                  start: { line: 20, column: 18 },
+                  end: { line: 24, column: 5 },
+                },
+                params: [
+                  {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 20, column: 19 },
+                      end: { line: 20, column: 23 },
                     },
-                    arguments: [
-                      {
-                        kind: "obj",
-                        loc: [21, 25, 21, 38],
-                        properties: [
-                          {
-                            kind: ":",
-                            loc: [21, 27, 21, 36],
-                            name: {
-                              kind: "string",
-                              loc: [21, 27, 21, 33],
-                              text: "length",
-                            },
-                            initializer: {
-                              kind: "number",
-                              loc: [21, 35, 21, 36],
-                              value: 3,
-                            },
-                          },
-                        ],
+                    name: "from",
+                    bindingKey: "from$30ur5mgzea4v6$2",
+                  },
+                ],
+                body: {
+                  type: "BlockStatement",
+                  loc: {
+                    start: { line: 20, column: 36 },
+                    end: { line: 24, column: 5 },
+                  },
+                  body: [
+                    {
+                      type: "ReturnStatement",
+                      loc: {
+                        start: { line: 21, column: 6 },
+                        end: { line: 23, column: 9 },
                       },
-                      {
-                        kind: "=>",
-                        loc: [21, 40, 23, 8],
-                        parameters: [
-                          {
-                            kind: "param",
-                            loc: [21, 41, 21, 42],
-                            name: {
-                              kind: "id",
-                              loc: [21, 41, 21, 42],
-                              text: "_",
-                              bindingKey: "_$30ur5mgzea4v6$3",
-                            },
+                      argument: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 21, column: 13 },
+                          end: { line: 23, column: 8 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 21, column: 13 },
+                            end: { line: 21, column: 23 },
                           },
-                          {
-                            kind: "param",
-                            loc: [21, 44, 21, 46],
-                            name: {
-                              kind: "id",
-                              loc: [21, 44, 21, 46],
-                              text: "at",
-                              bindingKey: "at$30ur5mgzea4v6$4",
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 21, column: 13 },
+                              end: { line: 21, column: 18 },
                             },
+                            name: "Array",
                           },
-                        ],
-                        body: {
-                          kind: "{}",
-                          loc: [21, 51, 23, 8],
-                          statements: [
-                            {
-                              kind: "return",
-                              loc: [22, 9, 22, 71],
-                              expression: {
-                                kind: "obj",
-                                loc: [22, 16, 22, 70],
-                                properties: [
-                                  {
-                                    kind: ":",
-                                    loc: [22, 18, 22, 31],
-                                    name: {
-                                      kind: "string",
-                                      loc: [22, 18, 22, 20],
-                                      text: "id",
-                                    },
-                                    initializer: {
-                                      kind: "binop",
-                                      loc: [22, 22, 22, 31],
-                                      left: {
-                                        kind: "id",
-                                        loc: [22, 22, 22, 26],
-                                        text: "from",
-                                        bindingKey: "from$30ur5mgzea4v6$2",
-                                      },
-                                      operatorToken: "+",
-                                      right: {
-                                        kind: "id",
-                                        loc: [22, 29, 22, 31],
-                                        text: "at",
-                                        bindingKey: "at$30ur5mgzea4v6$4",
-                                      },
-                                    },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 21, column: 19 },
+                              end: { line: 21, column: 23 },
+                            },
+                            name: "from",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [
+                          {
+                            type: "ObjectExpression",
+                            loc: {
+                              start: { line: 21, column: 24 },
+                              end: { line: 21, column: 37 },
+                            },
+                            properties: [
+                              {
+                                type: "Property",
+                                loc: {
+                                  start: { line: 21, column: 26 },
+                                  end: { line: 21, column: 35 },
+                                },
+                                key: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 21, column: 26 },
+                                    end: { line: 21, column: 32 },
                                   },
-                                  {
-                                    kind: ":",
-                                    loc: [22, 33, 22, 68],
-                                    name: {
-                                      kind: "string",
-                                      loc: [22, 33, 22, 38],
-                                      text: "label",
+                                  name: "length",
+                                },
+                                value: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 21, column: 34 },
+                                    end: { line: 21, column: 35 },
+                                  },
+                                  value: 3,
+                                },
+                                kind: "init",
+                                computed: false,
+                                method: false,
+                                shorthand: false,
+                              },
+                            ],
+                          },
+                          {
+                            type: "ArrowFunctionExpression",
+                            loc: {
+                              start: { line: 21, column: 39 },
+                              end: { line: 23, column: 7 },
+                            },
+                            params: [
+                              {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 21, column: 40 },
+                                  end: { line: 21, column: 41 },
+                                },
+                                name: "_",
+                                bindingKey: "_$30ur5mgzea4v6$3",
+                              },
+                              {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 21, column: 43 },
+                                  end: { line: 21, column: 45 },
+                                },
+                                name: "at",
+                                bindingKey: "at$30ur5mgzea4v6$4",
+                              },
+                            ],
+                            body: {
+                              type: "BlockStatement",
+                              loc: {
+                                start: { line: 21, column: 50 },
+                                end: { line: 23, column: 7 },
+                              },
+                              body: [
+                                {
+                                  type: "ReturnStatement",
+                                  loc: {
+                                    start: { line: 22, column: 8 },
+                                    end: { line: 22, column: 70 },
+                                  },
+                                  argument: {
+                                    type: "ObjectExpression",
+                                    loc: {
+                                      start: { line: 22, column: 15 },
+                                      end: { line: 22, column: 69 },
                                     },
-                                    initializer: {
-                                      kind: "()",
-                                      loc: [22, 40, 22, 68],
-                                      expression: {
-                                        kind: "splice",
-                                        loc: [22, 40, 22, 46],
-                                        key: "$state",
-                                      },
-                                      arguments: [
-                                        {
-                                          kind: "binop",
-                                          loc: [22, 47, 22, 67],
-                                          left: {
-                                            kind: "string",
-                                            loc: [22, 47, 22, 53],
-                                            text: "row ",
+                                    properties: [
+                                      {
+                                        type: "Property",
+                                        loc: {
+                                          start: { line: 22, column: 17 },
+                                          end: { line: 22, column: 30 },
+                                        },
+                                        key: {
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 22, column: 17 },
+                                            end: { line: 22, column: 19 },
                                           },
-                                          operatorToken: "+",
+                                          name: "id",
+                                        },
+                                        value: {
+                                          type: "BinaryExpression",
+                                          loc: {
+                                            start: { line: 22, column: 21 },
+                                            end: { line: 22, column: 30 },
+                                          },
+                                          operator: "+",
+                                          left: {
+                                            type: "Identifier",
+                                            loc: {
+                                              start: { line: 22, column: 21 },
+                                              end: { line: 22, column: 25 },
+                                            },
+                                            name: "from",
+                                            bindingKey: "from$30ur5mgzea4v6$2",
+                                          },
                                           right: {
-                                            kind: "binop",
-                                            loc: [22, 57, 22, 66],
-                                            left: {
-                                              kind: "id",
-                                              loc: [22, 57, 22, 61],
-                                              text: "from",
-                                              bindingKey:
-                                                "from$30ur5mgzea4v6$2",
+                                            type: "Identifier",
+                                            loc: {
+                                              start: { line: 22, column: 28 },
+                                              end: { line: 22, column: 30 },
                                             },
-                                            operatorToken: "+",
-                                            right: {
-                                              kind: "id",
-                                              loc: [22, 64, 22, 66],
-                                              text: "at",
-                                              bindingKey: "at$30ur5mgzea4v6$4",
-                                            },
+                                            name: "at",
+                                            bindingKey: "at$30ur5mgzea4v6$4",
                                           },
                                         },
-                                      ],
-                                    },
+                                        kind: "init",
+                                        computed: false,
+                                        method: false,
+                                        shorthand: false,
+                                      },
+                                      {
+                                        type: "Property",
+                                        loc: {
+                                          start: { line: 22, column: 32 },
+                                          end: { line: 22, column: 67 },
+                                        },
+                                        key: {
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 22, column: 32 },
+                                            end: { line: 22, column: 37 },
+                                          },
+                                          name: "label",
+                                        },
+                                        value: {
+                                          type: "CallExpression",
+                                          loc: {
+                                            start: { line: 22, column: 39 },
+                                            end: { line: 22, column: 67 },
+                                          },
+                                          callee: {
+                                            type: "Splice",
+                                            loc: {
+                                              start: { line: 22, column: 39 },
+                                              end: { line: 22, column: 45 },
+                                            },
+                                            key: "$state",
+                                          },
+                                          arguments: [
+                                            {
+                                              type: "BinaryExpression",
+                                              loc: {
+                                                start: { line: 22, column: 46 },
+                                                end: { line: 22, column: 66 },
+                                              },
+                                              operator: "+",
+                                              left: {
+                                                type: "Literal",
+                                                loc: {
+                                                  start: {
+                                                    line: 22,
+                                                    column: 46,
+                                                  },
+                                                  end: { line: 22, column: 52 },
+                                                },
+                                                value: "row ",
+                                              },
+                                              right: {
+                                                type: "BinaryExpression",
+                                                loc: {
+                                                  start: {
+                                                    line: 22,
+                                                    column: 56,
+                                                  },
+                                                  end: { line: 22, column: 65 },
+                                                },
+                                                operator: "+",
+                                                left: {
+                                                  type: "Identifier",
+                                                  loc: {
+                                                    start: {
+                                                      line: 22,
+                                                      column: 56,
+                                                    },
+                                                    end: {
+                                                      line: 22,
+                                                      column: 60,
+                                                    },
+                                                  },
+                                                  name: "from",
+                                                  bindingKey:
+                                                    "from$30ur5mgzea4v6$2",
+                                                },
+                                                right: {
+                                                  type: "Identifier",
+                                                  loc: {
+                                                    start: {
+                                                      line: 22,
+                                                      column: 63,
+                                                    },
+                                                    end: {
+                                                      line: 22,
+                                                      column: 65,
+                                                    },
+                                                  },
+                                                  name: "at",
+                                                  bindingKey:
+                                                    "at$30ur5mgzea4v6$4",
+                                                },
+                                              },
+                                            },
+                                          ],
+                                          optional: false,
+                                        },
+                                        kind: "init",
+                                        computed: false,
+                                        method: false,
+                                        shorthand: false,
+                                      },
+                                    ],
                                   },
-                                ],
-                              },
+                                },
+                              ],
                             },
-                          ],
-                        },
+                            expression: false,
+                          },
+                        ],
+                        optional: false,
                       },
-                    ],
-                  },
+                    },
+                  ],
                 },
-              ],
+                expression: false,
+              },
             },
-          },
+          ],
         },
         {
-          kind: "const",
-          loc: [26, 5, 26, 35],
-          name: {
-            kind: "id",
-            loc: [26, 11, 26, 15],
-            text: "held",
-            bindingKey: "held$30ur5mgzea4v6$1",
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 26, column: 4 },
+            end: { line: 26, column: 34 },
           },
-          initializer: {
-            kind: "()",
-            loc: [26, 18, 26, 34],
-            expression: {
-              kind: "splice",
-              loc: [26, 18, 26, 24],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "()",
-                loc: [26, 25, 26, 33],
-                expression: {
-                  kind: "id",
-                  loc: [26, 25, 26, 30],
-                  text: "build",
-                  bindingKey: "build$30ur5mgzea4v6$0",
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 26, column: 10 },
+                end: { line: 26, column: 33 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 26, column: 10 },
+                  end: { line: 26, column: 14 },
+                },
+                name: "held",
+                bindingKey: "held$30ur5mgzea4v6$1",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 26, column: 17 },
+                  end: { line: 26, column: 33 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 26, column: 17 },
+                    end: { line: 26, column: 23 },
+                  },
+                  key: "$state",
                 },
                 arguments: [
                   {
-                    kind: "number",
-                    loc: [26, 31, 26, 32],
-                    value: 1,
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 26, column: 24 },
+                      end: { line: 26, column: 32 },
+                    },
+                    callee: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 26, column: 24 },
+                        end: { line: 26, column: 29 },
+                      },
+                      name: "build",
+                      bindingKey: "build$30ur5mgzea4v6$0",
+                    },
+                    arguments: [
+                      {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 26, column: 30 },
+                          end: { line: 26, column: 31 },
+                        },
+                        value: 1,
+                      },
+                    ],
+                    optional: false,
                   },
                 ],
+                optional: false,
               },
-            ],
-          },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [28, 5, 40, 7],
-          expression: {
-            kind: "jsx",
-            loc: [29, 7, 39, 13],
-            type: {
-              kind: "string",
-              loc: [29, 8, 29, 11],
-              text: "div",
+          type: "ReturnStatement",
+          loc: { start: { line: 28, column: 4 }, end: { line: 40, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 39, column: 12 },
             },
-            attributes: [],
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 29, column: 6 },
+                end: { line: 29, column: 11 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 29, column: 7 },
+                  end: { line: 29, column: 10 },
+                },
+                name: "div",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "jsx",
-                loc: [30, 9, 38, 14],
-                type: {
-                  kind: "string",
-                  loc: [30, 10, 30, 12],
-                  text: "ul",
+                type: "JSXText",
+                loc: {
+                  start: { line: 30, column: 8 },
+                  end: { line: 30, column: 8 },
                 },
-                attributes: [
-                  {
-                    name: "class",
-                    initializer: {
-                      kind: "string",
-                      loc: [30, 19, 30, 25],
-                      text: "rows",
-                    },
+                value: "\n        ",
+                raw: "\n        ",
+              },
+              {
+                type: "JSXElement",
+                loc: {
+                  start: { line: 30, column: 8 },
+                  end: { line: 38, column: 13 },
+                },
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 30, column: 8 },
+                    end: { line: 30, column: 25 },
                   },
-                ],
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 30, column: 9 },
+                      end: { line: 30, column: 11 },
+                    },
+                    name: "ul",
+                  },
+                  attributes: [
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 30, column: 12 },
+                        end: { line: 30, column: 24 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 30, column: 12 },
+                          end: { line: 30, column: 17 },
+                        },
+                        name: "class",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 30, column: 18 },
+                          end: { line: 30, column: 24 },
+                        },
+                        value: "rows",
+                      },
+                    },
+                  ],
+                  selfClosing: false,
+                },
                 children: [
                   {
-                    kind: "jsx",
-                    loc: [31, 11, 37, 17],
-                    type: {
-                      kind: "splice",
-                      loc: [31, 12, 31, 15],
-                      key: "$For",
+                    type: "JSXText",
+                    loc: {
+                      start: { line: 31, column: 10 },
+                      end: { line: 31, column: 10 },
                     },
-                    attributes: [
-                      {
-                        name: "each",
-                        initializer: {
-                          kind: "()",
-                          loc: [31, 22, 31, 32],
-                          expression: {
-                            kind: ".",
-                            loc: [31, 22, 31, 30],
-                            expression: {
-                              kind: "id",
-                              loc: [31, 22, 31, 26],
-                              text: "held",
-                              bindingKey: "held$30ur5mgzea4v6$1",
-                            },
-                            name: "get",
-                          },
-                          arguments: [],
-                        },
+                    value: "\n          ",
+                    raw: "\n          ",
+                  },
+                  {
+                    type: "JSXElement",
+                    loc: {
+                      start: { line: 31, column: 10 },
+                      end: { line: 37, column: 16 },
+                    },
+                    openingElement: {
+                      type: "JSXOpeningElement",
+                      loc: {
+                        start: { line: 31, column: 10 },
+                        end: { line: 31, column: 33 },
                       },
-                    ],
-                    children: [
-                      {
-                        kind: "=>",
-                        loc: [32, 14, 36, 14],
-                        parameters: [
-                          {
-                            kind: "param",
-                            loc: [32, 15, 32, 23],
-                            name: {
-                              kind: "id",
-                              loc: [32, 15, 32, 18],
-                              text: "row",
-                              bindingKey: "row$30ur5mgzea4v6$5",
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 31, column: 11 },
+                          end: { line: 31, column: 14 },
+                        },
+                        name: "For",
+                      },
+                      attributes: [
+                        {
+                          type: "JSXAttribute",
+                          loc: {
+                            start: { line: 31, column: 15 },
+                            end: { line: 31, column: 32 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 31, column: 15 },
+                              end: { line: 31, column: 19 },
                             },
+                            name: "each",
                           },
-                        ],
-                        body: {
-                          kind: "jsx",
-                          loc: [33, 15, 35, 20],
-                          type: {
-                            kind: "string",
-                            loc: [33, 16, 33, 18],
-                            text: "li",
-                          },
-                          attributes: [
-                            {
-                              name: "onclick",
-                              initializer: {
-                                kind: "=>",
-                                loc: [33, 28, 33, 58],
-                                parameters: [],
-                                body: {
-                                  kind: "()",
-                                  loc: [33, 34, 33, 58],
-                                  expression: {
-                                    kind: ".",
-                                    loc: [33, 34, 33, 47],
-                                    expression: {
-                                      kind: ".",
-                                      loc: [33, 34, 33, 43],
-                                      expression: {
-                                        kind: "id",
-                                        loc: [33, 34, 33, 37],
-                                        text: "row",
-                                        bindingKey: "row$30ur5mgzea4v6$5",
-                                      },
-                                      name: "label",
-                                    },
-                                    name: "set",
-                                  },
-                                  arguments: [
-                                    {
-                                      kind: "string",
-                                      loc: [33, 48, 33, 57],
-                                      text: "pressed",
-                                    },
-                                  ],
-                                },
+                          value: {
+                            type: "JSXExpressionContainer",
+                            loc: {
+                              start: { line: 31, column: 20 },
+                              end: { line: 31, column: 32 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 31, column: 21 },
+                                end: { line: 31, column: 31 },
                               },
-                            },
-                          ],
-                          children: [
-                            {
-                              kind: "()",
-                              loc: [34, 18, 34, 33],
-                              expression: {
-                                kind: ".",
-                                loc: [34, 18, 34, 31],
-                                expression: {
-                                  kind: ".",
-                                  loc: [34, 18, 34, 27],
-                                  expression: {
-                                    kind: "id",
-                                    loc: [34, 18, 34, 21],
-                                    text: "row",
-                                    bindingKey: "row$30ur5mgzea4v6$5",
-                                  },
-                                  name: "label",
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 31, column: 21 },
+                                  end: { line: 31, column: 29 },
                                 },
-                                name: "get",
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 31, column: 21 },
+                                    end: { line: 31, column: 25 },
+                                  },
+                                  name: "held",
+                                  bindingKey: "held$30ur5mgzea4v6$1",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 31, column: 26 },
+                                    end: { line: 31, column: 29 },
+                                  },
+                                  name: "get",
+                                },
+                                computed: false,
+                                optional: false,
                               },
                               arguments: [],
+                              optional: false,
+                            },
+                          },
+                        },
+                      ],
+                      selfClosing: false,
+                    },
+                    children: [
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 32, column: 12 },
+                          end: { line: 32, column: 12 },
+                        },
+                        value: "\n            ",
+                        raw: "\n            ",
+                      },
+                      {
+                        type: "JSXExpressionContainer",
+                        loc: {
+                          start: { line: 32, column: 12 },
+                          end: { line: 36, column: 14 },
+                        },
+                        expression: {
+                          type: "ArrowFunctionExpression",
+                          loc: {
+                            start: { line: 32, column: 13 },
+                            end: { line: 36, column: 13 },
+                          },
+                          params: [
+                            {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 32, column: 14 },
+                                end: { line: 32, column: 17 },
+                              },
+                              name: "row",
+                              bindingKey: "row$30ur5mgzea4v6$5",
                             },
                           ],
+                          body: {
+                            type: "JSXElement",
+                            loc: {
+                              start: { line: 33, column: 14 },
+                              end: { line: 35, column: 19 },
+                            },
+                            openingElement: {
+                              type: "JSXOpeningElement",
+                              loc: {
+                                start: { line: 33, column: 14 },
+                                end: { line: 33, column: 59 },
+                              },
+                              name: {
+                                type: "JSXIdentifier",
+                                loc: {
+                                  start: { line: 33, column: 15 },
+                                  end: { line: 33, column: 17 },
+                                },
+                                name: "li",
+                              },
+                              attributes: [
+                                {
+                                  type: "JSXAttribute",
+                                  loc: {
+                                    start: { line: 33, column: 18 },
+                                    end: { line: 33, column: 58 },
+                                  },
+                                  name: {
+                                    type: "JSXIdentifier",
+                                    loc: {
+                                      start: { line: 33, column: 18 },
+                                      end: { line: 33, column: 25 },
+                                    },
+                                    name: "onclick",
+                                  },
+                                  value: {
+                                    type: "JSXExpressionContainer",
+                                    loc: {
+                                      start: { line: 33, column: 26 },
+                                      end: { line: 33, column: 58 },
+                                    },
+                                    expression: {
+                                      type: "ArrowFunctionExpression",
+                                      loc: {
+                                        start: { line: 33, column: 27 },
+                                        end: { line: 33, column: 57 },
+                                      },
+                                      params: [],
+                                      body: {
+                                        type: "CallExpression",
+                                        loc: {
+                                          start: { line: 33, column: 33 },
+                                          end: { line: 33, column: 57 },
+                                        },
+                                        callee: {
+                                          type: "MemberExpression",
+                                          loc: {
+                                            start: { line: 33, column: 33 },
+                                            end: { line: 33, column: 46 },
+                                          },
+                                          object: {
+                                            type: "MemberExpression",
+                                            loc: {
+                                              start: { line: 33, column: 33 },
+                                              end: { line: 33, column: 42 },
+                                            },
+                                            object: {
+                                              type: "Identifier",
+                                              loc: {
+                                                start: { line: 33, column: 33 },
+                                                end: { line: 33, column: 36 },
+                                              },
+                                              name: "row",
+                                              bindingKey: "row$30ur5mgzea4v6$5",
+                                            },
+                                            property: {
+                                              type: "Identifier",
+                                              loc: {
+                                                start: { line: 33, column: 37 },
+                                                end: { line: 33, column: 42 },
+                                              },
+                                              name: "label",
+                                            },
+                                            computed: false,
+                                            optional: false,
+                                          },
+                                          property: {
+                                            type: "Identifier",
+                                            loc: {
+                                              start: { line: 33, column: 43 },
+                                              end: { line: 33, column: 46 },
+                                            },
+                                            name: "set",
+                                          },
+                                          computed: false,
+                                          optional: false,
+                                        },
+                                        arguments: [
+                                          {
+                                            type: "Literal",
+                                            loc: {
+                                              start: { line: 33, column: 47 },
+                                              end: { line: 33, column: 56 },
+                                            },
+                                            value: "pressed",
+                                          },
+                                        ],
+                                        optional: false,
+                                      },
+                                      expression: true,
+                                    },
+                                  },
+                                },
+                              ],
+                              selfClosing: false,
+                            },
+                            children: [
+                              {
+                                type: "JSXText",
+                                loc: {
+                                  start: { line: 34, column: 16 },
+                                  end: { line: 34, column: 16 },
+                                },
+                                value: "\n                ",
+                                raw: "\n                ",
+                              },
+                              {
+                                type: "JSXExpressionContainer",
+                                loc: {
+                                  start: { line: 34, column: 16 },
+                                  end: { line: 34, column: 33 },
+                                },
+                                expression: {
+                                  type: "CallExpression",
+                                  loc: {
+                                    start: { line: 34, column: 17 },
+                                    end: { line: 34, column: 32 },
+                                  },
+                                  callee: {
+                                    type: "MemberExpression",
+                                    loc: {
+                                      start: { line: 34, column: 17 },
+                                      end: { line: 34, column: 30 },
+                                    },
+                                    object: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 34, column: 17 },
+                                        end: { line: 34, column: 26 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 34, column: 17 },
+                                          end: { line: 34, column: 20 },
+                                        },
+                                        name: "row",
+                                        bindingKey: "row$30ur5mgzea4v6$5",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 34, column: 21 },
+                                          end: { line: 34, column: 26 },
+                                        },
+                                        name: "label",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    property: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 34, column: 27 },
+                                        end: { line: 34, column: 30 },
+                                      },
+                                      name: "get",
+                                    },
+                                    computed: false,
+                                    optional: false,
+                                  },
+                                  arguments: [],
+                                  optional: false,
+                                },
+                              },
+                              {
+                                type: "JSXText",
+                                loc: {
+                                  start: { line: 35, column: 14 },
+                                  end: { line: 35, column: 14 },
+                                },
+                                value: "\n              ",
+                                raw: "\n              ",
+                              },
+                            ],
+                            closingElement: {
+                              type: "JSXClosingElement",
+                              loc: {
+                                start: { line: 35, column: 14 },
+                                end: { line: 35, column: 19 },
+                              },
+                              name: {
+                                type: "JSXIdentifier",
+                                loc: {
+                                  start: { line: 35, column: 16 },
+                                  end: { line: 35, column: 18 },
+                                },
+                                name: "li",
+                              },
+                            },
+                          },
+                          expression: true,
                         },
                       },
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 37, column: 10 },
+                          end: { line: 37, column: 10 },
+                        },
+                        value: "\n          ",
+                        raw: "\n          ",
+                      },
                     ],
+                    closingElement: {
+                      type: "JSXClosingElement",
+                      loc: {
+                        start: { line: 37, column: 10 },
+                        end: { line: 37, column: 16 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 37, column: 12 },
+                          end: { line: 37, column: 15 },
+                        },
+                        name: "For",
+                      },
+                    },
+                  },
+                  {
+                    type: "JSXText",
+                    loc: {
+                      start: { line: 38, column: 8 },
+                      end: { line: 38, column: 8 },
+                    },
+                    value: "\n        ",
+                    raw: "\n        ",
                   },
                 ],
+                closingElement: {
+                  type: "JSXClosingElement",
+                  loc: {
+                    start: { line: 38, column: 8 },
+                    end: { line: 38, column: 13 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 38, column: 10 },
+                      end: { line: 38, column: 12 },
+                    },
+                    name: "ul",
+                  },
+                },
+              },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 39, column: 6 },
+                  end: { line: 39, column: 6 },
+                },
+                value: "\n      ",
+                raw: "\n      ",
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 39, column: 6 },
+                end: { line: 39, column: 12 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 39, column: 8 },
+                  end: { line: 39, column: 11 },
+                },
+                name: "div",
+              },
+            },
           },
         },
       ],

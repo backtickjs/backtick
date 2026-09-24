@@ -14,7 +14,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // enclose is a different error.
 function innerBase(carried) {
   return cs.create(
-    [18, 10, 21, 5],
+    { start: { line: 18, column: 9 }, end: { line: 21, column: 4 } },
     {
       version: "0.0.0",
       filePath: "captures/foreign-capture-shadow.test.tsx",
@@ -22,7 +22,7 @@ function innerBase(carried) {
       splices: {
         $0splice0: {
           value: cs.create(
-            [20, 14, 20, 33],
+            { start: { line: 20, column: 13 }, end: { line: 20, column: 32 } },
             {
               version: "0.0.0",
               filePath: "captures/foreign-capture-shadow.test.tsx",
@@ -31,18 +31,27 @@ function innerBase(carried) {
               captures: ["base$bphb1svo1jv3$0"],
             },
             () => ({
-              kind: "binop",
-              loc: [20, 17, 20, 32],
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 20, column: 16 },
+                end: { line: 20, column: 31 },
+              },
+              operator: "+",
               left: {
-                kind: "id",
-                loc: [20, 17, 20, 21],
-                text: "base",
+                type: "Identifier",
+                loc: {
+                  start: { line: 20, column: 16 },
+                  end: { line: 20, column: 20 },
+                },
+                name: "base",
                 bindingKey: "base$bphb1svo1jv3$0",
               },
-              operatorToken: "+",
               right: {
-                kind: "splice",
-                loc: [20, 24, 20, 32],
+                type: "Splice",
+                loc: {
+                  start: { line: 20, column: 23 },
+                  end: { line: 20, column: 31 },
+                },
                 key: "$carried",
               },
             }),
@@ -53,30 +62,55 @@ function innerBase(carried) {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [18, 13, 21, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 18, column: 12 }, end: { line: 21, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 19, column: 4 },
+            end: { line: 19, column: 21 },
+          },
           kind: "const",
-          loc: [19, 5, 19, 22],
-          name: {
-            kind: "id",
-            loc: [19, 11, 19, 15],
-            text: "base",
-            bindingKey: "base$bphb1svo1jv3$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [19, 18, 19, 21],
-            value: 100,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 19, column: 10 },
+                end: { line: 19, column: 20 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 19, column: 10 },
+                  end: { line: 19, column: 14 },
+                },
+                name: "base",
+                bindingKey: "base$bphb1svo1jv3$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 19, column: 17 },
+                  end: { line: 19, column: 20 },
+                },
+                value: 100,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [20, 5, 20, 35],
-          expression: {
-            kind: "splice",
-            loc: [20, 12, 20, 34],
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 20, column: 4 },
+            end: { line: 20, column: 34 },
+          },
+          argument: {
+            type: "Splice",
+            loc: {
+              start: { line: 20, column: 11 },
+              end: { line: 20, column: 33 },
+            },
             key: "$0splice0",
           },
         },
@@ -89,7 +123,7 @@ it("foreignCaptureShadow", async (t) => {
     t,
     "foreignCaptureShadow",
     cs.create(
-      [28, 5, 31, 7],
+      { start: { line: 28, column: 4 }, end: { line: 31, column: 6 } },
       {
         version: "0.0.0",
         filePath: "captures/foreign-capture-shadow.test.tsx",
@@ -98,7 +132,10 @@ it("foreignCaptureShadow", async (t) => {
           $0splice0: {
             value: innerBase(
               cs.create(
-                [30, 26, 30, 34],
+                {
+                  start: { line: 30, column: 25 },
+                  end: { line: 30, column: 33 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "captures/foreign-capture-shadow.test.tsx",
@@ -107,9 +144,12 @@ it("foreignCaptureShadow", async (t) => {
                   captures: ["base$bphb1svo1jv3$1"],
                 },
                 () => ({
-                  kind: "id",
-                  loc: [30, 29, 30, 33],
-                  text: "base",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 30, column: 28 },
+                    end: { line: 30, column: 32 },
+                  },
+                  name: "base",
                   bindingKey: "base$bphb1svo1jv3$1",
                 }),
               ),
@@ -120,30 +160,55 @@ it("foreignCaptureShadow", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [28, 8, 31, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 28, column: 7 }, end: { line: 31, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 21 },
+            },
             kind: "const",
-            loc: [29, 7, 29, 22],
-            name: {
-              kind: "id",
-              loc: [29, 13, 29, 17],
-              text: "base",
-              bindingKey: "base$bphb1svo1jv3$1",
-            },
-            initializer: {
-              kind: "number",
-              loc: [29, 20, 29, 21],
-              value: 1,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 29, column: 12 },
+                  end: { line: 29, column: 20 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 29, column: 12 },
+                    end: { line: 29, column: 16 },
+                  },
+                  name: "base",
+                  bindingKey: "base$bphb1svo1jv3$1",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 29, column: 19 },
+                    end: { line: 29, column: 20 },
+                  },
+                  value: 1,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [30, 7, 30, 37],
-            expression: {
-              kind: "splice",
-              loc: [30, 14, 30, 36],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 30, column: 6 },
+              end: { line: 30, column: 36 },
+            },
+            argument: {
+              type: "Splice",
+              loc: {
+                start: { line: 30, column: 13 },
+                end: { line: 30, column: 35 },
+              },
               key: "$0splice0",
             },
           },

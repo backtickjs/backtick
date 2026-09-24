@@ -9,7 +9,7 @@ it("compoundAssignment", async (t) => {
     t,
     "compoundAssignment",
     cs.create(
-      [12, 5, 26, 7],
+      { start: { line: 12, column: 4 }, end: { line: 26, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/compound-assignment.test.tsx",
@@ -18,253 +18,493 @@ it("compoundAssignment", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 26, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 26, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 17 },
+            },
             kind: "let",
-            loc: [13, 7, 13, 18],
-            name: {
-              kind: "id",
-              loc: [13, 11, 13, 12],
-              text: "n",
-              bindingKey: "n$23v4b48bi2lxc$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [13, 15, 13, 17],
-              value: 10,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 10 },
+                  end: { line: 13, column: 16 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 10 },
+                    end: { line: 13, column: 11 },
+                  },
+                  name: "n",
+                  bindingKey: "n$23v4b48bi2lxc$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 13, column: 14 },
+                    end: { line: 13, column: 16 },
+                  },
+                  value: 10,
+                },
+              },
+            ],
           },
           {
-            kind: "binop",
-            loc: [14, 7, 14, 13],
-            left: {
-              kind: "id",
-              loc: [14, 7, 14, 8],
-              text: "n",
-              bindingKey: "n$23v4b48bi2lxc$0",
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 13 },
             },
-            operatorToken: "+=",
-            right: {
-              kind: "number",
-              loc: [14, 12, 14, 13],
-              value: 5,
-            },
-          },
-          {
-            kind: "binop",
-            loc: [15, 7, 15, 13],
-            left: {
-              kind: "id",
-              loc: [15, 7, 15, 8],
-              text: "n",
-              bindingKey: "n$23v4b48bi2lxc$0",
-            },
-            operatorToken: "-=",
-            right: {
-              kind: "number",
-              loc: [15, 12, 15, 13],
-              value: 3,
-            },
-          },
-          {
-            kind: "binop",
-            loc: [16, 7, 16, 13],
-            left: {
-              kind: "id",
-              loc: [16, 7, 16, 8],
-              text: "n",
-              bindingKey: "n$23v4b48bi2lxc$0",
-            },
-            operatorToken: "*=",
-            right: {
-              kind: "number",
-              loc: [16, 12, 16, 13],
-              value: 2,
-            },
-          },
-          {
-            kind: "binop",
-            loc: [17, 7, 17, 13],
-            left: {
-              kind: "id",
-              loc: [17, 7, 17, 8],
-              text: "n",
-              bindingKey: "n$23v4b48bi2lxc$0",
-            },
-            operatorToken: "/=",
-            right: {
-              kind: "number",
-              loc: [17, 12, 17, 13],
-              value: 4,
-            },
-          },
-          {
-            kind: "binop",
-            loc: [18, 7, 18, 13],
-            left: {
-              kind: "id",
-              loc: [18, 7, 18, 8],
-              text: "n",
-              bindingKey: "n$23v4b48bi2lxc$0",
-            },
-            operatorToken: "%=",
-            right: {
-              kind: "number",
-              loc: [18, 12, 18, 13],
-              value: 4,
-            },
-          },
-          {
-            kind: "let",
-            loc: [19, 7, 19, 22],
-            name: {
-              kind: "id",
-              loc: [19, 11, 19, 15],
-              text: "text",
-              bindingKey: "text$23v4b48bi2lxc$1",
-            },
-            initializer: {
-              kind: "string",
-              loc: [19, 18, 19, 21],
-              text: "a",
-            },
-          },
-          {
-            kind: "binop",
-            loc: [20, 7, 20, 18],
-            left: {
-              kind: "id",
-              loc: [20, 7, 20, 11],
-              text: "text",
-              bindingKey: "text$23v4b48bi2lxc$1",
-            },
-            operatorToken: "+=",
-            right: {
-              kind: "string",
-              loc: [20, 15, 20, 18],
-              text: "b",
-            },
-          },
-          {
-            kind: "let",
-            loc: [21, 7, 21, 21],
-            name: {
-              kind: "id",
-              loc: [21, 11, 21, 16],
-              text: "total",
-              bindingKey: "total$23v4b48bi2lxc$2",
-            },
-            initializer: {
-              kind: "number",
-              loc: [21, 19, 21, 20],
-              value: 1,
-            },
-          },
-          {
-            kind: "const",
-            loc: [22, 7, 22, 37],
-            name: {
-              kind: "id",
-              loc: [22, 13, 22, 21],
-              text: "answered",
-              bindingKey: "answered$23v4b48bi2lxc$3",
-            },
-            initializer: {
-              kind: "binop",
-              loc: [22, 25, 22, 35],
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 14, column: 6 },
+                end: { line: 14, column: 12 },
+              },
+              operator: "+=",
               left: {
-                kind: "id",
-                loc: [22, 25, 22, 30],
-                text: "total",
-                bindingKey: "total$23v4b48bi2lxc$2",
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 6 },
+                  end: { line: 14, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$23v4b48bi2lxc$0",
               },
-              operatorToken: "+=",
               right: {
-                kind: "number",
-                loc: [22, 34, 22, 35],
-                value: 2,
-              },
-            },
-          },
-          {
-            kind: "let",
-            loc: [23, 7, 23, 17],
-            name: {
-              kind: "id",
-              loc: [23, 11, 23, 12],
-              text: "x",
-              bindingKey: "x$23v4b48bi2lxc$4",
-            },
-            initializer: {
-              kind: "number",
-              loc: [23, 15, 23, 16],
-              value: 1,
-            },
-          },
-          {
-            kind: "binop",
-            loc: [24, 7, 24, 17],
-            left: {
-              kind: "id",
-              loc: [24, 7, 24, 8],
-              text: "x",
-              bindingKey: "x$23v4b48bi2lxc$4",
-            },
-            operatorToken: "+=",
-            right: {
-              kind: "binop",
-              loc: [24, 12, 24, 17],
-              left: {
-                kind: "id",
-                loc: [24, 12, 24, 13],
-                text: "x",
-                bindingKey: "x$23v4b48bi2lxc$4",
-              },
-              operatorToken: "=",
-              right: {
-                kind: "number",
-                loc: [24, 16, 24, 17],
+                type: "Literal",
+                loc: {
+                  start: { line: 14, column: 11 },
+                  end: { line: 14, column: 12 },
+                },
                 value: 5,
               },
             },
           },
           {
-            kind: "return",
-            loc: [25, 7, 25, 44],
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 13 },
+            },
             expression: {
-              kind: "arr",
-              loc: [25, 14, 25, 43],
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 12 },
+              },
+              operator: "-=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 6 },
+                  end: { line: 15, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$23v4b48bi2lxc$0",
+              },
+              right: {
+                type: "Literal",
+                loc: {
+                  start: { line: 15, column: 11 },
+                  end: { line: 15, column: 12 },
+                },
+                value: 3,
+              },
+            },
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 13 },
+            },
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 12 },
+              },
+              operator: "*=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 16, column: 6 },
+                  end: { line: 16, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$23v4b48bi2lxc$0",
+              },
+              right: {
+                type: "Literal",
+                loc: {
+                  start: { line: 16, column: 11 },
+                  end: { line: 16, column: 12 },
+                },
+                value: 2,
+              },
+            },
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 13 },
+            },
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 12 },
+              },
+              operator: "/=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 17, column: 6 },
+                  end: { line: 17, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$23v4b48bi2lxc$0",
+              },
+              right: {
+                type: "Literal",
+                loc: {
+                  start: { line: 17, column: 11 },
+                  end: { line: 17, column: 12 },
+                },
+                value: 4,
+              },
+            },
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 13 },
+            },
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 18, column: 12 },
+              },
+              operator: "%=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 18, column: 6 },
+                  end: { line: 18, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$23v4b48bi2lxc$0",
+              },
+              right: {
+                type: "Literal",
+                loc: {
+                  start: { line: 18, column: 11 },
+                  end: { line: 18, column: 12 },
+                },
+                value: 4,
+              },
+            },
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 21 },
+            },
+            kind: "let",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 19, column: 10 },
+                  end: { line: 19, column: 20 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 10 },
+                    end: { line: 19, column: 14 },
+                  },
+                  name: "text",
+                  bindingKey: "text$23v4b48bi2lxc$1",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 19, column: 17 },
+                    end: { line: 19, column: 20 },
+                  },
+                  value: "a",
+                },
+              },
+            ],
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 18 },
+            },
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 20, column: 6 },
+                end: { line: 20, column: 17 },
+              },
+              operator: "+=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 20, column: 6 },
+                  end: { line: 20, column: 10 },
+                },
+                name: "text",
+                bindingKey: "text$23v4b48bi2lxc$1",
+              },
+              right: {
+                type: "Literal",
+                loc: {
+                  start: { line: 20, column: 14 },
+                  end: { line: 20, column: 17 },
+                },
+                value: "b",
+              },
+            },
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 20 },
+            },
+            kind: "let",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 21, column: 10 },
+                  end: { line: 21, column: 19 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 10 },
+                    end: { line: 21, column: 15 },
+                  },
+                  name: "total",
+                  bindingKey: "total$23v4b48bi2lxc$2",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 21, column: 18 },
+                    end: { line: 21, column: 19 },
+                  },
+                  value: 1,
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 22, column: 36 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 22, column: 12 },
+                  end: { line: 22, column: 35 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 22, column: 12 },
+                    end: { line: 22, column: 20 },
+                  },
+                  name: "answered",
+                  bindingKey: "answered$23v4b48bi2lxc$3",
+                },
+                init: {
+                  type: "AssignmentExpression",
+                  loc: {
+                    start: { line: 22, column: 24 },
+                    end: { line: 22, column: 34 },
+                  },
+                  operator: "+=",
+                  left: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 22, column: 24 },
+                      end: { line: 22, column: 29 },
+                    },
+                    name: "total",
+                    bindingKey: "total$23v4b48bi2lxc$2",
+                  },
+                  right: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 22, column: 33 },
+                      end: { line: 22, column: 34 },
+                    },
+                    value: 2,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 23, column: 6 },
+              end: { line: 23, column: 16 },
+            },
+            kind: "let",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 23, column: 10 },
+                  end: { line: 23, column: 15 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 23, column: 10 },
+                    end: { line: 23, column: 11 },
+                  },
+                  name: "x",
+                  bindingKey: "x$23v4b48bi2lxc$4",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 23, column: 14 },
+                    end: { line: 23, column: 15 },
+                  },
+                  value: 1,
+                },
+              },
+            ],
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 24, column: 6 },
+              end: { line: 24, column: 17 },
+            },
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 24, column: 6 },
+                end: { line: 24, column: 16 },
+              },
+              operator: "+=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 24, column: 6 },
+                  end: { line: 24, column: 7 },
+                },
+                name: "x",
+                bindingKey: "x$23v4b48bi2lxc$4",
+              },
+              right: {
+                type: "AssignmentExpression",
+                loc: {
+                  start: { line: 24, column: 11 },
+                  end: { line: 24, column: 16 },
+                },
+                operator: "=",
+                left: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 24, column: 11 },
+                    end: { line: 24, column: 12 },
+                  },
+                  name: "x",
+                  bindingKey: "x$23v4b48bi2lxc$4",
+                },
+                right: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 24, column: 15 },
+                    end: { line: 24, column: 16 },
+                  },
+                  value: 5,
+                },
+              },
+            },
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 25, column: 6 },
+              end: { line: 25, column: 43 },
+            },
+            argument: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 25, column: 13 },
+                end: { line: 25, column: 42 },
+              },
               elements: [
                 {
-                  kind: "id",
-                  loc: [25, 15, 25, 16],
-                  text: "n",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 25, column: 14 },
+                    end: { line: 25, column: 15 },
+                  },
+                  name: "n",
                   bindingKey: "n$23v4b48bi2lxc$0",
                 },
                 {
-                  kind: "id",
-                  loc: [25, 18, 25, 22],
-                  text: "text",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 25, column: 17 },
+                    end: { line: 25, column: 21 },
+                  },
+                  name: "text",
                   bindingKey: "text$23v4b48bi2lxc$1",
                 },
                 {
-                  kind: "id",
-                  loc: [25, 24, 25, 32],
-                  text: "answered",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 25, column: 23 },
+                    end: { line: 25, column: 31 },
+                  },
+                  name: "answered",
                   bindingKey: "answered$23v4b48bi2lxc$3",
                 },
                 {
-                  kind: "id",
-                  loc: [25, 34, 25, 39],
-                  text: "total",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 25, column: 33 },
+                    end: { line: 25, column: 38 },
+                  },
+                  name: "total",
                   bindingKey: "total$23v4b48bi2lxc$2",
                 },
                 {
-                  kind: "id",
-                  loc: [25, 41, 25, 42],
-                  text: "x",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 25, column: 40 },
+                    end: { line: 25, column: 41 },
+                  },
+                  name: "x",
                   bindingKey: "x$23v4b48bi2lxc$4",
                 },
               ],

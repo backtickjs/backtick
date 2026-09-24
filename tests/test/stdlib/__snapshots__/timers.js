@@ -22,7 +22,7 @@ it("timers", async (t) => {
     t,
     "timers",
     cs.create(
-      [25, 5, 30, 7],
+      { start: { line: 25, column: 4 }, end: { line: 30, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/timers.test.tsx",
@@ -31,134 +31,282 @@ it("timers", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [25, 8, 30, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 25, column: 7 }, end: { line: 30, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 26, column: 6 },
+              end: { line: 26, column: 41 },
+            },
             kind: "const",
-            loc: [26, 7, 26, 42],
-            name: {
-              kind: "id",
-              loc: [26, 13, 26, 17],
-              text: "stop",
-              bindingKey: "stop$ujjuhj1csnkk$0",
-            },
-            initializer: {
-              kind: ".",
-              loc: [26, 20, 26, 41],
-              expression: {
-                kind: "splice",
-                loc: [26, 20, 26, 27],
-                key: "$window",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 26, column: 12 },
+                  end: { line: 26, column: 40 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 26, column: 12 },
+                    end: { line: 26, column: 16 },
+                  },
+                  name: "stop",
+                  bindingKey: "stop$ujjuhj1csnkk$0",
+                },
+                init: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 26, column: 19 },
+                    end: { line: 26, column: 40 },
+                  },
+                  object: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 26, column: 19 },
+                      end: { line: 26, column: 26 },
+                    },
+                    key: "$window",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 26, column: 27 },
+                      end: { line: 26, column: 40 },
+                    },
+                    name: "clearInterval",
+                  },
+                  computed: false,
+                  optional: false,
+                },
               },
-              name: "clearInterval",
-            },
+            ],
           },
           {
-            kind: "const",
-            loc: [27, 7, 27, 60],
-            name: {
-              kind: "id",
-              loc: [27, 13, 27, 22],
-              text: "repeating",
-              bindingKey: "repeating$ujjuhj1csnkk$1",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 27, column: 6 },
+              end: { line: 27, column: 59 },
             },
-            initializer: {
-              kind: "()",
-              loc: [27, 25, 27, 59],
-              expression: {
-                kind: ".",
-                loc: [27, 25, 27, 44],
-                expression: {
-                  kind: "splice",
-                  loc: [27, 25, 27, 32],
-                  key: "$window",
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 27, column: 12 },
+                  end: { line: 27, column: 58 },
                 },
-                name: "setInterval",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 27, column: 12 },
+                    end: { line: 27, column: 21 },
+                  },
+                  name: "repeating",
+                  bindingKey: "repeating$ujjuhj1csnkk$1",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 27, column: 24 },
+                    end: { line: 27, column: 58 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 27, column: 24 },
+                      end: { line: 27, column: 43 },
+                    },
+                    object: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 27, column: 24 },
+                        end: { line: 27, column: 31 },
+                      },
+                      key: "$window",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 27, column: 32 },
+                        end: { line: 27, column: 43 },
+                      },
+                      name: "setInterval",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 27, column: 44 },
+                        end: { line: 27, column: 51 },
+                      },
+                      params: [],
+                      body: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 27, column: 50 },
+                          end: { line: 27, column: 51 },
+                        },
+                        value: 0,
+                      },
+                      expression: true,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 27, column: 53 },
+                        end: { line: 27, column: 57 },
+                      },
+                      value: 1000,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 22 },
+            },
+            expression: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 21 },
+              },
+              callee: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 28, column: 6 },
+                  end: { line: 28, column: 10 },
+                },
+                name: "stop",
+                bindingKey: "stop$ujjuhj1csnkk$0",
               },
               arguments: [
                 {
-                  kind: "=>",
-                  loc: [27, 45, 27, 52],
-                  parameters: [],
-                  body: {
-                    kind: "number",
-                    loc: [27, 51, 27, 52],
-                    value: 0,
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 28, column: 11 },
+                    end: { line: 28, column: 20 },
                   },
-                },
-                {
-                  kind: "number",
-                  loc: [27, 54, 27, 58],
-                  value: 1000,
+                  name: "repeating",
+                  bindingKey: "repeating$ujjuhj1csnkk$1",
                 },
               ],
+              optional: false,
             },
           },
           {
-            kind: "()",
-            loc: [28, 7, 28, 22],
-            expression: {
-              kind: "id",
-              loc: [28, 7, 28, 11],
-              text: "stop",
-              bindingKey: "stop$ujjuhj1csnkk$0",
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 62 },
             },
-            arguments: [
-              {
-                kind: "id",
-                loc: [28, 12, 28, 21],
-                text: "repeating",
-                bindingKey: "repeating$ujjuhj1csnkk$1",
-              },
-            ],
-          },
-          {
-            kind: "()",
-            loc: [29, 7, 29, 62],
             expression: {
-              kind: ".",
-              loc: [29, 7, 29, 27],
-              expression: {
-                kind: "splice",
-                loc: [29, 7, 29, 14],
-                key: "$window",
+              type: "CallExpression",
+              loc: {
+                start: { line: 29, column: 6 },
+                end: { line: 29, column: 61 },
               },
-              name: "clearTimeout",
-            },
-            arguments: [
-              {
-                kind: "()",
-                loc: [29, 28, 29, 61],
-                expression: {
-                  kind: ".",
-                  loc: [29, 28, 29, 46],
-                  expression: {
-                    kind: "splice",
-                    loc: [29, 28, 29, 35],
-                    key: "$window",
-                  },
-                  name: "setTimeout",
+              callee: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 29, column: 6 },
+                  end: { line: 29, column: 26 },
                 },
-                arguments: [
-                  {
-                    kind: "=>",
-                    loc: [29, 47, 29, 54],
-                    parameters: [],
-                    body: {
-                      kind: "number",
-                      loc: [29, 53, 29, 54],
-                      value: 0,
-                    },
+                object: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 29, column: 6 },
+                    end: { line: 29, column: 13 },
                   },
-                  {
-                    kind: "number",
-                    loc: [29, 56, 29, 60],
-                    value: 1000,
+                  key: "$window",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 29, column: 14 },
+                    end: { line: 29, column: 26 },
                   },
-                ],
+                  name: "clearTimeout",
+                },
+                computed: false,
+                optional: false,
               },
-            ],
+              arguments: [
+                {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 29, column: 27 },
+                    end: { line: 29, column: 60 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 29, column: 27 },
+                      end: { line: 29, column: 45 },
+                    },
+                    object: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 29, column: 27 },
+                        end: { line: 29, column: 34 },
+                      },
+                      key: "$window",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 29, column: 35 },
+                        end: { line: 29, column: 45 },
+                      },
+                      name: "setTimeout",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 29, column: 46 },
+                        end: { line: 29, column: 53 },
+                      },
+                      params: [],
+                      body: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 29, column: 52 },
+                          end: { line: 29, column: 53 },
+                        },
+                        value: 0,
+                      },
+                      expression: true,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 29, column: 55 },
+                        end: { line: 29, column: 59 },
+                      },
+                      value: 1000,
+                    },
+                  ],
+                  optional: false,
+                },
+              ],
+              optional: false,
+            },
           },
         ],
       }),

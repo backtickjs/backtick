@@ -7,7 +7,7 @@ it("earlyReturn", async (t) => {
     t,
     "earlyReturn",
     cs.create(
-      [10, 5, 16, 7],
+      { start: { line: 10, column: 4 }, end: { line: 16, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/early-return.test.tsx",
@@ -16,73 +16,123 @@ it("earlyReturn", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [10, 8, 16, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 10, column: 7 }, end: { line: 16, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 11, column: 16 },
+            },
             kind: "let",
-            loc: [11, 7, 11, 17],
-            name: {
-              kind: "id",
-              loc: [11, 11, 11, 12],
-              text: "n",
-              bindingKey: "n$33mpmt8iae2c7$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [11, 15, 11, 16],
-              value: 0,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 11, column: 10 },
+                  end: { line: 11, column: 15 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 10 },
+                    end: { line: 11, column: 11 },
+                  },
+                  name: "n",
+                  bindingKey: "n$33mpmt8iae2c7$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 14 },
+                    end: { line: 11, column: 15 },
+                  },
+                  value: 0,
+                },
+              },
+            ],
           },
           {
-            kind: "if",
-            loc: [12, 7, 14, 8],
-            expression: {
-              kind: "binop",
-              loc: [12, 11, 12, 18],
+            type: "IfStatement",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 14, column: 7 },
+            },
+            test: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 12, column: 10 },
+                end: { line: 12, column: 17 },
+              },
+              operator: "===",
               left: {
-                kind: "id",
-                loc: [12, 11, 12, 12],
-                text: "n",
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 11 },
+                },
+                name: "n",
                 bindingKey: "n$33mpmt8iae2c7$0",
               },
-              operatorToken: "===",
               right: {
-                kind: "number",
-                loc: [12, 17, 12, 18],
+                type: "Literal",
+                loc: {
+                  start: { line: 12, column: 16 },
+                  end: { line: 12, column: 17 },
+                },
                 value: 0,
               },
             },
-            thenStatement: {
-              kind: "{}",
-              loc: [12, 20, 14, 8],
-              statements: [
+            consequent: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 12, column: 19 },
+                end: { line: 14, column: 7 },
+              },
+              body: [
                 {
-                  kind: "return",
-                  loc: [13, 9, 13, 16],
-                  expression: {
-                    kind: "undefined",
-                    loc: [13, 9, 13, 16],
+                  type: "ReturnStatement",
+                  loc: {
+                    start: { line: 13, column: 8 },
+                    end: { line: 13, column: 15 },
                   },
+                  argument: null,
                 },
               ],
             },
-            elseStatement: null,
+            alternate: null,
           },
           {
-            kind: "binop",
-            loc: [15, 7, 15, 12],
-            left: {
-              kind: "id",
-              loc: [15, 7, 15, 8],
-              text: "n",
-              bindingKey: "n$33mpmt8iae2c7$0",
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 12 },
             },
-            operatorToken: "=",
-            right: {
-              kind: "number",
-              loc: [15, 11, 15, 12],
-              value: 1,
+            expression: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 11 },
+              },
+              operator: "=",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 6 },
+                  end: { line: 15, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$33mpmt8iae2c7$0",
+              },
+              right: {
+                type: "Literal",
+                loc: {
+                  start: { line: 15, column: 10 },
+                  end: { line: 15, column: 11 },
+                },
+                value: 1,
+              },
             },
           },
         ],

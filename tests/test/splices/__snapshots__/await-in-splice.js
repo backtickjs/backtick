@@ -12,7 +12,7 @@ it("awaitInSplice", async (t) => {
     t,
     "awaitInSplice",
     cs.create(
-      [13, 42, 13, 76],
+      { start: { line: 13, column: 41 }, end: { line: 13, column: 75 } },
       {
         version: "0.0.0",
         filePath: "splices/await-in-splice.test.tsx",
@@ -21,18 +21,24 @@ it("awaitInSplice", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "binop",
-        loc: [13, 45, 13, 75],
+        type: "BinaryExpression",
+        loc: { start: { line: 13, column: 44 }, end: { line: 13, column: 74 } },
+        operator: "+",
         left: {
-          kind: "splice",
-          loc: [13, 45, 13, 69],
+          type: "Splice",
+          loc: {
+            start: { line: 13, column: 44 },
+            end: { line: 13, column: 68 },
+          },
           key: "$0splice0",
         },
-        operatorToken: "+",
         right: {
-          kind: "string",
-          loc: [13, 72, 13, 75],
-          text: "!",
+          type: "Literal",
+          loc: {
+            start: { line: 13, column: 71 },
+            end: { line: 13, column: 74 },
+          },
+          value: "!",
         },
       }),
     ),

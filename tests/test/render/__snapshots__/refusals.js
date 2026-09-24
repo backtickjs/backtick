@@ -87,7 +87,7 @@ describe("a handler that is not a function", () => {
   it("leaves a function alone", async () => {
     const div = await drawn(
       cs.create(
-        [134, 29, 134, 59],
+        { start: { line: 134, column: 28 }, end: { line: 134, column: 58 } },
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
@@ -96,29 +96,70 @@ describe("a handler that is not a function", () => {
           captures: [],
         },
         () => ({
-          kind: "jsx",
-          loc: [134, 32, 134, 58],
-          type: {
-            kind: "string",
-            loc: [134, 33, 134, 36],
-            text: "div",
+          type: "JSXElement",
+          loc: {
+            start: { line: 134, column: 31 },
+            end: { line: 134, column: 57 },
           },
-          attributes: [
-            {
-              name: "onclick",
-              initializer: {
-                kind: "=>",
-                loc: [134, 46, 134, 54],
-                parameters: [],
-                body: {
-                  kind: "{}",
-                  loc: [134, 52, 134, 54],
-                  statements: [],
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 134, column: 31 },
+              end: { line: 134, column: 57 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 134, column: 32 },
+                end: { line: 134, column: 35 },
+              },
+              name: "div",
+            },
+            attributes: [
+              {
+                type: "JSXAttribute",
+                loc: {
+                  start: { line: 134, column: 36 },
+                  end: { line: 134, column: 54 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 134, column: 36 },
+                    end: { line: 134, column: 43 },
+                  },
+                  name: "onclick",
+                },
+                value: {
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 134, column: 44 },
+                    end: { line: 134, column: 54 },
+                  },
+                  expression: {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 134, column: 45 },
+                      end: { line: 134, column: 53 },
+                    },
+                    params: [],
+                    body: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 134, column: 51 },
+                        end: { line: 134, column: 53 },
+                      },
+                      body: [],
+                    },
+                    expression: false,
+                  },
                 },
               },
-            },
-          ],
+            ],
+            selfClosing: true,
+          },
           children: [],
+          closingElement: null,
         }),
       ),
     );
@@ -130,7 +171,7 @@ describe("a handler that is not a function", () => {
   it("is refused the other way round too", async () => {
     await refused(
       cs.create(
-        [144, 7, 144, 35],
+        { start: { line: 144, column: 6 }, end: { line: 144, column: 34 } },
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
@@ -139,29 +180,70 @@ describe("a handler that is not a function", () => {
           captures: [],
         },
         () => ({
-          kind: "jsx",
-          loc: [144, 10, 144, 34],
-          type: {
-            kind: "string",
-            loc: [144, 11, 144, 14],
-            text: "div",
+          type: "JSXElement",
+          loc: {
+            start: { line: 144, column: 9 },
+            end: { line: 144, column: 33 },
           },
-          attributes: [
-            {
-              name: "title",
-              initializer: {
-                kind: "=>",
-                loc: [144, 22, 144, 30],
-                parameters: [],
-                body: {
-                  kind: "{}",
-                  loc: [144, 28, 144, 30],
-                  statements: [],
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 144, column: 9 },
+              end: { line: 144, column: 33 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 144, column: 10 },
+                end: { line: 144, column: 13 },
+              },
+              name: "div",
+            },
+            attributes: [
+              {
+                type: "JSXAttribute",
+                loc: {
+                  start: { line: 144, column: 14 },
+                  end: { line: 144, column: 30 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 144, column: 14 },
+                    end: { line: 144, column: 19 },
+                  },
+                  name: "title",
+                },
+                value: {
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 144, column: 20 },
+                    end: { line: 144, column: 30 },
+                  },
+                  expression: {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 144, column: 21 },
+                      end: { line: 144, column: 29 },
+                    },
+                    params: [],
+                    body: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 144, column: 27 },
+                        end: { line: 144, column: 29 },
+                      },
+                      body: [],
+                    },
+                    expression: false,
+                  },
                 },
               },
-            },
-          ],
+            ],
+            selfClosing: true,
+          },
           children: [],
+          closingElement: null,
         }),
       ),
       /takes a value, not a function/,
@@ -173,7 +255,7 @@ describe("a handler that is not a function", () => {
   it("lets an absent handler stay absent", async () => {
     const absent = [
       cs.create(
-        [155, 7, 155, 33],
+        { start: { line: 155, column: 6 }, end: { line: 155, column: 32 } },
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
@@ -182,27 +264,65 @@ describe("a handler that is not a function", () => {
           captures: [],
         },
         () => ({
-          kind: "jsx",
-          loc: [155, 10, 155, 32],
-          type: {
-            kind: "string",
-            loc: [155, 11, 155, 14],
-            text: "div",
+          type: "JSXElement",
+          loc: {
+            start: { line: 155, column: 9 },
+            end: { line: 155, column: 31 },
           },
-          attributes: [
-            {
-              name: "onclick",
-              initializer: {
-                kind: "null",
-                loc: [155, 24, 155, 28],
-              },
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 155, column: 9 },
+              end: { line: 155, column: 31 },
             },
-          ],
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 155, column: 10 },
+                end: { line: 155, column: 13 },
+              },
+              name: "div",
+            },
+            attributes: [
+              {
+                type: "JSXAttribute",
+                loc: {
+                  start: { line: 155, column: 14 },
+                  end: { line: 155, column: 28 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 155, column: 14 },
+                    end: { line: 155, column: 21 },
+                  },
+                  name: "onclick",
+                },
+                value: {
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 155, column: 22 },
+                    end: { line: 155, column: 28 },
+                  },
+                  expression: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 155, column: 23 },
+                      end: { line: 155, column: 27 },
+                    },
+                    value: null,
+                  },
+                },
+              },
+            ],
+            selfClosing: true,
+          },
           children: [],
+          closingElement: null,
         }),
       ),
       cs.create(
-        [156, 7, 156, 42],
+        { start: { line: 156, column: 6 }, end: { line: 156, column: 41 } },
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
@@ -211,44 +331,96 @@ describe("a handler that is not a function", () => {
           captures: [],
         },
         () => ({
-          kind: "jsx",
-          loc: [156, 10, 156, 41],
-          type: {
-            kind: "string",
-            loc: [156, 11, 156, 14],
-            text: "div",
+          type: "JSXElement",
+          loc: {
+            start: { line: 156, column: 9 },
+            end: { line: 156, column: 40 },
           },
-          attributes: [
-            {
-              name: "onclick",
-              initializer: {
-                kind: "[]",
-                loc: [156, 24, 156, 37],
-                expression: {
-                  kind: "arr",
-                  loc: [156, 24, 156, 34],
-                  elements: [
-                    {
-                      kind: "=>",
-                      loc: [156, 25, 156, 33],
-                      parameters: [],
-                      body: {
-                        kind: "{}",
-                        loc: [156, 31, 156, 33],
-                        statements: [],
-                      },
-                    },
-                  ],
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 156, column: 9 },
+              end: { line: 156, column: 40 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 156, column: 10 },
+                end: { line: 156, column: 13 },
+              },
+              name: "div",
+            },
+            attributes: [
+              {
+                type: "JSXAttribute",
+                loc: {
+                  start: { line: 156, column: 14 },
+                  end: { line: 156, column: 37 },
                 },
-                argumentExpression: {
-                  kind: "number",
-                  loc: [156, 35, 156, 36],
-                  value: 1,
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 156, column: 14 },
+                    end: { line: 156, column: 21 },
+                  },
+                  name: "onclick",
+                },
+                value: {
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 156, column: 22 },
+                    end: { line: 156, column: 37 },
+                  },
+                  expression: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 156, column: 23 },
+                      end: { line: 156, column: 36 },
+                    },
+                    object: {
+                      type: "ArrayExpression",
+                      loc: {
+                        start: { line: 156, column: 23 },
+                        end: { line: 156, column: 33 },
+                      },
+                      elements: [
+                        {
+                          type: "ArrowFunctionExpression",
+                          loc: {
+                            start: { line: 156, column: 24 },
+                            end: { line: 156, column: 32 },
+                          },
+                          params: [],
+                          body: {
+                            type: "BlockStatement",
+                            loc: {
+                              start: { line: 156, column: 30 },
+                              end: { line: 156, column: 32 },
+                            },
+                            body: [],
+                          },
+                          expression: false,
+                        },
+                      ],
+                    },
+                    property: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 156, column: 34 },
+                        end: { line: 156, column: 35 },
+                      },
+                      value: 1,
+                    },
+                    computed: true,
+                    optional: false,
+                  },
                 },
               },
-            },
-          ],
+            ],
+            selfClosing: true,
+          },
           children: [],
+          closingElement: null,
         }),
       ),
     ];

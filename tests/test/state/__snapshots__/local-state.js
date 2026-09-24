@@ -11,7 +11,7 @@ import { drawn, fontSize } from "./dom.ts";
 // cell changes — and `write` is an effect, which only an action can perform.
 async function Stepper() {
   return cs.create(
-    [13, 10, 25, 5],
+    { start: { line: 13, column: 9 }, end: { line: 25, column: 4 } },
     {
       version: "0.0.0",
       filePath: "state/local-state.test.tsx",
@@ -20,151 +20,337 @@ async function Stepper() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [13, 13, 25, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 13, column: 12 }, end: { line: 25, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 14, column: 4 },
+            end: { line: 14, column: 28 },
+          },
           kind: "const",
-          loc: [14, 5, 14, 29],
-          name: {
-            kind: "id",
-            loc: [14, 11, 14, 15],
-            text: "size",
-            bindingKey: "size$2gygj47yf1nf5$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [14, 18, 14, 28],
-            expression: {
-              kind: "splice",
-              loc: [14, 18, 14, 24],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "number",
-                loc: [14, 25, 14, 27],
-                value: 16,
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 14, column: 10 },
+                end: { line: 14, column: 27 },
               },
-            ],
-          },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 10 },
+                  end: { line: 14, column: 14 },
+                },
+                name: "size",
+                bindingKey: "size$2gygj47yf1nf5$0",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 14, column: 17 },
+                  end: { line: 14, column: 27 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 14, column: 17 },
+                    end: { line: 14, column: 23 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 14, column: 24 },
+                      end: { line: 14, column: 26 },
+                    },
+                    value: 16,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [15, 5, 24, 7],
-          expression: {
-            kind: "jsx",
-            loc: [16, 7, 23, 14],
-            type: {
-              kind: "string",
-              loc: [16, 8, 16, 12],
-              text: "span",
+          type: "ReturnStatement",
+          loc: { start: { line: 15, column: 4 }, end: { line: 24, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 23, column: 13 },
             },
-            attributes: [
-              {
-                name: "style",
-                initializer: {
-                  kind: "binop",
-                  loc: [17, 16, 17, 49],
-                  left: {
-                    kind: "binop",
-                    loc: [17, 16, 17, 42],
-                    left: {
-                      kind: "string",
-                      loc: [17, 16, 17, 29],
-                      text: "font-size: ",
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: "()",
-                      loc: [17, 32, 17, 42],
-                      expression: {
-                        kind: ".",
-                        loc: [17, 32, 17, 40],
-                        expression: {
-                          kind: "id",
-                          loc: [17, 32, 17, 36],
-                          text: "size",
-                          bindingKey: "size$2gygj47yf1nf5$0",
-                        },
-                        name: "get",
-                      },
-                      arguments: [],
-                    },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 21, column: 7 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 16, column: 7 },
+                  end: { line: 16, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 17, column: 8 },
+                    end: { line: 17, column: 49 },
                   },
-                  operatorToken: "+",
-                  right: {
-                    kind: "string",
-                    loc: [17, 45, 17, 49],
-                    text: "px",
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 17, column: 8 },
+                      end: { line: 17, column: 13 },
+                    },
+                    name: "style",
+                  },
+                  value: {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 17, column: 14 },
+                      end: { line: 17, column: 49 },
+                    },
+                    expression: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 17, column: 15 },
+                        end: { line: 17, column: 48 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 17, column: 15 },
+                          end: { line: 17, column: 41 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 17, column: 15 },
+                            end: { line: 17, column: 28 },
+                          },
+                          value: "font-size: ",
+                        },
+                        right: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 17, column: 31 },
+                            end: { line: 17, column: 41 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 17, column: 31 },
+                              end: { line: 17, column: 39 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 17, column: 31 },
+                                end: { line: 17, column: 35 },
+                              },
+                              name: "size",
+                              bindingKey: "size$2gygj47yf1nf5$0",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 17, column: 36 },
+                                end: { line: 17, column: 39 },
+                              },
+                              name: "get",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [],
+                          optional: false,
+                        },
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 17, column: 44 },
+                          end: { line: 17, column: 48 },
+                        },
+                        value: "px",
+                      },
+                    },
                   },
                 },
-              },
-              {
-                name: "onclick",
-                initializer: {
-                  kind: "=>",
-                  loc: [18, 18, 20, 10],
-                  parameters: [],
-                  body: {
-                    kind: "{}",
-                    loc: [18, 24, 20, 10],
-                    statements: [
-                      {
-                        kind: "()",
-                        loc: [19, 11, 19, 35],
-                        expression: {
-                          kind: ".",
-                          loc: [19, 11, 19, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [19, 11, 19, 15],
-                            text: "size",
-                            bindingKey: "size$2gygj47yf1nf5$0",
-                          },
-                          name: "set",
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 18, column: 8 },
+                    end: { line: 20, column: 10 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 18, column: 8 },
+                      end: { line: 18, column: 15 },
+                    },
+                    name: "onclick",
+                  },
+                  value: {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 18, column: 16 },
+                      end: { line: 20, column: 10 },
+                    },
+                    expression: {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 18, column: 17 },
+                        end: { line: 20, column: 9 },
+                      },
+                      params: [],
+                      body: {
+                        type: "BlockStatement",
+                        loc: {
+                          start: { line: 18, column: 23 },
+                          end: { line: 20, column: 9 },
                         },
-                        arguments: [
+                        body: [
                           {
-                            kind: "binop",
-                            loc: [19, 20, 19, 34],
-                            left: {
-                              kind: "()",
-                              loc: [19, 20, 19, 30],
-                              expression: {
-                                kind: ".",
-                                loc: [19, 20, 19, 28],
-                                expression: {
-                                  kind: "id",
-                                  loc: [19, 20, 19, 24],
-                                  text: "size",
+                            type: "ExpressionStatement",
+                            loc: {
+                              start: { line: 19, column: 10 },
+                              end: { line: 19, column: 35 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 19, column: 10 },
+                                end: { line: 19, column: 34 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 19, column: 10 },
+                                  end: { line: 19, column: 18 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 19, column: 10 },
+                                    end: { line: 19, column: 14 },
+                                  },
+                                  name: "size",
                                   bindingKey: "size$2gygj47yf1nf5$0",
                                 },
-                                name: "get",
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 19, column: 15 },
+                                    end: { line: 19, column: 18 },
+                                  },
+                                  name: "set",
+                                },
+                                computed: false,
+                                optional: false,
                               },
-                              arguments: [],
-                            },
-                            operatorToken: "+",
-                            right: {
-                              kind: "number",
-                              loc: [19, 33, 19, 34],
-                              value: 1,
+                              arguments: [
+                                {
+                                  type: "BinaryExpression",
+                                  loc: {
+                                    start: { line: 19, column: 19 },
+                                    end: { line: 19, column: 33 },
+                                  },
+                                  operator: "+",
+                                  left: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 19, column: 19 },
+                                      end: { line: 19, column: 29 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 19, column: 19 },
+                                        end: { line: 19, column: 27 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 19, column: 19 },
+                                          end: { line: 19, column: 23 },
+                                        },
+                                        name: "size",
+                                        bindingKey: "size$2gygj47yf1nf5$0",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 19, column: 24 },
+                                          end: { line: 19, column: 27 },
+                                        },
+                                        name: "get",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [],
+                                    optional: false,
+                                  },
+                                  right: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 19, column: 32 },
+                                      end: { line: 19, column: 33 },
+                                    },
+                                    value: 1,
+                                  },
+                                },
+                              ],
+                              optional: false,
                             },
                           },
                         ],
                       },
-                    ],
+                      expression: false,
+                    },
                   },
                 },
-              },
-            ],
+              ],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "string",
-                loc: [22, 9, 23, 7],
-                text: "press",
+                type: "JSXText",
+                loc: {
+                  start: { line: 22, column: 8 },
+                  end: { line: 23, column: 6 },
+                },
+                value: "\n        press\n      ",
+                raw: "\n        press\n      ",
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 23, column: 6 },
+                end: { line: 23, column: 13 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 23, column: 8 },
+                  end: { line: 23, column: 12 },
+                },
+                name: "span",
+              },
+            },
           },
         },
       ],

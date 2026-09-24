@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // Handlers — action arrows — are values: an object carries them, and
 // storing one is not calling it.
 const beep = cs.create(
-  [8, 28, 11, 3],
+  { start: { line: 8, column: 27 }, end: { line: 11, column: 2 } },
   {
     version: "0.0.0",
     filePath: "control-flow/handler-object.test.tsx",
@@ -13,45 +13,71 @@ const beep = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [8, 31, 11, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 8, column: 30 }, end: { line: 11, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 12 } },
         kind: "let",
-        loc: [9, 3, 9, 13],
-        name: {
-          kind: "id",
-          loc: [9, 7, 9, 8],
-          text: "n",
-          bindingKey: "n$1dqhax1do6u08$0",
-        },
-        initializer: {
-          kind: "number",
-          loc: [9, 11, 9, 12],
-          value: 0,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 9, column: 6 },
+              end: { line: 9, column: 11 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 9, column: 6 },
+                end: { line: 9, column: 7 },
+              },
+              name: "n",
+              bindingKey: "n$1dqhax1do6u08$0",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 9, column: 10 },
+                end: { line: 9, column: 11 },
+              },
+              value: 0,
+            },
+          },
+        ],
       },
       {
-        kind: "binop",
-        loc: [10, 3, 10, 8],
-        left: {
-          kind: "id",
-          loc: [10, 3, 10, 4],
-          text: "n",
-          bindingKey: "n$1dqhax1do6u08$0",
-        },
-        operatorToken: "=",
-        right: {
-          kind: "number",
-          loc: [10, 7, 10, 8],
-          value: 1,
+        type: "ExpressionStatement",
+        loc: { start: { line: 10, column: 2 }, end: { line: 10, column: 8 } },
+        expression: {
+          type: "AssignmentExpression",
+          loc: { start: { line: 10, column: 2 }, end: { line: 10, column: 7 } },
+          operator: "=",
+          left: {
+            type: "Identifier",
+            loc: {
+              start: { line: 10, column: 2 },
+              end: { line: 10, column: 3 },
+            },
+            name: "n",
+            bindingKey: "n$1dqhax1do6u08$0",
+          },
+          right: {
+            type: "Literal",
+            loc: {
+              start: { line: 10, column: 6 },
+              end: { line: 10, column: 7 },
+            },
+            value: 1,
+          },
         },
       },
     ],
   }),
 );
 const onTap = cs.create(
-  [13, 45, 15, 3],
+  { start: { line: 13, column: 44 }, end: { line: 15, column: 2 } },
   {
     version: "0.0.0",
     filePath: "control-flow/handler-object.test.tsx",
@@ -60,31 +86,35 @@ const onTap = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [13, 48, 15, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 13, column: 47 }, end: { line: 15, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [13, 49, 13, 59],
-        name: {
-          kind: "id",
-          loc: [13, 49, 13, 51],
-          text: "id",
-          bindingKey: "id$1dqhax1do6u08$1",
-        },
+        type: "Identifier",
+        loc: { start: { line: 13, column: 48 }, end: { line: 13, column: 50 } },
+        name: "id",
+        bindingKey: "id$1dqhax1do6u08$1",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [13, 64, 15, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 13, column: 63 }, end: { line: 15, column: 1 } },
+      body: [
         {
-          kind: "splice",
-          loc: [14, 3, 14, 8],
-          key: "$beep",
+          type: "ExpressionStatement",
+          loc: { start: { line: 14, column: 2 }, end: { line: 14, column: 8 } },
+          expression: {
+            type: "Splice",
+            loc: {
+              start: { line: 14, column: 2 },
+              end: { line: 14, column: 7 },
+            },
+            key: "$beep",
+          },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("handlerObject", async (t) => {
@@ -92,7 +122,7 @@ it("handlerObject", async (t) => {
     t,
     "handlerObject",
     cs.create(
-      [21, 5, 27, 7],
+      { start: { line: 21, column: 4 }, end: { line: 27, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/handler-object.test.tsx",
@@ -101,60 +131,111 @@ it("handlerObject", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [21, 8, 27, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 21, column: 7 }, end: { line: 27, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 25, column: 8 },
+            },
             kind: "const",
-            loc: [22, 7, 25, 9],
-            name: {
-              kind: "id",
-              loc: [22, 13, 22, 21],
-              text: "handlers",
-              bindingKey: "handlers$1dqhax1do6u08$2",
-            },
-            initializer: {
-              kind: "obj",
-              loc: [22, 24, 25, 8],
-              properties: [
-                {
-                  kind: ":",
-                  loc: [23, 9, 23, 20],
-                  name: {
-                    kind: "string",
-                    loc: [23, 9, 23, 12],
-                    text: "tap",
-                  },
-                  initializer: {
-                    kind: "splice",
-                    loc: [23, 14, 23, 20],
-                    key: "$onTap",
-                  },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 22, column: 12 },
+                  end: { line: 25, column: 7 },
                 },
-                {
-                  kind: ":",
-                  loc: [24, 9, 24, 21],
-                  name: {
-                    kind: "string",
-                    loc: [24, 9, 24, 13],
-                    text: "hold",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 22, column: 12 },
+                    end: { line: 22, column: 20 },
                   },
-                  initializer: {
-                    kind: "splice",
-                    loc: [24, 15, 24, 21],
-                    key: "$onTap",
-                  },
+                  name: "handlers",
+                  bindingKey: "handlers$1dqhax1do6u08$2",
                 },
-              ],
-            },
+                init: {
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 22, column: 23 },
+                    end: { line: 25, column: 7 },
+                  },
+                  properties: [
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 23, column: 8 },
+                        end: { line: 23, column: 19 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 23, column: 8 },
+                          end: { line: 23, column: 11 },
+                        },
+                        name: "tap",
+                      },
+                      value: {
+                        type: "Splice",
+                        loc: {
+                          start: { line: 23, column: 13 },
+                          end: { line: 23, column: 19 },
+                        },
+                        key: "$onTap",
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 24, column: 8 },
+                        end: { line: 24, column: 20 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 24, column: 8 },
+                          end: { line: 24, column: 12 },
+                        },
+                        name: "hold",
+                      },
+                      value: {
+                        type: "Splice",
+                        loc: {
+                          start: { line: 24, column: 14 },
+                          end: { line: 24, column: 20 },
+                        },
+                        key: "$onTap",
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [26, 7, 26, 23],
-            expression: {
-              kind: "id",
-              loc: [26, 14, 26, 22],
-              text: "handlers",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 26, column: 6 },
+              end: { line: 26, column: 22 },
+            },
+            argument: {
+              type: "Identifier",
+              loc: {
+                start: { line: 26, column: 13 },
+                end: { line: 26, column: 21 },
+              },
+              name: "handlers",
               bindingKey: "handlers$1dqhax1do6u08$2",
             },
           },

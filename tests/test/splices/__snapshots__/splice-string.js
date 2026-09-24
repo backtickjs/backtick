@@ -9,7 +9,7 @@ it("spliceString", async (t) => {
     t,
     "spliceString",
     cs.create(
-      [10, 41, 10, 51],
+      { start: { line: 10, column: 40 }, end: { line: 10, column: 50 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-string.test.tsx",
@@ -18,8 +18,8 @@ it("spliceString", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "splice",
-        loc: [10, 44, 10, 50],
+        type: "Splice",
+        loc: { start: { line: 10, column: 43 }, end: { line: 10, column: 49 } },
         key: "$value",
       }),
     ),

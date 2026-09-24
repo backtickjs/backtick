@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // binding holds has to be a function: `Tag` here is a number.
 // @ts-expect-error: JSX element type 'Tag' does not have any construct or call signatures.
 const held = cs.create(
-  [6, 14, 6, 42],
+  { start: { line: 6, column: 13 }, end: { line: 6, column: 41 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/script-element-bound-tag.test.tsx",
@@ -12,31 +12,34 @@ const held = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 17, 6, 41],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 16 }, end: { line: 6, column: 40 } },
+    params: [
       {
-        kind: "param",
-        loc: [6, 18, 6, 29],
-        name: {
-          kind: "id",
-          loc: [6, 18, 6, 21],
-          text: "Tag",
-          bindingKey: "Tag$xwewmj2gozc5$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 6, column: 17 }, end: { line: 6, column: 20 } },
+        name: "Tag",
+        bindingKey: "Tag$xwewmj2gozc5$0",
       },
     ],
     body: {
-      kind: "jsx",
-      loc: [6, 34, 6, 41],
-      type: {
-        kind: "id",
-        loc: [6, 35, 6, 38],
-        text: "Tag",
-        bindingKey: "Tag$xwewmj2gozc5$0",
+      type: "JSXElement",
+      loc: { start: { line: 6, column: 33 }, end: { line: 6, column: 40 } },
+      openingElement: {
+        type: "JSXOpeningElement",
+        loc: { start: { line: 6, column: 33 }, end: { line: 6, column: 40 } },
+        name: {
+          type: "JSXIdentifier",
+          loc: { start: { line: 6, column: 34 }, end: { line: 6, column: 37 } },
+          name: "Tag",
+          bindingKey: "Tag$xwewmj2gozc5$0",
+        },
+        attributes: [],
+        selfClosing: true,
       },
-      attributes: [],
       children: [],
+      closingElement: null,
     },
+    expression: true,
   }),
 );

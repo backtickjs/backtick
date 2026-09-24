@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // another cell, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs.create(
-    [10, 17, 12, 5],
+    { start: { line: 10, column: 16 }, end: { line: 12, column: 4 } },
     {
       version: "0.0.0",
       filePath: "state/script-state.test.tsx",
@@ -17,67 +17,93 @@ async function ScriptRows() {
       captures: [],
     },
     () => ({
-      kind: "=>",
-      loc: [10, 20, 12, 4],
-      parameters: [
+      type: "ArrowFunctionExpression",
+      loc: { start: { line: 10, column: 19 }, end: { line: 12, column: 3 } },
+      params: [
         {
-          kind: "param",
-          loc: [10, 21, 10, 34],
-          name: {
-            kind: "id",
-            loc: [10, 21, 10, 26],
-            text: "label",
-            bindingKey: "label$3f2468k5dp5lo$0",
+          type: "Identifier",
+          loc: {
+            start: { line: 10, column: 20 },
+            end: { line: 10, column: 25 },
           },
+          name: "label",
+          bindingKey: "label$3f2468k5dp5lo$0",
         },
       ],
       body: {
-        kind: "{}",
-        loc: [10, 39, 12, 4],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 10, column: 38 }, end: { line: 12, column: 3 } },
+        body: [
           {
-            kind: "return",
-            loc: [11, 5, 11, 37],
-            expression: {
-              kind: "obj",
-              loc: [11, 12, 11, 36],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 11, column: 4 },
+              end: { line: 11, column: 36 },
+            },
+            argument: {
+              type: "ObjectExpression",
+              loc: {
+                start: { line: 11, column: 11 },
+                end: { line: 11, column: 35 },
+              },
               properties: [
                 {
-                  kind: ":",
-                  loc: [11, 14, 11, 34],
-                  name: {
-                    kind: "string",
-                    loc: [11, 14, 11, 19],
-                    text: "label",
+                  type: "Property",
+                  loc: {
+                    start: { line: 11, column: 13 },
+                    end: { line: 11, column: 33 },
                   },
-                  initializer: {
-                    kind: "()",
-                    loc: [11, 21, 11, 34],
-                    expression: {
-                      kind: "splice",
-                      loc: [11, 21, 11, 27],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 13 },
+                      end: { line: 11, column: 18 },
+                    },
+                    name: "label",
+                  },
+                  value: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 11, column: 20 },
+                      end: { line: 11, column: 33 },
+                    },
+                    callee: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 11, column: 20 },
+                        end: { line: 11, column: 26 },
+                      },
                       key: "$state",
                     },
                     arguments: [
                       {
-                        kind: "id",
-                        loc: [11, 28, 11, 33],
-                        text: "label",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 11, column: 27 },
+                          end: { line: 11, column: 32 },
+                        },
+                        name: "label",
                         bindingKey: "label$3f2468k5dp5lo$0",
                       },
                     ],
+                    optional: false,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
               ],
             },
           },
         ],
       },
+      expression: false,
     }),
   );
   return _jsx("span", {
     style: cs.create(
-      [16, 14, 16, 35],
+      { start: { line: 16, column: 13 }, end: { line: 16, column: 34 } },
       {
         version: "0.0.0",
         filePath: "state/script-state.test.tsx",
@@ -86,13 +112,13 @@ async function ScriptRows() {
         captures: [],
       },
       () => ({
-        kind: "string",
-        loc: [16, 17, 16, 34],
-        text: "font-size: 16px",
+        type: "Literal",
+        loc: { start: { line: 16, column: 16 }, end: { line: 16, column: 33 } },
+        value: "font-size: 16px",
       }),
     ),
     onclick: cs.create(
-      [17, 16, 20, 9],
+      { start: { line: 17, column: 15 }, end: { line: 20, column: 8 } },
       {
         version: "0.0.0",
         filePath: "state/script-state.test.tsx",
@@ -101,98 +127,203 @@ async function ScriptRows() {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [17, 19, 20, 8],
-        parameters: [],
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 17, column: 18 }, end: { line: 20, column: 7 } },
+        params: [],
         body: {
-          kind: "{}",
-          loc: [17, 25, 20, 8],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 17, column: 24 },
+            end: { line: 20, column: 7 },
+          },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 18, column: 8 },
+                end: { line: 18, column: 34 },
+              },
               kind: "const",
-              loc: [18, 9, 18, 35],
-              name: {
-                kind: "id",
-                loc: [18, 15, 18, 18],
-                text: "row",
-                bindingKey: "row$3f2468k5dp5lo$1",
-              },
-              initializer: {
-                kind: "()",
-                loc: [18, 21, 18, 34],
-                expression: {
-                  kind: "splice",
-                  loc: [18, 21, 18, 27],
-                  key: "$build",
-                },
-                arguments: [
-                  {
-                    kind: "string",
-                    loc: [18, 28, 18, 33],
-                    text: "one",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 18, column: 14 },
+                    end: { line: 18, column: 33 },
                   },
-                ],
-              },
-            },
-            {
-              kind: "()",
-              loc: [19, 9, 19, 48],
-              expression: {
-                kind: ".",
-                loc: [19, 9, 19, 22],
-                expression: {
-                  kind: ".",
-                  loc: [19, 9, 19, 18],
-                  expression: {
-                    kind: "id",
-                    loc: [19, 9, 19, 12],
-                    text: "row",
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 14 },
+                      end: { line: 18, column: 17 },
+                    },
+                    name: "row",
                     bindingKey: "row$3f2468k5dp5lo$1",
                   },
-                  name: "label",
-                },
-                name: "set",
-              },
-              arguments: [
-                {
-                  kind: "binop",
-                  loc: [19, 23, 19, 47],
-                  left: {
-                    kind: "()",
-                    loc: [19, 23, 19, 38],
-                    expression: {
-                      kind: ".",
-                      loc: [19, 23, 19, 36],
-                      expression: {
-                        kind: ".",
-                        loc: [19, 23, 19, 32],
-                        expression: {
-                          kind: "id",
-                          loc: [19, 23, 19, 26],
-                          text: "row",
-                          bindingKey: "row$3f2468k5dp5lo$1",
-                        },
-                        name: "label",
-                      },
-                      name: "get",
+                  init: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 18, column: 20 },
+                      end: { line: 18, column: 33 },
                     },
-                    arguments: [],
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "string",
-                    loc: [19, 41, 19, 47],
-                    text: " !!!",
+                    callee: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 18, column: 20 },
+                        end: { line: 18, column: 26 },
+                      },
+                      key: "$build",
+                    },
+                    arguments: [
+                      {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 18, column: 27 },
+                          end: { line: 18, column: 32 },
+                        },
+                        value: "one",
+                      },
+                    ],
+                    optional: false,
                   },
                 },
               ],
             },
+            {
+              type: "ExpressionStatement",
+              loc: {
+                start: { line: 19, column: 8 },
+                end: { line: 19, column: 48 },
+              },
+              expression: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 19, column: 8 },
+                  end: { line: 19, column: 47 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 19, column: 8 },
+                    end: { line: 19, column: 21 },
+                  },
+                  object: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 19, column: 8 },
+                      end: { line: 19, column: 17 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 8 },
+                        end: { line: 19, column: 11 },
+                      },
+                      name: "row",
+                      bindingKey: "row$3f2468k5dp5lo$1",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 12 },
+                        end: { line: 19, column: 17 },
+                      },
+                      name: "label",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 19, column: 18 },
+                      end: { line: 19, column: 21 },
+                    },
+                    name: "set",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 19, column: 22 },
+                      end: { line: 19, column: 46 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 19, column: 22 },
+                        end: { line: 19, column: 37 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 19, column: 22 },
+                          end: { line: 19, column: 35 },
+                        },
+                        object: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 19, column: 22 },
+                            end: { line: 19, column: 31 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 19, column: 22 },
+                              end: { line: 19, column: 25 },
+                            },
+                            name: "row",
+                            bindingKey: "row$3f2468k5dp5lo$1",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 19, column: 26 },
+                              end: { line: 19, column: 31 },
+                            },
+                            name: "label",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 19, column: 32 },
+                            end: { line: 19, column: 35 },
+                          },
+                          name: "get",
+                        },
+                        computed: false,
+                        optional: false,
+                      },
+                      arguments: [],
+                      optional: false,
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 19, column: 40 },
+                        end: { line: 19, column: 46 },
+                      },
+                      value: " !!!",
+                    },
+                  },
+                ],
+                optional: false,
+              },
+            },
           ],
         },
+        expression: false,
       }),
     ),
     children: cs.create(
-      [22, 8, 22, 37],
+      { start: { line: 22, column: 7 }, end: { line: 22, column: 36 } },
       {
         version: "0.0.0",
         filePath: "state/script-state.test.tsx",
@@ -201,35 +332,70 @@ async function ScriptRows() {
         captures: [],
       },
       () => ({
-        kind: "()",
-        loc: [22, 11, 22, 36],
-        expression: {
-          kind: ".",
-          loc: [22, 11, 22, 34],
-          expression: {
-            kind: ".",
-            loc: [22, 11, 22, 30],
-            expression: {
-              kind: "()",
-              loc: [22, 11, 22, 24],
-              expression: {
-                kind: "splice",
-                loc: [22, 11, 22, 17],
+        type: "CallExpression",
+        loc: { start: { line: 22, column: 10 }, end: { line: 22, column: 35 } },
+        callee: {
+          type: "MemberExpression",
+          loc: {
+            start: { line: 22, column: 10 },
+            end: { line: 22, column: 33 },
+          },
+          object: {
+            type: "MemberExpression",
+            loc: {
+              start: { line: 22, column: 10 },
+              end: { line: 22, column: 29 },
+            },
+            object: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 22, column: 10 },
+                end: { line: 22, column: 23 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 22, column: 10 },
+                  end: { line: 22, column: 16 },
+                },
                 key: "$build",
               },
               arguments: [
                 {
-                  kind: "string",
-                  loc: [22, 18, 22, 23],
-                  text: "one",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 22, column: 17 },
+                    end: { line: 22, column: 22 },
+                  },
+                  value: "one",
                 },
               ],
+              optional: false,
             },
-            name: "label",
+            property: {
+              type: "Identifier",
+              loc: {
+                start: { line: 22, column: 24 },
+                end: { line: 22, column: 29 },
+              },
+              name: "label",
+            },
+            computed: false,
+            optional: false,
           },
-          name: "get",
+          property: {
+            type: "Identifier",
+            loc: {
+              start: { line: 22, column: 30 },
+              end: { line: 22, column: 33 },
+            },
+            name: "get",
+          },
+          computed: false,
+          optional: false,
         },
         arguments: [],
+        optional: false,
       }),
     ),
   });

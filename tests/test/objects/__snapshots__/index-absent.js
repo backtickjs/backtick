@@ -10,7 +10,7 @@ it("indexAbsent", async (t) => {
     t,
     "indexAbsent",
     cs.create(
-      [14, 5, 18, 7],
+      { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
       {
         version: "0.0.0",
         filePath: "objects/index-absent.test.tsx",
@@ -19,105 +19,189 @@ it("indexAbsent", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [14, 8, 18, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 36 },
+            },
             kind: "const",
-            loc: [15, 7, 15, 37],
-            name: {
-              kind: "id",
-              loc: [15, 13, 15, 18],
-              text: "names",
-              bindingKey: "names$26sqkhggd8j15$0",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [15, 21, 15, 36],
-              elements: [
-                {
-                  kind: "string",
-                  loc: [15, 22, 15, 28],
-                  text: "zero",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 15, column: 12 },
+                  end: { line: 15, column: 35 },
                 },
-                {
-                  kind: "string",
-                  loc: [15, 30, 15, 35],
-                  text: "one",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 15, column: 12 },
+                    end: { line: 15, column: 17 },
+                  },
+                  name: "names",
+                  bindingKey: "names$26sqkhggd8j15$0",
                 },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [16, 7, 16, 53],
-            name: {
-              kind: "id",
-              loc: [16, 13, 16, 20],
-              text: "missing",
-              bindingKey: "missing$26sqkhggd8j15$1",
-            },
-            initializer: {
-              kind: "binop",
-              loc: [16, 23, 16, 52],
-              left: {
-                kind: "[]",
-                loc: [16, 23, 16, 42],
-                expression: {
-                  kind: "splice",
-                  loc: [16, 23, 16, 31],
-                  key: "$answers",
-                },
-                argumentExpression: {
-                  kind: "string",
-                  loc: [16, 32, 16, 41],
-                  text: "nowhere",
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 15, column: 20 },
+                    end: { line: 15, column: 35 },
+                  },
+                  elements: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 21 },
+                        end: { line: 15, column: 27 },
+                      },
+                      value: "zero",
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 29 },
+                        end: { line: 15, column: 34 },
+                      },
+                      value: "one",
+                    },
+                  ],
                 },
               },
-              operatorToken: "??",
-              right: {
-                kind: "string",
-                loc: [16, 46, 16, 52],
-                text: "gone",
-              },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [17, 7, 17, 39],
-            expression: {
-              kind: "binop",
-              loc: [17, 14, 17, 38],
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 52 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 16, column: 12 },
+                  end: { line: 16, column: 51 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 12 },
+                    end: { line: 16, column: 19 },
+                  },
+                  name: "missing",
+                  bindingKey: "missing$26sqkhggd8j15$1",
+                },
+                init: {
+                  type: "LogicalExpression",
+                  loc: {
+                    start: { line: 16, column: 22 },
+                    end: { line: 16, column: 51 },
+                  },
+                  operator: "??",
+                  left: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 16, column: 22 },
+                      end: { line: 16, column: 41 },
+                    },
+                    object: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 16, column: 22 },
+                        end: { line: 16, column: 30 },
+                      },
+                      key: "$answers",
+                    },
+                    property: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 16, column: 31 },
+                        end: { line: 16, column: 40 },
+                      },
+                      value: "nowhere",
+                    },
+                    computed: true,
+                    optional: false,
+                  },
+                  right: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 16, column: 45 },
+                      end: { line: 16, column: 51 },
+                    },
+                    value: "gone",
+                  },
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 38 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 17, column: 13 },
+                end: { line: 17, column: 37 },
+              },
+              operator: "+",
               left: {
-                kind: "binop",
-                loc: [17, 14, 17, 28],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 17, column: 13 },
+                  end: { line: 17, column: 27 },
+                },
+                operator: "+",
                 left: {
-                  kind: "[]",
-                  loc: [17, 14, 17, 22],
-                  expression: {
-                    kind: "id",
-                    loc: [17, 14, 17, 19],
-                    text: "names",
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 17, column: 13 },
+                    end: { line: 17, column: 21 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 13 },
+                      end: { line: 17, column: 18 },
+                    },
+                    name: "names",
                     bindingKey: "names$26sqkhggd8j15$0",
                   },
-                  argumentExpression: {
-                    kind: "number",
-                    loc: [17, 20, 17, 21],
+                  property: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 17, column: 19 },
+                      end: { line: 17, column: 20 },
+                    },
                     value: 1,
                   },
+                  computed: true,
+                  optional: false,
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "string",
-                  loc: [17, 25, 17, 28],
-                  text: "/",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 17, column: 24 },
+                    end: { line: 17, column: 27 },
+                  },
+                  value: "/",
                 },
               },
-              operatorToken: "+",
               right: {
-                kind: "id",
-                loc: [17, 31, 17, 38],
-                text: "missing",
+                type: "Identifier",
+                loc: {
+                  start: { line: 17, column: 30 },
+                  end: { line: 17, column: 37 },
+                },
+                name: "missing",
                 bindingKey: "missing$26sqkhggd8j15$1",
               },
             },

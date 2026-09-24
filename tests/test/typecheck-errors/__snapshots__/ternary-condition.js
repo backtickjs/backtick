@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 // No truthiness: a ternary's condition must be boolean, like an `if`'s.
 const count = cs.create(
-  [4, 15, 4, 20],
+  { start: { line: 4, column: 14 }, end: { line: 4, column: 19 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/ternary-condition.test.tsx",
@@ -10,14 +10,14 @@ const count = cs.create(
     captures: [],
   },
   () => ({
-    kind: "number",
-    loc: [4, 18, 4, 19],
+    type: "Literal",
+    loc: { start: { line: 4, column: 17 }, end: { line: 4, column: 18 } },
     value: 1,
   }),
 );
 // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'boolean'.
 export default cs.create(
-  [7, 16, 7, 44],
+  { start: { line: 7, column: 15 }, end: { line: 7, column: 43 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/ternary-condition.test.tsx",
@@ -26,22 +26,22 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "?:",
-    loc: [7, 19, 7, 43],
-    condition: {
-      kind: "splice",
-      loc: [7, 19, 7, 25],
+    type: "ConditionalExpression",
+    loc: { start: { line: 7, column: 18 }, end: { line: 7, column: 42 } },
+    test: {
+      type: "Splice",
+      loc: { start: { line: 7, column: 18 }, end: { line: 7, column: 24 } },
       key: "$count",
     },
-    whenTrue: {
-      kind: "string",
-      loc: [7, 28, 7, 34],
-      text: "some",
+    consequent: {
+      type: "Literal",
+      loc: { start: { line: 7, column: 27 }, end: { line: 7, column: 33 } },
+      value: "some",
     },
-    whenFalse: {
-      kind: "string",
-      loc: [7, 37, 7, 43],
-      text: "none",
+    alternate: {
+      type: "Literal",
+      loc: { start: { line: 7, column: 36 }, end: { line: 7, column: 42 } },
+      value: "none",
     },
   }),
 );

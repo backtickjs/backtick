@@ -9,7 +9,7 @@ it("spread", async (t) => {
     t,
     "spread",
     cs.create(
-      [12, 5, 19, 7],
+      { start: { line: 12, column: 4 }, end: { line: 19, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/spread.test.tsx",
@@ -18,212 +18,401 @@ it("spread", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 19, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 19, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 27 },
+            },
             kind: "const",
-            loc: [13, 7, 13, 28],
-            name: {
-              kind: "id",
-              loc: [13, 13, 13, 18],
-              text: "front",
-              bindingKey: "front$2b1hzyqftxgza$0",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [13, 21, 13, 27],
-              elements: [
-                {
-                  kind: "number",
-                  loc: [13, 22, 13, 23],
-                  value: 1,
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 13, column: 26 },
                 },
-                {
-                  kind: "number",
-                  loc: [13, 25, 13, 26],
-                  value: 2,
-                },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [14, 7, 14, 24],
-            name: {
-              kind: "id",
-              loc: [14, 13, 14, 17],
-              text: "back",
-              bindingKey: "back$2b1hzyqftxgza$1",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [14, 20, 14, 23],
-              elements: [
-                {
-                  kind: "number",
-                  loc: [14, 21, 14, 22],
-                  value: 3,
-                },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [15, 7, 15, 23],
-            name: {
-              kind: "id",
-              loc: [15, 13, 15, 17],
-              text: "none",
-              bindingKey: "none$2b1hzyqftxgza$2",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [15, 20, 15, 22],
-              elements: [],
-            },
-          },
-          {
-            kind: "const",
-            loc: [16, 7, 16, 54],
-            name: {
-              kind: "id",
-              loc: [16, 13, 16, 16],
-              text: "all",
-              bindingKey: "all$2b1hzyqftxgza$3",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [16, 19, 16, 53],
-              elements: [
-                {
-                  kind: "number",
-                  loc: [16, 20, 16, 21],
-                  value: 0,
-                },
-                {
-                  kind: "...",
-                  loc: [16, 23, 16, 31],
-                  expression: {
-                    kind: "id",
-                    loc: [16, 26, 16, 31],
-                    text: "front",
-                    bindingKey: "front$2b1hzyqftxgza$0",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 12 },
+                    end: { line: 13, column: 17 },
                   },
+                  name: "front",
+                  bindingKey: "front$2b1hzyqftxgza$0",
                 },
-                {
-                  kind: "...",
-                  loc: [16, 33, 16, 40],
-                  expression: {
-                    kind: "id",
-                    loc: [16, 36, 16, 40],
-                    text: "none",
-                    bindingKey: "none$2b1hzyqftxgza$2",
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 13, column: 20 },
+                    end: { line: 13, column: 26 },
                   },
-                },
-                {
-                  kind: "...",
-                  loc: [16, 42, 16, 49],
-                  expression: {
-                    kind: "id",
-                    loc: [16, 45, 16, 49],
-                    text: "back",
-                    bindingKey: "back$2b1hzyqftxgza$1",
-                  },
-                },
-                {
-                  kind: "number",
-                  loc: [16, 51, 16, 52],
-                  value: 4,
-                },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [17, 7, 17, 38],
-            name: {
-              kind: "id",
-              loc: [17, 13, 17, 18],
-              text: "twice",
-              bindingKey: "twice$2b1hzyqftxgza$4",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [17, 21, 17, 37],
-              elements: [
-                {
-                  kind: "...",
-                  loc: [17, 22, 17, 28],
-                  expression: {
-                    kind: "id",
-                    loc: [17, 25, 17, 28],
-                    text: "all",
-                    bindingKey: "all$2b1hzyqftxgza$3",
-                  },
-                },
-                {
-                  kind: "...",
-                  loc: [17, 30, 17, 36],
-                  expression: {
-                    kind: "id",
-                    loc: [17, 33, 17, 36],
-                    text: "all",
-                    bindingKey: "all$2b1hzyqftxgza$3",
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: "return",
-            loc: [18, 7, 18, 49],
-            expression: {
-              kind: "binop",
-              loc: [18, 14, 18, 48],
-              left: {
-                kind: "binop",
-                loc: [18, 14, 18, 33],
-                left: {
-                  kind: "()",
-                  loc: [18, 14, 18, 27],
-                  expression: {
-                    kind: ".",
-                    loc: [18, 14, 18, 22],
-                    expression: {
-                      kind: "id",
-                      loc: [18, 14, 18, 17],
-                      text: "all",
-                      bindingKey: "all$2b1hzyqftxgza$3",
-                    },
-                    name: "join",
-                  },
-                  arguments: [
+                  elements: [
                     {
-                      kind: "string",
-                      loc: [18, 23, 18, 26],
-                      text: ",",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 13, column: 21 },
+                        end: { line: 13, column: 22 },
+                      },
+                      value: 1,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 13, column: 24 },
+                        end: { line: 13, column: 25 },
+                      },
+                      value: 2,
                     },
                   ],
                 },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [18, 30, 18, 33],
-                  text: "|",
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 23 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 14, column: 12 },
+                  end: { line: 14, column: 22 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 16 },
+                  },
+                  name: "back",
+                  bindingKey: "back$2b1hzyqftxgza$1",
+                },
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 14, column: 19 },
+                    end: { line: 14, column: 22 },
+                  },
+                  elements: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 20 },
+                        end: { line: 14, column: 21 },
+                      },
+                      value: 3,
+                    },
+                  ],
                 },
               },
-              operatorToken: "+",
-              right: {
-                kind: ".",
-                loc: [18, 36, 18, 48],
-                expression: {
-                  kind: "id",
-                  loc: [18, 36, 18, 41],
-                  text: "twice",
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 22 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 15, column: 12 },
+                  end: { line: 15, column: 21 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 15, column: 12 },
+                    end: { line: 15, column: 16 },
+                  },
+                  name: "none",
+                  bindingKey: "none$2b1hzyqftxgza$2",
+                },
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 15, column: 19 },
+                    end: { line: 15, column: 21 },
+                  },
+                  elements: [],
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 53 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 16, column: 12 },
+                  end: { line: 16, column: 52 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 12 },
+                    end: { line: 16, column: 15 },
+                  },
+                  name: "all",
+                  bindingKey: "all$2b1hzyqftxgza$3",
+                },
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 16, column: 18 },
+                    end: { line: 16, column: 52 },
+                  },
+                  elements: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 16, column: 19 },
+                        end: { line: 16, column: 20 },
+                      },
+                      value: 0,
+                    },
+                    {
+                      type: "SpreadElement",
+                      loc: {
+                        start: { line: 16, column: 22 },
+                        end: { line: 16, column: 30 },
+                      },
+                      argument: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 25 },
+                          end: { line: 16, column: 30 },
+                        },
+                        name: "front",
+                        bindingKey: "front$2b1hzyqftxgza$0",
+                      },
+                    },
+                    {
+                      type: "SpreadElement",
+                      loc: {
+                        start: { line: 16, column: 32 },
+                        end: { line: 16, column: 39 },
+                      },
+                      argument: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 35 },
+                          end: { line: 16, column: 39 },
+                        },
+                        name: "none",
+                        bindingKey: "none$2b1hzyqftxgza$2",
+                      },
+                    },
+                    {
+                      type: "SpreadElement",
+                      loc: {
+                        start: { line: 16, column: 41 },
+                        end: { line: 16, column: 48 },
+                      },
+                      argument: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 44 },
+                          end: { line: 16, column: 48 },
+                        },
+                        name: "back",
+                        bindingKey: "back$2b1hzyqftxgza$1",
+                      },
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 16, column: 50 },
+                        end: { line: 16, column: 51 },
+                      },
+                      value: 4,
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 37 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 17, column: 12 },
+                  end: { line: 17, column: 36 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 17 },
+                  },
+                  name: "twice",
                   bindingKey: "twice$2b1hzyqftxgza$4",
                 },
-                name: "length",
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 17, column: 20 },
+                    end: { line: 17, column: 36 },
+                  },
+                  elements: [
+                    {
+                      type: "SpreadElement",
+                      loc: {
+                        start: { line: 17, column: 21 },
+                        end: { line: 17, column: 27 },
+                      },
+                      argument: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 17, column: 24 },
+                          end: { line: 17, column: 27 },
+                        },
+                        name: "all",
+                        bindingKey: "all$2b1hzyqftxgza$3",
+                      },
+                    },
+                    {
+                      type: "SpreadElement",
+                      loc: {
+                        start: { line: 17, column: 29 },
+                        end: { line: 17, column: 35 },
+                      },
+                      argument: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 17, column: 32 },
+                          end: { line: 17, column: 35 },
+                        },
+                        name: "all",
+                        bindingKey: "all$2b1hzyqftxgza$3",
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 48 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 18, column: 13 },
+                end: { line: 18, column: 47 },
+              },
+              operator: "+",
+              left: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 18, column: 13 },
+                  end: { line: 18, column: 32 },
+                },
+                operator: "+",
+                left: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 18, column: 13 },
+                    end: { line: 18, column: 26 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 18, column: 13 },
+                      end: { line: 18, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 13 },
+                        end: { line: 18, column: 16 },
+                      },
+                      name: "all",
+                      bindingKey: "all$2b1hzyqftxgza$3",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 17 },
+                        end: { line: 18, column: 21 },
+                      },
+                      name: "join",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 18, column: 22 },
+                        end: { line: 18, column: 25 },
+                      },
+                      value: ",",
+                    },
+                  ],
+                  optional: false,
+                },
+                right: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 18, column: 29 },
+                    end: { line: 18, column: 32 },
+                  },
+                  value: "|",
+                },
+              },
+              right: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 18, column: 35 },
+                  end: { line: 18, column: 47 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 35 },
+                    end: { line: 18, column: 40 },
+                  },
+                  name: "twice",
+                  bindingKey: "twice$2b1hzyqftxgza$4",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 41 },
+                    end: { line: 18, column: 47 },
+                  },
+                  name: "length",
+                },
+                computed: false,
+                optional: false,
               },
             },
           },

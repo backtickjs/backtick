@@ -1,19 +1,16 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { cs } from "../dist/cs.js";
-import type { ClientScriptBody } from "../dist/index.js";
+import type * as ES from "estree";
 
 // the body is never read here; only `create`'s version check is under test
-const noBody = (): ClientScriptBody => ({
-  kind: "null",
-  loc: [0, 0, 0, 0],
-});
+const noBody = (): ES.Expression => ({ type: "Literal", value: null });
 
 // exercised through `cs.create`, the path emitted code takes
 function create(version: string) {
   return () =>
     cs.create(
-      [0, 0, 0, 0],
+      { start: { line: 1, column: 0 }, end: { line: 1, column: 0 } },
       {
         version,
         filePath: "test.ts",

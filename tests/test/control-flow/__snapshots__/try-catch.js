@@ -6,7 +6,7 @@ it("tryCatch", async (t) => {
     t,
     "tryCatch",
     cs.create(
-      [9, 5, 19, 7],
+      { start: { line: 9, column: 4 }, end: { line: 19, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/try-catch.test.tsx",
@@ -15,105 +15,173 @@ it("tryCatch", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [9, 8, 19, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 9, column: 7 }, end: { line: 19, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 10, column: 6 },
+              end: { line: 10, column: 29 },
+            },
             kind: "const",
-            loc: [10, 7, 10, 30],
-            name: {
-              kind: "id",
-              loc: [10, 13, 10, 20],
-              text: "message",
-              bindingKey: "message$3s3xo1kodgmhm$0",
-            },
-            initializer: {
-              kind: "string",
-              loc: [10, 23, 10, 29],
-              text: "boom",
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 10, column: 12 },
+                  end: { line: 10, column: 28 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 10, column: 12 },
+                    end: { line: 10, column: 19 },
+                  },
+                  name: "message",
+                  bindingKey: "message$3s3xo1kodgmhm$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 22 },
+                    end: { line: 10, column: 28 },
+                  },
+                  value: "boom",
+                },
+              },
+            ],
           },
           {
-            kind: "try",
-            loc: [11, 7, 18, 8],
-            tryBlock: {
-              kind: "{}",
-              loc: [11, 11, 13, 8],
-              statements: [
+            type: "TryStatement",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 18, column: 7 },
+            },
+            block: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 11, column: 10 },
+                end: { line: 13, column: 7 },
+              },
+              body: [
                 {
-                  kind: "throw",
-                  loc: [12, 9, 12, 23],
-                  expression: {
-                    kind: "id",
-                    loc: [12, 15, 12, 22],
-                    text: "message",
+                  type: "ThrowStatement",
+                  loc: {
+                    start: { line: 12, column: 8 },
+                    end: { line: 12, column: 22 },
+                  },
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 12, column: 14 },
+                      end: { line: 12, column: 21 },
+                    },
+                    name: "message",
                     bindingKey: "message$3s3xo1kodgmhm$0",
                   },
                 },
               ],
             },
-            catchClause: {
-              kind: "catch",
-              loc: [13, 9, 18, 8],
-              variableDeclaration: {
-                kind: "id",
-                loc: [13, 16, 13, 21],
-                text: "error",
+            handler: {
+              type: "CatchClause",
+              loc: {
+                start: { line: 13, column: 8 },
+                end: { line: 18, column: 7 },
+              },
+              param: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 13, column: 15 },
+                  end: { line: 13, column: 20 },
+                },
+                name: "error",
                 bindingKey: "error$3s3xo1kodgmhm$1",
               },
-              block: {
-                kind: "{}",
-                loc: [13, 23, 18, 8],
-                statements: [
+              body: {
+                type: "BlockStatement",
+                loc: {
+                  start: { line: 13, column: 22 },
+                  end: { line: 18, column: 7 },
+                },
+                body: [
                   {
-                    kind: "if",
-                    loc: [14, 9, 16, 10],
-                    expression: {
-                      kind: "binop",
-                      loc: [14, 13, 14, 30],
+                    type: "IfStatement",
+                    loc: {
+                      start: { line: 14, column: 8 },
+                      end: { line: 16, column: 9 },
+                    },
+                    test: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 14, column: 12 },
+                        end: { line: 14, column: 29 },
+                      },
+                      operator: "===",
                       left: {
-                        kind: "id",
-                        loc: [14, 13, 14, 18],
-                        text: "error",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 12 },
+                          end: { line: 14, column: 17 },
+                        },
+                        name: "error",
                         bindingKey: "error$3s3xo1kodgmhm$1",
                       },
-                      operatorToken: "===",
                       right: {
-                        kind: "id",
-                        loc: [14, 23, 14, 30],
-                        text: "message",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 22 },
+                          end: { line: 14, column: 29 },
+                        },
+                        name: "message",
                         bindingKey: "message$3s3xo1kodgmhm$0",
                       },
                     },
-                    thenStatement: {
-                      kind: "{}",
-                      loc: [14, 32, 16, 10],
-                      statements: [
+                    consequent: {
+                      type: "BlockStatement",
+                      loc: {
+                        start: { line: 14, column: 31 },
+                        end: { line: 16, column: 9 },
+                      },
+                      body: [
                         {
-                          kind: "return",
-                          loc: [15, 11, 15, 32],
-                          expression: {
-                            kind: "string",
-                            loc: [15, 18, 15, 31],
-                            text: "caught boom",
+                          type: "ReturnStatement",
+                          loc: {
+                            start: { line: 15, column: 10 },
+                            end: { line: 15, column: 31 },
+                          },
+                          argument: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 15, column: 17 },
+                              end: { line: 15, column: 30 },
+                            },
+                            value: "caught boom",
                           },
                         },
                       ],
                     },
-                    elseStatement: null,
+                    alternate: null,
                   },
                   {
-                    kind: "return",
-                    loc: [17, 9, 17, 40],
-                    expression: {
-                      kind: "string",
-                      loc: [17, 16, 17, 39],
-                      text: "caught something else",
+                    type: "ReturnStatement",
+                    loc: {
+                      start: { line: 17, column: 8 },
+                      end: { line: 17, column: 39 },
+                    },
+                    argument: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 17, column: 15 },
+                        end: { line: 17, column: 38 },
+                      },
+                      value: "caught something else",
                     },
                   },
                 ],
               },
             },
+            finalizer: null,
           },
         ],
       }),

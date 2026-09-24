@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // A condition must be a boolean: the language has no truthiness, so a
 // string tested directly is a type error.
 export default cs.create(
-  [5, 16, 11, 3],
+  { start: { line: 5, column: 15 }, end: { line: 11, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/non-boolean-condition.test.tsx",
@@ -11,61 +11,76 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [5, 19, 11, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 5, column: 18 }, end: { line: 11, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [5, 20, 5, 32],
-        name: {
-          kind: "id",
-          loc: [5, 20, 5, 24],
-          text: "name",
-          bindingKey: "name$e0jptcfnt0fh$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 5, column: 19 }, end: { line: 5, column: 23 } },
+        name: "name",
+        bindingKey: "name$e0jptcfnt0fh$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [5, 37, 11, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 5, column: 36 }, end: { line: 11, column: 1 } },
+      body: [
         {
-          kind: "if",
-          loc: [7, 3, 9, 4],
-          expression: {
-            kind: "id",
-            loc: [7, 7, 7, 11],
-            text: "name",
+          type: "IfStatement",
+          loc: { start: { line: 7, column: 2 }, end: { line: 9, column: 3 } },
+          test: {
+            type: "Identifier",
+            loc: {
+              start: { line: 7, column: 6 },
+              end: { line: 7, column: 10 },
+            },
+            name: "name",
             bindingKey: "name$e0jptcfnt0fh$0",
           },
-          thenStatement: {
-            kind: "{}",
-            loc: [7, 13, 9, 4],
-            statements: [
+          consequent: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 7, column: 12 },
+              end: { line: 9, column: 3 },
+            },
+            body: [
               {
-                kind: "return",
-                loc: [8, 5, 8, 17],
-                expression: {
-                  kind: "id",
-                  loc: [8, 12, 8, 16],
-                  text: "name",
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 8, column: 4 },
+                  end: { line: 8, column: 16 },
+                },
+                argument: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 8, column: 11 },
+                    end: { line: 8, column: 15 },
+                  },
+                  name: "name",
                   bindingKey: "name$e0jptcfnt0fh$0",
                 },
               },
             ],
           },
-          elseStatement: null,
+          alternate: null,
         },
         {
-          kind: "return",
-          loc: [10, 3, 10, 22],
-          expression: {
-            kind: "string",
-            loc: [10, 10, 10, 21],
-            text: "anonymous",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 10, column: 2 },
+            end: { line: 10, column: 21 },
+          },
+          argument: {
+            type: "Literal",
+            loc: {
+              start: { line: 10, column: 9 },
+              end: { line: 10, column: 20 },
+            },
+            value: "anonymous",
           },
         },
       ],
     },
+    expression: false,
   }),
 );

@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // A `while` condition is a boolean like every other condition: a number
 // tested directly is a type error, not a loop that runs while it is nonzero.
 export default cs.create(
-  [5, 16, 12, 3],
+  { start: { line: 5, column: 15 }, end: { line: 12, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/non-boolean-while-condition.test.tsx",
@@ -11,77 +11,117 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [5, 19, 12, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 5, column: 18 }, end: { line: 12, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [5, 20, 5, 29],
-        name: {
-          kind: "id",
-          loc: [5, 20, 5, 21],
-          text: "n",
-          bindingKey: "n$35ew3k4d5ef7n$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 5, column: 19 }, end: { line: 5, column: 20 } },
+        name: "n",
+        bindingKey: "n$35ew3k4d5ef7n$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [5, 34, 12, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 5, column: 33 }, end: { line: 12, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 6, column: 2 }, end: { line: 6, column: 15 } },
           kind: "let",
-          loc: [6, 3, 6, 16],
-          name: {
-            kind: "id",
-            loc: [6, 7, 6, 11],
-            text: "left",
-            bindingKey: "left$35ew3k4d5ef7n$1",
-          },
-          initializer: {
-            kind: "id",
-            loc: [6, 14, 6, 15],
-            text: "n",
-            bindingKey: "n$35ew3k4d5ef7n$0",
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 6, column: 6 },
+                end: { line: 6, column: 14 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 6, column: 6 },
+                  end: { line: 6, column: 10 },
+                },
+                name: "left",
+                bindingKey: "left$35ew3k4d5ef7n$1",
+              },
+              init: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 6, column: 13 },
+                  end: { line: 6, column: 14 },
+                },
+                name: "n",
+                bindingKey: "n$35ew3k4d5ef7n$0",
+              },
+            },
+          ],
         },
         {
-          kind: "while",
-          loc: [8, 3, 10, 4],
-          expression: {
-            kind: "id",
-            loc: [8, 10, 8, 14],
-            text: "left",
+          type: "WhileStatement",
+          loc: { start: { line: 8, column: 2 }, end: { line: 10, column: 3 } },
+          test: {
+            type: "Identifier",
+            loc: {
+              start: { line: 8, column: 9 },
+              end: { line: 8, column: 13 },
+            },
+            name: "left",
             bindingKey: "left$35ew3k4d5ef7n$1",
           },
-          statement: {
-            kind: "{}",
-            loc: [8, 16, 10, 4],
-            statements: [
+          body: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 8, column: 15 },
+              end: { line: 10, column: 3 },
+            },
+            body: [
               {
-                kind: "binop",
-                loc: [9, 5, 9, 20],
-                left: {
-                  kind: "id",
-                  loc: [9, 5, 9, 9],
-                  text: "left",
-                  bindingKey: "left$35ew3k4d5ef7n$1",
+                type: "ExpressionStatement",
+                loc: {
+                  start: { line: 9, column: 4 },
+                  end: { line: 9, column: 20 },
                 },
-                operatorToken: "=",
-                right: {
-                  kind: "binop",
-                  loc: [9, 12, 9, 20],
+                expression: {
+                  type: "AssignmentExpression",
+                  loc: {
+                    start: { line: 9, column: 4 },
+                    end: { line: 9, column: 19 },
+                  },
+                  operator: "=",
                   left: {
-                    kind: "id",
-                    loc: [9, 12, 9, 16],
-                    text: "left",
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 9, column: 4 },
+                      end: { line: 9, column: 8 },
+                    },
+                    name: "left",
                     bindingKey: "left$35ew3k4d5ef7n$1",
                   },
-                  operatorToken: "-",
                   right: {
-                    kind: "number",
-                    loc: [9, 19, 9, 20],
-                    value: 1,
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 9, column: 11 },
+                      end: { line: 9, column: 19 },
+                    },
+                    operator: "-",
+                    left: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 9, column: 11 },
+                        end: { line: 9, column: 15 },
+                      },
+                      name: "left",
+                      bindingKey: "left$35ew3k4d5ef7n$1",
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 9, column: 18 },
+                        end: { line: 9, column: 19 },
+                      },
+                      value: 1,
+                    },
                   },
                 },
               },
@@ -89,16 +129,23 @@ export default cs.create(
           },
         },
         {
-          kind: "return",
-          loc: [11, 3, 11, 15],
-          expression: {
-            kind: "id",
-            loc: [11, 10, 11, 14],
-            text: "left",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 11, column: 2 },
+            end: { line: 11, column: 14 },
+          },
+          argument: {
+            type: "Identifier",
+            loc: {
+              start: { line: 11, column: 9 },
+              end: { line: 11, column: 13 },
+            },
+            name: "left",
             bindingKey: "left$35ew3k4d5ef7n$1",
           },
         },
       ],
     },
+    expression: false,
   }),
 );

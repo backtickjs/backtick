@@ -6,7 +6,7 @@ const one = 1;
 // nothing can hold a value of is worth. Only a parameter needs saying earlier,
 // because an annotation is not a value and reaches no boundary at all.
 const asserted = cs.create(
-  [10, 18, 14, 3],
+  { start: { line: 10, column: 17 }, end: { line: 14, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/void-assertion.test.tsx",
@@ -15,40 +15,65 @@ const asserted = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [10, 21, 14, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 10, column: 20 }, end: { line: 14, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 25 } },
         kind: "const",
-        loc: [12, 3, 12, 26],
-        name: {
-          kind: "id",
-          loc: [12, 9, 12, 10],
-          text: "a",
-          bindingKey: "a$2ot05umo7ygwp$0",
-        },
-        initializer: {
-          kind: "splice",
-          loc: [12, 13, 12, 17],
-          key: "$one",
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 12, column: 8 },
+              end: { line: 12, column: 24 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 12, column: 8 },
+                end: { line: 12, column: 9 },
+              },
+              name: "a",
+              bindingKey: "a$2ot05umo7ygwp$0",
+            },
+            init: {
+              type: "Splice",
+              loc: {
+                start: { line: 12, column: 12 },
+                end: { line: 12, column: 16 },
+              },
+              key: "$one",
+            },
+          },
+        ],
       },
       {
-        kind: "return",
-        loc: [13, 3, 13, 17],
-        expression: {
-          kind: "binop",
-          loc: [13, 10, 13, 16],
-          left: {
-            kind: "string",
-            loc: [13, 10, 13, 12],
-            text: "",
+        type: "ReturnStatement",
+        loc: { start: { line: 13, column: 2 }, end: { line: 13, column: 16 } },
+        argument: {
+          type: "BinaryExpression",
+          loc: {
+            start: { line: 13, column: 9 },
+            end: { line: 13, column: 15 },
           },
-          operatorToken: "+",
+          operator: "+",
+          left: {
+            type: "Literal",
+            loc: {
+              start: { line: 13, column: 9 },
+              end: { line: 13, column: 11 },
+            },
+            value: "",
+          },
           right: {
-            kind: "id",
-            loc: [13, 15, 13, 16],
-            text: "a",
+            type: "Identifier",
+            loc: {
+              start: { line: 13, column: 14 },
+              end: { line: 13, column: 15 },
+            },
+            name: "a",
             bindingKey: "a$2ot05umo7ygwp$0",
           },
         },

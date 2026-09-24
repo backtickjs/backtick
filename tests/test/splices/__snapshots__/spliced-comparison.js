@@ -11,7 +11,7 @@ it("splicedComparison", async (t) => {
     t,
     "splicedComparison",
     cs.create(
-      [15, 5, 20, 8],
+      { start: { line: 15, column: 4 }, end: { line: 20, column: 7 } },
       {
         version: "0.0.0",
         filePath: "splices/spliced-comparison.test.tsx",
@@ -23,124 +23,212 @@ it("splicedComparison", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [15, 9, 20, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 15, column: 8 }, end: { line: 20, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [16, 7, 16, 26],
-            name: {
-              kind: "string",
-              loc: [16, 7, 16, 12],
-              text: "under",
+            type: "Property",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 25 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [16, 14, 16, 26],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 11 },
+              },
+              name: "under",
+            },
+            value: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 16, column: 13 },
+                end: { line: 16, column: 25 },
+              },
+              operator: "<",
               left: {
-                kind: "splice",
-                loc: [16, 14, 16, 18],
+                type: "Splice",
+                loc: {
+                  start: { line: 16, column: 13 },
+                  end: { line: 16, column: 17 },
+                },
                 key: "$low",
               },
-              operatorToken: "<",
               right: {
-                kind: "splice",
-                loc: [16, 21, 16, 26],
+                type: "Splice",
+                loc: {
+                  start: { line: 16, column: 20 },
+                  end: { line: 16, column: 25 },
+                },
                 key: "$high",
               },
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [17, 7, 17, 28],
-            name: {
-              kind: "string",
-              loc: [17, 7, 17, 13],
-              text: "atMost",
+            type: "Property",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 27 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [17, 15, 17, 28],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 12 },
+              },
+              name: "atMost",
+            },
+            value: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 17, column: 14 },
+                end: { line: 17, column: 27 },
+              },
+              operator: "<=",
               left: {
-                kind: "splice",
-                loc: [17, 15, 17, 19],
+                type: "Splice",
+                loc: {
+                  start: { line: 17, column: 14 },
+                  end: { line: 17, column: 18 },
+                },
                 key: "$low",
               },
-              operatorToken: "<=",
               right: {
-                kind: "splice",
-                loc: [17, 23, 17, 28],
+                type: "Splice",
+                loc: {
+                  start: { line: 17, column: 22 },
+                  end: { line: 17, column: 27 },
+                },
                 key: "$high",
               },
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [18, 7, 18, 25],
-            name: {
-              kind: "string",
-              loc: [18, 7, 18, 11],
-              text: "over",
+            type: "Property",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 24 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [18, 13, 18, 25],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 18, column: 10 },
+              },
+              name: "over",
+            },
+            value: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 18, column: 12 },
+                end: { line: 18, column: 24 },
+              },
+              operator: ">",
               left: {
-                kind: "splice",
-                loc: [18, 13, 18, 18],
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 12 },
+                  end: { line: 18, column: 17 },
+                },
                 key: "$high",
               },
-              operatorToken: ">",
               right: {
-                kind: "splice",
-                loc: [18, 21, 18, 25],
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 20 },
+                  end: { line: 18, column: 24 },
+                },
                 key: "$low",
               },
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [19, 7, 19, 44],
-            name: {
-              kind: "string",
-              loc: [19, 7, 19, 14],
-              text: "between",
+            type: "Property",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 43 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [19, 16, 19, 44],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 19, column: 13 },
+              },
+              name: "between",
+            },
+            value: {
+              type: "LogicalExpression",
+              loc: {
+                start: { line: 19, column: 15 },
+                end: { line: 19, column: 43 },
+              },
+              operator: "&&",
               left: {
-                kind: "binop",
-                loc: [19, 16, 19, 28],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 19, column: 15 },
+                  end: { line: 19, column: 27 },
+                },
+                operator: "<",
                 left: {
-                  kind: "splice",
-                  loc: [19, 16, 19, 20],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 19, column: 15 },
+                    end: { line: 19, column: 19 },
+                  },
                   key: "$low",
                 },
-                operatorToken: "<",
                 right: {
-                  kind: "splice",
-                  loc: [19, 23, 19, 28],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 19, column: 22 },
+                    end: { line: 19, column: 27 },
+                  },
                   key: "$high",
                 },
               },
-              operatorToken: "&&",
               right: {
-                kind: "binop",
-                loc: [19, 32, 19, 44],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 19, column: 31 },
+                  end: { line: 19, column: 43 },
+                },
+                operator: ">",
                 left: {
-                  kind: "splice",
-                  loc: [19, 32, 19, 37],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 19, column: 31 },
+                    end: { line: 19, column: 36 },
+                  },
                   key: "$high",
                 },
-                operatorToken: ">",
                 right: {
-                  kind: "splice",
-                  loc: [19, 40, 19, 44],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 19, column: 39 },
+                    end: { line: 19, column: 43 },
+                  },
                   key: "$low",
                 },
               },
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

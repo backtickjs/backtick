@@ -1,7 +1,7 @@
 import { assertVersion } from "./assertVersion.js";
 import type { Spliceable } from "@backtickjs/platform-sdk";
-import type { SourceLocation } from "./SourceLocation.js";
-import type { ClientScriptBody } from "./Ast.js";
+import type * as ES from "estree";
+import type {} from "./Splice.js";
 
 // A hole: what is spliced there, and what it hands whatever lands in it.
 export interface MetadataSplice {
@@ -24,12 +24,12 @@ export interface Metadata {
 
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
-  readonly loc: SourceLocation;
+  readonly loc: ES.SourceLocation;
   readonly metadata: Metadata;
   // The script's syntax, behind a thunk: one `cs` in a host function makes a
   // `ClientScript` per call, and the bundler parses one per source location, so
   // the nodes are built when they are first read rather than at every call.
-  readonly body: () => ClientScriptBody;
+  readonly body: () => ES.Expression | ES.BlockStatement;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -42,9 +42,9 @@ export function isClientScript(value: unknown): value is ClientScript {
 }
 
 export function create(
-  loc: SourceLocation,
+  loc: ES.SourceLocation,
   metadata: Metadata,
-  body: () => ClientScriptBody,
+  body: () => ES.Expression | ES.BlockStatement,
 ): ClientScript {
   assertVersion(metadata.version);
   return {

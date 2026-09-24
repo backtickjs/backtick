@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // front rather than a value and nothing is read off it.
 async function Parsed() {
   return cs.create(
-    [9, 10, 14, 5],
+    { start: { line: 9, column: 9 }, end: { line: 14, column: 4 } },
     {
       version: "0.0.0",
       filePath: "stdlib/number-parsing.test.tsx",
@@ -16,159 +16,336 @@ async function Parsed() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [9, 13, 14, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 9, column: 12 }, end: { line: 14, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 10, column: 4 },
+            end: { line: 10, column: 42 },
+          },
           kind: "const",
-          loc: [10, 5, 10, 43],
-          name: {
-            kind: "id",
-            loc: [10, 11, 10, 16],
-            text: "whole",
-            bindingKey: "whole$28kni4l69t7vb$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [10, 19, 10, 42],
-            expression: {
-              kind: ".",
-              loc: [10, 19, 10, 34],
-              expression: {
-                kind: "bltn",
-                loc: [10, 19, 10, 25],
-                name: "Number",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 10, column: 10 },
+                end: { line: 10, column: 41 },
               },
-              name: "parseInt",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 10, column: 10 },
+                  end: { line: 10, column: 15 },
+                },
+                name: "whole",
+                bindingKey: "whole$28kni4l69t7vb$0",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 10, column: 18 },
+                  end: { line: 10, column: 41 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 10, column: 18 },
+                    end: { line: 10, column: 33 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 10, column: 18 },
+                      end: { line: 10, column: 24 },
+                    },
+                    name: "Number",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 10, column: 25 },
+                      end: { line: 10, column: 33 },
+                    },
+                    name: "parseInt",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 10, column: 34 },
+                      end: { line: 10, column: 40 },
+                    },
+                    value: "42px",
+                  },
+                ],
+                optional: false,
+              },
             },
-            arguments: [
-              {
-                kind: "string",
-                loc: [10, 35, 10, 41],
-                text: "42px",
-              },
-            ],
-          },
+          ],
         },
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 11, column: 4 },
+            end: { line: 11, column: 44 },
+          },
           kind: "const",
-          loc: [11, 5, 11, 45],
-          name: {
-            kind: "id",
-            loc: [11, 11, 11, 16],
-            text: "based",
-            bindingKey: "based$28kni4l69t7vb$1",
-          },
-          initializer: {
-            kind: "()",
-            loc: [11, 19, 11, 44],
-            expression: {
-              kind: ".",
-              loc: [11, 19, 11, 34],
-              expression: {
-                kind: "bltn",
-                loc: [11, 19, 11, 25],
-                name: "Number",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 11, column: 10 },
+                end: { line: 11, column: 43 },
               },
-              name: "parseInt",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 11, column: 10 },
+                  end: { line: 11, column: 15 },
+                },
+                name: "based",
+                bindingKey: "based$28kni4l69t7vb$1",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 11, column: 18 },
+                  end: { line: 11, column: 43 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 11, column: 18 },
+                    end: { line: 11, column: 33 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 18 },
+                      end: { line: 11, column: 24 },
+                    },
+                    name: "Number",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 25 },
+                      end: { line: 11, column: 33 },
+                    },
+                    name: "parseInt",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 11, column: 34 },
+                      end: { line: 11, column: 38 },
+                    },
+                    value: "ff",
+                  },
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 11, column: 40 },
+                      end: { line: 11, column: 42 },
+                    },
+                    value: 16,
+                  },
+                ],
+                optional: false,
+              },
             },
-            arguments: [
-              {
-                kind: "string",
-                loc: [11, 35, 11, 39],
-                text: "ff",
-              },
-              {
-                kind: "number",
-                loc: [11, 41, 11, 43],
-                value: 16,
-              },
-            ],
-          },
+          ],
         },
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 12, column: 4 },
+            end: { line: 12, column: 48 },
+          },
           kind: "const",
-          loc: [12, 5, 12, 49],
-          name: {
-            kind: "id",
-            loc: [12, 11, 12, 21],
-            text: "fractional",
-            bindingKey: "fractional$28kni4l69t7vb$2",
-          },
-          initializer: {
-            kind: "()",
-            loc: [12, 24, 12, 48],
-            expression: {
-              kind: ".",
-              loc: [12, 24, 12, 41],
-              expression: {
-                kind: "bltn",
-                loc: [12, 24, 12, 30],
-                name: "Number",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 12, column: 10 },
+                end: { line: 12, column: 47 },
               },
-              name: "parseFloat",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 20 },
+                },
+                name: "fractional",
+                bindingKey: "fractional$28kni4l69t7vb$2",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 12, column: 23 },
+                  end: { line: 12, column: 47 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 12, column: 23 },
+                    end: { line: 12, column: 40 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 12, column: 23 },
+                      end: { line: 12, column: 29 },
+                    },
+                    name: "Number",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 12, column: 30 },
+                      end: { line: 12, column: 40 },
+                    },
+                    name: "parseFloat",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 12, column: 41 },
+                      end: { line: 12, column: 46 },
+                    },
+                    value: "1.5",
+                  },
+                ],
+                optional: false,
+              },
             },
-            arguments: [
-              {
-                kind: "string",
-                loc: [12, 42, 12, 47],
-                text: "1.5",
-              },
-            ],
-          },
+          ],
         },
         {
-          kind: "return",
-          loc: [13, 5, 13, 59],
-          expression: {
-            kind: "jsx",
-            loc: [13, 12, 13, 58],
-            type: {
-              kind: "string",
-              loc: [13, 13, 13, 17],
-              text: "span",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 13, column: 4 },
+            end: { line: 13, column: 58 },
+          },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 13, column: 11 },
+              end: { line: 13, column: 57 },
             },
-            attributes: [],
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 13, column: 11 },
+                end: { line: 13, column: 17 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 13, column: 16 },
+                },
+                name: "span",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "binop",
-                loc: [13, 19, 13, 50],
-                left: {
-                  kind: "binop",
-                  loc: [13, 19, 13, 45],
-                  left: {
-                    kind: "binop",
-                    loc: [13, 19, 13, 32],
-                    left: {
-                      kind: "id",
-                      loc: [13, 19, 13, 24],
-                      text: "whole",
-                      bindingKey: "whole$28kni4l69t7vb$0",
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: "id",
-                      loc: [13, 27, 13, 32],
-                      text: "based",
-                      bindingKey: "based$28kni4l69t7vb$1",
-                    },
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "id",
-                    loc: [13, 35, 13, 45],
-                    text: "fractional",
-                    bindingKey: "fractional$28kni4l69t7vb$2",
-                  },
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 13, column: 17 },
+                  end: { line: 13, column: 50 },
                 },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [13, 48, 13, 50],
-                  text: "",
+                expression: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 13, column: 18 },
+                    end: { line: 13, column: 49 },
+                  },
+                  operator: "+",
+                  left: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 13, column: 18 },
+                      end: { line: 13, column: 44 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 13, column: 18 },
+                        end: { line: 13, column: 31 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 13, column: 18 },
+                          end: { line: 13, column: 23 },
+                        },
+                        name: "whole",
+                        bindingKey: "whole$28kni4l69t7vb$0",
+                      },
+                      right: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 13, column: 26 },
+                          end: { line: 13, column: 31 },
+                        },
+                        name: "based",
+                        bindingKey: "based$28kni4l69t7vb$1",
+                      },
+                    },
+                    right: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 13, column: 34 },
+                        end: { line: 13, column: 44 },
+                      },
+                      name: "fractional",
+                      bindingKey: "fractional$28kni4l69t7vb$2",
+                    },
+                  },
+                  right: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 13, column: 47 },
+                      end: { line: 13, column: 49 },
+                    },
+                    value: "",
+                  },
                 },
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 13, column: 50 },
+                end: { line: 13, column: 57 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 13, column: 52 },
+                  end: { line: 13, column: 56 },
+                },
+                name: "span",
+              },
+            },
           },
         },
       ],

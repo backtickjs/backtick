@@ -13,7 +13,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // where they do not exist.
 function sandwich(fragment) {
   return cs.create(
-    [16, 10, 21, 5],
+    { start: { line: 16, column: 9 }, end: { line: 21, column: 4 } },
     {
       version: "0.0.0",
       filePath: "splices/splice-before-declaration.test.tsx",
@@ -22,82 +22,157 @@ function sandwich(fragment) {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [16, 13, 21, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 16, column: 12 }, end: { line: 21, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 17, column: 4 },
+            end: { line: 17, column: 21 },
+          },
           kind: "const",
-          loc: [17, 5, 17, 22],
-          name: {
-            kind: "id",
-            loc: [17, 11, 17, 17],
-            text: "before",
-            bindingKey: "before$1xi8jyc89buh5$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [17, 20, 17, 21],
-            value: 1,
-          },
-        },
-        {
-          kind: "const",
-          loc: [18, 5, 18, 31],
-          name: {
-            kind: "id",
-            loc: [18, 11, 18, 18],
-            text: "spliced",
-            bindingKey: "spliced$1xi8jyc89buh5$1",
-          },
-          initializer: {
-            kind: "splice",
-            loc: [18, 21, 18, 30],
-            key: "$fragment",
-          },
-        },
-        {
-          kind: "const",
-          loc: [19, 5, 19, 21],
-          name: {
-            kind: "id",
-            loc: [19, 11, 19, 16],
-            text: "after",
-            bindingKey: "after$1xi8jyc89buh5$2",
-          },
-          initializer: {
-            kind: "number",
-            loc: [19, 19, 19, 20],
-            value: 2,
-          },
-        },
-        {
-          kind: "return",
-          loc: [20, 5, 20, 37],
-          expression: {
-            kind: "binop",
-            loc: [20, 12, 20, 36],
-            left: {
-              kind: "binop",
-              loc: [20, 12, 20, 28],
-              left: {
-                kind: "id",
-                loc: [20, 12, 20, 18],
-                text: "before",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 17, column: 10 },
+                end: { line: 17, column: 20 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 17, column: 10 },
+                  end: { line: 17, column: 16 },
+                },
+                name: "before",
                 bindingKey: "before$1xi8jyc89buh5$0",
               },
-              operatorToken: "+",
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 17, column: 19 },
+                  end: { line: 17, column: 20 },
+                },
+                value: 1,
+              },
+            },
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 18, column: 4 },
+            end: { line: 18, column: 30 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 18, column: 10 },
+                end: { line: 18, column: 29 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 18, column: 10 },
+                  end: { line: 18, column: 17 },
+                },
+                name: "spliced",
+                bindingKey: "spliced$1xi8jyc89buh5$1",
+              },
+              init: {
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 20 },
+                  end: { line: 18, column: 29 },
+                },
+                key: "$fragment",
+              },
+            },
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 19, column: 4 },
+            end: { line: 19, column: 20 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 19, column: 10 },
+                end: { line: 19, column: 19 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 19, column: 10 },
+                  end: { line: 19, column: 15 },
+                },
+                name: "after",
+                bindingKey: "after$1xi8jyc89buh5$2",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 19, column: 18 },
+                  end: { line: 19, column: 19 },
+                },
+                value: 2,
+              },
+            },
+          ],
+        },
+        {
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 20, column: 4 },
+            end: { line: 20, column: 36 },
+          },
+          argument: {
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 20, column: 11 },
+              end: { line: 20, column: 35 },
+            },
+            operator: "+",
+            left: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 20, column: 11 },
+                end: { line: 20, column: 27 },
+              },
+              operator: "+",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 20, column: 11 },
+                  end: { line: 20, column: 17 },
+                },
+                name: "before",
+                bindingKey: "before$1xi8jyc89buh5$0",
+              },
               right: {
-                kind: "id",
-                loc: [20, 21, 20, 28],
-                text: "spliced",
+                type: "Identifier",
+                loc: {
+                  start: { line: 20, column: 20 },
+                  end: { line: 20, column: 27 },
+                },
+                name: "spliced",
                 bindingKey: "spliced$1xi8jyc89buh5$1",
               },
             },
-            operatorToken: "+",
             right: {
-              kind: "id",
-              loc: [20, 31, 20, 36],
-              text: "after",
+              type: "Identifier",
+              loc: {
+                start: { line: 20, column: 30 },
+                end: { line: 20, column: 35 },
+              },
+              name: "after",
               bindingKey: "after$1xi8jyc89buh5$2",
             },
           },
@@ -111,7 +186,7 @@ it("spliceBeforeDeclaration", async (t) => {
     t,
     "spliceBeforeDeclaration",
     cs.create(
-      [28, 5, 28, 50],
+      { start: { line: 28, column: 4 }, end: { line: 28, column: 49 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-before-declaration.test.tsx",
@@ -120,7 +195,10 @@ it("spliceBeforeDeclaration", async (t) => {
           $0splice0: {
             value: sandwich(
               cs.create(
-                [28, 19, 28, 25],
+                {
+                  start: { line: 28, column: 18 },
+                  end: { line: 28, column: 24 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/splice-before-declaration.test.tsx",
@@ -129,8 +207,11 @@ it("spliceBeforeDeclaration", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [28, 22, 28, 24],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 28, column: 21 },
+                    end: { line: 28, column: 23 },
+                  },
                   value: 10,
                 }),
               ),
@@ -140,7 +221,10 @@ it("spliceBeforeDeclaration", async (t) => {
           $0splice1: {
             value: sandwich(
               cs.create(
-                [28, 41, 28, 47],
+                {
+                  start: { line: 28, column: 40 },
+                  end: { line: 28, column: 46 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/splice-before-declaration.test.tsx",
@@ -149,8 +233,11 @@ it("spliceBeforeDeclaration", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [28, 44, 28, 46],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 28, column: 43 },
+                    end: { line: 28, column: 45 },
+                  },
                   value: 20,
                 }),
               ),
@@ -161,17 +248,23 @@ it("spliceBeforeDeclaration", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "binop",
-        loc: [28, 8, 28, 49],
+        type: "BinaryExpression",
+        loc: { start: { line: 28, column: 7 }, end: { line: 28, column: 48 } },
+        operator: "+",
         left: {
-          kind: "splice",
-          loc: [28, 8, 28, 27],
+          type: "Splice",
+          loc: {
+            start: { line: 28, column: 7 },
+            end: { line: 28, column: 26 },
+          },
           key: "$0splice0",
         },
-        operatorToken: "+",
         right: {
-          kind: "splice",
-          loc: [28, 30, 28, 49],
+          type: "Splice",
+          loc: {
+            start: { line: 28, column: 29 },
+            end: { line: 28, column: 48 },
+          },
           key: "$0splice1",
         },
       }),

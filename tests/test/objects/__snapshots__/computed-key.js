@@ -10,7 +10,7 @@ it("computedKey", async (t) => {
     t,
     "computedKey",
     cs.create(
-      [13, 5, 22, 7],
+      { start: { line: 13, column: 4 }, end: { line: 22, column: 6 } },
       {
         version: "0.0.0",
         filePath: "objects/computed-key.test.tsx",
@@ -19,137 +19,258 @@ it("computedKey", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [13, 8, 22, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 13, column: 7 }, end: { line: 22, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 34 },
+            },
             kind: "const",
-            loc: [14, 7, 14, 35],
-            name: {
-              kind: "id",
-              loc: [14, 13, 14, 17],
-              text: "base",
-              bindingKey: "base$27b2r7injyzq0$0",
-            },
-            initializer: {
-              kind: "obj",
-              loc: [14, 20, 14, 34],
-              properties: [
-                {
-                  kind: ":",
-                  loc: [14, 22, 14, 26],
-                  name: {
-                    kind: "string",
-                    loc: [14, 22, 14, 23],
-                    text: "a",
-                  },
-                  initializer: {
-                    kind: "number",
-                    loc: [14, 25, 14, 26],
-                    value: 1,
-                  },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 14, column: 12 },
+                  end: { line: 14, column: 33 },
                 },
-                {
-                  kind: ":",
-                  loc: [14, 28, 14, 32],
-                  name: {
-                    kind: "string",
-                    loc: [14, 28, 14, 29],
-                    text: "b",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 16 },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [14, 31, 14, 32],
-                    value: 2,
-                  },
+                  name: "base",
+                  bindingKey: "base$27b2r7injyzq0$0",
                 },
-              ],
-            },
+                init: {
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 14, column: 19 },
+                    end: { line: 14, column: 33 },
+                  },
+                  properties: [
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 14, column: 21 },
+                        end: { line: 14, column: 25 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 21 },
+                          end: { line: 14, column: 22 },
+                        },
+                        name: "a",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 14, column: 24 },
+                          end: { line: 14, column: 25 },
+                        },
+                        value: 1,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 14, column: 27 },
+                        end: { line: 14, column: 31 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 27 },
+                          end: { line: 14, column: 28 },
+                        },
+                        name: "b",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 14, column: 30 },
+                          end: { line: 14, column: 31 },
+                        },
+                        value: 2,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 23 },
+            },
             kind: "const",
-            loc: [15, 7, 15, 24],
-            name: {
-              kind: "id",
-              loc: [15, 13, 15, 17],
-              text: "name",
-              bindingKey: "name$27b2r7injyzq0$1",
-            },
-            initializer: {
-              kind: "string",
-              loc: [15, 20, 15, 23],
-              text: "b",
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 15, column: 12 },
+                  end: { line: 15, column: 22 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 15, column: 12 },
+                    end: { line: 15, column: 16 },
+                  },
+                  name: "name",
+                  bindingKey: "name$27b2r7injyzq0$1",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 15, column: 19 },
+                    end: { line: 15, column: 22 },
+                  },
+                  value: "b",
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [16, 7, 21, 9],
-            expression: {
-              kind: "obj",
-              loc: [16, 14, 21, 8],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 21, column: 8 },
+            },
+            argument: {
+              type: "ObjectExpression",
+              loc: {
+                start: { line: 16, column: 13 },
+                end: { line: 21, column: 7 },
+              },
               properties: [
                 {
-                  kind: "...",
-                  loc: [17, 9, 17, 16],
-                  expression: {
-                    kind: "id",
-                    loc: [17, 12, 17, 16],
-                    text: "base",
+                  type: "SpreadElement",
+                  loc: {
+                    start: { line: 17, column: 8 },
+                    end: { line: 17, column: 15 },
+                  },
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 11 },
+                      end: { line: 17, column: 15 },
+                    },
+                    name: "base",
                     bindingKey: "base$27b2r7injyzq0$0",
                   },
                 },
                 {
-                  kind: ":",
-                  loc: [18, 9, 18, 18],
-                  name: {
-                    kind: "id",
-                    loc: [18, 10, 18, 14],
-                    text: "name",
+                  type: "Property",
+                  loc: {
+                    start: { line: 18, column: 8 },
+                    end: { line: 18, column: 17 },
+                  },
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 9 },
+                      end: { line: 18, column: 13 },
+                    },
+                    name: "name",
                     bindingKey: "name$27b2r7injyzq0$1",
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [18, 17, 18, 18],
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 18, column: 16 },
+                      end: { line: 18, column: 17 },
+                    },
                     value: 9,
                   },
+                  kind: "init",
+                  computed: true,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [19, 9, 19, 23],
-                  name: {
-                    kind: "binop",
-                    loc: [19, 10, 19, 19],
-                    left: {
-                      kind: "string",
-                      loc: [19, 10, 19, 13],
-                      text: "c",
+                  type: "Property",
+                  loc: {
+                    start: { line: 19, column: 8 },
+                    end: { line: 19, column: 22 },
+                  },
+                  key: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 19, column: 9 },
+                      end: { line: 19, column: 18 },
                     },
-                    operatorToken: "+",
+                    operator: "+",
+                    left: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 19, column: 9 },
+                        end: { line: 19, column: 12 },
+                      },
+                      value: "c",
+                    },
                     right: {
-                      kind: "string",
-                      loc: [19, 16, 19, 19],
-                      text: "d",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 19, column: 15 },
+                        end: { line: 19, column: 18 },
+                      },
+                      value: "d",
                     },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [19, 22, 19, 23],
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 19, column: 21 },
+                      end: { line: 19, column: 22 },
+                    },
                     value: 3,
                   },
+                  kind: "init",
+                  computed: true,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [20, 9, 20, 13],
-                  name: {
-                    kind: "string",
-                    loc: [20, 9, 20, 10],
-                    text: "a",
+                  type: "Property",
+                  loc: {
+                    start: { line: 20, column: 8 },
+                    end: { line: 20, column: 12 },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [20, 12, 20, 13],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 20, column: 8 },
+                      end: { line: 20, column: 9 },
+                    },
+                    name: "a",
+                  },
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 20, column: 11 },
+                      end: { line: 20, column: 12 },
+                    },
                     value: 4,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
               ],
             },

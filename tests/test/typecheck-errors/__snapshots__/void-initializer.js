@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // An action call produces no value: its `void` result can't initialize a
 // variable — in a value script or an action.
 const ping = cs.create(
-  [5, 14, 8, 3],
+  { start: { line: 5, column: 13 }, end: { line: 8, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
@@ -11,50 +11,77 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [5, 17, 8, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 5, column: 16 }, end: { line: 8, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [5, 23, 8, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 5, column: 22 }, end: { line: 8, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 6, column: 2 }, end: { line: 6, column: 12 } },
           kind: "let",
-          loc: [6, 3, 6, 13],
-          name: {
-            kind: "id",
-            loc: [6, 7, 6, 8],
-            text: "n",
-            bindingKey: "n$3ch7rgcn8bjeq$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [6, 11, 6, 12],
-            value: 0,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 6, column: 6 },
+                end: { line: 6, column: 11 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 6, column: 6 },
+                  end: { line: 6, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$3ch7rgcn8bjeq$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 6, column: 10 },
+                  end: { line: 6, column: 11 },
+                },
+                value: 0,
+              },
+            },
+          ],
         },
         {
-          kind: "binop",
-          loc: [7, 3, 7, 8],
-          left: {
-            kind: "id",
-            loc: [7, 3, 7, 4],
-            text: "n",
-            bindingKey: "n$3ch7rgcn8bjeq$0",
-          },
-          operatorToken: "=",
-          right: {
-            kind: "number",
-            loc: [7, 7, 7, 8],
-            value: 1,
+          type: "ExpressionStatement",
+          loc: { start: { line: 7, column: 2 }, end: { line: 7, column: 8 } },
+          expression: {
+            type: "AssignmentExpression",
+            loc: { start: { line: 7, column: 2 }, end: { line: 7, column: 7 } },
+            operator: "=",
+            left: {
+              type: "Identifier",
+              loc: {
+                start: { line: 7, column: 2 },
+                end: { line: 7, column: 3 },
+              },
+              name: "n",
+              bindingKey: "n$3ch7rgcn8bjeq$0",
+            },
+            right: {
+              type: "Literal",
+              loc: {
+                start: { line: 7, column: 6 },
+                end: { line: 7, column: 7 },
+              },
+              value: 1,
+            },
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 const script = cs.create(
-  [10, 16, 13, 3],
+  { start: { line: 10, column: 15 }, end: { line: 13, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
@@ -63,35 +90,58 @@ const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [10, 19, 13, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 10, column: 18 }, end: { line: 13, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 11, column: 2 }, end: { line: 11, column: 20 } },
         kind: "const",
-        loc: [11, 3, 11, 21],
-        name: {
-          kind: "id",
-          loc: [11, 9, 11, 10],
-          text: "x",
-          bindingKey: "x$3ch7rgcn8bjeq$1",
-        },
-        initializer: {
-          kind: "()",
-          loc: [11, 13, 11, 20],
-          expression: {
-            kind: "splice",
-            loc: [11, 13, 11, 18],
-            key: "$ping",
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 11, column: 8 },
+              end: { line: 11, column: 19 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 11, column: 8 },
+                end: { line: 11, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$3ch7rgcn8bjeq$1",
+            },
+            init: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 11, column: 12 },
+                end: { line: 11, column: 19 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 11, column: 12 },
+                  end: { line: 11, column: 17 },
+                },
+                key: "$ping",
+              },
+              arguments: [],
+              optional: false,
+            },
           },
-          arguments: [],
-        },
+        ],
       },
       {
-        kind: "return",
-        loc: [12, 3, 12, 12],
-        expression: {
-          kind: "number",
-          loc: [12, 10, 12, 11],
+        type: "ReturnStatement",
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 11 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 12, column: 9 },
+            end: { line: 12, column: 10 },
+          },
           value: 1,
         },
       },
@@ -99,7 +149,7 @@ const script = cs.create(
   }),
 );
 const action = cs.create(
-  [15, 16, 17, 3],
+  { start: { line: 15, column: 15 }, end: { line: 17, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
@@ -108,28 +158,48 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [15, 19, 17, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 15, column: 18 }, end: { line: 17, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 16, column: 2 }, end: { line: 16, column: 20 } },
         kind: "const",
-        loc: [16, 3, 16, 21],
-        name: {
-          kind: "id",
-          loc: [16, 9, 16, 10],
-          text: "x",
-          bindingKey: "x$3ch7rgcn8bjeq$2",
-        },
-        initializer: {
-          kind: "()",
-          loc: [16, 13, 16, 20],
-          expression: {
-            kind: "splice",
-            loc: [16, 13, 16, 18],
-            key: "$ping",
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 16, column: 8 },
+              end: { line: 16, column: 19 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 16, column: 8 },
+                end: { line: 16, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$3ch7rgcn8bjeq$2",
+            },
+            init: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 16, column: 12 },
+                end: { line: 16, column: 19 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 16, column: 12 },
+                  end: { line: 16, column: 17 },
+                },
+                key: "$ping",
+              },
+              arguments: [],
+              optional: false,
+            },
           },
-          arguments: [],
-        },
+        ],
       },
     ],
   }),
@@ -137,7 +207,7 @@ const action = cs.create(
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
 const label = cs.create(
-  [21, 15, 23, 3],
+  { start: { line: 21, column: 14 }, end: { line: 23, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
@@ -146,40 +216,43 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [21, 18, 23, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 21, column: 17 }, end: { line: 23, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [21, 19, 21, 31],
-        name: {
-          kind: "id",
-          loc: [21, 19, 21, 23],
-          text: "text",
-          bindingKey: "text$3ch7rgcn8bjeq$3",
-        },
+        type: "Identifier",
+        loc: { start: { line: 21, column: 18 }, end: { line: 21, column: 22 } },
+        name: "text",
+        bindingKey: "text$3ch7rgcn8bjeq$3",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [21, 36, 23, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 21, column: 35 }, end: { line: 23, column: 1 } },
+      body: [
         {
-          kind: "return",
-          loc: [22, 3, 22, 15],
-          expression: {
-            kind: "id",
-            loc: [22, 10, 22, 14],
-            text: "text",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 22, column: 2 },
+            end: { line: 22, column: 14 },
+          },
+          argument: {
+            type: "Identifier",
+            loc: {
+              start: { line: 22, column: 9 },
+              end: { line: 22, column: 13 },
+            },
+            name: "text",
             bindingKey: "text$3ch7rgcn8bjeq$3",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 const wrongArgument = cs.create(
-  [25, 23, 29, 3],
+  { start: { line: 25, column: 22 }, end: { line: 29, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
@@ -188,40 +261,67 @@ const wrongArgument = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [25, 26, 29, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 25, column: 25 }, end: { line: 29, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 27, column: 2 }, end: { line: 27, column: 25 } },
         kind: "const",
-        loc: [27, 3, 27, 26],
-        name: {
-          kind: "id",
-          loc: [27, 9, 27, 10],
-          text: "x",
-          bindingKey: "x$3ch7rgcn8bjeq$4",
-        },
-        initializer: {
-          kind: "()",
-          loc: [27, 13, 27, 25],
-          expression: {
-            kind: "splice",
-            loc: [27, 13, 27, 19],
-            key: "$label",
-          },
-          arguments: [
-            {
-              kind: "true",
-              loc: [27, 20, 27, 24],
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 27, column: 8 },
+              end: { line: 27, column: 24 },
             },
-          ],
-        },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 27, column: 8 },
+                end: { line: 27, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$3ch7rgcn8bjeq$4",
+            },
+            init: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 27, column: 12 },
+                end: { line: 27, column: 24 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 27, column: 12 },
+                  end: { line: 27, column: 18 },
+                },
+                key: "$label",
+              },
+              arguments: [
+                {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 27, column: 19 },
+                    end: { line: 27, column: 23 },
+                  },
+                  value: true,
+                },
+              ],
+              optional: false,
+            },
+          },
+        ],
       },
       {
-        kind: "return",
-        loc: [28, 3, 28, 12],
-        expression: {
-          kind: "number",
-          loc: [28, 10, 28, 11],
+        type: "ReturnStatement",
+        loc: { start: { line: 28, column: 2 }, end: { line: 28, column: 11 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 28, column: 9 },
+            end: { line: 28, column: 10 },
+          },
           value: 1,
         },
       },

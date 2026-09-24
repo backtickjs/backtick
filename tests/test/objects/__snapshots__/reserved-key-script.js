@@ -8,7 +8,7 @@ it("reservedKeyScript", async (t) => {
     t,
     "reservedKeyScript",
     cs.create(
-      [8, 46, 8, 68],
+      { start: { line: 8, column: 45 }, end: { line: 8, column: 67 } },
       {
         version: "0.0.0",
         filePath: "objects/reserved-key-script.test.tsx",
@@ -17,22 +17,35 @@ it("reservedKeyScript", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [8, 50, 8, 66],
+        type: "ObjectExpression",
+        loc: { start: { line: 8, column: 49 }, end: { line: 8, column: 65 } },
         properties: [
           {
-            kind: ":",
-            loc: [8, 52, 8, 64],
-            name: {
-              kind: "string",
-              loc: [8, 52, 8, 55],
-              text: "#",
+            type: "Property",
+            loc: {
+              start: { line: 8, column: 51 },
+              end: { line: 8, column: 63 },
             },
-            initializer: {
-              kind: "string",
-              loc: [8, 57, 8, 64],
-              text: "value",
+            key: {
+              type: "Literal",
+              loc: {
+                start: { line: 8, column: 51 },
+                end: { line: 8, column: 54 },
+              },
+              value: "#",
             },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 8, column: 56 },
+                end: { line: 8, column: 63 },
+              },
+              value: "value",
+            },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

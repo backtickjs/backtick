@@ -13,7 +13,7 @@ it("arrayFrom", async (t) => {
     t,
     "arrayFrom",
     cs.create(
-      [16, 5, 23, 7],
+      { start: { line: 16, column: 4 }, end: { line: 23, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/array-from.test.tsx",
@@ -22,368 +22,642 @@ it("arrayFrom", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [16, 8, 23, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 16, column: 7 }, end: { line: 23, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 73 },
+            },
             kind: "const",
-            loc: [17, 7, 17, 74],
-            name: {
-              kind: "id",
-              loc: [17, 13, 17, 20],
-              text: "doubled",
-              bindingKey: "doubled$3pi2uzl7sovgc$0",
-            },
-            initializer: {
-              kind: "()",
-              loc: [17, 23, 17, 73],
-              expression: {
-                kind: ".",
-                loc: [17, 23, 17, 33],
-                expression: {
-                  kind: "bltn",
-                  loc: [17, 23, 17, 28],
-                  name: "Array",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 17, column: 12 },
+                  end: { line: 17, column: 72 },
                 },
-                name: "from",
-              },
-              arguments: [
-                {
-                  kind: "obj",
-                  loc: [17, 34, 17, 47],
-                  properties: [
-                    {
-                      kind: ":",
-                      loc: [17, 36, 17, 45],
-                      name: {
-                        kind: "string",
-                        loc: [17, 36, 17, 42],
-                        text: "length",
-                      },
-                      initializer: {
-                        kind: "number",
-                        loc: [17, 44, 17, 45],
-                        value: 4,
-                      },
-                    },
-                  ],
-                },
-                {
-                  kind: "=>",
-                  loc: [17, 49, 17, 72],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [17, 50, 17, 51],
-                      name: {
-                        kind: "id",
-                        loc: [17, 50, 17, 51],
-                        text: "_",
-                        bindingKey: "_$3pi2uzl7sovgc$3",
-                      },
-                    },
-                    {
-                      kind: "param",
-                      loc: [17, 53, 17, 58],
-                      name: {
-                        kind: "id",
-                        loc: [17, 53, 17, 58],
-                        text: "index",
-                        bindingKey: "index$3pi2uzl7sovgc$4",
-                      },
-                    },
-                  ],
-                  body: {
-                    kind: "binop",
-                    loc: [17, 63, 17, 72],
-                    left: {
-                      kind: "id",
-                      loc: [17, 63, 17, 68],
-                      text: "index",
-                      bindingKey: "index$3pi2uzl7sovgc$4",
-                    },
-                    operatorToken: "*",
-                    right: {
-                      kind: "number",
-                      loc: [17, 71, 17, 72],
-                      value: 2,
-                    },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 19 },
                   },
+                  name: "doubled",
+                  bindingKey: "doubled$3pi2uzl7sovgc$0",
                 },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [18, 7, 18, 68],
-            name: {
-              kind: "id",
-              loc: [18, 13, 18, 18],
-              text: "empty",
-              bindingKey: "empty$3pi2uzl7sovgc$1",
-            },
-            initializer: {
-              kind: "()",
-              loc: [18, 21, 18, 67],
-              expression: {
-                kind: ".",
-                loc: [18, 21, 18, 31],
-                expression: {
-                  kind: "bltn",
-                  loc: [18, 21, 18, 26],
-                  name: "Array",
-                },
-                name: "from",
-              },
-              arguments: [
-                {
-                  kind: "obj",
-                  loc: [18, 32, 18, 45],
-                  properties: [
-                    {
-                      kind: ":",
-                      loc: [18, 34, 18, 43],
-                      name: {
-                        kind: "string",
-                        loc: [18, 34, 18, 40],
-                        text: "length",
-                      },
-                      initializer: {
-                        kind: "number",
-                        loc: [18, 42, 18, 43],
-                        value: 0,
-                      },
-                    },
-                  ],
-                },
-                {
-                  kind: "=>",
-                  loc: [18, 47, 18, 66],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [18, 48, 18, 49],
-                      name: {
-                        kind: "id",
-                        loc: [18, 48, 18, 49],
-                        text: "_",
-                        bindingKey: "_$3pi2uzl7sovgc$5",
-                      },
-                    },
-                    {
-                      kind: "param",
-                      loc: [18, 51, 18, 56],
-                      name: {
-                        kind: "id",
-                        loc: [18, 51, 18, 56],
-                        text: "index",
-                        bindingKey: "index$3pi2uzl7sovgc$6",
-                      },
-                    },
-                  ],
-                  body: {
-                    kind: "id",
-                    loc: [18, 61, 18, 66],
-                    text: "index",
-                    bindingKey: "index$3pi2uzl7sovgc$6",
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 17, column: 22 },
+                    end: { line: 17, column: 72 },
                   },
-                },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [19, 7, 21, 9],
-            name: {
-              kind: "id",
-              loc: [19, 13, 19, 19],
-              text: "absent",
-              bindingKey: "absent$3pi2uzl7sovgc$2",
-            },
-            initializer: {
-              kind: "()",
-              loc: [19, 22, 21, 8],
-              expression: {
-                kind: ".",
-                loc: [19, 22, 19, 32],
-                expression: {
-                  kind: "bltn",
-                  loc: [19, 22, 19, 27],
-                  name: "Array",
-                },
-                name: "from",
-              },
-              arguments: [
-                {
-                  kind: "obj",
-                  loc: [19, 33, 19, 46],
-                  properties: [
-                    {
-                      kind: ":",
-                      loc: [19, 35, 19, 44],
-                      name: {
-                        kind: "string",
-                        loc: [19, 35, 19, 41],
-                        text: "length",
-                      },
-                      initializer: {
-                        kind: "number",
-                        loc: [19, 43, 19, 44],
-                        value: 2,
-                      },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 17, column: 22 },
+                      end: { line: 17, column: 32 },
                     },
-                  ],
-                },
-                {
-                  kind: "=>",
-                  loc: [19, 48, 20, 41],
-                  parameters: [
-                    {
-                      kind: "param",
-                      loc: [19, 49, 19, 54],
-                      name: {
-                        kind: "id",
-                        loc: [19, 49, 19, 54],
-                        text: "value",
-                        bindingKey: "value$3pi2uzl7sovgc$7",
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 17, column: 22 },
+                        end: { line: 17, column: 27 },
                       },
+                      name: "Array",
                     },
-                    {
-                      kind: "param",
-                      loc: [19, 56, 19, 61],
-                      name: {
-                        kind: "id",
-                        loc: [19, 56, 19, 61],
-                        text: "index",
-                        bindingKey: "index$3pi2uzl7sovgc$8",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 17, column: 28 },
+                        end: { line: 17, column: 32 },
                       },
+                      name: "from",
                     },
-                  ],
-                  body: {
-                    kind: "?:",
-                    loc: [20, 9, 20, 41],
-                    condition: {
-                      kind: "binop",
-                      loc: [20, 9, 20, 28],
-                      left: {
-                        kind: "id",
-                        loc: [20, 9, 20, 14],
-                        text: "value",
-                        bindingKey: "value$3pi2uzl7sovgc$7",
-                      },
-                      operatorToken: "===",
-                      right: {
-                        kind: "undefined",
-                        loc: [20, 19, 20, 28],
-                      },
-                    },
-                    whenTrue: {
-                      kind: "id",
-                      loc: [20, 31, 20, 36],
-                      text: "index",
-                      bindingKey: "index$3pi2uzl7sovgc$8",
-                    },
-                    whenFalse: {
-                      kind: "prefixop",
-                      loc: [20, 39, 20, 41],
-                      operator: "-",
-                      operand: {
-                        kind: "number",
-                        loc: [20, 40, 20, 41],
-                        value: 1,
-                      },
-                    },
+                    computed: false,
+                    optional: false,
                   },
-                },
-              ],
-            },
-          },
-          {
-            kind: "return",
-            loc: [22, 7, 22, 78],
-            expression: {
-              kind: "binop",
-              loc: [22, 14, 22, 77],
-              left: {
-                kind: "binop",
-                loc: [22, 14, 22, 58],
-                left: {
-                  kind: "binop",
-                  loc: [22, 14, 22, 52],
-                  left: {
-                    kind: "binop",
-                    loc: [22, 14, 22, 37],
-                    left: {
-                      kind: "()",
-                      loc: [22, 14, 22, 31],
-                      expression: {
-                        kind: ".",
-                        loc: [22, 14, 22, 26],
-                        expression: {
-                          kind: "id",
-                          loc: [22, 14, 22, 21],
-                          text: "doubled",
-                          bindingKey: "doubled$3pi2uzl7sovgc$0",
-                        },
-                        name: "join",
+                  arguments: [
+                    {
+                      type: "ObjectExpression",
+                      loc: {
+                        start: { line: 17, column: 33 },
+                        end: { line: 17, column: 46 },
                       },
-                      arguments: [
+                      properties: [
                         {
-                          kind: "string",
-                          loc: [22, 27, 22, 30],
-                          text: ",",
+                          type: "Property",
+                          loc: {
+                            start: { line: 17, column: 35 },
+                            end: { line: 17, column: 44 },
+                          },
+                          key: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 35 },
+                              end: { line: 17, column: 41 },
+                            },
+                            name: "length",
+                          },
+                          value: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 17, column: 43 },
+                              end: { line: 17, column: 44 },
+                            },
+                            value: 4,
+                          },
+                          kind: "init",
+                          computed: false,
+                          method: false,
+                          shorthand: false,
                         },
                       ],
                     },
-                    operatorToken: "+",
-                    right: {
-                      kind: "string",
-                      loc: [22, 34, 22, 37],
-                      text: "|",
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 17, column: 48 },
+                        end: { line: 17, column: 71 },
+                      },
+                      params: [
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 17, column: 49 },
+                            end: { line: 17, column: 50 },
+                          },
+                          name: "_",
+                          bindingKey: "_$3pi2uzl7sovgc$3",
+                        },
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 17, column: 52 },
+                            end: { line: 17, column: 57 },
+                          },
+                          name: "index",
+                          bindingKey: "index$3pi2uzl7sovgc$4",
+                        },
+                      ],
+                      body: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 17, column: 62 },
+                          end: { line: 17, column: 71 },
+                        },
+                        operator: "*",
+                        left: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 17, column: 62 },
+                            end: { line: 17, column: 67 },
+                          },
+                          name: "index",
+                          bindingKey: "index$3pi2uzl7sovgc$4",
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 17, column: 70 },
+                            end: { line: 17, column: 71 },
+                          },
+                          value: 2,
+                        },
+                      },
+                      expression: true,
                     },
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: ".",
-                    loc: [22, 40, 22, 52],
-                    expression: {
-                      kind: "id",
-                      loc: [22, 40, 22, 45],
-                      text: "empty",
-                      bindingKey: "empty$3pi2uzl7sovgc$1",
-                    },
-                    name: "length",
-                  },
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [22, 55, 22, 58],
-                  text: "|",
+                  ],
+                  optional: false,
                 },
               },
-              operatorToken: "+",
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 67 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 18, column: 12 },
+                  end: { line: 18, column: 66 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 17 },
+                  },
+                  name: "empty",
+                  bindingKey: "empty$3pi2uzl7sovgc$1",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 18, column: 20 },
+                    end: { line: 18, column: 66 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 18, column: 20 },
+                      end: { line: 18, column: 30 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 20 },
+                        end: { line: 18, column: 25 },
+                      },
+                      name: "Array",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 26 },
+                        end: { line: 18, column: 30 },
+                      },
+                      name: "from",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "ObjectExpression",
+                      loc: {
+                        start: { line: 18, column: 31 },
+                        end: { line: 18, column: 44 },
+                      },
+                      properties: [
+                        {
+                          type: "Property",
+                          loc: {
+                            start: { line: 18, column: 33 },
+                            end: { line: 18, column: 42 },
+                          },
+                          key: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 18, column: 33 },
+                              end: { line: 18, column: 39 },
+                            },
+                            name: "length",
+                          },
+                          value: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 18, column: 41 },
+                              end: { line: 18, column: 42 },
+                            },
+                            value: 0,
+                          },
+                          kind: "init",
+                          computed: false,
+                          method: false,
+                          shorthand: false,
+                        },
+                      ],
+                    },
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 18, column: 46 },
+                        end: { line: 18, column: 65 },
+                      },
+                      params: [
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 18, column: 47 },
+                            end: { line: 18, column: 48 },
+                          },
+                          name: "_",
+                          bindingKey: "_$3pi2uzl7sovgc$5",
+                        },
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 18, column: 50 },
+                            end: { line: 18, column: 55 },
+                          },
+                          name: "index",
+                          bindingKey: "index$3pi2uzl7sovgc$6",
+                        },
+                      ],
+                      body: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 18, column: 60 },
+                          end: { line: 18, column: 65 },
+                        },
+                        name: "index",
+                        bindingKey: "index$3pi2uzl7sovgc$6",
+                      },
+                      expression: true,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 21, column: 8 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 19, column: 12 },
+                  end: { line: 21, column: 7 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 12 },
+                    end: { line: 19, column: 18 },
+                  },
+                  name: "absent",
+                  bindingKey: "absent$3pi2uzl7sovgc$2",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 19, column: 21 },
+                    end: { line: 21, column: 7 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 19, column: 21 },
+                      end: { line: 19, column: 31 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 21 },
+                        end: { line: 19, column: 26 },
+                      },
+                      name: "Array",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 27 },
+                        end: { line: 19, column: 31 },
+                      },
+                      name: "from",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "ObjectExpression",
+                      loc: {
+                        start: { line: 19, column: 32 },
+                        end: { line: 19, column: 45 },
+                      },
+                      properties: [
+                        {
+                          type: "Property",
+                          loc: {
+                            start: { line: 19, column: 34 },
+                            end: { line: 19, column: 43 },
+                          },
+                          key: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 19, column: 34 },
+                              end: { line: 19, column: 40 },
+                            },
+                            name: "length",
+                          },
+                          value: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 19, column: 42 },
+                              end: { line: 19, column: 43 },
+                            },
+                            value: 2,
+                          },
+                          kind: "init",
+                          computed: false,
+                          method: false,
+                          shorthand: false,
+                        },
+                      ],
+                    },
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 19, column: 47 },
+                        end: { line: 20, column: 40 },
+                      },
+                      params: [
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 19, column: 48 },
+                            end: { line: 19, column: 53 },
+                          },
+                          name: "value",
+                          bindingKey: "value$3pi2uzl7sovgc$7",
+                        },
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 19, column: 55 },
+                            end: { line: 19, column: 60 },
+                          },
+                          name: "index",
+                          bindingKey: "index$3pi2uzl7sovgc$8",
+                        },
+                      ],
+                      body: {
+                        type: "ConditionalExpression",
+                        loc: {
+                          start: { line: 20, column: 8 },
+                          end: { line: 20, column: 40 },
+                        },
+                        test: {
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 20, column: 8 },
+                            end: { line: 20, column: 27 },
+                          },
+                          operator: "===",
+                          left: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 20, column: 8 },
+                              end: { line: 20, column: 13 },
+                            },
+                            name: "value",
+                            bindingKey: "value$3pi2uzl7sovgc$7",
+                          },
+                          right: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 20, column: 18 },
+                              end: { line: 20, column: 27 },
+                            },
+                            name: "undefined",
+                          },
+                        },
+                        consequent: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 20, column: 30 },
+                            end: { line: 20, column: 35 },
+                          },
+                          name: "index",
+                          bindingKey: "index$3pi2uzl7sovgc$8",
+                        },
+                        alternate: {
+                          type: "UnaryExpression",
+                          loc: {
+                            start: { line: 20, column: 38 },
+                            end: { line: 20, column: 40 },
+                          },
+                          operator: "-",
+                          prefix: true,
+                          argument: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 20, column: 39 },
+                              end: { line: 20, column: 40 },
+                            },
+                            value: 1,
+                          },
+                        },
+                      },
+                      expression: true,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 22, column: 77 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 22, column: 13 },
+                end: { line: 22, column: 76 },
+              },
+              operator: "+",
+              left: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 22, column: 13 },
+                  end: { line: 22, column: 57 },
+                },
+                operator: "+",
+                left: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 22, column: 13 },
+                    end: { line: 22, column: 51 },
+                  },
+                  operator: "+",
+                  left: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 22, column: 13 },
+                      end: { line: 22, column: 36 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 22, column: 13 },
+                        end: { line: 22, column: 30 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 22, column: 13 },
+                          end: { line: 22, column: 25 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 22, column: 13 },
+                            end: { line: 22, column: 20 },
+                          },
+                          name: "doubled",
+                          bindingKey: "doubled$3pi2uzl7sovgc$0",
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 22, column: 21 },
+                            end: { line: 22, column: 25 },
+                          },
+                          name: "join",
+                        },
+                        computed: false,
+                        optional: false,
+                      },
+                      arguments: [
+                        {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 22, column: 26 },
+                            end: { line: 22, column: 29 },
+                          },
+                          value: ",",
+                        },
+                      ],
+                      optional: false,
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 22, column: 33 },
+                        end: { line: 22, column: 36 },
+                      },
+                      value: "|",
+                    },
+                  },
+                  right: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 22, column: 39 },
+                      end: { line: 22, column: 51 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 39 },
+                        end: { line: 22, column: 44 },
+                      },
+                      name: "empty",
+                      bindingKey: "empty$3pi2uzl7sovgc$1",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 45 },
+                        end: { line: 22, column: 51 },
+                      },
+                      name: "length",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                },
+                right: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 22, column: 54 },
+                    end: { line: 22, column: 57 },
+                  },
+                  value: "|",
+                },
+              },
               right: {
-                kind: "()",
-                loc: [22, 61, 22, 77],
-                expression: {
-                  kind: ".",
-                  loc: [22, 61, 22, 72],
-                  expression: {
-                    kind: "id",
-                    loc: [22, 61, 22, 67],
-                    text: "absent",
+                type: "CallExpression",
+                loc: {
+                  start: { line: 22, column: 60 },
+                  end: { line: 22, column: 76 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 22, column: 60 },
+                    end: { line: 22, column: 71 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 22, column: 60 },
+                      end: { line: 22, column: 66 },
+                    },
+                    name: "absent",
                     bindingKey: "absent$3pi2uzl7sovgc$2",
                   },
-                  name: "join",
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 22, column: 67 },
+                      end: { line: 22, column: 71 },
+                    },
+                    name: "join",
+                  },
+                  computed: false,
+                  optional: false,
                 },
                 arguments: [
                   {
-                    kind: "string",
-                    loc: [22, 73, 22, 76],
-                    text: ",",
+                    type: "Literal",
+                    loc: {
+                      start: { line: 22, column: 72 },
+                      end: { line: 22, column: 75 },
+                    },
+                    value: ",",
                   },
                 ],
+                optional: false,
               },
             },
           },

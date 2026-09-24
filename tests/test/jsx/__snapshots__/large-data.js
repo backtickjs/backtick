@@ -26,7 +26,7 @@ it("largeData", async (t) => {
     _jsx("div", {
       children: _jsx(For, {
         each: cs.create(
-          [37, 18, 37, 29],
+          { start: { line: 37, column: 17 }, end: { line: 37, column: 28 } },
           {
             version: "0.0.0",
             filePath: "jsx/large-data.test.tsx",
@@ -35,13 +35,16 @@ it("largeData", async (t) => {
             captures: [],
           },
           () => ({
-            kind: "splice",
-            loc: [37, 21, 37, 28],
+            type: "Splice",
+            loc: {
+              start: { line: 37, column: 20 },
+              end: { line: 37, column: 27 },
+            },
             key: "$orders",
           }),
         ),
         children: cs.create(
-          [38, 10, 53, 14],
+          { start: { line: 38, column: 9 }, end: { line: 53, column: 13 } },
           {
             version: "0.0.0",
             filePath: "jsx/large-data.test.tsx",
@@ -52,7 +55,10 @@ it("largeData", async (t) => {
                   children: [
                     _jsx("img", {
                       src: cs.create(
-                        [42, 22, 42, 72],
+                        {
+                          start: { line: 42, column: 21 },
+                          end: { line: 42, column: 71 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
@@ -61,34 +67,61 @@ it("largeData", async (t) => {
                           captures: ["order$2tquu92zqyse3$0"],
                         },
                         () => ({
-                          kind: "binop",
-                          loc: [42, 25, 42, 71],
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 42, column: 24 },
+                            end: { line: 42, column: 70 },
+                          },
+                          operator: "+",
                           left: {
-                            kind: "binop",
-                            loc: [42, 25, 42, 62],
-                            left: {
-                              kind: "string",
-                              loc: [42, 25, 42, 51],
-                              text: "https://img.example.com/",
+                            type: "BinaryExpression",
+                            loc: {
+                              start: { line: 42, column: 24 },
+                              end: { line: 42, column: 61 },
                             },
-                            operatorToken: "+",
+                            operator: "+",
+                            left: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 42, column: 24 },
+                                end: { line: 42, column: 50 },
+                              },
+                              value: "https://img.example.com/",
+                            },
                             right: {
-                              kind: ".",
-                              loc: [42, 54, 42, 62],
-                              expression: {
-                                kind: "id",
-                                loc: [42, 54, 42, 59],
-                                text: "order",
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 42, column: 53 },
+                                end: { line: 42, column: 61 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 42, column: 53 },
+                                  end: { line: 42, column: 58 },
+                                },
+                                name: "order",
                                 bindingKey: "order$2tquu92zqyse3$0",
                               },
-                              name: "id",
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 42, column: 59 },
+                                  end: { line: 42, column: 61 },
+                                },
+                                name: "id",
+                              },
+                              computed: false,
+                              optional: false,
                             },
                           },
-                          operatorToken: "+",
                           right: {
-                            kind: "string",
-                            loc: [42, 65, 42, 71],
-                            text: ".png",
+                            type: "Literal",
+                            loc: {
+                              start: { line: 42, column: 64 },
+                              end: { line: 42, column: 70 },
+                            },
+                            value: ".png",
                           },
                         }),
                       ),
@@ -96,7 +129,10 @@ it("largeData", async (t) => {
                     }),
                     _jsx("span", {
                       children: cs.create(
-                        [45, 22, 45, 45],
+                        {
+                          start: { line: 45, column: 21 },
+                          end: { line: 45, column: 44 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
@@ -105,26 +141,56 @@ it("largeData", async (t) => {
                           captures: ["order$2tquu92zqyse3$0"],
                         },
                         () => ({
-                          kind: ".",
-                          loc: [45, 25, 45, 44],
-                          expression: {
-                            kind: ".",
-                            loc: [45, 25, 45, 39],
-                            expression: {
-                              kind: "id",
-                              loc: [45, 25, 45, 30],
-                              text: "order",
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 45, column: 24 },
+                            end: { line: 45, column: 43 },
+                          },
+                          object: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 45, column: 24 },
+                              end: { line: 45, column: 38 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 45, column: 24 },
+                                end: { line: 45, column: 29 },
+                              },
+                              name: "order",
                               bindingKey: "order$2tquu92zqyse3$0",
                             },
-                            name: "customer",
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 45, column: 30 },
+                                end: { line: 45, column: 38 },
+                              },
+                              name: "customer",
+                            },
+                            computed: false,
+                            optional: false,
                           },
-                          name: "name",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 45, column: 39 },
+                              end: { line: 45, column: 43 },
+                            },
+                            name: "name",
+                          },
+                          computed: false,
+                          optional: false,
                         }),
                       ),
                     }),
                     _jsx("span", {
                       children: cs.create(
-                        [46, 22, 46, 45],
+                        {
+                          start: { line: 46, column: 21 },
+                          end: { line: 46, column: 44 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
@@ -133,26 +199,56 @@ it("largeData", async (t) => {
                           captures: ["order$2tquu92zqyse3$0"],
                         },
                         () => ({
-                          kind: ".",
-                          loc: [46, 25, 46, 44],
-                          expression: {
-                            kind: ".",
-                            loc: [46, 25, 46, 39],
-                            expression: {
-                              kind: "id",
-                              loc: [46, 25, 46, 30],
-                              text: "order",
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 46, column: 24 },
+                            end: { line: 46, column: 43 },
+                          },
+                          object: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 46, column: 24 },
+                              end: { line: 46, column: 38 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 46, column: 24 },
+                                end: { line: 46, column: 29 },
+                              },
+                              name: "order",
                               bindingKey: "order$2tquu92zqyse3$0",
                             },
-                            name: "customer",
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 46, column: 30 },
+                                end: { line: 46, column: 38 },
+                              },
+                              name: "customer",
+                            },
+                            computed: false,
+                            optional: false,
                           },
-                          name: "city",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 46, column: 39 },
+                              end: { line: 46, column: 43 },
+                            },
+                            name: "city",
+                          },
+                          computed: false,
+                          optional: false,
                         }),
                       ),
                     }),
                     _jsx(For, {
                       each: cs.create(
-                        [47, 26, 47, 41],
+                        {
+                          start: { line: 47, column: 25 },
+                          end: { line: 47, column: 40 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
@@ -161,19 +257,37 @@ it("largeData", async (t) => {
                           captures: ["order$2tquu92zqyse3$0"],
                         },
                         () => ({
-                          kind: ".",
-                          loc: [47, 29, 47, 40],
-                          expression: {
-                            kind: "id",
-                            loc: [47, 29, 47, 34],
-                            text: "order",
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 47, column: 28 },
+                            end: { line: 47, column: 39 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 47, column: 28 },
+                              end: { line: 47, column: 33 },
+                            },
+                            name: "order",
                             bindingKey: "order$2tquu92zqyse3$0",
                           },
-                          name: "items",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 47, column: 34 },
+                              end: { line: 47, column: 39 },
+                            },
+                            name: "items",
+                          },
+                          computed: false,
+                          optional: false,
                         }),
                       ),
                       children: cs.create(
-                        [48, 18, 49, 70],
+                        {
+                          start: { line: 48, column: 17 },
+                          end: { line: 49, column: 69 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
@@ -182,7 +296,10 @@ it("largeData", async (t) => {
                             $0splice0: {
                               value: _jsx("span", {
                                 children: cs.create(
-                                  [49, 29, 49, 59],
+                                  {
+                                    start: { line: 49, column: 28 },
+                                    end: { line: 49, column: 58 },
+                                  },
                                   {
                                     version: "0.0.0",
                                     filePath: "jsx/large-data.test.tsx",
@@ -191,40 +308,79 @@ it("largeData", async (t) => {
                                     captures: ["item$2tquu92zqyse3$1"],
                                   },
                                   () => ({
-                                    kind: "binop",
-                                    loc: [49, 32, 49, 58],
+                                    type: "BinaryExpression",
+                                    loc: {
+                                      start: { line: 49, column: 31 },
+                                      end: { line: 49, column: 57 },
+                                    },
+                                    operator: "+",
                                     left: {
-                                      kind: "binop",
-                                      loc: [49, 32, 49, 47],
+                                      type: "BinaryExpression",
+                                      loc: {
+                                        start: { line: 49, column: 31 },
+                                        end: { line: 49, column: 46 },
+                                      },
+                                      operator: "+",
                                       left: {
-                                        kind: ".",
-                                        loc: [49, 32, 49, 40],
-                                        expression: {
-                                          kind: "id",
-                                          loc: [49, 32, 49, 36],
-                                          text: "item",
+                                        type: "MemberExpression",
+                                        loc: {
+                                          start: { line: 49, column: 31 },
+                                          end: { line: 49, column: 39 },
+                                        },
+                                        object: {
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 49, column: 31 },
+                                            end: { line: 49, column: 35 },
+                                          },
+                                          name: "item",
                                           bindingKey: "item$2tquu92zqyse3$1",
                                         },
-                                        name: "sku",
+                                        property: {
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 49, column: 36 },
+                                            end: { line: 49, column: 39 },
+                                          },
+                                          name: "sku",
+                                        },
+                                        computed: false,
+                                        optional: false,
                                       },
-                                      operatorToken: "+",
                                       right: {
-                                        kind: "string",
-                                        loc: [49, 43, 49, 47],
-                                        text: " x",
+                                        type: "Literal",
+                                        loc: {
+                                          start: { line: 49, column: 42 },
+                                          end: { line: 49, column: 46 },
+                                        },
+                                        value: " x",
                                       },
                                     },
-                                    operatorToken: "+",
                                     right: {
-                                      kind: ".",
-                                      loc: [49, 50, 49, 58],
-                                      expression: {
-                                        kind: "id",
-                                        loc: [49, 50, 49, 54],
-                                        text: "item",
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 49, column: 49 },
+                                        end: { line: 49, column: 57 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 49, column: 49 },
+                                          end: { line: 49, column: 53 },
+                                        },
+                                        name: "item",
                                         bindingKey: "item$2tquu92zqyse3$1",
                                       },
-                                      name: "qty",
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 49, column: 54 },
+                                          end: { line: 49, column: 57 },
+                                        },
+                                        name: "qty",
+                                      },
+                                      computed: false,
+                                      optional: false,
                                     },
                                   }),
                                 ),
@@ -235,31 +391,40 @@ it("largeData", async (t) => {
                           captures: [],
                         },
                         () => ({
-                          kind: "=>",
-                          loc: [48, 21, 49, 69],
-                          parameters: [
+                          type: "ArrowFunctionExpression",
+                          loc: {
+                            start: { line: 48, column: 20 },
+                            end: { line: 49, column: 68 },
+                          },
+                          params: [
                             {
-                              kind: "param",
-                              loc: [48, 22, 48, 32],
-                              name: {
-                                kind: "id",
-                                loc: [48, 22, 48, 26],
-                                text: "item",
-                                bindingKey: "item$2tquu92zqyse3$1",
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 48, column: 21 },
+                                end: { line: 48, column: 25 },
                               },
+                              name: "item",
+                              bindingKey: "item$2tquu92zqyse3$1",
                             },
                           ],
                           body: {
-                            kind: "splice",
-                            loc: [49, 19, 49, 69],
+                            type: "Splice",
+                            loc: {
+                              start: { line: 49, column: 18 },
+                              end: { line: 49, column: 68 },
+                            },
                             key: "$0splice0",
                           },
+                          expression: true,
                         }),
                       ),
                     }),
                     _jsx("span", {
                       children: cs.create(
-                        [51, 22, 51, 43],
+                        {
+                          start: { line: 51, column: 21 },
+                          end: { line: 51, column: 42 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
@@ -268,24 +433,45 @@ it("largeData", async (t) => {
                           captures: ["order$2tquu92zqyse3$0"],
                         },
                         () => ({
-                          kind: "binop",
-                          loc: [51, 25, 51, 42],
-                          left: {
-                            kind: "string",
-                            loc: [51, 25, 51, 28],
-                            text: "$",
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 51, column: 24 },
+                            end: { line: 51, column: 41 },
                           },
-                          operatorToken: "+",
+                          operator: "+",
+                          left: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 51, column: 24 },
+                              end: { line: 51, column: 27 },
+                            },
+                            value: "$",
+                          },
                           right: {
-                            kind: ".",
-                            loc: [51, 31, 51, 42],
-                            expression: {
-                              kind: "id",
-                              loc: [51, 31, 51, 36],
-                              text: "order",
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 51, column: 30 },
+                              end: { line: 51, column: 41 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 51, column: 30 },
+                                end: { line: 51, column: 35 },
+                              },
+                              name: "order",
                               bindingKey: "order$2tquu92zqyse3$0",
                             },
-                            name: "total",
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 51, column: 36 },
+                                end: { line: 51, column: 41 },
+                              },
+                              name: "total",
+                            },
+                            computed: false,
+                            optional: false,
                           },
                         }),
                       ),
@@ -298,25 +484,31 @@ it("largeData", async (t) => {
             captures: [],
           },
           () => ({
-            kind: "=>",
-            loc: [38, 13, 53, 13],
-            parameters: [
+            type: "ArrowFunctionExpression",
+            loc: {
+              start: { line: 38, column: 12 },
+              end: { line: 53, column: 12 },
+            },
+            params: [
               {
-                kind: "param",
-                loc: [38, 14, 38, 26],
-                name: {
-                  kind: "id",
-                  loc: [38, 14, 38, 19],
-                  text: "order",
-                  bindingKey: "order$2tquu92zqyse3$0",
+                type: "Identifier",
+                loc: {
+                  start: { line: 38, column: 13 },
+                  end: { line: 38, column: 18 },
                 },
+                name: "order",
+                bindingKey: "order$2tquu92zqyse3$0",
               },
             ],
             body: {
-              kind: "splice",
-              loc: [39, 11, 53, 13],
+              type: "Splice",
+              loc: {
+                start: { line: 39, column: 10 },
+                end: { line: 53, column: 12 },
+              },
               key: "$0splice0",
             },
+            expression: true,
           }),
         ),
       }),

@@ -8,7 +8,7 @@ it("typeofTable", async (t) => {
     t,
     "typeofTable",
     cs.create(
-      [11, 5, 25, 7],
+      { start: { line: 11, column: 4 }, end: { line: 25, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/typeof.test.tsx",
@@ -17,170 +17,316 @@ it("typeofTable", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 25, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 25, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 12, column: 30 },
+            },
             kind: "const",
-            loc: [12, 7, 12, 31],
-            name: {
-              kind: "id",
-              loc: [12, 13, 12, 18],
-              text: "count",
-              bindingKey: "count$1jdryi4es12ui$0",
-            },
-            initializer: {
-              kind: "()",
-              loc: [12, 21, 12, 30],
-              expression: {
-                kind: "splice",
-                loc: [12, 21, 12, 27],
-                key: "$state",
-              },
-              arguments: [
-                {
-                  kind: "number",
-                  loc: [12, 28, 12, 29],
-                  value: 0,
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 12, column: 12 },
+                  end: { line: 12, column: 29 },
                 },
-              ],
-            },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 12 },
+                    end: { line: 12, column: 17 },
+                  },
+                  name: "count",
+                  bindingKey: "count$1jdryi4es12ui$0",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 12, column: 20 },
+                    end: { line: 12, column: 29 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 12, column: 20 },
+                      end: { line: 12, column: 26 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 12, column: 27 },
+                        end: { line: 12, column: 28 },
+                      },
+                      value: 0,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [13, 7, 24, 9],
-            expression: {
-              kind: "arr",
-              loc: [13, 14, 24, 8],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 24, column: 8 },
+            },
+            argument: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 13, column: 13 },
+                end: { line: 24, column: 7 },
+              },
               elements: [
                 {
-                  kind: "typeof",
-                  loc: [14, 9, 14, 25],
-                  operand: {
-                    kind: "undefined",
-                    loc: [14, 16, 14, 25],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 14, column: 8 },
+                    end: { line: 14, column: 24 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 14, column: 15 },
+                      end: { line: 14, column: 24 },
+                    },
+                    name: "undefined",
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [15, 9, 15, 20],
-                  operand: {
-                    kind: "null",
-                    loc: [15, 16, 15, 20],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 19 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 15, column: 15 },
+                      end: { line: 15, column: 19 },
+                    },
+                    value: null,
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [16, 9, 16, 20],
-                  operand: {
-                    kind: "true",
-                    loc: [16, 16, 16, 20],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 16, column: 8 },
+                    end: { line: 16, column: 19 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 16, column: 15 },
+                      end: { line: 16, column: 19 },
+                    },
+                    value: true,
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [17, 9, 17, 17],
-                  operand: {
-                    kind: "number",
-                    loc: [17, 16, 17, 17],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 17, column: 8 },
+                    end: { line: 17, column: 16 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 17, column: 15 },
+                      end: { line: 17, column: 16 },
+                    },
                     value: 1,
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [18, 9, 18, 19],
-                  operand: {
-                    kind: "string",
-                    loc: [18, 16, 18, 19],
-                    text: "a",
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 18, column: 8 },
+                    end: { line: 18, column: 18 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 18, column: 15 },
+                      end: { line: 18, column: 18 },
+                    },
+                    value: "a",
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [19, 9, 19, 19],
-                  operand: {
-                    kind: "arr",
-                    loc: [19, 16, 19, 19],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 19, column: 8 },
+                    end: { line: 19, column: 18 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "ArrayExpression",
+                    loc: {
+                      start: { line: 19, column: 15 },
+                      end: { line: 19, column: 18 },
+                    },
                     elements: [
                       {
-                        kind: "number",
-                        loc: [19, 17, 19, 18],
+                        type: "Literal",
+                        loc: {
+                          start: { line: 19, column: 16 },
+                          end: { line: 19, column: 17 },
+                        },
                         value: 1,
                       },
                     ],
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [20, 9, 20, 24],
-                  operand: {
-                    kind: "obj",
-                    loc: [20, 16, 20, 24],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 20, column: 8 },
+                    end: { line: 20, column: 23 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "ObjectExpression",
+                    loc: {
+                      start: { line: 20, column: 15 },
+                      end: { line: 20, column: 23 },
+                    },
                     properties: [
                       {
-                        kind: ":",
-                        loc: [20, 18, 20, 22],
-                        name: {
-                          kind: "string",
-                          loc: [20, 18, 20, 19],
-                          text: "a",
+                        type: "Property",
+                        loc: {
+                          start: { line: 20, column: 17 },
+                          end: { line: 20, column: 21 },
                         },
-                        initializer: {
-                          kind: "number",
-                          loc: [20, 21, 20, 22],
+                        key: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 20, column: 17 },
+                            end: { line: 20, column: 18 },
+                          },
+                          name: "a",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 20, column: 20 },
+                            end: { line: 20, column: 21 },
+                          },
                           value: 1,
                         },
+                        kind: "init",
+                        computed: false,
+                        method: false,
+                        shorthand: false,
                       },
                     ],
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [21, 9, 21, 34],
-                  operand: {
-                    kind: "=>",
-                    loc: [21, 17, 21, 33],
-                    parameters: [
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 21, column: 8 },
+                    end: { line: 21, column: 33 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 21, column: 16 },
+                      end: { line: 21, column: 32 },
+                    },
+                    params: [
                       {
-                        kind: "param",
-                        loc: [21, 18, 21, 27],
-                        name: {
-                          kind: "id",
-                          loc: [21, 18, 21, 19],
-                          text: "n",
-                          bindingKey: "n$1jdryi4es12ui$1",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 21, column: 17 },
+                          end: { line: 21, column: 18 },
                         },
+                        name: "n",
+                        bindingKey: "n$1jdryi4es12ui$1",
                       },
                     ],
                     body: {
-                      kind: "id",
-                      loc: [21, 32, 21, 33],
-                      text: "n",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 21, column: 31 },
+                        end: { line: 21, column: 32 },
+                      },
+                      name: "n",
                       bindingKey: "n$1jdryi4es12ui$1",
                     },
+                    expression: true,
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [22, 9, 22, 26],
-                  operand: {
-                    kind: ".",
-                    loc: [22, 16, 22, 26],
-                    expression: {
-                      kind: "bltn",
-                      loc: [22, 16, 22, 20],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 22, column: 8 },
+                    end: { line: 22, column: 25 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 22, column: 15 },
+                      end: { line: 22, column: 25 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 15 },
+                        end: { line: 22, column: 19 },
+                      },
                       name: "Math",
                     },
-                    name: "floor",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 20 },
+                        end: { line: 22, column: 25 },
+                      },
+                      name: "floor",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                 },
                 {
-                  kind: "typeof",
-                  loc: [23, 9, 23, 21],
-                  operand: {
-                    kind: "id",
-                    loc: [23, 16, 23, 21],
-                    text: "count",
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 23, column: 8 },
+                    end: { line: 23, column: 20 },
+                  },
+                  operator: "typeof",
+                  prefix: true,
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 23, column: 15 },
+                      end: { line: 23, column: 20 },
+                    },
+                    name: "count",
                     bindingKey: "count$1jdryi4es12ui$0",
                   },
                 },
@@ -198,7 +344,7 @@ it("typeofNarrows", async (t) => {
     t,
     "typeofNarrows",
     cs.create(
-      [34, 5, 38, 7],
+      { start: { line: 34, column: 4 }, end: { line: 38, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/typeof.test.tsx",
@@ -207,126 +353,212 @@ it("typeofNarrows", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [34, 8, 38, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 34, column: 7 }, end: { line: 38, column: 5 } },
+        body: [
           {
-            kind: "const",
-            loc: [35, 7, 36, 50],
-            name: {
-              kind: "id",
-              loc: [35, 13, 35, 20],
-              text: "measure",
-              bindingKey: "measure$1jdryi4es12ui$2",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 35, column: 6 },
+              end: { line: 36, column: 49 },
             },
-            initializer: {
-              kind: "=>",
-              loc: [35, 23, 36, 49],
-              parameters: [
-                {
-                  kind: "param",
-                  loc: [35, 24, 35, 42],
-                  name: {
-                    kind: "id",
-                    loc: [35, 24, 35, 25],
-                    text: "v",
-                    bindingKey: "v$1jdryi4es12ui$3",
-                  },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 35, column: 12 },
+                  end: { line: 36, column: 48 },
                 },
-              ],
-              body: {
-                kind: "?:",
-                loc: [36, 9, 36, 49],
-                condition: {
-                  kind: "binop",
-                  loc: [36, 9, 36, 30],
-                  left: {
-                    kind: "typeof",
-                    loc: [36, 9, 36, 17],
-                    operand: {
-                      kind: "id",
-                      loc: [36, 16, 36, 17],
-                      text: "v",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 35, column: 12 },
+                    end: { line: 35, column: 19 },
+                  },
+                  name: "measure",
+                  bindingKey: "measure$1jdryi4es12ui$2",
+                },
+                init: {
+                  type: "ArrowFunctionExpression",
+                  loc: {
+                    start: { line: 35, column: 22 },
+                    end: { line: 36, column: 48 },
+                  },
+                  params: [
+                    {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 35, column: 23 },
+                        end: { line: 35, column: 24 },
+                      },
+                      name: "v",
                       bindingKey: "v$1jdryi4es12ui$3",
                     },
+                  ],
+                  body: {
+                    type: "ConditionalExpression",
+                    loc: {
+                      start: { line: 36, column: 8 },
+                      end: { line: 36, column: 48 },
+                    },
+                    test: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 36, column: 8 },
+                        end: { line: 36, column: 29 },
+                      },
+                      operator: "===",
+                      left: {
+                        type: "UnaryExpression",
+                        loc: {
+                          start: { line: 36, column: 8 },
+                          end: { line: 36, column: 16 },
+                        },
+                        operator: "typeof",
+                        prefix: true,
+                        argument: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 36, column: 15 },
+                            end: { line: 36, column: 16 },
+                          },
+                          name: "v",
+                          bindingKey: "v$1jdryi4es12ui$3",
+                        },
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 36, column: 21 },
+                          end: { line: 36, column: 29 },
+                        },
+                        value: "string",
+                      },
+                    },
+                    consequent: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 36, column: 32 },
+                        end: { line: 36, column: 40 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 36, column: 32 },
+                          end: { line: 36, column: 33 },
+                        },
+                        name: "v",
+                        bindingKey: "v$1jdryi4es12ui$3",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 36, column: 34 },
+                          end: { line: 36, column: 40 },
+                        },
+                        name: "length",
+                      },
+                      computed: false,
+                      optional: false,
+                    },
+                    alternate: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 36, column: 43 },
+                        end: { line: 36, column: 48 },
+                      },
+                      operator: "*",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 36, column: 43 },
+                          end: { line: 36, column: 44 },
+                        },
+                        name: "v",
+                        bindingKey: "v$1jdryi4es12ui$3",
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 36, column: 47 },
+                          end: { line: 36, column: 48 },
+                        },
+                        value: 2,
+                      },
+                    },
                   },
-                  operatorToken: "===",
-                  right: {
-                    kind: "string",
-                    loc: [36, 22, 36, 30],
-                    text: "string",
-                  },
-                },
-                whenTrue: {
-                  kind: ".",
-                  loc: [36, 33, 36, 41],
-                  expression: {
-                    kind: "id",
-                    loc: [36, 33, 36, 34],
-                    text: "v",
-                    bindingKey: "v$1jdryi4es12ui$3",
-                  },
-                  name: "length",
-                },
-                whenFalse: {
-                  kind: "binop",
-                  loc: [36, 44, 36, 49],
-                  left: {
-                    kind: "id",
-                    loc: [36, 44, 36, 45],
-                    text: "v",
-                    bindingKey: "v$1jdryi4es12ui$3",
-                  },
-                  operatorToken: "*",
-                  right: {
-                    kind: "number",
-                    loc: [36, 48, 36, 49],
-                    value: 2,
-                  },
+                  expression: true,
                 },
               },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [37, 7, 37, 43],
-            expression: {
-              kind: "arr",
-              loc: [37, 14, 37, 42],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 37, column: 6 },
+              end: { line: 37, column: 42 },
+            },
+            argument: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 37, column: 13 },
+                end: { line: 37, column: 41 },
+              },
               elements: [
                 {
-                  kind: "()",
-                  loc: [37, 15, 37, 29],
-                  expression: {
-                    kind: "id",
-                    loc: [37, 15, 37, 22],
-                    text: "measure",
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 37, column: 14 },
+                    end: { line: 37, column: 28 },
+                  },
+                  callee: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 37, column: 14 },
+                      end: { line: 37, column: 21 },
+                    },
+                    name: "measure",
                     bindingKey: "measure$1jdryi4es12ui$2",
                   },
                   arguments: [
                     {
-                      kind: "string",
-                      loc: [37, 23, 37, 28],
-                      text: "abc",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 37, column: 22 },
+                        end: { line: 37, column: 27 },
+                      },
+                      value: "abc",
                     },
                   ],
+                  optional: false,
                 },
                 {
-                  kind: "()",
-                  loc: [37, 31, 37, 41],
-                  expression: {
-                    kind: "id",
-                    loc: [37, 31, 37, 38],
-                    text: "measure",
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 37, column: 30 },
+                    end: { line: 37, column: 40 },
+                  },
+                  callee: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 37, column: 30 },
+                      end: { line: 37, column: 37 },
+                    },
+                    name: "measure",
                     bindingKey: "measure$1jdryi4es12ui$2",
                   },
                   arguments: [
                     {
-                      kind: "number",
-                      loc: [37, 39, 37, 40],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 37, column: 38 },
+                        end: { line: 37, column: 39 },
+                      },
                       value: 4,
                     },
                   ],
+                  optional: false,
                 },
               ],
             },

@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.create(
-    [13, 10, 16, 5],
+    { start: { line: 13, column: 9 }, end: { line: 16, column: 4 } },
     {
       version: "0.0.0",
       filePath: "components/component-answers-script.test.tsx",
@@ -20,65 +20,149 @@ async function Panel() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [13, 13, 16, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 13, column: 12 }, end: { line: 16, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 14, column: 4 },
+            end: { line: 14, column: 24 },
+          },
           kind: "const",
-          loc: [14, 5, 14, 25],
-          name: {
-            kind: "id",
-            loc: [14, 11, 14, 12],
-            text: "n",
-            bindingKey: "n$2g65d04vf49d2$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [14, 15, 14, 24],
-            expression: {
-              kind: "splice",
-              loc: [14, 15, 14, 21],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "number",
-                loc: [14, 22, 14, 23],
-                value: 2,
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 14, column: 10 },
+                end: { line: 14, column: 23 },
               },
-            ],
-          },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 10 },
+                  end: { line: 14, column: 11 },
+                },
+                name: "n",
+                bindingKey: "n$2g65d04vf49d2$0",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 14, column: 14 },
+                  end: { line: 14, column: 23 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 14, column: 14 },
+                    end: { line: 14, column: 20 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 14, column: 21 },
+                      end: { line: 14, column: 22 },
+                    },
+                    value: 2,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [15, 5, 15, 31],
-          expression: {
-            kind: "jsx",
-            loc: [15, 12, 15, 30],
-            type: {
-              kind: "string",
-              loc: [15, 13, 15, 15],
-              text: "em",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 15, column: 4 },
+            end: { line: 15, column: 30 },
+          },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 15, column: 11 },
+              end: { line: 15, column: 29 },
             },
-            attributes: [],
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 15, column: 11 },
+                end: { line: 15, column: 15 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 15, column: 12 },
+                  end: { line: 15, column: 14 },
+                },
+                name: "em",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "()",
-                loc: [15, 17, 15, 24],
-                expression: {
-                  kind: ".",
-                  loc: [15, 17, 15, 22],
-                  expression: {
-                    kind: "id",
-                    loc: [15, 17, 15, 18],
-                    text: "n",
-                    bindingKey: "n$2g65d04vf49d2$0",
-                  },
-                  name: "get",
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 15, column: 15 },
+                  end: { line: 15, column: 24 },
                 },
-                arguments: [],
+                expression: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 15, column: 16 },
+                    end: { line: 15, column: 23 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 15, column: 16 },
+                      end: { line: 15, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 16 },
+                        end: { line: 15, column: 17 },
+                      },
+                      name: "n",
+                      bindingKey: "n$2g65d04vf49d2$0",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 18 },
+                        end: { line: 15, column: 21 },
+                      },
+                      name: "get",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [],
+                  optional: false,
+                },
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 15, column: 24 },
+                end: { line: 15, column: 29 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 15, column: 26 },
+                  end: { line: 15, column: 28 },
+                },
+                name: "em",
+              },
+            },
           },
         },
       ],

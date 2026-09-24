@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // the empty string rather than refusing the way an empty `Math.min` does.
 async function Written() {
   return cs.create(
-    [10, 10, 14, 5],
+    { start: { line: 10, column: 9 }, end: { line: 14, column: 4 } },
     {
       version: "0.0.0",
       filePath: "stdlib/string-from-code-point.test.tsx",
@@ -17,69 +17,152 @@ async function Written() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [10, 13, 14, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 10, column: 12 }, end: { line: 14, column: 3 } },
+      body: [
         {
-          kind: "return",
-          loc: [11, 5, 13, 7],
-          expression: {
-            kind: "jsx",
-            loc: [12, 7, 12, 76],
-            type: {
-              kind: "string",
-              loc: [12, 8, 12, 12],
-              text: "span",
+          type: "ReturnStatement",
+          loc: { start: { line: 11, column: 4 }, end: { line: 13, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 12, column: 75 },
             },
-            attributes: [],
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 12, column: 6 },
+                end: { line: 12, column: 12 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 12, column: 7 },
+                  end: { line: 12, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "binop",
-                loc: [12, 14, 12, 68],
-                left: {
-                  kind: "()",
-                  loc: [12, 14, 12, 43],
-                  expression: {
-                    kind: ".",
-                    loc: [12, 14, 12, 34],
-                    expression: {
-                      kind: "bltn",
-                      loc: [12, 14, 12, 20],
-                      name: "String",
-                    },
-                    name: "fromCodePoint",
-                  },
-                  arguments: [
-                    {
-                      kind: "number",
-                      loc: [12, 35, 12, 37],
-                      value: 72,
-                    },
-                    {
-                      kind: "number",
-                      loc: [12, 39, 12, 42],
-                      value: 105,
-                    },
-                  ],
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 12, column: 12 },
+                  end: { line: 12, column: 68 },
                 },
-                operatorToken: "+",
-                right: {
-                  kind: "()",
-                  loc: [12, 46, 12, 68],
-                  expression: {
-                    kind: ".",
-                    loc: [12, 46, 12, 66],
-                    expression: {
-                      kind: "bltn",
-                      loc: [12, 46, 12, 52],
-                      name: "String",
-                    },
-                    name: "fromCodePoint",
+                expression: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 12, column: 13 },
+                    end: { line: 12, column: 67 },
                   },
-                  arguments: [],
+                  operator: "+",
+                  left: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 12, column: 13 },
+                      end: { line: 12, column: 42 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 12, column: 13 },
+                        end: { line: 12, column: 33 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 13 },
+                          end: { line: 12, column: 19 },
+                        },
+                        name: "String",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 20 },
+                          end: { line: 12, column: 33 },
+                        },
+                        name: "fromCodePoint",
+                      },
+                      computed: false,
+                      optional: false,
+                    },
+                    arguments: [
+                      {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 34 },
+                          end: { line: 12, column: 36 },
+                        },
+                        value: 72,
+                      },
+                      {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 38 },
+                          end: { line: 12, column: 41 },
+                        },
+                        value: 105,
+                      },
+                    ],
+                    optional: false,
+                  },
+                  right: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 12, column: 45 },
+                      end: { line: 12, column: 67 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 12, column: 45 },
+                        end: { line: 12, column: 65 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 45 },
+                          end: { line: 12, column: 51 },
+                        },
+                        name: "String",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 52 },
+                          end: { line: 12, column: 65 },
+                        },
+                        name: "fromCodePoint",
+                      },
+                      computed: false,
+                      optional: false,
+                    },
+                    arguments: [],
+                    optional: false,
+                  },
                 },
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 12, column: 68 },
+                end: { line: 12, column: 75 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 12, column: 70 },
+                  end: { line: 12, column: 74 },
+                },
+                name: "span",
+              },
+            },
           },
         },
       ],

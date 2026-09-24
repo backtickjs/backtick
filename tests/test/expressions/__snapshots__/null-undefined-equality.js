@@ -8,7 +8,7 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [9, 33, 9, 50],
+          { start: { line: 9, column: 32 }, end: { line: 9, column: 49 } },
           {
             version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
@@ -17,16 +17,27 @@ describe("null and undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "binop",
-            loc: [9, 36, 9, 49],
-            left: {
-              kind: "null",
-              loc: [9, 36, 9, 40],
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 9, column: 35 },
+              end: { line: 9, column: 48 },
             },
-            operatorToken: "===",
+            operator: "===",
+            left: {
+              type: "Literal",
+              loc: {
+                start: { line: 9, column: 35 },
+                end: { line: 9, column: 39 },
+              },
+              value: null,
+            },
             right: {
-              kind: "null",
-              loc: [9, 45, 9, 49],
+              type: "Literal",
+              loc: {
+                start: { line: 9, column: 44 },
+                end: { line: 9, column: 48 },
+              },
+              value: null,
             },
           }),
         ),
@@ -36,7 +47,7 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [10, 33, 10, 60],
+          { start: { line: 10, column: 32 }, end: { line: 10, column: 59 } },
           {
             version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
@@ -45,16 +56,27 @@ describe("null and undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "binop",
-            loc: [10, 36, 10, 59],
-            left: {
-              kind: "undefined",
-              loc: [10, 36, 10, 45],
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 10, column: 35 },
+              end: { line: 10, column: 58 },
             },
-            operatorToken: "===",
+            operator: "===",
+            left: {
+              type: "Identifier",
+              loc: {
+                start: { line: 10, column: 35 },
+                end: { line: 10, column: 44 },
+              },
+              name: "undefined",
+            },
             right: {
-              kind: "undefined",
-              loc: [10, 50, 10, 59],
+              type: "Identifier",
+              loc: {
+                start: { line: 10, column: 49 },
+                end: { line: 10, column: 58 },
+              },
+              name: "undefined",
             },
           }),
         ),
@@ -66,7 +88,7 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [14, 33, 14, 55],
+          { start: { line: 14, column: 32 }, end: { line: 14, column: 54 } },
           {
             version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
@@ -75,16 +97,27 @@ describe("null and undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "binop",
-            loc: [14, 36, 14, 54],
-            left: {
-              kind: "null",
-              loc: [14, 36, 14, 40],
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 14, column: 35 },
+              end: { line: 14, column: 53 },
             },
-            operatorToken: "!==",
+            operator: "!==",
+            left: {
+              type: "Literal",
+              loc: {
+                start: { line: 14, column: 35 },
+                end: { line: 14, column: 39 },
+              },
+              value: null,
+            },
             right: {
-              kind: "undefined",
-              loc: [14, 45, 14, 54],
+              type: "Identifier",
+              loc: {
+                start: { line: 14, column: 44 },
+                end: { line: 14, column: 53 },
+              },
+              name: "undefined",
             },
           }),
         ),
@@ -94,7 +127,7 @@ describe("null and undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [15, 33, 15, 55],
+          { start: { line: 15, column: 32 }, end: { line: 15, column: 54 } },
           {
             version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
@@ -103,16 +136,27 @@ describe("null and undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "binop",
-            loc: [15, 36, 15, 54],
-            left: {
-              kind: "null",
-              loc: [15, 36, 15, 40],
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 15, column: 35 },
+              end: { line: 15, column: 53 },
             },
-            operatorToken: "===",
+            operator: "===",
+            left: {
+              type: "Literal",
+              loc: {
+                start: { line: 15, column: 35 },
+                end: { line: 15, column: 39 },
+              },
+              value: null,
+            },
             right: {
-              kind: "undefined",
-              loc: [15, 45, 15, 54],
+              type: "Identifier",
+              loc: {
+                start: { line: 15, column: 44 },
+                end: { line: 15, column: 53 },
+              },
+              name: "undefined",
             },
           }),
         ),
@@ -128,7 +172,7 @@ describe("null and undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          [24, 22, 34, 9],
+          { start: { line: 24, column: 21 }, end: { line: 34, column: 8 } },
           {
             version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
@@ -140,139 +184,246 @@ describe("null and undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "{}",
-            loc: [24, 25, 34, 8],
-            statements: [
+            type: "BlockStatement",
+            loc: {
+              start: { line: 24, column: 24 },
+              end: { line: 34, column: 7 },
+            },
+            body: [
               {
+                type: "VariableDeclaration",
+                loc: {
+                  start: { line: 25, column: 8 },
+                  end: { line: 25, column: 28 },
+                },
                 kind: "const",
-                loc: [25, 9, 25, 29],
-                name: {
-                  kind: "id",
-                  loc: [25, 15, 25, 20],
-                  text: "names",
-                  bindingKey: "names$3265muyjx857r$0",
-                },
-                initializer: {
-                  kind: "arr",
-                  loc: [25, 23, 25, 28],
-                  elements: [
-                    {
-                      kind: "string",
-                      loc: [25, 24, 25, 27],
-                      text: "a",
+                declarations: [
+                  {
+                    type: "VariableDeclarator",
+                    loc: {
+                      start: { line: 25, column: 14 },
+                      end: { line: 25, column: 27 },
                     },
-                  ],
-                },
+                    id: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 25, column: 14 },
+                        end: { line: 25, column: 19 },
+                      },
+                      name: "names",
+                      bindingKey: "names$3265muyjx857r$0",
+                    },
+                    init: {
+                      type: "ArrayExpression",
+                      loc: {
+                        start: { line: 25, column: 22 },
+                        end: { line: 25, column: 27 },
+                      },
+                      elements: [
+                        {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 25, column: 23 },
+                            end: { line: 25, column: 26 },
+                          },
+                          value: "a",
+                        },
+                      ],
+                    },
+                  },
+                ],
               },
               {
-                kind: "return",
-                loc: [26, 9, 33, 11],
-                expression: {
-                  kind: "arr",
-                  loc: [26, 16, 33, 10],
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 26, column: 8 },
+                  end: { line: 33, column: 10 },
+                },
+                argument: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 26, column: 15 },
+                    end: { line: 33, column: 9 },
+                  },
                   elements: [
                     {
-                      kind: "binop",
-                      loc: [27, 11, 27, 33],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 27, column: 10 },
+                        end: { line: 27, column: 32 },
+                      },
+                      operator: "===",
                       left: {
-                        kind: "splice",
-                        loc: [27, 11, 27, 19],
+                        type: "Splice",
+                        loc: {
+                          start: { line: 27, column: 10 },
+                          end: { line: 27, column: 18 },
+                        },
                         key: "$nothing",
                       },
-                      operatorToken: "===",
                       right: {
-                        kind: "undefined",
-                        loc: [27, 24, 27, 33],
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 27, column: 23 },
+                          end: { line: 27, column: 32 },
+                        },
+                        name: "undefined",
                       },
                     },
                     {
-                      kind: "binop",
-                      loc: [28, 11, 28, 28],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 28, column: 10 },
+                        end: { line: 28, column: 27 },
+                      },
+                      operator: "!==",
                       left: {
-                        kind: "splice",
-                        loc: [28, 11, 28, 19],
+                        type: "Splice",
+                        loc: {
+                          start: { line: 28, column: 10 },
+                          end: { line: 28, column: 18 },
+                        },
                         key: "$nothing",
                       },
-                      operatorToken: "!==",
                       right: {
-                        kind: "null",
-                        loc: [28, 24, 28, 28],
+                        type: "Literal",
+                        loc: {
+                          start: { line: 28, column: 23 },
+                          end: { line: 28, column: 27 },
+                        },
+                        value: null,
                       },
                     },
                     {
-                      kind: "binop",
-                      loc: [29, 11, 29, 26],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 29, column: 10 },
+                        end: { line: 29, column: 25 },
+                      },
+                      operator: "===",
                       left: {
-                        kind: "splice",
-                        loc: [29, 11, 29, 17],
+                        type: "Splice",
+                        loc: {
+                          start: { line: 29, column: 10 },
+                          end: { line: 29, column: 16 },
+                        },
                         key: "$empty",
                       },
-                      operatorToken: "===",
                       right: {
-                        kind: "null",
-                        loc: [29, 22, 29, 26],
+                        type: "Literal",
+                        loc: {
+                          start: { line: 29, column: 21 },
+                          end: { line: 29, column: 25 },
+                        },
+                        value: null,
                       },
                     },
                     {
-                      kind: "binop",
-                      loc: [30, 11, 30, 31],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 30, column: 10 },
+                        end: { line: 30, column: 30 },
+                      },
+                      operator: "!==",
                       left: {
-                        kind: "splice",
-                        loc: [30, 11, 30, 17],
+                        type: "Splice",
+                        loc: {
+                          start: { line: 30, column: 10 },
+                          end: { line: 30, column: 16 },
+                        },
                         key: "$empty",
                       },
-                      operatorToken: "!==",
                       right: {
-                        kind: "undefined",
-                        loc: [30, 22, 30, 31],
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 30, column: 21 },
+                          end: { line: 30, column: 30 },
+                        },
+                        name: "undefined",
                       },
                     },
                     {
-                      kind: "binop",
-                      loc: [31, 11, 31, 33],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 31, column: 10 },
+                        end: { line: 31, column: 32 },
+                      },
+                      operator: "===",
                       left: {
-                        kind: "[]",
-                        loc: [31, 11, 31, 19],
-                        expression: {
-                          kind: "id",
-                          loc: [31, 11, 31, 16],
-                          text: "names",
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 31, column: 10 },
+                          end: { line: 31, column: 18 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 31, column: 10 },
+                            end: { line: 31, column: 15 },
+                          },
+                          name: "names",
                           bindingKey: "names$3265muyjx857r$0",
                         },
-                        argumentExpression: {
-                          kind: "number",
-                          loc: [31, 17, 31, 18],
+                        property: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 31, column: 16 },
+                            end: { line: 31, column: 17 },
+                          },
                           value: 1,
                         },
+                        computed: true,
+                        optional: false,
                       },
-                      operatorToken: "===",
                       right: {
-                        kind: "undefined",
-                        loc: [31, 24, 31, 33],
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 31, column: 23 },
+                          end: { line: 31, column: 32 },
+                        },
+                        name: "undefined",
                       },
                     },
                     {
-                      kind: "binop",
-                      loc: [32, 11, 32, 28],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 32, column: 10 },
+                        end: { line: 32, column: 27 },
+                      },
+                      operator: "!==",
                       left: {
-                        kind: "[]",
-                        loc: [32, 11, 32, 19],
-                        expression: {
-                          kind: "id",
-                          loc: [32, 11, 32, 16],
-                          text: "names",
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 32, column: 10 },
+                          end: { line: 32, column: 18 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 32, column: 10 },
+                            end: { line: 32, column: 15 },
+                          },
+                          name: "names",
                           bindingKey: "names$3265muyjx857r$0",
                         },
-                        argumentExpression: {
-                          kind: "number",
-                          loc: [32, 17, 32, 18],
+                        property: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 32, column: 16 },
+                            end: { line: 32, column: 17 },
+                          },
                           value: 1,
                         },
+                        computed: true,
+                        optional: false,
                       },
-                      operatorToken: "!==",
                       right: {
-                        kind: "null",
-                        loc: [32, 24, 32, 28],
+                        type: "Literal",
+                        loc: {
+                          start: { line: 32, column: 23 },
+                          end: { line: 32, column: 27 },
+                        },
+                        value: null,
                       },
                     },
                   ],

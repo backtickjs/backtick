@@ -1,7 +1,9 @@
 import type * as ES from "estree";
 
-// The ESTree a bundle is built as, and the one place its conventions live:
-// how a name is written, how a literal escapes, and what `jsx` is handed.
+// The ESTree a script and a bundle are built as, and the one place their
+// conventions live: how a name is written, how a literal escapes, and what
+// `jsx` is handed. The compiler builds a script's body with these, and the
+// bundler what composes scripts.
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
@@ -9,10 +11,10 @@ const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 const NAME = /^[A-Za-z][A-Za-z0-9_:-]*$/;
 
 /**
- * What a bundle names, registered as it is built and named when it is
- * printed: a binding may have to be renamed away from a builtin or from what
- * the bundle itself names, and a label is numbered once every binding is
- * known.
+ * What a bundle names, registered as the bundler builds it and named when it
+ * is printed: a binding may have to be renamed away from a builtin or from
+ * what the bundle itself names, and a label is numbered once every binding is
+ * known. A script's own body is closed, so the compiler builds it without one.
  */
 export interface Names {
   readonly bindings: ES.Identifier[];
@@ -46,7 +48,7 @@ export function label(names: Names, key: string): ES.Identifier {
 // `eval` read as a value, so a call of it is indirect: a bundle closes over
 // nothing, and a direct call would hand it this one's scope.
 /** A builtin, read as the global of its name. */
-export function builtin(names: Names, name: string): ES.Expression {
+export function builtin(names: Names | null, name: string): ES.Expression {
   if (name === "eval") {
     return {
       type: "SequenceExpression",
@@ -56,18 +58,22 @@ export function builtin(names: Names, name: string): ES.Expression {
   if (!IDENTIFIER.test(name)) {
     return index(identifier("globalThis"), stringLiteral(name));
   }
-  names.builtins.add(name);
+  names?.builtins.add(name);
   return identifier(name);
 }
 
-// What only data can carry: a name that is not a plain one.
-function data(names: Names, value: string): ES.Expression {
+// What only data can carry: a name the host computed that is not a plain one.
+// A script's own names are its source, and are written as strings.
+function data(names: Names | null, value: string): ES.Expression {
+  if (names === null) {
+    return stringLiteral(value);
+  }
   names.data.push(value);
   return index(identifier("$d"), numberLiteral(names.data.length - 1));
 }
 
 /** A tag, as a string where it is a plain name and read from `data` otherwise. */
-export function tagName(names: Names, text: string): ES.Expression {
+export function tagName(names: Names | null, text: string): ES.Expression {
   return NAME.test(text) ? stringLiteral(text) : data(names, text);
 }
 
@@ -280,7 +286,7 @@ function child(node: ES.Expression): ES.Expression {
 // A prop's key: bare where it can be, a string where it is a plain name, and
 // read from `data` otherwise.
 function propKey(
-  names: Names,
+  names: Names | null,
   key: string,
 ): { key: ES.Expression; computed: boolean } {
   return IDENTIFIER.test(key)
@@ -297,7 +303,7 @@ function propKey(
  * nothing.
  */
 function props(
-  names: Names,
+  names: Names | null,
   written: readonly (readonly [string, ES.Expression])[],
   children: ES.Expression | null,
 ): ES.ObjectExpression {
@@ -328,7 +334,7 @@ function props(
 
 /** An element: `jsx(tag, props)`, or its children where it is a fragment. */
 export function jsxElement(
-  names: Names,
+  names: Names | null,
   tag: string,
   written: readonly (readonly [string, ES.Expression])[],
   children: ES.Expression | null,
@@ -346,7 +352,7 @@ export function jsxElement(
 
 /** A component: `jsx(component, props)`. */
 export function jsxComponent(
-  names: Names,
+  names: Names | null,
   component: ES.Expression,
   written: readonly (readonly [string, ES.Expression])[],
   children: ES.Expression | null,

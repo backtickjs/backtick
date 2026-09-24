@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // action's result. Discarding a value is a mistake; calling an action is
 // the point.
 const getValue = cs.create(
-  [6, 18, 8, 3],
+  { start: { line: 6, column: 17 }, end: { line: 8, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/discarded-value.test.tsx",
@@ -12,28 +12,32 @@ const getValue = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 21, 8, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 20 }, end: { line: 8, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [6, 27, 8, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 6, column: 26 }, end: { line: 8, column: 1 } },
+      body: [
         {
-          kind: "return",
-          loc: [7, 3, 7, 12],
-          expression: {
-            kind: "number",
-            loc: [7, 10, 7, 11],
+          type: "ReturnStatement",
+          loc: { start: { line: 7, column: 2 }, end: { line: 7, column: 11 } },
+          argument: {
+            type: "Literal",
+            loc: {
+              start: { line: 7, column: 9 },
+              end: { line: 7, column: 10 },
+            },
             value: 1,
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 const ping = cs.create(
-  [10, 14, 13, 3],
+  { start: { line: 10, column: 13 }, end: { line: 13, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/discarded-value.test.tsx",
@@ -42,50 +46,83 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [10, 17, 13, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 10, column: 16 }, end: { line: 13, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [10, 23, 13, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 10, column: 22 }, end: { line: 13, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 11, column: 2 },
+            end: { line: 11, column: 12 },
+          },
           kind: "let",
-          loc: [11, 3, 11, 13],
-          name: {
-            kind: "id",
-            loc: [11, 7, 11, 8],
-            text: "n",
-            bindingKey: "n$15c51klv9dnfh$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [11, 11, 11, 12],
-            value: 0,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 11, column: 6 },
+                end: { line: 11, column: 11 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 11, column: 6 },
+                  end: { line: 11, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$15c51klv9dnfh$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 11, column: 10 },
+                  end: { line: 11, column: 11 },
+                },
+                value: 0,
+              },
+            },
+          ],
         },
         {
-          kind: "binop",
-          loc: [12, 3, 12, 8],
-          left: {
-            kind: "id",
-            loc: [12, 3, 12, 4],
-            text: "n",
-            bindingKey: "n$15c51klv9dnfh$0",
-          },
-          operatorToken: "=",
-          right: {
-            kind: "number",
-            loc: [12, 7, 12, 8],
-            value: 1,
+          type: "ExpressionStatement",
+          loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 8 } },
+          expression: {
+            type: "AssignmentExpression",
+            loc: {
+              start: { line: 12, column: 2 },
+              end: { line: 12, column: 7 },
+            },
+            operator: "=",
+            left: {
+              type: "Identifier",
+              loc: {
+                start: { line: 12, column: 2 },
+                end: { line: 12, column: 3 },
+              },
+              name: "n",
+              bindingKey: "n$15c51klv9dnfh$0",
+            },
+            right: {
+              type: "Literal",
+              loc: {
+                start: { line: 12, column: 6 },
+                end: { line: 12, column: 7 },
+              },
+              value: 1,
+            },
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 const action = cs.create(
-  [15, 16, 19, 3],
+  { start: { line: 15, column: 15 }, end: { line: 19, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/discarded-value.test.tsx",
@@ -97,28 +134,47 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [15, 19, 19, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 15, column: 18 }, end: { line: 19, column: 1 } },
+    body: [
       {
-        kind: "()",
-        loc: [16, 3, 16, 10],
+        type: "ExpressionStatement",
+        loc: { start: { line: 16, column: 2 }, end: { line: 16, column: 10 } },
         expression: {
-          kind: "splice",
-          loc: [16, 3, 16, 8],
-          key: "$ping",
+          type: "CallExpression",
+          loc: { start: { line: 16, column: 2 }, end: { line: 16, column: 9 } },
+          callee: {
+            type: "Splice",
+            loc: {
+              start: { line: 16, column: 2 },
+              end: { line: 16, column: 7 },
+            },
+            key: "$ping",
+          },
+          arguments: [],
+          optional: false,
         },
-        arguments: [],
       },
       {
-        kind: "()",
-        loc: [18, 3, 18, 14],
+        type: "ExpressionStatement",
+        loc: { start: { line: 18, column: 2 }, end: { line: 18, column: 14 } },
         expression: {
-          kind: "splice",
-          loc: [18, 3, 18, 12],
-          key: "$getValue",
+          type: "CallExpression",
+          loc: {
+            start: { line: 18, column: 2 },
+            end: { line: 18, column: 13 },
+          },
+          callee: {
+            type: "Splice",
+            loc: {
+              start: { line: 18, column: 2 },
+              end: { line: 18, column: 11 },
+            },
+            key: "$getValue",
+          },
+          arguments: [],
+          optional: false,
         },
-        arguments: [],
       },
     ],
   }),
@@ -126,7 +182,7 @@ const action = cs.create(
 // The same rule in a script that returns: the position is what decides, so a
 // discarded value fails here too while the action beside it stands.
 const valued = cs.create(
-  [23, 16, 28, 3],
+  { start: { line: 23, column: 15 }, end: { line: 28, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/discarded-value.test.tsx",
@@ -138,35 +194,57 @@ const valued = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [23, 19, 28, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 23, column: 18 }, end: { line: 28, column: 1 } },
+    body: [
       {
-        kind: "()",
-        loc: [24, 3, 24, 10],
+        type: "ExpressionStatement",
+        loc: { start: { line: 24, column: 2 }, end: { line: 24, column: 10 } },
         expression: {
-          kind: "splice",
-          loc: [24, 3, 24, 8],
-          key: "$ping",
+          type: "CallExpression",
+          loc: { start: { line: 24, column: 2 }, end: { line: 24, column: 9 } },
+          callee: {
+            type: "Splice",
+            loc: {
+              start: { line: 24, column: 2 },
+              end: { line: 24, column: 7 },
+            },
+            key: "$ping",
+          },
+          arguments: [],
+          optional: false,
         },
-        arguments: [],
       },
       {
-        kind: "()",
-        loc: [26, 3, 26, 14],
+        type: "ExpressionStatement",
+        loc: { start: { line: 26, column: 2 }, end: { line: 26, column: 14 } },
         expression: {
-          kind: "splice",
-          loc: [26, 3, 26, 12],
-          key: "$getValue",
+          type: "CallExpression",
+          loc: {
+            start: { line: 26, column: 2 },
+            end: { line: 26, column: 13 },
+          },
+          callee: {
+            type: "Splice",
+            loc: {
+              start: { line: 26, column: 2 },
+              end: { line: 26, column: 11 },
+            },
+            key: "$getValue",
+          },
+          arguments: [],
+          optional: false,
         },
-        arguments: [],
       },
       {
-        kind: "return",
-        loc: [27, 3, 27, 12],
-        expression: {
-          kind: "number",
-          loc: [27, 10, 27, 11],
+        type: "ReturnStatement",
+        loc: { start: { line: 27, column: 2 }, end: { line: 27, column: 11 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 27, column: 9 },
+            end: { line: 27, column: 10 },
+          },
           value: 1,
         },
       },

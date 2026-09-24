@@ -10,7 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // are boolean by construction and need no check.
 const flags = {
   strict: cs.create(
-    [12, 25, 12, 33],
+    { start: { line: 12, column: 24 }, end: { line: 12, column: 32 } },
     {
       version: "0.0.0",
       filePath: "expressions/condition-narrowing.test.tsx",
@@ -19,13 +19,14 @@ const flags = {
       captures: [],
     },
     () => ({
-      kind: "true",
-      loc: [12, 28, 12, 32],
+      type: "Literal",
+      loc: { start: { line: 12, column: 27 }, end: { line: 12, column: 31 } },
+      value: true,
     }),
   ),
 };
 const label = cs.create(
-  [14, 72, 25, 3],
+  { start: { line: 14, column: 71 }, end: { line: 25, column: 2 } },
   {
     version: "0.0.0",
     filePath: "expressions/condition-narrowing.test.tsx",
@@ -34,201 +35,316 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [14, 75, 25, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 14, column: 74 }, end: { line: 25, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [15, 3, 15, 22],
-        name: {
-          kind: "id",
-          loc: [15, 3, 15, 7],
-          text: "text",
-          bindingKey: "text$2dyt2z4zc0eux$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 15, column: 2 }, end: { line: 15, column: 6 } },
+        name: "text",
+        bindingKey: "text$2dyt2z4zc0eux$0",
       },
       {
-        kind: "param",
-        loc: [16, 3, 16, 17],
-        name: {
-          kind: "id",
-          loc: [16, 3, 16, 8],
-          text: "upper",
-          bindingKey: "upper$2dyt2z4zc0eux$1",
-        },
+        type: "Identifier",
+        loc: { start: { line: 16, column: 2 }, end: { line: 16, column: 7 } },
+        name: "upper",
+        bindingKey: "upper$2dyt2z4zc0eux$1",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [17, 6, 25, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 17, column: 5 }, end: { line: 25, column: 1 } },
+      body: [
         {
-          kind: "if",
-          loc: [18, 3, 20, 4],
-          expression: {
-            kind: "binop",
-            loc: [18, 7, 18, 29],
+          type: "IfStatement",
+          loc: { start: { line: 18, column: 2 }, end: { line: 20, column: 3 } },
+          test: {
+            type: "LogicalExpression",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 28 },
+            },
+            operator: "&&",
             left: {
-              kind: "id",
-              loc: [18, 7, 18, 12],
-              text: "upper",
+              type: "Identifier",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 18, column: 11 },
+              },
+              name: "upper",
               bindingKey: "upper$2dyt2z4zc0eux$1",
             },
-            operatorToken: "&&",
             right: {
-              kind: "binop",
-              loc: [18, 16, 18, 29],
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 18, column: 15 },
+                end: { line: 18, column: 28 },
+              },
+              operator: "!==",
               left: {
-                kind: "id",
-                loc: [18, 16, 18, 20],
-                text: "text",
+                type: "Identifier",
+                loc: {
+                  start: { line: 18, column: 15 },
+                  end: { line: 18, column: 19 },
+                },
+                name: "text",
                 bindingKey: "text$2dyt2z4zc0eux$0",
               },
-              operatorToken: "!==",
               right: {
-                kind: "null",
-                loc: [18, 25, 18, 29],
+                type: "Literal",
+                loc: {
+                  start: { line: 18, column: 24 },
+                  end: { line: 18, column: 28 },
+                },
+                value: null,
               },
             },
           },
-          thenStatement: {
-            kind: "{}",
-            loc: [18, 31, 20, 4],
-            statements: [
+          consequent: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 18, column: 30 },
+              end: { line: 20, column: 3 },
+            },
+            body: [
               {
-                kind: "return",
-                loc: [19, 5, 19, 31],
-                expression: {
-                  kind: "()",
-                  loc: [19, 12, 19, 30],
-                  expression: {
-                    kind: ".",
-                    loc: [19, 12, 19, 28],
-                    expression: {
-                      kind: "id",
-                      loc: [19, 12, 19, 16],
-                      text: "text",
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 19, column: 4 },
+                  end: { line: 19, column: 30 },
+                },
+                argument: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 19, column: 11 },
+                    end: { line: 19, column: 29 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 19, column: 11 },
+                      end: { line: 19, column: 27 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 11 },
+                        end: { line: 19, column: 15 },
+                      },
+                      name: "text",
                       bindingKey: "text$2dyt2z4zc0eux$0",
                     },
-                    name: "toUpperCase",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 16 },
+                        end: { line: 19, column: 27 },
+                      },
+                      name: "toUpperCase",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [],
+                  optional: false,
                 },
               },
             ],
           },
-          elseStatement: null,
+          alternate: null,
         },
         {
-          kind: "if",
-          loc: [21, 3, 23, 4],
-          expression: {
-            kind: "binop",
-            loc: [21, 7, 21, 65],
+          type: "IfStatement",
+          loc: { start: { line: 21, column: 2 }, end: { line: 23, column: 3 } },
+          test: {
+            type: "LogicalExpression",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 64 },
+            },
+            operator: "&&",
             left: {
-              kind: "binop",
-              loc: [21, 7, 21, 39],
+              type: "LogicalExpression",
+              loc: {
+                start: { line: 21, column: 6 },
+                end: { line: 21, column: 38 },
+              },
+              operator: "&&",
               left: {
-                kind: "splice",
-                loc: [21, 7, 21, 22],
+                type: "Splice",
+                loc: {
+                  start: { line: 21, column: 6 },
+                  end: { line: 21, column: 21 },
+                },
                 key: "$0splice0",
               },
-              operatorToken: "&&",
               right: {
-                kind: "binop",
-                loc: [21, 26, 21, 39],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 21, column: 25 },
+                  end: { line: 21, column: 38 },
+                },
+                operator: "!==",
                 left: {
-                  kind: "id",
-                  loc: [21, 26, 21, 30],
-                  text: "text",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 25 },
+                    end: { line: 21, column: 29 },
+                  },
+                  name: "text",
                   bindingKey: "text$2dyt2z4zc0eux$0",
                 },
-                operatorToken: "!==",
                 right: {
-                  kind: "null",
-                  loc: [21, 35, 21, 39],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 21, column: 34 },
+                    end: { line: 21, column: 38 },
+                  },
+                  value: null,
                 },
               },
             },
-            operatorToken: "&&",
             right: {
-              kind: "binop",
-              loc: [21, 43, 21, 65],
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 21, column: 42 },
+                end: { line: 21, column: 64 },
+              },
+              operator: "===",
               left: {
-                kind: "()",
-                loc: [21, 43, 21, 57],
-                expression: {
-                  kind: ".",
-                  loc: [21, 43, 21, 54],
-                  expression: {
-                    kind: "id",
-                    loc: [21, 43, 21, 47],
-                    text: "text",
+                type: "CallExpression",
+                loc: {
+                  start: { line: 21, column: 42 },
+                  end: { line: 21, column: 56 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 21, column: 42 },
+                    end: { line: 21, column: 53 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 21, column: 42 },
+                      end: { line: 21, column: 46 },
+                    },
+                    name: "text",
                     bindingKey: "text$2dyt2z4zc0eux$0",
                   },
-                  name: "charAt",
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 21, column: 47 },
+                      end: { line: 21, column: 53 },
+                    },
+                    name: "charAt",
+                  },
+                  computed: false,
+                  optional: false,
                 },
                 arguments: [
                   {
-                    kind: "number",
-                    loc: [21, 55, 21, 56],
+                    type: "Literal",
+                    loc: {
+                      start: { line: 21, column: 54 },
+                      end: { line: 21, column: 55 },
+                    },
                     value: 0,
                   },
                 ],
+                optional: false,
               },
-              operatorToken: "===",
               right: {
-                kind: "string",
-                loc: [21, 62, 21, 65],
-                text: "!",
+                type: "Literal",
+                loc: {
+                  start: { line: 21, column: 61 },
+                  end: { line: 21, column: 64 },
+                },
+                value: "!",
               },
             },
           },
-          thenStatement: {
-            kind: "{}",
-            loc: [21, 67, 23, 4],
-            statements: [
+          consequent: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 21, column: 66 },
+              end: { line: 23, column: 3 },
+            },
+            body: [
               {
-                kind: "return",
-                loc: [22, 5, 22, 29],
-                expression: {
-                  kind: "()",
-                  loc: [22, 12, 22, 28],
-                  expression: {
-                    kind: ".",
-                    loc: [22, 12, 22, 23],
-                    expression: {
-                      kind: "id",
-                      loc: [22, 12, 22, 16],
-                      text: "text",
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 22, column: 4 },
+                  end: { line: 22, column: 28 },
+                },
+                argument: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 22, column: 11 },
+                    end: { line: 22, column: 27 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 22, column: 11 },
+                      end: { line: 22, column: 22 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 11 },
+                        end: { line: 22, column: 15 },
+                      },
+                      name: "text",
                       bindingKey: "text$2dyt2z4zc0eux$0",
                     },
-                    name: "concat",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 16 },
+                        end: { line: 22, column: 22 },
+                      },
+                      name: "concat",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "string",
-                      loc: [22, 24, 22, 27],
-                      text: "?",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 22, column: 23 },
+                        end: { line: 22, column: 26 },
+                      },
+                      value: "?",
                     },
                   ],
+                  optional: false,
                 },
               },
             ],
           },
-          elseStatement: null,
+          alternate: null,
         },
         {
-          kind: "return",
-          loc: [24, 3, 24, 17],
-          expression: {
-            kind: "string",
-            loc: [24, 10, 24, 16],
-            text: "none",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 24, column: 2 },
+            end: { line: 24, column: 16 },
+          },
+          argument: {
+            type: "Literal",
+            loc: {
+              start: { line: 24, column: 9 },
+              end: { line: 24, column: 15 },
+            },
+            value: "none",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("conditionNarrowing", async (t) => {
@@ -236,7 +352,7 @@ it("conditionNarrowing", async (t) => {
     t,
     "conditionNarrowing",
     cs.create(
-      [31, 5, 36, 8],
+      { start: { line: 31, column: 4 }, end: { line: 36, column: 7 } },
       {
         version: "0.0.0",
         filePath: "expressions/condition-narrowing.test.tsx",
@@ -245,123 +361,220 @@ it("conditionNarrowing", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [31, 9, 36, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 31, column: 8 }, end: { line: 36, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [32, 7, 32, 34],
-            name: {
-              kind: "string",
-              loc: [32, 7, 32, 14],
-              text: "missing",
+            type: "Property",
+            loc: {
+              start: { line: 32, column: 6 },
+              end: { line: 32, column: 33 },
             },
-            initializer: {
-              kind: "()",
-              loc: [32, 16, 32, 34],
-              expression: {
-                kind: "splice",
-                loc: [32, 16, 32, 22],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 32, column: 6 },
+                end: { line: 32, column: 13 },
+              },
+              name: "missing",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 32, column: 15 },
+                end: { line: 32, column: 33 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 32, column: 15 },
+                  end: { line: 32, column: 21 },
+                },
                 key: "$label",
               },
               arguments: [
                 {
-                  kind: "null",
-                  loc: [32, 23, 32, 27],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 32, column: 22 },
+                    end: { line: 32, column: 26 },
+                  },
+                  value: null,
                 },
                 {
-                  kind: "true",
-                  loc: [32, 29, 32, 33],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 32, column: 28 },
+                    end: { line: 32, column: 32 },
+                  },
+                  value: true,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [33, 7, 33, 32],
-            name: {
-              kind: "string",
-              loc: [33, 7, 33, 11],
-              text: "loud",
+            type: "Property",
+            loc: {
+              start: { line: 33, column: 6 },
+              end: { line: 33, column: 31 },
             },
-            initializer: {
-              kind: "()",
-              loc: [33, 13, 33, 32],
-              expression: {
-                kind: "splice",
-                loc: [33, 13, 33, 19],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 33, column: 6 },
+                end: { line: 33, column: 10 },
+              },
+              name: "loud",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 33, column: 12 },
+                end: { line: 33, column: 31 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 33, column: 12 },
+                  end: { line: 33, column: 18 },
+                },
                 key: "$label",
               },
               arguments: [
                 {
-                  kind: "string",
-                  loc: [33, 20, 33, 25],
-                  text: "!hi",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 33, column: 19 },
+                    end: { line: 33, column: 24 },
+                  },
+                  value: "!hi",
                 },
                 {
-                  kind: "true",
-                  loc: [33, 27, 33, 31],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 33, column: 26 },
+                    end: { line: 33, column: 30 },
+                  },
+                  value: true,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [34, 7, 34, 34],
-            name: {
-              kind: "string",
-              loc: [34, 7, 34, 12],
-              text: "quiet",
+            type: "Property",
+            loc: {
+              start: { line: 34, column: 6 },
+              end: { line: 34, column: 33 },
             },
-            initializer: {
-              kind: "()",
-              loc: [34, 14, 34, 34],
-              expression: {
-                kind: "splice",
-                loc: [34, 14, 34, 20],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 34, column: 6 },
+                end: { line: 34, column: 11 },
+              },
+              name: "quiet",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 34, column: 13 },
+                end: { line: 34, column: 33 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 34, column: 13 },
+                  end: { line: 34, column: 19 },
+                },
                 key: "$label",
               },
               arguments: [
                 {
-                  kind: "string",
-                  loc: [34, 21, 34, 26],
-                  text: "!hi",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 34, column: 20 },
+                    end: { line: 34, column: 25 },
+                  },
+                  value: "!hi",
                 },
                 {
-                  kind: "false",
-                  loc: [34, 28, 34, 33],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 34, column: 27 },
+                    end: { line: 34, column: 32 },
+                  },
+                  value: false,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [35, 7, 35, 33],
-            name: {
-              kind: "string",
-              loc: [35, 7, 35, 12],
-              text: "plain",
+            type: "Property",
+            loc: {
+              start: { line: 35, column: 6 },
+              end: { line: 35, column: 32 },
             },
-            initializer: {
-              kind: "()",
-              loc: [35, 14, 35, 33],
-              expression: {
-                kind: "splice",
-                loc: [35, 14, 35, 20],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 35, column: 6 },
+                end: { line: 35, column: 11 },
+              },
+              name: "plain",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 35, column: 13 },
+                end: { line: 35, column: 32 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 35, column: 13 },
+                  end: { line: 35, column: 19 },
+                },
                 key: "$label",
               },
               arguments: [
                 {
-                  kind: "string",
-                  loc: [35, 21, 35, 25],
-                  text: "zz",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 35, column: 20 },
+                    end: { line: 35, column: 24 },
+                  },
+                  value: "zz",
                 },
                 {
-                  kind: "false",
-                  loc: [35, 27, 35, 32],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 35, column: 26 },
+                    end: { line: 35, column: 31 },
+                  },
+                  value: false,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

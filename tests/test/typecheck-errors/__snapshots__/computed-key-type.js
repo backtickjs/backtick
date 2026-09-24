@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // that isn't JavaScript has no such conversion to agree on.
 // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'string'.
 export default cs.create(
-  [6, 16, 6, 53],
+  { start: { line: 6, column: 15 }, end: { line: 6, column: 52 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/computed-key-type.test.tsx",
@@ -12,40 +12,47 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 19, 6, 52],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 18 }, end: { line: 6, column: 51 } },
+    params: [
       {
-        kind: "param",
-        loc: [6, 20, 6, 30],
-        name: {
-          kind: "id",
-          loc: [6, 20, 6, 22],
-          text: "at",
-          bindingKey: "at$zs52vif1gagd$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 6, column: 19 }, end: { line: 6, column: 21 } },
+        name: "at",
+        bindingKey: "at$zs52vif1gagd$0",
       },
     ],
     body: {
-      kind: "obj",
-      loc: [6, 36, 6, 51],
+      type: "ObjectExpression",
+      loc: { start: { line: 6, column: 35 }, end: { line: 6, column: 50 } },
       properties: [
         {
-          kind: ":",
-          loc: [6, 38, 6, 49],
-          name: {
-            kind: "id",
-            loc: [6, 39, 6, 41],
-            text: "at",
+          type: "Property",
+          loc: { start: { line: 6, column: 37 }, end: { line: 6, column: 48 } },
+          key: {
+            type: "Identifier",
+            loc: {
+              start: { line: 6, column: 38 },
+              end: { line: 6, column: 40 },
+            },
+            name: "at",
             bindingKey: "at$zs52vif1gagd$0",
           },
-          initializer: {
-            kind: "string",
-            loc: [6, 44, 6, 49],
-            text: "one",
+          value: {
+            type: "Literal",
+            loc: {
+              start: { line: 6, column: 43 },
+              end: { line: 6, column: 48 },
+            },
+            value: "one",
           },
+          kind: "init",
+          computed: true,
+          method: false,
+          shorthand: false,
         },
       ],
     },
+    expression: true,
   }),
 );

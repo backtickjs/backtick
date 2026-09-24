@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // effectful call belongs in an action block, cs`{ $ping(); }`, and an
 // action composes as cs`{ $action; }`, never as the expression itself.
 const ping = cs.create(
-  [6, 14, 8, 3],
+  { start: { line: 6, column: 13 }, end: { line: 8, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-call-script.test.tsx",
@@ -12,34 +12,51 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 17, 8, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 16 }, end: { line: 8, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [6, 23, 8, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 6, column: 22 }, end: { line: 8, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 7, column: 2 }, end: { line: 7, column: 14 } },
           kind: "const",
-          loc: [7, 3, 7, 15],
-          name: {
-            kind: "id",
-            loc: [7, 9, 7, 10],
-            text: "x",
-            bindingKey: "x$3513dvlaj30qa$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [7, 13, 7, 14],
-            value: 1,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 7, column: 8 },
+                end: { line: 7, column: 13 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 7, column: 8 },
+                  end: { line: 7, column: 9 },
+                },
+                name: "x",
+                bindingKey: "x$3513dvlaj30qa$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 7, column: 12 },
+                  end: { line: 7, column: 13 },
+                },
+                value: 1,
+              },
+            },
+          ],
         },
       ],
     },
+    expression: false,
   }),
 );
 export const called = cs.create(
-  [10, 23, 10, 34],
+  { start: { line: 10, column: 22 }, end: { line: 10, column: 33 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-call-script.test.tsx",
@@ -48,18 +65,19 @@ export const called = cs.create(
     captures: [],
   },
   () => ({
-    kind: "()",
-    loc: [10, 26, 10, 33],
-    expression: {
-      kind: "splice",
-      loc: [10, 26, 10, 31],
+    type: "CallExpression",
+    loc: { start: { line: 10, column: 25 }, end: { line: 10, column: 32 } },
+    callee: {
+      type: "Splice",
+      loc: { start: { line: 10, column: 25 }, end: { line: 10, column: 30 } },
       key: "$ping",
     },
     arguments: [],
+    optional: false,
   }),
 );
 const action = cs.create(
-  [12, 16, 14, 3],
+  { start: { line: 12, column: 15 }, end: { line: 14, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-call-script.test.tsx",
@@ -68,30 +86,46 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [12, 19, 14, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 12, column: 18 }, end: { line: 14, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 13, column: 2 }, end: { line: 13, column: 14 } },
         kind: "const",
-        loc: [13, 3, 13, 15],
-        name: {
-          kind: "id",
-          loc: [13, 9, 13, 10],
-          text: "x",
-          bindingKey: "x$3513dvlaj30qa$1",
-        },
-        initializer: {
-          kind: "number",
-          loc: [13, 13, 13, 14],
-          value: 1,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 13, column: 8 },
+              end: { line: 13, column: 13 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 13, column: 8 },
+                end: { line: 13, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$3513dvlaj30qa$1",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 13, column: 12 },
+                end: { line: 13, column: 13 },
+              },
+              value: 1,
+            },
+          },
+        ],
       },
     ],
   }),
 );
 // @ts-expect-error: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
 export const spliced = cs.create(
-  [17, 24, 17, 35],
+  { start: { line: 17, column: 23 }, end: { line: 17, column: 34 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-call-script.test.tsx",
@@ -100,8 +134,8 @@ export const spliced = cs.create(
     captures: [],
   },
   () => ({
-    kind: "splice",
-    loc: [17, 27, 17, 34],
+    type: "Splice",
+    loc: { start: { line: 17, column: 26 }, end: { line: 17, column: 33 } },
     key: "$action",
   }),
 );

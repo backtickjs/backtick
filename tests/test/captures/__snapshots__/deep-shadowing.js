@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function outerBase(inner) {
   return cs.create(
-    [7, 10, 10, 5],
+    { start: { line: 7, column: 9 }, end: { line: 10, column: 4 } },
     {
       version: "0.0.0",
       filePath: "captures/deep-shadowing.test.tsx",
@@ -12,40 +12,65 @@ function outerBase(inner) {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [7, 13, 10, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 7, column: 12 }, end: { line: 10, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 8, column: 4 }, end: { line: 8, column: 19 } },
           kind: "const",
-          loc: [8, 5, 8, 20],
-          name: {
-            kind: "id",
-            loc: [8, 11, 8, 15],
-            text: "base",
-            bindingKey: "base$8up2nb5o0inm$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [8, 18, 8, 19],
-            value: 1,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 8, column: 10 },
+                end: { line: 8, column: 18 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 8, column: 10 },
+                  end: { line: 8, column: 14 },
+                },
+                name: "base",
+                bindingKey: "base$8up2nb5o0inm$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 8, column: 17 },
+                  end: { line: 8, column: 18 },
+                },
+                value: 1,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [9, 5, 9, 40],
-          expression: {
-            kind: "binop",
-            loc: [9, 12, 9, 39],
+          type: "ReturnStatement",
+          loc: { start: { line: 9, column: 4 }, end: { line: 9, column: 39 } },
+          argument: {
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 9, column: 11 },
+              end: { line: 9, column: 38 },
+            },
+            operator: "+",
             left: {
-              kind: "id",
-              loc: [9, 12, 9, 16],
-              text: "base",
+              type: "Identifier",
+              loc: {
+                start: { line: 9, column: 11 },
+                end: { line: 9, column: 15 },
+              },
+              name: "base",
               bindingKey: "base$8up2nb5o0inm$0",
             },
-            operatorToken: "+",
             right: {
-              kind: "splice",
-              loc: [9, 19, 9, 39],
+              type: "Splice",
+              loc: {
+                start: { line: 9, column: 18 },
+                end: { line: 9, column: 38 },
+              },
               key: "$0splice0",
             },
           },
@@ -56,7 +81,7 @@ function outerBase(inner) {
 }
 function middleBase(inner) {
   return cs.create(
-    [14, 10, 17, 5],
+    { start: { line: 14, column: 9 }, end: { line: 17, column: 4 } },
     {
       version: "0.0.0",
       filePath: "captures/deep-shadowing.test.tsx",
@@ -65,40 +90,71 @@ function middleBase(inner) {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [14, 13, 17, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 14, column: 12 }, end: { line: 17, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 15, column: 4 },
+            end: { line: 15, column: 19 },
+          },
           kind: "const",
-          loc: [15, 5, 15, 20],
-          name: {
-            kind: "id",
-            loc: [15, 11, 15, 15],
-            text: "base",
-            bindingKey: "base$8up2nb5o0inm$1",
-          },
-          initializer: {
-            kind: "number",
-            loc: [15, 18, 15, 19],
-            value: 2,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 15, column: 10 },
+                end: { line: 15, column: 18 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 10 },
+                  end: { line: 15, column: 14 },
+                },
+                name: "base",
+                bindingKey: "base$8up2nb5o0inm$1",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 15, column: 17 },
+                  end: { line: 15, column: 18 },
+                },
+                value: 2,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [16, 5, 16, 26],
-          expression: {
-            kind: "binop",
-            loc: [16, 12, 16, 25],
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 16, column: 4 },
+            end: { line: 16, column: 25 },
+          },
+          argument: {
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 16, column: 11 },
+              end: { line: 16, column: 24 },
+            },
+            operator: "*",
             left: {
-              kind: "id",
-              loc: [16, 12, 16, 16],
-              text: "base",
+              type: "Identifier",
+              loc: {
+                start: { line: 16, column: 11 },
+                end: { line: 16, column: 15 },
+              },
+              name: "base",
               bindingKey: "base$8up2nb5o0inm$1",
             },
-            operatorToken: "*",
             right: {
-              kind: "splice",
-              loc: [16, 19, 16, 25],
+              type: "Splice",
+              loc: {
+                start: { line: 16, column: 18 },
+                end: { line: 16, column: 24 },
+              },
               key: "$inner",
             },
           },
@@ -116,7 +172,7 @@ it("deepShadowing", async (t) => {
     t,
     "deepShadowing",
     cs.create(
-      [28, 5, 31, 7],
+      { start: { line: 28, column: 4 }, end: { line: 31, column: 6 } },
       {
         version: "0.0.0",
         filePath: "captures/deep-shadowing.test.tsx",
@@ -125,7 +181,10 @@ it("deepShadowing", async (t) => {
           $0splice0: {
             value: outerBase(
               cs.create(
-                [30, 26, 30, 34],
+                {
+                  start: { line: 30, column: 25 },
+                  end: { line: 30, column: 33 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "captures/deep-shadowing.test.tsx",
@@ -134,9 +193,12 @@ it("deepShadowing", async (t) => {
                   captures: ["base$8up2nb5o0inm$2"],
                 },
                 () => ({
-                  kind: "id",
-                  loc: [30, 29, 30, 33],
-                  text: "base",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 30, column: 28 },
+                    end: { line: 30, column: 32 },
+                  },
+                  name: "base",
                   bindingKey: "base$8up2nb5o0inm$2",
                 }),
               ),
@@ -147,30 +209,55 @@ it("deepShadowing", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [28, 8, 31, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 28, column: 7 }, end: { line: 31, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 22 },
+            },
             kind: "const",
-            loc: [29, 7, 29, 23],
-            name: {
-              kind: "id",
-              loc: [29, 13, 29, 17],
-              text: "base",
-              bindingKey: "base$8up2nb5o0inm$2",
-            },
-            initializer: {
-              kind: "number",
-              loc: [29, 20, 29, 22],
-              value: 10,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 29, column: 12 },
+                  end: { line: 29, column: 21 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 29, column: 12 },
+                    end: { line: 29, column: 16 },
+                  },
+                  name: "base",
+                  bindingKey: "base$8up2nb5o0inm$2",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 29, column: 19 },
+                    end: { line: 29, column: 21 },
+                  },
+                  value: 10,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [30, 7, 30, 37],
-            expression: {
-              kind: "splice",
-              loc: [30, 14, 30, 36],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 30, column: 6 },
+              end: { line: 30, column: 36 },
+            },
+            argument: {
+              type: "Splice",
+              loc: {
+                start: { line: 30, column: 13 },
+                end: { line: 30, column: 35 },
+              },
               key: "$0splice0",
             },
           },

@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // One answers a string; the other a drawing, handed its props as a value.
 const greet = await bundler.run(
   cs.create(
-    [8, 33, 8, 70],
+    { start: { line: 8, column: 32 }, end: { line: 8, column: 69 } },
     {
       version: "0.0.0",
       filePath: "eval/eval-function.test.tsx",
@@ -15,42 +15,39 @@ const greet = await bundler.run(
       captures: [],
     },
     () => ({
-      kind: "=>",
-      loc: [8, 36, 8, 69],
-      parameters: [
+      type: "ArrowFunctionExpression",
+      loc: { start: { line: 8, column: 35 }, end: { line: 8, column: 68 } },
+      params: [
         {
-          kind: "param",
-          loc: [8, 37, 8, 49],
-          name: {
-            kind: "id",
-            loc: [8, 37, 8, 41],
-            text: "name",
-            bindingKey: "name$1061hn7xljcgj$0",
-          },
+          type: "Identifier",
+          loc: { start: { line: 8, column: 36 }, end: { line: 8, column: 40 } },
+          name: "name",
+          bindingKey: "name$1061hn7xljcgj$0",
         },
       ],
       body: {
-        kind: "binop",
-        loc: [8, 54, 8, 69],
+        type: "BinaryExpression",
+        loc: { start: { line: 8, column: 53 }, end: { line: 8, column: 68 } },
+        operator: "+",
         left: {
-          kind: "string",
-          loc: [8, 54, 8, 62],
-          text: "hello ",
+          type: "Literal",
+          loc: { start: { line: 8, column: 53 }, end: { line: 8, column: 61 } },
+          value: "hello ",
         },
-        operatorToken: "+",
         right: {
-          kind: "id",
-          loc: [8, 65, 8, 69],
-          text: "name",
+          type: "Identifier",
+          loc: { start: { line: 8, column: 64 }, end: { line: 8, column: 68 } },
+          name: "name",
           bindingKey: "name$1061hn7xljcgj$0",
         },
       },
+      expression: true,
     }),
   ),
 );
 const badge = await bundler.run(
   cs.create(
-    [11, 3, 11, 68],
+    { start: { line: 11, column: 2 }, end: { line: 11, column: 67 } },
     {
       version: "0.0.0",
       filePath: "eval/eval-function.test.tsx",
@@ -59,53 +56,107 @@ const badge = await bundler.run(
       captures: [],
     },
     () => ({
-      kind: "=>",
-      loc: [11, 6, 11, 67],
-      parameters: [
+      type: "ArrowFunctionExpression",
+      loc: { start: { line: 11, column: 5 }, end: { line: 11, column: 66 } },
+      params: [
         {
-          kind: "param",
-          loc: [11, 7, 11, 31],
-          name: {
-            kind: "id",
-            loc: [11, 7, 11, 12],
-            text: "props",
-            bindingKey: "props$1061hn7xljcgj$1",
+          type: "Identifier",
+          loc: {
+            start: { line: 11, column: 6 },
+            end: { line: 11, column: 11 },
           },
+          name: "props",
+          bindingKey: "props$1061hn7xljcgj$1",
         },
       ],
       body: {
-        kind: "jsx",
-        loc: [11, 36, 11, 67],
-        type: {
-          kind: "string",
-          loc: [11, 37, 11, 38],
-          text: "b",
+        type: "JSXElement",
+        loc: { start: { line: 11, column: 35 }, end: { line: 11, column: 66 } },
+        openingElement: {
+          type: "JSXOpeningElement",
+          loc: {
+            start: { line: 11, column: 35 },
+            end: { line: 11, column: 38 },
+          },
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 11, column: 36 },
+              end: { line: 11, column: 37 },
+            },
+            name: "b",
+          },
+          attributes: [],
+          selfClosing: false,
         },
-        attributes: [],
         children: [
           {
-            kind: "binop",
-            loc: [11, 40, 11, 62],
-            left: {
-              kind: "string",
-              loc: [11, 40, 11, 48],
-              text: "count ",
+            type: "JSXExpressionContainer",
+            loc: {
+              start: { line: 11, column: 38 },
+              end: { line: 11, column: 62 },
             },
-            operatorToken: "+",
-            right: {
-              kind: ".",
-              loc: [11, 51, 11, 62],
-              expression: {
-                kind: "id",
-                loc: [11, 51, 11, 56],
-                text: "props",
-                bindingKey: "props$1061hn7xljcgj$1",
+            expression: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 11, column: 39 },
+                end: { line: 11, column: 61 },
               },
-              name: "count",
+              operator: "+",
+              left: {
+                type: "Literal",
+                loc: {
+                  start: { line: 11, column: 39 },
+                  end: { line: 11, column: 47 },
+                },
+                value: "count ",
+              },
+              right: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 11, column: 50 },
+                  end: { line: 11, column: 61 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 50 },
+                    end: { line: 11, column: 55 },
+                  },
+                  name: "props",
+                  bindingKey: "props$1061hn7xljcgj$1",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 56 },
+                    end: { line: 11, column: 61 },
+                  },
+                  name: "count",
+                },
+                computed: false,
+                optional: false,
+              },
             },
           },
         ],
+        closingElement: {
+          type: "JSXClosingElement",
+          loc: {
+            start: { line: 11, column: 62 },
+            end: { line: 11, column: 66 },
+          },
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 11, column: 64 },
+              end: { line: 11, column: 65 },
+            },
+            name: "b",
+          },
+        },
       },
+      expression: true,
     }),
   ),
 );
@@ -114,7 +165,7 @@ it("evalFunction", async (t) => {
     t,
     "evalFunction",
     cs.create(
-      [18, 5, 21, 12],
+      { start: { line: 18, column: 4 }, end: { line: 21, column: 11 } },
       {
         version: "0.0.0",
         filePath: "eval/eval-function.test.tsx",
@@ -126,97 +177,240 @@ it("evalFunction", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "jsx",
-        loc: [18, 8, 21, 11],
-        type: {
-          kind: "string",
-          loc: [18, 9, 18, 12],
-          text: "div",
+        type: "JSXElement",
+        loc: { start: { line: 18, column: 7 }, end: { line: 21, column: 10 } },
+        openingElement: {
+          type: "JSXOpeningElement",
+          loc: {
+            start: { line: 18, column: 7 },
+            end: { line: 18, column: 12 },
+          },
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 18, column: 8 },
+              end: { line: 18, column: 11 },
+            },
+            name: "div",
+          },
+          attributes: [],
+          selfClosing: false,
         },
-        attributes: [],
         children: [
           {
-            kind: "jsx",
-            loc: [19, 7, 19, 41],
-            type: {
-              kind: "string",
-              loc: [19, 8, 19, 12],
-              text: "span",
+            type: "JSXText",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 6 },
             },
-            attributes: [],
+            value: "\n      ",
+            raw: "\n      ",
+          },
+          {
+            type: "JSXElement",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 40 },
+            },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 19, column: 12 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 19, column: 7 },
+                  end: { line: 19, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "()",
-                loc: [19, 14, 19, 33],
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 19, column: 12 },
+                  end: { line: 19, column: 33 },
+                },
                 expression: {
-                  kind: "()",
-                  loc: [19, 14, 19, 26],
-                  expression: {
-                    kind: "bltn",
-                    loc: [19, 14, 19, 18],
-                    name: "eval",
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 19, column: 13 },
+                    end: { line: 19, column: 32 },
+                  },
+                  callee: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 19, column: 13 },
+                      end: { line: 19, column: 25 },
+                    },
+                    callee: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 13 },
+                        end: { line: 19, column: 17 },
+                      },
+                      name: "eval",
+                    },
+                    arguments: [
+                      {
+                        type: "Splice",
+                        loc: {
+                          start: { line: 19, column: 18 },
+                          end: { line: 19, column: 24 },
+                        },
+                        key: "$greet",
+                      },
+                    ],
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "splice",
-                      loc: [19, 19, 19, 25],
-                      key: "$greet",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 19, column: 26 },
+                        end: { line: 19, column: 31 },
+                      },
+                      value: "ada",
                     },
                   ],
+                  optional: false,
+                },
+              },
+            ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 19, column: 33 },
+                end: { line: 19, column: 40 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 19, column: 35 },
+                  end: { line: 19, column: 39 },
+                },
+                name: "span",
+              },
+            },
+          },
+          {
+            type: "JSXText",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 6 },
+            },
+            value: "\n      ",
+            raw: "\n      ",
+          },
+          {
+            type: "JSXExpressionContainer",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 34 },
+            },
+            expression: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 20, column: 7 },
+                end: { line: 20, column: 33 },
+              },
+              callee: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 20, column: 7 },
+                  end: { line: 20, column: 19 },
+                },
+                callee: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 20, column: 7 },
+                    end: { line: 20, column: 11 },
+                  },
+                  name: "eval",
                 },
                 arguments: [
                   {
-                    kind: "string",
-                    loc: [19, 27, 19, 32],
-                    text: "ada",
+                    type: "Splice",
+                    loc: {
+                      start: { line: 20, column: 12 },
+                      end: { line: 20, column: 18 },
+                    },
+                    key: "$badge",
                   },
                 ],
-              },
-            ],
-          },
-          {
-            kind: "()",
-            loc: [20, 8, 20, 34],
-            expression: {
-              kind: "()",
-              loc: [20, 8, 20, 20],
-              expression: {
-                kind: "bltn",
-                loc: [20, 8, 20, 12],
-                name: "eval",
+                optional: false,
               },
               arguments: [
                 {
-                  kind: "splice",
-                  loc: [20, 13, 20, 19],
-                  key: "$badge",
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 20, column: 20 },
+                    end: { line: 20, column: 32 },
+                  },
+                  properties: [
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 20, column: 22 },
+                        end: { line: 20, column: 30 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 20, column: 22 },
+                          end: { line: 20, column: 27 },
+                        },
+                        name: "count",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 20, column: 29 },
+                          end: { line: 20, column: 30 },
+                        },
+                        value: 3,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                  ],
                 },
               ],
+              optional: false,
             },
-            arguments: [
-              {
-                kind: "obj",
-                loc: [20, 21, 20, 33],
-                properties: [
-                  {
-                    kind: ":",
-                    loc: [20, 23, 20, 31],
-                    name: {
-                      kind: "string",
-                      loc: [20, 23, 20, 28],
-                      text: "count",
-                    },
-                    initializer: {
-                      kind: "number",
-                      loc: [20, 30, 20, 31],
-                      value: 3,
-                    },
-                  },
-                ],
-              },
-            ],
+          },
+          {
+            type: "JSXText",
+            loc: {
+              start: { line: 21, column: 4 },
+              end: { line: 21, column: 4 },
+            },
+            value: "\n    ",
+            raw: "\n    ",
           },
         ],
+        closingElement: {
+          type: "JSXClosingElement",
+          loc: {
+            start: { line: 21, column: 4 },
+            end: { line: 21, column: 10 },
+          },
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 9 },
+            },
+            name: "div",
+          },
+        },
       }),
     ),
   );

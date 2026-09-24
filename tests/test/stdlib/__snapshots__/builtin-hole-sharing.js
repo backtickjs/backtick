@@ -3,7 +3,7 @@ import { cs, state } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const make = (f) =>
   cs.create(
-    [7, 3, 9, 5],
+    { start: { line: 7, column: 2 }, end: { line: 9, column: 4 } },
     {
       version: "0.0.0",
       filePath: "stdlib/builtin-hole-sharing.test.tsx",
@@ -12,44 +12,70 @@ const make = (f) =>
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [7, 6, 9, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 7, column: 5 }, end: { line: 9, column: 3 } },
+      body: [
         {
-          kind: "return",
-          loc: [8, 5, 8, 24],
-          expression: {
-            kind: "()",
-            loc: [8, 12, 8, 23],
-            expression: {
-              kind: ".",
-              loc: [8, 12, 8, 21],
-              expression: {
-                kind: "()",
-                loc: [8, 12, 8, 17],
-                expression: {
-                  kind: "splice",
-                  loc: [8, 12, 8, 14],
+          type: "ReturnStatement",
+          loc: { start: { line: 8, column: 4 }, end: { line: 8, column: 23 } },
+          argument: {
+            type: "CallExpression",
+            loc: {
+              start: { line: 8, column: 11 },
+              end: { line: 8, column: 22 },
+            },
+            callee: {
+              type: "MemberExpression",
+              loc: {
+                start: { line: 8, column: 11 },
+                end: { line: 8, column: 20 },
+              },
+              object: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 8, column: 11 },
+                  end: { line: 8, column: 16 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 8, column: 11 },
+                    end: { line: 8, column: 13 },
+                  },
                   key: "$f",
                 },
                 arguments: [
                   {
-                    kind: "number",
-                    loc: [8, 15, 8, 16],
+                    type: "Literal",
+                    loc: {
+                      start: { line: 8, column: 14 },
+                      end: { line: 8, column: 15 },
+                    },
                     value: 1,
                   },
                 ],
+                optional: false,
               },
-              name: "get",
+              property: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 8, column: 17 },
+                  end: { line: 8, column: 20 },
+                },
+                name: "get",
+              },
+              computed: false,
+              optional: false,
             },
             arguments: [],
+            optional: false,
           },
         },
       ],
     }),
   );
 const wrapped = cs.create(
-  [11, 17, 11, 50],
+  { start: { line: 11, column: 16 }, end: { line: 11, column: 49 } },
   {
     version: "0.0.0",
     filePath: "stdlib/builtin-hole-sharing.test.tsx",
@@ -58,47 +84,54 @@ const wrapped = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [11, 20, 11, 49],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 11, column: 19 }, end: { line: 11, column: 48 } },
+    params: [
       {
-        kind: "param",
-        loc: [11, 21, 11, 30],
-        name: {
-          kind: "id",
-          loc: [11, 21, 11, 22],
-          text: "n",
-          bindingKey: "n$3vatah1osfcoe$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 11, column: 20 }, end: { line: 11, column: 21 } },
+        name: "n",
+        bindingKey: "n$3vatah1osfcoe$0",
       },
     ],
     body: {
-      kind: "()",
-      loc: [11, 35, 11, 49],
-      expression: {
-        kind: "splice",
-        loc: [11, 35, 11, 41],
+      type: "CallExpression",
+      loc: { start: { line: 11, column: 34 }, end: { line: 11, column: 48 } },
+      callee: {
+        type: "Splice",
+        loc: { start: { line: 11, column: 34 }, end: { line: 11, column: 40 } },
         key: "$state",
       },
       arguments: [
         {
-          kind: "binop",
-          loc: [11, 42, 11, 48],
+          type: "BinaryExpression",
+          loc: {
+            start: { line: 11, column: 41 },
+            end: { line: 11, column: 47 },
+          },
+          operator: "+",
           left: {
-            kind: "id",
-            loc: [11, 42, 11, 43],
-            text: "n",
+            type: "Identifier",
+            loc: {
+              start: { line: 11, column: 41 },
+              end: { line: 11, column: 42 },
+            },
+            name: "n",
             bindingKey: "n$3vatah1osfcoe$0",
           },
-          operatorToken: "+",
           right: {
-            kind: "number",
-            loc: [11, 46, 11, 48],
+            type: "Literal",
+            loc: {
+              start: { line: 11, column: 45 },
+              end: { line: 11, column: 47 },
+            },
             value: 10,
           },
         },
       ],
+      optional: false,
     },
+    expression: true,
   }),
 );
 it("builtinHoleSharing", async (t) => {
@@ -106,7 +139,7 @@ it("builtinHoleSharing", async (t) => {
     t,
     "builtinHoleSharing",
     cs.create(
-      [17, 5, 19, 7],
+      { start: { line: 17, column: 4 }, end: { line: 19, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/builtin-hole-sharing.test.tsx",
@@ -118,24 +151,36 @@ it("builtinHoleSharing", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [17, 8, 19, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 17, column: 7 }, end: { line: 19, column: 5 } },
+        body: [
           {
-            kind: "return",
-            loc: [18, 7, 18, 48],
-            expression: {
-              kind: "binop",
-              loc: [18, 14, 18, 47],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 47 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 18, column: 13 },
+                end: { line: 18, column: 46 },
+              },
+              operator: "+",
               left: {
-                kind: "splice",
-                loc: [18, 14, 18, 28],
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 13 },
+                  end: { line: 18, column: 27 },
+                },
                 key: "$0splice0",
               },
-              operatorToken: "+",
               right: {
-                kind: "splice",
-                loc: [18, 31, 18, 47],
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 30 },
+                  end: { line: 18, column: 46 },
+                },
                 key: "$0splice1",
               },
             },

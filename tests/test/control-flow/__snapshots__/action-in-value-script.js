@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // a mistake wherever it stands (see `discarded-value`), and an action is the
 // point of the position rather than something a value script has to go without.
 const valueScriptEffects = cs.create(
-  [13, 42, 15, 3],
+  { start: { line: 13, column: 41 }, end: { line: 15, column: 2 } },
   {
     version: "0.0.0",
     filePath: "control-flow/action-in-value-script.test.tsx",
@@ -18,29 +18,45 @@ const valueScriptEffects = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [13, 45, 15, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 13, column: 44 }, end: { line: 15, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 14, column: 2 }, end: { line: 14, column: 14 } },
         kind: "const",
-        loc: [14, 3, 14, 15],
-        name: {
-          kind: "id",
-          loc: [14, 9, 14, 10],
-          text: "x",
-          bindingKey: "x$cliqugg05c8d$0",
-        },
-        initializer: {
-          kind: "number",
-          loc: [14, 13, 14, 14],
-          value: 1,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 14, column: 8 },
+              end: { line: 14, column: 13 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 14, column: 8 },
+                end: { line: 14, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$cliqugg05c8d$0",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 14, column: 12 },
+                end: { line: 14, column: 13 },
+              },
+              value: 1,
+            },
+          },
+        ],
       },
     ],
   }),
 );
 const ping = cs.create(
-  [17, 34, 20, 3],
+  { start: { line: 17, column: 33 }, end: { line: 20, column: 2 } },
   {
     version: "0.0.0",
     filePath: "control-flow/action-in-value-script.test.tsx",
@@ -49,46 +65,79 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [17, 37, 20, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 17, column: 36 }, end: { line: 20, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [17, 43, 20, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 17, column: 42 }, end: { line: 20, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 18, column: 2 },
+            end: { line: 18, column: 12 },
+          },
           kind: "let",
-          loc: [18, 3, 18, 13],
-          name: {
-            kind: "id",
-            loc: [18, 7, 18, 8],
-            text: "n",
-            bindingKey: "n$cliqugg05c8d$1",
-          },
-          initializer: {
-            kind: "number",
-            loc: [18, 11, 18, 12],
-            value: 0,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 18, column: 11 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 18, column: 6 },
+                  end: { line: 18, column: 7 },
+                },
+                name: "n",
+                bindingKey: "n$cliqugg05c8d$1",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 18, column: 10 },
+                  end: { line: 18, column: 11 },
+                },
+                value: 0,
+              },
+            },
+          ],
         },
         {
-          kind: "binop",
-          loc: [19, 3, 19, 8],
-          left: {
-            kind: "id",
-            loc: [19, 3, 19, 4],
-            text: "n",
-            bindingKey: "n$cliqugg05c8d$1",
-          },
-          operatorToken: "=",
-          right: {
-            kind: "number",
-            loc: [19, 7, 19, 8],
-            value: 1,
+          type: "ExpressionStatement",
+          loc: { start: { line: 19, column: 2 }, end: { line: 19, column: 8 } },
+          expression: {
+            type: "AssignmentExpression",
+            loc: {
+              start: { line: 19, column: 2 },
+              end: { line: 19, column: 7 },
+            },
+            operator: "=",
+            left: {
+              type: "Identifier",
+              loc: {
+                start: { line: 19, column: 2 },
+                end: { line: 19, column: 3 },
+              },
+              name: "n",
+              bindingKey: "n$cliqugg05c8d$1",
+            },
+            right: {
+              type: "Literal",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 19, column: 7 },
+              },
+              value: 1,
+            },
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("actionInValueScript", async (t) => {
@@ -96,7 +145,7 @@ it("actionInValueScript", async (t) => {
     t,
     "actionInValueScript",
     cs.create(
-      [26, 5, 34, 7],
+      { start: { line: 26, column: 4 }, end: { line: 34, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/action-in-value-script.test.tsx",
@@ -108,99 +157,176 @@ it("actionInValueScript", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [26, 8, 34, 6],
-        parameters: [
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 26, column: 7 }, end: { line: 34, column: 5 } },
+        params: [
           {
-            kind: "param",
-            loc: [26, 9, 26, 19],
-            name: {
-              kind: "id",
-              loc: [26, 9, 26, 10],
-              text: "b",
-              bindingKey: "b$cliqugg05c8d$2",
+            type: "Identifier",
+            loc: {
+              start: { line: 26, column: 8 },
+              end: { line: 26, column: 9 },
             },
+            name: "b",
+            bindingKey: "b$cliqugg05c8d$2",
           },
         ],
         body: {
-          kind: "{}",
-          loc: [26, 24, 34, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 26, column: 23 },
+            end: { line: 34, column: 5 },
+          },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 27, column: 6 },
+                end: { line: 27, column: 16 },
+              },
               kind: "let",
-              loc: [27, 7, 27, 17],
-              name: {
-                kind: "id",
-                loc: [27, 11, 27, 12],
-                text: "n",
-                bindingKey: "n$cliqugg05c8d$3",
-              },
-              initializer: {
-                kind: "number",
-                loc: [27, 15, 27, 16],
-                value: 0,
-              },
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 27, column: 10 },
+                    end: { line: 27, column: 15 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 27, column: 10 },
+                      end: { line: 27, column: 11 },
+                    },
+                    name: "n",
+                    bindingKey: "n$cliqugg05c8d$3",
+                  },
+                  init: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 27, column: 14 },
+                      end: { line: 27, column: 15 },
+                    },
+                    value: 0,
+                  },
+                },
+              ],
             },
             {
-              kind: "splice",
-              loc: [28, 7, 28, 26],
-              key: "$valueScriptEffects",
-            },
-            {
-              kind: "if",
-              loc: [29, 7, 32, 8],
+              type: "ExpressionStatement",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 26 },
+              },
               expression: {
-                kind: "id",
-                loc: [29, 11, 29, 12],
-                text: "b",
+                type: "Splice",
+                loc: {
+                  start: { line: 28, column: 6 },
+                  end: { line: 28, column: 25 },
+                },
+                key: "$valueScriptEffects",
+              },
+            },
+            {
+              type: "IfStatement",
+              loc: {
+                start: { line: 29, column: 6 },
+                end: { line: 32, column: 7 },
+              },
+              test: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 29, column: 10 },
+                  end: { line: 29, column: 11 },
+                },
+                name: "b",
                 bindingKey: "b$cliqugg05c8d$2",
               },
-              thenStatement: {
-                kind: "{}",
-                loc: [29, 14, 32, 8],
-                statements: [
+              consequent: {
+                type: "BlockStatement",
+                loc: {
+                  start: { line: 29, column: 13 },
+                  end: { line: 32, column: 7 },
+                },
+                body: [
                   {
-                    kind: "()",
-                    loc: [30, 9, 30, 16],
-                    expression: {
-                      kind: "splice",
-                      loc: [30, 9, 30, 14],
-                      key: "$ping",
+                    type: "ExpressionStatement",
+                    loc: {
+                      start: { line: 30, column: 8 },
+                      end: { line: 30, column: 16 },
                     },
-                    arguments: [],
+                    expression: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 30, column: 8 },
+                        end: { line: 30, column: 15 },
+                      },
+                      callee: {
+                        type: "Splice",
+                        loc: {
+                          start: { line: 30, column: 8 },
+                          end: { line: 30, column: 13 },
+                        },
+                        key: "$ping",
+                      },
+                      arguments: [],
+                      optional: false,
+                    },
                   },
                   {
-                    kind: "binop",
-                    loc: [31, 9, 31, 14],
-                    left: {
-                      kind: "id",
-                      loc: [31, 9, 31, 10],
-                      text: "n",
-                      bindingKey: "n$cliqugg05c8d$3",
+                    type: "ExpressionStatement",
+                    loc: {
+                      start: { line: 31, column: 8 },
+                      end: { line: 31, column: 14 },
                     },
-                    operatorToken: "=",
-                    right: {
-                      kind: "number",
-                      loc: [31, 13, 31, 14],
-                      value: 1,
+                    expression: {
+                      type: "AssignmentExpression",
+                      loc: {
+                        start: { line: 31, column: 8 },
+                        end: { line: 31, column: 13 },
+                      },
+                      operator: "=",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 31, column: 8 },
+                          end: { line: 31, column: 9 },
+                        },
+                        name: "n",
+                        bindingKey: "n$cliqugg05c8d$3",
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 31, column: 12 },
+                          end: { line: 31, column: 13 },
+                        },
+                        value: 1,
+                      },
                     },
                   },
                 ],
               },
-              elseStatement: null,
+              alternate: null,
             },
             {
-              kind: "return",
-              loc: [33, 7, 33, 16],
-              expression: {
-                kind: "id",
-                loc: [33, 14, 33, 15],
-                text: "n",
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 33, column: 6 },
+                end: { line: 33, column: 15 },
+              },
+              argument: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 33, column: 13 },
+                  end: { line: 33, column: 14 },
+                },
+                name: "n",
                 bindingKey: "n$cliqugg05c8d$3",
               },
             },
           ],
         },
+        expression: false,
       }),
     ),
   );

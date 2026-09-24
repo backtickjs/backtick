@@ -2,7 +2,7 @@
   const f1 = ($0) => {
     const count = $0()(0);
     return [
-      typeof void 0,
+      typeof undefined,
       typeof null,
       typeof true,
       typeof 1,

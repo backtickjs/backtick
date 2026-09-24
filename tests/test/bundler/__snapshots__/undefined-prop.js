@@ -26,7 +26,7 @@ describe("an undefined prop", () => {
       _jsx(Pill, {
         label: "focused",
         ref: cs.create(
-          [34, 34, 34, 72],
+          { start: { line: 34, column: 33 }, end: { line: 34, column: 71 } },
           {
             version: "0.0.0",
             filePath: "bundler/undefined-prop.test.tsx",
@@ -35,52 +35,85 @@ describe("an undefined prop", () => {
             captures: [],
           },
           () => ({
-            kind: "=>",
-            loc: [34, 37, 34, 71],
-            parameters: [
+            type: "ArrowFunctionExpression",
+            loc: {
+              start: { line: 34, column: 36 },
+              end: { line: 34, column: 70 },
+            },
+            params: [
               {
-                kind: "param",
-                loc: [34, 38, 34, 40],
-                name: {
-                  kind: "id",
-                  loc: [34, 38, 34, 40],
-                  text: "el",
-                  bindingKey: "el$28eplibrubp3g$0",
+                type: "Identifier",
+                loc: {
+                  start: { line: 34, column: 37 },
+                  end: { line: 34, column: 39 },
                 },
+                name: "el",
+                bindingKey: "el$28eplibrubp3g$0",
               },
             ],
             body: {
-              kind: "()",
-              loc: [34, 45, 34, 71],
-              expression: {
-                kind: "splice",
-                loc: [34, 45, 34, 53],
+              type: "CallExpression",
+              loc: {
+                start: { line: 34, column: 44 },
+                end: { line: 34, column: 70 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 34, column: 44 },
+                  end: { line: 34, column: 52 },
+                },
                 key: "$onMount",
               },
               arguments: [
                 {
-                  kind: "=>",
-                  loc: [34, 54, 34, 70],
-                  parameters: [],
+                  type: "ArrowFunctionExpression",
+                  loc: {
+                    start: { line: 34, column: 53 },
+                    end: { line: 34, column: 69 },
+                  },
+                  params: [],
                   body: {
-                    kind: "()",
-                    loc: [34, 60, 34, 70],
-                    expression: {
-                      kind: ".",
-                      loc: [34, 60, 34, 68],
-                      expression: {
-                        kind: "id",
-                        loc: [34, 60, 34, 62],
-                        text: "el",
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 34, column: 59 },
+                      end: { line: 34, column: 69 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 34, column: 59 },
+                        end: { line: 34, column: 67 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 34, column: 59 },
+                          end: { line: 34, column: 61 },
+                        },
+                        name: "el",
                         bindingKey: "el$28eplibrubp3g$0",
                       },
-                      name: "focus",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 34, column: 62 },
+                          end: { line: 34, column: 67 },
+                        },
+                        name: "focus",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [],
+                    optional: false,
                   },
+                  expression: true,
                 },
               ],
+              optional: false,
             },
+            expression: true,
           }),
         ),
       }),

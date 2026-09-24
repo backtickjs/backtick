@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function add(lhs, rhs) {
   return cs.create(
-    [6, 10, 6, 25],
+    { start: { line: 6, column: 9 }, end: { line: 6, column: 24 } },
     {
       version: "0.0.0",
       filePath: "splices/splice-sharing.test.tsx",
@@ -15,17 +15,17 @@ function add(lhs, rhs) {
       captures: [],
     },
     () => ({
-      kind: "binop",
-      loc: [6, 13, 6, 24],
+      type: "BinaryExpression",
+      loc: { start: { line: 6, column: 12 }, end: { line: 6, column: 23 } },
+      operator: "+",
       left: {
-        kind: "splice",
-        loc: [6, 13, 6, 17],
+        type: "Splice",
+        loc: { start: { line: 6, column: 12 }, end: { line: 6, column: 16 } },
         key: "$lhs",
       },
-      operatorToken: "+",
       right: {
-        kind: "splice",
-        loc: [6, 20, 6, 24],
+        type: "Splice",
+        loc: { start: { line: 6, column: 19 }, end: { line: 6, column: 23 } },
         key: "$rhs",
       },
     }),
@@ -36,7 +36,7 @@ it("spliceSharing", async (t) => {
     t,
     "spliceSharing",
     cs.create(
-      [13, 5, 16, 8],
+      { start: { line: 13, column: 4 }, end: { line: 16, column: 7 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-sharing.test.tsx",
@@ -45,7 +45,10 @@ it("spliceSharing", async (t) => {
           $0splice0: {
             value: add(
               cs.create(
-                [14, 16, 14, 21],
+                {
+                  start: { line: 14, column: 15 },
+                  end: { line: 14, column: 20 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
@@ -54,13 +57,19 @@ it("spliceSharing", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [14, 19, 14, 20],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 14, column: 18 },
+                    end: { line: 14, column: 19 },
+                  },
                   value: 1,
                 }),
               ),
               cs.create(
-                [14, 23, 14, 28],
+                {
+                  start: { line: 14, column: 22 },
+                  end: { line: 14, column: 27 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
@@ -69,8 +78,11 @@ it("spliceSharing", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [14, 26, 14, 27],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 14, column: 25 },
+                    end: { line: 14, column: 26 },
+                  },
                   value: 2,
                 }),
               ),
@@ -80,7 +92,10 @@ it("spliceSharing", async (t) => {
           $0splice1: {
             value: add(
               cs.create(
-                [15, 16, 15, 21],
+                {
+                  start: { line: 15, column: 15 },
+                  end: { line: 15, column: 20 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
@@ -89,13 +104,19 @@ it("spliceSharing", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [15, 19, 15, 20],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 15, column: 18 },
+                    end: { line: 15, column: 19 },
+                  },
                   value: 3,
                 }),
               ),
               cs.create(
-                [15, 23, 15, 28],
+                {
+                  start: { line: 15, column: 22 },
+                  end: { line: 15, column: 27 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
@@ -104,8 +125,11 @@ it("spliceSharing", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [15, 26, 15, 27],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 15, column: 25 },
+                    end: { line: 15, column: 26 },
+                  },
                   value: 4,
                 }),
               ),
@@ -116,36 +140,62 @@ it("spliceSharing", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [13, 9, 16, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 13, column: 8 }, end: { line: 16, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [14, 7, 14, 30],
-            name: {
-              kind: "string",
-              loc: [14, 7, 14, 8],
-              text: "x",
+            type: "Property",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 29 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [14, 10, 14, 30],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 14, column: 6 },
+                end: { line: 14, column: 7 },
+              },
+              name: "x",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 14, column: 9 },
+                end: { line: 14, column: 29 },
+              },
               key: "$0splice0",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [15, 7, 15, 30],
-            name: {
-              kind: "string",
-              loc: [15, 7, 15, 8],
-              text: "y",
+            type: "Property",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 29 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [15, 10, 15, 30],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 7 },
+              },
+              name: "y",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 15, column: 9 },
+                end: { line: 15, column: 29 },
+              },
               key: "$0splice1",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

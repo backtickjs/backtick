@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // parameter, and each `onPress`'s `#call` passes its own splice as a `#thunk`.
 function make(n) {
   return cs.create(
-    [9, 10, 9, 22],
+    { start: { line: 9, column: 9 }, end: { line: 9, column: 21 } },
     {
       version: "0.0.0",
       filePath: "jsx/jsx-polymorphic-prop.test.tsx",
@@ -16,14 +16,15 @@ function make(n) {
       captures: [],
     },
     () => ({
-      kind: "=>",
-      loc: [9, 13, 9, 21],
-      parameters: [],
+      type: "ArrowFunctionExpression",
+      loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 20 } },
+      params: [],
       body: {
-        kind: "splice",
-        loc: [9, 19, 9, 21],
+        type: "Splice",
+        loc: { start: { line: 9, column: 18 }, end: { line: 9, column: 20 } },
         key: "$n",
       },
+      expression: true,
     }),
   );
 }

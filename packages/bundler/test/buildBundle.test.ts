@@ -6,11 +6,11 @@ import type { AstScript } from "../dist/ast/Ast.js";
 // One script, `1`, written at 3:7 of a file hashing to `abc`.
 const script: AstScript = {
   kind: "AstScript",
-  loc: [3, 7, 3, 8],
+  loc: { start: { line: 3, column: 7 }, end: { line: 3, column: 8 } },
   fileHash: "abc",
   splices: {},
   captures: [],
-  expression: { kind: "number", loc: [3, 7, 3, 8], value: 1 },
+  expression: { type: "Literal", value: 1 },
 };
 
 const labelsOf = (tree: ReturnType<typeof buildBundle>) =>

@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // a coercion.
 // @ts-expect-error: Argument of type 'number' is not assignable to parameter of type 'boolean'.
 export default cs.create(
-  [6, 16, 6, 45],
+  { start: { line: 6, column: 15 }, end: { line: 6, column: 44 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/non-boolean-not.test.tsx",
@@ -12,30 +12,28 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 19, 6, 44],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 18 }, end: { line: 6, column: 43 } },
+    params: [
       {
-        kind: "param",
-        loc: [6, 20, 6, 33],
-        name: {
-          kind: "id",
-          loc: [6, 20, 6, 25],
-          text: "count",
-          bindingKey: "count$3imwfwdjuhdbp$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 6, column: 19 }, end: { line: 6, column: 24 } },
+        name: "count",
+        bindingKey: "count$3imwfwdjuhdbp$0",
       },
     ],
     body: {
-      kind: "prefixop",
-      loc: [6, 38, 6, 44],
+      type: "UnaryExpression",
+      loc: { start: { line: 6, column: 37 }, end: { line: 6, column: 43 } },
       operator: "!",
-      operand: {
-        kind: "id",
-        loc: [6, 39, 6, 44],
-        text: "count",
+      prefix: true,
+      argument: {
+        type: "Identifier",
+        loc: { start: { line: 6, column: 38 }, end: { line: 6, column: 43 } },
+        name: "count",
         bindingKey: "count$3imwfwdjuhdbp$0",
       },
     },
+    expression: true,
   }),
 );

@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // answers rather than a member read off a `Number` there is no value for.
 async function Checked() {
   return cs.create(
-    [9, 10, 37, 5],
+    { start: { line: 9, column: 9 }, end: { line: 37, column: 4 } },
     {
       version: "0.0.0",
       filePath: "stdlib/number-statics.test.tsx",
@@ -16,444 +16,910 @@ async function Checked() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [9, 13, 37, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 9, column: 12 }, end: { line: 37, column: 3 } },
+      body: [
         {
-          kind: "const",
-          loc: [10, 5, 10, 41],
-          name: {
-            kind: "id",
-            loc: [10, 11, 10, 19],
-            text: "positive",
-            bindingKey: "positive$1o8290c5hfi65$0",
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 10, column: 4 },
+            end: { line: 10, column: 40 },
           },
-          initializer: {
-            kind: "binop",
-            loc: [10, 22, 10, 40],
-            left: {
-              kind: ".",
-              loc: [10, 22, 10, 36],
-              expression: {
-                kind: "bltn",
-                loc: [10, 22, 10, 28],
-                name: "Number",
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 10, column: 10 },
+                end: { line: 10, column: 39 },
               },
-              name: "EPSILON",
-            },
-            operatorToken: ">",
-            right: {
-              kind: "number",
-              loc: [10, 39, 10, 40],
-              value: 0,
-            },
-          },
-        },
-        {
-          kind: "const",
-          loc: [11, 5, 11, 46],
-          name: {
-            kind: "id",
-            loc: [11, 11, 11, 18],
-            text: "largest",
-            bindingKey: "largest$1o8290c5hfi65$1",
-          },
-          initializer: {
-            kind: "binop",
-            loc: [11, 21, 11, 45],
-            left: {
-              kind: ".",
-              loc: [11, 21, 11, 37],
-              expression: {
-                kind: "bltn",
-                loc: [11, 21, 11, 27],
-                name: "Number",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 10, column: 10 },
+                  end: { line: 10, column: 18 },
+                },
+                name: "positive",
+                bindingKey: "positive$1o8290c5hfi65$0",
               },
-              name: "MAX_VALUE",
-            },
-            operatorToken: ">",
-            right: {
-              kind: "number",
-              loc: [11, 40, 11, 45],
-              value: 1e308,
-            },
-          },
-        },
-        {
-          kind: "const",
-          loc: [12, 5, 17, 58],
-          name: {
-            kind: "id",
-            loc: [12, 11, 12, 15],
-            text: "safe",
-            bindingKey: "safe$1o8290c5hfi65$2",
-          },
-          initializer: {
-            kind: "binop",
-            loc: [13, 7, 17, 57],
-            left: {
-              kind: "binop",
-              loc: [13, 7, 16, 30],
-              left: {
-                kind: "binop",
-                loc: [13, 7, 15, 27],
+              init: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 10, column: 21 },
+                  end: { line: 10, column: 39 },
+                },
+                operator: ">",
                 left: {
-                  kind: "binop",
-                  loc: [13, 7, 14, 52],
-                  left: {
-                    kind: "binop",
-                    loc: [13, 7, 13, 51],
-                    left: {
-                      kind: ".",
-                      loc: [13, 7, 13, 30],
-                      expression: {
-                        kind: "bltn",
-                        loc: [13, 7, 13, 13],
-                        name: "Number",
-                      },
-                      name: "MAX_SAFE_INTEGER",
-                    },
-                    operatorToken: "===",
-                    right: {
-                      kind: "number",
-                      loc: [13, 35, 13, 51],
-                      value: 9007199254740991,
-                    },
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 10, column: 21 },
+                    end: { line: 10, column: 35 },
                   },
-                  operatorToken: "&&",
-                  right: {
-                    kind: "binop",
-                    loc: [14, 7, 14, 52],
-                    left: {
-                      kind: ".",
-                      loc: [14, 7, 14, 30],
-                      expression: {
-                        kind: "bltn",
-                        loc: [14, 7, 14, 13],
-                        name: "Number",
-                      },
-                      name: "MIN_SAFE_INTEGER",
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 10, column: 21 },
+                      end: { line: 10, column: 27 },
                     },
-                    operatorToken: "===",
-                    right: {
-                      kind: "prefixop",
-                      loc: [14, 35, 14, 52],
-                      operator: "-",
-                      operand: {
-                        kind: "number",
-                        loc: [14, 36, 14, 52],
-                        value: 9007199254740991,
-                      },
-                    },
+                    name: "Number",
                   },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 10, column: 28 },
+                      end: { line: 10, column: 35 },
+                    },
+                    name: "EPSILON",
+                  },
+                  computed: false,
+                  optional: false,
                 },
-                operatorToken: "&&",
                 right: {
-                  kind: "binop",
-                  loc: [15, 7, 15, 27],
-                  left: {
-                    kind: ".",
-                    loc: [15, 7, 15, 23],
-                    expression: {
-                      kind: "bltn",
-                      loc: [15, 7, 15, 13],
-                      name: "Number",
-                    },
-                    name: "MIN_VALUE",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 38 },
+                    end: { line: 10, column: 39 },
                   },
-                  operatorToken: ">",
-                  right: {
-                    kind: "number",
-                    loc: [15, 26, 15, 27],
-                    value: 0,
-                  },
+                  value: 0,
                 },
-              },
-              operatorToken: "&&",
-              right: {
-                kind: "()",
-                loc: [16, 7, 16, 30],
-                expression: {
-                  kind: ".",
-                  loc: [16, 7, 16, 27],
-                  expression: {
-                    kind: "bltn",
-                    loc: [16, 7, 16, 13],
-                    name: "Number",
-                  },
-                  name: "isSafeInteger",
-                },
-                arguments: [
-                  {
-                    kind: "number",
-                    loc: [16, 28, 16, 29],
-                    value: 3,
-                  },
-                ],
               },
             },
-            operatorToken: "&&",
-            right: {
-              kind: "prefixop",
-              loc: [17, 7, 17, 57],
-              operator: "!",
-              operand: {
-                kind: "()",
-                loc: [17, 8, 17, 57],
-                expression: {
-                  kind: ".",
-                  loc: [17, 8, 17, 28],
-                  expression: {
-                    kind: "bltn",
-                    loc: [17, 8, 17, 14],
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 11, column: 4 },
+            end: { line: 11, column: 45 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 11, column: 10 },
+                end: { line: 11, column: 44 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 11, column: 10 },
+                  end: { line: 11, column: 17 },
+                },
+                name: "largest",
+                bindingKey: "largest$1o8290c5hfi65$1",
+              },
+              init: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 11, column: 20 },
+                  end: { line: 11, column: 44 },
+                },
+                operator: ">",
+                left: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 11, column: 20 },
+                    end: { line: 11, column: 36 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 20 },
+                      end: { line: 11, column: 26 },
+                    },
                     name: "Number",
                   },
-                  name: "isSafeInteger",
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 27 },
+                      end: { line: 11, column: 36 },
+                    },
+                    name: "MAX_VALUE",
+                  },
+                  computed: false,
+                  optional: false,
                 },
-                arguments: [
-                  {
-                    kind: "binop",
-                    loc: [17, 29, 17, 56],
+                right: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 39 },
+                    end: { line: 11, column: 44 },
+                  },
+                  value: 1e308,
+                },
+              },
+            },
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 12, column: 4 },
+            end: { line: 17, column: 57 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 12, column: 10 },
+                end: { line: 17, column: 56 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 14 },
+                },
+                name: "safe",
+                bindingKey: "safe$1o8290c5hfi65$2",
+              },
+              init: {
+                type: "LogicalExpression",
+                loc: {
+                  start: { line: 13, column: 6 },
+                  end: { line: 17, column: 56 },
+                },
+                operator: "&&",
+                left: {
+                  type: "LogicalExpression",
+                  loc: {
+                    start: { line: 13, column: 6 },
+                    end: { line: 16, column: 29 },
+                  },
+                  operator: "&&",
+                  left: {
+                    type: "LogicalExpression",
+                    loc: {
+                      start: { line: 13, column: 6 },
+                      end: { line: 15, column: 26 },
+                    },
+                    operator: "&&",
                     left: {
-                      kind: ".",
-                      loc: [17, 29, 17, 52],
-                      expression: {
-                        kind: "bltn",
-                        loc: [17, 29, 17, 35],
+                      type: "LogicalExpression",
+                      loc: {
+                        start: { line: 13, column: 6 },
+                        end: { line: 14, column: 51 },
+                      },
+                      operator: "&&",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 13, column: 6 },
+                          end: { line: 13, column: 50 },
+                        },
+                        operator: "===",
+                        left: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 13, column: 6 },
+                            end: { line: 13, column: 29 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 13, column: 6 },
+                              end: { line: 13, column: 12 },
+                            },
+                            name: "Number",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 13, column: 13 },
+                              end: { line: 13, column: 29 },
+                            },
+                            name: "MAX_SAFE_INTEGER",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 13, column: 34 },
+                            end: { line: 13, column: 50 },
+                          },
+                          value: 9007199254740991,
+                        },
+                      },
+                      right: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 14, column: 6 },
+                          end: { line: 14, column: 51 },
+                        },
+                        operator: "===",
+                        left: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 14, column: 6 },
+                            end: { line: 14, column: 29 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 14, column: 6 },
+                              end: { line: 14, column: 12 },
+                            },
+                            name: "Number",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 14, column: 13 },
+                              end: { line: 14, column: 29 },
+                            },
+                            name: "MIN_SAFE_INTEGER",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        right: {
+                          type: "UnaryExpression",
+                          loc: {
+                            start: { line: 14, column: 34 },
+                            end: { line: 14, column: 51 },
+                          },
+                          operator: "-",
+                          prefix: true,
+                          argument: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 14, column: 35 },
+                              end: { line: 14, column: 51 },
+                            },
+                            value: 9007199254740991,
+                          },
+                        },
+                      },
+                    },
+                    right: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 15, column: 6 },
+                        end: { line: 15, column: 26 },
+                      },
+                      operator: ">",
+                      left: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 15, column: 6 },
+                          end: { line: 15, column: 22 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 6 },
+                            end: { line: 15, column: 12 },
+                          },
+                          name: "Number",
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 13 },
+                            end: { line: 15, column: 22 },
+                          },
+                          name: "MIN_VALUE",
+                        },
+                        computed: false,
+                        optional: false,
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 15, column: 25 },
+                          end: { line: 15, column: 26 },
+                        },
+                        value: 0,
+                      },
+                    },
+                  },
+                  right: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 16, column: 6 },
+                      end: { line: 16, column: 29 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 16, column: 6 },
+                        end: { line: 16, column: 26 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 6 },
+                          end: { line: 16, column: 12 },
+                        },
                         name: "Number",
                       },
-                      name: "MAX_SAFE_INTEGER",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 13 },
+                          end: { line: 16, column: 26 },
+                        },
+                        name: "isSafeInteger",
+                      },
+                      computed: false,
+                      optional: false,
                     },
-                    operatorToken: "+",
-                    right: {
-                      kind: "number",
-                      loc: [17, 55, 17, 56],
-                      value: 1,
+                    arguments: [
+                      {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 16, column: 27 },
+                          end: { line: 16, column: 28 },
+                        },
+                        value: 3,
+                      },
+                    ],
+                    optional: false,
+                  },
+                },
+                right: {
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 17, column: 6 },
+                    end: { line: 17, column: 56 },
+                  },
+                  operator: "!",
+                  prefix: true,
+                  argument: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 17, column: 7 },
+                      end: { line: 17, column: 56 },
                     },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 17, column: 7 },
+                        end: { line: 17, column: 27 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 17, column: 7 },
+                          end: { line: 17, column: 13 },
+                        },
+                        name: "Number",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 17, column: 14 },
+                          end: { line: 17, column: 27 },
+                        },
+                        name: "isSafeInteger",
+                      },
+                      computed: false,
+                      optional: false,
+                    },
+                    arguments: [
+                      {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 17, column: 28 },
+                          end: { line: 17, column: 55 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 17, column: 28 },
+                            end: { line: 17, column: 51 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 28 },
+                              end: { line: 17, column: 34 },
+                            },
+                            name: "Number",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 35 },
+                              end: { line: 17, column: 51 },
+                            },
+                            name: "MAX_SAFE_INTEGER",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 17, column: 54 },
+                            end: { line: 17, column: 55 },
+                          },
+                          value: 1,
+                        },
+                      },
+                    ],
+                    optional: false,
+                  },
+                },
+              },
+            },
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 18, column: 4 },
+            end: { line: 18, column: 38 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 18, column: 10 },
+                end: { line: 18, column: 37 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 18, column: 10 },
+                  end: { line: 18, column: 15 },
+                },
+                name: "whole",
+                bindingKey: "whole$1o8290c5hfi65$3",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 18, column: 18 },
+                  end: { line: 18, column: 37 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 18, column: 18 },
+                    end: { line: 18, column: 34 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 18 },
+                      end: { line: 18, column: 24 },
+                    },
+                    name: "Number",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 25 },
+                      end: { line: 18, column: 34 },
+                    },
+                    name: "isInteger",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 18, column: 35 },
+                      end: { line: 18, column: 36 },
+                    },
+                    value: 2,
                   },
                 ],
+                optional: false,
               },
             },
-          },
+          ],
         },
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 19, column: 4 },
+            end: { line: 19, column: 45 },
+          },
           kind: "const",
-          loc: [18, 5, 18, 39],
-          name: {
-            kind: "id",
-            loc: [18, 11, 18, 16],
-            text: "whole",
-            bindingKey: "whole$1o8290c5hfi65$3",
-          },
-          initializer: {
-            kind: "()",
-            loc: [18, 19, 18, 38],
-            expression: {
-              kind: ".",
-              loc: [18, 19, 18, 35],
-              expression: {
-                kind: "bltn",
-                loc: [18, 19, 18, 25],
-                name: "Number",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 19, column: 10 },
+                end: { line: 19, column: 44 },
               },
-              name: "isInteger",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 19, column: 10 },
+                  end: { line: 19, column: 20 },
+                },
+                name: "fractional",
+                bindingKey: "fractional$1o8290c5hfi65$4",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 19, column: 23 },
+                  end: { line: 19, column: 44 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 19, column: 23 },
+                    end: { line: 19, column: 39 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 19, column: 23 },
+                      end: { line: 19, column: 29 },
+                    },
+                    name: "Number",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 19, column: 30 },
+                      end: { line: 19, column: 39 },
+                    },
+                    name: "isInteger",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 19, column: 40 },
+                      end: { line: 19, column: 43 },
+                    },
+                    value: 2.5,
+                  },
+                ],
+                optional: false,
+              },
             },
-            arguments: [
-              {
-                kind: "number",
-                loc: [18, 36, 18, 37],
-                value: 2,
-              },
-            ],
-          },
+          ],
         },
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 21, column: 4 },
+            end: { line: 21, column: 41 },
+          },
           kind: "const",
-          loc: [19, 5, 19, 46],
-          name: {
-            kind: "id",
-            loc: [19, 11, 19, 21],
-            text: "fractional",
-            bindingKey: "fractional$1o8290c5hfi65$4",
-          },
-          initializer: {
-            kind: "()",
-            loc: [19, 24, 19, 45],
-            expression: {
-              kind: ".",
-              loc: [19, 24, 19, 40],
-              expression: {
-                kind: "bltn",
-                loc: [19, 24, 19, 30],
-                name: "Number",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 21, column: 10 },
+                end: { line: 21, column: 40 },
               },
-              name: "isInteger",
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 21, column: 10 },
+                  end: { line: 21, column: 17 },
+                },
+                name: "written",
+                bindingKey: "written$1o8290c5hfi65$5",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 21, column: 20 },
+                  end: { line: 21, column: 40 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 21, column: 20 },
+                    end: { line: 21, column: 35 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 21, column: 20 },
+                      end: { line: 21, column: 26 },
+                    },
+                    name: "Number",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 21, column: 27 },
+                      end: { line: 21, column: 35 },
+                    },
+                    name: "isFinite",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 21, column: 36 },
+                      end: { line: 21, column: 39 },
+                    },
+                    value: "2",
+                  },
+                ],
+                optional: false,
+              },
             },
-            arguments: [
-              {
-                kind: "number",
-                loc: [19, 41, 19, 44],
-                value: 2.5,
-              },
-            ],
-          },
+          ],
         },
         {
-          kind: "const",
-          loc: [21, 5, 21, 42],
-          name: {
-            kind: "id",
-            loc: [21, 11, 21, 18],
-            text: "written",
-            bindingKey: "written$1o8290c5hfi65$5",
-          },
-          initializer: {
-            kind: "()",
-            loc: [21, 21, 21, 41],
-            expression: {
-              kind: ".",
-              loc: [21, 21, 21, 36],
-              expression: {
-                kind: "bltn",
-                loc: [21, 21, 21, 27],
-                name: "Number",
-              },
-              name: "isFinite",
+          type: "ReturnStatement",
+          loc: { start: { line: 22, column: 4 }, end: { line: 36, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 23, column: 6 },
+              end: { line: 35, column: 13 },
             },
-            arguments: [
-              {
-                kind: "string",
-                loc: [21, 37, 21, 40],
-                text: "2",
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 23, column: 6 },
+                end: { line: 23, column: 12 },
               },
-            ],
-          },
-        },
-        {
-          kind: "return",
-          loc: [22, 5, 36, 7],
-          expression: {
-            kind: "jsx",
-            loc: [23, 7, 35, 14],
-            type: {
-              kind: "string",
-              loc: [23, 8, 23, 12],
-              text: "span",
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 23, column: 7 },
+                  end: { line: 23, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [],
+              selfClosing: false,
             },
-            attributes: [],
             children: [
               {
-                kind: "binop",
-                loc: [24, 10, 34, 15],
-                left: {
-                  kind: "binop",
-                  loc: [24, 10, 33, 14],
-                  left: {
-                    kind: "binop",
-                    loc: [24, 10, 32, 18],
-                    left: {
-                      kind: "binop",
-                      loc: [24, 10, 31, 14],
-                      left: {
-                        kind: "binop",
-                        loc: [24, 10, 30, 19],
-                        left: {
-                          kind: "binop",
-                          loc: [24, 10, 29, 14],
-                          left: {
-                            kind: "binop",
-                            loc: [24, 10, 28, 18],
-                            left: {
-                              kind: "binop",
-                              loc: [24, 10, 27, 14],
-                              left: {
-                                kind: "binop",
-                                loc: [24, 10, 26, 21],
-                                left: {
-                                  kind: "binop",
-                                  loc: [24, 10, 25, 14],
-                                  left: {
-                                    kind: "id",
-                                    loc: [24, 10, 24, 15],
-                                    text: "whole",
-                                    bindingKey: "whole$1o8290c5hfi65$3",
-                                  },
-                                  operatorToken: "+",
-                                  right: {
-                                    kind: "string",
-                                    loc: [25, 11, 25, 14],
-                                    text: " ",
-                                  },
-                                },
-                                operatorToken: "+",
-                                right: {
-                                  kind: "id",
-                                  loc: [26, 11, 26, 21],
-                                  text: "fractional",
-                                  bindingKey: "fractional$1o8290c5hfi65$4",
-                                },
-                              },
-                              operatorToken: "+",
-                              right: {
-                                kind: "string",
-                                loc: [27, 11, 27, 14],
-                                text: " ",
-                              },
-                            },
-                            operatorToken: "+",
-                            right: {
-                              kind: "id",
-                              loc: [28, 11, 28, 18],
-                              text: "written",
-                              bindingKey: "written$1o8290c5hfi65$5",
-                            },
-                          },
-                          operatorToken: "+",
-                          right: {
-                            kind: "string",
-                            loc: [29, 11, 29, 14],
-                            text: " ",
-                          },
-                        },
-                        operatorToken: "+",
-                        right: {
-                          kind: "id",
-                          loc: [30, 11, 30, 19],
-                          text: "positive",
-                          bindingKey: "positive$1o8290c5hfi65$0",
-                        },
-                      },
-                      operatorToken: "+",
-                      right: {
-                        kind: "string",
-                        loc: [31, 11, 31, 14],
-                        text: " ",
-                      },
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: "id",
-                      loc: [32, 11, 32, 18],
-                      text: "largest",
-                      bindingKey: "largest$1o8290c5hfi65$1",
-                    },
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "string",
-                    loc: [33, 11, 33, 14],
-                    text: " ",
-                  },
+                type: "JSXText",
+                loc: {
+                  start: { line: 24, column: 8 },
+                  end: { line: 24, column: 8 },
                 },
-                operatorToken: "+",
-                right: {
-                  kind: "id",
-                  loc: [34, 11, 34, 15],
-                  text: "safe",
-                  bindingKey: "safe$1o8290c5hfi65$2",
+                value: "\n        ",
+                raw: "\n        ",
+              },
+              {
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 24, column: 8 },
+                  end: { line: 34, column: 15 },
+                },
+                expression: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 24, column: 9 },
+                    end: { line: 34, column: 14 },
+                  },
+                  operator: "+",
+                  left: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 24, column: 9 },
+                      end: { line: 33, column: 13 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 24, column: 9 },
+                        end: { line: 32, column: 17 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 24, column: 9 },
+                          end: { line: 31, column: 13 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 24, column: 9 },
+                            end: { line: 30, column: 18 },
+                          },
+                          operator: "+",
+                          left: {
+                            type: "BinaryExpression",
+                            loc: {
+                              start: { line: 24, column: 9 },
+                              end: { line: 29, column: 13 },
+                            },
+                            operator: "+",
+                            left: {
+                              type: "BinaryExpression",
+                              loc: {
+                                start: { line: 24, column: 9 },
+                                end: { line: 28, column: 17 },
+                              },
+                              operator: "+",
+                              left: {
+                                type: "BinaryExpression",
+                                loc: {
+                                  start: { line: 24, column: 9 },
+                                  end: { line: 27, column: 13 },
+                                },
+                                operator: "+",
+                                left: {
+                                  type: "BinaryExpression",
+                                  loc: {
+                                    start: { line: 24, column: 9 },
+                                    end: { line: 26, column: 20 },
+                                  },
+                                  operator: "+",
+                                  left: {
+                                    type: "BinaryExpression",
+                                    loc: {
+                                      start: { line: 24, column: 9 },
+                                      end: { line: 25, column: 13 },
+                                    },
+                                    operator: "+",
+                                    left: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 24, column: 9 },
+                                        end: { line: 24, column: 14 },
+                                      },
+                                      name: "whole",
+                                      bindingKey: "whole$1o8290c5hfi65$3",
+                                    },
+                                    right: {
+                                      type: "Literal",
+                                      loc: {
+                                        start: { line: 25, column: 10 },
+                                        end: { line: 25, column: 13 },
+                                      },
+                                      value: " ",
+                                    },
+                                  },
+                                  right: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 26, column: 10 },
+                                      end: { line: 26, column: 20 },
+                                    },
+                                    name: "fractional",
+                                    bindingKey: "fractional$1o8290c5hfi65$4",
+                                  },
+                                },
+                                right: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 27, column: 10 },
+                                    end: { line: 27, column: 13 },
+                                  },
+                                  value: " ",
+                                },
+                              },
+                              right: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 28, column: 10 },
+                                  end: { line: 28, column: 17 },
+                                },
+                                name: "written",
+                                bindingKey: "written$1o8290c5hfi65$5",
+                              },
+                            },
+                            right: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 29, column: 10 },
+                                end: { line: 29, column: 13 },
+                              },
+                              value: " ",
+                            },
+                          },
+                          right: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 30, column: 10 },
+                              end: { line: 30, column: 18 },
+                            },
+                            name: "positive",
+                            bindingKey: "positive$1o8290c5hfi65$0",
+                          },
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 31, column: 10 },
+                            end: { line: 31, column: 13 },
+                          },
+                          value: " ",
+                        },
+                      },
+                      right: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 32, column: 10 },
+                          end: { line: 32, column: 17 },
+                        },
+                        name: "largest",
+                        bindingKey: "largest$1o8290c5hfi65$1",
+                      },
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 33, column: 10 },
+                        end: { line: 33, column: 13 },
+                      },
+                      value: " ",
+                    },
+                  },
+                  right: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 34, column: 10 },
+                      end: { line: 34, column: 14 },
+                    },
+                    name: "safe",
+                    bindingKey: "safe$1o8290c5hfi65$2",
+                  },
                 },
               },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 35, column: 6 },
+                  end: { line: 35, column: 6 },
+                },
+                value: "\n      ",
+                raw: "\n      ",
+              },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 35, column: 6 },
+                end: { line: 35, column: 13 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 35, column: 8 },
+                  end: { line: 35, column: 12 },
+                },
+                name: "span",
+              },
+            },
           },
         },
       ],

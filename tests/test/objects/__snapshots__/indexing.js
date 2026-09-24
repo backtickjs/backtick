@@ -8,7 +8,7 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [10, 33, 10, 52],
+          { start: { line: 10, column: 32 }, end: { line: 10, column: 51 } },
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
@@ -17,34 +17,54 @@ describe("a read by key", () => {
             captures: [],
           },
           () => ({
-            kind: "[]",
-            loc: [10, 36, 10, 51],
-            expression: {
-              kind: "arr",
-              loc: [10, 36, 10, 46],
+            type: "MemberExpression",
+            loc: {
+              start: { line: 10, column: 35 },
+              end: { line: 10, column: 50 },
+            },
+            object: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 10, column: 35 },
+                end: { line: 10, column: 45 },
+              },
               elements: [
                 {
-                  kind: "number",
-                  loc: [10, 37, 10, 38],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 36 },
+                    end: { line: 10, column: 37 },
+                  },
                   value: 5,
                 },
                 {
-                  kind: "number",
-                  loc: [10, 40, 10, 42],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 39 },
+                    end: { line: 10, column: 41 },
+                  },
                   value: 31,
                 },
                 {
-                  kind: "number",
-                  loc: [10, 44, 10, 45],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 43 },
+                    end: { line: 10, column: 44 },
+                  },
                   value: 7,
                 },
               ],
             },
-            argumentExpression: {
-              kind: "string",
-              loc: [10, 47, 10, 50],
-              text: "0",
+            property: {
+              type: "Literal",
+              loc: {
+                start: { line: 10, column: 46 },
+                end: { line: 10, column: 49 },
+              },
+              value: "0",
             },
+            computed: true,
+            optional: false,
           }),
         ),
       ),
@@ -53,7 +73,7 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [11, 33, 11, 47],
+          { start: { line: 11, column: 32 }, end: { line: 11, column: 46 } },
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
@@ -62,18 +82,29 @@ describe("a read by key", () => {
             captures: [],
           },
           () => ({
-            kind: "[]",
-            loc: [11, 36, 11, 46],
-            expression: {
-              kind: "string",
-              loc: [11, 36, 11, 41],
-              text: "abc",
+            type: "MemberExpression",
+            loc: {
+              start: { line: 11, column: 35 },
+              end: { line: 11, column: 45 },
             },
-            argumentExpression: {
-              kind: "string",
-              loc: [11, 42, 11, 45],
-              text: "0",
+            object: {
+              type: "Literal",
+              loc: {
+                start: { line: 11, column: 35 },
+                end: { line: 11, column: 40 },
+              },
+              value: "abc",
             },
+            property: {
+              type: "Literal",
+              loc: {
+                start: { line: 11, column: 41 },
+                end: { line: 11, column: 44 },
+              },
+              value: "0",
+            },
+            computed: true,
+            optional: false,
           }),
         ),
       ),
@@ -83,7 +114,7 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [13, 33, 13, 50],
+          { start: { line: 13, column: 32 }, end: { line: 13, column: 49 } },
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
@@ -92,33 +123,57 @@ describe("a read by key", () => {
             captures: [],
           },
           () => ({
-            kind: "[]",
-            loc: [13, 36, 13, 49],
-            expression: {
-              kind: "obj",
-              loc: [13, 37, 13, 45],
+            type: "MemberExpression",
+            loc: {
+              start: { line: 13, column: 35 },
+              end: { line: 13, column: 48 },
+            },
+            object: {
+              type: "ObjectExpression",
+              loc: {
+                start: { line: 13, column: 36 },
+                end: { line: 13, column: 44 },
+              },
               properties: [
                 {
-                  kind: ":",
-                  loc: [13, 39, 13, 43],
-                  name: {
-                    kind: "string",
-                    loc: [13, 39, 13, 40],
-                    text: "x",
+                  type: "Property",
+                  loc: {
+                    start: { line: 13, column: 38 },
+                    end: { line: 13, column: 42 },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [13, 42, 13, 43],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 13, column: 38 },
+                      end: { line: 13, column: 39 },
+                    },
+                    name: "x",
+                  },
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 13, column: 41 },
+                      end: { line: 13, column: 42 },
+                    },
                     value: 1,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
               ],
             },
-            argumentExpression: {
-              kind: "number",
-              loc: [13, 47, 13, 48],
+            property: {
+              type: "Literal",
+              loc: {
+                start: { line: 13, column: 46 },
+                end: { line: 13, column: 47 },
+              },
               value: 0,
             },
+            computed: true,
+            optional: false,
           }),
         ),
       ),
@@ -127,7 +182,7 @@ describe("a read by key", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [14, 33, 14, 66],
+          { start: { line: 14, column: 32 }, end: { line: 14, column: 65 } },
           {
             version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
@@ -136,18 +191,29 @@ describe("a read by key", () => {
             captures: [],
           },
           () => ({
-            kind: "[]",
-            loc: [14, 36, 14, 65],
-            expression: {
-              kind: "number",
-              loc: [14, 37, 14, 38],
+            type: "MemberExpression",
+            loc: {
+              start: { line: 14, column: 35 },
+              end: { line: 14, column: 64 },
+            },
+            object: {
+              type: "Literal",
+              loc: {
+                start: { line: 14, column: 36 },
+                end: { line: 14, column: 37 },
+              },
               value: 7,
             },
-            argumentExpression: {
-              kind: "number",
-              loc: [14, 63, 14, 64],
+            property: {
+              type: "Literal",
+              loc: {
+                start: { line: 14, column: 62 },
+                end: { line: 14, column: 63 },
+              },
               value: 0,
             },
+            computed: true,
+            optional: false,
           }),
         ),
       ),
@@ -158,7 +224,7 @@ describe("a read by key", () => {
   it("answers `undefined` for a well-typed key that finds nothing", async () => {
     const reads = [
       cs.create(
-        [20, 7, 20, 24],
+        { start: { line: 20, column: 6 }, end: { line: 20, column: 23 } },
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
@@ -167,38 +233,58 @@ describe("a read by key", () => {
           captures: [],
         },
         () => ({
-          kind: "[]",
-          loc: [20, 10, 20, 23],
-          expression: {
-            kind: "arr",
-            loc: [20, 10, 20, 20],
+          type: "MemberExpression",
+          loc: {
+            start: { line: 20, column: 9 },
+            end: { line: 20, column: 22 },
+          },
+          object: {
+            type: "ArrayExpression",
+            loc: {
+              start: { line: 20, column: 9 },
+              end: { line: 20, column: 19 },
+            },
             elements: [
               {
-                kind: "number",
-                loc: [20, 11, 20, 12],
+                type: "Literal",
+                loc: {
+                  start: { line: 20, column: 10 },
+                  end: { line: 20, column: 11 },
+                },
                 value: 5,
               },
               {
-                kind: "number",
-                loc: [20, 14, 20, 16],
+                type: "Literal",
+                loc: {
+                  start: { line: 20, column: 13 },
+                  end: { line: 20, column: 15 },
+                },
                 value: 31,
               },
               {
-                kind: "number",
-                loc: [20, 18, 20, 19],
+                type: "Literal",
+                loc: {
+                  start: { line: 20, column: 17 },
+                  end: { line: 20, column: 18 },
+                },
                 value: 7,
               },
             ],
           },
-          argumentExpression: {
-            kind: "number",
-            loc: [20, 21, 20, 22],
+          property: {
+            type: "Literal",
+            loc: {
+              start: { line: 20, column: 20 },
+              end: { line: 20, column: 21 },
+            },
             value: 9,
           },
+          computed: true,
+          optional: false,
         }),
       ),
       cs.create(
-        [21, 7, 21, 26],
+        { start: { line: 21, column: 6 }, end: { line: 21, column: 25 } },
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
@@ -207,38 +293,58 @@ describe("a read by key", () => {
           captures: [],
         },
         () => ({
-          kind: "[]",
-          loc: [21, 10, 21, 25],
-          expression: {
-            kind: "arr",
-            loc: [21, 10, 21, 20],
+          type: "MemberExpression",
+          loc: {
+            start: { line: 21, column: 9 },
+            end: { line: 21, column: 24 },
+          },
+          object: {
+            type: "ArrayExpression",
+            loc: {
+              start: { line: 21, column: 9 },
+              end: { line: 21, column: 19 },
+            },
             elements: [
               {
-                kind: "number",
-                loc: [21, 11, 21, 12],
+                type: "Literal",
+                loc: {
+                  start: { line: 21, column: 10 },
+                  end: { line: 21, column: 11 },
+                },
                 value: 5,
               },
               {
-                kind: "number",
-                loc: [21, 14, 21, 16],
+                type: "Literal",
+                loc: {
+                  start: { line: 21, column: 13 },
+                  end: { line: 21, column: 15 },
+                },
                 value: 31,
               },
               {
-                kind: "number",
-                loc: [21, 18, 21, 19],
+                type: "Literal",
+                loc: {
+                  start: { line: 21, column: 17 },
+                  end: { line: 21, column: 18 },
+                },
                 value: 7,
               },
             ],
           },
-          argumentExpression: {
-            kind: "number",
-            loc: [21, 21, 21, 24],
+          property: {
+            type: "Literal",
+            loc: {
+              start: { line: 21, column: 20 },
+              end: { line: 21, column: 23 },
+            },
             value: 1.5,
           },
+          computed: true,
+          optional: false,
         }),
       ),
       cs.create(
-        [22, 7, 22, 25],
+        { start: { line: 22, column: 6 }, end: { line: 22, column: 24 } },
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
@@ -247,43 +353,67 @@ describe("a read by key", () => {
           captures: [],
         },
         () => ({
-          kind: "[]",
-          loc: [22, 10, 22, 24],
-          expression: {
-            kind: "arr",
-            loc: [22, 10, 22, 20],
+          type: "MemberExpression",
+          loc: {
+            start: { line: 22, column: 9 },
+            end: { line: 22, column: 23 },
+          },
+          object: {
+            type: "ArrayExpression",
+            loc: {
+              start: { line: 22, column: 9 },
+              end: { line: 22, column: 19 },
+            },
             elements: [
               {
-                kind: "number",
-                loc: [22, 11, 22, 12],
+                type: "Literal",
+                loc: {
+                  start: { line: 22, column: 10 },
+                  end: { line: 22, column: 11 },
+                },
                 value: 5,
               },
               {
-                kind: "number",
-                loc: [22, 14, 22, 16],
+                type: "Literal",
+                loc: {
+                  start: { line: 22, column: 13 },
+                  end: { line: 22, column: 15 },
+                },
                 value: 31,
               },
               {
-                kind: "number",
-                loc: [22, 18, 22, 19],
+                type: "Literal",
+                loc: {
+                  start: { line: 22, column: 17 },
+                  end: { line: 22, column: 18 },
+                },
                 value: 7,
               },
             ],
           },
-          argumentExpression: {
-            kind: "prefixop",
-            loc: [22, 21, 22, 23],
+          property: {
+            type: "UnaryExpression",
+            loc: {
+              start: { line: 22, column: 20 },
+              end: { line: 22, column: 22 },
+            },
             operator: "-",
-            operand: {
-              kind: "number",
-              loc: [22, 22, 22, 23],
+            prefix: true,
+            argument: {
+              type: "Literal",
+              loc: {
+                start: { line: 22, column: 21 },
+                end: { line: 22, column: 22 },
+              },
               value: 1,
             },
           },
+          computed: true,
+          optional: false,
         }),
       ),
       cs.create(
-        [23, 7, 23, 57],
+        { start: { line: 23, column: 6 }, end: { line: 23, column: 56 } },
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
@@ -292,37 +422,61 @@ describe("a read by key", () => {
           captures: [],
         },
         () => ({
-          kind: "[]",
-          loc: [23, 10, 23, 56],
-          expression: {
-            kind: "obj",
-            loc: [23, 12, 23, 20],
+          type: "MemberExpression",
+          loc: {
+            start: { line: 23, column: 9 },
+            end: { line: 23, column: 55 },
+          },
+          object: {
+            type: "ObjectExpression",
+            loc: {
+              start: { line: 23, column: 11 },
+              end: { line: 23, column: 19 },
+            },
             properties: [
               {
-                kind: ":",
-                loc: [23, 14, 23, 18],
-                name: {
-                  kind: "string",
-                  loc: [23, 14, 23, 15],
-                  text: "x",
+                type: "Property",
+                loc: {
+                  start: { line: 23, column: 13 },
+                  end: { line: 23, column: 17 },
                 },
-                initializer: {
-                  kind: "number",
-                  loc: [23, 17, 23, 18],
+                key: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 23, column: 13 },
+                    end: { line: 23, column: 14 },
+                  },
+                  name: "x",
+                },
+                value: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 23, column: 16 },
+                    end: { line: 23, column: 17 },
+                  },
                   value: 1,
                 },
+                kind: "init",
+                computed: false,
+                method: false,
+                shorthand: false,
               },
             ],
           },
-          argumentExpression: {
-            kind: "string",
-            loc: [23, 52, 23, 55],
-            text: "y",
+          property: {
+            type: "Literal",
+            loc: {
+              start: { line: 23, column: 51 },
+              end: { line: 23, column: 54 },
+            },
+            value: "y",
           },
+          computed: true,
+          optional: false,
         }),
       ),
       cs.create(
-        [24, 7, 24, 19],
+        { start: { line: 24, column: 6 }, end: { line: 24, column: 18 } },
         {
           version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
@@ -331,18 +485,29 @@ describe("a read by key", () => {
           captures: [],
         },
         () => ({
-          kind: "[]",
-          loc: [24, 10, 24, 18],
-          expression: {
-            kind: "string",
-            loc: [24, 10, 24, 15],
-            text: "abc",
+          type: "MemberExpression",
+          loc: {
+            start: { line: 24, column: 9 },
+            end: { line: 24, column: 17 },
           },
-          argumentExpression: {
-            kind: "number",
-            loc: [24, 16, 24, 17],
+          object: {
+            type: "Literal",
+            loc: {
+              start: { line: 24, column: 9 },
+              end: { line: 24, column: 14 },
+            },
+            value: "abc",
+          },
+          property: {
+            type: "Literal",
+            loc: {
+              start: { line: 24, column: 15 },
+              end: { line: 24, column: 16 },
+            },
             value: 9,
           },
+          computed: true,
+          optional: false,
         }),
       ),
     ];

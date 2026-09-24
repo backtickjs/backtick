@@ -8,7 +8,7 @@ it("hashKeyData", async (t) => {
     t,
     "hashKeyData",
     cs.create(
-      [8, 40, 8, 71],
+      { start: { line: 8, column: 39 }, end: { line: 8, column: 70 } },
       {
         version: "0.0.0",
         filePath: "objects/hash-key-data.test.tsx",
@@ -17,14 +17,15 @@ it("hashKeyData", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [8, 43, 8, 70],
-        parameters: [],
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 8, column: 42 }, end: { line: 8, column: 69 } },
+        params: [],
         body: {
-          kind: "splice",
-          loc: [8, 49, 8, 70],
+          type: "Splice",
+          loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 69 } },
           key: "$0splice0",
         },
+        expression: true,
       }),
     ),
   );

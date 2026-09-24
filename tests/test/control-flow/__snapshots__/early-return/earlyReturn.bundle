@@ -2,7 +2,7 @@
   const f1 = () => {
     let n = 0;
     if (n === 0) {
-      return void 0;
+      return;
     }
     n = 1;
   };

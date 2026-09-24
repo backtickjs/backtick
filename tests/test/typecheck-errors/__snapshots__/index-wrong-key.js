@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 // TypeScript reads a numeric string literal as a numeric index.
 const point = { x: 1, y: 2 };
 export default cs.create(
-  [8, 16, 16, 3],
+  { start: { line: 8, column: 15 }, end: { line: 16, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/index-wrong-key.test.tsx",
@@ -13,164 +13,285 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [8, 19, 16, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 8, column: 18 }, end: { line: 16, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [8, 20, 8, 32],
-        name: {
-          kind: "id",
-          loc: [8, 20, 8, 24],
-          text: "name",
-          bindingKey: "name$2p3ed6wqsrdah$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 8, column: 19 }, end: { line: 8, column: 23 } },
+        name: "name",
+        bindingKey: "name$2p3ed6wqsrdah$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [8, 37, 16, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 8, column: 36 }, end: { line: 16, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 27 } },
           kind: "const",
-          loc: [9, 3, 9, 28],
-          name: {
-            kind: "id",
-            loc: [9, 9, 9, 14],
-            text: "coins",
-            bindingKey: "coins$2p3ed6wqsrdah$1",
-          },
-          initializer: {
-            kind: "arr",
-            loc: [9, 17, 9, 27],
-            elements: [
-              {
-                kind: "number",
-                loc: [9, 18, 9, 19],
-                value: 5,
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 9, column: 8 },
+                end: { line: 9, column: 26 },
               },
-              {
-                kind: "number",
-                loc: [9, 21, 9, 23],
-                value: 31,
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 9, column: 8 },
+                  end: { line: 9, column: 13 },
+                },
+                name: "coins",
+                bindingKey: "coins$2p3ed6wqsrdah$1",
               },
-              {
-                kind: "number",
-                loc: [9, 25, 9, 26],
-                value: 7,
+              init: {
+                type: "ArrayExpression",
+                loc: {
+                  start: { line: 9, column: 16 },
+                  end: { line: 9, column: 26 },
+                },
+                elements: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 9, column: 17 },
+                      end: { line: 9, column: 18 },
+                    },
+                    value: 5,
+                  },
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 9, column: 20 },
+                      end: { line: 9, column: 22 },
+                    },
+                    value: 31,
+                  },
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 9, column: 24 },
+                      end: { line: 9, column: 25 },
+                    },
+                    value: 7,
+                  },
+                ],
               },
-            ],
-          },
+            },
+          ],
         },
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 10, column: 2 },
+            end: { line: 10, column: 27 },
+          },
           kind: "const",
-          loc: [10, 3, 10, 28],
-          name: {
-            kind: "id",
-            loc: [10, 9, 10, 14],
-            text: "first",
-            bindingKey: "first$2p3ed6wqsrdah$2",
-          },
-          initializer: {
-            kind: "[]",
-            loc: [10, 17, 10, 27],
-            expression: {
-              kind: "id",
-              loc: [10, 17, 10, 22],
-              text: "coins",
-              bindingKey: "coins$2p3ed6wqsrdah$1",
-            },
-            argumentExpression: {
-              kind: "string",
-              loc: [10, 23, 10, 26],
-              text: "0",
-            },
-          },
-        },
-        {
-          kind: "const",
-          loc: [12, 3, 12, 29],
-          name: {
-            kind: "id",
-            loc: [12, 9, 12, 14],
-            text: "wrong",
-            bindingKey: "wrong$2p3ed6wqsrdah$3",
-          },
-          initializer: {
-            kind: "[]",
-            loc: [12, 17, 12, 28],
-            expression: {
-              kind: "id",
-              loc: [12, 17, 12, 22],
-              text: "coins",
-              bindingKey: "coins$2p3ed6wqsrdah$1",
-            },
-            argumentExpression: {
-              kind: "id",
-              loc: [12, 23, 12, 27],
-              text: "name",
-              bindingKey: "name$2p3ed6wqsrdah$0",
-            },
-          },
-        },
-        {
-          kind: "const",
-          loc: [14, 3, 14, 30],
-          name: {
-            kind: "id",
-            loc: [14, 9, 14, 14],
-            text: "which",
-            bindingKey: "which$2p3ed6wqsrdah$4",
-          },
-          initializer: {
-            kind: "[]",
-            loc: [14, 17, 14, 29],
-            expression: {
-              kind: "splice",
-              loc: [14, 17, 14, 23],
-              key: "$point",
-            },
-            argumentExpression: {
-              kind: "id",
-              loc: [14, 24, 14, 28],
-              text: "name",
-              bindingKey: "name$2p3ed6wqsrdah$0",
-            },
-          },
-        },
-        {
-          kind: "return",
-          loc: [15, 3, 15, 32],
-          expression: {
-            kind: "binop",
-            loc: [15, 10, 15, 31],
-            left: {
-              kind: "binop",
-              loc: [15, 10, 15, 23],
-              left: {
-                kind: "id",
-                loc: [15, 10, 15, 15],
-                text: "first",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 10, column: 8 },
+                end: { line: 10, column: 26 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 10, column: 8 },
+                  end: { line: 10, column: 13 },
+                },
+                name: "first",
                 bindingKey: "first$2p3ed6wqsrdah$2",
               },
-              operatorToken: "+",
+              init: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 10, column: 16 },
+                  end: { line: 10, column: 26 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 10, column: 16 },
+                    end: { line: 10, column: 21 },
+                  },
+                  name: "coins",
+                  bindingKey: "coins$2p3ed6wqsrdah$1",
+                },
+                property: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 22 },
+                    end: { line: 10, column: 25 },
+                  },
+                  value: "0",
+                },
+                computed: true,
+                optional: false,
+              },
+            },
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 12, column: 2 },
+            end: { line: 12, column: 28 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 12, column: 8 },
+                end: { line: 12, column: 27 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 8 },
+                  end: { line: 12, column: 13 },
+                },
+                name: "wrong",
+                bindingKey: "wrong$2p3ed6wqsrdah$3",
+              },
+              init: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 12, column: 16 },
+                  end: { line: 12, column: 27 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 16 },
+                    end: { line: 12, column: 21 },
+                  },
+                  name: "coins",
+                  bindingKey: "coins$2p3ed6wqsrdah$1",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 22 },
+                    end: { line: 12, column: 26 },
+                  },
+                  name: "name",
+                  bindingKey: "name$2p3ed6wqsrdah$0",
+                },
+                computed: true,
+                optional: false,
+              },
+            },
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 14, column: 2 },
+            end: { line: 14, column: 29 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 14, column: 8 },
+                end: { line: 14, column: 28 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 8 },
+                  end: { line: 14, column: 13 },
+                },
+                name: "which",
+                bindingKey: "which$2p3ed6wqsrdah$4",
+              },
+              init: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 14, column: 16 },
+                  end: { line: 14, column: 28 },
+                },
+                object: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 14, column: 16 },
+                    end: { line: 14, column: 22 },
+                  },
+                  key: "$point",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 23 },
+                    end: { line: 14, column: 27 },
+                  },
+                  name: "name",
+                  bindingKey: "name$2p3ed6wqsrdah$0",
+                },
+                computed: true,
+                optional: false,
+              },
+            },
+          ],
+        },
+        {
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 15, column: 2 },
+            end: { line: 15, column: 31 },
+          },
+          argument: {
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 15, column: 9 },
+              end: { line: 15, column: 30 },
+            },
+            operator: "+",
+            left: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 15, column: 9 },
+                end: { line: 15, column: 22 },
+              },
+              operator: "+",
+              left: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 9 },
+                  end: { line: 15, column: 14 },
+                },
+                name: "first",
+                bindingKey: "first$2p3ed6wqsrdah$2",
+              },
               right: {
-                kind: "id",
-                loc: [15, 18, 15, 23],
-                text: "wrong",
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 17 },
+                  end: { line: 15, column: 22 },
+                },
+                name: "wrong",
                 bindingKey: "wrong$2p3ed6wqsrdah$3",
               },
             },
-            operatorToken: "+",
             right: {
-              kind: "id",
-              loc: [15, 26, 15, 31],
-              text: "which",
+              type: "Identifier",
+              loc: {
+                start: { line: 15, column: 25 },
+                end: { line: 15, column: 30 },
+              },
+              name: "which",
               bindingKey: "which$2p3ed6wqsrdah$4",
             },
           },
         },
       ],
     },
+    expression: false,
   }),
 );

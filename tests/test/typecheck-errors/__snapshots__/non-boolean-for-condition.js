@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 // A `for` condition is a boolean like every other condition, header or not.
 export default cs.create(
-  [4, 16, 11, 3],
+  { start: { line: 4, column: 15 }, end: { line: 11, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/non-boolean-for-condition.test.tsx",
@@ -10,126 +10,201 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [4, 19, 11, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 4, column: 18 }, end: { line: 11, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [4, 20, 4, 29],
-        name: {
-          kind: "id",
-          loc: [4, 20, 4, 21],
-          text: "n",
-          bindingKey: "n$1jrbfwc2wu5y3$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 4, column: 19 }, end: { line: 4, column: 20 } },
+        name: "n",
+        bindingKey: "n$1jrbfwc2wu5y3$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [4, 34, 11, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 4, column: 33 }, end: { line: 11, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 5, column: 2 }, end: { line: 5, column: 15 } },
           kind: "let",
-          loc: [5, 3, 5, 16],
-          name: {
-            kind: "id",
-            loc: [5, 7, 5, 11],
-            text: "last",
-            bindingKey: "last$1jrbfwc2wu5y3$1",
-          },
-          initializer: {
-            kind: "number",
-            loc: [5, 14, 5, 15],
-            value: 0,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 5, column: 6 },
+                end: { line: 5, column: 14 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 5, column: 6 },
+                  end: { line: 5, column: 10 },
+                },
+                name: "last",
+                bindingKey: "last$1jrbfwc2wu5y3$1",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 5, column: 13 },
+                  end: { line: 5, column: 14 },
+                },
+                value: 0,
+              },
+            },
+          ],
         },
         {
-          kind: "for",
-          loc: [7, 3, 9, 4],
-          initializer: {
+          type: "ForStatement",
+          loc: { start: { line: 7, column: 2 }, end: { line: 9, column: 3 } },
+          init: {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 7, column: 7 },
+              end: { line: 7, column: 16 },
+            },
             kind: "let",
-            loc: [7, 8, 7, 17],
-            name: {
-              kind: "id",
-              loc: [7, 12, 7, 13],
-              text: "i",
-              bindingKey: "i$1jrbfwc2wu5y3$2",
-            },
-            initializer: {
-              kind: "id",
-              loc: [7, 16, 7, 17],
-              text: "n",
-              bindingKey: "n$1jrbfwc2wu5y3$0",
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 7, column: 11 },
+                  end: { line: 7, column: 16 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 7, column: 11 },
+                    end: { line: 7, column: 12 },
+                  },
+                  name: "i",
+                  bindingKey: "i$1jrbfwc2wu5y3$2",
+                },
+                init: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 7, column: 15 },
+                    end: { line: 7, column: 16 },
+                  },
+                  name: "n",
+                  bindingKey: "n$1jrbfwc2wu5y3$0",
+                },
+              },
+            ],
           },
-          condition: {
-            kind: "id",
-            loc: [7, 19, 7, 20],
-            text: "i",
+          test: {
+            type: "Identifier",
+            loc: {
+              start: { line: 7, column: 18 },
+              end: { line: 7, column: 19 },
+            },
+            name: "i",
             bindingKey: "i$1jrbfwc2wu5y3$2",
           },
-          incrementor: {
-            kind: "binop",
-            loc: [7, 22, 7, 31],
+          update: {
+            type: "AssignmentExpression",
+            loc: {
+              start: { line: 7, column: 21 },
+              end: { line: 7, column: 30 },
+            },
+            operator: "=",
             left: {
-              kind: "id",
-              loc: [7, 22, 7, 23],
-              text: "i",
+              type: "Identifier",
+              loc: {
+                start: { line: 7, column: 21 },
+                end: { line: 7, column: 22 },
+              },
+              name: "i",
               bindingKey: "i$1jrbfwc2wu5y3$2",
             },
-            operatorToken: "=",
             right: {
-              kind: "binop",
-              loc: [7, 26, 7, 31],
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 7, column: 25 },
+                end: { line: 7, column: 30 },
+              },
+              operator: "-",
               left: {
-                kind: "id",
-                loc: [7, 26, 7, 27],
-                text: "i",
+                type: "Identifier",
+                loc: {
+                  start: { line: 7, column: 25 },
+                  end: { line: 7, column: 26 },
+                },
+                name: "i",
                 bindingKey: "i$1jrbfwc2wu5y3$2",
               },
-              operatorToken: "-",
               right: {
-                kind: "number",
-                loc: [7, 30, 7, 31],
+                type: "Literal",
+                loc: {
+                  start: { line: 7, column: 29 },
+                  end: { line: 7, column: 30 },
+                },
                 value: 1,
               },
             },
           },
-          statement: {
-            kind: "{}",
-            loc: [7, 33, 9, 4],
-            statements: [
+          body: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 7, column: 32 },
+              end: { line: 9, column: 3 },
+            },
+            body: [
               {
-                kind: "binop",
-                loc: [8, 5, 8, 13],
-                left: {
-                  kind: "id",
-                  loc: [8, 5, 8, 9],
-                  text: "last",
-                  bindingKey: "last$1jrbfwc2wu5y3$1",
+                type: "ExpressionStatement",
+                loc: {
+                  start: { line: 8, column: 4 },
+                  end: { line: 8, column: 13 },
                 },
-                operatorToken: "=",
-                right: {
-                  kind: "id",
-                  loc: [8, 12, 8, 13],
-                  text: "i",
-                  bindingKey: "i$1jrbfwc2wu5y3$2",
+                expression: {
+                  type: "AssignmentExpression",
+                  loc: {
+                    start: { line: 8, column: 4 },
+                    end: { line: 8, column: 12 },
+                  },
+                  operator: "=",
+                  left: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 8, column: 4 },
+                      end: { line: 8, column: 8 },
+                    },
+                    name: "last",
+                    bindingKey: "last$1jrbfwc2wu5y3$1",
+                  },
+                  right: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 8, column: 11 },
+                      end: { line: 8, column: 12 },
+                    },
+                    name: "i",
+                    bindingKey: "i$1jrbfwc2wu5y3$2",
+                  },
                 },
               },
             ],
           },
         },
         {
-          kind: "return",
-          loc: [10, 3, 10, 15],
-          expression: {
-            kind: "id",
-            loc: [10, 10, 10, 14],
-            text: "last",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 10, column: 2 },
+            end: { line: 10, column: 14 },
+          },
+          argument: {
+            type: "Identifier",
+            loc: {
+              start: { line: 10, column: 9 },
+              end: { line: 10, column: 13 },
+            },
+            name: "last",
             bindingKey: "last$1jrbfwc2wu5y3$1",
           },
         },
       ],
     },
+    expression: false,
   }),
 );

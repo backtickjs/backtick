@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // Statement position takes an action and nothing else: a discarded value
 // splice is dead code.
 const count = cs.create(
-  [5, 15, 5, 20],
+  { start: { line: 5, column: 14 }, end: { line: 5, column: 19 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/value-splice-statement.test.tsx",
@@ -11,13 +11,13 @@ const count = cs.create(
     captures: [],
   },
   () => ({
-    kind: "number",
-    loc: [5, 18, 5, 19],
+    type: "Literal",
+    loc: { start: { line: 5, column: 17 }, end: { line: 5, column: 18 } },
     value: 1,
   }),
 );
 export const script = cs.create(
-  [7, 23, 10, 3],
+  { start: { line: 7, column: 22 }, end: { line: 10, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/value-splice-statement.test.tsx",
@@ -26,13 +26,17 @@ export const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [7, 26, 10, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 7, column: 25 }, end: { line: 10, column: 1 } },
+    body: [
       {
-        kind: "splice",
-        loc: [9, 3, 9, 9],
-        key: "$count",
+        type: "ExpressionStatement",
+        loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 9 } },
+        expression: {
+          type: "Splice",
+          loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 8 } },
+          key: "$count",
+        },
       },
     ],
   }),

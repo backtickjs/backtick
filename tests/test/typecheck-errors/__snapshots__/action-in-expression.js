@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // fails right at the splice — a stored one, a returned one, even one
 // assigned to an `unknown`-typed catch binding.
 const action = cs.create(
-  [6, 16, 8, 3],
+  { start: { line: 6, column: 15 }, end: { line: 8, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-expression.test.tsx",
@@ -12,29 +12,45 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [6, 19, 8, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 6, column: 18 }, end: { line: 8, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 7, column: 2 }, end: { line: 7, column: 14 } },
         kind: "const",
-        loc: [7, 3, 7, 15],
-        name: {
-          kind: "id",
-          loc: [7, 9, 7, 10],
-          text: "x",
-          bindingKey: "x$1oi8866dofr8x$0",
-        },
-        initializer: {
-          kind: "number",
-          loc: [7, 13, 7, 14],
-          value: 1,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 7, column: 8 },
+              end: { line: 7, column: 13 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 7, column: 8 },
+                end: { line: 7, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$1oi8866dofr8x$0",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 7, column: 12 },
+                end: { line: 7, column: 13 },
+              },
+              value: 1,
+            },
+          },
+        ],
       },
     ],
   }),
 );
 export const stored = cs.create(
-  [10, 23, 14, 3],
+  { start: { line: 10, column: 22 }, end: { line: 14, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-expression.test.tsx",
@@ -43,30 +59,49 @@ export const stored = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [10, 26, 14, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 10, column: 25 }, end: { line: 14, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 27 } },
         kind: "const",
-        loc: [12, 3, 12, 28],
-        name: {
-          kind: "id",
-          loc: [12, 9, 12, 17],
-          text: "captured",
-          bindingKey: "captured$1oi8866dofr8x$1",
-        },
-        initializer: {
-          kind: "splice",
-          loc: [12, 20, 12, 27],
-          key: "$action",
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 12, column: 8 },
+              end: { line: 12, column: 26 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 12, column: 8 },
+                end: { line: 12, column: 16 },
+              },
+              name: "captured",
+              bindingKey: "captured$1oi8866dofr8x$1",
+            },
+            init: {
+              type: "Splice",
+              loc: {
+                start: { line: 12, column: 19 },
+                end: { line: 12, column: 26 },
+              },
+              key: "$action",
+            },
+          },
+        ],
       },
       {
-        kind: "return",
-        loc: [13, 3, 13, 12],
-        expression: {
-          kind: "number",
-          loc: [13, 10, 13, 11],
+        type: "ReturnStatement",
+        loc: { start: { line: 13, column: 2 }, end: { line: 13, column: 11 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 13, column: 9 },
+            end: { line: 13, column: 10 },
+          },
           value: 1,
         },
       },
@@ -74,7 +109,7 @@ export const stored = cs.create(
   }),
 );
 export const returned = cs.create(
-  [16, 25, 19, 3],
+  { start: { line: 16, column: 24 }, end: { line: 19, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-expression.test.tsx",
@@ -83,15 +118,18 @@ export const returned = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [16, 28, 19, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 16, column: 27 }, end: { line: 19, column: 1 } },
+    body: [
       {
-        kind: "return",
-        loc: [18, 3, 18, 18],
-        expression: {
-          kind: "splice",
-          loc: [18, 10, 18, 17],
+        type: "ReturnStatement",
+        loc: { start: { line: 18, column: 2 }, end: { line: 18, column: 17 } },
+        argument: {
+          type: "Splice",
+          loc: {
+            start: { line: 18, column: 9 },
+            end: { line: 18, column: 16 },
+          },
           key: "$action",
         },
       },
@@ -99,7 +137,7 @@ export const returned = cs.create(
   }),
 );
 export const assigned = cs.create(
-  [21, 25, 29, 3],
+  { start: { line: 21, column: 24 }, end: { line: 29, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-expression.test.tsx",
@@ -108,68 +146,103 @@ export const assigned = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [21, 28, 29, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 21, column: 27 }, end: { line: 29, column: 1 } },
+    body: [
       {
-        kind: "try",
-        loc: [22, 3, 28, 4],
-        tryBlock: {
-          kind: "{}",
-          loc: [22, 7, 24, 4],
-          statements: [
+        type: "TryStatement",
+        loc: { start: { line: 22, column: 2 }, end: { line: 28, column: 3 } },
+        block: {
+          type: "BlockStatement",
+          loc: { start: { line: 22, column: 6 }, end: { line: 24, column: 3 } },
+          body: [
             {
-              kind: "return",
-              loc: [23, 5, 23, 14],
-              expression: {
-                kind: "number",
-                loc: [23, 12, 23, 13],
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 23, column: 4 },
+                end: { line: 23, column: 13 },
+              },
+              argument: {
+                type: "Literal",
+                loc: {
+                  start: { line: 23, column: 11 },
+                  end: { line: 23, column: 12 },
+                },
                 value: 1,
               },
             },
           ],
         },
-        catchClause: {
-          kind: "catch",
-          loc: [24, 5, 28, 4],
-          variableDeclaration: {
-            kind: "id",
-            loc: [24, 12, 24, 13],
-            text: "e",
+        handler: {
+          type: "CatchClause",
+          loc: { start: { line: 24, column: 4 }, end: { line: 28, column: 3 } },
+          param: {
+            type: "Identifier",
+            loc: {
+              start: { line: 24, column: 11 },
+              end: { line: 24, column: 12 },
+            },
+            name: "e",
             bindingKey: "e$1oi8866dofr8x$2",
           },
-          block: {
-            kind: "{}",
-            loc: [24, 15, 28, 4],
-            statements: [
+          body: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 24, column: 14 },
+              end: { line: 28, column: 3 },
+            },
+            body: [
               {
-                kind: "binop",
-                loc: [26, 5, 26, 16],
-                left: {
-                  kind: "id",
-                  loc: [26, 5, 26, 6],
-                  text: "e",
-                  bindingKey: "e$1oi8866dofr8x$2",
+                type: "ExpressionStatement",
+                loc: {
+                  start: { line: 26, column: 4 },
+                  end: { line: 26, column: 16 },
                 },
-                operatorToken: "=",
-                right: {
-                  kind: "splice",
-                  loc: [26, 9, 26, 16],
-                  key: "$action",
+                expression: {
+                  type: "AssignmentExpression",
+                  loc: {
+                    start: { line: 26, column: 4 },
+                    end: { line: 26, column: 15 },
+                  },
+                  operator: "=",
+                  left: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 26, column: 4 },
+                      end: { line: 26, column: 5 },
+                    },
+                    name: "e",
+                    bindingKey: "e$1oi8866dofr8x$2",
+                  },
+                  right: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 26, column: 8 },
+                      end: { line: 26, column: 15 },
+                    },
+                    key: "$action",
+                  },
                 },
               },
               {
-                kind: "return",
-                loc: [27, 5, 27, 14],
-                expression: {
-                  kind: "number",
-                  loc: [27, 12, 27, 13],
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 27, column: 4 },
+                  end: { line: 27, column: 13 },
+                },
+                argument: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 27, column: 11 },
+                    end: { line: 27, column: 12 },
+                  },
                   value: 2,
                 },
               },
             ],
           },
         },
+        finalizer: null,
       },
     ],
   }),

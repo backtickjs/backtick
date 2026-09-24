@@ -10,7 +10,7 @@ it("spliceOrder", async (t) => {
     t,
     "spliceOrder",
     cs.create(
-      [11, 40, 11, 74],
+      { start: { line: 11, column: 39 }, end: { line: 11, column: 73 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-order.test.tsx",
@@ -22,36 +22,62 @@ it("spliceOrder", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [11, 44, 11, 72],
+        type: "ObjectExpression",
+        loc: { start: { line: 11, column: 43 }, end: { line: 11, column: 71 } },
         properties: [
           {
-            kind: ":",
-            loc: [11, 46, 11, 55],
-            name: {
-              kind: "string",
-              loc: [11, 46, 11, 47],
-              text: "a",
+            type: "Property",
+            loc: {
+              start: { line: 11, column: 45 },
+              end: { line: 11, column: 54 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [11, 49, 11, 55],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 11, column: 45 },
+                end: { line: 11, column: 46 },
+              },
+              name: "a",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 11, column: 48 },
+                end: { line: 11, column: 54 },
+              },
               key: "$count",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [11, 57, 11, 70],
-            name: {
-              kind: "string",
-              loc: [11, 57, 11, 58],
-              text: "b",
+            type: "Property",
+            loc: {
+              start: { line: 11, column: 56 },
+              end: { line: 11, column: 69 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [11, 60, 11, 70],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 11, column: 56 },
+                end: { line: 11, column: 57 },
+              },
+              name: "b",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 11, column: 59 },
+                end: { line: 11, column: 69 },
+              },
               key: "$0splice0",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

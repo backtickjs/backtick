@@ -12,7 +12,7 @@ import { namespaced } from "./dom.ts";
 // it.
 async function Ring() {
   return cs.create(
-    [15, 10, 15, 78],
+    { start: { line: 15, column: 9 }, end: { line: 15, column: 77 } },
     {
       version: "0.0.0",
       filePath: "render/svg-namespace.test.tsx",
@@ -21,61 +21,145 @@ async function Ring() {
       captures: [],
     },
     () => ({
-      kind: "jsx",
-      loc: [15, 13, 15, 77],
-      type: {
-        kind: "string",
-        loc: [15, 14, 15, 20],
-        text: "circle",
+      type: "JSXElement",
+      loc: { start: { line: 15, column: 12 }, end: { line: 15, column: 76 } },
+      openingElement: {
+        type: "JSXOpeningElement",
+        loc: { start: { line: 15, column: 12 }, end: { line: 15, column: 76 } },
+        name: {
+          type: "JSXIdentifier",
+          loc: {
+            start: { line: 15, column: 13 },
+            end: { line: 15, column: 19 },
+          },
+          name: "circle",
+        },
+        attributes: [
+          {
+            type: "JSXAttribute",
+            loc: {
+              start: { line: 15, column: 20 },
+              end: { line: 15, column: 26 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 15, column: 20 },
+                end: { line: 15, column: 22 },
+              },
+              name: "cx",
+            },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 15, column: 23 },
+                end: { line: 15, column: 26 },
+              },
+              value: "5",
+            },
+          },
+          {
+            type: "JSXAttribute",
+            loc: {
+              start: { line: 15, column: 27 },
+              end: { line: 15, column: 33 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 15, column: 27 },
+                end: { line: 15, column: 29 },
+              },
+              name: "cy",
+            },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 15, column: 30 },
+                end: { line: 15, column: 33 },
+              },
+              value: "5",
+            },
+          },
+          {
+            type: "JSXAttribute",
+            loc: {
+              start: { line: 15, column: 34 },
+              end: { line: 15, column: 39 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 15, column: 34 },
+                end: { line: 15, column: 35 },
+              },
+              name: "r",
+            },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 15, column: 36 },
+                end: { line: 15, column: 39 },
+              },
+              value: "4",
+            },
+          },
+          {
+            type: "JSXAttribute",
+            loc: {
+              start: { line: 15, column: 40 },
+              end: { line: 15, column: 51 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 15, column: 40 },
+                end: { line: 15, column: 44 },
+              },
+              name: "fill",
+            },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 15, column: 45 },
+                end: { line: 15, column: 51 },
+              },
+              value: "none",
+            },
+          },
+          {
+            type: "JSXAttribute",
+            loc: {
+              start: { line: 15, column: 52 },
+              end: { line: 15, column: 73 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 15, column: 52 },
+                end: { line: 15, column: 58 },
+              },
+              name: "stroke",
+            },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 15, column: 59 },
+                end: { line: 15, column: 73 },
+              },
+              value: "currentColor",
+            },
+          },
+        ],
+        selfClosing: true,
       },
-      attributes: [
-        {
-          name: "cx",
-          initializer: {
-            kind: "string",
-            loc: [15, 24, 15, 27],
-            text: "5",
-          },
-        },
-        {
-          name: "cy",
-          initializer: {
-            kind: "string",
-            loc: [15, 31, 15, 34],
-            text: "5",
-          },
-        },
-        {
-          name: "r",
-          initializer: {
-            kind: "string",
-            loc: [15, 37, 15, 40],
-            text: "4",
-          },
-        },
-        {
-          name: "fill",
-          initializer: {
-            kind: "string",
-            loc: [15, 46, 15, 52],
-            text: "none",
-          },
-        },
-        {
-          name: "stroke",
-          initializer: {
-            kind: "string",
-            loc: [15, 60, 15, 74],
-            text: "currentColor",
-          },
-        },
-      ],
       children: [],
+      closingElement: null,
     }),
   );
 }
 const svgNamespace = cs.create(
-  [18, 22, 37, 3],
+  { start: { line: 18, column: 21 }, end: { line: 37, column: 2 } },
   {
     version: "0.0.0",
     filePath: "render/svg-namespace.test.tsx",
@@ -87,323 +171,977 @@ const svgNamespace = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [18, 25, 37, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 18, column: 24 }, end: { line: 37, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 19, column: 2 }, end: { line: 23, column: 4 } },
         kind: "const",
-        loc: [19, 3, 23, 5],
-        name: {
-          kind: "id",
-          loc: [19, 9, 19, 12],
-          text: "Dot",
-          bindingKey: "Dot$8n845jjtfvwm$0",
-        },
-        initializer: {
-          kind: "=>",
-          loc: [19, 15, 23, 4],
-          parameters: [
-            {
-              kind: "param",
-              loc: [19, 16, 19, 36],
-              name: {
-                kind: "id",
-                loc: [19, 16, 19, 21],
-                text: "props",
-                bindingKey: "props$8n845jjtfvwm$1",
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 19, column: 8 },
+              end: { line: 23, column: 3 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 19, column: 8 },
+                end: { line: 19, column: 11 },
               },
+              name: "Dot",
+              bindingKey: "Dot$8n845jjtfvwm$0",
             },
-          ],
-          body: {
-            kind: "jsx",
-            loc: [20, 5, 22, 14],
-            type: {
-              kind: "string",
-              loc: [20, 6, 20, 12],
-              text: "circle",
-            },
-            attributes: [
-              {
-                name: "cx",
-                initializer: {
-                  kind: ".",
-                  loc: [20, 17, 20, 24],
-                  expression: {
-                    kind: "id",
-                    loc: [20, 17, 20, 22],
-                    text: "props",
-                    bindingKey: "props$8n845jjtfvwm$1",
+            init: {
+              type: "ArrowFunctionExpression",
+              loc: {
+                start: { line: 19, column: 14 },
+                end: { line: 23, column: 3 },
+              },
+              params: [
+                {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 15 },
+                    end: { line: 19, column: 20 },
                   },
-                  name: "x",
+                  name: "props",
+                  bindingKey: "props$8n845jjtfvwm$1",
                 },
-              },
-              {
-                name: "cy",
-                initializer: {
-                  kind: "string",
-                  loc: [20, 29, 20, 32],
-                  text: "5",
+              ],
+              body: {
+                type: "JSXElement",
+                loc: {
+                  start: { line: 20, column: 4 },
+                  end: { line: 22, column: 13 },
                 },
-              },
-              {
-                name: "r",
-                initializer: {
-                  kind: "string",
-                  loc: [20, 35, 20, 38],
-                  text: "2",
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 20, column: 4 },
+                    end: { line: 20, column: 38 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 20, column: 5 },
+                      end: { line: 20, column: 11 },
+                    },
+                    name: "circle",
+                  },
+                  attributes: [
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 20, column: 12 },
+                        end: { line: 20, column: 24 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 20, column: 12 },
+                          end: { line: 20, column: 14 },
+                        },
+                        name: "cx",
+                      },
+                      value: {
+                        type: "JSXExpressionContainer",
+                        loc: {
+                          start: { line: 20, column: 15 },
+                          end: { line: 20, column: 24 },
+                        },
+                        expression: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 20, column: 16 },
+                            end: { line: 20, column: 23 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 20, column: 16 },
+                              end: { line: 20, column: 21 },
+                            },
+                            name: "props",
+                            bindingKey: "props$8n845jjtfvwm$1",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 20, column: 22 },
+                              end: { line: 20, column: 23 },
+                            },
+                            name: "x",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                      },
+                    },
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 20, column: 25 },
+                        end: { line: 20, column: 31 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 20, column: 25 },
+                          end: { line: 20, column: 27 },
+                        },
+                        name: "cy",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 20, column: 28 },
+                          end: { line: 20, column: 31 },
+                        },
+                        value: "5",
+                      },
+                    },
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 20, column: 32 },
+                        end: { line: 20, column: 37 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 20, column: 32 },
+                          end: { line: 20, column: 33 },
+                        },
+                        name: "r",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 20, column: 34 },
+                          end: { line: 20, column: 37 },
+                        },
+                        value: "2",
+                      },
+                    },
+                  ],
+                  selfClosing: false,
                 },
-              },
-            ],
-            children: [
-              {
-                kind: "jsx",
-                loc: [21, 7, 21, 40],
-                type: {
-                  kind: "string",
-                  loc: [21, 8, 21, 13],
-                  text: "title",
-                },
-                attributes: [],
                 children: [
                   {
-                    kind: "binop",
-                    loc: [21, 15, 21, 31],
-                    left: {
-                      kind: "string",
-                      loc: [21, 15, 21, 21],
-                      text: "dot ",
+                    type: "JSXText",
+                    loc: {
+                      start: { line: 21, column: 6 },
+                      end: { line: 21, column: 6 },
                     },
-                    operatorToken: "+",
-                    right: {
-                      kind: ".",
-                      loc: [21, 24, 21, 31],
-                      expression: {
-                        kind: "id",
-                        loc: [21, 24, 21, 29],
-                        text: "props",
-                        bindingKey: "props$8n845jjtfvwm$1",
+                    value: "\n      ",
+                    raw: "\n      ",
+                  },
+                  {
+                    type: "JSXElement",
+                    loc: {
+                      start: { line: 21, column: 6 },
+                      end: { line: 21, column: 39 },
+                    },
+                    openingElement: {
+                      type: "JSXOpeningElement",
+                      loc: {
+                        start: { line: 21, column: 6 },
+                        end: { line: 21, column: 13 },
                       },
-                      name: "x",
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 21, column: 7 },
+                          end: { line: 21, column: 12 },
+                        },
+                        name: "title",
+                      },
+                      attributes: [],
+                      selfClosing: false,
+                    },
+                    children: [
+                      {
+                        type: "JSXExpressionContainer",
+                        loc: {
+                          start: { line: 21, column: 13 },
+                          end: { line: 21, column: 31 },
+                        },
+                        expression: {
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 21, column: 14 },
+                            end: { line: 21, column: 30 },
+                          },
+                          operator: "+",
+                          left: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 21, column: 14 },
+                              end: { line: 21, column: 20 },
+                            },
+                            value: "dot ",
+                          },
+                          right: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 21, column: 23 },
+                              end: { line: 21, column: 30 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 21, column: 23 },
+                                end: { line: 21, column: 28 },
+                              },
+                              name: "props",
+                              bindingKey: "props$8n845jjtfvwm$1",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 21, column: 29 },
+                                end: { line: 21, column: 30 },
+                              },
+                              name: "x",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                        },
+                      },
+                    ],
+                    closingElement: {
+                      type: "JSXClosingElement",
+                      loc: {
+                        start: { line: 21, column: 31 },
+                        end: { line: 21, column: 39 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 21, column: 33 },
+                          end: { line: 21, column: 38 },
+                        },
+                        name: "title",
+                      },
+                    },
+                  },
+                  {
+                    type: "JSXText",
+                    loc: {
+                      start: { line: 22, column: 4 },
+                      end: { line: 22, column: 4 },
+                    },
+                    value: "\n    ",
+                    raw: "\n    ",
+                  },
+                ],
+                closingElement: {
+                  type: "JSXClosingElement",
+                  loc: {
+                    start: { line: 22, column: 4 },
+                    end: { line: 22, column: 13 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 22, column: 6 },
+                      end: { line: 22, column: 12 },
+                    },
+                    name: "circle",
+                  },
+                },
+              },
+              expression: true,
+            },
+          },
+        ],
+      },
+      {
+        type: "ReturnStatement",
+        loc: { start: { line: 25, column: 2 }, end: { line: 36, column: 4 } },
+        argument: {
+          type: "JSXElement",
+          loc: {
+            start: { line: 26, column: 4 },
+            end: { line: 35, column: 10 },
+          },
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 26, column: 4 },
+              end: { line: 26, column: 9 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 26, column: 5 },
+                end: { line: 26, column: 8 },
+              },
+              name: "div",
+            },
+            attributes: [],
+            selfClosing: false,
+          },
+          children: [
+            {
+              type: "JSXText",
+              loc: {
+                start: { line: 27, column: 6 },
+                end: { line: 27, column: 6 },
+              },
+              value: "\n      ",
+              raw: "\n      ",
+            },
+            {
+              type: "JSXElement",
+              loc: {
+                start: { line: 27, column: 6 },
+                end: { line: 27, column: 38 },
+              },
+              openingElement: {
+                type: "JSXOpeningElement",
+                loc: {
+                  start: { line: 27, column: 6 },
+                  end: { line: 27, column: 24 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 27, column: 7 },
+                    end: { line: 27, column: 8 },
+                  },
+                  name: "a",
+                },
+                attributes: [
+                  {
+                    type: "JSXAttribute",
+                    loc: {
+                      start: { line: 27, column: 9 },
+                      end: { line: 27, column: 23 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 27, column: 9 },
+                        end: { line: 27, column: 13 },
+                      },
+                      name: "href",
+                    },
+                    value: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 27, column: 14 },
+                        end: { line: 27, column: 23 },
+                      },
+                      value: "/shapes",
                     },
                   },
                 ],
+                selfClosing: false,
               },
-            ],
-          },
-        },
-      },
-      {
-        kind: "return",
-        loc: [25, 3, 36, 5],
-        expression: {
-          kind: "jsx",
-          loc: [26, 5, 35, 11],
-          type: {
-            kind: "string",
-            loc: [26, 6, 26, 9],
-            text: "div",
-          },
-          attributes: [],
-          children: [
-            {
-              kind: "jsx",
-              loc: [27, 7, 27, 39],
-              type: {
-                kind: "string",
-                loc: [27, 8, 27, 9],
-                text: "a",
-              },
-              attributes: [
+              children: [
                 {
-                  name: "href",
-                  initializer: {
-                    kind: "string",
-                    loc: [27, 15, 27, 24],
-                    text: "/shapes",
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 27, column: 24 },
+                    end: { line: 27, column: 34 },
+                  },
+                  expression: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 27, column: 25 },
+                      end: { line: 27, column: 33 },
+                    },
+                    value: "shapes",
                   },
                 },
               ],
-              children: [
-                {
-                  kind: "string",
-                  loc: [27, 26, 27, 34],
-                  text: "shapes",
+              closingElement: {
+                type: "JSXClosingElement",
+                loc: {
+                  start: { line: 27, column: 34 },
+                  end: { line: 27, column: 38 },
                 },
-              ],
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 27, column: 36 },
+                    end: { line: 27, column: 37 },
+                  },
+                  name: "a",
+                },
+              },
             },
             {
-              kind: "jsx",
-              loc: [28, 7, 34, 13],
-              type: {
-                kind: "string",
-                loc: [28, 8, 28, 11],
-                text: "svg",
+              type: "JSXText",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 6 },
               },
-              attributes: [
-                {
-                  name: "viewBox",
-                  initializer: {
-                    kind: "string",
-                    loc: [28, 20, 28, 31],
-                    text: "0 0 30 10",
-                  },
+              value: "\n      ",
+              raw: "\n      ",
+            },
+            {
+              type: "JSXElement",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 34, column: 12 },
+              },
+              openingElement: {
+                type: "JSXOpeningElement",
+                loc: {
+                  start: { line: 28, column: 6 },
+                  end: { line: 28, column: 43 },
                 },
-                {
-                  name: "width",
-                  initializer: {
-                    kind: "string",
-                    loc: [28, 38, 28, 43],
-                    text: "120",
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 28, column: 7 },
+                    end: { line: 28, column: 10 },
                   },
+                  name: "svg",
                 },
-              ],
+                attributes: [
+                  {
+                    type: "JSXAttribute",
+                    loc: {
+                      start: { line: 28, column: 11 },
+                      end: { line: 28, column: 30 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 28, column: 11 },
+                        end: { line: 28, column: 18 },
+                      },
+                      name: "viewBox",
+                    },
+                    value: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 28, column: 19 },
+                        end: { line: 28, column: 30 },
+                      },
+                      value: "0 0 30 10",
+                    },
+                  },
+                  {
+                    type: "JSXAttribute",
+                    loc: {
+                      start: { line: 28, column: 31 },
+                      end: { line: 28, column: 42 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 28, column: 31 },
+                        end: { line: 28, column: 36 },
+                      },
+                      name: "width",
+                    },
+                    value: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 28, column: 37 },
+                        end: { line: 28, column: 42 },
+                      },
+                      value: "120",
+                    },
+                  },
+                ],
+                selfClosing: false,
+              },
               children: [
                 {
-                  kind: "jsx",
-                  loc: [29, 9, 29, 17],
-                  type: {
-                    kind: "splice",
-                    loc: [29, 10, 29, 14],
-                    key: "$Ring",
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 29, column: 8 },
+                    end: { line: 29, column: 8 },
                   },
-                  attributes: [],
-                  children: [],
+                  value: "\n        ",
+                  raw: "\n        ",
                 },
                 {
-                  kind: "jsx",
-                  loc: [30, 9, 30, 66],
-                  type: {
-                    kind: "splice",
-                    loc: [30, 10, 30, 13],
-                    key: "$For",
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 29, column: 8 },
+                    end: { line: 29, column: 16 },
                   },
-                  attributes: [
-                    {
-                      name: "each",
-                      initializer: {
-                        kind: "arr",
-                        loc: [30, 20, 30, 28],
-                        elements: [
-                          {
-                            kind: "number",
-                            loc: [30, 21, 30, 23],
-                            value: 10,
-                          },
-                          {
-                            kind: "number",
-                            loc: [30, 25, 30, 27],
-                            value: 20,
-                          },
-                        ],
-                      },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 29, column: 8 },
+                      end: { line: 29, column: 16 },
                     },
-                  ],
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 29, column: 9 },
+                        end: { line: 29, column: 13 },
+                      },
+                      name: "Ring",
+                    },
+                    attributes: [],
+                    selfClosing: true,
+                  },
+                  children: [],
+                  closingElement: null,
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 30, column: 8 },
+                    end: { line: 30, column: 8 },
+                  },
+                  value: "\n        ",
+                  raw: "\n        ",
+                },
+                {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 30, column: 8 },
+                    end: { line: 30, column: 65 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 30, column: 8 },
+                      end: { line: 30, column: 29 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 30, column: 9 },
+                        end: { line: 30, column: 12 },
+                      },
+                      name: "For",
+                    },
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 30, column: 13 },
+                          end: { line: 30, column: 28 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 30, column: 13 },
+                            end: { line: 30, column: 17 },
+                          },
+                          name: "each",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 30, column: 18 },
+                            end: { line: 30, column: 28 },
+                          },
+                          expression: {
+                            type: "ArrayExpression",
+                            loc: {
+                              start: { line: 30, column: 19 },
+                              end: { line: 30, column: 27 },
+                            },
+                            elements: [
+                              {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 30, column: 20 },
+                                  end: { line: 30, column: 22 },
+                                },
+                                value: 10,
+                              },
+                              {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 30, column: 24 },
+                                  end: { line: 30, column: 26 },
+                                },
+                                value: 20,
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    ],
+                    selfClosing: false,
+                  },
                   children: [
                     {
-                      kind: "=>",
-                      loc: [30, 31, 30, 59],
-                      parameters: [
-                        {
-                          kind: "param",
-                          loc: [30, 32, 30, 41],
-                          name: {
-                            kind: "id",
-                            loc: [30, 32, 30, 33],
-                            text: "x",
+                      type: "JSXExpressionContainer",
+                      loc: {
+                        start: { line: 30, column: 29 },
+                        end: { line: 30, column: 59 },
+                      },
+                      expression: {
+                        type: "ArrowFunctionExpression",
+                        loc: {
+                          start: { line: 30, column: 30 },
+                          end: { line: 30, column: 58 },
+                        },
+                        params: [
+                          {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 30, column: 31 },
+                              end: { line: 30, column: 32 },
+                            },
+                            name: "x",
                             bindingKey: "x$8n845jjtfvwm$2",
                           },
-                        },
-                      ],
-                      body: {
-                        kind: "jsx",
-                        loc: [30, 46, 30, 59],
-                        type: {
-                          kind: "id",
-                          loc: [30, 47, 30, 50],
-                          text: "Dot",
-                          bindingKey: "Dot$8n845jjtfvwm$0",
-                        },
-                        attributes: [
-                          {
-                            name: "x",
-                            initializer: {
-                              kind: "id",
-                              loc: [30, 54, 30, 55],
-                              text: "x",
-                              bindingKey: "x$8n845jjtfvwm$2",
-                            },
-                          },
                         ],
-                        children: [],
+                        body: {
+                          type: "JSXElement",
+                          loc: {
+                            start: { line: 30, column: 45 },
+                            end: { line: 30, column: 58 },
+                          },
+                          openingElement: {
+                            type: "JSXOpeningElement",
+                            loc: {
+                              start: { line: 30, column: 45 },
+                              end: { line: 30, column: 58 },
+                            },
+                            name: {
+                              type: "JSXIdentifier",
+                              loc: {
+                                start: { line: 30, column: 46 },
+                                end: { line: 30, column: 49 },
+                              },
+                              name: "Dot",
+                              bindingKey: "Dot$8n845jjtfvwm$0",
+                            },
+                            attributes: [
+                              {
+                                type: "JSXAttribute",
+                                loc: {
+                                  start: { line: 30, column: 50 },
+                                  end: { line: 30, column: 55 },
+                                },
+                                name: {
+                                  type: "JSXIdentifier",
+                                  loc: {
+                                    start: { line: 30, column: 50 },
+                                    end: { line: 30, column: 51 },
+                                  },
+                                  name: "x",
+                                },
+                                value: {
+                                  type: "JSXExpressionContainer",
+                                  loc: {
+                                    start: { line: 30, column: 52 },
+                                    end: { line: 30, column: 55 },
+                                  },
+                                  expression: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 30, column: 53 },
+                                      end: { line: 30, column: 54 },
+                                    },
+                                    name: "x",
+                                    bindingKey: "x$8n845jjtfvwm$2",
+                                  },
+                                },
+                              },
+                            ],
+                            selfClosing: true,
+                          },
+                          children: [],
+                          closingElement: null,
+                        },
+                        expression: true,
                       },
                     },
                   ],
+                  closingElement: {
+                    type: "JSXClosingElement",
+                    loc: {
+                      start: { line: 30, column: 59 },
+                      end: { line: 30, column: 65 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 30, column: 61 },
+                        end: { line: 30, column: 64 },
+                      },
+                      name: "For",
+                    },
+                  },
                 },
                 {
-                  kind: "jsx",
-                  loc: [31, 9, 33, 25],
-                  type: {
-                    kind: "string",
-                    loc: [31, 10, 31, 23],
-                    text: "foreignObject",
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 31, column: 8 },
+                    end: { line: 31, column: 8 },
                   },
-                  attributes: [
-                    {
-                      name: "x",
-                      initializer: {
-                        kind: "string",
-                        loc: [31, 26, 31, 29],
-                        text: "0",
-                      },
+                  value: "\n        ",
+                  raw: "\n        ",
+                },
+                {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 31, column: 8 },
+                    end: { line: 33, column: 24 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 31, column: 8 },
+                      end: { line: 31, column: 58 },
                     },
-                    {
-                      name: "y",
-                      initializer: {
-                        kind: "string",
-                        loc: [31, 32, 31, 35],
-                        text: "0",
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 31, column: 9 },
+                        end: { line: 31, column: 22 },
                       },
+                      name: "foreignObject",
                     },
-                    {
-                      name: "width",
-                      initializer: {
-                        kind: "string",
-                        loc: [31, 42, 31, 46],
-                        text: "10",
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 31, column: 23 },
+                          end: { line: 31, column: 28 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 31, column: 23 },
+                            end: { line: 31, column: 24 },
+                          },
+                          name: "x",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 31, column: 25 },
+                            end: { line: 31, column: 28 },
+                          },
+                          value: "0",
+                        },
                       },
-                    },
-                    {
-                      name: "height",
-                      initializer: {
-                        kind: "string",
-                        loc: [31, 54, 31, 58],
-                        text: "10",
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 31, column: 29 },
+                          end: { line: 31, column: 34 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 31, column: 29 },
+                            end: { line: 31, column: 30 },
+                          },
+                          name: "y",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 31, column: 31 },
+                            end: { line: 31, column: 34 },
+                          },
+                          value: "0",
+                        },
                       },
-                    },
-                  ],
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 31, column: 35 },
+                          end: { line: 31, column: 45 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 31, column: 35 },
+                            end: { line: 31, column: 40 },
+                          },
+                          name: "width",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 31, column: 41 },
+                            end: { line: 31, column: 45 },
+                          },
+                          value: "10",
+                        },
+                      },
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 31, column: 46 },
+                          end: { line: 31, column: 57 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 31, column: 46 },
+                            end: { line: 31, column: 52 },
+                          },
+                          name: "height",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 31, column: 53 },
+                            end: { line: 31, column: 57 },
+                          },
+                          value: "10",
+                        },
+                      },
+                    ],
+                    selfClosing: false,
+                  },
                   children: [
                     {
-                      kind: "jsx",
-                      loc: [32, 11, 32, 32],
-                      type: {
-                        kind: "string",
-                        loc: [32, 12, 32, 13],
-                        text: "p",
+                      type: "JSXText",
+                      loc: {
+                        start: { line: 32, column: 10 },
+                        end: { line: 32, column: 10 },
                       },
-                      attributes: [],
+                      value: "\n          ",
+                      raw: "\n          ",
+                    },
+                    {
+                      type: "JSXElement",
+                      loc: {
+                        start: { line: 32, column: 10 },
+                        end: { line: 32, column: 31 },
+                      },
+                      openingElement: {
+                        type: "JSXOpeningElement",
+                        loc: {
+                          start: { line: 32, column: 10 },
+                          end: { line: 32, column: 13 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 32, column: 11 },
+                            end: { line: 32, column: 12 },
+                          },
+                          name: "p",
+                        },
+                        attributes: [],
+                        selfClosing: false,
+                      },
                       children: [
                         {
-                          kind: "string",
-                          loc: [32, 15, 32, 27],
-                          text: "html again",
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 32, column: 13 },
+                            end: { line: 32, column: 27 },
+                          },
+                          expression: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 32, column: 14 },
+                              end: { line: 32, column: 26 },
+                            },
+                            value: "html again",
+                          },
                         },
                       ],
+                      closingElement: {
+                        type: "JSXClosingElement",
+                        loc: {
+                          start: { line: 32, column: 27 },
+                          end: { line: 32, column: 31 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 32, column: 29 },
+                            end: { line: 32, column: 30 },
+                          },
+                          name: "p",
+                        },
+                      },
+                    },
+                    {
+                      type: "JSXText",
+                      loc: {
+                        start: { line: 33, column: 8 },
+                        end: { line: 33, column: 8 },
+                      },
+                      value: "\n        ",
+                      raw: "\n        ",
                     },
                   ],
+                  closingElement: {
+                    type: "JSXClosingElement",
+                    loc: {
+                      start: { line: 33, column: 8 },
+                      end: { line: 33, column: 24 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 33, column: 10 },
+                        end: { line: 33, column: 23 },
+                      },
+                      name: "foreignObject",
+                    },
+                  },
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 34, column: 6 },
+                    end: { line: 34, column: 6 },
+                  },
+                  value: "\n      ",
+                  raw: "\n      ",
                 },
               ],
+              closingElement: {
+                type: "JSXClosingElement",
+                loc: {
+                  start: { line: 34, column: 6 },
+                  end: { line: 34, column: 12 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 34, column: 8 },
+                    end: { line: 34, column: 11 },
+                  },
+                  name: "svg",
+                },
+              },
+            },
+            {
+              type: "JSXText",
+              loc: {
+                start: { line: 35, column: 4 },
+                end: { line: 35, column: 4 },
+              },
+              value: "\n    ",
+              raw: "\n    ",
             },
           ],
+          closingElement: {
+            type: "JSXClosingElement",
+            loc: {
+              start: { line: 35, column: 4 },
+              end: { line: 35, column: 10 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 35, column: 6 },
+                end: { line: 35, column: 9 },
+              },
+              name: "div",
+            },
+          },
         },
       },
     ],

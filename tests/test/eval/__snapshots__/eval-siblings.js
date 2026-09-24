@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and nothing of its own does: the spans either side keep their order.
 async function Other() {
   return cs.create(
-    [9, 10, 9, 46],
+    { start: { line: 9, column: 9 }, end: { line: 9, column: 45 } },
     {
       version: "0.0.0",
       filePath: "eval/eval-siblings.test.tsx",
@@ -16,21 +16,42 @@ async function Other() {
       captures: [],
     },
     () => ({
-      kind: "jsx",
-      loc: [9, 13, 9, 45],
-      type: {
-        kind: "string",
-        loc: [9, 14, 9, 16],
-        text: "em",
+      type: "JSXElement",
+      loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 44 } },
+      openingElement: {
+        type: "JSXOpeningElement",
+        loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 16 } },
+        name: {
+          type: "JSXIdentifier",
+          loc: { start: { line: 9, column: 13 }, end: { line: 9, column: 15 } },
+          name: "em",
+        },
+        attributes: [],
+        selfClosing: false,
       },
-      attributes: [],
       children: [
         {
-          kind: "string",
-          loc: [9, 18, 9, 39],
-          text: "from another bundle",
+          type: "JSXExpressionContainer",
+          loc: { start: { line: 9, column: 16 }, end: { line: 9, column: 39 } },
+          expression: {
+            type: "Literal",
+            loc: {
+              start: { line: 9, column: 17 },
+              end: { line: 9, column: 38 },
+            },
+            value: "from another bundle",
+          },
         },
       ],
+      closingElement: {
+        type: "JSXClosingElement",
+        loc: { start: { line: 9, column: 39 }, end: { line: 9, column: 44 } },
+        name: {
+          type: "JSXIdentifier",
+          loc: { start: { line: 9, column: 41 }, end: { line: 9, column: 43 } },
+          name: "em",
+        },
+      },
     }),
   );
 }
@@ -40,7 +61,7 @@ it("evalSiblings", async (t) => {
     t,
     "evalSiblings",
     cs.create(
-      [18, 5, 22, 12],
+      { start: { line: 18, column: 4 }, end: { line: 22, column: 11 } },
       {
         version: "0.0.0",
         filePath: "eval/eval-siblings.test.tsx",
@@ -49,66 +70,211 @@ it("evalSiblings", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "jsx",
-        loc: [18, 8, 22, 11],
-        type: {
-          kind: "string",
-          loc: [18, 9, 18, 12],
-          text: "div",
+        type: "JSXElement",
+        loc: { start: { line: 18, column: 7 }, end: { line: 22, column: 10 } },
+        openingElement: {
+          type: "JSXOpeningElement",
+          loc: {
+            start: { line: 18, column: 7 },
+            end: { line: 18, column: 12 },
+          },
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 18, column: 8 },
+              end: { line: 18, column: 11 },
+            },
+            name: "div",
+          },
+          attributes: [],
+          selfClosing: false,
         },
-        attributes: [],
         children: [
           {
-            kind: "jsx",
-            loc: [19, 7, 19, 26],
-            type: {
-              kind: "string",
-              loc: [19, 8, 19, 12],
-              text: "span",
+            type: "JSXText",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 6 },
             },
-            attributes: [],
-            children: [
-              {
-                kind: "string",
-                loc: [19, 13, 19, 19],
-                text: "before",
-              },
-            ],
+            value: "\n      ",
+            raw: "\n      ",
           },
           {
-            kind: "()",
-            loc: [20, 8, 20, 26],
+            type: "JSXElement",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 25 },
+            },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 19, column: 12 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 19, column: 7 },
+                  end: { line: 19, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
+            children: [
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 19, column: 12 },
+                  end: { line: 19, column: 18 },
+                },
+                value: "before",
+                raw: "before",
+              },
+            ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 19, column: 18 },
+                end: { line: 19, column: 25 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 19, column: 20 },
+                  end: { line: 19, column: 24 },
+                },
+                name: "span",
+              },
+            },
+          },
+          {
+            type: "JSXText",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 6 },
+            },
+            value: "\n      ",
+            raw: "\n      ",
+          },
+          {
+            type: "JSXExpressionContainer",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 26 },
+            },
             expression: {
-              kind: "bltn",
-              loc: [20, 8, 20, 12],
-              name: "eval",
-            },
-            arguments: [
-              {
-                kind: "splice",
-                loc: [20, 13, 20, 25],
-                key: "$otherBundle",
+              type: "CallExpression",
+              loc: {
+                start: { line: 20, column: 7 },
+                end: { line: 20, column: 25 },
               },
-            ],
+              callee: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 20, column: 7 },
+                  end: { line: 20, column: 11 },
+                },
+                name: "eval",
+              },
+              arguments: [
+                {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 20, column: 12 },
+                    end: { line: 20, column: 24 },
+                  },
+                  key: "$otherBundle",
+                },
+              ],
+              optional: false,
+            },
           },
           {
-            kind: "jsx",
-            loc: [21, 7, 21, 25],
-            type: {
-              kind: "string",
-              loc: [21, 8, 21, 12],
-              text: "span",
+            type: "JSXText",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 6 },
             },
-            attributes: [],
+            value: "\n      ",
+            raw: "\n      ",
+          },
+          {
+            type: "JSXElement",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 24 },
+            },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 21, column: 6 },
+                end: { line: 21, column: 12 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 21, column: 7 },
+                  end: { line: 21, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "string",
-                loc: [21, 13, 21, 18],
-                text: "after",
+                type: "JSXText",
+                loc: {
+                  start: { line: 21, column: 12 },
+                  end: { line: 21, column: 17 },
+                },
+                value: "after",
+                raw: "after",
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 21, column: 17 },
+                end: { line: 21, column: 24 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 21, column: 19 },
+                  end: { line: 21, column: 23 },
+                },
+                name: "span",
+              },
+            },
+          },
+          {
+            type: "JSXText",
+            loc: {
+              start: { line: 22, column: 4 },
+              end: { line: 22, column: 4 },
+            },
+            value: "\n    ",
+            raw: "\n    ",
           },
         ],
+        closingElement: {
+          type: "JSXClosingElement",
+          loc: {
+            start: { line: 22, column: 4 },
+            end: { line: 22, column: 10 },
+          },
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 22, column: 9 },
+            },
+            name: "div",
+          },
+        },
       }),
     ),
   );

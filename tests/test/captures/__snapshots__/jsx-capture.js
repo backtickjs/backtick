@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // instantiates the tree with `#t0(x)` and the tree wires the capture into the
 // handler with `#slot`.
 const script = cs.create(
-  [11, 43, 14, 3],
+  { start: { line: 11, column: 42 }, end: { line: 14, column: 2 } },
   {
     version: "0.0.0",
     filePath: "captures/jsx-capture.test.tsx",
@@ -16,7 +16,7 @@ const script = cs.create(
       $0splice0: {
         value: _jsx("span", {
           onclick: cs.create(
-            [13, 28, 13, 39],
+            { start: { line: 13, column: 27 }, end: { line: 13, column: 38 } },
             {
               version: "0.0.0",
               filePath: "captures/jsx-capture.test.tsx",
@@ -25,15 +25,22 @@ const script = cs.create(
               captures: ["x$g38hwxw7rhvi$0"],
             },
             () => ({
-              kind: "=>",
-              loc: [13, 31, 13, 38],
-              parameters: [],
+              type: "ArrowFunctionExpression",
+              loc: {
+                start: { line: 13, column: 30 },
+                end: { line: 13, column: 37 },
+              },
+              params: [],
               body: {
-                kind: "id",
-                loc: [13, 37, 13, 38],
-                text: "x",
+                type: "Identifier",
+                loc: {
+                  start: { line: 13, column: 36 },
+                  end: { line: 13, column: 37 },
+                },
+                name: "x",
                 bindingKey: "x$g38hwxw7rhvi$0",
               },
+              expression: true,
             }),
           ),
         }),
@@ -43,39 +50,65 @@ const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [11, 46, 14, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 11, column: 45 }, end: { line: 14, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [11, 52, 14, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 11, column: 51 }, end: { line: 14, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 12, column: 2 },
+            end: { line: 12, column: 14 },
+          },
           kind: "const",
-          loc: [12, 3, 12, 15],
-          name: {
-            kind: "id",
-            loc: [12, 9, 12, 10],
-            text: "x",
-            bindingKey: "x$g38hwxw7rhvi$0",
-          },
-          initializer: {
-            kind: "number",
-            loc: [12, 13, 12, 14],
-            value: 1,
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 12, column: 8 },
+                end: { line: 12, column: 13 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 8 },
+                  end: { line: 12, column: 9 },
+                },
+                name: "x",
+                bindingKey: "x$g38hwxw7rhvi$0",
+              },
+              init: {
+                type: "Literal",
+                loc: {
+                  start: { line: 12, column: 12 },
+                  end: { line: 12, column: 13 },
+                },
+                value: 1,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [13, 3, 13, 46],
-          expression: {
-            kind: "splice",
-            loc: [13, 10, 13, 45],
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 13, column: 2 },
+            end: { line: 13, column: 45 },
+          },
+          argument: {
+            type: "Splice",
+            loc: {
+              start: { line: 13, column: 9 },
+              end: { line: 13, column: 44 },
+            },
             key: "$0splice0",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("jsxCapture", async (t) => {

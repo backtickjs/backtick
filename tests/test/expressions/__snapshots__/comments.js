@@ -8,7 +8,7 @@ it("comments", async (t) => {
     t,
     "comments",
     cs.create(
-      [11, 5, 23, 7],
+      { start: { line: 11, column: 4 }, end: { line: 23, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/comments.test.tsx",
@@ -17,67 +17,113 @@ it("comments", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 23, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 23, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 22 },
+            },
             kind: "const",
-            loc: [13, 7, 13, 23],
-            name: {
-              kind: "id",
-              loc: [13, 13, 13, 18],
-              text: "count",
-              bindingKey: "count$3lcac8ezsyzi3$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [13, 21, 13, 22],
-              value: 1,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 13, column: 21 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 12 },
+                    end: { line: 13, column: 17 },
+                  },
+                  name: "count",
+                  bindingKey: "count$3lcac8ezsyzi3$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 13, column: 20 },
+                    end: { line: 13, column: 21 },
+                  },
+                  value: 1,
+                },
+              },
+            ],
           },
           {
-            kind: "if",
-            loc: [15, 7, 18, 8],
-            expression: {
-              kind: "binop",
-              loc: [15, 11, 15, 22],
+            type: "IfStatement",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 18, column: 7 },
+            },
+            test: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 15, column: 10 },
+                end: { line: 15, column: 21 },
+              },
+              operator: "===",
               left: {
-                kind: "id",
-                loc: [15, 11, 15, 16],
-                text: "count",
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 10 },
+                  end: { line: 15, column: 15 },
+                },
+                name: "count",
                 bindingKey: "count$3lcac8ezsyzi3$0",
               },
-              operatorToken: "===",
               right: {
-                kind: "number",
-                loc: [15, 21, 15, 22],
+                type: "Literal",
+                loc: {
+                  start: { line: 15, column: 20 },
+                  end: { line: 15, column: 21 },
+                },
                 value: 1,
               },
             },
-            thenStatement: {
-              kind: "{}",
-              loc: [15, 24, 18, 8],
-              statements: [
+            consequent: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 15, column: 23 },
+                end: { line: 18, column: 7 },
+              },
+              body: [
                 {
-                  kind: "return",
-                  loc: [17, 9, 17, 22],
-                  expression: {
-                    kind: "string",
-                    loc: [17, 16, 17, 21],
-                    text: "one",
+                  type: "ReturnStatement",
+                  loc: {
+                    start: { line: 17, column: 8 },
+                    end: { line: 17, column: 21 },
+                  },
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 17, column: 15 },
+                      end: { line: 17, column: 20 },
+                    },
+                    value: "one",
                   },
                 },
               ],
             },
-            elseStatement: null,
+            alternate: null,
           },
           {
-            kind: "return",
-            loc: [22, 7, 22, 21],
-            expression: {
-              kind: "string",
-              loc: [22, 14, 22, 20],
-              text: "many",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 22, column: 20 },
+            },
+            argument: {
+              type: "Literal",
+              loc: {
+                start: { line: 22, column: 13 },
+                end: { line: 22, column: 19 },
+              },
+              value: "many",
             },
           },
         ],

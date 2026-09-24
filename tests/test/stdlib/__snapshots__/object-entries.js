@@ -8,7 +8,7 @@ it("objectEntries", async (t) => {
     t,
     "objectEntries",
     cs.create(
-      [11, 5, 17, 7],
+      { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/object-entries.test.tsx",
@@ -17,218 +17,425 @@ it("objectEntries", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 17, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 12, column: 38 },
+            },
             kind: "const",
-            loc: [12, 7, 12, 39],
-            name: {
-              kind: "id",
-              loc: [12, 13, 12, 17],
-              text: "held",
-              bindingKey: "held$txb5yf5uyd2o$0",
-            },
-            initializer: {
-              kind: "obj",
-              loc: [12, 20, 12, 38],
-              properties: [
-                {
-                  kind: ":",
-                  loc: [12, 22, 12, 26],
-                  name: {
-                    kind: "string",
-                    loc: [12, 22, 12, 23],
-                    text: "n",
-                  },
-                  initializer: {
-                    kind: "number",
-                    loc: [12, 25, 12, 26],
-                    value: 1,
-                  },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 12, column: 12 },
+                  end: { line: 12, column: 37 },
                 },
-                {
-                  kind: ":",
-                  loc: [12, 28, 12, 36],
-                  name: {
-                    kind: "string",
-                    loc: [12, 28, 12, 29],
-                    text: "q",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 12 },
+                    end: { line: 12, column: 16 },
                   },
-                  initializer: {
-                    kind: "string",
-                    loc: [12, 31, 12, 36],
-                    text: "ada",
-                  },
+                  name: "held",
+                  bindingKey: "held$txb5yf5uyd2o$0",
                 },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [13, 7, 15, 9],
-            name: {
-              kind: "id",
-              loc: [13, 13, 13, 20],
-              text: "written",
-              bindingKey: "written$txb5yf5uyd2o$1",
-            },
-            initializer: {
-              kind: "()",
-              loc: [13, 23, 15, 8],
-              expression: {
-                kind: ".",
-                loc: [13, 23, 13, 41],
-                expression: {
-                  kind: "bltn",
-                  loc: [13, 23, 13, 29],
-                  name: "Object",
-                },
-                name: "fromEntries",
-              },
-              arguments: [
-                {
-                  kind: "()",
-                  loc: [14, 9, 14, 79],
-                  expression: {
-                    kind: ".",
-                    loc: [14, 9, 14, 33],
-                    expression: {
-                      kind: "()",
-                      loc: [14, 9, 14, 29],
-                      expression: {
-                        kind: ".",
-                        loc: [14, 9, 14, 23],
-                        expression: {
-                          kind: "bltn",
-                          loc: [14, 9, 14, 15],
-                          name: "Object",
-                        },
-                        name: "entries",
-                      },
-                      arguments: [
-                        {
-                          kind: "id",
-                          loc: [14, 24, 14, 28],
-                          text: "held",
-                          bindingKey: "held$txb5yf5uyd2o$0",
-                        },
-                      ],
-                    },
-                    name: "map",
+                init: {
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 12, column: 19 },
+                    end: { line: 12, column: 37 },
                   },
-                  arguments: [
+                  properties: [
                     {
-                      kind: "=>",
-                      loc: [14, 34, 14, 78],
-                      parameters: [
-                        {
-                          kind: "param",
-                          loc: [14, 35, 14, 39],
-                          name: {
-                            kind: "id",
-                            loc: [14, 35, 14, 39],
-                            text: "pair",
-                            bindingKey: "pair$txb5yf5uyd2o$2",
-                          },
-                        },
-                      ],
-                      body: {
-                        kind: "arr",
-                        loc: [14, 44, 14, 78],
-                        elements: [
-                          {
-                            kind: "[]",
-                            loc: [14, 45, 14, 52],
-                            expression: {
-                              kind: "id",
-                              loc: [14, 45, 14, 49],
-                              text: "pair",
-                              bindingKey: "pair$txb5yf5uyd2o$2",
-                            },
-                            argumentExpression: {
-                              kind: "number",
-                              loc: [14, 50, 14, 51],
-                              value: 0,
-                            },
-                          },
-                          {
-                            kind: "()",
-                            loc: [14, 54, 14, 77],
-                            expression: {
-                              kind: ".",
-                              loc: [14, 54, 14, 68],
-                              expression: {
-                                kind: "bltn",
-                                loc: [14, 54, 14, 58],
-                                name: "JSON",
-                              },
-                              name: "stringify",
-                            },
-                            arguments: [
-                              {
-                                kind: "[]",
-                                loc: [14, 69, 14, 76],
-                                expression: {
-                                  kind: "id",
-                                  loc: [14, 69, 14, 73],
-                                  text: "pair",
-                                  bindingKey: "pair$txb5yf5uyd2o$2",
-                                },
-                                argumentExpression: {
-                                  kind: "number",
-                                  loc: [14, 74, 14, 75],
-                                  value: 1,
-                                },
-                              },
-                            ],
-                          },
-                        ],
+                      type: "Property",
+                      loc: {
+                        start: { line: 12, column: 21 },
+                        end: { line: 12, column: 25 },
                       },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 21 },
+                          end: { line: 12, column: 22 },
+                        },
+                        name: "n",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 24 },
+                          end: { line: 12, column: 25 },
+                        },
+                        value: 1,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 12, column: 27 },
+                        end: { line: 12, column: 35 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 27 },
+                          end: { line: 12, column: 28 },
+                        },
+                        name: "q",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 30 },
+                          end: { line: 12, column: 35 },
+                        },
+                        value: "ada",
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
                     },
                   ],
                 },
-              ],
-            },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [16, 7, 16, 42],
-            expression: {
-              kind: "binop",
-              loc: [16, 14, 16, 41],
-              left: {
-                kind: "binop",
-                loc: [16, 14, 16, 29],
-                left: {
-                  kind: ".",
-                  loc: [16, 14, 16, 23],
-                  expression: {
-                    kind: "id",
-                    loc: [16, 14, 16, 21],
-                    text: "written",
-                    bindingKey: "written$txb5yf5uyd2o$1",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 15, column: 8 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 15, column: 7 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 12 },
+                    end: { line: 13, column: 19 },
                   },
-                  name: "n",
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [16, 26, 16, 29],
-                  text: " ",
-                },
-              },
-              operatorToken: "+",
-              right: {
-                kind: ".",
-                loc: [16, 32, 16, 41],
-                expression: {
-                  kind: "id",
-                  loc: [16, 32, 16, 39],
-                  text: "written",
+                  name: "written",
                   bindingKey: "written$txb5yf5uyd2o$1",
                 },
-                name: "q",
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 13, column: 22 },
+                    end: { line: 15, column: 7 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 13, column: 22 },
+                      end: { line: 13, column: 40 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 13, column: 22 },
+                        end: { line: 13, column: 28 },
+                      },
+                      name: "Object",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 13, column: 29 },
+                        end: { line: 13, column: 40 },
+                      },
+                      name: "fromEntries",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 14, column: 8 },
+                        end: { line: 14, column: 78 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 14, column: 8 },
+                          end: { line: 14, column: 32 },
+                        },
+                        object: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 14, column: 8 },
+                            end: { line: 14, column: 28 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 14, column: 8 },
+                              end: { line: 14, column: 22 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 14, column: 8 },
+                                end: { line: 14, column: 14 },
+                              },
+                              name: "Object",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 14, column: 15 },
+                                end: { line: 14, column: 22 },
+                              },
+                              name: "entries",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [
+                            {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 14, column: 23 },
+                                end: { line: 14, column: 27 },
+                              },
+                              name: "held",
+                              bindingKey: "held$txb5yf5uyd2o$0",
+                            },
+                          ],
+                          optional: false,
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 14, column: 29 },
+                            end: { line: 14, column: 32 },
+                          },
+                          name: "map",
+                        },
+                        computed: false,
+                        optional: false,
+                      },
+                      arguments: [
+                        {
+                          type: "ArrowFunctionExpression",
+                          loc: {
+                            start: { line: 14, column: 33 },
+                            end: { line: 14, column: 77 },
+                          },
+                          params: [
+                            {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 14, column: 34 },
+                                end: { line: 14, column: 38 },
+                              },
+                              name: "pair",
+                              bindingKey: "pair$txb5yf5uyd2o$2",
+                            },
+                          ],
+                          body: {
+                            type: "ArrayExpression",
+                            loc: {
+                              start: { line: 14, column: 43 },
+                              end: { line: 14, column: 77 },
+                            },
+                            elements: [
+                              {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 14, column: 44 },
+                                  end: { line: 14, column: 51 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 14, column: 44 },
+                                    end: { line: 14, column: 48 },
+                                  },
+                                  name: "pair",
+                                  bindingKey: "pair$txb5yf5uyd2o$2",
+                                },
+                                property: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 14, column: 49 },
+                                    end: { line: 14, column: 50 },
+                                  },
+                                  value: 0,
+                                },
+                                computed: true,
+                                optional: false,
+                              },
+                              {
+                                type: "CallExpression",
+                                loc: {
+                                  start: { line: 14, column: 53 },
+                                  end: { line: 14, column: 76 },
+                                },
+                                callee: {
+                                  type: "MemberExpression",
+                                  loc: {
+                                    start: { line: 14, column: 53 },
+                                    end: { line: 14, column: 67 },
+                                  },
+                                  object: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 14, column: 53 },
+                                      end: { line: 14, column: 57 },
+                                    },
+                                    name: "JSON",
+                                  },
+                                  property: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 14, column: 58 },
+                                      end: { line: 14, column: 67 },
+                                    },
+                                    name: "stringify",
+                                  },
+                                  computed: false,
+                                  optional: false,
+                                },
+                                arguments: [
+                                  {
+                                    type: "MemberExpression",
+                                    loc: {
+                                      start: { line: 14, column: 68 },
+                                      end: { line: 14, column: 75 },
+                                    },
+                                    object: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 14, column: 68 },
+                                        end: { line: 14, column: 72 },
+                                      },
+                                      name: "pair",
+                                      bindingKey: "pair$txb5yf5uyd2o$2",
+                                    },
+                                    property: {
+                                      type: "Literal",
+                                      loc: {
+                                        start: { line: 14, column: 73 },
+                                        end: { line: 14, column: 74 },
+                                      },
+                                      value: 1,
+                                    },
+                                    computed: true,
+                                    optional: false,
+                                  },
+                                ],
+                                optional: false,
+                              },
+                            ],
+                          },
+                          expression: true,
+                        },
+                      ],
+                      optional: false,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 41 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 16, column: 13 },
+                end: { line: 16, column: 40 },
+              },
+              operator: "+",
+              left: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 16, column: 13 },
+                  end: { line: 16, column: 28 },
+                },
+                operator: "+",
+                left: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 16, column: 13 },
+                    end: { line: 16, column: 22 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 16, column: 13 },
+                      end: { line: 16, column: 20 },
+                    },
+                    name: "written",
+                    bindingKey: "written$txb5yf5uyd2o$1",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 16, column: 21 },
+                      end: { line: 16, column: 22 },
+                    },
+                    name: "n",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                right: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 16, column: 25 },
+                    end: { line: 16, column: 28 },
+                  },
+                  value: " ",
+                },
+              },
+              right: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 16, column: 31 },
+                  end: { line: 16, column: 40 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 31 },
+                    end: { line: 16, column: 38 },
+                  },
+                  name: "written",
+                  bindingKey: "written$txb5yf5uyd2o$1",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 39 },
+                    end: { line: 16, column: 40 },
+                  },
+                  name: "q",
+                },
+                computed: false,
+                optional: false,
               },
             },
           },

@@ -21,7 +21,7 @@ it("scriptComponentNestedProp", async (t) => {
     t,
     "scriptComponentNestedProp",
     cs.create(
-      [27, 5, 27, 51],
+      { start: { line: 27, column: 4 }, end: { line: 27, column: 50 } },
       {
         version: "0.0.0",
         filePath: "components/script-component-nested-prop.test.tsx",
@@ -30,39 +30,86 @@ it("scriptComponentNestedProp", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "jsx",
-        loc: [27, 8, 27, 50],
-        type: {
-          kind: "splice",
-          loc: [27, 9, 27, 17],
-          key: "$Greeting",
-        },
-        attributes: [
-          {
-            name: "person",
-            initializer: {
-              kind: "obj",
-              loc: [27, 26, 27, 46],
-              properties: [
-                {
-                  kind: ":",
-                  loc: [27, 28, 27, 44],
-                  name: {
-                    kind: "string",
-                    loc: [27, 28, 27, 37],
-                    text: "firstName",
-                  },
-                  initializer: {
-                    kind: "string",
-                    loc: [27, 39, 27, 44],
-                    text: "ada",
-                  },
-                },
-              ],
-            },
+        type: "JSXElement",
+        loc: { start: { line: 27, column: 7 }, end: { line: 27, column: 49 } },
+        openingElement: {
+          type: "JSXOpeningElement",
+          loc: {
+            start: { line: 27, column: 7 },
+            end: { line: 27, column: 49 },
           },
-        ],
+          name: {
+            type: "JSXIdentifier",
+            loc: {
+              start: { line: 27, column: 8 },
+              end: { line: 27, column: 16 },
+            },
+            name: "Greeting",
+          },
+          attributes: [
+            {
+              type: "JSXAttribute",
+              loc: {
+                start: { line: 27, column: 17 },
+                end: { line: 27, column: 46 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 27, column: 17 },
+                  end: { line: 27, column: 23 },
+                },
+                name: "person",
+              },
+              value: {
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 27, column: 24 },
+                  end: { line: 27, column: 46 },
+                },
+                expression: {
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 27, column: 25 },
+                    end: { line: 27, column: 45 },
+                  },
+                  properties: [
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 27, column: 27 },
+                        end: { line: 27, column: 43 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 27, column: 27 },
+                          end: { line: 27, column: 36 },
+                        },
+                        name: "firstName",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 27, column: 38 },
+                          end: { line: 27, column: 43 },
+                        },
+                        value: "ada",
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          selfClosing: true,
+        },
         children: [],
+        closingElement: null,
       }),
     ),
   );

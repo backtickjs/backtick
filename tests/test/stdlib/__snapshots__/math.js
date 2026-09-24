@@ -9,7 +9,7 @@ it("math", async (t) => {
     t,
     "math",
     cs.create(
-      [12, 5, 36, 7],
+      { start: { line: 12, column: 4 }, end: { line: 36, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/math.test.tsx",
@@ -18,598 +18,1121 @@ it("math", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 36, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 36, column: 5 } },
+        body: [
           {
-            kind: "const",
-            loc: [13, 7, 14, 75],
-            name: {
-              kind: "id",
-              loc: [13, 13, 13, 20],
-              text: "rounded",
-              bindingKey: "rounded$1j4uiiyebx17u$0",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 14, column: 74 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [14, 9, 14, 74],
-              left: {
-                kind: "binop",
-                loc: [14, 9, 14, 55],
-                left: {
-                  kind: "binop",
-                  loc: [14, 9, 14, 49],
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 14, column: 73 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 12 },
+                    end: { line: 13, column: 19 },
+                  },
+                  name: "rounded",
+                  bindingKey: "rounded$1j4uiiyebx17u$0",
+                },
+                init: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 14, column: 8 },
+                    end: { line: 14, column: 73 },
+                  },
+                  operator: "+",
                   left: {
-                    kind: "binop",
-                    loc: [14, 9, 14, 30],
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 14, column: 8 },
+                      end: { line: 14, column: 54 },
+                    },
+                    operator: "+",
                     left: {
-                      kind: "()",
-                      loc: [14, 9, 14, 24],
-                      expression: {
-                        kind: ".",
-                        loc: [14, 9, 14, 19],
-                        expression: {
-                          kind: "bltn",
-                          loc: [14, 9, 14, 13],
-                          name: "Math",
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 14, column: 8 },
+                        end: { line: 14, column: 48 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 14, column: 8 },
+                          end: { line: 14, column: 29 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 14, column: 8 },
+                            end: { line: 14, column: 23 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 14, column: 8 },
+                              end: { line: 14, column: 18 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 14, column: 8 },
+                                end: { line: 14, column: 12 },
+                              },
+                              name: "Math",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 14, column: 13 },
+                                end: { line: 14, column: 18 },
+                              },
+                              name: "round",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [
+                            {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 14, column: 19 },
+                                end: { line: 14, column: 22 },
+                              },
+                              value: 2.5,
+                            },
+                          ],
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 14, column: 26 },
+                            end: { line: 14, column: 29 },
+                          },
+                          value: ",",
+                        },
+                      },
+                      right: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 14, column: 32 },
+                          end: { line: 14, column: 48 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 14, column: 32 },
+                            end: { line: 14, column: 42 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 14, column: 32 },
+                              end: { line: 14, column: 36 },
+                            },
+                            name: "Math",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 14, column: 37 },
+                              end: { line: 14, column: 42 },
+                            },
+                            name: "round",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [
+                          {
+                            type: "UnaryExpression",
+                            loc: {
+                              start: { line: 14, column: 43 },
+                              end: { line: 14, column: 47 },
+                            },
+                            operator: "-",
+                            prefix: true,
+                            argument: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 14, column: 44 },
+                                end: { line: 14, column: 47 },
+                              },
+                              value: 2.5,
+                            },
+                          },
+                        ],
+                        optional: false,
+                      },
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 51 },
+                        end: { line: 14, column: 54 },
+                      },
+                      value: ",",
+                    },
+                  },
+                  right: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 14, column: 57 },
+                      end: { line: 14, column: 73 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 14, column: 57 },
+                        end: { line: 14, column: 67 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 57 },
+                          end: { line: 14, column: 61 },
+                        },
+                        name: "Math",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 62 },
+                          end: { line: 14, column: 67 },
                         },
                         name: "round",
                       },
-                      arguments: [
-                        {
-                          kind: "number",
-                          loc: [14, 20, 14, 23],
-                          value: 2.5,
-                        },
-                      ],
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: "string",
-                      loc: [14, 27, 14, 30],
-                      text: ",",
-                    },
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "()",
-                    loc: [14, 33, 14, 49],
-                    expression: {
-                      kind: ".",
-                      loc: [14, 33, 14, 43],
-                      expression: {
-                        kind: "bltn",
-                        loc: [14, 33, 14, 37],
-                        name: "Math",
-                      },
-                      name: "round",
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "prefixop",
-                        loc: [14, 44, 14, 48],
+                        type: "UnaryExpression",
+                        loc: {
+                          start: { line: 14, column: 68 },
+                          end: { line: 14, column: 72 },
+                        },
                         operator: "-",
-                        operand: {
-                          kind: "number",
-                          loc: [14, 45, 14, 48],
-                          value: 2.5,
+                        prefix: true,
+                        argument: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 14, column: 69 },
+                            end: { line: 14, column: 72 },
+                          },
+                          value: 0.5,
                         },
                       },
                     ],
+                    optional: false,
                   },
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [14, 52, 14, 55],
-                  text: ",",
                 },
               },
-              operatorToken: "+",
-              right: {
-                kind: "()",
-                loc: [14, 58, 14, 74],
-                expression: {
-                  kind: ".",
-                  loc: [14, 58, 14, 68],
-                  expression: {
-                    kind: "bltn",
-                    loc: [14, 58, 14, 62],
-                    name: "Math",
-                  },
-                  name: "round",
-                },
-                arguments: [
-                  {
-                    kind: "prefixop",
-                    loc: [14, 69, 14, 73],
-                    operator: "-",
-                    operand: {
-                      kind: "number",
-                      loc: [14, 70, 14, 73],
-                      value: 0.5,
-                    },
-                  },
-                ],
-              },
-            },
+            ],
           },
           {
-            kind: "const",
-            loc: [15, 7, 16, 75],
-            name: {
-              kind: "id",
-              loc: [15, 13, 15, 18],
-              text: "edges",
-              bindingKey: "edges$1j4uiiyebx17u$1",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 16, column: 74 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [16, 9, 16, 74],
-              left: {
-                kind: "binop",
-                loc: [16, 9, 16, 55],
-                left: {
-                  kind: "binop",
-                  loc: [16, 9, 16, 49],
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 15, column: 12 },
+                  end: { line: 16, column: 73 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 15, column: 12 },
+                    end: { line: 15, column: 17 },
+                  },
+                  name: "edges",
+                  bindingKey: "edges$1j4uiiyebx17u$1",
+                },
+                init: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 16, column: 8 },
+                    end: { line: 16, column: 73 },
+                  },
+                  operator: "+",
                   left: {
-                    kind: "binop",
-                    loc: [16, 9, 16, 31],
-                    left: {
-                      kind: "()",
-                      loc: [16, 9, 16, 25],
-                      expression: {
-                        kind: ".",
-                        loc: [16, 9, 16, 19],
-                        expression: {
-                          kind: "bltn",
-                          loc: [16, 9, 16, 13],
-                          name: "Math",
-                        },
-                        name: "floor",
-                      },
-                      arguments: [
-                        {
-                          kind: "prefixop",
-                          loc: [16, 20, 16, 24],
-                          operator: "-",
-                          operand: {
-                            kind: "number",
-                            loc: [16, 21, 16, 24],
-                            value: 1.5,
-                          },
-                        },
-                      ],
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 16, column: 8 },
+                      end: { line: 16, column: 54 },
                     },
-                    operatorToken: "+",
+                    operator: "+",
+                    left: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 16, column: 8 },
+                        end: { line: 16, column: 48 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 16, column: 8 },
+                          end: { line: 16, column: 30 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 16, column: 8 },
+                            end: { line: 16, column: 24 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 16, column: 8 },
+                              end: { line: 16, column: 18 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 16, column: 8 },
+                                end: { line: 16, column: 12 },
+                              },
+                              name: "Math",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 16, column: 13 },
+                                end: { line: 16, column: 18 },
+                              },
+                              name: "floor",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [
+                            {
+                              type: "UnaryExpression",
+                              loc: {
+                                start: { line: 16, column: 19 },
+                                end: { line: 16, column: 23 },
+                              },
+                              operator: "-",
+                              prefix: true,
+                              argument: {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 16, column: 20 },
+                                  end: { line: 16, column: 23 },
+                                },
+                                value: 1.5,
+                              },
+                            },
+                          ],
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 16, column: 27 },
+                            end: { line: 16, column: 30 },
+                          },
+                          value: ",",
+                        },
+                      },
+                      right: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 16, column: 33 },
+                          end: { line: 16, column: 48 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 16, column: 33 },
+                            end: { line: 16, column: 42 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 16, column: 33 },
+                              end: { line: 16, column: 37 },
+                            },
+                            name: "Math",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 16, column: 38 },
+                              end: { line: 16, column: 42 },
+                            },
+                            name: "ceil",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [
+                          {
+                            type: "UnaryExpression",
+                            loc: {
+                              start: { line: 16, column: 43 },
+                              end: { line: 16, column: 47 },
+                            },
+                            operator: "-",
+                            prefix: true,
+                            argument: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 16, column: 44 },
+                                end: { line: 16, column: 47 },
+                              },
+                              value: 1.5,
+                            },
+                          },
+                        ],
+                        optional: false,
+                      },
+                    },
                     right: {
-                      kind: "string",
-                      loc: [16, 28, 16, 31],
-                      text: ",",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 16, column: 51 },
+                        end: { line: 16, column: 54 },
+                      },
+                      value: ",",
                     },
                   },
-                  operatorToken: "+",
                   right: {
-                    kind: "()",
-                    loc: [16, 34, 16, 49],
-                    expression: {
-                      kind: ".",
-                      loc: [16, 34, 16, 43],
-                      expression: {
-                        kind: "bltn",
-                        loc: [16, 34, 16, 38],
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 16, column: 57 },
+                      end: { line: 16, column: 73 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 16, column: 57 },
+                        end: { line: 16, column: 67 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 57 },
+                          end: { line: 16, column: 61 },
+                        },
                         name: "Math",
                       },
-                      name: "ceil",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 62 },
+                          end: { line: 16, column: 67 },
+                        },
+                        name: "trunc",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "prefixop",
-                        loc: [16, 44, 16, 48],
+                        type: "UnaryExpression",
+                        loc: {
+                          start: { line: 16, column: 68 },
+                          end: { line: 16, column: 72 },
+                        },
                         operator: "-",
-                        operand: {
-                          kind: "number",
-                          loc: [16, 45, 16, 48],
+                        prefix: true,
+                        argument: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 16, column: 69 },
+                            end: { line: 16, column: 72 },
+                          },
                           value: 1.5,
                         },
                       },
                     ],
+                    optional: false,
                   },
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [16, 52, 16, 55],
-                  text: ",",
                 },
               },
-              operatorToken: "+",
-              right: {
-                kind: "()",
-                loc: [16, 58, 16, 74],
-                expression: {
-                  kind: ".",
-                  loc: [16, 58, 16, 68],
-                  expression: {
-                    kind: "bltn",
-                    loc: [16, 58, 16, 62],
-                    name: "Math",
-                  },
-                  name: "trunc",
-                },
-                arguments: [
-                  {
-                    kind: "prefixop",
-                    loc: [16, 69, 16, 73],
-                    operator: "-",
-                    operand: {
-                      kind: "number",
-                      loc: [16, 70, 16, 73],
-                      value: 1.5,
-                    },
-                  },
-                ],
-              },
-            },
+            ],
           },
           {
-            kind: "const",
-            loc: [17, 7, 18, 74],
-            name: {
-              kind: "id",
-              loc: [17, 13, 17, 18],
-              text: "picks",
-              bindingKey: "picks$1j4uiiyebx17u$2",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 18, column: 73 },
             },
-            initializer: {
-              kind: "binop",
-              loc: [18, 9, 18, 73],
-              left: {
-                kind: "binop",
-                loc: [18, 9, 18, 58],
-                left: {
-                  kind: "binop",
-                  loc: [18, 9, 18, 52],
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 17, column: 12 },
+                  end: { line: 18, column: 72 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 17 },
+                  },
+                  name: "picks",
+                  bindingKey: "picks$1j4uiiyebx17u$2",
+                },
+                init: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 18, column: 8 },
+                    end: { line: 18, column: 72 },
+                  },
+                  operator: "+",
                   left: {
-                    kind: "binop",
-                    loc: [18, 9, 18, 32],
-                    left: {
-                      kind: "()",
-                      loc: [18, 9, 18, 26],
-                      expression: {
-                        kind: ".",
-                        loc: [18, 9, 18, 17],
-                        expression: {
-                          kind: "bltn",
-                          loc: [18, 9, 18, 13],
-                          name: "Math",
-                        },
-                        name: "min",
-                      },
-                      arguments: [
-                        {
-                          kind: "number",
-                          loc: [18, 18, 18, 19],
-                          value: 3,
-                        },
-                        {
-                          kind: "number",
-                          loc: [18, 21, 18, 22],
-                          value: 1,
-                        },
-                        {
-                          kind: "number",
-                          loc: [18, 24, 18, 25],
-                          value: 2,
-                        },
-                      ],
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 18, column: 8 },
+                      end: { line: 18, column: 57 },
                     },
-                    operatorToken: "+",
+                    operator: "+",
+                    left: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 18, column: 8 },
+                        end: { line: 18, column: 51 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 18, column: 8 },
+                          end: { line: 18, column: 31 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 18, column: 8 },
+                            end: { line: 18, column: 25 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 18, column: 8 },
+                              end: { line: 18, column: 16 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 18, column: 8 },
+                                end: { line: 18, column: 12 },
+                              },
+                              name: "Math",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 18, column: 13 },
+                                end: { line: 18, column: 16 },
+                              },
+                              name: "min",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [
+                            {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 18, column: 17 },
+                                end: { line: 18, column: 18 },
+                              },
+                              value: 3,
+                            },
+                            {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 18, column: 20 },
+                                end: { line: 18, column: 21 },
+                              },
+                              value: 1,
+                            },
+                            {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 18, column: 23 },
+                                end: { line: 18, column: 24 },
+                              },
+                              value: 2,
+                            },
+                          ],
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 18, column: 28 },
+                            end: { line: 18, column: 31 },
+                          },
+                          value: ",",
+                        },
+                      },
+                      right: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 18, column: 34 },
+                          end: { line: 18, column: 51 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 18, column: 34 },
+                            end: { line: 18, column: 42 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 18, column: 34 },
+                              end: { line: 18, column: 38 },
+                            },
+                            name: "Math",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 18, column: 39 },
+                              end: { line: 18, column: 42 },
+                            },
+                            name: "max",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [
+                          {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 18, column: 43 },
+                              end: { line: 18, column: 44 },
+                            },
+                            value: 3,
+                          },
+                          {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 18, column: 46 },
+                              end: { line: 18, column: 47 },
+                            },
+                            value: 1,
+                          },
+                          {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 18, column: 49 },
+                              end: { line: 18, column: 50 },
+                            },
+                            value: 2,
+                          },
+                        ],
+                        optional: false,
+                      },
+                    },
                     right: {
-                      kind: "string",
-                      loc: [18, 29, 18, 32],
-                      text: ",",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 18, column: 54 },
+                        end: { line: 18, column: 57 },
+                      },
+                      value: ",",
                     },
                   },
-                  operatorToken: "+",
                   right: {
-                    kind: "()",
-                    loc: [18, 35, 18, 52],
-                    expression: {
-                      kind: ".",
-                      loc: [18, 35, 18, 43],
-                      expression: {
-                        kind: "bltn",
-                        loc: [18, 35, 18, 39],
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 18, column: 60 },
+                      end: { line: 18, column: 72 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 18, column: 60 },
+                        end: { line: 18, column: 68 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 18, column: 60 },
+                          end: { line: 18, column: 64 },
+                        },
                         name: "Math",
                       },
-                      name: "max",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 18, column: 65 },
+                          end: { line: 18, column: 68 },
+                        },
+                        name: "abs",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "number",
-                        loc: [18, 44, 18, 45],
-                        value: 3,
-                      },
-                      {
-                        kind: "number",
-                        loc: [18, 47, 18, 48],
-                        value: 1,
-                      },
-                      {
-                        kind: "number",
-                        loc: [18, 50, 18, 51],
-                        value: 2,
+                        type: "UnaryExpression",
+                        loc: {
+                          start: { line: 18, column: 69 },
+                          end: { line: 18, column: 71 },
+                        },
+                        operator: "-",
+                        prefix: true,
+                        argument: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 18, column: 70 },
+                            end: { line: 18, column: 71 },
+                          },
+                          value: 4,
+                        },
                       },
                     ],
+                    optional: false,
                   },
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [18, 55, 18, 58],
-                  text: ",",
                 },
               },
-              operatorToken: "+",
-              right: {
-                kind: "()",
-                loc: [18, 61, 18, 73],
-                expression: {
-                  kind: ".",
-                  loc: [18, 61, 18, 69],
-                  expression: {
-                    kind: "bltn",
-                    loc: [18, 61, 18, 65],
-                    name: "Math",
-                  },
-                  name: "abs",
-                },
-                arguments: [
-                  {
-                    kind: "prefixop",
-                    loc: [18, 70, 18, 72],
-                    operator: "-",
-                    operand: {
-                      kind: "number",
-                      loc: [18, 71, 18, 72],
-                      value: 4,
-                    },
-                  },
-                ],
-              },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [19, 7, 35, 9],
-            expression: {
-              kind: "binop",
-              loc: [20, 9, 34, 24],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 35, column: 8 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 20, column: 8 },
+                end: { line: 34, column: 23 },
+              },
+              operator: "+",
               left: {
-                kind: "binop",
-                loc: [20, 9, 33, 12],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 20, column: 8 },
+                  end: { line: 33, column: 11 },
+                },
+                operator: "+",
                 left: {
-                  kind: "binop",
-                  loc: [20, 9, 32, 25],
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 20, column: 8 },
+                    end: { line: 32, column: 24 },
+                  },
+                  operator: "+",
                   left: {
-                    kind: "binop",
-                    loc: [20, 9, 31, 12],
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 20, column: 8 },
+                      end: { line: 31, column: 11 },
+                    },
+                    operator: "+",
                     left: {
-                      kind: "binop",
-                      loc: [20, 9, 30, 25],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 20, column: 8 },
+                        end: { line: 30, column: 24 },
+                      },
+                      operator: "+",
                       left: {
-                        kind: "binop",
-                        loc: [20, 9, 29, 12],
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 20, column: 8 },
+                          end: { line: 29, column: 11 },
+                        },
+                        operator: "+",
                         left: {
-                          kind: "binop",
-                          loc: [20, 9, 28, 22],
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 20, column: 8 },
+                            end: { line: 28, column: 21 },
+                          },
+                          operator: "+",
                           left: {
-                            kind: "binop",
-                            loc: [20, 9, 27, 12],
+                            type: "BinaryExpression",
+                            loc: {
+                              start: { line: 20, column: 8 },
+                              end: { line: 27, column: 11 },
+                            },
+                            operator: "+",
                             left: {
-                              kind: "binop",
-                              loc: [20, 9, 26, 21],
+                              type: "BinaryExpression",
+                              loc: {
+                                start: { line: 20, column: 8 },
+                                end: { line: 26, column: 20 },
+                              },
+                              operator: "+",
                               left: {
-                                kind: "binop",
-                                loc: [20, 9, 25, 12],
+                                type: "BinaryExpression",
+                                loc: {
+                                  start: { line: 20, column: 8 },
+                                  end: { line: 25, column: 11 },
+                                },
+                                operator: "+",
                                 left: {
-                                  kind: "binop",
-                                  loc: [20, 9, 24, 14],
+                                  type: "BinaryExpression",
+                                  loc: {
+                                    start: { line: 20, column: 8 },
+                                    end: { line: 24, column: 13 },
+                                  },
+                                  operator: "+",
                                   left: {
-                                    kind: "binop",
-                                    loc: [20, 9, 23, 12],
+                                    type: "BinaryExpression",
+                                    loc: {
+                                      start: { line: 20, column: 8 },
+                                      end: { line: 23, column: 11 },
+                                    },
+                                    operator: "+",
                                     left: {
-                                      kind: "binop",
-                                      loc: [20, 9, 22, 14],
+                                      type: "BinaryExpression",
+                                      loc: {
+                                        start: { line: 20, column: 8 },
+                                        end: { line: 22, column: 13 },
+                                      },
+                                      operator: "+",
                                       left: {
-                                        kind: "binop",
-                                        loc: [20, 9, 21, 12],
+                                        type: "BinaryExpression",
+                                        loc: {
+                                          start: { line: 20, column: 8 },
+                                          end: { line: 21, column: 11 },
+                                        },
+                                        operator: "+",
                                         left: {
-                                          kind: "id",
-                                          loc: [20, 9, 20, 16],
-                                          text: "rounded",
+                                          type: "Identifier",
+                                          loc: {
+                                            start: { line: 20, column: 8 },
+                                            end: { line: 20, column: 15 },
+                                          },
+                                          name: "rounded",
                                           bindingKey: "rounded$1j4uiiyebx17u$0",
                                         },
-                                        operatorToken: "+",
                                         right: {
-                                          kind: "string",
-                                          loc: [21, 9, 21, 12],
-                                          text: "|",
+                                          type: "Literal",
+                                          loc: {
+                                            start: { line: 21, column: 8 },
+                                            end: { line: 21, column: 11 },
+                                          },
+                                          value: "|",
                                         },
                                       },
-                                      operatorToken: "+",
                                       right: {
-                                        kind: "id",
-                                        loc: [22, 9, 22, 14],
-                                        text: "edges",
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 22, column: 8 },
+                                          end: { line: 22, column: 13 },
+                                        },
+                                        name: "edges",
                                         bindingKey: "edges$1j4uiiyebx17u$1",
                                       },
                                     },
-                                    operatorToken: "+",
                                     right: {
-                                      kind: "string",
-                                      loc: [23, 9, 23, 12],
-                                      text: "|",
+                                      type: "Literal",
+                                      loc: {
+                                        start: { line: 23, column: 8 },
+                                        end: { line: 23, column: 11 },
+                                      },
+                                      value: "|",
                                     },
                                   },
-                                  operatorToken: "+",
                                   right: {
-                                    kind: "id",
-                                    loc: [24, 9, 24, 14],
-                                    text: "picks",
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 24, column: 8 },
+                                      end: { line: 24, column: 13 },
+                                    },
+                                    name: "picks",
                                     bindingKey: "picks$1j4uiiyebx17u$2",
                                   },
                                 },
-                                operatorToken: "+",
                                 right: {
-                                  kind: "string",
-                                  loc: [25, 9, 25, 12],
-                                  text: "|",
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 25, column: 8 },
+                                    end: { line: 25, column: 11 },
+                                  },
+                                  value: "|",
                                 },
                               },
-                              operatorToken: "+",
                               right: {
-                                kind: "()",
-                                loc: [26, 9, 26, 21],
-                                expression: {
-                                  kind: ".",
-                                  loc: [26, 9, 26, 18],
-                                  expression: {
-                                    kind: "bltn",
-                                    loc: [26, 9, 26, 13],
+                                type: "CallExpression",
+                                loc: {
+                                  start: { line: 26, column: 8 },
+                                  end: { line: 26, column: 20 },
+                                },
+                                callee: {
+                                  type: "MemberExpression",
+                                  loc: {
+                                    start: { line: 26, column: 8 },
+                                    end: { line: 26, column: 17 },
+                                  },
+                                  object: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 26, column: 8 },
+                                      end: { line: 26, column: 12 },
+                                    },
                                     name: "Math",
                                   },
-                                  name: "sqrt",
+                                  property: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 26, column: 13 },
+                                      end: { line: 26, column: 17 },
+                                    },
+                                    name: "sqrt",
+                                  },
+                                  computed: false,
+                                  optional: false,
                                 },
                                 arguments: [
                                   {
-                                    kind: "number",
-                                    loc: [26, 19, 26, 20],
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 26, column: 18 },
+                                      end: { line: 26, column: 19 },
+                                    },
                                     value: 9,
                                   },
                                 ],
+                                optional: false,
                               },
                             },
-                            operatorToken: "+",
                             right: {
-                              kind: "string",
-                              loc: [27, 9, 27, 12],
-                              text: ",",
+                              type: "Literal",
+                              loc: {
+                                start: { line: 27, column: 8 },
+                                end: { line: 27, column: 11 },
+                              },
+                              value: ",",
                             },
                           },
-                          operatorToken: "+",
                           right: {
-                            kind: "()",
-                            loc: [28, 9, 28, 22],
-                            expression: {
-                              kind: ".",
-                              loc: [28, 9, 28, 18],
-                              expression: {
-                                kind: "bltn",
-                                loc: [28, 9, 28, 13],
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 28, column: 8 },
+                              end: { line: 28, column: 21 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 28, column: 8 },
+                                end: { line: 28, column: 17 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 28, column: 8 },
+                                  end: { line: 28, column: 12 },
+                                },
                                 name: "Math",
                               },
-                              name: "sign",
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 28, column: 13 },
+                                  end: { line: 28, column: 17 },
+                                },
+                                name: "sign",
+                              },
+                              computed: false,
+                              optional: false,
                             },
                             arguments: [
                               {
-                                kind: "prefixop",
-                                loc: [28, 19, 28, 21],
+                                type: "UnaryExpression",
+                                loc: {
+                                  start: { line: 28, column: 18 },
+                                  end: { line: 28, column: 20 },
+                                },
                                 operator: "-",
-                                operand: {
-                                  kind: "number",
-                                  loc: [28, 20, 28, 21],
+                                prefix: true,
+                                argument: {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 28, column: 19 },
+                                    end: { line: 28, column: 20 },
+                                  },
                                   value: 8,
                                 },
                               },
                             ],
+                            optional: false,
                           },
                         },
-                        operatorToken: "+",
                         right: {
-                          kind: "string",
-                          loc: [29, 9, 29, 12],
-                          text: ",",
+                          type: "Literal",
+                          loc: {
+                            start: { line: 29, column: 8 },
+                            end: { line: 29, column: 11 },
+                          },
+                          value: ",",
                         },
                       },
-                      operatorToken: "+",
                       right: {
-                        kind: "()",
-                        loc: [30, 9, 30, 25],
-                        expression: {
-                          kind: ".",
-                          loc: [30, 9, 30, 20],
-                          expression: {
-                            kind: "bltn",
-                            loc: [30, 9, 30, 13],
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 30, column: 8 },
+                          end: { line: 30, column: 24 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 30, column: 8 },
+                            end: { line: 30, column: 19 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 30, column: 8 },
+                              end: { line: 30, column: 12 },
+                            },
                             name: "Math",
                           },
-                          name: "fround",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 30, column: 13 },
+                              end: { line: 30, column: 19 },
+                            },
+                            name: "fround",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "number",
-                            loc: [30, 21, 30, 24],
+                            type: "Literal",
+                            loc: {
+                              start: { line: 30, column: 20 },
+                              end: { line: 30, column: 23 },
+                            },
                             value: 1.5,
                           },
                         ],
+                        optional: false,
                       },
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "string",
-                      loc: [31, 9, 31, 12],
-                      text: "|",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 31, column: 8 },
+                        end: { line: 31, column: 11 },
+                      },
+                      value: "|",
                     },
                   },
-                  operatorToken: "+",
                   right: {
-                    kind: "binop",
-                    loc: [32, 10, 32, 24],
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 32, column: 9 },
+                      end: { line: 32, column: 23 },
+                    },
+                    operator: ">",
                     left: {
-                      kind: ".",
-                      loc: [32, 10, 32, 17],
-                      expression: {
-                        kind: "bltn",
-                        loc: [32, 10, 32, 14],
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 32, column: 9 },
+                        end: { line: 32, column: 16 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 32, column: 9 },
+                          end: { line: 32, column: 13 },
+                        },
                         name: "Math",
                       },
-                      name: "PI",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 32, column: 14 },
+                          end: { line: 32, column: 16 },
+                        },
+                        name: "PI",
+                      },
+                      computed: false,
+                      optional: false,
                     },
-                    operatorToken: ">",
                     right: {
-                      kind: "number",
-                      loc: [32, 20, 32, 24],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 32, column: 19 },
+                        end: { line: 32, column: 23 },
+                      },
                       value: 3.14,
                     },
                   },
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "string",
-                  loc: [33, 9, 33, 12],
-                  text: ",",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 33, column: 8 },
+                    end: { line: 33, column: 11 },
+                  },
+                  value: ",",
                 },
               },
-              operatorToken: "+",
               right: {
-                kind: "binop",
-                loc: [34, 10, 34, 23],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 34, column: 9 },
+                  end: { line: 34, column: 22 },
+                },
+                operator: ">",
                 left: {
-                  kind: ".",
-                  loc: [34, 10, 34, 16],
-                  expression: {
-                    kind: "bltn",
-                    loc: [34, 10, 34, 14],
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 34, column: 9 },
+                    end: { line: 34, column: 15 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 34, column: 9 },
+                      end: { line: 34, column: 13 },
+                    },
                     name: "Math",
                   },
-                  name: "E",
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 34, column: 14 },
+                      end: { line: 34, column: 15 },
+                    },
+                    name: "E",
+                  },
+                  computed: false,
+                  optional: false,
                 },
-                operatorToken: ">",
                 right: {
-                  kind: "number",
-                  loc: [34, 19, 34, 23],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 34, column: 18 },
+                    end: { line: 34, column: 22 },
+                  },
                   value: 2.71,
                 },
               },

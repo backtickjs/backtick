@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `null` written in the script itself — bare, compared against, and as an
 // argument — as opposed to a spliced host `null` (see `runtime-values.ts`).
 const orDash = cs.create(
-  [7, 58, 14, 3],
+  { start: { line: 7, column: 57 }, end: { line: 14, column: 2 } },
   {
     version: "0.0.0",
     filePath: "expressions/null-literal.test.tsx",
@@ -13,71 +13,93 @@ const orDash = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [7, 61, 14, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 7, column: 60 }, end: { line: 14, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [8, 3, 8, 23],
-        name: {
-          kind: "id",
-          loc: [8, 3, 8, 8],
-          text: "value",
-          bindingKey: "value$2nnj6ebvkk8vj$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 7 } },
+        name: "value",
+        bindingKey: "value$2nnj6ebvkk8vj$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [9, 6, 14, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 9, column: 5 }, end: { line: 14, column: 1 } },
+      body: [
         {
-          kind: "if",
-          loc: [10, 3, 12, 4],
-          expression: {
-            kind: "binop",
-            loc: [10, 7, 10, 21],
+          type: "IfStatement",
+          loc: { start: { line: 10, column: 2 }, end: { line: 12, column: 3 } },
+          test: {
+            type: "BinaryExpression",
+            loc: {
+              start: { line: 10, column: 6 },
+              end: { line: 10, column: 20 },
+            },
+            operator: "===",
             left: {
-              kind: "id",
-              loc: [10, 7, 10, 12],
-              text: "value",
+              type: "Identifier",
+              loc: {
+                start: { line: 10, column: 6 },
+                end: { line: 10, column: 11 },
+              },
+              name: "value",
               bindingKey: "value$2nnj6ebvkk8vj$0",
             },
-            operatorToken: "===",
             right: {
-              kind: "null",
-              loc: [10, 17, 10, 21],
+              type: "Literal",
+              loc: {
+                start: { line: 10, column: 16 },
+                end: { line: 10, column: 20 },
+              },
+              value: null,
             },
           },
-          thenStatement: {
-            kind: "{}",
-            loc: [10, 23, 12, 4],
-            statements: [
+          consequent: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 10, column: 22 },
+              end: { line: 12, column: 3 },
+            },
+            body: [
               {
-                kind: "return",
-                loc: [11, 5, 11, 16],
-                expression: {
-                  kind: "string",
-                  loc: [11, 12, 11, 15],
-                  text: "-",
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 11, column: 4 },
+                  end: { line: 11, column: 15 },
+                },
+                argument: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 11 },
+                    end: { line: 11, column: 14 },
+                  },
+                  value: "-",
                 },
               },
             ],
           },
-          elseStatement: null,
+          alternate: null,
         },
         {
-          kind: "return",
-          loc: [13, 3, 13, 16],
-          expression: {
-            kind: "id",
-            loc: [13, 10, 13, 15],
-            text: "value",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 13, column: 2 },
+            end: { line: 13, column: 15 },
+          },
+          argument: {
+            type: "Identifier",
+            loc: {
+              start: { line: 13, column: 9 },
+              end: { line: 13, column: 14 },
+            },
+            name: "value",
             bindingKey: "value$2nnj6ebvkk8vj$0",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("nullLiteral", async (t) => {
@@ -85,7 +107,7 @@ it("nullLiteral", async (t) => {
     t,
     "nullLiteral",
     cs.create(
-      [20, 5, 24, 8],
+      { start: { line: 20, column: 4 }, end: { line: 24, column: 7 } },
       {
         version: "0.0.0",
         filePath: "expressions/null-literal.test.tsx",
@@ -94,70 +116,125 @@ it("nullLiteral", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [20, 9, 24, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 20, column: 8 }, end: { line: 24, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [21, 7, 21, 29],
-            name: {
-              kind: "string",
-              loc: [21, 7, 21, 14],
-              text: "missing",
+            type: "Property",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 28 },
             },
-            initializer: {
-              kind: "()",
-              loc: [21, 16, 21, 29],
-              expression: {
-                kind: "splice",
-                loc: [21, 16, 21, 23],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 21, column: 6 },
+                end: { line: 21, column: 13 },
+              },
+              name: "missing",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 21, column: 15 },
+                end: { line: 21, column: 28 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 21, column: 15 },
+                  end: { line: 21, column: 22 },
+                },
                 key: "$orDash",
               },
               arguments: [
                 {
-                  kind: "null",
-                  loc: [21, 24, 21, 28],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 21, column: 23 },
+                    end: { line: 21, column: 27 },
+                  },
+                  value: null,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [22, 7, 22, 29],
-            name: {
-              kind: "string",
-              loc: [22, 7, 22, 14],
-              text: "present",
+            type: "Property",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 22, column: 28 },
             },
-            initializer: {
-              kind: "()",
-              loc: [22, 16, 22, 29],
-              expression: {
-                kind: "splice",
-                loc: [22, 16, 22, 23],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 22, column: 6 },
+                end: { line: 22, column: 13 },
+              },
+              name: "present",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 22, column: 15 },
+                end: { line: 22, column: 28 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 22, column: 15 },
+                  end: { line: 22, column: 22 },
+                },
                 key: "$orDash",
               },
               arguments: [
                 {
-                  kind: "string",
-                  loc: [22, 24, 22, 28],
-                  text: "hi",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 22, column: 23 },
+                    end: { line: 22, column: 27 },
+                  },
+                  value: "hi",
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [23, 7, 23, 17],
-            name: {
-              kind: "string",
-              loc: [23, 7, 23, 11],
-              text: "bare",
+            type: "Property",
+            loc: {
+              start: { line: 23, column: 6 },
+              end: { line: 23, column: 16 },
             },
-            initializer: {
-              kind: "null",
-              loc: [23, 13, 23, 17],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 23, column: 6 },
+                end: { line: 23, column: 10 },
+              },
+              name: "bare",
             },
+            value: {
+              type: "Literal",
+              loc: {
+                start: { line: 23, column: 12 },
+                end: { line: 23, column: 16 },
+              },
+              value: null,
+            },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

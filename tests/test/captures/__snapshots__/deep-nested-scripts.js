@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 function add(lhs, rhs) {
   return cs.create(
-    [7, 10, 7, 25],
+    { start: { line: 7, column: 9 }, end: { line: 7, column: 24 } },
     {
       version: "0.0.0",
       filePath: "captures/deep-nested-scripts.test.tsx",
@@ -15,17 +15,17 @@ function add(lhs, rhs) {
       captures: [],
     },
     () => ({
-      kind: "binop",
-      loc: [7, 13, 7, 24],
+      type: "BinaryExpression",
+      loc: { start: { line: 7, column: 12 }, end: { line: 7, column: 23 } },
+      operator: "+",
       left: {
-        kind: "splice",
-        loc: [7, 13, 7, 17],
+        type: "Splice",
+        loc: { start: { line: 7, column: 12 }, end: { line: 7, column: 16 } },
         key: "$lhs",
       },
-      operatorToken: "+",
       right: {
-        kind: "splice",
-        loc: [7, 20, 7, 24],
+        type: "Splice",
+        loc: { start: { line: 7, column: 19 }, end: { line: 7, column: 23 } },
         key: "$rhs",
       },
     }),
@@ -36,7 +36,7 @@ it("deepNestedScripts", async (t) => {
     t,
     "deepNestedScripts",
     cs.create(
-      [11, 46, 11, 70],
+      { start: { line: 11, column: 45 }, end: { line: 11, column: 69 } },
       {
         version: "0.0.0",
         filePath: "captures/deep-nested-scripts.test.tsx",
@@ -45,7 +45,10 @@ it("deepNestedScripts", async (t) => {
           $0splice0: {
             value: add(
               cs.create(
-                [11, 55, 11, 60],
+                {
+                  start: { line: 11, column: 54 },
+                  end: { line: 11, column: 59 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "captures/deep-nested-scripts.test.tsx",
@@ -54,13 +57,19 @@ it("deepNestedScripts", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [11, 58, 11, 59],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 57 },
+                    end: { line: 11, column: 58 },
+                  },
                   value: 1,
                 }),
               ),
               cs.create(
-                [11, 62, 11, 67],
+                {
+                  start: { line: 11, column: 61 },
+                  end: { line: 11, column: 66 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "captures/deep-nested-scripts.test.tsx",
@@ -69,8 +78,11 @@ it("deepNestedScripts", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [11, 65, 11, 66],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 64 },
+                    end: { line: 11, column: 65 },
+                  },
                   value: 2,
                 }),
               ),
@@ -81,8 +93,8 @@ it("deepNestedScripts", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "splice",
-        loc: [11, 49, 11, 69],
+        type: "Splice",
+        loc: { start: { line: 11, column: 48 }, end: { line: 11, column: 68 } },
         key: "$0splice0",
       }),
     ),

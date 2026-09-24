@@ -9,7 +9,7 @@ it("objectDotsKey", async (t) => {
     t,
     "objectDotsKey",
     cs.create(
-      [12, 5, 15, 7],
+      { start: { line: 12, column: 4 }, end: { line: 15, column: 6 } },
       {
         version: "0.0.0",
         filePath: "objects/object-dots-key.test.tsx",
@@ -18,69 +18,126 @@ it("objectDotsKey", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 15, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 15, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 28 },
+            },
             kind: "const",
-            loc: [13, 7, 13, 29],
-            name: {
-              kind: "id",
-              loc: [13, 13, 13, 17],
-              text: "base",
-              bindingKey: "base$13e6vrhonm3wb$0",
-            },
-            initializer: {
-              kind: "obj",
-              loc: [13, 20, 13, 28],
-              properties: [
-                {
-                  kind: ":",
-                  loc: [13, 22, 13, 26],
-                  name: {
-                    kind: "string",
-                    loc: [13, 22, 13, 23],
-                    text: "a",
-                  },
-                  initializer: {
-                    kind: "number",
-                    loc: [13, 25, 13, 26],
-                    value: 1,
-                  },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 13, column: 27 },
                 },
-              ],
-            },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 12 },
+                    end: { line: 13, column: 16 },
+                  },
+                  name: "base",
+                  bindingKey: "base$13e6vrhonm3wb$0",
+                },
+                init: {
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 13, column: 19 },
+                    end: { line: 13, column: 27 },
+                  },
+                  properties: [
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 13, column: 21 },
+                        end: { line: 13, column: 25 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 13, column: 21 },
+                          end: { line: 13, column: 22 },
+                        },
+                        name: "a",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 13, column: 24 },
+                          end: { line: 13, column: 25 },
+                        },
+                        value: 1,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [14, 7, 14, 36],
-            expression: {
-              kind: "obj",
-              loc: [14, 14, 14, 35],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 35 },
+            },
+            argument: {
+              type: "ObjectExpression",
+              loc: {
+                start: { line: 14, column: 13 },
+                end: { line: 14, column: 34 },
+              },
               properties: [
                 {
-                  kind: "...",
-                  loc: [14, 16, 14, 23],
-                  expression: {
-                    kind: "id",
-                    loc: [14, 19, 14, 23],
-                    text: "base",
+                  type: "SpreadElement",
+                  loc: {
+                    start: { line: 14, column: 15 },
+                    end: { line: 14, column: 22 },
+                  },
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 14, column: 18 },
+                      end: { line: 14, column: 22 },
+                    },
+                    name: "base",
                     bindingKey: "base$13e6vrhonm3wb$0",
                   },
                 },
                 {
-                  kind: ":",
-                  loc: [14, 25, 14, 33],
-                  name: {
-                    kind: "string",
-                    loc: [14, 25, 14, 30],
-                    text: "...",
+                  type: "Property",
+                  loc: {
+                    start: { line: 14, column: 24 },
+                    end: { line: 14, column: 32 },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [14, 32, 14, 33],
+                  key: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 14, column: 24 },
+                      end: { line: 14, column: 29 },
+                    },
+                    value: "...",
+                  },
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 14, column: 31 },
+                      end: { line: 14, column: 32 },
+                    },
                     value: 2,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
               ],
             },

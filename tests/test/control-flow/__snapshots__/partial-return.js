@@ -7,7 +7,7 @@ it("partialReturnScript", async (t) => {
     t,
     "partialReturnScript",
     cs.create(
-      [10, 5, 15, 7],
+      { start: { line: 10, column: 4 }, end: { line: 15, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/partial-return.test.tsx",
@@ -16,59 +16,99 @@ it("partialReturnScript", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [10, 8, 15, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 10, column: 7 }, end: { line: 15, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 11, column: 16 },
+            },
             kind: "let",
-            loc: [11, 7, 11, 17],
-            name: {
-              kind: "id",
-              loc: [11, 11, 11, 12],
-              text: "n",
-              bindingKey: "n$x79h35ggz599$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [11, 15, 11, 16],
-              value: 1,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 11, column: 10 },
+                  end: { line: 11, column: 15 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 10 },
+                    end: { line: 11, column: 11 },
+                  },
+                  name: "n",
+                  bindingKey: "n$x79h35ggz599$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 14 },
+                    end: { line: 11, column: 15 },
+                  },
+                  value: 1,
+                },
+              },
+            ],
           },
           {
-            kind: "if",
-            loc: [12, 7, 14, 8],
-            expression: {
-              kind: "binop",
-              loc: [12, 11, 12, 18],
+            type: "IfStatement",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 14, column: 7 },
+            },
+            test: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 12, column: 10 },
+                end: { line: 12, column: 17 },
+              },
+              operator: "===",
               left: {
-                kind: "id",
-                loc: [12, 11, 12, 12],
-                text: "n",
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 11 },
+                },
+                name: "n",
                 bindingKey: "n$x79h35ggz599$0",
               },
-              operatorToken: "===",
               right: {
-                kind: "number",
-                loc: [12, 17, 12, 18],
+                type: "Literal",
+                loc: {
+                  start: { line: 12, column: 16 },
+                  end: { line: 12, column: 17 },
+                },
                 value: 2,
               },
             },
-            thenStatement: {
-              kind: "{}",
-              loc: [12, 20, 14, 8],
-              statements: [
+            consequent: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 12, column: 19 },
+                end: { line: 14, column: 7 },
+              },
+              body: [
                 {
-                  kind: "return",
-                  loc: [13, 9, 13, 23],
-                  expression: {
-                    kind: "string",
-                    loc: [13, 16, 13, 22],
-                    text: "some",
+                  type: "ReturnStatement",
+                  loc: {
+                    start: { line: 13, column: 8 },
+                    end: { line: 13, column: 22 },
+                  },
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 13, column: 15 },
+                      end: { line: 13, column: 21 },
+                    },
+                    value: "some",
                   },
                 },
               ],
             },
-            elseStatement: null,
+            alternate: null,
           },
         ],
       }),
@@ -80,7 +120,7 @@ it("partialReturnArrow", async (t) => {
     t,
     "partialReturnArrow",
     cs.create(
-      [23, 5, 30, 7],
+      { start: { line: 23, column: 4 }, end: { line: 30, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/partial-return.test.tsx",
@@ -89,105 +129,170 @@ it("partialReturnArrow", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [23, 8, 30, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 23, column: 7 }, end: { line: 30, column: 5 } },
+        body: [
           {
-            kind: "const",
-            loc: [24, 7, 28, 9],
-            name: {
-              kind: "id",
-              loc: [24, 13, 24, 17],
-              text: "pick",
-              bindingKey: "pick$x79h35ggz599$1",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 24, column: 6 },
+              end: { line: 28, column: 8 },
             },
-            initializer: {
-              kind: "=>",
-              loc: [24, 20, 28, 8],
-              parameters: [
-                {
-                  kind: "param",
-                  loc: [24, 21, 24, 31],
-                  name: {
-                    kind: "id",
-                    loc: [24, 21, 24, 22],
-                    text: "b",
-                    bindingKey: "b$x79h35ggz599$2",
-                  },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 24, column: 12 },
+                  end: { line: 28, column: 7 },
                 },
-              ],
-              body: {
-                kind: "{}",
-                loc: [24, 36, 28, 8],
-                statements: [
-                  {
-                    kind: "if",
-                    loc: [25, 9, 27, 10],
-                    expression: {
-                      kind: "id",
-                      loc: [25, 13, 25, 14],
-                      text: "b",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 24, column: 12 },
+                    end: { line: 24, column: 16 },
+                  },
+                  name: "pick",
+                  bindingKey: "pick$x79h35ggz599$1",
+                },
+                init: {
+                  type: "ArrowFunctionExpression",
+                  loc: {
+                    start: { line: 24, column: 19 },
+                    end: { line: 28, column: 7 },
+                  },
+                  params: [
+                    {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 24, column: 20 },
+                        end: { line: 24, column: 21 },
+                      },
+                      name: "b",
                       bindingKey: "b$x79h35ggz599$2",
                     },
-                    thenStatement: {
-                      kind: "{}",
-                      loc: [25, 16, 27, 10],
-                      statements: [
-                        {
-                          kind: "return",
-                          loc: [26, 11, 26, 26],
-                          expression: {
-                            kind: "string",
-                            loc: [26, 18, 26, 25],
-                            text: "taken",
-                          },
-                        },
-                      ],
+                  ],
+                  body: {
+                    type: "BlockStatement",
+                    loc: {
+                      start: { line: 24, column: 35 },
+                      end: { line: 28, column: 7 },
                     },
-                    elseStatement: null,
+                    body: [
+                      {
+                        type: "IfStatement",
+                        loc: {
+                          start: { line: 25, column: 8 },
+                          end: { line: 27, column: 9 },
+                        },
+                        test: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 25, column: 12 },
+                            end: { line: 25, column: 13 },
+                          },
+                          name: "b",
+                          bindingKey: "b$x79h35ggz599$2",
+                        },
+                        consequent: {
+                          type: "BlockStatement",
+                          loc: {
+                            start: { line: 25, column: 15 },
+                            end: { line: 27, column: 9 },
+                          },
+                          body: [
+                            {
+                              type: "ReturnStatement",
+                              loc: {
+                                start: { line: 26, column: 10 },
+                                end: { line: 26, column: 25 },
+                              },
+                              argument: {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 26, column: 17 },
+                                  end: { line: 26, column: 24 },
+                                },
+                                value: "taken",
+                              },
+                            },
+                          ],
+                        },
+                        alternate: null,
+                      },
+                    ],
                   },
-                ],
+                  expression: false,
+                },
               },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [29, 7, 29, 40],
-            expression: {
-              kind: "arr",
-              loc: [29, 14, 29, 39],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 39 },
+            },
+            argument: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 29, column: 13 },
+                end: { line: 29, column: 38 },
+              },
               elements: [
                 {
-                  kind: "()",
-                  loc: [29, 15, 29, 25],
-                  expression: {
-                    kind: "id",
-                    loc: [29, 15, 29, 19],
-                    text: "pick",
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 29, column: 14 },
+                    end: { line: 29, column: 24 },
+                  },
+                  callee: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 29, column: 14 },
+                      end: { line: 29, column: 18 },
+                    },
+                    name: "pick",
                     bindingKey: "pick$x79h35ggz599$1",
                   },
                   arguments: [
                     {
-                      kind: "true",
-                      loc: [29, 20, 29, 24],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 29, column: 19 },
+                        end: { line: 29, column: 23 },
+                      },
+                      value: true,
                     },
                   ],
+                  optional: false,
                 },
                 {
-                  kind: "()",
-                  loc: [29, 27, 29, 38],
-                  expression: {
-                    kind: "id",
-                    loc: [29, 27, 29, 31],
-                    text: "pick",
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 29, column: 26 },
+                    end: { line: 29, column: 37 },
+                  },
+                  callee: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 29, column: 26 },
+                      end: { line: 29, column: 30 },
+                    },
+                    name: "pick",
                     bindingKey: "pick$x79h35ggz599$1",
                   },
                   arguments: [
                     {
-                      kind: "false",
-                      loc: [29, 32, 29, 37],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 29, column: 31 },
+                        end: { line: 29, column: 36 },
+                      },
+                      value: false,
                     },
                   ],
+                  optional: false,
                 },
               ],
             },

@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // sentence; on one line its spaces are its own; and the space between two
 // expressions survives, where trimming would take it.
 const listed = cs.create(
-  [11, 16, 18, 3],
+  { start: { line: 11, column: 15 }, end: { line: 18, column: 2 } },
   {
     version: "0.0.0",
     filePath: "jsx/script-fragment.test.tsx",
@@ -18,78 +18,199 @@ const listed = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [11, 19, 18, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 11, column: 18 }, end: { line: 18, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [11, 20, 11, 32],
-        name: {
-          kind: "id",
-          loc: [11, 20, 11, 24],
-          text: "name",
-          bindingKey: "name$3pjkiwnta5gua$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 11, column: 19 }, end: { line: 11, column: 23 } },
+        name: "name",
+        bindingKey: "name$3pjkiwnta5gua$0",
       },
     ],
     body: {
-      kind: "jsx",
-      loc: [12, 3, 17, 6],
-      type: {
-        kind: "string",
-        loc: [12, 3, 17, 6],
-        text: "Fragment",
+      type: "JSXFragment",
+      loc: { start: { line: 12, column: 2 }, end: { line: 17, column: 5 } },
+      openingFragment: {
+        type: "JSXOpeningFragment",
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 4 } },
       },
-      attributes: [],
       children: [
         {
-          kind: "jsx",
-          loc: [13, 5, 13, 41],
-          type: {
-            kind: "string",
-            loc: [13, 6, 13, 10],
-            text: "span",
-          },
-          attributes: [],
-          children: [
-            {
-              kind: "string",
-              loc: [13, 11, 13, 34],
-              text: "a sentence across lines",
-            },
-          ],
+          type: "JSXText",
+          loc: { start: { line: 13, column: 4 }, end: { line: 13, column: 4 } },
+          value: "\n    ",
+          raw: "\n    ",
         },
         {
-          kind: "jsx",
-          loc: [14, 5, 16, 12],
-          type: {
-            kind: "string",
-            loc: [14, 6, 14, 10],
-            text: "span",
+          type: "JSXElement",
+          loc: {
+            start: { line: 13, column: 4 },
+            end: { line: 13, column: 40 },
           },
-          attributes: [],
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 13, column: 4 },
+              end: { line: 13, column: 10 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 13, column: 5 },
+                end: { line: 13, column: 9 },
+              },
+              name: "span",
+            },
+            attributes: [],
+            selfClosing: false,
+          },
           children: [
             {
-              kind: "id",
-              loc: [15, 8, 15, 12],
-              text: "name",
-              bindingKey: "name$3pjkiwnta5gua$0",
-            },
-            {
-              kind: "string",
-              loc: [15, 14, 15, 14],
-              text: " ",
-            },
-            {
-              kind: "id",
-              loc: [15, 15, 15, 19],
-              text: "name",
-              bindingKey: "name$3pjkiwnta5gua$0",
+              type: "JSXText",
+              loc: {
+                start: { line: 13, column: 10 },
+                end: { line: 13, column: 33 },
+              },
+              value: "a sentence across lines",
+              raw: "a sentence across lines",
             },
           ],
+          closingElement: {
+            type: "JSXClosingElement",
+            loc: {
+              start: { line: 13, column: 33 },
+              end: { line: 13, column: 40 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 13, column: 35 },
+                end: { line: 13, column: 39 },
+              },
+              name: "span",
+            },
+          },
+        },
+        {
+          type: "JSXText",
+          loc: { start: { line: 14, column: 4 }, end: { line: 14, column: 4 } },
+          value: "\n    ",
+          raw: "\n    ",
+        },
+        {
+          type: "JSXElement",
+          loc: {
+            start: { line: 14, column: 4 },
+            end: { line: 16, column: 11 },
+          },
+          openingElement: {
+            type: "JSXOpeningElement",
+            loc: {
+              start: { line: 14, column: 4 },
+              end: { line: 14, column: 10 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 14, column: 5 },
+                end: { line: 14, column: 9 },
+              },
+              name: "span",
+            },
+            attributes: [],
+            selfClosing: false,
+          },
+          children: [
+            {
+              type: "JSXText",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 6 },
+              },
+              value: "\n      ",
+              raw: "\n      ",
+            },
+            {
+              type: "JSXExpressionContainer",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 12 },
+              },
+              expression: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 7 },
+                  end: { line: 15, column: 11 },
+                },
+                name: "name",
+                bindingKey: "name$3pjkiwnta5gua$0",
+              },
+            },
+            {
+              type: "JSXText",
+              loc: {
+                start: { line: 15, column: 13 },
+                end: { line: 15, column: 13 },
+              },
+              value: " ",
+              raw: " ",
+            },
+            {
+              type: "JSXExpressionContainer",
+              loc: {
+                start: { line: 15, column: 13 },
+                end: { line: 15, column: 19 },
+              },
+              expression: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 14 },
+                  end: { line: 15, column: 18 },
+                },
+                name: "name",
+                bindingKey: "name$3pjkiwnta5gua$0",
+              },
+            },
+            {
+              type: "JSXText",
+              loc: {
+                start: { line: 16, column: 4 },
+                end: { line: 16, column: 4 },
+              },
+              value: "\n    ",
+              raw: "\n    ",
+            },
+          ],
+          closingElement: {
+            type: "JSXClosingElement",
+            loc: {
+              start: { line: 16, column: 4 },
+              end: { line: 16, column: 11 },
+            },
+            name: {
+              type: "JSXIdentifier",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 10 },
+              },
+              name: "span",
+            },
+          },
+        },
+        {
+          type: "JSXText",
+          loc: { start: { line: 17, column: 2 }, end: { line: 17, column: 2 } },
+          value: "\n  ",
+          raw: "\n  ",
         },
       ],
+      closingFragment: {
+        type: "JSXClosingFragment",
+        loc: { start: { line: 17, column: 2 }, end: { line: 17, column: 5 } },
+      },
     },
+    expression: true,
   }),
 );
 it("scriptFragment", async (t) => {
@@ -98,7 +219,7 @@ it("scriptFragment", async (t) => {
     "scriptFragment",
     _jsx("div", {
       children: cs.create(
-        [21, 49, 21, 65],
+        { start: { line: 21, column: 48 }, end: { line: 21, column: 64 } },
         {
           version: "0.0.0",
           filePath: "jsx/script-fragment.test.tsx",
@@ -107,20 +228,30 @@ it("scriptFragment", async (t) => {
           captures: [],
         },
         () => ({
-          kind: "()",
-          loc: [21, 52, 21, 64],
-          expression: {
-            kind: "splice",
-            loc: [21, 52, 21, 59],
+          type: "CallExpression",
+          loc: {
+            start: { line: 21, column: 51 },
+            end: { line: 21, column: 63 },
+          },
+          callee: {
+            type: "Splice",
+            loc: {
+              start: { line: 21, column: 51 },
+              end: { line: 21, column: 58 },
+            },
             key: "$listed",
           },
           arguments: [
             {
-              kind: "string",
-              loc: [21, 60, 21, 63],
-              text: "x",
+              type: "Literal",
+              loc: {
+                start: { line: 21, column: 59 },
+                end: { line: 21, column: 62 },
+              },
+              value: "x",
             },
           ],
+          optional: false,
         }),
       ),
     }),

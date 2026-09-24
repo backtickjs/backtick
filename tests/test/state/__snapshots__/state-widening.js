@@ -21,7 +21,7 @@ var Tone;
 })(Tone || (Tone = {}));
 async function Widened() {
   return cs.create(
-    [23, 10, 38, 5],
+    { start: { line: 23, column: 9 }, end: { line: 38, column: 4 } },
     {
       version: "0.0.0",
       filePath: "state/state-widening.test.tsx",
@@ -34,273 +34,607 @@ async function Widened() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [23, 13, 38, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 23, column: 12 }, end: { line: 38, column: 3 } },
+      body: [
         {
-          kind: "const",
-          loc: [24, 5, 24, 31],
-          name: {
-            kind: "id",
-            loc: [24, 11, 24, 15],
-            text: "flag",
-            bindingKey: "flag$2832bhm4681w5$0",
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 24, column: 4 },
+            end: { line: 24, column: 30 },
           },
-          initializer: {
-            kind: "()",
-            loc: [24, 18, 24, 30],
-            expression: {
-              kind: "splice",
-              loc: [24, 18, 24, 24],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "true",
-                loc: [24, 25, 24, 29],
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 24, column: 10 },
+                end: { line: 24, column: 29 },
               },
-            ],
-          },
-        },
-        {
-          kind: "const",
-          loc: [25, 5, 25, 39],
-          name: {
-            kind: "id",
-            loc: [25, 11, 25, 15],
-            text: "tone",
-            bindingKey: "tone$2832bhm4681w5$1",
-          },
-          initializer: {
-            kind: "()",
-            loc: [25, 18, 25, 38],
-            expression: {
-              kind: "splice",
-              loc: [25, 18, 25, 24],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "splice",
-                loc: [25, 25, 25, 37],
-                key: "$0splice0",
-              },
-            ],
-          },
-        },
-        {
-          kind: "const",
-          loc: [26, 5, 26, 48],
-          name: {
-            kind: "id",
-            loc: [26, 11, 26, 15],
-            text: "step",
-            bindingKey: "step$2832bhm4681w5$2",
-          },
-          initializer: {
-            kind: "()",
-            loc: [26, 18, 26, 47],
-            expression: {
-              kind: "splice",
-              loc: [26, 18, 26, 24],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "=>",
-                loc: [26, 39, 26, 46],
-                parameters: [],
-                body: {
-                  kind: "number",
-                  loc: [26, 45, 26, 46],
-                  value: 0,
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 24, column: 10 },
+                  end: { line: 24, column: 14 },
                 },
+                name: "flag",
+                bindingKey: "flag$2832bhm4681w5$0",
               },
-            ],
-          },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 24, column: 17 },
+                  end: { line: 24, column: 29 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 24, column: 17 },
+                    end: { line: 24, column: 23 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 24, column: 24 },
+                      end: { line: 24, column: 28 },
+                    },
+                    value: true,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [27, 5, 37, 7],
-          expression: {
-            kind: "jsx",
-            loc: [28, 7, 36, 14],
-            type: {
-              kind: "string",
-              loc: [28, 8, 28, 12],
-              text: "span",
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 25, column: 4 },
+            end: { line: 25, column: 38 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 25, column: 10 },
+                end: { line: 25, column: 37 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 25, column: 10 },
+                  end: { line: 25, column: 14 },
+                },
+                name: "tone",
+                bindingKey: "tone$2832bhm4681w5$1",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 25, column: 17 },
+                  end: { line: 25, column: 37 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 25, column: 17 },
+                    end: { line: 25, column: 23 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 25, column: 24 },
+                      end: { line: 25, column: 36 },
+                    },
+                    key: "$0splice0",
+                  },
+                ],
+                optional: false,
+              },
             },
-            attributes: [
-              {
-                name: "onclick",
-                initializer: {
-                  kind: "=>",
-                  loc: [29, 18, 33, 10],
-                  parameters: [],
-                  body: {
-                    kind: "{}",
-                    loc: [29, 24, 33, 10],
-                    statements: [
-                      {
-                        kind: "()",
-                        loc: [30, 11, 30, 26],
-                        expression: {
-                          kind: ".",
-                          loc: [30, 11, 30, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [30, 11, 30, 15],
-                            text: "flag",
-                            bindingKey: "flag$2832bhm4681w5$0",
-                          },
-                          name: "set",
-                        },
-                        arguments: [
-                          {
-                            kind: "false",
-                            loc: [30, 20, 30, 25],
-                          },
-                        ],
+          ],
+        },
+        {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 26, column: 4 },
+            end: { line: 26, column: 47 },
+          },
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 26, column: 10 },
+                end: { line: 26, column: 46 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 26, column: 10 },
+                  end: { line: 26, column: 14 },
+                },
+                name: "step",
+                bindingKey: "step$2832bhm4681w5$2",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 26, column: 17 },
+                  end: { line: 26, column: 46 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 26, column: 17 },
+                    end: { line: 26, column: 23 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 26, column: 38 },
+                      end: { line: 26, column: 45 },
+                    },
+                    params: [],
+                    body: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 26, column: 44 },
+                        end: { line: 26, column: 45 },
                       },
-                      {
-                        kind: "()",
-                        loc: [31, 11, 31, 33],
-                        expression: {
-                          kind: ".",
-                          loc: [31, 11, 31, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [31, 11, 31, 15],
-                            text: "tone",
-                            bindingKey: "tone$2832bhm4681w5$1",
-                          },
-                          name: "set",
-                        },
-                        arguments: [
-                          {
-                            kind: "splice",
-                            loc: [31, 20, 31, 32],
-                            key: "$0splice1",
-                          },
-                        ],
+                      value: 0,
+                    },
+                    expression: true,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
+        },
+        {
+          type: "ReturnStatement",
+          loc: { start: { line: 27, column: 4 }, end: { line: 37, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 28, column: 6 },
+              end: { line: 36, column: 13 },
+            },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 34, column: 7 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 28, column: 7 },
+                  end: { line: 28, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 29, column: 8 },
+                    end: { line: 33, column: 10 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 29, column: 8 },
+                      end: { line: 29, column: 15 },
+                    },
+                    name: "onclick",
+                  },
+                  value: {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 29, column: 16 },
+                      end: { line: 33, column: 10 },
+                    },
+                    expression: {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 29, column: 17 },
+                        end: { line: 33, column: 9 },
                       },
-                      {
-                        kind: "()",
-                        loc: [32, 11, 32, 28],
-                        expression: {
-                          kind: ".",
-                          loc: [32, 11, 32, 19],
-                          expression: {
-                            kind: "id",
-                            loc: [32, 11, 32, 15],
-                            text: "step",
-                            bindingKey: "step$2832bhm4681w5$2",
-                          },
-                          name: "set",
+                      params: [],
+                      body: {
+                        type: "BlockStatement",
+                        loc: {
+                          start: { line: 29, column: 23 },
+                          end: { line: 33, column: 9 },
                         },
-                        arguments: [
+                        body: [
                           {
-                            kind: "=>",
-                            loc: [32, 20, 32, 27],
-                            parameters: [],
-                            body: {
-                              kind: "number",
-                              loc: [32, 26, 32, 27],
-                              value: 1,
+                            type: "ExpressionStatement",
+                            loc: {
+                              start: { line: 30, column: 10 },
+                              end: { line: 30, column: 26 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 30, column: 10 },
+                                end: { line: 30, column: 25 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 30, column: 10 },
+                                  end: { line: 30, column: 18 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 30, column: 10 },
+                                    end: { line: 30, column: 14 },
+                                  },
+                                  name: "flag",
+                                  bindingKey: "flag$2832bhm4681w5$0",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 30, column: 15 },
+                                    end: { line: 30, column: 18 },
+                                  },
+                                  name: "set",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [
+                                {
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 30, column: 19 },
+                                    end: { line: 30, column: 24 },
+                                  },
+                                  value: false,
+                                },
+                              ],
+                              optional: false,
+                            },
+                          },
+                          {
+                            type: "ExpressionStatement",
+                            loc: {
+                              start: { line: 31, column: 10 },
+                              end: { line: 31, column: 33 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 31, column: 10 },
+                                end: { line: 31, column: 32 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 31, column: 10 },
+                                  end: { line: 31, column: 18 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 31, column: 10 },
+                                    end: { line: 31, column: 14 },
+                                  },
+                                  name: "tone",
+                                  bindingKey: "tone$2832bhm4681w5$1",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 31, column: 15 },
+                                    end: { line: 31, column: 18 },
+                                  },
+                                  name: "set",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [
+                                {
+                                  type: "Splice",
+                                  loc: {
+                                    start: { line: 31, column: 19 },
+                                    end: { line: 31, column: 31 },
+                                  },
+                                  key: "$0splice1",
+                                },
+                              ],
+                              optional: false,
+                            },
+                          },
+                          {
+                            type: "ExpressionStatement",
+                            loc: {
+                              start: { line: 32, column: 10 },
+                              end: { line: 32, column: 28 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 32, column: 10 },
+                                end: { line: 32, column: 27 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 32, column: 10 },
+                                  end: { line: 32, column: 18 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 32, column: 10 },
+                                    end: { line: 32, column: 14 },
+                                  },
+                                  name: "step",
+                                  bindingKey: "step$2832bhm4681w5$2",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 32, column: 15 },
+                                    end: { line: 32, column: 18 },
+                                  },
+                                  name: "set",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [
+                                {
+                                  type: "ArrowFunctionExpression",
+                                  loc: {
+                                    start: { line: 32, column: 19 },
+                                    end: { line: 32, column: 26 },
+                                  },
+                                  params: [],
+                                  body: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 32, column: 25 },
+                                      end: { line: 32, column: 26 },
+                                    },
+                                    value: 1,
+                                  },
+                                  expression: true,
+                                },
+                              ],
+                              optional: false,
                             },
                           },
                         ],
                       },
-                    ],
+                      expression: false,
+                    },
                   },
                 },
-              },
-            ],
+              ],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "binop",
-                loc: [35, 10, 35, 60],
-                left: {
-                  kind: "binop",
-                  loc: [35, 10, 35, 45],
+                type: "JSXText",
+                loc: {
+                  start: { line: 35, column: 8 },
+                  end: { line: 35, column: 8 },
+                },
+                value: "\n        ",
+                raw: "\n        ",
+              },
+              {
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 35, column: 8 },
+                  end: { line: 35, column: 60 },
+                },
+                expression: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 35, column: 9 },
+                    end: { line: 35, column: 59 },
+                  },
+                  operator: "+",
                   left: {
-                    kind: "binop",
-                    loc: [35, 10, 35, 39],
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 35, column: 9 },
+                      end: { line: 35, column: 44 },
+                    },
+                    operator: "+",
                     left: {
-                      kind: "binop",
-                      loc: [35, 10, 35, 26],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 35, column: 9 },
+                        end: { line: 35, column: 38 },
+                      },
+                      operator: "+",
                       left: {
-                        kind: "()",
-                        loc: [35, 10, 35, 20],
-                        expression: {
-                          kind: ".",
-                          loc: [35, 10, 35, 18],
-                          expression: {
-                            kind: "id",
-                            loc: [35, 10, 35, 14],
-                            text: "flag",
-                            bindingKey: "flag$2832bhm4681w5$0",
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 35, column: 9 },
+                          end: { line: 35, column: 25 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 35, column: 9 },
+                            end: { line: 35, column: 19 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 35, column: 9 },
+                              end: { line: 35, column: 17 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 35, column: 9 },
+                                end: { line: 35, column: 13 },
+                              },
+                              name: "flag",
+                              bindingKey: "flag$2832bhm4681w5$0",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 35, column: 14 },
+                                end: { line: 35, column: 17 },
+                              },
+                              name: "get",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [],
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 35, column: 22 },
+                            end: { line: 35, column: 25 },
+                          },
+                          value: " ",
+                        },
+                      },
+                      right: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 35, column: 28 },
+                          end: { line: 35, column: 38 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 35, column: 28 },
+                            end: { line: 35, column: 36 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 35, column: 28 },
+                              end: { line: 35, column: 32 },
+                            },
+                            name: "tone",
+                            bindingKey: "tone$2832bhm4681w5$1",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 35, column: 33 },
+                              end: { line: 35, column: 36 },
+                            },
+                            name: "get",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [],
+                        optional: false,
+                      },
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 35, column: 41 },
+                        end: { line: 35, column: 44 },
+                      },
+                      value: " ",
+                    },
+                  },
+                  right: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 35, column: 47 },
+                      end: { line: 35, column: 59 },
+                    },
+                    callee: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 35, column: 47 },
+                        end: { line: 35, column: 57 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 35, column: 47 },
+                          end: { line: 35, column: 55 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 35, column: 47 },
+                            end: { line: 35, column: 51 },
+                          },
+                          name: "step",
+                          bindingKey: "step$2832bhm4681w5$2",
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 35, column: 52 },
+                            end: { line: 35, column: 55 },
                           },
                           name: "get",
                         },
-                        arguments: [],
-                      },
-                      operatorToken: "+",
-                      right: {
-                        kind: "string",
-                        loc: [35, 23, 35, 26],
-                        text: " ",
-                      },
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: "()",
-                      loc: [35, 29, 35, 39],
-                      expression: {
-                        kind: ".",
-                        loc: [35, 29, 35, 37],
-                        expression: {
-                          kind: "id",
-                          loc: [35, 29, 35, 33],
-                          text: "tone",
-                          bindingKey: "tone$2832bhm4681w5$1",
-                        },
-                        name: "get",
+                        computed: false,
+                        optional: false,
                       },
                       arguments: [],
-                    },
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "string",
-                    loc: [35, 42, 35, 45],
-                    text: " ",
-                  },
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "()",
-                  loc: [35, 48, 35, 60],
-                  expression: {
-                    kind: "()",
-                    loc: [35, 48, 35, 58],
-                    expression: {
-                      kind: ".",
-                      loc: [35, 48, 35, 56],
-                      expression: {
-                        kind: "id",
-                        loc: [35, 48, 35, 52],
-                        text: "step",
-                        bindingKey: "step$2832bhm4681w5$2",
-                      },
-                      name: "get",
+                      optional: false,
                     },
                     arguments: [],
+                    optional: false,
                   },
-                  arguments: [],
                 },
               },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 36, column: 6 },
+                  end: { line: 36, column: 6 },
+                },
+                value: "\n      ",
+                raw: "\n      ",
+              },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 36, column: 6 },
+                end: { line: 36, column: 13 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 36, column: 8 },
+                  end: { line: 36, column: 12 },
+                },
+                name: "span",
+              },
+            },
           },
         },
       ],

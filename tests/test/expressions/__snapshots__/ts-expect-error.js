@@ -9,7 +9,7 @@ it("tsExpectError", async (t) => {
     t,
     "tsExpectError",
     cs.create(
-      [12, 5, 16, 7],
+      { start: { line: 12, column: 4 }, end: { line: 16, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/ts-expect-error.test.tsx",
@@ -18,31 +18,56 @@ it("tsExpectError", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 16, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 16, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 34 },
+            },
             kind: "const",
-            loc: [14, 7, 14, 35],
-            name: {
-              kind: "id",
-              loc: [14, 13, 14, 18],
-              text: "count",
-              bindingKey: "count$353rib4gy05pn$0",
-            },
-            initializer: {
-              kind: "string",
-              loc: [14, 29, 14, 34],
-              text: "one",
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 14, column: 12 },
+                  end: { line: 14, column: 33 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 17 },
+                  },
+                  name: "count",
+                  bindingKey: "count$353rib4gy05pn$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 14, column: 28 },
+                    end: { line: 14, column: 33 },
+                  },
+                  value: "one",
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [15, 7, 15, 20],
-            expression: {
-              kind: "id",
-              loc: [15, 14, 15, 19],
-              text: "count",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 19 },
+            },
+            argument: {
+              type: "Identifier",
+              loc: {
+                start: { line: 15, column: 13 },
+                end: { line: 15, column: 18 },
+              },
+              name: "count",
               bindingKey: "count$353rib4gy05pn$0",
             },
           },

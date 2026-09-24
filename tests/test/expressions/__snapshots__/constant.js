@@ -6,7 +6,7 @@ it("constant", async (t) => {
     t,
     "constant",
     cs.create(
-      [6, 37, 6, 42],
+      { start: { line: 6, column: 36 }, end: { line: 6, column: 41 } },
       {
         version: "0.0.0",
         filePath: "expressions/constant.test.tsx",
@@ -15,8 +15,8 @@ it("constant", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "number",
-        loc: [6, 40, 6, 41],
+        type: "Literal",
+        loc: { start: { line: 6, column: 39 }, end: { line: 6, column: 40 } },
         value: 1,
       }),
     ),

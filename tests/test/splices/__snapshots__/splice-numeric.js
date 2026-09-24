@@ -6,7 +6,7 @@ it("spliceNumeric", async (t) => {
     t,
     "spliceNumeric",
     cs.create(
-      [6, 42, 6, 50],
+      { start: { line: 6, column: 41 }, end: { line: 6, column: 49 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-numeric.test.tsx",
@@ -15,8 +15,8 @@ it("spliceNumeric", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "splice",
-        loc: [6, 45, 6, 49],
+        type: "Splice",
+        loc: { start: { line: 6, column: 44 }, end: { line: 6, column: 48 } },
         key: "$0splice0",
       }),
     ),

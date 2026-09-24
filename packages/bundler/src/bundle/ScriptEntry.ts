@@ -1,7 +1,4 @@
-import type {
-  ClientScriptBody,
-  SourceLocation,
-} from "@backtickjs/client-script";
+import type * as ES from "estree";
 
 /**
  * One `functions` entry: a client script's body, compiled once for every place
@@ -24,9 +21,9 @@ export interface EntrySplice {
 }
 
 export interface ScriptEntry {
-  readonly loc: SourceLocation;
+  readonly loc: ES.SourceLocation;
   readonly fileHash: string;
   readonly splices: readonly EntrySplice[];
   readonly captures: readonly string[];
-  readonly body: ClientScriptBody;
+  readonly body: ES.Expression | ES.BlockStatement;
 }

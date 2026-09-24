@@ -1,11 +1,7 @@
-import type {
-  ClientScriptBody,
-  SourceLocation,
-} from "@backtickjs/client-script";
+import type * as ES from "estree";
 
-// The value grammar: what a splice becomes. A script's own syntax is the other
-// half of this AST and lives in `client-script`, since that is where the compiler's
-// output has to be able to name it — the compiler emits those nodes directly.
+// The value grammar: what a splice becomes. A script's own syntax is ESTree,
+// which the compiler builds and an `AstScript` holds as it is.
 
 // A node built from a value spliced into a client script. Splice values are
 // resolved at runtime and have no source text, so a value node never has a
@@ -33,11 +29,11 @@ export interface AstSplice {
 
 export interface AstScript {
   readonly kind: "AstScript";
-  readonly loc: SourceLocation;
+  readonly loc: ES.SourceLocation;
   readonly fileHash: string;
   readonly splices: Readonly<Record<string, AstSplice>>;
   readonly captures: readonly string[];
-  readonly expression: ClientScriptBody;
+  readonly expression: ES.Expression | ES.BlockStatement;
 }
 
 export interface AstArray {

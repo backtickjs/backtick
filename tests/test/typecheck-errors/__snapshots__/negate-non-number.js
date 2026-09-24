@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // the reason this one needs no check of the language's own.
 // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'number'.
 export default cs.create(
-  [6, 16, 6, 43],
+  { start: { line: 6, column: 15 }, end: { line: 6, column: 42 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/negate-non-number.test.tsx",
@@ -12,30 +12,28 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 19, 6, 42],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 18 }, end: { line: 6, column: 41 } },
+    params: [
       {
-        kind: "param",
-        loc: [6, 20, 6, 32],
-        name: {
-          kind: "id",
-          loc: [6, 20, 6, 24],
-          text: "name",
-          bindingKey: "name$63bu3dmolvh8$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 6, column: 19 }, end: { line: 6, column: 23 } },
+        name: "name",
+        bindingKey: "name$63bu3dmolvh8$0",
       },
     ],
     body: {
-      kind: "prefixop",
-      loc: [6, 37, 6, 42],
+      type: "UnaryExpression",
+      loc: { start: { line: 6, column: 36 }, end: { line: 6, column: 41 } },
       operator: "-",
-      operand: {
-        kind: "id",
-        loc: [6, 38, 6, 42],
-        text: "name",
+      prefix: true,
+      argument: {
+        type: "Identifier",
+        loc: { start: { line: 6, column: 37 }, end: { line: 6, column: 41 } },
+        name: "name",
         bindingKey: "name$63bu3dmolvh8$0",
       },
     },
+    expression: true,
   }),
 );

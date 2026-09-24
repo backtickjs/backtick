@@ -9,7 +9,7 @@ it("step", async (t) => {
     t,
     "step",
     cs.create(
-      [12, 5, 22, 7],
+      { start: { line: 12, column: 4 }, end: { line: 22, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/step.test.tsx",
@@ -18,98 +18,180 @@ it("step", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 22, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 22, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 20 },
+            },
             kind: "let",
-            loc: [13, 7, 13, 21],
-            name: {
-              kind: "id",
-              loc: [13, 11, 13, 16],
-              text: "total",
-              bindingKey: "total$l4vdws2hl3xc$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [13, 19, 13, 20],
-              value: 0,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 10 },
+                  end: { line: 13, column: 19 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 10 },
+                    end: { line: 13, column: 15 },
+                  },
+                  name: "total",
+                  bindingKey: "total$l4vdws2hl3xc$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 13, column: 18 },
+                    end: { line: 13, column: 19 },
+                  },
+                  value: 0,
+                },
+              },
+            ],
           },
           {
-            kind: "for",
-            loc: [14, 7, 16, 8],
-            initializer: {
-              kind: "let",
-              loc: [14, 12, 14, 21],
-              name: {
-                kind: "id",
-                loc: [14, 16, 14, 17],
-                text: "i",
-                bindingKey: "i$l4vdws2hl3xc$5",
-              },
-              initializer: {
-                kind: "number",
-                loc: [14, 20, 14, 21],
-                value: 0,
-              },
+            type: "ForStatement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 16, column: 7 },
             },
-            condition: {
-              kind: "binop",
-              loc: [14, 23, 14, 28],
+            init: {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 14, column: 11 },
+                end: { line: 14, column: 20 },
+              },
+              kind: "let",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 14, column: 15 },
+                    end: { line: 14, column: 20 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 14, column: 15 },
+                      end: { line: 14, column: 16 },
+                    },
+                    name: "i",
+                    bindingKey: "i$l4vdws2hl3xc$5",
+                  },
+                  init: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 14, column: 19 },
+                      end: { line: 14, column: 20 },
+                    },
+                    value: 0,
+                  },
+                },
+              ],
+            },
+            test: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 14, column: 22 },
+                end: { line: 14, column: 27 },
+              },
+              operator: "<",
               left: {
-                kind: "id",
-                loc: [14, 23, 14, 24],
-                text: "i",
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 22 },
+                  end: { line: 14, column: 23 },
+                },
+                name: "i",
                 bindingKey: "i$l4vdws2hl3xc$5",
               },
-              operatorToken: "<",
               right: {
-                kind: "number",
-                loc: [14, 27, 14, 28],
+                type: "Literal",
+                loc: {
+                  start: { line: 14, column: 26 },
+                  end: { line: 14, column: 27 },
+                },
                 value: 3,
               },
             },
-            incrementor: {
-              kind: "postfixop",
-              loc: [14, 30, 14, 33],
+            update: {
+              type: "UpdateExpression",
+              loc: {
+                start: { line: 14, column: 29 },
+                end: { line: 14, column: 32 },
+              },
               operator: "++",
-              operand: {
-                kind: "id",
-                loc: [14, 30, 14, 31],
-                text: "i",
+              prefix: false,
+              argument: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 29 },
+                  end: { line: 14, column: 30 },
+                },
+                name: "i",
                 bindingKey: "i$l4vdws2hl3xc$5",
               },
             },
-            statement: {
-              kind: "{}",
-              loc: [14, 35, 16, 8],
-              statements: [
+            body: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 14, column: 34 },
+                end: { line: 16, column: 7 },
+              },
+              body: [
                 {
-                  kind: "binop",
-                  loc: [15, 9, 15, 26],
-                  left: {
-                    kind: "id",
-                    loc: [15, 9, 15, 14],
-                    text: "total",
-                    bindingKey: "total$l4vdws2hl3xc$0",
+                  type: "ExpressionStatement",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 26 },
                   },
-                  operatorToken: "=",
-                  right: {
-                    kind: "binop",
-                    loc: [15, 17, 15, 26],
+                  expression: {
+                    type: "AssignmentExpression",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 25 },
+                    },
+                    operator: "=",
                     left: {
-                      kind: "id",
-                      loc: [15, 17, 15, 22],
-                      text: "total",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 8 },
+                        end: { line: 15, column: 13 },
+                      },
+                      name: "total",
                       bindingKey: "total$l4vdws2hl3xc$0",
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "id",
-                      loc: [15, 25, 15, 26],
-                      text: "i",
-                      bindingKey: "i$l4vdws2hl3xc$5",
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 15, column: 16 },
+                        end: { line: 15, column: 25 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 16 },
+                          end: { line: 15, column: 21 },
+                        },
+                        name: "total",
+                        bindingKey: "total$l4vdws2hl3xc$0",
+                      },
+                      right: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 24 },
+                          end: { line: 15, column: 25 },
+                        },
+                        name: "i",
+                        bindingKey: "i$l4vdws2hl3xc$5",
+                      },
                     },
                   },
                 },
@@ -117,118 +199,227 @@ it("step", async (t) => {
             },
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 18 },
+            },
             kind: "let",
-            loc: [17, 7, 17, 19],
-            name: {
-              kind: "id",
-              loc: [17, 11, 17, 12],
-              text: "n",
-              bindingKey: "n$l4vdws2hl3xc$1",
-            },
-            initializer: {
-              kind: "number",
-              loc: [17, 15, 17, 18],
-              value: 0.1,
-            },
-          },
-          {
-            kind: "const",
-            loc: [18, 7, 18, 26],
-            name: {
-              kind: "id",
-              loc: [18, 13, 18, 19],
-              text: "before",
-              bindingKey: "before$l4vdws2hl3xc$2",
-            },
-            initializer: {
-              kind: "postfixop",
-              loc: [18, 22, 18, 25],
-              operator: "++",
-              operand: {
-                kind: "id",
-                loc: [18, 22, 18, 23],
-                text: "n",
-                bindingKey: "n$l4vdws2hl3xc$1",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 17, column: 10 },
+                  end: { line: 17, column: 17 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 10 },
+                    end: { line: 17, column: 11 },
+                  },
+                  name: "n",
+                  bindingKey: "n$l4vdws2hl3xc$1",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 17, column: 14 },
+                    end: { line: 17, column: 17 },
+                  },
+                  value: 0.1,
+                },
               },
-            },
+            ],
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 25 },
+            },
             kind: "const",
-            loc: [19, 7, 19, 25],
-            name: {
-              kind: "id",
-              loc: [19, 13, 19, 18],
-              text: "after",
-              bindingKey: "after$l4vdws2hl3xc$3",
-            },
-            initializer: {
-              kind: "prefixop",
-              loc: [19, 21, 19, 24],
-              operator: "++",
-              operand: {
-                kind: "id",
-                loc: [19, 23, 19, 24],
-                text: "n",
-                bindingKey: "n$l4vdws2hl3xc$1",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 18, column: 12 },
+                  end: { line: 18, column: 24 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 18 },
+                  },
+                  name: "before",
+                  bindingKey: "before$l4vdws2hl3xc$2",
+                },
+                init: {
+                  type: "UpdateExpression",
+                  loc: {
+                    start: { line: 18, column: 21 },
+                    end: { line: 18, column: 24 },
+                  },
+                  operator: "++",
+                  prefix: false,
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 21 },
+                      end: { line: 18, column: 22 },
+                    },
+                    name: "n",
+                    bindingKey: "n$l4vdws2hl3xc$1",
+                  },
+                },
               },
-            },
+            ],
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 24 },
+            },
             kind: "const",
-            loc: [20, 7, 20, 24],
-            name: {
-              kind: "id",
-              loc: [20, 13, 20, 17],
-              text: "down",
-              bindingKey: "down$l4vdws2hl3xc$4",
-            },
-            initializer: {
-              kind: "postfixop",
-              loc: [20, 20, 20, 23],
-              operator: "--",
-              operand: {
-                kind: "id",
-                loc: [20, 20, 20, 21],
-                text: "n",
-                bindingKey: "n$l4vdws2hl3xc$1",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 19, column: 12 },
+                  end: { line: 19, column: 23 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 12 },
+                    end: { line: 19, column: 17 },
+                  },
+                  name: "after",
+                  bindingKey: "after$l4vdws2hl3xc$3",
+                },
+                init: {
+                  type: "UpdateExpression",
+                  loc: {
+                    start: { line: 19, column: 20 },
+                    end: { line: 19, column: 23 },
+                  },
+                  operator: "++",
+                  prefix: true,
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 19, column: 22 },
+                      end: { line: 19, column: 23 },
+                    },
+                    name: "n",
+                    bindingKey: "n$l4vdws2hl3xc$1",
+                  },
+                },
               },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [21, 7, 21, 46],
-            expression: {
-              kind: "arr",
-              loc: [21, 14, 21, 45],
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 23 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 20, column: 12 },
+                  end: { line: 20, column: 22 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 20, column: 12 },
+                    end: { line: 20, column: 16 },
+                  },
+                  name: "down",
+                  bindingKey: "down$l4vdws2hl3xc$4",
+                },
+                init: {
+                  type: "UpdateExpression",
+                  loc: {
+                    start: { line: 20, column: 19 },
+                    end: { line: 20, column: 22 },
+                  },
+                  operator: "--",
+                  prefix: false,
+                  argument: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 20, column: 19 },
+                      end: { line: 20, column: 20 },
+                    },
+                    name: "n",
+                    bindingKey: "n$l4vdws2hl3xc$1",
+                  },
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 45 },
+            },
+            argument: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 21, column: 13 },
+                end: { line: 21, column: 44 },
+              },
               elements: [
                 {
-                  kind: "id",
-                  loc: [21, 15, 21, 20],
-                  text: "total",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 14 },
+                    end: { line: 21, column: 19 },
+                  },
+                  name: "total",
                   bindingKey: "total$l4vdws2hl3xc$0",
                 },
                 {
-                  kind: "id",
-                  loc: [21, 22, 21, 28],
-                  text: "before",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 21 },
+                    end: { line: 21, column: 27 },
+                  },
+                  name: "before",
                   bindingKey: "before$l4vdws2hl3xc$2",
                 },
                 {
-                  kind: "id",
-                  loc: [21, 30, 21, 35],
-                  text: "after",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 29 },
+                    end: { line: 21, column: 34 },
+                  },
+                  name: "after",
                   bindingKey: "after$l4vdws2hl3xc$3",
                 },
                 {
-                  kind: "id",
-                  loc: [21, 37, 21, 41],
-                  text: "down",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 36 },
+                    end: { line: 21, column: 40 },
+                  },
+                  name: "down",
                   bindingKey: "down$l4vdws2hl3xc$4",
                 },
                 {
-                  kind: "id",
-                  loc: [21, 43, 21, 44],
-                  text: "n",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 21, column: 42 },
+                    end: { line: 21, column: 43 },
+                  },
+                  name: "n",
                   bindingKey: "n$l4vdws2hl3xc$1",
                 },
               ],

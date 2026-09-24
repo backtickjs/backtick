@@ -24,7 +24,7 @@ it("mappedComponent", async (t) => {
     _jsx("div", {
       children: _jsx(For, {
         each: cs.create(
-          [26, 18, 26, 27],
+          { start: { line: 26, column: 17 }, end: { line: 26, column: 26 } },
           {
             version: "0.0.0",
             filePath: "jsx/mapped-component.test.tsx",
@@ -33,13 +33,16 @@ it("mappedComponent", async (t) => {
             captures: [],
           },
           () => ({
-            kind: "splice",
-            loc: [26, 21, 26, 26],
+            type: "Splice",
+            loc: {
+              start: { line: 26, column: 20 },
+              end: { line: 26, column: 25 },
+            },
             key: "$rows",
           }),
         ),
         children: cs.create(
-          [27, 10, 27, 67],
+          { start: { line: 27, column: 9 }, end: { line: 27, column: 66 } },
           {
             version: "0.0.0",
             filePath: "jsx/mapped-component.test.tsx",
@@ -48,7 +51,10 @@ it("mappedComponent", async (t) => {
               $0splice0: {
                 value: _jsx("span", {
                   children: cs.create(
-                    [27, 40, 27, 56],
+                    {
+                      start: { line: 27, column: 39 },
+                      end: { line: 27, column: 55 },
+                    },
                     {
                       version: "0.0.0",
                       filePath: "jsx/mapped-component.test.tsx",
@@ -57,18 +63,27 @@ it("mappedComponent", async (t) => {
                       captures: ["row$8u2ewdd1g2mk$0"],
                     },
                     () => ({
-                      kind: "binop",
-                      loc: [27, 43, 27, 55],
-                      left: {
-                        kind: "string",
-                        loc: [27, 43, 27, 49],
-                        text: "row ",
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 27, column: 42 },
+                        end: { line: 27, column: 54 },
                       },
-                      operatorToken: "+",
+                      operator: "+",
+                      left: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 27, column: 42 },
+                          end: { line: 27, column: 48 },
+                        },
+                        value: "row ",
+                      },
                       right: {
-                        kind: "id",
-                        loc: [27, 52, 27, 55],
-                        text: "row",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 27, column: 51 },
+                          end: { line: 27, column: 54 },
+                        },
+                        name: "row",
                         bindingKey: "row$8u2ewdd1g2mk$0",
                       },
                     }),
@@ -80,25 +95,31 @@ it("mappedComponent", async (t) => {
             captures: [],
           },
           () => ({
-            kind: "=>",
-            loc: [27, 13, 27, 66],
-            parameters: [
+            type: "ArrowFunctionExpression",
+            loc: {
+              start: { line: 27, column: 12 },
+              end: { line: 27, column: 65 },
+            },
+            params: [
               {
-                kind: "param",
-                loc: [27, 14, 27, 25],
-                name: {
-                  kind: "id",
-                  loc: [27, 14, 27, 17],
-                  text: "row",
-                  bindingKey: "row$8u2ewdd1g2mk$0",
+                type: "Identifier",
+                loc: {
+                  start: { line: 27, column: 13 },
+                  end: { line: 27, column: 16 },
                 },
+                name: "row",
+                bindingKey: "row$8u2ewdd1g2mk$0",
               },
             ],
             body: {
-              kind: "splice",
-              loc: [27, 30, 27, 66],
+              type: "Splice",
+              loc: {
+                start: { line: 27, column: 29 },
+                end: { line: 27, column: 65 },
+              },
               key: "$0splice0",
             },
+            expression: true,
           }),
         ),
       }),

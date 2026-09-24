@@ -11,7 +11,7 @@ describe("a spliced undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [12, 33, 12, 45],
+          { start: { line: 12, column: 32 }, end: { line: 12, column: 44 } },
           {
             version: "0.0.0",
             filePath: "splices/undefined-splice.test.tsx",
@@ -20,8 +20,11 @@ describe("a spliced undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "splice",
-            loc: [12, 36, 12, 44],
+            type: "Splice",
+            loc: {
+              start: { line: 12, column: 35 },
+              end: { line: 12, column: 43 },
+            },
             key: "$nothing",
           }),
         ),
@@ -33,7 +36,7 @@ describe("a spliced undefined", () => {
     const data = { missing: undefined, kept: 1 };
     const arrived = await evaluate(
       cs.create(
-        [17, 36, 17, 45],
+        { start: { line: 17, column: 35 }, end: { line: 17, column: 44 } },
         {
           version: "0.0.0",
           filePath: "splices/undefined-splice.test.tsx",
@@ -42,8 +45,11 @@ describe("a spliced undefined", () => {
           captures: [],
         },
         () => ({
-          kind: "splice",
-          loc: [17, 39, 17, 44],
+          type: "Splice",
+          loc: {
+            start: { line: 17, column: 38 },
+            end: { line: 17, column: 43 },
+          },
           key: "$data",
         }),
       ),
@@ -56,7 +62,7 @@ describe("a spliced undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          [24, 37, 24, 46],
+          { start: { line: 24, column: 36 }, end: { line: 24, column: 45 } },
           {
             version: "0.0.0",
             filePath: "splices/undefined-splice.test.tsx",
@@ -65,8 +71,11 @@ describe("a spliced undefined", () => {
             captures: [],
           },
           () => ({
-            kind: "splice",
-            loc: [24, 40, 24, 45],
+            type: "Splice",
+            loc: {
+              start: { line: 24, column: 39 },
+              end: { line: 24, column: 44 },
+            },
             key: "$data",
           }),
         ),

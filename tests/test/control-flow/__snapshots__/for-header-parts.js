@@ -8,7 +8,7 @@ it("forHeaderParts", async (t) => {
     t,
     "forHeaderParts",
     cs.create(
-      [11, 5, 19, 7],
+      { start: { line: 11, column: 4 }, end: { line: 19, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/for-header-parts.test.tsx",
@@ -17,116 +17,213 @@ it("forHeaderParts", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 19, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 19, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 12, column: 16 },
+            },
             kind: "let",
-            loc: [12, 7, 12, 17],
-            name: {
-              kind: "id",
-              loc: [12, 11, 12, 12],
-              text: "i",
-              bindingKey: "i$2espgmzktnj99$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [12, 15, 12, 16],
-              value: 0,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 15 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 10 },
+                    end: { line: 12, column: 11 },
+                  },
+                  name: "i",
+                  bindingKey: "i$2espgmzktnj99$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 12, column: 14 },
+                    end: { line: 12, column: 15 },
+                  },
+                  value: 0,
+                },
+              },
+            ],
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 20 },
+            },
             kind: "let",
-            loc: [13, 7, 13, 21],
-            name: {
-              kind: "id",
-              loc: [13, 11, 13, 15],
-              text: "seen",
-              bindingKey: "seen$2espgmzktnj99$1",
-            },
-            initializer: {
-              kind: "string",
-              loc: [13, 18, 13, 20],
-              text: "",
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 10 },
+                  end: { line: 13, column: 19 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 10 },
+                    end: { line: 13, column: 14 },
+                  },
+                  name: "seen",
+                  bindingKey: "seen$2espgmzktnj99$1",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 13, column: 17 },
+                    end: { line: 13, column: 19 },
+                  },
+                  value: "",
+                },
+              },
+            ],
           },
           {
-            kind: "for",
-            loc: [14, 7, 17, 8],
-            initializer: null,
-            condition: {
-              kind: "binop",
-              loc: [14, 14, 14, 19],
+            type: "ForStatement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 17, column: 7 },
+            },
+            init: null,
+            test: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 14, column: 13 },
+                end: { line: 14, column: 18 },
+              },
+              operator: "<",
               left: {
-                kind: "id",
-                loc: [14, 14, 14, 15],
-                text: "i",
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 13 },
+                  end: { line: 14, column: 14 },
+                },
+                name: "i",
                 bindingKey: "i$2espgmzktnj99$0",
               },
-              operatorToken: "<",
               right: {
-                kind: "number",
-                loc: [14, 18, 14, 19],
+                type: "Literal",
+                loc: {
+                  start: { line: 14, column: 17 },
+                  end: { line: 14, column: 18 },
+                },
                 value: 3,
               },
             },
-            incrementor: null,
-            statement: {
-              kind: "{}",
-              loc: [14, 23, 17, 8],
-              statements: [
+            update: null,
+            body: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 14, column: 22 },
+                end: { line: 17, column: 7 },
+              },
+              body: [
                 {
-                  kind: "binop",
-                  loc: [15, 9, 15, 24],
-                  left: {
-                    kind: "id",
-                    loc: [15, 9, 15, 13],
-                    text: "seen",
-                    bindingKey: "seen$2espgmzktnj99$1",
+                  type: "ExpressionStatement",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 24 },
                   },
-                  operatorToken: "=",
-                  right: {
-                    kind: "binop",
-                    loc: [15, 16, 15, 24],
+                  expression: {
+                    type: "AssignmentExpression",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 23 },
+                    },
+                    operator: "=",
                     left: {
-                      kind: "id",
-                      loc: [15, 16, 15, 20],
-                      text: "seen",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 8 },
+                        end: { line: 15, column: 12 },
+                      },
+                      name: "seen",
                       bindingKey: "seen$2espgmzktnj99$1",
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "id",
-                      loc: [15, 23, 15, 24],
-                      text: "i",
-                      bindingKey: "i$2espgmzktnj99$0",
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 15, column: 15 },
+                        end: { line: 15, column: 23 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 15 },
+                          end: { line: 15, column: 19 },
+                        },
+                        name: "seen",
+                        bindingKey: "seen$2espgmzktnj99$1",
+                      },
+                      right: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 22 },
+                          end: { line: 15, column: 23 },
+                        },
+                        name: "i",
+                        bindingKey: "i$2espgmzktnj99$0",
+                      },
                     },
                   },
                 },
                 {
-                  kind: "binop",
-                  loc: [16, 9, 16, 18],
-                  left: {
-                    kind: "id",
-                    loc: [16, 9, 16, 10],
-                    text: "i",
-                    bindingKey: "i$2espgmzktnj99$0",
+                  type: "ExpressionStatement",
+                  loc: {
+                    start: { line: 16, column: 8 },
+                    end: { line: 16, column: 18 },
                   },
-                  operatorToken: "=",
-                  right: {
-                    kind: "binop",
-                    loc: [16, 13, 16, 18],
+                  expression: {
+                    type: "AssignmentExpression",
+                    loc: {
+                      start: { line: 16, column: 8 },
+                      end: { line: 16, column: 17 },
+                    },
+                    operator: "=",
                     left: {
-                      kind: "id",
-                      loc: [16, 13, 16, 14],
-                      text: "i",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 8 },
+                        end: { line: 16, column: 9 },
+                      },
+                      name: "i",
                       bindingKey: "i$2espgmzktnj99$0",
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "number",
-                      loc: [16, 17, 16, 18],
-                      value: 1,
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 16, column: 12 },
+                        end: { line: 16, column: 17 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 12 },
+                          end: { line: 16, column: 13 },
+                        },
+                        name: "i",
+                        bindingKey: "i$2espgmzktnj99$0",
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 16, column: 16 },
+                          end: { line: 16, column: 17 },
+                        },
+                        value: 1,
+                      },
                     },
                   },
                 },
@@ -134,12 +231,18 @@ it("forHeaderParts", async (t) => {
             },
           },
           {
-            kind: "return",
-            loc: [18, 7, 18, 19],
-            expression: {
-              kind: "id",
-              loc: [18, 14, 18, 18],
-              text: "seen",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 18 },
+            },
+            argument: {
+              type: "Identifier",
+              loc: {
+                start: { line: 18, column: 13 },
+                end: { line: 18, column: 17 },
+              },
+              name: "seen",
               bindingKey: "seen$2espgmzktnj99$1",
             },
           },

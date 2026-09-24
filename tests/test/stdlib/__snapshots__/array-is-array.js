@@ -8,7 +8,7 @@ it("arrayIsArray", async (t) => {
     t,
     "arrayIsArray",
     cs.create(
-      [11, 5, 19, 7],
+      { start: { line: 11, column: 4 }, end: { line: 19, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/array-is-array.test.tsx",
@@ -17,145 +17,281 @@ it("arrayIsArray", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 19, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 19, column: 5 } },
+        body: [
           {
-            kind: "return",
-            loc: [12, 7, 18, 9],
-            expression: {
-              kind: "arr",
-              loc: [12, 14, 18, 8],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 18, column: 8 },
+            },
+            argument: {
+              type: "ArrayExpression",
+              loc: {
+                start: { line: 12, column: 13 },
+                end: { line: 18, column: 7 },
+              },
               elements: [
                 {
-                  kind: "()",
-                  loc: [13, 9, 13, 26],
-                  expression: {
-                    kind: ".",
-                    loc: [13, 9, 13, 22],
-                    expression: {
-                      kind: "bltn",
-                      loc: [13, 9, 13, 14],
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 13, column: 8 },
+                    end: { line: 13, column: 25 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 13, column: 8 },
+                      end: { line: 13, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 13, column: 8 },
+                        end: { line: 13, column: 13 },
+                      },
                       name: "Array",
                     },
-                    name: "isArray",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 13, column: 14 },
+                        end: { line: 13, column: 21 },
+                      },
+                      name: "isArray",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "arr",
-                      loc: [13, 23, 13, 25],
+                      type: "ArrayExpression",
+                      loc: {
+                        start: { line: 13, column: 22 },
+                        end: { line: 13, column: 24 },
+                      },
                       elements: [],
                     },
                   ],
+                  optional: false,
                 },
                 {
-                  kind: "()",
-                  loc: [14, 9, 14, 30],
-                  expression: {
-                    kind: ".",
-                    loc: [14, 9, 14, 22],
-                    expression: {
-                      kind: "bltn",
-                      loc: [14, 9, 14, 14],
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 14, column: 8 },
+                    end: { line: 14, column: 29 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 14, column: 8 },
+                      end: { line: 14, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 14, column: 8 },
+                        end: { line: 14, column: 13 },
+                      },
                       name: "Array",
                     },
-                    name: "isArray",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 14, column: 14 },
+                        end: { line: 14, column: 21 },
+                      },
+                      name: "isArray",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "arr",
-                      loc: [14, 23, 14, 29],
+                      type: "ArrayExpression",
+                      loc: {
+                        start: { line: 14, column: 22 },
+                        end: { line: 14, column: 28 },
+                      },
                       elements: [
                         {
-                          kind: "number",
-                          loc: [14, 24, 14, 25],
+                          type: "Literal",
+                          loc: {
+                            start: { line: 14, column: 23 },
+                            end: { line: 14, column: 24 },
+                          },
                           value: 1,
                         },
                         {
-                          kind: "number",
-                          loc: [14, 27, 14, 28],
+                          type: "Literal",
+                          loc: {
+                            start: { line: 14, column: 26 },
+                            end: { line: 14, column: 27 },
+                          },
                           value: 2,
                         },
                       ],
                     },
                   ],
+                  optional: false,
                 },
                 {
-                  kind: "()",
-                  loc: [15, 9, 15, 28],
-                  expression: {
-                    kind: ".",
-                    loc: [15, 9, 15, 22],
-                    expression: {
-                      kind: "bltn",
-                      loc: [15, 9, 15, 14],
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 27 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 8 },
+                        end: { line: 15, column: 13 },
+                      },
                       name: "Array",
                     },
-                    name: "isArray",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 14 },
+                        end: { line: 15, column: 21 },
+                      },
+                      name: "isArray",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "string",
-                      loc: [15, 23, 15, 27],
-                      text: "ab",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 22 },
+                        end: { line: 15, column: 26 },
+                      },
+                      value: "ab",
                     },
                   ],
+                  optional: false,
                 },
                 {
-                  kind: "()",
-                  loc: [16, 9, 16, 37],
-                  expression: {
-                    kind: ".",
-                    loc: [16, 9, 16, 22],
-                    expression: {
-                      kind: "bltn",
-                      loc: [16, 9, 16, 14],
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 16, column: 8 },
+                    end: { line: 16, column: 36 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 16, column: 8 },
+                      end: { line: 16, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 8 },
+                        end: { line: 16, column: 13 },
+                      },
                       name: "Array",
                     },
-                    name: "isArray",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 14 },
+                        end: { line: 16, column: 21 },
+                      },
+                      name: "isArray",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "obj",
-                      loc: [16, 23, 16, 36],
+                      type: "ObjectExpression",
+                      loc: {
+                        start: { line: 16, column: 22 },
+                        end: { line: 16, column: 35 },
+                      },
                       properties: [
                         {
-                          kind: ":",
-                          loc: [16, 25, 16, 34],
-                          name: {
-                            kind: "string",
-                            loc: [16, 25, 16, 31],
-                            text: "length",
+                          type: "Property",
+                          loc: {
+                            start: { line: 16, column: 24 },
+                            end: { line: 16, column: 33 },
                           },
-                          initializer: {
-                            kind: "number",
-                            loc: [16, 33, 16, 34],
+                          key: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 16, column: 24 },
+                              end: { line: 16, column: 30 },
+                            },
+                            name: "length",
+                          },
+                          value: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 16, column: 32 },
+                              end: { line: 16, column: 33 },
+                            },
                             value: 0,
                           },
+                          kind: "init",
+                          computed: false,
+                          method: false,
+                          shorthand: false,
                         },
                       ],
                     },
                   ],
+                  optional: false,
                 },
                 {
-                  kind: "()",
-                  loc: [17, 9, 17, 28],
-                  expression: {
-                    kind: ".",
-                    loc: [17, 9, 17, 22],
-                    expression: {
-                      kind: "bltn",
-                      loc: [17, 9, 17, 14],
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 17, column: 8 },
+                    end: { line: 17, column: 27 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 17, column: 8 },
+                      end: { line: 17, column: 21 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 17, column: 8 },
+                        end: { line: 17, column: 13 },
+                      },
                       name: "Array",
                     },
-                    name: "isArray",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 17, column: 14 },
+                        end: { line: 17, column: 21 },
+                      },
+                      name: "isArray",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   arguments: [
                     {
-                      kind: "null",
-                      loc: [17, 23, 17, 27],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 17, column: 22 },
+                        end: { line: 17, column: 26 },
+                      },
+                      value: null,
                     },
                   ],
+                  optional: false,
                 },
               ],
             },

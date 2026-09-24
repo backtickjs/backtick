@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // idioms that lean on truthiness (`count && flag`, `value || fallback`) are
 // type errors on each non-boolean operand. Defaulting is `??`.
 export default cs.create(
-  [6, 16, 9, 3],
+  { start: { line: 6, column: 15 }, end: { line: 9, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/non-boolean-operand.test.tsx",
@@ -12,66 +12,74 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [6, 19, 9, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 6, column: 18 }, end: { line: 9, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [6, 20, 6, 33],
-        name: {
-          kind: "id",
-          loc: [6, 20, 6, 25],
-          text: "count",
-          bindingKey: "count$31w10vl5tonbf$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 6, column: 19 }, end: { line: 6, column: 24 } },
+        name: "count",
+        bindingKey: "count$31w10vl5tonbf$0",
       },
       {
-        kind: "param",
-        loc: [6, 35, 6, 48],
-        name: {
-          kind: "id",
-          loc: [6, 35, 6, 39],
-          text: "flag",
-          bindingKey: "flag$31w10vl5tonbf$1",
-        },
+        type: "Identifier",
+        loc: { start: { line: 6, column: 34 }, end: { line: 6, column: 38 } },
+        name: "flag",
+        bindingKey: "flag$31w10vl5tonbf$1",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [6, 53, 9, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 6, column: 52 }, end: { line: 9, column: 1 } },
+      body: [
         {
-          kind: "return",
-          loc: [8, 3, 8, 36],
-          expression: {
-            kind: "binop",
-            loc: [8, 10, 8, 35],
+          type: "ReturnStatement",
+          loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 35 } },
+          argument: {
+            type: "LogicalExpression",
+            loc: {
+              start: { line: 8, column: 9 },
+              end: { line: 8, column: 34 },
+            },
+            operator: "||",
             left: {
-              kind: "binop",
-              loc: [8, 11, 8, 24],
+              type: "LogicalExpression",
+              loc: {
+                start: { line: 8, column: 10 },
+                end: { line: 8, column: 23 },
+              },
+              operator: "&&",
               left: {
-                kind: "id",
-                loc: [8, 11, 8, 16],
-                text: "count",
+                type: "Identifier",
+                loc: {
+                  start: { line: 8, column: 10 },
+                  end: { line: 8, column: 15 },
+                },
+                name: "count",
                 bindingKey: "count$31w10vl5tonbf$0",
               },
-              operatorToken: "&&",
               right: {
-                kind: "id",
-                loc: [8, 20, 8, 24],
-                text: "flag",
+                type: "Identifier",
+                loc: {
+                  start: { line: 8, column: 19 },
+                  end: { line: 8, column: 23 },
+                },
+                name: "flag",
                 bindingKey: "flag$31w10vl5tonbf$1",
               },
             },
-            operatorToken: "||",
             right: {
-              kind: "string",
-              loc: [8, 29, 8, 35],
-              text: "none",
+              type: "Literal",
+              loc: {
+                start: { line: 8, column: 28 },
+                end: { line: 8, column: 34 },
+              },
+              value: "none",
             },
           },
         },
       ],
     },
+    expression: false,
   }),
 );

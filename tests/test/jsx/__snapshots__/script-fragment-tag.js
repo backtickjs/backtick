@@ -14,7 +14,7 @@ it("scriptFragmentTag", async (t) => {
     t,
     "scriptFragmentTag",
     cs.create(
-      [17, 5, 33, 7],
+      { start: { line: 17, column: 4 }, end: { line: 33, column: 6 } },
       {
         version: "0.0.0",
         filePath: "jsx/script-fragment-tag.test.tsx",
@@ -23,98 +23,355 @@ it("scriptFragmentTag", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [17, 8, 33, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 17, column: 7 }, end: { line: 33, column: 5 } },
+        body: [
           {
-            kind: "return",
-            loc: [18, 7, 32, 9],
-            expression: {
-              kind: "jsx",
-              loc: [19, 9, 31, 15],
-              type: {
-                kind: "string",
-                loc: [19, 10, 19, 13],
-                text: "div",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 32, column: 8 },
+            },
+            argument: {
+              type: "JSXElement",
+              loc: {
+                start: { line: 19, column: 8 },
+                end: { line: 31, column: 14 },
               },
-              attributes: [],
+              openingElement: {
+                type: "JSXOpeningElement",
+                loc: {
+                  start: { line: 19, column: 8 },
+                  end: { line: 19, column: 13 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 19, column: 9 },
+                    end: { line: 19, column: 12 },
+                  },
+                  name: "div",
+                },
+                attributes: [],
+                selfClosing: false,
+              },
               children: [
                 {
-                  kind: "jsx",
-                  loc: [21, 13, 24, 24],
-                  type: {
-                    kind: "string",
-                    loc: [21, 14, 21, 22],
-                    text: "Fragment",
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 20, column: 10 },
+                    end: { line: 20, column: 10 },
                   },
-                  attributes: [],
-                  children: [
-                    {
-                      kind: "jsx",
-                      loc: [22, 15, 22, 29],
-                      type: {
-                        kind: "string",
-                        loc: [22, 16, 22, 20],
-                        text: "span",
-                      },
-                      attributes: [],
-                      children: [
-                        {
-                          kind: "string",
-                          loc: [22, 21, 22, 22],
-                          text: "a",
-                        },
-                      ],
-                    },
-                    {
-                      kind: "jsx",
-                      loc: [23, 15, 23, 29],
-                      type: {
-                        kind: "string",
-                        loc: [23, 16, 23, 20],
-                        text: "span",
-                      },
-                      attributes: [],
-                      children: [
-                        {
-                          kind: "string",
-                          loc: [23, 21, 23, 22],
-                          text: "b",
-                        },
-                      ],
-                    },
-                  ],
+                  value: "\n          ",
+                  raw: "\n          ",
                 },
                 {
-                  kind: "jsx",
-                  loc: [27, 13, 29, 16],
-                  type: {
-                    kind: "string",
-                    loc: [27, 13, 29, 16],
-                    text: "Fragment",
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 20, column: 10 },
+                    end: { line: 25, column: 11 },
                   },
-                  attributes: [],
-                  children: [
-                    {
-                      kind: "jsx",
-                      loc: [28, 15, 28, 25],
-                      type: {
-                        kind: "string",
-                        loc: [28, 16, 28, 18],
-                        text: "em",
+                  expression: {
+                    type: "JSXElement",
+                    loc: {
+                      start: { line: 21, column: 12 },
+                      end: { line: 24, column: 23 },
+                    },
+                    openingElement: {
+                      type: "JSXOpeningElement",
+                      loc: {
+                        start: { line: 21, column: 12 },
+                        end: { line: 21, column: 22 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 21, column: 13 },
+                          end: { line: 21, column: 21 },
+                        },
+                        name: "Fragment",
                       },
                       attributes: [],
-                      children: [
-                        {
-                          kind: "string",
-                          loc: [28, 19, 28, 20],
-                          text: "c",
-                        },
-                      ],
+                      selfClosing: false,
                     },
-                  ],
+                    children: [
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 22, column: 14 },
+                          end: { line: 22, column: 14 },
+                        },
+                        value: "\n              ",
+                        raw: "\n              ",
+                      },
+                      {
+                        type: "JSXElement",
+                        loc: {
+                          start: { line: 22, column: 14 },
+                          end: { line: 22, column: 28 },
+                        },
+                        openingElement: {
+                          type: "JSXOpeningElement",
+                          loc: {
+                            start: { line: 22, column: 14 },
+                            end: { line: 22, column: 20 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 22, column: 15 },
+                              end: { line: 22, column: 19 },
+                            },
+                            name: "span",
+                          },
+                          attributes: [],
+                          selfClosing: false,
+                        },
+                        children: [
+                          {
+                            type: "JSXText",
+                            loc: {
+                              start: { line: 22, column: 20 },
+                              end: { line: 22, column: 21 },
+                            },
+                            value: "a",
+                            raw: "a",
+                          },
+                        ],
+                        closingElement: {
+                          type: "JSXClosingElement",
+                          loc: {
+                            start: { line: 22, column: 21 },
+                            end: { line: 22, column: 28 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 22, column: 23 },
+                              end: { line: 22, column: 27 },
+                            },
+                            name: "span",
+                          },
+                        },
+                      },
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 23, column: 14 },
+                          end: { line: 23, column: 14 },
+                        },
+                        value: "\n              ",
+                        raw: "\n              ",
+                      },
+                      {
+                        type: "JSXElement",
+                        loc: {
+                          start: { line: 23, column: 14 },
+                          end: { line: 23, column: 28 },
+                        },
+                        openingElement: {
+                          type: "JSXOpeningElement",
+                          loc: {
+                            start: { line: 23, column: 14 },
+                            end: { line: 23, column: 20 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 23, column: 15 },
+                              end: { line: 23, column: 19 },
+                            },
+                            name: "span",
+                          },
+                          attributes: [],
+                          selfClosing: false,
+                        },
+                        children: [
+                          {
+                            type: "JSXText",
+                            loc: {
+                              start: { line: 23, column: 20 },
+                              end: { line: 23, column: 21 },
+                            },
+                            value: "b",
+                            raw: "b",
+                          },
+                        ],
+                        closingElement: {
+                          type: "JSXClosingElement",
+                          loc: {
+                            start: { line: 23, column: 21 },
+                            end: { line: 23, column: 28 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 23, column: 23 },
+                              end: { line: 23, column: 27 },
+                            },
+                            name: "span",
+                          },
+                        },
+                      },
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 24, column: 12 },
+                          end: { line: 24, column: 12 },
+                        },
+                        value: "\n            ",
+                        raw: "\n            ",
+                      },
+                    ],
+                    closingElement: {
+                      type: "JSXClosingElement",
+                      loc: {
+                        start: { line: 24, column: 12 },
+                        end: { line: 24, column: 23 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 24, column: 14 },
+                          end: { line: 24, column: 22 },
+                        },
+                        name: "Fragment",
+                      },
+                    },
+                  },
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 26, column: 10 },
+                    end: { line: 26, column: 10 },
+                  },
+                  value: "\n          ",
+                  raw: "\n          ",
+                },
+                {
+                  type: "JSXExpressionContainer",
+                  loc: {
+                    start: { line: 26, column: 10 },
+                    end: { line: 30, column: 11 },
+                  },
+                  expression: {
+                    type: "JSXFragment",
+                    loc: {
+                      start: { line: 27, column: 12 },
+                      end: { line: 29, column: 15 },
+                    },
+                    openingFragment: {
+                      type: "JSXOpeningFragment",
+                      loc: {
+                        start: { line: 27, column: 12 },
+                        end: { line: 27, column: 14 },
+                      },
+                    },
+                    children: [
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 28, column: 14 },
+                          end: { line: 28, column: 14 },
+                        },
+                        value: "\n              ",
+                        raw: "\n              ",
+                      },
+                      {
+                        type: "JSXElement",
+                        loc: {
+                          start: { line: 28, column: 14 },
+                          end: { line: 28, column: 24 },
+                        },
+                        openingElement: {
+                          type: "JSXOpeningElement",
+                          loc: {
+                            start: { line: 28, column: 14 },
+                            end: { line: 28, column: 18 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 28, column: 15 },
+                              end: { line: 28, column: 17 },
+                            },
+                            name: "em",
+                          },
+                          attributes: [],
+                          selfClosing: false,
+                        },
+                        children: [
+                          {
+                            type: "JSXText",
+                            loc: {
+                              start: { line: 28, column: 18 },
+                              end: { line: 28, column: 19 },
+                            },
+                            value: "c",
+                            raw: "c",
+                          },
+                        ],
+                        closingElement: {
+                          type: "JSXClosingElement",
+                          loc: {
+                            start: { line: 28, column: 19 },
+                            end: { line: 28, column: 24 },
+                          },
+                          name: {
+                            type: "JSXIdentifier",
+                            loc: {
+                              start: { line: 28, column: 21 },
+                              end: { line: 28, column: 23 },
+                            },
+                            name: "em",
+                          },
+                        },
+                      },
+                      {
+                        type: "JSXText",
+                        loc: {
+                          start: { line: 29, column: 12 },
+                          end: { line: 29, column: 12 },
+                        },
+                        value: "\n            ",
+                        raw: "\n            ",
+                      },
+                    ],
+                    closingFragment: {
+                      type: "JSXClosingFragment",
+                      loc: {
+                        start: { line: 29, column: 12 },
+                        end: { line: 29, column: 15 },
+                      },
+                    },
+                  },
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 31, column: 8 },
+                    end: { line: 31, column: 8 },
+                  },
+                  value: "\n        ",
+                  raw: "\n        ",
                 },
               ],
+              closingElement: {
+                type: "JSXClosingElement",
+                loc: {
+                  start: { line: 31, column: 8 },
+                  end: { line: 31, column: 14 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 31, column: 10 },
+                    end: { line: 31, column: 13 },
+                  },
+                  name: "div",
+                },
+              },
             },
           },
         ],

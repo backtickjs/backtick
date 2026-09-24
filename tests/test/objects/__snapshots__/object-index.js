@@ -11,7 +11,7 @@ it("objectIndex", async (t) => {
     t,
     "objectIndex",
     cs.create(
-      [15, 5, 20, 7],
+      { start: { line: 15, column: 4 }, end: { line: 20, column: 6 } },
       {
         version: "0.0.0",
         filePath: "objects/object-index.test.tsx",
@@ -20,133 +20,233 @@ it("objectIndex", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [15, 8, 20, 6],
-        parameters: [
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 15, column: 7 }, end: { line: 20, column: 5 } },
+        params: [
           {
-            kind: "param",
-            loc: [15, 9, 15, 25],
-            name: {
-              kind: "id",
-              loc: [15, 9, 15, 17],
-              text: "currency",
-              bindingKey: "currency$o3ttyh4dq4dw$0",
+            type: "Identifier",
+            loc: {
+              start: { line: 15, column: 8 },
+              end: { line: 15, column: 16 },
             },
+            name: "currency",
+            bindingKey: "currency$o3ttyh4dq4dw$0",
           },
         ],
         body: {
-          kind: "{}",
-          loc: [15, 30, 20, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 15, column: 29 },
+            end: { line: 20, column: 5 },
+          },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 27 },
+              },
               kind: "const",
-              loc: [16, 7, 16, 28],
-              name: {
-                kind: "id",
-                loc: [16, 13, 16, 18],
-                text: "table",
-                bindingKey: "table$o3ttyh4dq4dw$1",
-              },
-              initializer: {
-                kind: "splice",
-                loc: [16, 21, 16, 27],
-                key: "$rates",
-              },
-            },
-            {
-              kind: "const",
-              loc: [17, 7, 17, 42],
-              name: {
-                kind: "id",
-                loc: [17, 13, 17, 18],
-                text: "asked",
-                bindingKey: "asked$o3ttyh4dq4dw$2",
-              },
-              initializer: {
-                kind: "binop",
-                loc: [17, 21, 17, 41],
-                left: {
-                  kind: "[]",
-                  loc: [17, 21, 17, 36],
-                  expression: {
-                    kind: "id",
-                    loc: [17, 21, 17, 26],
-                    text: "table",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 16, column: 12 },
+                    end: { line: 16, column: 26 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 16, column: 12 },
+                      end: { line: 16, column: 17 },
+                    },
+                    name: "table",
                     bindingKey: "table$o3ttyh4dq4dw$1",
                   },
-                  argumentExpression: {
-                    kind: "id",
-                    loc: [17, 27, 17, 35],
-                    text: "currency",
-                    bindingKey: "currency$o3ttyh4dq4dw$0",
+                  init: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 16, column: 20 },
+                      end: { line: 16, column: 26 },
+                    },
+                    key: "$rates",
                   },
                 },
-                operatorToken: "??",
-                right: {
-                  kind: "number",
-                  loc: [17, 40, 17, 41],
-                  value: 0,
-                },
-              },
+              ],
             },
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 41 },
+              },
               kind: "const",
-              loc: [18, 7, 18, 37],
-              name: {
-                kind: "id",
-                loc: [18, 13, 18, 16],
-                text: "usd",
-                bindingKey: "usd$o3ttyh4dq4dw$3",
-              },
-              initializer: {
-                kind: "binop",
-                loc: [18, 19, 18, 36],
-                left: {
-                  kind: "[]",
-                  loc: [18, 19, 18, 31],
-                  expression: {
-                    kind: "id",
-                    loc: [18, 19, 18, 24],
-                    text: "table",
-                    bindingKey: "table$o3ttyh4dq4dw$1",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 40 },
                   },
-                  argumentExpression: {
-                    kind: "string",
-                    loc: [18, 25, 18, 30],
-                    text: "usd",
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 12 },
+                      end: { line: 17, column: 17 },
+                    },
+                    name: "asked",
+                    bindingKey: "asked$o3ttyh4dq4dw$2",
+                  },
+                  init: {
+                    type: "LogicalExpression",
+                    loc: {
+                      start: { line: 17, column: 20 },
+                      end: { line: 17, column: 40 },
+                    },
+                    operator: "??",
+                    left: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 17, column: 20 },
+                        end: { line: 17, column: 35 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 17, column: 20 },
+                          end: { line: 17, column: 25 },
+                        },
+                        name: "table",
+                        bindingKey: "table$o3ttyh4dq4dw$1",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 17, column: 26 },
+                          end: { line: 17, column: 34 },
+                        },
+                        name: "currency",
+                        bindingKey: "currency$o3ttyh4dq4dw$0",
+                      },
+                      computed: true,
+                      optional: false,
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 17, column: 39 },
+                        end: { line: 17, column: 40 },
+                      },
+                      value: 0,
+                    },
                   },
                 },
-                operatorToken: "??",
-                right: {
-                  kind: "number",
-                  loc: [18, 35, 18, 36],
-                  value: 0,
-                },
-              },
+              ],
             },
             {
-              kind: "return",
-              loc: [19, 7, 19, 26],
-              expression: {
-                kind: "binop",
-                loc: [19, 14, 19, 25],
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 18, column: 36 },
+              },
+              kind: "const",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 35 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 12 },
+                      end: { line: 18, column: 15 },
+                    },
+                    name: "usd",
+                    bindingKey: "usd$o3ttyh4dq4dw$3",
+                  },
+                  init: {
+                    type: "LogicalExpression",
+                    loc: {
+                      start: { line: 18, column: 18 },
+                      end: { line: 18, column: 35 },
+                    },
+                    operator: "??",
+                    left: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 18, column: 18 },
+                        end: { line: 18, column: 30 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 18, column: 18 },
+                          end: { line: 18, column: 23 },
+                        },
+                        name: "table",
+                        bindingKey: "table$o3ttyh4dq4dw$1",
+                      },
+                      property: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 18, column: 24 },
+                          end: { line: 18, column: 29 },
+                        },
+                        value: "usd",
+                      },
+                      computed: true,
+                      optional: false,
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 18, column: 34 },
+                        end: { line: 18, column: 35 },
+                      },
+                      value: 0,
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 19, column: 6 },
+                end: { line: 19, column: 25 },
+              },
+              argument: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 19, column: 13 },
+                  end: { line: 19, column: 24 },
+                },
+                operator: "+",
                 left: {
-                  kind: "id",
-                  loc: [19, 14, 19, 19],
-                  text: "asked",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 13 },
+                    end: { line: 19, column: 18 },
+                  },
+                  name: "asked",
                   bindingKey: "asked$o3ttyh4dq4dw$2",
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "id",
-                  loc: [19, 22, 19, 25],
-                  text: "usd",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 21 },
+                    end: { line: 19, column: 24 },
+                  },
+                  name: "usd",
                   bindingKey: "usd$o3ttyh4dq4dw$3",
                 },
               },
             },
           ],
         },
+        expression: false,
       }),
     ),
   );

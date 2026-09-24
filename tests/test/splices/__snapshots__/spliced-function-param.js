@@ -10,7 +10,7 @@ it("splicedFunctionParam", async (t) => {
     t,
     "splicedFunctionParam",
     cs.create(
-      [13, 5, 16, 7],
+      { start: { line: 13, column: 4 }, end: { line: 16, column: 6 } },
       {
         version: "0.0.0",
         filePath: "splices/spliced-function-param.test.tsx",
@@ -18,7 +18,10 @@ it("splicedFunctionParam", async (t) => {
         splices: {
           $0splice0: {
             value: cs.create(
-              [15, 22, 15, 33],
+              {
+                start: { line: 15, column: 21 },
+                end: { line: 15, column: 32 },
+              },
               {
                 version: "0.0.0",
                 filePath: "splices/spliced-function-param.test.tsx",
@@ -27,14 +30,21 @@ it("splicedFunctionParam", async (t) => {
                 captures: [],
               },
               () => ({
-                kind: "=>",
-                loc: [15, 25, 15, 32],
-                parameters: [],
+                type: "ArrowFunctionExpression",
+                loc: {
+                  start: { line: 15, column: 24 },
+                  end: { line: 15, column: 31 },
+                },
+                params: [],
                 body: {
-                  kind: "number",
-                  loc: [15, 31, 15, 32],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 15, column: 30 },
+                    end: { line: 15, column: 31 },
+                  },
                   value: 2,
                 },
+                expression: true,
               }),
             ),
             params: [],
@@ -43,75 +53,120 @@ it("splicedFunctionParam", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [13, 8, 16, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 13, column: 7 }, end: { line: 16, column: 5 } },
+        body: [
           {
-            kind: "const",
-            loc: [14, 7, 14, 50],
-            name: {
-              kind: "id",
-              loc: [14, 13, 14, 18],
-              text: "apply",
-              bindingKey: "apply$yz0kiroonaez$0",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 49 },
             },
-            initializer: {
-              kind: "=>",
-              loc: [14, 21, 14, 49],
-              parameters: [
-                {
-                  kind: "param",
-                  loc: [14, 22, 14, 37],
-                  name: {
-                    kind: "id",
-                    loc: [14, 22, 14, 23],
-                    text: "f",
-                    bindingKey: "f$yz0kiroonaez$1",
-                  },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 14, column: 12 },
+                  end: { line: 14, column: 48 },
                 },
-              ],
-              body: {
-                kind: "binop",
-                loc: [14, 42, 14, 49],
-                left: {
-                  kind: "()",
-                  loc: [14, 42, 14, 45],
-                  expression: {
-                    kind: "id",
-                    loc: [14, 42, 14, 43],
-                    text: "f",
-                    bindingKey: "f$yz0kiroonaez$1",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 17 },
                   },
-                  arguments: [],
+                  name: "apply",
+                  bindingKey: "apply$yz0kiroonaez$0",
                 },
-                operatorToken: "+",
-                right: {
-                  kind: "number",
-                  loc: [14, 48, 14, 49],
-                  value: 1,
+                init: {
+                  type: "ArrowFunctionExpression",
+                  loc: {
+                    start: { line: 14, column: 20 },
+                    end: { line: 14, column: 48 },
+                  },
+                  params: [
+                    {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 14, column: 21 },
+                        end: { line: 14, column: 22 },
+                      },
+                      name: "f",
+                      bindingKey: "f$yz0kiroonaez$1",
+                    },
+                  ],
+                  body: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 14, column: 41 },
+                      end: { line: 14, column: 48 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 14, column: 41 },
+                        end: { line: 14, column: 44 },
+                      },
+                      callee: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 41 },
+                          end: { line: 14, column: 42 },
+                        },
+                        name: "f",
+                        bindingKey: "f$yz0kiroonaez$1",
+                      },
+                      arguments: [],
+                      optional: false,
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 47 },
+                        end: { line: 14, column: 48 },
+                      },
+                      value: 1,
+                    },
+                  },
+                  expression: true,
                 },
               },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [15, 7, 15, 36],
-            expression: {
-              kind: "()",
-              loc: [15, 14, 15, 35],
-              expression: {
-                kind: "id",
-                loc: [15, 14, 15, 19],
-                text: "apply",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 35 },
+            },
+            argument: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 15, column: 13 },
+                end: { line: 15, column: 34 },
+              },
+              callee: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 13 },
+                  end: { line: 15, column: 18 },
+                },
+                name: "apply",
                 bindingKey: "apply$yz0kiroonaez$0",
               },
               arguments: [
                 {
-                  kind: "splice",
-                  loc: [15, 20, 15, 34],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 15, column: 19 },
+                    end: { line: 15, column: 33 },
+                  },
                   key: "$0splice0",
                 },
               ],
+              optional: false,
             },
           },
         ],

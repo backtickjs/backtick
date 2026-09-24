@@ -7,7 +7,7 @@ import { cs } from "@backtickjs/core";
 // stays check-free — a duplicate that re-checked its operands would pin
 // the `count` mismatch a second time.
 export default cs.create(
-  [10, 16, 17, 3],
+  { start: { line: 10, column: 15 }, end: { line: 17, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/nested-non-boolean-operand.test.tsx",
@@ -16,125 +16,181 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [10, 19, 17, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 10, column: 18 }, end: { line: 17, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [10, 20, 10, 33],
-        name: {
-          kind: "id",
-          loc: [10, 20, 10, 25],
-          text: "count",
-          bindingKey: "count$3oonrws5csyo1$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 10, column: 19 }, end: { line: 10, column: 24 } },
+        name: "count",
+        bindingKey: "count$3oonrws5csyo1$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [10, 38, 17, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 10, column: 37 }, end: { line: 17, column: 1 } },
+      body: [
         {
-          kind: "const",
-          loc: [11, 3, 11, 36],
-          name: {
-            kind: "id",
-            loc: [11, 9, 11, 13],
-            text: "keep",
-            bindingKey: "keep$3oonrws5csyo1$1",
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 11, column: 2 },
+            end: { line: 11, column: 35 },
           },
-          initializer: {
-            kind: "=>",
-            loc: [11, 16, 11, 35],
-            parameters: [
-              {
-                kind: "param",
-                loc: [11, 17, 11, 28],
-                name: {
-                  kind: "id",
-                  loc: [11, 17, 11, 19],
-                  text: "on",
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 11, column: 8 },
+                end: { line: 11, column: 34 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 11, column: 8 },
+                  end: { line: 11, column: 12 },
+                },
+                name: "keep",
+                bindingKey: "keep$3oonrws5csyo1$1",
+              },
+              init: {
+                type: "ArrowFunctionExpression",
+                loc: {
+                  start: { line: 11, column: 15 },
+                  end: { line: 11, column: 34 },
+                },
+                params: [
+                  {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 16 },
+                      end: { line: 11, column: 18 },
+                    },
+                    name: "on",
+                    bindingKey: "on$3oonrws5csyo1$2",
+                  },
+                ],
+                body: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 32 },
+                    end: { line: 11, column: 34 },
+                  },
+                  name: "on",
                   bindingKey: "on$3oonrws5csyo1$2",
                 },
+                expression: true,
               },
-            ],
-            body: {
-              kind: "id",
-              loc: [11, 33, 11, 35],
-              text: "on",
-              bindingKey: "on$3oonrws5csyo1$2",
             },
-          },
+          ],
         },
         {
-          kind: "if",
-          loc: [13, 3, 15, 4],
-          expression: {
-            kind: "()",
-            loc: [13, 7, 13, 31],
-            expression: {
-              kind: "id",
-              loc: [13, 7, 13, 11],
-              text: "keep",
+          type: "IfStatement",
+          loc: { start: { line: 13, column: 2 }, end: { line: 15, column: 3 } },
+          test: {
+            type: "CallExpression",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 30 },
+            },
+            callee: {
+              type: "Identifier",
+              loc: {
+                start: { line: 13, column: 6 },
+                end: { line: 13, column: 10 },
+              },
+              name: "keep",
               bindingKey: "keep$3oonrws5csyo1$1",
             },
             arguments: [
               {
-                kind: "binop",
-                loc: [13, 12, 13, 30],
+                type: "LogicalExpression",
+                loc: {
+                  start: { line: 13, column: 11 },
+                  end: { line: 13, column: 29 },
+                },
+                operator: "&&",
                 left: {
-                  kind: "id",
-                  loc: [13, 12, 13, 17],
-                  text: "count",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 11 },
+                    end: { line: 13, column: 16 },
+                  },
+                  name: "count",
                   bindingKey: "count$3oonrws5csyo1$0",
                 },
-                operatorToken: "&&",
                 right: {
-                  kind: "binop",
-                  loc: [13, 21, 13, 30],
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 13, column: 20 },
+                    end: { line: 13, column: 29 },
+                  },
+                  operator: ">",
                   left: {
-                    kind: "id",
-                    loc: [13, 21, 13, 26],
-                    text: "count",
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 13, column: 20 },
+                      end: { line: 13, column: 25 },
+                    },
+                    name: "count",
                     bindingKey: "count$3oonrws5csyo1$0",
                   },
-                  operatorToken: ">",
                   right: {
-                    kind: "number",
-                    loc: [13, 29, 13, 30],
+                    type: "Literal",
+                    loc: {
+                      start: { line: 13, column: 28 },
+                      end: { line: 13, column: 29 },
+                    },
                     value: 0,
                   },
                 },
               },
             ],
+            optional: false,
           },
-          thenStatement: {
-            kind: "{}",
-            loc: [13, 33, 15, 4],
-            statements: [
+          consequent: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 13, column: 32 },
+              end: { line: 15, column: 3 },
+            },
+            body: [
               {
-                kind: "return",
-                loc: [14, 5, 14, 19],
-                expression: {
-                  kind: "string",
-                  loc: [14, 12, 14, 18],
-                  text: "kept",
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 14, column: 4 },
+                  end: { line: 14, column: 18 },
+                },
+                argument: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 14, column: 11 },
+                    end: { line: 14, column: 17 },
+                  },
+                  value: "kept",
                 },
               },
             ],
           },
-          elseStatement: null,
+          alternate: null,
         },
         {
-          kind: "return",
-          loc: [16, 3, 16, 20],
-          expression: {
-            kind: "string",
-            loc: [16, 10, 16, 19],
-            text: "dropped",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 16, column: 2 },
+            end: { line: 16, column: 19 },
+          },
+          argument: {
+            type: "Literal",
+            loc: {
+              start: { line: 16, column: 9 },
+              end: { line: 16, column: 18 },
+            },
+            value: "dropped",
           },
         },
       ],
     },
+    expression: false,
   }),
 );

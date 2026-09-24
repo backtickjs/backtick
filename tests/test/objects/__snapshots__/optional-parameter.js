@@ -5,7 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and either way it binds `undefined`. `null` is a value of its own and not
 // accepted here.
 const greet = cs.create(
-  [8, 15, 10, 3],
+  { start: { line: 8, column: 14 }, end: { line: 10, column: 2 } },
   {
     version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
@@ -14,58 +14,84 @@ const greet = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [8, 18, 10, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 8, column: 17 }, end: { line: 10, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [8, 19, 8, 32],
-        name: {
-          kind: "id",
-          loc: [8, 19, 8, 23],
-          text: "name",
-          bindingKey: "name$1i6s8vesd5nbi$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 8, column: 18 }, end: { line: 8, column: 22 } },
+        name: "name",
+        bindingKey: "name$1i6s8vesd5nbi$0",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [8, 37, 10, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 8, column: 36 }, end: { line: 10, column: 1 } },
+      body: [
         {
-          kind: "return",
-          loc: [9, 3, 9, 28],
-          expression: {
-            kind: "()",
-            loc: [9, 10, 9, 27],
-            expression: {
-              kind: "?.",
-              loc: [9, 10, 9, 22],
-              expression: {
-                kind: "id",
-                loc: [9, 10, 9, 14],
-                text: "name",
-                bindingKey: "name$1i6s8vesd5nbi$0",
-              },
-              name: "concat",
+          type: "ReturnStatement",
+          loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 27 } },
+          argument: {
+            type: "ChainExpression",
+            loc: {
+              start: { line: 9, column: 9 },
+              end: { line: 9, column: 26 },
             },
-            arguments: [
-              {
-                kind: "string",
-                loc: [9, 23, 9, 26],
-                text: "!",
+            expression: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 9, column: 9 },
+                end: { line: 9, column: 26 },
               },
-            ],
+              callee: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 9, column: 9 },
+                  end: { line: 9, column: 21 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 9, column: 9 },
+                    end: { line: 9, column: 13 },
+                  },
+                  name: "name",
+                  bindingKey: "name$1i6s8vesd5nbi$0",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 9, column: 15 },
+                    end: { line: 9, column: 21 },
+                  },
+                  name: "concat",
+                },
+                computed: false,
+                optional: true,
+              },
+              arguments: [
+                {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 9, column: 22 },
+                    end: { line: 9, column: 25 },
+                  },
+                  value: "!",
+                },
+              ],
+              optional: false,
+            },
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 // A function-typed annotation unions parenthesized: `(() => number) |
 // undefined`.
 const double = cs.create(
-  [14, 16, 14, 27],
+  { start: { line: 14, column: 15 }, end: { line: 14, column: 26 } },
   {
     version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
@@ -74,18 +100,19 @@ const double = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [14, 19, 14, 26],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 14, column: 18 }, end: { line: 14, column: 25 } },
+    params: [],
     body: {
-      kind: "number",
-      loc: [14, 25, 14, 26],
+      type: "Literal",
+      loc: { start: { line: 14, column: 24 }, end: { line: 14, column: 25 } },
       value: 2,
     },
+    expression: true,
   }),
 );
 const callIfGiven = cs.create(
-  [16, 21, 18, 3],
+  { start: { line: 16, column: 20 }, end: { line: 18, column: 2 } },
   {
     version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
@@ -94,51 +121,71 @@ const callIfGiven = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [16, 24, 18, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 16, column: 23 }, end: { line: 18, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [16, 25, 16, 42],
-        name: {
-          kind: "id",
-          loc: [16, 25, 16, 27],
-          text: "cb",
-          bindingKey: "cb$1i6s8vesd5nbi$1",
-        },
+        type: "Identifier",
+        loc: { start: { line: 16, column: 24 }, end: { line: 16, column: 26 } },
+        name: "cb",
+        bindingKey: "cb$1i6s8vesd5nbi$1",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [16, 47, 18, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 16, column: 46 }, end: { line: 18, column: 1 } },
+      body: [
         {
-          kind: "return",
-          loc: [17, 3, 17, 22],
-          expression: {
-            kind: "binop",
-            loc: [17, 10, 17, 21],
-            left: {
-              kind: "?.()",
-              loc: [17, 10, 17, 16],
-              expression: {
-                kind: "id",
-                loc: [17, 10, 17, 12],
-                text: "cb",
-                bindingKey: "cb$1i6s8vesd5nbi$1",
-              },
-              arguments: [],
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 17, column: 2 },
+            end: { line: 17, column: 21 },
+          },
+          argument: {
+            type: "LogicalExpression",
+            loc: {
+              start: { line: 17, column: 9 },
+              end: { line: 17, column: 20 },
             },
-            operatorToken: "??",
+            operator: "??",
+            left: {
+              type: "ChainExpression",
+              loc: {
+                start: { line: 17, column: 9 },
+                end: { line: 17, column: 15 },
+              },
+              expression: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 17, column: 9 },
+                  end: { line: 17, column: 15 },
+                },
+                callee: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 9 },
+                    end: { line: 17, column: 11 },
+                  },
+                  name: "cb",
+                  bindingKey: "cb$1i6s8vesd5nbi$1",
+                },
+                arguments: [],
+                optional: true,
+              },
+            },
             right: {
-              kind: "number",
-              loc: [17, 20, 17, 21],
+              type: "Literal",
+              loc: {
+                start: { line: 17, column: 19 },
+                end: { line: 17, column: 20 },
+              },
               value: 0,
             },
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("optionalParameter", async (t) => {
@@ -146,7 +193,7 @@ it("optionalParameter", async (t) => {
     t,
     "optionalParameter",
     cs.create(
-      [24, 5, 31, 8],
+      { start: { line: 24, column: 4 }, end: { line: 31, column: 7 } },
       {
         version: "0.0.0",
         filePath: "objects/optional-parameter.test.tsx",
@@ -159,144 +206,260 @@ it("optionalParameter", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [24, 9, 31, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 24, column: 8 }, end: { line: 31, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [25, 7, 25, 26],
-            name: {
-              kind: "string",
-              loc: [25, 7, 25, 12],
-              text: "named",
+            type: "Property",
+            loc: {
+              start: { line: 25, column: 6 },
+              end: { line: 25, column: 25 },
             },
-            initializer: {
-              kind: "()",
-              loc: [25, 14, 25, 26],
-              expression: {
-                kind: "splice",
-                loc: [25, 14, 25, 20],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 25, column: 6 },
+                end: { line: 25, column: 11 },
+              },
+              name: "named",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 25, column: 13 },
+                end: { line: 25, column: 25 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 25, column: 13 },
+                  end: { line: 25, column: 19 },
+                },
                 key: "$greet",
               },
               arguments: [
                 {
-                  kind: "string",
-                  loc: [25, 21, 25, 25],
-                  text: "hi",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 25, column: 20 },
+                    end: { line: 25, column: 24 },
+                  },
+                  value: "hi",
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [26, 7, 26, 34],
-            name: {
-              kind: "string",
-              loc: [26, 7, 26, 15],
-              text: "explicit",
+            type: "Property",
+            loc: {
+              start: { line: 26, column: 6 },
+              end: { line: 26, column: 33 },
             },
-            initializer: {
-              kind: "()",
-              loc: [26, 17, 26, 34],
-              expression: {
-                kind: "splice",
-                loc: [26, 17, 26, 23],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 26, column: 6 },
+                end: { line: 26, column: 14 },
+              },
+              name: "explicit",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 26, column: 16 },
+                end: { line: 26, column: 33 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 26, column: 16 },
+                  end: { line: 26, column: 22 },
+                },
                 key: "$greet",
               },
               arguments: [
                 {
-                  kind: "undefined",
-                  loc: [26, 24, 26, 33],
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 26, column: 23 },
+                    end: { line: 26, column: 32 },
+                  },
+                  name: "undefined",
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [27, 7, 27, 24],
-            name: {
-              kind: "string",
-              loc: [27, 7, 27, 14],
-              text: "omitted",
+            type: "Property",
+            loc: {
+              start: { line: 27, column: 6 },
+              end: { line: 27, column: 23 },
             },
-            initializer: {
-              kind: "()",
-              loc: [27, 16, 27, 24],
-              expression: {
-                kind: "splice",
-                loc: [27, 16, 27, 22],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 27, column: 6 },
+                end: { line: 27, column: 13 },
+              },
+              name: "omitted",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 27, column: 15 },
+                end: { line: 27, column: 23 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 27, column: 15 },
+                  end: { line: 27, column: 21 },
+                },
                 key: "$greet",
               },
               arguments: [],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [28, 7, 28, 38],
-            name: {
-              kind: "string",
-              loc: [28, 7, 28, 15],
-              text: "supplied",
+            type: "Property",
+            loc: {
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 37 },
             },
-            initializer: {
-              kind: "()",
-              loc: [28, 17, 28, 38],
-              expression: {
-                kind: "splice",
-                loc: [28, 17, 28, 29],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 14 },
+              },
+              name: "supplied",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 28, column: 16 },
+                end: { line: 28, column: 37 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 28, column: 16 },
+                  end: { line: 28, column: 28 },
+                },
                 key: "$callIfGiven",
               },
               arguments: [
                 {
-                  kind: "splice",
-                  loc: [28, 30, 28, 37],
+                  type: "Splice",
+                  loc: {
+                    start: { line: 28, column: 29 },
+                    end: { line: 28, column: 36 },
+                  },
                   key: "$double",
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [29, 7, 29, 40],
-            name: {
-              kind: "string",
-              loc: [29, 7, 29, 15],
-              text: "fallback",
+            type: "Property",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 39 },
             },
-            initializer: {
-              kind: "()",
-              loc: [29, 17, 29, 40],
-              expression: {
-                kind: "splice",
-                loc: [29, 17, 29, 29],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 29, column: 6 },
+                end: { line: 29, column: 14 },
+              },
+              name: "fallback",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 29, column: 16 },
+                end: { line: 29, column: 39 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 29, column: 16 },
+                  end: { line: 29, column: 28 },
+                },
                 key: "$callIfGiven",
               },
               arguments: [
                 {
-                  kind: "undefined",
-                  loc: [29, 30, 29, 39],
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 29, column: 29 },
+                    end: { line: 29, column: 38 },
+                  },
+                  name: "undefined",
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [30, 7, 30, 38],
-            name: {
-              kind: "string",
-              loc: [30, 7, 30, 22],
-              text: "omittedCallback",
+            type: "Property",
+            loc: {
+              start: { line: 30, column: 6 },
+              end: { line: 30, column: 37 },
             },
-            initializer: {
-              kind: "()",
-              loc: [30, 24, 30, 38],
-              expression: {
-                kind: "splice",
-                loc: [30, 24, 30, 36],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 30, column: 6 },
+                end: { line: 30, column: 21 },
+              },
+              name: "omittedCallback",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 30, column: 23 },
+                end: { line: 30, column: 37 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 30, column: 23 },
+                  end: { line: 30, column: 35 },
+                },
                 key: "$callIfGiven",
               },
               arguments: [],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

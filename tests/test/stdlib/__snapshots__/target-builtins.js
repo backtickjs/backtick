@@ -14,7 +14,7 @@ describe("a global an app defines", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [21, 22, 21, 34],
+          { start: { line: 21, column: 21 }, end: { line: 21, column: 33 } },
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
@@ -23,14 +23,21 @@ describe("a global an app defines", () => {
             captures: [],
           },
           () => ({
-            kind: "()",
-            loc: [21, 25, 21, 33],
-            expression: {
-              kind: "splice",
-              loc: [21, 25, 21, 31],
+            type: "CallExpression",
+            loc: {
+              start: { line: 21, column: 24 },
+              end: { line: 21, column: 32 },
+            },
+            callee: {
+              type: "Splice",
+              loc: {
+                start: { line: 21, column: 24 },
+                end: { line: 21, column: 30 },
+              },
               key: "$greet",
             },
             arguments: [],
+            optional: false,
           }),
         ),
         { globals: { greet: () => "hello" } },
@@ -44,7 +51,7 @@ describe("a global an app defines", () => {
     await assert.rejects(
       evaluate(
         cs.create(
-          [29, 35, 29, 47],
+          { start: { line: 29, column: 34 }, end: { line: 29, column: 46 } },
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
@@ -53,14 +60,21 @@ describe("a global an app defines", () => {
             captures: [],
           },
           () => ({
-            kind: "()",
-            loc: [29, 38, 29, 46],
-            expression: {
-              kind: "splice",
-              loc: [29, 38, 29, 44],
+            type: "CallExpression",
+            loc: {
+              start: { line: 29, column: 37 },
+              end: { line: 29, column: 45 },
+            },
+            callee: {
+              type: "Splice",
+              loc: {
+                start: { line: 29, column: 37 },
+                end: { line: 29, column: 43 },
+              },
               key: "$greet",
             },
             arguments: [],
+            optional: false,
           }),
         ),
       ),
@@ -74,7 +88,7 @@ describe("a global an app defines", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          [37, 22, 37, 50],
+          { start: { line: 37, column: 21 }, end: { line: 37, column: 49 } },
           {
             version: "0.0.0",
             filePath: "stdlib/target-builtins.test.tsx",
@@ -83,25 +97,47 @@ describe("a global an app defines", () => {
             captures: [],
           },
           () => ({
-            kind: "()",
-            loc: [37, 25, 37, 49],
-            expression: {
-              kind: ".",
-              loc: [37, 25, 37, 37],
-              expression: {
-                kind: "splice",
-                loc: [37, 25, 37, 33],
+            type: "CallExpression",
+            loc: {
+              start: { line: 37, column: 24 },
+              end: { line: 37, column: 48 },
+            },
+            callee: {
+              type: "MemberExpression",
+              loc: {
+                start: { line: 37, column: 24 },
+                end: { line: 37, column: 36 },
+              },
+              object: {
+                type: "Splice",
+                loc: {
+                  start: { line: 37, column: 24 },
+                  end: { line: 37, column: 32 },
+                },
                 key: "$storage",
               },
-              name: "get",
+              property: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 37, column: 33 },
+                  end: { line: 37, column: 36 },
+                },
+                name: "get",
+              },
+              computed: false,
+              optional: false,
             },
             arguments: [
               {
-                kind: "string",
-                loc: [37, 38, 37, 48],
-                text: "greeting",
+                type: "Literal",
+                loc: {
+                  start: { line: 37, column: 37 },
+                  end: { line: 37, column: 47 },
+                },
+                value: "greeting",
               },
             ],
+            optional: false,
           }),
         ),
         {

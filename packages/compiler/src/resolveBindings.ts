@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
-import { isComponentTag } from "./isComponentTag.js";
-import { isFragmentTag } from "./isFragmentTag.js";
+import { isComponentTag } from "@backtickjs/client-script";
+import { isFragmentTag } from "@backtickjs/client-script";
 
 /**
  * A single lexical-scope pass over every client script in a file. It produces

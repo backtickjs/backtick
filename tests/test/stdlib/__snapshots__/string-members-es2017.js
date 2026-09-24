@@ -9,7 +9,7 @@ it("stringMembersEs2017", async (t) => {
     t,
     "stringMembersEs2017",
     cs.create(
-      [12, 5, 21, 7],
+      { start: { line: 12, column: 4 }, end: { line: 21, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/string-members-es2017.test.tsx",
@@ -18,360 +18,675 @@ it("stringMembersEs2017", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 21, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 21, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 24 },
+            },
             kind: "const",
-            loc: [13, 7, 13, 25],
-            name: {
-              kind: "id",
-              loc: [13, 13, 13, 17],
-              text: "word",
-              bindingKey: "word$376ffut9l2xr3$0",
-            },
-            initializer: {
-              kind: "string",
-              loc: [13, 20, 13, 24],
-              text: "ab",
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 12 },
+                  end: { line: 13, column: 23 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 12 },
+                    end: { line: 13, column: 16 },
+                  },
+                  name: "word",
+                  bindingKey: "word$376ffut9l2xr3$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 13, column: 19 },
+                    end: { line: 13, column: 23 },
+                  },
+                  value: "ab",
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [14, 7, 20, 9],
-            expression: {
-              kind: "obj",
-              loc: [14, 14, 20, 8],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 20, column: 8 },
+            },
+            argument: {
+              type: "ObjectExpression",
+              loc: {
+                start: { line: 14, column: 13 },
+                end: { line: 20, column: 7 },
+              },
               properties: [
                 {
-                  kind: ":",
-                  loc: [15, 9, 15, 62],
-                  name: {
-                    kind: "string",
-                    loc: [15, 9, 15, 15],
-                    text: "padded",
+                  type: "Property",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 61 },
                   },
-                  initializer: {
-                    kind: "binop",
-                    loc: [15, 17, 15, 62],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 14 },
+                    },
+                    name: "padded",
+                  },
+                  value: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 15, column: 16 },
+                      end: { line: 15, column: 61 },
+                    },
+                    operator: "+",
                     left: {
-                      kind: "binop",
-                      loc: [15, 17, 15, 39],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 15, column: 16 },
+                        end: { line: 15, column: 38 },
+                      },
+                      operator: "+",
                       left: {
-                        kind: "()",
-                        loc: [15, 17, 15, 33],
-                        expression: {
-                          kind: ".",
-                          loc: [15, 17, 15, 30],
-                          expression: {
-                            kind: "id",
-                            loc: [15, 17, 15, 21],
-                            text: "word",
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 15, column: 16 },
+                          end: { line: 15, column: 32 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 15, column: 16 },
+                            end: { line: 15, column: 29 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 16 },
+                              end: { line: 15, column: 20 },
+                            },
+                            name: "word",
                             bindingKey: "word$376ffut9l2xr3$0",
                           },
-                          name: "padStart",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 21 },
+                              end: { line: 15, column: 29 },
+                            },
+                            name: "padStart",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "number",
-                            loc: [15, 31, 15, 32],
+                            type: "Literal",
+                            loc: {
+                              start: { line: 15, column: 30 },
+                              end: { line: 15, column: 31 },
+                            },
                             value: 4,
                           },
                         ],
+                        optional: false,
                       },
-                      operatorToken: "+",
                       right: {
-                        kind: "string",
-                        loc: [15, 36, 15, 39],
-                        text: "|",
+                        type: "Literal",
+                        loc: {
+                          start: { line: 15, column: 35 },
+                          end: { line: 15, column: 38 },
+                        },
+                        value: "|",
                       },
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "()",
-                      loc: [15, 42, 15, 62],
-                      expression: {
-                        kind: ".",
-                        loc: [15, 42, 15, 53],
-                        expression: {
-                          kind: "id",
-                          loc: [15, 42, 15, 46],
-                          text: "word",
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 15, column: 41 },
+                        end: { line: 15, column: 61 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 15, column: 41 },
+                          end: { line: 15, column: 52 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 41 },
+                            end: { line: 15, column: 45 },
+                          },
+                          name: "word",
                           bindingKey: "word$376ffut9l2xr3$0",
                         },
-                        name: "padEnd",
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 46 },
+                            end: { line: 15, column: 52 },
+                          },
+                          name: "padEnd",
+                        },
+                        computed: false,
+                        optional: false,
                       },
                       arguments: [
                         {
-                          kind: "number",
-                          loc: [15, 54, 15, 55],
+                          type: "Literal",
+                          loc: {
+                            start: { line: 15, column: 53 },
+                            end: { line: 15, column: 54 },
+                          },
                           value: 5,
                         },
                         {
-                          kind: "string",
-                          loc: [15, 57, 15, 61],
-                          text: "-=",
+                          type: "Literal",
+                          loc: {
+                            start: { line: 15, column: 56 },
+                            end: { line: 15, column: 60 },
+                          },
+                          value: "-=",
                         },
                       ],
+                      optional: false,
                     },
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [16, 9, 16, 69],
-                  name: {
-                    kind: "string",
-                    loc: [16, 9, 16, 16],
-                    text: "trimmed",
+                  type: "Property",
+                  loc: {
+                    start: { line: 16, column: 8 },
+                    end: { line: 16, column: 68 },
                   },
-                  initializer: {
-                    kind: "binop",
-                    loc: [16, 18, 16, 69],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 16, column: 8 },
+                      end: { line: 16, column: 15 },
+                    },
+                    name: "trimmed",
+                  },
+                  value: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 16, column: 17 },
+                      end: { line: 16, column: 68 },
+                    },
+                    operator: "+",
                     left: {
-                      kind: "binop",
-                      loc: [16, 18, 16, 63],
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 16, column: 17 },
+                        end: { line: 16, column: 62 },
+                      },
+                      operator: "+",
                       left: {
-                        kind: "binop",
-                        loc: [16, 18, 16, 43],
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 16, column: 17 },
+                          end: { line: 16, column: 42 },
+                        },
+                        operator: "+",
                         left: {
-                          kind: "()",
-                          loc: [16, 18, 16, 37],
-                          expression: {
-                            kind: ".",
-                            loc: [16, 18, 16, 35],
-                            expression: {
-                              kind: "string",
-                              loc: [16, 18, 16, 25],
-                              text: "  x  ",
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 16, column: 17 },
+                            end: { line: 16, column: 36 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 16, column: 17 },
+                              end: { line: 16, column: 34 },
                             },
-                            name: "trimStart",
+                            object: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 16, column: 17 },
+                                end: { line: 16, column: 24 },
+                              },
+                              value: "  x  ",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 16, column: 25 },
+                                end: { line: 16, column: 34 },
+                              },
+                              name: "trimStart",
+                            },
+                            computed: false,
+                            optional: false,
                           },
                           arguments: [],
+                          optional: false,
                         },
-                        operatorToken: "+",
                         right: {
-                          kind: "string",
-                          loc: [16, 40, 16, 43],
-                          text: "|",
+                          type: "Literal",
+                          loc: {
+                            start: { line: 16, column: 39 },
+                            end: { line: 16, column: 42 },
+                          },
+                          value: "|",
                         },
                       },
-                      operatorToken: "+",
                       right: {
-                        kind: "()",
-                        loc: [16, 46, 16, 63],
-                        expression: {
-                          kind: ".",
-                          loc: [16, 46, 16, 61],
-                          expression: {
-                            kind: "string",
-                            loc: [16, 46, 16, 53],
-                            text: "  x  ",
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 16, column: 45 },
+                          end: { line: 16, column: 62 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 16, column: 45 },
+                            end: { line: 16, column: 60 },
                           },
-                          name: "trimEnd",
+                          object: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 16, column: 45 },
+                              end: { line: 16, column: 52 },
+                            },
+                            value: "  x  ",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 16, column: 53 },
+                              end: { line: 16, column: 60 },
+                            },
+                            name: "trimEnd",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [],
+                        optional: false,
                       },
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "string",
-                      loc: [16, 66, 16, 69],
-                      text: "|",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 16, column: 65 },
+                        end: { line: 16, column: 68 },
+                      },
+                      value: "|",
                     },
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [17, 9, 17, 50],
-                  name: {
-                    kind: "string",
-                    loc: [17, 9, 17, 11],
-                    text: "at",
+                  type: "Property",
+                  loc: {
+                    start: { line: 17, column: 8 },
+                    end: { line: 17, column: 49 },
                   },
-                  initializer: {
-                    kind: "arr",
-                    loc: [17, 13, 17, 50],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 8 },
+                      end: { line: 17, column: 10 },
+                    },
+                    name: "at",
+                  },
+                  value: {
+                    type: "ArrayExpression",
+                    loc: {
+                      start: { line: 17, column: 12 },
+                      end: { line: 17, column: 49 },
+                    },
                     elements: [
                       {
-                        kind: "()",
-                        loc: [17, 14, 17, 24],
-                        expression: {
-                          kind: ".",
-                          loc: [17, 14, 17, 21],
-                          expression: {
-                            kind: "id",
-                            loc: [17, 14, 17, 18],
-                            text: "word",
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 17, column: 13 },
+                          end: { line: 17, column: 23 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 17, column: 13 },
+                            end: { line: 17, column: 20 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 13 },
+                              end: { line: 17, column: 17 },
+                            },
+                            name: "word",
                             bindingKey: "word$376ffut9l2xr3$0",
                           },
-                          name: "at",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 18 },
+                              end: { line: 17, column: 20 },
+                            },
+                            name: "at",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "number",
-                            loc: [17, 22, 17, 23],
+                            type: "Literal",
+                            loc: {
+                              start: { line: 17, column: 21 },
+                              end: { line: 17, column: 22 },
+                            },
                             value: 0,
                           },
                         ],
+                        optional: false,
                       },
                       {
-                        kind: "()",
-                        loc: [17, 26, 17, 37],
-                        expression: {
-                          kind: ".",
-                          loc: [17, 26, 17, 33],
-                          expression: {
-                            kind: "id",
-                            loc: [17, 26, 17, 30],
-                            text: "word",
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 17, column: 25 },
+                          end: { line: 17, column: 36 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 17, column: 25 },
+                            end: { line: 17, column: 32 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 25 },
+                              end: { line: 17, column: 29 },
+                            },
+                            name: "word",
                             bindingKey: "word$376ffut9l2xr3$0",
                           },
-                          name: "at",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 30 },
+                              end: { line: 17, column: 32 },
+                            },
+                            name: "at",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "prefixop",
-                            loc: [17, 34, 17, 36],
+                            type: "UnaryExpression",
+                            loc: {
+                              start: { line: 17, column: 33 },
+                              end: { line: 17, column: 35 },
+                            },
                             operator: "-",
-                            operand: {
-                              kind: "number",
-                              loc: [17, 35, 17, 36],
+                            prefix: true,
+                            argument: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 17, column: 34 },
+                                end: { line: 17, column: 35 },
+                              },
                               value: 1,
                             },
                           },
                         ],
+                        optional: false,
                       },
                       {
-                        kind: "()",
-                        loc: [17, 39, 17, 49],
-                        expression: {
-                          kind: ".",
-                          loc: [17, 39, 17, 46],
-                          expression: {
-                            kind: "id",
-                            loc: [17, 39, 17, 43],
-                            text: "word",
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 17, column: 38 },
+                          end: { line: 17, column: 48 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 17, column: 38 },
+                            end: { line: 17, column: 45 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 38 },
+                              end: { line: 17, column: 42 },
+                            },
+                            name: "word",
                             bindingKey: "word$376ffut9l2xr3$0",
                           },
-                          name: "at",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 17, column: 43 },
+                              end: { line: 17, column: 45 },
+                            },
+                            name: "at",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "number",
-                            loc: [17, 47, 17, 48],
+                            type: "Literal",
+                            loc: {
+                              start: { line: 17, column: 46 },
+                              end: { line: 17, column: 47 },
+                            },
                             value: 5,
                           },
                         ],
+                        optional: false,
                       },
                     ],
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [18, 9, 18, 47],
-                  name: {
-                    kind: "string",
-                    loc: [18, 9, 18, 17],
-                    text: "replaced",
+                  type: "Property",
+                  loc: {
+                    start: { line: 18, column: 8 },
+                    end: { line: 18, column: 46 },
                   },
-                  initializer: {
-                    kind: "()",
-                    loc: [18, 19, 18, 47],
-                    expression: {
-                      kind: ".",
-                      loc: [18, 19, 18, 37],
-                      expression: {
-                        kind: "string",
-                        loc: [18, 19, 18, 26],
-                        text: "a.b.c",
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 18, column: 8 },
+                      end: { line: 18, column: 16 },
+                    },
+                    name: "replaced",
+                  },
+                  value: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 18, column: 18 },
+                      end: { line: 18, column: 46 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 18, column: 18 },
+                        end: { line: 18, column: 36 },
                       },
-                      name: "replaceAll",
+                      object: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 18, column: 18 },
+                          end: { line: 18, column: 25 },
+                        },
+                        value: "a.b.c",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 18, column: 26 },
+                          end: { line: 18, column: 36 },
+                        },
+                        name: "replaceAll",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "string",
-                        loc: [18, 38, 18, 41],
-                        text: ".",
+                        type: "Literal",
+                        loc: {
+                          start: { line: 18, column: 37 },
+                          end: { line: 18, column: 40 },
+                        },
+                        value: ".",
                       },
                       {
-                        kind: "string",
-                        loc: [18, 43, 18, 46],
-                        text: "/",
+                        type: "Literal",
+                        loc: {
+                          start: { line: 18, column: 42 },
+                          end: { line: 18, column: 45 },
+                        },
+                        value: "/",
                       },
                     ],
+                    optional: false,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [19, 9, 19, 74],
-                  name: {
-                    kind: "string",
-                    loc: [19, 9, 19, 19],
-                    text: "replacedBy",
+                  type: "Property",
+                  loc: {
+                    start: { line: 19, column: 8 },
+                    end: { line: 19, column: 73 },
                   },
-                  initializer: {
-                    kind: "()",
-                    loc: [19, 21, 19, 74],
-                    expression: {
-                      kind: ".",
-                      loc: [19, 21, 19, 37],
-                      expression: {
-                        kind: "string",
-                        loc: [19, 21, 19, 26],
-                        text: "a.b",
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 19, column: 8 },
+                      end: { line: 19, column: 18 },
+                    },
+                    name: "replacedBy",
+                  },
+                  value: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 19, column: 20 },
+                      end: { line: 19, column: 73 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 19, column: 20 },
+                        end: { line: 19, column: 36 },
                       },
-                      name: "replaceAll",
+                      object: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 19, column: 20 },
+                          end: { line: 19, column: 25 },
+                        },
+                        value: "a.b",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 19, column: 26 },
+                          end: { line: 19, column: 36 },
+                        },
+                        name: "replaceAll",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "string",
-                        loc: [19, 38, 19, 41],
-                        text: ".",
+                        type: "Literal",
+                        loc: {
+                          start: { line: 19, column: 37 },
+                          end: { line: 19, column: 40 },
+                        },
+                        value: ".",
                       },
                       {
-                        kind: "=>",
-                        loc: [19, 43, 19, 73],
-                        parameters: [
+                        type: "ArrowFunctionExpression",
+                        loc: {
+                          start: { line: 19, column: 42 },
+                          end: { line: 19, column: 72 },
+                        },
+                        params: [
                           {
-                            kind: "param",
-                            loc: [19, 44, 19, 49],
-                            name: {
-                              kind: "id",
-                              loc: [19, 44, 19, 49],
-                              text: "found",
-                              bindingKey: "found$376ffut9l2xr3$1",
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 19, column: 43 },
+                              end: { line: 19, column: 48 },
                             },
+                            name: "found",
+                            bindingKey: "found$376ffut9l2xr3$1",
                           },
                           {
-                            kind: "param",
-                            loc: [19, 51, 19, 57],
-                            name: {
-                              kind: "id",
-                              loc: [19, 51, 19, 57],
-                              text: "offset",
-                              bindingKey: "offset$376ffut9l2xr3$2",
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 19, column: 50 },
+                              end: { line: 19, column: 56 },
                             },
+                            name: "offset",
+                            bindingKey: "offset$376ffut9l2xr3$2",
                           },
                         ],
                         body: {
-                          kind: "binop",
-                          loc: [19, 62, 19, 73],
-                          left: {
-                            kind: "string",
-                            loc: [19, 62, 19, 64],
-                            text: "",
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 19, column: 61 },
+                            end: { line: 19, column: 72 },
                           },
-                          operatorToken: "+",
+                          operator: "+",
+                          left: {
+                            type: "Literal",
+                            loc: {
+                              start: { line: 19, column: 61 },
+                              end: { line: 19, column: 63 },
+                            },
+                            value: "",
+                          },
                           right: {
-                            kind: "id",
-                            loc: [19, 67, 19, 73],
-                            text: "offset",
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 19, column: 66 },
+                              end: { line: 19, column: 72 },
+                            },
+                            name: "offset",
                             bindingKey: "offset$376ffut9l2xr3$2",
                           },
                         },
+                        expression: true,
                       },
                     ],
+                    optional: false,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
               ],
             },

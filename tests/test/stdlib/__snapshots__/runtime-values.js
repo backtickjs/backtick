@@ -6,7 +6,7 @@ it("runtimeValues", async (t) => {
     t,
     "runtimeValues",
     cs.create(
-      [9, 5, 12, 8],
+      { start: { line: 9, column: 4 }, end: { line: 12, column: 7 } },
       {
         version: "0.0.0",
         filePath: "stdlib/runtime-values.test.tsx",
@@ -18,36 +18,62 @@ it("runtimeValues", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [9, 9, 12, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 9, column: 8 }, end: { line: 12, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [10, 7, 10, 38],
-            name: {
-              kind: "string",
-              loc: [10, 7, 10, 11],
-              text: "list",
+            type: "Property",
+            loc: {
+              start: { line: 10, column: 6 },
+              end: { line: 10, column: 37 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [10, 13, 10, 38],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 10, column: 6 },
+                end: { line: 10, column: 10 },
+              },
+              name: "list",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 10, column: 12 },
+                end: { line: 10, column: 37 },
+              },
               key: "$0splice0",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [11, 7, 11, 23],
-            name: {
-              kind: "string",
-              loc: [11, 7, 11, 10],
-              text: "obj",
+            type: "Property",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 11, column: 22 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [11, 12, 11, 23],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 11, column: 6 },
+                end: { line: 11, column: 9 },
+              },
+              name: "obj",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 11, column: 11 },
+                end: { line: 11, column: 22 },
+              },
               key: "$0splice1",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

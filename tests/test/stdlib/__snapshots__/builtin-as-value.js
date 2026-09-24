@@ -13,7 +13,7 @@ it("builtinAsValue", async (t) => {
     t,
     "builtinAsValue",
     cs.create(
-      [16, 5, 20, 7],
+      { start: { line: 16, column: 4 }, end: { line: 20, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/builtin-as-value.test.tsx",
@@ -22,133 +22,233 @@ it("builtinAsValue", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [16, 8, 20, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 16, column: 7 }, end: { line: 20, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 31 },
+            },
             kind: "const",
-            loc: [17, 7, 17, 32],
-            name: {
-              kind: "id",
-              loc: [17, 13, 17, 18],
-              text: "floor",
-              bindingKey: "floor$1n7k5w76rpsyr$0",
-            },
-            initializer: {
-              kind: ".",
-              loc: [17, 21, 17, 31],
-              expression: {
-                kind: "bltn",
-                loc: [17, 21, 17, 25],
-                name: "Math",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 17, column: 12 },
+                  end: { line: 17, column: 30 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 17 },
+                  },
+                  name: "floor",
+                  bindingKey: "floor$1n7k5w76rpsyr$0",
+                },
+                init: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 17, column: 20 },
+                    end: { line: 17, column: 30 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 20 },
+                      end: { line: 17, column: 24 },
+                    },
+                    name: "Math",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 25 },
+                      end: { line: 17, column: 30 },
+                    },
+                    name: "floor",
+                  },
+                  computed: false,
+                  optional: false,
+                },
               },
-              name: "floor",
-            },
+            ],
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 66 },
+            },
             kind: "const",
-            loc: [18, 7, 18, 67],
-            name: {
-              kind: "id",
-              loc: [18, 13, 18, 18],
-              text: "apply",
-              bindingKey: "apply$1n7k5w76rpsyr$1",
-            },
-            initializer: {
-              kind: "=>",
-              loc: [18, 21, 18, 66],
-              parameters: [
-                {
-                  kind: "param",
-                  loc: [18, 22, 18, 46],
-                  name: {
-                    kind: "id",
-                    loc: [18, 22, 18, 23],
-                    text: "f",
-                    bindingKey: "f$1n7k5w76rpsyr$2",
-                  },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 18, column: 12 },
+                  end: { line: 18, column: 65 },
                 },
-                {
-                  kind: "param",
-                  loc: [18, 48, 18, 57],
-                  name: {
-                    kind: "id",
-                    loc: [18, 48, 18, 49],
-                    text: "n",
-                    bindingKey: "n$1n7k5w76rpsyr$3",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 17 },
                   },
+                  name: "apply",
+                  bindingKey: "apply$1n7k5w76rpsyr$1",
                 },
-              ],
-              body: {
-                kind: "()",
-                loc: [18, 62, 18, 66],
-                expression: {
-                  kind: "id",
-                  loc: [18, 62, 18, 63],
-                  text: "f",
-                  bindingKey: "f$1n7k5w76rpsyr$2",
-                },
-                arguments: [
-                  {
-                    kind: "id",
-                    loc: [18, 64, 18, 65],
-                    text: "n",
-                    bindingKey: "n$1n7k5w76rpsyr$3",
+                init: {
+                  type: "ArrowFunctionExpression",
+                  loc: {
+                    start: { line: 18, column: 20 },
+                    end: { line: 18, column: 65 },
                   },
-                ],
+                  params: [
+                    {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 21 },
+                        end: { line: 18, column: 22 },
+                      },
+                      name: "f",
+                      bindingKey: "f$1n7k5w76rpsyr$2",
+                    },
+                    {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 47 },
+                        end: { line: 18, column: 48 },
+                      },
+                      name: "n",
+                      bindingKey: "n$1n7k5w76rpsyr$3",
+                    },
+                  ],
+                  body: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 18, column: 61 },
+                      end: { line: 18, column: 65 },
+                    },
+                    callee: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 61 },
+                        end: { line: 18, column: 62 },
+                      },
+                      name: "f",
+                      bindingKey: "f$1n7k5w76rpsyr$2",
+                    },
+                    arguments: [
+                      {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 18, column: 63 },
+                          end: { line: 18, column: 64 },
+                        },
+                        name: "n",
+                        bindingKey: "n$1n7k5w76rpsyr$3",
+                      },
+                    ],
+                    optional: false,
+                  },
+                  expression: true,
+                },
               },
-            },
+            ],
           },
           {
-            kind: "return",
-            loc: [19, 7, 19, 49],
-            expression: {
-              kind: "binop",
-              loc: [19, 14, 19, 48],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 48 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 19, column: 13 },
+                end: { line: 19, column: 47 },
+              },
+              operator: "+",
               left: {
-                kind: "()",
-                loc: [19, 14, 19, 24],
-                expression: {
-                  kind: "id",
-                  loc: [19, 14, 19, 19],
-                  text: "floor",
+                type: "CallExpression",
+                loc: {
+                  start: { line: 19, column: 13 },
+                  end: { line: 19, column: 23 },
+                },
+                callee: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 13 },
+                    end: { line: 19, column: 18 },
+                  },
+                  name: "floor",
                   bindingKey: "floor$1n7k5w76rpsyr$0",
                 },
                 arguments: [
                   {
-                    kind: "number",
-                    loc: [19, 20, 19, 23],
+                    type: "Literal",
+                    loc: {
+                      start: { line: 19, column: 19 },
+                      end: { line: 19, column: 22 },
+                    },
                     value: 3.5,
                   },
                 ],
+                optional: false,
               },
-              operatorToken: "+",
               right: {
-                kind: "()",
-                loc: [19, 27, 19, 48],
-                expression: {
-                  kind: "id",
-                  loc: [19, 27, 19, 32],
-                  text: "apply",
+                type: "CallExpression",
+                loc: {
+                  start: { line: 19, column: 26 },
+                  end: { line: 19, column: 47 },
+                },
+                callee: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 26 },
+                    end: { line: 19, column: 31 },
+                  },
+                  name: "apply",
                   bindingKey: "apply$1n7k5w76rpsyr$1",
                 },
                 arguments: [
                   {
-                    kind: ".",
-                    loc: [19, 33, 19, 42],
-                    expression: {
-                      kind: "bltn",
-                      loc: [19, 33, 19, 37],
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 19, column: 32 },
+                      end: { line: 19, column: 41 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 32 },
+                        end: { line: 19, column: 36 },
+                      },
                       name: "Math",
                     },
-                    name: "ceil",
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 19, column: 37 },
+                        end: { line: 19, column: 41 },
+                      },
+                      name: "ceil",
+                    },
+                    computed: false,
+                    optional: false,
                   },
                   {
-                    kind: "number",
-                    loc: [19, 44, 19, 47],
+                    type: "Literal",
+                    loc: {
+                      start: { line: 19, column: 43 },
+                      end: { line: 19, column: 46 },
+                    },
                     value: 3.5,
                   },
                 ],
+                optional: false,
               },
             },
           },

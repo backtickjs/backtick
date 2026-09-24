@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // Checked as TypeScript checks one: a variable that isn't `const`, and operands
 // the operator takes.
 export const constant = cs.create(
-  [5, 25, 10, 3],
+  { start: { line: 5, column: 24 }, end: { line: 10, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/compound-assignment-operand.test.tsx",
@@ -11,47 +11,67 @@ export const constant = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [5, 28, 10, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 5, column: 27 }, end: { line: 10, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 6, column: 2 }, end: { line: 6, column: 14 } },
         kind: "const",
-        loc: [6, 3, 6, 15],
-        name: {
-          kind: "id",
-          loc: [6, 9, 6, 10],
-          text: "n",
-          bindingKey: "n$3586xtu4la89h$0",
-        },
-        initializer: {
-          kind: "number",
-          loc: [6, 13, 6, 14],
-          value: 0,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 6, column: 8 },
+              end: { line: 6, column: 13 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 6, column: 8 },
+                end: { line: 6, column: 9 },
+              },
+              name: "n",
+              bindingKey: "n$3586xtu4la89h$0",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 6, column: 12 },
+                end: { line: 6, column: 13 },
+              },
+              value: 0,
+            },
+          },
+        ],
       },
       {
-        kind: "binop",
-        loc: [8, 3, 8, 9],
-        left: {
-          kind: "id",
-          loc: [8, 3, 8, 4],
-          text: "n",
-          bindingKey: "n$3586xtu4la89h$0",
-        },
-        operatorToken: "+=",
-        right: {
-          kind: "number",
-          loc: [8, 8, 8, 9],
-          value: 1,
-        },
-      },
-      {
-        kind: "return",
-        loc: [9, 3, 9, 12],
+        type: "ExpressionStatement",
+        loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 9 } },
         expression: {
-          kind: "id",
-          loc: [9, 10, 9, 11],
-          text: "n",
+          type: "AssignmentExpression",
+          loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 8 } },
+          operator: "+=",
+          left: {
+            type: "Identifier",
+            loc: { start: { line: 8, column: 2 }, end: { line: 8, column: 3 } },
+            name: "n",
+            bindingKey: "n$3586xtu4la89h$0",
+          },
+          right: {
+            type: "Literal",
+            loc: { start: { line: 8, column: 7 }, end: { line: 8, column: 8 } },
+            value: 1,
+          },
+        },
+      },
+      {
+        type: "ReturnStatement",
+        loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 11 } },
+        argument: {
+          type: "Identifier",
+          loc: { start: { line: 9, column: 9 }, end: { line: 9, column: 10 } },
+          name: "n",
           bindingKey: "n$3586xtu4la89h$0",
         },
       },
@@ -59,7 +79,7 @@ export const constant = cs.create(
   }),
 );
 export const mixed = cs.create(
-  [12, 22, 17, 3],
+  { start: { line: 12, column: 21 }, end: { line: 17, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/compound-assignment-operand.test.tsx",
@@ -68,47 +88,79 @@ export const mixed = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [12, 25, 17, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 12, column: 24 }, end: { line: 17, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 13, column: 2 }, end: { line: 13, column: 12 } },
         kind: "let",
-        loc: [13, 3, 13, 13],
-        name: {
-          kind: "id",
-          loc: [13, 7, 13, 8],
-          text: "n",
-          bindingKey: "n$3586xtu4la89h$1",
-        },
-        initializer: {
-          kind: "number",
-          loc: [13, 11, 13, 12],
-          value: 1,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 11 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 13, column: 6 },
+                end: { line: 13, column: 7 },
+              },
+              name: "n",
+              bindingKey: "n$3586xtu4la89h$1",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 13, column: 10 },
+                end: { line: 13, column: 11 },
+              },
+              value: 1,
+            },
+          },
+        ],
       },
       {
-        kind: "binop",
-        loc: [15, 3, 15, 11],
-        left: {
-          kind: "id",
-          loc: [15, 3, 15, 4],
-          text: "n",
-          bindingKey: "n$3586xtu4la89h$1",
-        },
-        operatorToken: "-=",
-        right: {
-          kind: "string",
-          loc: [15, 8, 15, 11],
-          text: "a",
-        },
-      },
-      {
-        kind: "return",
-        loc: [16, 3, 16, 12],
+        type: "ExpressionStatement",
+        loc: { start: { line: 15, column: 2 }, end: { line: 15, column: 11 } },
         expression: {
-          kind: "id",
-          loc: [16, 10, 16, 11],
-          text: "n",
+          type: "AssignmentExpression",
+          loc: {
+            start: { line: 15, column: 2 },
+            end: { line: 15, column: 10 },
+          },
+          operator: "-=",
+          left: {
+            type: "Identifier",
+            loc: {
+              start: { line: 15, column: 2 },
+              end: { line: 15, column: 3 },
+            },
+            name: "n",
+            bindingKey: "n$3586xtu4la89h$1",
+          },
+          right: {
+            type: "Literal",
+            loc: {
+              start: { line: 15, column: 7 },
+              end: { line: 15, column: 10 },
+            },
+            value: "a",
+          },
+        },
+      },
+      {
+        type: "ReturnStatement",
+        loc: { start: { line: 16, column: 2 }, end: { line: 16, column: 11 } },
+        argument: {
+          type: "Identifier",
+          loc: {
+            start: { line: 16, column: 9 },
+            end: { line: 16, column: 10 },
+          },
+          name: "n",
           bindingKey: "n$3586xtu4la89h$1",
         },
       },

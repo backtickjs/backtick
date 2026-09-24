@@ -9,7 +9,7 @@ import { drawn } from "./dom.ts";
 // is kept, not called with the previous value.
 async function Greeting() {
   return cs.create(
-    [11, 10, 18, 5],
+    { start: { line: 11, column: 9 }, end: { line: 18, column: 4 } },
     {
       version: "0.0.0",
       filePath: "state/set-stores-function.test.tsx",
@@ -18,161 +18,330 @@ async function Greeting() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [11, 13, 18, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 11, column: 12 }, end: { line: 18, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 12, column: 4 },
+            end: { line: 12, column: 75 },
+          },
           kind: "const",
-          loc: [12, 5, 12, 76],
-          name: {
-            kind: "id",
-            loc: [12, 11, 12, 16],
-            text: "greet",
-            bindingKey: "greet$1zi7if3ybm5dh$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [12, 19, 12, 75],
-            expression: {
-              kind: "splice",
-              loc: [12, 19, 12, 25],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "=>",
-                loc: [12, 52, 12, 74],
-                parameters: [
-                  {
-                    kind: "param",
-                    loc: [12, 53, 12, 57],
-                    name: {
-                      kind: "id",
-                      loc: [12, 53, 12, 57],
-                      text: "name",
-                      bindingKey: "name$1zi7if3ybm5dh$1",
-                    },
-                  },
-                ],
-                body: {
-                  kind: "binop",
-                  loc: [12, 62, 12, 74],
-                  left: {
-                    kind: "string",
-                    loc: [12, 62, 12, 67],
-                    text: "hi ",
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "id",
-                    loc: [12, 70, 12, 74],
-                    text: "name",
-                    bindingKey: "name$1zi7if3ybm5dh$1",
-                  },
-                },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 12, column: 10 },
+                end: { line: 12, column: 74 },
               },
-            ],
-          },
-        },
-        {
-          kind: "return",
-          loc: [13, 5, 17, 7],
-          expression: {
-            kind: "jsx",
-            loc: [14, 7, 16, 14],
-            type: {
-              kind: "string",
-              loc: [14, 8, 14, 12],
-              text: "span",
-            },
-            attributes: [
-              {
-                name: "onclick",
-                initializer: {
-                  kind: "=>",
-                  loc: [14, 22, 14, 62],
-                  parameters: [],
-                  body: {
-                    kind: "()",
-                    loc: [14, 28, 14, 62],
-                    expression: {
-                      kind: ".",
-                      loc: [14, 28, 14, 37],
-                      expression: {
-                        kind: "id",
-                        loc: [14, 28, 14, 33],
-                        text: "greet",
-                        bindingKey: "greet$1zi7if3ybm5dh$0",
-                      },
-                      name: "set",
-                    },
-                    arguments: [
-                      {
-                        kind: "=>",
-                        loc: [14, 38, 14, 61],
-                        parameters: [
-                          {
-                            kind: "param",
-                            loc: [14, 39, 14, 43],
-                            name: {
-                              kind: "id",
-                              loc: [14, 39, 14, 43],
-                              text: "name",
-                              bindingKey: "name$1zi7if3ybm5dh$2",
-                            },
-                          },
-                        ],
-                        body: {
-                          kind: "binop",
-                          loc: [14, 48, 14, 61],
-                          left: {
-                            kind: "string",
-                            loc: [14, 48, 14, 54],
-                            text: "bye ",
-                          },
-                          operatorToken: "+",
-                          right: {
-                            kind: "id",
-                            loc: [14, 57, 14, 61],
-                            text: "name",
-                            bindingKey: "name$1zi7if3ybm5dh$2",
-                          },
-                        },
-                      },
-                    ],
-                  },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 15 },
                 },
+                name: "greet",
+                bindingKey: "greet$1zi7if3ybm5dh$0",
               },
-            ],
-            children: [
-              {
-                kind: "()",
-                loc: [15, 10, 15, 28],
-                expression: {
-                  kind: "()",
-                  loc: [15, 10, 15, 21],
-                  expression: {
-                    kind: ".",
-                    loc: [15, 10, 15, 19],
-                    expression: {
-                      kind: "id",
-                      loc: [15, 10, 15, 15],
-                      text: "greet",
-                      bindingKey: "greet$1zi7if3ybm5dh$0",
-                    },
-                    name: "get",
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 12, column: 18 },
+                  end: { line: 12, column: 74 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 12, column: 18 },
+                    end: { line: 12, column: 24 },
                   },
-                  arguments: [],
+                  key: "$state",
                 },
                 arguments: [
                   {
-                    kind: "string",
-                    loc: [15, 22, 15, 27],
-                    text: "ada",
+                    type: "ArrowFunctionExpression",
+                    loc: {
+                      start: { line: 12, column: 51 },
+                      end: { line: 12, column: 73 },
+                    },
+                    params: [
+                      {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 52 },
+                          end: { line: 12, column: 56 },
+                        },
+                        name: "name",
+                        bindingKey: "name$1zi7if3ybm5dh$1",
+                      },
+                    ],
+                    body: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 12, column: 61 },
+                        end: { line: 12, column: 73 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 61 },
+                          end: { line: 12, column: 66 },
+                        },
+                        value: "hi ",
+                      },
+                      right: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 69 },
+                          end: { line: 12, column: 73 },
+                        },
+                        name: "name",
+                        bindingKey: "name$1zi7if3ybm5dh$1",
+                      },
+                    },
+                    expression: true,
                   },
                 ],
+                optional: false,
+              },
+            },
+          ],
+        },
+        {
+          type: "ReturnStatement",
+          loc: { start: { line: 13, column: 4 }, end: { line: 17, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 16, column: 13 },
+            },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 14, column: 6 },
+                end: { line: 14, column: 63 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 14, column: 7 },
+                  end: { line: 14, column: 11 },
+                },
+                name: "span",
+              },
+              attributes: [
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 62 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 14, column: 12 },
+                      end: { line: 14, column: 19 },
+                    },
+                    name: "onclick",
+                  },
+                  value: {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 14, column: 20 },
+                      end: { line: 14, column: 62 },
+                    },
+                    expression: {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 14, column: 21 },
+                        end: { line: 14, column: 61 },
+                      },
+                      params: [],
+                      body: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 14, column: 27 },
+                          end: { line: 14, column: 61 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 14, column: 27 },
+                            end: { line: 14, column: 36 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 14, column: 27 },
+                              end: { line: 14, column: 32 },
+                            },
+                            name: "greet",
+                            bindingKey: "greet$1zi7if3ybm5dh$0",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 14, column: 33 },
+                              end: { line: 14, column: 36 },
+                            },
+                            name: "set",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [
+                          {
+                            type: "ArrowFunctionExpression",
+                            loc: {
+                              start: { line: 14, column: 37 },
+                              end: { line: 14, column: 60 },
+                            },
+                            params: [
+                              {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 14, column: 38 },
+                                  end: { line: 14, column: 42 },
+                                },
+                                name: "name",
+                                bindingKey: "name$1zi7if3ybm5dh$2",
+                              },
+                            ],
+                            body: {
+                              type: "BinaryExpression",
+                              loc: {
+                                start: { line: 14, column: 47 },
+                                end: { line: 14, column: 60 },
+                              },
+                              operator: "+",
+                              left: {
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 14, column: 47 },
+                                  end: { line: 14, column: 53 },
+                                },
+                                value: "bye ",
+                              },
+                              right: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 14, column: 56 },
+                                  end: { line: 14, column: 60 },
+                                },
+                                name: "name",
+                                bindingKey: "name$1zi7if3ybm5dh$2",
+                              },
+                            },
+                            expression: true,
+                          },
+                        ],
+                        optional: false,
+                      },
+                      expression: true,
+                    },
+                  },
+                },
+              ],
+              selfClosing: false,
+            },
+            children: [
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 15, column: 8 },
+                  end: { line: 15, column: 8 },
+                },
+                value: "\n        ",
+                raw: "\n        ",
+              },
+              {
+                type: "JSXExpressionContainer",
+                loc: {
+                  start: { line: 15, column: 8 },
+                  end: { line: 15, column: 28 },
+                },
+                expression: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 15, column: 9 },
+                    end: { line: 15, column: 27 },
+                  },
+                  callee: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 15, column: 9 },
+                      end: { line: 15, column: 20 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 15, column: 9 },
+                        end: { line: 15, column: 18 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 9 },
+                          end: { line: 15, column: 14 },
+                        },
+                        name: "greet",
+                        bindingKey: "greet$1zi7if3ybm5dh$0",
+                      },
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 15 },
+                          end: { line: 15, column: 18 },
+                        },
+                        name: "get",
+                      },
+                      computed: false,
+                      optional: false,
+                    },
+                    arguments: [],
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 21 },
+                        end: { line: 15, column: 26 },
+                      },
+                      value: "ada",
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 16, column: 6 },
+                  end: { line: 16, column: 6 },
+                },
+                value: "\n      ",
+                raw: "\n      ",
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 13 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 16, column: 8 },
+                  end: { line: 16, column: 12 },
+                },
+                name: "span",
+              },
+            },
           },
         },
       ],

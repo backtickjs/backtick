@@ -9,7 +9,7 @@ it("forPerTurnBinding", async (t) => {
     t,
     "forPerTurnBinding",
     cs.create(
-      [12, 5, 18, 7],
+      { start: { line: 12, column: 4 }, end: { line: 18, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/for-per-turn-binding.test.tsx",
@@ -18,113 +18,205 @@ it("forPerTurnBinding", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [12, 8, 18, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 12, column: 7 }, end: { line: 18, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 13, column: 39 },
+            },
             kind: "let",
-            loc: [13, 7, 13, 40],
-            name: {
-              kind: "id",
-              loc: [13, 11, 13, 15],
-              text: "last",
-              bindingKey: "last$2s6lhx8c4k6ow$0",
-            },
-            initializer: {
-              kind: "=>",
-              loc: [13, 32, 13, 39],
-              parameters: [],
-              body: {
-                kind: "number",
-                loc: [13, 38, 13, 39],
-                value: 0,
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 13, column: 10 },
+                  end: { line: 13, column: 38 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 13, column: 10 },
+                    end: { line: 13, column: 14 },
+                  },
+                  name: "last",
+                  bindingKey: "last$2s6lhx8c4k6ow$0",
+                },
+                init: {
+                  type: "ArrowFunctionExpression",
+                  loc: {
+                    start: { line: 13, column: 31 },
+                    end: { line: 13, column: 38 },
+                  },
+                  params: [],
+                  body: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 13, column: 37 },
+                      end: { line: 13, column: 38 },
+                    },
+                    value: 0,
+                  },
+                  expression: true,
+                },
               },
-            },
+            ],
           },
           {
-            kind: "for",
-            loc: [14, 7, 16, 8],
-            initializer: {
-              kind: "let",
-              loc: [14, 12, 14, 21],
-              name: {
-                kind: "id",
-                loc: [14, 16, 14, 17],
-                text: "i",
-                bindingKey: "i$2s6lhx8c4k6ow$1",
-              },
-              initializer: {
-                kind: "number",
-                loc: [14, 20, 14, 21],
-                value: 0,
-              },
+            type: "ForStatement",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 16, column: 7 },
             },
-            condition: {
-              kind: "binop",
-              loc: [14, 23, 14, 28],
+            init: {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 14, column: 11 },
+                end: { line: 14, column: 20 },
+              },
+              kind: "let",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 14, column: 15 },
+                    end: { line: 14, column: 20 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 14, column: 15 },
+                      end: { line: 14, column: 16 },
+                    },
+                    name: "i",
+                    bindingKey: "i$2s6lhx8c4k6ow$1",
+                  },
+                  init: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 14, column: 19 },
+                      end: { line: 14, column: 20 },
+                    },
+                    value: 0,
+                  },
+                },
+              ],
+            },
+            test: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 14, column: 22 },
+                end: { line: 14, column: 27 },
+              },
+              operator: "<",
               left: {
-                kind: "id",
-                loc: [14, 23, 14, 24],
-                text: "i",
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 22 },
+                  end: { line: 14, column: 23 },
+                },
+                name: "i",
                 bindingKey: "i$2s6lhx8c4k6ow$1",
               },
-              operatorToken: "<",
               right: {
-                kind: "number",
-                loc: [14, 27, 14, 28],
+                type: "Literal",
+                loc: {
+                  start: { line: 14, column: 26 },
+                  end: { line: 14, column: 27 },
+                },
                 value: 3,
               },
             },
-            incrementor: {
-              kind: "binop",
-              loc: [14, 30, 14, 39],
+            update: {
+              type: "AssignmentExpression",
+              loc: {
+                start: { line: 14, column: 29 },
+                end: { line: 14, column: 38 },
+              },
+              operator: "=",
               left: {
-                kind: "id",
-                loc: [14, 30, 14, 31],
-                text: "i",
+                type: "Identifier",
+                loc: {
+                  start: { line: 14, column: 29 },
+                  end: { line: 14, column: 30 },
+                },
+                name: "i",
                 bindingKey: "i$2s6lhx8c4k6ow$1",
               },
-              operatorToken: "=",
               right: {
-                kind: "binop",
-                loc: [14, 34, 14, 39],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 14, column: 33 },
+                  end: { line: 14, column: 38 },
+                },
+                operator: "+",
                 left: {
-                  kind: "id",
-                  loc: [14, 34, 14, 35],
-                  text: "i",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 33 },
+                    end: { line: 14, column: 34 },
+                  },
+                  name: "i",
                   bindingKey: "i$2s6lhx8c4k6ow$1",
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "number",
-                  loc: [14, 38, 14, 39],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 14, column: 37 },
+                    end: { line: 14, column: 38 },
+                  },
                   value: 1,
                 },
               },
             },
-            statement: {
-              kind: "{}",
-              loc: [14, 41, 16, 8],
-              statements: [
+            body: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 14, column: 40 },
+                end: { line: 16, column: 7 },
+              },
+              body: [
                 {
-                  kind: "binop",
-                  loc: [15, 9, 15, 23],
-                  left: {
-                    kind: "id",
-                    loc: [15, 9, 15, 13],
-                    text: "last",
-                    bindingKey: "last$2s6lhx8c4k6ow$0",
+                  type: "ExpressionStatement",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 23 },
                   },
-                  operatorToken: "=",
-                  right: {
-                    kind: "=>",
-                    loc: [15, 16, 15, 23],
-                    parameters: [],
-                    body: {
-                      kind: "id",
-                      loc: [15, 22, 15, 23],
-                      text: "i",
-                      bindingKey: "i$2s6lhx8c4k6ow$1",
+                  expression: {
+                    type: "AssignmentExpression",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 22 },
+                    },
+                    operator: "=",
+                    left: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 8 },
+                        end: { line: 15, column: 12 },
+                      },
+                      name: "last",
+                      bindingKey: "last$2s6lhx8c4k6ow$0",
+                    },
+                    right: {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 15, column: 15 },
+                        end: { line: 15, column: 22 },
+                      },
+                      params: [],
+                      body: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 15, column: 21 },
+                          end: { line: 15, column: 22 },
+                        },
+                        name: "i",
+                        bindingKey: "i$2s6lhx8c4k6ow$1",
+                      },
+                      expression: true,
                     },
                   },
                 },
@@ -132,18 +224,28 @@ it("forPerTurnBinding", async (t) => {
             },
           },
           {
-            kind: "return",
-            loc: [17, 7, 17, 21],
-            expression: {
-              kind: "()",
-              loc: [17, 14, 17, 20],
-              expression: {
-                kind: "id",
-                loc: [17, 14, 17, 18],
-                text: "last",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 20 },
+            },
+            argument: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 17, column: 13 },
+                end: { line: 17, column: 19 },
+              },
+              callee: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 17, column: 13 },
+                  end: { line: 17, column: 17 },
+                },
+                name: "last",
                 bindingKey: "last$2s6lhx8c4k6ow$0",
               },
               arguments: [],
+              optional: false,
             },
           },
         ],

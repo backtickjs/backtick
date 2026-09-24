@@ -12,7 +12,7 @@ import { cs, state } from "@backtickjs/core";
 // against `ClientUnknown`, which a `Date` is not.
 const host = new Date();
 export default cs.create(
-  [16, 16, 21, 3],
+  { start: { line: 16, column: 15 }, end: { line: 21, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/state-holds-host-object.test.tsx",
@@ -24,56 +24,105 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [16, 19, 21, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 16, column: 18 }, end: { line: 21, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 18, column: 2 }, end: { line: 18, column: 29 } },
         kind: "const",
-        loc: [18, 3, 18, 30],
-        name: {
-          kind: "id",
-          loc: [18, 9, 18, 13],
-          text: "held",
-          bindingKey: "held$1601kcqqso40z$0",
-        },
-        initializer: {
-          kind: "()",
-          loc: [18, 16, 18, 29],
-          expression: {
-            kind: "splice",
-            loc: [18, 16, 18, 22],
-            key: "$state",
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 18, column: 8 },
+              end: { line: 18, column: 28 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 18, column: 8 },
+                end: { line: 18, column: 12 },
+              },
+              name: "held",
+              bindingKey: "held$1601kcqqso40z$0",
+            },
+            init: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 18, column: 15 },
+                end: { line: 18, column: 28 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 15 },
+                  end: { line: 18, column: 21 },
+                },
+                key: "$state",
+              },
+              arguments: [
+                {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 18, column: 22 },
+                    end: { line: 18, column: 27 },
+                  },
+                  key: "$host",
+                },
+              ],
+              optional: false,
+            },
+          },
+        ],
+      },
+      {
+        type: "ExpressionStatement",
+        loc: { start: { line: 20, column: 2 }, end: { line: 20, column: 18 } },
+        expression: {
+          type: "CallExpression",
+          loc: {
+            start: { line: 20, column: 2 },
+            end: { line: 20, column: 17 },
+          },
+          callee: {
+            type: "MemberExpression",
+            loc: {
+              start: { line: 20, column: 2 },
+              end: { line: 20, column: 10 },
+            },
+            object: {
+              type: "Identifier",
+              loc: {
+                start: { line: 20, column: 2 },
+                end: { line: 20, column: 6 },
+              },
+              name: "held",
+              bindingKey: "held$1601kcqqso40z$0",
+            },
+            property: {
+              type: "Identifier",
+              loc: {
+                start: { line: 20, column: 7 },
+                end: { line: 20, column: 10 },
+              },
+              name: "set",
+            },
+            computed: false,
+            optional: false,
           },
           arguments: [
             {
-              kind: "splice",
-              loc: [18, 23, 18, 28],
+              type: "Splice",
+              loc: {
+                start: { line: 20, column: 11 },
+                end: { line: 20, column: 16 },
+              },
               key: "$host",
             },
           ],
+          optional: false,
         },
-      },
-      {
-        kind: "()",
-        loc: [20, 3, 20, 18],
-        expression: {
-          kind: ".",
-          loc: [20, 3, 20, 11],
-          expression: {
-            kind: "id",
-            loc: [20, 3, 20, 7],
-            text: "held",
-            bindingKey: "held$1601kcqqso40z$0",
-          },
-          name: "set",
-        },
-        arguments: [
-          {
-            kind: "splice",
-            loc: [20, 12, 20, 17],
-            key: "$host",
-          },
-        ],
       },
     ],
   }),

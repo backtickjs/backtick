@@ -12,7 +12,7 @@ it("coreComponents", async (t) => {
         _jsx("span", {
           style: "font-size: 12px",
           onclick: cs.create(
-            [10, 46, 10, 58],
+            { start: { line: 10, column: 45 }, end: { line: 10, column: 57 } },
             {
               version: "0.0.0",
               filePath: "components/core-components.test.tsx",
@@ -21,14 +21,21 @@ it("coreComponents", async (t) => {
               captures: [],
             },
             () => ({
-              kind: "=>",
-              loc: [10, 49, 10, 57],
-              parameters: [],
-              body: {
-                kind: "{}",
-                loc: [10, 55, 10, 57],
-                statements: [],
+              type: "ArrowFunctionExpression",
+              loc: {
+                start: { line: 10, column: 48 },
+                end: { line: 10, column: 56 },
               },
+              params: [],
+              body: {
+                type: "BlockStatement",
+                loc: {
+                  start: { line: 10, column: 54 },
+                  end: { line: 10, column: 56 },
+                },
+                body: [],
+              },
+              expression: false,
             }),
           ),
           children: "hi",

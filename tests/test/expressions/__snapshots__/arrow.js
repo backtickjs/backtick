@@ -6,7 +6,7 @@ it("arrow", async (t) => {
     t,
     "arrow",
     cs.create(
-      [9, 5, 12, 7],
+      { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/arrow.test.tsx",
@@ -15,80 +15,119 @@ it("arrow", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [9, 8, 12, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 10, column: 6 },
+              end: { line: 10, column: 22 },
+            },
             kind: "const",
-            loc: [10, 7, 10, 23],
-            name: {
-              kind: "id",
-              loc: [10, 13, 10, 17],
-              text: "base",
-              bindingKey: "base$1qw9q1toh3rnd$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [10, 20, 10, 22],
-              value: 10,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 10, column: 12 },
+                  end: { line: 10, column: 21 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 10, column: 12 },
+                    end: { line: 10, column: 16 },
+                  },
+                  name: "base",
+                  bindingKey: "base$1qw9q1toh3rnd$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 19 },
+                    end: { line: 10, column: 21 },
+                  },
+                  value: 10,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [11, 7, 11, 61],
-            expression: {
-              kind: "=>",
-              loc: [11, 14, 11, 60],
-              parameters: [
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 11, column: 60 },
+            },
+            argument: {
+              type: "ArrowFunctionExpression",
+              loc: {
+                start: { line: 11, column: 13 },
+                end: { line: 11, column: 59 },
+              },
+              params: [
                 {
-                  kind: "param",
-                  loc: [11, 15, 11, 26],
-                  name: {
-                    kind: "id",
-                    loc: [11, 15, 11, 18],
-                    text: "one",
-                    bindingKey: "one$1qw9q1toh3rnd$1",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 14 },
+                    end: { line: 11, column: 17 },
                   },
+                  name: "one",
+                  bindingKey: "one$1qw9q1toh3rnd$1",
                 },
                 {
-                  kind: "param",
-                  loc: [11, 28, 11, 39],
-                  name: {
-                    kind: "id",
-                    loc: [11, 28, 11, 31],
-                    text: "two",
-                    bindingKey: "two$1qw9q1toh3rnd$2",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 27 },
+                    end: { line: 11, column: 30 },
                   },
+                  name: "two",
+                  bindingKey: "two$1qw9q1toh3rnd$2",
                 },
               ],
               body: {
-                kind: "binop",
-                loc: [11, 44, 11, 60],
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 11, column: 43 },
+                  end: { line: 11, column: 59 },
+                },
+                operator: "+",
                 left: {
-                  kind: "binop",
-                  loc: [11, 44, 11, 53],
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 11, column: 43 },
+                    end: { line: 11, column: 52 },
+                  },
+                  operator: "+",
                   left: {
-                    kind: "id",
-                    loc: [11, 44, 11, 47],
-                    text: "one",
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 43 },
+                      end: { line: 11, column: 46 },
+                    },
+                    name: "one",
                     bindingKey: "one$1qw9q1toh3rnd$1",
                   },
-                  operatorToken: "+",
                   right: {
-                    kind: "id",
-                    loc: [11, 50, 11, 53],
-                    text: "two",
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 11, column: 49 },
+                      end: { line: 11, column: 52 },
+                    },
+                    name: "two",
                     bindingKey: "two$1qw9q1toh3rnd$2",
                   },
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "id",
-                  loc: [11, 56, 11, 60],
-                  text: "base",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 55 },
+                    end: { line: 11, column: 59 },
+                  },
+                  name: "base",
                   bindingKey: "base$1qw9q1toh3rnd$0",
                 },
               },
+              expression: true,
             },
           },
         ],

@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // An action — a block with no `return` — types `Client<void>` natively and
 // composes as a block running it in statement position.
 const effects = cs.create(
-  [8, 31, 10, 3],
+  { start: { line: 8, column: 30 }, end: { line: 10, column: 2 } },
   {
     version: "0.0.0",
     filePath: "control-flow/action-composition.test.tsx",
@@ -13,29 +13,45 @@ const effects = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [8, 34, 10, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 8, column: 33 }, end: { line: 10, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 9, column: 2 }, end: { line: 9, column: 14 } },
         kind: "const",
-        loc: [9, 3, 9, 15],
-        name: {
-          kind: "id",
-          loc: [9, 9, 9, 10],
-          text: "x",
-          bindingKey: "x$3q2gz79xhvvfp$0",
-        },
-        initializer: {
-          kind: "number",
-          loc: [9, 13, 9, 14],
-          value: 1,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 9, column: 8 },
+              end: { line: 9, column: 13 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 9, column: 8 },
+                end: { line: 9, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$3q2gz79xhvvfp$0",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 9, column: 12 },
+                end: { line: 9, column: 13 },
+              },
+              value: 1,
+            },
+          },
+        ],
       },
     ],
   }),
 );
 const composed = cs.create(
-  [12, 32, 14, 3],
+  { start: { line: 12, column: 31 }, end: { line: 14, column: 2 } },
   {
     version: "0.0.0",
     filePath: "control-flow/action-composition.test.tsx",
@@ -44,13 +60,20 @@ const composed = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [12, 35, 14, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 12, column: 34 }, end: { line: 14, column: 1 } },
+    body: [
       {
-        kind: "splice",
-        loc: [13, 3, 13, 11],
-        key: "$effects",
+        type: "ExpressionStatement",
+        loc: { start: { line: 13, column: 2 }, end: { line: 13, column: 11 } },
+        expression: {
+          type: "Splice",
+          loc: {
+            start: { line: 13, column: 2 },
+            end: { line: 13, column: 10 },
+          },
+          key: "$effects",
+        },
       },
     ],
   }),
@@ -60,7 +83,7 @@ it("actionComposition", async (t) => {
     t,
     "actionComposition",
     cs.create(
-      [20, 5, 22, 7],
+      { start: { line: 20, column: 4 }, end: { line: 22, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/action-composition.test.tsx",
@@ -69,13 +92,23 @@ it("actionComposition", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [20, 8, 22, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 20, column: 7 }, end: { line: 22, column: 5 } },
+        body: [
           {
-            kind: "splice",
-            loc: [21, 7, 21, 16],
-            key: "$composed",
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 21, column: 6 },
+              end: { line: 21, column: 16 },
+            },
+            expression: {
+              type: "Splice",
+              loc: {
+                start: { line: 21, column: 6 },
+                end: { line: 21, column: 15 },
+              },
+              key: "$composed",
+            },
           },
         ],
       }),

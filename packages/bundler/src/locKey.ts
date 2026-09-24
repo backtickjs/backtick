@@ -1,4 +1,4 @@
-import type { SourceLocation } from "@backtickjs/client-script";
+import type * as ES from "estree";
 
 // A stable string key for a script's source location, used to deduplicate
 // client scripts by where they were written. Two scripts parsed from the same
@@ -8,7 +8,6 @@ import type { SourceLocation } from "@backtickjs/client-script";
 // say, `1:1` and silently share one entry. With the hash, keys collide only
 // when the files' contents are identical, in which case the scripts are the
 // same and sharing is correct.
-export function locKey(fileHash: string, loc: SourceLocation): string {
-  const [startLine, startCharacter] = loc;
-  return `${fileHash}:${startLine}:${startCharacter}`;
+export function locKey(fileHash: string, loc: ES.SourceLocation): string {
+  return `${fileHash}:${loc.start.line}:${loc.start.column}`;
 }

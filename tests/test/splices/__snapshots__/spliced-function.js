@@ -17,7 +17,7 @@ it("splicedFunction", async (t) => {
     t,
     "splicedFunction",
     cs.create(
-      [21, 5, 21, 60],
+      { start: { line: 21, column: 4 }, end: { line: 21, column: 59 } },
       {
         version: "0.0.0",
         filePath: "splices/spliced-function.test.tsx",
@@ -26,14 +26,18 @@ it("splicedFunction", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [21, 8, 21, 59],
-        parameters: [],
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 21, column: 7 }, end: { line: 21, column: 58 } },
+        params: [],
         body: {
-          kind: "splice",
-          loc: [21, 14, 21, 59],
+          type: "Splice",
+          loc: {
+            start: { line: 21, column: 13 },
+            end: { line: 21, column: 58 },
+          },
           key: "$0splice0",
         },
+        expression: true,
       }),
     ),
   );

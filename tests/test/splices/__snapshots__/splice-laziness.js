@@ -10,7 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // even tested.
 function guard(fragment) {
   return cs.create(
-    [13, 10, 18, 5],
+    { start: { line: 13, column: 9 }, end: { line: 18, column: 4 } },
     {
       version: "0.0.0",
       filePath: "splices/splice-laziness.test.tsx",
@@ -19,66 +19,87 @@ function guard(fragment) {
       captures: [],
     },
     () => ({
-      kind: "=>",
-      loc: [13, 13, 18, 4],
-      parameters: [
+      type: "ArrowFunctionExpression",
+      loc: { start: { line: 13, column: 12 }, end: { line: 18, column: 3 } },
+      params: [
         {
-          kind: "param",
-          loc: [13, 14, 13, 27],
-          name: {
-            kind: "id",
-            loc: [13, 14, 13, 18],
-            text: "flag",
-            bindingKey: "flag$3cvzb2rrvx0i4$0",
+          type: "Identifier",
+          loc: {
+            start: { line: 13, column: 13 },
+            end: { line: 13, column: 17 },
           },
+          name: "flag",
+          bindingKey: "flag$3cvzb2rrvx0i4$0",
         },
       ],
       body: {
-        kind: "{}",
-        loc: [13, 32, 18, 4],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 13, column: 31 }, end: { line: 18, column: 3 } },
+        body: [
           {
-            kind: "if",
-            loc: [14, 5, 16, 6],
-            expression: {
-              kind: "id",
-              loc: [14, 9, 14, 13],
-              text: "flag",
+            type: "IfStatement",
+            loc: {
+              start: { line: 14, column: 4 },
+              end: { line: 16, column: 5 },
+            },
+            test: {
+              type: "Identifier",
+              loc: {
+                start: { line: 14, column: 8 },
+                end: { line: 14, column: 12 },
+              },
+              name: "flag",
               bindingKey: "flag$3cvzb2rrvx0i4$0",
             },
-            thenStatement: {
-              kind: "{}",
-              loc: [14, 15, 16, 6],
-              statements: [
+            consequent: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 14, column: 14 },
+                end: { line: 16, column: 5 },
+              },
+              body: [
                 {
-                  kind: "return",
-                  loc: [15, 7, 15, 24],
-                  expression: {
-                    kind: "splice",
-                    loc: [15, 14, 15, 23],
+                  type: "ReturnStatement",
+                  loc: {
+                    start: { line: 15, column: 6 },
+                    end: { line: 15, column: 23 },
+                  },
+                  argument: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 15, column: 13 },
+                      end: { line: 15, column: 22 },
+                    },
                     key: "$fragment",
                   },
                 },
               ],
             },
-            elseStatement: null,
+            alternate: null,
           },
           {
-            kind: "return",
-            loc: [17, 5, 17, 22],
-            expression: {
-              kind: "string",
-              loc: [17, 12, 17, 21],
-              text: "skipped",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 17, column: 4 },
+              end: { line: 17, column: 21 },
+            },
+            argument: {
+              type: "Literal",
+              loc: {
+                start: { line: 17, column: 11 },
+                end: { line: 17, column: 20 },
+              },
+              value: "skipped",
             },
           },
         ],
       },
+      expression: false,
     }),
   );
 }
 const ok = cs.create(
-  [21, 12, 21, 27],
+  { start: { line: 21, column: 11 }, end: { line: 21, column: 26 } },
   {
     version: "0.0.0",
     filePath: "splices/splice-laziness.test.tsx",
@@ -87,13 +108,13 @@ const ok = cs.create(
     captures: [],
   },
   () => ({
-    kind: "string",
-    loc: [21, 15, 21, 26],
-    text: "evaluated",
+    type: "Literal",
+    loc: { start: { line: 21, column: 14 }, end: { line: 21, column: 25 } },
+    value: "evaluated",
   }),
 );
 const broken = cs.create(
-  [23, 16, 25, 3],
+  { start: { line: 23, column: 15 }, end: { line: 25, column: 2 } },
   {
     version: "0.0.0",
     filePath: "splices/splice-laziness.test.tsx",
@@ -102,16 +123,19 @@ const broken = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [23, 19, 25, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 23, column: 18 }, end: { line: 25, column: 1 } },
+    body: [
       {
-        kind: "throw",
-        loc: [24, 3, 24, 52],
-        expression: {
-          kind: "string",
-          loc: [24, 9, 24, 51],
-          text: "the guarded fragment must never evaluate",
+        type: "ThrowStatement",
+        loc: { start: { line: 24, column: 2 }, end: { line: 24, column: 51 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 24, column: 8 },
+            end: { line: 24, column: 50 },
+          },
+          value: "the guarded fragment must never evaluate",
         },
       },
     ],
@@ -122,7 +146,7 @@ it("spliceLaziness", async (t) => {
     t,
     "spliceLaziness",
     cs.create(
-      [31, 5, 34, 8],
+      { start: { line: 31, column: 4 }, end: { line: 34, column: 7 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-laziness.test.tsx",
@@ -134,56 +158,98 @@ it("spliceLaziness", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [31, 9, 34, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 31, column: 8 }, end: { line: 34, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [32, 7, 32, 32],
-            name: {
-              kind: "string",
-              loc: [32, 7, 32, 12],
-              text: "taken",
+            type: "Property",
+            loc: {
+              start: { line: 32, column: 6 },
+              end: { line: 32, column: 31 },
             },
-            initializer: {
-              kind: "()",
-              loc: [32, 14, 32, 32],
-              expression: {
-                kind: "splice",
-                loc: [32, 14, 32, 26],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 32, column: 6 },
+                end: { line: 32, column: 11 },
+              },
+              name: "taken",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 32, column: 13 },
+                end: { line: 32, column: 31 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 32, column: 13 },
+                  end: { line: 32, column: 25 },
+                },
                 key: "$0splice0",
               },
               arguments: [
                 {
-                  kind: "true",
-                  loc: [32, 27, 32, 31],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 32, column: 26 },
+                    end: { line: 32, column: 30 },
+                  },
+                  value: true,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [33, 7, 33, 39],
-            name: {
-              kind: "string",
-              loc: [33, 7, 33, 14],
-              text: "skipped",
+            type: "Property",
+            loc: {
+              start: { line: 33, column: 6 },
+              end: { line: 33, column: 38 },
             },
-            initializer: {
-              kind: "()",
-              loc: [33, 16, 33, 39],
-              expression: {
-                kind: "splice",
-                loc: [33, 16, 33, 32],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 33, column: 6 },
+                end: { line: 33, column: 13 },
+              },
+              name: "skipped",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 33, column: 15 },
+                end: { line: 33, column: 38 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 33, column: 15 },
+                  end: { line: 33, column: 31 },
+                },
                 key: "$0splice1",
               },
               arguments: [
                 {
-                  kind: "false",
-                  loc: [33, 33, 33, 38],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 33, column: 32 },
+                    end: { line: 33, column: 37 },
+                  },
+                  value: false,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

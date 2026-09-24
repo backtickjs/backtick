@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // may write — this shape is the one TypeScript cannot infer, and a splice has
 // nowhere to name it, since the compiler writes the call.
 const originX = cs.create(
-  [14, 17, 14, 22],
+  { start: { line: 14, column: 16 }, end: { line: 14, column: 21 } },
   {
     version: "0.0.0",
     filePath: "splices/spliced-container.test.tsx",
@@ -20,13 +20,13 @@ const originX = cs.create(
     captures: [],
   },
   () => ({
-    kind: "number",
-    loc: [14, 20, 14, 21],
+    type: "Literal",
+    loc: { start: { line: 14, column: 19 }, end: { line: 14, column: 20 } },
     value: 1,
   }),
 );
 const label = cs.create(
-  [16, 15, 16, 27],
+  { start: { line: 16, column: 14 }, end: { line: 16, column: 26 } },
   {
     version: "0.0.0",
     filePath: "splices/spliced-container.test.tsx",
@@ -35,9 +35,9 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: "string",
-    loc: [16, 18, 16, 26],
-    text: "origin",
+    type: "Literal",
+    loc: { start: { line: 16, column: 17 }, end: { line: 16, column: 25 } },
+    value: "origin",
   }),
 );
 const point = { x: originX, label };
@@ -46,7 +46,7 @@ it("splicedContainer", async (t) => {
     t,
     "splicedContainer",
     cs.create(
-      [21, 45, 21, 61],
+      { start: { line: 21, column: 44 }, end: { line: 21, column: 60 } },
       {
         version: "0.0.0",
         filePath: "splices/spliced-container.test.tsx",
@@ -55,22 +55,40 @@ it("splicedContainer", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "binop",
-        loc: [21, 48, 21, 60],
+        type: "BinaryExpression",
+        loc: { start: { line: 21, column: 47 }, end: { line: 21, column: 59 } },
+        operator: "+",
         left: {
-          kind: ".",
-          loc: [21, 48, 21, 56],
-          expression: {
-            kind: "splice",
-            loc: [21, 48, 21, 54],
+          type: "MemberExpression",
+          loc: {
+            start: { line: 21, column: 47 },
+            end: { line: 21, column: 55 },
+          },
+          object: {
+            type: "Splice",
+            loc: {
+              start: { line: 21, column: 47 },
+              end: { line: 21, column: 53 },
+            },
             key: "$point",
           },
-          name: "x",
+          property: {
+            type: "Identifier",
+            loc: {
+              start: { line: 21, column: 54 },
+              end: { line: 21, column: 55 },
+            },
+            name: "x",
+          },
+          computed: false,
+          optional: false,
         },
-        operatorToken: "+",
         right: {
-          kind: "number",
-          loc: [21, 59, 21, 60],
+          type: "Literal",
+          loc: {
+            start: { line: 21, column: 58 },
+            end: { line: 21, column: 59 },
+          },
           value: 1,
         },
       }),

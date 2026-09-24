@@ -6,7 +6,7 @@ it("nestedScripts", async (t) => {
     t,
     "nestedScripts",
     cs.create(
-      [9, 5, 12, 7],
+      { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
       {
         version: "0.0.0",
         filePath: "captures/nested-scripts.test.tsx",
@@ -14,7 +14,10 @@ it("nestedScripts", async (t) => {
         splices: {
           $0splice0: {
             value: cs.create(
-              [11, 16, 11, 21],
+              {
+                start: { line: 11, column: 15 },
+                end: { line: 11, column: 20 },
+              },
               {
                 version: "0.0.0",
                 filePath: "captures/nested-scripts.test.tsx",
@@ -23,9 +26,12 @@ it("nestedScripts", async (t) => {
                 captures: ["x$2jjdjdr7m395y$0"],
               },
               () => ({
-                kind: "id",
-                loc: [11, 19, 11, 20],
-                text: "x",
+                type: "Identifier",
+                loc: {
+                  start: { line: 11, column: 18 },
+                  end: { line: 11, column: 19 },
+                },
+                name: "x",
                 bindingKey: "x$2jjdjdr7m395y$0",
               }),
             ),
@@ -35,30 +41,55 @@ it("nestedScripts", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [9, 8, 12, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 10, column: 6 },
+              end: { line: 10, column: 18 },
+            },
             kind: "const",
-            loc: [10, 7, 10, 19],
-            name: {
-              kind: "id",
-              loc: [10, 13, 10, 14],
-              text: "x",
-              bindingKey: "x$2jjdjdr7m395y$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [10, 17, 10, 18],
-              value: 0,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 10, column: 12 },
+                  end: { line: 10, column: 17 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 10, column: 12 },
+                    end: { line: 10, column: 13 },
+                  },
+                  name: "x",
+                  bindingKey: "x$2jjdjdr7m395y$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 10, column: 16 },
+                    end: { line: 10, column: 17 },
+                  },
+                  value: 0,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [11, 7, 11, 23],
-            expression: {
-              kind: "splice",
-              loc: [11, 14, 11, 22],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 11, column: 22 },
+            },
+            argument: {
+              type: "Splice",
+              loc: {
+                start: { line: 11, column: 13 },
+                end: { line: 11, column: 21 },
+              },
               key: "$0splice0",
             },
           },

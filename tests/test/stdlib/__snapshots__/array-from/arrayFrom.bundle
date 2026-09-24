@@ -16,7 +16,7 @@
       {
         length: 2,
       },
-      (value, index) => (value === void 0 ? index : -1),
+      (value, index) => (value === undefined ? index : -1),
     );
     return doubled.join(",") + "|" + empty.length + "|" + absent.join(",");
   };

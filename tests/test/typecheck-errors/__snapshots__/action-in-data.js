@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // A container ships verbatim, so an action inside one has no place — the
 // splice rejects it.
 const action = cs.create(
-  [5, 16, 7, 3],
+  { start: { line: 5, column: 15 }, end: { line: 7, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-data.test.tsx",
@@ -11,29 +11,45 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [5, 19, 7, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 5, column: 18 }, end: { line: 7, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 6, column: 2 }, end: { line: 6, column: 14 } },
         kind: "const",
-        loc: [6, 3, 6, 15],
-        name: {
-          kind: "id",
-          loc: [6, 9, 6, 10],
-          text: "x",
-          bindingKey: "x$3u22ze1jwlgvr$0",
-        },
-        initializer: {
-          kind: "number",
-          loc: [6, 13, 6, 14],
-          value: 1,
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 6, column: 8 },
+              end: { line: 6, column: 13 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 6, column: 8 },
+                end: { line: 6, column: 9 },
+              },
+              name: "x",
+              bindingKey: "x$3u22ze1jwlgvr$0",
+            },
+            init: {
+              type: "Literal",
+              loc: {
+                start: { line: 6, column: 12 },
+                end: { line: 6, column: 13 },
+              },
+              value: 1,
+            },
+          },
+        ],
       },
     ],
   }),
 );
 export const listed = cs.create(
-  [9, 23, 13, 3],
+  { start: { line: 9, column: 22 }, end: { line: 13, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-data.test.tsx",
@@ -42,30 +58,49 @@ export const listed = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [9, 26, 13, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 9, column: 25 }, end: { line: 13, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 11, column: 2 }, end: { line: 11, column: 27 } },
         kind: "const",
-        loc: [11, 3, 11, 28],
-        name: {
-          kind: "id",
-          loc: [11, 9, 11, 13],
-          text: "list",
-          bindingKey: "list$3u22ze1jwlgvr$1",
-        },
-        initializer: {
-          kind: "splice",
-          loc: [11, 16, 11, 27],
-          key: "$0splice0",
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 11, column: 8 },
+              end: { line: 11, column: 26 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 11, column: 8 },
+                end: { line: 11, column: 12 },
+              },
+              name: "list",
+              bindingKey: "list$3u22ze1jwlgvr$1",
+            },
+            init: {
+              type: "Splice",
+              loc: {
+                start: { line: 11, column: 15 },
+                end: { line: 11, column: 26 },
+              },
+              key: "$0splice0",
+            },
+          },
+        ],
       },
       {
-        kind: "return",
-        loc: [12, 3, 12, 12],
-        expression: {
-          kind: "number",
-          loc: [12, 10, 12, 11],
+        type: "ReturnStatement",
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 11 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 12, column: 9 },
+            end: { line: 12, column: 10 },
+          },
           value: 1,
         },
       },
@@ -73,7 +108,7 @@ export const listed = cs.create(
   }),
 );
 export const keyed = cs.create(
-  [15, 22, 19, 3],
+  { start: { line: 15, column: 21 }, end: { line: 19, column: 2 } },
   {
     version: "0.0.0",
     filePath: "typecheck-errors/action-in-data.test.tsx",
@@ -82,30 +117,49 @@ export const keyed = cs.create(
     captures: [],
   },
   () => ({
-    kind: "{}",
-    loc: [15, 25, 19, 2],
-    statements: [
+    type: "BlockStatement",
+    loc: { start: { line: 15, column: 24 }, end: { line: 19, column: 1 } },
+    body: [
       {
+        type: "VariableDeclaration",
+        loc: { start: { line: 17, column: 2 }, end: { line: 17, column: 35 } },
         kind: "const",
-        loc: [17, 3, 17, 36],
-        name: {
-          kind: "id",
-          loc: [17, 9, 17, 12],
-          text: "map",
-          bindingKey: "map$3u22ze1jwlgvr$2",
-        },
-        initializer: {
-          kind: "splice",
-          loc: [17, 15, 17, 35],
-          key: "$0splice0",
-        },
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            loc: {
+              start: { line: 17, column: 8 },
+              end: { line: 17, column: 34 },
+            },
+            id: {
+              type: "Identifier",
+              loc: {
+                start: { line: 17, column: 8 },
+                end: { line: 17, column: 11 },
+              },
+              name: "map",
+              bindingKey: "map$3u22ze1jwlgvr$2",
+            },
+            init: {
+              type: "Splice",
+              loc: {
+                start: { line: 17, column: 14 },
+                end: { line: 17, column: 34 },
+              },
+              key: "$0splice0",
+            },
+          },
+        ],
       },
       {
-        kind: "return",
-        loc: [18, 3, 18, 12],
-        expression: {
-          kind: "number",
-          loc: [18, 10, 18, 11],
+        type: "ReturnStatement",
+        loc: { start: { line: 18, column: 2 }, end: { line: 18, column: 11 } },
+        argument: {
+          type: "Literal",
+          loc: {
+            start: { line: 18, column: 9 },
+            end: { line: 18, column: 10 },
+          },
           value: 1,
         },
       },

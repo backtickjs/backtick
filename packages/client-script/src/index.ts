@@ -3,8 +3,8 @@
  * version both ends check.
  *
  * The compiler writes one of these and the bundler reads it, so the shape is
- * neither end's — every type here is named for the thing it is part of, and
- * `ClientScript` is what forty-seven of them say.
+ * neither end's. A script's body is ESTree as the source wrote it, with JSX
+ * and splices in it, and the rules both ends read it by are here.
  *
  * `cs` is here too: what a template is written as, and what it compiles to,
  * are one thing said at two moments.
@@ -20,61 +20,11 @@ export {
   type Metadata,
   type MetadataSplice,
 } from "./ClientScript.js";
-export type {
-  ClientScriptArrayElement,
-  ClientScriptArrayLiteralExpression,
-  ClientScriptArrowFunction,
-  ClientScriptBinaryExpression,
-  ClientScriptBlock,
-  ClientScriptBody,
-  ClientScriptBreakStatement,
-  ClientScriptBuiltin,
-  ClientScriptCall,
-  ClientScriptCallExpression,
-  ClientScriptCatchClause,
-  ClientScriptConditionalExpression,
-  ClientScriptConstDeclaration,
-  ClientScriptContinueStatement,
-  ClientScriptDeclaration,
-  ClientScriptElementAccessExpression,
-  ClientScriptExpression,
-  ClientScriptFalseLiteral,
-  ClientScriptForStatement,
-  ClientScriptIdentifier,
-  ClientScriptIfStatement,
-  ClientScriptJsxAttribute,
-  ClientScriptJsxElement,
-  ClientScriptKind,
-  ClientScriptLetDeclaration,
-  ClientScriptNode,
-  ClientScriptNullLiteral,
-  ClientScriptNumericLiteral,
-  ClientScriptObjectLiteralExpression,
-  ClientScriptObjectMember,
-  ClientScriptOptionalCallExpression,
-  ClientScriptOptionalPropertyAccessExpression,
-  ClientScriptParameterDeclaration,
-  ClientScriptPostfixUnaryExpression,
-  ClientScriptPrefixUnaryExpression,
-  ClientScriptPropertyAccess,
-  ClientScriptPropertyAccessExpression,
-  ClientScriptPropertyAssignment,
-  ClientScriptReturnStatement,
-  ClientScriptSplice,
-  ClientScriptSpreadElement,
-  ClientScriptStatement,
-  ClientScriptStringLiteral,
-  ClientScriptThrowStatement,
-  ClientScriptTrueLiteral,
-  ClientScriptTryStatement,
-  ClientScriptTypeOfExpression,
-  ClientScriptUndefinedLiteral,
-  ClientScriptWhileStatement,
-} from "./Ast.js";
+export type { Splice } from "./Splice.js";
+export { isComponentTag } from "./isComponentTag.js";
+export { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
+export { jsxText } from "./jsxText.js";
 export type { BinaryOperator } from "./BinaryOperator.js";
-export type { PostfixUnaryOperator } from "./PostfixUnaryOperator.js";
-export type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
-export type { SourceLocation } from "./SourceLocation.js";
 export { version } from "./version.js";
 
 // The tag itself, and how a script reads what it is handed.

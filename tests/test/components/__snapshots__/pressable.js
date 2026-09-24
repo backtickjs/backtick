@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.create(
-    [15, 10, 27, 5],
+    { start: { line: 15, column: 9 }, end: { line: 27, column: 4 } },
     {
       version: "0.0.0",
       filePath: "components/pressable.test.tsx",
@@ -21,226 +21,557 @@ async function Row() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [15, 13, 27, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 15, column: 12 }, end: { line: 27, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 16, column: 4 },
+            end: { line: 16, column: 28 },
+          },
           kind: "const",
-          loc: [16, 5, 16, 29],
-          name: {
-            kind: "id",
-            loc: [16, 11, 16, 16],
-            text: "count",
-            bindingKey: "count$7huprcub5nk3$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [16, 19, 16, 28],
-            expression: {
-              kind: "splice",
-              loc: [16, 19, 16, 25],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "number",
-                loc: [16, 26, 16, 27],
-                value: 0,
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 16, column: 10 },
+                end: { line: 16, column: 27 },
               },
-            ],
-          },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 16, column: 10 },
+                  end: { line: 16, column: 15 },
+                },
+                name: "count",
+                bindingKey: "count$7huprcub5nk3$0",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 16, column: 18 },
+                  end: { line: 16, column: 27 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 16, column: 18 },
+                    end: { line: 16, column: 24 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 16, column: 25 },
+                      end: { line: 16, column: 26 },
+                    },
+                    value: 0,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [17, 5, 26, 7],
-          expression: {
-            kind: "jsx",
-            loc: [18, 7, 25, 16],
-            type: {
-              kind: "string",
-              loc: [18, 8, 18, 14],
-              text: "button",
+          type: "ReturnStatement",
+          loc: { start: { line: 17, column: 4 }, end: { line: 26, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 25, column: 15 },
             },
-            attributes: [
-              {
-                name: "id",
-                initializer: {
-                  kind: "string",
-                  loc: [19, 12, 19, 17],
-                  text: "row",
-                },
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 18, column: 6 },
+                end: { line: 22, column: 7 },
               },
-              {
-                name: "style",
-                initializer: {
-                  kind: "string",
-                  loc: [20, 15, 20, 40],
-                  text: "display: flex; gap: 8px",
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 18, column: 7 },
+                  end: { line: 18, column: 13 },
                 },
+                name: "button",
               },
-              {
-                name: "onclick",
-                initializer: {
-                  kind: "=>",
-                  loc: [21, 18, 21, 50],
-                  parameters: [],
-                  body: {
-                    kind: "()",
-                    loc: [21, 24, 21, 50],
-                    expression: {
-                      kind: ".",
-                      loc: [21, 24, 21, 33],
-                      expression: {
-                        kind: "id",
-                        loc: [21, 24, 21, 29],
-                        text: "count",
-                        bindingKey: "count$7huprcub5nk3$0",
-                      },
-                      name: "set",
+              attributes: [
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 19, column: 8 },
+                    end: { line: 19, column: 16 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 19, column: 8 },
+                      end: { line: 19, column: 10 },
                     },
-                    arguments: [
-                      {
-                        kind: "binop",
-                        loc: [21, 34, 21, 49],
-                        left: {
-                          kind: "()",
-                          loc: [21, 34, 21, 45],
-                          expression: {
-                            kind: ".",
-                            loc: [21, 34, 21, 43],
-                            expression: {
-                              kind: "id",
-                              loc: [21, 34, 21, 39],
-                              text: "count",
-                              bindingKey: "count$7huprcub5nk3$0",
-                            },
-                            name: "get",
-                          },
-                          arguments: [],
-                        },
-                        operatorToken: "+",
-                        right: {
-                          kind: "number",
-                          loc: [21, 48, 21, 49],
-                          value: 1,
-                        },
-                      },
-                    ],
+                    name: "id",
+                  },
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 19, column: 11 },
+                      end: { line: 19, column: 16 },
+                    },
+                    value: "row",
                   },
                 },
-              },
-            ],
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 20, column: 8 },
+                    end: { line: 20, column: 39 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 20, column: 8 },
+                      end: { line: 20, column: 13 },
+                    },
+                    name: "style",
+                  },
+                  value: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 20, column: 14 },
+                      end: { line: 20, column: 39 },
+                    },
+                    value: "display: flex; gap: 8px",
+                  },
+                },
+                {
+                  type: "JSXAttribute",
+                  loc: {
+                    start: { line: 21, column: 8 },
+                    end: { line: 21, column: 50 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 21, column: 8 },
+                      end: { line: 21, column: 15 },
+                    },
+                    name: "onclick",
+                  },
+                  value: {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 21, column: 16 },
+                      end: { line: 21, column: 50 },
+                    },
+                    expression: {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 21, column: 17 },
+                        end: { line: 21, column: 49 },
+                      },
+                      params: [],
+                      body: {
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 21, column: 23 },
+                          end: { line: 21, column: 49 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 21, column: 23 },
+                            end: { line: 21, column: 32 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 21, column: 23 },
+                              end: { line: 21, column: 28 },
+                            },
+                            name: "count",
+                            bindingKey: "count$7huprcub5nk3$0",
+                          },
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 21, column: 29 },
+                              end: { line: 21, column: 32 },
+                            },
+                            name: "set",
+                          },
+                          computed: false,
+                          optional: false,
+                        },
+                        arguments: [
+                          {
+                            type: "BinaryExpression",
+                            loc: {
+                              start: { line: 21, column: 33 },
+                              end: { line: 21, column: 48 },
+                            },
+                            operator: "+",
+                            left: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 21, column: 33 },
+                                end: { line: 21, column: 44 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 21, column: 33 },
+                                  end: { line: 21, column: 42 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 21, column: 33 },
+                                    end: { line: 21, column: 38 },
+                                  },
+                                  name: "count",
+                                  bindingKey: "count$7huprcub5nk3$0",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 21, column: 39 },
+                                    end: { line: 21, column: 42 },
+                                  },
+                                  name: "get",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [],
+                              optional: false,
+                            },
+                            right: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 21, column: 47 },
+                                end: { line: 21, column: 48 },
+                              },
+                              value: 1,
+                            },
+                          },
+                        ],
+                        optional: false,
+                      },
+                      expression: true,
+                    },
+                  },
+                },
+              ],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "jsx",
-                loc: [23, 9, 23, 76],
-                type: {
-                  kind: "string",
-                  loc: [23, 10, 23, 14],
-                  text: "span",
+                type: "JSXText",
+                loc: {
+                  start: { line: 23, column: 8 },
+                  end: { line: 23, column: 8 },
                 },
-                attributes: [
-                  {
-                    name: "style",
-                    initializer: {
-                      kind: "string",
-                      loc: [23, 21, 23, 39],
-                      text: "font-weight: 700",
-                    },
-                  },
-                ],
-                children: [
-                  {
-                    kind: "?:",
-                    loc: [23, 41, 23, 68],
-                    condition: {
-                      kind: "binop",
-                      loc: [23, 41, 23, 56],
-                      left: {
-                        kind: "()",
-                        loc: [23, 41, 23, 52],
-                        expression: {
-                          kind: ".",
-                          loc: [23, 41, 23, 50],
-                          expression: {
-                            kind: "id",
-                            loc: [23, 41, 23, 46],
-                            text: "count",
-                            bindingKey: "count$7huprcub5nk3$0",
-                          },
-                          name: "get",
-                        },
-                        arguments: [],
-                      },
-                      operatorToken: ">",
-                      right: {
-                        kind: "number",
-                        loc: [23, 55, 23, 56],
-                        value: 0,
-                      },
-                    },
-                    whenTrue: {
-                      kind: "string",
-                      loc: [23, 59, 23, 62],
-                      text: "\u2611",
-                    },
-                    whenFalse: {
-                      kind: "string",
-                      loc: [23, 65, 23, 68],
-                      text: "\u2610",
-                    },
-                  },
-                ],
+                value: "\n        ",
+                raw: "\n        ",
               },
               {
-                kind: "jsx",
-                loc: [24, 9, 24, 59],
-                type: {
-                  kind: "string",
-                  loc: [24, 10, 24, 14],
-                  text: "span",
+                type: "JSXElement",
+                loc: {
+                  start: { line: 23, column: 8 },
+                  end: { line: 23, column: 75 },
                 },
-                attributes: [],
-                children: [
-                  {
-                    kind: "binop",
-                    loc: [24, 16, 24, 51],
-                    left: {
-                      kind: "binop",
-                      loc: [24, 16, 24, 40],
-                      left: {
-                        kind: "string",
-                        loc: [24, 16, 24, 26],
-                        text: "pressed ",
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 23, column: 8 },
+                    end: { line: 23, column: 39 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 23, column: 9 },
+                      end: { line: 23, column: 13 },
+                    },
+                    name: "span",
+                  },
+                  attributes: [
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 23, column: 14 },
+                        end: { line: 23, column: 38 },
                       },
-                      operatorToken: "+",
-                      right: {
-                        kind: "()",
-                        loc: [24, 29, 24, 40],
-                        expression: {
-                          kind: ".",
-                          loc: [24, 29, 24, 38],
-                          expression: {
-                            kind: "id",
-                            loc: [24, 29, 24, 34],
-                            text: "count",
-                            bindingKey: "count$7huprcub5nk3$0",
-                          },
-                          name: "get",
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 23, column: 14 },
+                          end: { line: 23, column: 19 },
                         },
-                        arguments: [],
+                        name: "style",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 23, column: 20 },
+                          end: { line: 23, column: 38 },
+                        },
+                        value: "font-weight: 700",
                       },
                     },
-                    operatorToken: "+",
-                    right: {
-                      kind: "string",
-                      loc: [24, 43, 24, 51],
-                      text: " times",
+                  ],
+                  selfClosing: false,
+                },
+                children: [
+                  {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 23, column: 39 },
+                      end: { line: 23, column: 68 },
+                    },
+                    expression: {
+                      type: "ConditionalExpression",
+                      loc: {
+                        start: { line: 23, column: 40 },
+                        end: { line: 23, column: 67 },
+                      },
+                      test: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 23, column: 40 },
+                          end: { line: 23, column: 55 },
+                        },
+                        operator: ">",
+                        left: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 23, column: 40 },
+                            end: { line: 23, column: 51 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 23, column: 40 },
+                              end: { line: 23, column: 49 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 23, column: 40 },
+                                end: { line: 23, column: 45 },
+                              },
+                              name: "count",
+                              bindingKey: "count$7huprcub5nk3$0",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 23, column: 46 },
+                                end: { line: 23, column: 49 },
+                              },
+                              name: "get",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [],
+                          optional: false,
+                        },
+                        right: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 23, column: 54 },
+                            end: { line: 23, column: 55 },
+                          },
+                          value: 0,
+                        },
+                      },
+                      consequent: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 23, column: 58 },
+                          end: { line: 23, column: 61 },
+                        },
+                        value: "\u2611",
+                      },
+                      alternate: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 23, column: 64 },
+                          end: { line: 23, column: 67 },
+                        },
+                        value: "\u2610",
+                      },
                     },
                   },
                 ],
+                closingElement: {
+                  type: "JSXClosingElement",
+                  loc: {
+                    start: { line: 23, column: 68 },
+                    end: { line: 23, column: 75 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 23, column: 70 },
+                      end: { line: 23, column: 74 },
+                    },
+                    name: "span",
+                  },
+                },
+              },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 24, column: 8 },
+                  end: { line: 24, column: 8 },
+                },
+                value: "\n        ",
+                raw: "\n        ",
+              },
+              {
+                type: "JSXElement",
+                loc: {
+                  start: { line: 24, column: 8 },
+                  end: { line: 24, column: 58 },
+                },
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 24, column: 8 },
+                    end: { line: 24, column: 14 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 24, column: 9 },
+                      end: { line: 24, column: 13 },
+                    },
+                    name: "span",
+                  },
+                  attributes: [],
+                  selfClosing: false,
+                },
+                children: [
+                  {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 24, column: 14 },
+                      end: { line: 24, column: 51 },
+                    },
+                    expression: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 24, column: 15 },
+                        end: { line: 24, column: 50 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 24, column: 15 },
+                          end: { line: 24, column: 39 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 24, column: 15 },
+                            end: { line: 24, column: 25 },
+                          },
+                          value: "pressed ",
+                        },
+                        right: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 24, column: 28 },
+                            end: { line: 24, column: 39 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 24, column: 28 },
+                              end: { line: 24, column: 37 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 24, column: 28 },
+                                end: { line: 24, column: 33 },
+                              },
+                              name: "count",
+                              bindingKey: "count$7huprcub5nk3$0",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 24, column: 34 },
+                                end: { line: 24, column: 37 },
+                              },
+                              name: "get",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [],
+                          optional: false,
+                        },
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 24, column: 42 },
+                          end: { line: 24, column: 50 },
+                        },
+                        value: " times",
+                      },
+                    },
+                  },
+                ],
+                closingElement: {
+                  type: "JSXClosingElement",
+                  loc: {
+                    start: { line: 24, column: 51 },
+                    end: { line: 24, column: 58 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 24, column: 53 },
+                      end: { line: 24, column: 57 },
+                    },
+                    name: "span",
+                  },
+                },
+              },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 25, column: 6 },
+                  end: { line: 25, column: 6 },
+                },
+                value: "\n      ",
+                raw: "\n      ",
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 25, column: 6 },
+                end: { line: 25, column: 15 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 25, column: 8 },
+                  end: { line: 25, column: 14 },
+                },
+                name: "button",
+              },
+            },
           },
         },
       ],

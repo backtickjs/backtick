@@ -1,9 +1,9 @@
-import { type SourceLocation, version } from "@backtickjs/client-script";
+import { version } from "@backtickjs/client-script";
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
-import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
-import type { ClientScript } from "./parseFile.js";
+import { arrow, call, iife, object } from "./nodeFactory.js";
+import { type ClientScript, sourceLocation } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { bodyKind } from "./bodyKind.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
@@ -92,14 +92,11 @@ export function rewriteScript(
     start: sourceNode.getStart(sourceFile),
     end: sourceNode.getEnd(),
   };
-  const from = sourceFile.getLineAndCharacterOfPosition(scriptRange.start);
-  const to = sourceFile.getLineAndCharacterOfPosition(scriptRange.end);
-  const scriptLocation: SourceLocation = [
-    from.line,
-    from.character,
-    to.line,
-    to.character,
-  ];
+  const scriptLocation = sourceLocation(
+    sourceFile,
+    scriptRange.start,
+    scriptRange.end,
+  );
 
   const metadata = ts.factory.createObjectLiteralExpression(
     [
@@ -161,12 +158,12 @@ export function rewriteScript(
   sourceMaps.set(virtual, scriptRange);
 
   const runtime = call(ts, "cs", "create", [
-    sourceLoc(ts, scriptLocation),
+    object(ts, scriptLocation),
     metadata,
     // The body behind a thunk: one `cs` inside a host function makes a script
-    // per call, and the bundler parses one per source location, so the nodes
+    // per call, and the bundler reads one per source location, so the nodes
     // are built when they are first read rather than at every call.
-    arrow(ts, [], rewritten.runtime as ts.Expression),
+    arrow(ts, [], object(ts, rewritten.runtime)),
   ]);
 
   return {

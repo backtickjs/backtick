@@ -8,7 +8,7 @@ it("reservedKeySplice", async (t) => {
     t,
     "reservedKeySplice",
     cs.create(
-      [8, 46, 8, 69],
+      { start: { line: 8, column: 45 }, end: { line: 8, column: 68 } },
       {
         version: "0.0.0",
         filePath: "objects/reserved-key-splice.test.tsx",
@@ -17,8 +17,8 @@ it("reservedKeySplice", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "splice",
-        loc: [8, 49, 8, 68],
+        type: "Splice",
+        loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 67 } },
         key: "$0splice0",
       }),
     ),

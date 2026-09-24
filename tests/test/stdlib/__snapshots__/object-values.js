@@ -8,7 +8,7 @@ it("objectValues", async (t) => {
     t,
     "objectValues",
     cs.create(
-      [11, 5, 17, 7],
+      { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/object-values.test.tsx",
@@ -17,159 +17,305 @@ it("objectValues", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 17, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 12, column: 43 },
+            },
             kind: "const",
-            loc: [12, 7, 12, 44],
-            name: {
-              kind: "id",
-              loc: [12, 13, 12, 19],
-              text: "prices",
-              bindingKey: "prices$1lmwvcf4zc2ir$0",
-            },
-            initializer: {
-              kind: "obj",
-              loc: [12, 22, 12, 43],
-              properties: [
-                {
-                  kind: ":",
-                  loc: [12, 24, 12, 32],
-                  name: {
-                    kind: "string",
-                    loc: [12, 24, 12, 29],
-                    text: "apple",
-                  },
-                  initializer: {
-                    kind: "number",
-                    loc: [12, 31, 12, 32],
-                    value: 1,
-                  },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 12, column: 12 },
+                  end: { line: 12, column: 42 },
                 },
-                {
-                  kind: ":",
-                  loc: [12, 34, 12, 41],
-                  name: {
-                    kind: "string",
-                    loc: [12, 34, 12, 38],
-                    text: "pear",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 12 },
+                    end: { line: 12, column: 18 },
                   },
-                  initializer: {
-                    kind: "number",
-                    loc: [12, 40, 12, 41],
-                    value: 2,
-                  },
+                  name: "prices",
+                  bindingKey: "prices$1lmwvcf4zc2ir$0",
                 },
-              ],
-            },
+                init: {
+                  type: "ObjectExpression",
+                  loc: {
+                    start: { line: 12, column: 21 },
+                    end: { line: 12, column: 42 },
+                  },
+                  properties: [
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 12, column: 23 },
+                        end: { line: 12, column: 31 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 23 },
+                          end: { line: 12, column: 28 },
+                        },
+                        name: "apple",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 30 },
+                          end: { line: 12, column: 31 },
+                        },
+                        value: 1,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                    {
+                      type: "Property",
+                      loc: {
+                        start: { line: 12, column: 33 },
+                        end: { line: 12, column: 40 },
+                      },
+                      key: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 12, column: 33 },
+                          end: { line: 12, column: 37 },
+                        },
+                        name: "pear",
+                      },
+                      value: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 12, column: 39 },
+                          end: { line: 12, column: 40 },
+                        },
+                        value: 2,
+                      },
+                      kind: "init",
+                      computed: false,
+                      method: false,
+                      shorthand: false,
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [13, 7, 16, 9],
-            expression: {
-              kind: "obj",
-              loc: [13, 14, 16, 8],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 13, column: 6 },
+              end: { line: 16, column: 8 },
+            },
+            argument: {
+              type: "ObjectExpression",
+              loc: {
+                start: { line: 13, column: 13 },
+                end: { line: 16, column: 7 },
+              },
               properties: [
                 {
-                  kind: ":",
-                  loc: [14, 9, 14, 38],
-                  name: {
-                    kind: "string",
-                    loc: [14, 9, 14, 15],
-                    text: "values",
+                  type: "Property",
+                  loc: {
+                    start: { line: 14, column: 8 },
+                    end: { line: 14, column: 37 },
                   },
-                  initializer: {
-                    kind: "()",
-                    loc: [14, 17, 14, 38],
-                    expression: {
-                      kind: ".",
-                      loc: [14, 17, 14, 30],
-                      expression: {
-                        kind: "bltn",
-                        loc: [14, 17, 14, 23],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 14, column: 8 },
+                      end: { line: 14, column: 14 },
+                    },
+                    name: "values",
+                  },
+                  value: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 14, column: 16 },
+                      end: { line: 14, column: 37 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 14, column: 16 },
+                        end: { line: 14, column: 29 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 16 },
+                          end: { line: 14, column: 22 },
+                        },
                         name: "Object",
                       },
-                      name: "values",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 23 },
+                          end: { line: 14, column: 29 },
+                        },
+                        name: "values",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "id",
-                        loc: [14, 31, 14, 37],
-                        text: "prices",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 14, column: 30 },
+                          end: { line: 14, column: 36 },
+                        },
+                        name: "prices",
                         bindingKey: "prices$1lmwvcf4zc2ir$0",
                       },
                     ],
+                    optional: false,
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
                 {
-                  kind: ":",
-                  loc: [15, 9, 15, 78],
-                  name: {
-                    kind: "string",
-                    loc: [15, 9, 15, 14],
-                    text: "holds",
+                  type: "Property",
+                  loc: {
+                    start: { line: 15, column: 8 },
+                    end: { line: 15, column: 77 },
                   },
-                  initializer: {
-                    kind: "arr",
-                    loc: [15, 16, 15, 78],
+                  key: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 13 },
+                    },
+                    name: "holds",
+                  },
+                  value: {
+                    type: "ArrayExpression",
+                    loc: {
+                      start: { line: 15, column: 15 },
+                      end: { line: 15, column: 77 },
+                    },
                     elements: [
                       {
-                        kind: "()",
-                        loc: [15, 17, 15, 46],
-                        expression: {
-                          kind: ".",
-                          loc: [15, 17, 15, 30],
-                          expression: {
-                            kind: "bltn",
-                            loc: [15, 17, 15, 23],
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 15, column: 16 },
+                          end: { line: 15, column: 45 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 15, column: 16 },
+                            end: { line: 15, column: 29 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 16 },
+                              end: { line: 15, column: 22 },
+                            },
                             name: "Object",
                           },
-                          name: "hasOwn",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 23 },
+                              end: { line: 15, column: 29 },
+                            },
+                            name: "hasOwn",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "id",
-                            loc: [15, 31, 15, 37],
-                            text: "prices",
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 30 },
+                              end: { line: 15, column: 36 },
+                            },
+                            name: "prices",
                             bindingKey: "prices$1lmwvcf4zc2ir$0",
                           },
                           {
-                            kind: "string",
-                            loc: [15, 39, 15, 45],
-                            text: "pear",
+                            type: "Literal",
+                            loc: {
+                              start: { line: 15, column: 38 },
+                              end: { line: 15, column: 44 },
+                            },
+                            value: "pear",
                           },
                         ],
+                        optional: false,
                       },
                       {
-                        kind: "()",
-                        loc: [15, 48, 15, 77],
-                        expression: {
-                          kind: ".",
-                          loc: [15, 48, 15, 61],
-                          expression: {
-                            kind: "bltn",
-                            loc: [15, 48, 15, 54],
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 15, column: 47 },
+                          end: { line: 15, column: 76 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 15, column: 47 },
+                            end: { line: 15, column: 60 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 47 },
+                              end: { line: 15, column: 53 },
+                            },
                             name: "Object",
                           },
-                          name: "hasOwn",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 54 },
+                              end: { line: 15, column: 60 },
+                            },
+                            name: "hasOwn",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "id",
-                            loc: [15, 62, 15, 68],
-                            text: "prices",
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 15, column: 61 },
+                              end: { line: 15, column: 67 },
+                            },
+                            name: "prices",
                             bindingKey: "prices$1lmwvcf4zc2ir$0",
                           },
                           {
-                            kind: "string",
-                            loc: [15, 70, 15, 76],
-                            text: "plum",
+                            type: "Literal",
+                            loc: {
+                              start: { line: 15, column: 69 },
+                              end: { line: 15, column: 75 },
+                            },
+                            value: "plum",
                           },
                         ],
+                        optional: false,
                       },
                     ],
                   },
+                  kind: "init",
+                  computed: false,
+                  method: false,
+                  shorthand: false,
                 },
               ],
             },

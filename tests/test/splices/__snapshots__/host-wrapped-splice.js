@@ -14,7 +14,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // wrong.
 function wrap(start) {
   return cs.create(
-    [17, 10, 23, 5],
+    { start: { line: 17, column: 9 }, end: { line: 23, column: 4 } },
     {
       version: "0.0.0",
       filePath: "splices/host-wrapped-splice.test.tsx",
@@ -24,7 +24,7 @@ function wrap(start) {
         $0splice0: {
           value: foo(
             cs.create(
-              [19, 18, 22, 7],
+              { start: { line: 19, column: 17 }, end: { line: 22, column: 6 } },
               {
                 version: "0.0.0",
                 filePath: "splices/host-wrapped-splice.test.tsx",
@@ -33,7 +33,10 @@ function wrap(start) {
                   $0splice0: {
                     value: same(
                       cs.create(
-                        [21, 30, 21, 39],
+                        {
+                          start: { line: 21, column: 29 },
+                          end: { line: 21, column: 38 },
+                        },
                         {
                           version: "0.0.0",
                           filePath: "splices/host-wrapped-splice.test.tsx",
@@ -42,9 +45,12 @@ function wrap(start) {
                           captures: ["outer$zqr0jsdf8ub6$0"],
                         },
                         () => ({
-                          kind: "id",
-                          loc: [21, 33, 21, 38],
-                          text: "outer",
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 21, column: 32 },
+                            end: { line: 21, column: 37 },
+                          },
+                          name: "outer",
                           bindingKey: "outer$zqr0jsdf8ub6$0",
                         }),
                       ),
@@ -55,40 +61,74 @@ function wrap(start) {
                 captures: ["outer$zqr0jsdf8ub6$0"],
               },
               () => ({
-                kind: "{}",
-                loc: [19, 21, 22, 6],
-                statements: [
+                type: "BlockStatement",
+                loc: {
+                  start: { line: 19, column: 20 },
+                  end: { line: 22, column: 5 },
+                },
+                body: [
                   {
+                    type: "VariableDeclaration",
+                    loc: {
+                      start: { line: 20, column: 6 },
+                      end: { line: 20, column: 24 },
+                    },
                     kind: "const",
-                    loc: [20, 7, 20, 25],
-                    name: {
-                      kind: "id",
-                      loc: [20, 13, 20, 19],
-                      text: "middle",
-                      bindingKey: "middle$zqr0jsdf8ub6$1",
-                    },
-                    initializer: {
-                      kind: "number",
-                      loc: [20, 22, 20, 24],
-                      value: 10,
-                    },
+                    declarations: [
+                      {
+                        type: "VariableDeclarator",
+                        loc: {
+                          start: { line: 20, column: 12 },
+                          end: { line: 20, column: 23 },
+                        },
+                        id: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 20, column: 12 },
+                            end: { line: 20, column: 18 },
+                          },
+                          name: "middle",
+                          bindingKey: "middle$zqr0jsdf8ub6$1",
+                        },
+                        init: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 20, column: 21 },
+                            end: { line: 20, column: 23 },
+                          },
+                          value: 10,
+                        },
+                      },
+                    ],
                   },
                   {
-                    kind: "return",
-                    loc: [21, 7, 21, 42],
-                    expression: {
-                      kind: "binop",
-                      loc: [21, 14, 21, 41],
+                    type: "ReturnStatement",
+                    loc: {
+                      start: { line: 21, column: 6 },
+                      end: { line: 21, column: 41 },
+                    },
+                    argument: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 21, column: 13 },
+                        end: { line: 21, column: 40 },
+                      },
+                      operator: "+",
                       left: {
-                        kind: "id",
-                        loc: [21, 14, 21, 20],
-                        text: "middle",
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 21, column: 13 },
+                          end: { line: 21, column: 19 },
+                        },
+                        name: "middle",
                         bindingKey: "middle$zqr0jsdf8ub6$1",
                       },
-                      operatorToken: "+",
                       right: {
-                        kind: "splice",
-                        loc: [21, 23, 21, 41],
+                        type: "Splice",
+                        loc: {
+                          start: { line: 21, column: 22 },
+                          end: { line: 21, column: 40 },
+                        },
                         key: "$0splice0",
                       },
                     },
@@ -103,30 +143,52 @@ function wrap(start) {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [17, 13, 23, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 17, column: 12 }, end: { line: 23, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 18, column: 4 },
+            end: { line: 18, column: 25 },
+          },
           kind: "const",
-          loc: [18, 5, 18, 26],
-          name: {
-            kind: "id",
-            loc: [18, 11, 18, 16],
-            text: "outer",
-            bindingKey: "outer$zqr0jsdf8ub6$0",
-          },
-          initializer: {
-            kind: "splice",
-            loc: [18, 19, 18, 25],
-            key: "$start",
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 18, column: 10 },
+                end: { line: 18, column: 24 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 18, column: 10 },
+                  end: { line: 18, column: 15 },
+                },
+                name: "outer",
+                bindingKey: "outer$zqr0jsdf8ub6$0",
+              },
+              init: {
+                type: "Splice",
+                loc: {
+                  start: { line: 18, column: 18 },
+                  end: { line: 18, column: 24 },
+                },
+                key: "$start",
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [19, 5, 22, 10],
-          expression: {
-            kind: "splice",
-            loc: [19, 12, 22, 9],
+          type: "ReturnStatement",
+          loc: { start: { line: 19, column: 4 }, end: { line: 22, column: 9 } },
+          argument: {
+            type: "Splice",
+            loc: {
+              start: { line: 19, column: 11 },
+              end: { line: 22, column: 8 },
+            },
             key: "$0splice0",
           },
         },
@@ -136,7 +198,7 @@ function wrap(start) {
 }
 function foo(start) {
   return cs.create(
-    [27, 10, 27, 24],
+    { start: { line: 27, column: 9 }, end: { line: 27, column: 23 } },
     {
       version: "0.0.0",
       filePath: "splices/host-wrapped-splice.test.tsx",
@@ -145,17 +207,17 @@ function foo(start) {
       captures: [],
     },
     () => ({
-      kind: "binop",
-      loc: [27, 13, 27, 23],
+      type: "BinaryExpression",
+      loc: { start: { line: 27, column: 12 }, end: { line: 27, column: 22 } },
+      operator: "+",
       left: {
-        kind: "splice",
-        loc: [27, 13, 27, 19],
+        type: "Splice",
+        loc: { start: { line: 27, column: 12 }, end: { line: 27, column: 18 } },
         key: "$start",
       },
-      operatorToken: "+",
       right: {
-        kind: "number",
-        loc: [27, 22, 27, 23],
+        type: "Literal",
+        loc: { start: { line: 27, column: 21 }, end: { line: 27, column: 22 } },
         value: 1,
       },
     }),
@@ -169,7 +231,7 @@ it("hostWrappedSplice", async (t) => {
     t,
     "hostWrappedSplice",
     cs.create(
-      [38, 5, 38, 40],
+      { start: { line: 38, column: 4 }, end: { line: 38, column: 39 } },
       {
         version: "0.0.0",
         filePath: "splices/host-wrapped-splice.test.tsx",
@@ -178,7 +240,10 @@ it("hostWrappedSplice", async (t) => {
           $0splice0: {
             value: wrap(
               cs.create(
-                [38, 15, 38, 20],
+                {
+                  start: { line: 38, column: 14 },
+                  end: { line: 38, column: 19 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/host-wrapped-splice.test.tsx",
@@ -187,8 +252,11 @@ it("hostWrappedSplice", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [38, 18, 38, 19],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 38, column: 17 },
+                    end: { line: 38, column: 18 },
+                  },
                   value: 1,
                 }),
               ),
@@ -198,7 +266,10 @@ it("hostWrappedSplice", async (t) => {
           $0splice1: {
             value: wrap(
               cs.create(
-                [38, 32, 38, 37],
+                {
+                  start: { line: 38, column: 31 },
+                  end: { line: 38, column: 36 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "splices/host-wrapped-splice.test.tsx",
@@ -207,8 +278,11 @@ it("hostWrappedSplice", async (t) => {
                   captures: [],
                 },
                 () => ({
-                  kind: "number",
-                  loc: [38, 35, 38, 36],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 38, column: 34 },
+                    end: { line: 38, column: 35 },
+                  },
                   value: 2,
                 }),
               ),
@@ -219,17 +293,23 @@ it("hostWrappedSplice", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "binop",
-        loc: [38, 8, 38, 39],
+        type: "BinaryExpression",
+        loc: { start: { line: 38, column: 7 }, end: { line: 38, column: 38 } },
+        operator: "+",
         left: {
-          kind: "splice",
-          loc: [38, 8, 38, 22],
+          type: "Splice",
+          loc: {
+            start: { line: 38, column: 7 },
+            end: { line: 38, column: 21 },
+          },
           key: "$0splice0",
         },
-        operatorToken: "+",
         right: {
-          kind: "splice",
-          loc: [38, 25, 38, 39],
+          type: "Splice",
+          loc: {
+            start: { line: 38, column: 24 },
+            end: { line: 38, column: 38 },
+          },
           key: "$0splice1",
         },
       }),

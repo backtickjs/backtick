@@ -10,7 +10,7 @@ it("arrayCopyingMembers", async (t) => {
     t,
     "arrayCopyingMembers",
     cs.create(
-      [13, 5, 30, 7],
+      { start: { line: 13, column: 4 }, end: { line: 30, column: 6 } },
       {
         version: "0.0.0",
         filePath: "stdlib/array-copying-members.test.tsx",
@@ -19,386 +19,729 @@ it("arrayCopyingMembers", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [13, 8, 30, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 13, column: 7 }, end: { line: 30, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 14, column: 6 },
+              end: { line: 14, column: 29 },
+            },
             kind: "const",
-            loc: [14, 7, 14, 30],
-            name: {
-              kind: "id",
-              loc: [14, 13, 14, 17],
-              text: "rows",
-              bindingKey: "rows$1o1nlczam5nsr$0",
-            },
-            initializer: {
-              kind: "arr",
-              loc: [14, 20, 14, 29],
-              elements: [
-                {
-                  kind: "number",
-                  loc: [14, 21, 14, 22],
-                  value: 3,
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 14, column: 12 },
+                  end: { line: 14, column: 28 },
                 },
-                {
-                  kind: "number",
-                  loc: [14, 24, 14, 25],
-                  value: 1,
-                },
-                {
-                  kind: "number",
-                  loc: [14, 27, 14, 28],
-                  value: 2,
-                },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [15, 7, 15, 53],
-            name: {
-              kind: "id",
-              loc: [15, 13, 15, 19],
-              text: "sorted",
-              bindingKey: "sorted$1o1nlczam5nsr$1",
-            },
-            initializer: {
-              kind: "()",
-              loc: [15, 22, 15, 52],
-              expression: {
-                kind: ".",
-                loc: [15, 22, 15, 35],
-                expression: {
-                  kind: "id",
-                  loc: [15, 22, 15, 26],
-                  text: "rows",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 14, column: 12 },
+                    end: { line: 14, column: 16 },
+                  },
+                  name: "rows",
                   bindingKey: "rows$1o1nlczam5nsr$0",
                 },
-                name: "toSorted",
-              },
-              arguments: [
-                {
-                  kind: "=>",
-                  loc: [15, 36, 15, 51],
-                  parameters: [
+                init: {
+                  type: "ArrayExpression",
+                  loc: {
+                    start: { line: 14, column: 19 },
+                    end: { line: 14, column: 28 },
+                  },
+                  elements: [
                     {
-                      kind: "param",
-                      loc: [15, 37, 15, 38],
-                      name: {
-                        kind: "id",
-                        loc: [15, 37, 15, 38],
-                        text: "a",
-                        bindingKey: "a$1o1nlczam5nsr$5",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 20 },
+                        end: { line: 14, column: 21 },
                       },
+                      value: 3,
                     },
                     {
-                      kind: "param",
-                      loc: [15, 40, 15, 41],
-                      name: {
-                        kind: "id",
-                        loc: [15, 40, 15, 41],
-                        text: "b",
-                        bindingKey: "b$1o1nlczam5nsr$6",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 23 },
+                        end: { line: 14, column: 24 },
                       },
+                      value: 1,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 14, column: 26 },
+                        end: { line: 14, column: 27 },
+                      },
+                      value: 2,
                     },
                   ],
-                  body: {
-                    kind: "binop",
-                    loc: [15, 46, 15, 51],
-                    left: {
-                      kind: "id",
-                      loc: [15, 46, 15, 47],
-                      text: "a",
-                      bindingKey: "a$1o1nlczam5nsr$5",
-                    },
-                    operatorToken: "-",
-                    right: {
-                      kind: "id",
-                      loc: [15, 50, 15, 51],
-                      text: "b",
-                      bindingKey: "b$1o1nlczam5nsr$6",
-                    },
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 15, column: 6 },
+              end: { line: 15, column: 52 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 15, column: 12 },
+                  end: { line: 15, column: 51 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 15, column: 12 },
+                    end: { line: 15, column: 18 },
                   },
+                  name: "sorted",
+                  bindingKey: "sorted$1o1nlczam5nsr$1",
                 },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [16, 7, 16, 42],
-            name: {
-              kind: "id",
-              loc: [16, 13, 16, 21],
-              text: "reversed",
-              bindingKey: "reversed$1o1nlczam5nsr$2",
-            },
-            initializer: {
-              kind: "()",
-              loc: [16, 24, 16, 41],
-              expression: {
-                kind: ".",
-                loc: [16, 24, 16, 39],
-                expression: {
-                  kind: "id",
-                  loc: [16, 24, 16, 28],
-                  text: "rows",
-                  bindingKey: "rows$1o1nlczam5nsr$0",
-                },
-                name: "toReversed",
-              },
-              arguments: [],
-            },
-          },
-          {
-            kind: "const",
-            loc: [17, 7, 17, 44],
-            name: {
-              kind: "id",
-              loc: [17, 13, 17, 20],
-              text: "spliced",
-              bindingKey: "spliced$1o1nlczam5nsr$3",
-            },
-            initializer: {
-              kind: "()",
-              loc: [17, 23, 17, 43],
-              expression: {
-                kind: ".",
-                loc: [17, 23, 17, 37],
-                expression: {
-                  kind: "id",
-                  loc: [17, 23, 17, 27],
-                  text: "rows",
-                  bindingKey: "rows$1o1nlczam5nsr$0",
-                },
-                name: "toSpliced",
-              },
-              arguments: [
-                {
-                  kind: "number",
-                  loc: [17, 38, 17, 39],
-                  value: 1,
-                },
-                {
-                  kind: "number",
-                  loc: [17, 41, 17, 42],
-                  value: 1,
-                },
-              ],
-            },
-          },
-          {
-            kind: "const",
-            loc: [18, 7, 18, 48],
-            name: {
-              kind: "id",
-              loc: [18, 13, 18, 21],
-              text: "inserted",
-              bindingKey: "inserted$1o1nlczam5nsr$4",
-            },
-            initializer: {
-              kind: "()",
-              loc: [18, 24, 18, 47],
-              expression: {
-                kind: ".",
-                loc: [18, 24, 18, 38],
-                expression: {
-                  kind: "id",
-                  loc: [18, 24, 18, 28],
-                  text: "rows",
-                  bindingKey: "rows$1o1nlczam5nsr$0",
-                },
-                name: "toSpliced",
-              },
-              arguments: [
-                {
-                  kind: "number",
-                  loc: [18, 39, 18, 40],
-                  value: 1,
-                },
-                {
-                  kind: "number",
-                  loc: [18, 42, 18, 43],
-                  value: 0,
-                },
-                {
-                  kind: "number",
-                  loc: [18, 45, 18, 46],
-                  value: 9,
-                },
-              ],
-            },
-          },
-          {
-            kind: "return",
-            loc: [19, 7, 29, 9],
-            expression: {
-              kind: "binop",
-              loc: [20, 9, 28, 23],
-              left: {
-                kind: "binop",
-                loc: [20, 9, 27, 12],
-                left: {
-                  kind: "binop",
-                  loc: [20, 9, 26, 27],
-                  left: {
-                    kind: "binop",
-                    loc: [20, 9, 25, 12],
-                    left: {
-                      kind: "binop",
-                      loc: [20, 9, 24, 26],
-                      left: {
-                        kind: "binop",
-                        loc: [20, 9, 23, 12],
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 15, column: 21 },
+                    end: { line: 15, column: 51 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 15, column: 21 },
+                      end: { line: 15, column: 34 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 21 },
+                        end: { line: 15, column: 25 },
+                      },
+                      name: "rows",
+                      bindingKey: "rows$1o1nlczam5nsr$0",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 26 },
+                        end: { line: 15, column: 34 },
+                      },
+                      name: "toSorted",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 15, column: 35 },
+                        end: { line: 15, column: 50 },
+                      },
+                      params: [
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 36 },
+                            end: { line: 15, column: 37 },
+                          },
+                          name: "a",
+                          bindingKey: "a$1o1nlczam5nsr$5",
+                        },
+                        {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 39 },
+                            end: { line: 15, column: 40 },
+                          },
+                          name: "b",
+                          bindingKey: "b$1o1nlczam5nsr$6",
+                        },
+                      ],
+                      body: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 15, column: 45 },
+                          end: { line: 15, column: 50 },
+                        },
+                        operator: "-",
                         left: {
-                          kind: "binop",
-                          loc: [20, 9, 22, 27],
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 45 },
+                            end: { line: 15, column: 46 },
+                          },
+                          name: "a",
+                          bindingKey: "a$1o1nlczam5nsr$5",
+                        },
+                        right: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 15, column: 49 },
+                            end: { line: 15, column: 50 },
+                          },
+                          name: "b",
+                          bindingKey: "b$1o1nlczam5nsr$6",
+                        },
+                      },
+                      expression: true,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 41 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 16, column: 12 },
+                  end: { line: 16, column: 40 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 12 },
+                    end: { line: 16, column: 20 },
+                  },
+                  name: "reversed",
+                  bindingKey: "reversed$1o1nlczam5nsr$2",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 16, column: 23 },
+                    end: { line: 16, column: 40 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 16, column: 23 },
+                      end: { line: 16, column: 38 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 23 },
+                        end: { line: 16, column: 27 },
+                      },
+                      name: "rows",
+                      bindingKey: "rows$1o1nlczam5nsr$0",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 28 },
+                        end: { line: 16, column: 38 },
+                      },
+                      name: "toReversed",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 17, column: 6 },
+              end: { line: 17, column: 43 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 17, column: 12 },
+                  end: { line: 17, column: 42 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 17, column: 12 },
+                    end: { line: 17, column: 19 },
+                  },
+                  name: "spliced",
+                  bindingKey: "spliced$1o1nlczam5nsr$3",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 17, column: 22 },
+                    end: { line: 17, column: 42 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 17, column: 22 },
+                      end: { line: 17, column: 36 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 17, column: 22 },
+                        end: { line: 17, column: 26 },
+                      },
+                      name: "rows",
+                      bindingKey: "rows$1o1nlczam5nsr$0",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 17, column: 27 },
+                        end: { line: 17, column: 36 },
+                      },
+                      name: "toSpliced",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 17, column: 37 },
+                        end: { line: 17, column: 38 },
+                      },
+                      value: 1,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 17, column: 40 },
+                        end: { line: 17, column: 41 },
+                      },
+                      value: 1,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 47 },
+            },
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 18, column: 12 },
+                  end: { line: 18, column: 46 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 20 },
+                  },
+                  name: "inserted",
+                  bindingKey: "inserted$1o1nlczam5nsr$4",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 18, column: 23 },
+                    end: { line: 18, column: 46 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 18, column: 23 },
+                      end: { line: 18, column: 37 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 23 },
+                        end: { line: 18, column: 27 },
+                      },
+                      name: "rows",
+                      bindingKey: "rows$1o1nlczam5nsr$0",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 18, column: 28 },
+                        end: { line: 18, column: 37 },
+                      },
+                      name: "toSpliced",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 18, column: 38 },
+                        end: { line: 18, column: 39 },
+                      },
+                      value: 1,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 18, column: 41 },
+                        end: { line: 18, column: 42 },
+                      },
+                      value: 0,
+                    },
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 18, column: 44 },
+                        end: { line: 18, column: 45 },
+                      },
+                      value: 9,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 29, column: 8 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 20, column: 8 },
+                end: { line: 28, column: 22 },
+              },
+              operator: "+",
+              left: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 20, column: 8 },
+                  end: { line: 27, column: 11 },
+                },
+                operator: "+",
+                left: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 20, column: 8 },
+                    end: { line: 26, column: 26 },
+                  },
+                  operator: "+",
+                  left: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 20, column: 8 },
+                      end: { line: 25, column: 11 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 20, column: 8 },
+                        end: { line: 24, column: 25 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 20, column: 8 },
+                          end: { line: 23, column: 11 },
+                        },
+                        operator: "+",
+                        left: {
+                          type: "BinaryExpression",
+                          loc: {
+                            start: { line: 20, column: 8 },
+                            end: { line: 22, column: 26 },
+                          },
+                          operator: "+",
                           left: {
-                            kind: "binop",
-                            loc: [20, 9, 21, 12],
+                            type: "BinaryExpression",
+                            loc: {
+                              start: { line: 20, column: 8 },
+                              end: { line: 21, column: 11 },
+                            },
+                            operator: "+",
                             left: {
-                              kind: "()",
-                              loc: [20, 9, 20, 25],
-                              expression: {
-                                kind: ".",
-                                loc: [20, 9, 20, 20],
-                                expression: {
-                                  kind: "id",
-                                  loc: [20, 9, 20, 15],
-                                  text: "sorted",
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 20, column: 8 },
+                                end: { line: 20, column: 24 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 20, column: 8 },
+                                  end: { line: 20, column: 19 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 20, column: 8 },
+                                    end: { line: 20, column: 14 },
+                                  },
+                                  name: "sorted",
                                   bindingKey: "sorted$1o1nlczam5nsr$1",
                                 },
-                                name: "join",
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 20, column: 15 },
+                                    end: { line: 20, column: 19 },
+                                  },
+                                  name: "join",
+                                },
+                                computed: false,
+                                optional: false,
                               },
                               arguments: [
                                 {
-                                  kind: "string",
-                                  loc: [20, 21, 20, 24],
-                                  text: ",",
+                                  type: "Literal",
+                                  loc: {
+                                    start: { line: 20, column: 20 },
+                                    end: { line: 20, column: 23 },
+                                  },
+                                  value: ",",
                                 },
                               ],
+                              optional: false,
                             },
-                            operatorToken: "+",
                             right: {
-                              kind: "string",
-                              loc: [21, 9, 21, 12],
-                              text: "|",
+                              type: "Literal",
+                              loc: {
+                                start: { line: 21, column: 8 },
+                                end: { line: 21, column: 11 },
+                              },
+                              value: "|",
                             },
                           },
-                          operatorToken: "+",
                           right: {
-                            kind: "()",
-                            loc: [22, 9, 22, 27],
-                            expression: {
-                              kind: ".",
-                              loc: [22, 9, 22, 22],
-                              expression: {
-                                kind: "id",
-                                loc: [22, 9, 22, 17],
-                                text: "reversed",
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 22, column: 8 },
+                              end: { line: 22, column: 26 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 22, column: 8 },
+                                end: { line: 22, column: 21 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 22, column: 8 },
+                                  end: { line: 22, column: 16 },
+                                },
+                                name: "reversed",
                                 bindingKey: "reversed$1o1nlczam5nsr$2",
                               },
-                              name: "join",
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 22, column: 17 },
+                                  end: { line: 22, column: 21 },
+                                },
+                                name: "join",
+                              },
+                              computed: false,
+                              optional: false,
                             },
                             arguments: [
                               {
-                                kind: "string",
-                                loc: [22, 23, 22, 26],
-                                text: ",",
+                                type: "Literal",
+                                loc: {
+                                  start: { line: 22, column: 22 },
+                                  end: { line: 22, column: 25 },
+                                },
+                                value: ",",
                               },
                             ],
+                            optional: false,
                           },
                         },
-                        operatorToken: "+",
                         right: {
-                          kind: "string",
-                          loc: [23, 9, 23, 12],
-                          text: "|",
+                          type: "Literal",
+                          loc: {
+                            start: { line: 23, column: 8 },
+                            end: { line: 23, column: 11 },
+                          },
+                          value: "|",
                         },
                       },
-                      operatorToken: "+",
                       right: {
-                        kind: "()",
-                        loc: [24, 9, 24, 26],
-                        expression: {
-                          kind: ".",
-                          loc: [24, 9, 24, 21],
-                          expression: {
-                            kind: "id",
-                            loc: [24, 9, 24, 16],
-                            text: "spliced",
+                        type: "CallExpression",
+                        loc: {
+                          start: { line: 24, column: 8 },
+                          end: { line: 24, column: 25 },
+                        },
+                        callee: {
+                          type: "MemberExpression",
+                          loc: {
+                            start: { line: 24, column: 8 },
+                            end: { line: 24, column: 20 },
+                          },
+                          object: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 24, column: 8 },
+                              end: { line: 24, column: 15 },
+                            },
+                            name: "spliced",
                             bindingKey: "spliced$1o1nlczam5nsr$3",
                           },
-                          name: "join",
+                          property: {
+                            type: "Identifier",
+                            loc: {
+                              start: { line: 24, column: 16 },
+                              end: { line: 24, column: 20 },
+                            },
+                            name: "join",
+                          },
+                          computed: false,
+                          optional: false,
                         },
                         arguments: [
                           {
-                            kind: "string",
-                            loc: [24, 22, 24, 25],
-                            text: ",",
+                            type: "Literal",
+                            loc: {
+                              start: { line: 24, column: 21 },
+                              end: { line: 24, column: 24 },
+                            },
+                            value: ",",
                           },
                         ],
+                        optional: false,
                       },
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "string",
-                      loc: [25, 9, 25, 12],
-                      text: "|",
+                      type: "Literal",
+                      loc: {
+                        start: { line: 25, column: 8 },
+                        end: { line: 25, column: 11 },
+                      },
+                      value: "|",
                     },
                   },
-                  operatorToken: "+",
                   right: {
-                    kind: "()",
-                    loc: [26, 9, 26, 27],
-                    expression: {
-                      kind: ".",
-                      loc: [26, 9, 26, 22],
-                      expression: {
-                        kind: "id",
-                        loc: [26, 9, 26, 17],
-                        text: "inserted",
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 26, column: 8 },
+                      end: { line: 26, column: 26 },
+                    },
+                    callee: {
+                      type: "MemberExpression",
+                      loc: {
+                        start: { line: 26, column: 8 },
+                        end: { line: 26, column: 21 },
+                      },
+                      object: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 26, column: 8 },
+                          end: { line: 26, column: 16 },
+                        },
+                        name: "inserted",
                         bindingKey: "inserted$1o1nlczam5nsr$4",
                       },
-                      name: "join",
+                      property: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 26, column: 17 },
+                          end: { line: 26, column: 21 },
+                        },
+                        name: "join",
+                      },
+                      computed: false,
+                      optional: false,
                     },
                     arguments: [
                       {
-                        kind: "string",
-                        loc: [26, 23, 26, 26],
-                        text: ",",
+                        type: "Literal",
+                        loc: {
+                          start: { line: 26, column: 22 },
+                          end: { line: 26, column: 25 },
+                        },
+                        value: ",",
                       },
                     ],
+                    optional: false,
                   },
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "string",
-                  loc: [27, 9, 27, 12],
-                  text: "|",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 27, column: 8 },
+                    end: { line: 27, column: 11 },
+                  },
+                  value: "|",
                 },
               },
-              operatorToken: "+",
               right: {
-                kind: "()",
-                loc: [28, 9, 28, 23],
-                expression: {
-                  kind: ".",
-                  loc: [28, 9, 28, 18],
-                  expression: {
-                    kind: "id",
-                    loc: [28, 9, 28, 13],
-                    text: "rows",
+                type: "CallExpression",
+                loc: {
+                  start: { line: 28, column: 8 },
+                  end: { line: 28, column: 22 },
+                },
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 28, column: 8 },
+                    end: { line: 28, column: 17 },
+                  },
+                  object: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 28, column: 8 },
+                      end: { line: 28, column: 12 },
+                    },
+                    name: "rows",
                     bindingKey: "rows$1o1nlczam5nsr$0",
                   },
-                  name: "join",
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 28, column: 13 },
+                      end: { line: 28, column: 17 },
+                    },
+                    name: "join",
+                  },
+                  computed: false,
+                  optional: false,
                 },
                 arguments: [
                   {
-                    kind: "string",
-                    loc: [28, 19, 28, 22],
-                    text: ",",
+                    type: "Literal",
+                    loc: {
+                      start: { line: 28, column: 18 },
+                      end: { line: 28, column: 21 },
+                    },
+                    value: ",",
                   },
                 ],
+                optional: false,
               },
             },
           },

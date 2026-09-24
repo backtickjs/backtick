@@ -5,7 +5,7 @@ import { cs, state } from "@backtickjs/core";
 // without returning, has nothing to draw.
 async function Panel() {
   return cs.create(
-    [7, 10, 10, 5],
+    { start: { line: 7, column: 9 }, end: { line: 10, column: 4 } },
     {
       version: "0.0.0",
       filePath: "typecheck-errors/component-answers-action.test.tsx",
@@ -14,56 +14,105 @@ async function Panel() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [7, 13, 10, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 7, column: 12 }, end: { line: 10, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: { start: { line: 8, column: 4 }, end: { line: 8, column: 24 } },
           kind: "const",
-          loc: [8, 5, 8, 25],
-          name: {
-            kind: "id",
-            loc: [8, 11, 8, 12],
-            text: "n",
-            bindingKey: "n$1y32lnuqpkjgj$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [8, 15, 8, 24],
-            expression: {
-              kind: "splice",
-              loc: [8, 15, 8, 21],
-              key: "$state",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 8, column: 10 },
+                end: { line: 8, column: 23 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 8, column: 10 },
+                  end: { line: 8, column: 11 },
+                },
+                name: "n",
+                bindingKey: "n$1y32lnuqpkjgj$0",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 8, column: 14 },
+                  end: { line: 8, column: 23 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 8, column: 14 },
+                    end: { line: 8, column: 20 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 8, column: 21 },
+                      end: { line: 8, column: 22 },
+                    },
+                    value: 2,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
+        },
+        {
+          type: "ExpressionStatement",
+          loc: { start: { line: 9, column: 4 }, end: { line: 9, column: 13 } },
+          expression: {
+            type: "CallExpression",
+            loc: {
+              start: { line: 9, column: 4 },
+              end: { line: 9, column: 12 },
+            },
+            callee: {
+              type: "MemberExpression",
+              loc: {
+                start: { line: 9, column: 4 },
+                end: { line: 9, column: 9 },
+              },
+              object: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 9, column: 4 },
+                  end: { line: 9, column: 5 },
+                },
+                name: "n",
+                bindingKey: "n$1y32lnuqpkjgj$0",
+              },
+              property: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 9, column: 6 },
+                  end: { line: 9, column: 9 },
+                },
+                name: "set",
+              },
+              computed: false,
+              optional: false,
             },
             arguments: [
               {
-                kind: "number",
-                loc: [8, 22, 8, 23],
-                value: 2,
+                type: "Literal",
+                loc: {
+                  start: { line: 9, column: 10 },
+                  end: { line: 9, column: 11 },
+                },
+                value: 3,
               },
             ],
+            optional: false,
           },
-        },
-        {
-          kind: "()",
-          loc: [9, 5, 9, 13],
-          expression: {
-            kind: ".",
-            loc: [9, 5, 9, 10],
-            expression: {
-              kind: "id",
-              loc: [9, 5, 9, 6],
-              text: "n",
-              bindingKey: "n$1y32lnuqpkjgj$0",
-            },
-            name: "set",
-          },
-          arguments: [
-            {
-              kind: "number",
-              loc: [9, 11, 9, 12],
-              value: 3,
-            },
-          ],
         },
       ],
     }),

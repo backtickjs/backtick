@@ -1,33 +1,55 @@
-import type {
-  ClientScriptKind,
-  SourceLocation,
-} from "@backtickjs/client-script";
+import type * as ES from "estree";
 import type ts from "typescript";
 
-/** An AST node as the emitted code spells it: `{ kind: "if", … }`.
- *
- * The compiler writes the bundler's AST directly, so the fields are named
- * rather than positional — a node gaining one is additive, where an argument
- * list gaining one shifts everything after it in code already compiled. The
- * kind goes as the word for it, which reads back without a table to look it
- * up in. */
-export function astNode(
+/** An ESTree node or location as the object literal that builds it. */
+export function object(
   ts: typeof import("typescript"),
-  kind: ClientScriptKind,
-  fields: { [name: string]: ts.Expression },
+  node: ES.Node | ES.SourceLocation,
 ): ts.ObjectLiteralExpression {
-  return ts.factory.createObjectLiteralExpression(
-    [
-      ts.factory.createPropertyAssignment(
-        "kind",
-        ts.factory.createStringLiteral(kind),
-      ),
-      ...Object.entries(fields).map(([name, value]) =>
-        ts.factory.createPropertyAssignment(name, value),
-      ),
-    ],
-    true,
-  );
+  return literal(ts, node) as ts.ObjectLiteralExpression;
+}
+
+function literal(
+  ts: typeof import("typescript"),
+  value: unknown,
+): ts.Expression {
+  if (value === null) {
+    return ts.factory.createNull();
+  }
+  if (typeof value === "boolean") {
+    return value ? ts.factory.createTrue() : ts.factory.createFalse();
+  }
+  if (typeof value === "number") {
+    if (!Number.isFinite(value) || value < 0 || Object.is(value, -0)) {
+      throw new Error(`${value} is not a value a node holds`);
+    }
+    return ts.factory.createNumericLiteral(value);
+  }
+  if (typeof value === "string") {
+    return ts.factory.createStringLiteral(value);
+  }
+  if (Array.isArray(value)) {
+    return ts.factory.createArrayLiteralExpression(
+      value.map((member) => literal(ts, member)),
+      false,
+    );
+  }
+  if (typeof value === "object") {
+    return ts.factory.createObjectLiteralExpression(
+      Object.entries(value)
+        .filter(([, member]) => member !== undefined)
+        .map(([key, member]) =>
+          ts.factory.createPropertyAssignment(
+            /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key)
+              ? key
+              : ts.factory.createStringLiteral(key),
+            literal(ts, member),
+          ),
+        ),
+      false,
+    );
+  }
+  throw new Error(`${typeof value} is not a value a node holds`);
 }
 
 /** <receiver>.<method>(...args) */
@@ -123,16 +145,4 @@ export function constDecl(
   initializer: ts.Expression,
 ): ts.VariableStatement {
   return varDecl(ts, ts.NodeFlags.Const, name, initializer);
-}
-
-// The compiler's positions are 0-based; the emitted tuple is 1-based, the
-// way a stack trace prints them.
-export function sourceLoc(
-  ts: typeof import("typescript"),
-  location: SourceLocation,
-): ts.ArrayLiteralExpression {
-  return ts.factory.createArrayLiteralExpression(
-    location.map((position) => ts.factory.createNumericLiteral(position + 1)),
-    false,
-  );
 }

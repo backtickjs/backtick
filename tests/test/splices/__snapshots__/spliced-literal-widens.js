@@ -23,7 +23,7 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.create(
-      [27, 5, 32, 7],
+      { start: { line: 27, column: 4 }, end: { line: 32, column: 6 } },
       {
         version: "0.0.0",
         filePath: "splices/spliced-literal-widens.test.tsx",
@@ -37,104 +37,214 @@ it("splicedLiteralWidens", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [27, 8, 32, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 27, column: 7 }, end: { line: 32, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 30 },
+            },
             kind: "const",
-            loc: [28, 7, 28, 31],
-            name: {
-              kind: "id",
-              loc: [28, 13, 28, 14],
-              text: "n",
-              bindingKey: "n$323oescdizqb0$0",
-            },
-            initializer: {
-              kind: "()",
-              loc: [28, 17, 28, 30],
-              expression: {
-                kind: "splice",
-                loc: [28, 17, 28, 23],
-                key: "$state",
-              },
-              arguments: [
-                {
-                  kind: "splice",
-                  loc: [28, 24, 28, 29],
-                  key: "$five",
-                },
-              ],
-            },
-          },
-          {
-            kind: "()",
-            loc: [29, 7, 29, 15],
-            expression: {
-              kind: ".",
-              loc: [29, 7, 29, 12],
-              expression: {
-                kind: "id",
-                loc: [29, 7, 29, 8],
-                text: "n",
-                bindingKey: "n$323oescdizqb0$0",
-              },
-              name: "set",
-            },
-            arguments: [
+            declarations: [
               {
-                kind: "number",
-                loc: [29, 13, 29, 14],
-                value: 6,
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 28, column: 12 },
+                  end: { line: 28, column: 29 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 28, column: 12 },
+                    end: { line: 28, column: 13 },
+                  },
+                  name: "n",
+                  bindingKey: "n$323oescdizqb0$0",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 28, column: 16 },
+                    end: { line: 28, column: 29 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 28, column: 16 },
+                      end: { line: 28, column: 22 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
+                    {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 28, column: 23 },
+                        end: { line: 28, column: 28 },
+                      },
+                      key: "$five",
+                    },
+                  ],
+                  optional: false,
+                },
               },
             ],
           },
           {
-            kind: "const",
-            loc: [30, 7, 30, 38],
-            name: {
-              kind: "id",
-              loc: [30, 13, 30, 14],
-              text: "c",
-              bindingKey: "c$323oescdizqb0$1",
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 15 },
             },
-            initializer: {
-              kind: "()",
-              loc: [30, 17, 30, 37],
-              expression: {
-                kind: "splice",
-                loc: [30, 17, 30, 23],
-                key: "$state",
+            expression: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 29, column: 6 },
+                end: { line: 29, column: 14 },
+              },
+              callee: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 29, column: 6 },
+                  end: { line: 29, column: 11 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 29, column: 6 },
+                    end: { line: 29, column: 7 },
+                  },
+                  name: "n",
+                  bindingKey: "n$323oescdizqb0$0",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 29, column: 8 },
+                    end: { line: 29, column: 11 },
+                  },
+                  name: "set",
+                },
+                computed: false,
+                optional: false,
               },
               arguments: [
                 {
-                  kind: "splice",
-                  loc: [30, 24, 30, 36],
-                  key: "$0splice0",
+                  type: "Literal",
+                  loc: {
+                    start: { line: 29, column: 12 },
+                    end: { line: 29, column: 13 },
+                  },
+                  value: 6,
                 },
               ],
+              optional: false,
             },
           },
           {
-            kind: "()",
-            loc: [31, 7, 31, 27],
-            expression: {
-              kind: ".",
-              loc: [31, 7, 31, 12],
-              expression: {
-                kind: "id",
-                loc: [31, 7, 31, 8],
-                text: "c",
-                bindingKey: "c$323oescdizqb0$1",
-              },
-              name: "set",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 30, column: 6 },
+              end: { line: 30, column: 37 },
             },
-            arguments: [
+            kind: "const",
+            declarations: [
               {
-                kind: "splice",
-                loc: [31, 13, 31, 26],
-                key: "$0splice1",
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 30, column: 12 },
+                  end: { line: 30, column: 36 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 30, column: 12 },
+                    end: { line: 30, column: 13 },
+                  },
+                  name: "c",
+                  bindingKey: "c$323oescdizqb0$1",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 30, column: 16 },
+                    end: { line: 30, column: 36 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 30, column: 16 },
+                      end: { line: 30, column: 22 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
+                    {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 30, column: 23 },
+                        end: { line: 30, column: 35 },
+                      },
+                      key: "$0splice0",
+                    },
+                  ],
+                  optional: false,
+                },
               },
             ],
+          },
+          {
+            type: "ExpressionStatement",
+            loc: {
+              start: { line: 31, column: 6 },
+              end: { line: 31, column: 27 },
+            },
+            expression: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 31, column: 6 },
+                end: { line: 31, column: 26 },
+              },
+              callee: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 31, column: 6 },
+                  end: { line: 31, column: 11 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 31, column: 6 },
+                    end: { line: 31, column: 7 },
+                  },
+                  name: "c",
+                  bindingKey: "c$323oescdizqb0$1",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 31, column: 8 },
+                    end: { line: 31, column: 11 },
+                  },
+                  name: "set",
+                },
+                computed: false,
+                optional: false,
+              },
+              arguments: [
+                {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 31, column: 12 },
+                    end: { line: 31, column: 25 },
+                  },
+                  key: "$0splice1",
+                },
+              ],
+              optional: false,
+            },
           },
         ],
       }),

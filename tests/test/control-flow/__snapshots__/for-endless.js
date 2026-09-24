@@ -7,7 +7,7 @@ it("forEndless", async (t) => {
     t,
     "forEndless",
     cs.create(
-      [10, 5, 19, 7],
+      { start: { line: 10, column: 4 }, end: { line: 19, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/for-endless.test.tsx",
@@ -16,89 +16,155 @@ it("forEndless", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [10, 8, 19, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 10, column: 7 }, end: { line: 19, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 11, column: 6 },
+              end: { line: 11, column: 16 },
+            },
             kind: "let",
-            loc: [11, 7, 11, 17],
-            name: {
-              kind: "id",
-              loc: [11, 11, 11, 12],
-              text: "i",
-              bindingKey: "i$3voddrkfnxnd9$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [11, 15, 11, 16],
-              value: 0,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 11, column: 10 },
+                  end: { line: 11, column: 15 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 11, column: 10 },
+                    end: { line: 11, column: 11 },
+                  },
+                  name: "i",
+                  bindingKey: "i$3voddrkfnxnd9$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 11, column: 14 },
+                    end: { line: 11, column: 15 },
+                  },
+                  value: 0,
+                },
+              },
+            ],
           },
           {
-            kind: "for",
-            loc: [12, 7, 17, 8],
-            initializer: null,
-            condition: null,
-            incrementor: null,
-            statement: {
-              kind: "{}",
-              loc: [12, 16, 17, 8],
-              statements: [
+            type: "ForStatement",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 17, column: 7 },
+            },
+            init: null,
+            test: null,
+            update: null,
+            body: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 12, column: 15 },
+                end: { line: 17, column: 7 },
+              },
+              body: [
                 {
-                  kind: "if",
-                  loc: [13, 9, 15, 10],
-                  expression: {
-                    kind: "binop",
-                    loc: [13, 13, 13, 20],
+                  type: "IfStatement",
+                  loc: {
+                    start: { line: 13, column: 8 },
+                    end: { line: 15, column: 9 },
+                  },
+                  test: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 13, column: 12 },
+                      end: { line: 13, column: 19 },
+                    },
+                    operator: "===",
                     left: {
-                      kind: "id",
-                      loc: [13, 13, 13, 14],
-                      text: "i",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 13, column: 12 },
+                        end: { line: 13, column: 13 },
+                      },
+                      name: "i",
                       bindingKey: "i$3voddrkfnxnd9$0",
                     },
-                    operatorToken: "===",
                     right: {
-                      kind: "number",
-                      loc: [13, 19, 13, 20],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 13, column: 18 },
+                        end: { line: 13, column: 19 },
+                      },
                       value: 4,
                     },
                   },
-                  thenStatement: {
-                    kind: "{}",
-                    loc: [13, 22, 15, 10],
-                    statements: [
+                  consequent: {
+                    type: "BlockStatement",
+                    loc: {
+                      start: { line: 13, column: 21 },
+                      end: { line: 15, column: 9 },
+                    },
+                    body: [
                       {
-                        kind: "break",
-                        loc: [14, 11, 14, 17],
+                        type: "BreakStatement",
+                        loc: {
+                          start: { line: 14, column: 10 },
+                          end: { line: 14, column: 16 },
+                        },
+                        label: null,
                       },
                     ],
                   },
-                  elseStatement: null,
+                  alternate: null,
                 },
                 {
-                  kind: "binop",
-                  loc: [16, 9, 16, 18],
-                  left: {
-                    kind: "id",
-                    loc: [16, 9, 16, 10],
-                    text: "i",
-                    bindingKey: "i$3voddrkfnxnd9$0",
+                  type: "ExpressionStatement",
+                  loc: {
+                    start: { line: 16, column: 8 },
+                    end: { line: 16, column: 18 },
                   },
-                  operatorToken: "=",
-                  right: {
-                    kind: "binop",
-                    loc: [16, 13, 16, 18],
+                  expression: {
+                    type: "AssignmentExpression",
+                    loc: {
+                      start: { line: 16, column: 8 },
+                      end: { line: 16, column: 17 },
+                    },
+                    operator: "=",
                     left: {
-                      kind: "id",
-                      loc: [16, 13, 16, 14],
-                      text: "i",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 8 },
+                        end: { line: 16, column: 9 },
+                      },
+                      name: "i",
                       bindingKey: "i$3voddrkfnxnd9$0",
                     },
-                    operatorToken: "+",
                     right: {
-                      kind: "number",
-                      loc: [16, 17, 16, 18],
-                      value: 1,
+                      type: "BinaryExpression",
+                      loc: {
+                        start: { line: 16, column: 12 },
+                        end: { line: 16, column: 17 },
+                      },
+                      operator: "+",
+                      left: {
+                        type: "Identifier",
+                        loc: {
+                          start: { line: 16, column: 12 },
+                          end: { line: 16, column: 13 },
+                        },
+                        name: "i",
+                        bindingKey: "i$3voddrkfnxnd9$0",
+                      },
+                      right: {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 16, column: 16 },
+                          end: { line: 16, column: 17 },
+                        },
+                        value: 1,
+                      },
                     },
                   },
                 },
@@ -106,12 +172,18 @@ it("forEndless", async (t) => {
             },
           },
           {
-            kind: "return",
-            loc: [18, 7, 18, 16],
-            expression: {
-              kind: "id",
-              loc: [18, 14, 18, 15],
-              text: "i",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 15 },
+            },
+            argument: {
+              type: "Identifier",
+              loc: {
+                start: { line: 18, column: 13 },
+                end: { line: 18, column: 14 },
+              },
+              name: "i",
               bindingKey: "i$3voddrkfnxnd9$0",
             },
           },

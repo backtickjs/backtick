@@ -97,7 +97,7 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.create(
-      [111, 12, 128, 7],
+      { start: { line: 111, column: 11 }, end: { line: 128, column: 6 } },
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
@@ -106,235 +106,628 @@ describe("a field's value", () => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [111, 15, 128, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: {
+          start: { line: 111, column: 14 },
+          end: { line: 128, column: 5 },
+        },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 112, column: 6 },
+              end: { line: 112, column: 35 },
+            },
             kind: "const",
-            loc: [112, 7, 112, 36],
-            name: {
-              kind: "id",
-              loc: [112, 13, 112, 17],
-              text: "text",
-              bindingKey: "text$2pi9tt1octht0$0",
-            },
-            initializer: {
-              kind: "()",
-              loc: [112, 20, 112, 35],
-              expression: {
-                kind: "splice",
-                loc: [112, 20, 112, 26],
-                key: "$state",
-              },
-              arguments: [
-                {
-                  kind: "string",
-                  loc: [112, 27, 112, 34],
-                  text: "first",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 112, column: 12 },
+                  end: { line: 112, column: 34 },
                 },
-              ],
-            },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 112, column: 12 },
+                    end: { line: 112, column: 16 },
+                  },
+                  name: "text",
+                  bindingKey: "text$2pi9tt1octht0$0",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 112, column: 19 },
+                    end: { line: 112, column: 34 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 112, column: 19 },
+                      end: { line: 112, column: 25 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 112, column: 26 },
+                        end: { line: 112, column: 33 },
+                      },
+                      value: "first",
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
           },
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 113, column: 6 },
+              end: { line: 113, column: 33 },
+            },
             kind: "const",
-            loc: [113, 7, 113, 34],
-            name: {
-              kind: "id",
-              loc: [113, 13, 113, 17],
-              text: "isOn",
-              bindingKey: "isOn$2pi9tt1octht0$1",
-            },
-            initializer: {
-              kind: "()",
-              loc: [113, 20, 113, 33],
-              expression: {
-                kind: "splice",
-                loc: [113, 20, 113, 26],
-                key: "$state",
-              },
-              arguments: [
-                {
-                  kind: "false",
-                  loc: [113, 27, 113, 32],
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 113, column: 12 },
+                  end: { line: 113, column: 32 },
                 },
-              ],
-            },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 113, column: 12 },
+                    end: { line: 113, column: 16 },
+                  },
+                  name: "isOn",
+                  bindingKey: "isOn$2pi9tt1octht0$1",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 113, column: 19 },
+                    end: { line: 113, column: 32 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 113, column: 19 },
+                      end: { line: 113, column: 25 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
+                    {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 113, column: 26 },
+                        end: { line: 113, column: 31 },
+                      },
+                      value: false,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [114, 7, 127, 9],
-            expression: {
-              kind: "jsx",
-              loc: [115, 9, 126, 15],
-              type: {
-                kind: "string",
-                loc: [115, 10, 115, 13],
-                text: "div",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 114, column: 6 },
+              end: { line: 127, column: 8 },
+            },
+            argument: {
+              type: "JSXElement",
+              loc: {
+                start: { line: 115, column: 8 },
+                end: { line: 126, column: 14 },
               },
-              attributes: [],
+              openingElement: {
+                type: "JSXOpeningElement",
+                loc: {
+                  start: { line: 115, column: 8 },
+                  end: { line: 115, column: 13 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 115, column: 9 },
+                    end: { line: 115, column: 12 },
+                  },
+                  name: "div",
+                },
+                attributes: [],
+                selfClosing: false,
+              },
               children: [
                 {
-                  kind: "jsx",
-                  loc: [116, 11, 116, 57],
-                  type: {
-                    kind: "string",
-                    loc: [116, 12, 116, 17],
-                    text: "input",
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 116, column: 10 },
+                    end: { line: 116, column: 10 },
                   },
-                  attributes: [
-                    {
-                      name: "aria-label",
-                      initializer: {
-                        kind: "string",
-                        loc: [116, 29, 116, 35],
-                        text: "text",
-                      },
-                    },
-                    {
-                      name: "value",
-                      initializer: {
-                        kind: "()",
-                        loc: [116, 43, 116, 53],
-                        expression: {
-                          kind: ".",
-                          loc: [116, 43, 116, 51],
-                          expression: {
-                            kind: "id",
-                            loc: [116, 43, 116, 47],
-                            text: "text",
-                            bindingKey: "text$2pi9tt1octht0$0",
-                          },
-                          name: "get",
-                        },
-                        arguments: [],
-                      },
-                    },
-                  ],
-                  children: [],
+                  value: "\n          ",
+                  raw: "\n          ",
                 },
                 {
-                  kind: "jsx",
-                  loc: [117, 11, 117, 73],
-                  type: {
-                    kind: "string",
-                    loc: [117, 12, 117, 17],
-                    text: "input",
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 116, column: 10 },
+                    end: { line: 116, column: 56 },
                   },
-                  attributes: [
-                    {
-                      name: "type",
-                      initializer: {
-                        kind: "string",
-                        loc: [117, 23, 117, 33],
-                        text: "checkbox",
-                      },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 116, column: 10 },
+                      end: { line: 116, column: 56 },
                     },
-                    {
-                      name: "aria-label",
-                      initializer: {
-                        kind: "string",
-                        loc: [117, 45, 117, 49],
-                        text: "on",
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 116, column: 11 },
+                        end: { line: 116, column: 16 },
                       },
+                      name: "input",
                     },
-                    {
-                      name: "checked",
-                      initializer: {
-                        kind: "()",
-                        loc: [117, 59, 117, 69],
-                        expression: {
-                          kind: ".",
-                          loc: [117, 59, 117, 67],
-                          expression: {
-                            kind: "id",
-                            loc: [117, 59, 117, 63],
-                            text: "isOn",
-                            bindingKey: "isOn$2pi9tt1octht0$1",
-                          },
-                          name: "get",
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 116, column: 17 },
+                          end: { line: 116, column: 34 },
                         },
-                        arguments: [],
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 116, column: 17 },
+                            end: { line: 116, column: 27 },
+                          },
+                          name: "aria-label",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 116, column: 28 },
+                            end: { line: 116, column: 34 },
+                          },
+                          value: "text",
+                        },
                       },
-                    },
-                  ],
-                  children: [],
-                },
-                {
-                  kind: "jsx",
-                  loc: [118, 11, 125, 20],
-                  type: {
-                    kind: "string",
-                    loc: [118, 12, 118, 18],
-                    text: "button",
-                  },
-                  attributes: [
-                    {
-                      name: "onclick",
-                      initializer: {
-                        kind: "=>",
-                        loc: [119, 22, 122, 14],
-                        parameters: [],
-                        body: {
-                          kind: "{}",
-                          loc: [119, 28, 122, 14],
-                          statements: [
-                            {
-                              kind: "()",
-                              loc: [120, 15, 120, 33],
-                              expression: {
-                                kind: ".",
-                                loc: [120, 15, 120, 23],
-                                expression: {
-                                  kind: "id",
-                                  loc: [120, 15, 120, 19],
-                                  text: "text",
-                                  bindingKey: "text$2pi9tt1octht0$0",
-                                },
-                                name: "set",
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 116, column: 35 },
+                          end: { line: 116, column: 53 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 116, column: 35 },
+                            end: { line: 116, column: 40 },
+                          },
+                          name: "value",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 116, column: 41 },
+                            end: { line: 116, column: 53 },
+                          },
+                          expression: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 116, column: 42 },
+                              end: { line: 116, column: 52 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 116, column: 42 },
+                                end: { line: 116, column: 50 },
                               },
-                              arguments: [
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 116, column: 42 },
+                                  end: { line: 116, column: 46 },
+                                },
+                                name: "text",
+                                bindingKey: "text$2pi9tt1octht0$0",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 116, column: 47 },
+                                  end: { line: 116, column: 50 },
+                                },
+                                name: "get",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            arguments: [],
+                            optional: false,
+                          },
+                        },
+                      },
+                    ],
+                    selfClosing: true,
+                  },
+                  children: [],
+                  closingElement: null,
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 117, column: 10 },
+                    end: { line: 117, column: 10 },
+                  },
+                  value: "\n          ",
+                  raw: "\n          ",
+                },
+                {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 117, column: 10 },
+                    end: { line: 117, column: 72 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 117, column: 10 },
+                      end: { line: 117, column: 72 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 117, column: 11 },
+                        end: { line: 117, column: 16 },
+                      },
+                      name: "input",
+                    },
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 117, column: 17 },
+                          end: { line: 117, column: 32 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 117, column: 17 },
+                            end: { line: 117, column: 21 },
+                          },
+                          name: "type",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 117, column: 22 },
+                            end: { line: 117, column: 32 },
+                          },
+                          value: "checkbox",
+                        },
+                      },
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 117, column: 33 },
+                          end: { line: 117, column: 48 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 117, column: 33 },
+                            end: { line: 117, column: 43 },
+                          },
+                          name: "aria-label",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 117, column: 44 },
+                            end: { line: 117, column: 48 },
+                          },
+                          value: "on",
+                        },
+                      },
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 117, column: 49 },
+                          end: { line: 117, column: 69 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 117, column: 49 },
+                            end: { line: 117, column: 56 },
+                          },
+                          name: "checked",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 117, column: 57 },
+                            end: { line: 117, column: 69 },
+                          },
+                          expression: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 117, column: 58 },
+                              end: { line: 117, column: 68 },
+                            },
+                            callee: {
+                              type: "MemberExpression",
+                              loc: {
+                                start: { line: 117, column: 58 },
+                                end: { line: 117, column: 66 },
+                              },
+                              object: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 117, column: 58 },
+                                  end: { line: 117, column: 62 },
+                                },
+                                name: "isOn",
+                                bindingKey: "isOn$2pi9tt1octht0$1",
+                              },
+                              property: {
+                                type: "Identifier",
+                                loc: {
+                                  start: { line: 117, column: 63 },
+                                  end: { line: 117, column: 66 },
+                                },
+                                name: "get",
+                              },
+                              computed: false,
+                              optional: false,
+                            },
+                            arguments: [],
+                            optional: false,
+                          },
+                        },
+                      },
+                    ],
+                    selfClosing: true,
+                  },
+                  children: [],
+                  closingElement: null,
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 118, column: 10 },
+                    end: { line: 118, column: 10 },
+                  },
+                  value: "\n          ",
+                  raw: "\n          ",
+                },
+                {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 118, column: 10 },
+                    end: { line: 125, column: 19 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 118, column: 10 },
+                      end: { line: 123, column: 11 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 118, column: 11 },
+                        end: { line: 118, column: 17 },
+                      },
+                      name: "button",
+                    },
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 119, column: 12 },
+                          end: { line: 122, column: 14 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 119, column: 12 },
+                            end: { line: 119, column: 19 },
+                          },
+                          name: "onclick",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 119, column: 20 },
+                            end: { line: 122, column: 14 },
+                          },
+                          expression: {
+                            type: "ArrowFunctionExpression",
+                            loc: {
+                              start: { line: 119, column: 21 },
+                              end: { line: 122, column: 13 },
+                            },
+                            params: [],
+                            body: {
+                              type: "BlockStatement",
+                              loc: {
+                                start: { line: 119, column: 27 },
+                                end: { line: 122, column: 13 },
+                              },
+                              body: [
                                 {
-                                  kind: "string",
-                                  loc: [120, 24, 120, 32],
-                                  text: "second",
+                                  type: "ExpressionStatement",
+                                  loc: {
+                                    start: { line: 120, column: 14 },
+                                    end: { line: 120, column: 33 },
+                                  },
+                                  expression: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 120, column: 14 },
+                                      end: { line: 120, column: 32 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 120, column: 14 },
+                                        end: { line: 120, column: 22 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 120, column: 14 },
+                                          end: { line: 120, column: 18 },
+                                        },
+                                        name: "text",
+                                        bindingKey: "text$2pi9tt1octht0$0",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 120, column: 19 },
+                                          end: { line: 120, column: 22 },
+                                        },
+                                        name: "set",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [
+                                      {
+                                        type: "Literal",
+                                        loc: {
+                                          start: { line: 120, column: 23 },
+                                          end: { line: 120, column: 31 },
+                                        },
+                                        value: "second",
+                                      },
+                                    ],
+                                    optional: false,
+                                  },
+                                },
+                                {
+                                  type: "ExpressionStatement",
+                                  loc: {
+                                    start: { line: 121, column: 14 },
+                                    end: { line: 121, column: 29 },
+                                  },
+                                  expression: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 121, column: 14 },
+                                      end: { line: 121, column: 28 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 121, column: 14 },
+                                        end: { line: 121, column: 22 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 121, column: 14 },
+                                          end: { line: 121, column: 18 },
+                                        },
+                                        name: "isOn",
+                                        bindingKey: "isOn$2pi9tt1octht0$1",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 121, column: 19 },
+                                          end: { line: 121, column: 22 },
+                                        },
+                                        name: "set",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [
+                                      {
+                                        type: "Literal",
+                                        loc: {
+                                          start: { line: 121, column: 23 },
+                                          end: { line: 121, column: 27 },
+                                        },
+                                        value: true,
+                                      },
+                                    ],
+                                    optional: false,
+                                  },
                                 },
                               ],
                             },
-                            {
-                              kind: "()",
-                              loc: [121, 15, 121, 29],
-                              expression: {
-                                kind: ".",
-                                loc: [121, 15, 121, 23],
-                                expression: {
-                                  kind: "id",
-                                  loc: [121, 15, 121, 19],
-                                  text: "isOn",
-                                  bindingKey: "isOn$2pi9tt1octht0$1",
-                                },
-                                name: "set",
-                              },
-                              arguments: [
-                                {
-                                  kind: "true",
-                                  loc: [121, 24, 121, 28],
-                                },
-                              ],
-                            },
-                          ],
+                            expression: false,
+                          },
                         },
                       },
-                    },
-                  ],
+                    ],
+                    selfClosing: false,
+                  },
                   children: [
                     {
-                      kind: "string",
-                      loc: [124, 13, 125, 11],
-                      text: "write",
+                      type: "JSXText",
+                      loc: {
+                        start: { line: 124, column: 12 },
+                        end: { line: 125, column: 10 },
+                      },
+                      value: "\n            write\n          ",
+                      raw: "\n            write\n          ",
                     },
                   ],
+                  closingElement: {
+                    type: "JSXClosingElement",
+                    loc: {
+                      start: { line: 125, column: 10 },
+                      end: { line: 125, column: 19 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 125, column: 12 },
+                        end: { line: 125, column: 18 },
+                      },
+                      name: "button",
+                    },
+                  },
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 126, column: 8 },
+                    end: { line: 126, column: 8 },
+                  },
+                  value: "\n        ",
+                  raw: "\n        ",
                 },
               ],
+              closingElement: {
+                type: "JSXClosingElement",
+                loc: {
+                  start: { line: 126, column: 8 },
+                  end: { line: 126, column: 14 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 126, column: 10 },
+                    end: { line: 126, column: 13 },
+                  },
+                  name: "div",
+                },
+              },
             },
           },
         ],
@@ -356,7 +749,7 @@ describe("a field's value", () => {
   // nothing reaches a field without a cast.
   async function Clearable() {
     return cs.create(
-      [147, 12, 164, 7],
+      { start: { line: 147, column: 11 }, end: { line: 164, column: 6 } },
       {
         version: "0.0.0",
         filePath: "render/attributes.test.tsx",
@@ -365,266 +758,680 @@ describe("a field's value", () => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [147, 15, 164, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: {
+          start: { line: 147, column: 14 },
+          end: { line: 164, column: 5 },
+        },
+        body: [
           {
-            kind: "const",
-            loc: [148, 7, 148, 53],
-            name: {
-              kind: "id",
-              loc: [148, 13, 148, 18],
-              text: "texts",
-              bindingKey: "texts$2pi9tt1octht0$2",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 148, column: 6 },
+              end: { line: 148, column: 52 },
             },
-            initializer: {
-              kind: "()",
-              loc: [148, 21, 148, 52],
-              expression: {
-                kind: "splice",
-                loc: [148, 21, 148, 27],
-                key: "$state",
-              },
-              arguments: [
-                {
-                  kind: "arr",
-                  loc: [148, 28, 148, 51],
-                  elements: [
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 148, column: 12 },
+                  end: { line: 148, column: 51 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 148, column: 12 },
+                    end: { line: 148, column: 17 },
+                  },
+                  name: "texts",
+                  bindingKey: "texts$2pi9tt1octht0$2",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 148, column: 20 },
+                    end: { line: 148, column: 51 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 148, column: 20 },
+                      end: { line: 148, column: 26 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
                     {
-                      kind: "string",
-                      loc: [148, 29, 148, 50],
-                      text: "typed by the script",
+                      type: "ArrayExpression",
+                      loc: {
+                        start: { line: 148, column: 27 },
+                        end: { line: 148, column: 50 },
+                      },
+                      elements: [
+                        {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 148, column: 28 },
+                            end: { line: 148, column: 49 },
+                          },
+                          value: "typed by the script",
+                        },
+                      ],
                     },
                   ],
+                  optional: false,
                 },
-              ],
-            },
+              },
+            ],
           },
           {
-            kind: "const",
-            loc: [149, 7, 149, 36],
-            name: {
-              kind: "id",
-              loc: [149, 13, 149, 18],
-              text: "flags",
-              bindingKey: "flags$2pi9tt1octht0$3",
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 149, column: 6 },
+              end: { line: 149, column: 35 },
             },
-            initializer: {
-              kind: "()",
-              loc: [149, 21, 149, 35],
-              expression: {
-                kind: "splice",
-                loc: [149, 21, 149, 27],
-                key: "$state",
-              },
-              arguments: [
-                {
-                  kind: "arr",
-                  loc: [149, 28, 149, 34],
-                  elements: [
+            kind: "const",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 149, column: 12 },
+                  end: { line: 149, column: 34 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 149, column: 12 },
+                    end: { line: 149, column: 17 },
+                  },
+                  name: "flags",
+                  bindingKey: "flags$2pi9tt1octht0$3",
+                },
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 149, column: 20 },
+                    end: { line: 149, column: 34 },
+                  },
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 149, column: 20 },
+                      end: { line: 149, column: 26 },
+                    },
+                    key: "$state",
+                  },
+                  arguments: [
                     {
-                      kind: "true",
-                      loc: [149, 29, 149, 33],
+                      type: "ArrayExpression",
+                      loc: {
+                        start: { line: 149, column: 27 },
+                        end: { line: 149, column: 33 },
+                      },
+                      elements: [
+                        {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 149, column: 28 },
+                            end: { line: 149, column: 32 },
+                          },
+                          value: true,
+                        },
+                      ],
                     },
                   ],
+                  optional: false,
                 },
-              ],
-            },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [150, 7, 163, 9],
-            expression: {
-              kind: "jsx",
-              loc: [151, 9, 162, 15],
-              type: {
-                kind: "string",
-                loc: [151, 10, 151, 13],
-                text: "div",
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 150, column: 6 },
+              end: { line: 163, column: 8 },
+            },
+            argument: {
+              type: "JSXElement",
+              loc: {
+                start: { line: 151, column: 8 },
+                end: { line: 162, column: 14 },
               },
-              attributes: [],
+              openingElement: {
+                type: "JSXOpeningElement",
+                loc: {
+                  start: { line: 151, column: 8 },
+                  end: { line: 151, column: 13 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 151, column: 9 },
+                    end: { line: 151, column: 12 },
+                  },
+                  name: "div",
+                },
+                attributes: [],
+                selfClosing: false,
+              },
               children: [
                 {
-                  kind: "jsx",
-                  loc: [152, 11, 152, 61],
-                  type: {
-                    kind: "string",
-                    loc: [152, 12, 152, 17],
-                    text: "input",
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 152, column: 10 },
+                    end: { line: 152, column: 10 },
                   },
-                  attributes: [
-                    {
-                      name: "aria-label",
-                      initializer: {
-                        kind: "string",
-                        loc: [152, 29, 152, 35],
-                        text: "text",
-                      },
-                    },
-                    {
-                      name: "value",
-                      initializer: {
-                        kind: "[]",
-                        loc: [152, 43, 152, 57],
-                        expression: {
-                          kind: "()",
-                          loc: [152, 43, 152, 54],
-                          expression: {
-                            kind: ".",
-                            loc: [152, 43, 152, 52],
-                            expression: {
-                              kind: "id",
-                              loc: [152, 43, 152, 48],
-                              text: "texts",
-                              bindingKey: "texts$2pi9tt1octht0$2",
-                            },
-                            name: "get",
-                          },
-                          arguments: [],
-                        },
-                        argumentExpression: {
-                          kind: "number",
-                          loc: [152, 55, 152, 56],
-                          value: 0,
-                        },
-                      },
-                    },
-                  ],
-                  children: [],
+                  value: "\n          ",
+                  raw: "\n          ",
                 },
                 {
-                  kind: "jsx",
-                  loc: [153, 11, 153, 77],
-                  type: {
-                    kind: "string",
-                    loc: [153, 12, 153, 17],
-                    text: "input",
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 152, column: 10 },
+                    end: { line: 152, column: 60 },
                   },
-                  attributes: [
-                    {
-                      name: "type",
-                      initializer: {
-                        kind: "string",
-                        loc: [153, 23, 153, 33],
-                        text: "checkbox",
-                      },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 152, column: 10 },
+                      end: { line: 152, column: 60 },
                     },
-                    {
-                      name: "aria-label",
-                      initializer: {
-                        kind: "string",
-                        loc: [153, 45, 153, 49],
-                        text: "on",
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 152, column: 11 },
+                        end: { line: 152, column: 16 },
                       },
+                      name: "input",
                     },
-                    {
-                      name: "checked",
-                      initializer: {
-                        kind: "[]",
-                        loc: [153, 59, 153, 73],
-                        expression: {
-                          kind: "()",
-                          loc: [153, 59, 153, 70],
-                          expression: {
-                            kind: ".",
-                            loc: [153, 59, 153, 68],
-                            expression: {
-                              kind: "id",
-                              loc: [153, 59, 153, 64],
-                              text: "flags",
-                              bindingKey: "flags$2pi9tt1octht0$3",
-                            },
-                            name: "get",
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 152, column: 17 },
+                          end: { line: 152, column: 34 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 152, column: 17 },
+                            end: { line: 152, column: 27 },
                           },
-                          arguments: [],
+                          name: "aria-label",
                         },
-                        argumentExpression: {
-                          kind: "number",
-                          loc: [153, 71, 153, 72],
-                          value: 0,
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 152, column: 28 },
+                            end: { line: 152, column: 34 },
+                          },
+                          value: "text",
                         },
                       },
-                    },
-                  ],
-                  children: [],
-                },
-                {
-                  kind: "jsx",
-                  loc: [154, 11, 161, 20],
-                  type: {
-                    kind: "string",
-                    loc: [154, 12, 154, 18],
-                    text: "button",
-                  },
-                  attributes: [
-                    {
-                      name: "onclick",
-                      initializer: {
-                        kind: "=>",
-                        loc: [155, 22, 158, 14],
-                        parameters: [],
-                        body: {
-                          kind: "{}",
-                          loc: [155, 28, 158, 14],
-                          statements: [
-                            {
-                              kind: "()",
-                              loc: [156, 15, 156, 28],
-                              expression: {
-                                kind: ".",
-                                loc: [156, 15, 156, 24],
-                                expression: {
-                                  kind: "id",
-                                  loc: [156, 15, 156, 20],
-                                  text: "texts",
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 152, column: 35 },
+                          end: { line: 152, column: 57 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 152, column: 35 },
+                            end: { line: 152, column: 40 },
+                          },
+                          name: "value",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 152, column: 41 },
+                            end: { line: 152, column: 57 },
+                          },
+                          expression: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 152, column: 42 },
+                              end: { line: 152, column: 56 },
+                            },
+                            object: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 152, column: 42 },
+                                end: { line: 152, column: 53 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 152, column: 42 },
+                                  end: { line: 152, column: 51 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 152, column: 42 },
+                                    end: { line: 152, column: 47 },
+                                  },
+                                  name: "texts",
                                   bindingKey: "texts$2pi9tt1octht0$2",
                                 },
-                                name: "set",
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 152, column: 48 },
+                                    end: { line: 152, column: 51 },
+                                  },
+                                  name: "get",
+                                },
+                                computed: false,
+                                optional: false,
                               },
-                              arguments: [
-                                {
-                                  kind: "arr",
-                                  loc: [156, 25, 156, 27],
-                                  elements: [],
-                                },
-                              ],
+                              arguments: [],
+                              optional: false,
                             },
-                            {
-                              kind: "()",
-                              loc: [157, 15, 157, 28],
-                              expression: {
-                                kind: ".",
-                                loc: [157, 15, 157, 24],
-                                expression: {
-                                  kind: "id",
-                                  loc: [157, 15, 157, 20],
-                                  text: "flags",
-                                  bindingKey: "flags$2pi9tt1octht0$3",
-                                },
-                                name: "set",
+                            property: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 152, column: 54 },
+                                end: { line: 152, column: 55 },
                               },
-                              arguments: [
-                                {
-                                  kind: "arr",
-                                  loc: [157, 25, 157, 27],
-                                  elements: [],
-                                },
-                              ],
+                              value: 0,
                             },
-                          ],
+                            computed: true,
+                            optional: false,
+                          },
                         },
                       },
+                    ],
+                    selfClosing: true,
+                  },
+                  children: [],
+                  closingElement: null,
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 153, column: 10 },
+                    end: { line: 153, column: 10 },
+                  },
+                  value: "\n          ",
+                  raw: "\n          ",
+                },
+                {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 153, column: 10 },
+                    end: { line: 153, column: 76 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 153, column: 10 },
+                      end: { line: 153, column: 76 },
                     },
-                  ],
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 153, column: 11 },
+                        end: { line: 153, column: 16 },
+                      },
+                      name: "input",
+                    },
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 153, column: 17 },
+                          end: { line: 153, column: 32 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 153, column: 17 },
+                            end: { line: 153, column: 21 },
+                          },
+                          name: "type",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 153, column: 22 },
+                            end: { line: 153, column: 32 },
+                          },
+                          value: "checkbox",
+                        },
+                      },
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 153, column: 33 },
+                          end: { line: 153, column: 48 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 153, column: 33 },
+                            end: { line: 153, column: 43 },
+                          },
+                          name: "aria-label",
+                        },
+                        value: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 153, column: 44 },
+                            end: { line: 153, column: 48 },
+                          },
+                          value: "on",
+                        },
+                      },
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 153, column: 49 },
+                          end: { line: 153, column: 73 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 153, column: 49 },
+                            end: { line: 153, column: 56 },
+                          },
+                          name: "checked",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 153, column: 57 },
+                            end: { line: 153, column: 73 },
+                          },
+                          expression: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 153, column: 58 },
+                              end: { line: 153, column: 72 },
+                            },
+                            object: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 153, column: 58 },
+                                end: { line: 153, column: 69 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 153, column: 58 },
+                                  end: { line: 153, column: 67 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 153, column: 58 },
+                                    end: { line: 153, column: 63 },
+                                  },
+                                  name: "flags",
+                                  bindingKey: "flags$2pi9tt1octht0$3",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 153, column: 64 },
+                                    end: { line: 153, column: 67 },
+                                  },
+                                  name: "get",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [],
+                              optional: false,
+                            },
+                            property: {
+                              type: "Literal",
+                              loc: {
+                                start: { line: 153, column: 70 },
+                                end: { line: 153, column: 71 },
+                              },
+                              value: 0,
+                            },
+                            computed: true,
+                            optional: false,
+                          },
+                        },
+                      },
+                    ],
+                    selfClosing: true,
+                  },
+                  children: [],
+                  closingElement: null,
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 154, column: 10 },
+                    end: { line: 154, column: 10 },
+                  },
+                  value: "\n          ",
+                  raw: "\n          ",
+                },
+                {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 154, column: 10 },
+                    end: { line: 161, column: 19 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 154, column: 10 },
+                      end: { line: 159, column: 11 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 154, column: 11 },
+                        end: { line: 154, column: 17 },
+                      },
+                      name: "button",
+                    },
+                    attributes: [
+                      {
+                        type: "JSXAttribute",
+                        loc: {
+                          start: { line: 155, column: 12 },
+                          end: { line: 158, column: 14 },
+                        },
+                        name: {
+                          type: "JSXIdentifier",
+                          loc: {
+                            start: { line: 155, column: 12 },
+                            end: { line: 155, column: 19 },
+                          },
+                          name: "onclick",
+                        },
+                        value: {
+                          type: "JSXExpressionContainer",
+                          loc: {
+                            start: { line: 155, column: 20 },
+                            end: { line: 158, column: 14 },
+                          },
+                          expression: {
+                            type: "ArrowFunctionExpression",
+                            loc: {
+                              start: { line: 155, column: 21 },
+                              end: { line: 158, column: 13 },
+                            },
+                            params: [],
+                            body: {
+                              type: "BlockStatement",
+                              loc: {
+                                start: { line: 155, column: 27 },
+                                end: { line: 158, column: 13 },
+                              },
+                              body: [
+                                {
+                                  type: "ExpressionStatement",
+                                  loc: {
+                                    start: { line: 156, column: 14 },
+                                    end: { line: 156, column: 28 },
+                                  },
+                                  expression: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 156, column: 14 },
+                                      end: { line: 156, column: 27 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 156, column: 14 },
+                                        end: { line: 156, column: 23 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 156, column: 14 },
+                                          end: { line: 156, column: 19 },
+                                        },
+                                        name: "texts",
+                                        bindingKey: "texts$2pi9tt1octht0$2",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 156, column: 20 },
+                                          end: { line: 156, column: 23 },
+                                        },
+                                        name: "set",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [
+                                      {
+                                        type: "ArrayExpression",
+                                        loc: {
+                                          start: { line: 156, column: 24 },
+                                          end: { line: 156, column: 26 },
+                                        },
+                                        elements: [],
+                                      },
+                                    ],
+                                    optional: false,
+                                  },
+                                },
+                                {
+                                  type: "ExpressionStatement",
+                                  loc: {
+                                    start: { line: 157, column: 14 },
+                                    end: { line: 157, column: 28 },
+                                  },
+                                  expression: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 157, column: 14 },
+                                      end: { line: 157, column: 27 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 157, column: 14 },
+                                        end: { line: 157, column: 23 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 157, column: 14 },
+                                          end: { line: 157, column: 19 },
+                                        },
+                                        name: "flags",
+                                        bindingKey: "flags$2pi9tt1octht0$3",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 157, column: 20 },
+                                          end: { line: 157, column: 23 },
+                                        },
+                                        name: "set",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [
+                                      {
+                                        type: "ArrayExpression",
+                                        loc: {
+                                          start: { line: 157, column: 24 },
+                                          end: { line: 157, column: 26 },
+                                        },
+                                        elements: [],
+                                      },
+                                    ],
+                                    optional: false,
+                                  },
+                                },
+                              ],
+                            },
+                            expression: false,
+                          },
+                        },
+                      },
+                    ],
+                    selfClosing: false,
+                  },
                   children: [
                     {
-                      kind: "string",
-                      loc: [160, 13, 161, 11],
-                      text: "clear",
+                      type: "JSXText",
+                      loc: {
+                        start: { line: 160, column: 12 },
+                        end: { line: 161, column: 10 },
+                      },
+                      value: "\n            clear\n          ",
+                      raw: "\n            clear\n          ",
                     },
                   ],
+                  closingElement: {
+                    type: "JSXClosingElement",
+                    loc: {
+                      start: { line: 161, column: 10 },
+                      end: { line: 161, column: 19 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 161, column: 12 },
+                        end: { line: 161, column: 18 },
+                      },
+                      name: "button",
+                    },
+                  },
+                },
+                {
+                  type: "JSXText",
+                  loc: {
+                    start: { line: 162, column: 8 },
+                    end: { line: 162, column: 8 },
+                  },
+                  value: "\n        ",
+                  raw: "\n        ",
                 },
               ],
+              closingElement: {
+                type: "JSXClosingElement",
+                loc: {
+                  start: { line: 162, column: 8 },
+                  end: { line: 162, column: 14 },
+                },
+                name: {
+                  type: "JSXIdentifier",
+                  loc: {
+                    start: { line: 162, column: 10 },
+                    end: { line: 162, column: 13 },
+                  },
+                  name: "div",
+                },
+              },
             },
           },
         ],

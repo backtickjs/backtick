@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // and calling what that named — and this is the case it existed for.
 const HeldRow = async () => _jsx("span", { children: "x" });
 const heldElement = cs.create(
-  [15, 21, 18, 3],
+  { start: { line: 15, column: 20 }, end: { line: 18, column: 2 } },
   {
     version: "0.0.0",
     filePath: "jsx/tree-in-variable.test.tsx",
@@ -21,44 +21,70 @@ const heldElement = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [15, 24, 18, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 15, column: 23 }, end: { line: 18, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [15, 30, 18, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 15, column: 29 }, end: { line: 18, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 16, column: 2 },
+            end: { line: 16, column: 28 },
+          },
           kind: "const",
-          loc: [16, 3, 16, 29],
-          name: {
-            kind: "id",
-            loc: [16, 9, 16, 13],
-            text: "tree",
-            bindingKey: "tree$224cj4eht1o03$0",
-          },
-          initializer: {
-            kind: "splice",
-            loc: [16, 16, 16, 28],
-            key: "$0splice0",
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 16, column: 8 },
+                end: { line: 16, column: 27 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 16, column: 8 },
+                  end: { line: 16, column: 12 },
+                },
+                name: "tree",
+                bindingKey: "tree$224cj4eht1o03$0",
+              },
+              init: {
+                type: "Splice",
+                loc: {
+                  start: { line: 16, column: 15 },
+                  end: { line: 16, column: 27 },
+                },
+                key: "$0splice0",
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [17, 3, 17, 15],
-          expression: {
-            kind: "id",
-            loc: [17, 10, 17, 14],
-            text: "tree",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 17, column: 2 },
+            end: { line: 17, column: 14 },
+          },
+          argument: {
+            type: "Identifier",
+            loc: {
+              start: { line: 17, column: 9 },
+              end: { line: 17, column: 13 },
+            },
+            name: "tree",
             bindingKey: "tree$224cj4eht1o03$0",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 const heldComponent = cs.create(
-  [20, 23, 23, 3],
+  { start: { line: 20, column: 22 }, end: { line: 23, column: 2 } },
   {
     version: "0.0.0",
     filePath: "jsx/tree-in-variable.test.tsx",
@@ -67,40 +93,66 @@ const heldComponent = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [20, 26, 23, 2],
-    parameters: [],
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 20, column: 25 }, end: { line: 23, column: 1 } },
+    params: [],
     body: {
-      kind: "{}",
-      loc: [20, 32, 23, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 20, column: 31 }, end: { line: 23, column: 1 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 21, column: 2 },
+            end: { line: 21, column: 32 },
+          },
           kind: "const",
-          loc: [21, 3, 21, 33],
-          name: {
-            kind: "id",
-            loc: [21, 9, 21, 13],
-            text: "tree",
-            bindingKey: "tree$224cj4eht1o03$1",
-          },
-          initializer: {
-            kind: "splice",
-            loc: [21, 16, 21, 32],
-            key: "$0splice0",
-          },
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 21, column: 8 },
+                end: { line: 21, column: 31 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 21, column: 8 },
+                  end: { line: 21, column: 12 },
+                },
+                name: "tree",
+                bindingKey: "tree$224cj4eht1o03$1",
+              },
+              init: {
+                type: "Splice",
+                loc: {
+                  start: { line: 21, column: 15 },
+                  end: { line: 21, column: 31 },
+                },
+                key: "$0splice0",
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [22, 3, 22, 15],
-          expression: {
-            kind: "id",
-            loc: [22, 10, 22, 14],
-            text: "tree",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 22, column: 2 },
+            end: { line: 22, column: 14 },
+          },
+          argument: {
+            type: "Identifier",
+            loc: {
+              start: { line: 22, column: 9 },
+              end: { line: 22, column: 13 },
+            },
+            name: "tree",
             bindingKey: "tree$224cj4eht1o03$1",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("treeInVariable", async (t) => {
@@ -110,7 +162,7 @@ it("treeInVariable", async (t) => {
     _jsxs("div", {
       children: [
         cs.create(
-          [30, 8, 30, 26],
+          { start: { line: 30, column: 7 }, end: { line: 30, column: 25 } },
           {
             version: "0.0.0",
             filePath: "jsx/tree-in-variable.test.tsx",
@@ -119,18 +171,25 @@ it("treeInVariable", async (t) => {
             captures: [],
           },
           () => ({
-            kind: "()",
-            loc: [30, 11, 30, 25],
-            expression: {
-              kind: "splice",
-              loc: [30, 11, 30, 23],
+            type: "CallExpression",
+            loc: {
+              start: { line: 30, column: 10 },
+              end: { line: 30, column: 24 },
+            },
+            callee: {
+              type: "Splice",
+              loc: {
+                start: { line: 30, column: 10 },
+                end: { line: 30, column: 22 },
+              },
               key: "$heldElement",
             },
             arguments: [],
+            optional: false,
           }),
         ),
         cs.create(
-          [31, 8, 31, 28],
+          { start: { line: 31, column: 7 }, end: { line: 31, column: 27 } },
           {
             version: "0.0.0",
             filePath: "jsx/tree-in-variable.test.tsx",
@@ -139,14 +198,21 @@ it("treeInVariable", async (t) => {
             captures: [],
           },
           () => ({
-            kind: "()",
-            loc: [31, 11, 31, 27],
-            expression: {
-              kind: "splice",
-              loc: [31, 11, 31, 25],
+            type: "CallExpression",
+            loc: {
+              start: { line: 31, column: 10 },
+              end: { line: 31, column: 26 },
+            },
+            callee: {
+              type: "Splice",
+              loc: {
+                start: { line: 31, column: 10 },
+                end: { line: 31, column: 24 },
+              },
               key: "$heldComponent",
             },
             arguments: [],
+            optional: false,
           }),
         ),
       ],

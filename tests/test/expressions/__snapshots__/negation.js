@@ -11,7 +11,7 @@ it("negation", async (t) => {
     t,
     "negation",
     cs.create(
-      [14, 5, 18, 7],
+      { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/negation.test.tsx",
@@ -20,96 +20,166 @@ it("negation", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [14, 8, 18, 6],
-        parameters: [
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },
+        params: [
           {
-            kind: "param",
-            loc: [14, 9, 14, 22],
-            name: {
-              kind: "id",
-              loc: [14, 9, 14, 14],
-              text: "count",
-              bindingKey: "count$31nhc0aoqh9gi$0",
+            type: "Identifier",
+            loc: {
+              start: { line: 14, column: 8 },
+              end: { line: 14, column: 13 },
             },
+            name: "count",
+            bindingKey: "count$31nhc0aoqh9gi$0",
           },
         ],
         body: {
-          kind: "{}",
-          loc: [14, 27, 18, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 14, column: 26 },
+            end: { line: 18, column: 5 },
+          },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 23 },
+              },
               kind: "const",
-              loc: [15, 7, 15, 24],
-              name: {
-                kind: "id",
-                loc: [15, 13, 15, 18],
-                text: "floor",
-                bindingKey: "floor$31nhc0aoqh9gi$1",
-              },
-              initializer: {
-                kind: "prefixop",
-                loc: [15, 21, 15, 23],
-                operator: "-",
-                operand: {
-                  kind: "number",
-                  loc: [15, 22, 15, 23],
-                  value: 1,
-                },
-              },
-            },
-            {
-              kind: "const",
-              loc: [16, 7, 16, 27],
-              name: {
-                kind: "id",
-                loc: [16, 13, 16, 17],
-                text: "step",
-                bindingKey: "step$31nhc0aoqh9gi$2",
-              },
-              initializer: {
-                kind: "prefixop",
-                loc: [16, 20, 16, 26],
-                operator: "-",
-                operand: {
-                  kind: "id",
-                  loc: [16, 21, 16, 26],
-                  text: "count",
-                  bindingKey: "count$31nhc0aoqh9gi$0",
-                },
-              },
-            },
-            {
-              kind: "return",
-              loc: [17, 7, 17, 32],
-              expression: {
-                kind: "binop",
-                loc: [17, 14, 17, 31],
-                left: {
-                  kind: "binop",
-                  loc: [17, 14, 17, 26],
-                  left: {
-                    kind: "id",
-                    loc: [17, 14, 17, 19],
-                    text: "floor",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 15, column: 12 },
+                    end: { line: 15, column: 22 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 15, column: 12 },
+                      end: { line: 15, column: 17 },
+                    },
+                    name: "floor",
                     bindingKey: "floor$31nhc0aoqh9gi$1",
                   },
-                  operatorToken: "+",
+                  init: {
+                    type: "UnaryExpression",
+                    loc: {
+                      start: { line: 15, column: 20 },
+                      end: { line: 15, column: 22 },
+                    },
+                    operator: "-",
+                    prefix: true,
+                    argument: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 21 },
+                        end: { line: 15, column: 22 },
+                      },
+                      value: 1,
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 26 },
+              },
+              kind: "const",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 16, column: 12 },
+                    end: { line: 16, column: 25 },
+                  },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 16, column: 12 },
+                      end: { line: 16, column: 16 },
+                    },
+                    name: "step",
+                    bindingKey: "step$31nhc0aoqh9gi$2",
+                  },
+                  init: {
+                    type: "UnaryExpression",
+                    loc: {
+                      start: { line: 16, column: 19 },
+                      end: { line: 16, column: 25 },
+                    },
+                    operator: "-",
+                    prefix: true,
+                    argument: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 16, column: 20 },
+                        end: { line: 16, column: 25 },
+                      },
+                      name: "count",
+                      bindingKey: "count$31nhc0aoqh9gi$0",
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 31 },
+              },
+              argument: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 17, column: 13 },
+                  end: { line: 17, column: 30 },
+                },
+                operator: "+",
+                left: {
+                  type: "BinaryExpression",
+                  loc: {
+                    start: { line: 17, column: 13 },
+                    end: { line: 17, column: 25 },
+                  },
+                  operator: "+",
+                  left: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 13 },
+                      end: { line: 17, column: 18 },
+                    },
+                    name: "floor",
+                    bindingKey: "floor$31nhc0aoqh9gi$1",
+                  },
                   right: {
-                    kind: "id",
-                    loc: [17, 22, 17, 26],
-                    text: "step",
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 21 },
+                      end: { line: 17, column: 25 },
+                    },
+                    name: "step",
                     bindingKey: "step$31nhc0aoqh9gi$2",
                   },
                 },
-                operatorToken: "+",
                 right: {
-                  kind: "prefixop",
-                  loc: [17, 29, 17, 31],
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 17, column: 28 },
+                    end: { line: 17, column: 30 },
+                  },
                   operator: "-",
-                  operand: {
-                    kind: "number",
-                    loc: [17, 30, 17, 31],
+                  prefix: true,
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 17, column: 29 },
+                      end: { line: 17, column: 30 },
+                    },
                     value: 2,
                   },
                 },
@@ -117,6 +187,7 @@ it("negation", async (t) => {
             },
           ],
         },
+        expression: false,
       }),
     ),
   );
@@ -127,7 +198,7 @@ it("negativeZero", async (t) => {
     t,
     "negativeZero",
     cs.create(
-      [24, 41, 26, 5],
+      { start: { line: 24, column: 40 }, end: { line: 26, column: 4 } },
       {
         version: "0.0.0",
         filePath: "expressions/negation.test.tsx",
@@ -136,28 +207,44 @@ it("negativeZero", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [24, 44, 26, 4],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 24, column: 43 }, end: { line: 26, column: 3 } },
+        body: [
           {
-            kind: "return",
-            loc: [25, 5, 25, 19],
-            expression: {
-              kind: "binop",
-              loc: [25, 12, 25, 18],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 25, column: 4 },
+              end: { line: 25, column: 18 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 25, column: 11 },
+                end: { line: 25, column: 17 },
+              },
+              operator: "/",
               left: {
-                kind: "number",
-                loc: [25, 12, 25, 13],
+                type: "Literal",
+                loc: {
+                  start: { line: 25, column: 11 },
+                  end: { line: 25, column: 12 },
+                },
                 value: 1,
               },
-              operatorToken: "/",
               right: {
-                kind: "prefixop",
-                loc: [25, 16, 25, 18],
+                type: "UnaryExpression",
+                loc: {
+                  start: { line: 25, column: 15 },
+                  end: { line: 25, column: 17 },
+                },
                 operator: "-",
-                operand: {
-                  kind: "number",
-                  loc: [25, 17, 25, 18],
+                prefix: true,
+                argument: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 25, column: 16 },
+                    end: { line: 25, column: 17 },
+                  },
                   value: 0,
                 },
               },

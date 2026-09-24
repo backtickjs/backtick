@@ -12,7 +12,7 @@ import { children, drawn, fontSize } from "./dom.ts";
 const SharedCounter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
-      [15, 12, 15, 50],
+      { start: { line: 15, column: 11 }, end: { line: 15, column: 49 } },
       {
         version: "0.0.0",
         filePath: "state/local-state-prop.test.tsx",
@@ -21,43 +21,71 @@ const SharedCounter = async ({ size }) =>
         captures: [],
       },
       () => ({
-        kind: "binop",
-        loc: [15, 15, 15, 49],
+        type: "BinaryExpression",
+        loc: { start: { line: 15, column: 14 }, end: { line: 15, column: 48 } },
+        operator: "+",
         left: {
-          kind: "binop",
-          loc: [15, 15, 15, 42],
-          left: {
-            kind: "string",
-            loc: [15, 15, 15, 28],
-            text: "font-size: ",
+          type: "BinaryExpression",
+          loc: {
+            start: { line: 15, column: 14 },
+            end: { line: 15, column: 41 },
           },
-          operatorToken: "+",
+          operator: "+",
+          left: {
+            type: "Literal",
+            loc: {
+              start: { line: 15, column: 14 },
+              end: { line: 15, column: 27 },
+            },
+            value: "font-size: ",
+          },
           right: {
-            kind: "()",
-            loc: [15, 31, 15, 42],
-            expression: {
-              kind: ".",
-              loc: [15, 31, 15, 40],
-              expression: {
-                kind: "splice",
-                loc: [15, 31, 15, 36],
+            type: "CallExpression",
+            loc: {
+              start: { line: 15, column: 30 },
+              end: { line: 15, column: 41 },
+            },
+            callee: {
+              type: "MemberExpression",
+              loc: {
+                start: { line: 15, column: 30 },
+                end: { line: 15, column: 39 },
+              },
+              object: {
+                type: "Splice",
+                loc: {
+                  start: { line: 15, column: 30 },
+                  end: { line: 15, column: 35 },
+                },
                 key: "$size",
               },
-              name: "get",
+              property: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 36 },
+                  end: { line: 15, column: 39 },
+                },
+                name: "get",
+              },
+              computed: false,
+              optional: false,
             },
             arguments: [],
+            optional: false,
           },
         },
-        operatorToken: "+",
         right: {
-          kind: "string",
-          loc: [15, 45, 15, 49],
-          text: "px",
+          type: "Literal",
+          loc: {
+            start: { line: 15, column: 44 },
+            end: { line: 15, column: 48 },
+          },
+          value: "px",
         },
       }),
     ),
     onclick: cs.create(
-      [16, 14, 18, 7],
+      { start: { line: 16, column: 13 }, end: { line: 18, column: 6 } },
       {
         version: "0.0.0",
         filePath: "state/local-state-prop.test.tsx",
@@ -66,63 +94,118 @@ const SharedCounter = async ({ size }) =>
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [16, 17, 18, 6],
-        parameters: [],
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 16, column: 16 }, end: { line: 18, column: 5 } },
+        params: [],
         body: {
-          kind: "{}",
-          loc: [16, 23, 18, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 16, column: 22 },
+            end: { line: 18, column: 5 },
+          },
+          body: [
             {
-              kind: "()",
-              loc: [17, 7, 17, 33],
-              expression: {
-                kind: ".",
-                loc: [17, 7, 17, 16],
-                expression: {
-                  kind: "splice",
-                  loc: [17, 7, 17, 12],
-                  key: "$size",
-                },
-                name: "set",
+              type: "ExpressionStatement",
+              loc: {
+                start: { line: 17, column: 6 },
+                end: { line: 17, column: 33 },
               },
-              arguments: [
-                {
-                  kind: "binop",
-                  loc: [17, 17, 17, 32],
-                  left: {
-                    kind: "()",
-                    loc: [17, 17, 17, 28],
-                    expression: {
-                      kind: ".",
-                      loc: [17, 17, 17, 26],
-                      expression: {
-                        kind: "splice",
-                        loc: [17, 17, 17, 22],
-                        key: "$size",
-                      },
-                      name: "get",
-                    },
-                    arguments: [],
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: "number",
-                    loc: [17, 31, 17, 32],
-                    value: 1,
-                  },
+              expression: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 17, column: 6 },
+                  end: { line: 17, column: 32 },
                 },
-              ],
+                callee: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 17, column: 6 },
+                    end: { line: 17, column: 15 },
+                  },
+                  object: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 17, column: 6 },
+                      end: { line: 17, column: 11 },
+                    },
+                    key: "$size",
+                  },
+                  property: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 17, column: 12 },
+                      end: { line: 17, column: 15 },
+                    },
+                    name: "set",
+                  },
+                  computed: false,
+                  optional: false,
+                },
+                arguments: [
+                  {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 17, column: 16 },
+                      end: { line: 17, column: 31 },
+                    },
+                    operator: "+",
+                    left: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 17, column: 16 },
+                        end: { line: 17, column: 27 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 17, column: 16 },
+                          end: { line: 17, column: 25 },
+                        },
+                        object: {
+                          type: "Splice",
+                          loc: {
+                            start: { line: 17, column: 16 },
+                            end: { line: 17, column: 21 },
+                          },
+                          key: "$size",
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 17, column: 22 },
+                            end: { line: 17, column: 25 },
+                          },
+                          name: "get",
+                        },
+                        computed: false,
+                        optional: false,
+                      },
+                      arguments: [],
+                      optional: false,
+                    },
+                    right: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 17, column: 30 },
+                        end: { line: 17, column: 31 },
+                      },
+                      value: 1,
+                    },
+                  },
+                ],
+                optional: false,
+              },
             },
           ],
         },
+        expression: false,
       }),
     ),
     children: "press",
   });
 async function SharingPanel() {
   return cs.create(
-    [25, 10, 33, 5],
+    { start: { line: 25, column: 9 }, end: { line: 33, column: 4 } },
     {
       version: "0.0.0",
       filePath: "state/local-state-prop.test.tsx",
@@ -134,91 +217,247 @@ async function SharingPanel() {
       captures: [],
     },
     () => ({
-      kind: "{}",
-      loc: [25, 13, 33, 4],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 25, column: 12 }, end: { line: 33, column: 3 } },
+      body: [
         {
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 26, column: 4 },
+            end: { line: 26, column: 28 },
+          },
           kind: "const",
-          loc: [26, 5, 26, 29],
-          name: {
-            kind: "id",
-            loc: [26, 11, 26, 15],
-            text: "size",
-            bindingKey: "size$1myb4rrcna327$0",
-          },
-          initializer: {
-            kind: "()",
-            loc: [26, 18, 26, 28],
-            expression: {
-              kind: "splice",
-              loc: [26, 18, 26, 24],
-              key: "$state",
-            },
-            arguments: [
-              {
-                kind: "number",
-                loc: [26, 25, 26, 27],
-                value: 16,
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 26, column: 10 },
+                end: { line: 26, column: 27 },
               },
-            ],
-          },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 26, column: 10 },
+                  end: { line: 26, column: 14 },
+                },
+                name: "size",
+                bindingKey: "size$1myb4rrcna327$0",
+              },
+              init: {
+                type: "CallExpression",
+                loc: {
+                  start: { line: 26, column: 17 },
+                  end: { line: 26, column: 27 },
+                },
+                callee: {
+                  type: "Splice",
+                  loc: {
+                    start: { line: 26, column: 17 },
+                    end: { line: 26, column: 23 },
+                  },
+                  key: "$state",
+                },
+                arguments: [
+                  {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 26, column: 24 },
+                      end: { line: 26, column: 26 },
+                    },
+                    value: 16,
+                  },
+                ],
+                optional: false,
+              },
+            },
+          ],
         },
         {
-          kind: "return",
-          loc: [27, 5, 32, 7],
-          expression: {
-            kind: "jsx",
-            loc: [28, 7, 31, 13],
-            type: {
-              kind: "string",
-              loc: [28, 8, 28, 11],
-              text: "div",
+          type: "ReturnStatement",
+          loc: { start: { line: 27, column: 4 }, end: { line: 32, column: 6 } },
+          argument: {
+            type: "JSXElement",
+            loc: {
+              start: { line: 28, column: 6 },
+              end: { line: 31, column: 12 },
             },
-            attributes: [],
+            openingElement: {
+              type: "JSXOpeningElement",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 11 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 28, column: 7 },
+                  end: { line: 28, column: 10 },
+                },
+                name: "div",
+              },
+              attributes: [],
+              selfClosing: false,
+            },
             children: [
               {
-                kind: "jsx",
-                loc: [29, 9, 29, 38],
-                type: {
-                  kind: "splice",
-                  loc: [29, 10, 29, 23],
-                  key: "$SharedCounter",
+                type: "JSXText",
+                loc: {
+                  start: { line: 29, column: 8 },
+                  end: { line: 29, column: 8 },
                 },
-                attributes: [
-                  {
-                    name: "size",
-                    initializer: {
-                      kind: "id",
-                      loc: [29, 30, 29, 34],
-                      text: "size",
-                      bindingKey: "size$1myb4rrcna327$0",
-                    },
-                  },
-                ],
-                children: [],
+                value: "\n        ",
+                raw: "\n        ",
               },
               {
-                kind: "jsx",
-                loc: [30, 9, 30, 38],
-                type: {
-                  kind: "splice",
-                  loc: [30, 10, 30, 23],
-                  key: "$SharedCounter",
+                type: "JSXElement",
+                loc: {
+                  start: { line: 29, column: 8 },
+                  end: { line: 29, column: 37 },
                 },
-                attributes: [
-                  {
-                    name: "size",
-                    initializer: {
-                      kind: "id",
-                      loc: [30, 30, 30, 34],
-                      text: "size",
-                      bindingKey: "size$1myb4rrcna327$0",
-                    },
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 29, column: 8 },
+                    end: { line: 29, column: 37 },
                   },
-                ],
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 29, column: 9 },
+                      end: { line: 29, column: 22 },
+                    },
+                    name: "SharedCounter",
+                  },
+                  attributes: [
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 29, column: 23 },
+                        end: { line: 29, column: 34 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 29, column: 23 },
+                          end: { line: 29, column: 27 },
+                        },
+                        name: "size",
+                      },
+                      value: {
+                        type: "JSXExpressionContainer",
+                        loc: {
+                          start: { line: 29, column: 28 },
+                          end: { line: 29, column: 34 },
+                        },
+                        expression: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 29, column: 29 },
+                            end: { line: 29, column: 33 },
+                          },
+                          name: "size",
+                          bindingKey: "size$1myb4rrcna327$0",
+                        },
+                      },
+                    },
+                  ],
+                  selfClosing: true,
+                },
                 children: [],
+                closingElement: null,
+              },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 30, column: 8 },
+                  end: { line: 30, column: 8 },
+                },
+                value: "\n        ",
+                raw: "\n        ",
+              },
+              {
+                type: "JSXElement",
+                loc: {
+                  start: { line: 30, column: 8 },
+                  end: { line: 30, column: 37 },
+                },
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 30, column: 8 },
+                    end: { line: 30, column: 37 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 30, column: 9 },
+                      end: { line: 30, column: 22 },
+                    },
+                    name: "SharedCounter",
+                  },
+                  attributes: [
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 30, column: 23 },
+                        end: { line: 30, column: 34 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 30, column: 23 },
+                          end: { line: 30, column: 27 },
+                        },
+                        name: "size",
+                      },
+                      value: {
+                        type: "JSXExpressionContainer",
+                        loc: {
+                          start: { line: 30, column: 28 },
+                          end: { line: 30, column: 34 },
+                        },
+                        expression: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 30, column: 29 },
+                            end: { line: 30, column: 33 },
+                          },
+                          name: "size",
+                          bindingKey: "size$1myb4rrcna327$0",
+                        },
+                      },
+                    },
+                  ],
+                  selfClosing: true,
+                },
+                children: [],
+                closingElement: null,
+              },
+              {
+                type: "JSXText",
+                loc: {
+                  start: { line: 31, column: 6 },
+                  end: { line: 31, column: 6 },
+                },
+                value: "\n      ",
+                raw: "\n      ",
               },
             ],
+            closingElement: {
+              type: "JSXClosingElement",
+              loc: {
+                start: { line: 31, column: 6 },
+                end: { line: 31, column: 12 },
+              },
+              name: {
+                type: "JSXIdentifier",
+                loc: {
+                  start: { line: 31, column: 8 },
+                  end: { line: 31, column: 11 },
+                },
+                name: "div",
+              },
+            },
           },
         },
       ],

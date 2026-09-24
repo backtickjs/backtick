@@ -20,7 +20,9 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/client-script": "workspace:*"
+    "@backtickjs/client-script": "workspace:*",
+    "@types/estree": "^1.0.9",
+    "@types/estree-jsx": "^1.0.5"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

@@ -1,399 +1,218 @@
-import type {
-  ClientScriptArrayElement,
-  ClientScriptBlock,
-  ClientScriptBody,
-  ClientScriptDeclaration,
-  ClientScriptExpression,
-  ClientScriptStatement,
+import {
+  isComponentTag,
+  isFragmentTag,
+  jsxText,
+  type Splice,
 } from "@backtickjs/client-script";
 import type * as ES from "estree";
+import type * as JSX from "estree-jsx";
 import {
-  arrow,
-  binding,
-  builtin,
   call,
-  chain,
+  identifier,
   jsxComponent,
   jsxElement,
-  literal,
-  member,
-  nullLiteral,
-  objectKey,
-  property,
   stringLiteral,
   thunk,
-  undefinedValue,
 } from "../estree.js";
-import type { Names } from "../estree.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 
-// Lowers a script to the ESTree body of its entry. The mapping mirrors the grammar —
-// expressions lower to expressions, statements to statements — with two places
-// where the script itself decides what to emit: an identifier, and a splice.
-//
-// Both are read off the script rather than passed in, so a body follows from
-// its own source. Nothing else here needs the script, which is why the builders
-// close over them instead of threading them down every branch to reach two
-// leaves.
-export function lowerScriptBody(
-  script: ScriptEntry,
-  names: Names,
-): ES.Expression | ES.BlockStatement {
-  // An entry's parameters are one numbered sequence: a thunk per splice hole
-  // the script writes, then a value per binding it captures. Both lists come
-  // from the script, so the arity and the order are its own.
-  //
-  // A capture reads as its number rather than its source name, which is what
-  // keeps it out of the way: `$` cannot start a source name, so a capture can
-  // never be shadowed by a local, and neither ever needs renaming to avoid the
-  // other. A binding the script declares still reads as itself, since that is
-  // what the source says.
+type Body = ES.Expression | ES.BlockStatement;
+
+// A binding annotated by the compiler with the key it resolved it to.
+type Bound = { readonly bindingKey?: string };
+
+/**
+ * A script's body, as the compiler wrote it, lowered to the entry it is in a
+ * bundle: closed over what it needs from outside, and drawing through `jsx`.
+ *
+ * - A binding it captures reads as its numbered parameter: an entry takes a
+ *   thunk per splice and then a value per capture, in the orders the script
+ *   fixes. `$` cannot start a source name, so a capture is never shadowed by
+ *   a local.
+ * - A splice is a call of its thunk, handed the bindings in scope at the hole
+ *   and then every capture, which is what a fragment landing there could need.
+ * - JSX is a call of the client's `jsx`, and its text reads as JSX reads it.
+ * - `eval` is called indirectly, so a bundle it runs sees globals and nothing
+ *   of this one's scope.
+ * - A binding named `jsx` is renamed, so it cannot hide the client's.
+ */
+export function lowerScriptBody(script: ScriptEntry): Body {
   const captureIndex = new Map(
     script.captures.map((key, at) => [key, script.splices.length + at]),
   );
-  const read = (key: string): ES.Identifier => {
-    const at = captureIndex.get(key);
-    return binding(names, at === undefined ? sourceName(key) : `$${at}`);
-  };
-
-  // The body names holes by key; a reference's `args` are positional in the
-  // script's `splices` order, so this maps between them. The hole hands its
-  // thunk the bindings bound where it sits (see `spliceParams`), since a
-  // fragment landing there can only reference what was in scope where it was
-  // written.
   const holes = new Map(
     script.splices.map((splice, index) => [splice.key, index] as const),
   );
   const paramsOf = new Map(
     script.splices.map((splice) => [splice.key, splice.params] as const),
   );
-  const renderSplice = (key: string): ES.Expression => {
+
+  const read = (
+    key: string,
+    name: string,
+    loc: ES.SourceLocation | null | undefined,
+  ): ES.Identifier => {
+    const at = captureIndex.get(key);
+    return {
+      ...identifier(
+        at !== undefined ? `$${at}` : name === "jsx" ? "$jsx" : name,
+      ),
+      loc,
+    };
+  };
+
+  const splice = (
+    key: string,
+    loc: ES.SourceLocation | null | undefined,
+  ): ES.Expression => {
     const index = holes.get(key);
     if (index === undefined) {
       throw new Error(`This script has no \`${key}\` splice.`);
     }
-    // What a fragment landing here could want: the bindings bound at this hole,
-    // then everything this script captured — which, captures being transitive,
-    // already covers what a fragment nested here needs. Positional, in an order
-    // the script fixes, so a call site reading the same metadata can line its
-    // thunk up without either side knowing the other.
     const args = [...(paramsOf.get(key) ?? []), ...script.captures].map(
-      (bound) => read(bound),
+      (bound) => read(bound, sourceName(bound), loc),
     );
-    return call(binding(names, `$${index}`), args);
+    return {
+      ...call({ ...identifier(`$${index}`), loc }, args),
+      loc,
+    };
   };
 
-  const buildBody = (
-    node: ClientScriptBody,
-  ): ES.Expression | ES.BlockStatement =>
-    node.kind === "{}" ? buildBlock(node) : buildExpression(node);
-
-  function buildBlock(node: ClientScriptBlock): ES.BlockStatement {
-    return {
-      type: "BlockStatement",
-      body: node.statements.map(buildStatement),
-    };
-  }
-
-  function buildDeclaration(
-    node: ClientScriptDeclaration,
-  ): ES.VariableDeclaration {
-    return {
-      type: "VariableDeclaration",
-      kind: node.kind,
-      declarations: [
-        {
-          type: "VariableDeclarator",
-          id: binding(names, sourceName(node.name.bindingKey)),
-          init: buildExpression(node.initializer),
-        },
-      ],
-    };
-  }
-
-  // Braced, so an `else` never attaches to an `if` nested inside.
-  const braced = (node: ES.Statement): ES.BlockStatement =>
-    node.type === "BlockStatement"
-      ? node
-      : { type: "BlockStatement", body: [node] };
-
-  function buildStatement(node: ClientScriptStatement): ES.Statement {
-    switch (node.kind) {
-      case "{}":
-        return buildBlock(node);
-      case "if":
-        return {
-          type: "IfStatement",
-          test: buildExpression(node.expression),
-          consequent: braced(buildStatement(node.thenStatement)),
-          alternate:
-            node.elseStatement === null
-              ? null
-              : buildStatement(node.elseStatement),
-        };
-      case "while":
-        return {
-          type: "WhileStatement",
-          test: buildExpression(node.expression),
-          body: buildStatement(node.statement),
-        };
-      case "for":
-        return {
-          type: "ForStatement",
-          init:
-            node.initializer === null
-              ? null
-              : node.initializer.kind === "const" ||
-                  node.initializer.kind === "let"
-                ? buildDeclaration(node.initializer)
-                : buildExpression(node.initializer),
-          test:
-            node.condition === null ? null : buildExpression(node.condition),
-          update:
-            node.incrementor === null
-              ? null
-              : buildExpression(node.incrementor),
-          body: buildStatement(node.statement),
-        };
-      case "break":
-        return { type: "BreakStatement", label: null };
-      case "continue":
-        return { type: "ContinueStatement", label: null };
-      case "return":
-        return {
-          type: "ReturnStatement",
-          argument: buildExpression(node.expression),
-        };
-      case "throw":
-        return {
-          type: "ThrowStatement",
-          argument: buildExpression(node.expression),
-        };
-      case "try": {
-        const clause = node.catchClause;
-        return {
-          type: "TryStatement",
-          block: buildBlock(node.tryBlock),
-          handler: {
-            type: "CatchClause",
-            param:
-              clause.variableDeclaration === null
-                ? null
-                : binding(
-                    names,
-                    sourceName(clause.variableDeclaration.bindingKey),
-                  ),
-            body: buildBlock(clause.block),
-          },
-          finalizer: null,
-        };
-      }
-      case "const":
-      case "let":
-        return buildDeclaration(node);
-      default:
-        // Every remaining kind is an expression, evaluated for its effect.
-        return {
-          type: "ExpressionStatement",
-          expression: buildExpression(node),
-        };
-    }
-  }
-
-  // What an assignment or a step writes: only a variable, which the compiler
-  // enforces; this is where the two meet.
-  function assignmentTarget(operand: ClientScriptExpression): ES.Identifier {
-    if (operand.kind !== "id") {
-      throw new Error("An assignment target must be an identifier.");
-    }
-    return read(operand.bindingKey);
-  }
-
-  function buildExpression(node: ClientScriptExpression): ES.Expression {
-    const e = buildExpression;
-    // Where a list admits `...xs` as well as a value.
-    const element = (
-      child: ClientScriptArrayElement,
-    ): ES.Expression | ES.SpreadElement =>
-      child.kind === "..."
-        ? { type: "SpreadElement", argument: e(child.expression) }
-        : e(child);
-    switch (node.kind) {
-      case "arr":
-        return {
-          type: "ArrayExpression",
-          elements: node.elements.map(element),
-        };
-      case "=>":
-        return arrow(
-          node.parameters.map((param) =>
-            binding(names, sourceName(param.name.bindingKey)),
-          ),
-          buildBody(node.body),
-        );
-      case "binop":
-        switch (node.operatorToken) {
-          case "=":
-          case "+=":
-          case "-=":
-          case "*=":
-          case "/=":
-          case "%=":
-            return {
-              type: "AssignmentExpression",
-              operator: node.operatorToken,
-              left: assignmentTarget(node.left),
-              right: e(node.right),
-            };
-          case "&&":
-          case "||":
-          case "??":
-            return {
-              type: "LogicalExpression",
-              operator: node.operatorToken,
-              left: e(node.left),
-              right: e(node.right),
-            };
+  function lowerJsx(node: JSX.JSXElement | JSX.JSXFragment): ES.Expression {
+    // What JSX reads as nothing is nothing: text left empty by its whitespace
+    // rule, and an empty `{}`.
+    const children = (node.children as JSX.JSXElement["children"]).flatMap(
+      (child): ES.Expression[] => {
+        switch (child.type) {
+          case "JSXText": {
+            const text = jsxText(child.value);
+            return text === null
+              ? []
+              : [{ ...stringLiteral(text), loc: child.loc }];
+          }
+          case "JSXExpressionContainer":
+            return child.expression.type === "JSXEmptyExpression"
+              ? []
+              : [lower(child.expression) as ES.Expression];
+          case "JSXElement":
+          case "JSXFragment":
+            return [lowerJsx(child)];
           default:
-            return {
-              type: "BinaryExpression",
-              operator: node.operatorToken,
-              left: e(node.left),
-              right: e(node.right),
-            };
+            throw new Error(`\`${child.type}\` isn't a child a script writes.`);
         }
-      case "prefixop":
-        if (node.operator === "++" || node.operator === "--") {
-          return {
-            type: "UpdateExpression",
-            operator: node.operator,
-            prefix: true,
-            argument: assignmentTarget(node.operand),
-          };
-        }
-        return {
-          type: "UnaryExpression",
-          operator: node.operator,
-          prefix: true,
-          argument: e(node.operand),
-        };
-      case "typeof":
-        return {
-          type: "UnaryExpression",
-          operator: "typeof",
-          prefix: true,
-          argument: e(node.operand),
-        };
-      case "postfixop":
-        return {
-          type: "UpdateExpression",
-          operator: node.operator,
-          prefix: false,
-          argument: assignmentTarget(node.operand),
-        };
-      case "?:":
-        return {
-          type: "ConditionalExpression",
-          test: e(node.condition),
-          consequent: e(node.whenTrue),
-          alternate: e(node.whenFalse),
-        };
-      case "true":
-        return literal(true);
-      case "false":
-        return literal(false);
-      case "()":
-      case "?.()": {
-        // The callee is built before the arguments, because building one can
-        // mint a `functions` entry and the labels run in the order they are
-        // taken. A method keeps its receiver: the member is read and called in
-        // one expression, and `a?.b(…)` short-circuits the whole call.
-        const optionalCall = node.kind === "?.()";
-        const callee = node.expression;
-        const method = callee.kind === "." || callee.kind === "?.";
-        const optionalMember = callee.kind === "?.";
-        const head = method
-          ? member(e(callee.expression), callee.name, optionalMember)
-          : e(callee);
-        const called: ES.SimpleCallExpression = {
-          type: "CallExpression",
-          callee: head,
-          arguments: node.arguments.map(element),
-          optional: optionalCall,
-        };
-        return optionalCall || optionalMember ? chain(called) : called;
+      },
+    );
+    // One child stands on its own; several are an array. None is `null`.
+    const drawn: ES.Expression | null =
+      children.length === 0
+        ? null
+        : children.length === 1
+          ? children[0]!
+          : { type: "ArrayExpression", elements: children };
+
+    const lowered = ((): ES.Expression => {
+      const opening = node.type === "JSXElement" ? node.openingElement : null;
+      const tag = opening?.name as (JSX.JSXIdentifier & Bound) | undefined;
+      if (tag === undefined || isFragmentTag(tag.name)) {
+        return jsxElement(null, "Fragment", [], drawn);
       }
-      case "id":
-        return read(node.bindingKey);
-      case "null":
-        return nullLiteral();
-      case "undefined":
-        return undefinedValue();
-      case "number":
-        return literal(node.value);
-      case "obj":
-        return {
-          type: "ObjectExpression",
-          properties: node.properties.map((one) =>
-            one.kind === "..."
-              ? { type: "SpreadElement", argument: e(one.expression) }
-              : one.name.kind === "string"
-                ? property(objectKey(one.name.text), e(one.initializer))
-                : property(e(one.name), e(one.initializer), true),
-          ),
-        };
-      case ".":
-        return member(e(node.expression), node.name, false);
-      case "?.":
-        return chain(member(e(node.expression), node.name, true));
-      case "[]":
-        return {
-          type: "MemberExpression",
-          object: e(node.expression),
-          property: e(node.argumentExpression),
-          computed: true,
-          optional: false,
-        };
-      case "bltn":
-        return builtin(names, node.name);
-      // An element the script wrote. The other kind of tag is a component: one
-      // the script holds, or one it splices, whose expansion reads each prop by
-      // calling it, so there each prop is a function of nothing.
-      case "jsx": {
-        const written = node.attributes.map(
-          (attribute) => [attribute.name, e(attribute.initializer)] as const,
+      // A valueless attribute is the `true` it means.
+      const written = (opening!.attributes as JSX.JSXAttribute[]).map(
+        (attribute) =>
+          [
+            (attribute.name as JSX.JSXIdentifier).name,
+            attribute.value === null
+              ? ({ type: "Literal", value: true } as ES.Literal)
+              : attribute.value.type === "JSXExpressionContainer"
+                ? (lower(attribute.value.expression) as ES.Expression)
+                : (lower(attribute.value) as ES.Expression),
+          ] as const,
+      );
+      // A component the script holds is called with its props.
+      if (tag.bindingKey !== undefined) {
+        return jsxComponent(
+          null,
+          read(tag.bindingKey, tag.name, tag.loc),
+          written,
+          drawn,
         );
-        // One child stands on its own; several are an array. None is `null`.
-        const children: ES.Expression | null =
-          node.children.length === 0
-            ? null
-            : node.children.length === 1
-              ? e(node.children[0])
-              : { type: "ArrayExpression", elements: node.children.map(e) };
-        if (node.type.kind === "splice") {
-          return jsxComponent(
-            names,
-            renderSplice(node.type.key),
-            written.map(([name, value]) => [name, thunk(value)] as const),
-            children === null ? null : thunk(children),
-          );
-        }
-        if (node.type.kind === "id") {
-          return jsxComponent(names, e(node.type), written, children);
-        }
-        return jsxElement(names, node.type.text, written, children);
       }
-      case "splice":
-        return renderSplice(node.key);
-      case "string":
-        return stringLiteral(node.text);
-      default: {
-        const unhandled: never = node;
-        throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);
+      // A component tag naming a host binding reaches it by splice, under
+      // `$<name>`. What it splices is the expansion of a host component, which
+      // reads each prop by calling it, so there each prop, and the children,
+      // are a function of nothing.
+      if (isComponentTag(tag.name)) {
+        return jsxComponent(
+          null,
+          splice(`$${tag.name}`, tag.loc),
+          written.map(([name, value]) => [name, thunk(value)] as const),
+          drawn === null ? null : thunk(drawn),
+        );
       }
+      return jsxElement(null, tag.name, written, drawn);
+    })();
+    // On the node itself: an element is known by the call that built it.
+    lowered.loc = node.loc;
+    return lowered;
+  }
+
+  function lower(node: unknown): unknown {
+    if (Array.isArray(node)) {
+      return node.map(lower);
+    }
+    if (node === null || typeof node !== "object") {
+      return node;
+    }
+    const held = node as ES.Node & Bound;
+    switch (held.type) {
+      case "Splice":
+        return splice((held as unknown as Splice).key, held.loc);
+      case "Identifier":
+        if (held.bindingKey !== undefined) {
+          return read(held.bindingKey, held.name, held.loc);
+        }
+        return held.name === "eval"
+          ? {
+              type: "SequenceExpression",
+              expressions: [{ type: "Literal", value: 0 }, identifier("eval")],
+              loc: held.loc,
+            }
+          : { ...held };
+      case "JSXElement":
+      case "JSXFragment":
+        return lowerJsx(held as JSX.JSXElement | JSX.JSXFragment);
+      // Escaped, so no `</script>` appears when the bundle is inlined.
+      case "Literal":
+        return typeof held.value === "string"
+          ? { ...stringLiteral(held.value), loc: held.loc }
+          : { ...held };
+      // Braced, so an `else` never attaches to an `if` nested inside.
+      case "IfStatement": {
+        const consequent = lower(held.consequent) as ES.Statement;
+        return {
+          ...held,
+          test: lower(held.test),
+          consequent:
+            consequent.type === "BlockStatement"
+              ? consequent
+              : {
+                  type: "BlockStatement",
+                  body: [consequent],
+                  loc: consequent.loc,
+                },
+          alternate: lower(held.alternate),
+        };
+      }
+      default:
+        return Object.fromEntries(
+          Object.entries(held).map(([field, value]) => [
+            field,
+            field === "loc" ? value : lower(value),
+          ]),
+        );
     }
   }
 
-  return buildBody(script.body);
+  return lower(script.body) as Body;
 }

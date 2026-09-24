@@ -15,7 +15,7 @@ it("typeAssertion", async (t) => {
     t,
     "typeAssertion",
     cs.create(
-      [19, 5, 23, 7],
+      { start: { line: 19, column: 4 }, end: { line: 23, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/type-assertion.test.tsx",
@@ -24,87 +24,175 @@ it("typeAssertion", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [19, 8, 23, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 19, column: 7 }, end: { line: 23, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 20, column: 6 },
+              end: { line: 20, column: 78 },
+            },
             kind: "const",
-            loc: [20, 7, 20, 79],
-            name: {
-              kind: "id",
-              loc: [20, 13, 20, 17],
-              text: "page",
-              bindingKey: "page$3amzui83z49rq$0",
-            },
-            initializer: {
-              kind: "()",
-              loc: [20, 20, 20, 41],
-              expression: {
-                kind: ".",
-                loc: [20, 20, 20, 30],
-                expression: {
-                  kind: "bltn",
-                  loc: [20, 20, 20, 24],
-                  name: "JSON",
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 20, column: 12 },
+                  end: { line: 20, column: 77 },
                 },
-                name: "parse",
-              },
-              arguments: [
-                {
-                  kind: "splice",
-                  loc: [20, 31, 20, 40],
-                  key: "$answered",
-                },
-              ],
-            },
-          },
-          {
-            kind: "return",
-            loc: [22, 7, 22, 49],
-            expression: {
-              kind: "binop",
-              loc: [22, 14, 22, 48],
-              left: {
-                kind: "binop",
-                loc: [22, 14, 22, 35],
-                left: {
-                  kind: "[]",
-                  loc: [22, 14, 22, 26],
-                  expression: {
-                    kind: ".",
-                    loc: [22, 14, 22, 23],
-                    expression: {
-                      kind: "id",
-                      loc: [22, 14, 22, 18],
-                      text: "page",
-                      bindingKey: "page$3amzui83z49rq$0",
-                    },
-                    name: "rows",
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 20, column: 12 },
+                    end: { line: 20, column: 16 },
                   },
-                  argumentExpression: {
-                    kind: "number",
-                    loc: [22, 24, 22, 25],
-                    value: 0,
-                  },
-                },
-                operatorToken: "+",
-                right: {
-                  kind: "string",
-                  loc: [22, 29, 22, 35],
-                  text: " of ",
-                },
-              },
-              operatorToken: "+",
-              right: {
-                kind: ".",
-                loc: [22, 38, 22, 48],
-                expression: {
-                  kind: "id",
-                  loc: [22, 38, 22, 42],
-                  text: "page",
+                  name: "page",
                   bindingKey: "page$3amzui83z49rq$0",
                 },
-                name: "count",
+                init: {
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 20, column: 19 },
+                    end: { line: 20, column: 40 },
+                  },
+                  callee: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 20, column: 19 },
+                      end: { line: 20, column: 29 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 20, column: 19 },
+                        end: { line: 20, column: 23 },
+                      },
+                      name: "JSON",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 20, column: 24 },
+                        end: { line: 20, column: 29 },
+                      },
+                      name: "parse",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  arguments: [
+                    {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 20, column: 30 },
+                        end: { line: 20, column: 39 },
+                      },
+                      key: "$answered",
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+            ],
+          },
+          {
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 22, column: 6 },
+              end: { line: 22, column: 48 },
+            },
+            argument: {
+              type: "BinaryExpression",
+              loc: {
+                start: { line: 22, column: 13 },
+                end: { line: 22, column: 47 },
+              },
+              operator: "+",
+              left: {
+                type: "BinaryExpression",
+                loc: {
+                  start: { line: 22, column: 13 },
+                  end: { line: 22, column: 34 },
+                },
+                operator: "+",
+                left: {
+                  type: "MemberExpression",
+                  loc: {
+                    start: { line: 22, column: 13 },
+                    end: { line: 22, column: 25 },
+                  },
+                  object: {
+                    type: "MemberExpression",
+                    loc: {
+                      start: { line: 22, column: 13 },
+                      end: { line: 22, column: 22 },
+                    },
+                    object: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 13 },
+                        end: { line: 22, column: 17 },
+                      },
+                      name: "page",
+                      bindingKey: "page$3amzui83z49rq$0",
+                    },
+                    property: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 22, column: 18 },
+                        end: { line: 22, column: 22 },
+                      },
+                      name: "rows",
+                    },
+                    computed: false,
+                    optional: false,
+                  },
+                  property: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 22, column: 23 },
+                      end: { line: 22, column: 24 },
+                    },
+                    value: 0,
+                  },
+                  computed: true,
+                  optional: false,
+                },
+                right: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 22, column: 28 },
+                    end: { line: 22, column: 34 },
+                  },
+                  value: " of ",
+                },
+              },
+              right: {
+                type: "MemberExpression",
+                loc: {
+                  start: { line: 22, column: 37 },
+                  end: { line: 22, column: 47 },
+                },
+                object: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 22, column: 37 },
+                    end: { line: 22, column: 41 },
+                  },
+                  name: "page",
+                  bindingKey: "page$3amzui83z49rq$0",
+                },
+                property: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 22, column: 42 },
+                    end: { line: 22, column: 47 },
+                  },
+                  name: "count",
+                },
+                computed: false,
+                optional: false,
               },
             },
           },

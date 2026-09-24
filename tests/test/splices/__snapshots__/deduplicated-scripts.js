@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // The same `cs\`7\`` literal spliced twice is one client script, so it
 // collapses into a single function-table entry referenced twice.
 const leaf = cs.create(
-  [7, 14, 7, 19],
+  { start: { line: 7, column: 13 }, end: { line: 7, column: 18 } },
   {
     version: "0.0.0",
     filePath: "splices/deduplicated-scripts.test.tsx",
@@ -13,8 +13,8 @@ const leaf = cs.create(
     captures: [],
   },
   () => ({
-    kind: "number",
-    loc: [7, 17, 7, 18],
+    type: "Literal",
+    loc: { start: { line: 7, column: 16 }, end: { line: 7, column: 17 } },
     value: 7,
   }),
 );
@@ -23,7 +23,7 @@ it("deduplicatedScripts", async (t) => {
     t,
     "deduplicatedScripts",
     cs.create(
-      [10, 48, 10, 76],
+      { start: { line: 10, column: 47 }, end: { line: 10, column: 75 } },
       {
         version: "0.0.0",
         filePath: "splices/deduplicated-scripts.test.tsx",
@@ -32,36 +32,62 @@ it("deduplicatedScripts", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [10, 52, 10, 74],
+        type: "ObjectExpression",
+        loc: { start: { line: 10, column: 51 }, end: { line: 10, column: 73 } },
         properties: [
           {
-            kind: ":",
-            loc: [10, 54, 10, 62],
-            name: {
-              kind: "string",
-              loc: [10, 54, 10, 55],
-              text: "a",
+            type: "Property",
+            loc: {
+              start: { line: 10, column: 53 },
+              end: { line: 10, column: 61 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [10, 57, 10, 62],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 10, column: 53 },
+                end: { line: 10, column: 54 },
+              },
+              name: "a",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 10, column: 56 },
+                end: { line: 10, column: 61 },
+              },
               key: "$leaf",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [10, 64, 10, 72],
-            name: {
-              kind: "string",
-              loc: [10, 64, 10, 65],
-              text: "b",
+            type: "Property",
+            loc: {
+              start: { line: 10, column: 63 },
+              end: { line: 10, column: 71 },
             },
-            initializer: {
-              kind: "splice",
-              loc: [10, 67, 10, 72],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 10, column: 63 },
+                end: { line: 10, column: 64 },
+              },
+              name: "b",
+            },
+            value: {
+              type: "Splice",
+              loc: {
+                start: { line: 10, column: 66 },
+                end: { line: 10, column: 71 },
+              },
               key: "$leaf",
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

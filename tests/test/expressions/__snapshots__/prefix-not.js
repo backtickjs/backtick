@@ -8,7 +8,7 @@ it("prefixNot", async (t) => {
     t,
     "prefixNot",
     cs.create(
-      [11, 5, 16, 7],
+      { start: { line: 11, column: 4 }, end: { line: 16, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/prefix-not.test.tsx",
@@ -17,106 +17,152 @@ it("prefixNot", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "=>",
-        loc: [11, 8, 16, 6],
-        parameters: [
+        type: "ArrowFunctionExpression",
+        loc: { start: { line: 11, column: 7 }, end: { line: 16, column: 5 } },
+        params: [
           {
-            kind: "param",
-            loc: [11, 9, 11, 23],
-            name: {
-              kind: "id",
-              loc: [11, 9, 11, 14],
-              text: "ready",
-              bindingKey: "ready$1mtvw9zrodgef$0",
+            type: "Identifier",
+            loc: {
+              start: { line: 11, column: 8 },
+              end: { line: 11, column: 13 },
             },
+            name: "ready",
+            bindingKey: "ready$1mtvw9zrodgef$0",
           },
           {
-            kind: "param",
-            loc: [11, 25, 11, 38],
-            name: {
-              kind: "id",
-              loc: [11, 25, 11, 30],
-              text: "count",
-              bindingKey: "count$1mtvw9zrodgef$1",
+            type: "Identifier",
+            loc: {
+              start: { line: 11, column: 24 },
+              end: { line: 11, column: 29 },
             },
+            name: "count",
+            bindingKey: "count$1mtvw9zrodgef$1",
           },
         ],
         body: {
-          kind: "{}",
-          loc: [11, 43, 16, 6],
-          statements: [
+          type: "BlockStatement",
+          loc: {
+            start: { line: 11, column: 42 },
+            end: { line: 16, column: 5 },
+          },
+          body: [
             {
-              kind: "if",
-              loc: [12, 7, 14, 8],
-              expression: {
-                kind: "prefixop",
-                loc: [12, 11, 12, 17],
+              type: "IfStatement",
+              loc: {
+                start: { line: 12, column: 6 },
+                end: { line: 14, column: 7 },
+              },
+              test: {
+                type: "UnaryExpression",
+                loc: {
+                  start: { line: 12, column: 10 },
+                  end: { line: 12, column: 16 },
+                },
                 operator: "!",
-                operand: {
-                  kind: "id",
-                  loc: [12, 12, 12, 17],
-                  text: "ready",
+                prefix: true,
+                argument: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 12, column: 11 },
+                    end: { line: 12, column: 16 },
+                  },
+                  name: "ready",
                   bindingKey: "ready$1mtvw9zrodgef$0",
                 },
               },
-              thenStatement: {
-                kind: "{}",
-                loc: [12, 19, 14, 8],
-                statements: [
+              consequent: {
+                type: "BlockStatement",
+                loc: {
+                  start: { line: 12, column: 18 },
+                  end: { line: 14, column: 7 },
+                },
+                body: [
                   {
-                    kind: "return",
-                    loc: [13, 9, 13, 26],
-                    expression: {
-                      kind: "string",
-                      loc: [13, 16, 13, 25],
-                      text: "waiting",
+                    type: "ReturnStatement",
+                    loc: {
+                      start: { line: 13, column: 8 },
+                      end: { line: 13, column: 25 },
+                    },
+                    argument: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 13, column: 15 },
+                        end: { line: 13, column: 24 },
+                      },
+                      value: "waiting",
                     },
                   },
                 ],
               },
-              elseStatement: null,
+              alternate: null,
             },
             {
-              kind: "return",
-              loc: [15, 7, 15, 50],
-              expression: {
-                kind: "?:",
-                loc: [15, 14, 15, 49],
-                condition: {
-                  kind: "prefixop",
-                  loc: [15, 14, 15, 26],
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 15, column: 6 },
+                end: { line: 15, column: 49 },
+              },
+              argument: {
+                type: "ConditionalExpression",
+                loc: {
+                  start: { line: 15, column: 13 },
+                  end: { line: 15, column: 48 },
+                },
+                test: {
+                  type: "UnaryExpression",
+                  loc: {
+                    start: { line: 15, column: 13 },
+                    end: { line: 15, column: 25 },
+                  },
                   operator: "!",
-                  operand: {
-                    kind: "binop",
-                    loc: [15, 16, 15, 25],
+                  prefix: true,
+                  argument: {
+                    type: "BinaryExpression",
+                    loc: {
+                      start: { line: 15, column: 15 },
+                      end: { line: 15, column: 24 },
+                    },
+                    operator: ">",
                     left: {
-                      kind: "id",
-                      loc: [15, 16, 15, 21],
-                      text: "count",
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 15, column: 15 },
+                        end: { line: 15, column: 20 },
+                      },
+                      name: "count",
                       bindingKey: "count$1mtvw9zrodgef$1",
                     },
-                    operatorToken: ">",
                     right: {
-                      kind: "number",
-                      loc: [15, 24, 15, 25],
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 23 },
+                        end: { line: 15, column: 24 },
+                      },
                       value: 3,
                     },
                   },
                 },
-                whenTrue: {
-                  kind: "string",
-                  loc: [15, 29, 15, 40],
-                  text: "room left",
+                consequent: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 15, column: 28 },
+                    end: { line: 15, column: 39 },
+                  },
+                  value: "room left",
                 },
-                whenFalse: {
-                  kind: "string",
-                  loc: [15, 43, 15, 49],
-                  text: "full",
+                alternate: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 15, column: 42 },
+                    end: { line: 15, column: 48 },
+                  },
+                  value: "full",
                 },
               },
             },
           ],
         },
+        expression: false,
       }),
     ),
   );

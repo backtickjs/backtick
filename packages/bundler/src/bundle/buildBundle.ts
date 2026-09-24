@@ -10,6 +10,7 @@ import {
   builtin,
   call,
   createNames,
+  identifier,
   jsxComponent,
   jsxElement,
   label,
@@ -107,8 +108,8 @@ export function buildBundle(
   // shadow what the outer was handed (`shadowing` nests three).
   //
   // One scope, which is the bundle root: what a drawing is written into now
-  // that structure goes where it stands. A `functions` entry names inside
-  // `lowerScriptBody`, from its own script — nothing out here reads those names,
+  // that structure goes where it stands. A `functions` entry's names are the
+  // compiler's, from its own script — nothing out here reads those names,
   // because a call site hands an entry its arguments positionally, and its
   // captures arrive as numbered parameters rather than under a name.
   const displayed = new Map<string, string>();
@@ -273,8 +274,8 @@ export function buildBundle(
     bodies.set(
       script,
       arrow(
-        params.map((param) => binding(names, param)),
-        lowerScriptBody(script, names),
+        params.map((param) => identifier(param)),
+        lowerScriptBody(script),
       ),
     );
   };

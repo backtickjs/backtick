@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // threaded capture's display name recovers `foo$` intact.
 function add(lhs) {
   return cs.create(
-    [10, 10, 10, 22],
+    { start: { line: 10, column: 9 }, end: { line: 10, column: 21 } },
     {
       version: "0.0.0",
       filePath: "expressions/dollar-name.test.tsx",
@@ -16,17 +16,17 @@ function add(lhs) {
       captures: [],
     },
     () => ({
-      kind: "binop",
-      loc: [10, 13, 10, 21],
+      type: "BinaryExpression",
+      loc: { start: { line: 10, column: 12 }, end: { line: 10, column: 20 } },
+      operator: "+",
       left: {
-        kind: "splice",
-        loc: [10, 13, 10, 17],
+        type: "Splice",
+        loc: { start: { line: 10, column: 12 }, end: { line: 10, column: 16 } },
         key: "$lhs",
       },
-      operatorToken: "+",
       right: {
-        kind: "number",
-        loc: [10, 20, 10, 21],
+        type: "Literal",
+        loc: { start: { line: 10, column: 19 }, end: { line: 10, column: 20 } },
         value: 2,
       },
     }),
@@ -37,7 +37,7 @@ it("dollarName", async (t) => {
     t,
     "dollarName",
     cs.create(
-      [17, 5, 20, 7],
+      { start: { line: 17, column: 4 }, end: { line: 20, column: 6 } },
       {
         version: "0.0.0",
         filePath: "expressions/dollar-name.test.tsx",
@@ -46,7 +46,10 @@ it("dollarName", async (t) => {
           $0splice0: {
             value: add(
               cs.create(
-                [19, 20, 19, 28],
+                {
+                  start: { line: 19, column: 19 },
+                  end: { line: 19, column: 27 },
+                },
                 {
                   version: "0.0.0",
                   filePath: "expressions/dollar-name.test.tsx",
@@ -55,9 +58,12 @@ it("dollarName", async (t) => {
                   captures: ["foo$$sl458m2swc6c$0"],
                 },
                 () => ({
-                  kind: "id",
-                  loc: [19, 23, 19, 27],
-                  text: "foo$",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 19, column: 22 },
+                    end: { line: 19, column: 26 },
+                  },
+                  name: "foo$",
                   bindingKey: "foo$$sl458m2swc6c$0",
                 }),
               ),
@@ -68,30 +74,55 @@ it("dollarName", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [17, 8, 20, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 17, column: 7 }, end: { line: 20, column: 5 } },
+        body: [
           {
+            type: "VariableDeclaration",
+            loc: {
+              start: { line: 18, column: 6 },
+              end: { line: 18, column: 21 },
+            },
             kind: "const",
-            loc: [18, 7, 18, 22],
-            name: {
-              kind: "id",
-              loc: [18, 13, 18, 17],
-              text: "foo$",
-              bindingKey: "foo$$sl458m2swc6c$0",
-            },
-            initializer: {
-              kind: "number",
-              loc: [18, 20, 18, 21],
-              value: 1,
-            },
+            declarations: [
+              {
+                type: "VariableDeclarator",
+                loc: {
+                  start: { line: 18, column: 12 },
+                  end: { line: 18, column: 20 },
+                },
+                id: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 18, column: 12 },
+                    end: { line: 18, column: 16 },
+                  },
+                  name: "foo$",
+                  bindingKey: "foo$$sl458m2swc6c$0",
+                },
+                init: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 18, column: 19 },
+                    end: { line: 18, column: 20 },
+                  },
+                  value: 1,
+                },
+              },
+            ],
           },
           {
-            kind: "return",
-            loc: [19, 7, 19, 31],
-            expression: {
-              kind: "splice",
-              loc: [19, 14, 19, 30],
+            type: "ReturnStatement",
+            loc: {
+              start: { line: 19, column: 6 },
+              end: { line: 19, column: 30 },
+            },
+            argument: {
+              type: "Splice",
+              loc: {
+                start: { line: 19, column: 13 },
+                end: { line: 19, column: 29 },
+              },
               key: "$0splice0",
             },
           },

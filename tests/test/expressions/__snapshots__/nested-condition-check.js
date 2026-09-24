@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // level and re-report every operand mismatch at a second virtual position —
 // so the virtual code and mappings pin the duplicate staying bare.
 const gate = cs.create(
-  [11, 58, 20, 3],
+  { start: { line: 11, column: 57 }, end: { line: 20, column: 2 } },
   {
     version: "0.0.0",
     filePath: "expressions/nested-condition-check.test.tsx",
@@ -17,126 +17,172 @@ const gate = cs.create(
     captures: [],
   },
   () => ({
-    kind: "=>",
-    loc: [11, 61, 20, 2],
-    parameters: [
+    type: "ArrowFunctionExpression",
+    loc: { start: { line: 11, column: 60 }, end: { line: 20, column: 1 } },
+    params: [
       {
-        kind: "param",
-        loc: [12, 3, 12, 13],
-        name: {
-          kind: "id",
-          loc: [12, 3, 12, 4],
-          text: "a",
-          bindingKey: "a$25ylu92dfkakl$0",
-        },
+        type: "Identifier",
+        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 3 } },
+        name: "a",
+        bindingKey: "a$25ylu92dfkakl$0",
       },
       {
-        kind: "param",
-        loc: [13, 3, 13, 13],
-        name: {
-          kind: "id",
-          loc: [13, 3, 13, 4],
-          text: "b",
-          bindingKey: "b$25ylu92dfkakl$1",
-        },
+        type: "Identifier",
+        loc: { start: { line: 13, column: 2 }, end: { line: 13, column: 3 } },
+        name: "b",
+        bindingKey: "b$25ylu92dfkakl$1",
       },
     ],
     body: {
-      kind: "{}",
-      loc: [14, 6, 20, 2],
-      statements: [
+      type: "BlockStatement",
+      loc: { start: { line: 14, column: 5 }, end: { line: 20, column: 1 } },
+      body: [
         {
-          kind: "const",
-          loc: [15, 3, 15, 36],
-          name: {
-            kind: "id",
-            loc: [15, 9, 15, 13],
-            text: "keep",
-            bindingKey: "keep$25ylu92dfkakl$2",
+          type: "VariableDeclaration",
+          loc: {
+            start: { line: 15, column: 2 },
+            end: { line: 15, column: 35 },
           },
-          initializer: {
-            kind: "=>",
-            loc: [15, 16, 15, 35],
-            parameters: [
-              {
-                kind: "param",
-                loc: [15, 17, 15, 28],
-                name: {
-                  kind: "id",
-                  loc: [15, 17, 15, 19],
-                  text: "on",
+          kind: "const",
+          declarations: [
+            {
+              type: "VariableDeclarator",
+              loc: {
+                start: { line: 15, column: 8 },
+                end: { line: 15, column: 34 },
+              },
+              id: {
+                type: "Identifier",
+                loc: {
+                  start: { line: 15, column: 8 },
+                  end: { line: 15, column: 12 },
+                },
+                name: "keep",
+                bindingKey: "keep$25ylu92dfkakl$2",
+              },
+              init: {
+                type: "ArrowFunctionExpression",
+                loc: {
+                  start: { line: 15, column: 15 },
+                  end: { line: 15, column: 34 },
+                },
+                params: [
+                  {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 15, column: 16 },
+                      end: { line: 15, column: 18 },
+                    },
+                    name: "on",
+                    bindingKey: "on$25ylu92dfkakl$3",
+                  },
+                ],
+                body: {
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 15, column: 32 },
+                    end: { line: 15, column: 34 },
+                  },
+                  name: "on",
                   bindingKey: "on$25ylu92dfkakl$3",
                 },
+                expression: true,
               },
-            ],
-            body: {
-              kind: "id",
-              loc: [15, 33, 15, 35],
-              text: "on",
-              bindingKey: "on$25ylu92dfkakl$3",
             },
-          },
+          ],
         },
         {
-          kind: "if",
-          loc: [16, 3, 18, 4],
-          expression: {
-            kind: "()",
-            loc: [16, 7, 16, 19],
-            expression: {
-              kind: "id",
-              loc: [16, 7, 16, 11],
-              text: "keep",
+          type: "IfStatement",
+          loc: { start: { line: 16, column: 2 }, end: { line: 18, column: 3 } },
+          test: {
+            type: "CallExpression",
+            loc: {
+              start: { line: 16, column: 6 },
+              end: { line: 16, column: 18 },
+            },
+            callee: {
+              type: "Identifier",
+              loc: {
+                start: { line: 16, column: 6 },
+                end: { line: 16, column: 10 },
+              },
+              name: "keep",
               bindingKey: "keep$25ylu92dfkakl$2",
             },
             arguments: [
               {
-                kind: "binop",
-                loc: [16, 12, 16, 18],
+                type: "LogicalExpression",
+                loc: {
+                  start: { line: 16, column: 11 },
+                  end: { line: 16, column: 17 },
+                },
+                operator: "&&",
                 left: {
-                  kind: "id",
-                  loc: [16, 12, 16, 13],
-                  text: "a",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 11 },
+                    end: { line: 16, column: 12 },
+                  },
+                  name: "a",
                   bindingKey: "a$25ylu92dfkakl$0",
                 },
-                operatorToken: "&&",
                 right: {
-                  kind: "id",
-                  loc: [16, 17, 16, 18],
-                  text: "b",
+                  type: "Identifier",
+                  loc: {
+                    start: { line: 16, column: 16 },
+                    end: { line: 16, column: 17 },
+                  },
+                  name: "b",
                   bindingKey: "b$25ylu92dfkakl$1",
                 },
               },
             ],
+            optional: false,
           },
-          thenStatement: {
-            kind: "{}",
-            loc: [16, 21, 18, 4],
-            statements: [
+          consequent: {
+            type: "BlockStatement",
+            loc: {
+              start: { line: 16, column: 20 },
+              end: { line: 18, column: 3 },
+            },
+            body: [
               {
-                kind: "return",
-                loc: [17, 5, 17, 19],
-                expression: {
-                  kind: "string",
-                  loc: [17, 12, 17, 18],
-                  text: "kept",
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 17, column: 4 },
+                  end: { line: 17, column: 18 },
+                },
+                argument: {
+                  type: "Literal",
+                  loc: {
+                    start: { line: 17, column: 11 },
+                    end: { line: 17, column: 17 },
+                  },
+                  value: "kept",
                 },
               },
             ],
           },
-          elseStatement: null,
+          alternate: null,
         },
         {
-          kind: "return",
-          loc: [19, 3, 19, 20],
-          expression: {
-            kind: "string",
-            loc: [19, 10, 19, 19],
-            text: "dropped",
+          type: "ReturnStatement",
+          loc: {
+            start: { line: 19, column: 2 },
+            end: { line: 19, column: 19 },
+          },
+          argument: {
+            type: "Literal",
+            loc: {
+              start: { line: 19, column: 9 },
+              end: { line: 19, column: 18 },
+            },
+            value: "dropped",
           },
         },
       ],
     },
+    expression: false,
   }),
 );
 it("nestedConditionCheck", async (t) => {
@@ -144,7 +190,7 @@ it("nestedConditionCheck", async (t) => {
     t,
     "nestedConditionCheck",
     cs.create(
-      [26, 5, 29, 8],
+      { start: { line: 26, column: 4 }, end: { line: 29, column: 7 } },
       {
         version: "0.0.0",
         filePath: "expressions/nested-condition-check.test.tsx",
@@ -153,64 +199,114 @@ it("nestedConditionCheck", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "obj",
-        loc: [26, 9, 29, 6],
+        type: "ObjectExpression",
+        loc: { start: { line: 26, column: 8 }, end: { line: 29, column: 5 } },
         properties: [
           {
-            kind: ":",
-            loc: [27, 7, 27, 30],
-            name: {
-              kind: "string",
-              loc: [27, 7, 27, 11],
-              text: "both",
+            type: "Property",
+            loc: {
+              start: { line: 27, column: 6 },
+              end: { line: 27, column: 29 },
             },
-            initializer: {
-              kind: "()",
-              loc: [27, 13, 27, 30],
-              expression: {
-                kind: "splice",
-                loc: [27, 13, 27, 18],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 27, column: 6 },
+                end: { line: 27, column: 10 },
+              },
+              name: "both",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 27, column: 12 },
+                end: { line: 27, column: 29 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 27, column: 12 },
+                  end: { line: 27, column: 17 },
+                },
                 key: "$gate",
               },
               arguments: [
                 {
-                  kind: "true",
-                  loc: [27, 19, 27, 23],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 27, column: 18 },
+                    end: { line: 27, column: 22 },
+                  },
+                  value: true,
                 },
                 {
-                  kind: "true",
-                  loc: [27, 25, 27, 29],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 27, column: 24 },
+                    end: { line: 27, column: 28 },
+                  },
+                  value: true,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
           {
-            kind: ":",
-            loc: [28, 7, 28, 30],
-            name: {
-              kind: "string",
-              loc: [28, 7, 28, 10],
-              text: "one",
+            type: "Property",
+            loc: {
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 29 },
             },
-            initializer: {
-              kind: "()",
-              loc: [28, 12, 28, 30],
-              expression: {
-                kind: "splice",
-                loc: [28, 12, 28, 17],
+            key: {
+              type: "Identifier",
+              loc: {
+                start: { line: 28, column: 6 },
+                end: { line: 28, column: 9 },
+              },
+              name: "one",
+            },
+            value: {
+              type: "CallExpression",
+              loc: {
+                start: { line: 28, column: 11 },
+                end: { line: 28, column: 29 },
+              },
+              callee: {
+                type: "Splice",
+                loc: {
+                  start: { line: 28, column: 11 },
+                  end: { line: 28, column: 16 },
+                },
                 key: "$gate",
               },
               arguments: [
                 {
-                  kind: "true",
-                  loc: [28, 18, 28, 22],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 28, column: 17 },
+                    end: { line: 28, column: 21 },
+                  },
+                  value: true,
                 },
                 {
-                  kind: "false",
-                  loc: [28, 24, 28, 29],
+                  type: "Literal",
+                  loc: {
+                    start: { line: 28, column: 23 },
+                    end: { line: 28, column: 28 },
+                  },
+                  value: false,
                 },
               ],
+              optional: false,
             },
+            kind: "init",
+            computed: false,
+            method: false,
+            shorthand: false,
           },
         ],
       }),

@@ -24,7 +24,7 @@ describe("onMount", () => {
     const seen = await logged(() =>
       render(
         cs.create(
-          [28, 9, 35, 11],
+          { start: { line: 28, column: 8 }, end: { line: 35, column: 10 } },
           {
             version: "0.0.0",
             filePath: "render/on-mount.test.tsx",
@@ -37,160 +37,363 @@ describe("onMount", () => {
             captures: [],
           },
           () => ({
-            kind: "{}",
-            loc: [28, 12, 35, 10],
-            statements: [
+            type: "BlockStatement",
+            loc: {
+              start: { line: 28, column: 11 },
+              end: { line: 35, column: 9 },
+            },
+            body: [
               {
+                type: "VariableDeclaration",
+                loc: {
+                  start: { line: 29, column: 10 },
+                  end: { line: 29, column: 34 },
+                },
                 kind: "const",
-                loc: [29, 11, 29, 35],
-                name: {
-                  kind: "id",
-                  loc: [29, 17, 29, 22],
-                  text: "count",
-                  bindingKey: "count$1vhzpl5t5wcnc$0",
-                },
-                initializer: {
-                  kind: "()",
-                  loc: [29, 25, 29, 34],
-                  expression: {
-                    kind: "splice",
-                    loc: [29, 25, 29, 31],
-                    key: "$state",
-                  },
-                  arguments: [
-                    {
-                      kind: "number",
-                      loc: [29, 32, 29, 33],
-                      value: 0,
-                    },
-                  ],
-                },
-              },
-              {
-                kind: "()",
-                loc: [30, 11, 33, 13],
-                expression: {
-                  kind: "splice",
-                  loc: [30, 11, 30, 19],
-                  key: "$onMount",
-                },
-                arguments: [
+                declarations: [
                   {
-                    kind: "=>",
-                    loc: [30, 20, 33, 12],
-                    parameters: [],
-                    body: {
-                      kind: "{}",
-                      loc: [30, 26, 33, 12],
-                      statements: [
-                        {
-                          kind: "()",
-                          loc: [31, 13, 31, 34],
-                          expression: {
-                            kind: ".",
-                            loc: [31, 13, 31, 32],
-                            expression: {
-                              kind: ".",
-                              loc: [31, 13, 31, 28],
-                              expression: {
-                                kind: "splice",
-                                loc: [31, 13, 31, 20],
-                                key: "$window",
-                              },
-                              name: "console",
-                            },
-                            name: "log",
-                          },
-                          arguments: [],
+                    type: "VariableDeclarator",
+                    loc: {
+                      start: { line: 29, column: 16 },
+                      end: { line: 29, column: 33 },
+                    },
+                    id: {
+                      type: "Identifier",
+                      loc: {
+                        start: { line: 29, column: 16 },
+                        end: { line: 29, column: 21 },
+                      },
+                      name: "count",
+                      bindingKey: "count$1vhzpl5t5wcnc$0",
+                    },
+                    init: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 29, column: 24 },
+                        end: { line: 29, column: 33 },
+                      },
+                      callee: {
+                        type: "Splice",
+                        loc: {
+                          start: { line: 29, column: 24 },
+                          end: { line: 29, column: 30 },
                         },
+                        key: "$state",
+                      },
+                      arguments: [
                         {
-                          kind: "()",
-                          loc: [32, 13, 32, 39],
-                          expression: {
-                            kind: ".",
-                            loc: [32, 13, 32, 22],
-                            expression: {
-                              kind: "id",
-                              loc: [32, 13, 32, 18],
-                              text: "count",
-                              bindingKey: "count$1vhzpl5t5wcnc$0",
-                            },
-                            name: "set",
+                          type: "Literal",
+                          loc: {
+                            start: { line: 29, column: 31 },
+                            end: { line: 29, column: 32 },
                           },
-                          arguments: [
-                            {
-                              kind: "binop",
-                              loc: [32, 23, 32, 38],
-                              left: {
-                                kind: "()",
-                                loc: [32, 23, 32, 34],
-                                expression: {
-                                  kind: ".",
-                                  loc: [32, 23, 32, 32],
-                                  expression: {
-                                    kind: "id",
-                                    loc: [32, 23, 32, 28],
-                                    text: "count",
-                                    bindingKey: "count$1vhzpl5t5wcnc$0",
-                                  },
-                                  name: "get",
-                                },
-                                arguments: [],
-                              },
-                              operatorToken: "+",
-                              right: {
-                                kind: "number",
-                                loc: [32, 37, 32, 38],
-                                value: 1,
-                              },
-                            },
-                          ],
+                          value: 0,
                         },
                       ],
+                      optional: false,
                     },
                   },
                 ],
               },
               {
-                kind: "return",
-                loc: [34, 11, 34, 52],
+                type: "ExpressionStatement",
+                loc: {
+                  start: { line: 30, column: 10 },
+                  end: { line: 33, column: 13 },
+                },
                 expression: {
-                  kind: "jsx",
-                  loc: [34, 18, 34, 51],
-                  type: {
-                    kind: "string",
-                    loc: [34, 19, 34, 20],
-                    text: "p",
+                  type: "CallExpression",
+                  loc: {
+                    start: { line: 30, column: 10 },
+                    end: { line: 33, column: 12 },
                   },
-                  attributes: [],
+                  callee: {
+                    type: "Splice",
+                    loc: {
+                      start: { line: 30, column: 10 },
+                      end: { line: 30, column: 18 },
+                    },
+                    key: "$onMount",
+                  },
+                  arguments: [
+                    {
+                      type: "ArrowFunctionExpression",
+                      loc: {
+                        start: { line: 30, column: 19 },
+                        end: { line: 33, column: 11 },
+                      },
+                      params: [],
+                      body: {
+                        type: "BlockStatement",
+                        loc: {
+                          start: { line: 30, column: 25 },
+                          end: { line: 33, column: 11 },
+                        },
+                        body: [
+                          {
+                            type: "ExpressionStatement",
+                            loc: {
+                              start: { line: 31, column: 12 },
+                              end: { line: 31, column: 34 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 31, column: 12 },
+                                end: { line: 31, column: 33 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 31, column: 12 },
+                                  end: { line: 31, column: 31 },
+                                },
+                                object: {
+                                  type: "MemberExpression",
+                                  loc: {
+                                    start: { line: 31, column: 12 },
+                                    end: { line: 31, column: 27 },
+                                  },
+                                  object: {
+                                    type: "Splice",
+                                    loc: {
+                                      start: { line: 31, column: 12 },
+                                      end: { line: 31, column: 19 },
+                                    },
+                                    key: "$window",
+                                  },
+                                  property: {
+                                    type: "Identifier",
+                                    loc: {
+                                      start: { line: 31, column: 20 },
+                                      end: { line: 31, column: 27 },
+                                    },
+                                    name: "console",
+                                  },
+                                  computed: false,
+                                  optional: false,
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 31, column: 28 },
+                                    end: { line: 31, column: 31 },
+                                  },
+                                  name: "log",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [],
+                              optional: false,
+                            },
+                          },
+                          {
+                            type: "ExpressionStatement",
+                            loc: {
+                              start: { line: 32, column: 12 },
+                              end: { line: 32, column: 39 },
+                            },
+                            expression: {
+                              type: "CallExpression",
+                              loc: {
+                                start: { line: 32, column: 12 },
+                                end: { line: 32, column: 38 },
+                              },
+                              callee: {
+                                type: "MemberExpression",
+                                loc: {
+                                  start: { line: 32, column: 12 },
+                                  end: { line: 32, column: 21 },
+                                },
+                                object: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 32, column: 12 },
+                                    end: { line: 32, column: 17 },
+                                  },
+                                  name: "count",
+                                  bindingKey: "count$1vhzpl5t5wcnc$0",
+                                },
+                                property: {
+                                  type: "Identifier",
+                                  loc: {
+                                    start: { line: 32, column: 18 },
+                                    end: { line: 32, column: 21 },
+                                  },
+                                  name: "set",
+                                },
+                                computed: false,
+                                optional: false,
+                              },
+                              arguments: [
+                                {
+                                  type: "BinaryExpression",
+                                  loc: {
+                                    start: { line: 32, column: 22 },
+                                    end: { line: 32, column: 37 },
+                                  },
+                                  operator: "+",
+                                  left: {
+                                    type: "CallExpression",
+                                    loc: {
+                                      start: { line: 32, column: 22 },
+                                      end: { line: 32, column: 33 },
+                                    },
+                                    callee: {
+                                      type: "MemberExpression",
+                                      loc: {
+                                        start: { line: 32, column: 22 },
+                                        end: { line: 32, column: 31 },
+                                      },
+                                      object: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 32, column: 22 },
+                                          end: { line: 32, column: 27 },
+                                        },
+                                        name: "count",
+                                        bindingKey: "count$1vhzpl5t5wcnc$0",
+                                      },
+                                      property: {
+                                        type: "Identifier",
+                                        loc: {
+                                          start: { line: 32, column: 28 },
+                                          end: { line: 32, column: 31 },
+                                        },
+                                        name: "get",
+                                      },
+                                      computed: false,
+                                      optional: false,
+                                    },
+                                    arguments: [],
+                                    optional: false,
+                                  },
+                                  right: {
+                                    type: "Literal",
+                                    loc: {
+                                      start: { line: 32, column: 36 },
+                                      end: { line: 32, column: 37 },
+                                    },
+                                    value: 1,
+                                  },
+                                },
+                              ],
+                              optional: false,
+                            },
+                          },
+                        ],
+                      },
+                      expression: false,
+                    },
+                  ],
+                  optional: false,
+                },
+              },
+              {
+                type: "ReturnStatement",
+                loc: {
+                  start: { line: 34, column: 10 },
+                  end: { line: 34, column: 51 },
+                },
+                argument: {
+                  type: "JSXElement",
+                  loc: {
+                    start: { line: 34, column: 17 },
+                    end: { line: 34, column: 50 },
+                  },
+                  openingElement: {
+                    type: "JSXOpeningElement",
+                    loc: {
+                      start: { line: 34, column: 17 },
+                      end: { line: 34, column: 20 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 34, column: 18 },
+                        end: { line: 34, column: 19 },
+                      },
+                      name: "p",
+                    },
+                    attributes: [],
+                    selfClosing: false,
+                  },
                   children: [
                     {
-                      kind: "binop",
-                      loc: [34, 22, 34, 46],
-                      left: {
-                        kind: "string",
-                        loc: [34, 22, 34, 32],
-                        text: "mounted ",
+                      type: "JSXExpressionContainer",
+                      loc: {
+                        start: { line: 34, column: 20 },
+                        end: { line: 34, column: 46 },
                       },
-                      operatorToken: "+",
-                      right: {
-                        kind: "()",
-                        loc: [34, 35, 34, 46],
-                        expression: {
-                          kind: ".",
-                          loc: [34, 35, 34, 44],
-                          expression: {
-                            kind: "id",
-                            loc: [34, 35, 34, 40],
-                            text: "count",
-                            bindingKey: "count$1vhzpl5t5wcnc$0",
-                          },
-                          name: "get",
+                      expression: {
+                        type: "BinaryExpression",
+                        loc: {
+                          start: { line: 34, column: 21 },
+                          end: { line: 34, column: 45 },
                         },
-                        arguments: [],
+                        operator: "+",
+                        left: {
+                          type: "Literal",
+                          loc: {
+                            start: { line: 34, column: 21 },
+                            end: { line: 34, column: 31 },
+                          },
+                          value: "mounted ",
+                        },
+                        right: {
+                          type: "CallExpression",
+                          loc: {
+                            start: { line: 34, column: 34 },
+                            end: { line: 34, column: 45 },
+                          },
+                          callee: {
+                            type: "MemberExpression",
+                            loc: {
+                              start: { line: 34, column: 34 },
+                              end: { line: 34, column: 43 },
+                            },
+                            object: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 34, column: 34 },
+                                end: { line: 34, column: 39 },
+                              },
+                              name: "count",
+                              bindingKey: "count$1vhzpl5t5wcnc$0",
+                            },
+                            property: {
+                              type: "Identifier",
+                              loc: {
+                                start: { line: 34, column: 40 },
+                                end: { line: 34, column: 43 },
+                              },
+                              name: "get",
+                            },
+                            computed: false,
+                            optional: false,
+                          },
+                          arguments: [],
+                          optional: false,
+                        },
                       },
                     },
                   ],
+                  closingElement: {
+                    type: "JSXClosingElement",
+                    loc: {
+                      start: { line: 34, column: 46 },
+                      end: { line: 34, column: 50 },
+                    },
+                    name: {
+                      type: "JSXIdentifier",
+                      loc: {
+                        start: { line: 34, column: 48 },
+                        end: { line: 34, column: 49 },
+                      },
+                      name: "p",
+                    },
+                  },
                 },
               },
             ],
@@ -204,7 +407,7 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     await render(
       cs.create(
-        [44, 7, 51, 9],
+        { start: { line: 44, column: 6 }, end: { line: 51, column: 8 } },
         {
           version: "0.0.0",
           filePath: "render/on-mount.test.tsx",
@@ -216,112 +419,270 @@ describe("onMount", () => {
           captures: [],
         },
         () => ({
-          kind: "{}",
-          loc: [44, 10, 51, 8],
-          statements: [
+          type: "BlockStatement",
+          loc: { start: { line: 44, column: 9 }, end: { line: 51, column: 7 } },
+          body: [
             {
+              type: "VariableDeclaration",
+              loc: {
+                start: { line: 45, column: 8 },
+                end: { line: 45, column: 39 },
+              },
               kind: "const",
-              loc: [45, 9, 45, 40],
-              name: {
-                kind: "id",
-                loc: [45, 15, 45, 19],
-                text: "said",
-                bindingKey: "said$1vhzpl5t5wcnc$1",
-              },
-              initializer: {
-                kind: "()",
-                loc: [45, 22, 45, 39],
-                expression: {
-                  kind: "splice",
-                  loc: [45, 22, 45, 28],
-                  key: "$state",
-                },
-                arguments: [
-                  {
-                    kind: "string",
-                    loc: [45, 29, 45, 38],
-                    text: "not yet",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  loc: {
+                    start: { line: 45, column: 14 },
+                    end: { line: 45, column: 38 },
                   },
-                ],
-              },
+                  id: {
+                    type: "Identifier",
+                    loc: {
+                      start: { line: 45, column: 14 },
+                      end: { line: 45, column: 18 },
+                    },
+                    name: "said",
+                    bindingKey: "said$1vhzpl5t5wcnc$1",
+                  },
+                  init: {
+                    type: "CallExpression",
+                    loc: {
+                      start: { line: 45, column: 21 },
+                      end: { line: 45, column: 38 },
+                    },
+                    callee: {
+                      type: "Splice",
+                      loc: {
+                        start: { line: 45, column: 21 },
+                        end: { line: 45, column: 27 },
+                      },
+                      key: "$state",
+                    },
+                    arguments: [
+                      {
+                        type: "Literal",
+                        loc: {
+                          start: { line: 45, column: 28 },
+                          end: { line: 45, column: 37 },
+                        },
+                        value: "not yet",
+                      },
+                    ],
+                    optional: false,
+                  },
+                },
+              ],
             },
             {
-              kind: "return",
-              loc: [46, 9, 50, 11],
-              expression: {
-                kind: "jsx",
-                loc: [47, 11, 49, 20],
-                type: {
-                  kind: "string",
-                  loc: [47, 12, 47, 18],
-                  text: "button",
+              type: "ReturnStatement",
+              loc: {
+                start: { line: 46, column: 8 },
+                end: { line: 50, column: 10 },
+              },
+              argument: {
+                type: "JSXElement",
+                loc: {
+                  start: { line: 47, column: 10 },
+                  end: { line: 49, column: 19 },
                 },
-                attributes: [
-                  {
-                    name: "onclick",
-                    initializer: {
-                      kind: "=>",
-                      loc: [47, 28, 47, 65],
-                      parameters: [],
-                      body: {
-                        kind: "()",
-                        loc: [47, 34, 47, 65],
-                        expression: {
-                          kind: "splice",
-                          loc: [47, 34, 47, 42],
-                          key: "$onMount",
+                openingElement: {
+                  type: "JSXOpeningElement",
+                  loc: {
+                    start: { line: 47, column: 10 },
+                    end: { line: 47, column: 66 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 47, column: 11 },
+                      end: { line: 47, column: 17 },
+                    },
+                    name: "button",
+                  },
+                  attributes: [
+                    {
+                      type: "JSXAttribute",
+                      loc: {
+                        start: { line: 47, column: 18 },
+                        end: { line: 47, column: 65 },
+                      },
+                      name: {
+                        type: "JSXIdentifier",
+                        loc: {
+                          start: { line: 47, column: 18 },
+                          end: { line: 47, column: 25 },
                         },
-                        arguments: [
-                          {
-                            kind: "=>",
-                            loc: [47, 43, 47, 64],
-                            parameters: [],
-                            body: {
-                              kind: "()",
-                              loc: [47, 49, 47, 64],
-                              expression: {
-                                kind: ".",
-                                loc: [47, 49, 47, 57],
-                                expression: {
-                                  kind: "id",
-                                  loc: [47, 49, 47, 53],
-                                  text: "said",
-                                  bindingKey: "said$1vhzpl5t5wcnc$1",
-                                },
-                                name: "set",
-                              },
-                              arguments: [
-                                {
-                                  kind: "string",
-                                  loc: [47, 58, 47, 63],
-                                  text: "ran",
-                                },
-                              ],
-                            },
+                        name: "onclick",
+                      },
+                      value: {
+                        type: "JSXExpressionContainer",
+                        loc: {
+                          start: { line: 47, column: 26 },
+                          end: { line: 47, column: 65 },
+                        },
+                        expression: {
+                          type: "ArrowFunctionExpression",
+                          loc: {
+                            start: { line: 47, column: 27 },
+                            end: { line: 47, column: 64 },
                           },
-                        ],
+                          params: [],
+                          body: {
+                            type: "CallExpression",
+                            loc: {
+                              start: { line: 47, column: 33 },
+                              end: { line: 47, column: 64 },
+                            },
+                            callee: {
+                              type: "Splice",
+                              loc: {
+                                start: { line: 47, column: 33 },
+                                end: { line: 47, column: 41 },
+                              },
+                              key: "$onMount",
+                            },
+                            arguments: [
+                              {
+                                type: "ArrowFunctionExpression",
+                                loc: {
+                                  start: { line: 47, column: 42 },
+                                  end: { line: 47, column: 63 },
+                                },
+                                params: [],
+                                body: {
+                                  type: "CallExpression",
+                                  loc: {
+                                    start: { line: 47, column: 48 },
+                                    end: { line: 47, column: 63 },
+                                  },
+                                  callee: {
+                                    type: "MemberExpression",
+                                    loc: {
+                                      start: { line: 47, column: 48 },
+                                      end: { line: 47, column: 56 },
+                                    },
+                                    object: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 47, column: 48 },
+                                        end: { line: 47, column: 52 },
+                                      },
+                                      name: "said",
+                                      bindingKey: "said$1vhzpl5t5wcnc$1",
+                                    },
+                                    property: {
+                                      type: "Identifier",
+                                      loc: {
+                                        start: { line: 47, column: 53 },
+                                        end: { line: 47, column: 56 },
+                                      },
+                                      name: "set",
+                                    },
+                                    computed: false,
+                                    optional: false,
+                                  },
+                                  arguments: [
+                                    {
+                                      type: "Literal",
+                                      loc: {
+                                        start: { line: 47, column: 57 },
+                                        end: { line: 47, column: 62 },
+                                      },
+                                      value: "ran",
+                                    },
+                                  ],
+                                  optional: false,
+                                },
+                                expression: true,
+                              },
+                            ],
+                            optional: false,
+                          },
+                          expression: true,
+                        },
                       },
                     },
-                  },
-                ],
+                  ],
+                  selfClosing: false,
+                },
                 children: [
                   {
-                    kind: "()",
-                    loc: [48, 14, 48, 24],
-                    expression: {
-                      kind: ".",
-                      loc: [48, 14, 48, 22],
-                      expression: {
-                        kind: "id",
-                        loc: [48, 14, 48, 18],
-                        text: "said",
-                        bindingKey: "said$1vhzpl5t5wcnc$1",
-                      },
-                      name: "get",
+                    type: "JSXText",
+                    loc: {
+                      start: { line: 48, column: 12 },
+                      end: { line: 48, column: 12 },
                     },
-                    arguments: [],
+                    value: "\n            ",
+                    raw: "\n            ",
+                  },
+                  {
+                    type: "JSXExpressionContainer",
+                    loc: {
+                      start: { line: 48, column: 12 },
+                      end: { line: 48, column: 24 },
+                    },
+                    expression: {
+                      type: "CallExpression",
+                      loc: {
+                        start: { line: 48, column: 13 },
+                        end: { line: 48, column: 23 },
+                      },
+                      callee: {
+                        type: "MemberExpression",
+                        loc: {
+                          start: { line: 48, column: 13 },
+                          end: { line: 48, column: 21 },
+                        },
+                        object: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 48, column: 13 },
+                            end: { line: 48, column: 17 },
+                          },
+                          name: "said",
+                          bindingKey: "said$1vhzpl5t5wcnc$1",
+                        },
+                        property: {
+                          type: "Identifier",
+                          loc: {
+                            start: { line: 48, column: 18 },
+                            end: { line: 48, column: 21 },
+                          },
+                          name: "get",
+                        },
+                        computed: false,
+                        optional: false,
+                      },
+                      arguments: [],
+                      optional: false,
+                    },
+                  },
+                  {
+                    type: "JSXText",
+                    loc: {
+                      start: { line: 49, column: 10 },
+                      end: { line: 49, column: 10 },
+                    },
+                    value: "\n          ",
+                    raw: "\n          ",
                   },
                 ],
+                closingElement: {
+                  type: "JSXClosingElement",
+                  loc: {
+                    start: { line: 49, column: 10 },
+                    end: { line: 49, column: 19 },
+                  },
+                  name: {
+                    type: "JSXIdentifier",
+                    loc: {
+                      start: { line: 49, column: 12 },
+                      end: { line: 49, column: 18 },
+                    },
+                    name: "button",
+                  },
+                },
               },
             },
           ],

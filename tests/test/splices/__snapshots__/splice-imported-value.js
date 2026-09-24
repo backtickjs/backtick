@@ -23,7 +23,7 @@ it("spliceImportedValue", async (t) => {
     t,
     "spliceImportedValue",
     cs.create(
-      [23, 48, 23, 60],
+      { start: { line: 23, column: 47 }, end: { line: 23, column: 59 } },
       {
         version: "0.0.0",
         filePath: "splices/splice-imported-value.test.tsx",
@@ -32,8 +32,8 @@ it("spliceImportedValue", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "splice",
-        loc: [23, 51, 23, 59],
+        type: "Splice",
+        loc: { start: { line: 23, column: 50 }, end: { line: 23, column: 58 } },
         key: "$version",
       }),
     ),

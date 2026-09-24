@@ -8,7 +8,7 @@ it("bindinglessCatch", async (t) => {
     t,
     "bindinglessCatch",
     cs.create(
-      [11, 5, 17, 7],
+      { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
         version: "0.0.0",
         filePath: "control-flow/bindingless-catch.test.tsx",
@@ -17,47 +17,72 @@ it("bindinglessCatch", async (t) => {
         captures: [],
       },
       () => ({
-        kind: "{}",
-        loc: [11, 8, 17, 6],
-        statements: [
+        type: "BlockStatement",
+        loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },
+        body: [
           {
-            kind: "try",
-            loc: [12, 7, 16, 8],
-            tryBlock: {
-              kind: "{}",
-              loc: [12, 11, 14, 8],
-              statements: [
+            type: "TryStatement",
+            loc: {
+              start: { line: 12, column: 6 },
+              end: { line: 16, column: 7 },
+            },
+            block: {
+              type: "BlockStatement",
+              loc: {
+                start: { line: 12, column: 10 },
+                end: { line: 14, column: 7 },
+              },
+              body: [
                 {
-                  kind: "throw",
-                  loc: [13, 9, 13, 22],
-                  expression: {
-                    kind: "string",
-                    loc: [13, 15, 13, 21],
-                    text: "boom",
+                  type: "ThrowStatement",
+                  loc: {
+                    start: { line: 13, column: 8 },
+                    end: { line: 13, column: 21 },
+                  },
+                  argument: {
+                    type: "Literal",
+                    loc: {
+                      start: { line: 13, column: 14 },
+                      end: { line: 13, column: 20 },
+                    },
+                    value: "boom",
                   },
                 },
               ],
             },
-            catchClause: {
-              kind: "catch",
-              loc: [14, 9, 16, 8],
-              variableDeclaration: null,
-              block: {
-                kind: "{}",
-                loc: [14, 15, 16, 8],
-                statements: [
+            handler: {
+              type: "CatchClause",
+              loc: {
+                start: { line: 14, column: 8 },
+                end: { line: 16, column: 7 },
+              },
+              param: null,
+              body: {
+                type: "BlockStatement",
+                loc: {
+                  start: { line: 14, column: 14 },
+                  end: { line: 16, column: 7 },
+                },
+                body: [
                   {
-                    kind: "return",
-                    loc: [15, 9, 15, 25],
-                    expression: {
-                      kind: "string",
-                      loc: [15, 16, 15, 24],
-                      text: "caught",
+                    type: "ReturnStatement",
+                    loc: {
+                      start: { line: 15, column: 8 },
+                      end: { line: 15, column: 24 },
+                    },
+                    argument: {
+                      type: "Literal",
+                      loc: {
+                        start: { line: 15, column: 15 },
+                        end: { line: 15, column: 23 },
+                      },
+                      value: "caught",
                     },
                   },
                 ],
               },
             },
+            finalizer: null,
           },
         ],
       }),
