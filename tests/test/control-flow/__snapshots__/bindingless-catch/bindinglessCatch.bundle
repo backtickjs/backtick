@@ -1,11 +1,10 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      try {
-        throw "boom";
-      } catch {
-        return "caught";
-      }
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    try {
+      throw "boom";
+    } catch {
+      return "caught";
+    }
+  };
+  return f1();
+})([]);

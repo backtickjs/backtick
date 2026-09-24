@@ -1,56 +1,29 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const said = $0()("");
-      return element(
-        "form",
-        [
-          [
-            "onsubmit",
-            () => (event) => {
-              event.preventDefault();
-              said.set(event.type + " " + event.cancelable);
+(($d) => {
+  const f1 = ($0) => {
+    const said = $0()("");
+    return jsx("form", {
+      onsubmit: (event) => {
+        event.preventDefault();
+        said.set(event.type + " " + event.cancelable);
+      },
+      get children() {
+        return [
+          jsx("textarea", {
+            oninput: (event) => said.set(event.currentTarget.value),
+          }),
+          jsx("input", {
+            oninput: (event) => said.set(event.currentTarget.value),
+          }),
+          jsx("button", {
+            onclick: (event) =>
+              said.set(event.clientX + " " + event.currentTarget.tagName),
+            get children() {
+              return said.get();
             },
-            true,
-          ],
-        ],
-        () => [
-          element(
-            "textarea",
-            [
-              [
-                "oninput",
-                () => (event) => said.set(event.currentTarget.value),
-                true,
-              ],
-            ],
-            null,
-          ),
-          element(
-            "input",
-            [
-              [
-                "oninput",
-                () => (event) => said.set(event.currentTarget.value),
-                true,
-              ],
-            ],
-            null,
-          ),
-          element(
-            "button",
-            [
-              [
-                "onclick",
-                () => (event) =>
-                  said.set(event.clientX + " " + event.currentTarget.tagName),
-                true,
-              ],
-            ],
-            () => () => said.get(),
-          ),
-        ],
-      );
-    };
-    return f1(() => state);
-  }))([]);
+          }),
+        ];
+      },
+    });
+  };
+  return f1(() => state);
+})([]);

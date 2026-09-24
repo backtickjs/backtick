@@ -1,18 +1,18 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => $0();
-    const f2 = ($0) => (order) => $0(order);
-    const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
-    const f4 = ($0) => $0.customer.name;
-    const f5 = ($0) => $0.customer.city;
-    const f6 = ($0) => $0.items;
-    const f7 = ($0) => (item) => $0(item);
-    const f8 = ($0) => $0.sku + " x" + $0.qty;
-    const f9 = ($0) => "$" + $0.total;
-    return element("div", [], () =>
-      list(
-        () =>
-          f1(() => [
+(($d) => {
+  const f1 = ($0) => $0();
+  const f2 = ($0) => (order) => $0(order);
+  const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
+  const f4 = ($0) => $0.customer.name;
+  const f5 = ($0) => $0.customer.city;
+  const f6 = ($0) => $0.items;
+  const f7 = ($0) => (item) => $0(item);
+  const f8 = ($0) => $0.sku + " x" + $0.qty;
+  const f9 = ($0) => "$" + $0.total;
+  return jsx("div", {
+    get children() {
+      return jsx("for", {
+        get each() {
+          return f1(() => [
             {
               id: "ord-1000",
               customer: { name: "Customer 0", city: "Montréal" },
@@ -58,26 +58,54 @@
               ],
               total: 49.23,
             },
-          ]),
-        f2((order) =>
-          element("div", [], () => [
-            element(
-              "img",
-              [
-                ["src", () => f3(order), false],
-                ["alt", () => "", true],
-              ],
-              null,
-            ),
-            element("span", [], () => () => f4(order)),
-            element("span", [], () => () => f5(order)),
-            list(
-              () => f6(order),
-              f7((item) => element("span", [], () => () => f8(item))),
-            ),
-            element("span", [], () => () => f9(order)),
-          ]),
-        ),
-      ),
-    );
-  }))([]);
+          ]);
+        },
+        get children() {
+          return f2((order) =>
+            jsx("div", {
+              get children() {
+                return [
+                  jsx("img", {
+                    get src() {
+                      return f3(order);
+                    },
+                    alt: "",
+                  }),
+                  jsx("span", {
+                    get children() {
+                      return f4(order);
+                    },
+                  }),
+                  jsx("span", {
+                    get children() {
+                      return f5(order);
+                    },
+                  }),
+                  jsx("for", {
+                    get each() {
+                      return f6(order);
+                    },
+                    get children() {
+                      return f7((item) =>
+                        jsx("span", {
+                          get children() {
+                            return f8(item);
+                          },
+                        }),
+                      );
+                    },
+                  }),
+                  jsx("span", {
+                    get children() {
+                      return f9(order);
+                    },
+                  }),
+                ];
+              },
+            }),
+          );
+        },
+      });
+    },
+  });
+})([]);

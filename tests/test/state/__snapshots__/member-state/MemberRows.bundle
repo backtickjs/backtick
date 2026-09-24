@@ -1,38 +1,47 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => {
-      const build = (from) => {
-        return Array.from({ length: 3 }, (_, at) => {
-          return { id: from + at, label: $0()("row " + (from + at)) };
-        });
-      };
-      const held = $0()(build(1));
-      return element("div", [], () =>
-        element(
-          "ul",
-          [["class", () => "rows", true]],
-          () => () =>
-            component($1(), [
-              ["each", () => () => held.get()],
-              [
-                "children",
-                () => () => (row) =>
-                  element(
-                    "li",
-                    [["onclick", () => () => row.label.set("pressed"), true]],
-                    () => () => row.label.get(),
-                  ),
-              ],
-            ]),
-        ),
-      );
+(($d) => {
+  const f1 = ($0, $1) => {
+    const build = (from) => {
+      return Array.from({ length: 3 }, (_, at) => {
+        return { id: from + at, label: $0()("row " + (from + at)) };
+      });
     };
-    return component(
-      () =>
-        f1(
-          () => state,
-          () => ($0) => list(() => $0.each(), $0.children()),
-        ),
-      [],
-    );
-  }))([]);
+    const held = $0()(build(1));
+    return jsx("div", {
+      get children() {
+        return jsx("ul", {
+          class: "rows",
+          get children() {
+            return jsx($1(), {
+              each: () => held.get(),
+              get children() {
+                return () => (row) =>
+                  jsx("li", {
+                    onclick: () => row.label.set("pressed"),
+                    get children() {
+                      return row.label.get();
+                    },
+                  });
+              },
+            });
+          },
+        });
+      },
+    });
+  };
+  return jsx(
+    () =>
+      f1(
+        () => state,
+        () => ($0) =>
+          jsx("for", {
+            get each() {
+              return $0.each();
+            },
+            get children() {
+              return $0.children();
+            },
+          }),
+      ),
+    {},
+  );
+})([]);

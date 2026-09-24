@@ -1,15 +1,18 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => () => {};
-    return element("div", [["style", () => "padding: 8px", true]], () => [
-      element(
-        "span",
-        [
-          ["style", () => "font-size: 12px", true],
-          ["onclick", () => f1(), false],
-        ],
-        () => "hi",
-      ),
-      element("img", [["src", () => "https://example.com/a.png", true]], null),
-    ]);
-  }))([]);
+(($d) => {
+  const f1 = () => () => {};
+  return jsx("div", {
+    style: "padding: 8px",
+    get children() {
+      return [
+        jsx("span", {
+          style: "font-size: 12px",
+          get onclick() {
+            return f1();
+          },
+          children: "hi",
+        }),
+        jsx("img", { src: "https://example.com/a.png" }),
+      ];
+    },
+  });
+})([]);

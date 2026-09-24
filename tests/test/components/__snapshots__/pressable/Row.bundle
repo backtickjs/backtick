@@ -1,23 +1,26 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const count = $0()(0);
-      return element(
-        "button",
-        [
-          ["id", () => "row", true],
-          ["style", () => "display: flex; gap: 8px", true],
-          ["onclick", () => () => count.set(count.get() + 1), true],
-        ],
-        () => [
-          element(
-            "span",
-            [["style", () => "font-weight: 700", true]],
-            () => () => (count.get() > 0 ? "☑" : "☐"),
-          ),
-          element("span", [], () => () => "pressed " + count.get() + " times"),
-        ],
-      );
-    };
-    return component(() => f1(() => state), []);
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const count = $0()(0);
+    return jsx("button", {
+      id: "row",
+      style: "display: flex; gap: 8px",
+      onclick: () => count.set(count.get() + 1),
+      get children() {
+        return [
+          jsx("span", {
+            style: "font-weight: 700",
+            get children() {
+              return count.get() > 0 ? "☑" : "☐";
+            },
+          }),
+          jsx("span", {
+            get children() {
+              return "pressed " + count.get() + " times";
+            },
+          }),
+        ];
+      },
+    });
+  };
+  return jsx(() => f1(() => state), {});
+})([]);

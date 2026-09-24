@@ -1,10 +1,13 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      return element("div", [], () => [
-        [element("span", [], () => "a"), element("span", [], () => "b")],
-        element("em", [], () => "c"),
-      ]);
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    return jsx("div", {
+      get children() {
+        return [
+          [jsx("span", { children: "a" }), jsx("span", { children: "b" })],
+          jsx("em", { children: "c" }),
+        ];
+      },
+    });
+  };
+  return f1();
+})([]);

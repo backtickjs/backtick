@@ -1,14 +1,21 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) =>
-      element("div", [], () => [
-        element("span", [], () => () => (0, eval)($0())("ada")),
-        memo(() => (0, eval)($1())({ count: 3 })),
-      ]);
-    return f1(
-      () =>
-        '(($d) => untrack(() => {\nconst f1 = (() => ((name) => ("hello " + name)));\nreturn (f1());\n}))([])',
-      () =>
-        '(($d) => untrack(() => {\nconst f1 = (() => ((props) => element("b", [], () => (() => ("count " + (props.count))))));\nreturn (f1());\n}))([])',
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1) =>
+    jsx("div", {
+      get children() {
+        return [
+          jsx("span", {
+            get children() {
+              return (0, eval)($0())("ada");
+            },
+          }),
+          () => (0, eval)($1())({ count: 3 }),
+        ];
+      },
+    });
+  return f1(
+    () =>
+      '(($d) => {\nconst f1 = (() => ((name) => ("hello " + name)));\nreturn (f1());\n})([])',
+    () =>
+      '(($d) => {\nconst f1 = (() => ((props) => jsx("b", { get children() { return ("count " + (props.count)); } })));\nreturn (f1());\n})([])',
+  );
+})([]);

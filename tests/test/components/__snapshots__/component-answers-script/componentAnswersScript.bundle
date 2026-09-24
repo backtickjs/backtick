@@ -1,8 +1,15 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const n = $0()(2);
-      return element("em", [], () => () => n.get());
-    };
-    return element("div", [], () => () => component(() => f1(() => state), []));
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const n = $0()(2);
+    return jsx("em", {
+      get children() {
+        return n.get();
+      },
+    });
+  };
+  return jsx("div", {
+    get children() {
+      return jsx(() => f1(() => state), {});
+    },
+  });
+})([]);

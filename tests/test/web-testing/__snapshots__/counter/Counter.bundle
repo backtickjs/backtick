@@ -1,15 +1,21 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const count = $0()(0);
-      return element("div", [], () => [
-        element(
-          "button",
-          [["onclick", () => () => count.set(count.get() + 1), true]],
-          () => "Add",
-        ),
-        element("p", [], () => () => "Count: " + count.get()),
-      ]);
-    };
-    return component(() => f1(() => state), []);
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const count = $0()(0);
+    return jsx("div", {
+      get children() {
+        return [
+          jsx("button", {
+            onclick: () => count.set(count.get() + 1),
+            children: "Add",
+          }),
+          jsx("p", {
+            get children() {
+              return "Count: " + count.get();
+            },
+          }),
+        ];
+      },
+    });
+  };
+  return jsx(() => f1(() => state), {});
+})([]);

@@ -1,13 +1,12 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      let i = 0;
-      let seen = "";
-      for (; i < 3; ) {
-        seen = seen + i;
-        i = i + 1;
-      }
-      return seen;
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    let i = 0;
+    let seen = "";
+    for (; i < 3; ) {
+      seen = seen + i;
+      i = i + 1;
+    }
+    return seen;
+  };
+  return f1();
+})([]);

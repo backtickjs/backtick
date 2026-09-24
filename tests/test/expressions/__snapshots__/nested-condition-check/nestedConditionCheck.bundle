@@ -1,14 +1,13 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => ({ both: $0()(true, true), one: $0()(true, false) });
-    const f2 = () => (a, b) => {
-      const keep = (on) => on;
-      if (keep(a && b)) {
-        {
-          return "kept";
-        }
+(($d) => {
+  const f1 = ($0) => ({ both: $0()(true, true), one: $0()(true, false) });
+  const f2 = () => (a, b) => {
+    const keep = (on) => on;
+    if (keep(a && b)) {
+      {
+        return "kept";
       }
-      return "dropped";
-    };
-    return f1(f2);
-  }))([]);
+    }
+    return "dropped";
+  };
+  return f1(f2);
+})([]);

@@ -13,12 +13,6 @@ import type { Renderer } from "solid-js/universal";
 // around them is untouched — there is no pass over the tree to find out what
 // changed, because whatever changed said so.
 
-/** A position's value, read again whenever what it read changes. */
-export type Read = () => ClientValue;
-
-/** A prop: its name, its read, and whether its value can never change. */
-export type DrawnProp = readonly [name: string, read: Read, fixed: boolean];
-
 // The language an element is drawn in: HTML's unless it stands inside an `svg`,
 // and HTML's again inside a `foreignObject`, as the DOM's parser decides. Read
 // where the element is drawn rather than where it was written, so a component
@@ -43,12 +37,46 @@ function withNamespace(namespace: Namespace, draw: () => void): void {
   }
 }
 
+type Props = { readonly [name: string]: ClientValue };
+
+/**
+ * The web client's `jsx`: a function is a component, `for` is a list, and any
+ * other tag an element of the renderer's.
+ */
+export function createJsx(
+  renderer: Renderer<object>,
+): (type: ClientValue, props: Props) => ClientValue {
+  return (type, props) =>
+    typeof type === "function"
+      ? callComponent(type, props)
+      : type === "for"
+        ? drawList(props)
+        : drawElement(renderer, type as string, props);
+}
+
+// Whether a prop can change: a bundle writes one that can as a getter.
+function isGetter(props: Props, name: string): boolean {
+  return Object.getOwnPropertyDescriptor(props, name)?.get !== undefined;
+}
+
+// What `insert` takes for children that arrived as a value: a child that can
+// change arrives as a function of nothing, and is kept as the one drawing it
+// answered, so a component among them is built once rather than again each
+// time `insert` reads the array.
+function childrenOf(value: ClientValue): unknown {
+  if (Array.isArray(value)) {
+    return value.map(childrenOf);
+  }
+  return typeof value === "function" && value.length === 0
+    ? createMemo(() => childrenOf((value as () => ClientValue)()))
+    : value;
+}
+
 /** An element, built as a node of the renderer's, with its props and children. */
-export function drawElement(
+function drawElement(
   renderer: Renderer<object>,
   id: string,
-  props: readonly DrawnProp[],
-  children: (() => unknown) | null,
+  props: Props,
 ): ClientValue {
   // Where it stands, what it is made in, and what its children are drawn in:
   // an `svg` enters SVG, and a `foreignObject`'s children are HTML again.
@@ -58,45 +86,49 @@ export function drawElement(
   const innerNamespace = id === "foreignObject" ? "html" : namespace;
   // The host hears SVG's as `svg:<tag>`; the wire carries no prefix.
   const node = renderer.createElement(namespace === "svg" ? `svg:${id}` : id);
-  let ref: ClientValue = null;
-  for (const [prop, read, fixed] of props) {
-    // The language's, not an attribute: the element is handed to the
-    // script once it is built.
-    if (prop === "ref") {
-      ref = read();
+  for (const prop of Object.keys(props)) {
+    // The language's, not an attribute: the element is handed to the script
+    // once it is built. Children are inserted below.
+    if (prop === "ref" || prop === "children") {
       continue;
     }
     // It cannot change, so set it and be done: no computation to make, and
     // none held for as long as the element is.
-    if (fixed) {
-      renderer.setProp(node, prop, read());
+    if (!isGetter(props, prop)) {
+      renderer.setProp(node, prop, props[prop]);
       continue;
     }
     // One effect per prop, so a write moves that one prop of that one node.
-    // It re-runs only when something the expression itself read has changed;
-    // nothing tells it to look.
+    // It re-runs only when something the getter read has changed.
     //
     // Re-running is not the same as changing: a state a whole list reads is
     // what decides one row's class, and every other row recomputes the class
     // it already has. The host hears about a prop when the prop moved, so
     // that is a comparison here rather than a write per row per selection.
-    // A handler is a new closure whenever what it captured changed, so it
-    // compares unequal and is registered again, as before.
     renderer.effect((previous) => {
-      const value = read();
+      const value = props[prop];
       return value === previous
         ? previous
         : renderer.setProp(node, prop, value, previous);
     });
   }
-  if (children !== null) {
+  // Read here, inside the namespace they are drawn in. A child that can
+  // change runs this memo again; what can change in an array of them is a
+  // function, memoized on its own, so its siblings are not built again.
+  if ("children" in props) {
+    const insert = () =>
+      renderer.insert(
+        node,
+        createMemo(() => childrenOf(props["children"])),
+      );
     if (innerNamespace === outerNamespace) {
-      renderer.insert(node, children());
+      insert();
     } else {
-      withNamespace(innerNamespace, () => renderer.insert(node, children()));
+      withNamespace(innerNamespace, insert);
     }
   }
   // Untracked, so what the callback reads never calls it again.
+  const ref = props["ref"];
   if (typeof ref === "function") {
     const handOver = ref as (element: ClientValue) => void;
     untrack(() => handOver(node as ClientValue));
@@ -105,22 +137,19 @@ export function drawElement(
 }
 
 /**
- * A list: one drawing per member of the array `each` reads.
+ * A list: one drawing per member of the array `each` holds, drawn by
+ * `children`.
  *
  * The client walks the array itself, so `mapArray` keeps the drawing of a
  * member that is still there, drops what a member that has gone drew, and draws
  * only what is new. Identity is the member's own — nothing here extracts a key.
- *
- * Nothing here reaches for the renderer: what a list contributes is what its
- * child drew per member, and the position it stands in inserts that as it
- * would any list.
  */
-export function drawList(each: Read, one: ClientValue): ClientValue {
+function drawList(props: Props): ClientValue {
   const members = createMemo(() => {
-    const value = each();
+    const value = props["each"];
     return Array.isArray(value) ? value : [];
   });
-  const draw = one as (...args: ClientValue[]) => ClientValue;
+  const draw = props["children"] as (...args: ClientValue[]) => ClientValue;
   // The index is `mapArray`'s own signal, handed over as storage rather than
   // as the number it holds: whoever reads it is reading where the member sits
   // now.
@@ -130,25 +159,15 @@ export function drawList(each: Read, one: ClientValue): ClientValue {
 }
 
 /**
- * A call of a component a script holds: called once, untracked, with its
- * props as a record whose members are read again on every access — what keeps
- * a prop live for a function the bundler never saw.
+ * A component: called once, untracked, with its props, whose getters are read
+ * again on every access — what keeps a prop live for a function the bundler
+ * never saw.
  */
-export function callComponent(
-  callee: ClientValue,
-  props: readonly (readonly [name: string, read: Read])[],
-): ClientValue {
-  const record: { [key: string]: ClientValue } = {};
-  for (const [name, read] of props) {
-    Object.defineProperty(record, name, { get: read, enumerable: true });
-  }
-  if (typeof callee !== "function") {
-    throw new Error("a component call names a function, and this is not one");
-  }
-  return untrack(() => (callee as (props: ClientValue) => ClientValue)(record));
+function callComponent(callee: ClientValue, props: Props): ClientValue {
+  return untrack(() => (callee as (props: Props) => ClientValue)(props));
 }
 
-/** A member of an array of children, kept as the one drawing it answered. */
-export function memo(read: Read): ClientValue {
-  return createMemo(read) as unknown as ClientValue;
+/** What `render` inserts for a bundle's root: see `childrenOf`. */
+export function rootOf(value: ClientValue): unknown {
+  return childrenOf(value);
 }

@@ -1,7 +1,10 @@
-(($d) =>
-  untrack(() => {
-    return element("div", [], () => [
-      "counted",
-      [element("em", [], () => "one"), element("em", [], () => "two")],
-    ]);
-  }))([]);
+(($d) => {
+  return jsx("div", {
+    get children() {
+      return [
+        "counted",
+        [jsx("em", { children: "one" }), jsx("em", { children: "two" })],
+      ];
+    },
+  });
+})([]);

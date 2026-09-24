@@ -1,17 +1,16 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      const message = "boom";
-      try {
-        throw message;
-      } catch (error) {
-        if (error === message) {
-          {
-            return "caught boom";
-          }
+(($d) => {
+  const f1 = () => {
+    const message = "boom";
+    try {
+      throw message;
+    } catch (error) {
+      if (error === message) {
+        {
+          return "caught boom";
         }
-        return "caught something else";
       }
-    };
-    return f1();
-  }))([]);
+      return "caught something else";
+    }
+  };
+  return f1();
+})([]);

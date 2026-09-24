@@ -1,24 +1,22 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const size = $0()(16);
-      return element(
-        "span",
-        [
-          ["style", () => "font-size: " + size.get() + "px", false],
-          [
-            "onclick",
-            () => () => {
-              size.set(size.get() + 1);
-            },
-            true,
-          ],
-        ],
-        () => "press",
-      );
-    };
-    return element("div", [], () => [
-      memo(() => component(() => f1(() => state), [])),
-      memo(() => component(() => f1(() => state), [])),
-    ]);
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const size = $0()(16);
+    return jsx("span", {
+      get style() {
+        return "font-size: " + size.get() + "px";
+      },
+      onclick: () => {
+        size.set(size.get() + 1);
+      },
+      children: "press",
+    });
+  };
+  return jsx("div", {
+    get children() {
+      return [
+        () => jsx(() => f1(() => state), {}),
+        () => jsx(() => f1(() => state), {}),
+      ];
+    },
+  });
+})([]);

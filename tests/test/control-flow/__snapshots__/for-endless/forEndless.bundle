@@ -1,16 +1,15 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      let i = 0;
-      for (;;) {
-        if (i === 4) {
-          {
-            break;
-          }
+(($d) => {
+  const f1 = () => {
+    let i = 0;
+    for (;;) {
+      if (i === 4) {
+        {
+          break;
         }
-        i = i + 1;
       }
-      return i;
-    };
-    return f1();
-  }))([]);
+      i = i + 1;
+    }
+    return i;
+  };
+  return f1();
+})([]);

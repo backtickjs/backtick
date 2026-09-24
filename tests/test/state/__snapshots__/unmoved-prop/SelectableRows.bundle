@@ -1,44 +1,46 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => {
-      const selected = $0()(0);
-      return element("div", [], () => [
-        element(
-          "span",
-          [["onclick", () => () => selected.set(1), true]],
-          () => "select",
-        ),
-        element(
-          "div",
-          [],
-          () => () =>
-            component($1(), [
-              ["each", () => () => [0, 1, 2]],
-              [
-                "children",
-                () => () => (id) =>
-                  element(
-                    "a",
-                    [
-                      [
-                        "href",
-                        () => (selected.get() === id ? "#open" : "#closed"),
-                        false,
-                      ],
-                    ],
-                    () => () => "row " + id,
-                  ),
-              ],
-            ]),
-        ),
-      ]);
-    };
-    return component(
-      () =>
-        f1(
-          () => state,
-          () => ($0) => list(() => $0.each(), $0.children()),
-        ),
-      [],
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1) => {
+    const selected = $0()(0);
+    return jsx("div", {
+      get children() {
+        return [
+          jsx("span", { onclick: () => selected.set(1), children: "select" }),
+          jsx("div", {
+            get children() {
+              return jsx($1(), {
+                each: () => [0, 1, 2],
+                get children() {
+                  return () => (id) =>
+                    jsx("a", {
+                      get href() {
+                        return selected.get() === id ? "#open" : "#closed";
+                      },
+                      get children() {
+                        return "row " + id;
+                      },
+                    });
+                },
+              });
+            },
+          }),
+        ];
+      },
+    });
+  };
+  return jsx(
+    () =>
+      f1(
+        () => state,
+        () => ($0) =>
+          jsx("for", {
+            get each() {
+              return $0.each();
+            },
+            get children() {
+              return $0.children();
+            },
+          }),
+      ),
+    {},
+  );
+})([]);

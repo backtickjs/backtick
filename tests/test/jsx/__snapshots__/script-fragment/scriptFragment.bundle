@@ -1,9 +1,16 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => $0()("x");
-    const f2 = () => (name) => [
-      element("span", [], () => "a sentence across lines"),
-      element("span", [], () => [memo(() => name), " ", memo(() => name)]),
-    ];
-    return element("div", [], () => () => f1(f2));
-  }))([]);
+(($d) => {
+  const f1 = ($0) => $0()("x");
+  const f2 = () => (name) => [
+    jsx("span", { children: "a sentence across lines" }),
+    jsx("span", {
+      get children() {
+        return [() => name, " ", () => name];
+      },
+    }),
+  ];
+  return jsx("div", {
+    get children() {
+      return f1(f2);
+    },
+  });
+})([]);

@@ -1,8 +1,7 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const page = JSON.parse($0());
-      return page.rows[0] + " of " + page.count;
-    };
-    return f1(() => '{"rows":["one","two"],"count":2}');
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const page = JSON.parse($0());
+    return page.rows[0] + " of " + page.count;
+  };
+  return f1(() => '{"rows":["one","two"],"count":2}');
+})([]);

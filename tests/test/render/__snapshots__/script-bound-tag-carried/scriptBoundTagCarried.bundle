@@ -1,36 +1,53 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1, $2) => {
-      const count = $0()(0);
-      const Badge = (p) =>
-        element("b", [], () => [
-          memo(() => "outer " + p.n),
-          memo(() => p.children),
-        ]);
-      return element("div", [], () => [
-        memo(() => component($2(), [["body", () => () => $1(count, Badge)]])),
-        element(
-          "button",
-          [["onclick", () => () => count.set(count.get() + 1), true]],
-          () => "more",
-        ),
-      ]);
-    };
-    const f2 = ($0, $1) =>
-      component($0, [
-        ["n", () => $1.get()],
-        ["children", () => element("u", [], () => () => "kid " + $1.get())],
-      ]);
-    const f3 = ($0) => {
-      const Badge = (p) => element("i", [], () => () => "panel " + p.n);
-      return element("section", [], () => [
-        memo(() => component(Badge, [["n", () => 0]])),
-        memo(() => $0().body),
-      ]);
-    };
-    return f1(
-      () => state,
-      (count, Badge) => f2(Badge, count),
-      () => ($0) => f3(() => $0),
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1, $2) => {
+    const count = $0()(0);
+    const Badge = (p) =>
+      jsx("b", {
+        get children() {
+          return [() => "outer " + p.n, () => p.children];
+        },
+      });
+    return jsx("div", {
+      get children() {
+        return [
+          () => jsx($2(), { body: () => $1(count, Badge) }),
+          jsx("button", {
+            onclick: () => count.set(count.get() + 1),
+            children: "more",
+          }),
+        ];
+      },
+    });
+  };
+  const f2 = ($0, $1) =>
+    jsx($0, {
+      get n() {
+        return $1.get();
+      },
+      get children() {
+        return jsx("u", {
+          get children() {
+            return "kid " + $1.get();
+          },
+        });
+      },
+    });
+  const f3 = ($0) => {
+    const Badge = (p) =>
+      jsx("i", {
+        get children() {
+          return "panel " + p.n;
+        },
+      });
+    return jsx("section", {
+      get children() {
+        return [() => jsx(Badge, { n: 0 }), () => $0().body];
+      },
+    });
+  };
+  return f1(
+    () => state,
+    (count, Badge) => f2(Badge, count),
+    () => ($0) => f3(() => $0),
+  );
+})([]);

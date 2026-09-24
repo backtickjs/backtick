@@ -1,6 +1,7 @@
-(($d) =>
-  untrack(() => {
-    return element("div", [], () =>
-      element("span", [["class", () => "danger", true]], () => "one"),
-    );
-  }))([]);
+(($d) => {
+  return jsx("div", {
+    get children() {
+      return jsx("span", { class: "danger", children: "one" });
+    },
+  });
+})([]);

@@ -1,8 +1,7 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      const base = { a: 1 };
-      return Object.fromEntries([...Object.entries(base), ["...", 2]]);
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    const base = { a: 1 };
+    return Object.fromEntries([...Object.entries(base), ["...", 2]]);
+  };
+  return f1();
+})([]);

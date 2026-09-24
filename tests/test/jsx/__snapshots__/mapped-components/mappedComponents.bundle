@@ -1,8 +1,11 @@
-(($d) =>
-  untrack(() => {
-    return element("div", [], () => [
-      element("span", [], () => "alpha"),
-      element("span", [], () => "beta"),
-      element("span", [], () => "gamma"),
-    ]);
-  }))([]);
+(($d) => {
+  return jsx("div", {
+    get children() {
+      return [
+        jsx("span", { children: "alpha" }),
+        jsx("span", { children: "beta" }),
+        jsx("span", { children: "gamma" }),
+      ];
+    },
+  });
+})([]);

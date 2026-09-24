@@ -1,8 +1,7 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      const greeting = "Hello";
-      return greeting.concat(", ", "World").toUpperCase();
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    const greeting = "Hello";
+    return greeting.concat(", ", "World").toUpperCase();
+  };
+  return f1();
+})([]);

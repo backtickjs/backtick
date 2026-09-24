@@ -1,32 +1,26 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1, $2) => {
-      const flag = $0()(true);
-      const tone = $0()($1());
-      const step = $0()(() => 0);
-      return element(
-        "span",
-        [
-          [
-            "onclick",
-            () => () => {
-              flag.set(false);
-              tone.set($2());
-              step.set(() => 1);
-            },
-            true,
-          ],
-        ],
-        () => () => flag.get() + " " + tone.get() + " " + step.get()(),
-      );
-    };
-    return component(
-      () =>
-        f1(
-          () => state,
-          () => "warm",
-          () => "cool",
-        ),
-      [],
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1, $2) => {
+    const flag = $0()(true);
+    const tone = $0()($1());
+    const step = $0()(() => 0);
+    return jsx("span", {
+      onclick: () => {
+        flag.set(false);
+        tone.set($2());
+        step.set(() => 1);
+      },
+      get children() {
+        return flag.get() + " " + tone.get() + " " + step.get()();
+      },
+    });
+  };
+  return jsx(
+    () =>
+      f1(
+        () => state,
+        () => "warm",
+        () => "cool",
+      ),
+    {},
+  );
+})([]);

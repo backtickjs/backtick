@@ -1,12 +1,11 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      let count = 0;
-      const bump = () => {
-        count = count + 1;
-        return count;
-      };
-      return bump() + bump();
+(($d) => {
+  const f1 = () => {
+    let count = 0;
+    const bump = () => {
+      count = count + 1;
+      return count;
     };
-    return f1();
-  }))([]);
+    return bump() + bump();
+  };
+  return f1();
+})([]);

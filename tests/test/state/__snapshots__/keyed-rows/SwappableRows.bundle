@@ -1,38 +1,61 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => {
-      const ids = $0()([1, 2, 3]);
-      const swap = () => {
-        const held = ids.get();
-        ids.set(held.with(0, held[2]).with(2, held[0]));
-      };
-      const drop = () => {
-        ids.set(ids.get().filter((id) => id !== 2));
-      };
-      return element("div", [], () => [
-        element("span", [["onclick", () => swap, false]], () => "swap"),
-        element("span", [["onclick", () => drop, false]], () => "drop"),
-        element(
-          "div",
-          [],
-          () => () =>
-            component($1(), [
-              ["each", () => () => ids.get()],
-              [
-                "children",
-                () => () => (id) =>
-                  element("span", [], () => () => "row " + id),
-              ],
-            ]),
-        ),
-      ]);
+(($d) => {
+  const f1 = ($0, $1) => {
+    const ids = $0()([1, 2, 3]);
+    const swap = () => {
+      const held = ids.get();
+      ids.set(held.with(0, held[2]).with(2, held[0]));
     };
-    return component(
-      () =>
-        f1(
-          () => state,
-          () => ($0) => list(() => $0.each(), $0.children()),
-        ),
-      [],
-    );
-  }))([]);
+    const drop = () => {
+      ids.set(ids.get().filter((id) => id !== 2));
+    };
+    return jsx("div", {
+      get children() {
+        return [
+          jsx("span", {
+            get onclick() {
+              return swap;
+            },
+            children: "swap",
+          }),
+          jsx("span", {
+            get onclick() {
+              return drop;
+            },
+            children: "drop",
+          }),
+          jsx("div", {
+            get children() {
+              return jsx($1(), {
+                each: () => ids.get(),
+                get children() {
+                  return () => (id) =>
+                    jsx("span", {
+                      get children() {
+                        return "row " + id;
+                      },
+                    });
+                },
+              });
+            },
+          }),
+        ];
+      },
+    });
+  };
+  return jsx(
+    () =>
+      f1(
+        () => state,
+        () => ($0) =>
+          jsx("for", {
+            get each() {
+              return $0.each();
+            },
+            get children() {
+              return $0.children();
+            },
+          }),
+      ),
+    {},
+  );
+})([]);

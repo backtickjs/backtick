@@ -1,45 +1,63 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => {
-      const asked = $0()(0);
-      return element("div", [], () => [
-        element("span", [], () => () => "asked " + asked.get()),
-        memo(() =>
-          component($1(), [
-            [
-              "more",
-              () => () => () => {
+(($d) => {
+  const f1 = ($0, $1) => {
+    const asked = $0()(0);
+    return jsx("div", {
+      get children() {
+        return [
+          jsx("span", {
+            get children() {
+              return "asked " + asked.get();
+            },
+          }),
+          () =>
+            jsx($1(), {
+              more: () => () => {
                 asked.set(asked.get() + 1);
                 return asked.get() < 5;
               },
-            ],
-          ]),
-        ),
-      ]);
-    };
-    const f2 = ($0, $1, $2, $3, $4) => {
-      const items = $0()([]);
-      const started = $1().setTimeout(() => {
-        if ($2()()) {
-          {
-            items.set($3());
-          }
+            }),
+        ];
+      },
+    });
+  };
+  const f2 = ($0, $1, $2, $3, $4) => {
+    const items = $0()([]);
+    const started = $1().setTimeout(() => {
+      if ($2()()) {
+        {
+          items.set($3());
         }
-      }, 0);
-      return component($4(), [
-        ["each", () => () => items.get()],
-        ["children", () => () => (item) => element("em", [], () => () => item)],
-      ]);
-    };
-    return f1(
-      () => state,
-      () => ($0) =>
-        f2(
-          () => state,
-          () => window,
-          () => $0.more(),
-          () => ["one", "two"],
-          () => ($0) => list(() => $0.each(), $0.children()),
-        ),
-    );
-  }))([]);
+      }
+    }, 0);
+    return jsx($4(), {
+      each: () => items.get(),
+      get children() {
+        return () => (item) =>
+          jsx("em", {
+            get children() {
+              return item;
+            },
+          });
+      },
+    });
+  };
+  return f1(
+    () => state,
+    () => ($0) =>
+      f2(
+        () => state,
+        () => window,
+        () => $0.more(),
+        () => ["one", "two"],
+        () => ($0) =>
+          jsx("for", {
+            get each() {
+              return $0.each();
+            },
+            get children() {
+              return $0.children();
+            },
+          }),
+      ),
+  );
+})([]);

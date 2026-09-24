@@ -1,13 +1,16 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) =>
-      element("div", [], () => [
-        element("span", [], () => "before"),
-        memo(() => (0, eval)($0())),
-        element("span", [], () => "after"),
-      ]);
-    return f1(
-      () =>
-        '(($d) => untrack(() => {\nconst f1 = (() => element("em", [], () => "from another bundle"));\nreturn component((() => (f1())), []);\n}))([])',
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0) =>
+    jsx("div", {
+      get children() {
+        return [
+          jsx("span", { children: "before" }),
+          () => (0, eval)($0()),
+          jsx("span", { children: "after" }),
+        ];
+      },
+    });
+  return f1(
+    () =>
+      '(($d) => {\nconst f1 = (() => jsx("em", { children: "from another bundle" }));\nreturn jsx((() => (f1())), {  });\n})([])',
+  );
+})([]);

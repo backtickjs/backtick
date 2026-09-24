@@ -1,7 +1,6 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      return 1 / -0;
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    return 1 / -0;
+  };
+  return f1();
+})([]);

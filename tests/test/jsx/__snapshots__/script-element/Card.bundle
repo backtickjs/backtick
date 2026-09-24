@@ -1,39 +1,44 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const label = $0()("hi");
-      const row = (size) => {
-        const css = "font-size: " + size + "px";
-        const press = () => label.set("held");
-        return element("div", [["style", () => css, false]], () => [
-          element(
-            "span",
-            [
-              ["style", () => css, false],
-              ["onclick", () => () => label.set("pressed"), true],
-            ],
-            () => () => label.get(),
-          ),
-          element(
-            "span",
-            [["style", () => "font-size: 8px", true]],
-            () => "fixed",
-          ),
-          element(
-            "span",
-            [
-              ["style", () => css, false],
-              ["onclick", () => press, false],
-            ],
-            () => "held",
-          ),
-        ]);
-      };
-      return element(
-        "div",
-        [["style", () => "padding: 0", true]],
-        () => () => row(12),
-      );
+(($d) => {
+  const f1 = ($0) => {
+    const label = $0()("hi");
+    const row = (size) => {
+      const css = "font-size: " + size + "px";
+      const press = () => label.set("held");
+      return jsx("div", {
+        get style() {
+          return css;
+        },
+        get children() {
+          return [
+            jsx("span", {
+              get style() {
+                return css;
+              },
+              onclick: () => label.set("pressed"),
+              get children() {
+                return label.get();
+              },
+            }),
+            jsx("span", { style: "font-size: 8px", children: "fixed" }),
+            jsx("span", {
+              get style() {
+                return css;
+              },
+              get onclick() {
+                return press;
+              },
+              children: "held",
+            }),
+          ];
+        },
+      });
     };
-    return component(() => f1(() => state), []);
-  }))([]);
+    return jsx("div", {
+      style: "padding: 0",
+      get children() {
+        return row(12);
+      },
+    });
+  };
+  return jsx(() => f1(() => state), {});
+})([]);

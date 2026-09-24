@@ -1,14 +1,13 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      const base = { a: 1, b: 2 };
-      const name = "b";
-      return Object.fromEntries([
-        ...Object.entries(base),
-        [name, 9],
-        ["c" + "d", 3],
-        ["a", 4],
-      ]);
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    const base = { a: 1, b: 2 };
+    const name = "b";
+    return Object.fromEntries([
+      ...Object.entries(base),
+      [name, 9],
+      ["c" + "d", 3],
+      ["a", 4],
+    ]);
+  };
+  return f1();
+})([]);

@@ -12,8 +12,7 @@ import type {
 
 /**
  * A bundle tree as JavaScript: one expression that answers with what the
- * tree's root evaluates to, built under the client's `untrack`, so nothing it
- * reads while it is built subscribes whoever evaluated it.
+ * tree's root evaluates to.
  *
  * Literals are printed as literals, strings escaped so that no `</script>`
  * or `<!--` appears. The bundle does not yet tell a value the host computed
@@ -21,9 +20,9 @@ import type {
  * element's tag or prop name that is not a plain name is data: the
  * expression carries its data in one `JSON.parse`, and reads it as `$d[i]`.
  *
- * A builtin is read as the global of its name, and so are the client's
- * `element`, `list`, `component` and `memo`: defining a client is putting them
- * on the global object before any bundle runs.
+ * An element or a component is a call of the client's `jsx`, and a builtin is
+ * read as the global of its name: defining a client is putting them on the
+ * global object before any bundle runs. What an element is, is the client's.
  */
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
@@ -38,15 +37,7 @@ function stringLiteral(value: string): string {
 }
 
 // What the module itself names, beside the builtins it reads.
-const RUNTIME = [
-  "$d",
-  "component",
-  "element",
-  "globalThis",
-  "list",
-  "memo",
-  "untrack",
-];
+const RUNTIME = ["$d", "globalThis", "jsx"];
 
 // Names a module may not bind: it is strict code, and `await` is reserved in
 // a module.
@@ -190,33 +181,56 @@ export function printBundle<T extends ClientUnknown>(
     return `((${parameters.join(", ")}) => ${printed})`;
   };
 
-  // What `compileChildren` builds, written out: a value that cannot change,
-  // an accessor alone in a position, a memo as a member of an array.
-  const children = (node: BundleArrayElement, inArray: boolean): string => {
-    if (Array.isArray(node) && node[0] === "arr") {
-      return `[${node[1].map((one) => children(one, true)).join(", ")}]`;
+  // A prop's key: bare where it can be, a string where it is a plain name, and
+  // read from `data` otherwise.
+  const propKey = (key: string): string =>
+    IDENTIFIER.test(key)
+      ? key
+      : NAME.test(key)
+        ? `"${key}"`
+        : `[${read$d(key)}]`;
+
+  // A child that can change is a function of nothing, so the client decides
+  // when to read it.
+  const child = (node: BundleArrayElement): string =>
+    Array.isArray(node) && node[0] === "arr"
+      ? `[${node[1].map(child).join(", ")}]`
+      : isFixed(node)
+        ? expression(node as BundleExpression)
+        : `() => ${expression(node as BundleExpression)}`;
+
+  // One object for an element's or a component's props: what cannot change is
+  // a property, what can is a getter. `children` is a getter too, and in an
+  // array of them, what can change is a function of nothing.
+  const props = (
+    written: { readonly [key: string]: BundleExpression },
+    drawn: BundleExpression | null,
+  ): string => {
+    const members = Object.entries(written).map(([key, value]) =>
+      isFixed(value)
+        ? `${propKey(key)}: ${expression(value)}`
+        : `get ${propKey(key)}() { return ${expression(value)}; }`,
+    );
+    // Children are read when the client asks, so an element among them is
+    // built where the client draws it: inside an `svg`, say. A literal has
+    // nothing to build.
+    if (drawn !== null) {
+      members.push(
+        drawn === null || typeof drawn !== "object"
+          ? `children: ${expression(drawn)}`
+          : `get children() { return ${Array.isArray(drawn) && drawn[0] === "arr" ? child(drawn) : expression(drawn)}; }`,
+      );
     }
-    const read = expression(node as BundleExpression);
-    if (isFixed(node)) {
-      return read;
-    }
-    return inArray ? `memo(() => ${read})` : `(() => ${read})`;
+    return `{ ${members.join(", ")} }`;
   };
 
+  // A fragment draws nothing of its own, so it is its children, as an array.
   const element = (node: BundleElement): string => {
-    const [, id, props, drawn] = node;
-    if (id === "for") {
-      return `list(() => ${expression(props["each"] ?? null)}, ${expression(drawn)})`;
-    }
+    const [, id, written, drawn] = node;
     if (id === "Fragment") {
-      return drawn === null ? "null" : children(drawn, true);
+      return drawn === null ? "null" : child(drawn);
     }
-    const printed = Object.entries(props).map(
-      ([prop, value]) =>
-        `[${name(prop)}, () => ${expression(value)}, ${isFixed(value)}]`,
-    );
-    const draw = drawn === null ? "null" : `() => ${children(drawn, false)}`;
-    return `element(${name(id)}, [${printed.join(", ")}], ${draw})`;
+    return `jsx(${name(id)}, ${props(written, drawn)})`;
   };
 
   function expression(node: BundleExpression): string {
@@ -246,15 +260,8 @@ export function printBundle<T extends ClientUnknown>(
         return builtin(node[1]);
       case "el":
         return element(node);
-      case "comp": {
-        const props = Object.entries(node[2]).map(
-          ([prop, value]) => `[${name(prop)}, () => ${expression(value)}]`,
-        );
-        if (node[3] !== null) {
-          props.push(`["children", () => ${expression(node[3])}]`);
-        }
-        return `component(${expression(node[1])}, [${props.join(", ")}])`;
-      }
+      case "comp":
+        return `jsx(${expression(node[1])}, ${props(node[2], node[3])})`;
       case "()":
       case "?.()": {
         const call = node[0] === "?.()" ? "?.(" : "(";
@@ -377,10 +384,10 @@ export function printBundle<T extends ClientUnknown>(
       ? "[]"
       : `JSON.parse(${stringLiteral(JSON.stringify(data))})`;
   const code = [
-    "(($d) => untrack(() => {",
+    "(($d) => {",
     ...functions,
     `return ${root};`,
-    `}))(${carried})`,
+    `})(${carried})`,
   ].join("\n");
   return code as Bundle<T>;
 }

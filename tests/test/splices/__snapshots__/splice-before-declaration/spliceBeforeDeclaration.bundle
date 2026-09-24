@@ -1,16 +1,15 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => $0() + $1();
-    const f2 = ($0) => {
-      const before = 1;
-      const spliced = $0();
-      const after = 2;
-      return before + spliced + after;
-    };
-    const f3 = () => 10;
-    const f4 = () => 20;
-    return f1(
-      () => f2(f3),
-      () => f2(f4),
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1) => $0() + $1();
+  const f2 = ($0) => {
+    const before = 1;
+    const spliced = $0();
+    const after = 2;
+    return before + spliced + after;
+  };
+  const f3 = () => 10;
+  const f4 = () => 20;
+  return f1(
+    () => f2(f3),
+    () => f2(f4),
+  );
+})([]);

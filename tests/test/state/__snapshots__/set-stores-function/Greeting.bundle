@@ -1,12 +1,12 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const greet = $0()((name) => "hi " + name);
-      return element(
-        "span",
-        [["onclick", () => () => greet.set((name) => "bye " + name), true]],
-        () => () => greet.get()("ada"),
-      );
-    };
-    return component(() => f1(() => state), []);
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const greet = $0()((name) => "hi " + name);
+    return jsx("span", {
+      onclick: () => greet.set((name) => "bye " + name),
+      get children() {
+        return greet.get()("ada");
+      },
+    });
+  };
+  return jsx(() => f1(() => state), {});
+})([]);

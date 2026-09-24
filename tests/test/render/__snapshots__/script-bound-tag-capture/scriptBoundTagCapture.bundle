@@ -1,45 +1,84 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1, $2, $3, $4) => {
-      const count = $0()(0);
-      const Badge = (props) => element("b", [], () => () => "n " + props.n);
-      return element("div", [], () => [
-        memo(() => $1(count, Badge)),
-        memo(() => $2(count, Badge)),
-        memo(() => $3(count, Badge)),
-        memo(() => $4(count, Badge)),
-        element(
-          "button",
-          [["onclick", () => () => count.set(count.get() + 1), true]],
-          () => "more",
-        ),
-      ]);
-    };
-    const f2 = ($0, $1) => component($0, [["n", () => $1.get()]]);
-    const f3 = ($0, $1, $2) => {
-      const skipped = 10;
-      return $0($1, $2);
-    };
-    const f4 = ($0, $1) => component($0, [["n", () => $1.get() + 100]]);
-    const f5 = ($0, $1) => component($0, [["n", () => $1.get() + 1000]]);
-    const f6 = ($0, $1, $2) =>
-      component($0($1, $2), [
-        ["each", () => () => [1, 2]],
-        [
-          "children",
-          () => () => (m) => component($1, [["n", () => m * $2.get()]]),
-        ],
-      ]);
-    return f1(
-      () => state,
-      (count, Badge) => f2(Badge, count),
-      (count, Badge) => f3(f4, Badge, count),
-      (count, Badge) => element("section", [], () => () => f5(Badge, count)),
-      (count, Badge) =>
-        f6(
-          (Badge, count) => ($0) => list(() => $0.each(), $0.children()),
-          Badge,
-          count,
-        ),
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1, $2, $3, $4) => {
+    const count = $0()(0);
+    const Badge = (props) =>
+      jsx("b", {
+        get children() {
+          return "n " + props.n;
+        },
+      });
+    return jsx("div", {
+      get children() {
+        return [
+          () => $1(count, Badge),
+          () => $2(count, Badge),
+          () => $3(count, Badge),
+          () => $4(count, Badge),
+          jsx("button", {
+            onclick: () => count.set(count.get() + 1),
+            children: "more",
+          }),
+        ];
+      },
+    });
+  };
+  const f2 = ($0, $1) =>
+    jsx($0, {
+      get n() {
+        return $1.get();
+      },
+    });
+  const f3 = ($0, $1, $2) => {
+    const skipped = 10;
+    return $0($1, $2);
+  };
+  const f4 = ($0, $1) =>
+    jsx($0, {
+      get n() {
+        return $1.get() + 100;
+      },
+    });
+  const f5 = ($0, $1) =>
+    jsx($0, {
+      get n() {
+        return $1.get() + 1000;
+      },
+    });
+  const f6 = ($0, $1, $2) =>
+    jsx($0($1, $2), {
+      each: () => [1, 2],
+      get children() {
+        return () => (m) =>
+          jsx($1, {
+            get n() {
+              return m * $2.get();
+            },
+          });
+      },
+    });
+  return f1(
+    () => state,
+    (count, Badge) => f2(Badge, count),
+    (count, Badge) => f3(f4, Badge, count),
+    (count, Badge) =>
+      jsx("section", {
+        get children() {
+          return f5(Badge, count);
+        },
+      }),
+    (count, Badge) =>
+      f6(
+        (Badge, count) => ($0) =>
+          jsx("for", {
+            get each() {
+              return $0.each();
+            },
+            get children() {
+              return $0.children();
+            },
+          }),
+        Badge,
+        count,
+      ),
+  );
+})([]);

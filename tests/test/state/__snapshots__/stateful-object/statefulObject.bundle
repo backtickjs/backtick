@@ -1,29 +1,23 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const c = $0()(10);
-      return element(
-        "button",
-        [
-          [
-            "onclick",
-            () => () => {
-              c.add(5);
-            },
-            true,
-          ],
-        ],
-        () => () => c.get(),
-      );
+(($d) => {
+  const f1 = ($0) => {
+    const c = $0()(10);
+    return jsx("button", {
+      onclick: () => {
+        c.add(5);
+      },
+      get children() {
+        return c.get();
+      },
+    });
+  };
+  const f2 = ($0) => (initial) => {
+    const count = $0()(initial);
+    return {
+      get: () => count.get(),
+      add: (n) => {
+        count.set(count.get() + n);
+      },
     };
-    const f2 = ($0) => (initial) => {
-      const count = $0()(initial);
-      return {
-        get: () => count.get(),
-        add: (n) => {
-          count.set(count.get() + n);
-        },
-      };
-    };
-    return f1(() => f2(() => state));
-  }))([]);
+  };
+  return f1(() => f2(() => state));
+})([]);

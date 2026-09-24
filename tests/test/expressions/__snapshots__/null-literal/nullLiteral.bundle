@@ -1,17 +1,12 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => ({
-      missing: $0()(null),
-      present: $0()("hi"),
-      bare: null,
-    });
-    const f2 = () => (value) => {
-      if (value === null) {
-        {
-          return "-";
-        }
+(($d) => {
+  const f1 = ($0) => ({ missing: $0()(null), present: $0()("hi"), bare: null });
+  const f2 = () => (value) => {
+    if (value === null) {
+      {
+        return "-";
       }
-      return value;
-    };
-    return f1(f2);
-  }))([]);
+    }
+    return value;
+  };
+  return f1(f2);
+})([]);

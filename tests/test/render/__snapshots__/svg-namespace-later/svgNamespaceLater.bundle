@@ -1,38 +1,48 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => {
-      const xs = $0()([10]);
-      const shown = $0()(false);
-      return element("div", [], () => [
-        element("svg", [["viewBox", () => "0 0 30 10", true]], () => [
-          memo(() =>
-            component($1(), [
-              ["each", () => () => xs.get()],
-              [
-                "children",
-                () => () => (x) => element("title", [], () => () => "dot " + x),
-              ],
-            ]),
-          ),
-          memo(() =>
-            shown.get() ? element("title", [], () => "shown") : null,
-          ),
-        ]),
-        element("title", [], () => "after"),
-        element(
-          "button",
-          [["onclick", () => () => xs.set([10, 20]), true]],
-          () => "add",
-        ),
-        element(
-          "button",
-          [["onclick", () => () => shown.set(true), true]],
-          () => "show",
-        ),
-      ]);
-    };
-    return f1(
-      () => state,
-      () => ($0) => list(() => $0.each(), $0.children()),
-    );
-  }))([]);
+(($d) => {
+  const f1 = ($0, $1) => {
+    const xs = $0()([10]);
+    const shown = $0()(false);
+    return jsx("div", {
+      get children() {
+        return [
+          jsx("svg", {
+            viewBox: "0 0 30 10",
+            get children() {
+              return [
+                () =>
+                  jsx($1(), {
+                    each: () => xs.get(),
+                    get children() {
+                      return () => (x) =>
+                        jsx("title", {
+                          get children() {
+                            return "dot " + x;
+                          },
+                        });
+                    },
+                  }),
+                () =>
+                  shown.get() ? jsx("title", { children: "shown" }) : null,
+              ];
+            },
+          }),
+          jsx("title", { children: "after" }),
+          jsx("button", { onclick: () => xs.set([10, 20]), children: "add" }),
+          jsx("button", { onclick: () => shown.set(true), children: "show" }),
+        ];
+      },
+    });
+  };
+  return f1(
+    () => state,
+    () => ($0) =>
+      jsx("for", {
+        get each() {
+          return $0.each();
+        },
+        get children() {
+          return $0.children();
+        },
+      }),
+  );
+})([]);

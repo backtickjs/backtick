@@ -1,8 +1,7 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      const names = ["zero", "one"];
-      return names[9];
-    };
-    return f1();
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    const names = ["zero", "one"];
+    return names[9];
+  };
+  return f1();
+})([]);

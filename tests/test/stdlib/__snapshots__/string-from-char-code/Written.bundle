@@ -1,12 +1,10 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      return element(
-        "span",
-        [],
-        () => () =>
-          String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832),
-      );
-    };
-    return component(() => f1(), []);
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    return jsx("span", {
+      get children() {
+        return String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832);
+      },
+    });
+  };
+  return jsx(() => f1(), {});
+})([]);

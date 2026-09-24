@@ -1,10 +1,13 @@
-(($d) =>
-  untrack(() => {
-    const f1 = () => {
-      const whole = Number.parseInt("42px");
-      const based = Number.parseInt("ff", 16);
-      const fractional = Number.parseFloat("1.5");
-      return element("span", [], () => () => whole + based + fractional + "");
-    };
-    return component(() => f1(), []);
-  }))([]);
+(($d) => {
+  const f1 = () => {
+    const whole = Number.parseInt("42px");
+    const based = Number.parseInt("ff", 16);
+    const fractional = Number.parseFloat("1.5");
+    return jsx("span", {
+      get children() {
+        return whole + based + fractional + "";
+      },
+    });
+  };
+  return jsx(() => f1(), {});
+})([]);

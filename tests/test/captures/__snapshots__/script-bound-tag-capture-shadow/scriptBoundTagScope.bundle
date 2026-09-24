@@ -1,17 +1,33 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0) => {
-      const twice = (Card) =>
-        element("div", [], () => [
-          memo(() => component(Card, [["n", () => 1]])),
-          memo(() => component(Card, [["n", () => 2]])),
-        ]);
-      return element("section", [], () => [
-        memo(() => component($0(), [["title", () => () => "host"]])),
-        memo(() =>
-          twice((props) => element("i", [], () => () => "row " + props.n)),
-        ),
-      ]);
-    };
-    return f1(() => ($0) => element("h2", [], () => () => $0.title()));
-  }))([]);
+(($d) => {
+  const f1 = ($0) => {
+    const twice = (Card) =>
+      jsx("div", {
+        get children() {
+          return [() => jsx(Card, { n: 1 }), () => jsx(Card, { n: 2 })];
+        },
+      });
+    return jsx("section", {
+      get children() {
+        return [
+          () => jsx($0(), { title: () => "host" }),
+          () =>
+            twice((props) =>
+              jsx("i", {
+                get children() {
+                  return "row " + props.n;
+                },
+              }),
+            ),
+        ];
+      },
+    });
+  };
+  return f1(
+    () => ($0) =>
+      jsx("h2", {
+        get children() {
+          return $0.title();
+        },
+      }),
+  );
+})([]);

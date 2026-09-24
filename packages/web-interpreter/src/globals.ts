@@ -1,15 +1,8 @@
 import type { Signal, SignalOptions, State } from "@backtickjs/platform-sdk";
 import type { Builtins } from "@backtickjs/web-sdk";
-import {
-  createMemo,
-  createSignal,
-  onCleanup,
-  onMount,
-  untrack,
-} from "solid-js";
+import { createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import type { Renderer } from "solid-js/universal";
-import { callComponent, drawElement, drawList, memo } from "./draw.js";
-import type { DrawnProp } from "./draw.js";
+import { createJsx } from "./draw.js";
 
 /** What a client is wired to. */
 export interface ClientOptions {
@@ -30,8 +23,8 @@ export interface ClientOptions {
 }
 
 /**
- * Defines the web client's globals on `global`: the framework's builtins, the
- * bindings a bundle draws with, and the app's own. Everything else a bundle
+ * Defines the web client's globals on `global`: the framework's builtins,
+ * `jsx`, which is what a bundle draws with, and the app's own. Everything else a bundle
  * names, `window` and ECMAScript's among it, is the realm's.
  */
 export function defineGlobals(
@@ -62,15 +55,7 @@ export function defineGlobals(
     onMount: onMount satisfies Builtins["onMount"],
     onCleanup: onCleanup satisfies Builtins["onCleanup"],
 
-    element: (
-      id: string,
-      props: readonly DrawnProp[],
-      children: (() => unknown) | null,
-    ) => drawElement(renderer, id, props, children),
-    list: drawList,
-    component: callComponent,
-    memo,
-    untrack,
+    jsx: createJsx(renderer),
   };
   Object.assign(global, web, globals);
 }

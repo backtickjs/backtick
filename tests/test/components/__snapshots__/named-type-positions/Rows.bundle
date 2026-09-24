@@ -1,40 +1,52 @@
-(($d) =>
-  untrack(() => {
-    const f1 = ($0, $1) => {
-      const rows = $0()([]);
-      const add = (row) => {
-        rows.set([row]);
-      };
-      const label = (row) => {
-        return row.label;
-      };
-      return element("div", [], () => [
-        element(
-          "span",
-          [["onclick", () => () => add({ id: 1, label: "one" }), true]],
-          () => "add",
-        ),
-        element(
-          "div",
-          [],
-          () => () =>
-            component($1(), [
-              ["each", () => () => rows.get()],
-              [
-                "children",
-                () => () => (row) =>
-                  element("span", [], () => () => label(row)),
-              ],
-            ]),
-        ),
-      ]);
+(($d) => {
+  const f1 = ($0, $1) => {
+    const rows = $0()([]);
+    const add = (row) => {
+      rows.set([row]);
     };
-    return component(
-      () =>
-        f1(
-          () => state,
-          () => ($0) => list(() => $0.each(), $0.children()),
-        ),
-      [],
-    );
-  }))([]);
+    const label = (row) => {
+      return row.label;
+    };
+    return jsx("div", {
+      get children() {
+        return [
+          jsx("span", {
+            onclick: () => add({ id: 1, label: "one" }),
+            children: "add",
+          }),
+          jsx("div", {
+            get children() {
+              return jsx($1(), {
+                each: () => rows.get(),
+                get children() {
+                  return () => (row) =>
+                    jsx("span", {
+                      get children() {
+                        return label(row);
+                      },
+                    });
+                },
+              });
+            },
+          }),
+        ];
+      },
+    });
+  };
+  return jsx(
+    () =>
+      f1(
+        () => state,
+        () => ($0) =>
+          jsx("for", {
+            get each() {
+              return $0.each();
+            },
+            get children() {
+              return $0.children();
+            },
+          }),
+      ),
+    {},
+  );
+})([]);

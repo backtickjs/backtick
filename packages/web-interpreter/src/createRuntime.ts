@@ -1,6 +1,7 @@
-import type { ClientUnknown } from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import { createRoot } from "solid-js";
 import { createRenderer } from "solid-js/universal";
+import { rootOf } from "./draw.js";
 import { defineGlobals } from "./globals.js";
 import type { ClientOptions } from "./globals.js";
 import { rendererOptions } from "./rendererOptions.js";
@@ -48,7 +49,7 @@ export function createRuntime(options: ClientOptions): Runtime<Node> {
   return {
     render: (run, parent, anchor) =>
       createRoot((dispose) => {
-        renderer.insert(parent, run(), anchor);
+        renderer.insert(parent, rootOf(run() as ClientValue), anchor);
         return dispose;
       }),
     evaluate: (run) => createRoot(run),
