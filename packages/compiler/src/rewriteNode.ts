@@ -4,7 +4,6 @@ import type * as JSX from "estree-jsx";
 import { isCompoundAssignment, isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { call, varDeclList } from "./nodeFactory.js";
-import { bodyKind } from "./bodyKind.js";
 import {
   type BinaryOperator,
   isComponentTag,
@@ -90,9 +89,6 @@ export interface RewriteState {
   // set while rewriting a condition's bare duplicate, so nested conditions
   // aren't re-duplicated (the copy would otherwise grow exponentially)
   dup?: boolean;
-  // the enclosing body's classification: a value body bans side-effect
-  // statements, and its returns take the value check
-  bodyKind: "value" | "action";
   // the binding keys this script captures from enclosing scripts — not
   // assignable: a nested script captures the value, not the variable
   captures?: Set<string>;
@@ -680,21 +676,8 @@ function rewriteNodeImpl(
   }
 
   if (ts.isReturnStatement(node) && !node.expression) {
-    // A bare `return` exits an action early. In a value script it returns
-    // nothing where a value is due — rewritten as `return null`, the
-    // suggested fix, so the one error stands alone. What it completes with is
-    // `undefined` either way.
-    if (state.bodyKind === "value") {
-      state.errors.set(
-        node,
-        "A script that returns a value can't `return` without one.",
-      );
-    }
     return {
-      virtual:
-        state.bodyKind === "value"
-          ? ts.factory.createReturnStatement(ts.factory.createNull())
-          : ts.factory.createReturnStatement(),
+      virtual: ts.factory.createReturnStatement(),
       runtime: { type: "ReturnStatement", loc: loc(node), argument: null },
     };
   }
@@ -703,9 +686,7 @@ function rewriteNodeImpl(
     const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
-        state.bodyKind === "value"
-          ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
-          : (expression.virtual as ts.Expression),
+        call(ts, "cs", "const", [expression.virtual as ts.Expression]),
       ),
       runtime: {
         type: "ReturnStatement",
@@ -1403,12 +1384,6 @@ function rewriteNodeImpl(
     });
 
     if (params.every((param) => param != null)) {
-      // An arrow's body classifies on its own — never inherited from the
-      // enclosing body.
-      const bodyState: RewriteState = {
-        ...state,
-        bodyKind: bodyKind(ts, node.body),
-      };
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
@@ -1427,7 +1402,7 @@ function rewriteNodeImpl(
         state.mappings.set(declaration, param.source);
         return declaration;
       });
-      const body = rewriteNode(ts, bodyState, node.body);
+      const body = rewriteNode(ts, state, node.body);
       return {
         virtual: ts.factory.createArrowFunction(
           undefined,

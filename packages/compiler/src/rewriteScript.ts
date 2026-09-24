@@ -5,7 +5,6 @@ import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, object } from "./nodeFactory.js";
 import { type ClientScript, sourceLocation } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
-import { bodyKind } from "./bodyKind.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
 
@@ -52,7 +51,6 @@ export function rewriteScript(
     mappings: new Map(),
     codeInformation: new Map(),
     captures: new Set(captures),
-    bodyKind: bodyKind(ts, scriptNode),
   };
 
   const rewritten = rewriteNode(ts, state, scriptNode);
