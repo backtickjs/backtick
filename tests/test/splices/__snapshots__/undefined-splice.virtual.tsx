@@ -24,8 +24,8 @@ describe("a spliced undefined", () => {
     assert.deepEqual(await evaluate(cs.lift(cs.const((cs.splice((data)) satisfies typeof cs.ClientUnknown)))), [1, undefined, 3]);
   });
 
-  it("is written as an undef node", async () => {
-    const bundle = await bundler.tree([undefined]);
-    assert.deepEqual(bundle.root, ["arr", [["undef"]]]);
+  it("is written as `void 0`", async () => {
+    const code = await bundler.run([undefined]);
+    assert.match(code, /\[void 0\]/);
   });
 });

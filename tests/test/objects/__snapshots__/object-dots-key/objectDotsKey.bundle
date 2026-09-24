@@ -3,7 +3,10 @@
     const base = {
       a: 1,
     };
-    return Object.fromEntries([...Object.entries(base), ["...", 2]]);
+    return {
+      ...base,
+      "...": 2,
+    };
   };
   return f1();
 })([]);

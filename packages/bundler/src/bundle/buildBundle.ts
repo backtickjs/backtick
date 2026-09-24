@@ -2,22 +2,44 @@ import type { Ast, AstElement, AstScript } from "../ast/Ast.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
-import type {
-  BundleTree,
-  BundleArrowFunction,
-  BundleElement,
-  BundleExpression,
-  BundleIdentifier,
-  BundleFunctionLabel,
-} from "@backtickjs/platform-sdk";
+import type * as ES from "estree";
 import type { ExperimentalFeatures } from "../bundler.js";
-import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
-import type { ClientUnknown } from "@backtickjs/platform-sdk";
+import {
+  arrow,
+  binding,
+  builtin,
+  call,
+  createNames,
+  jsxComponent,
+  jsxElement,
+  label,
+  literal,
+  member,
+  nullLiteral,
+  objectKey,
+  property,
+  thunk,
+  undefinedValue,
+} from "../estree.js";
+import type { Names } from "../estree.js";
+import { lowerScriptBody } from "./lowerScriptBody.js";
 
-// Builds the bundle `{ functions, root }` as plain data. The output
-// shapes — the tables, the tagged expression forms, and their evaluation
-// contract — are documented on the `Bundle` types; this file documents how
-// they are derived.
+/**
+ * A bundle as it is built, before it is printed: each `functions` entry under
+ * its label, in the order rendering first reached it, and the root. What they
+ * name is registered in `names` and settled when the bundle is printed.
+ */
+export interface BundleTree {
+  readonly functions: readonly (readonly [
+    string,
+    ES.ArrowFunctionExpression,
+  ])[];
+  readonly root: ES.Expression;
+  readonly names: Names;
+}
+
+// Builds the bundle `{ functions, root }` as ESTree, and documents how it is
+// derived.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -45,7 +67,8 @@ import type { ClientUnknown } from "@backtickjs/platform-sdk";
 export function buildBundle(
   ast: Ast,
   features: ExperimentalFeatures = {},
-): BundleTree<ClientUnknown> {
+): BundleTree {
+  const names = createNames();
   // The `functions` table, filled as rendering reaches each script. Two scripts
   // written at one source location are one entry, so this is what makes a
   // reference to a shared script a reference to the same object — the one thing
@@ -88,10 +111,10 @@ export function buildBundle(
   // `lowerScriptBody`, from its own script — nothing out here reads those names,
   // because a call site hands an entry its arguments positionally, and its
   // captures arrive as numbered parameters rather than under a name.
-  const names = new Map<string, string>();
+  const displayed = new Map<string, string>();
   const used = new Set<string>();
   const displayName = (key: string): string => {
-    const existing = names.get(key);
+    const existing = displayed.get(key);
     if (existing !== undefined) {
       return existing;
     }
@@ -101,7 +124,7 @@ export function buildBundle(
       name = `${base}${n}`;
     }
     used.add(name);
-    names.set(key, name);
+    displayed.set(key, name);
     return name;
   };
 
@@ -118,18 +141,21 @@ export function buildBundle(
   // A field is *called*, where the parameter is not. What binds a field is a
   // thunk written at the tag, because a prop has to be re-read whenever what it
   // names changes, where an argument is evaluated once where it is passed.
-  const holeRead = (name: string): BundleExpression => {
+  const holeRead = (name: string): ES.Expression => {
     const [param, prop, ...path] = name.split(".");
     if (prop === undefined) {
-      return ["id", param];
+      return binding(names, param);
     }
     // The parameter is a thunk the tag wrote, so it is called where the drawing
     // reads it: an argument is evaluated once where it is passed, and a prop has
     // to be re-read whenever what it names changes. What the call answers with
     // is an ordinary value, so the whole path off it is ordinary reads.
-    let read: BundleExpression = ["()", [".", ["id", param], prop], []];
+    let read: ES.Expression = call(
+      member(binding(names, param), prop, false),
+      [],
+    );
     for (const step of path) {
-      read = [".", read, step];
+      read = member(read, step, false);
     }
     return read;
   };
@@ -219,14 +245,14 @@ export function buildBundle(
   const passKeys = (target: ScriptEntry, hole: number): readonly string[] =>
     target.splices[hole]?.params ?? [];
 
-  const bodies = new Map<ScriptEntry, BundleArrowFunction>();
+  const bodies = new Map<ScriptEntry, ES.ArrowFunctionExpression>();
 
   // A script entry's label, either of the two things that name one (see
   // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
   // where it was written. Only the second is the same across responses — a
   // table position follows the order this composition reached things — so it is
   // what a client holding an entry from an earlier response can recognize.
-  const fnLabel = (target: ScriptEntry): BundleFunctionLabel =>
+  const fnLabel = (target: ScriptEntry): string =>
     features.stableFunctionLabels === true
       ? locKey(target.fileHash, target.loc)
       : String(scripts.get(target));
@@ -244,7 +270,13 @@ export function buildBundle(
       ...script.splices.map((splice) => splice.key),
       ...script.captures,
     ].map((_, index) => `$${index}`);
-    bodies.set(script, ["=>", parameterNodes(params), lowerScriptBody(script)]);
+    bodies.set(
+      script,
+      arrow(
+        params.map((param) => binding(names, param)),
+        lowerScriptBody(script, names),
+      ),
+    );
   };
 
   // A fragment that is one entry whose parameters are exactly what this hole
@@ -255,7 +287,7 @@ export function buildBundle(
   const forwarding = (
     value: Ast,
     passed: readonly string[],
-  ): BundleExpression | null => {
+  ): ES.Expression | null => {
     if (value.kind !== "AstScript" || Object.keys(value.splices).length > 0) {
       return null;
     }
@@ -268,7 +300,7 @@ export function buildBundle(
       return null;
     }
     materialize(target);
-    return ["fn", fnLabel(target)];
+    return label(names, fnLabel(target));
   };
 
   // Instantiating a tree in value position: which entry, and what to hand
@@ -282,34 +314,34 @@ export function buildBundle(
   const render = (
     value: Ast,
     params: ReadonlySet<string> = new Set(),
-  ): BundleExpression => {
+  ): ES.Expression => {
     const child = (
       node: Ast,
       inner: ReadonlySet<string> = params,
-    ): BundleExpression => render(node, inner);
+    ): ES.Expression => render(node, inner);
 
     switch (value.kind) {
       case "AstScript": {
         const target = entryFor(value);
         materialize(target);
-        return ["()", ["fn", fnLabel(target)], exprCallArgs(value, params)];
+        return call(label(names, fnLabel(target)), exprCallArgs(value, params));
       }
       // An arrow over nothing, called with no props: `comp` is what calls a
       // drawing untracked.
       case "AstComponentCall":
-        return ["comp", ["=>", [], child(value.body)], {}, null];
+        return jsxComponent(names, thunk(child(value.body)), [], null);
       case "AstElement":
         return renderElement(value, params);
       case "AstBuiltin":
-        return ["bltn", value.name];
+        return builtin(names, value.name);
       case "AstNumber":
       case "AstString":
       case "AstBoolean":
-        return value.value;
+        return literal(value.value);
       case "AstNull":
-        return null;
+        return nullLiteral();
       case "AstUndefined":
-        return ["undef"];
+        return undefinedValue();
       // An expansion is written out as the arrow it is, its holes the
       // parameters and the call the tag wrote binding them. Compiling it to a
       // `functions` entry instead is possible — `FunctionReference` is an entry as a
@@ -317,30 +349,29 @@ export function buildBundle(
       // expansion to close over nothing. Measured, it traded an inline arrow
       // for a table entry and came out even, so it is written here.
       case "AstExpansion":
-        return [
-          "=>",
-          parameterNodes(value.params),
+        return arrow(
+          value.params.map((param) => binding(names, param)),
           // The expansion's params extend the enclosing ones, like a nested
           // frame, so a hole threading into the body resolves by name.
           child(value.body, new Set([...params, ...value.params])),
-        ];
+        );
       // A hole threads like a capture (see `freeCaps`), so it is reached the
       // same way — through the environment when the entry took it as one.
       case "AstHole":
         return holeRead(value.name);
       case "AstArray":
-        // Data, and a node is an array too, so it says which it is.
-        return ["arr", value.elements.map((entry) => child(entry))];
-      case "AstObject": {
-        // A plain data object passes through, every key of it: a node is an
-        // array, so an object is never mistaken for one and the format reserves
-        // no key.
-        const entries: { [key: string]: BundleExpression } = {};
-        for (const [key, entry] of Object.entries(value.entries)) {
-          entries[key] = child(entry);
-        }
-        return entries;
-      }
+        return {
+          type: "ArrayExpression",
+          elements: value.elements.map((entry) => child(entry)),
+        };
+      // A plain data object passes through, every key of it.
+      case "AstObject":
+        return {
+          type: "ObjectExpression",
+          properties: Object.entries(value.entries).map(([key, entry]) =>
+            property(objectKey(key), child(entry)),
+          ),
+        };
     }
   };
 
@@ -352,9 +383,9 @@ export function buildBundle(
   const capExpr = (
     key: string,
     params: ReadonlySet<string> = new Set(),
-  ): BundleIdentifier => {
+  ): ES.Identifier => {
     if (params.has(key)) {
-      return ["id", displayName(key)];
+      return binding(names, displayName(key));
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -373,9 +404,9 @@ export function buildBundle(
   const exprCallArgs = (
     ref: AstScript,
     params: ReadonlySet<string>,
-  ): BundleExpression[] => {
+  ): ES.Expression[] => {
     const target = entryFor(ref);
-    const parts: BundleExpression[] = [];
+    const parts: ES.Expression[] = [];
     Object.values(ref.splices).forEach(({ value: arg }, index) => {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
@@ -390,16 +421,17 @@ export function buildBundle(
         return;
       }
       if (passed.length === 0) {
-        parts.push(["=>", [], render(arg, params)]);
+        parts.push(thunk(render(arg, params)));
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
-      parts.push([
-        "=>",
-        parameterNodes(passed.map(displayName)),
-        render(arg, inner),
-      ]);
+      parts.push(
+        arrow(
+          passed.map((key) => binding(names, displayName(key))),
+          render(arg, inner),
+        ),
+      );
     });
     for (const key of target.captures) {
       parts.push(capExpr(key, params));
@@ -407,37 +439,34 @@ export function buildBundle(
     return parts;
   };
 
-  // Renders an inline element: static structure carried as data, each prop a
-  // bundle expression in the enclosing entry's scope.
+  // Renders an inline element, each prop an expression in the enclosing
+  // entry's scope.
   const renderElement = (
     element: AstElement,
     params: ReadonlySet<string>,
-  ): BundleElement => {
-    const props: { [key: string]: BundleExpression } = {};
-    let children: BundleExpression = null;
+  ): ES.Expression => {
+    const written: [string, ES.Expression][] = [];
+    let children: ES.Expression | null = null;
     for (const [key, entry] of Object.entries(element.props)) {
       const rendered = render(entry, params);
       if (key === "children") {
         children = rendered;
         continue;
       }
-      props[key] = rendered;
+      written.push([key, rendered]);
     }
-    return ["el", element.id, props, children];
+    return jsxElement(names, element.id, written, children);
   };
 
   // Nothing encloses the root, so nothing it holds can capture.
   const root = render(ast);
-  const functions: Record<BundleFunctionLabel, BundleArrowFunction> = {};
   // In table order, which is the order rendering first reached each script.
+  const functions: (readonly [string, ES.ArrowFunctionExpression])[] = [];
   for (const script of scripts.keys()) {
     const body = bodies.get(script);
     if (body !== undefined) {
-      functions[fnLabel(script)] = body;
+      functions.push([fnLabel(script), body]);
     }
   }
-  // Minted here, which is the one place it can be. A bundle is a handle the
-  // client owns and its brands are keys nothing can write — so what makes one
-  // says so, the way a client says it when it hands a script a `State`.
-  return { functions, root } as BundleTree<ClientUnknown>;
+  return { functions, root, names };
 }

@@ -15,7 +15,7 @@ describe("a spliced undefined", () => {
           {
             version: "0.0.0",
             filePath: "splices/undefined-splice.test.tsx",
-            fileHash: "oeybv5lkrw7v",
+            fileHash: "3f9luoncz9vrv",
             splices: { $nothing: { value: nothing, params: [] } },
             captures: [],
           },
@@ -37,7 +37,7 @@ describe("a spliced undefined", () => {
         {
           version: "0.0.0",
           filePath: "splices/undefined-splice.test.tsx",
-          fileHash: "oeybv5lkrw7v",
+          fileHash: "3f9luoncz9vrv",
           splices: { $data: { value: data, params: [] } },
           captures: [],
         },
@@ -60,7 +60,7 @@ describe("a spliced undefined", () => {
           {
             version: "0.0.0",
             filePath: "splices/undefined-splice.test.tsx",
-            fileHash: "oeybv5lkrw7v",
+            fileHash: "3f9luoncz9vrv",
             splices: { $data: { value: data, params: [] } },
             captures: [],
           },
@@ -74,8 +74,8 @@ describe("a spliced undefined", () => {
       [1, undefined, 3],
     );
   });
-  it("is written as an undef node", async () => {
-    const bundle = await bundler.tree([undefined]);
-    assert.deepEqual(bundle.root, ["arr", [["undef"]]]);
+  it("is written as `void 0`", async () => {
+    const code = await bundler.run([undefined]);
+    assert.match(code, /\[void 0\]/);
   });
 });

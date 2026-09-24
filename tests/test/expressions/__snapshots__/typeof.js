@@ -2,7 +2,7 @@ import { it } from "node:test";
 import { cs, state } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 // `typeof` answers JavaScript's names, since TypeScript narrows by them: every
-// row of the wire format's table, a host's own value among them.
+// kind of value a script can hold, a host's own value among them.
 it("typeofTable", async (t) => {
   await snapshotCase(
     t,
@@ -12,7 +12,7 @@ it("typeofTable", async (t) => {
       {
         version: "0.0.0",
         filePath: "expressions/typeof.test.tsx",
-        fileHash: "2gv30cn7o7v4r",
+        fileHash: "1jdryi4es12ui",
         splices: { $state: { value: state, params: [] } },
         captures: [],
       },
@@ -27,7 +27,7 @@ it("typeofTable", async (t) => {
               kind: "id",
               loc: [12, 13, 12, 18],
               text: "count",
-              bindingKey: "count$2gv30cn7o7v4r$0",
+              bindingKey: "count$1jdryi4es12ui$0",
             },
             initializer: {
               kind: "()",
@@ -148,7 +148,7 @@ it("typeofTable", async (t) => {
                           kind: "id",
                           loc: [21, 18, 21, 19],
                           text: "n",
-                          bindingKey: "n$2gv30cn7o7v4r$1",
+                          bindingKey: "n$1jdryi4es12ui$1",
                         },
                       },
                     ],
@@ -156,7 +156,7 @@ it("typeofTable", async (t) => {
                       kind: "id",
                       loc: [21, 32, 21, 33],
                       text: "n",
-                      bindingKey: "n$2gv30cn7o7v4r$1",
+                      bindingKey: "n$1jdryi4es12ui$1",
                     },
                   },
                 },
@@ -181,7 +181,7 @@ it("typeofTable", async (t) => {
                     kind: "id",
                     loc: [23, 16, 23, 21],
                     text: "count",
-                    bindingKey: "count$2gv30cn7o7v4r$0",
+                    bindingKey: "count$1jdryi4es12ui$0",
                   },
                 },
               ],
@@ -202,7 +202,7 @@ it("typeofNarrows", async (t) => {
       {
         version: "0.0.0",
         filePath: "expressions/typeof.test.tsx",
-        fileHash: "2gv30cn7o7v4r",
+        fileHash: "1jdryi4es12ui",
         splices: {},
         captures: [],
       },
@@ -217,7 +217,7 @@ it("typeofNarrows", async (t) => {
               kind: "id",
               loc: [35, 13, 35, 20],
               text: "measure",
-              bindingKey: "measure$2gv30cn7o7v4r$2",
+              bindingKey: "measure$1jdryi4es12ui$2",
             },
             initializer: {
               kind: "=>",
@@ -230,7 +230,7 @@ it("typeofNarrows", async (t) => {
                     kind: "id",
                     loc: [35, 24, 35, 25],
                     text: "v",
-                    bindingKey: "v$2gv30cn7o7v4r$3",
+                    bindingKey: "v$1jdryi4es12ui$3",
                   },
                 },
               ],
@@ -247,7 +247,7 @@ it("typeofNarrows", async (t) => {
                       kind: "id",
                       loc: [36, 16, 36, 17],
                       text: "v",
-                      bindingKey: "v$2gv30cn7o7v4r$3",
+                      bindingKey: "v$1jdryi4es12ui$3",
                     },
                   },
                   operatorToken: "===",
@@ -264,7 +264,7 @@ it("typeofNarrows", async (t) => {
                     kind: "id",
                     loc: [36, 33, 36, 34],
                     text: "v",
-                    bindingKey: "v$2gv30cn7o7v4r$3",
+                    bindingKey: "v$1jdryi4es12ui$3",
                   },
                   name: "length",
                 },
@@ -275,7 +275,7 @@ it("typeofNarrows", async (t) => {
                     kind: "id",
                     loc: [36, 44, 36, 45],
                     text: "v",
-                    bindingKey: "v$2gv30cn7o7v4r$3",
+                    bindingKey: "v$1jdryi4es12ui$3",
                   },
                   operatorToken: "*",
                   right: {
@@ -301,7 +301,7 @@ it("typeofNarrows", async (t) => {
                     kind: "id",
                     loc: [37, 15, 37, 22],
                     text: "measure",
-                    bindingKey: "measure$2gv30cn7o7v4r$2",
+                    bindingKey: "measure$1jdryi4es12ui$2",
                   },
                   arguments: [
                     {
@@ -318,7 +318,7 @@ it("typeofNarrows", async (t) => {
                     kind: "id",
                     loc: [37, 31, 37, 38],
                     text: "measure",
-                    bindingKey: "measure$2gv30cn7o7v4r$2",
+                    bindingKey: "measure$1jdryi4es12ui$2",
                   },
                   arguments: [
                     {

@@ -6,13 +6,12 @@ import type {
   ClientScriptJsxElement,
   ClientScriptStringLiteral,
 } from "@backtickjs/client-script";
+import { generate } from "astring";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
 import type { AstScript } from "../dist/ast/Ast.js";
 
-// An element a script writes lowers to the node a tree entry builds. Nothing
-// emits one yet — the compiler rewrites a script's JSX to unsupported syntax —
-// so the node is written here by hand, which is what makes the lowering
-// provable ahead of the rewrite that will produce it.
+// An element a script writes lowers to a call of the client's `jsx`, written
+// here by hand, and read back as the JavaScript it prints as.
 
 const loc = [1, 0, 1, 1] as const;
 
@@ -45,43 +44,38 @@ const lower = (body: ClientScriptExpression) => {
     expression: body,
   };
   // An entry is an arrow, and this one takes no parameters.
-  return buildBundle(script).functions["0"][2];
+  const [[, entry]] = buildBundle(script).functions;
+  return generate(entry.body).replace(/\s+/g, " ");
 };
 
-test("an element lowers to the format's own element node", () => {
-  assert.deepEqual(lower(element("br", [], [])), ["el", "br", {}, null]);
+test("an element lowers to a call of jsx", () => {
+  assert.equal(lower(element("br", [], [])), 'jsx("br", {})');
 });
 
 test("an attribute lowers to a prop under its own name", () => {
-  assert.deepEqual(
+  assert.equal(
     lower(element("td", [{ name: "class", initializer: text("col") }], [])),
-    ["el", "td", { class: "col" }, null],
+    'jsx("td", { class: "col" })',
   );
 });
 
-test("one child stands in the children slot itself", () => {
-  assert.deepEqual(lower(element("td", [], [text("one")])), [
-    "el",
-    "td",
-    {},
-    "one",
-  ]);
+test("one child stands in the children prop itself", () => {
+  assert.equal(
+    lower(element("td", [], [text("one")])),
+    'jsx("td", { children: "one" })',
+  );
 });
 
-test("several children travel under a `ArrayLiteralExpression`", () => {
-  assert.deepEqual(lower(element("tr", [], [text("one"), text("two")])), [
-    "el",
-    "tr",
-    {},
-    ["arr", ["one", "two"]],
-  ]);
+test("several children are an array, read when the client asks", () => {
+  assert.equal(
+    lower(element("tr", [], [text("one"), text("two")])),
+    'jsx("tr", { get children() { return ["one", "two"]; } })',
+  );
 });
 
 test("an element holds an element, as a child is an expression", () => {
-  assert.deepEqual(lower(element("tr", [], [element("td", [], [])])), [
-    "el",
-    "tr",
-    {},
-    ["el", "td", {}, null],
-  ]);
+  assert.equal(
+    lower(element("tr", [], [element("td", [], [])])),
+    'jsx("tr", { get children() { return jsx("td", {}); } })',
+  );
 });

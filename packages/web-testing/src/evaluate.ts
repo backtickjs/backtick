@@ -1,6 +1,5 @@
-import type { ClientUnknown, Spliceable } from "@backtickjs/core";
-import { bundler, printBundle } from "@backtickjs/bundler";
-import type { BundleTree } from "@backtickjs/bundler";
+import type { Bundle, ClientUnknown, Spliceable } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 import { runOf, testRuntime } from "./client.js";
 
 /** What a test changes about the runtime a value runs in. */
@@ -26,13 +25,13 @@ export async function evaluate<T extends ClientUnknown>(
 }
 
 /**
- * Prints and evaluates a tree that did not come from the bundler, for a test
- * about a tree the bundler would never build. Every other test evaluates a
- * value with {@link evaluate}.
+ * Evaluates a bundle that did not come from the bundler, for a test about a
+ * bundle the bundler would never write. Every other test evaluates a value
+ * with {@link evaluate}.
  */
 export function evaluateBundle<T extends ClientUnknown>(
-  tree: BundleTree<T>,
+  code: Bundle<T>,
   { globals }: EvaluateOptions = {},
 ): T {
-  return testRuntime(globals).evaluate(runOf(printBundle(tree)));
+  return testRuntime(globals).evaluate(runOf(code));
 }

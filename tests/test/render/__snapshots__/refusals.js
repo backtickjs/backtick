@@ -26,10 +26,7 @@ async function drawn(value) {
 }
 // An element whose tag no source can spell: JSX reads a capital as a
 // component, so this is the bundle written by hand.
-const element = (tag) => ({
-  functions: {},
-  root: ["el", tag, {}],
-});
+const element = (tag) => `jsx(${JSON.stringify(tag)}, {})`;
 describe("a tag that would execute", () => {
   it("is refused in HTML", async () => {
     await refused(
@@ -90,20 +87,20 @@ describe("a handler that is not a function", () => {
   it("leaves a function alone", async () => {
     const div = await drawn(
       cs.create(
-        [137, 29, 137, 59],
+        [134, 29, 134, 59],
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "3b1d6kjqn8mk7",
+          fileHash: "2i39r1w0584h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "jsx",
-          loc: [137, 32, 137, 58],
+          loc: [134, 32, 134, 58],
           type: {
             kind: "string",
-            loc: [137, 33, 137, 36],
+            loc: [134, 33, 134, 36],
             text: "div",
           },
           attributes: [
@@ -111,11 +108,11 @@ describe("a handler that is not a function", () => {
               name: "onclick",
               initializer: {
                 kind: "=>",
-                loc: [137, 46, 137, 54],
+                loc: [134, 46, 134, 54],
                 parameters: [],
                 body: {
                   kind: "{}",
-                  loc: [137, 52, 137, 54],
+                  loc: [134, 52, 134, 54],
                   statements: [],
                 },
               },
@@ -133,20 +130,20 @@ describe("a handler that is not a function", () => {
   it("is refused the other way round too", async () => {
     await refused(
       cs.create(
-        [147, 7, 147, 35],
+        [144, 7, 144, 35],
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "3b1d6kjqn8mk7",
+          fileHash: "2i39r1w0584h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "jsx",
-          loc: [147, 10, 147, 34],
+          loc: [144, 10, 144, 34],
           type: {
             kind: "string",
-            loc: [147, 11, 147, 14],
+            loc: [144, 11, 144, 14],
             text: "div",
           },
           attributes: [
@@ -154,11 +151,11 @@ describe("a handler that is not a function", () => {
               name: "title",
               initializer: {
                 kind: "=>",
-                loc: [147, 22, 147, 30],
+                loc: [144, 22, 144, 30],
                 parameters: [],
                 body: {
                   kind: "{}",
-                  loc: [147, 28, 147, 30],
+                  loc: [144, 28, 144, 30],
                   statements: [],
                 },
               },
@@ -176,20 +173,20 @@ describe("a handler that is not a function", () => {
   it("lets an absent handler stay absent", async () => {
     const absent = [
       cs.create(
-        [158, 7, 158, 33],
+        [155, 7, 155, 33],
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "3b1d6kjqn8mk7",
+          fileHash: "2i39r1w0584h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "jsx",
-          loc: [158, 10, 158, 32],
+          loc: [155, 10, 155, 32],
           type: {
             kind: "string",
-            loc: [158, 11, 158, 14],
+            loc: [155, 11, 155, 14],
             text: "div",
           },
           attributes: [
@@ -197,7 +194,7 @@ describe("a handler that is not a function", () => {
               name: "onclick",
               initializer: {
                 kind: "null",
-                loc: [158, 24, 158, 28],
+                loc: [155, 24, 155, 28],
               },
             },
           ],
@@ -205,20 +202,20 @@ describe("a handler that is not a function", () => {
         }),
       ),
       cs.create(
-        [159, 7, 159, 42],
+        [156, 7, 156, 42],
         {
           version: "0.0.0",
           filePath: "render/refusals.test.tsx",
-          fileHash: "3b1d6kjqn8mk7",
+          fileHash: "2i39r1w0584h",
           splices: {},
           captures: [],
         },
         () => ({
           kind: "jsx",
-          loc: [159, 10, 159, 41],
+          loc: [156, 10, 156, 41],
           type: {
             kind: "string",
-            loc: [159, 11, 159, 14],
+            loc: [156, 11, 156, 14],
             text: "div",
           },
           attributes: [
@@ -226,18 +223,18 @@ describe("a handler that is not a function", () => {
               name: "onclick",
               initializer: {
                 kind: "[]",
-                loc: [159, 24, 159, 37],
+                loc: [156, 24, 156, 37],
                 expression: {
                   kind: "arr",
-                  loc: [159, 24, 159, 34],
+                  loc: [156, 24, 156, 34],
                   elements: [
                     {
                       kind: "=>",
-                      loc: [159, 25, 159, 33],
+                      loc: [156, 25, 156, 33],
                       parameters: [],
                       body: {
                         kind: "{}",
-                        loc: [159, 31, 159, 33],
+                        loc: [156, 31, 156, 33],
                         statements: [],
                       },
                     },
@@ -245,7 +242,7 @@ describe("a handler that is not a function", () => {
                 },
                 argumentExpression: {
                   kind: "number",
-                  loc: [159, 35, 159, 36],
+                  loc: [156, 35, 156, 36],
                   value: 1,
                 },
               },

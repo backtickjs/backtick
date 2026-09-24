@@ -12,10 +12,10 @@ async function Pill({ label, ref }) {
 }
 describe("an undefined prop", () => {
   it("is left out of the element", async () => {
-    const bundle = await bundler.tree(
+    const code = await bundler.run(
       _jsx("div", { class: undefined, id: "kept" }),
     );
-    assert.deepEqual(bundle.root, ["el", "div", { id: "kept" }, null]);
+    assert.match(code, /jsx\("div", \{\s*id: "kept"\s*\}\)/);
   });
   it("lets a component forward an optional prop it wasn't given", async () => {
     await render(_jsx(Pill, { label: "plain" }));
@@ -30,7 +30,7 @@ describe("an undefined prop", () => {
           {
             version: "0.0.0",
             filePath: "bundler/undefined-prop.test.tsx",
-            fileHash: "158erry6ssaza",
+            fileHash: "28eplibrubp3g",
             splices: { $onMount: { value: onMount, params: [] } },
             captures: [],
           },
@@ -45,7 +45,7 @@ describe("an undefined prop", () => {
                   kind: "id",
                   loc: [34, 38, 34, 40],
                   text: "el",
-                  bindingKey: "el$158erry6ssaza$0",
+                  bindingKey: "el$28eplibrubp3g$0",
                 },
               },
             ],
@@ -72,7 +72,7 @@ describe("an undefined prop", () => {
                         kind: "id",
                         loc: [34, 60, 34, 62],
                         text: "el",
-                        bindingKey: "el$158erry6ssaza$0",
+                        bindingKey: "el$28eplibrubp3g$0",
                       },
                       name: "focus",
                     },
