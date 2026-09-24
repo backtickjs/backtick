@@ -1,3 +1,5 @@
 (($d) => {
-  return jsx("p", { children: "& \u003c > \" ' \u003c/script> \u003c!-- -->" });
+  return jsx("p", {
+    children: "& \u003c > \" ' \u003c/script> \u003c!-- -->",
+  });
 })([]);

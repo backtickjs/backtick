@@ -1,7 +1,9 @@
 (($d) => {
   const f1 = ($0) => $0()("x");
   const f2 = () => (name) => [
-    jsx("span", { children: "a sentence across lines" }),
+    jsx("span", {
+      children: "a sentence across lines",
+    }),
     jsx("span", {
       get children() {
         return [() => name, " ", () => name];

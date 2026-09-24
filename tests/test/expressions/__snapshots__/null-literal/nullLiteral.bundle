@@ -1,10 +1,12 @@
 (($d) => {
-  const f1 = ($0) => ({ missing: $0()(null), present: $0()("hi"), bare: null });
+  const f1 = ($0) => ({
+    missing: $0()(null),
+    present: $0()("hi"),
+    bare: null,
+  });
   const f2 = () => (value) => {
     if (value === null) {
-      {
-        return "-";
-      }
+      return "-";
     }
     return value;
   };

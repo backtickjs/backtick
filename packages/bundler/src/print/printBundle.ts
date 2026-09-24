@@ -9,13 +9,15 @@ import type {
   BundleStatement,
   ClientUnknown,
 } from "@backtickjs/platform-sdk";
+import { generate } from "astring";
+import type * as ES from "estree";
 
 /**
  * A bundle tree as JavaScript: one expression that answers with what the
  * tree's root evaluates to.
  *
- * Literals are printed as literals, strings escaped so that no `</script>`
- * or `<!--` appears. The bundle does not yet tell a value the host computed
+ * Built as ESTree and printed by `astring`. Literals are printed as literals,
+ * strings escaped so that no `</script>` or `<!--` appears. The bundle does not yet tell a value the host computed
  * from one a script wrote, so both are printed that way for now. An
  * element's tag or prop name that is not a plain name is data: the
  * expression carries its data in one `JSON.parse`, and reads it as `$d[i]`.
@@ -29,12 +31,6 @@ const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
 // A tag or prop name that can be printed as a string without escaping.
 const NAME = /^[A-Za-z][A-Za-z0-9_:-]*$/;
-
-// A string a script wrote, as a literal: `<` escaped, so no `</script>` or
-// `<!--` appears when the module is inlined in a page.
-function stringLiteral(value: string): string {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
-}
 
 // What the module itself names, beside the builtins it reads.
 const RUNTIME = ["$d", "globalThis", "jsx"];
@@ -96,26 +92,23 @@ export function printBundle<T extends ClientUnknown>(
     return `${base}_${at}`;
   };
 
-  const read$d = (value: string): string => {
+  const read$d = (value: string): ES.Expression => {
     data.push(value);
-    return `$d[${data.length - 1}]`;
+    return index(identifier("$d"), numberLiteral(data.length - 1));
   };
 
-  const literal = (value: string | number | boolean): string => {
-    if (typeof value === "string") {
-      return stringLiteral(value);
-    }
-    if (typeof value === "number" && !Number.isFinite(value)) {
-      throw new Error(`${value} has no literal`);
-    }
-    return Object.is(value, -0) ? "-0" : String(value);
-  };
+  const literal = (value: string | number | boolean): ES.Expression =>
+    typeof value === "string"
+      ? stringLiteral(value)
+      : typeof value === "number"
+        ? numberLiteral(value)
+        : { type: "Literal", value };
 
-  const name = (text: string): string =>
-    NAME.test(text) ? `"${text}"` : read$d(text);
+  const name = (text: string): ES.Expression =>
+    NAME.test(text) ? stringLiteral(text) : read$d(text);
 
   // The name as written, unless the module needs it or may not bind it.
-  const binding = (name: string): string => {
+  const binding = (name: string): ES.Identifier => {
     let printed = bindings.get(name);
     if (printed === undefined) {
       printed =
@@ -124,11 +117,11 @@ export function printBundle<T extends ClientUnknown>(
           : fresh(IDENTIFIER.test(name) ? name : "binding");
       bindings.set(name, printed);
     }
-    return printed;
+    return identifier(printed);
   };
 
   let next = 1;
-  const label = (name: string): string => {
+  const label = (name: string): ES.Identifier => {
     let printed = labels.get(name);
     if (printed === undefined) {
       while (taken.has(`f${next}`) || bound.has(`f${next}`)) {
@@ -138,66 +131,88 @@ export function printBundle<T extends ClientUnknown>(
       taken.add(printed);
       labels.set(name, printed);
     }
-    return printed;
+    return identifier(printed);
   };
 
   // `eval` read as a value, so a call of it is indirect: a bundle closes over
   // nothing, and a direct call would hand it this one's scope.
-  const builtin = (name: string): string =>
+  const builtin = (name: string): ES.Expression =>
     name === "eval"
-      ? "(0, eval)"
+      ? {
+          type: "SequenceExpression",
+          expressions: [numberLiteral(0), identifier("eval")],
+        }
       : IDENTIFIER.test(name)
-        ? name
-        : `globalThis[${stringLiteral(name)}]`;
+        ? identifier(name)
+        : index(identifier("globalThis"), stringLiteral(name));
 
-  const member = (name: string, optional: boolean): string =>
+  const member = (
+    object: ES.Expression,
+    name: string,
+    optional: boolean,
+  ): ES.MemberExpression =>
     IDENTIFIER.test(name)
-      ? `${optional ? "?." : "."}${name}`
-      : `${optional ? "?." : ""}[${stringLiteral(name)}]`;
+      ? {
+          type: "MemberExpression",
+          object,
+          property: identifier(name),
+          computed: false,
+          optional,
+        }
+      : {
+          type: "MemberExpression",
+          object,
+          property: stringLiteral(name),
+          computed: true,
+          optional,
+        };
 
-  const target = (node: BundleIdentifier): string => {
+  const target = (node: BundleIdentifier): ES.Identifier => {
     if (!Array.isArray(node) || node[0] !== "id") {
       throw new Error("an assignment target must be an identifier");
     }
     return binding(node[1]);
   };
 
-  const list = (elements: readonly BundleArrayElement[]): string =>
-    elements
-      .map((element) =>
-        Array.isArray(element) && element[0] === "..."
-          ? `...${expression(element[1])}`
-          : expression(element),
-      )
-      .join(", ");
+  const list = (
+    elements: readonly BundleArrayElement[],
+  ): (ES.Expression | ES.SpreadElement)[] =>
+    elements.map((element) =>
+      Array.isArray(element) && element[0] === "..."
+        ? { type: "SpreadElement", argument: expression(element[1]) }
+        : expression(element),
+    );
 
-  const arrow = (node: BundleArrowFunction): string => {
-    const parameters = node[1].map((parameter) => binding(parameter[1]));
+  const arrow = (node: BundleArrowFunction): ES.ArrowFunctionExpression => {
     const body = node[2];
-    const printed =
-      Array.isArray(body) && body[0] === "{}"
-        ? statement(body)
-        : expression(body);
-    return `((${parameters.join(", ")}) => ${printed})`;
+    const block = Array.isArray(body) && body[0] === "{}";
+    return {
+      type: "ArrowFunctionExpression",
+      params: node[1].map((parameter) => binding(parameter[1])),
+      body: block
+        ? (statement(body) as ES.BlockStatement)
+        : expression(body as BundleExpression),
+      expression: !block,
+    };
   };
 
   // A prop's key: bare where it can be, a string where it is a plain name, and
   // read from `data` otherwise.
-  const propKey = (key: string): string =>
+  const propKey = (key: string): { key: ES.Expression; computed: boolean } =>
     IDENTIFIER.test(key)
-      ? key
+      ? { key: identifier(key), computed: false }
       : NAME.test(key)
-        ? `"${key}"`
-        : `[${read$d(key)}]`;
+        ? { key: stringLiteral(key), computed: false }
+        : { key: read$d(key), computed: true };
 
   // A child that can change is a function of nothing, so the client decides
   // when to read it.
-  const child = (node: BundleArrayElement): string =>
+  const child = (node: BundleArrayElement): ES.Expression =>
     Array.isArray(node) && node[0] === "arr"
-      ? `[${node[1].map(child).join(", ")}]`
+      ? { type: "ArrayExpression", elements: node[1].map(child) }
       : isFixed(node)
         ? expression(node as BundleExpression)
-        : `() => ${expression(node as BundleExpression)}`;
+        : thunk(expression(node as BundleExpression));
 
   // One object for an element's or a component's props: what cannot change is
   // a property, what can is a getter. `children` is a getter too, and in an
@@ -205,53 +220,82 @@ export function printBundle<T extends ClientUnknown>(
   const props = (
     written: { readonly [key: string]: BundleExpression },
     drawn: BundleExpression | null,
-  ): string => {
+  ): ES.ObjectExpression => {
     const members = Object.entries(written).map(([key, value]) =>
       isFixed(value)
-        ? `${propKey(key)}: ${expression(value)}`
-        : `get ${propKey(key)}() { return ${expression(value)}; }`,
+        ? property(propKey(key), expression(value))
+        : getter(propKey(key), expression(value)),
     );
     // Children are read when the client asks, so an element among them is
     // built where the client draws it: inside an `svg`, say. A literal has
     // nothing to build.
     if (drawn !== null) {
+      const key = { key: identifier("children"), computed: false };
       members.push(
-        drawn === null || typeof drawn !== "object"
-          ? `children: ${expression(drawn)}`
-          : `get children() { return ${Array.isArray(drawn) && drawn[0] === "arr" ? child(drawn) : expression(drawn)}; }`,
+        typeof drawn !== "object"
+          ? property(key, expression(drawn))
+          : getter(
+              key,
+              Array.isArray(drawn) && drawn[0] === "arr"
+                ? child(drawn)
+                : expression(drawn),
+            ),
       );
     }
-    return `{ ${members.join(", ")} }`;
+    return { type: "ObjectExpression", properties: members };
   };
+
+  const jsx = (
+    type: ES.Expression,
+    written: ES.ObjectExpression,
+  ): ES.CallExpression => call(identifier("jsx"), [type, written]);
 
   // A fragment draws nothing of its own, so it is its children, as an array.
-  const element = (node: BundleElement): string => {
+  const element = (node: BundleElement): ES.Expression => {
     const [, id, written, drawn] = node;
     if (id === "Fragment") {
-      return drawn === null ? "null" : child(drawn);
+      return drawn === null ? { type: "Literal", value: null } : child(drawn);
     }
-    return `jsx(${name(id)}, ${props(written, drawn)})`;
+    return jsx(name(id), props(written, drawn));
   };
 
-  function expression(node: BundleExpression): string {
+  // An optional link is a chain of its own, as each `?.` was parenthesized
+  // before: `a?.b` and `a?.b()` short-circuit themselves and nothing outside.
+  const chain = (node: ES.ChainElement): ES.Expression => ({
+    type: "ChainExpression",
+    expression: node,
+  });
+
+  function expression(node: BundleExpression): ES.Expression {
     if (node === null) {
-      return "null";
+      return { type: "Literal", value: null };
     }
     if (typeof node !== "object") {
       return literal(node);
     }
     if (!Array.isArray(node)) {
-      const members = Object.entries(node).map(
-        ([key, value]) =>
-          `${IDENTIFIER.test(key) ? key : stringLiteral(key)}: ${expression(value)}`,
-      );
-      return `({ ${members.join(", ")} })`;
+      return {
+        type: "ObjectExpression",
+        properties: Object.entries(node).map(([key, value]) =>
+          property(
+            IDENTIFIER.test(key)
+              ? { key: identifier(key), computed: false }
+              : { key: stringLiteral(key), computed: false },
+            expression(value),
+          ),
+        ),
+      };
     }
     switch (node[0]) {
       case "arr":
-        return `[${list(node[1])}]`;
+        return { type: "ArrayExpression", elements: list(node[1]) };
       case "undef":
-        return "(void 0)";
+        return {
+          type: "UnaryExpression",
+          operator: "void",
+          prefix: true,
+          argument: numberLiteral(0),
+        };
       case "id":
         return binding(node[1]);
       case "fn":
@@ -261,34 +305,53 @@ export function printBundle<T extends ClientUnknown>(
       case "el":
         return element(node);
       case "comp":
-        return `jsx(${expression(node[1])}, ${props(node[2], node[3])})`;
+        return jsx(expression(node[1]), props(node[2], node[3]));
       case "()":
       case "?.()": {
-        const call = node[0] === "?.()" ? "?.(" : "(";
+        const optionalCall = node[0] === "?.()";
         const callee = node[1];
         // A method keeps its receiver: the member is read and called in one
         // expression, and `a?.b(…)` short-circuits the whole call.
-        const head =
-          Array.isArray(callee) && (callee[0] === "." || callee[0] === "?.")
-            ? `${expression(callee[1])}${member(callee[2], callee[0] === "?.")}`
-            : expression(callee);
-        return `(${head}${call}${list(node[2])}))`;
+        const method =
+          Array.isArray(callee) && (callee[0] === "." || callee[0] === "?.");
+        const optionalMember = method && callee[0] === "?.";
+        const called: ES.SimpleCallExpression = {
+          type: "CallExpression",
+          callee: method
+            ? member(expression(callee[1]), callee[2], optionalMember)
+            : expression(callee),
+          arguments: list(node[2]),
+          optional: optionalCall,
+        };
+        return optionalCall || optionalMember ? chain(called) : called;
       }
       case ".":
+        return member(expression(node[1]), node[2], false);
       case "?.":
-        return `(${expression(node[1])}${member(node[2], node[0] === "?.")})`;
+        return chain(member(expression(node[1]), node[2], true));
       case "[]":
-        return `(${expression(node[1])}[${expression(node[2])}])`;
+        return index(expression(node[1]), expression(node[2]));
       case "=":
       case "+=":
       case "-=":
       case "*=":
       case "/=":
       case "%=":
-        return `(${target(node[1])} ${node[0]} ${expression(node[2])})`;
+        return {
+          type: "AssignmentExpression",
+          operator: node[0],
+          left: target(node[1]),
+          right: expression(node[2]),
+        };
       case "&&":
       case "||":
       case "??":
+        return {
+          type: "LogicalExpression",
+          operator: node[0],
+          left: expression(node[1]),
+          right: expression(node[2]),
+        };
       case "+":
       case "-":
       case "*":
@@ -300,23 +363,50 @@ export function printBundle<T extends ClientUnknown>(
       case "<=":
       case ">":
       case ">=":
-        return `(${expression(node[1])} ${node[0]} ${expression(node[2])})`;
+        return {
+          type: "BinaryExpression",
+          operator: node[0],
+          left: expression(node[1]),
+          right: expression(node[2]),
+        };
       case "!":
-        return `(!${expression(node[1])})`;
-      case "-x":
-        return `(-${expression(node[1])})`;
       case "typeof":
-        return `(typeof ${expression(node[1])})`;
+        return {
+          type: "UnaryExpression",
+          operator: node[0],
+          prefix: true,
+          argument: expression(node[1]),
+        };
+      case "-x":
+        return {
+          type: "UnaryExpression",
+          operator: "-",
+          prefix: true,
+          argument: expression(node[1]),
+        };
       case "++x":
-        return `(++${target(node[1])})`;
       case "--x":
-        return `(--${target(node[1])})`;
+        return {
+          type: "UpdateExpression",
+          operator: node[0] === "++x" ? "++" : "--",
+          prefix: true,
+          argument: target(node[1]),
+        };
       case "x++":
-        return `(${target(node[1])}++)`;
       case "x--":
-        return `(${target(node[1])}--)`;
+        return {
+          type: "UpdateExpression",
+          operator: node[0] === "x++" ? "++" : "--",
+          prefix: false,
+          argument: target(node[1]),
+        };
       case "?:":
-        return `(${expression(node[1])} ? ${expression(node[2])} : ${expression(node[3])})`;
+        return {
+          type: "ConditionalExpression",
+          test: expression(node[1]),
+          consequent: expression(node[2]),
+          alternate: expression(node[3]),
+        };
       case "=>":
         return arrow(node);
       default:
@@ -324,72 +414,217 @@ export function printBundle<T extends ClientUnknown>(
     }
   }
 
-  function statement(node: BundleStatement): string {
+  const declaration = (
+    kind: "const" | "let",
+    name: string,
+    initializer: BundleExpression,
+  ): ES.VariableDeclaration => ({
+    type: "VariableDeclaration",
+    kind,
+    declarations: [
+      {
+        type: "VariableDeclarator",
+        id: binding(name),
+        init: expression(initializer),
+      },
+    ],
+  });
+
+  const block = (node: ES.Statement): ES.BlockStatement =>
+    node.type === "BlockStatement"
+      ? node
+      : { type: "BlockStatement", body: [node] };
+
+  function statement(node: BundleStatement): ES.Statement {
     if (node === null || typeof node !== "object") {
-      return ";";
+      return { type: "EmptyStatement" };
     }
     if (!Array.isArray(node)) {
-      return `${expression(node)};`;
+      return { type: "ExpressionStatement", expression: expression(node) };
     }
     switch (node[0]) {
       case "{}":
-        return `{\n${node[1].map(statement).join("\n")}\n}`;
+        return { type: "BlockStatement", body: node[1].map(statement) };
       case "const":
       case "let":
-        return `${node[0]} ${binding(node[1])} = ${expression(node[2])};`;
-      case "if": {
-        // Braced, so an `else` never attaches to an `if` nested inside.
-        const otherwise = node[3] === null ? "" : ` else ${statement(node[3])}`;
-        return `if (${expression(node[1])}) {\n${statement(node[2])}\n}${otherwise}`;
-      }
+        return declaration(node[0], node[1], node[2]);
+      // Braced, so an `else` never attaches to an `if` nested inside.
+      case "if":
+        return {
+          type: "IfStatement",
+          test: expression(node[1]),
+          consequent: block(statement(node[2])),
+          alternate: node[3] === null ? null : statement(node[3]),
+        };
       case "while":
-        return `while (${expression(node[1])}) ${statement(node[2])}`;
+        return {
+          type: "WhileStatement",
+          test: expression(node[1]),
+          body: statement(node[2]),
+        };
       case "for": {
         const [, initializer, condition, incrementor, body] = node;
-        const head =
-          initializer === null
-            ? ""
-            : Array.isArray(initializer) &&
-                (initializer[0] === "const" || initializer[0] === "let")
-              ? `${initializer[0]} ${binding(initializer[1])} = ${expression(initializer[2])}`
-              : expression(initializer as BundleExpression);
-        const test = condition === null ? "" : expression(condition);
-        const step = incrementor === null ? "" : expression(incrementor);
-        return `for (${head}; ${test}; ${step}) ${statement(body)}`;
+        return {
+          type: "ForStatement",
+          init:
+            initializer === null
+              ? null
+              : Array.isArray(initializer) &&
+                  (initializer[0] === "const" || initializer[0] === "let")
+                ? declaration(initializer[0], initializer[1], initializer[2])
+                : expression(initializer as BundleExpression),
+          test: condition === null ? null : expression(condition),
+          update: incrementor === null ? null : expression(incrementor),
+          body: statement(body),
+        };
       }
       case "break":
-        return "break;";
+        return { type: "BreakStatement", label: null };
       case "continue":
-        return "continue;";
+        return { type: "ContinueStatement", label: null };
       case "return":
-        return `return ${expression(node[1])};`;
+        return { type: "ReturnStatement", argument: expression(node[1]) };
       case "throw":
-        return `throw ${expression(node[1])};`;
+        return { type: "ThrowStatement", argument: expression(node[1]) };
       case "try": {
         const [, attempted, [, caught, handler]] = node;
-        const clause = caught === null ? "catch" : `catch (${binding(caught)})`;
-        return `try ${statement(attempted)} ${clause} ${statement(handler)}`;
+        return {
+          type: "TryStatement",
+          block: statement(attempted) as ES.BlockStatement,
+          handler: {
+            type: "CatchClause",
+            param: caught === null ? null : binding(caught),
+            body: statement(handler) as ES.BlockStatement,
+          },
+          finalizer: null,
+        };
       }
       default:
-        return `${expression(node)};`;
+        return { type: "ExpressionStatement", expression: expression(node) };
     }
   }
 
-  const functions = Object.entries(bundle.functions).map(
-    ([name, node]) => `const ${label(name)} = ${arrow(node)};`,
+  const functions: ES.Statement[] = Object.entries(bundle.functions).map(
+    ([name, node]) => ({
+      type: "VariableDeclaration",
+      kind: "const",
+      declarations: [
+        { type: "VariableDeclarator", id: label(name), init: arrow(node) },
+      ],
+    }),
   );
   const root = expression(bundle.root);
-  const carried =
+  const carried: ES.Expression =
     data.length === 0
-      ? "[]"
-      : `JSON.parse(${stringLiteral(JSON.stringify(data))})`;
-  const code = [
-    "(($d) => {",
-    ...functions,
-    `return ${root};`,
-    `})(${carried})`,
-  ].join("\n");
-  return code as Bundle<T>;
+      ? { type: "ArrayExpression", elements: [] }
+      : call(member(identifier("JSON"), "parse", false), [
+          stringLiteral(JSON.stringify(data)),
+        ]);
+  const program: ES.Expression = call(
+    {
+      type: "ArrowFunctionExpression",
+      params: [identifier("$d")],
+      body: {
+        type: "BlockStatement",
+        body: [...functions, { type: "ReturnStatement", argument: root }],
+      },
+      expression: false,
+    },
+    [carried],
+  );
+  return generate(program) as Bundle<T>;
+}
+
+function identifier(name: string): ES.Identifier {
+  return { type: "Identifier", name };
+}
+
+// A string a script wrote, as a literal: `<` escaped, so no `</script>` or
+// `<!--` appears when the bundle is inlined in a page.
+function stringLiteral(value: string): ES.Literal {
+  return {
+    type: "Literal",
+    value,
+    raw: JSON.stringify(value).replace(/</g, "\\u003c"),
+  };
+}
+
+// A negative number is the negation of one, as JavaScript writes it.
+function numberLiteral(value: number): ES.Expression {
+  if (!Number.isFinite(value)) {
+    throw new Error(`${value} has no literal`);
+  }
+  return value < 0 || Object.is(value, -0)
+    ? {
+        type: "UnaryExpression",
+        operator: "-",
+        prefix: true,
+        argument: { type: "Literal", value: -value },
+      }
+    : { type: "Literal", value };
+}
+
+function index(object: ES.Expression, key: ES.Expression): ES.MemberExpression {
+  return {
+    type: "MemberExpression",
+    object,
+    property: key,
+    computed: true,
+    optional: false,
+  };
+}
+
+function call(
+  callee: ES.Expression,
+  args: (ES.Expression | ES.SpreadElement)[],
+): ES.SimpleCallExpression {
+  return { type: "CallExpression", callee, arguments: args, optional: false };
+}
+
+function thunk(body: ES.Expression): ES.ArrowFunctionExpression {
+  return {
+    type: "ArrowFunctionExpression",
+    params: [],
+    body,
+    expression: true,
+  };
+}
+
+function property(
+  { key, computed }: { key: ES.Expression; computed: boolean },
+  value: ES.Expression,
+): ES.Property {
+  return {
+    type: "Property",
+    key,
+    value,
+    kind: "init",
+    computed,
+    method: false,
+    shorthand: false,
+  };
+}
+
+function getter(
+  { key, computed }: { key: ES.Expression; computed: boolean },
+  value: ES.Expression,
+): ES.Property {
+  return {
+    type: "Property",
+    key,
+    value: {
+      type: "FunctionExpression",
+      params: [],
+      body: {
+        type: "BlockStatement",
+        body: [{ type: "ReturnStatement", argument: value }],
+      },
+    },
+    kind: "get",
+    computed,
+    method: false,
+    shorthand: false,
+  };
 }
 
 // Whether what a position holds can change after it has first been read: the

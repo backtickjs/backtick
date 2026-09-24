@@ -11,7 +11,9 @@
           },
           children: "hi",
         }),
-        jsx("img", { src: "https://example.com/a.png" }),
+        jsx("img", {
+          src: "https://example.com/a.png",
+        }),
       ];
     },
   });

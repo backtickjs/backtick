@@ -1,10 +1,11 @@
 (($d) => {
-  const f1 = ($0, $1) => ({ taken: $0()(true), skipped: $1()(false) });
+  const f1 = ($0, $1) => ({
+    taken: $0()(true),
+    skipped: $1()(false),
+  });
   const f2 = ($0) => (flag) => {
     if (flag) {
-      {
-        return $0();
-      }
+      return $0();
     }
     return "skipped";
   };

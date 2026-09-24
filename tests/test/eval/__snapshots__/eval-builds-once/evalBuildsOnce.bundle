@@ -28,7 +28,7 @@
   return f1(
     () => state,
     () =>
-      '(($d) => {\nconst f1 = (() => jsx("em", { children: "answered" }));\nreturn jsx((() => (f1())), {  });\n})([])',
+      '($d => {\n  const f1 = () => jsx("em", {\n    children: "answered"\n  });\n  return jsx(() => f1(), {});\n})([])',
     () => ($0) =>
       f2(
         () => state,

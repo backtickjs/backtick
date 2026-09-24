@@ -1,7 +1,12 @@
 (($d) => {
   const f1 = () => {
-    const base = { a: 1, b: 2 };
-    const over = { b: 9 };
+    const base = {
+      a: 1,
+      b: 2,
+    };
+    const over = {
+      b: 9,
+    };
     return Object.fromEntries([
       ...Object.entries(base),
       ...Object.entries(over),

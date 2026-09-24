@@ -11,7 +11,11 @@
       get children() {
         return [
           jsx("span", {
-            onclick: () => add({ id: 1, label: "one" }),
+            onclick: () =>
+              add({
+                id: 1,
+                label: "one",
+              }),
             children: "add",
           }),
           jsx("div", {

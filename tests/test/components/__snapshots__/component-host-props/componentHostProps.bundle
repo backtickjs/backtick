@@ -1,7 +1,10 @@
 (($d) => {
   return jsx("div", {
     get children() {
-      return jsx("span", { class: "danger", children: "one" });
+      return jsx("span", {
+        class: "danger",
+        children: "one",
+      });
     },
   });
 })([]);

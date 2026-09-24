@@ -462,7 +462,13 @@ importers:
       '@backtickjs/ui-platform-sdk':
         specifier: workspace:*
         version: link:../ui-platform-sdk
+      astring:
+        specifier: ^1.9.0
+        version: 1.9.0
     devDependencies:
+      '@types/estree':
+        specifier: ^1.0.9
+        version: 1.0.9
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -1325,6 +1331,10 @@ packages:
   array-union@2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
+
+  astring@1.9.0:
+    resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
+    hasBin: true
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -2190,6 +2200,8 @@ snapshots:
       dequal: 2.0.3
 
   array-union@2.1.0: {}
+
+  astring@1.9.0: {}
 
   balanced-match@1.0.2: {}
 

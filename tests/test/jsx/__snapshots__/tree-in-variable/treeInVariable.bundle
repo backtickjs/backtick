@@ -13,7 +13,14 @@
     get children() {
       return [
         () => f1(() => f2(() => jsx("div", {}))),
-        () => f3(() => f4(() => jsx("span", { children: "x" }))),
+        () =>
+          f3(() =>
+            f4(() =>
+              jsx("span", {
+                children: "x",
+              }),
+            ),
+          ),
       ];
     },
   });

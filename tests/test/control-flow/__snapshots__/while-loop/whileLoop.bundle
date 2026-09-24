@@ -5,9 +5,7 @@
     while (i < 5) {
       total = total + i;
       if (i === 3) {
-        {
-          return total;
-        }
+        return total;
       }
       i = i + 1;
     }

@@ -10,7 +10,10 @@
     return jsx("div", {
       get children() {
         return [
-          () => jsx($2(), { body: () => $1(count, Badge) }),
+          () =>
+            jsx($2(), {
+              body: () => $1(count, Badge),
+            }),
           jsx("button", {
             onclick: () => count.set(count.get() + 1),
             children: "more",
@@ -41,7 +44,13 @@
       });
     return jsx("section", {
       get children() {
-        return [() => jsx(Badge, { n: 0 }), () => $0().body];
+        return [
+          () =>
+            jsx(Badge, {
+              n: 0,
+            }),
+          () => $0().body,
+        ];
       },
     });
   };

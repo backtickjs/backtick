@@ -5,9 +5,7 @@
       throw message;
     } catch (error) {
       if (error === message) {
-        {
-          return "caught boom";
-        }
+        return "caught boom";
       }
       return "caught something else";
     }

@@ -3,7 +3,14 @@
     get children() {
       return [
         "counted",
-        [jsx("em", { children: "one" }), jsx("em", { children: "two" })],
+        [
+          jsx("em", {
+            children: "one",
+          }),
+          jsx("em", {
+            children: "two",
+          }),
+        ],
       ];
     },
   });

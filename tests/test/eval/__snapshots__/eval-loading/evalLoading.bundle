@@ -4,7 +4,9 @@
     return jsx("div", {
       get children() {
         return held.get() === null
-          ? jsx("span", { children: "loading…" })
+          ? jsx("span", {
+              children: "loading…",
+            })
           : (0, eval)(held.get());
       },
     });

@@ -19,7 +19,10 @@
                 return label.get();
               },
             }),
-            jsx("span", { style: "font-size: 8px", children: "fixed" }),
+            jsx("span", {
+              style: "font-size: 8px",
+              children: "fixed",
+            }),
             jsx("span", {
               get style() {
                 return css;

@@ -4,7 +4,10 @@
     return jsx("div", {
       get children() {
         return [
-          jsx("span", { onclick: () => selected.set(1), children: "select" }),
+          jsx("span", {
+            onclick: () => selected.set(1),
+            children: "select",
+          }),
           jsx("div", {
             get children() {
               return jsx($1(), {

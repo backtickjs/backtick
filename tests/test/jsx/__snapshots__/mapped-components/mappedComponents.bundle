@@ -2,9 +2,15 @@
   return jsx("div", {
     get children() {
       return [
-        jsx("span", { children: "alpha" }),
-        jsx("span", { children: "beta" }),
-        jsx("span", { children: "gamma" }),
+        jsx("span", {
+          children: "alpha",
+        }),
+        jsx("span", {
+          children: "beta",
+        }),
+        jsx("span", {
+          children: "gamma",
+        }),
       ];
     },
   });

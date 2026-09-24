@@ -5,5 +5,8 @@
     const usd = table["usd"] ?? 0;
     return asked + usd;
   };
-  return f1(() => ({ usd: 3, eur: 4 }));
+  return f1(() => ({
+    usd: 3,
+    eur: 4,
+  }));
 })([]);

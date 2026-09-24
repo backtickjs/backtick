@@ -1,5 +1,10 @@
 (($d) => {
-  const f1 = ($0) => jsx($0(), { person: () => ({ firstName: "ada" }) });
+  const f1 = ($0) =>
+    jsx($0(), {
+      person: () => ({
+        firstName: "ada",
+      }),
+    });
   return f1(
     () => ($0) =>
       jsx("h2", {

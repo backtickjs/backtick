@@ -4,9 +4,20 @@
     return jsx("div", {
       get children() {
         return [
-          jsx("span", { onclick: () => selected.set(1), children: "select" }),
-          () => jsx($1(), { id: () => 0, selected: () => selected }),
-          () => jsx($1(), { id: () => 1, selected: () => selected }),
+          jsx("span", {
+            onclick: () => selected.set(1),
+            children: "select",
+          }),
+          () =>
+            jsx($1(), {
+              id: () => 0,
+              selected: () => selected,
+            }),
+          () =>
+            jsx($1(), {
+              id: () => 1,
+              selected: () => selected,
+            }),
         ];
       },
     });
@@ -40,7 +51,10 @@
                   f4(
                     () => $0.selected(),
                     () => $0.id(),
-                    () => jsx("span", { children: "marker" }),
+                    () =>
+                      jsx("span", {
+                        children: "marker",
+                      }),
                   ),
               ];
             },

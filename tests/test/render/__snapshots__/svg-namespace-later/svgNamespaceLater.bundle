@@ -22,13 +22,25 @@
                     },
                   }),
                 () =>
-                  shown.get() ? jsx("title", { children: "shown" }) : null,
+                  shown.get()
+                    ? jsx("title", {
+                        children: "shown",
+                      })
+                    : null,
               ];
             },
           }),
-          jsx("title", { children: "after" }),
-          jsx("button", { onclick: () => xs.set([10, 20]), children: "add" }),
-          jsx("button", { onclick: () => shown.set(true), children: "show" }),
+          jsx("title", {
+            children: "after",
+          }),
+          jsx("button", {
+            onclick: () => xs.set([10, 20]),
+            children: "add",
+          }),
+          jsx("button", {
+            onclick: () => shown.set(true),
+            children: "show",
+          }),
         ];
       },
     });

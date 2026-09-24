@@ -2,9 +2,7 @@
   const f1 = () => {
     let n = 1;
     if (n === 2) {
-      {
-        return "some";
-      }
+      return "some";
     }
   };
   return f1();

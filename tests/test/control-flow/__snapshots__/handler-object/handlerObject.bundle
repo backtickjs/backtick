@@ -1,6 +1,9 @@
 (($d) => {
   const f1 = ($0) => {
-    const handlers = { tap: $0(), hold: $0() };
+    const handlers = {
+      tap: $0(),
+      hold: $0(),
+    };
     return handlers;
   };
   const f2 = ($0) => (id) => {

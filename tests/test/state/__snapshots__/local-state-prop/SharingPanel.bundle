@@ -4,8 +4,14 @@
     return jsx("div", {
       get children() {
         return [
-          () => jsx($1(), { size: () => size }),
-          () => jsx($1(), { size: () => size }),
+          () =>
+            jsx($1(), {
+              size: () => size,
+            }),
+          () =>
+            jsx($1(), {
+              size: () => size,
+            }),
         ];
       },
     });

@@ -3,14 +3,18 @@
     jsx("div", {
       get children() {
         return [
-          jsx("span", { children: "before" }),
+          jsx("span", {
+            children: "before",
+          }),
           () => (0, eval)($0()),
-          jsx("span", { children: "after" }),
+          jsx("span", {
+            children: "after",
+          }),
         ];
       },
     });
   return f1(
     () =>
-      '(($d) => {\nconst f1 = (() => jsx("em", { children: "from another bundle" }));\nreturn jsx((() => (f1())), {  });\n})([])',
+      '($d => {\n  const f1 = () => jsx("em", {\n    children: "from another bundle"\n  });\n  return jsx(() => f1(), {});\n})([])',
   );
 })([]);

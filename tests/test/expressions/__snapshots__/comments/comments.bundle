@@ -2,9 +2,7 @@
   const f1 = () => {
     const count = 1;
     if (count === 1) {
-      {
-        return "one";
-      }
+      return "one";
     }
     return "many";
   };

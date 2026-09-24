@@ -3,7 +3,10 @@
     jsx("div", {
       get children() {
         return [
-          () => jsx($2(), { title: () => "host" }),
+          () =>
+            jsx($2(), {
+              title: () => "host",
+            }),
           () => $0(),
           () => $1(),
         ];
@@ -23,7 +26,10 @@
     });
   };
   const f3 = () => "a";
-  const f4 = ($0) => jsx($0, { n: 1 });
+  const f4 = ($0) =>
+    jsx($0, {
+      n: 1,
+    });
   const f5 = () => "b";
   return f1(
     () => f2(f3, f4),

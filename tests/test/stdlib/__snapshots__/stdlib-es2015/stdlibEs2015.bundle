@@ -12,7 +12,10 @@
       endsWith: word.endsWith("tick", 4),
       repeated: "ab".repeat(3),
       codePoint: "😀".codePointAt(0),
-      keys: Object.keys({ a: 1, b: 2 }),
+      keys: Object.keys({
+        a: 1,
+        b: 2,
+      }),
     };
   };
   return f1();

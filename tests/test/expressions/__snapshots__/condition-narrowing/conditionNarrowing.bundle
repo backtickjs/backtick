@@ -7,14 +7,10 @@
   });
   const f2 = ($0) => (text, upper) => {
     if (upper && text !== null) {
-      {
-        return text.toUpperCase();
-      }
+      return text.toUpperCase();
     }
     if ($0() && text !== null && text.charAt(0) === "!") {
-      {
-        return text.concat("?");
-      }
+      return text.concat("?");
     }
     return "none";
   };

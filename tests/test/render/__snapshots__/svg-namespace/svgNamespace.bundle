@@ -18,7 +18,10 @@
     return jsx("div", {
       get children() {
         return [
-          jsx("a", { href: "/shapes", children: "shapes" }),
+          jsx("a", {
+            href: "/shapes",
+            children: "shapes",
+          }),
           jsx("svg", {
             viewBox: "0 0 30 10",
             width: "120",
@@ -43,7 +46,9 @@
                   width: "10",
                   height: "10",
                   get children() {
-                    return jsx("p", { children: "html again" });
+                    return jsx("p", {
+                      children: "html again",
+                    });
                   },
                 }),
               ];

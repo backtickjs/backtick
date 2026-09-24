@@ -27,15 +27,17 @@
     const shown = $0()(false);
     const started = $1().setTimeout(() => {
       if ($2()()) {
-        {
-          shown.set(true);
-        }
+        shown.set(true);
       }
     }, 0);
     return () =>
       shown.get()
-        ? jsx("em", { children: "shown" })
-        : jsx("i", { children: "waiting" });
+        ? jsx("em", {
+            children: "shown",
+          })
+        : jsx("i", {
+            children: "waiting",
+          });
   };
   return f1(
     () => state,

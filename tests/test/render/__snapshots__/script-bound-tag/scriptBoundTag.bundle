@@ -22,6 +22,6 @@
   return f1(
     () => state,
     () =>
-      '(($d) => {\nconst f1 = (() => ((props) => jsx("b", { get children() { return ("count " + (props.count)); } })));\nreturn (f1());\n})([])',
+      '($d => {\n  const f1 = () => props => jsx("b", {\n    get children() {\n      return "count " + props.count;\n    }\n  });\n  return f1();\n})([])',
   );
 })([]);

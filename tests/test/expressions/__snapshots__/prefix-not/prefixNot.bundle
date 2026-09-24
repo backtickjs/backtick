@@ -1,9 +1,7 @@
 (($d) => {
   const f1 = () => (ready, count) => {
     if (!ready) {
-      {
-        return "waiting";
-      }
+      return "waiting";
     }
     return !(count > 3) ? "room left" : "full";
   };

@@ -21,9 +21,11 @@
   "dependencies": {
     "@backtickjs/client-script": "workspace:*",
     "@backtickjs/platform-sdk": "workspace:*",
-    "@backtickjs/ui-platform-sdk": "workspace:*"
+    "@backtickjs/ui-platform-sdk": "workspace:*",
+    "astring": "^1.9.0"
   },
   "devDependencies": {
+    "@types/estree": "^1.0.9",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

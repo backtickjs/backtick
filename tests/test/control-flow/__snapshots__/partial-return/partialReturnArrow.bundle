@@ -2,9 +2,7 @@
   const f1 = () => {
     const pick = (b) => {
       if (b) {
-        {
-          return "taken";
-        }
+        return "taken";
       }
     };
     return [pick(true), pick(false)];

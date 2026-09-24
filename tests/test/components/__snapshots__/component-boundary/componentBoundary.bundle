@@ -2,8 +2,12 @@
   return jsx("div", {
     get children() {
       return [
-        jsx("span", { children: "one" }),
-        jsx("span", { children: "two" }),
+        jsx("span", {
+          children: "one",
+        }),
+        jsx("span", {
+          children: "two",
+        }),
       ];
     },
   });

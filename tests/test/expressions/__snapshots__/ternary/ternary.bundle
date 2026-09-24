@@ -1,5 +1,8 @@
 (($d) => {
-  const f1 = ($0) => ({ absent: $0()(null), present: $0()(4) });
+  const f1 = ($0) => ({
+    absent: $0()(null),
+    present: $0()(4),
+  });
   const f2 = () => (n) => {
     return n === null ? 0 : n + 1;
   };

@@ -3,7 +3,10 @@
     return jsx("div", {
       get children() {
         return [
-          () => jsx($0(), { title: () => "totals" }),
+          () =>
+            jsx($0(), {
+              title: () => "totals",
+            }),
           () => jsx($1(), {}),
         ];
       },
@@ -16,6 +19,9 @@
           return $0.title();
         },
       }),
-    () => () => jsx("span", { children: "new" }),
+    () => () =>
+      jsx("span", {
+        children: "new",
+      }),
   );
 })([]);

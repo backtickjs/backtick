@@ -4,5 +4,7 @@
     const missing = $0()["nowhere"] ?? "gone";
     return names[1] + "/" + missing;
   };
-  return f1(() => ({ here: "yes" }));
+  return f1(() => ({
+    here: "yes",
+  }));
 })([]);
