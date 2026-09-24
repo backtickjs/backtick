@@ -2425,9 +2425,7 @@ export interface WebElements {
 export interface Elements extends UiPlatformElements, WebElements {}
 
 /** What this schema declares, which is what its own client answers for. */
-export interface WebBuiltins {
-  window: Window;
-}
+export interface WebBuiltins {}
 
 /** What a client must answer with, for every name in scope. */
 export interface Builtins extends UiPlatformBuiltins, WebBuiltins {}

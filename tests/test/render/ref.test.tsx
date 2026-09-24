@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs, onMount, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { type HTMLInputElement, window } from "@backtickjs/web-sdk";
+import type { HTMLInputElement } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 
 // `ref` hands a script the element it is written on.

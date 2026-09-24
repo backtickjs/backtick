@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { computed, cs, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 // Each reader logs when it runs, so a test counts the runs by counting the
 // logs, and reads what was logged.
@@ -25,7 +25,7 @@ describe("equals", () => {
         { start: { line: 27, column: 6 }, end: { line: 42, column: 8 } },
         {
           filePath: "state/equals.test.tsx",
-          fileHash: "96w30i9eqr9l",
+          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -58,7 +58,7 @@ describe("equals", () => {
                       end: { line: 28, column: 15 },
                     },
                     name: "n",
-                    key: "n$96w30i9eqr9l$0",
+                    key: "n$34j4m9r77iqx8$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -110,7 +110,7 @@ describe("equals", () => {
                       end: { line: 29, column: 18 },
                     },
                     name: "size",
-                    key: "size$96w30i9eqr9l$1",
+                    key: "size$34j4m9r77iqx8$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -181,7 +181,7 @@ describe("equals", () => {
                                         end: { line: 29, column: 48 },
                                       },
                                       name: "n",
-                                      key: "n$96w30i9eqr9l$0",
+                                      key: "n$34j4m9r77iqx8$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -244,7 +244,7 @@ describe("equals", () => {
                                       end: { line: 29, column: 64 },
                                     },
                                     name: "n",
-                                    key: "n$96w30i9eqr9l$0",
+                                    key: "n$34j4m9r77iqx8$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -304,7 +304,7 @@ describe("equals", () => {
                                     end: { line: 30, column: 27 },
                                   },
                                   name: "previous",
-                                  key: "previous$96w30i9eqr9l$3",
+                                  key: "previous$34j4m9r77iqx8$3",
                                 },
                                 {
                                   type: "Identifier",
@@ -313,7 +313,7 @@ describe("equals", () => {
                                     end: { line: 30, column: 33 },
                                   },
                                   name: "next",
-                                  key: "next$96w30i9eqr9l$4",
+                                  key: "next$34j4m9r77iqx8$4",
                                 },
                               ],
                               body: {
@@ -336,7 +336,7 @@ describe("equals", () => {
                                       end: { line: 30, column: 46 },
                                     },
                                     name: "previous",
-                                    key: "previous$96w30i9eqr9l$3",
+                                    key: "previous$34j4m9r77iqx8$3",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -362,7 +362,7 @@ describe("equals", () => {
                                       end: { line: 30, column: 61 },
                                     },
                                     name: "next",
-                                    key: "next$96w30i9eqr9l$4",
+                                    key: "next$34j4m9r77iqx8$4",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -412,7 +412,7 @@ describe("equals", () => {
                       end: { line: 32, column: 19 },
                     },
                     name: "label",
-                    key: "label$96w30i9eqr9l$2",
+                    key: "label$34j4m9r77iqx8$2",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -523,7 +523,7 @@ describe("equals", () => {
                                       end: { line: 34, column: 21 },
                                     },
                                     name: "size",
-                                    key: "size$96w30i9eqr9l$1",
+                                    key: "size$34j4m9r77iqx8$1",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -681,7 +681,7 @@ describe("equals", () => {
                                       end: { line: 38, column: 36 },
                                     },
                                     name: "n",
-                                    key: "n$96w30i9eqr9l$0",
+                                    key: "n$34j4m9r77iqx8$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -721,7 +721,7 @@ describe("equals", () => {
                                             end: { line: 38, column: 42 },
                                           },
                                           name: "n",
-                                          key: "n$96w30i9eqr9l$0",
+                                          key: "n$34j4m9r77iqx8$0",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -835,7 +835,7 @@ describe("equals", () => {
                               end: { line: 39, column: 21 },
                             },
                             name: "label",
-                            key: "label$96w30i9eqr9l$2",
+                            key: "label$34j4m9r77iqx8$2",
                           },
                           arguments: [],
                           optional: false,
@@ -903,7 +903,7 @@ describe("equals", () => {
         { start: { line: 57, column: 6 }, end: { line: 74, column: 8 } },
         {
           filePath: "state/equals.test.tsx",
-          fileHash: "96w30i9eqr9l",
+          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -935,7 +935,7 @@ describe("equals", () => {
                       end: { line: 58, column: 19 },
                     },
                     name: "point",
-                    key: "point$96w30i9eqr9l$5",
+                    key: "point$34j4m9r77iqx8$5",
                   },
                   init: {
                     type: "CallExpression",
@@ -1023,7 +1023,7 @@ describe("equals", () => {
                                     end: { line: 60, column: 29 },
                                   },
                                   name: "previous",
-                                  key: "previous$96w30i9eqr9l$7",
+                                  key: "previous$34j4m9r77iqx8$7",
                                 },
                                 {
                                   type: "Identifier",
@@ -1032,7 +1032,7 @@ describe("equals", () => {
                                     end: { line: 60, column: 35 },
                                   },
                                   name: "next",
-                                  key: "next$96w30i9eqr9l$8",
+                                  key: "next$34j4m9r77iqx8$8",
                                 },
                               ],
                               body: {
@@ -1055,7 +1055,7 @@ describe("equals", () => {
                                       end: { line: 60, column: 48 },
                                     },
                                     name: "previous",
-                                    key: "previous$96w30i9eqr9l$7",
+                                    key: "previous$34j4m9r77iqx8$7",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1081,7 +1081,7 @@ describe("equals", () => {
                                       end: { line: 60, column: 59 },
                                     },
                                     name: "next",
-                                    key: "next$96w30i9eqr9l$8",
+                                    key: "next$34j4m9r77iqx8$8",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1131,7 +1131,7 @@ describe("equals", () => {
                       end: { line: 62, column: 19 },
                     },
                     name: "label",
-                    key: "label$96w30i9eqr9l$6",
+                    key: "label$34j4m9r77iqx8$6",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -1251,7 +1251,7 @@ describe("equals", () => {
                                       end: { line: 64, column: 29 },
                                     },
                                     name: "point",
-                                    key: "point$96w30i9eqr9l$5",
+                                    key: "point$34j4m9r77iqx8$5",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1393,7 +1393,7 @@ describe("equals", () => {
                                       end: { line: 68, column: 40 },
                                     },
                                     name: "point",
-                                    key: "point$96w30i9eqr9l$5",
+                                    key: "point$34j4m9r77iqx8$5",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1456,7 +1456,7 @@ describe("equals", () => {
                                                   end: { line: 68, column: 55 },
                                                 },
                                                 name: "point",
-                                                key: "point$96w30i9eqr9l$5",
+                                                key: "point$34j4m9r77iqx8$5",
                                               },
                                               property: {
                                                 type: "Identifier",
@@ -1582,7 +1582,7 @@ describe("equals", () => {
                               end: { line: 71, column: 21 },
                             },
                             name: "label",
-                            key: "label$96w30i9eqr9l$6",
+                            key: "label$34j4m9r77iqx8$6",
                           },
                           arguments: [],
                           optional: false,
@@ -1645,7 +1645,7 @@ describe("equals", () => {
         { start: { line: 82, column: 6 }, end: { line: 90, column: 8 } },
         {
           filePath: "state/equals.test.tsx",
-          fileHash: "96w30i9eqr9l",
+          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -1677,7 +1677,7 @@ describe("equals", () => {
                       end: { line: 83, column: 15 },
                     },
                     name: "n",
-                    key: "n$96w30i9eqr9l$9",
+                    key: "n$34j4m9r77iqx8$9",
                   },
                   init: {
                     type: "CallExpression",
@@ -1737,7 +1737,7 @@ describe("equals", () => {
                                     end: { line: 84, column: 27 },
                                   },
                                   name: "previous",
-                                  key: "previous$96w30i9eqr9l$10",
+                                  key: "previous$34j4m9r77iqx8$10",
                                 },
                                 {
                                   type: "Identifier",
@@ -1746,7 +1746,7 @@ describe("equals", () => {
                                     end: { line: 84, column: 33 },
                                   },
                                   name: "next",
-                                  key: "next$96w30i9eqr9l$11",
+                                  key: "next$34j4m9r77iqx8$11",
                                 },
                               ],
                               body: {
@@ -1818,7 +1818,7 @@ describe("equals", () => {
                                             end: { line: 85, column: 40 },
                                           },
                                           name: "previous",
-                                          key: "previous$96w30i9eqr9l$10",
+                                          key: "previous$34j4m9r77iqx8$10",
                                         },
                                         {
                                           type: "Identifier",
@@ -1827,7 +1827,7 @@ describe("equals", () => {
                                             end: { line: 85, column: 46 },
                                           },
                                           name: "next",
-                                          key: "next$96w30i9eqr9l$11",
+                                          key: "next$34j4m9r77iqx8$11",
                                         },
                                       ],
                                       optional: false,
@@ -1853,7 +1853,7 @@ describe("equals", () => {
                                           end: { line: 86, column: 27 },
                                         },
                                         name: "previous",
-                                        key: "previous$96w30i9eqr9l$10",
+                                        key: "previous$34j4m9r77iqx8$10",
                                       },
                                       right: {
                                         type: "Identifier",
@@ -1862,7 +1862,7 @@ describe("equals", () => {
                                           end: { line: 86, column: 36 },
                                         },
                                         name: "next",
-                                        key: "next$96w30i9eqr9l$11",
+                                        key: "next$34j4m9r77iqx8$11",
                                       },
                                     },
                                   },
@@ -1956,7 +1956,7 @@ describe("equals", () => {
                                   end: { line: 89, column: 39 },
                                 },
                                 name: "n",
-                                key: "n$96w30i9eqr9l$9",
+                                key: "n$34j4m9r77iqx8$9",
                               },
                               property: {
                                 type: "Identifier",
@@ -2029,7 +2029,7 @@ describe("equals", () => {
                               end: { line: 89, column: 57 },
                             },
                             name: "n",
-                            key: "n$96w30i9eqr9l$9",
+                            key: "n$34j4m9r77iqx8$9",
                           },
                           property: {
                             type: "Identifier",
@@ -2079,7 +2079,7 @@ describe("equals", () => {
         { start: { line: 99, column: 6 }, end: { line: 111, column: 8 } },
         {
           filePath: "state/equals.test.tsx",
-          fileHash: "96w30i9eqr9l",
+          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -2114,7 +2114,7 @@ describe("equals", () => {
                       end: { line: 100, column: 15 },
                     },
                     name: "n",
-                    key: "n$96w30i9eqr9l$12",
+                    key: "n$34j4m9r77iqx8$12",
                   },
                   init: {
                     type: "CallExpression",
@@ -2166,7 +2166,7 @@ describe("equals", () => {
                       end: { line: 101, column: 19 },
                     },
                     name: "label",
-                    key: "label$96w30i9eqr9l$13",
+                    key: "label$34j4m9r77iqx8$13",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -2280,7 +2280,7 @@ describe("equals", () => {
                                     end: { line: 103, column: 25 },
                                   },
                                   name: "n",
-                                  key: "n$96w30i9eqr9l$12",
+                                  key: "n$34j4m9r77iqx8$12",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -2411,7 +2411,7 @@ describe("equals", () => {
                                       end: { line: 107, column: 36 },
                                     },
                                     name: "n",
-                                    key: "n$96w30i9eqr9l$12",
+                                    key: "n$34j4m9r77iqx8$12",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -2522,7 +2522,7 @@ describe("equals", () => {
                               end: { line: 108, column: 21 },
                             },
                             name: "label",
-                            key: "label$96w30i9eqr9l$13",
+                            key: "label$34j4m9r77iqx8$13",
                           },
                           arguments: [],
                           optional: false,
@@ -2585,7 +2585,7 @@ describe("equals", () => {
         { start: { line: 119, column: 6 }, end: { line: 133, column: 8 } },
         {
           filePath: "state/equals.test.tsx",
-          fileHash: "96w30i9eqr9l",
+          fileHash: "34j4m9r77iqx8",
           splices: {
             $state: { value: state, params: [] },
             $window: { value: window, params: [] },
@@ -2620,7 +2620,7 @@ describe("equals", () => {
                       end: { line: 120, column: 19 },
                     },
                     name: "point",
-                    key: "point$96w30i9eqr9l$14",
+                    key: "point$34j4m9r77iqx8$14",
                   },
                   init: {
                     type: "CallExpression",
@@ -2700,7 +2700,7 @@ describe("equals", () => {
                       end: { line: 121, column: 19 },
                     },
                     name: "label",
-                    key: "label$96w30i9eqr9l$15",
+                    key: "label$34j4m9r77iqx8$15",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -2820,7 +2820,7 @@ describe("equals", () => {
                                       end: { line: 123, column: 29 },
                                     },
                                     name: "point",
-                                    key: "point$96w30i9eqr9l$14",
+                                    key: "point$34j4m9r77iqx8$14",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -2962,7 +2962,7 @@ describe("equals", () => {
                                       end: { line: 127, column: 40 },
                                     },
                                     name: "point",
-                                    key: "point$96w30i9eqr9l$14",
+                                    key: "point$34j4m9r77iqx8$14",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -3031,7 +3031,7 @@ describe("equals", () => {
                                                   },
                                                 },
                                                 name: "point",
-                                                key: "point$96w30i9eqr9l$14",
+                                                key: "point$34j4m9r77iqx8$14",
                                               },
                                               property: {
                                                 type: "Identifier",
@@ -3160,7 +3160,7 @@ describe("equals", () => {
                               end: { line: 130, column: 21 },
                             },
                             name: "label",
-                            key: "label$96w30i9eqr9l$15",
+                            key: "label$34j4m9r77iqx8$15",
                           },
                           arguments: [],
                           optional: false,

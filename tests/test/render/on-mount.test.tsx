@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, onMount, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 
 // What the page held each time a script logged, read through the console

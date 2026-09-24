@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { computed, cs, onCleanup, onMount, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 
 // Each script logs where it runs, so a test counts the runs by counting the

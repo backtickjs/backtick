@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 // A block whose drawing is a conditional, and a write that answers it.
@@ -29,7 +29,7 @@ async function Held({ again }) {
     { start: { line: 31, column: 9 }, end: { line: 41, column: 4 } },
     {
       filePath: "render/conditional-drawing.test.tsx",
-      fileHash: "t2scjfff5u22",
+      fileHash: "zlju6cob2npz",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -62,7 +62,7 @@ async function Held({ again }) {
                   end: { line: 32, column: 15 },
                 },
                 name: "shown",
-                key: "shown$t2scjfff5u22$0",
+                key: "shown$zlju6cob2npz$0",
               },
               init: {
                 type: "CallExpression",
@@ -114,7 +114,7 @@ async function Held({ again }) {
                   end: { line: 34, column: 17 },
                 },
                 name: "started",
-                key: "started$t2scjfff5u22$1",
+                key: "started$zlju6cob2npz$1",
               },
               init: {
                 type: "CallExpression",
@@ -217,7 +217,7 @@ async function Held({ again }) {
                                         end: { line: 36, column: 13 },
                                       },
                                       name: "shown",
-                                      key: "shown$t2scjfff5u22$0",
+                                      key: "shown$zlju6cob2npz$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -316,7 +316,7 @@ async function Held({ again }) {
                           end: { line: 40, column: 19 },
                         },
                         name: "shown",
-                        key: "shown$t2scjfff5u22$0",
+                        key: "shown$zlju6cob2npz$0",
                       },
                       property: {
                         type: "Identifier",
@@ -452,7 +452,7 @@ const conditionalDrawing = cs.create(
   { start: { line: 44, column: 27 }, end: { line: 60, column: 2 } },
   {
     filePath: "render/conditional-drawing.test.tsx",
-    fileHash: "t2scjfff5u22",
+    fileHash: "zlju6cob2npz",
     splices: {
       $state: { value: state, params: [] },
       $Held: { value: Held, params: [] },
@@ -481,7 +481,7 @@ const conditionalDrawing = cs.create(
                 end: { line: 45, column: 14 },
               },
               name: "builds",
-              key: "builds$t2scjfff5u22$2",
+              key: "builds$zlju6cob2npz$2",
             },
             init: {
               type: "CallExpression",
@@ -612,7 +612,7 @@ const conditionalDrawing = cs.create(
                             end: { line: 49, column: 31 },
                           },
                           name: "builds",
-                          key: "builds$t2scjfff5u22$2",
+                          key: "builds$zlju6cob2npz$2",
                         },
                         property: {
                           type: "Identifier",
@@ -769,7 +769,7 @@ const conditionalDrawing = cs.create(
                                           end: { line: 53, column: 18 },
                                         },
                                         name: "builds",
-                                        key: "builds$t2scjfff5u22$2",
+                                        key: "builds$zlju6cob2npz$2",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -809,7 +809,7 @@ const conditionalDrawing = cs.create(
                                                 end: { line: 53, column: 29 },
                                               },
                                               name: "builds",
-                                              key: "builds$t2scjfff5u22$2",
+                                              key: "builds$zlju6cob2npz$2",
                                             },
                                             property: {
                                               type: "Identifier",
@@ -870,7 +870,7 @@ const conditionalDrawing = cs.create(
                                             end: { line: 54, column: 25 },
                                           },
                                           name: "builds",
-                                          key: "builds$t2scjfff5u22$2",
+                                          key: "builds$zlju6cob2npz$2",
                                         },
                                         property: {
                                           type: "Identifier",

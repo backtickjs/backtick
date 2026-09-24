@@ -134,9 +134,7 @@ function drawElement(
     const insert = () =>
       renderer.insert(
         node,
-        isThunk(children)
-          ? () => childrenOf(children())
-          : childrenOf(children),
+        isThunk(children) ? () => childrenOf(children()) : childrenOf(children),
       );
     if (innerNamespace === outerNamespace) {
       insert();

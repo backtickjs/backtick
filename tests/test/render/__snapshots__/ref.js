@@ -1,59 +1,59 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs, onMount, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 // `ref` hands a script the element it is written on.
 describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     await render(
       cs.create(
-        { start: { line: 12, column: 6 }, end: { line: 20, column: 8 } },
+        { start: { line: 13, column: 6 }, end: { line: 21, column: 8 } },
         {
           filePath: "render/ref.test.tsx",
-          fileHash: "1omn3ou0fqxtc",
+          fileHash: "1ig5nq86fb7c4",
           splices: { $state: { value: state, params: [] } },
           captures: [],
         },
         () => ({
           type: "BlockStatement",
-          loc: { start: { line: 12, column: 9 }, end: { line: 20, column: 7 } },
+          loc: { start: { line: 13, column: 9 }, end: { line: 21, column: 7 } },
           body: [
             {
               type: "VariableDeclaration",
               loc: {
-                start: { line: 13, column: 8 },
-                end: { line: 13, column: 60 },
+                start: { line: 14, column: 8 },
+                end: { line: 14, column: 60 },
               },
               kind: "const",
               declarations: [
                 {
                   type: "VariableDeclarator",
                   loc: {
-                    start: { line: 13, column: 14 },
-                    end: { line: 13, column: 59 },
+                    start: { line: 14, column: 14 },
+                    end: { line: 14, column: 59 },
                   },
                   id: {
                     type: "Identifier",
                     loc: {
-                      start: { line: 13, column: 14 },
-                      end: { line: 13, column: 19 },
+                      start: { line: 14, column: 14 },
+                      end: { line: 14, column: 19 },
                     },
                     name: "field",
-                    key: "field$1omn3ou0fqxtc$0",
+                    key: "field$1ig5nq86fb7c4$0",
                   },
                   init: {
                     type: "CallExpression",
                     loc: {
-                      start: { line: 13, column: 22 },
-                      end: { line: 13, column: 59 },
+                      start: { line: 14, column: 22 },
+                      end: { line: 14, column: 59 },
                     },
                     callee: {
                       type: "Splice",
                       loc: {
-                        start: { line: 13, column: 22 },
-                        end: { line: 13, column: 28 },
+                        start: { line: 14, column: 22 },
+                        end: { line: 14, column: 28 },
                       },
                       key: "$state",
                     },
@@ -61,8 +61,8 @@ describe("ref", () => {
                       {
                         type: "Literal",
                         loc: {
-                          start: { line: 13, column: 54 },
-                          end: { line: 13, column: 58 },
+                          start: { line: 14, column: 54 },
+                          end: { line: 14, column: 58 },
                         },
                         value: null,
                       },
@@ -75,26 +75,26 @@ describe("ref", () => {
             {
               type: "ReturnStatement",
               loc: {
-                start: { line: 14, column: 8 },
-                end: { line: 19, column: 10 },
+                start: { line: 15, column: 8 },
+                end: { line: 20, column: 10 },
               },
               argument: {
                 type: "JSXElement",
                 loc: {
-                  start: { line: 15, column: 10 },
-                  end: { line: 18, column: 16 },
+                  start: { line: 16, column: 10 },
+                  end: { line: 19, column: 16 },
                 },
                 openingElement: {
                   type: "JSXOpeningElement",
                   loc: {
-                    start: { line: 15, column: 10 },
-                    end: { line: 15, column: 15 },
+                    start: { line: 16, column: 10 },
+                    end: { line: 16, column: 15 },
                   },
                   name: {
                     type: "JSXIdentifier",
                     loc: {
-                      start: { line: 15, column: 11 },
-                      end: { line: 15, column: 14 },
+                      start: { line: 16, column: 11 },
+                      end: { line: 16, column: 14 },
                     },
                     name: "div",
                   },
@@ -105,8 +105,8 @@ describe("ref", () => {
                   {
                     type: "JSXText",
                     loc: {
-                      start: { line: 16, column: 12 },
-                      end: { line: 16, column: 12 },
+                      start: { line: 17, column: 12 },
+                      end: { line: 17, column: 12 },
                     },
                     value: "\n            ",
                     raw: "\n            ",
@@ -114,20 +114,20 @@ describe("ref", () => {
                   {
                     type: "JSXElement",
                     loc: {
-                      start: { line: 16, column: 12 },
-                      end: { line: 16, column: 77 },
+                      start: { line: 17, column: 12 },
+                      end: { line: 17, column: 77 },
                     },
                     openingElement: {
                       type: "JSXOpeningElement",
                       loc: {
-                        start: { line: 16, column: 12 },
-                        end: { line: 16, column: 77 },
+                        start: { line: 17, column: 12 },
+                        end: { line: 17, column: 77 },
                       },
                       name: {
                         type: "JSXIdentifier",
                         loc: {
-                          start: { line: 16, column: 13 },
-                          end: { line: 16, column: 18 },
+                          start: { line: 17, column: 13 },
+                          end: { line: 17, column: 18 },
                         },
                         name: "input",
                       },
@@ -135,22 +135,22 @@ describe("ref", () => {
                         {
                           type: "JSXAttribute",
                           loc: {
-                            start: { line: 16, column: 19 },
-                            end: { line: 16, column: 36 },
+                            start: { line: 17, column: 19 },
+                            end: { line: 17, column: 36 },
                           },
                           name: {
                             type: "JSXIdentifier",
                             loc: {
-                              start: { line: 16, column: 19 },
-                              end: { line: 16, column: 29 },
+                              start: { line: 17, column: 19 },
+                              end: { line: 17, column: 29 },
                             },
                             name: "aria-label",
                           },
                           value: {
                             type: "Literal",
                             loc: {
-                              start: { line: 16, column: 30 },
-                              end: { line: 16, column: 36 },
+                              start: { line: 17, column: 30 },
+                              end: { line: 17, column: 36 },
                             },
                             value: "name",
                           },
@@ -158,66 +158,66 @@ describe("ref", () => {
                         {
                           type: "JSXAttribute",
                           loc: {
-                            start: { line: 16, column: 37 },
-                            end: { line: 16, column: 74 },
+                            start: { line: 17, column: 37 },
+                            end: { line: 17, column: 74 },
                           },
                           name: {
                             type: "JSXIdentifier",
                             loc: {
-                              start: { line: 16, column: 37 },
-                              end: { line: 16, column: 40 },
+                              start: { line: 17, column: 37 },
+                              end: { line: 17, column: 40 },
                             },
                             name: "ref",
                           },
                           value: {
                             type: "JSXExpressionContainer",
                             loc: {
-                              start: { line: 16, column: 41 },
-                              end: { line: 16, column: 74 },
+                              start: { line: 17, column: 41 },
+                              end: { line: 17, column: 74 },
                             },
                             expression: {
                               type: "ArrowFunctionExpression",
                               loc: {
-                                start: { line: 16, column: 42 },
-                                end: { line: 16, column: 73 },
+                                start: { line: 17, column: 42 },
+                                end: { line: 17, column: 73 },
                               },
                               params: [
                                 {
                                   type: "Identifier",
                                   loc: {
-                                    start: { line: 16, column: 43 },
-                                    end: { line: 16, column: 50 },
+                                    start: { line: 17, column: 43 },
+                                    end: { line: 17, column: 50 },
                                   },
                                   name: "element",
-                                  key: "element$1omn3ou0fqxtc$1",
+                                  key: "element$1ig5nq86fb7c4$1",
                                 },
                               ],
                               body: {
                                 type: "CallExpression",
                                 loc: {
-                                  start: { line: 16, column: 55 },
-                                  end: { line: 16, column: 73 },
+                                  start: { line: 17, column: 55 },
+                                  end: { line: 17, column: 73 },
                                 },
                                 callee: {
                                   type: "MemberExpression",
                                   loc: {
-                                    start: { line: 16, column: 55 },
-                                    end: { line: 16, column: 64 },
+                                    start: { line: 17, column: 55 },
+                                    end: { line: 17, column: 64 },
                                   },
                                   object: {
                                     type: "Identifier",
                                     loc: {
-                                      start: { line: 16, column: 55 },
-                                      end: { line: 16, column: 60 },
+                                      start: { line: 17, column: 55 },
+                                      end: { line: 17, column: 60 },
                                     },
                                     name: "field",
-                                    key: "field$1omn3ou0fqxtc$0",
+                                    key: "field$1ig5nq86fb7c4$0",
                                   },
                                   property: {
                                     type: "Identifier",
                                     loc: {
-                                      start: { line: 16, column: 61 },
-                                      end: { line: 16, column: 64 },
+                                      start: { line: 17, column: 61 },
+                                      end: { line: 17, column: 64 },
                                     },
                                     name: "set",
                                   },
@@ -228,11 +228,11 @@ describe("ref", () => {
                                   {
                                     type: "Identifier",
                                     loc: {
-                                      start: { line: 16, column: 65 },
-                                      end: { line: 16, column: 72 },
+                                      start: { line: 17, column: 65 },
+                                      end: { line: 17, column: 72 },
                                     },
                                     name: "element",
-                                    key: "element$1omn3ou0fqxtc$1",
+                                    key: "element$1ig5nq86fb7c4$1",
                                   },
                                 ],
                                 optional: false,
@@ -250,8 +250,8 @@ describe("ref", () => {
                   {
                     type: "JSXText",
                     loc: {
-                      start: { line: 17, column: 12 },
-                      end: { line: 17, column: 12 },
+                      start: { line: 18, column: 12 },
+                      end: { line: 18, column: 12 },
                     },
                     value: "\n            ",
                     raw: "\n            ",
@@ -259,20 +259,20 @@ describe("ref", () => {
                   {
                     type: "JSXElement",
                     loc: {
-                      start: { line: 17, column: 12 },
-                      end: { line: 17, column: 70 },
+                      start: { line: 18, column: 12 },
+                      end: { line: 18, column: 70 },
                     },
                     openingElement: {
                       type: "JSXOpeningElement",
                       loc: {
-                        start: { line: 17, column: 12 },
-                        end: { line: 17, column: 57 },
+                        start: { line: 18, column: 12 },
+                        end: { line: 18, column: 57 },
                       },
                       name: {
                         type: "JSXIdentifier",
                         loc: {
-                          start: { line: 17, column: 13 },
-                          end: { line: 17, column: 19 },
+                          start: { line: 18, column: 13 },
+                          end: { line: 18, column: 19 },
                         },
                         name: "button",
                       },
@@ -280,74 +280,74 @@ describe("ref", () => {
                         {
                           type: "JSXAttribute",
                           loc: {
-                            start: { line: 17, column: 20 },
-                            end: { line: 17, column: 56 },
+                            start: { line: 18, column: 20 },
+                            end: { line: 18, column: 56 },
                           },
                           name: {
                             type: "JSXIdentifier",
                             loc: {
-                              start: { line: 17, column: 20 },
-                              end: { line: 17, column: 27 },
+                              start: { line: 18, column: 20 },
+                              end: { line: 18, column: 27 },
                             },
                             name: "onclick",
                           },
                           value: {
                             type: "JSXExpressionContainer",
                             loc: {
-                              start: { line: 17, column: 28 },
-                              end: { line: 17, column: 56 },
+                              start: { line: 18, column: 28 },
+                              end: { line: 18, column: 56 },
                             },
                             expression: {
                               type: "ArrowFunctionExpression",
                               loc: {
-                                start: { line: 17, column: 29 },
-                                end: { line: 17, column: 55 },
+                                start: { line: 18, column: 29 },
+                                end: { line: 18, column: 55 },
                               },
                               params: [],
                               body: {
                                 type: "ChainExpression",
                                 loc: {
-                                  start: { line: 17, column: 35 },
-                                  end: { line: 17, column: 55 },
+                                  start: { line: 18, column: 35 },
+                                  end: { line: 18, column: 55 },
                                 },
                                 expression: {
                                   type: "CallExpression",
                                   loc: {
-                                    start: { line: 17, column: 35 },
-                                    end: { line: 17, column: 55 },
+                                    start: { line: 18, column: 35 },
+                                    end: { line: 18, column: 55 },
                                   },
                                   callee: {
                                     type: "MemberExpression",
                                     loc: {
-                                      start: { line: 17, column: 35 },
-                                      end: { line: 17, column: 53 },
+                                      start: { line: 18, column: 35 },
+                                      end: { line: 18, column: 53 },
                                     },
                                     object: {
                                       type: "CallExpression",
                                       loc: {
-                                        start: { line: 17, column: 35 },
-                                        end: { line: 17, column: 46 },
+                                        start: { line: 18, column: 35 },
+                                        end: { line: 18, column: 46 },
                                       },
                                       callee: {
                                         type: "MemberExpression",
                                         loc: {
-                                          start: { line: 17, column: 35 },
-                                          end: { line: 17, column: 44 },
+                                          start: { line: 18, column: 35 },
+                                          end: { line: 18, column: 44 },
                                         },
                                         object: {
                                           type: "Identifier",
                                           loc: {
-                                            start: { line: 17, column: 35 },
-                                            end: { line: 17, column: 40 },
+                                            start: { line: 18, column: 35 },
+                                            end: { line: 18, column: 40 },
                                           },
                                           name: "field",
-                                          key: "field$1omn3ou0fqxtc$0",
+                                          key: "field$1ig5nq86fb7c4$0",
                                         },
                                         property: {
                                           type: "Identifier",
                                           loc: {
-                                            start: { line: 17, column: 41 },
-                                            end: { line: 17, column: 44 },
+                                            start: { line: 18, column: 41 },
+                                            end: { line: 18, column: 44 },
                                           },
                                           name: "get",
                                         },
@@ -360,8 +360,8 @@ describe("ref", () => {
                                     property: {
                                       type: "Identifier",
                                       loc: {
-                                        start: { line: 17, column: 48 },
-                                        end: { line: 17, column: 53 },
+                                        start: { line: 18, column: 48 },
+                                        end: { line: 18, column: 53 },
                                       },
                                       name: "focus",
                                     },
@@ -383,8 +383,8 @@ describe("ref", () => {
                       {
                         type: "JSXText",
                         loc: {
-                          start: { line: 17, column: 57 },
-                          end: { line: 17, column: 61 },
+                          start: { line: 18, column: 57 },
+                          end: { line: 18, column: 61 },
                         },
                         value: "edit",
                         raw: "edit",
@@ -393,14 +393,14 @@ describe("ref", () => {
                     closingElement: {
                       type: "JSXClosingElement",
                       loc: {
-                        start: { line: 17, column: 61 },
-                        end: { line: 17, column: 70 },
+                        start: { line: 18, column: 61 },
+                        end: { line: 18, column: 70 },
                       },
                       name: {
                         type: "JSXIdentifier",
                         loc: {
-                          start: { line: 17, column: 63 },
-                          end: { line: 17, column: 69 },
+                          start: { line: 18, column: 63 },
+                          end: { line: 18, column: 69 },
                         },
                         name: "button",
                       },
@@ -409,8 +409,8 @@ describe("ref", () => {
                   {
                     type: "JSXText",
                     loc: {
-                      start: { line: 18, column: 10 },
-                      end: { line: 18, column: 10 },
+                      start: { line: 19, column: 10 },
+                      end: { line: 19, column: 10 },
                     },
                     value: "\n          ",
                     raw: "\n          ",
@@ -419,14 +419,14 @@ describe("ref", () => {
                 closingElement: {
                   type: "JSXClosingElement",
                   loc: {
-                    start: { line: 18, column: 10 },
-                    end: { line: 18, column: 16 },
+                    start: { line: 19, column: 10 },
+                    end: { line: 19, column: 16 },
                   },
                   name: {
                     type: "JSXIdentifier",
                     loc: {
-                      start: { line: 18, column: 12 },
-                      end: { line: 18, column: 15 },
+                      start: { line: 19, column: 12 },
+                      end: { line: 19, column: 15 },
                     },
                     name: "div",
                   },
@@ -443,40 +443,40 @@ describe("ref", () => {
   it("focuses once in place, through onMount", async () => {
     await render(
       cs.create(
-        { start: { line: 28, column: 6 }, end: { line: 35, column: 8 } },
+        { start: { line: 29, column: 6 }, end: { line: 36, column: 8 } },
         {
           filePath: "render/ref.test.tsx",
-          fileHash: "1omn3ou0fqxtc",
+          fileHash: "1ig5nq86fb7c4",
           splices: { $onMount: { value: onMount, params: [] } },
           captures: [],
         },
         () => ({
           type: "BlockStatement",
-          loc: { start: { line: 28, column: 9 }, end: { line: 35, column: 7 } },
+          loc: { start: { line: 29, column: 9 }, end: { line: 36, column: 7 } },
           body: [
             {
               type: "ReturnStatement",
               loc: {
-                start: { line: 29, column: 8 },
-                end: { line: 34, column: 10 },
+                start: { line: 30, column: 8 },
+                end: { line: 35, column: 10 },
               },
               argument: {
                 type: "JSXElement",
                 loc: {
-                  start: { line: 30, column: 10 },
-                  end: { line: 33, column: 12 },
+                  start: { line: 31, column: 10 },
+                  end: { line: 34, column: 12 },
                 },
                 openingElement: {
                   type: "JSXOpeningElement",
                   loc: {
-                    start: { line: 30, column: 10 },
-                    end: { line: 33, column: 12 },
+                    start: { line: 31, column: 10 },
+                    end: { line: 34, column: 12 },
                   },
                   name: {
                     type: "JSXIdentifier",
                     loc: {
-                      start: { line: 30, column: 11 },
-                      end: { line: 30, column: 16 },
+                      start: { line: 31, column: 11 },
+                      end: { line: 31, column: 16 },
                     },
                     name: "input",
                   },
@@ -484,22 +484,22 @@ describe("ref", () => {
                     {
                       type: "JSXAttribute",
                       loc: {
-                        start: { line: 31, column: 12 },
-                        end: { line: 31, column: 29 },
+                        start: { line: 32, column: 12 },
+                        end: { line: 32, column: 29 },
                       },
                       name: {
                         type: "JSXIdentifier",
                         loc: {
-                          start: { line: 31, column: 12 },
-                          end: { line: 31, column: 22 },
+                          start: { line: 32, column: 12 },
+                          end: { line: 32, column: 22 },
                         },
                         name: "aria-label",
                       },
                       value: {
                         type: "Literal",
                         loc: {
-                          start: { line: 31, column: 23 },
-                          end: { line: 31, column: 29 },
+                          start: { line: 32, column: 23 },
+                          end: { line: 32, column: 29 },
                         },
                         value: "name",
                       },
@@ -507,51 +507,51 @@ describe("ref", () => {
                     {
                       type: "JSXAttribute",
                       loc: {
-                        start: { line: 32, column: 12 },
-                        end: { line: 32, column: 62 },
+                        start: { line: 33, column: 12 },
+                        end: { line: 33, column: 62 },
                       },
                       name: {
                         type: "JSXIdentifier",
                         loc: {
-                          start: { line: 32, column: 12 },
-                          end: { line: 32, column: 15 },
+                          start: { line: 33, column: 12 },
+                          end: { line: 33, column: 15 },
                         },
                         name: "ref",
                       },
                       value: {
                         type: "JSXExpressionContainer",
                         loc: {
-                          start: { line: 32, column: 16 },
-                          end: { line: 32, column: 62 },
+                          start: { line: 33, column: 16 },
+                          end: { line: 33, column: 62 },
                         },
                         expression: {
                           type: "ArrowFunctionExpression",
                           loc: {
-                            start: { line: 32, column: 17 },
-                            end: { line: 32, column: 61 },
+                            start: { line: 33, column: 17 },
+                            end: { line: 33, column: 61 },
                           },
                           params: [
                             {
                               type: "Identifier",
                               loc: {
-                                start: { line: 32, column: 18 },
-                                end: { line: 32, column: 25 },
+                                start: { line: 33, column: 18 },
+                                end: { line: 33, column: 25 },
                               },
                               name: "element",
-                              key: "element$1omn3ou0fqxtc$2",
+                              key: "element$1ig5nq86fb7c4$2",
                             },
                           ],
                           body: {
                             type: "CallExpression",
                             loc: {
-                              start: { line: 32, column: 30 },
-                              end: { line: 32, column: 61 },
+                              start: { line: 33, column: 30 },
+                              end: { line: 33, column: 61 },
                             },
                             callee: {
                               type: "Splice",
                               loc: {
-                                start: { line: 32, column: 30 },
-                                end: { line: 32, column: 38 },
+                                start: { line: 33, column: 30 },
+                                end: { line: 33, column: 38 },
                               },
                               key: "$onMount",
                             },
@@ -559,36 +559,36 @@ describe("ref", () => {
                               {
                                 type: "ArrowFunctionExpression",
                                 loc: {
-                                  start: { line: 32, column: 39 },
-                                  end: { line: 32, column: 60 },
+                                  start: { line: 33, column: 39 },
+                                  end: { line: 33, column: 60 },
                                 },
                                 params: [],
                                 body: {
                                   type: "CallExpression",
                                   loc: {
-                                    start: { line: 32, column: 45 },
-                                    end: { line: 32, column: 60 },
+                                    start: { line: 33, column: 45 },
+                                    end: { line: 33, column: 60 },
                                   },
                                   callee: {
                                     type: "MemberExpression",
                                     loc: {
-                                      start: { line: 32, column: 45 },
-                                      end: { line: 32, column: 58 },
+                                      start: { line: 33, column: 45 },
+                                      end: { line: 33, column: 58 },
                                     },
                                     object: {
                                       type: "Identifier",
                                       loc: {
-                                        start: { line: 32, column: 45 },
-                                        end: { line: 32, column: 52 },
+                                        start: { line: 33, column: 45 },
+                                        end: { line: 33, column: 52 },
                                       },
                                       name: "element",
-                                      key: "element$1omn3ou0fqxtc$2",
+                                      key: "element$1ig5nq86fb7c4$2",
                                     },
                                     property: {
                                       type: "Identifier",
                                       loc: {
-                                        start: { line: 32, column: 53 },
-                                        end: { line: 32, column: 58 },
+                                        start: { line: 33, column: 53 },
+                                        end: { line: 33, column: 58 },
                                       },
                                       name: "focus",
                                     },
@@ -623,30 +623,30 @@ describe("ref", () => {
   it("is not written as an attribute", async () => {
     await render(
       cs.create(
-        { start: { line: 41, column: 17 }, end: { line: 41, column: 63 } },
+        { start: { line: 42, column: 17 }, end: { line: 42, column: 63 } },
         {
           filePath: "render/ref.test.tsx",
-          fileHash: "1omn3ou0fqxtc",
+          fileHash: "1ig5nq86fb7c4",
           splices: {},
           captures: [],
         },
         () => ({
           type: "JSXElement",
           loc: {
-            start: { line: 41, column: 20 },
-            end: { line: 41, column: 62 },
+            start: { line: 42, column: 20 },
+            end: { line: 42, column: 62 },
           },
           openingElement: {
             type: "JSXOpeningElement",
             loc: {
-              start: { line: 41, column: 20 },
-              end: { line: 41, column: 62 },
+              start: { line: 42, column: 20 },
+              end: { line: 42, column: 62 },
             },
             name: {
               type: "JSXIdentifier",
               loc: {
-                start: { line: 41, column: 21 },
-                end: { line: 41, column: 26 },
+                start: { line: 42, column: 21 },
+                end: { line: 42, column: 26 },
               },
               name: "input",
             },
@@ -654,22 +654,22 @@ describe("ref", () => {
               {
                 type: "JSXAttribute",
                 loc: {
-                  start: { line: 41, column: 27 },
-                  end: { line: 41, column: 44 },
+                  start: { line: 42, column: 27 },
+                  end: { line: 42, column: 44 },
                 },
                 name: {
                   type: "JSXIdentifier",
                   loc: {
-                    start: { line: 41, column: 27 },
-                    end: { line: 41, column: 37 },
+                    start: { line: 42, column: 27 },
+                    end: { line: 42, column: 37 },
                   },
                   name: "aria-label",
                 },
                 value: {
                   type: "Literal",
                   loc: {
-                    start: { line: 41, column: 38 },
-                    end: { line: 41, column: 44 },
+                    start: { line: 42, column: 38 },
+                    end: { line: 42, column: 44 },
                   },
                   value: "name",
                 },
@@ -677,35 +677,35 @@ describe("ref", () => {
               {
                 type: "JSXAttribute",
                 loc: {
-                  start: { line: 41, column: 45 },
-                  end: { line: 41, column: 59 },
+                  start: { line: 42, column: 45 },
+                  end: { line: 42, column: 59 },
                 },
                 name: {
                   type: "JSXIdentifier",
                   loc: {
-                    start: { line: 41, column: 45 },
-                    end: { line: 41, column: 48 },
+                    start: { line: 42, column: 45 },
+                    end: { line: 42, column: 48 },
                   },
                   name: "ref",
                 },
                 value: {
                   type: "JSXExpressionContainer",
                   loc: {
-                    start: { line: 41, column: 49 },
-                    end: { line: 41, column: 59 },
+                    start: { line: 42, column: 49 },
+                    end: { line: 42, column: 59 },
                   },
                   expression: {
                     type: "ArrowFunctionExpression",
                     loc: {
-                      start: { line: 41, column: 50 },
-                      end: { line: 41, column: 58 },
+                      start: { line: 42, column: 50 },
+                      end: { line: 42, column: 58 },
                     },
                     params: [],
                     body: {
                       type: "BlockStatement",
                       loc: {
-                        start: { line: 41, column: 56 },
-                        end: { line: 41, column: 58 },
+                        start: { line: 42, column: 56 },
+                        end: { line: 42, column: 58 },
                       },
                       body: [],
                     },
@@ -741,10 +741,10 @@ describe("ref", () => {
     it("even when a signal it read changes", async () => {
       await render(
         cs.create(
-          { start: { line: 63, column: 8 }, end: { line: 76, column: 10 } },
+          { start: { line: 64, column: 8 }, end: { line: 77, column: 10 } },
           {
             filePath: "render/ref.test.tsx",
-            fileHash: "1omn3ou0fqxtc",
+            fileHash: "1ig5nq86fb7c4",
             splices: {
               $state: { value: state, params: [] },
               $window: { value: window, params: [] },
@@ -754,44 +754,44 @@ describe("ref", () => {
           () => ({
             type: "BlockStatement",
             loc: {
-              start: { line: 63, column: 11 },
-              end: { line: 76, column: 9 },
+              start: { line: 64, column: 11 },
+              end: { line: 77, column: 9 },
             },
             body: [
               {
                 type: "VariableDeclaration",
                 loc: {
-                  start: { line: 64, column: 10 },
-                  end: { line: 64, column: 37 },
+                  start: { line: 65, column: 10 },
+                  end: { line: 65, column: 37 },
                 },
                 kind: "const",
                 declarations: [
                   {
                     type: "VariableDeclarator",
                     loc: {
-                      start: { line: 64, column: 16 },
-                      end: { line: 64, column: 36 },
+                      start: { line: 65, column: 16 },
+                      end: { line: 65, column: 36 },
                     },
                     id: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 64, column: 16 },
-                        end: { line: 64, column: 21 },
+                        start: { line: 65, column: 16 },
+                        end: { line: 65, column: 21 },
                       },
                       name: "shown",
-                      key: "shown$1omn3ou0fqxtc$3",
+                      key: "shown$1ig5nq86fb7c4$3",
                     },
                     init: {
                       type: "CallExpression",
                       loc: {
-                        start: { line: 64, column: 24 },
-                        end: { line: 64, column: 36 },
+                        start: { line: 65, column: 24 },
+                        end: { line: 65, column: 36 },
                       },
                       callee: {
                         type: "Splice",
                         loc: {
-                          start: { line: 64, column: 24 },
-                          end: { line: 64, column: 30 },
+                          start: { line: 65, column: 24 },
+                          end: { line: 65, column: 30 },
                         },
                         key: "$state",
                       },
@@ -799,8 +799,8 @@ describe("ref", () => {
                         {
                           type: "Literal",
                           loc: {
-                            start: { line: 64, column: 31 },
-                            end: { line: 64, column: 35 },
+                            start: { line: 65, column: 31 },
+                            end: { line: 65, column: 35 },
                           },
                           value: true,
                         },
@@ -813,37 +813,37 @@ describe("ref", () => {
               {
                 type: "VariableDeclaration",
                 loc: {
-                  start: { line: 65, column: 10 },
-                  end: { line: 65, column: 30 },
+                  start: { line: 66, column: 10 },
+                  end: { line: 66, column: 30 },
                 },
                 kind: "const",
                 declarations: [
                   {
                     type: "VariableDeclarator",
                     loc: {
-                      start: { line: 65, column: 16 },
-                      end: { line: 65, column: 29 },
+                      start: { line: 66, column: 16 },
+                      end: { line: 66, column: 29 },
                     },
                     id: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 65, column: 16 },
-                        end: { line: 65, column: 17 },
+                        start: { line: 66, column: 16 },
+                        end: { line: 66, column: 17 },
                       },
                       name: "n",
-                      key: "n$1omn3ou0fqxtc$4",
+                      key: "n$1ig5nq86fb7c4$4",
                     },
                     init: {
                       type: "CallExpression",
                       loc: {
-                        start: { line: 65, column: 20 },
-                        end: { line: 65, column: 29 },
+                        start: { line: 66, column: 20 },
+                        end: { line: 66, column: 29 },
                       },
                       callee: {
                         type: "Splice",
                         loc: {
-                          start: { line: 65, column: 20 },
-                          end: { line: 65, column: 26 },
+                          start: { line: 66, column: 20 },
+                          end: { line: 66, column: 26 },
                         },
                         key: "$state",
                       },
@@ -851,8 +851,8 @@ describe("ref", () => {
                         {
                           type: "Literal",
                           loc: {
-                            start: { line: 65, column: 27 },
-                            end: { line: 65, column: 28 },
+                            start: { line: 66, column: 27 },
+                            end: { line: 66, column: 28 },
                           },
                           value: 0,
                         },
@@ -865,26 +865,26 @@ describe("ref", () => {
               {
                 type: "ReturnStatement",
                 loc: {
-                  start: { line: 66, column: 10 },
-                  end: { line: 75, column: 12 },
+                  start: { line: 67, column: 10 },
+                  end: { line: 76, column: 12 },
                 },
                 argument: {
                   type: "JSXElement",
                   loc: {
-                    start: { line: 67, column: 12 },
-                    end: { line: 74, column: 18 },
+                    start: { line: 68, column: 12 },
+                    end: { line: 75, column: 18 },
                   },
                   openingElement: {
                     type: "JSXOpeningElement",
                     loc: {
-                      start: { line: 67, column: 12 },
-                      end: { line: 67, column: 17 },
+                      start: { line: 68, column: 12 },
+                      end: { line: 68, column: 17 },
                     },
                     name: {
                       type: "JSXIdentifier",
                       loc: {
-                        start: { line: 67, column: 13 },
-                        end: { line: 67, column: 16 },
+                        start: { line: 68, column: 13 },
+                        end: { line: 68, column: 16 },
                       },
                       name: "div",
                     },
@@ -895,8 +895,8 @@ describe("ref", () => {
                     {
                       type: "JSXText",
                       loc: {
-                        start: { line: 68, column: 14 },
-                        end: { line: 68, column: 14 },
+                        start: { line: 69, column: 14 },
+                        end: { line: 69, column: 14 },
                       },
                       value: "\n              ",
                       raw: "\n              ",
@@ -904,20 +904,20 @@ describe("ref", () => {
                     {
                       type: "JSXElement",
                       loc: {
-                        start: { line: 68, column: 14 },
-                        end: { line: 70, column: 23 },
+                        start: { line: 69, column: 14 },
+                        end: { line: 71, column: 23 },
                       },
                       openingElement: {
                         type: "JSXOpeningElement",
                         loc: {
-                          start: { line: 68, column: 14 },
-                          end: { line: 68, column: 57 },
+                          start: { line: 69, column: 14 },
+                          end: { line: 69, column: 57 },
                         },
                         name: {
                           type: "JSXIdentifier",
                           loc: {
-                            start: { line: 68, column: 15 },
-                            end: { line: 68, column: 21 },
+                            start: { line: 69, column: 15 },
+                            end: { line: 69, column: 21 },
                           },
                           name: "button",
                         },
@@ -925,56 +925,56 @@ describe("ref", () => {
                           {
                             type: "JSXAttribute",
                             loc: {
-                              start: { line: 68, column: 22 },
-                              end: { line: 68, column: 56 },
+                              start: { line: 69, column: 22 },
+                              end: { line: 69, column: 56 },
                             },
                             name: {
                               type: "JSXIdentifier",
                               loc: {
-                                start: { line: 68, column: 22 },
-                                end: { line: 68, column: 29 },
+                                start: { line: 69, column: 22 },
+                                end: { line: 69, column: 29 },
                               },
                               name: "onclick",
                             },
                             value: {
                               type: "JSXExpressionContainer",
                               loc: {
-                                start: { line: 68, column: 30 },
-                                end: { line: 68, column: 56 },
+                                start: { line: 69, column: 30 },
+                                end: { line: 69, column: 56 },
                               },
                               expression: {
                                 type: "ArrowFunctionExpression",
                                 loc: {
-                                  start: { line: 68, column: 31 },
-                                  end: { line: 68, column: 55 },
+                                  start: { line: 69, column: 31 },
+                                  end: { line: 69, column: 55 },
                                 },
                                 params: [],
                                 body: {
                                   type: "CallExpression",
                                   loc: {
-                                    start: { line: 68, column: 37 },
-                                    end: { line: 68, column: 55 },
+                                    start: { line: 69, column: 37 },
+                                    end: { line: 69, column: 55 },
                                   },
                                   callee: {
                                     type: "MemberExpression",
                                     loc: {
-                                      start: { line: 68, column: 37 },
-                                      end: { line: 68, column: 42 },
+                                      start: { line: 69, column: 37 },
+                                      end: { line: 69, column: 42 },
                                     },
                                     object: {
                                       type: "Identifier",
                                       loc: {
-                                        start: { line: 68, column: 37 },
-                                        end: { line: 68, column: 38 },
+                                        start: { line: 69, column: 37 },
+                                        end: { line: 69, column: 38 },
                                       },
                                       name: "n",
-                                      key: "n$1omn3ou0fqxtc$4",
+                                      key: "n$1ig5nq86fb7c4$4",
                                     },
                                     property: {
                                       type: "Identifier",
                                       loc: {
-                                        start: { line: 68, column: 39 },
-                                        end: { line: 68, column: 42 },
+                                        start: { line: 69, column: 39 },
+                                        end: { line: 69, column: 42 },
                                       },
                                       name: "set",
                                     },
@@ -985,36 +985,36 @@ describe("ref", () => {
                                     {
                                       type: "BinaryExpression",
                                       loc: {
-                                        start: { line: 68, column: 43 },
-                                        end: { line: 68, column: 54 },
+                                        start: { line: 69, column: 43 },
+                                        end: { line: 69, column: 54 },
                                       },
                                       operator: "+",
                                       left: {
                                         type: "CallExpression",
                                         loc: {
-                                          start: { line: 68, column: 43 },
-                                          end: { line: 68, column: 50 },
+                                          start: { line: 69, column: 43 },
+                                          end: { line: 69, column: 50 },
                                         },
                                         callee: {
                                           type: "MemberExpression",
                                           loc: {
-                                            start: { line: 68, column: 43 },
-                                            end: { line: 68, column: 48 },
+                                            start: { line: 69, column: 43 },
+                                            end: { line: 69, column: 48 },
                                           },
                                           object: {
                                             type: "Identifier",
                                             loc: {
-                                              start: { line: 68, column: 43 },
-                                              end: { line: 68, column: 44 },
+                                              start: { line: 69, column: 43 },
+                                              end: { line: 69, column: 44 },
                                             },
                                             name: "n",
-                                            key: "n$1omn3ou0fqxtc$4",
+                                            key: "n$1ig5nq86fb7c4$4",
                                           },
                                           property: {
                                             type: "Identifier",
                                             loc: {
-                                              start: { line: 68, column: 45 },
-                                              end: { line: 68, column: 48 },
+                                              start: { line: 69, column: 45 },
+                                              end: { line: 69, column: 48 },
                                             },
                                             name: "get",
                                           },
@@ -1027,8 +1027,8 @@ describe("ref", () => {
                                       right: {
                                         type: "Literal",
                                         loc: {
-                                          start: { line: 68, column: 53 },
-                                          end: { line: 68, column: 54 },
+                                          start: { line: 69, column: 53 },
+                                          end: { line: 69, column: 54 },
                                         },
                                         value: 1,
                                       },
@@ -1047,8 +1047,8 @@ describe("ref", () => {
                         {
                           type: "JSXText",
                           loc: {
-                            start: { line: 69, column: 16 },
-                            end: { line: 69, column: 16 },
+                            start: { line: 70, column: 16 },
+                            end: { line: 70, column: 16 },
                           },
                           value: "\n                ",
                           raw: "\n                ",
@@ -1056,50 +1056,50 @@ describe("ref", () => {
                         {
                           type: "JSXExpressionContainer",
                           loc: {
-                            start: { line: 69, column: 16 },
-                            end: { line: 69, column: 32 },
+                            start: { line: 70, column: 16 },
+                            end: { line: 70, column: 32 },
                           },
                           expression: {
                             type: "BinaryExpression",
                             loc: {
-                              start: { line: 69, column: 17 },
-                              end: { line: 69, column: 31 },
+                              start: { line: 70, column: 17 },
+                              end: { line: 70, column: 31 },
                             },
                             operator: "+",
                             left: {
                               type: "Literal",
                               loc: {
-                                start: { line: 69, column: 17 },
-                                end: { line: 69, column: 21 },
+                                start: { line: 70, column: 17 },
+                                end: { line: 70, column: 21 },
                               },
                               value: "n ",
                             },
                             right: {
                               type: "CallExpression",
                               loc: {
-                                start: { line: 69, column: 24 },
-                                end: { line: 69, column: 31 },
+                                start: { line: 70, column: 24 },
+                                end: { line: 70, column: 31 },
                               },
                               callee: {
                                 type: "MemberExpression",
                                 loc: {
-                                  start: { line: 69, column: 24 },
-                                  end: { line: 69, column: 29 },
+                                  start: { line: 70, column: 24 },
+                                  end: { line: 70, column: 29 },
                                 },
                                 object: {
                                   type: "Identifier",
                                   loc: {
-                                    start: { line: 69, column: 24 },
-                                    end: { line: 69, column: 25 },
+                                    start: { line: 70, column: 24 },
+                                    end: { line: 70, column: 25 },
                                   },
                                   name: "n",
-                                  key: "n$1omn3ou0fqxtc$4",
+                                  key: "n$1ig5nq86fb7c4$4",
                                 },
                                 property: {
                                   type: "Identifier",
                                   loc: {
-                                    start: { line: 69, column: 26 },
-                                    end: { line: 69, column: 29 },
+                                    start: { line: 70, column: 26 },
+                                    end: { line: 70, column: 29 },
                                   },
                                   name: "get",
                                 },
@@ -1114,8 +1114,8 @@ describe("ref", () => {
                         {
                           type: "JSXText",
                           loc: {
-                            start: { line: 70, column: 14 },
-                            end: { line: 70, column: 14 },
+                            start: { line: 71, column: 14 },
+                            end: { line: 71, column: 14 },
                           },
                           value: "\n              ",
                           raw: "\n              ",
@@ -1124,14 +1124,14 @@ describe("ref", () => {
                       closingElement: {
                         type: "JSXClosingElement",
                         loc: {
-                          start: { line: 70, column: 14 },
-                          end: { line: 70, column: 23 },
+                          start: { line: 71, column: 14 },
+                          end: { line: 71, column: 23 },
                         },
                         name: {
                           type: "JSXIdentifier",
                           loc: {
-                            start: { line: 70, column: 16 },
-                            end: { line: 70, column: 22 },
+                            start: { line: 71, column: 16 },
+                            end: { line: 71, column: 22 },
                           },
                           name: "button",
                         },
@@ -1140,8 +1140,8 @@ describe("ref", () => {
                     {
                       type: "JSXText",
                       loc: {
-                        start: { line: 71, column: 14 },
-                        end: { line: 71, column: 14 },
+                        start: { line: 72, column: 14 },
+                        end: { line: 72, column: 14 },
                       },
                       value: "\n              ",
                       raw: "\n              ",
@@ -1149,41 +1149,41 @@ describe("ref", () => {
                     {
                       type: "JSXExpressionContainer",
                       loc: {
-                        start: { line: 71, column: 14 },
-                        end: { line: 73, column: 23 },
+                        start: { line: 72, column: 14 },
+                        end: { line: 74, column: 23 },
                       },
                       expression: {
                         type: "ConditionalExpression",
                         loc: {
-                          start: { line: 71, column: 15 },
-                          end: { line: 73, column: 22 },
+                          start: { line: 72, column: 15 },
+                          end: { line: 74, column: 22 },
                         },
                         test: {
                           type: "CallExpression",
                           loc: {
-                            start: { line: 71, column: 15 },
-                            end: { line: 71, column: 26 },
+                            start: { line: 72, column: 15 },
+                            end: { line: 72, column: 26 },
                           },
                           callee: {
                             type: "MemberExpression",
                             loc: {
-                              start: { line: 71, column: 15 },
-                              end: { line: 71, column: 24 },
+                              start: { line: 72, column: 15 },
+                              end: { line: 72, column: 24 },
                             },
                             object: {
                               type: "Identifier",
                               loc: {
-                                start: { line: 71, column: 15 },
-                                end: { line: 71, column: 20 },
+                                start: { line: 72, column: 15 },
+                                end: { line: 72, column: 20 },
                               },
                               name: "shown",
-                              key: "shown$1omn3ou0fqxtc$3",
+                              key: "shown$1ig5nq86fb7c4$3",
                             },
                             property: {
                               type: "Identifier",
                               loc: {
-                                start: { line: 71, column: 21 },
-                                end: { line: 71, column: 24 },
+                                start: { line: 72, column: 21 },
+                                end: { line: 72, column: 24 },
                               },
                               name: "get",
                             },
@@ -1196,20 +1196,20 @@ describe("ref", () => {
                         consequent: {
                           type: "JSXElement",
                           loc: {
-                            start: { line: 72, column: 16 },
-                            end: { line: 72, column: 69 },
+                            start: { line: 73, column: 16 },
+                            end: { line: 73, column: 69 },
                           },
                           openingElement: {
                             type: "JSXOpeningElement",
                             loc: {
-                              start: { line: 72, column: 16 },
-                              end: { line: 72, column: 60 },
+                              start: { line: 73, column: 16 },
+                              end: { line: 73, column: 60 },
                             },
                             name: {
                               type: "JSXIdentifier",
                               loc: {
-                                start: { line: 72, column: 17 },
-                                end: { line: 72, column: 18 },
+                                start: { line: 73, column: 17 },
+                                end: { line: 73, column: 18 },
                               },
                               name: "p",
                             },
@@ -1217,61 +1217,61 @@ describe("ref", () => {
                               {
                                 type: "JSXAttribute",
                                 loc: {
-                                  start: { line: 72, column: 19 },
-                                  end: { line: 72, column: 59 },
+                                  start: { line: 73, column: 19 },
+                                  end: { line: 73, column: 59 },
                                 },
                                 name: {
                                   type: "JSXIdentifier",
                                   loc: {
-                                    start: { line: 72, column: 19 },
-                                    end: { line: 72, column: 22 },
+                                    start: { line: 73, column: 19 },
+                                    end: { line: 73, column: 22 },
                                   },
                                   name: "ref",
                                 },
                                 value: {
                                   type: "JSXExpressionContainer",
                                   loc: {
-                                    start: { line: 72, column: 23 },
-                                    end: { line: 72, column: 59 },
+                                    start: { line: 73, column: 23 },
+                                    end: { line: 73, column: 59 },
                                   },
                                   expression: {
                                     type: "ArrowFunctionExpression",
                                     loc: {
-                                      start: { line: 72, column: 24 },
-                                      end: { line: 72, column: 58 },
+                                      start: { line: 73, column: 24 },
+                                      end: { line: 73, column: 58 },
                                     },
                                     params: [],
                                     body: {
                                       type: "CallExpression",
                                       loc: {
-                                        start: { line: 72, column: 30 },
-                                        end: { line: 72, column: 58 },
+                                        start: { line: 73, column: 30 },
+                                        end: { line: 73, column: 58 },
                                       },
                                       callee: {
                                         type: "MemberExpression",
                                         loc: {
-                                          start: { line: 72, column: 30 },
-                                          end: { line: 72, column: 49 },
+                                          start: { line: 73, column: 30 },
+                                          end: { line: 73, column: 49 },
                                         },
                                         object: {
                                           type: "MemberExpression",
                                           loc: {
-                                            start: { line: 72, column: 30 },
-                                            end: { line: 72, column: 45 },
+                                            start: { line: 73, column: 30 },
+                                            end: { line: 73, column: 45 },
                                           },
                                           object: {
                                             type: "Splice",
                                             loc: {
-                                              start: { line: 72, column: 30 },
-                                              end: { line: 72, column: 37 },
+                                              start: { line: 73, column: 30 },
+                                              end: { line: 73, column: 37 },
                                             },
                                             key: "$window",
                                           },
                                           property: {
                                             type: "Identifier",
                                             loc: {
-                                              start: { line: 72, column: 38 },
-                                              end: { line: 72, column: 45 },
+                                              start: { line: 73, column: 38 },
+                                              end: { line: 73, column: 45 },
                                             },
                                             name: "console",
                                           },
@@ -1281,8 +1281,8 @@ describe("ref", () => {
                                         property: {
                                           type: "Identifier",
                                           loc: {
-                                            start: { line: 72, column: 46 },
-                                            end: { line: 72, column: 49 },
+                                            start: { line: 73, column: 46 },
+                                            end: { line: 73, column: 49 },
                                           },
                                           name: "log",
                                         },
@@ -1293,29 +1293,29 @@ describe("ref", () => {
                                         {
                                           type: "CallExpression",
                                           loc: {
-                                            start: { line: 72, column: 50 },
-                                            end: { line: 72, column: 57 },
+                                            start: { line: 73, column: 50 },
+                                            end: { line: 73, column: 57 },
                                           },
                                           callee: {
                                             type: "MemberExpression",
                                             loc: {
-                                              start: { line: 72, column: 50 },
-                                              end: { line: 72, column: 55 },
+                                              start: { line: 73, column: 50 },
+                                              end: { line: 73, column: 55 },
                                             },
                                             object: {
                                               type: "Identifier",
                                               loc: {
-                                                start: { line: 72, column: 50 },
-                                                end: { line: 72, column: 51 },
+                                                start: { line: 73, column: 50 },
+                                                end: { line: 73, column: 51 },
                                               },
                                               name: "n",
-                                              key: "n$1omn3ou0fqxtc$4",
+                                              key: "n$1ig5nq86fb7c4$4",
                                             },
                                             property: {
                                               type: "Identifier",
                                               loc: {
-                                                start: { line: 72, column: 52 },
-                                                end: { line: 72, column: 55 },
+                                                start: { line: 73, column: 52 },
+                                                end: { line: 73, column: 55 },
                                               },
                                               name: "get",
                                             },
@@ -1339,8 +1339,8 @@ describe("ref", () => {
                             {
                               type: "JSXText",
                               loc: {
-                                start: { line: 72, column: 60 },
-                                end: { line: 72, column: 65 },
+                                start: { line: 73, column: 60 },
+                                end: { line: 73, column: 65 },
                               },
                               value: "shown",
                               raw: "shown",
@@ -1349,14 +1349,14 @@ describe("ref", () => {
                           closingElement: {
                             type: "JSXClosingElement",
                             loc: {
-                              start: { line: 72, column: 65 },
-                              end: { line: 72, column: 69 },
+                              start: { line: 73, column: 65 },
+                              end: { line: 73, column: 69 },
                             },
                             name: {
                               type: "JSXIdentifier",
                               loc: {
-                                start: { line: 72, column: 67 },
-                                end: { line: 72, column: 68 },
+                                start: { line: 73, column: 67 },
+                                end: { line: 73, column: 68 },
                               },
                               name: "p",
                             },
@@ -1365,8 +1365,8 @@ describe("ref", () => {
                         alternate: {
                           type: "Literal",
                           loc: {
-                            start: { line: 73, column: 18 },
-                            end: { line: 73, column: 22 },
+                            start: { line: 74, column: 18 },
+                            end: { line: 74, column: 22 },
                           },
                           value: null,
                         },
@@ -1375,8 +1375,8 @@ describe("ref", () => {
                     {
                       type: "JSXText",
                       loc: {
-                        start: { line: 74, column: 12 },
-                        end: { line: 74, column: 12 },
+                        start: { line: 75, column: 12 },
+                        end: { line: 75, column: 12 },
                       },
                       value: "\n            ",
                       raw: "\n            ",
@@ -1385,14 +1385,14 @@ describe("ref", () => {
                   closingElement: {
                     type: "JSXClosingElement",
                     loc: {
-                      start: { line: 74, column: 12 },
-                      end: { line: 74, column: 18 },
+                      start: { line: 75, column: 12 },
+                      end: { line: 75, column: 18 },
                     },
                     name: {
                       type: "JSXIdentifier",
                       loc: {
-                        start: { line: 74, column: 14 },
-                        end: { line: 74, column: 17 },
+                        start: { line: 75, column: 14 },
+                        end: { line: 75, column: 17 },
                       },
                       name: "div",
                     },

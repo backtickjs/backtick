@@ -14,7 +14,7 @@ it("negation", async (t) => {
       { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
       {
         filePath: "expressions/negation.test.tsx",
-        fileHash: "31nhc0aoqh9gi",
+        fileHash: "3ucocch4sr77y",
         splices: {},
         captures: [],
       },
@@ -29,7 +29,7 @@ it("negation", async (t) => {
               end: { line: 14, column: 13 },
             },
             name: "count",
-            key: "count$31nhc0aoqh9gi$0",
+            key: "count$3ucocch4sr77y$0",
           },
         ],
         body: {
@@ -60,7 +60,7 @@ it("negation", async (t) => {
                       end: { line: 15, column: 17 },
                     },
                     name: "floor",
-                    key: "floor$31nhc0aoqh9gi$1",
+                    key: "floor$3ucocch4sr77y$1",
                   },
                   init: {
                     type: "UnaryExpression",
@@ -103,7 +103,7 @@ it("negation", async (t) => {
                       end: { line: 16, column: 16 },
                     },
                     name: "step",
-                    key: "step$31nhc0aoqh9gi$2",
+                    key: "step$3ucocch4sr77y$2",
                   },
                   init: {
                     type: "UnaryExpression",
@@ -120,7 +120,7 @@ it("negation", async (t) => {
                         end: { line: 16, column: 25 },
                       },
                       name: "count",
-                      key: "count$31nhc0aoqh9gi$0",
+                      key: "count$3ucocch4sr77y$0",
                     },
                   },
                 },
@@ -153,7 +153,7 @@ it("negation", async (t) => {
                       end: { line: 17, column: 18 },
                     },
                     name: "floor",
-                    key: "floor$31nhc0aoqh9gi$1",
+                    key: "floor$3ucocch4sr77y$1",
                   },
                   right: {
                     type: "Identifier",
@@ -162,7 +162,7 @@ it("negation", async (t) => {
                       end: { line: 17, column: 25 },
                     },
                     name: "step",
-                    key: "step$31nhc0aoqh9gi$2",
+                    key: "step$3ucocch4sr77y$2",
                   },
                 },
                 right: {
@@ -197,51 +197,51 @@ it("negativeZero", async (t) => {
     t,
     "negativeZero",
     cs.create(
-      { start: { line: 24, column: 40 }, end: { line: 26, column: 4 } },
+      { start: { line: 27, column: 4 }, end: { line: 29, column: 6 } },
       {
         filePath: "expressions/negation.test.tsx",
-        fileHash: "31nhc0aoqh9gi",
+        fileHash: "3ucocch4sr77y",
         splices: {},
         captures: [],
       },
       () => ({
         type: "BlockStatement",
-        loc: { start: { line: 24, column: 43 }, end: { line: 26, column: 3 } },
+        loc: { start: { line: 27, column: 7 }, end: { line: 29, column: 5 } },
         body: [
           {
             type: "ReturnStatement",
             loc: {
-              start: { line: 25, column: 4 },
-              end: { line: 25, column: 18 },
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 20 },
             },
             argument: {
               type: "BinaryExpression",
               loc: {
-                start: { line: 25, column: 11 },
-                end: { line: 25, column: 17 },
+                start: { line: 28, column: 13 },
+                end: { line: 28, column: 19 },
               },
               operator: "/",
               left: {
                 type: "Literal",
                 loc: {
-                  start: { line: 25, column: 11 },
-                  end: { line: 25, column: 12 },
+                  start: { line: 28, column: 13 },
+                  end: { line: 28, column: 14 },
                 },
                 value: 1,
               },
               right: {
                 type: "UnaryExpression",
                 loc: {
-                  start: { line: 25, column: 15 },
-                  end: { line: 25, column: 17 },
+                  start: { line: 28, column: 17 },
+                  end: { line: 28, column: 19 },
                 },
                 operator: "-",
                 prefix: true,
                 argument: {
                   type: "Literal",
                   loc: {
-                    start: { line: 25, column: 16 },
-                    end: { line: 25, column: 17 },
+                    start: { line: 28, column: 18 },
+                    end: { line: 28, column: 19 },
                   },
                   value: 0,
                 },

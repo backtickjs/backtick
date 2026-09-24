@@ -1,10 +1,11 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
+import { window } from "@backtickjs/browser";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A clock, which is the target's rather than the language's: a script reaches
-// one by splicing the window, the same as anything else a target hands over.
+// A clock, which is the platform's rather than the language's: a script reaches
+// one by splicing the browser's `window`, the same as anything else a platform
+// hands over.
 //
 // And the shape of a member read off a handle. `$window.clearInterval` is
 // read as a value and handed on, which is what a name has to survive being —

@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { computed, cs, onCleanup, onMount, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
@@ -25,7 +25,7 @@ describe("onCleanup", () => {
         { start: { line: 27, column: 6 }, end: { line: 30, column: 8 } },
         {
           filePath: "render/on-cleanup.test.tsx",
-          fileHash: "29e3pjiy23pgm",
+          fileHash: "24mnkvlbr5ln5",
           splices: {
             $onCleanup: { value: onCleanup, params: [] },
             $window: { value: window, params: [] },
@@ -192,7 +192,7 @@ describe("onCleanup", () => {
         { start: { line: 39, column: 6 }, end: { line: 48, column: 8 } },
         {
           filePath: "render/on-cleanup.test.tsx",
-          fileHash: "29e3pjiy23pgm",
+          fileHash: "24mnkvlbr5ln5",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -226,7 +226,7 @@ describe("onCleanup", () => {
                       end: { line: 40, column: 15 },
                     },
                     name: "n",
-                    key: "n$29e3pjiy23pgm$0",
+                    key: "n$24mnkvlbr5ln5$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -278,7 +278,7 @@ describe("onCleanup", () => {
                       end: { line: 41, column: 21 },
                     },
                     name: "doubled",
-                    key: "doubled$29e3pjiy23pgm$1",
+                    key: "doubled$24mnkvlbr5ln5$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -426,7 +426,7 @@ describe("onCleanup", () => {
                                         end: { line: 43, column: 18 },
                                       },
                                       name: "n",
-                                      key: "n$29e3pjiy23pgm$0",
+                                      key: "n$24mnkvlbr5ln5$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -535,7 +535,7 @@ describe("onCleanup", () => {
                                   end: { line: 46, column: 34 },
                                 },
                                 name: "n",
-                                key: "n$29e3pjiy23pgm$0",
+                                key: "n$24mnkvlbr5ln5$0",
                               },
                               property: {
                                 type: "Identifier",
@@ -575,7 +575,7 @@ describe("onCleanup", () => {
                                         end: { line: 46, column: 40 },
                                       },
                                       name: "n",
-                                      key: "n$29e3pjiy23pgm$0",
+                                      key: "n$24mnkvlbr5ln5$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -636,7 +636,7 @@ describe("onCleanup", () => {
                             end: { line: 46, column: 61 },
                           },
                           name: "doubled",
-                          key: "doubled$29e3pjiy23pgm$1",
+                          key: "doubled$24mnkvlbr5ln5$1",
                         },
                         property: {
                           type: "Identifier",
@@ -696,7 +696,7 @@ describe("onCleanup", () => {
         { start: { line: 73, column: 6 }, end: { line: 80, column: 8 } },
         {
           filePath: "render/on-cleanup.test.tsx",
-          fileHash: "29e3pjiy23pgm",
+          fileHash: "24mnkvlbr5ln5",
           splices: {
             $state: { value: state, params: [] },
             $onMount: { value: onMount, params: [] },
@@ -730,7 +730,7 @@ describe("onCleanup", () => {
                       end: { line: 74, column: 19 },
                     },
                     name: "timer",
-                    key: "timer$29e3pjiy23pgm$2",
+                    key: "timer$24mnkvlbr5ln5$2",
                   },
                   init: {
                     type: "CallExpression",
@@ -821,7 +821,7 @@ describe("onCleanup", () => {
                                   end: { line: 76, column: 15 },
                                 },
                                 name: "timer",
-                                key: "timer$29e3pjiy23pgm$2",
+                                key: "timer$24mnkvlbr5ln5$2",
                               },
                               property: {
                                 type: "Identifier",
@@ -1029,7 +1029,7 @@ describe("onCleanup", () => {
                                 end: { line: 78, column: 52 },
                               },
                               name: "timer",
-                              key: "timer$29e3pjiy23pgm$2",
+                              key: "timer$24mnkvlbr5ln5$2",
                             },
                             property: {
                               type: "Identifier",
@@ -1128,7 +1128,7 @@ describe("onCleanup", () => {
         { start: { line: 93, column: 6 }, end: { line: 99, column: 8 } },
         {
           filePath: "render/on-cleanup.test.tsx",
-          fileHash: "29e3pjiy23pgm",
+          fileHash: "24mnkvlbr5ln5",
           splices: {
             $onCleanup: { value: onCleanup, params: [] },
             $window: { value: window, params: [] },

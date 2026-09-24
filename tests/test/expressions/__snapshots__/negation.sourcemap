@@ -28,11 +28,11 @@ __cs_step               → step
 ;                       → ;
 \n}                     → \n    }
 )                       → `
-cs.lift((() => {\n      → cs`{\n    
+cs.lift((() => {\n      → cs`{\n      
 return                  → return 
 1                       → 1
  /                      →  / 
 -                       → -
 0                       → 0
 ;                       → ;
-\n})())                 → \n  }`
+\n})())                 → \n    }`

@@ -3642,20 +3642,9 @@ export const schema: Schema = {
   },
 
   /**
-   * What this target answers for, beside the language's own.
-   *
-   * A name here is one a script splices and a client hands over — `state` is
-   * the same arrangement one layer down. The language's names are closed and a
-   * target may lengthen the list but not edit it: `builtinsOf` throws on a
-   * collision rather than letting one client answer a bundle differently from
-   * every other.
+   * What this target answers for, beside the language's own: nothing. A
+   * script reads the platform's own globals — `window`, `fetch`, timers — as
+   * it reads ECMAScript's.
    */
-  builtins: {
-    window: Type.Ref("Window", {
-      description:
-        "The window a script is drawn in. Imported and spliced — `$window` —" +
-        " rather than written as a bare name: a target's vocabulary is a value" +
-        " it hands over, not a word the compiler knows.",
-    }),
-  },
+  builtins: {},
 };

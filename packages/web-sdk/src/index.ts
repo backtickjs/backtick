@@ -1,6 +1,3 @@
-// The values a script splices, the same way the layer below exposes its own.
-export { window } from "./builtins.generated.js";
-
 export type {
   AnchorProps,
   AnimationEvent,

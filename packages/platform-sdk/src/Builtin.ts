@@ -1,5 +1,4 @@
 import type { Client } from "./Client.js";
-import type { ClientValue } from "./declarations.generated.js";
 
 /**
  * A name the client answers for, held as a value.
@@ -16,14 +15,12 @@ import type { ClientValue } from "./declarations.generated.js";
  * grouping what it offers does it by handing over one name holding several
  * members rather than by writing a name with a dot in it.
  */
-export interface Builtin<
-  T extends ClientValue = ClientValue,
-> extends Client<T> {
+export interface Builtin<T> extends Client<T> {
   readonly "@backtickjs": "Builtin";
   readonly name: string;
 }
 
-export function isBuiltin(value: unknown): value is Builtin {
+export function isBuiltin(value: unknown): value is Builtin<unknown> {
   return (
     typeof value === "object" &&
     value !== null &&
@@ -36,7 +33,7 @@ export function isBuiltin(value: unknown): value is Builtin {
 // what makes one says so here rather than every holder being asked to prove it.
 // `T` is what the schema declares the name holds; nothing here can check the
 // two agree, and the client answering for the name is what does.
-export function createBuiltin<T extends ClientValue>(name: string): Builtin<T> {
+export function createBuiltin<T>(name: string): Builtin<T> {
   return {
     "@backtickjs": "Builtin",
     name,

@@ -1,10 +1,13 @@
 packages:
   # What is published.
   - "packages/*"
-  # Built here and never published to npm: a website, an editor extension and
-  # the conformance and benchmark apps.
+  # Built here and never published to npm: an editor extension and the
+  # benchmark app.
   - "apps/*"
-  - "apps/backtickjs.com/*"
+  # Parked while the two-compiler architecture settles (docs/dual-compiler.md):
+  # the website (apps/backtickjs.com/*) and conformance stay in the repo,
+  # untouched, outside the workspace.
+  - "!apps/conformance"
   - "tests"
   - "examples/*"
 

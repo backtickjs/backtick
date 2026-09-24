@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import type { Prop } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
 import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 

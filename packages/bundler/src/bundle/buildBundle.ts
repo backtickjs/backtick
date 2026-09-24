@@ -106,9 +106,10 @@ export async function buildBundle<T extends ClientUnknown>(
     const entry: ScriptEntry = {
       loc: script.loc,
       fileHash: script.metadata.fileHash,
-      splices: Object.entries(script.metadata.splices).map(
-        ([key, splice]) => ({ key, params: splice.params }),
-      ),
+      splices: Object.entries(script.metadata.splices).map(([key, splice]) => ({
+        key,
+        params: splice.params,
+      })),
       captures: script.metadata.captures,
       body,
     };

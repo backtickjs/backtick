@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, For, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
@@ -19,7 +19,7 @@ async function WaitingList({ more }) {
     { start: { line: 21, column: 9 }, end: { line: 31, column: 4 } },
     {
       filePath: "render/for-builds-once.test.tsx",
-      fileHash: "2rcdi8lc8fedv",
+      fileHash: "3l16jad540350",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -54,7 +54,7 @@ async function WaitingList({ more }) {
                   end: { line: 22, column: 15 },
                 },
                 name: "items",
-                key: "items$2rcdi8lc8fedv$0",
+                key: "items$3l16jad540350$0",
               },
               init: {
                 type: "CallExpression",
@@ -106,7 +106,7 @@ async function WaitingList({ more }) {
                   end: { line: 24, column: 17 },
                 },
                 name: "started",
-                key: "started$2rcdi8lc8fedv$1",
+                key: "started$3l16jad540350$1",
               },
               init: {
                 type: "CallExpression",
@@ -209,7 +209,7 @@ async function WaitingList({ more }) {
                                         end: { line: 26, column: 13 },
                                       },
                                       name: "items",
-                                      key: "items$2rcdi8lc8fedv$0",
+                                      key: "items$3l16jad540350$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -323,7 +323,7 @@ async function WaitingList({ more }) {
                             end: { line: 30, column: 27 },
                           },
                           name: "items",
-                          key: "items$2rcdi8lc8fedv$0",
+                          key: "items$3l16jad540350$0",
                         },
                         property: {
                           type: "Identifier",
@@ -365,7 +365,7 @@ async function WaitingList({ more }) {
                         end: { line: 30, column: 41 },
                       },
                       name: "item",
-                      key: "item$2rcdi8lc8fedv$2",
+                      key: "item$3l16jad540350$2",
                     },
                   ],
                   body: {
@@ -405,7 +405,7 @@ async function WaitingList({ more }) {
                             end: { line: 30, column: 63 },
                           },
                           name: "item",
-                          key: "item$2rcdi8lc8fedv$2",
+                          key: "item$3l16jad540350$2",
                         },
                       },
                     ],
@@ -454,7 +454,7 @@ const forBuildsOnce = cs.create(
   { start: { line: 34, column: 22 }, end: { line: 48, column: 2 } },
   {
     filePath: "render/for-builds-once.test.tsx",
-    fileHash: "2rcdi8lc8fedv",
+    fileHash: "3l16jad540350",
     splices: {
       $state: { value: state, params: [] },
       $WaitingList: { value: WaitingList, params: [] },
@@ -483,7 +483,7 @@ const forBuildsOnce = cs.create(
                 end: { line: 35, column: 13 },
               },
               name: "asked",
-              key: "asked$2rcdi8lc8fedv$3",
+              key: "asked$3l16jad540350$3",
             },
             init: {
               type: "CallExpression",
@@ -614,7 +614,7 @@ const forBuildsOnce = cs.create(
                             end: { line: 39, column: 29 },
                           },
                           name: "asked",
-                          key: "asked$2rcdi8lc8fedv$3",
+                          key: "asked$3l16jad540350$3",
                         },
                         property: {
                           type: "Identifier",
@@ -738,7 +738,7 @@ const forBuildsOnce = cs.create(
                                       end: { line: 42, column: 15 },
                                     },
                                     name: "asked",
-                                    key: "asked$2rcdi8lc8fedv$3",
+                                    key: "asked$3l16jad540350$3",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -778,7 +778,7 @@ const forBuildsOnce = cs.create(
                                             end: { line: 42, column: 25 },
                                           },
                                           name: "asked",
-                                          key: "asked$2rcdi8lc8fedv$3",
+                                          key: "asked$3l16jad540350$3",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -839,7 +839,7 @@ const forBuildsOnce = cs.create(
                                         end: { line: 43, column: 22 },
                                       },
                                       name: "asked",
-                                      key: "asked$2rcdi8lc8fedv$3",
+                                      key: "asked$3l16jad540350$3",
                                     },
                                     property: {
                                       type: "Identifier",

@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, onMount, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 // What the page held each time a script logged, read through the console
 // `onMount` reaches from a script.
@@ -27,7 +27,7 @@ describe("onMount", () => {
           { start: { line: 28, column: 8 }, end: { line: 35, column: 10 } },
           {
             filePath: "render/on-mount.test.tsx",
-            fileHash: "1vhzpl5t5wcnc",
+            fileHash: "1qp1kr79c2kqf",
             splices: {
               $state: { value: state, params: [] },
               $onMount: { value: onMount, params: [] },
@@ -63,7 +63,7 @@ describe("onMount", () => {
                         end: { line: 29, column: 21 },
                       },
                       name: "count",
-                      key: "count$1vhzpl5t5wcnc$0",
+                      key: "count$1qp1kr79c2kqf$0",
                     },
                     init: {
                       type: "CallExpression",
@@ -212,7 +212,7 @@ describe("onMount", () => {
                                     end: { line: 32, column: 17 },
                                   },
                                   name: "count",
-                                  key: "count$1vhzpl5t5wcnc$0",
+                                  key: "count$1qp1kr79c2kqf$0",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -252,7 +252,7 @@ describe("onMount", () => {
                                           end: { line: 32, column: 27 },
                                         },
                                         name: "count",
-                                        key: "count$1vhzpl5t5wcnc$0",
+                                        key: "count$1qp1kr79c2kqf$0",
                                       },
                                       property: {
                                         type: "Identifier",
@@ -359,7 +359,7 @@ describe("onMount", () => {
                                 end: { line: 34, column: 39 },
                               },
                               name: "count",
-                              key: "count$1vhzpl5t5wcnc$0",
+                              key: "count$1qp1kr79c2kqf$0",
                             },
                             property: {
                               type: "Identifier",
@@ -409,7 +409,7 @@ describe("onMount", () => {
         { start: { line: 44, column: 6 }, end: { line: 51, column: 8 } },
         {
           filePath: "render/on-mount.test.tsx",
-          fileHash: "1vhzpl5t5wcnc",
+          fileHash: "1qp1kr79c2kqf",
           splices: {
             $state: { value: state, params: [] },
             $onMount: { value: onMount, params: [] },
@@ -441,7 +441,7 @@ describe("onMount", () => {
                       end: { line: 45, column: 18 },
                     },
                     name: "said",
-                    key: "said$1vhzpl5t5wcnc$1",
+                    key: "said$1qp1kr79c2kqf$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -567,7 +567,7 @@ describe("onMount", () => {
                                         end: { line: 47, column: 52 },
                                       },
                                       name: "said",
-                                      key: "said$1vhzpl5t5wcnc$1",
+                                      key: "said$1qp1kr79c2kqf$1",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -639,7 +639,7 @@ describe("onMount", () => {
                             end: { line: 48, column: 17 },
                           },
                           name: "said",
-                          key: "said$1vhzpl5t5wcnc$1",
+                          key: "said$1qp1kr79c2kqf$1",
                         },
                         property: {
                           type: "Identifier",

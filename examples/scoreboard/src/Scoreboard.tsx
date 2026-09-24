@@ -1,6 +1,5 @@
 import { cs, For, onCleanup, onMount, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
-import type { Response } from "@backtickjs/web-sdk";
+import { window } from "@backtickjs/browser";
 import { GameCard } from "./GameCard.js";
 import { load, POLL_MS, SLATE_PATH } from "./scores.js";
 import type { Game, Slate } from "./scores.js";
@@ -27,27 +26,27 @@ export async function Scoreboard() {
     // bundled above — so a score changes by replacing an array, and nothing
     // below has to know a scoreboard API exists.
     //
-    // A script has no \`await\`: an answer arrives at a handler, and a status
-    // this cannot use is failed by throwing, which reaches the other one.
+    // A status this cannot use is failed by throwing, which reaches the
+    // \`catch\`.
     const refresh = () => {
-      $window.fetch(
-        $SLATE_PATH,
-        (response: Response) => {
+      $window
+        .fetch($SLATE_PATH, { signal: $window.AbortSignal.timeout(4000) })
+        .then((response: Response) => {
           if (response.status !== 200) {
             throw "the host answered " + response.status;
           }
-          const slate = JSON.parse(response.text) as Slate;
+          return response.json();
+        })
+        .then((slate: Slate) => {
           rows.set(slate.games);
           stamp.set(slate.asOf);
           trouble.set("");
-        },
-        (message: string) => {
+        })
+        .catch((error: unknown) => {
           // The last good slate stays on screen. A board that empties itself
           // because one poll missed is worse than a board a minute behind.
-          trouble.set("not updating — " + message);
-        },
-        { timeout: 4000 },
-      );
+          trouble.set("not updating — " + String(error));
+        });
     };
 
     // A script that draws cannot have effects, so the polling starts once this

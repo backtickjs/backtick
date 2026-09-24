@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { computed, cs, state } from "@backtickjs/core";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
-import { window } from "@backtickjs/web-sdk";
 import { userEvent } from "@testing-library/user-event";
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
@@ -24,7 +24,7 @@ describe("computed", () => {
         { start: { line: 25, column: 6 }, end: { line: 39, column: 8 } },
         {
           filePath: "state/computed.test.tsx",
-          fileHash: "p5ya93p4wb8",
+          fileHash: "3vk1ks01z9ilh",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -57,7 +57,7 @@ describe("computed", () => {
                       end: { line: 26, column: 15 },
                     },
                     name: "n",
-                    key: "n$p5ya93p4wb8$0",
+                    key: "n$3vk1ks01z9ilh$0",
                   },
                   init: {
                     type: "CallExpression",
@@ -109,7 +109,7 @@ describe("computed", () => {
                       end: { line: 27, column: 21 },
                     },
                     name: "doubled",
-                    key: "doubled$p5ya93p4wb8$1",
+                    key: "doubled$3vk1ks01z9ilh$1",
                   },
                   init: {
                     type: "CallExpression",
@@ -230,7 +230,7 @@ describe("computed", () => {
                                         end: { line: 29, column: 18 },
                                       },
                                       name: "n",
-                                      key: "n$p5ya93p4wb8$0",
+                                      key: "n$3vk1ks01z9ilh$0",
                                     },
                                     property: {
                                       type: "Identifier",
@@ -372,7 +372,7 @@ describe("computed", () => {
                                       end: { line: 33, column: 36 },
                                     },
                                     name: "n",
-                                    key: "n$p5ya93p4wb8$0",
+                                    key: "n$3vk1ks01z9ilh$0",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -412,7 +412,7 @@ describe("computed", () => {
                                             end: { line: 33, column: 42 },
                                           },
                                           name: "n",
-                                          key: "n$p5ya93p4wb8$0",
+                                          key: "n$3vk1ks01z9ilh$0",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -547,7 +547,7 @@ describe("computed", () => {
                                   end: { line: 34, column: 30 },
                                 },
                                 name: "doubled",
-                                key: "doubled$p5ya93p4wb8$1",
+                                key: "doubled$3vk1ks01z9ilh$1",
                               },
                               property: {
                                 type: "Identifier",
@@ -655,7 +655,7 @@ describe("computed", () => {
                                   end: { line: 35, column: 30 },
                                 },
                                 name: "doubled",
-                                key: "doubled$p5ya93p4wb8$1",
+                                key: "doubled$3vk1ks01z9ilh$1",
                               },
                               property: {
                                 type: "Identifier",
@@ -763,7 +763,7 @@ describe("computed", () => {
                                   end: { line: 36, column: 30 },
                                 },
                                 name: "doubled",
-                                key: "doubled$p5ya93p4wb8$1",
+                                key: "doubled$3vk1ks01z9ilh$1",
                               },
                               property: {
                                 type: "Identifier",
@@ -841,7 +841,7 @@ describe("computed", () => {
         { start: { line: 51, column: 6 }, end: { line: 64, column: 8 } },
         {
           filePath: "state/computed.test.tsx",
-          fileHash: "p5ya93p4wb8",
+          fileHash: "3vk1ks01z9ilh",
           splices: {
             $state: { value: state, params: [] },
             $computed: { value: computed, params: [] },
@@ -874,7 +874,7 @@ describe("computed", () => {
                       end: { line: 52, column: 15 },
                     },
                     name: "n",
-                    key: "n$p5ya93p4wb8$2",
+                    key: "n$3vk1ks01z9ilh$2",
                   },
                   init: {
                     type: "CallExpression",
@@ -926,7 +926,7 @@ describe("computed", () => {
                       end: { line: 53, column: 19 },
                     },
                     name: "isBig",
-                    key: "isBig$p5ya93p4wb8$3",
+                    key: "isBig$3vk1ks01z9ilh$3",
                   },
                   init: {
                     type: "CallExpression",
@@ -976,7 +976,7 @@ describe("computed", () => {
                                   end: { line: 53, column: 39 },
                                 },
                                 name: "n",
-                                key: "n$p5ya93p4wb8$2",
+                                key: "n$3vk1ks01z9ilh$2",
                               },
                               property: {
                                 type: "Identifier",
@@ -1030,7 +1030,7 @@ describe("computed", () => {
                       end: { line: 54, column: 19 },
                     },
                     name: "label",
-                    key: "label$p5ya93p4wb8$4",
+                    key: "label$3vk1ks01z9ilh$4",
                   },
                   init: {
                     type: "ArrowFunctionExpression",
@@ -1135,7 +1135,7 @@ describe("computed", () => {
                                     end: { line: 56, column: 22 },
                                   },
                                   name: "isBig",
-                                  key: "isBig$p5ya93p4wb8$3",
+                                  key: "isBig$3vk1ks01z9ilh$3",
                                 },
                                 property: {
                                   type: "Identifier",
@@ -1282,7 +1282,7 @@ describe("computed", () => {
                                       end: { line: 60, column: 36 },
                                     },
                                     name: "n",
-                                    key: "n$p5ya93p4wb8$2",
+                                    key: "n$3vk1ks01z9ilh$2",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -1322,7 +1322,7 @@ describe("computed", () => {
                                             end: { line: 60, column: 42 },
                                           },
                                           name: "n",
-                                          key: "n$p5ya93p4wb8$2",
+                                          key: "n$3vk1ks01z9ilh$2",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -1436,7 +1436,7 @@ describe("computed", () => {
                               end: { line: 61, column: 21 },
                             },
                             name: "label",
-                            key: "label$p5ya93p4wb8$4",
+                            key: "label$3vk1ks01z9ilh$4",
                           },
                           arguments: [],
                           optional: false,

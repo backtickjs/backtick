@@ -1,9 +1,10 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
+import { window } from "@backtickjs/browser";
 import { snapshotCase } from "../snapshotCase.ts";
-// A clock, which is the target's rather than the language's: a script reaches
-// one by splicing the window, the same as anything else a target hands over.
+// A clock, which is the platform's rather than the language's: a script reaches
+// one by splicing the browser's `window`, the same as anything else a platform
+// hands over.
 //
 // And the shape of a member read off a handle. `$window.clearInterval` is
 // read as a value and handed on, which is what a name has to survive being —
@@ -22,59 +23,59 @@ it("timers", async (t) => {
     t,
     "timers",
     cs.create(
-      { start: { line: 25, column: 4 }, end: { line: 30, column: 6 } },
+      { start: { line: 26, column: 4 }, end: { line: 31, column: 6 } },
       {
         filePath: "stdlib/timers.test.tsx",
-        fileHash: "ujjuhj1csnkk",
+        fileHash: "18988aj10wskx",
         splices: { $window: { value: window, params: [] } },
         captures: [],
       },
       () => ({
         type: "BlockStatement",
-        loc: { start: { line: 25, column: 7 }, end: { line: 30, column: 5 } },
+        loc: { start: { line: 26, column: 7 }, end: { line: 31, column: 5 } },
         body: [
           {
             type: "VariableDeclaration",
             loc: {
-              start: { line: 26, column: 6 },
-              end: { line: 26, column: 41 },
+              start: { line: 27, column: 6 },
+              end: { line: 27, column: 41 },
             },
             kind: "const",
             declarations: [
               {
                 type: "VariableDeclarator",
                 loc: {
-                  start: { line: 26, column: 12 },
-                  end: { line: 26, column: 40 },
+                  start: { line: 27, column: 12 },
+                  end: { line: 27, column: 40 },
                 },
                 id: {
                   type: "Identifier",
                   loc: {
-                    start: { line: 26, column: 12 },
-                    end: { line: 26, column: 16 },
+                    start: { line: 27, column: 12 },
+                    end: { line: 27, column: 16 },
                   },
                   name: "stop",
-                  key: "stop$ujjuhj1csnkk$0",
+                  key: "stop$18988aj10wskx$0",
                 },
                 init: {
                   type: "MemberExpression",
                   loc: {
-                    start: { line: 26, column: 19 },
-                    end: { line: 26, column: 40 },
+                    start: { line: 27, column: 19 },
+                    end: { line: 27, column: 40 },
                   },
                   object: {
                     type: "Splice",
                     loc: {
-                      start: { line: 26, column: 19 },
-                      end: { line: 26, column: 26 },
+                      start: { line: 27, column: 19 },
+                      end: { line: 27, column: 26 },
                     },
                     key: "$window",
                   },
                   property: {
                     type: "Identifier",
                     loc: {
-                      start: { line: 26, column: 27 },
-                      end: { line: 26, column: 40 },
+                      start: { line: 27, column: 27 },
+                      end: { line: 27, column: 40 },
                     },
                     name: "clearInterval",
                   },
@@ -87,51 +88,51 @@ it("timers", async (t) => {
           {
             type: "VariableDeclaration",
             loc: {
-              start: { line: 27, column: 6 },
-              end: { line: 27, column: 59 },
+              start: { line: 28, column: 6 },
+              end: { line: 28, column: 59 },
             },
             kind: "const",
             declarations: [
               {
                 type: "VariableDeclarator",
                 loc: {
-                  start: { line: 27, column: 12 },
-                  end: { line: 27, column: 58 },
+                  start: { line: 28, column: 12 },
+                  end: { line: 28, column: 58 },
                 },
                 id: {
                   type: "Identifier",
                   loc: {
-                    start: { line: 27, column: 12 },
-                    end: { line: 27, column: 21 },
+                    start: { line: 28, column: 12 },
+                    end: { line: 28, column: 21 },
                   },
                   name: "repeating",
-                  key: "repeating$ujjuhj1csnkk$1",
+                  key: "repeating$18988aj10wskx$1",
                 },
                 init: {
                   type: "CallExpression",
                   loc: {
-                    start: { line: 27, column: 24 },
-                    end: { line: 27, column: 58 },
+                    start: { line: 28, column: 24 },
+                    end: { line: 28, column: 58 },
                   },
                   callee: {
                     type: "MemberExpression",
                     loc: {
-                      start: { line: 27, column: 24 },
-                      end: { line: 27, column: 43 },
+                      start: { line: 28, column: 24 },
+                      end: { line: 28, column: 43 },
                     },
                     object: {
                       type: "Splice",
                       loc: {
-                        start: { line: 27, column: 24 },
-                        end: { line: 27, column: 31 },
+                        start: { line: 28, column: 24 },
+                        end: { line: 28, column: 31 },
                       },
                       key: "$window",
                     },
                     property: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 27, column: 32 },
-                        end: { line: 27, column: 43 },
+                        start: { line: 28, column: 32 },
+                        end: { line: 28, column: 43 },
                       },
                       name: "setInterval",
                     },
@@ -142,15 +143,15 @@ it("timers", async (t) => {
                     {
                       type: "ArrowFunctionExpression",
                       loc: {
-                        start: { line: 27, column: 44 },
-                        end: { line: 27, column: 51 },
+                        start: { line: 28, column: 44 },
+                        end: { line: 28, column: 51 },
                       },
                       params: [],
                       body: {
                         type: "Literal",
                         loc: {
-                          start: { line: 27, column: 50 },
-                          end: { line: 27, column: 51 },
+                          start: { line: 28, column: 50 },
+                          end: { line: 28, column: 51 },
                         },
                         value: 0,
                       },
@@ -159,8 +160,8 @@ it("timers", async (t) => {
                     {
                       type: "Literal",
                       loc: {
-                        start: { line: 27, column: 53 },
-                        end: { line: 27, column: 57 },
+                        start: { line: 28, column: 53 },
+                        end: { line: 28, column: 57 },
                       },
                       value: 1000,
                     },
@@ -173,33 +174,33 @@ it("timers", async (t) => {
           {
             type: "ExpressionStatement",
             loc: {
-              start: { line: 28, column: 6 },
-              end: { line: 28, column: 22 },
+              start: { line: 29, column: 6 },
+              end: { line: 29, column: 22 },
             },
             expression: {
               type: "CallExpression",
               loc: {
-                start: { line: 28, column: 6 },
-                end: { line: 28, column: 21 },
+                start: { line: 29, column: 6 },
+                end: { line: 29, column: 21 },
               },
               callee: {
                 type: "Identifier",
                 loc: {
-                  start: { line: 28, column: 6 },
-                  end: { line: 28, column: 10 },
+                  start: { line: 29, column: 6 },
+                  end: { line: 29, column: 10 },
                 },
                 name: "stop",
-                key: "stop$ujjuhj1csnkk$0",
+                key: "stop$18988aj10wskx$0",
               },
               arguments: [
                 {
                   type: "Identifier",
                   loc: {
-                    start: { line: 28, column: 11 },
-                    end: { line: 28, column: 20 },
+                    start: { line: 29, column: 11 },
+                    end: { line: 29, column: 20 },
                   },
                   name: "repeating",
-                  key: "repeating$ujjuhj1csnkk$1",
+                  key: "repeating$18988aj10wskx$1",
                 },
               ],
               optional: false,
@@ -208,34 +209,34 @@ it("timers", async (t) => {
           {
             type: "ExpressionStatement",
             loc: {
-              start: { line: 29, column: 6 },
-              end: { line: 29, column: 62 },
+              start: { line: 30, column: 6 },
+              end: { line: 30, column: 62 },
             },
             expression: {
               type: "CallExpression",
               loc: {
-                start: { line: 29, column: 6 },
-                end: { line: 29, column: 61 },
+                start: { line: 30, column: 6 },
+                end: { line: 30, column: 61 },
               },
               callee: {
                 type: "MemberExpression",
                 loc: {
-                  start: { line: 29, column: 6 },
-                  end: { line: 29, column: 26 },
+                  start: { line: 30, column: 6 },
+                  end: { line: 30, column: 26 },
                 },
                 object: {
                   type: "Splice",
                   loc: {
-                    start: { line: 29, column: 6 },
-                    end: { line: 29, column: 13 },
+                    start: { line: 30, column: 6 },
+                    end: { line: 30, column: 13 },
                   },
                   key: "$window",
                 },
                 property: {
                   type: "Identifier",
                   loc: {
-                    start: { line: 29, column: 14 },
-                    end: { line: 29, column: 26 },
+                    start: { line: 30, column: 14 },
+                    end: { line: 30, column: 26 },
                   },
                   name: "clearTimeout",
                 },
@@ -246,28 +247,28 @@ it("timers", async (t) => {
                 {
                   type: "CallExpression",
                   loc: {
-                    start: { line: 29, column: 27 },
-                    end: { line: 29, column: 60 },
+                    start: { line: 30, column: 27 },
+                    end: { line: 30, column: 60 },
                   },
                   callee: {
                     type: "MemberExpression",
                     loc: {
-                      start: { line: 29, column: 27 },
-                      end: { line: 29, column: 45 },
+                      start: { line: 30, column: 27 },
+                      end: { line: 30, column: 45 },
                     },
                     object: {
                       type: "Splice",
                       loc: {
-                        start: { line: 29, column: 27 },
-                        end: { line: 29, column: 34 },
+                        start: { line: 30, column: 27 },
+                        end: { line: 30, column: 34 },
                       },
                       key: "$window",
                     },
                     property: {
                       type: "Identifier",
                       loc: {
-                        start: { line: 29, column: 35 },
-                        end: { line: 29, column: 45 },
+                        start: { line: 30, column: 35 },
+                        end: { line: 30, column: 45 },
                       },
                       name: "setTimeout",
                     },
@@ -278,15 +279,15 @@ it("timers", async (t) => {
                     {
                       type: "ArrowFunctionExpression",
                       loc: {
-                        start: { line: 29, column: 46 },
-                        end: { line: 29, column: 53 },
+                        start: { line: 30, column: 46 },
+                        end: { line: 30, column: 53 },
                       },
                       params: [],
                       body: {
                         type: "Literal",
                         loc: {
-                          start: { line: 29, column: 52 },
-                          end: { line: 29, column: 53 },
+                          start: { line: 30, column: 52 },
+                          end: { line: 30, column: 53 },
                         },
                         value: 0,
                       },
@@ -295,8 +296,8 @@ it("timers", async (t) => {
                     {
                       type: "Literal",
                       loc: {
-                        start: { line: 29, column: 55 },
-                        end: { line: 29, column: 59 },
+                        start: { line: 30, column: 55 },
+                        end: { line: 30, column: 59 },
                       },
                       value: 1000,
                     },

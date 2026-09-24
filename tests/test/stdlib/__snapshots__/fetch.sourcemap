@@ -14,11 +14,29 @@ __cs_held                                 → held
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-.                                         → .
+.                                         → \n        .
 fetch                                     → fetch
-(                                         → (\n        
+(                                         → (
 "/cases/built-ins/Math/trunc/Math.trunc_Success"→ "/cases/built-ins/Math/trunc/Math.trunc_Success"
-,                                         → ,\n        
+,                                         → , 
+{                                         → {\n          
+signal                                    → signal
+:                                         → : 
+(cs.splice(                               →  [-semantic]
+(window)                                  → $window
+) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+.                                         → .
+AbortSignal                               → AbortSignal
+.                                         → .
+timeout                                   → timeout
+(                                         → (
+3000                                      → 3000
+)                                         → )
+ }                                        → ,\n        }
+)                                         → )
+.                                         → \n        .
+then                                      → then
+(                                         → (
 (                                         → (
 __cs_response                             → response
 :                                         → : 
@@ -41,18 +59,27 @@ status                                    → status
 ;                                         → ;
 \n        }                               → \n          }
 \n                                        → \n          
+return                                    → return 
+__cs_response                             → response
+.                                         → .
+json                                      → json
+()                                        → ()
+;                                         → ;
+\n    }                                   → \n        }
+)                                         → )
+.                                         → \n        .
+then                                      → then
+(                                         → (
+(                                         → (
+__cs_value                                → value
+:                                         → : 
+unknown                                   → unknown
+) => {\n                                  → ) => {\n          
 __cs_held                                 → held
 .                                         → .
 set                                       → set
 (                                         → (
-JSON                                      → JSON
-.                                         → .
-parse                                     → parse
-(                                         → (
-__cs_response                             → response
-.                                         → .
-text                                      → text
-)                                         → )
+__cs_value                                → value
  ===                                      →  === 
 null                                      → null
  ?                                        →  ? 
@@ -62,11 +89,14 @@ null                                      → null
 )                                         → )
 ;                                         → ;
 \n    }                                   → \n        }
-,                                         → ,\n        
+)                                         → )
+.                                         → \n        .
+catch                                     → catch
 (                                         → (
-__cs_message                              → message
+(                                         → (
+__cs_error                                → error
 :                                         → : 
-string                                    → string
+unknown                                   → unknown
 ) => {\n                                  → ) => {\n          
 __cs_held                                 → held
 .                                         → .
@@ -74,57 +104,24 @@ set                                       → set
 (                                         → (
 "failed \\u2014 "                         → "failed — "
  +                                        →  + 
-__cs_message                              → message
+String                                    → String
+(                                         → (
+__cs_error                                → error
+)                                         → )
 )                                         → )
 ;                                         → ;
 \n    }                                   → \n        }
-,                                         → ,\n        
-{                                         → { 
-timeout                                   → timeout
-:                                         → : 
-3000                                      → 3000
- }                                        →  }
-)                                         → ,\n      )
+)                                         → )
 ;                                         → ;
 \n                                        → \n\n      
 (cs.splice(                               →  [-semantic]
 (window)                                  → $window
 ) satisfies typeof cs.ClientUnknown)      →  [-semantic]
-.                                         → .
+.                                         → \n        .
 fetch                                     → fetch
-(                                         → (\n        
+(                                         → (
 "/cases"                                  → "/cases"
-,                                         → ,\n        
-(                                         → (
-__cs_response                             → response
-:                                         → : 
-Response                                  → Response
-) => {\n                                  → ) => {\n          
-__cs_held                                 → held
-.                                         → .
-set                                       → set
-(                                         → (
-__cs_response                             → response
-.                                         → .
-text                                      → text
-)                                         → )
-;                                         → ;
-\n    }                                   → \n        }
-,                                         → ,\n        
-(                                         → (
-__cs_message                              → message
-:                                         → : 
-string                                    → string
-) => {\n                                  → ) => {\n          
-__cs_held                                 → held
-.                                         → .
-set                                       → set
-(                                         → (
-__cs_message                              → message
-)                                         → )
-;                                         → ;
-\n    }                                   → \n        }
-,                                         → ,\n        
+,                                         → , 
 {                                         → {\n          
 method                                    → method
 :                                         → : 
@@ -155,7 +152,54 @@ true                                      → true
  }                                        →  }
 )                                         → )
  }                                        → ,\n        }
-)                                         → ,\n      )
+)                                         → )
+.                                         → \n        .
+then                                      → then
+(                                         → (
+(                                         → (
+__cs_response                             → response
+:                                         → : 
+Response                                  → Response
+) =>                                      → ) => 
+__cs_response                             → response
+.                                         → .
+text                                      → text
+()                                        → ()
+)                                         → )
+.                                         → \n        .
+then                                      → then
+(                                         → (\n          
+(                                         → (
+__cs_text                                 → text
+:                                         → : 
+string                                    → string
+) => {\n                                  → ) => {\n            
+__cs_held                                 → held
+.                                         → .
+set                                       → set
+(                                         → (
+__cs_text                                 → text
+)                                         → )
+;                                         → ;
+\n    }                                   → \n          }
+,                                         → ,\n          
+(                                         → (
+__cs_error                                → error
+:                                         → : 
+unknown                                   → unknown
+) => {\n                                  → ) => {\n            
+__cs_held                                 → held
+.                                         → .
+set                                       → set
+(                                         → (
+String                                    → String
+(                                         → (
+__cs_error                                → error
+)                                         → )
+)                                         → )
+;                                         → ;
+\n    }                                   → \n          }
+)                                         → ,\n        )
 ;                                         → ;
 \n                                        → \n\n      
 return                                    → return 

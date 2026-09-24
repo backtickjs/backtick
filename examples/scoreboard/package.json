@@ -11,10 +11,11 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
+    "@backtickjs/browser": "workspace:^0.1.0",
     "@backtickjs/bun-plugin": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
-    "@backtickjs/web-sdk": "^0.1.0",
-    "@backtickjs/web-page": "^0.1.0"
+    "@backtickjs/web-page": "^0.1.0",
+    "@backtickjs/web-sdk": "^0.1.0"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",

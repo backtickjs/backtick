@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web-sdk";
+import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/web-testing";
 import { settled } from "../render/dom.ts";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -41,7 +41,7 @@ async function Answer() {
     { start: { line: 42, column: 9 }, end: { line: 42, column: 34 } },
     {
       filePath: "eval/eval-builds-once.test.tsx",
-      fileHash: "35g1z58j10rir",
+      fileHash: "2f6ulv1ojihe6",
       splices: {},
       captures: [],
     },
@@ -100,7 +100,7 @@ async function Waiting({ ask }) {
     { start: { line: 52, column: 9 }, end: { line: 62, column: 4 } },
     {
       filePath: "eval/eval-builds-once.test.tsx",
-      fileHash: "35g1z58j10rir",
+      fileHash: "2f6ulv1ojihe6",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -133,7 +133,7 @@ async function Waiting({ ask }) {
                   end: { line: 53, column: 15 },
                 },
                 name: "drawn",
-                key: "drawn$35g1z58j10rir$0",
+                key: "drawn$2f6ulv1ojihe6$0",
               },
               init: {
                 type: "CallExpression",
@@ -185,7 +185,7 @@ async function Waiting({ ask }) {
                   end: { line: 54, column: 17 },
                 },
                 name: "started",
-                key: "started$35g1z58j10rir$1",
+                key: "started$2f6ulv1ojihe6$1",
               },
               init: {
                 type: "CallExpression",
@@ -245,7 +245,7 @@ async function Waiting({ ask }) {
                             end: { line: 54, column: 50 },
                           },
                           name: "drawn",
-                          key: "drawn$35g1z58j10rir$0",
+                          key: "drawn$2f6ulv1ojihe6$0",
                         },
                         property: {
                           type: "Identifier",
@@ -359,7 +359,7 @@ async function Waiting({ ask }) {
                             end: { line: 57, column: 14 },
                           },
                           name: "drawn",
-                          key: "drawn$35g1z58j10rir$0",
+                          key: "drawn$2f6ulv1ojihe6$0",
                         },
                         property: {
                           type: "Identifier",
@@ -426,7 +426,7 @@ async function Waiting({ ask }) {
                               end: { line: 59, column: 22 },
                             },
                             name: "drawn",
-                            key: "drawn$35g1z58j10rir$0",
+                            key: "drawn$2f6ulv1ojihe6$0",
                           },
                           property: {
                             type: "Identifier",
@@ -474,7 +474,7 @@ const evalBuildsOnce = cs.create(
   { start: { line: 65, column: 23 }, end: { line: 79, column: 2 } },
   {
     filePath: "eval/eval-builds-once.test.tsx",
-    fileHash: "35g1z58j10rir",
+    fileHash: "2f6ulv1ojihe6",
     splices: {
       $state: { value: state, params: [] },
       $answer: { value: answer, params: [] },
@@ -504,7 +504,7 @@ const evalBuildsOnce = cs.create(
                 end: { line: 66, column: 13 },
               },
               name: "asked",
-              key: "asked$35g1z58j10rir$2",
+              key: "asked$2f6ulv1ojihe6$2",
             },
             init: {
               type: "CallExpression",
@@ -635,7 +635,7 @@ const evalBuildsOnce = cs.create(
                             end: { line: 70, column: 29 },
                           },
                           name: "asked",
-                          key: "asked$35g1z58j10rir$2",
+                          key: "asked$2f6ulv1ojihe6$2",
                         },
                         property: {
                           type: "Identifier",
@@ -759,7 +759,7 @@ const evalBuildsOnce = cs.create(
                                       end: { line: 73, column: 15 },
                                     },
                                     name: "asked",
-                                    key: "asked$35g1z58j10rir$2",
+                                    key: "asked$2f6ulv1ojihe6$2",
                                   },
                                   property: {
                                     type: "Identifier",
@@ -799,7 +799,7 @@ const evalBuildsOnce = cs.create(
                                             end: { line: 73, column: 25 },
                                           },
                                           name: "asked",
-                                          key: "asked$35g1z58j10rir$2",
+                                          key: "asked$2f6ulv1ojihe6$2",
                                         },
                                         property: {
                                           type: "Identifier",
@@ -866,7 +866,7 @@ const evalBuildsOnce = cs.create(
                                           end: { line: 74, column: 22 },
                                         },
                                         name: "asked",
-                                        key: "asked$35g1z58j10rir$2",
+                                        key: "asked$2f6ulv1ojihe6$2",
                                       },
                                       property: {
                                         type: "Identifier",
