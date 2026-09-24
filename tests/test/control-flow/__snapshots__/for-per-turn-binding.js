@@ -11,7 +11,6 @@ it("forPerTurnBinding", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 18, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/for-per-turn-binding.test.tsx",
         fileHash: "2s6lhx8c4k6ow",
         splices: {},

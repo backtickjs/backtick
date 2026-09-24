@@ -24,7 +24,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 27, column: 6 }, end: { line: 30, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/on-cleanup.test.tsx",
           fileHash: "29e3pjiy23pgm",
           splices: {
@@ -192,7 +191,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 39, column: 6 }, end: { line: 48, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/on-cleanup.test.tsx",
           fileHash: "29e3pjiy23pgm",
           splices: {
@@ -697,7 +695,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 73, column: 6 }, end: { line: 80, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/on-cleanup.test.tsx",
           fileHash: "29e3pjiy23pgm",
           splices: {
@@ -1130,7 +1127,6 @@ describe("onCleanup", () => {
       cs.create(
         { start: { line: 93, column: 6 }, end: { line: 99, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/on-cleanup.test.tsx",
           fileHash: "29e3pjiy23pgm",
           splices: {

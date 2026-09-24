@@ -16,7 +16,6 @@ it("scriptFragmentTag", async (t) => {
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 33, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "jsx/script-fragment-tag.test.tsx",
         fileHash: "1uevnymojdbzi",
         splices: {},

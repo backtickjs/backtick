@@ -9,7 +9,6 @@ it("earlyReturn", async (t) => {
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 16, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/early-return.test.tsx",
         fileHash: "33mpmt8iae2c7",
         splices: {},

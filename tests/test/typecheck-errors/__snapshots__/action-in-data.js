@@ -4,7 +4,6 @@ import { cs } from "@backtickjs/core";
 const action = cs.create(
   { start: { line: 5, column: 15 }, end: { line: 7, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/action-in-data.test.tsx",
     fileHash: "23leqy4opwht7",
     splices: {},
@@ -51,7 +50,6 @@ const action = cs.create(
 export const listed = cs.create(
   { start: { line: 9, column: 22 }, end: { line: 13, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/action-in-data.test.tsx",
     fileHash: "23leqy4opwht7",
     splices: { $0splice0: { value: [action], params: [] } },
@@ -110,7 +108,6 @@ export const listed = cs.create(
 export const keyed = cs.create(
   { start: { line: 15, column: 21 }, end: { line: 19, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/action-in-data.test.tsx",
     fileHash: "23leqy4opwht7",
     splices: { $0splice0: { value: { press: action }, params: [] } },

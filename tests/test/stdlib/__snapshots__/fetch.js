@@ -14,7 +14,6 @@ it("fetchRequests", async (t) => {
     cs.create(
       { start: { line: 16, column: 4 }, end: { line: 49, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/fetch.test.tsx",
         fileHash: "2oxvexs6ogdoj",
         splices: {

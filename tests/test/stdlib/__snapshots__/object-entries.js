@@ -10,7 +10,6 @@ it("objectEntries", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/object-entries.test.tsx",
         fileHash: "txb5yf5uyd2o",
         splices: {},

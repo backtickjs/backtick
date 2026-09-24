@@ -1,5 +1,5 @@
 cs.lift(                              → cs`
 (cs.splice(                           →  [-semantic]
-(version)                             → $version
+(FRAGMENT_TAG)                        → $FRAGMENT_TAG
 ) satisfies typeof cs.ClientUnknown)  →  [-semantic]
 )                                     → `

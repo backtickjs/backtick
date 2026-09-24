@@ -16,7 +16,6 @@ function wrap(start) {
   return cs.create(
     { start: { line: 18, column: 9 }, end: { line: 24, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "captures/deep-capture.test.tsx",
       fileHash: "22sufdxid1i7s",
       splices: {
@@ -25,7 +24,6 @@ function wrap(start) {
           value: cs.create(
             { start: { line: 20, column: 13 }, end: { line: 23, column: 6 } },
             {
-              version: "0.0.0",
               filePath: "captures/deep-capture.test.tsx",
               fileHash: "22sufdxid1i7s",
               splices: {
@@ -36,7 +34,6 @@ function wrap(start) {
                       end: { line: 22, column: 33 },
                     },
                     {
-                      version: "0.0.0",
                       filePath: "captures/deep-capture.test.tsx",
                       fileHash: "22sufdxid1i7s",
                       splices: {},
@@ -199,7 +196,6 @@ it("deepCapture", async (t) => {
     cs.create(
       { start: { line: 28, column: 39 }, end: { line: 28, column: 74 } },
       {
-        version: "0.0.0",
         filePath: "captures/deep-capture.test.tsx",
         fileHash: "22sufdxid1i7s",
         splices: {
@@ -211,7 +207,6 @@ it("deepCapture", async (t) => {
                   end: { line: 28, column: 54 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/deep-capture.test.tsx",
                   fileHash: "22sufdxid1i7s",
                   splices: {},
@@ -237,7 +232,6 @@ it("deepCapture", async (t) => {
                   end: { line: 28, column: 71 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/deep-capture.test.tsx",
                   fileHash: "22sufdxid1i7s",
                   splices: {},

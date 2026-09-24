@@ -8,7 +8,6 @@ it("methodCall", async (t) => {
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/method-call.test.tsx",
         fileHash: "163oncfaq7kkj",
         splices: {},

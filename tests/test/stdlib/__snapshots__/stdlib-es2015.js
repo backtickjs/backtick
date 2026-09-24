@@ -11,7 +11,6 @@ it("stdlibEs2015", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 27, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/stdlib-es2015.test.tsx",
         fileHash: "s2q4937fji9l",
         splices: {},

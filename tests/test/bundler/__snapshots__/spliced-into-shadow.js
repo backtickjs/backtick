@@ -29,7 +29,6 @@ it("refuses a capture spliced where it is shadowed", async () => {
       cs.create(
         { start: { line: 32, column: 16 }, end: { line: 39, column: 6 } },
         {
-          version: "0.0.0",
           filePath: "bundler/spliced-into-shadow.test.tsx",
           fileHash: "1rcr3g75v4qq5",
           splices: {
@@ -41,7 +40,6 @@ it("refuses a capture spliced where it is shadowed", async () => {
                     end: { line: 34, column: 36 },
                   },
                   {
-                    version: "0.0.0",
                     filePath: "bundler/spliced-into-shadow.test.tsx",
                     fileHash: "1rcr3g75v4qq5",
                     splices: {},

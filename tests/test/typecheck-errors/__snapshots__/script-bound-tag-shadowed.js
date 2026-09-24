@@ -4,7 +4,6 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   { start: { line: 5, column: 15 }, end: { line: 12, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/script-bound-tag-shadowed.test.tsx",
     fileHash: "83k1lytjebk3",
     splices: {
@@ -12,7 +11,6 @@ export default cs.create(
         value: cs.create(
           { start: { line: 7, column: 11 }, end: { line: 11, column: 4 } },
           {
-            version: "0.0.0",
             filePath: "typecheck-errors/script-bound-tag-shadowed.test.tsx",
             fileHash: "83k1lytjebk3",
             splices: {
@@ -23,7 +21,6 @@ export default cs.create(
                     end: { line: 10, column: 32 },
                   },
                   {
-                    version: "0.0.0",
                     filePath:
                       "typecheck-errors/script-bound-tag-shadowed.test.tsx",
                     fileHash: "83k1lytjebk3",

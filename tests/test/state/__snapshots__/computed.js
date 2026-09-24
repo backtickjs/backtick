@@ -23,7 +23,6 @@ describe("computed", () => {
       cs.create(
         { start: { line: 25, column: 6 }, end: { line: 39, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/computed.test.tsx",
           fileHash: "p5ya93p4wb8",
           splices: {
@@ -841,7 +840,6 @@ describe("computed", () => {
       cs.create(
         { start: { line: 51, column: 6 }, end: { line: 64, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/computed.test.tsx",
           fileHash: "p5ya93p4wb8",
           splices: {

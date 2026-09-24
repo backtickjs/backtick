@@ -10,7 +10,6 @@ it("arrayMembers", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 25, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/array-members.test.tsx",
         fileHash: "139y0n5fpgs82",
         splices: {},

@@ -5,7 +5,6 @@ function add(lhs, rhs) {
   return cs.create(
     { start: { line: 6, column: 9 }, end: { line: 6, column: 24 } },
     {
-      version: "0.0.0",
       filePath: "splices/splice-sharing.test.tsx",
       fileHash: "3cex0hh0qp6qz",
       splices: {
@@ -38,7 +37,6 @@ it("spliceSharing", async (t) => {
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 16, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "splices/splice-sharing.test.tsx",
         fileHash: "3cex0hh0qp6qz",
         splices: {
@@ -50,7 +48,6 @@ it("spliceSharing", async (t) => {
                   end: { line: 14, column: 20 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
                   fileHash: "3cex0hh0qp6qz",
                   splices: {},
@@ -71,7 +68,6 @@ it("spliceSharing", async (t) => {
                   end: { line: 14, column: 27 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
                   fileHash: "3cex0hh0qp6qz",
                   splices: {},
@@ -97,7 +93,6 @@ it("spliceSharing", async (t) => {
                   end: { line: 15, column: 20 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
                   fileHash: "3cex0hh0qp6qz",
                   splices: {},
@@ -118,7 +113,6 @@ it("spliceSharing", async (t) => {
                   end: { line: 15, column: 27 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/splice-sharing.test.tsx",
                   fileHash: "3cex0hh0qp6qz",
                   splices: {},

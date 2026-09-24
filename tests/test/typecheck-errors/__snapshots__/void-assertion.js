@@ -5,7 +5,6 @@ const one = 1;
 const asserted = cs.create(
   { start: { line: 7, column: 17 }, end: { line: 11, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/void-assertion.test.tsx",
     fileHash: "3mgqg6v7h2mni",
     splices: { $one: { value: one, params: [] } },

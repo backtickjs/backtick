@@ -9,7 +9,6 @@ async function Other() {
   return cs.create(
     { start: { line: 9, column: 9 }, end: { line: 9, column: 45 } },
     {
-      version: "0.0.0",
       filePath: "eval/eval-siblings.test.tsx",
       fileHash: "1re1jas6fqiey",
       splices: {},
@@ -63,7 +62,6 @@ it("evalSiblings", async (t) => {
     cs.create(
       { start: { line: 18, column: 4 }, end: { line: 22, column: 11 } },
       {
-        version: "0.0.0",
         filePath: "eval/eval-siblings.test.tsx",
         fileHash: "1re1jas6fqiey",
         splices: { $otherBundle: { value: otherBundle, params: [] } },

@@ -11,7 +11,6 @@ describe("ref", () => {
       cs.create(
         { start: { line: 12, column: 6 }, end: { line: 20, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/ref.test.tsx",
           fileHash: "1omn3ou0fqxtc",
           splices: { $state: { value: state, params: [] } },
@@ -446,7 +445,6 @@ describe("ref", () => {
       cs.create(
         { start: { line: 28, column: 6 }, end: { line: 35, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/ref.test.tsx",
           fileHash: "1omn3ou0fqxtc",
           splices: { $onMount: { value: onMount, params: [] } },
@@ -627,7 +625,6 @@ describe("ref", () => {
       cs.create(
         { start: { line: 41, column: 17 }, end: { line: 41, column: 63 } },
         {
-          version: "0.0.0",
           filePath: "render/ref.test.tsx",
           fileHash: "1omn3ou0fqxtc",
           splices: {},
@@ -746,7 +743,6 @@ describe("ref", () => {
         cs.create(
           { start: { line: 63, column: 8 }, end: { line: 76, column: 10 } },
           {
-            version: "0.0.0",
             filePath: "render/ref.test.tsx",
             fileHash: "1omn3ou0fqxtc",
             splices: {

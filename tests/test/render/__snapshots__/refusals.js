@@ -89,7 +89,6 @@ describe("a handler that is not a function", () => {
       cs.create(
         { start: { line: 134, column: 28 }, end: { line: 134, column: 58 } },
         {
-          version: "0.0.0",
           filePath: "render/refusals.test.tsx",
           fileHash: "2i39r1w0584h",
           splices: {},
@@ -173,7 +172,6 @@ describe("a handler that is not a function", () => {
       cs.create(
         { start: { line: 144, column: 6 }, end: { line: 144, column: 34 } },
         {
-          version: "0.0.0",
           filePath: "render/refusals.test.tsx",
           fileHash: "2i39r1w0584h",
           splices: {},
@@ -257,7 +255,6 @@ describe("a handler that is not a function", () => {
       cs.create(
         { start: { line: 155, column: 6 }, end: { line: 155, column: 32 } },
         {
-          version: "0.0.0",
           filePath: "render/refusals.test.tsx",
           fileHash: "2i39r1w0584h",
           splices: {},
@@ -324,7 +321,6 @@ describe("a handler that is not a function", () => {
       cs.create(
         { start: { line: 156, column: 6 }, end: { line: 156, column: 41 } },
         {
-          version: "0.0.0",
           filePath: "render/refusals.test.tsx",
           fileHash: "2i39r1w0584h",
           splices: {},

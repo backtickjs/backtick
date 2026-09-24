@@ -12,7 +12,6 @@ it("indexAbsent", async (t) => {
     cs.create(
       { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "objects/index-absent.test.tsx",
         fileHash: "26sqkhggd8j15",
         splices: { $answers: { value: answers, params: [] } },

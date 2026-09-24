@@ -24,7 +24,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 27, column: 6 }, end: { line: 42, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/equals.test.tsx",
           fileHash: "96w30i9eqr9l",
           splices: {
@@ -903,7 +902,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 57, column: 6 }, end: { line: 74, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/equals.test.tsx",
           fileHash: "96w30i9eqr9l",
           splices: {
@@ -1646,7 +1644,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 82, column: 6 }, end: { line: 90, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/equals.test.tsx",
           fileHash: "96w30i9eqr9l",
           splices: {
@@ -2081,7 +2078,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 99, column: 6 }, end: { line: 111, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/equals.test.tsx",
           fileHash: "96w30i9eqr9l",
           splices: {
@@ -2588,7 +2584,6 @@ describe("equals", () => {
       cs.create(
         { start: { line: 119, column: 6 }, end: { line: 133, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "state/equals.test.tsx",
           fileHash: "96w30i9eqr9l",
           splices: {

@@ -10,7 +10,6 @@ async function Panel(props) {
   return cs.create(
     { start: { line: 12, column: 9 }, end: { line: 20, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "render/script-bound-tag-carried.test.tsx",
       fileHash: "2nh9ihk3oddge",
       splices: { $props: { value: props, params: [] } },
@@ -328,7 +327,6 @@ async function Panel(props) {
 const scriptBoundTagCarried = cs.create(
   { start: { line: 27, column: 30 }, end: { line: 48, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "render/script-bound-tag-carried.test.tsx",
     fileHash: "2nh9ihk3oddge",
     splices: {
@@ -337,7 +335,6 @@ const scriptBoundTagCarried = cs.create(
         value: cs.create(
           { start: { line: 40, column: 12 }, end: { line: 42, column: 19 } },
           {
-            version: "0.0.0",
             filePath: "render/script-bound-tag-carried.test.tsx",
             fileHash: "2nh9ihk3oddge",
             splices: {},

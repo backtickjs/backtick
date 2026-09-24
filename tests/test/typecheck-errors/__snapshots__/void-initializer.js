@@ -4,7 +4,6 @@ import { cs } from "@backtickjs/core";
 const ping = cs.create(
   { start: { line: 5, column: 13 }, end: { line: 8, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: {},
@@ -83,7 +82,6 @@ const ping = cs.create(
 const script = cs.create(
   { start: { line: 10, column: 15 }, end: { line: 13, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: { $ping: { value: ping, params: [] } },
@@ -151,7 +149,6 @@ const script = cs.create(
 const action = cs.create(
   { start: { line: 15, column: 15 }, end: { line: 17, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: { $ping: { value: ping, params: [] } },
@@ -209,7 +206,6 @@ const action = cs.create(
 const label = cs.create(
   { start: { line: 21, column: 14 }, end: { line: 23, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: {},
@@ -254,7 +250,6 @@ const label = cs.create(
 const wrongArgument = cs.create(
   { start: { line: 25, column: 22 }, end: { line: 29, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/void-initializer.test.tsx",
     fileHash: "3ch7rgcn8bjeq",
     splices: { $label: { value: label, params: [] } },

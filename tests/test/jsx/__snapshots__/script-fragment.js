@@ -11,7 +11,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const listed = cs.create(
   { start: { line: 11, column: 15 }, end: { line: 18, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "jsx/script-fragment.test.tsx",
     fileHash: "3pjkiwnta5gua",
     splices: {},
@@ -221,7 +220,6 @@ it("scriptFragment", async (t) => {
       children: cs.create(
         { start: { line: 21, column: 48 }, end: { line: 21, column: 64 } },
         {
-          version: "0.0.0",
           filePath: "jsx/script-fragment.test.tsx",
           fileHash: "3pjkiwnta5gua",
           splices: { $listed: { value: listed, params: [] } },

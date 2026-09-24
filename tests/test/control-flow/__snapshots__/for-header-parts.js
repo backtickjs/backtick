@@ -10,7 +10,6 @@ it("forHeaderParts", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 19, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/for-header-parts.test.tsx",
         fileHash: "2espgmzktnj99",
         splices: {},

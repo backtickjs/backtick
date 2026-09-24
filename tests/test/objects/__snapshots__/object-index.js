@@ -13,7 +13,6 @@ it("objectIndex", async (t) => {
     cs.create(
       { start: { line: 15, column: 4 }, end: { line: 20, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "objects/object-index.test.tsx",
         fileHash: "o3ttyh4dq4dw",
         splices: { $rates: { value: rates, params: [] } },

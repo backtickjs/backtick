@@ -8,7 +8,6 @@ it("arrow", async (t) => {
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 12, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/arrow.test.tsx",
         fileHash: "1qw9q1toh3rnd",
         splices: {},

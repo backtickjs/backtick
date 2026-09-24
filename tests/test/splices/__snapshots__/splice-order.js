@@ -12,7 +12,6 @@ it("spliceOrder", async (t) => {
     cs.create(
       { start: { line: 11, column: 39 }, end: { line: 11, column: 73 } },
       {
-        version: "0.0.0",
         filePath: "splices/splice-order.test.tsx",
         fileHash: "355ehjmpryw82",
         splices: {

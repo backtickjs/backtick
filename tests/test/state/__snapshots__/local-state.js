@@ -13,7 +13,6 @@ async function Stepper() {
   return cs.create(
     { start: { line: 13, column: 9 }, end: { line: 25, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/local-state.test.tsx",
       fileHash: "2gygj47yf1nf5",
       splices: { $state: { value: state, params: [] } },

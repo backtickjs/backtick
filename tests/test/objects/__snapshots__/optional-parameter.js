@@ -7,7 +7,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const greet = cs.create(
   { start: { line: 8, column: 14 }, end: { line: 10, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
     fileHash: "1i6s8vesd5nbi",
     splices: {},
@@ -93,7 +92,6 @@ const greet = cs.create(
 const double = cs.create(
   { start: { line: 14, column: 15 }, end: { line: 14, column: 26 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
     fileHash: "1i6s8vesd5nbi",
     splices: {},
@@ -114,7 +112,6 @@ const double = cs.create(
 const callIfGiven = cs.create(
   { start: { line: 16, column: 20 }, end: { line: 18, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-parameter.test.tsx",
     fileHash: "1i6s8vesd5nbi",
     splices: {},
@@ -195,7 +192,6 @@ it("optionalParameter", async (t) => {
     cs.create(
       { start: { line: 24, column: 4 }, end: { line: 31, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "objects/optional-parameter.test.tsx",
         fileHash: "1i6s8vesd5nbi",
         splices: {

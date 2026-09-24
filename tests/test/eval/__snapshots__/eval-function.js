@@ -8,7 +8,6 @@ const greet = await bundler.run(
   cs.create(
     { start: { line: 8, column: 32 }, end: { line: 8, column: 69 } },
     {
-      version: "0.0.0",
       filePath: "eval/eval-function.test.tsx",
       fileHash: "1061hn7xljcgj",
       splices: {},
@@ -49,7 +48,6 @@ const badge = await bundler.run(
   cs.create(
     { start: { line: 11, column: 2 }, end: { line: 11, column: 67 } },
     {
-      version: "0.0.0",
       filePath: "eval/eval-function.test.tsx",
       fileHash: "1061hn7xljcgj",
       splices: {},
@@ -167,7 +165,6 @@ it("evalFunction", async (t) => {
     cs.create(
       { start: { line: 18, column: 4 }, end: { line: 21, column: 11 } },
       {
-        version: "0.0.0",
         filePath: "eval/eval-function.test.tsx",
         fileHash: "1061hn7xljcgj",
         splices: {

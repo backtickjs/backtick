@@ -24,7 +24,6 @@ it("scriptComponent", async (t) => {
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 34, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "components/script-component.test.tsx",
         fileHash: "2ielk672xspgd",
         splices: {

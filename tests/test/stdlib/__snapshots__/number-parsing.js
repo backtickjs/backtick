@@ -9,7 +9,6 @@ async function Parsed() {
   return cs.create(
     { start: { line: 9, column: 9 }, end: { line: 14, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "stdlib/number-parsing.test.tsx",
       fileHash: "28kni4l69t7vb",
       splices: {},

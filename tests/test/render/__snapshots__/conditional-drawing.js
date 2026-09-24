@@ -28,7 +28,6 @@ async function Held({ again }) {
   return cs.create(
     { start: { line: 31, column: 9 }, end: { line: 41, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "render/conditional-drawing.test.tsx",
       fileHash: "t2scjfff5u22",
       splices: {
@@ -452,7 +451,6 @@ async function Held({ again }) {
 const conditionalDrawing = cs.create(
   { start: { line: 44, column: 27 }, end: { line: 60, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "render/conditional-drawing.test.tsx",
     fileHash: "t2scjfff5u22",
     splices: {

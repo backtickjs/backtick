@@ -12,7 +12,6 @@ async function OwnCounter() {
   return cs.create(
     { start: { line: 12, column: 9 }, end: { line: 24, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/local-state-instances.test.tsx",
       fileHash: "4rab33ccyjy9",
       splices: { $state: { value: state, params: [] } },

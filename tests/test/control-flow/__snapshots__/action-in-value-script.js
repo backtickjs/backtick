@@ -5,7 +5,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const valueScriptEffects = cs.create(
   { start: { line: 7, column: 41 }, end: { line: 9, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "control-flow/action-in-value-script.test.tsx",
     fileHash: "1zk77nyjrl50d",
     splices: {},
@@ -52,7 +51,6 @@ const valueScriptEffects = cs.create(
 const ping = cs.create(
   { start: { line: 11, column: 33 }, end: { line: 14, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "control-flow/action-in-value-script.test.tsx",
     fileHash: "1zk77nyjrl50d",
     splices: {},
@@ -141,7 +139,6 @@ it("actionInValueScript", async (t) => {
     cs.create(
       { start: { line: 20, column: 4 }, end: { line: 28, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/action-in-value-script.test.tsx",
         fileHash: "1zk77nyjrl50d",
         splices: {

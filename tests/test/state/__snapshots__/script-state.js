@@ -10,7 +10,6 @@ async function ScriptRows() {
   const build = cs.create(
     { start: { line: 10, column: 16 }, end: { line: 12, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/script-state.test.tsx",
       fileHash: "3f2468k5dp5lo",
       splices: { $state: { value: state, params: [] } },
@@ -105,7 +104,6 @@ async function ScriptRows() {
     style: cs.create(
       { start: { line: 16, column: 13 }, end: { line: 16, column: 34 } },
       {
-        version: "0.0.0",
         filePath: "state/script-state.test.tsx",
         fileHash: "3f2468k5dp5lo",
         splices: {},
@@ -120,7 +118,6 @@ async function ScriptRows() {
     onclick: cs.create(
       { start: { line: 17, column: 15 }, end: { line: 20, column: 8 } },
       {
-        version: "0.0.0",
         filePath: "state/script-state.test.tsx",
         fileHash: "3f2468k5dp5lo",
         splices: { $build: { value: build, params: [] } },
@@ -325,7 +322,6 @@ async function ScriptRows() {
     children: cs.create(
       { start: { line: 22, column: 7 }, end: { line: 22, column: 36 } },
       {
-        version: "0.0.0",
         filePath: "state/script-state.test.tsx",
         fileHash: "3f2468k5dp5lo",
         splices: { $build: { value: build, params: [] } },

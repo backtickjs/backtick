@@ -1,6 +1,5 @@
 /**
- * What a `cs` template compiles to: its syntax, where it was written, and the
- * version both ends check.
+ * What a `cs` template compiles to: its syntax and where it was written.
  *
  * The compiler writes one of these and the bundler reads it, so the shape is
  * neither end's. A script's body is ESTree as the source wrote it, with JSX
@@ -24,7 +23,6 @@ export type { Splice } from "./Splice.js";
 export { isComponentTag } from "./isComponentTag.js";
 export { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 export { jsxText } from "./jsxText.js";
-export { version } from "./version.js";
 
 // The tag itself, and how a script reads what it is handed.
 export { cs } from "./cs.js";

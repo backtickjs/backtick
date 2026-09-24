@@ -14,7 +14,6 @@ it("eventHandlers", async (t) => {
     cs.create(
       { start: { line: 15, column: 4 }, end: { line: 36, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "components/event-handlers.test.tsx",
         fileHash: "33yj2jmcqxbde",
         splices: { $state: { value: state, params: [] } },

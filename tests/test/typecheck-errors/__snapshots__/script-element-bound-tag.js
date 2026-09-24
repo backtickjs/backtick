@@ -5,7 +5,6 @@ import { cs } from "@backtickjs/core";
 const held = cs.create(
   { start: { line: 6, column: 13 }, end: { line: 6, column: 41 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/script-element-bound-tag.test.tsx",
     fileHash: "xwewmj2gozc5",
     splices: {},

@@ -17,7 +17,6 @@ var Color;
 const colorName = cs.create(
   { start: { line: 18, column: 48 }, end: { line: 20, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "state/state-enum.test.tsx",
     fileHash: "30a9wee2eidm4",
     splices: { $0splice0: { value: Color.Blue, params: [] } },
@@ -102,7 +101,6 @@ async function Swatch() {
   return cs.create(
     { start: { line: 23, column: 9 }, end: { line: 30, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/state-enum.test.tsx",
       fileHash: "30a9wee2eidm4",
       splices: {

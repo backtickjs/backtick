@@ -1,4 +1,3 @@
-import { version } from "@backtickjs/client-script";
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
@@ -97,10 +96,6 @@ export function rewriteScript(
 
   const metadata = ts.factory.createObjectLiteralExpression(
     [
-      ts.factory.createPropertyAssignment(
-        "version",
-        ts.factory.createStringLiteral(version),
-      ),
       ts.factory.createPropertyAssignment(
         "filePath",
         ts.factory.createStringLiteral(sourceFile.fileName),

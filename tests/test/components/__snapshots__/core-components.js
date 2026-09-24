@@ -14,7 +14,6 @@ it("coreComponents", async (t) => {
           onclick: cs.create(
             { start: { line: 10, column: 45 }, end: { line: 10, column: 57 } },
             {
-              version: "0.0.0",
               filePath: "components/core-components.test.tsx",
               fileHash: "1dqg1yg283gkk",
               splices: {},

@@ -40,7 +40,6 @@ async function Answer() {
   return cs.create(
     { start: { line: 42, column: 9 }, end: { line: 42, column: 34 } },
     {
-      version: "0.0.0",
       filePath: "eval/eval-builds-once.test.tsx",
       fileHash: "35g1z58j10rir",
       splices: {},
@@ -100,7 +99,6 @@ async function Waiting({ ask }) {
   return cs.create(
     { start: { line: 52, column: 9 }, end: { line: 62, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "eval/eval-builds-once.test.tsx",
       fileHash: "35g1z58j10rir",
       splices: {
@@ -475,7 +473,6 @@ async function Waiting({ ask }) {
 const evalBuildsOnce = cs.create(
   { start: { line: 65, column: 23 }, end: { line: 79, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "eval/eval-builds-once.test.tsx",
     fileHash: "35g1z58j10rir",
     splices: {

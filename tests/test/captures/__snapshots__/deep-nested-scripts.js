@@ -5,7 +5,6 @@ function add(lhs, rhs) {
   return cs.create(
     { start: { line: 7, column: 9 }, end: { line: 7, column: 24 } },
     {
-      version: "0.0.0",
       filePath: "captures/deep-nested-scripts.test.tsx",
       fileHash: "2rqwzcdfi281b",
       splices: {
@@ -38,7 +37,6 @@ it("deepNestedScripts", async (t) => {
     cs.create(
       { start: { line: 11, column: 45 }, end: { line: 11, column: 69 } },
       {
-        version: "0.0.0",
         filePath: "captures/deep-nested-scripts.test.tsx",
         fileHash: "2rqwzcdfi281b",
         splices: {
@@ -50,7 +48,6 @@ it("deepNestedScripts", async (t) => {
                   end: { line: 11, column: 59 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/deep-nested-scripts.test.tsx",
                   fileHash: "2rqwzcdfi281b",
                   splices: {},
@@ -71,7 +68,6 @@ it("deepNestedScripts", async (t) => {
                   end: { line: 11, column: 66 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/deep-nested-scripts.test.tsx",
                   fileHash: "2rqwzcdfi281b",
                   splices: {},

@@ -23,7 +23,6 @@ it("scriptComponentNestedProp", async (t) => {
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 27, column: 50 } },
       {
-        version: "0.0.0",
         filePath: "components/script-component-nested-prop.test.tsx",
         fileHash: "f9eea3gp8wr6",
         splices: { $Greeting: { value: Greeting, params: [] } },

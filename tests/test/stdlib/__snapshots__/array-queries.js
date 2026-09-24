@@ -11,7 +11,6 @@ it("arrayQueries", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 24, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/array-queries.test.tsx",
         fileHash: "25lflsbo2zrha",
         splices: {},

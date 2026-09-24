@@ -12,7 +12,6 @@ it("arrayReduce", async (t) => {
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 26, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/array-reduce.test.tsx",
         fileHash: "32uyy4dbi2509",
         splices: {},

@@ -11,7 +11,6 @@ async function Greeting() {
   return cs.create(
     { start: { line: 11, column: 9 }, end: { line: 18, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/set-stores-function.test.tsx",
       fileHash: "1zi7if3ybm5dh",
       splices: { $state: { value: state, params: [] } },

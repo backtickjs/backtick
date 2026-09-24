@@ -8,7 +8,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const counter = cs.create(
   { start: { line: 9, column: 16 }, end: { line: 17, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "state/stateful-object.test.tsx",
     fileHash: "2scghcewx41fn",
     splices: { $state: { value: state, params: [] } },
@@ -312,7 +311,6 @@ it("statefulObject", async (t) => {
     cs.create(
       { start: { line: 23, column: 4 }, end: { line: 34, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "state/stateful-object.test.tsx",
         fileHash: "2scghcewx41fn",
         splices: { $counter: { value: counter, params: [] } },

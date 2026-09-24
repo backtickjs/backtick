@@ -16,7 +16,6 @@ function innerBase(carried) {
   return cs.create(
     { start: { line: 18, column: 9 }, end: { line: 21, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "captures/foreign-capture-shadow.test.tsx",
       fileHash: "bphb1svo1jv3",
       splices: {
@@ -24,7 +23,6 @@ function innerBase(carried) {
           value: cs.create(
             { start: { line: 20, column: 13 }, end: { line: 20, column: 32 } },
             {
-              version: "0.0.0",
               filePath: "captures/foreign-capture-shadow.test.tsx",
               fileHash: "bphb1svo1jv3",
               splices: { $carried: { value: carried, params: [] } },
@@ -125,7 +123,6 @@ it("foreignCaptureShadow", async (t) => {
     cs.create(
       { start: { line: 28, column: 4 }, end: { line: 31, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "captures/foreign-capture-shadow.test.tsx",
         fileHash: "bphb1svo1jv3",
         splices: {
@@ -137,7 +134,6 @@ it("foreignCaptureShadow", async (t) => {
                   end: { line: 30, column: 33 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/foreign-capture-shadow.test.tsx",
                   fileHash: "bphb1svo1jv3",
                   splices: {},

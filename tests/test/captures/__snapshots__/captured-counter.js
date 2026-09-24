@@ -10,7 +10,6 @@ it("capturedCounter", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 18, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "captures/captured-counter.test.tsx",
         fileHash: "2s7xqailmdcpa",
         splices: {},

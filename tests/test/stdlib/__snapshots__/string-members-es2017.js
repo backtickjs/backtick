@@ -11,7 +11,6 @@ it("stringMembersEs2017", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 21, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/string-members-es2017.test.tsx",
         fileHash: "376ffut9l2xr3",
         splices: {},

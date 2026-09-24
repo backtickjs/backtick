@@ -12,7 +12,6 @@ const badge = await bundler.run(
   cs.create(
     { start: { line: 13, column: 2 }, end: { line: 13, column: 67 } },
     {
-      version: "0.0.0",
       filePath: "render/script-bound-tag.test.tsx",
       fileHash: "1g4jdt9f1nmyq",
       splices: {},
@@ -126,7 +125,6 @@ const badge = await bundler.run(
 const scriptBoundTag = cs.create(
   { start: { line: 16, column: 23 }, end: { line: 26, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "render/script-bound-tag.test.tsx",
     fileHash: "1g4jdt9f1nmyq",
     splices: {

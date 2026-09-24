@@ -6,7 +6,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const leaf = cs.create(
   { start: { line: 7, column: 13 }, end: { line: 7, column: 18 } },
   {
-    version: "0.0.0",
     filePath: "splices/deduplicated-scripts.test.tsx",
     fileHash: "2g4us6n03x6jl",
     splices: {},
@@ -25,7 +24,6 @@ it("deduplicatedScripts", async (t) => {
     cs.create(
       { start: { line: 10, column: 47 }, end: { line: 10, column: 75 } },
       {
-        version: "0.0.0",
         filePath: "splices/deduplicated-scripts.test.tsx",
         fileHash: "2g4us6n03x6jl",
         splices: { $leaf: { value: leaf, params: [] } },

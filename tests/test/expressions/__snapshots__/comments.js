@@ -10,7 +10,6 @@ it("comments", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 23, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/comments.test.tsx",
         fileHash: "3lcac8ezsyzi3",
         splices: {},

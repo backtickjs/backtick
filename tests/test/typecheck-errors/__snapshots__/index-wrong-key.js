@@ -6,7 +6,6 @@ const point = { x: 1, y: 2 };
 export default cs.create(
   { start: { line: 8, column: 15 }, end: { line: 16, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/index-wrong-key.test.tsx",
     fileHash: "2p3ed6wqsrdah",
     splices: { $point: { value: point, params: [] } },

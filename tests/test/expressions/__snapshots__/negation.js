@@ -13,7 +13,6 @@ it("negation", async (t) => {
     cs.create(
       { start: { line: 14, column: 4 }, end: { line: 18, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/negation.test.tsx",
         fileHash: "31nhc0aoqh9gi",
         splices: {},
@@ -200,7 +199,6 @@ it("negativeZero", async (t) => {
     cs.create(
       { start: { line: 24, column: 40 }, end: { line: 26, column: 4 } },
       {
-        version: "0.0.0",
         filePath: "expressions/negation.test.tsx",
         fileHash: "31nhc0aoqh9gi",
         splices: {},

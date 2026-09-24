@@ -10,7 +10,6 @@ describe("null and undefined", () => {
         cs.create(
           { start: { line: 9, column: 32 }, end: { line: 9, column: 49 } },
           {
-            version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
             fileHash: "3265muyjx857r",
             splices: {},
@@ -49,7 +48,6 @@ describe("null and undefined", () => {
         cs.create(
           { start: { line: 10, column: 32 }, end: { line: 10, column: 59 } },
           {
-            version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
             fileHash: "3265muyjx857r",
             splices: {},
@@ -90,7 +88,6 @@ describe("null and undefined", () => {
         cs.create(
           { start: { line: 14, column: 32 }, end: { line: 14, column: 54 } },
           {
-            version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
             fileHash: "3265muyjx857r",
             splices: {},
@@ -129,7 +126,6 @@ describe("null and undefined", () => {
         cs.create(
           { start: { line: 15, column: 32 }, end: { line: 15, column: 54 } },
           {
-            version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
             fileHash: "3265muyjx857r",
             splices: {},
@@ -174,7 +170,6 @@ describe("null and undefined", () => {
         cs.create(
           { start: { line: 24, column: 21 }, end: { line: 34, column: 8 } },
           {
-            version: "0.0.0",
             filePath: "expressions/null-undefined-equality.test.tsx",
             fileHash: "3265muyjx857r",
             splices: {

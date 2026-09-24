@@ -9,7 +9,6 @@ it("binaryOperators", async (t) => {
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 25, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/operators.test.tsx",
         fileHash: "3g7ol1xnrqdpp",
         splices: {},
@@ -392,7 +391,6 @@ it("unaryOperators", async (t) => {
     cs.create(
       { start: { line: 33, column: 4 }, end: { line: 38, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/operators.test.tsx",
         fileHash: "3g7ol1xnrqdpp",
         splices: {},
@@ -717,7 +715,6 @@ it("assignmentOperators", async (t) => {
     cs.create(
       { start: { line: 46, column: 4 }, end: { line: 62, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/operators.test.tsx",
         fileHash: "3g7ol1xnrqdpp",
         splices: {},
@@ -1248,7 +1245,6 @@ it("assignmentTargets", async (t) => {
     cs.create(
       { start: { line: 71, column: 4 }, end: { line: 80, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/operators.test.tsx",
         fileHash: "3g7ol1xnrqdpp",
         splices: {},
@@ -1666,7 +1662,6 @@ it("commaOperator", async (t) => {
     cs.create(
       { start: { line: 89, column: 4 }, end: { line: 93, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/operators.test.tsx",
         fileHash: "3g7ol1xnrqdpp",
         splices: {},

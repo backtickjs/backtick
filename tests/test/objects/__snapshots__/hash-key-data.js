@@ -10,7 +10,6 @@ it("hashKeyData", async (t) => {
     cs.create(
       { start: { line: 8, column: 39 }, end: { line: 8, column: 70 } },
       {
-        version: "0.0.0",
         filePath: "objects/hash-key-data.test.tsx",
         fileHash: "m50lyvn0wkye",
         splices: { $0splice0: { value: { "#call": "#f0" }, params: [] } },

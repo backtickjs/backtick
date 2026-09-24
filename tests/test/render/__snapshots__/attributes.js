@@ -99,7 +99,6 @@ describe("a field's value", () => {
     return cs.create(
       { start: { line: 111, column: 11 }, end: { line: 128, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "render/attributes.test.tsx",
         fileHash: "2pi9tt1octht0",
         splices: { $state: { value: state, params: [] } },
@@ -751,7 +750,6 @@ describe("a field's value", () => {
     return cs.create(
       { start: { line: 147, column: 11 }, end: { line: 164, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "render/attributes.test.tsx",
         fileHash: "2pi9tt1octht0",
         splices: { $state: { value: state, params: [] } },

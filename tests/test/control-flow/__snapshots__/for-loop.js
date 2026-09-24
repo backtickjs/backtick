@@ -10,7 +10,6 @@ it("forLoop", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/for-loop.test.tsx",
         fileHash: "1z8sn9rs7fbwb",
         splices: {},

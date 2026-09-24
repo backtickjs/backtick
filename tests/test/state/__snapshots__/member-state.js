@@ -13,7 +13,6 @@ async function MemberRows() {
   return cs.create(
     { start: { line: 19, column: 9 }, end: { line: 41, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/member-state.test.tsx",
       fileHash: "30ur5mgzea4v6",
       splices: {

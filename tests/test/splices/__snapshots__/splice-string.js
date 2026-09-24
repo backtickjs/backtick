@@ -11,7 +11,6 @@ it("spliceString", async (t) => {
     cs.create(
       { start: { line: 10, column: 40 }, end: { line: 10, column: 50 } },
       {
-        version: "0.0.0",
         filePath: "splices/splice-string.test.tsx",
         fileHash: "6r4m74y7k80e",
         splices: { $value: { value: value, params: [] } },

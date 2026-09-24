@@ -13,7 +13,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const originX = cs.create(
   { start: { line: 14, column: 16 }, end: { line: 14, column: 21 } },
   {
-    version: "0.0.0",
     filePath: "splices/spliced-container.test.tsx",
     fileHash: "3hhvicr225pmx",
     splices: {},
@@ -28,7 +27,6 @@ const originX = cs.create(
 const label = cs.create(
   { start: { line: 16, column: 14 }, end: { line: 16, column: 26 } },
   {
-    version: "0.0.0",
     filePath: "splices/spliced-container.test.tsx",
     fileHash: "3hhvicr225pmx",
     splices: {},
@@ -48,7 +46,6 @@ it("splicedContainer", async (t) => {
     cs.create(
       { start: { line: 21, column: 44 }, end: { line: 21, column: 60 } },
       {
-        version: "0.0.0",
         filePath: "splices/spliced-container.test.tsx",
         fileHash: "3hhvicr225pmx",
         splices: { $point: { value: point, params: [] } },

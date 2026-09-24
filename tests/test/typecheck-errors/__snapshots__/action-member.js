@@ -4,7 +4,6 @@ import { cs } from "@backtickjs/core";
 const action = cs.create(
   { start: { line: 5, column: 15 }, end: { line: 7, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/action-member.test.tsx",
     fileHash: "wf1ni21eddai",
     splices: {},
@@ -51,7 +50,6 @@ const action = cs.create(
 export default cs.create(
   { start: { line: 9, column: 15 }, end: { line: 13, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/action-member.test.tsx",
     fileHash: "wf1ni21eddai",
     splices: { $0splice0: { value: [action], params: [] } },

@@ -10,7 +10,6 @@ it("bindinglessCatch", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/bindingless-catch.test.tsx",
         fileHash: "1lr2275tf95wm",
         splices: {},

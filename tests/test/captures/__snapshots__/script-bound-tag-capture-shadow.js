@@ -14,7 +14,6 @@ function labelled(label) {
   return cs.create(
     { start: { line: 16, column: 9 }, end: { line: 19, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
       fileHash: "2mv5sg07ackia",
       splices: {
@@ -23,7 +22,6 @@ function labelled(label) {
           value: cs.create(
             { start: { line: 18, column: 17 }, end: { line: 18, column: 35 } },
             {
-              version: "0.0.0",
               filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
               fileHash: "2mv5sg07ackia",
               splices: {},
@@ -306,7 +304,6 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     cs.create(
       { start: { line: 26, column: 4 }, end: { line: 30, column: 11 } },
       {
-        version: "0.0.0",
         filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
         fileHash: "2mv5sg07ackia",
         splices: {
@@ -318,7 +315,6 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                   end: { line: 28, column: 25 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
                   fileHash: "2mv5sg07ackia",
                   splices: {},
@@ -344,7 +340,6 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                   end: { line: 29, column: 25 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
                   fileHash: "2mv5sg07ackia",
                   splices: {},
@@ -533,7 +528,6 @@ it("scriptBoundTagScope", async (t) => {
     cs.create(
       { start: { line: 41, column: 4 }, end: { line: 57, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "captures/script-bound-tag-capture-shadow.test.tsx",
         fileHash: "2mv5sg07ackia",
         splices: { $Card: { value: Card, params: [] } },

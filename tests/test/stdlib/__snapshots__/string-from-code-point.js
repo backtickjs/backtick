@@ -10,7 +10,6 @@ async function Written() {
   return cs.create(
     { start: { line: 10, column: 9 }, end: { line: 14, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "stdlib/string-from-code-point.test.tsx",
       fileHash: "7lcft72v2y3x",
       splices: {},

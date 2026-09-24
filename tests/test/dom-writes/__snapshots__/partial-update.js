@@ -12,7 +12,6 @@ async function Labels() {
   return cs.create(
     { start: { line: 12, column: 9 }, end: { line: 39, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "dom-writes/partial-update.test.tsx",
       fileHash: "2tlccuo5yvrz7",
       splices: {

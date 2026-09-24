@@ -10,7 +10,6 @@ describe("a read by key", () => {
         cs.create(
           { start: { line: 10, column: 32 }, end: { line: 10, column: 51 } },
           {
-            version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
             fileHash: "kbv0csg6ys4h",
             splices: {},
@@ -75,7 +74,6 @@ describe("a read by key", () => {
         cs.create(
           { start: { line: 11, column: 32 }, end: { line: 11, column: 46 } },
           {
-            version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
             fileHash: "kbv0csg6ys4h",
             splices: {},
@@ -116,7 +114,6 @@ describe("a read by key", () => {
         cs.create(
           { start: { line: 13, column: 32 }, end: { line: 13, column: 49 } },
           {
-            version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
             fileHash: "kbv0csg6ys4h",
             splices: {},
@@ -184,7 +181,6 @@ describe("a read by key", () => {
         cs.create(
           { start: { line: 14, column: 32 }, end: { line: 14, column: 65 } },
           {
-            version: "0.0.0",
             filePath: "objects/indexing.test.tsx",
             fileHash: "kbv0csg6ys4h",
             splices: {},
@@ -226,7 +222,6 @@ describe("a read by key", () => {
       cs.create(
         { start: { line: 20, column: 6 }, end: { line: 20, column: 23 } },
         {
-          version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
           fileHash: "kbv0csg6ys4h",
           splices: {},
@@ -286,7 +281,6 @@ describe("a read by key", () => {
       cs.create(
         { start: { line: 21, column: 6 }, end: { line: 21, column: 25 } },
         {
-          version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
           fileHash: "kbv0csg6ys4h",
           splices: {},
@@ -346,7 +340,6 @@ describe("a read by key", () => {
       cs.create(
         { start: { line: 22, column: 6 }, end: { line: 22, column: 24 } },
         {
-          version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
           fileHash: "kbv0csg6ys4h",
           splices: {},
@@ -415,7 +408,6 @@ describe("a read by key", () => {
       cs.create(
         { start: { line: 23, column: 6 }, end: { line: 23, column: 56 } },
         {
-          version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
           fileHash: "kbv0csg6ys4h",
           splices: {},
@@ -478,7 +470,6 @@ describe("a read by key", () => {
       cs.create(
         { start: { line: 24, column: 6 }, end: { line: 24, column: 18 } },
         {
-          version: "0.0.0",
           filePath: "objects/indexing.test.tsx",
           fileHash: "kbv0csg6ys4h",
           splices: {},

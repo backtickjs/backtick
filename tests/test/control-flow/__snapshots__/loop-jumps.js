@@ -11,7 +11,6 @@ it("loopJumps", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 27, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/loop-jumps.test.tsx",
         fileHash: "28bjtc1esuow3",
         splices: {},

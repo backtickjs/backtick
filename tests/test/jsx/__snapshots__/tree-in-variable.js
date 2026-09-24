@@ -14,7 +14,6 @@ const HeldRow = async () => _jsx("span", { children: "x" });
 const heldElement = cs.create(
   { start: { line: 15, column: 20 }, end: { line: 18, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "jsx/tree-in-variable.test.tsx",
     fileHash: "224cj4eht1o03",
     splices: { $0splice0: { value: _jsx("div", {}), params: [] } },
@@ -86,7 +85,6 @@ const heldElement = cs.create(
 const heldComponent = cs.create(
   { start: { line: 20, column: 22 }, end: { line: 23, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "jsx/tree-in-variable.test.tsx",
     fileHash: "224cj4eht1o03",
     splices: { $0splice0: { value: _jsx(HeldRow, {}), params: [] } },
@@ -164,7 +162,6 @@ it("treeInVariable", async (t) => {
         cs.create(
           { start: { line: 30, column: 7 }, end: { line: 30, column: 25 } },
           {
-            version: "0.0.0",
             filePath: "jsx/tree-in-variable.test.tsx",
             fileHash: "224cj4eht1o03",
             splices: { $heldElement: { value: heldElement, params: [] } },
@@ -191,7 +188,6 @@ it("treeInVariable", async (t) => {
         cs.create(
           { start: { line: 31, column: 7 }, end: { line: 31, column: 27 } },
           {
-            version: "0.0.0",
             filePath: "jsx/tree-in-variable.test.tsx",
             fileHash: "224cj4eht1o03",
             splices: { $heldComponent: { value: heldComponent, params: [] } },

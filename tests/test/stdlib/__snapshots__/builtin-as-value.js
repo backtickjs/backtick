@@ -15,7 +15,6 @@ it("builtinAsValue", async (t) => {
     cs.create(
       { start: { line: 16, column: 4 }, end: { line: 20, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/builtin-as-value.test.tsx",
         fileHash: "1n7k5w76rpsyr",
         splices: {},

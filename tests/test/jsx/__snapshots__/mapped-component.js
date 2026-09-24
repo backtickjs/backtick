@@ -26,7 +26,6 @@ it("mappedComponent", async (t) => {
         each: cs.create(
           { start: { line: 26, column: 17 }, end: { line: 26, column: 26 } },
           {
-            version: "0.0.0",
             filePath: "jsx/mapped-component.test.tsx",
             fileHash: "8u2ewdd1g2mk",
             splices: { $rows: { value: rows, params: [] } },
@@ -44,7 +43,6 @@ it("mappedComponent", async (t) => {
         children: cs.create(
           { start: { line: 27, column: 9 }, end: { line: 27, column: 66 } },
           {
-            version: "0.0.0",
             filePath: "jsx/mapped-component.test.tsx",
             fileHash: "8u2ewdd1g2mk",
             splices: {
@@ -56,7 +54,6 @@ it("mappedComponent", async (t) => {
                       end: { line: 27, column: 55 },
                     },
                     {
-                      version: "0.0.0",
                       filePath: "jsx/mapped-component.test.tsx",
                       fileHash: "8u2ewdd1g2mk",
                       splices: {},

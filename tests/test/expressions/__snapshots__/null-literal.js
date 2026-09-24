@@ -6,7 +6,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const orDash = cs.create(
   { start: { line: 7, column: 57 }, end: { line: 14, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "expressions/null-literal.test.tsx",
     fileHash: "2nnj6ebvkk8vj",
     splices: {},
@@ -109,7 +108,6 @@ it("nullLiteral", async (t) => {
     cs.create(
       { start: { line: 20, column: 4 }, end: { line: 24, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "expressions/null-literal.test.tsx",
         fileHash: "2nnj6ebvkk8vj",
         splices: { $orDash: { value: orDash, params: [] } },

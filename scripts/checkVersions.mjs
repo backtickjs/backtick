@@ -91,27 +91,12 @@ for (const { file, json } of [...released, ...consuming]) {
   }
 }
 
-// The compiler stamps this constant into every script it emits and a client
-// compares scripts against it, so a value that drifts from the manifests would
-// misreport every mismatch — in either direction.
-const constantFile = "packages/client-script/src/version.ts";
-const declared = readFileSync(join(root, constantFile), "utf8").match(
-  /export const version = "([^"]*)"/,
-)?.[1];
-
-if (declared !== expected) {
-  errors.push(
-    `${constantFile} declares "${declared}", ` +
-      `expected "${expected}" to match the package versions`,
-  );
-}
-
 if (errors.length > 0) {
   console.error(`✗ ${errors.join("\n✗ ")}`);
   process.exit(1);
 }
 
 console.log(
-  `✓ ${released.length} packages at ${expected}, constant in sync, ` +
+  `✓ ${released.length} packages at ${expected}, ` +
     `all @backtickjs ranges consistent`,
 );

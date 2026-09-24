@@ -6,7 +6,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const effects = cs.create(
   { start: { line: 8, column: 30 }, end: { line: 10, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "control-flow/action-composition.test.tsx",
     fileHash: "3q2gz79xhvvfp",
     splices: {},
@@ -53,7 +52,6 @@ const effects = cs.create(
 const composed = cs.create(
   { start: { line: 12, column: 31 }, end: { line: 14, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "control-flow/action-composition.test.tsx",
     fileHash: "3q2gz79xhvvfp",
     splices: { $effects: { value: effects, params: [] } },
@@ -85,7 +83,6 @@ it("actionComposition", async (t) => {
     cs.create(
       { start: { line: 20, column: 4 }, end: { line: 22, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/action-composition.test.tsx",
         fileHash: "3q2gz79xhvvfp",
         splices: { $composed: { value: composed, params: [] } },

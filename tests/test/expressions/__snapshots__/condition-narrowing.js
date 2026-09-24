@@ -8,7 +8,6 @@ const flags = {
   strict: cs.create(
     { start: { line: 8, column: 24 }, end: { line: 8, column: 32 } },
     {
-      version: "0.0.0",
       filePath: "expressions/condition-narrowing.test.tsx",
       fileHash: "g29mnwu0pbnr",
       splices: {},
@@ -24,7 +23,6 @@ const flags = {
 const label = cs.create(
   { start: { line: 10, column: 71 }, end: { line: 21, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "expressions/condition-narrowing.test.tsx",
     fileHash: "g29mnwu0pbnr",
     splices: { $0splice0: { value: flags.strict, params: [] } },
@@ -350,7 +348,6 @@ it("conditionNarrowing", async (t) => {
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 32, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "expressions/condition-narrowing.test.tsx",
         fileHash: "g29mnwu0pbnr",
         splices: { $label: { value: label, params: [] } },

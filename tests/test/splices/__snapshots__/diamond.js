@@ -9,7 +9,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const d0 = cs.create(
   { start: { line: 10, column: 11 }, end: { line: 10, column: 16 } },
   {
-    version: "0.0.0",
     filePath: "splices/diamond.test.tsx",
     fileHash: "23y608t6y2wp3",
     splices: {},
@@ -24,7 +23,6 @@ const d0 = cs.create(
 const d1 = cs.create(
   { start: { line: 12, column: 11 }, end: { line: 14, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "splices/diamond.test.tsx",
     fileHash: "23y608t6y2wp3",
     splices: { $d0: { value: d0, params: [] } },
@@ -68,7 +66,6 @@ const d1 = cs.create(
 const d2 = cs.create(
   { start: { line: 16, column: 11 }, end: { line: 18, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "splices/diamond.test.tsx",
     fileHash: "23y608t6y2wp3",
     splices: { $d1: { value: d1, params: [] } },
@@ -112,7 +109,6 @@ const d2 = cs.create(
 const d3 = cs.create(
   { start: { line: 20, column: 11 }, end: { line: 22, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "splices/diamond.test.tsx",
     fileHash: "23y608t6y2wp3",
     splices: { $d2: { value: d2, params: [] } },
@@ -156,7 +152,6 @@ const d3 = cs.create(
 const d4 = cs.create(
   { start: { line: 24, column: 11 }, end: { line: 26, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "splices/diamond.test.tsx",
     fileHash: "23y608t6y2wp3",
     splices: { $d3: { value: d3, params: [] } },

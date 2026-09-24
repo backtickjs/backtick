@@ -14,7 +14,6 @@ async function Ring() {
   return cs.create(
     { start: { line: 15, column: 9 }, end: { line: 15, column: 77 } },
     {
-      version: "0.0.0",
       filePath: "render/svg-namespace.test.tsx",
       fileHash: "8n845jjtfvwm",
       splices: {},
@@ -161,7 +160,6 @@ async function Ring() {
 const svgNamespace = cs.create(
   { start: { line: 18, column: 21 }, end: { line: 37, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "render/svg-namespace.test.tsx",
     fileHash: "8n845jjtfvwm",
     splices: {

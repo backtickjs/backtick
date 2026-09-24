@@ -6,7 +6,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const beep = cs.create(
   { start: { line: 8, column: 27 }, end: { line: 11, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "control-flow/handler-object.test.tsx",
     fileHash: "1dqhax1do6u08",
     splices: {},
@@ -79,7 +78,6 @@ const beep = cs.create(
 const onTap = cs.create(
   { start: { line: 13, column: 44 }, end: { line: 15, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "control-flow/handler-object.test.tsx",
     fileHash: "1dqhax1do6u08",
     splices: { $beep: { value: beep, params: [] } },
@@ -124,7 +122,6 @@ it("handlerObject", async (t) => {
     cs.create(
       { start: { line: 21, column: 4 }, end: { line: 27, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/handler-object.test.tsx",
         fileHash: "1dqhax1do6u08",
         splices: { $onTap: { value: onTap, params: [] } },

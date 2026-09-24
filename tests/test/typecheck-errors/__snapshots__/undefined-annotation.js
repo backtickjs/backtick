@@ -2,7 +2,6 @@ import { cs } from "@backtickjs/core";
 const stored = cs.create(
   { start: { line: 13, column: 15 }, end: { line: 16, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/undefined-annotation.test.tsx",
     fileHash: "2ybl4zwhlhjta",
     splices: {},
@@ -81,7 +80,6 @@ const stored = cs.create(
 const written = cs.create(
   { start: { line: 18, column: 16 }, end: { line: 23, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/undefined-annotation.test.tsx",
     fileHash: "2ybl4zwhlhjta",
     splices: {},

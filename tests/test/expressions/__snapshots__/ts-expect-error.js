@@ -11,7 +11,6 @@ it("tsExpectError", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 16, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/ts-expect-error.test.tsx",
         fileHash: "353rib4gy05pn",
         splices: {},

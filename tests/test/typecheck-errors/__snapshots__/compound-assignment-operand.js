@@ -4,7 +4,6 @@ import { cs } from "@backtickjs/core";
 export const constant = cs.create(
   { start: { line: 5, column: 24 }, end: { line: 10, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/compound-assignment-operand.test.tsx",
     fileHash: "3586xtu4la89h",
     splices: {},
@@ -81,7 +80,6 @@ export const constant = cs.create(
 export const mixed = cs.create(
   { start: { line: 12, column: 21 }, end: { line: 17, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/compound-assignment-operand.test.tsx",
     fileHash: "3586xtu4la89h",
     splices: {},

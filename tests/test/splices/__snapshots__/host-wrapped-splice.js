@@ -16,7 +16,6 @@ function wrap(start) {
   return cs.create(
     { start: { line: 17, column: 9 }, end: { line: 23, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "splices/host-wrapped-splice.test.tsx",
       fileHash: "zqr0jsdf8ub6",
       splices: {
@@ -26,7 +25,6 @@ function wrap(start) {
             cs.create(
               { start: { line: 19, column: 17 }, end: { line: 22, column: 6 } },
               {
-                version: "0.0.0",
                 filePath: "splices/host-wrapped-splice.test.tsx",
                 fileHash: "zqr0jsdf8ub6",
                 splices: {
@@ -38,7 +36,6 @@ function wrap(start) {
                           end: { line: 21, column: 38 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "splices/host-wrapped-splice.test.tsx",
                           fileHash: "zqr0jsdf8ub6",
                           splices: {},
@@ -200,7 +197,6 @@ function foo(start) {
   return cs.create(
     { start: { line: 27, column: 9 }, end: { line: 27, column: 23 } },
     {
-      version: "0.0.0",
       filePath: "splices/host-wrapped-splice.test.tsx",
       fileHash: "zqr0jsdf8ub6",
       splices: { $start: { value: start, params: [] } },
@@ -233,7 +229,6 @@ it("hostWrappedSplice", async (t) => {
     cs.create(
       { start: { line: 38, column: 4 }, end: { line: 38, column: 39 } },
       {
-        version: "0.0.0",
         filePath: "splices/host-wrapped-splice.test.tsx",
         fileHash: "zqr0jsdf8ub6",
         splices: {
@@ -245,7 +240,6 @@ it("hostWrappedSplice", async (t) => {
                   end: { line: 38, column: 19 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/host-wrapped-splice.test.tsx",
                   fileHash: "zqr0jsdf8ub6",
                   splices: {},
@@ -271,7 +265,6 @@ it("hostWrappedSplice", async (t) => {
                   end: { line: 38, column: 36 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/host-wrapped-splice.test.tsx",
                   fileHash: "zqr0jsdf8ub6",
                   splices: {},

@@ -12,7 +12,6 @@ it("computedKey", async (t) => {
     cs.create(
       { start: { line: 13, column: 4 }, end: { line: 22, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "objects/computed-key.test.tsx",
         fileHash: "27b2r7injyzq0",
         splices: {},

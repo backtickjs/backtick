@@ -16,7 +16,6 @@ it("objectSpread", async (t) => {
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 25, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "objects/object-spread.test.tsx",
         fileHash: "31uvwz3g4bdt1",
         splices: {},

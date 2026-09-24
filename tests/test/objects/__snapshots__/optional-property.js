@@ -7,7 +7,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const read = cs.create(
   { start: { line: 8, column: 13 }, end: { line: 10, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-property.test.tsx",
     fileHash: "1pn78z89zmc5d",
     splices: {},
@@ -145,7 +144,6 @@ it("optionalProperty", async (t) => {
     cs.create(
       { start: { line: 16, column: 4 }, end: { line: 20, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "objects/optional-property.test.tsx",
         fileHash: "1pn78z89zmc5d",
         splices: { $read: { value: read, params: [] } },

@@ -10,7 +10,6 @@ it("reservedKeyScript", async (t) => {
     cs.create(
       { start: { line: 8, column: 45 }, end: { line: 8, column: 67 } },
       {
-        version: "0.0.0",
         filePath: "objects/reserved-key-script.test.tsx",
         fileHash: "28g09xvp2p10c",
         splices: {},

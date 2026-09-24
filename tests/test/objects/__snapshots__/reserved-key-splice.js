@@ -10,7 +10,6 @@ it("reservedKeySplice", async (t) => {
     cs.create(
       { start: { line: 8, column: 45 }, end: { line: 8, column: 68 } },
       {
-        version: "0.0.0",
         filePath: "objects/reserved-key-splice.test.tsx",
         fileHash: "2dryy6my0qubf",
         splices: { $0splice0: { value: { "#": "value" }, params: [] } },

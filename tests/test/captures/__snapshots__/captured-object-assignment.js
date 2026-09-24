@@ -11,7 +11,6 @@ it("capturedObjectAssignment", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 20, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "captures/captured-object-assignment.test.tsx",
         fileHash: "385xpgt8q0ek2",
         splices: {
@@ -19,7 +18,6 @@ it("capturedObjectAssignment", async (t) => {
             value: cs.create(
               { start: { line: 14, column: 21 }, end: { line: 16, column: 8 } },
               {
-                version: "0.0.0",
                 filePath: "captures/captured-object-assignment.test.tsx",
                 fileHash: "385xpgt8q0ek2",
                 splices: {},

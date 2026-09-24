@@ -24,7 +24,6 @@ it("timers", async (t) => {
     cs.create(
       { start: { line: 25, column: 4 }, end: { line: 30, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/timers.test.tsx",
         fileHash: "ujjuhj1csnkk",
         splices: { $window: { value: window, params: [] } },

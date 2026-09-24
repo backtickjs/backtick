@@ -11,7 +11,6 @@ it("jsonRoundTrip", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 31, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/json.test.tsx",
         fileHash: "1nb9j9gha9a2e",
         splices: {},

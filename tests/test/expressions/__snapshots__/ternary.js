@@ -6,7 +6,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const pick = cs.create(
   { start: { line: 7, column: 13 }, end: { line: 9, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "expressions/ternary.test.tsx",
     fileHash: "uekyc2sf8mzc",
     splices: {},
@@ -108,7 +107,6 @@ it("ternary", async (t) => {
     cs.create(
       { start: { line: 15, column: 4 }, end: { line: 18, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "expressions/ternary.test.tsx",
         fileHash: "uekyc2sf8mzc",
         splices: { $pick: { value: pick, params: [] } },

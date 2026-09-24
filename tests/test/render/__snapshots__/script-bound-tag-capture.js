@@ -11,7 +11,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const scriptBoundTagCapture = cs.create(
   { start: { line: 11, column: 30 }, end: { line: 33, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "render/script-bound-tag-capture.test.tsx",
     fileHash: "h5jruxcfnavr",
     splices: {
@@ -20,7 +19,6 @@ const scriptBoundTagCapture = cs.create(
         value: cs.create(
           { start: { line: 17, column: 9 }, end: { line: 17, column: 38 } },
           {
-            version: "0.0.0",
             filePath: "render/script-bound-tag-capture.test.tsx",
             fileHash: "h5jruxcfnavr",
             splices: {},
@@ -118,7 +116,6 @@ const scriptBoundTagCapture = cs.create(
         value: cs.create(
           { start: { line: 19, column: 10 }, end: { line: 22, column: 10 } },
           {
-            version: "0.0.0",
             filePath: "render/script-bound-tag-capture.test.tsx",
             fileHash: "h5jruxcfnavr",
             splices: {
@@ -129,7 +126,6 @@ const scriptBoundTagCapture = cs.create(
                     end: { line: 21, column: 54 },
                   },
                   {
-                    version: "0.0.0",
                     filePath: "render/script-bound-tag-capture.test.tsx",
                     fileHash: "h5jruxcfnavr",
                     splices: {},
@@ -308,7 +304,6 @@ const scriptBoundTagCapture = cs.create(
           children: cs.create(
             { start: { line: 24, column: 20 }, end: { line: 24, column: 56 } },
             {
-              version: "0.0.0",
               filePath: "render/script-bound-tag-capture.test.tsx",
               fileHash: "h5jruxcfnavr",
               splices: {},
@@ -423,7 +418,6 @@ const scriptBoundTagCapture = cs.create(
         value: cs.create(
           { start: { line: 26, column: 10 }, end: { line: 28, column: 15 } },
           {
-            version: "0.0.0",
             filePath: "render/script-bound-tag-capture.test.tsx",
             fileHash: "h5jruxcfnavr",
             splices: { $For: { value: For, params: [] } },

@@ -8,7 +8,6 @@ it("tryCatch", async (t) => {
     cs.create(
       { start: { line: 9, column: 4 }, end: { line: 19, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/try-catch.test.tsx",
         fileHash: "3s3xo1kodgmhm",
         splices: {},

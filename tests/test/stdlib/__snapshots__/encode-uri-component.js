@@ -10,7 +10,6 @@ async function Encoded() {
   return cs.create(
     { start: { line: 10, column: 9 }, end: { line: 21, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "stdlib/encode-uri-component.test.tsx",
       fileHash: "3tch88psikxru",
       splices: {},

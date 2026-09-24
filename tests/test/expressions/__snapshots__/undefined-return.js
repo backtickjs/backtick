@@ -4,7 +4,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const lying = cs.create(
   { start: { line: 11, column: 35 }, end: { line: 11, column: 49 } },
   {
-    version: "0.0.0",
     filePath: "expressions/undefined-return.test.tsx",
     fileHash: "2qb372nig0g3z",
     splices: {},
@@ -29,7 +28,6 @@ it("undefinedReturn", async (t) => {
     cs.create(
       { start: { line: 17, column: 4 }, end: { line: 21, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/undefined-return.test.tsx",
         fileHash: "2qb372nig0g3z",
         splices: { $lying: { value: lying, params: [] } },

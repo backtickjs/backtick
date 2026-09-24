@@ -26,7 +26,6 @@ describe("onMount", () => {
         cs.create(
           { start: { line: 28, column: 8 }, end: { line: 35, column: 10 } },
           {
-            version: "0.0.0",
             filePath: "render/on-mount.test.tsx",
             fileHash: "1vhzpl5t5wcnc",
             splices: {
@@ -409,7 +408,6 @@ describe("onMount", () => {
       cs.create(
         { start: { line: 44, column: 6 }, end: { line: 51, column: 8 } },
         {
-          version: "0.0.0",
           filePath: "render/on-mount.test.tsx",
           fileHash: "1vhzpl5t5wcnc",
           splices: {

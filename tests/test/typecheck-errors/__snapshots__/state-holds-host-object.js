@@ -14,7 +14,6 @@ const host = new Date();
 export default cs.create(
   { start: { line: 16, column: 15 }, end: { line: 21, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "typecheck-errors/state-holds-host-object.test.tsx",
     fileHash: "1601kcqqso40z",
     splices: {

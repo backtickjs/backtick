@@ -7,7 +7,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const pick = cs.create(
   { start: { line: 8, column: 13 }, end: { line: 10, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-chain.test.tsx",
     fileHash: "2dtorvijco8u0",
     splices: {},
@@ -73,7 +72,6 @@ const pick = cs.create(
 const deep = cs.create(
   { start: { line: 12, column: 13 }, end: { line: 14, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-chain.test.tsx",
     fileHash: "2dtorvijco8u0",
     splices: {},
@@ -159,7 +157,6 @@ const deep = cs.create(
 const shout = cs.create(
   { start: { line: 16, column: 14 }, end: { line: 18, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "objects/optional-chain.test.tsx",
     fileHash: "2dtorvijco8u0",
     splices: {},
@@ -250,7 +247,6 @@ it("optionalChain", async (t) => {
     cs.create(
       { start: { line: 24, column: 4 }, end: { line: 32, column: 7 } },
       {
-        version: "0.0.0",
         filePath: "objects/optional-chain.test.tsx",
         fileHash: "2dtorvijco8u0",
         splices: {

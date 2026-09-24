@@ -28,7 +28,6 @@ describe("an undefined prop", () => {
         ref: cs.create(
           { start: { line: 34, column: 33 }, end: { line: 34, column: 71 } },
           {
-            version: "0.0.0",
             filePath: "bundler/undefined-prop.test.tsx",
             fileHash: "28eplibrubp3g",
             splices: { $onMount: { value: onMount, params: [] } },

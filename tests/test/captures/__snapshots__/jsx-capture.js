@@ -9,7 +9,6 @@ import { snapshotCase } from "../snapshotCase.ts";
 const script = cs.create(
   { start: { line: 11, column: 42 }, end: { line: 14, column: 2 } },
   {
-    version: "0.0.0",
     filePath: "captures/jsx-capture.test.tsx",
     fileHash: "g38hwxw7rhvi",
     splices: {
@@ -18,7 +17,6 @@ const script = cs.create(
           onclick: cs.create(
             { start: { line: 13, column: 27 }, end: { line: 13, column: 38 } },
             {
-              version: "0.0.0",
               filePath: "captures/jsx-capture.test.tsx",
               fileHash: "g38hwxw7rhvi",
               splices: {},

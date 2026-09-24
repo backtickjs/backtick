@@ -11,7 +11,6 @@ it("step", async (t) => {
     cs.create(
       { start: { line: 12, column: 4 }, end: { line: 22, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "expressions/step.test.tsx",
         fileHash: "l4vdws2hl3xc",
         splices: {},

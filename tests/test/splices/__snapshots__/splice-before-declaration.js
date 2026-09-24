@@ -15,7 +15,6 @@ function sandwich(fragment) {
   return cs.create(
     { start: { line: 16, column: 9 }, end: { line: 21, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "splices/splice-before-declaration.test.tsx",
       fileHash: "1xi8jyc89buh5",
       splices: { $fragment: { value: fragment, params: [] } },
@@ -188,7 +187,6 @@ it("spliceBeforeDeclaration", async (t) => {
     cs.create(
       { start: { line: 28, column: 4 }, end: { line: 28, column: 49 } },
       {
-        version: "0.0.0",
         filePath: "splices/splice-before-declaration.test.tsx",
         fileHash: "1xi8jyc89buh5",
         splices: {
@@ -200,7 +198,6 @@ it("spliceBeforeDeclaration", async (t) => {
                   end: { line: 28, column: 24 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/splice-before-declaration.test.tsx",
                   fileHash: "1xi8jyc89buh5",
                   splices: {},
@@ -226,7 +223,6 @@ it("spliceBeforeDeclaration", async (t) => {
                   end: { line: 28, column: 46 },
                 },
                 {
-                  version: "0.0.0",
                   filePath: "splices/splice-before-declaration.test.tsx",
                   fileHash: "1xi8jyc89buh5",
                   splices: {},

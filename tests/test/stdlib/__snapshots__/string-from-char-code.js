@@ -8,7 +8,6 @@ async function Written() {
   return cs.create(
     { start: { line: 8, column: 9 }, end: { line: 14, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "stdlib/string-from-char-code.test.tsx",
       fileHash: "rfc8jtzlhm6q",
       splices: {},

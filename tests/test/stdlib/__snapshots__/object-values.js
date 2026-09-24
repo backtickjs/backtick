@@ -10,7 +10,6 @@ it("objectValues", async (t) => {
     cs.create(
       { start: { line: 11, column: 4 }, end: { line: 17, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "stdlib/object-values.test.tsx",
         fileHash: "1lmwvcf4zc2ir",
         splices: {},

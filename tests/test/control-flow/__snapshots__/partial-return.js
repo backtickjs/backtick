@@ -9,7 +9,6 @@ it("partialReturnScript", async (t) => {
     cs.create(
       { start: { line: 10, column: 4 }, end: { line: 15, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/partial-return.test.tsx",
         fileHash: "x79h35ggz599",
         splices: {},
@@ -122,7 +121,6 @@ it("partialReturnArrow", async (t) => {
     cs.create(
       { start: { line: 23, column: 4 }, end: { line: 30, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "control-flow/partial-return.test.tsx",
         fileHash: "x79h35ggz599",
         splices: {},

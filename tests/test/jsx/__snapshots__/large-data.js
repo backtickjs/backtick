@@ -28,7 +28,6 @@ it("largeData", async (t) => {
         each: cs.create(
           { start: { line: 37, column: 17 }, end: { line: 37, column: 28 } },
           {
-            version: "0.0.0",
             filePath: "jsx/large-data.test.tsx",
             fileHash: "2tquu92zqyse3",
             splices: { $orders: { value: orders, params: [] } },
@@ -46,7 +45,6 @@ it("largeData", async (t) => {
         children: cs.create(
           { start: { line: 38, column: 9 }, end: { line: 53, column: 13 } },
           {
-            version: "0.0.0",
             filePath: "jsx/large-data.test.tsx",
             fileHash: "2tquu92zqyse3",
             splices: {
@@ -60,7 +58,6 @@ it("largeData", async (t) => {
                           end: { line: 42, column: 71 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
                           fileHash: "2tquu92zqyse3",
                           splices: {},
@@ -134,7 +131,6 @@ it("largeData", async (t) => {
                           end: { line: 45, column: 44 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
                           fileHash: "2tquu92zqyse3",
                           splices: {},
@@ -192,7 +188,6 @@ it("largeData", async (t) => {
                           end: { line: 46, column: 44 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
                           fileHash: "2tquu92zqyse3",
                           splices: {},
@@ -250,7 +245,6 @@ it("largeData", async (t) => {
                           end: { line: 47, column: 40 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
                           fileHash: "2tquu92zqyse3",
                           splices: {},
@@ -289,7 +283,6 @@ it("largeData", async (t) => {
                           end: { line: 49, column: 69 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
                           fileHash: "2tquu92zqyse3",
                           splices: {
@@ -301,7 +294,6 @@ it("largeData", async (t) => {
                                     end: { line: 49, column: 58 },
                                   },
                                   {
-                                    version: "0.0.0",
                                     filePath: "jsx/large-data.test.tsx",
                                     fileHash: "2tquu92zqyse3",
                                     splices: {},
@@ -426,7 +418,6 @@ it("largeData", async (t) => {
                           end: { line: 51, column: 42 },
                         },
                         {
-                          version: "0.0.0",
                           filePath: "jsx/large-data.test.tsx",
                           fileHash: "2tquu92zqyse3",
                           splices: {},

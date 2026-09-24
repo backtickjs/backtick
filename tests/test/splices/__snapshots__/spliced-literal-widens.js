@@ -25,7 +25,6 @@ it("splicedLiteralWidens", async (t) => {
     cs.create(
       { start: { line: 27, column: 4 }, end: { line: 32, column: 6 } },
       {
-        version: "0.0.0",
         filePath: "splices/spliced-literal-widens.test.tsx",
         fileHash: "323oescdizqb0",
         splices: {

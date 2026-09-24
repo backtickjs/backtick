@@ -9,7 +9,6 @@ async function Checked() {
   return cs.create(
     { start: { line: 9, column: 9 }, end: { line: 37, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "stdlib/number-statics.test.tsx",
       fileHash: "1o8290c5hfi65",
       splices: {},

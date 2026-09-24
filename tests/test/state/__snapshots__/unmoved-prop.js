@@ -13,7 +13,6 @@ async function SelectableRows() {
   return cs.create(
     { start: { line: 13, column: 9 }, end: { line: 29, column: 4 } },
     {
-      version: "0.0.0",
       filePath: "state/unmoved-prop.test.tsx",
       fileHash: "2i3sz19b0mqz4",
       splices: {
