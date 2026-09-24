@@ -1,15 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { lowerSpliceable } from "../dist/ast/lowerSpliceable.js";
+import { bundler } from "../dist/bundler.js";
 
 test("a plain object crosses member by member", async () => {
-  assert.deepEqual(await lowerSpliceable({ label: "row", count: 3 }), {
-    kind: "AstObject",
-    entries: {
-      label: { kind: "AstString", value: "row" },
-      count: { kind: "AstNumber", value: 3 },
-    },
-  });
+  assert.match(
+    await bundler.run({ label: "row", count: 3 }),
+    /return \{\s*label: "row",\s*count: 3,?\s*\};/,
+  );
 });
 
 test("a class instance does not", async () => {
@@ -25,18 +22,16 @@ test("a class instance does not", async () => {
   }
 
   await assert.rejects(
-    () => lowerSpliceable(new Point() as never),
+    () => bundler.run(new Point() as never),
     /only plain objects cross into a client script/,
   );
 });
 
 test("a host function expands rather than crossing", async () => {
   // It has no data form, so it is run against a hole per parameter and what it
-  // answered is what crosses. `length` is the arity, so this one takes none.
-  const expansion = await lowerSpliceable(((n: never) => n) as never);
-  assert.deepEqual(expansion, {
-    kind: "AstExpansion",
-    params: ["$0"],
-    body: { kind: "AstHole", name: "$0" },
-  });
+  // answered is what crosses. `length` is the arity, so this one takes one.
+  assert.match(
+    await bundler.run(((n: never) => n) as never),
+    /return \$0 => \$0;/,
+  );
 });

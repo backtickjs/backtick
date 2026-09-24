@@ -1,4 +1,14 @@
-import type { Ast, AstElement, AstScript } from "../ast/Ast.js";
+import { type ClientScript, isClientScript } from "@backtickjs/client-script";
+import {
+  type Client,
+  type ClientUnknown,
+  isBuiltin,
+  type Spliceable,
+} from "@backtickjs/platform-sdk";
+import { isJsxElement, type JsxElement } from "@backtickjs/ui-platform-sdk";
+import { expandFunction } from "./expandFunction.js";
+import { expandJsxElement } from "./expandJsxElement.js";
+import { holeName } from "./holes.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
@@ -39,6 +49,11 @@ export interface BundleTree {
   readonly names: Names;
 }
 
+// The parsed body for each distinct source location. Two scripts at the same
+// location — a script inside a host function, instantiated with different
+// splices at different call sites — share one parse.
+const parsedByLoc = new Map<string, ES.Expression | ES.BlockStatement>();
+
 // Builds the bundle `{ functions, root }` as ESTree, and documents how it is
 // derived.
 //
@@ -65,35 +80,37 @@ export interface BundleTree {
 //     `$i`: the body fills the hole with `$i()` and every reference passes that
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
-export function buildBundle(
-  ast: Ast,
+export async function buildBundle<T extends ClientUnknown>(
+  value: Spliceable<T>,
   features: ExperimentalFeatures = {},
-): BundleTree {
+): Promise<BundleTree> {
   const names = createNames();
   // The `functions` table, filled as rendering reaches each script. Two scripts
   // written at one source location are one entry, so this is what makes a
-  // reference to a shared script a reference to the same object — the one thing
-  // the AST cannot say for itself, since it keys by node and this keys by where
-  // the node was written.
+  // reference to a shared script a reference to the same object.
   // Keyed by entry so a label is a lookup rather than a scan, and ordered by
   // insertion, which is the table order the tail emits in.
   const scripts = new Map<ScriptEntry, number>();
   const entryByLoc = new Map<string, ScriptEntry>();
-  const entryFor = (script: AstScript): ScriptEntry => {
-    const key = locKey(script.fileHash, script.loc);
+  const entryFor = (script: ClientScript): ScriptEntry => {
+    const key = locKey(script.metadata.fileHash, script.loc);
     const existing = entryByLoc.get(key);
     if (existing !== undefined) {
       return existing;
     }
+    let body = parsedByLoc.get(key);
+    if (body === undefined) {
+      body = script.body();
+      parsedByLoc.set(key, body);
+    }
     const entry: ScriptEntry = {
       loc: script.loc,
-      fileHash: script.fileHash,
-      splices: Object.entries(script.splices).map(([key, splice]) => ({
-        key,
-        params: splice.params,
-      })),
-      captures: script.captures,
-      body: script.expression,
+      fileHash: script.metadata.fileHash,
+      splices: Object.entries(script.metadata.splices).map(
+        ([key, splice]) => ({ key, params: splice.params }),
+      ),
+      captures: script.metadata.captures,
+      body,
     };
     entryByLoc.set(key, entry);
     scripts.set(entry, scripts.size);
@@ -129,13 +146,6 @@ export function buildBundle(
     return name;
   };
 
-  // The captures that the rendered form of a splice argument refers to in the
-  // enclosing scope: whatever its target still needs, plus the captures of the
-  // thunks passed for its splices, since those thunks are written inline at this
-  // call site. A tree reference needs its
-  // arguments; an inline element whatever its props need.
-  // Memoized per argument — the IR is immutable and this fans out from `need`
-  // and `treeParams`.
   // How a hole is reached. Its name is the path the function read: `$0` is the
   // parameter itself, and `$0.title` is a field of it.
   //
@@ -159,73 +169,6 @@ export function buildBundle(
       read = member(read, step, false);
     }
     return read;
-  };
-
-  // The parameter a hole is reached through, which is what threads out of an
-  // entry hoisted from the expansion — one name, whatever it read off it.
-  const holeParam = (name: string): string => {
-    const dot = name.indexOf(".");
-    return dot === -1 ? name : name.slice(0, dot);
-  };
-
-  const freeCapsCache = new Map<Ast, string[]>();
-  const freeCaps = (value: Ast): string[] => {
-    const cached = freeCapsCache.get(value);
-    if (cached) {
-      return cached;
-    }
-    const result = freeCapsImpl(value);
-    freeCapsCache.set(value, result);
-    return result;
-  };
-
-  const freeCapsImpl = (value: Ast): string[] => {
-    switch (value.kind) {
-      case "AstScript": {
-        const target = entryFor(value);
-        const keys = [...target.captures];
-        Object.values(value.splices).forEach(({ value: arg }, index) => {
-          // What the hole hands its thunk is supplied there, not by the call
-          // site. Asking the hole rather than the entry is the exact question:
-          // a binding the entry declares but that is not in scope at *this*
-          // hole is not supplied here, so it still has to thread in.
-          const supplied = new Set(passKeys(target, index));
-          for (const key of freeCaps(arg)) {
-            if (!supplied.has(key)) {
-              keys.push(key);
-            }
-          }
-        });
-        return keys;
-      }
-      case "AstComponentCall":
-        return freeCaps(value.body);
-      case "AstElement":
-        return Object.values(value.props).flatMap(freeCaps);
-      case "AstArray":
-        return value.elements.flatMap(freeCaps);
-      case "AstObject":
-        return Object.values(value.entries).flatMap(freeCaps);
-      // An expansion's holes are bound by its own params: only what its
-      // body captures beyond them threads outward.
-      case "AstExpansion":
-        return freeCaps(value.body).filter(
-          (key) => !value.params.includes(key),
-        );
-      // A hole threads like a capture — a free variable the enclosing
-      // expansion's parameter binds — so a script entry hoisted out of the
-      // expansion receives it as a parameter instead of escaping its scope.
-      case "AstHole":
-        return [holeParam(value.name)];
-      // A name captures nothing.
-      case "AstBuiltin":
-      case "AstNumber":
-      case "AstString":
-      case "AstBoolean":
-      case "AstNull":
-      case "AstUndefined":
-        return [];
-    }
   };
 
   // The entry-declared bindings a hole feeds its thunk, so a spliced fragment
@@ -286,10 +229,13 @@ export function buildBundle(
   // and a fragment wants what its own script needs, and those coincide often
   // but not always.
   const forwarding = (
-    value: Ast,
+    value: Spliceable,
     passed: readonly string[],
   ): ES.Expression | null => {
-    if (value.kind !== "AstScript" || Object.keys(value.splices).length > 0) {
+    if (
+      !isClientScript(value) ||
+      Object.keys(value.metadata.splices).length > 0
+    ) {
       return null;
     }
     const target = entryFor(value);
@@ -304,76 +250,92 @@ export function buildBundle(
     return label(names, fnLabel(target));
   };
 
-  // Instantiating a tree in value position: which entry, and what to hand
-  // it. A tree is applied wherever it is reached — there was once a plain call
-  // for the unkeyed case and an apply for the keyed one, but the two carried
-  // the same label and the same arguments and differed only in the node they were
-  // written as.
   // Writes a value as the node it becomes: composition as data, which is what
   // a bundle is. A script reference is an application naming which entry and
-  // what to hand it; everything else is its literal form.
-  const render = (
-    value: Ast,
+  // what to hand it; everything else is its literal form. Rendered in order,
+  // one value after the other, so the table follows the order rendering first
+  // reached each script.
+  const render = async (
+    value: Spliceable,
     params: ReadonlySet<string> = new Set(),
-  ): ES.Expression => {
-    const child = (
-      node: Ast,
-      inner: ReadonlySet<string> = params,
-    ): ES.Expression => render(node, inner);
-
-    switch (value.kind) {
-      case "AstScript": {
-        const target = entryFor(value);
-        materialize(target);
-        return call(label(names, fnLabel(target)), exprCallArgs(value, params));
-      }
-      // An arrow over nothing, called with no props: `comp` is what calls a
-      // drawing untracked.
-      case "AstComponentCall":
-        return jsxComponent(names, thunk(child(value.body)), [], null);
-      case "AstElement":
-        return renderElement(value, params);
-      case "AstBuiltin":
-        return builtin(names, value.name);
-      case "AstNumber":
-      case "AstString":
-      case "AstBoolean":
-        return literal(value.value);
-      case "AstNull":
-        return nullLiteral();
-      case "AstUndefined":
-        return undefinedValue();
-      // An expansion is written out as the arrow it is, its holes the
-      // parameters and the call the tag wrote binding them. Compiling it to a
-      // `functions` entry instead is possible — `FunctionReference` is an entry as a
-      // value, and `forwarding` already emits one — and would need the
-      // expansion to close over nothing. Measured, it traded an inline arrow
-      // for a table entry and came out even, so it is written here.
-      case "AstExpansion":
-        return arrow(
-          value.params.map((param) => binding(names, param)),
-          // The expansion's params extend the enclosing ones, like a nested
-          // frame, so a hole threading into the body resolves by name.
-          child(value.body, new Set([...params, ...value.params])),
-        );
-      // A hole threads like a capture (see `freeCaps`), so it is reached the
-      // same way — through the environment when the entry took it as one.
-      case "AstHole":
-        return holeRead(value.name);
-      case "AstArray":
-        return {
-          type: "ArrayExpression",
-          elements: value.elements.map((entry) => child(entry)),
-        };
-      // A plain data object passes through, every key of it.
-      case "AstObject":
-        return {
-          type: "ObjectExpression",
-          properties: Object.entries(value.entries).map(([key, entry]) =>
-            property(objectKey(key), child(entry)),
-          ),
-        };
+  ): Promise<ES.Expression> => {
+    // A hole sentinel a host function stored somewhere in what it answered: the
+    // client argument it stands for has no value until the client runs, so it
+    // is a reference to the enclosing expansion's parameter.
+    const hole = holeName(value);
+    if (hole !== undefined) {
+      return holeRead(hole);
     }
+    if (isClientScript(value)) {
+      const target = entryFor(value);
+      materialize(target);
+      return call(
+        label(names, fnLabel(target)),
+        await exprCallArgs(value, params),
+      );
+    }
+    if (isJsxElement(value)) {
+      return renderJsx(value, params);
+    }
+    if (isBuiltin(value)) {
+      return builtin(names, value.name);
+    }
+    if (value === null) {
+      return nullLiteral();
+    }
+    // Checked by name, since everything past here reads the value as an object.
+    if (value === undefined) {
+      return undefinedValue();
+    }
+    if (
+      typeof value === "number" ||
+      typeof value === "string" ||
+      typeof value === "boolean"
+    ) {
+      return literal(value);
+    }
+    if (Array.isArray(value)) {
+      const elements: ES.Expression[] = [];
+      for (const element of value) {
+        elements.push(await render(element, params));
+      }
+      return { type: "ArrayExpression", elements };
+    }
+    // A host function has no data form — client code is written in `cs`...` and
+    // reaches a script as a script — so it is expanded rather than carried, and
+    // written out as the arrow it is: its holes the parameters, and the call
+    // the tag wrote binding them.
+    if (typeof value === "function") {
+      const expansion = await expandFunction(
+        value as (...args: Client<never>[]) => unknown,
+      );
+      return arrow(
+        expansion.params.map((param) => binding(names, param)),
+        // The expansion's params extend the enclosing ones, like a nested
+        // frame, so a hole threading into the body resolves by name.
+        await render(
+          expansion.returned,
+          new Set([...params, ...expansion.params]),
+        ),
+      );
+    }
+    // Only plain objects cross structurally. A class instance would land here
+    // and half-work — own fields reflect, getters and methods silently vanish —
+    // so fail loudly instead. An object with behaviour is built by a client
+    // function: `state` for what it holds, arrows for what may be done to it.
+    const prototype = Object.getPrototypeOf(value);
+    if (prototype !== Object.prototype && prototype !== null) {
+      const name = value.constructor?.name ?? "an unknown class";
+      throw new Error(
+        `Can't splice this \`${name}\` instance: only plain objects cross into ` +
+          "a client script. Build one with a client function instead.",
+      );
+    }
+    const properties: ES.Property[] = [];
+    for (const [key, entry] of Object.entries(value)) {
+      properties.push(property(objectKey(key), await render(entry, params)));
+    }
+    return { type: "ObjectExpression", properties };
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
@@ -402,13 +364,14 @@ export function buildBundle(
 
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
   // one `#thunk` per splice ahead of the environment.
-  const exprCallArgs = (
-    ref: AstScript,
+  const exprCallArgs = async (
+    ref: ClientScript,
     params: ReadonlySet<string>,
-  ): ES.Expression[] => {
+  ): Promise<ES.Expression[]> => {
     const target = entryFor(ref);
     const parts: ES.Expression[] = [];
-    Object.values(ref.splices).forEach(({ value: arg }, index) => {
+    const splices = Object.values(ref.metadata.splices);
+    for (const [index, { value: arg }] of splices.entries()) {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.
@@ -419,48 +382,77 @@ export function buildBundle(
       const forwarded = forwarding(arg, passed);
       if (forwarded !== null) {
         parts.push(forwarded);
-        return;
+        continue;
       }
       if (passed.length === 0) {
-        parts.push(thunk(render(arg, params)));
-        return;
+        parts.push(thunk(await render(arg, params)));
+        continue;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
       parts.push(
         arrow(
           passed.map((key) => binding(names, displayName(key))),
-          render(arg, inner),
+          await render(arg, inner),
         ),
       );
-    });
+    }
     for (const key of target.captures) {
       parts.push(capExpr(key, params));
     }
     return parts;
   };
 
-  // Renders an inline element, each prop an expression in the enclosing
-  // entry's scope.
-  const renderElement = (
-    element: AstElement,
+  // A tag. A component runs on the host and what it drew stands where the tag
+  // stood; an element is its own name, each prop an expression in the
+  // enclosing entry's scope.
+  //
+  // A prop that is `undefined` is left out, as JSX and TypeScript's optional
+  // props read it: a component forwarding an optional prop it wasn't given
+  // writes nothing.
+  const renderJsx = async (
+    jsx: JsxElement,
     params: ReadonlySet<string>,
-  ): ES.Expression => {
+  ): Promise<ES.Expression> => {
+    const type = jsx.type;
+    if (typeof type !== "string") {
+      const drawn = await expandJsxElement(jsx, type);
+      // A script is what runs on the client; an element it drew instead has no
+      // setup of its own to guard. An arrow over nothing, called with no props:
+      // `comp` is what calls a drawing untracked.
+      return isClientScript(drawn)
+        ? jsxComponent(names, thunk(await render(drawn, params)), [], null)
+        : render(drawn, params);
+    }
     const written: [string, ES.Expression][] = [];
     let children: ES.Expression | null = null;
-    for (const [key, entry] of Object.entries(element.props)) {
-      const rendered = render(entry, params);
+    for (const [key, entry] of Object.entries(jsx.props)) {
+      if (entry === undefined) {
+        continue;
+      }
+      let rendered: ES.Expression;
+      try {
+        rendered = await render(entry as Spliceable, params);
+      } catch (cause) {
+        // A component runs while its props render, so what surfaces here may
+        // be the app's own failure rather than a value that cannot cross — and
+        // app code may throw anything, not only an error.
+        const said = cause instanceof Error ? cause.message : String(cause);
+        throw new Error(`In the \`${key}\` prop of <${type} />: ${said}`, {
+          cause,
+        });
+      }
       if (key === "children") {
         children = rendered;
         continue;
       }
       written.push([key, rendered]);
     }
-    return jsxElement(names, element.id, written, children);
+    return jsxElement(names, type, written, children);
   };
 
   // Nothing encloses the root, so nothing it holds can capture.
-  const root = render(ast);
+  const root = await render(value as Spliceable);
   // In table order, which is the order rendering first reached each script.
   const functions: (readonly [string, ES.ArrowFunctionExpression])[] = [];
   for (const script of scripts.keys()) {

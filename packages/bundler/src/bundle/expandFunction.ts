@@ -1,16 +1,21 @@
 import type { Client, Spliceable } from "@backtickjs/platform-sdk";
-import type { Ast, AstExpansion } from "./Ast.js";
 import { createHole } from "./holes.js";
-import { lowerSpliceable } from "./lowerSpliceable.js";
+
+// A host function, run against a hole per parameter: the parameter names, and
+// what it answered with the holes wherever they surfaced.
+export interface Expansion {
+  readonly params: readonly string[];
+  readonly returned: Spliceable;
+}
 
 // One expansion per function, ever: it only ever sees holes, so what it answers
 // with is a function of the function alone — however many calls name it, and
 // whichever arguments each of them writes.
-const expansionByFunction = new WeakMap<object, Promise<AstExpansion>>();
+const expansionByFunction = new WeakMap<object, Promise<Expansion>>();
 
 /**
  * A spliced host function, expanded: run once against one opaque hole per
- * parameter, and what it answered lowered with a reference to that hole
+ * parameter, and what it answered rendered with a reference to that hole
  * wherever one surfaced.
  *
  * The function itself never leaves the host. What crosses is what it answered,
@@ -22,7 +27,7 @@ const expansionByFunction = new WeakMap<object, Promise<AstExpansion>>();
  */
 export function expandFunction(
   value: (...args: Client<never>[]) => unknown,
-): Promise<AstExpansion> {
+): Promise<Expansion> {
   const shared = expansionByFunction.get(value);
   if (shared) {
     return shared;
@@ -34,11 +39,9 @@ export function expandFunction(
 
 async function buildExpansion(
   value: (...args: Client<never>[]) => unknown,
-): Promise<AstExpansion> {
+): Promise<Expansion> {
   const params = Array.from({ length: value.length }, (_, at) => `$${at}`);
   const holes = params.map(createHole);
   const returned = value(...holes) as Spliceable | Promise<Spliceable>;
-  const answered = returned instanceof Promise ? await returned : returned;
-  const body: Ast = await lowerSpliceable(answered);
-  return { kind: "AstExpansion", params, body };
+  return { params, returned: await returned };
 }

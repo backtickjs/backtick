@@ -1,4 +1,3 @@
-import { lowerSpliceable } from "./ast/lowerSpliceable.js";
 import type { Bundle } from "@backtickjs/platform-sdk";
 import { buildBundle } from "./bundle/buildBundle.js";
 import { printBundle } from "./print/printBundle.js";
@@ -55,7 +54,6 @@ export const bundler = {
     value: Spliceable<T>,
     features: ExperimentalFeatures,
   ): Promise<Bundle<T>> {
-    const ast = await lowerSpliceable(value);
-    return printBundle(buildBundle(ast, features));
+    return printBundle(await buildBundle(value, features));
   },
 };

@@ -1,27 +1,24 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
-import type { AstScript } from "../dist/ast/Ast.js";
+import { create } from "@backtickjs/client-script";
 
 // One script, `1`, written at 3:7 of a file hashing to `abc`.
-const script: AstScript = {
-  kind: "AstScript",
-  loc: { start: { line: 3, column: 7 }, end: { line: 3, column: 8 } },
-  fileHash: "abc",
-  splices: {},
-  captures: [],
-  expression: { type: "Literal", value: 1 },
-};
+const script = create(
+  { start: { line: 3, column: 7 }, end: { line: 3, column: 8 } },
+  { filePath: "a.tsx", fileHash: "abc", splices: {}, captures: [] },
+  () => ({ type: "Literal", value: 1 }),
+) as never;
 
-const labelsOf = (tree: ReturnType<typeof buildBundle>) =>
+const labelsOf = (tree: Awaited<ReturnType<typeof buildBundle>>) =>
   tree.functions.map(([label]) => label);
 
-test("labels an entry by its table position by default", () => {
-  assert.deepEqual(labelsOf(buildBundle(script)), ["0"]);
+test("labels an entry by its table position by default", async () => {
+  assert.deepEqual(labelsOf(await buildBundle(script)), ["0"]);
 });
 
-test("labels an entry by where its script was written on request", () => {
-  const located = buildBundle(script, { stableFunctionLabels: true });
+test("labels an entry by where its script was written on request", async () => {
+  const located = await buildBundle(script, { stableFunctionLabels: true });
   assert.deepEqual(labelsOf(located), ["abc:3:7"]);
   // The reference names the same thing, so a bundle reads on its own.
   const { root } = located;
