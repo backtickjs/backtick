@@ -11,7 +11,7 @@ import { children, drawn, fontSize } from "./dom.ts";
 async function OwnCounter() {
   return cs.create(
     "4rab33ccyjy9:12:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 12, column: 12 }, end: { line: 24, column: 3 } },
@@ -51,7 +51,7 @@ async function OwnCounter() {
                     start: { line: 13, column: 17 },
                     end: { line: 13, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

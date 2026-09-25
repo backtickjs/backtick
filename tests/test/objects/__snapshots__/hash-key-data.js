@@ -9,10 +9,7 @@ it("hashKeyData", async (t) => {
     "hashKeyData",
     cs.create(
       "m50lyvn0wkye:8:39",
-      {
-        splices: { $0splice0: { value: { "#call": "#f0" }, params: [] } },
-        captures: [],
-      },
+      { params: [{ kind: "splice", value: { "#call": "#f0" }, bindings: [] }] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 8, column: 42 }, end: { line: 8, column: 69 } },
@@ -20,7 +17,7 @@ it("hashKeyData", async (t) => {
         body: {
           type: "Splice",
           loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 69 } },
-          key: "$0splice0",
+          param: 0,
         },
         expression: true,
       }),

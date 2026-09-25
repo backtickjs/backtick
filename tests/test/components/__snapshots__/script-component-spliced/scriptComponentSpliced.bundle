@@ -1,0 +1,27 @@
+(($d) => {
+  const f1 = ($0, $1) => {
+    const Heading = $0();
+    return jsx("div", {
+      children: [
+        () =>
+          jsx($1(), {
+            title: "tag",
+          }),
+        () =>
+          jsx(Heading, {
+            title: "splice",
+          }),
+      ],
+    });
+  };
+  return f1(
+    () => ($0) =>
+      jsx("h2", {
+        children: () => $0.title,
+      }),
+    () => ($0) =>
+      jsx("h2", {
+        children: () => $0.title,
+      }),
+  );
+})([]);

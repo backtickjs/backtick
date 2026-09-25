@@ -13,11 +13,10 @@ it("splicedComparison", async (t) => {
     cs.create(
       "3jdm2y7f9tpf:15:4",
       {
-        splices: {
-          $low: { value: low, params: [] },
-          $high: { value: high, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: low, bindings: [] },
+          { kind: "splice", value: high, bindings: [] },
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -50,7 +49,7 @@ it("splicedComparison", async (t) => {
                   start: { line: 16, column: 13 },
                   end: { line: 16, column: 17 },
                 },
-                key: "$low",
+                param: 0,
               },
               right: {
                 type: "Splice",
@@ -58,7 +57,7 @@ it("splicedComparison", async (t) => {
                   start: { line: 16, column: 20 },
                   end: { line: 16, column: 25 },
                 },
-                key: "$high",
+                param: 1,
               },
             },
             kind: "init",
@@ -93,7 +92,7 @@ it("splicedComparison", async (t) => {
                   start: { line: 17, column: 14 },
                   end: { line: 17, column: 18 },
                 },
-                key: "$low",
+                param: 0,
               },
               right: {
                 type: "Splice",
@@ -101,7 +100,7 @@ it("splicedComparison", async (t) => {
                   start: { line: 17, column: 22 },
                   end: { line: 17, column: 27 },
                 },
-                key: "$high",
+                param: 1,
               },
             },
             kind: "init",
@@ -136,7 +135,7 @@ it("splicedComparison", async (t) => {
                   start: { line: 18, column: 12 },
                   end: { line: 18, column: 17 },
                 },
-                key: "$high",
+                param: 1,
               },
               right: {
                 type: "Splice",
@@ -144,7 +143,7 @@ it("splicedComparison", async (t) => {
                   start: { line: 18, column: 20 },
                   end: { line: 18, column: 24 },
                 },
-                key: "$low",
+                param: 0,
               },
             },
             kind: "init",
@@ -186,7 +185,7 @@ it("splicedComparison", async (t) => {
                     start: { line: 19, column: 15 },
                     end: { line: 19, column: 19 },
                   },
-                  key: "$low",
+                  param: 0,
                 },
                 right: {
                   type: "Splice",
@@ -194,7 +193,7 @@ it("splicedComparison", async (t) => {
                     start: { line: 19, column: 22 },
                     end: { line: 19, column: 27 },
                   },
-                  key: "$high",
+                  param: 1,
                 },
               },
               right: {
@@ -210,7 +209,7 @@ it("splicedComparison", async (t) => {
                     start: { line: 19, column: 31 },
                     end: { line: 19, column: 36 },
                   },
-                  key: "$high",
+                  param: 1,
                 },
                 right: {
                   type: "Splice",
@@ -218,7 +217,7 @@ it("splicedComparison", async (t) => {
                     start: { line: 19, column: 39 },
                     end: { line: 19, column: 43 },
                   },
-                  key: "$low",
+                  param: 0,
                 },
               },
             },

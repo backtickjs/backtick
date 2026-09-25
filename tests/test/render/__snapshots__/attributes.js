@@ -98,7 +98,7 @@ describe("a field's value", () => {
   async function Field() {
     return cs.create(
       "2pi9tt1octht0:111:11",
-      { splices: { $state: { value: state, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: state, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: {
@@ -141,7 +141,7 @@ describe("a field's value", () => {
                       start: { line: 112, column: 19 },
                       end: { line: 112, column: 25 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {
@@ -193,7 +193,7 @@ describe("a field's value", () => {
                       start: { line: 113, column: 19 },
                       end: { line: 113, column: 25 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {
@@ -746,7 +746,7 @@ describe("a field's value", () => {
   async function Clearable() {
     return cs.create(
       "2pi9tt1octht0:147:11",
-      { splices: { $state: { value: state, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: state, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: {
@@ -789,7 +789,7 @@ describe("a field's value", () => {
                       start: { line: 148, column: 20 },
                       end: { line: 148, column: 26 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {
@@ -850,7 +850,7 @@ describe("a field's value", () => {
                       start: { line: 149, column: 20 },
                       end: { line: 149, column: 26 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {

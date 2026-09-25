@@ -12,11 +12,10 @@ async function RemovableRows() {
   return cs.create(
     "1dh0kxf6cd5v6:12:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -57,7 +56,7 @@ async function RemovableRows() {
                     start: { line: 13, column: 16 },
                     end: { line: 13, column: 22 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -203,6 +202,7 @@ async function RemovableRows() {
                           end: { line: 17, column: 14 },
                         },
                         name: "For",
+                        param: 1,
                       },
                       attributes: [
                         {

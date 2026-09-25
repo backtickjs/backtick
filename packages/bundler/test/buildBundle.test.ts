@@ -6,7 +6,7 @@ import { create } from "@backtickjs/client-script";
 // One script, `1`, written at 3:7 of a file hashing to `abc`.
 const script = create(
   "abc:3:7",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({ type: "Literal", value: 1 }),
   "() => 1",
   "",

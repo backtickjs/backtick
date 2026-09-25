@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function ScriptRows() {
   const build = cs.create(
     "3f2468k5dp5lo:10:16",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 10, column: 19 }, end: { line: 12, column: 3 } },
@@ -67,7 +67,7 @@ async function ScriptRows() {
                         start: { line: 11, column: 20 },
                         end: { line: 11, column: 26 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -100,7 +100,7 @@ async function ScriptRows() {
   return _jsx("span", {
     style: cs.create(
       "3f2468k5dp5lo:16:13",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "Literal",
         loc: { start: { line: 16, column: 16 }, end: { line: 16, column: 33 } },
@@ -111,7 +111,7 @@ async function ScriptRows() {
     ),
     onclick: cs.create(
       "3f2468k5dp5lo:17:15",
-      { splices: { $build: { value: build, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: build, bindings: [] }] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 17, column: 18 }, end: { line: 20, column: 7 } },
@@ -158,7 +158,7 @@ async function ScriptRows() {
                         start: { line: 18, column: 20 },
                         end: { line: 18, column: 26 },
                       },
-                      key: "$build",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -312,7 +312,7 @@ async function ScriptRows() {
     ),
     children: cs.create(
       "3f2468k5dp5lo:22:7",
-      { splices: { $build: { value: build, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: build, bindings: [] }] },
       () => ({
         type: "CallExpression",
         loc: { start: { line: 22, column: 10 }, end: { line: 22, column: 35 } },
@@ -340,7 +340,7 @@ async function ScriptRows() {
                   start: { line: 22, column: 10 },
                   end: { line: 22, column: 16 },
                 },
-                key: "$build",
+                param: 0,
               },
               arguments: [
                 {

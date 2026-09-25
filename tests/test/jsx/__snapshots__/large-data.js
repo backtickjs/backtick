@@ -27,14 +27,14 @@ it("largeData", async (t) => {
       children: _jsx(For, {
         each: cs.create(
           "2tquu92zqyse3:37:17",
-          { splices: { $orders: { value: orders, params: [] } }, captures: [] },
+          { params: [{ kind: "splice", value: orders, bindings: [] }] },
           () => ({
             type: "Splice",
             loc: {
               start: { line: 37, column: 20 },
               end: { line: 37, column: 27 },
             },
-            key: "$orders",
+            param: 0,
           }),
           "$0 => $0()",
           '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"AAoCoB,MAAA,IAAO,CAAA"}',
@@ -42,14 +42,19 @@ it("largeData", async (t) => {
         children: cs.create(
           "2tquu92zqyse3:38:9",
           {
-            splices: {
-              $0splice0: {
+            params: [
+              {
+                kind: "splice",
                 value: _jsxs("div", {
                   children: [
                     _jsx("img", {
                       src: cs.create(
                         "2tquu92zqyse3:42:21",
-                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
+                        {
+                          params: [
+                            { kind: "capture", key: "order$2tquu92zqyse3$0" },
+                          ],
+                        },
                         () => ({
                           type: "BinaryExpression",
                           loc: {
@@ -116,7 +121,11 @@ it("largeData", async (t) => {
                     _jsx("span", {
                       children: cs.create(
                         "2tquu92zqyse3:45:21",
-                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
+                        {
+                          params: [
+                            { kind: "capture", key: "order$2tquu92zqyse3$0" },
+                          ],
+                        },
                         () => ({
                           type: "MemberExpression",
                           loc: {
@@ -167,7 +176,11 @@ it("largeData", async (t) => {
                     _jsx("span", {
                       children: cs.create(
                         "2tquu92zqyse3:46:21",
-                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
+                        {
+                          params: [
+                            { kind: "capture", key: "order$2tquu92zqyse3$0" },
+                          ],
+                        },
                         () => ({
                           type: "MemberExpression",
                           loc: {
@@ -218,7 +231,11 @@ it("largeData", async (t) => {
                     _jsx(For, {
                       each: cs.create(
                         "2tquu92zqyse3:47:25",
-                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
+                        {
+                          params: [
+                            { kind: "capture", key: "order$2tquu92zqyse3$0" },
+                          ],
+                        },
                         () => ({
                           type: "MemberExpression",
                           loc: {
@@ -251,14 +268,19 @@ it("largeData", async (t) => {
                       children: cs.create(
                         "2tquu92zqyse3:48:17",
                         {
-                          splices: {
-                            $0splice0: {
+                          params: [
+                            {
+                              kind: "splice",
                               value: _jsx("span", {
                                 children: cs.create(
                                   "2tquu92zqyse3:49:28",
                                   {
-                                    splices: {},
-                                    captures: ["item$2tquu92zqyse3$1"],
+                                    params: [
+                                      {
+                                        kind: "capture",
+                                        key: "item$2tquu92zqyse3$1",
+                                      },
+                                    ],
                                   },
                                   () => ({
                                     type: "BinaryExpression",
@@ -340,10 +362,9 @@ it("largeData", async (t) => {
                                   '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"AAgD+B,MAAA,EAAI,CAAC,GAAG,GAAG,IAAI,GAAG,EAAI,CAAC,GAAG,CAAA"}',
                                 ),
                               }),
-                              params: ["item$2tquu92zqyse3$1"],
+                              bindings: ["item$2tquu92zqyse3$1"],
                             },
-                          },
-                          captures: [],
+                          ],
                         },
                         () => ({
                           type: "ArrowFunctionExpression",
@@ -368,7 +389,7 @@ it("largeData", async (t) => {
                               start: { line: 49, column: 18 },
                               end: { line: 49, column: 68 },
                             },
-                            key: "$0splice0",
+                            param: 0,
                           },
                           expression: true,
                         }),
@@ -379,7 +400,11 @@ it("largeData", async (t) => {
                     _jsx("span", {
                       children: cs.create(
                         "2tquu92zqyse3:51:21",
-                        { splices: {}, captures: ["order$2tquu92zqyse3$0"] },
+                        {
+                          params: [
+                            { kind: "capture", key: "order$2tquu92zqyse3$0" },
+                          ],
+                        },
                         () => ({
                           type: "BinaryExpression",
                           loc: {
@@ -428,10 +453,9 @@ it("largeData", async (t) => {
                     }),
                   ],
                 }),
-                params: ["order$2tquu92zqyse3$0"],
+                bindings: ["order$2tquu92zqyse3$0"],
               },
-            },
-            captures: [],
+            ],
           },
           () => ({
             type: "ArrowFunctionExpression",
@@ -456,7 +480,7 @@ it("largeData", async (t) => {
                 start: { line: 39, column: 10 },
                 end: { line: 53, column: 12 },
               },
-              key: "$0splice0",
+              param: 0,
             },
             expression: true,
           }),

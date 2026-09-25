@@ -12,7 +12,7 @@ it("objectIndex", async (t) => {
     "objectIndex",
     cs.create(
       "o3ttyh4dq4dw:15:4",
-      { splices: { $rates: { value: rates, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: rates, bindings: [] }] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 15, column: 7 }, end: { line: 20, column: 5 } },
@@ -63,7 +63,7 @@ it("objectIndex", async (t) => {
                       start: { line: 16, column: 20 },
                       end: { line: 16, column: 26 },
                     },
-                    key: "$rates",
+                    param: 0,
                   },
                 },
               ],

@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 // @ts-expect-error: JSX element type 'Tag' does not have any construct or call signatures.
 const held = cs.create(
   "xwewmj2gozc5:6:13",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 6, column: 16 }, end: { line: 6, column: 40 } },

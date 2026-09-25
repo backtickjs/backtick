@@ -13,10 +13,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const HeldRow = async () => _jsx("span", { children: "x" });
 const heldElement = cs.create(
   "224cj4eht1o03:15:20",
-  {
-    splices: { $0splice0: { value: _jsx("div", {}), params: [] } },
-    captures: [],
-  },
+  { params: [{ kind: "splice", value: _jsx("div", {}), bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 15, column: 23 }, end: { line: 18, column: 1 } },
@@ -54,7 +51,7 @@ const heldElement = cs.create(
                   start: { line: 16, column: 15 },
                   end: { line: 16, column: 27 },
                 },
-                key: "$0splice0",
+                param: 0,
               },
             },
           ],
@@ -84,10 +81,7 @@ const heldElement = cs.create(
 );
 const heldComponent = cs.create(
   "224cj4eht1o03:20:22",
-  {
-    splices: { $0splice0: { value: _jsx(HeldRow, {}), params: [] } },
-    captures: [],
-  },
+  { params: [{ kind: "splice", value: _jsx(HeldRow, {}), bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 20, column: 25 }, end: { line: 23, column: 1 } },
@@ -125,7 +119,7 @@ const heldComponent = cs.create(
                   start: { line: 21, column: 15 },
                   end: { line: 21, column: 31 },
                 },
-                key: "$0splice0",
+                param: 0,
               },
             },
           ],
@@ -161,10 +155,7 @@ it("treeInVariable", async (t) => {
       children: [
         cs.create(
           "224cj4eht1o03:30:7",
-          {
-            splices: { $heldElement: { value: heldElement, params: [] } },
-            captures: [],
-          },
+          { params: [{ kind: "splice", value: heldElement, bindings: [] }] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -177,7 +168,7 @@ it("treeInVariable", async (t) => {
                 start: { line: 30, column: 10 },
                 end: { line: 30, column: 22 },
               },
-              key: "$heldElement",
+              param: 0,
             },
             arguments: [],
             optional: false,
@@ -187,10 +178,7 @@ it("treeInVariable", async (t) => {
         ),
         cs.create(
           "224cj4eht1o03:31:7",
-          {
-            splices: { $heldComponent: { value: heldComponent, params: [] } },
-            captures: [],
-          },
+          { params: [{ kind: "splice", value: heldComponent, bindings: [] }] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -203,7 +191,7 @@ it("treeInVariable", async (t) => {
                 start: { line: 31, column: 10 },
                 end: { line: 31, column: 24 },
               },
-              key: "$heldComponent",
+              param: 0,
             },
             arguments: [],
             optional: false,

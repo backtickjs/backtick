@@ -14,11 +14,10 @@ it("fetchRequests", async (t) => {
     cs.create(
       "32y7bkpf4sqjs:15:4",
       {
-        splices: {
-          $state: { value: state, params: [] },
-          $window: { value: window, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: state, bindings: [] },
+          { kind: "splice", value: window, bindings: [] },
+        ],
       },
       () => ({
         type: "ArrowFunctionExpression",
@@ -66,7 +65,7 @@ it("fetchRequests", async (t) => {
                         start: { line: 16, column: 19 },
                         end: { line: 16, column: 25 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -143,7 +142,7 @@ it("fetchRequests", async (t) => {
                                   start: { line: 18, column: 6 },
                                   end: { line: 18, column: 13 },
                                 },
-                                key: "$window",
+                                param: 1,
                               },
                               property: {
                                 type: "Identifier",
@@ -211,7 +210,7 @@ it("fetchRequests", async (t) => {
                                               start: { line: 20, column: 18 },
                                               end: { line: 20, column: 25 },
                                             },
-                                            key: "$window",
+                                            param: 1,
                                           },
                                           property: {
                                             type: "Identifier",
@@ -762,7 +761,7 @@ it("fetchRequests", async (t) => {
                               start: { line: 35, column: 6 },
                               end: { line: 35, column: 13 },
                             },
-                            key: "$window",
+                            param: 1,
                           },
                           property: {
                             type: "Identifier",

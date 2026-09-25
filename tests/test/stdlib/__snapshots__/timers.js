@@ -24,7 +24,7 @@ it("timers", async (t) => {
     "timers",
     cs.create(
       "18988aj10wskx:26:4",
-      { splices: { $window: { value: window, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: window, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 26, column: 7 }, end: { line: 31, column: 5 } },
@@ -64,7 +64,7 @@ it("timers", async (t) => {
                       start: { line: 27, column: 19 },
                       end: { line: 27, column: 26 },
                     },
-                    key: "$window",
+                    param: 0,
                   },
                   property: {
                     type: "Identifier",
@@ -121,7 +121,7 @@ it("timers", async (t) => {
                         start: { line: 28, column: 24 },
                         end: { line: 28, column: 31 },
                       },
-                      key: "$window",
+                      param: 0,
                     },
                     property: {
                       type: "Identifier",
@@ -225,7 +225,7 @@ it("timers", async (t) => {
                     start: { line: 30, column: 6 },
                     end: { line: 30, column: 13 },
                   },
-                  key: "$window",
+                  param: 0,
                 },
                 property: {
                   type: "Identifier",
@@ -257,7 +257,7 @@ it("timers", async (t) => {
                         start: { line: 30, column: 27 },
                         end: { line: 30, column: 34 },
                       },
-                      key: "$window",
+                      param: 0,
                     },
                     property: {
                       type: "Identifier",

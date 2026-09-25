@@ -6,11 +6,10 @@ async function Rows() {
   return cs.create(
     "1xb9ns0x2f3vb:18:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -51,7 +50,7 @@ async function Rows() {
                     start: { line: 19, column: 17 },
                     end: { line: 19, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -525,6 +524,7 @@ async function Rows() {
                           end: { line: 30, column: 14 },
                         },
                         name: "For",
+                        param: 1,
                       },
                       attributes: [
                         {

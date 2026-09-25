@@ -29,12 +29,15 @@ it("refuses a capture spliced where it is shadowed", async () => {
       cs.create(
         "1rcr3g75v4qq5:32:16",
         {
-          splices: {
-            $0splice0: {
+          params: [
+            {
+              kind: "splice",
               value: keep(
                 cs.create(
                   "1rcr3g75v4qq5:34:27",
-                  { splices: {}, captures: ["total$1rcr3g75v4qq5$0"] },
+                  {
+                    params: [{ kind: "capture", key: "total$1rcr3g75v4qq5$0" }],
+                  },
                   () => ({
                     type: "Identifier",
                     loc: {
@@ -48,11 +51,10 @@ it("refuses a capture spliced where it is shadowed", async () => {
                   '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAiC8B,MAAA,EAAK,CAAA"}',
                 ),
               ),
-              params: ["total$1rcr3g75v4qq5$0"],
+              bindings: ["total$1rcr3g75v4qq5$0"],
             },
-            $0splice1: { value: again(), params: [] },
-          },
-          captures: [],
+            { kind: "splice", value: again(), bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -124,7 +126,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                       start: { line: 34, column: 20 },
                       end: { line: 34, column: 38 },
                     },
-                    key: "$0splice0",
+                    param: 0,
                   },
                 },
               ],
@@ -215,7 +217,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                         start: { line: 37, column: 31 },
                         end: { line: 37, column: 41 },
                       },
-                      key: "$0splice1",
+                      param: 1,
                     },
                   },
                 },

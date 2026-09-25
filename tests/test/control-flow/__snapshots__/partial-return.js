@@ -8,7 +8,7 @@ it("partialReturnScript", async (t) => {
     "partialReturnScript",
     cs.create(
       "x79h35ggz599:10:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 15, column: 5 } },
@@ -117,7 +117,7 @@ it("partialReturnArrow", async (t) => {
     "partialReturnArrow",
     cs.create(
       "x79h35ggz599:23:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 23, column: 7 }, end: { line: 30, column: 5 } },

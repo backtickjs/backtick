@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // top for the nullable reads.
 const read = cs.create(
   "1pn78z89zmc5d:8:13",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 16 }, end: { line: 10, column: 1 } },
@@ -140,7 +140,7 @@ it("optionalProperty", async (t) => {
     "optionalProperty",
     cs.create(
       "1pn78z89zmc5d:16:4",
-      { splices: { $read: { value: read, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: read, bindings: [] }] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 16, column: 8 }, end: { line: 20, column: 5 } },
@@ -171,7 +171,7 @@ it("optionalProperty", async (t) => {
                   start: { line: 17, column: 15 },
                   end: { line: 17, column: 20 },
                 },
-                key: "$read",
+                param: 0,
               },
               arguments: [
                 {
@@ -299,7 +299,7 @@ it("optionalProperty", async (t) => {
                   start: { line: 18, column: 15 },
                   end: { line: 18, column: 20 },
                 },
-                key: "$read",
+                param: 0,
               },
               arguments: [
                 {
@@ -399,7 +399,7 @@ it("optionalProperty", async (t) => {
                   start: { line: 19, column: 15 },
                   end: { line: 19, column: 20 },
                 },
-                key: "$read",
+                param: 0,
               },
               arguments: [
                 {

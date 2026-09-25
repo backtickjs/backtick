@@ -5,11 +5,10 @@ function add(lhs, rhs) {
   return cs.create(
     "2rqwzcdfi281b:7:9",
     {
-      splices: {
-        $lhs: { value: lhs, params: [] },
-        $rhs: { value: rhs, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: lhs, bindings: [] },
+        { kind: "splice", value: rhs, bindings: [] },
+      ],
     },
     () => ({
       type: "BinaryExpression",
@@ -18,12 +17,12 @@ function add(lhs, rhs) {
       left: {
         type: "Splice",
         loc: { start: { line: 7, column: 12 }, end: { line: 7, column: 16 } },
-        key: "$lhs",
+        param: 0,
       },
       right: {
         type: "Splice",
         loc: { start: { line: 7, column: 19 }, end: { line: 7, column: 23 } },
-        key: "$rhs",
+        param: 1,
       },
     }),
     "($0, $1) => $0() + $1()",
@@ -37,12 +36,13 @@ it("deepNestedScripts", async (t) => {
     cs.create(
       "2rqwzcdfi281b:11:45",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: add(
               cs.create(
                 "2rqwzcdfi281b:11:54",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -56,7 +56,7 @@ it("deepNestedScripts", async (t) => {
               ),
               cs.create(
                 "2rqwzcdfi281b:11:61",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -69,15 +69,14 @@ it("deepNestedScripts", async (t) => {
                 '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgE,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "Splice",
         loc: { start: { line: 11, column: 48 }, end: { line: 11, column: 68 } },
-        key: "$0splice0",
+        param: 0,
       }),
       "$0 => $0()",
       '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgD,MAAA,IAAC,CAAA"}',

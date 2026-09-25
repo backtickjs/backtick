@@ -10,7 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Items() {
   return cs.create(
     "3crw4saj766qu:11:9",
-    { splices: { $For: { value: For, params: [] } }, captures: [] },
+    { params: [{ kind: "tag", value: For }] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 11, column: 12 }, end: { line: 13, column: 8 } },
@@ -24,6 +24,7 @@ async function Items() {
             end: { line: 11, column: 16 },
           },
           name: "For",
+          param: 0,
         },
         attributes: [
           {
@@ -216,11 +217,10 @@ const total = await bundler.run(41);
 const evaluated = cs.create(
   "3crw4saj766qu:19:18",
   {
-    splices: {
-      $items: { value: items, params: [] },
-      $total: { value: total, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: items, bindings: [] },
+      { kind: "splice", value: total, bindings: [] },
+    ],
   },
   () => ({
     type: "JSXElement",
@@ -267,7 +267,7 @@ const evaluated = cs.create(
                 start: { line: 20, column: 8 },
                 end: { line: 20, column: 14 },
               },
-              key: "$items",
+              param: 0,
             },
           ],
           optional: false,
@@ -331,7 +331,7 @@ const evaluated = cs.create(
                       start: { line: 21, column: 11 },
                       end: { line: 21, column: 17 },
                     },
-                    key: "$total",
+                    param: 1,
                   },
                 ],
                 optional: false,

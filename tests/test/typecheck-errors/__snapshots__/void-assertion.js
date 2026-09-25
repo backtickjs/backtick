@@ -4,7 +4,7 @@ const one = 1;
 // assert a value to `void`.
 const asserted = cs.create(
   "3mgqg6v7h2mni:7:17",
-  { splices: { $one: { value: one, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: one, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 7, column: 20 }, end: { line: 11, column: 1 } },
@@ -35,7 +35,7 @@ const asserted = cs.create(
                 start: { line: 9, column: 12 },
                 end: { line: 9, column: 16 },
               },
-              key: "$one",
+              param: 0,
             },
           },
         ],

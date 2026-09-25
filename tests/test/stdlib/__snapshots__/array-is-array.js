@@ -9,7 +9,7 @@ it("arrayIsArray", async (t) => {
     "arrayIsArray",
     cs.create(
       "311zee6pw10s9:11:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 19, column: 5 } },

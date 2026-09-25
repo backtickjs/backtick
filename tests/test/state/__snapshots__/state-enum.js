@@ -16,7 +16,7 @@ var Color;
 })(Color || (Color = {}));
 const colorName = cs.create(
   "30a9wee2eidm4:18:48",
-  { splices: { $0splice0: { value: Color.Blue, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: Color.Blue, bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 18, column: 51 }, end: { line: 20, column: 1 } },
@@ -66,7 +66,7 @@ const colorName = cs.create(
                   start: { line: 19, column: 15 },
                   end: { line: 19, column: 28 },
                 },
-                key: "$0splice0",
+                param: 0,
               },
             },
             consequent: {
@@ -98,13 +98,12 @@ async function Swatch() {
   return cs.create(
     "30a9wee2eidm4:23:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $0splice0: { value: Color.Red, params: [] },
-        $0splice1: { value: Color.Blue, params: [] },
-        $colorName: { value: colorName, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "splice", value: Color.Red, bindings: [] },
+        { kind: "splice", value: Color.Blue, bindings: [] },
+        { kind: "splice", value: colorName, bindings: [] },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -145,7 +144,7 @@ async function Swatch() {
                     start: { line: 24, column: 17 },
                     end: { line: 24, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -154,7 +153,7 @@ async function Swatch() {
                       start: { line: 24, column: 24 },
                       end: { line: 24, column: 36 },
                     },
-                    key: "$0splice0",
+                    param: 1,
                   },
                 ],
                 optional: false,
@@ -252,7 +251,7 @@ async function Swatch() {
                               start: { line: 26, column: 36 },
                               end: { line: 26, column: 49 },
                             },
-                            key: "$0splice1",
+                            param: 2,
                           },
                         ],
                         optional: false,
@@ -292,7 +291,7 @@ async function Swatch() {
                       start: { line: 27, column: 9 },
                       end: { line: 27, column: 19 },
                     },
-                    key: "$colorName",
+                    param: 3,
                   },
                   arguments: [
                     {

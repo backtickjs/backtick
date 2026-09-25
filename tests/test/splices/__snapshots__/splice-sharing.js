@@ -5,11 +5,10 @@ function add(lhs, rhs) {
   return cs.create(
     "3cex0hh0qp6qz:6:9",
     {
-      splices: {
-        $lhs: { value: lhs, params: [] },
-        $rhs: { value: rhs, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: lhs, bindings: [] },
+        { kind: "splice", value: rhs, bindings: [] },
+      ],
     },
     () => ({
       type: "BinaryExpression",
@@ -18,12 +17,12 @@ function add(lhs, rhs) {
       left: {
         type: "Splice",
         loc: { start: { line: 6, column: 12 }, end: { line: 6, column: 16 } },
-        key: "$lhs",
+        param: 0,
       },
       right: {
         type: "Splice",
         loc: { start: { line: 6, column: 19 }, end: { line: 6, column: 23 } },
-        key: "$rhs",
+        param: 1,
       },
     }),
     "($0, $1) => $0() + $1()",
@@ -37,12 +36,13 @@ it("spliceSharing", async (t) => {
     cs.create(
       "3cex0hh0qp6qz:13:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: add(
               cs.create(
                 "3cex0hh0qp6qz:14:15",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -56,7 +56,7 @@ it("spliceSharing", async (t) => {
               ),
               cs.create(
                 "3cex0hh0qp6qz:14:22",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -69,13 +69,14 @@ it("spliceSharing", async (t) => {
                 '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAayB,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: add(
               cs.create(
                 "3cex0hh0qp6qz:15:15",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -89,7 +90,7 @@ it("spliceSharing", async (t) => {
               ),
               cs.create(
                 "3cex0hh0qp6qz:15:22",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -102,10 +103,9 @@ it("spliceSharing", async (t) => {
                 '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"AAcyB,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -131,7 +131,7 @@ it("spliceSharing", async (t) => {
                 start: { line: 14, column: 9 },
                 end: { line: 14, column: 29 },
               },
-              key: "$0splice0",
+              param: 0,
             },
             kind: "init",
             computed: false,
@@ -158,7 +158,7 @@ it("spliceSharing", async (t) => {
                 start: { line: 15, column: 9 },
                 end: { line: 15, column: 29 },
               },
-              key: "$0splice1",
+              param: 1,
             },
             kind: "init",
             computed: false,

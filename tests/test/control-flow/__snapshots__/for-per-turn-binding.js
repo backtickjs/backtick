@@ -10,7 +10,7 @@ it("forPerTurnBinding", async (t) => {
     "forPerTurnBinding",
     cs.create(
       "2s6lhx8c4k6ow:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 18, column: 5 } },

@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 const lying = cs.create(
   "2qb372nig0g3z:11:35",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 38 }, end: { line: 11, column: 48 } },
@@ -24,7 +24,7 @@ it("undefinedReturn", async (t) => {
     "undefinedReturn",
     cs.create(
       "2qb372nig0g3z:17:4",
-      { splices: { $lying: { value: lying, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: lying, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 21, column: 5 } },
@@ -58,7 +58,7 @@ it("undefinedReturn", async (t) => {
                     start: { line: 18, column: 21 },
                     end: { line: 18, column: 27 },
                   },
-                  key: "$lying",
+                  param: 0,
                 },
               },
             ],
@@ -98,7 +98,7 @@ it("undefinedReturn", async (t) => {
                       start: { line: 19, column: 21 },
                       end: { line: 19, column: 27 },
                     },
-                    key: "$lying",
+                    param: 0,
                   },
                   arguments: [],
                   optional: false,

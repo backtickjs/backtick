@@ -21,11 +21,10 @@ const ReadingRow = async ({ id, selected }) =>
         style: cs.create(
           "asvx80rnl1z5:27:13",
           {
-            splices: {
-              $selected: { value: selected, params: [] },
-              $id: { value: id, params: [] },
-            },
-            captures: [],
+            params: [
+              { kind: "splice", value: selected, bindings: [] },
+              { kind: "splice", value: id, bindings: [] },
+            ],
           },
           () => ({
             type: "BinaryExpression",
@@ -80,7 +79,7 @@ const ReadingRow = async ({ id, selected }) =>
                           start: { line: 27, column: 33 },
                           end: { line: 27, column: 42 },
                         },
-                        key: "$selected",
+                        param: 0,
                       },
                       property: {
                         type: "Identifier",
@@ -102,7 +101,7 @@ const ReadingRow = async ({ id, selected }) =>
                       start: { line: 27, column: 53 },
                       end: { line: 27, column: 56 },
                     },
-                    key: "$id",
+                    param: 1,
                   },
                 },
                 consequent: {
@@ -138,11 +137,10 @@ const ReadingRow = async ({ id, selected }) =>
         children: cs.create(
           "asvx80rnl1z5:29:7",
           {
-            splices: {
-              $id: { value: id, params: [] },
-              $selected: { value: selected, params: [] },
-            },
-            captures: [],
+            params: [
+              { kind: "splice", value: id, bindings: [] },
+              { kind: "splice", value: selected, bindings: [] },
+            ],
           },
           () => ({
             type: "BinaryExpression",
@@ -179,7 +177,7 @@ const ReadingRow = async ({ id, selected }) =>
                     start: { line: 29, column: 19 },
                     end: { line: 29, column: 22 },
                   },
-                  key: "$id",
+                  param: 0,
                 },
               },
               right: {
@@ -209,7 +207,7 @@ const ReadingRow = async ({ id, selected }) =>
                     start: { line: 29, column: 34 },
                     end: { line: 29, column: 43 },
                   },
-                  key: "$selected",
+                  param: 1,
                 },
                 property: {
                   type: "Identifier",
@@ -233,15 +231,15 @@ const ReadingRow = async ({ id, selected }) =>
       cs.create(
         "asvx80rnl1z5:31:5",
         {
-          splices: {
-            $selected: { value: selected, params: [] },
-            $id: { value: id, params: [] },
-            $0splice0: {
+          params: [
+            { kind: "splice", value: selected, bindings: [] },
+            { kind: "splice", value: id, bindings: [] },
+            {
+              kind: "splice",
               value: _jsx("span", { children: "marker" }),
-              params: [],
+              bindings: [],
             },
-          },
-          captures: [],
+          ],
         },
         () => ({
           type: "ConditionalExpression",
@@ -274,7 +272,7 @@ const ReadingRow = async ({ id, selected }) =>
                     start: { line: 31, column: 8 },
                     end: { line: 31, column: 17 },
                   },
-                  key: "$selected",
+                  param: 0,
                 },
                 property: {
                   type: "Identifier",
@@ -296,7 +294,7 @@ const ReadingRow = async ({ id, selected }) =>
                 start: { line: 31, column: 28 },
                 end: { line: 31, column: 31 },
               },
-              key: "$id",
+              param: 1,
             },
           },
           consequent: {
@@ -305,7 +303,7 @@ const ReadingRow = async ({ id, selected }) =>
               start: { line: 31, column: 34 },
               end: { line: 31, column: 58 },
             },
-            key: "$0splice0",
+            param: 2,
           },
           alternate: {
             type: "Literal",
@@ -325,11 +323,10 @@ async function ReadingPanel() {
   return cs.create(
     "asvx80rnl1z5:36:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $ReadingRow: { value: ReadingRow, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: ReadingRow },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -370,7 +367,7 @@ async function ReadingPanel() {
                     start: { line: 37, column: 21 },
                     end: { line: 37, column: 27 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -577,6 +574,7 @@ async function ReadingPanel() {
                       end: { line: 41, column: 19 },
                     },
                     name: "ReadingRow",
+                    param: 1,
                   },
                   attributes: [
                     {
@@ -674,6 +672,7 @@ async function ReadingPanel() {
                       end: { line: 42, column: 19 },
                     },
                     name: "ReadingRow",
+                    param: 1,
                   },
                   attributes: [
                     {

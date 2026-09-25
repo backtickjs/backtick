@@ -12,7 +12,7 @@ it("negation", async (t) => {
     "negation",
     cs.create(
       "3ucocch4sr77y:14:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },
@@ -195,7 +195,7 @@ it("negativeZero", async (t) => {
     "negativeZero",
     cs.create(
       "3ucocch4sr77y:27:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 27, column: 7 }, end: { line: 29, column: 5 } },

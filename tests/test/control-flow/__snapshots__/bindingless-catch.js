@@ -9,7 +9,7 @@ it("bindinglessCatch", async (t) => {
     "bindinglessCatch",
     cs.create(
       "1lr2275tf95wm:11:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 17, column: 5 } },

@@ -11,14 +11,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 const scriptBoundTagCapture = cs.create(
   "h5jruxcfnavr:11:30",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $0splice0: {
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      {
+        kind: "splice",
         value: cs.create(
           "h5jruxcfnavr:17:9",
           {
-            splices: {},
-            captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
+            params: [
+              { kind: "capture", key: "Badge$h5jruxcfnavr$1" },
+              { kind: "capture", key: "count$h5jruxcfnavr$0" },
+            ],
           },
           () => ({
             type: "JSXElement",
@@ -108,19 +111,23 @@ const scriptBoundTagCapture = cs.create(
           "($0, $1) => <$0 n={$1.get()}/>",
           '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAgBY,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,GAAG,EAAE,CAAC,EAAG,CAAA"}',
         ),
-        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
+        bindings: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
-      $0splice1: {
+      {
+        kind: "splice",
         value: cs.create(
           "h5jruxcfnavr:19:10",
           {
-            splices: {
-              $0splice0: {
+            params: [
+              {
+                kind: "splice",
                 value: cs.create(
                   "h5jruxcfnavr:21:19",
                   {
-                    splices: {},
-                    captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
+                    params: [
+                      { kind: "capture", key: "Badge$h5jruxcfnavr$1" },
+                      { kind: "capture", key: "count$h5jruxcfnavr$0" },
+                    ],
                   },
                   () => ({
                     type: "JSXElement",
@@ -226,10 +233,11 @@ const scriptBoundTagCapture = cs.create(
                   "($0, $1) => <$0 n={$1.get() + 100}/>",
                   '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAoBsB,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,GAAG,EAAE,GAAG,GAAG,CAAC,EAAG,CAAA"}',
                 ),
-                params: [],
+                bindings: [],
               },
-            },
-            captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
+              { kind: "capture", key: "Badge$h5jruxcfnavr$1" },
+              { kind: "capture", key: "count$h5jruxcfnavr$0" },
+            ],
           },
           () => ({
             type: "BlockStatement",
@@ -284,7 +292,7 @@ const scriptBoundTagCapture = cs.create(
                     start: { line: 21, column: 17 },
                     end: { line: 21, column: 55 },
                   },
-                  key: "$0splice0",
+                  param: 0,
                 },
               },
             ],
@@ -292,15 +300,18 @@ const scriptBoundTagCapture = cs.create(
           "($0, $1, $2) => {\n    const skipped = 10;\n    return $0($1, $2);\n}",
           '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAkBa;IACH,MAAM,OAAO,GAAG,EAAE,CAAC;IACnB,OAAO,UAAC,CAAsC;AAChD,CAAC,CAAA"}',
         ),
-        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
+        bindings: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
-      $0splice2: {
+      {
+        kind: "splice",
         value: _jsx("section", {
           children: cs.create(
             "h5jruxcfnavr:24:20",
             {
-              splices: {},
-              captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
+              params: [
+                { kind: "capture", key: "Badge$h5jruxcfnavr$1" },
+                { kind: "capture", key: "count$h5jruxcfnavr$0" },
+              ],
             },
             () => ({
               type: "JSXElement",
@@ -407,14 +418,18 @@ const scriptBoundTagCapture = cs.create(
             '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAuBuB,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,EAAG,CAAA"}',
           ),
         }),
-        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
+        bindings: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
-      $0splice3: {
+      {
+        kind: "splice",
         value: cs.create(
           "h5jruxcfnavr:26:10",
           {
-            splices: { $For: { value: For, params: [] } },
-            captures: ["Badge$h5jruxcfnavr$1", "count$h5jruxcfnavr$0"],
+            params: [
+              { kind: "tag", value: For },
+              { kind: "capture", key: "Badge$h5jruxcfnavr$1" },
+              { kind: "capture", key: "count$h5jruxcfnavr$0" },
+            ],
           },
           () => ({
             type: "JSXElement",
@@ -435,6 +450,7 @@ const scriptBoundTagCapture = cs.create(
                   end: { line: 26, column: 17 },
                 },
                 name: "For",
+                param: 0,
               },
               attributes: [
                 {
@@ -654,10 +670,9 @@ const scriptBoundTagCapture = cs.create(
           "($0, $1, $2) => <$0 each={[1, 2]}>\n          {(m) => <$1 n={m * $2.get()}/>}\n        </$0>",
           '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAyBa,gBAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACrB;UAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,EAAK,CAAC,GAAG,EAAE,CAAC,EAAG,CAC/C;QAAA,EAAE,EAAG,CAAC,CAAA"}',
         ),
-        params: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
+        bindings: ["count$h5jruxcfnavr$0", "Badge$h5jruxcfnavr$1"],
       },
-    },
-    captures: [],
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -695,7 +710,7 @@ const scriptBoundTagCapture = cs.create(
                   start: { line: 12, column: 16 },
                   end: { line: 12, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -892,7 +907,7 @@ const scriptBoundTagCapture = cs.create(
                   start: { line: 17, column: 7 },
                   end: { line: 17, column: 39 },
                 },
-                key: "$0splice0",
+                param: 1,
               },
             },
             {
@@ -916,7 +931,7 @@ const scriptBoundTagCapture = cs.create(
                   start: { line: 19, column: 8 },
                   end: { line: 22, column: 11 },
                 },
-                key: "$0splice1",
+                param: 2,
               },
             },
             {
@@ -940,7 +955,7 @@ const scriptBoundTagCapture = cs.create(
                   start: { line: 24, column: 7 },
                   end: { line: 24, column: 69 },
                 },
-                key: "$0splice2",
+                param: 3,
               },
             },
             {
@@ -964,7 +979,7 @@ const scriptBoundTagCapture = cs.create(
                   start: { line: 26, column: 8 },
                   end: { line: 28, column: 16 },
                 },
-                key: "$0splice3",
+                param: 4,
               },
             },
             {

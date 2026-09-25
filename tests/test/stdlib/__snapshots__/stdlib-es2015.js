@@ -10,7 +10,7 @@ it("stdlibEs2015", async (t) => {
     "stdlibEs2015",
     cs.create(
       "s2q4937fji9l:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 27, column: 5 } },

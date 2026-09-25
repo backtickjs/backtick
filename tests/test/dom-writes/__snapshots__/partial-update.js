@@ -12,11 +12,10 @@ async function Labels() {
   return cs.create(
     "2tlccuo5yvrz7:12:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -185,7 +184,7 @@ async function Labels() {
                                 start: { line: 15, column: 13 },
                                 end: { line: 15, column: 19 },
                               },
-                              key: "$state",
+                              param: 0,
                             },
                             arguments: [
                               {
@@ -783,6 +782,7 @@ async function Labels() {
                               end: { line: 28, column: 16 },
                             },
                             name: "For",
+                            param: 1,
                           },
                           attributes: [
                             {

@@ -11,7 +11,7 @@ it("indexPastEnd", async (t) => {
     "indexPastEnd",
     cs.create(
       "3821as72cvvin:13:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 16, column: 5 } },

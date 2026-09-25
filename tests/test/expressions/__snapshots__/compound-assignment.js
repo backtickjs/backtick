@@ -10,7 +10,7 @@ it("compoundAssignment", async (t) => {
     "compoundAssignment",
     cs.create(
       "23v4b48bi2lxc:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 26, column: 5 } },

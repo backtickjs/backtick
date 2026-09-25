@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const make = (f) =>
   cs.create(
     "3vatah1osfcoe:7:2",
-    { splices: { $f: { value: f, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: f, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 7, column: 5 }, end: { line: 9, column: 3 } },
@@ -36,7 +36,7 @@ const make = (f) =>
                     start: { line: 8, column: 11 },
                     end: { line: 8, column: 13 },
                   },
-                  key: "$f",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -72,7 +72,7 @@ const make = (f) =>
   );
 const wrapped = cs.create(
   "3vatah1osfcoe:11:16",
-  { splices: { $state: { value: state, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: state, bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 19 }, end: { line: 11, column: 48 } },
@@ -90,7 +90,7 @@ const wrapped = cs.create(
       callee: {
         type: "Splice",
         loc: { start: { line: 11, column: 34 }, end: { line: 11, column: 40 } },
-        key: "$state",
+        param: 0,
       },
       arguments: [
         {
@@ -133,11 +133,10 @@ it("builtinHoleSharing", async (t) => {
     cs.create(
       "3vatah1osfcoe:17:4",
       {
-        splices: {
-          $0splice0: { value: make(state), params: [] },
-          $0splice1: { value: make(wrapped), params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: make(state), bindings: [] },
+          { kind: "splice", value: make(wrapped), bindings: [] },
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -162,7 +161,7 @@ it("builtinHoleSharing", async (t) => {
                   start: { line: 18, column: 13 },
                   end: { line: 18, column: 27 },
                 },
-                key: "$0splice0",
+                param: 0,
               },
               right: {
                 type: "Splice",
@@ -170,7 +169,7 @@ it("builtinHoleSharing", async (t) => {
                   start: { line: 18, column: 30 },
                   end: { line: 18, column: 46 },
                 },
-                key: "$0splice1",
+                param: 1,
               },
             },
           },

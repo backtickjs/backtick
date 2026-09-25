@@ -9,7 +9,7 @@ it("reservedKeyScript", async (t) => {
     "reservedKeyScript",
     cs.create(
       "28g09xvp2p10c:8:45",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 8, column: 49 }, end: { line: 8, column: 65 } },

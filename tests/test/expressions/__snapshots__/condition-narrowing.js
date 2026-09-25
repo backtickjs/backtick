@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const flags = {
   strict: cs.create(
     "g29mnwu0pbnr:8:24",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "Literal",
       loc: { start: { line: 8, column: 27 }, end: { line: 8, column: 31 } },
@@ -19,7 +19,7 @@ const flags = {
 };
 const label = cs.create(
   "g29mnwu0pbnr:10:71",
-  { splices: { $0splice0: { value: flags.strict, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: flags.strict, bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 10, column: 74 }, end: { line: 21, column: 1 } },
@@ -162,7 +162,7 @@ const label = cs.create(
                   start: { line: 17, column: 6 },
                   end: { line: 17, column: 21 },
                 },
-                key: "$0splice0",
+                param: 0,
               },
               right: {
                 type: "BinaryExpression",
@@ -341,7 +341,7 @@ it("conditionNarrowing", async (t) => {
     "conditionNarrowing",
     cs.create(
       "g29mnwu0pbnr:27:4",
-      { splices: { $label: { value: label, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: label, bindings: [] }] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 27, column: 8 }, end: { line: 32, column: 5 } },
@@ -372,7 +372,7 @@ it("conditionNarrowing", async (t) => {
                   start: { line: 28, column: 15 },
                   end: { line: 28, column: 21 },
                 },
-                key: "$label",
+                param: 0,
               },
               arguments: [
                 {
@@ -425,7 +425,7 @@ it("conditionNarrowing", async (t) => {
                   start: { line: 29, column: 12 },
                   end: { line: 29, column: 18 },
                 },
-                key: "$label",
+                param: 0,
               },
               arguments: [
                 {
@@ -478,7 +478,7 @@ it("conditionNarrowing", async (t) => {
                   start: { line: 30, column: 13 },
                   end: { line: 30, column: 19 },
                 },
-                key: "$label",
+                param: 0,
               },
               arguments: [
                 {
@@ -531,7 +531,7 @@ it("conditionNarrowing", async (t) => {
                   start: { line: 31, column: 13 },
                   end: { line: 31, column: 19 },
                 },
-                key: "$label",
+                param: 0,
               },
               arguments: [
                 {

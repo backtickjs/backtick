@@ -4,10 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function outerBase(inner) {
   return cs.create(
     "8up2nb5o0inm:7:9",
-    {
-      splices: { $0splice0: { value: middleBase(inner), params: [] } },
-      captures: [],
-    },
+    { params: [{ kind: "splice", value: middleBase(inner), bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 7, column: 12 }, end: { line: 10, column: 3 } },
@@ -68,7 +65,7 @@ function outerBase(inner) {
                 start: { line: 9, column: 18 },
                 end: { line: 9, column: 38 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         },
@@ -81,7 +78,7 @@ function outerBase(inner) {
 function middleBase(inner) {
   return cs.create(
     "8up2nb5o0inm:14:9",
-    { splices: { $inner: { value: inner, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: inner, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 14, column: 12 }, end: { line: 17, column: 3 } },
@@ -148,7 +145,7 @@ function middleBase(inner) {
                 start: { line: 16, column: 18 },
                 end: { line: 16, column: 24 },
               },
-              key: "$inner",
+              param: 0,
             },
           },
         },
@@ -169,12 +166,13 @@ it("deepShadowing", async (t) => {
     cs.create(
       "8up2nb5o0inm:28:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: outerBase(
               cs.create(
                 "8up2nb5o0inm:30:25",
-                { splices: {}, captures: ["base$8up2nb5o0inm$2"] },
+                { params: [{ kind: "capture", key: "base$8up2nb5o0inm$2" }] },
                 () => ({
                   type: "Identifier",
                   loc: {
@@ -188,10 +186,9 @@ it("deepShadowing", async (t) => {
                 '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"AA6B4B,MAAA,EAAI,CAAA"}',
               ),
             ),
-            params: ["base$8up2nb5o0inm$2"],
+            bindings: ["base$8up2nb5o0inm$2"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -243,7 +240,7 @@ it("deepShadowing", async (t) => {
                 start: { line: 30, column: 13 },
                 end: { line: 30, column: 35 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

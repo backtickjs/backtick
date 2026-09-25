@@ -9,10 +9,7 @@ it("reservedKey", async (t) => {
     "reservedKey",
     cs.create(
       "2a27difszbs8:8:39",
-      {
-        splices: { $0splice0: { value: { "#": "value" }, params: [] } },
-        captures: [],
-      },
+      { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 8, column: 42 }, end: { line: 8, column: 67 } },
@@ -20,7 +17,7 @@ it("reservedKey", async (t) => {
         body: {
           type: "Splice",
           loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 67 } },
-          key: "$0splice0",
+          param: 0,
         },
         expression: true,
       }),

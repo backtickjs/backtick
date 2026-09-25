@@ -10,7 +10,7 @@ it("math", async (t) => {
     "math",
     cs.create(
       "1j4uiiyebx17u:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 36, column: 5 } },

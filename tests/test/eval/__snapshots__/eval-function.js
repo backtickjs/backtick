@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const greet = await bundler.run(
   cs.create(
     "1061hn7xljcgj:8:32",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 8, column: 35 }, end: { line: 8, column: 68 } },
@@ -44,7 +44,7 @@ const greet = await bundler.run(
 const badge = await bundler.run(
   cs.create(
     "1061hn7xljcgj:11:2",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 11, column: 5 }, end: { line: 11, column: 66 } },
@@ -159,11 +159,10 @@ it("evalFunction", async (t) => {
     cs.create(
       "1061hn7xljcgj:18:4",
       {
-        splices: {
-          $greet: { value: greet, params: [] },
-          $badge: { value: badge, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: greet, bindings: [] },
+          { kind: "splice", value: badge, bindings: [] },
+        ],
       },
       () => ({
         type: "JSXElement",
@@ -252,7 +251,7 @@ it("evalFunction", async (t) => {
                           start: { line: 19, column: 18 },
                           end: { line: 19, column: 24 },
                         },
-                        key: "$greet",
+                        param: 0,
                       },
                     ],
                     optional: false,
@@ -329,7 +328,7 @@ it("evalFunction", async (t) => {
                       start: { line: 20, column: 12 },
                       end: { line: 20, column: 18 },
                     },
-                    key: "$badge",
+                    param: 1,
                   },
                 ],
                 optional: false,

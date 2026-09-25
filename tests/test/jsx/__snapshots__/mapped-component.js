@@ -25,14 +25,14 @@ it("mappedComponent", async (t) => {
       children: _jsx(For, {
         each: cs.create(
           "8u2ewdd1g2mk:26:17",
-          { splices: { $rows: { value: rows, params: [] } }, captures: [] },
+          { params: [{ kind: "splice", value: rows, bindings: [] }] },
           () => ({
             type: "Splice",
             loc: {
               start: { line: 26, column: 20 },
               end: { line: 26, column: 25 },
             },
-            key: "$rows",
+            param: 0,
           }),
           "$0 => $0()",
           '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"AAyBoB,MAAA,IAAK,CAAA"}',
@@ -40,12 +40,15 @@ it("mappedComponent", async (t) => {
         children: cs.create(
           "8u2ewdd1g2mk:27:9",
           {
-            splices: {
-              $0splice0: {
+            params: [
+              {
+                kind: "splice",
                 value: _jsx("span", {
                   children: cs.create(
                     "8u2ewdd1g2mk:27:39",
-                    { splices: {}, captures: ["row$8u2ewdd1g2mk$0"] },
+                    {
+                      params: [{ kind: "capture", key: "row$8u2ewdd1g2mk$0" }],
+                    },
                     () => ({
                       type: "BinaryExpression",
                       loc: {
@@ -75,10 +78,9 @@ it("mappedComponent", async (t) => {
                     '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"AA0B0C,MAAA,MAAM,GAAG,EAAG,CAAA"}',
                   ),
                 }),
-                params: ["row$8u2ewdd1g2mk$0"],
+                bindings: ["row$8u2ewdd1g2mk$0"],
               },
-            },
-            captures: [],
+            ],
           },
           () => ({
             type: "ArrowFunctionExpression",
@@ -103,7 +105,7 @@ it("mappedComponent", async (t) => {
                 start: { line: 27, column: 29 },
                 end: { line: 27, column: 65 },
               },
-              key: "$0splice0",
+              param: 0,
             },
             expression: true,
           }),

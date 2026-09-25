@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // accepted here.
 const greet = cs.create(
   "1i6s8vesd5nbi:8:14",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 17 }, end: { line: 10, column: 1 } },
@@ -88,7 +88,7 @@ const greet = cs.create(
 // undefined`.
 const double = cs.create(
   "1i6s8vesd5nbi:14:15",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 14, column: 18 }, end: { line: 14, column: 25 } },
@@ -105,7 +105,7 @@ const double = cs.create(
 );
 const callIfGiven = cs.create(
   "1i6s8vesd5nbi:16:20",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 16, column: 23 }, end: { line: 18, column: 1 } },
@@ -183,12 +183,11 @@ it("optionalParameter", async (t) => {
     cs.create(
       "1i6s8vesd5nbi:24:4",
       {
-        splices: {
-          $greet: { value: greet, params: [] },
-          $callIfGiven: { value: callIfGiven, params: [] },
-          $double: { value: double, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: greet, bindings: [] },
+          { kind: "splice", value: callIfGiven, bindings: [] },
+          { kind: "splice", value: double, bindings: [] },
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -220,7 +219,7 @@ it("optionalParameter", async (t) => {
                   start: { line: 25, column: 13 },
                   end: { line: 25, column: 19 },
                 },
-                key: "$greet",
+                param: 0,
               },
               arguments: [
                 {
@@ -265,7 +264,7 @@ it("optionalParameter", async (t) => {
                   start: { line: 26, column: 16 },
                   end: { line: 26, column: 22 },
                 },
-                key: "$greet",
+                param: 0,
               },
               arguments: [
                 {
@@ -310,7 +309,7 @@ it("optionalParameter", async (t) => {
                   start: { line: 27, column: 15 },
                   end: { line: 27, column: 21 },
                 },
-                key: "$greet",
+                param: 0,
               },
               arguments: [],
               optional: false,
@@ -346,7 +345,7 @@ it("optionalParameter", async (t) => {
                   start: { line: 28, column: 16 },
                   end: { line: 28, column: 28 },
                 },
-                key: "$callIfGiven",
+                param: 1,
               },
               arguments: [
                 {
@@ -355,7 +354,7 @@ it("optionalParameter", async (t) => {
                     start: { line: 28, column: 29 },
                     end: { line: 28, column: 36 },
                   },
-                  key: "$double",
+                  param: 2,
                 },
               ],
               optional: false,
@@ -391,7 +390,7 @@ it("optionalParameter", async (t) => {
                   start: { line: 29, column: 16 },
                   end: { line: 29, column: 28 },
                 },
-                key: "$callIfGiven",
+                param: 1,
               },
               arguments: [
                 {
@@ -436,7 +435,7 @@ it("optionalParameter", async (t) => {
                   start: { line: 30, column: 23 },
                   end: { line: 30, column: 35 },
                 },
-                key: "$callIfGiven",
+                param: 1,
               },
               arguments: [],
               optional: false,

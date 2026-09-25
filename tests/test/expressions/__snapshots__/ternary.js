@@ -5,7 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `if`'s.
 const pick = cs.create(
   "uekyc2sf8mzc:7:13",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 7, column: 16 }, end: { line: 9, column: 1 } },
@@ -103,7 +103,7 @@ it("ternary", async (t) => {
     "ternary",
     cs.create(
       "uekyc2sf8mzc:15:4",
-      { splices: { $pick: { value: pick, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: pick, bindings: [] }] },
       () => ({
         type: "ObjectExpression",
         loc: { start: { line: 15, column: 8 }, end: { line: 18, column: 5 } },
@@ -134,7 +134,7 @@ it("ternary", async (t) => {
                   start: { line: 16, column: 14 },
                   end: { line: 16, column: 19 },
                 },
-                key: "$pick",
+                param: 0,
               },
               arguments: [
                 {
@@ -179,7 +179,7 @@ it("ternary", async (t) => {
                   start: { line: 17, column: 15 },
                   end: { line: 17, column: 20 },
                 },
-                key: "$pick",
+                param: 0,
               },
               arguments: [
                 {

@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Checked() {
   return cs.create(
     "1o8290c5hfi65:9:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 9, column: 12 }, end: { line: 37, column: 3 } },

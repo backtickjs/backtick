@@ -23,12 +23,11 @@ describe("computed", () => {
       cs.create(
         "3vk1ks01z9ilh:25:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $computed: { value: computed, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: computed, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -69,7 +68,7 @@ describe("computed", () => {
                         start: { line: 26, column: 18 },
                         end: { line: 26, column: 24 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -121,7 +120,7 @@ describe("computed", () => {
                         start: { line: 27, column: 24 },
                         end: { line: 27, column: 33 },
                       },
-                      key: "$computed",
+                      param: 1,
                     },
                     arguments: [
                       {
@@ -168,7 +167,7 @@ describe("computed", () => {
                                         start: { line: 28, column: 10 },
                                         end: { line: 28, column: 17 },
                                       },
-                                      key: "$window",
+                                      param: 2,
                                     },
                                     property: {
                                       type: "Identifier",
@@ -840,12 +839,11 @@ describe("computed", () => {
       cs.create(
         "3vk1ks01z9ilh:51:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $computed: { value: computed, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: computed, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -886,7 +884,7 @@ describe("computed", () => {
                         start: { line: 52, column: 18 },
                         end: { line: 52, column: 24 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -938,7 +936,7 @@ describe("computed", () => {
                         start: { line: 53, column: 22 },
                         end: { line: 53, column: 31 },
                       },
-                      key: "$computed",
+                      param: 1,
                     },
                     arguments: [
                       {
@@ -1074,7 +1072,7 @@ describe("computed", () => {
                                     start: { line: 55, column: 10 },
                                     end: { line: 55, column: 17 },
                                   },
-                                  key: "$window",
+                                  param: 2,
                                 },
                                 property: {
                                   type: "Identifier",

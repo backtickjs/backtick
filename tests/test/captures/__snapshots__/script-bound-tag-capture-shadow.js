@@ -14,12 +14,13 @@ function labelled(label) {
   return cs.create(
     "2mv5sg07ackia:16:9",
     {
-      splices: {
-        $label: { value: label, params: [] },
-        $0splice0: {
+      params: [
+        { kind: "splice", value: label, bindings: [] },
+        {
+          kind: "splice",
           value: cs.create(
             "2mv5sg07ackia:18:17",
-            { splices: {}, captures: ["Card$2mv5sg07ackia$0"] },
+            { params: [{ kind: "capture", key: "Card$2mv5sg07ackia$0" }] },
             () => ({
               type: "JSXElement",
               loc: {
@@ -81,10 +82,9 @@ function labelled(label) {
             "$0 => <$0 n={1}/>",
             '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAiBoB,MAAA,CAAC,EAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAA"}',
           ),
-          params: ["Card$2mv5sg07ackia$0"],
+          bindings: ["Card$2mv5sg07ackia$0"],
         },
-      },
-      captures: [],
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -173,7 +173,7 @@ function labelled(label) {
                             start: { line: 17, column: 47 },
                             end: { line: 17, column: 53 },
                           },
-                          key: "$label",
+                          param: 0,
                         },
                         right: {
                           type: "MemberExpression",
@@ -267,7 +267,7 @@ function labelled(label) {
                     start: { line: 18, column: 15 },
                     end: { line: 18, column: 36 },
                   },
-                  key: "$0splice0",
+                  param: 1,
                 },
               },
             ],
@@ -301,12 +301,13 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     cs.create(
       "2mv5sg07ackia:26:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: labelled(
               cs.create(
                 "2mv5sg07ackia:28:18",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -319,13 +320,14 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                 '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA2BqB,MAAA,GAAG,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: labelled(
               cs.create(
                 "2mv5sg07ackia:29:18",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -338,11 +340,10 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                 '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA4BqB,MAAA,GAAG,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $Card: { value: Card, params: [] },
-        },
-        captures: [],
+          { kind: "tag", value: Card },
+        ],
       },
       () => ({
         type: "JSXElement",
@@ -393,6 +394,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                   end: { line: 27, column: 11 },
                 },
                 name: "Card",
+                param: 2,
               },
               attributes: [
                 {
@@ -445,7 +447,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                 start: { line: 28, column: 7 },
                 end: { line: 28, column: 27 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
           {
@@ -469,7 +471,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
                 start: { line: 29, column: 7 },
                 end: { line: 29, column: 27 },
               },
-              key: "$0splice1",
+              param: 1,
             },
           },
           {
@@ -512,7 +514,7 @@ it("scriptBoundTagScope", async (t) => {
     "scriptBoundTagScope",
     cs.create(
       "2mv5sg07ackia:41:4",
-      { splices: { $Card: { value: Card, params: [] } }, captures: [] },
+      { params: [{ kind: "tag", value: Card }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 41, column: 7 }, end: { line: 57, column: 5 } },
@@ -804,6 +806,7 @@ it("scriptBoundTagScope", async (t) => {
                         end: { line: 51, column: 15 },
                       },
                       name: "Card",
+                      param: 0,
                     },
                     attributes: [
                       {

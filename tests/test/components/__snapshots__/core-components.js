@@ -13,7 +13,7 @@ it("coreComponents", async (t) => {
           style: "font-size: 12px",
           onclick: cs.create(
             "1dqg1yg283gkk:10:45",
-            { splices: {}, captures: [] },
+            { params: [] },
             () => ({
               type: "ArrowFunctionExpression",
               loc: {

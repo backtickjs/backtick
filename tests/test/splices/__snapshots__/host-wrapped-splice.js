@@ -16,19 +16,25 @@ function wrap(start) {
   return cs.create(
     "zqr0jsdf8ub6:17:9",
     {
-      splices: {
-        $start: { value: start, params: [] },
-        $0splice0: {
+      params: [
+        { kind: "splice", value: start, bindings: [] },
+        {
+          kind: "splice",
           value: foo(
             cs.create(
               "zqr0jsdf8ub6:19:17",
               {
-                splices: {
-                  $0splice0: {
+                params: [
+                  {
+                    kind: "splice",
                     value: same(
                       cs.create(
                         "zqr0jsdf8ub6:21:29",
-                        { splices: {}, captures: ["outer$zqr0jsdf8ub6$0"] },
+                        {
+                          params: [
+                            { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
+                          ],
+                        },
                         () => ({
                           type: "Identifier",
                           loc: {
@@ -42,10 +48,10 @@ function wrap(start) {
                         '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAoBgC,MAAA,EAAK,CAAA"}',
                       ),
                     ),
-                    params: [],
+                    bindings: [],
                   },
-                },
-                captures: ["outer$zqr0jsdf8ub6$0"],
+                  { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
+                ],
               },
               () => ({
                 type: "BlockStatement",
@@ -116,7 +122,7 @@ function wrap(start) {
                           start: { line: 21, column: 22 },
                           end: { line: 21, column: 40 },
                         },
-                        key: "$0splice0",
+                        param: 0,
                       },
                     },
                   },
@@ -126,10 +132,9 @@ function wrap(start) {
               '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAkBoB;IACd,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAkB;AACrC,CAAC,CAAA"}',
             ),
           ),
-          params: ["outer$zqr0jsdf8ub6$0"],
+          bindings: ["outer$zqr0jsdf8ub6$0"],
         },
-      },
-      captures: [],
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -164,7 +169,7 @@ function wrap(start) {
                   start: { line: 18, column: 18 },
                   end: { line: 18, column: 24 },
                 },
-                key: "$start",
+                param: 0,
               },
             },
           ],
@@ -178,7 +183,7 @@ function wrap(start) {
               start: { line: 19, column: 11 },
               end: { line: 22, column: 8 },
             },
-            key: "$0splice0",
+            param: 1,
           },
         },
       ],
@@ -190,7 +195,7 @@ function wrap(start) {
 function foo(start) {
   return cs.create(
     "zqr0jsdf8ub6:27:9",
-    { splices: { $start: { value: start, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: start, bindings: [] }] },
     () => ({
       type: "BinaryExpression",
       loc: { start: { line: 27, column: 12 }, end: { line: 27, column: 22 } },
@@ -198,7 +203,7 @@ function foo(start) {
       left: {
         type: "Splice",
         loc: { start: { line: 27, column: 12 }, end: { line: 27, column: 18 } },
-        key: "$start",
+        param: 0,
       },
       right: {
         type: "Literal",
@@ -220,12 +225,13 @@ it("hostWrappedSplice", async (t) => {
     cs.create(
       "zqr0jsdf8ub6:38:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: wrap(
               cs.create(
                 "zqr0jsdf8ub6:38:14",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -238,13 +244,14 @@ it("hostWrappedSplice", async (t) => {
                 '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCiB,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: wrap(
               cs.create(
                 "zqr0jsdf8ub6:38:31",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -257,10 +264,9 @@ it("hostWrappedSplice", async (t) => {
                 '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCkC,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BinaryExpression",
@@ -272,7 +278,7 @@ it("hostWrappedSplice", async (t) => {
             start: { line: 38, column: 7 },
             end: { line: 38, column: 21 },
           },
-          key: "$0splice0",
+          param: 0,
         },
         right: {
           type: "Splice",
@@ -280,7 +286,7 @@ it("hostWrappedSplice", async (t) => {
             start: { line: 38, column: 24 },
             end: { line: 38, column: 38 },
           },
-          key: "$0splice1",
+          param: 1,
         },
       }),
       "($0, $1) => $0() + $1()",

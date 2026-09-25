@@ -27,10 +27,7 @@ describe("an undefined prop", () => {
         label: "focused",
         ref: cs.create(
           "28eplibrubp3g:34:33",
-          {
-            splices: { $onMount: { value: onMount, params: [] } },
-            captures: [],
-          },
+          { params: [{ kind: "splice", value: onMount, bindings: [] }] },
           () => ({
             type: "ArrowFunctionExpression",
             loc: {
@@ -60,7 +57,7 @@ describe("an undefined prop", () => {
                   start: { line: 34, column: 44 },
                   end: { line: 34, column: 52 },
                 },
-                key: "$onMount",
+                param: 0,
               },
               arguments: [
                 {

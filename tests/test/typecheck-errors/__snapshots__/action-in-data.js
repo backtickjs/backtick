@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // splice rejects it.
 const action = cs.create(
   "23leqy4opwht7:5:15",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 18 }, end: { line: 7, column: 1 } },
@@ -46,7 +46,7 @@ const action = cs.create(
 );
 export const listed = cs.create(
   "23leqy4opwht7:9:22",
-  { splices: { $0splice0: { value: [action], params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: [action], bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 9, column: 25 }, end: { line: 13, column: 1 } },
@@ -77,7 +77,7 @@ export const listed = cs.create(
                 start: { line: 11, column: 15 },
                 end: { line: 11, column: 26 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],
@@ -101,10 +101,7 @@ export const listed = cs.create(
 );
 export const keyed = cs.create(
   "23leqy4opwht7:15:21",
-  {
-    splices: { $0splice0: { value: { press: action }, params: [] } },
-    captures: [],
-  },
+  { params: [{ kind: "splice", value: { press: action }, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 15, column: 24 }, end: { line: 19, column: 1 } },
@@ -135,7 +132,7 @@ export const keyed = cs.create(
                 start: { line: 17, column: 14 },
                 end: { line: 17, column: 34 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

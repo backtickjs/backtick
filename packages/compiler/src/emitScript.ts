@@ -1,12 +1,12 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
-import type { BindingResolution, ResolvedSplice } from "./resolveBindings.js";
+import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 
 /** A script as the client runs it, and where its code came from. */
 export interface EmittedScript {
   /**
    * The script as its entry in a bundle: `($0, …) => body`, a parameter per
-   * splice and then per capture, in `metadata`'s orders. Types are gone and
+   * entry of `metadata.params`. Types are gone and
    * everything else, JSX included, is as the script wrote it, for the
    * framework's own compiler to read next.
    */
@@ -37,40 +37,44 @@ function sourceName(key: string): string {
 /**
  * The edits a script's text needs, by the host-file offset of what each
  * replaces: every splice it reads, host tags among them, and every binding it
- * captures. What is a reference was decided by `resolveBindings`; this only
- * numbers the parameters, in `splices`' order and then `captures`'.
+ * captures. What is a reference, and each parameter's number, was decided by
+ * `resolveBindings`.
  */
 export function scriptEdits(
   script: ClientScript,
   bindings: BindingResolution,
-  splices: ReadonlyMap<string, ResolvedSplice>,
-  captures: readonly string[],
+  params: readonly ResolvedParam[],
 ): Map<number, Edit> {
-  const captureIndex = new Map(
-    captures.map((key, index) => [key, splices.size + index]),
+  const captureParam = new Map(
+    params.flatMap((param, index) =>
+      param.kind === "capture" ? [[param.key, index] as const] : [],
+    ),
   );
+  const captures = [...captureParam.keys()];
   const read = (key: string): string => {
-    const index = captureIndex.get(key);
+    const index = captureParam.get(key);
     return index === undefined ? sourceName(key) : `$${index}`;
   };
 
   const edits = new Map<number, Edit>();
   const at = (identifier: ts.Identifier) =>
     script.toSourceRange(identifier).start;
-  let param = 0;
-  for (const splice of splices.values()) {
+  params.forEach((param, index) => {
+    if (param.kind === "capture") {
+      return;
+    }
     // A tag is handed over as the value it names: it has no bindings to hand
     // its hole, and JSX cannot write a call where a tag goes.
-    const edit: Edit = splice.tag
-      ? { param }
-      : { param, args: [...splice.params, ...captures].map(read) };
-    for (const ref of splice.refs) {
+    const edit: Edit =
+      param.kind === "tag"
+        ? { param: index }
+        : { param: index, args: [...param.bindings, ...captures].map(read) };
+    for (const ref of param.refs) {
       edits.set(at(ref), edit);
     }
-    param++;
-  }
+  });
   for (const [identifier, key] of bindings) {
-    const index = captureIndex.get(key);
+    const index = captureParam.get(key);
     if (
       index !== undefined &&
       identifier.getSourceFile() === script.fileWithPlaceholders

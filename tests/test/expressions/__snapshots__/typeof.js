@@ -9,7 +9,7 @@ it("typeofTable", async (t) => {
     "typeofTable",
     cs.create(
       "1jdryi4es12ui:11:4",
-      { splices: { $state: { value: state, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: state, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 25, column: 5 } },
@@ -49,7 +49,7 @@ it("typeofTable", async (t) => {
                       start: { line: 12, column: 20 },
                       end: { line: 12, column: 26 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {
@@ -341,7 +341,7 @@ it("typeofNarrows", async (t) => {
     "typeofNarrows",
     cs.create(
       "1jdryi4es12ui:34:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 34, column: 7 }, end: { line: 38, column: 5 } },

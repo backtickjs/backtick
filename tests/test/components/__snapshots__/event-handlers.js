@@ -13,7 +13,7 @@ it("eventHandlers", async (t) => {
     "eventHandlers",
     cs.create(
       "33yj2jmcqxbde:15:4",
-      { splices: { $state: { value: state, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: state, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 15, column: 7 }, end: { line: 36, column: 5 } },
@@ -53,7 +53,7 @@ it("eventHandlers", async (t) => {
                       start: { line: 16, column: 19 },
                       end: { line: 16, column: 25 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {

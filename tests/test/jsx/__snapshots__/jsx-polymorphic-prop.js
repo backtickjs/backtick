@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function make(n) {
   return cs.create(
     "9toqhs9m4ayz:9:9",
-    { splices: { $n: { value: n, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: n, bindings: [] }] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 20 } },
@@ -16,7 +16,7 @@ function make(n) {
       body: {
         type: "Splice",
         loc: { start: { line: 9, column: 18 }, end: { line: 9, column: 20 } },
-        key: "$n",
+        param: 0,
       },
       expression: true,
     }),

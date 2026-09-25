@@ -14,8 +14,9 @@ it("awaitInSplice", async (t) => {
     cs.create(
       "1bxbldnw0mfci:13:41",
       {
-        splices: { $0splice0: { value: await fetchGreeting(), params: [] } },
-        captures: [],
+        params: [
+          { kind: "splice", value: await fetchGreeting(), bindings: [] },
+        ],
       },
       () => ({
         type: "BinaryExpression",
@@ -27,7 +28,7 @@ it("awaitInSplice", async (t) => {
             start: { line: 13, column: 44 },
             end: { line: 13, column: 68 },
           },
-          key: "$0splice0",
+          param: 0,
         },
         right: {
           type: "Literal",

@@ -6,7 +6,7 @@ import { cs, state } from "@backtickjs/core";
 async function Panel() {
   return cs.create(
     "1y32lnuqpkjgj:7:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 7, column: 12 }, end: { line: 10, column: 3 } },
@@ -43,7 +43,7 @@ async function Panel() {
                     start: { line: 8, column: 14 },
                     end: { line: 8, column: 20 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

@@ -9,14 +9,11 @@ it("reservedKeySplice", async (t) => {
     "reservedKeySplice",
     cs.create(
       "2dryy6my0qubf:8:45",
-      {
-        splices: { $0splice0: { value: { "#": "value" }, params: [] } },
-        captures: [],
-      },
+      { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
       () => ({
         type: "Splice",
         loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 67 } },
-        key: "$0splice0",
+        param: 0,
       }),
       "$0 => $0()",
       '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["reserved-key-splice.test.tsx"],"names":[],"mappings":"AAOgD,MAAA,IAAC,CAAA"}',

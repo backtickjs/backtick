@@ -9,7 +9,7 @@ it("arrayMembers", async (t) => {
     "arrayMembers",
     cs.create(
       "139y0n5fpgs82:11:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 25, column: 5 } },

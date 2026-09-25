@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Encoded() {
   return cs.create(
     "3tch88psikxru:10:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 21, column: 3 } },

@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // untyped caller can; the lowering backstop refuses to ship it.
 const action = cs.create(
   "wf1ni21eddai:5:15",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 18 }, end: { line: 7, column: 1 } },
@@ -46,7 +46,7 @@ const action = cs.create(
 );
 export default cs.create(
   "wf1ni21eddai:9:15",
-  { splices: { $0splice0: { value: [action], params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: [action], bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 9, column: 18 }, end: { line: 13, column: 1 } },
@@ -77,7 +77,7 @@ export default cs.create(
                 start: { line: 11, column: 15 },
                 end: { line: 11, column: 26 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

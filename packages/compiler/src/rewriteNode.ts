@@ -80,10 +80,21 @@ const globals = new Set([
 export interface RewriteState {
   script: ClientScript;
   bindings: BindingResolution;
+  params: ReadonlyMap<string, number>;
   errors: Map<ts.Node, string>;
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
+}
+
+// A splice's parameter. `resolveBindings` gave every splice one, so a miss is
+// the two walks disagreeing about what is a splice.
+function paramOf(state: RewriteState, key: string): number {
+  const param = state.params.get(key);
+  if (param === undefined) {
+    throw new Error(`\`${key}\` has no parameter.`);
+  }
+  return param;
 }
 
 // Built here because a property access and a method call reach the same read
@@ -708,7 +719,7 @@ function rewriteNodeImpl(
         runtime: {
           type: "Splice",
           loc: loc(node),
-          key: splice.key,
+          param: paramOf(state, splice.key),
         } satisfies Splice,
       };
     }
@@ -1070,7 +1081,9 @@ function rewriteNodeImpl(
                           opening.tagName as ts.Identifier,
                         ),
                       }
-                    : {}),
+                    : isComponentTag(tagName) && !isFragment
+                      ? { param: paramOf(state, tagName) }
+                      : {}),
                 },
                 attributes: attributes.map((attribute) => attribute.runtime),
                 selfClosing: !ts.isJsxElement(node),

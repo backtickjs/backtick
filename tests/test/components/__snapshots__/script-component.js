@@ -24,11 +24,10 @@ it("scriptComponent", async (t) => {
     cs.create(
       "2ielk672xspgd:27:4",
       {
-        splices: {
-          $Card: { value: Card, params: [] },
-          $Badge: { value: Badge, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "tag", value: Card },
+          { kind: "tag", value: Badge },
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -92,6 +91,7 @@ it("scriptComponent", async (t) => {
                         end: { line: 30, column: 15 },
                       },
                       name: "Card",
+                      param: 0,
                     },
                     attributes: [
                       {
@@ -151,6 +151,7 @@ it("scriptComponent", async (t) => {
                         end: { line: 31, column: 16 },
                       },
                       name: "Badge",
+                      param: 1,
                     },
                     attributes: [],
                     selfClosing: true,

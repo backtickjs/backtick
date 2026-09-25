@@ -11,11 +11,10 @@ import { namespaced } from "./dom.ts";
 const svgNamespaceLater = cs.create(
   "1brs7fv34j5dk:12:26",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $For: { value: For, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "tag", value: For },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -53,7 +52,7 @@ const svgNamespaceLater = cs.create(
                   start: { line: 13, column: 13 },
                   end: { line: 13, column: 19 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -111,7 +110,7 @@ const svgNamespaceLater = cs.create(
                   start: { line: 14, column: 16 },
                   end: { line: 14, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -240,6 +239,7 @@ const svgNamespaceLater = cs.create(
                         end: { line: 19, column: 12 },
                       },
                       name: "For",
+                      param: 1,
                     },
                     attributes: [
                       {

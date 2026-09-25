@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Panel(props) {
   return cs.create(
     "2nh9ihk3oddge:12:9",
-    { splices: { $props: { value: props, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: props, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 12, column: 12 }, end: { line: 20, column: 3 } },
@@ -270,7 +270,7 @@ async function Panel(props) {
                       start: { line: 17, column: 9 },
                       end: { line: 17, column: 15 },
                     },
-                    key: "$props",
+                    param: 0,
                   },
                   property: {
                     type: "Identifier",
@@ -324,14 +324,17 @@ async function Panel(props) {
 const scriptBoundTagCarried = cs.create(
   "2nh9ihk3oddge:27:30",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $0splice0: {
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      {
+        kind: "splice",
         value: cs.create(
           "2nh9ihk3oddge:40:12",
           {
-            splices: {},
-            captures: ["Badge$2nh9ihk3oddge$3", "count$2nh9ihk3oddge$2"],
+            params: [
+              { kind: "capture", key: "Badge$2nh9ihk3oddge$3" },
+              { kind: "capture", key: "count$2nh9ihk3oddge$2" },
+            ],
           },
           () => ({
             type: "JSXElement",
@@ -554,11 +557,10 @@ const scriptBoundTagCarried = cs.create(
           '($0, $1) => <$0 n={$1.get()}>\n            <u>{"kid " + $1.get()}</u>\n          </$0>',
           '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAuCe,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,GAAG,EAAE,CAAC,CACzB;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,EAAK,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,CAC9B;UAAA,EAAE,EAAK,CAAC,CAAA"}',
         ),
-        params: ["count$2nh9ihk3oddge$2", "Badge$2nh9ihk3oddge$3"],
+        bindings: ["count$2nh9ihk3oddge$2", "Badge$2nh9ihk3oddge$3"],
       },
-      $Panel: { value: Panel, params: [] },
-    },
-    captures: [],
+      { kind: "tag", value: Panel },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -596,7 +598,7 @@ const scriptBoundTagCarried = cs.create(
                   start: { line: 28, column: 16 },
                   end: { line: 28, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -860,6 +862,7 @@ const scriptBoundTagCarried = cs.create(
                     end: { line: 38, column: 12 },
                   },
                   name: "Panel",
+                  param: 2,
                 },
                 attributes: [
                   {
@@ -888,7 +891,7 @@ const scriptBoundTagCarried = cs.create(
                           start: { line: 40, column: 10 },
                           end: { line: 42, column: 20 },
                         },
-                        key: "$0splice0",
+                        param: 1,
                       },
                     },
                   },

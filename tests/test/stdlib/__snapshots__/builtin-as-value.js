@@ -14,7 +14,7 @@ it("builtinAsValue", async (t) => {
     "builtinAsValue",
     cs.create(
       "1n7k5w76rpsyr:16:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 16, column: 7 }, end: { line: 20, column: 5 } },

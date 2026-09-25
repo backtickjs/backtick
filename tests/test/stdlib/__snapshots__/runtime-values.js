@@ -8,11 +8,10 @@ it("runtimeValues", async (t) => {
     cs.create(
       "1eany0mypxz6m:9:4",
       {
-        splices: {
-          $0splice0: { value: [1, "two", true, null], params: [] },
-          $0splice1: { value: { k: 3 }, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: [1, "two", true, null], bindings: [] },
+          { kind: "splice", value: { k: 3 }, bindings: [] },
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -38,7 +37,7 @@ it("runtimeValues", async (t) => {
                 start: { line: 10, column: 12 },
                 end: { line: 10, column: 37 },
               },
-              key: "$0splice0",
+              param: 0,
             },
             kind: "init",
             computed: false,
@@ -65,7 +64,7 @@ it("runtimeValues", async (t) => {
                 start: { line: 11, column: 11 },
                 end: { line: 11, column: 22 },
               },
-              key: "$0splice1",
+              param: 1,
             },
             kind: "init",
             computed: false,

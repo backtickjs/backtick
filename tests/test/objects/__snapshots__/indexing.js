@@ -9,7 +9,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           "kbv0csg6ys4h:10:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -70,7 +70,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           "kbv0csg6ys4h:11:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -107,7 +107,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           "kbv0csg6ys4h:13:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -171,7 +171,7 @@ describe("a read by key", () => {
       await evaluate(
         cs.create(
           "kbv0csg6ys4h:14:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "MemberExpression",
             loc: {
@@ -209,7 +209,7 @@ describe("a read by key", () => {
     const reads = [
       cs.create(
         "kbv0csg6ys4h:20:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -265,7 +265,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         "kbv0csg6ys4h:21:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -321,7 +321,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         "kbv0csg6ys4h:22:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -386,7 +386,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         "kbv0csg6ys4h:23:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "MemberExpression",
           loc: {
@@ -445,7 +445,7 @@ describe("a read by key", () => {
       ),
       cs.create(
         "kbv0csg6ys4h:24:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "MemberExpression",
           loc: {

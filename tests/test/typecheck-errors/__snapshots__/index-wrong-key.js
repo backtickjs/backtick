@@ -5,7 +5,7 @@ import { cs } from "@backtickjs/core";
 const point = { x: 1, y: 2 };
 export default cs.create(
   "2p3ed6wqsrdah:8:15",
-  { splices: { $point: { value: point, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: point, bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 18 }, end: { line: 16, column: 1 } },
@@ -217,7 +217,7 @@ export default cs.create(
                     start: { line: 14, column: 16 },
                     end: { line: 14, column: 22 },
                   },
-                  key: "$point",
+                  param: 0,
                 },
                 property: {
                   type: "Identifier",

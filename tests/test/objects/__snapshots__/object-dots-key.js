@@ -10,7 +10,7 @@ it("objectDotsKey", async (t) => {
     "objectDotsKey",
     cs.create(
       "13e6vrhonm3wb:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 15, column: 5 } },

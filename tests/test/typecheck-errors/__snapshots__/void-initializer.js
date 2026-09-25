@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // variable — in a value script or an action.
 const ping = cs.create(
   "3ch7rgcn8bjeq:5:13",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 5, column: 16 }, end: { line: 8, column: 1 } },
@@ -78,7 +78,7 @@ const ping = cs.create(
 );
 const script = cs.create(
   "3ch7rgcn8bjeq:10:15",
-  { splices: { $ping: { value: ping, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: ping, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 10, column: 18 }, end: { line: 13, column: 1 } },
@@ -115,7 +115,7 @@ const script = cs.create(
                   start: { line: 11, column: 12 },
                   end: { line: 11, column: 17 },
                 },
-                key: "$ping",
+                param: 0,
               },
               arguments: [],
               optional: false,
@@ -142,7 +142,7 @@ const script = cs.create(
 );
 const action = cs.create(
   "3ch7rgcn8bjeq:15:15",
-  { splices: { $ping: { value: ping, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: ping, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 15, column: 18 }, end: { line: 17, column: 1 } },
@@ -179,7 +179,7 @@ const action = cs.create(
                   start: { line: 16, column: 12 },
                   end: { line: 16, column: 17 },
                 },
-                key: "$ping",
+                param: 0,
               },
               arguments: [],
               optional: false,
@@ -196,7 +196,7 @@ const action = cs.create(
 // the check sequences is shielded.
 const label = cs.create(
   "3ch7rgcn8bjeq:21:14",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 21, column: 17 }, end: { line: 23, column: 1 } },
@@ -237,7 +237,7 @@ const label = cs.create(
 );
 const wrongArgument = cs.create(
   "3ch7rgcn8bjeq:25:22",
-  { splices: { $label: { value: label, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: label, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 25, column: 25 }, end: { line: 29, column: 1 } },
@@ -274,7 +274,7 @@ const wrongArgument = cs.create(
                   start: { line: 27, column: 12 },
                   end: { line: 27, column: 18 },
                 },
-                key: "$label",
+                param: 0,
               },
               arguments: [
                 {

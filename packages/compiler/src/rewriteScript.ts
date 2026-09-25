@@ -4,7 +4,7 @@ import type { Diagnostic } from "./diagnostics.js";
 import { type EmittedScript, emitScript, scriptEdits } from "./emitScript.js";
 import { arrow, call, iife, object } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
-import type { BindingResolution, ResolvedSplice } from "./resolveBindings.js";
+import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
 
@@ -25,8 +25,7 @@ export function rewriteScript(
   clientScript: ClientScript,
   fileHash: string,
   bindings: BindingResolution,
-  captures: string[] = [],
-  splices: ReadonlyMap<string, ResolvedSplice> = new Map(),
+  params: readonly ResolvedParam[] = [],
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -50,6 +49,9 @@ export function rewriteScript(
   const state: RewriteState = {
     script: clientScript,
     bindings,
+    // A splice key starts with `$`, a tag key is a bare name, and a binding
+    // key ends in `$<fileHash>$<n>`, so none of them meet.
+    params: new Map(params.map((param, index) => [param.key, index])),
     errors: new Map(),
     mappings: new Map(),
     codeInformation: new Map(),
@@ -84,50 +86,44 @@ export function rewriteScript(
   );
   const id = `${fileHash}:${line + 1}:${character}`;
 
-  const metadata = ts.factory.createObjectLiteralExpression(
-    [
-      ts.factory.createPropertyAssignment(
-        "splices",
-        ts.factory.createObjectLiteralExpression(
-          // A splice the text spells is the host expression written there, and
-          // a host tag the host binding it names.
-          Array.from(splices, ([key, splice]) =>
-            ts.factory.createPropertyAssignment(
-              key,
-              ts.factory.createObjectLiteralExpression(
-                [
-                  ts.factory.createPropertyAssignment(
-                    "value",
-                    clientScript.splices[key]?.expression ??
-                      ts.factory.createIdentifier(key.slice(1)),
-                  ),
-                  ts.factory.createPropertyAssignment(
-                    "params",
-                    ts.factory.createArrayLiteralExpression(
-                      splice.params.map((name) =>
-                        ts.factory.createStringLiteral(name),
-                      ),
-                      false,
-                    ),
-                  ),
-                ],
+  // The script's parameters, as `Metadata` describes them: a splice is the
+  // host expression written there, and a host tag the host binding it names.
+  const objectLiteral = (properties: Record<string, ts.Expression>) =>
+    ts.factory.createObjectLiteralExpression(
+      Object.entries(properties).map(([name, value]) =>
+        ts.factory.createPropertyAssignment(name, value),
+      ),
+      false,
+    );
+  const string = (text: string) => ts.factory.createStringLiteral(text);
+  const metadata = objectLiteral({
+    params: ts.factory.createArrayLiteralExpression(
+      params.map((param) => {
+        switch (param.kind) {
+          case "splice":
+            return objectLiteral({
+              kind: string("splice"),
+              value: clientScript.splices[param.key]!.expression,
+              bindings: ts.factory.createArrayLiteralExpression(
+                param.bindings.map(string),
                 false,
               ),
-            ),
-          ),
-          false,
-        ),
-      ),
-      ts.factory.createPropertyAssignment(
-        "captures",
-        ts.factory.createArrayLiteralExpression(
-          captures.map((name) => ts.factory.createStringLiteral(name)),
-          false,
-        ),
-      ),
-    ],
-    false,
-  );
+            });
+          case "tag":
+            return objectLiteral({
+              kind: string("tag"),
+              value: ts.factory.createIdentifier(param.key),
+            });
+          case "capture":
+            return objectLiteral({
+              kind: string("capture"),
+              key: string(param.key),
+            });
+        }
+      }),
+      false,
+    ),
+  });
 
   const virtual = call(ts, "cs", "lift", [
     ts.isBlock(rewritten.virtual)
@@ -140,8 +136,8 @@ export function rewriteScript(
   const emitted = emitScript(
     ts,
     clientScript,
-    splices.size + captures.length,
-    scriptEdits(clientScript, bindings, splices, captures),
+    params.length,
+    scriptEdits(clientScript, bindings, params),
   );
 
   const runtime = call(ts, "cs", "create", [

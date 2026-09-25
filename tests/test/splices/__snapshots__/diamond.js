@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // 2^depth.
 const d0 = cs.create(
   "23y608t6y2wp3:10:11",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 10, column: 14 }, end: { line: 10, column: 15 } },
@@ -19,7 +19,7 @@ const d0 = cs.create(
 );
 const d1 = cs.create(
   "23y608t6y2wp3:12:11",
-  { splices: { $d0: { value: d0, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: d0, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 14 }, end: { line: 14, column: 1 } },
@@ -40,7 +40,7 @@ const d1 = cs.create(
               start: { line: 13, column: 9 },
               end: { line: 13, column: 12 },
             },
-            key: "$d0",
+            param: 0,
           },
           right: {
             type: "Splice",
@@ -48,7 +48,7 @@ const d1 = cs.create(
               start: { line: 13, column: 15 },
               end: { line: 13, column: 18 },
             },
-            key: "$d0",
+            param: 0,
           },
         },
       },
@@ -59,7 +59,7 @@ const d1 = cs.create(
 );
 const d2 = cs.create(
   "23y608t6y2wp3:16:11",
-  { splices: { $d1: { value: d1, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: d1, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 16, column: 14 }, end: { line: 18, column: 1 } },
@@ -80,7 +80,7 @@ const d2 = cs.create(
               start: { line: 17, column: 9 },
               end: { line: 17, column: 12 },
             },
-            key: "$d1",
+            param: 0,
           },
           right: {
             type: "Splice",
@@ -88,7 +88,7 @@ const d2 = cs.create(
               start: { line: 17, column: 15 },
               end: { line: 17, column: 18 },
             },
-            key: "$d1",
+            param: 0,
           },
         },
       },
@@ -99,7 +99,7 @@ const d2 = cs.create(
 );
 const d3 = cs.create(
   "23y608t6y2wp3:20:11",
-  { splices: { $d2: { value: d2, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: d2, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 20, column: 14 }, end: { line: 22, column: 1 } },
@@ -120,7 +120,7 @@ const d3 = cs.create(
               start: { line: 21, column: 9 },
               end: { line: 21, column: 12 },
             },
-            key: "$d2",
+            param: 0,
           },
           right: {
             type: "Splice",
@@ -128,7 +128,7 @@ const d3 = cs.create(
               start: { line: 21, column: 15 },
               end: { line: 21, column: 18 },
             },
-            key: "$d2",
+            param: 0,
           },
         },
       },
@@ -139,7 +139,7 @@ const d3 = cs.create(
 );
 const d4 = cs.create(
   "23y608t6y2wp3:24:11",
-  { splices: { $d3: { value: d3, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: d3, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 24, column: 14 }, end: { line: 26, column: 1 } },
@@ -160,7 +160,7 @@ const d4 = cs.create(
               start: { line: 25, column: 9 },
               end: { line: 25, column: 12 },
             },
-            key: "$d3",
+            param: 0,
           },
           right: {
             type: "Splice",
@@ -168,7 +168,7 @@ const d4 = cs.create(
               start: { line: 25, column: 15 },
               end: { line: 25, column: 18 },
             },
-            key: "$d3",
+            param: 0,
           },
         },
       },

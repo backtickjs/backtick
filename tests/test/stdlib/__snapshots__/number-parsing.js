@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Parsed() {
   return cs.create(
     "28kni4l69t7vb:9:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 9, column: 12 }, end: { line: 14, column: 3 } },

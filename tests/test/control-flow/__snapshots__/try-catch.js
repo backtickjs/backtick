@@ -7,7 +7,7 @@ it("tryCatch", async (t) => {
     "tryCatch",
     cs.create(
       "3s3xo1kodgmhm:9:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 19, column: 5 } },

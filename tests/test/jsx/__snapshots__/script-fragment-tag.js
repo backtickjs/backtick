@@ -15,7 +15,7 @@ it("scriptFragmentTag", async (t) => {
     "scriptFragmentTag",
     cs.create(
       "1uevnymojdbzi:17:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 33, column: 5 } },

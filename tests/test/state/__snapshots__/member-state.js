@@ -13,11 +13,10 @@ async function MemberRows() {
   return cs.create(
     "30ur5mgzea4v6:19:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -258,7 +257,7 @@ async function MemberRows() {
                                               start: { line: 22, column: 39 },
                                               end: { line: 22, column: 45 },
                                             },
-                                            key: "$state",
+                                            param: 0,
                                           },
                                           arguments: [
                                             {
@@ -382,7 +381,7 @@ async function MemberRows() {
                     start: { line: 26, column: 17 },
                     end: { line: 26, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -530,6 +529,7 @@ async function MemberRows() {
                           end: { line: 31, column: 14 },
                         },
                         name: "For",
+                        param: 1,
                       },
                       attributes: [
                         {

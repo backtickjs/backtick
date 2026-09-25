@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A script that returns a value may still run an action.
 const valueScriptEffects = cs.create(
   "1zk77nyjrl50d:7:41",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 7, column: 44 }, end: { line: 9, column: 1 } },
@@ -47,7 +47,7 @@ const valueScriptEffects = cs.create(
 );
 const ping = cs.create(
   "1zk77nyjrl50d:11:33",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 36 }, end: { line: 14, column: 1 } },
@@ -133,11 +133,10 @@ it("actionInValueScript", async (t) => {
     cs.create(
       "1zk77nyjrl50d:20:4",
       {
-        splices: {
-          $valueScriptEffects: { value: valueScriptEffects, params: [] },
-          $ping: { value: ping, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: valueScriptEffects, bindings: [] },
+          { kind: "splice", value: ping, bindings: [] },
+        ],
       },
       () => ({
         type: "ArrowFunctionExpression",
@@ -206,7 +205,7 @@ it("actionInValueScript", async (t) => {
                   start: { line: 22, column: 6 },
                   end: { line: 22, column: 25 },
                 },
-                key: "$valueScriptEffects",
+                param: 0,
               },
             },
             {
@@ -249,7 +248,7 @@ it("actionInValueScript", async (t) => {
                           start: { line: 24, column: 8 },
                           end: { line: 24, column: 13 },
                         },
-                        key: "$ping",
+                        param: 1,
                       },
                       arguments: [],
                       optional: false,

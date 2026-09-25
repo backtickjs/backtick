@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const badge = await bundler.run(
   cs.create(
     "1g4jdt9f1nmyq:13:2",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 13, column: 5 }, end: { line: 13, column: 66 } },
@@ -122,11 +122,10 @@ const badge = await bundler.run(
 const scriptBoundTag = cs.create(
   "1g4jdt9f1nmyq:16:23",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $badge: { value: badge, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "splice", value: badge, bindings: [] },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -164,7 +163,7 @@ const scriptBoundTag = cs.create(
                   start: { line: 17, column: 16 },
                   end: { line: 17, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -222,7 +221,7 @@ const scriptBoundTag = cs.create(
                     start: { line: 18, column: 21 },
                     end: { line: 18, column: 27 },
                   },
-                  key: "$badge",
+                  param: 1,
                 },
               ],
               optional: false,

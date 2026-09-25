@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 const stored = cs.create(
   "2ybl4zwhlhjta:13:15",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 13, column: 18 }, end: { line: 16, column: 1 } },
@@ -76,7 +76,7 @@ const stored = cs.create(
 );
 const written = cs.create(
   "2ybl4zwhlhjta:18:16",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 18, column: 19 }, end: { line: 23, column: 1 } },

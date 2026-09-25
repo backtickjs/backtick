@@ -12,11 +12,12 @@ it("splicedFunctionParam", async (t) => {
     cs.create(
       "yz0kiroonaez:13:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: cs.create(
               "yz0kiroonaez:15:21",
-              { splices: {}, captures: [] },
+              { params: [] },
               () => ({
                 type: "ArrowFunctionExpression",
                 loc: {
@@ -37,10 +38,9 @@ it("splicedFunctionParam", async (t) => {
               "() => () => 2",
               '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"AAcwB,MAAA,GAAG,EAAE,CAAC,CAAC,CAAA"}',
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -153,7 +153,7 @@ it("splicedFunctionParam", async (t) => {
                     start: { line: 15, column: 19 },
                     end: { line: 15, column: 33 },
                   },
-                  key: "$0splice0",
+                  param: 0,
                 },
               ],
               optional: false,

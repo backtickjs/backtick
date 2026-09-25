@@ -16,17 +16,23 @@ function wrap(start) {
   return cs.create(
     "22sufdxid1i7s:18:9",
     {
-      splices: {
-        $start: { value: start, params: [] },
-        $0splice0: {
+      params: [
+        { kind: "splice", value: start, bindings: [] },
+        {
+          kind: "splice",
           value: cs.create(
             "22sufdxid1i7s:20:13",
             {
-              splices: {
-                $0splice0: {
+              params: [
+                {
+                  kind: "splice",
                   value: cs.create(
                     "22sufdxid1i7s:22:24",
-                    { splices: {}, captures: ["outer$22sufdxid1i7s$0"] },
+                    {
+                      params: [
+                        { kind: "capture", key: "outer$22sufdxid1i7s$0" },
+                      ],
+                    },
                     () => ({
                       type: "Identifier",
                       loc: {
@@ -39,10 +45,10 @@ function wrap(start) {
                     "$0 => $0",
                     '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AAqB2B,MAAA,EAAK,CAAA"}',
                   ),
-                  params: [],
+                  bindings: [],
                 },
-              },
-              captures: ["outer$22sufdxid1i7s$0"],
+                { kind: "capture", key: "outer$22sufdxid1i7s$0" },
+              ],
             },
             () => ({
               type: "BlockStatement",
@@ -113,7 +119,7 @@ function wrap(start) {
                         start: { line: 22, column: 22 },
                         end: { line: 22, column: 34 },
                       },
-                      key: "$0splice0",
+                      param: 0,
                     },
                   },
                 },
@@ -122,10 +128,9 @@ function wrap(start) {
             "($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n}",
             '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AAmBgB;IACV,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAY;AAC/B,CAAC,CAAA"}',
           ),
-          params: ["outer$22sufdxid1i7s$0"],
+          bindings: ["outer$22sufdxid1i7s$0"],
         },
-      },
-      captures: [],
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -160,7 +165,7 @@ function wrap(start) {
                   start: { line: 19, column: 18 },
                   end: { line: 19, column: 24 },
                 },
-                key: "$start",
+                param: 0,
               },
             },
           ],
@@ -174,7 +179,7 @@ function wrap(start) {
               start: { line: 20, column: 11 },
               end: { line: 23, column: 7 },
             },
-            key: "$0splice0",
+            param: 1,
           },
         },
       ],
@@ -190,12 +195,13 @@ it("deepCapture", async (t) => {
     cs.create(
       "22sufdxid1i7s:28:39",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: wrap(
               cs.create(
                 "22sufdxid1i7s:28:49",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -208,13 +214,14 @@ it("deepCapture", async (t) => {
                 '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AA2BoD,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: wrap(
               cs.create(
                 "22sufdxid1i7s:28:66",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -227,10 +234,9 @@ it("deepCapture", async (t) => {
                 '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"AA2BqE,MAAA,CAAC,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BinaryExpression",
@@ -242,7 +248,7 @@ it("deepCapture", async (t) => {
             start: { line: 28, column: 42 },
             end: { line: 28, column: 56 },
           },
-          key: "$0splice0",
+          param: 0,
         },
         right: {
           type: "Splice",
@@ -250,7 +256,7 @@ it("deepCapture", async (t) => {
             start: { line: 28, column: 59 },
             end: { line: 28, column: 73 },
           },
-          key: "$0splice1",
+          param: 1,
         },
       }),
       "($0, $1) => $0() + $1()",

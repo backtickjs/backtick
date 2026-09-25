@@ -13,7 +13,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 const loadedBadge = await bundler.run(
   cs.create(
     "v8fe0e5k2jbe:16:2",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 16, column: 5 }, end: { line: 16, column: 66 } },
@@ -124,11 +124,10 @@ const loadedBadge = await bundler.run(
 const scriptBoundTagLoading = cs.create(
   "v8fe0e5k2jbe:19:30",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $loadedBadge: { value: loadedBadge, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "splice", value: loadedBadge, bindings: [] },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -166,7 +165,7 @@ const scriptBoundTagLoading = cs.create(
                   start: { line: 20, column: 16 },
                   end: { line: 20, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -215,7 +214,7 @@ const scriptBoundTagLoading = cs.create(
                   start: { line: 21, column: 16 },
                   end: { line: 21, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -769,7 +768,7 @@ const scriptBoundTagLoading = cs.create(
                                 start: { line: 32, column: 39 },
                                 end: { line: 32, column: 51 },
                               },
-                              key: "$loadedBadge",
+                              param: 1,
                             },
                           ],
                           optional: false,

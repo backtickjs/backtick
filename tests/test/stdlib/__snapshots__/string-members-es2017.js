@@ -10,7 +10,7 @@ it("stringMembersEs2017", async (t) => {
     "stringMembersEs2017",
     cs.create(
       "376ffut9l2xr3:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 21, column: 5 } },

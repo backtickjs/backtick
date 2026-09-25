@@ -15,11 +15,10 @@ async function RotatingRows() {
   return cs.create(
     "3hac73x1hhg8m:16:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -60,7 +59,7 @@ async function RotatingRows() {
                     start: { line: 17, column: 18 },
                     end: { line: 17, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -513,6 +512,7 @@ async function RotatingRows() {
                           end: { line: 26, column: 14 },
                         },
                         name: "For",
+                        param: 1,
                       },
                       attributes: [
                         {

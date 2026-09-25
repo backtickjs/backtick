@@ -11,7 +11,7 @@ it("indexAbsent", async (t) => {
     "indexAbsent",
     cs.create(
       "26sqkhggd8j15:14:4",
-      { splices: { $answers: { value: answers, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: answers, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 14, column: 7 }, end: { line: 18, column: 5 } },
@@ -109,7 +109,7 @@ it("indexAbsent", async (t) => {
                         start: { line: 16, column: 22 },
                         end: { line: 16, column: 30 },
                       },
-                      key: "$answers",
+                      param: 0,
                     },
                     property: {
                       type: "Literal",

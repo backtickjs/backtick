@@ -12,17 +12,14 @@ describe("a spliced undefined", () => {
       await evaluate(
         cs.create(
           "3f9luoncz9vrv:12:32",
-          {
-            splices: { $nothing: { value: nothing, params: [] } },
-            captures: [],
-          },
+          { params: [{ kind: "splice", value: nothing, bindings: [] }] },
           () => ({
             type: "Splice",
             loc: {
               start: { line: 12, column: 35 },
               end: { line: 12, column: 43 },
             },
-            key: "$nothing",
+            param: 0,
           }),
           "$0 => $0()",
           '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"AAWmC,MAAA,IAAQ,CAAA"}',
@@ -36,14 +33,14 @@ describe("a spliced undefined", () => {
     const arrived = await evaluate(
       cs.create(
         "3f9luoncz9vrv:17:35",
-        { splices: { $data: { value: data, params: [] } }, captures: [] },
+        { params: [{ kind: "splice", value: data, bindings: [] }] },
         () => ({
           type: "Splice",
           loc: {
             start: { line: 17, column: 38 },
             end: { line: 17, column: 43 },
           },
-          key: "$data",
+          param: 0,
         }),
         "$0 => $0()",
         '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"AAgBsC,MAAA,IAAK,CAAA"}',
@@ -58,14 +55,14 @@ describe("a spliced undefined", () => {
       await evaluate(
         cs.create(
           "3f9luoncz9vrv:24:36",
-          { splices: { $data: { value: data, params: [] } }, captures: [] },
+          { params: [{ kind: "splice", value: data, bindings: [] }] },
           () => ({
             type: "Splice",
             loc: {
               start: { line: 24, column: 39 },
               end: { line: 24, column: 44 },
             },
-            key: "$data",
+            param: 0,
           }),
           "$0 => $0()",
           '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"AAuBuC,MAAA,IAAK,CAAA"}',

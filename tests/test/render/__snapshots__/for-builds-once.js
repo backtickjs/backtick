@@ -18,14 +18,13 @@ async function WaitingList({ more }) {
   return cs.create(
     "3l16jad540350:21:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $window: { value: window, params: [] },
-        $more: { value: more, params: [] },
-        $answerItems: { value: answerItems, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "splice", value: window, bindings: [] },
+        { kind: "splice", value: more, bindings: [] },
+        { kind: "splice", value: answerItems, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -66,7 +65,7 @@ async function WaitingList({ more }) {
                     start: { line: 22, column: 18 },
                     end: { line: 22, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -124,7 +123,7 @@ async function WaitingList({ more }) {
                       start: { line: 24, column: 20 },
                       end: { line: 24, column: 27 },
                     },
-                    key: "$window",
+                    param: 1,
                   },
                   property: {
                     type: "Identifier",
@@ -170,7 +169,7 @@ async function WaitingList({ more }) {
                                 start: { line: 25, column: 10 },
                                 end: { line: 25, column: 15 },
                               },
-                              key: "$more",
+                              param: 2,
                             },
                             arguments: [],
                             optional: false,
@@ -227,7 +226,7 @@ async function WaitingList({ more }) {
                                         start: { line: 26, column: 18 },
                                         end: { line: 26, column: 30 },
                                       },
-                                      key: "$answerItems",
+                                      param: 3,
                                     },
                                   ],
                                   optional: false,
@@ -280,6 +279,7 @@ async function WaitingList({ more }) {
                   end: { line: 30, column: 15 },
                 },
                 name: "For",
+                param: 4,
               },
               attributes: [
                 {
@@ -453,11 +453,10 @@ async function WaitingList({ more }) {
 const forBuildsOnce = cs.create(
   "3l16jad540350:34:22",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $WaitingList: { value: WaitingList, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "tag", value: WaitingList },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -495,7 +494,7 @@ const forBuildsOnce = cs.create(
                   start: { line: 35, column: 16 },
                   end: { line: 35, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -675,6 +674,7 @@ const forBuildsOnce = cs.create(
                     end: { line: 40, column: 18 },
                   },
                   name: "WaitingList",
+                  param: 1,
                 },
                 attributes: [
                   {

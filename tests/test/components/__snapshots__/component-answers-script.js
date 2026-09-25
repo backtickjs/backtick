@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Panel() {
   return cs.create(
     "2g65d04vf49d2:13:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 13, column: 12 }, end: { line: 16, column: 3 } },
@@ -52,7 +52,7 @@ async function Panel() {
                     start: { line: 14, column: 14 },
                     end: { line: 14, column: 20 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

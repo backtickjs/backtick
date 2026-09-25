@@ -14,7 +14,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function sandwich(fragment) {
   return cs.create(
     "1xi8jyc89buh5:16:9",
-    { splices: { $fragment: { value: fragment, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: fragment, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 16, column: 12 }, end: { line: 21, column: 3 } },
@@ -82,7 +82,7 @@ function sandwich(fragment) {
                   start: { line: 18, column: 20 },
                   end: { line: 18, column: 29 },
                 },
-                key: "$fragment",
+                param: 0,
               },
             },
           ],
@@ -184,12 +184,13 @@ it("spliceBeforeDeclaration", async (t) => {
     cs.create(
       "1xi8jyc89buh5:28:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: sandwich(
               cs.create(
                 "1xi8jyc89buh5:28:18",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -202,13 +203,14 @@ it("spliceBeforeDeclaration", async (t) => {
                 '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BqB,MAAA,EAAE,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: sandwich(
               cs.create(
                 "1xi8jyc89buh5:28:40",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -221,10 +223,9 @@ it("spliceBeforeDeclaration", async (t) => {
                 '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2B2C,MAAA,EAAE,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BinaryExpression",
@@ -236,7 +237,7 @@ it("spliceBeforeDeclaration", async (t) => {
             start: { line: 28, column: 7 },
             end: { line: 28, column: 26 },
           },
-          key: "$0splice0",
+          param: 0,
         },
         right: {
           type: "Splice",
@@ -244,7 +245,7 @@ it("spliceBeforeDeclaration", async (t) => {
             start: { line: 28, column: 29 },
             end: { line: 28, column: 48 },
           },
-          key: "$0splice1",
+          param: 1,
         },
       }),
       "($0, $1) => $0() + $1()",

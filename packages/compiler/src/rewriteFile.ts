@@ -31,7 +31,7 @@ export function rewriteFile(
   // to distinguish this file from a same-named file in another codebase.
   const fileHash = hashText(sourceFile.text);
 
-  const { bindings, captures, splices } = resolveBindings(
+  const { bindings, params } = resolveBindings(
     ts,
     parsedFile.scripts,
     fileHash,
@@ -43,8 +43,7 @@ export function rewriteFile(
       script,
       fileHash,
       bindings,
-      captures.get(script),
-      splices.get(script),
+      params.get(script),
     );
     scripts.set(script.sourceNode, rewritten);
     for (const [node, range] of rewritten.sourceMaps) {

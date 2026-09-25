@@ -7,7 +7,7 @@ it("methodCall", async (t) => {
     "methodCall",
     cs.create(
       "163oncfaq7kkj:9:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 12, column: 5 } },

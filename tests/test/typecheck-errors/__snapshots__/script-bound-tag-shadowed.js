@@ -4,16 +4,20 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   "83k1lytjebk3:5:15",
   {
-    splices: {
-      $0splice0: {
+    params: [
+      {
+        kind: "splice",
         value: cs.create(
           "83k1lytjebk3:7:11",
           {
-            splices: {
-              $0splice0: {
+            params: [
+              {
+                kind: "splice",
                 value: cs.create(
                   "83k1lytjebk3:10:13",
-                  { splices: {}, captures: ["Badge$83k1lytjebk3$2"] },
+                  {
+                    params: [{ kind: "capture", key: "Badge$83k1lytjebk3$2" }],
+                  },
                   () => ({
                     type: "JSXElement",
                     loc: {
@@ -75,10 +79,9 @@ export default cs.create(
                   "$0 => <$0 n={1}/>",
                   '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"AASgB,MAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAA"}',
                 ),
-                params: ["Badge$83k1lytjebk3$2"],
+                bindings: ["Badge$83k1lytjebk3$2"],
               },
-            },
-            captures: [],
+            ],
           },
           () => ({
             type: "BlockStatement",
@@ -133,7 +136,7 @@ export default cs.create(
                     start: { line: 10, column: 11 },
                     end: { line: 10, column: 33 },
                   },
-                  key: "$0splice0",
+                  param: 0,
                 },
               },
             ],
@@ -141,10 +144,9 @@ export default cs.create(
           "$0 => {\n    const Badge = 5;\n    return $0(Badge);\n}",
           '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"AAMc;IACV,MAAM,KAAK,GAAG,CAAC,CAAC;IAEhB,OAAO,SAAC,CAAsB;AAChC,CAAC,CAAA"}',
         ),
-        params: [],
+        bindings: [],
       },
-    },
-    captures: [],
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -288,7 +290,7 @@ export default cs.create(
         argument: {
           type: "Splice",
           loc: { start: { line: 7, column: 9 }, end: { line: 11, column: 5 } },
-          key: "$0splice0",
+          param: 0,
         },
       },
     ],

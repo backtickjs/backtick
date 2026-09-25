@@ -24,12 +24,11 @@ describe("equals", () => {
       cs.create(
         "34j4m9r77iqx8:27:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $computed: { value: computed, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: computed, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -70,7 +69,7 @@ describe("equals", () => {
                         start: { line: 28, column: 18 },
                         end: { line: 28, column: 24 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -122,7 +121,7 @@ describe("equals", () => {
                         start: { line: 29, column: 21 },
                         end: { line: 29, column: 30 },
                       },
-                      key: "$computed",
+                      param: 1,
                     },
                     arguments: [
                       {
@@ -456,7 +455,7 @@ describe("equals", () => {
                                     start: { line: 33, column: 10 },
                                     end: { line: 33, column: 17 },
                                   },
-                                  key: "$window",
+                                  param: 2,
                                 },
                                 property: {
                                   type: "Identifier",
@@ -902,11 +901,10 @@ describe("equals", () => {
       cs.create(
         "34j4m9r77iqx8:57:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -947,7 +945,7 @@ describe("equals", () => {
                         start: { line: 58, column: 22 },
                         end: { line: 58, column: 28 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -1175,7 +1173,7 @@ describe("equals", () => {
                                     start: { line: 63, column: 10 },
                                     end: { line: 63, column: 17 },
                                   },
-                                  key: "$window",
+                                  param: 1,
                                 },
                                 property: {
                                   type: "Identifier",
@@ -1644,11 +1642,10 @@ describe("equals", () => {
       cs.create(
         "34j4m9r77iqx8:82:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -1689,7 +1686,7 @@ describe("equals", () => {
                         start: { line: 83, column: 18 },
                         end: { line: 83, column: 24 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -1784,7 +1781,7 @@ describe("equals", () => {
                                               start: { line: 85, column: 12 },
                                               end: { line: 85, column: 19 },
                                             },
-                                            key: "$window",
+                                            param: 1,
                                           },
                                           property: {
                                             type: "Identifier",
@@ -2078,11 +2075,10 @@ describe("equals", () => {
       cs.create(
         "34j4m9r77iqx8:99:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -2126,7 +2122,7 @@ describe("equals", () => {
                         start: { line: 100, column: 18 },
                         end: { line: 100, column: 24 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -2210,7 +2206,7 @@ describe("equals", () => {
                                     start: { line: 102, column: 10 },
                                     end: { line: 102, column: 17 },
                                   },
-                                  key: "$window",
+                                  param: 1,
                                 },
                                 property: {
                                   type: "Identifier",
@@ -2584,11 +2580,10 @@ describe("equals", () => {
       cs.create(
         "34j4m9r77iqx8:119:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -2632,7 +2627,7 @@ describe("equals", () => {
                         start: { line: 120, column: 22 },
                         end: { line: 120, column: 28 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -2744,7 +2739,7 @@ describe("equals", () => {
                                     start: { line: 122, column: 10 },
                                     end: { line: 122, column: 17 },
                                   },
-                                  key: "$window",
+                                  param: 1,
                                 },
                                 property: {
                                   type: "Identifier",

@@ -13,7 +13,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Row() {
   return cs.create(
     "7huprcub5nk3:15:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 15, column: 12 }, end: { line: 27, column: 3 } },
@@ -53,7 +53,7 @@ async function Row() {
                     start: { line: 16, column: 18 },
                     end: { line: 16, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function guard(fragment) {
   return cs.create(
     "3cvzb2rrvx0i4:13:9",
-    { splices: { $fragment: { value: fragment, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: fragment, bindings: [] }] },
     () => ({
       type: "ArrowFunctionExpression",
       loc: { start: { line: 13, column: 12 }, end: { line: 18, column: 3 } },
@@ -64,7 +64,7 @@ function guard(fragment) {
                       start: { line: 15, column: 13 },
                       end: { line: 15, column: 22 },
                     },
-                    key: "$fragment",
+                    param: 0,
                   },
                 },
               ],
@@ -96,7 +96,7 @@ function guard(fragment) {
 }
 const ok = cs.create(
   "3cvzb2rrvx0i4:21:11",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 21, column: 14 }, end: { line: 21, column: 25 } },
@@ -107,7 +107,7 @@ const ok = cs.create(
 );
 const broken = cs.create(
   "3cvzb2rrvx0i4:23:15",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 23, column: 18 }, end: { line: 25, column: 1 } },
@@ -136,11 +136,10 @@ it("spliceLaziness", async (t) => {
     cs.create(
       "3cvzb2rrvx0i4:31:4",
       {
-        splices: {
-          $0splice0: { value: guard(ok), params: [] },
-          $0splice1: { value: guard(broken), params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: guard(ok), bindings: [] },
+          { kind: "splice", value: guard(broken), bindings: [] },
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -172,7 +171,7 @@ it("spliceLaziness", async (t) => {
                   start: { line: 32, column: 13 },
                   end: { line: 32, column: 25 },
                 },
-                key: "$0splice0",
+                param: 0,
               },
               arguments: [
                 {
@@ -217,7 +216,7 @@ it("spliceLaziness", async (t) => {
                   start: { line: 33, column: 15 },
                   end: { line: 33, column: 31 },
                 },
-                key: "$0splice1",
+                param: 1,
               },
               arguments: [
                 {

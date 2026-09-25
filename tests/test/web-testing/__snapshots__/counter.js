@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Counter() {
   return cs.create(
     "2x6geiwtygybj:10:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 18, column: 3 } },
@@ -49,7 +49,7 @@ async function Counter() {
                     start: { line: 11, column: 18 },
                     end: { line: 11, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

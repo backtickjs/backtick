@@ -88,7 +88,7 @@ describe("a handler that is not a function", () => {
     const div = await drawn(
       cs.create(
         "2i39r1w0584h:134:28",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -168,7 +168,7 @@ describe("a handler that is not a function", () => {
     await refused(
       cs.create(
         "2i39r1w0584h:144:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -248,7 +248,7 @@ describe("a handler that is not a function", () => {
     const absent = [
       cs.create(
         "2i39r1w0584h:155:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -311,7 +311,7 @@ describe("a handler that is not a function", () => {
       ),
       cs.create(
         "2i39r1w0584h:156:6",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "JSXElement",
           loc: {

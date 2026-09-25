@@ -10,7 +10,7 @@ describe("ref", () => {
     await render(
       cs.create(
         "1ig5nq86fb7c4:13:6",
-        { splices: { $state: { value: state, params: [] } }, captures: [] },
+        { params: [{ kind: "splice", value: state, bindings: [] }] },
         () => ({
           type: "BlockStatement",
           loc: { start: { line: 13, column: 9 }, end: { line: 21, column: 7 } },
@@ -50,7 +50,7 @@ describe("ref", () => {
                         start: { line: 14, column: 22 },
                         end: { line: 14, column: 28 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -441,7 +441,7 @@ describe("ref", () => {
     await render(
       cs.create(
         "1ig5nq86fb7c4:29:6",
-        { splices: { $onMount: { value: onMount, params: [] } }, captures: [] },
+        { params: [{ kind: "splice", value: onMount, bindings: [] }] },
         () => ({
           type: "BlockStatement",
           loc: { start: { line: 29, column: 9 }, end: { line: 36, column: 7 } },
@@ -545,7 +545,7 @@ describe("ref", () => {
                                 start: { line: 33, column: 30 },
                                 end: { line: 33, column: 38 },
                               },
-                              key: "$onMount",
+                              param: 0,
                             },
                             arguments: [
                               {
@@ -618,7 +618,7 @@ describe("ref", () => {
     await render(
       cs.create(
         "1ig5nq86fb7c4:42:17",
-        { splices: {}, captures: [] },
+        { params: [] },
         () => ({
           type: "JSXElement",
           loc: {
@@ -734,11 +734,10 @@ describe("ref", () => {
         cs.create(
           "1ig5nq86fb7c4:64:8",
           {
-            splices: {
-              $state: { value: state, params: [] },
-              $window: { value: window, params: [] },
-            },
-            captures: [],
+            params: [
+              { kind: "splice", value: state, bindings: [] },
+              { kind: "splice", value: window, bindings: [] },
+            ],
           },
           () => ({
             type: "BlockStatement",
@@ -782,7 +781,7 @@ describe("ref", () => {
                           start: { line: 65, column: 24 },
                           end: { line: 65, column: 30 },
                         },
-                        key: "$state",
+                        param: 0,
                       },
                       arguments: [
                         {
@@ -834,7 +833,7 @@ describe("ref", () => {
                           start: { line: 66, column: 20 },
                           end: { line: 66, column: 26 },
                         },
-                        key: "$state",
+                        param: 0,
                       },
                       arguments: [
                         {
@@ -1254,7 +1253,7 @@ describe("ref", () => {
                                               start: { line: 73, column: 30 },
                                               end: { line: 73, column: 37 },
                                             },
-                                            key: "$window",
+                                            param: 1,
                                           },
                                           property: {
                                             type: "Identifier",

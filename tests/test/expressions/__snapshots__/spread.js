@@ -10,7 +10,7 @@ it("spread", async (t) => {
     "spread",
     cs.create(
       "umu4jsb4aovz:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 19, column: 5 } },

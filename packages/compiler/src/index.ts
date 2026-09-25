@@ -6,7 +6,7 @@ export { emitScripts, type EmittedScriptAt } from "./emitScripts.js";
 export { flattenScripts } from "./flattenScripts.js";
 export type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 export { parseSourceFile, parseSourceText } from "./parseFile.js";
-export { resolveBindings } from "./resolveBindings.js";
+export { type ResolvedParam, resolveBindings } from "./resolveBindings.js";
 export { transform } from "./transform.js";
 export { transpile } from "./transpile.js";
 export { mangle, unmangle } from "./unmangle.js";

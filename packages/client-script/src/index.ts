@@ -17,7 +17,7 @@ export {
   type ClientScript,
   isClientScript,
   type Metadata,
-  type MetadataSplice,
+  type Param,
 } from "./ClientScript.js";
 export type { Splice } from "./Splice.js";
 export { isComponentTag } from "./isComponentTag.js";

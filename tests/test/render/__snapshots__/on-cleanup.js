@@ -24,11 +24,10 @@ describe("onCleanup", () => {
       cs.create(
         "24mnkvlbr5ln5:27:6",
         {
-          splices: {
-            $onCleanup: { value: onCleanup, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: onCleanup, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -52,7 +51,7 @@ describe("onCleanup", () => {
                     start: { line: 28, column: 8 },
                     end: { line: 28, column: 18 },
                   },
-                  key: "$onCleanup",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -86,7 +85,7 @@ describe("onCleanup", () => {
                               start: { line: 28, column: 25 },
                               end: { line: 28, column: 32 },
                             },
-                            key: "$window",
+                            param: 1,
                           },
                           property: {
                             type: "Identifier",
@@ -191,13 +190,12 @@ describe("onCleanup", () => {
       cs.create(
         "24mnkvlbr5ln5:39:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $computed: { value: computed, params: [] },
-            $onCleanup: { value: onCleanup, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: computed, bindings: [] },
+            { kind: "splice", value: onCleanup, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -238,7 +236,7 @@ describe("onCleanup", () => {
                         start: { line: 40, column: 18 },
                         end: { line: 40, column: 24 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -290,7 +288,7 @@ describe("onCleanup", () => {
                         start: { line: 41, column: 24 },
                         end: { line: 41, column: 33 },
                       },
-                      key: "$computed",
+                      param: 1,
                     },
                     arguments: [
                       {
@@ -325,7 +323,7 @@ describe("onCleanup", () => {
                                     start: { line: 42, column: 10 },
                                     end: { line: 42, column: 20 },
                                   },
-                                  key: "$onCleanup",
+                                  param: 2,
                                 },
                                 arguments: [
                                   {
@@ -359,7 +357,7 @@ describe("onCleanup", () => {
                                               start: { line: 42, column: 27 },
                                               end: { line: 42, column: 34 },
                                             },
-                                            key: "$window",
+                                            param: 3,
                                           },
                                           property: {
                                             type: "Identifier",
@@ -695,13 +693,12 @@ describe("onCleanup", () => {
       cs.create(
         "24mnkvlbr5ln5:73:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $onMount: { value: onMount, params: [] },
-            $window: { value: window, params: [] },
-            $onCleanup: { value: onCleanup, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: onMount, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+            { kind: "splice", value: onCleanup, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -742,7 +739,7 @@ describe("onCleanup", () => {
                         start: { line: 74, column: 22 },
                         end: { line: 74, column: 28 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -777,7 +774,7 @@ describe("onCleanup", () => {
                     start: { line: 75, column: 8 },
                     end: { line: 75, column: 16 },
                   },
-                  key: "$onMount",
+                  param: 1,
                 },
                 arguments: [
                   {
@@ -851,7 +848,7 @@ describe("onCleanup", () => {
                                       start: { line: 76, column: 20 },
                                       end: { line: 76, column: 27 },
                                     },
-                                    key: "$window",
+                                    param: 2,
                                   },
                                   property: {
                                     type: "Identifier",
@@ -896,7 +893,7 @@ describe("onCleanup", () => {
                                               start: { line: 76, column: 46 },
                                               end: { line: 76, column: 53 },
                                             },
-                                            key: "$window",
+                                            param: 2,
                                           },
                                           property: {
                                             type: "Identifier",
@@ -966,7 +963,7 @@ describe("onCleanup", () => {
                     start: { line: 78, column: 8 },
                     end: { line: 78, column: 18 },
                   },
-                  key: "$onCleanup",
+                  param: 3,
                 },
                 arguments: [
                   {
@@ -994,7 +991,7 @@ describe("onCleanup", () => {
                             start: { line: 78, column: 25 },
                             end: { line: 78, column: 32 },
                           },
-                          key: "$window",
+                          param: 2,
                         },
                         property: {
                           type: "Identifier",
@@ -1127,11 +1124,10 @@ describe("onCleanup", () => {
       cs.create(
         "24mnkvlbr5ln5:93:6",
         {
-          splices: {
-            $onCleanup: { value: onCleanup, params: [] },
-            $window: { value: window, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: onCleanup, bindings: [] },
+            { kind: "splice", value: window, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -1203,7 +1199,7 @@ describe("onCleanup", () => {
                                 start: { line: 95, column: 33 },
                                 end: { line: 95, column: 43 },
                               },
-                              key: "$onCleanup",
+                              param: 0,
                             },
                             arguments: [
                               {
@@ -1237,7 +1233,7 @@ describe("onCleanup", () => {
                                           start: { line: 95, column: 50 },
                                           end: { line: 95, column: 57 },
                                         },
-                                        key: "$window",
+                                        param: 1,
                                       },
                                       property: {
                                         type: "Identifier",

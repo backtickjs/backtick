@@ -10,7 +10,7 @@ it("arrayQueries", async (t) => {
     "arrayQueries",
     cs.create(
       "25lflsbo2zrha:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 24, column: 5 } },

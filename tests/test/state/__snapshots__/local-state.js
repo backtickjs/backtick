@@ -12,7 +12,7 @@ import { drawn, fontSize } from "./dom.ts";
 async function Stepper() {
   return cs.create(
     "2gygj47yf1nf5:13:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 13, column: 12 }, end: { line: 25, column: 3 } },
@@ -52,7 +52,7 @@ async function Stepper() {
                     start: { line: 14, column: 17 },
                     end: { line: 14, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

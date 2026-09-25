@@ -11,7 +11,7 @@ it("computedKey", async (t) => {
     "computedKey",
     cs.create(
       "27b2r7injyzq0:13:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 22, column: 5 } },

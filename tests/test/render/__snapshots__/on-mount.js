@@ -26,12 +26,11 @@ describe("onMount", () => {
         cs.create(
           "1qp1kr79c2kqf:28:8",
           {
-            splices: {
-              $state: { value: state, params: [] },
-              $onMount: { value: onMount, params: [] },
-              $window: { value: window, params: [] },
-            },
-            captures: [],
+            params: [
+              { kind: "splice", value: state, bindings: [] },
+              { kind: "splice", value: onMount, bindings: [] },
+              { kind: "splice", value: window, bindings: [] },
+            ],
           },
           () => ({
             type: "BlockStatement",
@@ -75,7 +74,7 @@ describe("onMount", () => {
                           start: { line: 29, column: 24 },
                           end: { line: 29, column: 30 },
                         },
-                        key: "$state",
+                        param: 0,
                       },
                       arguments: [
                         {
@@ -110,7 +109,7 @@ describe("onMount", () => {
                       start: { line: 30, column: 10 },
                       end: { line: 30, column: 18 },
                     },
-                    key: "$onMount",
+                    param: 1,
                   },
                   arguments: [
                     {
@@ -157,7 +156,7 @@ describe("onMount", () => {
                                       start: { line: 31, column: 12 },
                                       end: { line: 31, column: 19 },
                                     },
-                                    key: "$window",
+                                    param: 2,
                                   },
                                   property: {
                                     type: "Identifier",
@@ -408,11 +407,10 @@ describe("onMount", () => {
       cs.create(
         "1qp1kr79c2kqf:44:6",
         {
-          splices: {
-            $state: { value: state, params: [] },
-            $onMount: { value: onMount, params: [] },
-          },
-          captures: [],
+          params: [
+            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: onMount, bindings: [] },
+          ],
         },
         () => ({
           type: "BlockStatement",
@@ -453,7 +451,7 @@ describe("onMount", () => {
                         start: { line: 45, column: 21 },
                         end: { line: 45, column: 27 },
                       },
-                      key: "$state",
+                      param: 0,
                     },
                     arguments: [
                       {
@@ -536,7 +534,7 @@ describe("onMount", () => {
                                 start: { line: 47, column: 33 },
                                 end: { line: 47, column: 41 },
                               },
-                              key: "$onMount",
+                              param: 1,
                             },
                             arguments: [
                               {

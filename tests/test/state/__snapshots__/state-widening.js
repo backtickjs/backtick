@@ -23,12 +23,11 @@ async function Widened() {
   return cs.create(
     "2832bhm4681w5:23:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $0splice0: { value: Tone.Warm, params: [] },
-        $0splice1: { value: Tone.Cool, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "splice", value: Tone.Warm, bindings: [] },
+        { kind: "splice", value: Tone.Cool, bindings: [] },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -69,7 +68,7 @@ async function Widened() {
                     start: { line: 24, column: 17 },
                     end: { line: 24, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -121,7 +120,7 @@ async function Widened() {
                     start: { line: 25, column: 17 },
                     end: { line: 25, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -130,7 +129,7 @@ async function Widened() {
                       start: { line: 25, column: 24 },
                       end: { line: 25, column: 36 },
                     },
-                    key: "$0splice0",
+                    param: 1,
                   },
                 ],
                 optional: false,
@@ -173,7 +172,7 @@ async function Widened() {
                     start: { line: 26, column: 17 },
                     end: { line: 26, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -353,7 +352,7 @@ async function Widened() {
                                     start: { line: 31, column: 19 },
                                     end: { line: 31, column: 31 },
                                   },
-                                  key: "$0splice1",
+                                  param: 2,
                                 },
                               ],
                               optional: false,

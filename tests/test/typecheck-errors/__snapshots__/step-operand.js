@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // isn't `const`.
 export const constant = cs.create(
   "3iw6lzhko8e0n:5:24",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 27 }, end: { line: 10, column: 1 } },
@@ -72,7 +72,7 @@ export const constant = cs.create(
 );
 export const text = cs.create(
   "3iw6lzhko8e0n:12:20",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 23 }, end: { line: 17, column: 1 } },

@@ -18,7 +18,7 @@ it("splicedFunction", async (t) => {
     "splicedFunction",
     cs.create(
       "1pdv8x4hbo6de:21:4",
-      { splices: { $0splice0: { value: (n) => n, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: (n) => n, bindings: [] }] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 21, column: 7 }, end: { line: 21, column: 58 } },
@@ -29,7 +29,7 @@ it("splicedFunction", async (t) => {
             start: { line: 21, column: 13 },
             end: { line: 21, column: 58 },
           },
-          key: "$0splice0",
+          param: 0,
         },
         expression: true,
       }),

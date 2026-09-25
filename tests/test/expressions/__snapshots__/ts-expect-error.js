@@ -10,7 +10,7 @@ it("tsExpectError", async (t) => {
     "tsExpectError",
     cs.create(
       "353rib4gy05pn:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 16, column: 5 } },

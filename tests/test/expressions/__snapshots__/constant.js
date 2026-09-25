@@ -7,7 +7,7 @@ it("constant", async (t) => {
     "constant",
     cs.create(
       "1e4ingeabxazf:6:36",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "Literal",
         loc: { start: { line: 6, column: 39 }, end: { line: 6, column: 40 } },

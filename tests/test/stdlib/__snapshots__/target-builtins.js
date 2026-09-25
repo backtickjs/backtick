@@ -15,7 +15,7 @@ describe("a global an app defines", () => {
       await evaluate(
         cs.create(
           "34nfn77gkxcwe:21:21",
-          { splices: { $greet: { value: greet, params: [] } }, captures: [] },
+          { params: [{ kind: "splice", value: greet, bindings: [] }] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -28,7 +28,7 @@ describe("a global an app defines", () => {
                 start: { line: 21, column: 24 },
                 end: { line: 21, column: 30 },
               },
-              key: "$greet",
+              param: 0,
             },
             arguments: [],
             optional: false,
@@ -48,7 +48,7 @@ describe("a global an app defines", () => {
       evaluate(
         cs.create(
           "34nfn77gkxcwe:29:34",
-          { splices: { $greet: { value: greet, params: [] } }, captures: [] },
+          { params: [{ kind: "splice", value: greet, bindings: [] }] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -61,7 +61,7 @@ describe("a global an app defines", () => {
                 start: { line: 29, column: 37 },
                 end: { line: 29, column: 43 },
               },
-              key: "$greet",
+              param: 0,
             },
             arguments: [],
             optional: false,
@@ -81,10 +81,7 @@ describe("a global an app defines", () => {
       await evaluate(
         cs.create(
           "34nfn77gkxcwe:37:21",
-          {
-            splices: { $storage: { value: storage, params: [] } },
-            captures: [],
-          },
+          { params: [{ kind: "splice", value: storage, bindings: [] }] },
           () => ({
             type: "CallExpression",
             loc: {
@@ -103,7 +100,7 @@ describe("a global an app defines", () => {
                   start: { line: 37, column: 24 },
                   end: { line: 37, column: 32 },
                 },
-                key: "$storage",
+                param: 0,
               },
               property: {
                 type: "Identifier",

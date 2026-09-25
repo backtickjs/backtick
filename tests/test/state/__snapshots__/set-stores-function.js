@@ -10,7 +10,7 @@ import { drawn } from "./dom.ts";
 async function Greeting() {
   return cs.create(
     "1zi7if3ybm5dh:11:9",
-    { splices: { $state: { value: state, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: state, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 11, column: 12 }, end: { line: 18, column: 3 } },
@@ -50,7 +50,7 @@ async function Greeting() {
                     start: { line: 12, column: 18 },
                     end: { line: 12, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {

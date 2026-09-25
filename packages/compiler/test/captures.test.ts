@@ -1,7 +1,18 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { parseSourceText, resolveBindings } from "@backtickjs/compiler";
+import {
+  parseSourceText,
+  type ResolvedParam,
+  resolveBindings,
+} from "@backtickjs/compiler";
 import ts from "typescript";
+
+// The binding keys a script's parameters capture, in order.
+function capturesOf(params: readonly ResolvedParam[] = []): string[] {
+  return params.flatMap((param) =>
+    param.kind === "capture" ? [param.key] : [],
+  );
+}
 
 // Captures of the top-level script in `body`. A top-level script has no
 // enclosing script — and there are no globals — so its captures are always
@@ -9,20 +20,20 @@ import ts from "typescript";
 function captures(body: string): string[] {
   const source = `const script = cs\`${body}\`;`;
   const parsed = parseSourceText(ts, "test.ts", source);
-  const { captures } = resolveBindings(ts, parsed.scripts, "hash");
+  const { params } = resolveBindings(ts, parsed.scripts, "hash");
   const [script] = parsed.scripts;
-  return captures.get(script) ?? [];
+  return capturesOf(params.get(script));
 }
 
 // Captures of the scripts nested in `source`'s top-level script, in source
 // order: the binding keys they must receive from the enclosing scope.
 function nested(source: string): string[] {
   const parsed = parseSourceText(ts, "test.ts", source);
-  const { captures } = resolveBindings(ts, parsed.scripts, "hash");
+  const { params } = resolveBindings(ts, parsed.scripts, "hash");
   const [script] = parsed.scripts;
   return Object.values(script.splices)
     .flatMap((splice) => splice.scripts)
-    .flatMap((nestedScript) => captures.get(nestedScript) ?? []);
+    .flatMap((nestedScript) => capturesOf(params.get(nestedScript)));
 }
 
 describe("captures", () => {

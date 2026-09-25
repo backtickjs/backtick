@@ -9,12 +9,13 @@ import { snapshotCase } from "../snapshotCase.ts";
 const script = cs.create(
   "g38hwxw7rhvi:11:42",
   {
-    splices: {
-      $0splice0: {
+    params: [
+      {
+        kind: "splice",
         value: _jsx("span", {
           onclick: cs.create(
             "g38hwxw7rhvi:13:27",
-            { splices: {}, captures: ["x$g38hwxw7rhvi$0"] },
+            { params: [{ kind: "capture", key: "x$g38hwxw7rhvi$0" }] },
             () => ({
               type: "ArrowFunctionExpression",
               loc: {
@@ -37,10 +38,9 @@ const script = cs.create(
             '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"AAY8B,MAAA,GAAG,EAAE,CAAC,EAAC,CAAA"}',
           ),
         }),
-        params: ["x$g38hwxw7rhvi$0"],
+        bindings: ["x$g38hwxw7rhvi$0"],
       },
-    },
-    captures: [],
+    ],
   },
   () => ({
     type: "ArrowFunctionExpression",
@@ -96,7 +96,7 @@ const script = cs.create(
               start: { line: 13, column: 9 },
               end: { line: 13, column: 44 },
             },
-            key: "$0splice0",
+            param: 0,
           },
         },
       ],

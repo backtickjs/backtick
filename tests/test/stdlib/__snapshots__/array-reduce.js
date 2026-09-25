@@ -11,7 +11,7 @@ it("arrayReduce", async (t) => {
     "arrayReduce",
     cs.create(
       "32uyy4dbi2509:13:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 26, column: 5 } },

@@ -5,11 +5,10 @@ function addOwnTotal(lhs, rhs) {
   return cs.create(
     "3ujapqmnmm2ra:7:9",
     {
-      splices: {
-        $lhs: { value: lhs, params: [] },
-        $rhs: { value: rhs, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: lhs, bindings: [] },
+        { kind: "splice", value: rhs, bindings: [] },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -87,7 +86,7 @@ function addOwnTotal(lhs, rhs) {
                   start: { line: 9, column: 20 },
                   end: { line: 9, column: 24 },
                 },
-                key: "$lhs",
+                param: 0,
               },
             },
           },
@@ -136,7 +135,7 @@ function addOwnTotal(lhs, rhs) {
                   start: { line: 10, column: 20 },
                   end: { line: 10, column: 24 },
                 },
-                key: "$rhs",
+                param: 1,
               },
             },
           },
@@ -170,12 +169,13 @@ it("shadowing", async (t) => {
     cs.create(
       "3ujapqmnmm2ra:19:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: addOwnTotal(
               cs.create(
                 "3ujapqmnmm2ra:21:27",
-                { splices: {}, captures: ["total$3ujapqmnmm2ra$1"] },
+                { params: [{ kind: "capture", key: "total$3ujapqmnmm2ra$1" }] },
                 () => ({
                   type: "Identifier",
                   loc: {
@@ -190,10 +190,9 @@ it("shadowing", async (t) => {
               ),
               100,
             ),
-            params: ["total$3ujapqmnmm2ra$1"],
+            bindings: ["total$3ujapqmnmm2ra$1"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -245,7 +244,7 @@ it("shadowing", async (t) => {
                 start: { line: 21, column: 13 },
                 end: { line: 21, column: 43 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

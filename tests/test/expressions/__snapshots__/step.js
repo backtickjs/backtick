@@ -10,7 +10,7 @@ it("step", async (t) => {
     "step",
     cs.create(
       "l4vdws2hl3xc:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 22, column: 5 } },

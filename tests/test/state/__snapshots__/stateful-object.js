@@ -7,7 +7,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // an action, so it stands in a handler.
 const counter = cs.create(
   "2scghcewx41fn:9:16",
-  { splices: { $state: { value: state, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: state, bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 9, column: 19 }, end: { line: 17, column: 1 } },
@@ -58,7 +58,7 @@ const counter = cs.create(
                     start: { line: 10, column: 16 },
                     end: { line: 10, column: 22 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -307,7 +307,7 @@ it("statefulObject", async (t) => {
     "statefulObject",
     cs.create(
       "2scghcewx41fn:23:4",
-      { splices: { $counter: { value: counter, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: counter, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 23, column: 7 }, end: { line: 34, column: 5 } },
@@ -347,7 +347,7 @@ it("statefulObject", async (t) => {
                       start: { line: 24, column: 16 },
                       end: { line: 24, column: 24 },
                     },
-                    key: "$counter",
+                    param: 0,
                   },
                   arguments: [
                     {

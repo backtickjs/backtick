@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // the operator takes.
 export const constant = cs.create(
   "3586xtu4la89h:5:24",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 5, column: 27 }, end: { line: 10, column: 1 } },
@@ -76,7 +76,7 @@ export const constant = cs.create(
 );
 export const mixed = cs.create(
   "3586xtu4la89h:12:21",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 24 }, end: { line: 17, column: 1 } },

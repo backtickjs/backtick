@@ -7,7 +7,7 @@ it("whileLoop", async (t) => {
     "whileLoop",
     cs.create(
       "1qmqxi23sdk0m:9:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 9, column: 7 }, end: { line: 20, column: 5 } },

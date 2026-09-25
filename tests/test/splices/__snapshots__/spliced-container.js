@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // nowhere to name it, since the compiler writes the call.
 const originX = cs.create(
   "3hhvicr225pmx:14:16",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 14, column: 19 }, end: { line: 14, column: 20 } },
@@ -23,7 +23,7 @@ const originX = cs.create(
 );
 const label = cs.create(
   "3hhvicr225pmx:16:14",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "Literal",
     loc: { start: { line: 16, column: 17 }, end: { line: 16, column: 25 } },
@@ -39,7 +39,7 @@ it("splicedContainer", async (t) => {
     "splicedContainer",
     cs.create(
       "3hhvicr225pmx:21:44",
-      { splices: { $point: { value: point, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: point, bindings: [] }] },
       () => ({
         type: "BinaryExpression",
         loc: { start: { line: 21, column: 47 }, end: { line: 21, column: 59 } },
@@ -56,7 +56,7 @@ it("splicedContainer", async (t) => {
               start: { line: 21, column: 47 },
               end: { line: 21, column: 53 },
             },
-            key: "$point",
+            param: 0,
           },
           property: {
             type: "Identifier",

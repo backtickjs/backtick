@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function add(lhs) {
   return cs.create(
     "sl458m2swc6c:10:9",
-    { splices: { $lhs: { value: lhs, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: lhs, bindings: [] }] },
     () => ({
       type: "BinaryExpression",
       loc: { start: { line: 10, column: 12 }, end: { line: 10, column: 20 } },
@@ -16,7 +16,7 @@ function add(lhs) {
       left: {
         type: "Splice",
         loc: { start: { line: 10, column: 12 }, end: { line: 10, column: 16 } },
-        key: "$lhs",
+        param: 0,
       },
       right: {
         type: "Literal",
@@ -35,12 +35,13 @@ it("dollarName", async (t) => {
     cs.create(
       "sl458m2swc6c:17:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: add(
               cs.create(
                 "sl458m2swc6c:19:19",
-                { splices: {}, captures: ["foo$$sl458m2swc6c$0"] },
+                { params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }] },
                 () => ({
                   type: "Identifier",
                   loc: {
@@ -54,10 +55,9 @@ it("dollarName", async (t) => {
                 '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"AAkBsB,MAAA,EAAI,CAAA"}',
               ),
             ),
-            params: ["foo$$sl458m2swc6c$0"],
+            bindings: ["foo$$sl458m2swc6c$0"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -109,7 +109,7 @@ it("dollarName", async (t) => {
                 start: { line: 19, column: 13 },
                 end: { line: 19, column: 29 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

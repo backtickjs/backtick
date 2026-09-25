@@ -14,7 +14,7 @@ it("arrayFrom", async (t) => {
     "arrayFrom",
     cs.create(
       "3pi2uzl7sovgc:16:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 16, column: 7 }, end: { line: 23, column: 5 } },

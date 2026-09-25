@@ -12,11 +12,10 @@ it("spliceOrder", async (t) => {
     cs.create(
       "355ehjmpryw82:11:39",
       {
-        splices: {
-          $count: { value: count, params: [] },
-          $0splice0: { value: ++count, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: count, bindings: [] },
+          { kind: "splice", value: ++count, bindings: [] },
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -42,7 +41,7 @@ it("spliceOrder", async (t) => {
                 start: { line: 11, column: 48 },
                 end: { line: 11, column: 54 },
               },
-              key: "$count",
+              param: 0,
             },
             kind: "init",
             computed: false,
@@ -69,7 +68,7 @@ it("spliceOrder", async (t) => {
                 start: { line: 11, column: 59 },
                 end: { line: 11, column: 69 },
               },
-              key: "$0splice0",
+              param: 1,
             },
             kind: "init",
             computed: false,

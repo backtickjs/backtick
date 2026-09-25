@@ -6,7 +6,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // each access, and a null method receiver skips the call.
 const pick = cs.create(
   "2dtorvijco8u0:8:13",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 8, column: 16 }, end: { line: 10, column: 1 } },
@@ -68,7 +68,7 @@ const pick = cs.create(
 );
 const deep = cs.create(
   "2dtorvijco8u0:12:13",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 12, column: 16 }, end: { line: 14, column: 1 } },
@@ -150,7 +150,7 @@ const deep = cs.create(
 );
 const shout = cs.create(
   "2dtorvijco8u0:16:14",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 16, column: 17 }, end: { line: 18, column: 1 } },
@@ -238,12 +238,11 @@ it("optionalChain", async (t) => {
     cs.create(
       "2dtorvijco8u0:24:4",
       {
-        splices: {
-          $pick: { value: pick, params: [] },
-          $deep: { value: deep, params: [] },
-          $shout: { value: shout, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: pick, bindings: [] },
+          { kind: "splice", value: deep, bindings: [] },
+          { kind: "splice", value: shout, bindings: [] },
+        ],
       },
       () => ({
         type: "ObjectExpression",
@@ -275,7 +274,7 @@ it("optionalChain", async (t) => {
                   start: { line: 25, column: 13 },
                   end: { line: 25, column: 18 },
                 },
-                key: "$pick",
+                param: 0,
               },
               arguments: [
                 {
@@ -348,7 +347,7 @@ it("optionalChain", async (t) => {
                   start: { line: 26, column: 15 },
                   end: { line: 26, column: 20 },
                 },
-                key: "$pick",
+                param: 0,
               },
               arguments: [
                 {
@@ -393,7 +392,7 @@ it("optionalChain", async (t) => {
                   start: { line: 27, column: 12 },
                   end: { line: 27, column: 17 },
                 },
-                key: "$deep",
+                param: 1,
               },
               arguments: [
                 {
@@ -494,7 +493,7 @@ it("optionalChain", async (t) => {
                   start: { line: 28, column: 11 },
                   end: { line: 28, column: 16 },
                 },
-                key: "$deep",
+                param: 1,
               },
               arguments: [
                 {
@@ -567,7 +566,7 @@ it("optionalChain", async (t) => {
                   start: { line: 29, column: 11 },
                   end: { line: 29, column: 16 },
                 },
-                key: "$deep",
+                param: 1,
               },
               arguments: [
                 {
@@ -612,7 +611,7 @@ it("optionalChain", async (t) => {
                   start: { line: 30, column: 12 },
                   end: { line: 30, column: 18 },
                 },
-                key: "$shout",
+                param: 2,
               },
               arguments: [
                 {
@@ -657,7 +656,7 @@ it("optionalChain", async (t) => {
                   start: { line: 31, column: 14 },
                   end: { line: 31, column: 20 },
                 },
-                key: "$shout",
+                param: 2,
               },
               arguments: [
                 {

@@ -11,11 +11,12 @@ it("capturedObjectAssignment", async (t) => {
     cs.create(
       "385xpgt8q0ek2:12:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: cs.create(
               "385xpgt8q0ek2:14:21",
-              { splices: {}, captures: ["counter$385xpgt8q0ek2$0"] },
+              { params: [{ kind: "capture", key: "counter$385xpgt8q0ek2$0" }] },
               () => ({
                 type: "ArrowFunctionExpression",
                 loc: {
@@ -86,10 +87,9 @@ it("capturedObjectAssignment", async (t) => {
               "$0 => () => {\n    $0.count += 1;\n}",
               '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"AAawB,MAAA,GAAG,EAAE;IACrB,EAAO,CAAC,KAAK,IAAI,CAAC,CAAC;AACrB,CAAC,CAAA"}',
             ),
-            params: ["counter$385xpgt8q0ek2$0"],
+            bindings: ["counter$385xpgt8q0ek2$0"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -186,7 +186,7 @@ it("capturedObjectAssignment", async (t) => {
                     start: { line: 14, column: 19 },
                     end: { line: 16, column: 9 },
                   },
-                  key: "$0splice0",
+                  param: 0,
                 },
               },
             ],

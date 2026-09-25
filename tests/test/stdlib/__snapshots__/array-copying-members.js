@@ -11,7 +11,7 @@ it("arrayCopyingMembers", async (t) => {
     "arrayCopyingMembers",
     cs.create(
       "1o1nlczam5nsr:13:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 13, column: 7 }, end: { line: 30, column: 5 } },

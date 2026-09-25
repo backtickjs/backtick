@@ -13,11 +13,10 @@ async function SelectableRows() {
   return cs.create(
     "2i3sz19b0mqz4:13:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -58,7 +57,7 @@ async function SelectableRows() {
                     start: { line: 14, column: 21 },
                     end: { line: 14, column: 27 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -298,6 +297,7 @@ async function SelectableRows() {
                           end: { line: 19, column: 14 },
                         },
                         name: "For",
+                        param: 1,
                       },
                       attributes: [
                         {

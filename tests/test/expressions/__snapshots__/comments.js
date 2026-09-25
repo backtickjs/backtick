@@ -9,7 +9,7 @@ it("comments", async (t) => {
     "comments",
     cs.create(
       "3lcac8ezsyzi3:11:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 23, column: 5 } },

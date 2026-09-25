@@ -5,7 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // storing one is not calling it.
 const beep = cs.create(
   "1dqhax1do6u08:8:27",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 8, column: 30 }, end: { line: 11, column: 1 } },
@@ -74,7 +74,7 @@ const beep = cs.create(
 );
 const onTap = cs.create(
   "1dqhax1do6u08:13:44",
-  { splices: { $beep: { value: beep, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: beep, bindings: [] }] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 13, column: 47 }, end: { line: 15, column: 1 } },
@@ -99,7 +99,7 @@ const onTap = cs.create(
               start: { line: 14, column: 2 },
               end: { line: 14, column: 7 },
             },
-            key: "$beep",
+            param: 0,
           },
         },
       ],
@@ -115,7 +115,7 @@ it("handlerObject", async (t) => {
     "handlerObject",
     cs.create(
       "1dqhax1do6u08:21:4",
-      { splices: { $onTap: { value: onTap, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: onTap, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 21, column: 7 }, end: { line: 27, column: 5 } },
@@ -170,7 +170,7 @@ it("handlerObject", async (t) => {
                           start: { line: 23, column: 13 },
                           end: { line: 23, column: 19 },
                         },
-                        key: "$onTap",
+                        param: 0,
                       },
                       kind: "init",
                       computed: false,
@@ -197,7 +197,7 @@ it("handlerObject", async (t) => {
                           start: { line: 24, column: 14 },
                           end: { line: 24, column: 20 },
                         },
-                        key: "$onTap",
+                        param: 0,
                       },
                       kind: "init",
                       computed: false,

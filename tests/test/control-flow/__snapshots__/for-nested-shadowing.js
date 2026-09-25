@@ -10,7 +10,7 @@ it("forNestedShadowing", async (t) => {
     "forNestedShadowing",
     cs.create(
       "lj6vk8127ex6:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 21, column: 5 } },

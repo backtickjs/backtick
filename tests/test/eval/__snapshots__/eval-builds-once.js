@@ -39,7 +39,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Answer() {
   return cs.create(
     "2f6ulv1ojihe6:42:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 42, column: 12 }, end: { line: 42, column: 33 } },
@@ -96,12 +96,11 @@ async function Waiting({ ask }) {
   return cs.create(
     "2f6ulv1ojihe6:52:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $window: { value: window, params: [] },
-        $ask: { value: ask, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "splice", value: window, bindings: [] },
+        { kind: "splice", value: ask, bindings: [] },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -142,7 +141,7 @@ async function Waiting({ ask }) {
                     start: { line: 53, column: 18 },
                     end: { line: 53, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -200,7 +199,7 @@ async function Waiting({ ask }) {
                       start: { line: 54, column: 20 },
                       end: { line: 54, column: 27 },
                     },
-                    key: "$window",
+                    param: 1,
                   },
                   property: {
                     type: "Identifier",
@@ -266,7 +265,7 @@ async function Waiting({ ask }) {
                               start: { line: 54, column: 55 },
                               end: { line: 54, column: 59 },
                             },
-                            key: "$ask",
+                            param: 2,
                           },
                           arguments: [],
                           optional: false,
@@ -470,12 +469,11 @@ async function Waiting({ ask }) {
 const evalBuildsOnce = cs.create(
   "2f6ulv1ojihe6:65:23",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $answer: { value: answer, params: [] },
-      $Waiting: { value: Waiting, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "splice", value: answer, bindings: [] },
+      { kind: "tag", value: Waiting },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -513,7 +511,7 @@ const evalBuildsOnce = cs.create(
                   start: { line: 66, column: 16 },
                   end: { line: 66, column: 22 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -693,6 +691,7 @@ const evalBuildsOnce = cs.create(
                     end: { line: 71, column: 14 },
                   },
                   name: "Waiting",
+                  param: 2,
                 },
                 attributes: [
                   {
@@ -900,7 +899,7 @@ const evalBuildsOnce = cs.create(
                                     start: { line: 74, column: 42 },
                                     end: { line: 74, column: 49 },
                                   },
-                                  key: "$answer",
+                                  param: 1,
                                 },
                               },
                             },

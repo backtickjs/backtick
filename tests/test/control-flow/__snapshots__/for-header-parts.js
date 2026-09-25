@@ -9,7 +9,7 @@ it("forHeaderParts", async (t) => {
     "forHeaderParts",
     cs.create(
       "2espgmzktnj99:11:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 11, column: 7 }, end: { line: 19, column: 5 } },

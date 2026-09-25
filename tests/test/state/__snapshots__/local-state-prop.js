@@ -13,7 +13,7 @@ const SharedCounter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
       "1myb4rrcna327:15:11",
-      { splices: { $size: { value: size, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: size, bindings: [] }] },
       () => ({
         type: "BinaryExpression",
         loc: { start: { line: 15, column: 14 }, end: { line: 15, column: 48 } },
@@ -51,7 +51,7 @@ const SharedCounter = async ({ size }) =>
                   start: { line: 15, column: 30 },
                   end: { line: 15, column: 35 },
                 },
-                key: "$size",
+                param: 0,
               },
               property: {
                 type: "Identifier",
@@ -82,7 +82,7 @@ const SharedCounter = async ({ size }) =>
     ),
     onclick: cs.create(
       "1myb4rrcna327:16:13",
-      { splices: { $size: { value: size, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: size, bindings: [] }] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 16, column: 16 }, end: { line: 18, column: 5 } },
@@ -118,7 +118,7 @@ const SharedCounter = async ({ size }) =>
                       start: { line: 17, column: 6 },
                       end: { line: 17, column: 11 },
                     },
-                    key: "$size",
+                    param: 0,
                   },
                   property: {
                     type: "Identifier",
@@ -157,7 +157,7 @@ const SharedCounter = async ({ size }) =>
                             start: { line: 17, column: 16 },
                             end: { line: 17, column: 21 },
                           },
-                          key: "$size",
+                          param: 0,
                         },
                         property: {
                           type: "Identifier",
@@ -199,11 +199,10 @@ async function SharingPanel() {
   return cs.create(
     "1myb4rrcna327:25:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $SharedCounter: { value: SharedCounter, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: SharedCounter },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -244,7 +243,7 @@ async function SharingPanel() {
                     start: { line: 26, column: 17 },
                     end: { line: 26, column: 23 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -316,6 +315,7 @@ async function SharingPanel() {
                       end: { line: 29, column: 22 },
                     },
                     name: "SharedCounter",
+                    param: 1,
                   },
                   attributes: [
                     {
@@ -383,6 +383,7 @@ async function SharingPanel() {
                       end: { line: 30, column: 22 },
                     },
                     name: "SharedCounter",
+                    param: 1,
                   },
                   attributes: [
                     {

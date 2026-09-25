@@ -9,7 +9,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Written() {
   return cs.create(
     "7lcft72v2y3x:10:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 10, column: 12 }, end: { line: 14, column: 3 } },

@@ -5,7 +5,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // composes as a block running it in statement position.
 const effects = cs.create(
   "3q2gz79xhvvfp:8:30",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 8, column: 33 }, end: { line: 10, column: 1 } },
@@ -48,7 +48,7 @@ const effects = cs.create(
 );
 const composed = cs.create(
   "3q2gz79xhvvfp:12:31",
-  { splices: { $effects: { value: effects, params: [] } }, captures: [] },
+  { params: [{ kind: "splice", value: effects, bindings: [] }] },
   () => ({
     type: "BlockStatement",
     loc: { start: { line: 12, column: 34 }, end: { line: 14, column: 1 } },
@@ -62,7 +62,7 @@ const composed = cs.create(
             start: { line: 13, column: 2 },
             end: { line: 13, column: 10 },
           },
-          key: "$effects",
+          param: 0,
         },
       },
     ],
@@ -76,7 +76,7 @@ it("actionComposition", async (t) => {
     "actionComposition",
     cs.create(
       "3q2gz79xhvvfp:20:4",
-      { splices: { $composed: { value: composed, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: composed, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 20, column: 7 }, end: { line: 22, column: 5 } },
@@ -93,7 +93,7 @@ it("actionComposition", async (t) => {
                 start: { line: 21, column: 6 },
                 end: { line: 21, column: 15 },
               },
-              key: "$composed",
+              param: 0,
             },
           },
         ],

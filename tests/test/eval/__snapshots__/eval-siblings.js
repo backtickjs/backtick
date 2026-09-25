@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 async function Other() {
   return cs.create(
     "1re1jas6fqiey:9:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 44 } },
@@ -58,10 +58,7 @@ it("evalSiblings", async (t) => {
     "evalSiblings",
     cs.create(
       "1re1jas6fqiey:18:4",
-      {
-        splices: { $otherBundle: { value: otherBundle, params: [] } },
-        captures: [],
-      },
+      { params: [{ kind: "splice", value: otherBundle, bindings: [] }] },
       () => ({
         type: "JSXElement",
         loc: { start: { line: 18, column: 7 }, end: { line: 22, column: 10 } },
@@ -178,7 +175,7 @@ it("evalSiblings", async (t) => {
                     start: { line: 20, column: 12 },
                     end: { line: 20, column: 24 },
                   },
-                  key: "$otherBundle",
+                  param: 0,
                 },
               ],
               optional: false,

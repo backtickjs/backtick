@@ -1,8 +1,7 @@
 import {
-  isComponentTag,
+  type ClientScript,
   isFragmentTag,
   jsxText,
-  type Splice,
 } from "@backtickjs/client-script";
 import type * as ES from "estree";
 import type * as JSX from "estree-jsx";
@@ -13,7 +12,7 @@ import {
   jsxElement,
   stringLiteral,
 } from "../estree.js";
-import type { ScriptEntry } from "./ScriptEntry.js";
+import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 
 type Body = ES.Expression | ES.BlockStatement;
@@ -23,6 +22,8 @@ const RUNTIME = new Set(["fixed", "jsx"]);
 
 // A binding annotated by the compiler with the key it resolved it to.
 type Bound = { readonly key?: string };
+// A host tag, annotated by the compiler with the parameter it is.
+type Spliced = { readonly param?: number };
 
 /**
  * A script's body, as the compiler wrote it, lowered to the entry it is in a
@@ -40,15 +41,13 @@ type Bound = { readonly key?: string };
  * - A binding named `jsx` or `fixed` is renamed, so it cannot hide the
  *   client's.
  */
-export function lowerScriptBody(script: ScriptEntry): Body {
+export function lowerScriptBody(script: ClientScript, body: Body): Body {
+  const { params } = script.metadata;
+  const captures = capturesOf(script);
   const captureIndex = new Map(
-    script.captures.map((key, at) => [key, script.splices.length + at]),
-  );
-  const holes = new Map(
-    script.splices.map((splice, index) => [splice.key, index] as const),
-  );
-  const paramsOf = new Map(
-    script.splices.map((splice) => [splice.key, splice.params] as const),
+    params.flatMap((param, at) =>
+      param.kind === "capture" ? [[param.key, at] as const] : [],
+    ),
   );
 
   const read = (
@@ -66,14 +65,14 @@ export function lowerScriptBody(script: ScriptEntry): Body {
   };
 
   const splice = (
-    key: string,
+    index: number,
     loc: ES.SourceLocation | null | undefined,
   ): ES.Expression => {
-    const index = holes.get(key);
-    if (index === undefined) {
-      throw new Error(`This script has no \`${key}\` splice.`);
+    const hole = params[index];
+    if (hole === undefined || hole.kind === "capture") {
+      throw new Error(`This script has no splice \`$${index}\`.`);
     }
-    const args = [...(paramsOf.get(key) ?? []), ...script.captures].map(
+    const args = [...bindingsOf(hole), ...captures].map(
       (bound) => read(bound, sourceName(bound), loc),
     );
     return {
@@ -116,7 +115,9 @@ export function lowerScriptBody(script: ScriptEntry): Body {
 
     const lowered = ((): ES.Expression => {
       const opening = node.type === "JSXElement" ? node.openingElement : null;
-      const tag = opening?.name as (JSX.JSXIdentifier & Bound) | undefined;
+      const tag = opening?.name as
+        | (JSX.JSXIdentifier & Bound & Spliced)
+        | undefined;
       if (tag === undefined || isFragmentTag(tag.name)) {
         return jsxElement(null, "Fragment", [], drawn);
       }
@@ -141,12 +142,11 @@ export function lowerScriptBody(script: ScriptEntry): Body {
           drawn,
         );
       }
-      // A component tag naming a host binding reaches it by splice, under
-      // `$<name>`.
-      if (isComponentTag(tag.name)) {
+      // A component tag naming a host binding reaches it by splice.
+      if (tag.param !== undefined) {
         return jsxComponent(
           null,
-          splice(`$${tag.name}`, tag.loc),
+          splice(tag.param, tag.loc),
           written,
           drawn,
         );
@@ -168,7 +168,7 @@ export function lowerScriptBody(script: ScriptEntry): Body {
     const held = node as ES.Node & Bound;
     switch (held.type) {
       case "Splice":
-        return splice((held as unknown as Splice).key, held.loc);
+        return splice(held.param, held.loc);
       case "Identifier":
         if (held.key !== undefined) {
           return read(held.key, held.name, held.loc);
@@ -215,5 +215,5 @@ export function lowerScriptBody(script: ScriptEntry): Body {
     }
   }
 
-  return lower(script.body) as Body;
+  return lower(body) as Body;
 }

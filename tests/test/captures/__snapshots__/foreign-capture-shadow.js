@@ -16,13 +16,16 @@ function innerBase(carried) {
   return cs.create(
     "bphb1svo1jv3:18:9",
     {
-      splices: {
-        $0splice0: {
+      params: [
+        {
+          kind: "splice",
           value: cs.create(
             "bphb1svo1jv3:20:13",
             {
-              splices: { $carried: { value: carried, params: [] } },
-              captures: ["base$bphb1svo1jv3$0"],
+              params: [
+                { kind: "splice", value: carried, bindings: [] },
+                { kind: "capture", key: "base$bphb1svo1jv3$0" },
+              ],
             },
             () => ({
               type: "BinaryExpression",
@@ -46,16 +49,15 @@ function innerBase(carried) {
                   start: { line: 20, column: 23 },
                   end: { line: 20, column: 31 },
                 },
-                key: "$carried",
+                param: 0,
               },
             }),
             "($0, $1) => $1 + $0($1)",
             '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"AAmBgB,YAAA,EAAI,GAAG,MAAQ,CAAA"}',
           ),
-          params: ["base$bphb1svo1jv3$0"],
+          bindings: ["base$bphb1svo1jv3$0"],
         },
-      },
-      captures: [],
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -107,7 +109,7 @@ function innerBase(carried) {
               start: { line: 20, column: 11 },
               end: { line: 20, column: 33 },
             },
-            key: "$0splice0",
+            param: 0,
           },
         },
       ],
@@ -123,12 +125,13 @@ it("foreignCaptureShadow", async (t) => {
     cs.create(
       "bphb1svo1jv3:28:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: innerBase(
               cs.create(
                 "bphb1svo1jv3:30:25",
-                { splices: {}, captures: ["base$bphb1svo1jv3$1"] },
+                { params: [{ kind: "capture", key: "base$bphb1svo1jv3$1" }] },
                 () => ({
                   type: "Identifier",
                   loc: {
@@ -142,10 +145,9 @@ it("foreignCaptureShadow", async (t) => {
                 '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"AA6B4B,MAAA,EAAI,CAAA"}',
               ),
             ),
-            params: ["base$bphb1svo1jv3$1"],
+            bindings: ["base$bphb1svo1jv3$1"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -197,7 +199,7 @@ it("foreignCaptureShadow", async (t) => {
                 start: { line: 30, column: 13 },
                 end: { line: 30, column: 35 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

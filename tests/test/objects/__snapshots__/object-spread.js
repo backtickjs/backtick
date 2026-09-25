@@ -15,7 +15,7 @@ it("objectSpread", async (t) => {
     "objectSpread",
     cs.create(
       "31uvwz3g4bdt1:17:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 25, column: 5 } },

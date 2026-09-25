@@ -16,7 +16,7 @@ it("typeAssertion", async (t) => {
     "typeAssertion",
     cs.create(
       "3amzui83z49rq:19:4",
-      { splices: { $answered: { value: answered, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: answered, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 19, column: 7 }, end: { line: 23, column: 5 } },
@@ -82,7 +82,7 @@ it("typeAssertion", async (t) => {
                         start: { line: 20, column: 30 },
                         end: { line: 20, column: 39 },
                       },
-                      key: "$answered",
+                      param: 0,
                     },
                   ],
                   optional: false,

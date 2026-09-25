@@ -12,11 +12,10 @@ async function SwappableRows() {
   return cs.create(
     "2f4veetc9j0fm:12:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $For: { value: For, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "tag", value: For },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -57,7 +56,7 @@ async function SwappableRows() {
                     start: { line: 13, column: 16 },
                     end: { line: 13, column: 22 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -603,6 +602,7 @@ async function SwappableRows() {
                               end: { line: 23, column: 16 },
                             },
                             name: "For",
+                            param: 1,
                           },
                           attributes: [
                             {

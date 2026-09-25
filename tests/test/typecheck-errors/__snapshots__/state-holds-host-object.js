@@ -14,11 +14,10 @@ const host = new Date();
 export default cs.create(
   "1601kcqqso40z:16:15",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $host: { value: host, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "splice", value: host, bindings: [] },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -56,7 +55,7 @@ export default cs.create(
                   start: { line: 18, column: 15 },
                   end: { line: 18, column: 21 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -65,7 +64,7 @@ export default cs.create(
                     start: { line: 18, column: 22 },
                     end: { line: 18, column: 27 },
                   },
-                  key: "$host",
+                  param: 1,
                 },
               ],
               optional: false,
@@ -115,7 +114,7 @@ export default cs.create(
                 start: { line: 20, column: 11 },
                 end: { line: 20, column: 16 },
               },
-              key: "$host",
+              param: 1,
             },
           ],
           optional: false,

@@ -13,7 +13,7 @@ import { namespaced } from "./dom.ts";
 async function Ring() {
   return cs.create(
     "8n845jjtfvwm:15:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 15, column: 12 }, end: { line: 15, column: 76 } },
@@ -157,11 +157,10 @@ async function Ring() {
 const svgNamespace = cs.create(
   "8n845jjtfvwm:18:21",
   {
-    splices: {
-      $Ring: { value: Ring, params: [] },
-      $For: { value: For, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "tag", value: Ring },
+      { kind: "tag", value: For },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -677,6 +676,7 @@ const svgNamespace = cs.create(
                         end: { line: 29, column: 13 },
                       },
                       name: "Ring",
+                      param: 0,
                     },
                     attributes: [],
                     selfClosing: true,
@@ -712,6 +712,7 @@ const svgNamespace = cs.create(
                         end: { line: 30, column: 12 },
                       },
                       name: "For",
+                      param: 1,
                     },
                     attributes: [
                       {

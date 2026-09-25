@@ -25,13 +25,12 @@ it("splicedLiteralWidens", async (t) => {
     cs.create(
       "323oescdizqb0:27:4",
       {
-        splices: {
-          $state: { value: state, params: [] },
-          $five: { value: five, params: [] },
-          $0splice0: { value: Color.Red, params: [] },
-          $0splice1: { value: Color.Blue, params: [] },
-        },
-        captures: [],
+        params: [
+          { kind: "splice", value: state, bindings: [] },
+          { kind: "splice", value: five, bindings: [] },
+          { kind: "splice", value: Color.Red, bindings: [] },
+          { kind: "splice", value: Color.Blue, bindings: [] },
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -72,7 +71,7 @@ it("splicedLiteralWidens", async (t) => {
                       start: { line: 28, column: 16 },
                       end: { line: 28, column: 22 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {
@@ -81,7 +80,7 @@ it("splicedLiteralWidens", async (t) => {
                         start: { line: 28, column: 23 },
                         end: { line: 28, column: 28 },
                       },
-                      key: "$five",
+                      param: 1,
                     },
                   ],
                   optional: false,
@@ -175,7 +174,7 @@ it("splicedLiteralWidens", async (t) => {
                       start: { line: 30, column: 16 },
                       end: { line: 30, column: 22 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {
@@ -184,7 +183,7 @@ it("splicedLiteralWidens", async (t) => {
                         start: { line: 30, column: 23 },
                         end: { line: 30, column: 35 },
                       },
-                      key: "$0splice0",
+                      param: 2,
                     },
                   ],
                   optional: false,
@@ -237,7 +236,7 @@ it("splicedLiteralWidens", async (t) => {
                     start: { line: 31, column: 12 },
                     end: { line: 31, column: 25 },
                   },
-                  key: "$0splice1",
+                  param: 3,
                 },
               ],
               optional: false,

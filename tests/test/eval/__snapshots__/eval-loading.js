@@ -14,7 +14,7 @@ it("evalLoading", async (t) => {
     "evalLoading",
     cs.create(
       "2t6t5dze0269t:17:4",
-      { splices: { $state: { value: state, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: state, bindings: [] }] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 17, column: 7 }, end: { line: 29, column: 5 } },
@@ -54,7 +54,7 @@ it("evalLoading", async (t) => {
                       start: { line: 18, column: 19 },
                       end: { line: 18, column: 25 },
                     },
-                    key: "$state",
+                    param: 0,
                   },
                   arguments: [
                     {

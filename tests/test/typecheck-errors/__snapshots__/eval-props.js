@@ -7,7 +7,7 @@ import { cs } from "@backtickjs/core";
 async function Row({ count }) {
   return cs.create(
     "3og7hp7gm9m5d:14:9",
-    { splices: { $count: { value: count, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: count, bindings: [] }] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 14, column: 12 }, end: { line: 14, column: 39 } },
@@ -53,7 +53,7 @@ async function Row({ count }) {
                 start: { line: 14, column: 27 },
                 end: { line: 14, column: 33 },
               },
-              key: "$count",
+              param: 0,
             },
           },
         },
@@ -78,7 +78,7 @@ async function Row({ count }) {
 async function Nothing() {
   return cs.create(
     "3og7hp7gm9m5d:18:9",
-    { splices: {}, captures: [] },
+    { params: [] },
     () => ({
       type: "JSXElement",
       loc: { start: { line: 18, column: 12 }, end: { line: 18, column: 43 } },
@@ -134,12 +134,13 @@ const rows = await bundler.run(
   cs.create(
     "3og7hp7gm9m5d:22:2",
     {
-      splices: {
-        $0splice0: {
+      params: [
+        {
+          kind: "splice",
           value: _jsx(Row, {
             count: cs.create(
               "3og7hp7gm9m5d:22:50",
-              { splices: {}, captures: ["props$3og7hp7gm9m5d$0"] },
+              { params: [{ kind: "capture", key: "props$3og7hp7gm9m5d$0" }] },
               () => ({
                 type: "MemberExpression",
                 loc: {
@@ -170,10 +171,9 @@ const rows = await bundler.run(
               '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"AAqBqD,MAAA,EAAK,CAAC,KAAK,CAAA"}',
             ),
           }),
-          params: ["props$3og7hp7gm9m5d$0"],
+          bindings: ["props$3og7hp7gm9m5d$0"],
         },
-      },
-      captures: [],
+      ],
     },
     () => ({
       type: "ArrowFunctionExpression",
@@ -192,7 +192,7 @@ const rows = await bundler.run(
       body: {
         type: "Splice",
         loc: { start: { line: 22, column: 35 }, end: { line: 22, column: 71 } },
-        key: "$0splice0",
+        param: 0,
       },
       expression: true,
     }),
@@ -204,11 +204,10 @@ const empty = await bundler.run(_jsx(Nothing, {}));
 export default cs.create(
   "3og7hp7gm9m5d:27:15",
   {
-    splices: {
-      $rows: { value: rows, params: [] },
-      $empty: { value: empty, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: rows, bindings: [] },
+      { kind: "splice", value: empty, bindings: [] },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -255,7 +254,7 @@ export default cs.create(
                     start: { line: 28, column: 20 },
                     end: { line: 28, column: 25 },
                   },
-                  key: "$rows",
+                  param: 0,
                 },
               ],
               optional: false,
@@ -304,7 +303,7 @@ export default cs.create(
                     start: { line: 29, column: 21 },
                     end: { line: 29, column: 27 },
                   },
-                  key: "$empty",
+                  param: 1,
                 },
               ],
               optional: false,

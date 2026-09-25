@@ -11,11 +11,12 @@ it("scriptBoundTagParam", async (t) => {
     cs.create(
       "3ehgcl2xwg3z1:13:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: cs.create(
               "3ehgcl2xwg3z1:16:13",
-              { splices: {}, captures: ["Row$3ehgcl2xwg3z1$1"] },
+              { params: [{ kind: "capture", key: "Row$3ehgcl2xwg3z1$1" }] },
               () => ({
                 type: "JSXElement",
                 loc: {
@@ -77,12 +78,13 @@ it("scriptBoundTagParam", async (t) => {
               "$0 => <$0 n={1}/>",
               '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"AAegB,MAAA,CAAC,EAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAA"}',
             ),
-            params: ["Row$3ehgcl2xwg3z1$1"],
+            bindings: ["Row$3ehgcl2xwg3z1$1"],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: cs.create(
               "3ehgcl2xwg3z1:17:13",
-              { splices: {}, captures: ["Row$3ehgcl2xwg3z1$1"] },
+              { params: [{ kind: "capture", key: "Row$3ehgcl2xwg3z1$1" }] },
               () => ({
                 type: "JSXElement",
                 loc: {
@@ -144,10 +146,9 @@ it("scriptBoundTagParam", async (t) => {
               "$0 => <$0 n={2}/>",
               '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"AAgBgB,MAAA,CAAC,EAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAA"}',
             ),
-            params: ["Row$3ehgcl2xwg3z1$1"],
+            bindings: ["Row$3ehgcl2xwg3z1$1"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -238,7 +239,7 @@ it("scriptBoundTagParam", async (t) => {
                             start: { line: 16, column: 11 },
                             end: { line: 16, column: 31 },
                           },
-                          key: "$0splice0",
+                          param: 0,
                         },
                       },
                       {
@@ -262,7 +263,7 @@ it("scriptBoundTagParam", async (t) => {
                             start: { line: 17, column: 11 },
                             end: { line: 17, column: 31 },
                           },
-                          key: "$0splice1",
+                          param: 1,
                         },
                       },
                       {

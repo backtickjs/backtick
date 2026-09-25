@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function wrapShadowed(fragment) {
   return cs.create(
     "1wiy7dknp0llv:15:9",
-    { splices: { $fragment: { value: fragment, params: [] } }, captures: [] },
+    { params: [{ kind: "splice", value: fragment, bindings: [] }] },
     () => ({
       type: "BlockStatement",
       loc: { start: { line: 15, column: 12 }, end: { line: 21, column: 3 } },
@@ -117,7 +117,7 @@ function wrapShadowed(fragment) {
                     start: { line: 19, column: 21 },
                     end: { line: 19, column: 30 },
                   },
-                  key: "$fragment",
+                  param: 0,
                 },
               },
             },
@@ -136,12 +136,13 @@ it("shadowedHole", async (t) => {
     cs.create(
       "1wiy7dknp0llv:28:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: wrapShadowed(
               cs.create(
                 "1wiy7dknp0llv:28:22",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -154,13 +155,14 @@ it("shadowedHole", async (t) => {
                 '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"AA2ByB,MAAA,EAAE,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-          $0splice1: {
+          {
+            kind: "splice",
             value: wrapShadowed(
               cs.create(
                 "1wiy7dknp0llv:28:48",
-                { splices: {}, captures: [] },
+                { params: [] },
                 () => ({
                   type: "Literal",
                   loc: {
@@ -173,10 +175,9 @@ it("shadowedHole", async (t) => {
                 '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BmD,MAAA,EAAE,CAAA"}',
               ),
             ),
-            params: [],
+            bindings: [],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BinaryExpression",
@@ -188,7 +189,7 @@ it("shadowedHole", async (t) => {
             start: { line: 28, column: 7 },
             end: { line: 28, column: 30 },
           },
-          key: "$0splice0",
+          param: 0,
         },
         right: {
           type: "Splice",
@@ -196,7 +197,7 @@ it("shadowedHole", async (t) => {
             start: { line: 28, column: 33 },
             end: { line: 28, column: 56 },
           },
-          key: "$0splice1",
+          param: 1,
         },
       }),
       "($0, $1) => $0() + $1()",

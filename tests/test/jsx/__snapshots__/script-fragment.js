@@ -10,7 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // expressions survives, where trimming would take it.
 const listed = cs.create(
   "3pjkiwnta5gua:11:15",
-  { splices: {}, captures: [] },
+  { params: [] },
   () => ({
     type: "ArrowFunctionExpression",
     loc: { start: { line: 11, column: 18 }, end: { line: 18, column: 1 } },
@@ -216,7 +216,7 @@ it("scriptFragment", async (t) => {
     _jsx("div", {
       children: cs.create(
         "3pjkiwnta5gua:21:48",
-        { splices: { $listed: { value: listed, params: [] } }, captures: [] },
+        { params: [{ kind: "splice", value: listed, bindings: [] }] },
         () => ({
           type: "CallExpression",
           loc: {
@@ -229,7 +229,7 @@ it("scriptFragment", async (t) => {
               start: { line: 21, column: 51 },
               end: { line: 21, column: 58 },
             },
-            key: "$listed",
+            param: 0,
           },
           arguments: [
             {

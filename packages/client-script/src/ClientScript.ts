@@ -2,17 +2,19 @@ import type { Spliceable } from "@backtickjs/platform-sdk";
 import type * as ES from "estree";
 import type {} from "./Splice.js";
 
-// A hole: what is spliced there, and what it hands whatever lands in it.
-export interface MetadataSplice {
-  value: Spliceable;
-  params: string[];
-}
+// What one of a script's parameters is handed: splices, then host tags, then
+// captures.
+export type Param =
+  // a host value, called with the bindings its hole hands over
+  | { kind: "splice"; value: Spliceable; bindings: string[] }
+  // a host tag, handed over as the value it names
+  | { kind: "tag"; value: Spliceable }
+  // the binding key of an enclosing script's binding
+  | { kind: "capture"; key: string };
 
 export interface Metadata {
-  // spliced host values, under the keys the body uses (see `ClientScriptSplice`)
-  splices: { [key: string]: MetadataSplice };
-  // binding keys the script captures from an enclosing scope
-  captures: string[];
+  // one per parameter: `params[i]` is `$i`
+  params: Param[];
 }
 
 export interface ClientScript {
@@ -30,7 +32,7 @@ export interface ClientScript {
   // the nodes are built when they are first read rather than at every call.
   readonly body: () => ES.Expression | ES.BlockStatement;
   // The script as its bundle entry, `($0, …) => body`, compiled when the host
-  // was: splices and captures are its parameters, and JSX is as written.
+  // was: `metadata.params` are its parameters, and JSX is as written.
   readonly code: string;
   // The code's source map, as JSON, into the host file.
   readonly map: string;

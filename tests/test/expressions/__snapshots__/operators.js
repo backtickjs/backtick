@@ -8,7 +8,7 @@ it("binaryOperators", async (t) => {
     "binaryOperators",
     cs.create(
       "3g7ol1xnrqdpp:10:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 25, column: 5 } },
@@ -387,7 +387,7 @@ it("unaryOperators", async (t) => {
     "unaryOperators",
     cs.create(
       "3g7ol1xnrqdpp:33:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 33, column: 7 }, end: { line: 38, column: 5 } },
@@ -708,7 +708,7 @@ it("assignmentOperators", async (t) => {
     "assignmentOperators",
     cs.create(
       "3g7ol1xnrqdpp:46:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 46, column: 7 }, end: { line: 62, column: 5 } },
@@ -1235,7 +1235,7 @@ it("assignmentTargets", async (t) => {
     "assignmentTargets",
     cs.create(
       "3g7ol1xnrqdpp:71:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 71, column: 7 }, end: { line: 80, column: 5 } },
@@ -1649,7 +1649,7 @@ it("commaOperator", async (t) => {
     "commaOperator",
     cs.create(
       "3g7ol1xnrqdpp:89:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 89, column: 7 }, end: { line: 93, column: 5 } },

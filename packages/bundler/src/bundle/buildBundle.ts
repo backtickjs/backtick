@@ -9,7 +9,7 @@ import { isJsxElement, type JsxElement } from "@backtickjs/ui-platform-sdk";
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 import { holeName } from "./holes.js";
-import type { ScriptEntry } from "./ScriptEntry.js";
+import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import type * as ES from "estree";
 import type { ExperimentalFeatures } from "../bundler.js";
@@ -85,34 +85,29 @@ export async function buildBundle<T extends ClientUnknown>(
 ): Promise<BundleTree> {
   const names = createNames();
   // The `functions` table, filled as rendering reaches each script. Two scripts
-  // written at one source location are one entry, so this is what makes a
-  // reference to a shared script a reference to the same object.
-  // Keyed by entry so a label is a lookup rather than a scan, and ordered by
-  // insertion, which is the table order the tail emits in.
-  const scripts = new Map<ScriptEntry, number>();
-  const entryById = new Map<string, ScriptEntry>();
-  const entryFor = (script: ClientScript): ScriptEntry => {
+  // written at one source location are one entry, so the first script with an
+  // id stands for all of them, and a reference to a shared script is a
+  // reference to the same object. Keyed by that script so a label is a lookup
+  // rather than a scan, and ordered by insertion, which is the table order the
+  // tail emits in.
+  const scripts = new Map<ClientScript, number>();
+  const entryById = new Map<string, ClientScript>();
+  const entryFor = (script: ClientScript): ClientScript => {
     const existing = entryById.get(script.id);
     if (existing !== undefined) {
       return existing;
     }
+    entryById.set(script.id, script);
+    scripts.set(script, scripts.size);
+    return script;
+  };
+  const bodyOf = (script: ClientScript): ES.Expression | ES.BlockStatement => {
     let body = parsedById.get(script.id);
     if (body === undefined) {
       body = script.body();
       parsedById.set(script.id, body);
     }
-    const entry: ScriptEntry = {
-      id: script.id,
-      splices: Object.entries(script.metadata.splices).map(([key, splice]) => ({
-        key,
-        params: splice.params,
-      })),
-      captures: script.metadata.captures,
-      body,
-    };
-    entryById.set(script.id, entry);
-    scripts.set(entry, scripts.size);
-    return entry;
+    return body;
   };
   // A binding key printed under its source name, with a numeric suffix when two
   // distinct bindings would otherwise print the same.
@@ -171,17 +166,17 @@ export async function buildBundle<T extends ClientUnknown>(
   // the ones it does — because which fragment reaches a hole is a host
   // decision. A carried fragment arrives with its own captures already bound,
   // so the extra parameters are unused rather than wrong.
-  const passKeys = (target: ScriptEntry, hole: number): readonly string[] =>
-    target.splices[hole]?.params ?? [];
+  const passKeys = (target: ClientScript, hole: number): readonly string[] =>
+    bindingsOf(target.metadata.params[hole]);
 
-  const bodies = new Map<ScriptEntry, ES.ArrowFunctionExpression>();
+  const bodies = new Map<ClientScript, ES.ArrowFunctionExpression>();
 
   // A script entry's label, either of the two things that name one (see
   // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
   // where it was written. Only the second is the same across responses — a
   // table position follows the order this composition reached things — so it is
   // what a client holding an entry from an earlier response can recognize.
-  const fnLabel = (target: ScriptEntry): string =>
+  const fnLabel = (target: ClientScript): string =>
     features.stableFunctionLabels === true
       ? target.id
       : String(scripts.get(target));
@@ -190,20 +185,17 @@ export async function buildBundle<T extends ClientUnknown>(
   // reached. An entry takes a `$i` parameter per splice — its holes render as
   // calls `$i()` — ahead of its environment. Nothing from a call site is
   // inlined, so the body is a function of the script's source alone.
-  const materialize = (script: ScriptEntry): void => {
+  const materialize = (script: ClientScript): void => {
     if (bodies.has(script)) {
       return;
     }
     // One numbered sequence: a thunk per splice hole, then a value per capture.
-    const params = [
-      ...script.splices.map((splice) => splice.key),
-      ...script.captures,
-    ].map((_, index) => `$${index}`);
+    const params = script.metadata.params.map((_, index) => `$${index}`);
     bodies.set(
       script,
       arrow(
         params.map((param) => identifier(param)),
-        lowerScriptBody(script),
+        lowerScriptBody(script, bodyOf(script)),
       ),
     );
   };
@@ -219,12 +211,12 @@ export async function buildBundle<T extends ClientUnknown>(
   ): ES.Expression | null => {
     if (
       !isClientScript(value) ||
-      Object.keys(value.metadata.splices).length > 0
+      value.metadata.params.some((param) => param.kind !== "capture")
     ) {
       return null;
     }
     const target = entryFor(value);
-    const wanted = target.captures;
+    const wanted = capturesOf(target);
     if (
       wanted.length !== passed.length ||
       wanted.some((key, at) => key !== passed[at])
@@ -355,12 +347,14 @@ export async function buildBundle<T extends ClientUnknown>(
   ): Promise<ES.Expression[]> => {
     const target = entryFor(ref);
     const parts: ES.Expression[] = [];
-    const splices = Object.values(ref.metadata.splices);
-    for (const [index, { value: arg }] of splices.entries()) {
+    const splices = ref.metadata.params.flatMap((param) =>
+      param.kind === "capture" ? [] : [param.value],
+    );
+    for (const [index, arg] of splices.entries()) {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.
-      const passed = [...passKeys(target, index), ...target.captures];
+      const passed = [...passKeys(target, index), ...capturesOf(target)];
       // A fragment whose own parameters are exactly that list reads the hole's
       // arguments as they arrive, so it is passed as it is rather than wrapped
       // in a thunk that would only pass them along.
@@ -382,7 +376,7 @@ export async function buildBundle<T extends ClientUnknown>(
         ),
       );
     }
-    for (const key of target.captures) {
+    for (const key of capturesOf(target)) {
       parts.push(capExpr(key, params));
     }
     return parts;

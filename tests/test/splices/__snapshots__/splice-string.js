@@ -10,11 +10,11 @@ it("spliceString", async (t) => {
     "spliceString",
     cs.create(
       "6r4m74y7k80e:10:40",
-      { splices: { $value: { value: value, params: [] } }, captures: [] },
+      { params: [{ kind: "splice", value: value, bindings: [] }] },
       () => ({
         type: "Splice",
         loc: { start: { line: 10, column: 43 }, end: { line: 10, column: 49 } },
-        key: "$value",
+        param: 0,
       }),
       "$0 => $0()",
       '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splice-string.test.tsx"],"names":[],"mappings":"AAS2C,MAAA,IAAM,CAAA"}',

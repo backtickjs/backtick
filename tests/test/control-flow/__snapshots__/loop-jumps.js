@@ -10,7 +10,7 @@ it("loopJumps", async (t) => {
     "loopJumps",
     cs.create(
       "28bjtc1esuow3:12:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 12, column: 7 }, end: { line: 27, column: 5 } },

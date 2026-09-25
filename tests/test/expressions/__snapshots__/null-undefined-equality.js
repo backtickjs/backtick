@@ -9,7 +9,7 @@ describe("null and undefined", () => {
       await evaluate(
         cs.create(
           "3265muyjx857r:9:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -44,7 +44,7 @@ describe("null and undefined", () => {
       await evaluate(
         cs.create(
           "3265muyjx857r:10:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -81,7 +81,7 @@ describe("null and undefined", () => {
       await evaluate(
         cs.create(
           "3265muyjx857r:14:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -116,7 +116,7 @@ describe("null and undefined", () => {
       await evaluate(
         cs.create(
           "3265muyjx857r:15:32",
-          { splices: {}, captures: [] },
+          { params: [] },
           () => ({
             type: "BinaryExpression",
             loc: {
@@ -158,11 +158,10 @@ describe("null and undefined", () => {
         cs.create(
           "3265muyjx857r:24:21",
           {
-            splices: {
-              $nothing: { value: nothing, params: [] },
-              $empty: { value: empty, params: [] },
-            },
-            captures: [],
+            params: [
+              { kind: "splice", value: nothing, bindings: [] },
+              { kind: "splice", value: empty, bindings: [] },
+            ],
           },
           () => ({
             type: "BlockStatement",
@@ -240,7 +239,7 @@ describe("null and undefined", () => {
                           start: { line: 27, column: 10 },
                           end: { line: 27, column: 18 },
                         },
-                        key: "$nothing",
+                        param: 0,
                       },
                       right: {
                         type: "Identifier",
@@ -264,7 +263,7 @@ describe("null and undefined", () => {
                           start: { line: 28, column: 10 },
                           end: { line: 28, column: 18 },
                         },
-                        key: "$nothing",
+                        param: 0,
                       },
                       right: {
                         type: "Literal",
@@ -288,7 +287,7 @@ describe("null and undefined", () => {
                           start: { line: 29, column: 10 },
                           end: { line: 29, column: 16 },
                         },
-                        key: "$empty",
+                        param: 1,
                       },
                       right: {
                         type: "Literal",
@@ -312,7 +311,7 @@ describe("null and undefined", () => {
                           start: { line: 30, column: 10 },
                           end: { line: 30, column: 16 },
                         },
-                        key: "$empty",
+                        param: 1,
                       },
                       right: {
                         type: "Identifier",

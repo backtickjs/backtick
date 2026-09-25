@@ -28,12 +28,11 @@ async function Held({ again }) {
   return cs.create(
     "zlju6cob2npz:31:9",
     {
-      splices: {
-        $state: { value: state, params: [] },
-        $window: { value: window, params: [] },
-        $again: { value: again, params: [] },
-      },
-      captures: [],
+      params: [
+        { kind: "splice", value: state, bindings: [] },
+        { kind: "splice", value: window, bindings: [] },
+        { kind: "splice", value: again, bindings: [] },
+      ],
     },
     () => ({
       type: "BlockStatement",
@@ -74,7 +73,7 @@ async function Held({ again }) {
                     start: { line: 32, column: 18 },
                     end: { line: 32, column: 24 },
                   },
-                  key: "$state",
+                  param: 0,
                 },
                 arguments: [
                   {
@@ -132,7 +131,7 @@ async function Held({ again }) {
                       start: { line: 34, column: 20 },
                       end: { line: 34, column: 27 },
                     },
-                    key: "$window",
+                    param: 1,
                   },
                   property: {
                     type: "Identifier",
@@ -178,7 +177,7 @@ async function Held({ again }) {
                                 start: { line: 35, column: 10 },
                                 end: { line: 35, column: 16 },
                               },
-                              key: "$again",
+                              param: 2,
                             },
                             arguments: [],
                             optional: false,
@@ -451,11 +450,10 @@ async function Held({ again }) {
 const conditionalDrawing = cs.create(
   "zlju6cob2npz:44:27",
   {
-    splices: {
-      $state: { value: state, params: [] },
-      $Held: { value: Held, params: [] },
-    },
-    captures: [],
+    params: [
+      { kind: "splice", value: state, bindings: [] },
+      { kind: "tag", value: Held },
+    ],
   },
   () => ({
     type: "BlockStatement",
@@ -493,7 +491,7 @@ const conditionalDrawing = cs.create(
                   start: { line: 45, column: 17 },
                   end: { line: 45, column: 23 },
                 },
-                key: "$state",
+                param: 0,
               },
               arguments: [
                 {
@@ -706,6 +704,7 @@ const conditionalDrawing = cs.create(
                         end: { line: 51, column: 13 },
                       },
                       name: "Held",
+                      param: 1,
                     },
                     attributes: [
                       {

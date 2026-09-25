@@ -24,14 +24,11 @@ it("spliceImportedValue", async (t) => {
     "spliceImportedValue",
     cs.create(
       "3rujjqwiut9zl:23:47",
-      {
-        splices: { $FRAGMENT_TAG: { value: FRAGMENT_TAG, params: [] } },
-        captures: [],
-      },
+      { params: [{ kind: "splice", value: FRAGMENT_TAG, bindings: [] }] },
       () => ({
         type: "Splice",
         loc: { start: { line: 23, column: 50 }, end: { line: 23, column: 63 } },
-        key: "$FRAGMENT_TAG",
+        param: 0,
       }),
       "$0 => $0()",
       '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,MAAA,IAAa,CAAA"}',

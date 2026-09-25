@@ -8,11 +8,12 @@ it("nestedScripts", async (t) => {
     cs.create(
       "2jjdjdr7m395y:9:4",
       {
-        splices: {
-          $0splice0: {
+        params: [
+          {
+            kind: "splice",
             value: cs.create(
               "2jjdjdr7m395y:11:15",
-              { splices: {}, captures: ["x$2jjdjdr7m395y$0"] },
+              { params: [{ kind: "capture", key: "x$2jjdjdr7m395y$0" }] },
               () => ({
                 type: "Identifier",
                 loc: {
@@ -25,10 +26,9 @@ it("nestedScripts", async (t) => {
               "$0 => $0",
               '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["nested-scripts.test.tsx"],"names":[],"mappings":"AAUkB,MAAA,EAAC,CAAA"}',
             ),
-            params: ["x$2jjdjdr7m395y$0"],
+            bindings: ["x$2jjdjdr7m395y$0"],
           },
-        },
-        captures: [],
+        ],
       },
       () => ({
         type: "BlockStatement",
@@ -80,7 +80,7 @@ it("nestedScripts", async (t) => {
                 start: { line: 11, column: 13 },
                 end: { line: 11, column: 21 },
               },
-              key: "$0splice0",
+              param: 0,
             },
           },
         ],

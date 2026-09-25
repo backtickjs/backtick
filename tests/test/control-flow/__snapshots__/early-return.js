@@ -8,7 +8,7 @@ it("earlyReturn", async (t) => {
     "earlyReturn",
     cs.create(
       "33mpmt8iae2c7:10:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "BlockStatement",
         loc: { start: { line: 10, column: 7 }, end: { line: 16, column: 5 } },

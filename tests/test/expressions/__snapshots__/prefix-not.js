@@ -8,7 +8,7 @@ it("prefixNot", async (t) => {
     "prefixNot",
     cs.create(
       "3rwumhu91n08h:10:4",
-      { splices: {}, captures: [] },
+      { params: [] },
       () => ({
         type: "ArrowFunctionExpression",
         loc: { start: { line: 10, column: 7 }, end: { line: 15, column: 5 } },
