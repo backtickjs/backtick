@@ -1,5 +1,5 @@
 // 15:5
-($0) =>   → 15:8 (currenc
+($0) =>   → 15:8 (currency:…
 (         → 15:8 (
 currency  → 15:9 currency
 )         → 15:25 ) 
@@ -8,7 +8,7 @@ currency  → 15:9 currency
 const     → 16:7 const 
 table     → 16:13 table
  =        → 16:18  = 
-$0()      → 16:21 $rat
+$0()      → 16:21 $rates;…
 ;         → 16:27 ;
 const     → 17:7 const 
 asked     → 17:13 asked
@@ -36,4 +36,4 @@ asked     → 19:14 asked
 usd       → 19:22 usd
 ;         → 19:25 ;
 }         → 20:5 }
-;         → 20:6 `
+;         → 20:6 `,…

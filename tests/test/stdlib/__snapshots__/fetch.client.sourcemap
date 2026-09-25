@@ -1,17 +1,17 @@
 // 15:5
-($0, $1) =>                                       → 15:8 () => {
+($0, $1) =>                                       → 15:8 ()…
 ()                                                → 15:8 () 
 =>                                                → 15:11 =>
  {                                                → 15:13  {
 const                                             → 16:7 const 
 held                                              → 16:13 held
  =                                                → 16:17  = 
-$0()                                              → 16:20 $sta
+$0()                                              → 16:20 $state("waiting");…
 (                                                 → 16:26 (
 "waiting"                                         → 16:27 "waiting"
 )                                                 → 16:36 )
 ;                                                 → 16:37 ;
-$1()                                              → 18:7 $win
+$1()                                              → 18:7 $window…
 fetch                                             → 19:10 fetch
 (                                                 → 19:15 (
 "/cases/built-ins/Math/trunc/Math.trunc_Success"  → 19:16 "/cases/built-ins/Math/trunc/Math.trunc_Success"
@@ -19,7 +19,7 @@ fetch                                             → 19:10 fetch
 {                                                 → 19:66 {
 signal                                            → 20:11 signal
 :                                                 → 20:17 : 
-$1()                                              → 20:19 $win
+$1()                                              → 20:19 $window.AbortSignal.timeout(3000),…
 .                                                 → 20:26 .
 AbortSignal                                       → 20:27 AbortSignal
 .                                                 → 20:38 .
@@ -104,7 +104,7 @@ error                                             → 32:41 error
 }                                                 → 33:9 }
 )                                                 → 33:10 )
 ;                                                 → 33:11 ;
-$1()                                              → 35:7 $win
+$1()                                              → 35:7 $window…
 fetch                                             → 36:10 fetch
 (                                                 → 36:15 (
 "/cases"                                          → 36:16 "/cases"
@@ -166,7 +166,7 @@ text                                              → 44:22 text
 )                                                 → 44:26 )
 ;                                                 → 44:27 ;
 }                                                 → 45:11 }
-,                                                 → 45:12 ,
+,                                                 → 45:12 ,…
 (                                                 → 46:11 (
 error                                             → 46:12 error
 )                                                 → 46:26 ) 
@@ -183,7 +183,7 @@ error                                             → 47:29 error
 )                                                 → 47:35 )
 ;                                                 → 47:36 ;
 }                                                 → 48:11 }
-)                                                 → 48:12 ,
+)                                                 → 48:12 ,…
 ;                                                 → 49:10 ;
 return                                            → 51:7 return 
 held                                              → 51:14 held
@@ -192,4 +192,4 @@ get                                               → 51:19 get
 ()                                                → 51:22 ()
 ;                                                 → 51:24 ;
 }                                                 → 52:5 }
-;                                                 → 52:6 `
+;                                                 → 52:6 `,…

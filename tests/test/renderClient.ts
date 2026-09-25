@@ -64,9 +64,12 @@ const escape = (text: string): string =>
   text.replace(/\\/g, "\\\\").replace(/\t/g, "\\t");
 
 // Each script's source map as `<generated>  → line:column <source>`: a
-// segment of the emitted code, and the host text it maps to, as long as the
-// segment. The host file is the reader's to see, so the map carries no text
-// of its own — which is recorded too.
+// segment of the emitted code, and the host text it maps to. A map records
+// only where a segment starts, so the text shown is as long as the segment
+// where the two read the same; where they differ — a splice lowered to
+// `$0(…)`, say — it is only the first token there, marked `…`. The host file
+// is the reader's to see, so the map carries no text of its own — which is
+// recorded too.
 export function renderClientMappings(
   sourceText: string,
   scripts: readonly EmittedScriptAt[],
@@ -87,10 +90,12 @@ export function renderClientMappings(
           if (generated.trim() === "" || toLine === undefined) {
             return;
           }
-          const source = (sourceLines[toLine] ?? "").slice(
-            toColumn,
-            toColumn! + generated.length,
-          );
+          const sourceLine = sourceLines[toLine] ?? "";
+          const same = sourceLine.slice(toColumn, toColumn! + generated.length);
+          const source =
+            same === generated
+              ? same
+              : `${/^\s*\S*/.exec(sourceLine.slice(toColumn))![0]}…`;
           rows.push([
             escape(generated),
             `${toLine + 1}:${toColumn! + 1} ${escape(source)}`,

@@ -1,5 +1,5 @@
 // 9:10
-() => {           → 9:13 {
+() => {           → 9:13 {…
 const             → 10:5 const 
 positive          → 10:11 positive
  =                → 10:19  = 
@@ -20,7 +20,7 @@ MAX_VALUE         → 11:28 MAX_VALUE
 ;                 → 11:45 ;
 const             → 12:5 const 
 safe              → 12:11 safe
- =                → 12:15  =
+ =                → 12:15  =…
 Number            → 13:7 Number
 .                 → 13:13 .
 MAX_SAFE_INTEGER  → 13:14 MAX_SAFE_INTEGER
@@ -120,7 +120,7 @@ safe              → 34:11 safe
 </                → 35:7 </
 span              → 35:9 span
 >                 → 35:13 >
-)                 → 35:14 
+)                 → 35:14 …
 ;                 → 36:6 ;
 }                 → 37:3 }
-;                 → 37:4 `
+;                 → 37:4 `;…

@@ -1,9 +1,9 @@
 // 15:5
-($0) => {       → 15:8 {
+($0) => {       → 15:8 {…
 const           → 16:7 const 
 said            → 16:13 said
  =              → 16:17  = 
-$0()            → 16:20 $sta
+$0()            → 16:20 $state("");…
 (               → 16:26 (
 ""              → 16:27 ""
 )               → 16:29 )
@@ -42,7 +42,7 @@ cancelable      → 22:47 cancelable
 ;               → 22:58 ;
 }               → 23:11 }
 }               → 23:12 }
->               → 23:13 
+>               → 23:13 …
 <               → 25:11 <
 textarea        → 25:12 textarea
 oninput         → 25:21 oninput
@@ -63,7 +63,7 @@ currentTarget   → 25:56 currentTarget
 value           → 25:70 value
 )               → 25:75 )
 }               → 25:76 }
-/>              → 25:77  /
+/>              → 25:77  />…
 <               → 26:11 <
 input           → 26:12 input
 oninput         → 26:18 oninput
@@ -84,7 +84,7 @@ currentTarget   → 26:53 currentTarget
 value           → 26:67 value
 )               → 26:72 )
 }               → 26:73 }
-/>              → 26:74  /
+/>              → 26:74  />…
 <               → 27:11 <
 button          → 27:12 button
 onclick         → 28:13 onclick
@@ -111,7 +111,7 @@ currentTarget   → 29:52 currentTarget
 tagName         → 29:66 tagName
 )               → 29:73 )
 }               → 30:13 }
->               → 30:14 
+>               → 30:14 …
 {               → 32:13 {
 said            → 32:14 said
 .               → 32:18 .
@@ -124,7 +124,7 @@ button          → 33:13 button
 </              → 34:9 </
 form            → 34:11 form
 >               → 34:15 >
-)               → 34:16 
+)               → 34:16 …
 ;               → 35:8 ;
 }               → 36:5 }
-;               → 36:6 `
+;               → 36:6 `,…

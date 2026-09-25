@@ -1,5 +1,5 @@
 // 14:5
-($0) => {  → 14:8 {
+($0) => {  → 14:8 {…
 const      → 15:7 const 
 names      → 15:13 names
  =         → 15:18  = 
@@ -12,7 +12,7 @@ names      → 15:13 names
 const      → 16:7 const 
 missing    → 16:13 missing
  =         → 16:20  = 
-$0()       → 16:23 $ans
+$0()       → 16:23 $answers["nowhere"]…
 [          → 16:31 [
 "nowhere"  → 16:32 "nowhere"
 ]          → 16:41 ]
@@ -30,4 +30,4 @@ names      → 17:14 names
 missing    → 17:31 missing
 ;          → 17:38 ;
 }          → 18:5 }
-;          → 18:6 `
+;          → 18:6 `,…
