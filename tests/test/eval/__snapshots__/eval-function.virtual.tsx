@@ -17,6 +17,6 @@ it("evalFunction", async (t) => {
   await snapshotCase(
     t,
     "evalFunction",
-    cs.lift(<div>{cs.lift(<span>{cs.lift(eval((cs.splice((greet)) satisfies typeof cs.ClientUnknown))("ada"))}</span>)}{cs.lift(eval((cs.splice((badge)) satisfies typeof cs.ClientUnknown))({ count: 3 }))}</div>),
+    cs.lift(<div>{cs.lift(<span>{cs.lift(eval(cs.splice((greet) satisfies typeof cs.Spliceable))("ada"))}</span>)}{cs.lift(eval(cs.splice((badge) satisfies typeof cs.Spliceable))({ count: 3 }))}</div>),
   );
 });

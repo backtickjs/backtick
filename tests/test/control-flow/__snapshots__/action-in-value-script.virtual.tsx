@@ -19,9 +19,9 @@ it("actionInValueScript", async (t) => {
     "actionInValueScript",
     cs.lift((__cs_b: boolean) => {
     let __cs_n = 0;
-    (cs.splice((valueScriptEffects)) satisfies typeof cs.ClientUnknown);
+    cs.splice((valueScriptEffects) satisfies typeof cs.Spliceable);
     if (__cs_b) {
-        (cs.splice((ping)) satisfies typeof cs.ClientUnknown)();
+        cs.splice((ping) satisfies typeof cs.Spliceable)();
         __cs_n = 1;
     }
     return __cs_n;

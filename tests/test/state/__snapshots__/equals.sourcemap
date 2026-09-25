@@ -2,9 +2,9 @@ cs.lift((() => {\n                     → cs`{\n
 const                                  → const 
 __cs_n                                 → n
  =                                     →  = 
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (state)                                → $state
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 1                                      → 1
 )                                      → )
@@ -13,9 +13,9 @@ __cs_n                                 → n
 const                                  → const 
 __cs_size                              → size
  =                                     →  = 
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (computed)                             → $computed
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 () => (                                → () => 
 {                                      → ({ 
@@ -60,9 +60,9 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (window)                               → $window
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 .                                      → .
 console                                → console
 .                                      → .
@@ -128,9 +128,9 @@ cs.lift((() => {\n                     → cs`{\n
 const                                  → const 
 __cs_point                             → point
  =                                     →  = 
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (state)                                → $state
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (\n          
 {                                      → { 
 x                                      → x
@@ -161,9 +161,9 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (window)                               → $window
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 .                                      → .
 console                                → console
 .                                      → .
@@ -231,9 +231,9 @@ cs.lift((() => {\n                     → cs`{\n
 const                                  → const 
 __cs_n                                 → n
  =                                     →  = 
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (state)                                → $state
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 1                                      → 1
 ,                                      → , 
@@ -245,9 +245,9 @@ __cs_previous                          → previous
 ,                                      → , 
 __cs_next                              → next
 ) => {\n                               → ) => {\n            
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (window)                               → $window
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 .                                      → .
 console                                → console
 .                                      → .
@@ -299,9 +299,9 @@ cs.lift((() => {\n                     → cs`{\n
 const                                  → const 
 __cs_n                                 → n
  =                                     →  = 
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (state)                                → $state
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 1                                      → 1
 )                                      → )
@@ -311,9 +311,9 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (window)                               → $window
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 .                                      → .
 console                                → console
 .                                      → .
@@ -370,9 +370,9 @@ cs.lift((() => {\n                     → cs`{\n
 const                                  → const 
 __cs_point                             → point
  =                                     →  = 
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (state)                                → $state
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 {                                      → { 
 x                                      → x
@@ -386,9 +386,9 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-(cs.splice(                            →  [-semantic]
+cs.splice(                             →  [-semantic]
 (window)                               → $window
-) satisfies typeof cs.ClientUnknown)   →  [-semantic]
+ satisfies typeof cs.Spliceable)       →  [-semantic]
 .                                      → .
 console                                → console
 .                                      → .

@@ -9,9 +9,9 @@ __cs_flag                                 → flag
 )                                         → ) 
 {\n                                       → {\n      
 return                                    → return 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 ;                                         → ;
 \n    }                                   → \n    }
 \n                                        → \n    
@@ -32,18 +32,18 @@ cs.lift(                                  → cs`
 {                                         → ({\n      
 taken                                     → taken
 :                                         → : 
-(cs.splice(                               → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 guard(ok)                                 → guard(ok)
-) satisfies typeof cs.ClientUnknown)      → } [-semantic]
+ satisfies typeof cs.Spliceable)          → } [-semantic]
 (                                         → (
 true                                      → true
 )                                         → )
 ,                                         → ,\n      
 skipped                                   → skipped
 :                                         → : 
-(cs.splice(                               → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 guard(broken)                             → guard(broken)
-) satisfies typeof cs.ClientUnknown)      → } [-semantic]
+ satisfies typeof cs.Spliceable)          → } [-semantic]
 (                                         → (
 false                                     → false
 )                                         → )

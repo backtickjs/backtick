@@ -11,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.lift((() => {
-    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(2);
+    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(2);
     return <em>{cs.lift(__cs_n.get())}</em>;
 })());
 }

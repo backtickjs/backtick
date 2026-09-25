@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A cell a script declares, and a button that writes it.
 async function Counter() {
   return cs.lift((() => {
-    const __cs_count = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>Add</button>)}{cs.lift(<p>{cs.lift("Count: " + __cs_count.get())}</p>)}</div>;
 })());
 }

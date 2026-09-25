@@ -37,9 +37,9 @@ __cs_name                                 → name
 const                                     → const 
 __cs_which                                → which
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (point)                                   → $point
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 [                                         → [
 __cs_name                                 → name
 ]                                         → ]

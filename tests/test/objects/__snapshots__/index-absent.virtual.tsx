@@ -13,7 +13,7 @@ it("indexAbsent", async (t) => {
     "indexAbsent",
     cs.lift((() => {
     const __cs_names = ["zero", "one"];
-    const __cs_missing = (cs.splice((answers)) satisfies typeof cs.ClientUnknown)["nowhere"] ?? "gone";
+    const __cs_missing = cs.splice((answers) satisfies typeof cs.Spliceable)["nowhere"] ?? "gone";
     return __cs_names[1] + "/" + __cs_missing;
 })()),
   );

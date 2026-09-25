@@ -1,53 +1,53 @@
-cs.lift((() => {\n                    → cs`{\n      
-const                                 → const 
-__cs_stop                             → stop
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(window)                              → $window
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-clearInterval                         → clearInterval
-;                                     → ;
-\n                                    → \n      
-const                                 → const 
-__cs_repeating                        → repeating
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(window)                              → $window
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-setInterval                           → setInterval
-(                                     → (
-() =>                                 → () => 
-0                                     → 0
-,                                     → , 
-1000                                  → 1000
-)                                     → )
-;                                     → ;
-\n                                    → \n      
-__cs_stop                             → stop
-(                                     → (
-__cs_repeating                        → repeating
-)                                     → )
-;                                     → ;
-\n                                    → \n      
-(cs.splice(                           →  [-semantic]
-(window)                              → $window
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-clearTimeout                          → clearTimeout
-(                                     → (
-(cs.splice(                           →  [-semantic]
-(window)                              → $window
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-setTimeout                            → setTimeout
-(                                     → (
-() =>                                 → () => 
-0                                     → 0
-,                                     → , 
-1000                                  → 1000
-)                                     → )
-)                                     → )
-;                                     → ;
-\n})())                               → \n    }`
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_stop                         → stop
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(window)                          → $window
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+clearInterval                     → clearInterval
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_repeating                    → repeating
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(window)                          → $window
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+setInterval                       → setInterval
+(                                 → (
+() =>                             → () => 
+0                                 → 0
+,                                 → , 
+1000                              → 1000
+)                                 → )
+;                                 → ;
+\n                                → \n      
+__cs_stop                         → stop
+(                                 → (
+__cs_repeating                    → repeating
+)                                 → )
+;                                 → ;
+\n                                → \n      
+cs.splice(                        →  [-semantic]
+(window)                          → $window
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+clearTimeout                      → clearTimeout
+(                                 → (
+cs.splice(                        →  [-semantic]
+(window)                          → $window
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+setTimeout                        → setTimeout
+(                                 → (
+() =>                             → () => 
+0                                 → 0
+,                                 → , 
+1000                              → 1000
+)                                 → )
+)                                 → )
+;                                 → ;
+\n})())                           → \n    }`

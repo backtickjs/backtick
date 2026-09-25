@@ -31,10 +31,10 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.run(cs.lift((() => {
     const __cs_total = 1;
-    const __cs_first = (cs.splice(keep(cs.lift(__cs_total))) satisfies typeof cs.ClientUnknown);
+    const __cs_first = cs.splice(keep(cs.lift(__cs_total)) satisfies typeof cs.Spliceable);
     {
         const __cs_total = 2;
-        return __cs_first + __cs_total + (cs.splice(again()) satisfies typeof cs.ClientUnknown);
+        return __cs_first + __cs_total + cs.splice(again() satisfies typeof cs.Spliceable);
     }
 })())),
     {

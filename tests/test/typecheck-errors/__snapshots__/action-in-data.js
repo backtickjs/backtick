@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // A container ships verbatim, so an action inside one has no place — the
 // splice rejects it.
 const action = cs.create(
-  "23leqy4opwht7:5:15",
+  "8ajqw43hsla0:5:15",
   { params: [] },
   () => ({
     type: "BlockStatement",
@@ -26,7 +26,7 @@ const action = cs.create(
                 end: { line: 6, column: 9 },
               },
               name: "x",
-              key: "x$23leqy4opwht7$0",
+              key: "x$8ajqw43hsla0$0",
             },
             init: {
               type: "Literal",
@@ -45,7 +45,7 @@ const action = cs.create(
   '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["action-in-data.test.tsx"],"names":[],"mappings":"AAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 export const listed = cs.create(
-  "23leqy4opwht7:9:22",
+  "8ajqw43hsla0:9:22",
   { params: [{ kind: "splice", value: [action], bindings: [] }] },
   () => ({
     type: "BlockStatement",
@@ -69,7 +69,7 @@ export const listed = cs.create(
                 end: { line: 11, column: 12 },
               },
               name: "list",
-              key: "list$23leqy4opwht7$1",
+              key: "list$8ajqw43hsla0$1",
             },
             init: {
               type: "Splice",
@@ -100,7 +100,7 @@ export const listed = cs.create(
   '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["action-in-data.test.tsx"],"names":[],"mappings":"AAQyB;IAEvB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
 );
 export const keyed = cs.create(
-  "23leqy4opwht7:15:21",
+  "8ajqw43hsla0:15:21",
   { params: [{ kind: "splice", value: { press: action }, bindings: [] }] },
   () => ({
     type: "BlockStatement",
@@ -124,7 +124,7 @@ export const keyed = cs.create(
                 end: { line: 17, column: 11 },
               },
               name: "map",
-              key: "map$23leqy4opwht7$2",
+              key: "map$8ajqw43hsla0$2",
             },
             init: {
               type: "Splice",

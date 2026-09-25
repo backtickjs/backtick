@@ -7,13 +7,13 @@ const action = cs`{
 }`;
 
 export const listed = cs`{
-  // @ts-expect-error: Type 'Client<void>[]' does not satisfy the expected type 'ClientUnknown'.
+  // @ts-expect-error: Type 'Client<void>' is not assignable to type 'Spliceable<ClientValue>'.
   const list = ${[action]};
   return 1;
 }`;
 
 export const keyed = cs`{
-  // @ts-expect-error: Type '{ press: Client<void>; }' does not satisfy the expected type 'ClientUnknown'.
+  // @ts-expect-error: Type '{ press: Client<void>; }' does not satisfy the expected type 'Spliceable'.
   const map = ${{ press: action }};
   return 1;
 }`;

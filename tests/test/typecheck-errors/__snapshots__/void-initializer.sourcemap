@@ -16,9 +16,9 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_x                                    → x
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (ping)                                    → $ping
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 ()                                        → ()
 ;                                         → ;
 \n                                        → \n  
@@ -30,9 +30,9 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_x                                    → x
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (ping)                                    → $ping
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 ()                                        → ()
 ;                                         → ;
 \n})())                                   → \n}`
@@ -51,9 +51,9 @@ cs.lift((() => {\n    // @ts-expect-error: Argument of type 'boolean' is not ass
 const                                     → const 
 __cs_x                                    → x
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (label)                                   → $label
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 (                                         → (
 true                                      → true
 )                                         → )

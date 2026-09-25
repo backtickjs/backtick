@@ -1,89 +1,89 @@
-cs.lift(                              → cs`
-(                                     → (
-__cs_initial                          → initial
-:                                     → : 
-number                                → number
-) => {\n                              → ) => {\n  
-const                                 → const 
-__cs_count                            → count
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-__cs_initial                          → initial
-)                                     → )
-;                                     → ;
-\n                                    → \n  
-return                                → return 
-{                                     → {\n    
-get                                   → get
-:                                     → : 
-() =>                                 → () => 
-__cs_count                            → count
-.                                     → .
-get                                   → get
-()                                    → ()
-,                                     → ,\n    
-add                                   → add
-:                                     → : 
-(                                     → (
-__cs_n                                → n
-:                                     → : 
-number                                → number
-) => {\n                              → ) => {\n      
-__cs_count                            → count
-.                                     → .
-set                                   → set
-(                                     → (
-__cs_count                            → count
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-__cs_n                                → n
-)                                     → )
-;                                     → ;
-\n        }                           → \n    }
- }                                    → ,\n  }
-;                                     → ;
-\n}                                   → \n}
-)                                     → `
-cs.lift((() => {\n                    → cs`{\n      
-const                                 → const 
-__cs_c                                → c
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(counter)                             → $counter
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-10                                    → 10
-)                                     → )
-;                                     → ;
-\n                                    → \n      
-return                                → return 
-<                                     → (\n        <
-button                                → button
-                                      → \n          
-onclick                               → onclick
-={cs.lift(                            → ={
-() => {\n                             → () => {\n            
-__cs_c                                → c
-.                                     → .
-add                                   → add
-(                                     → (
-5                                     → 5
-)                                     → )
-;                                     → ;
-\n    }                               → \n          }
-)}                                    → }
->{cs.lift(                            → \n        >\n          {
-__cs_c                                → c
-.                                     → .
-get                                   → get
-()                                    → ()
-)}</                                  → }\n        </
-button                                → button
->                                     → >\n      )
-;                                     → ;
-\n})())                               → \n    }`
+cs.lift(                          → cs`
+(                                 → (
+__cs_initial                      → initial
+:                                 → : 
+number                            → number
+) => {\n                          → ) => {\n  
+const                             → const 
+__cs_count                        → count
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+__cs_initial                      → initial
+)                                 → )
+;                                 → ;
+\n                                → \n  
+return                            → return 
+{                                 → {\n    
+get                               → get
+:                                 → : 
+() =>                             → () => 
+__cs_count                        → count
+.                                 → .
+get                               → get
+()                                → ()
+,                                 → ,\n    
+add                               → add
+:                                 → : 
+(                                 → (
+__cs_n                            → n
+:                                 → : 
+number                            → number
+) => {\n                          → ) => {\n      
+__cs_count                        → count
+.                                 → .
+set                               → set
+(                                 → (
+__cs_count                        → count
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+__cs_n                            → n
+)                                 → )
+;                                 → ;
+\n        }                       → \n    }
+ }                                → ,\n  }
+;                                 → ;
+\n}                               → \n}
+)                                 → `
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_c                            → c
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(counter)                         → $counter
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+10                                → 10
+)                                 → )
+;                                 → ;
+\n                                → \n      
+return                            → return 
+<                                 → (\n        <
+button                            → button
+                                  → \n          
+onclick                           → onclick
+={cs.lift(                        → ={
+() => {\n                         → () => {\n            
+__cs_c                            → c
+.                                 → .
+add                               → add
+(                                 → (
+5                                 → 5
+)                                 → )
+;                                 → ;
+\n    }                           → \n          }
+)}                                → }
+>{cs.lift(                        → \n        >\n          {
+__cs_c                            → c
+.                                 → .
+get                               → get
+()                                → ()
+)}</                              → }\n        </
+button                            → button
+>                                 → >\n      )
+;                                 → ;
+\n})())                           → \n    }`

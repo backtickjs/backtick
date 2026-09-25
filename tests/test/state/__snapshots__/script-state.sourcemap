@@ -1,67 +1,67 @@
-cs.lift(                              → cs`
-(                                     → (
-__cs_label                            → label
-:                                     → : 
-string                                → string
-) => {\n                              → ) => {\n    
-return                                → return 
-{                                     → { 
-label                                 → label
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-__cs_label                            → label
-)                                     → )
- }                                    →  }
-;                                     → ;
-\n}                                   → \n  }
-)                                     → `
-cs.lift(                              → cs`
-"font-size: 16px"                     → "font-size: 16px"
-)                                     → `
-cs.lift(                              → cs`
-() => {\n                             → () => {\n        
-const                                 → const 
-__cs_row                              → row
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(build)                               → $build
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-"one"                                 → "one"
-)                                     → )
-;                                     → ;
-\n                                    → \n        
-__cs_row                              → row
-.                                     → .
-label                                 → label
-.                                     → .
-set                                   → set
-(                                     → (
-__cs_row                              → row
-.                                     → .
-label                                 → label
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-" !!!"                                → " !!!"
-)                                     → )
-;                                     → ;
-\n}                                   → \n      }
-)                                     → `
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(build)                               → $build
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-"one"                                 → "one"
-)                                     → )
-.                                     → .
-label                                 → label
-.                                     → .
-get                                   → get
-()                                    → ()
-)                                     → `
+cs.lift(                          → cs`
+(                                 → (
+__cs_label                        → label
+:                                 → : 
+string                            → string
+) => {\n                          → ) => {\n    
+return                            → return 
+{                                 → { 
+label                             → label
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+__cs_label                        → label
+)                                 → )
+ }                                →  }
+;                                 → ;
+\n}                               → \n  }
+)                                 → `
+cs.lift(                          → cs`
+"font-size: 16px"                 → "font-size: 16px"
+)                                 → `
+cs.lift(                          → cs`
+() => {\n                         → () => {\n        
+const                             → const 
+__cs_row                          → row
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(build)                           → $build
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+"one"                             → "one"
+)                                 → )
+;                                 → ;
+\n                                → \n        
+__cs_row                          → row
+.                                 → .
+label                             → label
+.                                 → .
+set                               → set
+(                                 → (
+__cs_row                          → row
+.                                 → .
+label                             → label
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+" !!!"                            → " !!!"
+)                                 → )
+;                                 → ;
+\n}                               → \n      }
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(build)                           → $build
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+"one"                             → "one"
+)                                 → )
+.                                 → .
+label                             → label
+.                                 → .
+get                               → get
+()                                → ()
+)                                 → `

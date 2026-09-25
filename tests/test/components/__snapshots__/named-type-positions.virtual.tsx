@@ -16,7 +16,7 @@ type Row = { id: number; label: string };
 
 async function Rows() {
   return cs.lift((() => {
-    const __cs_rows = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<Row[]>([]);
+    const __cs_rows = cs.splice((state) satisfies typeof cs.Spliceable)<Row[]>([]);
     const __cs_add = (__cs_row: Row) => {
         __cs_rows.set([__cs_row]);
     };

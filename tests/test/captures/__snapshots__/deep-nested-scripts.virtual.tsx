@@ -4,9 +4,9 @@ import type { Client } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 function add(lhs: Client<number>, rhs: Client<number>): Client<number> {
-  return cs.lift((cs.splice((lhs)) satisfies typeof cs.ClientUnknown) + (cs.splice((rhs)) satisfies typeof cs.ClientUnknown));
+  return cs.lift(cs.splice((lhs) satisfies typeof cs.Spliceable) + cs.splice((rhs) satisfies typeof cs.Spliceable));
 }
 
 it("deepNestedScripts", async (t) => {
-  await snapshotCase(t, "deepNestedScripts", cs.lift((cs.splice(add(cs.lift(1), cs.lift(2))) satisfies typeof cs.ClientUnknown)));
+  await snapshotCase(t, "deepNestedScripts", cs.lift(cs.splice(add(cs.lift(1), cs.lift(2)) satisfies typeof cs.Spliceable)));
 });

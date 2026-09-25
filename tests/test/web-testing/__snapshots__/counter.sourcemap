@@ -1,55 +1,55 @@
-cs.lift((() => {\n                    → cs`{\n    
-const                                 → const 
-__cs_count                            → count
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-return                                → return 
-<                                     → (\n      <
-div                                   → div
->{cs.lift(                            → >\n        
-<                                     → <
-button                                → button
-                                      →  
-onclick                               → onclick
-={cs.lift(                            → ={
-() =>                                 → () => 
-__cs_count                            → count
-.                                     → .
-set                                   → set
-(                                     → (
-__cs_count                            → count
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-1                                     → 1
-)                                     → )
-)}                                    → }
->Add</                                → >Add</
-button                                → button
->                                     → >
-)}{cs.lift(                           → \n        
-<                                     → <
-p                                     → p
->{cs.lift(                            → >{
-"Count: "                             → "Count: "
- +                                    →  + 
-__cs_count                            → count
-.                                     → .
-get                                   → get
-()                                    → ()
-)}</                                  → }</
-p                                     → p
->                                     → >
-)}</                                  → \n      </
-div                                   → div
->                                     → >\n    )
-;                                     → ;
-\n})())                               → \n  }`
+cs.lift((() => {\n                → cs`{\n    
+const                             → const 
+__cs_count                        → count
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n    
+return                            → return 
+<                                 → (\n      <
+div                               → div
+>{cs.lift(                        → >\n        
+<                                 → <
+button                            → button
+                                  →  
+onclick                           → onclick
+={cs.lift(                        → ={
+() =>                             → () => 
+__cs_count                        → count
+.                                 → .
+set                               → set
+(                                 → (
+__cs_count                        → count
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+1                                 → 1
+)                                 → )
+)}                                → }
+>Add</                            → >Add</
+button                            → button
+>                                 → >
+)}{cs.lift(                       → \n        
+<                                 → <
+p                                 → p
+>{cs.lift(                        → >{
+"Count: "                         → "Count: "
+ +                                →  + 
+__cs_count                        → count
+.                                 → .
+get                               → get
+()                                → ()
+)}</                              → }</
+p                                 → p
+>                                 → >
+)}</                              → \n      </
+div                               → div
+>                                 → >\n    )
+;                                 → ;
+\n})())                           → \n  }`

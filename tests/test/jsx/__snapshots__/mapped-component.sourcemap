@@ -1,21 +1,21 @@
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(rows)                                → $rows
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → `
-cs.lift(                              → cs`
-(                                     → (
-__cs_row                              → row
-:                                     → : 
-number                                → number
-) =>                                  → ) => 
-(cs.splice(                           → ${ [-semantic]
-(<span>{                              → (<span>{
-cs.lift(                              → cs`
-"row "                                → "row "
- +                                    →  + 
-__cs_row                              → row
-)                                     → `
-}</span>)                             → }</span>)
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-)                                     → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(rows)                            → $rows
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → `
+cs.lift(                          → cs`
+(                                 → (
+__cs_row                          → row
+:                                 → : 
+number                            → number
+) =>                              → ) => 
+cs.splice(                        → ${ [-semantic]
+(<span>{                          → (<span>{
+cs.lift(                          → cs`
+"row "                            → "row "
+ +                                →  + 
+__cs_row                          → row
+)                                 → `
+}</span>)                         → }</span>)
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+)                                 → `

@@ -26,9 +26,9 @@ describe("onMount", () => {
     const seen = await logged(() =>
       render(
         cs.lift((() => {
-    const __cs_count = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
-    (cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => {
-        (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log();
+    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
+    cs.splice((onMount) satisfies typeof cs.Spliceable)(() => {
+        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
         __cs_count.set(__cs_count.get() + 1);
     });
     return <p>{cs.lift("mounted " + __cs_count.get())}</p>;
@@ -42,8 +42,8 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     await render(
       cs.lift((() => {
-    const __cs_said = (cs.splice((state)) satisfies typeof cs.ClientUnknown)("not yet");
-    return <button onclick={cs.lift(() => (cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => __cs_said.set("ran")))}>{cs.lift(__cs_said.get())}</button>;
+    const __cs_said = cs.splice((state) satisfies typeof cs.Spliceable)("not yet");
+    return <button onclick={cs.lift(() => cs.splice((onMount) satisfies typeof cs.Spliceable)(() => __cs_said.set("ran")))}>{cs.lift(__cs_said.get())}</button>;
 })()),
     );
     await userEvent.click(screen.getByRole("button"));

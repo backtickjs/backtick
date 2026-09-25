@@ -2,9 +2,9 @@ cs.lift((() => {\n    // @ts-expect-error: Conversion of type 'number' to type '
 const                                     → const 
 __cs_a                                    → a
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (one)                                     → $one
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
  as                                       →  as 
 void                                      → void
 ;                                         → ;

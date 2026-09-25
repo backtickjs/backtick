@@ -1,50 +1,50 @@
-cs.lift((() => {\n                    → cs`{\n    
-const                                 → const 
-__cs_size                             → size
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-16                                    → 16
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-return                                → return 
-<                                     → (\n      <
-span                                  → span
-                                      → \n        
-style                                 → style
-={cs.lift(                            → ={
-"font-size: "                         → "font-size: "
- +                                    →  + 
-__cs_size                             → size
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-"px"                                  → "px"
-)}                                    → }
-                                      → \n        
-onclick                               → onclick
-={cs.lift(                            → ={
-() => {\n                             → () => {\n          
-__cs_size                             → size
-.                                     → .
-set                                   → set
-(                                     → (
-__cs_size                             → size
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-1                                     → 1
-)                                     → )
-;                                     → ;
-\n    }                               → \n        }
-)}                                    → }
->\n        press\n      </            → \n      >\n        press\n      </
-span                                  → span
->                                     → >\n    )
-;                                     → ;
-\n})())                               → \n  }`
+cs.lift((() => {\n                → cs`{\n    
+const                             → const 
+__cs_size                         → size
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+16                                → 16
+)                                 → )
+;                                 → ;
+\n                                → \n    
+return                            → return 
+<                                 → (\n      <
+span                              → span
+                                  → \n        
+style                             → style
+={cs.lift(                        → ={
+"font-size: "                     → "font-size: "
+ +                                →  + 
+__cs_size                         → size
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+"px"                              → "px"
+)}                                → }
+                                  → \n        
+onclick                           → onclick
+={cs.lift(                        → ={
+() => {\n                         → () => {\n          
+__cs_size                         → size
+.                                 → .
+set                               → set
+(                                 → (
+__cs_size                         → size
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n    }                           → \n        }
+)}                                → }
+>\n        press\n      </        → \n      >\n        press\n      </
+span                              → span
+>                                 → >\n    )
+;                                 → ;
+\n})())                           → \n  }`

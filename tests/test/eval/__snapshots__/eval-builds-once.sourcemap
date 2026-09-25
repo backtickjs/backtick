@@ -1,148 +1,148 @@
-cs.lift(                              → cs`
-<                                     → <
-em                                    → em
->{cs.lift(                            → >{
-"answered"                            → "answered"
-)}</                                  → }</
-em                                    → em
->                                     → >
-)                                     → `
-cs.lift((() => {\n                    → cs`{\n    
-const                                 → const 
-__cs_drawn                            → drawn
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-<                                     → <
-Bundle                                → Bundle
-<                                     → <
-BacktickElement                       → BacktickElement
->                                     → >
- |                                    →  | 
-null                                  → null
->(                                    → >(
-null                                  → null
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-const                                 → const 
-__cs_started                          → started
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(window)                              → $window
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-setTimeout                            → setTimeout
-(                                     → (
-() =>                                 → () => 
-__cs_drawn                            → drawn
-.                                     → .
-set                                   → set
-(                                     → (
-(cs.splice(                           →  [-semantic]
-(ask)                                 → $ask
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-()                                    → ()
-)                                     → )
-,                                     → , 
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-return                                → return 
-<>{cs.lift(                           → (\n      <>\n        {
-__cs_drawn                            → drawn
-.                                     → .
-get                                   → get
-()                                    → ()
- ===                                  →  === 
-null                                  → null
- ?                                    → \n          ? 
-null                                  → null
- :                                    → \n          : 
-eval                                  → eval
-(                                     → (
-__cs_drawn                            → drawn
-.                                     → .
-get                                   → get
-()                                    → ()
- as                                   →  as 
-Bundle                                → Bundle
-<                                     → <
-BacktickElement                       → BacktickElement
->                                     → >
-)                                     → )
-)}</>                                 → }\n      </>\n    )
-;                                     → ;
-\n})())                               → \n  }`
-cs.lift((() => {\n                    → cs`{\n  
-const                                 → const 
-__cs_asked                            → asked
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n\n  
-return                                → return 
-<                                     → (\n    <
-div                                   → div
->{cs.lift(                            → >\n      
-<                                     → <
-span                                  → span
->{cs.lift(                            → >{
-"asked "                              → "asked "
- +                                    →  + 
-__cs_asked                            → asked
-.                                     → .
-get                                   → get
-()                                    → ()
-)}</                                  → }</
-span                                  → span
->                                     → >
-)}{cs.lift(                           → \n      
-<                                     → <
-Waiting                               → Waiting
-                                      → \n        
-ask                                   → ask
-={cs.lift(                            → ={
-() => {\n                             → () => {\n          
-__cs_asked                            → asked
-.                                     → .
-set                                   → set
-(                                     → (
-__cs_asked                            → asked
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-1                                     → 1
-)                                     → )
-;                                     → ;
-\n                                    → \n          
-return                                → return 
-__cs_asked                            → asked
-.                                     → .
-get                                   → get
-()                                    → ()
- >                                    →  > 
-4                                     → 4
- ?                                    →  ? 
-null                                  → null
- :                                    →  : 
-(cs.splice(                           →  [-semantic]
-(answer)                              → $answer
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-;                                     → ;
-\n    }                               → \n        }
-)}                                    → }
-/>                                    → \n      />
-)}</                                  → \n    </
-div                                   → div
->                                     → >\n  )
-;                                     → ;
-\n})())                               → \n}`
+cs.lift(                          → cs`
+<                                 → <
+em                                → em
+>{cs.lift(                        → >{
+"answered"                        → "answered"
+)}</                              → }</
+em                                → em
+>                                 → >
+)                                 → `
+cs.lift((() => {\n                → cs`{\n    
+const                             → const 
+__cs_drawn                        → drawn
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+<                                 → <
+Bundle                            → Bundle
+<                                 → <
+BacktickElement                   → BacktickElement
+>                                 → >
+ |                                →  | 
+null                              → null
+>(                                → >(
+null                              → null
+)                                 → )
+;                                 → ;
+\n                                → \n    
+const                             → const 
+__cs_started                      → started
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(window)                          → $window
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+setTimeout                        → setTimeout
+(                                 → (
+() =>                             → () => 
+__cs_drawn                        → drawn
+.                                 → .
+set                               → set
+(                                 → (
+cs.splice(                        →  [-semantic]
+(ask)                             → $ask
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+()                                → ()
+)                                 → )
+,                                 → , 
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n    
+return                            → return 
+<>{cs.lift(                       → (\n      <>\n        {
+__cs_drawn                        → drawn
+.                                 → .
+get                               → get
+()                                → ()
+ ===                              →  === 
+null                              → null
+ ?                                → \n          ? 
+null                              → null
+ :                                → \n          : 
+eval                              → eval
+(                                 → (
+__cs_drawn                        → drawn
+.                                 → .
+get                               → get
+()                                → ()
+ as                               →  as 
+Bundle                            → Bundle
+<                                 → <
+BacktickElement                   → BacktickElement
+>                                 → >
+)                                 → )
+)}</>                             → }\n      </>\n    )
+;                                 → ;
+\n})())                           → \n  }`
+cs.lift((() => {\n                → cs`{\n  
+const                             → const 
+__cs_asked                        → asked
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n\n  
+return                            → return 
+<                                 → (\n    <
+div                               → div
+>{cs.lift(                        → >\n      
+<                                 → <
+span                              → span
+>{cs.lift(                        → >{
+"asked "                          → "asked "
+ +                                →  + 
+__cs_asked                        → asked
+.                                 → .
+get                               → get
+()                                → ()
+)}</                              → }</
+span                              → span
+>                                 → >
+)}{cs.lift(                       → \n      
+<                                 → <
+Waiting                           → Waiting
+                                  → \n        
+ask                               → ask
+={cs.lift(                        → ={
+() => {\n                         → () => {\n          
+__cs_asked                        → asked
+.                                 → .
+set                               → set
+(                                 → (
+__cs_asked                        → asked
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n                                → \n          
+return                            → return 
+__cs_asked                        → asked
+.                                 → .
+get                               → get
+()                                → ()
+ >                                →  > 
+4                                 → 4
+ ?                                →  ? 
+null                              → null
+ :                                →  : 
+cs.splice(                        →  [-semantic]
+(answer)                          → $answer
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+;                                 → ;
+\n    }                           → \n        }
+)}                                → }
+/>                                → \n      />
+)}</                              → \n    </
+div                               → div
+>                                 → >\n  )
+;                                 → ;
+\n})())                           → \n}`

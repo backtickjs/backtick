@@ -31,7 +31,7 @@ describe("an undefined prop", () => {
 
   it("still reaches the element when it is given", async () => {
     await render(
-      <Pill label="focused" ref={cs.lift(__cs_el => (cs.splice((onMount)) satisfies typeof cs.ClientUnknown)(() => __cs_el.focus()))} />,
+      <Pill label="focused" ref={cs.lift(__cs_el => cs.splice((onMount) satisfies typeof cs.Spliceable)(() => __cs_el.focus()))} />,
     );
     assert.equal(document.activeElement, screen.getByRole("button"));
   });

@@ -1,71 +1,71 @@
-cs.lift(                              → cs`
-null                                  → null
- ===                                  →  === 
-null                                  → null
-)                                     → `
-cs.lift(                              → cs`
-undefined                             → undefined
- ===                                  →  === 
-undefined                             → undefined
-)                                     → `
-cs.lift(                              → cs`
-null                                  → null
- !==                                  →  !== 
-undefined                             → undefined
-)                                     → `
-cs.lift(                              → cs`
-null                                  → null
- ===                                  →  === 
-undefined                             → undefined
-)                                     → `
-cs.lift((() => {\n                    → cs`{\n        
-const                                 → const 
-__cs_names                            → names
- =                                    →  = 
-[                                     → [
-"a"                                   → "a"
-]                                     → ]
-;                                     → ;
-\n                                    → \n        
-return                                → return 
-[                                     → [\n          
-(cs.splice(                           →  [-semantic]
-(nothing)                             → $nothing
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- ===                                  →  === 
-undefined                             → undefined
-,                                     → ,\n          
-(cs.splice(                           →  [-semantic]
-(nothing)                             → $nothing
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- !==                                  →  !== 
-null                                  → null
-,                                     → ,\n          
-(cs.splice(                           →  [-semantic]
-(empty)                               → $empty
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- ===                                  →  === 
-null                                  → null
-,                                     → ,\n          
-(cs.splice(                           →  [-semantic]
-(empty)                               → $empty
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- !==                                  →  !== 
-undefined                             → undefined
-,                                     → ,\n          
-__cs_names                            → names
-[                                     → [
-1                                     → 1
-]                                     → ]
- ===                                  →  === 
-undefined                             → undefined
-,                                     → ,\n          
-__cs_names                            → names
-[                                     → [
-1                                     → 1
-]                                     → ]
- !==                                  →  !== 
-null                                  → null
-]                                     → ,\n        ]
-;                                     → ;
-\n})())                               → \n      }`
+cs.lift(                          → cs`
+null                              → null
+ ===                              →  === 
+null                              → null
+)                                 → `
+cs.lift(                          → cs`
+undefined                         → undefined
+ ===                              →  === 
+undefined                         → undefined
+)                                 → `
+cs.lift(                          → cs`
+null                              → null
+ !==                              →  !== 
+undefined                         → undefined
+)                                 → `
+cs.lift(                          → cs`
+null                              → null
+ ===                              →  === 
+undefined                         → undefined
+)                                 → `
+cs.lift((() => {\n                → cs`{\n        
+const                             → const 
+__cs_names                        → names
+ =                                →  = 
+[                                 → [
+"a"                               → "a"
+]                                 → ]
+;                                 → ;
+\n                                → \n        
+return                            → return 
+[                                 → [\n          
+cs.splice(                        →  [-semantic]
+(nothing)                         → $nothing
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ ===                              →  === 
+undefined                         → undefined
+,                                 → ,\n          
+cs.splice(                        →  [-semantic]
+(nothing)                         → $nothing
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ !==                              →  !== 
+null                              → null
+,                                 → ,\n          
+cs.splice(                        →  [-semantic]
+(empty)                           → $empty
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ ===                              →  === 
+null                              → null
+,                                 → ,\n          
+cs.splice(                        →  [-semantic]
+(empty)                           → $empty
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ !==                              →  !== 
+undefined                         → undefined
+,                                 → ,\n          
+__cs_names                        → names
+[                                 → [
+1                                 → 1
+]                                 → ]
+ ===                              →  === 
+undefined                         → undefined
+,                                 → ,\n          
+__cs_names                        → names
+[                                 → [
+1                                 → 1
+]                                 → ]
+ !==                              →  !== 
+null                              → null
+]                                 → ,\n        ]
+;                                 → ;
+\n})())                           → \n      }`

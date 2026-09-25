@@ -1,0 +1,1 @@
+12:19 error TS1360: Type '(props: { readonly title: Prop<string>; }) => Element' does not satisfy the expected type 'Spliceable'.

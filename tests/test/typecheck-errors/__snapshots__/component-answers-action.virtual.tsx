@@ -5,7 +5,7 @@ import { cs, state } from "@backtickjs/core";
 // without returning, has nothing to draw.
 async function Panel() {
   return cs.lift((() => {
-    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(2);
+    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(2);
     __cs_n.set(3);
 })());
 }

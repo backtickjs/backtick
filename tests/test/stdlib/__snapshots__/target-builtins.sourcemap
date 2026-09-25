@@ -1,22 +1,22 @@
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(greet)                               → $greet
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-()                                    → ()
-)                                     → `
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(greet)                               → $greet
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-()                                    → ()
-)                                     → `
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(storage)                             → $storage
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-get                                   → get
-(                                     → (
-"greeting"                            → "greeting"
-)                                     → )
-)                                     → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(greet)                           → $greet
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+()                                → ()
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(greet)                           → $greet
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+()                                → ()
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(storage)                         → $storage
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+get                               → get
+(                                 → (
+"greeting"                        → "greeting"
+)                                 → )
+)                                 → `

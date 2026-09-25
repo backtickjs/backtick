@@ -10,7 +10,7 @@ import { children, drawn, text } from "./dom.ts";
 // thing saying which row is which.
 async function SwappableRows() {
   return cs.lift((() => {
-    const __cs_ids = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3]);
+    const __cs_ids = cs.splice((state) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
     const __cs_swap = () => {
         const __cs_held = __cs_ids.get();
         __cs_ids.set(__cs_held.with(0, __cs_held[2]).with(2, __cs_held[0]));

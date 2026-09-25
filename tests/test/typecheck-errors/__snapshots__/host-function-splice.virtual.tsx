@@ -1,0 +1,14 @@
+import { cs } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/core";
+
+// A host function is not spliceable (see `Spliceable`): only a tag may name
+// one, as a component. Client behaviour is `cs`.
+function Card(props: { readonly title: Prop<string> }) {
+  return <h2>{props.title}</h2>;
+}
+
+export default cs.lift((() => {
+    // @ts-expect-error: Type '(props: { readonly title: Prop<string>; }) => Element' does not satisfy the expected type 'Spliceable'.
+    const __cs_Heading = cs.splice((Card) satisfies typeof cs.Spliceable);
+    return <Card title={cs.lift("tag")}/>;
+})());

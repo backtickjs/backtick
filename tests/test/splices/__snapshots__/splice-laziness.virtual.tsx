@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.lift((__cs_flag: boolean) => {
     if (__cs_flag) {
-        return (cs.splice((fragment)) satisfies typeof cs.ClientUnknown);
+        return cs.splice((fragment) satisfies typeof cs.Spliceable);
     }
     return "skipped";
 });
@@ -28,6 +28,6 @@ it("spliceLaziness", async (t) => {
   await snapshotCase(
     t,
     "spliceLaziness",
-    cs.lift({ taken: (cs.splice(guard(ok)) satisfies typeof cs.ClientUnknown)(true), skipped: (cs.splice(guard(broken)) satisfies typeof cs.ClientUnknown)(false) }),
+    cs.lift({ taken: cs.splice(guard(ok) satisfies typeof cs.Spliceable)(true), skipped: cs.splice(guard(broken) satisfies typeof cs.Spliceable)(false) }),
   );
 });

@@ -1,120 +1,120 @@
-cs.lift(                              → cs`
-"font-size: "                         → "font-size: "
- + (                                  →  + 
-(cs.splice(                           →  [-semantic]
-(selected)                            → $selected
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-get                                   → get
-()                                    → ()
- ===                                  →  === 
-(cs.splice(                           →  [-semantic]
-(id)                                  → $id
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- ?                                    →  ? 
-20                                    → 20
- :                                    →  : 
-16                                    → 16
-)                                     → 
- +                                    →  + 
-"px"                                  → "px"
-)                                     → `
-cs.lift(                              → cs`
-"row "                                → "row "
- +                                    →  + 
-(cs.splice(                           →  [-semantic]
-(id)                                  → $id
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- +                                    →  + 
-" of "                                → " of "
- +                                    →  + 
-(cs.splice(                           →  [-semantic]
-(selected)                            → $selected
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-get                                   → get
-()                                    → ()
-)                                     → `
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(selected)                            → $selected
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-get                                   → get
-()                                    → ()
- ===                                  →  === 
-(cs.splice(                           →  [-semantic]
-(id)                                  → $id
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- ?                                    →  ? 
-(cs.splice(                           → ${ [-semantic]
-(<span>marker</span>)                 → (<span>marker</span>)
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
- :                                    →  : 
-null                                  → null
-)                                     → `
-cs.lift((() => {\n                    → cs`{\n    
-const                                 → const 
-__cs_selected                         → selected
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-return                                → return 
-<                                     → (\n      <
-div                                   → div
->{cs.lift(                            → >\n        
-<                                     → <
-span                                  → span
-                                      →  
-onclick                               → onclick
-={cs.lift(                            → ={
-() =>                                 → () => 
-__cs_selected                         → selected
-.                                     → .
-set                                   → set
-(                                     → (
-1                                     → 1
-)                                     → )
-)}                                    → }
->select</                             → >select</
-span                                  → span
->                                     → >
-)}{cs.lift(                           → \n        
-<                                     → <
-ReadingRow                            → ReadingRow
-                                      →  
-id                                    → id
-={cs.lift(                            → ={
-0                                     → 0
-)}                                    → }
-                                      →  
-selected                              → selected
-={cs.lift(                            → ={
-__cs_selected                         → selected
-)}                                    → }
-/>                                    →  />
-)}{cs.lift(                           → \n        
-<                                     → <
-ReadingRow                            → ReadingRow
-                                      →  
-id                                    → id
-={cs.lift(                            → ={
-1                                     → 1
-)}                                    → }
-                                      →  
-selected                              → selected
-={cs.lift(                            → ={
-__cs_selected                         → selected
-)}                                    → }
-/>                                    →  />
-)}</                                  → \n      </
-div                                   → div
->                                     → >\n    )
-;                                     → ;
-\n})())                               → \n  }`
+cs.lift(                          → cs`
+"font-size: "                     → "font-size: "
+ + (                              →  + 
+cs.splice(                        →  [-semantic]
+(selected)                        → $selected
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+get                               → get
+()                                → ()
+ ===                              →  === 
+cs.splice(                        →  [-semantic]
+(id)                              → $id
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ ?                                →  ? 
+20                                → 20
+ :                                →  : 
+16                                → 16
+)                                 → 
+ +                                →  + 
+"px"                              → "px"
+)                                 → `
+cs.lift(                          → cs`
+"row "                            → "row "
+ +                                →  + 
+cs.splice(                        →  [-semantic]
+(id)                              → $id
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ +                                →  + 
+" of "                            → " of "
+ +                                →  + 
+cs.splice(                        →  [-semantic]
+(selected)                        → $selected
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+get                               → get
+()                                → ()
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(selected)                        → $selected
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+get                               → get
+()                                → ()
+ ===                              →  === 
+cs.splice(                        →  [-semantic]
+(id)                              → $id
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ ?                                →  ? 
+cs.splice(                        → ${ [-semantic]
+(<span>marker</span>)             → (<span>marker</span>)
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+ :                                →  : 
+null                              → null
+)                                 → `
+cs.lift((() => {\n                → cs`{\n    
+const                             → const 
+__cs_selected                     → selected
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n    
+return                            → return 
+<                                 → (\n      <
+div                               → div
+>{cs.lift(                        → >\n        
+<                                 → <
+span                              → span
+                                  →  
+onclick                           → onclick
+={cs.lift(                        → ={
+() =>                             → () => 
+__cs_selected                     → selected
+.                                 → .
+set                               → set
+(                                 → (
+1                                 → 1
+)                                 → )
+)}                                → }
+>select</                         → >select</
+span                              → span
+>                                 → >
+)}{cs.lift(                       → \n        
+<                                 → <
+ReadingRow                        → ReadingRow
+                                  →  
+id                                → id
+={cs.lift(                        → ={
+0                                 → 0
+)}                                → }
+                                  →  
+selected                          → selected
+={cs.lift(                        → ={
+__cs_selected                     → selected
+)}                                → }
+/>                                →  />
+)}{cs.lift(                       → \n        
+<                                 → <
+ReadingRow                        → ReadingRow
+                                  →  
+id                                → id
+={cs.lift(                        → ={
+1                                 → 1
+)}                                → }
+                                  →  
+selected                          → selected
+={cs.lift(                        → ={
+__cs_selected                     → selected
+)}                                → }
+/>                                →  />
+)}</                              → \n      </
+div                               → div
+>                                 → >\n    )
+;                                 → ;
+\n})())                           → \n  }`

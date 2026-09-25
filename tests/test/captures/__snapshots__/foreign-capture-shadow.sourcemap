@@ -1,36 +1,36 @@
-cs.lift((() => {\n                    → cs`{\n    
-const                                 → const 
-__cs_base                             → base
- =                                    →  = 
-100                                   → 100
-;                                     → ;
-\n                                    → \n    
-return                                → return 
-(cs.splice(                           → ${ [-semantic]
-cs.lift(                              → cs`
-__cs_base                             → base
- +                                    →  + 
-(cs.splice(                           →  [-semantic]
-(carried)                             → $carried
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → `
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-;                                     → ;
-\n})())                               → \n  }`
-cs.lift((() => {\n                    → cs`{\n      
-const                                 → const 
-__cs_base                             → base
- =                                    →  = 
-1                                     → 1
-;                                     → ;
-\n                                    → \n      
-return                                → return 
-(cs.splice(                           → ${ [-semantic]
-innerBase(                            → innerBase(
-cs.lift(                              → cs`
-__cs_base                             → base
-)                                     → `
-)                                     → )
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-;                                     → ;
-\n})())                               → \n    }`
+cs.lift((() => {\n                → cs`{\n    
+const                             → const 
+__cs_base                         → base
+ =                                →  = 
+100                               → 100
+;                                 → ;
+\n                                → \n    
+return                            → return 
+cs.splice(                        → ${ [-semantic]
+cs.lift(                          → cs`
+__cs_base                         → base
+ +                                →  + 
+cs.splice(                        →  [-semantic]
+(carried)                         → $carried
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → `
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+;                                 → ;
+\n})())                           → \n  }`
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_base                         → base
+ =                                →  = 
+1                                 → 1
+;                                 → ;
+\n                                → \n      
+return                            → return 
+cs.splice(                        → ${ [-semantic]
+innerBase(                        → innerBase(
+cs.lift(                          → cs`
+__cs_base                         → base
+)                                 → `
+)                                 → )
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+;                                 → ;
+\n})())                           → \n    }`

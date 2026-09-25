@@ -11,7 +11,7 @@ type Rows = (props: { count: number }) => BacktickElement;
 // a fixture that spelled one would pin the format twice. The claim about what
 // each takes is still written, because that is what is under test.
 async function Row({ count }: { count: Prop<number> }) {
-  return cs.lift(<em>{cs.lift("rows " + (cs.splice((count)) satisfies typeof cs.ClientUnknown))}</em>);
+  return cs.lift(<em>{cs.lift("rows " + cs.splice((count) satisfies typeof cs.Spliceable))}</em>);
 }
 
 async function Nothing() {
@@ -21,14 +21,14 @@ async function Nothing() {
 const rows = (await bundler.run(
   cs.lift((__cs_props: {
     count: number;
-}) => (cs.splice((<Row count={cs.lift(__cs_props.count)} />)) satisfies typeof cs.ClientUnknown)),
+}) => cs.splice((<Row count={cs.lift(__cs_props.count)} />) satisfies typeof cs.Spliceable)),
 )) as Bundle<Rows>;
 
 const empty = (await bundler.run(<Nothing />)) as Bundle<BacktickElement>;
 
 export default cs.lift((() => {
-    const __cs_Rows = eval((cs.splice((rows)) satisfies typeof cs.ClientUnknown));
-    const __cs_Empty = eval((cs.splice((empty)) satisfies typeof cs.ClientUnknown));
+    const __cs_Rows = eval(cs.splice((rows) satisfies typeof cs.Spliceable));
+    const __cs_Empty = eval(cs.splice((empty) satisfies typeof cs.Spliceable));
     // Wrong: the wrong type, a name it hasn't got, and none at all.
     // @ts-expect-error: Type 'string' is not assignable to type 'number'.
     const __cs_wrongType = <__cs_Rows count={"one"}/>;

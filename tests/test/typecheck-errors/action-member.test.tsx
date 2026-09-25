@@ -7,7 +7,7 @@ const action = cs`{
 }`;
 
 export default cs`{
-  // @ts-expect-error: Type 'Client<void>[]' does not satisfy the expected type 'ClientUnknown'.
+  // @ts-expect-error: Type 'Client<void>' is not assignable to type 'Spliceable<ClientValue>'.
   const list = ${[action]};
   return 1;
 }`;

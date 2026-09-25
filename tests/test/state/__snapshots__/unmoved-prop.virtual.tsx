@@ -11,7 +11,7 @@ import { children, drawn } from "./dom.ts";
 // already had, and the host must not hear about it.
 async function SelectableRows() {
   return cs.lift((() => {
-    const __cs_selected = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_selected = cs.splice((state) satisfies typeof cs.Spliceable)(0);
     return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected.set(1))}>select</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift([0, 1, 2])}>{cs.lift((__cs_id: number) => <a href={cs.lift(__cs_selected.get() === __cs_id ? "#open" : "#closed")}>{cs.lift("row " + __cs_id)}</a>)}</For>)}</div>)}</div>;
 })());
 }

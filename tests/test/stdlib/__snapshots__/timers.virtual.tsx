@@ -24,10 +24,10 @@ it("timers", async (t) => {
     t,
     "timers",
     cs.lift((() => {
-    const __cs_stop = (cs.splice((window)) satisfies typeof cs.ClientUnknown).clearInterval;
-    const __cs_repeating = (cs.splice((window)) satisfies typeof cs.ClientUnknown).setInterval(() => 0, 1000);
+    const __cs_stop = cs.splice((window) satisfies typeof cs.Spliceable).clearInterval;
+    const __cs_repeating = cs.splice((window) satisfies typeof cs.Spliceable).setInterval(() => 0, 1000);
     __cs_stop(__cs_repeating);
-    (cs.splice((window)) satisfies typeof cs.ClientUnknown).clearTimeout((cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => 0, 1000));
+    cs.splice((window) satisfies typeof cs.Spliceable).clearTimeout(cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => 0, 1000));
 })()),
   );
 });

@@ -1,35 +1,35 @@
-cs.lift(                              → cs`
-<                                     → <
-em                                    → em
->{cs.lift(                            → >{
-"from another bundle"                 → "from another bundle"
-)}</                                  → }</
-em                                    → em
->                                     → >
-)                                     → `
-cs.lift(                              → cs`
-<                                     → <
-div                                   → div
->{cs.lift(                            → >\n      
-<                                     → <
-span                                  → span
->before</                             → >before</
-span                                  → span
->                                     → >
-)}{cs.lift(                           → \n      {
-eval                                  → eval
-(                                     → (
-(cs.splice(                           →  [-semantic]
-(otherBundle)                         → $otherBundle
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → )
-)}{cs.lift(                           → }\n      
-<                                     → <
-span                                  → span
->after</                              → >after</
-span                                  → span
->                                     → >
-)}</                                  → \n    </
-div                                   → div
->                                     → >
-)                                     → `
+cs.lift(                          → cs`
+<                                 → <
+em                                → em
+>{cs.lift(                        → >{
+"from another bundle"             → "from another bundle"
+)}</                              → }</
+em                                → em
+>                                 → >
+)                                 → `
+cs.lift(                          → cs`
+<                                 → <
+div                               → div
+>{cs.lift(                        → >\n      
+<                                 → <
+span                              → span
+>before</                         → >before</
+span                              → span
+>                                 → >
+)}{cs.lift(                       → \n      {
+eval                              → eval
+(                                 → (
+cs.splice(                        →  [-semantic]
+(otherBundle)                     → $otherBundle
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → )
+)}{cs.lift(                       → }\n      
+<                                 → <
+span                              → span
+>after</                          → >after</
+span                              → span
+>                                 → >
+)}</                              → \n    </
+div                               → div
+>                                 → >
+)                                 → `

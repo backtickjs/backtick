@@ -25,10 +25,10 @@ describe("equals", () => {
   it("keeps a computed's readers from updating for an equal value", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(1);
-    const __cs_size = (cs.splice((computed)) satisfies typeof cs.ClientUnknown)(() => ({ isBig: __cs_n.get() > 2, n: __cs_n.get() }), { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
+    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(1);
+    const __cs_size = cs.splice((computed) satisfies typeof cs.Spliceable)(() => ({ isBig: __cs_n.get() > 2, n: __cs_n.get() }), { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
     const __cs_label = () => {
-        (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log();
+        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
         return __cs_size.get().isBig ? "big" : "small";
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
@@ -48,9 +48,9 @@ describe("equals", () => {
   it("keeps a state's readers from updating for an equal value", async () => {
     await render(
       cs.lift((() => {
-    const __cs_point = (cs.splice((state)) satisfies typeof cs.ClientUnknown)({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
+    const __cs_point = cs.splice((state) satisfies typeof cs.Spliceable)({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
     const __cs_label = () => {
-        (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log();
+        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
         return "x " + __cs_point.get().x;
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_point.set({ x: __cs_point.get().x }))}>
@@ -65,8 +65,8 @@ describe("equals", () => {
   it("is handed the previous and the next value", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(1, { equals: (__cs_previous, __cs_next) => {
-            (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log(__cs_previous, __cs_next);
+    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(1, { equals: (__cs_previous, __cs_next) => {
+            cs.splice((window) satisfies typeof cs.Spliceable).console.log(__cs_previous, __cs_next);
             return __cs_previous === __cs_next;
         } });
     return <button onclick={cs.lift(() => __cs_n.set(2))}>{cs.lift("n " + __cs_n.get())}</button>;
@@ -80,9 +80,9 @@ describe("equals", () => {
   it("is `===` when left out, so the same number doesn't update", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(1);
+    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(1);
     const __cs_label = () => {
-        (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log();
+        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
         return "n " + __cs_n.get();
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(1))}>same</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
@@ -95,9 +95,9 @@ describe("equals", () => {
   it("is `===` when left out, so a new object always updates", async () => {
     await render(
       cs.lift((() => {
-    const __cs_point = (cs.splice((state)) satisfies typeof cs.ClientUnknown)({ x: 1 });
+    const __cs_point = cs.splice((state) satisfies typeof cs.Spliceable)({ x: 1 });
     const __cs_label = () => {
-        (cs.splice((window)) satisfies typeof cs.ClientUnknown).console.log();
+        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
         return "x " + __cs_point.get().x;
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_point.set({ x: __cs_point.get().x }))}>

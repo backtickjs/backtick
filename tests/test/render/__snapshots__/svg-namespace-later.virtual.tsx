@@ -10,8 +10,8 @@ import { namespaced } from "./dom.ts";
 // condition shows, are SVG's because of where they stand, and the `title` after
 // the `svg` is HTML's again.
 const svgNamespaceLater = cs.lift((() => {
-    const __cs_xs = (cs.splice((state)) satisfies typeof cs.ClientUnknown)([10]);
-    const __cs_shown = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(false);
+    const __cs_xs = cs.splice((state) satisfies typeof cs.Spliceable)([10]);
+    const __cs_shown = cs.splice((state) satisfies typeof cs.Spliceable)(false);
     return <div>{cs.lift(<svg viewBox={cs.lift("0 0 30 10")}>{cs.lift(<For each={cs.lift(__cs_xs.get())}>{cs.lift((__cs_x: number) => <title>{cs.lift("dot " + __cs_x)}</title>)}</For>)}{cs.lift(__cs_shown.get() ? <title>{cs.lift("shown")}</title> : null)}</svg>)}{cs.lift(<title>{cs.lift("after")}</title>)}{cs.lift(<button onclick={cs.lift(() => __cs_xs.set([10, 20]))}>add</button>)}{cs.lift(<button onclick={cs.lift(() => __cs_shown.set(true))}>show</button>)}</div>;
 })());
 

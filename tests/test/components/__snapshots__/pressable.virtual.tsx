@@ -13,7 +13,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.lift((() => {
-    const __cs_count = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
     return <button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(__cs_count.get() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + __cs_count.get() + " times")}</span>)}</button>;
 })());
 }

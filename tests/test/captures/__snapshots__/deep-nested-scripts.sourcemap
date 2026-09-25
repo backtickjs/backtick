@@ -1,22 +1,22 @@
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(lhs)                                 → $lhs
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- +                                    →  + 
-(cs.splice(                           →  [-semantic]
-(rhs)                                 → $rhs
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → `
-cs.lift(                              → cs`
-(cs.splice(                           → ${ [-semantic]
-add(                                  → add(
-cs.lift(                              → cs`
-1                                     → 1
-)                                     → `
-,                                     → , 
-cs.lift(                              → cs`
-2                                     → 2
-)                                     → `
-)                                     → )
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-)                                     → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(lhs)                             → $lhs
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ +                                →  + 
+cs.splice(                        →  [-semantic]
+(rhs)                             → $rhs
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        → ${ [-semantic]
+add(                              → add(
+cs.lift(                          → cs`
+1                                 → 1
+)                                 → `
+,                                 → , 
+cs.lift(                          → cs`
+2                                 → 2
+)                                 → `
+)                                 → )
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+)                                 → `

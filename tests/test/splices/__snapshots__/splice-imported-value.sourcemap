@@ -1,5 +1,5 @@
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(FRAGMENT_TAG)                        → $FRAGMENT_TAG
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(FRAGMENT_TAG)                    → $FRAGMENT_TAG
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → `

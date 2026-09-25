@@ -1,24 +1,24 @@
-cs.lift((() => {\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n    → cs`{\n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n  
+cs.lift((() => {\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n    → cs`{\n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n  
 const                                     → const 
 __cs_held                                 → held
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 (                                         → (
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (host)                                    → $host
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 )                                         → )
 ;                                         → ;
-\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n    → \n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.\n  
+\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n    → \n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n  
 __cs_held                                 → held
 .                                         → .
 set                                       → set
 (                                         → (
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (host)                                    → $host
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 )                                         → )
 ;                                         → ;
 \n})())                                   → \n}`

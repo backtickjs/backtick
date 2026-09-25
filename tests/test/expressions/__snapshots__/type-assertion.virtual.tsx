@@ -17,7 +17,7 @@ it("typeAssertion", async (t) => {
     t,
     "typeAssertion",
     cs.lift((() => {
-    const __cs_page = JSON.parse((cs.splice((answered)) satisfies typeof cs.ClientUnknown)) as {
+    const __cs_page = JSON.parse(cs.splice((answered) satisfies typeof cs.Spliceable)) as {
         rows: string[];
         count: number;
     };

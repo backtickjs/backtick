@@ -19,10 +19,10 @@ async function MemberRows() {
   return cs.lift((() => {
     const __cs_build = (__cs_from: number) => {
         return Array.from({ length: 3 }, (__cs__, __cs_at) => {
-            return { id: __cs_from + __cs_at, label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)("row " + (__cs_from + __cs_at)) };
+            return { id: __cs_from + __cs_at, label: cs.splice((state) satisfies typeof cs.Spliceable)("row " + (__cs_from + __cs_at)) };
         });
     };
-    const __cs_held = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_build(1));
+    const __cs_held = cs.splice((state) satisfies typeof cs.Spliceable)(__cs_build(1));
     return <div>{cs.lift(<ul class={cs.lift("rows")}>{cs.lift(<For each={cs.lift(__cs_held.get())}>{cs.lift((__cs_row: Row) => <li onclick={cs.lift(() => __cs_row.label.set("pressed"))}>{cs.lift(__cs_row.label.get())}</li>)}</For>)}</ul>)}</div>;
 })());
 }

@@ -8,18 +8,18 @@ import { snapshotCase } from "../snapshotCase.ts";
 // another cell, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs.lift((__cs_label: string) => {
-    return { label: (cs.splice((state)) satisfies typeof cs.ClientUnknown)(__cs_label) };
+    return { label: cs.splice((state) satisfies typeof cs.Spliceable)(__cs_label) };
 });
 
   return (
     <span
       style={cs.lift("font-size: 16px")}
       onclick={cs.lift(() => {
-    const __cs_row = (cs.splice((build)) satisfies typeof cs.ClientUnknown)("one");
+    const __cs_row = cs.splice((build) satisfies typeof cs.Spliceable)("one");
     __cs_row.label.set(__cs_row.label.get() + " !!!");
 })}
     >
-      {cs.lift((cs.splice((build)) satisfies typeof cs.ClientUnknown)("one").label.get())}
+      {cs.lift(cs.splice((build) satisfies typeof cs.Spliceable)("one").label.get())}
     </span>
   );
 }

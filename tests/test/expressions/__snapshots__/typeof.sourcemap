@@ -1,99 +1,99 @@
-cs.lift((() => {\n                    → cs`{\n      
-const                                 → const 
-__cs_count                            → count
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n      
-return                                → return 
-[                                     → [\n        
-typeof                                → typeof 
-undefined                             → undefined
-,                                     → ,\n        
-typeof                                → typeof 
-null                                  → null
-,                                     → ,\n        
-typeof                                → typeof 
-true                                  → true
-,                                     → ,\n        
-typeof                                → typeof 
-1                                     → 1
-,                                     → ,\n        
-typeof                                → typeof 
-"a"                                   → "a"
-,                                     → ,\n        
-typeof                                → typeof 
-[                                     → [
-1                                     → 1
-]                                     → ]
-,                                     → ,\n        
-typeof                                → typeof 
-{                                     → { 
-a                                     → a
-:                                     → : 
-1                                     → 1
- }                                    →  }
-,                                     → ,\n        
-typeof (                              → typeof 
-(                                     → ((
-__cs_n                                → n
-:                                     → : 
-number                                → number
-) =>                                  → ) => 
-__cs_n                                → n
-)                                     → 
-,                                     → ,\n        
-typeof                                → typeof 
-Math                                  → Math
-.                                     → .
-floor                                 → floor
-,                                     → ,\n        
-typeof                                → typeof 
-__cs_count                            → count
-]                                     → ,\n      ]
-;                                     → ;
-\n})())                               → \n    }`
-cs.lift((() => {\n                    → cs`{\n      
-const                                 → const 
-__cs_measure                          → measure
- =                                    →  = 
-(                                     → (
-__cs_v                                → v
-:                                     → : 
-string                                → string
- |                                    →  | 
-number                                → number
-) =>                                  → ) =>\n        
-typeof                                → typeof 
-__cs_v                                → v
- ===                                  →  === 
-"string"                              → "string"
- ?                                    →  ? 
-__cs_v                                → v
-.                                     → .
-length                                → length
- :                                    →  : 
-__cs_v                                → v
- *                                    →  * 
-2                                     → 2
-;                                     → ;
-\n                                    → \n      
-return                                → return 
-[                                     → [
-__cs_measure                          → measure
-(                                     → (
-"abc"                                 → "abc"
-)                                     → )
-,                                     → , 
-__cs_measure                          → measure
-(                                     → (
-4                                     → 4
-)                                     → )
-]                                     → ]
-;                                     → ;
-\n})())                               → \n    }`
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_count                        → count
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n      
+return                            → return 
+[                                 → [\n        
+typeof                            → typeof 
+undefined                         → undefined
+,                                 → ,\n        
+typeof                            → typeof 
+null                              → null
+,                                 → ,\n        
+typeof                            → typeof 
+true                              → true
+,                                 → ,\n        
+typeof                            → typeof 
+1                                 → 1
+,                                 → ,\n        
+typeof                            → typeof 
+"a"                               → "a"
+,                                 → ,\n        
+typeof                            → typeof 
+[                                 → [
+1                                 → 1
+]                                 → ]
+,                                 → ,\n        
+typeof                            → typeof 
+{                                 → { 
+a                                 → a
+:                                 → : 
+1                                 → 1
+ }                                →  }
+,                                 → ,\n        
+typeof (                          → typeof 
+(                                 → ((
+__cs_n                            → n
+:                                 → : 
+number                            → number
+) =>                              → ) => 
+__cs_n                            → n
+)                                 → 
+,                                 → ,\n        
+typeof                            → typeof 
+Math                              → Math
+.                                 → .
+floor                             → floor
+,                                 → ,\n        
+typeof                            → typeof 
+__cs_count                        → count
+]                                 → ,\n      ]
+;                                 → ;
+\n})())                           → \n    }`
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_measure                      → measure
+ =                                →  = 
+(                                 → (
+__cs_v                            → v
+:                                 → : 
+string                            → string
+ |                                →  | 
+number                            → number
+) =>                              → ) =>\n        
+typeof                            → typeof 
+__cs_v                            → v
+ ===                              →  === 
+"string"                          → "string"
+ ?                                →  ? 
+__cs_v                            → v
+.                                 → .
+length                            → length
+ :                                →  : 
+__cs_v                            → v
+ *                                →  * 
+2                                 → 2
+;                                 → ;
+\n                                → \n      
+return                            → return 
+[                                 → [
+__cs_measure                      → measure
+(                                 → (
+"abc"                             → "abc"
+)                                 → )
+,                                 → , 
+__cs_measure                      → measure
+(                                 → (
+4                                 → 4
+)                                 → )
+]                                 → ]
+;                                 → ;
+\n})())                           → \n    }`

@@ -14,8 +14,8 @@ import { cs, state } from "@backtickjs/core";
 const host = new Date();
 
 export default cs`{
-  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
+  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.
   const held = $state($host);
-  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
+  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.
   held.set($host);
 }`;

@@ -10,19 +10,19 @@ import { snapshotCase } from "../snapshotCase.ts";
 const d0 = cs.lift(1);
 
 const d1 = cs.lift((() => {
-    return (cs.splice((d0)) satisfies typeof cs.ClientUnknown) + (cs.splice((d0)) satisfies typeof cs.ClientUnknown);
+    return cs.splice((d0) satisfies typeof cs.Spliceable) + cs.splice((d0) satisfies typeof cs.Spliceable);
 })());
 
 const d2 = cs.lift((() => {
-    return (cs.splice((d1)) satisfies typeof cs.ClientUnknown) + (cs.splice((d1)) satisfies typeof cs.ClientUnknown);
+    return cs.splice((d1) satisfies typeof cs.Spliceable) + cs.splice((d1) satisfies typeof cs.Spliceable);
 })());
 
 const d3 = cs.lift((() => {
-    return (cs.splice((d2)) satisfies typeof cs.ClientUnknown) + (cs.splice((d2)) satisfies typeof cs.ClientUnknown);
+    return cs.splice((d2) satisfies typeof cs.Spliceable) + cs.splice((d2) satisfies typeof cs.Spliceable);
 })());
 
 const d4 = cs.lift((() => {
-    return (cs.splice((d3)) satisfies typeof cs.ClientUnknown) + (cs.splice((d3)) satisfies typeof cs.ClientUnknown);
+    return cs.splice((d3) satisfies typeof cs.Spliceable) + cs.splice((d3) satisfies typeof cs.Spliceable);
 })());
 
 it("diamond", async (t) => {

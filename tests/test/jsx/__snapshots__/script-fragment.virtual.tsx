@@ -11,5 +11,5 @@ import { snapshotCase } from "../snapshotCase.ts";
 const listed = cs.lift((__cs_name: string) => <>{cs.lift(<span>a sentence across lines</span>)}{cs.lift(<span>{cs.lift(__cs_name)} {cs.lift(__cs_name)}</span>)}</>);
 
 it("scriptFragment", async (t) => {
-  await snapshotCase(t, "scriptFragment", <div>{cs.lift((cs.splice((listed)) satisfies typeof cs.ClientUnknown)("x"))}</div>);
+  await snapshotCase(t, "scriptFragment", <div>{cs.lift(cs.splice((listed) satisfies typeof cs.Spliceable)("x"))}</div>);
 });

@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 // Typed code can't put an action in a container (see `Spliceable`), but an
 // untyped caller can; the lowering backstop refuses to ship it.
 const action = cs.create(
-  "wf1ni21eddai:5:15",
+  "lzbinin395o6:5:15",
   { params: [] },
   () => ({
     type: "BlockStatement",
@@ -26,7 +26,7 @@ const action = cs.create(
                 end: { line: 6, column: 9 },
               },
               name: "x",
-              key: "x$wf1ni21eddai$0",
+              key: "x$lzbinin395o6$0",
             },
             init: {
               type: "Literal",
@@ -45,7 +45,7 @@ const action = cs.create(
   '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"AAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
 );
 export default cs.create(
-  "wf1ni21eddai:9:15",
+  "lzbinin395o6:9:15",
   { params: [{ kind: "splice", value: [action], bindings: [] }] },
   () => ({
     type: "BlockStatement",
@@ -69,7 +69,7 @@ export default cs.create(
                 end: { line: 11, column: 12 },
               },
               name: "list",
-              key: "list$wf1ni21eddai$1",
+              key: "list$lzbinin395o6$1",
             },
             init: {
               type: "Splice",

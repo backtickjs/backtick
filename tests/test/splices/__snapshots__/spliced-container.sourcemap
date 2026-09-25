@@ -1,15 +1,15 @@
-cs.lift(                              → cs`
-1                                     → 1
-)                                     → `
-cs.lift(                              → cs`
-"origin"                              → "origin"
-)                                     → `
-cs.lift(                              → cs`
-(cs.splice(                           →  [-semantic]
-(point)                               → $point
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-x                                     → x
- +                                    →  + 
-1                                     → 1
-)                                     → `
+cs.lift(                          → cs`
+1                                 → 1
+)                                 → `
+cs.lift(                          → cs`
+"origin"                          → "origin"
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(point)                           → $point
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+x                                 → x
+ +                                →  + 
+1                                 → 1
+)                                 → `

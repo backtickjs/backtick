@@ -1,7 +1,7 @@
-cs.lift(                              → cs`
-(cs.splice(                           → ${ [-semantic]
-await fetchGreeting()                 → await fetchGreeting()
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
- +                                    →  + 
-"!"                                   → "!"
-)                                     → `
+cs.lift(                          → cs`
+cs.splice(                        → ${ [-semantic]
+await fetchGreeting()             → await fetchGreeting()
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+ +                                →  + 
+"!"                               → "!"
+)                                 → `

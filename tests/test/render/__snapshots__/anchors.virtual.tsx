@@ -29,7 +29,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3]);
+    const __cs_ids = cs.splice((state) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
     const __cs_clear = () => {
         __cs_ids.set([]);
     };

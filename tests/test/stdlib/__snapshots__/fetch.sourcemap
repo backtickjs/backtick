@@ -3,17 +3,17 @@ cs.lift(                                  → cs`
 const                                     → const 
 __cs_held                                 → held
  =                                        →  = 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 (                                         → (
 "waiting"                                 → "waiting"
 )                                         → )
 ;                                         → ;
 \n                                        → \n\n      
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (window)                                  → $window
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 .                                         → \n        .
 fetch                                     → fetch
 (                                         → (
@@ -22,9 +22,9 @@ fetch                                     → fetch
 {                                         → {\n          
 signal                                    → signal
 :                                         → : 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (window)                                  → $window
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 .                                         → .
 AbortSignal                               → AbortSignal
 .                                         → .
@@ -114,9 +114,9 @@ __cs_error                                → error
 )                                         → )
 ;                                         → ;
 \n                                        → \n\n      
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (window)                                  → $window
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 .                                         → \n        .
 fetch                                     → fetch
 (                                         → (

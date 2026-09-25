@@ -14,8 +14,8 @@ import { cs, state } from "@backtickjs/core";
 const host = new Date();
 
 export default cs.lift((() => {
-    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
-    const __cs_held = (cs.splice((state)) satisfies typeof cs.ClientUnknown)((cs.splice((host)) satisfies typeof cs.ClientUnknown));
-    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'ClientUnknown'.
-    __cs_held.set((cs.splice((host)) satisfies typeof cs.ClientUnknown));
+    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.
+    const __cs_held = cs.splice((state) satisfies typeof cs.Spliceable)(cs.splice((host) satisfies typeof cs.Spliceable));
+    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.
+    __cs_held.set(cs.splice((host) satisfies typeof cs.Spliceable));
 })());

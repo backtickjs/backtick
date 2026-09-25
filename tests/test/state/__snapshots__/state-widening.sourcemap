@@ -1,100 +1,100 @@
-cs.lift((() => {\n                    → cs`{\n    
-const                                 → const 
-__cs_flag                             → flag
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-true                                  → true
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-const                                 → const 
-__cs_tone                             → tone
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-(cs.splice(                           → ${ [-semantic]
-Tone.Warm                             → Tone.Warm
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-const                                 → const 
-__cs_step                             → step
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-<                                     → <
-() =>                                 → () => 
-number                                → number
->(                                    → >(
-() =>                                 → () => 
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n    
-return                                → return 
-<                                     → (\n      <
-span                                  → span
-                                      → \n        
-onclick                               → onclick
-={cs.lift(                            → ={
-() => {\n                             → () => {\n          
-__cs_flag                             → flag
-.                                     → .
-set                                   → set
-(                                     → (
-false                                 → false
-)                                     → )
-;                                     → ;
-\n                                    → \n          
-__cs_tone                             → tone
-.                                     → .
-set                                   → set
-(                                     → (
-(cs.splice(                           → ${ [-semantic]
-Tone.Cool                             → Tone.Cool
-) satisfies typeof cs.ClientUnknown)  → } [-semantic]
-)                                     → )
-;                                     → ;
-\n                                    → \n          
-__cs_step                             → step
-.                                     → .
-set                                   → set
-(                                     → (
-() =>                                 → () => 
-1                                     → 1
-)                                     → )
-;                                     → ;
-\n    }                               → \n        }
-)}                                    → }
->{cs.lift(                            → \n      >\n        {
-__cs_flag                             → flag
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-" "                                   → " "
- +                                    →  + 
-__cs_tone                             → tone
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-" "                                   → " "
- +                                    →  + 
-__cs_step                             → step
-.                                     → .
-get                                   → get
-()                                    → ()
-()                                    → ()
-)}</                                  → }\n      </
-span                                  → span
->                                     → >\n    )
-;                                     → ;
-\n})())                               → \n  }`
+cs.lift((() => {\n                → cs`{\n    
+const                             → const 
+__cs_flag                         → flag
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+true                              → true
+)                                 → )
+;                                 → ;
+\n                                → \n    
+const                             → const 
+__cs_tone                         → tone
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+cs.splice(                        → ${ [-semantic]
+Tone.Warm                         → Tone.Warm
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+)                                 → )
+;                                 → ;
+\n                                → \n    
+const                             → const 
+__cs_step                         → step
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+<                                 → <
+() =>                             → () => 
+number                            → number
+>(                                → >(
+() =>                             → () => 
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n    
+return                            → return 
+<                                 → (\n      <
+span                              → span
+                                  → \n        
+onclick                           → onclick
+={cs.lift(                        → ={
+() => {\n                         → () => {\n          
+__cs_flag                         → flag
+.                                 → .
+set                               → set
+(                                 → (
+false                             → false
+)                                 → )
+;                                 → ;
+\n                                → \n          
+__cs_tone                         → tone
+.                                 → .
+set                               → set
+(                                 → (
+cs.splice(                        → ${ [-semantic]
+Tone.Cool                         → Tone.Cool
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+)                                 → )
+;                                 → ;
+\n                                → \n          
+__cs_step                         → step
+.                                 → .
+set                               → set
+(                                 → (
+() =>                             → () => 
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n    }                           → \n        }
+)}                                → }
+>{cs.lift(                        → \n      >\n        {
+__cs_flag                         → flag
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+" "                               → " "
+ +                                →  + 
+__cs_tone                         → tone
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+" "                               → " "
+ +                                →  + 
+__cs_step                         → step
+.                                 → .
+get                               → get
+()                                → ()
+()                                → ()
+)}</                              → }\n      </
+span                              → span
+>                                 → >\n    )
+;                                 → ;
+\n})())                           → \n  }`

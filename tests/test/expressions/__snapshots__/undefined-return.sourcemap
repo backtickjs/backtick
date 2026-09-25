@@ -1,26 +1,26 @@
-cs.lift(                              → cs`
-() =>                                 → () => 
-"hi"                                  → "hi"
-)                                     → `
-cs.lift((() => {\n                    → cs`{\n      
-const                                 → const 
-__cs_stored                           → stored
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(lying)                               → $lying
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-;                                     → ;
-\n                                    → \n      
-const                                 → const 
-__cs_caught                           → caught
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(lying)                               → $lying
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-()                                    → ()
-;                                     → ;
-\n                                    → \n      
-return                                → return 
-1                                     → 1
-;                                     → ;
-\n})())                               → \n    }`
+cs.lift(                          → cs`
+() =>                             → () => 
+"hi"                              → "hi"
+)                                 → `
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_stored                       → stored
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(lying)                           → $lying
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_caught                       → caught
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(lying)                           → $lying
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+()                                → ()
+;                                 → ;
+\n                                → \n      
+return                            → return 
+1                                 → 1
+;                                 → ;
+\n})())                           → \n    }`

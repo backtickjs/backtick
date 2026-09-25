@@ -14,7 +14,7 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs.lift((() => {
-    const __cs_names = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>(["a", "b", "c"]);
+    const __cs_names = cs.splice((state) satisfies typeof cs.Spliceable)<string[]>(["a", "b", "c"]);
     const __cs_rotate = () => {
         const __cs_held = __cs_names.get();
         __cs_names.set([__cs_held[2], __cs_held[0], __cs_held[1]]);

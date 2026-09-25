@@ -50,17 +50,17 @@ async function Waiting({
   ask: Prop<() => Bundle<BacktickElement> | null>;
 }) {
   return cs.lift((() => {
-    const __cs_drawn = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<Bundle<BacktickElement> | null>(null);
-    const __cs_started = (cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => __cs_drawn.set((cs.splice((ask)) satisfies typeof cs.ClientUnknown)()), 0);
+    const __cs_drawn = cs.splice((state) satisfies typeof cs.Spliceable)<Bundle<BacktickElement> | null>(null);
+    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => __cs_drawn.set(cs.splice((ask) satisfies typeof cs.Spliceable)()), 0);
     return <>{cs.lift(__cs_drawn.get() === null ? null : eval(__cs_drawn.get() as Bundle<BacktickElement>))}</>;
 })());
 }
 
 const evalBuildsOnce = cs.lift((() => {
-    const __cs_asked = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_asked = cs.splice((state) satisfies typeof cs.Spliceable)(0);
     return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked.get())}</span>)}{cs.lift(<Waiting ask={cs.lift(() => {
         __cs_asked.set(__cs_asked.get() + 1);
-        return __cs_asked.get() > 4 ? null : (cs.splice((answer)) satisfies typeof cs.ClientUnknown);
+        return __cs_asked.get() > 4 ? null : cs.splice((answer) satisfies typeof cs.Spliceable);
     })}/>)}</div>;
 })());
 

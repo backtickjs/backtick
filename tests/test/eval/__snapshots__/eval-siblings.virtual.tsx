@@ -15,6 +15,6 @@ it("evalSiblings", async (t) => {
   await snapshotCase(
     t,
     "evalSiblings",
-    cs.lift(<div>{cs.lift(<span>before</span>)}{cs.lift(eval((cs.splice((otherBundle)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<span>after</span>)}</div>),
+    cs.lift(<div>{cs.lift(<span>before</span>)}{cs.lift(eval(cs.splice((otherBundle) satisfies typeof cs.Spliceable)))}{cs.lift(<span>after</span>)}</div>),
   );
 });

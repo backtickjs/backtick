@@ -8,7 +8,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // written, not what it is.
 async function Card() {
   return cs.lift((() => {
-    const __cs_label = (cs.splice((state)) satisfies typeof cs.ClientUnknown)("hi");
+    const __cs_label = cs.splice((state) satisfies typeof cs.Spliceable)("hi");
     // A handler written inline and one held under a name: both are client code,
     // and a handler prop takes a function and nothing else.
     const __cs_row = (__cs_size: number) => {

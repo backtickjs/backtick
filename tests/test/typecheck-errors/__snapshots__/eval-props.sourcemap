@@ -4,9 +4,9 @@ em                                        → em
 >{cs.lift(                                → >{
 "rows "                                   → "rows "
  +                                        →  + 
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (count)                                   → $count
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 )}</                                      → }</
 em                                        → em
 >                                         → >
@@ -31,7 +31,7 @@ number                                    → number
 ;                                         → 
 \n}                                       →  }
 ) =>                                      → ) => 
-(cs.splice(                               → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 (<Row count={                             → (<Row count={
 cs.lift(                                  → cs`
 __cs_props                                → props
@@ -39,7 +39,7 @@ __cs_props                                → props
 count                                     → count
 )                                         → `
 } />)                                     → } />)
-) satisfies typeof cs.ClientUnknown)      → } [-semantic]
+ satisfies typeof cs.Spliceable)          → } [-semantic]
 )                                         → `
 cs.lift((() => {\n                        → cs`{\n  
 const                                     → const 
@@ -47,9 +47,9 @@ __cs_Rows                                 → Rows
  =                                        →  = 
 eval                                      → eval
 (                                         → (
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (rows)                                    → $rows
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 )                                         → )
 ;                                         → ;
 \n                                        → \n  
@@ -58,9 +58,9 @@ __cs_Empty                                → Empty
  =                                        →  = 
 eval                                      → eval
 (                                         → (
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (empty)                                   → $empty
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 )                                         → )
 ;                                         → ;
 \n    // Wrong: the wrong type, a name it hasn't got, and none at all.\n    // @ts-expect-error: Type 'string' is not assignable to type 'number'.\n    → \n\n  // Wrong: the wrong type, a name it hasn't got, and none at all.\n  // @ts-expect-error: Type 'string' is not assignable to type 'number'.\n  

@@ -10,7 +10,7 @@ import { children, drawn, fontSize } from "./dom.ts";
 // applications of one entry, and each declares a cell of its own.
 async function OwnCounter() {
   return cs.lift((() => {
-    const __cs_size = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(16);
+    const __cs_size = cs.splice((state) satisfies typeof cs.Spliceable)(16);
     return <span style={cs.lift("font-size: " + __cs_size.get() + "px")} onclick={cs.lift(() => {
         __cs_size.set(__cs_size.get() + 1);
     })}>

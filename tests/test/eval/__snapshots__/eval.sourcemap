@@ -1,62 +1,62 @@
-cs.lift(                              → cs`
-<                                     → <
-For                                   → For
-                                      →  
-each                                  → each
-={cs.lift(                            → ={
-[                                     → [
-1                                     → 1
-,                                     → , 
-2                                     → 2
-,                                     → , 
-3                                     → 3
-]                                     → ]
-)}                                    → }
->{cs.lift(                            → >\n    {
-(                                     → (
-__cs_n                                → n
-:                                     → : 
-number                                → number
-) =>                                  → ) => 
-<                                     → <
-span                                  → span
->{cs.lift(                            → >{
-"item "                               → "item "
- +                                    →  + 
-__cs_n                                → n
-)}</                                  → }</
-span                                  → span
->                                     → >
-)}</                                  → }\n  </
-For                                   → For
->                                     → >
-)                                     → `
-cs.lift(                              → cs`
-<                                     → <
-div                                   → div
->{cs.lift(                            → >\n  {
-eval                                  → eval
-(                                     → (
-(cs.splice(                           →  [-semantic]
-(items)                               → $items
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → )
-)}{cs.lift(                           → }\n  
-<                                     → <
-b                                     → b
->{cs.lift(                            → >{
-eval                                  → eval
-(                                     → (
-(cs.splice(                           →  [-semantic]
-(total)                               → $total
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-)                                     → )
- +                                    →  + 
-1                                     → 1
-)}</                                  → }</
-b                                     → b
->                                     → >
-)}</                                  → \n</
-div                                   → div
->                                     → >
-)                                     → `
+cs.lift(                          → cs`
+<                                 → <
+For                               → For
+                                  →  
+each                              → each
+={cs.lift(                        → ={
+[                                 → [
+1                                 → 1
+,                                 → , 
+2                                 → 2
+,                                 → , 
+3                                 → 3
+]                                 → ]
+)}                                → }
+>{cs.lift(                        → >\n    {
+(                                 → (
+__cs_n                            → n
+:                                 → : 
+number                            → number
+) =>                              → ) => 
+<                                 → <
+span                              → span
+>{cs.lift(                        → >{
+"item "                           → "item "
+ +                                →  + 
+__cs_n                            → n
+)}</                              → }</
+span                              → span
+>                                 → >
+)}</                              → }\n  </
+For                               → For
+>                                 → >
+)                                 → `
+cs.lift(                          → cs`
+<                                 → <
+div                               → div
+>{cs.lift(                        → >\n  {
+eval                              → eval
+(                                 → (
+cs.splice(                        →  [-semantic]
+(items)                           → $items
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → )
+)}{cs.lift(                       → }\n  
+<                                 → <
+b                                 → b
+>{cs.lift(                        → >{
+eval                              → eval
+(                                 → (
+cs.splice(                        →  [-semantic]
+(total)                           → $total
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → )
+ +                                →  + 
+1                                 → 1
+)}</                              → }</
+b                                 → b
+>                                 → >
+)}</                              → \n</
+div                               → div
+>                                 → >
+)                                 → `

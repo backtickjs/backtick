@@ -14,7 +14,7 @@ async function Items() {
 const items = await bundler.run(<Items />);
 const total = await bundler.run(41);
 
-const evaluated = cs.lift(<div>{cs.lift(eval((cs.splice((items)) satisfies typeof cs.ClientUnknown)))}{cs.lift(<b>{cs.lift(eval((cs.splice((total)) satisfies typeof cs.ClientUnknown)) + 1)}</b>)}</div>);
+const evaluated = cs.lift(<div>{cs.lift(eval(cs.splice((items) satisfies typeof cs.Spliceable)))}{cs.lift(<b>{cs.lift(eval(cs.splice((total) satisfies typeof cs.Spliceable)) + 1)}</b>)}</div>);
 
 it("eval", async (t) => {
   await snapshotCase(t, "eval", evaluated);

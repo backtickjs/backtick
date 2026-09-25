@@ -19,10 +19,10 @@ const answerItems = ["one", "two"];
 
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_items = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>([]);
-    const __cs_started = (cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
-        if ((cs.splice((more)) satisfies typeof cs.ClientUnknown)()) {
-            __cs_items.set((cs.splice((answerItems)) satisfies typeof cs.ClientUnknown));
+    const __cs_items = cs.splice((state) satisfies typeof cs.Spliceable)<string[]>([]);
+    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => {
+        if (cs.splice((more) satisfies typeof cs.Spliceable)()) {
+            __cs_items.set(cs.splice((answerItems) satisfies typeof cs.Spliceable));
         }
     }, 0);
     return <For each={cs.lift(__cs_items.get())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>;
@@ -30,7 +30,7 @@ async function WaitingList({ more }: { more: Prop<() => boolean> }) {
 }
 
 const forBuildsOnce = cs.lift((() => {
-    const __cs_asked = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_asked = cs.splice((state) satisfies typeof cs.Spliceable)(0);
     return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked.get())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
         __cs_asked.set(__cs_asked.get() + 1);
         return __cs_asked.get() < 5;

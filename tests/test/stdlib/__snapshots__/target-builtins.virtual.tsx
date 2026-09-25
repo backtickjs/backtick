@@ -18,7 +18,7 @@ describe("a global an app defines", () => {
   // `createBuiltin` made, which a bundle reads as the global of that name.
   it("is what the client defined under that name", async () => {
     assert.equal(
-      await evaluate(cs.lift((cs.splice((greet)) satisfies typeof cs.ClientUnknown)()), { globals: { greet: () => "hello" } }),
+      await evaluate(cs.lift(cs.splice((greet) satisfies typeof cs.Spliceable)()), { globals: { greet: () => "hello" } }),
       "hello",
     );
   });
@@ -26,7 +26,7 @@ describe("a global an app defines", () => {
   it("is not defined by a client that did not define it", async () => {
     // A bundle built against one client says so on another rather than
     // reading as absent, as a name nothing defined does in JavaScript.
-    await assert.rejects(evaluate(cs.lift((cs.splice((greet)) satisfies typeof cs.ClientUnknown)())), /greet is not defined/);
+    await assert.rejects(evaluate(cs.lift(cs.splice((greet) satisfies typeof cs.Spliceable)())), /greet is not defined/);
   });
 
   it("holds what the client defined, whatever kind of value that is", async () => {
@@ -34,7 +34,7 @@ describe("a global an app defines", () => {
     // name: `$storage.get(…)` is a member read on a plain object.
     const held = { greeting: "hei" } as Record<string, string>;
     assert.equal(
-      await evaluate(cs.lift((cs.splice((storage)) satisfies typeof cs.ClientUnknown).get("greeting")), {
+      await evaluate(cs.lift(cs.splice((storage) satisfies typeof cs.Spliceable).get("greeting")), {
         globals: {
           storage: { get: (key: ClientValue) => held[key as string] ?? null },
         },

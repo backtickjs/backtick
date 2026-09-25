@@ -10,7 +10,7 @@ const effects: Client<void> = cs.lift((() => {
 })());
 
 const composed: Client<void> = cs.lift((() => {
-    (cs.splice((effects)) satisfies typeof cs.ClientUnknown);
+    cs.splice((effects) satisfies typeof cs.Spliceable);
 })());
 
 it("actionComposition", async (t) => {
@@ -18,7 +18,7 @@ it("actionComposition", async (t) => {
     t,
     "actionComposition",
     cs.lift((() => {
-    (cs.splice((composed)) satisfies typeof cs.ClientUnknown);
+    cs.splice((composed) satisfies typeof cs.Spliceable);
 })()),
   );
 });

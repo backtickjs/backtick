@@ -34,8 +34,8 @@ it("largeData", async (t) => {
     t,
     "largeData",
     <div>
-      <For each={cs.lift((cs.splice((orders)) satisfies typeof cs.ClientUnknown))}>
-        {cs.lift((__cs_order: Order) => (cs.splice((
+      <For each={cs.lift(cs.splice((orders) satisfies typeof cs.Spliceable))}>
+        {cs.lift((__cs_order: Order) => cs.splice((
             <div>
               <img
                 src={cs.lift("https://img.example.com/" + __cs_order.id + ".png")}
@@ -44,11 +44,11 @@ it("largeData", async (t) => {
               <span>{cs.lift(__cs_order.customer.name)}</span>
               <span>{cs.lift(__cs_order.customer.city)}</span>
               <For each={cs.lift(__cs_order.items)}>
-                {cs.lift((__cs_item: Item) => (cs.splice((<span>{cs.lift(__cs_item.sku + " x" + __cs_item.qty)}</span>)) satisfies typeof cs.ClientUnknown))}
+                {cs.lift((__cs_item: Item) => cs.splice((<span>{cs.lift(__cs_item.sku + " x" + __cs_item.qty)}</span>) satisfies typeof cs.Spliceable))}
               </For>
               <span>{cs.lift("$" + __cs_order.total)}</span>
             </div>
-          )) satisfies typeof cs.ClientUnknown))}
+          ) satisfies typeof cs.Spliceable))}
       </For>
     </div>,
   );

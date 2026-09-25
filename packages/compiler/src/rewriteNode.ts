@@ -692,27 +692,27 @@ function rewriteNodeImpl(
         );
         state.mappings.set(argument, node);
       }
+      // The host value is checked, not what it becomes on the client: a host
+      // function passes as a client function once spliced, but only a tag may
+      // name one.
+      //
       // `satisfies` rather than a constraint on `cs.splice`: one admitting
       // primitives would keep a literal a literal instead of widening it.
       //
-      // `typeof cs.ClientUnknown` rather than a module, because this has to resolve
-      // in the file the template was written in — and naming a package would
-      // put that package in front of every user of the transform.
-      //
-      // Parenthesized because this otherwise ends in a type, which is open to
-      // what follows it: `$a < $b` reads as an instantiation. Parenthesizing
-      // the type only moves that — `(T)[0]` is an indexed access.
+      // `typeof cs.Spliceable` rather than a module, because this has to
+      // resolve in the file the template was written in — and naming a
+      // package would put that package in front of every user of the
+      // transform.
       const satisfies = ts.factory.createSatisfiesExpression(
-        call(ts, "cs", "splice", [argument]),
+        argument,
         ts.factory.createTypeQueryNode(
           ts.factory.createQualifiedName(
             ts.factory.createIdentifier("cs"),
-            ts.factory.createIdentifier("ClientUnknown"),
+            ts.factory.createIdentifier("Spliceable"),
           ),
         ),
       );
-      const virtual = ts.factory.createParenthesizedExpression(satisfies);
-      // On the outer node, so the parentheses fall inside the splice's span.
+      const virtual = call(ts, "cs", "splice", [satisfies]);
       state.codeInformation.set(virtual, { semantic: false });
       return {
         virtual,

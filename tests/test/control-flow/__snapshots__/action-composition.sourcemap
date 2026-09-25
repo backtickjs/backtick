@@ -1,19 +1,19 @@
-cs.lift((() => {\n                    → cs`{\n  
-const                                 → const 
-__cs_x                                → x
- =                                    →  = 
-1                                     → 1
-;                                     → ;
-\n})())                               → \n}`
-cs.lift((() => {\n                    → cs`{\n  
-(cs.splice(                           →  [-semantic]
-(effects)                             → $effects
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-;                                     → ;
-\n})())                               → \n}`
-cs.lift((() => {\n                    → cs`{\n      
-(cs.splice(                           →  [-semantic]
-(composed)                            → $composed
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-;                                     → ;
-\n})())                               → \n    }`
+cs.lift((() => {\n                → cs`{\n  
+const                             → const 
+__cs_x                            → x
+ =                                →  = 
+1                                 → 1
+;                                 → ;
+\n})())                           → \n}`
+cs.lift((() => {\n                → cs`{\n  
+cs.splice(                        →  [-semantic]
+(effects)                         → $effects
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+;                                 → ;
+\n})())                           → \n}`
+cs.lift((() => {\n                → cs`{\n      
+cs.splice(                        →  [-semantic]
+(composed)                        → $composed
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+;                                 → ;
+\n})())                           → \n    }`

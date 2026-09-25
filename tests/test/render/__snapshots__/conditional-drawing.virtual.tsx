@@ -29,9 +29,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 // again. Without that, this case does not stop.
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_shown = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(false);
-    const __cs_started = (cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
-        if ((cs.splice((again)) satisfies typeof cs.ClientUnknown)()) {
+    const __cs_shown = cs.splice((state) satisfies typeof cs.Spliceable)(false);
+    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => {
+        if (cs.splice((again) satisfies typeof cs.Spliceable)()) {
             __cs_shown.set(true);
         }
     }, 0);
@@ -40,7 +40,7 @@ async function Held({ again }: { again: Prop<() => boolean> }) {
 }
 
 const conditionalDrawing = cs.lift((() => {
-    const __cs_builds = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
+    const __cs_builds = cs.splice((state) satisfies typeof cs.Spliceable)(0);
     return <div>{cs.lift(<span>{cs.lift("builds " + __cs_builds.get())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
         __cs_builds.set(__cs_builds.get() + 1);
         return __cs_builds.get() < 5;

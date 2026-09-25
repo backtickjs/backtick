@@ -19,8 +19,8 @@ const loadedBadge = await bundler.run(
 );
 
 const scriptBoundTagLoading = cs.lift((() => {
-    const __cs_count = (cs.splice((state)) satisfies typeof cs.ClientUnknown)(0);
-    const __cs_drawn = (cs.splice((state)) satisfies typeof cs.ClientUnknown)<Bundle<(props: {
+    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
+    const __cs_drawn = cs.splice((state) satisfies typeof cs.Spliceable)<Bundle<(props: {
         count: number;
     }) => BacktickElement> | null>(null);
     const __cs_Badge = (__cs_props: {
@@ -29,7 +29,7 @@ const scriptBoundTagLoading = cs.lift((() => {
         const __cs_held = __cs_drawn.get();
         return __cs_held === null ? null : eval(__cs_held)(__cs_props);
     };
-    return <div>{cs.lift(__cs_drawn.get() === null ? <i>loading</i> : <__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_drawn.set((cs.splice((loadedBadge)) satisfies typeof cs.ClientUnknown)))}>load</button>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>;
+    return <div>{cs.lift(__cs_drawn.get() === null ? <i>loading</i> : <__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_drawn.set(cs.splice((loadedBadge) satisfies typeof cs.Spliceable)))}>load</button>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>;
 })());
 
 it("scriptBoundTagLoading", async (t) => {

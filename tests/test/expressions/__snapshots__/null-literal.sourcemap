@@ -1,49 +1,49 @@
-cs.lift(                              → cs`
-(                                     → (\n  
-__cs_value                            → value
-:                                     → : 
-string                                → string
- |                                    →  | 
-null                                  → null
-) => {\n                              → ,\n) => {\n  
-if (                                  → if (
-__cs_value                            → value
- ===                                  →  === 
-null                                  → null
-)                                     → ) 
-{\n                                   → {\n    
-return                                → return 
-"-"                                   → "-"
-;                                     → ;
-\n    }                               → \n  }
-\n                                    → \n  
-return                                → return 
-__cs_value                            → value
-;                                     → ;
-\n}                                   → \n}
-)                                     → `
-cs.lift(                              → cs`
-{                                     → ({\n      
-missing                               → missing
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(orDash)                              → $orDash
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-null                                  → null
-)                                     → )
-,                                     → ,\n      
-present                               → present
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(orDash)                              → $orDash
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-"hi"                                  → "hi"
-)                                     → )
-,                                     → ,\n      
-bare                                  → bare
-:                                     → : 
-null                                  → null
- }                                    → ,\n    })
-)                                     → `
+cs.lift(                          → cs`
+(                                 → (\n  
+__cs_value                        → value
+:                                 → : 
+string                            → string
+ |                                →  | 
+null                              → null
+) => {\n                          → ,\n) => {\n  
+if (                              → if (
+__cs_value                        → value
+ ===                              →  === 
+null                              → null
+)                                 → ) 
+{\n                               → {\n    
+return                            → return 
+"-"                               → "-"
+;                                 → ;
+\n    }                           → \n  }
+\n                                → \n  
+return                            → return 
+__cs_value                        → value
+;                                 → ;
+\n}                               → \n}
+)                                 → `
+cs.lift(                          → cs`
+{                                 → ({\n      
+missing                           → missing
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(orDash)                          → $orDash
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+null                              → null
+)                                 → )
+,                                 → ,\n      
+present                           → present
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(orDash)                          → $orDash
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+"hi"                              → "hi"
+)                                 → )
+,                                 → ,\n      
+bare                              → bare
+:                                 → : 
+null                              → null
+ }                                → ,\n    })
+)                                 → `

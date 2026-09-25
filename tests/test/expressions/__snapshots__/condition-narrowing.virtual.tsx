@@ -11,7 +11,7 @@ const label: Client<(text: string | null, upper: boolean) => string> = cs.lift((
     if (__cs_upper && __cs_text !== null) {
         return __cs_text.toUpperCase();
     }
-    if ((cs.splice(flags.strict) satisfies typeof cs.ClientUnknown) && __cs_text !== null && __cs_text.charAt(0) === "!") {
+    if (cs.splice(flags.strict satisfies typeof cs.Spliceable) && __cs_text !== null && __cs_text.charAt(0) === "!") {
         return __cs_text.concat("?");
     }
     return "none";
@@ -21,6 +21,6 @@ it("conditionNarrowing", async (t) => {
   await snapshotCase(
     t,
     "conditionNarrowing",
-    cs.lift({ missing: (cs.splice((label)) satisfies typeof cs.ClientUnknown)(null, true), loud: (cs.splice((label)) satisfies typeof cs.ClientUnknown)("!hi", true), quiet: (cs.splice((label)) satisfies typeof cs.ClientUnknown)("!hi", false), plain: (cs.splice((label)) satisfies typeof cs.ClientUnknown)("zz", false) }),
+    cs.lift({ missing: cs.splice((label) satisfies typeof cs.Spliceable)(null, true), loud: cs.splice((label) satisfies typeof cs.Spliceable)("!hi", true), quiet: cs.splice((label) satisfies typeof cs.Spliceable)("!hi", false), plain: cs.splice((label) satisfies typeof cs.Spliceable)("zz", false) }),
   );
 });

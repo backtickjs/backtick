@@ -1,51 +1,51 @@
-cs.lift(                              → cs`
-{                                     → ({\n      
-under                                 → under
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(low)                                 → $low
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- <                                    →  < 
-(cs.splice(                           →  [-semantic]
-(high)                                → $high
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-,                                     → ,\n      
-atMost                                → atMost
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(low)                                 → $low
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- <=                                   →  <= 
-(cs.splice(                           →  [-semantic]
-(high)                                → $high
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-,                                     → ,\n      
-over                                  → over
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(high)                                → $high
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- >                                    →  > 
-(cs.splice(                           →  [-semantic]
-(low)                                 → $low
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-,                                     → ,\n      
-between                               → between
-:                                     → : 
-(cs.splice(                           →  [-semantic]
-(low)                                 → $low
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- <                                    →  < 
-(cs.splice(                           →  [-semantic]
-(high)                                → $high
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- &&                                   →  && 
-(cs.splice(                           →  [-semantic]
-(high)                                → $high
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- >                                    →  > 
-(cs.splice(                           →  [-semantic]
-(low)                                 → $low
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
- }                                    → ,\n    })
-)                                     → `
+cs.lift(                          → cs`
+{                                 → ({\n      
+under                             → under
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(low)                             → $low
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ <                                →  < 
+cs.splice(                        →  [-semantic]
+(high)                            → $high
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+,                                 → ,\n      
+atMost                            → atMost
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(low)                             → $low
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ <=                               →  <= 
+cs.splice(                        →  [-semantic]
+(high)                            → $high
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+,                                 → ,\n      
+over                              → over
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(high)                            → $high
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ >                                →  > 
+cs.splice(                        →  [-semantic]
+(low)                             → $low
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+,                                 → ,\n      
+between                           → between
+:                                 → : 
+cs.splice(                        →  [-semantic]
+(low)                             → $low
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ <                                →  < 
+cs.splice(                        →  [-semantic]
+(high)                            → $high
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ &&                               →  && 
+cs.splice(                        →  [-semantic]
+(high)                            → $high
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ >                                →  > 
+cs.splice(                        →  [-semantic]
+(low)                             → $low
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ }                                → ,\n    })
+)                                 → `

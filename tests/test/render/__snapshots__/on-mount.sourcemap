@@ -1,100 +1,100 @@
-cs.lift((() => {\n                    → cs`{\n          
-const                                 → const 
-__cs_count                            → count
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-0                                     → 0
-)                                     → )
-;                                     → ;
-\n                                    → \n          
-(cs.splice(                           →  [-semantic]
-(onMount)                             → $onMount
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-() => {\n                             → () => {\n            
-(cs.splice(                           →  [-semantic]
-(window)                              → $window
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-.                                     → .
-console                               → console
-.                                     → .
-log                                   → log
-()                                    → ()
-;                                     → ;
-\n                                    → \n            
-__cs_count                            → count
-.                                     → .
-set                                   → set
-(                                     → (
-__cs_count                            → count
-.                                     → .
-get                                   → get
-()                                    → ()
- +                                    →  + 
-1                                     → 1
-)                                     → )
-;                                     → ;
-\n    }                               → \n          }
-)                                     → )
-;                                     → ;
-\n                                    → \n          
-return                                → return 
-<                                     → <
-p                                     → p
->{cs.lift(                            → >{
-"mounted "                            → "mounted "
- +                                    →  + 
-__cs_count                            → count
-.                                     → .
-get                                   → get
-()                                    → ()
-)}</                                  → }</
-p                                     → p
->                                     → >
-;                                     → ;
-\n})())                               → \n        }`
-cs.lift((() => {\n                    → cs`{\n        
-const                                 → const 
-__cs_said                             → said
- =                                    →  = 
-(cs.splice(                           →  [-semantic]
-(state)                               → $state
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-"not yet"                             → "not yet"
-)                                     → )
-;                                     → ;
-\n                                    → \n        
-return                                → return 
-<                                     → (\n          <
-button                                → button
-                                      →  
-onclick                               → onclick
-={cs.lift(                            → ={
-() =>                                 → () => 
-(cs.splice(                           →  [-semantic]
-(onMount)                             → $onMount
-) satisfies typeof cs.ClientUnknown)  →  [-semantic]
-(                                     → (
-() =>                                 → () => 
-__cs_said                             → said
-.                                     → .
-set                                   → set
-(                                     → (
-"ran"                                 → "ran"
-)                                     → )
-)                                     → )
-)}                                    → }
->{cs.lift(                            → >\n            {
-__cs_said                             → said
-.                                     → .
-get                                   → get
-()                                    → ()
-)}</                                  → }\n          </
-button                                → button
->                                     → >\n        )
-;                                     → ;
-\n})())                               → \n      }`
+cs.lift((() => {\n                → cs`{\n          
+const                             → const 
+__cs_count                        → count
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+0                                 → 0
+)                                 → )
+;                                 → ;
+\n                                → \n          
+cs.splice(                        →  [-semantic]
+(onMount)                         → $onMount
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+() => {\n                         → () => {\n            
+cs.splice(                        →  [-semantic]
+(window)                          → $window
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+.                                 → .
+console                           → console
+.                                 → .
+log                               → log
+()                                → ()
+;                                 → ;
+\n                                → \n            
+__cs_count                        → count
+.                                 → .
+set                               → set
+(                                 → (
+__cs_count                        → count
+.                                 → .
+get                               → get
+()                                → ()
+ +                                →  + 
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n    }                           → \n          }
+)                                 → )
+;                                 → ;
+\n                                → \n          
+return                            → return 
+<                                 → <
+p                                 → p
+>{cs.lift(                        → >{
+"mounted "                        → "mounted "
+ +                                →  + 
+__cs_count                        → count
+.                                 → .
+get                               → get
+()                                → ()
+)}</                              → }</
+p                                 → p
+>                                 → >
+;                                 → ;
+\n})())                           → \n        }`
+cs.lift((() => {\n                → cs`{\n        
+const                             → const 
+__cs_said                         → said
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(state)                           → $state
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+"not yet"                         → "not yet"
+)                                 → )
+;                                 → ;
+\n                                → \n        
+return                            → return 
+<                                 → (\n          <
+button                            → button
+                                  →  
+onclick                           → onclick
+={cs.lift(                        → ={
+() =>                             → () => 
+cs.splice(                        →  [-semantic]
+(onMount)                         → $onMount
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+() =>                             → () => 
+__cs_said                         → said
+.                                 → .
+set                               → set
+(                                 → (
+"ran"                             → "ran"
+)                                 → )
+)                                 → )
+)}                                → }
+>{cs.lift(                        → >\n            {
+__cs_said                         → said
+.                                 → .
+get                               → get
+()                                → ()
+)}</                              → }\n          </
+button                            → button
+>                                 → >\n        )
+;                                 → ;
+\n})())                           → \n      }`

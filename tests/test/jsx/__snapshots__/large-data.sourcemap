@@ -1,7 +1,7 @@
 cs.lift(                                  → cs`
-(cs.splice(                               →  [-semantic]
+cs.splice(                                →  [-semantic]
 (orders)                                  → $orders
-) satisfies typeof cs.ClientUnknown)      →  [-semantic]
+ satisfies typeof cs.Spliceable)          →  [-semantic]
 )                                         → `
 cs.lift(                                  → cs`
 (                                         → (
@@ -9,7 +9,7 @@ __cs_order                                → order
 :                                         → : 
 Order                                     → Order
 ) =>                                      → ) =>\n          
-(cs.splice(                               → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 (\n            <div>\n              <img\n                src={→ (\n            <div>\n              <img\n                src={
 cs.lift(                                  → cs`
 "https://img.example.com/"                → "https://img.example.com/"
@@ -49,7 +49,7 @@ __cs_item                                 → item
 :                                         → : 
 Item                                      → Item
 ) =>                                      → ) =>\n                  
-(cs.splice(                               → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 (<span>{                                  → (<span>{
 cs.lift(                                  → cs`
 __cs_item                                 → item
@@ -63,7 +63,7 @@ __cs_item                                 → item
 qty                                       → qty
 )                                         → `
 }</span>)                                 → }</span>)
-) satisfies typeof cs.ClientUnknown)      → } [-semantic]
+ satisfies typeof cs.Spliceable)          → } [-semantic]
 )                                         → `
 }\n              </For>\n              <span>{→ }\n              </For>\n              <span>{
 cs.lift(                                  → cs`
@@ -74,5 +74,5 @@ __cs_order                                → order
 total                                     → total
 )                                         → `
 }</span>\n            </div>\n          ) → }</span>\n            </div>\n          )
-) satisfies typeof cs.ClientUnknown)      → } [-semantic]
+ satisfies typeof cs.Spliceable)          → } [-semantic]
 )                                         → `
