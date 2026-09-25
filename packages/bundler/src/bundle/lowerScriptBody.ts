@@ -72,8 +72,8 @@ export function lowerScriptBody(script: ClientScript, body: Body): Body {
     if (hole === undefined || hole.kind === "capture") {
       throw new Error(`This script has no splice \`$${index}\`.`);
     }
-    const args = [...bindingsOf(hole), ...captures].map(
-      (bound) => read(bound, sourceName(bound), loc),
+    const args = [...bindingsOf(hole), ...captures].map((bound) =>
+      read(bound, sourceName(bound), loc),
     );
     return {
       ...call({ ...identifier(`$${index}`), loc }, args),
@@ -144,12 +144,7 @@ export function lowerScriptBody(script: ClientScript, body: Body): Body {
       }
       // A component tag naming a host binding reaches it by splice.
       if (tag.param !== undefined) {
-        return jsxComponent(
-          null,
-          splice(tag.param, tag.loc),
-          written,
-          drawn,
-        );
+        return jsxComponent(null, splice(tag.param, tag.loc), written, drawn);
       }
       return jsxElement(null, tag.name, written, drawn);
     })();

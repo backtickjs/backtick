@@ -12,7 +12,9 @@ export function renderClientCode(
   scripts: readonly EmittedScriptAt[],
 ): string {
   return scripts
-    .map((script) => `// ${position(sourceText, script.start)}\n${script.code}\n`)
+    .map(
+      (script) => `// ${position(sourceText, script.start)}\n${script.code}\n`,
+    )
     .join("\n");
 }
 
@@ -101,8 +103,8 @@ export function renderClientMappings(
       }`;
       return [
         header,
-        ...rows.map(([generated, source]) =>
-          `${generated.padEnd(width)}  → ${source}`,
+        ...rows.map(
+          ([generated, source]) => `${generated.padEnd(width)}  → ${source}`,
         ),
       ].join("\n");
     })

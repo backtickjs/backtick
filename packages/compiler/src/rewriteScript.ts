@@ -6,6 +6,7 @@ import { arrow, call, iife, object } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
+import { applyTransform, type CodeTransform } from "./applyTransform.js";
 import type { SourceRange } from "./SourceRange.js";
 
 export interface RewrittenScript {
@@ -26,6 +27,7 @@ export function rewriteScript(
   fileHash: string,
   bindings: BindingResolution,
   params: readonly ResolvedParam[] = [],
+  transform?: CodeTransform,
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -133,12 +135,18 @@ export function rewriteScript(
 
   sourceMaps.set(virtual, scriptRange);
 
-  const emitted = emitScript(
+  // Through the framework's compiler, where there is one.
+  const script = emitScript(
     ts,
     clientScript,
     params.length,
     scriptEdits(clientScript, bindings, params),
   );
+
+  const emitted =
+    transform != null
+      ? applyTransform(transform, script, sourceFile.fileName)
+      : script;
 
   const runtime = call(ts, "cs", "create", [
     ts.factory.createStringLiteral(id),

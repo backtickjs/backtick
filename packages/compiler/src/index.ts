@@ -2,6 +2,7 @@ export type { SourceMapping } from "./buildMappings.js";
 export type { CodeInformation } from "./CodeInformation.js";
 export type { Diagnostic } from "./diagnostics.js";
 export type { EmittedScript } from "./emitScript.js";
+export type { CodeTransform } from "./applyTransform.js";
 export { emitScripts, type EmittedScriptAt } from "./emitScripts.js";
 export { flattenScripts } from "./flattenScripts.js";
 export type { ClientScript, ParsedFile, Splice } from "./parseFile.js";

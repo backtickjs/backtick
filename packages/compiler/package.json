@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@backtickjs/client-script": "workspace:*",
+    "@jridgewell/remapping": "^2.3.5",
     "@types/estree": "^1.0.9",
     "@types/estree-jsx": "^1.0.5"
   },
@@ -28,6 +29,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@jridgewell/trace-mapping": "^0.3.31",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }
