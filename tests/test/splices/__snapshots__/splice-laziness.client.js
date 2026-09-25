@@ -1,21 +1,21 @@
 // 13:10
-$0 => (flag) => {
+export default ($0) => (flag) => {
     if (flag) {
         return $0();
     }
     return "skipped";
-}
+};
 
 // 21:12
-() => "evaluated"
+export default () => "evaluated";
 
 // 23:16
-() => {
+export default () => {
     throw "the guarded fragment must never evaluate";
-}
+};
 
 // 31:5
-($0, $1) => ({
+export default ($0, $1) => ({
     taken: $0()(true),
     skipped: $1()(false),
-})
+});

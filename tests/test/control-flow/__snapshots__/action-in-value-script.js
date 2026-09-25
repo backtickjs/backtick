@@ -42,8 +42,8 @@ const valueScriptEffects = cs.create(
       },
     ],
   }),
-  "() => {\n    const x = 1;\n}",
-  '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"AAM4C;IAC1C,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
+  "export default () => {\n    const x = 1;\n};",
+  '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"eAM4C;IAC1C,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
 );
 const ping = cs.create(
   "1zk77nyjrl50d:11:33",
@@ -123,8 +123,8 @@ const ping = cs.create(
     },
     expression: false,
   }),
-  "() => () => {\n    let n = 0;\n    n = 1;\n}",
-  '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"AAUoC,MAAA,GAAG,EAAE;IACvC,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC,CAAA"}',
+  "export default () => () => {\n    let n = 0;\n    n = 1;\n};",
+  '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"eAUoC,MAAA,GAAG,EAAE;IACvC,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
 );
 it("actionInValueScript", async (t) => {
   await snapshotCase(
@@ -310,8 +310,8 @@ it("actionInValueScript", async (t) => {
         },
         expression: false,
       }),
-      "($0, $1) => (b) => {\n    let n = 0;\n    $0();\n    if (b) {\n        $1()();\n        n = 1;\n    }\n    return n;\n}",
-      '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"AAmBO,YAAA,CAAC,CAAU,EAAE,EAAE;IAChB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAmB,CAAC;IACpB,IAAI,CAAC,EAAE,CAAC;QACN,IAAK,EAAE,CAAC;QACR,CAAC,GAAG,CAAC,CAAC;IACR,CAAC;IACD,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
+      "export default ($0, $1) => (b) => {\n    let n = 0;\n    $0();\n    if (b) {\n        $1()();\n        n = 1;\n    }\n    return n;\n};",
+      '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"eAmBO,YAAA,CAAC,CAAU,EAAE,EAAE;IAChB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAmB,CAAC;IACpB,IAAI,CAAC,EAAE,CAAC;QACN,IAAK,EAAE,CAAC;QACR,CAAC,GAAG,CAAC,CAAC;IACR,CAAC;IACD,OAAO,CAAC,CAAC;AACX,CAAC"}',
     ),
   );
 });

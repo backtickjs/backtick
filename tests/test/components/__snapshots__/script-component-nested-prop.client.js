@@ -1,2 +1,2 @@
 // 27:5
-$0 => <$0 person={{ firstName: "ada" }}/>
+export default ($0) => <$0 person={{ firstName: "ada" }}/>;

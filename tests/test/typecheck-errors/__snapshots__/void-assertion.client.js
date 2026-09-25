@@ -1,5 +1,5 @@
 // 7:18
-$0 => {
+export default ($0) => {
     const a = $0();
     return "" + a;
-}
+};

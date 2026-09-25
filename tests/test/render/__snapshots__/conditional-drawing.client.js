@@ -1,5 +1,5 @@
 // 31:10
-($0, $1, $2) => {
+export default ($0, $1, $2) => {
     const shown = $0()(false);
     const started = $1().setTimeout(() => {
         if ($2()()) {
@@ -7,10 +7,10 @@
         }
     }, 0);
     return <>{shown.get() ? <em>shown</em> : <i>waiting</i>}</>;
-}
+};
 
 // 44:28
-($0, $1) => {
+export default ($0, $1) => {
     const builds = $0()(0);
     return (<div>
       <span>{"builds " + builds.get()}</span>
@@ -21,4 +21,4 @@
         }}/>
       </section>
     </div>);
-}
+};

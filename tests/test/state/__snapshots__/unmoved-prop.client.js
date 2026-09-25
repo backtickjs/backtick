@@ -1,5 +1,5 @@
 // 13:10
-($0, $1) => {
+export default ($0, $1) => {
     const selected = $0()(0);
     return (<div>
         <span onclick={() => selected.set(1)}>select</span>
@@ -11,4 +11,4 @@
           </$1>
         </div>
       </div>);
-}
+};

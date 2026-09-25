@@ -1,8 +1,8 @@
 // 15:10
-() => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>
+export default () => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>;
 
 // 18:22
-($0, $1) => {
+export default ($0, $1) => {
     const Dot = (props) => (<circle cx={props.x} cy="5" r="2">
       <title>{"dot " + props.x}</title>
     </circle>);
@@ -16,4 +16,4 @@
         </foreignObject>
       </svg>
     </div>);
-}
+};

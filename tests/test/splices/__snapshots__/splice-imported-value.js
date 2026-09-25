@@ -30,8 +30,8 @@ it("spliceImportedValue", async (t) => {
         loc: { start: { line: 23, column: 50 }, end: { line: 23, column: 63 } },
         param: 0,
       }),
-      "$0 => $0()",
-      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,MAAA,IAAa,CAAA"}',
+      "export default ($0) => $0();",
+      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splice-imported-value.test.tsx"],"names":[],"mappings":"eAsBkD,QAAA,IAAa"}',
     ),
   );
 });

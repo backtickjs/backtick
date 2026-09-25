@@ -71,8 +71,8 @@ export const constant = cs.create(
       },
     ],
   }),
-  "() => {\n    const n = 0;\n    n += 1;\n    return n;\n}",
-  '{"version":3,"file":"compound-assignment-operand.test.jsx","sourceRoot":"","sources":["compound-assignment-operand.test.tsx"],"names":[],"mappings":"AAI2B;IACzB,MAAM,CAAC,GAAG,CAAC,CAAC;IAEZ,CAAC,IAAI,CAAC,CAAC;IACP,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
+  "export default () => {\n    const n = 0;\n    n += 1;\n    return n;\n};",
+  '{"version":3,"file":"compound-assignment-operand.test.jsx","sourceRoot":"","sources":["compound-assignment-operand.test.tsx"],"names":[],"mappings":"eAI2B;IACzB,MAAM,CAAC,GAAG,CAAC,CAAC;IAEZ,CAAC,IAAI,CAAC,CAAC;IACP,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );
 export const mixed = cs.create(
   "3586xtu4la89h:12:21",
@@ -156,6 +156,6 @@ export const mixed = cs.create(
       },
     ],
   }),
-  '() => {\n    let n = 1;\n    n -= "a";\n    return n;\n}',
-  '{"version":3,"file":"compound-assignment-operand.test.jsx","sourceRoot":"","sources":["compound-assignment-operand.test.tsx"],"names":[],"mappings":"AAWwB;IACtB,IAAI,CAAC,GAAG,CAAC,CAAC;IAEV,CAAC,IAAI,GAAG,CAAC;IACT,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
+  'export default () => {\n    let n = 1;\n    n -= "a";\n    return n;\n};',
+  '{"version":3,"file":"compound-assignment-operand.test.jsx","sourceRoot":"","sources":["compound-assignment-operand.test.tsx"],"names":[],"mappings":"eAWwB;IACtB,IAAI,CAAC,GAAG,CAAC,CAAC;IAEV,CAAC,IAAI,GAAG,CAAC;IACT,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );

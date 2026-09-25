@@ -1,5 +1,5 @@
 // 12:5
-() => {
+export default () => {
     const word = "ab";
     return {
         padded: word.padStart(4) + "|" + word.padEnd(5, "-="),
@@ -8,4 +8,4 @@
         replaced: "a.b.c".replaceAll(".", "/"),
         replacedBy: "a.b".replaceAll(".", (found, offset) => "" + offset),
     };
-}
+};

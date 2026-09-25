@@ -244,8 +244,8 @@ it("splicedLiteralWidens", async (t) => {
           },
         ],
       }),
-      "($0, $1, $2, $3) => {\n    const n = $0()($1());\n    n.set(6);\n    const c = $0()($2());\n    c.set($3());\n}",
-      '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["spliced-literal-widens.test.tsx"],"names":[],"mappings":"AA0BO;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,IAAK,CAAC,CAAC;IACxB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;IACT,MAAM,CAAC,GAAG,IAAM,CAAC,IAAC,CAAY,CAAC;IAC/B,CAAC,CAAC,GAAG,CAAC,IAAC,CAAa,CAAC;AACvB,CAAC,CAAA"}',
+      "export default ($0, $1, $2, $3) => {\n    const n = $0()($1());\n    n.set(6);\n    const c = $0()($2());\n    c.set($3());\n};",
+      '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["spliced-literal-widens.test.tsx"],"names":[],"mappings":"eA0BO;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,IAAK,CAAC,CAAC;IACxB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;IACT,MAAM,CAAC,GAAG,IAAM,CAAC,IAAC,CAAY,CAAC;IAC/B,CAAC,CAAC,GAAG,CAAC,IAAC,CAAa,CAAC;AACvB,CAAC"}',
     ),
   );
 });

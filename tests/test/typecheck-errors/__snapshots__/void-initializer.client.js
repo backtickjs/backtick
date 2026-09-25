@@ -1,27 +1,27 @@
 // 5:14
-() => () => {
+export default () => () => {
     let n = 0;
     n = 1;
-}
+};
 
 // 10:16
-$0 => {
+export default ($0) => {
     const x = $0()();
     return 1;
-}
+};
 
 // 15:16
-$0 => {
+export default ($0) => {
     const x = $0()();
-}
+};
 
 // 21:15
-() => (text) => {
+export default () => (text) => {
     return text;
-}
+};
 
 // 25:23
-$0 => {
+export default ($0) => {
     const x = $0()(true);
     return 1;
-}
+};

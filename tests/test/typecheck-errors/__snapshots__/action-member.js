@@ -41,8 +41,8 @@ const action = cs.create(
       },
     ],
   }),
-  "() => {\n    const x = 1;\n}",
-  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"AAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC,CAAA"}',
+  "export default () => {\n    const x = 1;\n};",
+  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"eAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
 );
 export default cs.create(
   "lzbinin395o6:9:15",
@@ -96,6 +96,6 @@ export default cs.create(
       },
     ],
   }),
-  "$0 => {\n    const list = $0();\n    return 1;\n}",
-  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"AAQkB;IAEhB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
+  "export default ($0) => {\n    const list = $0();\n    return 1;\n};",
+  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"eAQkB;IAEhB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );

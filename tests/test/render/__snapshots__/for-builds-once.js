@@ -446,8 +446,8 @@ async function WaitingList({ more }) {
         },
       ],
     }),
-    "($0, $1, $2, $3, $4) => {\n    const items = $0()([]);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            items.set($3());\n        }\n    }, 0);\n    return <$4 each={items.get()}>{(item) => <em>{item}</em>}</$4>;\n}",
-    '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["for-builds-once.test.tsx"],"names":[],"mappings":"AAoBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAW,EAAE,CAAC,CAAC;IAEnC,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,GAAG,CAAC,IAAY,CAAC,CAAC;QAC1B,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAG,CAAC,CAAC;AAC3E,CAAC,CAAA"}',
+    "export default ($0, $1, $2, $3, $4) => {\n    const items = $0()([]);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            items.set($3());\n        }\n    }, 0);\n    return <$4 each={items.get()}>{(item) => <em>{item}</em>}</$4>;\n};",
+    '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["for-builds-once.test.tsx"],"names":[],"mappings":"eAoBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAW,EAAE,CAAC,CAAC;IAEnC,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,GAAG,CAAC,IAAY,CAAC,CAAC;QAC1B,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAG,CAAC,CAAC;AAC3E,CAAC"}',
   );
 }
 const forBuildsOnce = cs.create(
@@ -904,8 +904,8 @@ const forBuildsOnce = cs.create(
       },
     ],
   }),
-  '($0, $1) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked.get()}</span>\n      <$1 more={() => {\n            asked.set(asked.get() + 1);\n            return asked.get() < 5;\n        }}/>\n    </div>);\n}',
-  '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["for-builds-once.test.tsx"],"names":[],"mappings":"AAiCyB;IACvB,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAExB,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,IAAI,CACpC;MAAA,CAAC,EAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;YAC3B,OAAO,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;QACzB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+  'export default ($0, $1) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked.get()}</span>\n      <$1 more={() => {\n            asked.set(asked.get() + 1);\n            return asked.get() < 5;\n        }}/>\n    </div>);\n};',
+  '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["for-builds-once.test.tsx"],"names":[],"mappings":"eAiCyB;IACvB,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAExB,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,IAAI,CACpC;MAAA,CAAC,EAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;YAC3B,OAAO,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;QACzB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
 );
 it("forBuildsOnce", async (t) => {
   await snapshotCase(t, "forBuildsOnce", forBuildsOnce);

@@ -1,5 +1,5 @@
 // 13:10
-$0 =>      → 13:13 (flag:
+($0) =>    → 13:13 (flag: b
 (          → 13:13 (
 flag       → 13:14 flag
 )          → 13:27 ) 
@@ -17,10 +17,12 @@ return     → 17:5 return
 "skipped"  → 17:12 "skipped"
 ;          → 17:21 ;
 }          → 18:3 }
+;          → 18:4 `
 
 // 21:12
 () =>        → 21:15 "evalu
 "evaluated"  → 21:15 "evaluated"
+;            → 21:26 `
 
 // 23:16
 () => {                                     → 23:19 {
@@ -28,6 +30,7 @@ throw                                       → 24:3 throw
 "the guarded fragment must never evaluate"  → 24:9 "the guarded fragment must never evaluate"
 ;                                           → 24:51 ;
 }                                           → 25:1 }
+;                                           → 25:2 `
 
 // 31:5
 ($0, $1) =>   → 31:8 ({
@@ -48,3 +51,4 @@ false         → 33:33 false
 )             → 33:38 )
 ,             → 33:39 ,
 )             → 34:6 )
+;             → 34:7 `

@@ -1,2 +1,2 @@
 // 34:34
-$0 => (el) => $0()(() => el.focus())
+export default ($0) => (el) => $0()(() => el.focus());

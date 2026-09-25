@@ -155,8 +155,8 @@ describe("a handler that is not a function", () => {
           children: [],
           closingElement: null,
         }),
-        "() => <div onclick={() => { }}/>",
-        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"AAqI+B,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG,CAAA"}',
+        "export default () => <div onclick={() => { }}/>;",
+        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eAqI+B,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
       ),
     );
     assert.equal(div.attributes.length, 0);
@@ -235,8 +235,8 @@ describe("a handler that is not a function", () => {
           children: [],
           closingElement: null,
         }),
-        "() => <div title={() => { }}/>",
-        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"AA+IS,MAAA,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG,CAAA"}',
+        "export default () => <div title={() => { }}/>;",
+        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eA+IS,MAAA,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
       ),
       /takes a value, not a function/,
     );
@@ -306,8 +306,8 @@ describe("a handler that is not a function", () => {
           children: [],
           closingElement: null,
         }),
-        "() => <div onclick={null}/>",
-        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"AA0JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,EAAG,CAAA"}',
+        "export default () => <div onclick={null}/>;",
+        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eA0JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,EAAG"}',
       ),
       cs.create(
         "2i39r1w0584h:156:6",
@@ -404,8 +404,8 @@ describe("a handler that is not a function", () => {
           children: [],
           closingElement: null,
         }),
-        "() => <div onclick={[() => { }][1]}/>",
-        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"AA2JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAA"}',
+        "export default () => <div onclick={[() => { }][1]}/>;",
+        '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eA2JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
       ),
     ];
     for (const value of absent) {

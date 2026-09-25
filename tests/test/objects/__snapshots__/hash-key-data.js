@@ -21,8 +21,8 @@ it("hashKeyData", async (t) => {
         },
         expression: true,
       }),
-      "$0 => () => $0()",
-      '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["hash-key-data.test.tsx"],"names":[],"mappings":"AAO0C,MAAA,GAAG,EAAE,CAAC,IAAC,CAAA"}',
+      "export default ($0) => () => $0();",
+      '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["hash-key-data.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
     ),
   );
 });

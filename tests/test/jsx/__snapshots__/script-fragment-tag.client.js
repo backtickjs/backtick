@@ -1,5 +1,5 @@
 // 17:5
-() => {
+export default () => {
     return (<div>
           {<Fragment>
               <span>a</span>
@@ -9,4 +9,4 @@
               <em>c</em>
             </>}
         </div>);
-}
+};

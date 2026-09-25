@@ -884,8 +884,8 @@ describe("equals", () => {
             },
           ],
         }),
-        '($0, $1, $2) => {\n    const n = $0()(1);\n    const size = $1()(() => ({ isBig: n.get() > 2, n: n.get() }), {\n        equals: (previous, next) => previous.isBig === next.isBig,\n    });\n    const label = () => {\n        $2().console.log();\n        return size.get().isBig ? "big" : "small";\n    };\n    return (<div>\n            <button onclick={() => n.set(n.get() + 1)}>add</button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"AA0BS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,MAAM,IAAI,GAAG,IAAS,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,GAAG,EAAE,EAAE,CAAC,EAAE;QACjE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,KAAK,KAAK,IAAI,CAAC,KAAK;KAC1D,CAAC,CAAC;IACH,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,OAAO,CAAC;IAC5C,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACtD;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+        'export default ($0, $1, $2) => {\n    const n = $0()(1);\n    const size = $1()(() => ({ isBig: n.get() > 2, n: n.get() }), {\n        equals: (previous, next) => previous.isBig === next.isBig,\n    });\n    const label = () => {\n        $2().console.log();\n        return size.get().isBig ? "big" : "small";\n    };\n    return (<div>\n            <button onclick={() => n.set(n.get() + 1)}>add</button>\n            <p>{label()}</p>\n          </div>);\n};',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eA0BS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,MAAM,IAAI,GAAG,IAAS,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,GAAG,EAAE,EAAE,CAAC,EAAE;QACjE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,KAAK,KAAK,IAAI,CAAC,KAAK;KAC1D,CAAC,CAAC;IACH,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,OAAO,CAAC;IAC5C,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACtD;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     assert.equal(logged.length, 1);
@@ -1630,8 +1630,8 @@ describe("equals", () => {
             },
           ],
         }),
-        '($0, $1) => {\n    const point = $0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });\n    const label = () => {\n        $1().console.log();\n        return "x " + point.get().x;\n    };\n    return (<div>\n            <button onclick={() => point.set({ x: point.get().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"AAwDS;IACD,MAAM,KAAK,GAAG,IAAM,CAClB,EAAE,CAAC,EAAE,CAAC,EAAE,EACR,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,EAAE,CACtD,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC;IAC9B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACrD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+        'export default ($0, $1) => {\n    const point = $0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });\n    const label = () => {\n        $1().console.log();\n        return "x " + point.get().x;\n    };\n    return (<div>\n            <button onclick={() => point.set({ x: point.get().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n};',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAwDS;IACD,MAAM,KAAK,GAAG,IAAM,CAClB,EAAE,CAAC,EAAE,CAAC,EAAE,EACR,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,EAAE,CACtD,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC;IAC9B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACrD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     await press();
@@ -2062,8 +2062,8 @@ describe("equals", () => {
             },
           ],
         }),
-        '($0, $1) => {\n    const n = $0()(1, {\n        equals: (previous, next) => {\n            $1().console.log(previous, next);\n            return previous === next;\n        },\n    });\n    return <button onclick={() => n.set(2)}>{"n " + n.get()}</button>;\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"AAiFS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,EAAE;QAClB,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE;YACzB,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,QAAQ,EAAE,IAAI,CAAC,CAAC;YACpC,OAAO,QAAQ,KAAK,IAAI,CAAC;QAC3B,CAAC;KACF,CAAC,CAAC;IACH,OAAO,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,EAAE,MAAM,CAAC,CAAC;AACpE,CAAC,CAAA"}',
+        'export default ($0, $1) => {\n    const n = $0()(1, {\n        equals: (previous, next) => {\n            $1().console.log(previous, next);\n            return previous === next;\n        },\n    });\n    return <button onclick={() => n.set(2)}>{"n " + n.get()}</button>;\n};',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAiFS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,EAAE;QAClB,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE;YACzB,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,QAAQ,EAAE,IAAI,CAAC,CAAC;YACpC,OAAO,QAAQ,KAAK,IAAI,CAAC;QAC3B,CAAC;KACF,CAAC,CAAC;IACH,OAAO,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,EAAE,MAAM,CAAC,CAAC;AACpE,CAAC"}',
       ),
     );
     await press();
@@ -2568,8 +2568,8 @@ describe("equals", () => {
             },
           ],
         }),
-        '($0, $1) => {\n    const n = $0()(1);\n    const label = () => {\n        $1().console.log();\n        return "n " + n.get();\n    };\n    return (<div>\n            <button onclick={() => n.set(1)}>same</button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"AAkGS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC;IACxB,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC7C;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+        'export default ($0, $1) => {\n    const n = $0()(1);\n    const label = () => {\n        $1().console.log();\n        return "n " + n.get();\n    };\n    return (<div>\n            <button onclick={() => n.set(1)}>same</button>\n            <p>{label()}</p>\n          </div>);\n};',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAkGS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC;IACxB,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC7C;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     await press();
@@ -3205,8 +3205,8 @@ describe("equals", () => {
             },
           ],
         }),
-        '($0, $1) => {\n    const point = $0()({ x: 1 });\n    const label = () => {\n        $1().console.log();\n        return "x " + point.get().x;\n    };\n    return (<div>\n            <button onclick={() => point.set({ x: point.get().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"AAsHS;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC;IAC9B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACrD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+        'export default ($0, $1) => {\n    const point = $0()({ x: 1 });\n    const label = () => {\n        $1().console.log();\n        return "x " + point.get().x;\n    };\n    return (<div>\n            <button onclick={() => point.set({ x: point.get().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n};',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAsHS;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC;IAC9B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACrD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     await press();

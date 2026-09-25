@@ -19,8 +19,8 @@ describe("emitScripts", () => {
     const [plain] = emitScripts(ts, "host.tsx", host);
     const [compiled] = emitScripts(ts, "host.tsx", host, transform);
 
-    assert.deepStrictEqual(seen, [["() => 1 + 1", "host.tsx"]]);
-    assert.strictEqual(compiled?.code, "\n() => 1 + 1");
+    assert.deepStrictEqual(seen, [["export default () => 1 + 1;", "host.tsx"]]);
+    assert.strictEqual(compiled?.code, "\nexport default () => 1 + 1;");
     // Composed: where the transform's output starts is where the code it was
     // given starts, in the host file.
     const map = new TraceMap(compiled!.map);

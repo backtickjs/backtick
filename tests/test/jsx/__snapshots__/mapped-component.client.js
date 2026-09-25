@@ -1,8 +1,8 @@
 // 26:18
-$0 => $0()
+export default ($0) => $0();
 
 // 27:10
-$0 => (row) => $0(row)
+export default ($0) => (row) => $0(row);
 
 // 27:40
-$0 => "row " + $0
+export default ($0) => "row " + $0;

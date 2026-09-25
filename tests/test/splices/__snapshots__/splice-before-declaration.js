@@ -173,8 +173,8 @@ function sandwich(fragment) {
         },
       ],
     }),
-    "$0 => {\n    const before = 1;\n    const spliced = $0();\n    const after = 2;\n    return before + spliced + after;\n}",
-    '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,IAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC,CAAA"}',
+    "export default ($0) => {\n    const before = 1;\n    const spliced = $0();\n    const after = 2;\n    return before + spliced + after;\n};",
+    '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,IAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC"}',
   );
 }
 it("spliceBeforeDeclaration", async (t) => {
@@ -199,8 +199,8 @@ it("spliceBeforeDeclaration", async (t) => {
                   },
                   value: 10,
                 }),
-                "() => 10",
-                '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BqB,MAAA,EAAE,CAAA"}',
+                "export default () => 10;",
+                '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2BqB,MAAA,EAAE"}',
               ),
             ),
             bindings: [],
@@ -219,8 +219,8 @@ it("spliceBeforeDeclaration", async (t) => {
                   },
                   value: 20,
                 }),
-                "() => 20",
-                '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2B2C,MAAA,EAAE,CAAA"}',
+                "export default () => 20;",
+                '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2B2C,MAAA,EAAE"}',
               ),
             ),
             bindings: [],
@@ -248,8 +248,8 @@ it("spliceBeforeDeclaration", async (t) => {
           param: 1,
         },
       }),
-      "($0, $1) => $0() + $1()",
-      '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BO,YAAA,IAAC,GAAqB,IAAC,CAAA"}',
+      "export default ($0, $1) => $0() + $1();",
+      '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2BO,YAAA,IAAC,GAAqB,IAAC"}',
     ),
   );
 });

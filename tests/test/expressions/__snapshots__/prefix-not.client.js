@@ -1,7 +1,7 @@
 // 10:5
-() => (ready, count) => {
+export default () => (ready, count) => {
     if (!ready) {
         return "waiting";
     }
     return !(count > 3) ? "room left" : "full";
-}
+};

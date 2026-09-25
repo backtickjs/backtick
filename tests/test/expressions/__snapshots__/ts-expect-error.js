@@ -67,8 +67,8 @@ it("tsExpectError", async (t) => {
           },
         ],
       }),
-      '() => {\n    const count = "one";\n    return count;\n}',
-      '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["ts-expect-error.test.tsx"],"names":[],"mappings":"AAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC,CAAA"}',
+      'export default () => {\n    const count = "one";\n    return count;\n};',
+      '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["ts-expect-error.test.tsx"],"names":[],"mappings":"eAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC"}',
     ),
   );
 });

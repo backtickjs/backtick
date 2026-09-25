@@ -1,5 +1,5 @@
 // 10:5
-() => {
+export default () => {
     const n = 5;
     return [
         n ** 2,
@@ -14,18 +14,18 @@
         "length" in [n],
         [n] instanceof Array,
     ];
-}
+};
 
 // 33:5
-() => {
+export default () => {
     const s = "7";
     const o = { a: 1, b: 2 };
     const deleted = delete o.a;
     return [+s, ~5, void s === null, deleted, "a" in o];
-}
+};
 
 // 46:5
-() => {
+export default () => {
     let n = 3;
     n **= 2;
     n <<= 1;
@@ -41,10 +41,10 @@
     let c = true;
     c &&= false;
     return [n, a, b, c];
-}
+};
 
 // 71:5
-() => {
+export default () => {
     const o = { n: 1 };
     const list = [1, 2];
     o.n += 1;
@@ -53,11 +53,11 @@
     list[1] **= 3;
     --list[1];
     return [o.n, list];
-}
+};
 
 // 89:5
-() => {
+export default () => {
     let n = 0;
     const last = (n++, n + 10);
     return [n, last];
-}
+};

@@ -1,5 +1,5 @@
 // 19:10
-($0, $1) => {
+export default ($0, $1) => {
     const build = (from) => {
         return Array.from({ length: 3 }, (_, at) => {
             return { id: from + at, label: $0()("row " + (from + at)) };
@@ -15,4 +15,4 @@
           </$1>
         </ul>
       </div>);
-}
+};

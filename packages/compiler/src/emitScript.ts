@@ -1,14 +1,15 @@
 import type ts from "typescript";
+import { addExportDefault } from "./addExportDefault.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 
 /** A script as the client runs it, and where its code came from. */
 export interface EmittedScript {
   /**
-   * The script as its entry in a bundle: `($0, …) => body`, a parameter per
-   * entry of `metadata.params`. Types are gone and
-   * everything else, JSX included, is as the script wrote it, for the
-   * framework's own compiler to read next.
+   * The script as a module, `export default ($0, …) => body`, a parameter
+   * per entry of `metadata.params`. Types are gone and everything else, JSX
+   * included, is as the script wrote it, for the framework's own compiler to
+   * read next (see `CodeTransform`).
    */
   readonly code: string;
   /**
@@ -162,23 +163,24 @@ export function emitScript(
       if (statement === undefined) {
         return file;
       }
-      const entry = f.createArrowFunction(
-        undefined,
-        undefined,
-        Array.from({ length: params }, (_, index) =>
-          f.createParameterDeclaration(undefined, undefined, `$${index}`),
+      // Where the script stands, so the entry maps to it.
+      const entry = ts.setTextRange(
+        f.createArrowFunction(
+          undefined,
+          undefined,
+          Array.from({ length: params }, (_, index) =>
+            f.createParameterDeclaration(undefined, undefined, `$${index}`),
+          ),
+          undefined,
+          f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+          ts.isExpressionStatement(statement)
+            ? ts.visitNode(statement.expression, visit, ts.isExpression)
+            : ts.visitNode(statement, visit, ts.isBlock),
         ),
-        undefined,
-        f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-        ts.isExpressionStatement(statement)
-          ? ts.visitNode(statement.expression, visit, ts.isExpression)
-          : ts.visitNode(statement, visit, ts.isBlock),
+        statement,
       );
       return f.updateSourceFile(file, [
-        ts.setOriginalNode(
-          ts.setTextRange(f.createExpressionStatement(entry), statement),
-          statement,
-        ),
+        ts.setOriginalNode(f.createExpressionStatement(entry), statement),
       ]);
     };
 
@@ -192,13 +194,9 @@ export function emitScript(
       alwaysStrict: false,
       removeComments: true,
     },
-    transformers: { before: [transformer] },
+    transformers: { before: [transformer], after: [addExportDefault(ts)] },
   });
-  // One expression: the statement it was printed as, without its `;` and the
-  // comment naming a map file.
-  const code = output.outputText
-    .replace(/\n\/\/# sourceMappingURL=.*$/, "")
-    .trimEnd()
-    .replace(/;$/, "");
+  // Without the comment naming a map file.
+  const code = output.outputText.replace(/\n\/\/# sourceMappingURL=.*$/, "");
   return { code, map: output.sourceMapText ?? "" };
 }

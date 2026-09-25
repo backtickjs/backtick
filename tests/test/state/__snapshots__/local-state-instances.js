@@ -348,8 +348,8 @@ async function OwnCounter() {
         },
       ],
     }),
-    '$0 => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size.get() + "px"} onclick={() => {\n            size.set(size.get() + 1);\n        }}>\n        press\n      </span>);\n}',
-    '{"version":3,"file":"local-state-instances.test.jsx","sourceRoot":"","sources":["local-state-instances.test.tsx"],"names":[],"mappings":"AAWY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC,CAAA"}',
+    'export default ($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size.get() + "px"} onclick={() => {\n            size.set(size.get() + 1);\n        }}>\n        press\n      </span>);\n};',
+    '{"version":3,"file":"local-state-instances.test.jsx","sourceRoot":"","sources":["local-state-instances.test.tsx"],"names":[],"mappings":"eAWY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
   );
 }
 const instances = _jsxs("div", {

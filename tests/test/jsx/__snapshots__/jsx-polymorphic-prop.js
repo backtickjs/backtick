@@ -20,8 +20,8 @@ function make(n) {
       },
       expression: true,
     }),
-    "$0 => () => $0()",
-    '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"AAQY,MAAA,GAAG,EAAE,CAAC,IAAE,CAAA"}',
+    "export default ($0) => () => $0();",
+    '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"eAQY,QAAA,GAAG,EAAE,CAAC,IAAE"}',
   );
 }
 it("jsxPolymorphicProp", async (t) => {

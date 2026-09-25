@@ -1,11 +1,11 @@
 // 134:29
-() => <div onclick={() => { }}/>
+export default () => <div onclick={() => { }}/>;
 
 // 144:7
-() => <div title={() => { }}/>
+export default () => <div title={() => { }}/>;
 
 // 155:7
-() => <div onclick={null}/>
+export default () => <div onclick={null}/>;
 
 // 156:7
-() => <div onclick={[() => { }][1]}/>
+export default () => <div onclick={[() => { }][1]}/>;

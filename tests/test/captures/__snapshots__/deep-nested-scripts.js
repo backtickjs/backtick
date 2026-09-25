@@ -25,8 +25,8 @@ function add(lhs, rhs) {
         param: 1,
       },
     }),
-    "($0, $1) => $0() + $1()",
-    '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAMY,YAAA,IAAI,GAAG,IAAI,CAAA"}',
+    "export default ($0, $1) => $0() + $1();",
+    '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAMY,YAAA,IAAI,GAAG,IAAI"}',
   );
 }
 it("deepNestedScripts", async (t) => {
@@ -51,8 +51,8 @@ it("deepNestedScripts", async (t) => {
                   },
                   value: 1,
                 }),
-                "() => 1",
-                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUyD,MAAA,CAAC,CAAA"}',
+                "export default () => 1;",
+                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUyD,MAAA,CAAC"}',
               ),
               cs.create(
                 "2rqwzcdfi281b:11:61",
@@ -65,8 +65,8 @@ it("deepNestedScripts", async (t) => {
                   },
                   value: 2,
                 }),
-                "() => 2",
-                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgE,MAAA,CAAC,CAAA"}',
+                "export default () => 2;",
+                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUgE,MAAA,CAAC"}',
               ),
             ),
             bindings: [],
@@ -78,8 +78,8 @@ it("deepNestedScripts", async (t) => {
         loc: { start: { line: 11, column: 48 }, end: { line: 11, column: 68 } },
         param: 0,
       }),
-      "$0 => $0()",
-      '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgD,MAAA,IAAC,CAAA"}',
+      "export default ($0) => $0();",
+      '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUgD,QAAA,IAAC"}',
     ),
   );
 });

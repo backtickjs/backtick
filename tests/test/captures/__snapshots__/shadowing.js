@@ -158,8 +158,8 @@ function addOwnTotal(lhs, rhs) {
         },
       ],
     }),
-    "($0, $1) => {\n    let total = 0;\n    total = total + $0();\n    total = total + $1();\n    return total;\n}",
-    '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"AAMY;IACR,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,OAAO,KAAK,CAAC;AACf,CAAC,CAAA"}',
+    "export default ($0, $1) => {\n    let total = 0;\n    total = total + $0();\n    total = total + $1();\n    return total;\n};",
+    '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,OAAO,KAAK,CAAC;AACf,CAAC"}',
   );
 }
 it("shadowing", async (t) => {
@@ -185,8 +185,8 @@ it("shadowing", async (t) => {
                   name: "total",
                   key: "total$3ujapqmnmm2ra$1",
                 }),
-                "$0 => $0",
-                '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"AAoB8B,MAAA,EAAK,CAAA"}',
+                "export default ($0) => $0;",
+                '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"eAoB8B,QAAA,EAAK"}',
               ),
               100,
             ),
@@ -249,8 +249,8 @@ it("shadowing", async (t) => {
           },
         ],
       }),
-      "$0 => {\n    const total = 1;\n    return $0(total);\n}",
-      '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"AAkBO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,SAAC,CAA8B;AACxC,CAAC,CAAA"}',
+      "export default ($0) => {\n    const total = 1;\n    return $0(total);\n};",
+      '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"eAkBO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,SAAC,CAA8B;AACxC,CAAC"}',
     ),
   );
 });

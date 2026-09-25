@@ -1,2 +1,2 @@
 // 8:46
-() => ({ "#": "value" })
+export default () => ({ "#": "value" });

@@ -307,8 +307,8 @@ it("evalLoading", async (t) => {
           },
         ],
       }),
-      "$0 => {\n    const held = $0()(null);\n    return (<div>\n          {held.get() === null ? (<span>loading\u2026</span>) : (eval(held.get()))}\n        </div>);\n}",
-      '{"version":3,"file":"eval-loading.test.jsx","sourceRoot":"","sources":["eval-loading.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,IAAI,GAAG,IAAM,CAAiC,IAAI,CAAC,CAAC;IAE1D,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,GAAG,EAAE,KAAK,IAAI,CAAC,CAAC,CAAC,CACrB,CAAC,IAAI,CAAC,QAAQ,EAAE,IAAI,CAAC,CACtB,CAAC,CAAC,CAAC,CACF,IAAI,CAAC,IAAI,CAAC,GAAG,EAA6B,CAAC,CAC5C,CACH;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+      "export default ($0) => {\n    const held = $0()(null);\n    return (<div>\n          {held.get() === null ? (<span>loading\u2026</span>) : (eval(held.get()))}\n        </div>);\n};",
+      '{"version":3,"file":"eval-loading.test.jsx","sourceRoot":"","sources":["eval-loading.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,IAAM,CAAiC,IAAI,CAAC,CAAC;IAE1D,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,GAAG,EAAE,KAAK,IAAI,CAAC,CAAC,CAAC,CACrB,CAAC,IAAI,CAAC,QAAQ,EAAE,IAAI,CAAC,CACtB,CAAC,CAAC,CAAC,CACF,IAAI,CAAC,IAAI,CAAC,GAAG,EAA6B,CAAC,CAC5C,CACH;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     ),
   );
 });

@@ -67,8 +67,8 @@ const make = (f) =>
         },
       ],
     }),
-    "$0 => {\n    return $0()(1).get();\n}",
-    '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAMK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC;AACrB,CAAC,CAAA"}',
+    "export default ($0) => {\n    return $0()(1).get();\n};",
+    '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAMK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC;AACrB,CAAC"}',
   );
 const wrapped = cs.create(
   "3vatah1osfcoe:11:16",
@@ -123,8 +123,8 @@ const wrapped = cs.create(
     },
     expression: true,
   }),
-  "$0 => (n) => $0()(n + 10)",
-  '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAUmB,MAAA,CAAC,CAAS,EAAE,EAAE,CAAC,IAAM,CAAC,CAAC,GAAG,EAAE,CAAC,CAAA"}',
+  "export default ($0) => (n) => $0()(n + 10);",
+  '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAUmB,QAAA,CAAC,CAAS,EAAE,EAAE,CAAC,IAAM,CAAC,CAAC,GAAG,EAAE,CAAC"}',
 );
 it("builtinHoleSharing", async (t) => {
   await snapshotCase(
@@ -175,8 +175,8 @@ it("builtinHoleSharing", async (t) => {
           },
         ],
       }),
-      "($0, $1) => {\n    return $0() + $1();\n}",
-      '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAgBO;IACD,OAAO,IAAC,GAAgB,IAAC,CAAgB;AAC3C,CAAC,CAAA"}',
+      "export default ($0, $1) => {\n    return $0() + $1();\n};",
+      '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAgBO;IACD,OAAO,IAAC,GAAgB,IAAC,CAAgB;AAC3C,CAAC"}',
     ),
   );
 });

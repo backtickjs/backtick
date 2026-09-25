@@ -1,5 +1,5 @@
 // 18:10
-($0, $1) => {
+export default ($0, $1) => {
     const rows = $0()([]);
     const add = (row) => {
         rows.set([row]);
@@ -13,4 +13,4 @@
           <$1 each={rows.get()}>{(row) => <span>{label(row)}</span>}</$1>
         </div>
       </div>);
-}
+};

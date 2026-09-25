@@ -1,10 +1,10 @@
 // 11:16
-() => (name) => (<>
+export default () => (name) => (<>
     <span>a sentence across lines</span>
     <span>
       {name} {name}
     </span>
-  </>)
+  </>);
 
 // 21:49
-$0 => $0()("x")
+export default ($0) => $0()("x");

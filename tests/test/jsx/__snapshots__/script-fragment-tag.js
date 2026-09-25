@@ -370,8 +370,8 @@ it("scriptFragmentTag", async (t) => {
           },
         ],
       }),
-      "() => {\n    return (<div>\n          {<Fragment>\n              <span>a</span>\n              <span>b</span>\n            </Fragment>}\n          {<>\n              <em>c</em>\n            </>}\n        </div>);\n}",
-      '{"version":3,"file":"script-fragment-tag.test.jsx","sourceRoot":"","sources":["script-fragment-tag.test.tsx"],"names":[],"mappings":"AAgBO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CACE,CAAC,QAAQ,CACP;cAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACb;cAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACf;YAAA,EAAE,QAAQ,CACZ,CACA;UAAA,CACE,EACE;cAAA,CAAC,EAAE,CAAC,CAAC,EAAE,EAAE,CACX;YAAA,GACF,CACF;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC,CAAA"}',
+      "export default () => {\n    return (<div>\n          {<Fragment>\n              <span>a</span>\n              <span>b</span>\n            </Fragment>}\n          {<>\n              <em>c</em>\n            </>}\n        </div>);\n};",
+      '{"version":3,"file":"script-fragment-tag.test.jsx","sourceRoot":"","sources":["script-fragment-tag.test.tsx"],"names":[],"mappings":"eAgBO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CACE,CAAC,QAAQ,CACP;cAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACb;cAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACf;YAAA,EAAE,QAAQ,CACZ,CACA;UAAA,CACE,EACE;cAAA,CAAC,EAAE,CAAC,CAAC,EAAE,EAAE,CACX;YAAA,GACF,CACF;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     ),
   );
 });

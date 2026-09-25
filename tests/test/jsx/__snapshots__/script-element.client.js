@@ -1,5 +1,5 @@
 // 10:10
-$0 => {
+export default ($0) => {
     const label = $0()("hi");
     const row = (size) => {
         const css = "font-size: " + size + "px";
@@ -15,4 +15,4 @@ $0 => {
         </div>);
     };
     return <div style="padding: 0">{row(12)}</div>;
-}
+};

@@ -1,22 +1,22 @@
 // 8:15
-() => (name) => {
+export default () => (name) => {
     return name?.concat("!");
-}
+};
 
 // 14:16
-() => () => 2
+export default () => () => 2;
 
 // 16:21
-() => (cb) => {
+export default () => (cb) => {
     return cb?.() ?? 0;
-}
+};
 
 // 24:5
-($0, $1, $2) => ({
+export default ($0, $1, $2) => ({
     named: $0()("hi"),
     explicit: $0()(undefined),
     omitted: $0()(),
     supplied: $1()($2()),
     fallback: $1()(undefined),
     omittedCallback: $1()(),
-})
+});

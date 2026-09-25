@@ -1,2 +1,2 @@
 // 6:14
-() => (Tag) => <Tag />
+export default () => (Tag) => <Tag />;

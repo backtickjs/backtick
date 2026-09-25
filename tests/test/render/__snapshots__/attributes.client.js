@@ -1,5 +1,5 @@
 // 111:12
-$0 => {
+export default ($0) => {
     const text = $0()("first");
     const isOn = $0()(false);
     return (<div>
@@ -12,10 +12,10 @@ $0 => {
             write
           </button>
         </div>);
-}
+};
 
 // 147:12
-$0 => {
+export default ($0) => {
     const texts = $0()(["typed by the script"]);
     const flags = $0()([true]);
     return (<div>
@@ -28,4 +28,4 @@ $0 => {
             clear
           </button>
         </div>);
-}
+};

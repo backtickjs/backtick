@@ -1,8 +1,8 @@
 // 15:10
-$0 => {
+export default ($0) => {
     const count = $0()(0);
     return (<button id="row" style="display: flex; gap: 8px" onclick={() => count.set(count.get() + 1)}>
         <span style="font-weight: 700">{count.get() > 0 ? "☑" : "☐"}</span>
         <span>{"pressed " + count.get() + " times"}</span>
       </button>);
-}
+};

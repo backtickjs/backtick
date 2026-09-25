@@ -344,8 +344,8 @@ async function Parsed() {
         },
       ],
     }),
-    '() => {\n    const whole = Number.parseInt("42px");\n    const based = Number.parseInt("ff", 16);\n    const fractional = Number.parseFloat("1.5");\n    return <span>{whole + based + fractional + ""}</span>;\n}',
-    '{"version":3,"file":"number-parsing.test.jsx","sourceRoot":"","sources":["number-parsing.test.tsx"],"names":[],"mappings":"AAQY;IACR,MAAM,KAAK,GAAG,MAAM,CAAC,QAAQ,CAAC,MAAM,CAAC,CAAC;IACtC,MAAM,KAAK,GAAG,MAAM,CAAC,QAAQ,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC;IACxC,MAAM,UAAU,GAAG,MAAM,CAAC,UAAU,CAAC,KAAK,CAAC,CAAC;IAC5C,OAAO,CAAC,IAAI,CAAC,CAAC,KAAK,GAAG,KAAK,GAAG,UAAU,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC;AACxD,CAAC,CAAA"}',
+    'export default () => {\n    const whole = Number.parseInt("42px");\n    const based = Number.parseInt("ff", 16);\n    const fractional = Number.parseFloat("1.5");\n    return <span>{whole + based + fractional + ""}</span>;\n};',
+    '{"version":3,"file":"number-parsing.test.jsx","sourceRoot":"","sources":["number-parsing.test.tsx"],"names":[],"mappings":"eAQY;IACR,MAAM,KAAK,GAAG,MAAM,CAAC,QAAQ,CAAC,MAAM,CAAC,CAAC;IACtC,MAAM,KAAK,GAAG,MAAM,CAAC,QAAQ,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC;IACxC,MAAM,UAAU,GAAG,MAAM,CAAC,UAAU,CAAC,KAAK,CAAC,CAAC;IAC5C,OAAO,CAAC,IAAI,CAAC,CAAC,KAAK,GAAG,KAAK,GAAG,UAAU,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC;AACxD,CAAC"}',
   );
 }
 it("Parsed", async (t) => {

@@ -35,8 +35,8 @@ it("splicedFunctionParam", async (t) => {
                 },
                 expression: true,
               }),
-              "() => () => 2",
-              '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"AAcwB,MAAA,GAAG,EAAE,CAAC,CAAC,CAAA"}',
+              "export default () => () => 2;",
+              '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"eAcwB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
             ),
             bindings: [],
           },
@@ -161,8 +161,8 @@ it("splicedFunctionParam", async (t) => {
           },
         ],
       }),
-      "$0 => {\n    const apply = (f) => f() + 1;\n    return apply($0());\n}",
-      '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,IAAC,CAAc,CAAC;AAC/B,CAAC,CAAA"}',
+      "export default ($0) => {\n    const apply = (f) => f() + 1;\n    return apply($0());\n};",
+      '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,IAAC,CAAc,CAAC;AAC/B,CAAC"}',
     ),
   );
 });

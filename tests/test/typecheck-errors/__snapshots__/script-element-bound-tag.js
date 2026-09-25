@@ -36,6 +36,6 @@ const held = cs.create(
     },
     expression: true,
   }),
-  "() => (Tag) => <Tag />",
-  '{"version":3,"file":"script-element-bound-tag.test.jsx","sourceRoot":"","sources":["script-element-bound-tag.test.tsx"],"names":[],"mappings":"AAKgB,MAAA,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,AAAD,EAAG,CAAA"}',
+  "export default () => (Tag) => <Tag />;",
+  '{"version":3,"file":"script-element-bound-tag.test.jsx","sourceRoot":"","sources":["script-element-bound-tag.test.tsx"],"names":[],"mappings":"eAKgB,MAAA,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,AAAD,EAAG"}',
 );

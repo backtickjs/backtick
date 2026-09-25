@@ -73,8 +73,8 @@ const ping = cs.create(
     },
     expression: false,
   }),
-  "() => () => {\n    let n = 0;\n    n = 1;\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAIgB,MAAA,GAAG,EAAE;IACnB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC,CAAA"}',
+  "export default () => () => {\n    let n = 0;\n    n = 1;\n};",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAIgB,MAAA,GAAG,EAAE;IACnB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
 );
 const script = cs.create(
   "3ch7rgcn8bjeq:10:15",
@@ -137,8 +137,8 @@ const script = cs.create(
       },
     ],
   }),
-  "$0 => {\n    const x = $0()();\n    return 1;\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
+  "export default ($0) => {\n    const x = $0()();\n    return 1;\n};",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );
 const action = cs.create(
   "3ch7rgcn8bjeq:15:15",
@@ -189,8 +189,8 @@ const action = cs.create(
       },
     ],
   }),
-  "$0 => {\n    const x = $0()();\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAckB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;AACpB,CAAC,CAAA"}',
+  "export default ($0) => {\n    const x = $0()();\n};",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAckB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;AACpB,CAAC"}',
 );
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
@@ -232,8 +232,8 @@ const label = cs.create(
     },
     expression: false,
   }),
-  "() => (text) => {\n    return text;\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAoBiB,MAAA,CAAC,IAAY,EAAE,EAAE;IAChC,OAAO,IAAI,CAAC;AACd,CAAC,CAAA"}',
+  "export default () => (text) => {\n    return text;\n};",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAoBiB,MAAA,CAAC,IAAY,EAAE,EAAE;IAChC,OAAO,IAAI,CAAC;AACd,CAAC"}',
 );
 const wrongArgument = cs.create(
   "3ch7rgcn8bjeq:25:22",
@@ -305,6 +305,6 @@ const wrongArgument = cs.create(
       },
     ],
   }),
-  "$0 => {\n    const x = $0()(true);\n    return 1;\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"AAwByB;IAEvB,MAAM,CAAC,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC,CAAA"}',
+  "export default ($0) => {\n    const x = $0()(true);\n    return 1;\n};",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAwByB;IAEvB,MAAM,CAAC,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );

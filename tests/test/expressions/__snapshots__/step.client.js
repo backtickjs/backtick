@@ -1,5 +1,5 @@
 // 12:5
-() => {
+export default () => {
     let total = 0;
     for (let i = 0; i < 3; i++) {
         total = total + i;
@@ -9,4 +9,4 @@
     const after = ++n;
     const down = n--;
     return [total, before, after, down, n];
-}
+};

@@ -1,5 +1,5 @@
 // 12:5
-() => {
+export default () => {
     let out = "";
     for (let i = 0; i < 2; i = i + 1) {
         const i = "-";
@@ -8,4 +8,4 @@
         }
     }
     return out;
-}
+};

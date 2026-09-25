@@ -421,8 +421,8 @@ it("step", async (t) => {
           },
         ],
       }),
-      "() => {\n    let total = 0;\n    for (let i = 0; i < 3; i++) {\n        total = total + i;\n    }\n    let n = 0.1;\n    const before = n++;\n    const after = ++n;\n    const down = n--;\n    return [total, before, after, down, n];\n}",
-      '{"version":3,"file":"step.test.jsx","sourceRoot":"","sources":["step.test.tsx"],"names":[],"mappings":"AAWO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;QAC3B,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;IACpB,CAAC;IACD,IAAI,CAAC,GAAG,GAAG,CAAC;IACZ,MAAM,MAAM,GAAG,CAAC,EAAE,CAAC;IACnB,MAAM,KAAK,GAAG,EAAE,CAAC,CAAC;IAClB,MAAM,IAAI,GAAG,CAAC,EAAE,CAAC;IACjB,OAAO,CAAC,KAAK,EAAE,MAAM,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC,CAAC,CAAC;AACzC,CAAC,CAAA"}',
+      "export default () => {\n    let total = 0;\n    for (let i = 0; i < 3; i++) {\n        total = total + i;\n    }\n    let n = 0.1;\n    const before = n++;\n    const after = ++n;\n    const down = n--;\n    return [total, before, after, down, n];\n};",
+      '{"version":3,"file":"step.test.jsx","sourceRoot":"","sources":["step.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;QAC3B,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;IACpB,CAAC;IACD,IAAI,CAAC,GAAG,GAAG,CAAC;IACZ,MAAM,MAAM,GAAG,CAAC,EAAE,CAAC;IACnB,MAAM,KAAK,GAAG,EAAE,CAAC,CAAC;IAClB,MAAM,IAAI,GAAG,CAAC,EAAE,CAAC;IACjB,OAAO,CAAC,KAAK,EAAE,MAAM,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC,CAAC,CAAC;AACzC,CAAC"}',
     ),
   );
 });

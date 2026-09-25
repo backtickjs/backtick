@@ -1,5 +1,5 @@
 // 10:10
-() => {
+export default () => {
     return (<span>
         {"/at?q=" +
             encodeURIComponent("a b+c&d#é") +
@@ -8,4 +8,4 @@
             " " +
             decodeURIComponent("a%20b%2Bc%26d%23%C3%A9")}
       </span>);
-}
+};

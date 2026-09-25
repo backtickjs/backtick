@@ -13,8 +13,8 @@ it("spliceNumeric", async (t) => {
         loc: { start: { line: 6, column: 44 }, end: { line: 6, column: 48 } },
         param: 0,
       }),
-      "$0 => $0()",
-      '{"version":3,"file":"splice-numeric.test.jsx","sourceRoot":"","sources":["splice-numeric.test.tsx"],"names":[],"mappings":"AAK4C,MAAA,IAAC,CAAA"}',
+      "export default ($0) => $0();",
+      '{"version":3,"file":"splice-numeric.test.jsx","sourceRoot":"","sources":["splice-numeric.test.tsx"],"names":[],"mappings":"eAK4C,QAAA,IAAC"}',
     ),
   );
 });

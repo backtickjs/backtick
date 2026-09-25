@@ -52,8 +52,8 @@ function innerBase(carried) {
                 param: 0,
               },
             }),
-            "($0, $1) => $1 + $0($1)",
-            '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"AAmBgB,YAAA,EAAI,GAAG,MAAQ,CAAA"}',
+            "export default ($0, $1) => $1 + $0($1);",
+            '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eAmBgB,YAAA,EAAI,GAAG,MAAQ"}',
           ),
           bindings: ["base$bphb1svo1jv3$0"],
         },
@@ -114,8 +114,8 @@ function innerBase(carried) {
         },
       ],
     }),
-    "$0 => {\n    const base = 100;\n    return $0(base);\n}",
-    '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"AAiBY;IACR,MAAM,IAAI,GAAG,GAAG,CAAC;IACjB,OAAO,QAAC,CAAsB;AAChC,CAAC,CAAA"}',
+    "export default ($0) => {\n    const base = 100;\n    return $0(base);\n};",
+    '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eAiBY;IACR,MAAM,IAAI,GAAG,GAAG,CAAC;IACjB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
   );
 }
 it("foreignCaptureShadow", async (t) => {
@@ -141,8 +141,8 @@ it("foreignCaptureShadow", async (t) => {
                   name: "base",
                   key: "base$bphb1svo1jv3$1",
                 }),
-                "$0 => $0",
-                '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"AA6B4B,MAAA,EAAI,CAAA"}',
+                "export default ($0) => $0;",
+                '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
               ),
             ),
             bindings: ["base$bphb1svo1jv3$1"],
@@ -204,8 +204,8 @@ it("foreignCaptureShadow", async (t) => {
           },
         ],
       }),
-      "$0 => {\n    const base = 1;\n    return $0(base);\n}",
-      '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"AA2BO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAsB;AAChC,CAAC,CAAA"}',
+      "export default ($0) => {\n    const base = 1;\n    return $0(base);\n};",
+      '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
     ),
   );
 });

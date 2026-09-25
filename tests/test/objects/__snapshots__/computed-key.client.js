@@ -1,5 +1,5 @@
 // 13:5
-() => {
+export default () => {
     const base = { a: 1, b: 2 };
     const name = "b";
     return {
@@ -8,4 +8,4 @@
         ["c" + "d"]: 3,
         a: 4,
     };
-}
+};

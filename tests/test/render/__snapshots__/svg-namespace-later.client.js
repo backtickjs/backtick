@@ -1,5 +1,5 @@
 // 12:27
-($0, $1) => {
+export default ($0, $1) => {
     const xs = $0()([10]);
     const shown = $0()(false);
     return (<div>
@@ -11,4 +11,4 @@
       <button onclick={() => xs.set([10, 20])}>add</button>
       <button onclick={() => shown.set(true)}>show</button>
     </div>);
-}
+};

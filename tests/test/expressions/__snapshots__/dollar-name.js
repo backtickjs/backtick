@@ -24,8 +24,8 @@ function add(lhs) {
         value: 2,
       },
     }),
-    "$0 => $0() + 2",
-    '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"AASY,MAAA,IAAI,GAAG,CAAC,CAAA"}',
+    "export default ($0) => $0() + 2;",
+    '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eASY,QAAA,IAAI,GAAG,CAAC"}',
   );
 }
 it("dollarName", async (t) => {
@@ -51,8 +51,8 @@ it("dollarName", async (t) => {
                   name: "foo$",
                   key: "foo$$sl458m2swc6c$0",
                 }),
-                "$0 => $0",
-                '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"AAkBsB,MAAA,EAAI,CAAA"}',
+                "export default ($0) => $0;",
+                '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAkBsB,QAAA,EAAI"}',
               ),
             ),
             bindings: ["foo$$sl458m2swc6c$0"],
@@ -114,8 +114,8 @@ it("dollarName", async (t) => {
           },
         ],
       }),
-      "$0 => {\n    const foo$ = 1;\n    return $0(foo$);\n}",
-      '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC,CAAA"}',
+      "export default ($0) => {\n    const foo$ = 1;\n    return $0(foo$);\n};",
+      '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
     ),
   );
 });

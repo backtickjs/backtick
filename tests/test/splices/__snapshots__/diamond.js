@@ -14,8 +14,8 @@ const d0 = cs.create(
     loc: { start: { line: 10, column: 14 }, end: { line: 10, column: 15 } },
     value: 1,
   }),
-  "() => 1",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AASc,MAAA,CAAC,CAAA"}',
+  "export default () => 1;",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eASc,MAAA,CAAC"}',
 );
 const d1 = cs.create(
   "23y608t6y2wp3:12:11",
@@ -54,8 +54,8 @@ const d1 = cs.create(
       },
     ],
   }),
-  "$0 => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
+  "export default ($0) => {\n    return $0() + $0();\n};",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
 );
 const d2 = cs.create(
   "23y608t6y2wp3:16:11",
@@ -94,8 +94,8 @@ const d2 = cs.create(
       },
     ],
   }),
-  "$0 => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
+  "export default ($0) => {\n    return $0() + $0();\n};",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
 );
 const d3 = cs.create(
   "23y608t6y2wp3:20:11",
@@ -134,8 +134,8 @@ const d3 = cs.create(
       },
     ],
   }),
-  "$0 => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
+  "export default ($0) => {\n    return $0() + $0();\n};",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
 );
 const d4 = cs.create(
   "23y608t6y2wp3:24:11",
@@ -174,8 +174,8 @@ const d4 = cs.create(
       },
     ],
   }),
-  "$0 => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"AAuBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC,CAAA"}',
+  "export default ($0) => {\n    return $0() + $0();\n};",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAuBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
 );
 it("diamond", async (t) => {
   await snapshotCase(t, "diamond", d4);

@@ -161,8 +161,8 @@ async function Panel() {
         },
       ],
     }),
-    "$0 => {\n    const n = $0()(2);\n    return <em>{n.get()}</em>;\n}",
-    '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["component-answers-script.test.tsx"],"names":[],"mappings":"AAYY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC5B,CAAC,CAAA"}',
+    "export default ($0) => {\n    const n = $0()(2);\n    return <em>{n.get()}</em>;\n};",
+    '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["component-answers-script.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC5B,CAAC"}',
   );
 }
 it("componentAnswersScript", async (t) => {

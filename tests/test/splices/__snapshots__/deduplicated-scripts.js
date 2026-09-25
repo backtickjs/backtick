@@ -11,8 +11,8 @@ const leaf = cs.create(
     loc: { start: { line: 7, column: 16 }, end: { line: 7, column: 17 } },
     value: 7,
   }),
-  "() => 7",
-  '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"AAMgB,MAAA,CAAC,CAAA"}',
+  "export default () => 7;",
+  '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC"}',
 );
 it("deduplicatedScripts", async (t) => {
   await snapshotCase(
@@ -81,8 +81,8 @@ it("deduplicatedScripts", async (t) => {
           },
         ],
       }),
-      "$0 => ({ a: $0(), b: $0() })",
-      '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"AASkD,MAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,CAAA"}',
+      "export default ($0) => ({ a: $0(), b: $0() });",
+      '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
     ),
   );
 });

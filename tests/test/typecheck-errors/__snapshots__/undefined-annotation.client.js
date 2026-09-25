@@ -1,12 +1,12 @@
 // 13:16
-() => (x) => {
+export default () => (x) => {
     const y = x;
     return 1;
-}
+};
 
 // 18:17
-() => (x) => {
+export default () => (x) => {
     let y = "";
     y = x;
     return 1;
-}
+};

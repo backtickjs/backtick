@@ -435,8 +435,8 @@ it("objectEntries", async (t) => {
           },
         ],
       }),
-      '() => {\n    const held = { n: 1, q: "ada" };\n    const written = Object.fromEntries(Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]));\n    return written.n + " " + written.q;\n}',
-      '{"version":3,"file":"object-entries.test.jsx","sourceRoot":"","sources":["object-entries.test.tsx"],"names":[],"mappings":"AAUO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC;IAChC,MAAM,OAAO,GAAG,MAAM,CAAC,WAAW,CAChC,MAAM,CAAC,OAAO,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACvE,CAAC;IACF,OAAO,OAAO,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC,CAAC,CAAC;AACrC,CAAC,CAAA"}',
+      'export default () => {\n    const held = { n: 1, q: "ada" };\n    const written = Object.fromEntries(Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]));\n    return written.n + " " + written.q;\n};',
+      '{"version":3,"file":"object-entries.test.jsx","sourceRoot":"","sources":["object-entries.test.tsx"],"names":[],"mappings":"eAUO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC;IAChC,MAAM,OAAO,GAAG,MAAM,CAAC,WAAW,CAChC,MAAM,CAAC,OAAO,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACvE,CAAC;IACF,OAAO,OAAO,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC,CAAC,CAAC;AACrC,CAAC"}',
     ),
   );
 });

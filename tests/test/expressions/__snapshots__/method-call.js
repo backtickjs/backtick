@@ -133,8 +133,8 @@ it("methodCall", async (t) => {
           },
         ],
       }),
-      '() => {\n    const greeting = "Hello";\n    return greeting.concat(", ", "World").toUpperCase();\n}',
-      '{"version":3,"file":"method-call.test.jsx","sourceRoot":"","sources":["method-call.test.tsx"],"names":[],"mappings":"AAQO;IACD,MAAM,QAAQ,GAAG,OAAO,CAAC;IACzB,OAAO,QAAQ,CAAC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAAC,WAAW,EAAE,CAAC;AACtD,CAAC,CAAA"}',
+      'export default () => {\n    const greeting = "Hello";\n    return greeting.concat(", ", "World").toUpperCase();\n};',
+      '{"version":3,"file":"method-call.test.jsx","sourceRoot":"","sources":["method-call.test.tsx"],"names":[],"mappings":"eAQO;IACD,MAAM,QAAQ,GAAG,OAAO,CAAC;IACzB,OAAO,QAAQ,CAAC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAAC,WAAW,EAAE,CAAC;AACtD,CAAC"}',
     ),
   );
 });

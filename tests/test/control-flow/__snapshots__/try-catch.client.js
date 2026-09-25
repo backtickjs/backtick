@@ -1,5 +1,5 @@
 // 9:5
-() => {
+export default () => {
     const message = "boom";
     try {
         throw message;
@@ -10,4 +10,4 @@
         }
         return "caught something else";
     }
-}
+};
