@@ -143,10 +143,12 @@ export function rewriteScript(
     scriptEdits(clientScript, bindings, params),
   );
 
+  // The script as a module of its own inside the host file, as Vite names
+  // one (a Vue block, say): where it was written, and the language its code
+  // is in, with the types gone.
+  const moduleId = `${sourceFile.fileName}?cs=${line + 1}:${character}&lang.jsx`;
   const emitted =
-    transform != null
-      ? applyTransform(transform, script, sourceFile.fileName)
-      : script;
+    transform != null ? applyTransform(transform, script, moduleId) : script;
 
   const runtime = call(ts, "cs", "create", [
     ts.factory.createStringLiteral(id),

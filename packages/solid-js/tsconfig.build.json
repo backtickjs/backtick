@@ -1,0 +1,9 @@
+{
+  "extends": "../../configs/tsconfig.build.json",
+  "compilerOptions": {
+    // The DOM's declarations are what the builtins here are typed with.
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "emitDeclarationOnly": false,
+    "sourceMap": true
+  }
+}
