@@ -13,7 +13,6 @@ import { holeName } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import type * as ES from "estree";
-import type { ExperimentalFeatures } from "../bundler.js";
 import {
   arrow,
   binding,
@@ -75,7 +74,6 @@ export interface BundleTree {
 //     just positionally.
 export async function buildBundle<T extends ClientUnknown>(
   value: Spliceable<T>,
-  features: ExperimentalFeatures = {},
 ): Promise<BundleTree> {
   const names = createNames();
   // The `functions` table, filled as rendering reaches each script. Two scripts
@@ -157,15 +155,9 @@ export async function buildBundle<T extends ClientUnknown>(
 
   const bodies = new Map<ClientScript, ES.Expression>();
 
-  // A script entry's label, either of the two things that name one (see
-  // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
-  // where it was written. Only the second is the same across responses — a
-  // table position follows the order this composition reached things — so it is
-  // what a client holding an entry from an earlier response can recognize.
+  // A script entry's label: where it landed in the table.
   const fnLabel = (target: ClientScript): string =>
-    features.stableFunctionLabels === true
-      ? target.id
-      : String(scripts.get(target));
+    String(scripts.get(target));
 
   // Materializes an entry's arrow node into `bodies` the first time it is
   // reached. An entry takes a `$i` parameter per splice — its holes render as

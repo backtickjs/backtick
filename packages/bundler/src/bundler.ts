@@ -3,29 +3,6 @@ import { buildBundle } from "./bundle/buildBundle.js";
 import { type CodeTransform, printBundle } from "./print/printBundle.js";
 import type { ClientUnknown, Spliceable } from "@backtickjs/platform-sdk";
 
-/**
- * What is being tried rather than offered: a feature here is one whose premise
- * nothing has demonstrated yet, and a bundle built with one is not a bundle
- * every client reads.
- *
- * Reached through {@link bundler.runWithExperimentalFeatures} and nowhere
- * else, so what uses one says so on the line that uses it.
- */
-export interface ExperimentalFeatures {
-  /**
-   * Names a `functions` entry the same way in every response that carries the
-   * script, rather than for where it landed in this one's table.
-   *
-   * A table position follows the order a composition reached things, so it says
-   * nothing across responses; a name that holds is one a client could recognize
-   * in an entry it kept from an earlier response. Could: no client keeps them,
-   * so what this buys is unmeasured, and what it costs is bytes — the name is
-   * `<fileHash>:<line>:<char>` where the other is a number. That is the
-   * experiment.
-   */
-  readonly stableFunctionLabels?: boolean;
-}
-
 /** How a bundle is made: `transform` is the adapter's, which compiles it. */
 export interface BundleOptions {
   readonly transform: CodeTransform;
@@ -38,32 +15,14 @@ export interface BundleOptions {
  *     const bundle = await bundler.run(<Home />, { transform });
  *
  * A namespace rather than a bare function, so `bundle` stays a name a caller
- * can give what comes back. The bundle is JavaScript, which a client runs with
- * `eval`.
+ * can give what comes back. The bundle is a module, whose default export draws
+ * what the value drew.
  */
 export const bundler = {
   async run<T extends ClientUnknown>(
     value: Spliceable<T>,
     options: BundleOptions,
   ): Promise<Bundle<T>> {
-    return await bundler.runWithExperimentalFeatures(value, options);
-  },
-
-  /**
-   * As {@link bundler.run}, with features that are being tried.
-   *
-   *     await bundler.runWithExperimentalFeatures(<Home />, {
-   *       transform,
-   *       stableFunctionLabels: true,
-   *     });
-   *
-   * Named at length on purpose: what it admits may change or go, and a call
-   * site is where that is worth reading. Everything settled is `run`.
-   */
-  async runWithExperimentalFeatures<T extends ClientUnknown>(
-    value: Spliceable<T>,
-    options: BundleOptions & ExperimentalFeatures,
-  ): Promise<Bundle<T>> {
-    return printBundle(await buildBundle(value, options), options.transform);
+    return printBundle(await buildBundle(value), options.transform);
   },
 };
