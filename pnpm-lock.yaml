@@ -491,6 +491,9 @@ importers:
       '@backtickjs/compiler':
         specifier: workspace:^0.1.0
         version: link:../compiler
+      '@backtickjs/tspatch-plugin':
+        specifier: workspace:^0.1.0
+        version: link:../tspatch-plugin
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
         version: 0.3.31
