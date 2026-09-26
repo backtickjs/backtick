@@ -19,7 +19,7 @@ import type {
  * `Spliceable` that costs either the alias in a refusal or what the
  * unparameterised name means.
  */
-type SplicesTo<T extends ClientUnknown> = T extends ClientFunction
+type SplicesTo<T> = T extends ClientFunction
   ? never
   : T extends readonly (infer Item extends ClientValue)[]
     ? readonly Spliceable<Item>[]
@@ -34,9 +34,13 @@ type SplicesTo<T extends ClientUnknown> = T extends ClientFunction
 /**
  * What the host may splice where the client wants a `T`: the value written out,
  * a script standing in for it, or a container mixing the two.
+ *
+ * Where the client wants anything (`T` left as `ClientUnknown`), any client
+ * value will do — a framework's function is the client's to hold, whatever it
+ * is — while what the host writes out is still held to what it can write.
  */
-export type Spliceable<T extends ClientUnknown = ClientUnknown> =
-  | Client<T>
+export type Spliceable<T = ClientUnknown> =
+  | Client<ClientUnknown extends T ? unknown : T>
   | SplicesTo<T>;
 
 // What a spliceable becomes on the client:

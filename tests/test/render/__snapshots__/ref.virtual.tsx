@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { cs, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
-import type { HTMLInputElement } from "@backtickjs/web-sdk";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // `ref` hands a script the element it is written on.
@@ -11,8 +11,8 @@ describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     await render(
       cs.lift((() => {
-    const __cs_field = cs.splice((state) satisfies typeof cs.Spliceable)<HTMLInputElement | null>(null);
-    return <div>{cs.lift(<input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => __cs_field.set(__cs_element))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_field.get()?.focus())}>edit</button>)}</div>;
+    const __cs_field = cs.splice((createSignal) satisfies typeof cs.Spliceable)<HTMLInputElement | null>(null);
+    return <div>{cs.lift(<input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => __cs_field[1](__cs_element))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_field[0]()?.focus())}>edit</button>)}</div>;
 })()),
     );
     await userEvent.click(screen.getByRole("button"));
@@ -53,9 +53,9 @@ describe("ref", () => {
     it("even when a signal it read changes", async () => {
       await render(
         cs.lift((() => {
-    const __cs_shown = cs.splice((state) satisfies typeof cs.Spliceable)(true);
-    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>{cs.lift("n " + __cs_n.get())}</button>)}{cs.lift(__cs_shown.get() ? <p ref={cs.lift(() => cs.splice((window) satisfies typeof cs.Spliceable).console.log(__cs_n.get()))}>shown</p> : null)}</div>;
+    const __cs_shown = cs.splice((createSignal) satisfies typeof cs.Spliceable)(true);
+    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift("n " + __cs_n[0]())}</button>)}{cs.lift(__cs_shown[0]() ? <p ref={cs.lift(() => cs.splice((window) satisfies typeof cs.Spliceable).console.log(__cs_n[0]()))}>shown</p> : null)}</div>;
 })()),
       );
       const shownText = screen.getByText("shown");

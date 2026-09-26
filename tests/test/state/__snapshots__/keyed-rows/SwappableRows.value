@@ -1,8 +1,8 @@
 <div>
-  <span onclick={[function]}>
+  <span>
     {"swap"}
   </span>
-  <span onclick={[function]}>
+  <span>
     {"drop"}
   </span>
   <div>

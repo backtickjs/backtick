@@ -3,7 +3,7 @@ const                             → const
 __cs_flag                         → flag
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 true                              → true
@@ -14,7 +14,7 @@ const                             → const
 __cs_tone                         → tone
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 cs.splice(                        → ${ [-semantic]
@@ -27,7 +27,7 @@ const                             → const
 __cs_step                         → step
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 () =>                             → () => 
@@ -46,16 +46,18 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () => {\n                         → () => {\n          
 __cs_flag                         → flag
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 false                             → false
 )                                 → )
 ;                                 → ;
 \n                                → \n          
 __cs_tone                         → tone
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 cs.splice(                        → ${ [-semantic]
 Tone.Cool                         → Tone.Cool
@@ -64,9 +66,11 @@ Tone.Cool                         → Tone.Cool
 ;                                 → ;
 \n                                → \n          
 __cs_step                         → step
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
+() =>                             → () => 
 () =>                             → () => 
 1                                 → 1
 )                                 → )
@@ -75,22 +79,25 @@ set                               → set
 )}                                → }
 >{cs.lift(                        → \n      >\n        {
 __cs_flag                         → flag
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 " "                               → " "
  +                                →  + 
 __cs_tone                         → tone
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 " "                               → " "
  +                                →  + 
 __cs_step                         → step
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 ()                                → ()
 )}</                              → }\n      </

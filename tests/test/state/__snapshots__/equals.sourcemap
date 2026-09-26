@@ -3,7 +3,7 @@ const                                  → const
 __cs_n                                 → n
  =                                     →  = 
 cs.splice(                             →  [-semantic]
-(state)                                → $state
+(createSignal)                         → $createSignal
  satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 1                                      → 1
@@ -14,16 +14,17 @@ const                                  → const
 __cs_size                              → size
  =                                     →  = 
 cs.splice(                             →  [-semantic]
-(computed)                             → $computed
+(createMemo)                           → $createMemo
  satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (
+(                                      → (\n          
 () => (                                → () => 
 {                                      → ({ 
 isBig                                  → isBig
 :                                      → : 
 __cs_n                                 → n
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
  >                                     →  > 
 2                                      → 2
@@ -31,13 +32,16 @@ get                                    → get
 n                                      → n
 :                                      → : 
 __cs_n                                 → n
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
  }                                     →  })
 )                                      → 
-,                                      → , 
-{                                      → {\n          
+,                                      → ,\n          
+undefined                              → undefined
+,                                      → ,\n          
+{                                      → { 
 equals                                 → equals
 :                                      → : 
 (                                      → (
@@ -52,8 +56,8 @@ isBig                                  → isBig
 __cs_next                              → next
 .                                      → .
 isBig                                  → isBig
- }                                     → ,\n        }
-)                                      → )
+ }                                     →  }
+)                                      → ,\n        )
 ;                                      → ;
 \n                                     → \n        
 const                                  → const 
@@ -72,8 +76,6 @@ log                                    → log
 \n                                     → \n          
 return                                 → return 
 __cs_size                              → size
-.                                      → .
-get                                    → get
 ()                                     → ()
 .                                      → .
 isBig                                  → isBig
@@ -96,12 +98,14 @@ onclick                                → onclick
 ={cs.lift(                             → ={
 () =>                                  → () => 
 __cs_n                                 → n
-.                                      → .
-set                                    → set
+[                                      → [
+1                                      → 1
+]                                      → ]
 (                                      → (
 __cs_n                                 → n
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
  +                                     →  + 
 1                                      → 1
@@ -129,7 +133,7 @@ const                                  → const
 __cs_point                             → point
  =                                     →  = 
 cs.splice(                             →  [-semantic]
-(state)                                → $state
+(createSignal)                         → $createSignal
  satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (\n          
 {                                      → { 
@@ -175,8 +179,9 @@ return                                 → return
 "x "                                   → "x "
  +                                     →  + 
 __cs_point                             → point
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
 .                                      → .
 x                                      → x
@@ -195,15 +200,17 @@ onclick                                → onclick
 ={cs.lift(                             → ={
 () =>                                  → () => 
 __cs_point                             → point
-.                                      → .
-set                                    → set
+[                                      → [
+1                                      → 1
+]                                      → ]
 (                                      → (
 {                                      → { 
 x                                      → x
 :                                      → : 
 __cs_point                             → point
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
 .                                      → .
 x                                      → x
@@ -232,7 +239,7 @@ const                                  → const
 __cs_n                                 → n
  =                                     →  = 
 cs.splice(                             →  [-semantic]
-(state)                                → $state
+(createSignal)                         → $createSignal
  satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 1                                      → 1
@@ -277,8 +284,9 @@ onclick                                → onclick
 ={cs.lift(                             → ={
 () =>                                  → () => 
 __cs_n                                 → n
-.                                      → .
-set                                    → set
+[                                      → [
+1                                      → 1
+]                                      → ]
 (                                      → (
 2                                      → 2
 )                                      → )
@@ -287,8 +295,9 @@ set                                    → set
 "n "                                   → "n "
  +                                     →  + 
 __cs_n                                 → n
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
 )}</                                   → }</
 button                                 → button
@@ -300,7 +309,7 @@ const                                  → const
 __cs_n                                 → n
  =                                     →  = 
 cs.splice(                             →  [-semantic]
-(state)                                → $state
+(createSignal)                         → $createSignal
  satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 1                                      → 1
@@ -325,8 +334,9 @@ return                                 → return
 "n "                                   → "n "
  +                                     →  + 
 __cs_n                                 → n
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
 ;                                      → ;
 \n    }                                → \n        }
@@ -343,8 +353,9 @@ onclick                                → onclick
 ={cs.lift(                             → ={
 () =>                                  → () => 
 __cs_n                                 → n
-.                                      → .
-set                                    → set
+[                                      → [
+1                                      → 1
+]                                      → ]
 (                                      → (
 1                                      → 1
 )                                      → )
@@ -371,7 +382,7 @@ const                                  → const
 __cs_point                             → point
  =                                     →  = 
 cs.splice(                             →  [-semantic]
-(state)                                → $state
+(createSignal)                         → $createSignal
  satisfies typeof cs.Spliceable)       →  [-semantic]
 (                                      → (
 {                                      → { 
@@ -400,8 +411,9 @@ return                                 → return
 "x "                                   → "x "
  +                                     →  + 
 __cs_point                             → point
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
 .                                      → .
 x                                      → x
@@ -420,15 +432,17 @@ onclick                                → onclick
 ={cs.lift(                             → ={
 () =>                                  → () => 
 __cs_point                             → point
-.                                      → .
-set                                    → set
+[                                      → [
+1                                      → 1
+]                                      → ]
 (                                      → (
 {                                      → { 
 x                                      → x
 :                                      → : 
 __cs_point                             → point
-.                                      → .
-get                                    → get
+[                                      → [
+0                                      → 0
+]                                      → ]
 ()                                     → ()
 .                                      → .
 x                                      → x

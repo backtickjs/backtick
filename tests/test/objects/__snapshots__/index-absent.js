@@ -13,8 +13,8 @@ it("indexAbsent", async (t) => {
       "26sqkhggd8j15:14:4",
       { params: [{ kind: "splice", value: answers, bindings: [] }] },
       {
-        code: 'export default ($0) => {\n    const names = ["zero", "one"];\n    const missing = $0()["nowhere"] ?? "gone";\n    return names[1] + "/" + missing;\n};',
-        map: '{"version":3,"file":"index-absent.test.jsx","sourceRoot":"","sources":["index-absent.test.tsx"],"names":[],"mappings":"eAaO;IACD,MAAM,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;IAC9B,MAAM,OAAO,GAAG,IAAQ,CAAC,SAAS,CAAC,IAAI,MAAM,CAAC;IAC9C,OAAO,KAAK,CAAC,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC;AAClC,CAAC"}',
+        code: 'export default $0 => {\n  const names = ["zero", "one"];\n  const missing = $0()["nowhere"] ?? "gone";\n  return names[1] + "/" + missing;\n};',
+        map: '{"version":3,"mappings":"eAaOA,EAAA;EACD,MAAMC,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC;EAC7B,MAAMC,OAAO,GAAGF,EAAA,EAAQ,CAAC,SAAS,CAAC,IAAI,MAAM;EAC7C,OAAOC,KAAK,CAAC,CAAC,CAAC,GAAG,GAAG,GAAGC,OAAO;AACjC,CAAC","names":["$0","names","missing"],"ignoreList":[],"sources":["index-absent.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

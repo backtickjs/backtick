@@ -12,7 +12,7 @@ const                             → const
 __cs_drawn                        → drawn
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 Bundle                            → Bundle
@@ -37,8 +37,9 @@ setTimeout                        → setTimeout
 (                                 → (
 () =>                             → () => 
 __cs_drawn                        → drawn
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 cs.splice(                        →  [-semantic]
 (ask)                             → $ask
@@ -53,8 +54,9 @@ cs.splice(                        →  [-semantic]
 return                            → return 
 <>{cs.lift(                       → (\n      <>\n        {
 __cs_drawn                        → drawn
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  ===                              →  === 
 null                              → null
@@ -64,8 +66,9 @@ null                              → null
 eval                              → eval
 (                                 → (
 __cs_drawn                        → drawn
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  as                               →  as 
 Bundle                            → Bundle
@@ -81,7 +84,7 @@ const                             → const
 __cs_asked                        → asked
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 0                                 → 0
@@ -98,8 +101,9 @@ span                              → span
 "asked "                          → "asked "
  +                                →  + 
 __cs_asked                        → asked
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }</
 span                              → span
@@ -112,12 +116,14 @@ ask                               → ask
 ={cs.lift(                        → ={
 () => {\n                         → () => {\n          
 __cs_asked                        → asked
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_asked                        → asked
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1
@@ -126,8 +132,9 @@ get                               → get
 \n                                → \n          
 return                            → return 
 __cs_asked                        → asked
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  >                                →  > 
 4                                 → 4

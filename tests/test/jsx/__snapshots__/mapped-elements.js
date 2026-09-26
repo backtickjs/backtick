@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { snapshotCase } from "../snapshotCase.ts";
 const elementLabels = ["alpha", "beta", "gamma"];

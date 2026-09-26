@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { cs, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
-import type { HTMLInputElement } from "@backtickjs/web-sdk";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // `ref` hands a script the element it is written on.
@@ -11,11 +11,11 @@ describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     await render(
       cs`{
-        const field = $state<HTMLInputElement | null>(null);
+        const field = $createSignal<HTMLInputElement | null>(null);
         return (
           <div>
-            <input aria-label="name" ref={(element) => field.set(element)} />
-            <button onclick={() => field.get()?.focus()}>edit</button>
+            <input aria-label="name" ref={(element) => field[1](element)} />
+            <button onclick={() => field[0]()?.focus()}>edit</button>
           </div>
         );
       }`,
@@ -62,15 +62,15 @@ describe("ref", () => {
     it("even when a signal it read changes", async () => {
       await render(
         cs`{
-          const shown = $state(true);
-          const n = $state(0);
+          const shown = $createSignal(true);
+          const n = $createSignal(0);
           return (
             <div>
-              <button onclick={() => n.set(n.get() + 1)}>
-                {"n " + n.get()}
+              <button onclick={() => n[1](n[0]() + 1)}>
+                {"n " + n[0]()}
               </button>
-              {shown.get() ? (
-                <p ref={() => $window.console.log(n.get())}>shown</p>
+              {shown[0]() ? (
+                <p ref={() => $window.console.log(n[0]())}>shown</p>
               ) : null}
             </div>
           );

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
-import type { Signal } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
@@ -14,18 +14,18 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs`{
-    const names = $state<string[]>(["a", "b", "c"]);
+    const names = $createSignal<string[]>(["a", "b", "c"]);
     const rotate = () => {
-      const held = names.get();
-      names.set([held[2], held[0], held[1]]);
+      const held = names[0]();
+      names[1]([held[2], held[0], held[1]]);
     };
     return (
       <div>
         <span onclick={rotate}>rotate</span>
         <div>
-          <For each={names.get()}>
-            {(name: string, index: Signal<number>) => (
-              <span>{name + " at " + index.get()}</span>
+          <For each={names[0]()}>
+            {(name: string, index: () => number) => (
+              <span>{name + " at " + index()}</span>
             )}
           </For>
         </div>

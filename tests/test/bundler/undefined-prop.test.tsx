@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, onMount, type Prop } from "@backtickjs/core";
+import { cs, type Prop } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { render, screen } from "@backtickjs/web-testing";
-import type { HTMLButtonElement } from "@backtickjs/web-sdk";
+import { onMount } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 
 // An element's prop that is `undefined` is left out, as an optional prop reads
 // in JSX and TypeScript. That is what lets a component forward an optional

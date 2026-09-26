@@ -1,27 +1,32 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(
+      `<form><textarea></textarea><input><button>`,
+    );
     const $entry = ($0) => {
       const said = $0()("");
-      return (
-        <form
-          onsubmit={(event) => {
-            event.preventDefault();
-            said.set(event.type + " " + event.cancelable);
-          }}
-        >
-          <textarea oninput={(event) => said.set(event.currentTarget.value)} />
-          <input oninput={(event) => said.set(event.currentTarget.value)} />
-          <button
-            onclick={(event) =>
-              said.set(event.clientX + " " + event.currentTarget.tagName)
-            }
-          >
-            {said.get()}
-          </button>
-        </form>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling,
+          _el$4 = _el$3.nextSibling;
+        _el$.addEventListener("submit", (event) => {
+          event.preventDefault();
+          said[1](event.type + " " + event.cancelable);
+        });
+        _el$2.$$input = (event) => said[1](event.currentTarget.value);
+        _el$3.$$input = (event) => said[1](event.currentTarget.value);
+        _el$4.$$click = (event) =>
+          said[1](event.clientX + " " + event.currentTarget.tagName);
+        _$insert(_el$4, () => said[0]());
+        return _el$;
+      })();
     };
+    _$delegateEvents(["input", "click"]);
     return $entry;
   })();
-  return f1(() => state);
+  return f1(() => $modules["solid-js"].createSignal);
 })([]);

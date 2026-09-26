@@ -145,8 +145,12 @@ export function rewriteScript(
   // one (a Vue block, say): where it was written, and the language its code
   // is in, with the types gone.
   const moduleId = `${sourceFile.fileName}?cs=${line + 1}:${character}&lang.jsx`;
+  // A script the compiler refused never runs, and what it wrote may not even be
+  // JavaScript a framework's compiler would parse.
   const emitted =
-    transform != null ? applyTransform(transform, script, moduleId) : script;
+    transform != null && diagnostics.length === 0
+      ? applyTransform(transform, script, moduleId)
+      : script;
 
   const runtime = call(ts, "cs", "create", [
     ts.factory.createStringLiteral(id),

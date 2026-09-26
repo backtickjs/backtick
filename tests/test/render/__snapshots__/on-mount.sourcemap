@@ -3,7 +3,7 @@ const                             → const
 __cs_count                        → count
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 0                                 → 0
@@ -26,12 +26,14 @@ log                               → log
 ;                                 → ;
 \n                                → \n            
 __cs_count                        → count
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1
@@ -48,8 +50,9 @@ p                                 → p
 "mounted "                        → "mounted "
  +                                →  + 
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }</
 p                                 → p
@@ -61,7 +64,7 @@ const                             → const
 __cs_said                         → said
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 "not yet"                         → "not yet"
@@ -81,8 +84,9 @@ cs.splice(                        →  [-semantic]
 (                                 → (
 () =>                             → () => 
 __cs_said                         → said
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 "ran"                             → "ran"
 )                                 → )
@@ -90,8 +94,9 @@ set                               → set
 )}                                → }
 >{cs.lift(                        → >\n            {
 __cs_said                         → said
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }\n          </
 button                            → button

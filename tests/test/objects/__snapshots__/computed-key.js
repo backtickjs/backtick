@@ -13,8 +13,8 @@ it("computedKey", async (t) => {
       "27b2r7injyzq0:13:4",
       { params: [] },
       {
-        code: 'export default () => {\n    const base = { a: 1, b: 2 };\n    const name = "b";\n    return {\n        ...base,\n        [name]: 9,\n        ["c" + "d"]: 3,\n        a: 4,\n    };\n};',
-        map: '{"version":3,"file":"computed-key.test.jsx","sourceRoot":"","sources":["computed-key.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IAC5B,MAAM,IAAI,GAAG,GAAG,CAAC;IACjB,OAAO;QACL,GAAG,IAAI;QACP,CAAC,IAAI,CAAC,EAAE,CAAC;QACT,CAAC,GAAG,GAAG,GAAG,CAAC,EAAE,CAAC;QACd,CAAC,EAAE,CAAC;KACL,CAAC;AACJ,CAAC"}',
+        code: 'export default () => {\n  const base = {\n    a: 1,\n    b: 2\n  };\n  const name = "b";\n  return {\n    ...base,\n    [name]: 9,\n    ["c" + "d"]: 3,\n    a: 4\n  };\n};',
+        map: '{"version":3,"mappings":"eAYO;EACD,MAAMA,IAAI,GAAG;IAAEC,CAAC,EAAE,CAAC;IAAEC,CAAC,EAAE;EAAC,CAAE;EAC3B,MAAMC,IAAI,GAAG,GAAG;EAChB,OAAO;IACL,GAAGH,IAAI;IACP,CAACG,IAAI,GAAG,CAAC;IACT,CAAC,GAAG,GAAG,GAAG,GAAG,CAAC;IACdF,CAAC,EAAE;GACJ;AACH,CAAC","names":["base","a","b","name"],"ignoreList":[],"sources":["computed-key.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

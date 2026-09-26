@@ -1,20 +1,22 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import type { Client, State } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import type { Signal } from "solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 
-// A cell crossing a component boundary: declared once by the script that draws
-// the pair, handed to each child as a prop, so both read one storage. The cell
-// is an ordinary client value — the prop takes it the way it takes any other —
+// A signal crossing a component boundary: declared once by the script that
+// draws the pair, handed to each child as a prop, so both read one storage. The
+// signal is an ordinary client value — the prop takes it the way it takes any other —
 // which is what makes a write through either child reach the same storage.
-const SharedCounter = async ({ size }: { size: Client<State<number>> }) => (
+const SharedCounter = async ({ size }: { size: Client<Signal<number>> }) => (
   <span
-    style={cs`"font-size: " + $size.get() + "px"`}
+    style={cs`"font-size: " + $size[0]() + "px"`}
     onclick={cs`() => {
-      $size.set($size.get() + 1);
+      $size[1]($size[0]() + 1);
     }`}
   >
     press
@@ -23,7 +25,7 @@ const SharedCounter = async ({ size }: { size: Client<State<number>> }) => (
 
 async function SharingPanel() {
   return cs`{
-    const size = $state(16);
+    const size = $createSignal(16);
     return (
       <div>
         <SharedCounter size={size} />
@@ -34,13 +36,13 @@ async function SharingPanel() {
 }
 
 describe("local state", () => {
-  it("a cell passed as a prop is one storage, shared by both children", async () => {
+  it("a signal passed as a prop is one storage, shared by both children", async () => {
     const view = await drawn(<SharingPanel />);
     const [first, second] = children(view);
     assert.ok(first !== undefined && second !== undefined);
     assert.equal(fontSize(first), 16);
     assert.equal(fontSize(second), 16);
-    // The parent declared the cell and handed it to both, so a write through
+    // The parent declared the signal and handed it to both, so a write through
     // one child's handle moves the other's display too.
     await userEvent.click(first);
     assert.equal(fontSize(first), 17);

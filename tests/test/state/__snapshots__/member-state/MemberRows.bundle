@@ -1,35 +1,58 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><ul class=rows>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<li>`);
     const $entry = ($0, $1) => {
       const build = (from) => {
-        return Array.from({ length: 3 }, (_, at) => {
-          return { id: from + at, label: $0()("row " + (from + at)) };
-        });
+        return Array.from(
+          {
+            length: 3,
+          },
+          (_, at) => {
+            return {
+              id: from + at,
+              label: $0()("row " + (from + at)),
+            };
+          },
+        );
       };
       const held = $0()(build(1));
-      return (
-        <div>
-          <ul class="rows">
-            <$1 each={held.get()}>
-              {(row) => (
-                <li onclick={() => row.label.set("pressed")}>
-                  {row.label.get()}
-                </li>
-              )}
-            </$1>
-          </ul>
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _$insert(
+          _el$2,
+          _$createComponent($1, {
+            get each() {
+              return held[0]();
+            },
+            children: (row) =>
+              (() => {
+                var _el$3 = _tmpl$2();
+                _el$3.$$click = () => row.label[1]("pressed");
+                _$insert(_el$3, () => row.label[0]());
+                return _el$3;
+              })(),
+          }),
+        );
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   return jsx(
     () =>
       f1(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         ($0) =>
-          jsx("for", {
+          jsx($modules["solid-js"].For, {
             each: () => $0.each,
+            fallback: () => $0.fallback,
             children: () => $0.children,
           }),
       ),

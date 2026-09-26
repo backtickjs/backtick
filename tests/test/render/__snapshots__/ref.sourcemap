@@ -3,7 +3,7 @@ const                             → const
 __cs_field                        → field
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 HTMLInputElement                  → HTMLInputElement
@@ -31,8 +31,9 @@ ref                               → ref
 __cs_element                      → element
  =>                               → ) => 
 __cs_field                        → field
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_element                      → element
 )                                 → )
@@ -46,8 +47,9 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () =>                             → () => 
 __cs_field                        → field
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 ?.                                → ?.
 focus                             → focus
@@ -109,7 +111,7 @@ const                             → const
 __cs_shown                        → shown
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 true                              → true
@@ -120,7 +122,7 @@ const                             → const
 __cs_n                            → n
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 0                                 → 0
@@ -138,12 +140,14 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () =>                             → () => 
 __cs_n                            → n
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_n                            → n
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1
@@ -153,16 +157,18 @@ get                               → get
 "n "                              → "n "
  +                                →  + 
 __cs_n                            → n
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }\n              </
 button                            → button
 >                                 → >
 )}{cs.lift(                       → \n              {
 __cs_shown                        → shown
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  ?                                →  ? 
 <                                 → (\n                <
@@ -180,8 +186,9 @@ console                           → console
 log                               → log
 (                                 → (
 __cs_n                            → n
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )                                 → )
 )}                                → }

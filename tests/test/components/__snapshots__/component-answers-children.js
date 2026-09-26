@@ -2,7 +2,7 @@ import {
   Fragment as _Fragment,
   jsx as _jsx,
   jsxs as _jsxs,
-} from "@backtickjs/web-sdk/jsx-runtime";
+} from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { snapshotCase } from "../snapshotCase.ts";
 // A component stands exactly where its tag did, so what it may answer with is

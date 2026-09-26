@@ -3,7 +3,7 @@ const                             → const
 __cs_held                         → held
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 Bundle                            → Bundle
@@ -22,8 +22,9 @@ return                            → return
 div                               → div
 >{cs.lift(                        → >\n          {
 __cs_held                         → held
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  ===                              →  === 
 null                              → null
@@ -37,8 +38,9 @@ span                              → span
 eval                              → eval
 (                                 → (
 __cs_held                         → held
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  as                               →  as 
 Bundle                            → Bundle

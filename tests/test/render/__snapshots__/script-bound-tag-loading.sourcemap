@@ -26,7 +26,7 @@ const                             → const
 __cs_count                        → count
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 0                                 → 0
@@ -37,7 +37,7 @@ const                             → const
 __cs_drawn                        → drawn
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 Bundle                            → Bundle
@@ -78,8 +78,9 @@ const                             → const
 __cs_held                         → held
  =                                →  = 
 __cs_drawn                        → drawn
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 ;                                 → ;
 \n                                → \n    
@@ -106,8 +107,9 @@ return                            → return
 div                               → div
 >{cs.lift(                        → >\n      {
 __cs_drawn                        → drawn
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  ===                              →  === 
 null                              → null
@@ -124,8 +126,9 @@ __cs_Badge                        → Badge
 count                             → count
 ={                                → ={
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 }                                 → }
 />                                →  />
@@ -137,8 +140,9 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () =>                             → () => 
 __cs_drawn                        → drawn
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 cs.splice(                        →  [-semantic]
 (loadedBadge)                     → $loadedBadge
@@ -156,12 +160,14 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () =>                             → () => 
 __cs_count                        → count
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1

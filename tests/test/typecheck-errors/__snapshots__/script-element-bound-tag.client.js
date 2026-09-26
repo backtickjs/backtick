@@ -1,2 +1,3 @@
 // 6:14
-export default () => (Tag) => <Tag />;
+import { createComponent as _$createComponent } from "solid-js/web";
+export default () => Tag => _$createComponent(Tag, {});

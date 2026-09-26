@@ -27,7 +27,7 @@ __cs_id                           → id
 label                             → label
 :                                 → : 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 "row "                            → "row "
@@ -74,12 +74,14 @@ label                             → label
 ;                                 → ;
 \n                                → \n        
 __cs_label                        → label
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_label                        → label
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 " !!!"                            → " !!!"
@@ -129,7 +131,7 @@ number                            → number
 \n                                →  
 label                             → label
 :                                 → : 
-State                             → State
+Signal                            → Signal
 <                                 → <
 string                            → string
 >                                 → >
@@ -154,8 +156,9 @@ td                                → td
 __cs_row                          → row
 .                                 → .
 label                             → label
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }</
 td                                → td

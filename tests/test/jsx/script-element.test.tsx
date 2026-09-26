@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // An element a script writes, rather than one the host wrote and the script
@@ -8,17 +9,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 // written, not what it is.
 async function Card() {
   return cs`{
-    const label = $state("hi");
+    const label = $createSignal("hi");
 
     // A handler written inline and one held under a name: both are client code,
     // and a handler prop takes a function and nothing else.
     const row = (size: number) => {
       const css = "font-size: " + size + "px";
-      const press = () => label.set("held");
+      const press = () => label[1]("held");
       return (
         <div style={css}>
-          <span style={css} onclick={() => label.set("pressed")}>
-            {label.get()}
+          <span style={css} onclick={() => label[1]("pressed")}>
+            {label[0]()}
           </span>
           <span style="font-size: 8px">fixed</span>
           <span style={css} onclick={press}>

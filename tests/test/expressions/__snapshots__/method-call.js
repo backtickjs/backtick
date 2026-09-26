@@ -9,8 +9,8 @@ it("methodCall", async (t) => {
       "163oncfaq7kkj:9:4",
       { params: [] },
       {
-        code: 'export default () => {\n    const greeting = "Hello";\n    return greeting.concat(", ", "World").toUpperCase();\n};',
-        map: '{"version":3,"file":"method-call.test.jsx","sourceRoot":"","sources":["method-call.test.tsx"],"names":[],"mappings":"eAQO;IACD,MAAM,QAAQ,GAAG,OAAO,CAAC;IACzB,OAAO,QAAQ,CAAC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAAC,WAAW,EAAE,CAAC;AACtD,CAAC"}',
+        code: 'export default () => {\n  const greeting = "Hello";\n  return greeting.concat(", ", "World").toUpperCase();\n};',
+        map: '{"version":3,"mappings":"eAQO;EACD,MAAMA,QAAQ,GAAG,OAAO;EACxB,OAAOA,QAAQ,CAACC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAACC,WAAW,EAAE;AACrD,CAAC","names":["greeting","concat","toUpperCase"],"ignoreList":[],"sources":["method-call.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

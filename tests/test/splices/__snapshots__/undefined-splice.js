@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { evaluate } from "@backtickjs/web-testing";
+import { evaluate } from "@backtickjs/solid-js/testing";
 // A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
 // no form for it: dropped from an object and turned into `null` in an array.
 describe("a spliced undefined", () => {
@@ -11,11 +11,11 @@ describe("a spliced undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          "3f9luoncz9vrv:12:32",
+          "3u6z57xnacrp0:12:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
           {
-            code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAWmC,QAAA,IAAQ"}',
+            code: "export default $0 => $0();",
+            map: '{"version":3,"mappings":"eAWmCA,EAAA,IAAAA,EAAA,EAAQ","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },
@@ -28,11 +28,11 @@ describe("a spliced undefined", () => {
     const data = { missing: undefined, kept: 1 };
     const arrived = await evaluate(
       cs.create(
-        "3f9luoncz9vrv:17:35",
+        "3u6z57xnacrp0:17:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
         {
-          code: "export default ($0) => $0();",
-          map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAgBsC,QAAA,IAAK"}',
+          code: "export default $0 => $0();",
+          map: '{"version":3,"mappings":"eAgBsCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
           imports: [],
           exportAt: 0,
         },
@@ -46,11 +46,11 @@ describe("a spliced undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          "3f9luoncz9vrv:24:36",
+          "3u6z57xnacrp0:24:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
           {
-            code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAuBuC,QAAA,IAAK"}',
+            code: "export default $0 => $0();",
+            map: '{"version":3,"mappings":"eAuBuCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },

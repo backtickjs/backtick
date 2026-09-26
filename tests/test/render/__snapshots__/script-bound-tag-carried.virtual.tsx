@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import type { BacktickElement, Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -22,12 +23,12 @@ async function Panel(props: { body: Prop<BacktickElement> }) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs.lift((() => {
-    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
+    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
     const __cs_Badge = (__cs_p: {
         n: number;
         children: BacktickElement;
     }) => <b>{cs.lift("outer " + __cs_p.n)}{cs.lift(__cs_p.children)}</b>;
-    return <div>{cs.lift(<Panel body={cs.lift(cs.splice(cs.lift(<__cs_Badge n={__cs_count.get()}>{<u>{cs.lift("kid " + __cs_count.get())}</u>}</__cs_Badge>) satisfies typeof cs.Spliceable))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>;
+    return <div>{cs.lift(<Panel body={cs.lift(cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]()}>{<u>{cs.lift("kid " + __cs_count[0]())}</u>}</__cs_Badge>) satisfies typeof cs.Spliceable))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>more</button>)}</div>;
 })());
 
 it("scriptBoundTagCarried", async (t) => {

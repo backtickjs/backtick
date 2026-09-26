@@ -18,8 +18,8 @@ it("spliceOrder", async (t) => {
         ],
       },
       {
-        code: "export default ($0, $1) => ({ a: $0(), b: $1() });",
-        map: '{"version":3,"file":"splice-order.test.jsx","sourceRoot":"","sources":["splice-order.test.tsx"],"names":[],"mappings":"eAU0C,YAAA,CAAC,EAAE,CAAC,EAAE,IAAM,EAAE,CAAC,EAAE,IAAC,EAAW,CAAC"}',
+        code: "export default ($0, $1) => ({\n  a: $0(),\n  b: $1()\n});",
+        map: '{"version":3,"mappings":"eAU0C,CAAAA,EAAA,EAAAC,EAAA,MAAC;EAAEC,CAAC,EAAEF,EAAA,EAAM;EAAEG,CAAC,EAAEF,EAAA;AAAC,CAAW,CAAC","names":["$0","$1","a","b"],"ignoreList":[],"sources":["splice-order.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

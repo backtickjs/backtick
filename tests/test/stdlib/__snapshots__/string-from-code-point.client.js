@@ -1,4 +1,6 @@
 // 10:10
+import { template as _$template } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<span>Hi`);
 export default () => {
-    return (<span>{String.fromCodePoint(72, 105) + String.fromCodePoint()}</span>);
+  return _tmpl$();
 };

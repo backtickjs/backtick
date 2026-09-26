@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A handler is handed what the DOM hands it, and which event that is comes
@@ -13,23 +14,23 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs`{
-      const said = $state("");
+      const said = $createSignal("");
 
       return (
         <form
           onsubmit={(event) => {
             event.preventDefault();
-            said.set(event.type + " " + event.cancelable);
+            said[1](event.type + " " + event.cancelable);
           }}
         >
-          <textarea oninput={(event) => said.set(event.currentTarget.value)} />
-          <input oninput={(event) => said.set(event.currentTarget.value)} />
+          <textarea oninput={(event) => said[1](event.currentTarget.value)} />
+          <input oninput={(event) => said[1](event.currentTarget.value)} />
           <button
             onclick={(event) =>
-              said.set(event.clientX + " " + event.currentTarget.tagName)
+              said[1](event.clientX + " " + event.currentTarget.tagName)
             }
           >
-            {said.get()}
+            {said[0]()}
           </button>
         </form>
       );

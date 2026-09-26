@@ -1,11 +1,12 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import type { Client } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A cell holding an enum, handed to a function whose parameter is that enum.
+// A signal holding an enum, handed to a function whose parameter is that enum.
 //
-// The member is spliced as itself and the cell holds `Color` rather than
+// The member is spliced as itself and the signal holds `Color` rather than
 // `Color.Red`, so the other member is a value it takes. What a splice hands
 // over keeps the width the host gave it: `cs.splice` reads it back unbound, and
 // the binding it lands in decides the width the way TypeScript decides every
@@ -21,8 +22,8 @@ const colorName: Client<(c: Color) => string> = cs.lift((__cs_c: Color) => {
 
 async function Swatch() {
   return cs.lift((() => {
-    const __cs_held = cs.splice((state) satisfies typeof cs.Spliceable)(cs.splice(Color.Red satisfies typeof cs.Spliceable));
-    return <span onclick={cs.lift(() => __cs_held.set(cs.splice(Color.Blue satisfies typeof cs.Spliceable)))}>{cs.lift(cs.splice((colorName) satisfies typeof cs.Spliceable)(__cs_held.get()))}</span>;
+    const __cs_held = cs.splice((createSignal) satisfies typeof cs.Spliceable)(cs.splice(Color.Red satisfies typeof cs.Spliceable));
+    return <span onclick={cs.lift(() => __cs_held[1](cs.splice(Color.Blue satisfies typeof cs.Spliceable)))}>{cs.lift(cs.splice((colorName) satisfies typeof cs.Spliceable)(__cs_held[0]()))}</span>;
 })());
 }
 

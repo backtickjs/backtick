@@ -1,4 +1,10 @@
 import { createImport } from "@backtickjs/platform-sdk";
+import {
+  type BacktickElement,
+  createJsxElement,
+  type JsxElementType,
+  type Prop,
+} from "@backtickjs/ui-platform-sdk";
 import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";
@@ -53,9 +59,7 @@ export const mapArray = solid("mapArray");
 export const indexArray = solid("indexArray");
 
 // Control flow
-export const For = solid("For");
 export const Index = solid("Index");
-export const Show = solid("Show");
 export const Switch = solid("Switch");
 export const Match = solid("Match");
 export const ErrorBoundary = solid("ErrorBoundary");
@@ -73,3 +77,45 @@ export const unwrap = store("unwrap");
 // The DOM
 export const Dynamic = web("Dynamic");
 export const Portal = web("Portal");
+
+// Control flow, as server components: a host function a script or the host
+// writes as a tag, whose element is Solid's own component, called on the
+// client with the props it was handed.
+
+// A host element whose type is one of Solid's components. Props are named, not
+// spread: while bundling, a component's props stand for what only the client
+// has, and are reached by name.
+function solidElement(
+  name: "For" | "Show",
+  props: { [key: string]: unknown },
+): Promise<BacktickElement> {
+  return Promise.resolve(
+    createJsxElement(solid(name) as unknown as JsxElementType, props),
+  );
+}
+
+/** Solid's `For`: `children` drawn once per member of `each`. */
+export function For<T>(props: {
+  each: Prop<readonly T[] | undefined | null | false>;
+  fallback?: Prop<BacktickElement>;
+  children: Prop<(item: T, index: () => number) => BacktickElement>;
+}): Promise<BacktickElement> {
+  return solidElement("For", {
+    each: props.each,
+    fallback: props.fallback,
+    children: props.children,
+  });
+}
+
+/** Solid's `Show`: `children` while `when` holds, `fallback` otherwise. */
+export function Show<T>(props: {
+  when: Prop<T | undefined | null | false>;
+  fallback?: Prop<BacktickElement>;
+  children: Prop<BacktickElement | ((item: () => T) => BacktickElement)>;
+}): Promise<BacktickElement> {
+  return solidElement("Show", {
+    when: props.when,
+    fallback: props.fallback,
+    children: props.children,
+  });
+}

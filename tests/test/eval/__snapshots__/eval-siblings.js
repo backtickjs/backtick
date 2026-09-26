@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
@@ -9,49 +9,17 @@ async function Other() {
   return cs.create(
     "1re1jas6fqiey:9:9",
     { params: [] },
-    () => ({
-      type: "JSXElement",
-      loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 44 } },
-      openingElement: {
-        type: "JSXOpeningElement",
-        loc: { start: { line: 9, column: 12 }, end: { line: 9, column: 16 } },
-        name: {
-          type: "JSXIdentifier",
-          loc: { start: { line: 9, column: 13 }, end: { line: 9, column: 15 } },
-          name: "em",
-        },
-        attributes: [],
-        selfClosing: false,
-      },
-      children: [
+    {
+      code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>from another bundle`);\nexport default () => _tmpl$();',
+      map: '{"version":3,"mappings":";;eAQY,MAAAA,MAAA,EAAgC","names":["_tmpl$"],"ignoreList":[],"sources":["eval-siblings.test.tsx"]}',
+      imports: [
         {
-          type: "JSXExpressionContainer",
-          loc: { start: { line: 9, column: 16 }, end: { line: 9, column: 39 } },
-          expression: {
-            type: "Literal",
-            loc: {
-              start: { line: 9, column: 17 },
-              end: { line: 9, column: 38 },
-            },
-            value: "from another bundle",
-          },
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
         },
       ],
-      closingElement: {
-        type: "JSXClosingElement",
-        loc: { start: { line: 9, column: 39 }, end: { line: 9, column: 44 } },
-        name: {
-          type: "JSXIdentifier",
-          loc: { start: { line: 9, column: 41 }, end: { line: 9, column: 43 } },
-          name: "em",
-        },
-      },
-    }),
-    {
-      code: 'export default () => <em>{"from another bundle"}</em>;',
-      map: '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAQY,MAAA,CAAC,EAAE,CAAC,CAAC,qBAAqB,CAAC,EAAE,EAAE,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      exportAt: 120,
     },
   );
 }
@@ -63,218 +31,22 @@ it("evalSiblings", async (t) => {
     cs.create(
       "1re1jas6fqiey:18:4",
       { params: [{ kind: "splice", value: otherBundle, bindings: [] }] },
-      () => ({
-        type: "JSXElement",
-        loc: { start: { line: 18, column: 7 }, end: { line: 22, column: 10 } },
-        openingElement: {
-          type: "JSXOpeningElement",
-          loc: {
-            start: { line: 18, column: 7 },
-            end: { line: 18, column: 12 },
-          },
-          name: {
-            type: "JSXIdentifier",
-            loc: {
-              start: { line: 18, column: 8 },
-              end: { line: 18, column: 11 },
-            },
-            name: "div",
-          },
-          attributes: [],
-          selfClosing: false,
-        },
-        children: [
+      {
+        code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><span>before</span><span>after`);\nexport default $0 => (() => {\n  var _el$ = _tmpl$(),\n    _el$2 = _el$.firstChild,\n    _el$3 = _el$2.nextSibling;\n  _$insert(_el$, () => eval($0()), _el$3);\n  return _el$;\n})();',
+        map: '{"version":3,"mappings":";;;eAiBOA,EAAA;EAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;EAAAC,QAAA,CAAAN,IAAA,QAEAO,IAAI,CAACR,EAAA,EAAY,CAAC,EAAAK,KAAA;EAAA,OAAAJ,IAAA;AAAA,IAEf","names":["$0","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$insert","eval"],"ignoreList":[],"sources":["eval-siblings.test.tsx"]}',
+        imports: [
           {
-            type: "JSXText",
-            loc: {
-              start: { line: 19, column: 6 },
-              end: { line: 19, column: 6 },
-            },
-            value: "\n      ",
-            raw: "\n      ",
+            from: "solid-js/web",
+            range: [0, 54],
+            bindings: [{ name: "template", local: "_$template" }],
           },
           {
-            type: "JSXElement",
-            loc: {
-              start: { line: 19, column: 6 },
-              end: { line: 19, column: 25 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 19, column: 6 },
-                end: { line: 19, column: 12 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 19, column: 7 },
-                  end: { line: 19, column: 11 },
-                },
-                name: "span",
-              },
-              attributes: [],
-              selfClosing: false,
-            },
-            children: [
-              {
-                type: "JSXText",
-                loc: {
-                  start: { line: 19, column: 12 },
-                  end: { line: 19, column: 18 },
-                },
-                value: "before",
-                raw: "before",
-              },
-            ],
-            closingElement: {
-              type: "JSXClosingElement",
-              loc: {
-                start: { line: 19, column: 18 },
-                end: { line: 19, column: 25 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 19, column: 20 },
-                  end: { line: 19, column: 24 },
-                },
-                name: "span",
-              },
-            },
-          },
-          {
-            type: "JSXText",
-            loc: {
-              start: { line: 20, column: 6 },
-              end: { line: 20, column: 6 },
-            },
-            value: "\n      ",
-            raw: "\n      ",
-          },
-          {
-            type: "JSXExpressionContainer",
-            loc: {
-              start: { line: 20, column: 6 },
-              end: { line: 20, column: 26 },
-            },
-            expression: {
-              type: "CallExpression",
-              loc: {
-                start: { line: 20, column: 7 },
-                end: { line: 20, column: 25 },
-              },
-              callee: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 20, column: 7 },
-                  end: { line: 20, column: 11 },
-                },
-                name: "eval",
-              },
-              arguments: [
-                {
-                  type: "Splice",
-                  loc: {
-                    start: { line: 20, column: 12 },
-                    end: { line: 20, column: 24 },
-                  },
-                  param: 0,
-                },
-              ],
-              optional: false,
-            },
-          },
-          {
-            type: "JSXText",
-            loc: {
-              start: { line: 21, column: 6 },
-              end: { line: 21, column: 6 },
-            },
-            value: "\n      ",
-            raw: "\n      ",
-          },
-          {
-            type: "JSXElement",
-            loc: {
-              start: { line: 21, column: 6 },
-              end: { line: 21, column: 24 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 21, column: 6 },
-                end: { line: 21, column: 12 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 21, column: 7 },
-                  end: { line: 21, column: 11 },
-                },
-                name: "span",
-              },
-              attributes: [],
-              selfClosing: false,
-            },
-            children: [
-              {
-                type: "JSXText",
-                loc: {
-                  start: { line: 21, column: 12 },
-                  end: { line: 21, column: 17 },
-                },
-                value: "after",
-                raw: "after",
-              },
-            ],
-            closingElement: {
-              type: "JSXClosingElement",
-              loc: {
-                start: { line: 21, column: 17 },
-                end: { line: 21, column: 24 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 21, column: 19 },
-                  end: { line: 21, column: 23 },
-                },
-                name: "span",
-              },
-            },
-          },
-          {
-            type: "JSXText",
-            loc: {
-              start: { line: 22, column: 4 },
-              end: { line: 22, column: 4 },
-            },
-            value: "\n    ",
-            raw: "\n    ",
+            from: "solid-js/web",
+            range: [55, 105],
+            bindings: [{ name: "insert", local: "_$insert" }],
           },
         ],
-        closingElement: {
-          type: "JSXClosingElement",
-          loc: {
-            start: { line: 22, column: 4 },
-            end: { line: 22, column: 10 },
-          },
-          name: {
-            type: "JSXIdentifier",
-            loc: {
-              start: { line: 22, column: 6 },
-              end: { line: 22, column: 9 },
-            },
-            name: "div",
-          },
-        },
-      }),
-      {
-        code: "export default ($0) => <div>\n      <span>before</span>\n      {eval($0())}\n      <span>after</span>\n    </div>;",
-        map: '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAiBO,QAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,MAAM,EAAE,IAAI,CAClB;MAAA,CAAC,IAAI,CAAC,IAAY,CAAC,CACnB;MAAA,CAAC,IAAI,CAAC,KAAK,EAAE,IAAI,CACnB;IAAA,EAAE,GAAG,CAAC"}',
-        imports: [],
-        exportAt: 0,
+        exportAt: 183,
       },
     ),
   );

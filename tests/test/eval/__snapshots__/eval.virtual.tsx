@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, For } from "@backtickjs/core";
-import { render } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { For } from "@backtickjs/solid-js";
+import { render } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A bundle evaluated where a script stands, and used by its type: a drawing

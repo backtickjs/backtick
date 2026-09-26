@@ -1,18 +1,19 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A cell a script declares, and a button that writes it.
+// A signal a script declares, and a button that writes it.
 async function Counter() {
   return cs`{
-    const count = $state(0);
+    const count = $createSignal(0);
     return (
       <div>
-        <button onclick={() => count.set(count.get() + 1)}>Add</button>
-        <p>{"Count: " + count.get()}</p>
+        <button onclick={() => count[1](count[0]() + 1)}>Add</button>
+        <p>{"Count: " + count[0]()}</p>
       </div>
     );
   }`;

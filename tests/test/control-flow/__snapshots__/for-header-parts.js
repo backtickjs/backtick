@@ -11,8 +11,8 @@ it("forHeaderParts", async (t) => {
       "2espgmzktnj99:11:4",
       { params: [] },
       {
-        code: 'export default () => {\n    let i = 0;\n    let seen = "";\n    for (; i < 3;) {\n        seen = seen + i;\n        i = i + 1;\n    }\n    return seen;\n};',
-        map: '{"version":3,"file":"for-header-parts.test.jsx","sourceRoot":"","sources":["for-header-parts.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,IAAI,GAAG,EAAE,CAAC;IACd,OAAO,CAAC,GAAG,CAAC,GAAI,CAAC;QACf,IAAI,GAAG,IAAI,GAAG,CAAC,CAAC;QAChB,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC;IACZ,CAAC;IACD,OAAO,IAAI,CAAC;AACd,CAAC"}',
+        code: 'export default () => {\n  let i = 0;\n  let seen = "";\n  for (; i < 3;) {\n    seen = seen + i;\n    i = i + 1;\n  }\n  return seen;\n};',
+        map: '{"version":3,"mappings":"eAUO;EACD,IAAIA,CAAC,GAAG,CAAC;EACT,IAAIC,IAAI,GAAG,EAAE;EACb,OAAOD,CAAC,GAAG,CAAC,GAAI;IACdC,IAAI,GAAGA,IAAI,GAAGD,CAAC;IACfA,CAAC,GAAGA,CAAC,GAAG,CAAC;EACX;EACA,OAAOC,IAAI;AACb,CAAC","names":["i","seen"],"ignoreList":[],"sources":["for-header-parts.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

@@ -8,8 +8,8 @@ const pick = cs.create(
   "2dtorvijco8u0:8:13",
   { params: [] },
   {
-    code: "export default () => (p) => {\n    return p?.x;\n};",
-    map: '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["optional-chain.test.tsx"],"names":[],"mappings":"eAOgB,MAAA,CAAC,CAAuB,EAAE,EAAE;IAC1C,OAAO,CAAC,EAAE,CAAC,CAAC;AACd,CAAC"}',
+    code: "export default () => p => {\n  return p?.x;\n};",
+    map: '{"version":3,"mappings":"eAOgB,MAACA,CAAuB,IAAI;EAC1C,OAAOA,CAAC,EAAEC,CAAC;AACb,CAAC","names":["p","x"],"ignoreList":[],"sources":["optional-chain.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -18,8 +18,8 @@ const deep = cs.create(
   "2dtorvijco8u0:12:13",
   { params: [] },
   {
-    code: "export default () => (o) => {\n    return o?.inner?.z;\n};",
-    map: '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["optional-chain.test.tsx"],"names":[],"mappings":"eAWgB,MAAA,CAAC,CAAyC,EAAE,EAAE;IAC5D,OAAO,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC;AACrB,CAAC"}',
+    code: "export default () => o => {\n  return o?.inner?.z;\n};",
+    map: '{"version":3,"mappings":"eAWgB,MAACA,CAAyC,IAAI;EAC5D,OAAOA,CAAC,EAAEC,KAAK,EAAEC,CAAC;AACpB,CAAC","names":["o","inner","z"],"ignoreList":[],"sources":["optional-chain.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -28,8 +28,8 @@ const shout = cs.create(
   "2dtorvijco8u0:16:14",
   { params: [] },
   {
-    code: 'export default () => (s) => {\n    return s?.concat("!");\n};',
-    map: '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["optional-chain.test.tsx"],"names":[],"mappings":"eAeiB,MAAA,CAAC,CAAgB,EAAE,EAAE;IACpC,OAAO,CAAC,EAAE,MAAM,CAAC,GAAG,CAAC,CAAC;AACxB,CAAC"}',
+    code: 'export default () => s => {\n  return s?.concat("!");\n};',
+    map: '{"version":3,"mappings":"eAeiB,MAACA,CAAgB,IAAI;EACpC,OAAOA,CAAC,EAAEC,MAAM,CAAC,GAAG,CAAC;AACvB,CAAC","names":["s","concat"],"ignoreList":[],"sources":["optional-chain.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -48,8 +48,8 @@ it("optionalChain", async (t) => {
         ],
       },
       {
-        code: 'export default ($0, $1, $2) => ({\n    found: $0()({ x: 5 }),\n    missing: $0()(null),\n    deep: $1()({ inner: { z: 7 } }),\n    cut: $1()({ inner: null }),\n    top: $1()(null),\n    loud: $2()("hi"),\n    silent: $2()(null),\n});',
-        map: '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["optional-chain.test.tsx"],"names":[],"mappings":"eAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,IAAK,CAAC,IAAI,CAAC;IACpB,IAAI,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAChC,GAAG,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC;IAC3B,GAAG,EAAE,IAAK,CAAC,IAAI,CAAC;IAChB,IAAI,EAAE,IAAM,CAAC,IAAI,CAAC;IAClB,MAAM,EAAE,IAAM,CAAC,IAAI,CAAC;CACrB,CAAC"}',
+        code: 'export default ($0, $1, $2) => ({\n  found: $0()({\n    x: 5\n  }),\n  missing: $0()(null),\n  deep: $1()({\n    inner: {\n      z: 7\n    }\n  }),\n  cut: $1()({\n    inner: null\n  }),\n  top: $1()(null),\n  loud: $2()("hi"),\n  silent: $2()(null)\n});',
+        map: '{"version":3,"mappings":"eAuBO,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,MAAC;EACFC,KAAK,EAAEH,EAAA,EAAK,CAAC;IAAEI,CAAC,EAAE;EAAC,CAAE,CAAC;EACtBC,OAAO,EAAEL,EAAA,EAAK,CAAC,IAAI,CAAC;EACpBM,IAAI,EAAEL,EAAA,EAAK,CAAC;IAAEM,KAAK,EAAE;MAAEC,CAAC,EAAE;IAAC;EAAE,CAAE,CAAC;EAChCC,GAAG,EAAER,EAAA,EAAK,CAAC;IAAEM,KAAK,EAAE;EAAI,CAAE,CAAC;EAC3BG,GAAG,EAAET,EAAA,EAAK,CAAC,IAAI,CAAC;EAChBU,IAAI,EAAET,EAAA,EAAM,CAAC,IAAI,CAAC;EAClBU,MAAM,EAAEV,EAAA,EAAM,CAAC,IAAI;CACpB,CAAC","names":["$0","$1","$2","found","x","missing","deep","inner","z","cut","top","loud","silent"],"ignoreList":[],"sources":["optional-chain.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

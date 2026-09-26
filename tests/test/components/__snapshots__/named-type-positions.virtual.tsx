@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A type the host declared, named from inside a script: as a type argument, as
@@ -16,14 +17,14 @@ type Row = { id: number; label: string };
 
 async function Rows() {
   return cs.lift((() => {
-    const __cs_rows = cs.splice((state) satisfies typeof cs.Spliceable)<Row[]>([]);
+    const __cs_rows = cs.splice((createSignal) satisfies typeof cs.Spliceable)<Row[]>([]);
     const __cs_add = (__cs_row: Row) => {
-        __cs_rows.set([__cs_row]);
+        __cs_rows[1]([__cs_row]);
     };
     const __cs_label = (__cs_row: Row) => {
         return __cs_row.label;
     };
-    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_add({ id: 1, label: "one" }))}>add</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_rows.get())}>{cs.lift((__cs_row: Row) => <span>{cs.lift(__cs_label(__cs_row))}</span>)}</For>)}</div>)}</div>;
+    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_add({ id: 1, label: "one" }))}>add</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_rows[0]())}>{cs.lift((__cs_row: Row) => <span>{cs.lift(__cs_label(__cs_row))}</span>)}</For>)}</div>)}</div>;
 })());
 }
 

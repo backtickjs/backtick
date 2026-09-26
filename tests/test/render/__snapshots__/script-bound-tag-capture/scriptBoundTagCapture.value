@@ -16,7 +16,7 @@
   <b>
     {"n 0"}
   </b>
-  <button onclick={[function]}>
+  <button>
     {"more"}
   </button>
 </div>

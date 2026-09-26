@@ -1,31 +1,56 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>add</span><div>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
     const $entry = ($0, $1) => {
       const rows = $0()([]);
       const add = (row) => {
-        rows.set([row]);
+        rows[1]([row]);
       };
       const label = (row) => {
         return row.label;
       };
-      return (
-        <div>
-          <span onclick={() => add({ id: 1, label: "one" })}>add</span>
-          <div>
-            <$1 each={rows.get()}>{(row) => <span>{label(row)}</span>}</$1>
-          </div>
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _el$2.$$click = () =>
+          add({
+            id: 1,
+            label: "one",
+          });
+        _$insert(
+          _el$3,
+          _$createComponent($1, {
+            get each() {
+              return rows[0]();
+            },
+            children: (row) =>
+              (() => {
+                var _el$4 = _tmpl$2();
+                _$insert(_el$4, () => label(row));
+                return _el$4;
+              })(),
+          }),
+        );
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   return jsx(
     () =>
       f1(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         ($0) =>
-          jsx("for", {
+          jsx($modules["solid-js"].For, {
             each: () => $0.each,
+            fallback: () => $0.fallback,
             children: () => $0.children,
           }),
       ),

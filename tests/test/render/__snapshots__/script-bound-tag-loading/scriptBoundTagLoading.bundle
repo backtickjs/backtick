@@ -1,29 +1,51 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { memo: _$memo } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(
+        `<div><button>load</button><button>more`,
+      ),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<i>loading`);
     const $entry = ($0, $1) => {
       const count = $0()(0);
       const drawn = $0()(null);
       const Badge = (props) => {
-        const held = drawn.get();
+        const held = drawn[0]();
         return held === null ? null : eval(held)(props);
       };
-      return (
-        <div>
-          {drawn.get() === null ? (
-            <i>loading</i>
-          ) : (
-            <Badge count={count.get()} />
-          )}
-          <button onclick={() => drawn.set($1())}>load</button>
-          <button onclick={() => count.set(count.get() + 1)}>more</button>
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _$insert(
+          _el$,
+          (() => {
+            var _c$ = _$memo(() => drawn[0]() === null);
+            return () =>
+              _c$()
+                ? _tmpl$2()
+                : _$createComponent(Badge, {
+                    get count() {
+                      return count[0]();
+                    },
+                  });
+          })(),
+          _el$2,
+        );
+        _el$2.$$click = () => drawn[1]($1());
+        _el$3.$$click = () => count[1](count[0]() + 1);
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   return f1(
-    () => state,
+    () => $modules["solid-js"].createSignal,
     () =>
-      '($d => {\n  const f1 = (() => {\nconst $entry = () => (props) => \u003cb>{"count " + props.count}\u003c/b>;\nreturn $entry;\n})();\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\nconst $entry = () => props => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, () => "count " + props.count);\n  return _el$;\n})();\nreturn $entry;\n})();\n  return f1();\n})([])',
   );
 })([]);

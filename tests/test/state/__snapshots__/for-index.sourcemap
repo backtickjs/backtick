@@ -3,7 +3,7 @@ const                             → const
 __cs_names                        → names
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 string                            → string
@@ -27,14 +27,16 @@ const                             → const
 __cs_held                         → held
  =                                →  = 
 __cs_names                        → names
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 ;                                 → ;
 \n                                → \n      
 __cs_names                        → names
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 [                                 → [
 __cs_held                         → held
@@ -81,8 +83,9 @@ For                               → For
 each                              → each
 ={cs.lift(                        → ={
 __cs_names                        → names
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}                                → }
 >{cs.lift(                        → >\n            {
@@ -93,10 +96,8 @@ string                            → string
 ,                                 → , 
 __cs_index                        → index
 :                                 → : 
-Signal                            → Signal
-<                                 → <
+() =>                             → () => 
 number                            → number
->                                 → >
 ) =>                              → ) => 
 <                                 → (\n              <
 span                              → span
@@ -106,8 +107,6 @@ __cs_name                         → name
 " at "                            → " at "
  +                                →  + 
 __cs_index                        → index
-.                                 → .
-get                               → get
 ()                                → ()
 )}</                              → }</
 span                              → span

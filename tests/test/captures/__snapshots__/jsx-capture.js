@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -17,8 +17,8 @@ const script = cs.create(
             "g38hwxw7rhvi:13:27",
             { params: [{ kind: "capture", key: "x$g38hwxw7rhvi$0" }] },
             {
-              code: "export default ($0) => () => $0;",
-              map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"eAY8B,QAAA,GAAG,EAAE,CAAC,EAAC"}',
+              code: "export default $0 => () => $0;",
+              map: '{"version":3,"mappings":"eAY8BA,EAAA,UAAMA,EAAC","names":["$0"],"ignoreList":[],"sources":["jsx-capture.test.tsx"]}',
               imports: [],
               exportAt: 0,
             },
@@ -29,8 +29,8 @@ const script = cs.create(
     ],
   },
   {
-    code: "export default ($0) => () => {\n    const x = 1;\n    return $0(x);\n};",
-    map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"eAU6C,QAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC"}',
+    code: "export default $0 => () => {\n  const x = 1;\n  return $0(x);\n};",
+    map: '{"version":3,"mappings":"eAU6CA,EAAA,UAAK;EAChD,MAAMC,CAAC,GAAG,CAAC;EACX,OAAOD,EAAA,CAAAC,CAAA,CAAC;AACV,CAAC","names":["$0","x"],"ignoreList":[],"sources":["jsx-capture.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },

@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // `typeof` answers JavaScript's names, since TypeScript narrows by them: every
@@ -9,7 +10,7 @@ it("typeofTable", async (t) => {
     t,
     "typeofTable",
     cs`{
-      const count = $state(0);
+      const count = $createSignal(0);
       return [
         typeof undefined,
         typeof null,

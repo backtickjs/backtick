@@ -1,14 +1,15 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A tag naming a function the script holds — here a bundle that takes props,
 // evaluated. It is called with its props read on access, the way a component's
-// are, so `count` follows the cell without the badge being drawn again.
+// are, so `count` follows the signal without the badge being drawn again.
 const badge = await bundler.run(
   cs.lift((__cs_props: {
     count: number;
@@ -16,9 +17,9 @@ const badge = await bundler.run(
 );
 
 const scriptBoundTag = cs.lift((() => {
-    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
+    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
     const __cs_Badge = eval(cs.splice((badge) satisfies typeof cs.Spliceable));
-    return <div>{cs.lift(<__cs_Badge count={__cs_count.get()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>more</button>)}</div>;
+    return <div>{cs.lift(<__cs_Badge count={__cs_count[0]()}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>more</button>)}</div>;
 })());
 
 it("scriptBoundTag", async (t) => {

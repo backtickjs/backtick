@@ -1,36 +1,48 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
     const $entry = ($0, $1, $2) => {
       const asked = $0()(0);
-      return (
-        <div>
-          <span>{"asked " + asked.get()}</span>
-          <$2
-            ask={() => {
-              asked.set(asked.get() + 1);
-              return asked.get() > 4 ? null : $1();
-            }}
-          />
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _$insert(_el$2, () => "asked " + asked[0]());
+        _$insert(
+          _el$,
+          _$createComponent($2, {
+            ask: () => {
+              asked[1](asked[0]() + 1);
+              return asked[0]() > 4 ? null : $1();
+            },
+          }),
+          null,
+        );
+        return _el$;
+      })();
     };
     return $entry;
   })();
   const f2 = (() => {
+    const { memo: _$memo } = $modules["solid-js/web"];
     const $entry = ($0, $1, $2) => {
       const drawn = $0()(null);
-      const started = $1().setTimeout(() => drawn.set($2()()), 0);
-      return <>{drawn.get() === null ? null : eval(drawn.get())}</>;
+      const started = $1().setTimeout(() => drawn[1]($2()()), 0);
+      return _$memo(() =>
+        _$memo(() => drawn[0]() === null)() ? null : eval(drawn[0]()),
+      );
     };
     return $entry;
   })();
   return f1(
-    () => state,
+    () => $modules["solid-js"].createSignal,
     () =>
-      '($d => {\n  const f1 = (() => {\nconst $entry = () => \u003cem>{"answered"}\u003c/em>;\nreturn $entry;\n})();\n  return jsx(() => f1(), {});\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>answered`);\nconst $entry = () => _tmpl$();\nreturn $entry;\n})();\n  return jsx(() => f1(), {});\n})([])',
     ($0) =>
       f2(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         () => window,
         () => $0.ask,
       ),

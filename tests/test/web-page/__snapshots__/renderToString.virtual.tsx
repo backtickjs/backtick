@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { defineClient } from "@backtickjs/web-page/client";
 import { renderToString } from "@backtickjs/web-page/server";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { pageOf } from "./page.ts";
 

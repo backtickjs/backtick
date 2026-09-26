@@ -14,8 +14,8 @@ it("runtimeValues", async (t) => {
         ],
       },
       {
-        code: "export default ($0, $1) => ({\n    list: $0(),\n    obj: $1(),\n});",
-        map: '{"version":3,"file":"runtime-values.test.jsx","sourceRoot":"","sources":["runtime-values.test.tsx"],"names":[],"mappings":"eAQO,YAAA,CAAC;IACF,IAAI,EAAE,IAAC;IACP,GAAG,EAAE,IAAC;CACP,CAAC"}',
+        code: "export default ($0, $1) => ({\n  list: $0(),\n  obj: $1()\n});",
+        map: '{"version":3,"mappings":"eAQO,CAAAA,EAAA,EAAAC,EAAA,MAAC;EACFC,IAAI,EAAEF,EAAA,EAAC;EACPG,GAAG,EAAEF,EAAA;CACN,CAAC","names":["$0","$1","list","obj"],"ignoreList":[],"sources":["runtime-values.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

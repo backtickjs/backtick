@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A component whose whole body is client code answers with the script rather
@@ -11,8 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.lift((() => {
-    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(2);
-    return <em>{cs.lift(__cs_n.get())}</em>;
+    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(2);
+    return <em>{cs.lift(__cs_n[0]())}</em>;
 })());
 }
 

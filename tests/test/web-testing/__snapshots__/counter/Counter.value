@@ -1,5 +1,5 @@
 <div>
-  <button onclick={[function]}>
+  <button>
     {"Add"}
   </button>
   <p>

@@ -11,8 +11,8 @@ it("hashKeyData", async (t) => {
       "m50lyvn0wkye:8:39",
       { params: [{ kind: "splice", value: { "#call": "#f0" }, bindings: [] }] },
       {
-        code: "export default ($0) => () => $0();",
-        map: '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["hash-key-data.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+        code: "export default $0 => () => $0();",
+        map: '{"version":3,"mappings":"eAO0CA,EAAA,UAAMA,EAAA,EAAC","names":["$0"],"ignoreList":[],"sources":["hash-key-data.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

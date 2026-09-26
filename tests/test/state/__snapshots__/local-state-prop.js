@@ -1,202 +1,33 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
-// A cell crossing a component boundary: declared once by the script that draws
-// the pair, handed to each child as a prop, so both read one storage. The cell
-// is an ordinary client value — the prop takes it the way it takes any other —
+// A signal crossing a component boundary: declared once by the script that
+// draws the pair, handed to each child as a prop, so both read one storage. The
+// signal is an ordinary client value — the prop takes it the way it takes any other —
 // which is what makes a write through either child reach the same storage.
 const SharedCounter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
-      "1myb4rrcna327:15:11",
+      "sm4cgpukv0uc:17:11",
       { params: [{ kind: "splice", value: size, bindings: [] }] },
-      () => ({
-        type: "BinaryExpression",
-        loc: { start: { line: 15, column: 14 }, end: { line: 15, column: 48 } },
-        operator: "+",
-        left: {
-          type: "BinaryExpression",
-          loc: {
-            start: { line: 15, column: 14 },
-            end: { line: 15, column: 41 },
-          },
-          operator: "+",
-          left: {
-            type: "Literal",
-            loc: {
-              start: { line: 15, column: 14 },
-              end: { line: 15, column: 27 },
-            },
-            value: "font-size: ",
-          },
-          right: {
-            type: "CallExpression",
-            loc: {
-              start: { line: 15, column: 30 },
-              end: { line: 15, column: 41 },
-            },
-            callee: {
-              type: "MemberExpression",
-              loc: {
-                start: { line: 15, column: 30 },
-                end: { line: 15, column: 39 },
-              },
-              object: {
-                type: "Splice",
-                loc: {
-                  start: { line: 15, column: 30 },
-                  end: { line: 15, column: 35 },
-                },
-                param: 0,
-              },
-              property: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 15, column: 36 },
-                  end: { line: 15, column: 39 },
-                },
-                name: "get",
-              },
-              computed: false,
-              optional: false,
-            },
-            arguments: [],
-            optional: false,
-          },
-        },
-        right: {
-          type: "Literal",
-          loc: {
-            start: { line: 15, column: 44 },
-            end: { line: 15, column: 48 },
-          },
-          value: "px",
-        },
-      }),
       {
-        code: 'export default ($0) => "font-size: " + $0().get() + "px";',
-        map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAcc,QAAA,aAAa,GAAG,IAAK,CAAC,GAAG,EAAE,GAAG,IAAI"}',
+        code: 'export default $0 => "font-size: " + $0()[0]() + "px";',
+        map: '{"version":3,"mappings":"eAgBcA,EAAA,iBAAa,GAAGA,EAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI","names":["$0"],"ignoreList":[],"sources":["local-state-prop.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },
     ),
     onclick: cs.create(
-      "1myb4rrcna327:16:13",
+      "sm4cgpukv0uc:18:13",
       { params: [{ kind: "splice", value: size, bindings: [] }] },
-      () => ({
-        type: "ArrowFunctionExpression",
-        loc: { start: { line: 16, column: 16 }, end: { line: 18, column: 5 } },
-        params: [],
-        body: {
-          type: "BlockStatement",
-          loc: {
-            start: { line: 16, column: 22 },
-            end: { line: 18, column: 5 },
-          },
-          body: [
-            {
-              type: "ExpressionStatement",
-              loc: {
-                start: { line: 17, column: 6 },
-                end: { line: 17, column: 33 },
-              },
-              expression: {
-                type: "CallExpression",
-                loc: {
-                  start: { line: 17, column: 6 },
-                  end: { line: 17, column: 32 },
-                },
-                callee: {
-                  type: "MemberExpression",
-                  loc: {
-                    start: { line: 17, column: 6 },
-                    end: { line: 17, column: 15 },
-                  },
-                  object: {
-                    type: "Splice",
-                    loc: {
-                      start: { line: 17, column: 6 },
-                      end: { line: 17, column: 11 },
-                    },
-                    param: 0,
-                  },
-                  property: {
-                    type: "Identifier",
-                    loc: {
-                      start: { line: 17, column: 12 },
-                      end: { line: 17, column: 15 },
-                    },
-                    name: "set",
-                  },
-                  computed: false,
-                  optional: false,
-                },
-                arguments: [
-                  {
-                    type: "BinaryExpression",
-                    loc: {
-                      start: { line: 17, column: 16 },
-                      end: { line: 17, column: 31 },
-                    },
-                    operator: "+",
-                    left: {
-                      type: "CallExpression",
-                      loc: {
-                        start: { line: 17, column: 16 },
-                        end: { line: 17, column: 27 },
-                      },
-                      callee: {
-                        type: "MemberExpression",
-                        loc: {
-                          start: { line: 17, column: 16 },
-                          end: { line: 17, column: 25 },
-                        },
-                        object: {
-                          type: "Splice",
-                          loc: {
-                            start: { line: 17, column: 16 },
-                            end: { line: 17, column: 21 },
-                          },
-                          param: 0,
-                        },
-                        property: {
-                          type: "Identifier",
-                          loc: {
-                            start: { line: 17, column: 22 },
-                            end: { line: 17, column: 25 },
-                          },
-                          name: "get",
-                        },
-                        computed: false,
-                        optional: false,
-                      },
-                      arguments: [],
-                      optional: false,
-                    },
-                    right: {
-                      type: "Literal",
-                      loc: {
-                        start: { line: 17, column: 30 },
-                        end: { line: 17, column: 31 },
-                      },
-                      value: 1,
-                    },
-                  },
-                ],
-                optional: false,
-              },
-            },
-          ],
-        },
-        expression: false,
-      }),
       {
-        code: "export default ($0) => () => {\n    $0().set($0().get() + 1);\n};",
-        map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAegB,QAAA,GAAG,EAAE;IACf,IAAK,CAAC,GAAG,CAAC,IAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;AAC7B,CAAC"}',
+        code: "export default $0 => () => {\n  $0()[1]($0()[0]() + 1);\n};",
+        map: '{"version":3,"mappings":"eAiBgBA,EAAA,UAAK;EACfA,EAAA,EAAK,CAAC,CAAC,CAAC,CAACA,EAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;AAC1B,CAAC","names":["$0"],"ignoreList":[],"sources":["local-state-prop.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },
@@ -205,277 +36,45 @@ const SharedCounter = async ({ size }) =>
   });
 async function SharingPanel() {
   return cs.create(
-    "1myb4rrcna327:25:9",
+    "sm4cgpukv0uc:27:9",
     {
       params: [
-        { kind: "splice", value: state, bindings: [] },
+        { kind: "splice", value: createSignal, bindings: [] },
         { kind: "tag", value: SharedCounter },
       ],
     },
-    () => ({
-      type: "BlockStatement",
-      loc: { start: { line: 25, column: 12 }, end: { line: 33, column: 3 } },
-      body: [
+    {
+      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`);\nexport default ($0, $1) => {\n  const size = $0()(16);\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, _$createComponent($1, {\n      size: size\n    }), null);\n    _$insert(_el$, _$createComponent($1, {\n      size: size\n    }), null);\n    return _el$;\n  })();\n};',
+      map: '{"version":3,"mappings":";;;;eA0BY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,IAAI,GAAGF,EAAA,EAAa,CAAC,EAAE,CAAC;EAC9B;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CAEKL,EAAa;MAACC,IAAI,EAAEA;IAAI;IAAAG,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CACxBL,EAAa;MAACC,IAAI,EAAEA;IAAI;IAAA,OAAAC,IAAA;EAAA;AAG/B,CAAC","names":["$0","$1","size","_el$","_tmpl$","_$insert","_$createComponent"],"ignoreList":[],"sources":["local-state-prop.test.tsx"]}',
+      imports: [
         {
-          type: "VariableDeclaration",
-          loc: {
-            start: { line: 26, column: 4 },
-            end: { line: 26, column: 28 },
-          },
-          kind: "const",
-          declarations: [
-            {
-              type: "VariableDeclarator",
-              loc: {
-                start: { line: 26, column: 10 },
-                end: { line: 26, column: 27 },
-              },
-              id: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 26, column: 10 },
-                  end: { line: 26, column: 14 },
-                },
-                name: "size",
-                key: "size$1myb4rrcna327$0",
-              },
-              init: {
-                type: "CallExpression",
-                loc: {
-                  start: { line: 26, column: 17 },
-                  end: { line: 26, column: 27 },
-                },
-                callee: {
-                  type: "Splice",
-                  loc: {
-                    start: { line: 26, column: 17 },
-                    end: { line: 26, column: 23 },
-                  },
-                  param: 0,
-                },
-                arguments: [
-                  {
-                    type: "Literal",
-                    loc: {
-                      start: { line: 26, column: 24 },
-                      end: { line: 26, column: 26 },
-                    },
-                    value: 16,
-                  },
-                ],
-                optional: false,
-              },
-            },
-          ],
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
         },
         {
-          type: "ReturnStatement",
-          loc: { start: { line: 27, column: 4 }, end: { line: 32, column: 6 } },
-          argument: {
-            type: "JSXElement",
-            loc: {
-              start: { line: 28, column: 6 },
-              end: { line: 31, column: 12 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 28, column: 6 },
-                end: { line: 28, column: 11 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 28, column: 7 },
-                  end: { line: 28, column: 10 },
-                },
-                name: "div",
-              },
-              attributes: [],
-              selfClosing: false,
-            },
-            children: [
-              {
-                type: "JSXText",
-                loc: {
-                  start: { line: 29, column: 8 },
-                  end: { line: 29, column: 8 },
-                },
-                value: "\n        ",
-                raw: "\n        ",
-              },
-              {
-                type: "JSXElement",
-                loc: {
-                  start: { line: 29, column: 8 },
-                  end: { line: 29, column: 37 },
-                },
-                openingElement: {
-                  type: "JSXOpeningElement",
-                  loc: {
-                    start: { line: 29, column: 8 },
-                    end: { line: 29, column: 37 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 29, column: 9 },
-                      end: { line: 29, column: 22 },
-                    },
-                    name: "SharedCounter",
-                    param: 1,
-                  },
-                  attributes: [
-                    {
-                      type: "JSXAttribute",
-                      loc: {
-                        start: { line: 29, column: 23 },
-                        end: { line: 29, column: 34 },
-                      },
-                      name: {
-                        type: "JSXIdentifier",
-                        loc: {
-                          start: { line: 29, column: 23 },
-                          end: { line: 29, column: 27 },
-                        },
-                        name: "size",
-                      },
-                      value: {
-                        type: "JSXExpressionContainer",
-                        loc: {
-                          start: { line: 29, column: 28 },
-                          end: { line: 29, column: 34 },
-                        },
-                        expression: {
-                          type: "Identifier",
-                          loc: {
-                            start: { line: 29, column: 29 },
-                            end: { line: 29, column: 33 },
-                          },
-                          name: "size",
-                          key: "size$1myb4rrcna327$0",
-                        },
-                      },
-                    },
-                  ],
-                  selfClosing: true,
-                },
-                children: [],
-                closingElement: null,
-              },
-              {
-                type: "JSXText",
-                loc: {
-                  start: { line: 30, column: 8 },
-                  end: { line: 30, column: 8 },
-                },
-                value: "\n        ",
-                raw: "\n        ",
-              },
-              {
-                type: "JSXElement",
-                loc: {
-                  start: { line: 30, column: 8 },
-                  end: { line: 30, column: 37 },
-                },
-                openingElement: {
-                  type: "JSXOpeningElement",
-                  loc: {
-                    start: { line: 30, column: 8 },
-                    end: { line: 30, column: 37 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 30, column: 9 },
-                      end: { line: 30, column: 22 },
-                    },
-                    name: "SharedCounter",
-                    param: 1,
-                  },
-                  attributes: [
-                    {
-                      type: "JSXAttribute",
-                      loc: {
-                        start: { line: 30, column: 23 },
-                        end: { line: 30, column: 34 },
-                      },
-                      name: {
-                        type: "JSXIdentifier",
-                        loc: {
-                          start: { line: 30, column: 23 },
-                          end: { line: 30, column: 27 },
-                        },
-                        name: "size",
-                      },
-                      value: {
-                        type: "JSXExpressionContainer",
-                        loc: {
-                          start: { line: 30, column: 28 },
-                          end: { line: 30, column: 34 },
-                        },
-                        expression: {
-                          type: "Identifier",
-                          loc: {
-                            start: { line: 30, column: 29 },
-                            end: { line: 30, column: 33 },
-                          },
-                          name: "size",
-                          key: "size$1myb4rrcna327$0",
-                        },
-                      },
-                    },
-                  ],
-                  selfClosing: true,
-                },
-                children: [],
-                closingElement: null,
-              },
-              {
-                type: "JSXText",
-                loc: {
-                  start: { line: 31, column: 6 },
-                  end: { line: 31, column: 6 },
-                },
-                value: "\n      ",
-                raw: "\n      ",
-              },
-            ],
-            closingElement: {
-              type: "JSXClosingElement",
-              loc: {
-                start: { line: 31, column: 6 },
-                end: { line: 31, column: 12 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 31, column: 8 },
-                  end: { line: 31, column: 11 },
-                },
-                name: "div",
-              },
-            },
-          },
+          from: "solid-js/web",
+          range: [55, 105],
+          bindings: [{ name: "insert", local: "_$insert" }],
+        },
+        {
+          from: "solid-js/web",
+          range: [106, 174],
+          bindings: [{ name: "createComponent", local: "_$createComponent" }],
         },
       ],
-    }),
-    {
-      code: "export default ($0, $1) => {\n    const size = $0()(16);\n    return (<div>\n        <$1 size={size}/>\n        <$1 size={size}/>\n      </div>);\n};",
-      map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAwBY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC1B;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC5B;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      exportAt: 222,
     },
   );
 }
 describe("local state", () => {
-  it("a cell passed as a prop is one storage, shared by both children", async () => {
+  it("a signal passed as a prop is one storage, shared by both children", async () => {
     const view = await drawn(_jsx(SharingPanel, {}));
     const [first, second] = children(view);
     assert.ok(first !== undefined && second !== undefined);
     assert.equal(fontSize(first), 16);
     assert.equal(fontSize(second), 16);
-    // The parent declared the cell and handed it to both, so a write through
+    // The parent declared the signal and handed it to both, so a write through
     // one child's handle moves the other's display too.
     await userEvent.click(first);
     assert.equal(fontSize(first), 17);

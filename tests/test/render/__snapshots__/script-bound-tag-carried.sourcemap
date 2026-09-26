@@ -53,7 +53,7 @@ const                             → const
 __cs_count                        → count
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 0                                 → 0
@@ -112,8 +112,9 @@ __cs_Badge                        → Badge
 n                                 → n
 ={                                → ={
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 }                                 → }
 >{                                → >\n            
@@ -123,8 +124,9 @@ u                                 → u
 "kid "                            → "kid "
  +                                →  + 
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }</
 u                                 → u
@@ -144,12 +146,14 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () =>                             → () => 
 __cs_count                        → count
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1

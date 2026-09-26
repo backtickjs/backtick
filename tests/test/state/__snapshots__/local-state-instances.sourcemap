@@ -3,7 +3,7 @@ const                             → const
 __cs_size                         → size
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 16                                → 16
@@ -19,8 +19,9 @@ style                             → style
 "font-size: "                     → "font-size: "
  +                                →  + 
 __cs_size                         → size
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 "px"                              → "px"
@@ -30,12 +31,14 @@ onclick                           → onclick
 ={cs.lift(                        → ={
 () => {\n                         → () => {\n          
 __cs_size                         → size
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_size                         → size
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1

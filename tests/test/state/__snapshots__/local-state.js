@@ -1,359 +1,45 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { drawn, fontSize } from "./dom.ts";
-// A cell a script declares, read and written by what it draws. The script owns
-// the storage, so the display and the handler are two readers of one binding
-// and share one cell: `read()` is an input — a value that re-evaluates when the
-// cell changes — and `write` is an effect, which only an action can perform.
+// A signal a script declares, read and written by what it draws. The script
+// owns the storage, so the display and the handler are two readers of one
+// binding and share one signal: its getter is an input — a value that
+// re-evaluates when the signal changes — and its setter an effect.
 async function Stepper() {
   return cs.create(
-    "2gygj47yf1nf5:13:9",
-    { params: [{ kind: "splice", value: state, bindings: [] }] },
-    () => ({
-      type: "BlockStatement",
-      loc: { start: { line: 13, column: 12 }, end: { line: 25, column: 3 } },
-      body: [
+    "2d5qp9itzo9r0:14:9",
+    { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+    {
+      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { style as _$style } from "solid-js/web";\nimport { effect as _$effect } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>press`);\nexport default $0 => {\n  const size = $0()(16);\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n      size[1](size[0]() + 1);\n    };\n    _$effect(_$p => _$style(_el$, "font-size: " + size[0]() + "px", _$p));\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
+      map: '{"version":3,"mappings":";;;;;eAaYA,EAAA;EACR,MAAMC,IAAI,GAAGD,EAAA,EAAa,CAAC,EAAE,CAAC;EAC9B;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGa,MAAK;MACZH,IAAI,CAAC,CAAC,CAAC,CAACA,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACxB,CAAC;IAAAI,QAAA,CAAAC,GAAA,IAAAC,OAAA,CAAAL,IAAA,EAHM,aAAa,GAAGD,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAK,GAAA;IAAA,OAAAJ,IAAA;EAAA;AAQ7C,CAAC;AAAAM,gBAAA","names":["$0","size","_el$","_tmpl$","$$click","_$effect","_$p","_$style","_$delegateEvents"],"ignoreList":[],"sources":["local-state.test.tsx"]}',
+      imports: [
         {
-          type: "VariableDeclaration",
-          loc: {
-            start: { line: 14, column: 4 },
-            end: { line: 14, column: 28 },
-          },
-          kind: "const",
-          declarations: [
-            {
-              type: "VariableDeclarator",
-              loc: {
-                start: { line: 14, column: 10 },
-                end: { line: 14, column: 27 },
-              },
-              id: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 14, column: 10 },
-                  end: { line: 14, column: 14 },
-                },
-                name: "size",
-                key: "size$2gygj47yf1nf5$0",
-              },
-              init: {
-                type: "CallExpression",
-                loc: {
-                  start: { line: 14, column: 17 },
-                  end: { line: 14, column: 27 },
-                },
-                callee: {
-                  type: "Splice",
-                  loc: {
-                    start: { line: 14, column: 17 },
-                    end: { line: 14, column: 23 },
-                  },
-                  param: 0,
-                },
-                arguments: [
-                  {
-                    type: "Literal",
-                    loc: {
-                      start: { line: 14, column: 24 },
-                      end: { line: 14, column: 26 },
-                    },
-                    value: 16,
-                  },
-                ],
-                optional: false,
-              },
-            },
-          ],
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
         },
         {
-          type: "ReturnStatement",
-          loc: { start: { line: 15, column: 4 }, end: { line: 24, column: 6 } },
-          argument: {
-            type: "JSXElement",
-            loc: {
-              start: { line: 16, column: 6 },
-              end: { line: 23, column: 13 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 16, column: 6 },
-                end: { line: 21, column: 7 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 16, column: 7 },
-                  end: { line: 16, column: 11 },
-                },
-                name: "span",
-              },
-              attributes: [
-                {
-                  type: "JSXAttribute",
-                  loc: {
-                    start: { line: 17, column: 8 },
-                    end: { line: 17, column: 49 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 17, column: 8 },
-                      end: { line: 17, column: 13 },
-                    },
-                    name: "style",
-                  },
-                  value: {
-                    type: "JSXExpressionContainer",
-                    loc: {
-                      start: { line: 17, column: 14 },
-                      end: { line: 17, column: 49 },
-                    },
-                    expression: {
-                      type: "BinaryExpression",
-                      loc: {
-                        start: { line: 17, column: 15 },
-                        end: { line: 17, column: 48 },
-                      },
-                      operator: "+",
-                      left: {
-                        type: "BinaryExpression",
-                        loc: {
-                          start: { line: 17, column: 15 },
-                          end: { line: 17, column: 41 },
-                        },
-                        operator: "+",
-                        left: {
-                          type: "Literal",
-                          loc: {
-                            start: { line: 17, column: 15 },
-                            end: { line: 17, column: 28 },
-                          },
-                          value: "font-size: ",
-                        },
-                        right: {
-                          type: "CallExpression",
-                          loc: {
-                            start: { line: 17, column: 31 },
-                            end: { line: 17, column: 41 },
-                          },
-                          callee: {
-                            type: "MemberExpression",
-                            loc: {
-                              start: { line: 17, column: 31 },
-                              end: { line: 17, column: 39 },
-                            },
-                            object: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 17, column: 31 },
-                                end: { line: 17, column: 35 },
-                              },
-                              name: "size",
-                              key: "size$2gygj47yf1nf5$0",
-                            },
-                            property: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 17, column: 36 },
-                                end: { line: 17, column: 39 },
-                              },
-                              name: "get",
-                            },
-                            computed: false,
-                            optional: false,
-                          },
-                          arguments: [],
-                          optional: false,
-                        },
-                      },
-                      right: {
-                        type: "Literal",
-                        loc: {
-                          start: { line: 17, column: 44 },
-                          end: { line: 17, column: 48 },
-                        },
-                        value: "px",
-                      },
-                    },
-                  },
-                },
-                {
-                  type: "JSXAttribute",
-                  loc: {
-                    start: { line: 18, column: 8 },
-                    end: { line: 20, column: 10 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 18, column: 8 },
-                      end: { line: 18, column: 15 },
-                    },
-                    name: "onclick",
-                  },
-                  value: {
-                    type: "JSXExpressionContainer",
-                    loc: {
-                      start: { line: 18, column: 16 },
-                      end: { line: 20, column: 10 },
-                    },
-                    expression: {
-                      type: "ArrowFunctionExpression",
-                      loc: {
-                        start: { line: 18, column: 17 },
-                        end: { line: 20, column: 9 },
-                      },
-                      params: [],
-                      body: {
-                        type: "BlockStatement",
-                        loc: {
-                          start: { line: 18, column: 23 },
-                          end: { line: 20, column: 9 },
-                        },
-                        body: [
-                          {
-                            type: "ExpressionStatement",
-                            loc: {
-                              start: { line: 19, column: 10 },
-                              end: { line: 19, column: 35 },
-                            },
-                            expression: {
-                              type: "CallExpression",
-                              loc: {
-                                start: { line: 19, column: 10 },
-                                end: { line: 19, column: 34 },
-                              },
-                              callee: {
-                                type: "MemberExpression",
-                                loc: {
-                                  start: { line: 19, column: 10 },
-                                  end: { line: 19, column: 18 },
-                                },
-                                object: {
-                                  type: "Identifier",
-                                  loc: {
-                                    start: { line: 19, column: 10 },
-                                    end: { line: 19, column: 14 },
-                                  },
-                                  name: "size",
-                                  key: "size$2gygj47yf1nf5$0",
-                                },
-                                property: {
-                                  type: "Identifier",
-                                  loc: {
-                                    start: { line: 19, column: 15 },
-                                    end: { line: 19, column: 18 },
-                                  },
-                                  name: "set",
-                                },
-                                computed: false,
-                                optional: false,
-                              },
-                              arguments: [
-                                {
-                                  type: "BinaryExpression",
-                                  loc: {
-                                    start: { line: 19, column: 19 },
-                                    end: { line: 19, column: 33 },
-                                  },
-                                  operator: "+",
-                                  left: {
-                                    type: "CallExpression",
-                                    loc: {
-                                      start: { line: 19, column: 19 },
-                                      end: { line: 19, column: 29 },
-                                    },
-                                    callee: {
-                                      type: "MemberExpression",
-                                      loc: {
-                                        start: { line: 19, column: 19 },
-                                        end: { line: 19, column: 27 },
-                                      },
-                                      object: {
-                                        type: "Identifier",
-                                        loc: {
-                                          start: { line: 19, column: 19 },
-                                          end: { line: 19, column: 23 },
-                                        },
-                                        name: "size",
-                                        key: "size$2gygj47yf1nf5$0",
-                                      },
-                                      property: {
-                                        type: "Identifier",
-                                        loc: {
-                                          start: { line: 19, column: 24 },
-                                          end: { line: 19, column: 27 },
-                                        },
-                                        name: "get",
-                                      },
-                                      computed: false,
-                                      optional: false,
-                                    },
-                                    arguments: [],
-                                    optional: false,
-                                  },
-                                  right: {
-                                    type: "Literal",
-                                    loc: {
-                                      start: { line: 19, column: 32 },
-                                      end: { line: 19, column: 33 },
-                                    },
-                                    value: 1,
-                                  },
-                                },
-                              ],
-                              optional: false,
-                            },
-                          },
-                        ],
-                      },
-                      expression: false,
-                    },
-                  },
-                },
-              ],
-              selfClosing: false,
-            },
-            children: [
-              {
-                type: "JSXText",
-                loc: {
-                  start: { line: 22, column: 8 },
-                  end: { line: 23, column: 6 },
-                },
-                value: "\n        press\n      ",
-                raw: "\n        press\n      ",
-              },
-            ],
-            closingElement: {
-              type: "JSXClosingElement",
-              loc: {
-                start: { line: 23, column: 6 },
-                end: { line: 23, column: 13 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 23, column: 8 },
-                  end: { line: 23, column: 12 },
-                },
-                name: "span",
-              },
-            },
-          },
+          from: "solid-js/web",
+          range: [55, 121],
+          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
+        },
+        {
+          from: "solid-js/web",
+          range: [122, 170],
+          bindings: [{ name: "style", local: "_$style" }],
+        },
+        {
+          from: "solid-js/web",
+          range: [171, 221],
+          bindings: [{ name: "effect", local: "_$effect" }],
         },
       ],
-    }),
-    {
-      code: 'export default ($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size.get() + "px"} onclick={() => {\n            size.set(size.get() + 1);\n        }}>\n        press\n      </span>);\n};',
-      map: '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["local-state.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      exportAt: 275,
     },
   );
 }

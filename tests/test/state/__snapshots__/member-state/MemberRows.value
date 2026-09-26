@@ -1,12 +1,12 @@
 <div>
   <ul class="rows">
-    <li onclick={[function]}>
+    <li>
       {"row 1"}
     </li>
-    <li onclick={[function]}>
+    <li>
       {"row 2"}
     </li>
-    <li onclick={[function]}>
+    <li>
       {"row 3"}
     </li>
   </ul>

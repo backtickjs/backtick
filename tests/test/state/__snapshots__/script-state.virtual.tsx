@@ -1,14 +1,15 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // Storage a script declares for itself, rather than one a component owns and
-// splices in. `$state(...)` is an ordinary call of an imported value, and the
-// cell is what the call answers with: each time it is evaluated there is
-// another cell, which is what lets a script build a row that carries its own.
+// splices in. `$createSignal(...)` is an ordinary call of an imported value, and
+// the signal is what the call answers with: each time it is evaluated there is
+// another signal, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs.lift((__cs_label: string) => {
-    return { label: cs.splice((state) satisfies typeof cs.Spliceable)(__cs_label) };
+    return { label: cs.splice((createSignal) satisfies typeof cs.Spliceable)(__cs_label) };
 });
 
   return (
@@ -16,10 +17,10 @@ async function ScriptRows() {
       style={cs.lift("font-size: 16px")}
       onclick={cs.lift(() => {
     const __cs_row = cs.splice((build) satisfies typeof cs.Spliceable)("one");
-    __cs_row.label.set(__cs_row.label.get() + " !!!");
+    __cs_row.label[1](__cs_row.label[0]() + " !!!");
 })}
     >
-      {cs.lift(cs.splice((build) satisfies typeof cs.Spliceable)("one").label.get())}
+      {cs.lift(cs.splice((build) satisfies typeof cs.Spliceable)("one").label[0]())}
     </span>
   );
 }

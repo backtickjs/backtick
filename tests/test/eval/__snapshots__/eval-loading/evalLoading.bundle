@@ -1,14 +1,25 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { memo: _$memo } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<span>loading…`);
     const $entry = ($0) => {
       const held = $0()(null);
-      return (
-        <div>
-          {held.get() === null ? <span>loading…</span> : eval(held.get())}
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$();
+        _$insert(
+          _el$,
+          (() => {
+            var _c$ = _$memo(() => held[0]() === null);
+            return () => (_c$() ? _tmpl$2() : eval(held[0]()));
+          })(),
+        );
+        return _el$;
+      })();
     };
     return $entry;
   })();
-  return f1(() => state);
+  return f1(() => $modules["solid-js"].createSignal);
 })([]);

@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
@@ -7,7 +7,7 @@ import {
   queryHelpers,
   render,
   screen,
-} from "@backtickjs/web-testing";
+} from "@backtickjs/solid-js/testing";
 // `render` as React Testing Library's behaves: where it draws, what its
 // queries read, and what `cleanup` takes away.
 const paragraph = (text) => _jsx("p", { children: text });

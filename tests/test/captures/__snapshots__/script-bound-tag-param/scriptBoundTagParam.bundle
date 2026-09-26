@@ -1,22 +1,41 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<ul>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<li>`);
     const $entry = ($0, $1) => {
-      const twice = (Row) => (
-        <ul>
-          {$0(Row)}
-          {$1(Row)}
-        </ul>
+      const twice = (Row) =>
+        (() => {
+          var _el$ = _tmpl$();
+          _$insert(_el$, () => $0(Row), null);
+          _$insert(_el$, () => $1(Row), null);
+          return _el$;
+        })();
+      return twice((p) =>
+        (() => {
+          var _el$2 = _tmpl$2();
+          _$insert(_el$2, () => "row " + p.n);
+          return _el$2;
+        })(),
       );
-      return twice((p) => <li>{"row " + p.n}</li>);
     };
     return $entry;
   })();
   const f2 = (() => {
-    const $entry = ($0) => <$0 n={1} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0) =>
+      _$createComponent($0, {
+        n: 1,
+      });
     return $entry;
   })();
   const f3 = (() => {
-    const $entry = ($0) => <$0 n={2} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0) =>
+      _$createComponent($0, {
+        n: 2,
+      });
     return $entry;
   })();
   return f1(f2, f3);

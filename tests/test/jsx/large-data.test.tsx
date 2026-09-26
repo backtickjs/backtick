@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, For } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { For } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 type Item = { sku: string; qty: number };

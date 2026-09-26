@@ -7,8 +7,8 @@ const orDash = cs.create(
   "2nnj6ebvkk8vj:7:57",
   { params: [] },
   {
-    code: 'export default () => (value) => {\n    if (value === null) {\n        return "-";\n    }\n    return value;\n};',
-    map: '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["null-literal.test.tsx"],"names":[],"mappings":"eAM4D,MAAA,CAC1D,KAAoB,EACpB,EAAE;IACF,IAAI,KAAK,KAAK,IAAI,EAAE,CAAC;QACnB,OAAO,GAAG,CAAC;IACb,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
+    code: 'export default () => value => {\n  if (value === null) {\n    return "-";\n  }\n  return value;\n};',
+    map: '{"version":3,"mappings":"eAM4D,MAC1DA,KAAoB,IAClB;EACF,IAAIA,KAAK,KAAK,IAAI,EAAE;IAClB,OAAO,GAAG;EACZ;EACA,OAAOA,KAAK;AACd,CAAC","names":["value"],"ignoreList":[],"sources":["null-literal.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -21,8 +21,8 @@ it("nullLiteral", async (t) => {
       "2nnj6ebvkk8vj:20:4",
       { params: [{ kind: "splice", value: orDash, bindings: [] }] },
       {
-        code: 'export default ($0) => ({\n    missing: $0()(null),\n    present: $0()("hi"),\n    bare: null,\n});',
-        map: '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["null-literal.test.tsx"],"names":[],"mappings":"eAmBO,QAAA,CAAC;IACF,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,IAAI,EAAE,IAAI;CACX,CAAC"}',
+        code: 'export default $0 => ({\n  missing: $0()(null),\n  present: $0()("hi"),\n  bare: null\n});',
+        map: '{"version":3,"mappings":"eAmBOA,EAAA,KAAC;EACFC,OAAO,EAAED,EAAA,EAAO,CAAC,IAAI,CAAC;EACtBE,OAAO,EAAEF,EAAA,EAAO,CAAC,IAAI,CAAC;EACtBG,IAAI,EAAE;CACP,CAAC","names":["$0","missing","present","bare"],"ignoreList":[],"sources":["null-literal.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

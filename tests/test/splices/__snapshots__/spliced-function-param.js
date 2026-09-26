@@ -20,7 +20,7 @@ it("splicedFunctionParam", async (t) => {
               { params: [] },
               {
                 code: "export default () => () => 2;",
-                map: '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"eAcwB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
+                map: '{"version":3,"mappings":"eAcwB,YAAM,CAAC","names":[],"ignoreList":[],"sources":["spliced-function-param.test.tsx"]}',
                 imports: [],
                 exportAt: 0,
               },
@@ -30,8 +30,8 @@ it("splicedFunctionParam", async (t) => {
         ],
       },
       {
-        code: "export default ($0) => {\n    const apply = (f) => f() + 1;\n    return apply($0());\n};",
-        map: '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,IAAC,CAAc,CAAC;AAC/B,CAAC"}',
+        code: "export default $0 => {\n  const apply = f => f() + 1;\n  return apply($0());\n};",
+        map: '{"version":3,"mappings":"eAYOA,EAAA;EACD,MAAMC,KAAK,GAAIC,CAAe,IAAKA,CAAC,EAAE,GAAG,CAAC;EAC1C,OAAOD,KAAK,CAACD,EAAA,EAAC,CAAc;AAC9B,CAAC","names":["$0","apply","f"],"ignoreList":[],"sources":["spliced-function-param.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

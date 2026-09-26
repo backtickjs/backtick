@@ -1,34 +1,55 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`);
     const $entry = ($0, $1) => {
       const selected = $0()(0);
-      return (
-        <div>
-          <span onclick={() => selected.set(1)}>select</span>
-          <$1 id={0} selected={selected} />
-          <$1 id={1} selected={selected} />
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _el$2.$$click = () => selected[1](1);
+        _$insert(
+          _el$,
+          _$createComponent($1, {
+            id: 0,
+            selected: selected,
+          }),
+          null,
+        );
+        _$insert(
+          _el$,
+          _$createComponent($1, {
+            id: 1,
+            selected: selected,
+          }),
+          null,
+        );
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   const f2 = (() => {
     const $entry = ($0, $1) =>
-      "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";
+      "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";
     return $entry;
   })();
   const f3 = (() => {
-    const $entry = ($0, $1) => "row " + $0() + " of " + $1().get();
+    const $entry = ($0, $1) => "row " + $0() + " of " + $1()[0]();
     return $entry;
   })();
   const f4 = (() => {
-    const $entry = ($0, $1, $2) => ($0().get() === $1() ? $2() : null);
+    const $entry = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
     return $entry;
   })();
   return jsx(
     () =>
       f1(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         ($0) =>
           jsx("div", {
             children: [

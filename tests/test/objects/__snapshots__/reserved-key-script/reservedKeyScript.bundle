@@ -1,6 +1,8 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = () => ({ "#": "value" });
+    const $entry = () => ({
+      "#": "value",
+    });
     return $entry;
   })();
   return f1();

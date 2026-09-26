@@ -1,31 +1,55 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = ($0, $1) => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
+    const { effect: _$effect } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select</span><div>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<a>`);
+    const $entry = ($0, $1, $2) => {
       const selected = $0()(0);
-      return (
-        <div>
-          <span onclick={() => selected.set(1)}>select</span>
-          <div>
-            <$1 each={[0, 1, 2]}>
-              {(id) => (
-                <a href={selected.get() === id ? "#open" : "#closed"}>
-                  {"row " + id}
-                </a>
-              )}
-            </$1>
-          </div>
-        </div>
-      );
+      const isSelected = $1()(selected[0]);
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _el$2.$$click = () => selected[1](1);
+        _$insert(
+          _el$3,
+          _$createComponent($2, {
+            each: [0, 1, 2],
+            children: (id) =>
+              (() => {
+                var _el$4 = _tmpl$2();
+                _$insert(_el$4, "row " + id);
+                _$effect(() =>
+                  _$setAttribute(
+                    _el$4,
+                    "href",
+                    isSelected(id) ? "#open" : "#closed",
+                  ),
+                );
+                return _el$4;
+              })(),
+          }),
+        );
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   return jsx(
     () =>
       f1(
-        () => state,
+        () => $modules["solid-js"].createSignal,
+        () => $modules["solid-js"].createSelector,
         ($0) =>
-          jsx("for", {
+          jsx($modules["solid-js"].For, {
             each: () => $0.each,
+            fallback: () => $0.fallback,
             children: () => $0.children,
           }),
       ),

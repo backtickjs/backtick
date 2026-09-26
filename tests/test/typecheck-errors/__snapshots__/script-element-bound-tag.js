@@ -6,9 +6,15 @@ const held = cs.create(
   "xwewmj2gozc5:6:13",
   { params: [] },
   {
-    code: "export default () => (Tag) => <Tag />;",
-    map: '{"version":3,"file":"script-element-bound-tag.test.jsx","sourceRoot":"","sources":["script-element-bound-tag.test.tsx"],"names":[],"mappings":"eAKgB,MAAA,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,AAAD,EAAG"}',
-    imports: [],
-    exportAt: 0,
+    code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default () => Tag => _$createComponent(Tag, {});',
+    map: '{"version":3,"mappings":";eAKgB,MAACA,GAAW,IAAAC,iBAAA,CAAMD,GAAG,KAAG","names":["Tag","_$createComponent"],"ignoreList":[],"sources":["script-element-bound-tag.test.tsx"]}',
+    imports: [
+      {
+        from: "solid-js/web",
+        range: [0, 68],
+        bindings: [{ name: "createComponent", local: "_$createComponent" }],
+      },
+    ],
+    exportAt: 69,
   },
 );

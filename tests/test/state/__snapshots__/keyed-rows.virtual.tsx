@@ -1,24 +1,25 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
 
-// A keyed list driven by a cell. Every write hands back a new array of new
+// A keyed list driven by a signal. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
 // thing saying which row is which.
 async function SwappableRows() {
   return cs.lift((() => {
-    const __cs_ids = cs.splice((state) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
+    const __cs_ids = cs.splice((createSignal) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
     const __cs_swap = () => {
-        const __cs_held = __cs_ids.get();
-        __cs_ids.set(__cs_held.with(0, __cs_held[2]).with(2, __cs_held[0]));
+        const __cs_held = __cs_ids[0]();
+        __cs_ids[1](__cs_held.with(0, __cs_held[2]).with(2, __cs_held[0]));
     };
     const __cs_drop = () => {
-        __cs_ids.set(__cs_ids.get().filter(__cs_id => __cs_id !== 2));
+        __cs_ids[1](__cs_ids[0]().filter(__cs_id => __cs_id !== 2));
     };
-    return <div>{cs.lift(<span onclick={cs.lift(__cs_swap)}>swap</span>)}{cs.lift(<span onclick={cs.lift(__cs_drop)}>drop</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</div>)}</div>;
+    return <div>{cs.lift(<span onclick={cs.lift(__cs_swap)}>swap</span>)}{cs.lift(<span onclick={cs.lift(__cs_drop)}>drop</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_ids[0]())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</div>)}</div>;
 })());
 }
 

@@ -1,16 +1,21 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = ($0, $1) => (
-      <div>
-        {eval($0())}
-        <b>{eval($1()) + 1}</b>
-      </div>
-    );
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><b>`);
+    const $entry = ($0, $1) =>
+      (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _$insert(_el$, () => eval($0()), _el$2);
+        _$insert(_el$2, () => eval($1()) + 1);
+        return _el$;
+      })();
     return $entry;
   })();
   return f1(
     () =>
-      '($d => {\n  const f1 = (() => {\nconst $entry = ($0) => \u003c$0 each={[1, 2, 3]}>\n    {(n) => \u003cspan>{"item " + n}\u003c/span>}\n  \u003c/$0>;\nreturn $entry;\n})();\n  return jsx(() => f1($0 => jsx("for", {\n    each: () => $0.each,\n    children: () => $0.children\n  })), {});\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cspan>`);\nconst $entry = $0 => _$createComponent($0, {\n  each: [1, 2, 3],\n  children: n => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, "item " + n);\n    return _el$;\n  })()\n});\nreturn $entry;\n})();\n  return jsx(() => f1($0 => jsx($modules["solid-js"].For, {\n    each: () => $0.each,\n    fallback: () => $0.fallback,\n    children: () => $0.children\n  })), {});\n})([])',
     () => "($d => {\n  return 41;\n})([])",
   );
 })([]);

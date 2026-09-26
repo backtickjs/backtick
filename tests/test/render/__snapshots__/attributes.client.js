@@ -1,31 +1,23 @@
 // 111:12
-export default ($0) => {
-    const text = $0()("first");
-    const isOn = $0()(false);
-    return (<div>
-          <input aria-label="text" value={text.get()}/>
-          <input type="checkbox" aria-label="on" checked={isOn.get()}/>
-          <button onclick={() => {
-            text.set("second");
-            isOn.set(true);
-        }}>
-            write
-          </button>
-        </div>);
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<div><input aria-label=text><input type=checkbox aria-label=on><button>write`);
+export default $0 => {
+  const text = $0()("first");
+  const isOn = $0()(false);
+  return (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild,
+      _el$3 = _el$2.nextSibling,
+      _el$4 = _el$3.nextSibling;
+    _el$4.$$click = () => {
+      text[1]("second");
+      isOn[1](true);
+    };
+    _$effect(() => _el$2.value = text[0]());
+    _$effect(() => _el$3.checked = isOn[0]());
+    return _el$;
+  })();
 };
-
-// 147:12
-export default ($0) => {
-    const texts = $0()(["typed by the script"]);
-    const flags = $0()([true]);
-    return (<div>
-          <input aria-label="text" value={texts.get()[0]}/>
-          <input type="checkbox" aria-label="on" checked={flags.get()[0]}/>
-          <button onclick={() => {
-            texts.set([]);
-            flags.set([]);
-        }}>
-            clear
-          </button>
-        </div>);
-};
+_$delegateEvents(["click"]);

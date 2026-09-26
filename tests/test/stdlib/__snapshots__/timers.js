@@ -26,8 +26,8 @@ it("timers", async (t) => {
       "18988aj10wskx:26:4",
       { params: [{ kind: "splice", value: window, bindings: [] }] },
       {
-        code: "export default ($0) => {\n    const stop = $0().clearInterval;\n    const repeating = $0().setInterval(() => 0, 1000);\n    stop(repeating);\n    $0().clearTimeout($0().setTimeout(() => 0, 1000));\n};",
-        map: '{"version":3,"file":"timers.test.jsx","sourceRoot":"","sources":["timers.test.tsx"],"names":[],"mappings":"eAyBO;IACD,MAAM,IAAI,GAAG,IAAO,CAAC,aAAa,CAAC;IACnC,MAAM,SAAS,GAAG,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC;IACrD,IAAI,CAAC,SAAS,CAAC,CAAC;IAChB,IAAO,CAAC,YAAY,CAAC,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC;AAC1D,CAAC"}',
+        code: "export default $0 => {\n  const stop = $0().clearInterval;\n  const repeating = $0().setInterval(() => 0, 1000);\n  stop(repeating);\n  $0().clearTimeout($0().setTimeout(() => 0, 1000));\n};",
+        map: '{"version":3,"mappings":"eAyBOA,EAAA;EACD,MAAMC,IAAI,GAAGD,EAAA,EAAO,CAACE,aAAa;EAClC,MAAMC,SAAS,GAAGH,EAAA,EAAO,CAACI,WAAW,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC;EACpDH,IAAI,CAACE,SAAS,CAAC;EACfH,EAAA,EAAO,CAACK,YAAY,CAACL,EAAA,EAAO,CAACM,UAAU,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC,CAAC;AACzD,CAAC","names":["$0","stop","clearInterval","repeating","setInterval","clearTimeout","setTimeout"],"ignoreList":[],"sources":["timers.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

@@ -36,129 +36,131 @@
     return $entry;
   })();
   return jsx("div", {
-    children: jsx("for", {
-      each: () =>
-        f1(() => [
-          {
-            id: "ord-1000",
-            customer: {
-              name: "Customer 0",
-              city: "Montréal",
+    children: () =>
+      jsx($modules["solid-js"].For, {
+        each: () =>
+          f1(() => [
+            {
+              id: "ord-1000",
+              customer: {
+                name: "Customer 0",
+                city: "Montréal",
+              },
+              items: [
+                {
+                  sku: "SKU-0-A",
+                  qty: 1,
+                },
+                {
+                  sku: "SKU-0-B",
+                  qty: 1,
+                },
+              ],
+              total: 45.23,
             },
-            items: [
-              {
-                sku: "SKU-0-A",
-                qty: 1,
+            {
+              id: "ord-1001",
+              customer: {
+                name: "Customer 1",
+                city: "Toronto",
               },
-              {
-                sku: "SKU-0-B",
-                qty: 1,
-              },
-            ],
-            total: 45.23,
-          },
-          {
-            id: "ord-1001",
-            customer: {
-              name: "Customer 1",
-              city: "Toronto",
+              items: [
+                {
+                  sku: "SKU-1-A",
+                  qty: 2,
+                },
+                {
+                  sku: "SKU-1-B",
+                  qty: 1,
+                },
+              ],
+              total: 46.23,
             },
-            items: [
-              {
-                sku: "SKU-1-A",
-                qty: 2,
+            {
+              id: "ord-1002",
+              customer: {
+                name: "Customer 2",
+                city: "Montréal",
               },
-              {
-                sku: "SKU-1-B",
-                qty: 1,
-              },
-            ],
-            total: 46.23,
-          },
-          {
-            id: "ord-1002",
-            customer: {
-              name: "Customer 2",
-              city: "Montréal",
+              items: [
+                {
+                  sku: "SKU-2-A",
+                  qty: 3,
+                },
+                {
+                  sku: "SKU-2-B",
+                  qty: 1,
+                },
+              ],
+              total: 47.23,
             },
-            items: [
-              {
-                sku: "SKU-2-A",
-                qty: 3,
+            {
+              id: "ord-1003",
+              customer: {
+                name: "Customer 3",
+                city: "Toronto",
               },
-              {
-                sku: "SKU-2-B",
-                qty: 1,
-              },
-            ],
-            total: 47.23,
-          },
-          {
-            id: "ord-1003",
-            customer: {
-              name: "Customer 3",
-              city: "Toronto",
+              items: [
+                {
+                  sku: "SKU-3-A",
+                  qty: 1,
+                },
+                {
+                  sku: "SKU-3-B",
+                  qty: 1,
+                },
+              ],
+              total: 48.23,
             },
-            items: [
-              {
-                sku: "SKU-3-A",
-                qty: 1,
+            {
+              id: "ord-1004",
+              customer: {
+                name: "Customer 4",
+                city: "Montréal",
               },
-              {
-                sku: "SKU-3-B",
-                qty: 1,
-              },
-            ],
-            total: 48.23,
-          },
-          {
-            id: "ord-1004",
-            customer: {
-              name: "Customer 4",
-              city: "Montréal",
+              items: [
+                {
+                  sku: "SKU-4-A",
+                  qty: 2,
+                },
+                {
+                  sku: "SKU-4-B",
+                  qty: 1,
+                },
+              ],
+              total: 49.23,
             },
-            items: [
-              {
-                sku: "SKU-4-A",
-                qty: 2,
-              },
-              {
-                sku: "SKU-4-B",
-                qty: 1,
-              },
-            ],
-            total: 49.23,
-          },
-        ]),
-      children: () =>
-        f2((order) =>
-          jsx("div", {
-            children: [
-              jsx("img", {
-                src: () => f3(order),
-                alt: "",
-              }),
-              jsx("span", {
-                children: () => f4(order),
-              }),
-              jsx("span", {
-                children: () => f5(order),
-              }),
-              jsx("for", {
-                each: () => f6(order),
-                children: () =>
-                  f7((item) =>
-                    jsx("span", {
-                      children: () => f8(item),
-                    }),
-                  ),
-              }),
-              jsx("span", {
-                children: () => f9(order),
-              }),
-            ],
-          }),
-        ),
-    }),
+          ]),
+        children: () =>
+          f2((order) =>
+            jsx("div", {
+              children: [
+                jsx("img", {
+                  src: () => f3(order),
+                  alt: "",
+                }),
+                jsx("span", {
+                  children: () => f4(order),
+                }),
+                jsx("span", {
+                  children: () => f5(order),
+                }),
+                () =>
+                  jsx($modules["solid-js"].For, {
+                    each: () => f6(order),
+                    children: () =>
+                      f7((item) =>
+                        jsx("span", {
+                          children: () => f8(item),
+                        }),
+                      ),
+                  }),
+                jsx("span", {
+                  children: () => f9(order),
+                }),
+              ],
+            }),
+          ),
+      }),
   });
 })([]);

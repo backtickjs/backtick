@@ -1,9 +1,19 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
     const $entry = ($0, $1, $2, $3) => {
       const held = $0()($1());
-      return <span onclick={() => held.set($2())}>{$3()(held.get())}</span>;
+      return (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => held[1]($2());
+        _$insert(_el$, () => $3()(held[0]()));
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   const f2 = (() => {
@@ -15,7 +25,7 @@
   return jsx(
     () =>
       f1(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         () => 0,
         () => 1,
         () => f2(() => 1),

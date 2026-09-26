@@ -1,14 +1,15 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // Storage a script declares for itself, rather than one a component owns and
-// splices in. `$state(...)` is an ordinary call of an imported value, and the
-// cell is what the call answers with: each time it is evaluated there is
-// another cell, which is what lets a script build a row that carries its own.
+// splices in. `$createSignal(...)` is an ordinary call of an imported value, and
+// the signal is what the call answers with: each time it is evaluated there is
+// another signal, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs`(label: string) => {
-    return { label: $state(label) };
+    return { label: $createSignal(label) };
   }`;
 
   return (
@@ -16,10 +17,10 @@ async function ScriptRows() {
       style={cs`"font-size: 16px"`}
       onclick={cs`() => {
         const row = $build("one");
-        row.label.set(row.label.get() + " !!!");
+        row.label[1](row.label[0]() + " !!!");
       }`}
     >
-      {cs`$build("one").label.get()`}
+      {cs`$build("one").label[0]()`}
     </span>
   );
 }

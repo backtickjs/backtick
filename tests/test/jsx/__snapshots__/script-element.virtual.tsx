@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // An element a script writes, rather than one the host wrote and the script
@@ -8,13 +9,13 @@ import { snapshotCase } from "../snapshotCase.ts";
 // written, not what it is.
 async function Card() {
   return cs.lift((() => {
-    const __cs_label = cs.splice((state) satisfies typeof cs.Spliceable)("hi");
+    const __cs_label = cs.splice((createSignal) satisfies typeof cs.Spliceable)("hi");
     // A handler written inline and one held under a name: both are client code,
     // and a handler prop takes a function and nothing else.
     const __cs_row = (__cs_size: number) => {
         const __cs_css = "font-size: " + __cs_size + "px";
-        const __cs_press = () => __cs_label.set("held");
-        return <div style={cs.lift(__cs_css)}>{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(() => __cs_label.set("pressed"))}>{cs.lift(__cs_label.get())}</span>)}{cs.lift(<span style={cs.lift("font-size: 8px")}>fixed</span>)}{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(__cs_press)}>
+        const __cs_press = () => __cs_label[1]("held");
+        return <div style={cs.lift(__cs_css)}>{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(() => __cs_label[1]("pressed"))}>{cs.lift(__cs_label[0]())}</span>)}{cs.lift(<span style={cs.lift("font-size: 8px")}>fixed</span>)}{cs.lift(<span style={cs.lift(__cs_css)} onclick={cs.lift(__cs_press)}>
             held
           </span>)}</div>;
     };

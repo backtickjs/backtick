@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
 import type { Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
 
@@ -19,21 +20,21 @@ const answerItems = ["one", "two"];
 
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_items = cs.splice((state) satisfies typeof cs.Spliceable)<string[]>([]);
+    const __cs_items = cs.splice((createSignal) satisfies typeof cs.Spliceable)<string[]>([]);
     const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => {
         if (cs.splice((more) satisfies typeof cs.Spliceable)()) {
-            __cs_items.set(cs.splice((answerItems) satisfies typeof cs.Spliceable));
+            __cs_items[1](cs.splice((answerItems) satisfies typeof cs.Spliceable));
         }
     }, 0);
-    return <For each={cs.lift(__cs_items.get())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>;
+    return <For each={cs.lift(__cs_items[0]())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>;
 })());
 }
 
 const forBuildsOnce = cs.lift((() => {
-    const __cs_asked = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked.get())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
-        __cs_asked.set(__cs_asked.get() + 1);
-        return __cs_asked.get() < 5;
+    const __cs_asked = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked[0]())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
+        __cs_asked[1](__cs_asked[0]() + 1);
+        return __cs_asked[0]() < 5;
     })}/>)}</div>;
 })());
 

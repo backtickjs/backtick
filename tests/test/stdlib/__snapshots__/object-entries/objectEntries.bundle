@@ -1,7 +1,10 @@
 (($d) => {
   const f1 = (() => {
     const $entry = () => {
-      const held = { n: 1, q: "ada" };
+      const held = {
+        n: 1,
+        q: "ada",
+      };
       const written = Object.fromEntries(
         Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]),
       );

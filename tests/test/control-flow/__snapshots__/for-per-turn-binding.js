@@ -12,8 +12,8 @@ it("forPerTurnBinding", async (t) => {
       "2s6lhx8c4k6ow:12:4",
       { params: [] },
       {
-        code: "export default () => {\n    let last = () => 0;\n    for (let i = 0; i < 3; i = i + 1) {\n        last = () => i;\n    }\n    return last();\n};",
-        map: '{"version":3,"file":"for-per-turn-binding.test.jsx","sourceRoot":"","sources":["for-per-turn-binding.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,IAAI,GAAiB,GAAG,EAAE,CAAC,CAAC,CAAC;IACjC,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,IAAI,GAAG,GAAG,EAAE,CAAC,CAAC,CAAC;IACjB,CAAC;IACD,OAAO,IAAI,EAAE,CAAC;AAChB,CAAC"}',
+        code: "export default () => {\n  let last = () => 0;\n  for (let i = 0; i < 3; i = i + 1) {\n    last = () => i;\n  }\n  return last();\n};",
+        map: '{"version":3,"mappings":"eAWO;EACD,IAAIA,IAAI,GAAiBA,CAAA,KAAM,CAAC;EAChC,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;IAChCD,IAAI,GAAGA,CAAA,KAAMC,CAAC;EAChB;EACA,OAAOD,IAAI,EAAE;AACf,CAAC","names":["last","i"],"ignoreList":[],"sources":["for-per-turn-binding.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

@@ -11,8 +11,8 @@ it("comments", async (t) => {
       "3lcac8ezsyzi3:11:4",
       { params: [] },
       {
-        code: 'export default () => {\n    const count = 1;\n    if (count === 1) {\n        return "one";\n    }\n    return "many";\n};',
-        map: '{"version":3,"file":"comments.test.jsx","sourceRoot":"","sources":["comments.test.tsx"],"names":[],"mappings":"eAUO;IAED,MAAM,KAAK,GAAG,CAAC,CAAC;IAEhB,IAAI,KAAK,KAAK,CAAC,EAAE,CAAC;QAEhB,OAAO,KAAK,CAAC;IACf,CAAC;IAID,OAAO,MAAM,CAAC;AAChB,CAAC"}',
+        code: 'export default () => {\n  const count = 1;\n  if (count === 1) {\n    return "one";\n  }\n  return "many";\n};',
+        map: '{"version":3,"mappings":"eAUO;EAED,MAAMA,KAAK,GAAG,CAAC;EAEf,IAAIA,KAAK,KAAK,CAAC,EAAE;IAEf,OAAO,KAAK;EACd;EAIA,OAAO,MAAM;AACf,CAAC","names":["count"],"ignoreList":[],"sources":["comments.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

@@ -11,8 +11,8 @@ it("bindinglessCatch", async (t) => {
       "1lr2275tf95wm:11:4",
       { params: [] },
       {
-        code: 'export default () => {\n    try {\n        throw "boom";\n    }\n    catch {\n        return "caught";\n    }\n};',
-        map: '{"version":3,"file":"bindingless-catch.test.jsx","sourceRoot":"","sources":["bindingless-catch.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,CAAC;QACH,MAAM,MAAM,CAAC;IACf,CAAC;IAAC,MAAM,CAAC;QACP,OAAO,QAAQ,CAAC;IAClB,CAAC;AACH,CAAC"}',
+        code: 'export default () => {\n  try {\n    throw "boom";\n  } catch {\n    return "caught";\n  }\n};',
+        map: '{"version":3,"mappings":"eAUO;EACD,IAAI;IACF,MAAM,MAAM;EACd,CAAC,CAAC,MAAM;IACN,OAAO,QAAQ;EACjB;AACF,CAAC","names":[],"ignoreList":[],"sources":["bindingless-catch.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

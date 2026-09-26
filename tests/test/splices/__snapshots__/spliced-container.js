@@ -15,7 +15,7 @@ const originX = cs.create(
   { params: [] },
   {
     code: "export default () => 1;",
-    map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAamB,MAAA,CAAC"}',
+    map: '{"version":3,"mappings":"eAamB,OAAC","names":[],"ignoreList":[],"sources":["spliced-container.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -25,7 +25,7 @@ const label = cs.create(
   { params: [] },
   {
     code: 'export default () => "origin";',
-    map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAeiB,MAAA,QAAQ"}',
+    map: '{"version":3,"mappings":"eAeiB,cAAQ","names":[],"ignoreList":[],"sources":["spliced-container.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -39,8 +39,8 @@ it("splicedContainer", async (t) => {
       "3hhvicr225pmx:21:44",
       { params: [{ kind: "splice", value: point, bindings: [] }] },
       {
-        code: "export default ($0) => $0().x + 1;",
-        map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
+        code: "export default $0 => $0().x + 1;",
+        map: '{"version":3,"mappings":"eAoB+CA,EAAA,IAAAA,EAAA,EAAM,CAACC,CAAC,GAAG,CAAC","names":["$0","x"],"ignoreList":[],"sources":["spliced-container.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

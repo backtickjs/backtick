@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -21,284 +21,41 @@ function labelled(label) {
           value: cs.create(
             "2mv5sg07ackia:18:17",
             { params: [{ kind: "capture", key: "Card$2mv5sg07ackia$0" }] },
-            () => ({
-              type: "JSXElement",
-              loc: {
-                start: { line: 18, column: 20 },
-                end: { line: 18, column: 34 },
-              },
-              openingElement: {
-                type: "JSXOpeningElement",
-                loc: {
-                  start: { line: 18, column: 20 },
-                  end: { line: 18, column: 34 },
-                },
-                name: {
-                  type: "JSXIdentifier",
-                  loc: {
-                    start: { line: 18, column: 21 },
-                    end: { line: 18, column: 25 },
-                  },
-                  name: "Card",
-                  key: "Card$2mv5sg07ackia$0",
-                },
-                attributes: [
-                  {
-                    type: "JSXAttribute",
-                    loc: {
-                      start: { line: 18, column: 26 },
-                      end: { line: 18, column: 31 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 18, column: 26 },
-                        end: { line: 18, column: 27 },
-                      },
-                      name: "n",
-                    },
-                    value: {
-                      type: "JSXExpressionContainer",
-                      loc: {
-                        start: { line: 18, column: 28 },
-                        end: { line: 18, column: 31 },
-                      },
-                      expression: {
-                        type: "Literal",
-                        loc: {
-                          start: { line: 18, column: 29 },
-                          end: { line: 18, column: 30 },
-                        },
-                        value: 1,
-                      },
-                    },
-                  },
-                ],
-                selfClosing: true,
-              },
-              children: [],
-              closingElement: null,
-            }),
             {
-              code: "export default ($0) => <$0 n={1}/>;",
-              map: '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"eAiBoB,QAAA,CAAC,EAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
-              imports: [],
-              exportAt: 0,
+              code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default $0 => _$createComponent($0, {\n  n: 1\n});',
+              map: '{"version":3,"mappings":";eAiBoBA,EAAA,IAAAC,iBAAA,CAACD,EAAI;EAACE,CAAC,EAAE;AAAC,EAAI","names":["$0","_$createComponent","n"],"ignoreList":[],"sources":["script-bound-tag-capture-shadow.test.tsx"]}',
+              imports: [
+                {
+                  from: "solid-js/web",
+                  range: [0, 68],
+                  bindings: [
+                    { name: "createComponent", local: "_$createComponent" },
+                  ],
+                },
+              ],
+              exportAt: 69,
             },
           ),
           bindings: ["Card$2mv5sg07ackia$0"],
         },
       ],
     },
-    () => ({
-      type: "BlockStatement",
-      loc: { start: { line: 16, column: 12 }, end: { line: 19, column: 3 } },
-      body: [
+    {
+      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<i>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<p>`);\nexport default ($0, $1) => {\n  const Card = props => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => $0() + props.n);\n    return _el$;\n  })();\n  return (() => {\n    var _el$2 = _tmpl$2();\n    _$insert(_el$2, () => $1(Card));\n    return _el$2;\n  })();\n};',
+      map: '{"version":3,"mappings":";;;;eAeY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,IAAI,GAAIC,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAASJ,EAAA,EAAM,GAAGG,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;EAAA,IAAK;EAChE;IAAA,IAAAI,KAAA,GAAAC,OAAA;IAAAH,QAAA,CAAAE,KAAA,QAAWP,EAAA,CAAAC,IAAA,CAAqB;IAAA,OAAAM,KAAA;EAAA;AAClC,CAAC","names":["$0","$1","Card","props","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2"],"ignoreList":[],"sources":["script-bound-tag-capture-shadow.test.tsx"]}',
+      imports: [
         {
-          type: "VariableDeclaration",
-          loc: {
-            start: { line: 17, column: 4 },
-            end: { line: 17, column: 69 },
-          },
-          kind: "const",
-          declarations: [
-            {
-              type: "VariableDeclarator",
-              loc: {
-                start: { line: 17, column: 10 },
-                end: { line: 17, column: 68 },
-              },
-              id: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 17, column: 10 },
-                  end: { line: 17, column: 14 },
-                },
-                name: "Card",
-                key: "Card$2mv5sg07ackia$0",
-              },
-              init: {
-                type: "ArrowFunctionExpression",
-                loc: {
-                  start: { line: 17, column: 17 },
-                  end: { line: 17, column: 68 },
-                },
-                params: [
-                  {
-                    type: "Identifier",
-                    loc: {
-                      start: { line: 17, column: 18 },
-                      end: { line: 17, column: 23 },
-                    },
-                    name: "props",
-                    key: "props$2mv5sg07ackia$1",
-                  },
-                ],
-                body: {
-                  type: "JSXElement",
-                  loc: {
-                    start: { line: 17, column: 43 },
-                    end: { line: 17, column: 68 },
-                  },
-                  openingElement: {
-                    type: "JSXOpeningElement",
-                    loc: {
-                      start: { line: 17, column: 43 },
-                      end: { line: 17, column: 46 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 17, column: 44 },
-                        end: { line: 17, column: 45 },
-                      },
-                      name: "i",
-                    },
-                    attributes: [],
-                    selfClosing: false,
-                  },
-                  children: [
-                    {
-                      type: "JSXExpressionContainer",
-                      loc: {
-                        start: { line: 17, column: 46 },
-                        end: { line: 17, column: 64 },
-                      },
-                      expression: {
-                        type: "BinaryExpression",
-                        loc: {
-                          start: { line: 17, column: 47 },
-                          end: { line: 17, column: 63 },
-                        },
-                        operator: "+",
-                        left: {
-                          type: "Splice",
-                          loc: {
-                            start: { line: 17, column: 47 },
-                            end: { line: 17, column: 53 },
-                          },
-                          param: 0,
-                        },
-                        right: {
-                          type: "MemberExpression",
-                          loc: {
-                            start: { line: 17, column: 56 },
-                            end: { line: 17, column: 63 },
-                          },
-                          object: {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 17, column: 56 },
-                              end: { line: 17, column: 61 },
-                            },
-                            name: "props",
-                            key: "props$2mv5sg07ackia$1",
-                          },
-                          property: {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 17, column: 62 },
-                              end: { line: 17, column: 63 },
-                            },
-                            name: "n",
-                          },
-                          computed: false,
-                          optional: false,
-                        },
-                      },
-                    },
-                  ],
-                  closingElement: {
-                    type: "JSXClosingElement",
-                    loc: {
-                      start: { line: 17, column: 64 },
-                      end: { line: 17, column: 68 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 17, column: 66 },
-                        end: { line: 17, column: 67 },
-                      },
-                      name: "i",
-                    },
-                  },
-                },
-                expression: true,
-              },
-            },
-          ],
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
         },
         {
-          type: "ReturnStatement",
-          loc: {
-            start: { line: 18, column: 4 },
-            end: { line: 18, column: 42 },
-          },
-          argument: {
-            type: "JSXElement",
-            loc: {
-              start: { line: 18, column: 11 },
-              end: { line: 18, column: 41 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 18, column: 11 },
-                end: { line: 18, column: 14 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 18, column: 12 },
-                  end: { line: 18, column: 13 },
-                },
-                name: "p",
-              },
-              attributes: [],
-              selfClosing: false,
-            },
-            children: [
-              {
-                type: "JSXExpressionContainer",
-                loc: {
-                  start: { line: 18, column: 14 },
-                  end: { line: 18, column: 37 },
-                },
-                expression: {
-                  type: "Splice",
-                  loc: {
-                    start: { line: 18, column: 15 },
-                    end: { line: 18, column: 36 },
-                  },
-                  param: 1,
-                },
-              },
-            ],
-            closingElement: {
-              type: "JSXClosingElement",
-              loc: {
-                start: { line: 18, column: 37 },
-                end: { line: 18, column: 41 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 18, column: 39 },
-                  end: { line: 18, column: 40 },
-                },
-                name: "p",
-              },
-            },
-          },
+          from: "solid-js/web",
+          range: [55, 105],
+          bindings: [{ name: "insert", local: "_$insert" }],
         },
       ],
-    }),
-    {
-      code: "export default ($0, $1) => {\n    const Card = (props) => <i>{$0() + props.n}</i>;\n    return <p>{$1(Card)}</p>;\n};",
-      map: '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"eAeY;IACR,MAAM,IAAI,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACjE,OAAO,CAAC,CAAC,CAAC,CAAC,QAAqB,CAAC,EAAE,CAAC,CAAC,CAAC;AACxC,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      exportAt: 195,
     },
   );
 }
@@ -316,17 +73,9 @@ it("scriptBoundTagCaptureShadow", async (t) => {
               cs.create(
                 "2mv5sg07ackia:28:18",
                 { params: [] },
-                () => ({
-                  type: "Literal",
-                  loc: {
-                    start: { line: 28, column: 21 },
-                    end: { line: 28, column: 24 },
-                  },
-                  value: "a",
-                }),
                 {
                   code: 'export default () => "a";',
-                  map: '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"eA2BqB,MAAA,GAAG"}',
+                  map: '{"version":3,"mappings":"eA2BqB,SAAG","names":[],"ignoreList":[],"sources":["script-bound-tag-capture-shadow.test.tsx"]}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -340,17 +89,9 @@ it("scriptBoundTagCaptureShadow", async (t) => {
               cs.create(
                 "2mv5sg07ackia:29:18",
                 { params: [] },
-                () => ({
-                  type: "Literal",
-                  loc: {
-                    start: { line: 29, column: 21 },
-                    end: { line: 29, column: 24 },
-                  },
-                  value: "b",
-                }),
                 {
                   code: 'export default () => "b";',
-                  map: '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"eA4BqB,MAAA,GAAG"}',
+                  map: '{"version":3,"mappings":"eA4BqB,SAAG","names":[],"ignoreList":[],"sources":["script-bound-tag-capture-shadow.test.tsx"]}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -361,166 +102,27 @@ it("scriptBoundTagCaptureShadow", async (t) => {
           { kind: "tag", value: Card },
         ],
       },
-      () => ({
-        type: "JSXElement",
-        loc: { start: { line: 26, column: 7 }, end: { line: 30, column: 10 } },
-        openingElement: {
-          type: "JSXOpeningElement",
-          loc: {
-            start: { line: 26, column: 7 },
-            end: { line: 26, column: 12 },
-          },
-          name: {
-            type: "JSXIdentifier",
-            loc: {
-              start: { line: 26, column: 8 },
-              end: { line: 26, column: 11 },
-            },
-            name: "div",
-          },
-          attributes: [],
-          selfClosing: false,
-        },
-        children: [
+      {
+        code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`);\nexport default ($0, $1, $2) => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, _$createComponent($2, {\n    title: "host"\n  }), null);\n  _$insert(_el$, $0, null);\n  _$insert(_el$, $1, null);\n  return _el$;\n})();',
+        map: '{"version":3,"mappings":";;;;eAyBO,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EAAA,IAAAC,IAAA,GAAAC,MAAA;EAAAC,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CACAJ,EAAI;IAACK,KAAK;EAAA;EAAAF,QAAA,CAAAF,IAAA,EACVH,EAAA;EAAAK,QAAA,CAAAF,IAAA,EACAF,EAAA;EAAA,OAAAE,IAAA;AAAA,IACG","names":["$0","$1","$2","_el$","_tmpl$","_$insert","_$createComponent","title"],"ignoreList":[],"sources":["script-bound-tag-capture-shadow.test.tsx"]}',
+        imports: [
           {
-            type: "JSXText",
-            loc: {
-              start: { line: 27, column: 6 },
-              end: { line: 27, column: 6 },
-            },
-            value: "\n      ",
-            raw: "\n      ",
+            from: "solid-js/web",
+            range: [0, 54],
+            bindings: [{ name: "template", local: "_$template" }],
           },
           {
-            type: "JSXElement",
-            loc: {
-              start: { line: 27, column: 6 },
-              end: { line: 27, column: 27 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 27, column: 6 },
-                end: { line: 27, column: 27 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 27, column: 7 },
-                  end: { line: 27, column: 11 },
-                },
-                name: "Card",
-                param: 2,
-              },
-              attributes: [
-                {
-                  type: "JSXAttribute",
-                  loc: {
-                    start: { line: 27, column: 12 },
-                    end: { line: 27, column: 24 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 27, column: 12 },
-                      end: { line: 27, column: 17 },
-                    },
-                    name: "title",
-                  },
-                  value: {
-                    type: "Literal",
-                    loc: {
-                      start: { line: 27, column: 18 },
-                      end: { line: 27, column: 24 },
-                    },
-                    value: "host",
-                  },
-                },
-              ],
-              selfClosing: true,
-            },
-            children: [],
-            closingElement: null,
+            from: "solid-js/web",
+            range: [55, 105],
+            bindings: [{ name: "insert", local: "_$insert" }],
           },
           {
-            type: "JSXText",
-            loc: {
-              start: { line: 28, column: 6 },
-              end: { line: 28, column: 6 },
-            },
-            value: "\n      ",
-            raw: "\n      ",
-          },
-          {
-            type: "JSXExpressionContainer",
-            loc: {
-              start: { line: 28, column: 6 },
-              end: { line: 28, column: 28 },
-            },
-            expression: {
-              type: "Splice",
-              loc: {
-                start: { line: 28, column: 7 },
-                end: { line: 28, column: 27 },
-              },
-              param: 0,
-            },
-          },
-          {
-            type: "JSXText",
-            loc: {
-              start: { line: 29, column: 6 },
-              end: { line: 29, column: 6 },
-            },
-            value: "\n      ",
-            raw: "\n      ",
-          },
-          {
-            type: "JSXExpressionContainer",
-            loc: {
-              start: { line: 29, column: 6 },
-              end: { line: 29, column: 28 },
-            },
-            expression: {
-              type: "Splice",
-              loc: {
-                start: { line: 29, column: 7 },
-                end: { line: 29, column: 27 },
-              },
-              param: 1,
-            },
-          },
-          {
-            type: "JSXText",
-            loc: {
-              start: { line: 30, column: 4 },
-              end: { line: 30, column: 4 },
-            },
-            value: "\n    ",
-            raw: "\n    ",
+            from: "solid-js/web",
+            range: [106, 174],
+            bindings: [{ name: "createComponent", local: "_$createComponent" }],
           },
         ],
-        closingElement: {
-          type: "JSXClosingElement",
-          loc: {
-            start: { line: 30, column: 4 },
-            end: { line: 30, column: 10 },
-          },
-          name: {
-            type: "JSXIdentifier",
-            loc: {
-              start: { line: 30, column: 6 },
-              end: { line: 30, column: 9 },
-            },
-            name: "div",
-          },
-        },
-      }),
-      {
-        code: 'export default ($0, $1, $2) => <div>\n      <$2 title="host"/>\n      {$0()}\n      {$1()}\n    </div>;',
-        map: '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"eAyBO,gBAAA,CAAC,GAAG,CACL;MAAA,CAAC,EAAI,CAAC,KAAK,CAAC,MAAM,EAClB;MAAA,CAAC,IAAoB,CACrB;MAAA,CAAC,IAAoB,CACvB;IAAA,EAAE,GAAG,CAAC"}',
-        imports: [],
-        exportAt: 0,
+        exportAt: 222,
       },
     ),
   );
@@ -535,507 +137,27 @@ it("scriptBoundTagScope", async (t) => {
     cs.create(
       "2mv5sg07ackia:41:4",
       { params: [{ kind: "tag", value: Card }] },
-      () => ({
-        type: "BlockStatement",
-        loc: { start: { line: 41, column: 7 }, end: { line: 57, column: 5 } },
-        body: [
+      {
+        code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<section>`),\n  _tmpl$3 = /*#__PURE__*/_$template(`<i>`);\nexport default $0 => {\n  const twice = Card => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, _$createComponent(Card, {\n      n: 1\n    }), null);\n    _$insert(_el$, _$createComponent(Card, {\n      n: 2\n    }), null);\n    return _el$;\n  })();\n  return (() => {\n    var _el$2 = _tmpl$2();\n    _$insert(_el$2, _$createComponent($0, {\n      title: "host"\n    }), null);\n    _$insert(_el$2, () => twice(props => (() => {\n      var _el$3 = _tmpl$3();\n      _$insert(_el$3, () => "row " + props.n);\n      return _el$3;\n    })()), null);\n    return _el$2;\n  })();\n};',
+        map: '{"version":3,"mappings":";;;;;;eAwCOA,EAAA;EACD,MAAMC,KAAK,GAAIC,IAA+C;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CAEzDJ,IAAI;MAACK,CAAC,EAAE;IAAC;IAAAF,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CACTJ,IAAI;MAACK,CAAC,EAAE;IAAC;IAAA,OAAAJ,IAAA;EAAA,IAEb;EAED;IAAA,IAAAK,KAAA,GAAAC,OAAA;IAAAJ,QAAA,CAAAG,KAAA,EAAAF,iBAAA,CAEKN,EAAI;MAACU,KAAK;IAAA;IAAAL,QAAA,CAAAG,KAAA,QACVP,KAAK,CAAEU,KAAoB;MAAA,IAAAC,KAAA,GAAAC,OAAA;MAAAR,QAAA,CAAAO,KAAA,QACtB,MAAM,GAAGD,KAAK,CAACJ,CAAC;MAAA,OAAAK,KAAA;IAAA,IACrB,CAAC;IAAA,OAAAJ,KAAA;EAAA;AAGR,CAAC","names":["$0","twice","Card","_el$","_tmpl$","_$insert","_$createComponent","n","_el$2","_tmpl$2","title","props","_el$3","_tmpl$3"],"ignoreList":[],"sources":["script-bound-tag-capture-shadow.test.tsx"]}',
+        imports: [
           {
-            type: "VariableDeclaration",
-            loc: {
-              start: { line: 42, column: 6 },
-              end: { line: 47, column: 8 },
-            },
-            kind: "const",
-            declarations: [
-              {
-                type: "VariableDeclarator",
-                loc: {
-                  start: { line: 42, column: 12 },
-                  end: { line: 47, column: 7 },
-                },
-                id: {
-                  type: "Identifier",
-                  loc: {
-                    start: { line: 42, column: 12 },
-                    end: { line: 42, column: 17 },
-                  },
-                  name: "twice",
-                  key: "twice$2mv5sg07ackia$2",
-                },
-                init: {
-                  type: "ArrowFunctionExpression",
-                  loc: {
-                    start: { line: 42, column: 20 },
-                    end: { line: 47, column: 7 },
-                  },
-                  params: [
-                    {
-                      type: "Identifier",
-                      loc: {
-                        start: { line: 42, column: 21 },
-                        end: { line: 42, column: 25 },
-                      },
-                      name: "Card",
-                      key: "Card$2mv5sg07ackia$3",
-                    },
-                  ],
-                  body: {
-                    type: "JSXElement",
-                    loc: {
-                      start: { line: 43, column: 8 },
-                      end: { line: 46, column: 14 },
-                    },
-                    openingElement: {
-                      type: "JSXOpeningElement",
-                      loc: {
-                        start: { line: 43, column: 8 },
-                        end: { line: 43, column: 13 },
-                      },
-                      name: {
-                        type: "JSXIdentifier",
-                        loc: {
-                          start: { line: 43, column: 9 },
-                          end: { line: 43, column: 12 },
-                        },
-                        name: "div",
-                      },
-                      attributes: [],
-                      selfClosing: false,
-                    },
-                    children: [
-                      {
-                        type: "JSXText",
-                        loc: {
-                          start: { line: 44, column: 10 },
-                          end: { line: 44, column: 10 },
-                        },
-                        value: "\n          ",
-                        raw: "\n          ",
-                      },
-                      {
-                        type: "JSXElement",
-                        loc: {
-                          start: { line: 44, column: 10 },
-                          end: { line: 44, column: 24 },
-                        },
-                        openingElement: {
-                          type: "JSXOpeningElement",
-                          loc: {
-                            start: { line: 44, column: 10 },
-                            end: { line: 44, column: 24 },
-                          },
-                          name: {
-                            type: "JSXIdentifier",
-                            loc: {
-                              start: { line: 44, column: 11 },
-                              end: { line: 44, column: 15 },
-                            },
-                            name: "Card",
-                            key: "Card$2mv5sg07ackia$3",
-                          },
-                          attributes: [
-                            {
-                              type: "JSXAttribute",
-                              loc: {
-                                start: { line: 44, column: 16 },
-                                end: { line: 44, column: 21 },
-                              },
-                              name: {
-                                type: "JSXIdentifier",
-                                loc: {
-                                  start: { line: 44, column: 16 },
-                                  end: { line: 44, column: 17 },
-                                },
-                                name: "n",
-                              },
-                              value: {
-                                type: "JSXExpressionContainer",
-                                loc: {
-                                  start: { line: 44, column: 18 },
-                                  end: { line: 44, column: 21 },
-                                },
-                                expression: {
-                                  type: "Literal",
-                                  loc: {
-                                    start: { line: 44, column: 19 },
-                                    end: { line: 44, column: 20 },
-                                  },
-                                  value: 1,
-                                },
-                              },
-                            },
-                          ],
-                          selfClosing: true,
-                        },
-                        children: [],
-                        closingElement: null,
-                      },
-                      {
-                        type: "JSXText",
-                        loc: {
-                          start: { line: 45, column: 10 },
-                          end: { line: 45, column: 10 },
-                        },
-                        value: "\n          ",
-                        raw: "\n          ",
-                      },
-                      {
-                        type: "JSXElement",
-                        loc: {
-                          start: { line: 45, column: 10 },
-                          end: { line: 45, column: 24 },
-                        },
-                        openingElement: {
-                          type: "JSXOpeningElement",
-                          loc: {
-                            start: { line: 45, column: 10 },
-                            end: { line: 45, column: 24 },
-                          },
-                          name: {
-                            type: "JSXIdentifier",
-                            loc: {
-                              start: { line: 45, column: 11 },
-                              end: { line: 45, column: 15 },
-                            },
-                            name: "Card",
-                            key: "Card$2mv5sg07ackia$3",
-                          },
-                          attributes: [
-                            {
-                              type: "JSXAttribute",
-                              loc: {
-                                start: { line: 45, column: 16 },
-                                end: { line: 45, column: 21 },
-                              },
-                              name: {
-                                type: "JSXIdentifier",
-                                loc: {
-                                  start: { line: 45, column: 16 },
-                                  end: { line: 45, column: 17 },
-                                },
-                                name: "n",
-                              },
-                              value: {
-                                type: "JSXExpressionContainer",
-                                loc: {
-                                  start: { line: 45, column: 18 },
-                                  end: { line: 45, column: 21 },
-                                },
-                                expression: {
-                                  type: "Literal",
-                                  loc: {
-                                    start: { line: 45, column: 19 },
-                                    end: { line: 45, column: 20 },
-                                  },
-                                  value: 2,
-                                },
-                              },
-                            },
-                          ],
-                          selfClosing: true,
-                        },
-                        children: [],
-                        closingElement: null,
-                      },
-                      {
-                        type: "JSXText",
-                        loc: {
-                          start: { line: 46, column: 8 },
-                          end: { line: 46, column: 8 },
-                        },
-                        value: "\n        ",
-                        raw: "\n        ",
-                      },
-                    ],
-                    closingElement: {
-                      type: "JSXClosingElement",
-                      loc: {
-                        start: { line: 46, column: 8 },
-                        end: { line: 46, column: 14 },
-                      },
-                      name: {
-                        type: "JSXIdentifier",
-                        loc: {
-                          start: { line: 46, column: 10 },
-                          end: { line: 46, column: 13 },
-                        },
-                        name: "div",
-                      },
-                    },
-                  },
-                  expression: true,
-                },
-              },
-            ],
+            from: "solid-js/web",
+            range: [0, 54],
+            bindings: [{ name: "template", local: "_$template" }],
           },
           {
-            type: "ReturnStatement",
-            loc: {
-              start: { line: 49, column: 6 },
-              end: { line: 56, column: 8 },
-            },
-            argument: {
-              type: "JSXElement",
-              loc: {
-                start: { line: 50, column: 8 },
-                end: { line: 55, column: 18 },
-              },
-              openingElement: {
-                type: "JSXOpeningElement",
-                loc: {
-                  start: { line: 50, column: 8 },
-                  end: { line: 50, column: 17 },
-                },
-                name: {
-                  type: "JSXIdentifier",
-                  loc: {
-                    start: { line: 50, column: 9 },
-                    end: { line: 50, column: 16 },
-                  },
-                  name: "section",
-                },
-                attributes: [],
-                selfClosing: false,
-              },
-              children: [
-                {
-                  type: "JSXText",
-                  loc: {
-                    start: { line: 51, column: 10 },
-                    end: { line: 51, column: 10 },
-                  },
-                  value: "\n          ",
-                  raw: "\n          ",
-                },
-                {
-                  type: "JSXElement",
-                  loc: {
-                    start: { line: 51, column: 10 },
-                    end: { line: 51, column: 31 },
-                  },
-                  openingElement: {
-                    type: "JSXOpeningElement",
-                    loc: {
-                      start: { line: 51, column: 10 },
-                      end: { line: 51, column: 31 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 51, column: 11 },
-                        end: { line: 51, column: 15 },
-                      },
-                      name: "Card",
-                      param: 0,
-                    },
-                    attributes: [
-                      {
-                        type: "JSXAttribute",
-                        loc: {
-                          start: { line: 51, column: 16 },
-                          end: { line: 51, column: 28 },
-                        },
-                        name: {
-                          type: "JSXIdentifier",
-                          loc: {
-                            start: { line: 51, column: 16 },
-                            end: { line: 51, column: 21 },
-                          },
-                          name: "title",
-                        },
-                        value: {
-                          type: "Literal",
-                          loc: {
-                            start: { line: 51, column: 22 },
-                            end: { line: 51, column: 28 },
-                          },
-                          value: "host",
-                        },
-                      },
-                    ],
-                    selfClosing: true,
-                  },
-                  children: [],
-                  closingElement: null,
-                },
-                {
-                  type: "JSXText",
-                  loc: {
-                    start: { line: 52, column: 10 },
-                    end: { line: 52, column: 10 },
-                  },
-                  value: "\n          ",
-                  raw: "\n          ",
-                },
-                {
-                  type: "JSXExpressionContainer",
-                  loc: {
-                    start: { line: 52, column: 10 },
-                    end: { line: 54, column: 13 },
-                  },
-                  expression: {
-                    type: "CallExpression",
-                    loc: {
-                      start: { line: 52, column: 11 },
-                      end: { line: 54, column: 12 },
-                    },
-                    callee: {
-                      type: "Identifier",
-                      loc: {
-                        start: { line: 52, column: 11 },
-                        end: { line: 52, column: 16 },
-                      },
-                      name: "twice",
-                      key: "twice$2mv5sg07ackia$2",
-                    },
-                    arguments: [
-                      {
-                        type: "ArrowFunctionExpression",
-                        loc: {
-                          start: { line: 52, column: 17 },
-                          end: { line: 54, column: 11 },
-                        },
-                        params: [
-                          {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 52, column: 18 },
-                              end: { line: 52, column: 23 },
-                            },
-                            name: "props",
-                            key: "props$2mv5sg07ackia$4",
-                          },
-                        ],
-                        body: {
-                          type: "JSXElement",
-                          loc: {
-                            start: { line: 53, column: 12 },
-                            end: { line: 53, column: 37 },
-                          },
-                          openingElement: {
-                            type: "JSXOpeningElement",
-                            loc: {
-                              start: { line: 53, column: 12 },
-                              end: { line: 53, column: 15 },
-                            },
-                            name: {
-                              type: "JSXIdentifier",
-                              loc: {
-                                start: { line: 53, column: 13 },
-                                end: { line: 53, column: 14 },
-                              },
-                              name: "i",
-                            },
-                            attributes: [],
-                            selfClosing: false,
-                          },
-                          children: [
-                            {
-                              type: "JSXExpressionContainer",
-                              loc: {
-                                start: { line: 53, column: 15 },
-                                end: { line: 53, column: 33 },
-                              },
-                              expression: {
-                                type: "BinaryExpression",
-                                loc: {
-                                  start: { line: 53, column: 16 },
-                                  end: { line: 53, column: 32 },
-                                },
-                                operator: "+",
-                                left: {
-                                  type: "Literal",
-                                  loc: {
-                                    start: { line: 53, column: 16 },
-                                    end: { line: 53, column: 22 },
-                                  },
-                                  value: "row ",
-                                },
-                                right: {
-                                  type: "MemberExpression",
-                                  loc: {
-                                    start: { line: 53, column: 25 },
-                                    end: { line: 53, column: 32 },
-                                  },
-                                  object: {
-                                    type: "Identifier",
-                                    loc: {
-                                      start: { line: 53, column: 25 },
-                                      end: { line: 53, column: 30 },
-                                    },
-                                    name: "props",
-                                    key: "props$2mv5sg07ackia$4",
-                                  },
-                                  property: {
-                                    type: "Identifier",
-                                    loc: {
-                                      start: { line: 53, column: 31 },
-                                      end: { line: 53, column: 32 },
-                                    },
-                                    name: "n",
-                                  },
-                                  computed: false,
-                                  optional: false,
-                                },
-                              },
-                            },
-                          ],
-                          closingElement: {
-                            type: "JSXClosingElement",
-                            loc: {
-                              start: { line: 53, column: 33 },
-                              end: { line: 53, column: 37 },
-                            },
-                            name: {
-                              type: "JSXIdentifier",
-                              loc: {
-                                start: { line: 53, column: 35 },
-                                end: { line: 53, column: 36 },
-                              },
-                              name: "i",
-                            },
-                          },
-                        },
-                        expression: true,
-                      },
-                    ],
-                    optional: false,
-                  },
-                },
-                {
-                  type: "JSXText",
-                  loc: {
-                    start: { line: 55, column: 8 },
-                    end: { line: 55, column: 8 },
-                  },
-                  value: "\n        ",
-                  raw: "\n        ",
-                },
-              ],
-              closingElement: {
-                type: "JSXClosingElement",
-                loc: {
-                  start: { line: 55, column: 8 },
-                  end: { line: 55, column: 18 },
-                },
-                name: {
-                  type: "JSXIdentifier",
-                  loc: {
-                    start: { line: 55, column: 10 },
-                    end: { line: 55, column: 17 },
-                  },
-                  name: "section",
-                },
-              },
-            },
+            from: "solid-js/web",
+            range: [55, 105],
+            bindings: [{ name: "insert", local: "_$insert" }],
+          },
+          {
+            from: "solid-js/web",
+            range: [106, 174],
+            bindings: [{ name: "createComponent", local: "_$createComponent" }],
           },
         ],
-      }),
-      {
-        code: 'export default ($0) => {\n    const twice = (Card) => (<div>\n          <Card n={1}/>\n          <Card n={2}/>\n        </div>);\n    return (<section>\n          <$0 title="host"/>\n          {twice((props) => (<i>{"row " + props.n}</i>))}\n        </section>);\n};',
-        map: '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"eAwCO;IACD,MAAM,KAAK,GAAG,CAAC,IAA+C,EAAE,EAAE,CAAC,CACjE,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACX;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACb;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;IAEF,OAAO,CACL,CAAC,OAAO,CACN;UAAA,CAAC,EAAI,CAAC,KAAK,CAAC,MAAM,EAClB;UAAA,CAAC,KAAK,CAAC,CAAC,KAAoB,EAAE,EAAE,CAAC,CAC/B,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAC1B,CAAC,CACJ;QAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
-        imports: [],
-        exportAt: 0,
+        exportAt: 316,
       },
     ),
   );

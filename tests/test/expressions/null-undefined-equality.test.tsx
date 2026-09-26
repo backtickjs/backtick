@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { evaluate } from "@backtickjs/web-testing";
+import { evaluate } from "@backtickjs/solid-js/testing";
 
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {

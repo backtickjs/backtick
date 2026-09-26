@@ -21,8 +21,13 @@
       $1()
         .fetch("/cases", {
           method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ name: "Math.trunc", passed: true }),
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: "Math.trunc",
+            passed: true,
+          }),
         })
         .then((response) => response.text())
         .then(

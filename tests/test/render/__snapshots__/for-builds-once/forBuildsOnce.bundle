@@ -1,44 +1,68 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
     const $entry = ($0, $1) => {
       const asked = $0()(0);
-      return (
-        <div>
-          <span>{"asked " + asked.get()}</span>
-          <$1
-            more={() => {
-              asked.set(asked.get() + 1);
-              return asked.get() < 5;
-            }}
-          />
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _$insert(_el$2, () => "asked " + asked[0]());
+        _$insert(
+          _el$,
+          _$createComponent($1, {
+            more: () => {
+              asked[1](asked[0]() + 1);
+              return asked[0]() < 5;
+            },
+          }),
+          null,
+        );
+        return _el$;
+      })();
     };
     return $entry;
   })();
   const f2 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<em>`);
     const $entry = ($0, $1, $2, $3, $4) => {
       const items = $0()([]);
       const started = $1().setTimeout(() => {
         if ($2()()) {
-          items.set($3());
+          items[1]($3());
         }
       }, 0);
-      return <$4 each={items.get()}>{(item) => <em>{item}</em>}</$4>;
+      return _$createComponent($4, {
+        get each() {
+          return items[0]();
+        },
+        children: (item) =>
+          (() => {
+            var _el$ = _tmpl$();
+            _$insert(_el$, item);
+            return _el$;
+          })(),
+      });
     };
     return $entry;
   })();
   return f1(
-    () => state,
+    () => $modules["solid-js"].createSignal,
     ($0) =>
       f2(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         () => window,
         () => $0.more,
         () => ["one", "two"],
         ($0) =>
-          jsx("for", {
+          jsx($modules["solid-js"].For, {
             each: () => $0.each,
+            fallback: () => $0.fallback,
             children: () => $0.children,
           }),
       ),

@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
 import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { settled } from "../render/dom.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -13,7 +14,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `insert` reads what it was given inside the computation it makes, so a member
 // that answers with a way of asking used to tie the two together: what it drew
 // changing ran the expression that made it, which was the component again —
-// with new cells, and whatever it did on the way in done over.
+// with new signals, and whatever it did on the way in done over.
 //
 // Two of them answer that way: a bundle drawn where it stands, which is this
 // file, and a list, which `render/for-builds-once.test.tsx` covers. The list is
@@ -29,7 +30,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // What this pins is that it is built once. `insert` reads what it was given
 // inside the computation it makes, so a drawing that watches itself used to tie
 // the two together: the answer arriving changed the drawing, which ran the
-// expression that made it, which was this component again — new cells, and the
+// expression that made it, which was this component again — new signals, and the
 // wait started over.
 //
 // The condition stands under `<>`, where a child position watches it: at the
@@ -50,17 +51,17 @@ async function Waiting({
   ask: Prop<() => Bundle<BacktickElement> | null>;
 }) {
   return cs.lift((() => {
-    const __cs_drawn = cs.splice((state) satisfies typeof cs.Spliceable)<Bundle<BacktickElement> | null>(null);
-    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => __cs_drawn.set(cs.splice((ask) satisfies typeof cs.Spliceable)()), 0);
-    return <>{cs.lift(__cs_drawn.get() === null ? null : eval(__cs_drawn.get() as Bundle<BacktickElement>))}</>;
+    const __cs_drawn = cs.splice((createSignal) satisfies typeof cs.Spliceable)<Bundle<BacktickElement> | null>(null);
+    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => __cs_drawn[1](cs.splice((ask) satisfies typeof cs.Spliceable)()), 0);
+    return <>{cs.lift(__cs_drawn[0]() === null ? null : eval(__cs_drawn[0]() as Bundle<BacktickElement>))}</>;
 })());
 }
 
 const evalBuildsOnce = cs.lift((() => {
-    const __cs_asked = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked.get())}</span>)}{cs.lift(<Waiting ask={cs.lift(() => {
-        __cs_asked.set(__cs_asked.get() + 1);
-        return __cs_asked.get() > 4 ? null : cs.splice((answer) satisfies typeof cs.Spliceable);
+    const __cs_asked = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked[0]())}</span>)}{cs.lift(<Waiting ask={cs.lift(() => {
+        __cs_asked[1](__cs_asked[0]() + 1);
+        return __cs_asked[0]() > 4 ? null : cs.splice((answer) satisfies typeof cs.Spliceable);
     })}/>)}</div>;
 })());
 

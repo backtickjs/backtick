@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -13,15 +14,15 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs`{
-    const count = $state(0);
+    const count = $createSignal(0);
     return (
       <button
         id="row"
         style="display: flex; gap: 8px"
-        onclick={() => count.set(count.get() + 1)}
+        onclick={() => count[1](count[0]() + 1)}
       >
-        <span style="font-weight: 700">{count.get() > 0 ? "☑" : "☐"}</span>
-        <span>{"pressed " + count.get() + " times"}</span>
+        <span style="font-weight: 700">{count[0]() > 0 ? "☑" : "☐"}</span>
+        <span>{"pressed " + count[0]() + " times"}</span>
       </button>
     );
   }`;

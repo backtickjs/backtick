@@ -1,6 +1,9 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = ($0, $1) => ({ a: $0(), b: $1() });
+    const $entry = ($0, $1) => ({
+      a: $0(),
+      b: $1(),
+    });
     return $entry;
   })();
   return f1(

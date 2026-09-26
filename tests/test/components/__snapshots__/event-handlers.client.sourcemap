@@ -1,130 +1,144 @@
-// 15:5
-($0) => {       → 15:8 {…
-const           → 16:7 const 
-said            → 16:13 said
- =              → 16:17  = 
-$0()            → 16:20 $state("");…
-(               → 16:26 (
-""              → 16:27 ""
-)               → 16:29 )
-;               → 16:30 ;
-return          → 18:7 return 
-(               → 18:14 (
-<               → 19:9 <
-form            → 19:10 form
-onsubmit        → 20:11 onsubmit
-=               → 20:19 =
-{               → 20:20 {
-(               → 20:21 (
-event           → 20:22 event
-)               → 20:27 ) 
-=>              → 20:29 =>
- {              → 20:31  {
-event           → 21:13 event
-.               → 21:18 .
-preventDefault  → 21:19 preventDefault
-()              → 21:33 ()
-;               → 21:35 ;
-said            → 22:13 said
-.               → 22:17 .
-set             → 22:18 set
-(               → 22:21 (
-event           → 22:22 event
-.               → 22:27 .
-type            → 22:28 type
- +              → 22:32  + 
-" "             → 22:35 " "
- +              → 22:38  + 
-event           → 22:41 event
-.               → 22:46 .
-cancelable      → 22:47 cancelable
-)               → 22:57 )
-;               → 22:58 ;
-}               → 23:11 }
-}               → 23:12 }
->               → 23:13 …
-<               → 25:11 <
-textarea        → 25:12 textarea
-oninput         → 25:21 oninput
-=               → 25:28 =
-{               → 25:29 {
-(               → 25:30 (
-event           → 25:31 event
-)               → 25:36 ) 
-=>              → 25:38 =>
-said            → 25:41 said
-.               → 25:45 .
-set             → 25:46 set
-(               → 25:49 (
-event           → 25:50 event
-.               → 25:55 .
-currentTarget   → 25:56 currentTarget
-.               → 25:69 .
-value           → 25:70 value
-)               → 25:75 )
-}               → 25:76 }
-/>              → 25:77  />…
-<               → 26:11 <
-input           → 26:12 input
-oninput         → 26:18 oninput
-=               → 26:25 =
-{               → 26:26 {
-(               → 26:27 (
-event           → 26:28 event
-)               → 26:33 ) 
-=>              → 26:35 =>
-said            → 26:38 said
-.               → 26:42 .
-set             → 26:43 set
-(               → 26:46 (
-event           → 26:47 event
-.               → 26:52 .
-currentTarget   → 26:53 currentTarget
-.               → 26:66 .
-value           → 26:67 value
-)               → 26:72 )
-}               → 26:73 }
-/>              → 26:74  />…
-<               → 27:11 <
-button          → 27:12 button
-onclick         → 28:13 onclick
-=               → 28:20 =
-{               → 28:21 {
-(               → 28:22 (
-event           → 28:23 event
-)               → 28:28 ) 
-=>              → 28:30 =>
-said            → 29:15 said
-.               → 29:19 .
-set             → 29:20 set
-(               → 29:23 (
-event           → 29:24 event
-.               → 29:29 .
-clientX         → 29:30 clientX
- +              → 29:37  + 
-" "             → 29:40 " "
- +              → 29:43  + 
-event           → 29:46 event
-.               → 29:51 .
-currentTarget   → 29:52 currentTarget
-.               → 29:65 .
-tagName         → 29:66 tagName
-)               → 29:73 )
-}               → 30:13 }
->               → 30:14 …
-{               → 32:13 {
-said            → 32:14 said
-.               → 32:18 .
-get             → 32:19 get
-()              → 32:22 ()
-}               → 32:24 }
-</              → 33:11 </
-button          → 33:13 button
->               → 33:19 >
-</              → 34:9 </
-form            → 34:11 form
->               → 34:15 >
-)               → 34:16 …
-;               → 35:8 ;
-}               → 36:5 }
-;               → 36:6 `,…
+// 16:5
+$0                     → 16:8 {…
+ => {                  → 16:8 {…
+const                  → 17:7 const 
+said                   → 17:13 said
+ =                     → 17:17  = 
+$0                     → 17:20 $createSignal("");…
+()                     → 17:20 $createSignal("");…
+(                      → 17:33 (
+""                     → 17:34 ""
+)                      → 17:36 )
+;                      → 17:37 ;
+return (() => {        → 19:7 return…
+var                    → 19:7 return…
+_el$                   → 19:7 return…
+ =                     → 19:7 return…
+_tmpl$                 → 19:7 return…
+(),                    → 19:7 return…
+_el$2                  → 19:7 return…
+ =                     → 19:7 return…
+_el$                   → 19:7 return…
+.                      → 19:7 return…
+firstChild             → 19:7 return…
+,                      → 19:7 return…
+_el$3                  → 19:7 return…
+ =                     → 19:7 return…
+_el$2                  → 19:7 return…
+.                      → 19:7 return…
+nextSibling            → 19:7 return…
+,                      → 19:7 return…
+_el$4                  → 19:7 return…
+ =                     → 19:7 return…
+_el$3                  → 19:7 return…
+.                      → 19:7 return…
+nextSibling            → 19:7 return…
+;                      → 19:7 return…
+_el$                   → 19:7 return…
+.                      → 19:7 return…
+addEventListener       → 19:7 return…
+("submit",             → 19:7 return…
+event                  → 21:22 event
+ =>                    → 21:27 )…
+{                      → 21:31  {…
+event                  → 22:13 event
+.                      → 22:18 .
+preventDefault         → 22:19 preventDefault
+()                     → 22:33 ()
+;                      → 22:35 ;
+said                   → 23:13 said
+[                      → 23:17 [
+1                      → 23:18 1
+]                      → 23:19 ]
+(                      → 23:20 (
+event                  → 23:21 event
+.                      → 23:26 .
+type                   → 23:27 type
+ +                     → 23:31  + 
+" "                    → 23:34 " "
+ +                     → 23:37  + 
+event                  → 23:40 event
+.                      → 23:45 .
+cancelable             → 23:46 cancelable
+)                      → 23:56 )
+;                      → 23:57 ;
+}                      → 24:11 }
+);                     → 24:12 }…
+_el$2                  → 24:12 }…
+.                      → 24:12 }…
+$$input                → 24:12 }…
+ =                     → 24:12 }…
+event                  → 26:31 event
+ =>                    → 26:36 )…
+said                   → 26:41 said
+[                      → 26:45 [
+1                      → 26:46 1
+]                      → 26:47 ]
+(                      → 26:48 (
+event                  → 26:49 event
+.                      → 26:54 .
+currentTarget          → 26:55 currentTarget
+.                      → 26:68 .
+value                  → 26:69 value
+)                      → 26:74 )
+;                      → 26:75 }…
+_el$3                  → 26:75 }…
+.                      → 26:75 }…
+$$input                → 26:75 }…
+ =                     → 26:75 }…
+event                  → 27:28 event
+ =>                    → 27:33 )…
+said                   → 27:38 said
+[                      → 27:42 [
+1                      → 27:43 1
+]                      → 27:44 ]
+(                      → 27:45 (
+event                  → 27:46 event
+.                      → 27:51 .
+currentTarget          → 27:52 currentTarget
+.                      → 27:65 .
+value                  → 27:66 value
+)                      → 27:71 )
+;                      → 27:72 }…
+_el$4                  → 27:72 }…
+.                      → 27:72 }…
+$$click                → 27:72 }…
+ =                     → 27:72 }…
+event                  → 29:23 event
+ =>                    → 29:28 )…
+said                   → 30:15 said
+[                      → 30:19 [
+1                      → 30:20 1
+]                      → 30:21 ]
+(                      → 30:22 (
+event                  → 30:23 event
+.                      → 30:28 .
+clientX                → 30:29 clientX
+ +                     → 30:36  + 
+" "                    → 30:39 " "
+ +                     → 30:42  + 
+event                  → 30:45 event
+.                      → 30:50 .
+currentTarget          → 30:51 currentTarget
+.                      → 30:64 .
+tagName                → 30:65 tagName
+)                      → 30:72 )
+;                      → 31:13 }…
+_$insert               → 31:13 }…
+(                      → 31:13 }…
+_el$4                  → 31:13 }…
+, () =>                → 31:13 }…
+said                   → 33:14 said
+[                      → 33:18 [
+0                      → 33:19 0
+]                      → 33:20 ]
+()                     → 33:21 ()
+);                     → 33:23 }…
+return                 → 33:23 }…
+_el$                   → 33:23 }…
+;                      → 33:23 }…
+})();                  → 33:23 }…
+}                      → 37:5 }
+;                      → 37:6 `,…
+_$delegateEvents       → 37:6 `,…
+(["input", "click"]);  → 37:6 `,…

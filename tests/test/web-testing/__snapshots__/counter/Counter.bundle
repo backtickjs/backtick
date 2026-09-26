@@ -1,15 +1,22 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><button>Add</button><p>`);
     const $entry = ($0) => {
       const count = $0()(0);
-      return (
-        <div>
-          <button onclick={() => count.set(count.get() + 1)}>Add</button>
-          <p>{"Count: " + count.get()}</p>
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _el$2.$$click = () => count[1](count[0]() + 1);
+        _$insert(_el$3, () => "Count: " + count[0]());
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
-  return jsx(() => f1(() => state), {});
+  return jsx(() => f1(() => $modules["solid-js"].createSignal), {});
 })([]);

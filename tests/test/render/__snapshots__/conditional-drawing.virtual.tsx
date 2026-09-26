@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
 import type { Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A block whose drawing is a conditional, and a write that answers it.
@@ -13,14 +14,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 // never running the block again would pass the first and leave the page on the
 // branch it started with.
 
-// A component whose whole drawing is a conditional on a cell of its own, which
+// A component whose whole drawing is a conditional on a signal of its own, which
 // something writes once from outside the block.
 //
 // The fragment is what makes this work, and it is why a drawing answers with an
 // element: a conditional standing at a block's root has nowhere to be watched,
 // so `insert` reads it inside the computation it makes — and the write that
 // answers the condition re-runs that computation, which is this component
-// again, with a cell that has never been written and a timer that has never
+// again, with a signal that has never been written and a timer that has never
 // fired. Under `<>` the conditional is a child, and a child position owns a
 // computation of its own.
 //
@@ -29,21 +30,21 @@ import { snapshotCase } from "../snapshotCase.ts";
 // again. Without that, this case does not stop.
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_shown = cs.splice((state) satisfies typeof cs.Spliceable)(false);
+    const __cs_shown = cs.splice((createSignal) satisfies typeof cs.Spliceable)(false);
     const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => {
         if (cs.splice((again) satisfies typeof cs.Spliceable)()) {
-            __cs_shown.set(true);
+            __cs_shown[1](true);
         }
     }, 0);
-    return <>{cs.lift(__cs_shown.get() ? <em>shown</em> : <i>waiting</i>)}</>;
+    return <>{cs.lift(__cs_shown[0]() ? <em>shown</em> : <i>waiting</i>)}</>;
 })());
 }
 
 const conditionalDrawing = cs.lift((() => {
-    const __cs_builds = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<span>{cs.lift("builds " + __cs_builds.get())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
-        __cs_builds.set(__cs_builds.get() + 1);
-        return __cs_builds.get() < 5;
+    const __cs_builds = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <div>{cs.lift(<span>{cs.lift("builds " + __cs_builds[0]())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
+        __cs_builds[1](__cs_builds[0]() + 1);
+        return __cs_builds[0]() < 5;
     })}/>)}</section>)}</div>;
 })());
 

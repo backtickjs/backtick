@@ -24,6 +24,14 @@
     "./tspatch-plugin": {
       "types": "./dist/tspatch-plugin.d.ts",
       "default": "./dist/tspatch-plugin.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "default": "./dist/testing.js"
     }
   },
   "scripts": {
@@ -37,12 +45,14 @@
   "dependencies": {
     "@babel/core": "^7.29.7",
     "@backtickjs/platform-sdk": "workspace:^0.1.0",
+    "@backtickjs/ui-platform-sdk": "workspace:^0.1.0",
     "babel-preset-solid": "1.9.12",
     "solid-js": "1.9.14"
   },
   "devDependencies": {
     "@backtickjs/compiler": "workspace:^0.1.0",
     "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "@backtickjs/web-testing": "workspace:^0.1.0",
     "@jridgewell/trace-mapping": "^0.3.31",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^26.6.2",
@@ -52,10 +62,14 @@
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "@backtickjs/tspatch-plugin": "workspace:^0.1.0"
+    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
+    "@backtickjs/web-testing": "workspace:^0.1.0"
   },
   "peerDependenciesMeta": {
     "@backtickjs/tspatch-plugin": {
+      "optional": true
+    },
+    "@backtickjs/web-testing": {
       "optional": true
     }
   }

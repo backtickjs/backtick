@@ -1,2 +1,7 @@
 // 27:5
-export default ($0) => <$0 person={{ firstName: "ada" }}/>;
+import { createComponent as _$createComponent } from "solid-js/web";
+export default $0 => _$createComponent($0, {
+  person: {
+    firstName: "ada"
+  }
+});

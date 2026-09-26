@@ -1,17 +1,9 @@
 // 13:5
 export default () => {
-    const rows = [3, 1, 2];
-    const sorted = rows.toSorted((a, b) => a - b);
-    const reversed = rows.toReversed();
-    const spliced = rows.toSpliced(1, 1);
-    const inserted = rows.toSpliced(1, 0, 9);
-    return (sorted.join(",") +
-        "|" +
-        reversed.join(",") +
-        "|" +
-        spliced.join(",") +
-        "|" +
-        inserted.join(",") +
-        "|" +
-        rows.join(","));
+  const rows = [3, 1, 2];
+  const sorted = rows.toSorted((a, b) => a - b);
+  const reversed = rows.toReversed();
+  const spliced = rows.toSpliced(1, 1);
+  const inserted = rows.toSpliced(1, 0, 9);
+  return sorted.join(",") + "|" + reversed.join(",") + "|" + spliced.join(",") + "|" + inserted.join(",") + "|" + rows.join(",");
 };

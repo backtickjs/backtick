@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -23,94 +23,17 @@ it("scriptComponentNestedProp", async (t) => {
     cs.create(
       "f9eea3gp8wr6:27:4",
       { params: [{ kind: "tag", value: Greeting }] },
-      () => ({
-        type: "JSXElement",
-        loc: { start: { line: 27, column: 7 }, end: { line: 27, column: 49 } },
-        openingElement: {
-          type: "JSXOpeningElement",
-          loc: {
-            start: { line: 27, column: 7 },
-            end: { line: 27, column: 49 },
-          },
-          name: {
-            type: "JSXIdentifier",
-            loc: {
-              start: { line: 27, column: 8 },
-              end: { line: 27, column: 16 },
-            },
-            name: "Greeting",
-            param: 0,
-          },
-          attributes: [
-            {
-              type: "JSXAttribute",
-              loc: {
-                start: { line: 27, column: 17 },
-                end: { line: 27, column: 46 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 27, column: 17 },
-                  end: { line: 27, column: 23 },
-                },
-                name: "person",
-              },
-              value: {
-                type: "JSXExpressionContainer",
-                loc: {
-                  start: { line: 27, column: 24 },
-                  end: { line: 27, column: 46 },
-                },
-                expression: {
-                  type: "ObjectExpression",
-                  loc: {
-                    start: { line: 27, column: 25 },
-                    end: { line: 27, column: 45 },
-                  },
-                  properties: [
-                    {
-                      type: "Property",
-                      loc: {
-                        start: { line: 27, column: 27 },
-                        end: { line: 27, column: 43 },
-                      },
-                      key: {
-                        type: "Identifier",
-                        loc: {
-                          start: { line: 27, column: 27 },
-                          end: { line: 27, column: 36 },
-                        },
-                        name: "firstName",
-                      },
-                      value: {
-                        type: "Literal",
-                        loc: {
-                          start: { line: 27, column: 38 },
-                          end: { line: 27, column: 43 },
-                        },
-                        value: "ada",
-                      },
-                      kind: "init",
-                      computed: false,
-                      method: false,
-                      shorthand: false,
-                    },
-                  ],
-                },
-              },
-            },
-          ],
-          selfClosing: true,
-        },
-        children: [],
-        closingElement: null,
-      }),
       {
-        code: 'export default ($0) => <$0 person={{ firstName: "ada" }}/>;',
-        map: '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["script-component-nested-prop.test.tsx"],"names":[],"mappings":"eA0BO,QAAA,CAAC,EAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG"}',
-        imports: [],
-        exportAt: 0,
+        code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default $0 => _$createComponent($0, {\n  person: {\n    firstName: "ada"\n  }\n});',
+        map: '{"version":3,"mappings":";eA0BOA,EAAA,IAAAC,iBAAA,CAACD,EAAQ;EAACE,MAAM,EAAE;IAAEC,SAAS,EAAE;EAAK;AAAE,EAAI","names":["$0","_$createComponent","person","firstName"],"ignoreList":[],"sources":["script-component-nested-prop.test.tsx"]}',
+        imports: [
+          {
+            from: "solid-js/web",
+            range: [0, 68],
+            bindings: [{ name: "createComponent", local: "_$createComponent" }],
+          },
+        ],
+        exportAt: 69,
       },
     ),
   );

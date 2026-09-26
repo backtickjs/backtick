@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A component whose whole body is client code answers with the script rather
@@ -11,8 +12,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs`{
-    const n = $state(2);
-    return <em>{n.get()}</em>;
+    const n = $createSignal(2);
+    return <em>{n[0]()}</em>;
   }`;
 }
 

@@ -1,7 +1,10 @@
 (($d) => {
   const f1 = (() => {
     const $entry = () => {
-      const base = { a: 1, b: 2 };
+      const base = {
+        a: 1,
+        b: 2,
+      };
       const name = "b";
       return {
         ...base,

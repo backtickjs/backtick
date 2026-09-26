@@ -3,6 +3,7 @@ import {
   type Client,
   type ClientUnknown,
   isBuiltin,
+  isClientImport,
   type Spliceable,
 } from "@backtickjs/platform-sdk";
 import { isJsxElement, type JsxElement } from "@backtickjs/ui-platform-sdk";
@@ -27,6 +28,7 @@ import {
   nullLiteral,
   objectKey,
   property,
+  imported,
   raw,
   thunk,
   undefinedValue,
@@ -232,6 +234,9 @@ export async function buildBundle<T extends ClientUnknown>(
     if (isBuiltin(value)) {
       return builtin(names, value.name);
     }
+    if (isClientImport(value)) {
+      return imported(value.from, value.name);
+    }
     if (value === null) {
       return nullLiteral();
     }
@@ -374,6 +379,16 @@ export async function buildBundle<T extends ClientUnknown>(
     params: ReadonlySet<string>,
   ): Promise<ES.Expression> => {
     const type = jsx.type;
+    // A component a client module provides: called there with its props.
+    if (isClientImport(type)) {
+      const { written, children } = await renderProps(jsx, params);
+      return jsxComponent(
+        names,
+        imported(type.from, type.name),
+        written,
+        children,
+      );
+    }
     if (typeof type !== "string") {
       const drawn = await expandJsxElement(jsx, type);
       // A script is what runs on the client; an element it drew instead has no
@@ -383,6 +398,19 @@ export async function buildBundle<T extends ClientUnknown>(
         ? jsxComponent(names, thunk(await render(drawn, params)), [], null)
         : render(drawn, params);
     }
+    const { written, children } = await renderProps(jsx, params);
+    return jsxElement(names, type, written, children);
+  };
+
+  // An element's props, each an expression in the enclosing entry's scope, and
+  // its children apart.
+  const renderProps = async (
+    jsx: JsxElement,
+    params: ReadonlySet<string>,
+  ): Promise<{
+    written: [string, ES.Expression][];
+    children: ES.Expression | null;
+  }> => {
     const written: [string, ES.Expression][] = [];
     let children: ES.Expression | null = null;
     for (const [key, entry] of Object.entries(jsx.props)) {
@@ -397,7 +425,8 @@ export async function buildBundle<T extends ClientUnknown>(
         // be the app's own failure rather than a value that cannot cross — and
         // app code may throw anything, not only an error.
         const said = cause instanceof Error ? cause.message : String(cause);
-        throw new Error(`In the \`${key}\` prop of <${type} />: ${said}`, {
+        const tag = isClientImport(jsx.type) ? jsx.type.name : jsx.type;
+        throw new Error(`In the \`${key}\` prop of <${String(tag)} />: ${said}`, {
           cause,
         });
       }
@@ -407,8 +436,9 @@ export async function buildBundle<T extends ClientUnknown>(
       }
       written.push([key, rendered]);
     }
-    return jsxElement(names, type, written, children);
+    return { written, children };
   };
+
 
   // Nothing encloses the root, so nothing it holds can capture.
   const root = await render(value as Spliceable);

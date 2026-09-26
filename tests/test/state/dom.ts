@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { BacktickElement } from "@backtickjs/core";
-import { render } from "@backtickjs/web-testing";
+import { render } from "@backtickjs/solid-js/testing";
 
 // The behavior side of per-instance state: a write has to persist, move
 // everything that read the cell, and leave every other instance alone.

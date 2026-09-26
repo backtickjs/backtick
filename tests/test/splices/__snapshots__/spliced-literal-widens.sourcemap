@@ -3,7 +3,7 @@ const                             → const
 __cs_n                            → n
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 cs.splice(                        →  [-semantic]
@@ -13,8 +13,9 @@ cs.splice(                        →  [-semantic]
 ;                                 → ;
 \n                                → \n      
 __cs_n                            → n
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 6                                 → 6
 )                                 → )
@@ -24,7 +25,7 @@ const                             → const
 __cs_c                            → c
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 cs.splice(                        → ${ [-semantic]
@@ -34,8 +35,9 @@ Color.Red                         → Color.Red
 ;                                 → ;
 \n                                → \n      
 __cs_c                            → c
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 cs.splice(                        → ${ [-semantic]
 Color.Blue                        → Color.Blue

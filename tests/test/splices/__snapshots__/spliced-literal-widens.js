@@ -1,10 +1,11 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 // What a splice hands over keeps the width the host gave it.
 //
 // `const five = 5` has the literal type `5`, and an enum member has its own, so
-// a cell built from either would take no other value if the splice retyped what
+// a signal built from either would take no other value if the splice retyped what
 // it crossed. It does not: `cs.splice` reads its argument unbound, leaving the
 // binding to decide the width — `number` for the one, `Color` for the other.
 //
@@ -23,18 +24,18 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.create(
-      "323oescdizqb0:27:4",
+      "39eg5n9do9wwo:28:4",
       {
         params: [
-          { kind: "splice", value: state, bindings: [] },
+          { kind: "splice", value: createSignal, bindings: [] },
           { kind: "splice", value: five, bindings: [] },
           { kind: "splice", value: Color.Red, bindings: [] },
           { kind: "splice", value: Color.Blue, bindings: [] },
         ],
       },
       {
-        code: "export default ($0, $1, $2, $3) => {\n    const n = $0()($1());\n    n.set(6);\n    const c = $0()($2());\n    c.set($3());\n};",
-        map: '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["spliced-literal-widens.test.tsx"],"names":[],"mappings":"eA0BO;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,IAAK,CAAC,CAAC;IACxB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;IACT,MAAM,CAAC,GAAG,IAAM,CAAC,IAAC,CAAY,CAAC;IAC/B,CAAC,CAAC,GAAG,CAAC,IAAC,CAAa,CAAC;AACvB,CAAC"}',
+        code: "export default ($0, $1, $2, $3) => {\n  const n = $0()($1());\n  n[1](6);\n  const c = $0()($2());\n  c[1]($3());\n};",
+        map: '{"version":3,"mappings":"eA2BO,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGJ,EAAA,EAAa,CAACC,EAAA,EAAK,CAAC;EAC9BG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EACP,MAAMC,CAAC,GAAGL,EAAA,EAAa,CAACE,EAAA,EAAC,CAAY;EACrCG,CAAC,CAAC,CAAC,CAAC,CAACF,EAAA,EAAC,CAAa;AACrB,CAAC","names":["$0","$1","$2","$3","n","c"],"ignoreList":[],"sources":["spliced-literal-widens.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

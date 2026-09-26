@@ -1,30 +1,46 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div>`);
     const $entry = ($0, $1) => {
       const size = $0()(16);
-      return (
-        <div>
-          <$1 size={size} />
-          <$1 size={size} />
-        </div>
-      );
+      return (() => {
+        var _el$ = _tmpl$();
+        _$insert(
+          _el$,
+          _$createComponent($1, {
+            size: size,
+          }),
+          null,
+        );
+        _$insert(
+          _el$,
+          _$createComponent($1, {
+            size: size,
+          }),
+          null,
+        );
+        return _el$;
+      })();
     };
     return $entry;
   })();
   const f2 = (() => {
-    const $entry = ($0) => "font-size: " + $0().get() + "px";
+    const $entry = ($0) => "font-size: " + $0()[0]() + "px";
     return $entry;
   })();
   const f3 = (() => {
     const $entry = ($0) => () => {
-      $0().set($0().get() + 1);
+      $0()[1]($0()[0]() + 1);
     };
     return $entry;
   })();
   return jsx(
     () =>
       f1(
-        () => state,
+        () => $modules["solid-js"].createSignal,
         ($0) =>
           jsx("span", {
             style: () => f2(() => $0.size),

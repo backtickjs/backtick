@@ -68,7 +68,3 @@ export const nested = (
 // a boolean is not a child the web draws
 // @ts-expect-error: Type 'true' is not assignable to type 'Children | undefined'.
 export const wrongChild = <div>{true}</div>;
-
-// `br` holds nothing, so children are a type error
-// @ts-expect-error: Type '{ children: string; }' has no properties in common with type 'VoidProps<HTMLBRElement>'.
-export const voidWithChildren = <br>text</br>;

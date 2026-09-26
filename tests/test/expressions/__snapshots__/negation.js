@@ -14,8 +14,8 @@ it("negation", async (t) => {
       "3ucocch4sr77y:14:4",
       { params: [] },
       {
-        code: "export default () => (count) => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n};",
-        map: '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["negation.test.tsx"],"names":[],"mappings":"eAaO,MAAA,CAAC,KAAa,EAAE,EAAE;IACnB,MAAM,KAAK,GAAG,CAAC,CAAC,CAAC;IACjB,MAAM,IAAI,GAAG,CAAC,KAAK,CAAC;IACpB,OAAO,KAAK,GAAG,IAAI,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
+        code: "export default () => count => {\n  const floor = -1;\n  const step = -count;\n  return floor + step + -2;\n};",
+        map: '{"version":3,"mappings":"eAaO,MAACA,KAAa,IAAI;EACnB,MAAMC,KAAK,GAAG,CAAC,CAAC;EAChB,MAAMC,IAAI,GAAG,CAACF,KAAK;EACnB,OAAOC,KAAK,GAAGC,IAAI,GAAG,CAAC,CAAC;AAC1B,CAAC","names":["count","floor","step"],"ignoreList":[],"sources":["negation.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },
@@ -31,8 +31,8 @@ it("negativeZero", async (t) => {
       "3ucocch4sr77y:27:4",
       { params: [] },
       {
-        code: "export default () => {\n    return 1 / -0;\n};",
-        map: '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["negation.test.tsx"],"names":[],"mappings":"eA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC;AAChB,CAAC"}',
+        code: "export default () => {\n  return 1 / -0;\n};",
+        map: '{"version":3,"mappings":"eA0BO;EACD,OAAO,CAAC,GAAG,CAAC,CAAC;AACf,CAAC","names":[],"ignoreList":[],"sources":["negation.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

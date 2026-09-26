@@ -8,8 +8,8 @@ const greet = cs.create(
   "1i6s8vesd5nbi:8:14",
   { params: [] },
   {
-    code: 'export default () => (name) => {\n    return name?.concat("!");\n};',
-    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAOiB,MAAA,CAAC,IAAa,EAAE,EAAE;IACjC,OAAO,IAAI,EAAE,MAAM,CAAC,GAAG,CAAC,CAAC;AAC3B,CAAC"}',
+    code: 'export default () => name => {\n  return name?.concat("!");\n};',
+    map: '{"version":3,"mappings":"eAOiB,MAACA,IAAa,IAAI;EACjC,OAAOA,IAAI,EAAEC,MAAM,CAAC,GAAG,CAAC;AAC1B,CAAC","names":["name","concat"],"ignoreList":[],"sources":["optional-parameter.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -21,7 +21,7 @@ const double = cs.create(
   { params: [] },
   {
     code: "export default () => () => 2;",
-    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAakB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
+    map: '{"version":3,"mappings":"eAakB,YAAM,CAAC","names":[],"ignoreList":[],"sources":["optional-parameter.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -30,8 +30,8 @@ const callIfGiven = cs.create(
   "1i6s8vesd5nbi:16:20",
   { params: [] },
   {
-    code: "export default () => (cb) => {\n    return cb?.() ?? 0;\n};",
-    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAeuB,MAAA,CAAC,EAAiB,EAAE,EAAE;IAC3C,OAAO,EAAE,EAAE,EAAE,IAAI,CAAC,CAAC;AACrB,CAAC"}',
+    code: "export default () => cb => {\n  return cb?.() ?? 0;\n};",
+    map: '{"version":3,"mappings":"eAeuB,MAACA,EAAiB,IAAI;EAC3C,OAAOA,EAAE,GAAE,CAAE,IAAI,CAAC;AACpB,CAAC","names":["cb"],"ignoreList":[],"sources":["optional-parameter.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -50,8 +50,8 @@ it("optionalParameter", async (t) => {
         ],
       },
       {
-        code: 'export default ($0, $1, $2) => ({\n    named: $0()("hi"),\n    explicit: $0()(undefined),\n    omitted: $0()(),\n    supplied: $1()($2()),\n    fallback: $1()(undefined),\n    omittedCallback: $1()(),\n});',
-        map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAM,CAAC,IAAI,CAAC;IACnB,QAAQ,EAAE,IAAM,CAAC,SAAS,CAAC;IAC3B,OAAO,EAAE,IAAM,EAAE;IACjB,QAAQ,EAAE,IAAY,CAAC,IAAO,CAAC;IAC/B,QAAQ,EAAE,IAAY,CAAC,SAAS,CAAC;IACjC,eAAe,EAAE,IAAY,EAAE;CAChC,CAAC"}',
+        code: 'export default ($0, $1, $2) => ({\n  named: $0()("hi"),\n  explicit: $0()(undefined),\n  omitted: $0()(),\n  supplied: $1()($2()),\n  fallback: $1()(undefined),\n  omittedCallback: $1()()\n});',
+        map: '{"version":3,"mappings":"eAuBO,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,MAAC;EACFC,KAAK,EAAEH,EAAA,EAAM,CAAC,IAAI,CAAC;EACnBI,QAAQ,EAAEJ,EAAA,EAAM,CAACK,SAAS,CAAC;EAC3BC,OAAO,EAAEN,EAAA,EAAM,EAAE;EACjBO,QAAQ,EAAEN,EAAA,EAAY,CAACC,EAAA,EAAO,CAAC;EAC/BM,QAAQ,EAAEP,EAAA,EAAY,CAACI,SAAS,CAAC;EACjCI,eAAe,EAAER,EAAA,EAAY;CAC9B,CAAC","names":["$0","$1","$2","named","explicit","undefined","omitted","supplied","fallback","omittedCallback"],"ignoreList":[],"sources":["optional-parameter.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

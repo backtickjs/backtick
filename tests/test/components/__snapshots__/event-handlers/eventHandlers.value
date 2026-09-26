@@ -1,7 +1,5 @@
 <form onsubmit={[function]}>
-  <textarea oninput={[function]} />
-  <input oninput={[function]} />
-  <button onclick={[function]}>
-    {""}
-  </button>
+  <textarea />
+  <input />
+  <button />
 </form>

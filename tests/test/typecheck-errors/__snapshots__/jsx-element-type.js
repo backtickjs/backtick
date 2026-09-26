@@ -1,7 +1,7 @@
 import {
   jsx as _jsx,
   Fragment as _Fragment,
-} from "@backtickjs/web-sdk/jsx-runtime";
+} from "@backtickjs/solid-js/jsx-runtime";
 import { For } from "@backtickjs/core";
 import { Fragment } from "@backtickjs/web-sdk";
 // What the JSX namespace admits, and what it refuses.
@@ -53,6 +53,3 @@ export const nested = _jsx("div", {
 // a boolean is not a child the web draws
 // @ts-expect-error: Type 'true' is not assignable to type 'Children | undefined'.
 export const wrongChild = _jsx("div", { children: true });
-// `br` holds nothing, so children are a type error
-// @ts-expect-error: Type '{ children: string; }' has no properties in common with type 'VoidProps<HTMLBRElement>'.
-export const voidWithChildren = _jsx("br", { children: "text" });

@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { computed, cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createMemo, createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // Each script logs where it runs, so a test counts the runs by counting the
@@ -23,12 +24,12 @@ describe("computed", () => {
   it("runs once per change, however many read it", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(1);
-    const __cs_doubled = cs.splice((computed) satisfies typeof cs.Spliceable)(() => {
+    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
+    const __cs_doubled = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => {
         cs.splice((window) satisfies typeof cs.Spliceable).console.log();
-        return __cs_n.get() * 2;
+        return __cs_n[0]() * 2;
     });
-    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift("a " + __cs_doubled.get())}</p>)}{cs.lift(<p>{cs.lift("b " + __cs_doubled.get())}</p>)}{cs.lift(<p>{cs.lift("c " + __cs_doubled.get())}</p>)}</div>;
+    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift("a " + __cs_doubled())}</p>)}{cs.lift(<p>{cs.lift("b " + __cs_doubled())}</p>)}{cs.lift(<p>{cs.lift("c " + __cs_doubled())}</p>)}</div>;
 })()),
     );
     assert.equal(runs, 1);
@@ -42,13 +43,13 @@ describe("computed", () => {
   it("passes a change on only when its value changes", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(1);
-    const __cs_isBig = cs.splice((computed) satisfies typeof cs.Spliceable)(() => __cs_n.get() > 2);
+    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
+    const __cs_isBig = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => __cs_n[0]() > 2);
     const __cs_label = () => {
         cs.splice((window) satisfies typeof cs.Spliceable).console.log();
-        return __cs_isBig.get() ? "big" : "small";
+        return __cs_isBig() ? "big" : "small";
     };
-    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
+    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
 })()),
     );
     assert.equal(runs, 1);

@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
 import type { Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
 
@@ -19,28 +20,28 @@ const answerItems = ["one", "two"];
 
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs`{
-    const items = $state<string[]>([]);
+    const items = $createSignal<string[]>([]);
 
     const started = $window.setTimeout(() => {
       if ($more()) {
-        items.set($answerItems);
+        items[1]($answerItems);
       }
     }, 0);
 
-    return <For each={items.get()}>{(item: string) => <em>{item}</em>}</For>;
+    return <For each={items[0]()}>{(item: string) => <em>{item}</em>}</For>;
   }`;
 }
 
 const forBuildsOnce = cs`{
-  const asked = $state(0);
+  const asked = $createSignal(0);
 
   return (
     <div>
-      <span>{"asked " + asked.get()}</span>
+      <span>{"asked " + asked[0]()}</span>
       <WaitingList
         more={() => {
-          asked.set(asked.get() + 1);
-          return asked.get() < 5;
+          asked[1](asked[0]() + 1);
+          return asked[0]() < 5;
         }}
       />
     </div>

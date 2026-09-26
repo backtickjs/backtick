@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A type the host declared, named from inside a script: as a type argument, as
@@ -16,9 +17,9 @@ type Row = { id: number; label: string };
 
 async function Rows() {
   return cs`{
-    const rows = $state<Row[]>([]);
+    const rows = $createSignal<Row[]>([]);
     const add = (row: Row) => {
-      rows.set([row]);
+      rows[1]([row]);
     };
     const label = (row: Row) => {
       return row.label;
@@ -27,7 +28,7 @@ async function Rows() {
       <div>
         <span onclick={() => add({ id: 1, label: "one" })}>add</span>
         <div>
-          <For each={rows.get()}>{(row: Row) => <span>{label(row)}</span>}</For>
+          <For each={rows[0]()}>{(row: Row) => <span>{label(row)}</span>}</For>
         </div>
       </div>
     );

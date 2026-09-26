@@ -1,11 +1,12 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // What a splice hands over keeps the width the host gave it.
 //
 // `const five = 5` has the literal type `5`, and an enum member has its own, so
-// a cell built from either would take no other value if the splice retyped what
+// a signal built from either would take no other value if the splice retyped what
 // it crossed. It does not: `cs.splice` reads its argument unbound, leaving the
 // binding to decide the width — `number` for the one, `Color` for the other.
 //
@@ -25,10 +26,10 @@ it("splicedLiteralWidens", async (t) => {
     t,
     "splicedLiteralWidens",
     cs.lift((() => {
-    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(cs.splice((five) satisfies typeof cs.Spliceable));
-    __cs_n.set(6);
-    const __cs_c = cs.splice((state) satisfies typeof cs.Spliceable)(cs.splice(Color.Red satisfies typeof cs.Spliceable));
-    __cs_c.set(cs.splice(Color.Blue satisfies typeof cs.Spliceable));
+    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(cs.splice((five) satisfies typeof cs.Spliceable));
+    __cs_n[1](6);
+    const __cs_c = cs.splice((createSignal) satisfies typeof cs.Spliceable)(cs.splice(Color.Red satisfies typeof cs.Spliceable));
+    __cs_c[1](cs.splice(Color.Blue satisfies typeof cs.Spliceable));
 })()),
   );
 });

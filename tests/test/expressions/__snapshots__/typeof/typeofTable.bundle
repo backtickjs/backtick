@@ -9,7 +9,9 @@
         typeof 1,
         typeof "a",
         typeof [1],
-        typeof { a: 1 },
+        typeof {
+          a: 1,
+        },
         typeof ((n) => n),
         typeof Math.floor,
         typeof count,
@@ -17,5 +19,5 @@
     };
     return $entry;
   })();
-  return f1(() => state);
+  return f1(() => $modules["solid-js"].createSignal);
 })([]);

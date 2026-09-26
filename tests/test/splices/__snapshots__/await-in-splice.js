@@ -19,8 +19,8 @@ it("awaitInSplice", async (t) => {
         ],
       },
       {
-        code: 'export default ($0) => $0() + "!";',
-        map: '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["await-in-splice.test.tsx"],"names":[],"mappings":"eAY4C,QAAA,IAAC,GAA0B,GAAG"}',
+        code: 'export default $0 => $0() + "!";',
+        map: '{"version":3,"mappings":"eAY4CA,EAAA,IAAAA,EAAA,EAAC,GAA0B,GAAG","names":["$0"],"ignoreList":[],"sources":["await-in-splice.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 // What the page held each time a script logged, read through the console
 // `onMount` reaches from a script.
@@ -24,381 +25,30 @@ describe("onMount", () => {
     const seen = await logged(() =>
       render(
         cs.create(
-          "1qp1kr79c2kqf:28:8",
+          "20lmqniw1759i:29:8",
           {
             params: [
-              { kind: "splice", value: state, bindings: [] },
+              { kind: "splice", value: createSignal, bindings: [] },
               { kind: "splice", value: onMount, bindings: [] },
               { kind: "splice", value: window, bindings: [] },
             ],
           },
-          () => ({
-            type: "BlockStatement",
-            loc: {
-              start: { line: 28, column: 11 },
-              end: { line: 35, column: 9 },
-            },
-            body: [
+          {
+            code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<p>`);\nexport default ($0, $1, $2) => {\n  const count = $0()(0);\n  $1()(() => {\n    $2().console.log();\n    count[1](count[0]() + 1);\n  });\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "mounted " + count[0]());\n    return _el$;\n  })();\n};',
+            map: '{"version":3,"mappings":";;;eA4BW,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9BC,EAAA,EAAQ,CAAC,MAAK;IACZC,EAAA,EAAO,CAACE,OAAO,CAACC,GAAG,EAAE;IACrBF,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;EAC1B,CAAC,CAAC;EACF;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAW,UAAU,GAAGH,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAG,IAAA;EAAA;AACpC,CAAC","names":["$0","$1","$2","count","console","log","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["on-mount.test.tsx"]}',
+            imports: [
               {
-                type: "VariableDeclaration",
-                loc: {
-                  start: { line: 29, column: 10 },
-                  end: { line: 29, column: 34 },
-                },
-                kind: "const",
-                declarations: [
-                  {
-                    type: "VariableDeclarator",
-                    loc: {
-                      start: { line: 29, column: 16 },
-                      end: { line: 29, column: 33 },
-                    },
-                    id: {
-                      type: "Identifier",
-                      loc: {
-                        start: { line: 29, column: 16 },
-                        end: { line: 29, column: 21 },
-                      },
-                      name: "count",
-                      key: "count$1qp1kr79c2kqf$0",
-                    },
-                    init: {
-                      type: "CallExpression",
-                      loc: {
-                        start: { line: 29, column: 24 },
-                        end: { line: 29, column: 33 },
-                      },
-                      callee: {
-                        type: "Splice",
-                        loc: {
-                          start: { line: 29, column: 24 },
-                          end: { line: 29, column: 30 },
-                        },
-                        param: 0,
-                      },
-                      arguments: [
-                        {
-                          type: "Literal",
-                          loc: {
-                            start: { line: 29, column: 31 },
-                            end: { line: 29, column: 32 },
-                          },
-                          value: 0,
-                        },
-                      ],
-                      optional: false,
-                    },
-                  },
-                ],
+                from: "solid-js/web",
+                range: [0, 54],
+                bindings: [{ name: "template", local: "_$template" }],
               },
               {
-                type: "ExpressionStatement",
-                loc: {
-                  start: { line: 30, column: 10 },
-                  end: { line: 33, column: 13 },
-                },
-                expression: {
-                  type: "CallExpression",
-                  loc: {
-                    start: { line: 30, column: 10 },
-                    end: { line: 33, column: 12 },
-                  },
-                  callee: {
-                    type: "Splice",
-                    loc: {
-                      start: { line: 30, column: 10 },
-                      end: { line: 30, column: 18 },
-                    },
-                    param: 1,
-                  },
-                  arguments: [
-                    {
-                      type: "ArrowFunctionExpression",
-                      loc: {
-                        start: { line: 30, column: 19 },
-                        end: { line: 33, column: 11 },
-                      },
-                      params: [],
-                      body: {
-                        type: "BlockStatement",
-                        loc: {
-                          start: { line: 30, column: 25 },
-                          end: { line: 33, column: 11 },
-                        },
-                        body: [
-                          {
-                            type: "ExpressionStatement",
-                            loc: {
-                              start: { line: 31, column: 12 },
-                              end: { line: 31, column: 34 },
-                            },
-                            expression: {
-                              type: "CallExpression",
-                              loc: {
-                                start: { line: 31, column: 12 },
-                                end: { line: 31, column: 33 },
-                              },
-                              callee: {
-                                type: "MemberExpression",
-                                loc: {
-                                  start: { line: 31, column: 12 },
-                                  end: { line: 31, column: 31 },
-                                },
-                                object: {
-                                  type: "MemberExpression",
-                                  loc: {
-                                    start: { line: 31, column: 12 },
-                                    end: { line: 31, column: 27 },
-                                  },
-                                  object: {
-                                    type: "Splice",
-                                    loc: {
-                                      start: { line: 31, column: 12 },
-                                      end: { line: 31, column: 19 },
-                                    },
-                                    param: 2,
-                                  },
-                                  property: {
-                                    type: "Identifier",
-                                    loc: {
-                                      start: { line: 31, column: 20 },
-                                      end: { line: 31, column: 27 },
-                                    },
-                                    name: "console",
-                                  },
-                                  computed: false,
-                                  optional: false,
-                                },
-                                property: {
-                                  type: "Identifier",
-                                  loc: {
-                                    start: { line: 31, column: 28 },
-                                    end: { line: 31, column: 31 },
-                                  },
-                                  name: "log",
-                                },
-                                computed: false,
-                                optional: false,
-                              },
-                              arguments: [],
-                              optional: false,
-                            },
-                          },
-                          {
-                            type: "ExpressionStatement",
-                            loc: {
-                              start: { line: 32, column: 12 },
-                              end: { line: 32, column: 39 },
-                            },
-                            expression: {
-                              type: "CallExpression",
-                              loc: {
-                                start: { line: 32, column: 12 },
-                                end: { line: 32, column: 38 },
-                              },
-                              callee: {
-                                type: "MemberExpression",
-                                loc: {
-                                  start: { line: 32, column: 12 },
-                                  end: { line: 32, column: 21 },
-                                },
-                                object: {
-                                  type: "Identifier",
-                                  loc: {
-                                    start: { line: 32, column: 12 },
-                                    end: { line: 32, column: 17 },
-                                  },
-                                  name: "count",
-                                  key: "count$1qp1kr79c2kqf$0",
-                                },
-                                property: {
-                                  type: "Identifier",
-                                  loc: {
-                                    start: { line: 32, column: 18 },
-                                    end: { line: 32, column: 21 },
-                                  },
-                                  name: "set",
-                                },
-                                computed: false,
-                                optional: false,
-                              },
-                              arguments: [
-                                {
-                                  type: "BinaryExpression",
-                                  loc: {
-                                    start: { line: 32, column: 22 },
-                                    end: { line: 32, column: 37 },
-                                  },
-                                  operator: "+",
-                                  left: {
-                                    type: "CallExpression",
-                                    loc: {
-                                      start: { line: 32, column: 22 },
-                                      end: { line: 32, column: 33 },
-                                    },
-                                    callee: {
-                                      type: "MemberExpression",
-                                      loc: {
-                                        start: { line: 32, column: 22 },
-                                        end: { line: 32, column: 31 },
-                                      },
-                                      object: {
-                                        type: "Identifier",
-                                        loc: {
-                                          start: { line: 32, column: 22 },
-                                          end: { line: 32, column: 27 },
-                                        },
-                                        name: "count",
-                                        key: "count$1qp1kr79c2kqf$0",
-                                      },
-                                      property: {
-                                        type: "Identifier",
-                                        loc: {
-                                          start: { line: 32, column: 28 },
-                                          end: { line: 32, column: 31 },
-                                        },
-                                        name: "get",
-                                      },
-                                      computed: false,
-                                      optional: false,
-                                    },
-                                    arguments: [],
-                                    optional: false,
-                                  },
-                                  right: {
-                                    type: "Literal",
-                                    loc: {
-                                      start: { line: 32, column: 36 },
-                                      end: { line: 32, column: 37 },
-                                    },
-                                    value: 1,
-                                  },
-                                },
-                              ],
-                              optional: false,
-                            },
-                          },
-                        ],
-                      },
-                      expression: false,
-                    },
-                  ],
-                  optional: false,
-                },
-              },
-              {
-                type: "ReturnStatement",
-                loc: {
-                  start: { line: 34, column: 10 },
-                  end: { line: 34, column: 51 },
-                },
-                argument: {
-                  type: "JSXElement",
-                  loc: {
-                    start: { line: 34, column: 17 },
-                    end: { line: 34, column: 50 },
-                  },
-                  openingElement: {
-                    type: "JSXOpeningElement",
-                    loc: {
-                      start: { line: 34, column: 17 },
-                      end: { line: 34, column: 20 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 34, column: 18 },
-                        end: { line: 34, column: 19 },
-                      },
-                      name: "p",
-                    },
-                    attributes: [],
-                    selfClosing: false,
-                  },
-                  children: [
-                    {
-                      type: "JSXExpressionContainer",
-                      loc: {
-                        start: { line: 34, column: 20 },
-                        end: { line: 34, column: 46 },
-                      },
-                      expression: {
-                        type: "BinaryExpression",
-                        loc: {
-                          start: { line: 34, column: 21 },
-                          end: { line: 34, column: 45 },
-                        },
-                        operator: "+",
-                        left: {
-                          type: "Literal",
-                          loc: {
-                            start: { line: 34, column: 21 },
-                            end: { line: 34, column: 31 },
-                          },
-                          value: "mounted ",
-                        },
-                        right: {
-                          type: "CallExpression",
-                          loc: {
-                            start: { line: 34, column: 34 },
-                            end: { line: 34, column: 45 },
-                          },
-                          callee: {
-                            type: "MemberExpression",
-                            loc: {
-                              start: { line: 34, column: 34 },
-                              end: { line: 34, column: 43 },
-                            },
-                            object: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 34, column: 34 },
-                                end: { line: 34, column: 39 },
-                              },
-                              name: "count",
-                              key: "count$1qp1kr79c2kqf$0",
-                            },
-                            property: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 34, column: 40 },
-                                end: { line: 34, column: 43 },
-                              },
-                              name: "get",
-                            },
-                            computed: false,
-                            optional: false,
-                          },
-                          arguments: [],
-                          optional: false,
-                        },
-                      },
-                    },
-                  ],
-                  closingElement: {
-                    type: "JSXClosingElement",
-                    loc: {
-                      start: { line: 34, column: 46 },
-                      end: { line: 34, column: 50 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 34, column: 48 },
-                        end: { line: 34, column: 49 },
-                      },
-                      name: "p",
-                    },
-                  },
-                },
+                from: "solid-js/web",
+                range: [55, 105],
+                bindings: [{ name: "insert", local: "_$insert" }],
               },
             ],
-          }),
-          {
-            code: 'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    $1()(() => {\n        $2().console.log();\n        count.set(count.get() + 1);\n    });\n    return <p>{"mounted " + count.get()}</p>;\n};',
-            map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["on-mount.test.tsx"],"names":[],"mappings":"eA2BW;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,IAAQ,CAAC,GAAG,EAAE;QACZ,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC,CAAC;IACH,OAAO,CAAC,CAAC,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;AAC3C,CAAC"}',
-            imports: [],
-            exportAt: 0,
+            exportAt: 151,
           },
         ),
       ),
@@ -409,287 +59,34 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     await render(
       cs.create(
-        "1qp1kr79c2kqf:44:6",
+        "20lmqniw1759i:45:6",
         {
           params: [
-            { kind: "splice", value: state, bindings: [] },
+            { kind: "splice", value: createSignal, bindings: [] },
             { kind: "splice", value: onMount, bindings: [] },
           ],
         },
-        () => ({
-          type: "BlockStatement",
-          loc: { start: { line: 44, column: 9 }, end: { line: 51, column: 7 } },
-          body: [
+        {
+          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<button>`);\nexport default ($0, $1) => {\n  const said = $0()("not yet");\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => $1()(() => said[1]("ran"));\n    _$insert(_el$, () => said[0]());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
+          map: '{"version":3,"mappings":";;;;eA4CS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,IAAI,GAAGF,EAAA,EAAa,CAAC,SAAS,CAAC;EACrC;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMJ,EAAA,EAAQ,CAAC,MAAMC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC;IAAAI,QAAA,CAAAH,IAAA,QAClDD,IAAI,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAC,IAAA;EAAA;AAGhB,CAAC;AAAAI,gBAAA","names":["$0","$1","said","_el$","_tmpl$","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["on-mount.test.tsx"]}',
+          imports: [
             {
-              type: "VariableDeclaration",
-              loc: {
-                start: { line: 45, column: 8 },
-                end: { line: 45, column: 39 },
-              },
-              kind: "const",
-              declarations: [
-                {
-                  type: "VariableDeclarator",
-                  loc: {
-                    start: { line: 45, column: 14 },
-                    end: { line: 45, column: 38 },
-                  },
-                  id: {
-                    type: "Identifier",
-                    loc: {
-                      start: { line: 45, column: 14 },
-                      end: { line: 45, column: 18 },
-                    },
-                    name: "said",
-                    key: "said$1qp1kr79c2kqf$1",
-                  },
-                  init: {
-                    type: "CallExpression",
-                    loc: {
-                      start: { line: 45, column: 21 },
-                      end: { line: 45, column: 38 },
-                    },
-                    callee: {
-                      type: "Splice",
-                      loc: {
-                        start: { line: 45, column: 21 },
-                        end: { line: 45, column: 27 },
-                      },
-                      param: 0,
-                    },
-                    arguments: [
-                      {
-                        type: "Literal",
-                        loc: {
-                          start: { line: 45, column: 28 },
-                          end: { line: 45, column: 37 },
-                        },
-                        value: "not yet",
-                      },
-                    ],
-                    optional: false,
-                  },
-                },
-              ],
+              from: "solid-js/web",
+              range: [0, 54],
+              bindings: [{ name: "template", local: "_$template" }],
             },
             {
-              type: "ReturnStatement",
-              loc: {
-                start: { line: 46, column: 8 },
-                end: { line: 50, column: 10 },
-              },
-              argument: {
-                type: "JSXElement",
-                loc: {
-                  start: { line: 47, column: 10 },
-                  end: { line: 49, column: 19 },
-                },
-                openingElement: {
-                  type: "JSXOpeningElement",
-                  loc: {
-                    start: { line: 47, column: 10 },
-                    end: { line: 47, column: 66 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 47, column: 11 },
-                      end: { line: 47, column: 17 },
-                    },
-                    name: "button",
-                  },
-                  attributes: [
-                    {
-                      type: "JSXAttribute",
-                      loc: {
-                        start: { line: 47, column: 18 },
-                        end: { line: 47, column: 65 },
-                      },
-                      name: {
-                        type: "JSXIdentifier",
-                        loc: {
-                          start: { line: 47, column: 18 },
-                          end: { line: 47, column: 25 },
-                        },
-                        name: "onclick",
-                      },
-                      value: {
-                        type: "JSXExpressionContainer",
-                        loc: {
-                          start: { line: 47, column: 26 },
-                          end: { line: 47, column: 65 },
-                        },
-                        expression: {
-                          type: "ArrowFunctionExpression",
-                          loc: {
-                            start: { line: 47, column: 27 },
-                            end: { line: 47, column: 64 },
-                          },
-                          params: [],
-                          body: {
-                            type: "CallExpression",
-                            loc: {
-                              start: { line: 47, column: 33 },
-                              end: { line: 47, column: 64 },
-                            },
-                            callee: {
-                              type: "Splice",
-                              loc: {
-                                start: { line: 47, column: 33 },
-                                end: { line: 47, column: 41 },
-                              },
-                              param: 1,
-                            },
-                            arguments: [
-                              {
-                                type: "ArrowFunctionExpression",
-                                loc: {
-                                  start: { line: 47, column: 42 },
-                                  end: { line: 47, column: 63 },
-                                },
-                                params: [],
-                                body: {
-                                  type: "CallExpression",
-                                  loc: {
-                                    start: { line: 47, column: 48 },
-                                    end: { line: 47, column: 63 },
-                                  },
-                                  callee: {
-                                    type: "MemberExpression",
-                                    loc: {
-                                      start: { line: 47, column: 48 },
-                                      end: { line: 47, column: 56 },
-                                    },
-                                    object: {
-                                      type: "Identifier",
-                                      loc: {
-                                        start: { line: 47, column: 48 },
-                                        end: { line: 47, column: 52 },
-                                      },
-                                      name: "said",
-                                      key: "said$1qp1kr79c2kqf$1",
-                                    },
-                                    property: {
-                                      type: "Identifier",
-                                      loc: {
-                                        start: { line: 47, column: 53 },
-                                        end: { line: 47, column: 56 },
-                                      },
-                                      name: "set",
-                                    },
-                                    computed: false,
-                                    optional: false,
-                                  },
-                                  arguments: [
-                                    {
-                                      type: "Literal",
-                                      loc: {
-                                        start: { line: 47, column: 57 },
-                                        end: { line: 47, column: 62 },
-                                      },
-                                      value: "ran",
-                                    },
-                                  ],
-                                  optional: false,
-                                },
-                                expression: true,
-                              },
-                            ],
-                            optional: false,
-                          },
-                          expression: true,
-                        },
-                      },
-                    },
-                  ],
-                  selfClosing: false,
-                },
-                children: [
-                  {
-                    type: "JSXText",
-                    loc: {
-                      start: { line: 48, column: 12 },
-                      end: { line: 48, column: 12 },
-                    },
-                    value: "\n            ",
-                    raw: "\n            ",
-                  },
-                  {
-                    type: "JSXExpressionContainer",
-                    loc: {
-                      start: { line: 48, column: 12 },
-                      end: { line: 48, column: 24 },
-                    },
-                    expression: {
-                      type: "CallExpression",
-                      loc: {
-                        start: { line: 48, column: 13 },
-                        end: { line: 48, column: 23 },
-                      },
-                      callee: {
-                        type: "MemberExpression",
-                        loc: {
-                          start: { line: 48, column: 13 },
-                          end: { line: 48, column: 21 },
-                        },
-                        object: {
-                          type: "Identifier",
-                          loc: {
-                            start: { line: 48, column: 13 },
-                            end: { line: 48, column: 17 },
-                          },
-                          name: "said",
-                          key: "said$1qp1kr79c2kqf$1",
-                        },
-                        property: {
-                          type: "Identifier",
-                          loc: {
-                            start: { line: 48, column: 18 },
-                            end: { line: 48, column: 21 },
-                          },
-                          name: "get",
-                        },
-                        computed: false,
-                        optional: false,
-                      },
-                      arguments: [],
-                      optional: false,
-                    },
-                  },
-                  {
-                    type: "JSXText",
-                    loc: {
-                      start: { line: 49, column: 10 },
-                      end: { line: 49, column: 10 },
-                    },
-                    value: "\n          ",
-                    raw: "\n          ",
-                  },
-                ],
-                closingElement: {
-                  type: "JSXClosingElement",
-                  loc: {
-                    start: { line: 49, column: 10 },
-                    end: { line: 49, column: 19 },
-                  },
-                  name: {
-                    type: "JSXIdentifier",
-                    loc: {
-                      start: { line: 49, column: 12 },
-                      end: { line: 49, column: 18 },
-                    },
-                    name: "button",
-                  },
-                },
-              },
+              from: "solid-js/web",
+              range: [55, 121],
+              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
+            },
+            {
+              from: "solid-js/web",
+              range: [122, 172],
+              bindings: [{ name: "insert", local: "_$insert" }],
             },
           ],
-        }),
-        {
-          code: 'export default ($0, $1) => {\n    const said = $0()("not yet");\n    return (<button onclick={() => $1()(() => said.set("ran"))}>\n            {said.get()}\n          </button>);\n};',
-          map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["on-mount.test.tsx"],"names":[],"mappings":"eA2CS;IACD,MAAM,IAAI,GAAG,IAAM,CAAC,SAAS,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CACrD;YAAA,CAAC,IAAI,CAAC,GAAG,EAAE,CACb;UAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
-          imports: [],
-          exportAt: 0,
+          exportAt: 223,
         },
       ),
     );

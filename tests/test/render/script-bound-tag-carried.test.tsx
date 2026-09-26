@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import type { BacktickElement, Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -25,7 +26,7 @@ async function Panel(props: { body: Prop<BacktickElement> }) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs`{
-  const count = $state(0);
+  const count = $createSignal(0);
   const Badge = (p: { n: number; children: BacktickElement }) => (
     <b>
       {"outer " + p.n}
@@ -37,12 +38,12 @@ const scriptBoundTagCarried = cs`{
     <div>
       <Panel
         body={
-          ${cs`<Badge n={count.get()}>
-            <u>{"kid " + count.get()}</u>
+          ${cs`<Badge n={count[0]()}>
+            <u>{"kid " + count[0]()}</u>
           </Badge>`}
         }
       />
-      <button onclick={() => count.set(count.get() + 1)}>more</button>
+      <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>
   );
 }`;

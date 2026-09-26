@@ -1,5 +1,5 @@
 <div>
-  <span onclick={[function]}>
+  <span>
     {"select"}
   </span>
   <div>

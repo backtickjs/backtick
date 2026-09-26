@@ -3,7 +3,7 @@ const                             → const
 __cs_rows                         → rows
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 <                                 → <
 Row                               → Row
@@ -22,8 +22,9 @@ __cs_row                          → row
 Row                               → Row
 ) => {\n                          → ) => {\n      
 __cs_rows                         → rows
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 [                                 → [
 __cs_row                          → row
@@ -85,8 +86,9 @@ For                               → For
 each                              → each
 ={cs.lift(                        → ={
 __cs_rows                         → rows
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}                                → }
 >{cs.lift(                        → >{

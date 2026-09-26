@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { computed, cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createMemo, createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // Each reader logs when it runs, so a test counts the runs by counting the
@@ -22,20 +23,22 @@ afterEach(() => {
 const press = () => userEvent.click(screen.getByRole("button"));
 
 describe("equals", () => {
-  it("keeps a computed's readers from updating for an equal value", async () => {
+  it("keeps a memo's readers from updating for an equal value", async () => {
     await render(
       cs`{
-        const n = $state(1);
-        const size = $computed(() => ({ isBig: n.get() > 2, n: n.get() }), {
-          equals: (previous, next) => previous.isBig === next.isBig,
-        });
+        const n = $createSignal(1);
+        const size = $createMemo(
+          () => ({ isBig: n[0]() > 2, n: n[0]() }),
+          undefined,
+          { equals: (previous, next) => previous.isBig === next.isBig },
+        );
         const label = () => {
           $window.console.log();
-          return size.get().isBig ? "big" : "small";
+          return size().isBig ? "big" : "small";
         };
         return (
           <div>
-            <button onclick={() => n.set(n.get() + 1)}>add</button>
+            <button onclick={() => n[1](n[0]() + 1)}>add</button>
             <p>{label()}</p>
           </div>
         );
@@ -52,20 +55,20 @@ describe("equals", () => {
     assert.ok(screen.getByText("big"));
   });
 
-  it("keeps a state's readers from updating for an equal value", async () => {
+  it("keeps a signal's readers from updating for an equal value", async () => {
     await render(
       cs`{
-        const point = $state(
+        const point = $createSignal(
           { x: 1 },
           { equals: (previous, next) => previous.x === next.x },
         );
         const label = () => {
           $window.console.log();
-          return "x " + point.get().x;
+          return "x " + point[0]().x;
         };
         return (
           <div>
-            <button onclick={() => point.set({ x: point.get().x })}>
+            <button onclick={() => point[1]({ x: point[0]().x })}>
               same
             </button>
             <p>{label()}</p>
@@ -80,13 +83,13 @@ describe("equals", () => {
   it("is handed the previous and the next value", async () => {
     await render(
       cs`{
-        const n = $state(1, {
+        const n = $createSignal(1, {
           equals: (previous, next) => {
             $window.console.log(previous, next);
             return previous === next;
           },
         });
-        return <button onclick={() => n.set(2)}>{"n " + n.get()}</button>;
+        return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;
       }`,
     );
     await press();
@@ -97,14 +100,14 @@ describe("equals", () => {
   it("is `===` when left out, so the same number doesn't update", async () => {
     await render(
       cs`{
-        const n = $state(1);
+        const n = $createSignal(1);
         const label = () => {
           $window.console.log();
-          return "n " + n.get();
+          return "n " + n[0]();
         };
         return (
           <div>
-            <button onclick={() => n.set(1)}>same</button>
+            <button onclick={() => n[1](1)}>same</button>
             <p>{label()}</p>
           </div>
         );
@@ -117,14 +120,14 @@ describe("equals", () => {
   it("is `===` when left out, so a new object always updates", async () => {
     await render(
       cs`{
-        const point = $state({ x: 1 });
+        const point = $createSignal({ x: 1 });
         const label = () => {
           $window.console.log();
-          return "x " + point.get().x;
+          return "x " + point[0]().x;
         };
         return (
           <div>
-            <button onclick={() => point.set({ x: point.get().x })}>
+            <button onclick={() => point[1]({ x: point[0]().x })}>
               same
             </button>
             <p>{label()}</p>

@@ -1,10 +1,10 @@
 // 15:10
-export default ($0) => {
-    const total = 1;
-    {
-        const total = 2;
-        return total + $0();
-    }
+export default $0 => {
+  const total = 1;
+  {
+    const total = 2;
+    return total + $0();
+  }
 };
 
 // 28:5

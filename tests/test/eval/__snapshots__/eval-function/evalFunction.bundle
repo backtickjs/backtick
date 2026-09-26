@@ -1,17 +1,29 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = ($0, $1) => (
-      <div>
-        <span>{eval($0())("ada")}</span>
-        {eval($1())({ count: 3 })}
-      </div>
-    );
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
+    const $entry = ($0, $1) =>
+      (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _$insert(_el$2, () => eval($0())("ada"));
+        _$insert(
+          _el$,
+          () =>
+            eval($1())({
+              count: 3,
+            }),
+          null,
+        );
+        return _el$;
+      })();
     return $entry;
   })();
   return f1(
     () =>
-      '($d => {\n  const f1 = (() => {\nconst $entry = () => (name) => "hello " + name;\nreturn $entry;\n})();\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => name => "hello " + name;\nreturn $entry;\n})();\n  return f1();\n})([])',
     () =>
-      '($d => {\n  const f1 = (() => {\nconst $entry = () => (props) => \u003cb>{"count " + props.count}\u003c/b>;\nreturn $entry;\n})();\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\nconst $entry = () => props => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, () => "count " + props.count);\n  return _el$;\n})();\nreturn $entry;\n})();\n  return f1();\n})([])',
   );
 })([]);

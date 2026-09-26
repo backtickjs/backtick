@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 // Built rather than written out: what a bundle looks like is the bundler's, and
@@ -9,10 +9,21 @@ async function Row({ count }) {
     "3og7hp7gm9m5d:14:9",
     { params: [{ kind: "splice", value: count, bindings: [] }] },
     {
-      code: 'export default ($0) => <em>{"rows " + $0()}</em>;',
-      map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAaY,QAAA,CAAC,EAAE,CAAC,CAAC,OAAO,GAAG,IAAM,CAAC,EAAE,EAAE,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>`);\nexport default $0 => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, () => "rows " + $0());\n  return _el$;\n})();',
+      map: '{"version":3,"mappings":";;;eAaYA,EAAA;EAAA,IAAAC,IAAA,GAAAC,MAAA;EAAAC,QAAA,CAAAF,IAAA,QAAK,OAAO,GAAGD,EAAA,EAAM;EAAA,OAAAC,IAAA;AAAA,IAAM","names":["$0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["eval-props.test.tsx"]}',
+      imports: [
+        {
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
+        },
+        {
+          from: "solid-js/web",
+          range: [55, 105],
+          bindings: [{ name: "insert", local: "_$insert" }],
+        },
+      ],
+      exportAt: 152,
     },
   );
 }
@@ -21,10 +32,16 @@ async function Nothing() {
     "3og7hp7gm9m5d:18:9",
     { params: [] },
     {
-      code: 'export default () => <em>{"nothing to hand it"}</em>;',
-      map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAiBY,MAAA,CAAC,EAAE,CAAC,CAAC,oBAAoB,CAAC,EAAE,EAAE,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>nothing to hand it`);\nexport default () => _tmpl$();',
+      map: '{"version":3,"mappings":";;eAiBY,MAAAA,MAAA,EAA+B","names":["_tmpl$"],"ignoreList":[],"sources":["eval-props.test.tsx"]}',
+      imports: [
+        {
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
+        },
+      ],
+      exportAt: 119,
     },
   );
 }
@@ -40,8 +57,8 @@ const rows = await bundler.run(
               "3og7hp7gm9m5d:22:50",
               { params: [{ kind: "capture", key: "props$3og7hp7gm9m5d$0" }] },
               {
-                code: "export default ($0) => $0.count;",
-                map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAqBqD,QAAA,EAAK,CAAC,KAAK"}',
+                code: "export default $0 => $0.count;",
+                map: '{"version":3,"mappings":"eAqBqDA,EAAA,IAAAA,EAAK,CAACC,KAAK","names":["$0","count"],"ignoreList":[],"sources":["eval-props.test.tsx"]}',
                 imports: [],
                 exportAt: 0,
               },
@@ -52,8 +69,8 @@ const rows = await bundler.run(
       ],
     },
     {
-      code: "export default ($0) => (props) => $0(props);",
-      map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAqBK,QAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,SAAC"}',
+      code: "export default $0 => props => $0(props);",
+      map: '{"version":3,"mappings":"eAqBKA,EAAA,IAACC,KAAwB,IAAKD,EAAA,CAAAC,KAAA,CAAC","names":["$0","props"],"ignoreList":[],"sources":["eval-props.test.tsx"]}',
       imports: [],
       exportAt: 0,
     },
@@ -69,9 +86,25 @@ export default cs.create(
     ],
   },
   {
-    code: 'export default ($0, $1) => {\n    const Rows = eval($0());\n    const Empty = eval($1());\n    const wrongType = <Rows count={"one"}/>;\n    const unknownName = <Rows nope={1}/>;\n    const missing = <Rows />;\n    const called = <Empty count={1}/>;\n    return (<div>\n      \n      <Rows count={1}/>\n      {Empty}\n      {wrongType}\n      {unknownName}\n      {missing}\n      {called}\n      \n      {eval(null)}\n    </div>);\n};',
-    map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eA0BkB;IAChB,MAAM,IAAI,GAAG,IAAI,CAAC,IAAK,CAAC,CAAC;IACzB,MAAM,KAAK,GAAG,IAAI,CAAC,IAAM,CAAC,CAAC;IAI3B,MAAM,SAAS,GAAG,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,EAAG,CAAC;IAEzC,MAAM,WAAW,GAAG,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEtC,MAAM,OAAO,GAAG,CAAC,IAAI,CAAC,AAAD,EAAG,CAAC;IAIzB,MAAM,MAAM,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEnC,OAAO,CACL,CAAC,GAAG,CACF;MACA;MAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EACf;MAAA,CAAC,KAAK,CACN;MAAA,CAAC,SAAS,CACV;MAAA,CAAC,WAAW,CACZ;MAAA,CAAC,OAAO,CACR;MAAA,CAAC,MAAM,CACP;MACA;MAAA,CAEE,IAAI,CAAC,IAAI,CACX,CACF;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-    imports: [],
-    exportAt: 0,
+    code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`);\nexport default ($0, $1) => {\n  const Rows = eval($0());\n  const Empty = eval($1());\n  const wrongType = _$createComponent(Rows, {\n    count: "one"\n  });\n  const unknownName = _$createComponent(Rows, {\n    nope: 1\n  });\n  const missing = _$createComponent(Rows, {});\n  const called = _$createComponent(Empty, {\n    count: 1\n  });\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, _$createComponent(Rows, {\n      count: 1\n    }), null);\n    _$insert(_el$, Empty, null);\n    _$insert(_el$, wrongType, null);\n    _$insert(_el$, unknownName, null);\n    _$insert(_el$, missing, null);\n    _$insert(_el$, called, null);\n    _$insert(_el$, () => eval(null), null);\n    return _el$;\n  })();\n};',
+    map: '{"version":3,"mappings":";;;;eA0BkB,CAAAA,EAAA,EAAAC,EAAA;EAChB,MAAMC,IAAI,GAAGC,IAAI,CAACH,EAAA,EAAK,CAAC;EACxB,MAAMI,KAAK,GAAGD,IAAI,CAACF,EAAA,EAAM,CAAC;EAI1B,MAAMI,SAAS,GAAAC,iBAAA,CAAIJ,IAAI;IAACK,KAAK,EAAE;EAAK,EAAI;EAExC,MAAMC,WAAW,GAAAF,iBAAA,CAAIJ,IAAI;IAACO,IAAI,EAAE;EAAC,EAAI;EAErC,MAAMC,OAAO,GAAAJ,iBAAA,CAAIJ,IAAI,KAAG;EAIxB,MAAMS,MAAM,GAAAL,iBAAA,CAAIF,KAAK;IAACG,KAAK,EAAE;EAAC,EAAI;EAElC;IAAA,IAAAK,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,EAAAN,iBAAA,CAGKJ,IAAI;MAACK,KAAK,EAAE;IAAC;IAAAO,QAAA,CAAAF,IAAA,EACbR,KAAK;IAAAU,QAAA,CAAAF,IAAA,EACLP,SAAS;IAAAS,QAAA,CAAAF,IAAA,EACTJ,WAAW;IAAAM,QAAA,CAAAF,IAAA,EACXF,OAAO;IAAAI,QAAA,CAAAF,IAAA,EACPD,MAAM;IAAAG,QAAA,CAAAF,IAAA,QAILT,IAAI,CAAC,IAAI,CACX;IAAA,OAAAS,IAAA;EAAA;AAGN,CAAC","names":["$0","$1","Rows","eval","Empty","wrongType","_$createComponent","count","unknownName","nope","missing","called","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["eval-props.test.tsx"]}',
+    imports: [
+      {
+        from: "solid-js/web",
+        range: [0, 54],
+        bindings: [{ name: "template", local: "_$template" }],
+      },
+      {
+        from: "solid-js/web",
+        range: [55, 105],
+        bindings: [{ name: "insert", local: "_$insert" }],
+      },
+      {
+        from: "solid-js/web",
+        range: [106, 174],
+        bindings: [{ name: "createComponent", local: "_$createComponent" }],
+      },
+    ],
+    exportAt: 222,
   },
 );

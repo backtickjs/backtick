@@ -1,5 +1,8 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
     const $entry = () => {
       const positive = Number.EPSILON > 0;
       const largest = Number.MAX_VALUE > 1e308;
@@ -12,9 +15,11 @@
       const whole = Number.isInteger(2);
       const fractional = Number.isInteger(2.5);
       const written = Number.isFinite("2");
-      return (
-        <span>
-          {whole +
+      return (() => {
+        var _el$ = _tmpl$();
+        _$insert(
+          _el$,
+          whole +
             " " +
             fractional +
             " " +
@@ -24,9 +29,10 @@
             " " +
             largest +
             " " +
-            safe}
-        </span>
-      );
+            safe,
+        );
+        return _el$;
+      })();
     };
     return $entry;
   })();

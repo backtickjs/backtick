@@ -1,18 +1,42 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = ($0, $1, $2) => (
-      <div>
-        <$2 title="host" />
-        {$0()}
-        {$1()}
-      </div>
-    );
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<div>`);
+    const $entry = ($0, $1, $2) =>
+      (() => {
+        var _el$ = _tmpl$();
+        _$insert(
+          _el$,
+          _$createComponent($2, {
+            title: "host",
+          }),
+          null,
+        );
+        _$insert(_el$, $0, null);
+        _$insert(_el$, $1, null);
+        return _el$;
+      })();
     return $entry;
   })();
   const f2 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<i>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<p>`);
     const $entry = ($0, $1) => {
-      const Card = (props) => <i>{$0() + props.n}</i>;
-      return <p>{$1(Card)}</p>;
+      const Card = (props) =>
+        (() => {
+          var _el$ = _tmpl$();
+          _$insert(_el$, () => $0() + props.n);
+          return _el$;
+        })();
+      return (() => {
+        var _el$2 = _tmpl$2();
+        _$insert(_el$2, () => $1(Card));
+        return _el$2;
+      })();
     };
     return $entry;
   })();
@@ -21,7 +45,11 @@
     return $entry;
   })();
   const f4 = (() => {
-    const $entry = ($0) => <$0 n={1} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0) =>
+      _$createComponent($0, {
+        n: 1,
+      });
     return $entry;
   })();
   const f5 = (() => {

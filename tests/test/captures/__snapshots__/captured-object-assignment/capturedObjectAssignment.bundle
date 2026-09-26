@@ -1,7 +1,9 @@
 (($d) => {
   const f1 = (() => {
     const $entry = ($0) => {
-      const counter = { count: 0 };
+      const counter = {
+        count: 0,
+      };
       const bump = $0(counter);
       bump();
       bump();

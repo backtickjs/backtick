@@ -1,69 +1,124 @@
-// 27:7
+// 28:7
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<div><button>add</button><p>`);
 export default ($0, $1, $2) => {
-    const n = $0()(1);
-    const size = $1()(() => ({ isBig: n.get() > 2, n: n.get() }), {
-        equals: (previous, next) => previous.isBig === next.isBig,
+  const n = $0()(1);
+  const size = $1()(() => ({
+    isBig: n[0]() > 2,
+    n: n[0]()
+  }), undefined, {
+    equals: (previous, next) => previous.isBig === next.isBig
+  });
+  const label = () => {
+    $2().console.log();
+    return size().isBig ? "big" : "small";
+  };
+  return (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild,
+      _el$3 = _el$2.nextSibling;
+    _el$2.$$click = () => n[1](n[0]() + 1);
+    _$insert(_el$3, label);
+    return _el$;
+  })();
+};
+_$delegateEvents(["click"]);
+
+// 60:7
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<div><button>same</button><p>`);
+export default ($0, $1) => {
+  const point = $0()({
+    x: 1
+  }, {
+    equals: (previous, next) => previous.x === next.x
+  });
+  const label = () => {
+    $1().console.log();
+    return "x " + point[0]().x;
+  };
+  return (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild,
+      _el$3 = _el$2.nextSibling;
+    _el$2.$$click = () => point[1]({
+      x: point[0]().x
     });
-    const label = () => {
-        $2().console.log();
-        return size.get().isBig ? "big" : "small";
-    };
-    return (<div>
-            <button onclick={() => n.set(n.get() + 1)}>add</button>
-            <p>{label()}</p>
-          </div>);
+    _$insert(_el$3, label);
+    return _el$;
+  })();
 };
+_$delegateEvents(["click"]);
 
-// 57:7
+// 85:7
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<button>`);
 export default ($0, $1) => {
-    const point = $0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
-    const label = () => {
-        $1().console.log();
-        return "x " + point.get().x;
-    };
-    return (<div>
-            <button onclick={() => point.set({ x: point.get().x })}>
-              same
-            </button>
-            <p>{label()}</p>
-          </div>);
+  const n = $0()(1, {
+    equals: (previous, next) => {
+      $1().console.log(previous, next);
+      return previous === next;
+    }
+  });
+  return (() => {
+    var _el$ = _tmpl$();
+    _el$.$$click = () => n[1](2);
+    _$insert(_el$, () => "n " + n[0]());
+    return _el$;
+  })();
 };
+_$delegateEvents(["click"]);
 
-// 82:7
+// 102:7
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<div><button>same</button><p>`);
 export default ($0, $1) => {
-    const n = $0()(1, {
-        equals: (previous, next) => {
-            $1().console.log(previous, next);
-            return previous === next;
-        },
+  const n = $0()(1);
+  const label = () => {
+    $1().console.log();
+    return "n " + n[0]();
+  };
+  return (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild,
+      _el$3 = _el$2.nextSibling;
+    _el$2.$$click = () => n[1](1);
+    _$insert(_el$3, label);
+    return _el$;
+  })();
+};
+_$delegateEvents(["click"]);
+
+// 122:7
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<div><button>same</button><p>`);
+export default ($0, $1) => {
+  const point = $0()({
+    x: 1
+  });
+  const label = () => {
+    $1().console.log();
+    return "x " + point[0]().x;
+  };
+  return (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild,
+      _el$3 = _el$2.nextSibling;
+    _el$2.$$click = () => point[1]({
+      x: point[0]().x
     });
-    return <button onclick={() => n.set(2)}>{"n " + n.get()}</button>;
+    _$insert(_el$3, label);
+    return _el$;
+  })();
 };
-
-// 99:7
-export default ($0, $1) => {
-    const n = $0()(1);
-    const label = () => {
-        $1().console.log();
-        return "n " + n.get();
-    };
-    return (<div>
-            <button onclick={() => n.set(1)}>same</button>
-            <p>{label()}</p>
-          </div>);
-};
-
-// 119:7
-export default ($0, $1) => {
-    const point = $0()({ x: 1 });
-    const label = () => {
-        $1().console.log();
-        return "x " + point.get().x;
-    };
-    return (<div>
-            <button onclick={() => point.set({ x: point.get().x })}>
-              same
-            </button>
-            <p>{label()}</p>
-          </div>);
-};
+_$delegateEvents(["click"]);

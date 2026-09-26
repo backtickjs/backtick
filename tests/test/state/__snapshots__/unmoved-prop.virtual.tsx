@@ -1,27 +1,29 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSelector, createSignal, For } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn } from "./dom.ts";
 
-// A list whose every row reads the cell the selection is held in. A write
-// re-runs the `href` of all three rows and moves it on two of them — the row
-// selected, and the row that no longer is. The third recomputes the href it
-// already had, and the host must not hear about it.
+// A list whose rows ask a selector whether they are the one selected. A write
+// re-runs the `href` of only the two rows whose answer changed — the row
+// selected, and the row that no longer is. The third is not asked again, and
+// the host hears nothing about it.
 async function SelectableRows() {
   return cs.lift((() => {
-    const __cs_selected = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected.set(1))}>select</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift([0, 1, 2])}>{cs.lift((__cs_id: number) => <a href={cs.lift(__cs_selected.get() === __cs_id ? "#open" : "#closed")}>{cs.lift("row " + __cs_id)}</a>)}</For>)}</div>)}</div>;
+    const __cs_selected = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    const __cs_isSelected = cs.splice((createSelector) satisfies typeof cs.Spliceable)(__cs_selected[0]);
+    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected[1](1))}>select</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift([0, 1, 2])}>{cs.lift((__cs_id: number) => <a href={cs.lift(__cs_isSelected(__cs_id) ? "#open" : "#closed")}>{cs.lift("row " + __cs_id)}</a>)}</For>)}</div>)}</div>;
 })());
 }
 
 describe("local state", () => {
-  // A prop re-runs when something it read was written, which is not the same as
-  // holding anything new: a cell a whole list reads decides one row's prop, and
-  // every other row recomputes the value it already had. The host hears about
-  // the two that moved and nothing else — a write per row per selection is what
-  // a list of any size would otherwise cost.
+  // A signal a whole list reads would re-run every row's prop, and Solid writes
+  // a single dynamic attribute again even when its value did not change. A
+  // selector re-runs only the rows whose answer changed, so the host hears
+  // about the two that moved and nothing else — a write per row per selection
+  // is what a list of any size would otherwise cost.
   it("a prop that recomputed to what it held is not set again", async () => {
     const view = await drawn(<SelectableRows />);
     const [select, list] = children(view);
@@ -50,7 +52,7 @@ describe("local state", () => {
     await userEvent.click(select);
     assert.deepEqual(href(), ["#closed", "#open", "#closed"]);
     // The row that was selected and the row now selected, in the order they
-    // were built. The third row read the cell too, and had nothing to say.
+    // were built. The third row's answer did not change, so it did not run.
     assert.deepEqual(written(), [
       [0, "href", "#closed"],
       [1, "href", "#open"],

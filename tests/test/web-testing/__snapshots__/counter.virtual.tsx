@@ -1,15 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// A cell a script declares, and a button that writes it.
+// A signal a script declares, and a button that writes it.
 async function Counter() {
   return cs.lift((() => {
-    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>Add</button>)}{cs.lift(<p>{cs.lift("Count: " + __cs_count.get())}</p>)}</div>;
+    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>Add</button>)}{cs.lift(<p>{cs.lift("Count: " + __cs_count[0]())}</p>)}</div>;
 })());
 }
 

@@ -1,2 +1,4 @@
 // 8:46
-export default () => ({ "#": "value" });
+export default () => ({
+  "#": "value"
+});

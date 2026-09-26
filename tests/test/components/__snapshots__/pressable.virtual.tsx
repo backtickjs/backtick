@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -13,8 +14,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.lift((() => {
-    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => __cs_count.set(__cs_count.get() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(__cs_count.get() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + __cs_count.get() + " times")}</span>)}</button>;
+    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(__cs_count[0]() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + __cs_count[0]() + " times")}</span>)}</button>;
 })());
 }
 

@@ -11,7 +11,7 @@ const d0 = cs.create(
   { params: [] },
   {
     code: "export default () => 1;",
-    map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eASc,MAAA,CAAC"}',
+    map: '{"version":3,"mappings":"eASc,OAAC","names":[],"ignoreList":[],"sources":["diamond.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -20,8 +20,8 @@ const d1 = cs.create(
   "23y608t6y2wp3:12:11",
   { params: [{ kind: "splice", value: d0, bindings: [] }] },
   {
-    code: "export default ($0) => {\n    return $0() + $0();\n};",
-    map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    code: "export default $0 => {\n  return $0() + $0();\n};",
+    map: '{"version":3,"mappings":"eAWcA,EAAA;EACZ,OAAOA,EAAA,EAAG,GAAGA,EAAA,EAAG;AAClB,CAAC","names":["$0"],"ignoreList":[],"sources":["diamond.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -30,8 +30,8 @@ const d2 = cs.create(
   "23y608t6y2wp3:16:11",
   { params: [{ kind: "splice", value: d1, bindings: [] }] },
   {
-    code: "export default ($0) => {\n    return $0() + $0();\n};",
-    map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    code: "export default $0 => {\n  return $0() + $0();\n};",
+    map: '{"version":3,"mappings":"eAecA,EAAA;EACZ,OAAOA,EAAA,EAAG,GAAGA,EAAA,EAAG;AAClB,CAAC","names":["$0"],"ignoreList":[],"sources":["diamond.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -40,8 +40,8 @@ const d3 = cs.create(
   "23y608t6y2wp3:20:11",
   { params: [{ kind: "splice", value: d2, bindings: [] }] },
   {
-    code: "export default ($0) => {\n    return $0() + $0();\n};",
-    map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    code: "export default $0 => {\n  return $0() + $0();\n};",
+    map: '{"version":3,"mappings":"eAmBcA,EAAA;EACZ,OAAOA,EAAA,EAAG,GAAGA,EAAA,EAAG;AAClB,CAAC","names":["$0"],"ignoreList":[],"sources":["diamond.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -50,8 +50,8 @@ const d4 = cs.create(
   "23y608t6y2wp3:24:11",
   { params: [{ kind: "splice", value: d3, bindings: [] }] },
   {
-    code: "export default ($0) => {\n    return $0() + $0();\n};",
-    map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAuBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    code: "export default $0 => {\n  return $0() + $0();\n};",
+    map: '{"version":3,"mappings":"eAuBcA,EAAA;EACZ,OAAOA,EAAA,EAAG,GAAGA,EAAA,EAAG;AAClB,CAAC","names":["$0"],"ignoreList":[],"sources":["diamond.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },

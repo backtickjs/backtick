@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -15,8 +15,8 @@ const heldElement = cs.create(
   "224cj4eht1o03:15:20",
   { params: [{ kind: "splice", value: _jsx("div", {}), bindings: [] }] },
   {
-    code: "export default ($0) => () => {\n    const tree = $0();\n    return tree;\n};",
-    map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eAcuB,QAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,IAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+    code: "export default $0 => () => {\n  const tree = $0();\n  return tree;\n};",
+    map: '{"version":3,"mappings":"eAcuBA,EAAA,UAAK;EAC1B,MAAMC,IAAI,GAAGD,EAAA,EAAC;EACd,OAAOC,IAAI;AACb,CAAC","names":["$0","tree"],"ignoreList":[],"sources":["tree-in-variable.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -25,8 +25,8 @@ const heldComponent = cs.create(
   "224cj4eht1o03:20:22",
   { params: [{ kind: "splice", value: _jsx(HeldRow, {}), bindings: [] }] },
   {
-    code: "export default ($0) => () => {\n    const tree = $0();\n    return tree;\n};",
-    map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eAmByB,QAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,IAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+    code: "export default $0 => () => {\n  const tree = $0();\n  return tree;\n};",
+    map: '{"version":3,"mappings":"eAmByBA,EAAA,UAAK;EAC5B,MAAMC,IAAI,GAAGD,EAAA,EAAC;EACd,OAAOC,IAAI;AACb,CAAC","names":["$0","tree"],"ignoreList":[],"sources":["tree-in-variable.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -41,8 +41,8 @@ it("treeInVariable", async (t) => {
           "224cj4eht1o03:30:7",
           { params: [{ kind: "splice", value: heldElement, bindings: [] }] },
           {
-            code: "export default ($0) => $0()();",
-            map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eA6BU,QAAA,IAAY,EAAE"}',
+            code: "export default $0 => $0()();",
+            map: '{"version":3,"mappings":"eA6BUA,EAAA,IAAAA,EAAA,EAAY,EAAE","names":["$0"],"ignoreList":[],"sources":["tree-in-variable.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },
@@ -51,8 +51,8 @@ it("treeInVariable", async (t) => {
           "224cj4eht1o03:31:7",
           { params: [{ kind: "splice", value: heldComponent, bindings: [] }] },
           {
-            code: "export default ($0) => $0()();",
-            map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eA8BU,QAAA,IAAc,EAAE"}',
+            code: "export default $0 => $0()();",
+            map: '{"version":3,"mappings":"eA8BUA,EAAA,IAAAA,EAAA,EAAc,EAAE","names":["$0"],"ignoreList":[],"sources":["tree-in-variable.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },

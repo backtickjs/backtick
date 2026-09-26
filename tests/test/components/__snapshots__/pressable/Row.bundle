@@ -1,19 +1,26 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    const { memo: _$memo } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(
+      `<button id=row style=display:flex;gap:8px><span style=font-weight:700></span><span>`,
+    );
     const $entry = ($0) => {
       const count = $0()(0);
-      return (
-        <button
-          id="row"
-          style="display: flex; gap: 8px"
-          onclick={() => count.set(count.get() + 1)}
-        >
-          <span style="font-weight: 700">{count.get() > 0 ? "☑" : "☐"}</span>
-          <span>{"pressed " + count.get() + " times"}</span>
-        </button>
-      );
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _el$.$$click = () => count[1](count[0]() + 1);
+        _$insert(_el$2, () => (count[0]() > 0 ? "☑" : "☐"));
+        _$insert(_el$3, () => "pressed " + count[0]() + " times");
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
-  return jsx(() => f1(() => state), {});
+  return jsx(() => f1(() => $modules["solid-js"].createSignal), {});
 })([]);

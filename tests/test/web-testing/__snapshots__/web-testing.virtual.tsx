@@ -6,7 +6,7 @@ import {
   queryHelpers,
   render,
   screen,
-} from "@backtickjs/web-testing";
+} from "@backtickjs/solid-js/testing";
 
 // `render` as React Testing Library's behaves: where it draws, what its
 // queries read, and what `cleanup` takes away.

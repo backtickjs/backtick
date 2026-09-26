@@ -3,7 +3,7 @@ const                             → const
 __cs_shown                        → shown
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 false                             → false
@@ -28,8 +28,9 @@ cs.splice(                        →  [-semantic]
 )                                 → ) 
 {\n                               → {\n        
 __cs_shown                        → shown
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 true                              → true
 )                                 → )
@@ -44,8 +45,9 @@ true                              → true
 return                            → return 
 <>{cs.lift(                       → <>{
 __cs_shown                        → shown
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  ?                                →  ? 
 <                                 → <
@@ -67,7 +69,7 @@ const                             → const
 __cs_builds                       → builds
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 0                                 → 0
@@ -84,8 +86,9 @@ span                              → span
 "builds "                         → "builds "
  +                                →  + 
 __cs_builds                       → builds
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }</
 span                              → span
@@ -101,12 +104,14 @@ again                             → again
 ={cs.lift(                        → ={
 () => {\n                         → () => {\n            
 __cs_builds                       → builds
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_builds                       → builds
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1
@@ -115,8 +120,9 @@ get                               → get
 \n                                → \n            
 return                            → return 
 __cs_builds                       → builds
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  <                                →  < 
 5                                 → 5

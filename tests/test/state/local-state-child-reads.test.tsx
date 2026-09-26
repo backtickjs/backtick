@@ -1,43 +1,45 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import type { Client, State } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import type { Signal } from "solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 
-// A child reading a cell it was handed, in all three positions at once: a prop,
+// A child reading a signal it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. The script that
-// declares the cell never reads it, so a write reaches each `ReadingRow` with
+// declares the signal never reads it, so a write reaches each `ReadingRow` with
 // the arguments it already had — the same handle object, the same id.
 //
 // Nothing a row was given is different, and everything it draws is. Skipping
 // on the arguments alone leaves both rows stale: a handle is one object
-// whatever its cell holds. The branch is the half no amount of recomputing a
+// whatever its signal holds. The branch is the half no amount of recomputing a
 // prop can answer for.
 const ReadingRow = async ({
   id,
   selected,
 }: {
   id: Client<number>;
-  selected: Client<State<number>>;
+  selected: Client<Signal<number>>;
 }) => (
   <div>
     <span
-      style={cs`"font-size: " + ($selected.get() === $id ? 20 : 16) + "px"`}
+      style={cs`"font-size: " + ($selected[0]() === $id ? 20 : 16) + "px"`}
     >
-      {cs`"row " + $id + " of " + $selected.get()`}
+      {cs`"row " + $id + " of " + $selected[0]()`}
     </span>
-    {cs`$selected.get() === $id ? ${(<span>marker</span>)} : null`}
+    {cs`$selected[0]() === $id ? ${(<span>marker</span>)} : null`}
   </div>
 );
 
 async function ReadingPanel() {
   return cs`{
-    const selected = $state(0);
+    const selected = $createSignal(0);
     return (
       <div>
-        <span onclick={() => selected.set(1)}>select</span>
+        <span onclick={() => selected[1](1)}>select</span>
         <ReadingRow id={0} selected={selected} />
         <ReadingRow id={1} selected={selected} />
       </div>
@@ -45,7 +47,7 @@ async function ReadingPanel() {
   }`;
 }
 
-// What one `ReadingRow` draws, in the three positions it read the cell from: a
+// What one `ReadingRow` draws, in the three positions it read the signal from: a
 // prop, a text child, and a branch.
 function readRow(row: Element): {
   size: unknown;
@@ -62,7 +64,7 @@ function readRow(row: Element): {
 }
 
 describe("local state", () => {
-  it("a child redraws everything it read of a cell it was handed", async () => {
+  it("a child redraws everything it read of a signal it was handed", async () => {
     const view = await drawn(<ReadingPanel />);
     const [button, ...rows] = children(view);
     assert.ok(button !== undefined && rows.length === 2);

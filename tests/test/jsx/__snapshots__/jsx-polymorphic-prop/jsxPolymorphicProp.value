@@ -1,4 +1,1 @@
-<div>
-  <span onclick={[function]} />
-  <span onclick={[function]} />
-</div>
+[function]

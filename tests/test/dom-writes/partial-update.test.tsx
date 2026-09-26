@@ -1,23 +1,25 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { cs, For, state, type State } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
+import type { Signal } from "solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { watchWrites } from "./writes.ts";
 
 // js-framework-benchmark's "partial update": every other row's label grows,
-// and each label is a cell of its own. Writing one is a write to that row's
+// and each label is a signal of its own. Writing one is a write to that row's
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs`{
     const rows = [1, 2, 3, 4].map((id: number) => ({
       id: id,
-      label: $state("row " + id),
+      label: $createSignal("row " + id),
     }));
     const update = () => {
       for (let index = 0; index < rows.length; index = index + 2) {
         const label = rows[index].label;
-        label.set(label.get() + " !!!");
+        label[1](label[0]() + " !!!");
       }
     };
     return (
@@ -26,9 +28,9 @@ async function Labels() {
         <table>
           <tbody>
             <For each={rows}>
-              {(row: { id: number; label: State<string> }) => (
+              {(row: { id: number; label: Signal<string> }) => (
                 <tr id={"row-" + row.id}>
-                  <td>{row.label.get()}</td>
+                  <td>{row.label[0]()}</td>
                 </tr>
               )}
             </For>

@@ -11,8 +11,8 @@ it("reservedKeySplice", async (t) => {
       "2dryy6my0qubf:8:45",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
       {
-        code: "export default ($0) => $0();",
-        map: '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["reserved-key-splice.test.tsx"],"names":[],"mappings":"eAOgD,QAAA,IAAC"}',
+        code: "export default $0 => $0();",
+        map: '{"version":3,"mappings":"eAOgDA,EAAA,IAAAA,EAAA,EAAC","names":["$0"],"ignoreList":[],"sources":["reserved-key-splice.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { computed, cs, onCleanup, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createMemo, createSignal, onCleanup, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // Each script logs where it runs, so a test counts the runs by counting the
@@ -34,15 +35,15 @@ describe("onCleanup", () => {
     assert.equal(runs, 1);
   });
 
-  it("runs before a computed calculates again", async () => {
+  it("runs before a memo calculates again", async () => {
     await render(
       cs.lift((() => {
-    const __cs_n = cs.splice((state) satisfies typeof cs.Spliceable)(1);
-    const __cs_doubled = cs.splice((computed) satisfies typeof cs.Spliceable)(() => {
+    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
+    const __cs_doubled = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => {
         cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.splice((window) satisfies typeof cs.Spliceable).console.log());
-        return __cs_n.get() * 2;
+        return __cs_n[0]() * 2;
     });
-    return <button onclick={cs.lift(() => __cs_n.set(__cs_n.get() + 1))}>{cs.lift(__cs_doubled.get())}</button>;
+    return <button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift(__cs_doubled())}</button>;
 })()),
     );
     assert.equal(runs, 0);
@@ -69,11 +70,11 @@ describe("onCleanup", () => {
 
     const { unmount } = await render(
       cs.lift((() => {
-    const __cs_timer = cs.splice((state) satisfies typeof cs.Spliceable)(0);
+    const __cs_timer = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
     cs.splice((onMount) satisfies typeof cs.Spliceable)(() => {
-        __cs_timer.set(cs.splice((window) satisfies typeof cs.Spliceable).setInterval(() => cs.splice((window) satisfies typeof cs.Spliceable).console.log(), 5));
+        __cs_timer[1](cs.splice((window) satisfies typeof cs.Spliceable).setInterval(() => cs.splice((window) satisfies typeof cs.Spliceable).console.log(), 5));
     });
-    cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.splice((window) satisfies typeof cs.Spliceable).clearInterval(__cs_timer.get()));
+    cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.splice((window) satisfies typeof cs.Spliceable).clearInterval(__cs_timer[0]()));
     return <p>ticking</p>;
 })()),
     );

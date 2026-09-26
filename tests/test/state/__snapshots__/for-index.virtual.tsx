@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
-import type { Signal } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
@@ -14,12 +14,12 @@ import { children, drawn, text } from "./dom.ts";
 // drawn — leaves all three stale.
 async function RotatingRows() {
   return cs.lift((() => {
-    const __cs_names = cs.splice((state) satisfies typeof cs.Spliceable)<string[]>(["a", "b", "c"]);
+    const __cs_names = cs.splice((createSignal) satisfies typeof cs.Spliceable)<string[]>(["a", "b", "c"]);
     const __cs_rotate = () => {
-        const __cs_held = __cs_names.get();
-        __cs_names.set([__cs_held[2], __cs_held[0], __cs_held[1]]);
+        const __cs_held = __cs_names[0]();
+        __cs_names[1]([__cs_held[2], __cs_held[0], __cs_held[1]]);
     };
-    return <div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_names.get())}>{cs.lift((__cs_name: string, __cs_index: Signal<number>) => <span>{cs.lift(__cs_name + " at " + __cs_index.get())}</span>)}</For>)}</div>)}</div>;
+    return <div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(__cs_names[0]())}>{cs.lift((__cs_name: string, __cs_index: () => number) => <span>{cs.lift(__cs_name + " at " + __cs_index())}</span>)}</For>)}</div>)}</div>;
 })());
 }
 

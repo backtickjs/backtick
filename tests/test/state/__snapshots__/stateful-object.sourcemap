@@ -8,7 +8,7 @@ const                             → const
 __cs_count                        → count
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 __cs_initial                      → initial
@@ -21,8 +21,9 @@ get                               → get
 :                                 → : 
 () =>                             → () => 
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 ,                                 → ,\n    
 add                               → add
@@ -33,12 +34,14 @@ __cs_n                            → n
 number                            → number
 ) => {\n                          → ) => {\n      
 __cs_count                        → count
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_count                        → count
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 __cs_n                            → n

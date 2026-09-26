@@ -9,8 +9,8 @@ it("arrow", async (t) => {
       "1qw9q1toh3rnd:9:4",
       { params: [] },
       {
-        code: "export default () => {\n    const base = 10;\n    return (one, two) => one + two + base;\n};",
-        map: '{"version":3,"file":"arrow.test.jsx","sourceRoot":"","sources":["arrow.test.tsx"],"names":[],"mappings":"eAQO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,CAAC,GAAW,EAAE,GAAW,EAAE,EAAE,CAAC,GAAG,GAAG,GAAG,GAAG,IAAI,CAAC;AACxD,CAAC"}',
+        code: "export default () => {\n  const base = 10;\n  return (one, two) => one + two + base;\n};",
+        map: '{"version":3,"mappings":"eAQO;EACD,MAAMA,IAAI,GAAG,EAAE;EACf,OAAO,CAACC,GAAW,EAAEC,GAAW,KAAKD,GAAG,GAAGC,GAAG,GAAGF,IAAI;AACvD,CAAC","names":["base","one","two"],"ignoreList":[],"sources":["arrow.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

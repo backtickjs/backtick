@@ -2,10 +2,10 @@
   <i>
     {"loading"}
   </i>
-  <button onclick={[function]}>
+  <button>
     {"load"}
   </button>
-  <button onclick={[function]}>
+  <button>
     {"more"}
   </button>
 </div>

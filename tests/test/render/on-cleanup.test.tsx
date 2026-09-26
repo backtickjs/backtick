@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { computed, cs, onCleanup, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createMemo, createSignal, onCleanup, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // Each script logs where it runs, so a test counts the runs by counting the
@@ -34,16 +35,16 @@ describe("onCleanup", () => {
     assert.equal(runs, 1);
   });
 
-  it("runs before a computed calculates again", async () => {
+  it("runs before a memo calculates again", async () => {
     await render(
       cs`{
-        const n = $state(1);
-        const doubled = $computed(() => {
+        const n = $createSignal(1);
+        const doubled = $createMemo(() => {
           $onCleanup(() => $window.console.log());
-          return n.get() * 2;
+          return n[0]() * 2;
         });
         return (
-          <button onclick={() => n.set(n.get() + 1)}>{doubled.get()}</button>
+          <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>
         );
       }`,
     );
@@ -71,11 +72,11 @@ describe("onCleanup", () => {
 
     const { unmount } = await render(
       cs`{
-        const timer = $state(0);
+        const timer = $createSignal(0);
         $onMount(() => {
-          timer.set($window.setInterval(() => $window.console.log(), 5));
+          timer[1]($window.setInterval(() => $window.console.log(), 5));
         });
-        $onCleanup(() => $window.clearInterval(timer.get()));
+        $onCleanup(() => $window.clearInterval(timer[0]()));
         return <p>ticking</p>;
       }`,
     );

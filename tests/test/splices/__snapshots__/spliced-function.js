@@ -20,8 +20,8 @@ it("splicedFunction", async (t) => {
       "1pdv8x4hbo6de:21:4",
       { params: [{ kind: "splice", value: (n) => n, bindings: [] }] },
       {
-        code: "export default ($0) => () => $0();",
-        map: '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["spliced-function.test.tsx"],"names":[],"mappings":"eAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+        code: "export default $0 => () => $0();",
+        map: '{"version":3,"mappings":"eAoBOA,EAAA,UAAMA,EAAA,EAAC","names":["$0"],"ignoreList":[],"sources":["spliced-function.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

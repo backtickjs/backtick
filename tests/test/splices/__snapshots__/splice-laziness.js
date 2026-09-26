@@ -13,8 +13,8 @@ function guard(fragment) {
     "3cvzb2rrvx0i4:13:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
     {
-      code: 'export default ($0) => (flag) => {\n    if (flag) {\n        return $0();\n    }\n    return "skipped";\n};',
-      map: '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"eAYY,QAAA,CAAC,IAAa,EAAE,EAAE;IAC1B,IAAI,IAAI,EAAE,CAAC;QACT,OAAO,IAAS,CAAC;IACnB,CAAC;IACD,OAAO,SAAS,CAAC;AACnB,CAAC"}',
+      code: 'export default $0 => flag => {\n  if (flag) {\n    return $0();\n  }\n  return "skipped";\n};',
+      map: '{"version":3,"mappings":"eAYYA,EAAA,IAACC,IAAa,IAAI;EAC1B,IAAIA,IAAI,EAAE;IACR,OAAOD,EAAA,EAAS;EAClB;EACA,OAAO,SAAS;AAClB,CAAC","names":["$0","flag"],"ignoreList":[],"sources":["splice-laziness.test.tsx"]}',
       imports: [],
       exportAt: 0,
     },
@@ -25,7 +25,7 @@ const ok = cs.create(
   { params: [] },
   {
     code: 'export default () => "evaluated";',
-    map: '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"eAoBc,MAAA,WAAW"}',
+    map: '{"version":3,"mappings":"eAoBc,iBAAW","names":[],"ignoreList":[],"sources":["splice-laziness.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -34,8 +34,8 @@ const broken = cs.create(
   "3cvzb2rrvx0i4:23:15",
   { params: [] },
   {
-    code: 'export default () => {\n    throw "the guarded fragment must never evaluate";\n};',
-    map: '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"eAsBkB;IAChB,MAAM,0CAA0C,CAAC;AACnD,CAAC"}',
+    code: 'export default () => {\n  throw "the guarded fragment must never evaluate";\n};',
+    map: '{"version":3,"mappings":"eAsBkB;EAChB,MAAM,0CAA0C;AAClD,CAAC","names":[],"ignoreList":[],"sources":["splice-laziness.test.tsx"]}',
     imports: [],
     exportAt: 0,
   },
@@ -53,8 +53,8 @@ it("spliceLaziness", async (t) => {
         ],
       },
       {
-        code: "export default ($0, $1) => ({\n    taken: $0()(true),\n    skipped: $1()(false),\n});",
-        map: '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splice-laziness.test.tsx"],"names":[],"mappings":"eA8BO,YAAA,CAAC;IACF,KAAK,EAAE,IAAC,CAAY,IAAI,CAAC;IACzB,OAAO,EAAE,IAAC,CAAgB,KAAK,CAAC;CACjC,CAAC"}',
+        code: "export default ($0, $1) => ({\n  taken: $0()(true),\n  skipped: $1()(false)\n});",
+        map: '{"version":3,"mappings":"eA8BO,CAAAA,EAAA,EAAAC,EAAA,MAAC;EACFC,KAAK,EAAEF,EAAA,EAAC,CAAY,IAAI,CAAC;EACzBG,OAAO,EAAEF,EAAA,EAAC,CAAgB,KAAK;CAChC,CAAC","names":["$0","$1","taken","skipped"],"ignoreList":[],"sources":["splice-laziness.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

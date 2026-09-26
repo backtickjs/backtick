@@ -1,10 +1,1 @@
-<div>
-  <span>
-    {"a sentence across lines"}
-  </span>
-  <span>
-    {"x"}
-    {" "}
-    {"x"}
-  </span>
-</div>
+[function]

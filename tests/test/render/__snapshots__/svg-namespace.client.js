@@ -1,19 +1,36 @@
-// 15:10
-export default () => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>;
+// 16:10
+import { template as _$template } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<svg><circle cx=5 cy=5 r=4 fill=none stroke=currentColor></svg>`, false, true, false);
+export default () => _tmpl$();
 
-// 18:22
+// 19:22
+import { template as _$template } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+import { setAttribute as _$setAttribute } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/_$template(`<svg><circle cy=5 r=2><title></svg>`, false, true, false),
+  _tmpl$2 = /*#__PURE__*/_$template(`<div><a href=/shapes>shapes</a><svg viewBox="0 0 30 10"width=120><foreignObject x=0 y=0 width=10 height=10><p>html again`);
 export default ($0, $1) => {
-    const Dot = (props) => (<circle cx={props.x} cy="5" r="2">
-      <title>{"dot " + props.x}</title>
-    </circle>);
-    return (<div>
-      <a href="/shapes">{"shapes"}</a>
-      <svg viewBox="0 0 30 10" width="120">
-        <$0 />
-        <$1 each={[10, 20]}>{(x) => <Dot x={x}/>}</$1>
-        <foreignObject x="0" y="0" width="10" height="10">
-          <p>{"html again"}</p>
-        </foreignObject>
-      </svg>
-    </div>);
+  const Dot = props => (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild;
+    _$insert(_el$2, () => "dot " + props.x);
+    _$effect(() => _$setAttribute(_el$, "cx", props.x));
+    return _el$;
+  })();
+  return (() => {
+    var _el$3 = _tmpl$2(),
+      _el$4 = _el$3.firstChild,
+      _el$5 = _el$4.nextSibling,
+      _el$6 = _el$5.firstChild;
+    _$insert(_el$5, _$createComponent($0, {}), _el$6);
+    _$insert(_el$5, _$createComponent($1, {
+      each: [10, 20],
+      children: x => _$createComponent(Dot, {
+        x: x
+      })
+    }), _el$6);
+    return _el$3;
+  })();
 };

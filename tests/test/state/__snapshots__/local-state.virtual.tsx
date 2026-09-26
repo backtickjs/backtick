@@ -1,19 +1,20 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { drawn, fontSize } from "./dom.ts";
 
-// A cell a script declares, read and written by what it draws. The script owns
-// the storage, so the display and the handler are two readers of one binding
-// and share one cell: `read()` is an input — a value that re-evaluates when the
-// cell changes — and `write` is an effect, which only an action can perform.
+// A signal a script declares, read and written by what it draws. The script
+// owns the storage, so the display and the handler are two readers of one
+// binding and share one signal: its getter is an input — a value that
+// re-evaluates when the signal changes — and its setter an effect.
 async function Stepper() {
   return cs.lift((() => {
-    const __cs_size = cs.splice((state) satisfies typeof cs.Spliceable)(16);
-    return <span style={cs.lift("font-size: " + __cs_size.get() + "px")} onclick={cs.lift(() => {
-        __cs_size.set(__cs_size.get() + 1);
+    const __cs_size = cs.splice((createSignal) satisfies typeof cs.Spliceable)(16);
+    return <span style={cs.lift("font-size: " + __cs_size[0]() + "px")} onclick={cs.lift(() => {
+        __cs_size[1](__cs_size[0]() + 1);
     })}>
         press
       </span>;

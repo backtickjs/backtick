@@ -1,7 +1,9 @@
 (($d) => {
   const f1 = (() => {
     const $entry = () => {
-      const o = { n: 1 };
+      const o = {
+        n: 1,
+      };
       const list = [1, 2];
       o.n += 1;
       o.n++;

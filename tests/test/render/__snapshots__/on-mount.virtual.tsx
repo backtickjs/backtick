@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // What the page held each time a script logged, read through the console
@@ -26,12 +27,12 @@ describe("onMount", () => {
     const seen = await logged(() =>
       render(
         cs.lift((() => {
-    const __cs_count = cs.splice((state) satisfies typeof cs.Spliceable)(0);
+    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
     cs.splice((onMount) satisfies typeof cs.Spliceable)(() => {
         cs.splice((window) satisfies typeof cs.Spliceable).console.log();
-        __cs_count.set(__cs_count.get() + 1);
+        __cs_count[1](__cs_count[0]() + 1);
     });
-    return <p>{cs.lift("mounted " + __cs_count.get())}</p>;
+    return <p>{cs.lift("mounted " + __cs_count[0]())}</p>;
 })()),
       ),
     );
@@ -42,8 +43,8 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     await render(
       cs.lift((() => {
-    const __cs_said = cs.splice((state) satisfies typeof cs.Spliceable)("not yet");
-    return <button onclick={cs.lift(() => cs.splice((onMount) satisfies typeof cs.Spliceable)(() => __cs_said.set("ran")))}>{cs.lift(__cs_said.get())}</button>;
+    const __cs_said = cs.splice((createSignal) satisfies typeof cs.Spliceable)("not yet");
+    return <button onclick={cs.lift(() => cs.splice((onMount) satisfies typeof cs.Spliceable)(() => __cs_said[1]("ran")))}>{cs.lift(__cs_said[0]())}</button>;
 })()),
     );
     await userEvent.click(screen.getByRole("button"));

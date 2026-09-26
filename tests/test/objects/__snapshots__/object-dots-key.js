@@ -12,8 +12,8 @@ it("objectDotsKey", async (t) => {
       "13e6vrhonm3wb:12:4",
       { params: [] },
       {
-        code: 'export default () => {\n    const base = { a: 1 };\n    return { ...base, "...": 2 };\n};',
-        map: '{"version":3,"file":"object-dots-key.test.jsx","sourceRoot":"","sources":["object-dots-key.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,GAAG,IAAI,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;AAC/B,CAAC"}',
+        code: 'export default () => {\n  const base = {\n    a: 1\n  };\n  return {\n    ...base,\n    "...": 2\n  };\n};',
+        map: '{"version":3,"mappings":"eAWO;EACD,MAAMA,IAAI,GAAG;IAAEC,CAAC,EAAE;EAAC,CAAE;EACrB,OAAO;IAAE,GAAGD,IAAI;IAAE,KAAK,EAAE;EAAC,CAAE;AAC9B,CAAC","names":["base","a"],"ignoreList":[],"sources":["object-dots-key.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

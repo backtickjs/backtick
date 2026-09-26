@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
 import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { settled } from "../render/dom.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -13,7 +14,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // `insert` reads what it was given inside the computation it makes, so a member
 // that answers with a way of asking used to tie the two together: what it drew
 // changing ran the expression that made it, which was the component again —
-// with new cells, and whatever it did on the way in done over.
+// with new signals, and whatever it did on the way in done over.
 //
 // Two of them answer that way: a bundle drawn where it stands, which is this
 // file, and a list, which `render/for-builds-once.test.tsx` covers. The list is
@@ -29,7 +30,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // What this pins is that it is built once. `insert` reads what it was given
 // inside the computation it makes, so a drawing that watches itself used to tie
 // the two together: the answer arriving changed the drawing, which ran the
-// expression that made it, which was this component again — new cells, and the
+// expression that made it, which was this component again — new signals, and the
 // wait started over.
 //
 // The condition stands under `<>`, where a child position watches it: at the
@@ -50,28 +51,28 @@ async function Waiting({
   ask: Prop<() => Bundle<BacktickElement> | null>;
 }) {
   return cs`{
-    const drawn = $state<Bundle<BacktickElement> | null>(null);
-    const started = $window.setTimeout(() => drawn.set($ask()), 0);
+    const drawn = $createSignal<Bundle<BacktickElement> | null>(null);
+    const started = $window.setTimeout(() => drawn[1]($ask()), 0);
     return (
       <>
-        {drawn.get() === null
+        {drawn[0]() === null
           ? null
-          : eval(drawn.get() as Bundle<BacktickElement>)}
+          : eval(drawn[0]() as Bundle<BacktickElement>)}
       </>
     );
   }`;
 }
 
 const evalBuildsOnce = cs`{
-  const asked = $state(0);
+  const asked = $createSignal(0);
 
   return (
     <div>
-      <span>{"asked " + asked.get()}</span>
+      <span>{"asked " + asked[0]()}</span>
       <Waiting
         ask={() => {
-          asked.set(asked.get() + 1);
-          return asked.get() > 4 ? null : $answer;
+          asked[1](asked[0]() + 1);
+          return asked[0]() > 4 ? null : $answer;
         }}
       />
     </div>

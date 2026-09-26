@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import type { BacktickElement } from "@backtickjs/core";
-import { createRuntime } from "@backtickjs/web-interpreter";
-import { screen } from "@backtickjs/web-testing";
+import { createSignal, For } from "@backtickjs/solid-js";
+import { client } from "@backtickjs/solid-js/client";
+import { createRoot, type JSX } from "solid-js";
+import { insert } from "solid-js/web";
+import { screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -29,14 +32,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs`{
-    const ids = $state<number[]>([1, 2, 3]);
+    const ids = $createSignal<number[]>([1, 2, 3]);
     const clear = () => {
-      ids.set([]);
+      ids[1]([]);
     };
     return (
       <>
         <span onclick={clear}>clear</span>
-        <For each={ids.get()}>{(id: number) => <span>{"row " + id}</span>}</For>
+        <For each={ids[0]()}>{(id: number) => <span>{"row " + id}</span>}</For>
       </>
     );
   }`;
@@ -78,19 +81,23 @@ function target(html: string): Element {
   return main;
 }
 
-// Draws in front of the anchor `selector` names. `render` takes no anchor —
-// where a drawing goes among a page's own nodes is the runtime's business —
-// so these ask the runtime directly.
+// Draws in front of the anchor `selector` names. `render` takes no anchor, so
+// these insert at it with Solid directly.
 async function drawAt(
   value: BacktickElement,
   parent: Element,
   selector: string,
 ): Promise<void> {
   const code = await bundler.run(value);
-  const unmount = createRuntime({ window, global: globalThis }).render(
-    () => (0, eval)(code),
-    parent,
-    parent.querySelector(selector)!,
+  const unmount = client.evaluate(() =>
+    createRoot((dispose) => {
+      insert(
+        parent,
+        (0, eval)(code) as unknown as JSX.Element,
+        parent.querySelector(selector)!,
+      );
+      return dispose;
+    }),
   );
   undo.push(unmount);
 }

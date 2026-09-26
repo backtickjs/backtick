@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import type { Spliceable } from "@backtickjs/core";
-import { evaluate } from "@backtickjs/web-testing";
+import { evaluate } from "@backtickjs/solid-js/testing";
 
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {

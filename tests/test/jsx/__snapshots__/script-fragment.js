@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -11,206 +11,22 @@ import { snapshotCase } from "../snapshotCase.ts";
 const listed = cs.create(
   "3pjkiwnta5gua:11:15",
   { params: [] },
-  () => ({
-    type: "ArrowFunctionExpression",
-    loc: { start: { line: 11, column: 18 }, end: { line: 18, column: 1 } },
-    params: [
+  {
+    code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>a sentence across lines`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<span> `);\nexport default () => name => [_tmpl$(), (() => {\n  var _el$2 = _tmpl$2(),\n    _el$3 = _el$2.firstChild;\n  _$insert(_el$2, name, _el$3);\n  _$insert(_el$2, name, null);\n  return _el$2;\n})()];',
+    map: '{"version":3,"mappings":";;;;eAUkB,MAACA,IAAY,KAAAC,MAAA;EAAA,IAAAC,KAAA,GAAAC,OAAA;IAAAC,KAAA,GAAAF,KAAA,CAAAG,UAAA;EAAAC,QAAA,CAAAJ,KAAA,EAIxBF,IAAI,EAAAI,KAAA;EAAAE,QAAA,CAAAJ,KAAA,EAAGF,IAAI;EAAA,OAAAE,KAAA;AAAA,KAGjB","names":["name","_tmpl$","_el$2","_tmpl$2","_el$3","firstChild","_$insert"],"ignoreList":[],"sources":["script-fragment.test.tsx"]}',
+    imports: [
       {
-        type: "Identifier",
-        loc: { start: { line: 11, column: 19 }, end: { line: 11, column: 23 } },
-        name: "name",
-        key: "name$3pjkiwnta5gua$0",
+        from: "solid-js/web",
+        range: [0, 54],
+        bindings: [{ name: "template", local: "_$template" }],
+      },
+      {
+        from: "solid-js/web",
+        range: [55, 105],
+        bindings: [{ name: "insert", local: "_$insert" }],
       },
     ],
-    body: {
-      type: "JSXFragment",
-      loc: { start: { line: 12, column: 2 }, end: { line: 17, column: 5 } },
-      openingFragment: {
-        type: "JSXOpeningFragment",
-        loc: { start: { line: 12, column: 2 }, end: { line: 12, column: 4 } },
-      },
-      children: [
-        {
-          type: "JSXText",
-          loc: { start: { line: 13, column: 4 }, end: { line: 13, column: 4 } },
-          value: "\n    ",
-          raw: "\n    ",
-        },
-        {
-          type: "JSXElement",
-          loc: {
-            start: { line: 13, column: 4 },
-            end: { line: 13, column: 40 },
-          },
-          openingElement: {
-            type: "JSXOpeningElement",
-            loc: {
-              start: { line: 13, column: 4 },
-              end: { line: 13, column: 10 },
-            },
-            name: {
-              type: "JSXIdentifier",
-              loc: {
-                start: { line: 13, column: 5 },
-                end: { line: 13, column: 9 },
-              },
-              name: "span",
-            },
-            attributes: [],
-            selfClosing: false,
-          },
-          children: [
-            {
-              type: "JSXText",
-              loc: {
-                start: { line: 13, column: 10 },
-                end: { line: 13, column: 33 },
-              },
-              value: "a sentence across lines",
-              raw: "a sentence across lines",
-            },
-          ],
-          closingElement: {
-            type: "JSXClosingElement",
-            loc: {
-              start: { line: 13, column: 33 },
-              end: { line: 13, column: 40 },
-            },
-            name: {
-              type: "JSXIdentifier",
-              loc: {
-                start: { line: 13, column: 35 },
-                end: { line: 13, column: 39 },
-              },
-              name: "span",
-            },
-          },
-        },
-        {
-          type: "JSXText",
-          loc: { start: { line: 14, column: 4 }, end: { line: 14, column: 4 } },
-          value: "\n    ",
-          raw: "\n    ",
-        },
-        {
-          type: "JSXElement",
-          loc: {
-            start: { line: 14, column: 4 },
-            end: { line: 16, column: 11 },
-          },
-          openingElement: {
-            type: "JSXOpeningElement",
-            loc: {
-              start: { line: 14, column: 4 },
-              end: { line: 14, column: 10 },
-            },
-            name: {
-              type: "JSXIdentifier",
-              loc: {
-                start: { line: 14, column: 5 },
-                end: { line: 14, column: 9 },
-              },
-              name: "span",
-            },
-            attributes: [],
-            selfClosing: false,
-          },
-          children: [
-            {
-              type: "JSXText",
-              loc: {
-                start: { line: 15, column: 6 },
-                end: { line: 15, column: 6 },
-              },
-              value: "\n      ",
-              raw: "\n      ",
-            },
-            {
-              type: "JSXExpressionContainer",
-              loc: {
-                start: { line: 15, column: 6 },
-                end: { line: 15, column: 12 },
-              },
-              expression: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 15, column: 7 },
-                  end: { line: 15, column: 11 },
-                },
-                name: "name",
-                key: "name$3pjkiwnta5gua$0",
-              },
-            },
-            {
-              type: "JSXText",
-              loc: {
-                start: { line: 15, column: 13 },
-                end: { line: 15, column: 13 },
-              },
-              value: " ",
-              raw: " ",
-            },
-            {
-              type: "JSXExpressionContainer",
-              loc: {
-                start: { line: 15, column: 13 },
-                end: { line: 15, column: 19 },
-              },
-              expression: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 15, column: 14 },
-                  end: { line: 15, column: 18 },
-                },
-                name: "name",
-                key: "name$3pjkiwnta5gua$0",
-              },
-            },
-            {
-              type: "JSXText",
-              loc: {
-                start: { line: 16, column: 4 },
-                end: { line: 16, column: 4 },
-              },
-              value: "\n    ",
-              raw: "\n    ",
-            },
-          ],
-          closingElement: {
-            type: "JSXClosingElement",
-            loc: {
-              start: { line: 16, column: 4 },
-              end: { line: 16, column: 11 },
-            },
-            name: {
-              type: "JSXIdentifier",
-              loc: {
-                start: { line: 16, column: 6 },
-                end: { line: 16, column: 10 },
-              },
-              name: "span",
-            },
-          },
-        },
-        {
-          type: "JSXText",
-          loc: { start: { line: 17, column: 2 }, end: { line: 17, column: 2 } },
-          value: "\n  ",
-          raw: "\n  ",
-        },
-      ],
-      closingFragment: {
-        type: "JSXClosingFragment",
-        loc: { start: { line: 17, column: 2 }, end: { line: 17, column: 5 } },
-      },
-    },
-    expression: true,
-  }),
-  {
-    code: "export default () => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>);",
-    map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
-    imports: [],
-    exportAt: 0,
+    exportAt: 225,
   },
 );
 it("scriptFragment", async (t) => {
@@ -221,35 +37,9 @@ it("scriptFragment", async (t) => {
       children: cs.create(
         "3pjkiwnta5gua:21:48",
         { params: [{ kind: "splice", value: listed, bindings: [] }] },
-        () => ({
-          type: "CallExpression",
-          loc: {
-            start: { line: 21, column: 51 },
-            end: { line: 21, column: 63 },
-          },
-          callee: {
-            type: "Splice",
-            loc: {
-              start: { line: 21, column: 51 },
-              end: { line: 21, column: 58 },
-            },
-            param: 0,
-          },
-          arguments: [
-            {
-              type: "Literal",
-              loc: {
-                start: { line: 21, column: 59 },
-                end: { line: 21, column: 62 },
-              },
-              value: "x",
-            },
-          ],
-          optional: false,
-        }),
         {
-          code: 'export default ($0) => $0()("x");',
-          map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
+          code: 'export default $0 => $0()("x");',
+          map: '{"version":3,"mappings":"eAoBmDA,EAAA,IAAAA,EAAA,EAAO,CAAC,GAAG,CAAC","names":["$0"],"ignoreList":[],"sources":["script-fragment.test.tsx"]}',
           imports: [],
           exportAt: 0,
         },

@@ -1,24 +1,28 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { style: _$style } = $modules["solid-js/web"];
+    const { effect: _$effect } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`);
     const $entry = ($0) => {
       const size = $0()(16);
-      return (
-        <span
-          style={"font-size: " + size.get() + "px"}
-          onclick={() => {
-            size.set(size.get() + 1);
-          }}
-        >
-          press
-        </span>
-      );
+      return (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => {
+          size[1](size[0]() + 1);
+        };
+        _$effect((_$p) => _$style(_el$, "font-size: " + size[0]() + "px", _$p));
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   return jsx("div", {
     children: [
-      () => jsx(() => f1(() => state), {}),
-      () => jsx(() => f1(() => state), {}),
+      () => jsx(() => f1(() => $modules["solid-js"].createSignal), {}),
+      () => jsx(() => f1(() => $modules["solid-js"].createSignal), {}),
     ],
   });
 })([]);

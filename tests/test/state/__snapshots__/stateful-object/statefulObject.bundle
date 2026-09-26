@@ -1,30 +1,34 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<button>`);
     const $entry = ($0) => {
       const c = $0()(10);
-      return (
-        <button
-          onclick={() => {
-            c.add(5);
-          }}
-        >
-          {c.get()}
-        </button>
-      );
+      return (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => {
+          c.add(5);
+        };
+        _$insert(_el$, () => c.get());
+        return _el$;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   const f2 = (() => {
     const $entry = ($0) => (initial) => {
       const count = $0()(initial);
       return {
-        get: () => count.get(),
+        get: () => count[0](),
         add: (n) => {
-          count.set(count.get() + n);
+          count[1](count[0]() + n);
         },
       };
     };
     return $entry;
   })();
-  return f1(() => f2(() => state));
+  return f1(() => f2(() => $modules["solid-js"].createSignal));
 })([]);

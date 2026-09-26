@@ -1,12 +1,12 @@
 // 12:5
 export default () => {
-    let total = 0;
-    for (let i = 0; i < 3; i++) {
-        total = total + i;
-    }
-    let n = 0.1;
-    const before = n++;
-    const after = ++n;
-    const down = n--;
-    return [total, before, after, down, n];
+  let total = 0;
+  for (let i = 0; i < 3; i++) {
+    total = total + i;
+  }
+  let n = 0.1;
+  const before = n++;
+  const after = ++n;
+  const down = n--;
+  return [total, before, after, down, n];
 };

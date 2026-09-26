@@ -1,45 +1,47 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
-import type { Client, State } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Client } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import type { Signal } from "solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 
-// A child reading a cell it was handed, in all three positions at once: a prop,
+// A child reading a signal it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. The script that
-// declares the cell never reads it, so a write reaches each `ReadingRow` with
+// declares the signal never reads it, so a write reaches each `ReadingRow` with
 // the arguments it already had — the same handle object, the same id.
 //
 // Nothing a row was given is different, and everything it draws is. Skipping
 // on the arguments alone leaves both rows stale: a handle is one object
-// whatever its cell holds. The branch is the half no amount of recomputing a
+// whatever its signal holds. The branch is the half no amount of recomputing a
 // prop can answer for.
 const ReadingRow = async ({
   id,
   selected,
 }: {
   id: Client<number>;
-  selected: Client<State<number>>;
+  selected: Client<Signal<number>>;
 }) => (
   <div>
     <span
-      style={cs.lift("font-size: " + (cs.splice((selected) satisfies typeof cs.Spliceable).get() === cs.splice((id) satisfies typeof cs.Spliceable) ? 20 : 16) + "px")}
+      style={cs.lift("font-size: " + (cs.splice((selected) satisfies typeof cs.Spliceable)[0]() === cs.splice((id) satisfies typeof cs.Spliceable) ? 20 : 16) + "px")}
     >
-      {cs.lift("row " + cs.splice((id) satisfies typeof cs.Spliceable) + " of " + cs.splice((selected) satisfies typeof cs.Spliceable).get())}
+      {cs.lift("row " + cs.splice((id) satisfies typeof cs.Spliceable) + " of " + cs.splice((selected) satisfies typeof cs.Spliceable)[0]())}
     </span>
-    {cs.lift(cs.splice((selected) satisfies typeof cs.Spliceable).get() === cs.splice((id) satisfies typeof cs.Spliceable) ? cs.splice((<span>marker</span>) satisfies typeof cs.Spliceable) : null)}
+    {cs.lift(cs.splice((selected) satisfies typeof cs.Spliceable)[0]() === cs.splice((id) satisfies typeof cs.Spliceable) ? cs.splice((<span>marker</span>) satisfies typeof cs.Spliceable) : null)}
   </div>
 );
 
 async function ReadingPanel() {
   return cs.lift((() => {
-    const __cs_selected = cs.splice((state) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected.set(1))}>select</span>)}{cs.lift(<ReadingRow id={cs.lift(0)} selected={cs.lift(__cs_selected)}/>)}{cs.lift(<ReadingRow id={cs.lift(1)} selected={cs.lift(__cs_selected)}/>)}</div>;
+    const __cs_selected = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected[1](1))}>select</span>)}{cs.lift(<ReadingRow id={cs.lift(0)} selected={cs.lift(__cs_selected)}/>)}{cs.lift(<ReadingRow id={cs.lift(1)} selected={cs.lift(__cs_selected)}/>)}</div>;
 })());
 }
 
-// What one `ReadingRow` draws, in the three positions it read the cell from: a
+// What one `ReadingRow` draws, in the three positions it read the signal from: a
 // prop, a text child, and a branch.
 function readRow(row: Element): {
   size: unknown;
@@ -56,7 +58,7 @@ function readRow(row: Element): {
 }
 
 describe("local state", () => {
-  it("a child redraws everything it read of a cell it was handed", async () => {
+  it("a child redraws everything it read of a signal it was handed", async () => {
     const view = await drawn(<ReadingPanel />);
     const [button, ...rows] = children(view);
     assert.ok(button !== undefined && rows.length === 2);

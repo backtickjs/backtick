@@ -1,21 +1,22 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 
 // State belongs to the script that declares it, and a script entry is applied
 // once per place that reaches it — so two `<OwnCounter />` tags are two
-// applications of one entry, and each declares a cell of its own.
+// applications of one entry, and each declares a signal of its own.
 async function OwnCounter() {
   return cs`{
-    const size = $state(16);
+    const size = $createSignal(16);
     return (
       <span
-        style={"font-size: " + size.get() + "px"}
+        style={"font-size: " + size[0]() + "px"}
         onclick={() => {
-          size.set(size.get() + 1);
+          size[1](size[0]() + 1);
         }}
       >
         press
@@ -32,7 +33,7 @@ const instances = (
 );
 
 describe("local state", () => {
-  it("two invocations of one component hold independent cells", async () => {
+  it("two invocations of one component hold independent signals", async () => {
     const view = await drawn(instances);
     const [first, second] = children(view);
     assert.ok(first !== undefined && second !== undefined);

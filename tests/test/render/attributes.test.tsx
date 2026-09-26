@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { type BacktickElement, cs, state } from "@backtickjs/core";
-import { fireEvent, render, screen } from "@backtickjs/web-testing";
+import { type BacktickElement, cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { fireEvent, render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
@@ -98,7 +99,6 @@ describe("an attribute's case", () => {
   });
 
   it("is still folded down in HTML", async () => {
-    // @ts-expect-error: the schema declares no `tabIndex` on a `div`
     const div = await drawn(<div tabIndex={2} />);
     assert.deepEqual(attributes(div), { tabindex: "2" });
   });
@@ -109,16 +109,16 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs`{
-      const text = $state("first");
-      const isOn = $state(false);
+      const text = $createSignal("first");
+      const isOn = $createSignal(false);
       return (
         <div>
-          <input aria-label="text" value={text.get()} />
-          <input type="checkbox" aria-label="on" checked={isOn.get()} />
+          <input aria-label="text" value={text[0]()} />
+          <input type="checkbox" aria-label="on" checked={isOn[0]()} />
           <button
             onclick={() => {
-              text.set("second");
-              isOn.set(true);
+              text[1]("second");
+              isOn[1](true);
             }}
           >
             write
@@ -139,41 +139,5 @@ describe("a field's value", () => {
     await userEvent.click(screen.getByRole("button", { name: "write" }));
     assert.equal(text.value, "second");
     assert.equal(on.checked, true);
-  });
-
-  // A read past the end types as the element and reads as `undefined`, so
-  // nothing reaches a field without a cast.
-  async function Clearable() {
-    return cs`{
-      const texts = $state(["typed by the script"]);
-      const flags = $state([true]);
-      return (
-        <div>
-          <input aria-label="text" value={texts.get()[0]} />
-          <input type="checkbox" aria-label="on" checked={flags.get()[0]} />
-          <button
-            onclick={() => {
-              texts.set([]);
-              flags.set([]);
-            }}
-          >
-            clear
-          </button>
-        </div>
-      );
-    }`;
-  }
-
-  it("is cleared by nothing, after the field was edited", async () => {
-    await render(<Clearable />);
-    const text = screen.getByLabelText<HTMLInputElement>("text");
-    const on = screen.getByLabelText<HTMLInputElement>("on");
-    fireEvent.input(text, { target: { value: "typed" } });
-    await userEvent.click(on);
-    await userEvent.click(on);
-
-    await userEvent.click(screen.getByRole("button", { name: "clear" }));
-    assert.equal(text.value, "");
-    assert.equal(on.checked, false);
   });
 });

@@ -1,15 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import type { BacktickElement, Bundle } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A function the script holds that draws a bundle it is still waiting for.
 //
-// Read inside the drawing, so the condition follows the cell: when the bundle
+// Read inside the drawing, so the condition follows the signal: when the bundle
 // arrives the child runs again and calls `Badge`, and `count` stays a prop the
 // badge reads on access rather than a value handed over once.
 const loadedBadge = await bundler.run(
@@ -17,20 +18,20 @@ const loadedBadge = await bundler.run(
 );
 
 const scriptBoundTagLoading = cs`{
-  const count = $state(0);
-  const drawn = $state<Bundle<
+  const count = $createSignal(0);
+  const drawn = $createSignal<Bundle<
     (props: { count: number }) => BacktickElement
   > | null>(null);
   const Badge = (props: { count: number }) => {
-    const held = drawn.get();
+    const held = drawn[0]();
     return held === null ? null : eval(held)(props);
   };
 
   return (
     <div>
-      {drawn.get() === null ? <i>loading</i> : <Badge count={count.get()} />}
-      <button onclick={() => drawn.set($loadedBadge)}>load</button>
-      <button onclick={() => count.set(count.get() + 1)}>more</button>
+      {drawn[0]() === null ? <i>loading</i> : <Badge count={count[0]()} />}
+      <button onclick={() => drawn[1]($loadedBadge)}>load</button>
+      <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>
   );
 }`;

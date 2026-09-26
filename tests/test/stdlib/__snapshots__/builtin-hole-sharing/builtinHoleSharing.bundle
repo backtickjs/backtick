@@ -7,7 +7,7 @@
   })();
   const f2 = (() => {
     const $entry = ($0) => {
-      return $0()(1).get();
+      return $0()(1)[0]();
     };
     return $entry;
   })();
@@ -16,7 +16,7 @@
     return $entry;
   })();
   return f1(
-    () => f2(() => state),
-    () => f2(() => f3(() => state)),
+    () => f2(() => $modules["solid-js"].createSignal),
+    () => f2(() => f3(() => $modules["solid-js"].createSignal)),
   );
 })([]);

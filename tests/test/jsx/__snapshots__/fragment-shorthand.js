@@ -2,7 +2,7 @@ import {
   jsx as _jsx,
   Fragment as _Fragment,
   jsxs as _jsxs,
-} from "@backtickjs/web-sdk/jsx-runtime";
+} from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { snapshotCase } from "../snapshotCase.ts";
 // `<>…</>` and `<Fragment>` are one component: the JSX transform imports

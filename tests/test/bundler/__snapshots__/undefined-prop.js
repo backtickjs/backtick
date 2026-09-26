@@ -1,9 +1,10 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, onMount } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { render, screen } from "@backtickjs/web-testing";
+import { onMount } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 // An element's prop that is `undefined` is left out, as an optional prop reads
 // in JSX and TypeScript. That is what lets a component forward an optional
 // prop it wasn't given.
@@ -26,11 +27,11 @@ describe("an undefined prop", () => {
       _jsx(Pill, {
         label: "focused",
         ref: cs.create(
-          "28eplibrubp3g:34:33",
+          "17yttdqkgwskc:34:33",
           { params: [{ kind: "splice", value: onMount, bindings: [] }] },
           {
-            code: "export default ($0) => (el) => $0()(() => el.focus());",
-            map: '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["undefined-prop.test.tsx"],"names":[],"mappings":"eAiCoC,QAAA,CAAC,EAAE,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
+            code: "export default $0 => el => $0()(() => el.focus());",
+            map: '{"version":3,"mappings":"eAiCoCA,EAAA,IAACC,EAAE,IAAKD,EAAA,EAAQ,CAAC,MAAMC,EAAE,CAACC,KAAK,EAAE,CAAC","names":["$0","el","focus"],"ignoreList":[],"sources":["undefined-prop.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },

@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import type { BacktickElement } from "@backtickjs/core";
-import { createRuntime } from "@backtickjs/web-interpreter";
-import { screen } from "@backtickjs/web-testing";
+import { createSignal, For } from "@backtickjs/solid-js";
+import { client } from "@backtickjs/solid-js/client";
+import { createRoot, type JSX } from "solid-js";
+import { insert } from "solid-js/web";
+import { screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -29,11 +32,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = cs.splice((state) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
+    const __cs_ids = cs.splice((createSignal) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
     const __cs_clear = () => {
-        __cs_ids.set([]);
+        __cs_ids[1]([]);
     };
-    return <>{cs.lift(<span onclick={cs.lift(__cs_clear)}>clear</span>)}{cs.lift(<For each={cs.lift(__cs_ids.get())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</>;
+    return <>{cs.lift(<span onclick={cs.lift(__cs_clear)}>clear</span>)}{cs.lift(<For each={cs.lift(__cs_ids[0]())}>{cs.lift((__cs_id: number) => <span>{cs.lift("row " + __cs_id)}</span>)}</For>)}</>;
 })());
 }
 
@@ -73,19 +76,23 @@ function target(html: string): Element {
   return main;
 }
 
-// Draws in front of the anchor `selector` names. `render` takes no anchor —
-// where a drawing goes among a page's own nodes is the runtime's business —
-// so these ask the runtime directly.
+// Draws in front of the anchor `selector` names. `render` takes no anchor, so
+// these insert at it with Solid directly.
 async function drawAt(
   value: BacktickElement,
   parent: Element,
   selector: string,
 ): Promise<void> {
   const code = await bundler.run(value);
-  const unmount = createRuntime({ window, global: globalThis }).render(
-    () => (0, eval)(code),
-    parent,
-    parent.querySelector(selector)!,
+  const unmount = client.evaluate(() =>
+    createRoot((dispose) => {
+      insert(
+        parent,
+        (0, eval)(code) as unknown as JSX.Element,
+        parent.querySelector(selector)!,
+      );
+      return dispose;
+    }),
   );
   undo.push(unmount);
 }

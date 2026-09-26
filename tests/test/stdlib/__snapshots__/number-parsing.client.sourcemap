@@ -33,21 +33,7 @@ parseFloat  → 12:31 parseFloat
 )           → 12:47 )
 ;           → 12:48 ;
 return      → 13:5 return 
-<           → 13:12 <
-span        → 13:13 span
->           → 13:17 >
-{           → 13:18 {
-whole       → 13:19 whole
- +          → 13:24  + 
-based       → 13:27 based
- +          → 13:32  + 
-fractional  → 13:35 fractional
- +          → 13:45  + 
-""          → 13:48 ""
-}           → 13:50 }
-</          → 13:51 </
-span        → 13:53 span
->           → 13:57 >
-;           → 13:58 ;
+_tmpl$      → 13:5 return…
+();         → 13:5 return…
 }           → 14:3 }
 ;           → 14:4 `;…

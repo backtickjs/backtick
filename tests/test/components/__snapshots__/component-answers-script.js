@@ -1,6 +1,7 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 // A component whose whole body is client code answers with the script rather
 // than a drawing the host made: it declares its own storage and draws from it,
@@ -11,161 +12,24 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.create(
-    "2g65d04vf49d2:13:9",
-    { params: [{ kind: "splice", value: state, bindings: [] }] },
-    () => ({
-      type: "BlockStatement",
-      loc: { start: { line: 13, column: 12 }, end: { line: 16, column: 3 } },
-      body: [
+    "3t9qtypqc1fe7:14:9",
+    { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+    {
+      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>`);\nexport default $0 => {\n  const n = $0()(2);\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => n[0]());\n    return _el$;\n  })();\n};',
+      map: '{"version":3,"mappings":";;;eAaYA,EAAA;EACR,MAAMC,CAAC,GAAGD,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAYD,CAAC,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAC,IAAA;EAAA;AACpB,CAAC","names":["$0","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["component-answers-script.test.tsx"]}',
+      imports: [
         {
-          type: "VariableDeclaration",
-          loc: {
-            start: { line: 14, column: 4 },
-            end: { line: 14, column: 24 },
-          },
-          kind: "const",
-          declarations: [
-            {
-              type: "VariableDeclarator",
-              loc: {
-                start: { line: 14, column: 10 },
-                end: { line: 14, column: 23 },
-              },
-              id: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 14, column: 10 },
-                  end: { line: 14, column: 11 },
-                },
-                name: "n",
-                key: "n$2g65d04vf49d2$0",
-              },
-              init: {
-                type: "CallExpression",
-                loc: {
-                  start: { line: 14, column: 14 },
-                  end: { line: 14, column: 23 },
-                },
-                callee: {
-                  type: "Splice",
-                  loc: {
-                    start: { line: 14, column: 14 },
-                    end: { line: 14, column: 20 },
-                  },
-                  param: 0,
-                },
-                arguments: [
-                  {
-                    type: "Literal",
-                    loc: {
-                      start: { line: 14, column: 21 },
-                      end: { line: 14, column: 22 },
-                    },
-                    value: 2,
-                  },
-                ],
-                optional: false,
-              },
-            },
-          ],
+          from: "solid-js/web",
+          range: [0, 54],
+          bindings: [{ name: "template", local: "_$template" }],
         },
         {
-          type: "ReturnStatement",
-          loc: {
-            start: { line: 15, column: 4 },
-            end: { line: 15, column: 30 },
-          },
-          argument: {
-            type: "JSXElement",
-            loc: {
-              start: { line: 15, column: 11 },
-              end: { line: 15, column: 29 },
-            },
-            openingElement: {
-              type: "JSXOpeningElement",
-              loc: {
-                start: { line: 15, column: 11 },
-                end: { line: 15, column: 15 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 15, column: 12 },
-                  end: { line: 15, column: 14 },
-                },
-                name: "em",
-              },
-              attributes: [],
-              selfClosing: false,
-            },
-            children: [
-              {
-                type: "JSXExpressionContainer",
-                loc: {
-                  start: { line: 15, column: 15 },
-                  end: { line: 15, column: 24 },
-                },
-                expression: {
-                  type: "CallExpression",
-                  loc: {
-                    start: { line: 15, column: 16 },
-                    end: { line: 15, column: 23 },
-                  },
-                  callee: {
-                    type: "MemberExpression",
-                    loc: {
-                      start: { line: 15, column: 16 },
-                      end: { line: 15, column: 21 },
-                    },
-                    object: {
-                      type: "Identifier",
-                      loc: {
-                        start: { line: 15, column: 16 },
-                        end: { line: 15, column: 17 },
-                      },
-                      name: "n",
-                      key: "n$2g65d04vf49d2$0",
-                    },
-                    property: {
-                      type: "Identifier",
-                      loc: {
-                        start: { line: 15, column: 18 },
-                        end: { line: 15, column: 21 },
-                      },
-                      name: "get",
-                    },
-                    computed: false,
-                    optional: false,
-                  },
-                  arguments: [],
-                  optional: false,
-                },
-              },
-            ],
-            closingElement: {
-              type: "JSXClosingElement",
-              loc: {
-                start: { line: 15, column: 24 },
-                end: { line: 15, column: 29 },
-              },
-              name: {
-                type: "JSXIdentifier",
-                loc: {
-                  start: { line: 15, column: 26 },
-                  end: { line: 15, column: 28 },
-                },
-                name: "em",
-              },
-            },
-          },
+          from: "solid-js/web",
+          range: [55, 105],
+          bindings: [{ name: "insert", local: "_$insert" }],
         },
       ],
-    }),
-    {
-      code: "export default ($0) => {\n    const n = $0()(2);\n    return <em>{n.get()}</em>;\n};",
-      map: '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["component-answers-script.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC5B,CAAC"}',
-      imports: [],
-      exportAt: 0,
+      exportAt: 152,
     },
   );
 }

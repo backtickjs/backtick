@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -9,25 +10,25 @@ import { snapshotCase } from "../snapshotCase.ts";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs`{
-  const count = $state(0);
+  const count = $createSignal(0);
   const Badge = (props: { n: number }) => <b>{"n " + props.n}</b>;
 
   return (
     <div>
-      {${cs`<Badge n={count.get()} />`}}
+      {${cs`<Badge n={count[0]()} />`}}
       {
         ${cs`{
           const skipped = 10;
-          return ${cs`<Badge n={count.get() + 100} />`};
+          return ${cs`<Badge n={count[0]() + 100} />`};
         }`}
       }
-      {${(<section>{cs`<Badge n={count.get() + 1000} />`}</section>)}}
+      {${(<section>{cs`<Badge n={count[0]() + 1000} />`}</section>)}}
       {
         ${cs`<For each={[1, 2]}>
-          {(m: number) => <Badge n={m * count.get()} />}
+          {(m: number) => <Badge n={m * count[0]()} />}
         </For>`}
       }
-      <button onclick={() => count.set(count.get() + 1)}>more</button>
+      <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>
   );
 }`;

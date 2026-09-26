@@ -1,12 +1,19 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<em>`);
     const $entry = ($0) => {
       const n = $0()(2);
-      return <em>{n.get()}</em>;
+      return (() => {
+        var _el$ = _tmpl$();
+        _$insert(_el$, () => n[0]());
+        return _el$;
+      })();
     };
     return $entry;
   })();
   return jsx("div", {
-    children: () => jsx(() => f1(() => state), {}),
+    children: () => jsx(() => f1(() => $modules["solid-js"].createSignal), {}),
   });
 })([]);

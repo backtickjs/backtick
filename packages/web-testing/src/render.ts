@@ -7,9 +7,13 @@ import type {
   queries,
 } from "@testing-library/dom";
 import { mounted } from "./cleanup.js";
-import type { EvaluateOptions } from "./evaluate.js";
+import {
+  type BundleClient,
+  defaultClient,
+  type EvaluateOptions,
+} from "./evaluate.js";
 import { bundler } from "@backtickjs/bundler";
-import { runOf, testRuntime } from "./client.js";
+import { runOf } from "./client.js";
 
 /** Where and how a value is drawn. */
 export interface RenderOptions<
@@ -71,6 +75,19 @@ export async function render<
   value: Spliceable<BacktickElement>,
   options: RenderOptions<Q, Container, BaseElement> = {},
 ): Promise<RenderResult<Q, Container, BaseElement>> {
+  return renderWith(defaultClient(options), value, options);
+}
+
+/** {@link render}, drawing with `client`. */
+export async function renderWith<
+  Q extends Queries = typeof queries,
+  Container extends Element = HTMLElement,
+  BaseElement extends Element = Container,
+>(
+  client: BundleClient,
+  value: Spliceable<BacktickElement>,
+  options: RenderOptions<Q, Container, BaseElement> = {},
+): Promise<RenderResult<Q, Container, BaseElement>> {
   const baseElement = (options.baseElement ??
     options.container ??
     document.body) as BaseElement;
@@ -88,7 +105,7 @@ export async function render<
   const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
     const code = await bundler.run(value);
     takeDown();
-    const dispose = testRuntime(options.globals).render(runOf(code), container);
+    const dispose = client.render(runOf(code), container);
     // The runtime stops what it drew but leaves the nodes, so the
     // container is emptied here, as React's `unmount` and Solid's own `render`
     // do.

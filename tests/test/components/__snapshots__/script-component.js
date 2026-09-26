@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -29,170 +29,27 @@ it("scriptComponent", async (t) => {
           { kind: "tag", value: Badge },
         ],
       },
-      () => ({
-        type: "BlockStatement",
-        loc: { start: { line: 27, column: 7 }, end: { line: 34, column: 5 } },
-        body: [
+      {
+        code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`);\nexport default ($0, $1) => {\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, _$createComponent($0, {\n      title: "totals"\n    }), null);\n    _$insert(_el$, _$createComponent($1, {}), null);\n    return _el$;\n  })();\n};',
+        map: '{"version":3,"mappings":";;;;eA0BO,CAAAA,EAAA,EAAAC,EAAA;EACD;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CAEKL,EAAI;MAACM,KAAK;IAAA;IAAAF,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CACVJ,EAAK;IAAA,OAAAC,IAAA;EAAA;AAGZ,CAAC","names":["$0","$1","_el$","_tmpl$","_$insert","_$createComponent","title"],"ignoreList":[],"sources":["script-component.test.tsx"]}',
+        imports: [
           {
-            type: "ReturnStatement",
-            loc: {
-              start: { line: 28, column: 6 },
-              end: { line: 33, column: 8 },
-            },
-            argument: {
-              type: "JSXElement",
-              loc: {
-                start: { line: 29, column: 8 },
-                end: { line: 32, column: 14 },
-              },
-              openingElement: {
-                type: "JSXOpeningElement",
-                loc: {
-                  start: { line: 29, column: 8 },
-                  end: { line: 29, column: 13 },
-                },
-                name: {
-                  type: "JSXIdentifier",
-                  loc: {
-                    start: { line: 29, column: 9 },
-                    end: { line: 29, column: 12 },
-                  },
-                  name: "div",
-                },
-                attributes: [],
-                selfClosing: false,
-              },
-              children: [
-                {
-                  type: "JSXText",
-                  loc: {
-                    start: { line: 30, column: 10 },
-                    end: { line: 30, column: 10 },
-                  },
-                  value: "\n          ",
-                  raw: "\n          ",
-                },
-                {
-                  type: "JSXElement",
-                  loc: {
-                    start: { line: 30, column: 10 },
-                    end: { line: 30, column: 33 },
-                  },
-                  openingElement: {
-                    type: "JSXOpeningElement",
-                    loc: {
-                      start: { line: 30, column: 10 },
-                      end: { line: 30, column: 33 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 30, column: 11 },
-                        end: { line: 30, column: 15 },
-                      },
-                      name: "Card",
-                      param: 0,
-                    },
-                    attributes: [
-                      {
-                        type: "JSXAttribute",
-                        loc: {
-                          start: { line: 30, column: 16 },
-                          end: { line: 30, column: 30 },
-                        },
-                        name: {
-                          type: "JSXIdentifier",
-                          loc: {
-                            start: { line: 30, column: 16 },
-                            end: { line: 30, column: 21 },
-                          },
-                          name: "title",
-                        },
-                        value: {
-                          type: "Literal",
-                          loc: {
-                            start: { line: 30, column: 22 },
-                            end: { line: 30, column: 30 },
-                          },
-                          value: "totals",
-                        },
-                      },
-                    ],
-                    selfClosing: true,
-                  },
-                  children: [],
-                  closingElement: null,
-                },
-                {
-                  type: "JSXText",
-                  loc: {
-                    start: { line: 31, column: 10 },
-                    end: { line: 31, column: 10 },
-                  },
-                  value: "\n          ",
-                  raw: "\n          ",
-                },
-                {
-                  type: "JSXElement",
-                  loc: {
-                    start: { line: 31, column: 10 },
-                    end: { line: 31, column: 19 },
-                  },
-                  openingElement: {
-                    type: "JSXOpeningElement",
-                    loc: {
-                      start: { line: 31, column: 10 },
-                      end: { line: 31, column: 19 },
-                    },
-                    name: {
-                      type: "JSXIdentifier",
-                      loc: {
-                        start: { line: 31, column: 11 },
-                        end: { line: 31, column: 16 },
-                      },
-                      name: "Badge",
-                      param: 1,
-                    },
-                    attributes: [],
-                    selfClosing: true,
-                  },
-                  children: [],
-                  closingElement: null,
-                },
-                {
-                  type: "JSXText",
-                  loc: {
-                    start: { line: 32, column: 8 },
-                    end: { line: 32, column: 8 },
-                  },
-                  value: "\n        ",
-                  raw: "\n        ",
-                },
-              ],
-              closingElement: {
-                type: "JSXClosingElement",
-                loc: {
-                  start: { line: 32, column: 8 },
-                  end: { line: 32, column: 14 },
-                },
-                name: {
-                  type: "JSXIdentifier",
-                  loc: {
-                    start: { line: 32, column: 10 },
-                    end: { line: 32, column: 13 },
-                  },
-                  name: "div",
-                },
-              },
-            },
+            from: "solid-js/web",
+            range: [0, 54],
+            bindings: [{ name: "template", local: "_$template" }],
+          },
+          {
+            from: "solid-js/web",
+            range: [55, 105],
+            bindings: [{ name: "insert", local: "_$insert" }],
+          },
+          {
+            from: "solid-js/web",
+            range: [106, 174],
+            bindings: [{ name: "createComponent", local: "_$createComponent" }],
           },
         ],
-      }),
-      {
-        code: 'export default ($0, $1) => {\n    return (<div>\n          <$0 title="totals"/>\n          <$1 />\n        </div>);\n};',
-        map: '{"version":3,"file":"script-component.test.jsx","sourceRoot":"","sources":["script-component.test.tsx"],"names":[],"mappings":"eA0BO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,EAAI,CAAC,KAAK,CAAC,QAAQ,EACpB;UAAA,CAAC,EAAK,CAAC,AAAD,EACR;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-        imports: [],
-        exportAt: 0,
+        exportAt: 222,
       },
     ),
   );

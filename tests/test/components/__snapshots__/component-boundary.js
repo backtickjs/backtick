@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { snapshotCase } from "../snapshotCase.ts";
 // A server component's invocation is an instance boundary, so it hoists into a

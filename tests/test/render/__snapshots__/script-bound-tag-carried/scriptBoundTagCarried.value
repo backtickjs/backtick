@@ -10,7 +10,7 @@
       </u>
     </b>
   </section>
-  <button onclick={[function]}>
+  <button>
     {"more"}
   </button>
 </div>

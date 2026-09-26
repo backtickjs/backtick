@@ -1,29 +1,30 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, text } from "./dom.ts";
 
-// A keyed list driven by a cell. Every write hands back a new array of new
+// A keyed list driven by a signal. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
 // thing saying which row is which.
 async function SwappableRows() {
   return cs`{
-    const ids = $state<number[]>([1, 2, 3]);
+    const ids = $createSignal<number[]>([1, 2, 3]);
     const swap = () => {
-      const held = ids.get();
-      ids.set(held.with(0, held[2]).with(2, held[0]));
+      const held = ids[0]();
+      ids[1](held.with(0, held[2]).with(2, held[0]));
     };
     const drop = () => {
-      ids.set(ids.get().filter((id) => id !== 2));
+      ids[1](ids[0]().filter((id) => id !== 2));
     };
     return (
       <div>
         <span onclick={swap}>swap</span>
         <span onclick={drop}>drop</span>
         <div>
-          <For each={ids.get()}>
+          <For each={ids[0]()}>
             {(id: number) => <span>{"row " + id}</span>}
           </For>
         </div>

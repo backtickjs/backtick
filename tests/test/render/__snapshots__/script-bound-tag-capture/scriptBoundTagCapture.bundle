@@ -1,22 +1,40 @@
 (($d) => {
   const f1 = (() => {
+    const { template: _$template } = $modules["solid-js/web"];
+    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+    const { insert: _$insert } = $modules["solid-js/web"];
+    var _tmpl$ = /*#__PURE__*/ _$template(`<b>`),
+      _tmpl$2 = /*#__PURE__*/ _$template(`<div><button>more`);
     const $entry = ($0, $1, $2, $3, $4) => {
       const count = $0()(0);
-      const Badge = (props) => <b>{"n " + props.n}</b>;
-      return (
-        <div>
-          {$1(count, Badge)}
-          {$2(count, Badge)}
-          {$3(count, Badge)}
-          {$4(count, Badge)}
-          <button onclick={() => count.set(count.get() + 1)}>more</button>
-        </div>
-      );
+      const Badge = (props) =>
+        (() => {
+          var _el$ = _tmpl$();
+          _$insert(_el$, () => "n " + props.n);
+          return _el$;
+        })();
+      return (() => {
+        var _el$2 = _tmpl$2(),
+          _el$3 = _el$2.firstChild;
+        _$insert(_el$2, () => $1(count, Badge), _el$3);
+        _$insert(_el$2, () => $2(count, Badge), _el$3);
+        _$insert(_el$2, () => $3(count, Badge), _el$3);
+        _$insert(_el$2, () => $4(count, Badge), _el$3);
+        _el$3.$$click = () => count[1](count[0]() + 1);
+        return _el$2;
+      })();
     };
+    _$delegateEvents(["click"]);
     return $entry;
   })();
   const f2 = (() => {
-    const $entry = ($0, $1) => <$0 n={$1.get()} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0, $1) =>
+      _$createComponent($0, {
+        get n() {
+          return $1[0]();
+        },
+      });
     return $entry;
   })();
   const f3 = (() => {
@@ -27,21 +45,41 @@
     return $entry;
   })();
   const f4 = (() => {
-    const $entry = ($0, $1) => <$0 n={$1.get() + 100} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0, $1) =>
+      _$createComponent($0, {
+        get n() {
+          return $1[0]() + 100;
+        },
+      });
     return $entry;
   })();
   const f5 = (() => {
-    const $entry = ($0, $1) => <$0 n={$1.get() + 1000} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0, $1) =>
+      _$createComponent($0, {
+        get n() {
+          return $1[0]() + 1000;
+        },
+      });
     return $entry;
   })();
   const f6 = (() => {
-    const $entry = ($0, $1, $2) => (
-      <$0 each={[1, 2]}>{(m) => <$1 n={m * $2.get()} />}</$0>
-    );
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0, $1, $2) =>
+      _$createComponent($0, {
+        each: [1, 2],
+        children: (m) =>
+          _$createComponent($1, {
+            get n() {
+              return m * $2[0]();
+            },
+          }),
+      });
     return $entry;
   })();
   return f1(
-    () => state,
+    () => $modules["solid-js"].createSignal,
     (count, Badge) => f2(Badge, count),
     (count, Badge) => f3(f4, Badge, count),
     (count, Badge) =>
@@ -51,8 +89,9 @@
     (count, Badge) =>
       f6(
         ($0) =>
-          jsx("for", {
+          jsx($modules["solid-js"].For, {
             each: () => $0.each,
+            fallback: () => $0.fallback,
             children: () => $0.children,
           }),
         Badge,

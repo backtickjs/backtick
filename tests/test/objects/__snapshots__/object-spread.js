@@ -17,8 +17,8 @@ it("objectSpread", async (t) => {
       "31uvwz3g4bdt1:17:4",
       { params: [] },
       {
-        code: "export default () => {\n    const base = { a: 1, b: 2 };\n    const over = { b: 9 };\n    return {\n        ...base,\n        ...over,\n        c: 3,\n    };\n};",
-        map: '{"version":3,"file":"object-spread.test.jsx","sourceRoot":"","sources":["object-spread.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IAC5B,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO;QACL,GAAG,IAAI;QACP,GAAG,IAAI;QACP,CAAC,EAAE,CAAC;KACL,CAAC;AACJ,CAAC"}',
+        code: "export default () => {\n  const base = {\n    a: 1,\n    b: 2\n  };\n  const over = {\n    b: 9\n  };\n  return {\n    ...base,\n    ...over,\n    c: 3\n  };\n};",
+        map: '{"version":3,"mappings":"eAgBO;EACD,MAAMA,IAAI,GAAG;IAAEC,CAAC,EAAE,CAAC;IAAEC,CAAC,EAAE;EAAC,CAAE;EAC3B,MAAMC,IAAI,GAAG;IAAED,CAAC,EAAE;EAAC,CAAE;EACrB,OAAO;IACL,GAAGF,IAAI;IACP,GAAGG,IAAI;IACPC,CAAC,EAAE;GACJ;AACH,CAAC","names":["base","a","b","over","c"],"ignoreList":[],"sources":["object-spread.test.tsx"]}',
         imports: [],
         exportAt: 0,
       },

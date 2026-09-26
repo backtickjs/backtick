@@ -1,16 +1,17 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// What a cell holds is the initial widened, so a second value of the same kind
-// goes in after it. Each write is the assertion — every one is an error the
-// moment `$state` reads its initial narrowly.
+// What a signal holds is the initial widened, so a second value of the same
+// kind goes in after it. Each write is the assertion — every one is an error
+// the moment `$createSignal` reads its initial narrowly.
 //
 // A function is the one initial that does not widen on its own: what an arrow
-// answers with widens only against a contextual type, and `$state` takes its
-// initial unbound so that every other kind does widen. Written out, the type
-// argument is the contextual type — `$state<() => number>` holds a function
-// answering with any number rather than only the one it was built from.
+// answers with widens only against a contextual type. Written out, the type
+// argument is the contextual type — `$createSignal<() => number>` holds a
+// function answering with any number rather than only the one it was built
+// from. Solid's setter calls a function it is handed, so storing one wraps it.
 //
 // `Stepper` covers a number, and `Swatch` a numeric enum handed to a function
 // typed as it.
@@ -21,14 +22,14 @@ enum Tone {
 
 async function Widened() {
   return cs.lift((() => {
-    const __cs_flag = cs.splice((state) satisfies typeof cs.Spliceable)(true);
-    const __cs_tone = cs.splice((state) satisfies typeof cs.Spliceable)(cs.splice(Tone.Warm satisfies typeof cs.Spliceable));
-    const __cs_step = cs.splice((state) satisfies typeof cs.Spliceable)<() => number>(() => 0);
+    const __cs_flag = cs.splice((createSignal) satisfies typeof cs.Spliceable)(true);
+    const __cs_tone = cs.splice((createSignal) satisfies typeof cs.Spliceable)(cs.splice(Tone.Warm satisfies typeof cs.Spliceable));
+    const __cs_step = cs.splice((createSignal) satisfies typeof cs.Spliceable)<() => number>(() => 0);
     return <span onclick={cs.lift(() => {
-        __cs_flag.set(false);
-        __cs_tone.set(cs.splice(Tone.Cool satisfies typeof cs.Spliceable));
-        __cs_step.set(() => 1);
-    })}>{cs.lift(__cs_flag.get() + " " + __cs_tone.get() + " " + __cs_step.get()())}</span>;
+        __cs_flag[1](false);
+        __cs_tone[1](cs.splice(Tone.Cool satisfies typeof cs.Spliceable));
+        __cs_step[1](() => () => 1);
+    })}>{cs.lift(__cs_flag[0]() + " " + __cs_tone[0]() + " " + __cs_step[0]()())}</span>;
 })());
 }
 

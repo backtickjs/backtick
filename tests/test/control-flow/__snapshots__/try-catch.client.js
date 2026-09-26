@@ -1,13 +1,12 @@
 // 9:5
 export default () => {
-    const message = "boom";
-    try {
-        throw message;
+  const message = "boom";
+  try {
+    throw message;
+  } catch (error) {
+    if (error === message) {
+      return "caught boom";
     }
-    catch (error) {
-        if (error === message) {
-            return "caught boom";
-        }
-        return "caught something else";
-    }
+    return "caught something else";
+  }
 };

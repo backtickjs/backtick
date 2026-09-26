@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs, onMount, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, onMount } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // What the page held each time a script logged, read through the console
@@ -26,12 +27,12 @@ describe("onMount", () => {
     const seen = await logged(() =>
       render(
         cs`{
-          const count = $state(0);
+          const count = $createSignal(0);
           $onMount(() => {
             $window.console.log();
-            count.set(count.get() + 1);
+            count[1](count[0]() + 1);
           });
-          return <p>{"mounted " + count.get()}</p>;
+          return <p>{"mounted " + count[0]()}</p>;
         }`,
       ),
     );
@@ -42,10 +43,10 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     await render(
       cs`{
-        const said = $state("not yet");
+        const said = $createSignal("not yet");
         return (
-          <button onclick={() => $onMount(() => said.set("ran"))}>
-            {said.get()}
+          <button onclick={() => $onMount(() => said[1]("ran"))}>
+            {said[0]()}
           </button>
         );
       }`,

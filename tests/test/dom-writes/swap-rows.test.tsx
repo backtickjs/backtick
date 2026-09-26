@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
-import { cs, For, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { watchWrites } from "./writes.ts";
 
@@ -10,17 +11,17 @@ import { watchWrites } from "./writes.ts";
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs`{
-    const ids = $state<number[]>([1, 2, 3, 4, 5]);
+    const ids = $createSignal<number[]>([1, 2, 3, 4, 5]);
     const swap = () => {
-      const held = ids.get();
-      ids.set(held.with(1, held[3]).with(3, held[1]));
+      const held = ids[0]();
+      ids[1](held.with(1, held[3]).with(3, held[1]));
     };
     return (
       <div>
         <button onclick={swap}>swap</button>
         <table>
           <tbody>
-            <For each={ids.get()}>
+            <For each={ids[0]()}>
               {(id: number) => (
                 <tr id={"row-" + id}>
                   <td>{"row " + id}</td>

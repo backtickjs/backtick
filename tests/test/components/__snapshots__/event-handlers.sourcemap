@@ -3,7 +3,7 @@ const                             → const
 __cs_said                         → said
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 ""                                → ""
@@ -25,8 +25,9 @@ preventDefault                    → preventDefault
 ;                                 → ;
 \n                                → \n            
 __cs_said                         → said
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_event                        → event
 .                                 → .
@@ -50,8 +51,9 @@ oninput                           → oninput
 __cs_event                        → event
  =>                               → ) => 
 __cs_said                         → said
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_event                        → event
 .                                 → .
@@ -70,8 +72,9 @@ oninput                           → oninput
 __cs_event                        → event
  =>                               → ) => 
 __cs_said                         → said
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_event                        → event
 .                                 → .
@@ -90,8 +93,9 @@ onclick                           → onclick
 __cs_event                        → event
  =>                               → ) =>\n              
 __cs_said                         → said
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 __cs_event                        → event
 .                                 → .
@@ -108,8 +112,9 @@ tagName                           → tagName
 )}                                → \n            }
 >{cs.lift(                        → \n          >\n            {
 __cs_said                         → said
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
 )}</                              → }\n          </
 button                            → button

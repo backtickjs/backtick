@@ -1,9 +1,9 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { defineClient } from "@backtickjs/web-page/client";
 import { renderToString } from "@backtickjs/web-page/server";
-import { render, screen } from "@backtickjs/web-testing";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { pageOf } from "./page.ts";
 // A bundle written into a page's `<script>`, which must not end it early.

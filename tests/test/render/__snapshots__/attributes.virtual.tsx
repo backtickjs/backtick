@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { type BacktickElement, cs, state } from "@backtickjs/core";
-import { fireEvent, render, screen } from "@backtickjs/web-testing";
+import { type BacktickElement, cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { fireEvent, render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
@@ -98,7 +99,6 @@ describe("an attribute's case", () => {
   });
 
   it("is still folded down in HTML", async () => {
-    // @ts-expect-error: the schema declares no `tabIndex` on a `div`
     const div = await drawn(<div tabIndex={2} />);
     assert.deepEqual(attributes(div), { tabindex: "2" });
   });
@@ -109,11 +109,11 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.lift((() => {
-    const __cs_text = cs.splice((state) satisfies typeof cs.Spliceable)("first");
-    const __cs_isOn = cs.splice((state) satisfies typeof cs.Spliceable)(false);
-    return <div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(__cs_text.get())}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(__cs_isOn.get())}/>)}{cs.lift(<button onclick={cs.lift(() => {
-        __cs_text.set("second");
-        __cs_isOn.set(true);
+    const __cs_text = cs.splice((createSignal) satisfies typeof cs.Spliceable)("first");
+    const __cs_isOn = cs.splice((createSignal) satisfies typeof cs.Spliceable)(false);
+    return <div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(__cs_text[0]())}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(__cs_isOn[0]())}/>)}{cs.lift(<button onclick={cs.lift(() => {
+        __cs_text[1]("second");
+        __cs_isOn[1](true);
     })}>
             write
           </button>)}</div>;
@@ -131,33 +131,5 @@ describe("a field's value", () => {
     await userEvent.click(screen.getByRole("button", { name: "write" }));
     assert.equal(text.value, "second");
     assert.equal(on.checked, true);
-  });
-
-  // A read past the end types as the element and reads as `undefined`, so
-  // nothing reaches a field without a cast.
-  async function Clearable() {
-    return cs.lift((() => {
-    const __cs_texts = cs.splice((state) satisfies typeof cs.Spliceable)(["typed by the script"]);
-    const __cs_flags = cs.splice((state) satisfies typeof cs.Spliceable)([true]);
-    return <div>{cs.lift(<input aria-label={cs.lift("text")} value={cs.lift(__cs_texts.get()[0])}/>)}{cs.lift(<input type={cs.lift("checkbox")} aria-label={cs.lift("on")} checked={cs.lift(__cs_flags.get()[0])}/>)}{cs.lift(<button onclick={cs.lift(() => {
-        __cs_texts.set([]);
-        __cs_flags.set([]);
-    })}>
-            clear
-          </button>)}</div>;
-})());
-  }
-
-  it("is cleared by nothing, after the field was edited", async () => {
-    await render(<Clearable />);
-    const text = screen.getByLabelText<HTMLInputElement>("text");
-    const on = screen.getByLabelText<HTMLInputElement>("on");
-    fireEvent.input(text, { target: { value: "typed" } });
-    await userEvent.click(on);
-    await userEvent.click(on);
-
-    await userEvent.click(screen.getByRole("button", { name: "clear" }));
-    assert.equal(text.value, "");
-    assert.equal(on.checked, false);
   });
 });

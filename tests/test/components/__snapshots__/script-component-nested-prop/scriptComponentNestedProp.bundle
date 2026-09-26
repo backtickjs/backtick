@@ -1,6 +1,12 @@
 (($d) => {
   const f1 = (() => {
-    const $entry = ($0) => <$0 person={{ firstName: "ada" }} />;
+    const { createComponent: _$createComponent } = $modules["solid-js/web"];
+    const $entry = ($0) =>
+      _$createComponent($0, {
+        person: {
+          firstName: "ada",
+        },
+      });
     return $entry;
   })();
   return f1(($0) =>

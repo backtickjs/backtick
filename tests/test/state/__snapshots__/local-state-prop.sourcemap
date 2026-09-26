@@ -4,8 +4,9 @@ cs.lift(                          → cs`
 cs.splice(                        →  [-semantic]
 (size)                            → $size
  satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 "px"                              → "px"
@@ -15,14 +16,16 @@ cs.lift(                          → cs`
 cs.splice(                        →  [-semantic]
 (size)                            → $size
  satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-set                               → set
+[                                 → [
+1                                 → 1
+]                                 → ]
 (                                 → (
 cs.splice(                        →  [-semantic]
 (size)                            → $size
  satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-get                               → get
+[                                 → [
+0                                 → 0
+]                                 → ]
 ()                                → ()
  +                                →  + 
 1                                 → 1
@@ -35,7 +38,7 @@ const                             → const
 __cs_size                         → size
  =                                →  = 
 cs.splice(                        →  [-semantic]
-(state)                           → $state
+(createSignal)                    → $createSignal
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 16                                → 16
