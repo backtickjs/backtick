@@ -5,6 +5,5 @@
 49:31 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'Props<HTMLAttributes<HTMLDivElement>>'.
   Property 'nosuch' does not exist on type 'Props<HTMLAttributes<HTMLDivElement>>'.
 53:31 error TS2322: Type 'number' is not assignable to type 'Prop<string> | undefined'.
-57:44 error TS2322: Type '{ nosuch: number; }' is not assignable to type '{ children?: Children | undefined; }'.
-  Property 'nosuch' does not exist on type '{ children?: Children | undefined; }'.
-70:32 error TS2322: Type 'true' is not assignable to type 'Children | undefined'.
+57:44 error TS2322: Type '{ nosuch: number; }' is not assignable to type '{ children?: Prop<Element>; }'.
+  Property 'nosuch' does not exist on type '{ children?: Prop<Element>; }'.

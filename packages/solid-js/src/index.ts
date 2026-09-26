@@ -57,14 +57,6 @@ export const lazy = solid("lazy");
 export const mapArray = solid("mapArray");
 export const indexArray = solid("indexArray");
 
-// Control flow
-export const Index = solid("Index");
-export const Switch = solid("Switch");
-export const Match = solid("Match");
-export const ErrorBoundary = solid("ErrorBoundary");
-export const Suspense = solid("Suspense");
-export const SuspenseList = solid("SuspenseList");
-
 // Stores
 export const createStore = store("createStore");
 export const createMutable = store("createMutable");
@@ -75,17 +67,25 @@ export const unwrap = store("unwrap");
 
 // The DOM
 export const Dynamic = web("Dynamic");
-export const Portal = web("Portal");
 
-// Control flow, as server components: a host function a script or the host
-// writes as a tag, whose element is Solid's own component, called on the
-// client with the props it was handed.
+// Control flow, as server components: a host function the host or a script
+// writes as a tag, whose drawing is Solid's own component, called on the
+// client with the props it was handed. So each works in host JSX — around the
+// scripts a page draws — as well as inside a script.
 
 // A host element whose type is one of Solid's components. Props are named, not
 // spread: while bundling, a component's props stand for what only the client
 // has, and are reached by name.
 function solidElement(
-  name: "For" | "Show",
+  name:
+    | "For"
+    | "Index"
+    | "Show"
+    | "Switch"
+    | "Match"
+    | "ErrorBoundary"
+    | "Suspense"
+    | "SuspenseList",
   props: { [key: string]: unknown },
 ): Promise<JSX.Element> {
   return Promise.resolve(
@@ -96,13 +96,40 @@ function solidElement(
   );
 }
 
-/** Solid's `For`: `children` drawn once per member of `each`. */
+// A host element whose type is one of Solid's DOM components, as
+// `solidElement` for Solid's own.
+function webElement(
+  name: "Portal",
+  props: { [key: string]: unknown },
+): Promise<JSX.Element> {
+  return Promise.resolve(
+    createJsxElement(
+      web(name) as unknown as JsxElementType,
+      props,
+    ) as unknown as JSX.Element,
+  );
+}
+
+/** Solid's `For`: `children` drawn once per member of `each`, keyed by it. */
 export function For<T>(props: {
   each: Prop<readonly T[] | undefined | null | false>;
   fallback?: Prop<JSX.Element>;
   children: Prop<(item: T, index: () => number) => JSX.Element>;
 }): Promise<JSX.Element> {
   return solidElement("For", {
+    each: props.each,
+    fallback: props.fallback,
+    children: props.children,
+  });
+}
+
+/** Solid's `Index`: `children` drawn once per position of `each`. */
+export function Index<T>(props: {
+  each: Prop<readonly T[] | undefined | null | false>;
+  fallback?: Prop<JSX.Element>;
+  children: Prop<(item: () => T, index: number) => JSX.Element>;
+}): Promise<JSX.Element> {
+  return solidElement("Index", {
     each: props.each,
     fallback: props.fallback,
     children: props.children,
@@ -118,6 +145,80 @@ export function Show<T>(props: {
   return solidElement("Show", {
     when: props.when,
     fallback: props.fallback,
+    children: props.children,
+  });
+}
+
+/** Solid's `Switch`: its first `Match` whose `when` holds, or `fallback`. */
+export function Switch(props: {
+  fallback?: Prop<JSX.Element>;
+  children: Prop<JSX.Element>;
+}): Promise<JSX.Element> {
+  return solidElement("Switch", {
+    fallback: props.fallback,
+    children: props.children,
+  });
+}
+
+/** Solid's `Match`: one case of a `Switch`. */
+export function Match<T>(props: {
+  when: Prop<T | undefined | null | false>;
+  children: Prop<JSX.Element | ((item: () => T) => JSX.Element)>;
+}): Promise<JSX.Element> {
+  return solidElement("Match", {
+    when: props.when,
+    children: props.children,
+  });
+}
+
+/** Solid's `ErrorBoundary`: `fallback` in place of `children` that threw. */
+export function ErrorBoundary(props: {
+  fallback: Prop<
+    JSX.Element | ((error: unknown, reset: () => void) => JSX.Element)
+  >;
+  children: Prop<JSX.Element>;
+}): Promise<JSX.Element> {
+  return solidElement("ErrorBoundary", {
+    fallback: props.fallback,
+    children: props.children,
+  });
+}
+
+/** Solid's `Suspense`: `fallback` until the resources `children` read load. */
+export function Suspense(props: {
+  fallback?: Prop<JSX.Element>;
+  children: Prop<JSX.Element>;
+}): Promise<JSX.Element> {
+  return solidElement("Suspense", {
+    fallback: props.fallback,
+    children: props.children,
+  });
+}
+
+/** Solid's `SuspenseList`: the order its `Suspense` children reveal in. */
+export function SuspenseList(props: {
+  revealOrder: Prop<"forwards" | "backwards" | "together">;
+  tail?: Prop<"collapsed" | "hidden">;
+  children: Prop<JSX.Element>;
+}): Promise<JSX.Element> {
+  return solidElement("SuspenseList", {
+    revealOrder: props.revealOrder,
+    tail: props.tail,
+    children: props.children,
+  });
+}
+
+/** Solid's `Portal`: `children` drawn into `mount`, the body where none is given. */
+export function Portal(props: {
+  mount?: Prop<Node>;
+  useShadow?: Prop<boolean>;
+  isSVG?: Prop<boolean>;
+  children: Prop<JSX.Element>;
+}): Promise<JSX.Element> {
+  return webElement("Portal", {
+    mount: props.mount,
+    useShadow: props.useShadow,
+    isSVG: props.isSVG,
     children: props.children,
   });
 }

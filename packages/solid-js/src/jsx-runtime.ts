@@ -14,12 +14,21 @@ import type { JSX as Solid } from "solid-js";
  * child that is a script stays a child, read where it stands, rather than a
  * script the component drew.
  */
-export function Fragment(props: { children?: Children }): JSX.Element {
+export function Fragment(props: { children?: Prop<JSX.Element> }): JSX.Element {
   // What JSX types a drawing as; the bundler writes the array as it is.
   return [props.children] as unknown as JSX.Element;
 }
 
-declare const ElementBrand: unique symbol;
+declare const DrawingBrand: unique symbol;
+
+/**
+ * What stands where Solid has a `Node`: a drawing, as a host builds one from a
+ * tag or a script evaluates to one. Opaque, because a host holds no DOM node:
+ * what a drawing is made of belongs to whichever side made it.
+ */
+export interface Drawing extends ClientHandle {
+  readonly [DrawingBrand]: never;
+}
 
 /**
  * What a prop admits: what the server wrote, or a script standing in for it. A
@@ -28,39 +37,34 @@ declare const ElementBrand: unique symbol;
  */
 export type Prop<T> = Spliceable<T>;
 
-/**
- * What may stand inside an element: one thing, or several. A script may stand
- * where a value is written; a list that changes is drawn with `<For />`.
- */
-export type Children =
-  | Prop<JSX.Element | string | number | null>
-  | readonly Children[];
-
 // An element's props as Solid types them, each a `Prop`, and its children.
 type Props<Attributes> = {
   [Key in keyof Attributes as Key extends "children" ? never : Key]?: Prop<
     Exclude<Attributes[Key], undefined>
   >;
-} & { children?: Children };
+} & { children?: Prop<JSX.Element> };
 
 type Elements = {
   [Tag in keyof Solid.IntrinsicElements]: Props<Solid.IntrinsicElements[Tag]>;
 };
 
 export declare namespace JSX {
-  /**
-   * A drawing, as a host builds one from a tag or a script evaluates to one.
-   * Opaque: what it is made of belongs to whichever side made it.
-   */
-  export interface Element extends ClientHandle {
-    readonly [ElementBrand]: never;
-  }
+  /** Solid's `JSX.Element`, with a `Drawing` where Solid has a `Node`. */
+  export type Element =
+    | Drawing
+    | ArrayElement
+    | (string & {})
+    | number
+    | boolean
+    | null
+    | undefined;
+  export interface ArrayElement extends Array<Element> {}
   export interface IntrinsicElements extends Elements {}
   /** A tag: an element to draw, or a component that answers a drawing. */
   export type ElementType =
     | string
-    | ((props: never) => Prop<Element | null>)
-    | ((props: never) => Promise<Prop<Element | null>>);
+    | ((props: never) => Prop<Element>)
+    | ((props: never) => Promise<Prop<Element>>);
   export interface ElementChildrenAttribute {
     children: unknown;
   }

@@ -42,7 +42,7 @@ export const strayProp = _jsx("div", { nosuch: 1 });
 // @ts-expect-error: Type 'number' is not assignable to type 'Prop<string> | undefined'.
 export const wrongType = _jsx("div", { class: 1 });
 // a fragment takes children and nothing else
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type '{ children?: Children | undefined; }'.
+// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type '{ children?: Prop<Element>; }'.
 export const strayFragmentProp = _jsx(Fragment, { nosuch: 1 });
 // ─── children, which are structure ────────────────────────────────────
 export const text = _jsx("div", { children: "hello" });
@@ -50,6 +50,3 @@ export const number = _jsx("div", { children: 1 });
 export const nested = _jsx("div", {
   children: _jsx("span", { children: "a" }),
 });
-// a boolean is not a child the web draws
-// @ts-expect-error: Type 'true' is not assignable to type 'Children | undefined'.
-export const wrongChild = _jsx("div", { children: true });

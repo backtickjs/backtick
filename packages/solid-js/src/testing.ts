@@ -2,13 +2,21 @@ import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import type { Spliceable } from "@backtickjs/core";
+import type { Client, Spliceable } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 import { bundle } from "./bundle.js";
 import type { JSX } from "./jsx-runtime.js";
 
-/** What a bundle's default export answers: Solid's own element for a drawing. */
-export type Drawn<T> = T extends JSX.Element ? Solid.Element : T;
+/**
+ * What a bundle's default export answers: what a script evaluates to, and
+ * Solid's own element for a drawing.
+ */
+export type Drawn<T> =
+  T extends Client<infer Value>
+    ? Drawn<Value>
+    : T extends JSX.Element
+      ? Solid.Element
+      : T;
 
 /**
  * A value as a page runs it, for Solid Testing Library or Solid itself to
@@ -21,8 +29,10 @@ export type Drawn<T> = T extends JSX.Element ? Solid.Element : T;
  * (`solid-js/web`) resolve through the project's own modules, as the test's
  * do.
  */
-export async function draw<T>(value: Spliceable<T>): Promise<() => Drawn<T>> {
-  const { code } = await bundle(value as Spliceable);
+export async function draw<T extends Spliceable>(
+  value: T,
+): Promise<() => Drawn<T>> {
+  const { code } = await bundle(value);
   const directory = join(process.cwd(), "node_modules", ".cache", "backtick");
   const file = join(
     directory,

@@ -53,7 +53,7 @@ export const strayProp = <div nosuch={1} />;
 export const wrongType = <div class={1} />;
 
 // a fragment takes children and nothing else
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type '{ children?: Children | undefined; }'.
+// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type '{ children?: Prop<Element>; }'.
 export const strayFragmentProp = <Fragment nosuch={1} />;
 
 // ─── children, which are structure ────────────────────────────────────
@@ -65,6 +65,3 @@ export const nested = (
   </div>
 );
 
-// a boolean is not a child the web draws
-// @ts-expect-error: Type 'true' is not assignable to type 'Children | undefined'.
-export const wrongChild = <div>{true}</div>;

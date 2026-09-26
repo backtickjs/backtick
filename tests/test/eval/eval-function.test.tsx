@@ -5,12 +5,12 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 // A bundle whose value is a function: evaluated, then called like any other.
 // One answers a string; the other a drawing, handed its props as a value.
-const greet = (await bundle(cs`(name: string) => "hello " + name`),
-).code;
+const greet = (await bundle(cs`(name: string) => "hello " + name`)).code;
 
-const badge = (await bundle(
+const badge = (
+  await bundle(
     cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
-  ),
+  )
 ).code;
 
 it("evalFunction", async (t) => {
