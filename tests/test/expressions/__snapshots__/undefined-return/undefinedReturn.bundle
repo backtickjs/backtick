@@ -1,9 +1,15 @@
 (($d) => {
-  const f1 = ($0) => {
-    const stored = $0();
-    const caught = $0()();
-    return 1;
-  };
-  const f2 = () => () => "hi";
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const stored = $0();
+      const caught = $0()();
+      return 1;
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = () => () => "hi";
+    return $entry;
+  })();
   return f1(f2);
 })([]);

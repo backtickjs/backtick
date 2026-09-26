@@ -23,6 +23,8 @@ function make(n) {
     {
       code: "export default ($0) => () => $0();",
       map: '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"eAQY,QAAA,GAAG,EAAE,CAAC,IAAE"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

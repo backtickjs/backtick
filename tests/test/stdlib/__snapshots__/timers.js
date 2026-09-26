@@ -308,6 +308,8 @@ it("timers", async (t) => {
       {
         code: "export default ($0) => {\n    const stop = $0().clearInterval;\n    const repeating = $0().setInterval(() => 0, 1000);\n    stop(repeating);\n    $0().clearTimeout($0().setTimeout(() => 0, 1000));\n};",
         map: '{"version":3,"file":"timers.test.jsx","sourceRoot":"","sources":["timers.test.tsx"],"names":[],"mappings":"eAyBO;IACD,MAAM,IAAI,GAAG,IAAO,CAAC,aAAa,CAAC;IACnC,MAAM,SAAS,GAAG,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC;IACrD,IAAI,CAAC,SAAS,CAAC,CAAC;IAChB,IAAO,CAAC,YAAY,CAAC,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC;AAC1D,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

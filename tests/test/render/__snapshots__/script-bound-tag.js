@@ -118,6 +118,8 @@ const badge = await bundler.run(
     {
       code: 'export default () => (props) => <b>{"count " + props.count}</b>;',
       map: '{"version":3,"file":"script-bound-tag.test.jsx","sourceRoot":"","sources":["script-bound-tag.test.tsx"],"names":[],"mappings":"eAYK,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   ),
 );
@@ -562,6 +564,8 @@ const scriptBoundTag = cs.create(
   {
     code: "export default ($0, $1) => {\n    const count = $0()(0);\n    const Badge = eval($1());\n    return (<div>\n      <Badge count={count.get()}/>\n      <button onclick={() => count.set(count.get() + 1)}>more</button>\n    </div>);\n};",
     map: '{"version":3,"file":"script-bound-tag.test.jsx","sourceRoot":"","sources":["script-bound-tag.test.tsx"],"names":[],"mappings":"eAe0B;IACxB,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,MAAM,KAAK,GAAG,IAAI,CAAC,IAAM,CAAC,CAAC;IAE3B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,EAC1B;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CACjE;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("scriptBoundTag", async (t) => {

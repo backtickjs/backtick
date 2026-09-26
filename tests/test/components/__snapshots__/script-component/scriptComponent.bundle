@@ -1,21 +1,21 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    return jsx("div", {
-      children: [
-        () =>
-          jsx($0(), {
-            title: "totals",
-          }),
-        () => jsx($1(), {}),
-      ],
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      return (
+        <div>
+          <$0 title="totals" />
+          <$1 />
+        </div>
+      );
+    };
+    return $entry;
+  })();
   return f1(
-    () => ($0) =>
+    ($0) =>
       jsx("h2", {
         children: () => $0.title,
       }),
-    () => () =>
+    () =>
       jsx("span", {
         children: "new",
       }),

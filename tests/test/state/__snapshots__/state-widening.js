@@ -638,6 +638,8 @@ async function Widened() {
     {
       code: 'export default ($0, $1, $2) => {\n    const flag = $0()(true);\n    const tone = $0()($1());\n    const step = $0()(() => 0);\n    return (<span onclick={() => {\n            flag.set(false);\n            tone.set($2());\n            step.set(() => 1);\n        }}>\n        {flag.get() + " " + tone.get() + " " + step.get()()}\n      </span>);\n};',
       map: '{"version":3,"file":"state-widening.test.jsx","sourceRoot":"","sources":["state-widening.test.tsx"],"names":[],"mappings":"eAsBY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IAC1B,MAAM,IAAI,GAAG,IAAM,CAAC,IAAC,CAAY,CAAC;IAClC,MAAM,IAAI,GAAG,IAAM,CAAe,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC;IAC3C,OAAO,CACL,CAAC,IAAI,CACH,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC;YAChB,IAAI,CAAC,GAAG,CAAC,IAAC,CAAY,CAAC;YACvB,IAAI,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC;QACpB,CAAC,CAAC,CAEF;QAAA,CAAC,IAAI,CAAC,GAAG,EAAE,GAAG,GAAG,GAAG,IAAI,CAAC,GAAG,EAAE,GAAG,GAAG,GAAG,IAAI,CAAC,GAAG,EAAE,EAAE,CACrD;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

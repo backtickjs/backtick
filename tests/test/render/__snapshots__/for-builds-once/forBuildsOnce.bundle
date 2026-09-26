@@ -1,46 +1,42 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const asked = $0()(0);
-    return jsx("div", {
-      children: [
-        jsx("span", {
-          children: () => "asked " + asked.get(),
-        }),
-        () =>
-          jsx($1(), {
-            more: fixed(() => {
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const asked = $0()(0);
+      return (
+        <div>
+          <span>{"asked " + asked.get()}</span>
+          <$1
+            more={() => {
               asked.set(asked.get() + 1);
               return asked.get() < 5;
-            }),
-          }),
-      ],
-    });
-  };
-  const f2 = ($0, $1, $2, $3, $4) => {
-    const items = $0()([]);
-    const started = $1().setTimeout(() => {
-      if ($2()()) {
-        items.set($3());
-      }
-    }, 0);
-    return jsx($4(), {
-      each: () => items.get(),
-      children: fixed((item) =>
-        jsx("em", {
-          children: () => item,
-        }),
-      ),
-    });
-  };
+            }}
+          />
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0, $1, $2, $3, $4) => {
+      const items = $0()([]);
+      const started = $1().setTimeout(() => {
+        if ($2()()) {
+          items.set($3());
+        }
+      }, 0);
+      return <$4 each={items.get()}>{(item) => <em>{item}</em>}</$4>;
+    };
+    return $entry;
+  })();
   return f1(
     () => state,
-    () => ($0) =>
+    ($0) =>
       f2(
         () => state,
         () => window,
         () => $0.more,
         () => ["one", "two"],
-        () => ($0) =>
+        ($0) =>
           jsx("for", {
             each: () => $0.each,
             children: () => $0.children,

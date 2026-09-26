@@ -108,5 +108,7 @@ export default cs.create(
   {
     code: 'export default ($0, $1) => {\n    const Heading = $0();\n    return <$1 title="tag"/>;\n};',
     map: '{"version":3,"file":"host-function-splice.test.jsx","sourceRoot":"","sources":["host-function-splice.test.tsx"],"names":[],"mappings":"eASkB;IAEhB,MAAM,OAAO,GAAG,IAAK,CAAC;IACtB,OAAO,CAAC,EAAI,CAAC,KAAK,CAAC,KAAK,EAAG,CAAC;AAC9B,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );

@@ -397,6 +397,8 @@ describe("onMount", () => {
           {
             code: 'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    $1()(() => {\n        $2().console.log();\n        count.set(count.get() + 1);\n    });\n    return <p>{"mounted " + count.get()}</p>;\n};',
             map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["on-mount.test.tsx"],"names":[],"mappings":"eA2BW;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,IAAQ,CAAC,GAAG,EAAE;QACZ,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC,CAAC;IACH,OAAO,CAAC,CAAC,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;AAC3C,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       ),
@@ -686,6 +688,8 @@ describe("onMount", () => {
         {
           code: 'export default ($0, $1) => {\n    const said = $0()("not yet");\n    return (<button onclick={() => $1()(() => said.set("ran"))}>\n            {said.get()}\n          </button>);\n};',
           map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["on-mount.test.tsx"],"names":[],"mappings":"eA2CS;IACD,MAAM,IAAI,GAAG,IAAM,CAAC,SAAS,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CACrD;YAAA,CAAC,IAAI,CAAC,GAAG,EAAE,CACb;UAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );

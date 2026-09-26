@@ -18,6 +18,8 @@ it("reservedKeySplice", async (t) => {
       {
         code: "export default ($0) => $0();",
         map: '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["reserved-key-splice.test.tsx"],"names":[],"mappings":"eAOgD,QAAA,IAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

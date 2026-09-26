@@ -36,6 +36,8 @@ describe("a global an app defines", () => {
           {
             code: "export default ($0) => $0()();",
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoBwB,QAAA,IAAM,EAAE"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         { globals: { greet: () => "hello" } },
@@ -71,6 +73,8 @@ describe("a global an app defines", () => {
           {
             code: "export default ($0) => $0()();",
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eA4BqC,QAAA,IAAM,EAAE"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       ),
@@ -132,6 +136,8 @@ describe("a global an app defines", () => {
           {
             code: 'export default ($0) => $0().get("greeting");',
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoCwB,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         {

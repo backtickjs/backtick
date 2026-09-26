@@ -1,11 +1,12 @@
 (($d) => {
-  const f1 = () => {
-    const whole = Number.parseInt("42px");
-    const based = Number.parseInt("ff", 16);
-    const fractional = Number.parseFloat("1.5");
-    return jsx("span", {
-      children: () => whole + based + fractional + "",
-    });
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      const whole = Number.parseInt("42px");
+      const based = Number.parseInt("ff", 16);
+      const fractional = Number.parseFloat("1.5");
+      return <span>{whole + based + fractional + ""}</span>;
+    };
+    return $entry;
+  })();
   return jsx(() => f1(), {});
 })([]);

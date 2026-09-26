@@ -1,7 +1,10 @@
 (($d) => {
-  const f1 = ($0) => {
-    const page = JSON.parse($0());
-    return page.rows[0] + " of " + page.count;
-  };
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const page = JSON.parse($0());
+      return page.rows[0] + " of " + page.count;
+    };
+    return $entry;
+  })();
   return f1(() => '{"rows":["one","two"],"count":2}');
 })([]);

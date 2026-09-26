@@ -17,6 +17,8 @@ const d0 = cs.create(
   {
     code: "export default () => 1;",
     map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eASc,MAAA,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 const d1 = cs.create(
@@ -59,6 +61,8 @@ const d1 = cs.create(
   {
     code: "export default ($0) => {\n    return $0() + $0();\n};",
     map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 const d2 = cs.create(
@@ -101,6 +105,8 @@ const d2 = cs.create(
   {
     code: "export default ($0) => {\n    return $0() + $0();\n};",
     map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 const d3 = cs.create(
@@ -143,6 +149,8 @@ const d3 = cs.create(
   {
     code: "export default ($0) => {\n    return $0() + $0();\n};",
     map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 const d4 = cs.create(
@@ -185,6 +193,8 @@ const d4 = cs.create(
   {
     code: "export default ($0) => {\n    return $0() + $0();\n};",
     map: '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["diamond.test.tsx"],"names":[],"mappings":"eAuBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("diamond", async (t) => {

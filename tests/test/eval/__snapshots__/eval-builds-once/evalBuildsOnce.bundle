@@ -1,31 +1,34 @@
 (($d) => {
-  const f1 = ($0, $1, $2) => {
-    const asked = $0()(0);
-    return jsx("div", {
-      children: [
-        jsx("span", {
-          children: () => "asked " + asked.get(),
-        }),
-        () =>
-          jsx($2(), {
-            ask: fixed(() => {
+  const f1 = (() => {
+    const $entry = ($0, $1, $2) => {
+      const asked = $0()(0);
+      return (
+        <div>
+          <span>{"asked " + asked.get()}</span>
+          <$2
+            ask={() => {
               asked.set(asked.get() + 1);
               return asked.get() > 4 ? null : $1();
-            }),
-          }),
-      ],
-    });
-  };
-  const f2 = ($0, $1, $2) => {
-    const drawn = $0()(null);
-    const started = $1().setTimeout(() => drawn.set($2()()), 0);
-    return () => (drawn.get() === null ? null : (0, eval)(drawn.get()));
-  };
+            }}
+          />
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0, $1, $2) => {
+      const drawn = $0()(null);
+      const started = $1().setTimeout(() => drawn.set($2()()), 0);
+      return <>{drawn.get() === null ? null : eval(drawn.get())}</>;
+    };
+    return $entry;
+  })();
   return f1(
     () => state,
     () =>
-      '($d => {\n  const f1 = () => jsx("em", {\n    children: "answered"\n  });\n  return jsx(() => f1(), {});\n})([])',
-    () => ($0) =>
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => \u003cem>{"answered"}\u003c/em>;\nreturn $entry;\n})();\n  return jsx(() => f1(), {});\n})([])',
+    ($0) =>
       f2(
         () => state,
         () => window,

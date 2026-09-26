@@ -1,20 +1,23 @@
 (($d) => {
-  const f1 = () => {
-    return jsx("div", {
-      children: [
-        [
-          jsx("span", {
-            children: "a",
-          }),
-          jsx("span", {
-            children: "b",
-          }),
-        ],
-        jsx("em", {
-          children: "c",
-        }),
-      ],
-    });
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      return (
+        <div>
+          {
+            <Fragment>
+              <span>a</span>
+              <span>b</span>
+            </Fragment>
+          }
+          {
+            <>
+              <em>c</em>
+            </>
+          }
+        </div>
+      );
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

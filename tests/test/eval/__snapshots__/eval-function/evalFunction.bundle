@@ -1,20 +1,17 @@
 (($d) => {
-  const f1 = ($0, $1) =>
-    jsx("div", {
-      children: [
-        jsx("span", {
-          children: () => (0, eval)($0())("ada"),
-        }),
-        () =>
-          (0, eval)($1())({
-            count: 3,
-          }),
-      ],
-    });
+  const f1 = (() => {
+    const $entry = ($0, $1) => (
+      <div>
+        <span>{eval($0())("ada")}</span>
+        {eval($1())({ count: 3 })}
+      </div>
+    );
+    return $entry;
+  })();
   return f1(
     () =>
-      '($d => {\n  const f1 = () => name => "hello " + name;\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => (name) => "hello " + name;\nreturn $entry;\n})();\n  return f1();\n})([])',
     () =>
-      '($d => {\n  const f1 = () => props => jsx("b", {\n    children: () => "count " + props.count\n  });\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => (props) => \u003cb>{"count " + props.count}\u003c/b>;\nreturn $entry;\n})();\n  return f1();\n})([])',
   );
 })([]);

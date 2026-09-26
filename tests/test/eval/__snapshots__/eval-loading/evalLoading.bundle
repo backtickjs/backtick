@@ -1,14 +1,14 @@
 (($d) => {
-  const f1 = ($0) => {
-    const held = $0()(null);
-    return jsx("div", {
-      children: () =>
-        held.get() === null
-          ? jsx("span", {
-              children: "loading…",
-            })
-          : (0, eval)(held.get()),
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const held = $0()(null);
+      return (
+        <div>
+          {held.get() === null ? <span>loading…</span> : eval(held.get())}
+        </div>
+      );
+    };
+    return $entry;
+  })();
   return f1(() => state);
 })([]);

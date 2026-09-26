@@ -1,14 +1,11 @@
 (($d) => {
-  const f1 = ($0) =>
-    jsx($0(), {
-      person: {
-        firstName: "ada",
-      },
-    });
-  return f1(
-    () => ($0) =>
-      jsx("h2", {
-        children: () => $0.person.firstName,
-      }),
+  const f1 = (() => {
+    const $entry = ($0) => <$0 person={{ firstName: "ada" }} />;
+    return $entry;
+  })();
+  return f1(($0) =>
+    jsx("h2", {
+      children: () => $0.person.firstName,
+    }),
   );
 })([]);

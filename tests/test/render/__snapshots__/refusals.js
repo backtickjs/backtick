@@ -158,6 +158,8 @@ describe("a handler that is not a function", () => {
         {
           code: "export default () => <div onclick={() => { }}/>;",
           map: '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eAqI+B,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -240,6 +242,8 @@ describe("a handler that is not a function", () => {
         {
           code: "export default () => <div title={() => { }}/>;",
           map: '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eA+IS,MAAA,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
       /takes a value, not a function/,
@@ -313,6 +317,8 @@ describe("a handler that is not a function", () => {
         {
           code: "export default () => <div onclick={null}/>;",
           map: '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eA0JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,EAAG"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
       cs.create(
@@ -413,6 +419,8 @@ describe("a handler that is not a function", () => {
         {
           code: "export default () => <div onclick={[() => { }][1]}/>;",
           map: '{"version":3,"file":"refusals.test.jsx","sourceRoot":"","sources":["refusals.test.tsx"],"names":[],"mappings":"eA2JS,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     ];

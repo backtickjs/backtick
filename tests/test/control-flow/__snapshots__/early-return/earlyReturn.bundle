@@ -1,10 +1,13 @@
 (($d) => {
-  const f1 = () => {
-    let n = 0;
-    if (n === 0) {
-      return;
-    }
-    n = 1;
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      let n = 0;
+      if (n === 0) {
+        return;
+      }
+      n = 1;
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

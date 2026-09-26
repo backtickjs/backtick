@@ -1,18 +1,16 @@
 (($d) => {
-  const f1 = ($0) =>
-    jsx("div", {
-      children: [
-        jsx("span", {
-          children: "before",
-        }),
-        () => (0, eval)($0()),
-        jsx("span", {
-          children: "after",
-        }),
-      ],
-    });
+  const f1 = (() => {
+    const $entry = ($0) => (
+      <div>
+        <span>before</span>
+        {eval($0())}
+        <span>after</span>
+      </div>
+    );
+    return $entry;
+  })();
   return f1(
     () =>
-      '($d => {\n  const f1 = () => jsx("em", {\n    children: "from another bundle"\n  });\n  return jsx(() => f1(), {});\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => \u003cem>{"from another bundle"}\u003c/em>;\nreturn $entry;\n})();\n  return jsx(() => f1(), {});\n})([])',
   );
 })([]);

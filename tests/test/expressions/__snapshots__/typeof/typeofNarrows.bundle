@@ -1,7 +1,10 @@
 (($d) => {
-  const f1 = () => {
-    const measure = (v) => (typeof v === "string" ? v.length : v * 2);
-    return [measure("abc"), measure(4)];
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      const measure = (v) => (typeof v === "string" ? v.length : v * 2);
+      return [measure("abc"), measure(4)];
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

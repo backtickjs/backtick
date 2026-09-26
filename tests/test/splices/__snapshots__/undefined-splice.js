@@ -24,6 +24,8 @@ describe("a spliced undefined", () => {
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAWmC,QAAA,IAAQ"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       ),
@@ -47,6 +49,8 @@ describe("a spliced undefined", () => {
         {
           code: "export default ($0) => $0();",
           map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAgBsC,QAAA,IAAK"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -71,6 +75,8 @@ describe("a spliced undefined", () => {
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAuBuC,QAAA,IAAK"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       ),

@@ -1,23 +1,20 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const count = $0()(0);
-    const Badge = (0, eval)($1());
-    return jsx("div", {
-      children: [
-        () =>
-          jsx(Badge, {
-            count: () => count.get(),
-          }),
-        jsx("button", {
-          onclick: fixed(() => count.set(count.get() + 1)),
-          children: "more",
-        }),
-      ],
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const count = $0()(0);
+      const Badge = eval($1());
+      return (
+        <div>
+          <Badge count={count.get()} />
+          <button onclick={() => count.set(count.get() + 1)}>more</button>
+        </div>
+      );
+    };
+    return $entry;
+  })();
   return f1(
     () => state,
     () =>
-      '($d => {\n  const f1 = () => props => jsx("b", {\n    children: () => "count " + props.count\n  });\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => (props) => \u003cb>{"count " + props.count}\u003c/b>;\nreturn $entry;\n})();\n  return f1();\n})([])',
   );
 })([]);

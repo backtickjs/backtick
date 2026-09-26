@@ -185,6 +185,12 @@ export function arrow(
   };
 }
 
+// Code written elsewhere — a script's entry, compiled when the host was — as a
+// node `printBundle` writes as it is.
+export function raw(code: string): ES.Expression {
+  return { type: "Raw", code } as unknown as ES.Expression;
+}
+
 export function thunk(body: ES.Expression): ES.ArrowFunctionExpression {
   return arrow([], body);
 }

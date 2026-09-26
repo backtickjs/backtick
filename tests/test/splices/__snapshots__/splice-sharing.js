@@ -28,6 +28,8 @@ function add(lhs, rhs) {
     {
       code: "export default ($0, $1) => $0() + $1();",
       map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAKY,YAAA,IAAI,GAAG,IAAI"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -56,6 +58,8 @@ it("spliceSharing", async (t) => {
                 {
                   code: "export default () => 1;",
                   map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAakB,MAAA,CAAC"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
               cs.create(
@@ -72,6 +76,8 @@ it("spliceSharing", async (t) => {
                 {
                   code: "export default () => 2;",
                   map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAayB,MAAA,CAAC"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
             ),
@@ -94,6 +100,8 @@ it("spliceSharing", async (t) => {
                 {
                   code: "export default () => 3;",
                   map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAckB,MAAA,CAAC"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
               cs.create(
@@ -110,6 +118,8 @@ it("spliceSharing", async (t) => {
                 {
                   code: "export default () => 4;",
                   map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAcyB,MAAA,CAAC"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
             ),
@@ -180,6 +190,8 @@ it("spliceSharing", async (t) => {
       {
         code: "export default ($0, $1) => ({\n    x: $0(),\n    y: $1(),\n});",
         map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAYO,YAAA,CAAC;IACF,CAAC,EAAE,IAAC;IACJ,CAAC,EAAE,IAAC;CACL,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

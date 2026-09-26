@@ -247,6 +247,8 @@ it("forPerTurnBinding", async (t) => {
       {
         code: "export default () => {\n    let last = () => 0;\n    for (let i = 0; i < 3; i = i + 1) {\n        last = () => i;\n    }\n    return last();\n};",
         map: '{"version":3,"file":"for-per-turn-binding.test.jsx","sourceRoot":"","sources":["for-per-turn-binding.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,IAAI,GAAiB,GAAG,EAAE,CAAC,CAAC,CAAC;IACjC,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,IAAI,GAAG,GAAG,EAAE,CAAC,CAAC,CAAC;IACjB,CAAC;IACD,OAAO,IAAI,EAAE,CAAC;AAChB,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

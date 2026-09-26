@@ -24,6 +24,8 @@ it("hashKeyData", async (t) => {
       {
         code: "export default ($0) => () => $0();",
         map: '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["hash-key-data.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

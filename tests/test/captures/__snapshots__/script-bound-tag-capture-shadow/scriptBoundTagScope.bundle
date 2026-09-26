@@ -1,37 +1,26 @@
 (($d) => {
-  const f1 = ($0) => {
-    const twice = (Card) =>
-      jsx("div", {
-        children: [
-          () =>
-            jsx(Card, {
-              n: 1,
-            }),
-          () =>
-            jsx(Card, {
-              n: 2,
-            }),
-        ],
-      });
-    return jsx("section", {
-      children: [
-        () =>
-          jsx($0(), {
-            title: "host",
-          }),
-        () =>
-          twice((props) =>
-            jsx("i", {
-              children: () => "row " + props.n,
-            }),
-          ),
-      ],
-    });
-  };
-  return f1(
-    () => ($0) =>
-      jsx("h2", {
-        children: () => $0.title,
-      }),
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const twice = (Card) => (
+        <div>
+          <Card n={1} />
+          <Card n={2} />
+        </div>
+      );
+      return (
+        <section>
+          <$0 title="host" />
+          {twice((props) => (
+            <i>{"row " + props.n}</i>
+          ))}
+        </section>
+      );
+    };
+    return $entry;
+  })();
+  return f1(($0) =>
+    jsx("h2", {
+      children: () => $0.title,
+    }),
   );
 })([]);

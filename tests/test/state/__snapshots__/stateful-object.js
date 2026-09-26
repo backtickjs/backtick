@@ -301,6 +301,8 @@ const counter = cs.create(
   {
     code: "export default ($0) => (initial) => {\n    const count = $0()(initial);\n    return {\n        get: () => count.get(),\n        add: (n) => {\n            count.set(count.get() + n);\n        },\n    };\n};",
     map: '{"version":3,"file":"stateful-object.test.jsx","sourceRoot":"","sources":["stateful-object.test.tsx"],"names":[],"mappings":"eAQmB,QAAA,CAAC,OAAe,EAAE,EAAE;IACrC,MAAM,KAAK,GAAG,IAAM,CAAC,OAAO,CAAC,CAAC;IAC9B,OAAO;QACL,GAAG,EAAE,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,EAAE;QACtB,GAAG,EAAE,CAAC,CAAS,EAAE,EAAE;YACjB,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;QAC7B,CAAC;KACF,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("statefulObject", async (t) => {
@@ -571,6 +573,8 @@ it("statefulObject", async (t) => {
       {
         code: "export default ($0) => {\n    const c = $0()(10);\n    return (<button onclick={() => {\n            c.add(5);\n        }}>\n          {c.get()}\n        </button>);\n};",
         map: '{"version":3,"file":"stateful-object.test.jsx","sourceRoot":"","sources":["stateful-object.test.tsx"],"names":[],"mappings":"eAsBO;IACD,MAAM,CAAC,GAAG,IAAQ,CAAC,EAAE,CAAC,CAAC;IACvB,OAAO,CACL,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;QACX,CAAC,CAAC,CAEF;UAAA,CAAC,CAAC,CAAC,GAAG,EAAE,CACV;QAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

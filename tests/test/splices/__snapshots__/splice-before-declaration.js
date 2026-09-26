@@ -176,6 +176,8 @@ function sandwich(fragment) {
     {
       code: "export default ($0) => {\n    const before = 1;\n    const spliced = $0();\n    const after = 2;\n    return before + spliced + after;\n};",
       map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,IAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -204,6 +206,8 @@ it("spliceBeforeDeclaration", async (t) => {
                 {
                   code: "export default () => 10;",
                   map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2BqB,MAAA,EAAE"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
             ),
@@ -226,6 +230,8 @@ it("spliceBeforeDeclaration", async (t) => {
                 {
                   code: "export default () => 20;",
                   map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2B2C,MAAA,EAAE"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
             ),
@@ -257,6 +263,8 @@ it("spliceBeforeDeclaration", async (t) => {
       {
         code: "export default ($0, $1) => $0() + $1();",
         map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2BO,YAAA,IAAC,GAAqB,IAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

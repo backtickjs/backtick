@@ -1,9 +1,13 @@
 (($d) => {
-  const f1 = () => {
-    return jsx("span", {
-      children: () =>
-        String.fromCharCode(72, 105) + String.fromCharCode(55357, 56832),
-    });
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      return (
+        <span>
+          {String.fromCharCode(72, 105) + String.fromCharCode(0xd83d, 0xde00)}
+        </span>
+      );
+    };
+    return $entry;
+  })();
   return jsx(() => f1(), {});
 })([]);

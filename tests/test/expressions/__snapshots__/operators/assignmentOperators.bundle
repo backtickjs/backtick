@@ -1,20 +1,23 @@
 (($d) => {
-  const f1 = () => {
-    let n = 3;
-    n **= 2;
-    n <<= 1;
-    n >>= 2;
-    n >>>= 1;
-    n &= 7;
-    n |= 8;
-    n ^= 1;
-    let a = null;
-    a ??= 4;
-    let b = false;
-    b ||= true;
-    let c = true;
-    c &&= false;
-    return [n, a, b, c];
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      let n = 3;
+      n **= 2;
+      n <<= 1;
+      n >>= 2;
+      n >>>= 1;
+      n &= 7;
+      n |= 8;
+      n ^= 1;
+      let a = null;
+      a ??= 4;
+      let b = false;
+      b ||= true;
+      let c = true;
+      c &&= false;
+      return [n, a, b, c];
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

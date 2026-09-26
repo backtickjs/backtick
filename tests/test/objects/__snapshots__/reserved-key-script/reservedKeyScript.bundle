@@ -1,6 +1,7 @@
 (($d) => {
-  const f1 = () => ({
-    "#": "value",
-  });
+  const f1 = (() => {
+    const $entry = () => ({ "#": "value" });
+    return $entry;
+  })();
   return f1();
 })([]);

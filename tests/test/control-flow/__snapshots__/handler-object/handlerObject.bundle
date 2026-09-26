@@ -1,17 +1,26 @@
 (($d) => {
-  const f1 = ($0) => {
-    const handlers = {
-      tap: $0(),
-      hold: $0(),
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const handlers = {
+        tap: $0(),
+        hold: $0(),
+      };
+      return handlers;
     };
-    return handlers;
-  };
-  const f2 = ($0) => (id) => {
-    $0();
-  };
-  const f3 = () => {
-    let n = 0;
-    n = 1;
-  };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => (id) => {
+      $0();
+    };
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = () => {
+      let n = 0;
+      n = 1;
+    };
+    return $entry;
+  })();
   return f1(() => f2(f3));
 })([]);

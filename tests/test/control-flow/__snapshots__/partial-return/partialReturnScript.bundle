@@ -1,9 +1,12 @@
 (($d) => {
-  const f1 = () => {
-    let n = 1;
-    if (n === 2) {
-      return "some";
-    }
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      let n = 1;
+      if (n === 2) {
+        return "some";
+      }
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

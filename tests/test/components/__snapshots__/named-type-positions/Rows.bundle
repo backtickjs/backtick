@@ -1,42 +1,29 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const rows = $0()([]);
-    const add = (row) => {
-      rows.set([row]);
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const rows = $0()([]);
+      const add = (row) => {
+        rows.set([row]);
+      };
+      const label = (row) => {
+        return row.label;
+      };
+      return (
+        <div>
+          <span onclick={() => add({ id: 1, label: "one" })}>add</span>
+          <div>
+            <$1 each={rows.get()}>{(row) => <span>{label(row)}</span>}</$1>
+          </div>
+        </div>
+      );
     };
-    const label = (row) => {
-      return row.label;
-    };
-    return jsx("div", {
-      children: [
-        jsx("span", {
-          onclick: fixed(() =>
-            add({
-              id: 1,
-              label: "one",
-            }),
-          ),
-          children: "add",
-        }),
-        jsx("div", {
-          children: () =>
-            jsx($1(), {
-              each: () => rows.get(),
-              children: fixed((row) =>
-                jsx("span", {
-                  children: () => label(row),
-                }),
-              ),
-            }),
-        }),
-      ],
-    });
-  };
+    return $entry;
+  })();
   return jsx(
     () =>
       f1(
         () => state,
-        () => ($0) =>
+        ($0) =>
           jsx("for", {
             each: () => $0.each,
             children: () => $0.children,

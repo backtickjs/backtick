@@ -1,34 +1,37 @@
 (($d) => {
-  const f1 = ($0, $1, $2) =>
-    jsx("div", {
-      children: [
-        () =>
-          jsx($2(), {
-            title: "host",
-          }),
-        () => $0(),
-        () => $1(),
-      ],
-    });
-  const f2 = ($0, $1) => {
-    const Card = (props) =>
-      jsx("i", {
-        children: () => $0() + props.n,
-      });
-    return jsx("p", {
-      children: () => $1(Card),
-    });
-  };
-  const f3 = () => "a";
-  const f4 = ($0) =>
-    jsx($0, {
-      n: 1,
-    });
-  const f5 = () => "b";
+  const f1 = (() => {
+    const $entry = ($0, $1, $2) => (
+      <div>
+        <$2 title="host" />
+        {$0()}
+        {$1()}
+      </div>
+    );
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0, $1) => {
+      const Card = (props) => <i>{$0() + props.n}</i>;
+      return <p>{$1(Card)}</p>;
+    };
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = () => "a";
+    return $entry;
+  })();
+  const f4 = (() => {
+    const $entry = ($0) => <$0 n={1} />;
+    return $entry;
+  })();
+  const f5 = (() => {
+    const $entry = () => "b";
+    return $entry;
+  })();
   return f1(
     () => f2(f3, f4),
     () => f2(f5, f4),
-    () => ($0) =>
+    ($0) =>
       jsx("h2", {
         children: () => $0.title,
       }),

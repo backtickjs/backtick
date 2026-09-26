@@ -42,6 +42,8 @@ it("awaitInSplice", async (t) => {
       {
         code: 'export default ($0) => $0() + "!";',
         map: '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["await-in-splice.test.tsx"],"names":[],"mappings":"eAY4C,QAAA,IAAC,GAA0B,GAAG"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

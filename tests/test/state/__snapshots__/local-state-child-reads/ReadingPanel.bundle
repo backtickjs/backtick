@@ -1,33 +1,35 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const selected = $0()(0);
-    return jsx("div", {
-      children: [
-        jsx("span", {
-          onclick: fixed(() => selected.set(1)),
-          children: "select",
-        }),
-        () =>
-          jsx($1(), {
-            id: 0,
-            selected: () => selected,
-          }),
-        () =>
-          jsx($1(), {
-            id: 1,
-            selected: () => selected,
-          }),
-      ],
-    });
-  };
-  const f2 = ($0, $1) => "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";
-  const f3 = ($0, $1) => "row " + $0() + " of " + $1().get();
-  const f4 = ($0, $1, $2) => ($0().get() === $1() ? $2() : null);
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const selected = $0()(0);
+      return (
+        <div>
+          <span onclick={() => selected.set(1)}>select</span>
+          <$1 id={0} selected={selected} />
+          <$1 id={1} selected={selected} />
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0, $1) =>
+      "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0, $1) => "row " + $0() + " of " + $1().get();
+    return $entry;
+  })();
+  const f4 = (() => {
+    const $entry = ($0, $1, $2) => ($0().get() === $1() ? $2() : null);
+    return $entry;
+  })();
   return jsx(
     () =>
       f1(
         () => state,
-        () => ($0) =>
+        ($0) =>
           jsx("div", {
             children: [
               jsx("span", {

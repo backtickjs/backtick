@@ -17,6 +17,7 @@ export {
   type ClientScript,
   isClientScript,
   type Metadata,
+  type ModuleImport,
   type Param,
   type ScriptModule,
 } from "./ClientScript.js";

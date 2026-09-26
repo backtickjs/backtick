@@ -1,13 +1,19 @@
 (($d) => {
-  const f1 = ($0) => $0()("x");
-  const f2 = () => (name) => [
-    jsx("span", {
-      children: "a sentence across lines",
-    }),
-    jsx("span", {
-      children: [() => name, " ", () => name],
-    }),
-  ];
+  const f1 = (() => {
+    const $entry = ($0) => $0()("x");
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = () => (name) => (
+      <>
+        <span>a sentence across lines</span>
+        <span>
+          {name} {name}
+        </span>
+      </>
+    );
+    return $entry;
+  })();
   return jsx("div", {
     children: () => f1(f2),
   });

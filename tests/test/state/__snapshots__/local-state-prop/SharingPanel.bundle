@@ -1,28 +1,31 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const size = $0()(16);
-    return jsx("div", {
-      children: [
-        () =>
-          jsx($1(), {
-            size: () => size,
-          }),
-        () =>
-          jsx($1(), {
-            size: () => size,
-          }),
-      ],
-    });
-  };
-  const f2 = ($0) => "font-size: " + $0().get() + "px";
-  const f3 = ($0) => () => {
-    $0().set($0().get() + 1);
-  };
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const size = $0()(16);
+      return (
+        <div>
+          <$1 size={size} />
+          <$1 size={size} />
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => "font-size: " + $0().get() + "px";
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0) => () => {
+      $0().set($0().get() + 1);
+    };
+    return $entry;
+  })();
   return jsx(
     () =>
       f1(
         () => state,
-        () => ($0) =>
+        ($0) =>
           jsx("span", {
             style: () => f2(() => $0.size),
             onclick: () => f3(() => $0.size),

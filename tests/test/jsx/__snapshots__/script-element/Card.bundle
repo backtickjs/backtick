@@ -1,33 +1,25 @@
 (($d) => {
-  const f1 = ($0) => {
-    const label = $0()("hi");
-    const row = (size) => {
-      const css = "font-size: " + size + "px";
-      const press = () => label.set("held");
-      return jsx("div", {
-        style: () => css,
-        children: [
-          jsx("span", {
-            style: () => css,
-            onclick: fixed(() => label.set("pressed")),
-            children: () => label.get(),
-          }),
-          jsx("span", {
-            style: "font-size: 8px",
-            children: "fixed",
-          }),
-          jsx("span", {
-            style: () => css,
-            onclick: () => press,
-            children: "held",
-          }),
-        ],
-      });
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const label = $0()("hi");
+      const row = (size) => {
+        const css = "font-size: " + size + "px";
+        const press = () => label.set("held");
+        return (
+          <div style={css}>
+            <span style={css} onclick={() => label.set("pressed")}>
+              {label.get()}
+            </span>
+            <span style="font-size: 8px">fixed</span>
+            <span style={css} onclick={press}>
+              held
+            </span>
+          </div>
+        );
+      };
+      return <div style="padding: 0">{row(12)}</div>;
     };
-    return jsx("div", {
-      style: "padding: 0",
-      children: () => row(12),
-    });
-  };
+    return $entry;
+  })();
   return jsx(() => f1(() => state), {});
 })([]);

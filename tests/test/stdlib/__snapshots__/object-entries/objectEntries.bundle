@@ -1,13 +1,13 @@
 (($d) => {
-  const f1 = () => {
-    const held = {
-      n: 1,
-      q: "ada",
+  const f1 = (() => {
+    const $entry = () => {
+      const held = { n: 1, q: "ada" };
+      const written = Object.fromEntries(
+        Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]),
+      );
+      return written.n + " " + written.q;
     };
-    const written = Object.fromEntries(
-      Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]),
-    );
-    return written.n + " " + written.q;
-  };
+    return $entry;
+  })();
   return f1();
 })([]);

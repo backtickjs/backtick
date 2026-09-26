@@ -1,8 +1,11 @@
 (($d) => {
-  const f1 = () => {
-    let n = 0;
-    const last = (n++, n + 10);
-    return [n, last];
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      let n = 0;
+      const last = (n++, n + 10);
+      return [n, last];
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

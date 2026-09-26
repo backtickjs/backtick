@@ -1,46 +1,25 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const xs = $0()([10]);
-    const shown = $0()(false);
-    return jsx("div", {
-      children: [
-        jsx("svg", {
-          viewBox: "0 0 30 10",
-          children: [
-            () =>
-              jsx($1(), {
-                each: () => xs.get(),
-                children: fixed((x) =>
-                  jsx("title", {
-                    children: () => "dot " + x,
-                  }),
-                ),
-              }),
-            () =>
-              shown.get()
-                ? jsx("title", {
-                    children: "shown",
-                  })
-                : null,
-          ],
-        }),
-        jsx("title", {
-          children: "after",
-        }),
-        jsx("button", {
-          onclick: fixed(() => xs.set([10, 20])),
-          children: "add",
-        }),
-        jsx("button", {
-          onclick: fixed(() => shown.set(true)),
-          children: "show",
-        }),
-      ],
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const xs = $0()([10]);
+      const shown = $0()(false);
+      return (
+        <div>
+          <svg viewBox="0 0 30 10">
+            <$1 each={xs.get()}>{(x) => <title>{"dot " + x}</title>}</$1>
+            {shown.get() ? <title>{"shown"}</title> : null}
+          </svg>
+          <title>{"after"}</title>
+          <button onclick={() => xs.set([10, 20])}>add</button>
+          <button onclick={() => shown.set(true)}>show</button>
+        </div>
+      );
+    };
+    return $entry;
+  })();
   return f1(
     () => state,
-    () => ($0) =>
+    ($0) =>
       jsx("for", {
         each: () => $0.each,
         children: () => $0.children,

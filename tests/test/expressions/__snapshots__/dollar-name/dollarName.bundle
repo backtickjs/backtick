@@ -1,9 +1,18 @@
 (($d) => {
-  const f1 = ($0) => {
-    const foo$ = 1;
-    return $0(foo$);
-  };
-  const f2 = ($0) => $0() + 2;
-  const f3 = ($0) => $0;
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const foo$ = 1;
+      return $0(foo$);
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => $0() + 2;
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0) => $0;
+    return $entry;
+  })();
   return f1((foo$) => f2(() => f3(foo$)));
 })([]);

@@ -1,15 +1,25 @@
 (($d) => {
-  const f1 = () => "font-size: 16px";
-  const f2 = ($0) => () => {
-    const row = $0()("one");
-    row.label.set(row.label.get() + " !!!");
-  };
-  const f3 = ($0) => (label) => {
-    return {
-      label: $0()(label),
+  const f1 = (() => {
+    const $entry = () => "font-size: 16px";
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => () => {
+      const row = $0()("one");
+      row.label.set(row.label.get() + " !!!");
     };
-  };
-  const f4 = ($0) => $0()("one").label.get();
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0) => (label) => {
+      return { label: $0()(label) };
+    };
+    return $entry;
+  })();
+  const f4 = (() => {
+    const $entry = ($0) => $0()("one").label.get();
+    return $entry;
+  })();
   return jsx("span", {
     style: () => f1(),
     onclick: () => f2(() => f3(() => state)),

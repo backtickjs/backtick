@@ -70,6 +70,8 @@ const make = (f) =>
     {
       code: "export default ($0) => {\n    return $0()(1).get();\n};",
       map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAMK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC;AACrB,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 const wrapped = cs.create(
@@ -128,6 +130,8 @@ const wrapped = cs.create(
   {
     code: "export default ($0) => (n) => $0()(n + 10);",
     map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAUmB,QAAA,CAAC,CAAS,EAAE,EAAE,CAAC,IAAM,CAAC,CAAC,GAAG,EAAE,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("builtinHoleSharing", async (t) => {
@@ -182,6 +186,8 @@ it("builtinHoleSharing", async (t) => {
       {
         code: "export default ($0, $1) => {\n    return $0() + $1();\n};",
         map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAgBO;IACD,OAAO,IAAC,GAAgB,IAAC,CAAgB;AAC3C,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

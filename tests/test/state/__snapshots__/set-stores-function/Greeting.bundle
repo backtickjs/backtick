@@ -1,10 +1,14 @@
 (($d) => {
-  const f1 = ($0) => {
-    const greet = $0()((name) => "hi " + name);
-    return jsx("span", {
-      onclick: fixed(() => greet.set((name) => "bye " + name)),
-      children: () => greet.get()("ada"),
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const greet = $0()((name) => "hi " + name);
+      return (
+        <span onclick={() => greet.set((name) => "bye " + name)}>
+          {greet.get()("ada")}
+        </span>
+      );
+    };
+    return $entry;
+  })();
   return jsx(() => f1(() => state), {});
 })([]);

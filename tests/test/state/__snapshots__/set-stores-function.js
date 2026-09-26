@@ -343,6 +343,8 @@ async function Greeting() {
     {
       code: 'export default ($0) => {\n    const greet = $0()((name) => "hi " + name);\n    return (<span onclick={() => greet.set((name) => "bye " + name)}>\n        {greet.get()("ada")}\n      </span>);\n};',
       map: '{"version":3,"file":"set-stores-function.test.jsx","sourceRoot":"","sources":["set-stores-function.test.tsx"],"names":[],"mappings":"eAUY;IACR,MAAM,KAAK,GAAG,IAAM,CAA2B,CAAC,IAAI,EAAE,EAAE,CAAC,KAAK,GAAG,IAAI,CAAC,CAAC;IACvE,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,MAAM,GAAG,IAAI,CAAC,CAAC,CACtD;QAAA,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CACrB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

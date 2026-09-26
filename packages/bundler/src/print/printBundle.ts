@@ -1,5 +1,5 @@
 import type { Bundle, ClientUnknown } from "@backtickjs/platform-sdk";
-import { generate } from "astring";
+import { GENERATOR, generate } from "astring";
 import type * as ES from "estree";
 import type { BundleTree } from "../bundle/buildBundle.js";
 import { arrow, call, identifier, member, stringLiteral } from "../estree.js";
@@ -99,5 +99,13 @@ export function printBundle<T extends ClientUnknown>(
     }),
     [carried],
   );
-  return generate(program) as Bundle<T>;
+  return generate(program, {
+    generator: {
+      ...GENERATOR,
+      // A script's entry, written as it was compiled (see `raw`).
+      Raw(node: unknown, state: { write(code: string): void }) {
+        state.write((node as { code: string }).code);
+      },
+    } as typeof GENERATOR,
+  }) as Bundle<T>;
 }

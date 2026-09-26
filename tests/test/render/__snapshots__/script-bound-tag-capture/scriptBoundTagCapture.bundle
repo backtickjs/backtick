@@ -1,48 +1,45 @@
 (($d) => {
-  const f1 = ($0, $1, $2, $3, $4) => {
-    const count = $0()(0);
-    const Badge = (props) =>
-      jsx("b", {
-        children: () => "n " + props.n,
-      });
-    return jsx("div", {
-      children: [
-        () => $1(count, Badge),
-        () => $2(count, Badge),
-        () => $3(count, Badge),
-        () => $4(count, Badge),
-        jsx("button", {
-          onclick: fixed(() => count.set(count.get() + 1)),
-          children: "more",
-        }),
-      ],
-    });
-  };
-  const f2 = ($0, $1) =>
-    jsx($0, {
-      n: () => $1.get(),
-    });
-  const f3 = ($0, $1, $2) => {
-    const skipped = 10;
-    return $0($1, $2);
-  };
-  const f4 = ($0, $1) =>
-    jsx($0, {
-      n: () => $1.get() + 100,
-    });
-  const f5 = ($0, $1) =>
-    jsx($0, {
-      n: () => $1.get() + 1000,
-    });
-  const f6 = ($0, $1, $2) =>
-    jsx($0($1, $2), {
-      each: [1, 2],
-      children: fixed((m) =>
-        jsx($1, {
-          n: () => m * $2.get(),
-        }),
-      ),
-    });
+  const f1 = (() => {
+    const $entry = ($0, $1, $2, $3, $4) => {
+      const count = $0()(0);
+      const Badge = (props) => <b>{"n " + props.n}</b>;
+      return (
+        <div>
+          {$1(count, Badge)}
+          {$2(count, Badge)}
+          {$3(count, Badge)}
+          {$4(count, Badge)}
+          <button onclick={() => count.set(count.get() + 1)}>more</button>
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0, $1) => <$0 n={$1.get()} />;
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0, $1, $2) => {
+      const skipped = 10;
+      return $0($1, $2);
+    };
+    return $entry;
+  })();
+  const f4 = (() => {
+    const $entry = ($0, $1) => <$0 n={$1.get() + 100} />;
+    return $entry;
+  })();
+  const f5 = (() => {
+    const $entry = ($0, $1) => <$0 n={$1.get() + 1000} />;
+    return $entry;
+  })();
+  const f6 = (() => {
+    const $entry = ($0, $1, $2) => (
+      <$0 each={[1, 2]}>{(m) => <$1 n={m * $2.get()} />}</$0>
+    );
+    return $entry;
+  })();
   return f1(
     () => state,
     (count, Badge) => f2(Badge, count),
@@ -53,7 +50,7 @@
       }),
     (count, Badge) =>
       f6(
-        (Badge, count) => ($0) =>
+        ($0) =>
           jsx("for", {
             each: () => $0.each,
             children: () => $0.children,

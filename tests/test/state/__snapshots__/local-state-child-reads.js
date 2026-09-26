@@ -134,6 +134,8 @@ const ReadingRow = async ({ id, selected }) =>
           {
             code: 'export default ($0, $1) => "font-size: " + ($0().get() === $1() ? 20 : 16) + "px";',
             map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA0BgB,YAAA,aAAa,GAAG,CAAC,IAAS,CAAC,GAAG,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         children: cs.create(
@@ -229,6 +231,8 @@ const ReadingRow = async ({ id, selected }) =>
           {
             code: 'export default ($0, $1) => "row " + $0() + " of " + $1().get();',
             map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA4BU,YAAA,MAAM,GAAG,IAAG,GAAG,MAAM,GAAG,IAAS,CAAC,GAAG,EAAE"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       }),
@@ -321,6 +325,8 @@ const ReadingRow = async ({ id, selected }) =>
         {
           code: "export default ($0, $1, $2) => $0().get() === $1() ? $2() : null;",
           map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA8BQ,gBAAA,IAAS,CAAC,GAAG,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,IAAC,CAAwB,CAAC,CAAC,IAAI"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     ],
@@ -780,6 +786,8 @@ async function ReadingPanel() {
     {
       code: "export default ($0, $1) => {\n    const selected = $0()(0);\n    return (<div>\n        <span onclick={() => selected.set(1)}>select</span>\n        <$1 id={0} selected={selected}/>\n        <$1 id={1} selected={selected}/>\n      </div>);\n};",
       map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eAmCY;IACR,MAAM,QAAQ,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CAClD;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

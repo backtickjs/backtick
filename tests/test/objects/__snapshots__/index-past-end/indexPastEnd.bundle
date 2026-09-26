@@ -1,7 +1,10 @@
 (($d) => {
-  const f1 = () => {
-    const names = ["zero", "one"];
-    return names[9];
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      const names = ["zero", "one"];
+      return names[9];
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

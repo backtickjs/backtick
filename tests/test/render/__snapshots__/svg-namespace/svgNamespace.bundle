@@ -1,59 +1,35 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const Dot = (props) =>
-      jsx("circle", {
-        cx: () => props.x,
-        cy: "5",
-        r: "2",
-        children: jsx("title", {
-          children: () => "dot " + props.x,
-        }),
-      });
-    return jsx("div", {
-      children: [
-        jsx("a", {
-          href: "/shapes",
-          children: "shapes",
-        }),
-        jsx("svg", {
-          viewBox: "0 0 30 10",
-          width: "120",
-          children: [
-            () => jsx($0(), {}),
-            () =>
-              jsx($1(), {
-                each: [10, 20],
-                children: fixed((x) =>
-                  jsx(Dot, {
-                    x: () => x,
-                  }),
-                ),
-              }),
-            jsx("foreignObject", {
-              x: "0",
-              y: "0",
-              width: "10",
-              height: "10",
-              children: jsx("p", {
-                children: "html again",
-              }),
-            }),
-          ],
-        }),
-      ],
-    });
-  };
-  const f2 = () =>
-    jsx("circle", {
-      cx: "5",
-      cy: "5",
-      r: "4",
-      fill: "none",
-      stroke: "currentColor",
-    });
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const Dot = (props) => (
+        <circle cx={props.x} cy="5" r="2">
+          <title>{"dot " + props.x}</title>
+        </circle>
+      );
+      return (
+        <div>
+          <a href="/shapes">{"shapes"}</a>
+          <svg viewBox="0 0 30 10" width="120">
+            <$0 />
+            <$1 each={[10, 20]}>{(x) => <Dot x={x} />}</$1>
+            <foreignObject x="0" y="0" width="10" height="10">
+              <p>{"html again"}</p>
+            </foreignObject>
+          </svg>
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = () => (
+      <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor" />
+    );
+    return $entry;
+  })();
   return f1(
-    () => () => f2(),
-    () => ($0) =>
+    () => f2(),
+    ($0) =>
       jsx("for", {
         each: () => $0.each,
         children: () => $0.children,

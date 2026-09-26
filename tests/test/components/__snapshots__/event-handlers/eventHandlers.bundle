@@ -1,26 +1,27 @@
 (($d) => {
-  const f1 = ($0) => {
-    const said = $0()("");
-    return jsx("form", {
-      onsubmit: fixed((event) => {
-        event.preventDefault();
-        said.set(event.type + " " + event.cancelable);
-      }),
-      children: [
-        jsx("textarea", {
-          oninput: fixed((event) => said.set(event.currentTarget.value)),
-        }),
-        jsx("input", {
-          oninput: fixed((event) => said.set(event.currentTarget.value)),
-        }),
-        jsx("button", {
-          onclick: fixed((event) =>
-            said.set(event.clientX + " " + event.currentTarget.tagName),
-          ),
-          children: () => said.get(),
-        }),
-      ],
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const said = $0()("");
+      return (
+        <form
+          onsubmit={(event) => {
+            event.preventDefault();
+            said.set(event.type + " " + event.cancelable);
+          }}
+        >
+          <textarea oninput={(event) => said.set(event.currentTarget.value)} />
+          <input oninput={(event) => said.set(event.currentTarget.value)} />
+          <button
+            onclick={(event) =>
+              said.set(event.clientX + " " + event.currentTarget.tagName)
+            }
+          >
+            {said.get()}
+          </button>
+        </form>
+      );
+    };
+    return $entry;
+  })();
   return f1(() => state);
 })([]);

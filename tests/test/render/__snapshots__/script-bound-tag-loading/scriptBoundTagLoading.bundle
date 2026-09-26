@@ -1,35 +1,29 @@
 (($d) => {
-  const f1 = ($0, $1) => {
-    const count = $0()(0);
-    const drawn = $0()(null);
-    const Badge = (props) => {
-      const held = drawn.get();
-      return held === null ? null : (0, eval)(held)(props);
+  const f1 = (() => {
+    const $entry = ($0, $1) => {
+      const count = $0()(0);
+      const drawn = $0()(null);
+      const Badge = (props) => {
+        const held = drawn.get();
+        return held === null ? null : eval(held)(props);
+      };
+      return (
+        <div>
+          {drawn.get() === null ? (
+            <i>loading</i>
+          ) : (
+            <Badge count={count.get()} />
+          )}
+          <button onclick={() => drawn.set($1())}>load</button>
+          <button onclick={() => count.set(count.get() + 1)}>more</button>
+        </div>
+      );
     };
-    return jsx("div", {
-      children: [
-        () =>
-          drawn.get() === null
-            ? jsx("i", {
-                children: "loading",
-              })
-            : jsx(Badge, {
-                count: () => count.get(),
-              }),
-        jsx("button", {
-          onclick: fixed(() => drawn.set($1())),
-          children: "load",
-        }),
-        jsx("button", {
-          onclick: fixed(() => count.set(count.get() + 1)),
-          children: "more",
-        }),
-      ],
-    });
-  };
+    return $entry;
+  })();
   return f1(
     () => state,
     () =>
-      '($d => {\n  const f1 = () => props => jsx("b", {\n    children: () => "count " + props.count\n  });\n  return f1();\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = () => (props) => \u003cb>{"count " + props.count}\u003c/b>;\nreturn $entry;\n})();\n  return f1();\n})([])',
   );
 })([]);

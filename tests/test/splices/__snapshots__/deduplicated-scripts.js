@@ -14,6 +14,8 @@ const leaf = cs.create(
   {
     code: "export default () => 7;",
     map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("deduplicatedScripts", async (t) => {
@@ -86,6 +88,8 @@ it("deduplicatedScripts", async (t) => {
       {
         code: "export default ($0) => ({ a: $0(), b: $0() });",
         map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

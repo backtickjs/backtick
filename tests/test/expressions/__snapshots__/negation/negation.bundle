@@ -1,8 +1,11 @@
 (($d) => {
-  const f1 = () => (count) => {
-    const floor = -1;
-    const step = -count;
-    return floor + step + -2;
-  };
+  const f1 = (() => {
+    const $entry = () => (count) => {
+      const floor = -1;
+      const step = -count;
+      return floor + step + -2;
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

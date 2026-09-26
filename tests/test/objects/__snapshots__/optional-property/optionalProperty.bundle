@@ -1,21 +1,17 @@
 (($d) => {
-  const f1 = ($0) => ({
-    present: $0()({
-      label: "a",
-      inner: {
-        z: 3,
-      },
-    }),
-    partial: $0()({
-      label: "b",
-      inner: {},
-    }),
-    omitted: $0()({
-      label: "c",
-    }),
-  });
-  const f2 = () => (o) => {
-    return [o.label, o.inner?.z ?? 0];
-  };
+  const f1 = (() => {
+    const $entry = ($0) => ({
+      present: $0()({ label: "a", inner: { z: 3 } }),
+      partial: $0()({ label: "b", inner: {} }),
+      omitted: $0()({ label: "c" }),
+    });
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = () => (o) => {
+      return [o.label, o.inner?.z ?? 0];
+    };
+    return $entry;
+  })();
   return f1(f2);
 })([]);

@@ -1,11 +1,14 @@
 (($d) => {
-  const f1 = () => {
-    const pick = (b) => {
-      if (b) {
-        return "taken";
-      }
+  const f1 = (() => {
+    const $entry = () => {
+      const pick = (b) => {
+        if (b) {
+          return "taken";
+        }
+      };
+      return [pick(true), pick(false)];
     };
-    return [pick(true), pick(false)];
-  };
+    return $entry;
+  })();
   return f1();
 })([]);

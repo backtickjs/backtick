@@ -97,6 +97,8 @@ async function ScriptRows() {
     {
       code: "export default ($0) => (label) => {\n    return { label: $0()(label) };\n};",
       map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eASmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAM,CAAC,KAAK,CAAC,EAAE,CAAC;AAClC,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
   return _jsx("span", {
@@ -111,6 +113,8 @@ async function ScriptRows() {
       {
         code: 'export default () => "font-size: 16px";',
         map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAegB,MAAA,iBAAiB"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
     onclick: cs.create(
@@ -314,6 +318,8 @@ async function ScriptRows() {
       {
         code: 'export default ($0) => () => {\n    const row = $0()("one");\n    row.label.set(row.label.get() + " !!!");\n};',
         map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAgBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,MAAM,CAAC,CAAC;AAC1C,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
     children: cs.create(
@@ -388,6 +394,8 @@ async function ScriptRows() {
       {
         code: 'export default ($0) => $0()("one").label.get();',
         map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAqBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   });

@@ -1,10 +1,13 @@
 (($d) => {
-  const f1 = () => {
-    const count = 1;
-    if (count === 1) {
-      return "one";
-    }
-    return "many";
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      const count = 1;
+      if (count === 1) {
+        return "one";
+      }
+      return "many";
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

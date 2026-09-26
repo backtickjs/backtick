@@ -1,14 +1,20 @@
 (($d) => {
-  const f1 = ($0) => {
-    const size = $0()(16);
-    return jsx("span", {
-      style: () => "font-size: " + size.get() + "px",
-      onclick: fixed(() => {
-        size.set(size.get() + 1);
-      }),
-      children: "press",
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const size = $0()(16);
+      return (
+        <span
+          style={"font-size: " + size.get() + "px"}
+          onclick={() => {
+            size.set(size.get() + 1);
+          }}
+        >
+          press
+        </span>
+      );
+    };
+    return $entry;
+  })();
   return jsx("div", {
     children: [
       () => jsx(() => f1(() => state), {}),

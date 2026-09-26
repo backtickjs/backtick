@@ -27,6 +27,8 @@ function add(lhs) {
     {
       code: "export default ($0) => $0() + 2;",
       map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eASY,QAAA,IAAI,GAAG,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -56,6 +58,8 @@ it("dollarName", async (t) => {
                 {
                   code: "export default ($0) => $0;",
                   map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAkBsB,QAAA,EAAI"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
             ),
@@ -121,6 +125,8 @@ it("dollarName", async (t) => {
       {
         code: "export default ($0) => {\n    const foo$ = 1;\n    return $0(foo$);\n};",
         map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

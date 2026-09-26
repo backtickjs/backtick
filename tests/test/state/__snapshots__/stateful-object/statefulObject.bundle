@@ -1,21 +1,30 @@
 (($d) => {
-  const f1 = ($0) => {
-    const c = $0()(10);
-    return jsx("button", {
-      onclick: fixed(() => {
-        c.add(5);
-      }),
-      children: () => c.get(),
-    });
-  };
-  const f2 = ($0) => (initial) => {
-    const count = $0()(initial);
-    return {
-      get: () => count.get(),
-      add: (n) => {
-        count.set(count.get() + n);
-      },
+  const f1 = (() => {
+    const $entry = ($0) => {
+      const c = $0()(10);
+      return (
+        <button
+          onclick={() => {
+            c.add(5);
+          }}
+        >
+          {c.get()}
+        </button>
+      );
     };
-  };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => (initial) => {
+      const count = $0()(initial);
+      return {
+        get: () => count.get(),
+        add: (n) => {
+          count.set(count.get() + n);
+        },
+      };
+    };
+    return $entry;
+  })();
   return f1(() => f2(() => state));
 })([]);

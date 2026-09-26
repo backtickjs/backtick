@@ -1,19 +1,28 @@
 (($d) => {
-  const f1 = ($0, $1) => (b) => {
-    let n = 0;
-    $0();
-    if (b) {
-      $1()();
+  const f1 = (() => {
+    const $entry = ($0, $1) => (b) => {
+      let n = 0;
+      $0();
+      if (b) {
+        $1()();
+        n = 1;
+      }
+      return n;
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = () => {
+      const x = 1;
+    };
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = () => () => {
+      let n = 0;
       n = 1;
-    }
-    return n;
-  };
-  const f2 = () => {
-    const x = 1;
-  };
-  const f3 = () => () => {
-    let n = 0;
-    n = 1;
-  };
+    };
+    return $entry;
+  })();
   return f1(f2, f3);
 })([]);

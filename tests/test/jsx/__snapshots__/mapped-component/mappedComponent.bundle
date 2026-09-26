@@ -1,7 +1,16 @@
 (($d) => {
-  const f1 = ($0) => $0();
-  const f2 = ($0) => (row) => $0(row);
-  const f3 = ($0) => "row " + $0;
+  const f1 = (() => {
+    const $entry = ($0) => $0();
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => (row) => $0(row);
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0) => "row " + $0;
+    return $entry;
+  })();
   return jsx("div", {
     children: jsx("for", {
       each: () => f1(() => [1, 2, 3]),

@@ -1,4 +1,7 @@
 (($d) => {
-  const f1 = () => 1;
+  const f1 = (() => {
+    const $entry = () => 1;
+    return $entry;
+  })();
   return f1();
 })([]);

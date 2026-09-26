@@ -45,6 +45,8 @@ const valueScriptEffects = cs.create(
   {
     code: "export default () => {\n    const x = 1;\n};",
     map: '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"eAM4C;IAC1C,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 const ping = cs.create(
@@ -128,6 +130,8 @@ const ping = cs.create(
   {
     code: "export default () => () => {\n    let n = 0;\n    n = 1;\n};",
     map: '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"eAUoC,MAAA,GAAG,EAAE;IACvC,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("actionInValueScript", async (t) => {
@@ -317,6 +321,8 @@ it("actionInValueScript", async (t) => {
       {
         code: "export default ($0, $1) => (b) => {\n    let n = 0;\n    $0();\n    if (b) {\n        $1()();\n        n = 1;\n    }\n    return n;\n};",
         map: '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["action-in-value-script.test.tsx"],"names":[],"mappings":"eAmBO,YAAA,CAAC,CAAU,EAAE,EAAE;IAChB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAmB,CAAC;IACpB,IAAI,CAAC,EAAE,CAAC;QACN,IAAK,EAAE,CAAC;QACR,CAAC,GAAG,CAAC,CAAC;IACR,CAAC;IACD,OAAO,CAAC,CAAC;AACX,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

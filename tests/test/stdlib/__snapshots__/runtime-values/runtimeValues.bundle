@@ -1,8 +1,11 @@
 (($d) => {
-  const f1 = ($0, $1) => ({
-    list: $0(),
-    obj: $1(),
-  });
+  const f1 = (() => {
+    const $entry = ($0, $1) => ({
+      list: $0(),
+      obj: $1(),
+    });
+    return $entry;
+  })();
   return f1(
     () => [1, "two", true, null],
     () => ({

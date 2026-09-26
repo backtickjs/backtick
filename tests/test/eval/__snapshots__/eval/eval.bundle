@@ -1,16 +1,16 @@
 (($d) => {
-  const f1 = ($0, $1) =>
-    jsx("div", {
-      children: [
-        () => (0, eval)($0()),
-        jsx("b", {
-          children: () => (0, eval)($1()) + 1,
-        }),
-      ],
-    });
+  const f1 = (() => {
+    const $entry = ($0, $1) => (
+      <div>
+        {eval($0())}
+        <b>{eval($1()) + 1}</b>
+      </div>
+    );
+    return $entry;
+  })();
   return f1(
     () =>
-      '($d => {\n  const f1 = $0 => jsx($0(), {\n    each: [1, 2, 3],\n    children: fixed(n => jsx("span", {\n      children: () => "item " + n\n    }))\n  });\n  return jsx(() => f1(() => $0 => jsx("for", {\n    each: () => $0.each,\n    children: () => $0.children\n  })), {});\n})([])',
+      '($d => {\n  const f1 = (() => {\nconst $entry = ($0) => \u003c$0 each={[1, 2, 3]}>\n    {(n) => \u003cspan>{"item " + n}\u003c/span>}\n  \u003c/$0>;\nreturn $entry;\n})();\n  return jsx(() => f1($0 => jsx("for", {\n    each: () => $0.each,\n    children: () => $0.children\n  })), {});\n})([])',
     () => "($d => {\n  return 41;\n})([])",
   );
 })([]);

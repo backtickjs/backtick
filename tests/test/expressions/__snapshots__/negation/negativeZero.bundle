@@ -1,6 +1,9 @@
 (($d) => {
-  const f1 = () => {
-    return 1 / -0;
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      return 1 / -0;
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

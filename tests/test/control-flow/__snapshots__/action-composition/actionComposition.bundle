@@ -1,12 +1,21 @@
 (($d) => {
-  const f1 = ($0) => {
-    $0();
-  };
-  const f2 = ($0) => {
-    $0();
-  };
-  const f3 = () => {
-    const x = 1;
-  };
+  const f1 = (() => {
+    const $entry = ($0) => {
+      $0();
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => {
+      $0();
+    };
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = () => {
+      const x = 1;
+    };
+    return $entry;
+  })();
   return f1(() => f2(f3));
 })([]);

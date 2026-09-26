@@ -1,48 +1,45 @@
 (($d) => {
-  const f1 = ($0, $1, $2) => {
-    const count = $0()(0);
-    const Badge = (p) =>
-      jsx("b", {
-        children: [() => "outer " + p.n, () => p.children],
-      });
-    return jsx("div", {
-      children: [
-        () =>
-          jsx($2(), {
-            body: () => $1(count, Badge),
-          }),
-        jsx("button", {
-          onclick: fixed(() => count.set(count.get() + 1)),
-          children: "more",
-        }),
-      ],
-    });
-  };
-  const f2 = ($0, $1) =>
-    jsx($0, {
-      n: () => $1.get(),
-      children: jsx("u", {
-        children: () => "kid " + $1.get(),
-      }),
-    });
-  const f3 = ($0) => {
-    const Badge = (p) =>
-      jsx("i", {
-        children: () => "panel " + p.n,
-      });
-    return jsx("section", {
-      children: [
-        () =>
-          jsx(Badge, {
-            n: 0,
-          }),
-        () => $0().body,
-      ],
-    });
-  };
+  const f1 = (() => {
+    const $entry = ($0, $1, $2) => {
+      const count = $0()(0);
+      const Badge = (p) => (
+        <b>
+          {"outer " + p.n}
+          {p.children}
+        </b>
+      );
+      return (
+        <div>
+          <$2 body={$1(count, Badge)} />
+          <button onclick={() => count.set(count.get() + 1)}>more</button>
+        </div>
+      );
+    };
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0, $1) => (
+      <$0 n={$1.get()}>
+        <u>{"kid " + $1.get()}</u>
+      </$0>
+    );
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0) => {
+      const Badge = (p) => <i>{"panel " + p.n}</i>;
+      return (
+        <section>
+          <Badge n={0} />
+          {$0().body}
+        </section>
+      );
+    };
+    return $entry;
+  })();
   return f1(
     () => state,
     (count, Badge) => f2(Badge, count),
-    () => ($0) => f3(() => $0),
+    ($0) => f3(() => $0),
   );
 })([]);

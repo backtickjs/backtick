@@ -1,17 +1,15 @@
 (($d) => {
-  const f1 = () => {
-    const base = {
-      a: 1,
-      b: 2,
+  const f1 = (() => {
+    const $entry = () => {
+      const base = { a: 1, b: 2 };
+      const over = { b: 9 };
+      return {
+        ...base,
+        ...over,
+        c: 3,
+      };
     };
-    const over = {
-      b: 9,
-    };
-    return {
-      ...base,
-      ...over,
-      c: 3,
-    };
-  };
+    return $entry;
+  })();
   return f1();
 })([]);

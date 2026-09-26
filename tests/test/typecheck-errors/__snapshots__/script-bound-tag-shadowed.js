@@ -79,6 +79,8 @@ export default cs.create(
                   {
                     code: "export default ($0) => <$0 n={1}/>;",
                     map: '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"eASgB,QAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+                    imports: [],
+                    exportAt: 0,
                   },
                 ),
                 bindings: ["Badge$83k1lytjebk3$2"],
@@ -146,6 +148,8 @@ export default cs.create(
           {
             code: "export default ($0) => {\n    const Badge = 5;\n    return $0(Badge);\n};",
             map: '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"eAMc;IACV,MAAM,KAAK,GAAG,CAAC,CAAC;IAEhB,OAAO,SAAC,CAAsB;AAChC,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         bindings: [],
@@ -302,5 +306,7 @@ export default cs.create(
   {
     code: 'export default ($0) => {\n    const Badge = (p) => <b>{"n " + p.n}</b>;\n    return $0();\n};',
     map: '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"eAIkB;IAChB,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,OAAO,IAAC,CAIJ;AACN,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );

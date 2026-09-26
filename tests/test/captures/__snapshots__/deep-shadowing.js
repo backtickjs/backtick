@@ -74,6 +74,8 @@ function outerBase(inner) {
     {
       code: "export default ($0) => {\n    const base = 1;\n    return base + $0();\n};",
       map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAC,CAAoB;AACrC,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -156,6 +158,8 @@ function middleBase(inner) {
     {
       code: "export default ($0) => {\n    const base = 2;\n    return base * $0();\n};",
       map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAM,CAAC;AACvB,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -189,6 +193,8 @@ it("deepShadowing", async (t) => {
                 {
                   code: "export default ($0) => $0;",
                   map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
+                  imports: [],
+                  exportAt: 0,
                 },
               ),
             ),
@@ -254,6 +260,8 @@ it("deepShadowing", async (t) => {
       {
         code: "export default ($0) => {\n    const base = 10;\n    return $0(base);\n};",
         map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

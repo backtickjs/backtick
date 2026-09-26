@@ -57,7 +57,11 @@ describe("typecheck the .tsx tests", () => {
     // and the indented lines of its message chain.
     const reported = backtickTsc(join(testsRoot, "tsconfig.json"))
       .split(/\n(?=\S)/)
-      .filter((report) => report.trim() !== "" && isPorted(report))
+      .filter(
+        (report) =>
+          report.trim() !== "" &&
+          isPorted(report.slice(0, report.indexOf("("))),
+      )
       .join("\n");
     assert.equal(reported, "");
   });

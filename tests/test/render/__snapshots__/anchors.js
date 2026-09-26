@@ -547,6 +547,8 @@ async function Rows() {
     {
       code: 'export default ($0, $1) => {\n    const ids = $0()([1, 2, 3]);\n    const clear = () => {\n        ids.set([]);\n    };\n    return (<>\n        <span onclick={clear}>clear</span>\n        <$1 each={ids.get()}>{(id) => <span>{"row " + id}</span>}</$1>\n      </>);\n};',
       map: '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["anchors.test.tsx"],"names":[],"mappings":"eA8BY;IACR,MAAM,GAAG,GAAG,IAAM,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACxC,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC;IACd,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,EAAG,CACzE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

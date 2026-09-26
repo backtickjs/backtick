@@ -1,14 +1,26 @@
 (($d) => {
-  const f1 = ($0) => $0()();
-  const f2 = ($0) => () => {
-    const tree = $0();
-    return tree;
-  };
-  const f3 = ($0) => $0()();
-  const f4 = ($0) => () => {
-    const tree = $0();
-    return tree;
-  };
+  const f1 = (() => {
+    const $entry = ($0) => $0()();
+    return $entry;
+  })();
+  const f2 = (() => {
+    const $entry = ($0) => () => {
+      const tree = $0();
+      return tree;
+    };
+    return $entry;
+  })();
+  const f3 = (() => {
+    const $entry = ($0) => $0()();
+    return $entry;
+  })();
+  const f4 = (() => {
+    const $entry = ($0) => () => {
+      const tree = $0();
+      return tree;
+    };
+    return $entry;
+  })();
   return jsx("div", {
     children: [
       () => f1(() => f2(() => jsx("div", {}))),

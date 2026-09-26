@@ -1,5 +1,8 @@
 (($d) => {
-  const f1 = () => () => {};
+  const f1 = (() => {
+    const $entry = () => () => {};
+    return $entry;
+  })();
   return jsx("div", {
     style: "padding: 8px",
     children: [

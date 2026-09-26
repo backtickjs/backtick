@@ -46,6 +46,8 @@ const effects = cs.create(
   {
     code: "export default () => {\n    const x = 1;\n};",
     map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 const composed = cs.create(
@@ -72,6 +74,8 @@ const composed = cs.create(
   {
     code: "export default ($0) => {\n    $0();\n};",
     map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAWkC;IAChC,IAAQ,CAAC;AACX,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("actionComposition", async (t) => {
@@ -105,6 +109,8 @@ it("actionComposition", async (t) => {
       {
         code: "export default ($0) => {\n    $0();\n};",
         map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAmBO;IACD,IAAS,CAAC;AACZ,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

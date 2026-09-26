@@ -1,10 +1,13 @@
 (($d) => {
-  const f1 = () => {
-    try {
-      throw "boom";
-    } catch {
-      return "caught";
-    }
-  };
+  const f1 = (() => {
+    const $entry = () => {
+      try {
+        throw "boom";
+      } catch {
+        return "caught";
+      }
+    };
+    return $entry;
+  })();
   return f1();
 })([]);

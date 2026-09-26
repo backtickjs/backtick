@@ -19,7 +19,6 @@ import {
   builtin,
   call,
   createNames,
-  identifier,
   jsxComponent,
   jsxElement,
   label,
@@ -28,11 +27,12 @@ import {
   nullLiteral,
   objectKey,
   property,
+  raw,
   thunk,
   undefinedValue,
 } from "../estree.js";
 import type { Names } from "../estree.js";
-import { lowerScriptBody } from "./lowerScriptBody.js";
+import { entryOf } from "./entryOf.js";
 
 /**
  * A bundle as it is built, before it is printed: each `functions` entry under
@@ -40,18 +40,10 @@ import { lowerScriptBody } from "./lowerScriptBody.js";
  * name is registered in `names` and settled when the bundle is printed.
  */
 export interface BundleTree {
-  readonly functions: readonly (readonly [
-    string,
-    ES.ArrowFunctionExpression,
-  ])[];
+  readonly functions: readonly (readonly [string, ES.Expression])[];
   readonly root: ES.Expression;
   readonly names: Names;
 }
-
-// The parsed body for each script id. Two scripts with one id — a script inside
-// a host function, instantiated with different splices at different call sites
-// — share one parse.
-const parsedById = new Map<string, ES.Expression | ES.BlockStatement>();
 
 // Builds the bundle `{ functions, root }` as ESTree, and documents how it is
 // derived.
@@ -100,14 +92,6 @@ export async function buildBundle<T extends ClientUnknown>(
     entryById.set(script.id, script);
     scripts.set(script, scripts.size);
     return script;
-  };
-  const bodyOf = (script: ClientScript): ES.Expression | ES.BlockStatement => {
-    let body = parsedById.get(script.id);
-    if (body === undefined) {
-      body = script.body();
-      parsedById.set(script.id, body);
-    }
-    return body;
   };
   // A binding key printed under its source name, with a numeric suffix when two
   // distinct bindings would otherwise print the same.
@@ -169,7 +153,7 @@ export async function buildBundle<T extends ClientUnknown>(
   const passKeys = (target: ClientScript, hole: number): readonly string[] =>
     bindingsOf(target.metadata.params[hole]);
 
-  const bodies = new Map<ClientScript, ES.ArrowFunctionExpression>();
+  const bodies = new Map<ClientScript, ES.Expression>();
 
   // A script entry's label, either of the two things that name one (see
   // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
@@ -186,18 +170,9 @@ export async function buildBundle<T extends ClientUnknown>(
   // calls `$i()` — ahead of its environment. Nothing from a call site is
   // inlined, so the body is a function of the script's source alone.
   const materialize = (script: ClientScript): void => {
-    if (bodies.has(script)) {
-      return;
+    if (!bodies.has(script)) {
+      bodies.set(script, raw(entryOf(script.module)));
     }
-    // One numbered sequence: a thunk per splice hole, then a value per capture.
-    const params = script.metadata.params.map((_, index) => `$${index}`);
-    bodies.set(
-      script,
-      arrow(
-        params.map((param) => identifier(param)),
-        lowerScriptBody(script, bodyOf(script)),
-      ),
-    );
   };
 
   // A fragment that is one entry whose parameters are exactly what this hole
@@ -348,9 +323,14 @@ export async function buildBundle<T extends ClientUnknown>(
     const target = entryFor(ref);
     const parts: ES.Expression[] = [];
     const splices = ref.metadata.params.flatMap((param) =>
-      param.kind === "capture" ? [] : [param.value],
+      param.kind === "capture" ? [] : [param],
     );
-    for (const [index, arg] of splices.entries()) {
+    for (const [index, { kind, value: arg }] of splices.entries()) {
+      // A tag is handed over as the value it names, as its entry reads it.
+      if (kind === "tag") {
+        parts.push(await render(arg, params));
+        continue;
+      }
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.
@@ -433,7 +413,7 @@ export async function buildBundle<T extends ClientUnknown>(
   // Nothing encloses the root, so nothing it holds can capture.
   const root = await render(value as Spliceable);
   // In table order, which is the order rendering first reached each script.
-  const functions: (readonly [string, ES.ArrowFunctionExpression])[] = [];
+  const functions: (readonly [string, ES.Expression])[] = [];
   for (const script of scripts.keys()) {
     const body = bodies.get(script);
     if (body !== undefined) {
