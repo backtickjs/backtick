@@ -49,19 +49,4 @@ const $cs0 = ($tag0, $tag1) => {
   })();
 };
 const $cs1 = () => _tmpl$3();
-export default () =>
-  $cs0(
-    () => $cs1(),
-    ($arg0) =>
-      _$createComponent($i0, {
-        get each() {
-          return $arg0.each;
-        },
-        get fallback() {
-          return $arg0.fallback;
-        },
-        get children() {
-          return $arg0.children;
-        },
-      }),
-  );
+export default () => $cs0(() => $cs1(), $i0);

@@ -46,18 +46,7 @@ export default () =>
       $cs0(
         () => $i0,
         () => $i1,
-        ($arg0) =>
-          _$createComponent($i2, {
-            get each() {
-              return $arg0.each;
-            },
-            get fallback() {
-              return $arg0.fallback;
-            },
-            get children() {
-              return $arg0.children;
-            },
-          }),
+        $i2,
       ),
   });
 _$delegateEvents(["click"]);

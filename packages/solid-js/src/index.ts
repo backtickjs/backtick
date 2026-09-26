@@ -1,8 +1,4 @@
-import {
-  createImport,
-  createJsxElement,
-  type JsxElementType,
-} from "@backtickjs/core";
+import { type ClientImport, createImport } from "@backtickjs/core";
 import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";
@@ -68,157 +64,83 @@ export const unwrap = store("unwrap");
 // The DOM
 export const Dynamic = web("Dynamic");
 
-// Control flow, as server components: a host function the host or a script
-// writes as a tag, whose drawing is Solid's own component, called on the
-// client with the props it was handed. So each works in host JSX — around the
-// scripts a page draws — as well as inside a script.
-
-// A host element whose type is one of Solid's components. Props are named, not
-// spread: while bundling, a component's props stand for what only the client
-// has, and are reached by name.
-function solidElement(
-  name:
-    | "For"
-    | "Index"
-    | "Show"
-    | "Switch"
-    | "Match"
-    | "ErrorBoundary"
-    | "Suspense"
-    | "SuspenseList",
-  props: { [key: string]: unknown },
-): Promise<JSX.Element> {
-  return Promise.resolve(
-    createJsxElement(
-      solid(name) as unknown as JsxElementType,
-      props,
-    ) as unknown as JSX.Element,
-  );
-}
-
-// A host element whose type is one of Solid's DOM components, as
-// `solidElement` for Solid's own.
-function webElement(
-  name: "Portal",
-  props: { [key: string]: unknown },
-): Promise<JSX.Element> {
-  return Promise.resolve(
-    createJsxElement(
-      web(name) as unknown as JsxElementType,
-      props,
-    ) as unknown as JSX.Element,
-  );
-}
+// Control flow, typed as components so a tag may name one in host JSX as well
+// as inside a script. None is callable on the host: JSX hands the import to the
+// bundler, which writes it as the tag.
 
 /** Solid's `For`: `children` drawn once per member of `each`, keyed by it. */
-export function For<T>(props: {
-  each: Prop<readonly T[] | undefined | null | false>;
-  fallback?: Prop<JSX.Element>;
-  children: Prop<(item: T, index: () => number) => JSX.Element>;
-}): Promise<JSX.Element> {
-  return solidElement("For", {
-    each: props.each,
-    fallback: props.fallback,
-    children: props.children,
-  });
-}
+export const For = solid("For") as ClientImport<typeof Solid.For> &
+  (<T>(props: {
+    each: Prop<readonly T[] | undefined | null | false>;
+    fallback?: Prop<JSX.Element>;
+    children: Prop<(item: T, index: () => number) => JSX.Element>;
+  }) => JSX.Element);
 
 /** Solid's `Index`: `children` drawn once per position of `each`. */
-export function Index<T>(props: {
-  each: Prop<readonly T[] | undefined | null | false>;
-  fallback?: Prop<JSX.Element>;
-  children: Prop<(item: () => T, index: number) => JSX.Element>;
-}): Promise<JSX.Element> {
-  return solidElement("Index", {
-    each: props.each,
-    fallback: props.fallback,
-    children: props.children,
-  });
-}
+export const Index = solid("Index") as ClientImport<typeof Solid.Index> &
+  (<T>(props: {
+    each: Prop<readonly T[] | undefined | null | false>;
+    fallback?: Prop<JSX.Element>;
+    children: Prop<(item: () => T, index: number) => JSX.Element>;
+  }) => JSX.Element);
 
 /** Solid's `Show`: `children` while `when` holds, `fallback` otherwise. */
-export function Show<T>(props: {
-  when: Prop<T | undefined | null | false>;
-  fallback?: Prop<JSX.Element>;
-  children: Prop<JSX.Element | ((item: () => T) => JSX.Element)>;
-}): Promise<JSX.Element> {
-  return solidElement("Show", {
-    when: props.when,
-    fallback: props.fallback,
-    children: props.children,
-  });
-}
+export const Show = solid("Show") as ClientImport<typeof Solid.Show> &
+  (<T>(props: {
+    when: Prop<T | undefined | null | false>;
+    fallback?: Prop<JSX.Element>;
+    children: Prop<JSX.Element | ((item: () => T) => JSX.Element)>;
+  }) => JSX.Element);
 
 /** Solid's `Switch`: its first `Match` whose `when` holds, or `fallback`. */
-export function Switch(props: {
-  fallback?: Prop<JSX.Element>;
-  children: Prop<JSX.Element>;
-}): Promise<JSX.Element> {
-  return solidElement("Switch", {
-    fallback: props.fallback,
-    children: props.children,
-  });
-}
+export const Switch = solid("Switch") as ClientImport<typeof Solid.Switch> &
+  ((props: {
+    fallback?: Prop<JSX.Element>;
+    children: Prop<JSX.Element>;
+  }) => JSX.Element);
 
 /** Solid's `Match`: one case of a `Switch`. */
-export function Match<T>(props: {
-  when: Prop<T | undefined | null | false>;
-  children: Prop<JSX.Element | ((item: () => T) => JSX.Element)>;
-}): Promise<JSX.Element> {
-  return solidElement("Match", {
-    when: props.when,
-    children: props.children,
-  });
-}
+export const Match = solid("Match") as ClientImport<typeof Solid.Match> &
+  (<T>(props: {
+    when: Prop<T | undefined | null | false>;
+    children: Prop<JSX.Element | ((item: () => T) => JSX.Element)>;
+  }) => JSX.Element);
 
 /** Solid's `ErrorBoundary`: `fallback` in place of `children` that threw. */
-export function ErrorBoundary(props: {
-  fallback: Prop<
-    JSX.Element | ((error: unknown, reset: () => void) => JSX.Element)
-  >;
-  children: Prop<JSX.Element>;
-}): Promise<JSX.Element> {
-  return solidElement("ErrorBoundary", {
-    fallback: props.fallback,
-    children: props.children,
-  });
-}
+export const ErrorBoundary = solid("ErrorBoundary") as ClientImport<
+  typeof Solid.ErrorBoundary
+> &
+  ((props: {
+    fallback: Prop<
+      JSX.Element | ((error: unknown, reset: () => void) => JSX.Element)
+    >;
+    children: Prop<JSX.Element>;
+  }) => JSX.Element);
 
 /** Solid's `Suspense`: `fallback` until the resources `children` read load. */
-export function Suspense(props: {
-  fallback?: Prop<JSX.Element>;
-  children: Prop<JSX.Element>;
-}): Promise<JSX.Element> {
-  return solidElement("Suspense", {
-    fallback: props.fallback,
-    children: props.children,
-  });
-}
+export const Suspense = solid("Suspense") as ClientImport<
+  typeof Solid.Suspense
+> &
+  ((props: {
+    fallback?: Prop<JSX.Element>;
+    children: Prop<JSX.Element>;
+  }) => JSX.Element);
 
 /** Solid's `SuspenseList`: the order its `Suspense` children reveal in. */
-export function SuspenseList(props: {
-  revealOrder: Prop<"forwards" | "backwards" | "together">;
-  tail?: Prop<"collapsed" | "hidden">;
-  children: Prop<JSX.Element>;
-}): Promise<JSX.Element> {
-  return solidElement("SuspenseList", {
-    revealOrder: props.revealOrder,
-    tail: props.tail,
-    children: props.children,
-  });
-}
+export const SuspenseList = solid("SuspenseList") as ClientImport<
+  typeof Solid.SuspenseList
+> &
+  ((props: {
+    revealOrder: Prop<"forwards" | "backwards" | "together">;
+    tail?: Prop<"collapsed" | "hidden">;
+    children: Prop<JSX.Element>;
+  }) => JSX.Element);
 
 /** Solid's `Portal`: `children` drawn into `mount`, the body where none is given. */
-export function Portal(props: {
-  mount?: Prop<Node>;
-  useShadow?: Prop<boolean>;
-  isSVG?: Prop<boolean>;
-  children: Prop<JSX.Element>;
-}): Promise<JSX.Element> {
-  return webElement("Portal", {
-    mount: props.mount,
-    useShadow: props.useShadow,
-    isSVG: props.isSVG,
-    children: props.children,
-  });
-}
+export const Portal = web("Portal") as ClientImport<typeof Web.Portal> &
+  ((props: {
+    mount?: Prop<Node>;
+    useShadow?: Prop<boolean>;
+    isSVG?: Prop<boolean>;
+    children: Prop<JSX.Element>;
+  }) => JSX.Element);

@@ -69,22 +69,6 @@ export default () =>
         _$insert(_el$4, () => $cs4(Badge, count));
         return _el$4;
       })(),
-    (count, Badge) =>
-      $cs5(
-        ($arg0) =>
-          _$createComponent($i1, {
-            get each() {
-              return $arg0.each;
-            },
-            get fallback() {
-              return $arg0.fallback;
-            },
-            get children() {
-              return $arg0.children;
-            },
-          }),
-        Badge,
-        count,
-      ),
+    (count, Badge) => $cs5($i1, Badge, count),
   );
 _$delegateEvents(["click"]);
