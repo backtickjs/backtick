@@ -2,7 +2,7 @@ import type { Spliceable } from "@backtickjs/core";
 import type { Queries, queries } from "@testing-library/dom";
 import {
   type BundleClient,
-  type Compile,
+  type Bundle,
   evaluateBundleWith,
   evaluateWith,
 } from "./evaluate.js";
@@ -26,13 +26,13 @@ export interface Testing<T = unknown> {
 }
 
 /**
- * `render` and `evaluate` bound to an adapter's client and compiler: what an
+ * `render` and `evaluate` bound to an adapter's client and `bundle`: what an
  * adapter's own testing entry exports, as `@testing-library/react` binds
  * `@testing-library/dom` to React.
  */
 export function createTesting<T = unknown>(
   client: BundleClient,
-  compile: Compile,
+  bundle: Bundle,
 ): Testing<T> {
   return {
     render: <
@@ -42,9 +42,9 @@ export function createTesting<T = unknown>(
     >(
       value: Spliceable<T>,
       options?: RenderOptions<Q, Container, BaseElement>,
-    ) => renderWith(client, compile, value, options),
+    ) => renderWith(client, bundle, value, options),
     evaluate: <T>(value: Spliceable<T>) =>
-      evaluateWith(client, compile, value),
+      evaluateWith(client, bundle, value),
     evaluateBundle: <T>(code: string) =>
       evaluateBundleWith<T>(client, code),
   };

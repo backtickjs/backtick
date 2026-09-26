@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { compile } from "@backtickjs/solid-js/transform";
+import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@backtickjs/solid-js/testing";
@@ -11,8 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // A tag naming a function the script holds — here a bundle that takes props,
 // evaluated. It is called with its props read on access, the way a component's
 // are, so `count` follows the signal without the badge being drawn again.
-const badge = compile(
-  await bundler.run(
+const badge = (await bundle(
     cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
   ),
 ).code;

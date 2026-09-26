@@ -1,6 +1,5 @@
-import { bundler } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
-import { compile } from "./transform.js";
+import { bundle } from "./bundle.js";
 
 // Pages drawn with Solid: a container and the module script that draws a
 // bundle into it, and the import map that gives every bundle one Solid.
@@ -13,12 +12,15 @@ const SOLID = "https://cdn.jsdelivr.net/npm/solid-js@1.9.14";
  * once, in `<head>`, before any module script.
  */
 export function importMap(): string {
-  const imports = {
-    "solid-js": `${SOLID}/dist/solid.js`,
-    "solid-js/web": `${SOLID}/web/dist/web.js`,
-    "solid-js/store": `${SOLID}/store/dist/store.js`,
-  };
-  return `<script type="importmap">${literal({ imports })}</script>`;
+  return `<script type="importmap">
+  {
+    "imports": {
+      "solid-js": "${SOLID}/dist/solid.js",
+      "solid-js/web": "${SOLID}/web/dist/web.js",
+      "solid-js/store": "${SOLID}/store/dist/store.js"
+    }
+  }
+  </script>`;
 }
 
 /**
@@ -30,7 +32,7 @@ export function importMap(): string {
 export async function renderToString<T>(
   element: Spliceable<T>,
 ): Promise<string> {
-  const { code } = compile(await bundler.run(element as Spliceable));
+  const { code } = await bundle(element);
   const id = `backtick-${crypto.randomUUID()}`;
   const script = [
     `import { render } from "solid-js/web";`,

@@ -475,9 +475,6 @@ importers:
 
   packages/web-testing:
     dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core

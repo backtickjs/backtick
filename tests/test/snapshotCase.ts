@@ -1,8 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { compile } from "@backtickjs/solid-js/transform";
+import { bundle } from "@backtickjs/solid-js/bundle";
 import type { Spliceable } from "@backtickjs/core";
 import prettier from "prettier";
 import { evaluate, render } from "@backtickjs/solid-js/testing";
@@ -41,7 +40,7 @@ export async function snapshotCase(
 
   // Formatted, so a change to what is printed reads as the code it changed;
   // its map, against the code as it was printed.
-  const { code, map } = compile(await bundler.run(value));
+  const { code, map } = await bundle(value);
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   record(`${renderBundleMappings(code, map)}\n`, "bundle.sourcemap");
   const evaluated = await evaluate(value);

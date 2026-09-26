@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { compile } from "@backtickjs/solid-js/transform";
+import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { createRoot, type JSX as Solid } from "solid-js";
@@ -88,7 +87,7 @@ async function drawAt(
   parent: Element,
   selector: string,
 ): Promise<void> {
-  const { code } = compile(await bundler.run(value));
+  const { code } = (await bundle(value));
   const draw = (
     await import(`data:text/javascript,${encodeURIComponent(code)}`)
   ).default as () => Solid.Element;

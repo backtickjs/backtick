@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { compile } from "@backtickjs/solid-js/transform";
+import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
 import { render } from "@backtickjs/solid-js/testing";
@@ -15,8 +14,8 @@ async function Items() {
   </For>`;
 }
 
-const items = compile(await bundler.run(<Items />)).code;
-const total = compile(await bundler.run(41)).code;
+const items = (await bundle(<Items />)).code;
+const total = (await bundle(41)).code;
 
 const evaluated = cs`<div>
   {eval($items)}

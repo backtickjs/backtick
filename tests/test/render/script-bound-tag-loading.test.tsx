@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { compile } from "@backtickjs/solid-js/transform";
+import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import type { Bundle } from "@backtickjs/core";
@@ -15,8 +14,7 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // Read inside the drawing, so the condition follows the signal: when the bundle
 // arrives the child runs again and calls `Badge`, and `count` stays a prop the
 // badge reads on access rather than a value handed over once.
-const loadedBadge = compile(
-  await bundler.run(
+const loadedBadge = (await bundle(
     cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
   ),
 ).code;

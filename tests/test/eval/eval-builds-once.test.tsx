@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/bundler";
-import { compile } from "@backtickjs/solid-js/transform";
+import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import type { Bundle } from "@backtickjs/core";
@@ -44,7 +43,7 @@ async function Answer() {
   return cs`<em>{"answered"}</em>`;
 }
 
-const answer = compile(await bundler.run(<Answer />)).code;
+const answer = (await bundle(<Answer />)).code;
 
 async function Waiting({
   ask,

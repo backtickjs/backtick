@@ -6,7 +6,7 @@
  * A thin layer, as `@testing-library/dom` is: the document comes from the
  * test environment (jsdom through `global-jsdom`, Jest's or Vitest's `jsdom`
  * environment, or a browser), and what runs a bundle is an adapter's client.
- * An adapter binds `render` and `evaluate` to its client and compiler with
+ * An adapter binds `render` and `evaluate` to its client and `bundle` with
  * `createTesting` and re-exports the rest — `@backtickjs/solid-js/testing` —
  * so what a test exercises is what a page runs.
  *

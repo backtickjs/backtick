@@ -1,5 +1,4 @@
 import type { Spliceable } from "@backtickjs/core";
-import { bundler, type JsxModule } from "@backtickjs/bundler";
 import { importBundle } from "./client.js";
 
 /** What runs a bundle: an adapter's client (see `createTesting`). */
@@ -10,11 +9,11 @@ export interface BundleClient {
   render(run: () => unknown, container: Element): () => void;
 }
 
-/** What makes a bundle of what the bundler answered: an adapter's compiler. */
-export type Compile = (module: JsxModule) => { readonly code: string };
+/** What makes a bundle of a value: an adapter's `bundle`. */
+export type Bundle = (value: Spliceable) => Promise<{ readonly code: string }>;
 
 /**
- * Bundles a value, compiles it with `compile`, and evaluates the bundle's root
+ * Bundles a value with `bundle` and evaluates the bundle's root
  * with `client`.
  *
  * Nothing is mounted: a root is as often data as a drawing, and data has
@@ -23,10 +22,10 @@ export type Compile = (module: JsxModule) => { readonly code: string };
  */
 export async function evaluateWith<T>(
   client: BundleClient,
-  compile: Compile,
+  bundle: Bundle,
   value: Spliceable<T>,
 ): Promise<T> {
-  const { code } = compile(await bundler.run(value as Spliceable));
+  const { code } = await bundle(value as Spliceable);
   return client.evaluate(await importBundle<T>(code));
 }
 

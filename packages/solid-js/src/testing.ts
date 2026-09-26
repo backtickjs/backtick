@@ -2,7 +2,7 @@ import { createTesting, type Testing } from "@backtickjs/web-testing";
 import * as solid from "solid-js";
 import * as web from "solid-js/web";
 import type { JSX } from "./jsx-runtime.js";
-import { compile } from "./transform.js";
+import { bundle } from "./bundle.js";
 
 // Testing Library for a project drawn with Solid: everything
 // `@backtickjs/web-testing` offers, with `render` and `evaluate` compiling
@@ -20,7 +20,7 @@ const client = {
   },
 };
 
-const testing: Testing<JSX.Element> = createTesting(client, compile);
+const testing: Testing<JSX.Element> = createTesting(client, bundle);
 export const render: Testing<JSX.Element>["render"] = testing.render;
 export const evaluate: Testing["evaluate"] = testing.evaluate;
 export const evaluateBundle: Testing["evaluateBundle"] = testing.evaluateBundle;
