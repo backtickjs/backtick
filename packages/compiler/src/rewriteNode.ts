@@ -104,24 +104,6 @@ function bannedName(
   return true;
 }
 
-// `void` names no client value — an action answers with nothing, which is what
-// `Client<void>` says at the boundary rather than something a script may write.
-function bannedVoid(
-  ts: typeof import("typescript"),
-  state: RewriteState,
-  type: ts.Node,
-): boolean {
-  if (type.kind === ts.SyntaxKind.VoidKeyword) {
-    state.errors.set(type, "`void` isn't supported in a `cs` client script.");
-    return true;
-  }
-  let found = false;
-  ts.forEachChild(type, (child) => {
-    found = bannedVoid(ts, state, child) || found;
-  });
-  return found;
-}
-
 // The initializer's first reference to the binding it declares (e.g. a
 // method closing over the object that holds it) — rejected: checked value
 // positions would force resolving the binding mid-inference (TS7022), and
@@ -865,16 +847,10 @@ function rewriteNodeImpl(
       }
       if (ts.isIdentifier(param.name)) {
         bannedName(state, param.name, "parameter");
-        let type = param.type;
-        // Rewritten as `any` — the keyword error stands alone; the
-        // `ClientValue` boundary check would otherwise repeat it coarsely.
-        if (type && bannedVoid(ts, state, type)) {
-          type = ts.factory.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
-        }
         return {
           source: param,
           name: param.name,
-          type,
+          type: param.type,
           optional: param.questionToken != null,
         };
       }
