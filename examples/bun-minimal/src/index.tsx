@@ -1,24 +1,25 @@
-import type { BacktickElement } from "@backtickjs/core";
-import { renderToString } from "@backtickjs/web-page/server";
+import { fileURLToPath } from "node:url";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import {
+  importMap,
+  modules,
+  renderToString,
+} from "@backtickjs/solid-js/server";
 import { Counter } from "./Counter.js";
 
-// Bundle the client once at startup.
-const build = await Bun.build({
-  entrypoints: ["./src/client.ts"],
-  minify: true,
-});
-const [client] = build.outputs;
-const clientUrl = `/client-${client.hash}.js`;
+// Where the page finds each module a bundle and the client import.
+const urlOf = (specifier: string) => `/modules/${specifier}.js`;
 
-async function toHtml(element: BacktickElement): Promise<string> {
+async function toHtml(element: JSX.Element): Promise<string> {
   return `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    ${importMap(urlOf)}
   </head>
   <body>
-    ${await renderToString(element, clientUrl)}
+    ${await renderToString(element)}
   </body>
 </html>`;
 }
@@ -30,18 +31,25 @@ const server = Bun.serve({
       // An element saying what to draw. The component has not run yet.
       const counter = <Counter from={0} />;
 
-      // A document carrying what it drew, with the client that draws it.
+      // A document carrying what it drew, with the modules that draw it.
       const html = await toHtml(counter);
 
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });
     },
-
-    // The hash changes with the client, so the browser can keep this forever.
-    [clientUrl]: () =>
-      new Response(client, {
-        headers: { "cache-control": "public, max-age=31536000, immutable" },
-      }),
+  },
+  // Solid and the client, as the import map names them.
+  fetch(request) {
+    const { pathname } = new URL(request.url);
+    const specifier = Object.keys(modules).find(
+      (name) => urlOf(name) === pathname,
+    );
+    if (specifier === undefined) {
+      return new Response("Not found", { status: 404 });
+    }
+    return new Response(Bun.file(fileURLToPath(modules[specifier]!)), {
+      headers: { "content-type": "text/javascript" },
+    });
   },
 });
 

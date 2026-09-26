@@ -74,3 +74,5 @@ export function jsx(
 }
 
 export const jsxs = jsx;
+// What a development build of the JSX transform calls, as Bun does.
+export const jsxDEV = jsx;

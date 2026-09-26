@@ -1,4 +1,5 @@
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { Day } from "./Day.js";
 import { load, locationName } from "./forecast.js";
 
@@ -22,12 +23,12 @@ export async function WeatherCard() {
   const source = isLive ? "open-meteo.com" : "sample week (offline)";
 
   return cs`{
-    const unit = $state("C");
+    const unit = $createSignal("C");
 
     // Only Celsius crosses the wire. Fahrenheit is arithmetic on numbers the
     // client already holds, so the toggle costs no request.
     const show = (celsius: number) => {
-      return unit.get() === "F"
+      return unit[0]() === "F"
         ? Math.round((celsius * 9) / 5 + 32)
         : Math.round(celsius);
     };
@@ -43,13 +44,13 @@ export async function WeatherCard() {
             {(value: string) => (
               <button
                 id={"unit-" + value}
-                onclick={() => unit.set(value)}
+                onclick={() => unit[1](value)}
                 style={
                   "background: none; border: 0; padding: 0; cursor: pointer;" +
                   " font-size: 15px; font-weight: " +
-                  (unit.get() === value ? "700" : "400") +
+                  (unit[0]() === value ? "700" : "400") +
                   "; color: " +
-                  (unit.get() === value ? "#18181b" : "#71717a")
+                  (unit[0]() === value ? "#18181b" : "#71717a")
                 }
               >
                 {"°" + value}

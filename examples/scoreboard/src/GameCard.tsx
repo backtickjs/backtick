@@ -1,4 +1,5 @@
-import { cs, type Prop } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 import { TeamLine } from "./TeamLine.js";
 
 // Left open on purpose: the card's border colour is the one thing about it the

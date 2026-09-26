@@ -28,12 +28,15 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/solid-js':
+        specifier: ^0.1.0
+        version: link:../../packages/solid-js
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
-      '@backtickjs/web-page':
-        specifier: workspace:*
-        version: link:../../packages/web-page
+      solid-js:
+        specifier: 1.9.14
+        version: 1.9.14
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -41,9 +44,6 @@ importers:
       '@backtickjs/tsc':
         specifier: ^0.1.0
         version: link:../../packages/tsc
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
       ts-patch:
         specifier: ^4.0.1
         version: 4.0.1
@@ -93,9 +93,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-page':
+      '@backtickjs/solid-js':
         specifier: ^0.1.0
-        version: link:../../packages/web-page
+        version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -118,15 +118,12 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/solid-js':
+        specifier: ^0.1.0
+        version: link:../../packages/solid-js
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
-      '@backtickjs/web-page':
-        specifier: ^0.1.0
-        version: link:../../packages/web-page
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -152,9 +149,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-page':
+      '@backtickjs/solid-js':
         specifier: ^0.1.0
-        version: link:../../packages/web-page
+        version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -180,9 +177,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-page':
+      '@backtickjs/solid-js':
         specifier: ^0.1.0
-        version: link:../../packages/web-page
+        version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -208,9 +205,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
-      '@backtickjs/web-page':
+      '@backtickjs/solid-js':
         specifier: ^0.1.0
-        version: link:../../packages/web-page
+        version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -476,22 +473,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/web-page:
-    dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
-    devDependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/web-testing:
     dependencies:
       '@backtickjs/bundler':
@@ -531,9 +512,6 @@ importers:
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../packages/tsc
-      '@backtickjs/web-page':
-        specifier: workspace:*
-        version: link:../packages/web-page
       '@backtickjs/web-testing':
         specifier: workspace:*
         version: link:../packages/web-testing

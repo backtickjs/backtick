@@ -1,5 +1,5 @@
-import { cs, For, onCleanup, onMount, state } from "@backtickjs/core";
-import { window } from "@backtickjs/browser";
+import { cs } from "@backtickjs/core";
+import { createSignal, For, onCleanup, onMount } from "@backtickjs/solid-js";
 import { GameCard } from "./GameCard.js";
 import { load, POLL_MS, SLATE_PATH } from "./scores.js";
 import type { Game, Slate } from "./scores.js";
@@ -17,10 +17,10 @@ export async function Scoreboard() {
   const { games, asOf } = await load();
 
   return cs`{
-    const rows = $state($games);
-    const stamp = $state($asOf);
-    const trouble = $state("");
-    const timer = $state(0);
+    const rows = $createSignal($games);
+    const stamp = $createSignal($asOf);
+    const trouble = $createSignal("");
+    const timer = $createSignal(0);
 
     // The refresh asks this page's own host, which answers with the rows it
     // bundled above — so a score changes by replacing an array, and nothing
@@ -29,8 +29,8 @@ export async function Scoreboard() {
     // A status this cannot use is failed by throwing, which reaches the
     // \`catch\`.
     const refresh = () => {
-      $window
-        .fetch($SLATE_PATH, { signal: $window.AbortSignal.timeout(4000) })
+      window
+        .fetch($SLATE_PATH, { signal: window.AbortSignal.timeout(4000) })
         .then((response: Response) => {
           if (response.status !== 200) {
             throw "the host answered " + response.status;
@@ -38,33 +38,33 @@ export async function Scoreboard() {
           return response.json();
         })
         .then((slate: Slate) => {
-          rows.set(slate.games);
-          stamp.set(slate.asOf);
-          trouble.set("");
+          rows[1](slate.games);
+          stamp[1](slate.asOf);
+          trouble[1]("");
         })
         .catch((error: unknown) => {
           // The last good slate stays on screen. A board that empties itself
           // because one poll missed is worse than a board a minute behind.
-          trouble.set("not updating — " + String(error));
+          trouble[1]("not updating — " + String(error));
         });
     };
 
     // A script that draws cannot have effects, so the polling starts once this
     // drawing is in place, and stops when it is taken away.
-    $onMount(() => timer.set($window.setInterval(refresh, $POLL_MS)));
-    $onCleanup(() => $window.clearInterval(timer.get()));
+    $onMount(() => timer[1](window.setInterval(refresh, $POLL_MS)));
+    $onCleanup(() => window.clearInterval(timer[0]()));
 
     return (
       <div style={$page}>
         <div style={$head}>
           <h1 style="margin: 0; font-size: 24px">Top 25</h1>
           <span style="font-size: 13px; color: #71717a">
-            {rows.get().length + " games"}
+            {rows[0]().length + " games"}
           </span>
         </div>
 
         <ul style="display: grid; gap: 8px; margin: 0; padding: 0; list-style: none">
-          <For each={rows.get()}>
+          <For each={rows[0]()}>
             {(game: Game) => (
               <GameCard
                 awayRank={game.awayRank}
@@ -83,7 +83,7 @@ export async function Scoreboard() {
         </ul>
 
         <p style="margin: 0; font-size: 12px; color: #a1a1aa">
-          {trouble.get() === "" ? stamp.get() : trouble.get()}
+          {trouble[0]() === "" ? stamp[0]() : trouble[0]()}
         </p>
       </div>
     );

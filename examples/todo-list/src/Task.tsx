@@ -1,4 +1,5 @@
-import { cs, type Prop } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // One row of the list. Its props are `Prop<T>`, so each takes what the server
 // wrote or a script standing in for it — and what this draws is whichever

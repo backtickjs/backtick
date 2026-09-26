@@ -13,7 +13,7 @@
   "dependencies": {
     "@backtickjs/bun-plugin": "^0.1.0",
     "@backtickjs/core": "^0.1.0",
-    "@backtickjs/web-page": "^0.1.0"
+    "@backtickjs/solid-js": "^0.1.0"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",

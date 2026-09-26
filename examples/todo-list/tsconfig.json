@@ -9,7 +9,7 @@
       "bun"
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/web-sdk"
+    "jsxImportSource": "@backtickjs/solid-js"
   },
   "include": [
     "src"

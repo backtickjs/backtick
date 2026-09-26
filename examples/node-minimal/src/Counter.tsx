@@ -1,21 +1,22 @@
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 
 // A server component: this function runs once, on the server, while bundling.
 // Never again, and never on the client.
 export async function Counter({ from }: { from: number }) {
-  // `cs` does not run here. It is bundled as data for the client, which
-  // evaluates it — and re-evaluates what reads `count` every time it changes.
+  // `cs` does not run here. It is bundled for the client, which runs it as
+  // Solid code — and updates what reads `count` every time it changes.
   return cs`{
-    const count = $state($from);
+    const count = $createSignal($from);
 
     return (
       <div style="padding: 48px; font-family: system-ui">
-        <h1>{"Pressed " + count.get() + " times"}</h1>
+        <h1>{"Pressed " + count[0]() + " times"}</h1>
 
         <button
           id="press"
           style="font: inherit; padding: 8px 16px; cursor: pointer; border: 0; border-radius: 8px; background: black; color: white"
-          onclick={() => count.set(count.get() + 1)}
+          onclick={() => count[1](count[0]() + 1)}
         >
           Press me
         </button>

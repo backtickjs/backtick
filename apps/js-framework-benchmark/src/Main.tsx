@@ -1,9 +1,11 @@
-import { cs, For, state, type Client, type State } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/web-sdk";
+import { cs, type Client } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { Signal } from "solid-js";
 
 type Row = {
   readonly id: number;
-  readonly label: State<string>;
+  readonly label: Signal<string>;
 };
 
 const ADJECTIVES = [
@@ -66,21 +68,21 @@ const NOUNS = [
 
 export async function Main(): Promise<Client<JSX.Element>> {
   return cs`{
-    const data = $state<Row[]>([]);
-    const selected = $state(0);
-    const rowId = $state(1);
+    const data = $createSignal<Row[]>([]);
+    const selected = $createSignal(0);
+    const rowId = $createSignal(1);
 
     const word = (list: string[]) => {
       return list[Math.round(Math.random() * 1000) % list.length];
     };
 
     const buildData = (count: number) => {
-      const from = rowId.get();
-      rowId.set(from + count);
+      const from = rowId[0]();
+      rowId[1](from + count);
       return Array.from({ length: count }, (_, index) => {
         return {
           id: from + index,
-          label: $state(
+          label: $createSignal(
             word($ADJECTIVES) + " " + word($COLOURS) + " " + word($NOUNS),
           ),
         };
@@ -88,42 +90,42 @@ export async function Main(): Promise<Client<JSX.Element>> {
     };
 
     const run = () => {
-      data.set(buildData(1000));
+      data[1](buildData(1000));
     };
 
     const runLots = () => {
-      data.set(buildData(10000));
+      data[1](buildData(10000));
     };
 
     const add = () => {
-      data.set([...data.get(), ...buildData(1000)]);
+      data[1]([...data[0](), ...buildData(1000)]);
     };
 
     const partialUpdate = () => {
-      const rows = data.get();
+      const rows = data[0]();
       for (let index = 0; index < rows.length; index = index + 10) {
         const label = rows[index].label;
-        label.set(label.get() + " !!!");
+        label[1](label[0]() + " !!!");
       }
     };
 
     const clear = () => {
-      data.set([]);
+      data[1]([]);
     };
 
     const swapRows = () => {
-      const rows = data.get();
+      const rows = data[0]();
       if (rows.length > 998) {
-        data.set(rows.with(1, rows[998]).with(998, rows[1]));
+        data[1](rows.with(1, rows[998]).with(998, rows[1]));
       }
     };
 
     const select = (id: number) => {
-      selected.set(id);
+      selected[1](id);
     };
 
     const remove = (id: number) => {
-      data.set(data.get().filter((row) => row.id !== id));
+      data[1](data[0]().filter((row) => row.id !== id));
     };
 
     return (
@@ -201,12 +203,12 @@ export async function Main(): Promise<Client<JSX.Element>> {
         </div>
         <table class="table table-hover table-striped test-data">
           <tbody>
-            <For each={data.get()}>
+            <For each={data[0]()}>
               {(row: Row) => (
-                <tr class={selected.get() === row.id ? "danger" : ""}>
+                <tr class={selected[0]() === row.id ? "danger" : ""}>
                   <td class="col-md-1">{row.id}</td>
                   <td class="col-md-4">
-                    <a onclick={() => select(row.id)}>{row.label.get()}</a>
+                    <a onclick={() => select(row.id)}>{row.label[0]()}</a>
                   </td>
                   <td class="col-md-1">
                     <a onclick={() => remove(row.id)}>

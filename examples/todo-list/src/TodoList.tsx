@@ -1,4 +1,5 @@
-import { cs, For, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal, For } from "@backtickjs/solid-js";
 import { Task } from "./Task.js";
 
 const TASKS = [
@@ -18,16 +19,16 @@ const page =
 
 export async function TodoList() {
   return cs`{
-    const filter = $state("all");
-    const tasks = $state($initial);
+    const filter = $createSignal("all");
+    const tasks = $createSignal($initial);
 
     // A function rather than a value: what a prop holds is re-read whenever
     // what it names changes, and a value computed here would be computed once.
     const showing = () => {
-      return tasks.get().filter((task) => {
-        if (filter.get() === "all") {
+      return tasks[0]().filter((task) => {
+        if (filter[0]() === "all") {
           return true;
-        } else if (filter.get() === "done") {
+        } else if (filter[0]() === "done") {
           return task.isDone;
         } else {
           return !task.isDone;
@@ -38,9 +39,8 @@ export async function TodoList() {
     // By label rather than by position: the list draws the filtered array, so a
     // task's place in what is shown is not its place in \`tasks\`.
     const onPress = (label: string) => {
-      tasks.set(
-        tasks
-          .get()
+      tasks[1](
+        tasks[0]()
           .map((task) =>
             task.label === label
               ? { label: task.label, isDone: !task.isDone }
@@ -54,9 +54,9 @@ export async function TodoList() {
         <h1 style="margin: 0; font-size: 24px">Today</h1>
 
         <p style="margin: 0; font-size: 16px; color: #71717a">
-          {tasks.get().filter((task) => task.isDone).length +
+          {tasks[0]().filter((task) => task.isDone).length +
             " of " +
-            tasks.get().length +
+            tasks[0]().length +
             " done"}
         </p>
 
@@ -65,15 +65,15 @@ export async function TodoList() {
             {(value: string) => (
               <button
                 id={"filter-" + value}
-                onclick={() => filter.set(value)}
+                onclick={() => filter[1](value)}
                 // The style is a string here, so what changes with the filter is
                 // written into it rather than set as a property.
                 style={
                   "background: none; border: 0; padding: 0;" +
                   " cursor: pointer; font-size: 15px; font-weight: " +
-                  (filter.get() === value ? "700" : "400") +
+                  (filter[0]() === value ? "700" : "400") +
                   "; color: " +
-                  (filter.get() === value ? "#18181b" : "#71717a")
+                  (filter[0]() === value ? "#18181b" : "#71717a")
                 }
               >
                 {value === "todo" ? "To do" : value === "done" ? "Done" : "All"}

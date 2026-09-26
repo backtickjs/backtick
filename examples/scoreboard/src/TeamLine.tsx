@@ -1,4 +1,5 @@
-import { cs, type Prop } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 const line =
   "display: grid; grid-template-columns: 20px 1fr auto; gap: 9px;" +

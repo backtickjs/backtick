@@ -1,4 +1,5 @@
-import { cs, type Prop } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // One row of the week. Its props are `Prop<T>`, so a caller may hand each one
 // a written value or a script. The temperatures arrive already converted, and

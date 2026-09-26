@@ -1,50 +1,46 @@
+import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
-import { basename } from "node:path";
-import type { BacktickElement } from "@backtickjs/core";
-import { renderToString } from "@backtickjs/web-page/server";
-import { build } from "esbuild";
+import { fileURLToPath } from "node:url";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import {
+  importMap,
+  modules,
+  renderToString,
+} from "@backtickjs/solid-js/server";
 import { Counter } from "./Counter.js";
 
-// Bundle the client once at startup.
-const result = await build({
-  entryPoints: ["./src/client.ts"],
-  entryNames: "client-[hash]",
-  outdir: "/",
-  bundle: true,
-  minify: true,
-  write: false,
-});
-const [client] = result.outputFiles;
-const clientUrl = `/${basename(client.path)}`;
+// Where the page finds each module a bundle and the client import.
+const urlOf = (specifier: string) => `/modules/${specifier}.js`;
 
-async function toHtml(element: BacktickElement): Promise<string> {
+async function toHtml(element: JSX.Element): Promise<string> {
   return `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    ${importMap(urlOf)}
   </head>
   <body>
-    ${await renderToString(element, clientUrl)}
+    ${await renderToString(element)}
   </body>
 </html>`;
 }
 
 const server = createServer(async (incoming, outgoing) => {
-  if (incoming.url === clientUrl) {
-    // The hash changes with the client, so the browser can keep this forever.
-    outgoing.writeHead(200, {
-      "content-type": "text/javascript",
-      "cache-control": "public, max-age=31536000, immutable",
-    });
-    outgoing.end(client.text);
+  // Solid and the client, as the import map names them.
+  const specifier = Object.keys(modules).find(
+    (name) => urlOf(name) === incoming.url,
+  );
+  if (specifier !== undefined) {
+    outgoing.writeHead(200, { "content-type": "text/javascript" });
+    outgoing.end(await readFile(fileURLToPath(modules[specifier]!)));
     return;
   }
 
   // An element saying what to draw. The component has not run yet.
   const counter = <Counter from={0} />;
 
-  // A document carrying what it drew, with the client that draws it.
+  // A document carrying what it drew, with the modules that draw it.
   const html = await toHtml(counter);
 
   // Ordinary HTTP from here
