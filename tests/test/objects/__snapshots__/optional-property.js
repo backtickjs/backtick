@@ -8,8 +8,8 @@ const read = cs.create(
   "1pn78z89zmc5d:8:13",
   { params: [] },
   {
-    code: "export default () => o => {\n  return [o.label, o.inner?.z ?? 0];\n};",
-    map: '{"version":3,"mappings":"eAOgB,MAACA,CAA4C,IAAI;EAC/D,OAAO,CAACA,CAAC,CAACC,KAAK,EAAED,CAAC,CAACE,KAAK,EAAEC,CAAC,IAAI,CAAC,CAAC;AACnC,CAAC","names":["o","label","inner","z"],"ignoreList":[],"sources":["optional-property.test.tsx"]}',
+    code: "export default () => (o) => {\n    return [o.label, o.inner?.z ?? 0];\n};",
+    map: '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAOgB,MAAA,CAAC,CAA4C,EAAE,EAAE;IAC/D,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC;AACpC,CAAC"}',
     imports: [],
     exportAt: 0,
   },
@@ -22,8 +22,8 @@ it("optionalProperty", async (t) => {
       "1pn78z89zmc5d:16:4",
       { params: [{ kind: "splice", value: read, bindings: [] }] },
       {
-        code: 'export default $0 => ({\n  present: $0()({\n    label: "a",\n    inner: {\n      z: 3\n    }\n  }),\n  partial: $0()({\n    label: "b",\n    inner: {}\n  }),\n  omitted: $0()({\n    label: "c"\n  })\n});',
-        map: '{"version":3,"mappings":"eAeOA,EAAA,KAAC;EACFC,OAAO,EAAED,EAAA,EAAK,CAAC;IAAEE,KAAK,EAAE,GAAG;IAAEC,KAAK,EAAE;MAAEC,CAAC,EAAE;IAAC;EAAE,CAAE,CAAC;EAC/CC,OAAO,EAAEL,EAAA,EAAK,CAAC;IAAEE,KAAK,EAAE,GAAG;IAAEC,KAAK,EAAE;EAAE,CAAE,CAAC;EACzCG,OAAO,EAAEN,EAAA,EAAK,CAAC;IAAEE,KAAK,EAAE;EAAG,CAAE;CAC9B,CAAC","names":["$0","present","label","inner","z","partial","omitted"],"ignoreList":[],"sources":["optional-property.test.tsx"]}',
+        code: 'export default ($0) => ({\n    present: $0()({ label: "a", inner: { z: 3 } }),\n    partial: $0()({ label: "b", inner: {} }),\n    omitted: $0()({ label: "c" }),\n});',
+        map: '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAeO,QAAA,CAAC;IACF,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
         imports: [],
         exportAt: 0,
       },

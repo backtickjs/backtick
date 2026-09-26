@@ -1,12 +1,13 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(
+    `<form><textarea></textarea><input><button>`,
+  );
+
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(
-      `<form><textarea></textarea><input><button>`,
-    );
     const $entry = ($0) => {
       const said = $0()("");
       return (() => {
@@ -26,9 +27,9 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["input", "click"]);
     return $entry;
   })();
   const $bundle = f1(() => $i0);
+  _$delegateEvents(["input", "click"]);
   return $bundle;
 })();

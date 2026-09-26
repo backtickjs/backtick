@@ -1,13 +1,14 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { style: _$style } = $modules["solid-js/web"];
+  const { effect: _$effect } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`);
+
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { style: _$style } = $modules["solid-js/web"];
-    const { effect: _$effect } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`);
     const $entry = ($0) => {
       const size = $0()(16);
       return (() => {
@@ -19,11 +20,11 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["click"]);
     return $entry;
   })();
   const $bundle = _$createComponent($Script, {
     run: () => f1(() => $i0),
   });
+  _$delegateEvents(["click"]);
   return $bundle;
 })();

@@ -1,13 +1,10 @@
 import type ts from "typescript";
-import type { CodeTransform } from "./applyTransform.js";
 import { parseSourceFile } from "./parseFile.js";
 import { rewriteFile } from "./rewriteFile.js";
 
 export function transform(
   ts: typeof import("typescript"),
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
-  // the adapter's, run over each script's code
-  codeTransform?: CodeTransform,
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
     const parsedFile = parseSourceFile(ts, sourceFile);
@@ -15,7 +12,7 @@ export function transform(
       return sourceFile;
     }
 
-    const rewrittenFile = rewriteFile(ts, parsedFile, codeTransform);
+    const rewrittenFile = rewriteFile(ts, parsedFile);
 
     if (addDiagnostic) {
       for (const diagnostic of rewrittenFile.diagnostics) {

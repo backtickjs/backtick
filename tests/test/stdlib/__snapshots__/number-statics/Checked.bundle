@@ -1,10 +1,10 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
     const $entry = () => {
       const positive = Number.EPSILON > 0;
       const largest = Number.MAX_VALUE > 1e308;

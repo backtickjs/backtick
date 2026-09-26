@@ -1,15 +1,16 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  const { memo: _$memo } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(
+    `<button id=row style=display:flex;gap:8px><span style=font-weight:700></span><span>`,
+  );
+
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    const { memo: _$memo } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(
-      `<button id=row style=display:flex;gap:8px><span style=font-weight:700></span><span>`,
-    );
     const $entry = ($0) => {
       const count = $0()(0);
       return (() => {
@@ -22,11 +23,11 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["click"]);
     return $entry;
   })();
   const $bundle = _$createComponent($Script, {
     run: () => f1(() => $i0),
   });
+  _$delegateEvents(["click"]);
   return $bundle;
 })();

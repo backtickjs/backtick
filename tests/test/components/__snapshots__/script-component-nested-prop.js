@@ -24,16 +24,10 @@ it("scriptComponentNestedProp", async (t) => {
       "f9eea3gp8wr6:27:4",
       { params: [{ kind: "tag", value: Greeting }] },
       {
-        code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default $0 => _$createComponent($0, {\n  person: {\n    firstName: "ada"\n  }\n});',
-        map: '{"version":3,"mappings":";eA0BOA,EAAA,IAAAC,iBAAA,CAACD,EAAQ;EAACE,MAAM,EAAE;IAAEC,SAAS,EAAE;EAAK;AAAE,EAAI","names":["$0","_$createComponent","person","firstName"],"ignoreList":[],"sources":["script-component-nested-prop.test.tsx"]}',
-        imports: [
-          {
-            from: "solid-js/web",
-            range: [0, 68],
-            bindings: [{ name: "createComponent", local: "_$createComponent" }],
-          },
-        ],
-        exportAt: 69,
+        code: 'export default ($0) => <$0 person={{ firstName: "ada" }}/>;',
+        map: '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["script-component-nested-prop.test.tsx"],"names":[],"mappings":"eA0BO,QAAA,CAAC,EAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

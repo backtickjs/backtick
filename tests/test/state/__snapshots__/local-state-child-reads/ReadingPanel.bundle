@@ -1,20 +1,17 @@
 (() => {
-  const { template: _$template2 } = $modules["solid-js/web"];
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
   const { style: _$style } = $modules["solid-js/web"];
   const { effect: _$effect } = $modules["solid-js/web"];
-  const { insert: _$insert2 } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent2 } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$2 = /*#__PURE__*/ _$template2(`<div><span>`),
-    _tmpl$3 = /*#__PURE__*/ _$template2(`<span>marker`);
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
+    _tmpl$2 = /*#__PURE__*/ _$template(`<div><span>`),
+    _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
 
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`);
     const $entry = ($0, $1) => {
       const selected = $0()(0);
       return (() => {
@@ -40,7 +37,6 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["click"]);
     return $entry;
   })();
   const f2 = (() => {
@@ -56,7 +52,7 @@
     const $entry = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
     return $entry;
   })();
-  const $bundle = _$createComponent2($Script, {
+  const $bundle = _$createComponent($Script, {
     run: () =>
       f1(
         () => $i0,
@@ -64,13 +60,13 @@
           (() => {
             var _el$3 = _tmpl$2(),
               _el$4 = _el$3.firstChild;
-            _$insert2(_el$4, () =>
+            _$insert(_el$4, () =>
               f3(
                 () => $0.id,
                 () => $0.selected,
               ),
             );
-            _$insert2(
+            _$insert(
               _el$3,
               () =>
                 f4(
@@ -94,5 +90,6 @@
           })(),
       ),
   });
+  _$delegateEvents(["click"]);
   return $bundle;
 })();

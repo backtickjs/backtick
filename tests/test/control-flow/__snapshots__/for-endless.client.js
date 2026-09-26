@@ -1,11 +1,11 @@
 // 10:5
 export default () => {
-  let i = 0;
-  for (;;) {
-    if (i === 4) {
-      break;
+    let i = 0;
+    for (;;) {
+        if (i === 4) {
+            break;
+        }
+        i = i + 1;
     }
-    i = i + 1;
-  }
-  return i;
+    return i;
 };

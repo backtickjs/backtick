@@ -34,8 +34,8 @@ it("splicedLiteralWidens", async (t) => {
         ],
       },
       {
-        code: "export default ($0, $1, $2, $3) => {\n  const n = $0()($1());\n  n[1](6);\n  const c = $0()($2());\n  c[1]($3());\n};",
-        map: '{"version":3,"mappings":"eA2BO,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGJ,EAAA,EAAa,CAACC,EAAA,EAAK,CAAC;EAC9BG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EACP,MAAMC,CAAC,GAAGL,EAAA,EAAa,CAACE,EAAA,EAAC,CAAY;EACrCG,CAAC,CAAC,CAAC,CAAC,CAACF,EAAA,EAAC,CAAa;AACrB,CAAC","names":["$0","$1","$2","$3","n","c"],"ignoreList":[],"sources":["spliced-literal-widens.test.tsx"]}',
+        code: "export default ($0, $1, $2, $3) => {\n    const n = $0()($1());\n    n[1](6);\n    const c = $0()($2());\n    c[1]($3());\n};",
+        map: '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["spliced-literal-widens.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,IAAK,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,IAAC,CAAY,CAAC;IACtC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAC,CAAa,CAAC;AACtB,CAAC"}',
         imports: [],
         exportAt: 0,
       },

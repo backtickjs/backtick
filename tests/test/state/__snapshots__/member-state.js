@@ -20,31 +20,10 @@ async function MemberRows() {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><ul class=rows>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<li>`);\nexport default ($0, $1) => {\n  const build = from => {\n    return Array.from({\n      length: 3\n    }, (_, at) => {\n      return {\n        id: from + at,\n        label: $0()("row " + (from + at))\n      };\n    });\n  };\n  const held = $0()(build(1));\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild;\n    _$insert(_el$2, _$createComponent($1, {\n      get each() {\n        return held[0]();\n      },\n      children: row => (() => {\n        var _el$3 = _tmpl$2();\n        _el$3.$$click = () => row.label[1]("pressed");\n        _$insert(_el$3, () => row.label[0]());\n        return _el$3;\n      })()\n    }));\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;;eAmBY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,KAAK,GAAIC,IAAY,IAAI;IAC7B,OAAOC,KAAK,CAACD,IAAI,CAAC;MAAEE,MAAM,EAAE;IAAC,CAAE,EAAE,CAACC,CAAC,EAAEC,EAAE,KAAI;MACzC,OAAO;QAAEC,EAAE,EAAEL,IAAI,GAAGI,EAAE;QAAEE,KAAK,EAAET,EAAA,EAAa,CAAC,MAAM,IAAIG,IAAI,GAAGI,EAAE,CAAC;MAAC,CAAE;IACtE,CAAC,CAAC;EACJ,CAAC;EAED,MAAMG,IAAI,GAAGV,EAAA,EAAa,CAACE,KAAK,CAAC,CAAC,CAAC,CAAC;EAEpC;IAAA,IAAAS,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,QAAA,CAAAF,KAAA,EAAAG,iBAAA,CAGOf,EAAG;MAAA,IAACgB,IAAIA,CAAA;QAAA,OAAEP,IAAI,CAAC,CAAC,CAAC,EAAE;MAAA;MAAAQ,QAAA,EAChBC,GAAQ;QAAA,IAAAC,KAAA,GAAAC,OAAA;QAAAD,KAAA,CAAAE,OAAA,GACK,MAAMH,GAAG,CAACV,KAAK,CAAC,CAAC,CAAC,CAAC,SAAS,CAAC;QAAAM,QAAA,CAAAK,KAAA,QACvCD,GAAG,CAACV,KAAK,CAAC,CAAC,CAAC,EAAE;QAAA,OAAAW,KAAA;MAAA;IAElB;IAAA,OAAAT,IAAA;EAAA;AAKX,CAAC;AAAAY,gBAAA","names":["$0","$1","build","from","Array","length","_","at","id","label","held","_el$","_tmpl$","_el$2","firstChild","_$insert","_$createComponent","each","children","row","_el$3","_tmpl$2","$$click","_$delegateEvents"],"ignoreList":[],"sources":["member-state.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 172],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [173, 241],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 349,
+      code: 'export default ($0, $1) => {\n    const build = (from) => {\n        return Array.from({ length: 3 }, (_, at) => {\n            return { id: from + at, label: $0()("row " + (from + at)) };\n        });\n    };\n    const held = $0()(build(1));\n    return (<div>\n        <ul class="rows">\n          <$1 each={held[0]()}>\n            {(row) => (<li onclick={() => row.label[1]("pressed")}>\n                {row.label[0]()}\n              </li>)}\n          </$1>\n        </ul>\n      </div>);\n};',
+      map: '{"version":3,"file":"member-state.test.jsx","sourceRoot":"","sources":["member-state.test.tsx"],"names":[],"mappings":"eAmBY;IACR,MAAM,KAAK,GAAG,CAAC,IAAY,EAAE,EAAE;QAC7B,OAAO,KAAK,CAAC,IAAI,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAE,EAAE,EAAE;YACzC,OAAO,EAAE,EAAE,EAAE,IAAI,GAAG,EAAE,EAAE,KAAK,EAAE,IAAa,CAAC,MAAM,GAAG,CAAC,IAAI,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC;QACvE,CAAC,CAAC,CAAC;IACL,CAAC,CAAC;IAEF,MAAM,IAAI,GAAG,IAAa,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC;IAErC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAE,CAAC,KAAK,CAAC,MAAM,CACd;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,CACnB;YAAA,CAAC,CAAC,GAAQ,EAAE,EAAE,CAAC,CACb,CAAC,EAAE,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,SAAS,CAAC,CAAC,CACzC;gBAAA,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CACjB;cAAA,EAAE,EAAE,CAAC,CACN,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,EAAE,CACN;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

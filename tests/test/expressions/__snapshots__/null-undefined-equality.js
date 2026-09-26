@@ -12,7 +12,7 @@ describe("null and undefined", () => {
           { params: [] },
           {
             code: "export default () => null === null;",
-            map: '{"version":3,"mappings":"eAQmC,UAAI,KAAK,IAAI","names":[],"ignoreList":[],"sources":["null-undefined-equality.test.tsx"]}',
+            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["null-undefined-equality.test.tsx"],"names":[],"mappings":"eAQmC,MAAA,IAAI,KAAK,IAAI"}',
             imports: [],
             exportAt: 0,
           },
@@ -27,7 +27,7 @@ describe("null and undefined", () => {
           { params: [] },
           {
             code: "export default () => undefined === undefined;",
-            map: '{"version":3,"mappings":"eASmC,MAAAA,SAAS,KAAKA,SAAS","names":["undefined"],"ignoreList":[],"sources":["null-undefined-equality.test.tsx"]}',
+            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["null-undefined-equality.test.tsx"],"names":[],"mappings":"eASmC,MAAA,SAAS,KAAK,SAAS"}',
             imports: [],
             exportAt: 0,
           },
@@ -44,7 +44,7 @@ describe("null and undefined", () => {
           { params: [] },
           {
             code: "export default () => null !== undefined;",
-            map: '{"version":3,"mappings":"eAamC,UAAI,KAAKA,SAAS","names":["undefined"],"ignoreList":[],"sources":["null-undefined-equality.test.tsx"]}',
+            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["null-undefined-equality.test.tsx"],"names":[],"mappings":"eAamC,MAAA,IAAI,KAAK,SAAS"}',
             imports: [],
             exportAt: 0,
           },
@@ -59,7 +59,7 @@ describe("null and undefined", () => {
           { params: [] },
           {
             code: "export default () => null === undefined;",
-            map: '{"version":3,"mappings":"eAcmC,UAAI,KAAKA,SAAS","names":["undefined"],"ignoreList":[],"sources":["null-undefined-equality.test.tsx"]}',
+            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["null-undefined-equality.test.tsx"],"names":[],"mappings":"eAcmC,MAAA,IAAI,KAAK,SAAS"}',
             imports: [],
             exportAt: 0,
           },
@@ -84,8 +84,8 @@ describe("null and undefined", () => {
             ],
           },
           {
-            code: 'export default ($0, $1) => {\n  const names = ["a"];\n  return [$0() === undefined, $0() !== null, $1() === null, $1() !== undefined, names[1] === undefined, names[1] !== null];\n};',
-            map: '{"version":3,"mappings":"eAuBwB,CAAAA,EAAA,EAAAC,EAAA;EAChB,MAAMC,KAAK,GAAG,CAAC,GAAG,CAAC;EACnB,OAAO,CACLF,EAAA,EAAQ,KAAKG,SAAS,EACtBH,EAAA,EAAQ,KAAK,IAAI,EACjBC,EAAA,EAAM,KAAK,IAAI,EACfA,EAAA,EAAM,KAAKE,SAAS,EACpBD,KAAK,CAAC,CAAC,CAAC,KAAKC,SAAS,EACtBD,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI,CAClB;AACH,CAAC","names":["$0","$1","names","undefined"],"ignoreList":[],"sources":["null-undefined-equality.test.tsx"]}',
+            code: 'export default ($0, $1) => {\n    const names = ["a"];\n    return [\n        $0() === undefined,\n        $0() !== null,\n        $1() === null,\n        $1() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n};',
+            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["null-undefined-equality.test.tsx"],"names":[],"mappings":"eAuBwB;IAChB,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,IAAQ,KAAK,SAAS;QACtB,IAAQ,KAAK,IAAI;QACjB,IAAM,KAAK,IAAI;QACf,IAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC"}',
             imports: [],
             exportAt: 0,
           },

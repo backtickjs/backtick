@@ -9,8 +9,8 @@ it("spliceNumeric", async (t) => {
       "pyy2xapmkswv:6:41",
       { params: [{ kind: "splice", value: 1, bindings: [] }] },
       {
-        code: "export default $0 => $0();",
-        map: '{"version":3,"mappings":"eAK4CA,EAAA,IAAAA,EAAA,EAAC","names":["$0"],"ignoreList":[],"sources":["splice-numeric.test.tsx"]}',
+        code: "export default ($0) => $0();",
+        map: '{"version":3,"file":"splice-numeric.test.jsx","sourceRoot":"","sources":["splice-numeric.test.tsx"],"names":[],"mappings":"eAK4C,QAAA,IAAC"}',
         imports: [],
         exportAt: 0,
       },

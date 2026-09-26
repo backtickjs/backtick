@@ -12,26 +12,10 @@ async function Counter() {
     "7znh0cmscuqg:11:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>Add</button><p>`);\nexport default $0 => {\n  const count = $0()(0);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => count[1](count[0]() + 1);\n    _$insert(_el$3, () => "Count: " + count[0]());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;eAUYA,EAAA;EACR,MAAMC,KAAK,GAAGD,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9B;IAAA,IAAAE,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMP,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAQ,QAAA,CAAAH,KAAA,QAC3C,SAAS,GAAGL,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAC,IAAA;EAAA;AAGhC,CAAC;AAAAQ,gBAAA","names":["$0","count","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["counter.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 172],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-      ],
-      exportAt: 243,
+      code: 'export default ($0) => {\n    const count = $0()(0);\n    return (<div>\n        <button onclick={() => count[1](count[0]() + 1)}>Add</button>\n        <p>{"Count: " + count[0]()}</p>\n      </div>);\n};',
+      map: '{"version":3,"file":"counter.test.jsx","sourceRoot":"","sources":["counter.test.tsx"],"names":[],"mappings":"eAUY;IACR,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CAC5D;QAAA,CAAC,CAAC,CAAC,CAAC,SAAS,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAChC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

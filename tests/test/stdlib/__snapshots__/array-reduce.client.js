@@ -1,9 +1,13 @@
 // 13:5
 export default () => {
-  const prices = [4.5, 3.25, 2];
-  const total = prices.reduce((sum, price) => sum + price, 0);
-  const names = ["a", "b", "c"];
-  const joined = names.reduce((all, one, index) => all + index + one, "");
-  const empty = [];
-  return total.toFixed(2) + "|" + joined + "|" + empty.reduce((sum, one) => sum + one, 0);
+    const prices = [4.5, 3.25, 2];
+    const total = prices.reduce((sum, price) => sum + price, 0);
+    const names = ["a", "b", "c"];
+    const joined = names.reduce((all, one, index) => all + index + one, "");
+    const empty = [];
+    return (total.toFixed(2) +
+        "|" +
+        joined +
+        "|" +
+        empty.reduce((sum, one) => sum + one, 0));
 };

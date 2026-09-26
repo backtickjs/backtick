@@ -27,8 +27,8 @@ it("mappedComponent", async (t) => {
           "8u2ewdd1g2mk:26:17",
           { params: [{ kind: "splice", value: rows, bindings: [] }] },
           {
-            code: "export default $0 => $0();",
-            map: '{"version":3,"mappings":"eAyBoBA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["mapped-component.test.tsx"]}',
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
             imports: [],
             exportAt: 0,
           },
@@ -46,8 +46,8 @@ it("mappedComponent", async (t) => {
                       params: [{ kind: "capture", key: "row$8u2ewdd1g2mk$0" }],
                     },
                     {
-                      code: 'export default $0 => "row " + $0;',
-                      map: '{"version":3,"mappings":"eA0B0CA,EAAA,UAAM,GAAGA,EAAG","names":["$0"],"ignoreList":[],"sources":["mapped-component.test.tsx"]}',
+                      code: 'export default ($0) => "row " + $0;',
+                      map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
                       imports: [],
                       exportAt: 0,
                     },
@@ -58,8 +58,8 @@ it("mappedComponent", async (t) => {
             ],
           },
           {
-            code: "export default $0 => row => $0(row);",
-            map: '{"version":3,"mappings":"eA0BYA,EAAA,IAACC,GAAW,IAAKD,EAAA,CAAAC,GAAA,CAAC","names":["$0","row"],"ignoreList":[],"sources":["mapped-component.test.tsx"]}',
+            code: "export default ($0) => (row) => $0(row);",
+            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
             imports: [],
             exportAt: 0,
           },

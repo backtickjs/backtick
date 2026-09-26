@@ -1,9 +1,9 @@
 // 16:10
-export default $0 => {
-  const before = 1;
-  const spliced = $0();
-  const after = 2;
-  return before + spliced + after;
+export default ($0) => {
+    const before = 1;
+    const spliced = $0();
+    const after = 2;
+    return before + spliced + after;
 };
 
 // 28:5

@@ -43,16 +43,10 @@ async function Answer() {
     "2yide9yjkc2iv:44:9",
     { params: [] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>answered`);\nexport default () => _tmpl$();',
-      map: '{"version":3,"mappings":";;eA2CY,MAAAA,MAAA,EAAqB","names":["_tmpl$"],"ignoreList":[],"sources":["eval-builds-once.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-      ],
-      exportAt: 109,
+      code: 'export default () => <em>{"answered"}</em>;',
+      map: '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"eA2CY,MAAA,CAAC,EAAE,CAAC,CAAC,UAAU,CAAC,EAAE,EAAE,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -68,16 +62,10 @@ async function Waiting({ ask }) {
       ],
     },
     {
-      code: 'import { memo as _$memo } from "solid-js/web";\nexport default ($0, $1, $2) => {\n  const drawn = $0()(null);\n  const started = $1().setTimeout(() => drawn[1]($2()()), 0);\n  return _$memo(() => _$memo(() => drawn[0]() === null)() ? null : eval(drawn[0]()));\n};',
-      map: '{"version":3,"mappings":";eAqDY,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACR,MAAMC,KAAK,GAAGH,EAAA,EAAa,CAAiC,IAAI,CAAC;EACjE,MAAMI,OAAO,GAAGH,EAAA,EAAO,CAACI,UAAU,CAAC,MAAMF,KAAK,CAAC,CAAC,CAAC,CAACD,EAAA,EAAI,EAAE,CAAC,EAAE,CAAC,CAAC;EAC7D,OAAAI,MAAA,OAEKA,MAAA,OAAAH,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI,MAChB,IAAI,GACJI,IAAI,CAACJ,KAAK,CAAC,CAAC,CAAC,EAA6B,CAAC;AAGrD,CAAC","names":["$0","$1","$2","drawn","started","setTimeout","_$memo","eval"],"ignoreList":[],"sources":["eval-builds-once.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 46],
-          bindings: [{ name: "memo", local: "_$memo" }],
-        },
-      ],
-      exportAt: 47,
+      code: "export default ($0, $1, $2) => {\n    const drawn = $0()(null);\n    const started = $1().setTimeout(() => drawn[1]($2()()), 0);\n    return (<>\n        {drawn[0]() === null\n            ? null\n            : eval(drawn[0]())}\n      </>);\n};",
+      map: '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"eAqDY;IACR,MAAM,KAAK,GAAG,IAAa,CAAiC,IAAI,CAAC,CAAC;IAClE,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IAC9D,OAAO,CACL,EACE;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI;YAClB,CAAC,CAAC,IAAI;YACN,CAAC,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,EAA6B,CAAC,CACjD;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -91,26 +79,10 @@ const evalBuildsOnce = cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><span>`);\nexport default ($0, $1, $2) => {\n  const asked = $0()(0);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild;\n    _$insert(_el$2, () => "asked " + asked[0]());\n    _$insert(_el$, _$createComponent($2, {\n      ask: () => {\n        asked[1](asked[0]() + 1);\n        return asked[0]() > 4 ? null : $1();\n      }\n    }), null);\n    return _el$;\n  })();\n};',
-    map: '{"version":3,"mappings":";;;;eAkE0B,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACxB,MAAMC,KAAK,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAE9B;IAAA,IAAAI,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,QAAA,CAAAF,KAAA,QAEW,QAAQ,GAAGH,KAAK,CAAC,CAAC,CAAC,EAAE;IAAAK,QAAA,CAAAJ,IAAA,EAAAK,iBAAA,CAC3BP,EAAO;MACNQ,GAAG,EAAEA,CAAA,KAAK;QACRP,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,OAAOA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,GAAG,IAAI,GAAGF,EAAA,EAAO;MACxC;IAAC;IAAA,OAAAG,IAAA;EAAA;AAIT,CAAC","names":["$0","$1","$2","asked","_el$","_tmpl$","_el$2","firstChild","_$insert","_$createComponent","ask"],"ignoreList":[],"sources":["eval-builds-once.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 123],
-        bindings: [{ name: "createComponent", local: "_$createComponent" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [124, 174],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 228,
+    code: 'export default ($0, $1, $2) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked[0]()}</span>\n      <$2 ask={() => {\n            asked[1](asked[0]() + 1);\n            return asked[0]() > 4 ? null : $1();\n        }}/>\n    </div>);\n};',
+    map: '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"eAkE0B;IACxB,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,EAAO,CACN,GAAG,CAAC,CAAC,GAAG,EAAE;YACR,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAO,CAAC;QACzC,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("evalBuildsOnce", async (t) => {

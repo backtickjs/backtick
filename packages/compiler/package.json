@@ -20,8 +20,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/client-script": "workspace:*",
-    "@jridgewell/remapping": "^2.3.5"
+    "@backtickjs/client-script": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

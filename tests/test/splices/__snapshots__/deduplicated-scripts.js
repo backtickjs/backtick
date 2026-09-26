@@ -8,7 +8,7 @@ const leaf = cs.create(
   { params: [] },
   {
     code: "export default () => 7;",
-    map: '{"version":3,"mappings":"eAMgB,OAAC","names":[],"ignoreList":[],"sources":["deduplicated-scripts.test.tsx"]}',
+    map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC"}',
     imports: [],
     exportAt: 0,
   },
@@ -21,8 +21,8 @@ it("deduplicatedScripts", async (t) => {
       "2g4us6n03x6jl:10:47",
       { params: [{ kind: "splice", value: leaf, bindings: [] }] },
       {
-        code: "export default $0 => ({\n  a: $0(),\n  b: $0()\n});",
-        map: '{"version":3,"mappings":"eASkDA,EAAA,KAAC;EAAEC,CAAC,EAAED,EAAA,EAAK;EAAEE,CAAC,EAAEF,EAAA;AAAK,CAAE,CAAC","names":["$0","a","b"],"ignoreList":[],"sources":["deduplicated-scripts.test.tsx"]}',
+        code: "export default ($0) => ({ a: $0(), b: $0() });",
+        map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
         imports: [],
         exportAt: 0,
       },

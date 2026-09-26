@@ -1,33 +1,20 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { type CodeTransform, emitScripts } from "@backtickjs/compiler";
+import { emitScripts } from "@backtickjs/compiler";
 import { originalPositionFor, TraceMap } from "@jridgewell/trace-mapping";
 import ts from "typescript";
 
 const host = "const script = cs`1 + 1`;";
 
 describe("emitScripts", () => {
-  it("runs each script's code through a transform", () => {
-    const seen: Parameters<CodeTransform>[] = [];
-    // Moves the code down a line, and says so in its map: the second line is
-    // the first line of what it was given.
-    const transform: CodeTransform = (code, id) => {
-      seen.push([code, id]);
-      const map = { version: 3, sources: [id], names: [], mappings: ";AAAA" };
-      return { code: `\n${code}`, map: JSON.stringify(map) };
-    };
-    const [plain] = emitScripts(ts, "host.tsx", host);
-    const [compiled] = emitScripts(ts, "host.tsx", host, transform);
-
-    assert.deepStrictEqual(seen, [["export default () => 1 + 1;", "host.tsx?cs=1:15&lang.jsx"]]);
-    assert.strictEqual(compiled?.code, "\nexport default () => 1 + 1;");
-    // Composed: where the transform's output starts is where the code it was
-    // given starts, in the host file.
-    const map = new TraceMap(compiled!.map);
+  it("emits each script as a module, mapped into the host file", () => {
+    const [script] = emitScripts(ts, "host.tsx", host);
+    assert.strictEqual(script?.code, "export default () => 1 + 1;");
+    const map = new TraceMap(script!.map);
     assert.strictEqual(map.sourcesContent, undefined);
     assert.deepStrictEqual(
-      originalPositionFor(map, { line: 2, column: 0 }),
-      originalPositionFor(new TraceMap(plain!.map), { line: 1, column: 0 }),
+      originalPositionFor(map, { line: 1, column: "export default () => ".length }),
+      { source: "host.tsx", line: 1, column: host.indexOf("1 + 1"), name: null },
     );
   });
 });

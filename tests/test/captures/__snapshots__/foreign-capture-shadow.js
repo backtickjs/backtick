@@ -29,7 +29,7 @@ function innerBase(carried) {
             },
             {
               code: "export default ($0, $1) => $1 + $0($1);",
-              map: '{"version":3,"mappings":"eAmBgB,CAAAA,EAAA,EAAAC,EAAA,KAAAA,EAAI,GAAGD,EAAA,CAAAC,EAAA,CAAQ","names":["$0","$1"],"ignoreList":[],"sources":["foreign-capture-shadow.test.tsx"]}',
+              map: '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eAmBgB,YAAA,EAAI,GAAG,MAAQ"}',
               imports: [],
               exportAt: 0,
             },
@@ -39,8 +39,8 @@ function innerBase(carried) {
       ],
     },
     {
-      code: "export default $0 => {\n  const base = 100;\n  return $0(base);\n};",
-      map: '{"version":3,"mappings":"eAiBYA,EAAA;EACR,MAAMC,IAAI,GAAG,GAAG;EAChB,OAAOD,EAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$0","base"],"ignoreList":[],"sources":["foreign-capture-shadow.test.tsx"]}',
+      code: "export default ($0) => {\n    const base = 100;\n    return $0(base);\n};",
+      map: '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eAiBY;IACR,MAAM,IAAI,GAAG,GAAG,CAAC;IACjB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
       imports: [],
       exportAt: 0,
     },
@@ -61,8 +61,8 @@ it("foreignCaptureShadow", async (t) => {
                 "bphb1svo1jv3:30:25",
                 { params: [{ kind: "capture", key: "base$bphb1svo1jv3$1" }] },
                 {
-                  code: "export default $0 => $0;",
-                  map: '{"version":3,"mappings":"eA6B4BA,EAAA,IAAAA,EAAI","names":["$0"],"ignoreList":[],"sources":["foreign-capture-shadow.test.tsx"]}',
+                  code: "export default ($0) => $0;",
+                  map: '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -73,8 +73,8 @@ it("foreignCaptureShadow", async (t) => {
         ],
       },
       {
-        code: "export default $0 => {\n  const base = 1;\n  return $0(base);\n};",
-        map: '{"version":3,"mappings":"eA2BOA,EAAA;EACD,MAAMC,IAAI,GAAG,CAAC;EACd,OAAOD,EAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$0","base"],"ignoreList":[],"sources":["foreign-capture-shadow.test.tsx"]}',
+        code: "export default ($0) => {\n    const base = 1;\n    return $0(base);\n};",
+        map: '{"version":3,"file":"foreign-capture-shadow.test.jsx","sourceRoot":"","sources":["foreign-capture-shadow.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
         imports: [],
         exportAt: 0,
       },

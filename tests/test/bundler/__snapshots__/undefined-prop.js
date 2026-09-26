@@ -34,8 +34,8 @@ describe("an undefined prop", () => {
           "1x1djky073nkj:37:33",
           { params: [{ kind: "splice", value: onMount, bindings: [] }] },
           {
-            code: "export default $0 => el => $0()(() => el.focus());",
-            map: '{"version":3,"mappings":"eAoCoCA,EAAA,IAACC,EAAE,IAAKD,EAAA,EAAQ,CAAC,MAAMC,EAAE,CAACC,KAAK,EAAE,CAAC","names":["$0","el","focus"],"ignoreList":[],"sources":["undefined-prop.test.tsx"]}',
+            code: "export default ($0) => (el) => $0()(() => el.focus());",
+            map: '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["undefined-prop.test.tsx"],"names":[],"mappings":"eAoCoC,QAAA,CAAC,EAAE,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
             imports: [],
             exportAt: 0,
           },

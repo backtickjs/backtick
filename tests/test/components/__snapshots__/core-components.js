@@ -15,8 +15,8 @@ it("coreComponents", async (t) => {
             "1dqg1yg283gkk:10:45",
             { params: [] },
             {
-              code: "export default () => () => {};",
-              map: '{"version":3,"mappings":"eASgD,YAAK,CAAE,CAAC","names":[],"ignoreList":[],"sources":["core-components.test.tsx"]}',
+              code: "export default () => () => { };",
+              map: '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["core-components.test.tsx"],"names":[],"mappings":"eASgD,MAAA,GAAG,EAAE,GAAE,CAAC"}',
               imports: [],
               exportAt: 0,
             },

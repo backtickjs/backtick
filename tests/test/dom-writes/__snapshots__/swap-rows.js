@@ -19,36 +19,10 @@ async function SwappableRows() {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { setAttribute as _$setAttribute } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>swap</button><table><tbody>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<tr><td>`);\nexport default ($0, $1) => {\n  const ids = $0()([1, 2, 3, 4, 5]);\n  const swap = () => {\n    const held = ids[0]();\n    ids[1](held.with(1, held[3]).with(3, held[1]));\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling,\n      _el$4 = _el$3.firstChild;\n    _el$2.$$click = swap;\n    _$insert(_el$4, _$createComponent($1, {\n      get each() {\n        return ids[0]();\n      },\n      children: id => (() => {\n        var _el$5 = _tmpl$2(),\n          _el$6 = _el$5.firstChild;\n        _$setAttribute(_el$5, "id", "row-" + id);\n        _$insert(_el$6, "row " + id);\n        return _el$5;\n      })()\n    }));\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;;;eAYY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,GAAG,GAAGF,EAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;EACpD,MAAMG,IAAI,GAAGA,CAAA,KAAK;IAChB,MAAMC,IAAI,GAAGF,GAAG,CAAC,CAAC,CAAC,EAAE;IACrBA,GAAG,CAAC,CAAC,CAAC,CAACE,IAAI,CAACC,IAAI,CAAC,CAAC,EAAED,IAAI,CAAC,CAAC,CAAC,CAAC,CAACC,IAAI,CAAC,CAAC,EAAED,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC;EAChD,CAAC;EACD;IAAA,IAAAE,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAD,UAAA;IAAAD,KAAA,CAAAK,OAAA,GAEqBV,IAAI;IAAAW,QAAA,CAAAF,KAAA,EAAAG,iBAAA,CAGhBd,EAAG;MAAA,IAACe,IAAIA,CAAA;QAAA,OAAEd,GAAG,CAAC,CAAC,CAAC,EAAE;MAAA;MAAAe,QAAA,EACfC,EAAU;QAAA,IAAAC,KAAA,GAAAC,OAAA;UAAAC,KAAA,GAAAF,KAAA,CAAAV,UAAA;QAAAa,cAAA,CAAAH,KAAA,QACF,MAAM,GAAGD,EAAE;QAAAJ,QAAA,CAAAO,KAAA,EACZ,MAAM,GAAGH,EAAE;QAAA,OAAAC,KAAA;MAAA;IAEnB;IAAA,OAAAb,IAAA;EAAA;AAMb,CAAC;AAAAiB,gBAAA","names":["$0","$1","ids","swap","held","with","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$insert","_$createComponent","each","children","id","_el$5","_tmpl$2","_el$6","_$setAttribute","_$delegateEvents"],"ignoreList":[],"sources":["swap-rows.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 184],
-          bindings: [{ name: "setAttribute", local: "_$setAttribute" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [185, 235],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [236, 304],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 436,
+      code: 'export default ($0, $1) => {\n    const ids = $0()([1, 2, 3, 4, 5]);\n    const swap = () => {\n        const held = ids[0]();\n        ids[1](held.with(1, held[3]).with(3, held[1]));\n    };\n    return (<div>\n        <button onclick={swap}>swap</button>\n        <table>\n          <tbody>\n            <$1 each={ids[0]()}>\n              {(id) => (<tr id={"row-" + id}>\n                  <td>{"row " + id}</td>\n                </tr>)}\n            </$1>\n          </tbody>\n        </table>\n      </div>);\n};',
+      map: '{"version":3,"file":"swap-rows.test.jsx","sourceRoot":"","sources":["swap-rows.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,GAAG,GAAG,IAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACrD,MAAM,IAAI,GAAG,GAAG,EAAE;QAChB,MAAM,IAAI,GAAG,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC;QACtB,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACjD,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,EAAE,MAAM,CACnC;QAAA,CAAC,KAAK,CACJ;UAAA,CAAC,KAAK,CACJ;YAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAClB;cAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CACf,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,CAClB;kBAAA,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,EAAE,CACvB;gBAAA,EAAE,EAAE,CAAC,CACN,CACH;YAAA,EAAE,EAAG,CACP;UAAA,EAAE,KAAK,CACT;QAAA,EAAE,KAAK,CACT;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

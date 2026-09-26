@@ -1,21 +1,27 @@
 (() => {
-  const { createComponent: _$createComponent2 } = $modules["solid-js/web"];
+  const { template: _$template } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
+  const { effect: _$effect } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
   const { For: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(
+      `<svg><circle cy=5 r=2><title></svg>`,
+      false,
+      true,
+      false,
+    ),
+    _tmpl$2 = /*#__PURE__*/ _$template(
+      `<div><a href=/shapes>shapes</a><svg viewBox="0 0 30 10"width=120><foreignObject x=0 y=0 width=10 height=10><p>html again`,
+    ),
+    _tmpl$3 = /*#__PURE__*/ _$template(
+      `<svg><circle cx=5 cy=5 r=4 fill=none stroke=currentColor></svg>`,
+      false,
+      true,
+      false,
+    );
+
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
-    const { effect: _$effect } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(
-        `<svg><circle cy=5 r=2><title></svg>`,
-        false,
-        true,
-        false,
-      ),
-      _tmpl$2 = /*#__PURE__*/ _$template(
-        `<div><a href=/shapes>shapes</a><svg viewBox="0 0 30 10"width=120><foreignObject x=0 y=0 width=10 height=10><p>html again`,
-      );
     const $entry = ($0, $1) => {
       const Dot = (props) =>
         (() => {
@@ -48,20 +54,13 @@
     return $entry;
   })();
   const f2 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(
-      `<svg><circle cx=5 cy=5 r=4 fill=none stroke=currentColor></svg>`,
-      false,
-      true,
-      false,
-    );
-    const $entry = () => _tmpl$();
+    const $entry = () => _tmpl$3();
     return $entry;
   })();
   const $bundle = f1(
     () => f2(),
     ($0) =>
-      _$createComponent2($i0, {
+      _$createComponent($i0, {
         get each() {
           return $0.each;
         },

@@ -1,11 +1,12 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><button>more`);
+
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<div><button>more`);
     const $entry = ($0, $1) => {
       const count = $0()(0);
       const Badge = eval($1());
@@ -25,13 +26,13 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["click"]);
     return $entry;
   })();
   const $bundle = f1(
     () => $i0,
     () =>
-      '(() => {\n\nconst f1 = (() => {\n  const {\n    "template": _$template\n  } = $modules["solid-js/web"];\n  const {\n    "insert": _$insert\n  } = $modules["solid-js/web"];\n  var _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\n  const $entry = () => props => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "count " + props.count);\n    return _el$;\n  })();\n  return $entry;\n})();\nconst $bundle = f1();\nreturn $bundle;\n})()',
+      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\nconst f1 = (() => {\n  const $entry = () => props => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "count " + props.count);\n    return _el$;\n  })();\n  return $entry;\n})();\nconst $bundle = f1();\nreturn $bundle;\n})()',
   );
+  _$delegateEvents(["click"]);
   return $bundle;
 })();

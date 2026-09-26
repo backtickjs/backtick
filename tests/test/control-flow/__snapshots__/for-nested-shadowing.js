@@ -12,8 +12,8 @@ it("forNestedShadowing", async (t) => {
       "lj6vk8127ex6:12:4",
       { params: [] },
       {
-        code: 'export default () => {\n  let out = "";\n  for (let i = 0; i < 2; i = i + 1) {\n    const i = "-";\n    for (let j = 0; j < 2; j = j + 1) {\n      out = out + i + j;\n    }\n  }\n  return out;\n};',
-        map: '{"version":3,"mappings":"eAWO;EACD,IAAIA,GAAG,GAAG,EAAE;EACZ,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;IAChC,MAAMA,CAAC,GAAG,GAAG;IACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;MAChCF,GAAG,GAAGA,GAAG,GAAGC,CAAC,GAAGC,CAAC;IACnB;EACF;EACA,OAAOF,GAAG;AACZ,CAAC","names":["out","i","j"],"ignoreList":[],"sources":["for-nested-shadowing.test.tsx"]}',
+        code: 'export default () => {\n    let out = "";\n    for (let i = 0; i < 2; i = i + 1) {\n        const i = "-";\n        for (let j = 0; j < 2; j = j + 1) {\n            out = out + i + j;\n        }\n    }\n    return out;\n};',
+        map: '{"version":3,"file":"for-nested-shadowing.test.jsx","sourceRoot":"","sources":["for-nested-shadowing.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,GAAG,GAAG,EAAE,CAAC;IACb,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,MAAM,CAAC,GAAG,GAAG,CAAC;QACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;YACjC,GAAG,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC,CAAC;QACpB,CAAC;IACH,CAAC;IACD,OAAO,GAAG,CAAC;AACb,CAAC"}',
         imports: [],
         exportAt: 0,
       },

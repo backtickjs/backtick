@@ -15,8 +15,8 @@ describe("a spliced undefined", () => {
           "2i00dqahsuxy4:13:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
           {
-            code: "export default $0 => $0();",
-            map: '{"version":3,"mappings":"eAYmCA,EAAA,IAAAA,EAAA,EAAQ","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAYmC,QAAA,IAAQ"}',
             imports: [],
             exportAt: 0,
           },
@@ -32,8 +32,8 @@ describe("a spliced undefined", () => {
         "2i00dqahsuxy4:18:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
         {
-          code: "export default $0 => $0();",
-          map: '{"version":3,"mappings":"eAiBsCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
+          code: "export default ($0) => $0();",
+          map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAiBsC,QAAA,IAAK"}',
           imports: [],
           exportAt: 0,
         },
@@ -50,8 +50,8 @@ describe("a spliced undefined", () => {
           "2i00dqahsuxy4:25:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
           {
-            code: "export default $0 => $0();",
-            map: '{"version":3,"mappings":"eAwBuCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAwBuC,QAAA,IAAK"}',
             imports: [],
             exportAt: 0,
           },

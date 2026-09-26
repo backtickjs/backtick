@@ -8,8 +8,8 @@ async function Panel() {
     "1y32lnuqpkjgj:7:9",
     { params: [{ kind: "splice", value: state, bindings: [] }] },
     {
-      code: "export default $0 => {\n  const n = $0()(2);\n  n.set(3);\n};",
-      map: '{"version":3,"mappings":"eAMYA,EAAA;EACR,MAAMC,CAAC,GAAGD,EAAA,EAAM,CAAC,CAAC,CAAC;EACnBC,CAAC,CAACC,GAAG,CAAC,CAAC,CAAC;AACV,CAAC","names":["$0","n","set"],"ignoreList":[],"sources":["component-answers-action.test.tsx"]}',
+      code: "export default ($0) => {\n    const n = $0()(2);\n    n.set(3);\n};",
+      map: '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["component-answers-action.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
       imports: [],
       exportAt: 0,
     },

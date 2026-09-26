@@ -16,8 +16,8 @@ function sandwich(fragment) {
     "1xi8jyc89buh5:16:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
     {
-      code: "export default $0 => {\n  const before = 1;\n  const spliced = $0();\n  const after = 2;\n  return before + spliced + after;\n};",
-      map: '{"version":3,"mappings":"eAeYA,EAAA;EACR,MAAMC,MAAM,GAAG,CAAC;EAChB,MAAMC,OAAO,GAAGF,EAAA,EAAS;EACzB,MAAMG,KAAK,GAAG,CAAC;EACf,OAAOF,MAAM,GAAGC,OAAO,GAAGC,KAAK;AACjC,CAAC","names":["$0","before","spliced","after"],"ignoreList":[],"sources":["splice-before-declaration.test.tsx"]}',
+      code: "export default ($0) => {\n    const before = 1;\n    const spliced = $0();\n    const after = 2;\n    return before + spliced + after;\n};",
+      map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,IAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC"}',
       imports: [],
       exportAt: 0,
     },
@@ -39,7 +39,7 @@ it("spliceBeforeDeclaration", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 10;",
-                  map: '{"version":3,"mappings":"eA2BqB,QAAE","names":[],"ignoreList":[],"sources":["splice-before-declaration.test.tsx"]}',
+                  map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2BqB,MAAA,EAAE"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -55,7 +55,7 @@ it("spliceBeforeDeclaration", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 20;",
-                  map: '{"version":3,"mappings":"eA2B2C,QAAE","names":[],"ignoreList":[],"sources":["splice-before-declaration.test.tsx"]}',
+                  map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2B2C,MAAA,EAAE"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -67,7 +67,7 @@ it("spliceBeforeDeclaration", async (t) => {
       },
       {
         code: "export default ($0, $1) => $0() + $1();",
-        map: '{"version":3,"mappings":"eA2BO,CAAAA,EAAA,EAAAC,EAAA,KAAAD,EAAA,EAAC,GAAqBC,EAAA,EAAC","names":["$0","$1"],"ignoreList":[],"sources":["splice-before-declaration.test.tsx"]}',
+        map: '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splice-before-declaration.test.tsx"],"names":[],"mappings":"eA2BO,YAAA,IAAC,GAAqB,IAAC"}',
         imports: [],
         exportAt: 0,
       },

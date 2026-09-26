@@ -15,21 +15,10 @@ async function Panel() {
     "3t9qtypqc1fe7:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>`);\nexport default $0 => {\n  const n = $0()(2);\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => n[0]());\n    return _el$;\n  })();\n};',
-      map: '{"version":3,"mappings":";;;eAaYA,EAAA;EACR,MAAMC,CAAC,GAAGD,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAYD,CAAC,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAC,IAAA;EAAA;AACpB,CAAC","names":["$0","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["component-answers-script.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 105],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-      ],
-      exportAt: 152,
+      code: "export default ($0) => {\n    const n = $0()(2);\n    return <em>{n[0]()}</em>;\n};",
+      map: '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["component-answers-script.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC3B,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

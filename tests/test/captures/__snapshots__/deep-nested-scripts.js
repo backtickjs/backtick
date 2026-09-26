@@ -12,7 +12,7 @@ function add(lhs, rhs) {
     },
     {
       code: "export default ($0, $1) => $0() + $1();",
-      map: '{"version":3,"mappings":"eAMY,CAAAA,EAAA,EAAAC,EAAA,KAAAD,EAAA,EAAI,GAAGC,EAAA,EAAI","names":["$0","$1"],"ignoreList":[],"sources":["deep-nested-scripts.test.tsx"]}',
+      map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAMY,YAAA,IAAI,GAAG,IAAI"}',
       imports: [],
       exportAt: 0,
     },
@@ -34,7 +34,7 @@ it("deepNestedScripts", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 1;",
-                  map: '{"version":3,"mappings":"eAUyD,OAAC","names":[],"ignoreList":[],"sources":["deep-nested-scripts.test.tsx"]}',
+                  map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUyD,MAAA,CAAC"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -44,7 +44,7 @@ it("deepNestedScripts", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 2;",
-                  map: '{"version":3,"mappings":"eAUgE,OAAC","names":[],"ignoreList":[],"sources":["deep-nested-scripts.test.tsx"]}',
+                  map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUgE,MAAA,CAAC"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -55,8 +55,8 @@ it("deepNestedScripts", async (t) => {
         ],
       },
       {
-        code: "export default $0 => $0();",
-        map: '{"version":3,"mappings":"eAUgDA,EAAA,IAAAA,EAAA,EAAC","names":["$0"],"ignoreList":[],"sources":["deep-nested-scripts.test.tsx"]}',
+        code: "export default ($0) => $0();",
+        map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUgD,QAAA,IAAC"}',
         imports: [],
         exportAt: 0,
       },

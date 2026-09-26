@@ -1,10 +1,12 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { memo: _$memo } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
+
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
     const $entry = ($0, $1, $2) => {
       const asked = $0()(0);
       return (() => {
@@ -27,7 +29,6 @@
     return $entry;
   })();
   const f2 = (() => {
-    const { memo: _$memo } = $modules["solid-js/web"];
     const $entry = ($0, $1, $2) => {
       const drawn = $0()(null);
       const started = $1().setTimeout(() => drawn[1]($2()()), 0);
@@ -40,7 +41,7 @@
   const $bundle = f1(
     () => $i0,
     () =>
-      '(() => {\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const {\n    "template": _$template\n  } = $modules["solid-js/web"];\n  var _tmpl$ = /*#__PURE__*/_$template(`\u003cem>answered`);\n  const $entry = () => _tmpl$();\n  return $entry;\n})();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
+      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>answered`);\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const $entry = () => _tmpl$();\n  return $entry;\n})();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
     ($0) =>
       f2(
         () => $i0,

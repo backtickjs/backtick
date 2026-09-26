@@ -5,9 +5,7 @@ export default () => [5, 31, 7]["0"];
 export default () => "abc"["0"];
 
 // 13:33
-export default () => ({
-  x: 1
-})[0];
+export default () => ({ x: 1 })[0];
 
 // 14:33
 export default () => 7[0];
@@ -22,9 +20,7 @@ export default () => [5, 31, 7][1.5];
 export default () => [5, 31, 7][-1];
 
 // 23:7
-export default () => ({
-  x: 1
-})["y"];
+export default () => ({ x: 1 })["y"];
 
 // 24:7
 export default () => "abc"[9];

@@ -1,23 +1,21 @@
 // 26:5
-$0             → 26:8 {…
- => {          → 26:8 {…
+($0) => {      → 26:8 {…
 const          → 27:7 const 
 stop           → 27:13 stop
  =             → 27:17  = 
-$0             → 27:20 $window.clearInterval;…
-()             → 27:20 $window.clearInterval;…
+$0()           → 27:20 $window.clearInterval;…
 .              → 27:27 .
 clearInterval  → 27:28 clearInterval
 ;              → 27:41 ;
 const          → 28:7 const 
 repeating      → 28:13 repeating
  =             → 28:22  = 
-$0             → 28:25 $window.setInterval(()…
-()             → 28:25 $window.setInterval(()…
+$0()           → 28:25 $window.setInterval(()…
 .              → 28:32 .
 setInterval    → 28:33 setInterval
 (              → 28:44 (
-() =>          → 28:45 () => 
+()             → 28:45 () 
+=>             → 28:48 =>
 0              → 28:51 0
 ,              → 28:52 , 
 1000           → 28:54 1000
@@ -28,17 +26,16 @@ stop           → 29:7 stop
 repeating      → 29:12 repeating
 )              → 29:21 )
 ;              → 29:22 ;
-$0             → 30:7 $window.clearTimeout($window.setTimeout(()…
-()             → 30:7 $window.clearTimeout($window.setTimeout(()…
+$0()           → 30:7 $window.clearTimeout($window.setTimeout(()…
 .              → 30:14 .
 clearTimeout   → 30:15 clearTimeout
 (              → 30:27 (
-$0             → 30:28 $window.setTimeout(()…
-()             → 30:28 $window.setTimeout(()…
+$0()           → 30:28 $window.setTimeout(()…
 .              → 30:35 .
 setTimeout     → 30:36 setTimeout
 (              → 30:46 (
-() =>          → 30:47 () => 
+()             → 30:47 () 
+=>             → 30:50 =>
 0              → 30:53 0
 ,              → 30:54 , 
 1000           → 30:56 1000

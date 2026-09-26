@@ -14,8 +14,8 @@ function wrapShadowed(fragment) {
     "1wiy7dknp0llv:15:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
     {
-      code: "export default $0 => {\n  const total = 1;\n  {\n    const total = 2;\n    return total + $0();\n  }\n};",
-      map: '{"version":3,"mappings":"eAcYA,EAAA;EACR,MAAMC,KAAK,GAAG,CAAC;EACf;IACE,MAAMA,KAAK,GAAG,CAAC;IACf,OAAOA,KAAK,GAAGD,EAAA,EAAS;EAC1B;AACF,CAAC","names":["$0","total"],"ignoreList":[],"sources":["shadowed-hole.test.tsx"]}',
+      code: "export default ($0) => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $0();\n    }\n};",
+      map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,IAAS,CAAC;IAC3B,CAAC;AACH,CAAC"}',
       imports: [],
       exportAt: 0,
     },
@@ -37,7 +37,7 @@ it("shadowedHole", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 10;",
-                  map: '{"version":3,"mappings":"eA2ByB,QAAE","names":[],"ignoreList":[],"sources":["shadowed-hole.test.tsx"]}',
+                  map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2ByB,MAAA,EAAE"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -53,7 +53,7 @@ it("shadowedHole", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 20;",
-                  map: '{"version":3,"mappings":"eA2BmD,QAAE","names":[],"ignoreList":[],"sources":["shadowed-hole.test.tsx"]}',
+                  map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2BmD,MAAA,EAAE"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -65,7 +65,7 @@ it("shadowedHole", async (t) => {
       },
       {
         code: "export default ($0, $1) => $0() + $1();",
-        map: '{"version":3,"mappings":"eA2BO,CAAAA,EAAA,EAAAC,EAAA,KAAAD,EAAA,EAAC,GAAyBC,EAAA,EAAC","names":["$0","$1"],"ignoreList":[],"sources":["shadowed-hole.test.tsx"]}',
+        map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2BO,YAAA,IAAC,GAAyB,IAAC"}',
         imports: [],
         exportAt: 0,
       },

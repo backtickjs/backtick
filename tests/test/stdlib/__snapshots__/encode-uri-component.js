@@ -11,16 +11,10 @@ async function Encoded() {
     "3tch88psikxru:10:9",
     { params: [] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>/at?q=a%20b%2Bc%26d%23%C3%A9&amp;page=2.5 a b+c&amp;d#\u00E9`);\nexport default () => {\n  return _tmpl$();\n};',
-      map: '{"version":3,"mappings":";;eASY;EACR,OAAAA,MAAA;AAUF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["encode-uri-component.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-      ],
-      exportAt: 158,
+      code: 'export default () => {\n    return (<span>\n        {"/at?q=" +\n            encodeURIComponent("a b+c&d#\u00E9") +\n            "&page=" +\n            encodeURIComponent(2.5) +\n            " " +\n            decodeURIComponent("a%20b%2Bc%26d%23%C3%A9")}\n      </span>);\n};',
+      map: '{"version":3,"file":"encode-uri-component.test.jsx","sourceRoot":"","sources":["encode-uri-component.test.tsx"],"names":[],"mappings":"eASY;IACR,OAAO,CACL,CAAC,IAAI,CACH;QAAA,CAAC,QAAQ;YACP,kBAAkB,CAAC,WAAW,CAAC;YAC/B,QAAQ;YACR,kBAAkB,CAAC,GAAG,CAAC;YACvB,GAAG;YACH,kBAAkB,CAAC,wBAAwB,CAAC,CAChD;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

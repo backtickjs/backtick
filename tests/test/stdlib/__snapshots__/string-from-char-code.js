@@ -9,16 +9,10 @@ async function Written() {
     "rfc8jtzlhm6q:8:9",
     { params: [] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>Hi\uD83D\uDE00`);\nexport default () => {\n  return _tmpl$();\n};',
-      map: '{"version":3,"mappings":";;eAOY;EACR,OAAAA,MAAA;AAKF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["string-from-char-code.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-      ],
-      exportAt: 107,
+      code: "export default () => {\n    return (<span>\n        {String.fromCharCode(72, 105) + String.fromCharCode(0xd83d, 0xde00)}\n      </span>);\n};",
+      map: '{"version":3,"file":"string-from-char-code.test.jsx","sourceRoot":"","sources":["string-from-char-code.test.tsx"],"names":[],"mappings":"eAOY;IACR,OAAO,CACL,CAAC,IAAI,CACH;QAAA,CAAC,MAAM,CAAC,YAAY,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,YAAY,CAAC,MAAM,EAAE,MAAM,CAAC,CACrE;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

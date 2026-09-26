@@ -1,37 +1,20 @@
 // 13:10
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/_$template(`<div><span>swap</span><span>drop</span><div>`),
-  _tmpl$2 = /*#__PURE__*/_$template(`<span>`);
 export default ($0, $1) => {
-  const ids = $0()([1, 2, 3]);
-  const swap = () => {
-    const held = ids[0]();
-    ids[1](held.with(0, held[2]).with(2, held[0]));
-  };
-  const drop = () => {
-    ids[1](ids[0]().filter(id => id !== 2));
-  };
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild,
-      _el$3 = _el$2.nextSibling,
-      _el$4 = _el$3.nextSibling;
-    _el$2.$$click = swap;
-    _el$3.$$click = drop;
-    _$insert(_el$4, _$createComponent($1, {
-      get each() {
-        return ids[0]();
-      },
-      children: id => (() => {
-        var _el$5 = _tmpl$2();
-        _$insert(_el$5, "row " + id);
-        return _el$5;
-      })()
-    }));
-    return _el$;
-  })();
+    const ids = $0()([1, 2, 3]);
+    const swap = () => {
+        const held = ids[0]();
+        ids[1](held.with(0, held[2]).with(2, held[0]));
+    };
+    const drop = () => {
+        ids[1](ids[0]().filter((id) => id !== 2));
+    };
+    return (<div>
+        <span onclick={swap}>swap</span>
+        <span onclick={drop}>drop</span>
+        <div>
+          <$1 each={ids[0]()}>
+            {(id) => <span>{"row " + id}</span>}
+          </$1>
+        </div>
+      </div>);
 };
-_$delegateEvents(["click"]);

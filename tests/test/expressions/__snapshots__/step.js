@@ -12,8 +12,8 @@ it("step", async (t) => {
       "l4vdws2hl3xc:12:4",
       { params: [] },
       {
-        code: "export default () => {\n  let total = 0;\n  for (let i = 0; i < 3; i++) {\n    total = total + i;\n  }\n  let n = 0.1;\n  const before = n++;\n  const after = ++n;\n  const down = n--;\n  return [total, before, after, down, n];\n};",
-        map: '{"version":3,"mappings":"eAWO;EACD,IAAIA,KAAK,GAAG,CAAC;EACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,EAAE,EAAE;IAC1BD,KAAK,GAAGA,KAAK,GAAGC,CAAC;EACnB;EACA,IAAIC,CAAC,GAAG,GAAG;EACX,MAAMC,MAAM,GAAGD,CAAC,EAAE;EAClB,MAAME,KAAK,GAAG,EAAEF,CAAC;EACjB,MAAMG,IAAI,GAAGH,CAAC,EAAE;EAChB,OAAO,CAACF,KAAK,EAAEG,MAAM,EAAEC,KAAK,EAAEC,IAAI,EAAEH,CAAC,CAAC;AACxC,CAAC","names":["total","i","n","before","after","down"],"ignoreList":[],"sources":["step.test.tsx"]}',
+        code: "export default () => {\n    let total = 0;\n    for (let i = 0; i < 3; i++) {\n        total = total + i;\n    }\n    let n = 0.1;\n    const before = n++;\n    const after = ++n;\n    const down = n--;\n    return [total, before, after, down, n];\n};",
+        map: '{"version":3,"file":"step.test.jsx","sourceRoot":"","sources":["step.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;QAC3B,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;IACpB,CAAC;IACD,IAAI,CAAC,GAAG,GAAG,CAAC;IACZ,MAAM,MAAM,GAAG,CAAC,EAAE,CAAC;IACnB,MAAM,KAAK,GAAG,EAAE,CAAC,CAAC;IAClB,MAAM,IAAI,GAAG,CAAC,EAAE,CAAC;IACjB,OAAO,CAAC,KAAK,EAAE,MAAM,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC,CAAC,CAAC;AACzC,CAAC"}',
         imports: [],
         exportAt: 0,
       },

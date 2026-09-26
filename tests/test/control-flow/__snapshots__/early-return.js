@@ -10,8 +10,8 @@ it("earlyReturn", async (t) => {
       "33mpmt8iae2c7:10:4",
       { params: [] },
       {
-        code: "export default () => {\n  let n = 0;\n  if (n === 0) {\n    return;\n  }\n  n = 1;\n};",
-        map: '{"version":3,"mappings":"eASO;EACD,IAAIA,CAAC,GAAG,CAAC;EACT,IAAIA,CAAC,KAAK,CAAC,EAAE;IACX;EACF;EACAA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["early-return.test.tsx"]}',
+        code: "export default () => {\n    let n = 0;\n    if (n === 0) {\n        return;\n    }\n    n = 1;\n};",
+        map: '{"version":3,"file":"early-return.test.jsx","sourceRoot":"","sources":["early-return.test.tsx"],"names":[],"mappings":"eASO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;QACZ,OAAO;IACT,CAAC;IACD,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
         imports: [],
         exportAt: 0,
       },

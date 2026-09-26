@@ -1,37 +1,16 @@
 // 19:10
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/_$template(`<div><span>add</span><div>`),
-  _tmpl$2 = /*#__PURE__*/_$template(`<span>`);
 export default ($0, $1) => {
-  const rows = $0()([]);
-  const add = row => {
-    rows[1]([row]);
-  };
-  const label = row => {
-    return row.label;
-  };
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild,
-      _el$3 = _el$2.nextSibling;
-    _el$2.$$click = () => add({
-      id: 1,
-      label: "one"
-    });
-    _$insert(_el$3, _$createComponent($1, {
-      get each() {
-        return rows[0]();
-      },
-      children: row => (() => {
-        var _el$4 = _tmpl$2();
-        _$insert(_el$4, () => label(row));
-        return _el$4;
-      })()
-    }));
-    return _el$;
-  })();
+    const rows = $0()([]);
+    const add = (row) => {
+        rows[1]([row]);
+    };
+    const label = (row) => {
+        return row.label;
+    };
+    return (<div>
+        <span onclick={() => add({ id: 1, label: "one" })}>add</span>
+        <div>
+          <$1 each={rows[0]()}>{(row) => <span>{label(row)}</span>}</$1>
+        </div>
+      </div>);
 };
-_$delegateEvents(["click"]);

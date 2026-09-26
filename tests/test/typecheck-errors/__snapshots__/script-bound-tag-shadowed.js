@@ -19,21 +19,10 @@ export default cs.create(
                     params: [{ kind: "capture", key: "Badge$83k1lytjebk3$2" }],
                   },
                   {
-                    code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default $0 => _$createComponent($0, {\n  n: 1\n});',
-                    map: '{"version":3,"mappings":";eASgBA,EAAA,IAAAC,iBAAA,CAACD,EAAK;EAACE,CAAC,EAAE;AAAC,EAAI","names":["$0","_$createComponent","n"],"ignoreList":[],"sources":["script-bound-tag-shadowed.test.tsx"]}',
-                    imports: [
-                      {
-                        from: "solid-js/web",
-                        range: [0, 68],
-                        bindings: [
-                          {
-                            name: "createComponent",
-                            local: "_$createComponent",
-                          },
-                        ],
-                      },
-                    ],
-                    exportAt: 69,
+                    code: "export default ($0) => <$0 n={1}/>;",
+                    map: '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"eASgB,QAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+                    imports: [],
+                    exportAt: 0,
                   },
                 ),
                 bindings: ["Badge$83k1lytjebk3$2"],
@@ -41,8 +30,8 @@ export default cs.create(
             ],
           },
           {
-            code: "export default $0 => {\n  const Badge = 5;\n  return $0(Badge);\n};",
-            map: '{"version":3,"mappings":"eAMcA,EAAA;EACV,MAAMC,KAAK,GAAG,CAAC;EAEf,OAAOD,EAAA,CAAAC,KAAA,CAAC;AACV,CAAC","names":["$0","Badge"],"ignoreList":[],"sources":["script-bound-tag-shadowed.test.tsx"]}',
+            code: "export default ($0) => {\n    const Badge = 5;\n    return $0(Badge);\n};",
+            map: '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"eAMc;IACV,MAAM,KAAK,GAAG,CAAC,CAAC;IAEhB,OAAO,SAAC,CAAsB;AAChC,CAAC"}',
             imports: [],
             exportAt: 0,
           },
@@ -52,20 +41,9 @@ export default cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<b>`);\nexport default $0 => {\n  const Badge = p => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "n " + p.n);\n    return _el$;\n  })();\n  return $0();\n};',
-    map: '{"version":3,"mappings":";;;eAIkBA,EAAA;EAChB,MAAMC,KAAK,GAAIC,CAAgB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAS,IAAI,GAAGD,CAAC,CAACI,CAAC;IAAA,OAAAH,IAAA;EAAA,IAAK;EACvD,OAAOH,EAAA,EAAC;AAKV,CAAC","names":["$0","Badge","p","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["script-bound-tag-shadowed.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 105],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 151,
+    code: 'export default ($0) => {\n    const Badge = (p) => <b>{"n " + p.n}</b>;\n    return $0();\n};',
+    map: '{"version":3,"file":"script-bound-tag-shadowed.test.jsx","sourceRoot":"","sources":["script-bound-tag-shadowed.test.tsx"],"names":[],"mappings":"eAIkB;IAChB,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACxD,OAAO,IAAC,CAIJ;AACN,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );

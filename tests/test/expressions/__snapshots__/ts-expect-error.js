@@ -12,8 +12,8 @@ it("tsExpectError", async (t) => {
       "353rib4gy05pn:12:4",
       { params: [] },
       {
-        code: 'export default () => {\n  const count = "one";\n  return count;\n};',
-        map: '{"version":3,"mappings":"eAWO;EAED,MAAMA,KAAK,GAAW,KAAK;EAC3B,OAAOA,KAAK;AACd,CAAC","names":["count"],"ignoreList":[],"sources":["ts-expect-error.test.tsx"]}',
+        code: 'export default () => {\n    const count = "one";\n    return count;\n};',
+        map: '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["ts-expect-error.test.tsx"],"names":[],"mappings":"eAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC"}',
         imports: [],
         exportAt: 0,
       },

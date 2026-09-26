@@ -1,12 +1,13 @@
 (() => {
-  const { createComponent: _$createComponent2 } = $modules["solid-js/web"];
+  const { template: _$template } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
   const { For: $i1 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`),
+    _tmpl$2 = /*#__PURE__*/ _$template(`<em>`);
+
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
     const $entry = ($0, $1) => {
       const asked = $0()(0);
       return (() => {
@@ -29,10 +30,6 @@
     return $entry;
   })();
   const f2 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<em>`);
     const $entry = ($0, $1, $2, $3, $4) => {
       const items = $0()([]);
       const started = $1().setTimeout(() => {
@@ -46,9 +43,9 @@
         },
         children: (item) =>
           (() => {
-            var _el$ = _tmpl$();
-            _$insert(_el$, item);
-            return _el$;
+            var _el$3 = _tmpl$2();
+            _$insert(_el$3, item);
+            return _el$3;
           })(),
       });
     };
@@ -63,7 +60,7 @@
         () => $0.more,
         () => ["one", "two"],
         ($0) =>
-          _$createComponent2($i1, {
+          _$createComponent($i1, {
             get each() {
               return $0.each;
             },

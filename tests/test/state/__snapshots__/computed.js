@@ -31,26 +31,10 @@ describe("computed", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>add</button><p></p><p></p><p>`);\nexport default ($0, $1, $2) => {\n  const n = $0()(1);\n  const doubled = $1()(() => {\n    $2().console.log();\n    return n[0]() * 2;\n  });\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling,\n      _el$4 = _el$3.nextSibling,\n      _el$5 = _el$4.nextSibling;\n    _el$2.$$click = () => n[1](n[0]() + 1);\n    _$insert(_el$3, () => "a " + doubled());\n    _$insert(_el$4, () => "b " + doubled());\n    _$insert(_el$5, () => "c " + doubled());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAyBS,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B,MAAMI,OAAO,GAAGH,EAAA,EAAW,CAAC,MAAK;IAC/BC,EAAA,EAAO,CAACG,OAAO,CAACC,GAAG,EAAE;IACrB,OAAOH,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC;EACnB,CAAC,CAAC;EACF;IAAA,IAAAI,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;MAAAE,KAAA,GAAAD,KAAA,CAAAD,WAAA;IAAAH,KAAA,CAAAM,OAAA,GAEqB,MAAMZ,CAAC,CAAC,CAAC,CAAC,CAACA,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAa,QAAA,CAAAL,KAAA,QACnC,IAAI,GAAGP,OAAO,EAAE;IAAAY,QAAA,CAAAH,KAAA,QAChB,IAAI,GAAGT,OAAO,EAAE;IAAAY,QAAA,CAAAF,KAAA,QAChB,IAAI,GAAGV,OAAO,EAAE;IAAA,OAAAG,IAAA;EAAA;AAG1B,CAAC;AAAAU,gBAAA","names":["$0","$1","$2","n","doubled","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","_el$5","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["computed.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 257,
+          code: 'export default ($0, $1, $2) => {\n    const n = $0()(1);\n    const doubled = $1()(() => {\n        $2().console.log();\n        return n[0]() * 2;\n    });\n    return (<div>\n            <button onclick={() => n[1](n[0]() + 1)}>add</button>\n            <p>{"a " + doubled()}</p>\n            <p>{"b " + doubled()}</p>\n            <p>{"c " + doubled()}</p>\n          </div>);\n};',
+          map: '{"version":3,"file":"computed.test.jsx","sourceRoot":"","sources":["computed.test.tsx"],"names":[],"mappings":"eAyBS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,IAAW,CAAC,GAAG,EAAE;QAC/B,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACpD;YAAA,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,OAAO,EAAE,CAAC,EAAE,CAAC,CACxB;YAAA,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,OAAO,EAAE,CAAC,EAAE,CAAC,CACxB;YAAA,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,OAAO,EAAE,CAAC,EAAE,CAAC,CAC1B;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -72,26 +56,10 @@ describe("computed", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>add</button><p>`);\nexport default ($0, $1, $2) => {\n  const n = $0()(1);\n  const isBig = $1()(() => n[0]() > 2);\n  const label = () => {\n    $2().console.log();\n    return isBig() ? "big" : "small";\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => n[1](n[0]() + 1);\n    _$insert(_el$3, label);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAmDS,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B,MAAMI,KAAK,GAAGH,EAAA,EAAW,CAAC,MAAME,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;EAC3C,MAAME,KAAK,GAAGA,CAAA,KAAK;IACjBH,EAAA,EAAO,CAACI,OAAO,CAACC,GAAG,EAAE;IACrB,OAAOH,KAAK,EAAE,GAAG,KAAK,GAAG,OAAO;EAClC,CAAC;EACD;IAAA,IAAAI,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMX,CAAC,CAAC,CAAC,CAAC,CAACA,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAY,QAAA,CAAAH,KAAA,EACnCP,KAAK;IAAA,OAAAG,IAAA;EAAA;AAGf,CAAC;AAAAQ,gBAAA","names":["$0","$1","$2","n","isBig","label","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["computed.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 243,
+          code: 'export default ($0, $1, $2) => {\n    const n = $0()(1);\n    const isBig = $1()(() => n[0]() > 2);\n    const label = () => {\n        $2().console.log();\n        return isBig() ? "big" : "small";\n    };\n    return (<div>\n            <button onclick={() => n[1](n[0]() + 1)}>add</button>\n            <p>{label()}</p>\n          </div>);\n};',
+          map: '{"version":3,"file":"computed.test.jsx","sourceRoot":"","sources":["computed.test.tsx"],"names":[],"mappings":"eAmDS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,KAAK,GAAG,IAAW,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;IAC5C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,KAAK,EAAE,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,OAAO,CAAC;IACnC,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACpD;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );

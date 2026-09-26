@@ -1,32 +1,16 @@
 // 16:10
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/_$template(`<div><span>rotate</span><div>`),
-  _tmpl$2 = /*#__PURE__*/_$template(`<span>`);
 export default ($0, $1) => {
-  const names = $0()(["a", "b", "c"]);
-  const rotate = () => {
-    const held = names[0]();
-    names[1]([held[2], held[0], held[1]]);
-  };
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild,
-      _el$3 = _el$2.nextSibling;
-    _el$2.$$click = rotate;
-    _$insert(_el$3, _$createComponent($1, {
-      get each() {
-        return names[0]();
-      },
-      children: (name, index) => (() => {
-        var _el$4 = _tmpl$2();
-        _$insert(_el$4, () => name + " at " + index());
-        return _el$4;
-      })()
-    }));
-    return _el$;
-  })();
+    const names = $0()(["a", "b", "c"]);
+    const rotate = () => {
+        const held = names[0]();
+        names[1]([held[2], held[0], held[1]]);
+    };
+    return (<div>
+        <span onclick={rotate}>rotate</span>
+        <div>
+          <$1 each={names[0]()}>
+            {(name, index) => (<span>{name + " at " + index()}</span>)}
+          </$1>
+        </div>
+      </div>);
 };
-_$delegateEvents(["click"]);

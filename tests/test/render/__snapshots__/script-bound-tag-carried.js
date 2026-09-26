@@ -12,26 +12,10 @@ async function Panel(props) {
     "39ox4ofrbdtgr:13:9",
     { params: [{ kind: "splice", value: props, bindings: [] }] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<i>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<section>`);\nexport default $0 => {\n  const Badge = p => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "panel " + p.n);\n    return _el$;\n  })();\n  return (() => {\n    var _el$2 = _tmpl$2();\n    _$insert(_el$2, _$createComponent(Badge, {\n      n: 0\n    }), null);\n    _$insert(_el$2, () => $0().body, null);\n    return _el$2;\n  })();\n};',
-      map: '{"version":3,"mappings":";;;;;eAYYA,EAAA;EACR,MAAMC,KAAK,GAAIC,CAAgB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAS,QAAQ,GAAGD,CAAC,CAACI,CAAC;IAAA,OAAAH,IAAA;EAAA,IAAK;EAC3D;IAAA,IAAAI,KAAA,GAAAC,OAAA;IAAAH,QAAA,CAAAE,KAAA,EAAAE,iBAAA,CAEKR,KAAK;MAACK,CAAC,EAAE;IAAC;IAAAD,QAAA,CAAAE,KAAA,QACVP,EAAA,EAAM,CAACU,IAAI;IAAA,OAAAH,KAAA;EAAA;AAGlB,CAAC","names":["$0","Badge","p","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2","_$createComponent","body"],"ignoreList":[],"sources":["script-bound-tag-carried.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 123],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [124, 174],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-      ],
-      exportAt: 270,
+      code: 'export default ($0) => {\n    const Badge = (p) => <i>{"panel " + p.n}</i>;\n    return (<section>\n        <Badge n={0}/>\n        {$0().body}\n      </section>);\n};',
+      map: '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC5D,OAAO,CACL,CAAC,OAAO,CACN;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACZ;QAAA,CAAC,IAAM,CAAC,IAAI,CACd;MAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -55,28 +39,10 @@ const scriptBoundTagCarried = cs.create(
             ],
           },
           {
-            code: 'import { template as _$template } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<u>`);\nexport default ($0, $1) => _$createComponent($0, {\n  get n() {\n    return $1[0]();\n  },\n  get children() {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "kid " + $1[0]());\n    return _el$;\n  }\n});',
-            map: '{"version":3,"mappings":";;;;eAwCe,CAAAA,EAAA,EAAAC,EAAA,KAAAC,iBAAA,CAACF,EAAK;EAAA,IAACG,CAACA,CAAA;IAAA,OAAEF,EAAK,CAAC,CAAC,CAAC,EAAE;EAAA;EAAA,IAAAG,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QACnB,MAAM,GAAGJ,EAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAI,IAAA;EAAA;AAAA,EACjB","names":["$0","$1","_$createComponent","n","children","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["script-bound-tag-carried.test.tsx"]}',
-            imports: [
-              {
-                from: "solid-js/web",
-                range: [0, 54],
-                bindings: [{ name: "template", local: "_$template" }],
-              },
-              {
-                from: "solid-js/web",
-                range: [55, 123],
-                bindings: [
-                  { name: "createComponent", local: "_$createComponent" },
-                ],
-              },
-              {
-                from: "solid-js/web",
-                range: [124, 174],
-                bindings: [{ name: "insert", local: "_$insert" }],
-              },
-            ],
-            exportAt: 220,
+            code: 'export default ($0, $1) => <$0 n={$1[0]()}>\n            <u>{"kid " + $1[0]()}</u>\n          </$0>;',
+            map: '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eAwCe,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CACxB;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,EAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAC7B;UAAA,EAAE,EAAK,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         bindings: ["count$39ox4ofrbdtgr$2", "Badge$39ox4ofrbdtgr$3"],
@@ -85,31 +51,10 @@ const scriptBoundTagCarried = cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<b>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<div><button>more`);\nexport default ($0, $1, $2) => {\n  const count = $0()(0);\n  const Badge = p => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "outer " + p.n, null);\n    _$insert(_el$, () => p.children, null);\n    return _el$;\n  })();\n  return (() => {\n    var _el$2 = _tmpl$2(),\n      _el$3 = _el$2.firstChild;\n    _$insert(_el$2, _$createComponent($2, {\n      get body() {\n        return $1(count, Badge);\n      }\n    }), _el$3);\n    _el$3.$$click = () => count[1](count[0]() + 1);\n    return _el$2;\n  })();\n};\n_$delegateEvents(["click"]);',
-    map: '{"version":3,"mappings":";;;;;;eA2BiC,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EAC/B,MAAMC,KAAK,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9B,MAAMI,KAAK,GAAIC,CAA2C;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAErD,QAAQ,GAAGD,CAAC,CAACI,CAAC;IAAAD,QAAA,CAAAF,IAAA,QACdD,CAAC,CAACK,QAAQ;IAAA,OAAAJ,IAAA;EAAA,IAEd;EAED;IAAA,IAAAK,KAAA,GAAAC,OAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,UAAA;IAAAN,QAAA,CAAAG,KAAA,EAAAI,iBAAA,CAEKb,EAAK;MAAA,IACJc,IAAIA,CAAA;QAAA,OACFf,EAAA,CAAAE,KAAA,EAAAC,KAAA,CAGF;MAAA;IAAA,IAAAS,KAAA;IAAAA,KAAA,CAAAI,OAAA,GAEe,MAAMd,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAA,OAAAQ,KAAA;EAAA;AAGrD,CAAC;AAAAO,gBAAA","names":["$0","$1","$2","count","Badge","p","_el$","_tmpl$","_$insert","n","children","_el$2","_tmpl$2","_el$3","firstChild","_$createComponent","body","$$click","_$delegateEvents"],"ignoreList":[],"sources":["script-bound-tag-carried.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 121],
-        bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [122, 190],
-        bindings: [{ name: "createComponent", local: "_$createComponent" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [191, 241],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 345,
+    code: 'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    const Badge = (p) => (<b>\n      {"outer " + p.n}\n      {p.children}\n    </b>);\n    return (<div>\n      <$2 body={$1(count, Badge)}/>\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n};',
+    map: '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eA2BiC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,CAAC,CAA2C,EAAE,EAAE,CAAC,CAC7D,CAAC,CAAC,CACA;MAAA,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,QAAQ,CACb;IAAA,EAAE,CAAC,CAAC,CACL,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,EAAK,CACJ,IAAI,CAAC,CACH,gBAGF,CAAC,EAEH;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("scriptBoundTagCarried", async (t) => {

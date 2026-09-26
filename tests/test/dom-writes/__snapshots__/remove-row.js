@@ -19,36 +19,10 @@ async function RemovableRows() {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { setAttribute as _$setAttribute } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<table><tbody>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<tr><td><button>`);\nexport default ($0, $1) => {\n  const ids = $0()([1, 2, 3, 4, 5]);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild;\n    _$insert(_el$2, _$createComponent($1, {\n      get each() {\n        return ids[0]();\n      },\n      children: id => (() => {\n        var _el$3 = _tmpl$2(),\n          _el$4 = _el$3.firstChild,\n          _el$5 = _el$4.firstChild;\n        _$setAttribute(_el$3, "id", "row-" + id);\n        _el$5.$$click = () => ids[1](ids[0]().filter(each => each !== id));\n        _$insert(_el$5, "remove " + id);\n        return _el$3;\n      })()\n    }));\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;;;eAYY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,GAAG,GAAGF,EAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;EACpD;IAAA,IAAAG,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,QAAA,CAAAF,KAAA,EAAAG,iBAAA,CAGOP,EAAG;MAAA,IAACQ,IAAIA,CAAA;QAAA,OAAEP,GAAG,CAAC,CAAC,CAAC,EAAE;MAAA;MAAAQ,QAAA,EACfC,EAAU;QAAA,IAAAC,KAAA,GAAAC,OAAA;UAAAC,KAAA,GAAAF,KAAA,CAAAN,UAAA;UAAAS,KAAA,GAAAD,KAAA,CAAAR,UAAA;QAAAU,cAAA,CAAAJ,KAAA,QACF,MAAM,GAAGD,EAAE;QAAAI,KAAA,CAAAE,OAAA,GAGJ,MACPf,GAAG,CAAC,CAAC,CAAC,CAACA,GAAG,CAAC,CAAC,CAAC,EAAE,CAACgB,MAAM,CAAET,IAAI,IAAKA,IAAI,KAAKE,EAAE,CAAC,CAC/C;QAAAJ,QAAA,CAAAQ,KAAA,EAEC,SAAS,GAAGJ,EAAE;QAAA,OAAAC,KAAA;MAAA;IAItB;IAAA,OAAAT,IAAA;EAAA;AAKX,CAAC;AAAAgB,gBAAA","names":["$0","$1","ids","_el$","_tmpl$","_el$2","firstChild","_$insert","_$createComponent","each","children","id","_el$3","_tmpl$2","_el$4","_el$5","_$setAttribute","$$click","filter","_$delegateEvents"],"ignoreList":[],"sources":["remove-row.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 184],
-          bindings: [{ name: "setAttribute", local: "_$setAttribute" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [185, 235],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [236, 304],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 418,
+      code: 'export default ($0, $1) => {\n    const ids = $0()([1, 2, 3, 4, 5]);\n    return (<table>\n        <tbody>\n          <$1 each={ids[0]()}>\n            {(id) => (<tr id={"row-" + id}>\n                <td>\n                  <button onclick={() => ids[1](ids[0]().filter((each) => each !== id))}>\n                    {"remove " + id}\n                  </button>\n                </td>\n              </tr>)}\n          </$1>\n        </tbody>\n      </table>);\n};',
+      map: '{"version":3,"file":"remove-row.test.jsx","sourceRoot":"","sources":["remove-row.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,GAAG,GAAG,IAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACrD,OAAO,CACL,CAAC,KAAK,CACJ;QAAA,CAAC,KAAK,CACJ;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAClB;YAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CACf,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,CAClB;gBAAA,CAAC,EAAE,CACD;kBAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE,CACZ,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,MAAM,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,IAAI,KAAK,EAAE,CAAC,CAC/C,CAAC,CAED;oBAAA,CAAC,SAAS,GAAG,EAAE,CACjB;kBAAA,EAAE,MAAM,CACV;gBAAA,EAAE,EAAE,CACN;cAAA,EAAE,EAAE,CAAC,CACN,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,KAAK,CACT;MAAA,EAAE,KAAK,CAAC,CACT,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

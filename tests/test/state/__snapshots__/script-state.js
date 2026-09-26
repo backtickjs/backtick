@@ -12,8 +12,8 @@ async function ScriptRows() {
     "385ryajbwsmy3:11:16",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
-      code: "export default $0 => label => {\n  return {\n    label: $0()(label)\n  };\n};",
-      map: '{"version":3,"mappings":"eAUmBA,EAAA,IAACC,KAAa,IAAI;EACjC,OAAO;IAAEA,KAAK,EAAED,EAAA,EAAa,CAACC,KAAK;EAAC,CAAE;AACxC,CAAC","names":["$0","label"],"ignoreList":[],"sources":["script-state.test.tsx"]}',
+      code: "export default ($0) => (label) => {\n    return { label: $0()(label) };\n};",
+      map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAUmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
       imports: [],
       exportAt: 0,
     },
@@ -24,7 +24,7 @@ async function ScriptRows() {
       { params: [] },
       {
         code: 'export default () => "font-size: 16px";',
-        map: '{"version":3,"mappings":"eAgBgB,uBAAiB","names":[],"ignoreList":[],"sources":["script-state.test.tsx"]}',
+        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAgBgB,MAAA,iBAAiB"}',
         imports: [],
         exportAt: 0,
       },
@@ -33,8 +33,8 @@ async function ScriptRows() {
       "385ryajbwsmy3:18:15",
       { params: [{ kind: "splice", value: build, bindings: [] }] },
       {
-        code: 'export default $0 => () => {\n  const row = $0()("one");\n  row.label[1](row.label[0]() + " !!!");\n};',
-        map: '{"version":3,"mappings":"eAiBkBA,EAAA,UAAK;EACf,MAAMC,GAAG,GAAGD,EAAA,EAAM,CAAC,KAAK,CAAC;EACzBC,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,CAACD,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC;AACvC,CAAC","names":["$0","row","label"],"ignoreList":[],"sources":["script-state.test.tsx"]}',
+        code: 'export default ($0) => () => {\n    const row = $0()("one");\n    row.label[1](row.label[0]() + " !!!");\n};',
+        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAiBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
         imports: [],
         exportAt: 0,
       },
@@ -43,8 +43,8 @@ async function ScriptRows() {
       "385ryajbwsmy3:23:7",
       { params: [{ kind: "splice", value: build, bindings: [] }] },
       {
-        code: 'export default $0 => $0()("one").label[0]();',
-        map: '{"version":3,"mappings":"eAsBUA,EAAA,IAAAA,EAAA,EAAM,CAAC,KAAK,CAAC,CAACC,KAAK,CAAC,CAAC,CAAC,EAAE","names":["$0","label"],"ignoreList":[],"sources":["script-state.test.tsx"]}',
+        code: 'export default ($0) => $0()("one").label[0]();',
+        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAsBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
         imports: [],
         exportAt: 0,
       },

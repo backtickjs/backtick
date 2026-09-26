@@ -7,8 +7,8 @@ const beep = cs.create(
   "1dqhax1do6u08:8:27",
   { params: [] },
   {
-    code: "export default () => {\n  let n = 0;\n  n = 1;\n};",
-    map: '{"version":3,"mappings":"eAO8B;EAC5B,IAAIA,CAAC,GAAG,CAAC;EACTA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["handler-object.test.tsx"]}',
+    code: "export default () => {\n    let n = 0;\n    n = 1;\n};",
+    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
     imports: [],
     exportAt: 0,
   },
@@ -17,8 +17,8 @@ const onTap = cs.create(
   "1dqhax1do6u08:13:44",
   { params: [{ kind: "splice", value: beep, bindings: [] }] },
   {
-    code: "export default $0 => id => {\n  $0();\n};",
-    map: '{"version":3,"mappings":"eAY+CA,EAAA,IAACC,EAAU,IAAI;EAC5DD,EAAA,EAAK;AACP,CAAC","names":["$0","id"],"ignoreList":[],"sources":["handler-object.test.tsx"]}',
+    code: "export default ($0) => (id) => {\n    $0();\n};",
+    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
     imports: [],
     exportAt: 0,
   },
@@ -31,8 +31,8 @@ it("handlerObject", async (t) => {
       "1dqhax1do6u08:21:4",
       { params: [{ kind: "splice", value: onTap, bindings: [] }] },
       {
-        code: "export default $0 => {\n  const handlers = {\n    tap: $0(),\n    hold: $0()\n  };\n  return handlers;\n};",
-        map: '{"version":3,"mappings":"eAoBOA,EAAA;EACD,MAAMC,QAAQ,GAAG;IACfC,GAAG,EAAEF,EAAA,EAAM;IACXG,IAAI,EAAEH,EAAA;GACP;EACD,OAAOC,QAAQ;AACjB,CAAC","names":["$0","handlers","tap","hold"],"ignoreList":[],"sources":["handler-object.test.tsx"]}',
+        code: "export default ($0) => {\n    const handlers = {\n        tap: $0(),\n        hold: $0(),\n    };\n    return handlers;\n};",
+        map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
         imports: [],
         exportAt: 0,
       },

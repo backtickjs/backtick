@@ -1,22 +1,17 @@
 // 15:5
-(                                                 → 15:8 (
-$0                                                → 15:8 ()…
-,                                                 → 15:8 ()…
-$1                                                → 15:8 ()…
-) => () =>                                        → 15:8 ()…
-{                                                 → 15:13  {…
+($0, $1) =>                                       → 15:8 ()…
+()                                                → 15:8 () 
+=>                                                → 15:11 =>
+ {                                                → 15:13  {
 const                                             → 16:7 const 
 held                                              → 16:13 held
  =                                                → 16:17  = 
-$0                                                → 16:20 $state("waiting");…
-()                                                → 16:20 $state("waiting");…
+$0()                                              → 16:20 $state("waiting");…
 (                                                 → 16:26 (
 "waiting"                                         → 16:27 "waiting"
 )                                                 → 16:36 )
 ;                                                 → 16:37 ;
-$1                                                → 18:7 $window…
-()                                                → 18:7 $window…
-.                                                 → 18:14 …
+$1()                                              → 18:7 $window…
 fetch                                             → 19:10 fetch
 (                                                 → 19:15 (
 "/cases/built-ins/Math/trunc/Math.trunc_Success"  → 19:16 "/cases/built-ins/Math/trunc/Math.trunc_Success"
@@ -24,8 +19,7 @@ fetch                                             → 19:10 fetch
 {                                                 → 19:66 {
 signal                                            → 20:11 signal
 :                                                 → 20:17 : 
-$1                                                → 20:19 $window.AbortSignal.timeout(3000),…
-()                                                → 20:19 $window.AbortSignal.timeout(3000),…
+$1()                                              → 20:19 $window.AbortSignal.timeout(3000),…
 .                                                 → 20:26 .
 AbortSignal                                       → 20:27 AbortSignal
 .                                                 → 20:38 .
@@ -33,13 +27,15 @@ timeout                                           → 20:39 timeout
 (                                                 → 20:46 (
 3000                                              → 20:47 3000
 )                                                 → 20:51 )
+,                                                 → 20:52 ,
 )                                                 → 21:10 )
-.                                                 → 21:11 …
 then                                              → 22:10 then
 (                                                 → 22:14 (
+(                                                 → 22:15 (
 response                                          → 22:16 response
- =>                                               → 22:34 )…
-{                                                 → 22:38  {…
+)                                                 → 22:34 ) 
+=>                                                → 22:36 =>
+ {                                                → 22:38  {
 if (                                              → 23:11 if (
 response                                          → 23:15 response
 .                                                 → 23:23 .
@@ -64,12 +60,13 @@ json                                              → 26:27 json
 ;                                                 → 26:33 ;
 }                                                 → 27:9 }
 )                                                 → 27:10 )
-.                                                 → 27:11 …
 then                                              → 28:10 then
 (                                                 → 28:14 (
+(                                                 → 28:15 (
 value                                             → 28:16 value
- =>                                               → 28:30 )…
-{                                                 → 28:34  {…
+)                                                 → 28:30 ) 
+=>                                                → 28:32 =>
+ {                                                → 28:34  {
 held                                              → 29:11 held
 .                                                 → 29:15 .
 set                                               → 29:16 set
@@ -77,20 +74,21 @@ set                                               → 29:16 set
 value                                             → 29:20 value
  ===                                              → 29:25  === 
 null                                              → 29:30 null
- ?                                                → 29:34  ? 
+?                                                 → 29:35 ?
 "null"                                            → 29:37 "null"
- :                                                → 29:43  : 
+:                                                 → 29:44 :
 "a value"                                         → 29:46 "a value"
 )                                                 → 29:55 )
 ;                                                 → 29:56 ;
 }                                                 → 30:9 }
 )                                                 → 30:10 )
-.                                                 → 30:11 …
 catch                                             → 31:10 catch
 (                                                 → 31:15 (
+(                                                 → 31:16 (
 error                                             → 31:17 error
- =>                                               → 31:31 )…
-{                                                 → 31:35  {…
+)                                                 → 31:31 ) 
+=>                                                → 31:33 =>
+ {                                                → 31:35  {
 held                                              → 32:11 held
 .                                                 → 32:15 .
 set                                               → 32:16 set
@@ -106,9 +104,7 @@ error                                             → 32:41 error
 }                                                 → 33:9 }
 )                                                 → 33:10 )
 ;                                                 → 33:11 ;
-$1                                                → 35:7 $window…
-()                                                → 35:7 $window…
-.                                                 → 35:14 …
+$1()                                              → 35:7 $window…
 fetch                                             → 36:10 fetch
 (                                                 → 36:15 (
 "/cases"                                          → 36:16 "/cases"
@@ -120,11 +116,11 @@ method                                            → 37:11 method
 ,                                                 → 37:25 ,
 headers                                           → 38:11 headers
 :                                                 → 38:18 : 
-{                                                 → 38:20 {
+{                                                 → 38:20 { 
 "content-type"                                    → 38:22 "content-type"
 :                                                 → 38:36 : 
 "application/json"                                → 38:38 "application/json"
-}                                                 → 38:56  },…
+ }                                                → 38:56  }
 ,                                                 → 38:58 ,
 body                                              → 39:11 body
 :                                                 → 39:15 : 
@@ -132,33 +128,36 @@ JSON                                              → 39:17 JSON
 .                                                 → 39:21 .
 stringify                                         → 39:22 stringify
 (                                                 → 39:31 (
-{                                                 → 39:32 {
+{                                                 → 39:32 { 
 name                                              → 39:34 name
 :                                                 → 39:38 : 
 "Math.trunc"                                      → 39:40 "Math.trunc"
-,                                                 → 39:52 ,
+,                                                 → 39:52 , 
 passed                                            → 39:54 passed
 :                                                 → 39:60 : 
 true                                              → 39:62 true
-}                                                 → 39:66  }),…
+ }                                                → 39:66  }
 )                                                 → 39:68 )
+,                                                 → 39:69 ,
 )                                                 → 40:10 )
-.                                                 → 40:11 …
 then                                              → 41:10 then
 (                                                 → 41:14 (
+(                                                 → 41:15 (
 response                                          → 41:16 response
- =>                                               → 41:34 )…
+)                                                 → 41:34 ) 
+=>                                                → 41:36 =>
 response                                          → 41:39 response
 .                                                 → 41:47 .
 text                                              → 41:48 text
 ()                                                → 41:52 ()
 )                                                 → 41:54 )
-.                                                 → 41:55 …
 then                                              → 42:10 then
 (                                                 → 42:14 (
+(                                                 → 43:11 (
 text                                              → 43:12 text
- =>                                               → 43:24 )…
-{                                                 → 43:28  {…
+)                                                 → 43:24 ) 
+=>                                                → 43:26 =>
+ {                                                → 43:28  {
 held                                              → 44:13 held
 .                                                 → 44:17 .
 set                                               → 44:18 set
@@ -168,9 +167,11 @@ text                                              → 44:22 text
 ;                                                 → 44:27 ;
 }                                                 → 45:11 }
 ,                                                 → 45:12 ,…
+(                                                 → 46:11 (
 error                                             → 46:12 error
- =>                                               → 46:26 )…
-{                                                 → 46:30  {…
+)                                                 → 46:26 ) 
+=>                                                → 46:28 =>
+ {                                                → 46:30  {
 held                                              → 47:13 held
 .                                                 → 47:17 .
 set                                               → 47:18 set

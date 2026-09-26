@@ -13,26 +13,10 @@ describe("ref", () => {
         "3o832a07bjdmm:13:6",
         { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { use as _$use } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><input aria-label=name><button>edit`);\nexport default $0 => {\n  const field = $0()(null);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _$use(element => field[1](element), _el$2);\n    _el$3.$$click = () => field[0]()?.focus();\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAYSA,EAAA;EACD,MAAMC,KAAK,GAAGD,EAAA,EAAa,CAA0B,IAAI,CAAC;EAC1D;IAAA,IAAAE,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAC,KAAA,CAEmCC,OAAO,IAAKR,KAAK,CAAC,CAAC,CAAC,CAACQ,OAAO,CAAC,EAAAL,KAAA;IAAAE,KAAA,CAAAI,OAAA,GAC3C,MAAMT,KAAK,CAAC,CAAC,CAAC,EAAE,EAAEU,KAAK,EAAE;IAAA,OAAAT,IAAA;EAAA;AAGhD,CAAC;AAAAU,gBAAA","names":["$0","field","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$use","element","$$click","focus","_$delegateEvents"],"ignoreList":[],"sources":["ref.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 166],
-              bindings: [{ name: "use", local: "_$use" }],
-            },
-          ],
-          exportAt: 249,
+          code: 'export default ($0) => {\n    const field = $0()(null);\n    return (<div>\n            <input aria-label="name" ref={(element) => field[1](element)}/>\n            <button onclick={() => field[0]()?.focus()}>edit</button>\n          </div>);\n};',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAYS;IACD,MAAM,KAAK,GAAG,IAAa,CAA0B,IAAI,CAAC,CAAC;IAC3D,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,EAC7D;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,EAAE,KAAK,EAAE,CAAC,CAAC,IAAI,EAAE,MAAM,CAC1D;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -45,21 +29,10 @@ describe("ref", () => {
         "3o832a07bjdmm:29:6",
         { params: [{ kind: "splice", value: onMount, bindings: [] }] },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { use as _$use } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<input aria-label=name>`);\nexport default $0 => {\n  return (() => {\n    var _el$ = _tmpl$();\n    _$use(element => $0()(() => element.focus()), _el$);\n    return _el$;\n  })();\n};',
-          map: '{"version":3,"mappings":";;;eA4BSA,EAAA;EACD;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,KAAA,CAGUC,OAAO,IAAKJ,EAAA,EAAQ,CAAC,MAAMI,OAAO,CAACC,KAAK,EAAE,CAAC,EAAAJ,IAAA;IAAA,OAAAA,IAAA;EAAA;AAGvD,CAAC","names":["$0","_el$","_tmpl$","_$use","element","focus"],"ignoreList":[],"sources":["ref.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 99],
-              bindings: [{ name: "use", local: "_$use" }],
-            },
-          ],
-          exportAt: 165,
+          code: 'export default ($0) => {\n    return (<input aria-label="name" ref={(element) => $0()(() => element.focus())}/>);\n};',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA4BS;IACD,OAAO,CACL,CAAC,KAAK,CACJ,UAAU,CAAC,MAAM,CACjB,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,OAAO,CAAC,KAAK,EAAE,CAAC,CAAC,EAClD,CACH,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -71,21 +44,10 @@ describe("ref", () => {
         "3o832a07bjdmm:42:17",
         { params: [] },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { use as _$use } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<input aria-label=name>`);\nexport default () => (() => {\n  var _el$ = _tmpl$();\n  _$use(() => {}, _el$);\n  return _el$;\n})();',
-          map: '{"version":3,"mappings":";;;eAyCoB;EAAA,IAAAA,IAAA,GAAAC,MAAA;EAAAC,KAAA,CAA8B,MAAK,CAAE,CAAC,EAAAF,IAAA;EAAA,OAAAA,IAAA;AAAA,IAAI","names":["_el$","_tmpl$","_$use"],"ignoreList":[],"sources":["ref.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 99],
-              bindings: [{ name: "use", local: "_$use" }],
-            },
-          ],
-          exportAt: 165,
+          code: 'export default () => <input aria-label="name" ref={() => { }}/>;',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAyCoB,MAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -117,38 +79,10 @@ describe("ref", () => {
             ],
           },
           {
-            code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { use as _$use } from "solid-js/web";\nimport { memo as _$memo } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<p>shown`);\nexport default ($0, $1) => {\n  const shown = $0()(true);\n  const n = $0()(0);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild;\n    _el$2.$$click = () => n[1](n[0]() + 1);\n    _$insert(_el$2, () => "n " + n[0]());\n    _$insert(_el$, (() => {\n      var _c$ = _$memo(() => !!shown[0]());\n      return () => _c$() ? (() => {\n        var _el$3 = _tmpl$2();\n        _$use(() => $1().console.log(n[0]()), _el$3);\n        return _el$3;\n      })() : null;\n    })(), null);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-            map: '{"version":3,"mappings":";;;;;;;eA+DW,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAGF,EAAA,EAAa,CAAC,IAAI,CAAC;EACjC,MAAMG,CAAC,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B;IAAA,IAAAI,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAD,KAAA,CAAAE,OAAA,GAEqB,MAAML,CAAC,CAAC,CAAC,CAAC,CAACA,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAM,QAAA,CAAAH,KAAA,QACpC,IAAI,GAAGH,CAAC,CAAC,CAAC,CAAC,EAAE;IAAAM,QAAA,CAAAL,IAAA;MAAA,IAAAM,GAAA,GAAAC,MAAA,SAEfT,KAAK,CAAC,CAAC,CAAC,EAAE;MAAA,aAAVQ,GAAA;QAAA,IAAAE,KAAA,GAAAC,OAAA;QAAAC,KAAA,CACS,MAAMb,EAAA,EAAO,CAACc,OAAO,CAACC,GAAG,CAACb,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAAS,KAAA;QAAA,OAAAA,KAAA;MAAA,OACvC,IAAI;IAAA;IAAA,OAAAR,IAAA;EAAA;AAGd,CAAC;AAAAa,gBAAA","names":["$0","$1","shown","n","_el$","_tmpl$","_el$2","firstChild","$$click","_$insert","_c$","_$memo","_el$3","_tmpl$2","_$use","console","log","_$delegateEvents"],"ignoreList":[],"sources":["ref.test.tsx"]}',
-            imports: [
-              {
-                from: "solid-js/web",
-                range: [0, 54],
-                bindings: [{ name: "template", local: "_$template" }],
-              },
-              {
-                from: "solid-js/web",
-                range: [55, 121],
-                bindings: [
-                  { name: "delegateEvents", local: "_$delegateEvents" },
-                ],
-              },
-              {
-                from: "solid-js/web",
-                range: [122, 166],
-                bindings: [{ name: "use", local: "_$use" }],
-              },
-              {
-                from: "solid-js/web",
-                range: [167, 213],
-                bindings: [{ name: "memo", local: "_$memo" }],
-              },
-              {
-                from: "solid-js/web",
-                range: [214, 264],
-                bindings: [{ name: "insert", local: "_$insert" }],
-              },
-            ],
-            exportAt: 369,
+            code: 'export default ($0, $1) => {\n    const shown = $0()(true);\n    const n = $0()(0);\n    return (<div>\n              <button onclick={() => n[1](n[0]() + 1)}>\n                {"n " + n[0]()}\n              </button>\n              {shown[0]() ? (<p ref={() => $1().console.log(n[0]())}>shown</p>) : null}\n            </div>);\n};',
+            map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA+DW;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;cAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CACtC;gBAAA,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAChB;cAAA,EAAE,MAAM,CACR;cAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACZ,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CACrD,CAAC,CAAC,CAAC,IAAI,CACV;YAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       );

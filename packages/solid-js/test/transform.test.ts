@@ -5,11 +5,6 @@ import { join } from "node:path";
 import { after, describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
 import { emitScripts } from "@backtickjs/compiler";
-import {
-  eachMapping,
-  originalPositionFor,
-  TraceMap,
-} from "@jridgewell/trace-mapping";
 import { createSignal } from "solid-js";
 import * as web from "solid-js/web";
 import ts from "typescript";
@@ -17,7 +12,9 @@ import { transform } from "../dist/transform.js";
 
 // Each script in `host`, compiled by backtick's compiler and then Solid's.
 function compile(host: string) {
-  return emitScripts(ts, "host.tsx", host, transform);
+  return emitScripts(ts, "host.tsx", host).map((script) =>
+    transform(script.code, "host.tsx"),
+  );
 }
 
 // Inside the package, so a module's imports resolve to the Solid this test
@@ -72,47 +69,5 @@ describe("transform", () => {
     const listEntry = await entry(script!.code);
     const container = draw(() => listEntry(web.For));
     assert.equal(container.innerHTML, "<ul><li>a</li><li>b</li></ul>");
-  });
-
-  it("maps back into the host file, and carries none of it", () => {
-    const [script] = compile(counter);
-    const map = JSON.parse(script!.map);
-    assert.equal(map.version, 3);
-    assert.deepEqual(map.sources, ["host.tsx"]);
-    assert.equal(map.sourcesContent, undefined);
-
-    // Every segment points at a position the host file has.
-    const hostLines = counter.split("\n");
-    const traced = new TraceMap(map);
-    let segments = 0;
-    eachMapping(traced, (mapping) => {
-      if (mapping.originalLine === null) {
-        return;
-      }
-      segments++;
-      const line = hostLines[mapping.originalLine - 1];
-      assert.ok(line !== undefined, `line ${mapping.originalLine} is in host`);
-      assert.ok(
-        mapping.originalColumn <= line.length,
-        `column ${mapping.originalColumn} is on line ${mapping.originalLine}`,
-      );
-    });
-    assert.ok(segments > 0);
-
-    // What the script wrote maps to where it wrote it, through both compilers.
-    const codeLines = script!.code.split("\n");
-    const at = (needle: string) => {
-      const line = codeLines.findIndex((text) => text.includes(needle));
-      const position = originalPositionFor(traced, {
-        line: line + 1,
-        column: codeLines[line]!.indexOf(needle),
-      });
-      return hostLines[position.line! - 1]!.slice(position.column!);
-    };
-    assert.match(
-      at("signal[1](signal[0]() + 1)"),
-      /^signal\[1\]\(signal\[0\]\(\) \+ 1\)/,
-    );
-    assert.match(at("$0()(0)"), /^\$createSignal\(0\)/);
   });
 });

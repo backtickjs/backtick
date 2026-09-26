@@ -12,21 +12,10 @@ const listed = cs.create(
   "3pjkiwnta5gua:11:15",
   { params: [] },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>a sentence across lines`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<span> `);\nexport default () => name => [_tmpl$(), (() => {\n  var _el$2 = _tmpl$2(),\n    _el$3 = _el$2.firstChild;\n  _$insert(_el$2, name, _el$3);\n  _$insert(_el$2, name, null);\n  return _el$2;\n})()];',
-    map: '{"version":3,"mappings":";;;;eAUkB,MAACA,IAAY,KAAAC,MAAA;EAAA,IAAAC,KAAA,GAAAC,OAAA;IAAAC,KAAA,GAAAF,KAAA,CAAAG,UAAA;EAAAC,QAAA,CAAAJ,KAAA,EAIxBF,IAAI,EAAAI,KAAA;EAAAE,QAAA,CAAAJ,KAAA,EAAGF,IAAI;EAAA,OAAAE,KAAA;AAAA,KAGjB","names":["name","_tmpl$","_el$2","_tmpl$2","_el$3","firstChild","_$insert"],"ignoreList":[],"sources":["script-fragment.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 105],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 225,
+    code: "export default () => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>);",
+    map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("scriptFragment", async (t) => {
@@ -38,8 +27,8 @@ it("scriptFragment", async (t) => {
         "3pjkiwnta5gua:21:48",
         { params: [{ kind: "splice", value: listed, bindings: [] }] },
         {
-          code: 'export default $0 => $0()("x");',
-          map: '{"version":3,"mappings":"eAoBmDA,EAAA,IAAAA,EAAA,EAAO,CAAC,GAAG,CAAC","names":["$0"],"ignoreList":[],"sources":["script-fragment.test.tsx"]}',
+          code: 'export default ($0) => $0()("x");',
+          map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
           imports: [],
           exportAt: 0,
         },

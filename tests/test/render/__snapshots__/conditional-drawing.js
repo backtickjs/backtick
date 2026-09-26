@@ -36,21 +36,10 @@ async function Held({ again }) {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { memo as _$memo } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<em>shown`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<i>waiting`);\nexport default ($0, $1, $2) => {\n  const shown = $0()(false);\n  const started = $1().setTimeout(() => {\n    if ($2()()) {\n      shown[1](true);\n    }\n  }, 0);\n  return _$memo(() => _$memo(() => !!shown[0]())() ? _tmpl$() : _tmpl$2());\n};',
-      map: '{"version":3,"mappings":";;;;eA+BY,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACR,MAAMC,KAAK,GAAGH,EAAA,EAAa,CAAC,KAAK,CAAC;EAElC,MAAMI,OAAO,GAAGH,EAAA,EAAO,CAACI,UAAU,CAAC,MAAK;IACtC,IAAIH,EAAA,EAAM,EAAE,EAAE;MACZC,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;IAChB;EACF,CAAC,EAAE,CAAC,CAAC;EAEL,OAAAG,MAAA,OAAUA,MAAA,SAAAH,KAAK,CAAC,CAAC,CAAC,EAAE,MAAAI,MAAA,KAAAC,OAAA,EAAkC;AACxD,CAAC","names":["$0","$1","$2","shown","started","setTimeout","_$memo","_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["conditional-drawing.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 101],
-          bindings: [{ name: "memo", local: "_$memo" }],
-        },
-      ],
-      exportAt: 204,
+      code: "export default ($0, $1, $2) => {\n    const shown = $0()(false);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            shown[1](true);\n        }\n    }, 0);\n    return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;\n};",
+      map: '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["conditional-drawing.test.tsx"],"names":[],"mappings":"eA+BY;IACR,MAAM,KAAK,GAAG,IAAa,CAAC,KAAK,CAAC,CAAC;IAEnC,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAM,EAAE,EAAE,CAAC;YACb,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QACjB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,KAAK,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC;AAC7D,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -63,26 +52,10 @@ const conditionalDrawing = cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><span></span><section>`);\nexport default ($0, $1) => {\n  const builds = $0()(0);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _$insert(_el$2, () => "builds " + builds[0]());\n    _$insert(_el$3, _$createComponent($1, {\n      again: () => {\n        builds[1](builds[0]() + 1);\n        return builds[0]() < 5;\n      }\n    }));\n    return _el$;\n  })();\n};',
-    map: '{"version":3,"mappings":";;;;eA4C8B,CAAAA,EAAA,EAAAC,EAAA;EAC5B,MAAMC,MAAM,GAAGF,EAAA,EAAa,CAAC,CAAC,CAAC;EAE/B;IAAA,IAAAG,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAC,QAAA,CAAAJ,KAAA,QAEW,SAAS,GAAGH,MAAM,CAAC,CAAC,CAAC,EAAE;IAAAO,QAAA,CAAAF,KAAA,EAAAG,iBAAA,CAE3BT,EAAI;MACHU,KAAK,EAAEA,CAAA,KAAK;QACVT,MAAM,CAAC,CAAC,CAAC,CAACA,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QAC1B,OAAOA,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC;MACxB;IAAC;IAAA,OAAAC,IAAA;EAAA;AAKX,CAAC","names":["$0","$1","builds","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$insert","_$createComponent","again"],"ignoreList":[],"sources":["conditional-drawing.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 123],
-        bindings: [{ name: "createComponent", local: "_$createComponent" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [124, 174],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 244,
+    code: 'export default ($0, $1) => {\n    const builds = $0()(0);\n    return (<div>\n      <span>{"builds " + builds[0]()}</span>\n      <section>\n        <$1 again={() => {\n            builds[1](builds[0]() + 1);\n            return builds[0]() < 5;\n        }}/>\n      </section>\n    </div>);\n};',
+    map: '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["conditional-drawing.test.tsx"],"names":[],"mappings":"eA4C8B;IAC5B,MAAM,MAAM,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAEhC,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,SAAS,GAAG,MAAM,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACrC;MAAA,CAAC,OAAO,CACN;QAAA,CAAC,EAAI,CACH,KAAK,CAAC,CAAC,GAAG,EAAE;YACV,MAAM,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YAC3B,OAAO,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACzB,CAAC,CAAC,EAEN;MAAA,EAAE,OAAO,CACX;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 describe("a component whose drawing is a conditional", () => {

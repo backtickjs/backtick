@@ -16,8 +16,8 @@ const SharedCounter = async ({ size }) =>
       "sm4cgpukv0uc:17:11",
       { params: [{ kind: "splice", value: size, bindings: [] }] },
       {
-        code: 'export default $0 => "font-size: " + $0()[0]() + "px";',
-        map: '{"version":3,"mappings":"eAgBcA,EAAA,iBAAa,GAAGA,EAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI","names":["$0"],"ignoreList":[],"sources":["local-state-prop.test.tsx"]}',
+        code: 'export default ($0) => "font-size: " + $0()[0]() + "px";',
+        map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAgBc,QAAA,aAAa,GAAG,IAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI"}',
         imports: [],
         exportAt: 0,
       },
@@ -26,8 +26,8 @@ const SharedCounter = async ({ size }) =>
       "sm4cgpukv0uc:18:13",
       { params: [{ kind: "splice", value: size, bindings: [] }] },
       {
-        code: "export default $0 => () => {\n  $0()[1]($0()[0]() + 1);\n};",
-        map: '{"version":3,"mappings":"eAiBgBA,EAAA,UAAK;EACfA,EAAA,EAAK,CAAC,CAAC,CAAC,CAACA,EAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;AAC1B,CAAC","names":["$0"],"ignoreList":[],"sources":["local-state-prop.test.tsx"]}',
+        code: "export default ($0) => () => {\n    $0()[1]($0()[0]() + 1);\n};",
+        map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAiBgB,QAAA,GAAG,EAAE;IACf,IAAK,CAAC,CAAC,CAAC,CAAC,IAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
         imports: [],
         exportAt: 0,
       },
@@ -44,26 +44,10 @@ async function SharingPanel() {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`);\nexport default ($0, $1) => {\n  const size = $0()(16);\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, _$createComponent($1, {\n      size: size\n    }), null);\n    _$insert(_el$, _$createComponent($1, {\n      size: size\n    }), null);\n    return _el$;\n  })();\n};',
-      map: '{"version":3,"mappings":";;;;eA0BY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,IAAI,GAAGF,EAAA,EAAa,CAAC,EAAE,CAAC;EAC9B;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CAEKL,EAAa;MAACC,IAAI,EAAEA;IAAI;IAAAG,QAAA,CAAAF,IAAA,EAAAG,iBAAA,CACxBL,EAAa;MAACC,IAAI,EAAEA;IAAI;IAAA,OAAAC,IAAA;EAAA;AAG/B,CAAC","names":["$0","$1","size","_el$","_tmpl$","_$insert","_$createComponent"],"ignoreList":[],"sources":["local-state-prop.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 105],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [106, 174],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 222,
+      code: "export default ($0, $1) => {\n    const size = $0()(16);\n    return (<div>\n        <$1 size={size}/>\n        <$1 size={size}/>\n      </div>);\n};",
+      map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eA0BY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC1B;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC5B;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

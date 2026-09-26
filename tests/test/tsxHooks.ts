@@ -4,10 +4,10 @@ import { dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { transpile } from "@backtickjs/compiler";
 import ts from "typescript";
-import { transform } from "@backtickjs/solid-js/transform";
 
 // A `.tsx` test file, compiled the way a project's own build compiles one: its
-// JSX and `cs` scripts through the Backtick compiler, drawn with Solid. Node strips types from `.ts` itself, and runs no `.tsx` at all.
+// JSX and `cs` scripts through the Backtick compiler; Solid compiles each
+// bundle. Node strips types from `.ts` itself, and runs no `.tsx` at all.
 //
 // Diagnostics are left to the typecheck suite, as a build would leave them to
 // the editor: a test file that has some still runs.
@@ -29,8 +29,6 @@ export const load: LoadHook = async (url, context, nextLoad) => {
       fileName,
       sourceText,
       "@backtickjs/solid-js",
-      undefined,
-      transform,
     ),
     shortCircuit: true,
   };

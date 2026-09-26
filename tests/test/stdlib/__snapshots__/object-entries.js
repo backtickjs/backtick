@@ -11,8 +11,8 @@ it("objectEntries", async (t) => {
       "txb5yf5uyd2o:11:4",
       { params: [] },
       {
-        code: 'export default () => {\n  const held = {\n    n: 1,\n    q: "ada"\n  };\n  const written = Object.fromEntries(Object.entries(held).map(pair => [pair[0], JSON.stringify(pair[1])]));\n  return written.n + " " + written.q;\n};',
-        map: '{"version":3,"mappings":"eAUO;EACD,MAAMA,IAAI,GAAG;IAAEC,CAAC,EAAE,CAAC;IAAEC,CAAC,EAAE;EAAK,CAAE;EAC/B,MAAMC,OAAO,GAAGC,MAAM,CAACC,WAAW,CAChCD,MAAM,CAACE,OAAO,CAACN,IAAI,CAAC,CAACO,GAAG,CAAEC,IAAI,IAAK,CAACA,IAAI,CAAC,CAAC,CAAC,EAAEC,IAAI,CAACC,SAAS,CAACF,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACvE;EACD,OAAOL,OAAO,CAACF,CAAC,GAAG,GAAG,GAAGE,OAAO,CAACD,CAAC;AACpC,CAAC","names":["held","n","q","written","Object","fromEntries","entries","map","pair","JSON","stringify"],"ignoreList":[],"sources":["object-entries.test.tsx"]}',
+        code: 'export default () => {\n    const held = { n: 1, q: "ada" };\n    const written = Object.fromEntries(Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]));\n    return written.n + " " + written.q;\n};',
+        map: '{"version":3,"file":"object-entries.test.jsx","sourceRoot":"","sources":["object-entries.test.tsx"],"names":[],"mappings":"eAUO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC;IAChC,MAAM,OAAO,GAAG,MAAM,CAAC,WAAW,CAChC,MAAM,CAAC,OAAO,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACvE,CAAC;IACF,OAAO,OAAO,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC,CAAC,CAAC;AACrC,CAAC"}',
         imports: [],
         exportAt: 0,
       },

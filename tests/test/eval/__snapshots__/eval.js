@@ -14,26 +14,10 @@ async function Items() {
     "1jbjln2sp128k:13:9",
     { params: [{ kind: "tag", value: For }] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>`);\nexport default $0 => _$createComponent($0, {\n  each: [1, 2, 3],\n  children: n => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, "item " + n);\n    return _el$;\n  })()\n});',
-      map: '{"version":3,"mappings":";;;;eAYYA,EAAA,IAAAC,iBAAA,CAACD,EAAG;EAACE,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;EAAAC,QAAA,EAC1BC,CAAS;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,EAAY,OAAO,GAAGD,CAAC;IAAA,OAAAC,IAAA;EAAA;AAAQ,EACtC","names":["$0","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["eval.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 105],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [106, 174],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 223,
+      code: 'export default ($0) => <$0 each={[1, 2, 3]}>\n    {(n) => <span>{"item " + n}</span>}\n  </$0>;',
+      map: '{"version":3,"file":"eval.test.jsx","sourceRoot":"","sources":["eval.test.tsx"],"names":[],"mappings":"eAYY,QAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAC7B;IAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,OAAO,GAAG,CAAC,CAAC,EAAE,IAAI,CAAC,CAC5C;EAAA,EAAE,EAAG,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }
@@ -48,21 +32,10 @@ const evaluated = cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><b>`);\nexport default ($0, $1) => (() => {\n  var _el$ = _tmpl$(),\n    _el$2 = _el$.firstChild;\n  _$insert(_el$, () => eval($0()), _el$2);\n  _$insert(_el$2, () => eval($1()) + 1);\n  return _el$;\n})();',
-    map: '{"version":3,"mappings":";;;eAoBqB,CAAAA,EAAA,EAAAC,EAAA;EAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;EAAAC,QAAA,CAAAJ,IAAA,QAClBK,IAAI,CAACP,EAAA,EAAM,CAAC,EAAAI,KAAA;EAAAE,QAAA,CAAAF,KAAA,QACTG,IAAI,CAACN,EAAA,EAAM,CAAC,GAAG,CAAC;EAAA,OAAAC,IAAA;AAAA,IAChB","names":["$0","$1","_el$","_tmpl$","_el$2","firstChild","_$insert","eval"],"ignoreList":[],"sources":["eval.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 105],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 156,
+    code: "export default ($0, $1) => <div>\n  {eval($0())}\n  <b>{eval($1()) + 1}</b>\n</div>;",
+    map: '{"version":3,"file":"eval.test.jsx","sourceRoot":"","sources":["eval.test.tsx"],"names":[],"mappings":"eAoBqB,YAAA,CAAC,GAAG,CACvB;EAAA,CAAC,IAAI,CAAC,IAAM,CAAC,CACb;EAAA,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAM,CAAC,GAAG,CAAC,CAAC,EAAE,CAAC,CAC1B;AAAA,EAAE,GAAG,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("eval", async (t) => {

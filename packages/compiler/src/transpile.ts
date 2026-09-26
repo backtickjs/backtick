@@ -1,5 +1,4 @@
 import type ts from "typescript";
-import type { CodeTransform } from "./applyTransform.js";
 import { transform } from "./transform.js";
 
 /**
@@ -24,8 +23,7 @@ import { transform } from "./transform.js";
  *
  * `jsxImportSource` is the caller's, and the only one that is: which target a
  * file draws with is not something a compiler knows, and a default here would
- * be this package naming one target's package for every file it ever sees. So
- * is its adapter's transform.
+ * be this package naming one target's package for every file it ever sees.
  */
 export function transpile(
   ts: typeof import("typescript"),
@@ -33,7 +31,6 @@ export function transpile(
   sourceText: string,
   jsxImportSource: string,
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
-  codeTransform?: CodeTransform,
 ): string {
   const { outputText } = ts.transpileModule(sourceText, {
     fileName,
@@ -45,7 +42,7 @@ export function transpile(
       sourceMap: false,
       verbatimModuleSyntax: true,
     },
-    transformers: { before: [transform(ts, addDiagnostic, codeTransform)] },
+    transformers: { before: [transform(ts, addDiagnostic)] },
   });
   return outputText;
 }

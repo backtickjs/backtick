@@ -1,7 +1,36 @@
 // 10:10
-() => {  → 10:13 {…
-return   → 11:5 return 
-_tmpl$   → 11:5 return…
-();      → 11:5 return…
-}        → 21:3 }
-;        → 21:4 `;…
+() => {                   → 10:13 {…
+return                    → 11:5 return 
+(                         → 11:12 (
+<                         → 12:7 <
+span                      → 12:8 span
+>                         → 12:12 >
+{                         → 13:9 {
+"/at?q="                  → 13:10 "/at?q="
+ +                        → 13:18  +
+encodeURIComponent        → 14:11 encodeURIComponent
+(                         → 14:29 (
+"a b+c&d#é"               → 14:30 "a b+c&d#é"
+)                         → 14:41 )
+ +                        → 14:42  +
+"&page="                  → 15:11 "&page="
+ +                        → 15:19  +
+encodeURIComponent        → 16:11 encodeURIComponent
+(                         → 16:29 (
+2.5                       → 16:30 2.5
+)                         → 16:33 )
+ +                        → 16:34  +
+" "                       → 17:11 " "
+ +                        → 17:14  +
+decodeURIComponent        → 18:11 decodeURIComponent
+(                         → 18:29 (
+"a%20b%2Bc%26d%23%C3%A9"  → 18:30 "a%20b%2Bc%26d%23%C3%A9"
+)                         → 18:54 )
+}                         → 18:55 }
+</                        → 19:7 </
+span                      → 19:9 span
+>                         → 19:13 >
+)                         → 19:14 …
+;                         → 20:6 ;
+}                         → 21:3 }
+;                         → 21:4 `;…

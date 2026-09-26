@@ -1,9 +1,9 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<span>298.5`);
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<span>298.5`);
     const $entry = () => {
       const whole = Number.parseInt("42px");
       const based = Number.parseInt("ff", 16);

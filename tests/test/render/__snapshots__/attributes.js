@@ -100,26 +100,10 @@ describe("a field's value", () => {
       "wz2l9fdwjjts:111:11",
       { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
       {
-        code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { effect as _$effect } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><input aria-label=text><input type=checkbox aria-label=on><button>write`);\nexport default $0 => {\n  const text = $0()("first");\n  const isOn = $0()(false);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling,\n      _el$4 = _el$3.nextSibling;\n    _el$4.$$click = () => {\n      text[1]("second");\n      isOn[1](true);\n    };\n    _$effect(() => _el$2.value = text[0]());\n    _$effect(() => _el$3.checked = isOn[0]());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-        map: '{"version":3,"mappings":";;;;eA8GcA,EAAA;EACR,MAAMC,IAAI,GAAGD,EAAA,EAAa,CAAC,OAAO,CAAC;EACnC,MAAME,IAAI,GAAGF,EAAA,EAAa,CAAC,KAAK,CAAC;EACjC;IAAA,IAAAG,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;IAAAC,KAAA,CAAAC,OAAA,GAKe,MAAK;MACZT,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC;MACjBC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;IACf,CAAC;IAAAS,QAAA,OAAAN,KAAA,CAAAO,KAAA,GAN6BX,IAAI,CAAC,CAAC,CAAC,EAAE;IAAAU,QAAA,OAAAJ,KAAA,CAAAM,OAAA,GACOX,IAAI,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAC,IAAA;EAAA;AAW/D,CAAC;AAAAW,gBAAA","names":["$0","text","isOn","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$effect","value","checked","_$delegateEvents"],"ignoreList":[],"sources":["attributes.test.tsx"]}',
-        imports: [
-          {
-            from: "solid-js/web",
-            range: [0, 54],
-            bindings: [{ name: "template", local: "_$template" }],
-          },
-          {
-            from: "solid-js/web",
-            range: [55, 121],
-            bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-          },
-          {
-            from: "solid-js/web",
-            range: [122, 172],
-            bindings: [{ name: "effect", local: "_$effect" }],
-          },
-        ],
-        exportAt: 291,
+        code: 'export default ($0) => {\n    const text = $0()("first");\n    const isOn = $0()(false);\n    return (<div>\n          <input aria-label="text" value={text[0]()}/>\n          <input type="checkbox" aria-label="on" checked={isOn[0]()}/>\n          <button onclick={() => {\n            text[1]("second");\n            isOn[1](true);\n        }}>\n            write\n          </button>\n        </div>);\n};',
+        map: '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["attributes.test.tsx"],"names":[],"mappings":"eA8Gc;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,IAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     );
   }

@@ -10,8 +10,8 @@ function add(lhs) {
     "sl458m2swc6c:10:9",
     { params: [{ kind: "splice", value: lhs, bindings: [] }] },
     {
-      code: "export default $0 => $0() + 2;",
-      map: '{"version":3,"mappings":"eASYA,EAAA,IAAAA,EAAA,EAAI,GAAG,CAAC","names":["$0"],"ignoreList":[],"sources":["dollar-name.test.tsx"]}',
+      code: "export default ($0) => $0() + 2;",
+      map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eASY,QAAA,IAAI,GAAG,CAAC"}',
       imports: [],
       exportAt: 0,
     },
@@ -32,8 +32,8 @@ it("dollarName", async (t) => {
                 "sl458m2swc6c:19:19",
                 { params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }] },
                 {
-                  code: "export default $0 => $0;",
-                  map: '{"version":3,"mappings":"eAkBsBA,EAAA,IAAAA,EAAI","names":["$0"],"ignoreList":[],"sources":["dollar-name.test.tsx"]}',
+                  code: "export default ($0) => $0;",
+                  map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAkBsB,QAAA,EAAI"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -44,8 +44,8 @@ it("dollarName", async (t) => {
         ],
       },
       {
-        code: "export default $0 => {\n  const foo$ = 1;\n  return $0(foo$);\n};",
-        map: '{"version":3,"mappings":"eAgBOA,EAAA;EACD,MAAMC,IAAI,GAAG,CAAC;EACd,OAAOD,EAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$0","foo$"],"ignoreList":[],"sources":["dollar-name.test.tsx"]}',
+        code: "export default ($0) => {\n    const foo$ = 1;\n    return $0(foo$);\n};",
+        map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
         imports: [],
         exportAt: 0,
       },

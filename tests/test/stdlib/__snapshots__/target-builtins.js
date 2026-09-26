@@ -33,8 +33,8 @@ describe("a module an app provides", () => {
           "1chgux0r8qw0m:33:40",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
           {
-            code: "export default $0 => $0()();",
-            map: '{"version":3,"mappings":"eAgC2CA,EAAA,IAAAA,EAAA,EAAM,EAAE","names":["$0"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
+            code: "export default ($0) => $0()();",
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAgC2C,QAAA,IAAM,EAAE"}',
             imports: [],
             exportAt: 0,
           },
@@ -50,8 +50,8 @@ describe("a module an app provides", () => {
           "1chgux0r8qw0m:37:45",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
           {
-            code: "export default $0 => $0()();",
-            map: '{"version":3,"mappings":"eAoCgDA,EAAA,IAAAA,EAAA,EAAM,EAAE","names":["$0"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
+            code: "export default ($0) => $0()();",
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoCgD,QAAA,IAAM,EAAE"}',
             imports: [],
             exportAt: 0,
           },
@@ -69,8 +69,8 @@ describe("a module an app provides", () => {
           "1chgux0r8qw0m:43:40",
           { params: [{ kind: "splice", value: storage, bindings: [] }] },
           {
-            code: 'export default $0 => $0().get("greeting");',
-            map: '{"version":3,"mappings":"eA0C2CA,EAAA,IAAAA,EAAA,EAAQ,CAACC,GAAG,CAAC,UAAU,CAAC","names":["$0","get"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
+            code: 'export default ($0) => $0().get("greeting");',
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eA0C2C,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
             imports: [],
             exportAt: 0,
           },

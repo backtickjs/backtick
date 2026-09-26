@@ -11,16 +11,10 @@ async function Written() {
     "7lcft72v2y3x:10:9",
     { params: [] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>Hi`);\nexport default () => {\n  return _tmpl$();\n};',
-      map: '{"version":3,"mappings":";;eASY;EACR,OAAAA,MAAA;AAGF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["string-from-code-point.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-      ],
-      exportAt: 105,
+      code: "export default () => {\n    return (<span>{String.fromCodePoint(72, 105) + String.fromCodePoint()}</span>);\n};",
+      map: '{"version":3,"file":"string-from-code-point.test.jsx","sourceRoot":"","sources":["string-from-code-point.test.tsx"],"names":[],"mappings":"eASY;IACR,OAAO,CACL,CAAC,IAAI,CAAC,CAAC,MAAM,CAAC,aAAa,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,aAAa,EAAE,CAAC,EAAE,IAAI,CAAC,CACtE,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

@@ -9,7 +9,7 @@ export interface EmittedScript {
    * The script as a module, `export default ($0, …) => body`, a parameter
    * per entry of `metadata.params`. Types are gone and everything else, JSX
    * included, is as the script wrote it, for the framework's own compiler to
-   * read next (see `CodeTransform`).
+   * read when a bundle is built.
    */
   readonly code: string;
   /**

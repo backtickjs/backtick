@@ -11,8 +11,8 @@ it("reservedKeyScript", async (t) => {
       "28g09xvp2p10c:8:45",
       { params: [] },
       {
-        code: 'export default () => ({\n  "#": "value"\n});',
-        map: '{"version":3,"mappings":"eAOgD,OAAC;EAAE,GAAG,EAAE;AAAO,CAAE,CAAC","names":[],"ignoreList":[],"sources":["reserved-key-script.test.tsx"]}',
+        code: 'export default () => ({ "#": "value" });',
+        map: '{"version":3,"file":"reserved-key-script.test.jsx","sourceRoot":"","sources":["reserved-key-script.test.tsx"],"names":[],"mappings":"eAOgD,MAAA,CAAC,EAAE,GAAG,EAAE,OAAO,EAAE,CAAC"}',
         imports: [],
         exportAt: 0,
       },

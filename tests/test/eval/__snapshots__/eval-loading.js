@@ -17,26 +17,10 @@ it("evalLoading", async (t) => {
       "1wu0udf0e3xe4:18:4",
       { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
       {
-        code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { memo as _$memo } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<span>loading\u2026`);\nexport default $0 => {\n  const held = $0()(null);\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, (() => {\n      var _c$ = _$memo(() => held[0]() === null);\n      return () => _c$() ? _tmpl$2() : eval(held[0]());\n    })());\n    return _el$;\n  })();\n};',
-        map: '{"version":3,"mappings":";;;;;eAiBOA,EAAA;EACD,MAAMC,IAAI,GAAGD,EAAA,EAAa,CAAiC,IAAI,CAAC;EAEhE;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA;MAAA,IAAAG,GAAA,GAAAC,MAAA,OAEKL,IAAI,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI;MAAA,aAAlBI,GAAA,KAAAE,OAAA,KAGCC,IAAI,CAACP,IAAI,CAAC,CAAC,CAAC,EAA6B,CAC1C;IAAA;IAAA,OAAAC,IAAA;EAAA;AAGP,CAAC","names":["$0","held","_el$","_tmpl$","_$insert","_c$","_$memo","_tmpl$2","eval"],"ignoreList":[],"sources":["eval-loading.test.tsx"]}',
-        imports: [
-          {
-            from: "solid-js/web",
-            range: [0, 54],
-            bindings: [{ name: "template", local: "_$template" }],
-          },
-          {
-            from: "solid-js/web",
-            range: [55, 105],
-            bindings: [{ name: "insert", local: "_$insert" }],
-          },
-          {
-            from: "solid-js/web",
-            range: [106, 152],
-            bindings: [{ name: "memo", local: "_$memo" }],
-          },
-        ],
-        exportAt: 255,
+        code: "export default ($0) => {\n    const held = $0()(null);\n    return (<div>\n          {held[0]() === null ? (<span>loading\u2026</span>) : (eval(held[0]()))}\n        </div>);\n};",
+        map: '{"version":3,"file":"eval-loading.test.jsx","sourceRoot":"","sources":["eval-loading.test.tsx"],"names":[],"mappings":"eAiBO;IACD,MAAM,IAAI,GAAG,IAAa,CAAiC,IAAI,CAAC,CAAC;IAEjE,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI,CAAC,CAAC,CAAC,CACpB,CAAC,IAAI,CAAC,QAAQ,EAAE,IAAI,CAAC,CACtB,CAAC,CAAC,CAAC,CACF,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,EAA6B,CAAC,CAC3C,CACH;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        imports: [],
+        exportAt: 0,
       },
     ),
   );

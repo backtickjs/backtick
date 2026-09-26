@@ -1,18 +1,18 @@
 (() => {
-  const { createComponent: _$createComponent2 } = $modules["solid-js/web"];
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+  const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
+  const { effect: _$effect } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
   const { createSelector: $i1 } = $modules["solid-js"];
   const { For: $i2 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select</span><div>`),
+    _tmpl$2 = /*#__PURE__*/ _$template(`<a>`);
+
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
-    const { effect: _$effect } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    const { createComponent: _$createComponent } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select</span><div>`),
-      _tmpl$2 = /*#__PURE__*/ _$template(`<a>`);
     const $entry = ($0, $1, $2) => {
       const selected = $0()(0);
       const isSelected = $1()(selected[0]);
@@ -43,16 +43,15 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["click"]);
     return $entry;
   })();
-  const $bundle = _$createComponent2($Script, {
+  const $bundle = _$createComponent($Script, {
     run: () =>
       f1(
         () => $i0,
         () => $i1,
         ($0) =>
-          _$createComponent2($i2, {
+          _$createComponent($i2, {
             get each() {
               return $0.each;
             },
@@ -65,5 +64,6 @@
           }),
       ),
   });
+  _$delegateEvents(["click"]);
   return $bundle;
 })();

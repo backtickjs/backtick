@@ -16,31 +16,10 @@ async function Row() {
     "3sdwassvq0mne:16:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { memo as _$memo } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<button id=row style=display:flex;gap:8px><span style=font-weight:700></span><span>`);\nexport default $0 => {\n  const count = $0()(0);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$.$$click = () => count[1](count[0]() + 1);\n    _$insert(_el$2, () => count[0]() > 0 ? "\u2611" : "\u2610");\n    _$insert(_el$3, () => "pressed " + count[0]() + " times");\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;eAeYA,EAAA;EACR,MAAMC,KAAK,GAAGD,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9B;IAAA,IAAAE,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAL,IAAA,CAAAM,OAAA,GAIa,MAAMP,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAQ,QAAA,CAAAL,KAAA,QAEPH,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,GAAG,GAAG,GAAG,GAAG;IAAAQ,QAAA,CAAAH,KAAA,QACnD,UAAU,GAAGL,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ;IAAA,OAAAC,IAAA;EAAA;AAG/C,CAAC;AAAAQ,gBAAA","names":["$0","count","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["pressable.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 172],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [173, 219],
-          bindings: [{ name: "memo", local: "_$memo" }],
-        },
-      ],
-      exportAt: 345,
+      code: 'export default ($0) => {\n    const count = $0()(0);\n    return (<button id="row" style="display: flex; gap: 8px" onclick={() => count[1](count[0]() + 1)}>\n        <span style="font-weight: 700">{count[0]() > 0 ? "\u2611" : "\u2610"}</span>\n        <span>{"pressed " + count[0]() + " times"}</span>\n      </button>);\n};',
+      map: '{"version":3,"file":"pressable.test.jsx","sourceRoot":"","sources":["pressable.test.tsx"],"names":[],"mappings":"eAeY;IACR,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,MAAM,CACL,EAAE,CAAC,KAAK,CACR,KAAK,CAAC,yBAAyB,CAC/B,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAExC;QAAA,CAAC,IAAI,CAAC,KAAK,CAAC,kBAAkB,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,EAAE,IAAI,CACjE;QAAA,CAAC,IAAI,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ,CAAC,EAAE,IAAI,CAClD;MAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

@@ -21,41 +21,10 @@ async function SelectableRows() {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { setAttribute as _$setAttribute } from "solid-js/web";\nimport { effect as _$effect } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><span>select</span><div>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<a>`);\nexport default ($0, $1, $2) => {\n  const selected = $0()(0);\n  const isSelected = $1()(selected[0]);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => selected[1](1);\n    _$insert(_el$3, _$createComponent($2, {\n      each: [0, 1, 2],\n      children: id => (() => {\n        var _el$4 = _tmpl$2();\n        _$insert(_el$4, "row " + id);\n        _$effect(() => _$setAttribute(_el$4, "href", isSelected(id) ? "#open" : "#closed"));\n        return _el$4;\n      })()\n    }));\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;;;;eAaY,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACR,MAAMC,QAAQ,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EACjC,MAAMI,UAAU,GAAGH,EAAA,EAAe,CAACE,QAAQ,CAAC,CAAC,CAAC,CAAC;EAC/C;IAAA,IAAAE,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEmB,MAAMR,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAAAS,QAAA,CAAAH,KAAA,EAAAI,iBAAA,CAEhCX,EAAG;MAACY,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;MAAAC,QAAA,EAChBC,EAAU;QAAA,IAAAC,KAAA,GAAAC,OAAA;QAAAN,QAAA,CAAAK,KAAA,EACsC,MAAM,GAAGD,EAAE;QAAAG,QAAA,OAAAC,cAAA,CAAAH,KAAA,UAAlDb,UAAU,CAACY,EAAE,CAAC,GAAG,OAAO,GAAG,SAAS;QAAA,OAAAC,KAAA;MAAA;IAC9C;IAAA,OAAAZ,IAAA;EAAA;AAKX,CAAC;AAAAgB,gBAAA","names":["$0","$1","$2","selected","isSelected","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$createComponent","each","children","id","_el$4","_tmpl$2","_$effect","_$setAttribute","_$delegateEvents"],"ignoreList":[],"sources":["unmoved-prop.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 184],
-          bindings: [{ name: "setAttribute", local: "_$setAttribute" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [185, 235],
-          bindings: [{ name: "effect", local: "_$effect" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [236, 286],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [287, 355],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 471,
+      code: 'export default ($0, $1, $2) => {\n    const selected = $0()(0);\n    const isSelected = $1()(selected[0]);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        <div>\n          <$2 each={[0, 1, 2]}>\n            {(id) => (<a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>)}\n          </$2>\n        </div>\n      </div>);\n};',
+      map: '{"version":3,"file":"unmoved-prop.test.jsx","sourceRoot":"","sources":["unmoved-prop.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,QAAQ,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAClC,MAAM,UAAU,GAAG,IAAe,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC;IAChD,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,GAAG,CACF;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CACnB;YAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CACf,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,UAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,SAAS,CAAC,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,CAAC,CAAC,CACjE,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,GAAG,CACP;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

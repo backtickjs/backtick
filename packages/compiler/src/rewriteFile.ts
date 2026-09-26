@@ -6,7 +6,6 @@ import { hashText } from "./hashText.js";
 import type { ParsedFile } from "./parseFile.js";
 import { resolveBindings } from "./resolveBindings.js";
 import { type RewrittenScript, rewriteScript } from "./rewriteScript.js";
-import type { CodeTransform } from "./applyTransform.js";
 import type { SourceRange } from "./SourceRange.js";
 
 export interface RewrittenFile {
@@ -20,8 +19,6 @@ export interface RewrittenFile {
 export function rewriteFile(
   ts: typeof import("typescript"),
   parsedFile: ParsedFile,
-  // an adapter's, run over each script's code
-  transform?: CodeTransform,
 ): RewrittenFile {
   const sourceFile = parsedFile.sourceFile;
 
@@ -47,7 +44,6 @@ export function rewriteFile(
       fileHash,
       bindings,
       params.get(script),
-      transform,
     );
     scripts.set(script.sourceNode, rewritten);
     for (const [node, range] of rewritten.sourceMaps) {

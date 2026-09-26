@@ -15,31 +15,10 @@ async function Stepper() {
     "2d5qp9itzo9r0:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { style as _$style } from "solid-js/web";\nimport { effect as _$effect } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>press`);\nexport default $0 => {\n  const size = $0()(16);\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n      size[1](size[0]() + 1);\n    };\n    _$effect(_$p => _$style(_el$, "font-size: " + size[0]() + "px", _$p));\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;eAaYA,EAAA;EACR,MAAMC,IAAI,GAAGD,EAAA,EAAa,CAAC,EAAE,CAAC;EAC9B;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAGa,MAAK;MACZH,IAAI,CAAC,CAAC,CAAC,CAACA,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACxB,CAAC;IAAAI,QAAA,CAAAC,GAAA,IAAAC,OAAA,CAAAL,IAAA,EAHM,aAAa,GAAGD,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAK,GAAA;IAAA,OAAAJ,IAAA;EAAA;AAQ7C,CAAC;AAAAM,gBAAA","names":["$0","size","_el$","_tmpl$","$$click","_$effect","_$p","_$style","_$delegateEvents"],"ignoreList":[],"sources":["local-state.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 170],
-          bindings: [{ name: "style", local: "_$style" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [171, 221],
-          bindings: [{ name: "effect", local: "_$effect" }],
-        },
-      ],
-      exportAt: 275,
+      code: 'export default ($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n};',
+      map: '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["local-state.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

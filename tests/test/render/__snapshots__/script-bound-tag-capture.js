@@ -25,18 +25,10 @@ const scriptBoundTagCapture = cs.create(
             ],
           },
           {
-            code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default ($0, $1) => _$createComponent($0, {\n  get n() {\n    return $1[0]();\n  }\n});',
-            map: '{"version":3,"mappings":";eAiBY,CAAAA,EAAA,EAAAC,EAAA,KAAAC,iBAAA,CAACF,EAAK;EAAA,IAACG,CAACA,CAAA;IAAA,OAAEF,EAAK,CAAC,CAAC,CAAC,EAAE;EAAA;AAAA,EAAI","names":["$0","$1","_$createComponent","n"],"ignoreList":[],"sources":["script-bound-tag-capture.test.tsx"]}',
-            imports: [
-              {
-                from: "solid-js/web",
-                range: [0, 68],
-                bindings: [
-                  { name: "createComponent", local: "_$createComponent" },
-                ],
-              },
-            ],
-            exportAt: 69,
+            code: "export default ($0, $1) => <$0 n={$1[0]()}/>;",
+            map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAiBY,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         bindings: ["count$2un2f82x2jr3i$0", "Badge$2un2f82x2jr3i$1"],
@@ -58,21 +50,10 @@ const scriptBoundTagCapture = cs.create(
                     ],
                   },
                   {
-                    code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default ($0, $1) => _$createComponent($0, {\n  get n() {\n    return $1[0]() + 100;\n  }\n});',
-                    map: '{"version":3,"mappings":";eAqBsB,CAAAA,EAAA,EAAAC,EAAA,KAAAC,iBAAA,CAACF,EAAK;EAAA,IAACG,CAACA,CAAA;IAAA,OAAEF,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,GAAG;EAAA;AAAA,EAAI","names":["$0","$1","_$createComponent","n"],"ignoreList":[],"sources":["script-bound-tag-capture.test.tsx"]}',
-                    imports: [
-                      {
-                        from: "solid-js/web",
-                        range: [0, 68],
-                        bindings: [
-                          {
-                            name: "createComponent",
-                            local: "_$createComponent",
-                          },
-                        ],
-                      },
-                    ],
-                    exportAt: 69,
+                    code: "export default ($0, $1) => <$0 n={$1[0]() + 100}/>;",
+                    map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAqBsB,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,GAAG,CAAC,EAAG"}',
+                    imports: [],
+                    exportAt: 0,
                   },
                 ),
                 bindings: [],
@@ -82,8 +63,8 @@ const scriptBoundTagCapture = cs.create(
             ],
           },
           {
-            code: "export default ($0, $1, $2) => {\n  const skipped = 10;\n  return $0($1, $2);\n};",
-            map: '{"version":3,"mappings":"eAmBa,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACH,MAAMC,OAAO,GAAG,EAAE;EAClB,OAAOH,EAAA,CAAAC,EAAA,EAAAC,EAAA,CAAC;AACV,CAAC","names":["$0","$1","$2","skipped"],"ignoreList":[],"sources":["script-bound-tag-capture.test.tsx"]}',
+            code: "export default ($0, $1, $2) => {\n    const skipped = 10;\n    return $0($1, $2);\n};",
+            map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAmBa;IACH,MAAM,OAAO,GAAG,EAAE,CAAC;IACnB,OAAO,UAAC,CAAqC;AAC/C,CAAC"}',
             imports: [],
             exportAt: 0,
           },
@@ -102,18 +83,10 @@ const scriptBoundTagCapture = cs.create(
               ],
             },
             {
-              code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default ($0, $1) => _$createComponent($0, {\n  get n() {\n    return $1[0]() + 1000;\n  }\n});',
-              map: '{"version":3,"mappings":";eAwBuB,CAAAA,EAAA,EAAAC,EAAA,KAAAC,iBAAA,CAACF,EAAK;EAAA,IAACG,CAACA,CAAA;IAAA,OAAEF,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI;EAAA;AAAA,EAAI","names":["$0","$1","_$createComponent","n"],"ignoreList":[],"sources":["script-bound-tag-capture.test.tsx"]}',
-              imports: [
-                {
-                  from: "solid-js/web",
-                  range: [0, 68],
-                  bindings: [
-                    { name: "createComponent", local: "_$createComponent" },
-                  ],
-                },
-              ],
-              exportAt: 69,
+              code: "export default ($0, $1) => <$0 n={$1[0]() + 1000}/>;",
+              map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAwBuB,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,EAAG"}',
+              imports: [],
+              exportAt: 0,
             },
           ),
         }),
@@ -131,18 +104,10 @@ const scriptBoundTagCapture = cs.create(
             ],
           },
           {
-            code: 'import { createComponent as _$createComponent } from "solid-js/web";\nexport default ($0, $1, $2) => _$createComponent($0, {\n  each: [1, 2],\n  children: m => _$createComponent($1, {\n    get n() {\n      return m * $2[0]();\n    }\n  })\n});',
-            map: '{"version":3,"mappings":";eA0Ba,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,KAAAC,iBAAA,CAACH,EAAG;EAACI,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;EAAAC,QAAA,EAClBC,CAAS,IAAAH,iBAAA,CAAMF,EAAK;IAAA,IAACM,CAACA,CAAA;MAAA,OAAED,CAAC,GAAGJ,EAAK,CAAC,CAAC,CAAC,EAAE;IAAA;EAAA;AAAI,EACxC","names":["$0","$1","$2","_$createComponent","each","children","m","n"],"ignoreList":[],"sources":["script-bound-tag-capture.test.tsx"]}',
-            imports: [
-              {
-                from: "solid-js/web",
-                range: [0, 68],
-                bindings: [
-                  { name: "createComponent", local: "_$createComponent" },
-                ],
-              },
-            ],
-            exportAt: 69,
+            code: "export default ($0, $1, $2) => <$0 each={[1, 2]}>\n          {(m) => <$1 n={m * $2[0]()}/>}\n        </$0>;",
+            map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eA0Ba,gBAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACrB;UAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,EAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG,CAC9C;QAAA,EAAE,EAAG,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
         bindings: ["count$2un2f82x2jr3i$0", "Badge$2un2f82x2jr3i$1"],
@@ -150,26 +115,10 @@ const scriptBoundTagCapture = cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<b>`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<div><button>more`);\nexport default ($0, $1, $2, $3, $4) => {\n  const count = $0()(0);\n  const Badge = props => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "n " + props.n);\n    return _el$;\n  })();\n  return (() => {\n    var _el$2 = _tmpl$2(),\n      _el$3 = _el$2.firstChild;\n    _$insert(_el$2, () => $1(count, Badge), _el$3);\n    _$insert(_el$2, () => $2(count, Badge), _el$3);\n    _$insert(_el$2, () => $3(count, Badge), _el$3);\n    _$insert(_el$2, () => $4(count, Badge), _el$3);\n    _el$3.$$click = () => count[1](count[0]() + 1);\n    return _el$2;\n  })();\n};\n_$delegateEvents(["click"]);',
-    map: '{"version":3,"mappings":";;;;;eAWiC,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,EAAAC,EAAA,EAAAC,EAAA;EAC/B,MAAMC,KAAK,GAAGL,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9B,MAAMM,KAAK,GAAIC,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAS,IAAI,GAAGD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;EAAA,IAAK;EAE/D;IAAA,IAAAI,KAAA,GAAAC,OAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,UAAA;IAAAL,QAAA,CAAAE,KAAA,QAEKX,EAAA,CAAAI,KAAA,EAAAC,KAAA,CAA+B,EAAAQ,KAAA;IAAAJ,QAAA,CAAAE,KAAA,QAE9BV,EAAA,CAAAG,KAAA,EAAAC,KAAA,CAIF,EAAAQ,KAAA;IAAAJ,QAAA,CAAAE,KAAA,QACCT,EAAA,CAAAE,KAAA,EAAAC,KAAA,CAA6D,EAAAQ,KAAA;IAAAJ,QAAA,CAAAE,KAAA,QAE5DR,EAAA,CAAAC,KAAA,EAAAC,KAAA,CAGF,EAAAQ,KAAA;IAAAA,KAAA,CAAAE,OAAA,GACiB,MAAMX,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAA,OAAAO,KAAA;EAAA;AAGrD,CAAC;AAAAK,gBAAA","names":["$0","$1","$2","$3","$4","count","Badge","props","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2","_el$3","firstChild","$$click","_$delegateEvents"],"ignoreList":[],"sources":["script-bound-tag-capture.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 121],
-        bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [122, 172],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-    ],
-    exportAt: 276,
+    code: 'export default ($0, $1, $2, $3, $4) => {\n    const count = $0()(0);\n    const Badge = (props) => <b>{"n " + props.n}</b>;\n    return (<div>\n      {$1(count, Badge)}\n      {$2(count, Badge)}\n      {$3(count, Badge)}\n      {$4(count, Badge)}\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n};',
+    map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAWiC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAEhE,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,gBAA+B,CAChC;MAAA,CACE,gBAIF,CACA;MAAA,CAAC,gBAA6D,CAC9D;MAAA,CACE,gBAGF,CACA;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("scriptBoundTagCapture", async (t) => {

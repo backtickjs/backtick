@@ -36,16 +36,10 @@ describe("onCleanup", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<p>drawn`);\nexport default ($0, $1) => {\n  $0()(() => $1().console.log());\n  return _tmpl$();\n};',
-          map: '{"version":3,"mappings":";;eA2BS,CAAAA,EAAA,EAAAC,EAAA;EACDD,EAAA,EAAU,CAAC,MAAMC,EAAA,EAAO,CAACC,OAAO,CAACC,GAAG,EAAE,CAAC;EACvC,OAAAC,MAAA;AACF,CAAC","names":["$0","$1","console","log","_tmpl$"],"ignoreList":[],"sources":["on-cleanup.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-          ],
-          exportAt: 105,
+          code: "export default ($0, $1) => {\n    $0()(() => $1().console.log());\n    return <p>drawn</p>;\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA2BS;IACD,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -66,26 +60,10 @@ describe("onCleanup", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<button>`);\nexport default ($0, $1, $2, $3) => {\n  const n = $0()(1);\n  const doubled = $1()(() => {\n    $2()(() => $3().console.log());\n    return n[0]() * 2;\n  });\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => n[1](n[0]() + 1);\n    _$insert(_el$, doubled);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAuCS,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGJ,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B,MAAMK,OAAO,GAAGJ,EAAA,EAAW,CAAC,MAAK;IAC/BC,EAAA,EAAU,CAAC,MAAMC,EAAA,EAAO,CAACG,OAAO,CAACC,GAAG,EAAE,CAAC;IACvC,OAAOH,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC;EACnB,CAAC,CAAC;EACF;IAAA,IAAAI,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMN,CAAC,CAAC,CAAC,CAAC,CAACA,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAO,QAAA,CAAAH,IAAA,EAAGH,OAAO;IAAA,OAAAG,IAAA;EAAA;AAErD,CAAC;AAAAI,gBAAA","names":["$0","$1","$2","$3","n","doubled","console","log","_el$","_tmpl$","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["on-cleanup.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 223,
+          code: "export default ($0, $1, $2, $3) => {\n    const n = $0()(1);\n    const doubled = $1()(() => {\n        $2()(() => $3().console.log());\n        return n[0]() * 2;\n    });\n    return (<button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>);\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAuCS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,IAAW,CAAC,GAAG,EAAE;QAC/B,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,EAAE,MAAM,CAAC,CAC9D,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -117,16 +95,10 @@ describe("onCleanup", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<p>ticking`);\nexport default ($0, $1, $2, $3) => {\n  const timer = $0()(0);\n  $1()(() => {\n    timer[1]($2().setInterval(() => $2().console.log(), 5));\n  });\n  $3()(() => $2().clearInterval(timer[0]()));\n  return _tmpl$();\n};',
-          map: '{"version":3,"mappings":";;eAyES,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAGJ,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9BC,EAAA,EAAQ,CAAC,MAAK;IACZG,KAAK,CAAC,CAAC,CAAC,CAACF,EAAA,EAAO,CAACG,WAAW,CAAC,MAAMH,EAAA,EAAO,CAACI,OAAO,CAACC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC;EAC/D,CAAC,CAAC;EACFJ,EAAA,EAAU,CAAC,MAAMD,EAAA,EAAO,CAACM,aAAa,CAACJ,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;EACnD,OAAAK,MAAA;AACF,CAAC","names":["$0","$1","$2","$3","timer","setInterval","console","log","clearInterval","_tmpl$"],"ignoreList":[],"sources":["on-cleanup.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-          ],
-          exportAt: 107,
+          code: "export default ($0, $1, $2, $3) => {\n    const timer = $0()(0);\n    $1()(() => {\n        timer[1]($2().setInterval(() => $2().console.log(), 5));\n    });\n    $3()(() => $2().clearInterval(timer[0]()));\n    return <p>ticking</p>;\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAyES;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IAChE,CAAC,CAAC,CAAC;IACH,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACpD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -148,21 +120,10 @@ describe("onCleanup", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<button>press`);\nexport default ($0, $1) => {\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => $0()(() => $1().console.log());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;eA6FS,CAAAA,EAAA,EAAAC,EAAA;EACD;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMJ,EAAA,EAAU,CAAC,MAAMC,EAAA,EAAO,CAACI,OAAO,CAACC,GAAG,EAAE,CAAC;IAAA,OAAAJ,IAAA;EAAA;AAIlE,CAAC;AAAAK,gBAAA","names":["$0","$1","_el$","_tmpl$","$$click","console","log","_$delegateEvents"],"ignoreList":[],"sources":["on-cleanup.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-          ],
-          exportAt: 177,
+          code: "export default ($0, $1) => {\n    return (<button onclick={() => $0()(() => $1().console.log())}>\n            press\n          </button>);\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA6FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );

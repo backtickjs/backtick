@@ -1,44 +1,18 @@
 // 11:10
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { style as _$style } from "solid-js/web";
-import { effect as _$effect } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/_$template(`<div><span></span><span style=font-size:8px>fixed</span><span>held`),
-  _tmpl$2 = /*#__PURE__*/_$template(`<div style=padding:0>`);
-export default $0 => {
-  const label = $0()("hi");
-  const row = size => {
-    const css = "font-size: " + size + "px";
-    const press = () => label[1]("held");
-    return (() => {
-      var _el$ = _tmpl$(),
-        _el$2 = _el$.firstChild,
-        _el$3 = _el$2.nextSibling,
-        _el$4 = _el$3.nextSibling;
-      _el$2.$$click = () => label[1]("pressed");
-      _$insert(_el$2, () => label[0]());
-      _el$4.$$click = press;
-      _$effect(_p$ => {
-        var _v$ = css,
-          _v$2 = css,
-          _v$3 = css;
-        _p$.e = _$style(_el$, _v$, _p$.e);
-        _p$.t = _$style(_el$2, _v$2, _p$.t);
-        _p$.a = _$style(_el$4, _v$3, _p$.a);
-        return _p$;
-      }, {
-        e: undefined,
-        t: undefined,
-        a: undefined
-      });
-      return _el$;
-    })();
-  };
-  return (() => {
-    var _el$5 = _tmpl$2();
-    _$insert(_el$5, () => row(12));
-    return _el$5;
-  })();
+export default ($0) => {
+    const label = $0()("hi");
+    const row = (size) => {
+        const css = "font-size: " + size + "px";
+        const press = () => label[1]("held");
+        return (<div style={css}>
+          <span style={css} onclick={() => label[1]("pressed")}>
+            {label[0]()}
+          </span>
+          <span style="font-size: 8px">fixed</span>
+          <span style={css} onclick={press}>
+            held
+          </span>
+        </div>);
+    };
+    return <div style="padding: 0">{row(12)}</div>;
 };
-_$delegateEvents(["click"]);

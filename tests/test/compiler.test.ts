@@ -7,7 +7,6 @@ import prettier from "prettier";
 import ts from "typescript";
 import { renderClientCode, renderClientMappings } from "./renderClient.ts";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
-import { transform } from "@backtickjs/solid-js/transform";
 import { renderMappings } from "./renderMappings.ts";
 import { isPorted } from "./unported.ts";
 
@@ -37,8 +36,6 @@ async function emit(fileName: string, sourceText: string): Promise<string> {
     fileName,
     sourceText,
     "@backtickjs/solid-js",
-    undefined,
-    transform,
   );
   // The compiled host file prints as long lines; formatted, the snapshot
   // reads like code.
@@ -91,7 +88,7 @@ describe("compile the .tsx tests", () => {
       record(await emit(fileName, sourceText), "js");
       // What each script compiles to for the client, and where its code maps
       // back to in this file.
-      const scripts = emitScripts(ts, fileName, sourceText, transform);
+      const scripts = emitScripts(ts, fileName, sourceText);
       record(renderClientCode(sourceText, scripts), "client.js");
       record(renderClientMappings(sourceText, scripts), "client.sourcemap");
     });

@@ -29,7 +29,7 @@ const ReadingRow = async ({ id, selected }) =>
           },
           {
             code: 'export default ($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";',
-            map: '{"version":3,"mappings":"eA4BgB,CAAAA,EAAA,EAAAC,EAAA,kBAAa,IAAID,EAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,EAAA,EAAG,GAAG,EAAE,GAAG,EAAE,CAAC,GAAG,IAAI","names":["$0","$1"],"ignoreList":[],"sources":["local-state-child-reads.test.tsx"]}',
+            map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA4BgB,YAAA,aAAa,GAAG,CAAC,IAAS,CAAC,CAAC,CAAC,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
             imports: [],
             exportAt: 0,
           },
@@ -44,7 +44,7 @@ const ReadingRow = async ({ id, selected }) =>
           },
           {
             code: 'export default ($0, $1) => "row " + $0() + " of " + $1()[0]();',
-            map: '{"version":3,"mappings":"eA8BU,CAAAA,EAAA,EAAAC,EAAA,WAAM,GAAGD,EAAA,EAAG,GAAG,MAAM,GAAGC,EAAA,EAAS,CAAC,CAAC,CAAC,EAAE","names":["$0","$1"],"ignoreList":[],"sources":["local-state-child-reads.test.tsx"]}',
+            map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA8BU,YAAA,MAAM,GAAG,IAAG,GAAG,MAAM,GAAG,IAAS,CAAC,CAAC,CAAC,EAAE"}',
             imports: [],
             exportAt: 0,
           },
@@ -65,7 +65,7 @@ const ReadingRow = async ({ id, selected }) =>
         },
         {
           code: "export default ($0, $1, $2) => $0()[0]() === $1() ? $2() : null;",
-          map: '{"version":3,"mappings":"eAgCQ,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA,KAAAF,EAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,EAAA,EAAG,GAAGC,EAAA,EAAC,GAA0B,IAAI","names":["$0","$1","$2"],"ignoreList":[],"sources":["local-state-child-reads.test.tsx"]}',
+          map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eAgCQ,gBAAA,IAAS,CAAC,CAAC,CAAC,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,IAAC,CAAwB,CAAC,CAAC,IAAI"}',
           imports: [],
           exportAt: 0,
         },
@@ -82,31 +82,10 @@ async function ReadingPanel() {
       ],
     },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><span>select`);\nexport default ($0, $1) => {\n  const selected = $0()(0);\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild;\n    _el$2.$$click = () => selected[1](1);\n    _$insert(_el$, _$createComponent($1, {\n      id: 0,\n      selected: selected\n    }), null);\n    _$insert(_el$, _$createComponent($1, {\n      id: 1,\n      selected: selected\n    }), null);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;eAqCY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,QAAQ,GAAGF,EAAA,EAAa,CAAC,CAAC,CAAC;EACjC;IAAA,IAAAG,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAD,KAAA,CAAAE,OAAA,GAEmB,MAAML,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAAAM,QAAA,CAAAL,IAAA,EAAAM,iBAAA,CAClCR,EAAU;MAACS,EAAE,EAAE,CAAC;MAAER,QAAQ,EAAEA;IAAQ;IAAAM,QAAA,CAAAL,IAAA,EAAAM,iBAAA,CACpCR,EAAU;MAACS,EAAE,EAAE,CAAC;MAAER,QAAQ,EAAEA;IAAQ;IAAA,OAAAC,IAAA;EAAA;AAG3C,CAAC;AAAAQ,gBAAA","names":["$0","$1","selected","_el$","_tmpl$","_el$2","firstChild","$$click","_$insert","_$createComponent","id","_$delegateEvents"],"ignoreList":[],"sources":["local-state-child-reads.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 121],
-          bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [122, 172],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [173, 241],
-          bindings: [{ name: "createComponent", local: "_$createComponent" }],
-        },
-      ],
-      exportAt: 301,
+      code: "export default ($0, $1) => {\n    const selected = $0()(0);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        <$1 id={0} selected={selected}/>\n        <$1 id={1} selected={selected}/>\n      </div>);\n};",
+      map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eAqCY;IACR,MAAM,QAAQ,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   );
 }

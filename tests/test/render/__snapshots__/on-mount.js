@@ -34,21 +34,10 @@ describe("onMount", () => {
             ],
           },
           {
-            code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<p>`);\nexport default ($0, $1, $2) => {\n  const count = $0()(0);\n  $1()(() => {\n    $2().console.log();\n    count[1](count[0]() + 1);\n  });\n  return (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "mounted " + count[0]());\n    return _el$;\n  })();\n};',
-            map: '{"version":3,"mappings":";;;eA4BW,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9BC,EAAA,EAAQ,CAAC,MAAK;IACZC,EAAA,EAAO,CAACE,OAAO,CAACC,GAAG,EAAE;IACrBF,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;EAC1B,CAAC,CAAC;EACF;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAC,QAAA,CAAAF,IAAA,QAAW,UAAU,GAAGH,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAG,IAAA;EAAA;AACpC,CAAC","names":["$0","$1","$2","count","console","log","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["on-mount.test.tsx"]}',
-            imports: [
-              {
-                from: "solid-js/web",
-                range: [0, 54],
-                bindings: [{ name: "template", local: "_$template" }],
-              },
-              {
-                from: "solid-js/web",
-                range: [55, 105],
-                bindings: [{ name: "insert", local: "_$insert" }],
-              },
-            ],
-            exportAt: 151,
+            code: 'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    $1()(() => {\n        $2().console.log();\n        count[1](count[0]() + 1);\n    });\n    return <p>{"mounted " + count[0]()}</p>;\n};',
+            map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["on-mount.test.tsx"],"names":[],"mappings":"eA4BW;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;IAC3B,CAAC,CAAC,CAAC;IACH,OAAO,CAAC,CAAC,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;AAC1C,CAAC"}',
+            imports: [],
+            exportAt: 0,
           },
         ),
       ),
@@ -67,26 +56,10 @@ describe("onMount", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<button>`);\nexport default ($0, $1) => {\n  const said = $0()("not yet");\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => $1()(() => said[1]("ran"));\n    _$insert(_el$, () => said[0]());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eA4CS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,IAAI,GAAGF,EAAA,EAAa,CAAC,SAAS,CAAC;EACrC;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMJ,EAAA,EAAQ,CAAC,MAAMC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC;IAAAI,QAAA,CAAAH,IAAA,QAClDD,IAAI,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAC,IAAA;EAAA;AAGhB,CAAC;AAAAI,gBAAA","names":["$0","$1","said","_el$","_tmpl$","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["on-mount.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 223,
+          code: 'export default ($0, $1) => {\n    const said = $0()("not yet");\n    return (<button onclick={() => $1()(() => said[1]("ran"))}>\n            {said[0]()}\n          </button>);\n};',
+          map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["on-mount.test.tsx"],"names":[],"mappings":"eA4CS;IACD,MAAM,IAAI,GAAG,IAAa,CAAC,SAAS,CAAC,CAAC;IACtC,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CACpD;YAAA,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CACZ;UAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );

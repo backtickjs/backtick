@@ -32,26 +32,10 @@ describe("equals", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>add</button><p>`);\nexport default ($0, $1, $2) => {\n  const n = $0()(1);\n  const size = $1()(() => ({\n    isBig: n[0]() > 2,\n    n: n[0]()\n  }), undefined, {\n    equals: (previous, next) => previous.isBig === next.isBig\n  });\n  const label = () => {\n    $2().console.log();\n    return size().isBig ? "big" : "small";\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => n[1](n[0]() + 1);\n    _$insert(_el$3, label);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eA2BS,CAAAA,EAAA,EAAAC,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGH,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B,MAAMI,IAAI,GAAGH,EAAA,EAAW,CACtB,OAAO;IAAEI,KAAK,EAAEF,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC;IAAEA,CAAC,EAAEA,CAAC,CAAC,CAAC,CAAC;EAAE,CAAE,CAAC,EACxCG,SAAS,EACT;IAAEC,MAAM,EAAEA,CAACC,QAAQ,EAAEC,IAAI,KAAKD,QAAQ,CAACH,KAAK,KAAKI,IAAI,CAACJ;EAAK,CAAE,CAC9D;EACD,MAAMK,KAAK,GAAGA,CAAA,KAAK;IACjBR,EAAA,EAAO,CAACS,OAAO,CAACC,GAAG,EAAE;IACrB,OAAOR,IAAI,EAAE,CAACC,KAAK,GAAG,KAAK,GAAG,OAAO;EACvC,CAAC;EACD;IAAA,IAAAQ,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMhB,CAAC,CAAC,CAAC,CAAC,CAACA,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAAiB,QAAA,CAAAH,KAAA,EACnCP,KAAK;IAAA,OAAAG,IAAA;EAAA;AAGf,CAAC;AAAAQ,gBAAA","names":["$0","$1","$2","n","size","isBig","undefined","equals","previous","next","label","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["equals.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 243,
+          code: 'export default ($0, $1, $2) => {\n    const n = $0()(1);\n    const size = $1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });\n    const label = () => {\n        $2().console.log();\n        return size().isBig ? "big" : "small";\n    };\n    return (<div>\n            <button onclick={() => n[1](n[0]() + 1)}>add</button>\n            <p>{label()}</p>\n          </div>);\n};',
+          map: '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eA2BS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,IAAI,GAAG,IAAW,CACtB,GAAG,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,EACxC,SAAS,EACT,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,KAAK,KAAK,IAAI,CAAC,KAAK,EAAE,CAC9D,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,OAAO,CAAC;IACxC,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACpD;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -74,26 +58,10 @@ describe("equals", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>same</button><p>`);\nexport default ($0, $1) => {\n  const point = $0()({\n    x: 1\n  }, {\n    equals: (previous, next) => previous.x === next.x\n  });\n  const label = () => {\n    $1().console.log();\n    return "x " + point[0]().x;\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => point[1]({\n      x: point[0]().x\n    });\n    _$insert(_el$3, label);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eA2DS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAGF,EAAA,EAAa,CACzB;IAAEG,CAAC,EAAE;EAAC,CAAE,EACR;IAAEC,MAAM,EAAEA,CAACC,QAAQ,EAAEC,IAAI,KAAKD,QAAQ,CAACF,CAAC,KAAKG,IAAI,CAACH;EAAC,CAAE,CACtD;EACD,MAAMI,KAAK,GAAGA,CAAA,KAAK;IACjBN,EAAA,EAAO,CAACO,OAAO,CAACC,GAAG,EAAE;IACrB,OAAO,IAAI,GAAGP,KAAK,CAAC,CAAC,CAAC,EAAE,CAACC,CAAC;EAC5B,CAAC;EACD;IAAA,IAAAO,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMd,KAAK,CAAC,CAAC,CAAC,CAAC;MAAEC,CAAC,EAAED,KAAK,CAAC,CAAC,CAAC,EAAE,CAACC;IAAC,CAAE,CAAC;IAAAc,QAAA,CAAAH,KAAA,EAGhDP,KAAK;IAAA,OAAAG,IAAA;EAAA;AAGf,CAAC;AAAAQ,gBAAA","names":["$0","$1","point","x","equals","previous","next","label","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["equals.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 244,
+          code: 'export default ($0, $1) => {\n    const point = $0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });\n    const label = () => {\n        $1().console.log();\n        return "x " + point[0]().x;\n    };\n    return (<div>\n            <button onclick={() => point[1]({ x: point[0]().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n};',
+          map: '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eA2DS;IACD,MAAM,KAAK,GAAG,IAAa,CACzB,EAAE,CAAC,EAAE,CAAC,EAAE,EACR,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,EAAE,CACtD,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACnD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -111,26 +79,10 @@ describe("equals", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<button>`);\nexport default ($0, $1) => {\n  const n = $0()(1, {\n    equals: (previous, next) => {\n      $1().console.log(previous, next);\n      return previous === next;\n    }\n  });\n  return (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => n[1](2);\n    _$insert(_el$, () => "n " + n[0]());\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAoFS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGF,EAAA,EAAa,CAAC,CAAC,EAAE;IACzBG,MAAM,EAAEA,CAACC,QAAQ,EAAEC,IAAI,KAAI;MACzBJ,EAAA,EAAO,CAACK,OAAO,CAACC,GAAG,CAACH,QAAQ,EAAEC,IAAI,CAAC;MACnC,OAAOD,QAAQ,KAAKC,IAAI;IAC1B;GACD,CAAC;EACF;IAAA,IAAAG,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAAwB,MAAMR,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAAAS,QAAA,CAAAH,IAAA,QAAG,IAAI,GAAGN,CAAC,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAM,IAAA;EAAA;AACvD,CAAC;AAAAI,gBAAA","names":["$0","$1","n","equals","previous","next","console","log","_el$","_tmpl$","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["equals.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 223,
+          code: 'export default ($0, $1) => {\n    const n = $0()(1, {\n        equals: (previous, next) => {\n            $1().console.log(previous, next);\n            return previous === next;\n        },\n    });\n    return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;\n};',
+          map: '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAoFS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,EAAE;QACzB,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE;YACzB,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,QAAQ,EAAE,IAAI,CAAC,CAAC;YACpC,OAAO,QAAQ,KAAK,IAAI,CAAC;QAC3B,CAAC;KACF,CAAC,CAAC;IACH,OAAO,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,MAAM,CAAC,CAAC;AAClE,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -149,26 +101,10 @@ describe("equals", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>same</button><p>`);\nexport default ($0, $1) => {\n  const n = $0()(1);\n  const label = () => {\n    $1().console.log();\n    return "n " + n[0]();\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => n[1](1);\n    _$insert(_el$3, label);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAqGS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,CAAC,GAAGF,EAAA,EAAa,CAAC,CAAC,CAAC;EAC1B,MAAMG,KAAK,GAAGA,CAAA,KAAK;IACjBF,EAAA,EAAO,CAACG,OAAO,CAACC,GAAG,EAAE;IACrB,OAAO,IAAI,GAAGH,CAAC,CAAC,CAAC,CAAC,EAAE;EACtB,CAAC;EACD;IAAA,IAAAI,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAAAW,QAAA,CAAAH,KAAA,EAC1BP,KAAK;IAAA,OAAAG,IAAA;EAAA;AAGf,CAAC;AAAAQ,gBAAA","names":["$0","$1","n","label","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["equals.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 244,
+          code: 'export default ($0, $1) => {\n    const n = $0()(1);\n    const label = () => {\n        $1().console.log();\n        return "n " + n[0]();\n    };\n    return (<div>\n            <button onclick={() => n[1](1)}>same</button>\n            <p>{label()}</p>\n          </div>);\n};',
+          map: '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAqGS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;IACvB,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC5C;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );
@@ -186,26 +122,10 @@ describe("equals", () => {
           ],
         },
         {
-          code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>same</button><p>`);\nexport default ($0, $1) => {\n  const point = $0()({\n    x: 1\n  });\n  const label = () => {\n    $1().console.log();\n    return "x " + point[0]().x;\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _el$2.$$click = () => point[1]({\n      x: point[0]().x\n    });\n    _$insert(_el$3, label);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-          map: '{"version":3,"mappings":";;;;eAyHS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAGF,EAAA,EAAa,CAAC;IAAEG,CAAC,EAAE;EAAC,CAAE,CAAC;EACrC,MAAMC,KAAK,GAAGA,CAAA,KAAK;IACjBH,EAAA,EAAO,CAACI,OAAO,CAACC,GAAG,EAAE;IACrB,OAAO,IAAI,GAAGJ,KAAK,CAAC,CAAC,CAAC,EAAE,CAACC,CAAC;EAC5B,CAAC;EACD;IAAA,IAAAI,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAH,KAAA,CAAAI,OAAA,GAEqB,MAAMX,KAAK,CAAC,CAAC,CAAC,CAAC;MAAEC,CAAC,EAAED,KAAK,CAAC,CAAC,CAAC,EAAE,CAACC;IAAC,CAAE,CAAC;IAAAW,QAAA,CAAAH,KAAA,EAGhDP,KAAK;IAAA,OAAAG,IAAA;EAAA;AAGf,CAAC;AAAAQ,gBAAA","names":["$0","$1","point","x","label","console","log","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","$$click","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["equals.test.tsx"]}',
-          imports: [
-            {
-              from: "solid-js/web",
-              range: [0, 54],
-              bindings: [{ name: "template", local: "_$template" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [55, 121],
-              bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-            },
-            {
-              from: "solid-js/web",
-              range: [122, 172],
-              bindings: [{ name: "insert", local: "_$insert" }],
-            },
-          ],
-          exportAt: 244,
+          code: 'export default ($0, $1) => {\n    const point = $0()({ x: 1 });\n    const label = () => {\n        $1().console.log();\n        return "x " + point[0]().x;\n    };\n    return (<div>\n            <button onclick={() => point[1]({ x: point[0]().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n};',
+          map: '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["equals.test.tsx"],"names":[],"mappings":"eAyHS;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACtC,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACnD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          imports: [],
+          exportAt: 0,
         },
       ),
     );

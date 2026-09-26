@@ -10,7 +10,7 @@ it("constant", async (t) => {
       { params: [] },
       {
         code: "export default () => 1;",
-        map: '{"version":3,"mappings":"eAKuC,OAAC","names":[],"ignoreList":[],"sources":["constant.test.tsx"]}',
+        map: '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["constant.test.tsx"],"names":[],"mappings":"eAKuC,MAAA,CAAC"}',
         imports: [],
         exportAt: 0,
       },

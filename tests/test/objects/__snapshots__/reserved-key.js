@@ -11,8 +11,8 @@ it("reservedKey", async (t) => {
       "2a27difszbs8:8:39",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
       {
-        code: "export default $0 => () => $0();",
-        map: '{"version":3,"mappings":"eAO0CA,EAAA,UAAMA,EAAA,EAAC","names":["$0"],"ignoreList":[],"sources":["reserved-key.test.tsx"]}',
+        code: "export default ($0) => () => $0();",
+        map: '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["reserved-key.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
         imports: [],
         exportAt: 0,
       },

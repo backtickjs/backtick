@@ -17,21 +17,10 @@ const loadedBadge = await bundler.run(
     "2h8m00z8w6ydl:18:2",
     { params: [] },
     {
-      code: 'import { template as _$template } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<b>`);\nexport default () => props => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, () => "count " + props.count);\n  return _el$;\n})();',
-      map: '{"version":3,"mappings":";;;eAiBK,MAACA,KAAwB;EAAA,IAAAC,IAAA,GAAAC,MAAA;EAAAC,QAAA,CAAAF,IAAA,QAAS,QAAQ,GAAGD,KAAK,CAACI,KAAK;EAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","count"],"ignoreList":[],"sources":["script-bound-tag-loading.test.tsx"]}',
-      imports: [
-        {
-          from: "solid-js/web",
-          range: [0, 54],
-          bindings: [{ name: "template", local: "_$template" }],
-        },
-        {
-          from: "solid-js/web",
-          range: [55, 105],
-          bindings: [{ name: "insert", local: "_$insert" }],
-        },
-      ],
-      exportAt: 151,
+      code: 'export default () => (props) => <b>{"count " + props.count}</b>;',
+      map: '{"version":3,"file":"script-bound-tag-loading.test.jsx","sourceRoot":"","sources":["script-bound-tag-loading.test.tsx"],"names":[],"mappings":"eAiBK,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,CAAC"}',
+      imports: [],
+      exportAt: 0,
     },
   ),
   { transform },
@@ -45,36 +34,10 @@ const scriptBoundTagLoading = cs.create(
     ],
   },
   {
-    code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { memo as _$memo } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<div><button>load</button><button>more`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<i>loading`);\nexport default ($0, $1) => {\n  const count = $0()(0);\n  const drawn = $0()(null);\n  const Badge = props => {\n    const held = drawn[0]();\n    return held === null ? null : eval(held)(props);\n  };\n  return (() => {\n    var _el$ = _tmpl$(),\n      _el$2 = _el$.firstChild,\n      _el$3 = _el$2.nextSibling;\n    _$insert(_el$, (() => {\n      var _c$ = _$memo(() => drawn[0]() === null);\n      return () => _c$() ? _tmpl$2() : _$createComponent(Badge, {\n        get count() {\n          return count[0]();\n        }\n      });\n    })(), _el$2);\n    _el$2.$$click = () => drawn[1]($1());\n    _el$3.$$click = () => count[1](count[0]() + 1);\n    return _el$;\n  })();\n};\n_$delegateEvents(["click"]);',
-    map: '{"version":3,"mappings":";;;;;;;eAqBiC,CAAAA,EAAA,EAAAC,EAAA;EAC/B,MAAMC,KAAK,GAAGF,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9B,MAAMG,KAAK,GAAGH,EAAA,EAAa,CAEjB,IAAI,CAAC;EACf,MAAMI,KAAK,GAAIC,KAAwB,IAAI;IACzC,MAAMC,IAAI,GAAGH,KAAK,CAAC,CAAC,CAAC,EAAE;IACvB,OAAOG,IAAI,KAAK,IAAI,GAAG,IAAI,GAAGC,IAAI,CAACD,IAAI,CAAC,CAACD,KAAK,CAAC;EACjD,CAAC;EAED;IAAA,IAAAG,IAAA,GAAAC,MAAA;MAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;MAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAC,QAAA,CAAAN,IAAA;MAAA,IAAAO,GAAA,GAAAC,MAAA,OAEKb,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI;MAAA,aAAnBY,GAAA,KAAAE,OAAA,KAAAC,iBAAA,CAAwCd,KAAK;QAAA,IAACF,KAAKA,CAAA;UAAA,OAAEA,KAAK,CAAC,CAAC,CAAC,EAAE;QAAA;MAAA,EAAI;IAAA,MAAAQ,KAAA;IAAAA,KAAA,CAAAS,OAAA,GACnD,MAAMhB,KAAK,CAAC,CAAC,CAAC,CAACF,EAAA,EAAY,CAAC;IAAAW,KAAA,CAAAO,OAAA,GAC5B,MAAMjB,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAAA,OAAAM,IAAA;EAAA;AAGrD,CAAC;AAAAY,gBAAA","names":["$0","$1","count","drawn","Badge","props","held","eval","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$insert","_c$","_$memo","_tmpl$2","_$createComponent","$$click","_$delegateEvents"],"ignoreList":[],"sources":["script-bound-tag-loading.test.tsx"]}',
-    imports: [
-      {
-        from: "solid-js/web",
-        range: [0, 54],
-        bindings: [{ name: "template", local: "_$template" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [55, 121],
-        bindings: [{ name: "delegateEvents", local: "_$delegateEvents" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [122, 190],
-        bindings: [{ name: "createComponent", local: "_$createComponent" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [191, 241],
-        bindings: [{ name: "insert", local: "_$insert" }],
-      },
-      {
-        from: "solid-js/web",
-        range: [242, 288],
-        bindings: [{ name: "memo", local: "_$memo" }],
-      },
-    ],
-    exportAt: 420,
+    code: "export default ($0, $1) => {\n    const count = $0()(0);\n    const drawn = $0()(null);\n    const Badge = (props) => {\n        const held = drawn[0]();\n        return held === null ? null : eval(held)(props);\n    };\n    return (<div>\n      {drawn[0]() === null ? <i>loading</i> : <Badge count={count[0]()}/>}\n      <button onclick={() => drawn[1]($1())}>load</button>\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n};",
+    map: '{"version":3,"file":"script-bound-tag-loading.test.jsx","sourceRoot":"","sources":["script-bound-tag-loading.test.tsx"],"names":[],"mappings":"eAqBiC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAEjB,IAAI,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,CAAC,KAAwB,EAAE,EAAE;QACzC,MAAM,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC;QACxB,OAAO,IAAI,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC;IAClD,CAAC,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG,CACpE;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,IAAY,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC3D;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    imports: [],
+    exportAt: 0,
   },
 );
 it("scriptBoundTagLoading", async (t) => {

@@ -1,12 +1,13 @@
 (() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
   const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
+
   const $Script = (props) => props.run();
   const f1 = (() => {
-    const { template: _$template } = $modules["solid-js/web"];
-    const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-    const { insert: _$insert } = $modules["solid-js/web"];
-    var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
     const $entry = ($0, $1, $2) => {
       const flag = $0()(true);
       const tone = $0()($1());
@@ -22,7 +23,6 @@
         return _el$;
       })();
     };
-    _$delegateEvents(["click"]);
     return $entry;
   })();
   const $bundle = _$createComponent($Script, {
@@ -33,5 +33,6 @@
         () => "cool",
       ),
   });
+  _$delegateEvents(["click"]);
   return $bundle;
 })();

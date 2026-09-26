@@ -330,9 +330,6 @@ importers:
       '@backtickjs/client-script':
         specifier: workspace:*
         version: link:../client-script
-      '@jridgewell/remapping':
-        specifier: ^2.3.5
-        version: 2.3.5
     devDependencies:
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
@@ -485,9 +482,6 @@ importers:
       '@backtickjs/compiler':
         specifier: workspace:^0.1.0
         version: link:../compiler
-      '@backtickjs/tspatch-plugin':
-        specifier: workspace:^0.1.0
-        version: link:../tspatch-plugin
       '@backtickjs/web-testing':
         specifier: workspace:^0.1.0
         version: link:../web-testing

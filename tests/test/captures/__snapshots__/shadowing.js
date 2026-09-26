@@ -11,8 +11,8 @@ function addOwnTotal(lhs, rhs) {
       ],
     },
     {
-      code: "export default ($0, $1) => {\n  let total = 0;\n  total = total + $0();\n  total = total + $1();\n  return total;\n};",
-      map: '{"version":3,"mappings":"eAMY,CAAAA,EAAA,EAAAC,EAAA;EACR,IAAIC,KAAK,GAAG,CAAC;EACbA,KAAK,GAAGA,KAAK,GAAGF,EAAA,EAAI;EACpBE,KAAK,GAAGA,KAAK,GAAGD,EAAA,EAAI;EACpB,OAAOC,KAAK;AACd,CAAC","names":["$0","$1","total"],"ignoreList":[],"sources":["shadowing.test.tsx"]}',
+      code: "export default ($0, $1) => {\n    let total = 0;\n    total = total + $0();\n    total = total + $1();\n    return total;\n};",
+      map: '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,OAAO,KAAK,CAAC;AACf,CAAC"}',
       imports: [],
       exportAt: 0,
     },
@@ -33,8 +33,8 @@ it("shadowing", async (t) => {
                 "3ujapqmnmm2ra:21:27",
                 { params: [{ kind: "capture", key: "total$3ujapqmnmm2ra$1" }] },
                 {
-                  code: "export default $0 => $0;",
-                  map: '{"version":3,"mappings":"eAoB8BA,EAAA,IAAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["shadowing.test.tsx"]}',
+                  code: "export default ($0) => $0;",
+                  map: '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"eAoB8B,QAAA,EAAK"}',
                   imports: [],
                   exportAt: 0,
                 },
@@ -46,8 +46,8 @@ it("shadowing", async (t) => {
         ],
       },
       {
-        code: "export default $0 => {\n  const total = 1;\n  return $0(total);\n};",
-        map: '{"version":3,"mappings":"eAkBOA,EAAA;EACD,MAAMC,KAAK,GAAG,CAAC;EACf,OAAOD,EAAA,CAAAC,KAAA,CAAC;AACV,CAAC","names":["$0","total"],"ignoreList":[],"sources":["shadowing.test.tsx"]}',
+        code: "export default ($0) => {\n    const total = 1;\n    return $0(total);\n};",
+        map: '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["shadowing.test.tsx"],"names":[],"mappings":"eAkBO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,SAAC,CAA8B;AACxC,CAAC"}',
         imports: [],
         exportAt: 0,
       },

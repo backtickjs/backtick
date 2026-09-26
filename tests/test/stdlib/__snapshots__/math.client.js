@@ -1,7 +1,21 @@
 // 12:5
 export default () => {
-  const rounded = Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
-  const edges = Math.floor(-1.5) + "," + Math.ceil(-1.5) + "," + Math.trunc(-1.5);
-  const picks = Math.min(3, 1, 2) + "," + Math.max(3, 1, 2) + "," + Math.abs(-4);
-  return rounded + "|" + edges + "|" + picks + "|" + Math.sqrt(9) + "," + Math.sign(-8) + "," + Math.fround(1.5) + "|" + (Math.PI > 3.14) + "," + (Math.E > 2.71);
+    const rounded = Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
+    const edges = Math.floor(-1.5) + "," + Math.ceil(-1.5) + "," + Math.trunc(-1.5);
+    const picks = Math.min(3, 1, 2) + "," + Math.max(3, 1, 2) + "," + Math.abs(-4);
+    return (rounded +
+        "|" +
+        edges +
+        "|" +
+        picks +
+        "|" +
+        Math.sqrt(9) +
+        "," +
+        Math.sign(-8) +
+        "," +
+        Math.fround(1.5) +
+        "|" +
+        (Math.PI > 3.14) +
+        "," +
+        (Math.E > 2.71));
 };

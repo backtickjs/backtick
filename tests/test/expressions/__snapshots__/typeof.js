@@ -12,8 +12,8 @@ it("typeofTable", async (t) => {
       "3liitb76d9d7p:12:4",
       { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
       {
-        code: 'export default $0 => {\n  const count = $0()(0);\n  return [typeof undefined, typeof null, typeof true, typeof 1, typeof "a", typeof [1], typeof {\n    a: 1\n  }, typeof (n => n), typeof Math.floor, typeof count];\n};',
-        map: '{"version":3,"mappings":"eAWOA,EAAA;EACD,MAAMC,KAAK,GAAGD,EAAA,EAAa,CAAC,CAAC,CAAC;EAC9B,OAAO,CACL,OAAOE,SAAS,EAChB,OAAO,IAAI,EACX,OAAO,IAAI,EACX,OAAO,CAAC,EACR,OAAO,GAAG,EACV,OAAO,CAAC,CAAC,CAAC,EACV,OAAO;IAAEC,CAAC,EAAE;EAAC,CAAE,EACf,QAASC,CAAS,IAAKA,CAAC,CAAC,EACzB,OAAOC,IAAI,CAACC,KAAK,EACjB,OAAOL,KAAK,CACb;AACH,CAAC","names":["$0","count","undefined","a","n","Math","floor"],"ignoreList":[],"sources":["typeof.test.tsx"]}',
+        code: 'export default ($0) => {\n    const count = $0()(0);\n    return [\n        typeof undefined,\n        typeof null,\n        typeof true,\n        typeof 1,\n        typeof "a",\n        typeof [1],\n        typeof { a: 1 },\n        typeof ((n) => n),\n        typeof Math.floor,\n        typeof count,\n    ];\n};',
+        map: '{"version":3,"file":"typeof.test.jsx","sourceRoot":"","sources":["typeof.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO;QACL,OAAO,SAAS;QAChB,OAAO,IAAI;QACX,OAAO,IAAI;QACX,OAAO,CAAC;QACR,OAAO,GAAG;QACV,OAAO,CAAC,CAAC,CAAC;QACV,OAAO,EAAE,CAAC,EAAE,CAAC,EAAE;QACf,OAAO,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,CAAC;QACzB,OAAO,IAAI,CAAC,KAAK;QACjB,OAAO,KAAK;KACb,CAAC;AACJ,CAAC"}',
         imports: [],
         exportAt: 0,
       },
@@ -29,8 +29,8 @@ it("typeofNarrows", async (t) => {
       "3liitb76d9d7p:35:4",
       { params: [] },
       {
-        code: 'export default () => {\n  const measure = v => typeof v === "string" ? v.length : v * 2;\n  return [measure("abc"), measure(4)];\n};',
-        map: '{"version":3,"mappings":"eAkCO;EACD,MAAMA,OAAO,GAAIC,CAAkB,IACjC,OAAOA,CAAC,KAAK,QAAQ,GAAGA,CAAC,CAACC,MAAM,GAAGD,CAAC,GAAG,CAAC;EAC1C,OAAO,CAACD,OAAO,CAAC,KAAK,CAAC,EAAEA,OAAO,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC","names":["measure","v","length"],"ignoreList":[],"sources":["typeof.test.tsx"]}',
+        code: 'export default () => {\n    const measure = (v) => typeof v === "string" ? v.length : v * 2;\n    return [measure("abc"), measure(4)];\n};',
+        map: '{"version":3,"file":"typeof.test.jsx","sourceRoot":"","sources":["typeof.test.tsx"],"names":[],"mappings":"eAkCO;IACD,MAAM,OAAO,GAAG,CAAC,CAAkB,EAAE,EAAE,CACrC,OAAO,CAAC,KAAK,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC;IAC3C,OAAO,CAAC,OAAO,CAAC,KAAK,CAAC,EAAE,OAAO,CAAC,CAAC,CAAC,CAAC,CAAC;AACtC,CAAC"}',
         imports: [],
         exportAt: 0,
       },

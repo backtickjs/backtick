@@ -21,10 +21,6 @@
       "types": "./dist/transform.d.ts",
       "default": "./dist/transform.js"
     },
-    "./tspatch-plugin": {
-      "types": "./dist/tspatch-plugin.d.ts",
-      "default": "./dist/tspatch-plugin.js"
-    },
     "./client": {
       "types": "./dist/client.d.ts",
       "default": "./dist/client.js"
@@ -51,7 +47,6 @@
   },
   "devDependencies": {
     "@backtickjs/compiler": "workspace:^0.1.0",
-    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
     "@backtickjs/web-testing": "workspace:^0.1.0",
     "@jridgewell/trace-mapping": "^0.3.31",
     "@types/babel__core": "^7.20.5",
@@ -62,13 +57,9 @@
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
     "@backtickjs/web-testing": "workspace:^0.1.0"
   },
   "peerDependenciesMeta": {
-    "@backtickjs/tspatch-plugin": {
-      "optional": true
-    },
     "@backtickjs/web-testing": {
       "optional": true
     }
