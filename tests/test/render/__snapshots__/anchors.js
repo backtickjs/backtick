@@ -5,7 +5,6 @@ import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { client } from "@backtickjs/solid-js/client";
 import { createRoot } from "solid-js";
 import { insert } from "solid-js/web";
 import { screen } from "@backtickjs/solid-js/testing";
@@ -31,7 +30,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "17cuvaz50pawn:35:9",
+    "zqoyuycuzdnk:34:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -39,7 +38,7 @@ async function Rows() {
       ],
     },
     '($splice0, $tag1) => {\n    const ids = $splice0()([1, 2, 3]);\n    const clear = () => {\n        ids[1]([]);\n    };\n    return (<>\n        <span onclick={clear}>clear</span>\n        <$tag1 each={ids[0]()}>{(id) => <span>{"row " + id}</span>}</$tag1>\n      </>);\n}',
-    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AAkCY;IACR,MAAM,GAAG,GAAG,UAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,KAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
+    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AAiCY;IACR,MAAM,GAAG,GAAG,UAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,KAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
   );
 }
 it("Rows", async (t) => {
@@ -78,12 +77,10 @@ async function drawAt(value, parent, selector) {
   const draw = (
     await import(`data:text/javascript,${encodeURIComponent(code)}`)
   ).default;
-  const unmount = client.evaluate(() =>
-    createRoot((dispose) => {
-      insert(parent, draw(), parent.querySelector(selector));
-      return dispose;
-    }),
-  );
+  const unmount = createRoot((dispose) => {
+    insert(parent, draw(), parent.querySelector(selector));
+    return dispose;
+  });
   undo.push(unmount);
 }
 describe("where a render draws", () => {

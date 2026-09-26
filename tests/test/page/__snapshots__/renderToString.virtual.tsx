@@ -51,15 +51,19 @@ describe("renderToString", () => {
 });
 
 describe("importMap", () => {
-  it("writes where each module is served, escaped", () => {
+  it("maps Solid's modules to the CDN, one version for all", () => {
     const open = '<script type="importmap">';
-    const map = importMap((name) => `/modules/</script>/${name}.js`);
-    const json = map.slice(open.length, -"</script>".length);
-    assert.ok(map.startsWith(open) && !json.includes("<"));
-    assert.equal(
-      JSON.parse(json).imports["solid-js/web"],
-      "/modules/</script>/solid-js/web.js",
+    const map = importMap();
+    const { imports } = JSON.parse(map.slice(open.length, -"</script>".length));
+    assert.deepEqual(Object.keys(imports), [
+      "solid-js",
+      "solid-js/web",
+      "solid-js/store",
+    ]);
+    const versions = new Set(
+      Object.values(imports).map((url) => /solid-js@([^/]+)/.exec(url as string)![1]),
     );
+    assert.equal(versions.size, 1);
   });
 });
 

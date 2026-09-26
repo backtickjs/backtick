@@ -4,7 +4,6 @@ import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { client } from "@backtickjs/solid-js/client";
 import { createRoot, type JSX as Solid } from "solid-js";
 import { insert } from "solid-js/web";
 import { screen } from "@backtickjs/solid-js/testing";
@@ -93,12 +92,10 @@ async function drawAt(
   const draw = (
     await import(`data:text/javascript,${encodeURIComponent(code)}`)
   ).default as () => Solid.Element;
-  const unmount = client.evaluate(() =>
-    createRoot((dispose) => {
-      insert(parent, draw(), parent.querySelector(selector)!);
-      return dispose;
-    }),
-  );
+  const unmount = createRoot((dispose) => {
+    insert(parent, draw(), parent.querySelector(selector)!);
+    return dispose;
+  });
   undo.push(unmount);
 }
 
