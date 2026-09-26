@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
 import { evaluate } from "@backtickjs/solid-js/testing";
 // A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
 // no form for it: dropped from an object and turned into `null` in an array.
@@ -12,10 +11,10 @@ describe("a spliced undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          "2i00dqahsuxy4:13:32",
+          "geei6gdr1y20:12:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
           "($splice0) => $splice0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAYmC,cAAA,UAAQ"}',
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAWmC,cAAA,UAAQ"}',
         ),
       ),
       undefined,
@@ -25,10 +24,10 @@ describe("a spliced undefined", () => {
     const data = { missing: undefined, kept: 1 };
     const arrived = await evaluate(
       cs.create(
-        "2i00dqahsuxy4:18:35",
+        "geei6gdr1y20:17:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
         "($splice0) => $splice0()",
-        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiBsC,cAAA,UAAK"}',
+        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAgBsC,cAAA,UAAK"}',
       ),
     );
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
@@ -39,17 +38,17 @@ describe("a spliced undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          "2i00dqahsuxy4:25:36",
+          "geei6gdr1y20:24:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
           "($splice0) => $splice0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwBuC,cAAA,UAAK"}',
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAuBuC,cAAA,UAAK"}',
         ),
       ),
       [1, undefined, 3],
     );
   });
   it("is written as `void 0`", async () => {
-    const code = await bundler.run([undefined], { transform });
+    const { code } = await bundler.run([undefined]);
     assert.match(code, /\[void 0\]/);
   });
 });

@@ -2,7 +2,7 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
+import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { client } from "@backtickjs/solid-js/client";
@@ -31,7 +31,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "zbupybbcou6y:35:9",
+    "36fjqm6p5y7fv:35:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -74,7 +74,7 @@ function target(html) {
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
 // these insert at it with Solid directly.
 async function drawAt(value, parent, selector) {
-  const code = await bundler.run(value, { transform });
+  const { code } = compile(await bundler.run(value));
   const draw = (
     await import(`data:text/javascript,${encodeURIComponent(code)}`)
   ).default;

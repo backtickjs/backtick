@@ -1,6 +1,6 @@
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
+import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -10,7 +10,7 @@ async function Other() {
   return cs`<em>{"from another bundle"}</em>`;
 }
 
-const otherBundle = await bundler.run(<Other />, { transform });
+const otherBundle = compile(await bundler.run(<Other />)).code;
 
 it("evalSiblings", async (t) => {
   await snapshotCase(

@@ -1,21 +1,9 @@
-import type { Bundle, ClientUnknown } from "@backtickjs/platform-sdk";
 import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
-import remapping from "@jridgewell/remapping";
 import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type { BundleTree } from "../bundle/buildBundle.js";
+import type { JsxModule } from "../JsxModule.js";
 import type { ClientScript } from "@backtickjs/client-script";
 import { importDeclaration } from "./code.js";
-
-/**
- * What an adapter's transform does to a bundle's module, shaped as a Vite
- * plugin's `transform`: the code and its module id in, whatever the
- * framework's compiler made of it out, with a source map (as JSON) into the
- * code it was given.
- */
-export type CodeTransform = (
-  code: string,
-  id: string,
-) => { readonly code: string; readonly map: string };
 
 const MODULE_ID = "bundle.jsx";
 
@@ -23,20 +11,17 @@ const MODULE_ID = "bundle.jsx";
  * A bundle tree as a module whose default export draws the tree's root: a
  * function, so the client calls it where what it creates is owned.
  *
- * The module is JSX: its imports, each script, and the root. The adapter's
- * transform compiles it as the framework compiles any module; its imports are
+ * The module is JSX: its imports, each script, and the root, for the
+ * framework's compiler to compile as it compiles any module; its imports are
  * the client's to resolve, through an import map in a page.
  *
- * With `sourceMap`, the bundle ends with its map inline, into the host files
- * its scripts were written in: each script's own map, moved to where the
- * script stands in the module, then through the transform's. What the bundler
- * wrote around the scripts maps to nothing, since no source wrote it.
+ * Its map leads into the host files its scripts were written in: each
+ * script's own map, moved to where the script stands in the module. What the
+ * bundler wrote around the scripts maps to nothing, since no source wrote it.
  */
-export function printBundle<T extends ClientUnknown>(
+export function printBundle<T>(
   tree: BundleTree,
-  transform: CodeTransform,
-  sourceMap: boolean,
-): Bundle<T> {
+): JsxModule<T> {
   const { names } = tree;
   const module = new ModuleWriter();
   for (const { from, name, local } of names.imports.values()) {
@@ -53,14 +38,7 @@ export function printBundle<T extends ClientUnknown>(
   }
   module.write(`export default () => (${tree.root});`);
 
-  const compiled = transform(module.code, MODULE_ID);
-  if (!sourceMap) {
-    return compiled.code as Bundle<T>;
-  }
-  const map = remapping([compiled.map, module.map()], () => null, {
-    excludeContent: true,
-  }).toString();
-  return `${compiled.code}\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,${base64(map)}` as Bundle<T>;
+  return { code: module.code, map: module.map() };
 }
 
 // The module's code as it is written, and a map of the scripts in it.
@@ -113,13 +91,4 @@ class ModuleWriter {
   map(): string {
     return JSON.stringify(toEncodedMap(this.#map));
   }
-}
-
-// UTF-8, as a data URL's base64 reads it.
-function base64(text: string): string {
-  let binary = "";
-  for (const byte of new TextEncoder().encode(text)) {
-    binary += String.fromCharCode(byte);
-  }
-  return btoa(binary);
 }

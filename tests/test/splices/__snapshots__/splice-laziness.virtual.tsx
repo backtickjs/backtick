@@ -4,7 +4,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 
 // A host helper reused with different splices makes its script polymorphic:
 // the holes can't be inlined, so every call site passes its splice as a
-// thunk and the body evaluates `$0()` at the hole. The thunk is what keeps
+// thunk and the body evaluates `$splice0()` at the hole. The thunk is what keeps
 // the hole as lazy as an inlined splice: `guard(broken)(false)` never
 // reaches its hole, so the broken fragment must never evaluate — passed
 // eagerly (by value instead of by thunk) it would throw before `flag` was

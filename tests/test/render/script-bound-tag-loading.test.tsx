@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
+import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import type { BacktickElement, Bundle } from "@backtickjs/core";
@@ -14,10 +14,11 @@ import { snapshotCase } from "../snapshotCase.ts";
 // Read inside the drawing, so the condition follows the signal: when the bundle
 // arrives the child runs again and calls `Badge`, and `count` stays a prop the
 // badge reads on access rather than a value handed over once.
-const loadedBadge = await bundler.run(
-  cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
-  { transform },
-);
+const loadedBadge = compile(
+  await bundler.run(
+    cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
+  ),
+).code;
 
 const scriptBoundTagLoading = cs`{
   const count = $createSignal(0);

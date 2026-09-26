@@ -1,17 +1,15 @@
-import type { ClientUnknown } from "./declarations.generated.js";
-
 declare const BundleBrand: unique symbol;
 
 /**
- * A bundle: one JavaScript expression that evaluates to a `T`, which a client
- * runs with `eval`. What `T` is, is what the host wrote down when it bundled
- * it; nothing in the string checks it.
+ * A bundle: a module whose default export draws a `T`, as a framework's
+ * compiler made it of what the bundler answered, which a client imports and
+ * runs.
  */
-export type Bundle<T extends ClientUnknown> = string & {
+export type Bundle<T> = string & {
   readonly [BundleBrand]: T;
 };
 
 declare global {
   /** Evaluates a bundle, and answers with what it evaluates to. */
-  function eval<T extends ClientUnknown>(bundle: Bundle<T>): T;
+  function eval<T>(bundle: Bundle<T>): T;
 }

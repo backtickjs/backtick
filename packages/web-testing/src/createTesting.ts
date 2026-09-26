@@ -4,10 +4,10 @@ import type {
   ClientUnknown,
   Spliceable,
 } from "@backtickjs/core";
-import type { CodeTransform } from "@backtickjs/bundler";
 import type { Queries, queries } from "@testing-library/dom";
 import {
   type BundleClient,
+  type Compile,
   evaluateBundleWith,
   evaluateWith,
 } from "./evaluate.js";
@@ -28,13 +28,13 @@ export interface Testing {
 }
 
 /**
- * `render` and `evaluate` bound to an adapter's client and transform: what an
+ * `render` and `evaluate` bound to an adapter's client and compiler: what an
  * adapter's own testing entry exports, as `@testing-library/react` binds
  * `@testing-library/dom` to React.
  */
 export function createTesting(
   client: BundleClient,
-  transform: CodeTransform,
+  compile: Compile,
 ): Testing {
   return {
     render: <
@@ -44,9 +44,9 @@ export function createTesting(
     >(
       value: Spliceable<BacktickElement>,
       options?: RenderOptions<Q, Container, BaseElement>,
-    ) => renderWith(client, transform, value, options),
+    ) => renderWith(client, compile, value, options),
     evaluate: <T extends ClientUnknown>(value: Spliceable<T>) =>
-      evaluateWith(client, transform, value),
+      evaluateWith(client, compile, value),
     evaluateBundle: <T extends ClientUnknown>(code: Bundle<T>) =>
       evaluateBundleWith(client, code),
   };

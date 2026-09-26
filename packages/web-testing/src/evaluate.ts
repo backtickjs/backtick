@@ -1,5 +1,5 @@
 import type { Bundle, ClientUnknown, Spliceable } from "@backtickjs/core";
-import { bundler, type CodeTransform } from "@backtickjs/bundler";
+import { bundler, type JsxModule } from "@backtickjs/bundler";
 import { importBundle } from "./client.js";
 
 /** What runs a bundle: an adapter's client (see `createTesting`). */
@@ -10,9 +10,14 @@ export interface BundleClient {
   render(run: () => unknown, container: Element): () => void;
 }
 
+/** What makes a bundle of what the bundler answered: an adapter's compiler. */
+export type Compile = <T extends ClientUnknown>(
+  module: JsxModule<T>,
+) => { readonly code: Bundle<T> };
+
 /**
- * Bundles a value with `transform` and evaluates the bundle's root with
- * `client`.
+ * Bundles a value, compiles it with `compile`, and evaluates the bundle's root
+ * with `client`.
  *
  * Nothing is mounted: a root is as often data as a drawing, and data has
  * nowhere to be mounted. What comes back is what the root is: the node it
@@ -20,10 +25,10 @@ export interface BundleClient {
  */
 export async function evaluateWith<T extends ClientUnknown>(
   client: BundleClient,
-  transform: CodeTransform,
+  compile: Compile,
   value: Spliceable<T>,
 ): Promise<T> {
-  const code = await bundler.run(value, { transform });
+  const { code } = compile(await bundler.run(value));
   return client.evaluate(await importBundle(code));
 }
 

@@ -1,7 +1,6 @@
 import { type ClientScript, isClientScript } from "@backtickjs/client-script";
 import {
   type Client,
-  type ClientUnknown,
   isBuiltin,
   isClientImport,
   type Spliceable,
@@ -62,7 +61,7 @@ const RESERVED = ["globalThis", "arguments", "await", "eval", "yield"];
 // name, a capture is threaded under that one name the whole way down — an
 // intermediate script that binds a same-looking variable has a different
 // unique name, so there is nothing to disambiguate and nothing to rename.
-export async function buildBundle<T extends ClientUnknown>(
+export async function buildBundle<T>(
   value: Spliceable<T>,
 ): Promise<BundleTree> {
   const names = createNames();

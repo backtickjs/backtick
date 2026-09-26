@@ -10,10 +10,10 @@ it("twoFiles", async (t) => {
     t,
     "twoFiles",
     cs.create(
-      "2q1jq3rupgdvu:9:36",
+      "fb5gdg5h2ujo:12:4",
       { params: [{ kind: "splice", value: _jsx(Badge, {}), bindings: [] }] },
-      '($splice0) => <p>{"in "}{$splice0()}</p>',
-      '{"version":3,"file":"two-files.test.jsx","sourceRoot":"","sources":["bundler/two-files.test.tsx"],"names":[],"mappings":"AAQuC,cAAA,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,UAAc,CAAC,EAAE,CAAC,CAAC"}',
+      '($splice0) => <p>\n      {"in "}\n      {$splice0()}\n    </p>',
+      '{"version":3,"file":"two-files.test.jsx","sourceRoot":"","sources":["bundler/two-files.test.tsx"],"names":[],"mappings":"AAWO,cAAA,CAAC,CAAC,CACH;MAAA,CAAC,KAAK,CACN;MAAA,CAAC,UAAc,CACjB;IAAA,EAAE,CAAC,CAAC"}',
     ),
   );
 });

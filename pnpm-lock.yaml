@@ -295,9 +295,6 @@ importers:
       '@jridgewell/gen-mapping':
         specifier: ^0.3.13
         version: 0.3.13
-      '@jridgewell/remapping':
-        specifier: ^2.3.5
-        version: 2.3.5
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
         version: 0.3.31
@@ -463,6 +460,9 @@ importers:
       '@babel/core':
         specifier: ^7.29.7
         version: 7.29.7
+      '@backtickjs/bundler':
+        specifier: workspace:^0.1.0
+        version: link:../bundler
       '@backtickjs/platform-sdk':
         specifier: workspace:^0.1.0
         version: link:../platform-sdk

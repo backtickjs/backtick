@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
 import { onMount } from "@backtickjs/solid-js";
 import { render, screen } from "@backtickjs/solid-js/testing";
 // An element's prop that is `undefined` is left out, as an optional prop reads
@@ -14,13 +13,10 @@ async function Pill({ label, ref }) {
 }
 describe("an undefined prop", () => {
   it("is left out of the element", async () => {
-    const code = await bundler.run(
+    const { code } = await bundler.run(
       _jsx("div", { class: undefined, id: "kept" }),
-      {
-        transform,
-      },
     );
-    assert.match(code, /_\$template\(`<div id=kept>`\)/);
+    assert.match(code, /<div id=\{"kept"\} \/>/);
   });
   it("lets a component forward an optional prop it wasn't given", async () => {
     await render(_jsx(Pill, { label: "plain" }));
@@ -31,10 +27,10 @@ describe("an undefined prop", () => {
       _jsx(Pill, {
         label: "focused",
         ref: cs.create(
-          "1x1djky073nkj:37:33",
+          "jtqlr6qzr2nc:34:33",
           { params: [{ kind: "splice", value: onMount, bindings: [] }] },
           "($splice0) => (el) => $splice0()(() => el.focus())",
-          '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAoCoC,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
+          '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAiCoC,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
         ),
       }),
     );

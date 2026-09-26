@@ -23,7 +23,6 @@
     "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/ui-platform-sdk": "workspace:*",
     "@jridgewell/gen-mapping": "^0.3.13",
-    "@jridgewell/remapping": "^2.3.5",
     "@jridgewell/trace-mapping": "^0.3.31"
   },
   "devDependencies": {

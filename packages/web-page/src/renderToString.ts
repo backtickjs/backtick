@@ -1,9 +1,9 @@
-import { bundler, type BundleOptions } from "@backtickjs/bundler";
+import { bundler, type JsxModule } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
 
 /**
  * Runs `element` and returns its bundle, compiled with the adapter's
- * `transform`, as a `<script>`, followed by the client that draws it.
+ * `compile`, as a `<script>`, followed by the client that draws it.
  *
  * The script queues the bundle, with the script itself to say where it
  * stands, on `self.__backtick`. The bundle is behind a function, so nothing in
@@ -12,9 +12,9 @@ import type { BacktickElement } from "@backtickjs/core";
 export async function renderToString(
   element: BacktickElement,
   clientUrl: string,
-  options: BundleOptions,
+  compile: (module: JsxModule<unknown>) => { readonly code: string },
 ): Promise<string> {
-  const code = await bundler.run(element, options);
+  const { code } = compile(await bundler.run(element));
   const script = `(self.__backtick ??= []).push([document.currentScript, () => ${code}]);`;
   // The printer escapes every `<` a string holds; this is what would end the
   // element early if it ever did not.

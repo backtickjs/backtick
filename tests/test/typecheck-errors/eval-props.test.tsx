@@ -1,5 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
+import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
 
@@ -19,14 +19,14 @@ async function Nothing() {
   return cs`<em>{"nothing to hand it"}</em>`;
 }
 
-const rows = (await bundler.run(
-  cs`(props: { count: number }) => ${(<Row count={cs`props.count`} />)}`,
-  { transform },
-)) as Bundle<Rows>;
+const rows = compile(
+  await bundler.run(
+    cs`(props: { count: number }) => ${(<Row count={cs`props.count`} />)}`,
+  ),
+).code as Bundle<Rows>;
 
-const empty = (await bundler.run(<Nothing />, {
-  transform,
-})) as Bundle<BacktickElement>;
+const empty = compile(await bundler.run(<Nothing />))
+  .code as Bundle<BacktickElement>;
 
 export default cs`{
   const Rows = eval($rows);

@@ -7,8 +7,8 @@ import type {
   queries,
 } from "@testing-library/dom";
 import { mounted } from "./cleanup.js";
-import type { BundleClient } from "./evaluate.js";
-import { bundler, type CodeTransform } from "@backtickjs/bundler";
+import type { BundleClient, Compile } from "./evaluate.js";
+import { bundler } from "@backtickjs/bundler";
 import { importBundle } from "./client.js";
 
 /** Where and how a value is drawn. */
@@ -57,8 +57,8 @@ export type RenderResult<
 };
 
 /**
- * Bundles a value with `transform` and draws it into the global document with
- * `client`, as Testing Library's `render` mounts a component.
+ * Bundles a value, compiles it with `compile`, and draws it into the global
+ * document with `client`, as Testing Library's `render` mounts a component.
  *
  * The document is the test environment's: jsdom through `global-jsdom`, Jest's
  * or Vitest's `jsdom` environment, or a browser.
@@ -69,7 +69,7 @@ export async function renderWith<
   BaseElement extends Element = Container,
 >(
   client: BundleClient,
-  transform: CodeTransform,
+  compile: Compile,
   value: Spliceable<BacktickElement>,
   options: RenderOptions<Q, Container, BaseElement> = {},
 ): Promise<RenderResult<Q, Container, BaseElement>> {
@@ -88,7 +88,7 @@ export async function renderWith<
   takeDown();
 
   const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
-    const code = await bundler.run(value, { transform });
+    const { code } = compile(await bundler.run(value));
     const run = await importBundle(code);
     takeDown();
     const dispose = client.render(run, container);

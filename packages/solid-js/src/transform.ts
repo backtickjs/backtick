@@ -1,18 +1,33 @@
 import { transformSync } from "@babel/core";
+import type { Bundle, JsxModule } from "@backtickjs/bundler";
 import solid from "babel-preset-solid";
 
 /**
- * A script's module compiled by Solid's own compiler (see backtick's
- * `CodeTransform`): its JSX as template and DOM code, its map into the code
- * it was given.
+ * Code compiled by Solid's own compiler: its JSX as template and DOM code, and
+ * its map — into the code it was given, or through `inputSourceMap` into what
+ * that code's own map leads to. The map carries no `sourcesContent`.
  */
-export function transform(code: string, id: string) {
+export function transform(code: string, id: string, inputSourceMap?: string) {
   const result = transformSync(code, {
     filename: id,
     babelrc: false,
     configFile: false,
     sourceMaps: true,
+    inputSourceMap:
+      inputSourceMap === undefined ? undefined : JSON.parse(inputSourceMap),
     presets: [[solid, { moduleName: "solid-js/web", generate: "dom" }]],
   });
-  return { code: result!.code!, map: JSON.stringify(result!.map) };
+  const { sourcesContent: _, ...map } = result!.map!;
+  return { code: result!.code!, map: JSON.stringify(map) };
+}
+
+/**
+ * A bundle of what the bundler answered, compiled by Solid's compiler, and its
+ * map into the host files its scripts were written in.
+ */
+export function compile<T>(
+  module: JsxModule<T>,
+): { code: Bundle<T>; map: string } {
+  const { code, map } = transform(module.code, "bundle.jsx", module.map);
+  return { code: code as Bundle<T>, map };
 }

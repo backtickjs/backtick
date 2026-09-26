@@ -5,7 +5,7 @@ Testing Library for Backtick on the web, in the shape of
 `render` bundles an element and draws it into the test environment's
 document, and every query from `@testing-library/dom` reads the result.
 
-An adapter binds `render` and `evaluate` to its client and transform, and
+An adapter binds `render` and `evaluate` to its client and compiler, and
 re-exports the rest, so a test imports from the adapter:
 
 ```tsx
@@ -118,8 +118,8 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
 - `evaluateBundle(code)`: evaluates a hand-written bundle, for a bundle the
   bundler would never write.
 - `cleanup()`: takes down everything `render` drew.
-- `createTesting(client, transform)`: `render`, `evaluate` and
-  `evaluateBundle` bound to an adapter's client and transform, which is what
+- `createTesting(client, compile)`: `render`, `evaluate` and
+  `evaluateBundle` bound to an adapter's client and compiler, which is what
   an adapter's testing entry exports.
 
 - Everything from `@testing-library/dom`: `screen`, `within`, `fireEvent`,

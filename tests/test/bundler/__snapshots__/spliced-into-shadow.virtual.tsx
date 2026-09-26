@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
 import { cs, type Client } from "@backtickjs/core";
 
 // A fragment written under the outer `total`, carried by host code into a hole
@@ -39,7 +38,6 @@ it("refuses a capture spliced where it is shadowed", async () => {
         return __cs_first + __cs_total + cs.splice(again() satisfies typeof cs.Spliceable);
     }
 })()),
-      { transform },
     ),
     {
       message:

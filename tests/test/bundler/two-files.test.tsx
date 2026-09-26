@@ -6,5 +6,12 @@ import { snapshotCase } from "../snapshotCase.ts";
 // Scripts written in two host files, in one bundle: its map leads into each
 // file by its own path.
 it("twoFiles", async (t) => {
-  await snapshotCase(t, "twoFiles", cs`<p>{"in "}{${(<Badge />)}}</p>`);
+  await snapshotCase(
+    t,
+    "twoFiles",
+    cs`<p>
+      {"in "}
+      {${(<Badge />)}}
+    </p>`,
+  );
 });

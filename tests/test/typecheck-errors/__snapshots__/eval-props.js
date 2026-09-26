@@ -1,13 +1,13 @@
 import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
+import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 // Built rather than written out: what a bundle looks like is the bundler's, and
 // a fixture that spelled one would pin the format twice. The claim about what
 // each takes is still written, because that is what is under test.
 async function Row({ count }) {
   return cs.create(
-    "1zsasunacegt:15:9",
+    "387oc3tbdbn4c:15:9",
     { params: [{ kind: "splice", value: count, bindings: [] }] },
     '($splice0) => <em>{"rows " + $splice0()}</em>',
     '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAcY,cAAA,CAAC,EAAE,CAAC,CAAC,OAAO,GAAG,UAAM,CAAC,EAAE,EAAE,CAAC"}',
@@ -15,41 +15,40 @@ async function Row({ count }) {
 }
 async function Nothing() {
   return cs.create(
-    "1zsasunacegt:19:9",
+    "387oc3tbdbn4c:19:9",
     { params: [] },
     '() => <em>{"nothing to hand it"}</em>',
     '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAkBY,MAAA,CAAC,EAAE,CAAC,CAAC,oBAAoB,CAAC,EAAE,EAAE,CAAC"}',
   );
 }
-const rows = await bundler.run(
-  cs.create(
-    "1zsasunacegt:23:2",
-    {
-      params: [
-        {
-          kind: "splice",
-          value: _jsx(Row, {
-            count: cs.create(
-              "1zsasunacegt:23:50",
-              { params: [{ kind: "capture", key: "props$1zsasunacegt$0" }] },
-              "($capture0) => $capture0.count",
-              '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAsBqD,eAAA,SAAK,CAAC,KAAK"}',
-            ),
-          }),
-          bindings: ["props$1zsasunacegt$0"],
-        },
-      ],
-    },
-    "($splice0) => (props) => $splice0(props)",
-    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAsBK,cAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,eAAC"}',
+const rows = compile(
+  await bundler.run(
+    cs.create(
+      "387oc3tbdbn4c:24:4",
+      {
+        params: [
+          {
+            kind: "splice",
+            value: _jsx(Row, {
+              count: cs.create(
+                "387oc3tbdbn4c:24:52",
+                { params: [{ kind: "capture", key: "props$387oc3tbdbn4c$0" }] },
+                "($capture0) => $capture0.count",
+                '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAuBuD,eAAA,SAAK,CAAC,KAAK"}',
+              ),
+            }),
+            bindings: ["props$387oc3tbdbn4c$0"],
+          },
+        ],
+      },
+      "($splice0) => (props) => $splice0(props)",
+      '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAuBO,cAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,eAAC"}',
+    ),
   ),
-  { transform },
-);
-const empty = await bundler.run(_jsx(Nothing, {}), {
-  transform,
-});
+).code;
+const empty = compile(await bundler.run(_jsx(Nothing, {}))).code;
 export default cs.create(
-  "1zsasunacegt:31:15",
+  "387oc3tbdbn4c:31:15",
   {
     params: [
       { kind: "splice", value: rows, bindings: [] },

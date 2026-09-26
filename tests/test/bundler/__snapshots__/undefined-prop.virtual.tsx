@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, type Prop } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { transform } from "@backtickjs/solid-js/transform";
 import { onMount } from "@backtickjs/solid-js";
 import { render, screen } from "@backtickjs/solid-js/testing";
 
@@ -21,10 +20,8 @@ async function Pill({
 
 describe("an undefined prop", () => {
   it("is left out of the element", async () => {
-    const code = await bundler.run(<div class={undefined} id="kept" />, {
-      transform,
-    });
-    assert.match(code, /_\$template\(`<div id=kept>`\)/);
+    const { code } = await bundler.run(<div class={undefined} id="kept" />);
+    assert.match(code, /<div id=\{"kept"\} \/>/);
   });
 
   it("lets a component forward an optional prop it wasn't given", async () => {

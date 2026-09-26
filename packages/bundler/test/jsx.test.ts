@@ -4,21 +4,14 @@ import { createImport } from "@backtickjs/platform-sdk";
 import { createJsxElement } from "@backtickjs/ui-platform-sdk";
 import { bundler } from "../dist/bundler.js";
 
-// A host element is printed as JSX for the adapter's transform: read back here
-// as the module the bundler hands it.
+// A host element is printed as JSX, for the framework's compiler: read back
+// here as the module the bundler answers.
 
 async function printed(
   type: Parameters<typeof createJsxElement>[0],
   props: { [key: string]: unknown },
 ): Promise<string> {
-  let module = "";
-  await bundler.run(createJsxElement(type, props), {
-    transform: (code) => {
-      module = code;
-      return { code, map: "" };
-    },
-  });
-  return module;
+  return (await bundler.run(createJsxElement(type, props))).code;
 }
 
 const root = async (...args: Parameters<typeof printed>) =>

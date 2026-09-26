@@ -24,19 +24,19 @@ em                    → 19:14 em
 em                    → 19:41 em
 >                     → 19:43 >
 
-// 23:3
-($splice0) =>    → 23:6 (props:…
-(                → 23:6 (
-props            → 23:7 props
-)                → 23:31 ) 
-=>               → 23:33 =>
-$splice0(props)  → 23:36 ${(<Row…
+// 24:5
+($splice0) =>    → 24:8 (props:…
+(                → 24:8 (
+props            → 24:9 props
+)                → 24:33 ) 
+=>               → 24:35 =>
+$splice0(props)  → 24:38 ${(<Row…
 
-// 23:51
-($capture0) =>   → 23:54 props.count`}…
-$capture0        → 23:54 props.count`}…
-.                → 23:59 .
-count            → 23:60 count
+// 24:53
+($capture0) =>   → 24:56 props.count`}…
+$capture0        → 24:56 props.count`}…
+.                → 24:61 .
+count            → 24:62 count
 
 // 31:16
 ($splice0, $splice1) => {  → 31:19 {…
