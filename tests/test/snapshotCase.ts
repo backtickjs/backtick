@@ -2,6 +2,7 @@ import { mkdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import prettier from "prettier";
 import { evaluate, render } from "@backtickjs/solid-js/testing";
@@ -37,7 +38,7 @@ export async function snapshotCase(
     });
 
   // Formatted, so a change to what is printed reads as the code it changed.
-  const code = await bundler.run(value);
+  const code = await bundler.run(value, { transform });
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   const evaluated = await evaluate(value);
   const drawn =

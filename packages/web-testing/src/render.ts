@@ -7,12 +7,8 @@ import type {
   queries,
 } from "@testing-library/dom";
 import { mounted } from "./cleanup.js";
-import {
-  type BundleClient,
-  defaultClient,
-  type EvaluateOptions,
-} from "./evaluate.js";
-import { bundler } from "@backtickjs/bundler";
+import type { BundleClient } from "./evaluate.js";
+import { bundler, type CodeTransform } from "@backtickjs/bundler";
 import { runOf } from "./client.js";
 
 /** Where and how a value is drawn. */
@@ -20,7 +16,7 @@ export interface RenderOptions<
   Q extends Queries = typeof queries,
   Container extends Element = HTMLElement,
   BaseElement extends Element = Container,
-> extends EvaluateOptions {
+> {
   /**
    * The element to draw into. A new `<div>` appended to `baseElement` where
    * none is given. Drawing into a container again replaces what was drawn
@@ -61,30 +57,19 @@ export type RenderResult<
 };
 
 /**
- * Bundles a value and draws it into the global document, as Testing Library's
- * `render` mounts a component.
+ * Bundles a value with `transform` and draws it into the global document with
+ * `client`, as Testing Library's `render` mounts a component.
  *
  * The document is the test environment's: jsdom through `global-jsdom`, Jest's
  * or Vitest's `jsdom` environment, or a browser.
  */
-export async function render<
-  Q extends Queries = typeof queries,
-  Container extends Element = HTMLElement,
-  BaseElement extends Element = Container,
->(
-  value: Spliceable<BacktickElement>,
-  options: RenderOptions<Q, Container, BaseElement> = {},
-): Promise<RenderResult<Q, Container, BaseElement>> {
-  return renderWith(defaultClient(options), value, options);
-}
-
-/** {@link render}, drawing with `client`. */
 export async function renderWith<
   Q extends Queries = typeof queries,
   Container extends Element = HTMLElement,
   BaseElement extends Element = Container,
 >(
   client: BundleClient,
+  transform: CodeTransform,
   value: Spliceable<BacktickElement>,
   options: RenderOptions<Q, Container, BaseElement> = {},
 ): Promise<RenderResult<Q, Container, BaseElement>> {
@@ -103,7 +88,7 @@ export async function renderWith<
   takeDown();
 
   const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
-    const code = await bundler.run(value);
+    const code = await bundler.run(value, { transform });
     takeDown();
     const dispose = client.render(runOf(code), container);
     // The runtime stops what it drew but leaves the nodes, so the

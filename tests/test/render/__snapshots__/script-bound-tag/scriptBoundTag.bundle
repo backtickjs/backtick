@@ -1,4 +1,5 @@
-(($d) => {
+(() => {
+  const { createSignal: $i0 } = $modules["solid-js"];
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
@@ -27,9 +28,10 @@
     _$delegateEvents(["click"]);
     return $entry;
   })();
-  return f1(
-    () => $modules["solid-js"].createSignal,
+  const $bundle = f1(
+    () => $i0,
     () =>
-      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\nconst $entry = () => props => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, () => "count " + props.count);\n  return _el$;\n})();\nreturn $entry;\n})();\n  return f1();\n})([])',
+      '(() => {\n\nconst f1 = (() => {\n  const {\n    "template": _$template\n  } = $modules["solid-js/web"];\n  const {\n    "insert": _$insert\n  } = $modules["solid-js/web"];\n  var _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\n  const $entry = () => props => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "count " + props.count);\n    return _el$;\n  })();\n  return $entry;\n})();\nconst $bundle = f1();\nreturn $bundle;\n})()',
   );
-})([]);
+  return $bundle;
+})();

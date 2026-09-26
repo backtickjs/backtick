@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = () => {
       const prices = [4.5, 3.25, 2];
@@ -16,5 +16,6 @@
     };
     return $entry;
   })();
-  return f1();
-})([]);
+  const $bundle = f1();
+  return $bundle;
+})();

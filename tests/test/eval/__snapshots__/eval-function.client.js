@@ -1,7 +1,7 @@
-// 8:33
+// 9:33
 export default () => name => "hello " + name;
 
-// 11:3
+// 14:3
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/_$template(`<b>`);
@@ -11,7 +11,7 @@ export default () => props => (() => {
   return _el$;
 })();
 
-// 18:5
+// 22:5
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/_$template(`<div><span>`);

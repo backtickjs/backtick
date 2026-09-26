@@ -1,3 +1,6 @@
-(($d) => {
-  return jsx("div", {});
-})([]);
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div>`);
+  const $bundle = _tmpl$();
+  return $bundle;
+})();

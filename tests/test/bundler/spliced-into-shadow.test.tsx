@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs, type Client } from "@backtickjs/core";
 
 // A fragment written under the outer `total`, carried by host code into a hole
@@ -29,14 +30,17 @@ const again = (): Client<number> => {
 
 it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
-    bundler.run(cs`{
-      const total = 1;
-      const first = ${keep(cs`total`)};
-      {
-        const total = 2;
-        return first + total + ${again()};
-      }
-    }`),
+    bundler.run(
+      cs`{
+        const total = 1;
+        const first = ${keep(cs`total`)};
+        {
+          const total = 2;
+          return first + total + ${again()};
+        }
+      }`,
+      { transform },
+    ),
     {
       message:
         "Can't thread the capture `total`: nothing encloses this reference to supply it. A fragment carries the bindings it was written under, so this is also what happens when one is spliced somewhere another `total` shadows it: the binding is still there, but no longer reachable by name, and naming it anyway would mean emitting what the source couldn't say.",

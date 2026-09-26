@@ -1,4 +1,5 @@
-(($d) => {
+(() => {
+  const { createSignal: $i0 } = $modules["solid-js"];
   const f1 = (() => {
     const $entry = ($0) => {
       const count = $0()(0);
@@ -19,5 +20,6 @@
     };
     return $entry;
   })();
-  return f1(() => $modules["solid-js"].createSignal);
-})([]);
+  const $bundle = f1(() => $i0);
+  return $bundle;
+})();

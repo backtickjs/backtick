@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createImport } from "@backtickjs/platform-sdk";
 import { createClient } from "@backtickjs/solid-js/client";
 import { createTesting } from "@backtickjs/solid-js/testing";
+import { transform } from "@backtickjs/solid-js/transform";
 
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are.
@@ -21,8 +22,9 @@ const withApp = createTesting(
       storage: { get: (key: string) => held[key] ?? null },
     },
   }),
+  transform,
 );
-const withoutApp = createTesting(createClient());
+const withoutApp = createTesting(createClient(), transform);
 
 describe("a module an app provides", () => {
   // Reached by splicing the value `createImport` made, which a bundle reads

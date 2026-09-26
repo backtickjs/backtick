@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => {
       const stop = $0().clearInterval;
@@ -8,5 +8,6 @@
     };
     return $entry;
   })();
-  return f1(() => window);
-})([]);
+  const $bundle = f1(() => window);
+  return $bundle;
+})();

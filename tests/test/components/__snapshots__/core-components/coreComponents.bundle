@@ -1,19 +1,20 @@
-(($d) => {
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+  const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(
+    `<div style=padding:8px><span style=font-size:12px>hi</span><img src=https://example.com/a.png>`,
+  );
   const f1 = (() => {
     const $entry = () => () => {};
     return $entry;
   })();
-  return jsx("div", {
-    style: "padding: 8px",
-    children: [
-      jsx("span", {
-        style: "font-size: 12px",
-        onclick: () => f1(),
-        children: "hi",
-      }),
-      jsx("img", {
-        src: "https://example.com/a.png",
-      }),
-    ],
-  });
-})([]);
+  const $bundle = (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild;
+    _$addEventListener(_el$2, "click", f1(), true);
+    return _el$;
+  })();
+  _$delegateEvents(["click"]);
+  return $bundle;
+})();

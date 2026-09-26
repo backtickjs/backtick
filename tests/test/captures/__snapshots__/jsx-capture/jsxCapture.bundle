@@ -1,4 +1,8 @@
-(($d) => {
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+  const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
   const f1 = (() => {
     const $entry = ($0) => () => {
       const x = 1;
@@ -10,9 +14,13 @@
     const $entry = ($0) => () => $0;
     return $entry;
   })();
-  return f1((x) =>
-    jsx("span", {
-      onclick: () => f2(x),
-    }),
+  const $bundle = f1((x) =>
+    (() => {
+      var _el$ = _tmpl$();
+      _$addEventListener(_el$, "click", f2(x), true);
+      return _el$;
+    })(),
   );
-})([]);
+  _$delegateEvents(["click"]);
+  return $bundle;
+})();

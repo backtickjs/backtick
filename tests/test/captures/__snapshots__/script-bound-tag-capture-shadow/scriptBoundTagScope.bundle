@@ -1,4 +1,7 @@
-(($d) => {
+(() => {
+  const { template: _$template2 } = $modules["solid-js/web"];
+  const { insert: _$insert2 } = $modules["solid-js/web"];
+  var _tmpl$4 = /*#__PURE__*/ _$template2(`<h2>`);
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { insert: _$insert } = $modules["solid-js/web"];
@@ -52,9 +55,12 @@
     };
     return $entry;
   })();
-  return f1(($0) =>
-    jsx("h2", {
-      children: () => $0.title,
-    }),
+  const $bundle = f1(($0) =>
+    (() => {
+      var _el$4 = _tmpl$4();
+      _$insert2(_el$4, () => $0.title);
+      return _el$4;
+    })(),
   );
-})([]);
+  return $bundle;
+})();

@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => {
       const counter = {
@@ -17,5 +17,6 @@
     };
     return $entry;
   })();
-  return f1(f2);
-})([]);
+  const $bundle = f1(f2);
+  return $bundle;
+})();

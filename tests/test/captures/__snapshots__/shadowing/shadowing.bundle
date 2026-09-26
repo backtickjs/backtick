@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => {
       const total = 1;
@@ -19,10 +19,11 @@
     const $entry = ($0) => $0;
     return $entry;
   })();
-  return f1((total) =>
+  const $bundle = f1((total) =>
     f2(
       () => f3(total),
       () => 100,
     ),
   );
-})([]);
+  return $bundle;
+})();

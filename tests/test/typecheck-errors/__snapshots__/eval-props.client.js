@@ -1,4 +1,4 @@
-// 14:10
+// 15:10
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/_$template(`<em>`);
@@ -8,18 +8,18 @@ export default $0 => (() => {
   return _el$;
 })();
 
-// 18:10
+// 19:10
 import { template as _$template } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/_$template(`<em>nothing to hand it`);
 export default () => _tmpl$();
 
-// 22:3
+// 23:3
 export default $0 => props => $0(props);
 
-// 22:51
+// 23:51
 export default $0 => $0.count;
 
-// 27:16
+// 31:16
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";

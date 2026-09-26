@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0, $1) => () => {
       const held = $0()("waiting");
@@ -42,8 +42,9 @@
     };
     return $entry;
   })();
-  return f1(
+  const $bundle = f1(
     () => state,
     () => window,
   );
-})([]);
+  return $bundle;
+})();

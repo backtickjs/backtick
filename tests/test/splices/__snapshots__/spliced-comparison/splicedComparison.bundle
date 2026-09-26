@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0, $1) => ({
       under: $0() < $1(),
@@ -8,8 +8,9 @@
     });
     return $entry;
   })();
-  return f1(
+  const $bundle = f1(
     () => 3,
     () => 9,
   );
-})([]);
+  return $bundle;
+})();

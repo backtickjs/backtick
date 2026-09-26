@@ -1,4 +1,7 @@
-(($d) => {
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<h2>`);
   const f1 = (() => {
     const { createComponent: _$createComponent } = $modules["solid-js/web"];
     const $entry = ($0) =>
@@ -9,9 +12,12 @@
       });
     return $entry;
   })();
-  return f1(($0) =>
-    jsx("h2", {
-      children: () => $0.person.firstName,
-    }),
+  const $bundle = f1(($0) =>
+    (() => {
+      var _el$ = _tmpl$();
+      _$insert(_el$, () => $0.person.firstName);
+      return _el$;
+    })(),
   );
-})([]);
+  return $bundle;
+})();

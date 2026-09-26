@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0, $1) => $0() + $1();
     return $entry;
@@ -33,8 +33,9 @@
     const $entry = () => 2;
     return $entry;
   })();
-  return f1(
+  const $bundle = f1(
     () => f2(f3, (outer) => f4(() => f5(f6, outer))),
     () => f2(f7, (outer) => f4(() => f5(f6, outer))),
   );
-})([]);
+  return $bundle;
+})();

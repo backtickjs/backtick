@@ -25,7 +25,6 @@
   "dependencies": {
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-interpreter": "workspace:*",
     "@testing-library/dom": "^10.4.2"
   },
   "devDependencies": {

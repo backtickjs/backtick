@@ -20,7 +20,6 @@ import {
   builtin,
   call,
   createNames,
-  jsxComponent,
   jsxElement,
   label,
   literal,
@@ -30,6 +29,7 @@ import {
   property,
   imported,
   raw,
+  scriptElement,
   thunk,
   undefinedValue,
 } from "../estree.js";
@@ -235,7 +235,7 @@ export async function buildBundle<T extends ClientUnknown>(
       return builtin(names, value.name);
     }
     if (isClientImport(value)) {
-      return imported(value.from, value.name);
+      return imported(names, value.from, value.name);
     }
     if (value === null) {
       return nullLiteral();
@@ -379,12 +379,11 @@ export async function buildBundle<T extends ClientUnknown>(
     params: ReadonlySet<string>,
   ): Promise<ES.Expression> => {
     const type = jsx.type;
-    // A component a client module provides: called there with its props.
+    // A component a client module provides: written as a tag of its import.
     if (isClientImport(type)) {
       const { written, children } = await renderProps(jsx, params);
-      return jsxComponent(
-        names,
-        imported(type.from, type.name),
+      return jsxElement(
+        imported(names, type.from, type.name),
         written,
         children,
       );
@@ -392,14 +391,17 @@ export async function buildBundle<T extends ClientUnknown>(
     if (typeof type !== "string") {
       const drawn = await expandJsxElement(jsx, type);
       // A script is what runs on the client; an element it drew instead has no
-      // setup of its own to guard. An arrow over nothing, called with no props:
-      // `comp` is what calls a drawing untracked.
+      // setup of its own to guard.
       return isClientScript(drawn)
-        ? jsxComponent(names, thunk(await render(drawn, params)), [], null)
+        ? scriptElement(names, await render(drawn, params))
         : render(drawn, params);
     }
     const { written, children } = await renderProps(jsx, params);
-    return jsxElement(names, type, written, children);
+    // A fragment is its children: JSX has no fragment inside an element.
+    if (type === "Fragment") {
+      return children ?? nullLiteral();
+    }
+    return jsxElement(type, written, children);
   };
 
   // An element's props, each an expression in the enclosing entry's scope, and

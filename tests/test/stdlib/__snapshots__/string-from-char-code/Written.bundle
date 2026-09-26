@@ -1,4 +1,6 @@
-(($d) => {
+(() => {
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const $Script = (props) => props.run();
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     var _tmpl$ = /*#__PURE__*/ _$template(`<span>Hi😀`);
@@ -7,5 +9,8 @@
     };
     return $entry;
   })();
-  return jsx(() => f1(), {});
-})([]);
+  const $bundle = _$createComponent($Script, {
+    run: () => f1(),
+  });
+  return $bundle;
+})();

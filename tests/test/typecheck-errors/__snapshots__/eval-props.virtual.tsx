@@ -1,4 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
 
@@ -22,9 +23,12 @@ const rows = (await bundler.run(
   cs.lift((__cs_props: {
     count: number;
 }) => cs.splice((<Row count={cs.lift(__cs_props.count)} />) satisfies typeof cs.Spliceable)),
+  { transform },
 )) as Bundle<Rows>;
 
-const empty = (await bundler.run(<Nothing />)) as Bundle<BacktickElement>;
+const empty = (await bundler.run(<Nothing />, {
+  transform,
+})) as Bundle<BacktickElement>;
 
 export default cs.lift((() => {
     const __cs_Rows = eval(cs.splice((rows) satisfies typeof cs.Spliceable));

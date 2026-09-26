@@ -1,4 +1,4 @@
-// 32:17
+// 34:7
 export default ($0, $1) => {
   const total = 1;
   const first = $0(total);
@@ -8,5 +8,5 @@ export default ($0, $1) => {
   }
 };
 
-// 34:28
+// 36:30
 export default $0 => $0;

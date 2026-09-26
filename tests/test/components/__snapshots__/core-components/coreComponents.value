@@ -1,5 +1,5 @@
-<div style="padding: 8px;">
-  <span style="font-size: 12px;">
+<div style="padding:8px">
+  <span style="font-size:12px">
     {"hi"}
   </span>
   <img src="https://example.com/a.png" />

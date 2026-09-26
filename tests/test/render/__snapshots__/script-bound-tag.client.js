@@ -1,4 +1,4 @@
-// 14:3
+// 15:3
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/_$template(`<b>`);
@@ -8,7 +8,7 @@ export default () => props => (() => {
   return _el$;
 })();
 
-// 17:24
+// 19:24
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";

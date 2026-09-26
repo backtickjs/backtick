@@ -1,8 +1,6 @@
-(($d) => {
-  return jsx("div", {
-    children: jsx("span", {
-      class: "danger",
-      children: "one",
-    }),
-  });
-})([]);
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span class=danger>one`);
+  const $bundle = _tmpl$();
+  return $bundle;
+})();

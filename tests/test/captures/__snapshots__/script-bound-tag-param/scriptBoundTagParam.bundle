@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { insert: _$insert } = $modules["solid-js/web"];
@@ -38,5 +38,6 @@
       });
     return $entry;
   })();
-  return f1(f2, f3);
-})([]);
+  const $bundle = f1(f2, f3);
+  return $bundle;
+})();

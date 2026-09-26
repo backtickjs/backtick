@@ -1,15 +1,8 @@
-(($d) => {
-  return jsx("div", {
-    children: [
-      jsx("span", {
-        children: "alpha",
-      }),
-      jsx("span", {
-        children: "beta",
-      }),
-      jsx("span", {
-        children: "gamma",
-      }),
-    ],
-  });
-})([]);
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(
+    `<div><span>alpha</span><span>beta</span><span>gamma`,
+  );
+  const $bundle = _tmpl$();
+  return $bundle;
+})();

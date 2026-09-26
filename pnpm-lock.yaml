@@ -292,6 +292,9 @@ importers:
       '@backtickjs/ui-platform-sdk':
         specifier: workspace:*
         version: link:../ui-platform-sdk
+      acorn:
+        specifier: ^8.18.0
+        version: 8.18.0
       astring:
         specifier: ^1.9.0
         version: 1.9.0
@@ -657,9 +660,6 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/web-interpreter':
-        specifier: workspace:*
-        version: link:../web-interpreter
       '@testing-library/dom':
         specifier: ^10.4.2
         version: 10.4.2
@@ -1149,6 +1149,11 @@ packages:
 
   '@volar/vscode@2.4.28':
     resolution: {integrity: sha512-+08veB0c0l3Tp4afvVniQQSImVu4BgcojrBYYrKuR58ycch9raFfsS5NZBLFIlLes1XsggNOntyy7WpYW5AKnA==}
+
+  acorn@8.18.0:
+    resolution: {integrity: sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -2181,6 +2186,8 @@ snapshots:
       path-browserify: 1.0.1
       vscode-languageclient: 9.0.1
       vscode-nls: 5.2.0
+
+  acorn@8.18.0: {}
 
   ansi-regex@5.0.1: {}
 

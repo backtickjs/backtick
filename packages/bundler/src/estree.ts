@@ -1,30 +1,37 @@
 import type * as ES from "estree";
 
 // The ESTree a script and a bundle are built as, and the one place their
-// conventions live: how a name is written, how a literal escapes, and what
-// `jsx` is handed. The compiler builds a script's body with these, and the
-// bundler what composes scripts.
+// conventions live: how a name is written, how a literal escapes, and how an
+// element is written as JSX for the framework's compiler.
 
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
-// A tag or prop name that can be printed as a string without escaping.
-const NAME = /^[A-Za-z][A-Za-z0-9_:-]*$/;
+// A tag JSX reads as an intrinsic element, and a name it reads as an attribute.
+const TAG = /^[a-z][A-Za-z0-9-]*(:[A-Za-z][A-Za-z0-9-]*)?$/;
+const ATTRIBUTE = /^[A-Za-z_$][A-Za-z0-9_$-]*(:[A-Za-z_$][A-Za-z0-9_$-]*)?$/;
 
 /**
  * What a bundle names, registered as the bundler builds it and named when it
  * is printed: a binding may have to be renamed away from a builtin or from
  * what the bundle itself names, and a label is numbered once every binding is
- * known. A script's own body is closed, so the compiler builds it without one.
+ * known. Imports are keyed by specifier and export, each bound once.
  */
 export interface Names {
   readonly bindings: ES.Identifier[];
   readonly labels: Map<ES.Identifier, string>;
   readonly builtins: Set<string>;
-  readonly data: string[];
+  readonly imports: Map<string, { from: string; name: string; local: string }>;
+  drawsScript: boolean;
 }
 
 export function createNames(): Names {
-  return { bindings: [], labels: new Map(), builtins: new Set(), data: [] };
+  return {
+    bindings: [],
+    labels: new Map(),
+    builtins: new Set(),
+    imports: new Map(),
+    drawsScript: false,
+  };
 }
 
 export function identifier(name: string): ES.Identifier {
@@ -60,21 +67,6 @@ export function builtin(names: Names | null, name: string): ES.Expression {
   }
   names?.builtins.add(name);
   return identifier(name);
-}
-
-// What only data can carry: a name the host computed that is not a plain one.
-// A script's own names are its source, and are written as strings.
-function data(names: Names | null, value: string): ES.Expression {
-  if (names === null) {
-    return stringLiteral(value);
-  }
-  names.data.push(value);
-  return index(identifier("$d"), numberLiteral(names.data.length - 1));
-}
-
-/** A tag, as a string where it is a plain name and read from `data` otherwise. */
-export function tagName(names: Names | null, text: string): ES.Expression {
-  return NAME.test(text) ? stringLiteral(text) : data(names, text);
 }
 
 // A string a script wrote, as a literal: `<` escaped, so no `</script>` or
@@ -185,9 +177,19 @@ export function arrow(
   };
 }
 
-/** An export of a module the client registered under `$modules`. */
-export function imported(from: string, name: string): ES.Expression {
-  return member(index(identifier("$modules"), stringLiteral(from)), name, false);
+/** An export of a module the client provides, imported by the bundle. */
+export function imported(
+  names: Names,
+  from: string,
+  name: string,
+): ES.Identifier {
+  const key = `${from}\0${name}`;
+  let entry = names.imports.get(key);
+  if (entry === undefined) {
+    entry = { from, name, local: `$i${names.imports.size}` };
+    names.imports.set(key, entry);
+  }
+  return identifier(entry.local);
 }
 
 // Code written elsewhere — a script's entry, compiled when the host was — as a
@@ -221,136 +223,56 @@ export function property(
   };
 }
 
-// The calls that never answer anything new: one that builds an element, which
-// is made once, and one that marks a function as a value.
-const fixedCalls = new WeakSet<ES.Node>();
-
 /**
- * A value as a client reads it. One that cannot change is written as it is. A
- * function that is itself the value is marked `fixed(fn)`, since any other
- * function stands for a value that can change: it reads it, and the client
- * calls it to find out.
+ * An element as JSX: `<tag attr={value}>{child}</tag>`. What each attribute
+ * and child may change is the framework compiler's to decide.
  */
-function marked(value: ES.Expression): ES.Expression {
-  if (!isFixed(value)) {
-    return thunk(value);
-  }
-  if (
-    value.type === "ArrowFunctionExpression" ||
-    value.type === "FunctionExpression"
-  ) {
-    const node = call(identifier("fixed"), [value]);
-    fixedCalls.add(node);
-    return node;
-  }
-  return value;
+export interface JsxElement {
+  readonly type: "JsxElement";
+  readonly tag: ES.Identifier | string;
+  readonly attributes: readonly (readonly [string, ES.Expression])[];
+  readonly children: readonly ES.Expression[];
 }
 
-/**
- * Whether what a position holds can change after it has first been read: a
- * literal, a function and an element cannot, and neither can an array or an
- * object of them.
- */
-export function isFixed(node: ES.Node): boolean {
-  switch (node.type) {
-    case "Literal":
-    case "ArrowFunctionExpression":
-    case "FunctionExpression":
-      return true;
-    case "UnaryExpression":
-      return node.operator === "-" && node.argument.type === "Literal";
-    case "ArrayExpression":
-      return node.elements.every(
-        (element) =>
-          element !== null &&
-          element.type !== "SpreadElement" &&
-          isFixed(element),
-      );
-    case "ObjectExpression":
-      return node.properties.every(
-        (member) =>
-          member.type === "Property" &&
-          !member.computed &&
-          isFixed(member.value),
-      );
-    default:
-      return fixedCalls.has(node);
-  }
-}
-
-// Children, each child marked on its own, so one that changes leaves its
-// siblings alone.
-function child(node: ES.Expression): ES.Expression {
-  return node.type === "ArrayExpression"
-    ? {
-        type: "ArrayExpression",
-        elements: node.elements.map((one) =>
-          one === null || one.type === "SpreadElement" ? one : child(one),
-        ),
-      }
-    : marked(node);
-}
-
-// A prop's key: bare where it can be, a string where it is a plain name, and
-// read from `data` otherwise.
-function propKey(
-  names: Names | null,
-  key: string,
-): { key: ES.Expression; computed: boolean } {
-  return IDENTIFIER.test(key)
-    ? { key: identifier(key), computed: false }
-    : NAME.test(key)
-      ? { key: stringLiteral(key), computed: false }
-      : { key: data(names, key), computed: true };
-}
-
-/**
- * The props `jsx` is handed, a plain object, each prop marked as a client reads
- * it (see `marked`). Children are marked child by child.
- */
-function props(
-  names: Names | null,
-  written: readonly (readonly [string, ES.Expression])[],
-  children: ES.Expression | null,
-): ES.ObjectExpression {
-  const members = written.map(([name, value]) => {
-    const { key, computed } = propKey(names, name);
-    return property(key, marked(value), computed);
-  });
-  // A `null` child is no children at all.
-  if (
-    children !== null &&
-    !(children.type === "Literal" && children.value === null)
-  ) {
-    members.push(property(identifier("children"), child(children)));
-  }
-  return { type: "ObjectExpression", properties: members };
-}
-
-/** An element: `jsx(tag, props)`, or its children where it is a fragment. */
 export function jsxElement(
-  names: Names | null,
-  tag: string,
-  written: readonly (readonly [string, ES.Expression])[],
+  tag: ES.Identifier | string,
+  attributes: readonly (readonly [string, ES.Expression])[],
   children: ES.Expression | null,
 ): ES.Expression {
-  if (tag === "Fragment") {
-    return children === null ? nullLiteral() : child(children);
+  if (typeof tag === "string" && !TAG.test(tag)) {
+    throw new Error(`\`${tag}\` is not a tag JSX can write`);
   }
-  const node = call(identifier("jsx"), [
-    tagName(names, tag),
-    props(names, written, children),
-  ]);
-  fixedCalls.add(node);
-  return node;
+  for (const [name] of attributes) {
+    if (!ATTRIBUTE.test(name)) {
+      throw new Error(`\`${name}\` is not a prop name JSX can write`);
+    }
+  }
+  const node: JsxElement = {
+    type: "JsxElement",
+    tag,
+    attributes,
+    // A `null` child is no children at all.
+    children:
+      children === null ||
+      (children.type === "Literal" && children.value === null)
+        ? []
+        : children.type === "ArrayExpression"
+          ? children.elements.map((one) => {
+              if (one === null || one.type === "SpreadElement") {
+                throw new Error("a hole or spread among children");
+              }
+              return one;
+            })
+          : [children],
+  };
+  return node as unknown as ES.Expression;
 }
 
-/** A component: `jsx(component, props)`. */
-export function jsxComponent(
-  names: Names | null,
-  component: ES.Expression,
-  written: readonly (readonly [string, ES.Expression])[],
-  children: ES.Expression | null,
-): ES.Expression {
-  return call(identifier("jsx"), [component, props(names, written, children)]);
+/**
+ * A script a component drew, as an element: `<$Script run={() => …} />`, so
+ * its body runs the way a component's does.
+ */
+export function scriptElement(names: Names, run: ES.Expression): ES.Expression {
+  names.drawsScript = true;
+  return jsxElement(identifier("$Script"), [["run", thunk(run)]], null);
 }

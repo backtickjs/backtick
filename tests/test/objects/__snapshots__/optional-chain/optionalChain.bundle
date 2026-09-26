@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0, $1, $2) => ({
       found: $0()({
@@ -37,5 +37,6 @@
     };
     return $entry;
   })();
-  return f1(f2, f3, f4);
-})([]);
+  const $bundle = f1(f2, f3, f4);
+  return $bundle;
+})();

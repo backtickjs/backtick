@@ -1,4 +1,4 @@
-// 12:10
+// 13:10
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";
@@ -12,7 +12,7 @@ export default $0 => _$createComponent($0, {
   })()
 });
 
-// 20:19
+// 21:19
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/_$template(`<div><b>`);

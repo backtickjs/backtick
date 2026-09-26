@@ -1,8 +1,8 @@
-// 31:41
+// 33:41
 export default $0 => $0()();
 
-// 35:46
+// 37:46
 export default $0 => $0()();
 
-// 41:41
+// 43:41
 export default $0 => $0().get("greeting");

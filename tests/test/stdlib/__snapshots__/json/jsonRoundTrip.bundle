@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = () => {
       const numbers = JSON.stringify([1, 2, 3]);
@@ -25,5 +25,6 @@
     };
     return $entry;
   })();
-  return f1();
-})([]);
+  const $bundle = f1();
+  return $bundle;
+})();

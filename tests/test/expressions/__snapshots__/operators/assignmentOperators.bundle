@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = () => {
       let n = 3;
@@ -19,5 +19,6 @@
     };
     return $entry;
   })();
-  return f1();
-})([]);
+  const $bundle = f1();
+  return $bundle;
+})();

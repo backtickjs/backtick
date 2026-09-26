@@ -4,8 +4,6 @@
  */
 export * from "@testing-library/dom";
 export { cleanup } from "./cleanup.js";
-export { evaluate, evaluateBundle } from "./evaluate.js";
-export type { BundleClient, EvaluateOptions } from "./evaluate.js";
+export type { BundleClient } from "./evaluate.js";
 export { createTesting, type Testing } from "./createTesting.js";
-export { render } from "./render.js";
 export type { RenderOptions, RenderResult } from "./render.js";

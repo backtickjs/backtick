@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => {
       const stored = $0();
@@ -11,5 +11,6 @@
     const $entry = () => () => "hi";
     return $entry;
   })();
-  return f1(f2);
-})([]);
+  const $bundle = f1(f2);
+  return $bundle;
+})();

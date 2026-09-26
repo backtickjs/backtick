@@ -1,4 +1,6 @@
-(($d) => {
+(() => {
+  const { createComponent: _$createComponent2 } = $modules["solid-js/web"];
+  const { For: $i0 } = $modules["solid-js"];
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { createComponent: _$createComponent } = $modules["solid-js/web"];
@@ -56,13 +58,20 @@
     const $entry = () => _tmpl$();
     return $entry;
   })();
-  return f1(
+  const $bundle = f1(
     () => f2(),
     ($0) =>
-      jsx($modules["solid-js"].For, {
-        each: () => $0.each,
-        fallback: () => $0.fallback,
-        children: () => $0.children,
+      _$createComponent2($i0, {
+        get each() {
+          return $0.each;
+        },
+        get fallback() {
+          return $0.fallback;
+        },
+        get children() {
+          return $0.children;
+        },
       }),
   );
-})([]);
+  return $bundle;
+})();

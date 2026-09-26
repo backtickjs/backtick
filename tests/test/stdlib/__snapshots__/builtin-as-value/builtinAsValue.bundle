@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = () => {
       const floor = Math.floor;
@@ -7,5 +7,6 @@
     };
     return $entry;
   })();
-  return f1();
-})([]);
+  const $bundle = f1();
+  return $bundle;
+})();

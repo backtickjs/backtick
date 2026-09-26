@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
 import { render } from "@backtickjs/solid-js/testing";
@@ -12,8 +13,8 @@ async function Items() {
   return cs.lift(<For each={cs.lift([1, 2, 3])}>{cs.lift((__cs_n: number) => <span>{cs.lift("item " + __cs_n)}</span>)}</For>);
 }
 
-const items = await bundler.run(<Items />);
-const total = await bundler.run(41);
+const items = await bundler.run(<Items />, { transform });
+const total = await bundler.run(41, { transform });
 
 const evaluated = cs.lift(<div>{cs.lift(eval(cs.splice((items) satisfies typeof cs.Spliceable)))}{cs.lift(<b>{cs.lift(eval(cs.splice((total) satisfies typeof cs.Spliceable)) + 1)}</b>)}</div>);
 

@@ -1,4 +1,13 @@
-(($d) => {
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
+  const { style: _$style } = $modules["solid-js/web"];
+  const { effect: _$effect } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
+  const { createSignal: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
+
   const f1 = (() => {
     const $entry = () => "font-size: 16px";
     return $entry;
@@ -22,9 +31,18 @@
     const $entry = ($0) => $0()("one").label[0]();
     return $entry;
   })();
-  return jsx("span", {
-    style: () => f1(),
-    onclick: () => f2(() => f3(() => $modules["solid-js"].createSignal)),
-    children: () => f4(() => f3(() => $modules["solid-js"].createSignal)),
-  });
-})([]);
+  const $bundle = (() => {
+    var _el$ = _tmpl$();
+    _$addEventListener(
+      _el$,
+      "click",
+      f2(() => f3(() => $i0)),
+      true,
+    );
+    _$insert(_el$, () => f4(() => f3(() => $i0)));
+    _$effect((_$p) => _$style(_el$, f1(), _$p));
+    return _el$;
+  })();
+  _$delegateEvents(["click"]);
+  return $bundle;
+})();

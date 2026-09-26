@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { insert: _$insert } = $modules["solid-js/web"];
@@ -13,9 +13,10 @@
       })();
     return $entry;
   })();
-  return f1(
+  const $bundle = f1(
     () =>
-      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cspan>`);\nconst $entry = $0 => _$createComponent($0, {\n  each: [1, 2, 3],\n  children: n => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, "item " + n);\n    return _el$;\n  })()\n});\nreturn $entry;\n})();\n  return jsx(() => f1($0 => jsx($modules["solid-js"].For, {\n    each: () => $0.each,\n    fallback: () => $0.fallback,\n    children: () => $0.children\n  })), {});\n})([])',
-    () => "($d => {\n  return 41;\n})([])",
+      '(() => {\nconst { "createComponent": _$createComponent2 } = $modules["solid-js/web"];\nconst { "For": $i0 } = $modules["solid-js"];\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const {\n    "template": _$template\n  } = $modules["solid-js/web"];\n  const {\n    "insert": _$insert\n  } = $modules["solid-js/web"];\n  const {\n    "createComponent": _$createComponent\n  } = $modules["solid-js/web"];\n  var _tmpl$ = /*#__PURE__*/_$template(`\u003cspan>`);\n  const $entry = $0 => _$createComponent($0, {\n    each: [1, 2, 3],\n    children: n => (() => {\n      var _el$ = _tmpl$();\n      _$insert(_el$, "item " + n);\n      return _el$;\n    })()\n  });\n  return $entry;\n})();\nconst $bundle = _$createComponent2($Script, {\n  run: () => f1($0 => _$createComponent2($i0, {\n    get each() {\n      return $0.each;\n    },\n    get fallback() {\n      return $0.fallback;\n    },\n    get children() {\n      return $0.children;\n    }\n  }))\n});\nreturn $bundle;\n})()',
+    () => "(() => {\n\nconst $bundle = 41;\nreturn $bundle;\n})()",
   );
-})([]);
+  return $bundle;
+})();

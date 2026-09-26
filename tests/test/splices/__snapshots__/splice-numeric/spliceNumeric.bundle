@@ -1,7 +1,8 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => $0();
     return $entry;
   })();
-  return f1(() => 1);
-})([]);
+  const $bundle = f1(() => 1);
+  return $bundle;
+})();

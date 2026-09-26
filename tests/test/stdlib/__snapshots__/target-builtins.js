@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createImport } from "@backtickjs/platform-sdk";
 import { createClient } from "@backtickjs/solid-js/client";
 import { createTesting } from "@backtickjs/solid-js/testing";
+import { transform } from "@backtickjs/solid-js/transform";
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are.
 const greet = createImport({ name: "greet", from: "app" });
@@ -19,8 +20,9 @@ const withApp = createTesting(
       storage: { get: (key) => held[key] ?? null },
     },
   }),
+  transform,
 );
-const withoutApp = createTesting(createClient());
+const withoutApp = createTesting(createClient(), transform);
 describe("a module an app provides", () => {
   // Reached by splicing the value `createImport` made, which a bundle reads
   // from the module the client registered under that specifier.
@@ -28,11 +30,11 @@ describe("a module an app provides", () => {
     assert.equal(
       await withApp.evaluate(
         cs.create(
-          "qd5c6glk3xo:31:40",
+          "1chgux0r8qw0m:33:40",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
           {
             code: "export default $0 => $0()();",
-            map: '{"version":3,"mappings":"eA8B2CA,EAAA,IAAAA,EAAA,EAAM,EAAE","names":["$0"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
+            map: '{"version":3,"mappings":"eAgC2CA,EAAA,IAAAA,EAAA,EAAM,EAAE","names":["$0"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },
@@ -45,11 +47,11 @@ describe("a module an app provides", () => {
     await assert.rejects(
       withoutApp.evaluate(
         cs.create(
-          "qd5c6glk3xo:35:45",
+          "1chgux0r8qw0m:37:45",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
           {
             code: "export default $0 => $0()();",
-            map: '{"version":3,"mappings":"eAkCgDA,EAAA,IAAAA,EAAA,EAAM,EAAE","names":["$0"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
+            map: '{"version":3,"mappings":"eAoCgDA,EAAA,IAAAA,EAAA,EAAM,EAAE","names":["$0"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },
@@ -64,11 +66,11 @@ describe("a module an app provides", () => {
     assert.equal(
       await withApp.evaluate(
         cs.create(
-          "qd5c6glk3xo:41:40",
+          "1chgux0r8qw0m:43:40",
           { params: [{ kind: "splice", value: storage, bindings: [] }] },
           {
             code: 'export default $0 => $0().get("greeting");',
-            map: '{"version":3,"mappings":"eAwC2CA,EAAA,IAAAA,EAAA,EAAQ,CAACC,GAAG,CAAC,UAAU,CAAC","names":["$0","get"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
+            map: '{"version":3,"mappings":"eA0C2CA,EAAA,IAAAA,EAAA,EAAQ,CAACC,GAAG,CAAC,UAAU,CAAC","names":["$0","get"],"ignoreList":[],"sources":["target-builtins.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },

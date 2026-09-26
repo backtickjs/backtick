@@ -1,4 +1,5 @@
-(($d) => {
+(() => {
+  const { createSignal: $i0 } = $modules["solid-js"];
   const f1 = (() => {
     const $entry = ($0, $1, $2, $3) => {
       const n = $0()($1());
@@ -8,10 +9,11 @@
     };
     return $entry;
   })();
-  return f1(
-    () => $modules["solid-js"].createSignal,
+  const $bundle = f1(
+    () => $i0,
     () => 5,
     () => 0,
     () => 1,
   );
-})([]);
+  return $bundle;
+})();

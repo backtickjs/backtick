@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { evaluate } from "@backtickjs/solid-js/testing";
 
 // A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
@@ -25,7 +26,7 @@ describe("a spliced undefined", () => {
   });
 
   it("is written as `void 0`", async () => {
-    const code = await bundler.run([undefined]);
+    const code = await bundler.run([undefined], { transform });
     assert.match(code, /\[void 0\]/);
   });
 });

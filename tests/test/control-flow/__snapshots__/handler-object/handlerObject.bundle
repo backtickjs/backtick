@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => {
       const handlers = {
@@ -22,5 +22,6 @@
     };
     return $entry;
   })();
-  return f1(() => f2(f3));
-})([]);
+  const $bundle = f1(() => f2(f3));
+  return $bundle;
+})();

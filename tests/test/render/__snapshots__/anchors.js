@@ -2,6 +2,7 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { client } from "@backtickjs/solid-js/client";
@@ -30,7 +31,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "v0aklgnpxwox:34:9",
+    "16leozv29y23d:35:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -39,7 +40,7 @@ async function Rows() {
     },
     {
       code: 'import { template as _$template } from "solid-js/web";\nimport { delegateEvents as _$delegateEvents } from "solid-js/web";\nimport { insert as _$insert } from "solid-js/web";\nimport { createComponent as _$createComponent } from "solid-js/web";\nvar _tmpl$ = /*#__PURE__*/_$template(`<span>clear`),\n  _tmpl$2 = /*#__PURE__*/_$template(`<span>`);\nexport default ($0, $1) => {\n  const ids = $0()([1, 2, 3]);\n  const clear = () => {\n    ids[1]([]);\n  };\n  return [(() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = clear;\n    return _el$;\n  })(), _$createComponent($1, {\n    get each() {\n      return ids[0]();\n    },\n    children: id => (() => {\n      var _el$2 = _tmpl$2();\n      _$insert(_el$2, "row " + id);\n      return _el$2;\n    })()\n  })];\n};\n_$delegateEvents(["click"]);',
-      map: '{"version":3,"mappings":";;;;;;eAiCY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,GAAG,GAAGF,EAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;EAC9C,MAAMG,KAAK,GAAGA,CAAA,KAAK;IACjBD,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;EACZ,CAAC;EACD;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;IAAA,OAAAC,IAAA;EAAA,MAAAG,iBAAA,CACnBN,EAAG;IAAA,IAACO,IAAIA,CAAA;MAAA,OAAEN,GAAG,CAAC,CAAC,CAAC,EAAE;IAAA;IAAAO,QAAA,EAAIC,EAAU;MAAA,IAAAC,KAAA,GAAAC,OAAA;MAAAC,QAAA,CAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;MAAA,OAAAC,KAAA;IAAA;EAAQ;AAGtE,CAAC;AAAAG,gBAAA","names":["$0","$1","ids","clear","_el$","_tmpl$","$$click","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["anchors.test.tsx"]}',
+      map: '{"version":3,"mappings":";;;;;;eAkCY,CAAAA,EAAA,EAAAC,EAAA;EACR,MAAMC,GAAG,GAAGF,EAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;EAC9C,MAAMG,KAAK,GAAGA,CAAA,KAAK;IACjBD,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;EACZ,CAAC;EACD;IAAA,IAAAE,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;IAAA,OAAAC,IAAA;EAAA,MAAAG,iBAAA,CACnBN,EAAG;IAAA,IAACO,IAAIA,CAAA;MAAA,OAAEN,GAAG,CAAC,CAAC,CAAC,EAAE;IAAA;IAAAO,QAAA,EAAIC,EAAU;MAAA,IAAAC,KAAA,GAAAC,OAAA;MAAAC,QAAA,CAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;MAAA,OAAAC,KAAA;IAAA;EAAQ;AAGtE,CAAC;AAAAG,gBAAA","names":["$0","$1","ids","clear","_el$","_tmpl$","$$click","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert","_$delegateEvents"],"ignoreList":[],"sources":["anchors.test.tsx"]}',
       imports: [
         {
           from: "solid-js/web",
@@ -98,7 +99,7 @@ function target(html) {
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
 // these insert at it with Solid directly.
 async function drawAt(value, parent, selector) {
-  const code = await bundler.run(value);
+  const code = await bundler.run(value, { transform });
   const unmount = client.evaluate(() =>
     createRoot((dispose) => {
       insert(parent, (0, eval)(code), parent.querySelector(selector));

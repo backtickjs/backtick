@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => ({
       missing: $0()(null),
@@ -16,5 +16,6 @@
     };
     return $entry;
   })();
-  return f1(f2);
-})([]);
+  const $bundle = f1(f2);
+  return $bundle;
+})();

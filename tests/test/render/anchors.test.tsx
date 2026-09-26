@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import type { BacktickElement } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
@@ -88,7 +89,7 @@ async function drawAt(
   parent: Element,
   selector: string,
 ): Promise<void> {
-  const code = await bundler.run(value);
+  const code = await bundler.run(value, { transform });
   const unmount = client.evaluate(() =>
     createRoot((dispose) => {
       insert(

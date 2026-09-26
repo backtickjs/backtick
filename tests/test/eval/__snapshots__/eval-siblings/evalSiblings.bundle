@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { insert: _$insert } = $modules["solid-js/web"];
@@ -15,8 +15,9 @@
       })();
     return $entry;
   })();
-  return f1(
+  const $bundle = f1(
     () =>
-      '($d => {\n  const f1 = (() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>from another bundle`);\nconst $entry = () => _tmpl$();\nreturn $entry;\n})();\n  return jsx(() => f1(), {});\n})([])',
+      '(() => {\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const {\n    "template": _$template\n  } = $modules["solid-js/web"];\n  var _tmpl$ = /*#__PURE__*/_$template(`\u003cem>from another bundle`);\n  const $entry = () => _tmpl$();\n  return $entry;\n})();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
   );
-})([]);
+  return $bundle;
+})();

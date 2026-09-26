@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import type { BacktickElement, Bundle } from "@backtickjs/core";
@@ -15,6 +16,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // badge reads on access rather than a value handed over once.
 const loadedBadge = await bundler.run(
   cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
+  { transform },
 );
 
 const scriptBoundTagLoading = cs`{

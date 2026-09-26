@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => (currency) => {
       const table = $0();
@@ -8,8 +8,9 @@
     };
     return $entry;
   })();
-  return f1(() => ({
+  const $bundle = f1(() => ({
     usd: 3,
     eur: 4,
   }));
-})([]);
+  return $bundle;
+})();

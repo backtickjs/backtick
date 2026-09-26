@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@backtickjs/solid-js/testing";
@@ -14,6 +15,7 @@ const badge = await bundler.run(
   cs.lift((__cs_props: {
     count: number;
 }) => <b>{cs.lift("count " + __cs_props.count)}</b>),
+  { transform },
 );
 
 const scriptBoundTag = cs.lift((() => {

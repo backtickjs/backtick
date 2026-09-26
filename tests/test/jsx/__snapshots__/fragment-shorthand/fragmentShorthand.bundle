@@ -1,12 +1,6 @@
-(($d) => {
-  return jsx("div", {
-    children: [
-      jsx("span", {
-        children: "a",
-      }),
-      jsx("span", {
-        children: "b",
-      }),
-    ],
-  });
-})([]);
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>a</span><span>b`);
+  const $bundle = _tmpl$();
+  return $bundle;
+})();

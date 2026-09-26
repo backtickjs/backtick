@@ -10,52 +10,8 @@ const solidModules = {
   "solid-js/web": web,
 };
 
-// A function that is itself the value a prop holds, as a bundle marks one:
-// every other function a prop holds stands for a value that can change.
-const fixedFunctions = new WeakSet<object>();
-function fixed<F extends object>(fn: F): F {
-  fixedFunctions.add(fn);
-  return fn;
-}
-
-// A value as Solid reads a prop: a function a bundle wrapped around a value
-// that can change is read through a getter, which is how Solid tracks one.
-function readThrough(target: object, key: string, value: unknown): void {
-  if (typeof value === "function" && !fixedFunctions.has(value)) {
-    Object.defineProperty(target, key, {
-      enumerable: true,
-      get: value as () => unknown,
-    });
-  } else {
-    Object.defineProperty(target, key, { enumerable: true, value });
-  }
-}
-
-/**
- * A host-built element, as a bundle writes one — `jsx(type, props)` — drawn
- * with Solid: a component is created with its props, and a tag through
- * `Dynamic`.
- */
-function jsx(type: unknown, props: { [key: string]: unknown }): unknown {
-  const read: { [key: string]: unknown } = {};
-  for (const [key, value] of Object.entries(props)) {
-    readThrough(read, key, value);
-  }
-  if (typeof type === "function") {
-    return solid.createComponent(type as solid.Component, read);
-  }
-  // Merged rather than spread, which would read each getter once. `Dynamic`
-  // answers with an accessor, since what it draws may change; a tag is fixed,
-  // so the element it drew is read once.
-  const drawn = solid.createComponent(
-    web.Dynamic as solid.Component,
-    solid.mergeProps(read, { component: type }),
-  );
-  return typeof drawn === "function" ? (drawn as () => unknown)() : drawn;
-}
-
 function register(modules: object): void {
-  Object.assign(globalThis, { $modules: modules, jsx, fixed });
+  Object.assign(globalThis, { $modules: modules });
 }
 
 /**

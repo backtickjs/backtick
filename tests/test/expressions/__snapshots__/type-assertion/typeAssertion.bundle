@@ -1,4 +1,4 @@
-(($d) => {
+(() => {
   const f1 = (() => {
     const $entry = ($0) => {
       const page = JSON.parse($0());
@@ -6,5 +6,6 @@
     };
     return $entry;
   })();
-  return f1(() => '{"rows":["one","two"],"count":2}');
-})([]);
+  const $bundle = f1(() => '{"rows":["one","two"],"count":2}');
+  return $bundle;
+})();

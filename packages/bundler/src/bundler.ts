@@ -1,6 +1,6 @@
 import type { Bundle } from "@backtickjs/platform-sdk";
 import { buildBundle } from "./bundle/buildBundle.js";
-import { printBundle } from "./print/printBundle.js";
+import { type CodeTransform, printBundle } from "./print/printBundle.js";
 import type { ClientUnknown, Spliceable } from "@backtickjs/platform-sdk";
 
 /**
@@ -26,24 +26,34 @@ export interface ExperimentalFeatures {
   readonly stableFunctionLabels?: boolean;
 }
 
+/** How a bundle is made: `transform` is the adapter's, which compiles it. */
+export interface BundleOptions {
+  readonly transform: CodeTransform;
+}
+
 /**
  * What runs your components and hands back what they drew.
  *
- *     const bundle = await bundler.run(<Home />);
+ *     import { transform } from "@backtickjs/solid-js/transform";
+ *     const bundle = await bundler.run(<Home />, { transform });
  *
  * A namespace rather than a bare function, so `bundle` stays a name a caller
  * can give what comes back. The bundle is JavaScript, which a client runs with
  * `eval`.
  */
 export const bundler = {
-  async run<T extends ClientUnknown>(value: Spliceable<T>): Promise<Bundle<T>> {
-    return await bundler.runWithExperimentalFeatures(value, {});
+  async run<T extends ClientUnknown>(
+    value: Spliceable<T>,
+    options: BundleOptions,
+  ): Promise<Bundle<T>> {
+    return await bundler.runWithExperimentalFeatures(value, options);
   },
 
   /**
    * As {@link bundler.run}, with features that are being tried.
    *
    *     await bundler.runWithExperimentalFeatures(<Home />, {
+   *       transform,
    *       stableFunctionLabels: true,
    *     });
    *
@@ -52,8 +62,8 @@ export const bundler = {
    */
   async runWithExperimentalFeatures<T extends ClientUnknown>(
     value: Spliceable<T>,
-    features: ExperimentalFeatures,
+    options: BundleOptions & ExperimentalFeatures,
   ): Promise<Bundle<T>> {
-    return printBundle(await buildBundle(value, features));
+    return printBundle(await buildBundle(value, options), options.transform);
   },
 };

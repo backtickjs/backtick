@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 // A fragment written under the outer `total`, carried by host code into a hole
 // inside a block that shadows it.
@@ -27,37 +28,38 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.run(
       cs.create(
-        "1rcr3g75v4qq5:32:16",
+        "29bb93dza5nqb:34:6",
         {
           params: [
             {
               kind: "splice",
               value: keep(
                 cs.create(
-                  "1rcr3g75v4qq5:34:27",
+                  "29bb93dza5nqb:36:29",
                   {
-                    params: [{ kind: "capture", key: "total$1rcr3g75v4qq5$0" }],
+                    params: [{ kind: "capture", key: "total$29bb93dza5nqb$0" }],
                   },
                   {
                     code: "export default $0 => $0;",
-                    map: '{"version":3,"mappings":"eAiC8BA,EAAA,IAAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["spliced-into-shadow.test.tsx"]}',
+                    map: '{"version":3,"mappings":"eAmCgCA,EAAA,IAAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["spliced-into-shadow.test.tsx"]}',
                     imports: [],
                     exportAt: 0,
                   },
                 ),
               ),
-              bindings: ["total$1rcr3g75v4qq5$0"],
+              bindings: ["total$29bb93dza5nqb$0"],
             },
             { kind: "splice", value: again(), bindings: [] },
           ],
         },
         {
           code: "export default ($0, $1) => {\n  const total = 1;\n  const first = $0(total);\n  {\n    const total = 2;\n    return first + total + $1();\n  }\n};",
-          map: '{"version":3,"mappings":"eA+BmB,CAAAA,EAAA,EAAAC,EAAA;EACb,MAAMC,KAAK,GAAG,CAAC;EACf,MAAMC,KAAK,GAAGH,EAAA,CAAAE,KAAA,CAAC;EACf;IACE,MAAMA,KAAK,GAAG,CAAC;IACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,EAAA,EAAC;EAC1B;AACF,CAAC","names":["$0","$1","total","first"],"ignoreList":[],"sources":["spliced-into-shadow.test.tsx"]}',
+          map: '{"version":3,"mappings":"eAiCS,CAAAA,EAAA,EAAAC,EAAA;EACD,MAAMC,KAAK,GAAG,CAAC;EACf,MAAMC,KAAK,GAAGH,EAAA,CAAAE,KAAA,CAAC;EACf;IACE,MAAMA,KAAK,GAAG,CAAC;IACf,OAAOC,KAAK,GAAGD,KAAK,GAAGD,EAAA,EAAC;EAC1B;AACF,CAAC","names":["$0","$1","total","first"],"ignoreList":[],"sources":["spliced-into-shadow.test.tsx"]}',
           imports: [],
           exportAt: 0,
         },
       ),
+      { transform },
     ),
     {
       message:

@@ -1,4 +1,16 @@
-(($d) => {
+(() => {
+  const { template: _$template } = $modules["solid-js/web"];
+  const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
+  const { effect: _$effect } = $modules["solid-js/web"];
+  const { insert: _$insert } = $modules["solid-js/web"];
+  const { createComponent: _$createComponent } = $modules["solid-js/web"];
+  const { For: $i0 } = $modules["solid-js"];
+  var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
+    _tmpl$2 = /*#__PURE__*/ _$template(
+      `<div><img alt><span></span><span></span><span>`,
+    ),
+    _tmpl$3 = /*#__PURE__*/ _$template(`<span>`);
+
   const f1 = (() => {
     const $entry = ($0) => $0();
     return $entry;
@@ -35,11 +47,13 @@
     const $entry = ($0) => "$" + $0.total;
     return $entry;
   })();
-  return jsx("div", {
-    children: () =>
-      jsx($modules["solid-js"].For, {
-        each: () =>
-          f1(() => [
+  const $bundle = (() => {
+    var _el$ = _tmpl$();
+    _$insert(
+      _el$,
+      _$createComponent($i0, {
+        get each() {
+          return f1(() => [
             {
               id: "ord-1000",
               customer: {
@@ -130,37 +144,45 @@
               ],
               total: 49.23,
             },
-          ]),
-        children: () =>
-          f2((order) =>
-            jsx("div", {
-              children: [
-                jsx("img", {
-                  src: () => f3(order),
-                  alt: "",
+          ]);
+        },
+        get children() {
+          return f2((order) =>
+            (() => {
+              var _el$2 = _tmpl$2(),
+                _el$3 = _el$2.firstChild,
+                _el$4 = _el$3.nextSibling,
+                _el$5 = _el$4.nextSibling,
+                _el$6 = _el$5.nextSibling;
+              _$insert(_el$4, () => f4(order));
+              _$insert(_el$5, () => f5(order));
+              _$insert(
+                _el$2,
+                _$createComponent($i0, {
+                  get each() {
+                    return f6(order);
+                  },
+                  get children() {
+                    return f7((item) =>
+                      (() => {
+                        var _el$7 = _tmpl$3();
+                        _$insert(_el$7, () => f8(item));
+                        return _el$7;
+                      })(),
+                    );
+                  },
                 }),
-                jsx("span", {
-                  children: () => f4(order),
-                }),
-                jsx("span", {
-                  children: () => f5(order),
-                }),
-                () =>
-                  jsx($modules["solid-js"].For, {
-                    each: () => f6(order),
-                    children: () =>
-                      f7((item) =>
-                        jsx("span", {
-                          children: () => f8(item),
-                        }),
-                      ),
-                  }),
-                jsx("span", {
-                  children: () => f9(order),
-                }),
-              ],
-            }),
-          ),
+                _el$6,
+              );
+              _$insert(_el$6, () => f9(order));
+              _$effect(() => _$setAttribute(_el$3, "src", f3(order)));
+              return _el$2;
+            })(),
+          );
+        },
       }),
-  });
-})([]);
+    );
+    return _el$;
+  })();
+  return $bundle;
+})();

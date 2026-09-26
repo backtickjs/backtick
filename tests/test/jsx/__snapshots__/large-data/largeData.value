@@ -1,6 +1,6 @@
 <div>
   <div>
-    <img src="https://img.example.com/ord-1000.png" alt="" />
+    <img alt="" src="https://img.example.com/ord-1000.png" />
     <span>
       {"Customer 0"}
     </span>
@@ -18,7 +18,7 @@
     </span>
   </div>
   <div>
-    <img src="https://img.example.com/ord-1001.png" alt="" />
+    <img alt="" src="https://img.example.com/ord-1001.png" />
     <span>
       {"Customer 1"}
     </span>
@@ -36,7 +36,7 @@
     </span>
   </div>
   <div>
-    <img src="https://img.example.com/ord-1002.png" alt="" />
+    <img alt="" src="https://img.example.com/ord-1002.png" />
     <span>
       {"Customer 2"}
     </span>
@@ -54,7 +54,7 @@
     </span>
   </div>
   <div>
-    <img src="https://img.example.com/ord-1003.png" alt="" />
+    <img alt="" src="https://img.example.com/ord-1003.png" />
     <span>
       {"Customer 3"}
     </span>
@@ -72,7 +72,7 @@
     </span>
   </div>
   <div>
-    <img src="https://img.example.com/ord-1004.png" alt="" />
+    <img alt="" src="https://img.example.com/ord-1004.png" />
     <span>
       {"Customer 4"}
     </span>

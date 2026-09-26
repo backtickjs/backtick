@@ -1,4 +1,9 @@
-(($d) => {
+(() => {
+  const { createComponent: _$createComponent2 } = $modules["solid-js/web"];
+  const { createSignal: $i0 } = $modules["solid-js"];
+  const { createSelector: $i1 } = $modules["solid-js"];
+  const { For: $i2 } = $modules["solid-js"];
+  const $Script = (props) => props.run();
   const f1 = (() => {
     const { template: _$template } = $modules["solid-js/web"];
     const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
@@ -41,18 +46,24 @@
     _$delegateEvents(["click"]);
     return $entry;
   })();
-  return jsx(
-    () =>
+  const $bundle = _$createComponent2($Script, {
+    run: () =>
       f1(
-        () => $modules["solid-js"].createSignal,
-        () => $modules["solid-js"].createSelector,
+        () => $i0,
+        () => $i1,
         ($0) =>
-          jsx($modules["solid-js"].For, {
-            each: () => $0.each,
-            fallback: () => $0.fallback,
-            children: () => $0.children,
+          _$createComponent2($i2, {
+            get each() {
+              return $0.each;
+            },
+            get fallback() {
+              return $0.fallback;
+            },
+            get children() {
+              return $0.children;
+            },
           }),
       ),
-    {},
-  );
-})([]);
+  });
+  return $bundle;
+})();

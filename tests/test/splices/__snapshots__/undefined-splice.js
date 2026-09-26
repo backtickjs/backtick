@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
+import { transform } from "@backtickjs/solid-js/transform";
 import { evaluate } from "@backtickjs/solid-js/testing";
 // A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
 // no form for it: dropped from an object and turned into `null` in an array.
@@ -11,11 +12,11 @@ describe("a spliced undefined", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          "3u6z57xnacrp0:12:32",
+          "2i00dqahsuxy4:13:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
           {
             code: "export default $0 => $0();",
-            map: '{"version":3,"mappings":"eAWmCA,EAAA,IAAAA,EAAA,EAAQ","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
+            map: '{"version":3,"mappings":"eAYmCA,EAAA,IAAAA,EAAA,EAAQ","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },
@@ -28,11 +29,11 @@ describe("a spliced undefined", () => {
     const data = { missing: undefined, kept: 1 };
     const arrived = await evaluate(
       cs.create(
-        "3u6z57xnacrp0:17:35",
+        "2i00dqahsuxy4:18:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
         {
           code: "export default $0 => $0();",
-          map: '{"version":3,"mappings":"eAgBsCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
+          map: '{"version":3,"mappings":"eAiBsCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
           imports: [],
           exportAt: 0,
         },
@@ -46,11 +47,11 @@ describe("a spliced undefined", () => {
     assert.deepEqual(
       await evaluate(
         cs.create(
-          "3u6z57xnacrp0:24:36",
+          "2i00dqahsuxy4:25:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
           {
             code: "export default $0 => $0();",
-            map: '{"version":3,"mappings":"eAuBuCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
+            map: '{"version":3,"mappings":"eAwBuCA,EAAA,IAAAA,EAAA,EAAK","names":["$0"],"ignoreList":[],"sources":["undefined-splice.test.tsx"]}',
             imports: [],
             exportAt: 0,
           },
@@ -60,7 +61,7 @@ describe("a spliced undefined", () => {
     );
   });
   it("is written as `void 0`", async () => {
-    const code = await bundler.run([undefined]);
+    const code = await bundler.run([undefined], { transform });
     assert.match(code, /\[void 0\]/);
   });
 });
