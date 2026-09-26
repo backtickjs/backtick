@@ -1,5 +1,5 @@
 // 12:5
-export default () => {
+() => {
     const xs = [3, 8, 12, 5];
     const word = "backtick";
     return {
@@ -14,4 +14,4 @@ export default () => {
         codePoint: "\u{1F600}".codePointAt(0),
         keys: Object.keys({ a: 1, b: 2 }),
     };
-};
+}

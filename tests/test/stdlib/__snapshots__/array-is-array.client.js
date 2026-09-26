@@ -1,5 +1,5 @@
 // 11:5
-export default () => {
+() => {
     return [
         Array.isArray([]),
         Array.isArray([1, 2]),
@@ -7,4 +7,4 @@ export default () => {
         Array.isArray({ length: 0 }),
         Array.isArray(null),
     ];
-};
+}

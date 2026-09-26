@@ -1,5 +1,5 @@
 // 14:10
-export default ($0, $1) => {
+($0, $1) => {
     const rows = [1, 2, 3, 4].map((id) => ({
         id: id,
         label: $0()("row " + id),
@@ -22,4 +22,4 @@ export default ($0, $1) => {
           </tbody>
         </table>
       </div>);
-};
+}

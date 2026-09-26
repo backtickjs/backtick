@@ -1,5 +1,5 @@
 // 12:31
-export default ($0, $1, $2, $3, $4) => {
+($0, $1, $2, $3, $4) => {
     const count = $0()(0);
     const Badge = (props) => <b>{"n " + props.n}</b>;
     return (<div>
@@ -9,24 +9,24 @@ export default ($0, $1, $2, $3, $4) => {
       {$4(count, Badge)}
       <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>);
-};
+}
 
 // 18:10
-export default ($0, $1) => <$0 n={$1[0]()}/>;
+($0, $1) => <$0 n={$1[0]()}/>
 
 // 20:11
-export default ($0, $1, $2) => {
+($0, $1, $2) => {
     const skipped = 10;
     return $0($1, $2);
-};
+}
 
 // 22:20
-export default ($0, $1) => <$0 n={$1[0]() + 100}/>;
+($0, $1) => <$0 n={$1[0]() + 100}/>
 
 // 25:21
-export default ($0, $1) => <$0 n={$1[0]() + 1000}/>;
+($0, $1) => <$0 n={$1[0]() + 1000}/>
 
 // 27:11
-export default ($0, $1, $2) => <$0 each={[1, 2]}>
+($0, $1, $2) => <$0 each={[1, 2]}>
           {(m) => <$1 n={m * $2[0]()}/>}
-        </$0>;
+        </$0>

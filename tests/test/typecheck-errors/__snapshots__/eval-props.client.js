@@ -1,17 +1,17 @@
 // 15:10
-export default ($0) => <em>{"rows " + $0()}</em>;
+($0) => <em>{"rows " + $0()}</em>
 
 // 19:10
-export default () => <em>{"nothing to hand it"}</em>;
+() => <em>{"nothing to hand it"}</em>
 
 // 23:3
-export default ($0) => (props) => $0(props);
+($0) => (props) => $0(props)
 
 // 23:51
-export default ($0) => $0.count;
+($0) => $0.count
 
 // 31:16
-export default ($0, $1) => {
+($0, $1) => {
     const Rows = eval($0());
     const Empty = eval($1());
     const wrongType = <Rows count={"one"}/>;
@@ -29,4 +29,4 @@ export default ($0, $1) => {
       
       {eval(null)}
     </div>);
-};
+}

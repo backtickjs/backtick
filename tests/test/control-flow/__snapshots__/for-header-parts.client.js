@@ -1,5 +1,5 @@
 // 11:5
-export default () => {
+() => {
     let i = 0;
     let seen = "";
     for (; i < 3;) {
@@ -7,4 +7,4 @@ export default () => {
         i = i + 1;
     }
     return seen;
-};
+}

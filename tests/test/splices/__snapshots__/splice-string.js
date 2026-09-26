@@ -11,10 +11,8 @@ it("spliceString", async (t) => {
     cs.create(
       "6r4m74y7k80e:10:40",
       { params: [{ kind: "splice", value: value, bindings: [] }] },
-      {
-        code: "export default ($0) => $0();",
-        map: '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splices/splice-string.test.tsx"],"names":[],"mappings":"eAS2C,QAAA,IAAM"}',
-      },
+      "($0) => $0()",
+      '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splices/splice-string.test.tsx"],"names":[],"mappings":"AAS2C,QAAA,IAAM"}',
     ),
   );
 });

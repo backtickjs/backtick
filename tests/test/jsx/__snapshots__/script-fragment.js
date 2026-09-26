@@ -11,10 +11,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 const listed = cs.create(
   "3pjkiwnta5gua:11:15",
   { params: [] },
-  {
-    code: "export default () => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>);",
-    map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["jsx/script-fragment.test.tsx"],"names":[],"mappings":"eAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
-  },
+  "() => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>)",
+  '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["jsx/script-fragment.test.tsx"],"names":[],"mappings":"AAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
 );
 it("scriptFragment", async (t) => {
   await snapshotCase(
@@ -24,10 +22,8 @@ it("scriptFragment", async (t) => {
       children: cs.create(
         "3pjkiwnta5gua:21:48",
         { params: [{ kind: "splice", value: listed, bindings: [] }] },
-        {
-          code: 'export default ($0) => $0()("x");',
-          map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["jsx/script-fragment.test.tsx"],"names":[],"mappings":"eAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
-        },
+        '($0) => $0()("x")',
+        '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["jsx/script-fragment.test.tsx"],"names":[],"mappings":"AAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
       ),
     }),
   );

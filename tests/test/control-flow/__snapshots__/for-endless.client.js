@@ -1,5 +1,5 @@
 // 10:5
-export default () => {
+() => {
     let i = 0;
     for (;;) {
         if (i === 4) {
@@ -8,4 +8,4 @@ export default () => {
         i = i + 1;
     }
     return i;
-};
+}

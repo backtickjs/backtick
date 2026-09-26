@@ -20,10 +20,8 @@ describe("a module an app provides", () => {
         cs.create(
           "z01oglrv1s2s:20:32",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
-          {
-            code: "export default ($0) => $0()();",
-            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"eAmBmC,QAAA,IAAM,EAAE"}',
-          },
+          "($0) => $0()()",
+          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmBmC,QAAA,IAAM,EAAE"}',
         ),
       ),
       "hello",
@@ -37,10 +35,8 @@ describe("a module an app provides", () => {
         cs.create(
           "z01oglrv1s2s:26:32",
           { params: [{ kind: "splice", value: storage, bindings: [] }] },
-          {
-            code: 'export default ($0) => $0().get("greeting");',
-            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"eAyBmC,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
-          },
+          '($0) => $0().get("greeting")',
+          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyBmC,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
         ),
       ),
       "hei",

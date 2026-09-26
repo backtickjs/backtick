@@ -28,7 +28,6 @@ import {
   undefinedValue,
 } from "../print/code.js";
 import type { Names } from "../print/code.js";
-import { type Entry, entryOf } from "./entryOf.js";
 
 /**
  * A bundle as it is built, before it is printed: each `functions` entry under
@@ -36,7 +35,7 @@ import { type Entry, entryOf } from "./entryOf.js";
  * and what they import.
  */
 export interface BundleTree {
-  readonly functions: readonly (readonly [string, Entry])[];
+  readonly functions: readonly (readonly [string, ClientScript])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -153,20 +152,19 @@ export async function buildBundle<T extends ClientUnknown>(
   const passKeys = (target: ClientScript, hole: number): readonly string[] =>
     bindingsOf(target.metadata.params[hole]);
 
-  const bodies = new Map<ClientScript, Entry>();
+  // The scripts the bundle declares: those a reference calls or passes, not
+  // every one looked up on the way.
+  const declared = new Set<ClientScript>();
 
   // A script entry's label: where it landed in the table.
   const fnLabel = (target: ClientScript): string =>
     `$f${scripts.get(target)! + 1}`;
 
-  // Materializes an entry's code into `bodies` the first time it is
-  // reached. An entry takes a `$i` parameter per splice — its holes render as
-  // calls `$i()` — ahead of its environment. Nothing from a call site is
-  // inlined, so the body is a function of the script's source alone.
+  // An entry takes a `$i` parameter per splice — its holes render as calls
+  // `$i()` — ahead of its environment. Nothing from a call site is inlined,
+  // so its code is a function of the script's source alone.
   const materialize = (script: ClientScript): void => {
-    if (!bodies.has(script)) {
-      bodies.set(script, entryOf(script.module));
-    }
+    declared.add(script);
   };
 
   // A fragment that is one entry whose parameters are exactly what this hole
@@ -428,11 +426,10 @@ export async function buildBundle<T extends ClientUnknown>(
   // Nothing encloses the root, so nothing it holds can capture.
   const root = await render(value as Spliceable);
   // In table order, which is the order rendering first reached each script.
-  const functions: (readonly [string, Entry])[] = [];
+  const functions: (readonly [string, ClientScript])[] = [];
   for (const script of scripts.keys()) {
-    const body = bodies.get(script);
-    if (body !== undefined) {
-      functions.push([fnLabel(script), body]);
+    if (declared.has(script)) {
+      functions.push([fnLabel(script), script]);
     }
   }
   return { functions, root, names };

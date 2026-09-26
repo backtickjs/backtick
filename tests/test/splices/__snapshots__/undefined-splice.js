@@ -14,10 +14,8 @@ describe("a spliced undefined", () => {
         cs.create(
           "2i00dqahsuxy4:13:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
-          {
-            code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"eAYmC,QAAA,IAAQ"}',
-          },
+          "($0) => $0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAYmC,QAAA,IAAQ"}',
         ),
       ),
       undefined,
@@ -29,10 +27,8 @@ describe("a spliced undefined", () => {
       cs.create(
         "2i00dqahsuxy4:18:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
-        {
-          code: "export default ($0) => $0();",
-          map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"eAiBsC,QAAA,IAAK"}',
-        },
+        "($0) => $0()",
+        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiBsC,QAAA,IAAK"}',
       ),
     );
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
@@ -45,10 +41,8 @@ describe("a spliced undefined", () => {
         cs.create(
           "2i00dqahsuxy4:25:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
-          {
-            code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"eAwBuC,QAAA,IAAK"}',
-          },
+          "($0) => $0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwBuC,QAAA,IAAK"}',
         ),
       ),
       [1, undefined, 3],

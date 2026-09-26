@@ -13,18 +13,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 const originX = cs.create(
   "3hhvicr225pmx:14:16",
   { params: [] },
-  {
-    code: "export default () => 1;",
-    map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"eAamB,MAAA,CAAC"}',
-  },
+  "() => 1",
+  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAamB,MAAA,CAAC"}',
 );
 const label = cs.create(
   "3hhvicr225pmx:16:14",
   { params: [] },
-  {
-    code: 'export default () => "origin";',
-    map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"eAeiB,MAAA,QAAQ"}',
-  },
+  '() => "origin"',
+  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAeiB,MAAA,QAAQ"}',
 );
 const point = { x: originX, label };
 it("splicedContainer", async (t) => {
@@ -34,10 +30,8 @@ it("splicedContainer", async (t) => {
     cs.create(
       "3hhvicr225pmx:21:44",
       { params: [{ kind: "splice", value: point, bindings: [] }] },
-      {
-        code: "export default ($0) => $0().x + 1;",
-        map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"eAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
-      },
+      "($0) => $0().x + 1",
+      '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
     ),
   );
 });

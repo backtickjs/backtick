@@ -1,8 +1,8 @@
 // 8:25
-export default () => true;
+() => true
 
 // 10:72
-export default ($0) => (text, upper) => {
+($0) => (text, upper) => {
     if (upper && text !== null) {
         return text.toUpperCase();
     }
@@ -10,12 +10,12 @@ export default ($0) => (text, upper) => {
         return text.concat("?");
     }
     return "none";
-};
+}
 
 // 27:5
-export default ($0) => ({
+($0) => ({
     missing: $0()(null, true),
     loud: $0()("!hi", true),
     quiet: $0()("!hi", false),
     plain: $0()("zz", false),
-});
+})

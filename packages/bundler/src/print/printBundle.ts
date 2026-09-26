@@ -3,7 +3,7 @@ import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
 import remapping from "@jridgewell/remapping";
 import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type { BundleTree } from "../bundle/buildBundle.js";
-import type { Entry } from "../bundle/entryOf.js";
+import type { ClientScript } from "@backtickjs/client-script";
 import { importDeclaration } from "./code.js";
 
 /**
@@ -46,9 +46,9 @@ export function printBundle<T extends ClientUnknown>(
   if (names.drawsScript) {
     module.line("const $Script = (props) => props.run();");
   }
-  for (const [label, entry] of tree.functions) {
+  for (const [label, script] of tree.functions) {
     module.write(`const ${label} = `);
-    module.entry(entry);
+    module.script(script);
     module.line(";");
   }
   module.write(`export default () => (${tree.root});`);
@@ -85,9 +85,9 @@ class ModuleWriter {
     this.write(`${text}\n`);
   }
 
-  // An entry's code, with its map's segments moved to where it stands: its
+  // A script's code, with its map's segments moved to where it stands: its
   // first line by where it starts on this one, the rest by line alone.
-  entry({ code, map, column }: Entry): void {
+  script({ code, map }: ClientScript): void {
     const line = this.#line;
     const start = this.#column;
     eachMapping(new TraceMap(map), (segment) => {
@@ -95,15 +95,10 @@ class ModuleWriter {
         return;
       }
       const first = segment.generatedLine === 1;
-      if (first && segment.generatedColumn < column) {
-        return;
-      }
       addMapping(this.#map, {
         generated: {
           line: line + segment.generatedLine,
-          column: first
-            ? start + segment.generatedColumn - column
-            : segment.generatedColumn,
+          column: (first ? start : 0) + segment.generatedColumn,
         },
         source: segment.source,
         original: {

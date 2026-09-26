@@ -11,35 +11,27 @@ async function ScriptRows() {
   const build = cs.create(
     "385ryajbwsmy3:11:16",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    {
-      code: "export default ($0) => (label) => {\n    return { label: $0()(label) };\n};",
-      map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAUmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
-    },
+    "($0) => (label) => {\n    return { label: $0()(label) };\n}",
+    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAUmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
   );
   return _jsx("span", {
     style: cs.create(
       "385ryajbwsmy3:17:13",
       { params: [] },
-      {
-        code: 'export default () => "font-size: 16px";',
-        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAgBgB,MAAA,iBAAiB"}',
-      },
+      '() => "font-size: 16px"',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAgBgB,MAAA,iBAAiB"}',
     ),
     onclick: cs.create(
       "385ryajbwsmy3:18:15",
       { params: [{ kind: "splice", value: build, bindings: [] }] },
-      {
-        code: 'export default ($0) => () => {\n    const row = $0()("one");\n    row.label[1](row.label[0]() + " !!!");\n};',
-        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAiBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
-      },
+      '($0) => () => {\n    const row = $0()("one");\n    row.label[1](row.label[0]() + " !!!");\n}',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAiBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
     ),
     children: cs.create(
       "385ryajbwsmy3:23:7",
       { params: [{ kind: "splice", value: build, bindings: [] }] },
-      {
-        code: 'export default ($0) => $0()("one").label[0]();',
-        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAsBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
-      },
+      '($0) => $0()("one").label[0]()',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAsBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
     ),
   });
 }

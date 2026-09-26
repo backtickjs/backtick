@@ -1,15 +1,14 @@
 import type ts from "typescript";
-import { addExportDefault } from "./addExportDefault.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 
 /** A script as the client runs it, and where its code came from. */
 export interface EmittedScript {
   /**
-   * The script as a module, `export default ($0, …) => body`, a parameter
-   * per entry of `metadata.params`. Types are gone and everything else, JSX
-   * included, is as the script wrote it, for the framework's own compiler to
-   * read when a bundle is built.
+   * The script as an expression, `($0, …) => body`, a parameter per entry of
+   * `metadata.params`. Types are gone and everything else, JSX included, is
+   * as the script wrote it, for the framework's own compiler to read when a
+   * bundle is built. How it is delivered is the bundle's to write.
    */
   readonly code: string;
   /**
@@ -194,10 +193,13 @@ export function emitScript(
       alwaysStrict: false,
       removeComments: true,
     },
-    transformers: { before: [transformer], after: [addExportDefault(ts)] },
+    transformers: { before: [transformer] },
   });
-  // Without the comment naming a map file.
-  const code = output.outputText.replace(/\n\/\/# sourceMappingURL=.*$/, "");
+  // The file's one expression statement, without its `;` or the comment
+  // naming a map file.
+  const code = output.outputText
+    .replace(/\n\/\/# sourceMappingURL=.*$/, "")
+    .replace(/;\s*$/, "");
   // Named as the host file was, not relative to an output file there is none
   // of, so maps from files in different directories can be combined.
   const map = JSON.parse(output.sourceMapText!) as { sources: string[] };

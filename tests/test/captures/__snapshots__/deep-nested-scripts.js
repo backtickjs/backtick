@@ -10,10 +10,8 @@ function add(lhs, rhs) {
         { kind: "splice", value: rhs, bindings: [] },
       ],
     },
-    {
-      code: "export default ($0, $1) => $0() + $1();",
-      map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAMY,YAAA,IAAI,GAAG,IAAI"}',
-    },
+    "($0, $1) => $0() + $1()",
+    '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAMY,YAAA,IAAI,GAAG,IAAI"}',
   );
 }
 it("deepNestedScripts", async (t) => {
@@ -30,28 +28,22 @@ it("deepNestedScripts", async (t) => {
               cs.create(
                 "2rqwzcdfi281b:11:54",
                 { params: [] },
-                {
-                  code: "export default () => 1;",
-                  map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUyD,MAAA,CAAC"}',
-                },
+                "() => 1",
+                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUyD,MAAA,CAAC"}',
               ),
               cs.create(
                 "2rqwzcdfi281b:11:61",
                 { params: [] },
-                {
-                  code: "export default () => 2;",
-                  map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUgE,MAAA,CAAC"}',
-                },
+                "() => 2",
+                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgE,MAAA,CAAC"}',
               ),
             ),
             bindings: [],
           },
         ],
       },
-      {
-        code: "export default ($0) => $0();",
-        map: '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"eAUgD,QAAA,IAAC"}',
-      },
+      "($0) => $0()",
+      '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgD,QAAA,IAAC"}',
     ),
   );
 });

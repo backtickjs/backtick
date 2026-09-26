@@ -10,10 +10,11 @@ import * as web from "solid-js/web";
 import ts from "typescript";
 import { transform } from "../dist/transform.js";
 
-// Each script in `host`, compiled by backtick's compiler and then Solid's.
+// Each script in `host`, compiled by backtick's compiler and then Solid's, as
+// a module exporting it.
 function compile(host: string) {
   return emitScripts(ts, "host.tsx", host).map((script) =>
-    transform(script.code, "host.tsx"),
+    transform(`export default ${script.code};`, "host.tsx"),
   );
 }
 

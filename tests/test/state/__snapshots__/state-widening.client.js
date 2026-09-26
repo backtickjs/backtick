@@ -1,5 +1,5 @@
 // 24:10
-export default ($0, $1, $2) => {
+($0, $1, $2) => {
     const flag = $0()(true);
     const tone = $0()($1());
     const step = $0()(() => 0);
@@ -10,4 +10,4 @@ export default ($0, $1, $2) => {
         }}>
         {flag[0]() + " " + tone[0]() + " " + step[0]()()}
       </span>);
-};
+}

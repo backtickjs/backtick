@@ -18,7 +18,6 @@ export {
   isClientScript,
   type Metadata,
   type Param,
-  type ScriptModule,
 } from "./ClientScript.js";
 export { isComponentTag } from "./isComponentTag.js";
 export { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";

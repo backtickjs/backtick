@@ -13,10 +13,8 @@ it("negation", async (t) => {
     cs.create(
       "3ucocch4sr77y:14:4",
       { params: [] },
-      {
-        code: "export default () => (count) => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n};",
-        map: '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["expressions/negation.test.tsx"],"names":[],"mappings":"eAaO,MAAA,CAAC,KAAa,EAAE,EAAE;IACnB,MAAM,KAAK,GAAG,CAAC,CAAC,CAAC;IACjB,MAAM,IAAI,GAAG,CAAC,KAAK,CAAC;IACpB,OAAO,KAAK,GAAG,IAAI,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
-      },
+      "() => (count) => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n}",
+      '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["expressions/negation.test.tsx"],"names":[],"mappings":"AAaO,MAAA,CAAC,KAAa,EAAE,EAAE;IACnB,MAAM,KAAK,GAAG,CAAC,CAAC,CAAC;IACjB,MAAM,IAAI,GAAG,CAAC,KAAK,CAAC;IACpB,OAAO,KAAK,GAAG,IAAI,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
     ),
   );
 });
@@ -28,10 +26,8 @@ it("negativeZero", async (t) => {
     cs.create(
       "3ucocch4sr77y:27:4",
       { params: [] },
-      {
-        code: "export default () => {\n    return 1 / -0;\n};",
-        map: '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["expressions/negation.test.tsx"],"names":[],"mappings":"eA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC;AAChB,CAAC"}',
-      },
+      "() => {\n    return 1 / -0;\n}",
+      '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["expressions/negation.test.tsx"],"names":[],"mappings":"AA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC;AAChB,CAAC"}',
     ),
   );
 });

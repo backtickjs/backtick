@@ -1,5 +1,5 @@
 // 111:12
-export default ($0) => {
+($0) => {
     const text = $0()("first");
     const isOn = $0()(false);
     return (<div>
@@ -12,4 +12,4 @@ export default ($0) => {
             write
           </button>
         </div>);
-};
+}

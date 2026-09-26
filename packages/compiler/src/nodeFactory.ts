@@ -1,49 +1,5 @@
 import type ts from "typescript";
 
-/** Plain data as the literal that builds it. */
-export function literal(
-  ts: typeof import("typescript"),
-  value: unknown,
-): ts.Expression {
-  if (value === null) {
-    return ts.factory.createNull();
-  }
-  if (typeof value === "boolean") {
-    return value ? ts.factory.createTrue() : ts.factory.createFalse();
-  }
-  if (typeof value === "number") {
-    if (!Number.isFinite(value) || value < 0 || Object.is(value, -0)) {
-      throw new Error(`${value} is not a value a node holds`);
-    }
-    return ts.factory.createNumericLiteral(value);
-  }
-  if (typeof value === "string") {
-    return ts.factory.createStringLiteral(value);
-  }
-  if (Array.isArray(value)) {
-    return ts.factory.createArrayLiteralExpression(
-      value.map((member) => literal(ts, member)),
-      false,
-    );
-  }
-  if (typeof value === "object") {
-    return ts.factory.createObjectLiteralExpression(
-      Object.entries(value)
-        .filter(([, member]) => member !== undefined)
-        .map(([key, member]) =>
-          ts.factory.createPropertyAssignment(
-            /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key)
-              ? key
-              : ts.factory.createStringLiteral(key),
-            literal(ts, member),
-          ),
-        ),
-      false,
-    );
-  }
-  throw new Error(`${typeof value} is not a value a node holds`);
-}
-
 /** <receiver>.<method>(...args) */
 export function call(
   ts: typeof import("typescript"),

@@ -1,5 +1,5 @@
 // 12:5
-export default () => {
+() => {
     const coins = [1, 2, 3, 4];
     return {
         at: [coins.at(0), coins.at(-1), coins.at(9)],
@@ -11,4 +11,4 @@ export default () => {
         reduceRight: coins.reduceRight((text, n) => text + n, ""),
         unchanged: coins,
     };
-};
+}

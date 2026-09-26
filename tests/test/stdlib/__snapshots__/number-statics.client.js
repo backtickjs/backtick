@@ -1,5 +1,5 @@
 // 9:10
-export default () => {
+() => {
     const positive = Number.EPSILON > 0;
     const largest = Number.MAX_VALUE > 1e308;
     const safe = Number.MAX_SAFE_INTEGER === 9007199254740991 &&
@@ -23,4 +23,4 @@ export default () => {
             " " +
             safe}
       </span>);
-};
+}

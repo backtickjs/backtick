@@ -1,5 +1,5 @@
 // 16:10
-export default ($0, $1) => {
+($0, $1) => {
     const names = $0()(["a", "b", "c"]);
     const rotate = () => {
         const held = names[0]();
@@ -13,4 +13,4 @@ export default ($0, $1) => {
           </$1>
         </div>
       </div>);
-};
+}

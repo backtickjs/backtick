@@ -1,5 +1,5 @@
 // 11:5
-export default () => {
+() => {
     const coins = [1, 2, 3];
     const four = 4;
     return {
@@ -13,4 +13,4 @@ export default () => {
         doubled: coins.map((n) => n * 2),
         small: coins.filter((n) => n < 3),
     };
-};
+}

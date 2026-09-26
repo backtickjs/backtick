@@ -10,10 +10,8 @@ describe("a read by key", () => {
         cs.create(
           "kcu3tgkaz8ne:10:32",
           { params: [] },
-          {
-            code: 'export default () => [5, 31, 7]["0"];',
-            map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eASmC,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
-          },
+          '() => [5, 31, 7]["0"]',
+          '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AASmC,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
         ),
       ),
       5,
@@ -23,10 +21,8 @@ describe("a read by key", () => {
         cs.create(
           "kcu3tgkaz8ne:11:32",
           { params: [] },
-          {
-            code: 'export default () => "abc"["0"];',
-            map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAUmC,MAAA,KAAK,CAAC,GAAG,CAAC"}',
-          },
+          '() => "abc"["0"]',
+          '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAUmC,MAAA,KAAK,CAAC,GAAG,CAAC"}',
         ),
       ),
       "a",
@@ -37,10 +33,8 @@ describe("a read by key", () => {
         cs.create(
           "kcu3tgkaz8ne:13:32",
           { params: [] },
-          {
-            code: "export default () => ({ x: 1 })[0];",
-            map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAYmC,MAAA,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
-          },
+          "() => ({ x: 1 })[0]",
+          '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAYmC,MAAA,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
         ),
       ),
       undefined,
@@ -50,10 +44,8 @@ describe("a read by key", () => {
         cs.create(
           "kcu3tgkaz8ne:14:32",
           { params: [] },
-          {
-            code: "export default () => 7[0];",
-            map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAamC,MAAC,CAAyB,CAAC,CAAC,CAAC"}',
-          },
+          "() => 7[0]",
+          '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAamC,MAAC,CAAyB,CAAC,CAAC,CAAC"}',
         ),
       ),
       undefined,
@@ -65,42 +57,32 @@ describe("a read by key", () => {
       cs.create(
         "kcu3tgkaz8ne:20:6",
         { params: [] },
-        {
-          code: "export default () => [5, 31, 7][9];",
-          map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAmBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC"}',
-        },
+        "() => [5, 31, 7][9]",
+        '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAmBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC"}',
       ),
       cs.create(
         "kcu3tgkaz8ne:21:6",
         { params: [] },
-        {
-          code: "export default () => [5, 31, 7][1.5];",
-          map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAoBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
-        },
+        "() => [5, 31, 7][1.5]",
+        '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAoBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
       ),
       cs.create(
         "kcu3tgkaz8ne:22:6",
         { params: [] },
-        {
-          code: "export default () => [5, 31, 7][-1];",
-          map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAqBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC"}',
-        },
+        "() => [5, 31, 7][-1]",
+        '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAqBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC"}',
       ),
       cs.create(
         "kcu3tgkaz8ne:23:6",
         { params: [] },
-        {
-          code: 'export default () => ({ x: 1 })["y"];',
-          map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAsBS,MAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAA+B,CAAC,GAAG,CAAC"}',
-        },
+        '() => ({ x: 1 })["y"]',
+        '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAsBS,MAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAA+B,CAAC,GAAG,CAAC"}',
       ),
       cs.create(
         "kcu3tgkaz8ne:24:6",
         { params: [] },
-        {
-          code: 'export default () => "abc"[9];',
-          map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"eAuBS,MAAA,KAAK,CAAC,CAAC,CAAC"}',
-        },
+        '() => "abc"[9]',
+        '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAuBS,MAAA,KAAK,CAAC,CAAC,CAAC"}',
       ),
     ];
     for (const value of reads) {

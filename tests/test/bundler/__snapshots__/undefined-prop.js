@@ -33,10 +33,8 @@ describe("an undefined prop", () => {
         ref: cs.create(
           "1x1djky073nkj:37:33",
           { params: [{ kind: "splice", value: onMount, bindings: [] }] },
-          {
-            code: "export default ($0) => (el) => $0()(() => el.focus());",
-            map: '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"eAoCoC,QAAA,CAAC,EAAE,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
-          },
+          "($0) => (el) => $0()(() => el.focus())",
+          '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAoCoC,QAAA,CAAC,EAAE,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
         ),
       }),
     );

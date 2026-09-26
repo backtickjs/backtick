@@ -3,28 +3,24 @@
 null    → 9:36 null
  ===    → 9:40  === 
 null    → 9:45 null
-;       → 9:49 `),…
 
 // 10:33
 () =>      → 10:36 undefined…
 undefined  → 10:36 undefined
  ===       → 10:45  === 
 undefined  → 10:50 undefined
-;          → 10:59 `),…
 
 // 14:33
 () =>      → 14:36 null…
 null       → 14:36 null
  !==       → 14:40  !== 
 undefined  → 14:45 undefined
-;          → 14:54 `),…
 
 // 15:33
 () =>      → 15:36 null…
 null       → 15:36 null
  ===       → 15:40  === 
 undefined  → 15:45 undefined
-;          → 15:54 `),…
 
 // 24:22
 ($0, $1) => {  → 24:25 {…
@@ -69,4 +65,3 @@ null           → 32:24 null
 ,              → 32:28 ,
 ;              → 33:10 ;
 }              → 34:7 }
-;              → 34:8 `),…

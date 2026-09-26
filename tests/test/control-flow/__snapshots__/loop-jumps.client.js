@@ -1,5 +1,5 @@
 // 12:5
-export default () => {
+() => {
     let out = "";
     for (let i = 0; i < 5; i = i + 1) {
         if (i === 1) {
@@ -14,4 +14,4 @@ export default () => {
         }
     }
     return out;
-};
+}

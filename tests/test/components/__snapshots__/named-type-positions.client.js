@@ -1,5 +1,5 @@
 // 19:10
-export default ($0, $1) => {
+($0, $1) => {
     const rows = $0()([]);
     const add = (row) => {
         rows[1]([row]);
@@ -13,4 +13,4 @@ export default ($0, $1) => {
           <$1 each={rows[0]()}>{(row) => <span>{label(row)}</span>}</$1>
         </div>
       </div>);
-};
+}

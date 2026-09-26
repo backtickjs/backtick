@@ -20,10 +20,8 @@ async function SelectableRows() {
         { kind: "tag", value: For },
       ],
     },
-    {
-      code: 'export default ($0, $1, $2) => {\n    const selected = $0()(0);\n    const isSelected = $1()(selected[0]);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        <div>\n          <$2 each={[0, 1, 2]}>\n            {(id) => (<a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>)}\n          </$2>\n        </div>\n      </div>);\n};',
-      map: '{"version":3,"file":"unmoved-prop.test.jsx","sourceRoot":"","sources":["state/unmoved-prop.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,QAAQ,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAClC,MAAM,UAAU,GAAG,IAAe,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC;IAChD,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,GAAG,CACF;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CACnB;YAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CACf,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,UAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,SAAS,CAAC,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,CAAC,CAAC,CACjE,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,GAAG,CACP;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-    },
+    '($0, $1, $2) => {\n    const selected = $0()(0);\n    const isSelected = $1()(selected[0]);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        <div>\n          <$2 each={[0, 1, 2]}>\n            {(id) => (<a href={isSelected(id) ? "#open" : "#closed"}>{"row " + id}</a>)}\n          </$2>\n        </div>\n      </div>);\n}',
+    '{"version":3,"file":"unmoved-prop.test.jsx","sourceRoot":"","sources":["state/unmoved-prop.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,QAAQ,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAClC,MAAM,UAAU,GAAG,IAAe,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC;IAChD,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,GAAG,CACF;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CACnB;YAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CACf,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,UAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,SAAS,CAAC,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,CAAC,CAAC,CACjE,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,GAAG,CACP;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
   );
 }
 describe("local state", () => {

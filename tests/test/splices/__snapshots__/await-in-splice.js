@@ -18,10 +18,8 @@ it("awaitInSplice", async (t) => {
           { kind: "splice", value: await fetchGreeting(), bindings: [] },
         ],
       },
-      {
-        code: 'export default ($0) => $0() + "!";',
-        map: '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["splices/await-in-splice.test.tsx"],"names":[],"mappings":"eAY4C,QAAA,IAAC,GAA0B,GAAG"}',
-      },
+      '($0) => $0() + "!"',
+      '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["splices/await-in-splice.test.tsx"],"names":[],"mappings":"AAY4C,QAAA,IAAC,GAA0B,GAAG"}',
     ),
   );
 });

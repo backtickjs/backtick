@@ -1,5 +1,5 @@
 // 26:7
-export default ($0, $1, $2) => {
+($0, $1, $2) => {
     const n = $0()(1);
     const doubled = $1()(() => {
         $2().console.log();
@@ -11,10 +11,10 @@ export default ($0, $1, $2) => {
             <p>{"b " + doubled()}</p>
             <p>{"c " + doubled()}</p>
           </div>);
-};
+}
 
 // 52:7
-export default ($0, $1, $2) => {
+($0, $1, $2) => {
     const n = $0()(1);
     const isBig = $1()(() => n[0]() > 2);
     const label = () => {
@@ -25,4 +25,4 @@ export default ($0, $1, $2) => {
             <button onclick={() => n[1](n[0]() + 1)}>add</button>
             <p>{label()}</p>
           </div>);
-};
+}

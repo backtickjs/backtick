@@ -1,5 +1,5 @@
 // 12:5
-export default ($0) => {
+($0) => {
     const count = $0()(0);
     return [
         typeof undefined,
@@ -13,10 +13,10 @@ export default ($0) => {
         typeof Math.floor,
         typeof count,
     ];
-};
+}
 
 // 35:5
-export default () => {
+() => {
     const measure = (v) => typeof v === "string" ? v.length : v * 2;
     return [measure("abc"), measure(4)];
-};
+}

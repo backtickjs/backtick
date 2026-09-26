@@ -1,5 +1,5 @@
 // 14:10
-export default ($0, $1, $2) => {
+($0, $1, $2) => {
     const selected = $0()(0);
     const isSelected = $1()(selected[0]);
     return (<div>
@@ -10,4 +10,4 @@ export default ($0, $1, $2) => {
           </$2>
         </div>
       </div>);
-};
+}

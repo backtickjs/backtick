@@ -1,8 +1,8 @@
 // 14:17
-export default () => 1;
+() => 1
 
 // 16:15
-export default () => "origin";
+() => "origin"
 
 // 21:45
-export default ($0) => $0().x + 1;
+($0) => $0().x + 1

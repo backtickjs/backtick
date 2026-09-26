@@ -6,10 +6,8 @@ import { snapshotCase } from "../snapshotCase.ts";
 const leaf = cs.create(
   "2g4us6n03x6jl:7:13",
   { params: [] },
-  {
-    code: "export default () => 7;",
-    map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC"}',
-  },
+  "() => 7",
+  '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"AAMgB,MAAA,CAAC"}',
 );
 it("deduplicatedScripts", async (t) => {
   await snapshotCase(
@@ -18,10 +16,8 @@ it("deduplicatedScripts", async (t) => {
     cs.create(
       "2g4us6n03x6jl:10:47",
       { params: [{ kind: "splice", value: leaf, bindings: [] }] },
-      {
-        code: "export default ($0) => ({ a: $0(), b: $0() });",
-        map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"eASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
-      },
+      "($0) => ({ a: $0(), b: $0() })",
+      '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"AASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
     ),
   );
 });

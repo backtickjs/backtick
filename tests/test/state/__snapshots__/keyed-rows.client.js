@@ -1,5 +1,5 @@
 // 13:10
-export default ($0, $1) => {
+($0, $1) => {
     const ids = $0()([1, 2, 3]);
     const swap = () => {
         const held = ids[0]();
@@ -17,4 +17,4 @@ export default ($0, $1) => {
           </$1>
         </div>
       </div>);
-};
+}

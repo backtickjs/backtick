@@ -9,10 +9,8 @@ it("earlyReturn", async (t) => {
     cs.create(
       "33mpmt8iae2c7:10:4",
       { params: [] },
-      {
-        code: "export default () => {\n    let n = 0;\n    if (n === 0) {\n        return;\n    }\n    n = 1;\n};",
-        map: '{"version":3,"file":"early-return.test.jsx","sourceRoot":"","sources":["control-flow/early-return.test.tsx"],"names":[],"mappings":"eASO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;QACZ,OAAO;IACT,CAAC;IACD,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
-      },
+      "() => {\n    let n = 0;\n    if (n === 0) {\n        return;\n    }\n    n = 1;\n}",
+      '{"version":3,"file":"early-return.test.jsx","sourceRoot":"","sources":["control-flow/early-return.test.tsx"],"names":[],"mappings":"AASO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;QACZ,OAAO;IACT,CAAC;IACD,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
     ),
   );
 });

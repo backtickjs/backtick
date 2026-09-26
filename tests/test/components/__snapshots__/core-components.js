@@ -14,10 +14,8 @@ it("coreComponents", async (t) => {
           onclick: cs.create(
             "1dqg1yg283gkk:10:45",
             { params: [] },
-            {
-              code: "export default () => () => { };",
-              map: '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["components/core-components.test.tsx"],"names":[],"mappings":"eASgD,MAAA,GAAG,EAAE,GAAE,CAAC"}',
-            },
+            "() => () => { }",
+            '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["components/core-components.test.tsx"],"names":[],"mappings":"AASgD,MAAA,GAAG,EAAE,GAAE,CAAC"}',
           ),
           children: "hi",
         }),

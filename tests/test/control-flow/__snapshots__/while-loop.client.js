@@ -1,5 +1,5 @@
 // 9:5
-export default () => {
+() => {
     let i = 0;
     let total = 0;
     while (i < 5) {
@@ -10,4 +10,4 @@ export default () => {
         i = i + 1;
     }
     return total;
-};
+}

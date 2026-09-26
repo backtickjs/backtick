@@ -1,5 +1,5 @@
 // 13:10
-export default ($0, $1) => {
+($0, $1) => {
     const ids = $0()([1, 2, 3, 4, 5]);
     return (<table>
         <tbody>
@@ -14,4 +14,4 @@ export default ($0, $1) => {
           </$1>
         </tbody>
       </table>);
-};
+}

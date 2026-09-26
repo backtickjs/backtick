@@ -16,20 +16,16 @@ const script = cs.create(
           onclick: cs.create(
             "g38hwxw7rhvi:13:27",
             { params: [{ kind: "capture", key: "x$g38hwxw7rhvi$0" }] },
-            {
-              code: "export default ($0) => () => $0;",
-              map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"eAY8B,QAAA,GAAG,EAAE,CAAC,EAAC"}',
-            },
+            "($0) => () => $0",
+            '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAY8B,QAAA,GAAG,EAAE,CAAC,EAAC"}',
           ),
         }),
         bindings: ["x$g38hwxw7rhvi$0"],
       },
     ],
   },
-  {
-    code: "export default ($0) => () => {\n    const x = 1;\n    return $0(x);\n};",
-    map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"eAU6C,QAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC"}',
-  },
+  "($0) => () => {\n    const x = 1;\n    return $0(x);\n}",
+  '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAU6C,QAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC"}',
 );
 it("jsxCapture", async (t) => {
   await snapshotCase(t, "jsxCapture", script);

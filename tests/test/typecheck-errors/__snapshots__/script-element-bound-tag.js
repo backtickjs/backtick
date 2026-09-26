@@ -5,8 +5,6 @@ import { cs } from "@backtickjs/core";
 const held = cs.create(
   "xwewmj2gozc5:6:13",
   { params: [] },
-  {
-    code: "export default () => (Tag) => <Tag />;",
-    map: '{"version":3,"file":"script-element-bound-tag.test.jsx","sourceRoot":"","sources":["typecheck-errors/script-element-bound-tag.test.tsx"],"names":[],"mappings":"eAKgB,MAAA,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,AAAD,EAAG"}',
-  },
+  "() => (Tag) => <Tag />",
+  '{"version":3,"file":"script-element-bound-tag.test.jsx","sourceRoot":"","sources":["typecheck-errors/script-element-bound-tag.test.tsx"],"names":[],"mappings":"AAKgB,MAAA,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,AAAD,EAAG"}',
 );

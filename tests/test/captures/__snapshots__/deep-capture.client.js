@@ -1,23 +1,23 @@
 // 18:10
-export default ($0, $1) => {
+($0, $1) => {
     const outer = $0();
     return $1(outer);
-};
+}
 
 // 20:14
-export default ($0, $1) => {
+($0, $1) => {
     const middle = 10;
     return middle + $0($1);
-};
+}
 
 // 22:25
-export default ($0) => $0;
+($0) => $0
 
 // 28:40
-export default ($0, $1) => $0() + $1();
+($0, $1) => $0() + $1()
 
 // 28:50
-export default () => 1;
+() => 1
 
 // 28:67
-export default () => 2;
+() => 2

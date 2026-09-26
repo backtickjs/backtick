@@ -14,19 +14,15 @@ it("nestedScripts", async (t) => {
             value: cs.create(
               "2jjdjdr7m395y:11:15",
               { params: [{ kind: "capture", key: "x$2jjdjdr7m395y$0" }] },
-              {
-                code: "export default ($0) => $0;",
-                map: '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"eAUkB,QAAA,EAAC"}',
-              },
+              "($0) => $0",
+              '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"AAUkB,QAAA,EAAC"}',
             ),
             bindings: ["x$2jjdjdr7m395y$0"],
           },
         ],
       },
-      {
-        code: "export default ($0) => {\n    const x = 0;\n    return $0(x);\n};",
-        map: '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"eAQO;IACD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAQ;AAClB,CAAC"}',
-      },
+      "($0) => {\n    const x = 0;\n    return $0(x);\n}",
+      '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"AAQO;IACD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAQ;AAClB,CAAC"}',
     ),
   );
 });

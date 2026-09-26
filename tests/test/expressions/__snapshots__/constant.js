@@ -8,10 +8,8 @@ it("constant", async (t) => {
     cs.create(
       "1e4ingeabxazf:6:36",
       { params: [] },
-      {
-        code: "export default () => 1;",
-        map: '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["expressions/constant.test.tsx"],"names":[],"mappings":"eAKuC,MAAA,CAAC"}',
-      },
+      "() => 1",
+      '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["expressions/constant.test.tsx"],"names":[],"mappings":"AAKuC,MAAA,CAAC"}',
     ),
   );
 });

@@ -12,10 +12,8 @@ it("twoFiles", async (t) => {
     cs.create(
       "2q1jq3rupgdvu:9:36",
       { params: [{ kind: "splice", value: _jsx(Badge, {}), bindings: [] }] },
-      {
-        code: 'export default ($0) => <p>{"in "}{$0()}</p>;',
-        map: '{"version":3,"file":"two-files.test.jsx","sourceRoot":"","sources":["bundler/two-files.test.tsx"],"names":[],"mappings":"eAQuC,QAAA,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,IAAc,CAAC,EAAE,CAAC,CAAC"}',
-      },
+      '($0) => <p>{"in "}{$0()}</p>',
+      '{"version":3,"file":"two-files.test.jsx","sourceRoot":"","sources":["bundler/two-files.test.tsx"],"names":[],"mappings":"AAQuC,QAAA,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,IAAc,CAAC,EAAE,CAAC,CAAC"}',
     ),
   );
 });

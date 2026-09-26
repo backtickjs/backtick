@@ -9,10 +9,8 @@ function make(n) {
   return cs.create(
     "9toqhs9m4ayz:9:9",
     { params: [{ kind: "splice", value: n, bindings: [] }] },
-    {
-      code: "export default ($0) => () => $0();",
-      map: '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx/jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"eAQY,QAAA,GAAG,EAAE,CAAC,IAAE"}',
-    },
+    "($0) => () => $0()",
+    '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx/jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"AAQY,QAAA,GAAG,EAAE,CAAC,IAAE"}',
   );
 }
 it("jsxPolymorphicProp", async (t) => {

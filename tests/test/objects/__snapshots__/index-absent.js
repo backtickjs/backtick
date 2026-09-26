@@ -12,10 +12,8 @@ it("indexAbsent", async (t) => {
     cs.create(
       "26sqkhggd8j15:14:4",
       { params: [{ kind: "splice", value: answers, bindings: [] }] },
-      {
-        code: 'export default ($0) => {\n    const names = ["zero", "one"];\n    const missing = $0()["nowhere"] ?? "gone";\n    return names[1] + "/" + missing;\n};',
-        map: '{"version":3,"file":"index-absent.test.jsx","sourceRoot":"","sources":["objects/index-absent.test.tsx"],"names":[],"mappings":"eAaO;IACD,MAAM,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;IAC9B,MAAM,OAAO,GAAG,IAAQ,CAAC,SAAS,CAAC,IAAI,MAAM,CAAC;IAC9C,OAAO,KAAK,CAAC,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC;AAClC,CAAC"}',
-      },
+      '($0) => {\n    const names = ["zero", "one"];\n    const missing = $0()["nowhere"] ?? "gone";\n    return names[1] + "/" + missing;\n}',
+      '{"version":3,"file":"index-absent.test.jsx","sourceRoot":"","sources":["objects/index-absent.test.tsx"],"names":[],"mappings":"AAaO;IACD,MAAM,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;IAC9B,MAAM,OAAO,GAAG,IAAQ,CAAC,SAAS,CAAC,IAAI,MAAM,CAAC;IAC9C,OAAO,KAAK,CAAC,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC;AAClC,CAAC"}',
     ),
   );
 });

@@ -35,10 +35,8 @@ function wrap(start) {
                             { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
                           ],
                         },
-                        {
-                          code: "export default ($0) => $0;",
-                          map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eAoBgC,QAAA,EAAK"}',
-                        },
+                        "($0) => $0",
+                        '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAoBgC,QAAA,EAAK"}',
                       ),
                     ),
                     bindings: [],
@@ -46,30 +44,24 @@ function wrap(start) {
                   { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
                 ],
               },
-              {
-                code: "export default ($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n};",
-                map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eAkBoB;IACd,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAkB;AACrC,CAAC"}',
-              },
+              "($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n}",
+              '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAkBoB;IACd,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAkB;AACrC,CAAC"}',
             ),
           ),
           bindings: ["outer$zqr0jsdf8ub6$0"],
         },
       ],
     },
-    {
-      code: "export default ($0, $1) => {\n    const outer = $0();\n    return $1(outer);\n};",
-      map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eAgBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGH;AACP,CAAC"}',
-    },
+    "($0, $1) => {\n    const outer = $0();\n    return $1(outer);\n}",
+    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAgBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGH;AACP,CAAC"}',
   );
 }
 function foo(start) {
   return cs.create(
     "zqr0jsdf8ub6:27:9",
     { params: [{ kind: "splice", value: start, bindings: [] }] },
-    {
-      code: "export default ($0) => $0() + 1;",
-      map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,IAAM,GAAG,CAAC"}',
-    },
+    "($0) => $0() + 1",
+    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AA0BY,QAAA,IAAM,GAAG,CAAC"}',
   );
 }
 function same(script) {
@@ -89,10 +81,8 @@ it("hostWrappedSplice", async (t) => {
               cs.create(
                 "zqr0jsdf8ub6:38:14",
                 { params: [] },
-                {
-                  code: "export default () => 1;",
-                  map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eAqCiB,MAAA,CAAC"}',
-                },
+                "() => 1",
+                '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCiB,MAAA,CAAC"}',
               ),
             ),
             bindings: [],
@@ -103,20 +93,16 @@ it("hostWrappedSplice", async (t) => {
               cs.create(
                 "zqr0jsdf8ub6:38:31",
                 { params: [] },
-                {
-                  code: "export default () => 2;",
-                  map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eAqCkC,MAAA,CAAC"}',
-                },
+                "() => 2",
+                '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCkC,MAAA,CAAC"}',
               ),
             ),
             bindings: [],
           },
         ],
       },
-      {
-        code: "export default ($0, $1) => $0() + $1();",
-        map: '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"eAqCO,YAAA,IAAC,GAAgB,IAAC"}',
-      },
+      "($0, $1) => $0() + $1()",
+      '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCO,YAAA,IAAC,GAAgB,IAAC"}',
     ),
   );
 });

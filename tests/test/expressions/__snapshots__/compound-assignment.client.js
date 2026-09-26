@@ -1,5 +1,5 @@
 // 12:5
-export default () => {
+() => {
     let n = 10;
     n += 5;
     n -= 3;
@@ -13,4 +13,4 @@ export default () => {
     let x = 1;
     x += x = 5;
     return [n, text, answered, total, x];
-};
+}

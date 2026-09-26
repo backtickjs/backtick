@@ -1,5 +1,5 @@
 // 13:5
-export default () => {
+() => {
     const prices = [4.5, 3.25, 2];
     const total = prices.reduce((sum, price) => sum + price, 0);
     const names = ["a", "b", "c"];
@@ -10,4 +10,4 @@ export default () => {
         joined +
         "|" +
         empty.reduce((sum, one) => sum + one, 0));
-};
+}

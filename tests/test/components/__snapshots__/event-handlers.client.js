@@ -1,5 +1,5 @@
 // 16:5
-export default ($0) => {
+($0) => {
     const said = $0()("");
     return (<form onsubmit={(event) => {
             event.preventDefault();
@@ -11,4 +11,4 @@ export default ($0) => {
             {said[0]()}
           </button>
         </form>);
-};
+}

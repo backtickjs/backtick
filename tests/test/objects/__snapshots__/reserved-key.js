@@ -10,10 +10,8 @@ it("reservedKey", async (t) => {
     cs.create(
       "2a27difszbs8:8:39",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
-      {
-        code: "export default ($0) => () => $0();",
-        map: '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["objects/reserved-key.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
-      },
+      "($0) => () => $0()",
+      '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["objects/reserved-key.test.tsx"],"names":[],"mappings":"AAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
     ),
   );
 });

@@ -26,10 +26,8 @@ it("mappedComponent", async (t) => {
         each: cs.create(
           "8u2ewdd1g2mk:26:17",
           { params: [{ kind: "splice", value: rows, bindings: [] }] },
-          {
-            code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
-          },
+          "($0) => $0()",
+          '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AAyBoB,QAAA,IAAK"}',
         ),
         children: cs.create(
           "8u2ewdd1g2mk:27:9",
@@ -43,20 +41,16 @@ it("mappedComponent", async (t) => {
                     {
                       params: [{ kind: "capture", key: "row$8u2ewdd1g2mk$0" }],
                     },
-                    {
-                      code: 'export default ($0) => "row " + $0;',
-                      map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
-                    },
+                    '($0) => "row " + $0',
+                    '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA0B0C,QAAA,MAAM,GAAG,EAAG"}',
                   ),
                 }),
                 bindings: ["row$8u2ewdd1g2mk$0"],
               },
             ],
           },
-          {
-            code: "export default ($0) => (row) => $0(row);",
-            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
-          },
+          "($0) => (row) => $0(row)",
+          '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
         ),
       }),
     }),

@@ -10,10 +10,8 @@ describe("null and undefined", () => {
         cs.create(
           "169oizi6ociha:9:32",
           { params: [] },
-          {
-            code: "export default () => null === null;",
-            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"eAQmC,MAAA,IAAI,KAAK,IAAI"}',
-          },
+          "() => null === null",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAQmC,MAAA,IAAI,KAAK,IAAI"}',
         ),
       ),
       true,
@@ -23,10 +21,8 @@ describe("null and undefined", () => {
         cs.create(
           "169oizi6ociha:10:32",
           { params: [] },
-          {
-            code: "export default () => undefined === undefined;",
-            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"eASmC,MAAA,SAAS,KAAK,SAAS"}',
-          },
+          "() => undefined === undefined",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AASmC,MAAA,SAAS,KAAK,SAAS"}',
         ),
       ),
       true,
@@ -38,10 +34,8 @@ describe("null and undefined", () => {
         cs.create(
           "169oizi6ociha:14:32",
           { params: [] },
-          {
-            code: "export default () => null !== undefined;",
-            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"eAamC,MAAA,IAAI,KAAK,SAAS"}',
-          },
+          "() => null !== undefined",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAamC,MAAA,IAAI,KAAK,SAAS"}',
         ),
       ),
       true,
@@ -51,10 +45,8 @@ describe("null and undefined", () => {
         cs.create(
           "169oizi6ociha:15:32",
           { params: [] },
-          {
-            code: "export default () => null === undefined;",
-            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"eAcmC,MAAA,IAAI,KAAK,SAAS"}',
-          },
+          "() => null === undefined",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAcmC,MAAA,IAAI,KAAK,SAAS"}',
         ),
       ),
       false,
@@ -75,10 +67,8 @@ describe("null and undefined", () => {
               { kind: "splice", value: empty, bindings: [] },
             ],
           },
-          {
-            code: 'export default ($0, $1) => {\n    const names = ["a"];\n    return [\n        $0() === undefined,\n        $0() !== null,\n        $1() === null,\n        $1() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n};',
-            map: '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"eAuBwB;IAChB,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,IAAQ,KAAK,SAAS;QACtB,IAAQ,KAAK,IAAI;QACjB,IAAM,KAAK,IAAI;QACf,IAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC"}',
-          },
+          '($0, $1) => {\n    const names = ["a"];\n    return [\n        $0() === undefined,\n        $0() !== null,\n        $1() === null,\n        $1() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n}',
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAuBwB;IAChB,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,IAAQ,KAAK,SAAS;QACtB,IAAQ,KAAK,IAAI;QACjB,IAAM,KAAK,IAAI;QACf,IAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC"}',
         ),
       ),
       [true, true, true, true, true, true],

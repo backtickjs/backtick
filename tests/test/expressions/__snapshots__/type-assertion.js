@@ -17,10 +17,8 @@ it("typeAssertion", async (t) => {
     cs.create(
       "3amzui83z49rq:19:4",
       { params: [{ kind: "splice", value: answered, bindings: [] }] },
-      {
-        code: 'export default ($0) => {\n    const page = JSON.parse($0());\n    return page.rows[0] + " of " + page.count;\n};',
-        map: '{"version":3,"file":"type-assertion.test.jsx","sourceRoot":"","sources":["expressions/type-assertion.test.tsx"],"names":[],"mappings":"eAkBO;IACD,MAAM,IAAI,GAAG,IAAI,CAAC,KAAK,CAAC,IAAS,CAAsC,CAAC;IAExE,OAAO,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,GAAG,MAAM,GAAG,IAAI,CAAC,KAAK,CAAC;AAC5C,CAAC"}',
-      },
+      '($0) => {\n    const page = JSON.parse($0());\n    return page.rows[0] + " of " + page.count;\n}',
+      '{"version":3,"file":"type-assertion.test.jsx","sourceRoot":"","sources":["expressions/type-assertion.test.tsx"],"names":[],"mappings":"AAkBO;IACD,MAAM,IAAI,GAAG,IAAI,CAAC,KAAK,CAAC,IAAS,CAAsC,CAAC;IAExE,OAAO,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,GAAG,MAAM,GAAG,IAAI,CAAC,KAAK,CAAC;AAC5C,CAAC"}',
     ),
   );
 });

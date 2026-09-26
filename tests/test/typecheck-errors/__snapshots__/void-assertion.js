@@ -5,8 +5,6 @@ const one = 1;
 const asserted = cs.create(
   "3mgqg6v7h2mni:7:17",
   { params: [{ kind: "splice", value: one, bindings: [] }] },
-  {
-    code: 'export default ($0) => {\n    const a = $0();\n    return "" + a;\n};',
-    map: '{"version":3,"file":"void-assertion.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-assertion.test.tsx"],"names":[],"mappings":"eAMoB;IAElB,MAAM,CAAC,GAAG,IAAY,CAAC;IACvB,OAAO,EAAE,GAAG,CAAC,CAAC;AAChB,CAAC"}',
-  },
+  '($0) => {\n    const a = $0();\n    return "" + a;\n}',
+  '{"version":3,"file":"void-assertion.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-assertion.test.tsx"],"names":[],"mappings":"AAMoB;IAElB,MAAM,CAAC,GAAG,IAAY,CAAC;IACvB,OAAO,EAAE,GAAG,CAAC,CAAC;AAChB,CAAC"}',
 );

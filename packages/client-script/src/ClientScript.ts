@@ -15,15 +15,6 @@ export interface Metadata {
   params: Param[];
 }
 
-// A script's code as a module, `export default ($0, …) => body`, JSX and all,
-// for the framework's compiler to read when a bundle is built.
-export interface ScriptModule {
-  readonly code: string;
-  // The code's source map, as JSON, into the host file. It carries no
-  // `sourcesContent`: the host file is the server's.
-  readonly map: string;
-}
-
 export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
   // Which script this is: `<fileHash>:<line>:<column>`, where it was written.
@@ -34,10 +25,14 @@ export interface ClientScript {
   // the files' contents are identical, and then the scripts are the same.
   readonly id: string;
   readonly metadata: Metadata;
-  // The script as the client runs it, compiled when the host was:
-  // `metadata.params` are its default export's parameters. The same for every
-  // script with its id, where `metadata` is one call's.
-  readonly module: ScriptModule;
+  // The script as the client runs it, compiled when the host was: an
+  // expression, `($0, …) => body`, JSX kept, whose parameters are
+  // `metadata.params`. The same for every script with its id, where
+  // `metadata` is one call's.
+  readonly code: string;
+  // The code's source map, as JSON, into the host file. It carries no
+  // `sourcesContent`: the host file is the server's.
+  readonly map: string;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -52,12 +47,14 @@ export function isClientScript(value: unknown): value is ClientScript {
 export function create(
   id: string,
   metadata: Metadata,
-  module: ScriptModule,
+  code: string,
+  map: string,
 ): ClientScript {
   return {
     "@backtickjs": "ClientScript",
     id,
     metadata,
-    module,
+    code,
+    map,
   };
 }

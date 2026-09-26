@@ -15,10 +15,8 @@ it("builtinAsValue", async (t) => {
     cs.create(
       "1n7k5w76rpsyr:16:4",
       { params: [] },
-      {
-        code: "export default () => {\n    const floor = Math.floor;\n    const apply = (f, n) => f(n);\n    return floor(3.5) + apply(Math.ceil, 3.5);\n};",
-        map: '{"version":3,"file":"builtin-as-value.test.jsx","sourceRoot":"","sources":["stdlib/builtin-as-value.test.tsx"],"names":[],"mappings":"eAeO;IACD,MAAM,KAAK,GAAG,IAAI,CAAC,KAAK,CAAC;IACzB,MAAM,KAAK,GAAG,CAAC,CAAwB,EAAE,CAAS,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAC5D,OAAO,KAAK,CAAC,GAAG,CAAC,GAAG,KAAK,CAAC,IAAI,CAAC,IAAI,EAAE,GAAG,CAAC,CAAC;AAC5C,CAAC"}',
-      },
+      "() => {\n    const floor = Math.floor;\n    const apply = (f, n) => f(n);\n    return floor(3.5) + apply(Math.ceil, 3.5);\n}",
+      '{"version":3,"file":"builtin-as-value.test.jsx","sourceRoot":"","sources":["stdlib/builtin-as-value.test.tsx"],"names":[],"mappings":"AAeO;IACD,MAAM,KAAK,GAAG,IAAI,CAAC,KAAK,CAAC;IACzB,MAAM,KAAK,GAAG,CAAC,CAAwB,EAAE,CAAS,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAC5D,OAAO,KAAK,CAAC,GAAG,CAAC,GAAG,KAAK,CAAC,IAAI,CAAC,IAAI,EAAE,GAAG,CAAC,CAAC;AAC5C,CAAC"}',
     ),
   );
 });

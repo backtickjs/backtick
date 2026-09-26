@@ -1,5 +1,5 @@
 // 15:5
-export default ($0, $1) => () => {
+($0, $1) => () => {
     const held = $0()("waiting");
     $1()
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
@@ -30,4 +30,4 @@ export default ($0, $1) => () => {
         held.set(String(error));
     });
     return held.get();
-};
+}

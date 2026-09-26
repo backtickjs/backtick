@@ -1,5 +1,5 @@
 // 12:5
-export default () => {
+() => {
     const numbers = JSON.stringify([1, 2, 3]);
     const text = JSON.stringify("hi");
     const flag = JSON.stringify(true);
@@ -16,4 +16,4 @@ export default () => {
         JSON.stringify(back) +
         "|" +
         JSON.stringify(JSON.parse(held)));
-};
+}

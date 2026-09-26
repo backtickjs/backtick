@@ -1,17 +1,17 @@
 // 9:33
-export default () => null === null;
+() => null === null
 
 // 10:33
-export default () => undefined === undefined;
+() => undefined === undefined
 
 // 14:33
-export default () => null !== undefined;
+() => null !== undefined
 
 // 15:33
-export default () => null === undefined;
+() => null === undefined
 
 // 24:22
-export default ($0, $1) => {
+($0, $1) => {
     const names = ["a"];
     return [
         $0() === undefined,
@@ -21,4 +21,4 @@ export default ($0, $1) => {
         names[1] === undefined,
         names[1] !== null,
     ];
-};
+}

@@ -9,10 +9,8 @@ function add(lhs) {
   return cs.create(
     "sl458m2swc6c:10:9",
     { params: [{ kind: "splice", value: lhs, bindings: [] }] },
-    {
-      code: "export default ($0) => $0() + 2;",
-      map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"eASY,QAAA,IAAI,GAAG,CAAC"}',
-    },
+    "($0) => $0() + 2",
+    '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"AASY,QAAA,IAAI,GAAG,CAAC"}',
   );
 }
 it("dollarName", async (t) => {
@@ -29,20 +27,16 @@ it("dollarName", async (t) => {
               cs.create(
                 "sl458m2swc6c:19:19",
                 { params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }] },
-                {
-                  code: "export default ($0) => $0;",
-                  map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"eAkBsB,QAAA,EAAI"}',
-                },
+                "($0) => $0",
+                '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"AAkBsB,QAAA,EAAI"}',
               ),
             ),
             bindings: ["foo$$sl458m2swc6c$0"],
           },
         ],
       },
-      {
-        code: "export default ($0) => {\n    const foo$ = 1;\n    return $0(foo$);\n};",
-        map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
-      },
+      "($0) => {\n    const foo$ = 1;\n    return $0(foo$);\n}",
+      '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
     ),
   );
 });

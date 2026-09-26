@@ -11,10 +11,8 @@ it("forPerTurnBinding", async (t) => {
     cs.create(
       "2s6lhx8c4k6ow:12:4",
       { params: [] },
-      {
-        code: "export default () => {\n    let last = () => 0;\n    for (let i = 0; i < 3; i = i + 1) {\n        last = () => i;\n    }\n    return last();\n};",
-        map: '{"version":3,"file":"for-per-turn-binding.test.jsx","sourceRoot":"","sources":["control-flow/for-per-turn-binding.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,IAAI,GAAiB,GAAG,EAAE,CAAC,CAAC,CAAC;IACjC,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,IAAI,GAAG,GAAG,EAAE,CAAC,CAAC,CAAC;IACjB,CAAC;IACD,OAAO,IAAI,EAAE,CAAC;AAChB,CAAC"}',
-      },
+      "() => {\n    let last = () => 0;\n    for (let i = 0; i < 3; i = i + 1) {\n        last = () => i;\n    }\n    return last();\n}",
+      '{"version":3,"file":"for-per-turn-binding.test.jsx","sourceRoot":"","sources":["control-flow/for-per-turn-binding.test.tsx"],"names":[],"mappings":"AAWO;IACD,IAAI,IAAI,GAAiB,GAAG,EAAE,CAAC,CAAC,CAAC;IACjC,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,IAAI,GAAG,GAAG,EAAE,CAAC,CAAC,CAAC;IACjB,CAAC;IACD,OAAO,IAAI,EAAE,CAAC;AAChB,CAAC"}',
     ),
   );
 });

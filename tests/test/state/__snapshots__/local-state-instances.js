@@ -13,10 +13,8 @@ async function OwnCounter() {
   return cs.create(
     "2vruvr5rxa3mr:13:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    {
-      code: 'export default ($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n};',
-      map: '{"version":3,"file":"local-state-instances.test.jsx","sourceRoot":"","sources":["state/local-state-instances.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
-    },
+    '($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n}',
+    '{"version":3,"file":"local-state-instances.test.jsx","sourceRoot":"","sources":["state/local-state-instances.test.tsx"],"names":[],"mappings":"AAYY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
   );
 }
 const instances = _jsxs("div", {

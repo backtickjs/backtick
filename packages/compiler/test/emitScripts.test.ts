@@ -7,13 +7,13 @@ import ts from "typescript";
 const host = "const script = cs`1 + 1`;";
 
 describe("emitScripts", () => {
-  it("emits each script as a module, mapped into the host file", () => {
+  it("emits each script as an expression, mapped into the host file", () => {
     const [script] = emitScripts(ts, "host.tsx", host);
-    assert.strictEqual(script?.code, "export default () => 1 + 1;");
+    assert.strictEqual(script?.code, "() => 1 + 1");
     const map = new TraceMap(script!.map);
     assert.strictEqual(map.sourcesContent, undefined);
     assert.deepStrictEqual(
-      originalPositionFor(map, { line: 1, column: "export default () => ".length }),
+      originalPositionFor(map, { line: 1, column: "() => ".length }),
       { source: "host.tsx", line: 1, column: host.indexOf("1 + 1"), name: null },
     );
   });

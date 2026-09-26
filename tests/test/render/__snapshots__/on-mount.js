@@ -33,10 +33,8 @@ describe("onMount", () => {
               { kind: "splice", value: window, bindings: [] },
             ],
           },
-          {
-            code: 'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    $1()(() => {\n        $2().console.log();\n        count[1](count[0]() + 1);\n    });\n    return <p>{"mounted " + count[0]()}</p>;\n};',
-            map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["render/on-mount.test.tsx"],"names":[],"mappings":"eA4BW;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;IAC3B,CAAC,CAAC,CAAC;IACH,OAAO,CAAC,CAAC,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;AAC1C,CAAC"}',
-          },
+          '($0, $1, $2) => {\n    const count = $0()(0);\n    $1()(() => {\n        $2().console.log();\n        count[1](count[0]() + 1);\n    });\n    return <p>{"mounted " + count[0]()}</p>;\n}',
+          '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["render/on-mount.test.tsx"],"names":[],"mappings":"AA4BW;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;IAC3B,CAAC,CAAC,CAAC;IACH,OAAO,CAAC,CAAC,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;AAC1C,CAAC"}',
         ),
       ),
     );
@@ -53,10 +51,8 @@ describe("onMount", () => {
             { kind: "splice", value: onMount, bindings: [] },
           ],
         },
-        {
-          code: 'export default ($0, $1) => {\n    const said = $0()("not yet");\n    return (<button onclick={() => $1()(() => said[1]("ran"))}>\n            {said[0]()}\n          </button>);\n};',
-          map: '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["render/on-mount.test.tsx"],"names":[],"mappings":"eA4CS;IACD,MAAM,IAAI,GAAG,IAAa,CAAC,SAAS,CAAC,CAAC;IACtC,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CACpD;YAAA,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CACZ;UAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
-        },
+        '($0, $1) => {\n    const said = $0()("not yet");\n    return (<button onclick={() => $1()(() => said[1]("ran"))}>\n            {said[0]()}\n          </button>);\n}',
+        '{"version":3,"file":"on-mount.test.jsx","sourceRoot":"","sources":["render/on-mount.test.tsx"],"names":[],"mappings":"AA4CS;IACD,MAAM,IAAI,GAAG,IAAa,CAAC,SAAS,CAAC,CAAC;IACtC,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CACpD;YAAA,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CACZ;UAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
       ),
     );
     await userEvent.click(screen.getByRole("button"));
