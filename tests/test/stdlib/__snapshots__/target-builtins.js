@@ -16,23 +16,6 @@ describe("a global an app defines", () => {
         cs.create(
           "34nfn77gkxcwe:21:21",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
-          () => ({
-            type: "CallExpression",
-            loc: {
-              start: { line: 21, column: 24 },
-              end: { line: 21, column: 32 },
-            },
-            callee: {
-              type: "Splice",
-              loc: {
-                start: { line: 21, column: 24 },
-                end: { line: 21, column: 30 },
-              },
-              param: 0,
-            },
-            arguments: [],
-            optional: false,
-          }),
           {
             code: "export default ($0) => $0()();",
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoBwB,QAAA,IAAM,EAAE"}',
@@ -53,23 +36,6 @@ describe("a global an app defines", () => {
         cs.create(
           "34nfn77gkxcwe:29:34",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
-          () => ({
-            type: "CallExpression",
-            loc: {
-              start: { line: 29, column: 37 },
-              end: { line: 29, column: 45 },
-            },
-            callee: {
-              type: "Splice",
-              loc: {
-                start: { line: 29, column: 37 },
-                end: { line: 29, column: 43 },
-              },
-              param: 0,
-            },
-            arguments: [],
-            optional: false,
-          }),
           {
             code: "export default ($0) => $0()();",
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eA4BqC,QAAA,IAAM,EAAE"}',
@@ -90,49 +56,6 @@ describe("a global an app defines", () => {
         cs.create(
           "34nfn77gkxcwe:37:21",
           { params: [{ kind: "splice", value: storage, bindings: [] }] },
-          () => ({
-            type: "CallExpression",
-            loc: {
-              start: { line: 37, column: 24 },
-              end: { line: 37, column: 48 },
-            },
-            callee: {
-              type: "MemberExpression",
-              loc: {
-                start: { line: 37, column: 24 },
-                end: { line: 37, column: 36 },
-              },
-              object: {
-                type: "Splice",
-                loc: {
-                  start: { line: 37, column: 24 },
-                  end: { line: 37, column: 32 },
-                },
-                param: 0,
-              },
-              property: {
-                type: "Identifier",
-                loc: {
-                  start: { line: 37, column: 33 },
-                  end: { line: 37, column: 36 },
-                },
-                name: "get",
-              },
-              computed: false,
-              optional: false,
-            },
-            arguments: [
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 37, column: 37 },
-                  end: { line: 37, column: 47 },
-                },
-                value: "greeting",
-              },
-            ],
-            optional: false,
-          }),
           {
             code: 'export default ($0) => $0().get("greeting");',
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoCwB,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',

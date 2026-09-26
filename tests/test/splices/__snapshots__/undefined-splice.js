@@ -13,14 +13,6 @@ describe("a spliced undefined", () => {
         cs.create(
           "3f9luoncz9vrv:12:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
-          () => ({
-            type: "Splice",
-            loc: {
-              start: { line: 12, column: 35 },
-              end: { line: 12, column: 43 },
-            },
-            param: 0,
-          }),
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAWmC,QAAA,IAAQ"}',
@@ -38,14 +30,6 @@ describe("a spliced undefined", () => {
       cs.create(
         "3f9luoncz9vrv:17:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
-        () => ({
-          type: "Splice",
-          loc: {
-            start: { line: 17, column: 38 },
-            end: { line: 17, column: 43 },
-          },
-          param: 0,
-        }),
         {
           code: "export default ($0) => $0();",
           map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAgBsC,QAAA,IAAK"}',
@@ -64,14 +48,6 @@ describe("a spliced undefined", () => {
         cs.create(
           "3f9luoncz9vrv:24:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
-          () => ({
-            type: "Splice",
-            loc: {
-              start: { line: 24, column: 39 },
-              end: { line: 24, column: 44 },
-            },
-            param: 0,
-          }),
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAuBuC,QAAA,IAAK"}',

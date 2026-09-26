@@ -26,14 +26,6 @@ it("mappedComponent", async (t) => {
         each: cs.create(
           "8u2ewdd1g2mk:26:17",
           { params: [{ kind: "splice", value: rows, bindings: [] }] },
-          () => ({
-            type: "Splice",
-            loc: {
-              start: { line: 26, column: 20 },
-              end: { line: 26, column: 25 },
-            },
-            param: 0,
-          }),
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
@@ -53,31 +45,6 @@ it("mappedComponent", async (t) => {
                     {
                       params: [{ kind: "capture", key: "row$8u2ewdd1g2mk$0" }],
                     },
-                    () => ({
-                      type: "BinaryExpression",
-                      loc: {
-                        start: { line: 27, column: 42 },
-                        end: { line: 27, column: 54 },
-                      },
-                      operator: "+",
-                      left: {
-                        type: "Literal",
-                        loc: {
-                          start: { line: 27, column: 42 },
-                          end: { line: 27, column: 48 },
-                        },
-                        value: "row ",
-                      },
-                      right: {
-                        type: "Identifier",
-                        loc: {
-                          start: { line: 27, column: 51 },
-                          end: { line: 27, column: 54 },
-                        },
-                        name: "row",
-                        key: "row$8u2ewdd1g2mk$0",
-                      },
-                    }),
                     {
                       code: 'export default ($0) => "row " + $0;',
                       map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
@@ -90,33 +57,6 @@ it("mappedComponent", async (t) => {
               },
             ],
           },
-          () => ({
-            type: "ArrowFunctionExpression",
-            loc: {
-              start: { line: 27, column: 12 },
-              end: { line: 27, column: 65 },
-            },
-            params: [
-              {
-                type: "Identifier",
-                loc: {
-                  start: { line: 27, column: 13 },
-                  end: { line: 27, column: 16 },
-                },
-                name: "row",
-                key: "row$8u2ewdd1g2mk$0",
-              },
-            ],
-            body: {
-              type: "Splice",
-              loc: {
-                start: { line: 27, column: 29 },
-                end: { line: 27, column: 65 },
-              },
-              param: 0,
-            },
-            expression: true,
-          }),
           {
             code: "export default ($0) => (row) => $0(row);",
             map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',

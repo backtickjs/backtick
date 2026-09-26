@@ -3,7 +3,7 @@ import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { type EmittedScript, emitScript, scriptEdits } from "./emitScript.js";
 import { describeModule } from "./describeModule.js";
-import { arrow, call, iife, literal, object } from "./nodeFactory.js";
+import { call, iife, literal } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
@@ -154,10 +154,6 @@ export function rewriteScript(
   const runtime = call(ts, "cs", "create", [
     ts.factory.createStringLiteral(id),
     metadata,
-    // The body behind a thunk: one `cs` inside a host function makes a script
-    // per call, and the bundler reads one per source location, so the nodes
-    // are built when they are first read rather than at every call.
-    arrow(ts, [], object(ts, rewritten.runtime)),
     literal(ts, { ...emitted, ...describeModule(ts, emitted.code) }),
   ]);
 

@@ -19,20 +19,6 @@ it("splicedFunction", async (t) => {
     cs.create(
       "1pdv8x4hbo6de:21:4",
       { params: [{ kind: "splice", value: (n) => n, bindings: [] }] },
-      () => ({
-        type: "ArrowFunctionExpression",
-        loc: { start: { line: 21, column: 7 }, end: { line: 21, column: 58 } },
-        params: [],
-        body: {
-          type: "Splice",
-          loc: {
-            start: { line: 21, column: 13 },
-            end: { line: 21, column: 58 },
-          },
-          param: 0,
-        },
-        expression: true,
-      }),
       {
         code: "export default ($0) => () => $0();",
         map: '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["spliced-function.test.tsx"],"names":[],"mappings":"eAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',

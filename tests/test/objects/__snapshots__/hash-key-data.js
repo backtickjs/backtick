@@ -10,17 +10,6 @@ it("hashKeyData", async (t) => {
     cs.create(
       "m50lyvn0wkye:8:39",
       { params: [{ kind: "splice", value: { "#call": "#f0" }, bindings: [] }] },
-      () => ({
-        type: "ArrowFunctionExpression",
-        loc: { start: { line: 8, column: 42 }, end: { line: 8, column: 69 } },
-        params: [],
-        body: {
-          type: "Splice",
-          loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 69 } },
-          param: 0,
-        },
-        expression: true,
-      }),
       {
         code: "export default ($0) => () => $0();",
         map: '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["hash-key-data.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',

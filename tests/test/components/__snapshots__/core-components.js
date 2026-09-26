@@ -14,23 +14,6 @@ it("coreComponents", async (t) => {
           onclick: cs.create(
             "1dqg1yg283gkk:10:45",
             { params: [] },
-            () => ({
-              type: "ArrowFunctionExpression",
-              loc: {
-                start: { line: 10, column: 48 },
-                end: { line: 10, column: 56 },
-              },
-              params: [],
-              body: {
-                type: "BlockStatement",
-                loc: {
-                  start: { line: 10, column: 54 },
-                  end: { line: 10, column: 56 },
-                },
-                body: [],
-              },
-              expression: false,
-            }),
             {
               code: "export default () => () => { };",
               map: '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["core-components.test.tsx"],"names":[],"mappings":"eASgD,MAAA,GAAG,EAAE,GAAE,CAAC"}',

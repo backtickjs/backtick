@@ -18,27 +18,6 @@ it("awaitInSplice", async (t) => {
           { kind: "splice", value: await fetchGreeting(), bindings: [] },
         ],
       },
-      () => ({
-        type: "BinaryExpression",
-        loc: { start: { line: 13, column: 44 }, end: { line: 13, column: 74 } },
-        operator: "+",
-        left: {
-          type: "Splice",
-          loc: {
-            start: { line: 13, column: 44 },
-            end: { line: 13, column: 68 },
-          },
-          param: 0,
-        },
-        right: {
-          type: "Literal",
-          loc: {
-            start: { line: 13, column: 71 },
-            end: { line: 13, column: 74 },
-          },
-          value: "!",
-        },
-      }),
       {
         code: 'export default ($0) => $0() + "!";',
         map: '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["await-in-splice.test.tsx"],"names":[],"mappings":"eAY4C,QAAA,IAAC,GAA0B,GAAG"}',

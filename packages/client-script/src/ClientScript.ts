@@ -1,6 +1,4 @@
 import type { Spliceable } from "@backtickjs/platform-sdk";
-import type * as ES from "estree";
-import type {} from "./Splice.js";
 
 // What one of a script's parameters is handed: splices, then host tags, then
 // captures.
@@ -53,10 +51,6 @@ export interface ClientScript {
   // the files' contents are identical, and then the scripts are the same.
   readonly id: string;
   readonly metadata: Metadata;
-  // The script's syntax, behind a thunk: one `cs` in a host function makes a
-  // `ClientScript` per call, and the bundler parses one per source location, so
-  // the nodes are built when they are first read rather than at every call.
-  readonly body: () => ES.Expression | ES.BlockStatement;
   // The script as the client runs it, compiled when the host was:
   // `metadata.params` are its default export's parameters. The same for every
   // script with its id, where `metadata` is one call's.
@@ -75,14 +69,12 @@ export function isClientScript(value: unknown): value is ClientScript {
 export function create(
   id: string,
   metadata: Metadata,
-  body: () => ES.Expression | ES.BlockStatement,
   module: ScriptModule,
 ): ClientScript {
   return {
     "@backtickjs": "ClientScript",
     id,
     metadata,
-    body,
     module,
   };
 }

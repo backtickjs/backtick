@@ -1,13 +1,4 @@
-import type * as ES from "estree";
 import type ts from "typescript";
-
-/** An ESTree node or location as the object literal that builds it. */
-export function object(
-  ts: typeof import("typescript"),
-  node: ES.Node | ES.SourceLocation,
-): ts.ObjectLiteralExpression {
-  return literal(ts, node) as ts.ObjectLiteralExpression;
-}
 
 /** Plain data as the literal that builds it. */
 export function literal(

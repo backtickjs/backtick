@@ -25,11 +25,6 @@ it("spliceImportedValue", async (t) => {
     cs.create(
       "3rujjqwiut9zl:23:47",
       { params: [{ kind: "splice", value: FRAGMENT_TAG, bindings: [] }] },
-      () => ({
-        type: "Splice",
-        loc: { start: { line: 23, column: 50 }, end: { line: 23, column: 63 } },
-        param: 0,
-      }),
       {
         code: "export default ($0) => $0();",
         map: '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splice-imported-value.test.tsx"],"names":[],"mappings":"eAsBkD,QAAA,IAAa"}',

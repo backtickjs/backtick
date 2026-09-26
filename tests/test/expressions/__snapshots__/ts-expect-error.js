@@ -11,62 +11,6 @@ it("tsExpectError", async (t) => {
     cs.create(
       "353rib4gy05pn:12:4",
       { params: [] },
-      () => ({
-        type: "BlockStatement",
-        loc: { start: { line: 12, column: 7 }, end: { line: 16, column: 5 } },
-        body: [
-          {
-            type: "VariableDeclaration",
-            loc: {
-              start: { line: 14, column: 6 },
-              end: { line: 14, column: 34 },
-            },
-            kind: "const",
-            declarations: [
-              {
-                type: "VariableDeclarator",
-                loc: {
-                  start: { line: 14, column: 12 },
-                  end: { line: 14, column: 33 },
-                },
-                id: {
-                  type: "Identifier",
-                  loc: {
-                    start: { line: 14, column: 12 },
-                    end: { line: 14, column: 17 },
-                  },
-                  name: "count",
-                  key: "count$353rib4gy05pn$0",
-                },
-                init: {
-                  type: "Literal",
-                  loc: {
-                    start: { line: 14, column: 28 },
-                    end: { line: 14, column: 33 },
-                  },
-                  value: "one",
-                },
-              },
-            ],
-          },
-          {
-            type: "ReturnStatement",
-            loc: {
-              start: { line: 15, column: 6 },
-              end: { line: 15, column: 19 },
-            },
-            argument: {
-              type: "Identifier",
-              loc: {
-                start: { line: 15, column: 13 },
-                end: { line: 15, column: 18 },
-              },
-              name: "count",
-              key: "count$353rib4gy05pn$0",
-            },
-          },
-        ],
-      }),
       {
         code: 'export default () => {\n    const count = "one";\n    return count;\n};',
         map: '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["ts-expect-error.test.tsx"],"names":[],"mappings":"eAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC"}',

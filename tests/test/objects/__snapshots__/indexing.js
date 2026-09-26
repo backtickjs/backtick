@@ -10,56 +10,6 @@ describe("a read by key", () => {
         cs.create(
           "kbv0csg6ys4h:10:32",
           { params: [] },
-          () => ({
-            type: "MemberExpression",
-            loc: {
-              start: { line: 10, column: 35 },
-              end: { line: 10, column: 50 },
-            },
-            object: {
-              type: "ArrayExpression",
-              loc: {
-                start: { line: 10, column: 35 },
-                end: { line: 10, column: 45 },
-              },
-              elements: [
-                {
-                  type: "Literal",
-                  loc: {
-                    start: { line: 10, column: 36 },
-                    end: { line: 10, column: 37 },
-                  },
-                  value: 5,
-                },
-                {
-                  type: "Literal",
-                  loc: {
-                    start: { line: 10, column: 39 },
-                    end: { line: 10, column: 41 },
-                  },
-                  value: 31,
-                },
-                {
-                  type: "Literal",
-                  loc: {
-                    start: { line: 10, column: 43 },
-                    end: { line: 10, column: 44 },
-                  },
-                  value: 7,
-                },
-              ],
-            },
-            property: {
-              type: "Literal",
-              loc: {
-                start: { line: 10, column: 46 },
-                end: { line: 10, column: 49 },
-              },
-              value: "0",
-            },
-            computed: true,
-            optional: false,
-          }),
           {
             code: 'export default () => [5, 31, 7]["0"];',
             map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eASmC,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
@@ -75,31 +25,6 @@ describe("a read by key", () => {
         cs.create(
           "kbv0csg6ys4h:11:32",
           { params: [] },
-          () => ({
-            type: "MemberExpression",
-            loc: {
-              start: { line: 11, column: 35 },
-              end: { line: 11, column: 45 },
-            },
-            object: {
-              type: "Literal",
-              loc: {
-                start: { line: 11, column: 35 },
-                end: { line: 11, column: 40 },
-              },
-              value: "abc",
-            },
-            property: {
-              type: "Literal",
-              loc: {
-                start: { line: 11, column: 41 },
-                end: { line: 11, column: 44 },
-              },
-              value: "0",
-            },
-            computed: true,
-            optional: false,
-          }),
           {
             code: 'export default () => "abc"["0"];',
             map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAUmC,MAAA,KAAK,CAAC,GAAG,CAAC"}',
@@ -116,59 +41,6 @@ describe("a read by key", () => {
         cs.create(
           "kbv0csg6ys4h:13:32",
           { params: [] },
-          () => ({
-            type: "MemberExpression",
-            loc: {
-              start: { line: 13, column: 35 },
-              end: { line: 13, column: 48 },
-            },
-            object: {
-              type: "ObjectExpression",
-              loc: {
-                start: { line: 13, column: 36 },
-                end: { line: 13, column: 44 },
-              },
-              properties: [
-                {
-                  type: "Property",
-                  loc: {
-                    start: { line: 13, column: 38 },
-                    end: { line: 13, column: 42 },
-                  },
-                  key: {
-                    type: "Identifier",
-                    loc: {
-                      start: { line: 13, column: 38 },
-                      end: { line: 13, column: 39 },
-                    },
-                    name: "x",
-                  },
-                  value: {
-                    type: "Literal",
-                    loc: {
-                      start: { line: 13, column: 41 },
-                      end: { line: 13, column: 42 },
-                    },
-                    value: 1,
-                  },
-                  kind: "init",
-                  computed: false,
-                  method: false,
-                  shorthand: false,
-                },
-              ],
-            },
-            property: {
-              type: "Literal",
-              loc: {
-                start: { line: 13, column: 46 },
-                end: { line: 13, column: 47 },
-              },
-              value: 0,
-            },
-            computed: true,
-            optional: false,
-          }),
           {
             code: "export default () => ({ x: 1 })[0];",
             map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAYmC,MAAA,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
@@ -184,31 +56,6 @@ describe("a read by key", () => {
         cs.create(
           "kbv0csg6ys4h:14:32",
           { params: [] },
-          () => ({
-            type: "MemberExpression",
-            loc: {
-              start: { line: 14, column: 35 },
-              end: { line: 14, column: 64 },
-            },
-            object: {
-              type: "Literal",
-              loc: {
-                start: { line: 14, column: 36 },
-                end: { line: 14, column: 37 },
-              },
-              value: 7,
-            },
-            property: {
-              type: "Literal",
-              loc: {
-                start: { line: 14, column: 62 },
-                end: { line: 14, column: 63 },
-              },
-              value: 0,
-            },
-            computed: true,
-            optional: false,
-          }),
           {
             code: "export default () => 7[0];",
             map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAamC,MAAC,CAAyB,CAAC,CAAC,CAAC"}',
@@ -226,56 +73,6 @@ describe("a read by key", () => {
       cs.create(
         "kbv0csg6ys4h:20:6",
         { params: [] },
-        () => ({
-          type: "MemberExpression",
-          loc: {
-            start: { line: 20, column: 9 },
-            end: { line: 20, column: 22 },
-          },
-          object: {
-            type: "ArrayExpression",
-            loc: {
-              start: { line: 20, column: 9 },
-              end: { line: 20, column: 19 },
-            },
-            elements: [
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 20, column: 10 },
-                  end: { line: 20, column: 11 },
-                },
-                value: 5,
-              },
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 20, column: 13 },
-                  end: { line: 20, column: 15 },
-                },
-                value: 31,
-              },
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 20, column: 17 },
-                  end: { line: 20, column: 18 },
-                },
-                value: 7,
-              },
-            ],
-          },
-          property: {
-            type: "Literal",
-            loc: {
-              start: { line: 20, column: 20 },
-              end: { line: 20, column: 21 },
-            },
-            value: 9,
-          },
-          computed: true,
-          optional: false,
-        }),
         {
           code: "export default () => [5, 31, 7][9];",
           map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAmBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC"}',
@@ -286,56 +83,6 @@ describe("a read by key", () => {
       cs.create(
         "kbv0csg6ys4h:21:6",
         { params: [] },
-        () => ({
-          type: "MemberExpression",
-          loc: {
-            start: { line: 21, column: 9 },
-            end: { line: 21, column: 24 },
-          },
-          object: {
-            type: "ArrayExpression",
-            loc: {
-              start: { line: 21, column: 9 },
-              end: { line: 21, column: 19 },
-            },
-            elements: [
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 21, column: 10 },
-                  end: { line: 21, column: 11 },
-                },
-                value: 5,
-              },
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 21, column: 13 },
-                  end: { line: 21, column: 15 },
-                },
-                value: 31,
-              },
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 21, column: 17 },
-                  end: { line: 21, column: 18 },
-                },
-                value: 7,
-              },
-            ],
-          },
-          property: {
-            type: "Literal",
-            loc: {
-              start: { line: 21, column: 20 },
-              end: { line: 21, column: 23 },
-            },
-            value: 1.5,
-          },
-          computed: true,
-          optional: false,
-        }),
         {
           code: "export default () => [5, 31, 7][1.5];",
           map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAoBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
@@ -346,65 +93,6 @@ describe("a read by key", () => {
       cs.create(
         "kbv0csg6ys4h:22:6",
         { params: [] },
-        () => ({
-          type: "MemberExpression",
-          loc: {
-            start: { line: 22, column: 9 },
-            end: { line: 22, column: 23 },
-          },
-          object: {
-            type: "ArrayExpression",
-            loc: {
-              start: { line: 22, column: 9 },
-              end: { line: 22, column: 19 },
-            },
-            elements: [
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 22, column: 10 },
-                  end: { line: 22, column: 11 },
-                },
-                value: 5,
-              },
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 22, column: 13 },
-                  end: { line: 22, column: 15 },
-                },
-                value: 31,
-              },
-              {
-                type: "Literal",
-                loc: {
-                  start: { line: 22, column: 17 },
-                  end: { line: 22, column: 18 },
-                },
-                value: 7,
-              },
-            ],
-          },
-          property: {
-            type: "UnaryExpression",
-            loc: {
-              start: { line: 22, column: 20 },
-              end: { line: 22, column: 22 },
-            },
-            operator: "-",
-            prefix: true,
-            argument: {
-              type: "Literal",
-              loc: {
-                start: { line: 22, column: 21 },
-                end: { line: 22, column: 22 },
-              },
-              value: 1,
-            },
-          },
-          computed: true,
-          optional: false,
-        }),
         {
           code: "export default () => [5, 31, 7][-1];",
           map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAqBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC"}',
@@ -415,59 +103,6 @@ describe("a read by key", () => {
       cs.create(
         "kbv0csg6ys4h:23:6",
         { params: [] },
-        () => ({
-          type: "MemberExpression",
-          loc: {
-            start: { line: 23, column: 9 },
-            end: { line: 23, column: 55 },
-          },
-          object: {
-            type: "ObjectExpression",
-            loc: {
-              start: { line: 23, column: 11 },
-              end: { line: 23, column: 19 },
-            },
-            properties: [
-              {
-                type: "Property",
-                loc: {
-                  start: { line: 23, column: 13 },
-                  end: { line: 23, column: 17 },
-                },
-                key: {
-                  type: "Identifier",
-                  loc: {
-                    start: { line: 23, column: 13 },
-                    end: { line: 23, column: 14 },
-                  },
-                  name: "x",
-                },
-                value: {
-                  type: "Literal",
-                  loc: {
-                    start: { line: 23, column: 16 },
-                    end: { line: 23, column: 17 },
-                  },
-                  value: 1,
-                },
-                kind: "init",
-                computed: false,
-                method: false,
-                shorthand: false,
-              },
-            ],
-          },
-          property: {
-            type: "Literal",
-            loc: {
-              start: { line: 23, column: 51 },
-              end: { line: 23, column: 54 },
-            },
-            value: "y",
-          },
-          computed: true,
-          optional: false,
-        }),
         {
           code: 'export default () => ({ x: 1 })["y"];',
           map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAsBS,MAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAA+B,CAAC,GAAG,CAAC"}',
@@ -478,31 +113,6 @@ describe("a read by key", () => {
       cs.create(
         "kbv0csg6ys4h:24:6",
         { params: [] },
-        () => ({
-          type: "MemberExpression",
-          loc: {
-            start: { line: 24, column: 9 },
-            end: { line: 24, column: 17 },
-          },
-          object: {
-            type: "Literal",
-            loc: {
-              start: { line: 24, column: 9 },
-              end: { line: 24, column: 14 },
-            },
-            value: "abc",
-          },
-          property: {
-            type: "Literal",
-            loc: {
-              start: { line: 24, column: 15 },
-              end: { line: 24, column: 16 },
-            },
-            value: 9,
-          },
-          computed: true,
-          optional: false,
-        }),
         {
           code: 'export default () => "abc"[9];',
           map: '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["indexing.test.tsx"],"names":[],"mappings":"eAuBS,MAAA,KAAK,CAAC,CAAC,CAAC"}',

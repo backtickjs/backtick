@@ -10,11 +10,6 @@ it("reservedKeySplice", async (t) => {
     cs.create(
       "2dryy6my0qubf:8:45",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
-      () => ({
-        type: "Splice",
-        loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 67 } },
-        param: 0,
-      }),
       {
         code: "export default ($0) => $0();",
         map: '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["reserved-key-splice.test.tsx"],"names":[],"mappings":"eAOgD,QAAA,IAAC"}',

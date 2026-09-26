@@ -28,14 +28,6 @@ it("largeData", async (t) => {
         each: cs.create(
           "2tquu92zqyse3:37:17",
           { params: [{ kind: "splice", value: orders, bindings: [] }] },
-          () => ({
-            type: "Splice",
-            loc: {
-              start: { line: 37, column: 20 },
-              end: { line: 37, column: 27 },
-            },
-            param: 0,
-          }),
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAoCoB,QAAA,IAAO"}',
@@ -59,64 +51,6 @@ it("largeData", async (t) => {
                             { kind: "capture", key: "order$2tquu92zqyse3$0" },
                           ],
                         },
-                        () => ({
-                          type: "BinaryExpression",
-                          loc: {
-                            start: { line: 42, column: 24 },
-                            end: { line: 42, column: 70 },
-                          },
-                          operator: "+",
-                          left: {
-                            type: "BinaryExpression",
-                            loc: {
-                              start: { line: 42, column: 24 },
-                              end: { line: 42, column: 61 },
-                            },
-                            operator: "+",
-                            left: {
-                              type: "Literal",
-                              loc: {
-                                start: { line: 42, column: 24 },
-                                end: { line: 42, column: 50 },
-                              },
-                              value: "https://img.example.com/",
-                            },
-                            right: {
-                              type: "MemberExpression",
-                              loc: {
-                                start: { line: 42, column: 53 },
-                                end: { line: 42, column: 61 },
-                              },
-                              object: {
-                                type: "Identifier",
-                                loc: {
-                                  start: { line: 42, column: 53 },
-                                  end: { line: 42, column: 58 },
-                                },
-                                name: "order",
-                                key: "order$2tquu92zqyse3$0",
-                              },
-                              property: {
-                                type: "Identifier",
-                                loc: {
-                                  start: { line: 42, column: 59 },
-                                  end: { line: 42, column: 61 },
-                                },
-                                name: "id",
-                              },
-                              computed: false,
-                              optional: false,
-                            },
-                          },
-                          right: {
-                            type: "Literal",
-                            loc: {
-                              start: { line: 42, column: 64 },
-                              end: { line: 42, column: 70 },
-                            },
-                            value: ".png",
-                          },
-                        }),
                         {
                           code: 'export default ($0) => "https://img.example.com/" + $0.id + ".png";',
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAyCwB,QAAA,0BAA0B,GAAG,EAAK,CAAC,EAAE,GAAG,MAAM"}',
@@ -134,49 +68,6 @@ it("largeData", async (t) => {
                             { kind: "capture", key: "order$2tquu92zqyse3$0" },
                           ],
                         },
-                        () => ({
-                          type: "MemberExpression",
-                          loc: {
-                            start: { line: 45, column: 24 },
-                            end: { line: 45, column: 43 },
-                          },
-                          object: {
-                            type: "MemberExpression",
-                            loc: {
-                              start: { line: 45, column: 24 },
-                              end: { line: 45, column: 38 },
-                            },
-                            object: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 45, column: 24 },
-                                end: { line: 45, column: 29 },
-                              },
-                              name: "order",
-                              key: "order$2tquu92zqyse3$0",
-                            },
-                            property: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 45, column: 30 },
-                                end: { line: 45, column: 38 },
-                              },
-                              name: "customer",
-                            },
-                            computed: false,
-                            optional: false,
-                          },
-                          property: {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 45, column: 39 },
-                              end: { line: 45, column: 43 },
-                            },
-                            name: "name",
-                          },
-                          computed: false,
-                          optional: false,
-                        }),
                         {
                           code: "export default ($0) => $0.customer.name;",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA4CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
@@ -193,49 +84,6 @@ it("largeData", async (t) => {
                             { kind: "capture", key: "order$2tquu92zqyse3$0" },
                           ],
                         },
-                        () => ({
-                          type: "MemberExpression",
-                          loc: {
-                            start: { line: 46, column: 24 },
-                            end: { line: 46, column: 43 },
-                          },
-                          object: {
-                            type: "MemberExpression",
-                            loc: {
-                              start: { line: 46, column: 24 },
-                              end: { line: 46, column: 38 },
-                            },
-                            object: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 46, column: 24 },
-                                end: { line: 46, column: 29 },
-                              },
-                              name: "order",
-                              key: "order$2tquu92zqyse3$0",
-                            },
-                            property: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 46, column: 30 },
-                                end: { line: 46, column: 38 },
-                              },
-                              name: "customer",
-                            },
-                            computed: false,
-                            optional: false,
-                          },
-                          property: {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 46, column: 39 },
-                              end: { line: 46, column: 43 },
-                            },
-                            name: "city",
-                          },
-                          computed: false,
-                          optional: false,
-                        }),
                         {
                           code: "export default ($0) => $0.customer.city;",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA6CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
@@ -252,32 +100,6 @@ it("largeData", async (t) => {
                             { kind: "capture", key: "order$2tquu92zqyse3$0" },
                           ],
                         },
-                        () => ({
-                          type: "MemberExpression",
-                          loc: {
-                            start: { line: 47, column: 28 },
-                            end: { line: 47, column: 39 },
-                          },
-                          object: {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 47, column: 28 },
-                              end: { line: 47, column: 33 },
-                            },
-                            name: "order",
-                            key: "order$2tquu92zqyse3$0",
-                          },
-                          property: {
-                            type: "Identifier",
-                            loc: {
-                              start: { line: 47, column: 34 },
-                              end: { line: 47, column: 39 },
-                            },
-                            name: "items",
-                          },
-                          computed: false,
-                          optional: false,
-                        }),
                         {
                           code: "export default ($0) => $0.items;",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA8C4B,QAAA,EAAK,CAAC,KAAK"}',
@@ -302,82 +124,6 @@ it("largeData", async (t) => {
                                       },
                                     ],
                                   },
-                                  () => ({
-                                    type: "BinaryExpression",
-                                    loc: {
-                                      start: { line: 49, column: 31 },
-                                      end: { line: 49, column: 57 },
-                                    },
-                                    operator: "+",
-                                    left: {
-                                      type: "BinaryExpression",
-                                      loc: {
-                                        start: { line: 49, column: 31 },
-                                        end: { line: 49, column: 46 },
-                                      },
-                                      operator: "+",
-                                      left: {
-                                        type: "MemberExpression",
-                                        loc: {
-                                          start: { line: 49, column: 31 },
-                                          end: { line: 49, column: 39 },
-                                        },
-                                        object: {
-                                          type: "Identifier",
-                                          loc: {
-                                            start: { line: 49, column: 31 },
-                                            end: { line: 49, column: 35 },
-                                          },
-                                          name: "item",
-                                          key: "item$2tquu92zqyse3$1",
-                                        },
-                                        property: {
-                                          type: "Identifier",
-                                          loc: {
-                                            start: { line: 49, column: 36 },
-                                            end: { line: 49, column: 39 },
-                                          },
-                                          name: "sku",
-                                        },
-                                        computed: false,
-                                        optional: false,
-                                      },
-                                      right: {
-                                        type: "Literal",
-                                        loc: {
-                                          start: { line: 49, column: 42 },
-                                          end: { line: 49, column: 46 },
-                                        },
-                                        value: " x",
-                                      },
-                                    },
-                                    right: {
-                                      type: "MemberExpression",
-                                      loc: {
-                                        start: { line: 49, column: 49 },
-                                        end: { line: 49, column: 57 },
-                                      },
-                                      object: {
-                                        type: "Identifier",
-                                        loc: {
-                                          start: { line: 49, column: 49 },
-                                          end: { line: 49, column: 53 },
-                                        },
-                                        name: "item",
-                                        key: "item$2tquu92zqyse3$1",
-                                      },
-                                      property: {
-                                        type: "Identifier",
-                                        loc: {
-                                          start: { line: 49, column: 54 },
-                                          end: { line: 49, column: 57 },
-                                        },
-                                        name: "qty",
-                                      },
-                                      computed: false,
-                                      optional: false,
-                                    },
-                                  }),
                                   {
                                     code: 'export default ($0) => $0.sku + " x" + $0.qty;',
                                     map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAgD+B,QAAA,EAAI,CAAC,GAAG,GAAG,IAAI,GAAG,EAAI,CAAC,GAAG"}',
@@ -390,33 +136,6 @@ it("largeData", async (t) => {
                             },
                           ],
                         },
-                        () => ({
-                          type: "ArrowFunctionExpression",
-                          loc: {
-                            start: { line: 48, column: 20 },
-                            end: { line: 49, column: 68 },
-                          },
-                          params: [
-                            {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 48, column: 21 },
-                                end: { line: 48, column: 25 },
-                              },
-                              name: "item",
-                              key: "item$2tquu92zqyse3$1",
-                            },
-                          ],
-                          body: {
-                            type: "Splice",
-                            loc: {
-                              start: { line: 49, column: 18 },
-                              end: { line: 49, column: 68 },
-                            },
-                            param: 0,
-                          },
-                          expression: true,
-                        }),
                         {
                           code: "export default ($0) => (item) => $0(item);",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA+CoB,QAAA,CAAC,IAAU,EAAE,EAAE,CACjB,QAAC"}',
@@ -433,48 +152,6 @@ it("largeData", async (t) => {
                             { kind: "capture", key: "order$2tquu92zqyse3$0" },
                           ],
                         },
-                        () => ({
-                          type: "BinaryExpression",
-                          loc: {
-                            start: { line: 51, column: 24 },
-                            end: { line: 51, column: 41 },
-                          },
-                          operator: "+",
-                          left: {
-                            type: "Literal",
-                            loc: {
-                              start: { line: 51, column: 24 },
-                              end: { line: 51, column: 27 },
-                            },
-                            value: "$",
-                          },
-                          right: {
-                            type: "MemberExpression",
-                            loc: {
-                              start: { line: 51, column: 30 },
-                              end: { line: 51, column: 41 },
-                            },
-                            object: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 51, column: 30 },
-                                end: { line: 51, column: 35 },
-                              },
-                              name: "order",
-                              key: "order$2tquu92zqyse3$0",
-                            },
-                            property: {
-                              type: "Identifier",
-                              loc: {
-                                start: { line: 51, column: 36 },
-                                end: { line: 51, column: 41 },
-                              },
-                              name: "total",
-                            },
-                            computed: false,
-                            optional: false,
-                          },
-                        }),
                         {
                           code: 'export default ($0) => "$" + $0.total;',
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAkDwB,QAAA,GAAG,GAAG,EAAK,CAAC,KAAK"}',
@@ -489,33 +166,6 @@ it("largeData", async (t) => {
               },
             ],
           },
-          () => ({
-            type: "ArrowFunctionExpression",
-            loc: {
-              start: { line: 38, column: 12 },
-              end: { line: 53, column: 12 },
-            },
-            params: [
-              {
-                type: "Identifier",
-                loc: {
-                  start: { line: 38, column: 13 },
-                  end: { line: 38, column: 18 },
-                },
-                name: "order",
-                key: "order$2tquu92zqyse3$0",
-              },
-            ],
-            body: {
-              type: "Splice",
-              loc: {
-                start: { line: 39, column: 10 },
-                end: { line: 53, column: 12 },
-              },
-              param: 0,
-            },
-            expression: true,
-          }),
           {
             code: "export default ($0) => (order) => $0(order);",
             map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAqCY,QAAA,CAAC,KAAY,EAAE,EAAE,CACnB,SAAC"}',
