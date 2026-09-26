@@ -1,4 +1,4 @@
-import type { ClientHandle } from "@backtickjs/platform-sdk";
+import type { ClientHandle } from "@backtickjs/core";
 
 /**
  * What a JSX tag may name: an element to draw, or a component to run while

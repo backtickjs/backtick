@@ -1,9 +1,9 @@
-import { type ClientScript, isClientScript } from "@backtickjs/client-script";
+import { type ClientScript, isClientScript } from "@backtickjs/core";
 import {
   type Client,
   isClientImport,
   type Spliceable,
-} from "@backtickjs/platform-sdk";
+} from "@backtickjs/core";
 import { isJsxElement, type JsxElement } from "../JsxElement.js";
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";

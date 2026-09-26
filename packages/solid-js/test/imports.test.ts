@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { isClientImport } from "@backtickjs/platform-sdk";
+import { isClientImport } from "@backtickjs/core";
 import * as imports from "../dist/index.js";
 
 describe("Solid's API", () => {

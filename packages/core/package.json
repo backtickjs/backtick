@@ -15,17 +15,16 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo"
-  },
-  "dependencies": {
-    "@backtickjs/client-script": "workspace:*",
-    "@backtickjs/platform-sdk": "workspace:*"
+    "clean": "rm -rf node_modules dist .turbo",
+    "test": "node --test \"test/**/*.test.ts\""
   },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@types/node": "^26.6.2",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
-  }
+  },
+  "description": "Backtick: the `cs` tag, what a host may hand a client, and what a template compiles to"
 }

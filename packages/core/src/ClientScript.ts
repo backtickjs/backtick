@@ -1,4 +1,4 @@
-import type { Spliceable } from "@backtickjs/platform-sdk";
+import type { Spliceable } from "./Spliceable.js";
 
 // What one of a script's parameters is handed: splices, then host tags, then
 // captures.

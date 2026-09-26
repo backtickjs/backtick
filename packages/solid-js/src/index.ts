@@ -1,5 +1,5 @@
 import { createJsxElement, type JsxElementType } from "@backtickjs/bundler";
-import { createImport } from "@backtickjs/platform-sdk";
+import { createImport } from "@backtickjs/core";
 import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";

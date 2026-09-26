@@ -1,15 +1,15 @@
 import { it } from "node:test";
+import { sep } from "node:path";
 import { cs } from "@backtickjs/core";
-import { FRAGMENT_TAG } from "@backtickjs/client-script";
 import { snapshotCase } from "../snapshotCase.ts";
 // A host value that is imported and never mentioned outside a script.
 //
-// `FRAGMENT_TAG` appears once, as the `$FRAGMENT_TAG` splice below. That reference is
+// `sep` appears once, as the `$sep` splice below. That reference is
 // written by the transform, and TypeScript decides whether an import is used
 // before any transform runs — from the source it was handed, where the only
 // mention is inside a template literal. So the import is a candidate for
 // elision, and if it is elided the emitted module throws
-// `FRAGMENT_TAG is not defined` the moment the script is bundled.
+// `sep is not defined` the moment the script is bundled.
 //
 // What keeps it is `verbatimModuleSyntax`, which every tsconfig in this repo
 // sets (`configs/tsconfig.base.json`, and each example's own). This case is
@@ -23,10 +23,10 @@ it("spliceImportedValue", async (t) => {
     t,
     "spliceImportedValue",
     cs.create(
-      "3rujjqwiut9zl:23:47",
-      { params: [{ kind: "splice", value: FRAGMENT_TAG, bindings: [] }] },
+      "1vr745dtaiti0:23:47",
+      { params: [{ kind: "splice", value: sep, bindings: [] }] },
       "($splice0) => $splice0()",
-      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splices/splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,cAAA,UAAa"}',
+      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splices/splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,cAAA,UAAI"}',
     ),
   );
 });

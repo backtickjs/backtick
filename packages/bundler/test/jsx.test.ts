@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createImport } from "@backtickjs/platform-sdk";
+import { createImport } from "@backtickjs/core";
 import { createJsxElement } from "../dist/JsxElement.js";
 import { bundler } from "../dist/bundler.js";
 

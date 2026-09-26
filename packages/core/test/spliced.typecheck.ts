@@ -1,6 +1,6 @@
 // Type-level assertions for `Spliced`.
 // Never executed — typechecked by `tsc -b`.
-import type { Client, Spliceable, Spliced } from "@backtickjs/platform-sdk";
+import type { Client, Spliceable, Spliced } from "../dist/index.js";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare const clientNumber: Client<number>;

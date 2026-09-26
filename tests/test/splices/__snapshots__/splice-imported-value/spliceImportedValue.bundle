@@ -1,2 +1,2 @@
 const $cs0 = ($splice0) => $splice0();
-export default () => $cs0(() => "Fragment");
+export default () => $cs0(() => "/");

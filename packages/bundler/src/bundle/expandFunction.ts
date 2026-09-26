@@ -1,4 +1,4 @@
-import type { Client, Spliceable } from "@backtickjs/platform-sdk";
+import type { Client, Spliceable } from "@backtickjs/core";
 import { createHole } from "./holes.js";
 
 // A host function, run against a hole per parameter: the parameter names, and

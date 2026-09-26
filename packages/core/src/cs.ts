@@ -1,7 +1,8 @@
-import type { Client } from "@backtickjs/platform-sdk";
+import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
-import type { ClientUnknown, Spliceable } from "@backtickjs/platform-sdk";
-import type { Spliced } from "@backtickjs/platform-sdk";
+import type { ClientUnknown } from "./ClientUnknown.js";
+import type { Spliceable } from "./Spliceable.js";
+import type { Spliced } from "./Spliceable.js";
 
 // The root of a script
 function lift<T>(_: T): Client<T> {

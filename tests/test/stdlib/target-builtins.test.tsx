@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs } from "@backtickjs/core";
-import { createImport } from "@backtickjs/platform-sdk";
+import { cs, createImport } from "@backtickjs/core";
 import { evaluate } from "@backtickjs/solid-js/testing";
 
 // What a client provides beside Solid: a module an app adds, and the names it

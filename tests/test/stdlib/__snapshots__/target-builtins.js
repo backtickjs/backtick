@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs } from "@backtickjs/core";
-import { createImport } from "@backtickjs/platform-sdk";
+import { cs, createImport } from "@backtickjs/core";
 import { evaluate } from "@backtickjs/solid-js/testing";
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `#app` is this package's
@@ -18,10 +17,10 @@ describe("a module an app provides", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          "z01oglrv1s2s:20:32",
+          "3hpr60pg5f4i:19:32",
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
           "($splice0) => $splice0()()",
-          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmBmC,cAAA,UAAM,EAAE"}',
+          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAkBmC,cAAA,UAAM,EAAE"}',
         ),
       ),
       "hello",
@@ -33,10 +32,10 @@ describe("a module an app provides", () => {
     assert.equal(
       await evaluate(
         cs.create(
-          "z01oglrv1s2s:26:32",
+          "3hpr60pg5f4i:25:32",
           { params: [{ kind: "splice", value: storage, bindings: [] }] },
           '($splice0) => $splice0().get("greeting")',
-          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyBmC,cAAA,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAwBmC,cAAA,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
         ),
       ),
       "hei",

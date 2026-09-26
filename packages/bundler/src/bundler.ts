@@ -1,7 +1,7 @@
 import { buildBundle } from "./bundle/buildBundle.js";
 import type { JsxModule } from "./JsxModule.js";
 import { printBundle } from "./print/printBundle.js";
-import type { Spliceable } from "@backtickjs/platform-sdk";
+import type { Spliceable } from "@backtickjs/core";
 
 /**
  * What runs your components and hands back what they drew.

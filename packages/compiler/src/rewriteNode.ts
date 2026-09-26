@@ -1,11 +1,9 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import { call, varDeclList } from "./nodeFactory.js";
-import {
-  isComponentTag,
-  isFragmentTag,
-  jsxText,
-} from "@backtickjs/client-script";
+import { isComponentTag } from "./isComponentTag.js";
+import { isFragmentTag } from "./isFragmentTag.js";
+import { jsxText } from "./jsxText.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";

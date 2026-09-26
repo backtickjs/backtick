@@ -249,12 +249,9 @@ importers:
 
   packages/bundler:
     dependencies:
-      '@backtickjs/client-script':
+      '@backtickjs/core':
         specifier: workspace:*
-        version: link:../client-script
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../platform-sdk
+        version: link:../core
       '@jridgewell/gen-mapping':
         specifier: ^0.3.13
         version: 0.3.13
@@ -269,24 +266,11 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/client-script:
-    dependencies:
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../platform-sdk
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/compiler:
     dependencies:
-      '@backtickjs/client-script':
+      '@backtickjs/core':
         specifier: workspace:*
-        version: link:../client-script
+        version: link:../core
     devDependencies:
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
@@ -299,14 +283,10 @@ importers:
         version: 6.0.3
 
   packages/core:
-    dependencies:
-      '@backtickjs/client-script':
-        specifier: workspace:*
-        version: link:../client-script
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../platform-sdk
     devDependencies:
+      '@types/node':
+        specifier: ^26.6.2
+        version: 26.6.2
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -374,15 +354,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/platform-sdk:
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/prettier-plugin:
     dependencies:
       '@backtickjs/compiler':
@@ -410,9 +381,9 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:^0.1.0
         version: link:../bundler
-      '@backtickjs/platform-sdk':
+      '@backtickjs/core':
         specifier: workspace:^0.1.0
-        version: link:../platform-sdk
+        version: link:../core
       babel-preset-solid:
         specifier: 1.9.12
         version: 1.9.12(@babel/core@7.29.7)(solid-js@1.9.14)
@@ -545,18 +516,12 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../packages/bundler
-      '@backtickjs/client-script':
-        specifier: workspace:*
-        version: link:../packages/client-script
       '@backtickjs/compiler':
         specifier: workspace:*
         version: link:../packages/compiler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../packages/core
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../packages/platform-sdk
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../packages/prettier-plugin
@@ -2108,7 +2073,7 @@ snapshots:
 
   bun-types@1.3.14:
     dependencies:
-      '@types/node': 25.9.1
+      '@types/node': 26.6.2
       undici-types: 7.24.6
 
   caniuse-lite@1.0.30001812: {}

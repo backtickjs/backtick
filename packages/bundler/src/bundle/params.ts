@@ -1,4 +1,4 @@
-import type { ClientScript, Param } from "@backtickjs/client-script";
+import type { ClientScript, Param } from "@backtickjs/core";
 
 // What a script's parameters say about its shape, which is all its
 // declaration reads: one `ClientScript` stands for every script with its id, so its host

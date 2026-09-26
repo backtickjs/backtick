@@ -1,5 +1,5 @@
 import { createJsxElement } from "@backtickjs/bundler";
-import type { ClientHandle, Spliceable } from "@backtickjs/platform-sdk";
+import type { ClientHandle, Spliceable } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and

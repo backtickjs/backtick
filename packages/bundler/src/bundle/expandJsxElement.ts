@@ -1,4 +1,4 @@
-import type { Spliceable } from "@backtickjs/platform-sdk";
+import type { Spliceable } from "@backtickjs/core";
 import type { JsxElement } from "../JsxElement.js";
 
 // The in-flight promise, so two references to one element run its component

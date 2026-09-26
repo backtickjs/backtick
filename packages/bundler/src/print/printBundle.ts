@@ -2,7 +2,7 @@ import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
 import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type { BundleTree } from "../bundle/buildBundle.js";
 import type { JsxModule } from "../JsxModule.js";
-import type { ClientScript } from "@backtickjs/client-script";
+import type { ClientScript } from "@backtickjs/core";
 import { importDeclaration } from "./code.js";
 
 const MODULE_ID = "bundle.jsx";

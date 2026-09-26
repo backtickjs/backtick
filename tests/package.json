@@ -17,10 +17,8 @@
   },
   "devDependencies": {
     "@backtickjs/bundler": "workspace:*",
-    "@backtickjs/client-script": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/solid-js": "workspace:^0.1.0",
     "@backtickjs/tsc": "workspace:*",
