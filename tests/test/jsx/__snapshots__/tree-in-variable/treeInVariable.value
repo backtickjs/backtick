@@ -1,1 +1,6 @@
-[function]
+<div>
+  <div />
+  <span>
+    {"x"}
+  </span>
+</div>

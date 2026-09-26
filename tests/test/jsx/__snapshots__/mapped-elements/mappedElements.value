@@ -1,1 +1,11 @@
-[function]
+<div>
+  <span>
+    {"alpha"}
+  </span>
+  <span>
+    {"beta"}
+  </span>
+  <span>
+    {"gamma"}
+  </span>
+</div>

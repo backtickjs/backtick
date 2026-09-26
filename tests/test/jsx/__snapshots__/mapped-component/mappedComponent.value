@@ -1,1 +1,7 @@
-[function]
+<div>
+  <for each="1,2,3">
+    <span>
+      {"row undefined"}
+    </span>
+  </for>
+</div>

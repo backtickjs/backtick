@@ -1,1 +1,92 @@
-[function]
+<div>
+  <div>
+    <img src="https://img.example.com/ord-1000.png" alt="" />
+    <span>
+      {"Customer 0"}
+    </span>
+    <span>
+      {"Montréal"}
+    </span>
+    <span>
+      {"SKU-0-A x1"}
+    </span>
+    <span>
+      {"SKU-0-B x1"}
+    </span>
+    <span>
+      {"$45.23"}
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1001.png" alt="" />
+    <span>
+      {"Customer 1"}
+    </span>
+    <span>
+      {"Toronto"}
+    </span>
+    <span>
+      {"SKU-1-A x2"}
+    </span>
+    <span>
+      {"SKU-1-B x1"}
+    </span>
+    <span>
+      {"$46.23"}
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1002.png" alt="" />
+    <span>
+      {"Customer 2"}
+    </span>
+    <span>
+      {"Montréal"}
+    </span>
+    <span>
+      {"SKU-2-A x3"}
+    </span>
+    <span>
+      {"SKU-2-B x1"}
+    </span>
+    <span>
+      {"$47.23"}
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1003.png" alt="" />
+    <span>
+      {"Customer 3"}
+    </span>
+    <span>
+      {"Toronto"}
+    </span>
+    <span>
+      {"SKU-3-A x1"}
+    </span>
+    <span>
+      {"SKU-3-B x1"}
+    </span>
+    <span>
+      {"$48.23"}
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1004.png" alt="" />
+    <span>
+      {"Customer 4"}
+    </span>
+    <span>
+      {"Montréal"}
+    </span>
+    <span>
+      {"SKU-4-A x2"}
+    </span>
+    <span>
+      {"SKU-4-B x1"}
+    </span>
+    <span>
+      {"$49.23"}
+    </span>
+  </div>
+</div>

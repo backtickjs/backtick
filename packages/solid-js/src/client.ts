@@ -41,13 +41,17 @@ function jsx(type: unknown, props: { [key: string]: unknown }): unknown {
   for (const [key, value] of Object.entries(props)) {
     readThrough(read, key, value);
   }
-  return typeof type === "function"
-    ? solid.createComponent(type as solid.Component, read)
-    : // Merged rather than spread, which would read each getter once.
-      solid.createComponent(
-        web.Dynamic as solid.Component,
-        solid.mergeProps(read, { component: type }),
-      );
+  if (typeof type === "function") {
+    return solid.createComponent(type as solid.Component, read);
+  }
+  // Merged rather than spread, which would read each getter once. `Dynamic`
+  // answers with an accessor, since what it draws may change; a tag is fixed,
+  // so the element it drew is read once.
+  const drawn = solid.createComponent(
+    web.Dynamic as solid.Component,
+    solid.mergeProps(read, { component: type }),
+  );
+  return typeof drawn === "function" ? (drawn as () => unknown)() : drawn;
 }
 
 function register(modules: object): void {
