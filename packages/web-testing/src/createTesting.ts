@@ -1,7 +1,6 @@
 import type {
   Bundle,
   BacktickElement,
-  ClientUnknown,
   Spliceable,
 } from "@backtickjs/core";
 import type { Queries, queries } from "@testing-library/dom";
@@ -23,8 +22,8 @@ export interface Testing {
     value: Spliceable<BacktickElement>,
     options?: RenderOptions<Q, Container, BaseElement>,
   ): Promise<RenderResult<Q, Container, BaseElement>>;
-  evaluate<T extends ClientUnknown>(value: Spliceable<T>): Promise<T>;
-  evaluateBundle<T extends ClientUnknown>(code: Bundle<T>): Promise<T>;
+  evaluate<T>(value: Spliceable<T>): Promise<T>;
+  evaluateBundle<T>(code: Bundle<T>): Promise<T>;
 }
 
 /**
@@ -45,9 +44,9 @@ export function createTesting(
       value: Spliceable<BacktickElement>,
       options?: RenderOptions<Q, Container, BaseElement>,
     ) => renderWith(client, compile, value, options),
-    evaluate: <T extends ClientUnknown>(value: Spliceable<T>) =>
+    evaluate: <T>(value: Spliceable<T>) =>
       evaluateWith(client, compile, value),
-    evaluateBundle: <T extends ClientUnknown>(code: Bundle<T>) =>
+    evaluateBundle: <T>(code: Bundle<T>) =>
       evaluateBundleWith(client, code),
   };
 }

@@ -1,4 +1,4 @@
-import type { Bundle, ClientUnknown, Spliceable } from "@backtickjs/core";
+import type { Bundle, Spliceable } from "@backtickjs/core";
 import { bundler, type JsxModule } from "@backtickjs/bundler";
 import { importBundle } from "./client.js";
 
@@ -11,7 +11,7 @@ export interface BundleClient {
 }
 
 /** What makes a bundle of what the bundler answered: an adapter's compiler. */
-export type Compile = <T extends ClientUnknown>(
+export type Compile = <T>(
   module: JsxModule<T>,
 ) => { readonly code: Bundle<T> };
 
@@ -23,7 +23,7 @@ export type Compile = <T extends ClientUnknown>(
  * nowhere to be mounted. What comes back is what the root is: the node it
  * built, or the data it evaluated to.
  */
-export async function evaluateWith<T extends ClientUnknown>(
+export async function evaluateWith<T>(
   client: BundleClient,
   compile: Compile,
   value: Spliceable<T>,
@@ -36,7 +36,7 @@ export async function evaluateWith<T extends ClientUnknown>(
  * Evaluates a bundle with `client`, for a test about a bundle the bundler
  * would never write.
  */
-export async function evaluateBundleWith<T extends ClientUnknown>(
+export async function evaluateBundleWith<T>(
   client: BundleClient,
   code: Bundle<T>,
 ): Promise<T> {
