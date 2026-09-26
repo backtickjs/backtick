@@ -4,7 +4,7 @@ import type {
   ClientHandle,
   ClientUnknown,
   ClientValue,
-} from "./declarations.generated.js";
+} from "./declarations.js";
 
 /**
  * What a host value of type `T` splices to: the pair to `Client<T>`, which is

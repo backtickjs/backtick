@@ -168,7 +168,7 @@ export type {
   WebElements,
   WheelEvent,
   Window,
-} from "./declarations.generated.js";
+} from "./declarations.js";
 
 /**
  * What this target draws with, and what it hands a handler.

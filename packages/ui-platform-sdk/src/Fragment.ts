@@ -2,7 +2,7 @@ import { createJsxElement } from "./JsxElement.js";
 import type {
   BacktickElement,
   FragmentProps,
-} from "./declarations.generated.js";
+} from "./declarations.js";
 import type { Prop } from "./Prop.js";
 
 /**

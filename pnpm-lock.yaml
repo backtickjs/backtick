@@ -415,10 +415,6 @@ importers:
         version: 6.0.3
 
   packages/platform-sdk:
-    dependencies:
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -442,15 +438,6 @@ importers:
       tsx:
         specifier: ^4.22.4
         version: 4.22.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/schema:
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -566,9 +553,6 @@ importers:
       '@backtickjs/platform-sdk':
         specifier: workspace:*
         version: link:../platform-sdk
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -626,9 +610,6 @@ importers:
       '@backtickjs/platform-sdk':
         specifier: workspace:*
         version: link:../platform-sdk
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
       '@backtickjs/ui-platform-sdk':
         specifier: workspace:*
         version: link:../ui-platform-sdk

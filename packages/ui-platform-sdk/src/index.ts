@@ -1,5 +1,5 @@
 // The values a script splices, the same way the layer below exposes its own.
-export { onCleanup, onMount } from "./builtins.generated.js";
+export { onCleanup, onMount } from "./builtins.js";
 
 export type {
   ArrayLike,
@@ -18,7 +18,7 @@ export type {
   State,
   UiPlatformBuiltins,
   UiPlatformElements,
-} from "./declarations.generated.js";
+} from "./declarations.js";
 
 // A component, because a tag has nowhere to bind a type parameter: it checks a
 // list's child against its array. The tag stays writable on its own, unchecked.
