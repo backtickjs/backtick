@@ -11,42 +11,15 @@
     ),
     _tmpl$3 = /*#__PURE__*/ _$template(`<span>`);
 
-  const f1 = (() => {
-    const $entry = ($0) => $0();
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => (order) => $0(order);
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = ($0) => "https://img.example.com/" + $0.id + ".png";
-    return $entry;
-  })();
-  const f4 = (() => {
-    const $entry = ($0) => $0.customer.name;
-    return $entry;
-  })();
-  const f5 = (() => {
-    const $entry = ($0) => $0.customer.city;
-    return $entry;
-  })();
-  const f6 = (() => {
-    const $entry = ($0) => $0.items;
-    return $entry;
-  })();
-  const f7 = (() => {
-    const $entry = ($0) => (item) => $0(item);
-    return $entry;
-  })();
-  const f8 = (() => {
-    const $entry = ($0) => $0.sku + " x" + $0.qty;
-    return $entry;
-  })();
-  const f9 = (() => {
-    const $entry = ($0) => "$" + $0.total;
-    return $entry;
-  })();
+  const f1 = ($0) => $0();
+  const f2 = ($0) => (order) => $0(order);
+  const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
+  const f4 = ($0) => $0.customer.name;
+  const f5 = ($0) => $0.customer.city;
+  const f6 = ($0) => $0.items;
+  const f7 = ($0) => (item) => $0(item);
+  const f8 = ($0) => $0.sku + " x" + $0.qty;
+  const f9 = ($0) => "$" + $0.total;
   const $bundle = (() => {
     var _el$ = _tmpl$();
     _$insert(

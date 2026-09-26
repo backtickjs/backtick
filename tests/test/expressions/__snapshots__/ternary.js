@@ -9,8 +9,6 @@ const pick = cs.create(
   {
     code: "export default () => (n) => {\n    return n === null ? 0 : n + 1;\n};",
     map: '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["ternary.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC,CAAgB,EAAE,EAAE;IACnC,OAAO,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC;AAChC,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("ternary", async (t) => {
@@ -23,8 +21,6 @@ it("ternary", async (t) => {
       {
         code: "export default ($0) => ({\n    absent: $0()(null),\n    present: $0()(4),\n});",
         map: '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["ternary.test.tsx"],"names":[],"mappings":"eAcO,QAAA,CAAC;IACF,MAAM,EAAE,IAAK,CAAC,IAAI,CAAC;IACnB,OAAO,EAAE,IAAK,CAAC,CAAC,CAAC;CAClB,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

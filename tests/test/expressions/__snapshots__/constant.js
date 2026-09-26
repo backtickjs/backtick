@@ -11,8 +11,6 @@ it("constant", async (t) => {
       {
         code: "export default () => 1;",
         map: '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["constant.test.tsx"],"names":[],"mappings":"eAKuC,MAAA,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

@@ -14,8 +14,6 @@ it("spliceString", async (t) => {
       {
         code: "export default ($0) => $0();",
         map: '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splice-string.test.tsx"],"names":[],"mappings":"eAS2C,QAAA,IAAM"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

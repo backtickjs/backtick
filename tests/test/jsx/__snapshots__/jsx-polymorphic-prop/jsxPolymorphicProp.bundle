@@ -3,10 +3,7 @@
   const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
   const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<div><span></span><span>`);
-  const f1 = (() => {
-    const $entry = ($0) => () => $0();
-    return $entry;
-  })();
+  const f1 = ($0) => () => $0();
   const $bundle = (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild,

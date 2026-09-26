@@ -1,17 +1,11 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => ({
-      absent: $0()(null),
-      present: $0()(4),
-    });
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = () => (n) => {
-      return n === null ? 0 : n + 1;
-    };
-    return $entry;
-  })();
+  const f1 = ($0) => ({
+    absent: $0()(null),
+    present: $0()(4),
+  });
+  const f2 = () => (n) => {
+    return n === null ? 0 : n + 1;
+  };
   const $bundle = f1(f2);
   return $bundle;
 })();

@@ -6,32 +6,29 @@
   const { createSignal: $i0 } = $modules["solid-js"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<div><button>more`);
 
-  const f1 = (() => {
-    const $entry = ($0, $1) => {
-      const count = $0()(0);
-      const Badge = eval($1());
-      return (() => {
-        var _el$ = _tmpl$(),
-          _el$2 = _el$.firstChild;
-        _$insert(
-          _el$,
-          _$createComponent(Badge, {
-            get count() {
-              return count[0]();
-            },
-          }),
-          _el$2,
-        );
-        _el$2.$$click = () => count[1](count[0]() + 1);
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
+  const f1 = ($0, $1) => {
+    const count = $0()(0);
+    const Badge = eval($1());
+    return (() => {
+      var _el$ = _tmpl$(),
+        _el$2 = _el$.firstChild;
+      _$insert(
+        _el$,
+        _$createComponent(Badge, {
+          get count() {
+            return count[0]();
+          },
+        }),
+        _el$2,
+      );
+      _el$2.$$click = () => count[1](count[0]() + 1);
+      return _el$;
+    })();
+  };
   const $bundle = f1(
     () => $i0,
     () =>
-      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\nconst f1 = (() => {\n  const $entry = () => props => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, () => "count " + props.count);\n    return _el$;\n  })();\n  return $entry;\n})();\nconst $bundle = f1();\nreturn $bundle;\n})()',
+      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cb>`);\nconst f1 = () => props => (() => {\n  var _el$ = _tmpl$();\n  _$insert(_el$, () => "count " + props.count);\n  return _el$;\n})();\nconst $bundle = f1();\nreturn $bundle;\n})()',
   );
   _$delegateEvents(["click"]);
   return $bundle;

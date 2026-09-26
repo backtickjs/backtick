@@ -1,11 +1,8 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const count = "one";
-      return count;
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    const count = "one";
+    return count;
+  };
   const $bundle = f1();
   return $bundle;
 })();

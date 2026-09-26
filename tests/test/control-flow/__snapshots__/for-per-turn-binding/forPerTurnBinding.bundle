@@ -1,14 +1,11 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let last = () => 0;
-      for (let i = 0; i < 3; i = i + 1) {
-        last = () => i;
-      }
-      return last();
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    let last = () => 0;
+    for (let i = 0; i < 3; i = i + 1) {
+      last = () => i;
+    }
+    return last();
+  };
   const $bundle = f1();
   return $bundle;
 })();

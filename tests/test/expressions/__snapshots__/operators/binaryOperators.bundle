@@ -1,23 +1,20 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const n = 5;
-      return [
-        n ** 2,
-        n & 6,
-        n | 8,
-        n ^ 1,
-        n << 2,
-        -n >> 1,
-        -n >>> 28,
-        n == 5,
-        n != 5,
-        "length" in [n],
-        [n] instanceof Array,
-      ];
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    const n = 5;
+    return [
+      n ** 2,
+      n & 6,
+      n | 8,
+      n ^ 1,
+      n << 2,
+      -n >> 1,
+      -n >>> 28,
+      n == 5,
+      n != 5,
+      "length" in [n],
+      [n] instanceof Array,
+    ];
+  };
   const $bundle = f1();
   return $bundle;
 })();

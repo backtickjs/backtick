@@ -1,8 +1,5 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => 1;
-    return $entry;
-  })();
+  const f1 = () => 1;
   const $bundle = f1();
   return $bundle;
 })();

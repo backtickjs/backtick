@@ -13,8 +13,6 @@ async function Written() {
     {
       code: "export default () => {\n    return (<span>{String.fromCodePoint(72, 105) + String.fromCodePoint()}</span>);\n};",
       map: '{"version":3,"file":"string-from-code-point.test.jsx","sourceRoot":"","sources":["string-from-code-point.test.tsx"],"names":[],"mappings":"eASY;IACR,OAAO,CACL,CAAC,IAAI,CAAC,CAAC,MAAM,CAAC,aAAa,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,aAAa,EAAE,CAAC,EAAE,IAAI,CAAC,CACtE,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }

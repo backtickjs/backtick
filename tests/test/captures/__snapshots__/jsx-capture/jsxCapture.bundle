@@ -3,17 +3,11 @@
   const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
   const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-  const f1 = (() => {
-    const $entry = ($0) => () => {
-      const x = 1;
-      return $0(x);
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => () => $0;
-    return $entry;
-  })();
+  const f1 = ($0) => () => {
+    const x = 1;
+    return $0(x);
+  };
+  const f2 = ($0) => () => $0;
   const $bundle = f1((x) =>
     (() => {
       var _el$ = _tmpl$();

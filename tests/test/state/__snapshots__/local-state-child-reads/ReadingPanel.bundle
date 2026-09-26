@@ -11,47 +11,34 @@
     _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
 
   const $Script = (props) => props.run();
-  const f1 = (() => {
-    const $entry = ($0, $1) => {
-      const selected = $0()(0);
-      return (() => {
-        var _el$ = _tmpl$(),
-          _el$2 = _el$.firstChild;
-        _el$2.$$click = () => selected[1](1);
-        _$insert(
-          _el$,
-          _$createComponent($1, {
-            id: 0,
-            selected: selected,
-          }),
-          null,
-        );
-        _$insert(
-          _el$,
-          _$createComponent($1, {
-            id: 1,
-            selected: selected,
-          }),
-          null,
-        );
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0, $1) =>
-      "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = ($0, $1) => "row " + $0() + " of " + $1()[0]();
-    return $entry;
-  })();
-  const f4 = (() => {
-    const $entry = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
-    return $entry;
-  })();
+  const f1 = ($0, $1) => {
+    const selected = $0()(0);
+    return (() => {
+      var _el$ = _tmpl$(),
+        _el$2 = _el$.firstChild;
+      _el$2.$$click = () => selected[1](1);
+      _$insert(
+        _el$,
+        _$createComponent($1, {
+          id: 0,
+          selected: selected,
+        }),
+        null,
+      );
+      _$insert(
+        _el$,
+        _$createComponent($1, {
+          id: 1,
+          selected: selected,
+        }),
+        null,
+      );
+      return _el$;
+    })();
+  };
+  const f2 = ($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";
+  const f3 = ($0, $1) => "row " + $0() + " of " + $1()[0]();
+  const f4 = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
   const $bundle = _$createComponent($Script, {
     run: () =>
       f1(

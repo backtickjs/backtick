@@ -89,17 +89,9 @@ export function printBundle<T extends ClientUnknown>(
     node.name = labels.get(key)!;
   }
 
-  const functions: ES.Statement[] = tree.functions.map(([key, body]) => ({
-    type: "VariableDeclaration",
-    kind: "const",
-    declarations: [
-      {
-        type: "VariableDeclarator",
-        id: identifier(labels.get(key)!),
-        init: body,
-      },
-    ],
-  }));
+  const functions = tree.functions.map(([key, body]) =>
+    constant(labels.get(key)!, body),
+  );
   const imports: ES.ImportDeclaration[] = [...names.imports.values()].map(
     ({ from, name, local }): ES.ImportDeclaration => ({
       type: "ImportDeclaration",

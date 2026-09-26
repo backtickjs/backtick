@@ -16,8 +16,6 @@ it("negation", async (t) => {
       {
         code: "export default () => (count) => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n};",
         map: '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["negation.test.tsx"],"names":[],"mappings":"eAaO,MAAA,CAAC,KAAa,EAAE,EAAE;IACnB,MAAM,KAAK,GAAG,CAAC,CAAC,CAAC;IACjB,MAAM,IAAI,GAAG,CAAC,KAAK,CAAC;IACpB,OAAO,KAAK,GAAG,IAAI,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );
@@ -33,8 +31,6 @@ it("negativeZero", async (t) => {
       {
         code: "export default () => {\n    return 1 / -0;\n};",
         map: '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["negation.test.tsx"],"names":[],"mappings":"eA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC;AAChB,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

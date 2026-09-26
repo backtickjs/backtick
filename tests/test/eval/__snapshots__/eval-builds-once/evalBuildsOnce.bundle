@@ -6,42 +6,36 @@
   const { createSignal: $i0 } = $modules["solid-js"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`);
 
-  const f1 = (() => {
-    const $entry = ($0, $1, $2) => {
-      const asked = $0()(0);
-      return (() => {
-        var _el$ = _tmpl$(),
-          _el$2 = _el$.firstChild;
-        _$insert(_el$2, () => "asked " + asked[0]());
-        _$insert(
-          _el$,
-          _$createComponent($2, {
-            ask: () => {
-              asked[1](asked[0]() + 1);
-              return asked[0]() > 4 ? null : $1();
-            },
-          }),
-          null,
-        );
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0, $1, $2) => {
-      const drawn = $0()(null);
-      const started = $1().setTimeout(() => drawn[1]($2()()), 0);
-      return _$memo(() =>
-        _$memo(() => drawn[0]() === null)() ? null : eval(drawn[0]()),
+  const f1 = ($0, $1, $2) => {
+    const asked = $0()(0);
+    return (() => {
+      var _el$ = _tmpl$(),
+        _el$2 = _el$.firstChild;
+      _$insert(_el$2, () => "asked " + asked[0]());
+      _$insert(
+        _el$,
+        _$createComponent($2, {
+          ask: () => {
+            asked[1](asked[0]() + 1);
+            return asked[0]() > 4 ? null : $1();
+          },
+        }),
+        null,
       );
-    };
-    return $entry;
-  })();
+      return _el$;
+    })();
+  };
+  const f2 = ($0, $1, $2) => {
+    const drawn = $0()(null);
+    const started = $1().setTimeout(() => drawn[1]($2()()), 0);
+    return _$memo(() =>
+      _$memo(() => drawn[0]() === null)() ? null : eval(drawn[0]()),
+    );
+  };
   const $bundle = f1(
     () => $i0,
     () =>
-      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>answered`);\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const $entry = () => _tmpl$();\n  return $entry;\n})();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
+      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>answered`);\nconst $Script = props => props.run();\nconst f1 = () => _tmpl$();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
     ($0) =>
       f2(
         () => $i0,

@@ -1,14 +1,11 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let n = 0;
-      if (n === 0) {
-        return;
-      }
-      n = 1;
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    let n = 0;
+    if (n === 0) {
+      return;
+    }
+    n = 1;
+  };
   const $bundle = f1();
   return $bundle;
 })();

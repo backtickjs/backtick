@@ -1,16 +1,13 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const s = "7";
-      const o = {
-        a: 1,
-        b: 2,
-      };
-      const deleted = delete o.a;
-      return [+s, ~5, void s === null, deleted, "a" in o];
+  const f1 = () => {
+    const s = "7";
+    const o = {
+      a: 1,
+      b: 2,
     };
-    return $entry;
-  })();
+    const deleted = delete o.a;
+    return [+s, ~5, void s === null, deleted, "a" in o];
+  };
   const $bundle = f1();
   return $bundle;
 })();

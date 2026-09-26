@@ -13,8 +13,6 @@ async function Other() {
     {
       code: 'export default () => <em>{"from another bundle"}</em>;',
       map: '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eASY,MAAA,CAAC,EAAE,CAAC,CAAC,qBAAqB,CAAC,EAAE,EAAE,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }
@@ -29,8 +27,6 @@ it("evalSiblings", async (t) => {
       {
         code: "export default ($0) => <div>\n      <span>before</span>\n      {eval($0())}\n      <span>after</span>\n    </div>;",
         map: '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAkBO,QAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,MAAM,EAAE,IAAI,CAClB;MAAA,CAAC,IAAI,CAAC,IAAY,CAAC,CACnB;MAAA,CAAC,IAAI,CAAC,KAAK,EAAE,IAAI,CACnB;IAAA,EAAE,GAAG,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

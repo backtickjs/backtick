@@ -16,8 +16,6 @@ it("objectIndex", async (t) => {
       {
         code: 'export default ($0) => (currency) => {\n    const table = $0();\n    const asked = table[currency] ?? 0;\n    const usd = table["usd"] ?? 0;\n    return asked + usd;\n};',
         map: '{"version":3,"file":"object-index.test.jsx","sourceRoot":"","sources":["object-index.test.tsx"],"names":[],"mappings":"eAcO,QAAA,CAAC,QAAgB,EAAE,EAAE;IACtB,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,MAAM,KAAK,GAAG,KAAK,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC;IACnC,MAAM,GAAG,GAAG,KAAK,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC;IAC9B,OAAO,KAAK,GAAG,GAAG,CAAC;AACrB,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

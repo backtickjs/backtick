@@ -14,8 +14,6 @@ it("forNestedShadowing", async (t) => {
       {
         code: 'export default () => {\n    let out = "";\n    for (let i = 0; i < 2; i = i + 1) {\n        const i = "-";\n        for (let j = 0; j < 2; j = j + 1) {\n            out = out + i + j;\n        }\n    }\n    return out;\n};',
         map: '{"version":3,"file":"for-nested-shadowing.test.jsx","sourceRoot":"","sources":["for-nested-shadowing.test.tsx"],"names":[],"mappings":"eAWO;IACD,IAAI,GAAG,GAAG,EAAE,CAAC;IACb,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,MAAM,CAAC,GAAG,GAAG,CAAC;QACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;YACjC,GAAG,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC,CAAC;QACpB,CAAC;IACH,CAAC;IACD,OAAO,GAAG,CAAC;AACb,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

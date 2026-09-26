@@ -1,10 +1,7 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      return 1 / -0;
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    return 1 / -0;
+  };
   const $bundle = f1();
   return $bundle;
 })();

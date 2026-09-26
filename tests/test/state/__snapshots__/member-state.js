@@ -22,8 +22,6 @@ async function MemberRows() {
     {
       code: 'export default ($0, $1) => {\n    const build = (from) => {\n        return Array.from({ length: 3 }, (_, at) => {\n            return { id: from + at, label: $0()("row " + (from + at)) };\n        });\n    };\n    const held = $0()(build(1));\n    return (<div>\n        <ul class="rows">\n          <$1 each={held[0]()}>\n            {(row) => (<li onclick={() => row.label[1]("pressed")}>\n                {row.label[0]()}\n              </li>)}\n          </$1>\n        </ul>\n      </div>);\n};',
       map: '{"version":3,"file":"member-state.test.jsx","sourceRoot":"","sources":["member-state.test.tsx"],"names":[],"mappings":"eAmBY;IACR,MAAM,KAAK,GAAG,CAAC,IAAY,EAAE,EAAE;QAC7B,OAAO,KAAK,CAAC,IAAI,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAE,EAAE,EAAE;YACzC,OAAO,EAAE,EAAE,EAAE,IAAI,GAAG,EAAE,EAAE,KAAK,EAAE,IAAa,CAAC,MAAM,GAAG,CAAC,IAAI,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC;QACvE,CAAC,CAAC,CAAC;IACL,CAAC,CAAC;IAEF,MAAM,IAAI,GAAG,IAAa,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC;IAErC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAE,CAAC,KAAK,CAAC,MAAM,CACd;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,CACnB;YAAA,CAAC,CAAC,GAAQ,EAAE,EAAE,CAAC,CACb,CAAC,EAAE,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,SAAS,CAAC,CAAC,CACzC;gBAAA,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CACjB;cAAA,EAAE,EAAE,CAAC,CACN,CACH;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,EAAE,CACN;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }

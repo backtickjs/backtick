@@ -21,8 +21,6 @@ const colorName = cs.create(
   {
     code: 'export default ($0) => (c) => {\n    return c === $0() ? "blue" : "red";\n};',
     map: '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state-enum.test.tsx"],"names":[],"mappings":"eAkBmD,QAAA,CAAC,CAAQ,EAAE,EAAE;IAC9D,OAAO,CAAC,KAAK,IAAC,CAAa,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,KAAK,CAAC;AAC9C,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 async function Swatch() {
@@ -39,8 +37,6 @@ async function Swatch() {
     {
       code: "export default ($0, $1, $2, $3) => {\n    const held = $0()($1());\n    return (<span onclick={() => held[1]($2())}>\n        {$3()(held[0]())}\n      </span>);\n};",
       map: '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state-enum.test.tsx"],"names":[],"mappings":"eAuBY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,IAAC,CAAY,CAAC;IACzC,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAC,CAAa,CAAC,CAC1C;QAAA,CAAC,IAAU,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,CACxB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }

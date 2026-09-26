@@ -9,8 +9,6 @@ const beep = cs.create(
   {
     code: "export default () => {\n    let n = 0;\n    n = 1;\n};",
     map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 const onTap = cs.create(
@@ -19,8 +17,6 @@ const onTap = cs.create(
   {
     code: "export default ($0) => (id) => {\n    $0();\n};",
     map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("handlerObject", async (t) => {
@@ -33,8 +29,6 @@ it("handlerObject", async (t) => {
       {
         code: "export default ($0) => {\n    const handlers = {\n        tap: $0(),\n        hold: $0(),\n    };\n    return handlers;\n};",
         map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

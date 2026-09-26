@@ -18,8 +18,6 @@ const SharedCounter = async ({ size }) =>
       {
         code: 'export default ($0) => "font-size: " + $0()[0]() + "px";',
         map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAgBc,QAAA,aAAa,GAAG,IAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
     onclick: cs.create(
@@ -28,8 +26,6 @@ const SharedCounter = async ({ size }) =>
       {
         code: "export default ($0) => () => {\n    $0()[1]($0()[0]() + 1);\n};",
         map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAiBgB,QAAA,GAAG,EAAE;IACf,IAAK,CAAC,CAAC,CAAC,CAAC,IAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
     children: "press",
@@ -46,8 +42,6 @@ async function SharingPanel() {
     {
       code: "export default ($0, $1) => {\n    const size = $0()(16);\n    return (<div>\n        <$1 size={size}/>\n        <$1 size={size}/>\n      </div>);\n};",
       map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eA0BY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC1B;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC5B;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }

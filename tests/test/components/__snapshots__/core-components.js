@@ -17,8 +17,6 @@ it("coreComponents", async (t) => {
             {
               code: "export default () => () => { };",
               map: '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["core-components.test.tsx"],"names":[],"mappings":"eASgD,MAAA,GAAG,EAAE,GAAE,CAAC"}',
-              imports: [],
-              exportAt: 0,
             },
           ),
           children: "hi",

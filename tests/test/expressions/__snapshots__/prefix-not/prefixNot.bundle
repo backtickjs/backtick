@@ -1,13 +1,10 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => (ready, count) => {
-      if (!ready) {
-        return "waiting";
-      }
-      return !(count > 3) ? "room left" : "full";
-    };
-    return $entry;
-  })();
+  const f1 = () => (ready, count) => {
+    if (!ready) {
+      return "waiting";
+    }
+    return !(count > 3) ? "room left" : "full";
+  };
   const $bundle = f1();
   return $bundle;
 })();

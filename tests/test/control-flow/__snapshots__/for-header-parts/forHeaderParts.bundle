@@ -1,16 +1,13 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let i = 0;
-      let seen = "";
-      for (; i < 3; ) {
-        seen = seen + i;
-        i = i + 1;
-      }
-      return seen;
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    let i = 0;
+    let seen = "";
+    for (; i < 3; ) {
+      seen = seen + i;
+      i = i + 1;
+    }
+    return seen;
+  };
   const $bundle = f1();
   return $bundle;
 })();

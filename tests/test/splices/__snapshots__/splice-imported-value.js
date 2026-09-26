@@ -28,8 +28,6 @@ it("spliceImportedValue", async (t) => {
       {
         code: "export default ($0) => $0();",
         map: '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splice-imported-value.test.tsx"],"names":[],"mappings":"eAsBkD,QAAA,IAAa"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

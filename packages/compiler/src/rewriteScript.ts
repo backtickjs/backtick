@@ -2,7 +2,6 @@ import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { type EmittedScript, emitScript, scriptEdits } from "./emitScript.js";
-import { describeModule } from "./describeModule.js";
 import { call, iife, literal } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
@@ -141,7 +140,7 @@ export function rewriteScript(
   const runtime = call(ts, "cs", "create", [
     ts.factory.createStringLiteral(id),
     metadata,
-    literal(ts, { ...emitted, ...describeModule(ts, emitted.code) }),
+    literal(ts, emitted),
   ]);
 
   return {

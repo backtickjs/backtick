@@ -7,17 +7,14 @@
     _tmpl$2 = /*#__PURE__*/ _$template(`<div>`);
 
   const $Script = (props) => props.run();
-  const f1 = (() => {
-    const $entry = ($0) => {
-      const n = $0()(2);
-      return (() => {
-        var _el$ = _tmpl$();
-        _$insert(_el$, () => n[0]());
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
+  const f1 = ($0) => {
+    const n = $0()(2);
+    return (() => {
+      var _el$ = _tmpl$();
+      _$insert(_el$, () => n[0]());
+      return _el$;
+    })();
+  };
   const $bundle = (() => {
     var _el$2 = _tmpl$2();
     _$insert(

@@ -35,8 +35,6 @@ describe("a module an app provides", () => {
           {
             code: "export default ($0) => $0()();",
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAgC2C,QAAA,IAAM,EAAE"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
       ),
@@ -52,8 +50,6 @@ describe("a module an app provides", () => {
           {
             code: "export default ($0) => $0()();",
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoCgD,QAAA,IAAM,EAAE"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
       ),
@@ -71,8 +67,6 @@ describe("a module an app provides", () => {
           {
             code: 'export default ($0) => $0().get("greeting");',
             map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eA0C2C,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
       ),

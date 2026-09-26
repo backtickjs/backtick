@@ -1,13 +1,10 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => (currency) => {
-      const table = $0();
-      const asked = table[currency] ?? 0;
-      const usd = table["usd"] ?? 0;
-      return asked + usd;
-    };
-    return $entry;
-  })();
+  const f1 = ($0) => (currency) => {
+    const table = $0();
+    const asked = table[currency] ?? 0;
+    const usd = table["usd"] ?? 0;
+    return asked + usd;
+  };
   const $bundle = f1(() => ({
     usd: 3,
     eur: 4,

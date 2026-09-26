@@ -1,17 +1,14 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let i = 0;
-      for (;;) {
-        if (i === 4) {
-          break;
-        }
-        i = i + 1;
+  const f1 = () => {
+    let i = 0;
+    for (;;) {
+      if (i === 4) {
+        break;
       }
-      return i;
-    };
-    return $entry;
-  })();
+      i = i + 1;
+    }
+    return i;
+  };
   const $bundle = f1();
   return $bundle;
 })();

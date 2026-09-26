@@ -1,18 +1,15 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const message = "boom";
-      try {
-        throw message;
-      } catch (error) {
-        if (error === message) {
-          return "caught boom";
-        }
-        return "caught something else";
+  const f1 = () => {
+    const message = "boom";
+    try {
+      throw message;
+    } catch (error) {
+      if (error === message) {
+        return "caught boom";
       }
-    };
-    return $entry;
-  })();
+      return "caught something else";
+    }
+  };
   const $bundle = f1();
   return $bundle;
 })();

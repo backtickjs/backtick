@@ -1,14 +1,11 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      try {
-        throw "boom";
-      } catch {
-        return "caught";
-      }
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    try {
+      throw "boom";
+    } catch {
+      return "caught";
+    }
+  };
   const $bundle = f1();
   return $bundle;
 })();

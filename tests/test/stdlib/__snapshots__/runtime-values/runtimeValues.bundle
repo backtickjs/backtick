@@ -1,11 +1,8 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0, $1) => ({
-      list: $0(),
-      obj: $1(),
-    });
-    return $entry;
-  })();
+  const f1 = ($0, $1) => ({
+    list: $0(),
+    obj: $1(),
+  });
   const $bundle = f1(
     () => [1, "two", true, null],
     () => ({

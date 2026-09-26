@@ -3,15 +3,12 @@
   const { insert: _$insert } = $modules["solid-js/web"];
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<h2>`);
-  const f1 = (() => {
-    const $entry = ($0) =>
-      _$createComponent($0, {
-        person: {
-          firstName: "ada",
-        },
-      });
-    return $entry;
-  })();
+  const f1 = ($0) =>
+    _$createComponent($0, {
+      person: {
+        firstName: "ada",
+      },
+    });
   const $bundle = f1(($0) =>
     (() => {
       var _el$ = _tmpl$();

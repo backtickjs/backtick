@@ -1,34 +1,16 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0, $1) => $0() + $1();
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0, $1) => {
-      const outer = $0();
-      return $1(outer);
-    };
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = () => 1;
-    return $entry;
-  })();
-  const f4 = (() => {
-    const $entry = ($0, $1) => {
-      const middle = 10;
-      return middle + $0($1);
-    };
-    return $entry;
-  })();
-  const f5 = (() => {
-    const $entry = ($0) => $0;
-    return $entry;
-  })();
-  const f6 = (() => {
-    const $entry = () => 2;
-    return $entry;
-  })();
+  const f1 = ($0, $1) => $0() + $1();
+  const f2 = ($0, $1) => {
+    const outer = $0();
+    return $1(outer);
+  };
+  const f3 = () => 1;
+  const f4 = ($0, $1) => {
+    const middle = 10;
+    return middle + $0($1);
+  };
+  const f5 = ($0) => $0;
+  const f6 = () => 2;
   const $bundle = f1(
     () => f2(f3, (outer) => f4(f5, outer)),
     () => f2(f6, (outer) => f4(f5, outer)),

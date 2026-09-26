@@ -10,8 +10,6 @@ const read = cs.create(
   {
     code: "export default () => (o) => {\n    return [o.label, o.inner?.z ?? 0];\n};",
     map: '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAOgB,MAAA,CAAC,CAA4C,EAAE,EAAE;IAC/D,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC;AACpC,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("optionalProperty", async (t) => {
@@ -24,8 +22,6 @@ it("optionalProperty", async (t) => {
       {
         code: 'export default ($0) => ({\n    present: $0()({ label: "a", inner: { z: 3 } }),\n    partial: $0()({ label: "b", inner: {} }),\n    omitted: $0()({ label: "c" }),\n});',
         map: '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAeO,QAAA,CAAC;IACF,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

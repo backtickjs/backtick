@@ -27,8 +27,6 @@ const scriptBoundTagCapture = cs.create(
           {
             code: "export default ($0, $1) => <$0 n={$1[0]()}/>;",
             map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAiBY,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
         bindings: ["count$2un2f82x2jr3i$0", "Badge$2un2f82x2jr3i$1"],
@@ -52,8 +50,6 @@ const scriptBoundTagCapture = cs.create(
                   {
                     code: "export default ($0, $1) => <$0 n={$1[0]() + 100}/>;",
                     map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAqBsB,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,GAAG,CAAC,EAAG"}',
-                    imports: [],
-                    exportAt: 0,
                   },
                 ),
                 bindings: [],
@@ -65,8 +61,6 @@ const scriptBoundTagCapture = cs.create(
           {
             code: "export default ($0, $1, $2) => {\n    const skipped = 10;\n    return $0($1, $2);\n};",
             map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAmBa;IACH,MAAM,OAAO,GAAG,EAAE,CAAC;IACnB,OAAO,UAAC,CAAqC;AAC/C,CAAC"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
         bindings: ["count$2un2f82x2jr3i$0", "Badge$2un2f82x2jr3i$1"],
@@ -85,8 +79,6 @@ const scriptBoundTagCapture = cs.create(
             {
               code: "export default ($0, $1) => <$0 n={$1[0]() + 1000}/>;",
               map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAwBuB,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,EAAG"}',
-              imports: [],
-              exportAt: 0,
             },
           ),
         }),
@@ -106,8 +98,6 @@ const scriptBoundTagCapture = cs.create(
           {
             code: "export default ($0, $1, $2) => <$0 each={[1, 2]}>\n          {(m) => <$1 n={m * $2[0]()}/>}\n        </$0>;",
             map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eA0Ba,gBAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACrB;UAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,EAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG,CAC9C;QAAA,EAAE,EAAG,CAAC"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
         bindings: ["count$2un2f82x2jr3i$0", "Badge$2un2f82x2jr3i$1"],
@@ -117,8 +107,6 @@ const scriptBoundTagCapture = cs.create(
   {
     code: 'export default ($0, $1, $2, $3, $4) => {\n    const count = $0()(0);\n    const Badge = (props) => <b>{"n " + props.n}</b>;\n    return (<div>\n      {$1(count, Badge)}\n      {$2(count, Badge)}\n      {$3(count, Badge)}\n      {$4(count, Badge)}\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n};',
     map: '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["script-bound-tag-capture.test.tsx"],"names":[],"mappings":"eAWiC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAEhE,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,gBAA+B,CAChC;MAAA,CACE,gBAIF,CACA;MAAA,CAAC,gBAA6D,CAC9D;MAAA,CACE,gBAGF,CACA;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("scriptBoundTagCapture", async (t) => {

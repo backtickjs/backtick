@@ -5,18 +5,22 @@ Testing Library for Backtick on the web, in the shape of
 `render` bundles an element and draws it into the test environment's
 document, and every query from `@testing-library/dom` reads the result.
 
+An adapter binds `render` and `evaluate` to its client and transform, and
+re-exports the rest, so a test imports from the adapter:
+
 ```tsx
-import { cs, state } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/web-testing";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
+import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
 async function Counter() {
   return cs`{
-    const count = $state(0);
+    const [count, setCount] = $createSignal(0);
     return (
       <div>
-        <button onclick={() => count.set(count.get() + 1)}>Add</button>
-        <p>{"Count: " + count.get()}</p>
+        <button onclick={() => setCount(count() + 1)}>Add</button>
+        <p>{"Count: " + count()}</p>
       </div>
     );
   }`;
@@ -71,7 +75,7 @@ import { afterEach } from "bun:test";
 
 // Loaded once jsdom is registered: Testing Library binds `screen` on import,
 // and Bun runs a CommonJS import before the imports written above it.
-const { cleanup } = await import("@backtickjs/web-testing");
+const { cleanup } = await import("@backtickjs/solid-js/testing");
 afterEach(cleanup);
 ```
 
@@ -81,7 +85,7 @@ afterEach(cleanup);
 // test/setup.ts
 import "global-jsdom/register";
 import { afterEach } from "node:test";
-import { cleanup } from "@backtickjs/web-testing";
+import { cleanup } from "@backtickjs/solid-js/testing";
 
 afterEach(cleanup);
 ```
@@ -101,17 +105,17 @@ To turn automatic cleanup off, import `@backtickjs/web-testing/pure` or set
 - `render(element, options?)`: draws an element, or a script that evaluates to
   one (`Spliceable<BacktickElement>`), and resolves to `container`,
   `baseElement`, `rerender`, `unmount`, `asFragment`, `debug` and the queries.
-  Options are `container`, `baseElement`, `queries` and `globals`. It is
-  async, because bundling is, and so is `rerender`.
-- `evaluate(value, { globals? })`: resolves to what any value or script
+  Options are `container`, `baseElement` and `queries`. It is async, because
+  bundling is, and so is `rerender`.
+- `evaluate(value)`: resolves to what any value or script
   evaluates to, without mounting it. It plays the part of React Testing Library's
   `renderHook`.
 - `evaluateBundle(code)`: evaluates a hand-written bundle, for a bundle the
   bundler would never write.
 - `cleanup()`: takes down everything `render` drew.
-
-`render` and `evaluate` run each bundle with `eval` on `web-interpreter`'s
-`createRuntime`.
+- `createTesting(client, transform)`: `render`, `evaluate` and
+  `evaluateBundle` bound to an adapter's client and transform, which is what
+  an adapter's testing entry exports.
 
 - Everything from `@testing-library/dom`: `screen`, `within`, `fireEvent`,
   `waitFor`, and the rest.

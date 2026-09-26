@@ -16,8 +16,6 @@ const originX = cs.create(
   {
     code: "export default () => 1;",
     map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAamB,MAAA,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 const label = cs.create(
@@ -26,8 +24,6 @@ const label = cs.create(
   {
     code: 'export default () => "origin";',
     map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAeiB,MAAA,QAAQ"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 const point = { x: originX, label };
@@ -41,8 +37,6 @@ it("splicedContainer", async (t) => {
       {
         code: "export default ($0) => $0().x + 1;",
         map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

@@ -1,14 +1,11 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let total = 0;
-      for (let i = 0; i < 5; i = i + 1) {
-        total = total + i;
-      }
-      return total;
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    let total = 0;
+    for (let i = 0; i < 5; i = i + 1) {
+      total = total + i;
+    }
+    return total;
+  };
   const $bundle = f1();
   return $bundle;
 })();

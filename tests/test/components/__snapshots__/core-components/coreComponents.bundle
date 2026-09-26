@@ -5,10 +5,7 @@
   var _tmpl$ = /*#__PURE__*/ _$template(
     `<div style=padding:8px><span style=font-size:12px>hi</span><img src=https://example.com/a.png>`,
   );
-  const f1 = (() => {
-    const $entry = () => () => {};
-    return $entry;
-  })();
+  const f1 = () => () => {};
   const $bundle = (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;

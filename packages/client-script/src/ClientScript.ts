@@ -15,30 +15,13 @@ export interface Metadata {
   params: Param[];
 }
 
-// One import declaration of a script's module: where it stands, so a bundle can
-// replace it, and what it binds, so a bundle can bind it again.
-export interface ModuleImport {
-  readonly from: string;
-  // `[start, end)` in the module's code
-  readonly range: readonly [number, number];
-  // `name` is the export: `"default"`, `"*"` for a namespace, or its name
-  readonly bindings: readonly {
-    readonly name: string;
-    readonly local: string;
-  }[];
-}
-
-// A script's code as a module, `export default ($0, …) => body` through the
-// framework's compiler, and what a bundle needs to make an entry of it without
-// parsing it.
+// A script's code as a module, `export default ($0, …) => body`, JSX and all,
+// for the framework's compiler to read when a bundle is built.
 export interface ScriptModule {
   readonly code: string;
   // The code's source map, as JSON, into the host file. It carries no
   // `sourcesContent`: the host file is the server's.
   readonly map: string;
-  readonly imports: readonly ModuleImport[];
-  // the offset of `export default ` in the code
-  readonly exportAt: number;
 }
 
 export interface ClientScript {

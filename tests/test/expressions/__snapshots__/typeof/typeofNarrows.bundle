@@ -1,11 +1,8 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const measure = (v) => (typeof v === "string" ? v.length : v * 2);
-      return [measure("abc"), measure(4)];
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    const measure = (v) => (typeof v === "string" ? v.length : v * 2);
+    return [measure("abc"), measure(4)];
+  };
   const $bundle = f1();
   return $bundle;
 })();

@@ -1,29 +1,20 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => ({
-      missing: $0()(null, true),
-      loud: $0()("!hi", true),
-      quiet: $0()("!hi", false),
-      plain: $0()("zz", false),
-    });
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => (text, upper) => {
-      if (upper && text !== null) {
-        return text.toUpperCase();
-      }
-      if ($0() && text !== null && text.charAt(0) === "!") {
-        return text.concat("?");
-      }
-      return "none";
-    };
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = () => true;
-    return $entry;
-  })();
+  const f1 = ($0) => ({
+    missing: $0()(null, true),
+    loud: $0()("!hi", true),
+    quiet: $0()("!hi", false),
+    plain: $0()("zz", false),
+  });
+  const f2 = ($0) => (text, upper) => {
+    if (upper && text !== null) {
+      return text.toUpperCase();
+    }
+    if ($0() && text !== null && text.charAt(0) === "!") {
+      return text.concat("?");
+    }
+    return "none";
+  };
+  const f3 = () => true;
   const $bundle = f1(() => f2(f3));
   return $bundle;
 })();

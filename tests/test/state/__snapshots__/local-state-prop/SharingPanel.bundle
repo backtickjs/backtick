@@ -11,40 +11,31 @@
     _tmpl$2 = /*#__PURE__*/ _$template(`<span>press`);
 
   const $Script = (props) => props.run();
-  const f1 = (() => {
-    const $entry = ($0, $1) => {
-      const size = $0()(16);
-      return (() => {
-        var _el$ = _tmpl$();
-        _$insert(
-          _el$,
-          _$createComponent($1, {
-            size: size,
-          }),
-          null,
-        );
-        _$insert(
-          _el$,
-          _$createComponent($1, {
-            size: size,
-          }),
-          null,
-        );
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => "font-size: " + $0()[0]() + "px";
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = ($0) => () => {
-      $0()[1]($0()[0]() + 1);
-    };
-    return $entry;
-  })();
+  const f1 = ($0, $1) => {
+    const size = $0()(16);
+    return (() => {
+      var _el$ = _tmpl$();
+      _$insert(
+        _el$,
+        _$createComponent($1, {
+          size: size,
+        }),
+        null,
+      );
+      _$insert(
+        _el$,
+        _$createComponent($1, {
+          size: size,
+        }),
+        null,
+      );
+      return _el$;
+    })();
+  };
+  const f2 = ($0) => "font-size: " + $0()[0]() + "px";
+  const f3 = ($0) => () => {
+    $0()[1]($0()[0]() + 1);
+  };
   const $bundle = _$createComponent($Script, {
     run: () =>
       f1(

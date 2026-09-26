@@ -11,8 +11,6 @@ it("spliceNumeric", async (t) => {
       {
         code: "export default ($0) => $0();",
         map: '{"version":3,"file":"splice-numeric.test.jsx","sourceRoot":"","sources":["splice-numeric.test.tsx"],"names":[],"mappings":"eAK4C,QAAA,IAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

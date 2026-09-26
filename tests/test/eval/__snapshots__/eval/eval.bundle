@@ -2,20 +2,17 @@
   const { template: _$template } = $modules["solid-js/web"];
   const { insert: _$insert } = $modules["solid-js/web"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<div><b>`);
-  const f1 = (() => {
-    const $entry = ($0, $1) =>
-      (() => {
-        var _el$ = _tmpl$(),
-          _el$2 = _el$.firstChild;
-        _$insert(_el$, () => eval($0()), _el$2);
-        _$insert(_el$2, () => eval($1()) + 1);
-        return _el$;
-      })();
-    return $entry;
-  })();
+  const f1 = ($0, $1) =>
+    (() => {
+      var _el$ = _tmpl$(),
+        _el$2 = _el$.firstChild;
+      _$insert(_el$, () => eval($0()), _el$2);
+      _$insert(_el$2, () => eval($1()) + 1);
+      return _el$;
+    })();
   const $bundle = f1(
     () =>
-      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nconst { "For": $i0 } = $modules["solid-js"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cspan>`);\n\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const $entry = $0 => _$createComponent($0, {\n    each: [1, 2, 3],\n    children: n => (() => {\n      var _el$ = _tmpl$();\n      _$insert(_el$, "item " + n);\n      return _el$;\n    })()\n  });\n  return $entry;\n})();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1($0 => _$createComponent($i0, {\n    get each() {\n      return $0.each;\n    },\n    get fallback() {\n      return $0.fallback;\n    },\n    get children() {\n      return $0.children;\n    }\n  }))\n});\nreturn $bundle;\n})()',
+      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "insert": _$insert } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nconst { "For": $i0 } = $modules["solid-js"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cspan>`);\n\nconst $Script = props => props.run();\nconst f1 = $0 => _$createComponent($0, {\n  each: [1, 2, 3],\n  children: n => (() => {\n    var _el$ = _tmpl$();\n    _$insert(_el$, "item " + n);\n    return _el$;\n  })()\n});\nconst $bundle = _$createComponent($Script, {\n  run: () => f1($0 => _$createComponent($i0, {\n    get each() {\n      return $0.each;\n    },\n    get fallback() {\n      return $0.fallback;\n    },\n    get children() {\n      return $0.children;\n    }\n  }))\n});\nreturn $bundle;\n})()',
     () => "(() => {\n\nconst $bundle = 41;\nreturn $bundle;\n})()",
   );
   return $bundle;

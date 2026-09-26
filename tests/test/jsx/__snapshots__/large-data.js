@@ -32,8 +32,6 @@ it("largeData", async (t) => {
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAqCoB,QAAA,IAAO"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
         children: cs.create(
@@ -55,8 +53,6 @@ it("largeData", async (t) => {
                         {
                           code: 'export default ($0) => "https://img.example.com/" + $0.id + ".png";',
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA0CwB,QAAA,0BAA0B,GAAG,EAAK,CAAC,EAAE,GAAG,MAAM"}',
-                          imports: [],
-                          exportAt: 0,
                         },
                       ),
                       alt: "",
@@ -72,8 +68,6 @@ it("largeData", async (t) => {
                         {
                           code: "export default ($0) => $0.customer.name;",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA6CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
-                          imports: [],
-                          exportAt: 0,
                         },
                       ),
                     }),
@@ -88,8 +82,6 @@ it("largeData", async (t) => {
                         {
                           code: "export default ($0) => $0.customer.city;",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA8CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
-                          imports: [],
-                          exportAt: 0,
                         },
                       ),
                     }),
@@ -104,8 +96,6 @@ it("largeData", async (t) => {
                         {
                           code: "export default ($0) => $0.items;",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA+C4B,QAAA,EAAK,CAAC,KAAK"}',
-                          imports: [],
-                          exportAt: 0,
                         },
                       ),
                       children: cs.create(
@@ -128,8 +118,6 @@ it("largeData", async (t) => {
                                   {
                                     code: 'export default ($0) => $0.sku + " x" + $0.qty;',
                                     map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAiD+B,QAAA,EAAI,CAAC,GAAG,GAAG,IAAI,GAAG,EAAI,CAAC,GAAG"}',
-                                    imports: [],
-                                    exportAt: 0,
                                   },
                                 ),
                               }),
@@ -140,8 +128,6 @@ it("largeData", async (t) => {
                         {
                           code: "export default ($0) => (item) => $0(item);",
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAgDoB,QAAA,CAAC,IAAU,EAAE,EAAE,CACjB,QAAC"}',
-                          imports: [],
-                          exportAt: 0,
                         },
                       ),
                     }),
@@ -156,8 +142,6 @@ it("largeData", async (t) => {
                         {
                           code: 'export default ($0) => "$" + $0.total;',
                           map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAmDwB,QAAA,GAAG,GAAG,EAAK,CAAC,KAAK"}',
-                          imports: [],
-                          exportAt: 0,
                         },
                       ),
                     }),
@@ -170,8 +154,6 @@ it("largeData", async (t) => {
           {
             code: "export default ($0) => (order) => $0(order);",
             map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAsCY,QAAA,CAAC,KAAY,EAAE,EAAE,CACnB,SAAC"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
       }),

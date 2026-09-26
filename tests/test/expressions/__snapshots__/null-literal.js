@@ -9,8 +9,6 @@ const orDash = cs.create(
   {
     code: 'export default () => (value) => {\n    if (value === null) {\n        return "-";\n    }\n    return value;\n};',
     map: '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["null-literal.test.tsx"],"names":[],"mappings":"eAM4D,MAAA,CAC1D,KAAoB,EACpB,EAAE;IACF,IAAI,KAAK,KAAK,IAAI,EAAE,CAAC;QACnB,OAAO,GAAG,CAAC;IACb,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("nullLiteral", async (t) => {
@@ -23,8 +21,6 @@ it("nullLiteral", async (t) => {
       {
         code: 'export default ($0) => ({\n    missing: $0()(null),\n    present: $0()("hi"),\n    bare: null,\n});',
         map: '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["null-literal.test.tsx"],"names":[],"mappings":"eAmBO,QAAA,CAAC;IACF,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,IAAI,EAAE,IAAI;CACX,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

@@ -1,11 +1,8 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const greeting = "Hello";
-      return greeting.concat(", ", "World").toUpperCase();
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    const greeting = "Hello";
+    return greeting.concat(", ", "World").toUpperCase();
+  };
   const $bundle = f1();
   return $bundle;
 })();

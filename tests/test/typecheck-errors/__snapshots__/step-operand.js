@@ -7,8 +7,6 @@ export const constant = cs.create(
   {
     code: "export default () => {\n    const i = 0;\n    i++;\n    return i;\n};",
     map: '{"version":3,"file":"step-operand.test.jsx","sourceRoot":"","sources":["step-operand.test.tsx"],"names":[],"mappings":"eAI2B;IACzB,MAAM,CAAC,GAAG,CAAC,CAAC;IAEZ,CAAC,EAAE,CAAC;IACJ,OAAO,CAAC,CAAC;AACX,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 export const text = cs.create(
@@ -17,7 +15,5 @@ export const text = cs.create(
   {
     code: 'export default () => {\n    let s = "a";\n    s++;\n    return s;\n};',
     map: '{"version":3,"file":"step-operand.test.jsx","sourceRoot":"","sources":["step-operand.test.tsx"],"names":[],"mappings":"eAWuB;IACrB,IAAI,CAAC,GAAG,GAAG,CAAC;IAEZ,CAAC,EAAE,CAAC;IACJ,OAAO,CAAC,CAAC;AACX,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );

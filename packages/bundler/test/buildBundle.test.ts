@@ -7,7 +7,7 @@ import { create } from "@backtickjs/client-script";
 const script = create(
   "abc:3:7",
   { params: [] },
-  { code: "export default () => 1;", map: "", imports: [], exportAt: 0 },
+  { code: "export default () => 1;", map: "" },
 ) as never;
 
 const labelsOf = (tree: Awaited<ReturnType<typeof buildBundle>>) =>

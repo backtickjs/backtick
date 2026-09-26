@@ -1,25 +1,13 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0, $1) => $0() + $1();
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => {
-      const before = 1;
-      const spliced = $0();
-      const after = 2;
-      return before + spliced + after;
-    };
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = () => 10;
-    return $entry;
-  })();
-  const f4 = (() => {
-    const $entry = () => 20;
-    return $entry;
-  })();
+  const f1 = ($0, $1) => $0() + $1();
+  const f2 = ($0) => {
+    const before = 1;
+    const spliced = $0();
+    const after = 2;
+    return before + spliced + after;
+  };
+  const f3 = () => 10;
+  const f4 = () => 20;
   const $bundle = f1(
     () => f2(f3),
     () => f2(f4),

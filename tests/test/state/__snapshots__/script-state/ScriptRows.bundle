@@ -8,29 +8,17 @@
   const { createSignal: $i0 } = $modules["solid-js"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 
-  const f1 = (() => {
-    const $entry = () => "font-size: 16px";
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => () => {
-      const row = $0()("one");
-      row.label[1](row.label[0]() + " !!!");
+  const f1 = () => "font-size: 16px";
+  const f2 = ($0) => () => {
+    const row = $0()("one");
+    row.label[1](row.label[0]() + " !!!");
+  };
+  const f3 = ($0) => (label) => {
+    return {
+      label: $0()(label),
     };
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = ($0) => (label) => {
-      return {
-        label: $0()(label),
-      };
-    };
-    return $entry;
-  })();
-  const f4 = (() => {
-    const $entry = ($0) => $0()("one").label[0]();
-    return $entry;
-  })();
+  };
+  const f4 = ($0) => $0()("one").label[0]();
   const $bundle = (() => {
     var _el$ = _tmpl$();
     _$addEventListener(

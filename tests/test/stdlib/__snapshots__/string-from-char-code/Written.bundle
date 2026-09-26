@@ -3,12 +3,9 @@
   const { createComponent: _$createComponent } = $modules["solid-js/web"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<span>Hi😀`);
   const $Script = (props) => props.run();
-  const f1 = (() => {
-    const $entry = () => {
-      return _tmpl$();
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    return _tmpl$();
+  };
   const $bundle = _$createComponent($Script, {
     run: () => f1(),
   });

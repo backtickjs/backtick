@@ -48,7 +48,6 @@
   "devDependencies": {
     "@backtickjs/compiler": "workspace:^0.1.0",
     "@backtickjs/web-testing": "workspace:^0.1.0",
-    "@jridgewell/trace-mapping": "^0.3.31",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^26.6.2",
     "global-jsdom": "^30.0.0",

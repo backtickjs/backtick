@@ -1,17 +1,14 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let out = "";
-      for (let i = 0; i < 2; i = i + 1) {
-        const i = "-";
-        for (let j = 0; j < 2; j = j + 1) {
-          out = out + i + j;
-        }
+  const f1 = () => {
+    let out = "";
+    for (let i = 0; i < 2; i = i + 1) {
+      const i = "-";
+      for (let j = 0; j < 2; j = j + 1) {
+        out = out + i + j;
       }
-      return out;
-    };
-    return $entry;
-  })();
+    }
+    return out;
+  };
   const $bundle = f1();
   return $bundle;
 })();

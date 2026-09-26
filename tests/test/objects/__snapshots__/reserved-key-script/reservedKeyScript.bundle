@@ -1,10 +1,7 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => ({
-      "#": "value",
-    });
-    return $entry;
-  })();
+  const f1 = () => ({
+    "#": "value",
+  });
   const $bundle = f1();
   return $bundle;
 })();

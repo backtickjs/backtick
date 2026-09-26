@@ -13,8 +13,6 @@ it("bindinglessCatch", async (t) => {
       {
         code: 'export default () => {\n    try {\n        throw "boom";\n    }\n    catch {\n        return "caught";\n    }\n};',
         map: '{"version":3,"file":"bindingless-catch.test.jsx","sourceRoot":"","sources":["bindingless-catch.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,CAAC;QACH,MAAM,MAAM,CAAC;IACf,CAAC;IAAC,MAAM,CAAC;QACP,OAAO,QAAQ,CAAC;IAClB,CAAC;AACH,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

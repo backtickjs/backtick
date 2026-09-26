@@ -32,8 +32,6 @@ it("scriptComponent", async (t) => {
       {
         code: 'export default ($0, $1) => {\n    return (<div>\n          <$0 title="totals"/>\n          <$1 />\n        </div>);\n};',
         map: '{"version":3,"file":"script-component.test.jsx","sourceRoot":"","sources":["script-component.test.tsx"],"names":[],"mappings":"eA0BO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,EAAI,CAAC,KAAK,CAAC,QAAQ,EACpB;UAAA,CAAC,EAAK,CAAC,AAAD,EACR;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     ),
   );

@@ -7,24 +7,18 @@
   var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 
   const $Script = (props) => props.run();
-  const f1 = (() => {
-    const $entry = ($0, $1, $2, $3) => {
-      const held = $0()($1());
-      return (() => {
-        var _el$ = _tmpl$();
-        _el$.$$click = () => held[1]($2());
-        _$insert(_el$, () => $3()(held[0]()));
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => (c) => {
-      return c === $0() ? "blue" : "red";
-    };
-    return $entry;
-  })();
+  const f1 = ($0, $1, $2, $3) => {
+    const held = $0()($1());
+    return (() => {
+      var _el$ = _tmpl$();
+      _el$.$$click = () => held[1]($2());
+      _$insert(_el$, () => $3()(held[0]()));
+      return _el$;
+    })();
+  };
+  const f2 = ($0) => (c) => {
+    return c === $0() ? "blue" : "red";
+  };
   const $bundle = _$createComponent($Script, {
     run: () =>
       f1(

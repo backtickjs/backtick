@@ -1,13 +1,10 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      let n = 1;
-      if (n === 2) {
-        return "some";
-      }
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    let n = 1;
+    if (n === 2) {
+      return "some";
+    }
+  };
   const $bundle = f1();
   return $bundle;
 })();

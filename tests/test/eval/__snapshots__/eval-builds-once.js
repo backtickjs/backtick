@@ -45,8 +45,6 @@ async function Answer() {
     {
       code: 'export default () => <em>{"answered"}</em>;',
       map: '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"eA2CY,MAAA,CAAC,EAAE,CAAC,CAAC,UAAU,CAAC,EAAE,EAAE,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }
@@ -64,8 +62,6 @@ async function Waiting({ ask }) {
     {
       code: "export default ($0, $1, $2) => {\n    const drawn = $0()(null);\n    const started = $1().setTimeout(() => drawn[1]($2()()), 0);\n    return (<>\n        {drawn[0]() === null\n            ? null\n            : eval(drawn[0]())}\n      </>);\n};",
       map: '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"eAqDY;IACR,MAAM,KAAK,GAAG,IAAa,CAAiC,IAAI,CAAC,CAAC;IAClE,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IAC9D,OAAO,CACL,EACE;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI;YAClB,CAAC,CAAC,IAAI;YACN,CAAC,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,EAA6B,CAAC,CACjD;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }
@@ -81,8 +77,6 @@ const evalBuildsOnce = cs.create(
   {
     code: 'export default ($0, $1, $2) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked[0]()}</span>\n      <$2 ask={() => {\n            asked[1](asked[0]() + 1);\n            return asked[0]() > 4 ? null : $1();\n        }}/>\n    </div>);\n};',
     map: '{"version":3,"file":"eval-builds-once.test.jsx","sourceRoot":"","sources":["eval-builds-once.test.tsx"],"names":[],"mappings":"eAkE0B;IACxB,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,EAAO,CACN,GAAG,CAAC,CAAC,GAAG,EAAE;YACR,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAO,CAAC;QACzC,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("evalBuildsOnce", async (t) => {

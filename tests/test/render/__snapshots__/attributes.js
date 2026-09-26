@@ -102,8 +102,6 @@ describe("a field's value", () => {
       {
         code: 'export default ($0) => {\n    const text = $0()("first");\n    const isOn = $0()(false);\n    return (<div>\n          <input aria-label="text" value={text[0]()}/>\n          <input type="checkbox" aria-label="on" checked={isOn[0]()}/>\n          <button onclick={() => {\n            text[1]("second");\n            isOn[1](true);\n        }}>\n            write\n          </button>\n        </div>);\n};',
         map: '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["attributes.test.tsx"],"names":[],"mappings":"eA8Gc;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,IAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-        imports: [],
-        exportAt: 0,
       },
     );
   }

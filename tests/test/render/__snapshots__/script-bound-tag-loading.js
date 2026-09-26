@@ -19,8 +19,6 @@ const loadedBadge = await bundler.run(
     {
       code: 'export default () => (props) => <b>{"count " + props.count}</b>;',
       map: '{"version":3,"file":"script-bound-tag-loading.test.jsx","sourceRoot":"","sources":["script-bound-tag-loading.test.tsx"],"names":[],"mappings":"eAiBK,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   ),
   { transform },
@@ -36,8 +34,6 @@ const scriptBoundTagLoading = cs.create(
   {
     code: "export default ($0, $1) => {\n    const count = $0()(0);\n    const drawn = $0()(null);\n    const Badge = (props) => {\n        const held = drawn[0]();\n        return held === null ? null : eval(held)(props);\n    };\n    return (<div>\n      {drawn[0]() === null ? <i>loading</i> : <Badge count={count[0]()}/>}\n      <button onclick={() => drawn[1]($1())}>load</button>\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n};",
     map: '{"version":3,"file":"script-bound-tag-loading.test.jsx","sourceRoot":"","sources":["script-bound-tag-loading.test.tsx"],"names":[],"mappings":"eAqBiC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,IAAa,CAEjB,IAAI,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,CAAC,KAAwB,EAAE,EAAE;QACzC,MAAM,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC;QACxB,OAAO,IAAI,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC;IAClD,CAAC,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,KAAK,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG,CACpE;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,IAAY,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC3D;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("scriptBoundTagLoading", async (t) => {

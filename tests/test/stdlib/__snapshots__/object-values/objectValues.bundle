@@ -1,17 +1,14 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const prices = {
-        apple: 1,
-        pear: 2,
-      };
-      return {
-        values: Object.values(prices),
-        holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
-      };
+  const f1 = () => {
+    const prices = {
+      apple: 1,
+      pear: 2,
     };
-    return $entry;
-  })();
+    return {
+      values: Object.values(prices),
+      holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
+    };
+  };
   const $bundle = f1();
   return $bundle;
 })();

@@ -22,7 +22,6 @@
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/solid-js": "workspace:^0.1.0",
     "@backtickjs/tsc": "workspace:*",
-    "@backtickjs/web-interpreter": "workspace:*",
     "@backtickjs/web-page": "workspace:*",
     "@backtickjs/web-sdk": "workspace:*",
     "@backtickjs/web-testing": "workspace:*",

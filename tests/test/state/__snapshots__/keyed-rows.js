@@ -21,8 +21,6 @@ async function SwappableRows() {
     {
       code: 'export default ($0, $1) => {\n    const ids = $0()([1, 2, 3]);\n    const swap = () => {\n        const held = ids[0]();\n        ids[1](held.with(0, held[2]).with(2, held[0]));\n    };\n    const drop = () => {\n        ids[1](ids[0]().filter((id) => id !== 2));\n    };\n    return (<div>\n        <span onclick={swap}>swap</span>\n        <span onclick={drop}>drop</span>\n        <div>\n          <$1 each={ids[0]()}>\n            {(id) => <span>{"row " + id}</span>}\n          </$1>\n        </div>\n      </div>);\n};',
       map: '{"version":3,"file":"keyed-rows.test.jsx","sourceRoot":"","sources":["keyed-rows.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,GAAG,GAAG,IAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,IAAI,GAAG,GAAG,EAAE;QAChB,MAAM,IAAI,GAAG,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC;QACtB,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACjD,CAAC,CAAC;IACF,MAAM,IAAI,GAAG,GAAG,EAAE;QAChB,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,MAAM,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,CAAC;IAC5C,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,EAAE,IAAI,CAC/B;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,EAAE,IAAI,CAC/B;QAAA,CAAC,GAAG,CACF;UAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAClB;YAAA,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAC7C;UAAA,EAAE,EAAG,CACP;QAAA,EAAE,GAAG,CACP;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
-      imports: [],
-      exportAt: 0,
     },
   );
 }

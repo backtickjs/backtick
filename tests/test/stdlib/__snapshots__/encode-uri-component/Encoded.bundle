@@ -5,12 +5,9 @@
     `<span>/at?q=a%20b%2Bc%26d%23%C3%A9&amp;page=2.5 a b+c&amp;d#é`,
   );
   const $Script = (props) => props.run();
-  const f1 = (() => {
-    const $entry = () => {
-      return _tmpl$();
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    return _tmpl$();
+  };
   const $bundle = _$createComponent($Script, {
     run: () => f1(),
   });

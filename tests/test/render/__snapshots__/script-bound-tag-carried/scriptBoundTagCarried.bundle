@@ -10,71 +10,62 @@
     _tmpl$4 = /*#__PURE__*/ _$template(`<i>`),
     _tmpl$5 = /*#__PURE__*/ _$template(`<section>`);
 
-  const f1 = (() => {
-    const $entry = ($0, $1, $2) => {
-      const count = $0()(0);
-      const Badge = (p) =>
-        (() => {
-          var _el$ = _tmpl$();
-          _$insert(_el$, () => "outer " + p.n, null);
-          _$insert(_el$, () => p.children, null);
-          return _el$;
-        })();
-      return (() => {
-        var _el$2 = _tmpl$2(),
-          _el$3 = _el$2.firstChild;
-        _$insert(
-          _el$2,
-          _$createComponent($2, {
-            get body() {
-              return $1(count, Badge);
-            },
-          }),
-          _el$3,
-        );
-        _el$3.$$click = () => count[1](count[0]() + 1);
-        return _el$2;
+  const f1 = ($0, $1, $2) => {
+    const count = $0()(0);
+    const Badge = (p) =>
+      (() => {
+        var _el$ = _tmpl$();
+        _$insert(_el$, () => "outer " + p.n, null);
+        _$insert(_el$, () => p.children, null);
+        return _el$;
       })();
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0, $1) =>
-      _$createComponent($0, {
-        get n() {
-          return $1[0]();
-        },
-        get children() {
-          var _el$4 = _tmpl$3();
-          _$insert(_el$4, () => "kid " + $1[0]());
-          return _el$4;
-        },
-      });
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = ($0) => {
-      const Badge = (p) =>
-        (() => {
-          var _el$5 = _tmpl$4();
-          _$insert(_el$5, () => "panel " + p.n);
-          return _el$5;
-        })();
-      return (() => {
-        var _el$6 = _tmpl$5();
-        _$insert(
-          _el$6,
-          _$createComponent(Badge, {
-            n: 0,
-          }),
-          null,
-        );
-        _$insert(_el$6, () => $0().body, null);
-        return _el$6;
+    return (() => {
+      var _el$2 = _tmpl$2(),
+        _el$3 = _el$2.firstChild;
+      _$insert(
+        _el$2,
+        _$createComponent($2, {
+          get body() {
+            return $1(count, Badge);
+          },
+        }),
+        _el$3,
+      );
+      _el$3.$$click = () => count[1](count[0]() + 1);
+      return _el$2;
+    })();
+  };
+  const f2 = ($0, $1) =>
+    _$createComponent($0, {
+      get n() {
+        return $1[0]();
+      },
+      get children() {
+        var _el$4 = _tmpl$3();
+        _$insert(_el$4, () => "kid " + $1[0]());
+        return _el$4;
+      },
+    });
+  const f3 = ($0) => {
+    const Badge = (p) =>
+      (() => {
+        var _el$5 = _tmpl$4();
+        _$insert(_el$5, () => "panel " + p.n);
+        return _el$5;
       })();
-    };
-    return $entry;
-  })();
+    return (() => {
+      var _el$6 = _tmpl$5();
+      _$insert(
+        _el$6,
+        _$createComponent(Badge, {
+          n: 0,
+        }),
+        null,
+      );
+      _$insert(_el$6, () => $0().body, null);
+      return _el$6;
+    })();
+  };
   const $bundle = f1(
     () => $i0,
     (count, Badge) => f2(Badge, count),

@@ -2,20 +2,17 @@
   const { template: _$template } = $modules["solid-js/web"];
   const { insert: _$insert } = $modules["solid-js/web"];
   var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>before</span><span>after`);
-  const f1 = (() => {
-    const $entry = ($0) =>
-      (() => {
-        var _el$ = _tmpl$(),
-          _el$2 = _el$.firstChild,
-          _el$3 = _el$2.nextSibling;
-        _$insert(_el$, () => eval($0()), _el$3);
-        return _el$;
-      })();
-    return $entry;
-  })();
+  const f1 = ($0) =>
+    (() => {
+      var _el$ = _tmpl$(),
+        _el$2 = _el$.firstChild,
+        _el$3 = _el$2.nextSibling;
+      _$insert(_el$, () => eval($0()), _el$3);
+      return _el$;
+    })();
   const $bundle = f1(
     () =>
-      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>from another bundle`);\nconst $Script = props => props.run();\nconst f1 = (() => {\n  const $entry = () => _tmpl$();\n  return $entry;\n})();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
+      '(() => {\nconst { "template": _$template } = $modules["solid-js/web"];\nconst { "createComponent": _$createComponent } = $modules["solid-js/web"];\nvar _tmpl$ = /*#__PURE__*/_$template(`\u003cem>from another bundle`);\nconst $Script = props => props.run();\nconst f1 = () => _tmpl$();\nconst $bundle = _$createComponent($Script, {\n  run: () => f1()\n});\nreturn $bundle;\n})()',
   );
   return $bundle;
 })();

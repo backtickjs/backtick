@@ -485,9 +485,6 @@ importers:
       '@backtickjs/web-testing':
         specifier: workspace:^0.1.0
         version: link:../web-testing
-      '@jridgewell/trace-mapping':
-        specifier: ^0.3.31
-        version: 0.3.31
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -694,9 +691,6 @@ importers:
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../packages/tsc
-      '@backtickjs/web-interpreter':
-        specifier: workspace:*
-        version: link:../packages/web-interpreter
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../packages/web-page

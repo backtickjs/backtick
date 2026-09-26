@@ -1,21 +1,18 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      const base = {
-        a: 1,
-        b: 2,
-      };
-      const over = {
-        b: 9,
-      };
-      return {
-        ...base,
-        ...over,
-        c: 3,
-      };
+  const f1 = () => {
+    const base = {
+      a: 1,
+      b: 2,
     };
-    return $entry;
-  })();
+    const over = {
+      b: 9,
+    };
+    return {
+      ...base,
+      ...over,
+      c: 3,
+    };
+  };
   const $bundle = f1();
   return $bundle;
 })();

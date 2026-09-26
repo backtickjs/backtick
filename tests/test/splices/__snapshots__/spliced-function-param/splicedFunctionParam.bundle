@@ -1,15 +1,9 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => {
-      const apply = (f) => f() + 1;
-      return apply($0());
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = () => () => 2;
-    return $entry;
-  })();
+  const f1 = ($0) => {
+    const apply = (f) => f() + 1;
+    return apply($0());
+  };
+  const f2 = () => () => 2;
   const $bundle = f1(f2);
   return $bundle;
 })();

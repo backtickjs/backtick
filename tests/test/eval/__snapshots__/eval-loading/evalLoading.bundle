@@ -6,23 +6,20 @@
   var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
     _tmpl$2 = /*#__PURE__*/ _$template(`<span>loading…`);
 
-  const f1 = (() => {
-    const $entry = ($0) => {
-      const held = $0()(null);
-      return (() => {
-        var _el$ = _tmpl$();
-        _$insert(
-          _el$,
-          (() => {
-            var _c$ = _$memo(() => held[0]() === null);
-            return () => (_c$() ? _tmpl$2() : eval(held[0]()));
-          })(),
-        );
-        return _el$;
-      })();
-    };
-    return $entry;
-  })();
+  const f1 = ($0) => {
+    const held = $0()(null);
+    return (() => {
+      var _el$ = _tmpl$();
+      _$insert(
+        _el$,
+        (() => {
+          var _c$ = _$memo(() => held[0]() === null);
+          return () => (_c$() ? _tmpl$2() : eval(held[0]()));
+        })(),
+      );
+      return _el$;
+    })();
+  };
   const $bundle = f1(() => $i0);
   return $bundle;
 })();

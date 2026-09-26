@@ -14,8 +14,6 @@ const listed = cs.create(
   {
     code: "export default () => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>);",
     map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
-    imports: [],
-    exportAt: 0,
   },
 );
 it("scriptFragment", async (t) => {
@@ -29,8 +27,6 @@ it("scriptFragment", async (t) => {
         {
           code: 'export default ($0) => $0()("x");',
           map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
-          imports: [],
-          exportAt: 0,
         },
       ),
     }),

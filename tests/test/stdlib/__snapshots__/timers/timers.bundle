@@ -1,13 +1,10 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => {
-      const stop = $0().clearInterval;
-      const repeating = $0().setInterval(() => 0, 1000);
-      stop(repeating);
-      $0().clearTimeout($0().setTimeout(() => 0, 1000));
-    };
-    return $entry;
-  })();
+  const f1 = ($0) => {
+    const stop = $0().clearInterval;
+    const repeating = $0().setInterval(() => 0, 1000);
+    stop(repeating);
+    $0().clearTimeout($0().setTimeout(() => 0, 1000));
+  };
   const $bundle = f1(() => window);
   return $bundle;
 })();

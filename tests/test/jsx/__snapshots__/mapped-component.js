@@ -29,8 +29,6 @@ it("mappedComponent", async (t) => {
           {
             code: "export default ($0) => $0();",
             map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
         children: cs.create(
@@ -48,8 +46,6 @@ it("mappedComponent", async (t) => {
                     {
                       code: 'export default ($0) => "row " + $0;',
                       map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
-                      imports: [],
-                      exportAt: 0,
                     },
                   ),
                 }),
@@ -60,8 +56,6 @@ it("mappedComponent", async (t) => {
           {
             code: "export default ($0) => (row) => $0(row);",
             map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
-            imports: [],
-            exportAt: 0,
           },
         ),
       }),

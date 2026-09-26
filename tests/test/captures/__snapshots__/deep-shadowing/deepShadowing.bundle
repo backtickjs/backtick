@@ -1,29 +1,17 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => {
-      const base = 10;
-      return $0(base);
-    };
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = ($0) => {
-      const base = 1;
-      return base + $0();
-    };
-    return $entry;
-  })();
-  const f3 = (() => {
-    const $entry = ($0) => {
-      const base = 2;
-      return base * $0();
-    };
-    return $entry;
-  })();
-  const f4 = (() => {
-    const $entry = ($0) => $0;
-    return $entry;
-  })();
+  const f1 = ($0) => {
+    const base = 10;
+    return $0(base);
+  };
+  const f2 = ($0) => {
+    const base = 1;
+    return base + $0();
+  };
+  const f3 = ($0) => {
+    const base = 2;
+    return base * $0();
+  };
+  const f4 = ($0) => $0;
   const $bundle = f1((base) => f2(() => f3(() => f4(base))));
   return $bundle;
 })();

@@ -1,18 +1,15 @@
 (() => {
-  const f1 = (() => {
-    const $entry = () => {
-      return [
-        Array.isArray([]),
-        Array.isArray([1, 2]),
-        Array.isArray("ab"),
-        Array.isArray({
-          length: 0,
-        }),
-        Array.isArray(null),
-      ];
-    };
-    return $entry;
-  })();
+  const f1 = () => {
+    return [
+      Array.isArray([]),
+      Array.isArray([1, 2]),
+      Array.isArray("ab"),
+      Array.isArray({
+        length: 0,
+      }),
+      Array.isArray(null),
+    ];
+  };
   const $bundle = f1();
   return $bundle;
 })();

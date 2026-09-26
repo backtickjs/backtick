@@ -1,21 +1,15 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => ({
-      missing: $0()(null),
-      present: $0()("hi"),
-      bare: null,
-    });
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = () => (value) => {
-      if (value === null) {
-        return "-";
-      }
-      return value;
-    };
-    return $entry;
-  })();
+  const f1 = ($0) => ({
+    missing: $0()(null),
+    present: $0()("hi"),
+    bare: null,
+  });
+  const f2 = () => (value) => {
+    if (value === null) {
+      return "-";
+    }
+    return value;
+  };
   const $bundle = f1(f2);
   return $bundle;
 })();

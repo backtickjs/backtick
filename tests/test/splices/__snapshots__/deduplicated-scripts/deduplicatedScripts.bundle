@@ -1,15 +1,9 @@
 (() => {
-  const f1 = (() => {
-    const $entry = ($0) => ({
-      a: $0(),
-      b: $0(),
-    });
-    return $entry;
-  })();
-  const f2 = (() => {
-    const $entry = () => 7;
-    return $entry;
-  })();
+  const f1 = ($0) => ({
+    a: $0(),
+    b: $0(),
+  });
+  const f2 = () => 7;
   const $bundle = f1(f2);
   return $bundle;
 })();

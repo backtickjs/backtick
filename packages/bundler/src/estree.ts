@@ -71,7 +71,7 @@ export function builtin(names: Names | null, name: string): ES.Expression {
 
 // A string a script wrote, as a literal: `<` escaped, so no `</script>` or
 // `<!--` appears when the bundle is inlined in a page.
-export function stringLiteral(value: string): ES.Literal {
+function stringLiteral(value: string): ES.Literal {
   return {
     type: "Literal",
     value,
@@ -80,7 +80,7 @@ export function stringLiteral(value: string): ES.Literal {
 }
 
 // A negative number is the negation of one, as JavaScript writes it.
-export function numberLiteral(value: number): ES.Expression {
+function numberLiteral(value: number): ES.Expression {
   if (!Number.isFinite(value)) {
     throw new Error(`${value} has no literal`);
   }
@@ -192,7 +192,7 @@ export function imported(
   return identifier(entry.local);
 }
 
-// Code written elsewhere — a script's entry, compiled when the host was — as a
+// Code written elsewhere — a script's entry, as the compiler emitted it — as a
 // node `printBundle` writes as it is.
 export function raw(code: string): ES.Expression {
   return { type: "Raw", code } as unknown as ES.Expression;
