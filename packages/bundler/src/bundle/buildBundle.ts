@@ -1,10 +1,15 @@
-import { type ClientScript, isClientScript } from "@backtickjs/core";
+import {
+  type ClientScript,
+  isClientScript,
+  isJsxElement,
+  type JsxElement,
+} from "@backtickjs/core";
 import {
   type Client,
   isClientImport,
   type Spliceable,
 } from "@backtickjs/core";
-import { isJsxElement, type JsxElement } from "../JsxElement.js";
+
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 import { holeName } from "./holes.js";

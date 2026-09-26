@@ -1,4 +1,4 @@
-import { createJsxElement } from "@backtickjs/bundler";
+import { createJsxElement } from "@backtickjs/core";
 import type { ClientHandle, Spliceable } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 

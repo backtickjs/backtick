@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createImport } from "@backtickjs/core";
-import { createJsxElement } from "../dist/JsxElement.js";
+import { createImport, createJsxElement } from "@backtickjs/core";
 import { bundler } from "../dist/bundler.js";
 
 // A host element is printed as JSX, for the framework's compiler: read back

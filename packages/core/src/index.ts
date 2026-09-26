@@ -19,6 +19,15 @@ export {
   type ClientImport,
 } from "./ClientImport.js";
 
+// A drawing as a host builds one: what an adapter's JSX runtime makes, and
+// what the bundler expands.
+export {
+  createJsxElement,
+  isJsxElement,
+  type JsxElement,
+  type JsxElementType,
+} from "./JsxElement.js";
+
 // What a template compiles to: the compiler writes one and the bundler reads
 // it, so the shape is neither end's.
 export {
