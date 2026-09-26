@@ -4,7 +4,7 @@ import type { ClientUnknown, Spliceable } from "@backtickjs/platform-sdk";
 import type { Spliced } from "@backtickjs/platform-sdk";
 
 // The root of a script
-function lift<T extends ClientUnknown>(_: T): Client<T> {
+function lift<T>(_: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
