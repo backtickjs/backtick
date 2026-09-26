@@ -52,9 +52,6 @@ export function rewriteScript(
   const state: RewriteState = {
     script: clientScript,
     bindings,
-    // A splice key starts with `$`, a tag key is a bare name, and a binding
-    // key ends in `$<fileHash>$<n>`, so none of them meet.
-    params: new Map(params.map((param, index) => [param.key, index])),
     errors: new Map(),
     mappings: new Map(),
     codeInformation: new Map(),

@@ -314,12 +314,6 @@ importers:
       '@backtickjs/platform-sdk':
         specifier: workspace:*
         version: link:../platform-sdk
-      '@types/estree':
-        specifier: ^1.0.9
-        version: 1.0.9
-      '@types/estree-jsx':
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -336,12 +330,6 @@ importers:
       '@jridgewell/remapping':
         specifier: ^2.3.5
         version: 2.3.5
-      '@types/estree':
-        specifier: ^1.0.9
-        version: 1.0.9
-      '@types/estree-jsx':
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31

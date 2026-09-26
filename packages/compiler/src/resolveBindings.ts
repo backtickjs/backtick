@@ -9,9 +9,8 @@ import { isFragmentTag } from "@backtickjs/client-script";
  *
  *  - `bindings`: every *bound* variable identifier — a declaration, an arrow
  *    parameter, or a reference that resolves to one of those — mapped to a
- *    stable, globally unique binding key. This key is what the emitted runtime
- *    carries as an identifier's `binding` (`v.identifier`, `v.variableDeclaration`,
- *    `v.arrow` params); the virtual code the type-checker sees is untouched.
+ *    stable, globally unique binding key: what a capture is threaded by, and
+ *    what the virtual code renames a script's own bindings from.
  *
  *  - `params`: for each script, its parameters in order (see `ResolvedParam`):
  *

@@ -1,9 +1,9 @@
 /**
- * What a `cs` template compiles to: its syntax and where it was written.
+ * What a `cs` template compiles to: its code as a module, what it is handed,
+ * and where it was written.
  *
  * The compiler writes one of these and the bundler reads it, so the shape is
- * neither end's. A script's body is ESTree as the source wrote it, with JSX
- * and splices in it, and the rules both ends read it by are here.
+ * neither end's.
  *
  * `cs` is here too: what a template is written as, and what it compiles to,
  * are one thing said at two moments.
@@ -21,7 +21,6 @@ export {
   type Param,
   type ScriptModule,
 } from "./ClientScript.js";
-export type { Splice } from "./Splice.js";
 export { isComponentTag } from "./isComponentTag.js";
 export { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 export { jsxText } from "./jsxText.js";

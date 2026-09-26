@@ -21,9 +21,7 @@
   },
   "dependencies": {
     "@backtickjs/client-script": "workspace:*",
-    "@jridgewell/remapping": "^2.3.5",
-    "@types/estree": "^1.0.9",
-    "@types/estree-jsx": "^1.0.5"
+    "@jridgewell/remapping": "^2.3.5"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

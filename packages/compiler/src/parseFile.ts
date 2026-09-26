@@ -1,4 +1,3 @@
-import type * as ES from "estree";
 import type ts from "typescript";
 import type { SourceRange } from "./SourceRange.js";
 
@@ -14,7 +13,6 @@ export interface ClientScript {
   fileWithPlaceholders: ts.SourceFile;
   splices: { [placeholder: string]: Splice };
 
-  toSourceLocation: (node: ts.Node) => ES.SourceLocation;
   toSourceRange: (node: ts.Node) => SourceRange;
 }
 
@@ -123,16 +121,11 @@ function getDirectScripts(
       start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
       end: toSourceOffset(mappings, node.getEnd()),
     });
-    const toSourceLocation = (node: ts.Node): ES.SourceLocation => {
-      const { start, end } = toSourceRange(node);
-      return sourceLocation(sourceFile, start, end);
-    };
     scripts.push({
       sourceFile,
       sourceNode: taggedTemplate,
       textWithPlaceholders,
       fileWithPlaceholders,
-      toSourceLocation,
       toSourceRange,
       splices,
     });
@@ -315,16 +308,3 @@ function toSourceOffset(mappings: OffsetMapping[], pos: number): number {
   return last.sourceStart + last.length;
 }
 
-// Lines from 1 and columns from 0, as ESTree counts them.
-export function sourceLocation(
-  sourceFile: ts.SourceFile,
-  start: number,
-  end: number,
-): ES.SourceLocation {
-  const from = sourceFile.getLineAndCharacterOfPosition(start);
-  const to = sourceFile.getLineAndCharacterOfPosition(end);
-  return {
-    start: { line: from.line + 1, column: from.character },
-    end: { line: to.line + 1, column: to.character },
-  };
-}

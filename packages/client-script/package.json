@@ -12,9 +12,7 @@
     }
   },
   "dependencies": {
-    "@backtickjs/platform-sdk": "workspace:*",
-    "@types/estree": "^1.0.9",
-    "@types/estree-jsx": "^1.0.5"
+    "@backtickjs/platform-sdk": "workspace:*"
   },
   "scripts": {
     "build": "tsc -b",
