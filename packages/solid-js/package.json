@@ -5,6 +5,10 @@
   "description": "Backtick's Solid adapter: scripts written as Solid code, compiled by Solid's own compiler and run on Solid",
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./transform": {
       "types": "./dist/transform.d.ts",
       "default": "./dist/transform.js"
@@ -20,6 +24,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.29.7",
+    "@backtickjs/platform-sdk": "workspace:^0.1.0",
     "babel-preset-solid": "1.9.12",
     "solid-js": "1.9.14"
   },

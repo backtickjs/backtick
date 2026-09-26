@@ -478,6 +478,9 @@ importers:
       '@babel/core':
         specifier: ^7.29.7
         version: 7.29.7
+      '@backtickjs/platform-sdk':
+        specifier: workspace:^0.1.0
+        version: link:../platform-sdk
       babel-preset-solid:
         specifier: 1.9.12
         version: 1.9.12(@babel/core@7.29.7)(solid-js@1.9.14)

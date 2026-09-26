@@ -31,4 +31,9 @@ export { computed, state } from "./builtins.generated.js";
 export type { Client } from "./Client.js";
 export type { Spliceable, Spliced } from "./Spliceable.js";
 export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
+export {
+  createImport,
+  isClientImport,
+  type ClientImport,
+} from "./ClientImport.js";
 export type { Bundle } from "./Bundle.js";
