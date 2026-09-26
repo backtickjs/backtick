@@ -37,7 +37,7 @@ describe("onCleanup", () => {
         },
         {
           code: "export default ($0, $1) => {\n    $0()(() => $1().console.log());\n    return <p>drawn</p>;\n};",
-          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA2BS;IACD,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"eA2BS;IACD,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
         },
       ),
     );
@@ -59,7 +59,7 @@ describe("onCleanup", () => {
         },
         {
           code: "export default ($0, $1, $2, $3) => {\n    const n = $0()(1);\n    const doubled = $1()(() => {\n        $2()(() => $3().console.log());\n        return n[0]() * 2;\n    });\n    return (<button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>);\n};",
-          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAuCS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,IAAW,CAAC,GAAG,EAAE;QAC/B,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,EAAE,MAAM,CAAC,CAC9D,CAAC;AACJ,CAAC"}',
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"eAuCS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,IAAW,CAAC,GAAG,EAAE;QAC/B,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,EAAE,MAAM,CAAC,CAC9D,CAAC;AACJ,CAAC"}',
         },
       ),
     );
@@ -92,7 +92,7 @@ describe("onCleanup", () => {
         },
         {
           code: "export default ($0, $1, $2, $3) => {\n    const timer = $0()(0);\n    $1()(() => {\n        timer[1]($2().setInterval(() => $2().console.log(), 5));\n    });\n    $3()(() => $2().clearInterval(timer[0]()));\n    return <p>ticking</p>;\n};",
-          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAyES;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IAChE,CAAC,CAAC,CAAC;IACH,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACpD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"eAyES;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IAChE,CAAC,CAAC,CAAC;IACH,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACpD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
         },
       ),
     );
@@ -115,7 +115,7 @@ describe("onCleanup", () => {
         },
         {
           code: "export default ($0, $1) => {\n    return (<button onclick={() => $0()(() => $1().console.log())}>\n            press\n          </button>);\n};",
-          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA6FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"eA6FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
         },
       ),
     );

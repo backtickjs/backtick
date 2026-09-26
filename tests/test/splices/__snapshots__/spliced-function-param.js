@@ -20,7 +20,7 @@ it("splicedFunctionParam", async (t) => {
               { params: [] },
               {
                 code: "export default () => () => 2;",
-                map: '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"eAcwB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
+                map: '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["splices/spliced-function-param.test.tsx"],"names":[],"mappings":"eAcwB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
               },
             ),
             bindings: [],
@@ -29,7 +29,7 @@ it("splicedFunctionParam", async (t) => {
       },
       {
         code: "export default ($0) => {\n    const apply = (f) => f() + 1;\n    return apply($0());\n};",
-        map: '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["spliced-function-param.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,IAAC,CAAc,CAAC;AAC/B,CAAC"}',
+        map: '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["splices/spliced-function-param.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,IAAC,CAAc,CAAC;AAC/B,CAAC"}',
       },
     ),
   );

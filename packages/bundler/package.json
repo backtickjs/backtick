@@ -22,11 +22,11 @@
     "@backtickjs/client-script": "workspace:*",
     "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/ui-platform-sdk": "workspace:*",
-    "astring": "^1.9.0"
+    "@jridgewell/gen-mapping": "^0.3.13",
+    "@jridgewell/remapping": "^2.3.5",
+    "@jridgewell/trace-mapping": "^0.3.31"
   },
   "devDependencies": {
-    "@types/estree": "^1.0.9",
-    "@types/estree-jsx": "^1.0.5",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

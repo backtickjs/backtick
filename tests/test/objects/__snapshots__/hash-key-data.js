@@ -12,7 +12,7 @@ it("hashKeyData", async (t) => {
       { params: [{ kind: "splice", value: { "#call": "#f0" }, bindings: [] }] },
       {
         code: "export default ($0) => () => $0();",
-        map: '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["hash-key-data.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+        map: '{"version":3,"file":"hash-key-data.test.jsx","sourceRoot":"","sources":["objects/hash-key-data.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
       },
     ),
   );

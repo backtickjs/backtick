@@ -11,7 +11,7 @@ const counter = cs.create(
   { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
   {
     code: "export default ($0) => (initial) => {\n    const count = $0()(initial);\n    return {\n        get: () => count[0](),\n        add: (n) => {\n            count[1](count[0]() + n);\n        },\n    };\n};",
-    map: '{"version":3,"file":"stateful-object.test.jsx","sourceRoot":"","sources":["stateful-object.test.tsx"],"names":[],"mappings":"eASmB,QAAA,CAAC,OAAe,EAAE,EAAE;IACrC,MAAM,KAAK,GAAG,IAAa,CAAC,OAAO,CAAC,CAAC;IACrC,OAAO;QACL,GAAG,EAAE,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE;QACrB,GAAG,EAAE,CAAC,CAAS,EAAE,EAAE;YACjB,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC;KACF,CAAC;AACJ,CAAC"}',
+    map: '{"version":3,"file":"stateful-object.test.jsx","sourceRoot":"","sources":["state/stateful-object.test.tsx"],"names":[],"mappings":"eASmB,QAAA,CAAC,OAAe,EAAE,EAAE;IACrC,MAAM,KAAK,GAAG,IAAa,CAAC,OAAO,CAAC,CAAC;IACrC,OAAO;QACL,GAAG,EAAE,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE;QACrB,GAAG,EAAE,CAAC,CAAS,EAAE,EAAE;YACjB,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC;KACF,CAAC;AACJ,CAAC"}',
   },
 );
 it("statefulObject", async (t) => {
@@ -23,7 +23,7 @@ it("statefulObject", async (t) => {
       { params: [{ kind: "splice", value: counter, bindings: [] }] },
       {
         code: "export default ($0) => {\n    const c = $0()(10);\n    return (<button onclick={() => {\n            c.add(5);\n        }}>\n          {c.get()}\n        </button>);\n};",
-        map: '{"version":3,"file":"stateful-object.test.jsx","sourceRoot":"","sources":["stateful-object.test.tsx"],"names":[],"mappings":"eAuBO;IACD,MAAM,CAAC,GAAG,IAAQ,CAAC,EAAE,CAAC,CAAC;IACvB,OAAO,CACL,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;QACX,CAAC,CAAC,CAEF;UAAA,CAAC,CAAC,CAAC,GAAG,EAAE,CACV;QAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+        map: '{"version":3,"file":"stateful-object.test.jsx","sourceRoot":"","sources":["state/stateful-object.test.tsx"],"names":[],"mappings":"eAuBO;IACD,MAAM,CAAC,GAAG,IAAQ,CAAC,EAAE,CAAC,CAAC;IACvB,OAAO,CACL,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;QACX,CAAC,CAAC,CAEF;UAAA,CAAC,CAAC,CAAC,GAAG,EAAE,CACV;QAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
       },
     ),
   );

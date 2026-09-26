@@ -18,7 +18,7 @@ const script = cs.create(
             { params: [{ kind: "capture", key: "x$g38hwxw7rhvi$0" }] },
             {
               code: "export default ($0) => () => $0;",
-              map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"eAY8B,QAAA,GAAG,EAAE,CAAC,EAAC"}',
+              map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"eAY8B,QAAA,GAAG,EAAE,CAAC,EAAC"}',
             },
           ),
         }),
@@ -28,7 +28,7 @@ const script = cs.create(
   },
   {
     code: "export default ($0) => () => {\n    const x = 1;\n    return $0(x);\n};",
-    map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["jsx-capture.test.tsx"],"names":[],"mappings":"eAU6C,QAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC"}',
+    map: '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"eAU6C,QAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC"}',
   },
 );
 it("jsxCapture", async (t) => {

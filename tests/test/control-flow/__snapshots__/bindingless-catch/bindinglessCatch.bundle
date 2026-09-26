@@ -1,8 +1,8 @@
-const f1 = () => {
+const $f1 = () => {
   try {
     throw "boom";
   } catch {
     return "caught";
   }
 };
-export default () => f1();
+export default () => $f1();

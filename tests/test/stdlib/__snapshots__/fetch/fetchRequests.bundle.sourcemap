@@ -1,0 +1,193 @@
+(                                                 → stdlib/fetch.test.tsx 15:8 (
+$0                                                → stdlib/fetch.test.tsx 15:8 ()…
+,                                                 → stdlib/fetch.test.tsx 15:8 ()…
+$1                                                → stdlib/fetch.test.tsx 15:8 ()…
+) => () =>                                        → stdlib/fetch.test.tsx 15:8 ()…
+{                                                 → stdlib/fetch.test.tsx 15:13  {…
+const                                             → stdlib/fetch.test.tsx 16:7 const 
+held                                              → stdlib/fetch.test.tsx 16:13 held
+ =                                                → stdlib/fetch.test.tsx 16:17  = 
+$0                                                → stdlib/fetch.test.tsx 16:20 $state("waiting");…
+()                                                → stdlib/fetch.test.tsx 16:20 $state("waiting");…
+(                                                 → stdlib/fetch.test.tsx 16:26 (
+"waiting"                                         → stdlib/fetch.test.tsx 16:27 "waiting"
+)                                                 → stdlib/fetch.test.tsx 16:36 )
+;                                                 → stdlib/fetch.test.tsx 16:37 ;
+$1                                                → stdlib/fetch.test.tsx 18:7 $window…
+()                                                → stdlib/fetch.test.tsx 18:7 $window…
+.                                                 → stdlib/fetch.test.tsx 18:14 …
+fetch                                             → stdlib/fetch.test.tsx 19:10 fetch
+(                                                 → stdlib/fetch.test.tsx 19:15 (
+"/cases/built-ins/Math/trunc/Math.trunc_Success"  → stdlib/fetch.test.tsx 19:16 "/cases/built-ins/Math/trunc/Math.trunc_Success"
+,                                                 → stdlib/fetch.test.tsx 19:64 , 
+{                                                 → stdlib/fetch.test.tsx 19:66 {
+signal                                            → stdlib/fetch.test.tsx 20:11 signal
+:                                                 → stdlib/fetch.test.tsx 20:17 : 
+$1                                                → stdlib/fetch.test.tsx 20:19 $window.AbortSignal.timeout(3000),…
+()                                                → stdlib/fetch.test.tsx 20:19 $window.AbortSignal.timeout(3000),…
+.                                                 → stdlib/fetch.test.tsx 20:26 .
+AbortSignal                                       → stdlib/fetch.test.tsx 20:27 AbortSignal
+.                                                 → stdlib/fetch.test.tsx 20:38 .
+timeout                                           → stdlib/fetch.test.tsx 20:39 timeout
+(                                                 → stdlib/fetch.test.tsx 20:46 (
+3000                                              → stdlib/fetch.test.tsx 20:47 3000
+)                                                 → stdlib/fetch.test.tsx 20:51 )
+)                                                 → stdlib/fetch.test.tsx 21:10 )
+.                                                 → stdlib/fetch.test.tsx 21:11 …
+then                                              → stdlib/fetch.test.tsx 22:10 then
+(                                                 → stdlib/fetch.test.tsx 22:14 (
+response                                          → stdlib/fetch.test.tsx 22:16 response
+ =>                                               → stdlib/fetch.test.tsx 22:34 )…
+{                                                 → stdlib/fetch.test.tsx 22:38  {…
+if (                                              → stdlib/fetch.test.tsx 23:11 if (
+response                                          → stdlib/fetch.test.tsx 23:15 response
+.                                                 → stdlib/fetch.test.tsx 23:23 .
+status                                            → stdlib/fetch.test.tsx 23:24 status
+ !==                                              → stdlib/fetch.test.tsx 23:30  !== 
+200                                               → stdlib/fetch.test.tsx 23:35 200
+)                                                 → stdlib/fetch.test.tsx 23:38 ) 
+{                                                 → stdlib/fetch.test.tsx 23:40 {
+throw                                             → stdlib/fetch.test.tsx 24:13 throw 
+"answered "                                       → stdlib/fetch.test.tsx 24:19 "answered "
+ +                                                → stdlib/fetch.test.tsx 24:30  + 
+response                                          → stdlib/fetch.test.tsx 24:33 response
+.                                                 → stdlib/fetch.test.tsx 24:41 .
+status                                            → stdlib/fetch.test.tsx 24:42 status
+;                                                 → stdlib/fetch.test.tsx 24:48 ;
+}                                                 → stdlib/fetch.test.tsx 25:11 }
+return                                            → stdlib/fetch.test.tsx 26:11 return 
+response                                          → stdlib/fetch.test.tsx 26:18 response
+.                                                 → stdlib/fetch.test.tsx 26:26 .
+json                                              → stdlib/fetch.test.tsx 26:27 json
+()                                                → stdlib/fetch.test.tsx 26:31 ()
+;                                                 → stdlib/fetch.test.tsx 26:33 ;
+}                                                 → stdlib/fetch.test.tsx 27:9 }
+)                                                 → stdlib/fetch.test.tsx 27:10 )
+.                                                 → stdlib/fetch.test.tsx 27:11 …
+then                                              → stdlib/fetch.test.tsx 28:10 then
+(                                                 → stdlib/fetch.test.tsx 28:14 (
+value                                             → stdlib/fetch.test.tsx 28:16 value
+ =>                                               → stdlib/fetch.test.tsx 28:30 )…
+{                                                 → stdlib/fetch.test.tsx 28:34  {…
+held                                              → stdlib/fetch.test.tsx 29:11 held
+.                                                 → stdlib/fetch.test.tsx 29:15 .
+set                                               → stdlib/fetch.test.tsx 29:16 set
+(                                                 → stdlib/fetch.test.tsx 29:19 (
+value                                             → stdlib/fetch.test.tsx 29:20 value
+ ===                                              → stdlib/fetch.test.tsx 29:25  === 
+null                                              → stdlib/fetch.test.tsx 29:30 null
+ ?                                                → stdlib/fetch.test.tsx 29:34  ? 
+"null"                                            → stdlib/fetch.test.tsx 29:37 "null"
+ :                                                → stdlib/fetch.test.tsx 29:43  : 
+"a value"                                         → stdlib/fetch.test.tsx 29:46 "a value"
+)                                                 → stdlib/fetch.test.tsx 29:55 )
+;                                                 → stdlib/fetch.test.tsx 29:56 ;
+}                                                 → stdlib/fetch.test.tsx 30:9 }
+)                                                 → stdlib/fetch.test.tsx 30:10 )
+.                                                 → stdlib/fetch.test.tsx 30:11 …
+catch                                             → stdlib/fetch.test.tsx 31:10 catch
+(                                                 → stdlib/fetch.test.tsx 31:15 (
+error                                             → stdlib/fetch.test.tsx 31:17 error
+ =>                                               → stdlib/fetch.test.tsx 31:31 )…
+{                                                 → stdlib/fetch.test.tsx 31:35  {…
+held                                              → stdlib/fetch.test.tsx 32:11 held
+.                                                 → stdlib/fetch.test.tsx 32:15 .
+set                                               → stdlib/fetch.test.tsx 32:16 set
+(                                                 → stdlib/fetch.test.tsx 32:19 (
+"failed — "                                       → stdlib/fetch.test.tsx 32:20 "failed — "
+ +                                                → stdlib/fetch.test.tsx 32:31  + 
+String                                            → stdlib/fetch.test.tsx 32:34 String
+(                                                 → stdlib/fetch.test.tsx 32:40 (
+error                                             → stdlib/fetch.test.tsx 32:41 error
+)                                                 → stdlib/fetch.test.tsx 32:46 )
+)                                                 → stdlib/fetch.test.tsx 32:47 )
+;                                                 → stdlib/fetch.test.tsx 32:48 ;
+}                                                 → stdlib/fetch.test.tsx 33:9 }
+)                                                 → stdlib/fetch.test.tsx 33:10 )
+;                                                 → stdlib/fetch.test.tsx 33:11 ;
+$1                                                → stdlib/fetch.test.tsx 35:7 $window…
+()                                                → stdlib/fetch.test.tsx 35:7 $window…
+.                                                 → stdlib/fetch.test.tsx 35:14 …
+fetch                                             → stdlib/fetch.test.tsx 36:10 fetch
+(                                                 → stdlib/fetch.test.tsx 36:15 (
+"/cases"                                          → stdlib/fetch.test.tsx 36:16 "/cases"
+,                                                 → stdlib/fetch.test.tsx 36:24 , 
+{                                                 → stdlib/fetch.test.tsx 36:26 {
+method                                            → stdlib/fetch.test.tsx 37:11 method
+:                                                 → stdlib/fetch.test.tsx 37:17 : 
+"POST"                                            → stdlib/fetch.test.tsx 37:19 "POST"
+,                                                 → stdlib/fetch.test.tsx 37:25 ,
+headers                                           → stdlib/fetch.test.tsx 38:11 headers
+:                                                 → stdlib/fetch.test.tsx 38:18 : 
+{                                                 → stdlib/fetch.test.tsx 38:20 {
+"content-type"                                    → stdlib/fetch.test.tsx 38:22 "content-type"
+:                                                 → stdlib/fetch.test.tsx 38:36 : 
+"application/json"                                → stdlib/fetch.test.tsx 38:38 "application/json"
+}                                                 → stdlib/fetch.test.tsx 38:56  },…
+,                                                 → stdlib/fetch.test.tsx 38:58 ,
+body                                              → stdlib/fetch.test.tsx 39:11 body
+:                                                 → stdlib/fetch.test.tsx 39:15 : 
+JSON                                              → stdlib/fetch.test.tsx 39:17 JSON
+.                                                 → stdlib/fetch.test.tsx 39:21 .
+stringify                                         → stdlib/fetch.test.tsx 39:22 stringify
+(                                                 → stdlib/fetch.test.tsx 39:31 (
+{                                                 → stdlib/fetch.test.tsx 39:32 {
+name                                              → stdlib/fetch.test.tsx 39:34 name
+:                                                 → stdlib/fetch.test.tsx 39:38 : 
+"Math.trunc"                                      → stdlib/fetch.test.tsx 39:40 "Math.trunc"
+,                                                 → stdlib/fetch.test.tsx 39:52 ,
+passed                                            → stdlib/fetch.test.tsx 39:54 passed
+:                                                 → stdlib/fetch.test.tsx 39:60 : 
+true                                              → stdlib/fetch.test.tsx 39:62 true
+}                                                 → stdlib/fetch.test.tsx 39:66  }),…
+)                                                 → stdlib/fetch.test.tsx 39:68 )
+)                                                 → stdlib/fetch.test.tsx 40:10 )
+.                                                 → stdlib/fetch.test.tsx 40:11 …
+then                                              → stdlib/fetch.test.tsx 41:10 then
+(                                                 → stdlib/fetch.test.tsx 41:14 (
+response                                          → stdlib/fetch.test.tsx 41:16 response
+ =>                                               → stdlib/fetch.test.tsx 41:34 )…
+response                                          → stdlib/fetch.test.tsx 41:39 response
+.                                                 → stdlib/fetch.test.tsx 41:47 .
+text                                              → stdlib/fetch.test.tsx 41:48 text
+()                                                → stdlib/fetch.test.tsx 41:52 ()
+)                                                 → stdlib/fetch.test.tsx 41:54 )
+.                                                 → stdlib/fetch.test.tsx 41:55 …
+then                                              → stdlib/fetch.test.tsx 42:10 then
+(                                                 → stdlib/fetch.test.tsx 42:14 (
+text                                              → stdlib/fetch.test.tsx 43:12 text
+ =>                                               → stdlib/fetch.test.tsx 43:24 )…
+{                                                 → stdlib/fetch.test.tsx 43:28  {…
+held                                              → stdlib/fetch.test.tsx 44:13 held
+.                                                 → stdlib/fetch.test.tsx 44:17 .
+set                                               → stdlib/fetch.test.tsx 44:18 set
+(                                                 → stdlib/fetch.test.tsx 44:21 (
+text                                              → stdlib/fetch.test.tsx 44:22 text
+)                                                 → stdlib/fetch.test.tsx 44:26 )
+;                                                 → stdlib/fetch.test.tsx 44:27 ;
+}                                                 → stdlib/fetch.test.tsx 45:11 }
+,                                                 → stdlib/fetch.test.tsx 45:12 ,…
+error                                             → stdlib/fetch.test.tsx 46:12 error
+ =>                                               → stdlib/fetch.test.tsx 46:26 )…
+{                                                 → stdlib/fetch.test.tsx 46:30  {…
+held                                              → stdlib/fetch.test.tsx 47:13 held
+.                                                 → stdlib/fetch.test.tsx 47:17 .
+set                                               → stdlib/fetch.test.tsx 47:18 set
+(                                                 → stdlib/fetch.test.tsx 47:21 (
+String                                            → stdlib/fetch.test.tsx 47:22 String
+(                                                 → stdlib/fetch.test.tsx 47:28 (
+error                                             → stdlib/fetch.test.tsx 47:29 error
+)                                                 → stdlib/fetch.test.tsx 47:34 )
+)                                                 → stdlib/fetch.test.tsx 47:35 )
+;                                                 → stdlib/fetch.test.tsx 47:36 ;
+}                                                 → stdlib/fetch.test.tsx 48:11 }
+)                                                 → stdlib/fetch.test.tsx 48:12 ,…
+;                                                 → stdlib/fetch.test.tsx 49:10 ;
+return                                            → stdlib/fetch.test.tsx 51:7 return 
+held                                              → stdlib/fetch.test.tsx 51:14 held
+.                                                 → stdlib/fetch.test.tsx 51:18 .
+get                                               → stdlib/fetch.test.tsx 51:19 get
+()                                                → stdlib/fetch.test.tsx 51:22 ()
+;                                                 → stdlib/fetch.test.tsx 51:24 ;
+}                                                 → stdlib/fetch.test.tsx 52:5 }
+;                                                 → stdlib/fetch.test.tsx 52:6 `,…

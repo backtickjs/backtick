@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   const coins = [1, 2, 3];
   const four = 4;
   return {
@@ -13,4 +13,4 @@ const f1 = () => {
     small: coins.filter((n) => n < 3),
   };
 };
-export default () => f1();
+export default () => $f1();

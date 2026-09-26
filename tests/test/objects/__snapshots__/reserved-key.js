@@ -12,7 +12,7 @@ it("reservedKey", async (t) => {
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
       {
         code: "export default ($0) => () => $0();",
-        map: '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["reserved-key.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+        map: '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["objects/reserved-key.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
       },
     ),
   );

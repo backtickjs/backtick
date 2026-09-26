@@ -9,7 +9,7 @@ async function Panel() {
     { params: [{ kind: "splice", value: state, bindings: [] }] },
     {
       code: "export default ($0) => {\n    const n = $0()(2);\n    n.set(3);\n};",
-      map: '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["component-answers-action.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
+      map: '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["typecheck-errors/component-answers-action.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
     },
   );
 }

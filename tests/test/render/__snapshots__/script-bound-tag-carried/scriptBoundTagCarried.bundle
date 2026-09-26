@@ -8,7 +8,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<b>`),
   _tmpl$4 = /*#__PURE__*/ _$template(`<i>`),
   _tmpl$5 = /*#__PURE__*/ _$template(`<section>`);
 import { createSignal as $i0 } from "solid-js";
-const f1 = ($0, $1, $2) => {
+const $f1 = ($0, $1, $2) => {
   const count = $0()(0);
   const Badge = (p) =>
     (() => {
@@ -33,7 +33,7 @@ const f1 = ($0, $1, $2) => {
     return _el$2;
   })();
 };
-const f2 = ($0, $1) =>
+const $f2 = ($0, $1) =>
   _$createComponent($0, {
     get n() {
       return $1[0]();
@@ -44,7 +44,7 @@ const f2 = ($0, $1) =>
       return _el$4;
     },
   });
-const f3 = ($0) => {
+const $f3 = ($0) => {
   const Badge = (p) =>
     (() => {
       var _el$5 = _tmpl$4();
@@ -65,9 +65,9 @@ const f3 = ($0) => {
   })();
 };
 export default () =>
-  f1(
+  $f1(
     () => $i0,
-    (count, Badge) => f2(Badge, count),
-    ($0) => f3(() => $0),
+    (count, Badge) => $f2(Badge, count),
+    ($0) => $f3(() => $0),
   );
 _$delegateEvents(["click"]);

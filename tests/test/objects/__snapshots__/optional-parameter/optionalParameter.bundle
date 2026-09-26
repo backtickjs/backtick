@@ -1,4 +1,4 @@
-const f1 = ($0, $1, $2) => ({
+const $f1 = ($0, $1, $2) => ({
   named: $0()("hi"),
   explicit: $0()(undefined),
   omitted: $0()(),
@@ -6,11 +6,11 @@ const f1 = ($0, $1, $2) => ({
   fallback: $1()(undefined),
   omittedCallback: $1()(),
 });
-const f2 = () => (name) => {
+const $f2 = () => (name) => {
   return name?.concat("!");
 };
-const f3 = () => (cb) => {
+const $f3 = () => (cb) => {
   return cb?.() ?? 0;
 };
-const f4 = () => () => 2;
-export default () => f1(f2, f3, f4);
+const $f4 = () => () => 2;
+export default () => $f1($f2, $f3, $f4);

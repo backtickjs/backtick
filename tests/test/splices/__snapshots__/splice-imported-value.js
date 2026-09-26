@@ -27,7 +27,7 @@ it("spliceImportedValue", async (t) => {
       { params: [{ kind: "splice", value: FRAGMENT_TAG, bindings: [] }] },
       {
         code: "export default ($0) => $0();",
-        map: '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splice-imported-value.test.tsx"],"names":[],"mappings":"eAsBkD,QAAA,IAAa"}',
+        map: '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splices/splice-imported-value.test.tsx"],"names":[],"mappings":"eAsBkD,QAAA,IAAa"}',
       },
     ),
   );

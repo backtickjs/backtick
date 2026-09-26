@@ -9,7 +9,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1) => {
+const $f1 = ($0, $1) => {
   const ids = $0()([1, 2, 3]);
   const swap = () => {
     const held = ids[0]();
@@ -45,7 +45,7 @@ const f1 = ($0, $1) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         ($0) =>
           _$createComponent($i1, {

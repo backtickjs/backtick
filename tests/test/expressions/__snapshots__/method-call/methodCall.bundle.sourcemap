@@ -1,0 +1,22 @@
+(            → expressions/method-call.test.tsx 9:8 {…
+) => {       → expressions/method-call.test.tsx 9:8 {…
+const        → expressions/method-call.test.tsx 10:7 const 
+greeting     → expressions/method-call.test.tsx 10:13 greeting
+ =           → expressions/method-call.test.tsx 10:21  = 
+"Hello"      → expressions/method-call.test.tsx 10:24 "Hello"
+;            → expressions/method-call.test.tsx 10:31 ;
+return       → expressions/method-call.test.tsx 11:7 return 
+greeting     → expressions/method-call.test.tsx 11:14 greeting
+.            → expressions/method-call.test.tsx 11:22 .
+concat       → expressions/method-call.test.tsx 11:23 concat
+(            → expressions/method-call.test.tsx 11:29 (
+", "         → expressions/method-call.test.tsx 11:30 ", "
+,            → expressions/method-call.test.tsx 11:34 , 
+"World"      → expressions/method-call.test.tsx 11:36 "World"
+)            → expressions/method-call.test.tsx 11:43 )
+.            → expressions/method-call.test.tsx 11:44 .
+toUpperCase  → expressions/method-call.test.tsx 11:45 toUpperCase
+()           → expressions/method-call.test.tsx 11:56 ()
+;            → expressions/method-call.test.tsx 11:58 ;
+}            → expressions/method-call.test.tsx 12:5 }
+;            → expressions/method-call.test.tsx 12:6 `,…

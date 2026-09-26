@@ -1,0 +1,29 @@
+(          → control-flow/for-endless.test.tsx 10:8 {…
+) => {     → control-flow/for-endless.test.tsx 10:8 {…
+let        → control-flow/for-endless.test.tsx 11:7 let 
+i          → control-flow/for-endless.test.tsx 11:11 i
+ =         → control-flow/for-endless.test.tsx 11:12  = 
+0          → control-flow/for-endless.test.tsx 11:15 0
+;          → control-flow/for-endless.test.tsx 11:16 ;
+for (;;)   → control-flow/for-endless.test.tsx 12:7 for (;;) 
+{          → control-flow/for-endless.test.tsx 12:16 {
+if (       → control-flow/for-endless.test.tsx 13:9 if (
+i          → control-flow/for-endless.test.tsx 13:13 i
+ ===       → control-flow/for-endless.test.tsx 13:14  === 
+4          → control-flow/for-endless.test.tsx 13:19 4
+)          → control-flow/for-endless.test.tsx 13:20 ) 
+{          → control-flow/for-endless.test.tsx 13:22 {
+break;     → control-flow/for-endless.test.tsx 14:11 break;
+}          → control-flow/for-endless.test.tsx 15:9 }
+i          → control-flow/for-endless.test.tsx 16:9 i
+ =         → control-flow/for-endless.test.tsx 16:10  = 
+i          → control-flow/for-endless.test.tsx 16:13 i
+ +         → control-flow/for-endless.test.tsx 16:14  + 
+1          → control-flow/for-endless.test.tsx 16:17 1
+;          → control-flow/for-endless.test.tsx 16:18 ;
+}          → control-flow/for-endless.test.tsx 17:7 }
+return     → control-flow/for-endless.test.tsx 18:7 return 
+i          → control-flow/for-endless.test.tsx 18:14 i
+;          → control-flow/for-endless.test.tsx 18:15 ;
+}          → control-flow/for-endless.test.tsx 19:5 }
+;          → control-flow/for-endless.test.tsx 19:6 `,…

@@ -1,4 +1,4 @@
-const f1 = ($0, $1) => () => {
+const $f1 = ($0, $1) => () => {
   const held = $0()("waiting");
   $1()
     .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
@@ -39,7 +39,7 @@ const f1 = ($0, $1) => () => {
   return held.get();
 };
 export default () =>
-  f1(
-    () => state,
-    () => window,
+  $f1(
+    () => globalThis.state,
+    () => globalThis.window,
   );

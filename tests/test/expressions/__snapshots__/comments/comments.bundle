@@ -1,8 +1,8 @@
-const f1 = () => {
+const $f1 = () => {
   const count = 1;
   if (count === 1) {
     return "one";
   }
   return "many";
 };
-export default () => f1();
+export default () => $f1();

@@ -25,7 +25,7 @@ it("scriptComponentNestedProp", async (t) => {
       { params: [{ kind: "tag", value: Greeting }] },
       {
         code: 'export default ($0) => <$0 person={{ firstName: "ada" }}/>;',
-        map: '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["script-component-nested-prop.test.tsx"],"names":[],"mappings":"eA0BO,QAAA,CAAC,EAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG"}',
+        map: '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["components/script-component-nested-prop.test.tsx"],"names":[],"mappings":"eA0BO,QAAA,CAAC,EAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG"}',
       },
     ),
   );

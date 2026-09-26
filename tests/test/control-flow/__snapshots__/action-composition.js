@@ -8,7 +8,7 @@ const effects = cs.create(
   { params: [] },
   {
     code: "export default () => {\n    const x = 1;\n};",
-    map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+    map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"eAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
   },
 );
 const composed = cs.create(
@@ -16,7 +16,7 @@ const composed = cs.create(
   { params: [{ kind: "splice", value: effects, bindings: [] }] },
   {
     code: "export default ($0) => {\n    $0();\n};",
-    map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAWkC;IAChC,IAAQ,CAAC;AACX,CAAC"}',
+    map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"eAWkC;IAChC,IAAQ,CAAC;AACX,CAAC"}',
   },
 );
 it("actionComposition", async (t) => {
@@ -28,7 +28,7 @@ it("actionComposition", async (t) => {
       { params: [{ kind: "splice", value: composed, bindings: [] }] },
       {
         code: "export default ($0) => {\n    $0();\n};",
-        map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAmBO;IACD,IAAS,CAAC;AACZ,CAAC"}',
+        map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"eAmBO;IACD,IAAS,CAAC;AACZ,CAAC"}',
       },
     ),
   );

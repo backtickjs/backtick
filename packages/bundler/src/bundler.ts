@@ -3,9 +3,16 @@ import { buildBundle } from "./bundle/buildBundle.js";
 import { type CodeTransform, printBundle } from "./print/printBundle.js";
 import type { ClientUnknown, Spliceable } from "@backtickjs/platform-sdk";
 
-/** How a bundle is made: `transform` is the adapter's, which compiles it. */
+/** How a bundle is made. */
 export interface BundleOptions {
+  /** The adapter's, which compiles the bundle. */
   readonly transform: CodeTransform;
+  /**
+   * Ends the bundle with its source map, inline, into the host files its
+   * scripts were written in. Off by default: it is about as large again as
+   * the bundle.
+   */
+  readonly sourceMap?: boolean;
 }
 
 /**
@@ -23,6 +30,10 @@ export const bundler = {
     value: Spliceable<T>,
     options: BundleOptions,
   ): Promise<Bundle<T>> {
-    return printBundle(await buildBundle(value), options.transform);
+    return printBundle(
+      await buildBundle(value),
+      options.transform,
+      options.sourceMap ?? false,
+    );
   },
 };

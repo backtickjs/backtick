@@ -6,7 +6,7 @@ const ping = cs.create(
   { params: [] },
   {
     code: "export default () => () => {\n    let n = 0;\n    n = 1;\n};",
-    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAIgB,MAAA,GAAG,EAAE;IACnB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"eAIgB,MAAA,GAAG,EAAE;IACnB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
   },
 );
 const script = cs.create(
@@ -14,7 +14,7 @@ const script = cs.create(
   { params: [{ kind: "splice", value: ping, bindings: [] }] },
   {
     code: "export default ($0) => {\n    const x = $0()();\n    return 1;\n};",
-    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"eASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC"}',
   },
 );
 const action = cs.create(
@@ -22,7 +22,7 @@ const action = cs.create(
   { params: [{ kind: "splice", value: ping, bindings: [] }] },
   {
     code: "export default ($0) => {\n    const x = $0()();\n};",
-    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAckB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;AACpB,CAAC"}',
+    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"eAckB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;AACpB,CAAC"}',
   },
 );
 // An error inside a checked initializer reports once: the duplicate copy
@@ -32,7 +32,7 @@ const label = cs.create(
   { params: [] },
   {
     code: "export default () => (text) => {\n    return text;\n};",
-    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAoBiB,MAAA,CAAC,IAAY,EAAE,EAAE;IAChC,OAAO,IAAI,CAAC;AACd,CAAC"}',
+    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"eAoBiB,MAAA,CAAC,IAAY,EAAE,EAAE;IAChC,OAAO,IAAI,CAAC;AACd,CAAC"}',
   },
 );
 const wrongArgument = cs.create(
@@ -40,6 +40,6 @@ const wrongArgument = cs.create(
   { params: [{ kind: "splice", value: label, bindings: [] }] },
   {
     code: "export default ($0) => {\n    const x = $0()(true);\n    return 1;\n};",
-    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["void-initializer.test.tsx"],"names":[],"mappings":"eAwByB;IAEvB,MAAM,CAAC,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+    map: '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"eAwByB;IAEvB,MAAM,CAAC,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC"}',
   },
 );

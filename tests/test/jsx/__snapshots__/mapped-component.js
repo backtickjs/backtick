@@ -28,7 +28,7 @@ it("mappedComponent", async (t) => {
           { params: [{ kind: "splice", value: rows, bindings: [] }] },
           {
             code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
+            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
           },
         ),
         children: cs.create(
@@ -45,7 +45,7 @@ it("mappedComponent", async (t) => {
                     },
                     {
                       code: 'export default ($0) => "row " + $0;',
-                      map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
+                      map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
                     },
                   ),
                 }),
@@ -55,7 +55,7 @@ it("mappedComponent", async (t) => {
           },
           {
             code: "export default ($0) => (row) => $0(row);",
-            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
+            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
           },
         ),
       }),

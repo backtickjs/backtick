@@ -8,7 +8,7 @@ const leaf = cs.create(
   { params: [] },
   {
     code: "export default () => 7;",
-    map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC"}',
+    map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"eAMgB,MAAA,CAAC"}',
   },
 );
 it("deduplicatedScripts", async (t) => {
@@ -20,7 +20,7 @@ it("deduplicatedScripts", async (t) => {
       { params: [{ kind: "splice", value: leaf, bindings: [] }] },
       {
         code: "export default ($0) => ({ a: $0(), b: $0() });",
-        map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["deduplicated-scripts.test.tsx"],"names":[],"mappings":"eASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
+        map: '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"eASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
       },
     ),
   );

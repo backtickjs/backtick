@@ -1,0 +1,50 @@
+(        → expressions/operators.test.tsx 33:8 {…
+) => {   → expressions/operators.test.tsx 33:8 {…
+const    → expressions/operators.test.tsx 34:7 const 
+s        → expressions/operators.test.tsx 34:13 s
+ =       → expressions/operators.test.tsx 34:14  = 
+"7"      → expressions/operators.test.tsx 34:17 "7"
+;        → expressions/operators.test.tsx 34:20 ;
+const    → expressions/operators.test.tsx 35:7 const 
+o        → expressions/operators.test.tsx 35:13 o
+ =       → expressions/operators.test.tsx 35:14 :…
+{        → expressions/operators.test.tsx 35:44 {
+a        → expressions/operators.test.tsx 35:46 a
+:        → expressions/operators.test.tsx 35:47 : 
+1        → expressions/operators.test.tsx 35:49 1
+,        → expressions/operators.test.tsx 35:50 ,
+b        → expressions/operators.test.tsx 35:52 b
+:        → expressions/operators.test.tsx 35:53 : 
+2        → expressions/operators.test.tsx 35:55 2
+}        → expressions/operators.test.tsx 35:56  };…
+;        → expressions/operators.test.tsx 35:58 ;
+const    → expressions/operators.test.tsx 36:7 const 
+deleted  → expressions/operators.test.tsx 36:13 deleted
+ =       → expressions/operators.test.tsx 36:20  = 
+delete   → expressions/operators.test.tsx 36:23 delete 
+o        → expressions/operators.test.tsx 36:30 o
+.        → expressions/operators.test.tsx 36:31 .
+a        → expressions/operators.test.tsx 36:32 a
+;        → expressions/operators.test.tsx 36:33 ;
+return   → expressions/operators.test.tsx 37:7 return 
+[        → expressions/operators.test.tsx 37:14 [
++        → expressions/operators.test.tsx 37:15 +
+s        → expressions/operators.test.tsx 37:16 s
+,        → expressions/operators.test.tsx 37:17 , 
+~        → expressions/operators.test.tsx 37:19 ~
+5        → expressions/operators.test.tsx 37:20 5
+,        → expressions/operators.test.tsx 37:21 , 
+void     → expressions/operators.test.tsx 37:23 void 
+s        → expressions/operators.test.tsx 37:28 s
+ ===     → expressions/operators.test.tsx 37:29  === 
+null     → expressions/operators.test.tsx 37:34 null
+,        → expressions/operators.test.tsx 37:38 , 
+deleted  → expressions/operators.test.tsx 37:40 deleted
+,        → expressions/operators.test.tsx 37:47 , 
+"a"      → expressions/operators.test.tsx 37:49 "a"
+ in      → expressions/operators.test.tsx 37:52  in 
+o        → expressions/operators.test.tsx 37:56 o
+]        → expressions/operators.test.tsx 37:57 ]
+;        → expressions/operators.test.tsx 37:58 ;
+}        → expressions/operators.test.tsx 38:5 }
+;        → expressions/operators.test.tsx 38:6 `,…

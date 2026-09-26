@@ -1,2 +1,2 @@
-const f1 = ($0) => $0();
-export default () => f1(() => 'say "hi"\n\\done');
+const $f1 = ($0) => $0();
+export default () => $f1(() => 'say "hi"\n\\done');

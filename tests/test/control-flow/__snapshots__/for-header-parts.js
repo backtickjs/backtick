@@ -12,7 +12,7 @@ it("forHeaderParts", async (t) => {
       { params: [] },
       {
         code: 'export default () => {\n    let i = 0;\n    let seen = "";\n    for (; i < 3;) {\n        seen = seen + i;\n        i = i + 1;\n    }\n    return seen;\n};',
-        map: '{"version":3,"file":"for-header-parts.test.jsx","sourceRoot":"","sources":["for-header-parts.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,IAAI,GAAG,EAAE,CAAC;IACd,OAAO,CAAC,GAAG,CAAC,GAAI,CAAC;QACf,IAAI,GAAG,IAAI,GAAG,CAAC,CAAC;QAChB,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC;IACZ,CAAC;IACD,OAAO,IAAI,CAAC;AACd,CAAC"}',
+        map: '{"version":3,"file":"for-header-parts.test.jsx","sourceRoot":"","sources":["control-flow/for-header-parts.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,IAAI,GAAG,EAAE,CAAC;IACd,OAAO,CAAC,GAAG,CAAC,GAAI,CAAC;QACf,IAAI,GAAG,IAAI,GAAG,CAAC,CAAC;QAChB,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC;IACZ,CAAC;IACD,OAAO,IAAI,CAAC;AACd,CAAC"}',
       },
     ),
   );

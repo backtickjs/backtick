@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   const s = "7";
   const o = {
     a: 1,
@@ -7,4 +7,4 @@ const f1 = () => {
   const deleted = delete o.a;
   return [+s, ~5, void s === null, deleted, "a" in o];
 };
-export default () => f1();
+export default () => $f1();

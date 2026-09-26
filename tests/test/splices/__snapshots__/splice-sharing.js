@@ -12,7 +12,7 @@ function add(lhs, rhs) {
     },
     {
       code: "export default ($0, $1) => $0() + $1();",
-      map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAKY,YAAA,IAAI,GAAG,IAAI"}',
+      map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"eAKY,YAAA,IAAI,GAAG,IAAI"}',
     },
   );
 }
@@ -32,7 +32,7 @@ it("spliceSharing", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 1;",
-                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAakB,MAAA,CAAC"}',
+                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"eAakB,MAAA,CAAC"}',
                 },
               ),
               cs.create(
@@ -40,7 +40,7 @@ it("spliceSharing", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 2;",
-                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAayB,MAAA,CAAC"}',
+                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"eAayB,MAAA,CAAC"}',
                 },
               ),
             ),
@@ -54,7 +54,7 @@ it("spliceSharing", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 3;",
-                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAckB,MAAA,CAAC"}',
+                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"eAckB,MAAA,CAAC"}',
                 },
               ),
               cs.create(
@@ -62,7 +62,7 @@ it("spliceSharing", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 4;",
-                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAcyB,MAAA,CAAC"}',
+                  map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"eAcyB,MAAA,CAAC"}',
                 },
               ),
             ),
@@ -72,7 +72,7 @@ it("spliceSharing", async (t) => {
       },
       {
         code: "export default ($0, $1) => ({\n    x: $0(),\n    y: $1(),\n});",
-        map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splice-sharing.test.tsx"],"names":[],"mappings":"eAYO,YAAA,CAAC;IACF,CAAC,EAAE,IAAC;IACJ,CAAC,EAAE,IAAC;CACL,CAAC"}',
+        map: '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"eAYO,YAAA,CAAC;IACF,CAAC,EAAE,IAAC;IACJ,CAAC,EAAE,IAAC;CACL,CAAC"}',
       },
     ),
   );

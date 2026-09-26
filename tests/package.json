@@ -28,6 +28,7 @@
     "@backtickjs/web-page": "workspace:*",
     "@backtickjs/web-sdk": "workspace:*",
     "@backtickjs/web-testing": "workspace:*",
+    "@jridgewell/trace-mapping": "^0.3.31",
     "@testing-library/user-event": "^14.6.7",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",

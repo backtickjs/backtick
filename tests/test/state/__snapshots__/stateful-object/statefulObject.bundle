@@ -3,7 +3,7 @@ import { delegateEvents as _$delegateEvents } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<button>`);
 import { createSignal as $i0 } from "solid-js";
-const f1 = ($0) => {
+const $f1 = ($0) => {
   const c = $0()(10);
   return (() => {
     var _el$ = _tmpl$();
@@ -14,7 +14,7 @@ const f1 = ($0) => {
     return _el$;
   })();
 };
-const f2 = ($0) => (initial) => {
+const $f2 = ($0) => (initial) => {
   const count = $0()(initial);
   return {
     get: () => count[0](),
@@ -23,5 +23,5 @@ const f2 = ($0) => (initial) => {
     },
   };
 };
-export default () => f1(() => f2(() => $i0));
+export default () => $f1(() => $f2(() => $i0));
 _$delegateEvents(["click"]);

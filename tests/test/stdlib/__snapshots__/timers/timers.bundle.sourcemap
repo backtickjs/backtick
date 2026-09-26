@@ -1,0 +1,48 @@
+$0             → stdlib/timers.test.tsx 26:8 {…
+ => {          → stdlib/timers.test.tsx 26:8 {…
+const          → stdlib/timers.test.tsx 27:7 const 
+stop           → stdlib/timers.test.tsx 27:13 stop
+ =             → stdlib/timers.test.tsx 27:17  = 
+$0             → stdlib/timers.test.tsx 27:20 $window.clearInterval;…
+()             → stdlib/timers.test.tsx 27:20 $window.clearInterval;…
+.              → stdlib/timers.test.tsx 27:27 .
+clearInterval  → stdlib/timers.test.tsx 27:28 clearInterval
+;              → stdlib/timers.test.tsx 27:41 ;
+const          → stdlib/timers.test.tsx 28:7 const 
+repeating      → stdlib/timers.test.tsx 28:13 repeating
+ =             → stdlib/timers.test.tsx 28:22  = 
+$0             → stdlib/timers.test.tsx 28:25 $window.setInterval(()…
+()             → stdlib/timers.test.tsx 28:25 $window.setInterval(()…
+.              → stdlib/timers.test.tsx 28:32 .
+setInterval    → stdlib/timers.test.tsx 28:33 setInterval
+(              → stdlib/timers.test.tsx 28:44 (
+() =>          → stdlib/timers.test.tsx 28:45 () => 
+0              → stdlib/timers.test.tsx 28:51 0
+,              → stdlib/timers.test.tsx 28:52 , 
+1000           → stdlib/timers.test.tsx 28:54 1000
+)              → stdlib/timers.test.tsx 28:58 )
+;              → stdlib/timers.test.tsx 28:59 ;
+stop           → stdlib/timers.test.tsx 29:7 stop
+(              → stdlib/timers.test.tsx 29:11 (
+repeating      → stdlib/timers.test.tsx 29:12 repeating
+)              → stdlib/timers.test.tsx 29:21 )
+;              → stdlib/timers.test.tsx 29:22 ;
+$0             → stdlib/timers.test.tsx 30:7 $window.clearTimeout($window.setTimeout(()…
+()             → stdlib/timers.test.tsx 30:7 $window.clearTimeout($window.setTimeout(()…
+.              → stdlib/timers.test.tsx 30:14 .
+clearTimeout   → stdlib/timers.test.tsx 30:15 clearTimeout
+(              → stdlib/timers.test.tsx 30:27 (
+$0             → stdlib/timers.test.tsx 30:28 $window.setTimeout(()…
+()             → stdlib/timers.test.tsx 30:28 $window.setTimeout(()…
+.              → stdlib/timers.test.tsx 30:35 .
+setTimeout     → stdlib/timers.test.tsx 30:36 setTimeout
+(              → stdlib/timers.test.tsx 30:46 (
+() =>          → stdlib/timers.test.tsx 30:47 () => 
+0              → stdlib/timers.test.tsx 30:53 0
+,              → stdlib/timers.test.tsx 30:54 , 
+1000           → stdlib/timers.test.tsx 30:56 1000
+)              → stdlib/timers.test.tsx 30:60 )
+)              → stdlib/timers.test.tsx 30:61 )
+;              → stdlib/timers.test.tsx 30:62 ;
+}              → stdlib/timers.test.tsx 31:5 }
+;              → stdlib/timers.test.tsx 31:6 `,…

@@ -22,7 +22,7 @@ describe("a module an app provides", () => {
           { params: [{ kind: "splice", value: greet, bindings: [] }] },
           {
             code: "export default ($0) => $0()();",
-            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAmBmC,QAAA,IAAM,EAAE"}',
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"eAmBmC,QAAA,IAAM,EAAE"}',
           },
         ),
       ),
@@ -39,7 +39,7 @@ describe("a module an app provides", () => {
           { params: [{ kind: "splice", value: storage, bindings: [] }] },
           {
             code: 'export default ($0) => $0().get("greeting");',
-            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAyBmC,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"eAyBmC,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
           },
         ),
       ),

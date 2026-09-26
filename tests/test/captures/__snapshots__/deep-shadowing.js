@@ -7,7 +7,7 @@ function outerBase(inner) {
     { params: [{ kind: "splice", value: middleBase(inner), bindings: [] }] },
     {
       code: "export default ($0) => {\n    const base = 1;\n    return base + $0();\n};",
-      map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAC,CAAoB;AACrC,CAAC"}',
+      map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["captures/deep-shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAC,CAAoB;AACrC,CAAC"}',
     },
   );
 }
@@ -17,7 +17,7 @@ function middleBase(inner) {
     { params: [{ kind: "splice", value: inner, bindings: [] }] },
     {
       code: "export default ($0) => {\n    const base = 2;\n    return base * $0();\n};",
-      map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAM,CAAC;AACvB,CAAC"}',
+      map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["captures/deep-shadowing.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAM,CAAC;AACvB,CAAC"}',
     },
   );
 }
@@ -41,7 +41,7 @@ it("deepShadowing", async (t) => {
                 { params: [{ kind: "capture", key: "base$8up2nb5o0inm$2" }] },
                 {
                   code: "export default ($0) => $0;",
-                  map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
+                  map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["captures/deep-shadowing.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
                 },
               ),
             ),
@@ -51,7 +51,7 @@ it("deepShadowing", async (t) => {
       },
       {
         code: "export default ($0) => {\n    const base = 10;\n    return $0(base);\n};",
-        map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
+        map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["captures/deep-shadowing.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
       },
     ),
   );

@@ -9,7 +9,7 @@ const greet = cs.create(
   { params: [] },
   {
     code: 'export default () => (name) => {\n    return name?.concat("!");\n};',
-    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAOiB,MAAA,CAAC,IAAa,EAAE,EAAE;IACjC,OAAO,IAAI,EAAE,MAAM,CAAC,GAAG,CAAC,CAAC;AAC3B,CAAC"}',
+    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["objects/optional-parameter.test.tsx"],"names":[],"mappings":"eAOiB,MAAA,CAAC,IAAa,EAAE,EAAE;IACjC,OAAO,IAAI,EAAE,MAAM,CAAC,GAAG,CAAC,CAAC;AAC3B,CAAC"}',
   },
 );
 // A function-typed annotation unions parenthesized: `(() => number) |
@@ -19,7 +19,7 @@ const double = cs.create(
   { params: [] },
   {
     code: "export default () => () => 2;",
-    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAakB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
+    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["objects/optional-parameter.test.tsx"],"names":[],"mappings":"eAakB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
   },
 );
 const callIfGiven = cs.create(
@@ -27,7 +27,7 @@ const callIfGiven = cs.create(
   { params: [] },
   {
     code: "export default () => (cb) => {\n    return cb?.() ?? 0;\n};",
-    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAeuB,MAAA,CAAC,EAAiB,EAAE,EAAE;IAC3C,OAAO,EAAE,EAAE,EAAE,IAAI,CAAC,CAAC;AACrB,CAAC"}',
+    map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["objects/optional-parameter.test.tsx"],"names":[],"mappings":"eAeuB,MAAA,CAAC,EAAiB,EAAE,EAAE;IAC3C,OAAO,EAAE,EAAE,EAAE,IAAI,CAAC,CAAC;AACrB,CAAC"}',
   },
 );
 it("optionalParameter", async (t) => {
@@ -45,7 +45,7 @@ it("optionalParameter", async (t) => {
       },
       {
         code: 'export default ($0, $1, $2) => ({\n    named: $0()("hi"),\n    explicit: $0()(undefined),\n    omitted: $0()(),\n    supplied: $1()($2()),\n    fallback: $1()(undefined),\n    omittedCallback: $1()(),\n});',
-        map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["optional-parameter.test.tsx"],"names":[],"mappings":"eAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAM,CAAC,IAAI,CAAC;IACnB,QAAQ,EAAE,IAAM,CAAC,SAAS,CAAC;IAC3B,OAAO,EAAE,IAAM,EAAE;IACjB,QAAQ,EAAE,IAAY,CAAC,IAAO,CAAC;IAC/B,QAAQ,EAAE,IAAY,CAAC,SAAS,CAAC;IACjC,eAAe,EAAE,IAAY,EAAE;CAChC,CAAC"}',
+        map: '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["objects/optional-parameter.test.tsx"],"names":[],"mappings":"eAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAM,CAAC,IAAI,CAAC;IACnB,QAAQ,EAAE,IAAM,CAAC,SAAS,CAAC;IAC3B,OAAO,EAAE,IAAM,EAAE;IACjB,QAAQ,EAAE,IAAY,CAAC,IAAO,CAAC;IAC/B,QAAQ,EAAE,IAAY,CAAC,SAAS,CAAC;IACjC,eAAe,EAAE,IAAY,EAAE;CAChC,CAAC"}',
       },
     ),
   );

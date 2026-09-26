@@ -7,6 +7,7 @@ import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import prettier from "prettier";
 import { evaluate, render } from "@backtickjs/solid-js/testing";
 import { isNode } from "./node.ts";
+import { renderBundleMappings } from "./renderBundleMappings.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
 
@@ -37,9 +38,13 @@ export async function snapshotCase(
       serializers: verbatim,
     });
 
-  // Formatted, so a change to what is printed reads as the code it changed.
-  const code = await bundler.run(value, { transform });
-  record(await prettier.format(code, { parser: "babel" }), "bundle");
+  // Formatted, so a change to what is printed reads as the code it changed;
+  // its map, against the code as it was printed.
+  const bundle = await bundler.run(value, { transform, sourceMap: true });
+  const [code, url] = bundle.split("\n//# sourceMappingURL=");
+  const map = Buffer.from(url!.split(",")[1]!, "base64").toString("utf8");
+  record(await prettier.format(code!, { parser: "babel" }), "bundle");
+  record(`${renderBundleMappings(code!, map)}\n`, "bundle.sourcemap");
   const evaluated = await evaluate(value);
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));

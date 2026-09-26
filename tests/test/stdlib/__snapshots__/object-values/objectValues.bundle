@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   const prices = {
     apple: 1,
     pear: 2,
@@ -8,4 +8,4 @@ const f1 = () => {
     holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
   };
 };
-export default () => f1();
+export default () => $f1();

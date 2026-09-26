@@ -4,10 +4,10 @@ var _tmpl$ = /*#__PURE__*/ _$template(
   `<span>/at?q=a%20b%2Bc%26d%23%C3%A9&amp;page=2.5 a b+c&amp;d#é`,
 );
 const $Script = (props) => props.run();
-const f1 = () => {
+const $f1 = () => {
   return _tmpl$();
 };
 export default () =>
   _$createComponent($Script, {
-    run: () => f1(),
+    run: () => $f1(),
   });

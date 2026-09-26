@@ -1,0 +1,36 @@
+(        → control-flow/for-loop.test.tsx 11:8 {…
+) => {   → control-flow/for-loop.test.tsx 11:8 {…
+let      → control-flow/for-loop.test.tsx 12:7 let 
+total    → control-flow/for-loop.test.tsx 12:11 total
+ =       → control-flow/for-loop.test.tsx 12:16  = 
+0        → control-flow/for-loop.test.tsx 12:19 0
+;        → control-flow/for-loop.test.tsx 12:20 ;
+for (    → control-flow/for-loop.test.tsx 13:7 for (
+let      → control-flow/for-loop.test.tsx 13:12 let 
+i        → control-flow/for-loop.test.tsx 13:16 i
+ =       → control-flow/for-loop.test.tsx 13:17  = 
+0        → control-flow/for-loop.test.tsx 13:20 0
+;        → control-flow/for-loop.test.tsx 13:21 ; 
+i        → control-flow/for-loop.test.tsx 13:23 i
+ <       → control-flow/for-loop.test.tsx 13:24  < 
+5        → control-flow/for-loop.test.tsx 13:27 5
+;        → control-flow/for-loop.test.tsx 13:28 ; 
+i        → control-flow/for-loop.test.tsx 13:30 i
+ =       → control-flow/for-loop.test.tsx 13:31  = 
+i        → control-flow/for-loop.test.tsx 13:34 i
+ +       → control-flow/for-loop.test.tsx 13:35  + 
+1        → control-flow/for-loop.test.tsx 13:38 1
+)        → control-flow/for-loop.test.tsx 13:39 ) 
+{        → control-flow/for-loop.test.tsx 13:41 {
+total    → control-flow/for-loop.test.tsx 14:9 total
+ =       → control-flow/for-loop.test.tsx 14:14  = 
+total    → control-flow/for-loop.test.tsx 14:17 total
+ +       → control-flow/for-loop.test.tsx 14:22  + 
+i        → control-flow/for-loop.test.tsx 14:25 i
+;        → control-flow/for-loop.test.tsx 14:26 ;
+}        → control-flow/for-loop.test.tsx 15:7 }
+return   → control-flow/for-loop.test.tsx 16:7 return 
+total    → control-flow/for-loop.test.tsx 16:14 total
+;        → control-flow/for-loop.test.tsx 16:19 ;
+}        → control-flow/for-loop.test.tsx 17:5 }
+;        → control-flow/for-loop.test.tsx 17:6 `,…

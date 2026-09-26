@@ -14,7 +14,7 @@ describe("ref", () => {
         { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
         {
           code: 'export default ($0) => {\n    const field = $0()(null);\n    return (<div>\n            <input aria-label="name" ref={(element) => field[1](element)}/>\n            <button onclick={() => field[0]()?.focus()}>edit</button>\n          </div>);\n};',
-          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAYS;IACD,MAAM,KAAK,GAAG,IAAa,CAA0B,IAAI,CAAC,CAAC;IAC3D,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,EAC7D;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,EAAE,KAAK,EAAE,CAAC,CAAC,IAAI,EAAE,MAAM,CAC1D;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["render/ref.test.tsx"],"names":[],"mappings":"eAYS;IACD,MAAM,KAAK,GAAG,IAAa,CAA0B,IAAI,CAAC,CAAC;IAC3D,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,EAC7D;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,EAAE,KAAK,EAAE,CAAC,CAAC,IAAI,EAAE,MAAM,CAC1D;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
         },
       ),
     );
@@ -28,7 +28,7 @@ describe("ref", () => {
         { params: [{ kind: "splice", value: onMount, bindings: [] }] },
         {
           code: 'export default ($0) => {\n    return (<input aria-label="name" ref={(element) => $0()(() => element.focus())}/>);\n};',
-          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA4BS;IACD,OAAO,CACL,CAAC,KAAK,CACJ,UAAU,CAAC,MAAM,CACjB,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,OAAO,CAAC,KAAK,EAAE,CAAC,CAAC,EAClD,CACH,CAAC;AACJ,CAAC"}',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["render/ref.test.tsx"],"names":[],"mappings":"eA4BS;IACD,OAAO,CACL,CAAC,KAAK,CACJ,UAAU,CAAC,MAAM,CACjB,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,OAAO,CAAC,KAAK,EAAE,CAAC,CAAC,EAClD,CACH,CAAC;AACJ,CAAC"}',
         },
       ),
     );
@@ -41,7 +41,7 @@ describe("ref", () => {
         { params: [] },
         {
           code: 'export default () => <input aria-label="name" ref={() => { }}/>;',
-          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAyCoB,MAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["render/ref.test.tsx"],"names":[],"mappings":"eAyCoB,MAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
         },
       ),
     );
@@ -74,7 +74,7 @@ describe("ref", () => {
           },
           {
             code: 'export default ($0, $1) => {\n    const shown = $0()(true);\n    const n = $0()(0);\n    return (<div>\n              <button onclick={() => n[1](n[0]() + 1)}>\n                {"n " + n[0]()}\n              </button>\n              {shown[0]() ? (<p ref={() => $1().console.log(n[0]())}>shown</p>) : null}\n            </div>);\n};',
-            map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA+DW;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;cAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CACtC;gBAAA,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAChB;cAAA,EAAE,MAAM,CACR;cAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACZ,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CACrD,CAAC,CAAC,CAAC,IAAI,CACV;YAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+            map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["render/ref.test.tsx"],"names":[],"mappings":"eA+DW;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;cAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CACtC;gBAAA,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAChB;cAAA,EAAE,MAAM,CACR;cAAA,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACZ,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CACrD,CAAC,CAAC,CAAC,IAAI,CACV;YAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
           },
         ),
       );

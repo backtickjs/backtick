@@ -6,7 +6,7 @@ const action = cs.create(
   { params: [] },
   {
     code: "export default () => {\n    const x = 1;\n};",
-    map: '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"eAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+    map: '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["typecheck-errors/action-member.test.tsx"],"names":[],"mappings":"eAIkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
   },
 );
 export default cs.create(
@@ -14,6 +14,6 @@ export default cs.create(
   { params: [{ kind: "splice", value: [action], bindings: [] }] },
   {
     code: "export default ($0) => {\n    const list = $0();\n    return 1;\n};",
-    map: '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["action-member.test.tsx"],"names":[],"mappings":"eAQkB;IAEhB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+    map: '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["typecheck-errors/action-member.test.tsx"],"names":[],"mappings":"eAQkB;IAEhB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC"}',
   },
 );

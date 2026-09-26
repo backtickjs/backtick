@@ -41,7 +41,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
                   },
                   {
                     code: "export default ($0) => $0;",
-                    map: '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"eAmCgC,QAAA,EAAK"}',
+                    map: '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"eAmCgC,QAAA,EAAK"}',
                   },
                 ),
               ),
@@ -52,7 +52,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
         },
         {
           code: "export default ($0, $1) => {\n    const total = 1;\n    const first = $0(total);\n    {\n        const total = 2;\n        return first + total + $1();\n    }\n};",
-          map: '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"eAiCS;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,SAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,IAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
+          map: '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"eAiCS;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,SAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,IAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
         },
       ),
       { transform },

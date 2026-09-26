@@ -1,4 +1,4 @@
-const f1 = ($0) => ({
+const $f1 = ($0) => ({
   present: $0()({
     label: "a",
     inner: {
@@ -13,7 +13,7 @@ const f1 = ($0) => ({
     label: "c",
   }),
 });
-const f2 = () => (o) => {
+const $f2 = () => (o) => {
   return [o.label, o.inner?.z ?? 0];
 };
-export default () => f1(f2);
+export default () => $f1($f2);

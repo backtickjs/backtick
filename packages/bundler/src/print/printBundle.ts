@@ -1,9 +1,10 @@
 import type { Bundle, ClientUnknown } from "@backtickjs/platform-sdk";
-import { GENERATOR, generate } from "astring";
-import type * as ES from "estree";
+import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
+import remapping from "@jridgewell/remapping";
+import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type { BundleTree } from "../bundle/buildBundle.js";
-import { arrow, identifier, member } from "../estree.js";
-import type { JsxElement } from "../estree.js";
+import type { Entry } from "../bundle/entryOf.js";
+import { importDeclaration } from "./code.js";
 
 /**
  * What an adapter's transform does to a bundle's module, shaped as a Vite
@@ -16,165 +17,114 @@ export type CodeTransform = (
   id: string,
 ) => { readonly code: string; readonly map: string };
 
+const MODULE_ID = "bundle.jsx";
+
 /**
  * A bundle tree as a module whose default export draws the tree's root: a
  * function, so the client calls it where what it creates is owned.
  *
- * The tree is printed as a JSX module, by `astring`: its imports, each entry,
- * and the root. The adapter's transform compiles it as the framework compiles
- * any module; its imports are the client's to resolve, through an import map
- * in a page.
+ * The module is JSX: its imports, each entry, and the root. The adapter's
+ * transform compiles it as the framework compiles any module; its imports are
+ * the client's to resolve, through an import map in a page.
  *
- * Strings are printed escaped so that no `</script>` or `<!--` appears, and a
- * builtin is read as the global of its name.
+ * With `sourceMap`, the bundle ends with its map inline, into the host files
+ * its scripts were written in: each entry's own map, moved to where the entry
+ * stands in the module, then through the transform's. What the bundler wrote
+ * around the entries maps to nothing, since no source wrote it.
  */
-
-const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
-
-// What the bundle itself names, beside the builtins it reads.
-const RUNTIME = ["$Script", "globalThis"];
-
-// Names a bundle may not bind: it is strict code, and `await` is reserved in a
-// module.
-const UNBINDABLE = new Set(["arguments", "await", "eval", "yield"]);
-
 export function printBundle<T extends ClientUnknown>(
   tree: BundleTree,
   transform: CodeTransform,
+  sourceMap: boolean,
 ): Bundle<T> {
   const { names } = tree;
-  const bound = new Set(names.bindings.map((node) => node.name));
-  // Taken by the bundle, so a binding or a label named the same is renamed.
-  const taken = new Set([...RUNTIME, ...names.builtins]);
-  const fresh = (base: string): string => {
-    let at = 1;
-    while (taken.has(`${base}_${at}`) || bound.has(`${base}_${at}`)) {
-      at += 1;
-    }
-    taken.add(`${base}_${at}`);
-    return `${base}_${at}`;
-  };
-
-  // A binding keeps the name as written, unless the bundle needs it or may not
-  // bind it; every binding of one name is renamed alike.
-  const printed = new Map<string, string>();
-  for (const node of names.bindings) {
-    let name = printed.get(node.name);
-    if (name === undefined) {
-      name =
-        IDENTIFIER.test(node.name) &&
-        !taken.has(node.name) &&
-        !UNBINDABLE.has(node.name)
-          ? node.name
-          : fresh(IDENTIFIER.test(node.name) ? node.name : "binding");
-      printed.set(node.name, name);
-    }
-    node.name = name;
+  const module = new ModuleWriter();
+  for (const { from, name, local } of names.imports.values()) {
+    module.line(importDeclaration(from, name, local));
   }
-
-  // Labels numbered in table order, clear of every binding.
-  const labels = new Map<string, string>();
-  let next = 1;
-  for (const [key] of tree.functions) {
-    while (taken.has(`f${next}`) || bound.has(`f${next}`)) {
-      next += 1;
-    }
-    labels.set(key, `f${next}`);
-    taken.add(`f${next}`);
-  }
-  for (const [node, key] of names.labels) {
-    node.name = labels.get(key)!;
-  }
-
-  const functions = tree.functions.map(([key, body]) =>
-    constant(labels.get(key)!, body),
-  );
-  const imports: ES.ImportDeclaration[] = [...names.imports.values()].map(
-    ({ from, name, local }): ES.ImportDeclaration => ({
-      type: "ImportDeclaration",
-      specifiers: [
-        {
-          type: "ImportSpecifier",
-          imported: identifier(name),
-          local: identifier(local),
-        },
-      ],
-      source: { type: "Literal", value: from },
-      attributes: [],
-    }),
-  );
   // What draws a script a component drew: a component whose body runs it.
-  const script: ES.Statement[] = names.drawsScript
-    ? [
-        constant(
-          "$Script",
-          arrow(
-            [identifier("props")],
-            {
-              type: "CallExpression",
-              callee: member(identifier("props"), "run", false),
-              arguments: [],
-              optional: false,
-            },
-          ),
-        ),
-      ]
-    : [];
-  const program: ES.Program = {
-    type: "Program",
-    sourceType: "module",
-    body: [
-      ...imports,
-      ...script,
-      ...functions,
-      { type: "ExportDefaultDeclaration", declaration: arrow([], tree.root) },
-    ],
-  };
-  const module = generate(program, { generator });
-  return transform(module, "bundle.jsx").code as Bundle<T>;
+  if (names.drawsScript) {
+    module.line("const $Script = (props) => props.run();");
+  }
+  for (const [label, entry] of tree.functions) {
+    module.write(`const ${label} = `);
+    module.entry(entry);
+    module.line(";");
+  }
+  module.write(`export default () => (${tree.root});`);
+
+  const compiled = transform(module.code, MODULE_ID);
+  if (!sourceMap) {
+    return compiled.code as Bundle<T>;
+  }
+  const map = remapping([compiled.map, module.map()], () => null, {
+    excludeContent: true,
+  }).toString();
+  return `${compiled.code}\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,${base64(map)}` as Bundle<T>;
 }
 
-function constant(name: string, init: ES.Expression): ES.VariableDeclaration {
-  return {
-    type: "VariableDeclaration",
-    kind: "const",
-    declarations: [{ type: "VariableDeclarator", id: identifier(name), init }],
-  };
-}
+// The module's code as it is written, and a map of the entries in it.
+class ModuleWriter {
+  code = "";
+  #line = 0;
+  #column = 0;
+  #map = new GenMapping({ file: MODULE_ID });
 
-type State = { write(code: string): void };
-type Generator = Record<string, (node: never, state: State) => void>;
+  write(text: string): void {
+    this.code += text;
+    const lines = text.split("\n");
+    if (lines.length > 1) {
+      this.#line += lines.length - 1;
+      this.#column = lines[lines.length - 1]!.length;
+    } else {
+      this.#column += text.length;
+    }
+  }
 
-const generator = {
-  ...GENERATOR,
-  // A script's entry, written as it was compiled (see `raw`).
-  Raw(node: { code: string }, state: State) {
-    state.write(node.code);
-  },
-  JsxElement(this: Generator, node: JsxElement, state: State) {
-    const tag = typeof node.tag === "string" ? node.tag : node.tag.name;
-    const expression = (value: ES.Expression) => {
-      state.write("{");
-      this[value.type]!(value as never, state);
-      state.write("}");
-    };
-    state.write(`<${tag}`);
-    for (const [name, value] of node.attributes) {
-      state.write(` ${name}=`);
-      expression(value);
-    }
-    if (node.children.length === 0) {
-      state.write(" />");
-      return;
-    }
-    state.write(">");
-    for (const child of node.children) {
-      if ((child as { type: string }).type === "JsxElement") {
-        this.JsxElement!(child as never, state);
-      } else {
-        expression(child);
+  line(text: string): void {
+    this.write(`${text}\n`);
+  }
+
+  // An entry's code, with its map's segments moved to where it stands: its
+  // first line by where it starts on this one, the rest by line alone.
+  entry({ code, map, column }: Entry): void {
+    const line = this.#line;
+    const start = this.#column;
+    eachMapping(new TraceMap(map), (segment) => {
+      if (segment.source === null) {
+        return;
       }
-    }
-    state.write(`</${tag}>`);
-  },
-} as unknown as typeof GENERATOR;
+      const first = segment.generatedLine === 1;
+      if (first && segment.generatedColumn < column) {
+        return;
+      }
+      addMapping(this.#map, {
+        generated: {
+          line: line + segment.generatedLine,
+          column: first
+            ? start + segment.generatedColumn - column
+            : segment.generatedColumn,
+        },
+        source: segment.source,
+        original: {
+          line: segment.originalLine,
+          column: segment.originalColumn,
+        },
+      });
+    });
+    this.write(code);
+  }
+
+  map(): string {
+    return JSON.stringify(toEncodedMap(this.#map));
+  }
+}
+
+// UTF-8, as a data URL's base64 reads it.
+function base64(text: string): string {
+  let binary = "";
+  for (const byte of new TextEncoder().encode(text)) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary);
+}

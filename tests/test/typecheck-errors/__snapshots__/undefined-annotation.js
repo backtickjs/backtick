@@ -4,7 +4,7 @@ const stored = cs.create(
   { params: [] },
   {
     code: "export default () => (x) => {\n    const y = x;\n    return 1;\n};",
-    map: '{"version":3,"file":"undefined-annotation.test.jsx","sourceRoot":"","sources":["undefined-annotation.test.tsx"],"names":[],"mappings":"eAYkB,MAAA,CAAC,CAAQ,EAAE,EAAE;IAC7B,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,CAAC,CAAC;AACX,CAAC"}',
+    map: '{"version":3,"file":"undefined-annotation.test.jsx","sourceRoot":"","sources":["typecheck-errors/undefined-annotation.test.tsx"],"names":[],"mappings":"eAYkB,MAAA,CAAC,CAAQ,EAAE,EAAE;IAC7B,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,CAAC,CAAC;AACX,CAAC"}',
   },
 );
 const written = cs.create(
@@ -12,6 +12,6 @@ const written = cs.create(
   { params: [] },
   {
     code: 'export default () => (x) => {\n    let y = "";\n    y = x;\n    return 1;\n};',
-    map: '{"version":3,"file":"undefined-annotation.test.jsx","sourceRoot":"","sources":["undefined-annotation.test.tsx"],"names":[],"mappings":"eAiBmB,MAAA,CAAC,CAAQ,EAAE,EAAE;IAC9B,IAAI,CAAC,GAAG,EAAE,CAAC;IAEX,CAAC,GAAG,CAAC,CAAC;IACN,OAAO,CAAC,CAAC;AACX,CAAC"}',
+    map: '{"version":3,"file":"undefined-annotation.test.jsx","sourceRoot":"","sources":["typecheck-errors/undefined-annotation.test.tsx"],"names":[],"mappings":"eAiBmB,MAAA,CAAC,CAAQ,EAAE,EAAE;IAC9B,IAAI,CAAC,GAAG,EAAE,CAAC;IAEX,CAAC,GAAG,CAAC,CAAC;IACN,OAAO,CAAC,CAAC;AACX,CAAC"}',
   },
 );

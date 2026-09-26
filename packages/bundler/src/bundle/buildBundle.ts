@@ -12,41 +12,41 @@ import { expandJsxElement } from "./expandJsxElement.js";
 import { holeName } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
-import type * as ES from "estree";
 import {
+  array,
   arrow,
-  binding,
   builtin,
   call,
   createNames,
+  imported,
   jsxElement,
-  label,
   literal,
   member,
-  nullLiteral,
-  objectKey,
-  property,
-  imported,
-  raw,
+  object,
   scriptElement,
   thunk,
   undefinedValue,
-} from "../estree.js";
-import type { Names } from "../estree.js";
-import { entryOf } from "./entryOf.js";
+} from "../print/code.js";
+import type { Names } from "../print/code.js";
+import { type Entry, entryOf } from "./entryOf.js";
 
 /**
  * A bundle as it is built, before it is printed: each `functions` entry under
- * its label, in the order rendering first reached it, and the root. What they
- * name is registered in `names` and settled when the bundle is printed.
+ * its label, in the order rendering first reached it, and the root, as code;
+ * and what they import.
  */
 export interface BundleTree {
-  readonly functions: readonly (readonly [string, ES.Expression])[];
-  readonly root: ES.Expression;
+  readonly functions: readonly (readonly [string, Entry])[];
+  readonly root: string;
   readonly names: Names;
 }
 
-// Builds the bundle `{ functions, root }` as ESTree, and documents how it is
+// Names a binding may not take: what the bundle reads itself, and what strict
+// code cannot bind. Every name the bundle introduces starts with `$`, which a
+// script cannot bind, so none of those can meet a binding.
+const RESERVED = ["globalThis", "arguments", "await", "eval", "yield"];
+
+// Builds the bundle `{ functions, root }` as code, and documents how it is
 // derived.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
@@ -107,7 +107,7 @@ export async function buildBundle<T extends ClientUnknown>(
   // because a call site hands an entry its arguments positionally, and its
   // captures arrive as numbered parameters rather than under a name.
   const displayed = new Map<string, string>();
-  const used = new Set<string>();
+  const used = new Set<string>(RESERVED);
   const displayName = (key: string): string => {
     const existing = displayed.get(key);
     if (existing !== undefined) {
@@ -126,11 +126,11 @@ export async function buildBundle<T extends ClientUnknown>(
   // How a hole is reached. Its name is the path the function read: `$0` is the
   // parameter itself, and `$0.title` is a field of it, read where the drawing
   // reads it.
-  const holeRead = (name: string): ES.Expression => {
+  const holeRead = (name: string): string => {
     const [param, ...path] = name.split(".");
-    let read: ES.Expression = binding(names, param!);
+    let read = param!;
     for (const step of path) {
-      read = member(read, step, false);
+      read = member(read, step);
     }
     return read;
   };
@@ -153,19 +153,19 @@ export async function buildBundle<T extends ClientUnknown>(
   const passKeys = (target: ClientScript, hole: number): readonly string[] =>
     bindingsOf(target.metadata.params[hole]);
 
-  const bodies = new Map<ClientScript, ES.Expression>();
+  const bodies = new Map<ClientScript, Entry>();
 
   // A script entry's label: where it landed in the table.
   const fnLabel = (target: ClientScript): string =>
-    String(scripts.get(target));
+    `$f${scripts.get(target)! + 1}`;
 
-  // Materializes an entry's arrow node into `bodies` the first time it is
+  // Materializes an entry's code into `bodies` the first time it is
   // reached. An entry takes a `$i` parameter per splice — its holes render as
   // calls `$i()` — ahead of its environment. Nothing from a call site is
   // inlined, so the body is a function of the script's source alone.
   const materialize = (script: ClientScript): void => {
     if (!bodies.has(script)) {
-      bodies.set(script, raw(entryOf(script.module)));
+      bodies.set(script, entryOf(script.module));
     }
   };
 
@@ -177,7 +177,7 @@ export async function buildBundle<T extends ClientUnknown>(
   const forwarding = (
     value: Spliceable,
     passed: readonly string[],
-  ): ES.Expression | null => {
+  ): string | null => {
     if (
       !isClientScript(value) ||
       value.metadata.params.some((param) => param.kind !== "capture")
@@ -193,10 +193,10 @@ export async function buildBundle<T extends ClientUnknown>(
       return null;
     }
     materialize(target);
-    return label(names, fnLabel(target));
+    return fnLabel(target);
   };
 
-  // Writes a value as the node it becomes: composition as data, which is what
+  // Writes a value as the code it becomes: composition as data, which is what
   // a bundle is. A script reference is an application naming which entry and
   // what to hand it; everything else is its literal form. Rendered in order,
   // one value after the other, so the table follows the order rendering first
@@ -204,7 +204,7 @@ export async function buildBundle<T extends ClientUnknown>(
   const render = async (
     value: Spliceable,
     params: ReadonlySet<string> = new Set(),
-  ): Promise<ES.Expression> => {
+  ): Promise<string> => {
     // A hole sentinel a host function stored somewhere in what it answered: the
     // client argument it stands for has no value until the client runs, so it
     // is a reference to the enclosing expansion's parameter.
@@ -215,26 +215,23 @@ export async function buildBundle<T extends ClientUnknown>(
     if (isClientScript(value)) {
       const target = entryFor(value);
       materialize(target);
-      return call(
-        label(names, fnLabel(target)),
-        await exprCallArgs(value, params),
-      );
+      return call(fnLabel(target), await exprCallArgs(value, params));
     }
     if (isJsxElement(value)) {
       return renderJsx(value, params);
     }
     if (isBuiltin(value)) {
-      return builtin(names, value.name);
+      return builtin(value.name);
     }
     if (isClientImport(value)) {
       return imported(names, value.from, value.name);
     }
     if (value === null) {
-      return nullLiteral();
+      return literal(null);
     }
     // Checked by name, since everything past here reads the value as an object.
     if (value === undefined) {
-      return undefinedValue();
+      return undefinedValue;
     }
     if (
       typeof value === "number" ||
@@ -244,11 +241,11 @@ export async function buildBundle<T extends ClientUnknown>(
       return literal(value);
     }
     if (Array.isArray(value)) {
-      const elements: ES.Expression[] = [];
+      const elements: string[] = [];
       for (const element of value) {
         elements.push(await render(element, params));
       }
-      return { type: "ArrayExpression", elements };
+      return array(elements);
     }
     // A host function has no data form — client code is written in `cs`...` and
     // reaches a script as a script — so it is expanded rather than carried, and
@@ -259,7 +256,7 @@ export async function buildBundle<T extends ClientUnknown>(
         value as (...args: Client<never>[]) => unknown,
       );
       return arrow(
-        expansion.params.map((param) => binding(names, param)),
+        expansion.params,
         // The expansion's params extend the enclosing ones, like a nested
         // frame, so a hole threading into the body resolves by name.
         await render(
@@ -280,11 +277,11 @@ export async function buildBundle<T extends ClientUnknown>(
           "a client script. Build one with a client function instead.",
       );
     }
-    const properties: ES.Property[] = [];
+    const entries: [string, string][] = [];
     for (const [key, entry] of Object.entries(value)) {
-      properties.push(property(objectKey(key), await render(entry, params)));
+      entries.push([key, await render(entry, params)]);
     }
-    return { type: "ObjectExpression", properties };
+    return object(entries);
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
@@ -295,9 +292,9 @@ export async function buildBundle<T extends ClientUnknown>(
   const capExpr = (
     key: string,
     params: ReadonlySet<string> = new Set(),
-  ): ES.Identifier => {
+  ): string => {
     if (params.has(key)) {
-      return binding(names, displayName(key));
+      return displayName(key);
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -316,9 +313,9 @@ export async function buildBundle<T extends ClientUnknown>(
   const exprCallArgs = async (
     ref: ClientScript,
     params: ReadonlySet<string>,
-  ): Promise<ES.Expression[]> => {
+  ): Promise<string[]> => {
     const target = entryFor(ref);
-    const parts: ES.Expression[] = [];
+    const parts: string[] = [];
     const splices = ref.metadata.params.flatMap((param) =>
       param.kind === "capture" ? [] : [param],
     );
@@ -347,10 +344,7 @@ export async function buildBundle<T extends ClientUnknown>(
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
       parts.push(
-        arrow(
-          passed.map((key) => binding(names, displayName(key))),
-          await render(arg, inner),
-        ),
+        arrow(passed.map(displayName), await render(arg, inner)),
       );
     }
     for (const key of capturesOf(target)) {
@@ -369,18 +363,9 @@ export async function buildBundle<T extends ClientUnknown>(
   const renderJsx = async (
     jsx: JsxElement,
     params: ReadonlySet<string>,
-  ): Promise<ES.Expression> => {
+  ): Promise<string> => {
     const type = jsx.type;
-    // A component a client module provides: written as a tag of its import.
-    if (isClientImport(type)) {
-      const { written, children } = await renderProps(jsx, params);
-      return jsxElement(
-        imported(names, type.from, type.name),
-        written,
-        children,
-      );
-    }
-    if (typeof type !== "string") {
+    if (typeof type === "function" && !isClientImport(type)) {
       const drawn = await expandJsxElement(jsx, type);
       // A script is what runs on the client; an element it drew instead has no
       // setup of its own to guard.
@@ -388,56 +373,62 @@ export async function buildBundle<T extends ClientUnknown>(
         ? scriptElement(names, await render(drawn, params))
         : render(drawn, params);
     }
-    const { written, children } = await renderProps(jsx, params);
-    // A fragment is its children: JSX has no fragment inside an element.
-    if (type === "Fragment") {
-      return children ?? nullLiteral();
-    }
-    return jsxElement(type, written, children);
-  };
-
-  // An element's props, each an expression in the enclosing entry's scope, and
-  // its children apart.
-  const renderProps = async (
-    jsx: JsxElement,
-    params: ReadonlySet<string>,
-  ): Promise<{
-    written: [string, ES.Expression][];
-    children: ES.Expression | null;
-  }> => {
-    const written: [string, ES.Expression][] = [];
-    let children: ES.Expression | null = null;
+    const written: [string, string][] = [];
+    let children: string[] = [];
     for (const [key, entry] of Object.entries(jsx.props)) {
       if (entry === undefined) {
         continue;
       }
-      let rendered: ES.Expression;
-      try {
-        rendered = await render(entry as Spliceable, params);
-      } catch (cause) {
-        // A component runs while its props render, so what surfaces here may
-        // be the app's own failure rather than a value that cannot cross — and
-        // app code may throw anything, not only an error.
-        const said = cause instanceof Error ? cause.message : String(cause);
-        const tag = isClientImport(jsx.type) ? jsx.type.name : jsx.type;
-        throw new Error(`In the \`${key}\` prop of <${String(tag)} />: ${said}`, {
-          cause,
-        });
-      }
-      if (key === "children") {
-        children = rendered;
+      if (key !== "children") {
+        written.push([key, await renderProp(jsx, key, entry, params)]);
         continue;
       }
-      written.push([key, rendered]);
+      // A fragment is its children: JSX has no fragment inside an element.
+      if (type === "Fragment") {
+        return renderProp(jsx, key, entry, params);
+      }
+      // Each child its own: an array is several, and `null` is none.
+      const each = Array.isArray(entry) ? entry : entry === null ? [] : [entry];
+      children = [];
+      for (const child of each) {
+        children.push(await renderProp(jsx, key, child, params));
+      }
     }
-    return { written, children };
+    if (type === "Fragment") {
+      return literal(null);
+    }
+    // A component a client module provides is written as a tag of its import.
+    const tag = isClientImport(type)
+      ? imported(names, type.from, type.name)
+      : type;
+    return jsxElement(tag, written, children);
   };
 
+  // A prop, as an expression in the enclosing entry's scope.
+  const renderProp = async (
+    jsx: JsxElement,
+    key: string,
+    value: unknown,
+    params: ReadonlySet<string>,
+  ): Promise<string> => {
+    try {
+      return await render(value as Spliceable, params);
+    } catch (cause) {
+      // A component runs while its props render, so what surfaces here may
+      // be the app's own failure rather than a value that cannot cross — and
+      // app code may throw anything, not only an error.
+      const said = cause instanceof Error ? cause.message : String(cause);
+      const tag = isClientImport(jsx.type) ? jsx.type.name : jsx.type;
+      throw new Error(`In the \`${key}\` prop of <${String(tag)} />: ${said}`, {
+        cause,
+      });
+    }
+  };
 
   // Nothing encloses the root, so nothing it holds can capture.
   const root = await render(value as Spliceable);
   // In table order, which is the order rendering first reached each script.
-  const functions: (readonly [string, ES.Expression])[] = [];
+  const functions: (readonly [string, Entry])[] = [];
   for (const script of scripts.keys()) {
     const body = bodies.get(script);
     if (body !== undefined) {

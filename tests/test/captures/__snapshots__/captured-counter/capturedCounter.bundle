@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   let count = 0;
   const bump = () => {
     count = count + 1;
@@ -6,4 +6,4 @@ const f1 = () => {
   };
   return bump() + bump();
 };
-export default () => f1();
+export default () => $f1();

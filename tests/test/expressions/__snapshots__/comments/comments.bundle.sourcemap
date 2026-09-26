@@ -1,0 +1,22 @@
+(        → expressions/comments.test.tsx 11:8 {…
+) => {   → expressions/comments.test.tsx 11:8 {…
+const    → expressions/comments.test.tsx 13:7 const 
+count    → expressions/comments.test.tsx 13:13 count
+ =       → expressions/comments.test.tsx 13:18  = 
+1        → expressions/comments.test.tsx 13:21 1
+;        → expressions/comments.test.tsx 13:22 ;
+if (     → expressions/comments.test.tsx 15:7 if (
+count    → expressions/comments.test.tsx 15:11 count
+ ===     → expressions/comments.test.tsx 15:16  === 
+1        → expressions/comments.test.tsx 15:21 1
+)        → expressions/comments.test.tsx 15:22 ) 
+{        → expressions/comments.test.tsx 15:24 {
+return   → expressions/comments.test.tsx 17:9 return 
+"one"    → expressions/comments.test.tsx 17:16 "one"
+;        → expressions/comments.test.tsx 17:21 ;
+}        → expressions/comments.test.tsx 18:7 }
+return   → expressions/comments.test.tsx 22:7 return 
+"many"   → expressions/comments.test.tsx 22:14 "many"
+;        → expressions/comments.test.tsx 22:20 ;
+}        → expressions/comments.test.tsx 23:5 }
+;        → expressions/comments.test.tsx 23:6 `,…

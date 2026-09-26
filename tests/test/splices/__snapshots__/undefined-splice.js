@@ -16,7 +16,7 @@ describe("a spliced undefined", () => {
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
           {
             code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAYmC,QAAA,IAAQ"}',
+            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"eAYmC,QAAA,IAAQ"}',
           },
         ),
       ),
@@ -31,7 +31,7 @@ describe("a spliced undefined", () => {
         { params: [{ kind: "splice", value: data, bindings: [] }] },
         {
           code: "export default ($0) => $0();",
-          map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAiBsC,QAAA,IAAK"}',
+          map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"eAiBsC,QAAA,IAAK"}',
         },
       ),
     );
@@ -47,7 +47,7 @@ describe("a spliced undefined", () => {
           { params: [{ kind: "splice", value: data, bindings: [] }] },
           {
             code: "export default ($0) => $0();",
-            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAwBuC,QAAA,IAAK"}',
+            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"eAwBuC,QAAA,IAAK"}',
           },
         ),
       ),

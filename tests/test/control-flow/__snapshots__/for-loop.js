@@ -12,7 +12,7 @@ it("forLoop", async (t) => {
       { params: [] },
       {
         code: "export default () => {\n    let total = 0;\n    for (let i = 0; i < 5; i = i + 1) {\n        total = total + i;\n    }\n    return total;\n};",
-        map: '{"version":3,"file":"for-loop.test.jsx","sourceRoot":"","sources":["for-loop.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;IACpB,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
+        map: '{"version":3,"file":"for-loop.test.jsx","sourceRoot":"","sources":["control-flow/for-loop.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;IACpB,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
       },
     ),
   );

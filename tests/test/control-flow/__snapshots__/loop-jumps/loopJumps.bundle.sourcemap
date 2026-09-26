@@ -1,0 +1,58 @@
+(          → control-flow/loop-jumps.test.tsx 12:8 {…
+) => {     → control-flow/loop-jumps.test.tsx 12:8 {…
+let        → control-flow/loop-jumps.test.tsx 13:7 let 
+out        → control-flow/loop-jumps.test.tsx 13:11 out
+ =         → control-flow/loop-jumps.test.tsx 13:14  = 
+""         → control-flow/loop-jumps.test.tsx 13:17 ""
+;          → control-flow/loop-jumps.test.tsx 13:19 ;
+for (      → control-flow/loop-jumps.test.tsx 14:7 for (
+let        → control-flow/loop-jumps.test.tsx 14:12 let 
+i          → control-flow/loop-jumps.test.tsx 14:16 i
+ =         → control-flow/loop-jumps.test.tsx 14:17  = 
+0          → control-flow/loop-jumps.test.tsx 14:20 0
+;          → control-flow/loop-jumps.test.tsx 14:21 ; 
+i          → control-flow/loop-jumps.test.tsx 14:23 i
+ <         → control-flow/loop-jumps.test.tsx 14:24  < 
+5          → control-flow/loop-jumps.test.tsx 14:27 5
+;          → control-flow/loop-jumps.test.tsx 14:28 ; 
+i          → control-flow/loop-jumps.test.tsx 14:30 i
+ =         → control-flow/loop-jumps.test.tsx 14:31  = 
+i          → control-flow/loop-jumps.test.tsx 14:34 i
+ +         → control-flow/loop-jumps.test.tsx 14:35  + 
+1          → control-flow/loop-jumps.test.tsx 14:38 1
+)          → control-flow/loop-jumps.test.tsx 14:39 ) 
+{          → control-flow/loop-jumps.test.tsx 14:41 {
+if (       → control-flow/loop-jumps.test.tsx 15:9 if (
+i          → control-flow/loop-jumps.test.tsx 15:13 i
+ ===       → control-flow/loop-jumps.test.tsx 15:14  === 
+1          → control-flow/loop-jumps.test.tsx 15:19 1
+)          → control-flow/loop-jumps.test.tsx 15:20 ) 
+{          → control-flow/loop-jumps.test.tsx 15:22 {
+continue;  → control-flow/loop-jumps.test.tsx 16:11 continue;
+}          → control-flow/loop-jumps.test.tsx 17:9 }
+while (    → control-flow/loop-jumps.test.tsx 18:9 while (
+true       → control-flow/loop-jumps.test.tsx 18:16 true
+)          → control-flow/loop-jumps.test.tsx 18:20 ) 
+{          → control-flow/loop-jumps.test.tsx 18:22 {
+out        → control-flow/loop-jumps.test.tsx 19:11 out
+ =         → control-flow/loop-jumps.test.tsx 19:14  = 
+out        → control-flow/loop-jumps.test.tsx 19:17 out
+ +         → control-flow/loop-jumps.test.tsx 19:20  + 
+i          → control-flow/loop-jumps.test.tsx 19:23 i
+;          → control-flow/loop-jumps.test.tsx 19:24 ;
+break;     → control-flow/loop-jumps.test.tsx 20:11 break;
+}          → control-flow/loop-jumps.test.tsx 21:9 }
+if (       → control-flow/loop-jumps.test.tsx 22:9 if (
+i          → control-flow/loop-jumps.test.tsx 22:13 i
+ ===       → control-flow/loop-jumps.test.tsx 22:14  === 
+3          → control-flow/loop-jumps.test.tsx 22:19 3
+)          → control-flow/loop-jumps.test.tsx 22:20 ) 
+{          → control-flow/loop-jumps.test.tsx 22:22 {
+break;     → control-flow/loop-jumps.test.tsx 23:11 break;
+}          → control-flow/loop-jumps.test.tsx 24:9 }
+}          → control-flow/loop-jumps.test.tsx 25:7 }
+return     → control-flow/loop-jumps.test.tsx 26:7 return 
+out        → control-flow/loop-jumps.test.tsx 26:14 out
+;          → control-flow/loop-jumps.test.tsx 26:17 ;
+}          → control-flow/loop-jumps.test.tsx 27:5 }
+;          → control-flow/loop-jumps.test.tsx 27:6 `,…

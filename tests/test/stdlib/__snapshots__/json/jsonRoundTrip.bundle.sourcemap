@@ -1,0 +1,106 @@
+(          → stdlib/json.test.tsx 12:8 {…
+) => {     → stdlib/json.test.tsx 12:8 {…
+const      → stdlib/json.test.tsx 13:7 const 
+numbers    → stdlib/json.test.tsx 13:13 numbers
+ =         → stdlib/json.test.tsx 13:20  = 
+JSON       → stdlib/json.test.tsx 13:23 JSON
+.          → stdlib/json.test.tsx 13:27 .
+stringify  → stdlib/json.test.tsx 13:28 stringify
+(          → stdlib/json.test.tsx 13:37 (
+[          → stdlib/json.test.tsx 13:38 [
+1          → stdlib/json.test.tsx 13:39 1
+,          → stdlib/json.test.tsx 13:40 , 
+2          → stdlib/json.test.tsx 13:42 2
+,          → stdlib/json.test.tsx 13:43 , 
+3          → stdlib/json.test.tsx 13:45 3
+]          → stdlib/json.test.tsx 13:46 ]
+)          → stdlib/json.test.tsx 13:47 )
+;          → stdlib/json.test.tsx 13:48 ;
+const      → stdlib/json.test.tsx 14:7 const 
+text       → stdlib/json.test.tsx 14:13 text
+ =         → stdlib/json.test.tsx 14:17  = 
+JSON       → stdlib/json.test.tsx 14:20 JSON
+.          → stdlib/json.test.tsx 14:24 .
+stringify  → stdlib/json.test.tsx 14:25 stringify
+(          → stdlib/json.test.tsx 14:34 (
+"hi"       → stdlib/json.test.tsx 14:35 "hi"
+)          → stdlib/json.test.tsx 14:39 )
+;          → stdlib/json.test.tsx 14:40 ;
+const      → stdlib/json.test.tsx 15:7 const 
+flag       → stdlib/json.test.tsx 15:13 flag
+ =         → stdlib/json.test.tsx 15:17  = 
+JSON       → stdlib/json.test.tsx 15:20 JSON
+.          → stdlib/json.test.tsx 15:24 .
+stringify  → stdlib/json.test.tsx 15:25 stringify
+(          → stdlib/json.test.tsx 15:34 (
+true       → stdlib/json.test.tsx 15:35 true
+)          → stdlib/json.test.tsx 15:39 )
+;          → stdlib/json.test.tsx 15:40 ;
+const      → stdlib/json.test.tsx 16:7 const 
+held       → stdlib/json.test.tsx 16:13 held
+ =         → stdlib/json.test.tsx 16:17  = 
+JSON       → stdlib/json.test.tsx 16:20 JSON
+.          → stdlib/json.test.tsx 16:24 .
+stringify  → stdlib/json.test.tsx 16:25 stringify
+(          → stdlib/json.test.tsx 16:34 (
+{          → stdlib/json.test.tsx 16:35 {
+a          → stdlib/json.test.tsx 16:37 a
+:          → stdlib/json.test.tsx 16:38 : 
+1          → stdlib/json.test.tsx 16:40 1
+,          → stdlib/json.test.tsx 16:41 ,
+b          → stdlib/json.test.tsx 16:43 b
+:          → stdlib/json.test.tsx 16:44 : 
+"two"      → stdlib/json.test.tsx 16:46 "two"
+}          → stdlib/json.test.tsx 16:51  });…
+)          → stdlib/json.test.tsx 16:53 )
+;          → stdlib/json.test.tsx 16:54 ;
+const      → stdlib/json.test.tsx 17:7 const 
+back       → stdlib/json.test.tsx 17:13 back
+ =         → stdlib/json.test.tsx 17:17  = 
+JSON       → stdlib/json.test.tsx 17:20 JSON
+.          → stdlib/json.test.tsx 17:24 .
+parse      → stdlib/json.test.tsx 17:25 parse
+(          → stdlib/json.test.tsx 17:30 (
+numbers    → stdlib/json.test.tsx 17:31 numbers
+)          → stdlib/json.test.tsx 17:38 )
+;          → stdlib/json.test.tsx 17:39 ;
+return     → stdlib/json.test.tsx 18:7 return 
+numbers    → stdlib/json.test.tsx 19:9 numbers
+ +         → stdlib/json.test.tsx 19:16  +…
+"|"        → stdlib/json.test.tsx 20:9 "|"
+ +         → stdlib/json.test.tsx 20:12  +…
+text       → stdlib/json.test.tsx 21:9 text
+ +         → stdlib/json.test.tsx 21:13  +…
+"|"        → stdlib/json.test.tsx 22:9 "|"
+ +         → stdlib/json.test.tsx 22:12  +…
+flag       → stdlib/json.test.tsx 23:9 flag
+ +         → stdlib/json.test.tsx 23:13  +…
+"|"        → stdlib/json.test.tsx 24:9 "|"
+ +         → stdlib/json.test.tsx 24:12  +…
+held       → stdlib/json.test.tsx 25:9 held
+ +         → stdlib/json.test.tsx 25:13  +…
+"|"        → stdlib/json.test.tsx 26:9 "|"
+ +         → stdlib/json.test.tsx 26:12  +…
+JSON       → stdlib/json.test.tsx 27:9 JSON
+.          → stdlib/json.test.tsx 27:13 .
+stringify  → stdlib/json.test.tsx 27:14 stringify
+(          → stdlib/json.test.tsx 27:23 (
+back       → stdlib/json.test.tsx 27:24 back
+)          → stdlib/json.test.tsx 27:28 )
+ +         → stdlib/json.test.tsx 27:29  +…
+"|"        → stdlib/json.test.tsx 28:9 "|"
+ +         → stdlib/json.test.tsx 28:12  +…
+JSON       → stdlib/json.test.tsx 29:9 JSON
+.          → stdlib/json.test.tsx 29:13 .
+stringify  → stdlib/json.test.tsx 29:14 stringify
+(          → stdlib/json.test.tsx 29:23 (
+JSON       → stdlib/json.test.tsx 29:24 JSON
+.          → stdlib/json.test.tsx 29:28 .
+parse      → stdlib/json.test.tsx 29:29 parse
+(          → stdlib/json.test.tsx 29:34 (
+held       → stdlib/json.test.tsx 29:35 held
+)          → stdlib/json.test.tsx 29:39 )
+)          → stdlib/json.test.tsx 29:40 )
+;          → stdlib/json.test.tsx 29:41 …
+}          → stdlib/json.test.tsx 31:5 }
+;          → stdlib/json.test.tsx 31:6 `,…

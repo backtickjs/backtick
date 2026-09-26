@@ -4,12 +4,12 @@ import { addEventListener as _$addEventListener } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(
   `<div style=padding:8px><span style=font-size:12px>hi</span><img src=https://example.com/a.png>`,
 );
-const f1 = () => () => {};
+const $f1 = () => () => {};
 export default () =>
   (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
-    _$addEventListener(_el$2, "click", f1(), true);
+    _$addEventListener(_el$2, "click", $f1(), true);
     return _el$;
   })();
 _$delegateEvents(["click"]);

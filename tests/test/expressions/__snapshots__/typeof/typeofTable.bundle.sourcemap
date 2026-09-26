@@ -1,0 +1,57 @@
+$0         → expressions/typeof.test.tsx 12:8 {…
+ => {      → expressions/typeof.test.tsx 12:8 {…
+const      → expressions/typeof.test.tsx 13:7 const 
+count      → expressions/typeof.test.tsx 13:13 count
+ =         → expressions/typeof.test.tsx 13:18  = 
+$0         → expressions/typeof.test.tsx 13:21 $createSignal(0);…
+()         → expressions/typeof.test.tsx 13:21 $createSignal(0);…
+(          → expressions/typeof.test.tsx 13:34 (
+0          → expressions/typeof.test.tsx 13:35 0
+)          → expressions/typeof.test.tsx 13:36 )
+;          → expressions/typeof.test.tsx 13:37 ;
+return     → expressions/typeof.test.tsx 14:7 return 
+[          → expressions/typeof.test.tsx 14:14 [
+typeof     → expressions/typeof.test.tsx 15:9 typeof 
+undefined  → expressions/typeof.test.tsx 15:16 undefined
+,          → expressions/typeof.test.tsx 15:25 ,…
+typeof     → expressions/typeof.test.tsx 16:9 typeof 
+null       → expressions/typeof.test.tsx 16:16 null
+,          → expressions/typeof.test.tsx 16:20 ,…
+typeof     → expressions/typeof.test.tsx 17:9 typeof 
+true       → expressions/typeof.test.tsx 17:16 true
+,          → expressions/typeof.test.tsx 17:20 ,…
+typeof     → expressions/typeof.test.tsx 18:9 typeof 
+1          → expressions/typeof.test.tsx 18:16 1
+,          → expressions/typeof.test.tsx 18:17 ,…
+typeof     → expressions/typeof.test.tsx 19:9 typeof 
+"a"        → expressions/typeof.test.tsx 19:16 "a"
+,          → expressions/typeof.test.tsx 19:19 ,…
+typeof     → expressions/typeof.test.tsx 20:9 typeof 
+[          → expressions/typeof.test.tsx 20:16 [
+1          → expressions/typeof.test.tsx 20:17 1
+]          → expressions/typeof.test.tsx 20:18 ]
+,          → expressions/typeof.test.tsx 20:19 ,…
+typeof     → expressions/typeof.test.tsx 21:9 typeof 
+{          → expressions/typeof.test.tsx 21:16 {
+a          → expressions/typeof.test.tsx 21:18 a
+:          → expressions/typeof.test.tsx 21:19 : 
+1          → expressions/typeof.test.tsx 21:21 1
+}          → expressions/typeof.test.tsx 21:22  },…
+,          → expressions/typeof.test.tsx 21:24 ,…
+typeof (   → expressions/typeof.test.tsx 22:9 typeof (
+n          → expressions/typeof.test.tsx 22:18 n
+ =>        → expressions/typeof.test.tsx 22:27 )…
+n          → expressions/typeof.test.tsx 22:32 n
+)          → expressions/typeof.test.tsx 22:33 )
+,          → expressions/typeof.test.tsx 22:34 ,…
+typeof     → expressions/typeof.test.tsx 23:9 typeof 
+Math       → expressions/typeof.test.tsx 23:16 Math
+.          → expressions/typeof.test.tsx 23:20 .
+floor      → expressions/typeof.test.tsx 23:21 floor
+,          → expressions/typeof.test.tsx 23:26 ,…
+typeof     → expressions/typeof.test.tsx 24:9 typeof 
+count      → expressions/typeof.test.tsx 24:16 count
+]          → expressions/typeof.test.tsx 24:21 ,…
+;          → expressions/typeof.test.tsx 25:8 ;
+}          → expressions/typeof.test.tsx 26:5 }
+;          → expressions/typeof.test.tsx 26:6 `,…

@@ -1,0 +1,33 @@
+(        → captures/captured-counter.test.tsx 11:8 {…
+) => {   → captures/captured-counter.test.tsx 11:8 {…
+let      → captures/captured-counter.test.tsx 12:7 let 
+count    → captures/captured-counter.test.tsx 12:11 count
+ =       → captures/captured-counter.test.tsx 12:16  = 
+0        → captures/captured-counter.test.tsx 12:19 0
+;        → captures/captured-counter.test.tsx 12:20 ;
+const    → captures/captured-counter.test.tsx 13:7 const 
+bump     → captures/captured-counter.test.tsx 13:13 bump
+ =       → captures/captured-counter.test.tsx 13:17  = 
+(        → captures/captured-counter.test.tsx 13:20 (
+) =>     → captures/captured-counter.test.tsx 13:20 ()…
+{        → captures/captured-counter.test.tsx 13:25  {…
+count    → captures/captured-counter.test.tsx 14:9 count
+ =       → captures/captured-counter.test.tsx 14:14  = 
+count    → captures/captured-counter.test.tsx 14:17 count
+ +       → captures/captured-counter.test.tsx 14:22  + 
+1        → captures/captured-counter.test.tsx 14:25 1
+;        → captures/captured-counter.test.tsx 14:26 ;
+return   → captures/captured-counter.test.tsx 15:9 return 
+count    → captures/captured-counter.test.tsx 15:16 count
+;        → captures/captured-counter.test.tsx 15:21 ;
+}        → captures/captured-counter.test.tsx 16:7 }
+;        → captures/captured-counter.test.tsx 16:8 ;
+return   → captures/captured-counter.test.tsx 17:7 return 
+bump     → captures/captured-counter.test.tsx 17:14 bump
+()       → captures/captured-counter.test.tsx 17:18 ()
+ +       → captures/captured-counter.test.tsx 17:20  + 
+bump     → captures/captured-counter.test.tsx 17:23 bump
+()       → captures/captured-counter.test.tsx 17:27 ()
+;        → captures/captured-counter.test.tsx 17:29 ;
+}        → captures/captured-counter.test.tsx 18:5 }
+;        → captures/captured-counter.test.tsx 18:6 `,…

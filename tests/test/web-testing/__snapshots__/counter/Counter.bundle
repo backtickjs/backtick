@@ -5,7 +5,7 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div><button>Add</button><p>`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0) => {
+const $f1 = ($0) => {
   const count = $0()(0);
   return (() => {
     var _el$ = _tmpl$(),
@@ -18,6 +18,6 @@ const f1 = ($0) => {
 };
 export default () =>
   _$createComponent($Script, {
-    run: () => f1(() => $i0),
+    run: () => $f1(() => $i0),
   });
 _$delegateEvents(["click"]);

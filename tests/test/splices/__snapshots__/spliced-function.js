@@ -21,7 +21,7 @@ it("splicedFunction", async (t) => {
       { params: [{ kind: "splice", value: (n) => n, bindings: [] }] },
       {
         code: "export default ($0) => () => $0();",
-        map: '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["spliced-function.test.tsx"],"names":[],"mappings":"eAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+        map: '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["splices/spliced-function.test.tsx"],"names":[],"mappings":"eAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',
       },
     ),
   );

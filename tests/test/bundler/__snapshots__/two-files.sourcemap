@@ -1,0 +1,13 @@
+cs.lift(                          → cs`
+<                                 → <
+p                                 → p
+>{cs.lift(                        → >{
+"in "                             → "in "
+)}{cs.lift(                       → }{
+cs.splice(                        → ${ [-semantic]
+(<Badge />)                       → (<Badge />)
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+)}</                              → }</
+p                                 → p
+>                                 → >
+)                                 → `

@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   const coins = [5, 31, 7];
   let total = 0;
   for (let i = 0; i < coins.length; i = i + 1) {
@@ -6,4 +6,4 @@ const f1 = () => {
   }
   return total;
 };
-export default () => f1();
+export default () => $f1();

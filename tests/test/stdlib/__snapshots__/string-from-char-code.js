@@ -10,7 +10,7 @@ async function Written() {
     { params: [] },
     {
       code: "export default () => {\n    return (<span>\n        {String.fromCharCode(72, 105) + String.fromCharCode(0xd83d, 0xde00)}\n      </span>);\n};",
-      map: '{"version":3,"file":"string-from-char-code.test.jsx","sourceRoot":"","sources":["string-from-char-code.test.tsx"],"names":[],"mappings":"eAOY;IACR,OAAO,CACL,CAAC,IAAI,CACH;QAAA,CAAC,MAAM,CAAC,YAAY,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,YAAY,CAAC,MAAM,EAAE,MAAM,CAAC,CACrE;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+      map: '{"version":3,"file":"string-from-char-code.test.jsx","sourceRoot":"","sources":["stdlib/string-from-char-code.test.tsx"],"names":[],"mappings":"eAOY;IACR,OAAO,CACL,CAAC,IAAI,CACH;QAAA,CAAC,MAAM,CAAC,YAAY,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,YAAY,CAAC,MAAM,EAAE,MAAM,CAAC,CACrE;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
     },
   );
 }

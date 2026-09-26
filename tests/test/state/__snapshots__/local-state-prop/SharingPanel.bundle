@@ -9,7 +9,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<span>press`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1) => {
+const $f1 = ($0, $1) => {
   const size = $0()(16);
   return (() => {
     var _el$ = _tmpl$();
@@ -30,14 +30,14 @@ const f1 = ($0, $1) => {
     return _el$;
   })();
 };
-const f2 = ($0) => "font-size: " + $0()[0]() + "px";
-const f3 = ($0) => () => {
+const $f2 = ($0) => "font-size: " + $0()[0]() + "px";
+const $f3 = ($0) => () => {
   $0()[1]($0()[0]() + 1);
 };
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         ($0) =>
           (() => {
@@ -45,13 +45,13 @@ export default () =>
             _$addEventListener(
               _el$2,
               "click",
-              f3(() => $0.size),
+              $f3(() => $0.size),
               true,
             );
             _$effect((_$p) =>
               _$style(
                 _el$2,
-                f2(() => $0.size),
+                $f2(() => $0.size),
                 _$p,
               ),
             );

@@ -2,20 +2,20 @@ import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<span>x`);
-const f1 = ($0) => $0()();
-const f2 = ($0) => () => {
+const $f1 = ($0) => $0()();
+const $f2 = ($0) => () => {
   const tree = $0();
   return tree;
 };
-const f3 = ($0) => $0()();
-const f4 = ($0) => () => {
+const $f3 = ($0) => $0()();
+const $f4 = ($0) => () => {
   const tree = $0();
   return tree;
 };
 export default () =>
   (() => {
     var _el$ = _tmpl$();
-    _$insert(_el$, () => f1(() => f2(() => _tmpl$())), null);
-    _$insert(_el$, () => f3(() => f4(() => _tmpl$2())), null);
+    _$insert(_el$, () => $f1(() => $f2(() => _tmpl$())), null);
+    _$insert(_el$, () => $f3(() => $f4(() => _tmpl$2())), null);
     return _el$;
   })();

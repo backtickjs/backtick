@@ -3,9 +3,9 @@ import { test } from "node:test";
 import { entryOf } from "../dist/bundle/entryOf.js";
 
 test("an entry is the expression a script's module exports", () => {
-  assert.equal(
-    entryOf({ code: "export default ($0) => <b>{$0()}</b>;", map: "" }),
-    "($0) => <b>{$0()}</b>",
+  assert.deepEqual(
+    entryOf({ code: "export default ($0) => <b>{$0()}</b>;", map: "{}" }),
+    { code: "($0) => <b>{$0()}</b>", map: "{}", column: 15 },
   );
 });
 

@@ -16,7 +16,7 @@ async function Panel() {
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
       code: "export default ($0) => {\n    const n = $0()(2);\n    return <em>{n[0]()}</em>;\n};",
-      map: '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["component-answers-script.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC3B,CAAC"}',
+      map: '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["components/component-answers-script.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC3B,CAAC"}',
     },
   );
 }

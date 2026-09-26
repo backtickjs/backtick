@@ -1,0 +1,43 @@
+(        → objects/computed-key.test.tsx 13:8 {…
+) => {   → objects/computed-key.test.tsx 13:8 {…
+const    → objects/computed-key.test.tsx 14:7 const 
+base     → objects/computed-key.test.tsx 14:13 base
+ =       → objects/computed-key.test.tsx 14:17  = 
+{        → objects/computed-key.test.tsx 14:20 {
+a        → objects/computed-key.test.tsx 14:22 a
+:        → objects/computed-key.test.tsx 14:23 : 
+1        → objects/computed-key.test.tsx 14:25 1
+,        → objects/computed-key.test.tsx 14:26 ,
+b        → objects/computed-key.test.tsx 14:28 b
+:        → objects/computed-key.test.tsx 14:29 : 
+2        → objects/computed-key.test.tsx 14:31 2
+}        → objects/computed-key.test.tsx 14:32  };…
+;        → objects/computed-key.test.tsx 14:34 ;
+const    → objects/computed-key.test.tsx 15:7 const 
+name     → objects/computed-key.test.tsx 15:13 name
+ =       → objects/computed-key.test.tsx 15:17  = 
+"b"      → objects/computed-key.test.tsx 15:20 "b"
+;        → objects/computed-key.test.tsx 15:23 ;
+return   → objects/computed-key.test.tsx 16:7 return 
+{        → objects/computed-key.test.tsx 16:14 {
+...      → objects/computed-key.test.tsx 17:9 ...
+base     → objects/computed-key.test.tsx 17:12 base
+,        → objects/computed-key.test.tsx 17:16 ,
+[        → objects/computed-key.test.tsx 18:9 [
+name     → objects/computed-key.test.tsx 18:10 name
+]:       → objects/computed-key.test.tsx 18:14 ]: 
+9        → objects/computed-key.test.tsx 18:17 9
+,        → objects/computed-key.test.tsx 18:18 ,
+[        → objects/computed-key.test.tsx 19:9 [
+"c"      → objects/computed-key.test.tsx 19:10 "c"
+ +       → objects/computed-key.test.tsx 19:13  + 
+"d"      → objects/computed-key.test.tsx 19:16 "d"
+]:       → objects/computed-key.test.tsx 19:19 ]: 
+3        → objects/computed-key.test.tsx 19:22 3
+,        → objects/computed-key.test.tsx 19:23 ,
+a        → objects/computed-key.test.tsx 20:9 a
+:        → objects/computed-key.test.tsx 20:10 : 
+4        → objects/computed-key.test.tsx 20:12 4
+;        → objects/computed-key.test.tsx 21:8 ;
+}        → objects/computed-key.test.tsx 22:5 }
+;        → objects/computed-key.test.tsx 22:6 `,…

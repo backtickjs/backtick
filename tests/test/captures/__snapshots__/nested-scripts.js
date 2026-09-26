@@ -16,7 +16,7 @@ it("nestedScripts", async (t) => {
               { params: [{ kind: "capture", key: "x$2jjdjdr7m395y$0" }] },
               {
                 code: "export default ($0) => $0;",
-                map: '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["nested-scripts.test.tsx"],"names":[],"mappings":"eAUkB,QAAA,EAAC"}',
+                map: '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"eAUkB,QAAA,EAAC"}',
               },
             ),
             bindings: ["x$2jjdjdr7m395y$0"],
@@ -25,7 +25,7 @@ it("nestedScripts", async (t) => {
       },
       {
         code: "export default ($0) => {\n    const x = 0;\n    return $0(x);\n};",
-        map: '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["nested-scripts.test.tsx"],"names":[],"mappings":"eAQO;IACD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAQ;AAClB,CAAC"}',
+        map: '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"eAQO;IACD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAQ;AAClB,CAAC"}',
       },
     ),
   );

@@ -14,7 +14,7 @@ it("indexPastEnd", async (t) => {
       { params: [] },
       {
         code: 'export default () => {\n    const names = ["zero", "one"];\n    return names[9];\n};',
-        map: '{"version":3,"file":"index-past-end.test.jsx","sourceRoot":"","sources":["index-past-end.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;IAC9B,OAAO,KAAK,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC"}',
+        map: '{"version":3,"file":"index-past-end.test.jsx","sourceRoot":"","sources":["objects/index-past-end.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;IAC9B,OAAO,KAAK,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC"}',
       },
     ),
   );

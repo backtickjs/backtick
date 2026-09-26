@@ -35,7 +35,7 @@ function wrap(start) {
                     },
                     {
                       code: "export default ($0) => $0;",
-                      map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"eAqB2B,QAAA,EAAK"}',
+                      map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["captures/deep-capture.test.tsx"],"names":[],"mappings":"eAqB2B,QAAA,EAAK"}',
                     },
                   ),
                   bindings: [],
@@ -45,7 +45,7 @@ function wrap(start) {
             },
             {
               code: "export default ($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n};",
-              map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"eAmBgB;IACV,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAY;AAC/B,CAAC"}',
+              map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["captures/deep-capture.test.tsx"],"names":[],"mappings":"eAmBgB;IACV,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAY;AAC/B,CAAC"}',
             },
           ),
           bindings: ["outer$22sufdxid1i7s$0"],
@@ -54,7 +54,7 @@ function wrap(start) {
     },
     {
       code: "export default ($0, $1) => {\n    const outer = $0();\n    return $1(outer);\n};",
-      map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"eAiBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGJ;AACN,CAAC"}',
+      map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["captures/deep-capture.test.tsx"],"names":[],"mappings":"eAiBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGJ;AACN,CAAC"}',
     },
   );
 }
@@ -74,7 +74,7 @@ it("deepCapture", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 1;",
-                  map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"eA2BoD,MAAA,CAAC"}',
+                  map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["captures/deep-capture.test.tsx"],"names":[],"mappings":"eA2BoD,MAAA,CAAC"}',
                 },
               ),
             ),
@@ -88,7 +88,7 @@ it("deepCapture", async (t) => {
                 { params: [] },
                 {
                   code: "export default () => 2;",
-                  map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"eA2BqE,MAAA,CAAC"}',
+                  map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["captures/deep-capture.test.tsx"],"names":[],"mappings":"eA2BqE,MAAA,CAAC"}',
                 },
               ),
             ),
@@ -98,7 +98,7 @@ it("deepCapture", async (t) => {
       },
       {
         code: "export default ($0, $1) => $0() + $1();",
-        map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["deep-capture.test.tsx"],"names":[],"mappings":"eA2B0C,YAAA,IAAC,GAAgB,IAAC"}',
+        map: '{"version":3,"file":"deep-capture.test.jsx","sourceRoot":"","sources":["captures/deep-capture.test.tsx"],"names":[],"mappings":"eA2B0C,YAAA,IAAC,GAAgB,IAAC"}',
       },
     ),
   );

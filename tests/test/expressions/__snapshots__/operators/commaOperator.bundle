@@ -1,6 +1,6 @@
-const f1 = () => {
+const $f1 = () => {
   let n = 0;
   const last = (n++, n + 10);
   return [n, last];
 };
-export default () => f1();
+export default () => $f1();

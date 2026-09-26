@@ -1,0 +1,36 @@
+(        → control-flow/for-header-parts.test.tsx 11:8 {…
+) => {   → control-flow/for-header-parts.test.tsx 11:8 {…
+let      → control-flow/for-header-parts.test.tsx 12:7 let 
+i        → control-flow/for-header-parts.test.tsx 12:11 i
+ =       → control-flow/for-header-parts.test.tsx 12:12  = 
+0        → control-flow/for-header-parts.test.tsx 12:15 0
+;        → control-flow/for-header-parts.test.tsx 12:16 ;
+let      → control-flow/for-header-parts.test.tsx 13:7 let 
+seen     → control-flow/for-header-parts.test.tsx 13:11 seen
+ =       → control-flow/for-header-parts.test.tsx 13:15  = 
+""       → control-flow/for-header-parts.test.tsx 13:18 ""
+;        → control-flow/for-header-parts.test.tsx 13:20 ;
+for (;   → control-flow/for-header-parts.test.tsx 14:7 for (; 
+i        → control-flow/for-header-parts.test.tsx 14:14 i
+ <       → control-flow/for-header-parts.test.tsx 14:15  < 
+3        → control-flow/for-header-parts.test.tsx 14:18 3
+;)       → control-flow/for-header-parts.test.tsx 14:19 ;…
+{        → control-flow/for-header-parts.test.tsx 14:23 {
+seen     → control-flow/for-header-parts.test.tsx 15:9 seen
+ =       → control-flow/for-header-parts.test.tsx 15:13  = 
+seen     → control-flow/for-header-parts.test.tsx 15:16 seen
+ +       → control-flow/for-header-parts.test.tsx 15:20  + 
+i        → control-flow/for-header-parts.test.tsx 15:23 i
+;        → control-flow/for-header-parts.test.tsx 15:24 ;
+i        → control-flow/for-header-parts.test.tsx 16:9 i
+ =       → control-flow/for-header-parts.test.tsx 16:10  = 
+i        → control-flow/for-header-parts.test.tsx 16:13 i
+ +       → control-flow/for-header-parts.test.tsx 16:14  + 
+1        → control-flow/for-header-parts.test.tsx 16:17 1
+;        → control-flow/for-header-parts.test.tsx 16:18 ;
+}        → control-flow/for-header-parts.test.tsx 17:7 }
+return   → control-flow/for-header-parts.test.tsx 18:7 return 
+seen     → control-flow/for-header-parts.test.tsx 18:14 seen
+;        → control-flow/for-header-parts.test.tsx 18:18 ;
+}        → control-flow/for-header-parts.test.tsx 19:5 }
+;        → control-flow/for-header-parts.test.tsx 19:6 `,…

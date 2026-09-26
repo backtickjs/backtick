@@ -1,0 +1,66 @@
+(        → expressions/step.test.tsx 12:8 {…
+) => {   → expressions/step.test.tsx 12:8 {…
+let      → expressions/step.test.tsx 13:7 let 
+total    → expressions/step.test.tsx 13:11 total
+ =       → expressions/step.test.tsx 13:16  = 
+0        → expressions/step.test.tsx 13:19 0
+;        → expressions/step.test.tsx 13:20 ;
+for (    → expressions/step.test.tsx 14:7 for (
+let      → expressions/step.test.tsx 14:12 let 
+i        → expressions/step.test.tsx 14:16 i
+ =       → expressions/step.test.tsx 14:17  = 
+0        → expressions/step.test.tsx 14:20 0
+;        → expressions/step.test.tsx 14:21 ; 
+i        → expressions/step.test.tsx 14:23 i
+ <       → expressions/step.test.tsx 14:24  < 
+3        → expressions/step.test.tsx 14:27 3
+;        → expressions/step.test.tsx 14:28 ; 
+i        → expressions/step.test.tsx 14:30 i
+++       → expressions/step.test.tsx 14:31 ++
+)        → expressions/step.test.tsx 14:33 ) 
+{        → expressions/step.test.tsx 14:35 {
+total    → expressions/step.test.tsx 15:9 total
+ =       → expressions/step.test.tsx 15:14  = 
+total    → expressions/step.test.tsx 15:17 total
+ +       → expressions/step.test.tsx 15:22  + 
+i        → expressions/step.test.tsx 15:25 i
+;        → expressions/step.test.tsx 15:26 ;
+}        → expressions/step.test.tsx 16:7 }
+let      → expressions/step.test.tsx 17:7 let 
+n        → expressions/step.test.tsx 17:11 n
+ =       → expressions/step.test.tsx 17:12  = 
+0.1      → expressions/step.test.tsx 17:15 0.1
+;        → expressions/step.test.tsx 17:18 ;
+const    → expressions/step.test.tsx 18:7 const 
+before   → expressions/step.test.tsx 18:13 before
+ =       → expressions/step.test.tsx 18:19  = 
+n        → expressions/step.test.tsx 18:22 n
+++       → expressions/step.test.tsx 18:23 ++
+;        → expressions/step.test.tsx 18:25 ;
+const    → expressions/step.test.tsx 19:7 const 
+after    → expressions/step.test.tsx 19:13 after
+ =       → expressions/step.test.tsx 19:18  = 
+++       → expressions/step.test.tsx 19:21 ++
+n        → expressions/step.test.tsx 19:23 n
+;        → expressions/step.test.tsx 19:24 ;
+const    → expressions/step.test.tsx 20:7 const 
+down     → expressions/step.test.tsx 20:13 down
+ =       → expressions/step.test.tsx 20:17  = 
+n        → expressions/step.test.tsx 20:20 n
+--       → expressions/step.test.tsx 20:21 --
+;        → expressions/step.test.tsx 20:23 ;
+return   → expressions/step.test.tsx 21:7 return 
+[        → expressions/step.test.tsx 21:14 [
+total    → expressions/step.test.tsx 21:15 total
+,        → expressions/step.test.tsx 21:20 , 
+before   → expressions/step.test.tsx 21:22 before
+,        → expressions/step.test.tsx 21:28 , 
+after    → expressions/step.test.tsx 21:30 after
+,        → expressions/step.test.tsx 21:35 , 
+down     → expressions/step.test.tsx 21:37 down
+,        → expressions/step.test.tsx 21:41 , 
+n        → expressions/step.test.tsx 21:43 n
+]        → expressions/step.test.tsx 21:44 ]
+;        → expressions/step.test.tsx 21:45 ;
+}        → expressions/step.test.tsx 22:5 }
+;        → expressions/step.test.tsx 22:6 `,…

@@ -1,0 +1,102 @@
+(           → stdlib/string-members-es2017.test.tsx 12:8 {…
+) => {      → stdlib/string-members-es2017.test.tsx 12:8 {…
+const       → stdlib/string-members-es2017.test.tsx 13:7 const 
+word        → stdlib/string-members-es2017.test.tsx 13:13 word
+ =          → stdlib/string-members-es2017.test.tsx 13:17  = 
+"ab"        → stdlib/string-members-es2017.test.tsx 13:20 "ab"
+;           → stdlib/string-members-es2017.test.tsx 13:24 ;
+return      → stdlib/string-members-es2017.test.tsx 14:7 return 
+{           → stdlib/string-members-es2017.test.tsx 14:14 {
+padded      → stdlib/string-members-es2017.test.tsx 15:9 padded
+:           → stdlib/string-members-es2017.test.tsx 15:15 : 
+word        → stdlib/string-members-es2017.test.tsx 15:17 word
+.           → stdlib/string-members-es2017.test.tsx 15:21 .
+padStart    → stdlib/string-members-es2017.test.tsx 15:22 padStart
+(           → stdlib/string-members-es2017.test.tsx 15:30 (
+4           → stdlib/string-members-es2017.test.tsx 15:31 4
+)           → stdlib/string-members-es2017.test.tsx 15:32 )
+ +          → stdlib/string-members-es2017.test.tsx 15:33  + 
+"|"         → stdlib/string-members-es2017.test.tsx 15:36 "|"
+ +          → stdlib/string-members-es2017.test.tsx 15:39  + 
+word        → stdlib/string-members-es2017.test.tsx 15:42 word
+.           → stdlib/string-members-es2017.test.tsx 15:46 .
+padEnd      → stdlib/string-members-es2017.test.tsx 15:47 padEnd
+(           → stdlib/string-members-es2017.test.tsx 15:53 (
+5           → stdlib/string-members-es2017.test.tsx 15:54 5
+,           → stdlib/string-members-es2017.test.tsx 15:55 , 
+"-="        → stdlib/string-members-es2017.test.tsx 15:57 "-="
+)           → stdlib/string-members-es2017.test.tsx 15:61 )
+,           → stdlib/string-members-es2017.test.tsx 15:62 ,
+trimmed     → stdlib/string-members-es2017.test.tsx 16:9 trimmed
+:           → stdlib/string-members-es2017.test.tsx 16:16 : 
+"  x  "     → stdlib/string-members-es2017.test.tsx 16:18 "  x  "
+.           → stdlib/string-members-es2017.test.tsx 16:25 .
+trimStart   → stdlib/string-members-es2017.test.tsx 16:26 trimStart
+()          → stdlib/string-members-es2017.test.tsx 16:35 ()
+ +          → stdlib/string-members-es2017.test.tsx 16:37  + 
+"|"         → stdlib/string-members-es2017.test.tsx 16:40 "|"
+ +          → stdlib/string-members-es2017.test.tsx 16:43  + 
+"  x  "     → stdlib/string-members-es2017.test.tsx 16:46 "  x  "
+.           → stdlib/string-members-es2017.test.tsx 16:53 .
+trimEnd     → stdlib/string-members-es2017.test.tsx 16:54 trimEnd
+()          → stdlib/string-members-es2017.test.tsx 16:61 ()
+ +          → stdlib/string-members-es2017.test.tsx 16:63  + 
+"|"         → stdlib/string-members-es2017.test.tsx 16:66 "|"
+,           → stdlib/string-members-es2017.test.tsx 16:69 ,
+at          → stdlib/string-members-es2017.test.tsx 17:9 at
+:           → stdlib/string-members-es2017.test.tsx 17:11 : 
+[           → stdlib/string-members-es2017.test.tsx 17:13 [
+word        → stdlib/string-members-es2017.test.tsx 17:14 word
+.           → stdlib/string-members-es2017.test.tsx 17:18 .
+at          → stdlib/string-members-es2017.test.tsx 17:19 at
+(           → stdlib/string-members-es2017.test.tsx 17:21 (
+0           → stdlib/string-members-es2017.test.tsx 17:22 0
+)           → stdlib/string-members-es2017.test.tsx 17:23 )
+,           → stdlib/string-members-es2017.test.tsx 17:24 , 
+word        → stdlib/string-members-es2017.test.tsx 17:26 word
+.           → stdlib/string-members-es2017.test.tsx 17:30 .
+at          → stdlib/string-members-es2017.test.tsx 17:31 at
+(           → stdlib/string-members-es2017.test.tsx 17:33 (
+-           → stdlib/string-members-es2017.test.tsx 17:34 -
+1           → stdlib/string-members-es2017.test.tsx 17:35 1
+)           → stdlib/string-members-es2017.test.tsx 17:36 )
+,           → stdlib/string-members-es2017.test.tsx 17:37 , 
+word        → stdlib/string-members-es2017.test.tsx 17:39 word
+.           → stdlib/string-members-es2017.test.tsx 17:43 .
+at          → stdlib/string-members-es2017.test.tsx 17:44 at
+(           → stdlib/string-members-es2017.test.tsx 17:46 (
+5           → stdlib/string-members-es2017.test.tsx 17:47 5
+)           → stdlib/string-members-es2017.test.tsx 17:48 )
+]           → stdlib/string-members-es2017.test.tsx 17:49 ]
+,           → stdlib/string-members-es2017.test.tsx 17:50 ,
+replaced    → stdlib/string-members-es2017.test.tsx 18:9 replaced
+:           → stdlib/string-members-es2017.test.tsx 18:17 : 
+"a.b.c"     → stdlib/string-members-es2017.test.tsx 18:19 "a.b.c"
+.           → stdlib/string-members-es2017.test.tsx 18:26 .
+replaceAll  → stdlib/string-members-es2017.test.tsx 18:27 replaceAll
+(           → stdlib/string-members-es2017.test.tsx 18:37 (
+"."         → stdlib/string-members-es2017.test.tsx 18:38 "."
+,           → stdlib/string-members-es2017.test.tsx 18:41 , 
+"/"         → stdlib/string-members-es2017.test.tsx 18:43 "/"
+)           → stdlib/string-members-es2017.test.tsx 18:46 )
+,           → stdlib/string-members-es2017.test.tsx 18:47 ,
+replacedBy  → stdlib/string-members-es2017.test.tsx 19:9 replacedBy
+:           → stdlib/string-members-es2017.test.tsx 19:19 : 
+"a.b"       → stdlib/string-members-es2017.test.tsx 19:21 "a.b"
+.           → stdlib/string-members-es2017.test.tsx 19:26 .
+replaceAll  → stdlib/string-members-es2017.test.tsx 19:27 replaceAll
+(           → stdlib/string-members-es2017.test.tsx 19:37 (
+"."         → stdlib/string-members-es2017.test.tsx 19:38 "."
+,           → stdlib/string-members-es2017.test.tsx 19:41 , 
+(           → stdlib/string-members-es2017.test.tsx 19:43 (
+found       → stdlib/string-members-es2017.test.tsx 19:44 found
+,           → stdlib/string-members-es2017.test.tsx 19:49 , 
+offset      → stdlib/string-members-es2017.test.tsx 19:51 offset
+) =>        → stdlib/string-members-es2017.test.tsx 19:57 ) => 
+""          → stdlib/string-members-es2017.test.tsx 19:62 ""
+ +          → stdlib/string-members-es2017.test.tsx 19:64  + 
+offset      → stdlib/string-members-es2017.test.tsx 19:67 offset
+)           → stdlib/string-members-es2017.test.tsx 19:73 )
+;           → stdlib/string-members-es2017.test.tsx 20:8 ;
+}           → stdlib/string-members-es2017.test.tsx 21:5 }
+;           → stdlib/string-members-es2017.test.tsx 21:6 `,…

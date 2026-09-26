@@ -13,7 +13,7 @@ async function ScriptRows() {
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     {
       code: "export default ($0) => (label) => {\n    return { label: $0()(label) };\n};",
-      map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAUmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
+      map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAUmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
     },
   );
   return _jsx("span", {
@@ -22,7 +22,7 @@ async function ScriptRows() {
       { params: [] },
       {
         code: 'export default () => "font-size: 16px";',
-        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAgBgB,MAAA,iBAAiB"}',
+        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAgBgB,MAAA,iBAAiB"}',
       },
     ),
     onclick: cs.create(
@@ -30,7 +30,7 @@ async function ScriptRows() {
       { params: [{ kind: "splice", value: build, bindings: [] }] },
       {
         code: 'export default ($0) => () => {\n    const row = $0()("one");\n    row.label[1](row.label[0]() + " !!!");\n};',
-        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAiBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
+        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAiBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
       },
     ),
     children: cs.create(
@@ -38,7 +38,7 @@ async function ScriptRows() {
       { params: [{ kind: "splice", value: build, bindings: [] }] },
       {
         code: 'export default ($0) => $0()("one").label[0]();',
-        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["script-state.test.tsx"],"names":[],"mappings":"eAsBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
+        map: '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"eAsBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
       },
     ),
   });

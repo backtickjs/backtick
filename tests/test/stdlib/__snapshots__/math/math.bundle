@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   const rounded =
     Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
   const edges =
@@ -23,4 +23,4 @@ const f1 = () => {
     (Math.E > 2.71)
   );
 };
-export default () => f1();
+export default () => $f1();

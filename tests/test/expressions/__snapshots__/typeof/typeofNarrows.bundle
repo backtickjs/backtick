@@ -1,5 +1,5 @@
-const f1 = () => {
+const $f1 = () => {
   const measure = (v) => (typeof v === "string" ? v.length : v * 2);
   return [measure("abc"), measure(4)];
 };
-export default () => f1();
+export default () => $f1();

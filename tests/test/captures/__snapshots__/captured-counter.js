@@ -12,7 +12,7 @@ it("capturedCounter", async (t) => {
       { params: [] },
       {
         code: "export default () => {\n    let count = 0;\n    const bump = () => {\n        count = count + 1;\n        return count;\n    };\n    return bump() + bump();\n};",
-        map: '{"version":3,"file":"captured-counter.test.jsx","sourceRoot":"","sources":["captured-counter.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,MAAM,IAAI,GAAG,GAAG,EAAE;QAChB,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;QAClB,OAAO,KAAK,CAAC;IACf,CAAC,CAAC;IACF,OAAO,IAAI,EAAE,GAAG,IAAI,EAAE,CAAC;AACzB,CAAC"}',
+        map: '{"version":3,"file":"captured-counter.test.jsx","sourceRoot":"","sources":["captures/captured-counter.test.tsx"],"names":[],"mappings":"eAUO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,MAAM,IAAI,GAAG,GAAG,EAAE;QAChB,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;QAClB,OAAO,KAAK,CAAC;IACf,CAAC,CAAC;IACF,OAAO,IAAI,EAAE,GAAG,IAAI,EAAE,CAAC;AACzB,CAAC"}',
       },
     ),
   );

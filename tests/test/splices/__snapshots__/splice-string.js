@@ -13,7 +13,7 @@ it("spliceString", async (t) => {
       { params: [{ kind: "splice", value: value, bindings: [] }] },
       {
         code: "export default ($0) => $0();",
-        map: '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splice-string.test.tsx"],"names":[],"mappings":"eAS2C,QAAA,IAAM"}',
+        map: '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splices/splice-string.test.tsx"],"names":[],"mappings":"eAS2C,QAAA,IAAM"}',
       },
     ),
   );

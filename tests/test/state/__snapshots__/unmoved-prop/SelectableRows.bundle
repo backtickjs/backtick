@@ -10,7 +10,7 @@ import { createSignal as $i0 } from "solid-js";
 import { createSelector as $i1 } from "solid-js";
 import { For as $i2 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1, $2) => {
+const $f1 = ($0, $1, $2) => {
   const selected = $0()(0);
   const isSelected = $1()(selected[0]);
   return (() => {
@@ -43,7 +43,7 @@ const f1 = ($0, $1, $2) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         () => $i1,
         ($0) =>

@@ -12,7 +12,7 @@ it("reservedKeyScript", async (t) => {
       { params: [] },
       {
         code: 'export default () => ({ "#": "value" });',
-        map: '{"version":3,"file":"reserved-key-script.test.jsx","sourceRoot":"","sources":["reserved-key-script.test.tsx"],"names":[],"mappings":"eAOgD,MAAA,CAAC,EAAE,GAAG,EAAE,OAAO,EAAE,CAAC"}',
+        map: '{"version":3,"file":"reserved-key-script.test.jsx","sourceRoot":"","sources":["objects/reserved-key-script.test.tsx"],"names":[],"mappings":"eAOgD,MAAA,CAAC,EAAE,GAAG,EAAE,OAAO,EAAE,CAAC"}',
       },
     ),
   );

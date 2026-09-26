@@ -11,7 +11,7 @@ function make(n) {
     { params: [{ kind: "splice", value: n, bindings: [] }] },
     {
       code: "export default ($0) => () => $0();",
-      map: '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"eAQY,QAAA,GAAG,EAAE,CAAC,IAAE"}',
+      map: '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx/jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"eAQY,QAAA,GAAG,EAAE,CAAC,IAAE"}',
     },
   );
 }

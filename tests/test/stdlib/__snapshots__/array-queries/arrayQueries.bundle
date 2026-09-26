@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   const coins = [1, 2, 3, 4];
   return {
     at: [coins.at(0), coins.at(-1), coins.at(9)],
@@ -11,4 +11,4 @@ const f1 = () => {
     unchanged: coins,
   };
 };
-export default () => f1();
+export default () => $f1();

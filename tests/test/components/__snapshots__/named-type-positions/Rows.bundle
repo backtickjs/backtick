@@ -7,7 +7,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>add</span><div>`),
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1) => {
+const $f1 = ($0, $1) => {
   const rows = $0()([]);
   const add = (row) => {
     rows[1]([row]);
@@ -44,7 +44,7 @@ const f1 = ($0, $1) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         ($0) =>
           _$createComponent($i1, {

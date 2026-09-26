@@ -8,7 +8,7 @@ const beep = cs.create(
   { params: [] },
   {
     code: "export default () => {\n    let n = 0;\n    n = 1;\n};",
-    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"eAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
   },
 );
 const onTap = cs.create(
@@ -16,7 +16,7 @@ const onTap = cs.create(
   { params: [{ kind: "splice", value: beep, bindings: [] }] },
   {
     code: "export default ($0) => (id) => {\n    $0();\n};",
-    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
+    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"eAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
   },
 );
 it("handlerObject", async (t) => {
@@ -28,7 +28,7 @@ it("handlerObject", async (t) => {
       { params: [{ kind: "splice", value: onTap, bindings: [] }] },
       {
         code: "export default ($0) => {\n    const handlers = {\n        tap: $0(),\n        hold: $0(),\n    };\n    return handlers;\n};",
-        map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
+        map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"eAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
       },
     ),
   );

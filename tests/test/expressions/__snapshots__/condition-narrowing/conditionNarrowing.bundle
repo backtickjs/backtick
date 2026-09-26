@@ -1,10 +1,10 @@
-const f1 = ($0) => ({
+const $f1 = ($0) => ({
   missing: $0()(null, true),
   loud: $0()("!hi", true),
   quiet: $0()("!hi", false),
   plain: $0()("zz", false),
 });
-const f2 = ($0) => (text, upper) => {
+const $f2 = ($0) => (text, upper) => {
   if (upper && text !== null) {
     return text.toUpperCase();
   }
@@ -13,5 +13,5 @@ const f2 = ($0) => (text, upper) => {
   }
   return "none";
 };
-const f3 = () => true;
-export default () => f1(() => f2(f3));
+const $f3 = () => true;
+export default () => $f1(() => $f2($f3));

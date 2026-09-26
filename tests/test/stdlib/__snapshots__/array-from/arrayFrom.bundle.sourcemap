@@ -1,0 +1,99 @@
+(          → stdlib/array-from.test.tsx 16:8 {…
+) => {     → stdlib/array-from.test.tsx 16:8 {…
+const      → stdlib/array-from.test.tsx 17:7 const 
+doubled    → stdlib/array-from.test.tsx 17:13 doubled
+ =         → stdlib/array-from.test.tsx 17:20  = 
+Array      → stdlib/array-from.test.tsx 17:23 Array
+.          → stdlib/array-from.test.tsx 17:28 .
+from       → stdlib/array-from.test.tsx 17:29 from
+(          → stdlib/array-from.test.tsx 17:33 (
+{          → stdlib/array-from.test.tsx 17:34 {
+length     → stdlib/array-from.test.tsx 17:36 length
+:          → stdlib/array-from.test.tsx 17:42 : 
+4          → stdlib/array-from.test.tsx 17:44 4
+}          → stdlib/array-from.test.tsx 17:45  },…
+,          → stdlib/array-from.test.tsx 17:47 , 
+(          → stdlib/array-from.test.tsx 17:49 (
+_          → stdlib/array-from.test.tsx 17:50 _
+,          → stdlib/array-from.test.tsx 17:51 , 
+index      → stdlib/array-from.test.tsx 17:53 index
+) =>       → stdlib/array-from.test.tsx 17:58 ) => 
+index      → stdlib/array-from.test.tsx 17:63 index
+ *         → stdlib/array-from.test.tsx 17:68  * 
+2          → stdlib/array-from.test.tsx 17:71 2
+)          → stdlib/array-from.test.tsx 17:72 )
+;          → stdlib/array-from.test.tsx 17:73 ;
+const      → stdlib/array-from.test.tsx 18:7 const 
+empty      → stdlib/array-from.test.tsx 18:13 empty
+ =         → stdlib/array-from.test.tsx 18:18  = 
+Array      → stdlib/array-from.test.tsx 18:21 Array
+.          → stdlib/array-from.test.tsx 18:26 .
+from       → stdlib/array-from.test.tsx 18:27 from
+(          → stdlib/array-from.test.tsx 18:31 (
+{          → stdlib/array-from.test.tsx 18:32 {
+length     → stdlib/array-from.test.tsx 18:34 length
+:          → stdlib/array-from.test.tsx 18:40 : 
+0          → stdlib/array-from.test.tsx 18:42 0
+}          → stdlib/array-from.test.tsx 18:43  },…
+,          → stdlib/array-from.test.tsx 18:45 , 
+(          → stdlib/array-from.test.tsx 18:47 (
+_          → stdlib/array-from.test.tsx 18:48 _
+,          → stdlib/array-from.test.tsx 18:49 , 
+index      → stdlib/array-from.test.tsx 18:51 index
+) =>       → stdlib/array-from.test.tsx 18:56 ) => 
+index      → stdlib/array-from.test.tsx 18:61 index
+)          → stdlib/array-from.test.tsx 18:66 )
+;          → stdlib/array-from.test.tsx 18:67 ;
+const      → stdlib/array-from.test.tsx 19:7 const 
+absent     → stdlib/array-from.test.tsx 19:13 absent
+ =         → stdlib/array-from.test.tsx 19:19  = 
+Array      → stdlib/array-from.test.tsx 19:22 Array
+.          → stdlib/array-from.test.tsx 19:27 .
+from       → stdlib/array-from.test.tsx 19:28 from
+(          → stdlib/array-from.test.tsx 19:32 (
+{          → stdlib/array-from.test.tsx 19:33 {
+length     → stdlib/array-from.test.tsx 19:35 length
+:          → stdlib/array-from.test.tsx 19:41 : 
+2          → stdlib/array-from.test.tsx 19:43 2
+}          → stdlib/array-from.test.tsx 19:44  },…
+,          → stdlib/array-from.test.tsx 19:46 , 
+(          → stdlib/array-from.test.tsx 19:48 (
+value      → stdlib/array-from.test.tsx 19:49 value
+,          → stdlib/array-from.test.tsx 19:54 , 
+index      → stdlib/array-from.test.tsx 19:56 index
+) =>       → stdlib/array-from.test.tsx 19:61 )…
+value      → stdlib/array-from.test.tsx 20:9 value
+ ===       → stdlib/array-from.test.tsx 20:14  === 
+undefined  → stdlib/array-from.test.tsx 20:19 undefined
+ ?         → stdlib/array-from.test.tsx 20:28  ? 
+index      → stdlib/array-from.test.tsx 20:31 index
+ :         → stdlib/array-from.test.tsx 20:36  : 
+-          → stdlib/array-from.test.tsx 20:39 -
+1          → stdlib/array-from.test.tsx 20:40 1
+)          → stdlib/array-from.test.tsx 20:41 ,…
+;          → stdlib/array-from.test.tsx 21:8 ;
+return     → stdlib/array-from.test.tsx 22:7 return 
+doubled    → stdlib/array-from.test.tsx 22:14 doubled
+.          → stdlib/array-from.test.tsx 22:21 .
+join       → stdlib/array-from.test.tsx 22:22 join
+(          → stdlib/array-from.test.tsx 22:26 (
+","        → stdlib/array-from.test.tsx 22:27 ","
+)          → stdlib/array-from.test.tsx 22:30 )
+ +         → stdlib/array-from.test.tsx 22:31  + 
+"|"        → stdlib/array-from.test.tsx 22:34 "|"
+ +         → stdlib/array-from.test.tsx 22:37  + 
+empty      → stdlib/array-from.test.tsx 22:40 empty
+.          → stdlib/array-from.test.tsx 22:45 .
+length     → stdlib/array-from.test.tsx 22:46 length
+ +         → stdlib/array-from.test.tsx 22:52  + 
+"|"        → stdlib/array-from.test.tsx 22:55 "|"
+ +         → stdlib/array-from.test.tsx 22:58  + 
+absent     → stdlib/array-from.test.tsx 22:61 absent
+.          → stdlib/array-from.test.tsx 22:67 .
+join       → stdlib/array-from.test.tsx 22:68 join
+(          → stdlib/array-from.test.tsx 22:72 (
+","        → stdlib/array-from.test.tsx 22:73 ","
+)          → stdlib/array-from.test.tsx 22:76 )
+;          → stdlib/array-from.test.tsx 22:77 ;
+}          → stdlib/array-from.test.tsx 23:5 }
+;          → stdlib/array-from.test.tsx 23:6 `,…

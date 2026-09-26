@@ -29,7 +29,7 @@ const ReadingRow = async ({ id, selected }) =>
           },
           {
             code: 'export default ($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";',
-            map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA4BgB,YAAA,aAAa,GAAG,CAAC,IAAS,CAAC,CAAC,CAAC,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
+            map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"eA4BgB,YAAA,aAAa,GAAG,CAAC,IAAS,CAAC,CAAC,CAAC,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
           },
         ),
         children: cs.create(
@@ -42,7 +42,7 @@ const ReadingRow = async ({ id, selected }) =>
           },
           {
             code: 'export default ($0, $1) => "row " + $0() + " of " + $1()[0]();',
-            map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eA8BU,YAAA,MAAM,GAAG,IAAG,GAAG,MAAM,GAAG,IAAS,CAAC,CAAC,CAAC,EAAE"}',
+            map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"eA8BU,YAAA,MAAM,GAAG,IAAG,GAAG,MAAM,GAAG,IAAS,CAAC,CAAC,CAAC,EAAE"}',
           },
         ),
       }),
@@ -61,7 +61,7 @@ const ReadingRow = async ({ id, selected }) =>
         },
         {
           code: "export default ($0, $1, $2) => $0()[0]() === $1() ? $2() : null;",
-          map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eAgCQ,gBAAA,IAAS,CAAC,CAAC,CAAC,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,IAAC,CAAwB,CAAC,CAAC,IAAI"}',
+          map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"eAgCQ,gBAAA,IAAS,CAAC,CAAC,CAAC,EAAE,KAAK,IAAG,CAAC,CAAC,CAAC,IAAC,CAAwB,CAAC,CAAC,IAAI"}',
         },
       ),
     ],
@@ -77,7 +77,7 @@ async function ReadingPanel() {
     },
     {
       code: "export default ($0, $1) => {\n    const selected = $0()(0);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        <$1 id={0} selected={selected}/>\n        <$1 id={1} selected={selected}/>\n      </div>);\n};",
-      map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["local-state-child-reads.test.tsx"],"names":[],"mappings":"eAqCY;IACR,MAAM,QAAQ,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      map: '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"eAqCY;IACR,MAAM,QAAQ,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,EAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     },
   );
 }

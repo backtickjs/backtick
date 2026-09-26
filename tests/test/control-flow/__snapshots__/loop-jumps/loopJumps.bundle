@@ -1,4 +1,4 @@
-const f1 = () => {
+const $f1 = () => {
   let out = "";
   for (let i = 0; i < 5; i = i + 1) {
     if (i === 1) {
@@ -14,4 +14,4 @@ const f1 = () => {
   }
   return out;
 };
-export default () => f1();
+export default () => $f1();

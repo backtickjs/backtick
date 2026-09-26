@@ -35,7 +35,7 @@ it("splicedLiteralWidens", async (t) => {
       },
       {
         code: "export default ($0, $1, $2, $3) => {\n    const n = $0()($1());\n    n[1](6);\n    const c = $0()($2());\n    c[1]($3());\n};",
-        map: '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["spliced-literal-widens.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,IAAK,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,IAAC,CAAY,CAAC;IACtC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAC,CAAa,CAAC;AACtB,CAAC"}',
+        map: '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["splices/spliced-literal-widens.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,IAAK,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,IAAC,CAAY,CAAC;IACtC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAC,CAAa,CAAC;AACtB,CAAC"}',
       },
     ),
   );

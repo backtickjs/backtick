@@ -198,5 +198,9 @@ export function emitScript(
   });
   // Without the comment naming a map file.
   const code = output.outputText.replace(/\n\/\/# sourceMappingURL=.*$/, "");
-  return { code, map: output.sourceMapText ?? "" };
+  // Named as the host file was, not relative to an output file there is none
+  // of, so maps from files in different directories can be combined.
+  const map = JSON.parse(output.sourceMapText!) as { sources: string[] };
+  map.sources = [sourceFile.fileName];
+  return { code, map: JSON.stringify(map) };
 }

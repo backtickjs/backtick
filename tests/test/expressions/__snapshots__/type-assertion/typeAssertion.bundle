@@ -1,5 +1,5 @@
-const f1 = ($0) => {
+const $f1 = ($0) => {
   const page = JSON.parse($0());
   return page.rows[0] + " of " + page.count;
 };
-export default () => f1(() => '{"rows":["one","two"],"count":2}');
+export default () => $f1(() => '{"rows":["one","two"],"count":2}');

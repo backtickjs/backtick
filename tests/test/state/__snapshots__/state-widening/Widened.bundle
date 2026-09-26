@@ -5,7 +5,7 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1, $2) => {
+const $f1 = ($0, $1, $2) => {
   const flag = $0()(true);
   const tone = $0()($1());
   const step = $0()(() => 0);
@@ -23,7 +23,7 @@ const f1 = ($0, $1, $2) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         () => "warm",
         () => "cool",

@@ -1,0 +1,33 @@
+(                        → control-flow/try-catch.test.tsx 9:8 {…
+) => {                   → control-flow/try-catch.test.tsx 9:8 {…
+const                    → control-flow/try-catch.test.tsx 10:7 const 
+message                  → control-flow/try-catch.test.tsx 10:13 message
+ =                       → control-flow/try-catch.test.tsx 10:20  = 
+"boom"                   → control-flow/try-catch.test.tsx 10:23 "boom"
+;                        → control-flow/try-catch.test.tsx 10:29 ;
+try                      → control-flow/try-catch.test.tsx 11:7 try 
+{                        → control-flow/try-catch.test.tsx 11:11 {
+throw                    → control-flow/try-catch.test.tsx 12:9 throw 
+message                  → control-flow/try-catch.test.tsx 12:15 message
+;                        → control-flow/try-catch.test.tsx 12:22 ;
+}                        → control-flow/try-catch.test.tsx 13:7 }
+catch (                  → control-flow/try-catch.test.tsx 13:9 catch (
+error                    → control-flow/try-catch.test.tsx 13:16 error
+)                        → control-flow/try-catch.test.tsx 13:21 ) 
+{                        → control-flow/try-catch.test.tsx 13:23 {
+if (                     → control-flow/try-catch.test.tsx 14:9 if (
+error                    → control-flow/try-catch.test.tsx 14:13 error
+ ===                     → control-flow/try-catch.test.tsx 14:18  === 
+message                  → control-flow/try-catch.test.tsx 14:23 message
+)                        → control-flow/try-catch.test.tsx 14:30 ) 
+{                        → control-flow/try-catch.test.tsx 14:32 {
+return                   → control-flow/try-catch.test.tsx 15:11 return 
+"caught boom"            → control-flow/try-catch.test.tsx 15:18 "caught boom"
+;                        → control-flow/try-catch.test.tsx 15:31 ;
+}                        → control-flow/try-catch.test.tsx 16:9 }
+return                   → control-flow/try-catch.test.tsx 17:9 return 
+"caught something else"  → control-flow/try-catch.test.tsx 17:16 "caught something else"
+;                        → control-flow/try-catch.test.tsx 17:39 ;
+}                        → control-flow/try-catch.test.tsx 18:7 }
+}                        → control-flow/try-catch.test.tsx 19:5 }
+;                        → control-flow/try-catch.test.tsx 19:6 `,…

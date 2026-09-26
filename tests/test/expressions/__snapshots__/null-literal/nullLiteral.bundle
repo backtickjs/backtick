@@ -1,12 +1,12 @@
-const f1 = ($0) => ({
+const $f1 = ($0) => ({
   missing: $0()(null),
   present: $0()("hi"),
   bare: null,
 });
-const f2 = () => (value) => {
+const $f2 = () => (value) => {
   if (value === null) {
     return "-";
   }
   return value;
 };
-export default () => f1(f2);
+export default () => $f1($f2);

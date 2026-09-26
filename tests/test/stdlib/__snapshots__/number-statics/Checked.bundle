@@ -3,7 +3,7 @@ import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 const $Script = (props) => props.run();
-const f1 = () => {
+const $f1 = () => {
   const positive = Number.EPSILON > 0;
   const largest = Number.MAX_VALUE > 1e308;
   const safe =
@@ -36,5 +36,5 @@ const f1 = () => {
 };
 export default () =>
   _$createComponent($Script, {
-    run: () => f1(),
+    run: () => $f1(),
   });

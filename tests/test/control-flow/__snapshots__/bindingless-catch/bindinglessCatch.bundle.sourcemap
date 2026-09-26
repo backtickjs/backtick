@@ -1,0 +1,16 @@
+(         → control-flow/bindingless-catch.test.tsx 11:8 {…
+) => {    → control-flow/bindingless-catch.test.tsx 11:8 {…
+try       → control-flow/bindingless-catch.test.tsx 12:7 try 
+{         → control-flow/bindingless-catch.test.tsx 12:11 {
+throw     → control-flow/bindingless-catch.test.tsx 13:9 throw 
+"boom"    → control-flow/bindingless-catch.test.tsx 13:15 "boom"
+;         → control-flow/bindingless-catch.test.tsx 13:21 ;
+}         → control-flow/bindingless-catch.test.tsx 14:7 }
+catch     → control-flow/bindingless-catch.test.tsx 14:9 catch 
+{         → control-flow/bindingless-catch.test.tsx 14:15 {
+return    → control-flow/bindingless-catch.test.tsx 15:9 return 
+"caught"  → control-flow/bindingless-catch.test.tsx 15:16 "caught"
+;         → control-flow/bindingless-catch.test.tsx 15:24 ;
+}         → control-flow/bindingless-catch.test.tsx 16:7 }
+}         → control-flow/bindingless-catch.test.tsx 17:5 }
+;         → control-flow/bindingless-catch.test.tsx 17:6 `,…

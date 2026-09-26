@@ -1,9 +1,9 @@
-const f1 = ($0) => {
+const $f1 = ($0) => {
   const names = ["zero", "one"];
   const missing = $0()["nowhere"] ?? "gone";
   return names[1] + "/" + missing;
 };
 export default () =>
-  f1(() => ({
+  $f1(() => ({
     here: "yes",
   }));

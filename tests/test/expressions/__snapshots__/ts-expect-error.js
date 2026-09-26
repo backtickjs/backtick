@@ -13,7 +13,7 @@ it("tsExpectError", async (t) => {
       { params: [] },
       {
         code: 'export default () => {\n    const count = "one";\n    return count;\n};',
-        map: '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["ts-expect-error.test.tsx"],"names":[],"mappings":"eAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC"}',
+        map: '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["expressions/ts-expect-error.test.tsx"],"names":[],"mappings":"eAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC"}',
       },
     ),
   );

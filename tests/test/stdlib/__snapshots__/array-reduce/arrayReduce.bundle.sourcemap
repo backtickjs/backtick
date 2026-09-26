@@ -1,0 +1,103 @@
+(        → stdlib/array-reduce.test.tsx 13:8 {…
+) => {   → stdlib/array-reduce.test.tsx 13:8 {…
+const    → stdlib/array-reduce.test.tsx 14:7 const 
+prices   → stdlib/array-reduce.test.tsx 14:13 prices
+ =       → stdlib/array-reduce.test.tsx 14:19  = 
+[        → stdlib/array-reduce.test.tsx 14:22 [
+4.5      → stdlib/array-reduce.test.tsx 14:23 4.5
+,        → stdlib/array-reduce.test.tsx 14:26 , 
+3.25     → stdlib/array-reduce.test.tsx 14:28 3.25
+,        → stdlib/array-reduce.test.tsx 14:32 , 
+2        → stdlib/array-reduce.test.tsx 14:34 2
+]        → stdlib/array-reduce.test.tsx 14:35 ]
+;        → stdlib/array-reduce.test.tsx 14:36 ;
+const    → stdlib/array-reduce.test.tsx 15:7 const 
+total    → stdlib/array-reduce.test.tsx 15:13 total
+ =       → stdlib/array-reduce.test.tsx 15:18  = 
+prices   → stdlib/array-reduce.test.tsx 15:21 prices
+.        → stdlib/array-reduce.test.tsx 15:27 .
+reduce   → stdlib/array-reduce.test.tsx 15:28 reduce
+(        → stdlib/array-reduce.test.tsx 15:34 (
+(        → stdlib/array-reduce.test.tsx 15:35 (
+sum      → stdlib/array-reduce.test.tsx 15:36 sum
+,        → stdlib/array-reduce.test.tsx 15:39 , 
+price    → stdlib/array-reduce.test.tsx 15:41 price
+) =>     → stdlib/array-reduce.test.tsx 15:46 ) => 
+sum      → stdlib/array-reduce.test.tsx 15:51 sum
+ +       → stdlib/array-reduce.test.tsx 15:54  + 
+price    → stdlib/array-reduce.test.tsx 15:57 price
+,        → stdlib/array-reduce.test.tsx 15:62 , 
+0        → stdlib/array-reduce.test.tsx 15:64 0
+)        → stdlib/array-reduce.test.tsx 15:65 )
+;        → stdlib/array-reduce.test.tsx 15:66 ;
+const    → stdlib/array-reduce.test.tsx 16:7 const 
+names    → stdlib/array-reduce.test.tsx 16:13 names
+ =       → stdlib/array-reduce.test.tsx 16:18  = 
+[        → stdlib/array-reduce.test.tsx 16:21 [
+"a"      → stdlib/array-reduce.test.tsx 16:22 "a"
+,        → stdlib/array-reduce.test.tsx 16:25 , 
+"b"      → stdlib/array-reduce.test.tsx 16:27 "b"
+,        → stdlib/array-reduce.test.tsx 16:30 , 
+"c"      → stdlib/array-reduce.test.tsx 16:32 "c"
+]        → stdlib/array-reduce.test.tsx 16:35 ]
+;        → stdlib/array-reduce.test.tsx 16:36 ;
+const    → stdlib/array-reduce.test.tsx 17:7 const 
+joined   → stdlib/array-reduce.test.tsx 17:13 joined
+ =       → stdlib/array-reduce.test.tsx 17:19  = 
+names    → stdlib/array-reduce.test.tsx 17:22 names
+.        → stdlib/array-reduce.test.tsx 17:27 .
+reduce   → stdlib/array-reduce.test.tsx 17:28 reduce
+(        → stdlib/array-reduce.test.tsx 17:34 (
+(        → stdlib/array-reduce.test.tsx 17:35 (
+all      → stdlib/array-reduce.test.tsx 17:36 all
+,        → stdlib/array-reduce.test.tsx 17:39 , 
+one      → stdlib/array-reduce.test.tsx 17:41 one
+,        → stdlib/array-reduce.test.tsx 17:44 , 
+index    → stdlib/array-reduce.test.tsx 17:46 index
+) =>     → stdlib/array-reduce.test.tsx 17:51 ) => 
+all      → stdlib/array-reduce.test.tsx 17:56 all
+ +       → stdlib/array-reduce.test.tsx 17:59  + 
+index    → stdlib/array-reduce.test.tsx 17:62 index
+ +       → stdlib/array-reduce.test.tsx 17:67  + 
+one      → stdlib/array-reduce.test.tsx 17:70 one
+,        → stdlib/array-reduce.test.tsx 17:73 , 
+""       → stdlib/array-reduce.test.tsx 17:75 ""
+)        → stdlib/array-reduce.test.tsx 17:77 )
+;        → stdlib/array-reduce.test.tsx 17:78 ;
+const    → stdlib/array-reduce.test.tsx 18:7 const 
+empty    → stdlib/array-reduce.test.tsx 18:13 empty
+ =       → stdlib/array-reduce.test.tsx 18:18 :…
+[]       → stdlib/array-reduce.test.tsx 18:31 []
+;        → stdlib/array-reduce.test.tsx 18:33 ;
+return   → stdlib/array-reduce.test.tsx 19:7 return 
+total    → stdlib/array-reduce.test.tsx 20:9 total
+.        → stdlib/array-reduce.test.tsx 20:14 .
+toFixed  → stdlib/array-reduce.test.tsx 20:15 toFixed
+(        → stdlib/array-reduce.test.tsx 20:22 (
+2        → stdlib/array-reduce.test.tsx 20:23 2
+)        → stdlib/array-reduce.test.tsx 20:24 )
+ +       → stdlib/array-reduce.test.tsx 20:25  +…
+"|"      → stdlib/array-reduce.test.tsx 21:9 "|"
+ +       → stdlib/array-reduce.test.tsx 21:12  +…
+joined   → stdlib/array-reduce.test.tsx 22:9 joined
+ +       → stdlib/array-reduce.test.tsx 22:15  +…
+"|"      → stdlib/array-reduce.test.tsx 23:9 "|"
+ +       → stdlib/array-reduce.test.tsx 23:12  +…
+empty    → stdlib/array-reduce.test.tsx 24:9 empty
+.        → stdlib/array-reduce.test.tsx 24:14 .
+reduce   → stdlib/array-reduce.test.tsx 24:15 reduce
+(        → stdlib/array-reduce.test.tsx 24:21 (
+(        → stdlib/array-reduce.test.tsx 24:22 (
+sum      → stdlib/array-reduce.test.tsx 24:23 sum
+,        → stdlib/array-reduce.test.tsx 24:26 , 
+one      → stdlib/array-reduce.test.tsx 24:28 one
+) =>     → stdlib/array-reduce.test.tsx 24:31 ) => 
+sum      → stdlib/array-reduce.test.tsx 24:36 sum
+ +       → stdlib/array-reduce.test.tsx 24:39  + 
+one      → stdlib/array-reduce.test.tsx 24:42 one
+,        → stdlib/array-reduce.test.tsx 24:45 , 
+0        → stdlib/array-reduce.test.tsx 24:47 0
+)        → stdlib/array-reduce.test.tsx 24:48 )
+;        → stdlib/array-reduce.test.tsx 24:49 …
+}        → stdlib/array-reduce.test.tsx 26:5 }
+;        → stdlib/array-reduce.test.tsx 26:6 `,…

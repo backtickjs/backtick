@@ -11,7 +11,7 @@ function add(lhs) {
     { params: [{ kind: "splice", value: lhs, bindings: [] }] },
     {
       code: "export default ($0) => $0() + 2;",
-      map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eASY,QAAA,IAAI,GAAG,CAAC"}',
+      map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"eASY,QAAA,IAAI,GAAG,CAAC"}',
     },
   );
 }
@@ -31,7 +31,7 @@ it("dollarName", async (t) => {
                 { params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }] },
                 {
                   code: "export default ($0) => $0;",
-                  map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAkBsB,QAAA,EAAI"}',
+                  map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"eAkBsB,QAAA,EAAI"}',
                 },
               ),
             ),
@@ -41,7 +41,7 @@ it("dollarName", async (t) => {
       },
       {
         code: "export default ($0) => {\n    const foo$ = 1;\n    return $0(foo$);\n};",
-        map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["dollar-name.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
+        map: '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,QAAC,CAAgB;AAC1B,CAAC"}',
       },
     ),
   );

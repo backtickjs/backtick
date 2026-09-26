@@ -1,7 +1,7 @@
-const f1 = () => (ready, count) => {
+const $f1 = () => (ready, count) => {
   if (!ready) {
     return "waiting";
   }
   return !(count > 3) ? "room left" : "full";
 };
-export default () => f1();
+export default () => $f1();

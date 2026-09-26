@@ -8,7 +8,7 @@ const make = (f) =>
     { params: [{ kind: "splice", value: f, bindings: [] }] },
     {
       code: "export default ($0) => {\n    return $0()(1)[0]();\n};",
-      map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAQK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;AACpB,CAAC"}',
+      map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["stdlib/builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAQK;IACD,OAAO,IAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;AACpB,CAAC"}',
     },
   );
 const wrapped = cs.create(
@@ -16,7 +16,7 @@ const wrapped = cs.create(
   { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
   {
     code: "export default ($0) => (n) => $0()(n + 10);",
-    map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAYmB,QAAA,CAAC,CAAS,EAAE,EAAE,CAAC,IAAa,CAAC,CAAC,GAAG,EAAE,CAAC"}',
+    map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["stdlib/builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAYmB,QAAA,CAAC,CAAS,EAAE,EAAE,CAAC,IAAa,CAAC,CAAC,GAAG,EAAE,CAAC"}',
   },
 );
 it("builtinHoleSharing", async (t) => {
@@ -33,7 +33,7 @@ it("builtinHoleSharing", async (t) => {
       },
       {
         code: "export default ($0, $1) => {\n    return $0() + $1();\n};",
-        map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAkBO;IACD,OAAO,IAAC,GAAuB,IAAC,CAAgB;AAClD,CAAC"}',
+        map: '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["stdlib/builtin-hole-sharing.test.tsx"],"names":[],"mappings":"eAkBO;IACD,OAAO,IAAC,GAAuB,IAAC,CAAgB;AAClD,CAAC"}',
       },
     ),
   );

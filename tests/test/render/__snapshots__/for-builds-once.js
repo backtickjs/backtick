@@ -29,7 +29,7 @@ async function WaitingList({ more }) {
     },
     {
       code: "export default ($0, $1, $2, $3, $4) => {\n    const items = $0()([]);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            items[1]($3());\n        }\n    }, 0);\n    return <$4 each={items[0]()}>{(item) => <em>{item}</em>}</$4>;\n};",
-      map: '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["for-builds-once.test.tsx"],"names":[],"mappings":"eAqBY;IACR,MAAM,KAAK,GAAG,IAAa,CAAW,EAAE,CAAC,CAAC;IAE1C,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAY,CAAC,CAAC;QACzB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAG,CAAC,CAAC;AAC1E,CAAC"}',
+      map: '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"eAqBY;IACR,MAAM,KAAK,GAAG,IAAa,CAAW,EAAE,CAAC,CAAC;IAE1C,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAY,CAAC,CAAC;QACzB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAG,CAAC,CAAC;AAC1E,CAAC"}',
     },
   );
 }
@@ -43,7 +43,7 @@ const forBuildsOnce = cs.create(
   },
   {
     code: 'export default ($0, $1) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked[0]()}</span>\n      <$1 more={() => {\n            asked[1](asked[0]() + 1);\n            return asked[0]() < 5;\n        }}/>\n    </div>);\n};',
-    map: '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["for-builds-once.test.tsx"],"names":[],"mappings":"eAkCyB;IACvB,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,EAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    map: '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"eAkCyB;IACvB,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,EAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
   },
 );
 it("forBuildsOnce", async (t) => {

@@ -7,7 +7,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>rotate</span><div>`),
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1) => {
+const $f1 = ($0, $1) => {
   const names = $0()(["a", "b", "c"]);
   const rotate = () => {
     const held = names[0]();
@@ -38,7 +38,7 @@ const f1 = ($0, $1) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         ($0) =>
           _$createComponent($i1, {

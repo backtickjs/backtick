@@ -5,7 +5,7 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const f1 = ($0, $1, $2, $3) => {
+const $f1 = ($0, $1, $2, $3) => {
   const held = $0()($1());
   return (() => {
     var _el$ = _tmpl$();
@@ -14,17 +14,17 @@ const f1 = ($0, $1, $2, $3) => {
     return _el$;
   })();
 };
-const f2 = ($0) => (c) => {
+const $f2 = ($0) => (c) => {
   return c === $0() ? "blue" : "red";
 };
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      f1(
+      $f1(
         () => $i0,
         () => 0,
         () => 1,
-        () => f2(() => 1),
+        () => $f2(() => 1),
       ),
   });
 _$delegateEvents(["click"]);
