@@ -73,8 +73,10 @@ it("runtimeValues", async (t) => {
           },
         ],
       }),
-      "export default ($0, $1) => ({\n    list: $0(),\n    obj: $1(),\n});",
-      '{"version":3,"file":"runtime-values.test.jsx","sourceRoot":"","sources":["runtime-values.test.tsx"],"names":[],"mappings":"eAQO,YAAA,CAAC;IACF,IAAI,EAAE,IAAC;IACP,GAAG,EAAE,IAAC;CACP,CAAC"}',
+      {
+        code: "export default ($0, $1) => ({\n    list: $0(),\n    obj: $1(),\n});",
+        map: '{"version":3,"file":"runtime-values.test.jsx","sourceRoot":"","sources":["runtime-values.test.tsx"],"names":[],"mappings":"eAQO,YAAA,CAAC;IACF,IAAI,EAAE,IAAC;IACP,GAAG,EAAE,IAAC;CACP,CAAC"}',
+      },
     ),
   );
 });

@@ -91,8 +91,10 @@ const colorName = cs.create(
     },
     expression: false,
   }),
-  'export default ($0) => (c) => {\n    return c === $0() ? "blue" : "red";\n};',
-  '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state-enum.test.tsx"],"names":[],"mappings":"eAiBmD,QAAA,CAAC,CAAQ,EAAE,EAAE;IAC9D,OAAO,CAAC,KAAK,IAAC,CAAa,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,KAAK,CAAC;AAC9C,CAAC"}',
+  {
+    code: 'export default ($0) => (c) => {\n    return c === $0() ? "blue" : "red";\n};',
+    map: '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state-enum.test.tsx"],"names":[],"mappings":"eAiBmD,QAAA,CAAC,CAAQ,EAAE,EAAE;IAC9D,OAAO,CAAC,KAAK,IAAC,CAAa,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,KAAK,CAAC;AAC9C,CAAC"}',
+  },
 );
 async function Swatch() {
   return cs.create(
@@ -362,8 +364,10 @@ async function Swatch() {
         },
       ],
     }),
-    "export default ($0, $1, $2, $3) => {\n    const held = $0()($1());\n    return (<span onclick={() => held.set($2())}>\n        {$3()(held.get())}\n      </span>);\n};",
-    '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state-enum.test.tsx"],"names":[],"mappings":"eAsBY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,IAAC,CAAY,CAAC;IAClC,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,GAAG,CAAC,IAAC,CAAa,CAAC,CAC3C;QAAA,CAAC,IAAU,CAAC,IAAI,CAAC,GAAG,EAAE,CAAC,CACzB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    {
+      code: "export default ($0, $1, $2, $3) => {\n    const held = $0()($1());\n    return (<span onclick={() => held.set($2())}>\n        {$3()(held.get())}\n      </span>);\n};",
+      map: '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state-enum.test.tsx"],"names":[],"mappings":"eAsBY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,IAAC,CAAY,CAAC;IAClC,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,GAAG,CAAC,IAAC,CAAa,CAAC,CAC3C;QAAA,CAAC,IAAU,CAAC,IAAI,CAAC,GAAG,EAAE,CAAC,CACzB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    },
   );
 }
 it("Swatch", async (t) => {

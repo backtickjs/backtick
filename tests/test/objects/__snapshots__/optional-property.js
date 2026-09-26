@@ -131,8 +131,10 @@ const read = cs.create(
     },
     expression: false,
   }),
-  "export default () => (o) => {\n    return [o.label, o.inner?.z ?? 0];\n};",
-  '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAOgB,MAAA,CAAC,CAA4C,EAAE,EAAE;IAC/D,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC;AACpC,CAAC"}',
+  {
+    code: "export default () => (o) => {\n    return [o.label, o.inner?.z ?? 0];\n};",
+    map: '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAOgB,MAAA,CAAC,CAA4C,EAAE,EAAE;IAC/D,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC;AACpC,CAAC"}',
+  },
 );
 it("optionalProperty", async (t) => {
   await snapshotCase(
@@ -448,8 +450,10 @@ it("optionalProperty", async (t) => {
           },
         ],
       }),
-      'export default ($0) => ({\n    present: $0()({ label: "a", inner: { z: 3 } }),\n    partial: $0()({ label: "b", inner: {} }),\n    omitted: $0()({ label: "c" }),\n});',
-      '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAeO,QAAA,CAAC;IACF,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
+      {
+        code: 'export default ($0) => ({\n    present: $0()({ label: "a", inner: { z: 3 } }),\n    partial: $0()({ label: "b", inner: {} }),\n    omitted: $0()({ label: "c" }),\n});',
+        map: '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["optional-property.test.tsx"],"names":[],"mappings":"eAeO,QAAA,CAAC;IACF,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
+      },
     ),
   );
 });

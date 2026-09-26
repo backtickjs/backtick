@@ -69,8 +69,10 @@ const beep = cs.create(
       },
     ],
   }),
-  "export default () => {\n    let n = 0;\n    n = 1;\n};",
-  '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+  {
+    code: "export default () => {\n    let n = 0;\n    n = 1;\n};",
+    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+  },
 );
 const onTap = cs.create(
   "1dqhax1do6u08:13:44",
@@ -106,8 +108,10 @@ const onTap = cs.create(
     },
     expression: false,
   }),
-  "export default ($0) => (id) => {\n    $0();\n};",
-  '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
+  {
+    code: "export default ($0) => (id) => {\n    $0();\n};",
+    map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
+  },
 );
 it("handlerObject", async (t) => {
   await snapshotCase(
@@ -227,8 +231,10 @@ it("handlerObject", async (t) => {
           },
         ],
       }),
-      "export default ($0) => {\n    const handlers = {\n        tap: $0(),\n        hold: $0(),\n    };\n    return handlers;\n};",
-      '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
+      {
+        code: "export default ($0) => {\n    const handlers = {\n        tap: $0(),\n        hold: $0(),\n    };\n    return handlers;\n};",
+        map: '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["handler-object.test.tsx"],"names":[],"mappings":"eAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
+      },
     ),
   );
 });

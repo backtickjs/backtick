@@ -122,6 +122,8 @@ export default cs.create(
       },
     ],
   }),
-  "export default ($0, $1) => {\n    const held = $0()($1());\n    held.set($1());\n};",
-  '{"version":3,"file":"state-holds-host-object.test.jsx","sourceRoot":"","sources":["state-holds-host-object.test.tsx"],"names":[],"mappings":"eAekB;IAEhB,MAAM,IAAI,GAAG,IAAM,CAAC,IAAK,CAAC,CAAC;IAE3B,IAAI,CAAC,GAAG,CAAC,IAAK,CAAC,CAAC;AAClB,CAAC"}',
+  {
+    code: "export default ($0, $1) => {\n    const held = $0()($1());\n    held.set($1());\n};",
+    map: '{"version":3,"file":"state-holds-host-object.test.jsx","sourceRoot":"","sources":["state-holds-host-object.test.tsx"],"names":[],"mappings":"eAekB;IAEhB,MAAM,IAAI,GAAG,IAAM,CAAC,IAAK,CAAC,CAAC;IAE3B,IAAI,CAAC,GAAG,CAAC,IAAK,CAAC,CAAC;AAClB,CAAC"}',
+  },
 );

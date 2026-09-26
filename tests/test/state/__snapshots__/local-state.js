@@ -349,8 +349,10 @@ async function Stepper() {
         },
       ],
     }),
-    'export default ($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size.get() + "px"} onclick={() => {\n            size.set(size.get() + 1);\n        }}>\n        press\n      </span>);\n};',
-    '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["local-state.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    {
+      code: 'export default ($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size.get() + "px"} onclick={() => {\n            size.set(size.get() + 1);\n        }}>\n        press\n      </span>);\n};',
+      map: '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["local-state.test.tsx"],"names":[],"mappings":"eAYY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;QAC3B,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    },
   );
 }
 describe("local state", () => {

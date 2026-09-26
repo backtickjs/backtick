@@ -650,8 +650,10 @@ it("arrayReduce", async (t) => {
           },
         ],
       }),
-      'export default () => {\n    const prices = [4.5, 3.25, 2];\n    const total = prices.reduce((sum, price) => sum + price, 0);\n    const names = ["a", "b", "c"];\n    const joined = names.reduce((all, one, index) => all + index + one, "");\n    const empty = [];\n    return (total.toFixed(2) +\n        "|" +\n        joined +\n        "|" +\n        empty.reduce((sum, one) => sum + one, 0));\n};',
-      '{"version":3,"file":"array-reduce.test.jsx","sourceRoot":"","sources":["array-reduce.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,MAAM,GAAG,CAAC,GAAG,EAAE,IAAI,EAAE,CAAC,CAAC,CAAC;IAC9B,MAAM,KAAK,GAAG,MAAM,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,GAAG,GAAG,KAAK,EAAE,CAAC,CAAC,CAAC;IAC5D,MAAM,KAAK,GAAG,CAAC,GAAG,EAAE,GAAG,EAAE,GAAG,CAAC,CAAC;IAC9B,MAAM,MAAM,GAAG,KAAK,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,GAAG,GAAG,KAAK,GAAG,GAAG,EAAE,EAAE,CAAC,CAAC;IACxE,MAAM,KAAK,GAAa,EAAE,CAAC;IAC3B,OAAO,CACL,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC;QAChB,GAAG;QACH,MAAM;QACN,GAAG;QACH,KAAK,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC,GAAG,GAAG,GAAG,EAAE,CAAC,CAAC,CACzC,CAAC;AACJ,CAAC"}',
+      {
+        code: 'export default () => {\n    const prices = [4.5, 3.25, 2];\n    const total = prices.reduce((sum, price) => sum + price, 0);\n    const names = ["a", "b", "c"];\n    const joined = names.reduce((all, one, index) => all + index + one, "");\n    const empty = [];\n    return (total.toFixed(2) +\n        "|" +\n        joined +\n        "|" +\n        empty.reduce((sum, one) => sum + one, 0));\n};',
+        map: '{"version":3,"file":"array-reduce.test.jsx","sourceRoot":"","sources":["array-reduce.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,MAAM,GAAG,CAAC,GAAG,EAAE,IAAI,EAAE,CAAC,CAAC,CAAC;IAC9B,MAAM,KAAK,GAAG,MAAM,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,GAAG,GAAG,KAAK,EAAE,CAAC,CAAC,CAAC;IAC5D,MAAM,KAAK,GAAG,CAAC,GAAG,EAAE,GAAG,EAAE,GAAG,CAAC,CAAC;IAC9B,MAAM,MAAM,GAAG,KAAK,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,GAAG,GAAG,KAAK,GAAG,GAAG,EAAE,EAAE,CAAC,CAAC;IACxE,MAAM,KAAK,GAAa,EAAE,CAAC;IAC3B,OAAO,CACL,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC;QAChB,GAAG;QACH,MAAM;QACN,GAAG;QACH,KAAK,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC,GAAG,GAAG,GAAG,EAAE,CAAC,CAAC,CACzC,CAAC;AACJ,CAAC"}',
+      },
     ),
   );
 });

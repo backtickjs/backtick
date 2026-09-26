@@ -15,8 +15,10 @@ it("reservedKeySplice", async (t) => {
         loc: { start: { line: 8, column: 48 }, end: { line: 8, column: 67 } },
         param: 0,
       }),
-      "export default ($0) => $0();",
-      '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["reserved-key-splice.test.tsx"],"names":[],"mappings":"eAOgD,QAAA,IAAC"}',
+      {
+        code: "export default ($0) => $0();",
+        map: '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["reserved-key-splice.test.tsx"],"names":[],"mappings":"eAOgD,QAAA,IAAC"}',
+      },
     ),
   );
 });

@@ -15,8 +15,10 @@ const lying = cs.create(
     },
     expression: true,
   }),
-  'export default () => () => "hi";',
-  '{"version":3,"file":"undefined-return.test.jsx","sourceRoot":"","sources":["undefined-return.test.tsx"],"names":[],"mappings":"eAUsC,MAAA,GAAG,EAAE,CAAC,IAAI"}',
+  {
+    code: 'export default () => () => "hi";',
+    map: '{"version":3,"file":"undefined-return.test.jsx","sourceRoot":"","sources":["undefined-return.test.tsx"],"names":[],"mappings":"eAUsC,MAAA,GAAG,EAAE,CAAC,IAAI"}',
+  },
 );
 it("undefinedReturn", async (t) => {
   await snapshotCase(
@@ -123,8 +125,10 @@ it("undefinedReturn", async (t) => {
           },
         ],
       }),
-      "export default ($0) => {\n    const stored = $0();\n    const caught = $0()();\n    return 1;\n};",
-      '{"version":3,"file":"undefined-return.test.jsx","sourceRoot":"","sources":["undefined-return.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,MAAM,GAAG,IAAM,CAAC;IACtB,MAAM,MAAM,GAAG,IAAM,EAAE,CAAC;IACxB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+      {
+        code: "export default ($0) => {\n    const stored = $0();\n    const caught = $0()();\n    return 1;\n};",
+        map: '{"version":3,"file":"undefined-return.test.jsx","sourceRoot":"","sources":["undefined-return.test.tsx"],"names":[],"mappings":"eAgBO;IACD,MAAM,MAAM,GAAG,IAAM,CAAC;IACtB,MAAM,MAAM,GAAG,IAAM,EAAE,CAAC;IACxB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+      },
     ),
   );
 });

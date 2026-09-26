@@ -313,8 +313,10 @@ async function Panel(props) {
         },
       ],
     }),
-    'export default ($0) => {\n    const Badge = (p) => <i>{"panel " + p.n}</i>;\n    return (<section>\n        <Badge n={0}/>\n        {$0().body}\n      </section>);\n};',
-    '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eAWY;IACR,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC5D,OAAO,CACL,CAAC,OAAO,CACN;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACZ;QAAA,CAAC,IAAM,CAAC,IAAI,CACd;MAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+    {
+      code: 'export default ($0) => {\n    const Badge = (p) => <i>{"panel " + p.n}</i>;\n    return (<section>\n        <Badge n={0}/>\n        {$0().body}\n      </section>);\n};',
+      map: '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eAWY;IACR,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC5D,OAAO,CACL,CAAC,OAAO,CACN;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACZ;QAAA,CAAC,IAAM,CAAC,IAAI,CACd;MAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+    },
   );
 }
 // A script handed to `Panel` as a prop, naming a function the script around it
@@ -554,8 +556,10 @@ const scriptBoundTagCarried = cs.create(
               },
             },
           }),
-          'export default ($0, $1) => <$0 n={$1.get()}>\n            <u>{"kid " + $1.get()}</u>\n          </$0>;',
-          '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eAuCe,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,GAAG,EAAE,CAAC,CACzB;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,EAAK,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,CAC9B;UAAA,EAAE,EAAK,CAAC"}',
+          {
+            code: 'export default ($0, $1) => <$0 n={$1.get()}>\n            <u>{"kid " + $1.get()}</u>\n          </$0>;',
+            map: '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eAuCe,YAAA,CAAC,EAAK,CAAC,CAAC,CAAC,CAAC,EAAK,CAAC,GAAG,EAAE,CAAC,CACzB;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,EAAK,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,CAC9B;UAAA,EAAE,EAAK,CAAC"}',
+          },
         ),
         bindings: ["count$2nh9ihk3oddge$2", "Badge$2nh9ihk3oddge$3"],
       },
@@ -1108,8 +1112,10 @@ const scriptBoundTagCarried = cs.create(
       },
     ],
   }),
-  'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    const Badge = (p) => (<b>\n      {"outer " + p.n}\n      {p.children}\n    </b>);\n    return (<div>\n      <$2 body={$1(count, Badge)}/>\n      <button onclick={() => count.set(count.get() + 1)}>more</button>\n    </div>);\n};',
-  '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eA0BiC;IAC/B,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,MAAM,KAAK,GAAG,CAAC,CAA2C,EAAE,EAAE,CAAC,CAC7D,CAAC,CAAC,CACA;MAAA,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,QAAQ,CACb;IAAA,EAAE,CAAC,CAAC,CACL,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,EAAK,CACJ,IAAI,CAAC,CACH,gBAGF,CAAC,EAEH;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CACjE;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  {
+    code: 'export default ($0, $1, $2) => {\n    const count = $0()(0);\n    const Badge = (p) => (<b>\n      {"outer " + p.n}\n      {p.children}\n    </b>);\n    return (<div>\n      <$2 body={$1(count, Badge)}/>\n      <button onclick={() => count.set(count.get() + 1)}>more</button>\n    </div>);\n};',
+    map: '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["script-bound-tag-carried.test.tsx"],"names":[],"mappings":"eA0BiC;IAC/B,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,MAAM,KAAK,GAAG,CAAC,CAA2C,EAAE,EAAE,CAAC,CAC7D,CAAC,CAAC,CACA;MAAA,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,QAAQ,CACb;IAAA,EAAE,CAAC,CAAC,CACL,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,EAAK,CACJ,IAAI,CAAC,CACH,gBAGF,CAAC,EAEH;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CACjE;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  },
 );
 it("scriptBoundTagCarried", async (t) => {
   await snapshotCase(t, "scriptBoundTagCarried", scriptBoundTagCarried);

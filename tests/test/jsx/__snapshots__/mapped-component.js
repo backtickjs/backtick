@@ -34,8 +34,10 @@ it("mappedComponent", async (t) => {
             },
             param: 0,
           }),
-          "export default ($0) => $0();",
-          '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
+          {
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eAyBoB,QAAA,IAAK"}',
+          },
         ),
         children: cs.create(
           "8u2ewdd1g2mk:27:9",
@@ -74,8 +76,10 @@ it("mappedComponent", async (t) => {
                         key: "row$8u2ewdd1g2mk$0",
                       },
                     }),
-                    'export default ($0) => "row " + $0;',
-                    '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
+                    {
+                      code: 'export default ($0) => "row " + $0;',
+                      map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0B0C,QAAA,MAAM,GAAG,EAAG"}',
+                    },
                   ),
                 }),
                 bindings: ["row$8u2ewdd1g2mk$0"],
@@ -109,8 +113,10 @@ it("mappedComponent", async (t) => {
             },
             expression: true,
           }),
-          "export default ($0) => (row) => $0(row);",
-          '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
+          {
+            code: "export default ($0) => (row) => $0(row);",
+            map: '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["mapped-component.test.tsx"],"names":[],"mappings":"eA0BY,QAAA,CAAC,GAAW,EAAE,EAAE,CAAC,OAAC"}',
+          },
         ),
       }),
     }),

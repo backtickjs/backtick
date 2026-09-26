@@ -430,8 +430,10 @@ describe("ref", () => {
             },
           ],
         }),
-        'export default ($0) => {\n    const field = $0()(null);\n    return (<div>\n            <input aria-label="name" ref={(element) => field.set(element)}/>\n            <button onclick={() => field.get()?.focus()}>edit</button>\n          </div>);\n};',
-        '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAYS;IACD,MAAM,KAAK,GAAG,IAAM,CAA0B,IAAI,CAAC,CAAC;IACpD,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,EAC9D;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,EAAE,EAAE,KAAK,EAAE,CAAC,CAAC,IAAI,EAAE,MAAM,CAC3D;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        {
+          code: 'export default ($0) => {\n    const field = $0()(null);\n    return (<div>\n            <input aria-label="name" ref={(element) => field.set(element)}/>\n            <button onclick={() => field.get()?.focus()}>edit</button>\n          </div>);\n};',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAYS;IACD,MAAM,KAAK,GAAG,IAAM,CAA0B,IAAI,CAAC,CAAC;IACpD,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC,EAC9D;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,EAAE,EAAE,KAAK,EAAE,CAAC,CAAC,IAAI,EAAE,MAAM,CAC3D;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        },
       ),
     );
     await userEvent.click(screen.getByRole("button"));
@@ -608,8 +610,10 @@ describe("ref", () => {
             },
           ],
         }),
-        'export default ($0) => {\n    return (<input aria-label="name" ref={(element) => $0()(() => element.focus())}/>);\n};',
-        '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA4BS;IACD,OAAO,CACL,CAAC,KAAK,CACJ,UAAU,CAAC,MAAM,CACjB,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,OAAO,CAAC,KAAK,EAAE,CAAC,CAAC,EAClD,CACH,CAAC;AACJ,CAAC"}',
+        {
+          code: 'export default ($0) => {\n    return (<input aria-label="name" ref={(element) => $0()(() => element.focus())}/>);\n};',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA4BS;IACD,OAAO,CACL,CAAC,KAAK,CACJ,UAAU,CAAC,MAAM,CACjB,GAAG,CAAC,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,OAAO,CAAC,KAAK,EAAE,CAAC,CAAC,EAClD,CACH,CAAC;AACJ,CAAC"}',
+        },
       ),
     );
     assert.equal(document.activeElement, screen.getByLabelText("name"));
@@ -708,8 +712,10 @@ describe("ref", () => {
           children: [],
           closingElement: null,
         }),
-        'export default () => <input aria-label="name" ref={() => { }}/>;',
-        '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAyCoB,MAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
+        {
+          code: 'export default () => <input aria-label="name" ref={() => { }}/>;',
+          map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eAyCoB,MAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,EAAG"}',
+        },
       ),
     );
     assert.equal(screen.getByLabelText("name").hasAttribute("ref"), false);
@@ -1389,8 +1395,10 @@ describe("ref", () => {
               },
             ],
           }),
-          'export default ($0, $1) => {\n    const shown = $0()(true);\n    const n = $0()(0);\n    return (<div>\n              <button onclick={() => n.set(n.get() + 1)}>\n                {"n " + n.get()}\n              </button>\n              {shown.get() ? (<p ref={() => $1().console.log(n.get())}>shown</p>) : null}\n            </div>);\n};',
-          '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA+DW;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IAC3B,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,OAAO,CACL,CAAC,GAAG,CACF;cAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CACxC;gBAAA,CAAC,IAAI,GAAG,CAAC,CAAC,GAAG,EAAE,CACjB;cAAA,EAAE,MAAM,CACR;cAAA,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CACb,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CACtD,CAAC,CAAC,CAAC,IAAI,CACV;YAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          {
+            code: 'export default ($0, $1) => {\n    const shown = $0()(true);\n    const n = $0()(0);\n    return (<div>\n              <button onclick={() => n.set(n.get() + 1)}>\n                {"n " + n.get()}\n              </button>\n              {shown.get() ? (<p ref={() => $1().console.log(n.get())}>shown</p>) : null}\n            </div>);\n};',
+            map: '{"version":3,"file":"ref.test.jsx","sourceRoot":"","sources":["ref.test.tsx"],"names":[],"mappings":"eA+DW;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IAC3B,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,OAAO,CACL,CAAC,GAAG,CACF;cAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CACxC;gBAAA,CAAC,IAAI,GAAG,CAAC,CAAC,GAAG,EAAE,CACjB;cAAA,EAAE,MAAM,CACR;cAAA,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CACb,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CACtD,CAAC,CAAC,CAAC,IAAI,CACV;YAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+          },
         ),
       );
       const shownText = screen.getByText("shown");

@@ -36,8 +36,10 @@ it("largeData", async (t) => {
             },
             param: 0,
           }),
-          "export default ($0) => $0();",
-          '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAoCoB,QAAA,IAAO"}',
+          {
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAoCoB,QAAA,IAAO"}',
+          },
         ),
         children: cs.create(
           "2tquu92zqyse3:38:9",
@@ -113,8 +115,10 @@ it("largeData", async (t) => {
                             value: ".png",
                           },
                         }),
-                        'export default ($0) => "https://img.example.com/" + $0.id + ".png";',
-                        '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAyCwB,QAAA,0BAA0B,GAAG,EAAK,CAAC,EAAE,GAAG,MAAM"}',
+                        {
+                          code: 'export default ($0) => "https://img.example.com/" + $0.id + ".png";',
+                          map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAyCwB,QAAA,0BAA0B,GAAG,EAAK,CAAC,EAAE,GAAG,MAAM"}',
+                        },
                       ),
                       alt: "",
                     }),
@@ -169,8 +173,10 @@ it("largeData", async (t) => {
                           computed: false,
                           optional: false,
                         }),
-                        "export default ($0) => $0.customer.name;",
-                        '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA4CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
+                        {
+                          code: "export default ($0) => $0.customer.name;",
+                          map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA4CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
+                        },
                       ),
                     }),
                     _jsx("span", {
@@ -224,8 +230,10 @@ it("largeData", async (t) => {
                           computed: false,
                           optional: false,
                         }),
-                        "export default ($0) => $0.customer.city;",
-                        '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA6CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
+                        {
+                          code: "export default ($0) => $0.customer.city;",
+                          map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA6CwB,QAAA,EAAK,CAAC,QAAQ,CAAC,IAAI"}',
+                        },
                       ),
                     }),
                     _jsx(For, {
@@ -262,8 +270,10 @@ it("largeData", async (t) => {
                           computed: false,
                           optional: false,
                         }),
-                        "export default ($0) => $0.items;",
-                        '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA8C4B,QAAA,EAAK,CAAC,KAAK"}',
+                        {
+                          code: "export default ($0) => $0.items;",
+                          map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA8C4B,QAAA,EAAK,CAAC,KAAK"}',
+                        },
                       ),
                       children: cs.create(
                         "2tquu92zqyse3:48:17",
@@ -358,8 +368,10 @@ it("largeData", async (t) => {
                                       optional: false,
                                     },
                                   }),
-                                  'export default ($0) => $0.sku + " x" + $0.qty;',
-                                  '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAgD+B,QAAA,EAAI,CAAC,GAAG,GAAG,IAAI,GAAG,EAAI,CAAC,GAAG"}',
+                                  {
+                                    code: 'export default ($0) => $0.sku + " x" + $0.qty;',
+                                    map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAgD+B,QAAA,EAAI,CAAC,GAAG,GAAG,IAAI,GAAG,EAAI,CAAC,GAAG"}',
+                                  },
                                 ),
                               }),
                               bindings: ["item$2tquu92zqyse3$1"],
@@ -393,8 +405,10 @@ it("largeData", async (t) => {
                           },
                           expression: true,
                         }),
-                        "export default ($0) => (item) => $0(item);",
-                        '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA+CoB,QAAA,CAAC,IAAU,EAAE,EAAE,CACjB,QAAC"}',
+                        {
+                          code: "export default ($0) => (item) => $0(item);",
+                          map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eA+CoB,QAAA,CAAC,IAAU,EAAE,EAAE,CACjB,QAAC"}',
+                        },
                       ),
                     }),
                     _jsx("span", {
@@ -447,8 +461,10 @@ it("largeData", async (t) => {
                             optional: false,
                           },
                         }),
-                        'export default ($0) => "$" + $0.total;',
-                        '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAkDwB,QAAA,GAAG,GAAG,EAAK,CAAC,KAAK"}',
+                        {
+                          code: 'export default ($0) => "$" + $0.total;',
+                          map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAkDwB,QAAA,GAAG,GAAG,EAAK,CAAC,KAAK"}',
+                        },
                       ),
                     }),
                   ],
@@ -484,8 +500,10 @@ it("largeData", async (t) => {
             },
             expression: true,
           }),
-          "export default ($0) => (order) => $0(order);",
-          '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAqCY,QAAA,CAAC,KAAY,EAAE,EAAE,CACnB,SAAC"}',
+          {
+            code: "export default ($0) => (order) => $0(order);",
+            map: '{"version":3,"file":"large-data.test.jsx","sourceRoot":"","sources":["large-data.test.tsx"],"names":[],"mappings":"eAqCY,QAAA,CAAC,KAAY,EAAE,EAAE,CACnB,SAAC"}',
+          },
         ),
       }),
     }),

@@ -110,8 +110,10 @@ async function Panel() {
         },
       ],
     }),
-    "export default ($0) => {\n    const n = $0()(2);\n    n.set(3);\n};",
-    '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["component-answers-action.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
+    {
+      code: "export default ($0) => {\n    const n = $0()(2);\n    n.set(3);\n};",
+      map: '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["component-answers-action.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
+    },
   );
 }
 // @ts-expect-error: 'Panel' cannot be used as a JSX component.

@@ -21,8 +21,10 @@ it("reservedKey", async (t) => {
         },
         expression: true,
       }),
-      "export default ($0) => () => $0();",
-      '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["reserved-key.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+      {
+        code: "export default ($0) => () => $0();",
+        map: '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["reserved-key.test.tsx"],"names":[],"mappings":"eAO0C,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+      },
     ),
   );
 });

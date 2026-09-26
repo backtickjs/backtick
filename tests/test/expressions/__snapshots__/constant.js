@@ -13,8 +13,10 @@ it("constant", async (t) => {
         loc: { start: { line: 6, column: 39 }, end: { line: 6, column: 40 } },
         value: 1,
       }),
-      "export default () => 1;",
-      '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["constant.test.tsx"],"names":[],"mappings":"eAKuC,MAAA,CAAC"}',
+      {
+        code: "export default () => 1;",
+        map: '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["constant.test.tsx"],"names":[],"mappings":"eAKuC,MAAA,CAAC"}',
+      },
     ),
   );
 });

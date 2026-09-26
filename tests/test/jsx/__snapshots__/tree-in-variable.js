@@ -76,8 +76,10 @@ const heldElement = cs.create(
     },
     expression: false,
   }),
-  "export default ($0) => () => {\n    const tree = $0();\n    return tree;\n};",
-  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eAcuB,QAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,IAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  {
+    code: "export default ($0) => () => {\n    const tree = $0();\n    return tree;\n};",
+    map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eAcuB,QAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,IAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  },
 );
 const heldComponent = cs.create(
   "224cj4eht1o03:20:22",
@@ -144,8 +146,10 @@ const heldComponent = cs.create(
     },
     expression: false,
   }),
-  "export default ($0) => () => {\n    const tree = $0();\n    return tree;\n};",
-  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eAmByB,QAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,IAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  {
+    code: "export default ($0) => () => {\n    const tree = $0();\n    return tree;\n};",
+    map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eAmByB,QAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,IAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  },
 );
 it("treeInVariable", async (t) => {
   await snapshotCase(
@@ -173,8 +177,10 @@ it("treeInVariable", async (t) => {
             arguments: [],
             optional: false,
           }),
-          "export default ($0) => $0()();",
-          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eA6BU,QAAA,IAAY,EAAE"}',
+          {
+            code: "export default ($0) => $0()();",
+            map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eA6BU,QAAA,IAAY,EAAE"}',
+          },
         ),
         cs.create(
           "224cj4eht1o03:31:7",
@@ -196,8 +202,10 @@ it("treeInVariable", async (t) => {
             arguments: [],
             optional: false,
           }),
-          "export default ($0) => $0()();",
-          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eA8BU,QAAA,IAAc,EAAE"}',
+          {
+            code: "export default ($0) => $0()();",
+            map: '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["tree-in-variable.test.tsx"],"names":[],"mappings":"eA8BU,QAAA,IAAc,EAAE"}',
+          },
         ),
       ],
     }),

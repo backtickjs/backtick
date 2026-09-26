@@ -9,7 +9,8 @@ export function object(
   return literal(ts, node) as ts.ObjectLiteralExpression;
 }
 
-function literal(
+/** Plain data as the literal that builds it. */
+export function literal(
   ts: typeof import("typescript"),
   value: unknown,
 ): ts.Expression {

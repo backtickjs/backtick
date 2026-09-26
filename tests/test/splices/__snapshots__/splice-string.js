@@ -16,8 +16,10 @@ it("spliceString", async (t) => {
         loc: { start: { line: 10, column: 43 }, end: { line: 10, column: 49 } },
         param: 0,
       }),
-      "export default ($0) => $0();",
-      '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splice-string.test.tsx"],"names":[],"mappings":"eAS2C,QAAA,IAAM"}',
+      {
+        code: "export default ($0) => $0();",
+        map: '{"version":3,"file":"splice-string.test.jsx","sourceRoot":"","sources":["splice-string.test.tsx"],"names":[],"mappings":"eAS2C,QAAA,IAAM"}',
+      },
     ),
   );
 });

@@ -18,8 +18,10 @@ const originX = cs.create(
     loc: { start: { line: 14, column: 19 }, end: { line: 14, column: 20 } },
     value: 1,
   }),
-  "export default () => 1;",
-  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAamB,MAAA,CAAC"}',
+  {
+    code: "export default () => 1;",
+    map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAamB,MAAA,CAAC"}',
+  },
 );
 const label = cs.create(
   "3hhvicr225pmx:16:14",
@@ -29,8 +31,10 @@ const label = cs.create(
     loc: { start: { line: 16, column: 17 }, end: { line: 16, column: 25 } },
     value: "origin",
   }),
-  'export default () => "origin";',
-  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAeiB,MAAA,QAAQ"}',
+  {
+    code: 'export default () => "origin";',
+    map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAeiB,MAAA,QAAQ"}',
+  },
 );
 const point = { x: originX, label };
 it("splicedContainer", async (t) => {
@@ -78,8 +82,10 @@ it("splicedContainer", async (t) => {
           value: 1,
         },
       }),
-      "export default ($0) => $0().x + 1;",
-      '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
+      {
+        code: "export default ($0) => $0().x + 1;",
+        map: '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["spliced-container.test.tsx"],"names":[],"mappings":"eAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
+      },
     ),
   );
 });

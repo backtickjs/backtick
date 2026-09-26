@@ -208,8 +208,10 @@ async function Items() {
         },
       },
     }),
-    'export default ($0) => <$0 each={[1, 2, 3]}>\n    {(n) => <span>{"item " + n}</span>}\n  </$0>;',
-    '{"version":3,"file":"eval.test.jsx","sourceRoot":"","sources":["eval.test.tsx"],"names":[],"mappings":"eAUY,QAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAC7B;IAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,OAAO,GAAG,CAAC,CAAC,EAAE,IAAI,CAAC,CAC5C;EAAA,EAAE,EAAG,CAAC"}',
+    {
+      code: 'export default ($0) => <$0 each={[1, 2, 3]}>\n    {(n) => <span>{"item " + n}</span>}\n  </$0>;',
+      map: '{"version":3,"file":"eval.test.jsx","sourceRoot":"","sources":["eval.test.tsx"],"names":[],"mappings":"eAUY,QAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAC7B;IAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,OAAO,GAAG,CAAC,CAAC,EAAE,IAAI,CAAC,CAC5C;EAAA,EAAE,EAAG,CAAC"}',
+    },
   );
 }
 const items = await bundler.run(_jsx(Items, {}));
@@ -380,8 +382,10 @@ const evaluated = cs.create(
       },
     },
   }),
-  "export default ($0, $1) => <div>\n  {eval($0())}\n  <b>{eval($1()) + 1}</b>\n</div>;",
-  '{"version":3,"file":"eval.test.jsx","sourceRoot":"","sources":["eval.test.tsx"],"names":[],"mappings":"eAkBqB,YAAA,CAAC,GAAG,CACvB;EAAA,CAAC,IAAI,CAAC,IAAM,CAAC,CACb;EAAA,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAM,CAAC,GAAG,CAAC,CAAC,EAAE,CAAC,CAC1B;AAAA,EAAE,GAAG,CAAC"}',
+  {
+    code: "export default ($0, $1) => <div>\n  {eval($0())}\n  <b>{eval($1()) + 1}</b>\n</div>;",
+    map: '{"version":3,"file":"eval.test.jsx","sourceRoot":"","sources":["eval.test.tsx"],"names":[],"mappings":"eAkBqB,YAAA,CAAC,GAAG,CACvB;EAAA,CAAC,IAAI,CAAC,IAAM,CAAC,CACb;EAAA,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAM,CAAC,GAAG,CAAC,CAAC,EAAE,CAAC,CAC1B;AAAA,EAAE,GAAG,CAAC"}',
+  },
 );
 it("eval", async (t) => {
   await snapshotCase(t, "eval", evaluated);

@@ -177,8 +177,10 @@ describe("onCleanup", () => {
             },
           ],
         }),
-        "export default ($0, $1) => {\n    $0()(() => $1().console.log());\n    return <p>drawn</p>;\n};",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA0BS;IACD,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
+        {
+          code: "export default ($0, $1) => {\n    $0()(() => $1().console.log());\n    return <p>drawn</p>;\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA0BS;IACD,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
+        },
       ),
     );
     assert.equal(runs, 0);
@@ -669,8 +671,10 @@ describe("onCleanup", () => {
             },
           ],
         }),
-        "export default ($0, $1, $2, $3) => {\n    const n = $0()(1);\n    const doubled = $1()(() => {\n        $2()(() => $3().console.log());\n        return n.get() * 2;\n    });\n    return (<button onclick={() => n.set(n.get() + 1)}>{doubled.get()}</button>);\n};",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAsCS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,MAAM,OAAO,GAAG,IAAS,CAAC,GAAG,EAAE;QAC7B,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;IACrB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,EAAE,MAAM,CAAC,CACpE,CAAC;AACJ,CAAC"}',
+        {
+          code: "export default ($0, $1, $2, $3) => {\n    const n = $0()(1);\n    const doubled = $1()(() => {\n        $2()(() => $3().console.log());\n        return n.get() * 2;\n    });\n    return (<button onclick={() => n.set(n.get() + 1)}>{doubled.get()}</button>);\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAsCS;IACD,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,MAAM,OAAO,GAAG,IAAS,CAAC,GAAG,EAAE;QAC7B,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;IACrB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,EAAE,MAAM,CAAC,CACpE,CAAC;AACJ,CAAC"}',
+        },
       ),
     );
     assert.equal(runs, 0);
@@ -1108,8 +1112,10 @@ describe("onCleanup", () => {
             },
           ],
         }),
-        "export default ($0, $1, $2, $3) => {\n    const timer = $0()(0);\n    $1()(() => {\n        timer.set($2().setInterval(() => $2().console.log(), 5));\n    });\n    $3()(() => $2().clearInterval(timer.get()));\n    return <p>ticking</p>;\n};",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAwES;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,IAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,GAAG,CAAC,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IACjE,CAAC,CAAC,CAAC;IACH,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,aAAa,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC;IACrD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
+        {
+          code: "export default ($0, $1, $2, $3) => {\n    const timer = $0()(0);\n    $1()(() => {\n        timer.set($2().setInterval(() => $2().console.log(), 5));\n    });\n    $3()(() => $2().clearInterval(timer.get()));\n    return <p>ticking</p>;\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eAwES;IACD,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACxB,IAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,GAAG,CAAC,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IACjE,CAAC,CAAC,CAAC;IACH,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,aAAa,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC;IACrD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
+        },
       ),
     );
     await wait(40);
@@ -1302,8 +1308,10 @@ describe("onCleanup", () => {
             },
           ],
         }),
-        "export default ($0, $1) => {\n    return (<button onclick={() => $0()(() => $1().console.log())}>\n            press\n          </button>);\n};",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA4FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+        {
+          code: "export default ($0, $1) => {\n    return (<button onclick={() => $0()(() => $1().console.log())}>\n            press\n          </button>);\n};",
+          map: '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["on-cleanup.test.tsx"],"names":[],"mappings":"eA4FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+        },
       ),
     );
     await userEvent.click(screen.getByRole("button"));

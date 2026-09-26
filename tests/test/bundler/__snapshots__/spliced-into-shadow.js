@@ -47,8 +47,10 @@ it("refuses a capture spliced where it is shadowed", async () => {
                     name: "total",
                     key: "total$1rcr3g75v4qq5$0",
                   }),
-                  "export default ($0) => $0;",
-                  '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"eAiC8B,QAAA,EAAK"}',
+                  {
+                    code: "export default ($0) => $0;",
+                    map: '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"eAiC8B,QAAA,EAAK"}',
+                  },
                 ),
               ),
               bindings: ["total$1rcr3g75v4qq5$0"],
@@ -225,8 +227,10 @@ it("refuses a capture spliced where it is shadowed", async () => {
             },
           ],
         }),
-        "export default ($0, $1) => {\n    const total = 1;\n    const first = $0(total);\n    {\n        const total = 2;\n        return first + total + $1();\n    }\n};",
-        '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"eA+BmB;IACb,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,SAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,IAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
+        {
+          code: "export default ($0, $1) => {\n    const total = 1;\n    const first = $0(total);\n    {\n        const total = 2;\n        return first + total + $1();\n    }\n};",
+          map: '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["spliced-into-shadow.test.tsx"],"names":[],"mappings":"eA+BmB;IACb,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,SAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,IAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
+        },
       ),
     ),
     {

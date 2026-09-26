@@ -43,8 +43,10 @@ it("reservedKeyScript", async (t) => {
           },
         ],
       }),
-      'export default () => ({ "#": "value" });',
-      '{"version":3,"file":"reserved-key-script.test.jsx","sourceRoot":"","sources":["reserved-key-script.test.tsx"],"names":[],"mappings":"eAOgD,MAAA,CAAC,EAAE,GAAG,EAAE,OAAO,EAAE,CAAC"}',
+      {
+        code: 'export default () => ({ "#": "value" });',
+        map: '{"version":3,"file":"reserved-key-script.test.jsx","sourceRoot":"","sources":["reserved-key-script.test.tsx"],"names":[],"mappings":"eAOgD,MAAA,CAAC,EAAE,GAAG,EAAE,OAAO,EAAE,CAAC"}',
+      },
     ),
   );
 });

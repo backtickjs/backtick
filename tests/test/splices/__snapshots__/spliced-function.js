@@ -33,8 +33,10 @@ it("splicedFunction", async (t) => {
         },
         expression: true,
       }),
-      "export default ($0) => () => $0();",
-      '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["spliced-function.test.tsx"],"names":[],"mappings":"eAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+      {
+        code: "export default ($0) => () => $0();",
+        map: '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["spliced-function.test.tsx"],"names":[],"mappings":"eAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+      },
     ),
   );
 });

@@ -43,8 +43,10 @@ const effects = cs.create(
       },
     ],
   }),
-  "export default () => {\n    const x = 1;\n};",
-  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+  {
+    code: "export default () => {\n    const x = 1;\n};",
+    map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+  },
 );
 const composed = cs.create(
   "3q2gz79xhvvfp:12:31",
@@ -67,8 +69,10 @@ const composed = cs.create(
       },
     ],
   }),
-  "export default ($0) => {\n    $0();\n};",
-  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAWkC;IAChC,IAAQ,CAAC;AACX,CAAC"}',
+  {
+    code: "export default ($0) => {\n    $0();\n};",
+    map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAWkC;IAChC,IAAQ,CAAC;AACX,CAAC"}',
+  },
 );
 it("actionComposition", async (t) => {
   await snapshotCase(
@@ -98,8 +102,10 @@ it("actionComposition", async (t) => {
           },
         ],
       }),
-      "export default ($0) => {\n    $0();\n};",
-      '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAmBO;IACD,IAAS,CAAC;AACZ,CAAC"}',
+      {
+        code: "export default ($0) => {\n    $0();\n};",
+        map: '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["action-composition.test.tsx"],"names":[],"mappings":"eAmBO;IACD,IAAS,CAAC;AACZ,CAAC"}',
+      },
     ),
   );
 });

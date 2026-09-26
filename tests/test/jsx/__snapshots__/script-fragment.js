@@ -206,8 +206,10 @@ const listed = cs.create(
     },
     expression: true,
   }),
-  "export default () => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>);",
-  '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
+  {
+    code: "export default () => (name) => (<>\n    <span>a sentence across lines</span>\n    <span>\n      {name} {name}\n    </span>\n  </>);",
+    map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAUkB,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,CAClC,EACE;IAAA,CAAC,IAAI,CAAC,uBAAuB,EAAE,IAAI,CACnC;IAAA,CAAC,IAAI,CACH;MAAA,CAAC,IAAI,CAAE,CAAA,CAAC,IAAI,CACd;IAAA,EAAE,IAAI,CACR;EAAA,GAAG,CACJ"}',
+  },
 );
 it("scriptFragment", async (t) => {
   await snapshotCase(
@@ -243,8 +245,10 @@ it("scriptFragment", async (t) => {
           ],
           optional: false,
         }),
-        'export default ($0) => $0()("x");',
-        '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
+        {
+          code: 'export default ($0) => $0()("x");',
+          map: '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["script-fragment.test.tsx"],"names":[],"mappings":"eAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
+        },
       ),
     }),
   );

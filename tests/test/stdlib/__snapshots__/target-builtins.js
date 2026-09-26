@@ -33,8 +33,10 @@ describe("a global an app defines", () => {
             arguments: [],
             optional: false,
           }),
-          "export default ($0) => $0()();",
-          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoBwB,QAAA,IAAM,EAAE"}',
+          {
+            code: "export default ($0) => $0()();",
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoBwB,QAAA,IAAM,EAAE"}',
+          },
         ),
         { globals: { greet: () => "hello" } },
       ),
@@ -66,8 +68,10 @@ describe("a global an app defines", () => {
             arguments: [],
             optional: false,
           }),
-          "export default ($0) => $0()();",
-          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eA4BqC,QAAA,IAAM,EAAE"}',
+          {
+            code: "export default ($0) => $0()();",
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eA4BqC,QAAA,IAAM,EAAE"}',
+          },
         ),
       ),
       /greet is not defined/,
@@ -125,8 +129,10 @@ describe("a global an app defines", () => {
             ],
             optional: false,
           }),
-          'export default ($0) => $0().get("greeting");',
-          '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoCwB,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+          {
+            code: 'export default ($0) => $0().get("greeting");',
+            map: '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["target-builtins.test.tsx"],"names":[],"mappings":"eAoCwB,QAAA,IAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+          },
         ),
         {
           globals: {

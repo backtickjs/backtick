@@ -37,8 +37,10 @@ const greet = await bundler.run(
       },
       expression: true,
     }),
-    'export default () => (name) => "hello " + name;',
-    '{"version":3,"file":"eval-function.test.jsx","sourceRoot":"","sources":["eval-function.test.tsx"],"names":[],"mappings":"eAOmC,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,QAAQ,GAAG,IAAI"}',
+    {
+      code: 'export default () => (name) => "hello " + name;',
+      map: '{"version":3,"file":"eval-function.test.jsx","sourceRoot":"","sources":["eval-function.test.tsx"],"names":[],"mappings":"eAOmC,MAAA,CAAC,IAAY,EAAE,EAAE,CAAC,QAAQ,GAAG,IAAI"}',
+    },
   ),
 );
 const badge = await bundler.run(
@@ -148,8 +150,10 @@ const badge = await bundler.run(
       },
       expression: true,
     }),
-    'export default () => (props) => <b>{"count " + props.count}</b>;',
-    '{"version":3,"file":"eval-function.test.jsx","sourceRoot":"","sources":["eval-function.test.tsx"],"names":[],"mappings":"eAUK,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,CAAC"}',
+    {
+      code: 'export default () => (props) => <b>{"count " + props.count}</b>;',
+      map: '{"version":3,"file":"eval-function.test.jsx","sourceRoot":"","sources":["eval-function.test.tsx"],"names":[],"mappings":"eAUK,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,KAAK,CAAC,EAAE,CAAC,CAAC"}',
+    },
   ),
 );
 it("evalFunction", async (t) => {
@@ -400,8 +404,10 @@ it("evalFunction", async (t) => {
           },
         },
       }),
-      'export default ($0, $1) => <div>\n      <span>{eval($0())("ada")}</span>\n      {eval($1())({ count: 3 })}\n    </div>;',
-      '{"version":3,"file":"eval-function.test.jsx","sourceRoot":"","sources":["eval-function.test.tsx"],"names":[],"mappings":"eAiBO,YAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,IAAM,CAAC,CAAC,KAAK,CAAC,CAAC,EAAE,IAAI,CACjC;MAAA,CAAC,IAAI,CAAC,IAAM,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC,CAC7B;IAAA,EAAE,GAAG,CAAC"}',
+      {
+        code: 'export default ($0, $1) => <div>\n      <span>{eval($0())("ada")}</span>\n      {eval($1())({ count: 3 })}\n    </div>;',
+        map: '{"version":3,"file":"eval-function.test.jsx","sourceRoot":"","sources":["eval-function.test.tsx"],"names":[],"mappings":"eAiBO,YAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,IAAM,CAAC,CAAC,KAAK,CAAC,CAAC,EAAE,IAAI,CACjC;MAAA,CAAC,IAAI,CAAC,IAAM,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC,CAC7B;IAAA,EAAE,GAAG,CAAC"}',
+      },
     ),
   );
 });

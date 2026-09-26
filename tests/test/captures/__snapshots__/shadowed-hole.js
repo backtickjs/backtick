@@ -125,8 +125,10 @@ function wrapShadowed(fragment) {
         },
       ],
     }),
-    "export default ($0) => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $0();\n    }\n};",
-    '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,IAAS,CAAC;IAC3B,CAAC;AACH,CAAC"}',
+    {
+      code: "export default ($0) => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $0();\n    }\n};",
+      map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,IAAS,CAAC;IAC3B,CAAC;AACH,CAAC"}',
+    },
   );
 }
 it("shadowedHole", async (t) => {
@@ -151,8 +153,10 @@ it("shadowedHole", async (t) => {
                   },
                   value: 10,
                 }),
-                "export default () => 10;",
-                '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2ByB,MAAA,EAAE"}',
+                {
+                  code: "export default () => 10;",
+                  map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2ByB,MAAA,EAAE"}',
+                },
               ),
             ),
             bindings: [],
@@ -171,8 +175,10 @@ it("shadowedHole", async (t) => {
                   },
                   value: 20,
                 }),
-                "export default () => 20;",
-                '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2BmD,MAAA,EAAE"}',
+                {
+                  code: "export default () => 20;",
+                  map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2BmD,MAAA,EAAE"}',
+                },
               ),
             ),
             bindings: [],
@@ -200,8 +206,10 @@ it("shadowedHole", async (t) => {
           param: 1,
         },
       }),
-      "export default ($0, $1) => $0() + $1();",
-      '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2BO,YAAA,IAAC,GAAyB,IAAC"}',
+      {
+        code: "export default ($0, $1) => $0() + $1();",
+        map: '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["shadowed-hole.test.tsx"],"names":[],"mappings":"eA2BO,YAAA,IAAC,GAAyB,IAAC"}',
+      },
     ),
   );
 });

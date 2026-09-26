@@ -71,6 +71,8 @@ const asserted = cs.create(
       },
     ],
   }),
-  'export default ($0) => {\n    const a = $0();\n    return "" + a;\n};',
-  '{"version":3,"file":"void-assertion.test.jsx","sourceRoot":"","sources":["void-assertion.test.tsx"],"names":[],"mappings":"eAMoB;IAElB,MAAM,CAAC,GAAG,IAAY,CAAC;IACvB,OAAO,EAAE,GAAG,CAAC,CAAC;AAChB,CAAC"}',
+  {
+    code: 'export default ($0) => {\n    const a = $0();\n    return "" + a;\n};',
+    map: '{"version":3,"file":"void-assertion.test.jsx","sourceRoot":"","sources":["void-assertion.test.tsx"],"names":[],"mappings":"eAMoB;IAElB,MAAM,CAAC,GAAG,IAAY,CAAC;IACvB,OAAO,EAAE,GAAG,CAAC,CAAC;AAChB,CAAC"}',
+  },
 );

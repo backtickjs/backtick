@@ -8,8 +8,7 @@ const script = create(
   "abc:3:7",
   { params: [] },
   () => ({ type: "Literal", value: 1 }),
-  "() => 1",
-  "",
+  { code: "export default () => 1;", map: "" },
 ) as never;
 
 const labelsOf = (tree: Awaited<ReturnType<typeof buildBundle>>) =>

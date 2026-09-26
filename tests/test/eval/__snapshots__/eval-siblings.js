@@ -47,8 +47,10 @@ async function Other() {
         },
       },
     }),
-    'export default () => <em>{"from another bundle"}</em>;',
-    '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAQY,MAAA,CAAC,EAAE,CAAC,CAAC,qBAAqB,CAAC,EAAE,EAAE,CAAC"}',
+    {
+      code: 'export default () => <em>{"from another bundle"}</em>;',
+      map: '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAQY,MAAA,CAAC,EAAE,CAAC,CAAC,qBAAqB,CAAC,EAAE,EAAE,CAAC"}',
+    },
   );
 }
 const otherBundle = await bundler.run(_jsx(Other, {}));
@@ -266,8 +268,10 @@ it("evalSiblings", async (t) => {
           },
         },
       }),
-      "export default ($0) => <div>\n      <span>before</span>\n      {eval($0())}\n      <span>after</span>\n    </div>;",
-      '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAiBO,QAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,MAAM,EAAE,IAAI,CAClB;MAAA,CAAC,IAAI,CAAC,IAAY,CAAC,CACnB;MAAA,CAAC,IAAI,CAAC,KAAK,EAAE,IAAI,CACnB;IAAA,EAAE,GAAG,CAAC"}',
+      {
+        code: "export default ($0) => <div>\n      <span>before</span>\n      {eval($0())}\n      <span>after</span>\n    </div>;",
+        map: '{"version":3,"file":"eval-siblings.test.jsx","sourceRoot":"","sources":["eval-siblings.test.tsx"],"names":[],"mappings":"eAiBO,QAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,MAAM,EAAE,IAAI,CAClB;MAAA,CAAC,IAAI,CAAC,IAAY,CAAC,CACnB;MAAA,CAAC,IAAI,CAAC,KAAK,EAAE,IAAI,CACnB;IAAA,EAAE,GAAG,CAAC"}',
+      },
     ),
   );
 });

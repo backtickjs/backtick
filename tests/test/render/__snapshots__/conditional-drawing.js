@@ -443,8 +443,10 @@ async function Held({ again }) {
         },
       ],
     }),
-    "export default ($0, $1, $2) => {\n    const shown = $0()(false);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            shown.set(true);\n        }\n    }, 0);\n    return <>{shown.get() ? <em>shown</em> : <i>waiting</i>}</>;\n};",
-    '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["conditional-drawing.test.tsx"],"names":[],"mappings":"eA8BY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAE5B,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAM,EAAE,EAAE,CAAC;YACb,KAAK,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;QAClB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,EAAE,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,KAAK,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC;AAC9D,CAAC"}',
+    {
+      code: "export default ($0, $1, $2) => {\n    const shown = $0()(false);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            shown.set(true);\n        }\n    }, 0);\n    return <>{shown.get() ? <em>shown</em> : <i>waiting</i>}</>;\n};",
+      map: '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["conditional-drawing.test.tsx"],"names":[],"mappings":"eA8BY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAE5B,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAM,EAAE,EAAE,CAAC;YACb,KAAK,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;QAClB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,EAAE,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,KAAK,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC;AAC9D,CAAC"}',
+    },
   );
 }
 const conditionalDrawing = cs.create(
@@ -960,8 +962,10 @@ const conditionalDrawing = cs.create(
       },
     ],
   }),
-  'export default ($0, $1) => {\n    const builds = $0()(0);\n    return (<div>\n      <span>{"builds " + builds.get()}</span>\n      <section>\n        <$1 again={() => {\n            builds.set(builds.get() + 1);\n            return builds.get() < 5;\n        }}/>\n      </section>\n    </div>);\n};',
-  '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["conditional-drawing.test.tsx"],"names":[],"mappings":"eA2C8B;IAC5B,MAAM,MAAM,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAEzB,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,SAAS,GAAG,MAAM,CAAC,GAAG,EAAE,CAAC,EAAE,IAAI,CACtC;MAAA,CAAC,OAAO,CACN;QAAA,CAAC,EAAI,CACH,KAAK,CAAC,CAAC,GAAG,EAAE;YACV,MAAM,CAAC,GAAG,CAAC,MAAM,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;YAC7B,OAAO,MAAM,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;QAC1B,CAAC,CAAC,EAEN;MAAA,EAAE,OAAO,CACX;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  {
+    code: 'export default ($0, $1) => {\n    const builds = $0()(0);\n    return (<div>\n      <span>{"builds " + builds.get()}</span>\n      <section>\n        <$1 again={() => {\n            builds.set(builds.get() + 1);\n            return builds.get() < 5;\n        }}/>\n      </section>\n    </div>);\n};',
+    map: '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["conditional-drawing.test.tsx"],"names":[],"mappings":"eA2C8B;IAC5B,MAAM,MAAM,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IAEzB,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,SAAS,GAAG,MAAM,CAAC,GAAG,EAAE,CAAC,EAAE,IAAI,CACtC;MAAA,CAAC,OAAO,CACN;QAAA,CAAC,EAAI,CACH,KAAK,CAAC,CAAC,GAAG,EAAE;YACV,MAAM,CAAC,GAAG,CAAC,MAAM,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;YAC7B,OAAO,MAAM,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC;QAC1B,CAAC,CAAC,EAEN;MAAA,EAAE,OAAO,CACX;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  },
 );
 describe("a component whose drawing is a conditional", () => {
   it("is built once, and draws the branch the write chose", async () => {

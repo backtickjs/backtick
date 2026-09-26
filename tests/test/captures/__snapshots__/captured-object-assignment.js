@@ -84,8 +84,10 @@ it("capturedObjectAssignment", async (t) => {
                 },
                 expression: false,
               }),
-              "export default ($0) => () => {\n    $0.count += 1;\n};",
-              '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"eAawB,QAAA,GAAG,EAAE;IACrB,EAAO,CAAC,KAAK,IAAI,CAAC,CAAC;AACrB,CAAC"}',
+              {
+                code: "export default ($0) => () => {\n    $0.count += 1;\n};",
+                map: '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"eAawB,QAAA,GAAG,EAAE;IACrB,EAAO,CAAC,KAAK,IAAI,CAAC,CAAC;AACrB,CAAC"}',
+              },
             ),
             bindings: ["counter$385xpgt8q0ek2$0"],
           },
@@ -276,8 +278,10 @@ it("capturedObjectAssignment", async (t) => {
           },
         ],
       }),
-      "export default ($0) => {\n    const counter = { count: 0 };\n    const bump = $0(counter);\n    bump();\n    bump();\n    return counter.count;\n};",
-      '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,OAAO,GAAG,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;IAC7B,MAAM,IAAI,GAAG,WAAC,CAEV;IACJ,IAAI,EAAE,CAAC;IACP,IAAI,EAAE,CAAC;IACP,OAAO,OAAO,CAAC,KAAK,CAAC;AACvB,CAAC"}',
+      {
+        code: "export default ($0) => {\n    const counter = { count: 0 };\n    const bump = $0(counter);\n    bump();\n    bump();\n    return counter.count;\n};",
+        map: '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captured-object-assignment.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,OAAO,GAAG,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;IAC7B,MAAM,IAAI,GAAG,WAAC,CAEV;IACJ,IAAI,EAAE,CAAC;IACP,IAAI,EAAE,CAAC;IACP,OAAO,OAAO,CAAC,KAAK,CAAC;AACvB,CAAC"}',
+      },
     ),
   );
 });

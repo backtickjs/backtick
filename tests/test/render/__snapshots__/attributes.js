@@ -726,8 +726,10 @@ describe("a field's value", () => {
           },
         ],
       }),
-      'export default ($0) => {\n    const text = $0()("first");\n    const isOn = $0()(false);\n    return (<div>\n          <input aria-label="text" value={text.get()}/>\n          <input type="checkbox" aria-label="on" checked={isOn.get()}/>\n          <button onclick={() => {\n            text.set("second");\n            isOn.set(true);\n        }}>\n            write\n          </button>\n        </div>);\n};',
-      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["attributes.test.tsx"],"names":[],"mappings":"eA8Gc;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,OAAO,CAAC,CAAC;IAC7B,MAAM,IAAI,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,GAAG,EAAE,CAAC,EAC3C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,GAAG,EAAE,CAAC,EAC3D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,QAAQ,CAAC,CAAC;YACnB,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;QACjB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      {
+        code: 'export default ($0) => {\n    const text = $0()("first");\n    const isOn = $0()(false);\n    return (<div>\n          <input aria-label="text" value={text.get()}/>\n          <input type="checkbox" aria-label="on" checked={isOn.get()}/>\n          <button onclick={() => {\n            text.set("second");\n            isOn.set(true);\n        }}>\n            write\n          </button>\n        </div>);\n};',
+        map: '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["attributes.test.tsx"],"names":[],"mappings":"eA8Gc;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,OAAO,CAAC,CAAC;IAC7B,MAAM,IAAI,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC3B,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,GAAG,EAAE,CAAC,EAC3C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,GAAG,EAAE,CAAC,EAC3D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,GAAG,CAAC,QAAQ,CAAC,CAAC;YACnB,IAAI,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;QACjB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      },
     );
   }
   it("follows a write after the field was edited", async () => {
@@ -1426,8 +1428,10 @@ describe("a field's value", () => {
           },
         ],
       }),
-      'export default ($0) => {\n    const texts = $0()(["typed by the script"]);\n    const flags = $0()([true]);\n    return (<div>\n          <input aria-label="text" value={texts.get()[0]}/>\n          <input type="checkbox" aria-label="on" checked={flags.get()[0]}/>\n          <button onclick={() => {\n            texts.set([]);\n            flags.set([]);\n        }}>\n            clear\n          </button>\n        </div>);\n};',
-      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["attributes.test.tsx"],"names":[],"mappings":"eAkJc;IACR,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,qBAAqB,CAAC,CAAC,CAAC;IAC9C,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC;IAC7B,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAC/C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAC/D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC;YACd,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      {
+        code: 'export default ($0) => {\n    const texts = $0()(["typed by the script"]);\n    const flags = $0()([true]);\n    return (<div>\n          <input aria-label="text" value={texts.get()[0]}/>\n          <input type="checkbox" aria-label="on" checked={flags.get()[0]}/>\n          <button onclick={() => {\n            texts.set([]);\n            flags.set([]);\n        }}>\n            clear\n          </button>\n        </div>);\n};',
+        map: '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["attributes.test.tsx"],"names":[],"mappings":"eAkJc;IACR,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,qBAAqB,CAAC,CAAC,CAAC;IAC9C,MAAM,KAAK,GAAG,IAAM,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC;IAC7B,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAC/C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,EAC/D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC;YACd,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      },
     );
   }
   it("is cleared by nothing, after the field was edited", async () => {

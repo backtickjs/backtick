@@ -71,8 +71,10 @@ function outerBase(inner) {
         },
       ],
     }),
-    "export default ($0) => {\n    const base = 1;\n    return base + $0();\n};",
-    '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAC,CAAoB;AACrC,CAAC"}',
+    {
+      code: "export default ($0) => {\n    const base = 1;\n    return base + $0();\n};",
+      map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAMY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAC,CAAoB;AACrC,CAAC"}',
+    },
   );
 }
 function middleBase(inner) {
@@ -151,8 +153,10 @@ function middleBase(inner) {
         },
       ],
     }),
-    "export default ($0) => {\n    const base = 2;\n    return base * $0();\n};",
-    '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAM,CAAC;AACvB,CAAC"}',
+    {
+      code: "export default ($0) => {\n    const base = 2;\n    return base * $0();\n};",
+      map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eAaY;IACR,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,IAAI,GAAG,IAAM,CAAC;AACvB,CAAC"}',
+    },
   );
 }
 // `cs`base`` is written under the outer `base`, but is threaded through two
@@ -182,8 +186,10 @@ it("deepShadowing", async (t) => {
                   name: "base",
                   key: "base$8up2nb5o0inm$2",
                 }),
-                "export default ($0) => $0;",
-                '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
+                {
+                  code: "export default ($0) => $0;",
+                  map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA6B4B,QAAA,EAAI"}',
+                },
               ),
             ),
             bindings: ["base$8up2nb5o0inm$2"],
@@ -245,8 +251,10 @@ it("deepShadowing", async (t) => {
           },
         ],
       }),
-      "export default ($0) => {\n    const base = 10;\n    return $0(base);\n};",
-      '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
+      {
+        code: "export default ($0) => {\n    const base = 10;\n    return $0(base);\n};",
+        map: '{"version":3,"file":"deep-shadowing.test.jsx","sourceRoot":"","sources":["deep-shadowing.test.tsx"],"names":[],"mappings":"eA2BO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC;IAChB,OAAO,QAAC,CAAsB;AAChC,CAAC"}',
+      },
     ),
   );
 });

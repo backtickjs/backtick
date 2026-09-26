@@ -109,8 +109,10 @@ describe("an undefined prop", () => {
             },
             expression: true,
           }),
-          "export default ($0) => (el) => $0()(() => el.focus());",
-          '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["undefined-prop.test.tsx"],"names":[],"mappings":"eAiCoC,QAAA,CAAC,EAAE,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
+          {
+            code: "export default ($0) => (el) => $0()(() => el.focus());",
+            map: '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["undefined-prop.test.tsx"],"names":[],"mappings":"eAiCoC,QAAA,CAAC,EAAE,EAAE,EAAE,CAAC,IAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
+          },
         ),
       }),
     );

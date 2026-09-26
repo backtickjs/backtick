@@ -729,8 +729,10 @@ it("jsonRoundTrip", async (t) => {
           },
         ],
       }),
-      'export default () => {\n    const numbers = JSON.stringify([1, 2, 3]);\n    const text = JSON.stringify("hi");\n    const flag = JSON.stringify(true);\n    const held = JSON.stringify({ a: 1, b: "two" });\n    const back = JSON.parse(numbers);\n    return (numbers +\n        "|" +\n        text +\n        "|" +\n        flag +\n        "|" +\n        held +\n        "|" +\n        JSON.stringify(back) +\n        "|" +\n        JSON.stringify(JSON.parse(held)));\n};',
-      '{"version":3,"file":"json.test.jsx","sourceRoot":"","sources":["json.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,OAAO,GAAG,IAAI,CAAC,SAAS,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC1C,MAAM,IAAI,GAAG,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,IAAI,GAAG,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,IAAI,GAAG,IAAI,CAAC,SAAS,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC;IAChD,MAAM,IAAI,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC,CAAC;IACjC,OAAO,CACL,OAAO;QACP,GAAG;QACH,IAAI;QACJ,GAAG;QACH,IAAI;QACJ,GAAG;QACH,IAAI;QACJ,GAAG;QACH,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC;QACpB,GAAG;QACH,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,CACjC,CAAC;AACJ,CAAC"}',
+      {
+        code: 'export default () => {\n    const numbers = JSON.stringify([1, 2, 3]);\n    const text = JSON.stringify("hi");\n    const flag = JSON.stringify(true);\n    const held = JSON.stringify({ a: 1, b: "two" });\n    const back = JSON.parse(numbers);\n    return (numbers +\n        "|" +\n        text +\n        "|" +\n        flag +\n        "|" +\n        held +\n        "|" +\n        JSON.stringify(back) +\n        "|" +\n        JSON.stringify(JSON.parse(held)));\n};',
+        map: '{"version":3,"file":"json.test.jsx","sourceRoot":"","sources":["json.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,OAAO,GAAG,IAAI,CAAC,SAAS,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC1C,MAAM,IAAI,GAAG,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,IAAI,GAAG,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC;IAClC,MAAM,IAAI,GAAG,IAAI,CAAC,SAAS,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC;IAChD,MAAM,IAAI,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC,CAAC;IACjC,OAAO,CACL,OAAO;QACP,GAAG;QACH,IAAI;QACJ,GAAG;QACH,IAAI;QACJ,GAAG;QACH,IAAI;QACJ,GAAG;QACH,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC;QACpB,GAAG;QACH,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,CACjC,CAAC;AACJ,CAAC"}',
+      },
     ),
   );
 });

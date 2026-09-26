@@ -138,8 +138,10 @@ it("objectDotsKey", async (t) => {
           },
         ],
       }),
-      'export default () => {\n    const base = { a: 1 };\n    return { ...base, "...": 2 };\n};',
-      '{"version":3,"file":"object-dots-key.test.jsx","sourceRoot":"","sources":["object-dots-key.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,GAAG,IAAI,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;AAC/B,CAAC"}',
+      {
+        code: 'export default () => {\n    const base = { a: 1 };\n    return { ...base, "...": 2 };\n};',
+        map: '{"version":3,"file":"object-dots-key.test.jsx","sourceRoot":"","sources":["object-dots-key.test.tsx"],"names":[],"mappings":"eAWO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,GAAG,IAAI,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;AAC/B,CAAC"}',
+      },
     ),
   );
 });

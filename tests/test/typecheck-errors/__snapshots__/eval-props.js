@@ -71,8 +71,10 @@ async function Row({ count }) {
         },
       },
     }),
-    'export default ($0) => <em>{"rows " + $0()}</em>;',
-    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAaY,QAAA,CAAC,EAAE,CAAC,CAAC,OAAO,GAAG,IAAM,CAAC,EAAE,EAAE,CAAC"}',
+    {
+      code: 'export default ($0) => <em>{"rows " + $0()}</em>;',
+      map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAaY,QAAA,CAAC,EAAE,CAAC,CAAC,OAAO,GAAG,IAAM,CAAC,EAAE,EAAE,CAAC"}',
+    },
   );
 }
 async function Nothing() {
@@ -126,8 +128,10 @@ async function Nothing() {
         },
       },
     }),
-    'export default () => <em>{"nothing to hand it"}</em>;',
-    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAiBY,MAAA,CAAC,EAAE,CAAC,CAAC,oBAAoB,CAAC,EAAE,EAAE,CAAC"}',
+    {
+      code: 'export default () => <em>{"nothing to hand it"}</em>;',
+      map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAiBY,MAAA,CAAC,EAAE,CAAC,CAAC,oBAAoB,CAAC,EAAE,EAAE,CAAC"}',
+    },
   );
 }
 const rows = await bundler.run(
@@ -167,8 +171,10 @@ const rows = await bundler.run(
                 computed: false,
                 optional: false,
               }),
-              "export default ($0) => $0.count;",
-              '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAqBqD,QAAA,EAAK,CAAC,KAAK"}',
+              {
+                code: "export default ($0) => $0.count;",
+                map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAqBqD,QAAA,EAAK,CAAC,KAAK"}',
+              },
             ),
           }),
           bindings: ["props$3og7hp7gm9m5d$0"],
@@ -196,8 +202,10 @@ const rows = await bundler.run(
       },
       expression: true,
     }),
-    "export default ($0) => (props) => $0(props);",
-    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAqBK,QAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,SAAC"}',
+    {
+      code: "export default ($0) => (props) => $0(props);",
+      map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eAqBK,QAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,SAAC"}',
+    },
   ),
 );
 const empty = await bundler.run(_jsx(Nothing, {}));
@@ -940,6 +948,8 @@ export default cs.create(
       },
     ],
   }),
-  'export default ($0, $1) => {\n    const Rows = eval($0());\n    const Empty = eval($1());\n    const wrongType = <Rows count={"one"}/>;\n    const unknownName = <Rows nope={1}/>;\n    const missing = <Rows />;\n    const called = <Empty count={1}/>;\n    return (<div>\n      \n      <Rows count={1}/>\n      {Empty}\n      {wrongType}\n      {unknownName}\n      {missing}\n      {called}\n      \n      {eval(null)}\n    </div>);\n};',
-  '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eA0BkB;IAChB,MAAM,IAAI,GAAG,IAAI,CAAC,IAAK,CAAC,CAAC;IACzB,MAAM,KAAK,GAAG,IAAI,CAAC,IAAM,CAAC,CAAC;IAI3B,MAAM,SAAS,GAAG,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,EAAG,CAAC;IAEzC,MAAM,WAAW,GAAG,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEtC,MAAM,OAAO,GAAG,CAAC,IAAI,CAAC,AAAD,EAAG,CAAC;IAIzB,MAAM,MAAM,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEnC,OAAO,CACL,CAAC,GAAG,CACF;MACA;MAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EACf;MAAA,CAAC,KAAK,CACN;MAAA,CAAC,SAAS,CACV;MAAA,CAAC,WAAW,CACZ;MAAA,CAAC,OAAO,CACR;MAAA,CAAC,MAAM,CACP;MACA;MAAA,CAEE,IAAI,CAAC,IAAI,CACX,CACF;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  {
+    code: 'export default ($0, $1) => {\n    const Rows = eval($0());\n    const Empty = eval($1());\n    const wrongType = <Rows count={"one"}/>;\n    const unknownName = <Rows nope={1}/>;\n    const missing = <Rows />;\n    const called = <Empty count={1}/>;\n    return (<div>\n      \n      <Rows count={1}/>\n      {Empty}\n      {wrongType}\n      {unknownName}\n      {missing}\n      {called}\n      \n      {eval(null)}\n    </div>);\n};',
+    map: '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["eval-props.test.tsx"],"names":[],"mappings":"eA0BkB;IAChB,MAAM,IAAI,GAAG,IAAI,CAAC,IAAK,CAAC,CAAC;IACzB,MAAM,KAAK,GAAG,IAAI,CAAC,IAAM,CAAC,CAAC;IAI3B,MAAM,SAAS,GAAG,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,EAAG,CAAC;IAEzC,MAAM,WAAW,GAAG,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEtC,MAAM,OAAO,GAAG,CAAC,IAAI,CAAC,AAAD,EAAG,CAAC;IAIzB,MAAM,MAAM,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEnC,OAAO,CACL,CAAC,GAAG,CACF;MACA;MAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EACf;MAAA,CAAC,KAAK,CACN;MAAA,CAAC,SAAS,CACV;MAAA,CAAC,WAAW,CACZ;MAAA,CAAC,OAAO,CACR;MAAA,CAAC,MAAM,CACP;MACA;MAAA,CAEE,IAAI,CAAC,IAAI,CACX,CACF;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  },
 );

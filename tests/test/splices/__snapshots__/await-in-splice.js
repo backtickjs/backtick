@@ -39,8 +39,10 @@ it("awaitInSplice", async (t) => {
           value: "!",
         },
       }),
-      'export default ($0) => $0() + "!";',
-      '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["await-in-splice.test.tsx"],"names":[],"mappings":"eAY4C,QAAA,IAAC,GAA0B,GAAG"}',
+      {
+        code: 'export default ($0) => $0() + "!";',
+        map: '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["await-in-splice.test.tsx"],"names":[],"mappings":"eAY4C,QAAA,IAAC,GAA0B,GAAG"}',
+      },
     ),
   );
 });

@@ -75,8 +75,10 @@ it("scriptBoundTagParam", async (t) => {
                 children: [],
                 closingElement: null,
               }),
-              "export default ($0) => <$0 n={1}/>;",
-              '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"eAegB,QAAA,CAAC,EAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+              {
+                code: "export default ($0) => <$0 n={1}/>;",
+                map: '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"eAegB,QAAA,CAAC,EAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+              },
             ),
             bindings: ["Row$3ehgcl2xwg3z1$1"],
           },
@@ -143,8 +145,10 @@ it("scriptBoundTagParam", async (t) => {
                 children: [],
                 closingElement: null,
               }),
-              "export default ($0) => <$0 n={2}/>;",
-              '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"eAgBgB,QAAA,CAAC,EAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+              {
+                code: "export default ($0) => <$0 n={2}/>;",
+                map: '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"eAgBgB,QAAA,CAAC,EAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+              },
             ),
             bindings: ["Row$3ehgcl2xwg3z1$1"],
           },
@@ -434,8 +438,10 @@ it("scriptBoundTagParam", async (t) => {
           },
         ],
       }),
-      'export default ($0, $1) => {\n    const twice = (Row) => (<ul>\n          {$0(Row)}\n          {$1(Row)}\n        </ul>);\n    return twice((p) => <li>{"row " + p.n}</li>);\n};',
-      '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,GAA0C,EAAE,EAAE,CAAC,CAC5D,CAAC,EAAE,CACD;UAAA,CAAC,OAAoB,CACrB;UAAA,CAAC,OAAoB,CACvB;QAAA,EAAE,EAAE,CAAC,CACN,CAAC;IACF,OAAO,KAAK,CAAC,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC;AAC9D,CAAC"}',
+      {
+        code: 'export default ($0, $1) => {\n    const twice = (Row) => (<ul>\n          {$0(Row)}\n          {$1(Row)}\n        </ul>);\n    return twice((p) => <li>{"row " + p.n}</li>);\n};',
+        map: '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["script-bound-tag-param.test.tsx"],"names":[],"mappings":"eAYO;IACD,MAAM,KAAK,GAAG,CAAC,GAA0C,EAAE,EAAE,CAAC,CAC5D,CAAC,EAAE,CACD;UAAA,CAAC,OAAoB,CACrB;UAAA,CAAC,OAAoB,CACvB;QAAA,EAAE,EAAE,CAAC,CACN,CAAC;IACF,OAAO,KAAK,CAAC,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC;AAC9D,CAAC"}',
+      },
     ),
   );
 });

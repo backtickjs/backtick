@@ -21,8 +21,10 @@ describe("a spliced undefined", () => {
             },
             param: 0,
           }),
-          "export default ($0) => $0();",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAWmC,QAAA,IAAQ"}',
+          {
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAWmC,QAAA,IAAQ"}',
+          },
         ),
       ),
       undefined,
@@ -42,8 +44,10 @@ describe("a spliced undefined", () => {
           },
           param: 0,
         }),
-        "export default ($0) => $0();",
-        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAgBsC,QAAA,IAAK"}',
+        {
+          code: "export default ($0) => $0();",
+          map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAgBsC,QAAA,IAAK"}',
+        },
       ),
     );
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
@@ -64,8 +68,10 @@ describe("a spliced undefined", () => {
             },
             param: 0,
           }),
-          "export default ($0) => $0();",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAuBuC,QAAA,IAAK"}',
+          {
+            code: "export default ($0) => $0();",
+            map: '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["undefined-splice.test.tsx"],"names":[],"mappings":"eAuBuC,QAAA,IAAK"}',
+          },
         ),
       ),
       [1, undefined, 3],

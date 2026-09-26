@@ -77,8 +77,10 @@ const SharedCounter = async ({ size }) =>
           value: "px",
         },
       }),
-      'export default ($0) => "font-size: " + $0().get() + "px";',
-      '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAcc,QAAA,aAAa,GAAG,IAAK,CAAC,GAAG,EAAE,GAAG,IAAI"}',
+      {
+        code: 'export default ($0) => "font-size: " + $0().get() + "px";',
+        map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAcc,QAAA,aAAa,GAAG,IAAK,CAAC,GAAG,EAAE,GAAG,IAAI"}',
+      },
     ),
     onclick: cs.create(
       "1myb4rrcna327:16:13",
@@ -190,8 +192,10 @@ const SharedCounter = async ({ size }) =>
         },
         expression: false,
       }),
-      "export default ($0) => () => {\n    $0().set($0().get() + 1);\n};",
-      '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAegB,QAAA,GAAG,EAAE;IACf,IAAK,CAAC,GAAG,CAAC,IAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;AAC7B,CAAC"}',
+      {
+        code: "export default ($0) => () => {\n    $0().set($0().get() + 1);\n};",
+        map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAegB,QAAA,GAAG,EAAE;IACf,IAAK,CAAC,GAAG,CAAC,IAAK,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;AAC7B,CAAC"}',
+      },
     ),
     children: "press",
   });
@@ -452,8 +456,10 @@ async function SharingPanel() {
         },
       ],
     }),
-    "export default ($0, $1) => {\n    const size = $0()(16);\n    return (<div>\n        <$1 size={size}/>\n        <$1 size={size}/>\n      </div>);\n};",
-    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAwBY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC1B;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC5B;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    {
+      code: "export default ($0, $1) => {\n    const size = $0()(16);\n    return (<div>\n        <$1 size={size}/>\n        <$1 size={size}/>\n      </div>);\n};",
+      map: '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["local-state-prop.test.tsx"],"names":[],"mappings":"eAwBY;IACR,MAAM,IAAI,GAAG,IAAM,CAAC,EAAE,CAAC,CAAC;IACxB,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC1B;QAAA,CAAC,EAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC5B;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    },
   );
 }
 describe("local state", () => {

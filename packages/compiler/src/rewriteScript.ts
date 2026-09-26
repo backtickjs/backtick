@@ -2,7 +2,7 @@ import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { type EmittedScript, emitScript, scriptEdits } from "./emitScript.js";
-import { arrow, call, iife, object } from "./nodeFactory.js";
+import { arrow, call, iife, literal, object } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
@@ -157,8 +157,7 @@ export function rewriteScript(
     // per call, and the bundler reads one per source location, so the nodes
     // are built when they are first read rather than at every call.
     arrow(ts, [], object(ts, rewritten.runtime)),
-    ts.factory.createStringLiteral(emitted.code),
-    ts.factory.createStringLiteral(emitted.map),
+    literal(ts, emitted),
   ]);
 
   return {
