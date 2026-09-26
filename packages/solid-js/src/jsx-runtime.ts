@@ -4,7 +4,7 @@ import type {
   JsxElementType,
   Prop,
 } from "@backtickjs/ui-platform-sdk";
-import { createFragment, createJsxElement } from "@backtickjs/ui-platform-sdk";
+import { createJsxElement } from "@backtickjs/ui-platform-sdk";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and
@@ -12,7 +12,17 @@ import type { JSX as Solid } from "solid-js";
 // `Prop` — host data, or a script standing for it — so what a script hands an
 // element is checked the way a host's is.
 
-export const Fragment = createFragment();
+/**
+ * Children with no element of their own: `<>` and `<Fragment>`. Solid has no
+ * component for it — its compiler writes a fragment as an array — so this is a
+ * server component whose drawing is that array. Always an array, so a single
+ * child that is a script stays a child, read where it stands, rather than a
+ * script the component drew.
+ */
+export function Fragment(props: { children?: Children }): JSX.Element {
+  // What JSX types a drawing as; the bundler writes the array as it is.
+  return [props.children] as unknown as JSX.Element;
+}
 
 // An element's props as Solid types them, each a `Prop`, and its children.
 type Props<Attributes> = {

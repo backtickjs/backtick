@@ -381,19 +381,12 @@ export async function buildBundle<T extends ClientUnknown>(
         written.push([key, await renderProp(jsx, key, entry, params)]);
         continue;
       }
-      // A fragment is its children: JSX has no fragment inside an element.
-      if (type === "Fragment") {
-        return renderProp(jsx, key, entry, params);
-      }
       // Each child its own: an array is several, and `null` is none.
       const each = Array.isArray(entry) ? entry : entry === null ? [] : [entry];
       children = [];
       for (const child of each) {
         children.push(await renderProp(jsx, key, child, params));
       }
-    }
-    if (type === "Fragment") {
-      return literal(null);
     }
     // A component a client module provides is written as a tag of its import.
     const tag = isClientImport(type)

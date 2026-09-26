@@ -6,6 +6,6 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
 export default () =>
   (() => {
     var _el$ = _tmpl$();
-    _$insert(_el$, [_tmpl$2(), _tmpl$3()]);
+    _$insert(_el$, [[_tmpl$2(), _tmpl$3()]]);
     return _el$;
   })();
