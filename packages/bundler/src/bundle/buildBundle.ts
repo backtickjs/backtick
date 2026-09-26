@@ -61,9 +61,7 @@ const RESERVED = ["globalThis", "arguments", "await", "eval", "yield"];
 // name, a capture is threaded under that one name the whole way down — an
 // intermediate script that binds a same-looking variable has a different
 // unique name, so there is nothing to disambiguate and nothing to rename.
-export async function buildBundle<T>(
-  value: Spliceable<T>,
-): Promise<BundleTree> {
+export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   const names = createNames();
   // Each script's number, in the order rendering first reaches it. Two
   // scripts written at one source location are one declaration, so the first

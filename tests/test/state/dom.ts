@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import type { BacktickElement } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js/testing";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // The behavior side of per-instance state: a write has to persist, move
 // everything that read the cell, and leave every other instance alone.
@@ -10,7 +10,7 @@ import { render } from "@backtickjs/solid-js/testing";
 // the host was told, which is the whole of what a host would have drawn.
 
 // What an element drew, as the one element it put in the page.
-export async function drawn(value: BacktickElement): Promise<Element> {
+export async function drawn(value: JSX.Element): Promise<Element> {
   const { container } = await render(value);
   const node = container.firstElementChild;
   assert.ok(node !== null, "expected a rendered element");

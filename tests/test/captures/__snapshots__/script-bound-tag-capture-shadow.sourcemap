@@ -97,7 +97,9 @@ number                            → number
 ;                                 → 
 \n    }                           →  }
 ) =>                              → ) => 
-BacktickElement                   → BacktickElement
+JSX                               → JSX
+.                                 → .
+Element                           → Element
 ) =>                              → ) => 
 <                                 → (\n        <
 div                               → div

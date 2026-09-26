@@ -1,12 +1,9 @@
 import { createJsxElement, type JsxElementType } from "@backtickjs/bundler";
-import {
-  type BacktickElement,
-  createImport,
-  type Prop,
-} from "@backtickjs/platform-sdk";
+import { createImport, type Prop } from "@backtickjs/platform-sdk";
 import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";
+import type { JSX } from "./jsx-runtime.js";
 
 // Solid's API as a script splices it — `$createSignal(0)` — each typed with
 // Solid's own declarations, and each imported from Solid by the bundle that
@@ -87,18 +84,21 @@ export const Portal = web("Portal");
 function solidElement(
   name: "For" | "Show",
   props: { [key: string]: unknown },
-): Promise<BacktickElement> {
+): Promise<JSX.Element> {
   return Promise.resolve(
-    createJsxElement(solid(name) as unknown as JsxElementType, props),
+    createJsxElement(
+      solid(name) as unknown as JsxElementType,
+      props,
+    ) as unknown as JSX.Element,
   );
 }
 
 /** Solid's `For`: `children` drawn once per member of `each`. */
 export function For<T>(props: {
   each: Prop<readonly T[] | undefined | null | false>;
-  fallback?: Prop<BacktickElement>;
-  children: Prop<(item: T, index: () => number) => BacktickElement>;
-}): Promise<BacktickElement> {
+  fallback?: Prop<JSX.Element>;
+  children: Prop<(item: T, index: () => number) => JSX.Element>;
+}): Promise<JSX.Element> {
   return solidElement("For", {
     each: props.each,
     fallback: props.fallback,
@@ -109,9 +109,9 @@ export function For<T>(props: {
 /** Solid's `Show`: `children` while `when` holds, `fallback` otherwise. */
 export function Show<T>(props: {
   when: Prop<T | undefined | null | false>;
-  fallback?: Prop<BacktickElement>;
-  children: Prop<BacktickElement | ((item: () => T) => BacktickElement)>;
-}): Promise<BacktickElement> {
+  fallback?: Prop<JSX.Element>;
+  children: Prop<JSX.Element | ((item: () => T) => JSX.Element)>;
+}): Promise<JSX.Element> {
   return solidElement("Show", {
     when: props.when,
     fallback: props.fallback,

@@ -13,9 +13,7 @@ import type { Spliceable } from "@backtickjs/platform-sdk";
  * map, for the framework's compiler to make a bundle of.
  */
 export const bundler = {
-  async run<T>(
-    value: Spliceable<T>,
-  ): Promise<JsxModule<T>> {
+  async run(value: Spliceable): Promise<JsxModule> {
     return printBundle(await buildBundle(value));
   },
 };

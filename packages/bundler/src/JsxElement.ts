@@ -1,22 +1,18 @@
-import type { BacktickElement, Prop } from "@backtickjs/platform-sdk";
+import type { ClientHandle } from "@backtickjs/platform-sdk";
 
 /**
  * What a JSX tag may name: an element to draw, or a component to run while
- * bundling.
+ * bundling. What a component may answer is its adapter's to type.
  */
-export type JsxElementType =
-  | string /* IntrinsicElement tag */
-  | ((props: never) => Prop<BacktickElement | null>)
-  | ((props: never) => Promise<Prop<BacktickElement | null>>);
+export type JsxElementType = string | ((props: never) => unknown);
 
 /**
- * What a JSX tag evaluates to on the server, before bundling resolves it.
- *
- * The tag and its props are the server's own, and nothing a client script
- * holds reaches them — which is why they are here and not on `BacktickElement`:
- * a drawing is what both sides name, and this is what one side builds it from.
+ * What a JSX tag evaluates to on the server, before bundling resolves it: the
+ * tag and its props, which are the server's own. What a drawing is, is the
+ * adapter's; this is what the bundler expands. A handle, so a host may hand one
+ * over wherever a drawing may stand.
  */
-export interface JsxElement extends BacktickElement {
+export interface JsxElement extends ClientHandle {
   readonly "@backtickjs": "JsxElement";
   readonly type: JsxElementType;
   readonly props: { [key: string]: unknown };
@@ -31,16 +27,9 @@ export function isJsxElement(value: unknown): value is JsxElement {
   );
 }
 
-// The one place a host drawing is made: the brand is a symbol nothing outside
-// `BacktickElement.ts` can write, so what makes one says so here rather than
-// every holder being asked to prove it.
 export function createJsxElement(
   type: JsxElementType,
   props: { [key: string]: unknown },
-): BacktickElement {
-  return {
-    "@backtickjs": "JsxElement",
-    type,
-    props,
-  } as unknown as BacktickElement;
+): JsxElement {
+  return { "@backtickjs": "JsxElement", type, props } as unknown as JsxElement;
 }

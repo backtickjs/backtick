@@ -1,5 +1,5 @@
 import { bundler, type JsxModule } from "@backtickjs/bundler";
-import type { BacktickElement } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 
 /**
  * Runs `element` and returns its bundle, compiled with the adapter's
@@ -9,12 +9,12 @@ import type { BacktickElement } from "@backtickjs/core";
  * stands, on `self.__backtick`. The bundle is behind a function, so nothing in
  * it runs until the client has defined its globals and drains the queue.
  */
-export async function renderToString(
-  element: BacktickElement,
+export async function renderToString<T>(
+  element: Spliceable<T>,
   clientUrl: string,
-  compile: (module: JsxModule<unknown>) => { readonly code: string },
+  compile: (module: JsxModule) => { readonly code: string },
 ): Promise<string> {
-  const { code } = compile(await bundler.run(element));
+  const { code } = compile(await bundler.run(element as Spliceable));
   const script = `(self.__backtick ??= []).push([document.currentScript, () => ${code}]);`;
   // The printer escapes every `<` a string holds; this is what would end the
   // element early if it ever did not.

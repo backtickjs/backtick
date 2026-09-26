@@ -12,24 +12,24 @@ async function Card(props) {
 // polymorphic and its nested script's captures arrive through a thunk.
 function labelled(label) {
   return cs.create(
-    "2mv5sg07ackia:16:9",
+    "1vpk154d1g5tu:17:9",
     {
       params: [
         { kind: "splice", value: label, bindings: [] },
         {
           kind: "splice",
           value: cs.create(
-            "2mv5sg07ackia:18:17",
-            { params: [{ kind: "capture", key: "Card$2mv5sg07ackia$0" }] },
+            "1vpk154d1g5tu:19:17",
+            { params: [{ kind: "capture", key: "Card$1vpk154d1g5tu$0" }] },
             "($capture0) => <$capture0 n={1}/>",
-            '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAiBoB,eAAA,CAAC,SAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+            '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAkBoB,eAAA,CAAC,SAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
           ),
-          bindings: ["Card$2mv5sg07ackia$0"],
+          bindings: ["Card$1vpk154d1g5tu$0"],
         },
       ],
     },
     "($splice0, $splice1) => {\n    const Card = (props) => <i>{$splice0() + props.n}</i>;\n    return <p>{$splice1(Card)}</p>;\n}",
-    '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,IAAI,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,UAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACjE,OAAO,CAAC,CAAC,CAAC,CAAC,cAAqB,CAAC,EAAE,CAAC,CAAC,CAAC;AACxC,CAAC"}',
+    '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAgBY;IACR,MAAM,IAAI,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,UAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACjE,OAAO,CAAC,CAAC,CAAC,CAAC,cAAqB,CAAC,EAAE,CAAC,CAAC,CAAC;AACxC,CAAC"}',
   );
 }
 it("scriptBoundTagCaptureShadow", async (t) => {
@@ -37,17 +37,17 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     t,
     "scriptBoundTagCaptureShadow",
     cs.create(
-      "2mv5sg07ackia:26:4",
+      "1vpk154d1g5tu:27:4",
       {
         params: [
           {
             kind: "splice",
             value: labelled(
               cs.create(
-                "2mv5sg07ackia:28:18",
+                "1vpk154d1g5tu:29:18",
                 { params: [] },
                 '() => "a"',
-                '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA2BqB,MAAA,GAAG"}',
+                '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA4BqB,MAAA,GAAG"}',
               ),
             ),
             bindings: [],
@@ -56,10 +56,10 @@ it("scriptBoundTagCaptureShadow", async (t) => {
             kind: "splice",
             value: labelled(
               cs.create(
-                "2mv5sg07ackia:29:18",
+                "1vpk154d1g5tu:30:18",
                 { params: [] },
                 '() => "b"',
-                '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA4BqB,MAAA,GAAG"}',
+                '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA6BqB,MAAA,GAAG"}',
               ),
             ),
             bindings: [],
@@ -68,7 +68,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
         ],
       },
       '($splice0, $splice1, $tag2) => <div>\n      <$tag2 title="host"/>\n      {$splice0()}\n      {$splice1()}\n    </div>',
-      '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAyBO,+BAAA,CAAC,GAAG,CACL;MAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;MAAA,CAAC,UAAoB,CACrB;MAAA,CAAC,UAAoB,CACvB;IAAA,EAAE,GAAG,CAAC"}',
+      '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA0BO,+BAAA,CAAC,GAAG,CACL;MAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;MAAA,CAAC,UAAoB,CACrB;MAAA,CAAC,UAAoB,CACvB;IAAA,EAAE,GAAG,CAAC"}',
     ),
   );
 });
@@ -80,10 +80,10 @@ it("scriptBoundTagScope", async (t) => {
     t,
     "scriptBoundTagScope",
     cs.create(
-      "2mv5sg07ackia:41:4",
+      "1vpk154d1g5tu:42:4",
       { params: [{ kind: "tag", value: Card }] },
       '($tag0) => {\n    const twice = (Card) => (<div>\n          <Card n={1}/>\n          <Card n={2}/>\n        </div>);\n    return (<section>\n          <$tag0 title="host"/>\n          {twice((props) => (<i>{"row " + props.n}</i>))}\n        </section>);\n}',
-      '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAwCO;IACD,MAAM,KAAK,GAAG,CAAC,IAA+C,EAAE,EAAE,CAAC,CACjE,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACX;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACb;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;IAEF,OAAO,CACL,CAAC,OAAO,CACN;UAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;UAAA,CAAC,KAAK,CAAC,CAAC,KAAoB,EAAE,EAAE,CAAC,CAC/B,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAC1B,CAAC,CACJ;QAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+      '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAyCO;IACD,MAAM,KAAK,GAAG,CAAC,IAA2C,EAAE,EAAE,CAAC,CAC7D,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACX;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACb;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;IAEF,OAAO,CACL,CAAC,OAAO,CACN;UAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;UAAA,CAAC,KAAK,CAAC,CAAC,KAAoB,EAAE,EAAE,CAAC,CAC/B,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAC1B,CAAC,CACJ;QAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
     ),
   );
 });

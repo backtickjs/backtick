@@ -19,9 +19,7 @@ const MODULE_ID = "bundle.jsx";
  * script's own map, moved to where the script stands in the module. What the
  * bundler wrote around the scripts maps to nothing, since no source wrote it.
  */
-export function printBundle<T>(
-  tree: BundleTree,
-): JsxModule<T> {
+export function printBundle(tree: BundleTree): JsxModule {
   const { names } = tree;
   const module = new ModuleWriter();
   for (const { from, name, local } of names.imports.values()) {

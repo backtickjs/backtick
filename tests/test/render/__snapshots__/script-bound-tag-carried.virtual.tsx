@@ -2,14 +2,15 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import type { BacktickElement, Prop } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.
-async function Panel(props: { body: Prop<BacktickElement> }) {
+async function Panel(props: { body: Prop<JSX.Element> }) {
   return cs.lift((() => {
     const __cs_Badge = (__cs_p: {
         n: number;
@@ -26,7 +27,7 @@ const scriptBoundTagCarried = cs.lift((() => {
     const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
     const __cs_Badge = (__cs_p: {
         n: number;
-        children: BacktickElement;
+        children: JSX.Element;
     }) => <b>{cs.lift("outer " + __cs_p.n)}{cs.lift(__cs_p.children)}</b>;
     return <div>{cs.lift(<Panel body={cs.lift(cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]()}>{<u>{cs.lift("kid " + __cs_count[0]())}</u>}</__cs_Badge>) satisfies typeof cs.Spliceable))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>more</button>)}</div>;
 })());

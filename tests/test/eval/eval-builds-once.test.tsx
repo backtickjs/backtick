@@ -5,10 +5,11 @@ import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
+import type { Bundle, Prop } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { settled } from "../render/dom.ts";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A component is built once, however what it drew changes afterwards.
 //
@@ -49,16 +50,14 @@ const answer = compile(await bundler.run(<Answer />)).code;
 async function Waiting({
   ask,
 }: {
-  ask: Prop<() => Bundle<BacktickElement> | null>;
+  ask: Prop<() => Bundle<JSX.Element> | null>;
 }) {
   return cs`{
-    const drawn = $createSignal<Bundle<BacktickElement> | null>(null);
+    const drawn = $createSignal<Bundle<JSX.Element> | null>(null);
     const started = $window.setTimeout(() => drawn[1]($ask()), 0);
     return (
       <>
-        {drawn[0]() === null
-          ? null
-          : eval(drawn[0]() as Bundle<BacktickElement>)}
+        {drawn[0]() === null ? null : eval(drawn[0]() as Bundle<JSX.Element>)}
       </>
     );
   }`;

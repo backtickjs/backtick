@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import type { BacktickElement } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A tag naming a parameter of an arrow in the enclosing script. The nested
 // scripts sit inside the arrow's body, so the parameter reaches them through
@@ -13,7 +13,7 @@ it("scriptBoundTagParam", async (t) => {
     cs.lift((() => {
     const __cs_twice = (__cs_Row: (p: {
         n: number;
-    }) => BacktickElement) => <ul>{cs.lift(cs.splice(cs.lift(<__cs_Row n={1}/>) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(cs.lift(<__cs_Row n={2}/>) satisfies typeof cs.Spliceable))}</ul>;
+    }) => JSX.Element) => <ul>{cs.lift(cs.splice(cs.lift(<__cs_Row n={1}/>) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(cs.lift(<__cs_Row n={2}/>) satisfies typeof cs.Spliceable))}</ul>;
     return __cs_twice((__cs_p: {
         n: number;
     }) => <li>{cs.lift("row " + __cs_p.n)}</li>);

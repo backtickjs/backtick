@@ -74,7 +74,9 @@ number                            → number
 \n                                →  
 children                          → children
 :                                 → : 
-BacktickElement                   → BacktickElement
+JSX                               → JSX
+.                                 → .
+Element                           → Element
 ;                                 → 
 \n    }                           →  }
 ) =>                              → ) => 

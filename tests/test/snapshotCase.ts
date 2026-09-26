@@ -3,13 +3,14 @@ import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
-import type { BacktickElement, Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 import prettier from "prettier";
 import { evaluate, render } from "@backtickjs/solid-js/testing";
 import { isNode } from "./node.ts";
 import { renderBundleMappings } from "./renderBundleMappings.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // Written as given: each artifact is text meant to be read in its own file.
 const verbatim = [(value: unknown) => value as string];
@@ -48,7 +49,7 @@ export async function snapshotCase(
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));
   // Rendered only once evaluating it showed it draws.
   record(
-    `${drawn ? renderDrawing((await render(value as BacktickElement)).container) : renderValue(evaluated)}\n`,
+    `${drawn ? renderDrawing((await render(value as JSX.Element)).container) : renderValue(evaluated)}\n`,
     "value",
   );
 }

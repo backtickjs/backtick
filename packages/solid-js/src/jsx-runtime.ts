@@ -1,9 +1,5 @@
-import { createJsxElement, type JsxElementType } from "@backtickjs/bundler";
-import type {
-  BacktickElement,
-  Children,
-  Prop,
-} from "@backtickjs/platform-sdk";
+import { createJsxElement } from "@backtickjs/bundler";
+import type { ClientHandle, Prop } from "@backtickjs/platform-sdk";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and
@@ -23,6 +19,16 @@ export function Fragment(props: { children?: Children }): JSX.Element {
   return [props.children] as unknown as JSX.Element;
 }
 
+declare const ElementBrand: unique symbol;
+
+/**
+ * What may stand inside an element: one thing, or several. A script may stand
+ * where a value is written; a list that changes is drawn with `<For />`.
+ */
+export type Children =
+  | Prop<JSX.Element | string | number | null>
+  | readonly Children[];
+
 // An element's props as Solid types them, each a `Prop`, and its children.
 type Props<Attributes> = {
   [Key in keyof Attributes as Key extends "children"
@@ -35,9 +41,19 @@ type Elements = {
 };
 
 export declare namespace JSX {
-  export interface Element extends BacktickElement {}
+  /**
+   * A drawing, as a host builds one from a tag or a script evaluates to one.
+   * Opaque: what it is made of belongs to whichever side made it.
+   */
+  export interface Element extends ClientHandle {
+    readonly [ElementBrand]: never;
+  }
   export interface IntrinsicElements extends Elements {}
-  export type ElementType = JsxElementType;
+  /** A tag: an element to draw, or a component that answers a drawing. */
+  export type ElementType =
+    | string
+    | ((props: never) => Prop<Element | null>)
+    | ((props: never) => Promise<Prop<Element | null>>);
   export interface ElementChildrenAttribute {
     children: unknown;
   }
@@ -47,7 +63,7 @@ export function jsx(
   type: JSX.ElementType,
   props: { [key: string]: unknown },
 ): JSX.Element {
-  return createJsxElement(type, props);
+  return createJsxElement(type, props) as unknown as JSX.Element;
 }
 
 export const jsxs = jsx;

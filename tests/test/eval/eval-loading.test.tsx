@@ -1,8 +1,9 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import type { BacktickElement, Bundle } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A bundle a page does not have yet, and what stands in until it does.
 //
@@ -16,14 +17,14 @@ it("evalLoading", async (t) => {
     t,
     "evalLoading",
     cs`{
-      const held = $createSignal<Bundle<BacktickElement> | null>(null);
+      const held = $createSignal<Bundle<JSX.Element> | null>(null);
 
       return (
         <div>
           {held[0]() === null ? (
             <span>loading…</span>
           ) : (
-            eval(held[0]() as Bundle<BacktickElement>)
+            eval(held[0]() as Bundle<JSX.Element>)
           )}
         </div>
       );

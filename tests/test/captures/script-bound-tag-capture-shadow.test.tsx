@@ -1,7 +1,8 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import type { BacktickElement, Client, Prop } from "@backtickjs/core";
+import type { Client, Prop } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A host component, and a binding of the same name an enclosing script holds.
 // Scope decides: the nested script's `<Card>` is the captured function, and
@@ -39,7 +40,7 @@ it("scriptBoundTagScope", async (t) => {
     t,
     "scriptBoundTagScope",
     cs`{
-      const twice = (Card: (props: { n: number }) => BacktickElement) => (
+      const twice = (Card: (props: { n: number }) => JSX.Element) => (
         <div>
           <Card n={1} />
           <Card n={2} />

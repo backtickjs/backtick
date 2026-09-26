@@ -2,14 +2,15 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import type { BacktickElement, Prop } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.
-async function Panel(props: { body: Prop<BacktickElement> }) {
+async function Panel(props: { body: Prop<JSX.Element> }) {
   return cs`{
     const Badge = (p: { n: number }) => <i>{"panel " + p.n}</i>;
     return (
@@ -27,7 +28,7 @@ async function Panel(props: { body: Prop<BacktickElement> }) {
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs`{
   const count = $createSignal(0);
-  const Badge = (p: { n: number; children: BacktickElement }) => (
+  const Badge = (p: { n: number; children: JSX.Element }) => (
     <b>
       {"outer " + p.n}
       {p.children}

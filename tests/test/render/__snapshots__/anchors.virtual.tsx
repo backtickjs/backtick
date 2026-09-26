@@ -3,14 +3,14 @@ import { afterEach, describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
-import type { BacktickElement } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { client } from "@backtickjs/solid-js/client";
-import { createRoot, type JSX } from "solid-js";
+import { createRoot, type JSX as Solid } from "solid-js";
 import { insert } from "solid-js/web";
 import { screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // Where a render draws, and what it may move.
 //
@@ -80,14 +80,14 @@ function target(html: string): Element {
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
 // these insert at it with Solid directly.
 async function drawAt(
-  value: BacktickElement,
+  value: JSX.Element,
   parent: Element,
   selector: string,
 ): Promise<void> {
   const { code } = compile(await bundler.run(value));
   const draw = (
     await import(`data:text/javascript,${encodeURIComponent(code)}`)
-  ).default as () => JSX.Element;
+  ).default as () => Solid.Element;
   const unmount = client.evaluate(() =>
     createRoot((dispose) => {
       insert(parent, draw(), parent.querySelector(selector)!);

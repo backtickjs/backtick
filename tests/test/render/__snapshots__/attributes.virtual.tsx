@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { type BacktickElement, cs } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { fireEvent, render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
@@ -11,7 +12,7 @@ import { userEvent } from "@testing-library/user-event";
 const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
 
-async function drawn(value: BacktickElement): Promise<Element> {
+async function drawn(value: JSX.Element): Promise<Element> {
   const { container } = await render(value);
   return container.firstElementChild!;
 }

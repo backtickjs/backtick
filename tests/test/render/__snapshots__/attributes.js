@@ -97,10 +97,10 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.create(
-      "wz2l9fdwjjts:111:11",
+      "1lhbkxu0fvn9q:112:11",
       { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
       '($splice0) => {\n    const text = $splice0()("first");\n    const isOn = $splice0()(false);\n    return (<div>\n          <input aria-label="text" value={text[0]()}/>\n          <input type="checkbox" aria-label="on" checked={isOn[0]()}/>\n          <button onclick={() => {\n            text[1]("second");\n            isOn[1](true);\n        }}>\n            write\n          </button>\n        </div>);\n}',
-      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA8Gc;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA+Gc;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     );
   }
   it("follows a write after the field was edited", async () => {

@@ -4,10 +4,11 @@ import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import type { BacktickElement, Bundle } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // A function the script holds that draws a bundle it is still waiting for.
 //
@@ -23,7 +24,7 @@ const loadedBadge = compile(
 const scriptBoundTagLoading = cs`{
   const count = $createSignal(0);
   const drawn = $createSignal<Bundle<
-    (props: { count: number }) => BacktickElement
+    (props: { count: number }) => JSX.Element
   > | null>(null);
   const Badge = (props: { count: number }) => {
     const held = drawn[0]();

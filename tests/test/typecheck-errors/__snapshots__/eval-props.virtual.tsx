@@ -1,12 +1,13 @@
 import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
-import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
+import type { Bundle, Prop } from "@backtickjs/core";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // What `eval` answers with is what the bundle says it evaluates to — a
 // drawing, or a function of what it takes — so a tag naming it is checked the
 // way any component is. Nothing here writes a type argument.
-type Rows = (props: { count: number }) => BacktickElement;
+type Rows = (props: { count: number }) => JSX.Element;
 
 // Built rather than written out: what a bundle looks like is the bundler's, and
 // a fixture that spelled one would pin the format twice. The claim about what
@@ -28,7 +29,7 @@ const rows = compile(
 ).code as Bundle<Rows>;
 
 const empty = compile(await bundler.run(<Nothing />))
-  .code as Bundle<BacktickElement>;
+  .code as Bundle<JSX.Element>;
 
 export default cs.lift((() => {
     const __cs_Rows = eval(cs.splice((rows) satisfies typeof cs.Spliceable));

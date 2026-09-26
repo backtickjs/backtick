@@ -1,4 +1,4 @@
-import type { BacktickElement, Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 import { getQueriesForElement, prettyDOM } from "@testing-library/dom";
 import type {
   BoundFunctions,
@@ -37,6 +37,7 @@ export type RenderResult<
   Q extends Queries = typeof queries,
   Container extends Element = HTMLElement,
   BaseElement extends Element = Container,
+  T = unknown,
 > = BoundFunctions<Q> & {
   /** The element the value was drawn into. */
   readonly container: Container;
@@ -49,7 +50,7 @@ export type RenderResult<
     options?: PrettyDOMOptions,
   ): void;
   /** Draws another value in place of this one, in the same container. */
-  rerender(value: Spliceable<BacktickElement>): Promise<void>;
+  rerender(value: Spliceable<T>): Promise<void>;
   /** Takes this drawing down, leaving the container. */
   unmount(): void;
   /** What the container holds now, as a fragment. */
@@ -67,12 +68,13 @@ export async function renderWith<
   Q extends Queries = typeof queries,
   Container extends Element = HTMLElement,
   BaseElement extends Element = Container,
+  T = unknown,
 >(
   client: BundleClient,
   compile: Compile,
-  value: Spliceable<BacktickElement>,
+  value: Spliceable<T>,
   options: RenderOptions<Q, Container, BaseElement> = {},
-): Promise<RenderResult<Q, Container, BaseElement>> {
+): Promise<RenderResult<Q, Container, BaseElement, T>> {
   const baseElement = (options.baseElement ??
     options.container ??
     document.body) as BaseElement;
@@ -87,8 +89,8 @@ export async function renderWith<
   };
   takeDown();
 
-  const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
-    const { code } = compile(await bundler.run(value));
+  const draw = async (value: Spliceable<T>): Promise<void> => {
+    const { code } = compile(await bundler.run(value as Spliceable));
     const run = await importBundle(code);
     takeDown();
     const dispose = client.render(run, container);

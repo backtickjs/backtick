@@ -11,9 +11,7 @@ export interface BundleClient {
 }
 
 /** What makes a bundle of what the bundler answered: an adapter's compiler. */
-export type Compile = <T>(
-  module: JsxModule<T>,
-) => { readonly code: Bundle<T> };
+export type Compile = (module: JsxModule) => { readonly code: string };
 
 /**
  * Bundles a value, compiles it with `compile`, and evaluates the bundle's root
@@ -28,8 +26,8 @@ export async function evaluateWith<T>(
   compile: Compile,
   value: Spliceable<T>,
 ): Promise<T> {
-  const { code } = compile(await bundler.run(value));
-  return client.evaluate(await importBundle(code));
+  const { code } = compile(await bundler.run(value as Spliceable));
+  return client.evaluate(await importBundle<T>(code));
 }
 
 /**

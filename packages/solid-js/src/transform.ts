@@ -1,5 +1,5 @@
 import { transformSync } from "@babel/core";
-import type { Bundle, JsxModule } from "@backtickjs/bundler";
+import type { JsxModule } from "@backtickjs/bundler";
 import solid from "babel-preset-solid";
 
 /**
@@ -25,9 +25,6 @@ export function transform(code: string, id: string, inputSourceMap?: string) {
  * A bundle of what the bundler answered, compiled by Solid's compiler, and its
  * map into the host files its scripts were written in.
  */
-export function compile<T>(
-  module: JsxModule<T>,
-): { code: Bundle<T>; map: string } {
-  const { code, map } = transform(module.code, "bundle.jsx", module.map);
-  return { code: code as Bundle<T>, map };
+export function compile(module: JsxModule): { code: string; map: string } {
+  return transform(module.code, "bundle.jsx", module.map);
 }
