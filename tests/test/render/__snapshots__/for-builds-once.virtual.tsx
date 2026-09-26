@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //
@@ -45,7 +46,7 @@ describe("a component that draws a list", () => {
   // The same claim with no bundle in it: `<For />` answers with a way of asking
   // too, so a fault in what draws a bundle would leave this alone.
   it("is built once, and draws what arrives", async () => {
-    const { container } = await render(forBuildsOnce);
+    const { container } = render(await draw(forBuildsOnce));
 
     assert.ok(screen.getByText("asked 0"));
 

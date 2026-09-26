@@ -3,14 +3,15 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { fireEvent, render, screen } from "@backtickjs/solid-js/testing";
+import { render, fireEvent, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
+import { draw } from "@backtickjs/solid-js/testing";
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
 const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
 async function drawn(value) {
-  const { container } = await render(value);
+  const { container } = render(await draw(value));
   return container.firstElementChild;
 }
 // Every attribute an element holds, by the name it was written under.
@@ -97,14 +98,14 @@ describe("a field's value", () => {
   // defaults, so a write that reaches the attribute changes nothing shown.
   async function Field() {
     return cs.create(
-      "1lhbkxu0fvn9q:112:11",
+      "i8ogjwm11srn:113:11",
       { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
       '($splice0) => {\n    const text = $splice0()("first");\n    const isOn = $splice0()(false);\n    return (<div>\n          <input aria-label="text" value={text[0]()}/>\n          <input type="checkbox" aria-label="on" checked={isOn[0]()}/>\n          <button onclick={() => {\n            text[1]("second");\n            isOn[1](true);\n        }}>\n            write\n          </button>\n        </div>);\n}',
-      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA+Gc;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AAgHc;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     );
   }
   it("follows a write after the field was edited", async () => {
-    await render(_jsx(Field, {}));
+    render(await draw(_jsx(Field, {})));
     const text = screen.getByLabelText("text");
     const on = screen.getByLabelText("on");
     fireEvent.input(text, { target: { value: "typed" } });

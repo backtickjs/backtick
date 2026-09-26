@@ -1,463 +1,463 @@
-cs.lift((() => {\n                     → cs`{\n        
-const                                  → const 
-__cs_n                                 → n
- =                                     →  = 
-cs.splice(                             →  [-semantic]
-(createSignal)                         → $createSignal
- satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (
-1                                      → 1
-)                                      → )
-;                                      → ;
-\n                                     → \n        
-const                                  → const 
-__cs_size                              → size
- =                                     →  = 
-cs.splice(                             →  [-semantic]
-(createMemo)                           → $createMemo
- satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (\n          
-() => (                                → () => 
-{                                      → ({ 
-isBig                                  → isBig
-:                                      → : 
-__cs_n                                 → n
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
- >                                     →  > 
-2                                      → 2
-,                                      → , 
-n                                      → n
-:                                      → : 
-__cs_n                                 → n
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
- }                                     →  })
-)                                      → 
-,                                      → ,\n          
-undefined                              → undefined
-,                                      → ,\n          
-{                                      → { 
-equals                                 → equals
-:                                      → : 
-(                                      → (
-__cs_previous                          → previous
-,                                      → , 
-__cs_next                              → next
-) =>                                   → ) => 
-__cs_previous                          → previous
-.                                      → .
-isBig                                  → isBig
- ===                                   →  === 
-__cs_next                              → next
-.                                      → .
-isBig                                  → isBig
- }                                     →  }
-)                                      → ,\n        )
-;                                      → ;
-\n                                     → \n        
-const                                  → const 
-__cs_label                             → label
- =                                     →  = 
-() => {\n                              → () => {\n          
-cs.globalThis.                         → 
-window                                 → window
-.                                      → .
-console                                → console
-.                                      → .
-log                                    → log
-()                                     → ()
-;                                      → ;
-\n                                     → \n          
-return                                 → return 
-__cs_size                              → size
-()                                     → ()
-.                                      → .
-isBig                                  → isBig
- ?                                     →  ? 
-"big"                                  → "big"
- :                                     →  : 
-"small"                                → "small"
-;                                      → ;
-\n    }                                → \n        }
-;                                      → ;
-\n                                     → \n        
-return                                 → return 
-<                                      → (\n          <
-div                                    → div
->{cs.lift(                             → >\n            
-<                                      → <
-button                                 → button
-                                       →  
-onclick                                → onclick
-={cs.lift(                             → ={
-() =>                                  → () => 
-__cs_n                                 → n
-[                                      → [
-1                                      → 1
-]                                      → ]
-(                                      → (
-__cs_n                                 → n
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
- +                                     →  + 
-1                                      → 1
-)                                      → )
-)}                                     → }
->add</                                 → >add</
-button                                 → button
->                                      → >
-)}{cs.lift(                            → \n            
-<                                      → <
-p                                      → p
->{cs.lift(                             → >{
-__cs_label                             → label
-()                                     → ()
-)}</                                   → }</
-p                                      → p
->                                      → >
-)}</                                   → \n          </
-div                                    → div
->                                      → >\n        )
-;                                      → ;
-\n})())                                → \n      }`
-cs.lift((() => {\n                     → cs`{\n        
-const                                  → const 
-__cs_point                             → point
- =                                     →  = 
-cs.splice(                             →  [-semantic]
-(createSignal)                         → $createSignal
- satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (\n          
-{                                      → { 
-x                                      → x
-:                                      → : 
-1                                      → 1
- }                                     →  }
-,                                      → ,\n          
-{                                      → { 
-equals                                 → equals
-:                                      → : 
-(                                      → (
-__cs_previous                          → previous
-,                                      → , 
-__cs_next                              → next
-) =>                                   → ) => 
-__cs_previous                          → previous
-.                                      → .
-x                                      → x
- ===                                   →  === 
-__cs_next                              → next
-.                                      → .
-x                                      → x
- }                                     →  }
-)                                      → ,\n        )
-;                                      → ;
-\n                                     → \n        
-const                                  → const 
-__cs_label                             → label
- =                                     →  = 
-() => {\n                              → () => {\n          
-cs.globalThis.                         → 
-window                                 → window
-.                                      → .
-console                                → console
-.                                      → .
-log                                    → log
-()                                     → ()
-;                                      → ;
-\n                                     → \n          
-return                                 → return 
-"x "                                   → "x "
- +                                     →  + 
-__cs_point                             → point
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
-.                                      → .
-x                                      → x
-;                                      → ;
-\n    }                                → \n        }
-;                                      → ;
-\n                                     → \n        
-return                                 → return 
-<                                      → (\n          <
-div                                    → div
->{cs.lift(                             → >\n            
-<                                      → <
-button                                 → button
-                                       →  
-onclick                                → onclick
-={cs.lift(                             → ={
-() =>                                  → () => 
-__cs_point                             → point
-[                                      → [
-1                                      → 1
-]                                      → ]
-(                                      → (
-{                                      → { 
-x                                      → x
-:                                      → : 
-__cs_point                             → point
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
-.                                      → .
-x                                      → x
- }                                     →  }
-)                                      → )
-)}                                     → }
->\n              same\n            </  → >\n              same\n            </
-button                                 → button
->                                      → >
-)}{cs.lift(                            → \n            
-<                                      → <
-p                                      → p
->{cs.lift(                             → >{
-__cs_label                             → label
-()                                     → ()
-)}</                                   → }</
-p                                      → p
->                                      → >
-)}</                                   → \n          </
-div                                    → div
->                                      → >\n        )
-;                                      → ;
-\n})())                                → \n      }`
-cs.lift((() => {\n                     → cs`{\n        
-const                                  → const 
-__cs_n                                 → n
- =                                     →  = 
-cs.splice(                             →  [-semantic]
-(createSignal)                         → $createSignal
- satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (
-1                                      → 1
-,                                      → , 
-{                                      → {\n          
-equals                                 → equals
-:                                      → : 
-(                                      → (
-__cs_previous                          → previous
-,                                      → , 
-__cs_next                              → next
-) => {\n                               → ) => {\n            
-cs.globalThis.                         → 
-window                                 → window
-.                                      → .
-console                                → console
-.                                      → .
-log                                    → log
-(                                      → (
-__cs_previous                          → previous
-,                                      → , 
-__cs_next                              → next
-)                                      → )
-;                                      → ;
-\n                                     → \n            
-return                                 → return 
-__cs_previous                          → previous
- ===                                   →  === 
-__cs_next                              → next
-;                                      → ;
-\n        }                            → \n          }
- }                                     → ,\n        }
-)                                      → )
-;                                      → ;
-\n                                     → \n        
-return                                 → return 
-<                                      → <
-button                                 → button
-                                       →  
-onclick                                → onclick
-={cs.lift(                             → ={
-() =>                                  → () => 
-__cs_n                                 → n
-[                                      → [
-1                                      → 1
-]                                      → ]
-(                                      → (
-2                                      → 2
-)                                      → )
-)}                                     → }
->{cs.lift(                             → >{
-"n "                                   → "n "
- +                                     →  + 
-__cs_n                                 → n
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
-)}</                                   → }</
-button                                 → button
->                                      → >
-;                                      → ;
-\n})())                                → \n      }`
-cs.lift((() => {\n                     → cs`{\n        
-const                                  → const 
-__cs_n                                 → n
- =                                     →  = 
-cs.splice(                             →  [-semantic]
-(createSignal)                         → $createSignal
- satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (
-1                                      → 1
-)                                      → )
-;                                      → ;
-\n                                     → \n        
-const                                  → const 
-__cs_label                             → label
- =                                     →  = 
-() => {\n                              → () => {\n          
-cs.globalThis.                         → 
-window                                 → window
-.                                      → .
-console                                → console
-.                                      → .
-log                                    → log
-()                                     → ()
-;                                      → ;
-\n                                     → \n          
-return                                 → return 
-"n "                                   → "n "
- +                                     →  + 
-__cs_n                                 → n
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
-;                                      → ;
-\n    }                                → \n        }
-;                                      → ;
-\n                                     → \n        
-return                                 → return 
-<                                      → (\n          <
-div                                    → div
->{cs.lift(                             → >\n            
-<                                      → <
-button                                 → button
-                                       →  
-onclick                                → onclick
-={cs.lift(                             → ={
-() =>                                  → () => 
-__cs_n                                 → n
-[                                      → [
-1                                      → 1
-]                                      → ]
-(                                      → (
-1                                      → 1
-)                                      → )
-)}                                     → }
->same</                                → >same</
-button                                 → button
->                                      → >
-)}{cs.lift(                            → \n            
-<                                      → <
-p                                      → p
->{cs.lift(                             → >{
-__cs_label                             → label
-()                                     → ()
-)}</                                   → }</
-p                                      → p
->                                      → >
-)}</                                   → \n          </
-div                                    → div
->                                      → >\n        )
-;                                      → ;
-\n})())                                → \n      }`
-cs.lift((() => {\n                     → cs`{\n        
-const                                  → const 
-__cs_point                             → point
- =                                     →  = 
-cs.splice(                             →  [-semantic]
-(createSignal)                         → $createSignal
- satisfies typeof cs.Spliceable)       →  [-semantic]
-(                                      → (
-{                                      → { 
-x                                      → x
-:                                      → : 
-1                                      → 1
- }                                     →  }
-)                                      → )
-;                                      → ;
-\n                                     → \n        
-const                                  → const 
-__cs_label                             → label
- =                                     →  = 
-() => {\n                              → () => {\n          
-cs.globalThis.                         → 
-window                                 → window
-.                                      → .
-console                                → console
-.                                      → .
-log                                    → log
-()                                     → ()
-;                                      → ;
-\n                                     → \n          
-return                                 → return 
-"x "                                   → "x "
- +                                     →  + 
-__cs_point                             → point
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
-.                                      → .
-x                                      → x
-;                                      → ;
-\n    }                                → \n        }
-;                                      → ;
-\n                                     → \n        
-return                                 → return 
-<                                      → (\n          <
-div                                    → div
->{cs.lift(                             → >\n            
-<                                      → <
-button                                 → button
-                                       →  
-onclick                                → onclick
-={cs.lift(                             → ={
-() =>                                  → () => 
-__cs_point                             → point
-[                                      → [
-1                                      → 1
-]                                      → ]
-(                                      → (
-{                                      → { 
-x                                      → x
-:                                      → : 
-__cs_point                             → point
-[                                      → [
-0                                      → 0
-]                                      → ]
-()                                     → ()
-.                                      → .
-x                                      → x
- }                                     →  }
-)                                      → )
-)}                                     → }
->\n              same\n            </  → >\n              same\n            </
-button                                 → button
->                                      → >
-)}{cs.lift(                            → \n            
-<                                      → <
-p                                      → p
->{cs.lift(                             → >{
-__cs_label                             → label
-()                                     → ()
-)}</                                   → }</
-p                                      → p
->                                      → >
-)}</                                   → \n          </
-div                                    → div
->                                      → >\n        )
-;                                      → ;
-\n})())                                → \n      }`
+cs.lift((() => {\n                        → cs`{\n          
+const                                     → const 
+__cs_n                                    → n
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+ satisfies typeof cs.Spliceable)          →  [-semantic]
+(                                         → (
+1                                         → 1
+)                                         → )
+;                                         → ;
+\n                                        → \n          
+const                                     → const 
+__cs_size                                 → size
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createMemo)                              → $createMemo
+ satisfies typeof cs.Spliceable)          →  [-semantic]
+(                                         → (\n            
+() => (                                   → () => 
+{                                         → ({ 
+isBig                                     → isBig
+:                                         → : 
+__cs_n                                    → n
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+ >                                        →  > 
+2                                         → 2
+,                                         → , 
+n                                         → n
+:                                         → : 
+__cs_n                                    → n
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+ }                                        →  })
+)                                         → 
+,                                         → ,\n            
+undefined                                 → undefined
+,                                         → ,\n            
+{                                         → { 
+equals                                    → equals
+:                                         → : 
+(                                         → (
+__cs_previous                             → previous
+,                                         → , 
+__cs_next                                 → next
+) =>                                      → ) => 
+__cs_previous                             → previous
+.                                         → .
+isBig                                     → isBig
+ ===                                      →  === 
+__cs_next                                 → next
+.                                         → .
+isBig                                     → isBig
+ }                                        →  }
+)                                         → ,\n          )
+;                                         → ;
+\n                                        → \n          
+const                                     → const 
+__cs_label                                → label
+ =                                        →  = 
+() => {\n                                 → () => {\n            
+cs.globalThis.                            → 
+window                                    → window
+.                                         → .
+console                                   → console
+.                                         → .
+log                                       → log
+()                                        → ()
+;                                         → ;
+\n                                        → \n            
+return                                    → return 
+__cs_size                                 → size
+()                                        → ()
+.                                         → .
+isBig                                     → isBig
+ ?                                        →  ? 
+"big"                                     → "big"
+ :                                        →  : 
+"small"                                   → "small"
+;                                         → ;
+\n    }                                   → \n          }
+;                                         → ;
+\n                                        → \n          
+return                                    → return 
+<                                         → (\n            <
+div                                       → div
+>{cs.lift(                                → >\n              
+<                                         → <
+button                                    → button
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+__cs_n                                    → n
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+__cs_n                                    → n
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+ +                                        →  + 
+1                                         → 1
+)                                         → )
+)}                                        → }
+>add</                                    → >add</
+button                                    → button
+>                                         → >
+)}{cs.lift(                               → \n              
+<                                         → <
+p                                         → p
+>{cs.lift(                                → >{
+__cs_label                                → label
+()                                        → ()
+)}</                                      → }</
+p                                         → p
+>                                         → >
+)}</                                      → \n            </
+div                                       → div
+>                                         → >\n          )
+;                                         → ;
+\n})())                                   → \n        }`
+cs.lift((() => {\n                        → cs`{\n          
+const                                     → const 
+__cs_point                                → point
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+ satisfies typeof cs.Spliceable)          →  [-semantic]
+(                                         → (\n            
+{                                         → { 
+x                                         → x
+:                                         → : 
+1                                         → 1
+ }                                        →  }
+,                                         → ,\n            
+{                                         → { 
+equals                                    → equals
+:                                         → : 
+(                                         → (
+__cs_previous                             → previous
+,                                         → , 
+__cs_next                                 → next
+) =>                                      → ) => 
+__cs_previous                             → previous
+.                                         → .
+x                                         → x
+ ===                                      →  === 
+__cs_next                                 → next
+.                                         → .
+x                                         → x
+ }                                        →  }
+)                                         → ,\n          )
+;                                         → ;
+\n                                        → \n          
+const                                     → const 
+__cs_label                                → label
+ =                                        →  = 
+() => {\n                                 → () => {\n            
+cs.globalThis.                            → 
+window                                    → window
+.                                         → .
+console                                   → console
+.                                         → .
+log                                       → log
+()                                        → ()
+;                                         → ;
+\n                                        → \n            
+return                                    → return 
+"x "                                      → "x "
+ +                                        →  + 
+__cs_point                                → point
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+.                                         → .
+x                                         → x
+;                                         → ;
+\n    }                                   → \n          }
+;                                         → ;
+\n                                        → \n          
+return                                    → return 
+<                                         → (\n            <
+div                                       → div
+>{cs.lift(                                → >\n              
+<                                         → <
+button                                    → button
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+__cs_point                                → point
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+{                                         → { 
+x                                         → x
+:                                         → : 
+__cs_point                                → point
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+.                                         → .
+x                                         → x
+ }                                        →  }
+)                                         → )
+)}                                        → }
+>\n                same\n              </ → >\n                same\n              </
+button                                    → button
+>                                         → >
+)}{cs.lift(                               → \n              
+<                                         → <
+p                                         → p
+>{cs.lift(                                → >{
+__cs_label                                → label
+()                                        → ()
+)}</                                      → }</
+p                                         → p
+>                                         → >
+)}</                                      → \n            </
+div                                       → div
+>                                         → >\n          )
+;                                         → ;
+\n})())                                   → \n        }`
+cs.lift((() => {\n                        → cs`{\n          
+const                                     → const 
+__cs_n                                    → n
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+ satisfies typeof cs.Spliceable)          →  [-semantic]
+(                                         → (
+1                                         → 1
+,                                         → , 
+{                                         → {\n            
+equals                                    → equals
+:                                         → : 
+(                                         → (
+__cs_previous                             → previous
+,                                         → , 
+__cs_next                                 → next
+) => {\n                                  → ) => {\n              
+cs.globalThis.                            → 
+window                                    → window
+.                                         → .
+console                                   → console
+.                                         → .
+log                                       → log
+(                                         → (
+__cs_previous                             → previous
+,                                         → , 
+__cs_next                                 → next
+)                                         → )
+;                                         → ;
+\n                                        → \n              
+return                                    → return 
+__cs_previous                             → previous
+ ===                                      →  === 
+__cs_next                                 → next
+;                                         → ;
+\n        }                               → \n            }
+ }                                        → ,\n          }
+)                                         → )
+;                                         → ;
+\n                                        → \n          
+return                                    → return 
+<                                         → <
+button                                    → button
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+__cs_n                                    → n
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+2                                         → 2
+)                                         → )
+)}                                        → }
+>{cs.lift(                                → >{
+"n "                                      → "n "
+ +                                        →  + 
+__cs_n                                    → n
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+)}</                                      → }</
+button                                    → button
+>                                         → >
+;                                         → ;
+\n})())                                   → \n        }`
+cs.lift((() => {\n                        → cs`{\n          
+const                                     → const 
+__cs_n                                    → n
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+ satisfies typeof cs.Spliceable)          →  [-semantic]
+(                                         → (
+1                                         → 1
+)                                         → )
+;                                         → ;
+\n                                        → \n          
+const                                     → const 
+__cs_label                                → label
+ =                                        →  = 
+() => {\n                                 → () => {\n            
+cs.globalThis.                            → 
+window                                    → window
+.                                         → .
+console                                   → console
+.                                         → .
+log                                       → log
+()                                        → ()
+;                                         → ;
+\n                                        → \n            
+return                                    → return 
+"n "                                      → "n "
+ +                                        →  + 
+__cs_n                                    → n
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+;                                         → ;
+\n    }                                   → \n          }
+;                                         → ;
+\n                                        → \n          
+return                                    → return 
+<                                         → (\n            <
+div                                       → div
+>{cs.lift(                                → >\n              
+<                                         → <
+button                                    → button
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+__cs_n                                    → n
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+1                                         → 1
+)                                         → )
+)}                                        → }
+>same</                                   → >same</
+button                                    → button
+>                                         → >
+)}{cs.lift(                               → \n              
+<                                         → <
+p                                         → p
+>{cs.lift(                                → >{
+__cs_label                                → label
+()                                        → ()
+)}</                                      → }</
+p                                         → p
+>                                         → >
+)}</                                      → \n            </
+div                                       → div
+>                                         → >\n          )
+;                                         → ;
+\n})())                                   → \n        }`
+cs.lift((() => {\n                        → cs`{\n          
+const                                     → const 
+__cs_point                                → point
+ =                                        →  = 
+cs.splice(                                →  [-semantic]
+(createSignal)                            → $createSignal
+ satisfies typeof cs.Spliceable)          →  [-semantic]
+(                                         → (
+{                                         → { 
+x                                         → x
+:                                         → : 
+1                                         → 1
+ }                                        →  }
+)                                         → )
+;                                         → ;
+\n                                        → \n          
+const                                     → const 
+__cs_label                                → label
+ =                                        →  = 
+() => {\n                                 → () => {\n            
+cs.globalThis.                            → 
+window                                    → window
+.                                         → .
+console                                   → console
+.                                         → .
+log                                       → log
+()                                        → ()
+;                                         → ;
+\n                                        → \n            
+return                                    → return 
+"x "                                      → "x "
+ +                                        →  + 
+__cs_point                                → point
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+.                                         → .
+x                                         → x
+;                                         → ;
+\n    }                                   → \n          }
+;                                         → ;
+\n                                        → \n          
+return                                    → return 
+<                                         → (\n            <
+div                                       → div
+>{cs.lift(                                → >\n              
+<                                         → <
+button                                    → button
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+__cs_point                                → point
+[                                         → [
+1                                         → 1
+]                                         → ]
+(                                         → (
+{                                         → { 
+x                                         → x
+:                                         → : 
+__cs_point                                → point
+[                                         → [
+0                                         → 0
+]                                         → ]
+()                                        → ()
+.                                         → .
+x                                         → x
+ }                                        →  }
+)                                         → )
+)}                                        → }
+>\n                same\n              </ → >\n                same\n              </
+button                                    → button
+>                                         → >
+)}{cs.lift(                               → \n              
+<                                         → <
+p                                         → p
+>{cs.lift(                                → >{
+__cs_label                                → label
+()                                        → ()
+)}</                                      → }</
+p                                         → p
+>                                         → >
+)}</                                      → \n            </
+div                                       → div
+>                                         → >\n          )
+;                                         → ;
+\n})())                                   → \n        }`

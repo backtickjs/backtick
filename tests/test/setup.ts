@@ -7,8 +7,10 @@
 import "global-jsdom/register";
 import { register } from "node:module";
 import { afterEach } from "node:test";
-import { cleanup } from "@backtickjs/web-testing";
-
-afterEach(cleanup);
 
 register("./tsxHooks.ts", import.meta.url);
+
+// Imported once the hooks are in place, so it, like everything after it, gets
+// Solid's DOM build rather than its server one.
+const { cleanup } = await import("@solidjs/testing-library");
+afterEach(cleanup);

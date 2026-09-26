@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { JSX, Prop } from "@backtickjs/solid-js/jsx-runtime";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.
@@ -37,7 +38,7 @@ it("scriptBoundTagCarried", async (t) => {
 
 describe("a tag naming a function the script holds", () => {
   it("calls the one it was written under, drawn where another is in scope", async () => {
-    await render(scriptBoundTagCarried);
+    render(await draw(scriptBoundTagCarried));
     const panel = screen.getByText("panel 0");
     const badge = screen.getByText("outer 0");
     assert.equal(badge.tagName.toLowerCase(), "b");

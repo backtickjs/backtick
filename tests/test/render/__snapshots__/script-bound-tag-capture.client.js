@@ -1,4 +1,4 @@
-// 12:31
+// 13:31
 ($splice0, $splice1, $splice2, $splice3, $splice4) => {
     const count = $splice0()(0);
     const Badge = (props) => <b>{"n " + props.n}</b>;
@@ -11,22 +11,22 @@
     </div>);
 }
 
-// 18:10
+// 19:10
 ($capture0, $capture1) => <$capture0 n={$capture1[0]()}/>
 
-// 20:11
+// 21:11
 ($splice0, $capture1, $capture2) => {
     const skipped = 10;
     return $splice0($capture1, $capture2);
 }
 
-// 22:20
+// 23:20
 ($capture0, $capture1) => <$capture0 n={$capture1[0]() + 100}/>
 
-// 25:21
+// 26:21
 ($capture0, $capture1) => <$capture0 n={$capture1[0]() + 1000}/>
 
-// 27:11
+// 28:11
 ($tag0, $capture1, $capture2) => <$tag0 each={[1, 2]}>
           {(m) => <$capture1 n={m * $capture2[0]()}/>}
         </$tag0>

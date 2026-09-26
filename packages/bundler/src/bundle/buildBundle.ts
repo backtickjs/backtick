@@ -4,11 +4,7 @@ import {
   isJsxElement,
   type JsxElement,
 } from "@backtickjs/core";
-import {
-  type Client,
-  isClientImport,
-  type Spliceable,
-} from "@backtickjs/core";
+import { type Client, isClientImport, type Spliceable } from "@backtickjs/core";
 
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
@@ -326,9 +322,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
-      parts.push(
-        arrow(passed.map(displayName), await render(arg, inner)),
-      );
+      parts.push(arrow(passed.map(displayName), await render(arg, inner)));
     }
     for (const key of capturesOf(target)) {
       parts.push(capExpr(key, params));

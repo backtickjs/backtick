@@ -1,7 +1,7 @@
-// 16:10
+// 17:10
 () => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>
 
-// 19:22
+// 20:22
 ($tag0, $tag1) => {
     const Dot = (props) => (<circle cx={props.x} cy="5" r="2">
       <title>{"dot " + props.x}</title>

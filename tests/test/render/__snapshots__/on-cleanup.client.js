@@ -1,20 +1,20 @@
-// 27:7
+// 34:9
 ($splice0) => {
     $splice0()(() => window.console.log());
     return <p>drawn</p>;
 }
 
-// 39:7
+// 48:9
 ($splice0, $splice1, $splice2) => {
     const n = $splice0()(1);
     const doubled = $splice1()(() => {
         $splice2()(() => window.console.log());
         return n[0]() * 2;
     });
-    return (<button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>);
+    return <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>;
 }
 
-// 73:7
+// 82:9
 ($splice0, $splice1, $splice2) => {
     const timer = $splice0()(0);
     $splice1()(() => {
@@ -24,9 +24,9 @@
     return <p>ticking</p>;
 }
 
-// 93:7
+// 104:9
 ($splice0) => {
     return (<button onclick={() => $splice0()(() => window.console.log())}>
-            press
-          </button>);
+              press
+            </button>);
 }

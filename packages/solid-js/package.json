@@ -21,13 +21,13 @@
       "types": "./dist/bundle.d.ts",
       "default": "./dist/bundle.js"
     },
-    "./server": {
-      "types": "./dist/server.d.ts",
-      "default": "./dist/server.js"
-    },
     "./testing": {
       "types": "./dist/testing.d.ts",
       "default": "./dist/testing.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
     }
   },
   "scripts": {
@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@backtickjs/compiler": "workspace:^0.1.0",
-    "@backtickjs/web-testing": "workspace:^0.1.0",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^26.6.2",
     "global-jsdom": "^30.0.0",
@@ -55,12 +54,6 @@
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   },
-  "peerDependencies": {
-    "@backtickjs/web-testing": "workspace:^0.1.0"
-  },
-  "peerDependenciesMeta": {
-    "@backtickjs/web-testing": {
-      "optional": true
-    }
-  }
+  "peerDependencies": {},
+  "peerDependenciesMeta": {}
 }

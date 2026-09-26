@@ -4,12 +4,14 @@ import type { TestContext } from "node:test";
 import { bundle } from "@backtickjs/solid-js/bundle";
 import type { Spliceable } from "@backtickjs/core";
 import prettier from "prettier";
-import { evaluate, render } from "@backtickjs/solid-js/testing";
 import { isNode } from "./node.ts";
 import { renderBundleMappings } from "./renderBundleMappings.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import { draw } from "@backtickjs/solid-js/testing";
+import { render } from "@solidjs/testing-library";
+import { createRoot } from "solid-js";
 
 // Written as given: each artifact is text meant to be read in its own file.
 const verbatim = [(value: unknown) => value as string];
@@ -43,12 +45,12 @@ export async function snapshotCase(
   const { code, map } = await bundle(value);
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   record(`${renderBundleMappings(code, map)}\n`, "bundle.sourcemap");
-  const evaluated = await evaluate(value);
+  const evaluated = createRoot(await draw(value));
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));
   // Rendered only once evaluating it showed it draws.
   record(
-    `${drawn ? renderDrawing((await render(value as JSX.Element)).container) : renderValue(evaluated)}\n`,
+    `${drawn ? renderDrawing(render(await draw(value as JSX.Element)).container) : renderValue(evaluated)}\n`,
     "value",
   );
 }

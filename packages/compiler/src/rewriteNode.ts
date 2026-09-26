@@ -8,7 +8,6 @@ import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
 
-
 export interface RewriteState {
   script: ClientScript;
   bindings: BindingResolution;

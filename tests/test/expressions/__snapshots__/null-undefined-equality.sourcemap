@@ -18,7 +18,7 @@ null                              → null
  ===                              →  === 
 undefined                         → undefined
 )                                 → `
-cs.lift((() => {\n                → cs`{\n        
+cs.lift((() => {\n                → cs`{\n          
 const                             → const 
 __cs_names                        → names
  =                                →  = 
@@ -26,46 +26,46 @@ __cs_names                        → names
 "a"                               → "a"
 ]                                 → ]
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 return                            → return 
-[                                 → [\n          
+[                                 → [\n            
 cs.splice(                        →  [-semantic]
 (nothing)                         → $nothing
  satisfies typeof cs.Spliceable)  →  [-semantic]
  ===                              →  === 
 undefined                         → undefined
-,                                 → ,\n          
+,                                 → ,\n            
 cs.splice(                        →  [-semantic]
 (nothing)                         → $nothing
  satisfies typeof cs.Spliceable)  →  [-semantic]
  !==                              →  !== 
 null                              → null
-,                                 → ,\n          
+,                                 → ,\n            
 cs.splice(                        →  [-semantic]
 (empty)                           → $empty
  satisfies typeof cs.Spliceable)  →  [-semantic]
  ===                              →  === 
 null                              → null
-,                                 → ,\n          
+,                                 → ,\n            
 cs.splice(                        →  [-semantic]
 (empty)                           → $empty
  satisfies typeof cs.Spliceable)  →  [-semantic]
  !==                              →  !== 
 undefined                         → undefined
-,                                 → ,\n          
+,                                 → ,\n            
 __cs_names                        → names
 [                                 → [
 1                                 → 1
 ]                                 → ]
  ===                              →  === 
 undefined                         → undefined
-,                                 → ,\n          
+,                                 → ,\n            
 __cs_names                        → names
 [                                 → [
 1                                 → 1
 ]                                 → ]
  !==                              →  !== 
 null                              → null
-]                                 → ,\n        ]
+]                                 → ,\n          ]
 ;                                 → ;
-\n})())                           → \n      }`
+\n})())                           → \n        }`

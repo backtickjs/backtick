@@ -2,19 +2,22 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { evaluate } from "@backtickjs/solid-js/testing";
+import { draw } from "@backtickjs/solid-js/testing";
+import { createRoot } from "solid-js";
 // A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
 // no form for it: dropped from an object and turned into `null` in an array.
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
     const nothing = undefined;
     assert.equal(
-      await evaluate(
-        cs.create(
-          "geei6gdr1y20:12:32",
-          { params: [{ kind: "splice", value: nothing, bindings: [] }] },
-          "($splice0) => $splice0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAWmC,cAAA,UAAQ"}',
+      createRoot(
+        await draw(
+          cs.create(
+            "2mut7ohvbpsgi:13:39",
+            { params: [{ kind: "splice", value: nothing, bindings: [] }] },
+            "($splice0) => $splice0()",
+            '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAY0C,cAAA,UAAQ"}',
+          ),
         ),
       ),
       undefined,
@@ -22,12 +25,14 @@ describe("a spliced undefined", () => {
   });
   it("keeps its key in an object", async () => {
     const data = { missing: undefined, kept: 1 };
-    const arrived = await evaluate(
-      cs.create(
-        "geei6gdr1y20:17:35",
-        { params: [{ kind: "splice", value: data, bindings: [] }] },
-        "($splice0) => $splice0()",
-        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAgBsC,cAAA,UAAK"}',
+    const arrived = createRoot(
+      await draw(
+        cs.create(
+          "2mut7ohvbpsgi:18:42",
+          { params: [{ kind: "splice", value: data, bindings: [] }] },
+          "($splice0) => $splice0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiB6C,cAAA,UAAK"}',
+        ),
       ),
     );
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
@@ -36,12 +41,14 @@ describe("a spliced undefined", () => {
   it("stays undefined in an array", async () => {
     const data = [1, undefined, 3];
     assert.deepEqual(
-      await evaluate(
-        cs.create(
-          "geei6gdr1y20:24:36",
-          { params: [{ kind: "splice", value: data, bindings: [] }] },
-          "($splice0) => $splice0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAuBuC,cAAA,UAAK"}',
+      createRoot(
+        await draw(
+          cs.create(
+            "2mut7ohvbpsgi:25:43",
+            { params: [{ kind: "splice", value: data, bindings: [] }] },
+            "($splice0) => $splice0()",
+            '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwB8C,cAAA,UAAK"}',
+          ),
         ),
       ),
       [1, undefined, 3],

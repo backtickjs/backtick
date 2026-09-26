@@ -38,9 +38,9 @@ export type Children =
 
 // An element's props as Solid types them, each a `Prop`, and its children.
 type Props<Attributes> = {
-  [Key in keyof Attributes as Key extends "children"
-    ? never
-    : Key]?: Prop<Exclude<Attributes[Key], undefined>>;
+  [Key in keyof Attributes as Key extends "children" ? never : Key]?: Prop<
+    Exclude<Attributes[Key], undefined>
+  >;
 } & { children?: Children };
 
 type Elements = {

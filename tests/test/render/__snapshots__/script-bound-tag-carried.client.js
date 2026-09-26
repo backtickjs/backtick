@@ -1,4 +1,4 @@
-// 13:10
+// 14:10
 ($splice0) => {
     const Badge = (p) => <i>{"panel " + p.n}</i>;
     return (<section>
@@ -7,7 +7,7 @@
       </section>);
 }
 
-// 28:31
+// 29:31
 ($splice0, $splice1, $tag2) => {
     const count = $splice0()(0);
     const Badge = (p) => (<b>
@@ -20,7 +20,7 @@
     </div>);
 }
 
-// 41:13
+// 42:13
 ($capture0, $capture1) => <$capture0 n={$capture1[0]()}>
             <u>{"kid " + $capture1[0]()}</u>
           </$capture0>

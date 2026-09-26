@@ -29,9 +29,7 @@ export function importMap(): string {
  * a `data:` URL, so the bundle's own imports resolve through the page's import
  * map, as the script's do.
  */
-export async function renderToString<T>(
-  element: Spliceable<T>,
-): Promise<string> {
+export async function renderToString(element: Spliceable): Promise<string> {
   const { code } = await bundle(element);
   const id = `backtick-${crypto.randomUUID()}`;
   const script = [

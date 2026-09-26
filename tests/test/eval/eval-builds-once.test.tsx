@@ -4,10 +4,11 @@ import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import type { Bundle } from "@backtickjs/core";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import { settled } from "../render/dom.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { JSX, Prop } from "@backtickjs/solid-js/jsx-runtime";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // A component is built once, however what it drew changes afterwards.
 //
@@ -83,7 +84,7 @@ it("evalBuildsOnce", async (t) => {
 
 describe("a component that draws a bundle", () => {
   it("is built once, and draws what arrives", async () => {
-    await render(evalBuildsOnce);
+    render(await draw(evalBuildsOnce));
 
     // Nothing to draw yet, and the wait has not been made twice.
     assert.ok(screen.getByText("asked 0"));

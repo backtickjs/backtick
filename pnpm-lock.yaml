@@ -391,9 +391,6 @@ importers:
       '@backtickjs/compiler':
         specifier: workspace:^0.1.0
         version: link:../compiler
-      '@backtickjs/web-testing':
-        specifier: workspace:^0.1.0
-        version: link:../web-testing
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -473,22 +470,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/web-testing:
-    dependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@testing-library/dom':
-        specifier: ^10.4.2
-        version: 10.4.2
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   tests:
     devDependencies:
       '@backtickjs/bundler':
@@ -509,12 +490,12 @@ importers:
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../packages/tsc
-      '@backtickjs/web-testing':
-        specifier: workspace:*
-        version: link:../packages/web-testing
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
         version: 0.3.31
+      '@solidjs/testing-library':
+        specifier: ^0.8.10
+        version: 0.8.10(solid-js@1.9.14)
       '@testing-library/user-event':
         specifier: ^14.6.7
         version: 14.6.7(@testing-library/dom@10.4.2)
@@ -861,6 +842,16 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@solidjs/testing-library@0.8.10':
+    resolution: {integrity: sha512-qdeuIerwyq7oQTIrrKvV0aL9aFeuwTd86VYD3afdq5HYEwoox1OBTJy4y8A3TFZr8oAR0nujYgCzY/8wgHGfeQ==}
+    engines: {node: '>= 14'}
+    peerDependencies:
+      '@solidjs/router': '>=0.9.0'
+      solid-js: '>=1.0.0'
+    peerDependenciesMeta:
+      '@solidjs/router':
+        optional: true
 
   '@testing-library/dom@10.4.2':
     resolution: {integrity: sha512-yzr2S9HyAIdhz2/6qHgbs665Q7PKVcDF05vsOlHPxG1mo36gKVesdYVeDLnXgfjJ03CrKRk08knc6+E/9m8v2Q==}
@@ -1864,6 +1855,11 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
+
+  '@solidjs/testing-library@0.8.10(solid-js@1.9.14)':
+    dependencies:
+      '@testing-library/dom': 10.4.2
+      solid-js: 1.9.14
 
   '@testing-library/dom@10.4.2':
     dependencies:

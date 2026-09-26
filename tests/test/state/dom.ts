@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
-import { render } from "@backtickjs/solid-js/testing";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import { draw } from "@backtickjs/solid-js/testing";
+import { render } from "@solidjs/testing-library";
 
 // The behavior side of per-instance state: a write has to persist, move
 // everything that read the cell, and leave every other instance alone.
@@ -11,7 +12,7 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
 // What an element drew, as the one element it put in the page.
 export async function drawn(value: JSX.Element): Promise<Element> {
-  const { container } = await render(value);
+  const { container } = render(await draw(value));
   const node = container.firstElementChild;
   assert.ok(node !== null, "expected a rendered element");
   return node;

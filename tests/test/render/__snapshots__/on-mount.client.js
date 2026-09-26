@@ -1,4 +1,4 @@
-// 28:9
+// 28:7
 ($splice0, $splice1) => {
     const count = $splice0()(0);
     $splice1()(() => {
@@ -8,10 +8,10 @@
     return <p>{"mounted " + count[0]()}</p>;
 }
 
-// 44:7
+// 45:9
 ($splice0, $splice1) => {
     const said = $splice0()("not yet");
     return (<button onclick={() => $splice1()(() => said[1]("ran"))}>
-            {said[0]()}
-          </button>);
+              {said[0]()}
+            </button>);
 }

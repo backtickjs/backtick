@@ -1,199 +1,199 @@
-cs.lift((() => {\n                  → cs`{\n        
-cs.splice(                          →  [-semantic]
-(onCleanup)                         → $onCleanup
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-() =>                               → () => 
-cs.globalThis.                      → 
-window                              → window
-.                                   → .
-console                             → console
-.                                   → .
-log                                 → log
-()                                  → ()
-)                                   → )
-;                                   → ;
-\n                                  → \n        
-return                              → return 
-<                                   → <
-p                                   → p
->drawn</                            → >drawn</
-p                                   → p
->                                   → >
-;                                   → ;
-\n})())                             → \n      }`
-cs.lift((() => {\n                  → cs`{\n        
-const                               → const 
-__cs_n                              → n
- =                                  →  = 
-cs.splice(                          →  [-semantic]
-(createSignal)                      → $createSignal
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-1                                   → 1
-)                                   → )
-;                                   → ;
-\n                                  → \n        
-const                               → const 
-__cs_doubled                        → doubled
- =                                  →  = 
-cs.splice(                          →  [-semantic]
-(createMemo)                        → $createMemo
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-() => {\n                           → () => {\n          
-cs.splice(                          →  [-semantic]
-(onCleanup)                         → $onCleanup
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-() =>                               → () => 
-cs.globalThis.                      → 
-window                              → window
-.                                   → .
-console                             → console
-.                                   → .
-log                                 → log
-()                                  → ()
-)                                   → )
-;                                   → ;
-\n                                  → \n          
-return                              → return 
-__cs_n                              → n
-[                                   → [
-0                                   → 0
-]                                   → ]
-()                                  → ()
- *                                  →  * 
-2                                   → 2
-;                                   → ;
-\n    }                             → \n        }
-)                                   → )
-;                                   → ;
-\n                                  → \n        
-return                              → return 
-<                                   → (\n          <
-button                              → button
-                                    →  
-onclick                             → onclick
-={cs.lift(                          → ={
-() =>                               → () => 
-__cs_n                              → n
-[                                   → [
-1                                   → 1
-]                                   → ]
-(                                   → (
-__cs_n                              → n
-[                                   → [
-0                                   → 0
-]                                   → ]
-()                                  → ()
- +                                  →  + 
-1                                   → 1
-)                                   → )
-)}                                  → }
->{cs.lift(                          → >{
-__cs_doubled                        → doubled
-()                                  → ()
-)}</                                → }</
-button                              → button
->                                   → >\n        )
-;                                   → ;
-\n})())                             → \n      }`
-cs.lift((() => {\n                  → cs`{\n        
-const                               → const 
-__cs_timer                          → timer
- =                                  →  = 
-cs.splice(                          →  [-semantic]
-(createSignal)                      → $createSignal
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-0                                   → 0
-)                                   → )
-;                                   → ;
-\n                                  → \n        
-cs.splice(                          →  [-semantic]
-(onMount)                           → $onMount
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-() => {\n                           → () => {\n          
-__cs_timer                          → timer
-[                                   → [
-1                                   → 1
-]                                   → ]
-(                                   → (
-cs.globalThis.                      → 
-window                              → window
-.                                   → .
-setInterval                         → setInterval
-(                                   → (
-() =>                               → () => 
-cs.globalThis.                      → 
-window                              → window
-.                                   → .
-console                             → console
-.                                   → .
-log                                 → log
-()                                  → ()
-,                                   → , 
-5                                   → 5
-)                                   → )
-)                                   → )
-;                                   → ;
-\n    }                             → \n        }
-)                                   → )
-;                                   → ;
-\n                                  → \n        
-cs.splice(                          →  [-semantic]
-(onCleanup)                         → $onCleanup
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-() =>                               → () => 
-cs.globalThis.                      → 
-window                              → window
-.                                   → .
-clearInterval                       → clearInterval
-(                                   → (
-__cs_timer                          → timer
-[                                   → [
-0                                   → 0
-]                                   → ]
-()                                  → ()
-)                                   → )
-)                                   → )
-;                                   → ;
-\n                                  → \n        
-return                              → return 
-<                                   → <
-p                                   → p
->ticking</                          → >ticking</
-p                                   → p
->                                   → >
-;                                   → ;
-\n})())                             → \n      }`
-cs.lift((() => {\n                  → cs`{\n        
-return                              → return 
-<                                   → (\n          <
-button                              → button
-                                    →  
-onclick                             → onclick
-={cs.lift(                          → ={
-() =>                               → () => 
-cs.splice(                          →  [-semantic]
-(onCleanup)                         → $onCleanup
- satisfies typeof cs.Spliceable)    →  [-semantic]
-(                                   → (
-() =>                               → () => 
-cs.globalThis.                      → 
-window                              → window
-.                                   → .
-console                             → console
-.                                   → .
-log                                 → log
-()                                  → ()
-)                                   → )
-)}                                  → }
->\n            press\n          </  → >\n            press\n          </
-button                              → button
->                                   → >\n        )
-;                                   → ;
-\n})())                             → \n      }`
+cs.lift((() => {\n                      → cs`{\n          
+cs.splice(                              →  [-semantic]
+(onCleanup)                             → $onCleanup
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+() =>                                   → () => 
+cs.globalThis.                          → 
+window                                  → window
+.                                       → .
+console                                 → console
+.                                       → .
+log                                     → log
+()                                      → ()
+)                                       → )
+;                                       → ;
+\n                                      → \n          
+return                                  → return 
+<                                       → <
+p                                       → p
+>drawn</                                → >drawn</
+p                                       → p
+>                                       → >
+;                                       → ;
+\n})())                                 → \n        }`
+cs.lift((() => {\n                      → cs`{\n          
+const                                   → const 
+__cs_n                                  → n
+ =                                      →  = 
+cs.splice(                              →  [-semantic]
+(createSignal)                          → $createSignal
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+1                                       → 1
+)                                       → )
+;                                       → ;
+\n                                      → \n          
+const                                   → const 
+__cs_doubled                            → doubled
+ =                                      →  = 
+cs.splice(                              →  [-semantic]
+(createMemo)                            → $createMemo
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+() => {\n                               → () => {\n            
+cs.splice(                              →  [-semantic]
+(onCleanup)                             → $onCleanup
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+() =>                                   → () => 
+cs.globalThis.                          → 
+window                                  → window
+.                                       → .
+console                                 → console
+.                                       → .
+log                                     → log
+()                                      → ()
+)                                       → )
+;                                       → ;
+\n                                      → \n            
+return                                  → return 
+__cs_n                                  → n
+[                                       → [
+0                                       → 0
+]                                       → ]
+()                                      → ()
+ *                                      →  * 
+2                                       → 2
+;                                       → ;
+\n    }                                 → \n          }
+)                                       → )
+;                                       → ;
+\n                                      → \n          
+return                                  → return 
+<                                       → <
+button                                  → button
+                                        →  
+onclick                                 → onclick
+={cs.lift(                              → ={
+() =>                                   → () => 
+__cs_n                                  → n
+[                                       → [
+1                                       → 1
+]                                       → ]
+(                                       → (
+__cs_n                                  → n
+[                                       → [
+0                                       → 0
+]                                       → ]
+()                                      → ()
+ +                                      →  + 
+1                                       → 1
+)                                       → )
+)}                                      → }
+>{cs.lift(                              → >{
+__cs_doubled                            → doubled
+()                                      → ()
+)}</                                    → }</
+button                                  → button
+>                                       → >
+;                                       → ;
+\n})())                                 → \n        }`
+cs.lift((() => {\n                      → cs`{\n          
+const                                   → const 
+__cs_timer                              → timer
+ =                                      →  = 
+cs.splice(                              →  [-semantic]
+(createSignal)                          → $createSignal
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+0                                       → 0
+)                                       → )
+;                                       → ;
+\n                                      → \n          
+cs.splice(                              →  [-semantic]
+(onMount)                               → $onMount
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+() => {\n                               → () => {\n            
+__cs_timer                              → timer
+[                                       → [
+1                                       → 1
+]                                       → ]
+(                                       → (
+cs.globalThis.                          → 
+window                                  → window
+.                                       → .
+setInterval                             → setInterval
+(                                       → (
+() =>                                   → () => 
+cs.globalThis.                          → 
+window                                  → window
+.                                       → .
+console                                 → console
+.                                       → .
+log                                     → log
+()                                      → ()
+,                                       → , 
+5                                       → 5
+)                                       → )
+)                                       → )
+;                                       → ;
+\n    }                                 → \n          }
+)                                       → )
+;                                       → ;
+\n                                      → \n          
+cs.splice(                              →  [-semantic]
+(onCleanup)                             → $onCleanup
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+() =>                                   → () => 
+cs.globalThis.                          → 
+window                                  → window
+.                                       → .
+clearInterval                           → clearInterval
+(                                       → (
+__cs_timer                              → timer
+[                                       → [
+0                                       → 0
+]                                       → ]
+()                                      → ()
+)                                       → )
+)                                       → )
+;                                       → ;
+\n                                      → \n          
+return                                  → return 
+<                                       → <
+p                                       → p
+>ticking</                              → >ticking</
+p                                       → p
+>                                       → >
+;                                       → ;
+\n})())                                 → \n        }`
+cs.lift((() => {\n                      → cs`{\n          
+return                                  → return 
+<                                       → (\n            <
+button                                  → button
+                                        →  
+onclick                                 → onclick
+={cs.lift(                              → ={
+() =>                                   → () => 
+cs.splice(                              →  [-semantic]
+(onCleanup)                             → $onCleanup
+ satisfies typeof cs.Spliceable)        →  [-semantic]
+(                                       → (
+() =>                                   → () => 
+cs.globalThis.                          → 
+window                                  → window
+.                                       → .
+console                                 → console
+.                                       → .
+log                                     → log
+()                                      → ()
+)                                       → )
+)}                                      → }
+>\n              press\n            </  → >\n              press\n            </
+button                                  → button
+>                                       → >\n          )
+;                                       → ;
+\n})())                                 → \n        }`

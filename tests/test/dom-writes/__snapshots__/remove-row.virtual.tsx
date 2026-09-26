@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { watchWrites } from "./writes.ts";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // js-framework-benchmark's "remove row": one row in the middle goes. The rows
 // after it close up by staying where they are, so what is written is the one
@@ -17,7 +18,7 @@ async function RemovableRows() {
 }
 
 it("a removal takes out the one row", async () => {
-  const { container } = await render(<RemovableRows />);
+  const { container } = render(await draw(<RemovableRows />));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "remove 3" }));
   assert.deepEqual(written(), ["tbody − tr#row-3"]);

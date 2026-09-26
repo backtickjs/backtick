@@ -1,12 +1,12 @@
 import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { bundle } from "@backtickjs/solid-js/bundle";
+import { draw } from "@backtickjs/solid-js/testing";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { createRoot } from "solid-js";
 import { insert } from "solid-js/web";
-import { screen } from "@backtickjs/solid-js/testing";
+import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 // Where a render draws, and what it may move.
@@ -29,7 +29,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "3iao3z6ftz31b:33:9",
+    "333wb9hts3bww:33:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -72,12 +72,9 @@ function target(html) {
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
 // these insert at it with Solid directly.
 async function drawAt(value, parent, selector) {
-  const { code } = await bundle(value);
-  const draw = (
-    await import(`data:text/javascript,${encodeURIComponent(code)}`)
-  ).default;
+  const drawing = await draw(value);
   const unmount = createRoot((dispose) => {
-    insert(parent, draw(), parent.querySelector(selector));
+    insert(parent, drawing(), parent.querySelector(selector));
     return dispose;
   });
   undo.push(unmount);

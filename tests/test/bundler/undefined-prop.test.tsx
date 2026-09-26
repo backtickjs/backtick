@@ -3,8 +3,9 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
 import { onMount } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // An element's prop that is `undefined` is left out, as an optional prop reads
 // in JSX and TypeScript. That is what lets a component forward an optional
@@ -26,13 +27,15 @@ describe("an undefined prop", () => {
   });
 
   it("lets a component forward an optional prop it wasn't given", async () => {
-    await render(<Pill label="plain" />);
+    render(await draw(<Pill label="plain" />));
     assert.ok(screen.getByRole("button", { name: "plain" }));
   });
 
   it("still reaches the element when it is given", async () => {
-    await render(
-      <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />,
+    render(
+      await draw(
+        <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />,
+      ),
     );
     assert.equal(document.activeElement, screen.getByRole("button"));
   });

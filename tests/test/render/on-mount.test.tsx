@@ -2,8 +2,9 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // What the page held each time a script logged, read through the console
 // `onMount` reaches from a script.
@@ -23,32 +24,33 @@ async function logged(draw: () => Promise<unknown>): Promise<string[]> {
 
 describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
-    const seen = await logged(() =>
-      render(
-        cs`{
-          const count = $createSignal(0);
-          $onMount(() => {
-            window.console.log();
-            count[1](count[0]() + 1);
-          });
-          return <p>{"mounted " + count[0]()}</p>;
-        }`,
-      ),
+    const drawing = await draw(
+      cs`{
+        const count = $createSignal(0);
+        $onMount(() => {
+          window.console.log();
+          count[1](count[0]() + 1);
+        });
+        return <p>{"mounted " + count[0]()}</p>;
+      }`,
     );
+    const seen = await logged(async () => render(drawing));
     assert.deepEqual(seen, ["mounted 0"]);
     assert.equal(screen.getByText(/mounted/).textContent, "mounted 1");
   });
 
   it("runs at once when called from a handler", async () => {
-    await render(
-      cs`{
-        const said = $createSignal("not yet");
-        return (
-          <button onclick={() => $onMount(() => said[1]("ran"))}>
-            {said[0]()}
-          </button>
-        );
-      }`,
+    render(
+      await draw(
+        cs`{
+          const said = $createSignal("not yet");
+          return (
+            <button onclick={() => $onMount(() => said[1]("ran"))}>
+              {said[0]()}
+            </button>
+          );
+        }`,
+      ),
     );
     await userEvent.click(screen.getByRole("button"));
     assert.equal(screen.getByRole("button").textContent, "ran");

@@ -1,4 +1,4 @@
-cs.lift((() => {\n                → cs`{\n        
+cs.lift((() => {\n                → cs`{\n          
 const                             → const 
 __cs_n                            → n
  =                                →  = 
@@ -9,7 +9,7 @@ cs.splice(                        →  [-semantic]
 1                                 → 1
 )                                 → )
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 const                             → const 
 __cs_doubled                      → doubled
  =                                →  = 
@@ -17,7 +17,7 @@ cs.splice(                        →  [-semantic]
 (createMemo)                      → $createMemo
  satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
-() => {\n                         → () => {\n          
+() => {\n                         → () => {\n            
 cs.globalThis.                    → 
 window                            → window
 .                                 → .
@@ -26,7 +26,7 @@ console                           → console
 log                               → log
 ()                                → ()
 ;                                 → ;
-\n                                → \n          
+\n                                → \n            
 return                            → return 
 __cs_n                            → n
 [                                 → [
@@ -36,14 +36,14 @@ __cs_n                            → n
  *                                →  * 
 2                                 → 2
 ;                                 → ;
-\n    }                           → \n        }
+\n    }                           → \n          }
 )                                 → )
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 return                            → return 
-<                                 → (\n          <
+<                                 → (\n            <
 div                               → div
->{cs.lift(                        → >\n            
+>{cs.lift(                        → >\n              
 <                                 → <
 button                            → button
                                   →  
@@ -67,7 +67,7 @@ __cs_n                            → n
 >add</                            → >add</
 button                            → button
 >                                 → >
-)}{cs.lift(                       → \n            
+)}{cs.lift(                       → \n              
 <                                 → <
 p                                 → p
 >{cs.lift(                        → >{
@@ -78,7 +78,7 @@ __cs_doubled                      → doubled
 )}</                              → }</
 p                                 → p
 >                                 → >
-)}{cs.lift(                       → \n            
+)}{cs.lift(                       → \n              
 <                                 → <
 p                                 → p
 >{cs.lift(                        → >{
@@ -89,7 +89,7 @@ __cs_doubled                      → doubled
 )}</                              → }</
 p                                 → p
 >                                 → >
-)}{cs.lift(                       → \n            
+)}{cs.lift(                       → \n              
 <                                 → <
 p                                 → p
 >{cs.lift(                        → >{
@@ -100,12 +100,12 @@ __cs_doubled                      → doubled
 )}</                              → }</
 p                                 → p
 >                                 → >
-)}</                              → \n          </
+)}</                              → \n            </
 div                               → div
->                                 → >\n        )
+>                                 → >\n          )
 ;                                 → ;
-\n})())                           → \n      }`
-cs.lift((() => {\n                → cs`{\n        
+\n})())                           → \n        }`
+cs.lift((() => {\n                → cs`{\n          
 const                             → const 
 __cs_n                            → n
  =                                →  = 
@@ -116,7 +116,7 @@ cs.splice(                        →  [-semantic]
 1                                 → 1
 )                                 → )
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 const                             → const 
 __cs_isBig                        → isBig
  =                                →  = 
@@ -134,11 +134,11 @@ __cs_n                            → n
 2                                 → 2
 )                                 → )
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 const                             → const 
 __cs_label                        → label
  =                                →  = 
-() => {\n                         → () => {\n          
+() => {\n                         → () => {\n            
 cs.globalThis.                    → 
 window                            → window
 .                                 → .
@@ -147,7 +147,7 @@ console                           → console
 log                               → log
 ()                                → ()
 ;                                 → ;
-\n                                → \n          
+\n                                → \n            
 return                            → return 
 __cs_isBig                        → isBig
 ()                                → ()
@@ -156,13 +156,13 @@ __cs_isBig                        → isBig
  :                                →  : 
 "small"                           → "small"
 ;                                 → ;
-\n    }                           → \n        }
+\n    }                           → \n          }
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 return                            → return 
-<                                 → (\n          <
+<                                 → (\n            <
 div                               → div
->{cs.lift(                        → >\n            
+>{cs.lift(                        → >\n              
 <                                 → <
 button                            → button
                                   →  
@@ -186,7 +186,7 @@ __cs_n                            → n
 >add</                            → >add</
 button                            → button
 >                                 → >
-)}{cs.lift(                       → \n            
+)}{cs.lift(                       → \n              
 <                                 → <
 p                                 → p
 >{cs.lift(                        → >{
@@ -195,8 +195,8 @@ __cs_label                        → label
 )}</                              → }</
 p                                 → p
 >                                 → >
-)}</                              → \n          </
+)}</                              → \n            </
 div                               → div
->                                 → >\n        )
+>                                 → >\n          )
 ;                                 → ;
-\n})())                           → \n      }`
+\n})())                           → \n        }`

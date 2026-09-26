@@ -1,8 +1,0 @@
-<div>
-  <button>
-    {"Add"}
-  </button>
-  <p>
-    {"Count: 0"}
-  </p>
-</div>

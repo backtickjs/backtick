@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { bundle } from "@backtickjs/solid-js/bundle";
+import { draw } from "@backtickjs/solid-js/testing";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { createRoot, type JSX as Solid } from "solid-js";
+import { createRoot } from "solid-js";
 import { insert } from "solid-js/web";
-import { screen } from "@backtickjs/solid-js/testing";
+import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
@@ -87,12 +87,9 @@ async function drawAt(
   parent: Element,
   selector: string,
 ): Promise<void> {
-  const { code } = (await bundle(value));
-  const draw = (
-    await import(`data:text/javascript,${encodeURIComponent(code)}`)
-  ).default as () => Solid.Element;
+  const drawing = await draw(value);
   const unmount = createRoot((dispose) => {
-    insert(parent, draw(), parent.querySelector(selector)!);
+    insert(parent, drawing(), parent.querySelector(selector)!);
     return dispose;
   });
   undo.push(unmount);

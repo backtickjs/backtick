@@ -307,4 +307,3 @@ function toSourceOffset(mappings: OffsetMapping[], pos: number): number {
   const last = mappings[mappings.length - 1];
   return last.sourceStart + last.length;
 }
-

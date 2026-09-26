@@ -1,9 +1,15 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createMemo, createSignal, onCleanup, onMount } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import {
+  createMemo,
+  createSignal,
+  onCleanup,
+  onMount,
+} from "@backtickjs/solid-js";
+import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
@@ -23,11 +29,13 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
-    const { unmount } = await render(
-      cs`{
-        $onCleanup(() => window.console.log());
-        return <p>drawn</p>;
-      }`,
+    const { unmount } = render(
+      await draw(
+        cs`{
+          $onCleanup(() => window.console.log());
+          return <p>drawn</p>;
+        }`,
+      ),
     );
     assert.equal(runs, 0);
     unmount();
@@ -35,17 +43,17 @@ describe("onCleanup", () => {
   });
 
   it("runs before a memo calculates again", async () => {
-    await render(
-      cs`{
-        const n = $createSignal(1);
-        const doubled = $createMemo(() => {
-          $onCleanup(() => window.console.log());
-          return n[0]() * 2;
-        });
-        return (
-          <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>
-        );
-      }`,
+    render(
+      await draw(
+        cs`{
+          const n = $createSignal(1);
+          const doubled = $createMemo(() => {
+            $onCleanup(() => window.console.log());
+            return n[0]() * 2;
+          });
+          return <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>;
+        }`,
+      ),
     );
     assert.equal(runs, 0);
     await userEvent.click(screen.getByRole("button"));
@@ -69,15 +77,17 @@ describe("onCleanup", () => {
     );
     t.after(() => started.forEach((id) => globalThis.window.clearInterval(id)));
 
-    const { unmount } = await render(
-      cs`{
-        const timer = $createSignal(0);
-        $onMount(() => {
-          timer[1](window.setInterval(() => window.console.log(), 5));
-        });
-        $onCleanup(() => window.clearInterval(timer[0]()));
-        return <p>ticking</p>;
-      }`,
+    const { unmount } = render(
+      await draw(
+        cs`{
+          const timer = $createSignal(0);
+          $onMount(() => {
+            timer[1](window.setInterval(() => window.console.log(), 5));
+          });
+          $onCleanup(() => window.clearInterval(timer[0]()));
+          return <p>ticking</p>;
+        }`,
+      ),
     );
     await wait(40);
     assert.ok(runs > 0);
@@ -89,14 +99,16 @@ describe("onCleanup", () => {
   });
 
   it("never runs when called from a handler", async () => {
-    const { unmount } = await render(
-      cs`{
-        return (
-          <button onclick={() => $onCleanup(() => window.console.log())}>
-            press
-          </button>
-        );
-      }`,
+    const { unmount } = render(
+      await draw(
+        cs`{
+          return (
+            <button onclick={() => $onCleanup(() => window.console.log())}>
+              press
+            </button>
+          );
+        }`,
+      ),
     );
     await userEvent.click(screen.getByRole("button"));
     unmount();

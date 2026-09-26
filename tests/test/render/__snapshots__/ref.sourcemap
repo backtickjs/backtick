@@ -1,4 +1,4 @@
-cs.lift((() => {\n                → cs`{\n        
+cs.lift((() => {\n                → cs`{\n          
 const                             → const 
 __cs_field                        → field
  =                                →  = 
@@ -13,11 +13,11 @@ null                              → null
 null                              → null
 )                                 → )
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 return                            → return 
-<                                 → (\n          <
+<                                 → (\n            <
 div                               → div
->{cs.lift(                        → >\n            
+>{cs.lift(                        → >\n              
 <                                 → <
 input                             → input
                                   →  
@@ -39,7 +39,7 @@ __cs_element                      → element
 )                                 → )
 )}                                → }
 />                                →  />
-)}{cs.lift(                       → \n            
+)}{cs.lift(                       → \n              
 <                                 → <
 button                            → button
                                   →  
@@ -58,21 +58,21 @@ focus                             → focus
 >edit</                           → >edit</
 button                            → button
 >                                 → >
-)}</                              → \n          </
+)}</                              → \n            </
 div                               → div
->                                 → >\n        )
+>                                 → >\n          )
 ;                                 → ;
-\n})())                           → \n      }`
-cs.lift((() => {\n                → cs`{\n        
+\n})())                           → \n        }`
+cs.lift((() => {\n                → cs`{\n          
 return                            → return 
-<                                 → (\n          <
+<                                 → (\n            <
 input                             → input
-                                  → \n            
+                                  → \n              
 aria-label                        → aria-label
 ={cs.lift(                        → =
 "name"                            → "name"
 )}                                → 
-                                  → \n            
+                                  → \n              
 ref                               → ref
 ={cs.lift(                        → ={
 __cs_element                      → element
@@ -88,9 +88,9 @@ focus                             → focus
 ()                                → ()
 )                                 → )
 )}                                → }
-/>                                → \n          />\n        )
+/>                                → \n            />\n          )
 ;                                 → ;
-\n})())                           → \n      }`
+\n})())                           → \n        }`
 cs.lift(                          → cs`
 <                                 → <
 input                             → input
@@ -106,7 +106,7 @@ ref                               → ref
 )}                                → }
 />                                →  />
 )                                 → `
-cs.lift((() => {\n                → cs`{\n          
+cs.lift((() => {\n                → cs`{\n            
 const                             → const 
 __cs_shown                        → shown
  =                                →  = 
@@ -117,7 +117,7 @@ cs.splice(                        →  [-semantic]
 true                              → true
 )                                 → )
 ;                                 → ;
-\n                                → \n          
+\n                                → \n            
 const                             → const 
 __cs_n                            → n
  =                                →  = 
@@ -128,11 +128,11 @@ cs.splice(                        →  [-semantic]
 0                                 → 0
 )                                 → )
 ;                                 → ;
-\n                                → \n          
+\n                                → \n            
 return                            → return 
-<                                 → (\n            <
+<                                 → (\n              <
 div                               → div
->{cs.lift(                        → >\n              
+>{cs.lift(                        → >\n                
 <                                 → <
 button                            → button
                                   →  
@@ -153,7 +153,7 @@ __cs_n                            → n
 1                                 → 1
 )                                 → )
 )}                                → }
->{cs.lift(                        → >\n                {
+>{cs.lift(                        → >\n                  {
 "n "                              → "n "
  +                                →  + 
 __cs_n                            → n
@@ -161,17 +161,17 @@ __cs_n                            → n
 0                                 → 0
 ]                                 → ]
 ()                                → ()
-)}</                              → }\n              </
+)}</                              → }\n                </
 button                            → button
 >                                 → >
-)}{cs.lift(                       → \n              {
+)}{cs.lift(                       → \n                {
 __cs_shown                        → shown
 [                                 → [
 0                                 → 0
 ]                                 → ]
 ()                                → ()
  ?                                →  ? 
-<                                 → (\n                <
+<                                 → (\n                  <
 p                                 → p
                                   →  
 ref                               → ref
@@ -193,11 +193,11 @@ __cs_n                            → n
 )}                                → }
 >shown</                          → >shown</
 p                                 → p
->                                 → >\n              )
+>                                 → >\n                )
  :                                →  : 
 null                              → null
-)}</                              → }\n            </
+)}</                              → }\n              </
 div                               → div
->                                 → >\n          )
+>                                 → >\n            )
 ;                                 → ;
-\n})())                           → \n        }`
+\n})())                           → \n          }`

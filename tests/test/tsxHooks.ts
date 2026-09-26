@@ -34,21 +34,23 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   };
 };
 
-// What a bundle imports, resolved from this package, as a page's import map
-// resolves it: a bundle is imported as a `data:` URL, from which Node resolves
-// nothing. And Solid's DOM build, where Node would pick its server build: the
-// one a page runs, and the one the client draws with. Only for Solid, since
-// the condition changes what other packages resolve to too.
+// The page's import map, as the tests have it: a specifier names the same
+// module whoever imports it — a test, `draw`'s bundle, a page's script, Solid
+// itself — as a browser resolves an import map. Solid is its DOM build, the one
+// a page runs, where Node would pick its server build; `app` is the module an
+// app adds beside it (see `stdlib/target-builtins.test.tsx`).
+const APP = new URL("./stdlib/app.ts", import.meta.url).href;
+
 export const resolve: ResolveHook = (specifier, context, nextResolve) => {
-  const parentURL = context.parentURL?.startsWith("data:")
-    ? import.meta.url
-    : context.parentURL;
-  return nextResolve(specifier, {
-    ...context,
-    parentURL,
-    conditions:
-      specifier === "solid-js" || specifier.startsWith("solid-js/")
-        ? ["browser", ...context.conditions]
-        : context.conditions,
-  });
+  if (specifier === "app") {
+    return { url: APP, shortCircuit: true };
+  }
+  if (specifier === "solid-js" || specifier.startsWith("solid-js/")) {
+    return nextResolve(specifier, {
+      ...context,
+      parentURL: import.meta.url,
+      conditions: ["browser", ...context.conditions],
+    });
+  }
+  return nextResolve(specifier, context);
 };

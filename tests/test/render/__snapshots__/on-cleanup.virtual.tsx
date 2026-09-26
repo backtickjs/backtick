@@ -1,9 +1,15 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { createMemo, createSignal, onCleanup, onMount } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import {
+  createMemo,
+  createSignal,
+  onCleanup,
+  onMount,
+} from "@backtickjs/solid-js";
+import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
@@ -23,11 +29,13 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
-    const { unmount } = await render(
-      cs.lift((() => {
+    const { unmount } = render(
+      await draw(
+        cs.lift((() => {
     cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.globalThis.window.console.log());
     return <p>drawn</p>;
 })()),
+      ),
     );
     assert.equal(runs, 0);
     unmount();
@@ -35,8 +43,9 @@ describe("onCleanup", () => {
   });
 
   it("runs before a memo calculates again", async () => {
-    await render(
-      cs.lift((() => {
+    render(
+      await draw(
+        cs.lift((() => {
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
     const __cs_doubled = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => {
         cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.globalThis.window.console.log());
@@ -44,6 +53,7 @@ describe("onCleanup", () => {
     });
     return <button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift(__cs_doubled())}</button>;
 })()),
+      ),
     );
     assert.equal(runs, 0);
     await userEvent.click(screen.getByRole("button"));
@@ -67,8 +77,9 @@ describe("onCleanup", () => {
     );
     t.after(() => started.forEach((id) => globalThis.window.clearInterval(id)));
 
-    const { unmount } = await render(
-      cs.lift((() => {
+    const { unmount } = render(
+      await draw(
+        cs.lift((() => {
     const __cs_timer = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
     cs.splice((onMount) satisfies typeof cs.Spliceable)(() => {
         __cs_timer[1](cs.globalThis.window.setInterval(() => cs.globalThis.window.console.log(), 5));
@@ -76,6 +87,7 @@ describe("onCleanup", () => {
     cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.globalThis.window.clearInterval(__cs_timer[0]()));
     return <p>ticking</p>;
 })()),
+      ),
     );
     await wait(40);
     assert.ok(runs > 0);
@@ -87,12 +99,14 @@ describe("onCleanup", () => {
   });
 
   it("never runs when called from a handler", async () => {
-    const { unmount } = await render(
-      cs.lift((() => {
+    const { unmount } = render(
+      await draw(
+        cs.lift((() => {
     return <button onclick={cs.lift(() => cs.splice((onCleanup) satisfies typeof cs.Spliceable)(() => cs.globalThis.window.console.log()))}>
-            press
-          </button>;
+              press
+            </button>;
 })()),
+      ),
     );
     await userEvent.click(screen.getByRole("button"));
     unmount();

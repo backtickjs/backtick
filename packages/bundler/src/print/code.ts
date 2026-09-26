@@ -72,8 +72,7 @@ export function object(
   entries: readonly (readonly [string, string])[],
 ): string {
   const members = entries.map(
-    ([key, value]) =>
-      `${IDENTIFIER.test(key) ? key : string(key)}: ${value}`,
+    ([key, value]) => `${IDENTIFIER.test(key) ? key : string(key)}: ${value}`,
   );
   return `{ ${members.join(", ")} }`;
 }

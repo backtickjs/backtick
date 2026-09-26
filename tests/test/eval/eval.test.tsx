@@ -3,8 +3,9 @@ import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
-import { render } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
+import { draw } from "@backtickjs/solid-js/testing";
+import { render } from "@solidjs/testing-library";
 
 // A bundle evaluated where a script stands, and used by its type: a drawing
 // whose root is a list, placed as a child, and a number, added to.
@@ -28,7 +29,7 @@ it("eval", async (t) => {
 
 describe("a bundle a script runs with eval", () => {
   it("draws one whose root is a <For />, and answers one that is a value", async () => {
-    const { container } = await render(evaluated);
+    const { container } = render(await draw(evaluated));
 
     const div = container.firstElementChild!;
     assert.deepEqual(

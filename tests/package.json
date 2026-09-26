@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "imports": {
-    "#app": "./test/stdlib/app.ts"
-  },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
@@ -22,8 +19,8 @@
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/solid-js": "workspace:^0.1.0",
     "@backtickjs/tsc": "workspace:*",
-    "@backtickjs/web-testing": "workspace:*",
     "@jridgewell/trace-mapping": "^0.3.31",
+    "@solidjs/testing-library": "^0.8.10",
     "@testing-library/user-event": "^14.6.7",
     "global-jsdom": "^30.0.0",
     "jsdom": "^30.0.1",

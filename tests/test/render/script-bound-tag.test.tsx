@@ -3,16 +3,18 @@ import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/solid-js/bundle";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { render, screen } from "@backtickjs/solid-js/testing";
+import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
+import { draw } from "@backtickjs/solid-js/testing";
 
 // A tag naming a function the script holds — here a bundle that takes props,
 // evaluated. It is called with its props read on access, the way a component's
 // are, so `count` follows the signal without the badge being drawn again.
-const badge = (await bundle(
+const badge = (
+  await bundle(
     cs`(props: { count: number }) => <b>{"count " + props.count}</b>`,
-  ),
+  )
 ).code;
 
 const scriptBoundTag = cs`{
@@ -33,7 +35,7 @@ it("scriptBoundTag", async (t) => {
 
 describe("a tag naming a function the script holds", () => {
   it("keeps a prop live without drawing the function again", async () => {
-    await render(scriptBoundTag);
+    render(await draw(scriptBoundTag));
 
     const badge = screen.getByText("count 0");
 

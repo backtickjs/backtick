@@ -1,4 +1,4 @@
-// 21:10
+// 22:10
 ($splice0, $splice1, $splice2, $tag3) => {
     const items = $splice0()([]);
     const started = window.setTimeout(() => {
@@ -9,7 +9,7 @@
     return <$tag3 each={items[0]()}>{(item) => <em>{item}</em>}</$tag3>;
 }
 
-// 34:23
+// 35:23
 ($splice0, $tag1) => {
     const asked = $splice0()(0);
     return (<div>

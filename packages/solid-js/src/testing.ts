@@ -1,26 +1,36 @@
-import { createTesting, type Testing } from "@backtickjs/web-testing";
-import * as solid from "solid-js";
-import * as web from "solid-js/web";
-import type { JSX } from "./jsx-runtime.js";
+import { createHash } from "node:crypto";
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
+import type { Spliceable } from "@backtickjs/core";
+import type { JSX as Solid } from "solid-js";
 import { bundle } from "./bundle.js";
+import type { JSX } from "./jsx-runtime.js";
 
-// Testing Library for a project drawn with Solid: everything
-// `@backtickjs/web-testing` offers, with `render` and `evaluate` compiling
-// and running on Solid.
-export * from "@backtickjs/web-testing";
+/** What a bundle's default export answers: Solid's own element for a drawing. */
+export type Drawn<T> = T extends JSX.Element ? Solid.Element : T;
 
-// A bundle's default export, run in a root of its own, which owns what it
-// creates: evaluated, or drawn into a container.
-const client = {
-  evaluate<T>(run: () => T): T {
-    return solid.createRoot(() => run());
-  },
-  render(run: () => unknown, container: Element): () => void {
-    return web.render(() => run() as solid.JSX.Element, container);
-  },
-};
-
-const testing: Testing<JSX.Element> = createTesting(client, bundle);
-export const render: Testing<JSX.Element>["render"] = testing.render;
-export const evaluate: Testing["evaluate"] = testing.evaluate;
-export const evaluateBundle: Testing["evaluateBundle"] = testing.evaluateBundle;
+/**
+ * A value as a page runs it, for Solid Testing Library or Solid itself to
+ * run: bundled, and the bundle imported, whose default export draws it.
+ *
+ *     render(await draw(<Counter from={0} />));
+ *
+ * The bundle is imported from a file in the project's
+ * `node_modules/.cache/backtick/`, named for its content, so its imports
+ * (`solid-js/web`) resolve through the project's own modules, as the test's
+ * do.
+ */
+export async function draw<T>(value: Spliceable<T>): Promise<() => Drawn<T>> {
+  const { code } = await bundle(value as Spliceable);
+  const directory = join(process.cwd(), "node_modules", ".cache", "backtick");
+  const file = join(
+    directory,
+    `${createHash("sha256").update(code).digest("hex")}.js`,
+  );
+  await mkdir(directory, { recursive: true });
+  await writeFile(file, code);
+  return (
+    (await import(pathToFileURL(file).href)) as { default: () => Drawn<T> }
+  ).default;
+}

@@ -14,7 +14,12 @@ describe("emitScripts", () => {
     assert.strictEqual(map.sourcesContent, undefined);
     assert.deepStrictEqual(
       originalPositionFor(map, { line: 1, column: "() => ".length }),
-      { source: "host.tsx", line: 1, column: host.indexOf("1 + 1"), name: null },
+      {
+        source: "host.tsx",
+        line: 1,
+        column: host.indexOf("1 + 1"),
+        name: null,
+      },
     );
   });
 });
