@@ -31,7 +31,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "16leozv29y23d:35:9",
+    "zbupybbcou6y:35:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -77,9 +77,12 @@ function target(html) {
 // these insert at it with Solid directly.
 async function drawAt(value, parent, selector) {
   const code = await bundler.run(value, { transform });
+  const draw = (
+    await import(`data:text/javascript,${encodeURIComponent(code)}`)
+  ).default;
   const unmount = client.evaluate(() =>
     createRoot((dispose) => {
-      insert(parent, (0, eval)(code), parent.querySelector(selector));
+      insert(parent, draw(), parent.querySelector(selector));
       return dispose;
     }),
   );

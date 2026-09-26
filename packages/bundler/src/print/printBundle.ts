@@ -1,5 +1,4 @@
 import type { Bundle, ClientUnknown } from "@backtickjs/platform-sdk";
-import { parse } from "acorn";
 import { GENERATOR, generate } from "astring";
 import type * as ES from "estree";
 import type { BundleTree } from "../bundle/buildBundle.js";
@@ -18,15 +17,13 @@ export type CodeTransform = (
 ) => { readonly code: string; readonly map: string };
 
 /**
- * A bundle tree as JavaScript: one expression that answers with what the
- * tree's root evaluates to.
+ * A bundle tree as a module whose default export draws the tree's root: a
+ * function, so the client calls it where what it creates is owned.
  *
  * The tree is printed as a JSX module, by `astring`: its imports, each entry,
- * and the root as `$bundle`. The adapter's transform compiles it as the
- * framework compiles any module, and its imports become reads of the modules
- * the client registered under `$modules`, so `eval` can run it. Everything is
- * inside one function, so what the framework's compiler declares stays the
- * bundle's own.
+ * and the root. The adapter's transform compiles it as the framework compiles
+ * any module; its imports are the client's to resolve, through an import map
+ * in a page.
  *
  * Strings are printed escaped so that no `</script>` or `<!--` appears, and a
  * builtin is read as the global of its name.
@@ -35,7 +32,7 @@ export type CodeTransform = (
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
 // What the bundle itself names, beside the builtins it reads.
-const RUNTIME = ["$Script", "$bundle", "$modules", "globalThis"];
+const RUNTIME = ["$Script", "globalThis"];
 
 // Names a bundle may not bind: it is strict code, and `await` is reserved in a
 // module.
@@ -130,11 +127,11 @@ export function printBundle<T extends ClientUnknown>(
       ...imports,
       ...script,
       ...functions,
-      constant("$bundle", tree.root),
+      { type: "ExportDefaultDeclaration", declaration: arrow([], tree.root) },
     ],
   };
   const module = generate(program, { generator });
-  return asScript(transform(module, "bundle.jsx").code) as Bundle<T>;
+  return transform(module, "bundle.jsx").code as Bundle<T>;
 }
 
 function constant(name: string, init: ES.Expression): ES.VariableDeclaration {
@@ -181,36 +178,3 @@ const generator = {
     state.write(`</${tag}>`);
   },
 } as unknown as typeof GENERATOR;
-
-// A compiled module as one expression `eval` can run: its imports read from
-// `$modules`, and `$bundle` answered once everything after it has run.
-function asScript(code: string): string {
-  const program = parse(code, { ecmaVersion: "latest", sourceType: "module" });
-  const reads: string[] = [];
-  let body = code;
-  for (const statement of [...program.body].reverse()) {
-    if (statement.type !== "ImportDeclaration") {
-      continue;
-    }
-    const module = `$modules[${JSON.stringify(statement.source.value)}]`;
-    const named: string[] = [];
-    for (const specifier of statement.specifiers) {
-      if (specifier.type === "ImportNamespaceSpecifier") {
-        reads.push(`const ${specifier.local.name} = ${module};`);
-      } else {
-        const name =
-          specifier.type === "ImportDefaultSpecifier"
-            ? "default"
-            : specifier.imported.type === "Identifier"
-              ? specifier.imported.name
-              : String(specifier.imported.value);
-        named.push(`${JSON.stringify(name)}: ${specifier.local.name}`);
-      }
-    }
-    if (named.length > 0) {
-      reads.push(`const { ${named.join(", ")} } = ${module};`);
-    }
-    body = body.slice(0, statement.start) + body.slice(statement.end);
-  }
-  return `(() => {\n${reads.reverse().join("\n")}\n${body.trim()}\nreturn $bundle;\n})()`;
-}

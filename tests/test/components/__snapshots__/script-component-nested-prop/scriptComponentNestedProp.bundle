@@ -1,20 +1,18 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<h2>`);
-  const f1 = ($0) =>
-    _$createComponent($0, {
-      person: {
-        firstName: "ada",
-      },
-    });
-  const $bundle = f1(($0) =>
+import { template as _$template } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<h2>`);
+const f1 = ($0) =>
+  _$createComponent($0, {
+    person: {
+      firstName: "ada",
+    },
+  });
+export default () =>
+  f1(($0) =>
     (() => {
       var _el$ = _tmpl$();
       _$insert(_el$, () => $0.person.firstName);
       return _el$;
     })(),
   );
-  return $bundle;
-})();

@@ -1,14 +1,14 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
-  const { effect: _$effect } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<div><for>`),
-    _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
-  const f1 = ($0) => $0();
-  const f2 = ($0) => (row) => $0(row);
-  const f3 = ($0) => "row " + $0;
-  const $bundle = (() => {
+import { template as _$template } from "solid-js/web";
+import { setAttribute as _$setAttribute } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<div><for>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
+const f1 = ($0) => $0();
+const f2 = ($0) => (row) => $0(row);
+const f3 = ($0) => "row " + $0;
+export default () =>
+  (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     _$insert(_el$2, () =>
@@ -29,5 +29,3 @@
     );
     return _el$;
   })();
-  return $bundle;
-})();

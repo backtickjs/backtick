@@ -1,9 +1,6 @@
-(() => {
-  const f1 = () => (count) => {
-    const floor = -1;
-    const step = -count;
-    return floor + step + -2;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => (count) => {
+  const floor = -1;
+  const step = -count;
+  return floor + step + -2;
+};
+export default () => f1();

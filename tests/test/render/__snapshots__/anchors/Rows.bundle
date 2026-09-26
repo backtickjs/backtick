@@ -1,39 +1,38 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  const { For: $i1 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<span>clear`),
-    _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
-
-  const $Script = (props) => props.run();
-  const f1 = ($0, $1) => {
-    const ids = $0()([1, 2, 3]);
-    const clear = () => {
-      ids[1]([]);
-    };
-    return [
-      (() => {
-        var _el$ = _tmpl$();
-        _el$.$$click = clear;
-        return _el$;
-      })(),
-      _$createComponent($1, {
-        get each() {
-          return ids[0]();
-        },
-        children: (id) =>
-          (() => {
-            var _el$2 = _tmpl$2();
-            _$insert(_el$2, "row " + id);
-            return _el$2;
-          })(),
-      }),
-    ];
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<span>clear`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
+import { createSignal as $i0 } from "solid-js";
+import { For as $i1 } from "solid-js";
+const $Script = (props) => props.run();
+const f1 = ($0, $1) => {
+  const ids = $0()([1, 2, 3]);
+  const clear = () => {
+    ids[1]([]);
   };
-  const $bundle = _$createComponent($Script, {
+  return [
+    (() => {
+      var _el$ = _tmpl$();
+      _el$.$$click = clear;
+      return _el$;
+    })(),
+    _$createComponent($1, {
+      get each() {
+        return ids[0]();
+      },
+      children: (id) =>
+        (() => {
+          var _el$2 = _tmpl$2();
+          _$insert(_el$2, "row " + id);
+          return _el$2;
+        })(),
+    }),
+  ];
+};
+export default () =>
+  _$createComponent($Script, {
     run: () =>
       f1(
         () => $i0,
@@ -51,6 +50,4 @@
           }),
       ),
   });
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+_$delegateEvents(["click"]);

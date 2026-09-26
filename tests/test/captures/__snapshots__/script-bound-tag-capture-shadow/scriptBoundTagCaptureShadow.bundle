@@ -1,45 +1,45 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
-    _tmpl$2 = /*#__PURE__*/ _$template(`<i>`),
-    _tmpl$3 = /*#__PURE__*/ _$template(`<p>`),
-    _tmpl$4 = /*#__PURE__*/ _$template(`<h2>`);
-  const f1 = ($0, $1, $2) =>
+import { template as _$template } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<i>`),
+  _tmpl$3 = /*#__PURE__*/ _$template(`<p>`),
+  _tmpl$4 = /*#__PURE__*/ _$template(`<h2>`);
+const f1 = ($0, $1, $2) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _$insert(
+      _el$,
+      _$createComponent($2, {
+        title: "host",
+      }),
+      null,
+    );
+    _$insert(_el$, $0, null);
+    _$insert(_el$, $1, null);
+    return _el$;
+  })();
+const f2 = ($0, $1) => {
+  const Card = (props) =>
     (() => {
-      var _el$ = _tmpl$();
-      _$insert(
-        _el$,
-        _$createComponent($2, {
-          title: "host",
-        }),
-        null,
-      );
-      _$insert(_el$, $0, null);
-      _$insert(_el$, $1, null);
-      return _el$;
+      var _el$2 = _tmpl$2();
+      _$insert(_el$2, () => $0() + props.n);
+      return _el$2;
     })();
-  const f2 = ($0, $1) => {
-    const Card = (props) =>
-      (() => {
-        var _el$2 = _tmpl$2();
-        _$insert(_el$2, () => $0() + props.n);
-        return _el$2;
-      })();
-    return (() => {
-      var _el$3 = _tmpl$3();
-      _$insert(_el$3, () => $1(Card));
-      return _el$3;
-    })();
-  };
-  const f3 = () => "a";
-  const f4 = ($0) =>
-    _$createComponent($0, {
-      n: 1,
-    });
-  const f5 = () => "b";
-  const $bundle = f1(
+  return (() => {
+    var _el$3 = _tmpl$3();
+    _$insert(_el$3, () => $1(Card));
+    return _el$3;
+  })();
+};
+const f3 = () => "a";
+const f4 = ($0) =>
+  _$createComponent($0, {
+    n: 1,
+  });
+const f5 = () => "b";
+export default () =>
+  f1(
     () => f2(f3, f4),
     () => f2(f5, f4),
     ($0) =>
@@ -49,5 +49,3 @@
         return _el$4;
       })(),
   );
-  return $bundle;
-})();

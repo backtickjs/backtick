@@ -1,9 +1,6 @@
-(() => {
-  const f1 = ($0) => ({
-    a: $0(),
-    b: $0(),
-  });
-  const f2 = () => 7;
-  const $bundle = f1(f2);
-  return $bundle;
-})();
+const f1 = ($0) => ({
+  a: $0(),
+  b: $0(),
+});
+const f2 = () => 7;
+export default () => f1(f2);

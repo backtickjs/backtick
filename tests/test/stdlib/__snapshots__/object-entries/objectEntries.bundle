@@ -1,14 +1,11 @@
-(() => {
-  const f1 = () => {
-    const held = {
-      n: 1,
-      q: "ada",
-    };
-    const written = Object.fromEntries(
-      Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]),
-    );
-    return written.n + " " + written.q;
+const f1 = () => {
+  const held = {
+    n: 1,
+    q: "ada",
   };
-  const $bundle = f1();
-  return $bundle;
-})();
+  const written = Object.fromEntries(
+    Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]),
+  );
+  return written.n + " " + written.q;
+};
+export default () => f1();

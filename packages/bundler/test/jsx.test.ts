@@ -15,14 +15,14 @@ async function printed(
   await bundler.run(createJsxElement(type, props), {
     transform: (code) => {
       module = code;
-      return { code: "const $bundle = null;", map: "" };
+      return { code, map: "" };
     },
   });
   return module;
 }
 
 const root = async (...args: Parameters<typeof printed>) =>
-  (await printed(...args)).match(/const \$bundle = ([\s\S]*);\s*$/)![1]!;
+  (await printed(...args)).match(/export default \(\) => ([\s\S]*);\s*$/)![1]!;
 
 test("an element is a JSX tag", async () => {
   assert.equal(await root("br", {}), "<br />");
@@ -50,18 +50,5 @@ test("a client module's component is a tag of its import", async () => {
   const For = createImport({ name: "For", from: "solid-js" });
   const module = await printed(For as never, { each: [1] });
   assert.match(module, /^import \{For as \$i0\} from "solid-js";/);
-  assert.match(module, /\$bundle = <\$i0 each=\{\[1\]\} \/>;/);
-});
-
-test("what the transform imports is read from $modules", async () => {
-  const code = await bundler.run(1, {
-    transform: () => ({
-      code: 'import { a as b, c } from "m";\nconst $bundle = b(c);',
-      map: "",
-    }),
-  });
-  assert.equal(
-    code,
-    '(() => {\nconst { "a": b, "c": c } = $modules["m"];\nconst $bundle = b(c);\nreturn $bundle;\n})()',
-  );
+  assert.match(module, /export default \(\) => <\$i0 each=\{\[1\]\} \/>;/);
 });

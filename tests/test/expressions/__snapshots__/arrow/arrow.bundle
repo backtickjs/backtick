@@ -1,8 +1,5 @@
-(() => {
-  const f1 = () => {
-    const base = 10;
-    return (one, two) => one + two + base;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  const base = 10;
+  return (one, two) => one + two + base;
+};
+export default () => f1();

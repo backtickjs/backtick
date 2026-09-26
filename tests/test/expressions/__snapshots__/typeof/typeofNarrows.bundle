@@ -1,8 +1,5 @@
-(() => {
-  const f1 = () => {
-    const measure = (v) => (typeof v === "string" ? v.length : v * 2);
-    return [measure("abc"), measure(4)];
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  const measure = (v) => (typeof v === "string" ? v.length : v * 2);
+  return [measure("abc"), measure(4)];
+};
+export default () => f1();

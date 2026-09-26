@@ -42,6 +42,11 @@ transform is packaged yet. For `node:test`, a module hook that runs `.tsx`
 files through the compiler does it; this repository's `tests/test/tsxHooks.ts`
 is one.
 
+A bundle is a module, imported as a `data:` URL, and Node resolves nothing a
+`data:` URL imports by itself: a resolve hook has to resolve those imports
+(`solid-js/web`) from the project, as a page's import map does. The same hook
+file can do it.
+
 web-testing brings no DOM of its own. Your test runner provides one, as it
 does for React Testing Library, and `cleanup` has to run after each test.
 

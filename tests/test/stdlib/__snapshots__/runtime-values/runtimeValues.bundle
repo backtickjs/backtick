@@ -1,13 +1,11 @@
-(() => {
-  const f1 = ($0, $1) => ({
-    list: $0(),
-    obj: $1(),
-  });
-  const $bundle = f1(
+const f1 = ($0, $1) => ({
+  list: $0(),
+  obj: $1(),
+});
+export default () =>
+  f1(
     () => [1, "two", true, null],
     () => ({
       k: 3,
     }),
   );
-  return $bundle;
-})();

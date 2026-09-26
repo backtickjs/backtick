@@ -1,11 +1,8 @@
-(() => {
-  const f1 = () => {
-    try {
-      throw "boom";
-    } catch {
-      return "caught";
-    }
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  try {
+    throw "boom";
+  } catch {
+    return "caught";
+  }
+};
+export default () => f1();

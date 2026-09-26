@@ -34,13 +34,21 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   };
 };
 
-// Solid's DOM build, where Node would pick its server build: the one a page
-// runs, and the one the client draws with. Only for Solid, since the condition
-// changes what other packages resolve to too.
-export const resolve: ResolveHook = (specifier, context, nextResolve) =>
-  specifier === "solid-js" || specifier.startsWith("solid-js/")
-    ? nextResolve(specifier, {
-        ...context,
-        conditions: ["browser", ...context.conditions],
-      })
-    : nextResolve(specifier, context);
+// What a bundle imports, resolved from this package, as a page's import map
+// resolves it: a bundle is imported as a `data:` URL, from which Node resolves
+// nothing. And Solid's DOM build, where Node would pick its server build: the
+// one a page runs, and the one the client draws with. Only for Solid, since
+// the condition changes what other packages resolve to too.
+export const resolve: ResolveHook = (specifier, context, nextResolve) => {
+  const parentURL = context.parentURL?.startsWith("data:")
+    ? import.meta.url
+    : context.parentURL;
+  return nextResolve(specifier, {
+    ...context,
+    parentURL,
+    conditions:
+      specifier === "solid-js" || specifier.startsWith("solid-js/")
+        ? ["browser", ...context.conditions]
+        : context.conditions,
+  });
+};

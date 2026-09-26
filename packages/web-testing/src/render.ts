@@ -9,7 +9,7 @@ import type {
 import { mounted } from "./cleanup.js";
 import type { BundleClient } from "./evaluate.js";
 import { bundler, type CodeTransform } from "@backtickjs/bundler";
-import { runOf } from "./client.js";
+import { importBundle } from "./client.js";
 
 /** Where and how a value is drawn. */
 export interface RenderOptions<
@@ -89,8 +89,9 @@ export async function renderWith<
 
   const draw = async (value: Spliceable<BacktickElement>): Promise<void> => {
     const code = await bundler.run(value, { transform });
+    const run = await importBundle(code);
     takeDown();
-    const dispose = client.render(runOf(code), container);
+    const dispose = client.render(run, container);
     // The runtime stops what it drew but leaves the nodes, so the
     // container is emptied here, as React's `unmount` and Solid's own `render`
     // do.

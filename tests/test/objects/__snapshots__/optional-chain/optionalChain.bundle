@@ -1,30 +1,27 @@
-(() => {
-  const f1 = ($0, $1, $2) => ({
-    found: $0()({
-      x: 5,
-    }),
-    missing: $0()(null),
-    deep: $1()({
-      inner: {
-        z: 7,
-      },
-    }),
-    cut: $1()({
-      inner: null,
-    }),
-    top: $1()(null),
-    loud: $2()("hi"),
-    silent: $2()(null),
-  });
-  const f2 = () => (p) => {
-    return p?.x;
-  };
-  const f3 = () => (o) => {
-    return o?.inner?.z;
-  };
-  const f4 = () => (s) => {
-    return s?.concat("!");
-  };
-  const $bundle = f1(f2, f3, f4);
-  return $bundle;
-})();
+const f1 = ($0, $1, $2) => ({
+  found: $0()({
+    x: 5,
+  }),
+  missing: $0()(null),
+  deep: $1()({
+    inner: {
+      z: 7,
+    },
+  }),
+  cut: $1()({
+    inner: null,
+  }),
+  top: $1()(null),
+  loud: $2()("hi"),
+  silent: $2()(null),
+});
+const f2 = () => (p) => {
+  return p?.x;
+};
+const f3 = () => (o) => {
+  return o?.inner?.z;
+};
+const f4 = () => (s) => {
+  return s?.concat("!");
+};
+export default () => f1(f2, f3, f4);

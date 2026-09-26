@@ -1,16 +1,13 @@
-(() => {
-  const f1 = ($0) => {
-    const counter = {
-      count: 0,
-    };
-    const bump = $0(counter);
-    bump();
-    bump();
-    return counter.count;
+const f1 = ($0) => {
+  const counter = {
+    count: 0,
   };
-  const f2 = ($0) => () => {
-    $0.count += 1;
-  };
-  const $bundle = f1(f2);
-  return $bundle;
-})();
+  const bump = $0(counter);
+  bump();
+  bump();
+  return counter.count;
+};
+const f2 = ($0) => () => {
+  $0.count += 1;
+};
+export default () => f1(f2);

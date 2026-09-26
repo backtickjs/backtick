@@ -1,27 +1,24 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { style: _$style } = $modules["solid-js/web"];
-  const { effect: _$effect } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`);
-
-  const $Script = (props) => props.run();
-  const f1 = ($0) => {
-    const size = $0()(16);
-    return (() => {
-      var _el$ = _tmpl$();
-      _el$.$$click = () => {
-        size[1](size[0]() + 1);
-      };
-      _$effect((_$p) => _$style(_el$, "font-size: " + size[0]() + "px", _$p));
-      return _el$;
-    })();
-  };
-  const $bundle = _$createComponent($Script, {
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+import { style as _$style } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`);
+import { createSignal as $i0 } from "solid-js";
+const $Script = (props) => props.run();
+const f1 = ($0) => {
+  const size = $0()(16);
+  return (() => {
+    var _el$ = _tmpl$();
+    _el$.$$click = () => {
+      size[1](size[0]() + 1);
+    };
+    _$effect((_$p) => _$style(_el$, "font-size: " + size[0]() + "px", _$p));
+    return _el$;
+  })();
+};
+export default () =>
+  _$createComponent($Script, {
     run: () => f1(() => $i0),
   });
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+_$delegateEvents(["click"]);

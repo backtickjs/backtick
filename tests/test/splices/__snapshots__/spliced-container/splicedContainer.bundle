@@ -1,10 +1,8 @@
-(() => {
-  const f1 = ($0) => $0().x + 1;
-  const f2 = () => 1;
-  const f3 = () => "origin";
-  const $bundle = f1(() => ({
+const f1 = ($0) => $0().x + 1;
+const f2 = () => 1;
+const f3 = () => "origin";
+export default () =>
+  f1(() => ({
     x: f2(),
     label: f3(),
   }));
-  return $bundle;
-})();

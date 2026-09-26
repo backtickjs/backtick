@@ -1,31 +1,27 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<button>`);
-
-  const f1 = ($0) => {
-    const c = $0()(10);
-    return (() => {
-      var _el$ = _tmpl$();
-      _el$.$$click = () => {
-        c.add(5);
-      };
-      _$insert(_el$, () => c.get());
-      return _el$;
-    })();
-  };
-  const f2 = ($0) => (initial) => {
-    const count = $0()(initial);
-    return {
-      get: () => count[0](),
-      add: (n) => {
-        count[1](count[0]() + n);
-      },
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<button>`);
+import { createSignal as $i0 } from "solid-js";
+const f1 = ($0) => {
+  const c = $0()(10);
+  return (() => {
+    var _el$ = _tmpl$();
+    _el$.$$click = () => {
+      c.add(5);
     };
+    _$insert(_el$, () => c.get());
+    return _el$;
+  })();
+};
+const f2 = ($0) => (initial) => {
+  const count = $0()(initial);
+  return {
+    get: () => count[0](),
+    add: (n) => {
+      count[1](count[0]() + n);
+    },
   };
-  const $bundle = f1(() => f2(() => $i0));
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+};
+export default () => f1(() => f2(() => $i0));
+_$delegateEvents(["click"]);

@@ -1,7 +1,5 @@
-(() => {
-  const f1 = ($0) => () => $0();
-  const $bundle = f1(() => ({
+const f1 = ($0) => () => $0();
+export default () =>
+  f1(() => ({
     "#": "value",
   }));
-  return $bundle;
-})();

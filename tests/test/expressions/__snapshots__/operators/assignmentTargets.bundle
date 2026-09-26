@@ -1,16 +1,13 @@
-(() => {
-  const f1 = () => {
-    const o = {
-      n: 1,
-    };
-    const list = [1, 2];
-    o.n += 1;
-    o.n++;
-    list[0] = 10;
-    list[1] **= 3;
-    --list[1];
-    return [o.n, list];
+const f1 = () => {
+  const o = {
+    n: 1,
   };
-  const $bundle = f1();
-  return $bundle;
-})();
+  const list = [1, 2];
+  o.n += 1;
+  o.n++;
+  list[0] = 10;
+  list[1] **= 3;
+  --list[1];
+  return [o.n, list];
+};
+export default () => f1();

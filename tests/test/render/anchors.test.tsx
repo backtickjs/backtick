@@ -90,13 +90,12 @@ async function drawAt(
   selector: string,
 ): Promise<void> {
   const code = await bundler.run(value, { transform });
+  const draw = (
+    await import(`data:text/javascript,${encodeURIComponent(code)}`)
+  ).default as () => JSX.Element;
   const unmount = client.evaluate(() =>
     createRoot((dispose) => {
-      insert(
-        parent,
-        (0, eval)(code) as unknown as JSX.Element,
-        parent.querySelector(selector)!,
-      );
+      insert(parent, draw(), parent.querySelector(selector)!);
       return dispose;
     }),
   );

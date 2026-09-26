@@ -1,8 +1,5 @@
-(() => {
-  const f1 = () => {
-    const count = "one";
-    return count;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  const count = "one";
+  return count;
+};
+export default () => f1();

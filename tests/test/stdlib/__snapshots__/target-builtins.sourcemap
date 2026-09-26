@@ -6,12 +6,6 @@ cs.splice(                        →  [-semantic]
 )                                 → `
 cs.lift(                          → cs`
 cs.splice(                        →  [-semantic]
-(greet)                           → $greet
- satisfies typeof cs.Spliceable)  →  [-semantic]
-()                                → ()
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
 (storage)                         → $storage
  satisfies typeof cs.Spliceable)  →  [-semantic]
 .                                 → .

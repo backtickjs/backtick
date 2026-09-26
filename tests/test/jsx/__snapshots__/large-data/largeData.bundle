@@ -1,26 +1,25 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { setAttribute: _$setAttribute } = $modules["solid-js/web"];
-  const { effect: _$effect } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { For: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
-    _tmpl$2 = /*#__PURE__*/ _$template(
-      `<div><img alt><span></span><span></span><span>`,
-    ),
-    _tmpl$3 = /*#__PURE__*/ _$template(`<span>`);
-
-  const f1 = ($0) => $0();
-  const f2 = ($0) => (order) => $0(order);
-  const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
-  const f4 = ($0) => $0.customer.name;
-  const f5 = ($0) => $0.customer.city;
-  const f6 = ($0) => $0.items;
-  const f7 = ($0) => (item) => $0(item);
-  const f8 = ($0) => $0.sku + " x" + $0.qty;
-  const f9 = ($0) => "$" + $0.total;
-  const $bundle = (() => {
+import { template as _$template } from "solid-js/web";
+import { setAttribute as _$setAttribute } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(
+    `<div><img alt><span></span><span></span><span>`,
+  ),
+  _tmpl$3 = /*#__PURE__*/ _$template(`<span>`);
+import { For as $i0 } from "solid-js";
+const f1 = ($0) => $0();
+const f2 = ($0) => (order) => $0(order);
+const f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
+const f4 = ($0) => $0.customer.name;
+const f5 = ($0) => $0.customer.city;
+const f6 = ($0) => $0.items;
+const f7 = ($0) => (item) => $0(item);
+const f8 = ($0) => $0.sku + " x" + $0.qty;
+const f9 = ($0) => "$" + $0.total;
+export default () =>
+  (() => {
     var _el$ = _tmpl$();
     _$insert(
       _el$,
@@ -157,5 +156,3 @@
     );
     return _el$;
   })();
-  return $bundle;
-})();

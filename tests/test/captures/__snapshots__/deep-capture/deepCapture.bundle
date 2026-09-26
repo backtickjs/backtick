@@ -1,19 +1,17 @@
-(() => {
-  const f1 = ($0, $1) => $0() + $1();
-  const f2 = ($0, $1) => {
-    const outer = $0();
-    return $1(outer);
-  };
-  const f3 = () => 1;
-  const f4 = ($0, $1) => {
-    const middle = 10;
-    return middle + $0($1);
-  };
-  const f5 = ($0) => $0;
-  const f6 = () => 2;
-  const $bundle = f1(
+const f1 = ($0, $1) => $0() + $1();
+const f2 = ($0, $1) => {
+  const outer = $0();
+  return $1(outer);
+};
+const f3 = () => 1;
+const f4 = ($0, $1) => {
+  const middle = 10;
+  return middle + $0($1);
+};
+const f5 = ($0) => $0;
+const f6 = () => 2;
+export default () =>
+  f1(
     () => f2(f3, (outer) => f4(f5, outer)),
     () => f2(f6, (outer) => f4(f5, outer)),
   );
-  return $bundle;
-})();

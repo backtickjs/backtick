@@ -1,16 +1,13 @@
-(() => {
-  const f1 = () => {
-    let i = 0;
-    let total = 0;
-    while (i < 5) {
-      total = total + i;
-      if (i === 3) {
-        return total;
-      }
-      i = i + 1;
+const f1 = () => {
+  let i = 0;
+  let total = 0;
+  while (i < 5) {
+    total = total + i;
+    if (i === 3) {
+      return total;
     }
-    return total;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+    i = i + 1;
+  }
+  return total;
+};
+export default () => f1();

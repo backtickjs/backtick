@@ -1,8 +1,5 @@
-(() => {
-  const f1 = () => {
-    const greeting = "Hello";
-    return greeting.concat(", ", "World").toUpperCase();
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  const greeting = "Hello";
+  return greeting.concat(", ", "World").toUpperCase();
+};
+export default () => f1();

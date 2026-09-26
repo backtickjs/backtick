@@ -1,6 +1,3 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>hi`);
-  const $bundle = _tmpl$();
-  return $bundle;
-})();
+import { template as _$template } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>hi`);
+export default () => _tmpl$();

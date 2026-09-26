@@ -24,7 +24,7 @@ export interface Testing {
     options?: RenderOptions<Q, Container, BaseElement>,
   ): Promise<RenderResult<Q, Container, BaseElement>>;
   evaluate<T extends ClientUnknown>(value: Spliceable<T>): Promise<T>;
-  evaluateBundle<T extends ClientUnknown>(code: Bundle<T>): T;
+  evaluateBundle<T extends ClientUnknown>(code: Bundle<T>): Promise<T>;
 }
 
 /**

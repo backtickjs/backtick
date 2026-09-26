@@ -1,7 +1,4 @@
-(() => {
-  const f1 = () => {
-    return 1 / -0;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  return 1 / -0;
+};
+export default () => f1();

@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "imports": {
+    "#app": "./test/stdlib/app.ts"
+  },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",

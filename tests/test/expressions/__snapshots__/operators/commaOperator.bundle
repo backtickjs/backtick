@@ -1,9 +1,6 @@
-(() => {
-  const f1 = () => {
-    let n = 0;
-    const last = (n++, n + 10);
-    return [n, last];
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  let n = 0;
+  const last = (n++, n + 10);
+  return [n, last];
+};
+export default () => f1();

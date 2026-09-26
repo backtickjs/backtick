@@ -1,14 +1,11 @@
-(() => {
-  const f1 = () => {
-    const prices = {
-      apple: 1,
-      pear: 2,
-    };
-    return {
-      values: Object.values(prices),
-      holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
-    };
+const f1 = () => {
+  const prices = {
+    apple: 1,
+    pear: 2,
   };
-  const $bundle = f1();
-  return $bundle;
-})();
+  return {
+    values: Object.values(prices),
+    holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
+  };
+};
+export default () => f1();

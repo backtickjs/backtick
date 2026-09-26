@@ -1,28 +1,27 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-
-  const $Script = (props) => props.run();
-  const f1 = ($0, $1, $2) => {
-    const flag = $0()(true);
-    const tone = $0()($1());
-    const step = $0()(() => 0);
-    return (() => {
-      var _el$ = _tmpl$();
-      _el$.$$click = () => {
-        flag[1](false);
-        tone[1]($2());
-        step[1](() => () => 1);
-      };
-      _$insert(_el$, () => flag[0]() + " " + tone[0]() + " " + step[0]()());
-      return _el$;
-    })();
-  };
-  const $bundle = _$createComponent($Script, {
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
+import { createSignal as $i0 } from "solid-js";
+const $Script = (props) => props.run();
+const f1 = ($0, $1, $2) => {
+  const flag = $0()(true);
+  const tone = $0()($1());
+  const step = $0()(() => 0);
+  return (() => {
+    var _el$ = _tmpl$();
+    _el$.$$click = () => {
+      flag[1](false);
+      tone[1]($2());
+      step[1](() => () => 1);
+    };
+    _$insert(_el$, () => flag[0]() + " " + tone[0]() + " " + step[0]()());
+    return _el$;
+  })();
+};
+export default () =>
+  _$createComponent($Script, {
     run: () =>
       f1(
         () => $i0,
@@ -30,6 +29,4 @@
         () => "cool",
       ),
   });
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+_$delegateEvents(["click"]);

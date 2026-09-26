@@ -1,13 +1,11 @@
-(() => {
-  const f1 = ($0, $1) => ({
-    under: $0() < $1(),
-    atMost: $0() <= $1(),
-    over: $1() > $0(),
-    between: $0() < $1() && $1() > $0(),
-  });
-  const $bundle = f1(
+const f1 = ($0, $1) => ({
+  under: $0() < $1(),
+  atMost: $0() <= $1(),
+  over: $1() > $0(),
+  between: $0() < $1() && $1() > $0(),
+});
+export default () =>
+  f1(
     () => 3,
     () => 9,
   );
-  return $bundle;
-})();

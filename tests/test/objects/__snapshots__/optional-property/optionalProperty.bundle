@@ -1,22 +1,19 @@
-(() => {
-  const f1 = ($0) => ({
-    present: $0()({
-      label: "a",
-      inner: {
-        z: 3,
-      },
-    }),
-    partial: $0()({
-      label: "b",
-      inner: {},
-    }),
-    omitted: $0()({
-      label: "c",
-    }),
-  });
-  const f2 = () => (o) => {
-    return [o.label, o.inner?.z ?? 0];
-  };
-  const $bundle = f1(f2);
-  return $bundle;
-})();
+const f1 = ($0) => ({
+  present: $0()({
+    label: "a",
+    inner: {
+      z: 3,
+    },
+  }),
+  partial: $0()({
+    label: "b",
+    inner: {},
+  }),
+  omitted: $0()({
+    label: "c",
+  }),
+});
+const f2 = () => (o) => {
+  return [o.label, o.inner?.z ?? 0];
+};
+export default () => f1(f2);

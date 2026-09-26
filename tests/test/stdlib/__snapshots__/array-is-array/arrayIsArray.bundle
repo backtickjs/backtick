@@ -1,15 +1,12 @@
-(() => {
-  const f1 = () => {
-    return [
-      Array.isArray([]),
-      Array.isArray([1, 2]),
-      Array.isArray("ab"),
-      Array.isArray({
-        length: 0,
-      }),
-      Array.isArray(null),
-    ];
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  return [
+    Array.isArray([]),
+    Array.isArray([1, 2]),
+    Array.isArray("ab"),
+    Array.isArray({
+      length: 0,
+    }),
+    Array.isArray(null),
+  ];
+};
+export default () => f1();

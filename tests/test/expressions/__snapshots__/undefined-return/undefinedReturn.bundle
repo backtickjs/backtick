@@ -1,10 +1,7 @@
-(() => {
-  const f1 = ($0) => {
-    const stored = $0();
-    const caught = $0()();
-    return 1;
-  };
-  const f2 = () => () => "hi";
-  const $bundle = f1(f2);
-  return $bundle;
-})();
+const f1 = ($0) => {
+  const stored = $0();
+  const caught = $0()();
+  return 1;
+};
+const f2 = () => () => "hi";
+export default () => f1(f2);

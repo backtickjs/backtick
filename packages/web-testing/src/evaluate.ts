@@ -1,6 +1,6 @@
 import type { Bundle, ClientUnknown, Spliceable } from "@backtickjs/core";
 import { bundler, type CodeTransform } from "@backtickjs/bundler";
-import { runOf } from "./client.js";
+import { importBundle } from "./client.js";
 
 /** What runs a bundle: an adapter's client (see `createTesting`). */
 export interface BundleClient {
@@ -24,16 +24,16 @@ export async function evaluateWith<T extends ClientUnknown>(
   value: Spliceable<T>,
 ): Promise<T> {
   const code = await bundler.run(value, { transform });
-  return client.evaluate(runOf(code));
+  return client.evaluate(await importBundle(code));
 }
 
 /**
  * Evaluates a bundle with `client`, for a test about a bundle the bundler
  * would never write.
  */
-export function evaluateBundleWith<T extends ClientUnknown>(
+export async function evaluateBundleWith<T extends ClientUnknown>(
   client: BundleClient,
   code: Bundle<T>,
-): T {
-  return client.evaluate(runOf(code));
+): Promise<T> {
+  return client.evaluate(await importBundle(code));
 }

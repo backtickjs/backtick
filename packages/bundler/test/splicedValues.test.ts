@@ -8,7 +8,7 @@ const transform = (code: string) => ({ code, map: "" });
 test("a plain object crosses member by member", async () => {
   assert.match(
     await bundler.run({ label: "row", count: 3 }, { transform }),
-    /\$bundle = \{\s*label: "row",\s*count: 3,?\s*\};/,
+    /export default \(\) => \(\{\s*label: "row",\s*count: 3,?\s*\}\);/,
   );
 });
 
@@ -35,6 +35,6 @@ test("a host function expands rather than crossing", async () => {
   // answered is what crosses. `length` is the arity, so this one takes one.
   assert.match(
     await bundler.run(((n: never) => n) as never, { transform }),
-    /\$bundle = \$0 => \$0;/,
+    /export default \(\) => \$0 => \$0;/,
   );
 });

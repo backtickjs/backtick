@@ -1,13 +1,10 @@
-(() => {
-  const f1 = ($0) => {
-    $0();
-  };
-  const f2 = ($0) => {
-    $0();
-  };
-  const f3 = () => {
-    const x = 1;
-  };
-  const $bundle = f1(() => f2(f3));
-  return $bundle;
-})();
+const f1 = ($0) => {
+  $0();
+};
+const f2 = ($0) => {
+  $0();
+};
+const f3 = () => {
+  const x = 1;
+};
+export default () => f1(() => f2(f3));

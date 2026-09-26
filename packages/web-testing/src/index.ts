@@ -10,6 +10,10 @@
  * `createTesting` and re-exports the rest — `@backtickjs/solid-js/testing` —
  * so what a test exercises is what a page runs.
  *
+ * A bundle is a module, imported as a `data:` URL. Its imports (`solid-js/web`)
+ * are the environment's to resolve, as a page's import map resolves them: in
+ * `node:test`, a resolve hook that resolves them from the project.
+ *
  * `cleanup` runs after each test where the runner provides a global
  * `afterEach` or `teardown`. Import `@backtickjs/web-testing/pure`, or set
  * `BACKTICK_SKIP_AUTO_CLEANUP`, to register it yourself.

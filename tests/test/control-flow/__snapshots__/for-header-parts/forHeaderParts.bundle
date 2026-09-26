@@ -1,13 +1,10 @@
-(() => {
-  const f1 = () => {
-    let i = 0;
-    let seen = "";
-    for (; i < 3; ) {
-      seen = seen + i;
-      i = i + 1;
-    }
-    return seen;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  let i = 0;
+  let seen = "";
+  for (; i < 3; ) {
+    seen = seen + i;
+    i = i + 1;
+  }
+  return seen;
+};
+export default () => f1();

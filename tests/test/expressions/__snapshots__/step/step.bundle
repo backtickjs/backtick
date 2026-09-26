@@ -1,15 +1,12 @@
-(() => {
-  const f1 = () => {
-    let total = 0;
-    for (let i = 0; i < 3; i++) {
-      total = total + i;
-    }
-    let n = 0.1;
-    const before = n++;
-    const after = ++n;
-    const down = n--;
-    return [total, before, after, down, n];
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  let total = 0;
+  for (let i = 0; i < 3; i++) {
+    total = total + i;
+  }
+  let n = 0.1;
+  const before = n++;
+  const after = ++n;
+  const down = n--;
+  return [total, before, after, down, n];
+};
+export default () => f1();

@@ -1,12 +1,9 @@
-(() => {
-  const f1 = () => {
-    let count = 0;
-    const bump = () => {
-      count = count + 1;
-      return count;
-    };
-    return bump() + bump();
+const f1 = () => {
+  let count = 0;
+  const bump = () => {
+    count = count + 1;
+    return count;
   };
-  const $bundle = f1();
-  return $bundle;
-})();
+  return bump() + bump();
+};
+export default () => f1();

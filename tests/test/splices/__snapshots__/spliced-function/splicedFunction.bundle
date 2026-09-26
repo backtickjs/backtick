@@ -1,5 +1,2 @@
-(() => {
-  const f1 = ($0) => () => $0();
-  const $bundle = f1(() => ($0) => $0);
-  return $bundle;
-})();
+const f1 = ($0) => () => $0();
+export default () => f1(() => ($0) => $0);

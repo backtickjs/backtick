@@ -22,7 +22,6 @@
     "@backtickjs/client-script": "workspace:*",
     "@backtickjs/platform-sdk": "workspace:*",
     "@backtickjs/ui-platform-sdk": "workspace:*",
-    "acorn": "^8.18.0",
     "astring": "^1.9.0"
   },
   "devDependencies": {

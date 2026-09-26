@@ -1,13 +1,11 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<span>Hi😀`);
-  const $Script = (props) => props.run();
-  const f1 = () => {
-    return _tmpl$();
-  };
-  const $bundle = _$createComponent($Script, {
+import { template as _$template } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<span>Hi😀`);
+const $Script = (props) => props.run();
+const f1 = () => {
+  return _tmpl$();
+};
+export default () =>
+  _$createComponent($Script, {
     run: () => f1(),
   });
-  return $bundle;
-})();

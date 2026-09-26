@@ -1,11 +1,9 @@
-(() => {
-  const f1 = ($0, $1) => ({
-    a: $0(),
-    b: $1(),
-  });
-  const $bundle = f1(
+const f1 = ($0, $1) => ({
+  a: $0(),
+  b: $1(),
+});
+export default () =>
+  f1(
     () => 0,
     () => 1,
   );
-  return $bundle;
-})();

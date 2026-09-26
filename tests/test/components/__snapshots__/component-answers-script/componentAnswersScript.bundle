@@ -1,21 +1,20 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<em>`),
-    _tmpl$2 = /*#__PURE__*/ _$template(`<div>`);
-
-  const $Script = (props) => props.run();
-  const f1 = ($0) => {
-    const n = $0()(2);
-    return (() => {
-      var _el$ = _tmpl$();
-      _$insert(_el$, () => n[0]());
-      return _el$;
-    })();
-  };
-  const $bundle = (() => {
+import { template as _$template } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<em>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<div>`);
+import { createSignal as $i0 } from "solid-js";
+const $Script = (props) => props.run();
+const f1 = ($0) => {
+  const n = $0()(2);
+  return (() => {
+    var _el$ = _tmpl$();
+    _$insert(_el$, () => n[0]());
+    return _el$;
+  })();
+};
+export default () =>
+  (() => {
     var _el$2 = _tmpl$2();
     _$insert(
       _el$2,
@@ -25,5 +24,3 @@
     );
     return _el$2;
   })();
-  return $bundle;
-})();

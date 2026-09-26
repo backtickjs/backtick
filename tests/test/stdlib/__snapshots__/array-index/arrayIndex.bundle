@@ -1,12 +1,9 @@
-(() => {
-  const f1 = () => {
-    const coins = [5, 31, 7];
-    let total = 0;
-    for (let i = 0; i < coins.length; i = i + 1) {
-      total = total + coins[i];
-    }
-    return total;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+const f1 = () => {
+  const coins = [5, 31, 7];
+  let total = 0;
+  for (let i = 0; i < coins.length; i = i + 1) {
+    total = total + coins[i];
+  }
+  return total;
+};
+export default () => f1();

@@ -1,42 +1,41 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { style: _$style } = $modules["solid-js/web"];
-  const { effect: _$effect } = $modules["solid-js/web"];
-  const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
-    _tmpl$2 = /*#__PURE__*/ _$template(`<span>press`);
-
-  const $Script = (props) => props.run();
-  const f1 = ($0, $1) => {
-    const size = $0()(16);
-    return (() => {
-      var _el$ = _tmpl$();
-      _$insert(
-        _el$,
-        _$createComponent($1, {
-          size: size,
-        }),
-        null,
-      );
-      _$insert(
-        _el$,
-        _$createComponent($1, {
-          size: size,
-        }),
-        null,
-      );
-      return _el$;
-    })();
-  };
-  const f2 = ($0) => "font-size: " + $0()[0]() + "px";
-  const f3 = ($0) => () => {
-    $0()[1]($0()[0]() + 1);
-  };
-  const $bundle = _$createComponent($Script, {
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { style as _$style } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+import { addEventListener as _$addEventListener } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<span>press`);
+import { createSignal as $i0 } from "solid-js";
+const $Script = (props) => props.run();
+const f1 = ($0, $1) => {
+  const size = $0()(16);
+  return (() => {
+    var _el$ = _tmpl$();
+    _$insert(
+      _el$,
+      _$createComponent($1, {
+        size: size,
+      }),
+      null,
+    );
+    _$insert(
+      _el$,
+      _$createComponent($1, {
+        size: size,
+      }),
+      null,
+    );
+    return _el$;
+  })();
+};
+const f2 = ($0) => "font-size: " + $0()[0]() + "px";
+const f3 = ($0) => () => {
+  $0()[1]($0()[0]() + 1);
+};
+export default () =>
+  _$createComponent($Script, {
     run: () =>
       f1(
         () => $i0,
@@ -60,6 +59,4 @@
           })(),
       ),
   });
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+_$delegateEvents(["click"]);

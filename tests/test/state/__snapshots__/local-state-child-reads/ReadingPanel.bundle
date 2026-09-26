@@ -1,45 +1,44 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { style: _$style } = $modules["solid-js/web"];
-  const { effect: _$effect } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { createComponent: _$createComponent } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
-    _tmpl$2 = /*#__PURE__*/ _$template(`<div><span>`),
-    _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
-
-  const $Script = (props) => props.run();
-  const f1 = ($0, $1) => {
-    const selected = $0()(0);
-    return (() => {
-      var _el$ = _tmpl$(),
-        _el$2 = _el$.firstChild;
-      _el$2.$$click = () => selected[1](1);
-      _$insert(
-        _el$,
-        _$createComponent($1, {
-          id: 0,
-          selected: selected,
-        }),
-        null,
-      );
-      _$insert(
-        _el$,
-        _$createComponent($1, {
-          id: 1,
-          selected: selected,
-        }),
-        null,
-      );
-      return _el$;
-    })();
-  };
-  const f2 = ($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";
-  const f3 = ($0, $1) => "row " + $0() + " of " + $1()[0]();
-  const f4 = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
-  const $bundle = _$createComponent($Script, {
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { style as _$style } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<div><span>`),
+  _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
+import { createSignal as $i0 } from "solid-js";
+const $Script = (props) => props.run();
+const f1 = ($0, $1) => {
+  const selected = $0()(0);
+  return (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild;
+    _el$2.$$click = () => selected[1](1);
+    _$insert(
+      _el$,
+      _$createComponent($1, {
+        id: 0,
+        selected: selected,
+      }),
+      null,
+    );
+    _$insert(
+      _el$,
+      _$createComponent($1, {
+        id: 1,
+        selected: selected,
+      }),
+      null,
+    );
+    return _el$;
+  })();
+};
+const f2 = ($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";
+const f3 = ($0, $1) => "row " + $0() + " of " + $1()[0]();
+const f4 = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
+export default () =>
+  _$createComponent($Script, {
     run: () =>
       f1(
         () => $i0,
@@ -77,6 +76,4 @@
           })(),
       ),
   });
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+_$delegateEvents(["click"]);

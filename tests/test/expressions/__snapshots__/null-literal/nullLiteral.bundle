@@ -1,15 +1,12 @@
-(() => {
-  const f1 = ($0) => ({
-    missing: $0()(null),
-    present: $0()("hi"),
-    bare: null,
-  });
-  const f2 = () => (value) => {
-    if (value === null) {
-      return "-";
-    }
-    return value;
-  };
-  const $bundle = f1(f2);
-  return $bundle;
-})();
+const f1 = ($0) => ({
+  missing: $0()(null),
+  present: $0()("hi"),
+  bare: null,
+});
+const f2 = () => (value) => {
+  if (value === null) {
+    return "-";
+  }
+  return value;
+};
+export default () => f1(f2);

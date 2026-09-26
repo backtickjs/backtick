@@ -1,25 +1,24 @@
-(() => {
-  const { template: _$template } = $modules["solid-js/web"];
-  const { delegateEvents: _$delegateEvents } = $modules["solid-js/web"];
-  const { style: _$style } = $modules["solid-js/web"];
-  const { effect: _$effect } = $modules["solid-js/web"];
-  const { insert: _$insert } = $modules["solid-js/web"];
-  const { addEventListener: _$addEventListener } = $modules["solid-js/web"];
-  const { createSignal: $i0 } = $modules["solid-js"];
-  var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-
-  const f1 = () => "font-size: 16px";
-  const f2 = ($0) => () => {
-    const row = $0()("one");
-    row.label[1](row.label[0]() + " !!!");
+import { template as _$template } from "solid-js/web";
+import { delegateEvents as _$delegateEvents } from "solid-js/web";
+import { style as _$style } from "solid-js/web";
+import { effect as _$effect } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
+import { addEventListener as _$addEventListener } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
+import { createSignal as $i0 } from "solid-js";
+const f1 = () => "font-size: 16px";
+const f2 = ($0) => () => {
+  const row = $0()("one");
+  row.label[1](row.label[0]() + " !!!");
+};
+const f3 = ($0) => (label) => {
+  return {
+    label: $0()(label),
   };
-  const f3 = ($0) => (label) => {
-    return {
-      label: $0()(label),
-    };
-  };
-  const f4 = ($0) => $0()("one").label[0]();
-  const $bundle = (() => {
+};
+const f4 = ($0) => $0()("one").label[0]();
+export default () =>
+  (() => {
     var _el$ = _tmpl$();
     _$addEventListener(
       _el$,
@@ -31,6 +30,4 @@
     _$effect((_$p) => _$style(_el$, f1(), _$p));
     return _el$;
   })();
-  _$delegateEvents(["click"]);
-  return $bundle;
-})();
+_$delegateEvents(["click"]);

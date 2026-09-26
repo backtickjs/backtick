@@ -1,18 +1,15 @@
-(() => {
-  const f1 = ($0) => {
-    const handlers = {
-      tap: $0(),
-      hold: $0(),
-    };
-    return handlers;
+const f1 = ($0) => {
+  const handlers = {
+    tap: $0(),
+    hold: $0(),
   };
-  const f2 = ($0) => (id) => {
-    $0();
-  };
-  const f3 = () => {
-    let n = 0;
-    n = 1;
-  };
-  const $bundle = f1(() => f2(f3));
-  return $bundle;
-})();
+  return handlers;
+};
+const f2 = ($0) => (id) => {
+  $0();
+};
+const f3 = () => {
+  let n = 0;
+  n = 1;
+};
+export default () => f1(() => f2(f3));

@@ -1,12 +1,9 @@
-(() => {
-  const f1 = () => {
-    const pick = (b) => {
-      if (b) {
-        return "taken";
-      }
-    };
-    return [pick(true), pick(false)];
+const f1 = () => {
+  const pick = (b) => {
+    if (b) {
+      return "taken";
+    }
   };
-  const $bundle = f1();
-  return $bundle;
-})();
+  return [pick(true), pick(false)];
+};
+export default () => f1();

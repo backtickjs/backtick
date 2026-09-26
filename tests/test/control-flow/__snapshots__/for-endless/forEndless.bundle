@@ -1,14 +1,11 @@
-(() => {
-  const f1 = () => {
-    let i = 0;
-    for (;;) {
-      if (i === 4) {
-        break;
-      }
-      i = i + 1;
+const f1 = () => {
+  let i = 0;
+  for (;;) {
+    if (i === 4) {
+      break;
     }
-    return i;
-  };
-  const $bundle = f1();
-  return $bundle;
-})();
+    i = i + 1;
+  }
+  return i;
+};
+export default () => f1();
