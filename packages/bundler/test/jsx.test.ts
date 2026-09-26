@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createImport } from "@backtickjs/platform-sdk";
-import { createJsxElement } from "@backtickjs/ui-platform-sdk";
+import { createJsxElement } from "../dist/JsxElement.js";
 import { bundler } from "../dist/bundler.js";
 
 // A host element is printed as JSX, for the framework's compiler: read back

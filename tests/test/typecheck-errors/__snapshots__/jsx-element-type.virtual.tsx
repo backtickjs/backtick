@@ -1,5 +1,5 @@
-import { For } from "@backtickjs/core";
-import { Fragment } from "@backtickjs/web-sdk";
+import { For } from "@backtickjs/solid-js";
+import { Fragment } from "@backtickjs/solid-js/jsx-runtime";
 
 // What the JSX namespace admits, and what it refuses.
 //
@@ -45,7 +45,7 @@ export const component = <Panel />;
 
 // ─── props, which the tag decides and not `ElementType` ───────────────
 // `nosuch` is not an attribute `div` takes
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'HtmlProps<HTMLDivElement>'.
+// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'Props<HTMLAttributes<HTMLDivElement>>'.
 export const strayProp = <div nosuch={1} />;
 
 // `class` is a string, and a number is not one
@@ -53,7 +53,7 @@ export const strayProp = <div nosuch={1} />;
 export const wrongType = <div class={1} />;
 
 // a fragment takes children and nothing else
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'FragmentProps'.
+// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type '{ children?: Children | undefined; }'.
 export const strayFragmentProp = <Fragment nosuch={1} />;
 
 // ─── children, which are structure ────────────────────────────────────

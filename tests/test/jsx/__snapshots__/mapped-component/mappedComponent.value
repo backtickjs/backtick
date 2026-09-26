@@ -1,7 +1,11 @@
 <div>
-  <for each="1,2,3">
-    <span>
-      {"row undefined"}
-    </span>
-  </for>
+  <span>
+    {"row 1"}
+  </span>
+  <span>
+    {"row 2"}
+  </span>
+  <span>
+    {"row 3"}
+  </span>
 </div>

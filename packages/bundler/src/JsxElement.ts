@@ -1,5 +1,4 @@
-import type { BacktickElement } from "./declarations.js";
-import type { Prop } from "./Prop.js";
+import type { BacktickElement, Prop } from "@backtickjs/platform-sdk";
 
 /**
  * What a JSX tag may name: an element to draw, or a component to run while
@@ -32,7 +31,7 @@ export function isJsxElement(value: unknown): value is JsxElement {
   );
 }
 
-// The one place a drawing is made: the brand is a symbol nothing outside
+// The one place a host drawing is made: the brand is a symbol nothing outside
 // `BacktickElement.ts` can write, so what makes one says so here rather than
 // every holder being asked to prove it.
 export function createJsxElement(

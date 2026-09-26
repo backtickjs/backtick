@@ -2,8 +2,8 @@ import {
   jsx as _jsx,
   Fragment as _Fragment,
 } from "@backtickjs/solid-js/jsx-runtime";
-import { For } from "@backtickjs/core";
-import { Fragment } from "@backtickjs/web-sdk";
+import { For } from "@backtickjs/solid-js";
+import { Fragment } from "@backtickjs/solid-js/jsx-runtime";
 // What the JSX namespace admits, and what it refuses.
 //
 // `JSX.ElementType` is `JsxElementType`, which admits any `string`. What
@@ -36,13 +36,13 @@ const Panel = async () => null;
 export const component = _jsx(Panel, {});
 // ─── props, which the tag decides and not `ElementType` ───────────────
 // `nosuch` is not an attribute `div` takes
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'HtmlProps<HTMLDivElement>'.
+// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'Props<HTMLAttributes<HTMLDivElement>>'.
 export const strayProp = _jsx("div", { nosuch: 1 });
 // `class` is a string, and a number is not one
 // @ts-expect-error: Type 'number' is not assignable to type 'Prop<string> | undefined'.
 export const wrongType = _jsx("div", { class: 1 });
 // a fragment takes children and nothing else
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'FragmentProps'.
+// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type '{ children?: Children | undefined; }'.
 export const strayFragmentProp = _jsx(Fragment, { nosuch: 1 });
 // ─── children, which are structure ────────────────────────────────────
 export const text = _jsx("div", { children: "hello" });

@@ -1,10 +1,9 @@
-import { createImport } from "@backtickjs/platform-sdk";
+import { createJsxElement, type JsxElementType } from "@backtickjs/bundler";
 import {
   type BacktickElement,
-  createJsxElement,
-  type JsxElementType,
+  createImport,
   type Prop,
-} from "@backtickjs/ui-platform-sdk";
+} from "@backtickjs/platform-sdk";
 import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";

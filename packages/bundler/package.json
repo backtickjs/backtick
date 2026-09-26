@@ -21,7 +21,6 @@
   "dependencies": {
     "@backtickjs/client-script": "workspace:*",
     "@backtickjs/platform-sdk": "workspace:*",
-    "@backtickjs/ui-platform-sdk": "workspace:*",
     "@jridgewell/gen-mapping": "^0.3.13",
     "@jridgewell/trace-mapping": "^0.3.31"
   },

@@ -1,10 +1,9 @@
+import { createJsxElement, type JsxElementType } from "@backtickjs/bundler";
 import type {
   BacktickElement,
   Children,
-  JsxElementType,
   Prop,
-} from "@backtickjs/ui-platform-sdk";
-import { createJsxElement } from "@backtickjs/ui-platform-sdk";
+} from "@backtickjs/platform-sdk";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and

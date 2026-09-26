@@ -7,20 +7,20 @@ import { snapshotCase } from "../snapshotCase.ts";
 // instantiates the tree with `#t0(x)` and the tree wires the capture into the
 // handler with `#slot`.
 const script = cs.create(
-  "g38hwxw7rhvi:11:42",
+  "2ztxkt2oy5dex:11:42",
   {
     params: [
       {
         kind: "splice",
         value: _jsx("span", {
           onclick: cs.create(
-            "g38hwxw7rhvi:13:27",
-            { params: [{ kind: "capture", key: "x$g38hwxw7rhvi$0" }] },
+            "2ztxkt2oy5dex:13:27",
+            { params: [{ kind: "capture", key: "x$2ztxkt2oy5dex$0" }] },
             "($capture0) => () => $capture0",
             '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAY8B,eAAA,GAAG,EAAE,CAAC,SAAC"}',
           ),
         }),
-        bindings: ["x$g38hwxw7rhvi$0"],
+        bindings: ["x$2ztxkt2oy5dex$0"],
       },
     ],
   },

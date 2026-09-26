@@ -1,4 +1,4 @@
-import type { Spliceable } from "@backtickjs/platform-sdk";
+import type { Spliceable } from "./Spliceable.js";
 
 /**
  * What a prop admits: what the server wrote, or a script standing in for it.

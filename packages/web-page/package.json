@@ -5,10 +5,6 @@
   "type": "module",
   "description": "The page both halves agree on: the server writes bundles into it, the client draws them",
   "exports": {
-    "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
-    },
     "./server": {
       "types": "./dist/server.d.ts",
       "default": "./dist/server.js"
@@ -21,8 +17,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/bundler": "workspace:*",
-    "@backtickjs/web-interpreter": "workspace:*"
+    "@backtickjs/bundler": "workspace:*"
   },
   "peerDependencies": {
     "@backtickjs/core": "workspace:*"

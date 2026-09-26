@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/web-sdk";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A binding declared in an enclosing script and captured by a script inside a

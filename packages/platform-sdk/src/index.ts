@@ -19,11 +19,12 @@ export type {
 } from "./declarations.js";
 export { computed, state } from "./builtins.js";
 
-// Written by hand, because a schema never says it: `Client` is how a host
-// language spells "a script standing in for a value", which a client has no
-// version of. `Prop` is the same idea in a drawing's position, and lives with
-// drawings — see `@backtickjs/ui-platform-sdk`.
+// `Client` is how a host language spells "a script standing in for a value";
+// `Prop` is the same idea in a drawing's position.
 export type { Client } from "./Client.js";
+export type { BacktickElement, BacktickNode } from "./BacktickElement.js";
+export type { Prop } from "./Prop.js";
+export type { Children } from "./Children.js";
 export type { Spliceable, Spliced } from "./Spliceable.js";
 export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
 export {

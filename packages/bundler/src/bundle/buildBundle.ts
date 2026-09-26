@@ -5,7 +5,7 @@ import {
   isClientImport,
   type Spliceable,
 } from "@backtickjs/platform-sdk";
-import { isJsxElement, type JsxElement } from "@backtickjs/ui-platform-sdk";
+import { isJsxElement, type JsxElement } from "../JsxElement.js";
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 import { holeName } from "./holes.js";

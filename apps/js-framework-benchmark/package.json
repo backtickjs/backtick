@@ -35,7 +35,6 @@
   "dependencies": {
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/tspatch-plugin": "^0.1.0",
-    "@backtickjs/web-sdk": "workspace:*",
     "@backtickjs/web-page": "workspace:*"
   },
   "devDependencies": {

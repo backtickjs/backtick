@@ -34,9 +34,6 @@ importers:
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -99,9 +96,6 @@ importers:
       '@backtickjs/web-page':
         specifier: ^0.1.0
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: ^0.1.0
-        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -130,9 +124,6 @@ importers:
       '@backtickjs/web-page':
         specifier: ^0.1.0
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: ^0.1.0
-        version: link:../../packages/web-sdk
       esbuild:
         specifier: 0.28.0
         version: 0.28.0
@@ -167,9 +158,6 @@ importers:
       '@backtickjs/web-page':
         specifier: ^0.1.0
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: ^0.1.0
-        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -198,9 +186,6 @@ importers:
       '@backtickjs/web-page':
         specifier: ^0.1.0
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: ^0.1.0
-        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -229,9 +214,6 @@ importers:
       '@backtickjs/web-page':
         specifier: ^0.1.0
         version: link:../../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: ^0.1.0
-        version: link:../../packages/web-sdk
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -289,9 +271,6 @@ importers:
       '@backtickjs/platform-sdk':
         specifier: workspace:*
         version: link:../platform-sdk
-      '@backtickjs/ui-platform-sdk':
-        specifier: workspace:*
-        version: link:../ui-platform-sdk
       '@jridgewell/gen-mapping':
         specifier: ^0.3.13
         version: 0.3.13
@@ -343,9 +322,6 @@ importers:
       '@backtickjs/platform-sdk':
         specifier: workspace:*
         version: link:../platform-sdk
-      '@backtickjs/ui-platform-sdk':
-        specifier: workspace:*
-        version: link:../ui-platform-sdk
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -453,9 +429,6 @@ importers:
       '@backtickjs/platform-sdk':
         specifier: workspace:^0.1.0
         version: link:../platform-sdk
-      '@backtickjs/ui-platform-sdk':
-        specifier: workspace:^0.1.0
-        version: link:../ui-platform-sdk
       babel-preset-solid:
         specifier: 1.9.12
         version: 1.9.12(@babel/core@7.29.7)(solid-js@1.9.14)
@@ -548,72 +521,15 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/ui-platform-sdk:
-    dependencies:
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../platform-sdk
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/web-interpreter:
-    dependencies:
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../platform-sdk
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../web-sdk
-    devDependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/web-page:
     dependencies:
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler
-      '@backtickjs/web-interpreter':
-        specifier: workspace:*
-        version: link:../web-interpreter
     devDependencies:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/web-sdk:
-    dependencies:
-      '@backtickjs/platform-sdk':
-        specifier: workspace:*
-        version: link:../platform-sdk
-      '@backtickjs/ui-platform-sdk':
-        specifier: workspace:*
-        version: link:../ui-platform-sdk
-    devDependencies:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -672,9 +588,6 @@ importers:
       '@backtickjs/web-page':
         specifier: workspace:*
         version: link:../packages/web-page
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../packages/web-sdk
       '@backtickjs/web-testing':
         specifier: workspace:*
         version: link:../packages/web-testing

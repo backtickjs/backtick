@@ -1,4 +1,4 @@
-import type { BacktickElement } from "./declarations.js";
+import type { BacktickElement } from "./BacktickElement.js";
 import type { Prop } from "./Prop.js";
 
 /**

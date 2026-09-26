@@ -26,7 +26,6 @@
     "@backtickjs/solid-js": "workspace:^0.1.0",
     "@backtickjs/tsc": "workspace:*",
     "@backtickjs/web-page": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*",
     "@backtickjs/web-testing": "workspace:*",
     "@jridgewell/trace-mapping": "^0.3.31",
     "@testing-library/user-event": "^14.6.7",
