@@ -17,7 +17,7 @@ import { settled } from "./dom.ts";
 const answerItems = ["one", "two"];
 async function WaitingList({ more }) {
   return cs.create(
-    "1megzj3sd9ppx:22:9",
+    "jrnbyvr34lw6:22:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -32,7 +32,7 @@ async function WaitingList({ more }) {
   );
 }
 const forBuildsOnce = cs.create(
-  "1megzj3sd9ppx:35:22",
+  "jrnbyvr34lw6:35:22",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },

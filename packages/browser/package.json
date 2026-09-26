@@ -2,13 +2,17 @@
   "name": "@backtickjs/browser",
   "version": "0.1.0",
   "private": true,
-  "description": "The browser's globals as builtins a client script splices, typed with the DOM's own declarations",
+  "description": "The browser's globals as client-module imports a client script splices, typed with the DOM's own declarations",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./window": {
+      "types": "./dist/window.d.ts",
+      "default": "./dist/window.js"
     }
   },
   "scripts": {

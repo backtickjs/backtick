@@ -1,7 +1,6 @@
 import { type ClientScript, isClientScript } from "@backtickjs/client-script";
 import {
   type Client,
-  isBuiltin,
   isClientImport,
   type Spliceable,
 } from "@backtickjs/platform-sdk";
@@ -14,7 +13,6 @@ import { sourceName } from "./bindingKey.js";
 import {
   array,
   arrow,
-  builtin,
   call,
   createNames,
   imported,
@@ -39,10 +37,10 @@ export interface BundleTree {
   readonly names: Names;
 }
 
-// Names a binding may not take: what the bundle reads itself, and what strict
-// code cannot bind. Every name the bundle introduces starts with `$`, which a
-// script cannot bind, so none of those can meet a binding.
-const RESERVED = ["globalThis", "arguments", "await", "eval", "yield"];
+// Names a binding may not take: what strict code cannot bind. Every name the
+// bundle introduces starts with `$`, which a script cannot bind, so none of
+// those can meet a binding.
+const RESERVED = ["arguments", "await", "eval", "yield"];
 
 // Builds the bundle `{ scripts, root }` as code, and documents how it is
 // derived.
@@ -202,9 +200,6 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     }
     if (isJsxElement(value)) {
       return renderJsx(value, params);
-    }
-    if (isBuiltin(value)) {
-      return builtin(value.name);
     }
     if (isClientImport(value)) {
       return imported(names, value.from, value.name);

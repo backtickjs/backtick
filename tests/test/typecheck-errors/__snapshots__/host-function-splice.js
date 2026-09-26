@@ -6,7 +6,7 @@ function Card(props) {
   return _jsx("h2", { children: props.title });
 }
 export default cs.create(
-  "1cgjxfb71wjwz:10:15",
+  "2d4xjbzbsm8no:10:15",
   {
     params: [
       { kind: "splice", value: Card, bindings: [] },

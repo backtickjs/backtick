@@ -3,9 +3,9 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import type { Prop } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A block whose drawing is a conditional, and a write that answers it.
 //

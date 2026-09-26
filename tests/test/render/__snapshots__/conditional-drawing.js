@@ -27,7 +27,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // again. Without that, this case does not stop.
 async function Held({ again }) {
   return cs.create(
-    "als5zy3k1l8g:32:9",
+    "1b4jm0p18fqvh:32:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -40,7 +40,7 @@ async function Held({ again }) {
   );
 }
 const conditionalDrawing = cs.create(
-  "als5zy3k1l8g:45:27",
+  "1b4jm0p18fqvh:45:27",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },

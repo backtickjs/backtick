@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Prop } from "@backtickjs/core";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A host function is not spliceable (see `Spliceable`): only a tag may name
 // one, as a component. Client behaviour is `cs`.

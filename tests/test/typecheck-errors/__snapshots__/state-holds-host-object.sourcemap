@@ -3,7 +3,7 @@ const                                     → const
 __cs_held                                 → held
  =                                        →  = 
 cs.splice(                                →  [-semantic]
-(state)                                   → $state
+(createSignal)                            → $createSignal
  satisfies typeof cs.Spliceable)          →  [-semantic]
 (                                         → (
 cs.splice(                                →  [-semantic]
@@ -13,8 +13,9 @@ cs.splice(                                →  [-semantic]
 ;                                         → ;
 \n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n    → \n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n  
 __cs_held                                 → held
-.                                         → .
-set                                       → set
+[                                         → [
+1                                         → 1
+]                                         → ]
 (                                         → (
 cs.splice(                                →  [-semantic]
 (host)                                    → $host

@@ -1,5 +1,6 @@
 import { it } from "node:test";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -13,7 +14,7 @@ it("fetchRequests", async (t) => {
     t,
     "fetchRequests",
     cs`() => {
-      const held = $state("waiting");
+      const held = $createSignal("waiting");
 
       $window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
@@ -26,10 +27,10 @@ it("fetchRequests", async (t) => {
           return response.json();
         })
         .then((value: unknown) => {
-          held.set(value === null ? "null" : "a value");
+          held[1](value === null ? "null" : "a value");
         })
         .catch((error: unknown) => {
-          held.set("failed — " + String(error));
+          held[1]("failed — " + String(error));
         });
 
       $window
@@ -41,14 +42,14 @@ it("fetchRequests", async (t) => {
         .then((response: Response) => response.text())
         .then(
           (text: string) => {
-            held.set(text);
+            held[1](text);
           },
           (error: unknown) => {
-            held.set(String(error));
+            held[1](String(error));
           },
         );
 
-      return held.get();
+      return held[0]();
     }`,
   );
 });

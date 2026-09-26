@@ -3,10 +3,10 @@ import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import type { Prop } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //

@@ -21,14 +21,6 @@ export function createNames(): Names {
   return { imports: new Map(), usesComponent: false };
 }
 
-// `eval` read as a value, so a call of it is indirect: a bundle closes over
-// nothing, and a direct call would hand it this one's scope. Every other
-// builtin is read off `globalThis`, which nothing a script binds can hide.
-/** A builtin, read as the global of its name. */
-export function builtin(name: string): string {
-  return name === "eval" ? "(0, eval)" : member("globalThis", name);
-}
-
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
 // when the bundle is inlined in a page.
 export function string(value: string): string {

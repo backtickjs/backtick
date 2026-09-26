@@ -1,4 +1,4 @@
-import type { Bundle, Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 import type { Queries, queries } from "@testing-library/dom";
 import {
   type BundleClient,
@@ -22,7 +22,7 @@ export interface Testing<T = unknown> {
     options?: RenderOptions<Q, Container, BaseElement>,
   ): Promise<RenderResult<Q, Container, BaseElement, T>>;
   evaluate<T>(value: Spliceable<T>): Promise<T>;
-  evaluateBundle<T>(code: Bundle<T>): Promise<T>;
+  evaluateBundle<T>(code: string): Promise<T>;
 }
 
 /**
@@ -45,7 +45,7 @@ export function createTesting<T = unknown>(
     ) => renderWith(client, compile, value, options),
     evaluate: <T>(value: Spliceable<T>) =>
       evaluateWith(client, compile, value),
-    evaluateBundle: <T>(code: Bundle<T>) =>
-      evaluateBundleWith(client, code),
+    evaluateBundle: <T>(code: string) =>
+      evaluateBundleWith<T>(client, code),
   };
 }

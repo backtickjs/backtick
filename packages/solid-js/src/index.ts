@@ -1,9 +1,9 @@
 import { createJsxElement, type JsxElementType } from "@backtickjs/bundler";
-import { createImport, type Prop } from "@backtickjs/platform-sdk";
+import { createImport } from "@backtickjs/platform-sdk";
 import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";
-import type { JSX } from "./jsx-runtime.js";
+import type { JSX, Prop } from "./jsx-runtime.js";
 
 // Solid's API as a script splices it — `$createSignal(0)` — each typed with
 // Solid's own declarations, and each imported from Solid by the bundle that

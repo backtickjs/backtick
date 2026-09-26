@@ -22,7 +22,7 @@ it("scriptComponent", async (t) => {
     t,
     "scriptComponent",
     cs.create(
-      "2ielk672xspgd:27:4",
+      "t5r0so0w4r80:27:4",
       {
         params: [
           { kind: "tag", value: Card },

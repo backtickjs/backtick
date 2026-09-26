@@ -2,11 +2,10 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import type { Prop } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX, Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.

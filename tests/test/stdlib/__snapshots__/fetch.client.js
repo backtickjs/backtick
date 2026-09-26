@@ -1,4 +1,4 @@
-// 15:5
+// 16:5
 ($splice0, $splice1) => () => {
     const held = $splice0()("waiting");
     $splice1()
@@ -12,10 +12,10 @@
         return response.json();
     })
         .then((value) => {
-        held.set(value === null ? "null" : "a value");
+        held[1](value === null ? "null" : "a value");
     })
         .catch((error) => {
-        held.set("failed — " + String(error));
+        held[1]("failed — " + String(error));
     });
     $splice1()
         .fetch("/cases", {
@@ -25,9 +25,9 @@
     })
         .then((response) => response.text())
         .then((text) => {
-        held.set(text);
+        held[1](text);
     }, (error) => {
-        held.set(String(error));
+        held[1](String(error));
     });
-    return held.get();
+    return held[0]();
 }

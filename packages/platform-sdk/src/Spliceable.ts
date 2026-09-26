@@ -1,10 +1,13 @@
 import type { Client } from "./Client.js";
-import type {
-  ClientFunction,
-  ClientHandle,
-  ClientUnknown,
-  ClientValue,
-} from "./declarations.js";
+import type { ClientHandle } from "./ClientHandle.js";
+import type { ClientUnknown } from "./ClientUnknown.js";
+import type { ClientValue } from "./ClientValue.js";
+
+/**
+ * A function a client holds: what it takes is the client's to hand it, and
+ * what it answers with is a client value, or nothing.
+ */
+export type ClientFunction = (...args: never[]) => ClientUnknown;
 
 /**
  * What a host value of type `T` splices to: the pair to `Client<T>`, which is

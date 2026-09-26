@@ -21,7 +21,7 @@ it("scriptComponentNestedProp", async (t) => {
     t,
     "scriptComponentNestedProp",
     cs.create(
-      "f9eea3gp8wr6:27:4",
+      "3l3kfzos4omxz:27:4",
       { params: [{ kind: "tag", value: Greeting }] },
       '($tag0) => <$tag0 person={{ firstName: "ada" }}/>',
       '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["components/script-component-nested-prop.test.tsx"],"names":[],"mappings":"AA0BO,WAAA,CAAC,KAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG"}',

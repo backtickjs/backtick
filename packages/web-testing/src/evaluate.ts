@@ -1,4 +1,4 @@
-import type { Bundle, Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 import { bundler, type JsxModule } from "@backtickjs/bundler";
 import { importBundle } from "./client.js";
 
@@ -36,7 +36,7 @@ export async function evaluateWith<T>(
  */
 export async function evaluateBundleWith<T>(
   client: BundleClient,
-  code: Bundle<T>,
+  code: string,
 ): Promise<T> {
-  return client.evaluate(await importBundle(code));
+  return client.evaluate(await importBundle<T>(code));
 }

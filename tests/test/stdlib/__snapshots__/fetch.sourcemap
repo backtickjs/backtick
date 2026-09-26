@@ -4,7 +4,7 @@ const                                     → const
 __cs_held                                 → held
  =                                        →  = 
 cs.splice(                                →  [-semantic]
-(state)                                   → $state
+(createSignal)                            → $createSignal
  satisfies typeof cs.Spliceable)          →  [-semantic]
 (                                         → (
 "waiting"                                 → "waiting"
@@ -76,8 +76,9 @@ __cs_value                                → value
 unknown                                   → unknown
 ) => {\n                                  → ) => {\n          
 __cs_held                                 → held
-.                                         → .
-set                                       → set
+[                                         → [
+1                                         → 1
+]                                         → ]
 (                                         → (
 __cs_value                                → value
  ===                                      →  === 
@@ -99,8 +100,9 @@ __cs_error                                → error
 unknown                                   → unknown
 ) => {\n                                  → ) => {\n          
 __cs_held                                 → held
-.                                         → .
-set                                       → set
+[                                         → [
+1                                         → 1
+]                                         → ]
 (                                         → (
 "failed \\u2014 "                         → "failed — "
  +                                        →  + 
@@ -175,8 +177,9 @@ __cs_text                                 → text
 string                                    → string
 ) => {\n                                  → ) => {\n            
 __cs_held                                 → held
-.                                         → .
-set                                       → set
+[                                         → [
+1                                         → 1
+]                                         → ]
 (                                         → (
 __cs_text                                 → text
 )                                         → )
@@ -189,8 +192,9 @@ __cs_error                                → error
 unknown                                   → unknown
 ) => {\n                                  → ) => {\n            
 __cs_held                                 → held
-.                                         → .
-set                                       → set
+[                                         → [
+1                                         → 1
+]                                         → ]
 (                                         → (
 String                                    → String
 (                                         → (
@@ -204,8 +208,9 @@ __cs_error                                → error
 \n                                        → \n\n      
 return                                    → return 
 __cs_held                                 → held
-.                                         → .
-get                                       → get
+[                                         → [
+0                                         → 0
+]                                         → ]
 ()                                        → ()
 ;                                         → ;
 \n}                                       → \n    }

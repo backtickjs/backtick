@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import type { Prop } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 type Person = { readonly firstName: string };
 

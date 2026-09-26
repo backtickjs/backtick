@@ -12,19 +12,19 @@ async function Card(props) {
 // polymorphic and its nested script's captures arrive through a thunk.
 function labelled(label) {
   return cs.create(
-    "1vpk154d1g5tu:17:9",
+    "12x11v20r14vm:17:9",
     {
       params: [
         { kind: "splice", value: label, bindings: [] },
         {
           kind: "splice",
           value: cs.create(
-            "1vpk154d1g5tu:19:17",
-            { params: [{ kind: "capture", key: "Card$1vpk154d1g5tu$0" }] },
+            "12x11v20r14vm:19:17",
+            { params: [{ kind: "capture", key: "Card$12x11v20r14vm$0" }] },
             "($capture0) => <$capture0 n={1}/>",
             '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAkBoB,eAAA,CAAC,SAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
           ),
-          bindings: ["Card$1vpk154d1g5tu$0"],
+          bindings: ["Card$12x11v20r14vm$0"],
         },
       ],
     },
@@ -37,14 +37,14 @@ it("scriptBoundTagCaptureShadow", async (t) => {
     t,
     "scriptBoundTagCaptureShadow",
     cs.create(
-      "1vpk154d1g5tu:27:4",
+      "12x11v20r14vm:27:4",
       {
         params: [
           {
             kind: "splice",
             value: labelled(
               cs.create(
-                "1vpk154d1g5tu:29:18",
+                "12x11v20r14vm:29:18",
                 { params: [] },
                 '() => "a"',
                 '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA4BqB,MAAA,GAAG"}',
@@ -56,7 +56,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
             kind: "splice",
             value: labelled(
               cs.create(
-                "1vpk154d1g5tu:30:18",
+                "12x11v20r14vm:30:18",
                 { params: [] },
                 '() => "b"',
                 '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA6BqB,MAAA,GAAG"}',
@@ -80,7 +80,7 @@ it("scriptBoundTagScope", async (t) => {
     t,
     "scriptBoundTagScope",
     cs.create(
-      "1vpk154d1g5tu:42:4",
+      "12x11v20r14vm:42:4",
       { params: [{ kind: "tag", value: Card }] },
       '($tag0) => {\n    const twice = (Card) => (<div>\n          <Card n={1}/>\n          <Card n={2}/>\n        </div>);\n    return (<section>\n          <$tag0 title="host"/>\n          {twice((props) => (<i>{"row " + props.n}</i>))}\n        </section>);\n}',
       '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAyCO;IACD,MAAM,KAAK,GAAG,CAAC,IAA2C,EAAE,EAAE,CAAC,CAC7D,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACX;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACb;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;IAEF,OAAO,CACL,CAAC,OAAO,CACN;UAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;UAAA,CAAC,KAAK,CAAC,CAAC,KAAoB,EAAE,EAAE,CAAC,CAC/B,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAC1B,CAAC,CACJ;QAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',

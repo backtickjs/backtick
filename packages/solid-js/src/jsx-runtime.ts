@@ -1,5 +1,5 @@
 import { createJsxElement } from "@backtickjs/bundler";
-import type { ClientHandle, Prop } from "@backtickjs/platform-sdk";
+import type { ClientHandle, Spliceable } from "@backtickjs/platform-sdk";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and
@@ -20,6 +20,13 @@ export function Fragment(props: { children?: Children }): JSX.Element {
 }
 
 declare const ElementBrand: unique symbol;
+
+/**
+ * What a prop admits: what the server wrote, or a script standing in for it. A
+ * function has no written form — client behaviour is `cs`...` — so a handler
+ * prop is left with the script arm alone.
+ */
+export type Prop<T> = Spliceable<T>;
 
 /**
  * What may stand inside an element: one thing, or several. A script may stand

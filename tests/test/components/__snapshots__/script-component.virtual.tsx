@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import type { Prop } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
+import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A component tag written inside a client script. `Card` is a name no scope in
 // the script binds, so it splices as the host binding, and what a splice holds

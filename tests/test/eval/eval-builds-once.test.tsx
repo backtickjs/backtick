@@ -5,11 +5,11 @@ import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { window } from "@backtickjs/browser";
-import type { Bundle, Prop } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { settled } from "../render/dom.ts";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX, Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A component is built once, however what it drew changes afterwards.
 //
