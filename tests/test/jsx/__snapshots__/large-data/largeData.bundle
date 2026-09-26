@@ -9,15 +9,15 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   ),
   _tmpl$3 = /*#__PURE__*/ _$template(`<span>`);
 import { For as $i0 } from "solid-js";
-const $f1 = ($0) => $0();
-const $f2 = ($0) => (order) => $0(order);
-const $f3 = ($0) => "https://img.example.com/" + $0.id + ".png";
-const $f4 = ($0) => $0.customer.name;
-const $f5 = ($0) => $0.customer.city;
-const $f6 = ($0) => $0.items;
-const $f7 = ($0) => (item) => $0(item);
-const $f8 = ($0) => $0.sku + " x" + $0.qty;
-const $f9 = ($0) => "$" + $0.total;
+const $cs0 = ($splice0) => $splice0();
+const $cs1 = ($splice0) => (order) => $splice0(order);
+const $cs2 = ($capture0) => "https://img.example.com/" + $capture0.id + ".png";
+const $cs3 = ($capture0) => $capture0.customer.name;
+const $cs4 = ($capture0) => $capture0.customer.city;
+const $cs5 = ($capture0) => $capture0.items;
+const $cs6 = ($splice0) => (item) => $splice0(item);
+const $cs7 = ($capture0) => $capture0.sku + " x" + $capture0.qty;
+const $cs8 = ($capture0) => "$" + $capture0.total;
 export default () =>
   (() => {
     var _el$ = _tmpl$();
@@ -25,7 +25,7 @@ export default () =>
       _el$,
       _$createComponent($i0, {
         get each() {
-          return $f1(() => [
+          return $cs0(() => [
             {
               id: "ord-1000",
               customer: {
@@ -119,26 +119,26 @@ export default () =>
           ]);
         },
         get children() {
-          return $f2((order) =>
+          return $cs1((order) =>
             (() => {
               var _el$2 = _tmpl$2(),
                 _el$3 = _el$2.firstChild,
                 _el$4 = _el$3.nextSibling,
                 _el$5 = _el$4.nextSibling,
                 _el$6 = _el$5.nextSibling;
-              _$insert(_el$4, () => $f4(order));
-              _$insert(_el$5, () => $f5(order));
+              _$insert(_el$4, () => $cs3(order));
+              _$insert(_el$5, () => $cs4(order));
               _$insert(
                 _el$2,
                 _$createComponent($i0, {
                   get each() {
-                    return $f6(order);
+                    return $cs5(order);
                   },
                   get children() {
-                    return $f7((item) =>
+                    return $cs6((item) =>
                       (() => {
                         var _el$7 = _tmpl$3();
-                        _$insert(_el$7, () => $f8(item));
+                        _$insert(_el$7, () => $cs7(item));
                         return _el$7;
                       })(),
                     );
@@ -146,8 +146,8 @@ export default () =>
                 }),
                 _el$6,
               );
-              _$insert(_el$6, () => $f9(order));
-              _$effect(() => _$setAttribute(_el$3, "src", $f3(order)));
+              _$insert(_el$6, () => $cs8(order));
+              _$effect(() => _$setAttribute(_el$3, "src", $cs2(order)));
               return _el$2;
             })(),
           );

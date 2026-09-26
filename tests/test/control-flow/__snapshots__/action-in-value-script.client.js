@@ -10,11 +10,11 @@
 }
 
 // 20:5
-($0, $1) => (b) => {
+($splice0, $splice1) => (b) => {
     let n = 0;
-    $0();
+    $splice0();
     if (b) {
-        $1()();
+        $splice1()();
         n = 1;
     }
     return n;

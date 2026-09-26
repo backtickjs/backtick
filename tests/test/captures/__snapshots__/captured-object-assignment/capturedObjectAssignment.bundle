@@ -1,13 +1,13 @@
-const $f1 = ($0) => {
+const $cs0 = ($splice0) => {
   const counter = {
     count: 0,
   };
-  const bump = $0(counter);
+  const bump = $splice0(counter);
   bump();
   bump();
   return counter.count;
 };
-const $f2 = ($0) => () => {
-  $0.count += 1;
+const $cs1 = ($capture0) => () => {
+  $capture0.count += 1;
 };
-export default () => $f1($f2);
+export default () => $cs0($cs1);

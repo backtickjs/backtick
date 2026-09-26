@@ -8,8 +8,8 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<div>`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0) => {
-  const size = $0()(16);
+const $cs0 = ($splice0) => {
+  const size = $splice0()(16);
   return (() => {
     var _el$ = _tmpl$();
     _el$.$$click = () => {
@@ -25,14 +25,14 @@ export default () =>
     _$insert(
       _el$2,
       _$createComponent($Script, {
-        run: () => $f1(() => $i0),
+        run: () => $cs0(() => $i0),
       }),
       null,
     );
     _$insert(
       _el$2,
       _$createComponent($Script, {
-        run: () => $f1(() => $i0),
+        run: () => $cs0(() => $i0),
       }),
       null,
     );

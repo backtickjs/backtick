@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   let i = 0;
   let total = 0;
   while (i < 5) {
@@ -10,4 +10,4 @@ const $f1 = () => {
   }
   return total;
 };
-export default () => $f1();
+export default () => $cs0();

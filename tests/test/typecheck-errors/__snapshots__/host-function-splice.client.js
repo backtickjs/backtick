@@ -1,5 +1,5 @@
 // 10:16
-($0, $1) => {
-    const Heading = $0();
-    return <$1 title="tag"/>;
+($splice0, $tag1) => {
+    const Heading = $splice0();
+    return <$tag1 title="tag"/>;
 }

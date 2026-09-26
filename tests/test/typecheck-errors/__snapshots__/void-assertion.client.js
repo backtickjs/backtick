@@ -1,5 +1,5 @@
 // 7:18
-($0) => {
-    const a = $0();
+($splice0) => {
+    const a = $splice0();
     return "" + a;
 }

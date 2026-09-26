@@ -35,8 +35,8 @@ describe("onCleanup", () => {
             { kind: "splice", value: window, bindings: [] },
           ],
         },
-        "($0, $1) => {\n    $0()(() => $1().console.log());\n    return <p>drawn</p>;\n}",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AA2BS;IACD,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
+        "($splice0, $splice1) => {\n    $splice0()(() => $splice1().console.log());\n    return <p>drawn</p>;\n}",
+        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AA2BS;IACD,UAAU,CAAC,GAAG,EAAE,CAAC,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
       ),
     );
     assert.equal(runs, 0);
@@ -55,8 +55,8 @@ describe("onCleanup", () => {
             { kind: "splice", value: window, bindings: [] },
           ],
         },
-        "($0, $1, $2, $3) => {\n    const n = $0()(1);\n    const doubled = $1()(() => {\n        $2()(() => $3().console.log());\n        return n[0]() * 2;\n    });\n    return (<button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>);\n}",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAuCS;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,IAAW,CAAC,GAAG,EAAE;QAC/B,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,EAAE,MAAM,CAAC,CAC9D,CAAC;AACJ,CAAC"}',
+        "($splice0, $splice1, $splice2, $splice3) => {\n    const n = $splice0()(1);\n    const doubled = $splice1()(() => {\n        $splice2()(() => $splice3().console.log());\n        return n[0]() * 2;\n    });\n    return (<button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>);\n}",
+        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAuCS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,UAAW,CAAC,GAAG,EAAE;QAC/B,UAAU,CAAC,GAAG,EAAE,CAAC,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACxC,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,EAAE,MAAM,CAAC,CAC9D,CAAC;AACJ,CAAC"}',
       ),
     );
     assert.equal(runs, 0);
@@ -86,8 +86,8 @@ describe("onCleanup", () => {
             { kind: "splice", value: onCleanup, bindings: [] },
           ],
         },
-        "($0, $1, $2, $3) => {\n    const timer = $0()(0);\n    $1()(() => {\n        timer[1]($2().setInterval(() => $2().console.log(), 5));\n    });\n    $3()(() => $2().clearInterval(timer[0]()));\n    return <p>ticking</p>;\n}",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAyES;IACD,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,IAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IAChE,CAAC,CAAC,CAAC;IACH,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACpD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
+        "($splice0, $splice1, $splice2, $splice3) => {\n    const timer = $splice0()(0);\n    $splice1()(() => {\n        timer[1]($splice2().setInterval(() => $splice2().console.log(), 5));\n    });\n    $splice3()(() => $splice2().clearInterval(timer[0]()));\n    return <p>ticking</p>;\n}",
+        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAyES;IACD,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,UAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,CAAC,CAAC,CAAC,UAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IAChE,CAAC,CAAC,CAAC;IACH,UAAU,CAAC,GAAG,EAAE,CAAC,UAAO,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACpD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
       ),
     );
     await wait(40);
@@ -107,8 +107,8 @@ describe("onCleanup", () => {
             { kind: "splice", value: window, bindings: [] },
           ],
         },
-        "($0, $1) => {\n    return (<button onclick={() => $0()(() => $1().console.log())}>\n            press\n          </button>);\n}",
-        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AA6FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAU,CAAC,GAAG,EAAE,CAAC,IAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+        "($splice0, $splice1) => {\n    return (<button onclick={() => $splice0()(() => $splice1().console.log())}>\n            press\n          </button>);\n}",
+        '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AA6FS;IACD,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC7D;;UACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
       ),
     );
     await userEvent.click(screen.getByRole("button"));

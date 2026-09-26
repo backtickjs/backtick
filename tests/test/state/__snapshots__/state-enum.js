@@ -18,8 +18,8 @@ var Color;
 const colorName = cs.create(
   "133ie16u4j0dm:19:48",
   { params: [{ kind: "splice", value: Color.Blue, bindings: [] }] },
-  '($0) => (c) => {\n    return c === $0() ? "blue" : "red";\n}',
-  '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state/state-enum.test.tsx"],"names":[],"mappings":"AAkBmD,QAAA,CAAC,CAAQ,EAAE,EAAE;IAC9D,OAAO,CAAC,KAAK,IAAC,CAAa,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,KAAK,CAAC;AAC9C,CAAC"}',
+  '($splice0) => (c) => {\n    return c === $splice0() ? "blue" : "red";\n}',
+  '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state/state-enum.test.tsx"],"names":[],"mappings":"AAkBmD,cAAA,CAAC,CAAQ,EAAE,EAAE;IAC9D,OAAO,CAAC,KAAK,UAAC,CAAa,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,KAAK,CAAC;AAC9C,CAAC"}',
 );
 async function Swatch() {
   return cs.create(
@@ -32,8 +32,8 @@ async function Swatch() {
         { kind: "splice", value: colorName, bindings: [] },
       ],
     },
-    "($0, $1, $2, $3) => {\n    const held = $0()($1());\n    return (<span onclick={() => held[1]($2())}>\n        {$3()(held[0]())}\n      </span>);\n}",
-    '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state/state-enum.test.tsx"],"names":[],"mappings":"AAuBY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,IAAC,CAAY,CAAC;IACzC,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAC,CAAa,CAAC,CAC1C;QAAA,CAAC,IAAU,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,CACxB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    "($splice0, $splice1, $splice2, $splice3) => {\n    const held = $splice0()($splice1());\n    return (<span onclick={() => held[1]($splice2())}>\n        {$splice3()(held[0]())}\n      </span>);\n}",
+    '{"version":3,"file":"state-enum.test.jsx","sourceRoot":"","sources":["state/state-enum.test.tsx"],"names":[],"mappings":"AAuBY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,UAAC,CAAY,CAAC;IACzC,OAAO,CACL,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,UAAC,CAAa,CAAC,CAC1C;QAAA,CAAC,UAAU,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,CACxB;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
   );
 }
 it("Swatch", async (t) => {

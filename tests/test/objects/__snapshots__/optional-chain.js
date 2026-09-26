@@ -35,8 +35,8 @@ it("optionalChain", async (t) => {
           { kind: "splice", value: shout, bindings: [] },
         ],
       },
-      '($0, $1, $2) => ({\n    found: $0()({ x: 5 }),\n    missing: $0()(null),\n    deep: $1()({ inner: { z: 7 } }),\n    cut: $1()({ inner: null }),\n    top: $1()(null),\n    loud: $2()("hi"),\n    silent: $2()(null),\n})',
-      '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["objects/optional-chain.test.tsx"],"names":[],"mappings":"AAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,IAAK,CAAC,IAAI,CAAC;IACpB,IAAI,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAChC,GAAG,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC;IAC3B,GAAG,EAAE,IAAK,CAAC,IAAI,CAAC;IAChB,IAAI,EAAE,IAAM,CAAC,IAAI,CAAC;IAClB,MAAM,EAAE,IAAM,CAAC,IAAI,CAAC;CACrB,CAAC"}',
+      '($splice0, $splice1, $splice2) => ({\n    found: $splice0()({ x: 5 }),\n    missing: $splice0()(null),\n    deep: $splice1()({ inner: { z: 7 } }),\n    cut: $splice1()({ inner: null }),\n    top: $splice1()(null),\n    loud: $splice2()("hi"),\n    silent: $splice2()(null),\n})',
+      '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["objects/optional-chain.test.tsx"],"names":[],"mappings":"AAuBO,kCAAA,CAAC;IACF,KAAK,EAAE,UAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,UAAK,CAAC,IAAI,CAAC;IACpB,IAAI,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAChC,GAAG,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC;IAC3B,GAAG,EAAE,UAAK,CAAC,IAAI,CAAC;IAChB,IAAI,EAAE,UAAM,CAAC,IAAI,CAAC;IAClB,MAAM,EAAE,UAAM,CAAC,IAAI,CAAC;CACrB,CAAC"}',
     ),
   );
 });

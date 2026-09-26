@@ -14,12 +14,12 @@
 }
 
 // 24:5
-($0, $1, $2) => ({
-    found: $0()({ x: 5 }),
-    missing: $0()(null),
-    deep: $1()({ inner: { z: 7 } }),
-    cut: $1()({ inner: null }),
-    top: $1()(null),
-    loud: $2()("hi"),
-    silent: $2()(null),
+($splice0, $splice1, $splice2) => ({
+    found: $splice0()({ x: 5 }),
+    missing: $splice0()(null),
+    deep: $splice1()({ inner: { z: 7 } }),
+    cut: $splice1()({ inner: null }),
+    top: $splice1()(null),
+    loud: $splice2()("hi"),
+    silent: $splice2()(null),
 })

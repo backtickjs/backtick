@@ -1,12 +1,12 @@
 // 9:3
-($0) => {
-    return $0()(1)[0]();
+($splice0) => {
+    return $splice0()(1)[0]();
 }
 
 // 13:17
-($0) => (n) => $0()(n + 10)
+($splice0) => (n) => $splice0()(n + 10)
 
 // 19:5
-($0, $1) => {
-    return $0() + $1();
+($splice0, $splice1) => {
+    return $splice0() + $splice1();
 }

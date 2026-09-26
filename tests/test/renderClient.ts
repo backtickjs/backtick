@@ -67,7 +67,7 @@ const escape = (text: string): string =>
 // segment of the emitted code, and the host text it maps to. A map records
 // only where a segment starts, so the text shown is as long as the segment
 // where the two read the same; where they differ — a splice lowered to
-// `$0(…)`, say — it is only the first token there, marked `…`. The host file
+// `$splice0(…)`, say — it is only the first token there, marked `…`. The host file
 // is the reader's to see, so the map carries no text of its own — which is
 // recorded too.
 export function renderClientMappings(

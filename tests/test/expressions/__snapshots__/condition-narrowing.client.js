@@ -2,20 +2,20 @@
 () => true
 
 // 10:72
-($0) => (text, upper) => {
+($splice0) => (text, upper) => {
     if (upper && text !== null) {
         return text.toUpperCase();
     }
-    if ($0() && text !== null && text.charAt(0) === "!") {
+    if ($splice0() && text !== null && text.charAt(0) === "!") {
         return text.concat("?");
     }
     return "none";
 }
 
 // 27:5
-($0) => ({
-    missing: $0()(null, true),
-    loud: $0()("!hi", true),
-    quiet: $0()("!hi", false),
-    plain: $0()("zz", false),
+($splice0) => ({
+    missing: $splice0()(null, true),
+    loud: $splice0()("!hi", true),
+    quiet: $splice0()("!hi", false),
+    plain: $splice0()("zz", false),
 })

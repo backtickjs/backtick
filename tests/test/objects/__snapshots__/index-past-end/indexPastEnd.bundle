@@ -1,5 +1,5 @@
-const $f1 = () => {
+const $cs0 = () => {
   const names = ["zero", "one"];
   return names[9];
 };
-export default () => $f1();
+export default () => $cs0();

@@ -5,15 +5,15 @@
 }
 
 // 13:45
-($0) => (id) => {
-    $0();
+($splice0) => (id) => {
+    $splice0();
 }
 
 // 21:5
-($0) => {
+($splice0) => {
     const handlers = {
-        tap: $0(),
-        hold: $0(),
+        tap: $splice0(),
+        hold: $splice0(),
     };
     return handlers;
 }

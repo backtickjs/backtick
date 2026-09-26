@@ -5,8 +5,8 @@ import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 /** A script as the client runs it, and where its code came from. */
 export interface EmittedScript {
   /**
-   * The script as an expression, `($0, …) => body`, a parameter per entry of
-   * `metadata.params`. Types are gone and everything else, JSX included, is
+   * The script as an expression, `($splice0, …) => body`, a parameter per
+   * entry of `metadata.params` (see `paramName`). Types are gone and everything else, JSX included, is
    * as the script wrote it, for the framework's own compiler to read when a
    * bundle is built. How it is delivered is the bundle's to write.
    */
@@ -24,8 +24,17 @@ export interface EmittedScript {
  * not.
  */
 export interface Edit {
-  readonly param: number;
+  readonly param: string;
   readonly args?: readonly string[];
+}
+
+/**
+ * A script parameter's name: its kind and its index in `metadata.params`,
+ * `$splice0`, `$tag1`, `$capture2`. A script cannot bind a name starting with
+ * `$`, so none meets one of its own.
+ */
+export function paramName(param: ResolvedParam, index: number): string {
+  return `$${param.kind}${index}`;
 }
 
 // A binding key as `resolveBindings` writes it, `<name>$<fileHash>$<n>`, back
@@ -53,7 +62,7 @@ export function scriptEdits(
   const captures = [...captureParam.keys()];
   const read = (key: string): string => {
     const index = captureParam.get(key);
-    return index === undefined ? sourceName(key) : `$${index}`;
+    return index === undefined ? sourceName(key) : `$capture${index}`;
   };
 
   const edits = new Map<number, Edit>();
@@ -65,10 +74,11 @@ export function scriptEdits(
     }
     // A tag is handed over as the value it names: it has no bindings to hand
     // its hole, and JSX cannot write a call where a tag goes.
+    const name = paramName(param, index);
     const edit: Edit =
       param.kind === "tag"
-        ? { param: index }
-        : { param: index, args: [...param.bindings, ...captures].map(read) };
+        ? { param: name }
+        : { param: name, args: [...param.bindings, ...captures].map(read) };
     for (const ref of param.refs) {
       edits.set(at(ref), edit);
     }
@@ -79,7 +89,7 @@ export function scriptEdits(
       index !== undefined &&
       identifier.getSourceFile() === script.fileWithPlaceholders
     ) {
-      edits.set(at(identifier), { param: index });
+      edits.set(at(identifier), { param: `$capture${index}` });
     }
   }
   return edits;
@@ -98,7 +108,7 @@ export function scriptEdits(
 export function emitScript(
   ts: typeof import("typescript"),
   script: ClientScript,
-  params: number,
+  params: readonly string[],
   edits: ReadonlyMap<number, Edit>,
 ): EmittedScript {
   const sourceFile = script.sourceFile;
@@ -125,7 +135,7 @@ export function emitScript(
     (context) => (file) => {
       const f = context.factory;
       const edited = (edit: Edit, from: ts.Node): ts.Expression => {
-        const param = f.createIdentifier(`$${edit.param}`);
+        const param = f.createIdentifier(edit.param);
         const node =
           edit.args === undefined
             ? param
@@ -167,8 +177,8 @@ export function emitScript(
         f.createArrowFunction(
           undefined,
           undefined,
-          Array.from({ length: params }, (_, index) =>
-            f.createParameterDeclaration(undefined, undefined, `$${index}`),
+          params.map((name) =>
+            f.createParameterDeclaration(undefined, undefined, name),
           ),
           undefined,
           f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),

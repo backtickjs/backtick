@@ -10,9 +10,9 @@ import { createSignal as $i0 } from "solid-js";
 import { createSelector as $i1 } from "solid-js";
 import { For as $i2 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1, $2) => {
-  const selected = $0()(0);
-  const isSelected = $1()(selected[0]);
+const $cs0 = ($splice0, $splice1, $tag2) => {
+  const selected = $splice0()(0);
+  const isSelected = $splice1()(selected[0]);
   return (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild,
@@ -20,7 +20,7 @@ const $f1 = ($0, $1, $2) => {
     _el$2.$$click = () => selected[1](1);
     _$insert(
       _el$3,
-      _$createComponent($2, {
+      _$createComponent($tag2, {
         each: [0, 1, 2],
         children: (id) =>
           (() => {
@@ -43,19 +43,19 @@ const $f1 = ($0, $1, $2) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
         () => $i1,
-        ($0) =>
+        ($arg0) =>
           _$createComponent($i2, {
             get each() {
-              return $0.each;
+              return $arg0.each;
             },
             get fallback() {
-              return $0.fallback;
+              return $arg0.fallback;
             },
             get children() {
-              return $0.children;
+              return $arg0.children;
             },
           }),
       ),

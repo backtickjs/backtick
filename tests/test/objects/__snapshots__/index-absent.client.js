@@ -1,6 +1,6 @@
 // 14:5
-($0) => {
+($splice0) => {
     const names = ["zero", "one"];
-    const missing = $0()["nowhere"] ?? "gone";
+    const missing = $splice0()["nowhere"] ?? "gone";
     return names[1] + "/" + missing;
 }

@@ -1,13 +1,13 @@
 // 12:5
-($0) => {
+($splice0) => {
     const counter = { count: 0 };
-    const bump = $0(counter);
+    const bump = $splice0(counter);
     bump();
     bump();
     return counter.count;
 }
 
 // 14:22
-($0) => () => {
-    $0.count += 1;
+($capture0) => () => {
+    $capture0.count += 1;
 }

@@ -12,8 +12,8 @@ const beep = cs.create(
 const onTap = cs.create(
   "1dqhax1do6u08:13:44",
   { params: [{ kind: "splice", value: beep, bindings: [] }] },
-  "($0) => (id) => {\n    $0();\n}",
-  '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAY+C,QAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,IAAK,CAAC;AACR,CAAC"}',
+  "($splice0) => (id) => {\n    $splice0();\n}",
+  '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAY+C,cAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,UAAK,CAAC;AACR,CAAC"}',
 );
 it("handlerObject", async (t) => {
   await snapshotCase(
@@ -22,8 +22,8 @@ it("handlerObject", async (t) => {
     cs.create(
       "1dqhax1do6u08:21:4",
       { params: [{ kind: "splice", value: onTap, bindings: [] }] },
-      "($0) => {\n    const handlers = {\n        tap: $0(),\n        hold: $0(),\n    };\n    return handlers;\n}",
-      '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,IAAM;QACX,IAAI,EAAE,IAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
+      "($splice0) => {\n    const handlers = {\n        tap: $splice0(),\n        hold: $splice0(),\n    };\n    return handlers;\n}",
+      '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,UAAM;QACX,IAAI,EAAE,UAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
     ),
   );
 });

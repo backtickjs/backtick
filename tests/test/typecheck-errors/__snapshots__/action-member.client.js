@@ -4,7 +4,7 @@
 }
 
 // 9:16
-($0) => {
-    const list = $0();
+($splice0) => {
+    const list = $splice0();
     return 1;
 }

@@ -2,21 +2,21 @@
 () => 1
 
 // 12:12
-($0) => {
-    return $0() + $0();
+($splice0) => {
+    return $splice0() + $splice0();
 }
 
 // 16:12
-($0) => {
-    return $0() + $0();
+($splice0) => {
+    return $splice0() + $splice0();
 }
 
 // 20:12
-($0) => {
-    return $0() + $0();
+($splice0) => {
+    return $splice0() + $splice0();
 }
 
 // 24:12
-($0) => {
-    return $0() + $0();
+($splice0) => {
+    return $splice0() + $splice0();
 }

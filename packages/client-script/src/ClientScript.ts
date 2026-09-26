@@ -11,7 +11,8 @@ export type Param =
   | { kind: "capture"; key: string };
 
 export interface Metadata {
-  // one per parameter: `params[i]` is `$i`
+  // one per parameter: `params[i]` is `$splice<i>`, `$tag<i>` or
+  // `$capture<i>`, by its kind
   params: Param[];
 }
 
@@ -26,7 +27,7 @@ export interface ClientScript {
   readonly id: string;
   readonly metadata: Metadata;
   // The script as the client runs it, compiled when the host was: an
-  // expression, `($0, …) => body`, JSX kept, whose parameters are
+  // expression, `($splice0, …) => body`, JSX kept, whose parameters are
   // `metadata.params`. The same for every script with its id, where
   // `metadata` is one call's.
   readonly code: string;

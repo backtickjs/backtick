@@ -1,6 +1,6 @@
 import { createSignal as $i0 } from "solid-js";
-const $f1 = ($0) => {
-  const count = $0()(0);
+const $cs0 = ($splice0) => {
+  const count = $splice0()(0);
   return [
     typeof undefined,
     typeof null,
@@ -16,4 +16,4 @@ const $f1 = ($0) => {
     typeof count,
   ];
 };
-export default () => $f1(() => $i0);
+export default () => $cs0(() => $i0);

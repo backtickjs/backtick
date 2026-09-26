@@ -1,16 +1,16 @@
 // 15:10
-($0) =>   → 15:13 <em>{"rows…
-<         → 15:13 <
-em        → 15:14 em
->         → 15:16 >
-{         → 15:17 {
-"rows "   → 15:18 "rows "
- +        → 15:25  + 
-$0()      → 15:28 $count}</em>`;…
-}         → 15:34 }
-</        → 15:35 </
-em        → 15:37 em
->         → 15:39 >
+($splice0) =>   → 15:13 <em>{"rows…
+<               → 15:13 <
+em              → 15:14 em
+>               → 15:16 >
+{               → 15:17 {
+"rows "         → 15:18 "rows "
+ +              → 15:25  + 
+$splice0()      → 15:28 $count}</em>`;…
+}               → 15:34 }
+</              → 15:35 </
+em              → 15:37 em
+>               → 15:39 >
 
 // 19:10
 () =>                 → 19:13 <em>{"nothing…
@@ -25,117 +25,117 @@ em                    → 19:41 em
 >                     → 19:43 >
 
 // 23:3
-($0) =>    → 23:6 (props:…
-(          → 23:6 (
-props      → 23:7 props
-)          → 23:31 ) 
-=>         → 23:33 =>
-$0(props)  → 23:36 ${(<Row…
+($splice0) =>    → 23:6 (props:…
+(                → 23:6 (
+props            → 23:7 props
+)                → 23:31 ) 
+=>               → 23:33 =>
+$splice0(props)  → 23:36 ${(<Row…
 
 // 23:51
-($0) =>   → 23:54 props.count`}…
-$0        → 23:54 props.count`}…
-.         → 23:59 .
-count     → 23:60 count
+($capture0) =>   → 23:54 props.count`}…
+$capture0        → 23:54 props.count`}…
+.                → 23:59 .
+count            → 23:60 count
 
 // 31:16
-($0, $1) => {  → 31:19 {…
-const          → 32:3 const 
-Rows           → 32:9 Rows
- =             → 32:13  = 
-eval           → 32:16 eval
-(              → 32:20 (
-$0()           → 32:21 $rows);…
-)              → 32:26 )
-;              → 32:27 ;
-const          → 33:3 const 
-Empty          → 33:9 Empty
- =             → 33:14  = 
-eval           → 33:17 eval
-(              → 33:21 (
-$1()           → 33:22 $empty);…
-)              → 33:28 )
-;              → 33:29 ;
-const          → 37:3 const 
-wrongType      → 37:9 wrongType
- =             → 37:18  = 
-<              → 37:21 <
-Rows           → 37:22 Rows
-count          → 37:27 count
-=              → 37:32 =
-{              → 37:33 {
-"one"          → 37:34 "one"
-}              → 37:39 }
-/>             → 37:40  />;…
-;              → 37:43 ;
-const          → 39:3 const 
-unknownName    → 39:9 unknownName
- =             → 39:20  = 
-<              → 39:23 <
-Rows           → 39:24 Rows
-nope           → 39:29 nope
-=              → 39:33 =
-{              → 39:34 {
-1              → 39:35 1
-}              → 39:36 }
-/>             → 39:37  />;…
-;              → 39:40 ;
-const          → 41:3 const 
-missing        → 41:9 missing
- =             → 41:16  = 
-<              → 41:19 <
-Rows           → 41:20 Rows
-/>             → 41:24  />;…
-;              → 41:27 ;
-const          → 45:3 const 
-called         → 45:9 called
- =             → 45:15  = 
-<              → 45:18 <
-Empty          → 45:19 Empty
-count          → 45:25 count
-=              → 45:30 =
-{              → 45:31 {
-1              → 45:32 1
-}              → 45:33 }
-/>             → 45:34  />;…
-;              → 45:37 ;
-return         → 47:3 return 
-(              → 47:10 (
-<              → 48:5 <
-div            → 48:6 div
->              → 48:9 >
-<              → 50:7 <
-Rows           → 50:8 Rows
-count          → 50:13 count
-=              → 50:18 =
-{              → 50:19 {
-1              → 50:20 1
-}              → 50:21 }
-/>             → 50:22  />…
-{              → 51:7 {
-Empty          → 51:8 Empty
-}              → 51:13 }
-{              → 52:7 {
-wrongType      → 52:8 wrongType
-}              → 52:17 }
-{              → 53:7 {
-unknownName    → 53:8 unknownName
-}              → 53:19 }
-{              → 54:7 {
-missing        → 54:8 missing
-}              → 54:15 }
-{              → 55:7 {
-called         → 55:8 called
-}              → 55:14 }
-{              → 57:7 {
-eval           → 59:9 eval
-(              → 59:13 (
-null           → 59:14 null
-)              → 59:18 )
-}              → 60:7 }
-</             → 61:5 </
-div            → 61:7 div
->              → 61:10 >
-)              → 61:11 …
-;              → 62:4 ;
-}              → 63:1 }
+($splice0, $splice1) => {  → 31:19 {…
+const                      → 32:3 const 
+Rows                       → 32:9 Rows
+ =                         → 32:13  = 
+eval                       → 32:16 eval
+(                          → 32:20 (
+$splice0()                 → 32:21 $rows);…
+)                          → 32:26 )
+;                          → 32:27 ;
+const                      → 33:3 const 
+Empty                      → 33:9 Empty
+ =                         → 33:14  = 
+eval                       → 33:17 eval
+(                          → 33:21 (
+$splice1()                 → 33:22 $empty);…
+)                          → 33:28 )
+;                          → 33:29 ;
+const                      → 37:3 const 
+wrongType                  → 37:9 wrongType
+ =                         → 37:18  = 
+<                          → 37:21 <
+Rows                       → 37:22 Rows
+count                      → 37:27 count
+=                          → 37:32 =
+{                          → 37:33 {
+"one"                      → 37:34 "one"
+}                          → 37:39 }
+/>                         → 37:40  />;…
+;                          → 37:43 ;
+const                      → 39:3 const 
+unknownName                → 39:9 unknownName
+ =                         → 39:20  = 
+<                          → 39:23 <
+Rows                       → 39:24 Rows
+nope                       → 39:29 nope
+=                          → 39:33 =
+{                          → 39:34 {
+1                          → 39:35 1
+}                          → 39:36 }
+/>                         → 39:37  />;…
+;                          → 39:40 ;
+const                      → 41:3 const 
+missing                    → 41:9 missing
+ =                         → 41:16  = 
+<                          → 41:19 <
+Rows                       → 41:20 Rows
+/>                         → 41:24  />;…
+;                          → 41:27 ;
+const                      → 45:3 const 
+called                     → 45:9 called
+ =                         → 45:15  = 
+<                          → 45:18 <
+Empty                      → 45:19 Empty
+count                      → 45:25 count
+=                          → 45:30 =
+{                          → 45:31 {
+1                          → 45:32 1
+}                          → 45:33 }
+/>                         → 45:34  />;…
+;                          → 45:37 ;
+return                     → 47:3 return 
+(                          → 47:10 (
+<                          → 48:5 <
+div                        → 48:6 div
+>                          → 48:9 >
+<                          → 50:7 <
+Rows                       → 50:8 Rows
+count                      → 50:13 count
+=                          → 50:18 =
+{                          → 50:19 {
+1                          → 50:20 1
+}                          → 50:21 }
+/>                         → 50:22  />…
+{                          → 51:7 {
+Empty                      → 51:8 Empty
+}                          → 51:13 }
+{                          → 52:7 {
+wrongType                  → 52:8 wrongType
+}                          → 52:17 }
+{                          → 53:7 {
+unknownName                → 53:8 unknownName
+}                          → 53:19 }
+{                          → 54:7 {
+missing                    → 54:8 missing
+}                          → 54:15 }
+{                          → 55:7 {
+called                     → 55:8 called
+}                          → 55:14 }
+{                          → 57:7 {
+eval                       → 59:9 eval
+(                          → 59:13 (
+null                       → 59:14 null
+)                          → 59:18 )
+}                          → 60:7 }
+</                         → 61:5 </
+div                        → 61:7 div
+>                          → 61:10 >
+)                          → 61:11 …
+;                          → 62:4 ;
+}                          → 63:1 }

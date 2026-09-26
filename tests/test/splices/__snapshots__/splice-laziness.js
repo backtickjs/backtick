@@ -12,8 +12,8 @@ function guard(fragment) {
   return cs.create(
     "3cvzb2rrvx0i4:13:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    '($0) => (flag) => {\n    if (flag) {\n        return $0();\n    }\n    return "skipped";\n}',
-    '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AAYY,QAAA,CAAC,IAAa,EAAE,EAAE;IAC1B,IAAI,IAAI,EAAE,CAAC;QACT,OAAO,IAAS,CAAC;IACnB,CAAC;IACD,OAAO,SAAS,CAAC;AACnB,CAAC"}',
+    '($splice0) => (flag) => {\n    if (flag) {\n        return $splice0();\n    }\n    return "skipped";\n}',
+    '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AAYY,cAAA,CAAC,IAAa,EAAE,EAAE;IAC1B,IAAI,IAAI,EAAE,CAAC;QACT,OAAO,UAAS,CAAC;IACnB,CAAC;IACD,OAAO,SAAS,CAAC;AACnB,CAAC"}',
   );
 }
 const ok = cs.create(
@@ -40,8 +40,8 @@ it("spliceLaziness", async (t) => {
           { kind: "splice", value: guard(broken), bindings: [] },
         ],
       },
-      "($0, $1) => ({\n    taken: $0()(true),\n    skipped: $1()(false),\n})",
-      '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AA8BO,YAAA,CAAC;IACF,KAAK,EAAE,IAAC,CAAY,IAAI,CAAC;IACzB,OAAO,EAAE,IAAC,CAAgB,KAAK,CAAC;CACjC,CAAC"}',
+      "($splice0, $splice1) => ({\n    taken: $splice0()(true),\n    skipped: $splice1()(false),\n})",
+      '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AA8BO,wBAAA,CAAC;IACF,KAAK,EAAE,UAAC,CAAY,IAAI,CAAC;IACzB,OAAO,EAAE,UAAC,CAAgB,KAAK,CAAC;CACjC,CAAC"}',
     ),
   );
 });

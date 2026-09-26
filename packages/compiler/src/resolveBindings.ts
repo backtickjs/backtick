@@ -58,7 +58,8 @@ export type BindingResolution = Map<ts.Identifier, string>;
 
 export interface ResolvedScopes {
   bindings: BindingResolution;
-  // `$i` is `params.get(script)[i]`: splices, then host tags, then captures
+  // `params.get(script)[i]` is the script's parameter `i` (`$splice<i>`,
+  // `$tag<i>`, `$capture<i>`): splices, then host tags, then captures
   params: Map<ClientScript, ResolvedParam[]>;
 }
 

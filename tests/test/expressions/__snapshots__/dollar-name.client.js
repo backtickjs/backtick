@@ -1,11 +1,11 @@
 // 10:10
-($0) => $0() + 2
+($splice0) => $splice0() + 2
 
 // 17:5
-($0) => {
+($splice0) => {
     const foo$ = 1;
-    return $0(foo$);
+    return $splice0(foo$);
 }
 
 // 19:20
-($0) => $0
+($capture0) => $capture0

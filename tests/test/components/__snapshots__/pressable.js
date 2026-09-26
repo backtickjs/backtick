@@ -15,8 +15,8 @@ async function Row() {
   return cs.create(
     "3sdwassvq0mne:16:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    '($0) => {\n    const count = $0()(0);\n    return (<button id="row" style="display: flex; gap: 8px" onclick={() => count[1](count[0]() + 1)}>\n        <span style="font-weight: 700">{count[0]() > 0 ? "\u2611" : "\u2610"}</span>\n        <span>{"pressed " + count[0]() + " times"}</span>\n      </button>);\n}',
-    '{"version":3,"file":"pressable.test.jsx","sourceRoot":"","sources":["components/pressable.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,MAAM,CACL,EAAE,CAAC,KAAK,CACR,KAAK,CAAC,yBAAyB,CAC/B,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAExC;QAAA,CAAC,IAAI,CAAC,KAAK,CAAC,kBAAkB,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,EAAE,IAAI,CACjE;QAAA,CAAC,IAAI,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ,CAAC,EAAE,IAAI,CAClD;MAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+    '($splice0) => {\n    const count = $splice0()(0);\n    return (<button id="row" style="display: flex; gap: 8px" onclick={() => count[1](count[0]() + 1)}>\n        <span style="font-weight: 700">{count[0]() > 0 ? "\u2611" : "\u2610"}</span>\n        <span>{"pressed " + count[0]() + " times"}</span>\n      </button>);\n}',
+    '{"version":3,"file":"pressable.test.jsx","sourceRoot":"","sources":["components/pressable.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,MAAM,CACL,EAAE,CAAC,KAAK,CACR,KAAK,CAAC,yBAAyB,CAC/B,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAExC;QAAA,CAAC,IAAI,CAAC,KAAK,CAAC,kBAAkB,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,EAAE,IAAI,CACjE;QAAA,CAAC,IAAI,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ,CAAC,EAAE,IAAI,CAClD;MAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
   );
 }
 describe("screen", () => {

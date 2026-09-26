@@ -1,17 +1,17 @@
-const $f1 = ($0, $1) => (b) => {
+const $cs0 = ($splice0, $splice1) => (b) => {
   let n = 0;
-  $0();
+  $splice0();
   if (b) {
-    $1()();
+    $splice1()();
     n = 1;
   }
   return n;
 };
-const $f2 = () => {
+const $cs1 = () => {
   const x = 1;
 };
-const $f3 = () => () => {
+const $cs2 = () => () => {
   let n = 0;
   n = 1;
 };
-export default () => $f1($f2, $f3);
+export default () => $cs0($cs1, $cs2);

@@ -11,8 +11,8 @@ async function ScriptRows() {
   const build = cs.create(
     "385ryajbwsmy3:11:16",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    "($0) => (label) => {\n    return { label: $0()(label) };\n}",
-    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAUmB,QAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,IAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
+    "($splice0) => (label) => {\n    return { label: $splice0()(label) };\n}",
+    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAUmB,cAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,UAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
   );
   return _jsx("span", {
     style: cs.create(
@@ -24,14 +24,14 @@ async function ScriptRows() {
     onclick: cs.create(
       "385ryajbwsmy3:18:15",
       { params: [{ kind: "splice", value: build, bindings: [] }] },
-      '($0) => () => {\n    const row = $0()("one");\n    row.label[1](row.label[0]() + " !!!");\n}',
-      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAiBkB,QAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,IAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
+      '($splice0) => () => {\n    const row = $splice0()("one");\n    row.label[1](row.label[0]() + " !!!");\n}',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAiBkB,cAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,UAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
     ),
     children: cs.create(
       "385ryajbwsmy3:23:7",
       { params: [{ kind: "splice", value: build, bindings: [] }] },
-      '($0) => $0()("one").label[0]()',
-      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAsBU,QAAA,IAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
+      '($splice0) => $splice0()("one").label[0]()',
+      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAsBU,cAAA,UAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
     ),
   });
 }

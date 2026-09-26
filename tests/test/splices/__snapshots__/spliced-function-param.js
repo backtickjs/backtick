@@ -25,8 +25,8 @@ it("splicedFunctionParam", async (t) => {
           },
         ],
       },
-      "($0) => {\n    const apply = (f) => f() + 1;\n    return apply($0());\n}",
-      '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["splices/spliced-function-param.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,IAAC,CAAc,CAAC;AAC/B,CAAC"}',
+      "($splice0) => {\n    const apply = (f) => f() + 1;\n    return apply($splice0());\n}",
+      '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["splices/spliced-function-param.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,UAAC,CAAc,CAAC;AAC/B,CAAC"}',
     ),
   );
 });

@@ -17,8 +17,8 @@ it("spliceOrder", async (t) => {
           { kind: "splice", value: ++count, bindings: [] },
         ],
       },
-      "($0, $1) => ({ a: $0(), b: $1() })",
-      '{"version":3,"file":"splice-order.test.jsx","sourceRoot":"","sources":["splices/splice-order.test.tsx"],"names":[],"mappings":"AAU0C,YAAA,CAAC,EAAE,CAAC,EAAE,IAAM,EAAE,CAAC,EAAE,IAAC,EAAW,CAAC"}',
+      "($splice0, $splice1) => ({ a: $splice0(), b: $splice1() })",
+      '{"version":3,"file":"splice-order.test.jsx","sourceRoot":"","sources":["splices/splice-order.test.tsx"],"names":[],"mappings":"AAU0C,wBAAA,CAAC,EAAE,CAAC,EAAE,UAAM,EAAE,CAAC,EAAE,UAAC,EAAW,CAAC"}',
     ),
   );
 });

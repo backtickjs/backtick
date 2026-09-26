@@ -10,8 +10,8 @@ function addOwnTotal(lhs, rhs) {
         { kind: "splice", value: rhs, bindings: [] },
       ],
     },
-    "($0, $1) => {\n    let total = 0;\n    total = total + $0();\n    total = total + $1();\n    return total;\n}",
-    '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAMY;IACR,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,KAAK,GAAG,KAAK,GAAG,IAAI,CAAC;IACrB,OAAO,KAAK,CAAC;AACf,CAAC"}',
+    "($splice0, $splice1) => {\n    let total = 0;\n    total = total + $splice0();\n    total = total + $splice1();\n    return total;\n}",
+    '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAMY;IACR,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,GAAG,KAAK,GAAG,UAAI,CAAC;IACrB,KAAK,GAAG,KAAK,GAAG,UAAI,CAAC;IACrB,OAAO,KAAK,CAAC;AACf,CAAC"}',
   );
 }
 it("shadowing", async (t) => {
@@ -28,8 +28,8 @@ it("shadowing", async (t) => {
               cs.create(
                 "3ujapqmnmm2ra:21:27",
                 { params: [{ kind: "capture", key: "total$3ujapqmnmm2ra$1" }] },
-                "($0) => $0",
-                '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAoB8B,QAAA,EAAK"}',
+                "($capture0) => $capture0",
+                '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAoB8B,eAAA,SAAK"}',
               ),
               100,
             ),
@@ -37,8 +37,8 @@ it("shadowing", async (t) => {
           },
         ],
       },
-      "($0) => {\n    const total = 1;\n    return $0(total);\n}",
-      '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAkBO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,SAAC,CAA8B;AACxC,CAAC"}',
+      "($splice0) => {\n    const total = 1;\n    return $splice0(total);\n}",
+      '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAkBO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,eAAC,CAA8B;AACxC,CAAC"}',
     ),
   );
 });

@@ -1,10 +1,10 @@
-const $f1 = ($0) => {
-  $0();
+const $cs0 = ($splice0) => {
+  $splice0();
 };
-const $f2 = ($0) => {
-  $0();
+const $cs1 = ($splice0) => {
+  $splice0();
 };
-const $f3 = () => {
+const $cs2 = () => {
   const x = 1;
 };
-export default () => $f1(() => $f2($f3));
+export default () => $cs0(() => $cs1($cs2));

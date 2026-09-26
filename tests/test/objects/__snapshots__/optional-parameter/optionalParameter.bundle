@@ -1,16 +1,16 @@
-const $f1 = ($0, $1, $2) => ({
-  named: $0()("hi"),
-  explicit: $0()(undefined),
-  omitted: $0()(),
-  supplied: $1()($2()),
-  fallback: $1()(undefined),
-  omittedCallback: $1()(),
+const $cs0 = ($splice0, $splice1, $splice2) => ({
+  named: $splice0()("hi"),
+  explicit: $splice0()(undefined),
+  omitted: $splice0()(),
+  supplied: $splice1()($splice2()),
+  fallback: $splice1()(undefined),
+  omittedCallback: $splice1()(),
 });
-const $f2 = () => (name) => {
+const $cs1 = () => (name) => {
   return name?.concat("!");
 };
-const $f3 = () => (cb) => {
+const $cs2 = () => (cb) => {
   return cb?.() ?? 0;
 };
-const $f4 = () => () => 2;
-export default () => $f1($f2, $f3, $f4);
+const $cs3 = () => () => 2;
+export default () => $cs0($cs1, $cs2, $cs3);

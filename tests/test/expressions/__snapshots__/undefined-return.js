@@ -14,8 +14,8 @@ it("undefinedReturn", async (t) => {
     cs.create(
       "2qb372nig0g3z:17:4",
       { params: [{ kind: "splice", value: lying, bindings: [] }] },
-      "($0) => {\n    const stored = $0();\n    const caught = $0()();\n    return 1;\n}",
-      '{"version":3,"file":"undefined-return.test.jsx","sourceRoot":"","sources":["expressions/undefined-return.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,MAAM,GAAG,IAAM,CAAC;IACtB,MAAM,MAAM,GAAG,IAAM,EAAE,CAAC;IACxB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+      "($splice0) => {\n    const stored = $splice0();\n    const caught = $splice0()();\n    return 1;\n}",
+      '{"version":3,"file":"undefined-return.test.jsx","sourceRoot":"","sources":["expressions/undefined-return.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,MAAM,GAAG,UAAM,CAAC;IACtB,MAAM,MAAM,GAAG,UAAM,EAAE,CAAC;IACxB,OAAO,CAAC,CAAC;AACX,CAAC"}',
     ),
   );
 });

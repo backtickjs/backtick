@@ -2,17 +2,17 @@ import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<h2>`);
-const $f1 = ($0) =>
-  _$createComponent($0, {
+const $cs0 = ($tag0) =>
+  _$createComponent($tag0, {
     person: {
       firstName: "ada",
     },
   });
 export default () =>
-  $f1(($0) =>
+  $cs0(($arg0) =>
     (() => {
       var _el$ = _tmpl$();
-      _$insert(_el$, () => $0.person.firstName);
+      _$insert(_el$, () => $arg0.person.firstName);
       return _el$;
     })(),
   );

@@ -1,8 +1,8 @@
-const $f1 = ($0) => ({
-  absent: $0()(null),
-  present: $0()(4),
+const $cs0 = ($splice0) => ({
+  absent: $splice0()(null),
+  present: $splice0()(4),
 });
-const $f2 = () => (n) => {
+const $cs1 = () => (n) => {
   return n === null ? 0 : n + 1;
 };
-export default () => $f1($f2);
+export default () => $cs0($cs1);

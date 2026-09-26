@@ -1,6 +1,6 @@
 // 13:10
-($0, $1) => {
-    const ids = $0()([1, 2, 3]);
+($splice0, $tag1) => {
+    const ids = $splice0()([1, 2, 3]);
     const swap = () => {
         const held = ids[0]();
         ids[1](held.with(0, held[2]).with(2, held[0]));
@@ -12,9 +12,9 @@
         <span onclick={swap}>swap</span>
         <span onclick={drop}>drop</span>
         <div>
-          <$1 each={ids[0]()}>
+          <$tag1 each={ids[0]()}>
             {(id) => <span>{"row " + id}</span>}
-          </$1>
+          </$tag1>
         </div>
       </div>);
 }

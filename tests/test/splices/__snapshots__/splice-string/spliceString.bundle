@@ -1,2 +1,2 @@
-const $f1 = ($0) => $0();
-export default () => $f1(() => 'say "hi"\n\\done');
+const $cs0 = ($splice0) => $splice0();
+export default () => $cs0(() => 'say "hi"\n\\done');

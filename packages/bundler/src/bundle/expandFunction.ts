@@ -23,7 +23,7 @@ const expansionByFunction = new WeakMap<object, Promise<Expansion>>();
  * client evaluates the call.
  *
  * A component is this and nothing more: one parameter it reads fields off, so
- * the holes are `$0.title` and the like, and the tag is a call.
+ * the holes are `$arg0.title` and the like, and the tag is a call.
  */
 export function expandFunction(
   value: (...args: Client<never>[]) => unknown,
@@ -40,7 +40,7 @@ export function expandFunction(
 async function buildExpansion(
   value: (...args: Client<never>[]) => unknown,
 ): Promise<Expansion> {
-  const params = Array.from({ length: value.length }, (_, at) => `$${at}`);
+  const params = Array.from({ length: value.length }, (_, at) => `$arg${at}`);
   const holes = params.map(createHole);
   const returned = value(...holes) as Spliceable | Promise<Spliceable>;
   return { params, returned: await returned };

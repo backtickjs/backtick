@@ -1,5 +1,5 @@
-const $f1 = () => {
+const $cs0 = () => {
   const greeting = "Hello";
   return greeting.concat(", ", "World").toUpperCase();
 };
-export default () => $f1();
+export default () => $cs0();

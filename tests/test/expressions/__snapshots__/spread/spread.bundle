@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const front = [1, 2];
   const back = [3];
   const none = [];
@@ -6,4 +6,4 @@ const $f1 = () => {
   const twice = [...all, ...all];
   return all.join(",") + "|" + twice.length;
 };
-export default () => $f1();
+export default () => $cs0();

@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   let total = 0;
   for (let i = 0; i < 3; i++) {
     total = total + i;
@@ -9,4 +9,4 @@ const $f1 = () => {
   const down = n--;
   return [total, before, after, down, n];
 };
-export default () => $f1();
+export default () => $cs0();

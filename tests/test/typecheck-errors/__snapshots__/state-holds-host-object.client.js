@@ -1,5 +1,5 @@
 // 16:16
-($0, $1) => {
-    const held = $0()($1());
-    held.set($1());
+($splice0, $splice1) => {
+    const held = $splice0()($splice1());
+    held.set($splice1());
 }

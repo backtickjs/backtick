@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const base = {
     a: 1,
     b: 2,
@@ -11,4 +11,4 @@ const $f1 = () => {
     a: 4,
   };
 };
-export default () => $f1();
+export default () => $cs0();

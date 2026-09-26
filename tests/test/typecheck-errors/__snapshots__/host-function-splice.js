@@ -13,6 +13,6 @@ export default cs.create(
       { kind: "tag", value: Card },
     ],
   },
-  '($0, $1) => {\n    const Heading = $0();\n    return <$1 title="tag"/>;\n}',
-  '{"version":3,"file":"host-function-splice.test.jsx","sourceRoot":"","sources":["typecheck-errors/host-function-splice.test.tsx"],"names":[],"mappings":"AASkB;IAEhB,MAAM,OAAO,GAAG,IAAK,CAAC;IACtB,OAAO,CAAC,EAAI,CAAC,KAAK,CAAC,KAAK,EAAG,CAAC;AAC9B,CAAC"}',
+  '($splice0, $tag1) => {\n    const Heading = $splice0();\n    return <$tag1 title="tag"/>;\n}',
+  '{"version":3,"file":"host-function-splice.test.jsx","sourceRoot":"","sources":["typecheck-errors/host-function-splice.test.tsx"],"names":[],"mappings":"AASkB;IAEhB,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,OAAO,CAAC,KAAI,CAAC,KAAK,CAAC,KAAK,EAAG,CAAC;AAC9B,CAAC"}',
 );

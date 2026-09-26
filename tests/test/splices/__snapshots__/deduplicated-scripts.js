@@ -16,8 +16,8 @@ it("deduplicatedScripts", async (t) => {
     cs.create(
       "2g4us6n03x6jl:10:47",
       { params: [{ kind: "splice", value: leaf, bindings: [] }] },
-      "($0) => ({ a: $0(), b: $0() })",
-      '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"AASkD,QAAA,CAAC,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC,EAAE,IAAK,EAAE,CAAC"}',
+      "($splice0) => ({ a: $splice0(), b: $splice0() })",
+      '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"AASkD,cAAA,CAAC,EAAE,CAAC,EAAE,UAAK,EAAE,CAAC,EAAE,UAAK,EAAE,CAAC"}',
     ),
   );
 });

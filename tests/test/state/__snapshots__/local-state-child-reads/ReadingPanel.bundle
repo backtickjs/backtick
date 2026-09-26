@@ -9,15 +9,15 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
   _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1) => {
-  const selected = $0()(0);
+const $cs0 = ($splice0, $tag1) => {
+  const selected = $splice0()(0);
   return (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     _el$2.$$click = () => selected[1](1);
     _$insert(
       _el$,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         id: 0,
         selected: selected,
       }),
@@ -25,7 +25,7 @@ const $f1 = ($0, $1) => {
     );
     _$insert(
       _el$,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         id: 1,
         selected: selected,
       }),
@@ -34,30 +34,33 @@ const $f1 = ($0, $1) => {
     return _el$;
   })();
 };
-const $f2 = ($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px";
-const $f3 = ($0, $1) => "row " + $0() + " of " + $1()[0]();
-const $f4 = ($0, $1, $2) => ($0()[0]() === $1() ? $2() : null);
+const $cs1 = ($splice0, $splice1) =>
+  "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px";
+const $cs2 = ($splice0, $splice1) =>
+  "row " + $splice0() + " of " + $splice1()[0]();
+const $cs3 = ($splice0, $splice1, $splice2) =>
+  $splice0()[0]() === $splice1() ? $splice2() : null;
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
-        ($0) =>
+        ($arg0) =>
           (() => {
             var _el$3 = _tmpl$2(),
               _el$4 = _el$3.firstChild;
             _$insert(_el$4, () =>
-              $f3(
-                () => $0.id,
-                () => $0.selected,
+              $cs2(
+                () => $arg0.id,
+                () => $arg0.selected,
               ),
             );
             _$insert(
               _el$3,
               () =>
-                $f4(
-                  () => $0.selected,
-                  () => $0.id,
+                $cs3(
+                  () => $arg0.selected,
+                  () => $arg0.id,
                   () => _tmpl$3(),
                 ),
               null,
@@ -65,9 +68,9 @@ export default () =>
             _$effect((_$p) =>
               _$style(
                 _el$4,
-                $f2(
-                  () => $0.selected,
-                  () => $0.id,
+                $cs1(
+                  () => $arg0.selected,
+                  () => $arg0.id,
                 ),
                 _$p,
               ),

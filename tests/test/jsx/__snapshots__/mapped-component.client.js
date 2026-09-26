@@ -1,8 +1,8 @@
 // 26:18
-($0) => $0()
+($splice0) => $splice0()
 
 // 27:10
-($0) => (row) => $0(row)
+($splice0) => (row) => $splice0(row)
 
 // 27:40
-($0) => "row " + $0
+($capture0) => "row " + $capture0

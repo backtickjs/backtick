@@ -1,16 +1,16 @@
 // 11:17
-($0) => (label) => {
-    return { label: $0()(label) };
+($splice0) => (label) => {
+    return { label: $splice0()(label) };
 }
 
 // 17:14
 () => "font-size: 16px"
 
 // 18:16
-($0) => () => {
-    const row = $0()("one");
+($splice0) => () => {
+    const row = $splice0()("one");
     row.label[1](row.label[0]() + " !!!");
 }
 
 // 23:8
-($0) => $0()("one").label[0]()
+($splice0) => $splice0()("one").label[0]()

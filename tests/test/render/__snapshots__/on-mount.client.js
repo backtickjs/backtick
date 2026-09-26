@@ -1,17 +1,17 @@
 // 29:9
-($0, $1, $2) => {
-    const count = $0()(0);
-    $1()(() => {
-        $2().console.log();
+($splice0, $splice1, $splice2) => {
+    const count = $splice0()(0);
+    $splice1()(() => {
+        $splice2().console.log();
         count[1](count[0]() + 1);
     });
     return <p>{"mounted " + count[0]()}</p>;
 }
 
 // 45:7
-($0, $1) => {
-    const said = $0()("not yet");
-    return (<button onclick={() => $1()(() => said[1]("ran"))}>
+($splice0, $splice1) => {
+    const said = $splice0()("not yet");
+    return (<button onclick={() => $splice1()(() => said[1]("ran"))}>
             {said[0]()}
           </button>);
 }

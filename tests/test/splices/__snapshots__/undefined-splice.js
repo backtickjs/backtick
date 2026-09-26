@@ -14,8 +14,8 @@ describe("a spliced undefined", () => {
         cs.create(
           "2i00dqahsuxy4:13:32",
           { params: [{ kind: "splice", value: nothing, bindings: [] }] },
-          "($0) => $0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAYmC,QAAA,IAAQ"}',
+          "($splice0) => $splice0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAYmC,cAAA,UAAQ"}',
         ),
       ),
       undefined,
@@ -27,8 +27,8 @@ describe("a spliced undefined", () => {
       cs.create(
         "2i00dqahsuxy4:18:35",
         { params: [{ kind: "splice", value: data, bindings: [] }] },
-        "($0) => $0()",
-        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiBsC,QAAA,IAAK"}',
+        "($splice0) => $splice0()",
+        '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiBsC,cAAA,UAAK"}',
       ),
     );
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
@@ -41,8 +41,8 @@ describe("a spliced undefined", () => {
         cs.create(
           "2i00dqahsuxy4:25:36",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
-          "($0) => $0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwBuC,QAAA,IAAK"}',
+          "($splice0) => $splice0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwBuC,cAAA,UAAK"}',
         ),
       ),
       [1, undefined, 3],

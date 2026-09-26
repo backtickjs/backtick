@@ -23,14 +23,14 @@ const MODULE_ID = "bundle.jsx";
  * A bundle tree as a module whose default export draws the tree's root: a
  * function, so the client calls it where what it creates is owned.
  *
- * The module is JSX: its imports, each entry, and the root. The adapter's
+ * The module is JSX: its imports, each script, and the root. The adapter's
  * transform compiles it as the framework compiles any module; its imports are
  * the client's to resolve, through an import map in a page.
  *
  * With `sourceMap`, the bundle ends with its map inline, into the host files
- * its scripts were written in: each entry's own map, moved to where the entry
- * stands in the module, then through the transform's. What the bundler wrote
- * around the entries maps to nothing, since no source wrote it.
+ * its scripts were written in: each script's own map, moved to where the
+ * script stands in the module, then through the transform's. What the bundler
+ * wrote around the scripts maps to nothing, since no source wrote it.
  */
 export function printBundle<T extends ClientUnknown>(
   tree: BundleTree,
@@ -46,7 +46,7 @@ export function printBundle<T extends ClientUnknown>(
   if (names.drawsScript) {
     module.line("const $Script = (props) => props.run();");
   }
-  for (const [label, script] of tree.functions) {
+  for (const [label, script] of tree.scripts) {
     module.write(`const ${label} = `);
     module.script(script);
     module.line(";");
@@ -63,7 +63,7 @@ export function printBundle<T extends ClientUnknown>(
   return `${compiled.code}\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,${base64(map)}` as Bundle<T>;
 }
 
-// The module's code as it is written, and a map of the entries in it.
+// The module's code as it is written, and a map of the scripts in it.
 class ModuleWriter {
   code = "";
   #line = 0;

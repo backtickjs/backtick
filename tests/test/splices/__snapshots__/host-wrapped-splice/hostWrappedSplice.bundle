@@ -1,18 +1,18 @@
-const $f1 = ($0, $1) => $0() + $1();
-const $f2 = ($0, $1) => {
-  const outer = $0();
-  return $1(outer);
+const $cs0 = ($splice0, $splice1) => $splice0() + $splice1();
+const $cs1 = ($splice0, $splice1) => {
+  const outer = $splice0();
+  return $splice1(outer);
 };
-const $f3 = () => 1;
-const $f4 = ($0) => $0() + 1;
-const $f5 = ($0, $1) => {
+const $cs2 = () => 1;
+const $cs3 = ($splice0) => $splice0() + 1;
+const $cs4 = ($splice0, $capture1) => {
   const middle = 10;
-  return middle + $0($1);
+  return middle + $splice0($capture1);
 };
-const $f6 = ($0) => $0;
-const $f7 = () => 2;
+const $cs5 = ($capture0) => $capture0;
+const $cs6 = () => 2;
 export default () =>
-  $f1(
-    () => $f2($f3, (outer) => $f4(() => $f5($f6, outer))),
-    () => $f2($f7, (outer) => $f4(() => $f5($f6, outer))),
+  $cs0(
+    () => $cs1($cs2, (outer) => $cs3(() => $cs4($cs5, outer))),
+    () => $cs1($cs6, (outer) => $cs3(() => $cs4($cs5, outer))),
   );

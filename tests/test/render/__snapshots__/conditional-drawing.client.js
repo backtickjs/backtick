@@ -1,8 +1,8 @@
 // 32:10
-($0, $1, $2) => {
-    const shown = $0()(false);
-    const started = $1().setTimeout(() => {
-        if ($2()()) {
+($splice0, $splice1, $splice2) => {
+    const shown = $splice0()(false);
+    const started = $splice1().setTimeout(() => {
+        if ($splice2()()) {
             shown[1](true);
         }
     }, 0);
@@ -10,12 +10,12 @@
 }
 
 // 45:28
-($0, $1) => {
-    const builds = $0()(0);
+($splice0, $tag1) => {
+    const builds = $splice0()(0);
     return (<div>
       <span>{"builds " + builds[0]()}</span>
       <section>
-        <$1 again={() => {
+        <$tag1 again={() => {
             builds[1](builds[0]() + 1);
             return builds[0]() < 5;
         }}/>

@@ -1,12 +1,12 @@
-const $f1 = ($0) => ({
-  missing: $0()(null),
-  present: $0()("hi"),
+const $cs0 = ($splice0) => ({
+  missing: $splice0()(null),
+  present: $splice0()("hi"),
   bare: null,
 });
-const $f2 = () => (value) => {
+const $cs1 = () => (value) => {
   if (value === null) {
     return "-";
   }
   return value;
 };
-export default () => $f1($f2);
+export default () => $cs0($cs1);

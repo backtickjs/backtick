@@ -11,13 +11,13 @@
 () => null === undefined
 
 // 24:22
-($0, $1) => {
+($splice0, $splice1) => {
     const names = ["a"];
     return [
-        $0() === undefined,
-        $0() !== null,
-        $1() === null,
-        $1() !== undefined,
+        $splice0() === undefined,
+        $splice0() !== null,
+        $splice1() === null,
+        $splice1() !== undefined,
         names[1] === undefined,
         names[1] !== null,
     ];

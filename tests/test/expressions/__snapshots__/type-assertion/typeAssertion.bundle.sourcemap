@@ -1,29 +1,29 @@
-$0       → expressions/type-assertion.test.tsx 19:8 {…
- => {    → expressions/type-assertion.test.tsx 19:8 {…
-const    → expressions/type-assertion.test.tsx 20:7 const 
-page     → expressions/type-assertion.test.tsx 20:13 page
- =       → expressions/type-assertion.test.tsx 20:17  = 
-JSON     → expressions/type-assertion.test.tsx 20:20 JSON
-.        → expressions/type-assertion.test.tsx 20:24 .
-parse    → expressions/type-assertion.test.tsx 20:25 parse
-(        → expressions/type-assertion.test.tsx 20:30 (
-$0       → expressions/type-assertion.test.tsx 20:31 $answered)…
-()       → expressions/type-assertion.test.tsx 20:31 $answered)…
-)        → expressions/type-assertion.test.tsx 20:40 )
-;        → expressions/type-assertion.test.tsx 20:78 ;
-return   → expressions/type-assertion.test.tsx 22:7 return 
-page     → expressions/type-assertion.test.tsx 22:14 page
-.        → expressions/type-assertion.test.tsx 22:18 .
-rows     → expressions/type-assertion.test.tsx 22:19 rows
-[        → expressions/type-assertion.test.tsx 22:23 [
-0        → expressions/type-assertion.test.tsx 22:24 0
-]        → expressions/type-assertion.test.tsx 22:25 ]
- +       → expressions/type-assertion.test.tsx 22:26  + 
-" of "   → expressions/type-assertion.test.tsx 22:29 " of "
- +       → expressions/type-assertion.test.tsx 22:35  + 
-page     → expressions/type-assertion.test.tsx 22:38 page
-.        → expressions/type-assertion.test.tsx 22:42 .
-count    → expressions/type-assertion.test.tsx 22:43 count
-;        → expressions/type-assertion.test.tsx 22:48 ;
-}        → expressions/type-assertion.test.tsx 23:5 }
-;        → expressions/type-assertion.test.tsx 23:6 `,…
+$splice0  → expressions/type-assertion.test.tsx 19:8 {…
+ => {     → expressions/type-assertion.test.tsx 19:8 {…
+const     → expressions/type-assertion.test.tsx 20:7 const 
+page      → expressions/type-assertion.test.tsx 20:13 page
+ =        → expressions/type-assertion.test.tsx 20:17  = 
+JSON      → expressions/type-assertion.test.tsx 20:20 JSON
+.         → expressions/type-assertion.test.tsx 20:24 .
+parse     → expressions/type-assertion.test.tsx 20:25 parse
+(         → expressions/type-assertion.test.tsx 20:30 (
+$splice0  → expressions/type-assertion.test.tsx 20:31 $answered)…
+()        → expressions/type-assertion.test.tsx 20:31 $answered)…
+)         → expressions/type-assertion.test.tsx 20:40 )
+;         → expressions/type-assertion.test.tsx 20:78 ;
+return    → expressions/type-assertion.test.tsx 22:7 return 
+page      → expressions/type-assertion.test.tsx 22:14 page
+.         → expressions/type-assertion.test.tsx 22:18 .
+rows      → expressions/type-assertion.test.tsx 22:19 rows
+[         → expressions/type-assertion.test.tsx 22:23 [
+0         → expressions/type-assertion.test.tsx 22:24 0
+]         → expressions/type-assertion.test.tsx 22:25 ]
+ +        → expressions/type-assertion.test.tsx 22:26  + 
+" of "    → expressions/type-assertion.test.tsx 22:29 " of "
+ +        → expressions/type-assertion.test.tsx 22:35  + 
+page      → expressions/type-assertion.test.tsx 22:38 page
+.         → expressions/type-assertion.test.tsx 22:42 .
+count     → expressions/type-assertion.test.tsx 22:43 count
+;         → expressions/type-assertion.test.tsx 22:48 ;
+}         → expressions/type-assertion.test.tsx 23:5 }
+;         → expressions/type-assertion.test.tsx 23:6 `,…

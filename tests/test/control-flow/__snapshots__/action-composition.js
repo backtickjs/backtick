@@ -12,8 +12,8 @@ const effects = cs.create(
 const composed = cs.create(
   "3q2gz79xhvvfp:12:31",
   { params: [{ kind: "splice", value: effects, bindings: [] }] },
-  "($0) => {\n    $0();\n}",
-  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAWkC;IAChC,IAAQ,CAAC;AACX,CAAC"}',
+  "($splice0) => {\n    $splice0();\n}",
+  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAWkC;IAChC,UAAQ,CAAC;AACX,CAAC"}',
 );
 it("actionComposition", async (t) => {
   await snapshotCase(
@@ -22,8 +22,8 @@ it("actionComposition", async (t) => {
     cs.create(
       "3q2gz79xhvvfp:20:4",
       { params: [{ kind: "splice", value: composed, bindings: [] }] },
-      "($0) => {\n    $0();\n}",
-      '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAmBO;IACD,IAAS,CAAC;AACZ,CAAC"}',
+      "($splice0) => {\n    $splice0();\n}",
+      '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAmBO;IACD,UAAS,CAAC;AACZ,CAAC"}',
     ),
   );
 });

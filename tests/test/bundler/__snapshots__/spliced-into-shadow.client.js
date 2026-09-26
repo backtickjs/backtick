@@ -1,12 +1,12 @@
 // 34:7
-($0, $1) => {
+($splice0, $splice1) => {
     const total = 1;
-    const first = $0(total);
+    const first = $splice0(total);
     {
         const total = 2;
-        return first + total + $1();
+        return first + total + $splice1();
     }
 }
 
 // 36:30
-($0) => $0
+($capture0) => $capture0

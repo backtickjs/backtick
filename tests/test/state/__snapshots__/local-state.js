@@ -14,8 +14,8 @@ async function Stepper() {
   return cs.create(
     "2d5qp9itzo9r0:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    '($0) => {\n    const size = $0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n}',
-    '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["state/local-state.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,IAAI,GAAG,IAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    '($splice0) => {\n    const size = $splice0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n}',
+    '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["state/local-state.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
   );
 }
 describe("local state", () => {

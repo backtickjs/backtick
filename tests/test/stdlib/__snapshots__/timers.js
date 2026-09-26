@@ -25,8 +25,8 @@ it("timers", async (t) => {
     cs.create(
       "18988aj10wskx:26:4",
       { params: [{ kind: "splice", value: window, bindings: [] }] },
-      "($0) => {\n    const stop = $0().clearInterval;\n    const repeating = $0().setInterval(() => 0, 1000);\n    stop(repeating);\n    $0().clearTimeout($0().setTimeout(() => 0, 1000));\n}",
-      '{"version":3,"file":"timers.test.jsx","sourceRoot":"","sources":["stdlib/timers.test.tsx"],"names":[],"mappings":"AAyBO;IACD,MAAM,IAAI,GAAG,IAAO,CAAC,aAAa,CAAC;IACnC,MAAM,SAAS,GAAG,IAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC;IACrD,IAAI,CAAC,SAAS,CAAC,CAAC;IAChB,IAAO,CAAC,YAAY,CAAC,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC;AAC1D,CAAC"}',
+      "($splice0) => {\n    const stop = $splice0().clearInterval;\n    const repeating = $splice0().setInterval(() => 0, 1000);\n    stop(repeating);\n    $splice0().clearTimeout($splice0().setTimeout(() => 0, 1000));\n}",
+      '{"version":3,"file":"timers.test.jsx","sourceRoot":"","sources":["stdlib/timers.test.tsx"],"names":[],"mappings":"AAyBO;IACD,MAAM,IAAI,GAAG,UAAO,CAAC,aAAa,CAAC;IACnC,MAAM,SAAS,GAAG,UAAO,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC;IACrD,IAAI,CAAC,SAAS,CAAC,CAAC;IAChB,UAAO,CAAC,YAAY,CAAC,UAAO,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC;AAC1D,CAAC"}',
     ),
   );
 });

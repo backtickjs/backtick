@@ -9,8 +9,8 @@ async function Row({ count }) {
   return cs.create(
     "1zsasunacegt:15:9",
     { params: [{ kind: "splice", value: count, bindings: [] }] },
-    '($0) => <em>{"rows " + $0()}</em>',
-    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAcY,QAAA,CAAC,EAAE,CAAC,CAAC,OAAO,GAAG,IAAM,CAAC,EAAE,EAAE,CAAC"}',
+    '($splice0) => <em>{"rows " + $splice0()}</em>',
+    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAcY,cAAA,CAAC,EAAE,CAAC,CAAC,OAAO,GAAG,UAAM,CAAC,EAAE,EAAE,CAAC"}',
   );
 }
 async function Nothing() {
@@ -32,16 +32,16 @@ const rows = await bundler.run(
             count: cs.create(
               "1zsasunacegt:23:50",
               { params: [{ kind: "capture", key: "props$1zsasunacegt$0" }] },
-              "($0) => $0.count",
-              '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAsBqD,QAAA,EAAK,CAAC,KAAK"}',
+              "($capture0) => $capture0.count",
+              '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAsBqD,eAAA,SAAK,CAAC,KAAK"}',
             ),
           }),
           bindings: ["props$1zsasunacegt$0"],
         },
       ],
     },
-    "($0) => (props) => $0(props)",
-    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAsBK,QAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,SAAC"}',
+    "($splice0) => (props) => $splice0(props)",
+    '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AAsBK,cAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,eAAC"}',
   ),
   { transform },
 );
@@ -56,6 +56,6 @@ export default cs.create(
       { kind: "splice", value: empty, bindings: [] },
     ],
   },
-  '($0, $1) => {\n    const Rows = eval($0());\n    const Empty = eval($1());\n    const wrongType = <Rows count={"one"}/>;\n    const unknownName = <Rows nope={1}/>;\n    const missing = <Rows />;\n    const called = <Empty count={1}/>;\n    return (<div>\n      \n      <Rows count={1}/>\n      {Empty}\n      {wrongType}\n      {unknownName}\n      {missing}\n      {called}\n      \n      {eval(null)}\n    </div>);\n}',
-  '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AA8BkB;IAChB,MAAM,IAAI,GAAG,IAAI,CAAC,IAAK,CAAC,CAAC;IACzB,MAAM,KAAK,GAAG,IAAI,CAAC,IAAM,CAAC,CAAC;IAI3B,MAAM,SAAS,GAAG,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,EAAG,CAAC;IAEzC,MAAM,WAAW,GAAG,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEtC,MAAM,OAAO,GAAG,CAAC,IAAI,CAAC,AAAD,EAAG,CAAC;IAIzB,MAAM,MAAM,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEnC,OAAO,CACL,CAAC,GAAG,CACF;MACA;MAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EACf;MAAA,CAAC,KAAK,CACN;MAAA,CAAC,SAAS,CACV;MAAA,CAAC,WAAW,CACZ;MAAA,CAAC,OAAO,CACR;MAAA,CAAC,MAAM,CACP;MACA;MAAA,CAEE,IAAI,CAAC,IAAI,CACX,CACF;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  '($splice0, $splice1) => {\n    const Rows = eval($splice0());\n    const Empty = eval($splice1());\n    const wrongType = <Rows count={"one"}/>;\n    const unknownName = <Rows nope={1}/>;\n    const missing = <Rows />;\n    const called = <Empty count={1}/>;\n    return (<div>\n      \n      <Rows count={1}/>\n      {Empty}\n      {wrongType}\n      {unknownName}\n      {missing}\n      {called}\n      \n      {eval(null)}\n    </div>);\n}',
+  '{"version":3,"file":"eval-props.test.jsx","sourceRoot":"","sources":["typecheck-errors/eval-props.test.tsx"],"names":[],"mappings":"AA8BkB;IAChB,MAAM,IAAI,GAAG,IAAI,CAAC,UAAK,CAAC,CAAC;IACzB,MAAM,KAAK,GAAG,IAAI,CAAC,UAAM,CAAC,CAAC;IAI3B,MAAM,SAAS,GAAG,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,EAAG,CAAC;IAEzC,MAAM,WAAW,GAAG,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEtC,MAAM,OAAO,GAAG,CAAC,IAAI,CAAC,AAAD,EAAG,CAAC;IAIzB,MAAM,MAAM,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC;IAEnC,OAAO,CACL,CAAC,GAAG,CACF;MACA;MAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EACf;MAAA,CAAC,KAAK,CACN;MAAA,CAAC,SAAS,CACV;MAAA,CAAC,WAAW,CACZ;MAAA,CAAC,OAAO,CACR;MAAA,CAAC,MAAM,CACP;MACA;MAAA,CAEE,IAAI,CAAC,IAAI,CACX,CACF;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
 );

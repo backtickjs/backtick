@@ -22,8 +22,8 @@ it("scriptFragment", async (t) => {
       children: cs.create(
         "3pjkiwnta5gua:21:48",
         { params: [{ kind: "splice", value: listed, bindings: [] }] },
-        '($0) => $0()("x")',
-        '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["jsx/script-fragment.test.tsx"],"names":[],"mappings":"AAoBmD,QAAA,IAAO,CAAC,GAAG,CAAC"}',
+        '($splice0) => $splice0()("x")',
+        '{"version":3,"file":"script-fragment.test.jsx","sourceRoot":"","sources":["jsx/script-fragment.test.tsx"],"names":[],"mappings":"AAoBmD,cAAA,UAAO,CAAC,GAAG,CAAC"}',
       ),
     }),
   );

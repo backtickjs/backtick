@@ -1,5 +1,5 @@
 // 20:33
-($0) => $0()()
+($splice0) => $splice0()()
 
 // 26:33
-($0) => $0().get("greeting")
+($splice0) => $splice0().get("greeting")

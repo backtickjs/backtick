@@ -1,14 +1,14 @@
-const $f1 = ($0) => {
+const $cs0 = ($splice0) => {
   const base = 10;
-  return $0(base);
+  return $splice0(base);
 };
-const $f2 = ($0) => {
+const $cs1 = ($splice0) => {
   const base = 1;
-  return base + $0();
+  return base + $splice0();
 };
-const $f3 = ($0) => {
+const $cs2 = ($splice0) => {
   const base = 2;
-  return base * $0();
+  return base * $splice0();
 };
-const $f4 = ($0) => $0;
-export default () => $f1((base) => $f2(() => $f3(() => $f4(base))));
+const $cs3 = ($capture0) => $capture0;
+export default () => $cs0((base) => $cs1(() => $cs2(() => $cs3(base))));

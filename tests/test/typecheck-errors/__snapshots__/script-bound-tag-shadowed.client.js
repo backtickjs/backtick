@@ -1,14 +1,14 @@
 // 5:16
-($0) => {
+($splice0) => {
     const Badge = (p) => <b>{"n " + p.n}</b>;
-    return $0();
+    return $splice0();
 }
 
 // 7:12
-($0) => {
+($splice0) => {
     const Badge = 5;
-    return $0(Badge);
+    return $splice0(Badge);
 }
 
 // 10:14
-($0) => <$0 n={1}/>
+($capture0) => <$capture0 n={1}/>

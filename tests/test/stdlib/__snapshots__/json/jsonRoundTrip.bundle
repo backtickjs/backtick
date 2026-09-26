@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const numbers = JSON.stringify([1, 2, 3]);
   const text = JSON.stringify("hi");
   const flag = JSON.stringify(true);
@@ -21,4 +21,4 @@ const $f1 = () => {
     JSON.stringify(JSON.parse(held))
   );
 };
-export default () => $f1();
+export default () => $cs0();

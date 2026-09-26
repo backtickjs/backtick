@@ -4,8 +4,8 @@
 }
 
 // 16:5
-($0) => ({
-    present: $0()({ label: "a", inner: { z: 3 } }),
-    partial: $0()({ label: "b", inner: {} }),
-    omitted: $0()({ label: "c" }),
+($splice0) => ({
+    present: $splice0()({ label: "a", inner: { z: 3 } }),
+    partial: $splice0()({ label: "b", inner: {} }),
+    omitted: $splice0()({ label: "c" }),
 })

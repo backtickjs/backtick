@@ -37,8 +37,8 @@ it("optionalParameter", async (t) => {
           { kind: "splice", value: double, bindings: [] },
         ],
       },
-      '($0, $1, $2) => ({\n    named: $0()("hi"),\n    explicit: $0()(undefined),\n    omitted: $0()(),\n    supplied: $1()($2()),\n    fallback: $1()(undefined),\n    omittedCallback: $1()(),\n})',
-      '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["objects/optional-parameter.test.tsx"],"names":[],"mappings":"AAuBO,gBAAA,CAAC;IACF,KAAK,EAAE,IAAM,CAAC,IAAI,CAAC;IACnB,QAAQ,EAAE,IAAM,CAAC,SAAS,CAAC;IAC3B,OAAO,EAAE,IAAM,EAAE;IACjB,QAAQ,EAAE,IAAY,CAAC,IAAO,CAAC;IAC/B,QAAQ,EAAE,IAAY,CAAC,SAAS,CAAC;IACjC,eAAe,EAAE,IAAY,EAAE;CAChC,CAAC"}',
+      '($splice0, $splice1, $splice2) => ({\n    named: $splice0()("hi"),\n    explicit: $splice0()(undefined),\n    omitted: $splice0()(),\n    supplied: $splice1()($splice2()),\n    fallback: $splice1()(undefined),\n    omittedCallback: $splice1()(),\n})',
+      '{"version":3,"file":"optional-parameter.test.jsx","sourceRoot":"","sources":["objects/optional-parameter.test.tsx"],"names":[],"mappings":"AAuBO,kCAAA,CAAC;IACF,KAAK,EAAE,UAAM,CAAC,IAAI,CAAC;IACnB,QAAQ,EAAE,UAAM,CAAC,SAAS,CAAC;IAC3B,OAAO,EAAE,UAAM,EAAE;IACjB,QAAQ,EAAE,UAAY,CAAC,UAAO,CAAC;IAC/B,QAAQ,EAAE,UAAY,CAAC,SAAS,CAAC;IACjC,eAAe,EAAE,UAAY,EAAE;CAChC,CAAC"}',
     ),
   );
 });

@@ -25,8 +25,8 @@ it("spliceImportedValue", async (t) => {
     cs.create(
       "3rujjqwiut9zl:23:47",
       { params: [{ kind: "splice", value: FRAGMENT_TAG, bindings: [] }] },
-      "($0) => $0()",
-      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splices/splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,QAAA,IAAa"}',
+      "($splice0) => $splice0()",
+      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splices/splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,cAAA,UAAa"}',
     ),
   );
 });

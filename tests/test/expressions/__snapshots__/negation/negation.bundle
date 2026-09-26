@@ -1,6 +1,6 @@
-const $f1 = () => (count) => {
+const $cs0 = () => (count) => {
   const floor = -1;
   const step = -count;
   return floor + step + -2;
 };
-export default () => $f1();
+export default () => $cs0();

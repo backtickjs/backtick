@@ -7,8 +7,8 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<b>`),
   _tmpl$3 = /*#__PURE__*/ _$template(`<section>`);
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
-const $f1 = ($0, $1, $2, $3, $4) => {
-  const count = $0()(0);
+const $cs0 = ($splice0, $splice1, $splice2, $splice3, $splice4) => {
+  const count = $splice0()(0);
   const Badge = (props) =>
     (() => {
       var _el$ = _tmpl$();
@@ -18,69 +18,69 @@ const $f1 = ($0, $1, $2, $3, $4) => {
   return (() => {
     var _el$2 = _tmpl$2(),
       _el$3 = _el$2.firstChild;
-    _$insert(_el$2, () => $1(count, Badge), _el$3);
-    _$insert(_el$2, () => $2(count, Badge), _el$3);
-    _$insert(_el$2, () => $3(count, Badge), _el$3);
-    _$insert(_el$2, () => $4(count, Badge), _el$3);
+    _$insert(_el$2, () => $splice1(count, Badge), _el$3);
+    _$insert(_el$2, () => $splice2(count, Badge), _el$3);
+    _$insert(_el$2, () => $splice3(count, Badge), _el$3);
+    _$insert(_el$2, () => $splice4(count, Badge), _el$3);
     _el$3.$$click = () => count[1](count[0]() + 1);
     return _el$2;
   })();
 };
-const $f2 = ($0, $1) =>
-  _$createComponent($0, {
+const $cs1 = ($capture0, $capture1) =>
+  _$createComponent($capture0, {
     get n() {
-      return $1[0]();
+      return $capture1[0]();
     },
   });
-const $f3 = ($0, $1, $2) => {
+const $cs2 = ($splice0, $capture1, $capture2) => {
   const skipped = 10;
-  return $0($1, $2);
+  return $splice0($capture1, $capture2);
 };
-const $f4 = ($0, $1) =>
-  _$createComponent($0, {
+const $cs3 = ($capture0, $capture1) =>
+  _$createComponent($capture0, {
     get n() {
-      return $1[0]() + 100;
+      return $capture1[0]() + 100;
     },
   });
-const $f5 = ($0, $1) =>
-  _$createComponent($0, {
+const $cs4 = ($capture0, $capture1) =>
+  _$createComponent($capture0, {
     get n() {
-      return $1[0]() + 1000;
+      return $capture1[0]() + 1000;
     },
   });
-const $f6 = ($0, $1, $2) =>
-  _$createComponent($0, {
+const $cs5 = ($tag0, $capture1, $capture2) =>
+  _$createComponent($tag0, {
     each: [1, 2],
     children: (m) =>
-      _$createComponent($1, {
+      _$createComponent($capture1, {
         get n() {
-          return m * $2[0]();
+          return m * $capture2[0]();
         },
       }),
   });
 export default () =>
-  $f1(
+  $cs0(
     () => $i0,
-    (count, Badge) => $f2(Badge, count),
-    (count, Badge) => $f3($f4, Badge, count),
+    (count, Badge) => $cs1(Badge, count),
+    (count, Badge) => $cs2($cs3, Badge, count),
     (count, Badge) =>
       (() => {
         var _el$4 = _tmpl$3();
-        _$insert(_el$4, () => $f5(Badge, count));
+        _$insert(_el$4, () => $cs4(Badge, count));
         return _el$4;
       })(),
     (count, Badge) =>
-      $f6(
-        ($0) =>
+      $cs5(
+        ($arg0) =>
           _$createComponent($i1, {
             get each() {
-              return $0.each;
+              return $arg0.each;
             },
             get fallback() {
-              return $0.fallback;
+              return $arg0.fallback;
             },
             get children() {
-              return $0.children;
+              return $arg0.children;
             },
           }),
         Badge,

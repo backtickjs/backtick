@@ -2,16 +2,16 @@ import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
 import { addEventListener as _$addEventListener } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-const $f1 = ($0) => () => {
+const $cs0 = ($splice0) => () => {
   const x = 1;
-  return $0(x);
+  return $splice0(x);
 };
-const $f2 = ($0) => () => $0;
+const $cs1 = ($capture0) => () => $capture0;
 export default () =>
-  $f1((x) =>
+  $cs0((x) =>
     (() => {
       var _el$ = _tmpl$();
-      _$addEventListener(_el$, "click", $f2(x), true);
+      _$addEventListener(_el$, "click", $cs1(x), true);
       return _el$;
     })(),
   );

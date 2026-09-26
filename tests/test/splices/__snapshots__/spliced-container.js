@@ -30,8 +30,8 @@ it("splicedContainer", async (t) => {
     cs.create(
       "3hhvicr225pmx:21:44",
       { params: [{ kind: "splice", value: point, bindings: [] }] },
-      "($0) => $0().x + 1",
-      '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAoB+C,QAAA,IAAM,CAAC,CAAC,GAAG,CAAC"}',
+      "($splice0) => $splice0().x + 1",
+      '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAoB+C,cAAA,UAAM,CAAC,CAAC,GAAG,CAAC"}',
     ),
   );
 });

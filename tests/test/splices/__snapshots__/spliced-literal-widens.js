@@ -33,8 +33,8 @@ it("splicedLiteralWidens", async (t) => {
           { kind: "splice", value: Color.Blue, bindings: [] },
         ],
       },
-      "($0, $1, $2, $3) => {\n    const n = $0()($1());\n    n[1](6);\n    const c = $0()($2());\n    c[1]($3());\n}",
-      '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["splices/spliced-literal-widens.test.tsx"],"names":[],"mappings":"AA2BO;IACD,MAAM,CAAC,GAAG,IAAa,CAAC,IAAK,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACR,MAAM,CAAC,GAAG,IAAa,CAAC,IAAC,CAAY,CAAC;IACtC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAC,CAAa,CAAC;AACtB,CAAC"}',
+      "($splice0, $splice1, $splice2, $splice3) => {\n    const n = $splice0()($splice1());\n    n[1](6);\n    const c = $splice0()($splice2());\n    c[1]($splice3());\n}",
+      '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["splices/spliced-literal-widens.test.tsx"],"names":[],"mappings":"AA2BO;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,UAAK,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACR,MAAM,CAAC,GAAG,UAAa,CAAC,UAAC,CAAY,CAAC;IACtC,CAAC,CAAC,CAAC,CAAC,CAAC,UAAC,CAAa,CAAC;AACtB,CAAC"}',
     ),
   );
 });

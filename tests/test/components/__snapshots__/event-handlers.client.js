@@ -1,6 +1,6 @@
 // 16:5
-($0) => {
-    const said = $0()("");
+($splice0) => {
+    const said = $splice0()("");
     return (<form onsubmit={(event) => {
             event.preventDefault();
             said[1](event.type + " " + event.cancelable);

@@ -19,7 +19,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(
     false,
   );
 import { For as $i0 } from "solid-js";
-const $f1 = ($0, $1) => {
+const $cs0 = ($tag0, $tag1) => {
   const Dot = (props) =>
     (() => {
       var _el$ = _tmpl$(),
@@ -33,10 +33,10 @@ const $f1 = ($0, $1) => {
       _el$4 = _el$3.firstChild,
       _el$5 = _el$4.nextSibling,
       _el$6 = _el$5.firstChild;
-    _$insert(_el$5, _$createComponent($0, {}), _el$6);
+    _$insert(_el$5, _$createComponent($tag0, {}), _el$6);
     _$insert(
       _el$5,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         each: [10, 20],
         children: (x) =>
           _$createComponent(Dot, {
@@ -48,20 +48,20 @@ const $f1 = ($0, $1) => {
     return _el$3;
   })();
 };
-const $f2 = () => _tmpl$3();
+const $cs1 = () => _tmpl$3();
 export default () =>
-  $f1(
-    () => $f2(),
-    ($0) =>
+  $cs0(
+    () => $cs1(),
+    ($arg0) =>
       _$createComponent($i0, {
         get each() {
-          return $0.each;
+          return $arg0.each;
         },
         get fallback() {
-          return $0.fallback;
+          return $arg0.fallback;
         },
         get children() {
-          return $0.children;
+          return $arg0.children;
         },
       }),
   );

@@ -1,5 +1,5 @@
-const $f1 = ($0) => $0();
+const $cs0 = ($splice0) => $splice0();
 export default () =>
-  $f1(() => ({
+  $cs0(() => ({
     "#": "value",
   }));

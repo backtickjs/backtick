@@ -1,9 +1,9 @@
-const $f1 = ($0, $1) => ({
-  a: $0(),
-  b: $1(),
+const $cs0 = ($splice0, $splice1) => ({
+  a: $splice0(),
+  b: $splice1(),
 });
 export default () =>
-  $f1(
+  $cs0(
     () => 0,
     () => 1,
   );

@@ -1,8 +1,8 @@
 // 26:7
-($0, $1, $2) => {
-    const n = $0()(1);
-    const doubled = $1()(() => {
-        $2().console.log();
+($splice0, $splice1, $splice2) => {
+    const n = $splice0()(1);
+    const doubled = $splice1()(() => {
+        $splice2().console.log();
         return n[0]() * 2;
     });
     return (<div>
@@ -14,11 +14,11 @@
 }
 
 // 52:7
-($0, $1, $2) => {
-    const n = $0()(1);
-    const isBig = $1()(() => n[0]() > 2);
+($splice0, $splice1, $splice2) => {
+    const n = $splice0()(1);
+    const isBig = $splice1()(() => n[0]() > 2);
     const label = () => {
-        $2().console.log();
+        $splice2().console.log();
         return isBig() ? "big" : "small";
     };
     return (<div>

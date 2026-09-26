@@ -9,20 +9,20 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<span>press`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1) => {
-  const size = $0()(16);
+const $cs0 = ($splice0, $tag1) => {
+  const size = $splice0()(16);
   return (() => {
     var _el$ = _tmpl$();
     _$insert(
       _el$,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         size: size,
       }),
       null,
     );
     _$insert(
       _el$,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         size: size,
       }),
       null,
@@ -30,28 +30,28 @@ const $f1 = ($0, $1) => {
     return _el$;
   })();
 };
-const $f2 = ($0) => "font-size: " + $0()[0]() + "px";
-const $f3 = ($0) => () => {
-  $0()[1]($0()[0]() + 1);
+const $cs1 = ($splice0) => "font-size: " + $splice0()[0]() + "px";
+const $cs2 = ($splice0) => () => {
+  $splice0()[1]($splice0()[0]() + 1);
 };
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
-        ($0) =>
+        ($arg0) =>
           (() => {
             var _el$2 = _tmpl$2();
             _$addEventListener(
               _el$2,
               "click",
-              $f3(() => $0.size),
+              $cs2(() => $arg0.size),
               true,
             );
             _$effect((_$p) =>
               _$style(
                 _el$2,
-                $f2(() => $0.size),
+                $cs1(() => $arg0.size),
                 _$p,
               ),
             );

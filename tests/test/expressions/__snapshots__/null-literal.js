@@ -16,8 +16,8 @@ it("nullLiteral", async (t) => {
     cs.create(
       "2nnj6ebvkk8vj:20:4",
       { params: [{ kind: "splice", value: orDash, bindings: [] }] },
-      '($0) => ({\n    missing: $0()(null),\n    present: $0()("hi"),\n    bare: null,\n})',
-      '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["expressions/null-literal.test.tsx"],"names":[],"mappings":"AAmBO,QAAA,CAAC;IACF,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,OAAO,EAAE,IAAO,CAAC,IAAI,CAAC;IACtB,IAAI,EAAE,IAAI;CACX,CAAC"}',
+      '($splice0) => ({\n    missing: $splice0()(null),\n    present: $splice0()("hi"),\n    bare: null,\n})',
+      '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["expressions/null-literal.test.tsx"],"names":[],"mappings":"AAmBO,cAAA,CAAC;IACF,OAAO,EAAE,UAAO,CAAC,IAAI,CAAC;IACtB,OAAO,EAAE,UAAO,CAAC,IAAI,CAAC;IACtB,IAAI,EAAE,IAAI;CACX,CAAC"}',
     ),
   );
 });

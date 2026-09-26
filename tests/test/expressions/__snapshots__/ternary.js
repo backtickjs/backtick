@@ -16,8 +16,8 @@ it("ternary", async (t) => {
     cs.create(
       "uekyc2sf8mzc:15:4",
       { params: [{ kind: "splice", value: pick, bindings: [] }] },
-      "($0) => ({\n    absent: $0()(null),\n    present: $0()(4),\n})",
-      '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["expressions/ternary.test.tsx"],"names":[],"mappings":"AAcO,QAAA,CAAC;IACF,MAAM,EAAE,IAAK,CAAC,IAAI,CAAC;IACnB,OAAO,EAAE,IAAK,CAAC,CAAC,CAAC;CAClB,CAAC"}',
+      "($splice0) => ({\n    absent: $splice0()(null),\n    present: $splice0()(4),\n})",
+      '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["expressions/ternary.test.tsx"],"names":[],"mappings":"AAcO,cAAA,CAAC;IACF,MAAM,EAAE,UAAK,CAAC,IAAI,CAAC;IACnB,OAAO,EAAE,UAAK,CAAC,CAAC,CAAC;CAClB,CAAC"}',
     ),
   );
 });

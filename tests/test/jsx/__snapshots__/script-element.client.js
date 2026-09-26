@@ -1,6 +1,6 @@
 // 11:10
-($0) => {
-    const label = $0()("hi");
+($splice0) => {
+    const label = $splice0()("hi");
     const row = (size) => {
         const css = "font-size: " + size + "px";
         const press = () => label[1]("held");

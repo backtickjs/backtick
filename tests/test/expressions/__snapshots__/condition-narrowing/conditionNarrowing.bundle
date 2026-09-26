@@ -1,17 +1,17 @@
-const $f1 = ($0) => ({
-  missing: $0()(null, true),
-  loud: $0()("!hi", true),
-  quiet: $0()("!hi", false),
-  plain: $0()("zz", false),
+const $cs0 = ($splice0) => ({
+  missing: $splice0()(null, true),
+  loud: $splice0()("!hi", true),
+  quiet: $splice0()("!hi", false),
+  plain: $splice0()("zz", false),
 });
-const $f2 = ($0) => (text, upper) => {
+const $cs1 = ($splice0) => (text, upper) => {
   if (upper && text !== null) {
     return text.toUpperCase();
   }
-  if ($0() && text !== null && text.charAt(0) === "!") {
+  if ($splice0() && text !== null && text.charAt(0) === "!") {
     return text.concat("?");
   }
   return "none";
 };
-const $f3 = () => true;
-export default () => $f1(() => $f2($f3));
+const $cs2 = () => true;
+export default () => $cs0(() => $cs1($cs2));

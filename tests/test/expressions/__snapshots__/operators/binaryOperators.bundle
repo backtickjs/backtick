@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const n = 5;
   return [
     n ** 2,
@@ -14,4 +14,4 @@ const $f1 = () => {
     [n] instanceof Array,
   ];
 };
-export default () => $f1();
+export default () => $cs0();

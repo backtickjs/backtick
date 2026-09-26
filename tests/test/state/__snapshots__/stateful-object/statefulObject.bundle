@@ -3,8 +3,8 @@ import { delegateEvents as _$delegateEvents } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<button>`);
 import { createSignal as $i0 } from "solid-js";
-const $f1 = ($0) => {
-  const c = $0()(10);
+const $cs0 = ($splice0) => {
+  const c = $splice0()(10);
   return (() => {
     var _el$ = _tmpl$();
     _el$.$$click = () => {
@@ -14,8 +14,8 @@ const $f1 = ($0) => {
     return _el$;
   })();
 };
-const $f2 = ($0) => (initial) => {
-  const count = $0()(initial);
+const $cs1 = ($splice0) => (initial) => {
+  const count = $splice0()(initial);
   return {
     get: () => count[0](),
     add: (n) => {
@@ -23,5 +23,5 @@ const $f2 = ($0) => (initial) => {
     },
   };
 };
-export default () => $f1(() => $f2(() => $i0));
+export default () => $cs0(() => $cs1(() => $i0));
 _$delegateEvents(["click"]);

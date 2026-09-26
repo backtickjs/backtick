@@ -17,8 +17,8 @@ it("optionalProperty", async (t) => {
     cs.create(
       "1pn78z89zmc5d:16:4",
       { params: [{ kind: "splice", value: read, bindings: [] }] },
-      '($0) => ({\n    present: $0()({ label: "a", inner: { z: 3 } }),\n    partial: $0()({ label: "b", inner: {} }),\n    omitted: $0()({ label: "c" }),\n})',
-      '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["objects/optional-property.test.tsx"],"names":[],"mappings":"AAeO,QAAA,CAAC;IACF,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,IAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
+      '($splice0) => ({\n    present: $splice0()({ label: "a", inner: { z: 3 } }),\n    partial: $splice0()({ label: "b", inner: {} }),\n    omitted: $splice0()({ label: "c" }),\n})',
+      '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["objects/optional-property.test.tsx"],"names":[],"mappings":"AAeO,cAAA,CAAC;IACF,OAAO,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
     ),
   );
 });

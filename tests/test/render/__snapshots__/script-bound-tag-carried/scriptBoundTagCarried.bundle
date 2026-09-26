@@ -8,8 +8,8 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<b>`),
   _tmpl$4 = /*#__PURE__*/ _$template(`<i>`),
   _tmpl$5 = /*#__PURE__*/ _$template(`<section>`);
 import { createSignal as $i0 } from "solid-js";
-const $f1 = ($0, $1, $2) => {
-  const count = $0()(0);
+const $cs0 = ($splice0, $splice1, $tag2) => {
+  const count = $splice0()(0);
   const Badge = (p) =>
     (() => {
       var _el$ = _tmpl$();
@@ -22,9 +22,9 @@ const $f1 = ($0, $1, $2) => {
       _el$3 = _el$2.firstChild;
     _$insert(
       _el$2,
-      _$createComponent($2, {
+      _$createComponent($tag2, {
         get body() {
-          return $1(count, Badge);
+          return $splice1(count, Badge);
         },
       }),
       _el$3,
@@ -33,18 +33,18 @@ const $f1 = ($0, $1, $2) => {
     return _el$2;
   })();
 };
-const $f2 = ($0, $1) =>
-  _$createComponent($0, {
+const $cs1 = ($capture0, $capture1) =>
+  _$createComponent($capture0, {
     get n() {
-      return $1[0]();
+      return $capture1[0]();
     },
     get children() {
       var _el$4 = _tmpl$3();
-      _$insert(_el$4, () => "kid " + $1[0]());
+      _$insert(_el$4, () => "kid " + $capture1[0]());
       return _el$4;
     },
   });
-const $f3 = ($0) => {
+const $cs2 = ($splice0) => {
   const Badge = (p) =>
     (() => {
       var _el$5 = _tmpl$4();
@@ -60,14 +60,14 @@ const $f3 = ($0) => {
       }),
       null,
     );
-    _$insert(_el$6, () => $0().body, null);
+    _$insert(_el$6, () => $splice0().body, null);
     return _el$6;
   })();
 };
 export default () =>
-  $f1(
+  $cs0(
     () => $i0,
-    (count, Badge) => $f2(Badge, count),
-    ($0) => $f3(() => $0),
+    (count, Badge) => $cs1(Badge, count),
+    ($arg0) => $cs2(() => $arg0),
   );
 _$delegateEvents(["click"]);

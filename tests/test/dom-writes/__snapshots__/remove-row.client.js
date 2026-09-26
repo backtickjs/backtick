@@ -1,9 +1,9 @@
 // 13:10
-($0, $1) => {
-    const ids = $0()([1, 2, 3, 4, 5]);
+($splice0, $tag1) => {
+    const ids = $splice0()([1, 2, 3, 4, 5]);
     return (<table>
         <tbody>
-          <$1 each={ids[0]()}>
+          <$tag1 each={ids[0]()}>
             {(id) => (<tr id={"row-" + id}>
                 <td>
                   <button onclick={() => ids[1](ids[0]().filter((each) => each !== id))}>
@@ -11,7 +11,7 @@
                   </button>
                 </td>
               </tr>)}
-          </$1>
+          </$tag1>
         </tbody>
       </table>);
 }

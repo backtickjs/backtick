@@ -1,7 +1,7 @@
 // 26:5
-($0) => {
-    const stop = $0().clearInterval;
-    const repeating = $0().setInterval(() => 0, 1000);
+($splice0) => {
+    const stop = $splice0().clearInterval;
+    const repeating = $splice0().setInterval(() => 0, 1000);
     stop(repeating);
-    $0().clearTimeout($0().setTimeout(() => 0, 1000));
+    $splice0().clearTimeout($splice0().setTimeout(() => 0, 1000));
 }

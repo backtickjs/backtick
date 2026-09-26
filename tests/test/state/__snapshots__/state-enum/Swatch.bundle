@@ -5,26 +5,26 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 import { createSignal as $i0 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1, $2, $3) => {
-  const held = $0()($1());
+const $cs0 = ($splice0, $splice1, $splice2, $splice3) => {
+  const held = $splice0()($splice1());
   return (() => {
     var _el$ = _tmpl$();
-    _el$.$$click = () => held[1]($2());
-    _$insert(_el$, () => $3()(held[0]()));
+    _el$.$$click = () => held[1]($splice2());
+    _$insert(_el$, () => $splice3()(held[0]()));
     return _el$;
   })();
 };
-const $f2 = ($0) => (c) => {
-  return c === $0() ? "blue" : "red";
+const $cs1 = ($splice0) => (c) => {
+  return c === $splice0() ? "blue" : "red";
 };
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
         () => 0,
         () => 1,
-        () => $f2(() => 1),
+        () => $cs1(() => 1),
       ),
   });
 _$delegateEvents(["click"]);

@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   return [
     Array.isArray([]),
     Array.isArray([1, 2]),
@@ -9,4 +9,4 @@ const $f1 = () => {
     Array.isArray(null),
   ];
 };
-export default () => $f1();
+export default () => $cs0();

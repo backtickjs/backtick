@@ -1,7 +1,7 @@
 // 27:5
-($0, $1) => {
+($tag0, $tag1) => {
     return (<div>
-          <$0 title="totals"/>
-          <$1 />
+          <$tag0 title="totals"/>
+          <$tag1 />
         </div>);
 }

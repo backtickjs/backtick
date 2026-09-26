@@ -10,8 +10,8 @@ function add(lhs, rhs) {
         { kind: "splice", value: rhs, bindings: [] },
       ],
     },
-    "($0, $1) => $0() + $1()",
-    '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"AAKY,YAAA,IAAI,GAAG,IAAI"}',
+    "($splice0, $splice1) => $splice0() + $splice1()",
+    '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"AAKY,wBAAA,UAAI,GAAG,UAAI"}',
   );
 }
 it("spliceSharing", async (t) => {
@@ -60,8 +60,8 @@ it("spliceSharing", async (t) => {
           },
         ],
       },
-      "($0, $1) => ({\n    x: $0(),\n    y: $1(),\n})",
-      '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"AAYO,YAAA,CAAC;IACF,CAAC,EAAE,IAAC;IACJ,CAAC,EAAE,IAAC;CACL,CAAC"}',
+      "($splice0, $splice1) => ({\n    x: $splice0(),\n    y: $splice1(),\n})",
+      '{"version":3,"file":"splice-sharing.test.jsx","sourceRoot":"","sources":["splices/splice-sharing.test.tsx"],"names":[],"mappings":"AAYO,wBAAA,CAAC;IACF,CAAC,EAAE,UAAC;IACJ,CAAC,EAAE,UAAC;CACL,CAAC"}',
     ),
   );
 });

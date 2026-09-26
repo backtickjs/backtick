@@ -1,7 +1,7 @@
 // 28:5
-($0, $1, $2, $3) => {
-    const n = $0()($1());
+($splice0, $splice1, $splice2, $splice3) => {
+    const n = $splice0()($splice1());
     n[1](6);
-    const c = $0()($2());
-    c[1]($3());
+    const c = $splice0()($splice2());
+    c[1]($splice3());
 }

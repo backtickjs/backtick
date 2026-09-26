@@ -14,14 +14,14 @@ const HeldRow = async () => _jsx("span", { children: "x" });
 const heldElement = cs.create(
   "224cj4eht1o03:15:20",
   { params: [{ kind: "splice", value: _jsx("div", {}), bindings: [] }] },
-  "($0) => () => {\n    const tree = $0();\n    return tree;\n}",
-  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAcuB,QAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,IAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  "($splice0) => () => {\n    const tree = $splice0();\n    return tree;\n}",
+  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAcuB,cAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,UAAC,CAAY;IAC1B,OAAO,IAAI,CAAC;AACd,CAAC"}',
 );
 const heldComponent = cs.create(
   "224cj4eht1o03:20:22",
   { params: [{ kind: "splice", value: _jsx(HeldRow, {}), bindings: [] }] },
-  "($0) => () => {\n    const tree = $0();\n    return tree;\n}",
-  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAmByB,QAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,IAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  "($splice0) => () => {\n    const tree = $splice0();\n    return tree;\n}",
+  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAmByB,cAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,UAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC"}',
 );
 it("treeInVariable", async (t) => {
   await snapshotCase(
@@ -32,14 +32,14 @@ it("treeInVariable", async (t) => {
         cs.create(
           "224cj4eht1o03:30:7",
           { params: [{ kind: "splice", value: heldElement, bindings: [] }] },
-          "($0) => $0()()",
-          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AA6BU,QAAA,IAAY,EAAE"}',
+          "($splice0) => $splice0()()",
+          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AA6BU,cAAA,UAAY,EAAE"}',
         ),
         cs.create(
           "224cj4eht1o03:31:7",
           { params: [{ kind: "splice", value: heldComponent, bindings: [] }] },
-          "($0) => $0()()",
-          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AA8BU,QAAA,IAAc,EAAE"}',
+          "($splice0) => $splice0()()",
+          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AA8BU,cAAA,UAAc,EAAE"}',
         ),
       ],
     }),

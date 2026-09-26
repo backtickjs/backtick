@@ -1,9 +1,9 @@
 // 15:5
-($0, $1) => () => {
-    const held = $0()("waiting");
-    $1()
+($splice0, $splice1) => () => {
+    const held = $splice0()("waiting");
+    $splice1()
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
-        signal: $1().AbortSignal.timeout(3000),
+        signal: $splice1().AbortSignal.timeout(3000),
     })
         .then((response) => {
         if (response.status !== 200) {
@@ -17,7 +17,7 @@
         .catch((error) => {
         held.set("failed — " + String(error));
     });
-    $1()
+    $splice1()
         .fetch("/cases", {
         method: "POST",
         headers: { "content-type": "application/json" },

@@ -7,8 +7,8 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<span>clear`),
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1) => {
-  const ids = $0()([1, 2, 3]);
+const $cs0 = ($splice0, $tag1) => {
+  const ids = $splice0()([1, 2, 3]);
   const clear = () => {
     ids[1]([]);
   };
@@ -18,7 +18,7 @@ const $f1 = ($0, $1) => {
       _el$.$$click = clear;
       return _el$;
     })(),
-    _$createComponent($1, {
+    _$createComponent($tag1, {
       get each() {
         return ids[0]();
       },
@@ -34,18 +34,18 @@ const $f1 = ($0, $1) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
-        ($0) =>
+        ($arg0) =>
           _$createComponent($i1, {
             get each() {
-              return $0.each;
+              return $arg0.each;
             },
             get fallback() {
-              return $0.fallback;
+              return $arg0.fallback;
             },
             get children() {
-              return $0.children;
+              return $arg0.children;
             },
           }),
       ),

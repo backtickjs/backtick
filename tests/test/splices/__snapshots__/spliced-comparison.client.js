@@ -1,7 +1,7 @@
 // 15:5
-($0, $1) => ({
-    under: $0() < $1(),
-    atMost: $0() <= $1(),
-    over: $1() > $0(),
-    between: $0() < $1() && $1() > $0(),
+($splice0, $splice1) => ({
+    under: $splice0() < $splice1(),
+    atMost: $splice0() <= $splice1(),
+    over: $splice1() > $splice0(),
+    between: $splice0() < $splice1() && $splice1() > $splice0(),
 })

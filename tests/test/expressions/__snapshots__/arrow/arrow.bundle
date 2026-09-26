@@ -1,5 +1,5 @@
-const $f1 = () => {
+const $cs0 = () => {
   const base = 10;
   return (one, two) => one + two + base;
 };
-export default () => $f1();
+export default () => $cs0();

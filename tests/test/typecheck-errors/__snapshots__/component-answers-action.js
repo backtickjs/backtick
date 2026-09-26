@@ -7,8 +7,8 @@ async function Panel() {
   return cs.create(
     "1y32lnuqpkjgj:7:9",
     { params: [{ kind: "splice", value: state, bindings: [] }] },
-    "($0) => {\n    const n = $0()(2);\n    n.set(3);\n}",
-    '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["typecheck-errors/component-answers-action.test.tsx"],"names":[],"mappings":"AAMY;IACR,MAAM,CAAC,GAAG,IAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
+    "($splice0) => {\n    const n = $splice0()(2);\n    n.set(3);\n}",
+    '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["typecheck-errors/component-answers-action.test.tsx"],"names":[],"mappings":"AAMY;IACR,MAAM,CAAC,GAAG,UAAM,CAAC,CAAC,CAAC,CAAC;IACpB,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC;AACX,CAAC"}',
   );
 }
 // @ts-expect-error: 'Panel' cannot be used as a JSX component.

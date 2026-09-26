@@ -10,14 +10,14 @@ const ping = cs.create(
 const script = cs.create(
   "3ch7rgcn8bjeq:10:15",
   { params: [{ kind: "splice", value: ping, bindings: [] }] },
-  "($0) => {\n    const x = $0()();\n    return 1;\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"AASkB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+  "($splice0) => {\n    const x = $splice0()();\n    return 1;\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"AASkB;IAChB,MAAM,CAAC,GAAG,UAAK,EAAE,CAAC;IAClB,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );
 const action = cs.create(
   "3ch7rgcn8bjeq:15:15",
   { params: [{ kind: "splice", value: ping, bindings: [] }] },
-  "($0) => {\n    const x = $0()();\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"AAckB;IAChB,MAAM,CAAC,GAAG,IAAK,EAAE,CAAC;AACpB,CAAC"}',
+  "($splice0) => {\n    const x = $splice0()();\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"AAckB;IAChB,MAAM,CAAC,GAAG,UAAK,EAAE,CAAC;AACpB,CAAC"}',
 );
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
@@ -30,6 +30,6 @@ const label = cs.create(
 const wrongArgument = cs.create(
   "3ch7rgcn8bjeq:25:22",
   { params: [{ kind: "splice", value: label, bindings: [] }] },
-  "($0) => {\n    const x = $0()(true);\n    return 1;\n}",
-  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"AAwByB;IAEvB,MAAM,CAAC,GAAG,IAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+  "($splice0) => {\n    const x = $splice0()(true);\n    return 1;\n}",
+  '{"version":3,"file":"void-initializer.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-initializer.test.tsx"],"names":[],"mappings":"AAwByB;IAEvB,MAAM,CAAC,GAAG,UAAM,CAAC,IAAI,CAAC,CAAC;IACvB,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );

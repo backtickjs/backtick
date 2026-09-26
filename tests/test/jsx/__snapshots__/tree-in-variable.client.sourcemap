@@ -1,39 +1,39 @@
 // 15:21
-($0) =>   → 15:24 ()…
-()        → 15:24 () 
-=>        → 15:27 =>
- {        → 15:29  {
-const     → 16:3 const 
-tree      → 16:9 tree
- =        → 16:13  = 
-$0()      → 16:16 ${(<div…
-;         → 16:17 {(<div…
-return    → 17:3 return 
-tree      → 17:10 tree
-;         → 17:14 ;
-}         → 18:1 }
+($splice0) =>   → 15:24 ()…
+()              → 15:24 () 
+=>              → 15:27 =>
+ {              → 15:29  {
+const           → 16:3 const 
+tree            → 16:9 tree
+ =              → 16:13  = 
+$splice0()      → 16:16 ${(<div…
+;               → 16:17 {(<div…
+return          → 17:3 return 
+tree            → 17:10 tree
+;               → 17:14 ;
+}               → 18:1 }
 
 // 20:23
-($0) =>   → 20:26 ()…
-()        → 20:26 () 
-=>        → 20:29 =>
- {        → 20:31  {
-const     → 21:3 const 
-tree      → 21:9 tree
- =        → 21:13  = 
-$0()      → 21:16 ${(<HeldRow…
-;         → 21:17 {(<HeldRow…
-return    → 22:3 return 
-tree      → 22:10 tree
-;         → 22:14 ;
-}         → 23:1 }
+($splice0) =>   → 20:26 ()…
+()              → 20:26 () 
+=>              → 20:29 =>
+ {              → 20:31  {
+const           → 21:3 const 
+tree            → 21:9 tree
+ =              → 21:13  = 
+$splice0()      → 21:16 ${(<HeldRow…
+;               → 21:17 {(<HeldRow…
+return          → 22:3 return 
+tree            → 22:10 tree
+;               → 22:14 ;
+}               → 23:1 }
 
 // 30:8
-($0) =>   → 30:11 $heldElement()`}…
-$0()      → 30:11 $heldElement()`}…
-()        → 30:23 ()
+($splice0) =>   → 30:11 $heldElement()`}…
+$splice0()      → 30:11 $heldElement()`}…
+()              → 30:23 ()
 
 // 31:8
-($0) =>   → 31:11 $heldComponent()`}…
-$0()      → 31:11 $heldComponent()`}…
-()        → 31:25 ()
+($splice0) =>   → 31:11 $heldComponent()`}…
+$splice0()      → 31:11 $heldComponent()`}…
+()              → 31:25 ()

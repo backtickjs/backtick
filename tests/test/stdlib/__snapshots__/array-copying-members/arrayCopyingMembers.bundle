@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const rows = [3, 1, 2];
   const sorted = rows.toSorted((a, b) => a - b);
   const reversed = rows.toReversed();
@@ -16,4 +16,4 @@ const $f1 = () => {
     rows.join(",")
   );
 };
-export default () => $f1();
+export default () => $cs0();

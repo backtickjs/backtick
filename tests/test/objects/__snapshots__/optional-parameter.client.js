@@ -12,11 +12,11 @@
 }
 
 // 24:5
-($0, $1, $2) => ({
-    named: $0()("hi"),
-    explicit: $0()(undefined),
-    omitted: $0()(),
-    supplied: $1()($2()),
-    fallback: $1()(undefined),
-    omittedCallback: $1()(),
+($splice0, $splice1, $splice2) => ({
+    named: $splice0()("hi"),
+    explicit: $splice0()(undefined),
+    omitted: $splice0()(),
+    supplied: $splice1()($splice2()),
+    fallback: $splice1()(undefined),
+    omittedCallback: $splice1()(),
 })

@@ -1,7 +1,7 @@
-const $f1 = () => {
+const $cs0 = () => {
   let n = 1;
   if (n === 2) {
     return "some";
   }
 };
-export default () => $f1();
+export default () => $cs0();

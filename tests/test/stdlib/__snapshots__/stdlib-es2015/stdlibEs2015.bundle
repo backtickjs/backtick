@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const xs = [3, 8, 12, 5];
   const word = "backtick";
   return {
@@ -17,4 +17,4 @@ const $f1 = () => {
     }),
   };
 };
-export default () => $f1();
+export default () => $cs0();

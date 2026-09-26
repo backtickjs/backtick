@@ -1,7 +1,7 @@
 // 13:10
-($0) => (flag) => {
+($splice0) => (flag) => {
     if (flag) {
-        return $0();
+        return $splice0();
     }
     return "skipped";
 }
@@ -15,7 +15,7 @@
 }
 
 // 31:5
-($0, $1) => ({
-    taken: $0()(true),
-    skipped: $1()(false),
+($splice0, $splice1) => ({
+    taken: $splice0()(true),
+    skipped: $splice1()(false),
 })

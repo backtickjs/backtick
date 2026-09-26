@@ -1,6 +1,6 @@
 // 12:5
-($0) => {
-    const count = $0()(0);
+($splice0) => {
+    const count = $splice0()(0);
     return [
         typeof undefined,
         typeof null,

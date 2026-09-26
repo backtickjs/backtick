@@ -1,19 +1,19 @@
-const $f1 = ($0) => ({
-  present: $0()({
+const $cs0 = ($splice0) => ({
+  present: $splice0()({
     label: "a",
     inner: {
       z: 3,
     },
   }),
-  partial: $0()({
+  partial: $splice0()({
     label: "b",
     inner: {},
   }),
-  omitted: $0()({
+  omitted: $splice0()({
     label: "c",
   }),
 });
-const $f2 = () => (o) => {
+const $cs1 = () => (o) => {
   return [o.label, o.inner?.z ?? 0];
 };
-export default () => $f1($f2);
+export default () => $cs0($cs1);

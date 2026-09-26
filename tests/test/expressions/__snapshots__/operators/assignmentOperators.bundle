@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   let n = 3;
   n **= 2;
   n <<= 1;
@@ -15,4 +15,4 @@ const $f1 = () => {
   c &&= false;
   return [n, a, b, c];
 };
-export default () => $f1();
+export default () => $cs0();

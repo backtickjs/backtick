@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const held = {
     n: 1,
     q: "ada",
@@ -8,4 +8,4 @@ const $f1 = () => {
   );
   return written.n + " " + written.q;
 };
-export default () => $f1();
+export default () => $cs0();

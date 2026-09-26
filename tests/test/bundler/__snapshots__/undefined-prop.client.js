@@ -1,2 +1,2 @@
 // 37:34
-($0) => (el) => $0()(() => el.focus())
+($splice0) => (el) => $splice0()(() => el.focus())

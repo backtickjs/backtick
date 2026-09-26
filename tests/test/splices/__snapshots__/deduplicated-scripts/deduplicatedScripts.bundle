@@ -1,6 +1,6 @@
-const $f1 = ($0) => ({
-  a: $0(),
-  b: $0(),
+const $cs0 = ($splice0) => ({
+  a: $splice0(),
+  b: $splice0(),
 });
-const $f2 = () => 7;
-export default () => $f1($f2);
+const $cs1 = () => 7;
+export default () => $cs0($cs1);

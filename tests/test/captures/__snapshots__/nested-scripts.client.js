@@ -1,8 +1,8 @@
 // 9:5
-($0) => {
+($splice0) => {
     const x = 0;
-    return $0(x);
+    return $splice0(x);
 }
 
 // 11:16
-($0) => $0
+($capture0) => $capture0

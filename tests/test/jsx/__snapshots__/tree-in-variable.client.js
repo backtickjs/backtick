@@ -1,17 +1,17 @@
 // 15:21
-($0) => () => {
-    const tree = $0();
+($splice0) => () => {
+    const tree = $splice0();
     return tree;
 }
 
 // 20:23
-($0) => () => {
-    const tree = $0();
+($splice0) => () => {
+    const tree = $splice0();
     return tree;
 }
 
 // 30:8
-($0) => $0()()
+($splice0) => $splice0()()
 
 // 31:8
-($0) => $0()()
+($splice0) => $splice0()()

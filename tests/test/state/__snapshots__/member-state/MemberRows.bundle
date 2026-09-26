@@ -7,7 +7,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><ul class=rows>`),
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1) => {
+const $cs0 = ($splice0, $tag1) => {
   const build = (from) => {
     return Array.from(
       {
@@ -16,18 +16,18 @@ const $f1 = ($0, $1) => {
       (_, at) => {
         return {
           id: from + at,
-          label: $0()("row " + (from + at)),
+          label: $splice0()("row " + (from + at)),
         };
       },
     );
   };
-  const held = $0()(build(1));
+  const held = $splice0()(build(1));
   return (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     _$insert(
       _el$2,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         get each() {
           return held[0]();
         },
@@ -46,18 +46,18 @@ const $f1 = ($0, $1) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
-        ($0) =>
+        ($arg0) =>
           _$createComponent($i1, {
             get each() {
-              return $0.each;
+              return $arg0.each;
             },
             get fallback() {
-              return $0.fallback;
+              return $arg0.fallback;
             },
             get children() {
-              return $0.children;
+              return $arg0.children;
             },
           }),
       ),

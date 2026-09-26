@@ -19,8 +19,8 @@ it("splicedFunction", async (t) => {
     cs.create(
       "1pdv8x4hbo6de:21:4",
       { params: [{ kind: "splice", value: (n) => n, bindings: [] }] },
-      "($0) => () => $0()",
-      '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["splices/spliced-function.test.tsx"],"names":[],"mappings":"AAoBO,QAAA,GAAG,EAAE,CAAC,IAAC"}',
+      "($splice0) => () => $splice0()",
+      '{"version":3,"file":"spliced-function.test.jsx","sourceRoot":"","sources":["splices/spliced-function.test.tsx"],"names":[],"mappings":"AAoBO,cAAA,GAAG,EAAE,CAAC,UAAC"}',
     ),
   );
 });

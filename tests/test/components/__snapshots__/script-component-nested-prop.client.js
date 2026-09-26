@@ -1,2 +1,2 @@
 // 27:5
-($0) => <$0 person={{ firstName: "ada" }}/>
+($tag0) => <$tag0 person={{ firstName: "ada" }}/>

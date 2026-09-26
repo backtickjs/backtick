@@ -1,8 +1,8 @@
-const $f1 = () => {
+const $cs0 = () => {
   let total = 0;
   for (let i = 0; i < 5; i = i + 1) {
     total = total + i;
   }
   return total;
 };
-export default () => $f1();
+export default () => $cs0();

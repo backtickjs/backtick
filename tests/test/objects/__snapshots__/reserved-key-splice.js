@@ -10,8 +10,8 @@ it("reservedKeySplice", async (t) => {
     cs.create(
       "2dryy6my0qubf:8:45",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
-      "($0) => $0()",
-      '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["objects/reserved-key-splice.test.tsx"],"names":[],"mappings":"AAOgD,QAAA,IAAC"}',
+      "($splice0) => $splice0()",
+      '{"version":3,"file":"reserved-key-splice.test.jsx","sourceRoot":"","sources":["objects/reserved-key-splice.test.tsx"],"names":[],"mappings":"AAOgD,cAAA,UAAC"}',
     ),
   );
 });

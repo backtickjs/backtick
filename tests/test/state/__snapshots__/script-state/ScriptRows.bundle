@@ -6,28 +6,28 @@ import { insert as _$insert } from "solid-js/web";
 import { addEventListener as _$addEventListener } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 import { createSignal as $i0 } from "solid-js";
-const $f1 = () => "font-size: 16px";
-const $f2 = ($0) => () => {
-  const row = $0()("one");
+const $cs0 = () => "font-size: 16px";
+const $cs1 = ($splice0) => () => {
+  const row = $splice0()("one");
   row.label[1](row.label[0]() + " !!!");
 };
-const $f3 = ($0) => (label) => {
+const $cs2 = ($splice0) => (label) => {
   return {
-    label: $0()(label),
+    label: $splice0()(label),
   };
 };
-const $f4 = ($0) => $0()("one").label[0]();
+const $cs3 = ($splice0) => $splice0()("one").label[0]();
 export default () =>
   (() => {
     var _el$ = _tmpl$();
     _$addEventListener(
       _el$,
       "click",
-      $f2(() => $f3(() => $i0)),
+      $cs1(() => $cs2(() => $i0)),
       true,
     );
-    _$insert(_el$, () => $f4(() => $f3(() => $i0)));
-    _$effect((_$p) => _$style(_el$, $f1(), _$p));
+    _$insert(_el$, () => $cs3(() => $cs2(() => $i0)));
+    _$effect((_$p) => _$style(_el$, $cs0(), _$p));
     return _el$;
   })();
 _$delegateEvents(["click"]);

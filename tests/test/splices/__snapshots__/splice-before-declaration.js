@@ -15,8 +15,8 @@ function sandwich(fragment) {
   return cs.create(
     "1xi8jyc89buh5:16:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    "($0) => {\n    const before = 1;\n    const spliced = $0();\n    const after = 2;\n    return before + spliced + after;\n}",
-    '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,IAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC"}',
+    "($splice0) => {\n    const before = 1;\n    const spliced = $splice0();\n    const after = 2;\n    return before + spliced + after;\n}",
+    '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,UAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC"}',
   );
 }
 it("spliceBeforeDeclaration", async (t) => {
@@ -53,8 +53,8 @@ it("spliceBeforeDeclaration", async (t) => {
           },
         ],
       },
-      "($0, $1) => $0() + $1()",
-      '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BO,YAAA,IAAC,GAAqB,IAAC"}',
+      "($splice0, $splice1) => $splice0() + $splice1()",
+      '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BO,wBAAA,UAAC,GAAqB,UAAC"}',
     ),
   );
 });

@@ -7,8 +7,8 @@
 }
 
 // 20:5
-($0) => ({
-    missing: $0()(null),
-    present: $0()("hi"),
+($splice0) => ({
+    missing: $splice0()(null),
+    present: $splice0()("hi"),
     bare: null,
 })

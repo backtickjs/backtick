@@ -1,4 +1,4 @@
-const $f1 = () => ({
+const $cs0 = () => ({
   "#": "value",
 });
-export default () => $f1();
+export default () => $cs0();

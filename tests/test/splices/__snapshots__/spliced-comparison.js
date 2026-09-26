@@ -18,8 +18,8 @@ it("splicedComparison", async (t) => {
           { kind: "splice", value: high, bindings: [] },
         ],
       },
-      "($0, $1) => ({\n    under: $0() < $1(),\n    atMost: $0() <= $1(),\n    over: $1() > $0(),\n    between: $0() < $1() && $1() > $0(),\n})",
-      '{"version":3,"file":"spliced-comparison.test.jsx","sourceRoot":"","sources":["splices/spliced-comparison.test.tsx"],"names":[],"mappings":"AAcO,YAAA,CAAC;IACF,KAAK,EAAE,IAAI,GAAG,IAAK;IACnB,MAAM,EAAE,IAAI,IAAI,IAAK;IACrB,IAAI,EAAE,IAAK,GAAG,IAAI;IAClB,OAAO,EAAE,IAAI,GAAG,IAAK,IAAI,IAAK,GAAG,IAAI;CACtC,CAAC"}',
+      "($splice0, $splice1) => ({\n    under: $splice0() < $splice1(),\n    atMost: $splice0() <= $splice1(),\n    over: $splice1() > $splice0(),\n    between: $splice0() < $splice1() && $splice1() > $splice0(),\n})",
+      '{"version":3,"file":"spliced-comparison.test.jsx","sourceRoot":"","sources":["splices/spliced-comparison.test.tsx"],"names":[],"mappings":"AAcO,wBAAA,CAAC;IACF,KAAK,EAAE,UAAI,GAAG,UAAK;IACnB,MAAM,EAAE,UAAI,IAAI,UAAK;IACrB,IAAI,EAAE,UAAK,GAAG,UAAI;IAClB,OAAO,EAAE,UAAI,GAAG,UAAK,IAAI,UAAK,GAAG,UAAI;CACtC,CAAC"}',
     ),
   );
 });

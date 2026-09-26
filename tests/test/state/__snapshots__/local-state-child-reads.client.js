@@ -1,18 +1,18 @@
 // 29:14
-($0, $1) => "font-size: " + ($0()[0]() === $1() ? 20 : 16) + "px"
+($splice0, $splice1) => "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"
 
 // 31:8
-($0, $1) => "row " + $0() + " of " + $1()[0]()
+($splice0, $splice1) => "row " + $splice0() + " of " + $splice1()[0]()
 
 // 33:6
-($0, $1, $2) => $0()[0]() === $1() ? $2() : null
+($splice0, $splice1, $splice2) => $splice0()[0]() === $splice1() ? $splice2() : null
 
 // 38:10
-($0, $1) => {
-    const selected = $0()(0);
+($splice0, $tag1) => {
+    const selected = $splice0()(0);
     return (<div>
         <span onclick={() => selected[1](1)}>select</span>
-        <$1 id={0} selected={selected}/>
-        <$1 id={1} selected={selected}/>
+        <$tag1 id={0} selected={selected}/>
+        <$tag1 id={1} selected={selected}/>
       </div>);
 }

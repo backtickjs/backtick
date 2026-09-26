@@ -26,8 +26,8 @@ it("actionInValueScript", async (t) => {
           { kind: "splice", value: ping, bindings: [] },
         ],
       },
-      "($0, $1) => (b) => {\n    let n = 0;\n    $0();\n    if (b) {\n        $1()();\n        n = 1;\n    }\n    return n;\n}",
-      '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["control-flow/action-in-value-script.test.tsx"],"names":[],"mappings":"AAmBO,YAAA,CAAC,CAAU,EAAE,EAAE;IAChB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAmB,CAAC;IACpB,IAAI,CAAC,EAAE,CAAC;QACN,IAAK,EAAE,CAAC;QACR,CAAC,GAAG,CAAC,CAAC;IACR,CAAC;IACD,OAAO,CAAC,CAAC;AACX,CAAC"}',
+      "($splice0, $splice1) => (b) => {\n    let n = 0;\n    $splice0();\n    if (b) {\n        $splice1()();\n        n = 1;\n    }\n    return n;\n}",
+      '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["control-flow/action-in-value-script.test.tsx"],"names":[],"mappings":"AAmBO,wBAAA,CAAC,CAAU,EAAE,EAAE;IAChB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,UAAmB,CAAC;IACpB,IAAI,CAAC,EAAE,CAAC;QACN,UAAK,EAAE,CAAC;QACR,CAAC,GAAG,CAAC,CAAC;IACR,CAAC;IACD,OAAO,CAAC,CAAC;AACX,CAAC"}',
     ),
   );
 });

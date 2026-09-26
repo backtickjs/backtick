@@ -38,8 +38,8 @@ async function Rows() {
         { kind: "tag", value: For },
       ],
     },
-    '($0, $1) => {\n    const ids = $0()([1, 2, 3]);\n    const clear = () => {\n        ids[1]([]);\n    };\n    return (<>\n        <span onclick={clear}>clear</span>\n        <$1 each={ids[0]()}>{(id) => <span>{"row " + id}</span>}</$1>\n      </>);\n}',
-    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AAkCY;IACR,MAAM,GAAG,GAAG,IAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,EAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
+    '($splice0, $tag1) => {\n    const ids = $splice0()([1, 2, 3]);\n    const clear = () => {\n        ids[1]([]);\n    };\n    return (<>\n        <span onclick={clear}>clear</span>\n        <$tag1 each={ids[0]()}>{(id) => <span>{"row " + id}</span>}</$tag1>\n      </>);\n}',
+    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AAkCY;IACR,MAAM,GAAG,GAAG,UAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,KAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
   );
 }
 it("Rows", async (t) => {

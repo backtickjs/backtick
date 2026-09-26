@@ -4,13 +4,13 @@
 }
 
 // 9:23
-($0) => {
-    const list = $0();
+($splice0) => {
+    const list = $splice0();
     return 1;
 }
 
 // 15:22
-($0) => {
-    const map = $0();
+($splice0) => {
+    const map = $splice0();
     return 1;
 }

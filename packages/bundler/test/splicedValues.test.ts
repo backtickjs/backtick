@@ -35,6 +35,6 @@ test("a host function expands rather than crossing", async () => {
   // answered is what crosses. `length` is the arity, so this one takes one.
   assert.match(
     await bundler.run(((n: never) => n) as never, { transform }),
-    /export default \(\) => \(\(\$0\) => \(\$0\)\);/,
+    /export default \(\) => \(\(\$arg0\) => \(\$arg0\)\);/,
   );
 });

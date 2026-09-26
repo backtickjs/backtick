@@ -16,16 +16,16 @@ const script = cs.create(
           onclick: cs.create(
             "g38hwxw7rhvi:13:27",
             { params: [{ kind: "capture", key: "x$g38hwxw7rhvi$0" }] },
-            "($0) => () => $0",
-            '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAY8B,QAAA,GAAG,EAAE,CAAC,EAAC"}',
+            "($capture0) => () => $capture0",
+            '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAY8B,eAAA,GAAG,EAAE,CAAC,SAAC"}',
           ),
         }),
         bindings: ["x$g38hwxw7rhvi$0"],
       },
     ],
   },
-  "($0) => () => {\n    const x = 1;\n    return $0(x);\n}",
-  '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAU6C,QAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,KAAC,CAAmC;AAC7C,CAAC"}',
+  "($splice0) => () => {\n    const x = 1;\n    return $splice0(x);\n}",
+  '{"version":3,"file":"jsx-capture.test.jsx","sourceRoot":"","sources":["captures/jsx-capture.test.tsx"],"names":[],"mappings":"AAU6C,cAAA,GAAG,EAAE;IAChD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,WAAC,CAAmC;AAC7C,CAAC"}',
 );
 it("jsxCapture", async (t) => {
   await snapshotCase(t, "jsxCapture", script);

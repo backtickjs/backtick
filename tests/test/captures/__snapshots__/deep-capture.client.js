@@ -1,20 +1,20 @@
 // 18:10
-($0, $1) => {
-    const outer = $0();
-    return $1(outer);
+($splice0, $splice1) => {
+    const outer = $splice0();
+    return $splice1(outer);
 }
 
 // 20:14
-($0, $1) => {
+($splice0, $capture1) => {
     const middle = 10;
-    return middle + $0($1);
+    return middle + $splice0($capture1);
 }
 
 // 22:25
-($0) => $0
+($capture0) => $capture0
 
 // 28:40
-($0, $1) => $0() + $1()
+($splice0, $splice1) => $splice0() + $splice1()
 
 // 28:50
 () => 1

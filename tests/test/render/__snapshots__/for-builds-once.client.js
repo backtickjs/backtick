@@ -1,20 +1,20 @@
 // 22:10
-($0, $1, $2, $3, $4) => {
-    const items = $0()([]);
-    const started = $1().setTimeout(() => {
-        if ($2()()) {
-            items[1]($3());
+($splice0, $splice1, $splice2, $splice3, $tag4) => {
+    const items = $splice0()([]);
+    const started = $splice1().setTimeout(() => {
+        if ($splice2()()) {
+            items[1]($splice3());
         }
     }, 0);
-    return <$4 each={items[0]()}>{(item) => <em>{item}</em>}</$4>;
+    return <$tag4 each={items[0]()}>{(item) => <em>{item}</em>}</$tag4>;
 }
 
 // 35:23
-($0, $1) => {
-    const asked = $0()(0);
+($splice0, $tag1) => {
+    const asked = $splice0()(0);
     return (<div>
       <span>{"asked " + asked[0]()}</span>
-      <$1 more={() => {
+      <$tag1 more={() => {
             asked[1](asked[0]() + 1);
             return asked[0]() < 5;
         }}/>

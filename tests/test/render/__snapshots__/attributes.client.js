@@ -1,7 +1,7 @@
 // 111:12
-($0) => {
-    const text = $0()("first");
-    const isOn = $0()(false);
+($splice0) => {
+    const text = $splice0()("first");
+    const isOn = $splice0()(false);
     return (<div>
           <input aria-label="text" value={text[0]()}/>
           <input type="checkbox" aria-label="on" checked={isOn[0]()}/>

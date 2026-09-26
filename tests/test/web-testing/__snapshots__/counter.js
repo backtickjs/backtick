@@ -11,8 +11,8 @@ async function Counter() {
   return cs.create(
     "7znh0cmscuqg:11:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    '($0) => {\n    const count = $0()(0);\n    return (<div>\n        <button onclick={() => count[1](count[0]() + 1)}>Add</button>\n        <p>{"Count: " + count[0]()}</p>\n      </div>);\n}',
-    '{"version":3,"file":"counter.test.jsx","sourceRoot":"","sources":["web-testing/counter.test.tsx"],"names":[],"mappings":"AAUY;IACR,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CAC5D;QAAA,CAAC,CAAC,CAAC,CAAC,SAAS,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAChC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    '($splice0) => {\n    const count = $splice0()(0);\n    return (<div>\n        <button onclick={() => count[1](count[0]() + 1)}>Add</button>\n        <p>{"Count: " + count[0]()}</p>\n      </div>);\n}',
+    '{"version":3,"file":"counter.test.jsx","sourceRoot":"","sources":["web-testing/counter.test.tsx"],"names":[],"mappings":"AAUY;IACR,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CAC5D;QAAA,CAAC,CAAC,CAAC,CAAC,SAAS,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAChC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
   );
 }
 describe("a counter", () => {

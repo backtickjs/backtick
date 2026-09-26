@@ -2,7 +2,7 @@ import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
 import { addEventListener as _$addEventListener } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div><span></span><span>`);
-const $f1 = ($0) => () => $0();
+const $cs0 = ($splice0) => () => $splice0();
 export default () =>
   (() => {
     var _el$ = _tmpl$(),
@@ -11,13 +11,13 @@ export default () =>
     _$addEventListener(
       _el$2,
       "click",
-      $f1(() => 1),
+      $cs0(() => 1),
       true,
     );
     _$addEventListener(
       _el$3,
       "click",
-      $f1(() => 2),
+      $cs0(() => 2),
       true,
     );
     return _el$;

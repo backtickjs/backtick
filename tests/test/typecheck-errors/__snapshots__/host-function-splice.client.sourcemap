@@ -1,16 +1,16 @@
 // 10:16
-($0, $1) => {  → 10:19 {…
-const          → 12:3 const 
-Heading        → 12:9 Heading
- =             → 12:16  = 
-$0()           → 12:19 $Card;…
-;              → 12:24 ;
-return         → 13:3 return 
-<              → 13:10 <
-$1             → 13:11 Card…
-title          → 13:16 title
-=              → 13:21 =
-"tag"          → 13:22 "tag"
-/>             → 13:27  />;…
-;              → 13:30 ;
-}              → 14:1 }
+($splice0, $tag1) => {  → 10:19 {…
+const                   → 12:3 const 
+Heading                 → 12:9 Heading
+ =                      → 12:16  = 
+$splice0()              → 12:19 $Card;…
+;                       → 12:24 ;
+return                  → 13:3 return 
+<                       → 13:10 <
+$tag1                   → 13:11 Card…
+title                   → 13:16 title
+=                       → 13:21 =
+"tag"                   → 13:22 "tag"
+/>                      → 13:27  />;…
+;                       → 13:30 ;
+}                       → 14:1 }

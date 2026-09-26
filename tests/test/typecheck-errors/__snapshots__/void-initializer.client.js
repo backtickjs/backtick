@@ -5,14 +5,14 @@
 }
 
 // 10:16
-($0) => {
-    const x = $0()();
+($splice0) => {
+    const x = $splice0()();
     return 1;
 }
 
 // 15:16
-($0) => {
-    const x = $0()();
+($splice0) => {
+    const x = $splice0()();
 }
 
 // 21:15
@@ -21,7 +21,7 @@
 }
 
 // 25:23
-($0) => {
-    const x = $0()(true);
+($splice0) => {
+    const x = $splice0()(true);
     return 1;
 }

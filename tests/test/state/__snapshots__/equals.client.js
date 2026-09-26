@@ -1,9 +1,9 @@
 // 28:7
-($0, $1, $2) => {
-    const n = $0()(1);
-    const size = $1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
+($splice0, $splice1, $splice2) => {
+    const n = $splice0()(1);
+    const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
     const label = () => {
-        $2().console.log();
+        $splice2().console.log();
         return size().isBig ? "big" : "small";
     };
     return (<div>
@@ -13,10 +13,10 @@
 }
 
 // 60:7
-($0, $1) => {
-    const point = $0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
+($splice0, $splice1) => {
+    const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
     const label = () => {
-        $1().console.log();
+        $splice1().console.log();
         return "x " + point[0]().x;
     };
     return (<div>
@@ -28,10 +28,10 @@
 }
 
 // 85:7
-($0, $1) => {
-    const n = $0()(1, {
+($splice0, $splice1) => {
+    const n = $splice0()(1, {
         equals: (previous, next) => {
-            $1().console.log(previous, next);
+            $splice1().console.log(previous, next);
             return previous === next;
         },
     });
@@ -39,10 +39,10 @@
 }
 
 // 102:7
-($0, $1) => {
-    const n = $0()(1);
+($splice0, $splice1) => {
+    const n = $splice0()(1);
     const label = () => {
-        $1().console.log();
+        $splice1().console.log();
         return "n " + n[0]();
     };
     return (<div>
@@ -52,10 +52,10 @@
 }
 
 // 122:7
-($0, $1) => {
-    const point = $0()({ x: 1 });
+($splice0, $splice1) => {
+    const point = $splice0()({ x: 1 });
     const label = () => {
-        $1().console.log();
+        $splice1().console.log();
         return "x " + point[0]().x;
     };
     return (<div>

@@ -10,8 +10,8 @@ function add(lhs, rhs) {
         { kind: "splice", value: rhs, bindings: [] },
       ],
     },
-    "($0, $1) => $0() + $1()",
-    '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAMY,YAAA,IAAI,GAAG,IAAI"}',
+    "($splice0, $splice1) => $splice0() + $splice1()",
+    '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAMY,wBAAA,UAAI,GAAG,UAAI"}',
   );
 }
 it("deepNestedScripts", async (t) => {
@@ -42,8 +42,8 @@ it("deepNestedScripts", async (t) => {
           },
         ],
       },
-      "($0) => $0()",
-      '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgD,QAAA,IAAC"}',
+      "($splice0) => $splice0()",
+      '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgD,cAAA,UAAC"}',
     ),
   );
 });

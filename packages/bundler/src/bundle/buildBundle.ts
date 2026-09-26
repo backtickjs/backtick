@@ -30,12 +30,12 @@ import {
 import type { Names } from "../print/code.js";
 
 /**
- * A bundle as it is built, before it is printed: each `functions` entry under
- * its label, in the order rendering first reached it, and the root, as code;
- * and what they import.
+ * A bundle as it is built, before it is printed: each script it declares
+ * under its label, in the order rendering first reached it, and the root, as
+ * code; and what they import.
  */
 export interface BundleTree {
-  readonly functions: readonly (readonly [string, ClientScript])[];
+  readonly scripts: readonly (readonly [string, ClientScript])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -45,51 +45,42 @@ export interface BundleTree {
 // script cannot bind, so none of those can meet a binding.
 const RESERVED = ["globalThis", "arguments", "await", "eval", "yield"];
 
-// Builds the bundle `{ functions, root }` as code, and documents how it is
+// Builds the bundle `{ scripts, root }` as code, and documents how it is
 // derived.
+//
+// Each script is declared once, as its compiled code under a label `$cs<n>`,
+// and called wherever it is used. Its code takes a parameter per splice —
+// a hole reads `$splice<i>()` — then per tag and per capture, so it is a function of the
+// script's source alone: every call passes its own splice arguments, as
+// thunks, and nothing from a call site is inlined.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
-// refers to the binding it was written under. Each entry receives its live
-// captures as parameters, and a reference to an entry passes those captures from
-// the enclosing scope. Because the compiler gives every binding a globally
-// unique name, a capture is threaded under that one name the whole way down — an
-// intermediate entry that binds a same-looking variable has a different unique
-// name, so there is nothing to disambiguate and nothing to rename.
-//
-// A splice hole is filled one of two ways, chosen per entry:
-//
-//   - Monomorphic entry — every reference to it passes structurally identical
-//     splice arguments. The arguments are inlined directly into the body (a
-//     nested-script argument as a call of its entry, a runtime value as a
-//     literal),
-//     so the entry takes no splice parameters.
-//   - Polymorphic entry — the same body (one source location) is reached with
-//     differing splice arguments, as when a host helper builds a fragment from
-//     its parameters and is called more than once (see the `splice-sharing`
-//     fixture). Its splices can't be baked in, so each becomes a parameter
-//     `$i`: the body fills the hole with `$i()` and every reference passes that
-//     call's argument as a thunk. This threads splices exactly like captures,
-//     just positionally.
+// refers to the binding it was written under. Each script receives its live
+// captures as parameters, and a call of it passes those captures from the
+// enclosing scope. Because the compiler gives every binding a globally unique
+// name, a capture is threaded under that one name the whole way down — an
+// intermediate script that binds a same-looking variable has a different
+// unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle<T extends ClientUnknown>(
   value: Spliceable<T>,
 ): Promise<BundleTree> {
   const names = createNames();
-  // The `functions` table, filled as rendering reaches each script. Two scripts
-  // written at one source location are one entry, so the first script with an
-  // id stands for all of them, and a reference to a shared script is a
-  // reference to the same object. Keyed by that script so a label is a lookup
-  // rather than a scan, and ordered by insertion, which is the table order the
-  // tail emits in.
-  const scripts = new Map<ClientScript, number>();
-  const entryById = new Map<string, ClientScript>();
-  const entryFor = (script: ClientScript): ClientScript => {
-    const existing = entryById.get(script.id);
+  // Each script's number, in the order rendering first reaches it. Two
+  // scripts written at one source location are one declaration, so the first
+  // script with an id stands for all of them, and a reference to a shared
+  // script is a reference to the same object. Keyed by that script so a label
+  // is a lookup rather than a scan, and ordered by insertion, which is the
+  // order the tail declares them in.
+  const numbers = new Map<ClientScript, number>();
+  const scriptById = new Map<string, ClientScript>();
+  const scriptFor = (script: ClientScript): ClientScript => {
+    const existing = scriptById.get(script.id);
     if (existing !== undefined) {
       return existing;
     }
-    entryById.set(script.id, script);
-    scripts.set(script, scripts.size);
+    scriptById.set(script.id, script);
+    numbers.set(script, numbers.size);
     return script;
   };
   // A binding key printed under its source name, with a numeric suffix when two
@@ -101,9 +92,9 @@ export async function buildBundle<T extends ClientUnknown>(
   // shadow what the outer was handed (`shadowing` nests three).
   //
   // One scope, which is the bundle root: what a drawing is written into now
-  // that structure goes where it stands. A `functions` entry's names are the
-  // compiler's, from its own script — nothing out here reads those names,
-  // because a call site hands an entry its arguments positionally, and its
+  // that structure goes where it stands. A declared script's names are the
+  // compiler's, from its own source — nothing out here reads those names,
+  // because a call hands a script its arguments positionally, and its
   // captures arrive as numbered parameters rather than under a name.
   const displayed = new Map<string, string>();
   const used = new Set<string>(RESERVED);
@@ -122,8 +113,8 @@ export async function buildBundle<T extends ClientUnknown>(
     return name;
   };
 
-  // How a hole is reached. Its name is the path the function read: `$0` is the
-  // parameter itself, and `$0.title` is a field of it, read where the drawing
+  // How a hole is reached. Its name is the path the function read: `$arg0` is
+  // the parameter itself, and `$arg0.title` is a field of it, read where the drawing
   // reads it.
   const holeRead = (name: string): string => {
     const [param, ...path] = name.split(".");
@@ -134,14 +125,14 @@ export async function buildBundle<T extends ClientUnknown>(
     return read;
   };
 
-  // The entry-declared bindings a hole feeds its thunk, so a spliced fragment
+  // The script-declared bindings a hole feeds its thunk, so a spliced fragment
   // sees the bindings in scope at its hole even though the thunk is written at
   // the call site. The body's hole call and every thunk's parameter list read
   // this, so they agree positionally.
   //
-  // Read off the entry's own source (see `splices` in `resolveBindings`),
+  // Read off the script's own source (see `splices` in `resolveBindings`),
   // not off what the arguments reaching that hole in this bundle happen to
-  // capture. That is what lets an entry be compiled from its script alone: a
+  // capture. That is what lets a script be compiled from its source alone: a
   // second call site appearing elsewhere in a render cannot change a thunk a
   // first one already had.
   //
@@ -156,20 +147,17 @@ export async function buildBundle<T extends ClientUnknown>(
   // every one looked up on the way.
   const declared = new Set<ClientScript>();
 
-  // A script entry's label: where it landed in the table.
-  const fnLabel = (target: ClientScript): string =>
-    `$f${scripts.get(target)! + 1}`;
+  // A declared script's label: `$cs` and its number.
+  const labelOf = (target: ClientScript): string =>
+    `$cs${numbers.get(target)!}`;
 
-  // An entry takes a `$i` parameter per splice — its holes render as calls
-  // `$i()` — ahead of its environment. Nothing from a call site is inlined,
-  // so its code is a function of the script's source alone.
-  const materialize = (script: ClientScript): void => {
+  const declare = (script: ClientScript): void => {
     declared.add(script);
   };
 
-  // A fragment that is one entry whose parameters are exactly what this hole
+  // A fragment that is one script whose parameters are exactly what this hole
   // passes, so calling it is what a thunk around it would have done. The lists
-  // are compared rather than assumed: a hole hands over what its own entry has,
+  // are compared rather than assumed: a hole hands over what its own script has,
   // and a fragment wants what its own script needs, and those coincide often
   // but not always.
   const forwarding = (
@@ -182,7 +170,7 @@ export async function buildBundle<T extends ClientUnknown>(
     ) {
       return null;
     }
-    const target = entryFor(value);
+    const target = scriptFor(value);
     const wanted = capturesOf(target);
     if (
       wanted.length !== passed.length ||
@@ -190,12 +178,12 @@ export async function buildBundle<T extends ClientUnknown>(
     ) {
       return null;
     }
-    materialize(target);
-    return fnLabel(target);
+    declare(target);
+    return labelOf(target);
   };
 
   // Writes a value as the code it becomes: composition as data, which is what
-  // a bundle is. A script reference is an application naming which entry and
+  // a bundle is. A script reference is a call naming which script and
   // what to hand it; everything else is its literal form. Rendered in order,
   // one value after the other, so the table follows the order rendering first
   // reached each script.
@@ -211,9 +199,9 @@ export async function buildBundle<T extends ClientUnknown>(
       return holeRead(hole);
     }
     if (isClientScript(value)) {
-      const target = entryFor(value);
-      materialize(target);
-      return call(fnLabel(target), await exprCallArgs(value, params));
+      const target = scriptFor(value);
+      declare(target);
+      return call(labelOf(target), await exprCallArgs(value, params));
     }
     if (isJsxElement(value)) {
       return renderJsx(value, params);
@@ -283,7 +271,7 @@ export async function buildBundle<T extends ClientUnknown>(
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
-  // resolves by name; anything else must be a parameter of the enclosing entry.
+  // resolves by name; anything else must be a parameter of the enclosing script.
   // At
   // the bundle root there is no enclosing instance, so a capture reaching it
   // can't be threaded from anywhere.
@@ -306,24 +294,24 @@ export async function buildBundle<T extends ClientUnknown>(
     );
   };
 
-  // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
+  // The arguments of a call of a declared script: for
   // one `#thunk` per splice ahead of the environment.
   const exprCallArgs = async (
     ref: ClientScript,
     params: ReadonlySet<string>,
   ): Promise<string[]> => {
-    const target = entryFor(ref);
+    const target = scriptFor(ref);
     const parts: string[] = [];
     const splices = ref.metadata.params.flatMap((param) =>
       param.kind === "capture" ? [] : [param],
     );
     for (const [index, { kind, value: arg }] of splices.entries()) {
-      // A tag is handed over as the value it names, as its entry reads it.
+      // A tag is handed over as the value it names, as its script reads it.
       if (kind === "tag") {
         parts.push(await render(arg, params));
         continue;
       }
-      // What the hole hands over, in the order the entry fixes: the bindings
+      // What the hole hands over, in the order the script fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.
       const passed = [...passKeys(target, index), ...capturesOf(target)];
@@ -353,7 +341,7 @@ export async function buildBundle<T extends ClientUnknown>(
 
   // A tag. A component runs on the host and what it drew stands where the tag
   // stood; an element is its own name, each prop an expression in the
-  // enclosing entry's scope.
+  // enclosing script's scope.
   //
   // A prop that is `undefined` is left out, as JSX and TypeScript's optional
   // props read it: a component forwarding an optional prop it wasn't given
@@ -395,7 +383,7 @@ export async function buildBundle<T extends ClientUnknown>(
     return jsxElement(tag, written, children);
   };
 
-  // A prop, as an expression in the enclosing entry's scope.
+  // A prop, as an expression in the enclosing script's scope.
   const renderProp = async (
     jsx: JsxElement,
     key: string,
@@ -419,11 +407,11 @@ export async function buildBundle<T extends ClientUnknown>(
   // Nothing encloses the root, so nothing it holds can capture.
   const root = await render(value as Spliceable);
   // In table order, which is the order rendering first reached each script.
-  const functions: (readonly [string, ClientScript])[] = [];
-  for (const script of scripts.keys()) {
+  const scripts: (readonly [string, ClientScript])[] = [];
+  for (const script of numbers.keys()) {
     if (declared.has(script)) {
-      functions.push([fnLabel(script), script]);
+      scripts.push([labelOf(script), script]);
     }
   }
-  return { functions, root, names };
+  return { scripts, root, names };
 }

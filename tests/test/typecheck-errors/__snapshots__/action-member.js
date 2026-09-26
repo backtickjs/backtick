@@ -10,6 +10,6 @@ const action = cs.create(
 export default cs.create(
   "lzbinin395o6:9:15",
   { params: [{ kind: "splice", value: [action], bindings: [] }] },
-  "($0) => {\n    const list = $0();\n    return 1;\n}",
-  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["typecheck-errors/action-member.test.tsx"],"names":[],"mappings":"AAQkB;IAEhB,MAAM,IAAI,GAAG,IAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC"}',
+  "($splice0) => {\n    const list = $splice0();\n    return 1;\n}",
+  '{"version":3,"file":"action-member.test.jsx","sourceRoot":"","sources":["typecheck-errors/action-member.test.tsx"],"names":[],"mappings":"AAQkB;IAEhB,MAAM,IAAI,GAAG,UAAC,CAAW;IACzB,OAAO,CAAC,CAAC;AACX,CAAC"}',
 );

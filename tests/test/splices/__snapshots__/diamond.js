@@ -15,26 +15,26 @@ const d0 = cs.create(
 const d1 = cs.create(
   "23y608t6y2wp3:12:11",
   { params: [{ kind: "splice", value: d0, bindings: [] }] },
-  "($0) => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAWc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+  "($splice0) => {\n    return $splice0() + $splice0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAWc;IACZ,OAAO,UAAG,GAAG,UAAG,CAAC;AACnB,CAAC"}',
 );
 const d2 = cs.create(
   "23y608t6y2wp3:16:11",
   { params: [{ kind: "splice", value: d1, bindings: [] }] },
-  "($0) => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAec;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+  "($splice0) => {\n    return $splice0() + $splice0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAec;IACZ,OAAO,UAAG,GAAG,UAAG,CAAC;AACnB,CAAC"}',
 );
 const d3 = cs.create(
   "23y608t6y2wp3:20:11",
   { params: [{ kind: "splice", value: d2, bindings: [] }] },
-  "($0) => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAmBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+  "($splice0) => {\n    return $splice0() + $splice0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAmBc;IACZ,OAAO,UAAG,GAAG,UAAG,CAAC;AACnB,CAAC"}',
 );
 const d4 = cs.create(
   "23y608t6y2wp3:24:11",
   { params: [{ kind: "splice", value: d3, bindings: [] }] },
-  "($0) => {\n    return $0() + $0();\n}",
-  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAuBc;IACZ,OAAO,IAAG,GAAG,IAAG,CAAC;AACnB,CAAC"}',
+  "($splice0) => {\n    return $splice0() + $splice0();\n}",
+  '{"version":3,"file":"diamond.test.jsx","sourceRoot":"","sources":["splices/diamond.test.tsx"],"names":[],"mappings":"AAuBc;IACZ,OAAO,UAAG,GAAG,UAAG,CAAC;AACnB,CAAC"}',
 );
 it("diamond", async (t) => {
   await snapshotCase(t, "diamond", d4);

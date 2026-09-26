@@ -5,15 +5,15 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<em>`);
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
-const $f1 = ($0, $1) => {
-  const asked = $0()(0);
+const $cs0 = ($splice0, $tag1) => {
+  const asked = $splice0()(0);
   return (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     _$insert(_el$2, () => "asked " + asked[0]());
     _$insert(
       _el$,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         more: () => {
           asked[1](asked[0]() + 1);
           return asked[0]() < 5;
@@ -24,14 +24,14 @@ const $f1 = ($0, $1) => {
     return _el$;
   })();
 };
-const $f2 = ($0, $1, $2, $3, $4) => {
-  const items = $0()([]);
-  const started = $1().setTimeout(() => {
-    if ($2()()) {
-      items[1]($3());
+const $cs1 = ($splice0, $splice1, $splice2, $splice3, $tag4) => {
+  const items = $splice0()([]);
+  const started = $splice1().setTimeout(() => {
+    if ($splice2()()) {
+      items[1]($splice3());
     }
   }, 0);
-  return _$createComponent($4, {
+  return _$createComponent($tag4, {
     get each() {
       return items[0]();
     },
@@ -44,24 +44,24 @@ const $f2 = ($0, $1, $2, $3, $4) => {
   });
 };
 export default () =>
-  $f1(
+  $cs0(
     () => $i0,
-    ($0) =>
-      $f2(
+    ($arg0) =>
+      $cs1(
         () => $i0,
         () => globalThis.window,
-        () => $0.more,
+        () => $arg0.more,
         () => ["one", "two"],
-        ($0) =>
+        ($arg0) =>
           _$createComponent($i1, {
             get each() {
-              return $0.each;
+              return $arg0.each;
             },
             get fallback() {
-              return $0.fallback;
+              return $arg0.fallback;
             },
             get children() {
-              return $0.children;
+              return $arg0.children;
             },
           }),
       ),

@@ -1,26 +1,26 @@
 // 13:10
-($0) => {
+($splice0) => {
     const Badge = (p) => <i>{"panel " + p.n}</i>;
     return (<section>
         <Badge n={0}/>
-        {$0().body}
+        {$splice0().body}
       </section>);
 }
 
 // 28:31
-($0, $1, $2) => {
-    const count = $0()(0);
+($splice0, $splice1, $tag2) => {
+    const count = $splice0()(0);
     const Badge = (p) => (<b>
       {"outer " + p.n}
       {p.children}
     </b>);
     return (<div>
-      <$2 body={$1(count, Badge)}/>
+      <$tag2 body={$splice1(count, Badge)}/>
       <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>);
 }
 
 // 41:13
-($0, $1) => <$0 n={$1[0]()}>
-            <u>{"kid " + $1[0]()}</u>
-          </$0>
+($capture0, $capture1) => <$capture0 n={$capture1[0]()}>
+            <u>{"kid " + $capture1[0]()}</u>
+          </$capture0>

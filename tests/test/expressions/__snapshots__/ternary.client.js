@@ -4,7 +4,7 @@
 }
 
 // 15:5
-($0) => ({
-    absent: $0()(null),
-    present: $0()(4),
+($splice0) => ({
+    absent: $splice0()(null),
+    present: $splice0()(4),
 })

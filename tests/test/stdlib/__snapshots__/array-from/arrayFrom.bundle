@@ -1,4 +1,4 @@
-const $f1 = () => {
+const $cs0 = () => {
   const doubled = Array.from(
     {
       length: 4,
@@ -19,4 +19,4 @@ const $f1 = () => {
   );
   return doubled.join(",") + "|" + empty.length + "|" + absent.join(",");
 };
-export default () => $f1();
+export default () => $cs0();

@@ -1,6 +1,6 @@
 // 19:10
-($0, $1) => {
-    const rows = $0()([]);
+($splice0, $tag1) => {
+    const rows = $splice0()([]);
     const add = (row) => {
         rows[1]([row]);
     };
@@ -10,7 +10,7 @@
     return (<div>
         <span onclick={() => add({ id: 1, label: "one" })}>add</span>
         <div>
-          <$1 each={rows[0]()}>{(row) => <span>{label(row)}</span>}</$1>
+          <$tag1 each={rows[0]()}>{(row) => <span>{label(row)}</span>}</$tag1>
         </div>
       </div>);
 }

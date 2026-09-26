@@ -1,14 +1,14 @@
 // 13:5
-($0, $1) => {
+($splice0, $splice1) => {
     const twice = (Row) => (<ul>
-          {$0(Row)}
-          {$1(Row)}
+          {$splice0(Row)}
+          {$splice1(Row)}
         </ul>);
     return twice((p) => <li>{"row " + p.n}</li>);
 }
 
 // 16:14
-($0) => <$0 n={1}/>
+($capture0) => <$capture0 n={1}/>
 
 // 17:14
-($0) => <$0 n={2}/>
+($capture0) => <$capture0 n={2}/>

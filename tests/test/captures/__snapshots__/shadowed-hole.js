@@ -13,8 +13,8 @@ function wrapShadowed(fragment) {
   return cs.create(
     "1wiy7dknp0llv:15:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    "($0) => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $0();\n    }\n}",
-    '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,IAAS,CAAC;IAC3B,CAAC;AACH,CAAC"}',
+    "($splice0) => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $splice0();\n    }\n}",
+    '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,UAAS,CAAC;IAC3B,CAAC;AACH,CAAC"}',
   );
 }
 it("shadowedHole", async (t) => {
@@ -51,8 +51,8 @@ it("shadowedHole", async (t) => {
           },
         ],
       },
-      "($0, $1) => $0() + $1()",
-      '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BO,YAAA,IAAC,GAAyB,IAAC"}',
+      "($splice0, $splice1) => $splice0() + $splice1()",
+      '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BO,wBAAA,UAAC,GAAyB,UAAC"}',
     ),
   );
 });

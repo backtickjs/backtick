@@ -27,8 +27,8 @@ async function WaitingList({ more }) {
         { kind: "tag", value: For },
       ],
     },
-    "($0, $1, $2, $3, $4) => {\n    const items = $0()([]);\n    const started = $1().setTimeout(() => {\n        if ($2()()) {\n            items[1]($3());\n        }\n    }, 0);\n    return <$4 each={items[0]()}>{(item) => <em>{item}</em>}</$4>;\n}",
-    '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAqBY;IACR,MAAM,KAAK,GAAG,IAAa,CAAW,EAAE,CAAC,CAAC;IAE1C,MAAM,OAAO,GAAG,IAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,IAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,CAAC,CAAC,CAAC,IAAY,CAAC,CAAC;QACzB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,EAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,EAAG,CAAC,CAAC;AAC1E,CAAC"}',
+    "($splice0, $splice1, $splice2, $splice3, $tag4) => {\n    const items = $splice0()([]);\n    const started = $splice1().setTimeout(() => {\n        if ($splice2()()) {\n            items[1]($splice3());\n        }\n    }, 0);\n    return <$tag4 each={items[0]()}>{(item) => <em>{item}</em>}</$tag4>;\n}",
+    '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAqBY;IACR,MAAM,KAAK,GAAG,UAAa,CAAW,EAAE,CAAC,CAAC;IAE1C,MAAM,OAAO,GAAG,UAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,UAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,CAAC,CAAC,CAAC,UAAY,CAAC,CAAC;QACzB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,KAAG,CAAC,CAAC;AAC1E,CAAC"}',
   );
 }
 const forBuildsOnce = cs.create(
@@ -39,8 +39,8 @@ const forBuildsOnce = cs.create(
       { kind: "tag", value: WaitingList },
     ],
   },
-  '($0, $1) => {\n    const asked = $0()(0);\n    return (<div>\n      <span>{"asked " + asked[0]()}</span>\n      <$1 more={() => {\n            asked[1](asked[0]() + 1);\n            return asked[0]() < 5;\n        }}/>\n    </div>);\n}',
-  '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAkCyB;IACvB,MAAM,KAAK,GAAG,IAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,EAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  '($splice0, $tag1) => {\n    const asked = $splice0()(0);\n    return (<div>\n      <span>{"asked " + asked[0]()}</span>\n      <$tag1 more={() => {\n            asked[1](asked[0]() + 1);\n            return asked[0]() < 5;\n        }}/>\n    </div>);\n}',
+  '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAkCyB;IACvB,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,KAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
 );
 it("forBuildsOnce", async (t) => {
   await snapshotCase(t, "forBuildsOnce", forBuildsOnce);

@@ -13,8 +13,8 @@ it("objectIndex", async (t) => {
     cs.create(
       "o3ttyh4dq4dw:15:4",
       { params: [{ kind: "splice", value: rates, bindings: [] }] },
-      '($0) => (currency) => {\n    const table = $0();\n    const asked = table[currency] ?? 0;\n    const usd = table["usd"] ?? 0;\n    return asked + usd;\n}',
-      '{"version":3,"file":"object-index.test.jsx","sourceRoot":"","sources":["objects/object-index.test.tsx"],"names":[],"mappings":"AAcO,QAAA,CAAC,QAAgB,EAAE,EAAE;IACtB,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,MAAM,KAAK,GAAG,KAAK,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC;IACnC,MAAM,GAAG,GAAG,KAAK,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC;IAC9B,OAAO,KAAK,GAAG,GAAG,CAAC;AACrB,CAAC"}',
+      '($splice0) => (currency) => {\n    const table = $splice0();\n    const asked = table[currency] ?? 0;\n    const usd = table["usd"] ?? 0;\n    return asked + usd;\n}',
+      '{"version":3,"file":"object-index.test.jsx","sourceRoot":"","sources":["objects/object-index.test.tsx"],"names":[],"mappings":"AAcO,cAAA,CAAC,QAAgB,EAAE,EAAE;IACtB,MAAM,KAAK,GAAG,UAAM,CAAC;IACrB,MAAM,KAAK,GAAG,KAAK,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC;IACnC,MAAM,GAAG,GAAG,KAAK,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC;IAC9B,OAAO,KAAK,GAAG,GAAG,CAAC;AACrB,CAAC"}',
     ),
   );
 });

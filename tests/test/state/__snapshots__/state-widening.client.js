@@ -1,11 +1,11 @@
 // 24:10
-($0, $1, $2) => {
-    const flag = $0()(true);
-    const tone = $0()($1());
-    const step = $0()(() => 0);
+($splice0, $splice1, $splice2) => {
+    const flag = $splice0()(true);
+    const tone = $splice0()($splice1());
+    const step = $splice0()(() => 0);
     return (<span onclick={() => {
             flag[1](false);
-            tone[1]($2());
+            tone[1]($splice2());
             step[1](() => () => 1);
         }}>
         {flag[0]() + " " + tone[0]() + " " + step[0]()()}

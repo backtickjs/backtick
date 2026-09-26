@@ -35,8 +35,8 @@ function wrap(start) {
                             { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
                           ],
                         },
-                        "($0) => $0",
-                        '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAoBgC,QAAA,EAAK"}',
+                        "($capture0) => $capture0",
+                        '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAoBgC,eAAA,SAAK"}',
                       ),
                     ),
                     bindings: [],
@@ -44,24 +44,24 @@ function wrap(start) {
                   { kind: "capture", key: "outer$zqr0jsdf8ub6$0" },
                 ],
               },
-              "($0, $1) => {\n    const middle = 10;\n    return middle + $0($1);\n}",
-              '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAkBoB;IACd,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,MAAC,CAAkB;AACrC,CAAC"}',
+              "($splice0, $capture1) => {\n    const middle = 10;\n    return middle + $splice0($capture1);\n}",
+              '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAkBoB;IACd,MAAM,MAAM,GAAG,EAAE,CAAC;IAClB,OAAO,MAAM,GAAG,mBAAC,CAAkB;AACrC,CAAC"}',
             ),
           ),
           bindings: ["outer$zqr0jsdf8ub6$0"],
         },
       ],
     },
-    "($0, $1) => {\n    const outer = $0();\n    return $1(outer);\n}",
-    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAgBY;IACR,MAAM,KAAK,GAAG,IAAM,CAAC;IACrB,OAAO,SAAC,CAGH;AACP,CAAC"}',
+    "($splice0, $splice1) => {\n    const outer = $splice0();\n    return $splice1(outer);\n}",
+    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAgBY;IACR,MAAM,KAAK,GAAG,UAAM,CAAC;IACrB,OAAO,eAAC,CAGH;AACP,CAAC"}',
   );
 }
 function foo(start) {
   return cs.create(
     "zqr0jsdf8ub6:27:9",
     { params: [{ kind: "splice", value: start, bindings: [] }] },
-    "($0) => $0() + 1",
-    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AA0BY,QAAA,IAAM,GAAG,CAAC"}',
+    "($splice0) => $splice0() + 1",
+    '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AA0BY,cAAA,UAAM,GAAG,CAAC"}',
   );
 }
 function same(script) {
@@ -101,8 +101,8 @@ it("hostWrappedSplice", async (t) => {
           },
         ],
       },
-      "($0, $1) => $0() + $1()",
-      '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCO,YAAA,IAAC,GAAgB,IAAC"}',
+      "($splice0, $splice1) => $splice0() + $splice1()",
+      '{"version":3,"file":"host-wrapped-splice.test.jsx","sourceRoot":"","sources":["splices/host-wrapped-splice.test.tsx"],"names":[],"mappings":"AAqCO,wBAAA,UAAC,GAAgB,UAAC"}',
     ),
   );
 });

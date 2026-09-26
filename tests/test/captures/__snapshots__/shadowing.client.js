@@ -1,16 +1,16 @@
 // 7:10
-($0, $1) => {
+($splice0, $splice1) => {
     let total = 0;
-    total = total + $0();
-    total = total + $1();
+    total = total + $splice0();
+    total = total + $splice1();
     return total;
 }
 
 // 19:5
-($0) => {
+($splice0) => {
     const total = 1;
-    return $0(total);
+    return $splice0(total);
 }
 
 // 21:28
-($0) => $0
+($capture0) => $capture0

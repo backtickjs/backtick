@@ -1,16 +1,16 @@
 // 17:12
-($0) => "font-size: " + $0()[0]() + "px"
+($splice0) => "font-size: " + $splice0()[0]() + "px"
 
 // 18:14
-($0) => () => {
-    $0()[1]($0()[0]() + 1);
+($splice0) => () => {
+    $splice0()[1]($splice0()[0]() + 1);
 }
 
 // 27:10
-($0, $1) => {
-    const size = $0()(16);
+($splice0, $tag1) => {
+    const size = $splice0()(16);
     return (<div>
-        <$1 size={size}/>
-        <$1 size={size}/>
+        <$tag1 size={size}/>
+        <$tag1 size={size}/>
       </div>);
 }

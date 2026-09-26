@@ -29,8 +29,8 @@ it("scriptComponent", async (t) => {
           { kind: "tag", value: Badge },
         ],
       },
-      '($0, $1) => {\n    return (<div>\n          <$0 title="totals"/>\n          <$1 />\n        </div>);\n}',
-      '{"version":3,"file":"script-component.test.jsx","sourceRoot":"","sources":["components/script-component.test.tsx"],"names":[],"mappings":"AA0BO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,EAAI,CAAC,KAAK,CAAC,QAAQ,EACpB;UAAA,CAAC,EAAK,CAAC,AAAD,EACR;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      '($tag0, $tag1) => {\n    return (<div>\n          <$tag0 title="totals"/>\n          <$tag1 />\n        </div>);\n}',
+      '{"version":3,"file":"script-component.test.jsx","sourceRoot":"","sources":["components/script-component.test.tsx"],"names":[],"mappings":"AA0BO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAI,CAAC,KAAK,CAAC,QAAQ,EACpB;UAAA,CAAC,KAAK,CAAC,AAAD,EACR;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     ),
   );
 });

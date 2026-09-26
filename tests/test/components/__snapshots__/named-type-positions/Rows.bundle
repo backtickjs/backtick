@@ -7,8 +7,8 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>add</span><div>`),
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
 const $Script = (props) => props.run();
-const $f1 = ($0, $1) => {
-  const rows = $0()([]);
+const $cs0 = ($splice0, $tag1) => {
+  const rows = $splice0()([]);
   const add = (row) => {
     rows[1]([row]);
   };
@@ -26,7 +26,7 @@ const $f1 = ($0, $1) => {
       });
     _$insert(
       _el$3,
-      _$createComponent($1, {
+      _$createComponent($tag1, {
         get each() {
           return rows[0]();
         },
@@ -44,18 +44,18 @@ const $f1 = ($0, $1) => {
 export default () =>
   _$createComponent($Script, {
     run: () =>
-      $f1(
+      $cs0(
         () => $i0,
-        ($0) =>
+        ($arg0) =>
           _$createComponent($i1, {
             get each() {
-              return $0.each;
+              return $arg0.each;
             },
             get fallback() {
-              return $0.fallback;
+              return $arg0.fallback;
             },
             get children() {
-              return $0.children;
+              return $arg0.children;
             },
           }),
       ),

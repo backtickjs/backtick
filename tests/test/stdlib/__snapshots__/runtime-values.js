@@ -13,8 +13,8 @@ it("runtimeValues", async (t) => {
           { kind: "splice", value: { k: 3 }, bindings: [] },
         ],
       },
-      "($0, $1) => ({\n    list: $0(),\n    obj: $1(),\n})",
-      '{"version":3,"file":"runtime-values.test.jsx","sourceRoot":"","sources":["stdlib/runtime-values.test.tsx"],"names":[],"mappings":"AAQO,YAAA,CAAC;IACF,IAAI,EAAE,IAAC;IACP,GAAG,EAAE,IAAC;CACP,CAAC"}',
+      "($splice0, $splice1) => ({\n    list: $splice0(),\n    obj: $splice1(),\n})",
+      '{"version":3,"file":"runtime-values.test.jsx","sourceRoot":"","sources":["stdlib/runtime-values.test.tsx"],"names":[],"mappings":"AAQO,wBAAA,CAAC;IACF,IAAI,EAAE,UAAC;IACP,GAAG,EAAE,UAAC;CACP,CAAC"}',
     ),
   );
 });

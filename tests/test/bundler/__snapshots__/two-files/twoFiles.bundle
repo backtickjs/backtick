@@ -4,17 +4,17 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<p>in `),
   _tmpl$2 = /*#__PURE__*/ _$template(`<b>badge`);
 const $Script = (props) => props.run();
-const $f1 = ($0) =>
+const $cs0 = ($splice0) =>
   (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
-    _$insert(_el$, $0, null);
+    _$insert(_el$, $splice0, null);
     return _el$;
   })();
-const $f2 = () => _tmpl$2();
+const $cs1 = () => _tmpl$2();
 export default () =>
-  $f1(() =>
+  $cs0(() =>
     _$createComponent($Script, {
-      run: () => $f2(),
+      run: () => $cs1(),
     }),
   );

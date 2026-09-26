@@ -1,2 +1,2 @@
-const $f1 = () => 1;
-export default () => $f1();
+const $cs0 = () => 1;
+export default () => $cs0();
