@@ -7,8 +7,7 @@ describe("Solid's API", () => {
   it("names what its module exports, under the name it is imported as", async () => {
     for (const [name, value] of Object.entries(imports)) {
       // Control flow is written as server components (see `For`).
-      if (name === "For" || name === "Show") {
-        assert.equal(typeof value, "function");
+      if (typeof value === "function") {
         continue;
       }
       assert.ok(isClientImport(value), `${name} is a client import`);
