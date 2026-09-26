@@ -1,0 +1,23 @@
+cs.lift((() => {\n    // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n    → cs`{\n  // @ts-expect-error: Property 'hostValue' does not exist on type 'GlobalThis'.\n  
+return                                    → return 
+cs.globalThis.                            → 
+hostValue                                 → hostValue
+ +                                        →  + 
+1                                         → 1
+;                                         → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n    // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n    → cs`{\n  // @ts-expect-error: Property 'count' does not exist on type 'GlobalThis'.\n  
+cs.globalThis.                            → 
+count                                     → count
+ =                                        →  = 
+1                                         → 1
+;                                         → ;
+\n})())                                   → \n}`
+cs.lift(                                  → cs`
+cs.globalThis.                            → 
+window                                    → window
+.                                         → .
+location                                  → location
+.                                         → .
+href                                      → href
+)                                         → `

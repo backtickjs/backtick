@@ -2,6 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_doubled            → doubled
  =                      →  = 
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 from                    → from
@@ -26,6 +27,7 @@ __cs_index              → index
 const                   → const 
 __cs_empty              → empty
  =                      →  = 
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 from                    → from
@@ -48,6 +50,7 @@ __cs_index              → index
 const                   → const 
 __cs_absent             → absent
  =                      →  = 
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 from                    → from

@@ -1,53 +1,49 @@
-cs.lift((() => {\n                → cs`{\n      
-const                             → const 
-__cs_stop                         → stop
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(window)                          → $window
- satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-clearInterval                     → clearInterval
-;                                 → ;
-\n                                → \n      
-const                             → const 
-__cs_repeating                    → repeating
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(window)                          → $window
- satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-setInterval                       → setInterval
-(                                 → (
-() =>                             → () => 
-0                                 → 0
-,                                 → , 
-1000                              → 1000
-)                                 → )
-;                                 → ;
-\n                                → \n      
-__cs_stop                         → stop
-(                                 → (
-__cs_repeating                    → repeating
-)                                 → )
-;                                 → ;
-\n                                → \n      
-cs.splice(                        →  [-semantic]
-(window)                          → $window
- satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-clearTimeout                      → clearTimeout
-(                                 → (
-cs.splice(                        →  [-semantic]
-(window)                          → $window
- satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-setTimeout                        → setTimeout
-(                                 → (
-() =>                             → () => 
-0                                 → 0
-,                                 → , 
-1000                              → 1000
-)                                 → )
-)                                 → )
-;                                 → ;
-\n})())                           → \n    }`
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_stop               → stop
+ =                      →  = 
+cs.globalThis.          → 
+window                  → window
+.                       → .
+clearInterval           → clearInterval
+;                       → ;
+\n                      → \n      
+const                   → const 
+__cs_repeating          → repeating
+ =                      →  = 
+cs.globalThis.          → 
+window                  → window
+.                       → .
+setInterval             → setInterval
+(                       → (
+() =>                   → () => 
+0                       → 0
+,                       → , 
+1000                    → 1000
+)                       → )
+;                       → ;
+\n                      → \n      
+__cs_stop               → stop
+(                       → (
+__cs_repeating          → repeating
+)                       → )
+;                       → ;
+\n                      → \n      
+cs.globalThis.          → 
+window                  → window
+.                       → .
+clearTimeout            → clearTimeout
+(                       → (
+cs.globalThis.          → 
+window                  → window
+.                       → .
+setTimeout              → setTimeout
+(                       → (
+() =>                   → () => 
+0                       → 0
+,                       → , 
+1000                    → 1000
+)                       → )
+)                       → )
+;                       → ;
+\n})())                 → \n    }`

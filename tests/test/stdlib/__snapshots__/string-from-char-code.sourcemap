@@ -3,6 +3,7 @@ return                  → return
 <                       → (\n      <
 span                    → span
 >{cs.lift(              → >\n        {
+cs.globalThis.          → 
 String                  → String
 .                       → .
 fromCharCode            → fromCharCode
@@ -12,6 +13,7 @@ fromCharCode            → fromCharCode
 105                     → 105
 )                       → )
  +                      →  + 
+cs.globalThis.          → 
 String                  → String
 .                       → .
 fromCharCode            → fromCharCode

@@ -177,9 +177,8 @@ p                                 → p
 ref                               → ref
 ={cs.lift(                        → ={
 () =>                             → () => 
-cs.splice(                        →  [-semantic]
-(window)                          → $window
- satisfies typeof cs.Spliceable)  →  [-semantic]
+cs.globalThis.                    → 
+window                            → window
 .                                 → .
 console                           → console
 .                                 → .

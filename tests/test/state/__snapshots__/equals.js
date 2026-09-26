@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 // Each reader logs when it runs, so a test counts the runs by counting the
@@ -23,16 +22,15 @@ describe("equals", () => {
   it("keeps a memo's readers from updating for an equal value", async () => {
     await render(
       cs.create(
-        "274064prm9jpl:28:6",
+        "46tvqexcd69t:27:6",
         {
           params: [
             { kind: "splice", value: createSignal, bindings: [] },
             { kind: "splice", value: createMemo, bindings: [] },
-            { kind: "splice", value: window, bindings: [] },
           ],
         },
-        '($splice0, $splice1, $splice2) => {\n    const n = $splice0()(1);\n    const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });\n    const label = () => {\n        $splice2().console.log();\n        return size().isBig ? "big" : "small";\n    };\n    return (<div>\n            <button onclick={() => n[1](n[0]() + 1)}>add</button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AA2BS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,IAAI,GAAG,UAAW,CACtB,GAAG,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,EACxC,SAAS,EACT,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,KAAK,KAAK,IAAI,CAAC,KAAK,EAAE,CAC9D,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,OAAO,CAAC;IACxC,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACpD;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        '($splice0, $splice1) => {\n    const n = $splice0()(1);\n    const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });\n    const label = () => {\n        window.console.log();\n        return size().isBig ? "big" : "small";\n    };\n    return (<div>\n            <button onclick={() => n[1](n[0]() + 1)}>add</button>\n            <p>{label()}</p>\n          </div>);\n}',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AA0BS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,IAAI,GAAG,UAAW,CACtB,GAAG,EAAE,CAAC,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,EACxC,SAAS,EACT,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,KAAK,KAAK,IAAI,CAAC,KAAK,EAAE,CAC9D,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACrB,OAAO,IAAI,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,OAAO,CAAC;IACxC,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,EAAE,MAAM,CACpD;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     assert.equal(logged.length, 1);
@@ -46,15 +44,10 @@ describe("equals", () => {
   it("keeps a signal's readers from updating for an equal value", async () => {
     await render(
       cs.create(
-        "274064prm9jpl:60:6",
-        {
-          params: [
-            { kind: "splice", value: createSignal, bindings: [] },
-            { kind: "splice", value: window, bindings: [] },
-          ],
-        },
-        '($splice0, $splice1) => {\n    const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });\n    const label = () => {\n        $splice1().console.log();\n        return "x " + point[0]().x;\n    };\n    return (<div>\n            <button onclick={() => point[1]({ x: point[0]().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AA2DS;IACD,MAAM,KAAK,GAAG,UAAa,CACzB,EAAE,CAAC,EAAE,CAAC,EAAE,EACR,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,EAAE,CACtD,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACnD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        "46tvqexcd69t:59:6",
+        { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+        '($splice0) => {\n    const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });\n    const label = () => {\n        window.console.log();\n        return "x " + point[0]().x;\n    };\n    return (<div>\n            <button onclick={() => point[1]({ x: point[0]().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n}',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AA0DS;IACD,MAAM,KAAK,GAAG,UAAa,CACzB,EAAE,CAAC,EAAE,CAAC,EAAE,EACR,EAAE,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE,CAAC,QAAQ,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,EAAE,CACtD,CAAC;IACF,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACrB,OAAO,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACnD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     await press();
@@ -63,15 +56,10 @@ describe("equals", () => {
   it("is handed the previous and the next value", async () => {
     await render(
       cs.create(
-        "274064prm9jpl:85:6",
-        {
-          params: [
-            { kind: "splice", value: createSignal, bindings: [] },
-            { kind: "splice", value: window, bindings: [] },
-          ],
-        },
-        '($splice0, $splice1) => {\n    const n = $splice0()(1, {\n        equals: (previous, next) => {\n            $splice1().console.log(previous, next);\n            return previous === next;\n        },\n    });\n    return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AAoFS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,EAAE;QACzB,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE;YACzB,UAAO,CAAC,OAAO,CAAC,GAAG,CAAC,QAAQ,EAAE,IAAI,CAAC,CAAC;YACpC,OAAO,QAAQ,KAAK,IAAI,CAAC;QAC3B,CAAC;KACF,CAAC,CAAC;IACH,OAAO,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,MAAM,CAAC,CAAC;AAClE,CAAC"}',
+        "46tvqexcd69t:84:6",
+        { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+        '($splice0) => {\n    const n = $splice0()(1, {\n        equals: (previous, next) => {\n            window.console.log(previous, next);\n            return previous === next;\n        },\n    });\n    return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;\n}',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AAmFS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,EAAE;QACzB,MAAM,EAAE,CAAC,QAAQ,EAAE,IAAI,EAAE,EAAE;YACzB,MAAM,CAAC,OAAO,CAAC,GAAG,CAAC,QAAQ,EAAE,IAAI,CAAC,CAAC;YACnC,OAAO,QAAQ,KAAK,IAAI,CAAC;QAC3B,CAAC;KACF,CAAC,CAAC;IACH,OAAO,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,MAAM,CAAC,CAAC;AAClE,CAAC"}',
       ),
     );
     await press();
@@ -81,15 +69,10 @@ describe("equals", () => {
   it("is `===` when left out, so the same number doesn't update", async () => {
     await render(
       cs.create(
-        "274064prm9jpl:102:6",
-        {
-          params: [
-            { kind: "splice", value: createSignal, bindings: [] },
-            { kind: "splice", value: window, bindings: [] },
-          ],
-        },
-        '($splice0, $splice1) => {\n    const n = $splice0()(1);\n    const label = () => {\n        $splice1().console.log();\n        return "n " + n[0]();\n    };\n    return (<div>\n            <button onclick={() => n[1](1)}>same</button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AAqGS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;IACvB,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC5C;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        "46tvqexcd69t:101:6",
+        { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+        '($splice0) => {\n    const n = $splice0()(1);\n    const label = () => {\n        window.console.log();\n        return "n " + n[0]();\n    };\n    return (<div>\n            <button onclick={() => n[1](1)}>same</button>\n            <p>{label()}</p>\n          </div>);\n}',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AAoGS;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACrB,OAAO,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;IACvB,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC5C;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     await press();
@@ -98,15 +81,10 @@ describe("equals", () => {
   it("is `===` when left out, so a new object always updates", async () => {
     await render(
       cs.create(
-        "274064prm9jpl:122:6",
-        {
-          params: [
-            { kind: "splice", value: createSignal, bindings: [] },
-            { kind: "splice", value: window, bindings: [] },
-          ],
-        },
-        '($splice0, $splice1) => {\n    const point = $splice0()({ x: 1 });\n    const label = () => {\n        $splice1().console.log();\n        return "x " + point[0]().x;\n    };\n    return (<div>\n            <button onclick={() => point[1]({ x: point[0]().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n}',
-        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AAyHS;IACD,MAAM,KAAK,GAAG,UAAa,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACtC,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,UAAO,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACtB,OAAO,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACnD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+        "46tvqexcd69t:121:6",
+        { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+        '($splice0) => {\n    const point = $splice0()({ x: 1 });\n    const label = () => {\n        window.console.log();\n        return "x " + point[0]().x;\n    };\n    return (<div>\n            <button onclick={() => point[1]({ x: point[0]().x })}>\n              same\n            </button>\n            <p>{label()}</p>\n          </div>);\n}',
+        '{"version":3,"file":"equals.test.jsx","sourceRoot":"","sources":["state/equals.test.tsx"],"names":[],"mappings":"AAwHS;IACD,MAAM,KAAK,GAAG,UAAa,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACtC,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC;QACrB,OAAO,IAAI,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC7B,CAAC,CAAC;IACF,OAAO,CACL,CAAC,GAAG,CACF;YAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CACnD;;YACF,EAAE,MAAM,CACR;YAAA,CAAC,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,CACjB;UAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
       ),
     );
     await press();

@@ -2,6 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_floor              → floor
  =                      →  = 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 floor                   → floor
@@ -38,6 +39,7 @@ __cs_floor              → floor
  +                      →  + 
 __cs_apply              → apply
 (                       → (
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 ceil                    → ceil

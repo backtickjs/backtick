@@ -2,6 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_rounded            → rounded
  =                      →  =\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 round                   → round
@@ -11,6 +12,7 @@ round                   → round
  +                      →  + 
 ","                     → ","
  +                      →  + 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 round                   → round
@@ -21,6 +23,7 @@ round                   → round
  +                      →  + 
 ","                     → ","
  +                      →  + 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 round                   → round
@@ -33,6 +36,7 @@ round                   → round
 const                   → const 
 __cs_edges              → edges
  =                      →  =\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 floor                   → floor
@@ -43,6 +47,7 @@ floor                   → floor
  +                      →  + 
 ","                     → ","
  +                      →  + 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 ceil                    → ceil
@@ -53,6 +58,7 @@ ceil                    → ceil
  +                      →  + 
 ","                     → ","
  +                      →  + 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 trunc                   → trunc
@@ -65,6 +71,7 @@ trunc                   → trunc
 const                   → const 
 __cs_picks              → picks
  =                      →  =\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 min                     → min
@@ -78,6 +85,7 @@ min                     → min
  +                      →  + 
 ","                     → ","
  +                      →  + 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 max                     → max
@@ -91,6 +99,7 @@ max                     → max
  +                      →  + 
 ","                     → ","
  +                      →  + 
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 abs                     → abs
@@ -113,6 +122,7 @@ __cs_picks              → picks
  +                      →  +\n        
 "|"                     → "|"
  +                      →  +\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 sqrt                    → sqrt
@@ -122,6 +132,7 @@ sqrt                    → sqrt
  +                      →  +\n        
 ","                     → ","
  +                      →  +\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 sign                    → sign
@@ -132,6 +143,7 @@ sign                    → sign
  +                      →  +\n        
 ","                     → ","
  +                      →  +\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 fround                  → fround
@@ -141,6 +153,7 @@ fround                  → fround
  +                      →  +\n        
 "|"                     → "|"
  + (                    →  +\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 PI                      → PI
@@ -150,6 +163,7 @@ PI                      → PI
  +                      →  +\n        
 ","                     → ","
  + (                    →  +\n        
+cs.globalThis.          → 
 Math                    → Math
 .                       → .
 E                       → E

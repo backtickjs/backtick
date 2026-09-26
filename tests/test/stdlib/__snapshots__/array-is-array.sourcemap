@@ -1,6 +1,7 @@
 cs.lift((() => {\n      → cs`{\n      
 return                  → return 
 [                       → [\n        
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 isArray                 → isArray
@@ -8,6 +9,7 @@ isArray                 → isArray
 []                      → []
 )                       → )
 ,                       → ,\n        
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 isArray                 → isArray
@@ -19,6 +21,7 @@ isArray                 → isArray
 ]                       → ]
 )                       → )
 ,                       → ,\n        
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 isArray                 → isArray
@@ -26,6 +29,7 @@ isArray                 → isArray
 "ab"                    → "ab"
 )                       → )
 ,                       → ,\n        
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 isArray                 → isArray
@@ -37,6 +41,7 @@ length                  → length
  }                      →  }
 )                       → )
 ,                       → ,\n        
+cs.globalThis.          → 
 Array                   → Array
 .                       → .
 isArray                 → isArray

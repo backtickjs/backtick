@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
@@ -31,7 +30,7 @@ import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_shown = cs.splice((createSignal) satisfies typeof cs.Spliceable)(false);
-    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => {
+    const __cs_started = cs.globalThis.window.setTimeout(() => {
         if (cs.splice((again) satisfies typeof cs.Spliceable)()) {
             __cs_shown[1](true);
         }

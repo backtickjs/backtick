@@ -14,9 +14,9 @@ it("arrayFrom", async (t) => {
     t,
     "arrayFrom",
     cs.lift((() => {
-    const __cs_doubled = Array.from({ length: 4 }, (__cs__, __cs_index) => __cs_index * 2);
-    const __cs_empty = Array.from({ length: 0 }, (__cs__, __cs_index) => __cs_index);
-    const __cs_absent = Array.from({ length: 2 }, (__cs_value, __cs_index) => __cs_value === undefined ? __cs_index : -1);
+    const __cs_doubled = cs.globalThis.Array.from({ length: 4 }, (__cs__, __cs_index) => __cs_index * 2);
+    const __cs_empty = cs.globalThis.Array.from({ length: 0 }, (__cs__, __cs_index) => __cs_index);
+    const __cs_absent = cs.globalThis.Array.from({ length: 2 }, (__cs_value, __cs_index) => __cs_value === undefined ? __cs_index : -1);
     return __cs_doubled.join(",") + "|" + __cs_empty.length + "|" + __cs_absent.join(",");
 })()),
   );

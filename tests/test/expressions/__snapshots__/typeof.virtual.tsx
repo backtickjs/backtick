@@ -11,7 +11,7 @@ it("typeofTable", async (t) => {
     "typeofTable",
     cs.lift((() => {
     const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
-    return [typeof undefined, typeof null, typeof true, typeof 1, typeof "a", typeof [1], typeof { a: 1 }, typeof ((__cs_n: number) => __cs_n), typeof Math.floor, typeof __cs_count];
+    return [typeof undefined, typeof null, typeof true, typeof 1, typeof "a", typeof [1], typeof { a: 1 }, typeof ((__cs_n: number) => __cs_n), typeof cs.globalThis.Math.floor, typeof __cs_count];
 })()),
   );
 });

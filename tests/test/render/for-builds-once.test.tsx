@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
@@ -22,7 +21,7 @@ async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs`{
     const items = $createSignal<string[]>([]);
 
-    const started = $window.setTimeout(() => {
+    const started = window.setTimeout(() => {
       if ($more()) {
         items[1]($answerItems);
       }

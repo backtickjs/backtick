@@ -55,6 +55,7 @@ __cs_n                  → n
 __cs_n                  → n
 ]                       → ]
  instanceof             →  instanceof 
+cs.globalThis.          → 
 Array                   → Array
 ]                       → ,\n      ]
 ;                       → ;

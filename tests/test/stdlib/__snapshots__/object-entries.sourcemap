@@ -16,10 +16,12 @@ q                       → q
 const                   → const 
 __cs_written            → written
  =                      →  = 
+cs.globalThis.          → 
 Object                  → Object
 .                       → .
 fromEntries             → fromEntries
 (                       → (\n        
+cs.globalThis.          → 
 Object                  → Object
 .                       → .
 entries                 → entries
@@ -37,6 +39,7 @@ __cs_pair               → pair
 0                       → 0
 ]                       → ]
 ,                       → , 
+cs.globalThis.          → 
 JSON                    → JSON
 .                       → .
 stringify               → stringify

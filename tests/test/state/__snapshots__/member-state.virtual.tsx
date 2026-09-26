@@ -19,7 +19,7 @@ type Row = {
 async function MemberRows() {
   return cs.lift((() => {
     const __cs_build = (__cs_from: number) => {
-        return Array.from({ length: 3 }, (__cs__, __cs_at) => {
+        return cs.globalThis.Array.from({ length: 3 }, (__cs__, __cs_at) => {
             return { id: __cs_from + __cs_at, label: cs.splice((createSignal) satisfies typeof cs.Spliceable)("row " + (__cs_from + __cs_at)) };
         });
     };

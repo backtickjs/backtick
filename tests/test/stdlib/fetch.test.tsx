@@ -1,7 +1,6 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // The platform's own `fetch`: a status is failed on by throwing, and so is a
@@ -16,9 +15,9 @@ it("fetchRequests", async (t) => {
     cs`() => {
       const held = $createSignal("waiting");
 
-      $window
+      window
         .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
-          signal: $window.AbortSignal.timeout(3000),
+          signal: window.AbortSignal.timeout(3000),
         })
         .then((response: Response) => {
           if (response.status !== 200) {
@@ -33,7 +32,7 @@ it("fetchRequests", async (t) => {
           held[1]("failed — " + String(error));
         });
 
-      $window
+      window
         .fetch("/cases", {
           method: "POST",
           headers: { "content-type": "application/json" },

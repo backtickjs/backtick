@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -26,7 +25,7 @@ describe("computed", () => {
       cs.lift((() => {
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
     const __cs_doubled = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => {
-        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
+        cs.globalThis.window.console.log();
         return __cs_n[0]() * 2;
     });
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift("a " + __cs_doubled())}</p>)}{cs.lift(<p>{cs.lift("b " + __cs_doubled())}</p>)}{cs.lift(<p>{cs.lift("c " + __cs_doubled())}</p>)}</div>;
@@ -46,7 +45,7 @@ describe("computed", () => {
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
     const __cs_isBig = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => __cs_n[0]() > 2);
     const __cs_label = () => {
-        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
+        cs.globalThis.window.console.log();
         return __cs_isBig() ? "big" : "small";
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;

@@ -16,7 +16,6 @@
     "clean": "rm -rf node_modules .cache .turbo"
   },
   "devDependencies": {
-    "@backtickjs/browser": "workspace:^0.1.0",
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/client-script": "workspace:*",
     "@backtickjs/compiler": "workspace:*",

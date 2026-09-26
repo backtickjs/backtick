@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -33,7 +32,7 @@ describe("equals", () => {
           { equals: (previous, next) => previous.isBig === next.isBig },
         );
         const label = () => {
-          $window.console.log();
+          window.console.log();
           return size().isBig ? "big" : "small";
         };
         return (
@@ -63,7 +62,7 @@ describe("equals", () => {
           { equals: (previous, next) => previous.x === next.x },
         );
         const label = () => {
-          $window.console.log();
+          window.console.log();
           return "x " + point[0]().x;
         };
         return (
@@ -85,7 +84,7 @@ describe("equals", () => {
       cs`{
         const n = $createSignal(1, {
           equals: (previous, next) => {
-            $window.console.log(previous, next);
+            window.console.log(previous, next);
             return previous === next;
           },
         });
@@ -102,7 +101,7 @@ describe("equals", () => {
       cs`{
         const n = $createSignal(1);
         const label = () => {
-          $window.console.log();
+          window.console.log();
           return "n " + n[0]();
         };
         return (
@@ -122,7 +121,7 @@ describe("equals", () => {
       cs`{
         const point = $createSignal({ x: 1 });
         const label = () => {
-          $window.console.log();
+          window.console.log();
           return "x " + point[0]().x;
         };
         return (

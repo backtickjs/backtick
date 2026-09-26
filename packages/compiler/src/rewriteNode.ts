@@ -10,69 +10,6 @@ import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
 
-// The global object's names from ECMA-262 and ECMA-402, which a script reads
-// off the client's own global. What a target adds, like `window`, is spliced.
-// `eval` is how a script runs a bundle, and a client calls it indirectly.
-const globals = new Set([
-  "AggregateError",
-  "Array",
-  "ArrayBuffer",
-  "Atomics",
-  "BigInt",
-  "BigInt64Array",
-  "BigUint64Array",
-  "Boolean",
-  "DataView",
-  "Date",
-  "Error",
-  "EvalError",
-  "FinalizationRegistry",
-  "Float32Array",
-  "Float64Array",
-  "Function",
-  "Infinity",
-  "Int16Array",
-  "Int32Array",
-  "Int8Array",
-  "Intl",
-  "Iterator",
-  "JSON",
-  "Map",
-  "Math",
-  "NaN",
-  "Number",
-  "Object",
-  "Promise",
-  "Proxy",
-  "RangeError",
-  "ReferenceError",
-  "Reflect",
-  "RegExp",
-  "Set",
-  "SharedArrayBuffer",
-  "String",
-  "Symbol",
-  "SyntaxError",
-  "TypeError",
-  "URIError",
-  "Uint16Array",
-  "Uint32Array",
-  "Uint8Array",
-  "Uint8ClampedArray",
-  "WeakMap",
-  "WeakRef",
-  "WeakSet",
-  "decodeURI",
-  "decodeURIComponent",
-  "encodeURI",
-  "encodeURIComponent",
-  "eval",
-  "globalThis",
-  "isFinite",
-  "isNaN",
-  "parseFloat",
-  "parseInt",
-]);
 
 export interface RewriteState {
   script: ClientScript;
@@ -568,38 +505,33 @@ function rewriteNodeImpl(
     }
 
     // The global, which no binding may shadow — so an `undefined` reaching
-    // here is always the literal.
+    // here is always the literal. TypeScript has no `globalThis.undefined`.
     if (node.text === "undefined" && !state.bindings.has(node)) {
       return {
         virtual: ts.factory.createIdentifier("undefined"),
       };
     }
 
-    // Read off the client's global, as the name it is.
-    if (!state.bindings.has(node) && globals.has(node.text)) {
-      const virtual = ts.factory.createIdentifier(node.text);
-      state.mappings.set(virtual, node);
+    // A name the script didn't bind is the client's global, read off
+    // `cs.globalThis`: it typechecks only where the project declares it — its
+    // libs, `@types`, a `declare global` — so a host binding the script forgot
+    // to splice, which is no global, is reported where it is written.
+    if (!state.bindings.has(node)) {
+      const name = ts.factory.createIdentifier(node.text);
+      state.mappings.set(name, node);
       return {
-        virtual,
+        virtual: ts.factory.createPropertyAccessExpression(
+          ts.factory.createPropertyAccessExpression(
+            ts.factory.createIdentifier("cs"),
+            "globalThis",
+          ),
+          name,
+        ),
       };
     }
 
-    // Any other name the resolver didn't bind is a host binding the script
-    // forgot to splice, or a global a target provides.
-    if (!state.bindings.has(node)) {
-      state.errors.set(
-        node,
-        `Cannot find name '${node.text}'. A client script can only ` +
-          "reference its own variables; splice host values with `${...}`.",
-      );
-    }
-
     return {
-      // An unbound name (an error, above) keeps its unmangled text: a lib
-      // name resolves in the virtual code, so the one error stands alone.
-      virtual: ts.factory.createIdentifier(
-        state.bindings.has(node) ? mangle(node.text) : node.text,
-      ),
+      virtual: ts.factory.createIdentifier(mangle(node.text)),
     };
   }
 

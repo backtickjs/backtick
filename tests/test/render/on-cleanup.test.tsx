@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createMemo, createSignal, onCleanup, onMount } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -26,7 +25,7 @@ describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = await render(
       cs`{
-        $onCleanup(() => $window.console.log());
+        $onCleanup(() => window.console.log());
         return <p>drawn</p>;
       }`,
     );
@@ -40,7 +39,7 @@ describe("onCleanup", () => {
       cs`{
         const n = $createSignal(1);
         const doubled = $createMemo(() => {
-          $onCleanup(() => $window.console.log());
+          $onCleanup(() => window.console.log());
           return n[0]() * 2;
         });
         return (
@@ -74,9 +73,9 @@ describe("onCleanup", () => {
       cs`{
         const timer = $createSignal(0);
         $onMount(() => {
-          timer[1]($window.setInterval(() => $window.console.log(), 5));
+          timer[1](window.setInterval(() => window.console.log(), 5));
         });
-        $onCleanup(() => $window.clearInterval(timer[0]()));
+        $onCleanup(() => window.clearInterval(timer[0]()));
         return <p>ticking</p>;
       }`,
     );
@@ -93,7 +92,7 @@ describe("onCleanup", () => {
     const { unmount } = await render(
       cs`{
         return (
-          <button onclick={() => $onCleanup(() => $window.console.log())}>
+          <button onclick={() => $onCleanup(() => window.console.log())}>
             press
           </button>
         );

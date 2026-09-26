@@ -64,9 +64,8 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-cs.splice(                             →  [-semantic]
-(window)                               → $window
- satisfies typeof cs.Spliceable)       →  [-semantic]
+cs.globalThis.                         → 
+window                                 → window
 .                                      → .
 console                                → console
 .                                      → .
@@ -165,9 +164,8 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-cs.splice(                             →  [-semantic]
-(window)                               → $window
- satisfies typeof cs.Spliceable)       →  [-semantic]
+cs.globalThis.                         → 
+window                                 → window
 .                                      → .
 console                                → console
 .                                      → .
@@ -252,9 +250,8 @@ __cs_previous                          → previous
 ,                                      → , 
 __cs_next                              → next
 ) => {\n                               → ) => {\n            
-cs.splice(                             →  [-semantic]
-(window)                               → $window
- satisfies typeof cs.Spliceable)       →  [-semantic]
+cs.globalThis.                         → 
+window                                 → window
 .                                      → .
 console                                → console
 .                                      → .
@@ -320,9 +317,8 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-cs.splice(                             →  [-semantic]
-(window)                               → $window
- satisfies typeof cs.Spliceable)       →  [-semantic]
+cs.globalThis.                         → 
+window                                 → window
 .                                      → .
 console                                → console
 .                                      → .
@@ -397,9 +393,8 @@ const                                  → const
 __cs_label                             → label
  =                                     →  = 
 () => {\n                              → () => {\n          
-cs.splice(                             →  [-semantic]
-(window)                               → $window
- satisfies typeof cs.Spliceable)       →  [-semantic]
+cs.globalThis.                         → 
+window                                 → window
 .                                      → .
 console                                → console
 .                                      → .

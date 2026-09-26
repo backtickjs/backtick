@@ -11,9 +11,8 @@ cs.splice(                                →  [-semantic]
 )                                         → )
 ;                                         → ;
 \n                                        → \n\n      
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
- satisfies typeof cs.Spliceable)          →  [-semantic]
+cs.globalThis.                            → 
+window                                    → window
 .                                         → \n        .
 fetch                                     → fetch
 (                                         → (
@@ -22,9 +21,8 @@ fetch                                     → fetch
 {                                         → {\n          
 signal                                    → signal
 :                                         → : 
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
- satisfies typeof cs.Spliceable)          →  [-semantic]
+cs.globalThis.                            → 
+window                                    → window
 .                                         → .
 AbortSignal                               → AbortSignal
 .                                         → .
@@ -106,6 +104,7 @@ __cs_held                                 → held
 (                                         → (
 "failed \\u2014 "                         → "failed — "
  +                                        →  + 
+cs.globalThis.                            → 
 String                                    → String
 (                                         → (
 __cs_error                                → error
@@ -116,9 +115,8 @@ __cs_error                                → error
 )                                         → )
 ;                                         → ;
 \n                                        → \n\n      
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
- satisfies typeof cs.Spliceable)          →  [-semantic]
+cs.globalThis.                            → 
+window                                    → window
 .                                         → \n        .
 fetch                                     → fetch
 (                                         → (
@@ -139,6 +137,7 @@ headers                                   → headers
 ,                                         → ,\n          
 body                                      → body
 :                                         → : 
+cs.globalThis.                            → 
 JSON                                      → JSON
 .                                         → .
 stringify                                 → stringify
@@ -196,6 +195,7 @@ __cs_held                                 → held
 1                                         → 1
 ]                                         → ]
 (                                         → (
+cs.globalThis.                            → 
 String                                    → String
 (                                         → (
 __cs_error                                → error

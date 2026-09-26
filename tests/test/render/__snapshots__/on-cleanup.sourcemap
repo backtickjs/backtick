@@ -4,9 +4,8 @@ cs.splice(                          →  [-semantic]
  satisfies typeof cs.Spliceable)    →  [-semantic]
 (                                   → (
 () =>                               → () => 
-cs.splice(                          →  [-semantic]
-(window)                            → $window
- satisfies typeof cs.Spliceable)    →  [-semantic]
+cs.globalThis.                      → 
+window                              → window
 .                                   → .
 console                             → console
 .                                   → .
@@ -48,9 +47,8 @@ cs.splice(                          →  [-semantic]
  satisfies typeof cs.Spliceable)    →  [-semantic]
 (                                   → (
 () =>                               → () => 
-cs.splice(                          →  [-semantic]
-(window)                            → $window
- satisfies typeof cs.Spliceable)    →  [-semantic]
+cs.globalThis.                      → 
+window                              → window
 .                                   → .
 console                             → console
 .                                   → .
@@ -123,16 +121,14 @@ __cs_timer                          → timer
 1                                   → 1
 ]                                   → ]
 (                                   → (
-cs.splice(                          →  [-semantic]
-(window)                            → $window
- satisfies typeof cs.Spliceable)    →  [-semantic]
+cs.globalThis.                      → 
+window                              → window
 .                                   → .
 setInterval                         → setInterval
 (                                   → (
 () =>                               → () => 
-cs.splice(                          →  [-semantic]
-(window)                            → $window
- satisfies typeof cs.Spliceable)    →  [-semantic]
+cs.globalThis.                      → 
+window                              → window
 .                                   → .
 console                             → console
 .                                   → .
@@ -152,9 +148,8 @@ cs.splice(                          →  [-semantic]
  satisfies typeof cs.Spliceable)    →  [-semantic]
 (                                   → (
 () =>                               → () => 
-cs.splice(                          →  [-semantic]
-(window)                            → $window
- satisfies typeof cs.Spliceable)    →  [-semantic]
+cs.globalThis.                      → 
+window                              → window
 .                                   → .
 clearInterval                       → clearInterval
 (                                   → (
@@ -188,9 +183,8 @@ cs.splice(                          →  [-semantic]
  satisfies typeof cs.Spliceable)    →  [-semantic]
 (                                   → (
 () =>                               → () => 
-cs.splice(                          →  [-semantic]
-(window)                            → $window
- satisfies typeof cs.Spliceable)    →  [-semantic]
+cs.globalThis.                      → 
+window                              → window
 .                                   → .
 console                             → console
 .                                   → .

@@ -17,6 +17,7 @@ return                  → return
 {                       → {\n        
 values                  → values
 :                       → : 
+cs.globalThis.          → 
 Object                  → Object
 .                       → .
 values                  → values
@@ -27,6 +28,7 @@ __cs_prices             → prices
 holds                   → holds
 :                       → : 
 [                       → [
+cs.globalThis.          → 
 Object                  → Object
 .                       → .
 hasOwn                  → hasOwn
@@ -36,6 +38,7 @@ __cs_prices             → prices
 "pear"                  → "pear"
 )                       → )
 ,                       → , 
+cs.globalThis.          → 
 Object                  → Object
 .                       → .
 hasOwn                  → hasOwn

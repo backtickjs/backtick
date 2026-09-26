@@ -1,10 +1,9 @@
 import { createSignal as $i0 } from "solid-js";
-import { window as $i1 } from "@backtickjs/browser/window";
-const $cs0 = ($splice0, $splice1) => () => {
+const $cs0 = ($splice0) => () => {
   const held = $splice0()("waiting");
-  $splice1()
+  window
     .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
-      signal: $splice1().AbortSignal.timeout(3000),
+      signal: window.AbortSignal.timeout(3000),
     })
     .then((response) => {
       if (response.status !== 200) {
@@ -18,7 +17,7 @@ const $cs0 = ($splice0, $splice1) => () => {
     .catch((error) => {
       held[1]("failed — " + String(error));
     });
-  $splice1()
+  window
     .fetch("/cases", {
       method: "POST",
       headers: {
@@ -40,8 +39,4 @@ const $cs0 = ($splice0, $splice1) => () => {
     );
   return held[0]();
 };
-export default () =>
-  $cs0(
-    () => $i0,
-    () => $i1,
-  );
+export default () => $cs0(() => $i0);

@@ -7,9 +7,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 // front rather than a value and nothing is read off it.
 async function Parsed() {
   return cs.lift((() => {
-    const __cs_whole = Number.parseInt("42px");
-    const __cs_based = Number.parseInt("ff", 16);
-    const __cs_fractional = Number.parseFloat("1.5");
+    const __cs_whole = cs.globalThis.Number.parseInt("42px");
+    const __cs_based = cs.globalThis.Number.parseInt("ff", 16);
+    const __cs_fractional = cs.globalThis.Number.parseFloat("1.5");
     return <span>{cs.lift(__cs_whole + __cs_based + __cs_fractional + "")}</span>;
 })());
 }

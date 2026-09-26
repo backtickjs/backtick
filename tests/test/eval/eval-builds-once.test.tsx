@@ -4,7 +4,6 @@ import { bundler } from "@backtickjs/bundler";
 import { compile } from "@backtickjs/solid-js/transform";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import type { Bundle } from "@backtickjs/core";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { settled } from "../render/dom.ts";
@@ -54,7 +53,7 @@ async function Waiting({
 }) {
   return cs`{
     const drawn = $createSignal<Bundle<JSX.Element> | null>(null);
-    const started = $window.setTimeout(() => drawn[1]($ask()), 0);
+    const started = window.setTimeout(() => drawn[1]($ask()), 0);
     return (
       <>
         {drawn[0]() === null ? null : eval(drawn[0]() as Bundle<JSX.Element>)}

@@ -6,7 +6,6 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<div><span></span><section>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<em>shown`),
   _tmpl$3 = /*#__PURE__*/ _$template(`<i>waiting`);
 import { createSignal as $i0 } from "solid-js";
-import { window as $i1 } from "@backtickjs/browser/window";
 const $cs0 = ($splice0, $tag1) => {
   const builds = $splice0()(0);
   return (() => {
@@ -26,10 +25,10 @@ const $cs0 = ($splice0, $tag1) => {
     return _el$;
   })();
 };
-const $cs1 = ($splice0, $splice1, $splice2) => {
+const $cs1 = ($splice0, $splice1) => {
   const shown = $splice0()(false);
-  const started = $splice1().setTimeout(() => {
-    if ($splice2()()) {
+  const started = window.setTimeout(() => {
+    if ($splice1()()) {
       shown[1](true);
     }
   }, 0);
@@ -41,7 +40,6 @@ export default () =>
     ($arg0) =>
       $cs1(
         () => $i0,
-        () => $i1,
         () => $arg0.again,
       ),
   );

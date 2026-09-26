@@ -1,9 +1,9 @@
-// 28:7
-($splice0, $splice1, $splice2) => {
+// 27:7
+($splice0, $splice1) => {
     const n = $splice0()(1);
     const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
     const label = () => {
-        $splice2().console.log();
+        window.console.log();
         return size().isBig ? "big" : "small";
     };
     return (<div>
@@ -12,11 +12,11 @@
           </div>);
 }
 
-// 60:7
-($splice0, $splice1) => {
+// 59:7
+($splice0) => {
     const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
     const label = () => {
-        $splice1().console.log();
+        window.console.log();
         return "x " + point[0]().x;
     };
     return (<div>
@@ -27,22 +27,22 @@
           </div>);
 }
 
-// 85:7
-($splice0, $splice1) => {
+// 84:7
+($splice0) => {
     const n = $splice0()(1, {
         equals: (previous, next) => {
-            $splice1().console.log(previous, next);
+            window.console.log(previous, next);
             return previous === next;
         },
     });
     return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;
 }
 
-// 102:7
-($splice0, $splice1) => {
+// 101:7
+($splice0) => {
     const n = $splice0()(1);
     const label = () => {
-        $splice1().console.log();
+        window.console.log();
         return "n " + n[0]();
     };
     return (<div>
@@ -51,11 +51,11 @@
           </div>);
 }
 
-// 122:7
-($splice0, $splice1) => {
+// 121:7
+($splice0) => {
     const point = $splice0()({ x: 1 });
     const label = () => {
-        $splice1().console.log();
+        window.console.log();
         return "x " + point[0]().x;
     };
     return (<div>

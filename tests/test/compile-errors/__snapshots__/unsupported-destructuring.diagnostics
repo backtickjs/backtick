@@ -1,5 +1,2 @@
 4:9-4:15 error TS0: Destructuring isn't supported in a `cs` client script; declare each variable on its own.
-5:10-5:11 error TS0: Cannot find name 'a'. A client script can only reference its own variables; splice host values with `${...}`.
-5:14-5:15 error TS0: Cannot find name 'b'. A client script can only reference its own variables; splice host values with `${...}`.
 9:9-9:14 error TS0: Destructuring isn't supported in a `cs` client script; declare each variable on its own.
-10:10-10:11 error TS0: Cannot find name 'a'. A client script can only reference its own variables; splice host values with `${...}`.

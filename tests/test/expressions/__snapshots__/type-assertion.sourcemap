@@ -2,6 +2,7 @@ cs.lift((() => {\n                → cs`{\n
 const                             → const 
 __cs_page                         → page
  =                                →  = 
+cs.globalThis.                    → 
 JSON                              → JSON
 .                                 → .
 parse                             → parse

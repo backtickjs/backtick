@@ -25,9 +25,19 @@ const members = {
   splice,
 };
 
-// `Spliceable`, for the `satisfies` the transform writes inside a splice.
-// In the type and not in the object: nothing reads it, and there is nothing to
-// read — `typeof cs.Spliceable` is the whole of what it is for.
+/**
+ * The globals a project declares — its libs, `@types`, a `declare global` —
+ * as an ordinary object type: reading one it doesn't declare is an error
+ * however strict the project is, where `typeof globalThis` itself lets it
+ * through as `any` without `noImplicitAny`.
+ */
+export type GlobalThis = {
+  [Key in keyof typeof globalThis]: (typeof globalThis)[Key];
+};
+
+// `Spliceable`, for the `satisfies` the transform writes inside a splice, and
+// `globalThis`, which a name the script didn't bind is read off. In the type and
+// not in the object: nothing runs the virtual code they are written in.
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -37,5 +47,8 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  members as typeof members & { readonly Spliceable: Spliceable },
+  members as typeof members & {
+    readonly Spliceable: Spliceable;
+    readonly globalThis: GlobalThis;
+  },
 );

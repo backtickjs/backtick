@@ -9,7 +9,7 @@ it("binaryOperators", async (t) => {
     "binaryOperators",
     cs.lift((() => {
     const __cs_n = 5;
-    return [__cs_n ** 2, __cs_n & 6, __cs_n | 8, __cs_n ^ 1, __cs_n << 2, -__cs_n >> 1, -__cs_n >>> 28, __cs_n == 5, __cs_n != 5, "length" in [__cs_n], [__cs_n] instanceof Array];
+    return [__cs_n ** 2, __cs_n & 6, __cs_n | 8, __cs_n ^ 1, __cs_n << 2, -__cs_n >> 1, -__cs_n >>> 28, __cs_n == 5, __cs_n != 5, "length" in [__cs_n], [__cs_n] instanceof cs.globalThis.Array];
 })()),
   );
 });

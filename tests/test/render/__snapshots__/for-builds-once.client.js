@@ -1,15 +1,15 @@
-// 22:10
-($splice0, $splice1, $splice2, $splice3, $tag4) => {
+// 21:10
+($splice0, $splice1, $splice2, $tag3) => {
     const items = $splice0()([]);
-    const started = $splice1().setTimeout(() => {
-        if ($splice2()()) {
-            items[1]($splice3());
+    const started = window.setTimeout(() => {
+        if ($splice1()()) {
+            items[1]($splice2());
         }
     }, 0);
-    return <$tag4 each={items[0]()}>{(item) => <em>{item}</em>}</$tag4>;
+    return <$tag3 each={items[0]()}>{(item) => <em>{item}</em>}</$tag3>;
 }
 
-// 35:23
+// 34:23
 ($splice0, $tag1) => {
     const asked = $splice0()(0);
     return (<div>

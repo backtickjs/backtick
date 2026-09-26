@@ -1,4 +1,4 @@
-// 13:7
+// 12:7
 ($splice0) => {
     const field = $splice0()(null);
     return (<div>
@@ -7,22 +7,22 @@
           </div>);
 }
 
-// 29:7
+// 28:7
 ($splice0) => {
     return (<input aria-label="name" ref={(element) => $splice0()(() => element.focus())}/>);
 }
 
-// 42:18
+// 41:18
 () => <input aria-label="name" ref={() => { }}/>
 
-// 64:9
-($splice0, $splice1) => {
+// 63:9
+($splice0) => {
     const shown = $splice0()(true);
     const n = $splice0()(0);
     return (<div>
               <button onclick={() => n[1](n[0]() + 1)}>
                 {"n " + n[0]()}
               </button>
-              {shown[0]() ? (<p ref={() => $splice1().console.log(n[0]())}>shown</p>) : null}
+              {shown[0]() ? (<p ref={() => window.console.log(n[0]())}>shown</p>) : null}
             </div>);
 }

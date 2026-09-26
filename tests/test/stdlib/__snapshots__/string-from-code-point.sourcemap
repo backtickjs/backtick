@@ -3,6 +3,7 @@ return                  → return
 <                       → (\n      <
 span                    → span
 >{cs.lift(              → >{
+cs.globalThis.          → 
 String                  → String
 .                       → .
 fromCodePoint           → fromCodePoint
@@ -12,6 +13,7 @@ fromCodePoint           → fromCodePoint
 105                     → 105
 )                       → )
  +                      →  + 
+cs.globalThis.          → 
 String                  → String
 .                       → .
 fromCodePoint           → fromCodePoint

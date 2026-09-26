@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -29,7 +28,7 @@ describe("equals", () => {
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
     const __cs_size = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => ({ isBig: __cs_n[0]() > 2, n: __cs_n[0]() }), undefined, { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
     const __cs_label = () => {
-        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
+        cs.globalThis.window.console.log();
         return __cs_size().isBig ? "big" : "small";
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
@@ -51,7 +50,7 @@ describe("equals", () => {
       cs.lift((() => {
     const __cs_point = cs.splice((createSignal) satisfies typeof cs.Spliceable)({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
     const __cs_label = () => {
-        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
+        cs.globalThis.window.console.log();
         return "x " + __cs_point[0]().x;
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_point[1]({ x: __cs_point[0]().x }))}>
@@ -67,7 +66,7 @@ describe("equals", () => {
     await render(
       cs.lift((() => {
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1, { equals: (__cs_previous, __cs_next) => {
-            cs.splice((window) satisfies typeof cs.Spliceable).console.log(__cs_previous, __cs_next);
+            cs.globalThis.window.console.log(__cs_previous, __cs_next);
             return __cs_previous === __cs_next;
         } });
     return <button onclick={cs.lift(() => __cs_n[1](2))}>{cs.lift("n " + __cs_n[0]())}</button>;
@@ -83,7 +82,7 @@ describe("equals", () => {
       cs.lift((() => {
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
     const __cs_label = () => {
-        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
+        cs.globalThis.window.console.log();
         return "n " + __cs_n[0]();
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](1))}>same</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
@@ -98,7 +97,7 @@ describe("equals", () => {
       cs.lift((() => {
     const __cs_point = cs.splice((createSignal) satisfies typeof cs.Spliceable)({ x: 1 });
     const __cs_label = () => {
-        cs.splice((window) satisfies typeof cs.Spliceable).console.log();
+        cs.globalThis.window.console.log();
         return "x " + __cs_point[0]().x;
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_point[1]({ x: __cs_point[0]().x }))}>

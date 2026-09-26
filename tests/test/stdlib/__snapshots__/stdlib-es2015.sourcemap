@@ -124,6 +124,7 @@ codePointAt             → codePointAt
 ,                       → ,\n        
 keys                    → keys
 :                       → : 
+cs.globalThis.          → 
 Object                  → Object
 .                       → .
 keys                    → keys

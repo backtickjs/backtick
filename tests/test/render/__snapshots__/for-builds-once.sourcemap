@@ -16,9 +16,8 @@ string                            → string
 const                             → const 
 __cs_started                      → started
  =                                →  = 
-cs.splice(                        →  [-semantic]
-(window)                          → $window
- satisfies typeof cs.Spliceable)  →  [-semantic]
+cs.globalThis.                    → 
+window                            → window
 .                                 → .
 setTimeout                        → setTimeout
 (                                 → (

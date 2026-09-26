@@ -5,6 +5,7 @@ span                      → span
 >{cs.lift(                → >\n        {
 "/at?q="                  → "/at?q="
  +                        →  +\n          
+cs.globalThis.            → 
 encodeURIComponent        → encodeURIComponent
 (                         → (
 "a b+c&d#\\u00E9"         → "a b+c&d#é"
@@ -12,6 +13,7 @@ encodeURIComponent        → encodeURIComponent
  +                        →  +\n          
 "&page="                  → "&page="
  +                        →  +\n          
+cs.globalThis.            → 
 encodeURIComponent        → encodeURIComponent
 (                         → (
 2.5                       → 2.5
@@ -19,6 +21,7 @@ encodeURIComponent        → encodeURIComponent
  +                        →  +\n          
 " "                       → " "
  +                        →  +\n          
+cs.globalThis.            → 
 decodeURIComponent        → decodeURIComponent
 (                         → (
 "a%20b%2Bc%26d%23%C3%A9"  → "a%20b%2Bc%26d%23%C3%A9"

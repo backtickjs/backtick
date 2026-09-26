@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
@@ -17,22 +16,21 @@ import { settled } from "./dom.ts";
 const answerItems = ["one", "two"];
 async function WaitingList({ more }) {
   return cs.create(
-    "jrnbyvr34lw6:22:9",
+    "1d6n83lrklr7g:21:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
-        { kind: "splice", value: window, bindings: [] },
         { kind: "splice", value: more, bindings: [] },
         { kind: "splice", value: answerItems, bindings: [] },
         { kind: "tag", value: For },
       ],
     },
-    "($splice0, $splice1, $splice2, $splice3, $tag4) => {\n    const items = $splice0()([]);\n    const started = $splice1().setTimeout(() => {\n        if ($splice2()()) {\n            items[1]($splice3());\n        }\n    }, 0);\n    return <$tag4 each={items[0]()}>{(item) => <em>{item}</em>}</$tag4>;\n}",
-    '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAqBY;IACR,MAAM,KAAK,GAAG,UAAa,CAAW,EAAE,CAAC,CAAC;IAE1C,MAAM,OAAO,GAAG,UAAO,CAAC,UAAU,CAAC,GAAG,EAAE;QACtC,IAAI,UAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,CAAC,CAAC,CAAC,UAAY,CAAC,CAAC;QACzB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,KAAG,CAAC,CAAC;AAC1E,CAAC"}',
+    "($splice0, $splice1, $splice2, $tag3) => {\n    const items = $splice0()([]);\n    const started = window.setTimeout(() => {\n        if ($splice1()()) {\n            items[1]($splice2());\n        }\n    }, 0);\n    return <$tag3 each={items[0]()}>{(item) => <em>{item}</em>}</$tag3>;\n}",
+    '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAoBY;IACR,MAAM,KAAK,GAAG,UAAa,CAAW,EAAE,CAAC,CAAC;IAE1C,MAAM,OAAO,GAAG,MAAM,CAAC,UAAU,CAAC,GAAG,EAAE;QACrC,IAAI,UAAK,EAAE,EAAE,CAAC;YACZ,KAAK,CAAC,CAAC,CAAC,CAAC,UAAY,CAAC,CAAC;QACzB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,IAAY,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,KAAG,CAAC,CAAC;AAC1E,CAAC"}',
   );
 }
 const forBuildsOnce = cs.create(
-  "jrnbyvr34lw6:35:22",
+  "1d6n83lrklr7g:34:22",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
@@ -40,7 +38,7 @@ const forBuildsOnce = cs.create(
     ],
   },
   '($splice0, $tag1) => {\n    const asked = $splice0()(0);\n    return (<div>\n      <span>{"asked " + asked[0]()}</span>\n      <$tag1 more={() => {\n            asked[1](asked[0]() + 1);\n            return asked[0]() < 5;\n        }}/>\n    </div>);\n}',
-  '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAkCyB;IACvB,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,KAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  '{"version":3,"file":"for-builds-once.test.jsx","sourceRoot":"","sources":["render/for-builds-once.test.tsx"],"names":[],"mappings":"AAiCyB;IACvB,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAE/B,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACnC;MAAA,CAAC,KAAW,CACV,IAAI,CAAC,CAAC,GAAG,EAAE;YACT,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YACzB,OAAO,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC,CAAC,EAEN;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
 );
 it("forBuildsOnce", async (t) => {
   await snapshotCase(t, "forBuildsOnce", forBuildsOnce);

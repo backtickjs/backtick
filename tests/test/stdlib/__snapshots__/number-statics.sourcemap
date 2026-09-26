@@ -2,6 +2,7 @@ cs.lift((() => {\n                        → cs`{\n
 const                                     → const 
 __cs_positive                             → positive
  =                                        →  = 
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 EPSILON                                   → EPSILON
@@ -12,6 +13,7 @@ EPSILON                                   → EPSILON
 const                                     → const 
 __cs_largest                              → largest
  =                                        →  = 
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 MAX_VALUE                                 → MAX_VALUE
@@ -22,12 +24,14 @@ MAX_VALUE                                 → MAX_VALUE
 const                                     → const 
 __cs_safe                                 → safe
  =                                        →  =\n      
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
  ===                                      →  === 
 9007199254740991                          → 9007199254740991
  &&                                       →  &&\n      
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
@@ -35,12 +39,14 @@ MIN_SAFE_INTEGER                          → MIN_SAFE_INTEGER
 -                                         → -
 9007199254740991                          → 9007199254740991
  &&                                       →  &&\n      
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 MIN_VALUE                                 → MIN_VALUE
  >                                        →  > 
 0                                         → 0
  &&                                       →  &&\n      
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 isSafeInteger                             → isSafeInteger
@@ -49,10 +55,12 @@ isSafeInteger                             → isSafeInteger
 )                                         → )
  &&                                       →  &&\n      
 !                                         → !
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 isSafeInteger                             → isSafeInteger
 (                                         → (
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
@@ -64,6 +72,7 @@ MAX_SAFE_INTEGER                          → MAX_SAFE_INTEGER
 const                                     → const 
 __cs_whole                                → whole
  =                                        →  = 
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 isInteger                                 → isInteger
@@ -75,6 +84,7 @@ isInteger                                 → isInteger
 const                                     → const 
 __cs_fractional                           → fractional
  =                                        →  = 
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 isInteger                                 → isInteger
@@ -86,6 +96,7 @@ isInteger                                 → isInteger
 const                                     → const 
 __cs_written                              → written
  =                                        →  = 
+cs.globalThis.                            → 
 Number                                    → Number
 .                                         → .
 isFinite                                  → isFinite

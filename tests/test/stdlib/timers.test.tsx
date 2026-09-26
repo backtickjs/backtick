@@ -1,13 +1,12 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { window } from "@backtickjs/browser";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A clock, which is the platform's rather than the language's: a script reaches
 // one by splicing the browser's `window`, the same as anything else a platform
 // hands over.
 //
-// And the shape of a member read off a handle. `$window.clearInterval` is
+// And the shape of a member read off a handle. `window.clearInterval` is
 // read as a value and handed on, which is what a name has to survive being —
 // the call site below reaches it through a variable, not through the window.
 //
@@ -24,10 +23,10 @@ it("timers", async (t) => {
     t,
     "timers",
     cs`{
-      const stop = $window.clearInterval;
-      const repeating = $window.setInterval(() => 0, 1000);
+      const stop = window.clearInterval;
+      const repeating = window.setInterval(() => 0, 1000);
       stop(repeating);
-      $window.clearTimeout($window.setTimeout(() => 0, 1000));
+      window.clearTimeout(window.setTimeout(() => 0, 1000));
     }`,
   );
 });

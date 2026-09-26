@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
@@ -21,7 +20,7 @@ const answerItems = ["one", "two"];
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_items = cs.splice((createSignal) satisfies typeof cs.Spliceable)<string[]>([]);
-    const __cs_started = cs.splice((window) satisfies typeof cs.Spliceable).setTimeout(() => {
+    const __cs_started = cs.globalThis.window.setTimeout(() => {
         if (cs.splice((more) satisfies typeof cs.Spliceable)()) {
             __cs_items[1](cs.splice((answerItems) satisfies typeof cs.Spliceable));
         }

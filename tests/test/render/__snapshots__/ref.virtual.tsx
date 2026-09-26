@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -55,7 +54,7 @@ describe("ref", () => {
         cs.lift((() => {
     const __cs_shown = cs.splice((createSignal) satisfies typeof cs.Spliceable)(true);
     const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
-    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift("n " + __cs_n[0]())}</button>)}{cs.lift(__cs_shown[0]() ? <p ref={cs.lift(() => cs.splice((window) satisfies typeof cs.Spliceable).console.log(__cs_n[0]()))}>shown</p> : null)}</div>;
+    return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift("n " + __cs_n[0]())}</button>)}{cs.lift(__cs_shown[0]() ? <p ref={cs.lift(() => cs.globalThis.window.console.log(__cs_n[0]()))}>shown</p> : null)}</div>;
 })()),
       );
       const shownText = screen.getByText("shown");

@@ -1,0 +1,2 @@
+11:10 error TS2339: Property 'hostValue' does not exist on type 'GlobalThis'.
+16:3 error TS2339: Property 'count' does not exist on type 'GlobalThis'.

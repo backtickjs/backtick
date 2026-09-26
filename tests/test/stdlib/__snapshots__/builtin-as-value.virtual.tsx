@@ -14,9 +14,9 @@ it("builtinAsValue", async (t) => {
     t,
     "builtinAsValue",
     cs.lift((() => {
-    const __cs_floor = Math.floor;
+    const __cs_floor = cs.globalThis.Math.floor;
     const __cs_apply = (__cs_f: (n: number) => number, __cs_n: number) => __cs_f(__cs_n);
-    return __cs_floor(3.5) + __cs_apply(Math.ceil, 3.5);
+    return __cs_floor(3.5) + __cs_apply(cs.globalThis.Math.ceil, 3.5);
 })()),
   );
 });

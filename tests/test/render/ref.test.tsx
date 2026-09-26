@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -70,7 +69,7 @@ describe("ref", () => {
                 {"n " + n[0]()}
               </button>
               {shown[0]() ? (
-                <p ref={() => $window.console.log(n[0]())}>shown</p>
+                <p ref={() => window.console.log(n[0]())}>shown</p>
               ) : null}
             </div>
           );

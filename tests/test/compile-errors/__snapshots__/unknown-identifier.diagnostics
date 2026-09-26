@@ -1,2 +1,0 @@
-8:10-8:19 error TS0: Cannot find name 'hostValue'. A client script can only reference its own variables; splice host values with `${...}`.
-12:3-12:8 error TS0: Cannot find name 'count'. A client script can only reference its own variables; splice host values with `${...}`.

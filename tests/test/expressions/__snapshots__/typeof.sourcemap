@@ -49,6 +49,7 @@ __cs_n                            → n
 )                                 → 
 ,                                 → ,\n        
 typeof                            → typeof 
+cs.globalThis.                    → 
 Math                              → Math
 .                                 → .
 floor                             → floor

@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
@@ -32,7 +31,7 @@ async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs`{
     const shown = $createSignal(false);
 
-    const started = $window.setTimeout(() => {
+    const started = window.setTimeout(() => {
       if ($again()) {
         shown[1](true);
       }

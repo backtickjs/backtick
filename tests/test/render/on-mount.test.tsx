@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -29,7 +28,7 @@ describe("onMount", () => {
         cs`{
           const count = $createSignal(0);
           $onMount(() => {
-            $window.console.log();
+            window.console.log();
             count[1](count[0]() + 1);
           });
           return <p>{"mounted " + count[0]()}</p>;

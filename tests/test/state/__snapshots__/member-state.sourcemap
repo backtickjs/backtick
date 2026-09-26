@@ -8,6 +8,7 @@ __cs_from                         → from
 number                            → number
 ) => {\n                          → ) => {\n      
 return                            → return 
+cs.globalThis.                    → 
 Array                             → Array
 .                                 → .
 from                              → from

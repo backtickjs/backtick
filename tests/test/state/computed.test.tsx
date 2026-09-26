@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
-import { window } from "@backtickjs/browser";
 import { render, screen } from "@backtickjs/solid-js/testing";
 import { userEvent } from "@testing-library/user-event";
 
@@ -26,7 +25,7 @@ describe("computed", () => {
       cs`{
         const n = $createSignal(1);
         const doubled = $createMemo(() => {
-          $window.console.log();
+          window.console.log();
           return n[0]() * 2;
         });
         return (
@@ -53,7 +52,7 @@ describe("computed", () => {
         const n = $createSignal(1);
         const isBig = $createMemo(() => n[0]() > 2);
         const label = () => {
-          $window.console.log();
+          window.console.log();
           return isBig() ? "big" : "small";
         };
         return (
