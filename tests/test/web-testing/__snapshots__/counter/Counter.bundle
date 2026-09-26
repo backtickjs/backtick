@@ -4,7 +4,7 @@ import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div><button>Add</button><p>`);
 import { createSignal as $i0 } from "solid-js";
-const $Script = (props) => props.run();
+const $Component = (props) => props.body();
 const $cs0 = ($splice0) => {
   const count = $splice0()(0);
   return (() => {
@@ -17,7 +17,7 @@ const $cs0 = ($splice0) => {
   })();
 };
 export default () =>
-  _$createComponent($Script, {
-    run: () => $cs0(() => $i0),
+  _$createComponent($Component, {
+    body: () => $cs0(() => $i0),
   });
 _$delegateEvents(["click"]);

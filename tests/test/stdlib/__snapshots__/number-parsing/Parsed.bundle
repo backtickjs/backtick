@@ -1,7 +1,7 @@
 import { template as _$template } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>298.5`);
-const $Script = (props) => props.run();
+const $Component = (props) => props.body();
 const $cs0 = () => {
   const whole = Number.parseInt("42px");
   const based = Number.parseInt("ff", 16);
@@ -9,6 +9,6 @@ const $cs0 = () => {
   return _tmpl$();
 };
 export default () =>
-  _$createComponent($Script, {
-    run: () => $cs0(),
+  _$createComponent($Component, {
+    body: () => $cs0(),
   });

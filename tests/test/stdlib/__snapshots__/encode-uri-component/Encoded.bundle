@@ -3,11 +3,11 @@ import { createComponent as _$createComponent } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(
   `<span>/at?q=a%20b%2Bc%26d%23%C3%A9&amp;page=2.5 a b+c&amp;d#é`,
 );
-const $Script = (props) => props.run();
+const $Component = (props) => props.body();
 const $cs0 = () => {
   return _tmpl$();
 };
 export default () =>
-  _$createComponent($Script, {
-    run: () => $cs0(),
+  _$createComponent($Component, {
+    body: () => $cs0(),
   });

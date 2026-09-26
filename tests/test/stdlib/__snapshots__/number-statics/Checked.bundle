@@ -2,7 +2,7 @@ import { template as _$template } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-const $Script = (props) => props.run();
+const $Component = (props) => props.body();
 const $cs0 = () => {
   const positive = Number.EPSILON > 0;
   const largest = Number.MAX_VALUE > 1e308;
@@ -35,6 +35,6 @@ const $cs0 = () => {
   })();
 };
 export default () =>
-  _$createComponent($Script, {
-    run: () => $cs0(),
+  _$createComponent($Component, {
+    body: () => $cs0(),
   });

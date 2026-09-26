@@ -9,7 +9,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(
   ),
   _tmpl$2 = /*#__PURE__*/ _$template(`<div style=padding:0>`);
 import { createSignal as $i0 } from "solid-js";
-const $Script = (props) => props.run();
+const $Component = (props) => props.body();
 const $cs0 = ($splice0) => {
   const label = $splice0()("hi");
   const row = (size) => {
@@ -49,7 +49,7 @@ const $cs0 = ($splice0) => {
   })();
 };
 export default () =>
-  _$createComponent($Script, {
-    run: () => $cs0(() => $i0),
+  _$createComponent($Component, {
+    body: () => $cs0(() => $i0),
   });
 _$delegateEvents(["click"]);

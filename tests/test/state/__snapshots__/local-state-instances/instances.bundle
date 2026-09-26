@@ -7,7 +7,7 @@ import { effect as _$effect } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>press`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<div>`);
 import { createSignal as $i0 } from "solid-js";
-const $Script = (props) => props.run();
+const $Component = (props) => props.body();
 const $cs0 = ($splice0) => {
   const size = $splice0()(16);
   return (() => {
@@ -24,15 +24,15 @@ export default () =>
     var _el$2 = _tmpl$2();
     _$insert(
       _el$2,
-      _$createComponent($Script, {
-        run: () => $cs0(() => $i0),
+      _$createComponent($Component, {
+        body: () => $cs0(() => $i0),
       }),
       null,
     );
     _$insert(
       _el$2,
-      _$createComponent($Script, {
-        run: () => $cs0(() => $i0),
+      _$createComponent($Component, {
+        body: () => $cs0(() => $i0),
       }),
       null,
     );

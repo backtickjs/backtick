@@ -27,9 +27,10 @@ export function printBundle<T>(
   for (const { from, name, local } of names.imports.values()) {
     module.line(importDeclaration(from, name, local));
   }
-  // What draws a script a component drew: a component whose body runs it.
-  if (names.drawsScript) {
-    module.line("const $Script = (props) => props.run();");
+  // A component whose body is the function it is handed: what draws a script
+  // a component drew (see `componentElement`). Declared where one is.
+  if (names.usesComponent) {
+    module.line("const $Component = (props) => props.body();");
   }
   for (const [label, script] of tree.scripts) {
     module.write(`const ${label} = `);

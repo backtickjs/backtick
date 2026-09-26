@@ -22,7 +22,7 @@ import {
   literal,
   member,
   object,
-  scriptElement,
+  componentElement,
   thunk,
   undefinedValue,
 } from "../print/code.js";
@@ -355,7 +355,7 @@ export async function buildBundle<T>(
       // A script is what runs on the client; an element it drew instead has no
       // setup of its own to guard.
       return isClientScript(drawn)
-        ? scriptElement(names, await render(drawn, params))
+        ? componentElement(names, await render(drawn, params))
         : render(drawn, params);
     }
     const written: [string, string][] = [];

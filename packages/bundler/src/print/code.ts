@@ -10,15 +10,15 @@ const ATTRIBUTE = /^[A-Za-z_$][A-Za-z0-9_$-]*(:[A-Za-z_$][A-Za-z0-9_$-]*)?$/;
 
 /**
  * What a bundle imports, keyed by specifier and export, each bound once, and
- * whether it draws a script a component drew (see `scriptElement`).
+ * whether it draws a script a component drew (see `componentElement`).
  */
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
-  drawsScript: boolean;
+  usesComponent: boolean;
 }
 
 export function createNames(): Names {
-  return { imports: new Map(), drawsScript: false };
+  return { imports: new Map(), usesComponent: false };
 }
 
 // `eval` read as a value, so a call of it is indirect: a bundle closes over
@@ -138,10 +138,10 @@ export function jsxElement(
 }
 
 /**
- * A script a component drew, as an element: `<$Script run={() => …} />`, so
- * its body runs the way a component's does.
+ * A script a component drew, as an element: `<$Component body={() => …} />`,
+ * a component whose body is that call, so it runs the way a component's does.
  */
-export function scriptElement(names: Names, run: string): string {
-  names.drawsScript = true;
-  return jsxElement("$Script", [["run", thunk(run)]], []);
+export function componentElement(names: Names, body: string): string {
+  names.usesComponent = true;
+  return jsxElement("$Component", [["body", thunk(body)]], []);
 }
