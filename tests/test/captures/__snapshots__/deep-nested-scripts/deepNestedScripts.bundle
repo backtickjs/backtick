@@ -2,4 +2,4 @@ const $cs0 = ($splice0) => $splice0();
 const $cs1 = ($splice0, $splice1) => $splice0() + $splice1();
 const $cs2 = () => 1;
 const $cs3 = () => 2;
-export default () => $cs0(() => $cs1($cs2, $cs3));
+export default $cs0(() => $cs1($cs2, $cs3));

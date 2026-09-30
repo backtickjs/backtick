@@ -3,4 +3,4 @@ const $cs0 = () => (count) => {
   const step = -count;
   return floor + step + -2;
 };
-export default () => $cs0();
+export default $cs0();

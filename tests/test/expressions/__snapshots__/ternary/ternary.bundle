@@ -5,4 +5,4 @@ const $cs0 = ($splice0) => ({
 const $cs1 = () => (n) => {
   return n === null ? 0 : n + 1;
 };
-export default () => $cs0($cs1);
+export default $cs0($cs1);

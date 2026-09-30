@@ -1,203 +1,210 @@
-cs.lift((() => {\n      → cs`{\n          
-const                   → const 
-__cs_field              → field
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-<                       → <
-HTMLInputElement        → HTMLInputElement
- |                      →  | 
-null                    → null
->(                      → >(
-null                    → null
-)                       → )
-;                       → ;
-\n                      → \n          
-return                  → return 
-<                       → (\n            <
-div                     → div
->{cs.lift(              → >\n              
-<                       → <
-input                   → input
-                        →  
-aria-label              → aria-label
-={cs.lift(              → =
-"name"                  → "name"
-)}                      → 
-                        →  
-ref                     → ref
-={cs.lift(              → ={
-__cs_element            → element
- =>                     → ) => 
-__cs_field              → field
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_element            → element
-)                       → )
-)}                      → }
-/>                      →  />
-)}{cs.lift(             → \n              
-<                       → <
-button                  → button
-                        →  
-onclick                 → onclick
-={cs.lift(              → ={
-() =>                   → () => 
-__cs_field              → field
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-?.                      → ?.
-focus                   → focus
-()                      → ()
-)}                      → }
->edit</                 → >edit</
-button                  → button
->                       → >
-)}</                    → \n            </
-div                     → div
->                       → >\n          )
-;                       → ;
-\n})())                 → \n        }`
-cs.lift((() => {\n      → cs`{\n          
-return                  → return 
-<                       → (\n            <
-input                   → input
-                        → \n              
-aria-label              → aria-label
-={cs.lift(              → =
-"name"                  → "name"
-)}                      → 
-                        → \n              
-ref                     → ref
-={cs.lift(              → ={
-__cs_element            → element
- =>                     → ) => 
-cs.splice(              →  [-semantic]
-(onMount)               → $onMount
-)                       →  [-semantic]
-(                       → (
-() =>                   → () => 
-__cs_element            → element
-.                       → .
-focus                   → focus
-()                      → ()
-)                       → )
-)}                      → }
-/>                      → \n            />\n          )
-;                       → ;
-\n})())                 → \n        }`
-cs.lift(                → cs`
-<                       → <
-input                   → input
-                        →  
-aria-label              → aria-label
-={cs.lift(              → =
-"name"                  → "name"
-)}                      → 
-                        →  
-ref                     → ref
-={cs.lift(              → ={
-() => {\n}              → () => {}
-)}                      → }
-/>                      →  />
-)                       → `
-cs.lift((() => {\n      → cs`{\n            
-const                   → const 
-__cs_shown              → shown
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-true                    → true
-)                       → )
-;                       → ;
-\n                      → \n            
-const                   → const 
-__cs_n                  → n
- =                      →  = 
-cs.splice(              →  [-semantic]
-(createSignal)          → $createSignal
-)                       →  [-semantic]
-(                       → (
-0                       → 0
-)                       → )
-;                       → ;
-\n                      → \n            
-return                  → return 
-<                       → (\n              <
-div                     → div
->{cs.lift(              → >\n                
-<                       → <
-button                  → button
-                        →  
-onclick                 → onclick
-={cs.lift(              → ={
-() =>                   → () => 
-__cs_n                  → n
-[                       → [
-1                       → 1
-]                       → ]
-(                       → (
-__cs_n                  → n
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
- +                      →  + 
-1                       → 1
-)                       → )
-)}                      → }
->{cs.lift(              → >\n                  {
-"n "                    → "n "
- +                      →  + 
-__cs_n                  → n
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-)}</                    → }\n                </
-button                  → button
->                       → >
-)}{cs.lift(             → \n                {
-__cs_shown              → shown
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
- ?                      →  ? 
-<                       → (\n                  <
-p                       → p
-                        →  
-ref                     → ref
-={cs.lift(              → ={
-() =>                   → () => 
-cs.globalThis.          → 
-window                  → window
-.                       → .
-console                 → console
-.                       → .
-log                     → log
-(                       → (
-__cs_n                  → n
-[                       → [
-0                       → 0
-]                       → ]
-()                      → ()
-)                       → )
-)}                      → }
->shown</                → >shown</
-p                       → p
->                       → >\n                )
- :                      →  : 
-null                    → null
-)}</                    → }\n              </
-div                     → div
->                       → >\n            )
-;                       → ;
-\n})())                 → \n          }`
+cs.lift(          → cs`
+() => {\n         → () => {\n          
+const             → const 
+__cs_field        → field
+ =                →  = 
+cs.splice(        →  [-semantic]
+(createSignal)    → $createSignal
+)                 →  [-semantic]
+<                 → <
+HTMLInputElement  → HTMLInputElement
+ |                →  | 
+null              → null
+>(                → >(
+null              → null
+)                 → )
+;                 → ;
+\n                → \n          
+return            → return 
+<                 → (\n            <
+div               → div
+>{cs.lift(        → >\n              
+<                 → <
+input             → input
+                  →  
+aria-label        → aria-label
+={cs.lift(        → =
+"name"            → "name"
+)}                → 
+                  →  
+ref               → ref
+={cs.lift(        → ={
+__cs_element      → element
+ =>               → ) => 
+__cs_field        → field
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_element      → element
+)                 → )
+)}                → }
+/>                →  />
+)}{cs.lift(       → \n              
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+={cs.lift(        → ={
+() =>             → () => 
+__cs_field        → field
+[                 → [
+0                 → 0
+]                 → ]
+()                → ()
+?.                → ?.
+focus             → focus
+()                → ()
+)}                → }
+>edit</           → >edit</
+button            → button
+>                 → >
+)}</              → \n            </
+div               → div
+>                 → >\n          )
+;                 → ;
+\n}               → \n        }
+)                 → `
+cs.lift(          → cs`
+() => {\n         → () => {\n          
+return            → return 
+<                 → (\n            <
+input             → input
+                  → \n              
+aria-label        → aria-label
+={cs.lift(        → =
+"name"            → "name"
+)}                → 
+                  → \n              
+ref               → ref
+={cs.lift(        → ={
+__cs_element      → element
+ =>               → ) => 
+cs.splice(        →  [-semantic]
+(onMount)         → $onMount
+)                 →  [-semantic]
+(                 → (
+() =>             → () => 
+__cs_element      → element
+.                 → .
+focus             → focus
+()                → ()
+)                 → )
+)}                → }
+/>                → \n            />\n          )
+;                 → ;
+\n}               → \n        }
+)                 → `
+cs.lift(          → cs`
+() =>             → () => 
+<                 → <
+input             → input
+                  →  
+aria-label        → aria-label
+={cs.lift(        → =
+"name"            → "name"
+)}                → 
+                  →  
+ref               → ref
+={cs.lift(        → ={
+() => {\n}        → () => {}
+)}                → }
+/>                →  />
+)                 → `
+cs.lift(          → cs`
+() => {\n         → () => {\n            
+const             → const 
+__cs_shown        → shown
+ =                →  = 
+cs.splice(        →  [-semantic]
+(createSignal)    → $createSignal
+)                 →  [-semantic]
+(                 → (
+true              → true
+)                 → )
+;                 → ;
+\n                → \n            
+const             → const 
+__cs_n            → n
+ =                →  = 
+cs.splice(        →  [-semantic]
+(createSignal)    → $createSignal
+)                 →  [-semantic]
+(                 → (
+0                 → 0
+)                 → )
+;                 → ;
+\n                → \n            
+return            → return 
+<                 → (\n              <
+div               → div
+>{cs.lift(        → >\n                
+<                 → <
+button            → button
+                  →  
+onclick           → onclick
+={cs.lift(        → ={
+() =>             → () => 
+__cs_n            → n
+[                 → [
+1                 → 1
+]                 → ]
+(                 → (
+__cs_n            → n
+[                 → [
+0                 → 0
+]                 → ]
+()                → ()
+ +                →  + 
+1                 → 1
+)                 → )
+)}                → }
+>{cs.lift(        → >\n                  {
+"n "              → "n "
+ +                →  + 
+__cs_n            → n
+[                 → [
+0                 → 0
+]                 → ]
+()                → ()
+)}</              → }\n                </
+button            → button
+>                 → >
+)}{cs.lift(       → \n                {
+__cs_shown        → shown
+[                 → [
+0                 → 0
+]                 → ]
+()                → ()
+ ?                →  ? 
+<                 → (\n                  <
+p                 → p
+                  →  
+ref               → ref
+={cs.lift(        → ={
+() =>             → () => 
+cs.globalThis.    → 
+window            → window
+.                 → .
+console           → console
+.                 → .
+log               → log
+(                 → (
+__cs_n            → n
+[                 → [
+0                 → 0
+]                 → ]
+()                → ()
+)                 → )
+)}                → }
+>shown</          → >shown</
+p                 → p
+>                 → >\n                )
+ :                →  : 
+null              → null
+)}</              → }\n              </
+div               → div
+>                 → >\n            )
+;                 → ;
+\n}               → \n          }
+)                 → `

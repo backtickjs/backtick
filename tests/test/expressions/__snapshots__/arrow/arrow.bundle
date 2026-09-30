@@ -2,4 +2,4 @@ const $cs0 = () => {
   const base = 10;
   return (one, two) => one + two + base;
 };
-export default () => $cs0();
+export default $cs0();

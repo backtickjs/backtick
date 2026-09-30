@@ -55,7 +55,7 @@ it("scriptBoundTagCarried", async (t) => {
 
 describe("a tag naming a function the script holds", () => {
   it("calls the one it was written under, drawn where another is in scope", async () => {
-    render(await draw(scriptBoundTagCarried));
+    render(await draw(() => scriptBoundTagCarried));
     const panel = screen.getByText("panel 0");
     const badge = screen.getByText("outer 0");
     assert.equal(badge.tagName.toLowerCase(), "b");

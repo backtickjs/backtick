@@ -58,17 +58,16 @@ const $cs5 = ($tag0, $capture1, $capture2) =>
         },
       }),
   });
-export default () =>
-  $cs0(
-    () => $i0,
-    (count, Badge) => $cs1(Badge, count),
-    (count, Badge) => $cs2($cs3, Badge, count),
-    (count, Badge) =>
-      (() => {
-        var _el$4 = _tmpl$3();
-        _$insert(_el$4, () => $cs4(Badge, count));
-        return _el$4;
-      })(),
-    (count, Badge) => $cs5($i1, Badge, count),
-  );
+export default $cs0(
+  () => $i0,
+  (count, Badge) => $cs1(Badge, count),
+  (count, Badge) => $cs2($cs3, Badge, count),
+  (count, Badge) =>
+    (() => {
+      var _el$4 = _tmpl$3();
+      _$insert(_el$4, () => $cs4(Badge, count));
+      return _el$4;
+    })(),
+  (count, Badge) => $cs5($i1, Badge, count),
+);
 _$delegateEvents(["click"]);

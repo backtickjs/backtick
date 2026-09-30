@@ -1,5 +1,4 @@
 const $cs0 = ($splice0) => $splice0();
-export default () =>
-  $cs0(() => ({
-    "#": "value",
-  }));
+export default $cs0(() => ({
+  "#": "value",
+}));

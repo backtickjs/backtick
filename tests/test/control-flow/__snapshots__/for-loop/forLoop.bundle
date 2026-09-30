@@ -5,4 +5,4 @@ const $cs0 = () => {
   }
   return total;
 };
-export default () => $cs0();
+export default $cs0();

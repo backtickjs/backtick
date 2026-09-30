@@ -41,16 +41,17 @@ export async function snapshotCase(
     });
 
   // Formatted, so a change to what is printed reads as the code it changed;
-  // its map, against the code as it was printed.
+  // its map, against the code as it was printed. The value as bundled.
   const { code, map } = await bundle(value);
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   record(`${renderBundleMappings(code, map)}\n`, "bundle.sourcemap");
-  const evaluated = createRoot(await draw(value));
+  // Run as a Solid user would draw it: a function Solid calls in a root.
+  const evaluated = createRoot(await draw(() => value));
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));
   // Rendered only once evaluating it showed it draws.
   record(
-    `${drawn ? renderDrawing(render(await draw(value as JSX.Element)).container) : renderValue(evaluated)}\n`,
+    `${drawn ? renderDrawing(render(await draw(() => value as JSX.Element)).container) : renderValue(evaluated)}\n`,
     "value",
   );
 }

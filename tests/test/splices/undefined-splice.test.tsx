@@ -10,19 +10,19 @@ import { createRoot } from "solid-js";
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
     const nothing: number | undefined = undefined;
-    assert.equal(createRoot(await draw(cs`$nothing`)), undefined);
+    assert.equal(createRoot(await draw(cs`() => $nothing`)), undefined);
   });
 
   it("keeps its key in an object", async () => {
     const data = { missing: undefined, kept: 1 };
-    const arrived = createRoot(await draw(cs`$data`));
+    const arrived = createRoot(await draw(cs`() => $data`));
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
     assert.ok("missing" in (arrived as object));
   });
 
   it("stays undefined in an array", async () => {
     const data = [1, undefined, 3];
-    assert.deepEqual(createRoot(await draw(cs`$data`)), [1, undefined, 3]);
+    assert.deepEqual(createRoot(await draw(cs`() => $data`)), [1, undefined, 3]);
   });
 
   it("is written as `void 0`", async () => {

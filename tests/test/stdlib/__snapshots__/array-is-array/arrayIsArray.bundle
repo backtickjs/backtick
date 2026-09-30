@@ -9,4 +9,4 @@ const $cs0 = () => {
     Array.isArray(null),
   ];
 };
-export default () => $cs0();
+export default $cs0();

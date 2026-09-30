@@ -3,7 +3,6 @@ const $cs0 = ($splice0) => {
   const missing = $splice0()["nowhere"] ?? "gone";
   return names[1] + "/" + missing;
 };
-export default () =>
-  $cs0(() => ({
-    here: "yes",
-  }));
+export default $cs0(() => ({
+  here: "yes",
+}));

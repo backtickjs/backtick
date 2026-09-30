@@ -39,4 +39,4 @@ const $expn0 = () => ($arg0) =>
     () => $i0,
     () => $arg0.again,
   );
-export default () => $cs0(() => $i0, $expn0());
+export default $cs0(() => $i0, $expn0());

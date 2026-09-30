@@ -17,4 +17,4 @@ const $cs0 = () => {
     }),
   };
 };
-export default () => $cs0();
+export default $cs0();

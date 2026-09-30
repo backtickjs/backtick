@@ -2,4 +2,4 @@ const $cs0 = () => {
   const names = ["zero", "one"];
   return names[9];
 };
-export default () => $cs0();
+export default $cs0();

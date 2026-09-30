@@ -13,4 +13,4 @@ const $cs0 = () => {
   x += x = 5;
   return [n, text, answered, total, x];
 };
-export default () => $cs0();
+export default $cs0();

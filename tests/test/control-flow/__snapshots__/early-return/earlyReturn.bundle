@@ -5,4 +5,4 @@ const $cs0 = () => {
   }
   n = 1;
 };
-export default () => $cs0();
+export default $cs0();

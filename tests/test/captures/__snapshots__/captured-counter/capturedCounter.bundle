@@ -6,4 +6,4 @@ const $cs0 = () => {
   };
   return bump() + bump();
 };
-export default () => $cs0();
+export default $cs0();

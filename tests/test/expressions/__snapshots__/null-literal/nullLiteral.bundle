@@ -9,4 +9,4 @@ const $cs1 = () => (value) => {
   }
   return value;
 };
-export default () => $cs0($cs1);
+export default $cs0($cs1);

@@ -1,4 +1,4 @@
 const $cs0 = () => {
   return 1 / -0;
 };
-export default () => $cs0();
+export default $cs0();

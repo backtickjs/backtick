@@ -2,26 +2,29 @@ import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import type { Client, Spliceable } from "@backtickjs/core";
+import type { Client, Spliceable, Spliced } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 import { bundle } from "./bundle.js";
 import type { JSX } from "./jsx-runtime.js";
 
 /**
- * What a bundle's default export answers: what a script evaluates to, and
- * Solid's own element for a drawing.
+ * A bundle's default export: what a script evaluates to, what a host function
+ * becomes on the client, and Solid's own element for a drawing.
  */
 export type Drawn<T> = T extends JSX.Element
   ? Solid.Element
   : T extends Client<infer Value>
     ? Drawn<Value>
-    : T;
+    : T extends (...args: infer Args) => infer Returned
+      ? (...args: { [K in keyof Args]: Spliced<Args[K]> }) => Drawn<Returned>
+      : T;
 
 /**
  * A value as a page runs it, for Solid Testing Library or Solid itself to
- * run: bundled, and the bundle imported, whose default export draws it.
+ * run: bundled, and the bundle imported, whose default export is the value.
+ * Draw with a function that draws, as Solid's `render` takes one:
  *
- *     render(await draw(<Counter from={0} />));
+ *     render(await draw(() => <Counter from={0} />));
  *
  * The bundle is imported from a file in the project's
  * `node_modules/.cache/backtick/`, named for its content, so its imports
@@ -30,7 +33,7 @@ export type Drawn<T> = T extends JSX.Element
  */
 export async function draw<T extends Spliceable>(
   value: T,
-): Promise<() => Drawn<T>> {
+): Promise<Drawn<T>> {
   const { code } = await bundle(value);
   const directory = join(process.cwd(), "node_modules", ".cache", "backtick");
   const file = join(
@@ -40,6 +43,6 @@ export async function draw<T extends Spliceable>(
   await mkdir(directory, { recursive: true });
   await writeFile(file, code);
   return (
-    (await import(pathToFileURL(file).href)) as { default: () => Drawn<T> }
+    (await import(pathToFileURL(file).href)) as { default: Drawn<T> }
   ).default;
 }

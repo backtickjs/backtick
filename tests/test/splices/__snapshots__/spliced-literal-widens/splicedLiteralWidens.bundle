@@ -5,10 +5,9 @@ const $cs0 = ($splice0, $splice1, $splice2, $splice3) => {
   const c = $splice0()($splice2());
   c[1]($splice3());
 };
-export default () =>
-  $cs0(
-    () => $i0,
-    () => 5,
-    () => 0,
-    () => 1,
-  );
+export default $cs0(
+  () => $i0,
+  () => 5,
+  () => 0,
+  () => 1,
+);

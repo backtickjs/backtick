@@ -25,14 +25,14 @@ async function logged(draw: () => Promise<unknown>): Promise<string[]> {
 describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
     const drawing = await draw(
-      cs.lift((() => {
+      cs.lift(() => {
     const __cs_count = cs.splice((createSignal))(0);
     cs.splice((onMount))(() => {
         cs.globalThis.window.console.log();
         __cs_count[1](__cs_count[0]() + 1);
     });
     return <p>{cs.lift("mounted " + __cs_count[0]())}</p>;
-})()),
+}),
     );
     const seen = await logged(async () => render(drawing));
     assert.deepEqual(seen, ["mounted 0"]);
@@ -42,10 +42,10 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_said = cs.splice((createSignal))("not yet");
     return <button onclick={cs.lift(() => cs.splice((onMount))(() => __cs_said[1]("ran")))}>{cs.lift(__cs_said[0]())}</button>;
-})()),
+}),
       ),
     );
     await userEvent.click(screen.getByRole("button"));

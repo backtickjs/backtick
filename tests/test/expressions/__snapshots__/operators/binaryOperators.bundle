@@ -14,4 +14,4 @@ const $cs0 = () => {
     [n] instanceof Array,
   ];
 };
-export default () => $cs0();
+export default $cs0();

@@ -35,4 +35,4 @@ const $expn1 = ($capture0) => ($arg0) =>
     () => $capture0,
     () => $arg0,
   );
-export default () => $cs0(() => $expn0());
+export default $cs0(() => $expn0());

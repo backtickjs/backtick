@@ -4,4 +4,4 @@ const $cs0 = () => {
   stop(repeating);
   window.clearTimeout(window.setTimeout(() => 0, 1000));
 };
-export default () => $cs0();
+export default $cs0();

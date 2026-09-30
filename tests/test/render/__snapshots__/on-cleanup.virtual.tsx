@@ -31,10 +31,10 @@ describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
     return <p>drawn</p>;
-})()),
+}),
       ),
     );
     assert.equal(runs, 0);
@@ -45,14 +45,14 @@ describe("onCleanup", () => {
   it("runs before a memo calculates again", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_doubled = cs.splice((createMemo))(() => {
         cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
         return __cs_n[0]() * 2;
     });
     return <button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift(__cs_doubled())}</button>;
-})()),
+}),
       ),
     );
     assert.equal(runs, 0);
@@ -79,14 +79,14 @@ describe("onCleanup", () => {
 
     const { unmount } = render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_timer = cs.splice((createSignal))(0);
     cs.splice((onMount))(() => {
         __cs_timer[1](cs.globalThis.window.setInterval(() => cs.globalThis.window.console.log(), 5));
     });
     cs.splice((onCleanup))(() => cs.globalThis.window.clearInterval(__cs_timer[0]()));
     return <p>ticking</p>;
-})()),
+}),
       ),
     );
     await wait(40);
@@ -101,11 +101,11 @@ describe("onCleanup", () => {
   it("never runs when called from a handler", async () => {
     const { unmount } = render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     return <button onclick={cs.lift(() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log()))}>
               press
             </button>;
-})()),
+}),
       ),
     );
     await userEvent.click(screen.getByRole("button"));

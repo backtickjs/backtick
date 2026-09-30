@@ -13,4 +13,4 @@ const $cs2 = () => (cb) => {
   return cb?.() ?? 0;
 };
 const $cs3 = () => () => 2;
-export default () => $cs0($cs1, $cs2, $cs3);
+export default $cs0($cs1, $cs2, $cs3);

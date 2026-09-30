@@ -26,7 +26,7 @@ describe("equals", () => {
   it("keeps a memo's readers from updating for an equal value", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_size = cs.splice((createMemo))(() => ({ isBig: __cs_n[0]() > 2, n: __cs_n[0]() }), undefined, { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
     const __cs_label = () => {
@@ -34,7 +34,7 @@ describe("equals", () => {
         return __cs_size().isBig ? "big" : "small";
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
-})()),
+}),
       ),
     );
     assert.equal(logged.length, 1);
@@ -51,7 +51,7 @@ describe("equals", () => {
   it("keeps a signal's readers from updating for an equal value", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_point = cs.splice((createSignal))({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
     const __cs_label = () => {
         cs.globalThis.window.console.log();
@@ -60,7 +60,7 @@ describe("equals", () => {
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_point[1]({ x: __cs_point[0]().x }))}>
                 same
               </button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
-})()),
+}),
       ),
     );
     await press();
@@ -70,13 +70,13 @@ describe("equals", () => {
   it("is handed the previous and the next value", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1, { equals: (__cs_previous, __cs_next) => {
             cs.globalThis.window.console.log(__cs_previous, __cs_next);
             return __cs_previous === __cs_next;
         } });
     return <button onclick={cs.lift(() => __cs_n[1](2))}>{cs.lift("n " + __cs_n[0]())}</button>;
-})()),
+}),
       ),
     );
     await press();
@@ -87,14 +87,14 @@ describe("equals", () => {
   it("is `===` when left out, so the same number doesn't update", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_label = () => {
         cs.globalThis.window.console.log();
         return "n " + __cs_n[0]();
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](1))}>same</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
-})()),
+}),
       ),
     );
     await press();
@@ -104,7 +104,7 @@ describe("equals", () => {
   it("is `===` when left out, so a new object always updates", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_point = cs.splice((createSignal))({ x: 1 });
     const __cs_label = () => {
         cs.globalThis.window.console.log();
@@ -113,7 +113,7 @@ describe("equals", () => {
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_point[1]({ x: __cs_point[0]().x }))}>
                 same
               </button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
-})()),
+}),
       ),
     );
     await press();

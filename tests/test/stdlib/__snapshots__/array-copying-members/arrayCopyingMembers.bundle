@@ -16,4 +16,4 @@ const $cs0 = () => {
     rows.join(",")
   );
 };
-export default () => $cs0();
+export default $cs0();

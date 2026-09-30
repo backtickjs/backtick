@@ -1,27 +1,28 @@
-(        → expressions/negation.test.tsx 14:8 (
-) =>     → expressions/negation.test.tsx 14:8 (count:…
-count    → expressions/negation.test.tsx 14:9 count
- =>      → expressions/negation.test.tsx 14:22 )…
-{        → expressions/negation.test.tsx 14:26  {…
-const    → expressions/negation.test.tsx 15:7 const 
-floor    → expressions/negation.test.tsx 15:13 floor
- =       → expressions/negation.test.tsx 15:18  = 
--        → expressions/negation.test.tsx 15:21 -
-1        → expressions/negation.test.tsx 15:22 1
-;        → expressions/negation.test.tsx 15:23 ;
-const    → expressions/negation.test.tsx 16:7 const 
-step     → expressions/negation.test.tsx 16:13 step
- =       → expressions/negation.test.tsx 16:17  = 
--        → expressions/negation.test.tsx 16:20 -
-count    → expressions/negation.test.tsx 16:21 count
-;        → expressions/negation.test.tsx 16:26 ;
-return   → expressions/negation.test.tsx 17:7 return 
-floor    → expressions/negation.test.tsx 17:14 floor
- +       → expressions/negation.test.tsx 17:19  + 
-step     → expressions/negation.test.tsx 17:22 step
- +       → expressions/negation.test.tsx 17:26  + 
--        → expressions/negation.test.tsx 17:29 -
-2        → expressions/negation.test.tsx 17:30 2
-;        → expressions/negation.test.tsx 17:31 ;
-}        → expressions/negation.test.tsx 18:5 }
-;        → expressions/negation.test.tsx 18:6 `,…
+(                → expressions/negation.test.tsx 14:8 (
+) =>             → expressions/negation.test.tsx 14:8 (count:…
+count            → expressions/negation.test.tsx 14:9 count
+ =>              → expressions/negation.test.tsx 14:22 )…
+{                → expressions/negation.test.tsx 14:26  {…
+const            → expressions/negation.test.tsx 15:7 const 
+floor            → expressions/negation.test.tsx 15:13 floor
+ =               → expressions/negation.test.tsx 15:18  = 
+-                → expressions/negation.test.tsx 15:21 -
+1                → expressions/negation.test.tsx 15:22 1
+;                → expressions/negation.test.tsx 15:23 ;
+const            → expressions/negation.test.tsx 16:7 const 
+step             → expressions/negation.test.tsx 16:13 step
+ =               → expressions/negation.test.tsx 16:17  = 
+-                → expressions/negation.test.tsx 16:20 -
+count            → expressions/negation.test.tsx 16:21 count
+;                → expressions/negation.test.tsx 16:26 ;
+return           → expressions/negation.test.tsx 17:7 return 
+floor            → expressions/negation.test.tsx 17:14 floor
+ +               → expressions/negation.test.tsx 17:19  + 
+step             → expressions/negation.test.tsx 17:22 step
+ +               → expressions/negation.test.tsx 17:26  + 
+-                → expressions/negation.test.tsx 17:29 -
+2                → expressions/negation.test.tsx 17:30 2
+;                → expressions/negation.test.tsx 17:31 ;
+}                → expressions/negation.test.tsx 18:5 }
+;                → expressions/negation.test.tsx 18:6 `,…
+export default   → expressions/negation.test.tsx 18:6 `,…

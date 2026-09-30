@@ -12,7 +12,7 @@ import { render } from "@solidjs/testing-library";
 
 // What an element drew, as the one element it put in the page.
 export async function drawn(value: JSX.Element): Promise<Element> {
-  const { container } = render(await draw(value));
+  const { container } = render(await draw(() => value));
   const node = container.firstElementChild;
   assert.ok(node !== null, "expected a rendered element");
   return node;

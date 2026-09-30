@@ -1,19 +1,20 @@
-(        → objects/index-past-end.test.tsx 13:8 {…
-) => {   → objects/index-past-end.test.tsx 13:8 {…
-const    → objects/index-past-end.test.tsx 14:7 const 
-names    → objects/index-past-end.test.tsx 14:13 names
- =       → objects/index-past-end.test.tsx 14:18  = 
-[        → objects/index-past-end.test.tsx 14:21 [
-"zero"   → objects/index-past-end.test.tsx 14:22 "zero"
-,        → objects/index-past-end.test.tsx 14:28 , 
-"one"    → objects/index-past-end.test.tsx 14:30 "one"
-]        → objects/index-past-end.test.tsx 14:35 ]
-;        → objects/index-past-end.test.tsx 14:36 ;
-return   → objects/index-past-end.test.tsx 15:7 return 
-names    → objects/index-past-end.test.tsx 15:14 names
-[        → objects/index-past-end.test.tsx 15:19 [
-9        → objects/index-past-end.test.tsx 15:20 9
-]        → objects/index-past-end.test.tsx 15:21 ]
-;        → objects/index-past-end.test.tsx 15:22 ;
-}        → objects/index-past-end.test.tsx 16:5 }
-;        → objects/index-past-end.test.tsx 16:6 `,…
+(                → objects/index-past-end.test.tsx 13:8 {…
+) => {           → objects/index-past-end.test.tsx 13:8 {…
+const            → objects/index-past-end.test.tsx 14:7 const 
+names            → objects/index-past-end.test.tsx 14:13 names
+ =               → objects/index-past-end.test.tsx 14:18  = 
+[                → objects/index-past-end.test.tsx 14:21 [
+"zero"           → objects/index-past-end.test.tsx 14:22 "zero"
+,                → objects/index-past-end.test.tsx 14:28 , 
+"one"            → objects/index-past-end.test.tsx 14:30 "one"
+]                → objects/index-past-end.test.tsx 14:35 ]
+;                → objects/index-past-end.test.tsx 14:36 ;
+return           → objects/index-past-end.test.tsx 15:7 return 
+names            → objects/index-past-end.test.tsx 15:14 names
+[                → objects/index-past-end.test.tsx 15:19 [
+9                → objects/index-past-end.test.tsx 15:20 9
+]                → objects/index-past-end.test.tsx 15:21 ]
+;                → objects/index-past-end.test.tsx 15:22 ;
+}                → objects/index-past-end.test.tsx 16:5 }
+;                → objects/index-past-end.test.tsx 16:6 `,…
+export default   → objects/index-past-end.test.tsx 16:6 `,…

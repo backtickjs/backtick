@@ -8,4 +8,4 @@ const $cs0 = () => {
   );
   return written.n + " " + written.q;
 };
-export default () => $cs0();
+export default $cs0();

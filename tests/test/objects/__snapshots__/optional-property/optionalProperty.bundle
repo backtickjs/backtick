@@ -16,4 +16,4 @@ const $cs0 = ($splice0) => ({
 const $cs1 = () => (o) => {
   return [o.label, o.inner?.z ?? 0];
 };
-export default () => $cs0($cs1);
+export default $cs0($cs1);

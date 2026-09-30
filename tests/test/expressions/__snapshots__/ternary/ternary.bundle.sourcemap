@@ -1,38 +1,39 @@
-$splice0  → expressions/ternary.test.tsx 15:8 ({…
- => (     → expressions/ternary.test.tsx 15:8 ({…
-{         → expressions/ternary.test.tsx 15:9 {
-absent    → expressions/ternary.test.tsx 16:7 absent
-:         → expressions/ternary.test.tsx 16:13 : 
-$splice0  → expressions/ternary.test.tsx 16:15 $pick(null),…
-()        → expressions/ternary.test.tsx 16:15 $pick(null),…
-(         → expressions/ternary.test.tsx 16:20 (
-null      → expressions/ternary.test.tsx 16:21 null
-)         → expressions/ternary.test.tsx 16:25 )
-,         → expressions/ternary.test.tsx 16:26 ,
-present   → expressions/ternary.test.tsx 17:7 present
-:         → expressions/ternary.test.tsx 17:14 : 
-$splice0  → expressions/ternary.test.tsx 17:16 $pick(4),…
-()        → expressions/ternary.test.tsx 17:16 $pick(4),…
-(         → expressions/ternary.test.tsx 17:21 (
-4         → expressions/ternary.test.tsx 17:22 4
-)         → expressions/ternary.test.tsx 17:23 )
-)         → expressions/ternary.test.tsx 18:6 )
-;         → expressions/ternary.test.tsx 18:7 `,…
-(         → expressions/ternary.test.tsx 7:17 (
-) =>      → expressions/ternary.test.tsx 7:17 (n:…
-n         → expressions/ternary.test.tsx 7:18 n
- =>       → expressions/ternary.test.tsx 7:34 )…
-{         → expressions/ternary.test.tsx 7:38  {…
-return    → expressions/ternary.test.tsx 8:3 return 
-n         → expressions/ternary.test.tsx 8:10 n
- ===      → expressions/ternary.test.tsx 8:11  === 
-null      → expressions/ternary.test.tsx 8:16 null
- ?        → expressions/ternary.test.tsx 8:20  ? 
-0         → expressions/ternary.test.tsx 8:23 0
- :        → expressions/ternary.test.tsx 8:24  : 
-n         → expressions/ternary.test.tsx 8:27 n
- +        → expressions/ternary.test.tsx 8:28  + 
-1         → expressions/ternary.test.tsx 8:31 1
-;         → expressions/ternary.test.tsx 8:32 ;
-}         → expressions/ternary.test.tsx 9:1 }
-;         → expressions/ternary.test.tsx 9:2 `;…
+$splice0         → expressions/ternary.test.tsx 15:8 ({…
+ => (            → expressions/ternary.test.tsx 15:8 ({…
+{                → expressions/ternary.test.tsx 15:9 {
+absent           → expressions/ternary.test.tsx 16:7 absent
+:                → expressions/ternary.test.tsx 16:13 : 
+$splice0         → expressions/ternary.test.tsx 16:15 $pick(null),…
+()               → expressions/ternary.test.tsx 16:15 $pick(null),…
+(                → expressions/ternary.test.tsx 16:20 (
+null             → expressions/ternary.test.tsx 16:21 null
+)                → expressions/ternary.test.tsx 16:25 )
+,                → expressions/ternary.test.tsx 16:26 ,
+present          → expressions/ternary.test.tsx 17:7 present
+:                → expressions/ternary.test.tsx 17:14 : 
+$splice0         → expressions/ternary.test.tsx 17:16 $pick(4),…
+()               → expressions/ternary.test.tsx 17:16 $pick(4),…
+(                → expressions/ternary.test.tsx 17:21 (
+4                → expressions/ternary.test.tsx 17:22 4
+)                → expressions/ternary.test.tsx 17:23 )
+)                → expressions/ternary.test.tsx 18:6 )
+;                → expressions/ternary.test.tsx 18:7 `,…
+(                → expressions/ternary.test.tsx 7:17 (
+) =>             → expressions/ternary.test.tsx 7:17 (n:…
+n                → expressions/ternary.test.tsx 7:18 n
+ =>              → expressions/ternary.test.tsx 7:34 )…
+{                → expressions/ternary.test.tsx 7:38  {…
+return           → expressions/ternary.test.tsx 8:3 return 
+n                → expressions/ternary.test.tsx 8:10 n
+ ===             → expressions/ternary.test.tsx 8:11  === 
+null             → expressions/ternary.test.tsx 8:16 null
+ ?               → expressions/ternary.test.tsx 8:20  ? 
+0                → expressions/ternary.test.tsx 8:23 0
+ :               → expressions/ternary.test.tsx 8:24  : 
+n                → expressions/ternary.test.tsx 8:27 n
+ +               → expressions/ternary.test.tsx 8:28  + 
+1                → expressions/ternary.test.tsx 8:31 1
+;                → expressions/ternary.test.tsx 8:32 ;
+}                → expressions/ternary.test.tsx 9:1 }
+;                → expressions/ternary.test.tsx 9:2 `;…
+export default   → expressions/ternary.test.tsx 9:2 `;…

@@ -1,23 +1,24 @@
-(        → objects/object-dots-key.test.tsx 12:8 {…
-) => {   → objects/object-dots-key.test.tsx 12:8 {…
-const    → objects/object-dots-key.test.tsx 13:7 const 
-base     → objects/object-dots-key.test.tsx 13:13 base
- =       → objects/object-dots-key.test.tsx 13:17  = 
-{        → objects/object-dots-key.test.tsx 13:20 {
-a        → objects/object-dots-key.test.tsx 13:22 a
-:        → objects/object-dots-key.test.tsx 13:23 : 
-1        → objects/object-dots-key.test.tsx 13:25 1
-}        → objects/object-dots-key.test.tsx 13:26  };…
-;        → objects/object-dots-key.test.tsx 13:28 ;
-return   → objects/object-dots-key.test.tsx 14:7 return 
-{        → objects/object-dots-key.test.tsx 14:14 {
-...      → objects/object-dots-key.test.tsx 14:16 ...
-base     → objects/object-dots-key.test.tsx 14:19 base
-,        → objects/object-dots-key.test.tsx 14:23 ,
-"..."    → objects/object-dots-key.test.tsx 14:25 "..."
-:        → objects/object-dots-key.test.tsx 14:30 : 
-2        → objects/object-dots-key.test.tsx 14:32 2
-}        → objects/object-dots-key.test.tsx 14:33  };…
-;        → objects/object-dots-key.test.tsx 14:35 ;
-}        → objects/object-dots-key.test.tsx 15:5 }
-;        → objects/object-dots-key.test.tsx 15:6 `,…
+(                → objects/object-dots-key.test.tsx 12:8 {…
+) => {           → objects/object-dots-key.test.tsx 12:8 {…
+const            → objects/object-dots-key.test.tsx 13:7 const 
+base             → objects/object-dots-key.test.tsx 13:13 base
+ =               → objects/object-dots-key.test.tsx 13:17  = 
+{                → objects/object-dots-key.test.tsx 13:20 {
+a                → objects/object-dots-key.test.tsx 13:22 a
+:                → objects/object-dots-key.test.tsx 13:23 : 
+1                → objects/object-dots-key.test.tsx 13:25 1
+}                → objects/object-dots-key.test.tsx 13:26  };…
+;                → objects/object-dots-key.test.tsx 13:28 ;
+return           → objects/object-dots-key.test.tsx 14:7 return 
+{                → objects/object-dots-key.test.tsx 14:14 {
+...              → objects/object-dots-key.test.tsx 14:16 ...
+base             → objects/object-dots-key.test.tsx 14:19 base
+,                → objects/object-dots-key.test.tsx 14:23 ,
+"..."            → objects/object-dots-key.test.tsx 14:25 "..."
+:                → objects/object-dots-key.test.tsx 14:30 : 
+2                → objects/object-dots-key.test.tsx 14:32 2
+}                → objects/object-dots-key.test.tsx 14:33  };…
+;                → objects/object-dots-key.test.tsx 14:35 ;
+}                → objects/object-dots-key.test.tsx 15:5 }
+;                → objects/object-dots-key.test.tsx 15:6 `,…
+export default   → objects/object-dots-key.test.tsx 15:6 `,…

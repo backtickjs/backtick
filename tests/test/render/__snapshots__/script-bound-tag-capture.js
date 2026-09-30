@@ -11,39 +11,39 @@ import { draw } from "@backtickjs/solid-js/testing";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs.create(
-  "2hvgs7ncwokla:13:30",
+  "23xdw1rrgifg:13:30",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
       {
         kind: "splice",
         value: cs.create(
-          "2hvgs7ncwokla:19:9",
+          "23xdw1rrgifg:19:9",
           {
             params: [
-              { kind: "capture", key: "Badge$2hvgs7ncwokla$1" },
-              { kind: "capture", key: "count$2hvgs7ncwokla$0" },
+              { kind: "capture", key: "Badge$23xdw1rrgifg$1" },
+              { kind: "capture", key: "count$23xdw1rrgifg$0" },
             ],
           },
           "($capture0, $capture1) => <$capture0 n={$capture1[0]()}/>",
           '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAkBY,0BAAA,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG"}',
         ),
-        bindings: ["count$2hvgs7ncwokla$0", "Badge$2hvgs7ncwokla$1"],
+        bindings: ["count$23xdw1rrgifg$0", "Badge$23xdw1rrgifg$1"],
       },
       {
         kind: "splice",
         value: cs.create(
-          "2hvgs7ncwokla:21:10",
+          "23xdw1rrgifg:21:10",
           {
             params: [
               {
                 kind: "splice",
                 value: cs.create(
-                  "2hvgs7ncwokla:23:19",
+                  "23xdw1rrgifg:23:19",
                   {
                     params: [
-                      { kind: "capture", key: "Badge$2hvgs7ncwokla$1" },
-                      { kind: "capture", key: "count$2hvgs7ncwokla$0" },
+                      { kind: "capture", key: "Badge$23xdw1rrgifg$1" },
+                      { kind: "capture", key: "count$23xdw1rrgifg$0" },
                     ],
                   },
                   "($capture0, $capture1) => <$capture0 n={$capture1[0]() + 100}/>",
@@ -51,47 +51,47 @@ const scriptBoundTagCapture = cs.create(
                 ),
                 bindings: [],
               },
-              { kind: "capture", key: "Badge$2hvgs7ncwokla$1" },
-              { kind: "capture", key: "count$2hvgs7ncwokla$0" },
+              { kind: "capture", key: "Badge$23xdw1rrgifg$1" },
+              { kind: "capture", key: "count$23xdw1rrgifg$0" },
             ],
           },
           "($splice0, $capture1, $capture2) => {\n    const skipped = 10;\n    return $splice0($capture1, $capture2);\n}",
           '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAoBa;IACH,MAAM,OAAO,GAAG,EAAE,CAAC;IACnB,OAAO,8BAAC,CAAqC;AAC/C,CAAC"}',
         ),
-        bindings: ["count$2hvgs7ncwokla$0", "Badge$2hvgs7ncwokla$1"],
+        bindings: ["count$23xdw1rrgifg$0", "Badge$23xdw1rrgifg$1"],
       },
       {
         kind: "splice",
         value: _jsx("section", {
           children: cs.create(
-            "2hvgs7ncwokla:26:20",
+            "23xdw1rrgifg:26:20",
             {
               params: [
-                { kind: "capture", key: "Badge$2hvgs7ncwokla$1" },
-                { kind: "capture", key: "count$2hvgs7ncwokla$0" },
+                { kind: "capture", key: "Badge$23xdw1rrgifg$1" },
+                { kind: "capture", key: "count$23xdw1rrgifg$0" },
               ],
             },
             "($capture0, $capture1) => <$capture0 n={$capture1[0]() + 1000}/>",
             '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AAyBuB,0BAAA,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,EAAG"}',
           ),
         }),
-        bindings: ["count$2hvgs7ncwokla$0", "Badge$2hvgs7ncwokla$1"],
+        bindings: ["count$23xdw1rrgifg$0", "Badge$23xdw1rrgifg$1"],
       },
       {
         kind: "splice",
         value: cs.create(
-          "2hvgs7ncwokla:28:10",
+          "23xdw1rrgifg:28:10",
           {
             params: [
               { kind: "tag", value: For },
-              { kind: "capture", key: "Badge$2hvgs7ncwokla$1" },
-              { kind: "capture", key: "count$2hvgs7ncwokla$0" },
+              { kind: "capture", key: "Badge$23xdw1rrgifg$1" },
+              { kind: "capture", key: "count$23xdw1rrgifg$0" },
             ],
           },
           "($tag0, $capture1, $capture2) => <$tag0 each={[1, 2]}>\n          {(m) => <$capture1 n={m * $capture2[0]()}/>}\n        </$tag0>",
           '{"version":3,"file":"script-bound-tag-capture.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-capture.test.tsx"],"names":[],"mappings":"AA2Ba,iCAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACrB;UAAA,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAG,CAC9C;QAAA,EAAE,KAAG,CAAC"}',
         ),
-        bindings: ["count$2hvgs7ncwokla$0", "Badge$2hvgs7ncwokla$1"],
+        bindings: ["count$23xdw1rrgifg$0", "Badge$23xdw1rrgifg$1"],
       },
     ],
   },
@@ -103,7 +103,7 @@ it("scriptBoundTagCapture", async (t) => {
 });
 describe("a tag naming a function the script holds", () => {
   it("calls one an enclosing script holds, however the call is nested", async () => {
-    const { container } = render(await draw(scriptBoundTagCapture));
+    const { container } = render(await draw(() => scriptBoundTagCapture));
     const badges = () => [...container.querySelectorAll("b")];
     const before = badges();
     const texts = () => badges().map((b) => b.textContent);

@@ -6,8 +6,7 @@ const $cs1 = ($splice0) => {
   return $splice0()(1)[0]();
 };
 const $cs2 = ($splice0) => (n) => $splice0()(n + 10);
-export default () =>
-  $cs0(
-    () => $cs1(() => $i0),
-    () => $cs1(() => $cs2(() => $i0)),
-  );
+export default $cs0(
+  () => $cs1(() => $i0),
+  () => $cs1(() => $cs2(() => $i0)),
+);

@@ -2,4 +2,4 @@ import { template as _$template } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(
   `<div><span>alpha</span><span>beta</span><span>gamma`,
 );
-export default () => _tmpl$();
+export default _tmpl$();

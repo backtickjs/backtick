@@ -14,9 +14,8 @@ const $cs1 = () => (name) => [
     return _el$2;
   })(),
 ];
-export default () =>
-  (() => {
-    var _el$4 = _tmpl$3();
-    _$insert(_el$4, () => $cs0($cs1));
-    return _el$4;
-  })();
+export default (() => {
+  var _el$4 = _tmpl$3();
+  _$insert(_el$4, () => $cs0($cs1));
+  return _el$4;
+})();

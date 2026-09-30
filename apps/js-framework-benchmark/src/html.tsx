@@ -11,7 +11,7 @@ export const html = `<!doctype html>
   </head>
   <body>
     <div id="main" class="container">
-      ${await renderToString(<Main />)}
+      ${await renderToString(() => <Main />)}
     </div>
   </body>
 </html>

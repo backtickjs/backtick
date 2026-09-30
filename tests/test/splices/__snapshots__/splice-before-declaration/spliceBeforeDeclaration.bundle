@@ -7,8 +7,7 @@ const $cs1 = ($splice0) => {
 };
 const $cs2 = () => 10;
 const $cs3 = () => 20;
-export default () =>
-  $cs0(
-    () => $cs1($cs2),
-    () => $cs1($cs3),
-  );
+export default $cs0(
+  () => $cs1($cs2),
+  () => $cs1($cs3),
+);

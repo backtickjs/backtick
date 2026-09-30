@@ -19,10 +19,10 @@ describe("a module an app provides", () => {
       createRoot(
         await draw(
           cs.create(
-            "o4m6qpcv17jb:20:39",
+            "1n3focz0nhdlf:20:39",
             { params: [{ kind: "splice", value: greet, bindings: [] }] },
-            "($splice0) => $splice0()()",
-            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmB0C,cAAA,UAAM,EAAE"}',
+            "($splice0) => () => $splice0()()",
+            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmB0C,cAAA,GAAG,EAAE,CAAC,UAAM,EAAE"}',
           ),
         ),
       ),
@@ -36,10 +36,10 @@ describe("a module an app provides", () => {
       createRoot(
         await draw(
           cs.create(
-            "o4m6qpcv17jb:26:39",
+            "1n3focz0nhdlf:26:39",
             { params: [{ kind: "splice", value: storage, bindings: [] }] },
-            '($splice0) => $splice0().get("greeting")',
-            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyB0C,cAAA,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+            '($splice0) => () => $splice0().get("greeting")',
+            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyB0C,cAAA,GAAG,EAAE,CAAC,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
           ),
         ),
       ),

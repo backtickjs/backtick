@@ -14,7 +14,7 @@ async function printed(
 }
 
 const root = async (...args: Parameters<typeof printed>) =>
-  (await printed(...args)).match(/export default \(\) => \(([\s\S]*)\);$/)![1]!;
+  (await printed(...args)).match(/^\(([\s\S]*)\);$/m)![1]!;
 
 test("an element is a JSX tag", async () => {
   assert.equal(await root("br", {}), "<br />");
@@ -42,7 +42,7 @@ test("a client module's component is a tag of its import", async () => {
   const For = createImport({ name: "For", from: "solid-js" });
   const module = await printed(For as never, { each: [1] });
   assert.match(module, /^import \{ For as \$i0 \} from "solid-js";/);
-  assert.match(module, /export default \(\) => \(<\$i0 each=\{\[1\]\} \/>\);/);
+  assert.match(module, /^\(<\$i0 each=\{\[1\]\} \/>\);$/m);
 });
 
 test("a component runs once per element per bundle", async () => {

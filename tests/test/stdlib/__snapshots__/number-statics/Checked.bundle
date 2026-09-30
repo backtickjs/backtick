@@ -34,7 +34,6 @@ const $cs0 = () => {
     return _el$;
   })();
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () => $cs0(),
-  });
+export default _$createComponent($Component, {
+  body: () => $cs0(),
+});

@@ -8,4 +8,4 @@ const $cs0 = () => {
     holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],
   };
 };
-export default () => $cs0();
+export default $cs0();

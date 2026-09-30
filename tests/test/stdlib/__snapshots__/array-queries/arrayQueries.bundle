@@ -11,4 +11,4 @@ const $cs0 = () => {
     unchanged: coins,
   };
 };
-export default () => $cs0();
+export default $cs0();

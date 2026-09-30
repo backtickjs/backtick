@@ -1,38 +1,39 @@
-$splice0  → objects/object-index.test.tsx 15:8 (currency:…
- =>       → objects/object-index.test.tsx 15:8 (currency:…
-currency  → objects/object-index.test.tsx 15:9 currency
- =>       → objects/object-index.test.tsx 15:25 )…
-{         → objects/object-index.test.tsx 15:29  {…
-const     → objects/object-index.test.tsx 16:7 const 
-table     → objects/object-index.test.tsx 16:13 table
- =        → objects/object-index.test.tsx 16:18  = 
-$splice0  → objects/object-index.test.tsx 16:21 $rates;…
-()        → objects/object-index.test.tsx 16:21 $rates;…
-;         → objects/object-index.test.tsx 16:27 ;
-const     → objects/object-index.test.tsx 17:7 const 
-asked     → objects/object-index.test.tsx 17:13 asked
- =        → objects/object-index.test.tsx 17:18  = 
-table     → objects/object-index.test.tsx 17:21 table
-[         → objects/object-index.test.tsx 17:26 [
-currency  → objects/object-index.test.tsx 17:27 currency
-]         → objects/object-index.test.tsx 17:35 ]
- ??       → objects/object-index.test.tsx 17:36  ?? 
-0         → objects/object-index.test.tsx 17:40 0
-;         → objects/object-index.test.tsx 17:41 ;
-const     → objects/object-index.test.tsx 18:7 const 
-usd       → objects/object-index.test.tsx 18:13 usd
- =        → objects/object-index.test.tsx 18:16  = 
-table     → objects/object-index.test.tsx 18:19 table
-[         → objects/object-index.test.tsx 18:24 [
-"usd"     → objects/object-index.test.tsx 18:25 "usd"
-]         → objects/object-index.test.tsx 18:30 ]
- ??       → objects/object-index.test.tsx 18:31  ?? 
-0         → objects/object-index.test.tsx 18:35 0
-;         → objects/object-index.test.tsx 18:36 ;
-return    → objects/object-index.test.tsx 19:7 return 
-asked     → objects/object-index.test.tsx 19:14 asked
- +        → objects/object-index.test.tsx 19:19  + 
-usd       → objects/object-index.test.tsx 19:22 usd
-;         → objects/object-index.test.tsx 19:25 ;
-}         → objects/object-index.test.tsx 20:5 }
-;         → objects/object-index.test.tsx 20:6 `,…
+$splice0         → objects/object-index.test.tsx 15:8 (currency:…
+ =>              → objects/object-index.test.tsx 15:8 (currency:…
+currency         → objects/object-index.test.tsx 15:9 currency
+ =>              → objects/object-index.test.tsx 15:25 )…
+{                → objects/object-index.test.tsx 15:29  {…
+const            → objects/object-index.test.tsx 16:7 const 
+table            → objects/object-index.test.tsx 16:13 table
+ =               → objects/object-index.test.tsx 16:18  = 
+$splice0         → objects/object-index.test.tsx 16:21 $rates;…
+()               → objects/object-index.test.tsx 16:21 $rates;…
+;                → objects/object-index.test.tsx 16:27 ;
+const            → objects/object-index.test.tsx 17:7 const 
+asked            → objects/object-index.test.tsx 17:13 asked
+ =               → objects/object-index.test.tsx 17:18  = 
+table            → objects/object-index.test.tsx 17:21 table
+[                → objects/object-index.test.tsx 17:26 [
+currency         → objects/object-index.test.tsx 17:27 currency
+]                → objects/object-index.test.tsx 17:35 ]
+ ??              → objects/object-index.test.tsx 17:36  ?? 
+0                → objects/object-index.test.tsx 17:40 0
+;                → objects/object-index.test.tsx 17:41 ;
+const            → objects/object-index.test.tsx 18:7 const 
+usd              → objects/object-index.test.tsx 18:13 usd
+ =               → objects/object-index.test.tsx 18:16  = 
+table            → objects/object-index.test.tsx 18:19 table
+[                → objects/object-index.test.tsx 18:24 [
+"usd"            → objects/object-index.test.tsx 18:25 "usd"
+]                → objects/object-index.test.tsx 18:30 ]
+ ??              → objects/object-index.test.tsx 18:31  ?? 
+0                → objects/object-index.test.tsx 18:35 0
+;                → objects/object-index.test.tsx 18:36 ;
+return           → objects/object-index.test.tsx 19:7 return 
+asked            → objects/object-index.test.tsx 19:14 asked
+ +               → objects/object-index.test.tsx 19:19  + 
+usd              → objects/object-index.test.tsx 19:22 usd
+;                → objects/object-index.test.tsx 19:25 ;
+}                → objects/object-index.test.tsx 20:5 }
+;                → objects/object-index.test.tsx 20:6 `,…
+export default   → objects/object-index.test.tsx 20:6 `,…

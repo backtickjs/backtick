@@ -22,7 +22,7 @@ async function SwappableRows() {
 }
 
 it("a swap moves the two rows it swapped", async () => {
-  const { container } = render(await draw(<SwappableRows />));
+  const { container } = render(await draw(() => <SwappableRows />));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "swap" }));
   // Each move is the row leaving where it was and arriving where it goes.

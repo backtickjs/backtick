@@ -16,4 +16,4 @@ const $cs0 = ($splice0) => {
     typeof count,
   ];
 };
-export default () => $cs0(() => $i0);
+export default $cs0(() => $i0);

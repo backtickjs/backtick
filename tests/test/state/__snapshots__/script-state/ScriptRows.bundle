@@ -17,17 +17,16 @@ const $cs2 = ($splice0) => (label) => {
   };
 };
 const $cs3 = ($splice0) => $splice0()("one").label[0]();
-export default () =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$addEventListener(
-      _el$,
-      "click",
-      $cs1(() => $cs2(() => $i0)),
-      true,
-    );
-    _$insert(_el$, () => $cs3(() => $cs2(() => $i0)));
-    _$effect((_$p) => _$style(_el$, $cs0(), _$p));
-    return _el$;
-  })();
+export default (() => {
+  var _el$ = _tmpl$();
+  _$addEventListener(
+    _el$,
+    "click",
+    $cs1(() => $cs2(() => $i0)),
+    true,
+  );
+  _$insert(_el$, () => $cs3(() => $cs2(() => $i0)));
+  _$effect((_$p) => _$style(_el$, $cs0(), _$p));
+  return _el$;
+})();
 _$delegateEvents(["click"]);

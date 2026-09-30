@@ -27,14 +27,14 @@ describe("an undefined prop", () => {
   });
 
   it("lets a component forward an optional prop it wasn't given", async () => {
-    render(await draw(<Pill label="plain" />));
+    render(await draw(() => <Pill label="plain" />));
     assert.ok(screen.getByRole("button", { name: "plain" }));
   });
 
   it("still reaches the element when it is given", async () => {
     render(
       await draw(
-        <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />,
+        () => <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />,
       ),
     );
     assert.equal(document.activeElement, screen.getByRole("button"));

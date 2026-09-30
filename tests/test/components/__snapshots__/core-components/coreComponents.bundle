@@ -5,11 +5,10 @@ var _tmpl$ = /*#__PURE__*/ _$template(
   `<div style=padding:8px><span style=font-size:12px>hi</span><img src=https://example.com/a.png>`,
 );
 const $cs0 = () => () => {};
-export default () =>
-  (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild;
-    _$addEventListener(_el$2, "click", $cs0(), true);
-    return _el$;
-  })();
+export default (() => {
+  var _el$ = _tmpl$(),
+    _el$2 = _el$.firstChild;
+  _$addEventListener(_el$2, "click", $cs0(), true);
+  return _el$;
+})();
 _$delegateEvents(["click"]);

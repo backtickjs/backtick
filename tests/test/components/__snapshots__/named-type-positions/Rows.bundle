@@ -41,8 +41,7 @@ const $cs0 = ($splice0, $tag1) => {
     return _el$;
   })();
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () => $cs0(() => $i0, $i1),
-  });
+export default _$createComponent($Component, {
+  body: () => $cs0(() => $i0, $i1),
+});
 _$delegateEvents(["click"]);

@@ -24,4 +24,4 @@ const $cs2 = () => (o) => {
 const $cs3 = () => (s) => {
   return s?.concat("!");
 };
-export default () => $cs0($cs1, $cs2, $cs3);
+export default $cs0($cs1, $cs2, $cs3);

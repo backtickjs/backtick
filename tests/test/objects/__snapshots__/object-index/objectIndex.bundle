@@ -4,8 +4,7 @@ const $cs0 = ($splice0) => (currency) => {
   const usd = table["usd"] ?? 0;
   return asked + usd;
 };
-export default () =>
-  $cs0(() => ({
-    usd: 3,
-    eur: 4,
-  }));
+export default $cs0(() => ({
+  usd: 3,
+  eur: 4,
+}));

@@ -1,4 +1,5 @@
-cs.lift((() => {\n                      → cs`{\n          
+cs.lift(                                → cs`
+() => {\n                               → () => {\n          
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
 )                                       →  [-semantic]
@@ -21,8 +22,10 @@ p                                       → p
 p                                       → p
 >                                       → >
 ;                                       → ;
-\n})())                                 → \n        }`
-cs.lift((() => {\n                      → cs`{\n          
+\n}                                     → \n        }
+)                                       → `
+cs.lift(                                → cs`
+() => {\n                               → () => {\n          
 const                                   → const 
 __cs_n                                  → n
  =                                      →  = 
@@ -98,8 +101,10 @@ __cs_doubled                            → doubled
 button                                  → button
 >                                       → >
 ;                                       → ;
-\n})())                                 → \n        }`
-cs.lift((() => {\n                      → cs`{\n          
+\n}                                     → \n        }
+)                                       → `
+cs.lift(                                → cs`
+() => {\n                               → () => {\n          
 const                                   → const 
 __cs_timer                              → timer
  =                                      →  = 
@@ -169,8 +174,10 @@ p                                       → p
 p                                       → p
 >                                       → >
 ;                                       → ;
-\n})())                                 → \n        }`
-cs.lift((() => {\n                      → cs`{\n          
+\n}                                     → \n        }
+)                                       → `
+cs.lift(                                → cs`
+() => {\n                               → () => {\n          
 return                                  → return 
 <                                       → (\n            <
 button                                  → button
@@ -196,4 +203,5 @@ log                                     → log
 button                                  → button
 >                                       → >\n          )
 ;                                       → ;
-\n})())                                 → \n        }`
+\n}                                     → \n        }
+)                                       → `

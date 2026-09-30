@@ -14,7 +14,7 @@ const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
 
 async function drawn(value: JSX.Element): Promise<Element> {
-  const { container } = render(await draw(value));
+  const { container } = render(await draw(() => value));
   return container.firstElementChild!;
 }
 
@@ -123,7 +123,7 @@ describe("a field's value", () => {
   }
 
   it("follows a write after the field was edited", async () => {
-    render(await draw(<Field />));
+    render(await draw(() => <Field />));
     const text = screen.getByLabelText<HTMLInputElement>("text");
     const on = screen.getByLabelText<HTMLInputElement>("on");
     fireEvent.input(text, { target: { value: "typed" } });

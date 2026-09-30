@@ -2,4 +2,4 @@ const $cs0 = ($splice0) => {
   const page = JSON.parse($splice0());
   return page.rows[0] + " of " + page.count;
 };
-export default () => $cs0(() => '{"rows":["one","two"],"count":2}');
+export default $cs0(() => '{"rows":["one","two"],"count":2}');

@@ -8,7 +8,6 @@ const $cs0 = () => {
   const fractional = Number.parseFloat("1.5");
   return _tmpl$();
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () => $cs0(),
-  });
+export default _$createComponent($Component, {
+  body: () => $cs0(),
+});

@@ -7,25 +7,24 @@ import { For as $i0 } from "solid-js";
 const $cs0 = ($splice0) => $splice0();
 const $cs1 = ($splice0) => (row) => $splice0(row);
 const $cs2 = ($capture0) => "row " + $capture0;
-export default () =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$insert(
-      _el$,
-      _$createComponent($i0, {
-        get each() {
-          return $cs0(() => [1, 2, 3]);
-        },
-        get children() {
-          return $cs1((row) =>
-            (() => {
-              var _el$2 = _tmpl$2();
-              _$insert(_el$2, () => $cs2(row));
-              return _el$2;
-            })(),
-          );
-        },
-      }),
-    );
-    return _el$;
-  })();
+export default (() => {
+  var _el$ = _tmpl$();
+  _$insert(
+    _el$,
+    _$createComponent($i0, {
+      get each() {
+        return $cs0(() => [1, 2, 3]);
+      },
+      get children() {
+        return $cs1((row) =>
+          (() => {
+            var _el$2 = _tmpl$2();
+            _$insert(_el$2, () => $cs2(row));
+            return _el$2;
+          })(),
+        );
+      },
+    }),
+  );
+  return _el$;
+})();

@@ -8,4 +8,4 @@ const $cs0 = () => {
     replacedBy: "a.b".replaceAll(".", (found, offset) => "" + offset),
   };
 };
-export default () => $cs0();
+export default $cs0();

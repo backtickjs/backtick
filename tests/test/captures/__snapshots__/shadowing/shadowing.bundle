@@ -9,10 +9,9 @@ const $cs1 = ($splice0, $splice1) => {
   return total;
 };
 const $cs2 = ($capture0) => $capture0;
-export default () =>
-  $cs0((total) =>
-    $cs1(
-      () => $cs2(total),
-      () => 100,
-    ),
-  );
+export default $cs0((total) =>
+  $cs1(
+    () => $cs2(total),
+    () => 100,
+  ),
+);

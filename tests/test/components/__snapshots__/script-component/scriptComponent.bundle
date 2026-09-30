@@ -25,4 +25,4 @@ const $expn0 = () => ($arg0) =>
     return _el$2;
   })();
 const $expn1 = () => () => _tmpl$3();
-export default () => $cs0($expn0(), $expn1());
+export default $cs0($expn0(), $expn1());

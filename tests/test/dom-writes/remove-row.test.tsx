@@ -38,7 +38,7 @@ async function RemovableRows() {
 }
 
 it("a removal takes out the one row", async () => {
-  const { container } = render(await draw(<RemovableRows />));
+  const { container } = render(await draw(() => <RemovableRows />));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "remove 3" }));
   assert.deepEqual(written(), ["tbody − tr#row-3"]);

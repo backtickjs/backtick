@@ -9,4 +9,4 @@ const $cs0 = () => {
   const down = n--;
   return [total, before, after, down, n];
 };
-export default () => $cs0();
+export default $cs0();

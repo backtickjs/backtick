@@ -8,4 +8,4 @@ const $cs0 = () => {
   }
   return out;
 };
-export default () => $cs0();
+export default $cs0();

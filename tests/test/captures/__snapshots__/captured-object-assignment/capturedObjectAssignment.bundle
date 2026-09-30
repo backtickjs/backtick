@@ -10,4 +10,4 @@ const $cs0 = ($splice0) => {
 const $cs1 = ($capture0) => () => {
   $capture0.count += 1;
 };
-export default () => $cs0($cs1);
+export default $cs0($cs1);

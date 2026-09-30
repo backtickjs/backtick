@@ -61,16 +61,15 @@ const $expn10 = () => ($arg0) =>
     _$insert(_el$, $arg0);
     return _el$;
   })();
-export default () =>
-  $cs0(
-    () => $expn0(),
-    () => $expn1(),
-    () => $expn2(),
-    () => $expn3(),
-    () => $expn4(),
-    () => $expn5(),
-    () => $expn6(),
-    () => $expn7(),
-    () => $expn8(),
-    () => $expn10(),
-  );
+export default $cs0(
+  () => $expn0(),
+  () => $expn1(),
+  () => $expn2(),
+  () => $expn3(),
+  () => $expn4(),
+  () => $expn5(),
+  () => $expn6(),
+  () => $expn7(),
+  () => $expn8(),
+  () => $expn10(),
+);

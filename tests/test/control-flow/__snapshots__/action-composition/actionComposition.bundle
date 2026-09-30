@@ -7,4 +7,4 @@ const $cs1 = ($splice0) => {
 const $cs2 = () => {
   const x = 1;
 };
-export default () => $cs0(() => $cs1($cs2));
+export default $cs0(() => $cs1($cs2));

@@ -10,10 +10,10 @@ describe("null and undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "39yr336z7wo30:10:39",
+            "7fapaxc7mlwa:10:39",
             { params: [] },
-            "() => null === null",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAS0C,MAAA,IAAI,KAAK,IAAI"}',
+            "() => () => null === null",
+            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAS0C,MAAA,GAAG,EAAE,CAAC,IAAI,KAAK,IAAI"}',
           ),
         ),
       ),
@@ -23,10 +23,10 @@ describe("null and undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "39yr336z7wo30:11:39",
+            "7fapaxc7mlwa:11:39",
             { params: [] },
-            "() => undefined === undefined",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAU0C,MAAA,SAAS,KAAK,SAAS"}',
+            "() => () => undefined === undefined",
+            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAU0C,MAAA,GAAG,EAAE,CAAC,SAAS,KAAK,SAAS"}',
           ),
         ),
       ),
@@ -38,10 +38,10 @@ describe("null and undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "39yr336z7wo30:15:39",
+            "7fapaxc7mlwa:15:39",
             { params: [] },
-            "() => null !== undefined",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAc0C,MAAA,IAAI,KAAK,SAAS"}',
+            "() => () => null !== undefined",
+            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAc0C,MAAA,GAAG,EAAE,CAAC,IAAI,KAAK,SAAS"}',
           ),
         ),
       ),
@@ -51,10 +51,10 @@ describe("null and undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "39yr336z7wo30:16:39",
+            "7fapaxc7mlwa:16:39",
             { params: [] },
-            "() => null === undefined",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAe0C,MAAA,IAAI,KAAK,SAAS"}',
+            "() => () => null === undefined",
+            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAe0C,MAAA,GAAG,EAAE,CAAC,IAAI,KAAK,SAAS"}',
           ),
         ),
       ),
@@ -70,15 +70,15 @@ describe("null and undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "39yr336z7wo30:26:19",
+            "7fapaxc7mlwa:26:19",
             {
               params: [
                 { kind: "splice", value: nothing, bindings: [] },
                 { kind: "splice", value: empty, bindings: [] },
               ],
             },
-            '($splice0, $splice1) => {\n    const names = ["a"];\n    return [\n        $splice0() === undefined,\n        $splice0() !== null,\n        $splice1() === null,\n        $splice1() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n}',
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAyBsB;IACZ,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,UAAQ,KAAK,SAAS;QACtB,UAAQ,KAAK,IAAI;QACjB,UAAM,KAAK,IAAI;QACf,UAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC"}',
+            '($splice0, $splice1) => () => {\n    const names = ["a"];\n    return [\n        $splice0() === undefined,\n        $splice0() !== null,\n        $splice1() === null,\n        $splice1() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n}',
+            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAyBsB,wBAAA,GAAG,EAAE;IACjB,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,UAAQ,KAAK,SAAS;QACtB,UAAQ,KAAK,IAAI;QACjB,UAAM,KAAK,IAAI;QACf,UAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC"}',
           ),
         ),
       ),

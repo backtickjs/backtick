@@ -1,5 +1,5 @@
 // 27:9
-($splice0, $splice1) => {
+($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const doubled = $splice1()(() => {
         window.console.log();
@@ -14,7 +14,7 @@
 }
 
 // 55:9
-($splice0, $splice1) => {
+($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const isBig = $splice1()(() => n[0]() > 2);
     const label = () => {

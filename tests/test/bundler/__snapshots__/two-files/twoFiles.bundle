@@ -12,9 +12,8 @@ const $cs0 = ($splice0) =>
     return _el$;
   })();
 const $cs1 = () => _tmpl$2();
-export default () =>
-  $cs0(() =>
-    _$createComponent($Component, {
-      body: () => $cs1(),
-    }),
-  );
+export default $cs0(() =>
+  _$createComponent($Component, {
+    body: () => $cs1(),
+  }),
+);

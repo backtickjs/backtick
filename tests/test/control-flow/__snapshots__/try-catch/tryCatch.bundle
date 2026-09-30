@@ -9,4 +9,4 @@ const $cs0 = () => {
     return "caught something else";
   }
 };
-export default () => $cs0();
+export default $cs0();

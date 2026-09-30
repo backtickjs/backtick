@@ -3,4 +3,4 @@ const $cs0 = ($splice0) => {
   return apply($splice0());
 };
 const $cs1 = () => () => 2;
-export default () => $cs0($cs1);
+export default $cs0($cs1);

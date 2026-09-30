@@ -1,14 +1,17 @@
 cs.lift(    → cs`
+() =>       → () => 
 cs.splice(  →  [-semantic]
 (nothing)   → $nothing
 )           →  [-semantic]
 )           → `
 cs.lift(    → cs`
+() =>       → () => 
 cs.splice(  →  [-semantic]
 (data)      → $data
 )           →  [-semantic]
 )           → `
 cs.lift(    → cs`
+() =>       → () => 
 cs.splice(  →  [-semantic]
 (data)      → $data
 )           →  [-semantic]

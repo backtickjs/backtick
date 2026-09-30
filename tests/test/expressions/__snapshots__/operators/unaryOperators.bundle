@@ -7,4 +7,4 @@ const $cs0 = () => {
   const deleted = delete o.a;
   return [+s, ~5, void s === null, deleted, "a" in o];
 };
-export default () => $cs0();
+export default $cs0();

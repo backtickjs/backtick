@@ -19,4 +19,4 @@ const $cs0 = () => {
   );
   return doubled.join(",") + "|" + empty.length + "|" + absent.join(",");
 };
-export default () => $cs0();
+export default $cs0();

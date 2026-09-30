@@ -7,8 +7,7 @@ const $cs2 = () => 1;
 const $cs3 = () => 2;
 const $cs4 = () => 3;
 const $cs5 = () => 4;
-export default () =>
-  $cs0(
-    () => $cs1($cs2, $cs3),
-    () => $cs1($cs4, $cs5),
-  );
+export default $cs0(
+  () => $cs1($cs2, $cs3),
+  () => $cs1($cs4, $cs5),
+);

@@ -12,4 +12,4 @@ const $cs0 = () => {
     c: 3,
   };
 };
-export default () => $cs0();
+export default $cs0();

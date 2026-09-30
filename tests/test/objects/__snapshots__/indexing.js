@@ -10,10 +10,10 @@ describe("a read by key", () => {
       createRoot(
         await draw(
           cs.create(
-            "1b0wj1fzm2hmk:11:39",
+            "v6sr364epe7e:11:39",
             { params: [] },
-            '() => [5, 31, 7]["0"]',
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAU0C,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
+            '() => () => [5, 31, 7]["0"]',
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAU0C,MAAA,GAAG,EAAE,CAAC,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
           ),
         ),
       ),
@@ -23,10 +23,10 @@ describe("a read by key", () => {
       createRoot(
         await draw(
           cs.create(
-            "1b0wj1fzm2hmk:12:39",
+            "v6sr364epe7e:12:39",
             { params: [] },
-            '() => "abc"["0"]',
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAW0C,MAAA,KAAK,CAAC,GAAG,CAAC"}',
+            '() => () => "abc"["0"]',
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAW0C,MAAA,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC"}',
           ),
         ),
       ),
@@ -37,10 +37,10 @@ describe("a read by key", () => {
       createRoot(
         await draw(
           cs.create(
-            "1b0wj1fzm2hmk:14:39",
+            "v6sr364epe7e:14:39",
             { params: [] },
-            "() => ({ x: 1 })[0]",
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAa0C,MAAA,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
+            "() => () => ({ x: 1 })[0]",
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAa0C,MAAA,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
           ),
         ),
       ),
@@ -50,10 +50,10 @@ describe("a read by key", () => {
       createRoot(
         await draw(
           cs.create(
-            "1b0wj1fzm2hmk:16:28",
+            "v6sr364epe7e:16:28",
             { params: [] },
-            "() => 7[0]",
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAe+B,MAAC,CAAyB,CAAC,CAAC,CAAC"}',
+            "() => () => 7[0]",
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAe+B,MAAA,GAAG,EAAE,CAAE,CAAyB,CAAC,CAAC,CAAC"}',
           ),
         ),
       ),
@@ -64,38 +64,38 @@ describe("a read by key", () => {
   it("answers `undefined` for a well-typed key that finds nothing", async () => {
     const reads = [
       cs.create(
-        "1b0wj1fzm2hmk:24:6",
+        "v6sr364epe7e:24:6",
         { params: [] },
         "() => [5, 31, 7][9]",
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAuBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC"}',
       ),
       cs.create(
-        "1b0wj1fzm2hmk:25:6",
+        "v6sr364epe7e:25:6",
         { params: [] },
         "() => [5, 31, 7][1.5]",
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAwBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
       ),
       cs.create(
-        "1b0wj1fzm2hmk:26:6",
+        "v6sr364epe7e:26:6",
         { params: [] },
         "() => [5, 31, 7][-1]",
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAyBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC"}',
       ),
       cs.create(
-        "1b0wj1fzm2hmk:27:6",
+        "v6sr364epe7e:27:6",
         { params: [] },
         '() => ({ x: 1 })["y"]',
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AA0BS,MAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAA+B,CAAC,GAAG,CAAC"}',
       ),
       cs.create(
-        "1b0wj1fzm2hmk:28:6",
+        "v6sr364epe7e:28:6",
         { params: [] },
         '() => "abc"[9]',
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AA2BS,MAAA,KAAK,CAAC,CAAC,CAAC"}',
       ),
     ];
     for (const value of reads) {
-      assert.equal(createRoot(await draw(value)), undefined);
+      assert.equal(createRoot(await draw(() => value)), undefined);
     }
   });
 });

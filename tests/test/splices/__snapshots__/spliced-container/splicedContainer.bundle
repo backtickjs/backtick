@@ -1,8 +1,7 @@
 const $cs0 = ($splice0) => $splice0().x + 1;
 const $cs1 = () => 1;
 const $cs2 = () => "origin";
-export default () =>
-  $cs0(() => ({
-    x: $cs1(),
-    label: $cs2(),
-  }));
+export default $cs0(() => ({
+  x: $cs1(),
+  label: $cs2(),
+}));

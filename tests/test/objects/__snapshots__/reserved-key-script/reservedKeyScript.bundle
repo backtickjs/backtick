@@ -1,4 +1,4 @@
 const $cs0 = () => ({
   "#": "value",
 });
-export default () => $cs0();
+export default $cs0();

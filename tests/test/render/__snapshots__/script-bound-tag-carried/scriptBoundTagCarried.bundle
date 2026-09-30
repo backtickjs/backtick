@@ -65,10 +65,9 @@ const $cs2 = ($splice0) => {
   })();
 };
 const $expn0 = () => ($arg0) => $cs2(() => $arg0);
-export default () =>
-  $cs0(
-    () => $i0,
-    (count, Badge) => $cs1(Badge, count),
-    $expn0(),
-  );
+export default $cs0(
+  () => $i0,
+  (count, Badge) => $cs1(Badge, count),
+  $expn0(),
+);
 _$delegateEvents(["click"]);

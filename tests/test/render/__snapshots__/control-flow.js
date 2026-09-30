@@ -19,13 +19,13 @@ const rows = ["first", "second"];
 const indexed = _jsx("ul", {
   children: _jsx(Index, {
     each: cs.create(
-      "3jitckq2znso8:23:17",
+      "xbwc2yk4vexq:23:17",
       { params: [{ kind: "splice", value: rows, bindings: [] }] },
       "($splice0) => $splice0()",
       '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAsBoB,cAAA,UAAK"}',
     ),
     children: cs.create(
-      "3jitckq2znso8:24:7",
+      "xbwc2yk4vexq:24:7",
       { params: [] },
       '() => (row, index) => (<li>{index + ": " + row()}</li>)',
       '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAuBU,MAAA,CAAC,GAAiB,EAAE,KAAa,EAAE,EAAE,CAAC,CACxC,CAAC,EAAE,CAAC,CAAC,KAAK,GAAG,IAAI,GAAG,GAAG,EAAE,CAAC,EAAE,EAAE,CAAC,CAChC"}',
@@ -37,7 +37,7 @@ const switched = _jsxs(Switch, {
   children: [
     _jsx(Match, {
       when: cs.create(
-        "3jitckq2znso8:33:17",
+        "xbwc2yk4vexq:33:17",
         { params: [] },
         "() => 1 > 2",
         '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAgCoB,MAAA,CAAC,GAAG,CAAC"}',
@@ -46,7 +46,7 @@ const switched = _jsxs(Switch, {
     }),
     _jsx(Match, {
       when: cs.create(
-        "3jitckq2znso8:36:17",
+        "xbwc2yk4vexq:36:17",
         { params: [] },
         "() => 2 > 1",
         '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAmCoB,MAAA,CAAC,GAAG,CAAC"}',
@@ -58,7 +58,7 @@ const switched = _jsxs(Switch, {
 const caught = _jsx(ErrorBoundary, {
   fallback: _jsx("p", { children: "caught" }),
   children: cs.create(
-    "3jitckq2znso8:44:5",
+    "xbwc2yk4vexq:44:5",
     { params: [] },
     '() => {\n    throw "drawn wrong";\n}',
     '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AA2CQ;IACF,MAAM,aAAa,CAAC;AACtB,CAAC"}',
@@ -76,29 +76,29 @@ const portaled = _jsxs("div", {
 });
 describe("control flow in host JSX", () => {
   it("draws each position with Index", async () => {
-    render(await draw(indexed));
+    render(await draw(() => indexed));
     assert.deepEqual(
       screen.getAllByRole("listitem").map((item) => item.textContent),
       ["0: first", "1: second"],
     );
   });
   it("draws the first Match that holds", async () => {
-    render(await draw(switched));
+    render(await draw(() => switched));
     assert.ok(screen.getByText("right"));
     assert.equal(screen.queryByText("wrong"), null);
   });
   it("draws the fallback of an ErrorBoundary around a script that throws", async () => {
-    render(await draw(caught));
+    render(await draw(() => caught));
     assert.ok(screen.getByText("caught"));
   });
   it("draws a Portal's children outside where it stands", async () => {
-    const { container } = render(await draw(portaled));
+    const { container } = render(await draw(() => portaled));
     assert.ok(container.textContent?.includes("here"));
     assert.ok(!container.textContent?.includes("elsewhere"));
     assert.ok(screen.getByText("elsewhere"));
   });
   it("draws Suspense's children when nothing is pending", async () => {
-    render(await draw(suspended));
+    render(await draw(() => suspended));
     assert.ok(screen.getByText("loaded"));
   });
 });

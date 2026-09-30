@@ -6,4 +6,4 @@ const $cs0 = () => {
   };
   return [pick(true), pick(false)];
 };
-export default () => $cs0();
+export default $cs0();

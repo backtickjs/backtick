@@ -6,10 +6,9 @@ const $cs0 = ($splice0, $splice1) => {
 const $cs1 = () => {
   const x = 1;
 };
-export default () =>
-  $cs0(
-    () => [$cs1()],
-    () => ({
-      press: $cs1(),
-    }),
-  );
+export default $cs0(
+  () => [$cs1()],
+  () => ({
+    press: $cs1(),
+  }),
+);

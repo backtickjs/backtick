@@ -14,4 +14,4 @@ const $cs1 = ($splice0) => (text, upper) => {
   return "none";
 };
 const $cs2 = () => true;
-export default () => $cs0(() => $cs1($cs2));
+export default $cs0(() => $cs1($cs2));

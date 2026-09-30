@@ -19,23 +19,22 @@ const $cs0 = ($splice0) => {
     return _el$;
   })();
 };
-export default () =>
-  (() => {
-    var _el$2 = _tmpl$2();
-    _$insert(
-      _el$2,
-      _$createComponent($Component, {
-        body: () => $cs0(() => $i0),
-      }),
-      null,
-    );
-    _$insert(
-      _el$2,
-      _$createComponent($Component, {
-        body: () => $cs0(() => $i0),
-      }),
-      null,
-    );
-    return _el$2;
-  })();
+export default (() => {
+  var _el$2 = _tmpl$2();
+  _$insert(
+    _el$2,
+    _$createComponent($Component, {
+      body: () => $cs0(() => $i0),
+    }),
+    null,
+  );
+  _$insert(
+    _el$2,
+    _$createComponent($Component, {
+      body: () => $cs0(() => $i0),
+    }),
+    null,
+  );
+  return _el$2;
+})();
 _$delegateEvents(["click"]);

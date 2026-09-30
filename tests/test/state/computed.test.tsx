@@ -24,7 +24,7 @@ describe("computed", () => {
   it("runs once per change, however many read it", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const n = $createSignal(1);
           const doubled = $createMemo(() => {
             window.console.log();
@@ -52,7 +52,7 @@ describe("computed", () => {
   it("passes a change on only when its value changes", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const n = $createSignal(1);
           const isBig = $createMemo(() => n[0]() > 2);
           const label = () => {

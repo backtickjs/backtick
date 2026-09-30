@@ -20,19 +20,19 @@ describe("an undefined prop", () => {
     assert.match(code, /<div id=\{"kept"\} \/>/);
   });
   it("lets a component forward an optional prop it wasn't given", async () => {
-    render(await draw(_jsx(Pill, { label: "plain" })));
+    render(await draw(() => _jsx(Pill, { label: "plain" })));
     assert.ok(screen.getByRole("button", { name: "plain" }));
   });
   it("still reaches the element when it is given", async () => {
     render(
-      await draw(
+      await draw(() =>
         _jsx(Pill, {
           label: "focused",
           ref: cs.create(
-            "3seb4ypqcwqrz:37:35",
+            "1wruh4jo2lhjz:37:41",
             { params: [{ kind: "splice", value: onMount, bindings: [] }] },
             "($splice0) => (el) => $splice0()(() => el.focus())",
-            '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAoCsC,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
+            '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAoC4C,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',
           ),
         }),
       ),

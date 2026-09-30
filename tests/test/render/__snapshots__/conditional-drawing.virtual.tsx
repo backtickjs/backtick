@@ -50,7 +50,7 @@ const conditionalDrawing = cs.lift((() => {
 
 describe("a component whose drawing is a conditional", () => {
   it("is built once, and draws the branch the write chose", async () => {
-    render(await draw(conditionalDrawing));
+    render(await draw(() => conditionalDrawing));
 
     // Nothing has answered the condition yet: the count is of blocks that have
     // reached their timer, and the first has not.

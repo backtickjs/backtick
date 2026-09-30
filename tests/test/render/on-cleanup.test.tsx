@@ -31,7 +31,7 @@ describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = render(
       await draw(
-        cs`{
+        cs`() => {
           $onCleanup(() => window.console.log());
           return <p>drawn</p>;
         }`,
@@ -45,7 +45,7 @@ describe("onCleanup", () => {
   it("runs before a memo calculates again", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const n = $createSignal(1);
           const doubled = $createMemo(() => {
             $onCleanup(() => window.console.log());
@@ -79,7 +79,7 @@ describe("onCleanup", () => {
 
     const { unmount } = render(
       await draw(
-        cs`{
+        cs`() => {
           const timer = $createSignal(0);
           $onMount(() => {
             timer[1](window.setInterval(() => window.console.log(), 5));
@@ -101,7 +101,7 @@ describe("onCleanup", () => {
   it("never runs when called from a handler", async () => {
     const { unmount } = render(
       await draw(
-        cs`{
+        cs`() => {
           return (
             <button onclick={() => $onCleanup(() => window.console.log())}>
               press

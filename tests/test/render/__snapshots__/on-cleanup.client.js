@@ -1,11 +1,11 @@
 // 34:9
-($splice0) => {
+($splice0) => () => {
     $splice0()(() => window.console.log());
     return <p>drawn</p>;
 }
 
 // 48:9
-($splice0, $splice1, $splice2) => {
+($splice0, $splice1, $splice2) => () => {
     const n = $splice0()(1);
     const doubled = $splice1()(() => {
         $splice2()(() => window.console.log());
@@ -15,7 +15,7 @@
 }
 
 // 82:9
-($splice0, $splice1, $splice2) => {
+($splice0, $splice1, $splice2) => () => {
     const timer = $splice0()(0);
     $splice1()(() => {
         timer[1](window.setInterval(() => window.console.log(), 5));
@@ -25,7 +25,7 @@
 }
 
 // 104:9
-($splice0) => {
+($splice0) => () => {
     return (<button onclick={() => $splice0()(() => window.console.log())}>
               press
             </button>);

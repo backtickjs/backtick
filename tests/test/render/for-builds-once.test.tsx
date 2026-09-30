@@ -56,7 +56,7 @@ describe("a component that draws a list", () => {
   // The same claim with no bundle in it: `<For />` answers with a way of asking
   // too, so a fault in what draws a bundle would leave this alone.
   it("is built once, and draws what arrives", async () => {
-    const { container } = render(await draw(forBuildsOnce));
+    const { container } = render(await draw(() => forBuildsOnce));
 
     assert.ok(screen.getByText("asked 0"));
 

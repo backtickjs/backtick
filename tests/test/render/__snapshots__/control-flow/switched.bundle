@@ -7,29 +7,28 @@ import { Match as $i0 } from "solid-js";
 import { Switch as $i1 } from "solid-js";
 const $cs0 = () => 1 > 2;
 const $cs1 = () => 2 > 1;
-export default () =>
-  _$createComponent($i1, {
-    get fallback() {
-      return _tmpl$3();
-    },
-    get children() {
-      return [
-        _$createComponent($i0, {
-          get when() {
-            return $cs0();
-          },
-          get children() {
-            return _tmpl$();
-          },
-        }),
-        _$createComponent($i0, {
-          get when() {
-            return $cs1();
-          },
-          get children() {
-            return _tmpl$2();
-          },
-        }),
-      ];
-    },
-  });
+export default _$createComponent($i1, {
+  get fallback() {
+    return _tmpl$3();
+  },
+  get children() {
+    return [
+      _$createComponent($i0, {
+        get when() {
+          return $cs0();
+        },
+        get children() {
+          return _tmpl$();
+        },
+      }),
+      _$createComponent($i0, {
+        get when() {
+          return $cs1();
+        },
+        get children() {
+          return _tmpl$2();
+        },
+      }),
+    ];
+  },
+});

@@ -18,141 +18,140 @@ const $cs5 = ($capture0) => $capture0.items;
 const $cs6 = ($splice0) => (item) => $splice0(item);
 const $cs7 = ($capture0) => $capture0.sku + " x" + $capture0.qty;
 const $cs8 = ($capture0) => "$" + $capture0.total;
-export default () =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$insert(
-      _el$,
-      _$createComponent($i0, {
-        get each() {
-          return $cs0(() => [
-            {
-              id: "ord-1000",
-              customer: {
-                name: "Customer 0",
-                city: "Montréal",
-              },
-              items: [
-                {
-                  sku: "SKU-0-A",
-                  qty: 1,
-                },
-                {
-                  sku: "SKU-0-B",
-                  qty: 1,
-                },
-              ],
-              total: 45.23,
+export default (() => {
+  var _el$ = _tmpl$();
+  _$insert(
+    _el$,
+    _$createComponent($i0, {
+      get each() {
+        return $cs0(() => [
+          {
+            id: "ord-1000",
+            customer: {
+              name: "Customer 0",
+              city: "Montréal",
             },
-            {
-              id: "ord-1001",
-              customer: {
-                name: "Customer 1",
-                city: "Toronto",
+            items: [
+              {
+                sku: "SKU-0-A",
+                qty: 1,
               },
-              items: [
-                {
-                  sku: "SKU-1-A",
-                  qty: 2,
-                },
-                {
-                  sku: "SKU-1-B",
-                  qty: 1,
-                },
-              ],
-              total: 46.23,
-            },
-            {
-              id: "ord-1002",
-              customer: {
-                name: "Customer 2",
-                city: "Montréal",
+              {
+                sku: "SKU-0-B",
+                qty: 1,
               },
-              items: [
-                {
-                  sku: "SKU-2-A",
-                  qty: 3,
-                },
-                {
-                  sku: "SKU-2-B",
-                  qty: 1,
-                },
-              ],
-              total: 47.23,
+            ],
+            total: 45.23,
+          },
+          {
+            id: "ord-1001",
+            customer: {
+              name: "Customer 1",
+              city: "Toronto",
             },
-            {
-              id: "ord-1003",
-              customer: {
-                name: "Customer 3",
-                city: "Toronto",
+            items: [
+              {
+                sku: "SKU-1-A",
+                qty: 2,
               },
-              items: [
-                {
-                  sku: "SKU-3-A",
-                  qty: 1,
-                },
-                {
-                  sku: "SKU-3-B",
-                  qty: 1,
-                },
-              ],
-              total: 48.23,
-            },
-            {
-              id: "ord-1004",
-              customer: {
-                name: "Customer 4",
-                city: "Montréal",
+              {
+                sku: "SKU-1-B",
+                qty: 1,
               },
-              items: [
-                {
-                  sku: "SKU-4-A",
-                  qty: 2,
-                },
-                {
-                  sku: "SKU-4-B",
-                  qty: 1,
-                },
-              ],
-              total: 49.23,
+            ],
+            total: 46.23,
+          },
+          {
+            id: "ord-1002",
+            customer: {
+              name: "Customer 2",
+              city: "Montréal",
             },
-          ]);
-        },
-        get children() {
-          return $cs1((order) =>
-            (() => {
-              var _el$2 = _tmpl$2(),
-                _el$3 = _el$2.firstChild,
-                _el$4 = _el$3.nextSibling,
-                _el$5 = _el$4.nextSibling,
-                _el$6 = _el$5.nextSibling;
-              _$insert(_el$4, () => $cs3(order));
-              _$insert(_el$5, () => $cs4(order));
-              _$insert(
-                _el$2,
-                _$createComponent($i0, {
-                  get each() {
-                    return $cs5(order);
-                  },
-                  get children() {
-                    return $cs6((item) =>
-                      (() => {
-                        var _el$7 = _tmpl$3();
-                        _$insert(_el$7, () => $cs7(item));
-                        return _el$7;
-                      })(),
-                    );
-                  },
-                }),
-                _el$6,
-              );
-              _$insert(_el$6, () => $cs8(order));
-              _$effect(() => _$setAttribute(_el$3, "src", $cs2(order)));
-              return _el$2;
-            })(),
-          );
-        },
-      }),
-    );
-    return _el$;
-  })();
+            items: [
+              {
+                sku: "SKU-2-A",
+                qty: 3,
+              },
+              {
+                sku: "SKU-2-B",
+                qty: 1,
+              },
+            ],
+            total: 47.23,
+          },
+          {
+            id: "ord-1003",
+            customer: {
+              name: "Customer 3",
+              city: "Toronto",
+            },
+            items: [
+              {
+                sku: "SKU-3-A",
+                qty: 1,
+              },
+              {
+                sku: "SKU-3-B",
+                qty: 1,
+              },
+            ],
+            total: 48.23,
+          },
+          {
+            id: "ord-1004",
+            customer: {
+              name: "Customer 4",
+              city: "Montréal",
+            },
+            items: [
+              {
+                sku: "SKU-4-A",
+                qty: 2,
+              },
+              {
+                sku: "SKU-4-B",
+                qty: 1,
+              },
+            ],
+            total: 49.23,
+          },
+        ]);
+      },
+      get children() {
+        return $cs1((order) =>
+          (() => {
+            var _el$2 = _tmpl$2(),
+              _el$3 = _el$2.firstChild,
+              _el$4 = _el$3.nextSibling,
+              _el$5 = _el$4.nextSibling,
+              _el$6 = _el$5.nextSibling;
+            _$insert(_el$4, () => $cs3(order));
+            _$insert(_el$5, () => $cs4(order));
+            _$insert(
+              _el$2,
+              _$createComponent($i0, {
+                get each() {
+                  return $cs5(order);
+                },
+                get children() {
+                  return $cs6((item) =>
+                    (() => {
+                      var _el$7 = _tmpl$3();
+                      _$insert(_el$7, () => $cs7(item));
+                      return _el$7;
+                    })(),
+                  );
+                },
+              }),
+              _el$6,
+            );
+            _$insert(_el$6, () => $cs8(order));
+            _$effect(() => _$setAttribute(_el$3, "src", $cs2(order)));
+            return _el$2;
+          })(),
+        );
+      },
+    }),
+  );
+  return _el$;
+})();

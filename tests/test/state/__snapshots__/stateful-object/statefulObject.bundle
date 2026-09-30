@@ -23,5 +23,5 @@ const $cs1 = ($splice0) => (initial) => {
     },
   };
 };
-export default () => $cs0(() => $cs1(() => $i0));
+export default $cs0(() => $cs1(() => $i0));
 _$delegateEvents(["click"]);

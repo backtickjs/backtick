@@ -5,4 +5,4 @@ const $cs0 = () => {
   }
   return "many";
 };
-export default () => $cs0();
+export default $cs0();

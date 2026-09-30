@@ -4,4 +4,4 @@ const $cs0 = () => {
     return "some";
   }
 };
-export default () => $cs0();
+export default $cs0();

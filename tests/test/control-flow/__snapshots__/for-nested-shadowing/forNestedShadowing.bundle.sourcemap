@@ -1,61 +1,62 @@
-(        → control-flow/for-nested-shadowing.test.tsx 12:8 {…
-) => {   → control-flow/for-nested-shadowing.test.tsx 12:8 {…
-let      → control-flow/for-nested-shadowing.test.tsx 13:7 let 
-out      → control-flow/for-nested-shadowing.test.tsx 13:11 out
- =       → control-flow/for-nested-shadowing.test.tsx 13:14  = 
-""       → control-flow/for-nested-shadowing.test.tsx 13:17 ""
-;        → control-flow/for-nested-shadowing.test.tsx 13:19 ;
-for (    → control-flow/for-nested-shadowing.test.tsx 14:7 for (
-let      → control-flow/for-nested-shadowing.test.tsx 14:12 let 
-i        → control-flow/for-nested-shadowing.test.tsx 14:16 i
- =       → control-flow/for-nested-shadowing.test.tsx 14:17  = 
-0        → control-flow/for-nested-shadowing.test.tsx 14:20 0
-;        → control-flow/for-nested-shadowing.test.tsx 14:21 ; 
-i        → control-flow/for-nested-shadowing.test.tsx 14:23 i
- <       → control-flow/for-nested-shadowing.test.tsx 14:24  < 
-2        → control-flow/for-nested-shadowing.test.tsx 14:27 2
-;        → control-flow/for-nested-shadowing.test.tsx 14:28 ; 
-i        → control-flow/for-nested-shadowing.test.tsx 14:30 i
- =       → control-flow/for-nested-shadowing.test.tsx 14:31  = 
-i        → control-flow/for-nested-shadowing.test.tsx 14:34 i
- +       → control-flow/for-nested-shadowing.test.tsx 14:35  + 
-1        → control-flow/for-nested-shadowing.test.tsx 14:38 1
-)        → control-flow/for-nested-shadowing.test.tsx 14:39 ) 
-{        → control-flow/for-nested-shadowing.test.tsx 14:41 {
-const    → control-flow/for-nested-shadowing.test.tsx 15:9 const 
-i        → control-flow/for-nested-shadowing.test.tsx 15:15 i
- =       → control-flow/for-nested-shadowing.test.tsx 15:16  = 
-"-"      → control-flow/for-nested-shadowing.test.tsx 15:19 "-"
-;        → control-flow/for-nested-shadowing.test.tsx 15:22 ;
-for (    → control-flow/for-nested-shadowing.test.tsx 16:9 for (
-let      → control-flow/for-nested-shadowing.test.tsx 16:14 let 
-j        → control-flow/for-nested-shadowing.test.tsx 16:18 j
- =       → control-flow/for-nested-shadowing.test.tsx 16:19  = 
-0        → control-flow/for-nested-shadowing.test.tsx 16:22 0
-;        → control-flow/for-nested-shadowing.test.tsx 16:23 ; 
-j        → control-flow/for-nested-shadowing.test.tsx 16:25 j
- <       → control-flow/for-nested-shadowing.test.tsx 16:26  < 
-2        → control-flow/for-nested-shadowing.test.tsx 16:29 2
-;        → control-flow/for-nested-shadowing.test.tsx 16:30 ; 
-j        → control-flow/for-nested-shadowing.test.tsx 16:32 j
- =       → control-flow/for-nested-shadowing.test.tsx 16:33  = 
-j        → control-flow/for-nested-shadowing.test.tsx 16:36 j
- +       → control-flow/for-nested-shadowing.test.tsx 16:37  + 
-1        → control-flow/for-nested-shadowing.test.tsx 16:40 1
-)        → control-flow/for-nested-shadowing.test.tsx 16:41 ) 
-{        → control-flow/for-nested-shadowing.test.tsx 16:43 {
-out      → control-flow/for-nested-shadowing.test.tsx 17:11 out
- =       → control-flow/for-nested-shadowing.test.tsx 17:14  = 
-out      → control-flow/for-nested-shadowing.test.tsx 17:17 out
- +       → control-flow/for-nested-shadowing.test.tsx 17:20  + 
-i        → control-flow/for-nested-shadowing.test.tsx 17:23 i
- +       → control-flow/for-nested-shadowing.test.tsx 17:24  + 
-j        → control-flow/for-nested-shadowing.test.tsx 17:27 j
-;        → control-flow/for-nested-shadowing.test.tsx 17:28 ;
-}        → control-flow/for-nested-shadowing.test.tsx 18:9 }
-}        → control-flow/for-nested-shadowing.test.tsx 19:7 }
-return   → control-flow/for-nested-shadowing.test.tsx 20:7 return 
-out      → control-flow/for-nested-shadowing.test.tsx 20:14 out
-;        → control-flow/for-nested-shadowing.test.tsx 20:17 ;
-}        → control-flow/for-nested-shadowing.test.tsx 21:5 }
-;        → control-flow/for-nested-shadowing.test.tsx 21:6 `,…
+(                → control-flow/for-nested-shadowing.test.tsx 12:8 {…
+) => {           → control-flow/for-nested-shadowing.test.tsx 12:8 {…
+let              → control-flow/for-nested-shadowing.test.tsx 13:7 let 
+out              → control-flow/for-nested-shadowing.test.tsx 13:11 out
+ =               → control-flow/for-nested-shadowing.test.tsx 13:14  = 
+""               → control-flow/for-nested-shadowing.test.tsx 13:17 ""
+;                → control-flow/for-nested-shadowing.test.tsx 13:19 ;
+for (            → control-flow/for-nested-shadowing.test.tsx 14:7 for (
+let              → control-flow/for-nested-shadowing.test.tsx 14:12 let 
+i                → control-flow/for-nested-shadowing.test.tsx 14:16 i
+ =               → control-flow/for-nested-shadowing.test.tsx 14:17  = 
+0                → control-flow/for-nested-shadowing.test.tsx 14:20 0
+;                → control-flow/for-nested-shadowing.test.tsx 14:21 ; 
+i                → control-flow/for-nested-shadowing.test.tsx 14:23 i
+ <               → control-flow/for-nested-shadowing.test.tsx 14:24  < 
+2                → control-flow/for-nested-shadowing.test.tsx 14:27 2
+;                → control-flow/for-nested-shadowing.test.tsx 14:28 ; 
+i                → control-flow/for-nested-shadowing.test.tsx 14:30 i
+ =               → control-flow/for-nested-shadowing.test.tsx 14:31  = 
+i                → control-flow/for-nested-shadowing.test.tsx 14:34 i
+ +               → control-flow/for-nested-shadowing.test.tsx 14:35  + 
+1                → control-flow/for-nested-shadowing.test.tsx 14:38 1
+)                → control-flow/for-nested-shadowing.test.tsx 14:39 ) 
+{                → control-flow/for-nested-shadowing.test.tsx 14:41 {
+const            → control-flow/for-nested-shadowing.test.tsx 15:9 const 
+i                → control-flow/for-nested-shadowing.test.tsx 15:15 i
+ =               → control-flow/for-nested-shadowing.test.tsx 15:16  = 
+"-"              → control-flow/for-nested-shadowing.test.tsx 15:19 "-"
+;                → control-flow/for-nested-shadowing.test.tsx 15:22 ;
+for (            → control-flow/for-nested-shadowing.test.tsx 16:9 for (
+let              → control-flow/for-nested-shadowing.test.tsx 16:14 let 
+j                → control-flow/for-nested-shadowing.test.tsx 16:18 j
+ =               → control-flow/for-nested-shadowing.test.tsx 16:19  = 
+0                → control-flow/for-nested-shadowing.test.tsx 16:22 0
+;                → control-flow/for-nested-shadowing.test.tsx 16:23 ; 
+j                → control-flow/for-nested-shadowing.test.tsx 16:25 j
+ <               → control-flow/for-nested-shadowing.test.tsx 16:26  < 
+2                → control-flow/for-nested-shadowing.test.tsx 16:29 2
+;                → control-flow/for-nested-shadowing.test.tsx 16:30 ; 
+j                → control-flow/for-nested-shadowing.test.tsx 16:32 j
+ =               → control-flow/for-nested-shadowing.test.tsx 16:33  = 
+j                → control-flow/for-nested-shadowing.test.tsx 16:36 j
+ +               → control-flow/for-nested-shadowing.test.tsx 16:37  + 
+1                → control-flow/for-nested-shadowing.test.tsx 16:40 1
+)                → control-flow/for-nested-shadowing.test.tsx 16:41 ) 
+{                → control-flow/for-nested-shadowing.test.tsx 16:43 {
+out              → control-flow/for-nested-shadowing.test.tsx 17:11 out
+ =               → control-flow/for-nested-shadowing.test.tsx 17:14  = 
+out              → control-flow/for-nested-shadowing.test.tsx 17:17 out
+ +               → control-flow/for-nested-shadowing.test.tsx 17:20  + 
+i                → control-flow/for-nested-shadowing.test.tsx 17:23 i
+ +               → control-flow/for-nested-shadowing.test.tsx 17:24  + 
+j                → control-flow/for-nested-shadowing.test.tsx 17:27 j
+;                → control-flow/for-nested-shadowing.test.tsx 17:28 ;
+}                → control-flow/for-nested-shadowing.test.tsx 18:9 }
+}                → control-flow/for-nested-shadowing.test.tsx 19:7 }
+return           → control-flow/for-nested-shadowing.test.tsx 20:7 return 
+out              → control-flow/for-nested-shadowing.test.tsx 20:14 out
+;                → control-flow/for-nested-shadowing.test.tsx 20:17 ;
+}                → control-flow/for-nested-shadowing.test.tsx 21:5 }
+;                → control-flow/for-nested-shadowing.test.tsx 21:6 `,…
+export default   → control-flow/for-nested-shadowing.test.tsx 21:6 `,…

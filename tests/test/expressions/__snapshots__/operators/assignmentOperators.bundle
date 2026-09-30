@@ -15,4 +15,4 @@ const $cs0 = () => {
   c &&= false;
   return [n, a, b, c];
 };
-export default () => $cs0();
+export default $cs0();

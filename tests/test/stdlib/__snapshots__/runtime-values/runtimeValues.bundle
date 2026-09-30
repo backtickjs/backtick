@@ -2,10 +2,9 @@ const $cs0 = ($splice0, $splice1) => ({
   list: $splice0(),
   obj: $splice1(),
 });
-export default () =>
-  $cs0(
-    () => [1, "two", true, null],
-    () => ({
-      k: 3,
-    }),
-  );
+export default $cs0(
+  () => [1, "two", true, null],
+  () => ({
+    k: 3,
+  }),
+);

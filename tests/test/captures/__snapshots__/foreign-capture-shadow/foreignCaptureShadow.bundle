@@ -8,5 +8,6 @@ const $cs1 = ($splice0) => {
 };
 const $cs2 = ($splice0, $capture1) => $capture1 + $splice0($capture1);
 const $cs3 = ($capture0) => $capture0;
-export default () =>
-  $cs0((base) => $cs1((base2) => $cs2((base2) => $cs3(base), base2)));
+export default $cs0((base) =>
+  $cs1((base2) => $cs2((base2) => $cs3(base), base2)),
+);

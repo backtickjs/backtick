@@ -29,7 +29,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "333wb9hts3bww:33:9",
+    "q6wjhwouf9ey:33:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -72,7 +72,7 @@ function target(html) {
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
 // these insert at it with Solid directly.
 async function drawAt(value, parent, selector) {
-  const drawing = await draw(value);
+  const drawing = await draw(() => value);
   const unmount = createRoot((dispose) => {
     insert(parent, drawing(), parent.querySelector(selector));
     return dispose;

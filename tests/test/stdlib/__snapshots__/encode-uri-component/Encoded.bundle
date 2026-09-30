@@ -7,7 +7,6 @@ const $Component = (props) => props.body();
 const $cs0 = () => {
   return _tmpl$();
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () => $cs0(),
-  });
+export default _$createComponent($Component, {
+  body: () => $cs0(),
+});

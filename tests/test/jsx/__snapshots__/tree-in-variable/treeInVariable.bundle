@@ -12,10 +12,9 @@ const $cs3 = ($splice0) => () => {
   const tree = $splice0();
   return tree;
 };
-export default () =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$insert(_el$, () => $cs0(() => $cs1(() => _tmpl$())), null);
-    _$insert(_el$, () => $cs2(() => $cs3(() => _tmpl$2())), null);
-    return _el$;
-  })();
+export default (() => {
+  var _el$ = _tmpl$();
+  _$insert(_el$, () => $cs0(() => $cs1(() => _tmpl$())), null);
+  _$insert(_el$, () => $cs2(() => $cs3(() => _tmpl$2())), null);
+  return _el$;
+})();

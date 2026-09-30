@@ -12,7 +12,7 @@ async function toHtml(element: JSX.Element): Promise<string> {
     ${importMap()}
   </head>
   <body>
-    ${await renderToString(element)}
+    ${await renderToString(() => element)}
   </body>
 </html>`;
 }

@@ -3,4 +3,4 @@ const $cs0 = () => {
   const last = (n++, n + 10);
   return [n, last];
 };
-export default () => $cs0();
+export default $cs0();

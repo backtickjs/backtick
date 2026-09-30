@@ -11,19 +11,18 @@ const $cs1 = () => (row, index) =>
     _$insert(_el$, () => index + ": " + row());
     return _el$;
   })();
-export default () =>
-  (() => {
-    var _el$2 = _tmpl$2();
-    _$insert(
-      _el$2,
-      _$createComponent($i0, {
-        get each() {
-          return $cs0(() => ["first", "second"]);
-        },
-        get children() {
-          return $cs1();
-        },
-      }),
-    );
-    return _el$2;
-  })();
+export default (() => {
+  var _el$2 = _tmpl$2();
+  _$insert(
+    _el$2,
+    _$createComponent($i0, {
+      get each() {
+        return $cs0(() => ["first", "second"]);
+      },
+      get children() {
+        return $cs1();
+      },
+    }),
+  );
+  return _el$2;
+})();

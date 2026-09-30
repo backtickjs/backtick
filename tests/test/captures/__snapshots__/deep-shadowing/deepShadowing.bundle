@@ -11,4 +11,4 @@ const $cs2 = ($splice0) => {
   return base * $splice0();
 };
 const $cs3 = ($capture0) => $capture0;
-export default () => $cs0((base) => $cs1(() => $cs2(() => $cs3(base))));
+export default $cs0((base) => $cs1(() => $cs2(() => $cs3(base))));

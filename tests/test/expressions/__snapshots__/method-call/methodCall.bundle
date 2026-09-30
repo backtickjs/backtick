@@ -2,4 +2,4 @@ const $cs0 = () => {
   const greeting = "Hello";
   return greeting.concat(", ", "World").toUpperCase();
 };
-export default () => $cs0();
+export default $cs0();

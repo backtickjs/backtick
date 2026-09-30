@@ -1,129 +1,132 @@
-(                 → stdlib/number-statics.test.tsx 9:13 {…
-) => {            → stdlib/number-statics.test.tsx 9:13 {…
-const             → stdlib/number-statics.test.tsx 10:5 const 
-positive          → stdlib/number-statics.test.tsx 10:11 positive
- =                → stdlib/number-statics.test.tsx 10:19  = 
-Number            → stdlib/number-statics.test.tsx 10:22 Number
-.                 → stdlib/number-statics.test.tsx 10:28 .
-EPSILON           → stdlib/number-statics.test.tsx 10:29 EPSILON
- >                → stdlib/number-statics.test.tsx 10:36  > 
-0                 → stdlib/number-statics.test.tsx 10:39 0
-;                 → stdlib/number-statics.test.tsx 10:40 ;
-const             → stdlib/number-statics.test.tsx 11:5 const 
-largest           → stdlib/number-statics.test.tsx 11:11 largest
- =                → stdlib/number-statics.test.tsx 11:18  = 
-Number            → stdlib/number-statics.test.tsx 11:21 Number
-.                 → stdlib/number-statics.test.tsx 11:27 .
-MAX_VALUE         → stdlib/number-statics.test.tsx 11:28 MAX_VALUE
- >                → stdlib/number-statics.test.tsx 11:37  > 
-1e308             → stdlib/number-statics.test.tsx 11:40 1e308
-;                 → stdlib/number-statics.test.tsx 11:45 ;
-const             → stdlib/number-statics.test.tsx 12:5 const 
-safe              → stdlib/number-statics.test.tsx 12:11 safe
- =                → stdlib/number-statics.test.tsx 12:15  =…
-Number            → stdlib/number-statics.test.tsx 13:7 Number
-.                 → stdlib/number-statics.test.tsx 13:13 .
-MAX_SAFE_INTEGER  → stdlib/number-statics.test.tsx 13:14 MAX_SAFE_INTEGER
- ===              → stdlib/number-statics.test.tsx 13:30  === 
-9007199254740991  → stdlib/number-statics.test.tsx 13:35 9007199254740991
- &&               → stdlib/number-statics.test.tsx 13:51  &&…
-Number            → stdlib/number-statics.test.tsx 14:7 Number
-.                 → stdlib/number-statics.test.tsx 14:13 .
-MIN_SAFE_INTEGER  → stdlib/number-statics.test.tsx 14:14 MIN_SAFE_INTEGER
- ===              → stdlib/number-statics.test.tsx 14:30  === 
--                 → stdlib/number-statics.test.tsx 14:35 -
-9007199254740991  → stdlib/number-statics.test.tsx 14:36 9007199254740991
- &&               → stdlib/number-statics.test.tsx 14:52  &&…
-Number            → stdlib/number-statics.test.tsx 15:7 Number
-.                 → stdlib/number-statics.test.tsx 15:13 .
-MIN_VALUE         → stdlib/number-statics.test.tsx 15:14 MIN_VALUE
- >                → stdlib/number-statics.test.tsx 15:23  > 
-0                 → stdlib/number-statics.test.tsx 15:26 0
- &&               → stdlib/number-statics.test.tsx 15:27  &&…
-Number            → stdlib/number-statics.test.tsx 16:7 Number
-.                 → stdlib/number-statics.test.tsx 16:13 .
-isSafeInteger     → stdlib/number-statics.test.tsx 16:14 isSafeInteger
-(                 → stdlib/number-statics.test.tsx 16:27 (
-3                 → stdlib/number-statics.test.tsx 16:28 3
-)                 → stdlib/number-statics.test.tsx 16:29 )
- &&               → stdlib/number-statics.test.tsx 16:30  &&…
-!                 → stdlib/number-statics.test.tsx 17:7 !
-Number            → stdlib/number-statics.test.tsx 17:8 Number
-.                 → stdlib/number-statics.test.tsx 17:14 .
-isSafeInteger     → stdlib/number-statics.test.tsx 17:15 isSafeInteger
-(                 → stdlib/number-statics.test.tsx 17:28 (
-Number            → stdlib/number-statics.test.tsx 17:29 Number
-.                 → stdlib/number-statics.test.tsx 17:35 .
-MAX_SAFE_INTEGER  → stdlib/number-statics.test.tsx 17:36 MAX_SAFE_INTEGER
- +                → stdlib/number-statics.test.tsx 17:52  + 
-1                 → stdlib/number-statics.test.tsx 17:55 1
-)                 → stdlib/number-statics.test.tsx 17:56 )
-;                 → stdlib/number-statics.test.tsx 17:57 ;
-const             → stdlib/number-statics.test.tsx 18:5 const 
-whole             → stdlib/number-statics.test.tsx 18:11 whole
- =                → stdlib/number-statics.test.tsx 18:16  = 
-Number            → stdlib/number-statics.test.tsx 18:19 Number
-.                 → stdlib/number-statics.test.tsx 18:25 .
-isInteger         → stdlib/number-statics.test.tsx 18:26 isInteger
-(                 → stdlib/number-statics.test.tsx 18:35 (
-2                 → stdlib/number-statics.test.tsx 18:36 2
-)                 → stdlib/number-statics.test.tsx 18:37 )
-;                 → stdlib/number-statics.test.tsx 18:38 ;
-const             → stdlib/number-statics.test.tsx 19:5 const 
-fractional        → stdlib/number-statics.test.tsx 19:11 fractional
- =                → stdlib/number-statics.test.tsx 19:21  = 
-Number            → stdlib/number-statics.test.tsx 19:24 Number
-.                 → stdlib/number-statics.test.tsx 19:30 .
-isInteger         → stdlib/number-statics.test.tsx 19:31 isInteger
-(                 → stdlib/number-statics.test.tsx 19:40 (
-2.5               → stdlib/number-statics.test.tsx 19:41 2.5
-)                 → stdlib/number-statics.test.tsx 19:44 )
-;                 → stdlib/number-statics.test.tsx 19:45 ;
-const             → stdlib/number-statics.test.tsx 21:5 const 
-written           → stdlib/number-statics.test.tsx 21:11 written
- =                → stdlib/number-statics.test.tsx 21:18  = 
-Number            → stdlib/number-statics.test.tsx 21:21 Number
-.                 → stdlib/number-statics.test.tsx 21:27 .
-isFinite          → stdlib/number-statics.test.tsx 21:28 isFinite
-(                 → stdlib/number-statics.test.tsx 21:36 (
-"2"               → stdlib/number-statics.test.tsx 21:37 "2"
-)                 → stdlib/number-statics.test.tsx 21:40 )
-;                 → stdlib/number-statics.test.tsx 21:41 ;
-return (() => {   → stdlib/number-statics.test.tsx 22:5 return…
-var               → stdlib/number-statics.test.tsx 22:5 return…
-_el$              → stdlib/number-statics.test.tsx 22:5 return…
- =                → stdlib/number-statics.test.tsx 22:5 return…
-_tmpl$            → stdlib/number-statics.test.tsx 22:5 return…
-();               → stdlib/number-statics.test.tsx 22:5 return…
-_$insert          → stdlib/number-statics.test.tsx 22:5 return…
-(                 → stdlib/number-statics.test.tsx 22:5 return…
-_el$              → stdlib/number-statics.test.tsx 22:5 return…
-,                 → stdlib/number-statics.test.tsx 22:5 return…
-whole             → stdlib/number-statics.test.tsx 24:10 whole
- +                → stdlib/number-statics.test.tsx 24:15  +…
-" "               → stdlib/number-statics.test.tsx 25:11 " "
- +                → stdlib/number-statics.test.tsx 25:14  +…
-fractional        → stdlib/number-statics.test.tsx 26:11 fractional
- +                → stdlib/number-statics.test.tsx 26:21  +…
-" "               → stdlib/number-statics.test.tsx 27:11 " "
- +                → stdlib/number-statics.test.tsx 27:14  +…
-written           → stdlib/number-statics.test.tsx 28:11 written
- +                → stdlib/number-statics.test.tsx 28:18  +…
-" "               → stdlib/number-statics.test.tsx 29:11 " "
- +                → stdlib/number-statics.test.tsx 29:14  +…
-positive          → stdlib/number-statics.test.tsx 30:11 positive
- +                → stdlib/number-statics.test.tsx 30:19  +…
-" "               → stdlib/number-statics.test.tsx 31:11 " "
- +                → stdlib/number-statics.test.tsx 31:14  +…
-largest           → stdlib/number-statics.test.tsx 32:11 largest
- +                → stdlib/number-statics.test.tsx 32:18  +…
-" "               → stdlib/number-statics.test.tsx 33:11 " "
- +                → stdlib/number-statics.test.tsx 33:14  +…
-safe              → stdlib/number-statics.test.tsx 34:11 safe
-);                → stdlib/number-statics.test.tsx 34:15 }…
-return            → stdlib/number-statics.test.tsx 34:15 }…
-_el$              → stdlib/number-statics.test.tsx 34:15 }…
-;                 → stdlib/number-statics.test.tsx 34:15 }…
-})();             → stdlib/number-statics.test.tsx 34:15 }…
-}                 → stdlib/number-statics.test.tsx 37:3 }
-;                 → stdlib/number-statics.test.tsx 37:4 `;…
+(                  → stdlib/number-statics.test.tsx 9:13 {…
+) => {             → stdlib/number-statics.test.tsx 9:13 {…
+const              → stdlib/number-statics.test.tsx 10:5 const 
+positive           → stdlib/number-statics.test.tsx 10:11 positive
+ =                 → stdlib/number-statics.test.tsx 10:19  = 
+Number             → stdlib/number-statics.test.tsx 10:22 Number
+.                  → stdlib/number-statics.test.tsx 10:28 .
+EPSILON            → stdlib/number-statics.test.tsx 10:29 EPSILON
+ >                 → stdlib/number-statics.test.tsx 10:36  > 
+0                  → stdlib/number-statics.test.tsx 10:39 0
+;                  → stdlib/number-statics.test.tsx 10:40 ;
+const              → stdlib/number-statics.test.tsx 11:5 const 
+largest            → stdlib/number-statics.test.tsx 11:11 largest
+ =                 → stdlib/number-statics.test.tsx 11:18  = 
+Number             → stdlib/number-statics.test.tsx 11:21 Number
+.                  → stdlib/number-statics.test.tsx 11:27 .
+MAX_VALUE          → stdlib/number-statics.test.tsx 11:28 MAX_VALUE
+ >                 → stdlib/number-statics.test.tsx 11:37  > 
+1e308              → stdlib/number-statics.test.tsx 11:40 1e308
+;                  → stdlib/number-statics.test.tsx 11:45 ;
+const              → stdlib/number-statics.test.tsx 12:5 const 
+safe               → stdlib/number-statics.test.tsx 12:11 safe
+ =                 → stdlib/number-statics.test.tsx 12:15  =…
+Number             → stdlib/number-statics.test.tsx 13:7 Number
+.                  → stdlib/number-statics.test.tsx 13:13 .
+MAX_SAFE_INTEGER   → stdlib/number-statics.test.tsx 13:14 MAX_SAFE_INTEGER
+ ===               → stdlib/number-statics.test.tsx 13:30  === 
+9007199254740991   → stdlib/number-statics.test.tsx 13:35 9007199254740991
+ &&                → stdlib/number-statics.test.tsx 13:51  &&…
+Number             → stdlib/number-statics.test.tsx 14:7 Number
+.                  → stdlib/number-statics.test.tsx 14:13 .
+MIN_SAFE_INTEGER   → stdlib/number-statics.test.tsx 14:14 MIN_SAFE_INTEGER
+ ===               → stdlib/number-statics.test.tsx 14:30  === 
+-                  → stdlib/number-statics.test.tsx 14:35 -
+9007199254740991   → stdlib/number-statics.test.tsx 14:36 9007199254740991
+ &&                → stdlib/number-statics.test.tsx 14:52  &&…
+Number             → stdlib/number-statics.test.tsx 15:7 Number
+.                  → stdlib/number-statics.test.tsx 15:13 .
+MIN_VALUE          → stdlib/number-statics.test.tsx 15:14 MIN_VALUE
+ >                 → stdlib/number-statics.test.tsx 15:23  > 
+0                  → stdlib/number-statics.test.tsx 15:26 0
+ &&                → stdlib/number-statics.test.tsx 15:27  &&…
+Number             → stdlib/number-statics.test.tsx 16:7 Number
+.                  → stdlib/number-statics.test.tsx 16:13 .
+isSafeInteger      → stdlib/number-statics.test.tsx 16:14 isSafeInteger
+(                  → stdlib/number-statics.test.tsx 16:27 (
+3                  → stdlib/number-statics.test.tsx 16:28 3
+)                  → stdlib/number-statics.test.tsx 16:29 )
+ &&                → stdlib/number-statics.test.tsx 16:30  &&…
+!                  → stdlib/number-statics.test.tsx 17:7 !
+Number             → stdlib/number-statics.test.tsx 17:8 Number
+.                  → stdlib/number-statics.test.tsx 17:14 .
+isSafeInteger      → stdlib/number-statics.test.tsx 17:15 isSafeInteger
+(                  → stdlib/number-statics.test.tsx 17:28 (
+Number             → stdlib/number-statics.test.tsx 17:29 Number
+.                  → stdlib/number-statics.test.tsx 17:35 .
+MAX_SAFE_INTEGER   → stdlib/number-statics.test.tsx 17:36 MAX_SAFE_INTEGER
+ +                 → stdlib/number-statics.test.tsx 17:52  + 
+1                  → stdlib/number-statics.test.tsx 17:55 1
+)                  → stdlib/number-statics.test.tsx 17:56 )
+;                  → stdlib/number-statics.test.tsx 17:57 ;
+const              → stdlib/number-statics.test.tsx 18:5 const 
+whole              → stdlib/number-statics.test.tsx 18:11 whole
+ =                 → stdlib/number-statics.test.tsx 18:16  = 
+Number             → stdlib/number-statics.test.tsx 18:19 Number
+.                  → stdlib/number-statics.test.tsx 18:25 .
+isInteger          → stdlib/number-statics.test.tsx 18:26 isInteger
+(                  → stdlib/number-statics.test.tsx 18:35 (
+2                  → stdlib/number-statics.test.tsx 18:36 2
+)                  → stdlib/number-statics.test.tsx 18:37 )
+;                  → stdlib/number-statics.test.tsx 18:38 ;
+const              → stdlib/number-statics.test.tsx 19:5 const 
+fractional         → stdlib/number-statics.test.tsx 19:11 fractional
+ =                 → stdlib/number-statics.test.tsx 19:21  = 
+Number             → stdlib/number-statics.test.tsx 19:24 Number
+.                  → stdlib/number-statics.test.tsx 19:30 .
+isInteger          → stdlib/number-statics.test.tsx 19:31 isInteger
+(                  → stdlib/number-statics.test.tsx 19:40 (
+2.5                → stdlib/number-statics.test.tsx 19:41 2.5
+)                  → stdlib/number-statics.test.tsx 19:44 )
+;                  → stdlib/number-statics.test.tsx 19:45 ;
+const              → stdlib/number-statics.test.tsx 21:5 const 
+written            → stdlib/number-statics.test.tsx 21:11 written
+ =                 → stdlib/number-statics.test.tsx 21:18  = 
+Number             → stdlib/number-statics.test.tsx 21:21 Number
+.                  → stdlib/number-statics.test.tsx 21:27 .
+isFinite           → stdlib/number-statics.test.tsx 21:28 isFinite
+(                  → stdlib/number-statics.test.tsx 21:36 (
+"2"                → stdlib/number-statics.test.tsx 21:37 "2"
+)                  → stdlib/number-statics.test.tsx 21:40 )
+;                  → stdlib/number-statics.test.tsx 21:41 ;
+return (() => {    → stdlib/number-statics.test.tsx 22:5 return…
+var                → stdlib/number-statics.test.tsx 22:5 return…
+_el$               → stdlib/number-statics.test.tsx 22:5 return…
+ =                 → stdlib/number-statics.test.tsx 22:5 return…
+_tmpl$             → stdlib/number-statics.test.tsx 22:5 return…
+();                → stdlib/number-statics.test.tsx 22:5 return…
+_$insert           → stdlib/number-statics.test.tsx 22:5 return…
+(                  → stdlib/number-statics.test.tsx 22:5 return…
+_el$               → stdlib/number-statics.test.tsx 22:5 return…
+,                  → stdlib/number-statics.test.tsx 22:5 return…
+whole              → stdlib/number-statics.test.tsx 24:10 whole
+ +                 → stdlib/number-statics.test.tsx 24:15  +…
+" "                → stdlib/number-statics.test.tsx 25:11 " "
+ +                 → stdlib/number-statics.test.tsx 25:14  +…
+fractional         → stdlib/number-statics.test.tsx 26:11 fractional
+ +                 → stdlib/number-statics.test.tsx 26:21  +…
+" "                → stdlib/number-statics.test.tsx 27:11 " "
+ +                 → stdlib/number-statics.test.tsx 27:14  +…
+written            → stdlib/number-statics.test.tsx 28:11 written
+ +                 → stdlib/number-statics.test.tsx 28:18  +…
+" "                → stdlib/number-statics.test.tsx 29:11 " "
+ +                 → stdlib/number-statics.test.tsx 29:14  +…
+positive           → stdlib/number-statics.test.tsx 30:11 positive
+ +                 → stdlib/number-statics.test.tsx 30:19  +…
+" "                → stdlib/number-statics.test.tsx 31:11 " "
+ +                 → stdlib/number-statics.test.tsx 31:14  +…
+largest            → stdlib/number-statics.test.tsx 32:11 largest
+ +                 → stdlib/number-statics.test.tsx 32:18  +…
+" "                → stdlib/number-statics.test.tsx 33:11 " "
+ +                 → stdlib/number-statics.test.tsx 33:14  +…
+safe               → stdlib/number-statics.test.tsx 34:11 safe
+);                 → stdlib/number-statics.test.tsx 34:15 }…
+return             → stdlib/number-statics.test.tsx 34:15 }…
+_el$               → stdlib/number-statics.test.tsx 34:15 }…
+;                  → stdlib/number-statics.test.tsx 34:15 }…
+})();              → stdlib/number-statics.test.tsx 34:15 }…
+}                  → stdlib/number-statics.test.tsx 37:3 }
+;                  → stdlib/number-statics.test.tsx 37:4 `;…
+export default     → stdlib/number-statics.test.tsx 37:4 `;…
+_$createComponent  → stdlib/number-statics.test.tsx 37:4 `;…
+(                  → stdlib/number-statics.test.tsx 37:4 `;…

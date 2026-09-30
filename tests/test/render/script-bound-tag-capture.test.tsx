@@ -40,7 +40,7 @@ it("scriptBoundTagCapture", async (t) => {
 
 describe("a tag naming a function the script holds", () => {
   it("calls one an enclosing script holds, however the call is nested", async () => {
-    const { container } = render(await draw(scriptBoundTagCapture));
+    const { container } = render(await draw(() => scriptBoundTagCapture));
     const badges = () => [...container.querySelectorAll("b")];
     const before = badges();
     const texts = () => badges().map((b) => b.textContent);

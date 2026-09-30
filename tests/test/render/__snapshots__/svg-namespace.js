@@ -14,14 +14,14 @@ import { render } from "@solidjs/testing-library";
 // it.
 async function Ring() {
   return cs.create(
-    "lnypv56qhyvu:17:9",
+    "1yk8a5rma0zxk:17:9",
     { params: [] },
     '() => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>',
     '{"version":3,"file":"svg-namespace.test.jsx","sourceRoot":"","sources":["render/svg-namespace.test.tsx"],"names":[],"mappings":"AAgBY,MAAA,CAAC,MAAM,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,IAAI,CAAC,MAAM,CAAC,MAAM,CAAC,cAAc,EAAG"}',
   );
 }
 const svgNamespace = cs.create(
-  "lnypv56qhyvu:20:21",
+  "1yk8a5rma0zxk:20:21",
   {
     params: [
       { kind: "tag", value: Ring },
@@ -36,7 +36,7 @@ it("svgNamespace", async (t) => {
 });
 describe("an element's namespace", () => {
   it("is where the element is drawn", async () => {
-    const { container } = render(await draw(svgNamespace));
+    const { container } = render(await draw(() => svgNamespace));
     // Sorted: a list builds its rows after the elements beside it, and the
     // order they are made in is not the claim.
     assert.deepEqual(namespaced(container).sort(), [

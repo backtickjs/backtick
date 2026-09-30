@@ -5,7 +5,7 @@ import { bundler } from "../dist/bundler.js";
 test("a plain object crosses member by member", async () => {
   assert.match(
     (await bundler.run({ label: "row", count: 3 })).code,
-    /export default \(\) => \(\{ label: "row", count: 3 \}\);/,
+    /^\(\{ label: "row", count: 3 \}\);$/m,
   );
 });
 
@@ -33,7 +33,7 @@ test("a host function expands rather than crossing", async () => {
   // one takes one.
   assert.equal(
     (await bundler.run(((n: never) => n) as never)).code,
-    "const $expn0 = () => (($arg0) => ($arg0));\nexport default () => ($expn0());",
+    ["const $expn0 = () => (($arg0) => ($arg0));", "($expn0());"].join("\n"),
   );
 });
 
@@ -45,7 +45,7 @@ test("a host function answering one hands it its argument", async () => {
     [
       "const $expn0 = () => (($arg0) => ($expn1($arg0)));",
       "const $expn1 = ($capture0) => (($arg0) => ([$capture0, $arg0]));",
-      "export default () => ($expn0());",
+      "($expn0());",
     ].join("\n"),
   );
 });

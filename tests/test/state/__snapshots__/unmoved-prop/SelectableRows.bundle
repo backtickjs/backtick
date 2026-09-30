@@ -40,13 +40,12 @@ const $cs0 = ($splice0, $splice1, $tag2) => {
     return _el$;
   })();
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () =>
-      $cs0(
-        () => $i0,
-        () => $i1,
-        $i2,
-      ),
-  });
+export default _$createComponent($Component, {
+  body: () =>
+    $cs0(
+      () => $i0,
+      () => $i1,
+      $i2,
+    ),
+});
 _$delegateEvents(["click"]);

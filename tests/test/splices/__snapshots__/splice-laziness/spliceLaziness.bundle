@@ -12,8 +12,7 @@ const $cs2 = () => "evaluated";
 const $cs3 = () => {
   throw "the guarded fragment must never evaluate";
 };
-export default () =>
-  $cs0(
-    () => $cs1($cs2),
-    () => $cs1($cs3),
-  );
+export default $cs0(
+  () => $cs1($cs2),
+  () => $cs1($cs3),
+);

@@ -1,101 +1,102 @@
-$splice0     → expressions/condition-narrowing.test.tsx 27:8 ({…
- => (        → expressions/condition-narrowing.test.tsx 27:8 ({…
-{            → expressions/condition-narrowing.test.tsx 27:9 {
-missing      → expressions/condition-narrowing.test.tsx 28:7 missing
-:            → expressions/condition-narrowing.test.tsx 28:14 : 
-$splice0     → expressions/condition-narrowing.test.tsx 28:16 $label(null,…
-()           → expressions/condition-narrowing.test.tsx 28:16 $label(null,…
-(            → expressions/condition-narrowing.test.tsx 28:22 (
-null         → expressions/condition-narrowing.test.tsx 28:23 null
-,            → expressions/condition-narrowing.test.tsx 28:27 , 
-true         → expressions/condition-narrowing.test.tsx 28:29 true
-)            → expressions/condition-narrowing.test.tsx 28:33 )
-,            → expressions/condition-narrowing.test.tsx 28:34 ,
-loud         → expressions/condition-narrowing.test.tsx 29:7 loud
-:            → expressions/condition-narrowing.test.tsx 29:11 : 
-$splice0     → expressions/condition-narrowing.test.tsx 29:13 $label("!hi",…
-()           → expressions/condition-narrowing.test.tsx 29:13 $label("!hi",…
-(            → expressions/condition-narrowing.test.tsx 29:19 (
-"!hi"        → expressions/condition-narrowing.test.tsx 29:20 "!hi"
-,            → expressions/condition-narrowing.test.tsx 29:25 , 
-true         → expressions/condition-narrowing.test.tsx 29:27 true
-)            → expressions/condition-narrowing.test.tsx 29:31 )
-,            → expressions/condition-narrowing.test.tsx 29:32 ,
-quiet        → expressions/condition-narrowing.test.tsx 30:7 quiet
-:            → expressions/condition-narrowing.test.tsx 30:12 : 
-$splice0     → expressions/condition-narrowing.test.tsx 30:14 $label("!hi",…
-()           → expressions/condition-narrowing.test.tsx 30:14 $label("!hi",…
-(            → expressions/condition-narrowing.test.tsx 30:20 (
-"!hi"        → expressions/condition-narrowing.test.tsx 30:21 "!hi"
-,            → expressions/condition-narrowing.test.tsx 30:26 , 
-false        → expressions/condition-narrowing.test.tsx 30:28 false
-)            → expressions/condition-narrowing.test.tsx 30:33 )
-,            → expressions/condition-narrowing.test.tsx 30:34 ,
-plain        → expressions/condition-narrowing.test.tsx 31:7 plain
-:            → expressions/condition-narrowing.test.tsx 31:12 : 
-$splice0     → expressions/condition-narrowing.test.tsx 31:14 $label("zz",…
-()           → expressions/condition-narrowing.test.tsx 31:14 $label("zz",…
-(            → expressions/condition-narrowing.test.tsx 31:20 (
-"zz"         → expressions/condition-narrowing.test.tsx 31:21 "zz"
-,            → expressions/condition-narrowing.test.tsx 31:25 , 
-false        → expressions/condition-narrowing.test.tsx 31:27 false
-)            → expressions/condition-narrowing.test.tsx 31:32 )
-)            → expressions/condition-narrowing.test.tsx 32:6 )
-;            → expressions/condition-narrowing.test.tsx 32:7 `,…
-$splice0     → expressions/condition-narrowing.test.tsx 10:75 (…
- => (        → expressions/condition-narrowing.test.tsx 10:75 (…
-text         → expressions/condition-narrowing.test.tsx 11:3 text
-,            → expressions/condition-narrowing.test.tsx 11:22 ,…
-upper        → expressions/condition-narrowing.test.tsx 12:3 upper
-) =>         → expressions/condition-narrowing.test.tsx 12:17 ,…
-{            → expressions/condition-narrowing.test.tsx 13:5  {…
-if (         → expressions/condition-narrowing.test.tsx 14:3 if (
-upper        → expressions/condition-narrowing.test.tsx 14:7 upper
- &&          → expressions/condition-narrowing.test.tsx 14:12  && 
-text         → expressions/condition-narrowing.test.tsx 14:16 text
- !==         → expressions/condition-narrowing.test.tsx 14:20  !== 
-null         → expressions/condition-narrowing.test.tsx 14:25 null
-)            → expressions/condition-narrowing.test.tsx 14:29 ) 
-{            → expressions/condition-narrowing.test.tsx 14:31 {
-return       → expressions/condition-narrowing.test.tsx 15:5 return 
-text         → expressions/condition-narrowing.test.tsx 15:12 text
-.            → expressions/condition-narrowing.test.tsx 15:16 .
-toUpperCase  → expressions/condition-narrowing.test.tsx 15:17 toUpperCase
-()           → expressions/condition-narrowing.test.tsx 15:28 ()
-;            → expressions/condition-narrowing.test.tsx 15:30 ;
-}            → expressions/condition-narrowing.test.tsx 16:3 }
-if (         → expressions/condition-narrowing.test.tsx 17:3 if (
-$splice0     → expressions/condition-narrowing.test.tsx 17:7 ${flags.strict}…
-()           → expressions/condition-narrowing.test.tsx 17:7 ${flags.strict}…
- &&          → expressions/condition-narrowing.test.tsx 17:8 {flags.strict}…
-text         → expressions/condition-narrowing.test.tsx 17:26 text
- !==         → expressions/condition-narrowing.test.tsx 17:30  !== 
-null         → expressions/condition-narrowing.test.tsx 17:35 null
- &&          → expressions/condition-narrowing.test.tsx 17:39  && 
-text         → expressions/condition-narrowing.test.tsx 17:43 text
-.            → expressions/condition-narrowing.test.tsx 17:47 .
-charAt       → expressions/condition-narrowing.test.tsx 17:48 charAt
-(            → expressions/condition-narrowing.test.tsx 17:54 (
-0            → expressions/condition-narrowing.test.tsx 17:55 0
-)            → expressions/condition-narrowing.test.tsx 17:56 )
- ===         → expressions/condition-narrowing.test.tsx 17:57  === 
-"!"          → expressions/condition-narrowing.test.tsx 17:62 "!"
-)            → expressions/condition-narrowing.test.tsx 17:65 ) 
-{            → expressions/condition-narrowing.test.tsx 17:67 {
-return       → expressions/condition-narrowing.test.tsx 18:5 return 
-text         → expressions/condition-narrowing.test.tsx 18:12 text
-.            → expressions/condition-narrowing.test.tsx 18:16 .
-concat       → expressions/condition-narrowing.test.tsx 18:17 concat
-(            → expressions/condition-narrowing.test.tsx 18:23 (
-"?"          → expressions/condition-narrowing.test.tsx 18:24 "?"
-)            → expressions/condition-narrowing.test.tsx 18:27 )
-;            → expressions/condition-narrowing.test.tsx 18:28 ;
-}            → expressions/condition-narrowing.test.tsx 19:3 }
-return       → expressions/condition-narrowing.test.tsx 20:3 return 
-"none"       → expressions/condition-narrowing.test.tsx 20:10 "none"
-;            → expressions/condition-narrowing.test.tsx 20:16 ;
-}            → expressions/condition-narrowing.test.tsx 21:1 }
-;            → expressions/condition-narrowing.test.tsx 21:2 `;…
-(            → expressions/condition-narrowing.test.tsx 8:28 true`…
-) => true    → expressions/condition-narrowing.test.tsx 8:28 true`…
-;            → expressions/condition-narrowing.test.tsx 8:32 `…
+$splice0         → expressions/condition-narrowing.test.tsx 27:8 ({…
+ => (            → expressions/condition-narrowing.test.tsx 27:8 ({…
+{                → expressions/condition-narrowing.test.tsx 27:9 {
+missing          → expressions/condition-narrowing.test.tsx 28:7 missing
+:                → expressions/condition-narrowing.test.tsx 28:14 : 
+$splice0         → expressions/condition-narrowing.test.tsx 28:16 $label(null,…
+()               → expressions/condition-narrowing.test.tsx 28:16 $label(null,…
+(                → expressions/condition-narrowing.test.tsx 28:22 (
+null             → expressions/condition-narrowing.test.tsx 28:23 null
+,                → expressions/condition-narrowing.test.tsx 28:27 , 
+true             → expressions/condition-narrowing.test.tsx 28:29 true
+)                → expressions/condition-narrowing.test.tsx 28:33 )
+,                → expressions/condition-narrowing.test.tsx 28:34 ,
+loud             → expressions/condition-narrowing.test.tsx 29:7 loud
+:                → expressions/condition-narrowing.test.tsx 29:11 : 
+$splice0         → expressions/condition-narrowing.test.tsx 29:13 $label("!hi",…
+()               → expressions/condition-narrowing.test.tsx 29:13 $label("!hi",…
+(                → expressions/condition-narrowing.test.tsx 29:19 (
+"!hi"            → expressions/condition-narrowing.test.tsx 29:20 "!hi"
+,                → expressions/condition-narrowing.test.tsx 29:25 , 
+true             → expressions/condition-narrowing.test.tsx 29:27 true
+)                → expressions/condition-narrowing.test.tsx 29:31 )
+,                → expressions/condition-narrowing.test.tsx 29:32 ,
+quiet            → expressions/condition-narrowing.test.tsx 30:7 quiet
+:                → expressions/condition-narrowing.test.tsx 30:12 : 
+$splice0         → expressions/condition-narrowing.test.tsx 30:14 $label("!hi",…
+()               → expressions/condition-narrowing.test.tsx 30:14 $label("!hi",…
+(                → expressions/condition-narrowing.test.tsx 30:20 (
+"!hi"            → expressions/condition-narrowing.test.tsx 30:21 "!hi"
+,                → expressions/condition-narrowing.test.tsx 30:26 , 
+false            → expressions/condition-narrowing.test.tsx 30:28 false
+)                → expressions/condition-narrowing.test.tsx 30:33 )
+,                → expressions/condition-narrowing.test.tsx 30:34 ,
+plain            → expressions/condition-narrowing.test.tsx 31:7 plain
+:                → expressions/condition-narrowing.test.tsx 31:12 : 
+$splice0         → expressions/condition-narrowing.test.tsx 31:14 $label("zz",…
+()               → expressions/condition-narrowing.test.tsx 31:14 $label("zz",…
+(                → expressions/condition-narrowing.test.tsx 31:20 (
+"zz"             → expressions/condition-narrowing.test.tsx 31:21 "zz"
+,                → expressions/condition-narrowing.test.tsx 31:25 , 
+false            → expressions/condition-narrowing.test.tsx 31:27 false
+)                → expressions/condition-narrowing.test.tsx 31:32 )
+)                → expressions/condition-narrowing.test.tsx 32:6 )
+;                → expressions/condition-narrowing.test.tsx 32:7 `,…
+$splice0         → expressions/condition-narrowing.test.tsx 10:75 (…
+ => (            → expressions/condition-narrowing.test.tsx 10:75 (…
+text             → expressions/condition-narrowing.test.tsx 11:3 text
+,                → expressions/condition-narrowing.test.tsx 11:22 ,…
+upper            → expressions/condition-narrowing.test.tsx 12:3 upper
+) =>             → expressions/condition-narrowing.test.tsx 12:17 ,…
+{                → expressions/condition-narrowing.test.tsx 13:5  {…
+if (             → expressions/condition-narrowing.test.tsx 14:3 if (
+upper            → expressions/condition-narrowing.test.tsx 14:7 upper
+ &&              → expressions/condition-narrowing.test.tsx 14:12  && 
+text             → expressions/condition-narrowing.test.tsx 14:16 text
+ !==             → expressions/condition-narrowing.test.tsx 14:20  !== 
+null             → expressions/condition-narrowing.test.tsx 14:25 null
+)                → expressions/condition-narrowing.test.tsx 14:29 ) 
+{                → expressions/condition-narrowing.test.tsx 14:31 {
+return           → expressions/condition-narrowing.test.tsx 15:5 return 
+text             → expressions/condition-narrowing.test.tsx 15:12 text
+.                → expressions/condition-narrowing.test.tsx 15:16 .
+toUpperCase      → expressions/condition-narrowing.test.tsx 15:17 toUpperCase
+()               → expressions/condition-narrowing.test.tsx 15:28 ()
+;                → expressions/condition-narrowing.test.tsx 15:30 ;
+}                → expressions/condition-narrowing.test.tsx 16:3 }
+if (             → expressions/condition-narrowing.test.tsx 17:3 if (
+$splice0         → expressions/condition-narrowing.test.tsx 17:7 ${flags.strict}…
+()               → expressions/condition-narrowing.test.tsx 17:7 ${flags.strict}…
+ &&              → expressions/condition-narrowing.test.tsx 17:8 {flags.strict}…
+text             → expressions/condition-narrowing.test.tsx 17:26 text
+ !==             → expressions/condition-narrowing.test.tsx 17:30  !== 
+null             → expressions/condition-narrowing.test.tsx 17:35 null
+ &&              → expressions/condition-narrowing.test.tsx 17:39  && 
+text             → expressions/condition-narrowing.test.tsx 17:43 text
+.                → expressions/condition-narrowing.test.tsx 17:47 .
+charAt           → expressions/condition-narrowing.test.tsx 17:48 charAt
+(                → expressions/condition-narrowing.test.tsx 17:54 (
+0                → expressions/condition-narrowing.test.tsx 17:55 0
+)                → expressions/condition-narrowing.test.tsx 17:56 )
+ ===             → expressions/condition-narrowing.test.tsx 17:57  === 
+"!"              → expressions/condition-narrowing.test.tsx 17:62 "!"
+)                → expressions/condition-narrowing.test.tsx 17:65 ) 
+{                → expressions/condition-narrowing.test.tsx 17:67 {
+return           → expressions/condition-narrowing.test.tsx 18:5 return 
+text             → expressions/condition-narrowing.test.tsx 18:12 text
+.                → expressions/condition-narrowing.test.tsx 18:16 .
+concat           → expressions/condition-narrowing.test.tsx 18:17 concat
+(                → expressions/condition-narrowing.test.tsx 18:23 (
+"?"              → expressions/condition-narrowing.test.tsx 18:24 "?"
+)                → expressions/condition-narrowing.test.tsx 18:27 )
+;                → expressions/condition-narrowing.test.tsx 18:28 ;
+}                → expressions/condition-narrowing.test.tsx 19:3 }
+return           → expressions/condition-narrowing.test.tsx 20:3 return 
+"none"           → expressions/condition-narrowing.test.tsx 20:10 "none"
+;                → expressions/condition-narrowing.test.tsx 20:16 ;
+}                → expressions/condition-narrowing.test.tsx 21:1 }
+;                → expressions/condition-narrowing.test.tsx 21:2 `;…
+(                → expressions/condition-narrowing.test.tsx 8:28 true`…
+) => true        → expressions/condition-narrowing.test.tsx 8:28 true`…
+;                → expressions/condition-narrowing.test.tsx 8:32 `…
+export default   → expressions/condition-narrowing.test.tsx 8:32 `…

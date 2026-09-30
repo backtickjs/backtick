@@ -13,10 +13,10 @@ describe("a spliced undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "2mut7ohvbpsgi:13:39",
+            "1zpcykvig9epw:13:39",
             { params: [{ kind: "splice", value: nothing, bindings: [] }] },
-            "($splice0) => $splice0()",
-            '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAY0C,cAAA,UAAQ"}',
+            "($splice0) => () => $splice0()",
+            '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAY0C,cAAA,GAAG,EAAE,CAAC,UAAQ"}',
           ),
         ),
       ),
@@ -28,10 +28,10 @@ describe("a spliced undefined", () => {
     const arrived = createRoot(
       await draw(
         cs.create(
-          "2mut7ohvbpsgi:18:42",
+          "1zpcykvig9epw:18:42",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
-          "($splice0) => $splice0()",
-          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiB6C,cAAA,UAAK"}',
+          "($splice0) => () => $splice0()",
+          '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiB6C,cAAA,GAAG,EAAE,CAAC,UAAK"}',
         ),
       ),
     );
@@ -44,10 +44,10 @@ describe("a spliced undefined", () => {
       createRoot(
         await draw(
           cs.create(
-            "2mut7ohvbpsgi:25:43",
+            "1zpcykvig9epw:25:43",
             { params: [{ kind: "splice", value: data, bindings: [] }] },
-            "($splice0) => $splice0()",
-            '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwB8C,cAAA,UAAK"}',
+            "($splice0) => () => $splice0()",
+            '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwB8C,cAAA,GAAG,EAAE,CAAC,UAAK"}',
           ),
         ),
       ),

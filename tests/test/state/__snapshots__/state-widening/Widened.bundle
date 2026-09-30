@@ -20,13 +20,12 @@ const $cs0 = ($splice0, $splice1, $splice2) => {
     return _el$;
   })();
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () =>
-      $cs0(
-        () => $i0,
-        () => "warm",
-        () => "cool",
-      ),
-  });
+export default _$createComponent($Component, {
+  body: () =>
+    $cs0(
+      () => $i0,
+      () => "warm",
+      () => "cool",
+    ),
+});
 _$delegateEvents(["click"]);

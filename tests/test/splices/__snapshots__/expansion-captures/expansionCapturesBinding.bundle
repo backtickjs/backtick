@@ -5,4 +5,4 @@ const $cs0 = ($splice0) => {
 };
 const $cs1 = ($splice0, $capture1) => $capture1 + $splice0($capture1);
 const $expn0 = ($capture0) => ($arg0) => $cs1((base) => $arg0, $capture0);
-export default () => $cs0((base) => $expn0(base));
+export default $cs0((base) => $expn0(base));

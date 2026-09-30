@@ -28,8 +28,7 @@ const $expn0 = () => ($arg0) =>
     _$insert(_el$2, () => $arg0.title);
     return _el$2;
   })();
-export default () =>
-  $cs0(
-    () => $cs1(() => $expn0()),
-    () => $cs2(() => $expn0()),
-  );
+export default $cs0(
+  () => $cs1(() => $expn0()),
+  () => $cs2(() => $expn0()),
+);

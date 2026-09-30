@@ -82,7 +82,7 @@ async function drawAt(
   parent: Element,
   selector: string,
 ): Promise<void> {
-  const drawing = await draw(value);
+  const drawing = await draw(() => value);
   const unmount = createRoot((dispose) => {
     insert(parent, drawing(), parent.querySelector(selector)!);
     return dispose;

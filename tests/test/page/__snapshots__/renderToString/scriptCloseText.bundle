@@ -2,4 +2,4 @@ import { template as _$template } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(
   `<p>&amp; &lt; > " ' &lt;/script> &lt;!-- -->`,
 );
-export default () => _tmpl$();
+export default _tmpl$();

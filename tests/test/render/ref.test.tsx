@@ -11,7 +11,7 @@ describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const field = $createSignal<HTMLInputElement | null>(null);
           return (
             <div>
@@ -29,7 +29,7 @@ describe("ref", () => {
   it("focuses once in place, through onMount", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           return (
             <input
               aria-label="name"
@@ -43,7 +43,7 @@ describe("ref", () => {
   });
 
   it("is not written as an attribute", async () => {
-    render(await draw(cs`<input aria-label="name" ref={() => {}} />`));
+    render(await draw(cs`() => <input aria-label="name" ref={() => {}} />`));
     assert.equal(screen.getByLabelText("name").hasAttribute("ref"), false);
   });
 
@@ -66,7 +66,7 @@ describe("ref", () => {
     it("even when a signal it read changes", async () => {
       render(
         await draw(
-          cs`{
+          cs`() => {
             const shown = $createSignal(true);
             const n = $createSignal(0);
             return (

@@ -1,29 +1,30 @@
-(            → expressions/prefix-not.test.tsx 10:8 (
-) => (       → expressions/prefix-not.test.tsx 10:8 (ready:…
-ready        → expressions/prefix-not.test.tsx 10:9 ready
-,            → expressions/prefix-not.test.tsx 10:23 , 
-count        → expressions/prefix-not.test.tsx 10:25 count
-) =>         → expressions/prefix-not.test.tsx 10:38 ) => 
-{            → expressions/prefix-not.test.tsx 10:42  {…
-if (         → expressions/prefix-not.test.tsx 11:7 if (
-!            → expressions/prefix-not.test.tsx 11:11 !
-ready        → expressions/prefix-not.test.tsx 11:12 ready
-)            → expressions/prefix-not.test.tsx 11:17 ) 
-{            → expressions/prefix-not.test.tsx 11:19 {
-return       → expressions/prefix-not.test.tsx 12:9 return 
-"waiting"    → expressions/prefix-not.test.tsx 12:16 "waiting"
-;            → expressions/prefix-not.test.tsx 12:25 ;
-}            → expressions/prefix-not.test.tsx 13:7 }
-return       → expressions/prefix-not.test.tsx 14:7 return 
-!(           → expressions/prefix-not.test.tsx 14:14 !(
-count        → expressions/prefix-not.test.tsx 14:16 count
- >           → expressions/prefix-not.test.tsx 14:21  > 
-3            → expressions/prefix-not.test.tsx 14:24 3
-)            → expressions/prefix-not.test.tsx 14:25 )
- ?           → expressions/prefix-not.test.tsx 14:26  ? 
-"room left"  → expressions/prefix-not.test.tsx 14:29 "room left"
- :           → expressions/prefix-not.test.tsx 14:40  : 
-"full"       → expressions/prefix-not.test.tsx 14:43 "full"
-;            → expressions/prefix-not.test.tsx 14:49 ;
-}            → expressions/prefix-not.test.tsx 15:5 }
-;            → expressions/prefix-not.test.tsx 15:6 `,…
+(                → expressions/prefix-not.test.tsx 10:8 (
+) => (           → expressions/prefix-not.test.tsx 10:8 (ready:…
+ready            → expressions/prefix-not.test.tsx 10:9 ready
+,                → expressions/prefix-not.test.tsx 10:23 , 
+count            → expressions/prefix-not.test.tsx 10:25 count
+) =>             → expressions/prefix-not.test.tsx 10:38 ) => 
+{                → expressions/prefix-not.test.tsx 10:42  {…
+if (             → expressions/prefix-not.test.tsx 11:7 if (
+!                → expressions/prefix-not.test.tsx 11:11 !
+ready            → expressions/prefix-not.test.tsx 11:12 ready
+)                → expressions/prefix-not.test.tsx 11:17 ) 
+{                → expressions/prefix-not.test.tsx 11:19 {
+return           → expressions/prefix-not.test.tsx 12:9 return 
+"waiting"        → expressions/prefix-not.test.tsx 12:16 "waiting"
+;                → expressions/prefix-not.test.tsx 12:25 ;
+}                → expressions/prefix-not.test.tsx 13:7 }
+return           → expressions/prefix-not.test.tsx 14:7 return 
+!(               → expressions/prefix-not.test.tsx 14:14 !(
+count            → expressions/prefix-not.test.tsx 14:16 count
+ >               → expressions/prefix-not.test.tsx 14:21  > 
+3                → expressions/prefix-not.test.tsx 14:24 3
+)                → expressions/prefix-not.test.tsx 14:25 )
+ ?               → expressions/prefix-not.test.tsx 14:26  ? 
+"room left"      → expressions/prefix-not.test.tsx 14:29 "room left"
+ :               → expressions/prefix-not.test.tsx 14:40  : 
+"full"           → expressions/prefix-not.test.tsx 14:43 "full"
+;                → expressions/prefix-not.test.tsx 14:49 ;
+}                → expressions/prefix-not.test.tsx 15:5 }
+;                → expressions/prefix-not.test.tsx 15:6 `,…
+export default   → expressions/prefix-not.test.tsx 15:6 `,…

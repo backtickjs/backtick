@@ -23,4 +23,4 @@ const $cs0 = () => {
     (Math.E > 2.71)
   );
 };
-export default () => $cs0();
+export default $cs0();

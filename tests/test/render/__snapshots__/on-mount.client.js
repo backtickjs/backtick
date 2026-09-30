@@ -1,5 +1,5 @@
 // 28:7
-($splice0, $splice1) => {
+($splice0, $splice1) => () => {
     const count = $splice0()(0);
     $splice1()(() => {
         window.console.log();
@@ -9,7 +9,7 @@
 }
 
 // 45:9
-($splice0, $splice1) => {
+($splice0, $splice1) => () => {
     const said = $splice0()("not yet");
     return (<button onclick={() => $splice1()(() => said[1]("ran"))}>
               {said[0]()}

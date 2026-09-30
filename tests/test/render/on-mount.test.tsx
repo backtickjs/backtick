@@ -25,7 +25,7 @@ async function logged(draw: () => Promise<unknown>): Promise<string[]> {
 describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
     const drawing = await draw(
-      cs`{
+      cs`() => {
         const count = $createSignal(0);
         $onMount(() => {
           window.console.log();
@@ -42,7 +42,7 @@ describe("onMount", () => {
   it("runs at once when called from a handler", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const said = $createSignal("not yet");
           return (
             <button onclick={() => $onMount(() => said[1]("ran"))}>

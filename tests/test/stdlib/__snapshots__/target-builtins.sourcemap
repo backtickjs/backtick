@@ -1,10 +1,12 @@
 cs.lift(    → cs`
+() =>       → () => 
 cs.splice(  →  [-semantic]
 (greet)     → $greet
 )           →  [-semantic]
 ()          → ()
 )           → `
 cs.lift(    → cs`
+() =>       → () => 
 cs.splice(  →  [-semantic]
 (storage)   → $storage
 )           →  [-semantic]

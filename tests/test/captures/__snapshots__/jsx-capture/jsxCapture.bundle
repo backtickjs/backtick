@@ -7,12 +7,11 @@ const $cs0 = ($splice0) => () => {
   return $splice0(x);
 };
 const $cs1 = ($capture0) => () => $capture0;
-export default () =>
-  $cs0((x) =>
-    (() => {
-      var _el$ = _tmpl$();
-      _$addEventListener(_el$, "click", $cs1(x), true);
-      return _el$;
-    })(),
-  );
+export default $cs0((x) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _$addEventListener(_el$, "click", $cs1(x), true);
+    return _el$;
+  })(),
+);
 _$delegateEvents(["click"]);

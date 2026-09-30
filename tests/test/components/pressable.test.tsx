@@ -31,13 +31,13 @@ async function Row() {
 
 describe("screen", () => {
   it("increments the counter", async () => {
-    render(await draw(<Row />));
+    render(await draw(() => <Row />));
     await userEvent.click(screen.getByRole("button", { name: /pressed/ }));
     assert.ok(screen.getByText("pressed 1 times"));
   });
 
   it("reads a fresh page in each test", async () => {
-    render(await draw(<Row />));
+    render(await draw(() => <Row />));
     assert.ok(screen.getByText("pressed 0 times"));
   });
 });

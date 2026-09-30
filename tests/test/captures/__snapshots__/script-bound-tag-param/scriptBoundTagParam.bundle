@@ -27,4 +27,4 @@ const $cs2 = ($capture0) =>
   _$createComponent($capture0, {
     n: 2,
   });
-export default () => $cs0($cs1, $cs2);
+export default $cs0($cs1, $cs2);

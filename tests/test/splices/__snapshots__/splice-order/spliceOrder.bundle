@@ -2,8 +2,7 @@ const $cs0 = ($splice0, $splice1) => ({
   a: $splice0(),
   b: $splice1(),
 });
-export default () =>
-  $cs0(
-    () => 0,
-    () => 1,
-  );
+export default $cs0(
+  () => 0,
+  () => 1,
+);

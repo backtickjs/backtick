@@ -17,14 +17,13 @@ const $cs0 = ($splice0, $splice1, $splice2, $splice3) => {
 const $cs1 = ($splice0) => (c) => {
   return c === $splice0() ? "blue" : "red";
 };
-export default () =>
-  _$createComponent($Component, {
-    body: () =>
-      $cs0(
-        () => $i0,
-        () => 0,
-        () => 1,
-        () => $cs1(() => 1),
-      ),
-  });
+export default _$createComponent($Component, {
+  body: () =>
+    $cs0(
+      () => $i0,
+      () => 0,
+      () => 1,
+      () => $cs1(() => 1),
+    ),
+});
 _$delegateEvents(["click"]);

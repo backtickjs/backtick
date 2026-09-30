@@ -1,46 +1,47 @@
-(        → control-flow/while-loop.test.tsx 9:8 {…
-) => {   → control-flow/while-loop.test.tsx 9:8 {…
-let      → control-flow/while-loop.test.tsx 10:7 let 
-i        → control-flow/while-loop.test.tsx 10:11 i
- =       → control-flow/while-loop.test.tsx 10:12  = 
-0        → control-flow/while-loop.test.tsx 10:15 0
-;        → control-flow/while-loop.test.tsx 10:16 ;
-let      → control-flow/while-loop.test.tsx 11:7 let 
-total    → control-flow/while-loop.test.tsx 11:11 total
- =       → control-flow/while-loop.test.tsx 11:16  = 
-0        → control-flow/while-loop.test.tsx 11:19 0
-;        → control-flow/while-loop.test.tsx 11:20 ;
-while (  → control-flow/while-loop.test.tsx 12:7 while (
-i        → control-flow/while-loop.test.tsx 12:14 i
- <       → control-flow/while-loop.test.tsx 12:15  < 
-5        → control-flow/while-loop.test.tsx 12:18 5
-)        → control-flow/while-loop.test.tsx 12:19 ) 
-{        → control-flow/while-loop.test.tsx 12:21 {
-total    → control-flow/while-loop.test.tsx 13:9 total
- =       → control-flow/while-loop.test.tsx 13:14  = 
-total    → control-flow/while-loop.test.tsx 13:17 total
- +       → control-flow/while-loop.test.tsx 13:22  + 
-i        → control-flow/while-loop.test.tsx 13:25 i
-;        → control-flow/while-loop.test.tsx 13:26 ;
-if (     → control-flow/while-loop.test.tsx 14:9 if (
-i        → control-flow/while-loop.test.tsx 14:13 i
- ===     → control-flow/while-loop.test.tsx 14:14  === 
-3        → control-flow/while-loop.test.tsx 14:19 3
-)        → control-flow/while-loop.test.tsx 14:20 ) 
-{        → control-flow/while-loop.test.tsx 14:22 {
-return   → control-flow/while-loop.test.tsx 15:11 return 
-total    → control-flow/while-loop.test.tsx 15:18 total
-;        → control-flow/while-loop.test.tsx 15:23 ;
-}        → control-flow/while-loop.test.tsx 16:9 }
-i        → control-flow/while-loop.test.tsx 17:9 i
- =       → control-flow/while-loop.test.tsx 17:10  = 
-i        → control-flow/while-loop.test.tsx 17:13 i
- +       → control-flow/while-loop.test.tsx 17:14  + 
-1        → control-flow/while-loop.test.tsx 17:17 1
-;        → control-flow/while-loop.test.tsx 17:18 ;
-}        → control-flow/while-loop.test.tsx 18:7 }
-return   → control-flow/while-loop.test.tsx 19:7 return 
-total    → control-flow/while-loop.test.tsx 19:14 total
-;        → control-flow/while-loop.test.tsx 19:19 ;
-}        → control-flow/while-loop.test.tsx 20:5 }
-;        → control-flow/while-loop.test.tsx 20:6 `,…
+(                → control-flow/while-loop.test.tsx 9:8 {…
+) => {           → control-flow/while-loop.test.tsx 9:8 {…
+let              → control-flow/while-loop.test.tsx 10:7 let 
+i                → control-flow/while-loop.test.tsx 10:11 i
+ =               → control-flow/while-loop.test.tsx 10:12  = 
+0                → control-flow/while-loop.test.tsx 10:15 0
+;                → control-flow/while-loop.test.tsx 10:16 ;
+let              → control-flow/while-loop.test.tsx 11:7 let 
+total            → control-flow/while-loop.test.tsx 11:11 total
+ =               → control-flow/while-loop.test.tsx 11:16  = 
+0                → control-flow/while-loop.test.tsx 11:19 0
+;                → control-flow/while-loop.test.tsx 11:20 ;
+while (          → control-flow/while-loop.test.tsx 12:7 while (
+i                → control-flow/while-loop.test.tsx 12:14 i
+ <               → control-flow/while-loop.test.tsx 12:15  < 
+5                → control-flow/while-loop.test.tsx 12:18 5
+)                → control-flow/while-loop.test.tsx 12:19 ) 
+{                → control-flow/while-loop.test.tsx 12:21 {
+total            → control-flow/while-loop.test.tsx 13:9 total
+ =               → control-flow/while-loop.test.tsx 13:14  = 
+total            → control-flow/while-loop.test.tsx 13:17 total
+ +               → control-flow/while-loop.test.tsx 13:22  + 
+i                → control-flow/while-loop.test.tsx 13:25 i
+;                → control-flow/while-loop.test.tsx 13:26 ;
+if (             → control-flow/while-loop.test.tsx 14:9 if (
+i                → control-flow/while-loop.test.tsx 14:13 i
+ ===             → control-flow/while-loop.test.tsx 14:14  === 
+3                → control-flow/while-loop.test.tsx 14:19 3
+)                → control-flow/while-loop.test.tsx 14:20 ) 
+{                → control-flow/while-loop.test.tsx 14:22 {
+return           → control-flow/while-loop.test.tsx 15:11 return 
+total            → control-flow/while-loop.test.tsx 15:18 total
+;                → control-flow/while-loop.test.tsx 15:23 ;
+}                → control-flow/while-loop.test.tsx 16:9 }
+i                → control-flow/while-loop.test.tsx 17:9 i
+ =               → control-flow/while-loop.test.tsx 17:10  = 
+i                → control-flow/while-loop.test.tsx 17:13 i
+ +               → control-flow/while-loop.test.tsx 17:14  + 
+1                → control-flow/while-loop.test.tsx 17:17 1
+;                → control-flow/while-loop.test.tsx 17:18 ;
+}                → control-flow/while-loop.test.tsx 18:7 }
+return           → control-flow/while-loop.test.tsx 19:7 return 
+total            → control-flow/while-loop.test.tsx 19:14 total
+;                → control-flow/while-loop.test.tsx 19:19 ;
+}                → control-flow/while-loop.test.tsx 20:5 }
+;                → control-flow/while-loop.test.tsx 20:6 `,…
+export default   → control-flow/while-loop.test.tsx 20:6 `,…

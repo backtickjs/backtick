@@ -43,7 +43,7 @@ async function Labels() {
 }
 
 it("a label written changes that label's text and nothing else", async () => {
-  const { container } = render(await draw(<Labels />));
+  const { container } = render(await draw(() => <Labels />));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "update" }));
   assert.deepEqual(written(), [

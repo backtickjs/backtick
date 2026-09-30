@@ -21,4 +21,4 @@ const $cs0 = () => {
     JSON.stringify(JSON.parse(held))
   );
 };
-export default () => $cs0();
+export default $cs0();

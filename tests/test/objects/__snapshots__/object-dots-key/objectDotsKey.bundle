@@ -7,4 +7,4 @@ const $cs0 = () => {
     "...": 2,
   };
 };
-export default () => $cs0();
+export default $cs0();

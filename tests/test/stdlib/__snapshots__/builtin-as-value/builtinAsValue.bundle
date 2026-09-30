@@ -3,4 +3,4 @@ const $cs0 = () => {
   const apply = (f, n) => f(n);
   return floor(3.5) + apply(Math.ceil, 3.5);
 };
-export default () => $cs0();
+export default $cs0();

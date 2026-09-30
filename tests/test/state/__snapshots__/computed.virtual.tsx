@@ -24,14 +24,14 @@ describe("computed", () => {
   it("runs once per change, however many read it", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_doubled = cs.splice((createMemo))(() => {
         cs.globalThis.window.console.log();
         return __cs_n[0]() * 2;
     });
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift("a " + __cs_doubled())}</p>)}{cs.lift(<p>{cs.lift("b " + __cs_doubled())}</p>)}{cs.lift(<p>{cs.lift("c " + __cs_doubled())}</p>)}</div>;
-})()),
+}),
       ),
     );
     assert.equal(runs, 1);
@@ -45,7 +45,7 @@ describe("computed", () => {
   it("passes a change on only when its value changes", async () => {
     render(
       await draw(
-        cs.lift((() => {
+        cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_isBig = cs.splice((createMemo))(() => __cs_n[0]() > 2);
     const __cs_label = () => {
@@ -53,7 +53,7 @@ describe("computed", () => {
         return __cs_isBig() ? "big" : "small";
     };
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>add</button>)}{cs.lift(<p>{cs.lift(__cs_label())}</p>)}</div>;
-})()),
+}),
       ),
     );
     assert.equal(runs, 1);

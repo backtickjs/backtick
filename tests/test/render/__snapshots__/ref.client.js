@@ -1,5 +1,5 @@
 // 14:9
-($splice0) => {
+($splice0) => () => {
     const field = $splice0()(null);
     return (<div>
               <input aria-label="name" ref={(element) => field[1](element)}/>
@@ -8,15 +8,15 @@
 }
 
 // 32:9
-($splice0) => {
+($splice0) => () => {
     return (<input aria-label="name" ref={(element) => $splice0()(() => element.focus())}/>);
 }
 
 // 46:23
-() => <input aria-label="name" ref={() => { }}/>
+() => () => <input aria-label="name" ref={() => { }}/>
 
 // 69:11
-($splice0) => {
+($splice0) => () => {
     const shown = $splice0()(true);
     const n = $splice0()(0);
     return (<div>

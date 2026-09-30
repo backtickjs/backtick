@@ -13,4 +13,4 @@ const $cs0 = () => {
     small: coins.filter((n) => n < 3),
   };
 };
-export default () => $cs0();
+export default $cs0();

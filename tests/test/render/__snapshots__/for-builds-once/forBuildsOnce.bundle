@@ -50,4 +50,4 @@ const $expn0 = () => ($arg0) =>
     () => ["one", "two"],
     $i1,
   );
-export default () => $cs0(() => $i0, $expn0());
+export default $cs0(() => $i0, $expn0());

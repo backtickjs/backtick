@@ -12,4 +12,4 @@ const $cs0 = () => {
     empty.reduce((sum, one) => sum + one, 0)
   );
 };
-export default () => $cs0();
+export default $cs0();

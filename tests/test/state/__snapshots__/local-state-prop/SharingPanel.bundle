@@ -52,8 +52,7 @@ const $expn0 = () => ($arg0) =>
     );
     return _el$2;
   })();
-export default () =>
-  _$createComponent($Component, {
-    body: () => $cs0(() => $i0, $expn0()),
-  });
+export default _$createComponent($Component, {
+  body: () => $cs0(() => $i0, $expn0()),
+});
 _$delegateEvents(["click"]);

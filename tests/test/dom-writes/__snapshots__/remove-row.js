@@ -12,7 +12,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // removal.
 async function RemovableRows() {
   return cs.create(
-    "20euhl8ober3l:14:9",
+    "312x26yzimgyz:14:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -24,7 +24,7 @@ async function RemovableRows() {
   );
 }
 it("a removal takes out the one row", async () => {
-  const { container } = render(await draw(_jsx(RemovableRows, {})));
+  const { container } = render(await draw(() => _jsx(RemovableRows, {})));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "remove 3" }));
   assert.deepEqual(written(), ["tbody − tr#row-3"]);

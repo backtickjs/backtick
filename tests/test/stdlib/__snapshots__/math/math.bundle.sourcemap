@@ -1,159 +1,160 @@
-(        → stdlib/math.test.tsx 12:8 {…
-) => {   → stdlib/math.test.tsx 12:8 {…
-const    → stdlib/math.test.tsx 13:7 const 
-rounded  → stdlib/math.test.tsx 13:13 rounded
- =       → stdlib/math.test.tsx 13:20  =…
-Math     → stdlib/math.test.tsx 14:9 Math
-.        → stdlib/math.test.tsx 14:13 .
-round    → stdlib/math.test.tsx 14:14 round
-(        → stdlib/math.test.tsx 14:19 (
-2.5      → stdlib/math.test.tsx 14:20 2.5
-)        → stdlib/math.test.tsx 14:23 )
- +       → stdlib/math.test.tsx 14:24  + 
-","      → stdlib/math.test.tsx 14:27 ","
- +       → stdlib/math.test.tsx 14:30  + 
-Math     → stdlib/math.test.tsx 14:33 Math
-.        → stdlib/math.test.tsx 14:37 .
-round    → stdlib/math.test.tsx 14:38 round
-(        → stdlib/math.test.tsx 14:43 (
--        → stdlib/math.test.tsx 14:44 -
-2.5      → stdlib/math.test.tsx 14:45 2.5
-)        → stdlib/math.test.tsx 14:48 )
- +       → stdlib/math.test.tsx 14:49  + 
-","      → stdlib/math.test.tsx 14:52 ","
- +       → stdlib/math.test.tsx 14:55  + 
-Math     → stdlib/math.test.tsx 14:58 Math
-.        → stdlib/math.test.tsx 14:62 .
-round    → stdlib/math.test.tsx 14:63 round
-(        → stdlib/math.test.tsx 14:68 (
--        → stdlib/math.test.tsx 14:69 -
-0.5      → stdlib/math.test.tsx 14:70 0.5
-)        → stdlib/math.test.tsx 14:73 )
-;        → stdlib/math.test.tsx 14:74 ;
-const    → stdlib/math.test.tsx 15:7 const 
-edges    → stdlib/math.test.tsx 15:13 edges
- =       → stdlib/math.test.tsx 15:18  =…
-Math     → stdlib/math.test.tsx 16:9 Math
-.        → stdlib/math.test.tsx 16:13 .
-floor    → stdlib/math.test.tsx 16:14 floor
-(        → stdlib/math.test.tsx 16:19 (
--        → stdlib/math.test.tsx 16:20 -
-1.5      → stdlib/math.test.tsx 16:21 1.5
-)        → stdlib/math.test.tsx 16:24 )
- +       → stdlib/math.test.tsx 16:25  + 
-","      → stdlib/math.test.tsx 16:28 ","
- +       → stdlib/math.test.tsx 16:31  + 
-Math     → stdlib/math.test.tsx 16:34 Math
-.        → stdlib/math.test.tsx 16:38 .
-ceil     → stdlib/math.test.tsx 16:39 ceil
-(        → stdlib/math.test.tsx 16:43 (
--        → stdlib/math.test.tsx 16:44 -
-1.5      → stdlib/math.test.tsx 16:45 1.5
-)        → stdlib/math.test.tsx 16:48 )
- +       → stdlib/math.test.tsx 16:49  + 
-","      → stdlib/math.test.tsx 16:52 ","
- +       → stdlib/math.test.tsx 16:55  + 
-Math     → stdlib/math.test.tsx 16:58 Math
-.        → stdlib/math.test.tsx 16:62 .
-trunc    → stdlib/math.test.tsx 16:63 trunc
-(        → stdlib/math.test.tsx 16:68 (
--        → stdlib/math.test.tsx 16:69 -
-1.5      → stdlib/math.test.tsx 16:70 1.5
-)        → stdlib/math.test.tsx 16:73 )
-;        → stdlib/math.test.tsx 16:74 ;
-const    → stdlib/math.test.tsx 17:7 const 
-picks    → stdlib/math.test.tsx 17:13 picks
- =       → stdlib/math.test.tsx 17:18  =…
-Math     → stdlib/math.test.tsx 18:9 Math
-.        → stdlib/math.test.tsx 18:13 .
-min      → stdlib/math.test.tsx 18:14 min
-(        → stdlib/math.test.tsx 18:17 (
-3        → stdlib/math.test.tsx 18:18 3
-,        → stdlib/math.test.tsx 18:19 , 
-1        → stdlib/math.test.tsx 18:21 1
-,        → stdlib/math.test.tsx 18:22 , 
-2        → stdlib/math.test.tsx 18:24 2
-)        → stdlib/math.test.tsx 18:25 )
- +       → stdlib/math.test.tsx 18:26  + 
-","      → stdlib/math.test.tsx 18:29 ","
- +       → stdlib/math.test.tsx 18:32  + 
-Math     → stdlib/math.test.tsx 18:35 Math
-.        → stdlib/math.test.tsx 18:39 .
-max      → stdlib/math.test.tsx 18:40 max
-(        → stdlib/math.test.tsx 18:43 (
-3        → stdlib/math.test.tsx 18:44 3
-,        → stdlib/math.test.tsx 18:45 , 
-1        → stdlib/math.test.tsx 18:47 1
-,        → stdlib/math.test.tsx 18:48 , 
-2        → stdlib/math.test.tsx 18:50 2
-)        → stdlib/math.test.tsx 18:51 )
- +       → stdlib/math.test.tsx 18:52  + 
-","      → stdlib/math.test.tsx 18:55 ","
- +       → stdlib/math.test.tsx 18:58  + 
-Math     → stdlib/math.test.tsx 18:61 Math
-.        → stdlib/math.test.tsx 18:65 .
-abs      → stdlib/math.test.tsx 18:66 abs
-(        → stdlib/math.test.tsx 18:69 (
--        → stdlib/math.test.tsx 18:70 -
-4        → stdlib/math.test.tsx 18:71 4
-)        → stdlib/math.test.tsx 18:72 )
-;        → stdlib/math.test.tsx 18:73 ;
-return   → stdlib/math.test.tsx 19:7 return 
-rounded  → stdlib/math.test.tsx 20:9 rounded
- +       → stdlib/math.test.tsx 20:16  +…
-"|"      → stdlib/math.test.tsx 21:9 "|"
- +       → stdlib/math.test.tsx 21:12  +…
-edges    → stdlib/math.test.tsx 22:9 edges
- +       → stdlib/math.test.tsx 22:14  +…
-"|"      → stdlib/math.test.tsx 23:9 "|"
- +       → stdlib/math.test.tsx 23:12  +…
-picks    → stdlib/math.test.tsx 24:9 picks
- +       → stdlib/math.test.tsx 24:14  +…
-"|"      → stdlib/math.test.tsx 25:9 "|"
- +       → stdlib/math.test.tsx 25:12  +…
-Math     → stdlib/math.test.tsx 26:9 Math
-.        → stdlib/math.test.tsx 26:13 .
-sqrt     → stdlib/math.test.tsx 26:14 sqrt
-(        → stdlib/math.test.tsx 26:18 (
-9        → stdlib/math.test.tsx 26:19 9
-)        → stdlib/math.test.tsx 26:20 )
- +       → stdlib/math.test.tsx 26:21  +…
-","      → stdlib/math.test.tsx 27:9 ","
- +       → stdlib/math.test.tsx 27:12  +…
-Math     → stdlib/math.test.tsx 28:9 Math
-.        → stdlib/math.test.tsx 28:13 .
-sign     → stdlib/math.test.tsx 28:14 sign
-(        → stdlib/math.test.tsx 28:18 (
--        → stdlib/math.test.tsx 28:19 -
-8        → stdlib/math.test.tsx 28:20 8
-)        → stdlib/math.test.tsx 28:21 )
- +       → stdlib/math.test.tsx 28:22  +…
-","      → stdlib/math.test.tsx 29:9 ","
- +       → stdlib/math.test.tsx 29:12  +…
-Math     → stdlib/math.test.tsx 30:9 Math
-.        → stdlib/math.test.tsx 30:13 .
-fround   → stdlib/math.test.tsx 30:14 fround
-(        → stdlib/math.test.tsx 30:20 (
-1.5      → stdlib/math.test.tsx 30:21 1.5
-)        → stdlib/math.test.tsx 30:24 )
- +       → stdlib/math.test.tsx 30:25  +…
-"|"      → stdlib/math.test.tsx 31:9 "|"
- + (     → stdlib/math.test.tsx 31:12  +…
-Math     → stdlib/math.test.tsx 32:10 Math
-.        → stdlib/math.test.tsx 32:14 .
-PI       → stdlib/math.test.tsx 32:15 PI
- >       → stdlib/math.test.tsx 32:17  > 
-3.14     → stdlib/math.test.tsx 32:20 3.14
-)        → stdlib/math.test.tsx 32:24 )
- +       → stdlib/math.test.tsx 32:25  +…
-","      → stdlib/math.test.tsx 33:9 ","
- + (     → stdlib/math.test.tsx 33:12  +…
-Math     → stdlib/math.test.tsx 34:10 Math
-.        → stdlib/math.test.tsx 34:14 .
-E        → stdlib/math.test.tsx 34:15 E
- >       → stdlib/math.test.tsx 34:16  > 
-2.71     → stdlib/math.test.tsx 34:19 2.71
-)        → stdlib/math.test.tsx 34:23 )
-;        → stdlib/math.test.tsx 34:24 …
-}        → stdlib/math.test.tsx 36:5 }
-;        → stdlib/math.test.tsx 36:6 `,…
+(                → stdlib/math.test.tsx 12:8 {…
+) => {           → stdlib/math.test.tsx 12:8 {…
+const            → stdlib/math.test.tsx 13:7 const 
+rounded          → stdlib/math.test.tsx 13:13 rounded
+ =               → stdlib/math.test.tsx 13:20  =…
+Math             → stdlib/math.test.tsx 14:9 Math
+.                → stdlib/math.test.tsx 14:13 .
+round            → stdlib/math.test.tsx 14:14 round
+(                → stdlib/math.test.tsx 14:19 (
+2.5              → stdlib/math.test.tsx 14:20 2.5
+)                → stdlib/math.test.tsx 14:23 )
+ +               → stdlib/math.test.tsx 14:24  + 
+","              → stdlib/math.test.tsx 14:27 ","
+ +               → stdlib/math.test.tsx 14:30  + 
+Math             → stdlib/math.test.tsx 14:33 Math
+.                → stdlib/math.test.tsx 14:37 .
+round            → stdlib/math.test.tsx 14:38 round
+(                → stdlib/math.test.tsx 14:43 (
+-                → stdlib/math.test.tsx 14:44 -
+2.5              → stdlib/math.test.tsx 14:45 2.5
+)                → stdlib/math.test.tsx 14:48 )
+ +               → stdlib/math.test.tsx 14:49  + 
+","              → stdlib/math.test.tsx 14:52 ","
+ +               → stdlib/math.test.tsx 14:55  + 
+Math             → stdlib/math.test.tsx 14:58 Math
+.                → stdlib/math.test.tsx 14:62 .
+round            → stdlib/math.test.tsx 14:63 round
+(                → stdlib/math.test.tsx 14:68 (
+-                → stdlib/math.test.tsx 14:69 -
+0.5              → stdlib/math.test.tsx 14:70 0.5
+)                → stdlib/math.test.tsx 14:73 )
+;                → stdlib/math.test.tsx 14:74 ;
+const            → stdlib/math.test.tsx 15:7 const 
+edges            → stdlib/math.test.tsx 15:13 edges
+ =               → stdlib/math.test.tsx 15:18  =…
+Math             → stdlib/math.test.tsx 16:9 Math
+.                → stdlib/math.test.tsx 16:13 .
+floor            → stdlib/math.test.tsx 16:14 floor
+(                → stdlib/math.test.tsx 16:19 (
+-                → stdlib/math.test.tsx 16:20 -
+1.5              → stdlib/math.test.tsx 16:21 1.5
+)                → stdlib/math.test.tsx 16:24 )
+ +               → stdlib/math.test.tsx 16:25  + 
+","              → stdlib/math.test.tsx 16:28 ","
+ +               → stdlib/math.test.tsx 16:31  + 
+Math             → stdlib/math.test.tsx 16:34 Math
+.                → stdlib/math.test.tsx 16:38 .
+ceil             → stdlib/math.test.tsx 16:39 ceil
+(                → stdlib/math.test.tsx 16:43 (
+-                → stdlib/math.test.tsx 16:44 -
+1.5              → stdlib/math.test.tsx 16:45 1.5
+)                → stdlib/math.test.tsx 16:48 )
+ +               → stdlib/math.test.tsx 16:49  + 
+","              → stdlib/math.test.tsx 16:52 ","
+ +               → stdlib/math.test.tsx 16:55  + 
+Math             → stdlib/math.test.tsx 16:58 Math
+.                → stdlib/math.test.tsx 16:62 .
+trunc            → stdlib/math.test.tsx 16:63 trunc
+(                → stdlib/math.test.tsx 16:68 (
+-                → stdlib/math.test.tsx 16:69 -
+1.5              → stdlib/math.test.tsx 16:70 1.5
+)                → stdlib/math.test.tsx 16:73 )
+;                → stdlib/math.test.tsx 16:74 ;
+const            → stdlib/math.test.tsx 17:7 const 
+picks            → stdlib/math.test.tsx 17:13 picks
+ =               → stdlib/math.test.tsx 17:18  =…
+Math             → stdlib/math.test.tsx 18:9 Math
+.                → stdlib/math.test.tsx 18:13 .
+min              → stdlib/math.test.tsx 18:14 min
+(                → stdlib/math.test.tsx 18:17 (
+3                → stdlib/math.test.tsx 18:18 3
+,                → stdlib/math.test.tsx 18:19 , 
+1                → stdlib/math.test.tsx 18:21 1
+,                → stdlib/math.test.tsx 18:22 , 
+2                → stdlib/math.test.tsx 18:24 2
+)                → stdlib/math.test.tsx 18:25 )
+ +               → stdlib/math.test.tsx 18:26  + 
+","              → stdlib/math.test.tsx 18:29 ","
+ +               → stdlib/math.test.tsx 18:32  + 
+Math             → stdlib/math.test.tsx 18:35 Math
+.                → stdlib/math.test.tsx 18:39 .
+max              → stdlib/math.test.tsx 18:40 max
+(                → stdlib/math.test.tsx 18:43 (
+3                → stdlib/math.test.tsx 18:44 3
+,                → stdlib/math.test.tsx 18:45 , 
+1                → stdlib/math.test.tsx 18:47 1
+,                → stdlib/math.test.tsx 18:48 , 
+2                → stdlib/math.test.tsx 18:50 2
+)                → stdlib/math.test.tsx 18:51 )
+ +               → stdlib/math.test.tsx 18:52  + 
+","              → stdlib/math.test.tsx 18:55 ","
+ +               → stdlib/math.test.tsx 18:58  + 
+Math             → stdlib/math.test.tsx 18:61 Math
+.                → stdlib/math.test.tsx 18:65 .
+abs              → stdlib/math.test.tsx 18:66 abs
+(                → stdlib/math.test.tsx 18:69 (
+-                → stdlib/math.test.tsx 18:70 -
+4                → stdlib/math.test.tsx 18:71 4
+)                → stdlib/math.test.tsx 18:72 )
+;                → stdlib/math.test.tsx 18:73 ;
+return           → stdlib/math.test.tsx 19:7 return 
+rounded          → stdlib/math.test.tsx 20:9 rounded
+ +               → stdlib/math.test.tsx 20:16  +…
+"|"              → stdlib/math.test.tsx 21:9 "|"
+ +               → stdlib/math.test.tsx 21:12  +…
+edges            → stdlib/math.test.tsx 22:9 edges
+ +               → stdlib/math.test.tsx 22:14  +…
+"|"              → stdlib/math.test.tsx 23:9 "|"
+ +               → stdlib/math.test.tsx 23:12  +…
+picks            → stdlib/math.test.tsx 24:9 picks
+ +               → stdlib/math.test.tsx 24:14  +…
+"|"              → stdlib/math.test.tsx 25:9 "|"
+ +               → stdlib/math.test.tsx 25:12  +…
+Math             → stdlib/math.test.tsx 26:9 Math
+.                → stdlib/math.test.tsx 26:13 .
+sqrt             → stdlib/math.test.tsx 26:14 sqrt
+(                → stdlib/math.test.tsx 26:18 (
+9                → stdlib/math.test.tsx 26:19 9
+)                → stdlib/math.test.tsx 26:20 )
+ +               → stdlib/math.test.tsx 26:21  +…
+","              → stdlib/math.test.tsx 27:9 ","
+ +               → stdlib/math.test.tsx 27:12  +…
+Math             → stdlib/math.test.tsx 28:9 Math
+.                → stdlib/math.test.tsx 28:13 .
+sign             → stdlib/math.test.tsx 28:14 sign
+(                → stdlib/math.test.tsx 28:18 (
+-                → stdlib/math.test.tsx 28:19 -
+8                → stdlib/math.test.tsx 28:20 8
+)                → stdlib/math.test.tsx 28:21 )
+ +               → stdlib/math.test.tsx 28:22  +…
+","              → stdlib/math.test.tsx 29:9 ","
+ +               → stdlib/math.test.tsx 29:12  +…
+Math             → stdlib/math.test.tsx 30:9 Math
+.                → stdlib/math.test.tsx 30:13 .
+fround           → stdlib/math.test.tsx 30:14 fround
+(                → stdlib/math.test.tsx 30:20 (
+1.5              → stdlib/math.test.tsx 30:21 1.5
+)                → stdlib/math.test.tsx 30:24 )
+ +               → stdlib/math.test.tsx 30:25  +…
+"|"              → stdlib/math.test.tsx 31:9 "|"
+ + (             → stdlib/math.test.tsx 31:12  +…
+Math             → stdlib/math.test.tsx 32:10 Math
+.                → stdlib/math.test.tsx 32:14 .
+PI               → stdlib/math.test.tsx 32:15 PI
+ >               → stdlib/math.test.tsx 32:17  > 
+3.14             → stdlib/math.test.tsx 32:20 3.14
+)                → stdlib/math.test.tsx 32:24 )
+ +               → stdlib/math.test.tsx 32:25  +…
+","              → stdlib/math.test.tsx 33:9 ","
+ + (             → stdlib/math.test.tsx 33:12  +…
+Math             → stdlib/math.test.tsx 34:10 Math
+.                → stdlib/math.test.tsx 34:14 .
+E                → stdlib/math.test.tsx 34:15 E
+ >               → stdlib/math.test.tsx 34:16  > 
+2.71             → stdlib/math.test.tsx 34:19 2.71
+)                → stdlib/math.test.tsx 34:23 )
+;                → stdlib/math.test.tsx 34:24 …
+}                → stdlib/math.test.tsx 36:5 }
+;                → stdlib/math.test.tsx 36:6 `,…
+export default   → stdlib/math.test.tsx 36:6 `,…

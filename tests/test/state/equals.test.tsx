@@ -26,7 +26,7 @@ describe("equals", () => {
   it("keeps a memo's readers from updating for an equal value", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const n = $createSignal(1);
           const size = $createMemo(
             () => ({ isBig: n[0]() > 2, n: n[0]() }),
@@ -60,7 +60,7 @@ describe("equals", () => {
   it("keeps a signal's readers from updating for an equal value", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const point = $createSignal(
             { x: 1 },
             { equals: (previous, next) => previous.x === next.x },
@@ -87,7 +87,7 @@ describe("equals", () => {
   it("is handed the previous and the next value", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const n = $createSignal(1, {
             equals: (previous, next) => {
               window.console.log(previous, next);
@@ -106,7 +106,7 @@ describe("equals", () => {
   it("is `===` when left out, so the same number doesn't update", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const n = $createSignal(1);
           const label = () => {
             window.console.log();
@@ -128,7 +128,7 @@ describe("equals", () => {
   it("is `===` when left out, so a new object always updates", async () => {
     render(
       await draw(
-        cs`{
+        cs`() => {
           const point = $createSignal({ x: 1 });
           const label = () => {
             window.console.log();

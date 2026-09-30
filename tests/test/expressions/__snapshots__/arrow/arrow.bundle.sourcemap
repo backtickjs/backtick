@@ -1,21 +1,22 @@
-(        → expressions/arrow.test.tsx 9:8 {…
-) => {   → expressions/arrow.test.tsx 9:8 {…
-const    → expressions/arrow.test.tsx 10:7 const 
-base     → expressions/arrow.test.tsx 10:13 base
- =       → expressions/arrow.test.tsx 10:17  = 
-10       → expressions/arrow.test.tsx 10:20 10
-;        → expressions/arrow.test.tsx 10:22 ;
-return   → expressions/arrow.test.tsx 11:7 return 
-(        → expressions/arrow.test.tsx 11:14 (
-one      → expressions/arrow.test.tsx 11:15 one
-,        → expressions/arrow.test.tsx 11:26 , 
-two      → expressions/arrow.test.tsx 11:28 two
-) =>     → expressions/arrow.test.tsx 11:39 ) => 
-one      → expressions/arrow.test.tsx 11:44 one
- +       → expressions/arrow.test.tsx 11:47  + 
-two      → expressions/arrow.test.tsx 11:50 two
- +       → expressions/arrow.test.tsx 11:53  + 
-base     → expressions/arrow.test.tsx 11:56 base
-;        → expressions/arrow.test.tsx 11:60 ;
-}        → expressions/arrow.test.tsx 12:5 }
-;        → expressions/arrow.test.tsx 12:6 `,…
+(                → expressions/arrow.test.tsx 9:8 {…
+) => {           → expressions/arrow.test.tsx 9:8 {…
+const            → expressions/arrow.test.tsx 10:7 const 
+base             → expressions/arrow.test.tsx 10:13 base
+ =               → expressions/arrow.test.tsx 10:17  = 
+10               → expressions/arrow.test.tsx 10:20 10
+;                → expressions/arrow.test.tsx 10:22 ;
+return           → expressions/arrow.test.tsx 11:7 return 
+(                → expressions/arrow.test.tsx 11:14 (
+one              → expressions/arrow.test.tsx 11:15 one
+,                → expressions/arrow.test.tsx 11:26 , 
+two              → expressions/arrow.test.tsx 11:28 two
+) =>             → expressions/arrow.test.tsx 11:39 ) => 
+one              → expressions/arrow.test.tsx 11:44 one
+ +               → expressions/arrow.test.tsx 11:47  + 
+two              → expressions/arrow.test.tsx 11:50 two
+ +               → expressions/arrow.test.tsx 11:53  + 
+base             → expressions/arrow.test.tsx 11:56 base
+;                → expressions/arrow.test.tsx 11:60 ;
+}                → expressions/arrow.test.tsx 12:5 }
+;                → expressions/arrow.test.tsx 12:6 `,…
+export default   → expressions/arrow.test.tsx 12:6 `,…

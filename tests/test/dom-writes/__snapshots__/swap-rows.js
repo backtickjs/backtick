@@ -12,7 +12,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs.create(
-    "kc1nnw6emwe5:14:9",
+    "1enzxk1360g2b:14:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -24,7 +24,7 @@ async function SwappableRows() {
   );
 }
 it("a swap moves the two rows it swapped", async () => {
-  const { container } = render(await draw(_jsx(SwappableRows, {})));
+  const { container } = render(await draw(() => _jsx(SwappableRows, {})));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "swap" }));
   // Each move is the row leaving where it was and arriving where it goes.

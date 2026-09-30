@@ -4,4 +4,4 @@ const $cs0 = () => (ready, count) => {
   }
   return !(count > 3) ? "room left" : "full";
 };
-export default () => $cs0();
+export default $cs0();

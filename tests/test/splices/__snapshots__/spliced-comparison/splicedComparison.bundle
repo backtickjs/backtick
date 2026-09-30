@@ -4,8 +4,7 @@ const $cs0 = ($splice0, $splice1) => ({
   over: $splice1() > $splice0(),
   between: $splice0() < $splice1() && $splice1() > $splice0(),
 });
-export default () =>
-  $cs0(
-    () => 3,
-    () => 9,
-  );
+export default $cs0(
+  () => 3,
+  () => 9,
+);

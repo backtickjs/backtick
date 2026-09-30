@@ -12,7 +12,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.create(
-    "19w4etifwrxt:15:9",
+    "7yuibq3v1he7:15:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -24,7 +24,7 @@ async function Labels() {
   );
 }
 it("a label written changes that label's text and nothing else", async () => {
-  const { container } = render(await draw(_jsx(Labels, {})));
+  const { container } = render(await draw(() => _jsx(Labels, {})));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "update" }));
   assert.deepEqual(written(), [

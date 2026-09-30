@@ -6,4 +6,4 @@ const $cs0 = () => {
   const twice = [...all, ...all];
   return all.join(",") + "|" + twice.length;
 };
-export default () => $cs0();
+export default $cs0();

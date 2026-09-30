@@ -7,4 +7,4 @@ const $cs0 = () => {
   }
   return seen;
 };
-export default () => $cs0();
+export default $cs0();

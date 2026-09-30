@@ -55,4 +55,4 @@ const $expn0 = () => ($arg0) =>
     _$insert(_el$4, () => $arg0.title);
     return _el$4;
   })();
-export default () => $cs0($expn0());
+export default $cs0($expn0());

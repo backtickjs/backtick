@@ -1,65 +1,66 @@
-(            → stdlib/object-entries.test.tsx 11:8 {…
-) => {       → stdlib/object-entries.test.tsx 11:8 {…
-const        → stdlib/object-entries.test.tsx 12:7 const 
-held         → stdlib/object-entries.test.tsx 12:13 held
- =           → stdlib/object-entries.test.tsx 12:17  = 
-{            → stdlib/object-entries.test.tsx 12:20 {
-n            → stdlib/object-entries.test.tsx 12:22 n
-:            → stdlib/object-entries.test.tsx 12:23 : 
-1            → stdlib/object-entries.test.tsx 12:25 1
-,            → stdlib/object-entries.test.tsx 12:26 ,
-q            → stdlib/object-entries.test.tsx 12:28 q
-:            → stdlib/object-entries.test.tsx 12:29 : 
-"ada"        → stdlib/object-entries.test.tsx 12:31 "ada"
-}            → stdlib/object-entries.test.tsx 12:36  };…
-;            → stdlib/object-entries.test.tsx 12:38 ;
-const        → stdlib/object-entries.test.tsx 13:7 const 
-written      → stdlib/object-entries.test.tsx 13:13 written
- =           → stdlib/object-entries.test.tsx 13:20  = 
-Object       → stdlib/object-entries.test.tsx 13:23 Object
-.            → stdlib/object-entries.test.tsx 13:29 .
-fromEntries  → stdlib/object-entries.test.tsx 13:30 fromEntries
-(            → stdlib/object-entries.test.tsx 13:41 (
-Object       → stdlib/object-entries.test.tsx 14:9 Object
-.            → stdlib/object-entries.test.tsx 14:15 .
-entries      → stdlib/object-entries.test.tsx 14:16 entries
-(            → stdlib/object-entries.test.tsx 14:23 (
-held         → stdlib/object-entries.test.tsx 14:24 held
-)            → stdlib/object-entries.test.tsx 14:28 )
-.            → stdlib/object-entries.test.tsx 14:29 .
-map          → stdlib/object-entries.test.tsx 14:30 map
-(            → stdlib/object-entries.test.tsx 14:33 (
-pair         → stdlib/object-entries.test.tsx 14:35 pair
- =>          → stdlib/object-entries.test.tsx 14:39 )…
-[            → stdlib/object-entries.test.tsx 14:44 [
-pair         → stdlib/object-entries.test.tsx 14:45 pair
-[            → stdlib/object-entries.test.tsx 14:49 [
-0            → stdlib/object-entries.test.tsx 14:50 0
-]            → stdlib/object-entries.test.tsx 14:51 ]
-,            → stdlib/object-entries.test.tsx 14:52 , 
-JSON         → stdlib/object-entries.test.tsx 14:54 JSON
-.            → stdlib/object-entries.test.tsx 14:58 .
-stringify    → stdlib/object-entries.test.tsx 14:59 stringify
-(            → stdlib/object-entries.test.tsx 14:68 (
-pair         → stdlib/object-entries.test.tsx 14:69 pair
-[            → stdlib/object-entries.test.tsx 14:73 [
-1            → stdlib/object-entries.test.tsx 14:74 1
-]            → stdlib/object-entries.test.tsx 14:75 ]
-)            → stdlib/object-entries.test.tsx 14:76 )
-]            → stdlib/object-entries.test.tsx 14:77 ]
-)            → stdlib/object-entries.test.tsx 14:78 )
-)            → stdlib/object-entries.test.tsx 14:79 ,…
-;            → stdlib/object-entries.test.tsx 15:8 ;
-return       → stdlib/object-entries.test.tsx 16:7 return 
-written      → stdlib/object-entries.test.tsx 16:14 written
-.            → stdlib/object-entries.test.tsx 16:21 .
-n            → stdlib/object-entries.test.tsx 16:22 n
- +           → stdlib/object-entries.test.tsx 16:23  + 
-" "          → stdlib/object-entries.test.tsx 16:26 " "
- +           → stdlib/object-entries.test.tsx 16:29  + 
-written      → stdlib/object-entries.test.tsx 16:32 written
-.            → stdlib/object-entries.test.tsx 16:39 .
-q            → stdlib/object-entries.test.tsx 16:40 q
-;            → stdlib/object-entries.test.tsx 16:41 ;
-}            → stdlib/object-entries.test.tsx 17:5 }
-;            → stdlib/object-entries.test.tsx 17:6 `,…
+(                → stdlib/object-entries.test.tsx 11:8 {…
+) => {           → stdlib/object-entries.test.tsx 11:8 {…
+const            → stdlib/object-entries.test.tsx 12:7 const 
+held             → stdlib/object-entries.test.tsx 12:13 held
+ =               → stdlib/object-entries.test.tsx 12:17  = 
+{                → stdlib/object-entries.test.tsx 12:20 {
+n                → stdlib/object-entries.test.tsx 12:22 n
+:                → stdlib/object-entries.test.tsx 12:23 : 
+1                → stdlib/object-entries.test.tsx 12:25 1
+,                → stdlib/object-entries.test.tsx 12:26 ,
+q                → stdlib/object-entries.test.tsx 12:28 q
+:                → stdlib/object-entries.test.tsx 12:29 : 
+"ada"            → stdlib/object-entries.test.tsx 12:31 "ada"
+}                → stdlib/object-entries.test.tsx 12:36  };…
+;                → stdlib/object-entries.test.tsx 12:38 ;
+const            → stdlib/object-entries.test.tsx 13:7 const 
+written          → stdlib/object-entries.test.tsx 13:13 written
+ =               → stdlib/object-entries.test.tsx 13:20  = 
+Object           → stdlib/object-entries.test.tsx 13:23 Object
+.                → stdlib/object-entries.test.tsx 13:29 .
+fromEntries      → stdlib/object-entries.test.tsx 13:30 fromEntries
+(                → stdlib/object-entries.test.tsx 13:41 (
+Object           → stdlib/object-entries.test.tsx 14:9 Object
+.                → stdlib/object-entries.test.tsx 14:15 .
+entries          → stdlib/object-entries.test.tsx 14:16 entries
+(                → stdlib/object-entries.test.tsx 14:23 (
+held             → stdlib/object-entries.test.tsx 14:24 held
+)                → stdlib/object-entries.test.tsx 14:28 )
+.                → stdlib/object-entries.test.tsx 14:29 .
+map              → stdlib/object-entries.test.tsx 14:30 map
+(                → stdlib/object-entries.test.tsx 14:33 (
+pair             → stdlib/object-entries.test.tsx 14:35 pair
+ =>              → stdlib/object-entries.test.tsx 14:39 )…
+[                → stdlib/object-entries.test.tsx 14:44 [
+pair             → stdlib/object-entries.test.tsx 14:45 pair
+[                → stdlib/object-entries.test.tsx 14:49 [
+0                → stdlib/object-entries.test.tsx 14:50 0
+]                → stdlib/object-entries.test.tsx 14:51 ]
+,                → stdlib/object-entries.test.tsx 14:52 , 
+JSON             → stdlib/object-entries.test.tsx 14:54 JSON
+.                → stdlib/object-entries.test.tsx 14:58 .
+stringify        → stdlib/object-entries.test.tsx 14:59 stringify
+(                → stdlib/object-entries.test.tsx 14:68 (
+pair             → stdlib/object-entries.test.tsx 14:69 pair
+[                → stdlib/object-entries.test.tsx 14:73 [
+1                → stdlib/object-entries.test.tsx 14:74 1
+]                → stdlib/object-entries.test.tsx 14:75 ]
+)                → stdlib/object-entries.test.tsx 14:76 )
+]                → stdlib/object-entries.test.tsx 14:77 ]
+)                → stdlib/object-entries.test.tsx 14:78 )
+)                → stdlib/object-entries.test.tsx 14:79 ,…
+;                → stdlib/object-entries.test.tsx 15:8 ;
+return           → stdlib/object-entries.test.tsx 16:7 return 
+written          → stdlib/object-entries.test.tsx 16:14 written
+.                → stdlib/object-entries.test.tsx 16:21 .
+n                → stdlib/object-entries.test.tsx 16:22 n
+ +               → stdlib/object-entries.test.tsx 16:23  + 
+" "              → stdlib/object-entries.test.tsx 16:26 " "
+ +               → stdlib/object-entries.test.tsx 16:29  + 
+written          → stdlib/object-entries.test.tsx 16:32 written
+.                → stdlib/object-entries.test.tsx 16:39 .
+q                → stdlib/object-entries.test.tsx 16:40 q
+;                → stdlib/object-entries.test.tsx 16:41 ;
+}                → stdlib/object-entries.test.tsx 17:5 }
+;                → stdlib/object-entries.test.tsx 17:6 `,…
+export default   → stdlib/object-entries.test.tsx 17:6 `,…

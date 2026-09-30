@@ -24,22 +24,22 @@ async function draw(page) {
 }
 describe("renderToString", () => {
   it("writes a container and one module script", async () => {
-    assert.match(await renderToString(scriptCloseText), PAGE);
+    assert.match(await renderToString(() => scriptCloseText), PAGE);
   });
   it("writes no `<` its script's parser could read", async () => {
-    const [, , script] = PAGE.exec(await renderToString(scriptCloseText));
+    const [, , script] = PAGE.exec(await renderToString(() => scriptCloseText));
     assert.ok(!script.includes("<"));
   });
   it("draws the text as written, where it stands", async () => {
-    const container = await draw(await renderToString(scriptCloseText));
+    const container = await draw(await renderToString(() => scriptCloseText));
     assert.equal(container.querySelector("p")?.textContent, text);
   });
   it("draws each bundle into its own container", async () => {
     const first = await draw(
-      await renderToString(_jsx("p", { children: "first" })),
+      await renderToString(() => _jsx("p", { children: "first" })),
     );
     const second = await draw(
-      await renderToString(_jsx("p", { children: "second" })),
+      await renderToString(() => _jsx("p", { children: "second" })),
     );
     assert.equal(first.textContent, "first");
     assert.equal(second.textContent, "second");
