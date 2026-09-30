@@ -2,7 +2,7 @@ import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js";
 import { solid } from "@backtickjs/solid-js/plugin";
-import { importMap } from "@backtickjs/solid-js/server";
+import { importMap } from "@backtickjs/solid-js/import-map";
 import { Main } from "./Main.js";
 
 // Solid from a CDN, at the version the adapter is typed against.

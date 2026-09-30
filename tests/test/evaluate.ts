@@ -1,7 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import type { Client, Spliceable, Spliced } from "@backtickjs/core";
 import { solid } from "@backtickjs/solid-js/plugin";
-import { importMap } from "@backtickjs/solid-js/server";
+import { importMap } from "@backtickjs/solid-js/import-map";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { JSX as Solid } from "solid-js";
 

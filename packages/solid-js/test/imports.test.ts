@@ -5,7 +5,7 @@ import { bundler } from "@backtickjs/bundler";
 import { createJsxElement, isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
 import * as vocabulary from "../dist/index.js";
-import { importMap } from "../dist/importMap.js";
+import { importMap } from "../dist/import-map.js";
 import ts from "typescript";
 
 // The import map with the installed package as its URL, so each entry

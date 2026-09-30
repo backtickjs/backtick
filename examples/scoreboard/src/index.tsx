@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js";
 import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { importMap } from "@backtickjs/solid-js/server";
+import { importMap } from "@backtickjs/solid-js/import-map";
 import { Scoreboard } from "./Scoreboard.js";
 import { load, SLATE_PATH } from "./scores.js";
 
