@@ -14,6 +14,10 @@ export type Spliceable =
   | string
   | readonly Spliceable[]
   | { readonly [key: string]: Spliceable }
+  // A host function, spliced to be used as a component (or a callback that
+  // draws): expanded once per bundle against a hole per parameter, so it
+  // arranges what the client will pass but can't compute with it. For
+  // anything else, write a client function instead: cs`(n: number) => …`.
   | ((...args: never[]) => Spliceable);
 
 // What a spliceable becomes on the client:

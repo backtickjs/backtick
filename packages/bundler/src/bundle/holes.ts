@@ -46,8 +46,9 @@ export function createHole(
         if (property === Symbol.toPrimitive) {
           throw new Error(
             `Can't compute with \`${name}\` on the host: it stands for a ` +
-              "value only the client has. Compute with it inside a script " +
-              "(cs`...`) instead.",
+              "value only the client has. A host function spliced into a " +
+              "script only arranges what the client passes; write this one " +
+              "as a client function instead (cs`(...) => ...`).",
           );
         }
         return createHole(param, [...path, String(property)]);
