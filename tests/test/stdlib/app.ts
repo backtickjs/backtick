@@ -2,4 +2,6 @@
 export const greet = (): string => "hello";
 
 const held: Record<string, string> = { greeting: "hei" };
-export const storage = { get: (key: string): string | null => held[key] ?? null };
+export const storage = {
+  get: (key: string): string | null => held[key] ?? null,
+};

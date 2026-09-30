@@ -61,7 +61,9 @@ describe("importMap", () => {
       "solid-js/store",
     ]);
     const versions = new Set(
-      Object.values(imports).map((url) => /solid-js@([^/]+)/.exec(url as string)![1]),
+      Object.values(imports).map(
+        (url) => /solid-js@([^/]+)/.exec(url as string)![1],
+      ),
     );
     assert.equal(versions.size, 1);
   });

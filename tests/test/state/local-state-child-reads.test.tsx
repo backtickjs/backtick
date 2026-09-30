@@ -25,9 +25,7 @@ const ReadingRow = async ({
   selected: Client<Signal<number>>;
 }) => (
   <div>
-    <span
-      style={cs`"font-size: " + ($selected[0]() === $id ? 20 : 16) + "px"`}
-    >
+    <span style={cs`"font-size: " + ($selected[0]() === $id ? 20 : 16) + "px"`}>
       {cs`"row " + $id + " of " + $selected[0]()`}
     </span>
     {cs`$selected[0]() === $id ? ${(<span>marker</span>)} : null`}

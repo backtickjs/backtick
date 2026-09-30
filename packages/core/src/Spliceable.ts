@@ -56,7 +56,9 @@ export type Spliced<T> = [AnySpliceable] extends [T]
   : T extends Client<infer U>
     ? U
     : T extends (...args: infer Args) => infer Returned
-      ? (...args: { [Key in keyof Args]: Spliced<Args[Key]> }) => Spliced<Returned>
+      ? (
+          ...args: { [Key in keyof Args]: Spliced<Args[Key]> }
+        ) => Spliced<Returned>
       : T extends readonly (infer Item extends Spliceable)[]
         ? Spliced<Item>[]
         : T extends { readonly [key: string]: Spliceable }

@@ -39,10 +39,7 @@ export type GlobalThis = {
 // `globalThis`, which a name the script didn't bind is read off. In the type and
 // not in the object: nothing runs the virtual code they are written in.
 export const cs = Object.assign(
-  (
-    _strings: TemplateStringsArray,
-    ..._values: unknown[]
-  ): Client<unknown> => {
+  (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
     throw new Error(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );

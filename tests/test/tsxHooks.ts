@@ -24,12 +24,7 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   const fileName = relative(testsRoot, path);
   return {
     format: "module",
-    source: transpile(
-      ts,
-      fileName,
-      sourceText,
-      "@backtickjs/solid-js",
-    ),
+    source: transpile(ts, fileName, sourceText, "@backtickjs/solid-js"),
     shortCircuit: true,
   };
 };

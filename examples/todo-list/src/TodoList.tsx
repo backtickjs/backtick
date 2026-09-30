@@ -40,12 +40,11 @@ export async function TodoList() {
     // task's place in what is shown is not its place in \`tasks\`.
     const onPress = (label: string) => {
       tasks[1](
-        tasks[0]()
-          .map((task) =>
-            task.label === label
-              ? { label: task.label, isDone: !task.isDone }
-              : task,
-          ),
+        tasks[0]().map((task) =>
+          task.label === label
+            ? { label: task.label, isDone: !task.isDone }
+            : task,
+        ),
       );
     };
 

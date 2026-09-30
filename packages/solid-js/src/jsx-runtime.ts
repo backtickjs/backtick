@@ -59,10 +59,7 @@ export declare namespace JSX {
   }
 }
 
-export function jsx(
-  type: JSX.ElementType,
-  props: { [key: string]: unknown },
-): JSX.Element {
+export function jsx(type: JSX.ElementType, props: unknown): JSX.Element {
   return createJsxElement(type, props);
 }
 

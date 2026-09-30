@@ -15,7 +15,7 @@ export type JsxElementType = string | ((props: never) => unknown);
 export interface JsxElement extends BacktickElement {
   readonly "@backtickjs": "JsxElement";
   readonly type: JsxElementType;
-  readonly props: { [key: string]: unknown };
+  readonly props: unknown;
 }
 
 export function isJsxElement(value: unknown): value is JsxElement {
@@ -29,7 +29,7 @@ export function isJsxElement(value: unknown): value is JsxElement {
 
 export function createJsxElement(
   type: JsxElementType,
-  props: { [key: string]: unknown },
+  props: unknown,
 ): JsxElement {
-  return { "@backtickjs": "JsxElement", type, props } as unknown as JsxElement;
+  return { "@backtickjs": "JsxElement", type, props } as JsxElement;
 }
