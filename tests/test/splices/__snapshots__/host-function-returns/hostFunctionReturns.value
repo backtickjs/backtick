@@ -1,0 +1,20 @@
+{
+  "none": null,
+  "missing": undefined,
+  "number": 1,
+  "boolean": true,
+  "string": "text",
+  "array": [
+    3,
+    2
+  ],
+  "object": {
+    "value": 4,
+    "label": "n"
+  },
+  "script": 6,
+  "called": 49,
+  "element": <b>
+    {"8"}
+  </b>
+}

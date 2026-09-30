@@ -14,13 +14,13 @@ export type Spliceable =
   | string
   | readonly Spliceable[]
   | { readonly [key: string]: Spliceable }
-  | ((...args: Client<never>[]) => Client<unknown>);
+  | ((...args: Client<never>[]) => Spliceable);
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
-//   (Client<A>) => Client<R>  -> (A) => R
+//   (Client<A>) => R          -> (A) => Spliced<R>
 //   primitives                -> unchanged
 export type Spliced<T> = [Spliceable] extends [T]
   ? unknown

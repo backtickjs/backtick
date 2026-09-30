@@ -1,0 +1,203 @@
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(n)                               → $n
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ +                                →  + 
+1                                 → 1
+)                                 → `
+cs.lift(                          → cs`
+cs.splice(                        →  [-semantic]
+(n)                               → $n
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+ *                                →  * 
+cs.splice(                        →  [-semantic]
+(m)                               → $m
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+)                                 → `
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_none                         → none
+:                                 → : 
+null                              → null
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsNull)                     → $returnsNull
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_missing                      → missing
+:                                 → : 
+undefined                         → undefined
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsUndefined)                → $returnsUndefined
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_number                       → number
+:                                 → : 
+number                            → number
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsNumber)                   → $returnsNumber
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_boolean                      → boolean
+:                                 → : 
+boolean                           → boolean
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsBoolean)                  → $returnsBoolean
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_string                       → string
+:                                 → : 
+string                            → string
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsString)                   → $returnsString
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+1                                 → 1
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_array                        → array
+:                                 → : 
+number                            → number
+[]                                → []
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsArray)                    → $returnsArray
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+3                                 → 3
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_object                       → object
+:                                 → : 
+{\n                               → { 
+value                             → value
+:                                 → : 
+number                            → number
+;                                 → ;
+\n                                →  
+label                             → label
+:                                 → : 
+string                            → string
+;                                 → 
+\n    }                           →  }
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsObject)                   → $returnsObject
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+4                                 → 4
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_script                       → script
+:                                 → : 
+number                            → number
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsScript)                   → $returnsScript
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+5                                 → 5
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_called                       → called
+:                                 → : 
+number                            → number
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsFunction)                 → $returnsFunction
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+6                                 → 6
+)                                 → )
+(                                 → (
+7                                 → 7
+)                                 → )
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_element                      → element
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(returnsElement)                  → $returnsElement
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+(                                 → (
+8                                 → 8
+)                                 → )
+;                                 → ;
+\n                                → \n      
+return                            → return 
+{                                 → {\n        
+none                              → none
+:                                 → : 
+__cs_none                         → none
+,                                 → ,\n        
+missing                           → missing
+:                                 → : 
+__cs_missing                      → missing
+,                                 → ,\n        
+number                            → number
+:                                 → : 
+__cs_number                       → number
+,                                 → ,\n        
+boolean                           → boolean
+:                                 → : 
+__cs_boolean                      → boolean
+,                                 → ,\n        
+string                            → string
+:                                 → : 
+__cs_string                       → string
+,                                 → ,\n        
+array                             → array
+:                                 → : 
+__cs_array                        → array
+,                                 → ,\n        
+object                            → object
+:                                 → : 
+__cs_object                       → object
+,                                 → ,\n        
+script                            → script
+:                                 → : 
+__cs_script                       → script
+,                                 → ,\n        
+called                            → called
+:                                 → : 
+__cs_called                       → called
+,                                 → ,\n        
+element                           → element
+:                                 → : 
+__cs_element                      → element
+ }                                → ,\n      }
+;                                 → ;
+\n})())                           → \n    }`
