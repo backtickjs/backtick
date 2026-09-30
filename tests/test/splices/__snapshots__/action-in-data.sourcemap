@@ -1,0 +1,40 @@
+cs.lift((() => {\n                → cs`{\n  
+const                             → const 
+__cs_x                            → x
+ =                                →  = 
+1                                 → 1
+;                                 → ;
+\n})())                           → \n}`
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_list                         → list
+ =                                →  = 
+cs.splice(                        → ${ [-semantic]
+[action]                          → [action]
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+;                                 → ;
+\n                                → \n      
+const                             → const 
+__cs_map                          → map
+ =                                →  = 
+cs.splice(                        → ${ [-semantic]
+{ press: action }                 → { press: action }
+ satisfies typeof cs.Spliceable)  → } [-semantic]
+;                                 → ;
+\n                                → \n      
+return                            → return 
+__cs_list                         → list
+.                                 → .
+length                            → length
+ +                                →  + 
+cs.globalThis.                    → 
+Object                            → Object
+.                                 → .
+keys                              → keys
+(                                 → (
+__cs_map                          → map
+)                                 → )
+.                                 → .
+length                            → length
+;                                 → ;
+\n})())                           → \n    }`

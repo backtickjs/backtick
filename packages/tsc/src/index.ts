@@ -33,7 +33,7 @@ export function run(tscPath = require.resolve("typescript/lib/tsc.js")) {
 
 // What this tool is for beyond checking: a package that exports a client script
 // gets a declaration carrying the script's real type. Plain `tsc` types
-// `cs`...`` by the tag's own signature, `Client<ClientUnknown>`, because the
+// `cs`...`` by the tag's own signature, `Client<unknown>`, because the
 // precise type lives in the virtual code — which is what this program checks,
 // and so what this program can write down.
 //

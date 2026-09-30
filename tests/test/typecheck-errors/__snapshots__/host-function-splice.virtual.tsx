@@ -1,8 +1,8 @@
 import { cs } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
-// A host function is not spliceable (see `Spliceable`): only a tag may name
-// one, as a component. Client behaviour is `cs`.
+// A host function splices only if it takes and answers with scripts (see
+// `Spliceable`); one taking props is named by a tag, as a component.
 function Card(props: { readonly title: Prop<string> }) {
   return <h2>{props.title}</h2>;
 }

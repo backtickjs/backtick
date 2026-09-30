@@ -1,0 +1,36 @@
+// 7:16
+() => {  → 7:19 {…
+const    → 8:3 const 
+x        → 8:9 x
+ =       → 8:10  = 
+1        → 8:13 1
+;        → 8:14 ;
+}        → 9:1 }
+
+// 15:5
+($splice0, $splice1) => {  → 15:8 {…
+const                      → 16:7 const 
+list                       → 16:13 list
+ =                         → 16:17  = 
+$splice0()                 → 16:20 ${[action]};…
+;                          → 16:21 {[action]};…
+const                      → 17:7 const 
+map                        → 17:13 map
+ =                         → 17:16  = 
+$splice1()                 → 17:19 ${{…
+;                          → 17:20 {{…
+return                     → 18:7 return 
+list                       → 18:14 list
+.                          → 18:18 .
+length                     → 18:19 length
+ +                         → 18:25  + 
+Object                     → 18:28 Object
+.                          → 18:34 .
+keys                       → 18:35 keys
+(                          → 18:39 (
+map                        → 18:40 map
+)                          → 18:43 )
+.                          → 18:44 .
+length                     → 18:45 length
+;                          → 18:51 ;
+}                          → 19:5 }

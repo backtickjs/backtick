@@ -22,3 +22,16 @@ list satisfies number[];
 // Plain data crosses unchanged.
 spliced("host label") satisfies string;
 spliced([1, [true, null]]) satisfies (number | (boolean | null)[])[];
+
+// A host function taking and answering with scripts becomes the client
+// function it stands for.
+declare const double: (n: Client<number>) => Client<number>;
+spliced(double)(1) satisfies number;
+
+// One taking host data is not client code.
+// @ts-expect-error: a host function's parameters must be scripts.
+spliced((n: number) => clientNumber);
+
+// An action is a script like any other, in data too.
+declare const action: Client<void>;
+spliced([action]);

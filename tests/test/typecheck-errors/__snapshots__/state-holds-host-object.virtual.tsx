@@ -10,7 +10,7 @@ import { createSignal } from "@backtickjs/solid-js";
 // lands in would take it, and the bundle would be the first to say no.
 //
 // What says no here is the splice itself: what it answers with is checked
-// against `ClientUnknown`, which a `Date` is not.
+// against `Spliceable`, which a `Date` is not.
 const host = new Date();
 
 export default cs.lift((() => {

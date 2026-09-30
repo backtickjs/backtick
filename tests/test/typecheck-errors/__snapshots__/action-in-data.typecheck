@@ -1,8 +1,0 @@
-11:19 error TS2322: Type 'Client<void>' is not assignable to type 'Spliceable<ClientValue>'.
-  Type 'Client<void>' is not assignable to type 'Client<ClientValue>'.
-    Type 'void' is not assignable to type 'ClientValue'.
-17:35 error TS1360: Type '{ press: Client<void>; }' does not satisfy the expected type 'Spliceable'.
-  Types of property 'press' are incompatible.
-    Type 'Client<void>' is not assignable to type 'Spliceable<ClientValue>'.
-      Type 'Client<void>' is not assignable to type 'Client<ClientValue>'.
-        Type 'void' is not assignable to type 'ClientValue'.

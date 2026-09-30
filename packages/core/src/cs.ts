@@ -1,6 +1,5 @@
 import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
-import type { ClientUnknown } from "./ClientUnknown.js";
 import type { Spliceable } from "./Spliceable.js";
 import type { Spliced } from "./Spliceable.js";
 
@@ -43,7 +42,7 @@ export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
     ..._values: unknown[]
-  ): Client<ClientUnknown> => {
+  ): Client<unknown> => {
     throw new Error(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );

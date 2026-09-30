@@ -1,6 +1,6 @@
 18:35 error TS1360: Type 'Date' does not satisfy the expected type 'Spliceable'.
-  Type 'Date' is not assignable to type '{ readonly [x: string]: Spliceable<ClientValue>; }'.
+  Type 'Date' is not assignable to type '{ readonly [key: string]: AnySpliceable; }'.
     Index signature for type 'string' is missing in type 'Date'.
 20:16 error TS1360: Type 'Date' does not satisfy the expected type 'Spliceable'.
-  Type 'Date' is not assignable to type '{ readonly [x: string]: Spliceable<ClientValue>; }'.
+  Type 'Date' is not assignable to type '{ readonly [key: string]: AnySpliceable; }'.
     Index signature for type 'string' is missing in type 'Date'.

@@ -1,0 +1,15 @@
+const $cs0 = ($splice0, $splice1) => {
+  const list = $splice0();
+  const map = $splice1();
+  return list.length + Object.keys(map).length;
+};
+const $cs1 = () => {
+  const x = 1;
+};
+export default () =>
+  $cs0(
+    () => [$cs1()],
+    () => ({
+      press: $cs1(),
+    }),
+  );

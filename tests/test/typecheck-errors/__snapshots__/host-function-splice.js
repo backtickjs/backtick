@@ -1,12 +1,12 @@
 import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { cs } from "@backtickjs/core";
-// A host function is not spliceable (see `Spliceable`): only a tag may name
-// one, as a component. Client behaviour is `cs`.
+// A host function splices only if it takes and answers with scripts (see
+// `Spliceable`); one taking props is named by a tag, as a component.
 function Card(props) {
   return _jsx("h2", { children: props.title });
 }
 export default cs.create(
-  "2d4xjbzbsm8no:10:15",
+  "3b4m4ikjy3s7h:10:15",
   {
     params: [
       { kind: "splice", value: Card, bindings: [] },

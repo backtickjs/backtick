@@ -1,1 +1,4 @@
 12:19 error TS1360: Type '(props: { readonly title: Prop<string>; }) => Element' does not satisfy the expected type 'Spliceable'.
+  Type '(props: { readonly title: Prop<string>; }) => Element' is not assignable to type 'HostFunction'.
+    Types of parameters 'props' and 'args' are incompatible.
+      Property 'title' is missing in type 'Client<never>' but required in type '{ readonly title: Prop<string>; }'.
