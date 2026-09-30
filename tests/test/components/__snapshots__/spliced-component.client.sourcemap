@@ -1,0 +1,16 @@
+// 17:5
+($splice0) => {  → 17:8 {…
+const            → 18:7 const 
+Heading          → 18:13 Heading
+ =               → 18:20  = 
+$splice0()       → 18:23 $Card;…
+;                → 18:28 ;
+return           → 19:7 return 
+<                → 19:14 <
+Heading          → 19:15 Heading
+title            → 19:23 title
+=                → 19:28 =
+"tag"            → 19:29 "tag"
+/>               → 19:34  />;…
+;                → 19:37 ;
+}                → 20:5 }

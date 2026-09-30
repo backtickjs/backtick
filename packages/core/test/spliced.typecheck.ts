@@ -28,9 +28,11 @@ spliced([1, [true, null]]) satisfies (number | (boolean | null)[])[];
 declare const double: (n: Client<number>) => Client<number>;
 spliced(double)(1) satisfies number;
 
-// One taking host data is not client code.
-// @ts-expect-error: a host function's parameters must be scripts.
-spliced((n: number) => clientNumber);
+// So does a component: its props become what each member is on the client.
+declare const card: (props: {
+  readonly title: Client<string> | string;
+}) => Client<number>;
+spliced(card)({ title: "a" }) satisfies number;
 
 // An action is a script like any other, in data too.
 declare const action: Client<void>;

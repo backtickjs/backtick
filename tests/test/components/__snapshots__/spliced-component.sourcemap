@@ -1,0 +1,20 @@
+cs.lift((() => {\n                → cs`{\n      
+const                             → const 
+__cs_Heading                      → Heading
+ =                                →  = 
+cs.splice(                        →  [-semantic]
+(Card)                            → $Card
+ satisfies typeof cs.Spliceable)  →  [-semantic]
+;                                 → ;
+\n                                → \n      
+return                            → return 
+<                                 → <
+__cs_Heading                      → Heading
+                                  →  
+title                             → title
+={                                → =
+"tag"                             → "tag"
+}                                 → 
+/>                                →  />
+;                                 → ;
+\n})())                           → \n    }`
