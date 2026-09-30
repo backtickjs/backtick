@@ -1,4 +1,4 @@
-import type { Client, Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
 import { createHole } from "./holes.js";
 
 // A host function, run against a hole per parameter: the parameter names, and
@@ -8,10 +8,12 @@ export interface Expansion {
   readonly returned: Spliceable;
 }
 
-// One expansion per function, ever: it only ever sees holes, so what it answers
-// with is a function of the function alone — however many calls name it, and
-// whichever arguments each of them writes.
-const expansionByFunction = new WeakMap<object, Promise<Expansion>>();
+// One expansion per function per bundle: it only ever sees holes, so within a
+// bundle what it answers with is a function of the function alone — however
+// many calls name it, and whichever arguments each of them writes. Not across
+// bundles: what its host code computes (a random number, the request's user)
+// is the bundle's, and the next bundle computes its own.
+export type FunctionExpansions = WeakMap<object, Promise<Expansion>>;
 
 /**
  * A spliced host function, expanded: run once against one opaque hole per
@@ -26,22 +28,25 @@ const expansionByFunction = new WeakMap<object, Promise<Expansion>>();
  * the holes are `$arg0.title` and the like, and the tag is a call.
  */
 export function expandFunction(
-  value: (...args: Client<never>[]) => unknown,
+  value: (...args: never[]) => unknown,
+  expansions: FunctionExpansions,
 ): Promise<Expansion> {
-  const shared = expansionByFunction.get(value);
+  const shared = expansions.get(value);
   if (shared) {
     return shared;
   }
   const expansion = buildExpansion(value);
-  expansionByFunction.set(value, expansion);
+  expansions.set(value, expansion);
   return expansion;
 }
 
 async function buildExpansion(
-  value: (...args: Client<never>[]) => unknown,
+  value: (...args: never[]) => unknown,
 ): Promise<Expansion> {
   const params = Array.from({ length: value.length }, (_, at) => `$arg${at}`);
   const holes = params.map(createHole);
-  const returned = value(...holes) as Spliceable | Promise<Spliceable>;
+  const returned = value(...(holes as never[])) as
+    | Spliceable
+    | Promise<Spliceable>;
   return { params, returned: await returned };
 }

@@ -4,10 +4,10 @@ import {
   isJsxElement,
   type JsxElement,
 } from "@backtickjs/core";
-import { type Client, isClientImport, type Spliceable } from "@backtickjs/core";
+import { isClientImport, type Spliceable } from "@backtickjs/core";
 
-import { expandFunction } from "./expandFunction.js";
-import { expandJsxElement } from "./expandJsxElement.js";
+import { expandFunction, type FunctionExpansions } from "./expandFunction.js";
+import { type ElementExpansions, expandJsxElement } from "./expandJsxElement.js";
 import { holeName } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
@@ -62,6 +62,8 @@ const RESERVED = ["arguments", "await", "eval", "yield"];
 // unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   const names = createNames();
+  const functionExpansions: FunctionExpansions = new WeakMap();
+  const elementExpansions: ElementExpansions = new WeakMap();
   // Each script's number, in the order rendering first reaches it. Two
   // scripts written at one source location are one declaration, so the first
   // script with an id stands for all of them, and a reference to a shared
@@ -231,9 +233,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     // written out as the arrow it is: its holes the parameters, and the call
     // the tag wrote binding them.
     if (typeof value === "function") {
-      const expansion = await expandFunction(
-        value as (...args: Client<never>[]) => unknown,
-      );
+      const expansion = await expandFunction(value, functionExpansions);
       return arrow(
         expansion.params,
         // The expansion's params extend the enclosing ones, like a nested
@@ -343,16 +343,18 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   ): Promise<string> => {
     const type = jsx.type;
     if (typeof type === "function" && !isClientImport(type)) {
-      const drawn = await expandJsxElement(jsx, type);
+      const expansion = await expandJsxElement(jsx, type, elementExpansions);
       // A script is what runs on the client; an element it drew instead has no
       // setup of its own to guard.
-      return isClientScript(drawn)
-        ? componentElement(names, await render(drawn, params))
-        : render(drawn, params);
+      return isClientScript(expansion)
+        ? componentElement(names, await render(expansion, params))
+        : render(expansion, params);
     }
     const written: [string, string][] = [];
     let children: string[] = [];
-    for (const [key, entry] of Object.entries(jsx.props)) {
+    // The adapter's JSX runtime hands over the props JSX wrote, an object.
+    const props = jsx.props as { readonly [key: string]: unknown };
+    for (const [key, entry] of Object.entries(props)) {
       if (entry === undefined) {
         continue;
       }

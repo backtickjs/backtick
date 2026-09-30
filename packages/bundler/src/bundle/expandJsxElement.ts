@@ -1,8 +1,10 @@
 import type { JsxElement, Spliceable } from "@backtickjs/core";
 
 // The in-flight promise, so two references to one element run its component
-// once.
-const drawnByElement = new WeakMap<JsxElement, Promise<Spliceable>>();
+// once. Per bundle, like a function's expansion: an element held at module
+// level is the same object in every bundle, and what its component drew for
+// one request (the request's user) is not the next one's.
+export type ElementExpansions = WeakMap<JsxElement, Promise<Spliceable>>;
 
 // Runs a host component and answers with what it drew. The component itself
 // never leaves the host: a server component expands away here, and only the
@@ -10,14 +12,15 @@ const drawnByElement = new WeakMap<JsxElement, Promise<Spliceable>>();
 export function expandJsxElement(
   jsx: JsxElement,
   component: (props: never) => unknown,
+  expansions: ElementExpansions,
 ): Promise<Spliceable> {
-  const shared = drawnByElement.get(jsx);
+  const shared = expansions.get(jsx);
   if (shared) {
     return shared;
   }
   const drawn = Promise.resolve(
     component(jsx.props as never) as Spliceable | Promise<Spliceable>,
   );
-  drawnByElement.set(jsx, drawn);
+  expansions.set(jsx, drawn);
   return drawn;
 }

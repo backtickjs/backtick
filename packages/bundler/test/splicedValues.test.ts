@@ -35,3 +35,17 @@ test("a host function expands rather than crossing", async () => {
     /export default \(\) => \(\(\$arg0\) => \(\$arg0\)\);/,
   );
 });
+
+test("a host function expands once per bundle", async () => {
+  // Its host code runs while bundling, so what it computes is the bundle's:
+  // two splices in one bundle share one run, and the next bundle runs it again.
+  let runs = 0;
+  const counted = (n: never) => {
+    runs += 1;
+    return n;
+  };
+  await bundler.run([counted, counted] as never);
+  assert.equal(runs, 1);
+  await bundler.run(counted as never);
+  assert.equal(runs, 2);
+});

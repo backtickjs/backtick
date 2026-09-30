@@ -44,3 +44,18 @@ test("a client module's component is a tag of its import", async () => {
   assert.match(module, /^import \{ For as \$i0 \} from "solid-js";/);
   assert.match(module, /export default \(\) => \(<\$i0 each=\{\[1\]\} \/>\);/);
 });
+
+test("a component runs once per element per bundle", async () => {
+  // An element held at module level is the same object in every bundle, so
+  // what its component drew for one request must not be the next one's.
+  let runs = 0;
+  const Counted = () => {
+    runs += 1;
+    return "drawn";
+  };
+  const element = createJsxElement(Counted, {});
+  await bundler.run([element, element]);
+  assert.equal(runs, 1);
+  await bundler.run(element);
+  assert.equal(runs, 2);
+});
