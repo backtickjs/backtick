@@ -22,9 +22,12 @@
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
+  "dependencies": {
+    "@jridgewell/gen-mapping": "^0.3.13",
+    "@jridgewell/trace-mapping": "^0.3.31"
+  },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
-    "@jridgewell/trace-mapping": "^0.3.31",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

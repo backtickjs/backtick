@@ -264,13 +264,17 @@ importers:
         version: 6.0.3
 
   packages/compiler:
+    dependencies:
+      '@jridgewell/gen-mapping':
+        specifier: ^0.3.13
+        version: 0.3.13
+      '@jridgewell/trace-mapping':
+        specifier: ^0.3.31
+        version: 0.3.31
     devDependencies:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@jridgewell/trace-mapping':
-        specifier: ^0.3.31
-        version: 0.3.31
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

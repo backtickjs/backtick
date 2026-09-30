@@ -1,3 +1,9 @@
+import {
+  addMapping,
+  GenMapping,
+  toEncodedMap,
+} from "@jridgewell/gen-mapping";
+import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
@@ -99,11 +105,12 @@ export function scriptEdits(
  * Emits a script's code by compiling its own text with TypeScript, with
  * `edits` applied.
  *
- * TypeScript is handed the host file with everything but the script blanked
- * and every `${…}` hole replaced by `0` padded to the same length, newlines
- * kept, so a position in what it parses is the same position in the host file:
- * its source map points into the host file as it stands, and an edit is found
- * by where it starts.
+ * TypeScript is handed the script's text alone, every `${…}` hole replaced by
+ * `0` padded to the same length, so a position in what it parses is the host
+ * file's less where the script starts: an edit is found by where it starts,
+ * and the source map is moved to where the script stands in the host file.
+ * The script alone, not the host file blanked around it: that would make each
+ * script cost what the whole file does.
  */
 export function emitScript(
   ts: typeof import("typescript"),
@@ -118,7 +125,7 @@ export function emitScript(
   const end = template.getEnd() - 1; // before `
   const blank = (from: number, to: number, fill = ""): string =>
     fill + text.slice(from + fill.length, to).replace(/[^\r\n]/g, " ");
-  let aligned = blank(0, start);
+  let aligned = "";
   let at = start;
   if (ts.isTemplateExpression(template)) {
     for (const span of template.templateSpans) {
@@ -129,7 +136,7 @@ export function emitScript(
       at = afterBrace;
     }
   }
-  aligned += text.slice(at, end) + blank(end, text.length);
+  aligned += text.slice(at, end);
 
   const transformer: ts.TransformerFactory<ts.SourceFile> =
     (context) => (file) => {
@@ -152,12 +159,12 @@ export function emitScript(
           return node;
         }
         if (ts.isIdentifier(node) || ts.isNumericLiteral(node)) {
-          const edit = edits.get(node.getStart(file));
+          const edit = edits.get(start + node.getStart(file));
           return edit === undefined ? node : edited(edit, node);
         }
         // `{ count }` names a key as well as a value.
         if (ts.isShorthandPropertyAssignment(node)) {
-          const edit = edits.get(node.name.getStart(file));
+          const edit = edits.get(start + node.name.getStart(file));
           if (edit !== undefined) {
             return f.createPropertyAssignment(
               node.name.text,
@@ -210,9 +217,45 @@ export function emitScript(
   const code = output.outputText
     .replace(/\n\/\/# sourceMappingURL=.*$/, "")
     .replace(/;\s*$/, "");
-  // Named as the host file was, not relative to an output file there is none
-  // of, so maps from files in different directories can be combined.
-  const map = JSON.parse(output.sourceMapText!) as { sources: string[] };
-  map.sources = [sourceFile.fileName];
-  return { code, map: JSON.stringify(map) };
+  return { code, map: moved(output.sourceMapText!, sourceFile, start) };
+}
+
+// A map into the script's text, moved to where the script starts in the host
+// file: every line down by the script's line, and the script's first line
+// across by its column. Named as the host file was, not relative to an output
+// file there is none of, so maps from files in different directories can be
+// combined.
+function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
+  const { line, character } = sourceFile.getLineAndCharacterOfPosition(start);
+  const into = new GenMapping({ file: sourceFile.fileName });
+  eachMapping(new TraceMap(map), (mapping) => {
+    if (mapping.originalLine === null) {
+      addMapping(into, {
+        generated: {
+          line: mapping.generatedLine,
+          column: mapping.generatedColumn,
+        },
+      });
+      return;
+    }
+    // TypeScript writes no names, so there are none to carry.
+    addMapping(into, {
+      generated: { line: mapping.generatedLine, column: mapping.generatedColumn },
+      source: sourceFile.fileName,
+      // Lines are 1-based here, columns 0-based.
+      original: {
+        line: mapping.originalLine + line,
+        column:
+          mapping.originalLine === 1
+            ? mapping.originalColumn + character
+            : mapping.originalColumn,
+      },
+    });
+  });
+  // TypeScript's own map, with only where it points changed.
+  return JSON.stringify({
+    ...(JSON.parse(map) as object),
+    sources: [sourceFile.fileName],
+    mappings: toEncodedMap(into).mappings,
+  });
 }
