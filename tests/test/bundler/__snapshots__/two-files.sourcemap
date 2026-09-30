@@ -1,13 +1,13 @@
-cs.lift(                          → cs`
-<                                 → <
-p                                 → p
->{cs.lift(                        → >\n      {
-"in "                             → "in "
-)}{cs.lift(                       → }\n      {
-cs.splice(                        → ${ [-semantic]
-(<Badge />)                       → (<Badge />)
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)}</                              → }\n    </
-p                                 → p
->                                 → >
-)                                 → `
+cs.lift(     → cs`
+<            → <
+p            → p
+>{cs.lift(   → >\n      {
+"in "        → "in "
+)}{cs.lift(  → }\n      {
+cs.splice(   → ${ [-semantic]
+(<Badge />)  → (<Badge />)
+)            → } [-semantic]
+)}</         → }\n    </
+p            → p
+>            → >
+)            → `

@@ -15,16 +15,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 // wrong.
 function wrap(start: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_outer = cs.splice((start) satisfies typeof cs.Spliceable);
+    const __cs_outer = cs.splice((start));
     return cs.splice(foo(cs.lift((() => {
     const __cs_middle = 10;
-    return __cs_middle + cs.splice(same(cs.lift(__cs_outer)) satisfies typeof cs.Spliceable);
-})())) satisfies typeof cs.Spliceable);
+    return __cs_middle + cs.splice(same(cs.lift(__cs_outer)));
+})())));
 })());
 }
 
 function foo(start: Client<number>): Client<number> {
-  return cs.lift(cs.splice((start) satisfies typeof cs.Spliceable) + 1);
+  return cs.lift(cs.splice((start)) + 1);
 }
 
 function same(script: Client<number>): Client<number> {
@@ -35,6 +35,6 @@ it("hostWrappedSplice", async (t) => {
   await snapshotCase(
     t,
     "hostWrappedSplice",
-    cs.lift(cs.splice(wrap(cs.lift(1)) satisfies typeof cs.Spliceable) + cs.splice(wrap(cs.lift(2)) satisfies typeof cs.Spliceable)),
+    cs.lift(cs.splice(wrap(cs.lift(1))) + cs.splice(wrap(cs.lift(2)))),
   );
 });

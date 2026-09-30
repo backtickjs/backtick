@@ -1,15 +1,15 @@
-cs.lift(                          → cs`
-{                                 → ({\n      
-list                              → list
-:                                 → : 
-cs.splice(                        → ${ [-semantic]
-[1, "two", true, null]            → [1, "two", true, null]
- satisfies typeof cs.Spliceable)  → } [-semantic]
-,                                 → ,\n      
-obj                               → obj
-:                                 → : 
-cs.splice(                        → ${ [-semantic]
-{ k: 3 }                          → { k: 3 }
- satisfies typeof cs.Spliceable)  → } [-semantic]
- }                                → ,\n    })
-)                                 → `
+cs.lift(                → cs`
+{                       → ({\n      
+list                    → list
+:                       → : 
+cs.splice(              → ${ [-semantic]
+[1, "two", true, null]  → [1, "two", true, null]
+)                       → } [-semantic]
+,                       → ,\n      
+obj                     → obj
+:                       → : 
+cs.splice(              → ${ [-semantic]
+{ k: 3 }                → { k: 3 }
+)                       → } [-semantic]
+ }                      → ,\n    })
+)                       → `

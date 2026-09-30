@@ -14,9 +14,9 @@ const returnsBoolean = (_n: Client<number>) => true;
 const returnsString = (_n: Client<number>) => "text";
 const returnsArray = (n: Client<number>) => [n, 2];
 const returnsObject = (n: Client<number>) => ({ value: n, label: "n" });
-const returnsScript = (n: Client<number>) => cs.lift(cs.splice((n) satisfies typeof cs.Spliceable) + 1);
+const returnsScript = (n: Client<number>) => cs.lift(cs.splice((n)) + 1);
 const returnsFunction = (n: Client<number>) => (m: Client<number>) =>
-  cs.lift(cs.splice((n) satisfies typeof cs.Spliceable) * cs.splice((m) satisfies typeof cs.Spliceable));
+  cs.lift(cs.splice((n)) * cs.splice((m)));
 const returnsElement = (n: Client<number>): JSX.Element => <b>{n}</b>;
 
 it("hostFunctionReturns", async (t) => {
@@ -24,19 +24,19 @@ it("hostFunctionReturns", async (t) => {
     t,
     "hostFunctionReturns",
     cs.lift((() => {
-    const __cs_none: null = cs.splice((returnsNull) satisfies typeof cs.Spliceable)(1);
-    const __cs_missing: undefined = cs.splice((returnsUndefined) satisfies typeof cs.Spliceable)(1);
-    const __cs_number: number = cs.splice((returnsNumber) satisfies typeof cs.Spliceable)(1);
-    const __cs_boolean: boolean = cs.splice((returnsBoolean) satisfies typeof cs.Spliceable)(1);
-    const __cs_string: string = cs.splice((returnsString) satisfies typeof cs.Spliceable)(1);
-    const __cs_array: number[] = cs.splice((returnsArray) satisfies typeof cs.Spliceable)(3);
+    const __cs_none: null = cs.splice((returnsNull))(1);
+    const __cs_missing: undefined = cs.splice((returnsUndefined))(1);
+    const __cs_number: number = cs.splice((returnsNumber))(1);
+    const __cs_boolean: boolean = cs.splice((returnsBoolean))(1);
+    const __cs_string: string = cs.splice((returnsString))(1);
+    const __cs_array: number[] = cs.splice((returnsArray))(3);
     const __cs_object: {
         value: number;
         label: string;
-    } = cs.splice((returnsObject) satisfies typeof cs.Spliceable)(4);
-    const __cs_script: number = cs.splice((returnsScript) satisfies typeof cs.Spliceable)(5);
-    const __cs_called: number = cs.splice((returnsFunction) satisfies typeof cs.Spliceable)(6)(7);
-    const __cs_element = cs.splice((returnsElement) satisfies typeof cs.Spliceable)(8);
+    } = cs.splice((returnsObject))(4);
+    const __cs_script: number = cs.splice((returnsScript))(5);
+    const __cs_called: number = cs.splice((returnsFunction))(6)(7);
+    const __cs_element = cs.splice((returnsElement))(8);
     return { none: __cs_none, missing: __cs_missing, number: __cs_number, boolean: __cs_boolean, string: __cs_string, array: __cs_array, object: __cs_object, script: __cs_script, called: __cs_called, element: __cs_element };
 })()),
   );

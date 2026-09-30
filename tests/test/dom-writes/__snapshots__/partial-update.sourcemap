@@ -1,182 +1,182 @@
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_rows                         → rows
- =                                →  = 
-[                                 → [
-1                                 → 1
-,                                 → , 
-2                                 → 2
-,                                 → , 
-3                                 → 3
-,                                 → , 
-4                                 → 4
-]                                 → ]
-.                                 → .
-map                               → map
-(                                 → (
-(                                 → (
-__cs_id                           → id
-:                                 → : 
-number                            → number
-) => (                            → ) => 
-{                                 → ({\n      
-id                                → id
-:                                 → : 
-__cs_id                           → id
-,                                 → ,\n      
-label                             → label
-:                                 → : 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-"row "                            → "row "
- +                                →  + 
-__cs_id                           → id
-)                                 → )
- }                                → ,\n    })
-)                                 → 
-)                                 → )
-;                                 → ;
-\n                                → \n    
-const                             → const 
-__cs_update                       → update
- =                                →  = 
-() => {\n                         → () => {\n      
-for (                             → for (
-let                               → let 
-__cs_index                        → index
- =                                →  = 
-0                                 → 0
-;                                 → ; 
-__cs_index                        → index
- <                                →  < 
-__cs_rows                         → rows
-.                                 → .
-length                            → length
-;                                 → ; 
-__cs_index                        → index
- =                                →  = 
-__cs_index                        → index
- +                                →  + 
-2                                 → 2
-)                                 → ) 
-{\n                               → {\n        
-const                             → const 
-__cs_label                        → label
- =                                →  = 
-__cs_rows                         → rows
-[                                 → [
-__cs_index                        → index
-]                                 → ]
-.                                 → .
-label                             → label
-;                                 → ;
-\n                                → \n        
-__cs_label                        → label
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-__cs_label                        → label
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-" !!!"                            → " !!!"
-)                                 → )
-;                                 → ;
-\n        }                       → \n      }
-\n    }                           → \n    }
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → (\n      <
-div                               → div
->{cs.lift(                        → >\n        
-<                                 → <
-button                            → button
-                                  →  
-onclick                           → onclick
-={cs.lift(                        → ={
-__cs_update                       → update
-)}                                → }
->update</                         → >update</
-button                            → button
->                                 → >
-)}{cs.lift(                       → \n        
-<                                 → <
-table                             → table
->{cs.lift(                        → >\n          
-<                                 → <
-tbody                             → tbody
->{cs.lift(                        → >\n            
-<                                 → <
-For                               → For
-                                  →  
-each                              → each
-={cs.lift(                        → ={
-__cs_rows                         → rows
-)}                                → }
->{cs.lift(                        → >\n              {
-(                                 → (
-__cs_row                          → row
-:                                 → : 
-{\n                               → { 
-id                                → id
-:                                 → : 
-number                            → number
-;                                 → ;
-\n                                →  
-label                             → label
-:                                 → : 
-Signal                            → Signal
-<                                 → <
-string                            → string
->                                 → >
-;                                 → 
-\n    }                           →  }
-) =>                              → ) => 
-<                                 → (\n                <
-tr                                → tr
-                                  →  
-id                                → id
-={cs.lift(                        → ={
-"row-"                            → "row-"
- +                                →  + 
-__cs_row                          → row
-.                                 → .
-id                                → id
-)}                                → }
->{cs.lift(                        → >\n                  
-<                                 → <
-td                                → td
->{cs.lift(                        → >{
-__cs_row                          → row
-.                                 → .
-label                             → label
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}</                              → }</
-td                                → td
->                                 → >
-)}</                              → \n                </
-tr                                → tr
->                                 → >\n              )
-)}</                              → }\n            </
-For                               → For
->                                 → >
-)}</                              → \n          </
-tbody                             → tbody
->                                 → >
-)}</                              → \n        </
-table                             → table
->                                 → >
-)}</                              → \n      </
-div                               → div
->                                 → >\n    )
-;                                 → ;
-\n})())                           → \n  }`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_rows               → rows
+ =                      →  = 
+[                       → [
+1                       → 1
+,                       → , 
+2                       → 2
+,                       → , 
+3                       → 3
+,                       → , 
+4                       → 4
+]                       → ]
+.                       → .
+map                     → map
+(                       → (
+(                       → (
+__cs_id                 → id
+:                       → : 
+number                  → number
+) => (                  → ) => 
+{                       → ({\n      
+id                      → id
+:                       → : 
+__cs_id                 → id
+,                       → ,\n      
+label                   → label
+:                       → : 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+"row "                  → "row "
+ +                      →  + 
+__cs_id                 → id
+)                       → )
+ }                      → ,\n    })
+)                       → 
+)                       → )
+;                       → ;
+\n                      → \n    
+const                   → const 
+__cs_update             → update
+ =                      →  = 
+() => {\n               → () => {\n      
+for (                   → for (
+let                     → let 
+__cs_index              → index
+ =                      →  = 
+0                       → 0
+;                       → ; 
+__cs_index              → index
+ <                      →  < 
+__cs_rows               → rows
+.                       → .
+length                  → length
+;                       → ; 
+__cs_index              → index
+ =                      →  = 
+__cs_index              → index
+ +                      →  + 
+2                       → 2
+)                       → ) 
+{\n                     → {\n        
+const                   → const 
+__cs_label              → label
+ =                      →  = 
+__cs_rows               → rows
+[                       → [
+__cs_index              → index
+]                       → ]
+.                       → .
+label                   → label
+;                       → ;
+\n                      → \n        
+__cs_label              → label
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_label              → label
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+" !!!"                  → " !!!"
+)                       → )
+;                       → ;
+\n        }             → \n      }
+\n    }                 → \n    }
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → (\n      <
+div                     → div
+>{cs.lift(              → >\n        
+<                       → <
+button                  → button
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+__cs_update             → update
+)}                      → }
+>update</               → >update</
+button                  → button
+>                       → >
+)}{cs.lift(             → \n        
+<                       → <
+table                   → table
+>{cs.lift(              → >\n          
+<                       → <
+tbody                   → tbody
+>{cs.lift(              → >\n            
+<                       → <
+For                     → For
+                        →  
+each                    → each
+={cs.lift(              → ={
+__cs_rows               → rows
+)}                      → }
+>{cs.lift(              → >\n              {
+(                       → (
+__cs_row                → row
+:                       → : 
+{\n                     → { 
+id                      → id
+:                       → : 
+number                  → number
+;                       → ;
+\n                      →  
+label                   → label
+:                       → : 
+Signal                  → Signal
+<                       → <
+string                  → string
+>                       → >
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → (\n                <
+tr                      → tr
+                        →  
+id                      → id
+={cs.lift(              → ={
+"row-"                  → "row-"
+ +                      →  + 
+__cs_row                → row
+.                       → .
+id                      → id
+)}                      → }
+>{cs.lift(              → >\n                  
+<                       → <
+td                      → td
+>{cs.lift(              → >{
+__cs_row                → row
+.                       → .
+label                   → label
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)}</                    → }</
+td                      → td
+>                       → >
+)}</                    → \n                </
+tr                      → tr
+>                       → >\n              )
+)}</                    → }\n            </
+For                     → For
+>                       → >
+)}</                    → \n          </
+tbody                   → tbody
+>                       → >
+)}</                    → \n        </
+table                   → table
+>                       → >
+)}</                    → \n      </
+div                     → div
+>                       → >\n    )
+;                       → ;
+\n})())                 → \n  }`

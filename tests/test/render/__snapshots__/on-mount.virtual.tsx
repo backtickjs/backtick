@@ -26,8 +26,8 @@ describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
     const drawing = await draw(
       cs.lift((() => {
-    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
-    cs.splice((onMount) satisfies typeof cs.Spliceable)(() => {
+    const __cs_count = cs.splice((createSignal))(0);
+    cs.splice((onMount))(() => {
         cs.globalThis.window.console.log();
         __cs_count[1](__cs_count[0]() + 1);
     });
@@ -43,8 +43,8 @@ describe("onMount", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_said = cs.splice((createSignal) satisfies typeof cs.Spliceable)("not yet");
-    return <button onclick={cs.lift(() => cs.splice((onMount) satisfies typeof cs.Spliceable)(() => __cs_said[1]("ran")))}>{cs.lift(__cs_said[0]())}</button>;
+    const __cs_said = cs.splice((createSignal))("not yet");
+    return <button onclick={cs.lift(() => cs.splice((onMount))(() => __cs_said[1]("ran")))}>{cs.lift(__cs_said[0]())}</button>;
 })()),
       ),
     );

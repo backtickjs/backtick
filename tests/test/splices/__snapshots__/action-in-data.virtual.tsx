@@ -13,8 +13,8 @@ it("actionInData", async (t) => {
     t,
     "actionInData",
     cs.lift((() => {
-    const __cs_list = cs.splice([action] satisfies typeof cs.Spliceable);
-    const __cs_map = cs.splice({ press: action } satisfies typeof cs.Spliceable);
+    const __cs_list = cs.splice([action]);
+    const __cs_map = cs.splice({ press: action });
     return __cs_list.length + cs.globalThis.Object.keys(__cs_map).length;
 })()),
   );

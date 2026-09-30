@@ -10,7 +10,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // handler with `#slot`.
 const script: Client<() => JSX.Element> = cs.lift(() => {
     const __cs_x = 1;
-    return cs.splice((<span onclick={cs.lift(() => __cs_x)} />) satisfies typeof cs.Spliceable);
+    return cs.splice((<span onclick={cs.lift(() => __cs_x)} />));
 });
 
 it("jsxCapture", async (t) => {

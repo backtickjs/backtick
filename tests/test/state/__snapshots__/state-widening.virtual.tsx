@@ -22,12 +22,12 @@ enum Tone {
 
 async function Widened() {
   return cs.lift((() => {
-    const __cs_flag = cs.splice((createSignal) satisfies typeof cs.Spliceable)(true);
-    const __cs_tone = cs.splice((createSignal) satisfies typeof cs.Spliceable)(cs.splice(Tone.Warm satisfies typeof cs.Spliceable));
-    const __cs_step = cs.splice((createSignal) satisfies typeof cs.Spliceable)<() => number>(() => 0);
+    const __cs_flag = cs.splice((createSignal))(true);
+    const __cs_tone = cs.splice((createSignal))(cs.splice(Tone.Warm));
+    const __cs_step = cs.splice((createSignal))<() => number>(() => 0);
     return <span onclick={cs.lift(() => {
         __cs_flag[1](false);
-        __cs_tone[1](cs.splice(Tone.Cool satisfies typeof cs.Spliceable));
+        __cs_tone[1](cs.splice(Tone.Cool));
         __cs_step[1](() => () => 1);
     })}>{cs.lift(__cs_flag[0]() + " " + __cs_tone[0]() + " " + __cs_step[0]()())}</span>;
 })());

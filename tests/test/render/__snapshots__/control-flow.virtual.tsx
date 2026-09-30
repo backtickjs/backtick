@@ -20,7 +20,7 @@ const rows = ["first", "second"];
 
 const indexed = (
   <ul>
-    <Index each={cs.lift(cs.splice((rows) satisfies typeof cs.Spliceable))}>
+    <Index each={cs.lift(cs.splice((rows)))}>
       {cs.lift((__cs_row: () => string, __cs_index: number) => <li>{cs.lift(__cs_index + ": " + __cs_row())}</li>)}
     </Index>
   </ul>

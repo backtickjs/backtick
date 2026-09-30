@@ -1,113 +1,113 @@
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_ids                          → ids
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-<                                 → <
-number                            → number
-[]                                → []
->(                                → >(
-[                                 → [
-1                                 → 1
-,                                 → , 
-2                                 → 2
-,                                 → , 
-3                                 → 3
-,                                 → , 
-4                                 → 4
-,                                 → , 
-5                                 → 5
-]                                 → ]
-)                                 → )
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → (\n      <
-table                             → table
->{cs.lift(                        → >\n        
-<                                 → <
-tbody                             → tbody
->{cs.lift(                        → >\n          
-<                                 → <
-For                               → For
-                                  →  
-each                              → each
-={cs.lift(                        → ={
-__cs_ids                          → ids
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}                                → }
->{cs.lift(                        → >\n            {
-(                                 → (
-__cs_id                           → id
-:                                 → : 
-number                            → number
-) =>                              → ) => 
-<                                 → (\n              <
-tr                                → tr
-                                  →  
-id                                → id
-={cs.lift(                        → ={
-"row-"                            → "row-"
- +                                →  + 
-__cs_id                           → id
-)}                                → }
->{cs.lift(                        → >\n                
-<                                 → <
-td                                → td
->{cs.lift(                        → >\n                  
-<                                 → <
-button                            → button
-                                  → \n                    
-onclick                           → onclick
-={cs.lift(                        → ={
-() =>                             → () =>\n                      
-__cs_ids                          → ids
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-__cs_ids                          → ids
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-.                                 → .
-filter                            → filter
-(                                 → (
-__cs_each                         → each
- =>                               → ) => 
-__cs_each                         → each
- !==                              →  !== 
-__cs_id                           → id
-)                                 → )
-)                                 → )
-)}                                → \n                    }
->{cs.lift(                        → \n                  >\n                    {
-"remove "                         → "remove "
- +                                →  + 
-__cs_id                           → id
-)}</                              → }\n                  </
-button                            → button
->                                 → >
-)}</                              → \n                </
-td                                → td
->                                 → >
-)}</                              → \n              </
-tr                                → tr
->                                 → >\n            )
-)}</                              → }\n          </
-For                               → For
->                                 → >
-)}</                              → \n        </
-tbody                             → tbody
->                                 → >
-)}</                              → \n      </
-table                             → table
->                                 → >\n    )
-;                                 → ;
-\n})())                           → \n  }`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_ids                → ids
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+<                       → <
+number                  → number
+[]                      → []
+>(                      → >(
+[                       → [
+1                       → 1
+,                       → , 
+2                       → 2
+,                       → , 
+3                       → 3
+,                       → , 
+4                       → 4
+,                       → , 
+5                       → 5
+]                       → ]
+)                       → )
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → (\n      <
+table                   → table
+>{cs.lift(              → >\n        
+<                       → <
+tbody                   → tbody
+>{cs.lift(              → >\n          
+<                       → <
+For                     → For
+                        →  
+each                    → each
+={cs.lift(              → ={
+__cs_ids                → ids
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)}                      → }
+>{cs.lift(              → >\n            {
+(                       → (
+__cs_id                 → id
+:                       → : 
+number                  → number
+) =>                    → ) => 
+<                       → (\n              <
+tr                      → tr
+                        →  
+id                      → id
+={cs.lift(              → ={
+"row-"                  → "row-"
+ +                      →  + 
+__cs_id                 → id
+)}                      → }
+>{cs.lift(              → >\n                
+<                       → <
+td                      → td
+>{cs.lift(              → >\n                  
+<                       → <
+button                  → button
+                        → \n                    
+onclick                 → onclick
+={cs.lift(              → ={
+() =>                   → () =>\n                      
+__cs_ids                → ids
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_ids                → ids
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+.                       → .
+filter                  → filter
+(                       → (
+__cs_each               → each
+ =>                     → ) => 
+__cs_each               → each
+ !==                    →  !== 
+__cs_id                 → id
+)                       → )
+)                       → )
+)}                      → \n                    }
+>{cs.lift(              → \n                  >\n                    {
+"remove "               → "remove "
+ +                      →  + 
+__cs_id                 → id
+)}</                    → }\n                  </
+button                  → button
+>                       → >
+)}</                    → \n                </
+td                      → td
+>                       → >
+)}</                    → \n              </
+tr                      → tr
+>                       → >\n            )
+)}</                    → }\n          </
+For                     → For
+>                       → >
+)}</                    → \n        </
+tbody                   → tbody
+>                       → >
+)}</                    → \n      </
+table                   → table
+>                       → >\n    )
+;                       → ;
+\n})())                 → \n  }`

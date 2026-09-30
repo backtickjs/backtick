@@ -16,14 +16,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 // a wrong answer would show up.
 function wrap(start: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_outer = cs.splice((start) satisfies typeof cs.Spliceable);
+    const __cs_outer = cs.splice((start));
     return cs.splice(cs.lift((() => {
     const __cs_middle = 10;
-    return __cs_middle + cs.splice(cs.lift(__cs_outer) satisfies typeof cs.Spliceable);
-})()) satisfies typeof cs.Spliceable);
+    return __cs_middle + cs.splice(cs.lift(__cs_outer));
+})()));
 })());
 }
 
 it("deepCapture", async (t) => {
-  await snapshotCase(t, "deepCapture", cs.lift(cs.splice(wrap(cs.lift(1)) satisfies typeof cs.Spliceable) + cs.splice(wrap(cs.lift(2)) satisfies typeof cs.Spliceable)));
+  await snapshotCase(t, "deepCapture", cs.lift(cs.splice(wrap(cs.lift(1))) + cs.splice(wrap(cs.lift(2)))));
 });

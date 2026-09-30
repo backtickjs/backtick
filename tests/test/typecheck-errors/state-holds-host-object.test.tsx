@@ -14,8 +14,8 @@ import { createSignal } from "@backtickjs/solid-js";
 const host = new Date();
 
 export default cs`{
-  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.
+  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.
   const held = $createSignal($host);
-  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.
+  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.
   held[1]($host);
 }`;

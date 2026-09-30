@@ -1,7 +1,7 @@
 cs.lift(                                  → cs`
 cs.splice(                                →  [-semantic]
 (orders)                                  → $orders
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 )                                         → `
 cs.lift(                                  → cs`
 (                                         → (
@@ -63,7 +63,7 @@ __cs_item                                 → item
 qty                                       → qty
 )                                         → `
 }</span>)                                 → }</span>)
- satisfies typeof cs.Spliceable)          → } [-semantic]
+)                                         → } [-semantic]
 )                                         → `
 }\n              </For>\n              <span>{→ }\n              </For>\n              <span>{
 cs.lift(                                  → cs`
@@ -74,5 +74,5 @@ __cs_order                                → order
 total                                     → total
 )                                         → `
 }</span>\n            </div>\n          ) → }</span>\n            </div>\n          )
- satisfies typeof cs.Spliceable)          → } [-semantic]
+)                                         → } [-semantic]
 )                                         → `

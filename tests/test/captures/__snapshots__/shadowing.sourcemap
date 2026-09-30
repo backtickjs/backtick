@@ -1,46 +1,46 @@
-cs.lift((() => {\n                → cs`{\n    
-let                               → let 
-__cs_total                        → total
- =                                →  = 
-0                                 → 0
-;                                 → ;
-\n                                → \n    
-__cs_total                        → total
- =                                →  = 
-__cs_total                        → total
- +                                →  + 
-cs.splice(                        →  [-semantic]
-(lhs)                             → $lhs
- satisfies typeof cs.Spliceable)  →  [-semantic]
-;                                 → ;
-\n                                → \n    
-__cs_total                        → total
- =                                →  = 
-__cs_total                        → total
- +                                →  + 
-cs.splice(                        →  [-semantic]
-(rhs)                             → $rhs
- satisfies typeof cs.Spliceable)  →  [-semantic]
-;                                 → ;
-\n                                → \n    
-return                            → return 
-__cs_total                        → total
-;                                 → ;
-\n})())                           → \n  }`
-cs.lift((() => {\n                → cs`{\n      
-const                             → const 
-__cs_total                        → total
- =                                →  = 
-1                                 → 1
-;                                 → ;
-\n                                → \n      
-return                            → return 
-cs.splice(                        → ${ [-semantic]
-addOwnTotal(                      → addOwnTotal(
-cs.lift(                          → cs`
-__cs_total                        → total
-)                                 → `
-, 100)                            → , 100)
- satisfies typeof cs.Spliceable)  → } [-semantic]
-;                                 → ;
-\n})())                           → \n    }`
+cs.lift((() => {\n      → cs`{\n    
+let                     → let 
+__cs_total              → total
+ =                      →  = 
+0                       → 0
+;                       → ;
+\n                      → \n    
+__cs_total              → total
+ =                      →  = 
+__cs_total              → total
+ +                      →  + 
+cs.splice(              →  [-semantic]
+(lhs)                   → $lhs
+)                       →  [-semantic]
+;                       → ;
+\n                      → \n    
+__cs_total              → total
+ =                      →  = 
+__cs_total              → total
+ +                      →  + 
+cs.splice(              →  [-semantic]
+(rhs)                   → $rhs
+)                       →  [-semantic]
+;                       → ;
+\n                      → \n    
+return                  → return 
+__cs_total              → total
+;                       → ;
+\n})())                 → \n  }`
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_total              → total
+ =                      →  = 
+1                       → 1
+;                       → ;
+\n                      → \n      
+return                  → return 
+cs.splice(              → ${ [-semantic]
+addOwnTotal(            → addOwnTotal(
+cs.lift(                → cs`
+__cs_total              → total
+)                       → `
+, 100)                  → , 100)
+)                       → } [-semantic]
+;                       → ;
+\n})())                 → \n    }`

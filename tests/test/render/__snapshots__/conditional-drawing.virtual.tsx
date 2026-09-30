@@ -30,9 +30,9 @@ import { draw } from "@backtickjs/solid-js/testing";
 // again. Without that, this case does not stop.
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_shown = cs.splice((createSignal) satisfies typeof cs.Spliceable)(false);
+    const __cs_shown = cs.splice((createSignal))(false);
     const __cs_started = cs.globalThis.window.setTimeout(() => {
-        if (cs.splice((again) satisfies typeof cs.Spliceable)()) {
+        if (cs.splice((again))()) {
             __cs_shown[1](true);
         }
     }, 0);
@@ -41,7 +41,7 @@ async function Held({ again }: { again: Prop<() => boolean> }) {
 }
 
 const conditionalDrawing = cs.lift((() => {
-    const __cs_builds = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    const __cs_builds = cs.splice((createSignal))(0);
     return <div>{cs.lift(<span>{cs.lift("builds " + __cs_builds[0]())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
         __cs_builds[1](__cs_builds[0]() + 1);
         return __cs_builds[0]() < 5;

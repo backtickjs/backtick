@@ -456,27 +456,8 @@ function rewriteNodeImpl(
         );
         state.mappings.set(argument, node);
       }
-      // The host value is checked, not what it becomes on the client: a host
-      // function passes as a client function once spliced, but only a tag may
-      // name one.
-      //
-      // `satisfies` rather than a constraint on `cs.splice`: one admitting
-      // primitives would keep a literal a literal instead of widening it.
-      //
-      // `typeof cs.Spliceable` rather than a module, because this has to
-      // resolve in the file the template was written in — and naming a
-      // package would put that package in front of every user of the
-      // transform.
-      const satisfies = ts.factory.createSatisfiesExpression(
-        argument,
-        ts.factory.createTypeQueryNode(
-          ts.factory.createQualifiedName(
-            ts.factory.createIdentifier("cs"),
-            ts.factory.createIdentifier("Spliceable"),
-          ),
-        ),
-      );
-      const virtual = call(ts, "cs", "splice", [satisfies]);
+      // Checked by `cs.splice`'s own signature.
+      const virtual = call(ts, "cs", "splice", [argument]);
       state.codeInformation.set(virtual, { semantic: false });
       return {
         virtual,

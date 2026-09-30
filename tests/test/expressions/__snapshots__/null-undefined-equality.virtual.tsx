@@ -25,7 +25,7 @@ describe("null and undefined", () => {
       createRoot(
         await draw(cs.lift((() => {
     const __cs_names = ["a"];
-    return [cs.splice((nothing) satisfies typeof cs.Spliceable) === undefined, cs.splice((nothing) satisfies typeof cs.Spliceable) !== null, cs.splice((empty) satisfies typeof cs.Spliceable) === null, cs.splice((empty) satisfies typeof cs.Spliceable) !== undefined, __cs_names[1] === undefined, __cs_names[1] !== null];
+    return [cs.splice((nothing)) === undefined, cs.splice((nothing)) !== null, cs.splice((empty)) === null, cs.splice((empty)) !== undefined, __cs_names[1] === undefined, __cs_names[1] !== null];
 })())),
       ),
       [true, true, true, true, true, true],

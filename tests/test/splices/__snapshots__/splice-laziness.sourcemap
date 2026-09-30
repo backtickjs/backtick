@@ -11,7 +11,7 @@ __cs_flag                                 → flag
 return                                    → return 
 cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 ;                                         → ;
 \n    }                                   → \n    }
 \n                                        → \n    
@@ -34,7 +34,7 @@ taken                                     → taken
 :                                         → : 
 cs.splice(                                → ${ [-semantic]
 guard(ok)                                 → guard(ok)
- satisfies typeof cs.Spliceable)          → } [-semantic]
+)                                         → } [-semantic]
 (                                         → (
 true                                      → true
 )                                         → )
@@ -43,7 +43,7 @@ skipped                                   → skipped
 :                                         → : 
 cs.splice(                                → ${ [-semantic]
 guard(broken)                             → guard(broken)
- satisfies typeof cs.Spliceable)          → } [-semantic]
+)                                         → } [-semantic]
 (                                         → (
 false                                     → false
 )                                         → )

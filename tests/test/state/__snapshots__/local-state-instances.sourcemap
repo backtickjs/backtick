@@ -1,53 +1,53 @@
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_size                         → size
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-16                                → 16
-)                                 → )
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → (\n      <
-span                              → span
-                                  → \n        
-style                             → style
-={cs.lift(                        → ={
-"font-size: "                     → "font-size: "
- +                                →  + 
-__cs_size                         → size
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-"px"                              → "px"
-)}                                → }
-                                  → \n        
-onclick                           → onclick
-={cs.lift(                        → ={
-() => {\n                         → () => {\n          
-__cs_size                         → size
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-__cs_size                         → size
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-1                                 → 1
-)                                 → )
-;                                 → ;
-\n    }                           → \n        }
-)}                                → }
->\n        press\n      </        → \n      >\n        press\n      </
-span                              → span
->                                 → >\n    )
-;                                 → ;
-\n})())                           → \n  }`
+cs.lift((() => {\n          → cs`{\n    
+const                       → const 
+__cs_size                   → size
+ =                          →  = 
+cs.splice(                  →  [-semantic]
+(createSignal)              → $createSignal
+)                           →  [-semantic]
+(                           → (
+16                          → 16
+)                           → )
+;                           → ;
+\n                          → \n    
+return                      → return 
+<                           → (\n      <
+span                        → span
+                            → \n        
+style                       → style
+={cs.lift(                  → ={
+"font-size: "               → "font-size: "
+ +                          →  + 
+__cs_size                   → size
+[                           → [
+0                           → 0
+]                           → ]
+()                          → ()
+ +                          →  + 
+"px"                        → "px"
+)}                          → }
+                            → \n        
+onclick                     → onclick
+={cs.lift(                  → ={
+() => {\n                   → () => {\n          
+__cs_size                   → size
+[                           → [
+1                           → 1
+]                           → ]
+(                           → (
+__cs_size                   → size
+[                           → [
+0                           → 0
+]                           → ]
+()                          → ()
+ +                          →  + 
+1                           → 1
+)                           → )
+;                           → ;
+\n    }                     → \n        }
+)}                          → }
+>\n        press\n      </  → \n      >\n        press\n      </
+span                        → span
+>                           → >\n    )
+;                           → ;
+\n})())                     → \n  }`

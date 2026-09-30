@@ -1,171 +1,171 @@
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_Badge                        → Badge
- =                                →  = 
-(                                 → (
-__cs_p                            → p
-:                                 → : 
-{\n                               → { 
-n                                 → n
-:                                 → : 
-number                            → number
-;                                 → 
-\n    }                           →  }
-) =>                              → ) => 
-<                                 → <
-i                                 → i
->{cs.lift(                        → >{
-"panel "                          → "panel "
- +                                →  + 
-__cs_p                            → p
-.                                 → .
-n                                 → n
-)}</                              → }</
-i                                 → i
->                                 → >
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → (\n      <
-section                           → section
->{cs.lift(                        → >\n        
-<                                 → <
-__cs_Badge                        → Badge
-                                  →  
-n                                 → n
-={                                → ={
-0                                 → 0
-}                                 → }
-/>                                →  />
-)}{cs.lift(                       → \n        {
-cs.splice(                        →  [-semantic]
-(props)                           → $props
- satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-body                              → body
-)}</                              → }\n      </
-section                           → section
->                                 → >\n    )
-;                                 → ;
-\n})())                           → \n  }`
-cs.lift((() => {\n                → cs`{\n  
-const                             → const 
-__cs_count                        → count
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-0                                 → 0
-)                                 → )
-;                                 → ;
-\n                                → \n  
-const                             → const 
-__cs_Badge                        → Badge
- =                                →  = 
-(                                 → (
-__cs_p                            → p
-:                                 → : 
-{\n                               → { 
-n                                 → n
-:                                 → : 
-number                            → number
-;                                 → ;
-\n                                →  
-children                          → children
-:                                 → : 
-JSX                               → JSX
-.                                 → .
-Element                           → Element
-;                                 → 
-\n    }                           →  }
-) =>                              → ) => 
-<                                 → (\n    <
-b                                 → b
->{cs.lift(                        → >\n      {
-"outer "                          → "outer "
- +                                →  + 
-__cs_p                            → p
-.                                 → .
-n                                 → n
-)}{cs.lift(                       → }\n      {
-__cs_p                            → p
-.                                 → .
-children                          → children
-)}</                              → }\n    </
-b                                 → b
->                                 → >\n  )
-;                                 → ;
-\n                                → \n\n  
-return                            → return 
-<                                 → (\n    <
-div                               → div
->{cs.lift(                        → >\n      
-<                                 → <
-Panel                             → Panel
-                                  → \n        
-body                              → body
-={cs.lift(                        → ={\n          
-cs.splice(                        → ${ [-semantic]
-cs.lift(                          → cs`
-<                                 → <
-__cs_Badge                        → Badge
-                                  →  
-n                                 → n
-={                                → ={
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-}                                 → }
->{                                → >\n            
-<                                 → <
-u                                 → u
->{cs.lift(                        → >{
-"kid "                            → "kid "
- +                                →  + 
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}</                              → }</
-u                                 → u
->                                 → >
-}</                               → \n          </
-__cs_Badge                        → Badge
->                                 → >
-)                                 → `
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)}                                → \n        }
-/>                                → \n      />
-)}{cs.lift(                       → \n      
-<                                 → <
-button                            → button
-                                  →  
-onclick                           → onclick
-={cs.lift(                        → ={
-() =>                             → () => 
-__cs_count                        → count
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-1                                 → 1
-)                                 → )
-)}                                → }
->more</                           → >more</
-button                            → button
->                                 → >
-)}</                              → \n    </
-div                               → div
->                                 → >\n  )
-;                                 → ;
-\n})())                           → \n}`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_Badge              → Badge
+ =                      →  = 
+(                       → (
+__cs_p                  → p
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → <
+i                       → i
+>{cs.lift(              → >{
+"panel "                → "panel "
+ +                      →  + 
+__cs_p                  → p
+.                       → .
+n                       → n
+)}</                    → }</
+i                       → i
+>                       → >
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → (\n      <
+section                 → section
+>{cs.lift(              → >\n        
+<                       → <
+__cs_Badge              → Badge
+                        →  
+n                       → n
+={                      → ={
+0                       → 0
+}                       → }
+/>                      →  />
+)}{cs.lift(             → \n        {
+cs.splice(              →  [-semantic]
+(props)                 → $props
+)                       →  [-semantic]
+.                       → .
+body                    → body
+)}</                    → }\n      </
+section                 → section
+>                       → >\n    )
+;                       → ;
+\n})())                 → \n  }`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_count              → count
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+0                       → 0
+)                       → )
+;                       → ;
+\n                      → \n  
+const                   → const 
+__cs_Badge              → Badge
+ =                      →  = 
+(                       → (
+__cs_p                  → p
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → ;
+\n                      →  
+children                → children
+:                       → : 
+JSX                     → JSX
+.                       → .
+Element                 → Element
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → (\n    <
+b                       → b
+>{cs.lift(              → >\n      {
+"outer "                → "outer "
+ +                      →  + 
+__cs_p                  → p
+.                       → .
+n                       → n
+)}{cs.lift(             → }\n      {
+__cs_p                  → p
+.                       → .
+children                → children
+)}</                    → }\n    </
+b                       → b
+>                       → >\n  )
+;                       → ;
+\n                      → \n\n  
+return                  → return 
+<                       → (\n    <
+div                     → div
+>{cs.lift(              → >\n      
+<                       → <
+Panel                   → Panel
+                        → \n        
+body                    → body
+={cs.lift(              → ={\n          
+cs.splice(              → ${ [-semantic]
+cs.lift(                → cs`
+<                       → <
+__cs_Badge              → Badge
+                        →  
+n                       → n
+={                      → ={
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+}                       → }
+>{                      → >\n            
+<                       → <
+u                       → u
+>{cs.lift(              → >{
+"kid "                  → "kid "
+ +                      →  + 
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)}</                    → }</
+u                       → u
+>                       → >
+}</                     → \n          </
+__cs_Badge              → Badge
+>                       → >
+)                       → `
+)                       → } [-semantic]
+)}                      → \n        }
+/>                      → \n      />
+)}{cs.lift(             → \n      
+<                       → <
+button                  → button
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+() =>                   → () => 
+__cs_count              → count
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1                       → 1
+)                       → )
+)}                      → }
+>more</                 → >more</
+button                  → button
+>                       → >
+)}</                    → \n    </
+div                     → div
+>                       → >\n  )
+;                       → ;
+\n})())                 → \n}`

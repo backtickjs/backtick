@@ -12,6 +12,6 @@ it("ternary", async (t) => {
   await snapshotCase(
     t,
     "ternary",
-    cs.lift({ absent: cs.splice((pick) satisfies typeof cs.Spliceable)(null), present: cs.splice((pick) satisfies typeof cs.Spliceable)(4) }),
+    cs.lift({ absent: cs.splice((pick))(null), present: cs.splice((pick))(4) }),
   );
 });

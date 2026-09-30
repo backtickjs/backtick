@@ -18,7 +18,7 @@ __cs_x                                    → x
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (ping)                                    → $ping
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 ()                                        → ()
 ;                                         → ;
 \n                                        → \n  
@@ -32,7 +32,7 @@ __cs_x                                    → x
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (ping)                                    → $ping
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 ()                                        → ()
 ;                                         → ;
 \n})())                                   → \n}`
@@ -53,7 +53,7 @@ __cs_x                                    → x
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (label)                                   → $label
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 true                                      → true
 )                                         → )

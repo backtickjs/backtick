@@ -1,15 +1,15 @@
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(nothing)                         → $nothing
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(data)                            → $data
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(data)                            → $data
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)                                 → `
+cs.lift(    → cs`
+cs.splice(  →  [-semantic]
+(nothing)   → $nothing
+)           →  [-semantic]
+)           → `
+cs.lift(    → cs`
+cs.splice(  →  [-semantic]
+(data)      → $data
+)           →  [-semantic]
+)           → `
+cs.lift(    → cs`
+cs.splice(  →  [-semantic]
+(data)      → $data
+)           →  [-semantic]
+)           → `

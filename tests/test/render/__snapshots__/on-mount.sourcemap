@@ -1,104 +1,104 @@
-cs.lift((() => {\n                → cs`{\n        
-const                             → const 
-__cs_count                        → count
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-0                                 → 0
-)                                 → )
-;                                 → ;
-\n                                → \n        
-cs.splice(                        →  [-semantic]
-(onMount)                         → $onMount
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-() => {\n                         → () => {\n          
-cs.globalThis.                    → 
-window                            → window
-.                                 → .
-console                           → console
-.                                 → .
-log                               → log
-()                                → ()
-;                                 → ;
-\n                                → \n          
-__cs_count                        → count
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-1                                 → 1
-)                                 → )
-;                                 → ;
-\n    }                           → \n        }
-)                                 → )
-;                                 → ;
-\n                                → \n        
-return                            → return 
-<                                 → <
-p                                 → p
->{cs.lift(                        → >{
-"mounted "                        → "mounted "
- +                                →  + 
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}</                              → }</
-p                                 → p
->                                 → >
-;                                 → ;
-\n})())                           → \n      }`
-cs.lift((() => {\n                → cs`{\n          
-const                             → const 
-__cs_said                         → said
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-"not yet"                         → "not yet"
-)                                 → )
-;                                 → ;
-\n                                → \n          
-return                            → return 
-<                                 → (\n            <
-button                            → button
-                                  →  
-onclick                           → onclick
-={cs.lift(                        → ={
-() =>                             → () => 
-cs.splice(                        →  [-semantic]
-(onMount)                         → $onMount
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-() =>                             → () => 
-__cs_said                         → said
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-"ran"                             → "ran"
-)                                 → )
-)                                 → )
-)}                                → }
->{cs.lift(                        → >\n              {
-__cs_said                         → said
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}</                              → }\n            </
-button                            → button
->                                 → >\n          )
-;                                 → ;
-\n})())                           → \n        }`
+cs.lift((() => {\n      → cs`{\n        
+const                   → const 
+__cs_count              → count
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+0                       → 0
+)                       → )
+;                       → ;
+\n                      → \n        
+cs.splice(              →  [-semantic]
+(onMount)               → $onMount
+)                       →  [-semantic]
+(                       → (
+() => {\n               → () => {\n          
+cs.globalThis.          → 
+window                  → window
+.                       → .
+console                 → console
+.                       → .
+log                     → log
+()                      → ()
+;                       → ;
+\n                      → \n          
+__cs_count              → count
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1                       → 1
+)                       → )
+;                       → ;
+\n    }                 → \n        }
+)                       → )
+;                       → ;
+\n                      → \n        
+return                  → return 
+<                       → <
+p                       → p
+>{cs.lift(              → >{
+"mounted "              → "mounted "
+ +                      →  + 
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)}</                    → }</
+p                       → p
+>                       → >
+;                       → ;
+\n})())                 → \n      }`
+cs.lift((() => {\n      → cs`{\n          
+const                   → const 
+__cs_said               → said
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+"not yet"               → "not yet"
+)                       → )
+;                       → ;
+\n                      → \n          
+return                  → return 
+<                       → (\n            <
+button                  → button
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+() =>                   → () => 
+cs.splice(              →  [-semantic]
+(onMount)               → $onMount
+)                       →  [-semantic]
+(                       → (
+() =>                   → () => 
+__cs_said               → said
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+"ran"                   → "ran"
+)                       → )
+)                       → )
+)}                      → }
+>{cs.lift(              → >\n              {
+__cs_said               → said
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)}</                    → }\n            </
+button                  → button
+>                       → >\n          )
+;                       → ;
+\n})())                 → \n        }`

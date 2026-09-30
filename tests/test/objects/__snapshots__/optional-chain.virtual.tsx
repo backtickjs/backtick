@@ -27,6 +27,6 @@ it("optionalChain", async (t) => {
   await snapshotCase(
     t,
     "optionalChain",
-    cs.lift({ found: cs.splice((pick) satisfies typeof cs.Spliceable)({ x: 5 }), missing: cs.splice((pick) satisfies typeof cs.Spliceable)(null), deep: cs.splice((deep) satisfies typeof cs.Spliceable)({ inner: { z: 7 } }), cut: cs.splice((deep) satisfies typeof cs.Spliceable)({ inner: null }), top: cs.splice((deep) satisfies typeof cs.Spliceable)(null), loud: cs.splice((shout) satisfies typeof cs.Spliceable)("hi"), silent: cs.splice((shout) satisfies typeof cs.Spliceable)(null) }),
+    cs.lift({ found: cs.splice((pick))({ x: 5 }), missing: cs.splice((pick))(null), deep: cs.splice((deep))({ inner: { z: 7 } }), cut: cs.splice((deep))({ inner: null }), top: cs.splice((deep))(null), loud: cs.splice((shout))("hi"), silent: cs.splice((shout))(null) }),
   );
 });

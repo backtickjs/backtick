@@ -12,7 +12,7 @@ describe("ref", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_field = cs.splice((createSignal) satisfies typeof cs.Spliceable)<HTMLInputElement | null>(null);
+    const __cs_field = cs.splice((createSignal))<HTMLInputElement | null>(null);
     return <div>{cs.lift(<input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => __cs_field[1](__cs_element))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_field[0]()?.focus())}>edit</button>)}</div>;
 })()),
       ),
@@ -25,7 +25,7 @@ describe("ref", () => {
     render(
       await draw(
         cs.lift((() => {
-    return <input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => cs.splice((onMount) satisfies typeof cs.Spliceable)(() => __cs_element.focus()))}/>;
+    return <input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => cs.splice((onMount))(() => __cs_element.focus()))}/>;
 })()),
       ),
     );
@@ -58,8 +58,8 @@ describe("ref", () => {
       render(
         await draw(
           cs.lift((() => {
-    const __cs_shown = cs.splice((createSignal) satisfies typeof cs.Spliceable)(true);
-    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    const __cs_shown = cs.splice((createSignal))(true);
+    const __cs_n = cs.splice((createSignal))(0);
     return <div>{cs.lift(<button onclick={cs.lift(() => __cs_n[1](__cs_n[0]() + 1))}>{cs.lift("n " + __cs_n[0]())}</button>)}{cs.lift(__cs_shown[0]() ? <p ref={cs.lift(() => cs.globalThis.window.console.log(__cs_n[0]()))}>shown</p> : null)}</div>;
 })()),
         ),

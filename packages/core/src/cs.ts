@@ -11,7 +11,12 @@ function lift<T>(_: T): Client<T> {
   );
 }
 
-function splice<T>(_: T): Spliced<T> {
+// A constraint that is `unknown` for a value that splices, rather than
+// `Spliceable` itself or an intersection with it: either of those keeps a
+// literal a literal instead of widening it.
+function splice<T extends ([T] extends [Spliceable] ? unknown : Spliceable)>(
+  _: T,
+): Spliced<T> {
   throw new Error(
     "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -35,9 +40,8 @@ export type GlobalThis = {
   [Key in keyof typeof globalThis]: (typeof globalThis)[Key];
 };
 
-// `Spliceable`, for the `satisfies` the transform writes inside a splice, and
-// `globalThis`, which a name the script didn't bind is read off. In the type and
-// not in the object: nothing runs the virtual code they are written in.
+// `globalThis`, which a name the script didn't bind is read off. In the type
+// and not in the object: nothing runs the virtual code it is written in.
 export const cs = Object.assign(
   (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
     throw new Error(
@@ -45,7 +49,6 @@ export const cs = Object.assign(
     );
   },
   members as typeof members & {
-    readonly Spliceable: Spliceable;
     readonly globalThis: GlobalThis;
   },
 );

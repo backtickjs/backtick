@@ -1,66 +1,66 @@
-cs.lift(                          → cs`
-(                                 → (
-__cs_c                            → c
-:                                 → : 
-Color                             → Color
-) => {\n                          → ) => {\n  
-return                            → return 
-__cs_c                            → c
- ===                              →  === 
-cs.splice(                        → ${ [-semantic]
-Color.Blue                        → Color.Blue
- satisfies typeof cs.Spliceable)  → } [-semantic]
- ?                                →  ? 
-"blue"                            → "blue"
- :                                →  : 
-"red"                             → "red"
-;                                 → ;
-\n}                               → \n}
-)                                 → `
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_held                         → held
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-cs.splice(                        → ${ [-semantic]
-Color.Red                         → Color.Red
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)                                 → )
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → (\n      <
-span                              → span
-                                  →  
-onclick                           → onclick
-={cs.lift(                        → ={
-() =>                             → () => 
-__cs_held                         → held
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-cs.splice(                        → ${ [-semantic]
-Color.Blue                        → Color.Blue
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)                                 → )
-)}                                → }
->{cs.lift(                        → >\n        {
-cs.splice(                        →  [-semantic]
-(colorName)                       → $colorName
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-__cs_held                         → held
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)                                 → )
-)}</                              → }\n      </
-span                              → span
->                                 → >\n    )
-;                                 → ;
-\n})())                           → \n  }`
+cs.lift(                → cs`
+(                       → (
+__cs_c                  → c
+:                       → : 
+Color                   → Color
+) => {\n                → ) => {\n  
+return                  → return 
+__cs_c                  → c
+ ===                    →  === 
+cs.splice(              → ${ [-semantic]
+Color.Blue              → Color.Blue
+)                       → } [-semantic]
+ ?                      →  ? 
+"blue"                  → "blue"
+ :                      →  : 
+"red"                   → "red"
+;                       → ;
+\n}                     → \n}
+)                       → `
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_held               → held
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+cs.splice(              → ${ [-semantic]
+Color.Red               → Color.Red
+)                       → } [-semantic]
+)                       → )
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → (\n      <
+span                    → span
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+() =>                   → () => 
+__cs_held               → held
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+cs.splice(              → ${ [-semantic]
+Color.Blue              → Color.Blue
+)                       → } [-semantic]
+)                       → )
+)}                      → }
+>{cs.lift(              → >\n        {
+cs.splice(              →  [-semantic]
+(colorName)             → $colorName
+)                       →  [-semantic]
+(                       → (
+__cs_held               → held
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)                       → )
+)}</                    → }\n      </
+span                    → span
+>                       → >\n    )
+;                       → ;
+\n})())                 → \n  }`

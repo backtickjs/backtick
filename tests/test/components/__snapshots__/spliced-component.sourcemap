@@ -1,73 +1,73 @@
-cs.lift((() => {\n                → cs`{\n      
-const                             → const 
-__cs_Heading                      → Heading
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(Card)                            → $Card
- satisfies typeof cs.Spliceable)  →  [-semantic]
-;                                 → ;
-\n                                → \n      
-return                            → return 
-<                                 → <
-__cs_Heading                      → Heading
-                                  →  
-title                             → title
-={                                → =
-"tag"                             → "tag"
-}                                 → 
-/>                                →  />
-;                                 → ;
-\n})())                           → \n    }`
-cs.lift(                          → cs`
-<                                 → <
-div                               → div
->{cs.lift(                        → >\n      {\n        
-cs.splice(                        → ${ [-semantic]
-cs.lift((() => {\n                → cs`{\n          
-const                             → const 
-__cs_Heading                      → Heading
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(Card)                            → $Card
- satisfies typeof cs.Spliceable)  →  [-semantic]
-;                                 → ;
-\n                                → \n          
-return                            → return 
-<                                 → <
-__cs_Heading                      → Heading
-                                  →  
-title                             → title
-={                                → =
-"first"                           → "first"
-}                                 → 
-/>                                →  />
-;                                 → ;
-\n})())                           → \n        }`
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)}{cs.lift(                       → \n      }\n      {\n        
-cs.splice(                        → ${ [-semantic]
-cs.lift((() => {\n                → cs`{\n          
-const                             → const 
-__cs_Heading                      → Heading
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(Card)                            → $Card
- satisfies typeof cs.Spliceable)  →  [-semantic]
-;                                 → ;
-\n                                → \n          
-return                            → return 
-<                                 → <
-__cs_Heading                      → Heading
-                                  →  
-title                             → title
-={                                → =
-"second"                          → "second"
-}                                 → 
-/>                                →  />
-;                                 → ;
-\n})())                           → \n        }`
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)}</                              → \n      }\n    </
-div                               → div
->                                 → >
-)                                 → `
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_Heading            → Heading
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(Card)                  → $Card
+)                       →  [-semantic]
+;                       → ;
+\n                      → \n      
+return                  → return 
+<                       → <
+__cs_Heading            → Heading
+                        →  
+title                   → title
+={                      → =
+"tag"                   → "tag"
+}                       → 
+/>                      →  />
+;                       → ;
+\n})())                 → \n    }`
+cs.lift(                → cs`
+<                       → <
+div                     → div
+>{cs.lift(              → >\n      {\n        
+cs.splice(              → ${ [-semantic]
+cs.lift((() => {\n      → cs`{\n          
+const                   → const 
+__cs_Heading            → Heading
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(Card)                  → $Card
+)                       →  [-semantic]
+;                       → ;
+\n                      → \n          
+return                  → return 
+<                       → <
+__cs_Heading            → Heading
+                        →  
+title                   → title
+={                      → =
+"first"                 → "first"
+}                       → 
+/>                      →  />
+;                       → ;
+\n})())                 → \n        }`
+)                       → } [-semantic]
+)}{cs.lift(             → \n      }\n      {\n        
+cs.splice(              → ${ [-semantic]
+cs.lift((() => {\n      → cs`{\n          
+const                   → const 
+__cs_Heading            → Heading
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(Card)                  → $Card
+)                       →  [-semantic]
+;                       → ;
+\n                      → \n          
+return                  → return 
+<                       → <
+__cs_Heading            → Heading
+                        →  
+title                   → title
+={                      → =
+"second"                → "second"
+}                       → 
+/>                      →  />
+;                       → ;
+\n})())                 → \n        }`
+)                       → } [-semantic]
+)}</                    → \n      }\n    </
+div                     → div
+>                       → >
+)                       → `

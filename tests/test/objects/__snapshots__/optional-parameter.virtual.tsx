@@ -21,6 +21,6 @@ it("optionalParameter", async (t) => {
   await snapshotCase(
     t,
     "optionalParameter",
-    cs.lift({ named: cs.splice((greet) satisfies typeof cs.Spliceable)("hi"), explicit: cs.splice((greet) satisfies typeof cs.Spliceable)(undefined), omitted: cs.splice((greet) satisfies typeof cs.Spliceable)(), supplied: cs.splice((callIfGiven) satisfies typeof cs.Spliceable)(cs.splice((double) satisfies typeof cs.Spliceable)), fallback: cs.splice((callIfGiven) satisfies typeof cs.Spliceable)(undefined), omittedCallback: cs.splice((callIfGiven) satisfies typeof cs.Spliceable)() }),
+    cs.lift({ named: cs.splice((greet))("hi"), explicit: cs.splice((greet))(undefined), omitted: cs.splice((greet))(), supplied: cs.splice((callIfGiven))(cs.splice((double))), fallback: cs.splice((callIfGiven))(undefined), omittedCallback: cs.splice((callIfGiven))() }),
   );
 });

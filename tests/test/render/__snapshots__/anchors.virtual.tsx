@@ -31,7 +31,7 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = cs.splice((createSignal) satisfies typeof cs.Spliceable)<number[]>([1, 2, 3]);
+    const __cs_ids = cs.splice((createSignal))<number[]>([1, 2, 3]);
     const __cs_clear = () => {
         __cs_ids[1]([]);
     };

@@ -15,6 +15,6 @@ it("nullLiteral", async (t) => {
   await snapshotCase(
     t,
     "nullLiteral",
-    cs.lift({ missing: cs.splice((orDash) satisfies typeof cs.Spliceable)(null), present: cs.splice((orDash) satisfies typeof cs.Spliceable)("hi"), bare: null }),
+    cs.lift({ missing: cs.splice((orDash))(null), present: cs.splice((orDash))("hi"), bare: null }),
   );
 });

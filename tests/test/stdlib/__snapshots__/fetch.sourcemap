@@ -5,7 +5,7 @@ __cs_held                                 → held
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 "waiting"                                 → "waiting"
 )                                         → )

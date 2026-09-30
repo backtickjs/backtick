@@ -9,6 +9,6 @@ export default cs.lift((() => {
     return cs.splice(cs.lift((() => {
     const __cs_Badge = 5;
     // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.
-    return cs.splice(cs.lift(<__cs_Badge n={1}/>) satisfies typeof cs.Spliceable);
-})()) satisfies typeof cs.Spliceable);
+    return cs.splice(cs.lift(<__cs_Badge n={1}/>));
+})()));
 })());

@@ -1,17 +1,17 @@
-cs.lift((() => {\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n    → cs`{\n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n  
+cs.lift((() => {\n    // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n    → cs`{\n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
 const                                     → const 
 __cs_held                                 → held
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 cs.splice(                                →  [-semantic]
 (host)                                    → $host
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 )                                         → )
 ;                                         → ;
-\n    // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n    → \n  // @ts-expect-error: Type 'Date' does not satisfy the expected type 'Spliceable'.\n  
+\n    // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n    → \n  // @ts-expect-error: Argument of type 'Date' is not assignable to parameter of type 'Spliceable'.\n  
 __cs_held                                 → held
 [                                         → [
 1                                         → 1
@@ -19,7 +19,7 @@ __cs_held                                 → held
 (                                         → (
 cs.splice(                                →  [-semantic]
 (host)                                    → $host
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 )                                         → )
 ;                                         → ;
 \n})())                                   → \n}`

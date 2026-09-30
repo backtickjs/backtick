@@ -6,14 +6,14 @@ import { snapshotCase } from "../snapshotCase.ts";
 function outerBase(inner: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = 1;
-    return __cs_base + cs.splice(middleBase(inner) satisfies typeof cs.Spliceable);
+    return __cs_base + cs.splice(middleBase(inner));
 })());
 }
 
 function middleBase(inner: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = 2;
-    return __cs_base * cs.splice((inner) satisfies typeof cs.Spliceable);
+    return __cs_base * cs.splice((inner));
 })());
 }
 
@@ -27,7 +27,7 @@ it("deepShadowing", async (t) => {
     "deepShadowing",
     cs.lift((() => {
     const __cs_base = 10;
-    return cs.splice(outerBase(cs.lift(__cs_base)) satisfies typeof cs.Spliceable);
+    return cs.splice(outerBase(cs.lift(__cs_base)));
 })()),
   );
 });

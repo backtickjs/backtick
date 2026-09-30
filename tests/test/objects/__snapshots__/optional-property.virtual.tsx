@@ -18,6 +18,6 @@ it("optionalProperty", async (t) => {
   await snapshotCase(
     t,
     "optionalProperty",
-    cs.lift({ present: cs.splice((read) satisfies typeof cs.Spliceable)({ label: "a", inner: { z: 3 } }), partial: cs.splice((read) satisfies typeof cs.Spliceable)({ label: "b", inner: {} }), omitted: cs.splice((read) satisfies typeof cs.Spliceable)({ label: "c" }) }),
+    cs.lift({ present: cs.splice((read))({ label: "a", inner: { z: 3 } }), partial: cs.splice((read))({ label: "b", inner: {} }), omitted: cs.splice((read))({ label: "c" }) }),
   );
 });

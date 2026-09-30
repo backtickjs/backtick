@@ -14,7 +14,7 @@ it("eventHandlers", async (t) => {
     t,
     "eventHandlers",
     cs.lift((() => {
-    const __cs_said = cs.splice((createSignal) satisfies typeof cs.Spliceable)("");
+    const __cs_said = cs.splice((createSignal))("");
     return <form onsubmit={cs.lift(__cs_event => {
         __cs_event.preventDefault();
         __cs_said[1](__cs_event.type + " " + __cs_event.cancelable);

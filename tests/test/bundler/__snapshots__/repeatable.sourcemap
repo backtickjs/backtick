@@ -1,211 +1,211 @@
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(n)                               → $n
- satisfies typeof cs.Spliceable)  →  [-semantic]
- *                                →  * 
-2                                 → 2
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(n)                               → $n
- satisfies typeof cs.Spliceable)  →  [-semantic]
- +                                →  + 
-cs.splice(                        →  [-semantic]
-(m)                               → $m
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)                                 → `
-cs.lift(                          → cs`
-"shared"                          → "shared"
-)                                 → `
-cs.lift((() => {\n                → cs`{\n  
-const                             → const 
-__cs_count                        → count
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-1                                 → 1
-)                                 → )
-;                                 → ;
-\n                                → \n  
-const                             → const 
-__cs_Heading                      → Heading
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(Card)                            → $Card
- satisfies typeof cs.Spliceable)  →  [-semantic]
-;                                 → ;
-\n                                → \n  
-const                             → const 
-__cs_rows                         → rows
- =                                →  = 
-[                                 → [
-1                                 → 1
-,                                 → , 
-2                                 → 2
-,                                 → , 
-3                                 → 3
-]                                 → ]
-;                                 → ;
-\n                                → \n  
-const                             → const 
-__cs_total                        → total
- =                                →  = 
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-cs.splice(                        → ${ [-semantic]
-cs.lift(                          → cs`
-__cs_rows                         → rows
-.                                 → .
-length                            → length
-)                                 → `
- satisfies typeof cs.Spliceable)  → } [-semantic]
-;                                 → ;
-\n                                → \n  
-return                            → return 
-<                                 → (\n    <
-section                           → section
->{cs.lift(                        → >\n      
-<                                 → <
-__cs_Heading                      → Heading
-                                  →  
-title                             → title
-={                                → =
-"spliced"                         → "spliced"
-}                                 → 
-/>                                →  />
-)}{cs.lift(                       → \n      {
-cs.splice(                        → ${ [-semantic]
-(<Card title="element" />)        → (<Card title="element" />)
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)}{cs.lift(                       → }\n      {
-cs.splice(                        → ${ [-semantic]
-(<Card title={shared} />)         → (<Card title={shared} />)
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)}{cs.lift(                       → }\n      
-<                                 → <
-p                                 → p
->{cs.lift(                        → >{
-cs.splice(                        →  [-semantic]
-(doubled)                         → $doubled
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)                                 → )
-)}</                              → }</
-p                                 → p
->                                 → >
-)}{cs.lift(                       → \n      
-<                                 → <
-p                                 → p
->{cs.lift(                        → >{
-cs.splice(                        →  [-semantic]
-(pair)                            → $pair
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-1                                 → 1
-)                                 → )
-(                                 → (
-2                                 → 2
-)                                 → )
-)}</                              → }</
-p                                 → p
->                                 → >
-)}{cs.lift(                       → \n      
-<                                 → <
-p                                 → p
->{cs.lift(                        → >{
-cs.splice(                        →  [-semantic]
-(shared)                          → $shared
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)}</                              → }</
-p                                 → p
->                                 → >
-)}{cs.lift(                       → \n      
-<                                 → <
-p                                 → p
->{cs.lift(                        → >{
-__cs_total                        → total
-)}</                              → }</
-p                                 → p
->                                 → >
-)}{cs.lift(                       → \n      
-<                                 → <
-ul                                → ul
->{cs.lift(                        → >\n        
-<                                 → <
-For                               → For
-                                  →  
-each                              → each
-={cs.lift(                        → ={
-__cs_rows                         → rows
-)}                                → }
->{cs.lift(                        → >{
-(                                 → (
-__cs_row                          → row
-:                                 → : 
-number                            → number
-) =>                              → ) => 
-<                                 → <
-li                                → li
->{cs.lift(                        → >{
-__cs_row                          → row
- +                                →  + 
-__cs_count                        → count
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}</                              → }</
-li                                → li
->                                 → >
-)}</                              → }</
-For                               → For
->                                 → >
-)}</                              → \n      </
-ul                                → ul
->                                 → >
-)}</                              → \n    </
-section                           → section
->                                 → >\n  )
-;                                 → ;
-\n})())                           → \n}`
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(doubled)                         → $doubled
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-1                                 → 1
-)                                 → )
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(pair)                            → $pair
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-1                                 → 1
-)                                 → )
-(                                 → (
-2                                 → 2
-)                                 → )
- +                                →  + 
-cs.splice(                        →  [-semantic]
-(shared)                          → $shared
- satisfies typeof cs.Spliceable)  →  [-semantic]
-.                                 → .
-length                            → length
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        → ${ [-semantic]
-(<Card title="other" />)          → (<Card title="other" />)
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)                                 → `
+cs.lift(                    → cs`
+cs.splice(                  →  [-semantic]
+(n)                         → $n
+)                           →  [-semantic]
+ *                          →  * 
+2                           → 2
+)                           → `
+cs.lift(                    → cs`
+cs.splice(                  →  [-semantic]
+(n)                         → $n
+)                           →  [-semantic]
+ +                          →  + 
+cs.splice(                  →  [-semantic]
+(m)                         → $m
+)                           →  [-semantic]
+)                           → `
+cs.lift(                    → cs`
+"shared"                    → "shared"
+)                           → `
+cs.lift((() => {\n          → cs`{\n  
+const                       → const 
+__cs_count                  → count
+ =                          →  = 
+cs.splice(                  →  [-semantic]
+(createSignal)              → $createSignal
+)                           →  [-semantic]
+(                           → (
+1                           → 1
+)                           → )
+;                           → ;
+\n                          → \n  
+const                       → const 
+__cs_Heading                → Heading
+ =                          →  = 
+cs.splice(                  →  [-semantic]
+(Card)                      → $Card
+)                           →  [-semantic]
+;                           → ;
+\n                          → \n  
+const                       → const 
+__cs_rows                   → rows
+ =                          →  = 
+[                           → [
+1                           → 1
+,                           → , 
+2                           → 2
+,                           → , 
+3                           → 3
+]                           → ]
+;                           → ;
+\n                          → \n  
+const                       → const 
+__cs_total                  → total
+ =                          →  = 
+__cs_count                  → count
+[                           → [
+0                           → 0
+]                           → ]
+()                          → ()
+ +                          →  + 
+cs.splice(                  → ${ [-semantic]
+cs.lift(                    → cs`
+__cs_rows                   → rows
+.                           → .
+length                      → length
+)                           → `
+)                           → } [-semantic]
+;                           → ;
+\n                          → \n  
+return                      → return 
+<                           → (\n    <
+section                     → section
+>{cs.lift(                  → >\n      
+<                           → <
+__cs_Heading                → Heading
+                            →  
+title                       → title
+={                          → =
+"spliced"                   → "spliced"
+}                           → 
+/>                          →  />
+)}{cs.lift(                 → \n      {
+cs.splice(                  → ${ [-semantic]
+(<Card title="element" />)  → (<Card title="element" />)
+)                           → } [-semantic]
+)}{cs.lift(                 → }\n      {
+cs.splice(                  → ${ [-semantic]
+(<Card title={shared} />)   → (<Card title={shared} />)
+)                           → } [-semantic]
+)}{cs.lift(                 → }\n      
+<                           → <
+p                           → p
+>{cs.lift(                  → >{
+cs.splice(                  →  [-semantic]
+(doubled)                   → $doubled
+)                           →  [-semantic]
+(                           → (
+__cs_count                  → count
+[                           → [
+0                           → 0
+]                           → ]
+()                          → ()
+)                           → )
+)}</                        → }</
+p                           → p
+>                           → >
+)}{cs.lift(                 → \n      
+<                           → <
+p                           → p
+>{cs.lift(                  → >{
+cs.splice(                  →  [-semantic]
+(pair)                      → $pair
+)                           →  [-semantic]
+(                           → (
+1                           → 1
+)                           → )
+(                           → (
+2                           → 2
+)                           → )
+)}</                        → }</
+p                           → p
+>                           → >
+)}{cs.lift(                 → \n      
+<                           → <
+p                           → p
+>{cs.lift(                  → >{
+cs.splice(                  →  [-semantic]
+(shared)                    → $shared
+)                           →  [-semantic]
+)}</                        → }</
+p                           → p
+>                           → >
+)}{cs.lift(                 → \n      
+<                           → <
+p                           → p
+>{cs.lift(                  → >{
+__cs_total                  → total
+)}</                        → }</
+p                           → p
+>                           → >
+)}{cs.lift(                 → \n      
+<                           → <
+ul                          → ul
+>{cs.lift(                  → >\n        
+<                           → <
+For                         → For
+                            →  
+each                        → each
+={cs.lift(                  → ={
+__cs_rows                   → rows
+)}                          → }
+>{cs.lift(                  → >{
+(                           → (
+__cs_row                    → row
+:                           → : 
+number                      → number
+) =>                        → ) => 
+<                           → <
+li                          → li
+>{cs.lift(                  → >{
+__cs_row                    → row
+ +                          →  + 
+__cs_count                  → count
+[                           → [
+0                           → 0
+]                           → ]
+()                          → ()
+)}</                        → }</
+li                          → li
+>                           → >
+)}</                        → }</
+For                         → For
+>                           → >
+)}</                        → \n      </
+ul                          → ul
+>                           → >
+)}</                        → \n    </
+section                     → section
+>                           → >\n  )
+;                           → ;
+\n})())                     → \n}`
+cs.lift(                    → cs`
+cs.splice(                  →  [-semantic]
+(doubled)                   → $doubled
+)                           →  [-semantic]
+(                           → (
+1                           → 1
+)                           → )
+)                           → `
+cs.lift(                    → cs`
+cs.splice(                  →  [-semantic]
+(pair)                      → $pair
+)                           →  [-semantic]
+(                           → (
+1                           → 1
+)                           → )
+(                           → (
+2                           → 2
+)                           → )
+ +                          →  + 
+cs.splice(                  →  [-semantic]
+(shared)                    → $shared
+)                           →  [-semantic]
+.                           → .
+length                      → length
+)                           → `
+cs.lift(                    → cs`
+cs.splice(                  → ${ [-semantic]
+(<Card title="other" />)    → (<Card title="other" />)
+)                           → } [-semantic]
+)                           → `

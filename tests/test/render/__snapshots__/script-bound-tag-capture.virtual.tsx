@@ -11,14 +11,14 @@ import { draw } from "@backtickjs/solid-js/testing";
 // it the way it captures any binding, and calls it as a component: once, with
 // its props read on access.
 const scriptBoundTagCapture = cs.lift((() => {
-    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    const __cs_count = cs.splice((createSignal))(0);
     const __cs_Badge = (__cs_props: {
         n: number;
     }) => <b>{cs.lift("n " + __cs_props.n)}</b>;
-    return <div>{cs.lift(cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]()}/>) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(cs.lift((() => {
+    return <div>{cs.lift(cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]()}/>)))}{cs.lift(cs.splice(cs.lift((() => {
     const __cs_skipped = 10;
-    return cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]() + 100}/>) satisfies typeof cs.Spliceable);
-})()) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice((<section>{cs.lift(<__cs_Badge n={__cs_count[0]() + 1000}/>)}</section>) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(cs.lift(<For each={cs.lift([1, 2])}>{cs.lift((__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count[0]()}/>)}</For>) satisfies typeof cs.Spliceable))}{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>more</button>)}</div>;
+    return cs.splice(cs.lift(<__cs_Badge n={__cs_count[0]() + 100}/>));
+})())))}{cs.lift(cs.splice((<section>{cs.lift(<__cs_Badge n={__cs_count[0]() + 1000}/>)}</section>)))}{cs.lift(cs.splice(cs.lift(<For each={cs.lift([1, 2])}>{cs.lift((__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count[0]()}/>)}</For>)))}{cs.lift(<button onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>more</button>)}</div>;
 })());
 
 it("scriptBoundTagCapture", async (t) => {

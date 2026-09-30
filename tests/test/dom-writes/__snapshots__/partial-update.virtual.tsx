@@ -13,7 +13,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.lift((() => {
-    const __cs_rows = [1, 2, 3, 4].map((__cs_id: number) => ({ id: __cs_id, label: cs.splice((createSignal) satisfies typeof cs.Spliceable)("row " + __cs_id) }));
+    const __cs_rows = [1, 2, 3, 4].map((__cs_id: number) => ({ id: __cs_id, label: cs.splice((createSignal))("row " + __cs_id) }));
     const __cs_update = () => {
         for (let __cs_index = 0; __cs_index < __cs_rows.length; __cs_index = __cs_index + 2) {
             const __cs_label = __cs_rows[__cs_index].label;

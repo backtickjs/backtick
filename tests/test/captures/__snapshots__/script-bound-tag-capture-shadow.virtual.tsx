@@ -17,8 +17,8 @@ function labelled(label: Client<string>) {
   return cs.lift((() => {
     const __cs_Card = (__cs_props: {
         n: number;
-    }) => <i>{cs.lift(cs.splice((label) satisfies typeof cs.Spliceable) + __cs_props.n)}</i>;
-    return <p>{cs.lift(cs.splice(cs.lift(<__cs_Card n={1}/>) satisfies typeof cs.Spliceable))}</p>;
+    }) => <i>{cs.lift(cs.splice((label)) + __cs_props.n)}</i>;
+    return <p>{cs.lift(cs.splice(cs.lift(<__cs_Card n={1}/>)))}</p>;
 })());
 }
 
@@ -26,7 +26,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs.lift(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(cs.splice(labelled(cs.lift("a")) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(labelled(cs.lift("b")) satisfies typeof cs.Spliceable))}</div>),
+    cs.lift(<div>{cs.lift(<Card title={cs.lift("host")}/>)}{cs.lift(cs.splice(labelled(cs.lift("a"))))}{cs.lift(cs.splice(labelled(cs.lift("b"))))}</div>),
   );
 });
 

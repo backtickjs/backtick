@@ -1,26 +1,26 @@
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_n                            → n
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-2                                 → 2
-)                                 → )
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → <
-em                                → em
->{cs.lift(                        → >{
-__cs_n                            → n
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
-)}</                              → }</
-em                                → em
->                                 → >
-;                                 → ;
-\n})())                           → \n  }`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_n                  → n
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+2                       → 2
+)                       → )
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → <
+em                      → em
+>{cs.lift(              → >{
+__cs_n                  → n
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+)}</                    → }</
+em                      → em
+>                       → >
+;                       → ;
+\n})())                 → \n  }`

@@ -1,47 +1,47 @@
-cs.lift((() => {\n                → cs`{\n      
-const                             → const 
-__cs_n                            → n
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-cs.splice(                        →  [-semantic]
-(five)                            → $five
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)                                 → )
-;                                 → ;
-\n                                → \n      
-__cs_n                            → n
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-6                                 → 6
-)                                 → )
-;                                 → ;
-\n                                → \n      
-const                             → const 
-__cs_c                            → c
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-cs.splice(                        → ${ [-semantic]
-Color.Red                         → Color.Red
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)                                 → )
-;                                 → ;
-\n                                → \n      
-__cs_c                            → c
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-cs.splice(                        → ${ [-semantic]
-Color.Blue                        → Color.Blue
- satisfies typeof cs.Spliceable)  → } [-semantic]
-)                                 → )
-;                                 → ;
-\n})())                           → \n    }`
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_n                  → n
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+cs.splice(              →  [-semantic]
+(five)                  → $five
+)                       →  [-semantic]
+)                       → )
+;                       → ;
+\n                      → \n      
+__cs_n                  → n
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+6                       → 6
+)                       → )
+;                       → ;
+\n                      → \n      
+const                   → const 
+__cs_c                  → c
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+cs.splice(              → ${ [-semantic]
+Color.Red               → Color.Red
+)                       → } [-semantic]
+)                       → )
+;                       → ;
+\n                      → \n      
+__cs_c                  → c
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+cs.splice(              → ${ [-semantic]
+Color.Blue              → Color.Blue
+)                       → } [-semantic]
+)                       → )
+;                       → ;
+\n})())                 → \n    }`

@@ -1,7 +1,7 @@
 cs.lift((() => {\n                      → cs`{\n          
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 () =>                                   → () => 
 cs.globalThis.                          → 
@@ -28,7 +28,7 @@ __cs_n                                  → n
  =                                      →  = 
 cs.splice(                              →  [-semantic]
 (createSignal)                          → $createSignal
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 1                                       → 1
 )                                       → )
@@ -39,12 +39,12 @@ __cs_doubled                            → doubled
  =                                      →  = 
 cs.splice(                              →  [-semantic]
 (createMemo)                            → $createMemo
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 () => {\n                               → () => {\n            
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 () =>                                   → () => 
 cs.globalThis.                          → 
@@ -105,7 +105,7 @@ __cs_timer                              → timer
  =                                      →  = 
 cs.splice(                              →  [-semantic]
 (createSignal)                          → $createSignal
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 0                                       → 0
 )                                       → )
@@ -113,7 +113,7 @@ cs.splice(                              →  [-semantic]
 \n                                      → \n          
 cs.splice(                              →  [-semantic]
 (onMount)                               → $onMount
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 () => {\n                               → () => {\n            
 __cs_timer                              → timer
@@ -145,7 +145,7 @@ log                                     → log
 \n                                      → \n          
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 () =>                                   → () => 
 cs.globalThis.                          → 
@@ -180,7 +180,7 @@ onclick                                 → onclick
 () =>                                   → () => 
 cs.splice(                              →  [-semantic]
 (onCleanup)                             → $onCleanup
- satisfies typeof cs.Spliceable)        →  [-semantic]
+)                                       →  [-semantic]
 (                                       → (
 () =>                                   → () => 
 cs.globalThis.                          → 

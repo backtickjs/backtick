@@ -15,7 +15,7 @@ it("splicedComponent", async (t) => {
     t,
     "splicedComponent",
     cs.lift((() => {
-    const __cs_Heading = cs.splice((Card) satisfies typeof cs.Spliceable);
+    const __cs_Heading = cs.splice((Card));
     return <__cs_Heading title={"tag"}/>;
 })()),
   );
@@ -27,11 +27,11 @@ it("splicedComponentTwice", async (t) => {
     t,
     "splicedComponentTwice",
     cs.lift(<div>{cs.lift(cs.splice(cs.lift((() => {
-    const __cs_Heading = cs.splice((Card) satisfies typeof cs.Spliceable);
+    const __cs_Heading = cs.splice((Card));
     return <__cs_Heading title={"first"}/>;
-})()) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(cs.lift((() => {
-    const __cs_Heading = cs.splice((Card) satisfies typeof cs.Spliceable);
+})())))}{cs.lift(cs.splice(cs.lift((() => {
+    const __cs_Heading = cs.splice((Card));
     return <__cs_Heading title={"second"}/>;
-})()) satisfies typeof cs.Spliceable))}</div>),
+})())))}</div>),
   );
 });

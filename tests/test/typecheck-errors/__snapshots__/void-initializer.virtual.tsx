@@ -8,12 +8,12 @@ const ping = cs.lift(() => {
 });
 
 const script = cs.lift((() => {
-    const __cs_x = cs.splice((ping) satisfies typeof cs.Spliceable)();
+    const __cs_x = cs.splice((ping))();
     return 1;
 })());
 
 const action = cs.lift((() => {
-    const __cs_x = cs.splice((ping) satisfies typeof cs.Spliceable)();
+    const __cs_x = cs.splice((ping))();
 })());
 
 // An error inside a checked initializer reports once: the duplicate copy
@@ -24,6 +24,6 @@ const label = cs.lift((__cs_text: string) => {
 
 const wrongArgument = cs.lift((() => {
     // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'string'.
-    const __cs_x = cs.splice((label) satisfies typeof cs.Spliceable)(true);
+    const __cs_x = cs.splice((label))(true);
     return 1;
 })());

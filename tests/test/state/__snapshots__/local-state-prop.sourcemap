@@ -1,73 +1,73 @@
-cs.lift(                          → cs`
-"font-size: "                     → "font-size: "
- +                                →  + 
-cs.splice(                        →  [-semantic]
-(size)                            → $size
- satisfies typeof cs.Spliceable)  →  [-semantic]
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-"px"                              → "px"
-)                                 → `
-cs.lift(                          → cs`
-() => {\n                         → () => {\n      
-cs.splice(                        →  [-semantic]
-(size)                            → $size
- satisfies typeof cs.Spliceable)  →  [-semantic]
-[                                 → [
-1                                 → 1
-]                                 → ]
-(                                 → (
-cs.splice(                        →  [-semantic]
-(size)                            → $size
- satisfies typeof cs.Spliceable)  →  [-semantic]
-[                                 → [
-0                                 → 0
-]                                 → ]
-()                                → ()
- +                                →  + 
-1                                 → 1
-)                                 → )
-;                                 → ;
-\n}                               → \n    }
-)                                 → `
-cs.lift((() => {\n                → cs`{\n    
-const                             → const 
-__cs_size                         → size
- =                                →  = 
-cs.splice(                        →  [-semantic]
-(createSignal)                    → $createSignal
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-16                                → 16
-)                                 → )
-;                                 → ;
-\n                                → \n    
-return                            → return 
-<                                 → (\n      <
-div                               → div
->{cs.lift(                        → >\n        
-<                                 → <
-SharedCounter                     → SharedCounter
-                                  →  
-size                              → size
-={cs.lift(                        → ={
-__cs_size                         → size
-)}                                → }
-/>                                →  />
-)}{cs.lift(                       → \n        
-<                                 → <
-SharedCounter                     → SharedCounter
-                                  →  
-size                              → size
-={cs.lift(                        → ={
-__cs_size                         → size
-)}                                → }
-/>                                →  />
-)}</                              → \n      </
-div                               → div
->                                 → >\n    )
-;                                 → ;
-\n})())                           → \n  }`
+cs.lift(                → cs`
+"font-size: "           → "font-size: "
+ +                      →  + 
+cs.splice(              →  [-semantic]
+(size)                  → $size
+)                       →  [-semantic]
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+"px"                    → "px"
+)                       → `
+cs.lift(                → cs`
+() => {\n               → () => {\n      
+cs.splice(              →  [-semantic]
+(size)                  → $size
+)                       →  [-semantic]
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+cs.splice(              →  [-semantic]
+(size)                  → $size
+)                       →  [-semantic]
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1                       → 1
+)                       → )
+;                       → ;
+\n}                     → \n    }
+)                       → `
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_size               → size
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+16                      → 16
+)                       → )
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → (\n      <
+div                     → div
+>{cs.lift(              → >\n        
+<                       → <
+SharedCounter           → SharedCounter
+                        →  
+size                    → size
+={cs.lift(              → ={
+__cs_size               → size
+)}                      → }
+/>                      →  />
+)}{cs.lift(             → \n        
+<                       → <
+SharedCounter           → SharedCounter
+                        →  
+size                    → size
+={cs.lift(              → ={
+__cs_size               → size
+)}                      → }
+/>                      →  />
+)}</                    → \n      </
+div                     → div
+>                       → >\n    )
+;                       → ;
+\n})())                 → \n  }`

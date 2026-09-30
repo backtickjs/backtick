@@ -13,7 +13,7 @@ it("capturedObjectAssignment", async (t) => {
     const __cs_counter = { count: 0 };
     const __cs_bump = cs.splice(cs.lift(() => {
     __cs_counter.count += 1;
-}) satisfies typeof cs.Spliceable);
+}));
     __cs_bump();
     __cs_bump();
     return __cs_counter.count;

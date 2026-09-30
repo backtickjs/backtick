@@ -1,5 +1,5 @@
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(value)                           → $value
- satisfies typeof cs.Spliceable)  →  [-semantic]
-)                                 → `
+cs.lift(    → cs`
+cs.splice(  →  [-semantic]
+(value)     → $value
+)           →  [-semantic]
+)           → `

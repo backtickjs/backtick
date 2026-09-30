@@ -1,32 +1,32 @@
-cs.lift(                          → cs`
-(                                 → (
-__cs_name                         → name
-:                                 → : 
-string                            → string
-) =>                              → ) => 
-<>{cs.lift(                       → (\n  <>\n    
-<                                 → <
-span                              → span
->a sentence across lines</        → >a sentence across lines</
-span                              → span
->                                 → >
-)}{cs.lift(                       → \n    
-<                                 → <
-span                              → span
->{cs.lift(                        → >\n      {
-__cs_name                         → name
-)} {cs.lift(                      → } {
-__cs_name                         → name
-)}</                              → }\n    </
-span                              → span
->                                 → >
-)}</>                             → \n  </>\n)
-)                                 → `
-cs.lift(                          → cs`
-cs.splice(                        →  [-semantic]
-(listed)                          → $listed
- satisfies typeof cs.Spliceable)  →  [-semantic]
-(                                 → (
-"x"                               → "x"
-)                                 → )
-)                                 → `
+cs.lift(                    → cs`
+(                           → (
+__cs_name                   → name
+:                           → : 
+string                      → string
+) =>                        → ) => 
+<>{cs.lift(                 → (\n  <>\n    
+<                           → <
+span                        → span
+>a sentence across lines</  → >a sentence across lines</
+span                        → span
+>                           → >
+)}{cs.lift(                 → \n    
+<                           → <
+span                        → span
+>{cs.lift(                  → >\n      {
+__cs_name                   → name
+)} {cs.lift(                → } {
+__cs_name                   → name
+)}</                        → }\n    </
+span                        → span
+>                           → >
+)}</>                       → \n  </>\n)
+)                           → `
+cs.lift(                    → cs`
+cs.splice(                  →  [-semantic]
+(listed)                    → $listed
+)                           →  [-semantic]
+(                           → (
+"x"                         → "x"
+)                           → )
+)                           → `

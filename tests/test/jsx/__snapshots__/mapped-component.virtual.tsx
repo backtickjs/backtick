@@ -24,8 +24,8 @@ it("mappedComponent", async (t) => {
     t,
     "mappedComponent",
     <div>
-      <For each={cs.lift(cs.splice((rows) satisfies typeof cs.Spliceable))}>
-        {cs.lift((__cs_row: number) => cs.splice((<span>{cs.lift("row " + __cs_row)}</span>) satisfies typeof cs.Spliceable))}
+      <For each={cs.lift(cs.splice((rows)))}>
+        {cs.lift((__cs_row: number) => cs.splice((<span>{cs.lift("row " + __cs_row)}</span>)))}
       </For>
     </div>,
   );

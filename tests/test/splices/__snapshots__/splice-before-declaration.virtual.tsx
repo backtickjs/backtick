@@ -15,7 +15,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 function sandwich(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_before = 1;
-    const __cs_spliced = cs.splice((fragment) satisfies typeof cs.Spliceable);
+    const __cs_spliced = cs.splice((fragment));
     const __cs_after = 2;
     return __cs_before + __cs_spliced + __cs_after;
 })());
@@ -25,6 +25,6 @@ it("spliceBeforeDeclaration", async (t) => {
   await snapshotCase(
     t,
     "spliceBeforeDeclaration",
-    cs.lift(cs.splice(sandwich(cs.lift(10)) satisfies typeof cs.Spliceable) + cs.splice(sandwich(cs.lift(20)) satisfies typeof cs.Spliceable)),
+    cs.lift(cs.splice(sandwich(cs.lift(10))) + cs.splice(sandwich(cs.lift(20)))),
   );
 });

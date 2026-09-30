@@ -13,12 +13,12 @@ import { snapshotCase } from "../snapshotCase.ts";
 const HeldRow = async () => <span>x</span>;
 
 const heldElement = cs.lift(() => {
-    const __cs_tree = cs.splice((<div />) satisfies typeof cs.Spliceable);
+    const __cs_tree = cs.splice((<div />));
     return __cs_tree;
 });
 
 const heldComponent = cs.lift(() => {
-    const __cs_tree = cs.splice((<HeldRow />) satisfies typeof cs.Spliceable);
+    const __cs_tree = cs.splice((<HeldRow />));
     return __cs_tree;
 });
 
@@ -27,8 +27,8 @@ it("treeInVariable", async (t) => {
     t,
     "treeInVariable",
     <div>
-      {cs.lift(cs.splice((heldElement) satisfies typeof cs.Spliceable)())}
-      {cs.lift(cs.splice((heldComponent) satisfies typeof cs.Spliceable)())}
+      {cs.lift(cs.splice((heldElement))())}
+      {cs.lift(cs.splice((heldComponent))())}
     </div>,
   );
 });

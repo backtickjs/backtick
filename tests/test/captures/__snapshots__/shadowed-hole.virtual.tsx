@@ -16,7 +16,7 @@ function wrapShadowed(fragment: Client<number>): Client<number> {
     const __cs_total = 1;
     {
         const __cs_total = 2;
-        return __cs_total + cs.splice((fragment) satisfies typeof cs.Spliceable);
+        return __cs_total + cs.splice((fragment));
     }
 })());
 }
@@ -25,6 +25,6 @@ it("shadowedHole", async (t) => {
   await snapshotCase(
     t,
     "shadowedHole",
-    cs.lift(cs.splice(wrapShadowed(cs.lift(10)) satisfies typeof cs.Spliceable) + cs.splice(wrapShadowed(cs.lift(20)) satisfies typeof cs.Spliceable)),
+    cs.lift(cs.splice(wrapShadowed(cs.lift(10))) + cs.splice(wrapShadowed(cs.lift(20)))),
   );
 });

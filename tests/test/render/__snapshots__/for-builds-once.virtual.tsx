@@ -20,10 +20,10 @@ const answerItems = ["one", "two"];
 
 async function WaitingList({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_items = cs.splice((createSignal) satisfies typeof cs.Spliceable)<string[]>([]);
+    const __cs_items = cs.splice((createSignal))<string[]>([]);
     const __cs_started = cs.globalThis.window.setTimeout(() => {
-        if (cs.splice((more) satisfies typeof cs.Spliceable)()) {
-            __cs_items[1](cs.splice((answerItems) satisfies typeof cs.Spliceable));
+        if (cs.splice((more))()) {
+            __cs_items[1](cs.splice((answerItems)));
         }
     }, 0);
     return <For each={cs.lift(__cs_items[0]())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>;
@@ -31,7 +31,7 @@ async function WaitingList({ more }: { more: Prop<() => boolean> }) {
 }
 
 const forBuildsOnce = cs.lift((() => {
-    const __cs_asked = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    const __cs_asked = cs.splice((createSignal))(0);
     return <div>{cs.lift(<span>{cs.lift("asked " + __cs_asked[0]())}</span>)}{cs.lift(<WaitingList more={cs.lift(() => {
         __cs_asked[1](__cs_asked[0]() + 1);
         return __cs_asked[0]() < 5;

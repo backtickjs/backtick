@@ -4,7 +4,7 @@ __cs_text                           → text
  =                                  →  = 
 cs.splice(                          →  [-semantic]
 (createSignal)                      → $createSignal
- satisfies typeof cs.Spliceable)    →  [-semantic]
+)                                   →  [-semantic]
 (                                   → (
 "first"                             → "first"
 )                                   → )
@@ -15,7 +15,7 @@ __cs_isOn                           → isOn
  =                                  →  = 
 cs.splice(                          →  [-semantic]
 (createSignal)                      → $createSignal
- satisfies typeof cs.Spliceable)    →  [-semantic]
+)                                   →  [-semantic]
 (                                   → (
 false                               → false
 )                                   → )

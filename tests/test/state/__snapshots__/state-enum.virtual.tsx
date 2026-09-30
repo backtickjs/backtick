@@ -17,13 +17,13 @@ enum Color {
 }
 
 const colorName: Client<(c: Color) => string> = cs.lift((__cs_c: Color) => {
-    return __cs_c === cs.splice(Color.Blue satisfies typeof cs.Spliceable) ? "blue" : "red";
+    return __cs_c === cs.splice(Color.Blue) ? "blue" : "red";
 });
 
 async function Swatch() {
   return cs.lift((() => {
-    const __cs_held = cs.splice((createSignal) satisfies typeof cs.Spliceable)(cs.splice(Color.Red satisfies typeof cs.Spliceable));
-    return <span onclick={cs.lift(() => __cs_held[1](cs.splice(Color.Blue satisfies typeof cs.Spliceable)))}>{cs.lift(cs.splice((colorName) satisfies typeof cs.Spliceable)(__cs_held[0]()))}</span>;
+    const __cs_held = cs.splice((createSignal))(cs.splice(Color.Red));
+    return <span onclick={cs.lift(() => __cs_held[1](cs.splice(Color.Blue)))}>{cs.lift(cs.splice((colorName))(__cs_held[0]()))}</span>;
 })());
 }
 

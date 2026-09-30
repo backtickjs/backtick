@@ -46,9 +46,9 @@ n                                         → n
 }                                         → }
 />                                        →  />
 )                                         → `
- satisfies typeof cs.Spliceable)          → } [-semantic]
+)                                         → } [-semantic]
 ;                                         → ;
 \n})())                                   → \n  }`
- satisfies typeof cs.Spliceable)          → } [-semantic]
+)                                         → } [-semantic]
 ;                                         → ;
 \n})())                                   → \n}`

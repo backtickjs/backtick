@@ -12,8 +12,8 @@ import { children, drawn } from "./dom.ts";
 // the host hears nothing about it.
 async function SelectableRows() {
   return cs.lift((() => {
-    const __cs_selected = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
-    const __cs_isSelected = cs.splice((createSelector) satisfies typeof cs.Spliceable)(__cs_selected[0]);
+    const __cs_selected = cs.splice((createSignal))(0);
+    const __cs_isSelected = cs.splice((createSelector))(__cs_selected[0]);
     return <div>{cs.lift(<span onclick={cs.lift(() => __cs_selected[1](1))}>select</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift([0, 1, 2])}>{cs.lift((__cs_id: number) => <a href={cs.lift(__cs_isSelected(__cs_id) ? "#open" : "#closed")}>{cs.lift("row " + __cs_id)}</a>)}</For>)}</div>)}</div>;
 })());
 }

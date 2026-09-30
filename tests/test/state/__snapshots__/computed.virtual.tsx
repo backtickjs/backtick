@@ -25,8 +25,8 @@ describe("computed", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
-    const __cs_doubled = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => {
+    const __cs_n = cs.splice((createSignal))(1);
+    const __cs_doubled = cs.splice((createMemo))(() => {
         cs.globalThis.window.console.log();
         return __cs_n[0]() * 2;
     });
@@ -46,8 +46,8 @@ describe("computed", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
-    const __cs_isBig = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => __cs_n[0]() > 2);
+    const __cs_n = cs.splice((createSignal))(1);
+    const __cs_isBig = cs.splice((createMemo))(() => __cs_n[0]() > 2);
     const __cs_label = () => {
         cs.globalThis.window.console.log();
         return __cs_isBig() ? "big" : "small";

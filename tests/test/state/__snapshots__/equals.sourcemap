@@ -4,7 +4,7 @@ __cs_n                                    → n
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 1                                         → 1
 )                                         → )
@@ -15,7 +15,7 @@ __cs_size                                 → size
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createMemo)                              → $createMemo
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (\n            
 () => (                                   → () => 
 {                                         → ({ 
@@ -133,7 +133,7 @@ __cs_point                                → point
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (\n            
 {                                         → { 
 x                                         → x
@@ -238,7 +238,7 @@ __cs_n                                    → n
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 1                                         → 1
 ,                                         → , 
@@ -307,7 +307,7 @@ __cs_n                                    → n
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 1                                         → 1
 )                                         → )
@@ -379,7 +379,7 @@ __cs_point                                → point
  =                                        →  = 
 cs.splice(                                →  [-semantic]
 (createSignal)                            → $createSignal
- satisfies typeof cs.Spliceable)          →  [-semantic]
+)                                         →  [-semantic]
 (                                         → (
 {                                         → { 
 x                                         → x

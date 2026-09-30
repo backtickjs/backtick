@@ -27,8 +27,8 @@ describe("equals", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
-    const __cs_size = cs.splice((createMemo) satisfies typeof cs.Spliceable)(() => ({ isBig: __cs_n[0]() > 2, n: __cs_n[0]() }), undefined, { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
+    const __cs_n = cs.splice((createSignal))(1);
+    const __cs_size = cs.splice((createMemo))(() => ({ isBig: __cs_n[0]() > 2, n: __cs_n[0]() }), undefined, { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
     const __cs_label = () => {
         cs.globalThis.window.console.log();
         return __cs_size().isBig ? "big" : "small";
@@ -52,7 +52,7 @@ describe("equals", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_point = cs.splice((createSignal) satisfies typeof cs.Spliceable)({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
+    const __cs_point = cs.splice((createSignal))({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
     const __cs_label = () => {
         cs.globalThis.window.console.log();
         return "x " + __cs_point[0]().x;
@@ -71,7 +71,7 @@ describe("equals", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1, { equals: (__cs_previous, __cs_next) => {
+    const __cs_n = cs.splice((createSignal))(1, { equals: (__cs_previous, __cs_next) => {
             cs.globalThis.window.console.log(__cs_previous, __cs_next);
             return __cs_previous === __cs_next;
         } });
@@ -88,7 +88,7 @@ describe("equals", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_n = cs.splice((createSignal) satisfies typeof cs.Spliceable)(1);
+    const __cs_n = cs.splice((createSignal))(1);
     const __cs_label = () => {
         cs.globalThis.window.console.log();
         return "n " + __cs_n[0]();
@@ -105,7 +105,7 @@ describe("equals", () => {
     render(
       await draw(
         cs.lift((() => {
-    const __cs_point = cs.splice((createSignal) satisfies typeof cs.Spliceable)({ x: 1 });
+    const __cs_point = cs.splice((createSignal))({ x: 1 });
     const __cs_label = () => {
         cs.globalThis.window.console.log();
         return "x " + __cs_point[0]().x;

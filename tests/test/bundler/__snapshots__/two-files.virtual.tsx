@@ -9,6 +9,6 @@ it("twoFiles", async (t) => {
   await snapshotCase(
     t,
     "twoFiles",
-    cs.lift(<p>{cs.lift("in ")}{cs.lift(cs.splice((<Badge />) satisfies typeof cs.Spliceable))}</p>),
+    cs.lift(<p>{cs.lift("in ")}{cs.lift(cs.splice((<Badge />)))}</p>),
   );
 });

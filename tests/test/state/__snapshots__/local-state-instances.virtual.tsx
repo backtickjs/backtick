@@ -11,7 +11,7 @@ import { children, drawn, fontSize } from "./dom.ts";
 // applications of one entry, and each declares a signal of its own.
 async function OwnCounter() {
   return cs.lift((() => {
-    const __cs_size = cs.splice((createSignal) satisfies typeof cs.Spliceable)(16);
+    const __cs_size = cs.splice((createSignal))(16);
     return <span style={cs.lift("font-size: " + __cs_size[0]() + "px")} onclick={cs.lift(() => {
         __cs_size[1](__cs_size[0]() + 1);
     })}>

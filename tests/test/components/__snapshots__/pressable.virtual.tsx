@@ -15,7 +15,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.lift((() => {
-    const __cs_count = cs.splice((createSignal) satisfies typeof cs.Spliceable)(0);
+    const __cs_count = cs.splice((createSignal))(0);
     return <button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => __cs_count[1](__cs_count[0]() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(__cs_count[0]() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + __cs_count[0]() + " times")}</span>)}</button>;
 })());
 }

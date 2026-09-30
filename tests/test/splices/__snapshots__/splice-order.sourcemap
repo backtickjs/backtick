@@ -1,15 +1,15 @@
-cs.lift(                          → cs`
-{                                 → ({ 
-a                                 → a
-:                                 → : 
-cs.splice(                        →  [-semantic]
-(count)                           → $count
- satisfies typeof cs.Spliceable)  →  [-semantic]
-,                                 → , 
-b                                 → b
-:                                 → : 
-cs.splice(                        → ${ [-semantic]
-++count                           → ++count
- satisfies typeof cs.Spliceable)  → } [-semantic]
- }                                →  })
-)                                 → `
+cs.lift(    → cs`
+{           → ({ 
+a           → a
+:           → : 
+cs.splice(  →  [-semantic]
+(count)     → $count
+)           →  [-semantic]
+,           → , 
+b           → b
+:           → : 
+cs.splice(  → ${ [-semantic]
+++count     → ++count
+)           → } [-semantic]
+ }          →  })
+)           → `
