@@ -18,13 +18,11 @@ const $cs0 = ($tag0, $tag1) => {
     return _el$;
   })();
 };
-export default () =>
-  $cs0(
-    ($arg0) =>
-      (() => {
-        var _el$2 = _tmpl$2();
-        _$insert(_el$2, () => $arg0.title);
-        return _el$2;
-      })(),
-    () => _tmpl$3(),
-  );
+const $expn0 = () => ($arg0) =>
+  (() => {
+    var _el$2 = _tmpl$2();
+    _$insert(_el$2, () => $arg0.title);
+    return _el$2;
+  })();
+const $expn1 = () => () => _tmpl$3();
+export default () => $cs0($expn0(), $expn1());

@@ -20,3 +20,18 @@ it("splicedComponent", async (t) => {
 })()),
   );
 });
+
+// Spliced in two scripts, it is still one declaration: both name `$expn0`.
+it("splicedComponentTwice", async (t) => {
+  await snapshotCase(
+    t,
+    "splicedComponentTwice",
+    cs.lift(<div>{cs.lift(cs.splice(cs.lift((() => {
+    const __cs_Heading = cs.splice((Card) satisfies typeof cs.Spliceable);
+    return <__cs_Heading title={"first"}/>;
+})()) satisfies typeof cs.Spliceable))}{cs.lift(cs.splice(cs.lift((() => {
+    const __cs_Heading = cs.splice((Card) satisfies typeof cs.Spliceable);
+    return <__cs_Heading title={"second"}/>;
+})()) satisfies typeof cs.Spliceable))}</div>),
+  );
+});

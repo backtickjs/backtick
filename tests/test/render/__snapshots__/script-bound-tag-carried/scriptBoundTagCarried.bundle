@@ -64,10 +64,11 @@ const $cs2 = ($splice0) => {
     return _el$6;
   })();
 };
+const $expn0 = () => ($arg0) => $cs2(() => $arg0);
 export default () =>
   $cs0(
     () => $i0,
     (count, Badge) => $cs1(Badge, count),
-    ($arg0) => $cs2(() => $arg0),
+    $expn0(),
   );
 _$delegateEvents(["click"]);

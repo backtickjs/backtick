@@ -35,6 +35,11 @@ export function printBundle(tree: BundleTree): JsxModule {
     module.script(script);
     module.line(";");
   }
+  // Each host function the bundle expanded, declared once however many places
+  // name it.
+  for (const [label, code] of tree.expansions) {
+    module.line(`const ${label} = ${code};`);
+  }
   module.write(`export default () => (${tree.root});`);
 
   return { code: module.code, map: module.map() };

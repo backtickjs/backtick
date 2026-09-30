@@ -38,28 +38,39 @@ const $cs0 = (
 };
 const $cs1 = ($splice0) => $splice0() + 1;
 const $cs2 = ($splice0, $splice1) => $splice0() * $splice1();
+const $expn0 = () => ($arg0) => null;
+const $expn1 = () => ($arg0) => void 0;
+const $expn2 = () => ($arg0) => 1;
+const $expn3 = () => ($arg0) => true;
+const $expn4 = () => ($arg0) => "text";
+const $expn5 = () => ($arg0) => [$arg0, 2];
+const $expn6 = () => ($arg0) => ({
+  value: $arg0,
+  label: "n",
+});
+const $expn7 = () => ($arg0) => $cs1(() => $arg0);
+const $expn8 = () => ($arg0) => $expn9($arg0);
+const $expn9 = ($capture0) => ($arg0) =>
+  $cs2(
+    () => $capture0,
+    () => $arg0,
+  );
+const $expn10 = () => ($arg0) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _$insert(_el$, $arg0);
+    return _el$;
+  })();
 export default () =>
   $cs0(
-    () => ($arg0) => null,
-    () => ($arg0) => void 0,
-    () => ($arg0) => 1,
-    () => ($arg0) => true,
-    () => ($arg0) => "text",
-    () => ($arg0) => [$arg0, 2],
-    () => ($arg0) => ({
-      value: $arg0,
-      label: "n",
-    }),
-    () => ($arg0) => $cs1(() => $arg0),
-    () => ($arg0) => ($arg0) =>
-      $cs2(
-        () => $arg0,
-        () => $arg0,
-      ),
-    () => ($arg0) =>
-      (() => {
-        var _el$ = _tmpl$();
-        _$insert(_el$, $arg0);
-        return _el$;
-      })(),
+    () => $expn0(),
+    () => $expn1(),
+    () => $expn2(),
+    () => $expn3(),
+    () => $expn4(),
+    () => $expn5(),
+    () => $expn6(),
+    () => $expn7(),
+    () => $expn8(),
+    () => $expn10(),
   );

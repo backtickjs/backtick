@@ -8,12 +8,10 @@ const $cs0 = ($splice0) => {
     title: "tag",
   });
 };
-export default () =>
-  $cs0(
-    () => ($arg0) =>
-      (() => {
-        var _el$ = _tmpl$();
-        _$insert(_el$, () => $arg0.title);
-        return _el$;
-      })(),
-  );
+const $expn0 = () => ($arg0) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _$insert(_el$, () => $arg0.title);
+    return _el$;
+  })();
+export default () => $cs0(() => $expn0());

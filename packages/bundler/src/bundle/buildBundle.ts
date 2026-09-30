@@ -8,7 +8,7 @@ import { isClientImport, type Spliceable } from "@backtickjs/core";
 
 import { expandFunction, type FunctionExpansions } from "./expandFunction.js";
 import { type ElementExpansions, expandJsxElement } from "./expandJsxElement.js";
-import { holeOf } from "./holes.js";
+import { type Hole, holeOf, type HostParam } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
@@ -34,6 +34,7 @@ import type { Names } from "../print/code.js";
  */
 export interface BundleTree {
   readonly scripts: readonly (readonly [string, ClientScript])[];
+  readonly expansions: readonly (readonly [string, string])[];
   readonly root: string;
   readonly names: Names;
 }
@@ -42,6 +43,35 @@ export interface BundleTree {
 // bundle introduces starts with `$`, which a script cannot bind, so none of
 // those can meet a binding.
 const RESERVED = ["arguments", "await", "eval", "yield"];
+
+// What an expansion's declaration takes from where it is referenced: an
+// argument of an enclosing expansion, or the key of a binding an enclosing
+// thunk was handed.
+type Capture = HostParam | string;
+
+// A host function as the bundle declares it: `$expn` and its number, what a
+// reference hands it, and its code.
+interface Declaration {
+  readonly label: string;
+  readonly captures: readonly Capture[];
+  readonly code: string;
+}
+
+// The expansion whose declaration is being written: its own parameters, and
+// what it captures, each at the position the body first reached it.
+interface Frame {
+  readonly own: ReadonlySet<HostParam>;
+  readonly captures: Map<Capture, number>;
+}
+
+// What encloses a value being rendered: the bindings the thunks around it were
+// handed, and the declaration it is written into, if one.
+interface Scope {
+  readonly bindings: ReadonlySet<string>;
+  readonly frame?: Frame;
+}
+
+const rootScope: Scope = { bindings: new Set() };
 
 // Builds the bundle `{ scripts, root }` as code, and documents how it is
 // derived.
@@ -111,13 +141,36 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     return name;
   };
 
-  // How a hole is reached. Its name is the path the function read: `$arg0` is
-  // the parameter itself, and `$arg0.title` is a field of it, read where the drawing
-  // reads it.
-  const holeRead = (name: string): string => {
-    const [param, ...path] = name.split(".");
-    let read = param!;
-    for (const step of path) {
+  // What a declaration names a capture: `$capture` and where it stands, the
+  // capture recorded the first time the body reaches it.
+  const captureName = (frame: Frame, capture: Capture): string => {
+    let at = frame.captures.get(capture);
+    if (at === undefined) {
+      at = frame.captures.size;
+      frame.captures.set(capture, at);
+    }
+    return `$capture${at}`;
+  };
+
+  // An argument of an expansion, read where the value stands: its own
+  // parameter inside its declaration, and a capture inside any other.
+  const paramRead = (param: HostParam, scope: Scope): string => {
+    if (scope.frame === undefined) {
+      throw new Error(
+        "Can't splice an argument of a host function outside the function: " +
+          "it stands for a value only a call on the client supplies.",
+      );
+    }
+    return scope.frame.own.has(param)
+      ? param.name
+      : captureName(scope.frame, param);
+  };
+
+  // How a hole is reached: its parameter, then each member read off it, read
+  // where the drawing reads it.
+  const holeRead = (hole: Hole, scope: Scope): string => {
+    let read = paramRead(hole.param, scope);
+    for (const step of hole.path) {
       read = member(read, step);
     }
     return read;
@@ -180,6 +233,48 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     return labelOf(target);
   };
 
+  // Each host function's label, taken when rendering first reaches it, so an
+  // outer function is numbered before those its body reaches; and its
+  // declaration, once its body is written. A body is written in a scope of its
+  // own, so it reads its own arguments as its parameters and everything else it
+  // reaches as a capture, wherever it is referenced from.
+  const labels = new Map<object, string>();
+  const declarations = new Map<string, Declaration>();
+  const declareExpansion = async (
+    value: (...args: never[]) => unknown,
+  ): Promise<Declaration> => {
+    const known = labels.get(value);
+    if (known !== undefined) {
+      const declaration = declarations.get(known);
+      // Labelled but not yet written: its body reached it again.
+      if (declaration === undefined) {
+        throw new Error(
+          "Can't splice a host function that answers with itself: its " +
+            "expansion would never end.",
+        );
+      }
+      return declaration;
+    }
+    const expansion = await expandFunction(value, functionExpansions);
+    const label = `$expn${labels.size}`;
+    labels.set(value, label);
+    const frame: Frame = { own: new Set(expansion.params), captures: new Map() };
+    const body = arrow(
+      expansion.params.map((param) => param.name),
+      await render(expansion.returned, { bindings: new Set(), frame }),
+    );
+    // Always taking its captures first, even none, so every reference is a
+    // call.
+    const captures = [...frame.captures.keys()];
+    const code = arrow(
+      captures.map((_, at) => `$capture${at}`),
+      body,
+    );
+    const declaration = { label, captures, code };
+    declarations.set(label, declaration);
+    return declaration;
+  };
+
   // Writes a value as the code it becomes: composition as data, which is what
   // a bundle is. A script reference is a call naming which script and
   // what to hand it; everything else is its literal form. Rendered in order,
@@ -187,22 +282,22 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   // reached each script.
   const render = async (
     value: Spliceable,
-    params: ReadonlySet<string> = new Set(),
+    scope: Scope = rootScope,
   ): Promise<string> => {
     // A hole sentinel a host function stored somewhere in what it answered: the
     // client argument it stands for has no value until the client runs, so it
     // is a reference to the enclosing expansion's parameter.
     const hole = holeOf(value);
     if (hole !== undefined) {
-      return holeRead(hole.name);
+      return holeRead(hole, scope);
     }
     if (isClientScript(value)) {
       const target = scriptFor(value);
       declare(target);
-      return call(labelOf(target), await exprCallArgs(value, params));
+      return call(labelOf(target), await exprCallArgs(value, scope));
     }
     if (isJsxElement(value)) {
-      return renderJsx(value, params);
+      return renderJsx(value, scope);
     }
     if (isClientImport(value)) {
       return imported(names, value.from, value.name);
@@ -224,23 +319,22 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     if (Array.isArray(value)) {
       const elements: string[] = [];
       for (const element of value) {
-        elements.push(await render(element, params));
+        elements.push(await render(element, scope));
       }
       return array(elements);
     }
     // A host function has no data form — client code is written in `cs`...` and
     // reaches a script as a script — so it is expanded rather than carried, and
-    // written out as the arrow it is: its holes the parameters, and the call
-    // the tag wrote binding them.
+    // declared as the arrow it is: its holes the parameters, and the call the
+    // tag wrote binding them. A reference hands it what it captures.
     if (typeof value === "function") {
-      const expansion = await expandFunction(value, functionExpansions);
-      return arrow(
-        expansion.params,
-        // The expansion's params extend the enclosing ones, like a nested
-        // frame, so a hole threading into the body resolves by name.
-        await render(
-          expansion.returned,
-          new Set([...params, ...expansion.params]),
+      const declaration = await declareExpansion(value);
+      return call(
+        declaration.label,
+        declaration.captures.map((capture) =>
+          typeof capture === "string"
+            ? capExpr(capture, scope)
+            : paramRead(capture, scope),
         ),
       );
     }
@@ -258,7 +352,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     }
     const entries: [string, string][] = [];
     for (const [key, entry] of Object.entries(value)) {
-      entries.push([key, await render(entry, params)]);
+      entries.push([key, await render(entry, scope)]);
     }
     return object(entries);
   };
@@ -268,12 +362,14 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   // At
   // the bundle root there is no enclosing instance, so a capture reaching it
   // can't be threaded from anywhere.
-  const capExpr = (
-    key: string,
-    params: ReadonlySet<string> = new Set(),
-  ): string => {
-    if (params.has(key)) {
+  const capExpr = (key: string, scope: Scope): string => {
+    if (scope.bindings.has(key)) {
       return displayName(key);
+    }
+    // Inside a declaration, a binding the body doesn't bind itself is the
+    // reference's to hand over.
+    if (scope.frame !== undefined) {
+      return captureName(scope.frame, key);
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -291,7 +387,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   // one `#thunk` per splice ahead of the environment.
   const exprCallArgs = async (
     ref: ClientScript,
-    params: ReadonlySet<string>,
+    scope: Scope,
   ): Promise<string[]> => {
     const target = scriptFor(ref);
     const parts: string[] = [];
@@ -301,7 +397,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     for (const [index, { kind, value: arg }] of splices.entries()) {
       // A tag is handed over as the value it names, as its script reads it.
       if (kind === "tag") {
-        parts.push(await render(arg, params));
+        parts.push(await render(arg, scope));
         continue;
       }
       // What the hole hands over, in the order the script fixes: the bindings
@@ -317,15 +413,18 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
         continue;
       }
       if (passed.length === 0) {
-        parts.push(thunk(await render(arg, params)));
+        parts.push(thunk(await render(arg, scope)));
         continue;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
-      const inner = new Set([...params, ...passed]);
+      const inner = {
+        bindings: new Set([...scope.bindings, ...passed]),
+        frame: scope.frame,
+      };
       parts.push(arrow(passed.map(displayName), await render(arg, inner)));
     }
     for (const key of capturesOf(target)) {
-      parts.push(capExpr(key, params));
+      parts.push(capExpr(key, scope));
     }
     return parts;
   };
@@ -339,7 +438,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   // writes nothing.
   const renderJsx = async (
     jsx: JsxElement,
-    params: ReadonlySet<string>,
+    scope: Scope,
   ): Promise<string> => {
     const type = jsx.type;
     if (typeof type === "function" && !isClientImport(type)) {
@@ -347,8 +446,8 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
       // A script is what runs on the client; an element it drew instead has no
       // setup of its own to guard.
       return isClientScript(expansion)
-        ? componentElement(names, await render(expansion, params))
-        : render(expansion, params);
+        ? componentElement(names, await render(expansion, scope))
+        : render(expansion, scope);
     }
     const written: [string, string][] = [];
     let children: string[] = [];
@@ -359,14 +458,14 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
         continue;
       }
       if (key !== "children") {
-        written.push([key, await renderProp(jsx, key, entry, params)]);
+        written.push([key, await renderProp(jsx, key, entry, scope)]);
         continue;
       }
       // Each child its own: an array is several, and `null` is none.
       const each = Array.isArray(entry) ? entry : entry === null ? [] : [entry];
       children = [];
       for (const child of each) {
-        children.push(await renderProp(jsx, key, child, params));
+        children.push(await renderProp(jsx, key, child, scope));
       }
     }
     // A component a client module provides is written as a tag of its import.
@@ -381,10 +480,10 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     jsx: JsxElement,
     key: string,
     value: unknown,
-    params: ReadonlySet<string>,
+    scope: Scope,
   ): Promise<string> => {
     try {
-      return await render(value as Spliceable, params);
+      return await render(value as Spliceable, scope);
     } catch (cause) {
       // A component runs while its props render, so what surfaces here may
       // be the app's own failure rather than a value that cannot cross — and
@@ -406,5 +505,9 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
       scripts.push([labelOf(script), script]);
     }
   }
-  return { scripts, root, names };
+  // In label order, which is the order rendering first reached each.
+  const expansions = [...labels.values()].map(
+    (label) => [label, declarations.get(label)!.code] as const,
+  );
+  return { scripts, expansions, root, names };
 }

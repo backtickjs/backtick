@@ -49,4 +49,5 @@ const $cs0 = ($tag0, $tag1) => {
   })();
 };
 const $cs1 = () => _tmpl$3();
-export default () => $cs0(() => $cs1(), $i0);
+const $expn0 = () => () => $cs1();
+export default () => $cs0($expn0(), $i0);

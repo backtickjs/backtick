@@ -43,14 +43,11 @@ const $cs1 = ($splice0, $splice1, $splice2, $tag3) => {
       })(),
   });
 };
-export default () =>
-  $cs0(
+const $expn0 = () => ($arg0) =>
+  $cs1(
     () => $i0,
-    ($arg0) =>
-      $cs1(
-        () => $i0,
-        () => $arg0.more,
-        () => ["one", "two"],
-        $i1,
-      ),
+    () => $arg0.more,
+    () => ["one", "two"],
+    $i1,
   );
+export default () => $cs0(() => $i0, $expn0());

@@ -1,10 +1,10 @@
 import type { Spliceable } from "@backtickjs/core";
-import { createHole } from "./holes.js";
+import { createHole, type HostParam } from "./holes.js";
 
-// A host function, run against a hole per parameter: the parameter names, and
-// what it answered with the holes wherever they surfaced.
+// A host function, run against a hole per parameter: its parameters, and what
+// it answered with the holes wherever they surfaced.
 export interface Expansion {
-  readonly params: readonly string[];
+  readonly params: readonly HostParam[];
   readonly returned: Spliceable;
 }
 
@@ -43,11 +43,13 @@ export function expandFunction(
 async function buildExpansion(
   value: (...args: never[]) => unknown,
 ): Promise<Expansion> {
-  // Which expansion a hole belongs to, by identity: nothing is counted, and
-  // nothing outlives the bundle.
-  const expansion = {};
-  const params = Array.from({ length: value.length }, (_, at) => `$arg${at}`);
-  const holes = params.map((param) => createHole(param, expansion));
+  // Fresh objects, so a hole says which expansion it belongs to by identity:
+  // nothing is counted, and nothing outlives the bundle.
+  const params = Array.from(
+    { length: value.length },
+    (_, at): HostParam => ({ name: `$arg${at}` }),
+  );
+  const holes = params.map((param) => createHole(param));
   const returned = value(...(holes as never[])) as
     | Spliceable
     | Promise<Spliceable>;

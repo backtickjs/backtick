@@ -34,29 +34,26 @@ const $cs1 = ($splice0) => "font-size: " + $splice0()[0]() + "px";
 const $cs2 = ($splice0) => () => {
   $splice0()[1]($splice0()[0]() + 1);
 };
+const $expn0 = () => ($arg0) =>
+  (() => {
+    var _el$2 = _tmpl$2();
+    _$addEventListener(
+      _el$2,
+      "click",
+      $cs2(() => $arg0.size),
+      true,
+    );
+    _$effect((_$p) =>
+      _$style(
+        _el$2,
+        $cs1(() => $arg0.size),
+        _$p,
+      ),
+    );
+    return _el$2;
+  })();
 export default () =>
   _$createComponent($Component, {
-    body: () =>
-      $cs0(
-        () => $i0,
-        ($arg0) =>
-          (() => {
-            var _el$2 = _tmpl$2();
-            _$addEventListener(
-              _el$2,
-              "click",
-              $cs2(() => $arg0.size),
-              true,
-            );
-            _$effect((_$p) =>
-              _$style(
-                _el$2,
-                $cs1(() => $arg0.size),
-                _$p,
-              ),
-            );
-            return _el$2;
-          })(),
-      ),
+    body: () => $cs0(() => $i0, $expn0()),
   });
 _$delegateEvents(["click"]);

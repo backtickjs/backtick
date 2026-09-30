@@ -29,10 +29,24 @@ test("a class instance does not", async () => {
 
 test("a host function expands rather than crossing", async () => {
   // It has no data form, so it is run against a hole per parameter and what it
-  // answered is what crosses. `length` is the arity, so this one takes one.
-  assert.match(
+  // answered is what crosses, declared once. `length` is the arity, so this
+  // one takes one.
+  assert.equal(
     (await bundler.run(((n: never) => n) as never)).code,
-    /export default \(\) => \(\(\$arg0\) => \(\$arg0\)\);/,
+    "const $expn0 = () => (($arg0) => ($arg0));\nexport default () => ($expn0());",
+  );
+});
+
+test("a host function answering one hands it its argument", async () => {
+  // The inner function reads the outer one's argument: a capture of its
+  // declaration, so the two never shadow each other.
+  assert.equal(
+    (await bundler.run(((n: never) => (m: never) => [n, m]) as never)).code,
+    [
+      "const $expn0 = () => (($arg0) => ($expn1($arg0)));",
+      "const $expn1 = ($capture0) => (($arg0) => ([$capture0, $arg0]));",
+      "export default () => ($expn0());",
+    ].join("\n"),
   );
 });
 
