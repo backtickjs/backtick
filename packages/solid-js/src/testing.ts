@@ -11,12 +11,11 @@ import type { JSX } from "./jsx-runtime.js";
  * What a bundle's default export answers: what a script evaluates to, and
  * Solid's own element for a drawing.
  */
-export type Drawn<T> =
-  T extends Client<infer Value>
+export type Drawn<T> = T extends JSX.Element
+  ? Solid.Element
+  : T extends Client<infer Value>
     ? Drawn<Value>
-    : T extends JSX.Element
-      ? Solid.Element
-      : T;
+    : T;
 
 /**
  * A value as a page runs it, for Solid Testing Library or Solid itself to

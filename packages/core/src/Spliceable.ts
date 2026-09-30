@@ -1,5 +1,4 @@
 import type { Client } from "./Client.js";
-import type { ClientHandle } from "./ClientHandle.js";
 
 /**
  * A host function the bundler can expand: run once against a hole per
@@ -15,7 +14,6 @@ type AnySpliceable =
   | number
   | boolean
   | string
-  | ClientHandle
   | Client<unknown>
   | HostFunction
   | readonly AnySpliceable[]
@@ -25,23 +23,21 @@ type AnySpliceable =
  * What a host value of type `T` splices to: the pair to `Client<T>`, which is
  * what a host writes instead where it cannot write the value itself.
  *
- * A container member by member, a handle and a primitive as themselves, and a
- * function as a host function taking and answering with scripts. Where the
- * client wants anything, any host value that splices will do.
+ * A container member by member, a primitive as itself, and a function as a
+ * host function taking and answering with scripts. Where the client wants
+ * anything, any host value that splices will do.
  */
 type SplicesTo<T> = unknown extends T
   ? AnySpliceable
   : T extends (...args: infer Args) => infer Returned
     ? (...args: { [Key in keyof Args]: Client<Args[Key]> }) => Client<Returned>
-    : T extends ClientHandle
-      ? T
-      : T extends readonly (infer Item)[]
-        ? readonly Spliceable<Item>[]
-        : T extends { readonly [key: string]: unknown }
-          ? { readonly [Key in keyof T]: Spliceable<T[Key]> }
-          : T extends null | undefined | number | boolean | string
-            ? T
-            : never;
+    : T extends readonly (infer Item)[]
+      ? readonly Spliceable<Item>[]
+      : T extends { readonly [key: string]: unknown }
+        ? { readonly [Key in keyof T]: Spliceable<T[Key]> }
+        : T extends null | undefined | number | boolean | string
+          ? T
+          : never;
 
 /**
  * What the host may splice where the client wants a `T`: the value written out,
@@ -51,7 +47,6 @@ export type Spliceable<T = unknown> = Client<T> | SplicesTo<T>;
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   ClientHandle              -> unchanged
 //   (Client<A>) => Client<R>  -> (A) => R
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
@@ -60,12 +55,10 @@ export type Spliced<T> = [AnySpliceable] extends [T]
   ? unknown
   : T extends Client<infer U>
     ? U
-    : T extends ClientHandle
-      ? T
-      : T extends (...args: infer Args) => infer Returned
-        ? (...args: { [Key in keyof Args]: Spliced<Args[Key]> }) => Spliced<Returned>
-        : T extends readonly (infer Item extends Spliceable)[]
-          ? Spliced<Item>[]
-          : T extends { readonly [key: string]: Spliceable }
-            ? { -readonly [K in keyof T]: Spliced<T[K]> }
-            : T;
+    : T extends (...args: infer Args) => infer Returned
+      ? (...args: { [Key in keyof Args]: Spliced<Args[Key]> }) => Spliced<Returned>
+      : T extends readonly (infer Item extends Spliceable)[]
+        ? Spliced<Item>[]
+        : T extends { readonly [key: string]: Spliceable }
+          ? { -readonly [K in keyof T]: Spliced<T[K]> }
+          : T;

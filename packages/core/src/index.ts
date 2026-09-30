@@ -7,9 +7,8 @@
 export { cs } from "./cs.js";
 export type { Client } from "./Client.js";
 
-// What a host may hand a client: data, a script, a handle to something the
-// client owns, or an export of a module the client provides.
-export type { ClientHandle } from "./ClientHandle.js";
+// What a host may hand a client: data, a script, or an export of a module the
+// client provides.
 export type { Spliceable, Spliced } from "./Spliceable.js";
 export {
   createImport,
@@ -19,6 +18,7 @@ export {
 
 // A drawing as a host builds one: what an adapter's JSX runtime makes, and
 // what the bundler expands.
+export type { BacktickElement } from "./BacktickElement.js";
 export {
   createJsxElement,
   isJsxElement,

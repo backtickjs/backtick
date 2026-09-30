@@ -1,5 +1,5 @@
 import { createJsxElement } from "@backtickjs/core";
-import type { ClientHandle, Spliceable } from "@backtickjs/core";
+import type { BacktickElement, Spliceable } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and
@@ -17,17 +17,6 @@ import type { JSX as Solid } from "solid-js";
 export function Fragment(props: { children?: Prop<JSX.Element> }): JSX.Element {
   // What JSX types a drawing as; the bundler writes the array as it is.
   return [props.children] as unknown as JSX.Element;
-}
-
-declare const DrawingBrand: unique symbol;
-
-/**
- * What stands where Solid has a `Node`: a drawing, as a host builds one from a
- * tag or a script evaluates to one. Opaque, because a host holds no DOM node:
- * what a drawing is made of belongs to whichever side made it.
- */
-export interface Drawing extends ClientHandle {
-  readonly [DrawingBrand]: never;
 }
 
 /**
@@ -49,9 +38,9 @@ type Elements = {
 };
 
 export declare namespace JSX {
-  /** Solid's `JSX.Element`, with a `Drawing` where Solid has a `Node`. */
+  /** Solid's `JSX.Element`, with a `BacktickElement` where Solid has a `Node`. */
   export type Element =
-    | Drawing
+    | BacktickElement
     | ArrayElement
     | (string & {})
     | number
@@ -74,7 +63,7 @@ export function jsx(
   type: JSX.ElementType,
   props: { [key: string]: unknown },
 ): JSX.Element {
-  return createJsxElement(type, props) as unknown as JSX.Element;
+  return createJsxElement(type, props);
 }
 
 export const jsxs = jsx;
