@@ -10,7 +10,6 @@ import {
 import { createRequire } from "node:module";
 import { basename, join } from "node:path";
 import { describe, it } from "node:test";
-import { isPorted } from "./unported.ts";
 
 const require = createRequire(import.meta.url);
 const testsRoot = import.meta.dirname;
@@ -53,17 +52,7 @@ function backtickTsc(project: string): string {
 // one that stops being an error is reported too.
 describe("typecheck the .tsx tests", () => {
   it("reports nothing", () => {
-    // Nothing from a directory not yet moved (see `unported.ts`): an error
-    // and the indented lines of its message chain.
-    const reported = backtickTsc(join(testsRoot, "tsconfig.json"))
-      .split(/\n(?=\S)/)
-      .filter(
-        (report) =>
-          report.trim() !== "" &&
-          isPorted(report.slice(0, report.indexOf("("))),
-      )
-      .join("\n");
-    assert.equal(reported, "");
+    assert.equal(backtickTsc(join(testsRoot, "tsconfig.json")).trim(), "");
   });
 });
 
@@ -127,7 +116,7 @@ const unparsed: string[] = [];
 // Written as given: each report is text meant to be read in its own file.
 const verbatim = [(value: unknown) => value as string];
 
-describe("the type errors", { skip: !isPorted("typecheck-errors") }, () => {
+describe("the type errors", () => {
   it("are all reported against a file", () => {
     assert.deepStrictEqual(unparsed, []);
     assert.deepStrictEqual(

@@ -8,7 +8,6 @@ import ts from "typescript";
 import { renderClientCode, renderClientMappings } from "./renderClient.ts";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
-import { isPorted } from "./unported.ts";
 
 // Every `.test.tsx`, compiled whole under the name `tsxHooks.ts` gives it, so
 // what is recorded is the module the test runs as. Recorded per file, next to
@@ -20,8 +19,7 @@ const testFiles = readdirSync(testsRoot, { recursive: true, encoding: "utf8" })
     (file) =>
       file.endsWith(".test.tsx") &&
       !file.startsWith("node_modules") &&
-      !file.includes("__snapshots__") &&
-      isPorted(file),
+      !file.includes("__snapshots__"),
   )
   .sort();
 
