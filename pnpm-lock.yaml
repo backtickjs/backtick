@@ -29,14 +29,11 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/solid-js':
-        specifier: ^0.1.0
+        specifier: ^1.9.14
         version: link:../../packages/solid-js
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
-      solid-js:
-        specifier: 1.9.14
-        version: 1.9.14
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -94,7 +91,7 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/solid-js':
-        specifier: ^0.1.0
+        specifier: ^1.9.14
         version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -119,7 +116,7 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/solid-js':
-        specifier: ^0.1.0
+        specifier: ^1.9.14
         version: link:../../packages/solid-js
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
@@ -150,7 +147,7 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/solid-js':
-        specifier: ^0.1.0
+        specifier: ^1.9.14
         version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -178,7 +175,7 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/solid-js':
-        specifier: ^0.1.0
+        specifier: ^1.9.14
         version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':
@@ -206,7 +203,7 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/solid-js':
-        specifier: ^0.1.0
+        specifier: ^1.9.14
         version: link:../../packages/solid-js
     devDependencies:
       '@backtickjs/prettier-plugin':

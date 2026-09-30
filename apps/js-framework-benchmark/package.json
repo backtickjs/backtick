@@ -34,9 +34,8 @@
   },
   "dependencies": {
     "@backtickjs/core": "^0.1.0",
-    "@backtickjs/solid-js": "^0.1.0",
-    "@backtickjs/tspatch-plugin": "^0.1.0",
-    "solid-js": "1.9.14"
+    "@backtickjs/solid-js": "^1.9.14",
+    "@backtickjs/tspatch-plugin": "^0.1.0"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",

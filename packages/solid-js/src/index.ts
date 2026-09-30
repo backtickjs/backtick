@@ -6,15 +6,58 @@ import type { JSX, Prop } from "./jsx-runtime.js";
 
 // Solid's API as a script splices it — `$createSignal(0)` — each typed with
 // Solid's own declarations, and each imported from Solid by the bundle that
-// uses it.
+// uses it. Every name `solid-js` exports, its types included.
 
-/**
- * The modules this vocabulary's imports come from, and Solid's compiler
- * writes imports of: what a client drawing with Solid provides. A bundle may
- * import from these and no others (`bundler.build`'s `external`), and a page's
- * import map maps each.
- */
-export const modules = ["solid-js", "solid-js/web", "solid-js/store"] as const;
+export type {
+  Accessor,
+  AccessorArray,
+  ChildrenReturn,
+  Component,
+  ComponentProps,
+  Context,
+  ContextProviderComponent,
+  EffectFunction,
+  EffectOptions,
+  FlowComponent,
+  FlowProps,
+  InitializedResource,
+  InitializedResourceOptions,
+  InitializedResourceReturn,
+  JSXElement,
+  MatchProps,
+  MemoOptions,
+  MergeProps,
+  NoInfer,
+  ObservableObserver,
+  OnEffectFunction,
+  OnOptions,
+  Owner,
+  ParentComponent,
+  ParentProps,
+  PropsWithChildren,
+  Ref,
+  ResolvedChildren,
+  ResolvedJSXElement,
+  Resource,
+  ResourceActions,
+  ResourceFetcher,
+  ResourceFetcherInfo,
+  ResourceOptions,
+  ResourceReturn,
+  ResourceSource,
+  ReturnTypes,
+  Setter,
+  Signal,
+  SignalOptions,
+  SplitProps,
+  Task,
+  Transition,
+  ValidComponent,
+  VoidComponent,
+  VoidProps,
+} from "solid-js";
+// The adapter's, where Solid's names its own: what a tag is typed through here.
+export type { JSX } from "./jsx-runtime.js";
 
 const solid = <Name extends keyof typeof Solid>(name: Name) =>
   createImport<(typeof Solid)[Name]>({ name, from: "solid-js" });
@@ -60,6 +103,22 @@ export const createUniqueId = solid("createUniqueId");
 export const lazy = solid("lazy");
 export const mapArray = solid("mapArray");
 export const indexArray = solid("indexArray");
+
+// Internals, scheduling, hydration and development hooks
+export const $DEVCOMP = solid("$DEVCOMP");
+export const $PROXY = solid("$PROXY");
+export const $TRACK = solid("$TRACK");
+export const DEV = solid("DEV");
+export const sharedConfig = solid("sharedConfig");
+export const createComponent = solid("createComponent");
+export const equalFn = solid("equalFn");
+export const getListener = solid("getListener");
+export const requestCallback = solid("requestCallback");
+export const cancelCallback = solid("cancelCallback");
+export const enableScheduling = solid("enableScheduling");
+export const enableExternalSource = solid("enableExternalSource");
+export const enableHydration = solid("enableHydration");
+export const resetErrorBoundaries = solid("resetErrorBoundaries");
 
 // Stores
 export const createStore = store("createStore");

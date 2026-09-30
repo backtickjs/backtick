@@ -2,7 +2,7 @@ import { transformSync } from "@babel/core";
 import { bundler, type Plugin } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
 import solid from "babel-preset-solid";
-import { modules } from "./index.js";
+import { importMap } from "./importMap.js";
 
 /**
  * Solid's compiler as a bundler plugin: the bundle's JSX as Solid's template
@@ -30,7 +30,7 @@ export async function bundle(
 ): Promise<{ code: string; map: string }> {
   const built = await bundler.build({
     input: value,
-    external: modules,
+    external: Object.keys(importMap.imports),
     plugins: [compile],
   });
   const { code, map } = built.generate({ format: "es" });

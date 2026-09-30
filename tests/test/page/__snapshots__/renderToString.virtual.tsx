@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { importMap, renderToString } from "@backtickjs/solid-js/server";
+import { renderToString } from "@backtickjs/solid-js/server";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A bundle written into a page's module script, which must not end it early.
@@ -47,25 +47,6 @@ describe("renderToString", () => {
     const second = await draw(await renderToString(() => <p>second</p>));
     assert.equal(first.textContent, "first");
     assert.equal(second.textContent, "second");
-  });
-});
-
-describe("importMap", () => {
-  it("maps Solid's modules to the CDN, one version for all", () => {
-    const open = '<script type="importmap">';
-    const map = importMap();
-    const { imports } = JSON.parse(map.slice(open.length, -"</script>".length));
-    assert.deepEqual(Object.keys(imports), [
-      "solid-js",
-      "solid-js/web",
-      "solid-js/store",
-    ]);
-    const versions = new Set(
-      Object.values(imports).map(
-        (url) => /solid-js@([^/]+)/.exec(url as string)![1],
-      ),
-    );
-    assert.equal(versions.size, 1);
   });
 });
 

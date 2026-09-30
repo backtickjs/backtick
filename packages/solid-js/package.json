@@ -1,6 +1,6 @@
 {
   "name": "@backtickjs/solid-js",
-  "version": "0.1.0",
+  "version": "1.9.14",
   "private": true,
   "description": "Backtick's Solid adapter: scripts written as Solid code, compiled by Solid's own compiler and run on Solid",
   "type": "module",

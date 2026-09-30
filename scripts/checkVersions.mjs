@@ -5,6 +5,9 @@
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
 // users hit at runtime, not a cosmetic inconsistency.
+//
+// Adapters are the exception: an adapter's version is its framework's, which
+// it pins exactly, and its import map points at.
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
@@ -20,7 +23,12 @@ function manifests(dir) {
     .map((file) => ({ file, json: JSON.parse(readFileSync(file, "utf8")) }));
 }
 
-const released = manifests("packages");
+// Each adapter, and the framework whose version it takes.
+const ADAPTERS = { "@backtickjs/solid-js": "solid-js" };
+
+const packages = manifests("packages");
+const released = packages.filter(({ json }) => !(json.name in ADAPTERS));
+const adapters = packages.filter(({ json }) => json.name in ADAPTERS);
 // examples and benchmarks model a real consumer install, so their ranges are
 // checked but their own versions are not part of the release set.
 //
@@ -70,6 +78,23 @@ if (versions.size > 1) {
 
 const [expected] = versions.keys();
 
+for (const { file, json } of adapters) {
+  const framework = ADAPTERS[json.name];
+  const pinned = json.dependencies?.[framework];
+  if (pinned !== json.version) {
+    errors.push(
+      `${file.slice(root.length)}: version is "${json.version}", expected ` +
+        `its pinned ${framework} dependency ("${pinned}")`,
+    );
+  }
+}
+
+// What a range pointing at each package must pin.
+const expectedOf = (name) =>
+  name in ADAPTERS
+    ? adapters.find(({ json }) => json.name === name)?.json.version
+    : expected;
+
 const dependencyFields = [
   "dependencies",
   "devDependencies",
@@ -77,15 +102,15 @@ const dependencyFields = [
   "optionalDependencies",
 ];
 
-for (const { file, json } of [...released, ...consuming]) {
+for (const { file, json } of [...packages, ...consuming]) {
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
       if (!name.startsWith("@backtickjs/")) continue;
       if (range.startsWith("workspace:")) continue;
-      if (range === `^${expected}`) continue;
+      if (range === `^${expectedOf(name)}`) continue;
       errors.push(
         `${file.slice(root.length)}: ${field}["${name}"] is "${range}", ` +
-          `expected "^${expected}" or a workspace: range`,
+          `expected "^${expectedOf(name)}" or a workspace: range`,
       );
     }
   }
@@ -98,5 +123,6 @@ if (errors.length > 0) {
 
 console.log(
   `✓ ${released.length} packages at ${expected}, ` +
+    `${adapters.length} adapter(s) at their framework's version, ` +
     `all @backtickjs ranges consistent`,
 );

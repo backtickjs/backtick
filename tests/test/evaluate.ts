@@ -1,7 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import type { Client, Spliceable, Spliced } from "@backtickjs/core";
-import { modules } from "@backtickjs/solid-js";
 import { compile } from "@backtickjs/solid-js/bundle";
+import { importMap } from "@backtickjs/solid-js/server";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { JSX as Solid } from "solid-js";
 
@@ -31,7 +31,7 @@ export async function evaluate<T extends Spliceable>(
 ): Promise<Evaluated<T>> {
   const bundle = await bundler.build({
     input: value,
-    external: [...modules, "app"],
+    external: [...Object.keys(importMap.imports), "app"],
     plugins: [compile],
   });
   const { code } = bundle.generate({ format: "es" });

@@ -1,40 +1,86 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createJsxElement, isClientImport } from "@backtickjs/core";
 import { compile } from "../dist/bundle.js";
 import * as vocabulary from "../dist/index.js";
+import { importMap } from "../dist/importMap.js";
+import ts from "typescript";
 
-const { modules, ...imports } = vocabulary;
+// The modules the import map maps: all a Solid client provides.
+const modules = Object.keys(importMap.imports);
+
+// A module as a page loads it: the browser build the import map points at,
+// not the server build Node resolves `solid-js` to.
+const load = (from: string): Promise<Record<string, unknown>> =>
+  import(
+    import.meta.resolve(
+      `solid-js/${importMap.imports[from]!.replace(/^.*\/solid-js@[^/]+\//, "")}`,
+    )
+  );
 
 describe("Solid's API", () => {
   it("names what its module exports, under the name it is imported as", async () => {
-    for (const [name, value] of Object.entries(imports)) {
+    for (const [name, value] of Object.entries(vocabulary)) {
       assert.ok(isClientImport(value), `${name} is a client import`);
       assert.equal(value.name, name);
-      const module = await import(value.from);
-      assert.notEqual(module[name], undefined, `${value.from} has ${name}`);
+      // `in`, not a value: `DEV` is `undefined` outside Solid's dev build.
+      assert.ok(name in (await load(value.from)), `${value.from} has ${name}`);
+    }
+  });
+
+  it("names every value `solid-js` exports", async () => {
+    for (const name of Object.keys(await load("solid-js"))) {
+      assert.ok(name in vocabulary, name);
+    }
+  });
+
+  it("names every type `solid-js` exports", () => {
+    const program = ts.createProgram(
+      [join(import.meta.dirname, "..", "src", "index.ts")],
+      {
+        strict: true,
+        noEmit: true,
+        skipLibCheck: true,
+        module: ts.ModuleKind.NodeNext,
+        moduleResolution: ts.ModuleResolutionKind.NodeNext,
+        types: [],
+      },
+    );
+    const checker = program.getTypeChecker();
+    const names = (file: ts.SourceFile) =>
+      checker
+        .getExportsOfModule(checker.getSymbolAtLocation(file)!)
+        .map(({ name }) => name);
+    const ours = names(program.getSourceFile(program.getRootFileNames()[0]!)!);
+    const solid = program
+      .getSourceFiles()
+      .find(({ fileName }) => /solid-js\/types\/index\.d\.ts$/.test(fileName))!;
+    for (const name of names(solid)) {
+      assert.ok(ours.includes(name), name);
     }
   });
 });
 
-// What a Solid client provides must cover everything a bundle imports: the
-// vocabulary's imports, and what Solid's compiler writes imports of.
-describe("the modules a Solid client provides", () => {
-  it("hold every import's module", () => {
-    for (const [name, value] of Object.entries(imports)) {
+// The import map must cover everything a bundle imports: the vocabulary's
+// imports, and what Solid's compiler writes imports of.
+describe("the import map", () => {
+  it("maps every import's module", () => {
+    for (const [name, value] of Object.entries(vocabulary)) {
       assert.ok(isClientImport(value));
-      assert.ok(
-        (modules as readonly string[]).includes(value.from),
-        `${name} is from "${value.from}"`,
-      );
+      assert.ok(modules.includes(value.from), `${name} is from "${value.from}"`);
     }
   });
 
-  it("hold what Solid's compiler imports", async () => {
+  it("maps what Solid's compiler imports", async () => {
     // A drawing with an event: templates, insertion, and delegated events.
     const bundle = await bundler.build({
-      input: createJsxElement("button", { onclick: imports.batch, children: ["a"] }),
+      input: createJsxElement("button", {
+        onclick: vocabulary.batch,
+        children: ["a"],
+      }),
       external: modules,
       plugins: [compile],
     });
@@ -44,7 +90,20 @@ describe("the modules a Solid client provides", () => {
     );
     assert.ok(written.includes("solid-js/web"));
     for (const from of written) {
-      assert.ok((modules as readonly string[]).includes(from), from);
+      assert.ok(modules.includes(from), from);
+    }
+  });
+
+  // The adapter takes Solid's version, which the import map loads.
+  it("loads the Solid of the adapter's version", () => {
+    const { version } = JSON.parse(
+      readFileSync(new URL("../package.json", import.meta.url), "utf8"),
+    ) as { version: string };
+    for (const url of Object.values(importMap.imports)) {
+      assert.match(
+        url,
+        new RegExp(`/solid-js@${version.replaceAll(".", "\\.")}/`),
+      );
     }
   });
 });

@@ -7,7 +7,7 @@ export const html = `<!doctype html>
     <meta charset="utf-8">
     <title>Backtick-"keyed"</title>
     <link href="/css/currentStyle.css" rel="stylesheet">
-    ${importMap()}
+    <script type="importmap">${JSON.stringify(importMap)}</script>
   </head>
   <body>
     <div id="main" class="container">

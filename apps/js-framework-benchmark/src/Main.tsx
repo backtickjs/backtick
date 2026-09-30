@@ -1,7 +1,6 @@
 import { cs, type Client } from "@backtickjs/core";
-import { createSignal, For } from "@backtickjs/solid-js";
+import { createSignal, For, type Signal } from "@backtickjs/solid-js";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import type { Signal } from "solid-js";
 
 type Row = {
   readonly id: number;

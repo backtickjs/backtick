@@ -8,7 +8,7 @@ async function toHtml(element: JSX.Element): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    ${importMap()}
+    <script type="importmap">${JSON.stringify(importMap)}</script>
   </head>
   <body>
     ${await renderToString(() => element)}
