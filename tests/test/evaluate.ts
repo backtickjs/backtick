@@ -14,27 +14,38 @@ export type Evaluated<T> = T extends JSX.Element
   : T extends Client<infer Value>
     ? Evaluated<Value>
     : T extends (...args: infer Args) => infer Returned
-      ? (...args: { [K in keyof Args]: Spliced<Args[K]> }) => Evaluated<Returned>
+      ? (
+          ...args: { [K in keyof Args]: Spliced<Args[K]> }
+        ) => Evaluated<Returned>
       : T;
 
 /**
- * A value as the client runs it: bundled with Solid's compiler, and imported
- * from a `data:` URL, its imports resolved as a page's import map resolves
- * them — Solid's modules, and the one an app adds beside them (see
- * `stdlib/target-builtins.test.tsx`). Run a drawing the way Solid does, as a
- * function it calls:
+ * A value as the module a page imports: compiled by Solid, against the modules
+ * a page's import map provides — Solid's, and the one an app adds beside them
+ * (see `stdlib/target-builtins.test.tsx`).
+ */
+export async function bundle(
+  value: Spliceable,
+): Promise<{ code: string; map: string }> {
+  const built = await bundler.build({
+    input: value,
+    external: [...Object.keys(importMap.imports), "app"],
+    plugins: [solid()],
+  });
+  return built.generate({ format: "es" });
+}
+
+/**
+ * A value as the client runs it: bundled, and imported from a `data:` URL,
+ * its imports resolved as a page's import map resolves them. Run a drawing the
+ * way Solid does, as a function it calls:
  *
  *     render(await evaluate(() => <Counter from={0} />));
  */
 export async function evaluate<T extends Spliceable>(
   value: T,
 ): Promise<Evaluated<T>> {
-  const bundle = await bundler.build({
-    input: value,
-    external: [...Object.keys(importMap.imports), "app"],
-    plugins: [solid()],
-  });
-  const { code } = bundle.generate({ format: "es" });
+  const { code } = await bundle(value);
   const module = (await import(
     `data:text/javascript,${encodeURIComponent(code)}`
   )) as { default: Evaluated<T> };

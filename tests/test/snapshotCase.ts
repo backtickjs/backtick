@@ -1,7 +1,6 @@
 import { mkdirSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import type { TestContext } from "node:test";
-import { bundle } from "@backtickjs/solid-js/bundle";
 import type { Spliceable } from "@backtickjs/core";
 import prettier from "prettier";
 import { isNode } from "./node.ts";
@@ -9,7 +8,7 @@ import { renderBundleMappings } from "./renderBundleMappings.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { evaluate } from "./evaluate.ts";
+import { bundle, evaluate } from "./evaluate.ts";
 import { render } from "@solidjs/testing-library";
 import { createRoot } from "solid-js";
 

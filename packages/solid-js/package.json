@@ -17,10 +17,6 @@
       "types": "./dist/jsx-runtime.d.ts",
       "default": "./dist/jsx-runtime.js"
     },
-    "./bundle": {
-      "types": "./dist/bundle.d.ts",
-      "default": "./dist/bundle.js"
-    },
     "./plugin": {
       "types": "./dist/plugin.d.ts",
       "default": "./dist/plugin.js"

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs, type Client } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { bundle } from "@backtickjs/solid-js/bundle";
+import { bundle } from "../evaluate.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A bundle is a function of what was spliced alone: bundling it again, or after

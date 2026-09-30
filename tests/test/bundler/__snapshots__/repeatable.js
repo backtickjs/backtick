@@ -3,21 +3,21 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import { bundle } from "@backtickjs/solid-js/bundle";
+import { bundle } from "../evaluate.ts";
 // A bundle is a function of what was spliced alone: bundling it again, or after
 // other bundles, writes the same code. Scripts are where most of the bundler's
 // bookkeeping is — their numbers, the names captures print under, the thunks a
 // hole feeds — so this is the bundler's own repeatability test with them in.
 const doubled = (n) =>
   cs.create(
-    "1megtw9jvvt02:13:39",
+    "1edi3gfk3umuj:13:39",
     { params: [{ kind: "splice", value: n, bindings: [] }] },
     "($splice0) => $splice0() * 2",
     '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAY0C,cAAA,UAAE,GAAG,CAAC"}',
   );
 const pair = (n) => (m) =>
   cs.create(
-    "1megtw9jvvt02:14:59",
+    "1edi3gfk3umuj:14:59",
     {
       params: [
         { kind: "splice", value: n, bindings: [] },
@@ -31,14 +31,14 @@ function Card(props) {
   return _jsx("h2", { children: props.title });
 }
 const shared = cs.create(
-  "1megtw9jvvt02:20:15",
+  "1edi3gfk3umuj:20:15",
   { params: [] },
   '() => "shared"',
   '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAmBkB,MAAA,QAAQ"}',
 );
 const page = () =>
   cs.create(
-    "1megtw9jvvt02:22:19",
+    "1edi3gfk3umuj:22:19",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -46,26 +46,26 @@ const page = () =>
         {
           kind: "splice",
           value: cs.create(
-            "1megtw9jvvt02:26:31",
-            { params: [{ kind: "capture", key: "rows$1megtw9jvvt02$2" }] },
+            "1edi3gfk3umuj:26:31",
+            { params: [{ kind: "capture", key: "rows$1edi3gfk3umuj$2" }] },
             "($capture0) => $capture0.length",
             '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAyBkC,eAAA,SAAI,CAAC,MAAM"}',
           ),
-          bindings: ["rows$1megtw9jvvt02$2"],
+          bindings: ["rows$1edi3gfk3umuj$2"],
         },
         {
           kind: "splice",
           value: _jsx(Card, { title: "element" }),
-          bindings: ["rows$1megtw9jvvt02$2"],
+          bindings: ["rows$1edi3gfk3umuj$2"],
         },
         {
           kind: "splice",
           value: _jsx(Card, { title: shared }),
-          bindings: ["rows$1megtw9jvvt02$2"],
+          bindings: ["rows$1edi3gfk3umuj$2"],
         },
-        { kind: "splice", value: doubled, bindings: ["rows$1megtw9jvvt02$2"] },
-        { kind: "splice", value: pair, bindings: ["rows$1megtw9jvvt02$2"] },
-        { kind: "splice", value: shared, bindings: ["rows$1megtw9jvvt02$2"] },
+        { kind: "splice", value: doubled, bindings: ["rows$1edi3gfk3umuj$2"] },
+        { kind: "splice", value: pair, bindings: ["rows$1edi3gfk3umuj$2"] },
+        { kind: "splice", value: shared, bindings: ["rows$1edi3gfk3umuj$2"] },
         { kind: "tag", value: For },
       ],
     },
@@ -79,7 +79,7 @@ it("bundles the same every time, with scripts in it", async () => {
   // Other bundles in between, sharing its host functions and scripts.
   await code(
     cs.create(
-      "1megtw9jvvt02:49:13",
+      "1edi3gfk3umuj:49:13",
       { params: [{ kind: "splice", value: doubled, bindings: [] }] },
       "($splice0) => $splice0()(1)",
       '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAgDgB,cAAA,UAAQ,CAAC,CAAC,CAAC"}',
@@ -87,7 +87,7 @@ it("bundles the same every time, with scripts in it", async () => {
   );
   await code(
     cs.create(
-      "1megtw9jvvt02:50:13",
+      "1edi3gfk3umuj:50:13",
       {
         params: [
           { kind: "splice", value: pair, bindings: [] },
@@ -100,7 +100,7 @@ it("bundles the same every time, with scripts in it", async () => {
   );
   await code(
     cs.create(
-      "1megtw9jvvt02:51:13",
+      "1edi3gfk3umuj:51:13",
       {
         params: [
           {
