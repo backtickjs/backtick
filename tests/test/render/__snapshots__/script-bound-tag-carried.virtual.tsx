@@ -6,7 +6,7 @@ import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { JSX, Prop } from "@backtickjs/solid-js/jsx-runtime";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.
@@ -38,7 +38,7 @@ it("scriptBoundTagCarried", async (t) => {
 
 describe("a tag naming a function the script holds", () => {
   it("calls the one it was written under, drawn where another is in scope", async () => {
-    render(await draw(() => scriptBoundTagCarried));
+    render(await evaluate(() => scriptBoundTagCarried));
     const panel = screen.getByText("panel 0");
     const badge = screen.getByText("outer 0");
     assert.equal(badge.tagName.toLowerCase(), "b");

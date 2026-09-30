@@ -5,7 +5,7 @@ import { createSignal, For } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { watchWrites } from "./writes.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // js-framework-benchmark's "swap rows": the second row and the second-to-last
 // change places. The rows between them stay where they are, so what moves is
@@ -37,7 +37,7 @@ async function SwappableRows() {
 }
 
 it("a swap moves the two rows it swapped", async () => {
-  const { container } = render(await draw(() => <SwappableRows />));
+  const { container } = render(await evaluate(() => <SwappableRows />));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "swap" }));
   // Each move is the row leaving where it was and arriving where it goes.

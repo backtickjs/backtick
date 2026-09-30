@@ -9,16 +9,18 @@ const TAG = /^[a-z][A-Za-z0-9-]*(:[A-Za-z][A-Za-z0-9-]*)?$/;
 const ATTRIBUTE = /^[A-Za-z_$][A-Za-z0-9_$-]*(:[A-Za-z_$][A-Za-z0-9_$-]*)?$/;
 
 /**
- * What a bundle imports, keyed by specifier and export, each bound once, and
- * whether it draws a script a component drew (see `componentElement`).
+ * What a bundle imports, keyed by specifier and export, each bound once; the
+ * modules it may import them from, which the client provides; and whether it
+ * draws a script a component drew (see `componentElement`).
  */
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
+  readonly external: readonly string[];
   usesComponent: boolean;
 }
 
-export function createNames(): Names {
-  return { imports: new Map(), usesComponent: false };
+export function createNames(external: readonly string[]): Names {
+  return { imports: new Map(), external, usesComponent: false };
 }
 
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
@@ -79,6 +81,14 @@ export function object(
 
 /** An export of a module the client provides, imported by the bundle. */
 export function imported(names: Names, from: string, name: string): string {
+  // Where a script's import is written: a plugin's own (a framework's compile
+  // step) are the plugin's, trusted as it is.
+  if (!names.external.includes(from)) {
+    throw new Error(
+      `Can't import \`${name}\` from "${from}": the client provides ` +
+        `${names.external.map((module) => `"${module}"`).join(", ") || "no modules"}.`,
+    );
+  }
   const key = `${from}\0${name}`;
   let entry = names.imports.get(key);
   if (entry === undefined) {

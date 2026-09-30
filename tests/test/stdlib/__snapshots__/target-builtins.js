@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, createImport } from "@backtickjs/core";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { createRoot } from "solid-js";
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `app` is an entry of the import
@@ -17,12 +17,12 @@ describe("a module an app provides", () => {
   it("is what that specifier resolves to", async () => {
     assert.equal(
       createRoot(
-        await draw(
+        await evaluate(
           cs.create(
-            "1n3focz0nhdlf:20:39",
+            "1knirzmcv1y2v:20:43",
             { params: [{ kind: "splice", value: greet, bindings: [] }] },
             "($splice0) => () => $splice0()()",
-            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmB0C,cAAA,GAAG,EAAE,CAAC,UAAM,EAAE"}',
+            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmB8C,cAAA,GAAG,EAAE,CAAC,UAAM,EAAE"}',
           ),
         ),
       ),
@@ -34,12 +34,12 @@ describe("a module an app provides", () => {
     // name: `$storage.get(…)` is a member read on a plain object.
     assert.equal(
       createRoot(
-        await draw(
+        await evaluate(
           cs.create(
-            "1n3focz0nhdlf:26:39",
+            "1knirzmcv1y2v:26:43",
             { params: [{ kind: "splice", value: storage, bindings: [] }] },
             '($splice0) => () => $splice0().get("greeting")',
-            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyB0C,cAAA,GAAG,EAAE,CAAC,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyB8C,cAAA,GAAG,EAAE,CAAC,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
           ),
         ),
       ),

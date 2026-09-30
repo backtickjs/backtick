@@ -9,7 +9,7 @@ import {
 } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
 let runs = 0;
@@ -27,9 +27,9 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = render(
-      await draw(
+      await evaluate(
         cs.create(
-          "385i4pwhgb2fp:34:8",
+          "3cbamsnh3ycv9:34:8",
           { params: [{ kind: "splice", value: onCleanup, bindings: [] }] },
           "($splice0) => () => {\n    $splice0()(() => window.console.log());\n    return <p>drawn</p>;\n}",
           '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAiCW,cAAA,GAAG,EAAE;IACN,UAAU,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACvC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
@@ -42,9 +42,9 @@ describe("onCleanup", () => {
   });
   it("runs before a memo calculates again", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.create(
-          "385i4pwhgb2fp:48:8",
+          "3cbamsnh3ycv9:48:8",
           {
             params: [
               { kind: "splice", value: createSignal, bindings: [] },
@@ -74,9 +74,9 @@ describe("onCleanup", () => {
     });
     t.after(() => started.forEach((id) => globalThis.window.clearInterval(id)));
     const { unmount } = render(
-      await draw(
+      await evaluate(
         cs.create(
-          "385i4pwhgb2fp:82:8",
+          "3cbamsnh3ycv9:82:8",
           {
             params: [
               { kind: "splice", value: createSignal, bindings: [] },
@@ -98,9 +98,9 @@ describe("onCleanup", () => {
   });
   it("never runs when called from a handler", async () => {
     const { unmount } = render(
-      await draw(
+      await evaluate(
         cs.create(
-          "385i4pwhgb2fp:104:8",
+          "3cbamsnh3ycv9:104:8",
           { params: [{ kind: "splice", value: onCleanup, bindings: [] }] },
           "($splice0) => () => {\n    return (<button onclick={() => $splice0()(() => window.console.log())}>\n              press\n            </button>);\n}",
           '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAuGW,cAAA,GAAG,EAAE;IACN,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC5D;;YACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',

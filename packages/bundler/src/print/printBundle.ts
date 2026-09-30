@@ -8,9 +8,10 @@ import { importDeclaration } from "./code.js";
 const MODULE_ID = "bundle.jsx";
 
 /**
- * A bundle tree as a module whose last statement is the tree's root: the value
- * bundled, as its scripts wrote it. Exporting it is the adapter's, which knows
- * what its framework's `render` takes.
+ * A bundle tree as a module whose default export is the tree's root: the value
+ * bundled, as its scripts wrote it. The export is how the value is found again
+ * once plugins have transformed the module (they may add statements after it);
+ * what a caller gets is `generate`'s, in the format they asked for.
  *
  * The module is JSX: its imports, each script, and the root, for the
  * framework's compiler to compile as it compiles any module; its imports are
@@ -41,9 +42,8 @@ export function printBundle(tree: BundleTree): JsxModule {
   for (const [label, code] of tree.expansions) {
     module.line(`const ${label} = ${code};`);
   }
-  // Parenthesized, so a root that is an object literal or a function isn't
-  // read as a block or a declaration.
-  module.write(`(${tree.root});`);
+  // Parenthesized, so a root that is a function isn't a declaration.
+  module.write(`export default (${tree.root});`);
 
   return { code: module.code, map: module.map() };
 }

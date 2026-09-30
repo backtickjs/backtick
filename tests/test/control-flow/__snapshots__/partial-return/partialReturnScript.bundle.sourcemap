@@ -1,20 +1,19 @@
-(                → control-flow/partial-return.test.tsx 10:8 {…
-) => {           → control-flow/partial-return.test.tsx 10:8 {…
-let              → control-flow/partial-return.test.tsx 11:7 let 
-n                → control-flow/partial-return.test.tsx 11:11 n
- =               → control-flow/partial-return.test.tsx 11:12  = 
-1                → control-flow/partial-return.test.tsx 11:15 1
-;                → control-flow/partial-return.test.tsx 11:16 ;
-if (             → control-flow/partial-return.test.tsx 12:7 if (
-n                → control-flow/partial-return.test.tsx 12:11 n
- ===             → control-flow/partial-return.test.tsx 12:12  === 
-2                → control-flow/partial-return.test.tsx 12:17 2
-)                → control-flow/partial-return.test.tsx 12:18 ) 
-{                → control-flow/partial-return.test.tsx 12:20 {
-return           → control-flow/partial-return.test.tsx 13:9 return 
-"some"           → control-flow/partial-return.test.tsx 13:16 "some"
-;                → control-flow/partial-return.test.tsx 13:22 ;
-}                → control-flow/partial-return.test.tsx 14:7 }
-}                → control-flow/partial-return.test.tsx 15:5 }
-;                → control-flow/partial-return.test.tsx 15:6 `,…
-export default   → control-flow/partial-return.test.tsx 15:6 `,…
+(        → control-flow/partial-return.test.tsx 10:8 {…
+) => {   → control-flow/partial-return.test.tsx 10:8 {…
+let      → control-flow/partial-return.test.tsx 11:7 let 
+n        → control-flow/partial-return.test.tsx 11:11 n
+ =       → control-flow/partial-return.test.tsx 11:12  = 
+1        → control-flow/partial-return.test.tsx 11:15 1
+;        → control-flow/partial-return.test.tsx 11:16 ;
+if (     → control-flow/partial-return.test.tsx 12:7 if (
+n        → control-flow/partial-return.test.tsx 12:11 n
+ ===     → control-flow/partial-return.test.tsx 12:12  === 
+2        → control-flow/partial-return.test.tsx 12:17 2
+)        → control-flow/partial-return.test.tsx 12:18 ) 
+{        → control-flow/partial-return.test.tsx 12:20 {
+return   → control-flow/partial-return.test.tsx 13:9 return 
+"some"   → control-flow/partial-return.test.tsx 13:16 "some"
+;        → control-flow/partial-return.test.tsx 13:22 ;
+}        → control-flow/partial-return.test.tsx 14:7 }
+}        → control-flow/partial-return.test.tsx 15:5 }
+;        → control-flow/partial-return.test.tsx 15:6 `,…

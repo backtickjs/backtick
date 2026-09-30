@@ -1,40 +1,39 @@
-(                → stdlib/builtin-as-value.test.tsx 16:8 {…
-) => {           → stdlib/builtin-as-value.test.tsx 16:8 {…
-const            → stdlib/builtin-as-value.test.tsx 17:7 const 
-floor            → stdlib/builtin-as-value.test.tsx 17:13 floor
- =               → stdlib/builtin-as-value.test.tsx 17:18  = 
-Math             → stdlib/builtin-as-value.test.tsx 17:21 Math
-.                → stdlib/builtin-as-value.test.tsx 17:25 .
-floor            → stdlib/builtin-as-value.test.tsx 17:26 floor
-;                → stdlib/builtin-as-value.test.tsx 17:31 ;
-const            → stdlib/builtin-as-value.test.tsx 18:7 const 
-apply            → stdlib/builtin-as-value.test.tsx 18:13 apply
- =               → stdlib/builtin-as-value.test.tsx 18:18  = 
-(                → stdlib/builtin-as-value.test.tsx 18:21 (
-f                → stdlib/builtin-as-value.test.tsx 18:22 f
-,                → stdlib/builtin-as-value.test.tsx 18:46 , 
-n                → stdlib/builtin-as-value.test.tsx 18:48 n
-) =>             → stdlib/builtin-as-value.test.tsx 18:57 ) => 
-f                → stdlib/builtin-as-value.test.tsx 18:62 f
-(                → stdlib/builtin-as-value.test.tsx 18:63 (
-n                → stdlib/builtin-as-value.test.tsx 18:64 n
-)                → stdlib/builtin-as-value.test.tsx 18:65 )
-;                → stdlib/builtin-as-value.test.tsx 18:66 ;
-return           → stdlib/builtin-as-value.test.tsx 19:7 return 
-floor            → stdlib/builtin-as-value.test.tsx 19:14 floor
-(                → stdlib/builtin-as-value.test.tsx 19:19 (
-3.5              → stdlib/builtin-as-value.test.tsx 19:20 3.5
-)                → stdlib/builtin-as-value.test.tsx 19:23 )
- +               → stdlib/builtin-as-value.test.tsx 19:24  + 
-apply            → stdlib/builtin-as-value.test.tsx 19:27 apply
-(                → stdlib/builtin-as-value.test.tsx 19:32 (
-Math             → stdlib/builtin-as-value.test.tsx 19:33 Math
-.                → stdlib/builtin-as-value.test.tsx 19:37 .
-ceil             → stdlib/builtin-as-value.test.tsx 19:38 ceil
-,                → stdlib/builtin-as-value.test.tsx 19:42 , 
-3.5              → stdlib/builtin-as-value.test.tsx 19:44 3.5
-)                → stdlib/builtin-as-value.test.tsx 19:47 )
-;                → stdlib/builtin-as-value.test.tsx 19:48 ;
-}                → stdlib/builtin-as-value.test.tsx 20:5 }
-;                → stdlib/builtin-as-value.test.tsx 20:6 `,…
-export default   → stdlib/builtin-as-value.test.tsx 20:6 `,…
+(        → stdlib/builtin-as-value.test.tsx 16:8 {…
+) => {   → stdlib/builtin-as-value.test.tsx 16:8 {…
+const    → stdlib/builtin-as-value.test.tsx 17:7 const 
+floor    → stdlib/builtin-as-value.test.tsx 17:13 floor
+ =       → stdlib/builtin-as-value.test.tsx 17:18  = 
+Math     → stdlib/builtin-as-value.test.tsx 17:21 Math
+.        → stdlib/builtin-as-value.test.tsx 17:25 .
+floor    → stdlib/builtin-as-value.test.tsx 17:26 floor
+;        → stdlib/builtin-as-value.test.tsx 17:31 ;
+const    → stdlib/builtin-as-value.test.tsx 18:7 const 
+apply    → stdlib/builtin-as-value.test.tsx 18:13 apply
+ =       → stdlib/builtin-as-value.test.tsx 18:18  = 
+(        → stdlib/builtin-as-value.test.tsx 18:21 (
+f        → stdlib/builtin-as-value.test.tsx 18:22 f
+,        → stdlib/builtin-as-value.test.tsx 18:46 , 
+n        → stdlib/builtin-as-value.test.tsx 18:48 n
+) =>     → stdlib/builtin-as-value.test.tsx 18:57 ) => 
+f        → stdlib/builtin-as-value.test.tsx 18:62 f
+(        → stdlib/builtin-as-value.test.tsx 18:63 (
+n        → stdlib/builtin-as-value.test.tsx 18:64 n
+)        → stdlib/builtin-as-value.test.tsx 18:65 )
+;        → stdlib/builtin-as-value.test.tsx 18:66 ;
+return   → stdlib/builtin-as-value.test.tsx 19:7 return 
+floor    → stdlib/builtin-as-value.test.tsx 19:14 floor
+(        → stdlib/builtin-as-value.test.tsx 19:19 (
+3.5      → stdlib/builtin-as-value.test.tsx 19:20 3.5
+)        → stdlib/builtin-as-value.test.tsx 19:23 )
+ +       → stdlib/builtin-as-value.test.tsx 19:24  + 
+apply    → stdlib/builtin-as-value.test.tsx 19:27 apply
+(        → stdlib/builtin-as-value.test.tsx 19:32 (
+Math     → stdlib/builtin-as-value.test.tsx 19:33 Math
+.        → stdlib/builtin-as-value.test.tsx 19:37 .
+ceil     → stdlib/builtin-as-value.test.tsx 19:38 ceil
+,        → stdlib/builtin-as-value.test.tsx 19:42 , 
+3.5      → stdlib/builtin-as-value.test.tsx 19:44 3.5
+)        → stdlib/builtin-as-value.test.tsx 19:47 )
+;        → stdlib/builtin-as-value.test.tsx 19:48 ;
+}        → stdlib/builtin-as-value.test.tsx 20:5 }
+;        → stdlib/builtin-as-value.test.tsx 20:6 `,…

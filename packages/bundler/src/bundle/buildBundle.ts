@@ -99,8 +99,11 @@ const rootScope: Scope = { bindings: new Set() };
 // name, a capture is threaded under that one name the whole way down — an
 // intermediate script that binds a same-looking variable has a different
 // unique name, so there is nothing to disambiguate and nothing to rename.
-export async function buildBundle(value: Spliceable): Promise<BundleTree> {
-  const names = createNames();
+export async function buildBundle(
+  value: Spliceable,
+  external: readonly string[],
+): Promise<BundleTree> {
+  const names = createNames(external);
   const functionExpansions: FunctionExpansions = new WeakMap();
   const elementExpansions: ElementExpansions = new WeakMap();
   // Each script's number, in the order rendering first reaches it. Two

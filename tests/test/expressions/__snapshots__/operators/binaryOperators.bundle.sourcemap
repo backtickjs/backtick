@@ -1,63 +1,62 @@
-(                → expressions/operators.test.tsx 10:8 {…
-) => {           → expressions/operators.test.tsx 10:8 {…
-const            → expressions/operators.test.tsx 11:7 const 
-n                → expressions/operators.test.tsx 11:13 n
- =               → expressions/operators.test.tsx 11:14  = 
-5                → expressions/operators.test.tsx 11:17 5
-;                → expressions/operators.test.tsx 11:18 ;
-return           → expressions/operators.test.tsx 12:7 return 
-[                → expressions/operators.test.tsx 12:14 [
-n                → expressions/operators.test.tsx 13:9 n
- **              → expressions/operators.test.tsx 13:10  ** 
-2                → expressions/operators.test.tsx 13:14 2
-,                → expressions/operators.test.tsx 13:15 ,…
-n                → expressions/operators.test.tsx 14:9 n
- &               → expressions/operators.test.tsx 14:10  & 
-6                → expressions/operators.test.tsx 14:13 6
-,                → expressions/operators.test.tsx 14:14 ,…
-n                → expressions/operators.test.tsx 15:9 n
- |               → expressions/operators.test.tsx 15:10  | 
-8                → expressions/operators.test.tsx 15:13 8
-,                → expressions/operators.test.tsx 15:14 ,…
-n                → expressions/operators.test.tsx 16:9 n
- ^               → expressions/operators.test.tsx 16:10  ^ 
-1                → expressions/operators.test.tsx 16:13 1
-,                → expressions/operators.test.tsx 16:14 ,…
-n                → expressions/operators.test.tsx 17:9 n
- <<              → expressions/operators.test.tsx 17:10  << 
-2                → expressions/operators.test.tsx 17:14 2
-,                → expressions/operators.test.tsx 17:15 ,…
--                → expressions/operators.test.tsx 18:9 -
-n                → expressions/operators.test.tsx 18:10 n
- >>              → expressions/operators.test.tsx 18:11  >> 
-1                → expressions/operators.test.tsx 18:15 1
-,                → expressions/operators.test.tsx 18:16 ,…
--                → expressions/operators.test.tsx 19:9 -
-n                → expressions/operators.test.tsx 19:10 n
- >>>             → expressions/operators.test.tsx 19:11  >>> 
-28               → expressions/operators.test.tsx 19:16 28
-,                → expressions/operators.test.tsx 19:18 ,…
-n                → expressions/operators.test.tsx 20:9 n
- ==              → expressions/operators.test.tsx 20:10  == 
-5                → expressions/operators.test.tsx 20:14 5
-,                → expressions/operators.test.tsx 20:15 ,…
-n                → expressions/operators.test.tsx 21:9 n
- !=              → expressions/operators.test.tsx 21:10  != 
-5                → expressions/operators.test.tsx 21:14 5
-,                → expressions/operators.test.tsx 21:15 ,…
-"length"         → expressions/operators.test.tsx 22:9 "length"
- in              → expressions/operators.test.tsx 22:17  in 
-[                → expressions/operators.test.tsx 22:21 [
-n                → expressions/operators.test.tsx 22:22 n
-]                → expressions/operators.test.tsx 22:23 ]
-,                → expressions/operators.test.tsx 22:24 ,…
-[                → expressions/operators.test.tsx 23:9 [
-n                → expressions/operators.test.tsx 23:10 n
-]                → expressions/operators.test.tsx 23:11 ]
- instanceof      → expressions/operators.test.tsx 23:12  instanceof 
-Array            → expressions/operators.test.tsx 23:24 Array
-]                → expressions/operators.test.tsx 23:29 ,…
-;                → expressions/operators.test.tsx 24:8 ;
-}                → expressions/operators.test.tsx 25:5 }
-;                → expressions/operators.test.tsx 25:6 `,…
-export default   → expressions/operators.test.tsx 25:6 `,…
+(             → expressions/operators.test.tsx 10:8 {…
+) => {        → expressions/operators.test.tsx 10:8 {…
+const         → expressions/operators.test.tsx 11:7 const 
+n             → expressions/operators.test.tsx 11:13 n
+ =            → expressions/operators.test.tsx 11:14  = 
+5             → expressions/operators.test.tsx 11:17 5
+;             → expressions/operators.test.tsx 11:18 ;
+return        → expressions/operators.test.tsx 12:7 return 
+[             → expressions/operators.test.tsx 12:14 [
+n             → expressions/operators.test.tsx 13:9 n
+ **           → expressions/operators.test.tsx 13:10  ** 
+2             → expressions/operators.test.tsx 13:14 2
+,             → expressions/operators.test.tsx 13:15 ,…
+n             → expressions/operators.test.tsx 14:9 n
+ &            → expressions/operators.test.tsx 14:10  & 
+6             → expressions/operators.test.tsx 14:13 6
+,             → expressions/operators.test.tsx 14:14 ,…
+n             → expressions/operators.test.tsx 15:9 n
+ |            → expressions/operators.test.tsx 15:10  | 
+8             → expressions/operators.test.tsx 15:13 8
+,             → expressions/operators.test.tsx 15:14 ,…
+n             → expressions/operators.test.tsx 16:9 n
+ ^            → expressions/operators.test.tsx 16:10  ^ 
+1             → expressions/operators.test.tsx 16:13 1
+,             → expressions/operators.test.tsx 16:14 ,…
+n             → expressions/operators.test.tsx 17:9 n
+ <<           → expressions/operators.test.tsx 17:10  << 
+2             → expressions/operators.test.tsx 17:14 2
+,             → expressions/operators.test.tsx 17:15 ,…
+-             → expressions/operators.test.tsx 18:9 -
+n             → expressions/operators.test.tsx 18:10 n
+ >>           → expressions/operators.test.tsx 18:11  >> 
+1             → expressions/operators.test.tsx 18:15 1
+,             → expressions/operators.test.tsx 18:16 ,…
+-             → expressions/operators.test.tsx 19:9 -
+n             → expressions/operators.test.tsx 19:10 n
+ >>>          → expressions/operators.test.tsx 19:11  >>> 
+28            → expressions/operators.test.tsx 19:16 28
+,             → expressions/operators.test.tsx 19:18 ,…
+n             → expressions/operators.test.tsx 20:9 n
+ ==           → expressions/operators.test.tsx 20:10  == 
+5             → expressions/operators.test.tsx 20:14 5
+,             → expressions/operators.test.tsx 20:15 ,…
+n             → expressions/operators.test.tsx 21:9 n
+ !=           → expressions/operators.test.tsx 21:10  != 
+5             → expressions/operators.test.tsx 21:14 5
+,             → expressions/operators.test.tsx 21:15 ,…
+"length"      → expressions/operators.test.tsx 22:9 "length"
+ in           → expressions/operators.test.tsx 22:17  in 
+[             → expressions/operators.test.tsx 22:21 [
+n             → expressions/operators.test.tsx 22:22 n
+]             → expressions/operators.test.tsx 22:23 ]
+,             → expressions/operators.test.tsx 22:24 ,…
+[             → expressions/operators.test.tsx 23:9 [
+n             → expressions/operators.test.tsx 23:10 n
+]             → expressions/operators.test.tsx 23:11 ]
+ instanceof   → expressions/operators.test.tsx 23:12  instanceof 
+Array         → expressions/operators.test.tsx 23:24 Array
+]             → expressions/operators.test.tsx 23:29 ,…
+;             → expressions/operators.test.tsx 24:8 ;
+}             → expressions/operators.test.tsx 25:5 }
+;             → expressions/operators.test.tsx 25:6 `,…

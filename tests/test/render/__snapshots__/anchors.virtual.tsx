@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { createRoot } from "solid-js";
@@ -82,7 +82,7 @@ async function drawAt(
   parent: Element,
   selector: string,
 ): Promise<void> {
-  const drawing = await draw(() => value);
+  const drawing = await evaluate(() => value);
   const unmount = createRoot((dispose) => {
     insert(parent, drawing(), parent.querySelector(selector)!);
     return dispose;

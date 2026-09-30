@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { createRoot } from "solid-js";
 
 // A spliced `undefined` crosses as the bundle's `undef` node, since JSON has
@@ -10,23 +10,24 @@ import { createRoot } from "solid-js";
 describe("a spliced undefined", () => {
   it("arrives as undefined", async () => {
     const nothing: number | undefined = undefined;
-    assert.equal(createRoot(await draw(cs`() => $nothing`)), undefined);
+    assert.equal(createRoot(await evaluate(cs`() => $nothing`)), undefined);
   });
 
   it("keeps its key in an object", async () => {
     const data = { missing: undefined, kept: 1 };
-    const arrived = createRoot(await draw(cs`() => $data`));
+    const arrived = createRoot(await evaluate(cs`() => $data`));
     assert.deepEqual(arrived, { missing: undefined, kept: 1 });
     assert.ok("missing" in (arrived as object));
   });
 
   it("stays undefined in an array", async () => {
     const data = [1, undefined, 3];
-    assert.deepEqual(createRoot(await draw(cs`() => $data`)), [1, undefined, 3]);
+    assert.deepEqual(createRoot(await evaluate(cs`() => $data`)), [1, undefined, 3]);
   });
 
   it("is written as `void 0`", async () => {
-    const { code } = await bundler.run([undefined]);
+    const bundle = await bundler.build({ input: [undefined], external: [] });
+    const { code } = bundle.generate({ format: "es" });
     assert.match(code, /\[void 0\]/);
   });
 });

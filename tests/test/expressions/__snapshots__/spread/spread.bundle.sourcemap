@@ -1,69 +1,68 @@
-(                → expressions/spread.test.tsx 12:8 {…
-) => {           → expressions/spread.test.tsx 12:8 {…
-const            → expressions/spread.test.tsx 13:7 const 
-front            → expressions/spread.test.tsx 13:13 front
- =               → expressions/spread.test.tsx 13:18  = 
-[                → expressions/spread.test.tsx 13:21 [
-1                → expressions/spread.test.tsx 13:22 1
-,                → expressions/spread.test.tsx 13:23 , 
-2                → expressions/spread.test.tsx 13:25 2
-]                → expressions/spread.test.tsx 13:26 ]
-;                → expressions/spread.test.tsx 13:27 ;
-const            → expressions/spread.test.tsx 14:7 const 
-back             → expressions/spread.test.tsx 14:13 back
- =               → expressions/spread.test.tsx 14:17  = 
-[                → expressions/spread.test.tsx 14:20 [
-3                → expressions/spread.test.tsx 14:21 3
-]                → expressions/spread.test.tsx 14:22 ]
-;                → expressions/spread.test.tsx 14:23 ;
-const            → expressions/spread.test.tsx 15:7 const 
-none             → expressions/spread.test.tsx 15:13 none
- =               → expressions/spread.test.tsx 15:17 :…
-[]               → expressions/spread.test.tsx 15:30 []
-;                → expressions/spread.test.tsx 15:32 ;
-const            → expressions/spread.test.tsx 16:7 const 
-all              → expressions/spread.test.tsx 16:13 all
- =               → expressions/spread.test.tsx 16:16  = 
-[                → expressions/spread.test.tsx 16:19 [
-0                → expressions/spread.test.tsx 16:20 0
-,                → expressions/spread.test.tsx 16:21 , 
-...              → expressions/spread.test.tsx 16:23 ...
-front            → expressions/spread.test.tsx 16:26 front
-,                → expressions/spread.test.tsx 16:31 , 
-...              → expressions/spread.test.tsx 16:33 ...
-none             → expressions/spread.test.tsx 16:36 none
-,                → expressions/spread.test.tsx 16:40 , 
-...              → expressions/spread.test.tsx 16:42 ...
-back             → expressions/spread.test.tsx 16:45 back
-,                → expressions/spread.test.tsx 16:49 , 
-4                → expressions/spread.test.tsx 16:51 4
-]                → expressions/spread.test.tsx 16:52 ]
-;                → expressions/spread.test.tsx 16:53 ;
-const            → expressions/spread.test.tsx 17:7 const 
-twice            → expressions/spread.test.tsx 17:13 twice
- =               → expressions/spread.test.tsx 17:18  = 
-[                → expressions/spread.test.tsx 17:21 [
-...              → expressions/spread.test.tsx 17:22 ...
-all              → expressions/spread.test.tsx 17:25 all
-,                → expressions/spread.test.tsx 17:28 , 
-...              → expressions/spread.test.tsx 17:30 ...
-all              → expressions/spread.test.tsx 17:33 all
-]                → expressions/spread.test.tsx 17:36 ]
-;                → expressions/spread.test.tsx 17:37 ;
-return           → expressions/spread.test.tsx 18:7 return 
-all              → expressions/spread.test.tsx 18:14 all
-.                → expressions/spread.test.tsx 18:17 .
-join             → expressions/spread.test.tsx 18:18 join
-(                → expressions/spread.test.tsx 18:22 (
-","              → expressions/spread.test.tsx 18:23 ","
-)                → expressions/spread.test.tsx 18:26 )
- +               → expressions/spread.test.tsx 18:27  + 
-"|"              → expressions/spread.test.tsx 18:30 "|"
- +               → expressions/spread.test.tsx 18:33  + 
-twice            → expressions/spread.test.tsx 18:36 twice
-.                → expressions/spread.test.tsx 18:41 .
-length           → expressions/spread.test.tsx 18:42 length
-;                → expressions/spread.test.tsx 18:48 ;
-}                → expressions/spread.test.tsx 19:5 }
-;                → expressions/spread.test.tsx 19:6 `,…
-export default   → expressions/spread.test.tsx 19:6 `,…
+(        → expressions/spread.test.tsx 12:8 {…
+) => {   → expressions/spread.test.tsx 12:8 {…
+const    → expressions/spread.test.tsx 13:7 const 
+front    → expressions/spread.test.tsx 13:13 front
+ =       → expressions/spread.test.tsx 13:18  = 
+[        → expressions/spread.test.tsx 13:21 [
+1        → expressions/spread.test.tsx 13:22 1
+,        → expressions/spread.test.tsx 13:23 , 
+2        → expressions/spread.test.tsx 13:25 2
+]        → expressions/spread.test.tsx 13:26 ]
+;        → expressions/spread.test.tsx 13:27 ;
+const    → expressions/spread.test.tsx 14:7 const 
+back     → expressions/spread.test.tsx 14:13 back
+ =       → expressions/spread.test.tsx 14:17  = 
+[        → expressions/spread.test.tsx 14:20 [
+3        → expressions/spread.test.tsx 14:21 3
+]        → expressions/spread.test.tsx 14:22 ]
+;        → expressions/spread.test.tsx 14:23 ;
+const    → expressions/spread.test.tsx 15:7 const 
+none     → expressions/spread.test.tsx 15:13 none
+ =       → expressions/spread.test.tsx 15:17 :…
+[]       → expressions/spread.test.tsx 15:30 []
+;        → expressions/spread.test.tsx 15:32 ;
+const    → expressions/spread.test.tsx 16:7 const 
+all      → expressions/spread.test.tsx 16:13 all
+ =       → expressions/spread.test.tsx 16:16  = 
+[        → expressions/spread.test.tsx 16:19 [
+0        → expressions/spread.test.tsx 16:20 0
+,        → expressions/spread.test.tsx 16:21 , 
+...      → expressions/spread.test.tsx 16:23 ...
+front    → expressions/spread.test.tsx 16:26 front
+,        → expressions/spread.test.tsx 16:31 , 
+...      → expressions/spread.test.tsx 16:33 ...
+none     → expressions/spread.test.tsx 16:36 none
+,        → expressions/spread.test.tsx 16:40 , 
+...      → expressions/spread.test.tsx 16:42 ...
+back     → expressions/spread.test.tsx 16:45 back
+,        → expressions/spread.test.tsx 16:49 , 
+4        → expressions/spread.test.tsx 16:51 4
+]        → expressions/spread.test.tsx 16:52 ]
+;        → expressions/spread.test.tsx 16:53 ;
+const    → expressions/spread.test.tsx 17:7 const 
+twice    → expressions/spread.test.tsx 17:13 twice
+ =       → expressions/spread.test.tsx 17:18  = 
+[        → expressions/spread.test.tsx 17:21 [
+...      → expressions/spread.test.tsx 17:22 ...
+all      → expressions/spread.test.tsx 17:25 all
+,        → expressions/spread.test.tsx 17:28 , 
+...      → expressions/spread.test.tsx 17:30 ...
+all      → expressions/spread.test.tsx 17:33 all
+]        → expressions/spread.test.tsx 17:36 ]
+;        → expressions/spread.test.tsx 17:37 ;
+return   → expressions/spread.test.tsx 18:7 return 
+all      → expressions/spread.test.tsx 18:14 all
+.        → expressions/spread.test.tsx 18:17 .
+join     → expressions/spread.test.tsx 18:18 join
+(        → expressions/spread.test.tsx 18:22 (
+","      → expressions/spread.test.tsx 18:23 ","
+)        → expressions/spread.test.tsx 18:26 )
+ +       → expressions/spread.test.tsx 18:27  + 
+"|"      → expressions/spread.test.tsx 18:30 "|"
+ +       → expressions/spread.test.tsx 18:33  + 
+twice    → expressions/spread.test.tsx 18:36 twice
+.        → expressions/spread.test.tsx 18:41 .
+length   → expressions/spread.test.tsx 18:42 length
+;        → expressions/spread.test.tsx 18:48 ;
+}        → expressions/spread.test.tsx 19:5 }
+;        → expressions/spread.test.tsx 19:6 `,…

@@ -1,39 +1,38 @@
-(                → objects/object-spread.test.tsx 17:8 {…
-) => {           → objects/object-spread.test.tsx 17:8 {…
-const            → objects/object-spread.test.tsx 18:7 const 
-base             → objects/object-spread.test.tsx 18:13 base
- =               → objects/object-spread.test.tsx 18:17  = 
-{                → objects/object-spread.test.tsx 18:20 {
-a                → objects/object-spread.test.tsx 18:22 a
-:                → objects/object-spread.test.tsx 18:23 : 
-1                → objects/object-spread.test.tsx 18:25 1
-,                → objects/object-spread.test.tsx 18:26 ,
-b                → objects/object-spread.test.tsx 18:28 b
-:                → objects/object-spread.test.tsx 18:29 : 
-2                → objects/object-spread.test.tsx 18:31 2
-}                → objects/object-spread.test.tsx 18:32  };…
-;                → objects/object-spread.test.tsx 18:34 ;
-const            → objects/object-spread.test.tsx 19:7 const 
-over             → objects/object-spread.test.tsx 19:13 over
- =               → objects/object-spread.test.tsx 19:17  = 
-{                → objects/object-spread.test.tsx 19:20 {
-b                → objects/object-spread.test.tsx 19:22 b
-:                → objects/object-spread.test.tsx 19:23 : 
-9                → objects/object-spread.test.tsx 19:25 9
-}                → objects/object-spread.test.tsx 19:26  };…
-;                → objects/object-spread.test.tsx 19:28 ;
-return           → objects/object-spread.test.tsx 20:7 return 
-{                → objects/object-spread.test.tsx 20:14 {
-...              → objects/object-spread.test.tsx 21:9 ...
-base             → objects/object-spread.test.tsx 21:12 base
-,                → objects/object-spread.test.tsx 21:16 ,
-...              → objects/object-spread.test.tsx 22:9 ...
-over             → objects/object-spread.test.tsx 22:12 over
-,                → objects/object-spread.test.tsx 22:16 ,
-c                → objects/object-spread.test.tsx 23:9 c
-:                → objects/object-spread.test.tsx 23:10 : 
-3                → objects/object-spread.test.tsx 23:12 3
-;                → objects/object-spread.test.tsx 24:8 ;
-}                → objects/object-spread.test.tsx 25:5 }
-;                → objects/object-spread.test.tsx 25:6 `,…
-export default   → objects/object-spread.test.tsx 25:6 `,…
+(        → objects/object-spread.test.tsx 17:8 {…
+) => {   → objects/object-spread.test.tsx 17:8 {…
+const    → objects/object-spread.test.tsx 18:7 const 
+base     → objects/object-spread.test.tsx 18:13 base
+ =       → objects/object-spread.test.tsx 18:17  = 
+{        → objects/object-spread.test.tsx 18:20 {
+a        → objects/object-spread.test.tsx 18:22 a
+:        → objects/object-spread.test.tsx 18:23 : 
+1        → objects/object-spread.test.tsx 18:25 1
+,        → objects/object-spread.test.tsx 18:26 ,
+b        → objects/object-spread.test.tsx 18:28 b
+:        → objects/object-spread.test.tsx 18:29 : 
+2        → objects/object-spread.test.tsx 18:31 2
+}        → objects/object-spread.test.tsx 18:32  };…
+;        → objects/object-spread.test.tsx 18:34 ;
+const    → objects/object-spread.test.tsx 19:7 const 
+over     → objects/object-spread.test.tsx 19:13 over
+ =       → objects/object-spread.test.tsx 19:17  = 
+{        → objects/object-spread.test.tsx 19:20 {
+b        → objects/object-spread.test.tsx 19:22 b
+:        → objects/object-spread.test.tsx 19:23 : 
+9        → objects/object-spread.test.tsx 19:25 9
+}        → objects/object-spread.test.tsx 19:26  };…
+;        → objects/object-spread.test.tsx 19:28 ;
+return   → objects/object-spread.test.tsx 20:7 return 
+{        → objects/object-spread.test.tsx 20:14 {
+...      → objects/object-spread.test.tsx 21:9 ...
+base     → objects/object-spread.test.tsx 21:12 base
+,        → objects/object-spread.test.tsx 21:16 ,
+...      → objects/object-spread.test.tsx 22:9 ...
+over     → objects/object-spread.test.tsx 22:12 over
+,        → objects/object-spread.test.tsx 22:16 ,
+c        → objects/object-spread.test.tsx 23:9 c
+:        → objects/object-spread.test.tsx 23:10 : 
+3        → objects/object-spread.test.tsx 23:12 3
+;        → objects/object-spread.test.tsx 24:8 ;
+}        → objects/object-spread.test.tsx 25:5 }
+;        → objects/object-spread.test.tsx 25:6 `,…

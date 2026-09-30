@@ -5,7 +5,7 @@ import { createSignal, For } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // A tag naming a function an enclosing script holds. The nested script captures
 // it the way it captures any binding, and calls it as a component: once, with
@@ -40,7 +40,7 @@ it("scriptBoundTagCapture", async (t) => {
 
 describe("a tag naming a function the script holds", () => {
   it("calls one an enclosing script holds, however the call is nested", async () => {
-    const { container } = render(await draw(() => scriptBoundTagCapture));
+    const { container } = render(await evaluate(() => scriptBoundTagCapture));
     const badges = () => [...container.querySelectorAll("b")];
     const before = badges();
     const texts = () => badges().map((b) => b.textContent);

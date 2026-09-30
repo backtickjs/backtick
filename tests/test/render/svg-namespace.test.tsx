@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 import { namespaced } from "./dom.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { render } from "@solidjs/testing-library";
 
 // SVG written the way it is pasted: no tag says which language it is from.
@@ -44,7 +44,7 @@ it("svgNamespace", async (t) => {
 
 describe("an element's namespace", () => {
   it("is where the element is drawn", async () => {
-    const { container } = render(await draw(() => svgNamespace));
+    const { container } = render(await evaluate(() => svgNamespace));
 
     // Sorted: a list builds its rows after the elements beside it, and the
     // order they are made in is not the claim.

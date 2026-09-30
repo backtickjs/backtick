@@ -1,28 +1,27 @@
-(                → expressions/operators.test.tsx 89:8 {…
-) => {           → expressions/operators.test.tsx 89:8 {…
-let              → expressions/operators.test.tsx 90:7 let 
-n                → expressions/operators.test.tsx 90:11 n
- =               → expressions/operators.test.tsx 90:12  = 
-0                → expressions/operators.test.tsx 90:15 0
-;                → expressions/operators.test.tsx 90:16 ;
-const            → expressions/operators.test.tsx 91:7 const 
-last             → expressions/operators.test.tsx 91:13 last
- = (             → expressions/operators.test.tsx 91:17  = (
-n                → expressions/operators.test.tsx 91:21 n
-++               → expressions/operators.test.tsx 91:22 ++
-,                → expressions/operators.test.tsx 91:24 , 
-n                → expressions/operators.test.tsx 91:26 n
- +               → expressions/operators.test.tsx 91:27  + 
-10               → expressions/operators.test.tsx 91:30 10
-)                → expressions/operators.test.tsx 91:32 )
-;                → expressions/operators.test.tsx 91:33 ;
-return           → expressions/operators.test.tsx 92:7 return 
-[                → expressions/operators.test.tsx 92:14 [
-n                → expressions/operators.test.tsx 92:15 n
-,                → expressions/operators.test.tsx 92:16 , 
-last             → expressions/operators.test.tsx 92:18 last
-]                → expressions/operators.test.tsx 92:22 ]
-;                → expressions/operators.test.tsx 92:23 ;
-}                → expressions/operators.test.tsx 93:5 }
-;                → expressions/operators.test.tsx 93:6 `,…
-export default   → expressions/operators.test.tsx 93:6 `,…
+(        → expressions/operators.test.tsx 89:8 {…
+) => {   → expressions/operators.test.tsx 89:8 {…
+let      → expressions/operators.test.tsx 90:7 let 
+n        → expressions/operators.test.tsx 90:11 n
+ =       → expressions/operators.test.tsx 90:12  = 
+0        → expressions/operators.test.tsx 90:15 0
+;        → expressions/operators.test.tsx 90:16 ;
+const    → expressions/operators.test.tsx 91:7 const 
+last     → expressions/operators.test.tsx 91:13 last
+ = (     → expressions/operators.test.tsx 91:17  = (
+n        → expressions/operators.test.tsx 91:21 n
+++       → expressions/operators.test.tsx 91:22 ++
+,        → expressions/operators.test.tsx 91:24 , 
+n        → expressions/operators.test.tsx 91:26 n
+ +       → expressions/operators.test.tsx 91:27  + 
+10       → expressions/operators.test.tsx 91:30 10
+)        → expressions/operators.test.tsx 91:32 )
+;        → expressions/operators.test.tsx 91:33 ;
+return   → expressions/operators.test.tsx 92:7 return 
+[        → expressions/operators.test.tsx 92:14 [
+n        → expressions/operators.test.tsx 92:15 n
+,        → expressions/operators.test.tsx 92:16 , 
+last     → expressions/operators.test.tsx 92:18 last
+]        → expressions/operators.test.tsx 92:22 ]
+;        → expressions/operators.test.tsx 92:23 ;
+}        → expressions/operators.test.tsx 93:5 }
+;        → expressions/operators.test.tsx 93:6 `,…

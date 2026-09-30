@@ -1,35 +1,34 @@
-$splice0         → objects/index-absent.test.tsx 14:8 {…
- => {            → objects/index-absent.test.tsx 14:8 {…
-const            → objects/index-absent.test.tsx 15:7 const 
-names            → objects/index-absent.test.tsx 15:13 names
- =               → objects/index-absent.test.tsx 15:18  = 
-[                → objects/index-absent.test.tsx 15:21 [
-"zero"           → objects/index-absent.test.tsx 15:22 "zero"
-,                → objects/index-absent.test.tsx 15:28 , 
-"one"            → objects/index-absent.test.tsx 15:30 "one"
-]                → objects/index-absent.test.tsx 15:35 ]
-;                → objects/index-absent.test.tsx 15:36 ;
-const            → objects/index-absent.test.tsx 16:7 const 
-missing          → objects/index-absent.test.tsx 16:13 missing
- =               → objects/index-absent.test.tsx 16:20  = 
-$splice0         → objects/index-absent.test.tsx 16:23 $answers["nowhere"]…
-()               → objects/index-absent.test.tsx 16:23 $answers["nowhere"]…
-[                → objects/index-absent.test.tsx 16:31 [
-"nowhere"        → objects/index-absent.test.tsx 16:32 "nowhere"
-]                → objects/index-absent.test.tsx 16:41 ]
- ??              → objects/index-absent.test.tsx 16:42  ?? 
-"gone"           → objects/index-absent.test.tsx 16:46 "gone"
-;                → objects/index-absent.test.tsx 16:52 ;
-return           → objects/index-absent.test.tsx 17:7 return 
-names            → objects/index-absent.test.tsx 17:14 names
-[                → objects/index-absent.test.tsx 17:19 [
-1                → objects/index-absent.test.tsx 17:20 1
-]                → objects/index-absent.test.tsx 17:21 ]
- +               → objects/index-absent.test.tsx 17:22  + 
-"/"              → objects/index-absent.test.tsx 17:25 "/"
- +               → objects/index-absent.test.tsx 17:28  + 
-missing          → objects/index-absent.test.tsx 17:31 missing
-;                → objects/index-absent.test.tsx 17:38 ;
-}                → objects/index-absent.test.tsx 18:5 }
-;                → objects/index-absent.test.tsx 18:6 `,…
-export default   → objects/index-absent.test.tsx 18:6 `,…
+$splice0   → objects/index-absent.test.tsx 14:8 {…
+ => {      → objects/index-absent.test.tsx 14:8 {…
+const      → objects/index-absent.test.tsx 15:7 const 
+names      → objects/index-absent.test.tsx 15:13 names
+ =         → objects/index-absent.test.tsx 15:18  = 
+[          → objects/index-absent.test.tsx 15:21 [
+"zero"     → objects/index-absent.test.tsx 15:22 "zero"
+,          → objects/index-absent.test.tsx 15:28 , 
+"one"      → objects/index-absent.test.tsx 15:30 "one"
+]          → objects/index-absent.test.tsx 15:35 ]
+;          → objects/index-absent.test.tsx 15:36 ;
+const      → objects/index-absent.test.tsx 16:7 const 
+missing    → objects/index-absent.test.tsx 16:13 missing
+ =         → objects/index-absent.test.tsx 16:20  = 
+$splice0   → objects/index-absent.test.tsx 16:23 $answers["nowhere"]…
+()         → objects/index-absent.test.tsx 16:23 $answers["nowhere"]…
+[          → objects/index-absent.test.tsx 16:31 [
+"nowhere"  → objects/index-absent.test.tsx 16:32 "nowhere"
+]          → objects/index-absent.test.tsx 16:41 ]
+ ??        → objects/index-absent.test.tsx 16:42  ?? 
+"gone"     → objects/index-absent.test.tsx 16:46 "gone"
+;          → objects/index-absent.test.tsx 16:52 ;
+return     → objects/index-absent.test.tsx 17:7 return 
+names      → objects/index-absent.test.tsx 17:14 names
+[          → objects/index-absent.test.tsx 17:19 [
+1          → objects/index-absent.test.tsx 17:20 1
+]          → objects/index-absent.test.tsx 17:21 ]
+ +         → objects/index-absent.test.tsx 17:22  + 
+"/"        → objects/index-absent.test.tsx 17:25 "/"
+ +         → objects/index-absent.test.tsx 17:28  + 
+missing    → objects/index-absent.test.tsx 17:31 missing
+;          → objects/index-absent.test.tsx 17:38 ;
+}          → objects/index-absent.test.tsx 18:5 }
+;          → objects/index-absent.test.tsx 18:6 `,…

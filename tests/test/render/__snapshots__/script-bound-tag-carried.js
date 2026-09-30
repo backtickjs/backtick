@@ -5,12 +5,12 @@ import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.
 async function Panel(props) {
   return cs.create(
-    "33kiqo80o8pad:14:9",
+    "3flh7j79x7tgi:14:9",
     { params: [{ kind: "splice", value: props, bindings: [] }] },
     '($splice0) => {\n    const Badge = (p) => <i>{"panel " + p.n}</i>;\n    return (<section>\n        <Badge n={0}/>\n        {$splice0().body}\n      </section>);\n}',
     '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC5D,OAAO,CACL,CAAC,OAAO,CACN;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACZ;QAAA,CAAC,UAAM,CAAC,IAAI,CACd;MAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
@@ -21,24 +21,24 @@ async function Panel(props) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs.create(
-  "33kiqo80o8pad:29:30",
+  "3flh7j79x7tgi:29:30",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
       {
         kind: "splice",
         value: cs.create(
-          "33kiqo80o8pad:42:12",
+          "3flh7j79x7tgi:42:12",
           {
             params: [
-              { kind: "capture", key: "Badge$33kiqo80o8pad$3" },
-              { kind: "capture", key: "count$33kiqo80o8pad$2" },
+              { kind: "capture", key: "Badge$3flh7j79x7tgi$3" },
+              { kind: "capture", key: "count$3flh7j79x7tgi$2" },
             ],
           },
           '($capture0, $capture1) => <$capture0 n={$capture1[0]()}>\n            <u>{"kid " + $capture1[0]()}</u>\n          </$capture0>',
           '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAyCe,0BAAA,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CACxB;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAC7B;UAAA,EAAE,SAAK,CAAC"}',
         ),
-        bindings: ["count$33kiqo80o8pad$2", "Badge$33kiqo80o8pad$3"],
+        bindings: ["count$3flh7j79x7tgi$2", "Badge$3flh7j79x7tgi$3"],
       },
       { kind: "tag", value: Panel },
     ],
@@ -51,7 +51,7 @@ it("scriptBoundTagCarried", async (t) => {
 });
 describe("a tag naming a function the script holds", () => {
   it("calls the one it was written under, drawn where another is in scope", async () => {
-    render(await draw(() => scriptBoundTagCarried));
+    render(await evaluate(() => scriptBoundTagCarried));
     const panel = screen.getByText("panel 0");
     const badge = screen.getByText("outer 0");
     assert.equal(badge.tagName.toLowerCase(), "b");

@@ -6,7 +6,7 @@ import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // A drawing read the way Testing Library reads one: by role and by text, with
 // a click a user would make.
 // `Pressable` is the row that responds as one thing: `View` lays children out
@@ -14,7 +14,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.create(
-    "137ngsqo9dnkp:17:9",
+    "1ge8r4d9ywy2n:17:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     '($splice0) => {\n    const count = $splice0()(0);\n    return (<button id="row" style="display: flex; gap: 8px" onclick={() => count[1](count[0]() + 1)}>\n        <span style="font-weight: 700">{count[0]() > 0 ? "\u2611" : "\u2610"}</span>\n        <span>{"pressed " + count[0]() + " times"}</span>\n      </button>);\n}',
     '{"version":3,"file":"pressable.test.jsx","sourceRoot":"","sources":["components/pressable.test.tsx"],"names":[],"mappings":"AAgBY;IACR,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,MAAM,CACL,EAAE,CAAC,KAAK,CACR,KAAK,CAAC,yBAAyB,CAC/B,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAExC;QAAA,CAAC,IAAI,CAAC,KAAK,CAAC,kBAAkB,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,EAAE,IAAI,CACjE;QAAA,CAAC,IAAI,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ,CAAC,EAAE,IAAI,CAClD;MAAA,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
@@ -22,12 +22,12 @@ async function Row() {
 }
 describe("screen", () => {
   it("increments the counter", async () => {
-    render(await draw(() => _jsx(Row, {})));
+    render(await evaluate(() => _jsx(Row, {})));
     await userEvent.click(screen.getByRole("button", { name: /pressed/ }));
     assert.ok(screen.getByText("pressed 1 times"));
   });
   it("reads a fresh page in each test", async () => {
-    render(await draw(() => _jsx(Row, {})));
+    render(await evaluate(() => _jsx(Row, {})));
     assert.ok(screen.getByText("pressed 0 times"));
   });
 });

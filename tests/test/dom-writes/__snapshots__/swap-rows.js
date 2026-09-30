@@ -6,13 +6,13 @@ import { createSignal, For } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { watchWrites } from "./writes.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // js-framework-benchmark's "swap rows": the second row and the second-to-last
 // change places. The rows between them stay where they are, so what moves is
 // the two rows and nothing else.
 async function SwappableRows() {
   return cs.create(
-    "1enzxk1360g2b:14:9",
+    "2s9q67k5v5jck:14:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -24,7 +24,7 @@ async function SwappableRows() {
   );
 }
 it("a swap moves the two rows it swapped", async () => {
-  const { container } = render(await draw(() => _jsx(SwappableRows, {})));
+  const { container } = render(await evaluate(() => _jsx(SwappableRows, {})));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "swap" }));
   // Each move is the row leaving where it was and arriving where it goes.

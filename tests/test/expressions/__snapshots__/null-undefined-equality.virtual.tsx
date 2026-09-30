@@ -1,19 +1,19 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { createRoot } from "solid-js";
 
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {
   it("are each equal to themselves", async () => {
-    assert.equal(createRoot(await draw(cs.lift(() => null === null))), true);
-    assert.equal(createRoot(await draw(cs.lift(() => undefined === undefined))), true);
+    assert.equal(createRoot(await evaluate(cs.lift(() => null === null))), true);
+    assert.equal(createRoot(await evaluate(cs.lift(() => undefined === undefined))), true);
   });
 
   it("are not equal to each other", async () => {
-    assert.equal(createRoot(await draw(cs.lift(() => null !== undefined))), true);
-    assert.equal(createRoot(await draw(cs.lift(() => null === undefined))), false);
+    assert.equal(createRoot(await evaluate(cs.lift(() => null !== undefined))), true);
+    assert.equal(createRoot(await evaluate(cs.lift(() => null === undefined))), false);
   });
 
   // The same holds wherever the value came from: a splice, or a read past
@@ -23,7 +23,7 @@ describe("null and undefined", () => {
     const empty = null;
     assert.deepEqual(
       createRoot(
-        await draw(cs.lift(() => {
+        await evaluate(cs.lift(() => {
     const __cs_names = ["a"];
     return [cs.splice((nothing)) === undefined, cs.splice((nothing)) !== null, cs.splice((empty)) === null, cs.splice((empty)) !== undefined, __cs_names[1] === undefined, __cs_names[1] !== null];
 })),

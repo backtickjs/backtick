@@ -4,13 +4,13 @@ import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // `ref` hands a script the element it is written on.
 describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const field = $createSignal<HTMLInputElement | null>(null);
           return (
@@ -28,7 +28,7 @@ describe("ref", () => {
 
   it("focuses once in place, through onMount", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           return (
             <input
@@ -43,7 +43,7 @@ describe("ref", () => {
   });
 
   it("is not written as an attribute", async () => {
-    render(await draw(cs`() => <input aria-label="name" ref={() => {}} />`));
+    render(await evaluate(cs`() => <input aria-label="name" ref={() => {}} />`));
     assert.equal(screen.getByLabelText("name").hasAttribute("ref"), false);
   });
 
@@ -65,7 +65,7 @@ describe("ref", () => {
     // element again.
     it("even when a signal it read changes", async () => {
       render(
-        await draw(
+        await evaluate(
           cs`() => {
             const shown = $createSignal(true);
             const n = $createSignal(0);

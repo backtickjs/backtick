@@ -5,7 +5,7 @@ import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // A block whose drawing is a conditional, and a write that answers it.
 //
@@ -50,7 +50,7 @@ const conditionalDrawing = cs.lift((() => {
 
 describe("a component whose drawing is a conditional", () => {
   it("is built once, and draws the branch the write chose", async () => {
-    render(await draw(() => conditionalDrawing));
+    render(await evaluate(() => conditionalDrawing));
 
     // Nothing has answered the condition yet: the count is of blocks that have
     // reached their timer, and the first has not.

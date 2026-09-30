@@ -25,32 +25,33 @@ const again = () => {
 };
 it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
-    bundler.run(
-      cs.create(
-        "1x4u0j32lr35d:33:6",
+    bundler.build({
+      input: cs.create(
+        "hfbn8qccg6w7:34:6",
         {
           params: [
             {
               kind: "splice",
               value: keep(
                 cs.create(
-                  "1x4u0j32lr35d:35:29",
+                  "hfbn8qccg6w7:36:29",
                   {
-                    params: [{ kind: "capture", key: "total$1x4u0j32lr35d$0" }],
+                    params: [{ kind: "capture", key: "total$hfbn8qccg6w7$0" }],
                   },
                   "($capture0) => $capture0",
-                  '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAkCgC,eAAA,SAAK"}',
+                  '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAmCgC,eAAA,SAAK"}',
                 ),
               ),
-              bindings: ["total$1x4u0j32lr35d$0"],
+              bindings: ["total$hfbn8qccg6w7$0"],
             },
             { kind: "splice", value: again(), bindings: [] },
           ],
         },
         "($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n}",
-        '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAgCS;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,eAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,UAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
+        '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAiCS;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,eAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,UAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
       ),
-    ),
+      external: [],
+    }),
     {
       message:
         "Can't thread the capture `total`: nothing encloses this reference to supply it. A fragment carries the bindings it was written under, so this is also what happens when one is spliced somewhere another `total` shadows it: the binding is still there, but no longer reachable by name, and naming it anyway would mean emitting what the source couldn't say.",

@@ -9,7 +9,7 @@ import { renderBundleMappings } from "./renderBundleMappings.ts";
 import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "./evaluate.ts";
 import { render } from "@solidjs/testing-library";
 import { createRoot } from "solid-js";
 
@@ -46,12 +46,12 @@ export async function snapshotCase(
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   record(`${renderBundleMappings(code, map)}\n`, "bundle.sourcemap");
   // Run as a Solid user would draw it: a function Solid calls in a root.
-  const evaluated = createRoot(await draw(() => value));
+  const evaluated = createRoot(await evaluate(() => value));
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));
   // Rendered only once evaluating it showed it draws.
   record(
-    `${drawn ? renderDrawing(render(await draw(() => value as JSX.Element)).container) : renderValue(evaluated)}\n`,
+    `${drawn ? renderDrawing(render(await evaluate(() => value as JSX.Element)).container) : renderValue(evaluated)}\n`,
     "value",
   );
 }

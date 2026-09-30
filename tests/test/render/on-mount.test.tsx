@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // What the page held each time a script logged, read through the console
 // `onMount` reaches from a script.
@@ -24,7 +24,7 @@ async function logged(draw: () => Promise<unknown>): Promise<string[]> {
 
 describe("onMount", () => {
   it("runs once, after the drawing is in the page", async () => {
-    const drawing = await draw(
+    const drawing = await evaluate(
       cs`() => {
         const count = $createSignal(0);
         $onMount(() => {
@@ -41,7 +41,7 @@ describe("onMount", () => {
 
   it("runs at once when called from a handler", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const said = $createSignal("not yet");
           return (

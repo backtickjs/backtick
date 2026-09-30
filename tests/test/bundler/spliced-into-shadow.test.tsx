@@ -29,7 +29,8 @@ const again = (): Client<number> => {
 
 it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
-    bundler.run(
+    bundler.build({
+      input:
       cs`{
         const total = 1;
         const first = ${keep(cs`total`)};
@@ -38,7 +39,8 @@ it("refuses a capture spliced where it is shadowed", async () => {
           return first + total + ${again()};
         }
       }`,
-    ),
+      external: [],
+    }),
     {
       message:
         "Can't thread the capture `total`: nothing encloses this reference to supply it. A fragment carries the bindings it was written under, so this is also what happens when one is spliced somewhere another `total` shadows it: the binding is still there, but no longer reachable by name, and naming it anyway would mean emitting what the source couldn't say.",

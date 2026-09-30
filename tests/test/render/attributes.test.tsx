@@ -5,7 +5,7 @@ import { createSignal } from "@backtickjs/solid-js";
 import { render, fireEvent, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // How a prop lands on the element it was drawn on: as the attribute a page's
 // own markup would have written.
@@ -14,7 +14,7 @@ const SVG = "http://www.w3.org/2000/svg";
 const HTML = "http://www.w3.org/1999/xhtml";
 
 async function drawn(value: JSX.Element): Promise<Element> {
-  const { container } = render(await draw(() => value));
+  const { container } = render(await evaluate(() => value));
   return container.firstElementChild!;
 }
 
@@ -131,7 +131,7 @@ describe("a field's value", () => {
   }
 
   it("follows a write after the field was edited", async () => {
-    render(await draw(() => <Field />));
+    render(await evaluate(() => <Field />));
     const text = screen.getByLabelText<HTMLInputElement>("text");
     const on = screen.getByLabelText<HTMLInputElement>("on");
     fireEvent.input(text, { target: { value: "typed" } });

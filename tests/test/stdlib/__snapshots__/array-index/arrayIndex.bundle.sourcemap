@@ -1,53 +1,52 @@
-(                → stdlib/array-index.test.tsx 11:8 {…
-) => {           → stdlib/array-index.test.tsx 11:8 {…
-const            → stdlib/array-index.test.tsx 12:7 const 
-coins            → stdlib/array-index.test.tsx 12:13 coins
- =               → stdlib/array-index.test.tsx 12:18  = 
-[                → stdlib/array-index.test.tsx 12:21 [
-5                → stdlib/array-index.test.tsx 12:22 5
-,                → stdlib/array-index.test.tsx 12:23 , 
-31               → stdlib/array-index.test.tsx 12:25 31
-,                → stdlib/array-index.test.tsx 12:27 , 
-7                → stdlib/array-index.test.tsx 12:29 7
-]                → stdlib/array-index.test.tsx 12:30 ]
-;                → stdlib/array-index.test.tsx 12:31 ;
-let              → stdlib/array-index.test.tsx 13:7 let 
-total            → stdlib/array-index.test.tsx 13:11 total
- =               → stdlib/array-index.test.tsx 13:16  = 
-0                → stdlib/array-index.test.tsx 13:19 0
-;                → stdlib/array-index.test.tsx 13:20 ;
-for (            → stdlib/array-index.test.tsx 14:7 for (
-let              → stdlib/array-index.test.tsx 14:12 let 
-i                → stdlib/array-index.test.tsx 14:16 i
- =               → stdlib/array-index.test.tsx 14:17  = 
-0                → stdlib/array-index.test.tsx 14:20 0
-;                → stdlib/array-index.test.tsx 14:21 ; 
-i                → stdlib/array-index.test.tsx 14:23 i
- <               → stdlib/array-index.test.tsx 14:24  < 
-coins            → stdlib/array-index.test.tsx 14:27 coins
-.                → stdlib/array-index.test.tsx 14:32 .
-length           → stdlib/array-index.test.tsx 14:33 length
-;                → stdlib/array-index.test.tsx 14:39 ; 
-i                → stdlib/array-index.test.tsx 14:41 i
- =               → stdlib/array-index.test.tsx 14:42  = 
-i                → stdlib/array-index.test.tsx 14:45 i
- +               → stdlib/array-index.test.tsx 14:46  + 
-1                → stdlib/array-index.test.tsx 14:49 1
-)                → stdlib/array-index.test.tsx 14:50 ) 
-{                → stdlib/array-index.test.tsx 14:52 {
-total            → stdlib/array-index.test.tsx 15:9 total
- =               → stdlib/array-index.test.tsx 15:14  = 
-total            → stdlib/array-index.test.tsx 15:17 total
- +               → stdlib/array-index.test.tsx 15:22  + 
-coins            → stdlib/array-index.test.tsx 15:25 coins
-[                → stdlib/array-index.test.tsx 15:30 [
-i                → stdlib/array-index.test.tsx 15:31 i
-]                → stdlib/array-index.test.tsx 15:32 ]
-;                → stdlib/array-index.test.tsx 15:33 ;
-}                → stdlib/array-index.test.tsx 16:7 }
-return           → stdlib/array-index.test.tsx 17:7 return 
-total            → stdlib/array-index.test.tsx 17:14 total
-;                → stdlib/array-index.test.tsx 17:19 ;
-}                → stdlib/array-index.test.tsx 18:5 }
-;                → stdlib/array-index.test.tsx 18:6 `,…
-export default   → stdlib/array-index.test.tsx 18:6 `,…
+(        → stdlib/array-index.test.tsx 11:8 {…
+) => {   → stdlib/array-index.test.tsx 11:8 {…
+const    → stdlib/array-index.test.tsx 12:7 const 
+coins    → stdlib/array-index.test.tsx 12:13 coins
+ =       → stdlib/array-index.test.tsx 12:18  = 
+[        → stdlib/array-index.test.tsx 12:21 [
+5        → stdlib/array-index.test.tsx 12:22 5
+,        → stdlib/array-index.test.tsx 12:23 , 
+31       → stdlib/array-index.test.tsx 12:25 31
+,        → stdlib/array-index.test.tsx 12:27 , 
+7        → stdlib/array-index.test.tsx 12:29 7
+]        → stdlib/array-index.test.tsx 12:30 ]
+;        → stdlib/array-index.test.tsx 12:31 ;
+let      → stdlib/array-index.test.tsx 13:7 let 
+total    → stdlib/array-index.test.tsx 13:11 total
+ =       → stdlib/array-index.test.tsx 13:16  = 
+0        → stdlib/array-index.test.tsx 13:19 0
+;        → stdlib/array-index.test.tsx 13:20 ;
+for (    → stdlib/array-index.test.tsx 14:7 for (
+let      → stdlib/array-index.test.tsx 14:12 let 
+i        → stdlib/array-index.test.tsx 14:16 i
+ =       → stdlib/array-index.test.tsx 14:17  = 
+0        → stdlib/array-index.test.tsx 14:20 0
+;        → stdlib/array-index.test.tsx 14:21 ; 
+i        → stdlib/array-index.test.tsx 14:23 i
+ <       → stdlib/array-index.test.tsx 14:24  < 
+coins    → stdlib/array-index.test.tsx 14:27 coins
+.        → stdlib/array-index.test.tsx 14:32 .
+length   → stdlib/array-index.test.tsx 14:33 length
+;        → stdlib/array-index.test.tsx 14:39 ; 
+i        → stdlib/array-index.test.tsx 14:41 i
+ =       → stdlib/array-index.test.tsx 14:42  = 
+i        → stdlib/array-index.test.tsx 14:45 i
+ +       → stdlib/array-index.test.tsx 14:46  + 
+1        → stdlib/array-index.test.tsx 14:49 1
+)        → stdlib/array-index.test.tsx 14:50 ) 
+{        → stdlib/array-index.test.tsx 14:52 {
+total    → stdlib/array-index.test.tsx 15:9 total
+ =       → stdlib/array-index.test.tsx 15:14  = 
+total    → stdlib/array-index.test.tsx 15:17 total
+ +       → stdlib/array-index.test.tsx 15:22  + 
+coins    → stdlib/array-index.test.tsx 15:25 coins
+[        → stdlib/array-index.test.tsx 15:30 [
+i        → stdlib/array-index.test.tsx 15:31 i
+]        → stdlib/array-index.test.tsx 15:32 ]
+;        → stdlib/array-index.test.tsx 15:33 ;
+}        → stdlib/array-index.test.tsx 16:7 }
+return   → stdlib/array-index.test.tsx 17:7 return 
+total    → stdlib/array-index.test.tsx 17:14 total
+;        → stdlib/array-index.test.tsx 17:19 ;
+}        → stdlib/array-index.test.tsx 18:5 }
+;        → stdlib/array-index.test.tsx 18:6 `,…

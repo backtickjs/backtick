@@ -1,19 +1,19 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { createRoot } from "solid-js";
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {
   it("reads a key of another type as JavaScript does", async () => {
     assert.equal(
       createRoot(
-        await draw(
+        await evaluate(
           cs.create(
-            "v6sr364epe7e:11:39",
+            "2rmsfrxteu84j:11:43",
             { params: [] },
             '() => () => [5, 31, 7]["0"]',
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAU0C,MAAA,GAAG,EAAE,CAAC,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAU8C,MAAA,GAAG,EAAE,CAAC,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
           ),
         ),
       ),
@@ -21,12 +21,12 @@ describe("a read by key", () => {
     );
     assert.equal(
       createRoot(
-        await draw(
+        await evaluate(
           cs.create(
-            "v6sr364epe7e:12:39",
+            "2rmsfrxteu84j:12:43",
             { params: [] },
             '() => () => "abc"["0"]',
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAW0C,MAAA,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC"}',
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAW8C,MAAA,GAAG,EAAE,CAAC,KAAK,CAAC,GAAG,CAAC"}',
           ),
         ),
       ),
@@ -35,12 +35,12 @@ describe("a read by key", () => {
     // @ts-expect-error: an object's type names its keys
     assert.equal(
       createRoot(
-        await draw(
+        await evaluate(
           cs.create(
-            "v6sr364epe7e:14:39",
+            "2rmsfrxteu84j:14:43",
             { params: [] },
             "() => () => ({ x: 1 })[0]",
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAa0C,MAAA,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAa8C,MAAA,GAAG,EAAE,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC"}',
           ),
         ),
       ),
@@ -48,12 +48,12 @@ describe("a read by key", () => {
     );
     assert.equal(
       createRoot(
-        await draw(
+        await evaluate(
           cs.create(
-            "v6sr364epe7e:16:28",
+            "2rmsfrxteu84j:16:32",
             { params: [] },
             "() => () => 7[0]",
-            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAe+B,MAAA,GAAG,EAAE,CAAE,CAAyB,CAAC,CAAC,CAAC"}',
+            '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAemC,MAAA,GAAG,EAAE,CAAE,CAAyB,CAAC,CAAC,CAAC"}',
           ),
         ),
       ),
@@ -64,38 +64,38 @@ describe("a read by key", () => {
   it("answers `undefined` for a well-typed key that finds nothing", async () => {
     const reads = [
       cs.create(
-        "v6sr364epe7e:24:6",
+        "2rmsfrxteu84j:24:6",
         { params: [] },
         "() => [5, 31, 7][9]",
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAuBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC"}',
       ),
       cs.create(
-        "v6sr364epe7e:25:6",
+        "2rmsfrxteu84j:25:6",
         { params: [] },
         "() => [5, 31, 7][1.5]",
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAwBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC"}',
       ),
       cs.create(
-        "v6sr364epe7e:26:6",
+        "2rmsfrxteu84j:26:6",
         { params: [] },
         "() => [5, 31, 7][-1]",
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AAyBS,MAAA,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC"}',
       ),
       cs.create(
-        "v6sr364epe7e:27:6",
+        "2rmsfrxteu84j:27:6",
         { params: [] },
         '() => ({ x: 1 })["y"]',
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AA0BS,MAAC,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAA+B,CAAC,GAAG,CAAC"}',
       ),
       cs.create(
-        "v6sr364epe7e:28:6",
+        "2rmsfrxteu84j:28:6",
         { params: [] },
         '() => "abc"[9]',
         '{"version":3,"file":"indexing.test.jsx","sourceRoot":"","sources":["objects/indexing.test.tsx"],"names":[],"mappings":"AA2BS,MAAA,KAAK,CAAC,CAAC,CAAC"}',
       ),
     ];
     for (const value of reads) {
-      assert.equal(createRoot(await draw(() => value)), undefined);
+      assert.equal(createRoot(await evaluate(() => value)), undefined);
     }
   });
 });

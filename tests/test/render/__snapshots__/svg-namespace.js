@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 import { namespaced } from "./dom.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { render } from "@solidjs/testing-library";
 // SVG written the way it is pasted: no tag says which language it is from.
 // Where an element is drawn does — inside an `svg` it is SVG's, and a
@@ -14,14 +14,14 @@ import { render } from "@solidjs/testing-library";
 // it.
 async function Ring() {
   return cs.create(
-    "1yk8a5rma0zxk:17:9",
+    "2xmhdtehesnu3:17:9",
     { params: [] },
     '() => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>',
     '{"version":3,"file":"svg-namespace.test.jsx","sourceRoot":"","sources":["render/svg-namespace.test.tsx"],"names":[],"mappings":"AAgBY,MAAA,CAAC,MAAM,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC,GAAG,CAAC,IAAI,CAAC,MAAM,CAAC,MAAM,CAAC,cAAc,EAAG"}',
   );
 }
 const svgNamespace = cs.create(
-  "1yk8a5rma0zxk:20:21",
+  "2xmhdtehesnu3:20:21",
   {
     params: [
       { kind: "tag", value: Ring },
@@ -36,7 +36,7 @@ it("svgNamespace", async (t) => {
 });
 describe("an element's namespace", () => {
   it("is where the element is drawn", async () => {
-    const { container } = render(await draw(() => svgNamespace));
+    const { container } = render(await evaluate(() => svgNamespace));
     // Sorted: a list builds its rows after the elements beside it, and the
     // order they are made in is not the claim.
     assert.deepEqual(namespaced(container).sort(), [

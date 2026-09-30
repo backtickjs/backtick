@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs, createImport } from "@backtickjs/core";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { createRoot } from "solid-js";
 
 // What a client provides beside Solid: a module an app adds, and the names it
@@ -17,12 +17,12 @@ describe("a module an app provides", () => {
   // Reached by splicing the value `createImport` made, which a bundle imports
   // from that specifier.
   it("is what that specifier resolves to", async () => {
-    assert.equal(createRoot(await draw(cs`() => $greet()`)), "hello");
+    assert.equal(createRoot(await evaluate(cs`() => $greet()`)), "hello");
   });
 
   it("holds what the module exports, whatever kind of value that is", async () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object.
-    assert.equal(createRoot(await draw(cs`() => $storage.get("greeting")`)), "hei");
+    assert.equal(createRoot(await evaluate(cs`() => $storage.get("greeting")`)), "hei");
   });
 });

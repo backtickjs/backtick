@@ -1,45 +1,44 @@
-(                → stdlib/timers.test.tsx 25:8 {…
-) => {           → stdlib/timers.test.tsx 25:8 {…
-const            → stdlib/timers.test.tsx 26:7 const 
-stop             → stdlib/timers.test.tsx 26:13 stop
- =               → stdlib/timers.test.tsx 26:17  = 
-window           → stdlib/timers.test.tsx 26:20 window
-.                → stdlib/timers.test.tsx 26:26 .
-clearInterval    → stdlib/timers.test.tsx 26:27 clearInterval
-;                → stdlib/timers.test.tsx 26:40 ;
-const            → stdlib/timers.test.tsx 27:7 const 
-repeating        → stdlib/timers.test.tsx 27:13 repeating
- =               → stdlib/timers.test.tsx 27:22  = 
-window           → stdlib/timers.test.tsx 27:25 window
-.                → stdlib/timers.test.tsx 27:31 .
-setInterval      → stdlib/timers.test.tsx 27:32 setInterval
-(                → stdlib/timers.test.tsx 27:43 (
-() =>            → stdlib/timers.test.tsx 27:44 () => 
-0                → stdlib/timers.test.tsx 27:50 0
-,                → stdlib/timers.test.tsx 27:51 , 
-1000             → stdlib/timers.test.tsx 27:53 1000
-)                → stdlib/timers.test.tsx 27:57 )
-;                → stdlib/timers.test.tsx 27:58 ;
-stop             → stdlib/timers.test.tsx 28:7 stop
-(                → stdlib/timers.test.tsx 28:11 (
-repeating        → stdlib/timers.test.tsx 28:12 repeating
-)                → stdlib/timers.test.tsx 28:21 )
-;                → stdlib/timers.test.tsx 28:22 ;
-window           → stdlib/timers.test.tsx 29:7 window
-.                → stdlib/timers.test.tsx 29:13 .
-clearTimeout     → stdlib/timers.test.tsx 29:14 clearTimeout
-(                → stdlib/timers.test.tsx 29:26 (
-window           → stdlib/timers.test.tsx 29:27 window
-.                → stdlib/timers.test.tsx 29:33 .
-setTimeout       → stdlib/timers.test.tsx 29:34 setTimeout
-(                → stdlib/timers.test.tsx 29:44 (
-() =>            → stdlib/timers.test.tsx 29:45 () => 
-0                → stdlib/timers.test.tsx 29:51 0
-,                → stdlib/timers.test.tsx 29:52 , 
-1000             → stdlib/timers.test.tsx 29:54 1000
-)                → stdlib/timers.test.tsx 29:58 )
-)                → stdlib/timers.test.tsx 29:59 )
-;                → stdlib/timers.test.tsx 29:60 ;
-}                → stdlib/timers.test.tsx 30:5 }
-;                → stdlib/timers.test.tsx 30:6 `,…
-export default   → stdlib/timers.test.tsx 30:6 `,…
+(              → stdlib/timers.test.tsx 25:8 {…
+) => {         → stdlib/timers.test.tsx 25:8 {…
+const          → stdlib/timers.test.tsx 26:7 const 
+stop           → stdlib/timers.test.tsx 26:13 stop
+ =             → stdlib/timers.test.tsx 26:17  = 
+window         → stdlib/timers.test.tsx 26:20 window
+.              → stdlib/timers.test.tsx 26:26 .
+clearInterval  → stdlib/timers.test.tsx 26:27 clearInterval
+;              → stdlib/timers.test.tsx 26:40 ;
+const          → stdlib/timers.test.tsx 27:7 const 
+repeating      → stdlib/timers.test.tsx 27:13 repeating
+ =             → stdlib/timers.test.tsx 27:22  = 
+window         → stdlib/timers.test.tsx 27:25 window
+.              → stdlib/timers.test.tsx 27:31 .
+setInterval    → stdlib/timers.test.tsx 27:32 setInterval
+(              → stdlib/timers.test.tsx 27:43 (
+() =>          → stdlib/timers.test.tsx 27:44 () => 
+0              → stdlib/timers.test.tsx 27:50 0
+,              → stdlib/timers.test.tsx 27:51 , 
+1000           → stdlib/timers.test.tsx 27:53 1000
+)              → stdlib/timers.test.tsx 27:57 )
+;              → stdlib/timers.test.tsx 27:58 ;
+stop           → stdlib/timers.test.tsx 28:7 stop
+(              → stdlib/timers.test.tsx 28:11 (
+repeating      → stdlib/timers.test.tsx 28:12 repeating
+)              → stdlib/timers.test.tsx 28:21 )
+;              → stdlib/timers.test.tsx 28:22 ;
+window         → stdlib/timers.test.tsx 29:7 window
+.              → stdlib/timers.test.tsx 29:13 .
+clearTimeout   → stdlib/timers.test.tsx 29:14 clearTimeout
+(              → stdlib/timers.test.tsx 29:26 (
+window         → stdlib/timers.test.tsx 29:27 window
+.              → stdlib/timers.test.tsx 29:33 .
+setTimeout     → stdlib/timers.test.tsx 29:34 setTimeout
+(              → stdlib/timers.test.tsx 29:44 (
+() =>          → stdlib/timers.test.tsx 29:45 () => 
+0              → stdlib/timers.test.tsx 29:51 0
+,              → stdlib/timers.test.tsx 29:52 , 
+1000           → stdlib/timers.test.tsx 29:54 1000
+)              → stdlib/timers.test.tsx 29:58 )
+)              → stdlib/timers.test.tsx 29:59 )
+;              → stdlib/timers.test.tsx 29:60 ;
+}              → stdlib/timers.test.tsx 30:5 }
+;              → stdlib/timers.test.tsx 30:6 `,…

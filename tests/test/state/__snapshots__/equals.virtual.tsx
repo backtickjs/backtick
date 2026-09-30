@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // Each reader logs when it runs, so a test counts the runs by counting the
 // logs, and reads what was logged.
@@ -25,7 +25,7 @@ const press = () => userEvent.click(screen.getByRole("button"));
 describe("equals", () => {
   it("keeps a memo's readers from updating for an equal value", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_size = cs.splice((createMemo))(() => ({ isBig: __cs_n[0]() > 2, n: __cs_n[0]() }), undefined, { equals: (__cs_previous, __cs_next) => __cs_previous.isBig === __cs_next.isBig });
@@ -50,7 +50,7 @@ describe("equals", () => {
 
   it("keeps a signal's readers from updating for an equal value", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_point = cs.splice((createSignal))({ x: 1 }, { equals: (__cs_previous, __cs_next) => __cs_previous.x === __cs_next.x });
     const __cs_label = () => {
@@ -69,7 +69,7 @@ describe("equals", () => {
 
   it("is handed the previous and the next value", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1, { equals: (__cs_previous, __cs_next) => {
             cs.globalThis.window.console.log(__cs_previous, __cs_next);
@@ -86,7 +86,7 @@ describe("equals", () => {
 
   it("is `===` when left out, so the same number doesn't update", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_label = () => {
@@ -103,7 +103,7 @@ describe("equals", () => {
 
   it("is `===` when left out, so a new object always updates", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_point = cs.splice((createSignal))({ x: 1 });
     const __cs_label = () => {

@@ -9,7 +9,7 @@ import {
 } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
@@ -30,7 +30,7 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 describe("onCleanup", () => {
   it("runs when the drawing is removed", async () => {
     const { unmount } = render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     cs.splice((onCleanup))(() => cs.globalThis.window.console.log());
     return <p>drawn</p>;
@@ -44,7 +44,7 @@ describe("onCleanup", () => {
 
   it("runs before a memo calculates again", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_n = cs.splice((createSignal))(1);
     const __cs_doubled = cs.splice((createMemo))(() => {
@@ -78,7 +78,7 @@ describe("onCleanup", () => {
     t.after(() => started.forEach((id) => globalThis.window.clearInterval(id)));
 
     const { unmount } = render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_timer = cs.splice((createSignal))(0);
     cs.splice((onMount))(() => {
@@ -100,7 +100,7 @@ describe("onCleanup", () => {
 
   it("never runs when called from a handler", async () => {
     const { unmount } = render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     return <button onclick={cs.lift(() => cs.splice((onCleanup))(() => cs.globalThis.window.console.log()))}>
               press

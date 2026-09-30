@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { render } from "@solidjs/testing-library";
 
 // The behavior side of per-instance state: a write has to persist, move
@@ -12,7 +12,7 @@ import { render } from "@solidjs/testing-library";
 
 // What an element drew, as the one element it put in the page.
 export async function drawn(value: JSX.Element): Promise<Element> {
-  const { container } = render(await draw(() => value));
+  const { container } = render(await evaluate(() => value));
   const node = container.firstElementChild;
   assert.ok(node !== null, "expected a rendered element");
   return node;

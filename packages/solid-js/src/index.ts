@@ -8,6 +8,14 @@ import type { JSX, Prop } from "./jsx-runtime.js";
 // Solid's own declarations, and each imported from Solid by the bundle that
 // uses it.
 
+/**
+ * The modules this vocabulary's imports come from, and Solid's compiler
+ * writes imports of: what a client drawing with Solid provides. A bundle may
+ * import from these and no others (`bundler.build`'s `external`), and a page's
+ * import map maps each.
+ */
+export const modules = ["solid-js", "solid-js/web", "solid-js/store"] as const;
+
 const solid = <Name extends keyof typeof Solid>(name: Name) =>
   createImport<(typeof Solid)[Name]>({ name, from: "solid-js" });
 const store = <Name extends keyof typeof Store>(name: Name) =>

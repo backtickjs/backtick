@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { createRoot } from "solid-js";
@@ -29,7 +29,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "q6wjhwouf9ey:33:9",
+    "etjzh3ew1hzv:33:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -72,7 +72,7 @@ function target(html) {
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
 // these insert at it with Solid directly.
 async function drawAt(value, parent, selector) {
-  const drawing = await draw(() => value);
+  const drawing = await evaluate(() => value);
   const unmount = createRoot((dispose) => {
     insert(parent, drawing(), parent.querySelector(selector));
     return dispose;

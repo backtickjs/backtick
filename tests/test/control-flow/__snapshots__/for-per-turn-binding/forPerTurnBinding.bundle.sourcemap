@@ -1,40 +1,39 @@
-(                → control-flow/for-per-turn-binding.test.tsx 12:8 {…
-) => {           → control-flow/for-per-turn-binding.test.tsx 12:8 {…
-let              → control-flow/for-per-turn-binding.test.tsx 13:7 let 
-last             → control-flow/for-per-turn-binding.test.tsx 13:11 last
- =               → control-flow/for-per-turn-binding.test.tsx 13:15 :…
-(                → control-flow/for-per-turn-binding.test.tsx 13:32 (
-) =>             → control-flow/for-per-turn-binding.test.tsx 13:32 ()…
-0                → control-flow/for-per-turn-binding.test.tsx 13:38 0
-;                → control-flow/for-per-turn-binding.test.tsx 13:39 ;
-for (            → control-flow/for-per-turn-binding.test.tsx 14:7 for (
-let              → control-flow/for-per-turn-binding.test.tsx 14:12 let 
-i                → control-flow/for-per-turn-binding.test.tsx 14:16 i
- =               → control-flow/for-per-turn-binding.test.tsx 14:17  = 
-0                → control-flow/for-per-turn-binding.test.tsx 14:20 0
-;                → control-flow/for-per-turn-binding.test.tsx 14:21 ; 
-i                → control-flow/for-per-turn-binding.test.tsx 14:23 i
- <               → control-flow/for-per-turn-binding.test.tsx 14:24  < 
-3                → control-flow/for-per-turn-binding.test.tsx 14:27 3
-;                → control-flow/for-per-turn-binding.test.tsx 14:28 ; 
-i                → control-flow/for-per-turn-binding.test.tsx 14:30 i
- =               → control-flow/for-per-turn-binding.test.tsx 14:31  = 
-i                → control-flow/for-per-turn-binding.test.tsx 14:34 i
- +               → control-flow/for-per-turn-binding.test.tsx 14:35  + 
-1                → control-flow/for-per-turn-binding.test.tsx 14:38 1
-)                → control-flow/for-per-turn-binding.test.tsx 14:39 ) 
-{                → control-flow/for-per-turn-binding.test.tsx 14:41 {
-last             → control-flow/for-per-turn-binding.test.tsx 15:9 last
- =               → control-flow/for-per-turn-binding.test.tsx 15:13  = 
-(                → control-flow/for-per-turn-binding.test.tsx 15:16 (
-) =>             → control-flow/for-per-turn-binding.test.tsx 15:16 ()…
-i                → control-flow/for-per-turn-binding.test.tsx 15:22 i
-;                → control-flow/for-per-turn-binding.test.tsx 15:23 ;
-}                → control-flow/for-per-turn-binding.test.tsx 16:7 }
-return           → control-flow/for-per-turn-binding.test.tsx 17:7 return 
-last             → control-flow/for-per-turn-binding.test.tsx 17:14 last
-()               → control-flow/for-per-turn-binding.test.tsx 17:18 ()
-;                → control-flow/for-per-turn-binding.test.tsx 17:20 ;
-}                → control-flow/for-per-turn-binding.test.tsx 18:5 }
-;                → control-flow/for-per-turn-binding.test.tsx 18:6 `,…
-export default   → control-flow/for-per-turn-binding.test.tsx 18:6 `,…
+(        → control-flow/for-per-turn-binding.test.tsx 12:8 {…
+) => {   → control-flow/for-per-turn-binding.test.tsx 12:8 {…
+let      → control-flow/for-per-turn-binding.test.tsx 13:7 let 
+last     → control-flow/for-per-turn-binding.test.tsx 13:11 last
+ =       → control-flow/for-per-turn-binding.test.tsx 13:15 :…
+(        → control-flow/for-per-turn-binding.test.tsx 13:32 (
+) =>     → control-flow/for-per-turn-binding.test.tsx 13:32 ()…
+0        → control-flow/for-per-turn-binding.test.tsx 13:38 0
+;        → control-flow/for-per-turn-binding.test.tsx 13:39 ;
+for (    → control-flow/for-per-turn-binding.test.tsx 14:7 for (
+let      → control-flow/for-per-turn-binding.test.tsx 14:12 let 
+i        → control-flow/for-per-turn-binding.test.tsx 14:16 i
+ =       → control-flow/for-per-turn-binding.test.tsx 14:17  = 
+0        → control-flow/for-per-turn-binding.test.tsx 14:20 0
+;        → control-flow/for-per-turn-binding.test.tsx 14:21 ; 
+i        → control-flow/for-per-turn-binding.test.tsx 14:23 i
+ <       → control-flow/for-per-turn-binding.test.tsx 14:24  < 
+3        → control-flow/for-per-turn-binding.test.tsx 14:27 3
+;        → control-flow/for-per-turn-binding.test.tsx 14:28 ; 
+i        → control-flow/for-per-turn-binding.test.tsx 14:30 i
+ =       → control-flow/for-per-turn-binding.test.tsx 14:31  = 
+i        → control-flow/for-per-turn-binding.test.tsx 14:34 i
+ +       → control-flow/for-per-turn-binding.test.tsx 14:35  + 
+1        → control-flow/for-per-turn-binding.test.tsx 14:38 1
+)        → control-flow/for-per-turn-binding.test.tsx 14:39 ) 
+{        → control-flow/for-per-turn-binding.test.tsx 14:41 {
+last     → control-flow/for-per-turn-binding.test.tsx 15:9 last
+ =       → control-flow/for-per-turn-binding.test.tsx 15:13  = 
+(        → control-flow/for-per-turn-binding.test.tsx 15:16 (
+) =>     → control-flow/for-per-turn-binding.test.tsx 15:16 ()…
+i        → control-flow/for-per-turn-binding.test.tsx 15:22 i
+;        → control-flow/for-per-turn-binding.test.tsx 15:23 ;
+}        → control-flow/for-per-turn-binding.test.tsx 16:7 }
+return   → control-flow/for-per-turn-binding.test.tsx 17:7 return 
+last     → control-flow/for-per-turn-binding.test.tsx 17:14 last
+()       → control-flow/for-per-turn-binding.test.tsx 17:18 ()
+;        → control-flow/for-per-turn-binding.test.tsx 17:20 ;
+}        → control-flow/for-per-turn-binding.test.tsx 18:5 }
+;        → control-flow/for-per-turn-binding.test.tsx 18:6 `,…

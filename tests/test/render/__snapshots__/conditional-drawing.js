@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // A block whose drawing is a conditional, and a write that answers it.
 //
 // Two claims, because a fix that only meets one is worse than none: the
@@ -27,7 +27,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 // again. Without that, this case does not stop.
 async function Held({ again }) {
   return cs.create(
-    "4uo55kbtfrez:32:9",
+    "19wmlt4siguvo:32:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -39,7 +39,7 @@ async function Held({ again }) {
   );
 }
 const conditionalDrawing = cs.create(
-  "4uo55kbtfrez:45:27",
+  "19wmlt4siguvo:45:27",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
@@ -51,7 +51,7 @@ const conditionalDrawing = cs.create(
 );
 describe("a component whose drawing is a conditional", () => {
   it("is built once, and draws the branch the write chose", async () => {
-    render(await draw(() => conditionalDrawing));
+    render(await evaluate(() => conditionalDrawing));
     // Nothing has answered the condition yet: the count is of blocks that have
     // reached their timer, and the first has not.
     assert.ok(screen.getByText("builds 0"));

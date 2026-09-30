@@ -1,137 +1,136 @@
-(                → stdlib/array-queries.test.tsx 12:8 {…
-) => {           → stdlib/array-queries.test.tsx 12:8 {…
-const            → stdlib/array-queries.test.tsx 13:7 const 
-coins            → stdlib/array-queries.test.tsx 13:13 coins
- =               → stdlib/array-queries.test.tsx 13:18  = 
-[                → stdlib/array-queries.test.tsx 13:21 [
-1                → stdlib/array-queries.test.tsx 13:22 1
-,                → stdlib/array-queries.test.tsx 13:23 , 
-2                → stdlib/array-queries.test.tsx 13:25 2
-,                → stdlib/array-queries.test.tsx 13:26 , 
-3                → stdlib/array-queries.test.tsx 13:28 3
-,                → stdlib/array-queries.test.tsx 13:29 , 
-4                → stdlib/array-queries.test.tsx 13:31 4
-]                → stdlib/array-queries.test.tsx 13:32 ]
-;                → stdlib/array-queries.test.tsx 13:33 ;
-return           → stdlib/array-queries.test.tsx 14:7 return 
-{                → stdlib/array-queries.test.tsx 14:14 {
-at               → stdlib/array-queries.test.tsx 15:9 at
-:                → stdlib/array-queries.test.tsx 15:11 : 
-[                → stdlib/array-queries.test.tsx 15:13 [
-coins            → stdlib/array-queries.test.tsx 15:14 coins
-.                → stdlib/array-queries.test.tsx 15:19 .
-at               → stdlib/array-queries.test.tsx 15:20 at
-(                → stdlib/array-queries.test.tsx 15:22 (
-0                → stdlib/array-queries.test.tsx 15:23 0
-)                → stdlib/array-queries.test.tsx 15:24 )
-,                → stdlib/array-queries.test.tsx 15:25 , 
-coins            → stdlib/array-queries.test.tsx 15:27 coins
-.                → stdlib/array-queries.test.tsx 15:32 .
-at               → stdlib/array-queries.test.tsx 15:33 at
-(                → stdlib/array-queries.test.tsx 15:35 (
--                → stdlib/array-queries.test.tsx 15:36 -
-1                → stdlib/array-queries.test.tsx 15:37 1
-)                → stdlib/array-queries.test.tsx 15:38 )
-,                → stdlib/array-queries.test.tsx 15:39 , 
-coins            → stdlib/array-queries.test.tsx 15:41 coins
-.                → stdlib/array-queries.test.tsx 15:46 .
-at               → stdlib/array-queries.test.tsx 15:47 at
-(                → stdlib/array-queries.test.tsx 15:49 (
-9                → stdlib/array-queries.test.tsx 15:50 9
-)                → stdlib/array-queries.test.tsx 15:51 )
-]                → stdlib/array-queries.test.tsx 15:52 ]
-,                → stdlib/array-queries.test.tsx 15:53 ,
-every            → stdlib/array-queries.test.tsx 16:9 every
-:                → stdlib/array-queries.test.tsx 16:14 : 
-coins            → stdlib/array-queries.test.tsx 16:16 coins
-.                → stdlib/array-queries.test.tsx 16:21 .
-every            → stdlib/array-queries.test.tsx 16:22 every
-(                → stdlib/array-queries.test.tsx 16:27 (
-n                → stdlib/array-queries.test.tsx 16:29 n
- =>              → stdlib/array-queries.test.tsx 16:30 )…
-n                → stdlib/array-queries.test.tsx 16:35 n
- >               → stdlib/array-queries.test.tsx 16:36  > 
-0                → stdlib/array-queries.test.tsx 16:39 0
-)                → stdlib/array-queries.test.tsx 16:40 )
-,                → stdlib/array-queries.test.tsx 16:41 ,
-some             → stdlib/array-queries.test.tsx 17:9 some
-:                → stdlib/array-queries.test.tsx 17:13 : 
-coins            → stdlib/array-queries.test.tsx 17:15 coins
-.                → stdlib/array-queries.test.tsx 17:20 .
-some             → stdlib/array-queries.test.tsx 17:21 some
-(                → stdlib/array-queries.test.tsx 17:25 (
-n                → stdlib/array-queries.test.tsx 17:27 n
- =>              → stdlib/array-queries.test.tsx 17:28 )…
-n                → stdlib/array-queries.test.tsx 17:33 n
- >               → stdlib/array-queries.test.tsx 17:34  > 
-3                → stdlib/array-queries.test.tsx 17:37 3
-)                → stdlib/array-queries.test.tsx 17:38 )
-,                → stdlib/array-queries.test.tsx 17:39 ,
-findLast         → stdlib/array-queries.test.tsx 18:9 findLast
-:                → stdlib/array-queries.test.tsx 18:17 : 
-coins            → stdlib/array-queries.test.tsx 18:19 coins
-.                → stdlib/array-queries.test.tsx 18:24 .
-findLast         → stdlib/array-queries.test.tsx 18:25 findLast
-(                → stdlib/array-queries.test.tsx 18:33 (
-n                → stdlib/array-queries.test.tsx 18:35 n
- =>              → stdlib/array-queries.test.tsx 18:36 )…
-n                → stdlib/array-queries.test.tsx 18:41 n
- <               → stdlib/array-queries.test.tsx 18:42  < 
-3                → stdlib/array-queries.test.tsx 18:45 3
-)                → stdlib/array-queries.test.tsx 18:46 )
-,                → stdlib/array-queries.test.tsx 18:47 ,
-findLastIndex    → stdlib/array-queries.test.tsx 19:9 findLastIndex
-:                → stdlib/array-queries.test.tsx 19:22 : 
-coins            → stdlib/array-queries.test.tsx 19:24 coins
-.                → stdlib/array-queries.test.tsx 19:29 .
-findLastIndex    → stdlib/array-queries.test.tsx 19:30 findLastIndex
-(                → stdlib/array-queries.test.tsx 19:43 (
-n                → stdlib/array-queries.test.tsx 19:45 n
- =>              → stdlib/array-queries.test.tsx 19:46 )…
-n                → stdlib/array-queries.test.tsx 19:51 n
- <               → stdlib/array-queries.test.tsx 19:52  < 
-3                → stdlib/array-queries.test.tsx 19:55 3
-)                → stdlib/array-queries.test.tsx 19:56 )
-,                → stdlib/array-queries.test.tsx 19:57 ,
-flatMap          → stdlib/array-queries.test.tsx 20:9 flatMap
-:                → stdlib/array-queries.test.tsx 20:16 : 
-coins            → stdlib/array-queries.test.tsx 20:18 coins
-.                → stdlib/array-queries.test.tsx 20:23 .
-flatMap          → stdlib/array-queries.test.tsx 20:24 flatMap
-(                → stdlib/array-queries.test.tsx 20:31 (
-n                → stdlib/array-queries.test.tsx 20:33 n
- =>              → stdlib/array-queries.test.tsx 20:34 )…
-[                → stdlib/array-queries.test.tsx 20:39 [
-n                → stdlib/array-queries.test.tsx 20:40 n
-,                → stdlib/array-queries.test.tsx 20:41 , 
-n                → stdlib/array-queries.test.tsx 20:43 n
- *               → stdlib/array-queries.test.tsx 20:44  * 
-10               → stdlib/array-queries.test.tsx 20:47 10
-]                → stdlib/array-queries.test.tsx 20:49 ]
-)                → stdlib/array-queries.test.tsx 20:50 )
-,                → stdlib/array-queries.test.tsx 20:51 ,
-reduceRight      → stdlib/array-queries.test.tsx 21:9 reduceRight
-:                → stdlib/array-queries.test.tsx 21:20 : 
-coins            → stdlib/array-queries.test.tsx 21:22 coins
-.                → stdlib/array-queries.test.tsx 21:27 .
-reduceRight      → stdlib/array-queries.test.tsx 21:28 reduceRight
-(                → stdlib/array-queries.test.tsx 21:39 (
-(                → stdlib/array-queries.test.tsx 21:40 (
-text             → stdlib/array-queries.test.tsx 21:41 text
-,                → stdlib/array-queries.test.tsx 21:45 , 
-n                → stdlib/array-queries.test.tsx 21:47 n
-) =>             → stdlib/array-queries.test.tsx 21:48 ) => 
-text             → stdlib/array-queries.test.tsx 21:53 text
- +               → stdlib/array-queries.test.tsx 21:57  + 
-n                → stdlib/array-queries.test.tsx 21:60 n
-,                → stdlib/array-queries.test.tsx 21:61 , 
-""               → stdlib/array-queries.test.tsx 21:63 ""
-)                → stdlib/array-queries.test.tsx 21:65 )
-,                → stdlib/array-queries.test.tsx 21:66 ,
-unchanged        → stdlib/array-queries.test.tsx 22:9 unchanged
-:                → stdlib/array-queries.test.tsx 22:18 : 
-coins            → stdlib/array-queries.test.tsx 22:20 coins
-;                → stdlib/array-queries.test.tsx 23:8 ;
-}                → stdlib/array-queries.test.tsx 24:5 }
-;                → stdlib/array-queries.test.tsx 24:6 `,…
-export default   → stdlib/array-queries.test.tsx 24:6 `,…
+(              → stdlib/array-queries.test.tsx 12:8 {…
+) => {         → stdlib/array-queries.test.tsx 12:8 {…
+const          → stdlib/array-queries.test.tsx 13:7 const 
+coins          → stdlib/array-queries.test.tsx 13:13 coins
+ =             → stdlib/array-queries.test.tsx 13:18  = 
+[              → stdlib/array-queries.test.tsx 13:21 [
+1              → stdlib/array-queries.test.tsx 13:22 1
+,              → stdlib/array-queries.test.tsx 13:23 , 
+2              → stdlib/array-queries.test.tsx 13:25 2
+,              → stdlib/array-queries.test.tsx 13:26 , 
+3              → stdlib/array-queries.test.tsx 13:28 3
+,              → stdlib/array-queries.test.tsx 13:29 , 
+4              → stdlib/array-queries.test.tsx 13:31 4
+]              → stdlib/array-queries.test.tsx 13:32 ]
+;              → stdlib/array-queries.test.tsx 13:33 ;
+return         → stdlib/array-queries.test.tsx 14:7 return 
+{              → stdlib/array-queries.test.tsx 14:14 {
+at             → stdlib/array-queries.test.tsx 15:9 at
+:              → stdlib/array-queries.test.tsx 15:11 : 
+[              → stdlib/array-queries.test.tsx 15:13 [
+coins          → stdlib/array-queries.test.tsx 15:14 coins
+.              → stdlib/array-queries.test.tsx 15:19 .
+at             → stdlib/array-queries.test.tsx 15:20 at
+(              → stdlib/array-queries.test.tsx 15:22 (
+0              → stdlib/array-queries.test.tsx 15:23 0
+)              → stdlib/array-queries.test.tsx 15:24 )
+,              → stdlib/array-queries.test.tsx 15:25 , 
+coins          → stdlib/array-queries.test.tsx 15:27 coins
+.              → stdlib/array-queries.test.tsx 15:32 .
+at             → stdlib/array-queries.test.tsx 15:33 at
+(              → stdlib/array-queries.test.tsx 15:35 (
+-              → stdlib/array-queries.test.tsx 15:36 -
+1              → stdlib/array-queries.test.tsx 15:37 1
+)              → stdlib/array-queries.test.tsx 15:38 )
+,              → stdlib/array-queries.test.tsx 15:39 , 
+coins          → stdlib/array-queries.test.tsx 15:41 coins
+.              → stdlib/array-queries.test.tsx 15:46 .
+at             → stdlib/array-queries.test.tsx 15:47 at
+(              → stdlib/array-queries.test.tsx 15:49 (
+9              → stdlib/array-queries.test.tsx 15:50 9
+)              → stdlib/array-queries.test.tsx 15:51 )
+]              → stdlib/array-queries.test.tsx 15:52 ]
+,              → stdlib/array-queries.test.tsx 15:53 ,
+every          → stdlib/array-queries.test.tsx 16:9 every
+:              → stdlib/array-queries.test.tsx 16:14 : 
+coins          → stdlib/array-queries.test.tsx 16:16 coins
+.              → stdlib/array-queries.test.tsx 16:21 .
+every          → stdlib/array-queries.test.tsx 16:22 every
+(              → stdlib/array-queries.test.tsx 16:27 (
+n              → stdlib/array-queries.test.tsx 16:29 n
+ =>            → stdlib/array-queries.test.tsx 16:30 )…
+n              → stdlib/array-queries.test.tsx 16:35 n
+ >             → stdlib/array-queries.test.tsx 16:36  > 
+0              → stdlib/array-queries.test.tsx 16:39 0
+)              → stdlib/array-queries.test.tsx 16:40 )
+,              → stdlib/array-queries.test.tsx 16:41 ,
+some           → stdlib/array-queries.test.tsx 17:9 some
+:              → stdlib/array-queries.test.tsx 17:13 : 
+coins          → stdlib/array-queries.test.tsx 17:15 coins
+.              → stdlib/array-queries.test.tsx 17:20 .
+some           → stdlib/array-queries.test.tsx 17:21 some
+(              → stdlib/array-queries.test.tsx 17:25 (
+n              → stdlib/array-queries.test.tsx 17:27 n
+ =>            → stdlib/array-queries.test.tsx 17:28 )…
+n              → stdlib/array-queries.test.tsx 17:33 n
+ >             → stdlib/array-queries.test.tsx 17:34  > 
+3              → stdlib/array-queries.test.tsx 17:37 3
+)              → stdlib/array-queries.test.tsx 17:38 )
+,              → stdlib/array-queries.test.tsx 17:39 ,
+findLast       → stdlib/array-queries.test.tsx 18:9 findLast
+:              → stdlib/array-queries.test.tsx 18:17 : 
+coins          → stdlib/array-queries.test.tsx 18:19 coins
+.              → stdlib/array-queries.test.tsx 18:24 .
+findLast       → stdlib/array-queries.test.tsx 18:25 findLast
+(              → stdlib/array-queries.test.tsx 18:33 (
+n              → stdlib/array-queries.test.tsx 18:35 n
+ =>            → stdlib/array-queries.test.tsx 18:36 )…
+n              → stdlib/array-queries.test.tsx 18:41 n
+ <             → stdlib/array-queries.test.tsx 18:42  < 
+3              → stdlib/array-queries.test.tsx 18:45 3
+)              → stdlib/array-queries.test.tsx 18:46 )
+,              → stdlib/array-queries.test.tsx 18:47 ,
+findLastIndex  → stdlib/array-queries.test.tsx 19:9 findLastIndex
+:              → stdlib/array-queries.test.tsx 19:22 : 
+coins          → stdlib/array-queries.test.tsx 19:24 coins
+.              → stdlib/array-queries.test.tsx 19:29 .
+findLastIndex  → stdlib/array-queries.test.tsx 19:30 findLastIndex
+(              → stdlib/array-queries.test.tsx 19:43 (
+n              → stdlib/array-queries.test.tsx 19:45 n
+ =>            → stdlib/array-queries.test.tsx 19:46 )…
+n              → stdlib/array-queries.test.tsx 19:51 n
+ <             → stdlib/array-queries.test.tsx 19:52  < 
+3              → stdlib/array-queries.test.tsx 19:55 3
+)              → stdlib/array-queries.test.tsx 19:56 )
+,              → stdlib/array-queries.test.tsx 19:57 ,
+flatMap        → stdlib/array-queries.test.tsx 20:9 flatMap
+:              → stdlib/array-queries.test.tsx 20:16 : 
+coins          → stdlib/array-queries.test.tsx 20:18 coins
+.              → stdlib/array-queries.test.tsx 20:23 .
+flatMap        → stdlib/array-queries.test.tsx 20:24 flatMap
+(              → stdlib/array-queries.test.tsx 20:31 (
+n              → stdlib/array-queries.test.tsx 20:33 n
+ =>            → stdlib/array-queries.test.tsx 20:34 )…
+[              → stdlib/array-queries.test.tsx 20:39 [
+n              → stdlib/array-queries.test.tsx 20:40 n
+,              → stdlib/array-queries.test.tsx 20:41 , 
+n              → stdlib/array-queries.test.tsx 20:43 n
+ *             → stdlib/array-queries.test.tsx 20:44  * 
+10             → stdlib/array-queries.test.tsx 20:47 10
+]              → stdlib/array-queries.test.tsx 20:49 ]
+)              → stdlib/array-queries.test.tsx 20:50 )
+,              → stdlib/array-queries.test.tsx 20:51 ,
+reduceRight    → stdlib/array-queries.test.tsx 21:9 reduceRight
+:              → stdlib/array-queries.test.tsx 21:20 : 
+coins          → stdlib/array-queries.test.tsx 21:22 coins
+.              → stdlib/array-queries.test.tsx 21:27 .
+reduceRight    → stdlib/array-queries.test.tsx 21:28 reduceRight
+(              → stdlib/array-queries.test.tsx 21:39 (
+(              → stdlib/array-queries.test.tsx 21:40 (
+text           → stdlib/array-queries.test.tsx 21:41 text
+,              → stdlib/array-queries.test.tsx 21:45 , 
+n              → stdlib/array-queries.test.tsx 21:47 n
+) =>           → stdlib/array-queries.test.tsx 21:48 ) => 
+text           → stdlib/array-queries.test.tsx 21:53 text
+ +             → stdlib/array-queries.test.tsx 21:57  + 
+n              → stdlib/array-queries.test.tsx 21:60 n
+,              → stdlib/array-queries.test.tsx 21:61 , 
+""             → stdlib/array-queries.test.tsx 21:63 ""
+)              → stdlib/array-queries.test.tsx 21:65 )
+,              → stdlib/array-queries.test.tsx 21:66 ,
+unchanged      → stdlib/array-queries.test.tsx 22:9 unchanged
+:              → stdlib/array-queries.test.tsx 22:18 : 
+coins          → stdlib/array-queries.test.tsx 22:20 coins
+;              → stdlib/array-queries.test.tsx 23:8 ;
+}              → stdlib/array-queries.test.tsx 24:5 }
+;              → stdlib/array-queries.test.tsx 24:6 `,…

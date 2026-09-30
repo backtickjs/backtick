@@ -2,18 +2,18 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import type { Spliceable } from "@backtickjs/core";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { createRoot } from "solid-js";
 
 // What `a[k]` does with a key of another type: what JavaScript does.
 describe("a read by key", () => {
   it("reads a key of another type as JavaScript does", async () => {
-    assert.equal(createRoot(await draw(cs`() => [5, 31, 7]["0"]`)), 5);
-    assert.equal(createRoot(await draw(cs`() => "abc"["0"]`)), "a");
+    assert.equal(createRoot(await evaluate(cs`() => [5, 31, 7]["0"]`)), 5);
+    assert.equal(createRoot(await evaluate(cs`() => "abc"["0"]`)), "a");
     // @ts-expect-error: an object's type names its keys
-    assert.equal(createRoot(await draw(cs`() => ({ x: 1 })[0]`)), undefined);
+    assert.equal(createRoot(await evaluate(cs`() => ({ x: 1 })[0]`)), undefined);
     assert.equal(
-      createRoot(await draw(cs`() => (7 as unknown as number[])[0]`)),
+      createRoot(await evaluate(cs`() => (7 as unknown as number[])[0]`)),
       undefined,
     );
   });
@@ -28,7 +28,7 @@ describe("a read by key", () => {
       cs`"abc"[9]`,
     ];
     for (const value of reads) {
-      assert.equal(createRoot(await draw(() => value)), undefined);
+      assert.equal(createRoot(await evaluate(() => value)), undefined);
     }
   });
 });

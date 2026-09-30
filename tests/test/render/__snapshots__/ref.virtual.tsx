@@ -4,13 +4,13 @@ import { cs } from "@backtickjs/core";
 import { createSignal, onMount } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // `ref` hands a script the element it is written on.
 describe("ref", () => {
   it("keeps the element for a handler to use", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     const __cs_field = cs.splice((createSignal))<HTMLInputElement | null>(null);
     return <div>{cs.lift(<input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => __cs_field[1](__cs_element))}/>)}{cs.lift(<button onclick={cs.lift(() => __cs_field[0]()?.focus())}>edit</button>)}</div>;
@@ -23,7 +23,7 @@ describe("ref", () => {
 
   it("focuses once in place, through onMount", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.lift(() => {
     return <input aria-label={cs.lift("name")} ref={cs.lift(__cs_element => cs.splice((onMount))(() => __cs_element.focus()))}/>;
 }),
@@ -33,7 +33,7 @@ describe("ref", () => {
   });
 
   it("is not written as an attribute", async () => {
-    render(await draw(cs.lift(() => <input aria-label={cs.lift("name")} ref={cs.lift(() => {
+    render(await evaluate(cs.lift(() => <input aria-label={cs.lift("name")} ref={cs.lift(() => {
 })}/>)));
     assert.equal(screen.getByLabelText("name").hasAttribute("ref"), false);
   });
@@ -56,7 +56,7 @@ describe("ref", () => {
     // element again.
     it("even when a signal it read changes", async () => {
       render(
-        await draw(
+        await evaluate(
           cs.lift(() => {
     const __cs_shown = cs.splice((createSignal))(true);
     const __cs_n = cs.splice((createSignal))(0);

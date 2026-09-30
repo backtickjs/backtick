@@ -5,7 +5,7 @@ import { createSignal, For } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //
 // A component is built once, however what it drew changes afterwards. `<For />`
@@ -17,7 +17,7 @@ import { draw } from "@backtickjs/solid-js/testing";
 const answerItems = ["one", "two"];
 async function WaitingList({ more }) {
   return cs.create(
-    "27pjqr457jdo4:22:9",
+    "ekbysolfc3it:22:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -31,7 +31,7 @@ async function WaitingList({ more }) {
   );
 }
 const forBuildsOnce = cs.create(
-  "27pjqr457jdo4:35:22",
+  "ekbysolfc3it:35:22",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
@@ -48,7 +48,7 @@ describe("a component that draws a list", () => {
   // The same claim with no bundle in it: `<For />` answers with a way of asking
   // too, so a fault in what draws a bundle would leave this alone.
   it("is built once, and draws what arrives", async () => {
-    const { container } = render(await draw(() => forBuildsOnce));
+    const { container } = render(await evaluate(() => forBuildsOnce));
     assert.ok(screen.getByText("asked 0"));
     await settled();
     assert.equal(container.querySelectorAll("em").length, 2);

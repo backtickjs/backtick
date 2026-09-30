@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // Each reader logs when it runs, so a test counts the runs by counting the
 // logs, and reads what was logged.
@@ -25,7 +25,7 @@ const press = () => userEvent.click(screen.getByRole("button"));
 describe("equals", () => {
   it("keeps a memo's readers from updating for an equal value", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const n = $createSignal(1);
           const size = $createMemo(
@@ -59,7 +59,7 @@ describe("equals", () => {
 
   it("keeps a signal's readers from updating for an equal value", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const point = $createSignal(
             { x: 1 },
@@ -86,7 +86,7 @@ describe("equals", () => {
 
   it("is handed the previous and the next value", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const n = $createSignal(1, {
             equals: (previous, next) => {
@@ -105,7 +105,7 @@ describe("equals", () => {
 
   it("is `===` when left out, so the same number doesn't update", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const n = $createSignal(1);
           const label = () => {
@@ -127,7 +127,7 @@ describe("equals", () => {
 
   it("is `===` when left out, so a new object always updates", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const point = $createSignal({ x: 1 });
           const label = () => {

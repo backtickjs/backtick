@@ -1,36 +1,35 @@
-(                → expressions/typeof.test.tsx 35:8 {…
-) => {           → expressions/typeof.test.tsx 35:8 {…
-const            → expressions/typeof.test.tsx 36:7 const 
-measure          → expressions/typeof.test.tsx 36:13 measure
- =               → expressions/typeof.test.tsx 36:20  = 
-v                → expressions/typeof.test.tsx 36:24 v
- =>              → expressions/typeof.test.tsx 36:42 )…
-typeof           → expressions/typeof.test.tsx 37:9 typeof 
-v                → expressions/typeof.test.tsx 37:16 v
- ===             → expressions/typeof.test.tsx 37:17  === 
-"string"         → expressions/typeof.test.tsx 37:22 "string"
- ?               → expressions/typeof.test.tsx 37:30  ? 
-v                → expressions/typeof.test.tsx 37:33 v
-.                → expressions/typeof.test.tsx 37:34 .
-length           → expressions/typeof.test.tsx 37:35 length
- :               → expressions/typeof.test.tsx 37:41  : 
-v                → expressions/typeof.test.tsx 37:44 v
- *               → expressions/typeof.test.tsx 37:45  * 
-2                → expressions/typeof.test.tsx 37:48 2
-;                → expressions/typeof.test.tsx 37:49 ;
-return           → expressions/typeof.test.tsx 38:7 return 
-[                → expressions/typeof.test.tsx 38:14 [
-measure          → expressions/typeof.test.tsx 38:15 measure
-(                → expressions/typeof.test.tsx 38:22 (
-"abc"            → expressions/typeof.test.tsx 38:23 "abc"
-)                → expressions/typeof.test.tsx 38:28 )
-,                → expressions/typeof.test.tsx 38:29 , 
-measure          → expressions/typeof.test.tsx 38:31 measure
-(                → expressions/typeof.test.tsx 38:38 (
-4                → expressions/typeof.test.tsx 38:39 4
-)                → expressions/typeof.test.tsx 38:40 )
-]                → expressions/typeof.test.tsx 38:41 ]
-;                → expressions/typeof.test.tsx 38:42 ;
-}                → expressions/typeof.test.tsx 39:5 }
-;                → expressions/typeof.test.tsx 39:6 `,…
-export default   → expressions/typeof.test.tsx 39:6 `,…
+(         → expressions/typeof.test.tsx 35:8 {…
+) => {    → expressions/typeof.test.tsx 35:8 {…
+const     → expressions/typeof.test.tsx 36:7 const 
+measure   → expressions/typeof.test.tsx 36:13 measure
+ =        → expressions/typeof.test.tsx 36:20  = 
+v         → expressions/typeof.test.tsx 36:24 v
+ =>       → expressions/typeof.test.tsx 36:42 )…
+typeof    → expressions/typeof.test.tsx 37:9 typeof 
+v         → expressions/typeof.test.tsx 37:16 v
+ ===      → expressions/typeof.test.tsx 37:17  === 
+"string"  → expressions/typeof.test.tsx 37:22 "string"
+ ?        → expressions/typeof.test.tsx 37:30  ? 
+v         → expressions/typeof.test.tsx 37:33 v
+.         → expressions/typeof.test.tsx 37:34 .
+length    → expressions/typeof.test.tsx 37:35 length
+ :        → expressions/typeof.test.tsx 37:41  : 
+v         → expressions/typeof.test.tsx 37:44 v
+ *        → expressions/typeof.test.tsx 37:45  * 
+2         → expressions/typeof.test.tsx 37:48 2
+;         → expressions/typeof.test.tsx 37:49 ;
+return    → expressions/typeof.test.tsx 38:7 return 
+[         → expressions/typeof.test.tsx 38:14 [
+measure   → expressions/typeof.test.tsx 38:15 measure
+(         → expressions/typeof.test.tsx 38:22 (
+"abc"     → expressions/typeof.test.tsx 38:23 "abc"
+)         → expressions/typeof.test.tsx 38:28 )
+,         → expressions/typeof.test.tsx 38:29 , 
+measure   → expressions/typeof.test.tsx 38:31 measure
+(         → expressions/typeof.test.tsx 38:38 (
+4         → expressions/typeof.test.tsx 38:39 4
+)         → expressions/typeof.test.tsx 38:40 )
+]         → expressions/typeof.test.tsx 38:41 ]
+;         → expressions/typeof.test.tsx 38:42 ;
+}         → expressions/typeof.test.tsx 39:5 }
+;         → expressions/typeof.test.tsx 39:6 `,…

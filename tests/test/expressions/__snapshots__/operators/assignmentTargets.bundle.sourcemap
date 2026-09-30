@@ -1,63 +1,62 @@
-(                → expressions/operators.test.tsx 71:8 {…
-) => {           → expressions/operators.test.tsx 71:8 {…
-const            → expressions/operators.test.tsx 72:7 const 
-o                → expressions/operators.test.tsx 72:13 o
- =               → expressions/operators.test.tsx 72:14  = 
-{                → expressions/operators.test.tsx 72:17 {
-n                → expressions/operators.test.tsx 72:19 n
-:                → expressions/operators.test.tsx 72:20 : 
-1                → expressions/operators.test.tsx 72:22 1
-}                → expressions/operators.test.tsx 72:23  };…
-;                → expressions/operators.test.tsx 72:25 ;
-const            → expressions/operators.test.tsx 73:7 const 
-list             → expressions/operators.test.tsx 73:13 list
- =               → expressions/operators.test.tsx 73:17  = 
-[                → expressions/operators.test.tsx 73:20 [
-1                → expressions/operators.test.tsx 73:21 1
-,                → expressions/operators.test.tsx 73:22 , 
-2                → expressions/operators.test.tsx 73:24 2
-]                → expressions/operators.test.tsx 73:25 ]
-;                → expressions/operators.test.tsx 73:26 ;
-o                → expressions/operators.test.tsx 74:7 o
-.                → expressions/operators.test.tsx 74:8 .
-n                → expressions/operators.test.tsx 74:9 n
- +=              → expressions/operators.test.tsx 74:10  += 
-1                → expressions/operators.test.tsx 74:14 1
-;                → expressions/operators.test.tsx 74:15 ;
-o                → expressions/operators.test.tsx 75:7 o
-.                → expressions/operators.test.tsx 75:8 .
-n                → expressions/operators.test.tsx 75:9 n
-++               → expressions/operators.test.tsx 75:10 ++
-;                → expressions/operators.test.tsx 75:12 ;
-list             → expressions/operators.test.tsx 76:7 list
-[                → expressions/operators.test.tsx 76:11 [
-0                → expressions/operators.test.tsx 76:12 0
-]                → expressions/operators.test.tsx 76:13 ]
- =               → expressions/operators.test.tsx 76:14  = 
-10               → expressions/operators.test.tsx 76:17 10
-;                → expressions/operators.test.tsx 76:19 ;
-list             → expressions/operators.test.tsx 77:7 list
-[                → expressions/operators.test.tsx 77:11 [
-1                → expressions/operators.test.tsx 77:12 1
-]                → expressions/operators.test.tsx 77:13 ]
- **=             → expressions/operators.test.tsx 77:14  **= 
-3                → expressions/operators.test.tsx 77:19 3
-;                → expressions/operators.test.tsx 77:20 ;
---               → expressions/operators.test.tsx 78:7 --
-list             → expressions/operators.test.tsx 78:9 list
-[                → expressions/operators.test.tsx 78:13 [
-1                → expressions/operators.test.tsx 78:14 1
-]                → expressions/operators.test.tsx 78:15 ]
-;                → expressions/operators.test.tsx 78:16 ;
-return           → expressions/operators.test.tsx 79:7 return 
-[                → expressions/operators.test.tsx 79:14 [
-o                → expressions/operators.test.tsx 79:15 o
-.                → expressions/operators.test.tsx 79:16 .
-n                → expressions/operators.test.tsx 79:17 n
-,                → expressions/operators.test.tsx 79:18 , 
-list             → expressions/operators.test.tsx 79:20 list
-]                → expressions/operators.test.tsx 79:24 ]
-;                → expressions/operators.test.tsx 79:25 ;
-}                → expressions/operators.test.tsx 80:5 }
-;                → expressions/operators.test.tsx 80:6 `,…
-export default   → expressions/operators.test.tsx 80:6 `,…
+(        → expressions/operators.test.tsx 71:8 {…
+) => {   → expressions/operators.test.tsx 71:8 {…
+const    → expressions/operators.test.tsx 72:7 const 
+o        → expressions/operators.test.tsx 72:13 o
+ =       → expressions/operators.test.tsx 72:14  = 
+{        → expressions/operators.test.tsx 72:17 {
+n        → expressions/operators.test.tsx 72:19 n
+:        → expressions/operators.test.tsx 72:20 : 
+1        → expressions/operators.test.tsx 72:22 1
+}        → expressions/operators.test.tsx 72:23  };…
+;        → expressions/operators.test.tsx 72:25 ;
+const    → expressions/operators.test.tsx 73:7 const 
+list     → expressions/operators.test.tsx 73:13 list
+ =       → expressions/operators.test.tsx 73:17  = 
+[        → expressions/operators.test.tsx 73:20 [
+1        → expressions/operators.test.tsx 73:21 1
+,        → expressions/operators.test.tsx 73:22 , 
+2        → expressions/operators.test.tsx 73:24 2
+]        → expressions/operators.test.tsx 73:25 ]
+;        → expressions/operators.test.tsx 73:26 ;
+o        → expressions/operators.test.tsx 74:7 o
+.        → expressions/operators.test.tsx 74:8 .
+n        → expressions/operators.test.tsx 74:9 n
+ +=      → expressions/operators.test.tsx 74:10  += 
+1        → expressions/operators.test.tsx 74:14 1
+;        → expressions/operators.test.tsx 74:15 ;
+o        → expressions/operators.test.tsx 75:7 o
+.        → expressions/operators.test.tsx 75:8 .
+n        → expressions/operators.test.tsx 75:9 n
+++       → expressions/operators.test.tsx 75:10 ++
+;        → expressions/operators.test.tsx 75:12 ;
+list     → expressions/operators.test.tsx 76:7 list
+[        → expressions/operators.test.tsx 76:11 [
+0        → expressions/operators.test.tsx 76:12 0
+]        → expressions/operators.test.tsx 76:13 ]
+ =       → expressions/operators.test.tsx 76:14  = 
+10       → expressions/operators.test.tsx 76:17 10
+;        → expressions/operators.test.tsx 76:19 ;
+list     → expressions/operators.test.tsx 77:7 list
+[        → expressions/operators.test.tsx 77:11 [
+1        → expressions/operators.test.tsx 77:12 1
+]        → expressions/operators.test.tsx 77:13 ]
+ **=     → expressions/operators.test.tsx 77:14  **= 
+3        → expressions/operators.test.tsx 77:19 3
+;        → expressions/operators.test.tsx 77:20 ;
+--       → expressions/operators.test.tsx 78:7 --
+list     → expressions/operators.test.tsx 78:9 list
+[        → expressions/operators.test.tsx 78:13 [
+1        → expressions/operators.test.tsx 78:14 1
+]        → expressions/operators.test.tsx 78:15 ]
+;        → expressions/operators.test.tsx 78:16 ;
+return   → expressions/operators.test.tsx 79:7 return 
+[        → expressions/operators.test.tsx 79:14 [
+o        → expressions/operators.test.tsx 79:15 o
+.        → expressions/operators.test.tsx 79:16 .
+n        → expressions/operators.test.tsx 79:17 n
+,        → expressions/operators.test.tsx 79:18 , 
+list     → expressions/operators.test.tsx 79:20 list
+]        → expressions/operators.test.tsx 79:24 ]
+;        → expressions/operators.test.tsx 79:25 ;
+}        → expressions/operators.test.tsx 80:5 }
+;        → expressions/operators.test.tsx 80:6 `,…

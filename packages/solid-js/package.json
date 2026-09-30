@@ -21,10 +21,6 @@
       "types": "./dist/bundle.d.ts",
       "default": "./dist/bundle.js"
     },
-    "./testing": {
-      "types": "./dist/testing.d.ts",
-      "default": "./dist/testing.js"
-    },
     "./server": {
       "types": "./dist/server.d.ts",
       "default": "./dist/server.js"

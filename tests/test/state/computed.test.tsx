@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
@@ -23,7 +23,7 @@ afterEach(() => {
 describe("computed", () => {
   it("runs once per change, however many read it", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const n = $createSignal(1);
           const doubled = $createMemo(() => {
@@ -51,7 +51,7 @@ describe("computed", () => {
 
   it("passes a change on only when its value changes", async () => {
     render(
-      await draw(
+      await evaluate(
         cs`() => {
           const n = $createSignal(1);
           const isBig = $createMemo(() => n[0]() > 2);

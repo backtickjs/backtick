@@ -6,7 +6,7 @@ import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
 //
@@ -46,7 +46,7 @@ describe("a component that draws a list", () => {
   // The same claim with no bundle in it: `<For />` answers with a way of asking
   // too, so a fault in what draws a bundle would leave this alone.
   it("is built once, and draws what arrives", async () => {
-    const { container } = render(await draw(() => forBuildsOnce));
+    const { container } = render(await evaluate(() => forBuildsOnce));
 
     assert.ok(screen.getByText("asked 0"));
 

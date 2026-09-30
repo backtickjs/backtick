@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 import { createMemo, createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 // Each script logs where it runs, so a test counts the runs by counting the
 // logs.
 let runs = 0;
@@ -21,9 +21,9 @@ afterEach(() => {
 describe("computed", () => {
   it("runs once per change, however many read it", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.create(
-          "12fxffq26fcne:27:8",
+          "12dzjzytlh0cm:27:8",
           {
             params: [
               { kind: "splice", value: createSignal, bindings: [] },
@@ -43,9 +43,9 @@ describe("computed", () => {
   });
   it("passes a change on only when its value changes", async () => {
     render(
-      await draw(
+      await evaluate(
         cs.create(
-          "12fxffq26fcne:55:8",
+          "12dzjzytlh0cm:55:8",
           {
             params: [
               { kind: "splice", value: createSignal, bindings: [] },

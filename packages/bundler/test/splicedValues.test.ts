@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { bundler } from "../dist/bundler.js";
+import { es } from "./es.ts";
 
 test("a plain object crosses member by member", async () => {
   assert.match(
-    (await bundler.run({ label: "row", count: 3 })).code,
-    /^\(\{ label: "row", count: 3 \}\);$/m,
+    await es({ label: "row", count: 3 }),
+    /^export default \(\{ label: "row", count: 3 \}\);$/m,
   );
 });
 
@@ -22,7 +22,7 @@ test("a class instance does not", async () => {
   }
 
   await assert.rejects(
-    () => bundler.run(new Point() as never),
+    () => es(new Point() as never),
     /only plain objects cross into a client script/,
   );
 });
@@ -32,8 +32,8 @@ test("a host function expands rather than crossing", async () => {
   // answered is what crosses, declared once. `length` is the arity, so this
   // one takes one.
   assert.equal(
-    (await bundler.run(((n: never) => n) as never)).code,
-    ["const $expn0 = () => (($arg0) => ($arg0));", "($expn0());"].join("\n"),
+    await es((n: never) => n),
+    ["const $expn0 = () => (($arg0) => ($arg0));", "export default ($expn0());"].join("\n"),
   );
 });
 
@@ -41,11 +41,11 @@ test("a host function answering one hands it its argument", async () => {
   // The inner function reads the outer one's argument: a capture of its
   // declaration, so the two never shadow each other.
   assert.equal(
-    (await bundler.run(((n: never) => (m: never) => [n, m]) as never)).code,
+    await es((n: never) => (m: never) => [n, m]),
     [
       "const $expn0 = () => (($arg0) => ($expn1($arg0)));",
       "const $expn1 = ($capture0) => (($arg0) => ([$capture0, $arg0]));",
-      "($expn0());",
+      "export default ($expn0());",
     ].join("\n"),
   );
 });
@@ -58,9 +58,9 @@ test("a host function expands once per bundle", async () => {
     runs += 1;
     return n;
   };
-  await bundler.run([counted, counted] as never);
+  await es([counted, counted]);
   assert.equal(runs, 1);
-  await bundler.run(counted as never);
+  await es(counted);
   assert.equal(runs, 2);
 });
 
@@ -68,13 +68,12 @@ test("host code can't compute with an argument", async () => {
   // The argument is a hole: the client has its value, so arithmetic on it has
   // to be written in a script.
   await assert.rejects(
-    () => bundler.run(((n: number) => n + 1) as never),
+    () => es((n: number) => n + 1),
     /Can't compute with `\$arg0` on the host/,
   );
   await assert.rejects(
     () =>
-      bundler.run(((props: { count: number }) =>
-        props.count > 5 ? "many" : "few") as never),
+      es((props: { count: number }) => (props.count > 5 ? "many" : "few")),
     /Can't compute with `\$arg0\.count` on the host/,
   );
 });

@@ -9,7 +9,7 @@ import {
   Suspense,
   Switch,
 } from "@backtickjs/solid-js";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 
@@ -62,7 +62,7 @@ const portaled = (
 
 describe("control flow in host JSX", () => {
   it("draws each position with Index", async () => {
-    render(await draw(() => indexed));
+    render(await evaluate(() => indexed));
     assert.deepEqual(
       screen.getAllByRole("listitem").map((item) => item.textContent),
       ["0: first", "1: second"],
@@ -70,25 +70,25 @@ describe("control flow in host JSX", () => {
   });
 
   it("draws the first Match that holds", async () => {
-    render(await draw(() => switched));
+    render(await evaluate(() => switched));
     assert.ok(screen.getByText("right"));
     assert.equal(screen.queryByText("wrong"), null);
   });
 
   it("draws the fallback of an ErrorBoundary around a script that throws", async () => {
-    render(await draw(() => caught));
+    render(await evaluate(() => caught));
     assert.ok(screen.getByText("caught"));
   });
 
   it("draws a Portal's children outside where it stands", async () => {
-    const { container } = render(await draw(() => portaled));
+    const { container } = render(await evaluate(() => portaled));
     assert.ok(container.textContent?.includes("here"));
     assert.ok(!container.textContent?.includes("elsewhere"));
     assert.ok(screen.getByText("elsewhere"));
   });
 
   it("draws Suspense's children when nothing is pending", async () => {
-    render(await draw(() => suspended));
+    render(await evaluate(() => suspended));
     assert.ok(screen.getByText("loaded"));
   });
 });

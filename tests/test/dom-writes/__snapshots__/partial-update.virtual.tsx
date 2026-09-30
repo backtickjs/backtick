@@ -6,7 +6,7 @@ import type { Signal } from "solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { watchWrites } from "./writes.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // js-framework-benchmark's "partial update": every other row's label grows,
 // and each label is a signal of its own. Writing one is a write to that row's
@@ -28,7 +28,7 @@ async function Labels() {
 }
 
 it("a label written changes that label's text and nothing else", async () => {
-  const { container } = render(await draw(() => <Labels />));
+  const { container } = render(await evaluate(() => <Labels />));
   const written = watchWrites(container);
   await userEvent.click(screen.getByRole("button", { name: "update" }));
   assert.deepEqual(written(), [

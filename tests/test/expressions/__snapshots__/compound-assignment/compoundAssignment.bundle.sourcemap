@@ -1,75 +1,74 @@
-(                → expressions/compound-assignment.test.tsx 12:8 {…
-) => {           → expressions/compound-assignment.test.tsx 12:8 {…
-let              → expressions/compound-assignment.test.tsx 13:7 let 
-n                → expressions/compound-assignment.test.tsx 13:11 n
- =               → expressions/compound-assignment.test.tsx 13:12  = 
-10               → expressions/compound-assignment.test.tsx 13:15 10
-;                → expressions/compound-assignment.test.tsx 13:17 ;
-n                → expressions/compound-assignment.test.tsx 14:7 n
- +=              → expressions/compound-assignment.test.tsx 14:8  += 
-5                → expressions/compound-assignment.test.tsx 14:12 5
-;                → expressions/compound-assignment.test.tsx 14:13 ;
-n                → expressions/compound-assignment.test.tsx 15:7 n
- -=              → expressions/compound-assignment.test.tsx 15:8  -= 
-3                → expressions/compound-assignment.test.tsx 15:12 3
-;                → expressions/compound-assignment.test.tsx 15:13 ;
-n                → expressions/compound-assignment.test.tsx 16:7 n
- *=              → expressions/compound-assignment.test.tsx 16:8  *= 
-2                → expressions/compound-assignment.test.tsx 16:12 2
-;                → expressions/compound-assignment.test.tsx 16:13 ;
-n                → expressions/compound-assignment.test.tsx 17:7 n
- /=              → expressions/compound-assignment.test.tsx 17:8  /= 
-4                → expressions/compound-assignment.test.tsx 17:12 4
-;                → expressions/compound-assignment.test.tsx 17:13 ;
-n                → expressions/compound-assignment.test.tsx 18:7 n
- %=              → expressions/compound-assignment.test.tsx 18:8  %= 
-4                → expressions/compound-assignment.test.tsx 18:12 4
-;                → expressions/compound-assignment.test.tsx 18:13 ;
-let              → expressions/compound-assignment.test.tsx 19:7 let 
-text             → expressions/compound-assignment.test.tsx 19:11 text
- =               → expressions/compound-assignment.test.tsx 19:15  = 
-"a"              → expressions/compound-assignment.test.tsx 19:18 "a"
-;                → expressions/compound-assignment.test.tsx 19:21 ;
-text             → expressions/compound-assignment.test.tsx 20:7 text
- +=              → expressions/compound-assignment.test.tsx 20:11  += 
-"b"              → expressions/compound-assignment.test.tsx 20:15 "b"
-;                → expressions/compound-assignment.test.tsx 20:18 ;
-let              → expressions/compound-assignment.test.tsx 21:7 let 
-total            → expressions/compound-assignment.test.tsx 21:11 total
- =               → expressions/compound-assignment.test.tsx 21:16  = 
-1                → expressions/compound-assignment.test.tsx 21:19 1
-;                → expressions/compound-assignment.test.tsx 21:20 ;
-const            → expressions/compound-assignment.test.tsx 22:7 const 
-answered         → expressions/compound-assignment.test.tsx 22:13 answered
- =               → expressions/compound-assignment.test.tsx 22:21  = 
-total            → expressions/compound-assignment.test.tsx 22:25 total
- +=              → expressions/compound-assignment.test.tsx 22:30  += 
-2                → expressions/compound-assignment.test.tsx 22:34 2
-;                → expressions/compound-assignment.test.tsx 22:36 ;
-let              → expressions/compound-assignment.test.tsx 23:7 let 
-x                → expressions/compound-assignment.test.tsx 23:11 x
- =               → expressions/compound-assignment.test.tsx 23:12  = 
-1                → expressions/compound-assignment.test.tsx 23:15 1
-;                → expressions/compound-assignment.test.tsx 23:16 ;
-x                → expressions/compound-assignment.test.tsx 24:7 x
- +=              → expressions/compound-assignment.test.tsx 24:8  += 
-x                → expressions/compound-assignment.test.tsx 24:12 x
- =               → expressions/compound-assignment.test.tsx 24:13  = 
-5                → expressions/compound-assignment.test.tsx 24:16 5
-;                → expressions/compound-assignment.test.tsx 24:17 ;
-return           → expressions/compound-assignment.test.tsx 25:7 return 
-[                → expressions/compound-assignment.test.tsx 25:14 [
-n                → expressions/compound-assignment.test.tsx 25:15 n
-,                → expressions/compound-assignment.test.tsx 25:16 , 
-text             → expressions/compound-assignment.test.tsx 25:18 text
-,                → expressions/compound-assignment.test.tsx 25:22 , 
-answered         → expressions/compound-assignment.test.tsx 25:24 answered
-,                → expressions/compound-assignment.test.tsx 25:32 , 
-total            → expressions/compound-assignment.test.tsx 25:34 total
-,                → expressions/compound-assignment.test.tsx 25:39 , 
-x                → expressions/compound-assignment.test.tsx 25:41 x
-]                → expressions/compound-assignment.test.tsx 25:42 ]
-;                → expressions/compound-assignment.test.tsx 25:43 ;
-}                → expressions/compound-assignment.test.tsx 26:5 }
-;                → expressions/compound-assignment.test.tsx 26:6 `,…
-export default   → expressions/compound-assignment.test.tsx 26:6 `,…
+(         → expressions/compound-assignment.test.tsx 12:8 {…
+) => {    → expressions/compound-assignment.test.tsx 12:8 {…
+let       → expressions/compound-assignment.test.tsx 13:7 let 
+n         → expressions/compound-assignment.test.tsx 13:11 n
+ =        → expressions/compound-assignment.test.tsx 13:12  = 
+10        → expressions/compound-assignment.test.tsx 13:15 10
+;         → expressions/compound-assignment.test.tsx 13:17 ;
+n         → expressions/compound-assignment.test.tsx 14:7 n
+ +=       → expressions/compound-assignment.test.tsx 14:8  += 
+5         → expressions/compound-assignment.test.tsx 14:12 5
+;         → expressions/compound-assignment.test.tsx 14:13 ;
+n         → expressions/compound-assignment.test.tsx 15:7 n
+ -=       → expressions/compound-assignment.test.tsx 15:8  -= 
+3         → expressions/compound-assignment.test.tsx 15:12 3
+;         → expressions/compound-assignment.test.tsx 15:13 ;
+n         → expressions/compound-assignment.test.tsx 16:7 n
+ *=       → expressions/compound-assignment.test.tsx 16:8  *= 
+2         → expressions/compound-assignment.test.tsx 16:12 2
+;         → expressions/compound-assignment.test.tsx 16:13 ;
+n         → expressions/compound-assignment.test.tsx 17:7 n
+ /=       → expressions/compound-assignment.test.tsx 17:8  /= 
+4         → expressions/compound-assignment.test.tsx 17:12 4
+;         → expressions/compound-assignment.test.tsx 17:13 ;
+n         → expressions/compound-assignment.test.tsx 18:7 n
+ %=       → expressions/compound-assignment.test.tsx 18:8  %= 
+4         → expressions/compound-assignment.test.tsx 18:12 4
+;         → expressions/compound-assignment.test.tsx 18:13 ;
+let       → expressions/compound-assignment.test.tsx 19:7 let 
+text      → expressions/compound-assignment.test.tsx 19:11 text
+ =        → expressions/compound-assignment.test.tsx 19:15  = 
+"a"       → expressions/compound-assignment.test.tsx 19:18 "a"
+;         → expressions/compound-assignment.test.tsx 19:21 ;
+text      → expressions/compound-assignment.test.tsx 20:7 text
+ +=       → expressions/compound-assignment.test.tsx 20:11  += 
+"b"       → expressions/compound-assignment.test.tsx 20:15 "b"
+;         → expressions/compound-assignment.test.tsx 20:18 ;
+let       → expressions/compound-assignment.test.tsx 21:7 let 
+total     → expressions/compound-assignment.test.tsx 21:11 total
+ =        → expressions/compound-assignment.test.tsx 21:16  = 
+1         → expressions/compound-assignment.test.tsx 21:19 1
+;         → expressions/compound-assignment.test.tsx 21:20 ;
+const     → expressions/compound-assignment.test.tsx 22:7 const 
+answered  → expressions/compound-assignment.test.tsx 22:13 answered
+ =        → expressions/compound-assignment.test.tsx 22:21  = 
+total     → expressions/compound-assignment.test.tsx 22:25 total
+ +=       → expressions/compound-assignment.test.tsx 22:30  += 
+2         → expressions/compound-assignment.test.tsx 22:34 2
+;         → expressions/compound-assignment.test.tsx 22:36 ;
+let       → expressions/compound-assignment.test.tsx 23:7 let 
+x         → expressions/compound-assignment.test.tsx 23:11 x
+ =        → expressions/compound-assignment.test.tsx 23:12  = 
+1         → expressions/compound-assignment.test.tsx 23:15 1
+;         → expressions/compound-assignment.test.tsx 23:16 ;
+x         → expressions/compound-assignment.test.tsx 24:7 x
+ +=       → expressions/compound-assignment.test.tsx 24:8  += 
+x         → expressions/compound-assignment.test.tsx 24:12 x
+ =        → expressions/compound-assignment.test.tsx 24:13  = 
+5         → expressions/compound-assignment.test.tsx 24:16 5
+;         → expressions/compound-assignment.test.tsx 24:17 ;
+return    → expressions/compound-assignment.test.tsx 25:7 return 
+[         → expressions/compound-assignment.test.tsx 25:14 [
+n         → expressions/compound-assignment.test.tsx 25:15 n
+,         → expressions/compound-assignment.test.tsx 25:16 , 
+text      → expressions/compound-assignment.test.tsx 25:18 text
+,         → expressions/compound-assignment.test.tsx 25:22 , 
+answered  → expressions/compound-assignment.test.tsx 25:24 answered
+,         → expressions/compound-assignment.test.tsx 25:32 , 
+total     → expressions/compound-assignment.test.tsx 25:34 total
+,         → expressions/compound-assignment.test.tsx 25:39 , 
+x         → expressions/compound-assignment.test.tsx 25:41 x
+]         → expressions/compound-assignment.test.tsx 25:42 ]
+;         → expressions/compound-assignment.test.tsx 25:43 ;
+}         → expressions/compound-assignment.test.tsx 26:5 }
+;         → expressions/compound-assignment.test.tsx 26:6 `,…

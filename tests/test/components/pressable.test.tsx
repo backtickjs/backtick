@@ -5,7 +5,7 @@ import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import { draw } from "@backtickjs/solid-js/testing";
+import { evaluate } from "../evaluate.ts";
 
 // A drawing read the way Testing Library reads one: by role and by text, with
 // a click a user would make.
@@ -31,13 +31,13 @@ async function Row() {
 
 describe("screen", () => {
   it("increments the counter", async () => {
-    render(await draw(() => <Row />));
+    render(await evaluate(() => <Row />));
     await userEvent.click(screen.getByRole("button", { name: /pressed/ }));
     assert.ok(screen.getByText("pressed 1 times"));
   });
 
   it("reads a fresh page in each test", async () => {
-    render(await draw(() => <Row />));
+    render(await evaluate(() => <Row />));
     assert.ok(screen.getByText("pressed 0 times"));
   });
 });

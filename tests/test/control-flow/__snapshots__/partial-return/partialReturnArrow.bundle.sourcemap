@@ -1,34 +1,33 @@
-(                → control-flow/partial-return.test.tsx 23:8 {…
-) => {           → control-flow/partial-return.test.tsx 23:8 {…
-const            → control-flow/partial-return.test.tsx 24:7 const 
-pick             → control-flow/partial-return.test.tsx 24:13 pick
- =               → control-flow/partial-return.test.tsx 24:17  = 
-b                → control-flow/partial-return.test.tsx 24:21 b
- =>              → control-flow/partial-return.test.tsx 24:31 )…
-{                → control-flow/partial-return.test.tsx 24:35  {…
-if (             → control-flow/partial-return.test.tsx 25:9 if (
-b                → control-flow/partial-return.test.tsx 25:13 b
-)                → control-flow/partial-return.test.tsx 25:14 ) 
-{                → control-flow/partial-return.test.tsx 25:16 {
-return           → control-flow/partial-return.test.tsx 26:11 return 
-"taken"          → control-flow/partial-return.test.tsx 26:18 "taken"
-;                → control-flow/partial-return.test.tsx 26:25 ;
-}                → control-flow/partial-return.test.tsx 27:9 }
-}                → control-flow/partial-return.test.tsx 28:7 }
-;                → control-flow/partial-return.test.tsx 28:8 ;
-return           → control-flow/partial-return.test.tsx 29:7 return 
-[                → control-flow/partial-return.test.tsx 29:14 [
-pick             → control-flow/partial-return.test.tsx 29:15 pick
-(                → control-flow/partial-return.test.tsx 29:19 (
-true             → control-flow/partial-return.test.tsx 29:20 true
-)                → control-flow/partial-return.test.tsx 29:24 )
-,                → control-flow/partial-return.test.tsx 29:25 , 
-pick             → control-flow/partial-return.test.tsx 29:27 pick
-(                → control-flow/partial-return.test.tsx 29:31 (
-false            → control-flow/partial-return.test.tsx 29:32 false
-)                → control-flow/partial-return.test.tsx 29:37 )
-]                → control-flow/partial-return.test.tsx 29:38 ]
-;                → control-flow/partial-return.test.tsx 29:39 ;
-}                → control-flow/partial-return.test.tsx 30:5 }
-;                → control-flow/partial-return.test.tsx 30:6 `,…
-export default   → control-flow/partial-return.test.tsx 30:6 `,…
+(        → control-flow/partial-return.test.tsx 23:8 {…
+) => {   → control-flow/partial-return.test.tsx 23:8 {…
+const    → control-flow/partial-return.test.tsx 24:7 const 
+pick     → control-flow/partial-return.test.tsx 24:13 pick
+ =       → control-flow/partial-return.test.tsx 24:17  = 
+b        → control-flow/partial-return.test.tsx 24:21 b
+ =>      → control-flow/partial-return.test.tsx 24:31 )…
+{        → control-flow/partial-return.test.tsx 24:35  {…
+if (     → control-flow/partial-return.test.tsx 25:9 if (
+b        → control-flow/partial-return.test.tsx 25:13 b
+)        → control-flow/partial-return.test.tsx 25:14 ) 
+{        → control-flow/partial-return.test.tsx 25:16 {
+return   → control-flow/partial-return.test.tsx 26:11 return 
+"taken"  → control-flow/partial-return.test.tsx 26:18 "taken"
+;        → control-flow/partial-return.test.tsx 26:25 ;
+}        → control-flow/partial-return.test.tsx 27:9 }
+}        → control-flow/partial-return.test.tsx 28:7 }
+;        → control-flow/partial-return.test.tsx 28:8 ;
+return   → control-flow/partial-return.test.tsx 29:7 return 
+[        → control-flow/partial-return.test.tsx 29:14 [
+pick     → control-flow/partial-return.test.tsx 29:15 pick
+(        → control-flow/partial-return.test.tsx 29:19 (
+true     → control-flow/partial-return.test.tsx 29:20 true
+)        → control-flow/partial-return.test.tsx 29:24 )
+,        → control-flow/partial-return.test.tsx 29:25 , 
+pick     → control-flow/partial-return.test.tsx 29:27 pick
+(        → control-flow/partial-return.test.tsx 29:31 (
+false    → control-flow/partial-return.test.tsx 29:32 false
+)        → control-flow/partial-return.test.tsx 29:37 )
+]        → control-flow/partial-return.test.tsx 29:38 ]
+;        → control-flow/partial-return.test.tsx 29:39 ;
+}        → control-flow/partial-return.test.tsx 30:5 }
+;        → control-flow/partial-return.test.tsx 30:6 `,…
