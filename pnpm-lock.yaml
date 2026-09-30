@@ -264,11 +264,10 @@ importers:
         version: 6.0.3
 
   packages/compiler:
-    dependencies:
+    devDependencies:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-    devDependencies:
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
         version: 0.3.31
@@ -281,9 +280,6 @@ importers:
 
   packages/core:
     devDependencies:
-      '@types/node':
-        specifier: ^26.6.2
-        version: 26.6.2
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -299,13 +295,7 @@ importers:
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28
-      vscode-uri:
-        specifier: ^3.0.8
-        version: 3.1.0
     devDependencies:
-      '@volar/language-server':
-        specifier: ^2.4.28
-        version: 2.4.28
       '@volar/typescript':
         specifier: ^2.4.28
         version: 2.4.28
@@ -388,21 +378,9 @@ importers:
         specifier: 1.9.14
         version: 1.9.14
     devDependencies:
-      '@backtickjs/compiler':
-        specifier: workspace:^0.1.0
-        version: link:../compiler
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
-      '@types/node':
-        specifier: ^26.6.2
-        version: 26.6.2
-      global-jsdom:
-        specifier: ^30.0.0
-        version: 30.0.0(jsdom@30.0.1)
-      jsdom:
-        specifier: ^30.0.1
-        version: 30.0.1
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

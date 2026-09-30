@@ -14,7 +14,7 @@ function lift<T>(_: T): Client<T> {
 // A constraint that is `unknown` for a value that splices, rather than
 // `Spliceable` itself or an intersection with it: either of those keeps a
 // literal a literal instead of widening it.
-function splice<T extends ([T] extends [Spliceable] ? unknown : Spliceable)>(
+function splice<T extends [T] extends [Spliceable] ? unknown : Spliceable>(
   _: T,
 ): Spliced<T> {
   throw new Error(

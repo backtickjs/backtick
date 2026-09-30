@@ -20,11 +20,9 @@
   },
   "dependencies": {
     "@backtickjs/compiler": "workspace:*",
-    "@volar/language-core": "^2.4.28",
-    "vscode-uri": "^3.0.8"
+    "@volar/language-core": "^2.4.28"
   },
   "devDependencies": {
-    "@volar/language-server": "^2.4.28",
     "@volar/typescript": "^2.4.28",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"

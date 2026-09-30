@@ -19,13 +19,11 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo"
   },
-  "dependencies": {
-    "@backtickjs/core": "workspace:*"
-  },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@backtickjs/core": "workspace:*",
     "@jridgewell/trace-mapping": "^0.3.31",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
