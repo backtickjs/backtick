@@ -1,5 +1,5 @@
 import { createJsxElement } from "@backtickjs/core";
-import type { BacktickElement, Spliceable } from "@backtickjs/core";
+import type { BacktickElement, Client, Spliceable } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 
 // What the JSX transform reaches for in a file drawn with this adapter, and
@@ -24,7 +24,27 @@ export function Fragment(props: { children?: Prop<JSX.Element> }): JSX.Element {
  * function has no written form — client behaviour is `cs`...` — so a handler
  * prop is left with the script arm alone.
  */
-export type Prop<T> = Spliceable<T>;
+export type Prop<T> = Client<T> | SplicesTo<T>;
+
+/**
+ * What a host value of type `T` splices to: the pair to `Client<T>`, which is
+ * what a host writes instead where it cannot write the value itself.
+ *
+ * A container member by member, a primitive as itself, and a function as a
+ * host function taking and answering with scripts. Where the client wants
+ * anything, any host value that splices will do.
+ */
+type SplicesTo<T> = unknown extends T
+  ? Spliceable
+  : T extends (...args: infer Args) => infer Returned
+    ? (...args: { [Key in keyof Args]: Client<Args[Key]> }) => Client<Returned>
+    : T extends readonly (infer Item)[]
+      ? readonly Prop<Item>[]
+      : T extends { readonly [key: string]: unknown }
+        ? { readonly [Key in keyof T]: Prop<T[Key]> }
+        : T extends null | undefined | number | boolean | string
+          ? T
+          : never;
 
 // An element's props as Solid types them, each a `Prop`, and its children.
 type Props<Attributes> = {

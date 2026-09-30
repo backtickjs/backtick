@@ -9,9 +9,7 @@
     return (<div>
         <ul class="rows">
           <$tag1 each={held[0]()}>
-            {(row) => (<li onclick={() => row.label[1]("pressed")}>
-                {row.label[0]()}
-              </li>)}
+            {(row) => (<li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>)}
           </$tag1>
         </ul>
       </div>);

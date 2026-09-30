@@ -112,7 +112,7 @@ label                             → label
 "pressed"                         → "pressed"
 )                                 → )
 )}                                → }
->{cs.lift(                        → >\n                {
+>{cs.lift(                        → >{
 __cs_row                          → row
 .                                 → .
 label                             → label
@@ -120,7 +120,7 @@ label                             → label
 0                                 → 0
 ]                                 → ]
 ()                                → ()
-)}</                              → }\n              </
+)}</                              → }</
 li                                → li
 >                                 → >\n            )
 )}</                              → }\n          </

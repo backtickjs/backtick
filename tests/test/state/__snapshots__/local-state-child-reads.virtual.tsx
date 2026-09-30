@@ -25,9 +25,7 @@ const ReadingRow = async ({
   selected: Client<Signal<number>>;
 }) => (
   <div>
-    <span
-      style={cs.lift("font-size: " + (cs.splice((selected) satisfies typeof cs.Spliceable)[0]() === cs.splice((id) satisfies typeof cs.Spliceable) ? 20 : 16) + "px")}
-    >
+    <span style={cs.lift("font-size: " + (cs.splice((selected) satisfies typeof cs.Spliceable)[0]() === cs.splice((id) satisfies typeof cs.Spliceable) ? 20 : 16) + "px")}>
       {cs.lift("row " + cs.splice((id) satisfies typeof cs.Spliceable) + " of " + cs.splice((selected) satisfies typeof cs.Spliceable)[0]())}
     </span>
     {cs.lift(cs.splice((selected) satisfies typeof cs.Spliceable)[0]() === cs.splice((id) satisfies typeof cs.Spliceable) ? cs.splice((<span>marker</span>) satisfies typeof cs.Spliceable) : null)}

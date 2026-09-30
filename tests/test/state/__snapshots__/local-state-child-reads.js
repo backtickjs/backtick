@@ -20,7 +20,7 @@ const ReadingRow = async ({ id, selected }) =>
     children: [
       _jsx("span", {
         style: cs.create(
-          "1pnyalh8z32fc:29:13",
+          "3td9u6rlq79le:28:17",
           {
             params: [
               { kind: "splice", value: selected, bindings: [] },
@@ -28,10 +28,10 @@ const ReadingRow = async ({ id, selected }) =>
             ],
           },
           '($splice0, $splice1) => "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"',
-          '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AA4BgB,wBAAA,aAAa,GAAG,CAAC,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
+          '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AA2BoB,wBAAA,aAAa,GAAG,CAAC,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
         ),
         children: cs.create(
-          "1pnyalh8z32fc:31:7",
+          "3td9u6rlq79le:29:7",
           {
             params: [
               { kind: "splice", value: id, bindings: [] },
@@ -39,11 +39,11 @@ const ReadingRow = async ({ id, selected }) =>
             ],
           },
           '($splice0, $splice1) => "row " + $splice0() + " of " + $splice1()[0]()',
-          '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AA8BU,wBAAA,MAAM,GAAG,UAAG,GAAG,MAAM,GAAG,UAAS,CAAC,CAAC,CAAC,EAAE"}',
+          '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AA4BU,wBAAA,MAAM,GAAG,UAAG,GAAG,MAAM,GAAG,UAAS,CAAC,CAAC,CAAC,EAAE"}',
         ),
       }),
       cs.create(
-        "1pnyalh8z32fc:33:5",
+        "3td9u6rlq79le:31:5",
         {
           params: [
             { kind: "splice", value: selected, bindings: [] },
@@ -56,13 +56,13 @@ const ReadingRow = async ({ id, selected }) =>
           ],
         },
         "($splice0, $splice1, $splice2) => $splice0()[0]() === $splice1() ? $splice2() : null",
-        '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAgCQ,kCAAA,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,UAAC,CAAwB,CAAC,CAAC,IAAI"}',
+        '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AA8BQ,kCAAA,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,UAAC,CAAwB,CAAC,CAAC,IAAI"}',
       ),
     ],
   });
 async function ReadingPanel() {
   return cs.create(
-    "1pnyalh8z32fc:38:9",
+    "3td9u6rlq79le:36:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -70,7 +70,7 @@ async function ReadingPanel() {
       ],
     },
     "($splice0, $tag1) => {\n    const selected = $splice0()(0);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        <$tag1 id={0} selected={selected}/>\n        <$tag1 id={1} selected={selected}/>\n      </div>);\n}",
-    '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAqCY;IACR,MAAM,QAAQ,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,KAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,KAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAmCY;IACR,MAAM,QAAQ,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,KAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACtC;QAAA,CAAC,KAAU,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC,QAAQ,CAAC,EACxC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
   );
 }
 // What one `ReadingRow` draws, in the three positions it read the signal from: a
