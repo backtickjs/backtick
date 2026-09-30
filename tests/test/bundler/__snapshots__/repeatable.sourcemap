@@ -81,11 +81,11 @@ title                             → title
 />                                →  />
 )}{cs.lift(                       → \n      {
 cs.splice(                        → ${ [-semantic]
-<Card title="element" />          → <Card title="element" />
+(<Card title="element" />)        → (<Card title="element" />)
  satisfies typeof cs.Spliceable)  → } [-semantic]
 )}{cs.lift(                       → }\n      {
 cs.splice(                        → ${ [-semantic]
-<Card title={shared} />           → <Card title={shared} />
+(<Card title={shared} />)         → (<Card title={shared} />)
  satisfies typeof cs.Spliceable)  → } [-semantic]
 )}{cs.lift(                       → }\n      
 <                                 → <
@@ -124,9 +124,9 @@ p                                 → p
 <                                 → <
 p                                 → p
 >{cs.lift(                        → >{
-cs.splice(                        → ${ [-semantic]
-shared                            → shared
- satisfies typeof cs.Spliceable)  → } [-semantic]
+cs.splice(                        →  [-semantic]
+(shared)                          → $shared
+ satisfies typeof cs.Spliceable)  →  [-semantic]
 )}</                              → }</
 p                                 → p
 >                                 → >
@@ -149,7 +149,7 @@ each                              → each
 ={cs.lift(                        → ={
 __cs_rows                         → rows
 )}                                → }
->{cs.lift(                        → >\n          {
+>{cs.lift(                        → >{
 (                                 → (
 __cs_row                          → row
 :                                 → : 
@@ -168,7 +168,7 @@ __cs_count                        → count
 )}</                              → }</
 li                                → li
 >                                 → >
-)}</                              → }\n        </
+)}</                              → }</
 For                               → For
 >                                 → >
 )}</                              → \n      </
@@ -180,17 +180,17 @@ section                           → section
 ;                                 → ;
 \n})())                           → \n}`
 cs.lift(                          → cs`
-cs.splice(                        → ${ [-semantic]
-doubled                           → doubled
- satisfies typeof cs.Spliceable)  → } [-semantic]
+cs.splice(                        →  [-semantic]
+(doubled)                         → $doubled
+ satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 1                                 → 1
 )                                 → )
 )                                 → `
 cs.lift(                          → cs`
-cs.splice(                        → ${ [-semantic]
-pair                              → pair
- satisfies typeof cs.Spliceable)  → } [-semantic]
+cs.splice(                        →  [-semantic]
+(pair)                            → $pair
+ satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 1                                 → 1
 )                                 → )
@@ -198,14 +198,14 @@ pair                              → pair
 2                                 → 2
 )                                 → )
  +                                →  + 
-cs.splice(                        → ${ [-semantic]
-shared                            → shared
- satisfies typeof cs.Spliceable)  → } [-semantic]
+cs.splice(                        →  [-semantic]
+(shared)                          → $shared
+ satisfies typeof cs.Spliceable)  →  [-semantic]
 .                                 → .
 length                            → length
 )                                 → `
 cs.lift(                          → cs`
 cs.splice(                        → ${ [-semantic]
-<Card title="other" />            → <Card title="other" />
+(<Card title="other" />)          → (<Card title="other" />)
  satisfies typeof cs.Spliceable)  → } [-semantic]
 )                                 → `

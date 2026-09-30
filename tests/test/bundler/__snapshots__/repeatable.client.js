@@ -22,9 +22,7 @@
       <p>{$splice7(rows)}</p>
       <p>{total}</p>
       <ul>
-        <$tag8 each={rows}>
-          {(row) => <li>{row + count[0]()}</li>}
-        </$tag8>
+        <$tag8 each={rows}>{(row) => <li>{row + count[0]()}</li>}</$tag8>
       </ul>
     </section>);
 }
@@ -32,11 +30,11 @@
 // 26:32
 ($capture0) => $capture0.length
 
-// 51:14
+// 49:14
 ($splice0) => $splice0()(1)
 
-// 52:14
+// 50:14
 ($splice0, $splice1) => $splice0()(1)(2) + $splice1().length
 
-// 53:14
+// 51:14
 ($splice0) => $splice0()

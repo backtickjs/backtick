@@ -21,9 +21,9 @@ title                             → title
 cs.lift(                          → cs`
 <                                 → <
 div                               → div
->{cs.lift(                        → >\n      {
+>{cs.lift(                        → >\n      {\n        
 cs.splice(                        → ${ [-semantic]
-cs.lift((() => {\n                → cs`{\n        
+cs.lift((() => {\n                → cs`{\n          
 const                             → const 
 __cs_Heading                      → Heading
  =                                →  = 
@@ -31,7 +31,7 @@ cs.splice(                        →  [-semantic]
 (Card)                            → $Card
  satisfies typeof cs.Spliceable)  →  [-semantic]
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 return                            → return 
 <                                 → <
 __cs_Heading                      → Heading
@@ -42,11 +42,11 @@ title                             → title
 }                                 → 
 />                                →  />
 ;                                 → ;
-\n})())                           → \n      }`
+\n})())                           → \n        }`
  satisfies typeof cs.Spliceable)  → } [-semantic]
-)}{cs.lift(                       → }\n      {
+)}{cs.lift(                       → \n      }\n      {\n        
 cs.splice(                        → ${ [-semantic]
-cs.lift((() => {\n                → cs`{\n        
+cs.lift((() => {\n                → cs`{\n          
 const                             → const 
 __cs_Heading                      → Heading
  =                                →  = 
@@ -54,7 +54,7 @@ cs.splice(                        →  [-semantic]
 (Card)                            → $Card
  satisfies typeof cs.Spliceable)  →  [-semantic]
 ;                                 → ;
-\n                                → \n        
+\n                                → \n          
 return                            → return 
 <                                 → <
 __cs_Heading                      → Heading
@@ -65,9 +65,9 @@ title                             → title
 }                                 → 
 />                                →  />
 ;                                 → ;
-\n})())                           → \n      }`
+\n})())                           → \n        }`
  satisfies typeof cs.Spliceable)  → } [-semantic]
-)}</                              → }\n    </
+)}</                              → \n      }\n    </
 div                               → div
 >                                 → >
 )                                 → `

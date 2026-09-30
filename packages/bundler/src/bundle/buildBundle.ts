@@ -7,7 +7,10 @@ import {
 import { isClientImport, type Spliceable } from "@backtickjs/core";
 
 import { expandFunction, type FunctionExpansions } from "./expandFunction.js";
-import { type ElementExpansions, expandJsxElement } from "./expandJsxElement.js";
+import {
+  type ElementExpansions,
+  expandJsxElement,
+} from "./expandJsxElement.js";
 import { type Hole, holeOf, type HostParam } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
@@ -264,7 +267,10 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     const expansion = await expandFunction(value, functionExpansions);
     const label = `$expn${labels.size}`;
     labels.set(value, label);
-    const frame: Frame = { own: new Set(expansion.params), captures: new Map() };
+    const frame: Frame = {
+      own: new Set(expansion.params),
+      captures: new Map(),
+    };
     const body = arrow(
       expansion.params.map((param) => param.name),
       await render(expansion.returned, { bindings: new Set(), frame }),
@@ -442,10 +448,7 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
   // A prop that is `undefined` is left out, as JSX and TypeScript's optional
   // props read it: a component forwarding an optional prop it wasn't given
   // writes nothing.
-  const renderJsx = async (
-    jsx: JsxElement,
-    scope: Scope,
-  ): Promise<string> => {
+  const renderJsx = async (jsx: JsxElement, scope: Scope): Promise<string> => {
     const type = jsx.type;
     if (typeof type === "function" && !isClientImport(type)) {
       const expansion = await expandJsxElement(jsx, type, elementExpansions);

@@ -27,16 +27,14 @@ const page = () => cs`{
   return (
     <section>
       <Heading title="spliced" />
-      {${<Card title="element" />}}
-      {${<Card title={shared} />}}
+      {${(<Card title="element" />)}}
+      {${(<Card title={shared} />)}}
       <p>{$doubled(count[0]())}</p>
       <p>{$pair(1)(2)}</p>
-      <p>{${shared}}</p>
+      <p>{$shared}</p>
       <p>{total}</p>
       <ul>
-        <For each={rows}>
-          {(row: number) => <li>{row + count[0]()}</li>}
-        </For>
+        <For each={rows}>{(row: number) => <li>{row + count[0]()}</li>}</For>
       </ul>
     </section>
   );
@@ -48,8 +46,8 @@ it("bundles the same every time, with scripts in it", async () => {
   const first = await code(page());
   assert.equal(await code(page()), first);
   // Other bundles in between, sharing its host functions and scripts.
-  await code(cs`${doubled}(1)`);
-  await code(cs`${pair}(1)(2) + ${shared}.length`);
-  await code(cs`${<Card title="other" />}`);
+  await code(cs`$doubled(1)`);
+  await code(cs`$pair(1)(2) + $shared.length`);
+  await code(cs`${(<Card title="other" />)}`);
   assert.equal(await code(page()), first);
 });

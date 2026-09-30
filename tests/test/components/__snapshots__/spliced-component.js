@@ -13,7 +13,7 @@ it("splicedComponent", async (t) => {
     t,
     "splicedComponent",
     cs.create(
-      "2ak4jipgrabex:17:4",
+      "35n10e2h62hfl:17:4",
       { params: [{ kind: "splice", value: Card, bindings: [] }] },
       '($splice0) => {\n    const Heading = $splice0();\n    return <Heading title="tag"/>;\n}',
       '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,OAAO,CAAC,OAAO,CAAC,KAAK,CAAC,KAAK,EAAG,CAAC;AACjC,CAAC"}',
@@ -26,33 +26,33 @@ it("splicedComponentTwice", async (t) => {
     t,
     "splicedComponentTwice",
     cs.create(
-      "2ak4jipgrabex:29:4",
+      "35n10e2h62hfl:29:4",
       {
         params: [
           {
             kind: "splice",
             value: cs.create(
-              "2ak4jipgrabex:30:9",
+              "35n10e2h62hfl:31:10",
               { params: [{ kind: "splice", value: Card, bindings: [] }] },
               '($splice0) => {\n    const Heading = $splice0();\n    return <Heading title="first"/>;\n}',
-              '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AA6BY;IACJ,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,OAAO,CAAC,OAAO,CAAC,KAAK,CAAC,OAAO,EAAG,CAAC;AACnC,CAAC"}',
+              '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AA8Ba;IACH,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,OAAO,CAAC,OAAO,CAAC,KAAK,CAAC,OAAO,EAAG,CAAC;AACnC,CAAC"}',
             ),
             bindings: [],
           },
           {
             kind: "splice",
             value: cs.create(
-              "2ak4jipgrabex:34:9",
+              "35n10e2h62hfl:37:10",
               { params: [{ kind: "splice", value: Card, bindings: [] }] },
               '($splice0) => {\n    const Heading = $splice0();\n    return <Heading title="second"/>;\n}',
-              '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AAiCY;IACJ,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,OAAO,CAAC,OAAO,CAAC,KAAK,CAAC,QAAQ,EAAG,CAAC;AACpC,CAAC"}',
+              '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AAoCa;IACH,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,OAAO,CAAC,OAAO,CAAC,KAAK,CAAC,QAAQ,EAAG,CAAC;AACpC,CAAC"}',
             ),
             bindings: [],
           },
         ],
       },
       "($splice0, $splice1) => <div>\n      {$splice0()}\n      {$splice1()}\n    </div>",
-      '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AA4BO,wBAAA,CAAC,GAAG,CACL;MAAA,CAAC,UAGE,CACH;MAAA,CAAC,UAGE,CACL;IAAA,EAAE,GAAG,CAAC"}',
+      '{"version":3,"file":"spliced-component.test.jsx","sourceRoot":"","sources":["components/spliced-component.test.tsx"],"names":[],"mappings":"AA4BO,wBAAA,CAAC,GAAG,CACL;MAAA,CACE,UAIF,CACA;MAAA,CACE,UAIF,CACF;IAAA,EAAE,GAAG,CAAC"}',
     ),
   );
 });

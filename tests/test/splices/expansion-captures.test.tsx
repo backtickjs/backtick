@@ -12,13 +12,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 const rows = (label: Client<string>) => (
   <ul>
     <For each={cs`[1, 2]`}>
-      {(n: Client<number>) => cs`<li>{${label}} {$n}</li>`}
+      {(n: Client<number>) =>
+        cs`<li>
+          {$label} {$n}
+        </li>`
+      }
     </For>
   </ul>
 );
 
 it("expansionCapturesArgument", async (t) => {
-  await snapshotCase(t, "expansionCapturesArgument", cs`${rows}("row")`);
+  await snapshotCase(t, "expansionCapturesArgument", cs`$rows("row")`);
 });
 
 // A host function written inside a script, whose script reads the enclosing

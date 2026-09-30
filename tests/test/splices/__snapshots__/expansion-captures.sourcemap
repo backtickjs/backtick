@@ -8,22 +8,22 @@ cs.lift(                          → cs`
 cs.lift(                          → cs`
 <                                 → <
 li                                → li
->{cs.lift(                        → >{
-cs.splice(                        → ${ [-semantic]
-label                             → label
- satisfies typeof cs.Spliceable)  → } [-semantic]
+>{cs.lift(                        → >\n          {
+cs.splice(                        →  [-semantic]
+(label)                           → $label
+ satisfies typeof cs.Spliceable)  →  [-semantic]
 )} {cs.lift(                      → } {
 cs.splice(                        →  [-semantic]
 (n)                               → $n
  satisfies typeof cs.Spliceable)  →  [-semantic]
-)}</                              → }</
+)}</                              → }\n        </
 li                                → li
 >                                 → >
 )                                 → `
 cs.lift(                          → cs`
-cs.splice(                        → ${ [-semantic]
-rows                              → rows
- satisfies typeof cs.Spliceable)  → } [-semantic]
+cs.splice(                        →  [-semantic]
+(rows)                            → $rows
+ satisfies typeof cs.Spliceable)  →  [-semantic]
 (                                 → (
 "row"                             → "row"
 )                                 → )

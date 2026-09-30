@@ -12,13 +12,15 @@ import { snapshotCase } from "../snapshotCase.ts";
 const rows = (label: Client<string>) => (
   <ul>
     <For each={cs.lift([1, 2])}>
-      {(n: Client<number>) => cs.lift(<li>{cs.lift(cs.splice(label satisfies typeof cs.Spliceable))} {cs.lift(cs.splice((n) satisfies typeof cs.Spliceable))}</li>)}
+      {(n: Client<number>) =>
+        cs.lift(<li>{cs.lift(cs.splice((label) satisfies typeof cs.Spliceable))} {cs.lift(cs.splice((n) satisfies typeof cs.Spliceable))}</li>)
+      }
     </For>
   </ul>
 );
 
 it("expansionCapturesArgument", async (t) => {
-  await snapshotCase(t, "expansionCapturesArgument", cs.lift(cs.splice(rows satisfies typeof cs.Spliceable)("row")));
+  await snapshotCase(t, "expansionCapturesArgument", cs.lift(cs.splice((rows) satisfies typeof cs.Spliceable)("row")));
 });
 
 // A host function written inside a script, whose script reads the enclosing

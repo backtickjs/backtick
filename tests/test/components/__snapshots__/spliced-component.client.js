@@ -10,13 +10,13 @@
       {$splice1()}
     </div>
 
-// 30:10
+// 31:11
 ($splice0) => {
     const Heading = $splice0();
     return <Heading title="first"/>;
 }
 
-// 34:10
+// 37:11
 ($splice0) => {
     const Heading = $splice0();
     return <Heading title="second"/>;

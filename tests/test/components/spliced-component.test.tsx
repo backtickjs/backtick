@@ -27,14 +27,18 @@ it("splicedComponentTwice", async (t) => {
     t,
     "splicedComponentTwice",
     cs`<div>
-      {${cs`{
-        const Heading = $Card;
-        return <Heading title="first" />;
-      }`}}
-      {${cs`{
-        const Heading = $Card;
-        return <Heading title="second" />;
-      }`}}
+      {
+        ${cs`{
+          const Heading = $Card;
+          return <Heading title="first" />;
+        }`}
+      }
+      {
+        ${cs`{
+          const Heading = $Card;
+          return <Heading title="second" />;
+        }`}
+      }
     </div>`,
   );
 });

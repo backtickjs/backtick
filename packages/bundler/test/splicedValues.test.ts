@@ -73,9 +73,8 @@ test("host code can't compute with an argument", async () => {
   );
   await assert.rejects(
     () =>
-      bundler.run(
-        ((props: { count: number }) => (props.count > 5 ? "many" : "few")) as never,
-      ),
+      bundler.run(((props: { count: number }) =>
+        props.count > 5 ? "many" : "few") as never),
     /Can't compute with `\$arg0\.count` on the host/,
   );
 });
