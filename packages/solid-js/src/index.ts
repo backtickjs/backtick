@@ -131,6 +131,11 @@ export const unwrap = store("unwrap");
 // The DOM
 export const Dynamic = web("Dynamic");
 
+/** Solid's `render`, typed with the adapter's drawing: `code` into `element`. */
+export const render = createImport<
+  (code: () => JSX.Element, element: Node) => () => void
+>({ name: "render", from: "solid-js/web" });
+
 // Control flow, typed as components so a tag may name one in host JSX as well
 // as inside a script. None is callable on the host: JSX hands the import to the
 // bundler, which writes it as the tag.

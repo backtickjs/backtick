@@ -1,0 +1,15 @@
+// 25:5
+($splice0, $splice1, $splice2) =>   → 25:8 $render(()…
+$splice0()                          → 25:8 $render(()…
+(                                   → 25:15 (
+()                                  → 25:16 () 
+=>                                  → 25:19 =>
+$splice1()                          → 25:22 $element,…
+,                                   → 25:30 , 
+document                            → 25:32 document
+.                                   → 25:40 .
+getElementById                      → 25:41 getElementById
+(                                   → 25:55 (
+$splice2()                          → 25:56 $id)…
+)                                   → 25:59 )
+)                                   → 25:75 )

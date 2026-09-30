@@ -1,5 +1,20 @@
-import { importMap, renderToString } from "@backtickjs/solid-js/server";
+import { bundler } from "@backtickjs/bundler";
+import { cs } from "@backtickjs/core";
+import { render } from "@backtickjs/solid-js";
+import { solid } from "@backtickjs/solid-js/plugin";
+import { importMap } from "@backtickjs/solid-js/server";
 import { Main } from "./Main.js";
+
+// The client entry: the page's script, drawing `Main` into its container.
+const bundle = await bundler.build({
+  input: cs`$render(
+    () => ${(<Main />)},
+    document.getElementById("main") as HTMLElement,
+  )`,
+  external: Object.keys(importMap.imports),
+  plugins: [solid()],
+});
+const { code } = bundle.generate({ format: "es" });
 
 export const html = `<!doctype html>
 <html>
@@ -10,9 +25,8 @@ export const html = `<!doctype html>
     <script type="importmap">${JSON.stringify(importMap)}</script>
   </head>
   <body>
-    <div id="main" class="container">
-      ${await renderToString(() => <Main />)}
-    </div>
+    <div id="main" class="container"></div>
+    <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
   </body>
 </html>
 `;

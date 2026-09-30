@@ -1,0 +1,23 @@
+cs.lift(        → cs`
+cs.splice(      →  [-semantic]
+(render)        → $render
+)               →  [-semantic]
+(               → (
+() =>           → () => 
+cs.splice(      →  [-semantic]
+(element)       → $element
+)               →  [-semantic]
+,               → , 
+cs.globalThis.  → 
+document        → document
+.               → .
+getElementById  → getElementById
+(               → (
+cs.splice(      →  [-semantic]
+(id)            → $id
+)               →  [-semantic]
+)               → )
+ as             →  as 
+HTMLElement     → HTMLElement
+)               → )
+)               → `

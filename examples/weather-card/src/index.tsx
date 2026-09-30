@@ -1,8 +1,22 @@
+import { bundler } from "@backtickjs/bundler";
+import { cs } from "@backtickjs/core";
+import { render } from "@backtickjs/solid-js";
+import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { importMap, renderToString } from "@backtickjs/solid-js/server";
+import { importMap } from "@backtickjs/solid-js/server";
 import { WeatherCard } from "./WeatherCard.js";
 
 async function toHtml(element: JSX.Element): Promise<string> {
+  // The client entry: the page's script, drawing the element into its container.
+  const bundle = await bundler.build({
+    input: cs`$render(
+      () => $element,
+      document.getElementById("app") as HTMLElement,
+    )`,
+    external: Object.keys(importMap.imports),
+    plugins: [solid()],
+  });
+  const { code } = bundle.generate({ format: "es" });
   return `<!doctype html>
 <html>
   <head>
@@ -11,7 +25,8 @@ async function toHtml(element: JSX.Element): Promise<string> {
     <script type="importmap">${JSON.stringify(importMap)}</script>
   </head>
   <body>
-    ${await renderToString(() => element)}
+    <div id="app"></div>
+    <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
   </body>
 </html>`;
 }

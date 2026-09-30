@@ -1,23 +1,7 @@
-import { transformSync } from "@babel/core";
-import { bundler, type Plugin } from "@backtickjs/bundler";
+import { bundler } from "@backtickjs/bundler";
 import type { Spliceable } from "@backtickjs/core";
-import solid from "babel-preset-solid";
 import { importMap } from "./importMap.js";
-
-/**
- * Solid's compiler as a bundler plugin: the bundle's JSX as Solid's template
- * and DOM code, importing from `solid-js/web`.
- */
-export const compile: Plugin = (code, id) => {
-  const result = transformSync(code, {
-    filename: id,
-    babelrc: false,
-    configFile: false,
-    sourceMaps: true,
-    presets: [[solid, { moduleName: "solid-js/web", generate: "dom" }]],
-  })!;
-  return { code: result.code!, map: JSON.stringify(result.map) };
-};
+import { solid } from "./plugin.js";
 
 /**
  * A value as a module a page imports: built with Solid's compiler, against
@@ -31,7 +15,7 @@ export async function bundle(
   const built = await bundler.build({
     input: value,
     external: Object.keys(importMap.imports),
-    plugins: [compile],
+    plugins: [solid()],
   });
   const { code, map } = built.generate({ format: "es" });
   return { code, map };

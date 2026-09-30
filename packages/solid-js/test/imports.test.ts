@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createJsxElement, isClientImport } from "@backtickjs/core";
-import { compile } from "../dist/bundle.js";
+import { solid } from "../dist/plugin.js";
 import * as vocabulary from "../dist/index.js";
 import { importMap } from "../dist/importMap.js";
 import ts from "typescript";
@@ -82,7 +82,7 @@ describe("the import map", () => {
         children: ["a"],
       }),
       external: modules,
-      plugins: [compile],
+      plugins: [solid()],
     });
     const { code } = bundle.generate({ format: "es" });
     const written = [...code.matchAll(/^import .* from "([^"]+)";$/gm)].map(
