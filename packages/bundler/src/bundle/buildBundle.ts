@@ -51,6 +51,12 @@ type Capture = HostParam | string;
 
 // A host function as the bundle declares it: `$expn` and its number, what a
 // reference hands it, and its code.
+//
+// Curried, captures then arguments, where a script takes both in one list: a
+// script reference is a call answering the script's value, but a function's
+// is the function itself, which the client calls later with arguments of its
+// own. So a reference fixes the captures and leaves the arguments open, with
+// no parameter of its own to name, and so none to shadow.
 interface Declaration {
   readonly label: string;
   readonly captures: readonly Capture[];

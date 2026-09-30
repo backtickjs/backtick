@@ -18,9 +18,9 @@ export function expandJsxElement(
   if (shared) {
     return shared;
   }
-  const drawn = Promise.resolve(
+  const expansion = Promise.resolve(
     component(jsx.props as never) as Spliceable | Promise<Spliceable>,
   );
-  expansions.set(jsx, drawn);
-  return drawn;
+  expansions.set(jsx, expansion);
+  return expansion;
 }
