@@ -49,3 +49,19 @@ test("a host function expands once per bundle", async () => {
   await bundler.run(counted as never);
   assert.equal(runs, 2);
 });
+
+test("host code can't compute with an argument", async () => {
+  // The argument is a hole: the client has its value, so arithmetic on it has
+  // to be written in a script.
+  await assert.rejects(
+    () => bundler.run(((n: number) => n + 1) as never),
+    /Can't compute with `\$arg0` on the host/,
+  );
+  await assert.rejects(
+    () =>
+      bundler.run(
+        ((props: { count: number }) => (props.count > 5 ? "many" : "few")) as never,
+      ),
+    /Can't compute with `\$arg0\.count` on the host/,
+  );
+});

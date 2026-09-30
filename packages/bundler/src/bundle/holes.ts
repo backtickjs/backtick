@@ -5,9 +5,18 @@ import type { Client } from "@backtickjs/core";
 // surfaces in what the function answered, the bundle reads the expansion's
 // parameter of that name (see `render` in `buildBundle`), recognized here by
 // identity.
-const names = new WeakMap<object, string>();
+export interface Hole {
+  // The path the function read, as the bundle writes it: `$arg0`, or
+  // `$arg0.title` for a field of it.
+  readonly name: string;
+  // Which expansion made it, so a function answering a function can tell its
+  // own arguments from the enclosing one's, which print the same.
+  readonly expansion: object;
+}
 
-export function createHole(name: string): Client<never> {
+const holes = new WeakMap<object, Hole>();
+
+export function createHole(name: string, expansion: object): Client<never> {
   // Reading a member gives a hole of its own, named for the path. The value is
   // still opaque — what comes back is another sentinel, not anything to compute
   // with — so a function that takes one argument and reads fields off it
@@ -19,7 +28,16 @@ export function createHole(name: string): Client<never> {
     {},
     {
       get(_target, property) {
-        return createHole(`${name}.${String(property)}`);
+        // What arithmetic, comparison and string building ask for first: the
+        // host is computing with a value it doesn't have.
+        if (property === Symbol.toPrimitive) {
+          throw new Error(
+            `Can't compute with \`${name}\` on the host: it stands for a ` +
+              "value only the client has. Compute with it inside a script " +
+              "(cs`...`) instead.",
+          );
+        }
+        return createHole(`${name}.${String(property)}`, expansion);
       },
       set(_target, property) {
         throw new Error(
@@ -39,12 +57,12 @@ export function createHole(name: string): Client<never> {
       },
     },
   );
-  names.set(hole, name);
+  holes.set(hole, { name, expansion });
   return hole as unknown as Client<never>;
 }
 
-export function holeName(value: unknown): string | undefined {
+export function holeOf(value: unknown): Hole | undefined {
   return typeof value === "object" && value !== null
-    ? names.get(value)
+    ? holes.get(value)
     : undefined;
 }

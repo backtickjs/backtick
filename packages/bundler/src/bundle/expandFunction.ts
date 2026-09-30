@@ -43,8 +43,11 @@ export function expandFunction(
 async function buildExpansion(
   value: (...args: never[]) => unknown,
 ): Promise<Expansion> {
+  // Which expansion a hole belongs to, by identity: nothing is counted, and
+  // nothing outlives the bundle.
+  const expansion = {};
   const params = Array.from({ length: value.length }, (_, at) => `$arg${at}`);
-  const holes = params.map(createHole);
+  const holes = params.map((param) => createHole(param, expansion));
   const returned = value(...(holes as never[])) as
     | Spliceable
     | Promise<Spliceable>;

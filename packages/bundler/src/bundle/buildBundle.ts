@@ -8,7 +8,7 @@ import { isClientImport, type Spliceable } from "@backtickjs/core";
 
 import { expandFunction, type FunctionExpansions } from "./expandFunction.js";
 import { type ElementExpansions, expandJsxElement } from "./expandJsxElement.js";
-import { holeName } from "./holes.js";
+import { holeOf } from "./holes.js";
 import { bindingsOf, capturesOf } from "./params.js";
 import { sourceName } from "./bindingKey.js";
 import {
@@ -192,9 +192,9 @@ export async function buildBundle(value: Spliceable): Promise<BundleTree> {
     // A hole sentinel a host function stored somewhere in what it answered: the
     // client argument it stands for has no value until the client runs, so it
     // is a reference to the enclosing expansion's parameter.
-    const hole = holeName(value);
+    const hole = holeOf(value);
     if (hole !== undefined) {
-      return holeRead(hole);
+      return holeRead(hole.name);
     }
     if (isClientScript(value)) {
       const target = scriptFor(value);
