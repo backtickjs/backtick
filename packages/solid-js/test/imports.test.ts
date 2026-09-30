@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
@@ -9,17 +8,17 @@ import * as vocabulary from "../dist/index.js";
 import { importMap } from "../dist/importMap.js";
 import ts from "typescript";
 
+// The import map with the installed package as its URL, so each entry
+// resolves here to the file a page would load.
+const { imports } = importMap("solid-js");
+
 // The modules the import map maps: all a Solid client provides.
-const modules = Object.keys(importMap.imports);
+const modules = Object.keys(imports);
 
 // A module as a page loads it: the browser build the import map points at,
 // not the server build Node resolves `solid-js` to.
 const load = (from: string): Promise<Record<string, unknown>> =>
-  import(
-    import.meta.resolve(
-      `solid-js/${importMap.imports[from]!.replace(/^.*\/solid-js@[^/]+\//, "")}`,
-    )
-  );
+  import(import.meta.resolve(imports[from]!));
 
 describe("Solid's API", () => {
   it("names what its module exports, under the name it is imported as", async () => {
@@ -94,16 +93,7 @@ describe("the import map", () => {
     }
   });
 
-  // The adapter takes Solid's version, which the import map loads.
-  it("loads the Solid of the adapter's version", () => {
-    const { version } = JSON.parse(
-      readFileSync(new URL("../package.json", import.meta.url), "utf8"),
-    ) as { version: string };
-    for (const url of Object.values(importMap.imports)) {
-      assert.match(
-        url,
-        new RegExp(`/solid-js@${version.replaceAll(".", "\\.")}/`),
-      );
-    }
+  it("takes the package's URL with or without a trailing slash", () => {
+    assert.deepEqual(importMap("https://x.test/solid-js/"), importMap("https://x.test/solid-js"));
   });
 });

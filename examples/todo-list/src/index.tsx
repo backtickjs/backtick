@@ -6,6 +6,9 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { importMap } from "@backtickjs/solid-js/server";
 import { TodoList } from "./TodoList.js";
 
+// Solid from a CDN, at the version the adapter is typed against.
+const map = importMap("https://cdn.jsdelivr.net/npm/solid-js@1.9.14");
+
 async function toHtml(element: JSX.Element): Promise<string> {
   // The client entry: the page's script, drawing the element into its container.
   const bundle = await bundler.build({
@@ -13,7 +16,7 @@ async function toHtml(element: JSX.Element): Promise<string> {
       () => $element,
       document.getElementById("app") as HTMLElement,
     )`,
-    external: Object.keys(importMap.imports),
+    external: Object.keys(map.imports),
     plugins: [solid()],
   });
   const { code } = bundle.generate({ format: "es" });
@@ -22,7 +25,7 @@ async function toHtml(element: JSX.Element): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="importmap">${JSON.stringify(importMap)}</script>
+    <script type="importmap">${JSON.stringify(map)}</script>
   </head>
   <body>
     <div id="app"></div>

@@ -7,7 +7,7 @@
 // users hit at runtime, not a cosmetic inconsistency.
 //
 // Adapters are the exception: an adapter's version is its framework's, which
-// it pins exactly, and its import map points at.
+// it pins exactly.
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 

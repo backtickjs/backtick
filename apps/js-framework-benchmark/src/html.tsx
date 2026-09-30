@@ -5,13 +5,16 @@ import { solid } from "@backtickjs/solid-js/plugin";
 import { importMap } from "@backtickjs/solid-js/server";
 import { Main } from "./Main.js";
 
+// Solid from a CDN, at the version the adapter is typed against.
+const map = importMap("https://cdn.jsdelivr.net/npm/solid-js@1.9.14");
+
 // The client entry: the page's script, drawing `Main` into its container.
 const bundle = await bundler.build({
   input: cs`$render(
     () => ${(<Main />)},
     document.getElementById("main") as HTMLElement,
   )`,
-  external: Object.keys(importMap.imports),
+  external: Object.keys(map.imports),
   plugins: [solid()],
 });
 const { code } = bundle.generate({ format: "es" });
@@ -22,7 +25,7 @@ export const html = `<!doctype html>
     <meta charset="utf-8">
     <title>Backtick-"keyed"</title>
     <link href="/css/currentStyle.css" rel="stylesheet">
-    <script type="importmap">${JSON.stringify(importMap)}</script>
+    <script type="importmap">${JSON.stringify(map)}</script>
   </head>
   <body>
     <div id="main" class="container"></div>

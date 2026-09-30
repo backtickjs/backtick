@@ -29,7 +29,7 @@ export async function bundle(
 ): Promise<{ code: string; map: string }> {
   const built = await bundler.build({
     input: value,
-    external: [...Object.keys(importMap.imports), "app"],
+    external: [...Object.keys(importMap("solid-js").imports), "app"],
     plugins: [solid()],
   });
   return built.generate({ format: "es" });
