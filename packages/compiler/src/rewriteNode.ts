@@ -345,6 +345,15 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isNonNullExpression(node)) {
+    const asserted = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createNonNullExpression(
+        asserted.virtual as ts.Expression,
+      ),
+    };
+  }
+
   if (ts.isReturnStatement(node) && !node.expression) {
     return {
       virtual: ts.factory.createReturnStatement(),

@@ -2,24 +2,25 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { it } from "node:test";
 import * as vocabulary from "../dist/index.js";
-import { version } from "../dist/version.js";
 
 const versionOf = (url: URL): string =>
   (JSON.parse(readFileSync(url, "utf8")) as { version: string }).version;
 
-it("is the adapter's version", () => {
-  assert.equal(version, versionOf(new URL("../package.json", import.meta.url)));
+// Every name needs the Solid the adapter is typed against, or a later 1.x.
+const ranges = new Set(Object.values(vocabulary).map((value) => value.version));
+
+it("is one range for every name", () => {
+  assert.equal(ranges.size, 1);
 });
 
-it("is the version of the installed solid-js", () => {
-  assert.equal(
-    version,
-    versionOf(new URL(import.meta.resolve("solid-js/package.json"))),
+it("starts at the adapter's version", () => {
+  const version = versionOf(new URL("../package.json", import.meta.url));
+  assert.deepEqual([...ranges], [`^${version}`]);
+});
+
+it("starts at the installed solid-js", () => {
+  const version = versionOf(
+    new URL(import.meta.resolve("solid-js/package.json")),
   );
-});
-
-it("is what every name needs, or a later 1.x", () => {
-  for (const [name, value] of Object.entries(vocabulary)) {
-    assert.equal(value.version, `^${version}`, name);
-  }
+  assert.deepEqual([...ranges], [`^${version}`]);
 });

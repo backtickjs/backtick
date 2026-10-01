@@ -3,7 +3,6 @@ import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";
 import type { JSX, Prop } from "./jsx-runtime.js";
-import { version } from "./version.js";
 
 // Solid's API as a script splices it — `$createSignal(0)` — each typed with
 // Solid's own declarations, and each imported from Solid by the bundle that
@@ -60,8 +59,9 @@ export type {
 // The adapter's, where Solid's names its own: what a tag is typed through here.
 export type { JSX } from "./jsx-runtime.js";
 
-// What every name needs: the Solid it is typed against, or a later 1.x.
-const range = `^${version}`;
+// What every name needs: the Solid it is typed against (the adapter's version,
+// and its `solid-js` dependency), or a later 1.x.
+const range = "^1.9.14";
 
 const solid = <Name extends keyof typeof Solid>(name: Name) =>
   createImport<(typeof Solid)[Name]>({

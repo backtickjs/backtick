@@ -1,0 +1,34 @@
+(        → expressions/non-null-assertion.test.tsx 12:8 {…
+) => {   → expressions/non-null-assertion.test.tsx 12:8 {…
+const    → expressions/non-null-assertion.test.tsx 13:7 const 
+rows     → expressions/non-null-assertion.test.tsx 13:13 rows
+ =       → expressions/non-null-assertion.test.tsx 13:17  = 
+[        → expressions/non-null-assertion.test.tsx 13:20 [
+1        → expressions/non-null-assertion.test.tsx 13:21 1
+,        → expressions/non-null-assertion.test.tsx 13:22 , 
+2        → expressions/non-null-assertion.test.tsx 13:24 2
+,        → expressions/non-null-assertion.test.tsx 13:25 , 
+3        → expressions/non-null-assertion.test.tsx 13:27 3
+]        → expressions/non-null-assertion.test.tsx 13:28 ]
+;        → expressions/non-null-assertion.test.tsx 13:29 ;
+const    → expressions/non-null-assertion.test.tsx 14:7 const 
+first    → expressions/non-null-assertion.test.tsx 14:13 first
+ =       → expressions/non-null-assertion.test.tsx 14:18  = 
+rows     → expressions/non-null-assertion.test.tsx 14:21 rows
+.        → expressions/non-null-assertion.test.tsx 14:25 .
+find     → expressions/non-null-assertion.test.tsx 14:26 find
+(        → expressions/non-null-assertion.test.tsx 14:30 (
+row      → expressions/non-null-assertion.test.tsx 14:32 row
+ =>      → expressions/non-null-assertion.test.tsx 14:35 )…
+row      → expressions/non-null-assertion.test.tsx 14:40 row
+ >       → expressions/non-null-assertion.test.tsx 14:43  > 
+1        → expressions/non-null-assertion.test.tsx 14:46 1
+)        → expressions/non-null-assertion.test.tsx 14:47 )
+;        → expressions/non-null-assertion.test.tsx 14:49 ;
+return   → expressions/non-null-assertion.test.tsx 16:7 return 
+first    → expressions/non-null-assertion.test.tsx 16:14 first
+ *       → expressions/non-null-assertion.test.tsx 16:19  * 
+10       → expressions/non-null-assertion.test.tsx 16:22 10
+;        → expressions/non-null-assertion.test.tsx 16:24 ;
+}        → expressions/non-null-assertion.test.tsx 17:5 }
+;        → expressions/non-null-assertion.test.tsx 17:6 `,…

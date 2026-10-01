@@ -1,7 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import type { Client, Spliceable, Spliced } from "@backtickjs/core";
 import { solid } from "@backtickjs/solid-js/plugin";
-import { version } from "@backtickjs/solid-js/version";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import type { JSX as Solid } from "solid-js";
 
@@ -29,7 +28,7 @@ export async function bundle(
 ): Promise<{ code: string; map: string }> {
   const built = await bundler.build({
     input: value,
-    external: { "solid-js": version, app: "1.0.0" },
+    external: { "solid-js": "1.9.14", app: "1.0.0" },
     plugins: [solid()],
   });
   const { code, map } = built.generate({ format: "es", sourcemap: "hidden" });

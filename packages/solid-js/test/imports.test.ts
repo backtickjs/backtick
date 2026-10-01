@@ -1,12 +1,17 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createJsxElement, isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
 import * as vocabulary from "../dist/index.js";
-import { version } from "../dist/version.js";
 import ts from "typescript";
+
+// The Solid these tests' client loads: the installed one.
+const { version: solidVersion } = JSON.parse(
+  readFileSync(new URL(import.meta.resolve("solid-js/package.json")), "utf8"),
+) as { version: string };
 
 // What a page's import map maps, as the examples write it: each module a
 // bundle may import, by the file in the `solid-js` package that is its browser
@@ -86,7 +91,7 @@ describe("a page's import map", () => {
         onclick: vocabulary.batch,
         children: ["a"],
       }),
-      external: { "solid-js": version },
+      external: { "solid-js": solidVersion },
       plugins: [solid()],
     });
     const { code } = bundle.generate({ format: "es" });
