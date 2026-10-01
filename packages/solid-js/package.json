@@ -21,10 +21,6 @@
       "types": "./dist/plugin.d.ts",
       "default": "./dist/plugin.js"
     },
-    "./import-map": {
-      "types": "./dist/import-map.d.ts",
-      "default": "./dist/import-map.js"
-    },
     "./version": {
       "types": "./dist/version.d.ts",
       "default": "./dist/version.js"

@@ -3,13 +3,9 @@ import { cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js";
 import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import { importMap } from "@backtickjs/solid-js/import-map";
 import { version } from "@backtickjs/solid-js/version";
 import { Scoreboard } from "./Scoreboard.js";
 import { load, SLATE_PATH } from "./scores.js";
-
-// Solid from a CDN, at the version the adapter is typed against.
-const map = importMap(`https://cdn.jsdelivr.net/npm/solid-js@${version}`);
 
 // In development, a map into the host files in each bundle, for devtools.
 const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
@@ -30,7 +26,15 @@ async function toHtml(element: JSX.Element): Promise<string> {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="importmap">${JSON.stringify(map)}</script>
+    <script type="importmap">
+      {
+        "imports": {
+          "solid-js": "https://cdn.jsdelivr.net/npm/solid-js@${version}/dist/solid.js",
+          "solid-js/web": "https://cdn.jsdelivr.net/npm/solid-js@${version}/web/dist/web.js",
+          "solid-js/store": "https://cdn.jsdelivr.net/npm/solid-js@${version}/store/dist/store.js"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

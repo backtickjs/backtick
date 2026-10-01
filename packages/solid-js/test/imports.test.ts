@@ -5,21 +5,23 @@ import { bundler } from "@backtickjs/bundler";
 import { createJsxElement, isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
 import * as vocabulary from "../dist/index.js";
-import { importMap } from "../dist/import-map.js";
 import { version } from "../dist/version.js";
 import ts from "typescript";
 
-// The import map with the installed package as its URL, so each entry
-// resolves here to the file a page would load.
-const { imports } = importMap("solid-js");
+// What a page's import map maps, as the examples write it: each module a
+// bundle may import, by the file in the `solid-js` package that is its browser
+// build.
+const browserBuilds: Record<string, string> = {
+  "solid-js": "dist/solid.js",
+  "solid-js/web": "web/dist/web.js",
+  "solid-js/store": "store/dist/store.js",
+};
+const modules = Object.keys(browserBuilds);
 
-// The modules the import map maps: all a Solid client provides.
-const modules = Object.keys(imports);
-
-// A module as a page loads it: the browser build the import map points at,
+// A module as a page loads it: its browser build, in the installed package,
 // not the server build Node resolves `solid-js` to.
 const load = (from: string): Promise<Record<string, unknown>> =>
-  import(import.meta.resolve(imports[from]!));
+  import(import.meta.resolve(`solid-js/${browserBuilds[from]}`));
 
 describe("Solid's API", () => {
   it("names what its module exports, under the name it is imported as", async () => {
@@ -64,9 +66,9 @@ describe("Solid's API", () => {
   });
 });
 
-// The import map must cover everything a bundle imports: the vocabulary's
-// imports, and what Solid's compiler writes imports of.
-describe("the import map", () => {
+// A page's import map must cover everything a bundle imports: the
+// vocabulary's imports, and what Solid's compiler writes imports of.
+describe("a page's import map", () => {
   it("maps every import's module", () => {
     for (const [name, value] of Object.entries(vocabulary)) {
       assert.ok(isClientImport(value));
@@ -95,12 +97,5 @@ describe("the import map", () => {
     for (const from of written) {
       assert.ok(modules.includes(from), from);
     }
-  });
-
-  it("takes the package's URL with or without a trailing slash", () => {
-    assert.deepEqual(
-      importMap("https://x.test/solid-js/"),
-      importMap("https://x.test/solid-js"),
-    );
   });
 });
