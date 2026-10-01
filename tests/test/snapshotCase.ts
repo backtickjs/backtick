@@ -9,8 +9,8 @@ import { renderDrawing } from "./renderMarkup.ts";
 import { renderValue } from "./renderValue.ts";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { bundle, evaluate } from "./evaluate.ts";
+import { inRoot } from "./inRoot.tsx";
 import { render } from "@solidjs/testing-library";
-import { createRoot } from "solid-js";
 
 // Written as given: each artifact is text meant to be read in its own file.
 const verbatim = [(value: unknown) => value as string];
@@ -44,8 +44,8 @@ export async function snapshotCase(
   const { code, map } = await bundle(value);
   record(await prettier.format(code, { parser: "babel" }), "bundle");
   record(`${renderBundleMappings(code, map)}\n`, "bundle.sourcemap");
-  // Run as a Solid user would draw it: a function Solid calls in a root.
-  const evaluated = createRoot(await evaluate(() => value));
+  // Run in a root, in client code, as every value test is.
+  const evaluated = await evaluate(inRoot(value));
   const drawn =
     isNode(evaluated) || (Array.isArray(evaluated) && evaluated.some(isNode));
   // Rendered only once evaluating it showed it draws.

@@ -2,7 +2,7 @@ import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
-import type { Signal } from "solid-js";
+import type { Signal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 const make = (f: Client<(n: number) => Signal<number>>) =>

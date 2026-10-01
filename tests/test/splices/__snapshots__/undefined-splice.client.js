@@ -1,8 +1,8 @@
-// 13:44
-($splice0) => () => $splice0()
+// 13:33
+($splice0, $splice1) => $splice0()(() => $splice1())
 
-// 18:47
-($splice0) => () => $splice0()
+// 18:36
+($splice0, $splice1) => $splice0()(() => $splice1())
 
-// 25:48
-($splice0) => () => $splice0()
+// 25:37
+($splice0, $splice1) => $splice0()(() => $splice1())

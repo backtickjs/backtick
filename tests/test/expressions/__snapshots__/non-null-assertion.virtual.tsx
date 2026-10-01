@@ -11,7 +11,7 @@ it("nonNullAssertion", async (t) => {
     "nonNullAssertion",
     cs.lift((() => {
     const __cs_rows = [1, 2, 3];
-    const __cs_first = cs.globalThis.rows.find(__cs_row => cs.globalThis.row > 1)!;
+    const __cs_first = __cs_rows.find(__cs_row => __cs_row > 1)!;
     return __cs_first * 10;
 })()),
   );

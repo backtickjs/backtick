@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
-import type { Signal } from "solid-js";
+import type { Signal } from "@backtickjs/solid-js";
 import { snapshotCase } from "../snapshotCase.ts";
 
 type Row = {

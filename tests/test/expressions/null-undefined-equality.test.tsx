@@ -2,25 +2,25 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "solid-js";
+import { createRoot } from "@backtickjs/solid-js";
 
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {
   it("are each equal to themselves", async () => {
-    assert.equal(createRoot(await evaluate(cs`() => null === null`)), true);
+    assert.equal(await evaluate(cs`$createRoot(() => null === null)`), true);
     assert.equal(
-      createRoot(await evaluate(cs`() => undefined === undefined`)),
+      await evaluate(cs`$createRoot(() => undefined === undefined)`),
       true,
     );
   });
 
   it("are not equal to each other", async () => {
     assert.equal(
-      createRoot(await evaluate(cs`() => null !== undefined`)),
+      await evaluate(cs`$createRoot(() => null !== undefined)`),
       true,
     );
     assert.equal(
-      createRoot(await evaluate(cs`() => null === undefined`)),
+      await evaluate(cs`$createRoot(() => null === undefined)`),
       false,
     );
   });
@@ -31,19 +31,17 @@ describe("null and undefined", () => {
     const nothing: number | undefined = undefined;
     const empty = null;
     assert.deepEqual(
-      createRoot(
-        await evaluate(cs`() => {
-          const names = ["a"];
-          return [
-            $nothing === undefined,
-            $nothing !== null,
-            $empty === null,
-            $empty !== undefined,
-            names[1] === undefined,
-            names[1] !== null,
-          ];
-        }`),
-      ),
+      await evaluate(cs`$createRoot(() => {
+        const names = ["a"];
+        return [
+          $nothing === undefined,
+          $nothing !== null,
+          $empty === null,
+          $empty !== undefined,
+          names[1] === undefined,
+          names[1] !== null,
+        ];
+      })`),
       [true, true, true, true, true, true],
     );
   });

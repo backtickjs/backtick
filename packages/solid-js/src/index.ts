@@ -146,6 +146,7 @@ export const unwrap = store("unwrap");
 
 // The DOM
 export const Dynamic = web("Dynamic");
+export const insert = web("insert");
 
 /** Solid's `render`, typed with the adapter's drawing: `code` into `element`. */
 export const render = createImport<

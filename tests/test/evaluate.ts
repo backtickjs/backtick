@@ -2,14 +2,14 @@ import { bundler } from "@backtickjs/bundler";
 import type { Client, Spliceable, Spliced } from "@backtickjs/core";
 import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
-import type { JSX as Solid } from "solid-js";
+import type { JSXElement } from "@backtickjs/solid-js";
 
 /**
  * What evaluating a bundle answers: what a script evaluates to, what a host
  * function becomes on the client, and Solid's own element for a drawing.
  */
 export type Evaluated<T> = T extends JSX.Element
-  ? Solid.Element
+  ? JSXElement
   : T extends Client<infer Value>
     ? Evaluated<Value>
     : T extends (...args: infer Args) => infer Returned
@@ -46,8 +46,13 @@ export async function evaluate<T extends Spliceable>(
   value: T,
 ): Promise<Evaluated<T>> {
   const { code } = await bundle(value);
+  // A module is evaluated once per URL, so each call's is its own: the same
+  // bundle twice still runs twice, as two page loads would.
+  const evaluation = `\n// evaluation ${evaluations++}`;
   const module = (await import(
-    `data:text/javascript,${encodeURIComponent(code)}`
+    `data:text/javascript,${encodeURIComponent(code + evaluation)}`
   )) as { default: Evaluated<T> };
   return module.default;
 }
+
+let evaluations = 0;

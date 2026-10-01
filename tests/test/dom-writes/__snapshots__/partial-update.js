@@ -12,7 +12,7 @@ import { evaluate } from "../evaluate.ts";
 // text, and nothing else: no row is rebuilt, and no other row hears of it.
 async function Labels() {
   return cs.create(
-    "3mc1uobpga9ss:15:9",
+    "2gmqev1zv5x1m:15:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },

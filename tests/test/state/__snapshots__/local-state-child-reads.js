@@ -20,7 +20,7 @@ const ReadingRow = async ({ id, selected }) =>
     children: [
       _jsx("span", {
         style: cs.create(
-          "3td9u6rlq79le:28:17",
+          "3ty27fz4zq9n4:28:17",
           {
             params: [
               { kind: "splice", value: selected, bindings: [] },
@@ -31,7 +31,7 @@ const ReadingRow = async ({ id, selected }) =>
           '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AA2BoB,wBAAA,aAAa,GAAG,CAAC,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI"}',
         ),
         children: cs.create(
-          "3td9u6rlq79le:29:7",
+          "3ty27fz4zq9n4:29:7",
           {
             params: [
               { kind: "splice", value: id, bindings: [] },
@@ -43,7 +43,7 @@ const ReadingRow = async ({ id, selected }) =>
         ),
       }),
       cs.create(
-        "3td9u6rlq79le:31:5",
+        "3ty27fz4zq9n4:31:5",
         {
           params: [
             { kind: "splice", value: selected, bindings: [] },
@@ -62,7 +62,7 @@ const ReadingRow = async ({ id, selected }) =>
   });
 async function ReadingPanel() {
   return cs.create(
-    "3td9u6rlq79le:36:9",
+    "3ty27fz4zq9n4:36:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },

@@ -1,24 +1,24 @@
-// 10:44
-() => () => null === null
+// 10:33
+($splice0) => $splice0()(() => null === null)
 
-// 11:44
-() => () => undefined === undefined
+// 12:22
+($splice0) => $splice0()(() => undefined === undefined)
 
-// 15:44
-() => () => null !== undefined
+// 19:22
+($splice0) => $splice0()(() => null !== undefined)
 
-// 16:44
-() => () => null === undefined
+// 23:22
+($splice0) => $splice0()(() => null === undefined)
 
-// 26:24
-($splice0, $splice1) => () => {
+// 34:22
+($splice0, $splice1, $splice2) => $splice0()(() => {
     const names = ["a"];
     return [
-        $splice0() === undefined,
-        $splice0() !== null,
-        $splice1() === null,
-        $splice1() !== undefined,
+        $splice1() === undefined,
+        $splice1() !== null,
+        $splice2() === null,
+        $splice2() !== undefined,
         names[1] === undefined,
         names[1] !== null,
     ];
-}
+})

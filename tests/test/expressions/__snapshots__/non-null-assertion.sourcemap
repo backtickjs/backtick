@@ -14,15 +14,13 @@ __cs_rows               → rows
 const                   → const 
 __cs_first              → first
  =                      →  = 
-cs.globalThis.          → 
-rows                    → rows
+__cs_rows               → rows
 .                       → .
 find                    → find
 (                       → (
 __cs_row                → row
  =>                     → ) => 
-cs.globalThis.          → 
-row                     → row
+__cs_row                → row
  >                      →  > 
 1                       → 1
 )                       → )

@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // here, not data, which is what a signal declared where it is evaluated allows.
 async function MemberRows() {
   return cs.create(
-    "29y7yt4pe8mj3:20:9",
+    "3i0bbei0uxpv9:20:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },

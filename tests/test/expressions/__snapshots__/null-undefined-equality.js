@@ -2,32 +2,28 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { evaluate } from "../evaluate.ts";
-import { createRoot } from "solid-js";
+import { createRoot } from "@backtickjs/solid-js";
 // `null` and `undefined` are two values, each equal only to itself.
 describe("null and undefined", () => {
   it("are each equal to themselves", async () => {
     assert.equal(
-      createRoot(
-        await evaluate(
-          cs.create(
-            "2ta5py37tqm4x:10:43",
-            { params: [] },
-            "() => () => null === null",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAS8C,MAAA,GAAG,EAAE,CAAC,IAAI,KAAK,IAAI"}',
-          ),
+      await evaluate(
+        cs.create(
+          "dggvpbrq8knn:10:32",
+          { params: [{ kind: "splice", value: createRoot, bindings: [] }] },
+          "($splice0) => $splice0()(() => null === null)",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AASmC,cAAA,UAAW,CAAC,GAAG,EAAE,CAAC,IAAI,KAAK,IAAI,CAAC"}',
         ),
       ),
       true,
     );
     assert.equal(
-      createRoot(
-        await evaluate(
-          cs.create(
-            "2ta5py37tqm4x:11:43",
-            { params: [] },
-            "() => () => undefined === undefined",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAU8C,MAAA,GAAG,EAAE,CAAC,SAAS,KAAK,SAAS"}',
-          ),
+      await evaluate(
+        cs.create(
+          "dggvpbrq8knn:12:21",
+          { params: [{ kind: "splice", value: createRoot, bindings: [] }] },
+          "($splice0) => $splice0()(() => undefined === undefined)",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAWwB,cAAA,UAAW,CAAC,GAAG,EAAE,CAAC,SAAS,KAAK,SAAS,CAAC"}',
         ),
       ),
       true,
@@ -35,27 +31,23 @@ describe("null and undefined", () => {
   });
   it("are not equal to each other", async () => {
     assert.equal(
-      createRoot(
-        await evaluate(
-          cs.create(
-            "2ta5py37tqm4x:15:43",
-            { params: [] },
-            "() => () => null !== undefined",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAc8C,MAAA,GAAG,EAAE,CAAC,IAAI,KAAK,SAAS"}',
-          ),
+      await evaluate(
+        cs.create(
+          "dggvpbrq8knn:19:21",
+          { params: [{ kind: "splice", value: createRoot, bindings: [] }] },
+          "($splice0) => $splice0()(() => null !== undefined)",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAkBwB,cAAA,UAAW,CAAC,GAAG,EAAE,CAAC,IAAI,KAAK,SAAS,CAAC"}',
         ),
       ),
       true,
     );
     assert.equal(
-      createRoot(
-        await evaluate(
-          cs.create(
-            "2ta5py37tqm4x:16:43",
-            { params: [] },
-            "() => () => null === undefined",
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAe8C,MAAA,GAAG,EAAE,CAAC,IAAI,KAAK,SAAS"}',
-          ),
+      await evaluate(
+        cs.create(
+          "dggvpbrq8knn:23:21",
+          { params: [{ kind: "splice", value: createRoot, bindings: [] }] },
+          "($splice0) => $splice0()(() => null === undefined)",
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAsBwB,cAAA,UAAW,CAAC,GAAG,EAAE,CAAC,IAAI,KAAK,SAAS,CAAC"}',
         ),
       ),
       false,
@@ -67,19 +59,18 @@ describe("null and undefined", () => {
     const nothing = undefined;
     const empty = null;
     assert.deepEqual(
-      createRoot(
-        await evaluate(
-          cs.create(
-            "2ta5py37tqm4x:26:23",
-            {
-              params: [
-                { kind: "splice", value: nothing, bindings: [] },
-                { kind: "splice", value: empty, bindings: [] },
-              ],
-            },
-            '($splice0, $splice1) => () => {\n    const names = ["a"];\n    return [\n        $splice0() === undefined,\n        $splice0() !== null,\n        $splice1() === null,\n        $splice1() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n}',
-            '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAyB0B,wBAAA,GAAG,EAAE;IACrB,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,UAAQ,KAAK,SAAS;QACtB,UAAQ,KAAK,IAAI;QACjB,UAAM,KAAK,IAAI;QACf,UAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC"}',
-          ),
+      await evaluate(
+        cs.create(
+          "dggvpbrq8knn:34:21",
+          {
+            params: [
+              { kind: "splice", value: createRoot, bindings: [] },
+              { kind: "splice", value: nothing, bindings: [] },
+              { kind: "splice", value: empty, bindings: [] },
+            ],
+          },
+          '($splice0, $splice1, $splice2) => $splice0()(() => {\n    const names = ["a"];\n    return [\n        $splice1() === undefined,\n        $splice1() !== null,\n        $splice2() === null,\n        $splice2() !== undefined,\n        names[1] === undefined,\n        names[1] !== null,\n    ];\n})',
+          '{"version":3,"file":"null-undefined-equality.test.jsx","sourceRoot":"","sources":["expressions/null-undefined-equality.test.tsx"],"names":[],"mappings":"AAiCwB,kCAAA,UAAW,CAAC,GAAG,EAAE;IACjC,MAAM,KAAK,GAAG,CAAC,GAAG,CAAC,CAAC;IACpB,OAAO;QACL,UAAQ,KAAK,SAAS;QACtB,UAAQ,KAAK,IAAI;QACjB,UAAM,KAAK,IAAI;QACf,UAAM,KAAK,SAAS;QACpB,KAAK,CAAC,CAAC,CAAC,KAAK,SAAS;QACtB,KAAK,CAAC,CAAC,CAAC,KAAK,IAAI;KAClB,CAAC;AACJ,CAAC,CAAC"}',
         ),
       ),
       [true, true, true, true, true, true],

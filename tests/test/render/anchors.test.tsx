@@ -2,9 +2,7 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { evaluate } from "../evaluate.ts";
 import { cs } from "@backtickjs/core";
-import { createSignal, For } from "@backtickjs/solid-js";
-import { createRoot } from "solid-js";
-import { insert } from "solid-js/web";
+import { createRoot, createSignal, For, insert } from "@backtickjs/solid-js";
 import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -74,6 +72,7 @@ afterEach(() => {
 // A target in the page holding the markup given, as a page's own would.
 function target(html: string): Element {
   const main = document.createElement("main");
+  main.id = `target-${undo.length}`;
   main.innerHTML = html;
   document.body.append(main);
   undo.push(() => main.remove());
@@ -81,17 +80,18 @@ function target(html: string): Element {
 }
 
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
-// these insert at it with Solid directly.
+// these insert at it with Solid's `insert`, in a root, in client code.
 async function drawAt(
   value: JSX.Element,
   parent: Element,
   selector: string,
 ): Promise<void> {
-  const drawing = await evaluate(() => value);
-  const unmount = createRoot((dispose) => {
-    insert(parent, drawing(), parent.querySelector(selector)!);
+  const id = parent.id;
+  const unmount = await evaluate(cs`$createRoot((dispose: () => void) => {
+    const parent = document.getElementById($id)!;
+    $insert(parent, $value, parent.querySelector($selector));
     return dispose;
-  });
+  })`);
   undo.push(unmount);
 }
 

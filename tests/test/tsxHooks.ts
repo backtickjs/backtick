@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
-import type { LoadHook, ResolveHook } from "node:module";
+import { createRequire, type LoadHook, type ResolveHook } from "node:module";
 import { dirname, relative } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { transpile } from "@backtickjs/compiler";
 import ts from "typescript";
 
@@ -36,6 +36,10 @@ export const load: LoadHook = async (url, context, nextLoad) => {
 // app adds beside it (see `stdlib/target-builtins.test.tsx`).
 const APP = new URL("./stdlib/app.ts", import.meta.url).href;
 
+const ADAPTER = pathToFileURL(
+  createRequire(import.meta.url).resolve("@backtickjs/solid-js"),
+).href;
+
 export const resolve: ResolveHook = (specifier, context, nextResolve) => {
   if (specifier === "app") {
     return { url: APP, shortCircuit: true };
@@ -43,7 +47,8 @@ export const resolve: ResolveHook = (specifier, context, nextResolve) => {
   if (specifier === "solid-js" || specifier.startsWith("solid-js/")) {
     return nextResolve(specifier, {
       ...context,
-      parentURL: import.meta.url,
+      // The adapter's Solid, the one its names are typed against.
+      parentURL: ADAPTER,
       conditions: ["browser", ...context.conditions],
     });
   }

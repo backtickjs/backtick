@@ -79,3 +79,56 @@ For                     → For
 )}</>                   → \n      </>\n    )
 ;                       → ;
 \n})())                 → \n  }`
+cs.lift(                → cs`
+cs.splice(              →  [-semantic]
+(createRoot)            → $createRoot
+)                       →  [-semantic]
+(                       → (
+(                       → (
+__cs_dispose            → dispose
+:                       → : 
+() =>                   → () => 
+void                    → void
+) => {\n                → ) => {\n    
+const                   → const 
+__cs_parent             → parent
+ =                      →  = 
+cs.globalThis.          → 
+document                → document
+.                       → .
+getElementById          → getElementById
+(                       → (
+cs.splice(              →  [-semantic]
+(id)                    → $id
+)                       →  [-semantic]
+)                       → )
+!                       → !
+;                       → ;
+\n                      → \n    
+cs.splice(              →  [-semantic]
+(insert)                → $insert
+)                       →  [-semantic]
+(                       → (
+__cs_parent             → parent
+,                       → , 
+cs.splice(              →  [-semantic]
+(value)                 → $value
+)                       →  [-semantic]
+,                       → , 
+__cs_parent             → parent
+.                       → .
+querySelector           → querySelector
+(                       → (
+cs.splice(              →  [-semantic]
+(selector)              → $selector
+)                       →  [-semantic]
+)                       → )
+)                       → )
+;                       → ;
+\n                      → \n    
+return                  → return 
+__cs_dispose            → dispose
+;                       → ;
+\n}                     → \n  }
+)                       → )
+)                       → `

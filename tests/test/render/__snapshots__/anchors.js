@@ -3,9 +3,7 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { evaluate } from "../evaluate.ts";
 import { cs } from "@backtickjs/core";
-import { createSignal, For } from "@backtickjs/solid-js";
-import { createRoot } from "solid-js";
-import { insert } from "solid-js/web";
+import { createRoot, createSignal, For, insert } from "@backtickjs/solid-js";
 import { screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
@@ -29,7 +27,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.create(
-    "etjzh3ew1hzv:33:9",
+    "k53jpsdpnvnd:31:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -37,7 +35,7 @@ async function Rows() {
       ],
     },
     '($splice0, $tag1) => {\n    const ids = $splice0()([1, 2, 3]);\n    const clear = () => {\n        ids[1]([]);\n    };\n    return (<>\n        <span onclick={clear}>clear</span>\n        <$tag1 each={ids[0]()}>{(id) => <span>{"row " + id}</span>}</$tag1>\n      </>);\n}',
-    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AAgCY;IACR,MAAM,GAAG,GAAG,UAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,KAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
+    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AA8BY;IACR,MAAM,GAAG,GAAG,UAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,KAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
   );
 }
 it("Rows", async (t) => {
@@ -64,19 +62,32 @@ afterEach(() => {
 // A target in the page holding the markup given, as a page's own would.
 function target(html) {
   const main = document.createElement("main");
+  main.id = `target-${undo.length}`;
   main.innerHTML = html;
   document.body.append(main);
   undo.push(() => main.remove());
   return main;
 }
 // Draws in front of the anchor `selector` names. `render` takes no anchor, so
-// these insert at it with Solid directly.
+// these insert at it with Solid's `insert`, in a root, in client code.
 async function drawAt(value, parent, selector) {
-  const drawing = await evaluate(() => value);
-  const unmount = createRoot((dispose) => {
-    insert(parent, drawing(), parent.querySelector(selector));
-    return dispose;
-  });
+  const id = parent.id;
+  const unmount = await evaluate(
+    cs.create(
+      "k53jpsdpnvnd:90:33",
+      {
+        params: [
+          { kind: "splice", value: createRoot, bindings: [] },
+          { kind: "splice", value: id, bindings: [] },
+          { kind: "splice", value: insert, bindings: [] },
+          { kind: "splice", value: value, bindings: [] },
+          { kind: "splice", value: selector, bindings: [] },
+        ],
+      },
+      "($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()((dispose) => {\n    const parent = document.getElementById($splice1());\n    $splice2()(parent, $splice3(), parent.querySelector($splice4()));\n    return dispose;\n})",
+      '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AAyFoC,sDAAA,UAAW,CAAC,CAAC,OAAmB,EAAE,EAAE;IACpE,MAAM,MAAM,GAAG,QAAQ,CAAC,cAAc,CAAC,UAAG,CAAE,CAAC;IAC7C,UAAO,CAAC,MAAM,EAAE,UAAM,EAAE,MAAM,CAAC,aAAa,CAAC,UAAS,CAAC,CAAC,CAAC;IACzD,OAAO,OAAO,CAAC;AACjB,CAAC,CAAC"}',
+    ),
+  );
   undo.push(unmount);
 }
 describe("where a render draws", () => {
