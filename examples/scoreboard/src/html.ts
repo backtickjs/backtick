@@ -2,22 +2,25 @@ import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 import { render } from "@backtickjs/solid-js";
 import { solid } from "@backtickjs/solid-js/plugin";
-import { Main } from "./Main.js";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 
-const bundle = await bundler.build({
-  input: cs`$render(() => <Main />, document.getElementById("main")!)`,
-  external: { "solid-js": "1.9.14" },
-  plugins: [solid()],
-});
+// In development, a map into the host files in each bundle, for devtools.
+const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
 
-const { code } = bundle.generate({ format: "es" });
+export async function toHtml(element: JSX.Element): Promise<string> {
+  const bundle = await bundler.build({
+    input: cs`$render(() => $element, document.getElementById("app")!)`,
+    external: { "solid-js": "1.9.14" },
+    plugins: [solid()],
+  });
 
-export const html = `<!doctype html>
+  const { code } = bundle.generate({ format: "es", sourcemap });
+
+  return `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Backtick-"keyed"</title>
-    <link href="/css/currentStyle.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="importmap">
       {
         "imports": {
@@ -29,8 +32,8 @@ export const html = `<!doctype html>
     </script>
   </head>
   <body>
-    <div id="main" class="container"></div>
+    <div id="app"></div>
     <script type="module" src="data:text/javascript,${encodeURIComponent(code)}"></script>
   </body>
-</html>
-`;
+</html>`;
+}
