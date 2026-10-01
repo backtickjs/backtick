@@ -18,7 +18,6 @@ export {
 
 // A drawing as a host builds one: what an adapter's JSX runtime makes, and
 // what the bundler expands.
-export type { BacktickElement } from "./BacktickElement.js";
 export {
   createJsxElement,
   isJsxElement,

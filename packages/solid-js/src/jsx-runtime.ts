@@ -1,11 +1,22 @@
-import { createJsxElement } from "@backtickjs/core";
+import { createJsxElement, type Client } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 
 export declare namespace JSX {
   export type FunctionMaybe<T = unknown> = Solid.FunctionMaybe<T>;
   export type FunctionElement = Solid.FunctionElement;
-  export type Element = Solid.Element;
-  export type ArrayElement = Solid.ArrayElement;
+  export type Element =
+    | Client<Solid.Element>
+    | ArrayElement
+    | (string & {})
+    | number
+    | boolean
+    | null
+    | undefined;
+  export type ElementType =
+    | string
+    | ((props: never) => Element)
+    | ((props: never) => Promise<Element>);
+  export interface ArrayElement extends Array<Element> {}
   export type ElementClass = Solid.ElementClass;
   export type ElementAttributesProperty = Solid.ElementAttributesProperty;
   export type ElementChildrenAttribute = Solid.ElementChildrenAttribute;
@@ -332,7 +343,8 @@ export function Fragment(props: { children: JSX.Element }): JSX.Element {
 }
 
 export function jsx(type: JSX.ElementType, props: unknown): JSX.Element {
-  return createJsxElement(type, props);
+  // Core's element, as this adapter types it: a stand-in for a Solid element.
+  return createJsxElement(type, props) as JSX.Element;
 }
 
 export const jsxs = jsx;
