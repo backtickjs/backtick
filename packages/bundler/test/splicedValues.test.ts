@@ -33,7 +33,10 @@ test("a host function expands rather than crossing", async () => {
   // one takes one.
   assert.equal(
     await es((n: never) => n),
-    ["const $expn0 = () => (($arg0) => ($arg0));", "export default ($expn0());"].join("\n"),
+    [
+      "const $expn0 = () => (($arg0) => ($arg0));",
+      "export default ($expn0());",
+    ].join("\n"),
   );
 });
 
@@ -72,8 +75,7 @@ test("host code can't compute with an argument", async () => {
     /Can't compute with `\$arg0` on the host/,
   );
   await assert.rejects(
-    () =>
-      es((props: { count: number }) => (props.count > 5 ? "many" : "few")),
+    () => es((props: { count: number }) => (props.count > 5 ? "many" : "few")),
     /Can't compute with `\$arg0\.count` on the host/,
   );
 });

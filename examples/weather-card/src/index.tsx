@@ -4,10 +4,11 @@ import { render } from "@backtickjs/solid-js";
 import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { importMap } from "@backtickjs/solid-js/import-map";
+import { version } from "@backtickjs/solid-js/version";
 import { WeatherCard } from "./WeatherCard.js";
 
 // Solid from a CDN, at the version the adapter is typed against.
-const map = importMap("https://cdn.jsdelivr.net/npm/solid-js@1.9.14");
+const map = importMap(`https://cdn.jsdelivr.net/npm/solid-js@${version}`);
 
 async function toHtml(element: JSX.Element): Promise<string> {
   // The client entry: the page's script, drawing the element into its container.
@@ -16,7 +17,7 @@ async function toHtml(element: JSX.Element): Promise<string> {
       () => $element,
       document.getElementById("app") as HTMLElement,
     )`,
-    external: Object.keys(map.imports),
+    external: { "solid-js": version },
     plugins: [solid()],
   });
   const { code } = bundle.generate({ format: "es" });

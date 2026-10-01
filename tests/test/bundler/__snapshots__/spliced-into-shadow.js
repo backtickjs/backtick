@@ -27,22 +27,22 @@ it("refuses a capture spliced where it is shadowed", async () => {
   await assert.rejects(
     bundler.build({
       input: cs.create(
-        "hfbn8qccg6w7:34:6",
+        "38gnycjdllkkn:34:6",
         {
           params: [
             {
               kind: "splice",
               value: keep(
                 cs.create(
-                  "hfbn8qccg6w7:36:29",
+                  "38gnycjdllkkn:36:29",
                   {
-                    params: [{ kind: "capture", key: "total$hfbn8qccg6w7$0" }],
+                    params: [{ kind: "capture", key: "total$38gnycjdllkkn$0" }],
                   },
                   "($capture0) => $capture0",
                   '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAmCgC,eAAA,SAAK"}',
                 ),
               ),
-              bindings: ["total$hfbn8qccg6w7$0"],
+              bindings: ["total$38gnycjdllkkn$0"],
             },
             { kind: "splice", value: again(), bindings: [] },
           ],
@@ -50,7 +50,7 @@ it("refuses a capture spliced where it is shadowed", async () => {
         "($splice0, $splice1) => {\n    const total = 1;\n    const first = $splice0(total);\n    {\n        const total = 2;\n        return first + total + $splice1();\n    }\n}",
         '{"version":3,"file":"spliced-into-shadow.test.jsx","sourceRoot":"","sources":["bundler/spliced-into-shadow.test.tsx"],"names":[],"mappings":"AAiCS;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,MAAM,KAAK,GAAG,eAAC,CAAkB;IACjC,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,KAAK,GAAG,UAAC,CAAU;IACpC,CAAC;AACH,CAAC"}',
       ),
-      external: [],
+      external: {},
     }),
     {
       message:

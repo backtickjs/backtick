@@ -26,7 +26,7 @@ describe("a spliced undefined", () => {
   });
 
   it("is written as `void 0`", async () => {
-    const bundle = await bundler.build({ input: [undefined], external: [] });
+    const bundle = await bundler.build({ input: [undefined], external: {} });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /\[void 0\]/);
   });

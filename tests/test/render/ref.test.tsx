@@ -43,7 +43,9 @@ describe("ref", () => {
   });
 
   it("is not written as an attribute", async () => {
-    render(await evaluate(cs`() => <input aria-label="name" ref={() => {}} />`));
+    render(
+      await evaluate(cs`() => <input aria-label="name" ref={() => {}} />`),
+    );
     assert.equal(screen.getByLabelText("name").hasAttribute("ref"), false);
   });
 

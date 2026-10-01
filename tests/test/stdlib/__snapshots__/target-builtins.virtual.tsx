@@ -7,10 +7,15 @@ import { createRoot } from "solid-js";
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `app` is an entry of the import
 // map the tests resolve with (`tsxHooks.ts`), as it would be of a page's.
-const greet = createImport<() => string>({ name: "greet", from: "app" });
+const greet = createImport<() => string>({
+  name: "greet",
+  from: "app",
+  version: "^1.0.0",
+});
 const storage = createImport<{ get: (key: string) => string | null }>({
   name: "storage",
   from: "app",
+  version: "^1.0.0",
 });
 
 describe("a module an app provides", () => {

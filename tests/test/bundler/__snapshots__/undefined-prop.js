@@ -16,7 +16,7 @@ describe("an undefined prop", () => {
   it("is left out of the element", async () => {
     const bundle = await bundler.build({
       input: _jsx("div", { class: undefined, id: "kept" }),
-      external: [],
+      external: {},
     });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /<div id=\{"kept"\} \/>/);
@@ -31,7 +31,7 @@ describe("an undefined prop", () => {
         _jsx(Pill, {
           label: "focused",
           ref: cs.create(
-            "6xdnwbclwfdd:41:41",
+            "2un0jwmh4hogh:41:41",
             { params: [{ kind: "splice", value: onMount, bindings: [] }] },
             "($splice0) => (el) => $splice0()(() => el.focus())",
             '{"version":3,"file":"undefined-prop.test.jsx","sourceRoot":"","sources":["bundler/undefined-prop.test.tsx"],"names":[],"mappings":"AAwC4C,cAAA,CAAC,EAAE,EAAE,EAAE,CAAC,UAAQ,CAAC,GAAG,EAAE,CAAC,EAAE,CAAC,KAAK,EAAE,CAAC"}',

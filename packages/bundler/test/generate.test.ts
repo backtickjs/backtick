@@ -14,14 +14,14 @@ const appending =
   });
 
 test("the output is a module whose default export is the value", async () => {
-  const bundle = await bundler.build({ input: 42, external: [] });
+  const bundle = await bundler.build({ input: 42, external: {} });
   assert.equal(bundle.generate({ format: "es" }).code, "export default (42);");
 });
 
 test("a plugin's statements follow the value", async () => {
   const bundle = await bundler.build({
     input: 1,
-    external: [],
+    external: {},
     plugins: [appending("globalThis.appended = true;")],
   });
   assert.equal(
@@ -34,21 +34,61 @@ test("a plugin is given the code and the bundle's id", async () => {
   const seen: string[] = [];
   await bundler.build({
     input: 1,
-    external: [],
+    external: {},
     plugins: [
       (code, id) => {
         seen.push(code, id);
-        return { code, map: JSON.stringify({ version: 3, sources: [], names: [], mappings: "" }) };
+        return {
+          code,
+          map: JSON.stringify({
+            version: 3,
+            sources: [],
+            names: [],
+            mappings: "",
+          }),
+        };
       },
     ],
   });
   assert.deepEqual(seen, ["export default (1);", "bundle.jsx"]);
 });
 
-test("a script's import from a module the client doesn't provide is refused", async () => {
-  const Portal = createImport({ name: "Portal", from: "solid-js/web" });
+test("a script's import from a package the client doesn't provide is refused", async () => {
+  const greet = createImport({ name: "greet", from: "app", version: "^1.0.0" });
   await assert.rejects(
-    () => bundler.build({ input: Portal, external: ["solid-js"] }),
-    /Can't import `Portal` from "solid-js\/web": the client provides "solid-js"\./,
+    () => bundler.build({ input: greet, external: { "solid-js": "1.9.14" } }),
+    /Can't import `greet` from "app": the client provides solid-js@1\.9\.14\./,
   );
+});
+
+test("a script's import needing a version the client doesn't have is refused", async () => {
+  const Portal = createImport({
+    name: "Portal",
+    from: "solid-js/web",
+    version: "^2.0.0",
+  });
+  await assert.rejects(
+    () => bundler.build({ input: Portal, external: { "solid-js": "1.9.14" } }),
+    /Can't import `Portal` from "solid-js\/web": it needs solid-js@\^2\.0\.0, and the client provides solid-js@1\.9\.14\./,
+  );
+});
+
+test("a module is provided by its package, scoped or not", async () => {
+  const Portal = createImport({
+    name: "Portal",
+    from: "solid-js/web",
+    version: "^1.9.0",
+  });
+  const button = createImport({
+    name: "button",
+    from: "@scope/ui/button",
+    version: "^1.0.0",
+  });
+  const bundle = await bundler.build({
+    input: [Portal, button],
+    external: { "solid-js": "1.9.14", "@scope/ui": "1.2.0" },
+  });
+  const { code } = bundle.generate({ format: "es" });
+  assert.match(code, /from "solid-js\/web";/);
+  assert.match(code, /from "@scope\/ui\/button";/);
 });

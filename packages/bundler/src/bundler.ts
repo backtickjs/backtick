@@ -18,8 +18,9 @@ export type Plugin = (
 export interface BuildOptions {
   // What to bundle.
   readonly input: Spliceable;
-  // The modules the client provides. A script's import from any other throws.
-  readonly external: readonly string[];
+  // The packages the client provides, each at its exact version. A script's
+  // import from any other, or needing a version it doesn't have, throws.
+  readonly external: Readonly<Record<string, string>>;
   // Run in order over the bundle's module.
   readonly plugins?: readonly Plugin[];
 }
@@ -57,7 +58,9 @@ export const bundler = {
       code = result.code;
       maps.unshift(result.map);
     }
-    const map = remapping(maps, () => null, { excludeContent: true }).toString();
+    const map = remapping(maps, () => null, {
+      excludeContent: true,
+    }).toString();
     return { generate: () => ({ code, map }) };
   },
 };

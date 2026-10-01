@@ -6,6 +6,7 @@ import { createJsxElement, isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
 import * as vocabulary from "../dist/index.js";
 import { importMap } from "../dist/import-map.js";
+import { version } from "../dist/version.js";
 import ts from "typescript";
 
 // The import map with the installed package as its URL, so each entry
@@ -69,7 +70,10 @@ describe("the import map", () => {
   it("maps every import's module", () => {
     for (const [name, value] of Object.entries(vocabulary)) {
       assert.ok(isClientImport(value));
-      assert.ok(modules.includes(value.from), `${name} is from "${value.from}"`);
+      assert.ok(
+        modules.includes(value.from),
+        `${name} is from "${value.from}"`,
+      );
     }
   });
 
@@ -80,7 +84,7 @@ describe("the import map", () => {
         onclick: vocabulary.batch,
         children: ["a"],
       }),
-      external: modules,
+      external: { "solid-js": version },
       plugins: [solid()],
     });
     const { code } = bundle.generate({ format: "es" });
@@ -94,6 +98,9 @@ describe("the import map", () => {
   });
 
   it("takes the package's URL with or without a trailing slash", () => {
-    assert.deepEqual(importMap("https://x.test/solid-js/"), importMap("https://x.test/solid-js"));
+    assert.deepEqual(
+      importMap("https://x.test/solid-js/"),
+      importMap("https://x.test/solid-js"),
+    );
   });
 });

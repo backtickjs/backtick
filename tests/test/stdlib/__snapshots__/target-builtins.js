@@ -6,10 +6,15 @@ import { createRoot } from "solid-js";
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `app` is an entry of the import
 // map the tests resolve with (`tsxHooks.ts`), as it would be of a page's.
-const greet = createImport({ name: "greet", from: "app" });
+const greet = createImport({
+  name: "greet",
+  from: "app",
+  version: "^1.0.0",
+});
 const storage = createImport({
   name: "storage",
   from: "app",
+  version: "^1.0.0",
 });
 describe("a module an app provides", () => {
   // Reached by splicing the value `createImport` made, which a bundle imports
@@ -19,10 +24,10 @@ describe("a module an app provides", () => {
       createRoot(
         await evaluate(
           cs.create(
-            "1knirzmcv1y2v:20:43",
+            "21t7r7s7w4sel:25:43",
             { params: [{ kind: "splice", value: greet, bindings: [] }] },
             "($splice0) => () => $splice0()()",
-            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAmB8C,cAAA,GAAG,EAAE,CAAC,UAAM,EAAE"}',
+            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAwB8C,cAAA,GAAG,EAAE,CAAC,UAAM,EAAE"}',
           ),
         ),
       ),
@@ -36,10 +41,10 @@ describe("a module an app provides", () => {
       createRoot(
         await evaluate(
           cs.create(
-            "1knirzmcv1y2v:26:43",
+            "21t7r7s7w4sel:31:43",
             { params: [{ kind: "splice", value: storage, bindings: [] }] },
             '($splice0) => () => $splice0().get("greeting")',
-            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AAyB8C,cAAA,GAAG,EAAE,CAAC,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
+            '{"version":3,"file":"target-builtins.test.jsx","sourceRoot":"","sources":["stdlib/target-builtins.test.tsx"],"names":[],"mappings":"AA8B8C,cAAA,GAAG,EAAE,CAAC,UAAQ,CAAC,GAAG,CAAC,UAAU,CAAC"}',
           ),
         ),
       ),

@@ -11,7 +11,10 @@ describe("a read by key", () => {
     assert.equal(createRoot(await evaluate(cs`() => [5, 31, 7]["0"]`)), 5);
     assert.equal(createRoot(await evaluate(cs`() => "abc"["0"]`)), "a");
     // @ts-expect-error: an object's type names its keys
-    assert.equal(createRoot(await evaluate(cs`() => ({ x: 1 })[0]`)), undefined);
+    assert.equal(
+      createRoot(await evaluate(cs`() => ({ x: 1 })[0]`)),
+      undefined,
+    );
     assert.equal(
       createRoot(await evaluate(cs`() => (7 as unknown as number[])[0]`)),
       undefined,

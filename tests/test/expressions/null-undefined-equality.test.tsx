@@ -8,12 +8,21 @@ import { createRoot } from "solid-js";
 describe("null and undefined", () => {
   it("are each equal to themselves", async () => {
     assert.equal(createRoot(await evaluate(cs`() => null === null`)), true);
-    assert.equal(createRoot(await evaluate(cs`() => undefined === undefined`)), true);
+    assert.equal(
+      createRoot(await evaluate(cs`() => undefined === undefined`)),
+      true,
+    );
   });
 
   it("are not equal to each other", async () => {
-    assert.equal(createRoot(await evaluate(cs`() => null !== undefined`)), true);
-    assert.equal(createRoot(await evaluate(cs`() => null === undefined`)), false);
+    assert.equal(
+      createRoot(await evaluate(cs`() => null !== undefined`)),
+      true,
+    );
+    assert.equal(
+      createRoot(await evaluate(cs`() => null === undefined`)),
+      false,
+    );
   });
 
   // The same holds wherever the value came from: a splice, or a read past

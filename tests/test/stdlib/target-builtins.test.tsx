@@ -7,10 +7,15 @@ import { createRoot } from "solid-js";
 // What a client provides beside Solid: a module an app adds, and the names it
 // exports, imported the way Solid's own are. `app` is an entry of the import
 // map the tests resolve with (`tsxHooks.ts`), as it would be of a page's.
-const greet = createImport<() => string>({ name: "greet", from: "app" });
+const greet = createImport<() => string>({
+  name: "greet",
+  from: "app",
+  version: "^1.0.0",
+});
 const storage = createImport<{ get: (key: string) => string | null }>({
   name: "storage",
   from: "app",
+  version: "^1.0.0",
 });
 
 describe("a module an app provides", () => {
@@ -23,6 +28,9 @@ describe("a module an app provides", () => {
   it("holds what the module exports, whatever kind of value that is", async () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object.
-    assert.equal(createRoot(await evaluate(cs`() => $storage.get("greeting")`)), "hei");
+    assert.equal(
+      createRoot(await evaluate(cs`() => $storage.get("greeting")`)),
+      "hei",
+    );
   });
 });

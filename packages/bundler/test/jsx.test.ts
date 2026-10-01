@@ -39,7 +39,11 @@ test("an element holds an element as a tag", async () => {
 });
 
 test("a client module's component is a tag of its import", async () => {
-  const For = createImport({ name: "For", from: "solid-js" });
+  const For = createImport({
+    name: "For",
+    from: "solid-js",
+    version: "^1.9.0",
+  });
   const module = await printed(For as never, { each: [1] });
   assert.match(module, /^import \{ For as \$i0 \} from "solid-js";/);
   assert.match(module, /^export default \(<\$i0 each=\{\[1\]\} \/>\);$/m);

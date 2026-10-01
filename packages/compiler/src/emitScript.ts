@@ -1,8 +1,4 @@
-import {
-  addMapping,
-  GenMapping,
-  toEncodedMap,
-} from "@jridgewell/gen-mapping";
+import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
 import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
@@ -240,7 +236,10 @@ function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
     }
     // TypeScript writes no names, so there are none to carry.
     addMapping(into, {
-      generated: { line: mapping.generatedLine, column: mapping.generatedColumn },
+      generated: {
+        line: mapping.generatedLine,
+        column: mapping.generatedColumn,
+      },
       source: sourceFile.fileName,
       // Lines are 1-based here, columns 0-based.
       original: {

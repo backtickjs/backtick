@@ -22,11 +22,15 @@ describe("a spliced undefined", () => {
 
   it("stays undefined in an array", async () => {
     const data = [1, undefined, 3];
-    assert.deepEqual(createRoot(await evaluate(cs`() => $data`)), [1, undefined, 3]);
+    assert.deepEqual(createRoot(await evaluate(cs`() => $data`)), [
+      1,
+      undefined,
+      3,
+    ]);
   });
 
   it("is written as `void 0`", async () => {
-    const bundle = await bundler.build({ input: [undefined], external: [] });
+    const bundle = await bundler.build({ input: [undefined], external: {} });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /\[void 0\]/);
   });

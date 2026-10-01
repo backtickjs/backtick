@@ -24,7 +24,7 @@ describe("an undefined prop", () => {
   it("is left out of the element", async () => {
     const bundle = await bundler.build({
       input: <div class={undefined} id="kept" />,
-      external: [],
+      external: {},
     });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /<div id=\{"kept"\} \/>/);
@@ -37,9 +37,9 @@ describe("an undefined prop", () => {
 
   it("still reaches the element when it is given", async () => {
     render(
-      await evaluate(
-        () => <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />,
-      ),
+      await evaluate(() => (
+        <Pill label="focused" ref={cs`(el) => $onMount(() => el.focus())`} />
+      )),
     );
     assert.equal(document.activeElement, screen.getByRole("button"));
   });

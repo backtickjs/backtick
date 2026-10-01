@@ -1,3 +1,6 @@
+import type { ClientImport } from "@backtickjs/core";
+import semver from "semver";
+
 // What a bundle is written as, and the one place its conventions live: how a
 // name is written, how a literal escapes, and how an element is written as JSX
 // for the framework's compiler. Everything is code, as a string.
@@ -10,16 +13,16 @@ const ATTRIBUTE = /^[A-Za-z_$][A-Za-z0-9_$-]*(:[A-Za-z_$][A-Za-z0-9_$-]*)?$/;
 
 /**
  * What a bundle imports, keyed by specifier and export, each bound once; the
- * modules it may import them from, which the client provides; and whether it
- * draws a script a component drew (see `componentElement`).
+ * packages it may import them from, which the client provides, by version;
+ * and whether it draws a script a component drew (see `componentElement`).
  */
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
-  readonly external: readonly string[];
+  readonly external: Readonly<Record<string, string>>;
   usesComponent: boolean;
 }
 
-export function createNames(external: readonly string[]): Names {
+export function createNames(external: Readonly<Record<string, string>>): Names {
   return { imports: new Map(), external, usesComponent: false };
 }
 
@@ -79,14 +82,35 @@ export function object(
   return `{ ${members.join(", ")} }`;
 }
 
+// The package a module is in: its specifier's first segment, or first two
+// when scoped (`solid-js/web` → `solid-js`, `@scope/pkg/x` → `@scope/pkg`).
+function packageOf(from: string): string {
+  const segments = from.split("/");
+  return segments.slice(0, from.startsWith("@") ? 2 : 1).join("/");
+}
+
 /** An export of a module the client provides, imported by the bundle. */
-export function imported(names: Names, from: string, name: string): string {
+export function imported(
+  names: Names,
+  { from, name, version }: ClientImport<unknown>,
+): string {
   // Where a script's import is written: a plugin's own (a framework's compile
   // step) are the plugin's, trusted as it is.
-  if (!names.external.includes(from)) {
+  const pkg = packageOf(from);
+  const provided = names.external[pkg];
+  if (provided === undefined) {
+    const packages = Object.entries(names.external).map(
+      ([external, at]) => `${external}@${at}`,
+    );
     throw new Error(
       `Can't import \`${name}\` from "${from}": the client provides ` +
-        `${names.external.map((module) => `"${module}"`).join(", ") || "no modules"}.`,
+        `${packages.join(", ") || "no packages"}.`,
+    );
+  }
+  if (!semver.satisfies(provided, version)) {
+    throw new Error(
+      `Can't import \`${name}\` from "${from}": it needs ${pkg}@${version}, ` +
+        `and the client provides ${pkg}@${provided}.`,
     );
   }
   const key = `${from}\0${name}`;

@@ -3,6 +3,7 @@ import type * as Solid from "solid-js";
 import type * as Store from "solid-js/store";
 import type * as Web from "solid-js/web";
 import type { JSX, Prop } from "./jsx-runtime.js";
+import { version } from "./version.js";
 
 // Solid's API as a script splices it — `$createSignal(0)` — each typed with
 // Solid's own declarations, and each imported from Solid by the bundle that
@@ -59,12 +60,27 @@ export type {
 // The adapter's, where Solid's names its own: what a tag is typed through here.
 export type { JSX } from "./jsx-runtime.js";
 
+// What every name needs: the Solid it is typed against, or a later 1.x.
+const range = `^${version}`;
+
 const solid = <Name extends keyof typeof Solid>(name: Name) =>
-  createImport<(typeof Solid)[Name]>({ name, from: "solid-js" });
+  createImport<(typeof Solid)[Name]>({
+    name,
+    from: "solid-js",
+    version: range,
+  });
 const store = <Name extends keyof typeof Store>(name: Name) =>
-  createImport<(typeof Store)[Name]>({ name, from: "solid-js/store" });
+  createImport<(typeof Store)[Name]>({
+    name,
+    from: "solid-js/store",
+    version: range,
+  });
 const web = <Name extends keyof typeof Web>(name: Name) =>
-  createImport<(typeof Web)[Name]>({ name, from: "solid-js/web" });
+  createImport<(typeof Web)[Name]>({
+    name,
+    from: "solid-js/web",
+    version: range,
+  });
 
 // Reactivity
 export const createSignal = solid("createSignal");
@@ -134,7 +150,7 @@ export const Dynamic = web("Dynamic");
 /** Solid's `render`, typed with the adapter's drawing: `code` into `element`. */
 export const render = createImport<
   (code: () => JSX.Element, element: Node) => () => void
->({ name: "render", from: "solid-js/web" });
+>({ name: "render", from: "solid-js/web", version: range });
 
 // Control flow, typed as components so a tag may name one in host JSX as well
 // as inside a script. None is callable on the host: JSX hands the import to the

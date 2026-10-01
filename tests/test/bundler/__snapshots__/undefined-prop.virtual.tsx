@@ -24,7 +24,7 @@ describe("an undefined prop", () => {
   it("is left out of the element", async () => {
     const bundle = await bundler.build({
       input: <div class={undefined} id="kept" />,
-      external: [],
+      external: {},
     });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /<div id=\{"kept"\} \/>/);

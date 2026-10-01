@@ -13,7 +13,7 @@ describe("a spliced undefined", () => {
       createRoot(
         await evaluate(
           cs.create(
-            "1npohs0n0jr7x:13:43",
+            "6dasbzu6j7d9:13:43",
             { params: [{ kind: "splice", value: nothing, bindings: [] }] },
             "($splice0) => () => $splice0()",
             '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAY8C,cAAA,GAAG,EAAE,CAAC,UAAQ"}',
@@ -28,7 +28,7 @@ describe("a spliced undefined", () => {
     const arrived = createRoot(
       await evaluate(
         cs.create(
-          "1npohs0n0jr7x:18:46",
+          "6dasbzu6j7d9:18:46",
           { params: [{ kind: "splice", value: data, bindings: [] }] },
           "($splice0) => () => $splice0()",
           '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAiBiD,cAAA,GAAG,EAAE,CAAC,UAAK"}',
@@ -44,7 +44,7 @@ describe("a spliced undefined", () => {
       createRoot(
         await evaluate(
           cs.create(
-            "1npohs0n0jr7x:25:47",
+            "6dasbzu6j7d9:25:47",
             { params: [{ kind: "splice", value: data, bindings: [] }] },
             "($splice0) => () => $splice0()",
             '{"version":3,"file":"undefined-splice.test.jsx","sourceRoot":"","sources":["splices/undefined-splice.test.tsx"],"names":[],"mappings":"AAwBkD,cAAA,GAAG,EAAE,CAAC,UAAK"}',
@@ -55,7 +55,7 @@ describe("a spliced undefined", () => {
     );
   });
   it("is written as `void 0`", async () => {
-    const bundle = await bundler.build({ input: [undefined], external: [] });
+    const bundle = await bundler.build({ input: [undefined], external: {} });
     const { code } = bundle.generate({ format: "es" });
     assert.match(code, /\[void 0\]/);
   });

@@ -101,7 +101,7 @@ const rootScope: Scope = { bindings: new Set() };
 // unique name, so there is nothing to disambiguate and nothing to rename.
 export async function buildBundle(
   value: Spliceable,
-  external: readonly string[],
+  external: Readonly<Record<string, string>>,
 ): Promise<BundleTree> {
   const names = createNames(external);
   const functionExpansions: FunctionExpansions = new WeakMap();
@@ -315,7 +315,7 @@ export async function buildBundle(
       return renderJsx(value, scope);
     }
     if (isClientImport(value)) {
-      return imported(names, value.from, value.name);
+      return imported(names, value);
     }
     if (value === null) {
       return literal(null);
@@ -481,9 +481,7 @@ export async function buildBundle(
       }
     }
     // A component a client module provides is written as a tag of its import.
-    const tag = isClientImport(type)
-      ? imported(names, type.from, type.name)
-      : type;
+    const tag = isClientImport(type) ? imported(names, type) : type;
     return jsxElement(tag, written, children);
   };
 
