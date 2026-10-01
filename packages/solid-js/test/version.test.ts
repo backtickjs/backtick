@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { it } from "node:test";
-import * as vocabulary from "../dist/index.js";
+import * as main from "../dist/index.js";
+import * as store from "../dist/store.js";
+import * as web from "../dist/web.js";
+
+const vocabulary = Object.assign({}, main, store, web);
 
 const versionOf = (url: URL): string =>
   (JSON.parse(readFileSync(url, "utf8")) as { version: string }).version;

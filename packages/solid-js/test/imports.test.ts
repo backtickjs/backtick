@@ -5,7 +5,9 @@ import { describe, it } from "node:test";
 import { bundler } from "@backtickjs/bundler";
 import { createJsxElement, isClientImport } from "@backtickjs/core";
 import { solid } from "../dist/plugin.js";
-import * as vocabulary from "../dist/index.js";
+import * as main from "../dist/index.js";
+import * as store from "../dist/store.js";
+import * as web from "../dist/web.js";
 import ts from "typescript";
 
 // The Solid these tests' client loads: the installed one.
@@ -28,48 +30,89 @@ const modules = Object.keys(browserBuilds);
 const load = (from: string): Promise<Record<string, unknown>> =>
   import(import.meta.resolve(`solid-js/${browserBuilds[from]}`));
 
-describe("Solid's API", () => {
-  it("names what its module exports, under the name it is imported as", async () => {
-    for (const [name, value] of Object.entries(vocabulary)) {
-      assert.ok(isClientImport(value), `${name} is a client import`);
-      assert.equal(value.name, name);
-      // `in`, not a value: `DEV` is `undefined` outside Solid's dev build.
-      assert.ok(name in (await load(value.from)), `${value.from} has ${name}`);
-    }
-  });
+// Each of the adapter's modules, the Solid module it mirrors, and the
+// declarations Solid ships for that module.
+const mirrors = [
+  {
+    module: "solid-js",
+    ours: main,
+    source: "index.ts",
+    types: /solid-js\/types\/index\.d\.ts$/,
+  },
+  {
+    module: "solid-js/store",
+    ours: store,
+    source: "store.ts",
+    types: /solid-js\/store\/types\/index\.d\.ts$/,
+  },
+  {
+    module: "solid-js/web",
+    ours: web,
+    source: "web.ts",
+    types: /solid-js\/web\/types\/index\.d\.ts$/,
+  },
+];
 
-  it("names every value `solid-js` exports", async () => {
-    for (const name of Object.keys(await load("solid-js"))) {
-      assert.ok(name in vocabulary, name);
-    }
-  });
+// Every client import the adapter exports, from any of its modules.
+const vocabulary = Object.assign({}, main, store, web);
 
-  it("names every type `solid-js` exports", () => {
-    const program = ts.createProgram(
-      [join(import.meta.dirname, "..", "src", "index.ts")],
-      {
-        strict: true,
-        noEmit: true,
-        skipLibCheck: true,
-        module: ts.ModuleKind.NodeNext,
-        moduleResolution: ts.ModuleResolutionKind.NodeNext,
-        types: [],
-      },
-    );
-    const checker = program.getTypeChecker();
-    const names = (file: ts.SourceFile) =>
-      checker
-        .getExportsOfModule(checker.getSymbolAtLocation(file)!)
-        .map(({ name }) => name);
-    const ours = names(program.getSourceFile(program.getRootFileNames()[0]!)!);
-    const solid = program
-      .getSourceFiles()
-      .find(({ fileName }) => /solid-js\/types\/index\.d\.ts$/.test(fileName))!;
-    for (const name of names(solid)) {
-      assert.ok(ours.includes(name), name);
-    }
+for (const { module, ours, source, types } of mirrors) {
+  describe(`${module}, mirrored`, () => {
+    it("names what its module exports, under the name it is imported as", async () => {
+      for (const [name, value] of Object.entries(ours)) {
+        assert.ok(isClientImport(value), `${name} is a client import`);
+        assert.equal(value.name, name);
+        // `in`, not a value: `DEV` is `undefined` outside Solid's dev build.
+        assert.ok(
+          name in (await load(value.from)),
+          `${value.from} has ${name}`,
+        );
+      }
+    });
+
+    it("names every value it exports", async () => {
+      for (const name of Object.keys(await load(module))) {
+        // Exported by the browser build but not declared, so not typed.
+        if (module === "solid-js/web" && name === "innerHTML") {
+          continue;
+        }
+        assert.ok(name in ours, name);
+      }
+    });
+
+    it("names every name its declarations export", () => {
+      const program = ts.createProgram(
+        [join(import.meta.dirname, "..", "src", source)],
+        {
+          strict: true,
+          noEmit: true,
+          skipLibCheck: true,
+          module: ts.ModuleKind.NodeNext,
+          moduleResolution: ts.ModuleResolutionKind.NodeNext,
+          types: [],
+        },
+      );
+      const checker = program.getTypeChecker();
+      const names = (file: ts.SourceFile) =>
+        checker
+          .getExportsOfModule(checker.getSymbolAtLocation(file)!)
+          .map(({ name }) => name);
+      const mirrored = names(
+        program.getSourceFile(program.getRootFileNames()[0]!)!,
+      );
+      const declared = program
+        .getSourceFiles()
+        .find(({ fileName }) => types.test(fileName))!;
+      for (const name of names(declared)) {
+        // Declared but not in the browser build: server APIs.
+        if (module === "solid-js/web" && name.startsWith("pipeTo")) {
+          continue;
+        }
+        assert.ok(mirrored.includes(name), name);
+      }
+    });
   });
-});
+}
 
 // A page's import map must cover everything a bundle imports: the
 // vocabulary's imports, and what Solid's compiler writes imports of.

@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js";
+import { render } from "@backtickjs/solid-js/web";
 import { solid } from "@backtickjs/solid-js/plugin";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 

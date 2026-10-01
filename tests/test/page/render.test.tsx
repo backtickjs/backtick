@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
-import { render } from "@backtickjs/solid-js";
+import { render } from "@backtickjs/solid-js/web";
 import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
