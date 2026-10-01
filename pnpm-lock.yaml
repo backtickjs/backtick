@@ -387,9 +387,6 @@ importers:
       '@babel/core':
         specifier: ^7.29.7
         version: 7.29.7
-      '@backtickjs/bundler':
-        specifier: workspace:^0.1.0
-        version: link:../bundler
       '@backtickjs/core':
         specifier: workspace:^0.1.0
         version: link:../core
@@ -400,6 +397,9 @@ importers:
         specifier: 1.9.14
         version: 1.9.14
     devDependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:^0.1.0
+        version: link:../bundler
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
