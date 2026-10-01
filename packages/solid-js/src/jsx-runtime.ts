@@ -1,22 +1,17 @@
-import { createJsxElement, type Client } from "@backtickjs/core";
+import {
+  createJsxElement,
+  type Client,
+  type JsxElementOf,
+  type JsxElementTypeOf,
+} from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
 
 export declare namespace JSX {
   export type FunctionMaybe<T = unknown> = Solid.FunctionMaybe<T>;
   export type FunctionElement = Solid.FunctionElement;
-  export type Element =
-    | Client<Solid.Element>
-    | ArrayElement
-    | (string & {})
-    | number
-    | boolean
-    | null
-    | undefined;
-  export type ElementType =
-    | string
-    | ((props: never) => Element)
-    | ((props: never) => Promise<Element>);
-  export interface ArrayElement extends Array<Element> {}
+  export type Element = JsxElementOf<Solid.Element>;
+  export type ElementType = JsxElementTypeOf<Solid.Element>;
+  export type ArrayElement = Solid.ArrayElement;
   export type ElementClass = Solid.ElementClass;
   export type ElementAttributesProperty = Solid.ElementAttributesProperty;
   export type ElementChildrenAttribute = Solid.ElementChildrenAttribute;
@@ -338,13 +333,17 @@ export declare namespace JSX {
  * array, so a single child that is a script stays a child, read where it
  * stands, rather than a script the fragment drew.
  */
-export function Fragment(props: { children: JSX.Element }): JSX.Element {
-  return [props.children];
+export function Fragment(props: { children?: unknown }): Client<Solid.Element> {
+  // The bundler writes the array as it is: a Solid array element.
+  return [props.children] as unknown as Client<Solid.Element>;
 }
 
-export function jsx(type: JSX.ElementType, props: unknown): JSX.Element {
+export function jsx(
+  type: JSX.ElementType,
+  props: unknown,
+): Client<Solid.Element> {
   // Core's element, as this adapter types it: a stand-in for a Solid element.
-  return createJsxElement(type, props) as JSX.Element;
+  return createJsxElement(type, props) as Client<Solid.Element>;
 }
 
 export const jsxs = jsx;
