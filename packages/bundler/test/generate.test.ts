@@ -18,6 +18,26 @@ test("the output is a module whose default export is the value", async () => {
   assert.equal(bundle.generate({ format: "es" }).code, "export default (42);");
 });
 
+test("a map is written only where one is asked for", async () => {
+  const bundle = await bundler.build({ input: 42, external: {} });
+  const code = "export default (42);";
+  assert.deepEqual(bundle.generate({ format: "es" }), { code, map: null });
+  assert.deepEqual(bundle.generate({ format: "es", sourcemap: false }), {
+    code,
+    map: null,
+  });
+  const { map } = bundle.generate({ format: "es", sourcemap: "hidden" });
+  assert.equal(JSON.parse(map!).version, 3);
+  assert.deepEqual(bundle.generate({ format: "es", sourcemap: "hidden" }), {
+    code,
+    map,
+  });
+  assert.deepEqual(bundle.generate({ format: "es", sourcemap: "inline" }), {
+    code: `${code}\n//# sourceMappingURL=data:application/json;charset=utf-8,${encodeURIComponent(map!)}`,
+    map,
+  });
+});
+
 test("a plugin's statements follow the value", async () => {
   const bundle = await bundler.build({
     input: 1,

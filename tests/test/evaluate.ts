@@ -32,7 +32,8 @@ export async function bundle(
     external: { "solid-js": version, app: "1.0.0" },
     plugins: [solid()],
   });
-  return built.generate({ format: "es" });
+  const { code, map } = built.generate({ format: "es", sourcemap: "hidden" });
+  return { code, map: map! };
 }
 
 /**

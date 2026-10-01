@@ -1,7 +1,6 @@
 import remapping from "@jridgewell/remapping";
 import type { Spliceable } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
-import type { JsxModule } from "./JsxModule.js";
 import { printBundle } from "./print/printBundle.js";
 
 /**
@@ -13,7 +12,7 @@ import { printBundle } from "./print/printBundle.js";
 export type Plugin = (
   code: string,
   id: string,
-) => JsxModule | Promise<JsxModule>;
+) => { code: string; map: string } | Promise<{ code: string; map: string }>;
 
 export interface BuildOptions {
   // What to bundle.
@@ -25,9 +24,24 @@ export interface BuildOptions {
   readonly plugins?: readonly Plugin[];
 }
 
+export interface OutputOptions {
+  readonly format: "es";
+  // A map into the host files, as Rollup's: `"inline"` appends the map to the
+  // code as a `data:` URL, and `"hidden"` answers it alone. None by default.
+  // It carries host files' names and lines, not their content, which stays
+  // the server's.
+  readonly sourcemap?: false | "inline" | "hidden";
+}
+
+/** What `generate` writes: the code, and its map where one was asked for. */
+export interface OutputChunk {
+  readonly code: string;
+  readonly map: string | null;
+}
+
 /** A built bundle, written out by `generate`. */
 export interface Bundle {
-  generate(options: { readonly format: "es" }): JsxModule;
+  generate(options: OutputOptions): OutputChunk;
 }
 
 // What a plugin is told the bundle is.
@@ -38,7 +52,7 @@ const ID = "bundle.jsx";
  * is: a build, then output from it.
  *
  *     const bundle = await bundler.build({ input: <Home />, external, plugins });
- *     const { code, map } = bundle.generate({ format: "es" });
+ *     const { code, map } = bundle.generate({ format: "es", sourcemap: "hidden" });
  *
  * The module's default export is the value. A namespace rather than a bare
  * function, so `bundle` stays a name a caller can give what comes back.
@@ -58,9 +72,20 @@ export const bundler = {
       code = result.code;
       maps.unshift(result.map);
     }
-    const map = remapping(maps, () => null, {
-      excludeContent: true,
-    }).toString();
-    return { generate: () => ({ code, map }) };
+    return {
+      generate: ({ sourcemap = false }) => {
+        if (sourcemap === false) {
+          return { code, map: null };
+        }
+        const map = remapping(maps, () => null, {
+          excludeContent: true,
+        }).toString();
+        if (sourcemap === "hidden") {
+          return { code, map };
+        }
+        const url = `data:application/json;charset=utf-8,${encodeURIComponent(map)}`;
+        return { code: `${code}\n//# sourceMappingURL=${url}`, map };
+      },
+    };
   },
 };

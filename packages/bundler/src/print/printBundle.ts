@@ -1,7 +1,6 @@
 import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
 import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type { BundleTree } from "../bundle/buildBundle.js";
-import type { JsxModule } from "../JsxModule.js";
 import type { ClientScript } from "@backtickjs/core";
 import { importDeclaration } from "./code.js";
 
@@ -21,7 +20,7 @@ const MODULE_ID = "bundle.jsx";
  * script's own map, moved to where the script stands in the module. What the
  * bundler wrote around the scripts maps to nothing, since no source wrote it.
  */
-export function printBundle(tree: BundleTree): JsxModule {
+export function printBundle(tree: BundleTree): { code: string; map: string } {
   const { names } = tree;
   const module = new ModuleWriter();
   for (const { from, name, local } of names.imports.values()) {

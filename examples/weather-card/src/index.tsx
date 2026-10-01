@@ -10,6 +10,9 @@ import { WeatherCard } from "./WeatherCard.js";
 // Solid from a CDN, at the version the adapter is typed against.
 const map = importMap(`https://cdn.jsdelivr.net/npm/solid-js@${version}`);
 
+// In development, a map into the host files in each bundle, for devtools.
+const sourcemap = process.env.NODE_ENV === "production" ? undefined : "inline";
+
 async function toHtml(element: JSX.Element): Promise<string> {
   // The client entry: the page's script, drawing the element into its container.
   const bundle = await bundler.build({
@@ -20,7 +23,7 @@ async function toHtml(element: JSX.Element): Promise<string> {
     external: { "solid-js": version },
     plugins: [solid()],
   });
-  const { code } = bundle.generate({ format: "es" });
+  const { code } = bundle.generate({ format: "es", sourcemap });
   return `<!doctype html>
 <html>
   <head>
