@@ -1,0 +1,21 @@
+cs.lift((() =>   → cs`
+(                → (
+__cs_props       → props
+:                → : 
+{\n              → { 
+n                → n
+:                → : 
+number           → number
+;                → 
+\n}              →  }
+) =>             → ) => 
+<                → <
+b                → b
+>{               → >{
+__cs_props       → props
+.                → .
+n                → n
+}</              → }</
+b                → b
+>                → >
+)())             → `

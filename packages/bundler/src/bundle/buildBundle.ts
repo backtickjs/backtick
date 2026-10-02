@@ -337,6 +337,15 @@ export async function buildBundle(
         ? componentElement(names, await render(expansion, scope))
         : render(expansion, scope);
     }
+    // A client component (an import, or a script answering one) is client
+    // code, so on the host it can't be a tag: it is one in a script.
+    if (typeof type !== "string") {
+      const tag = isClientImport(type) ? `\`<${type.name}>\`` : "A script";
+      throw new Error(
+        `${tag} is a client component, so it can't be a tag on the host. ` +
+          "Use it as a tag in a script.",
+      );
+    }
     const written: [string, string][] = [];
     let children: string[] = [];
     // The adapter's JSX runtime hands over the props JSX wrote, an object.
@@ -356,9 +365,7 @@ export async function buildBundle(
         children.push(await renderProp(jsx, key, child, scope));
       }
     }
-    // A component a client module provides is written as a tag of its import.
-    const tag = isClientImport(type) ? imported(names, type) : type;
-    return jsxElement(tag, written, children);
+    return jsxElement(type, written, children);
   };
 
   // A prop, as an expression in the enclosing script's scope.
@@ -375,10 +382,12 @@ export async function buildBundle(
       // be the app's own failure rather than a value that cannot cross — and
       // app code may throw anything, not only an error.
       const said = cause instanceof Error ? cause.message : String(cause);
-      const tag = isClientImport(jsx.type) ? jsx.type.name : jsx.type;
-      throw new Error(`In the \`${key}\` prop of <${String(tag)} />: ${said}`, {
-        cause,
-      });
+      throw new Error(
+        `In the \`${key}\` prop of <${String(jsx.type)} />: ${said}`,
+        {
+          cause,
+        },
+      );
     }
   };
 

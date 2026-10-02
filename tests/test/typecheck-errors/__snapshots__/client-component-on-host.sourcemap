@@ -1,0 +1,48 @@
+cs.lift((() =>                            → cs`
+(                                         → (
+__cs_props                                → props
+:                                         → : 
+{\n                                       → { 
+n                                         → n
+:                                         → : 
+number                                    → number
+;                                         → 
+\n}                                       →  }
+) =>                                      → ) => 
+<                                         → <
+b                                         → b
+>{                                        → >{
+__cs_props                                → props
+.                                         → .
+n                                         → n
+}</                                       → }</
+b                                         → b
+>                                         → >
+)())                                      → `
+cs.lift(((__cs_For = cs.splice(For), __cs_Badge = cs.splice(Badge)) => → cs`
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
+[                                         → [
+1                                         → 1
+,                                         → , 
+2                                         → 2
+]                                         → ]
+}                                         → }
+>{                                        → >{
+__cs_n                                    → n
+ =>                                       → ) => 
+<                                         → <
+__cs_Badge                                → Badge
+                                          →  
+n                                         → n
+={                                        → ={
+__cs_n                                    → n
+}                                         → }
+/>                                        →  />
+}</                                       → }</
+__cs_For                                  → For
+>                                         → >
+)())                                      → `

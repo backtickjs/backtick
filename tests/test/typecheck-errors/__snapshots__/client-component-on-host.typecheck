@@ -1,0 +1,6 @@
+10:27 error TS2604: JSX element type 'For' does not have any construct or call signatures.
+10:27 error TS2786: 'For' cannot be used as a JSX component.
+  Its type 'Client<(<T extends readonly any[], U extends JSX.Element>(props: { each: false | T | null | undefined; fallback?: Element; children: (item: T[number], index: Accessor<number>) => U; }) => Element)>' is not a valid JSX element type.
+13:29 error TS2604: JSX element type 'Badge' does not have any construct or call signatures.
+13:29 error TS2786: 'Badge' cannot be used as a JSX component.
+  Its type 'Client<(props: { n: number; }) => Element>' is not a valid JSX element type.

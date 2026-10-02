@@ -38,15 +38,17 @@ test("an element holds an element as a tag", async () => {
   );
 });
 
-test("a client module's component is a tag of its import", async () => {
+test("a client module's component is not a tag on the host", async () => {
+  // It's client code, a tag in a script.
   const For = createImport({
     name: "For",
     from: "solid-js",
     version: "^1.9.0",
   });
-  const module = await printed(For as never, { each: [1] });
-  assert.match(module, /^import \{ For as \$i0 \} from "solid-js";/);
-  assert.match(module, /^export default \(<\$i0 each=\{\[1\]\} \/>\);$/m);
+  await assert.rejects(
+    () => printed(For as never, { each: [1] }),
+    /`<For>` is a client component, so it can't be a tag on the host/,
+  );
 });
 
 test("a component runs once per element per bundle", async () => {
