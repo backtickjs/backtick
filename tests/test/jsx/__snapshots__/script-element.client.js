@@ -1,5 +1,8 @@
 // 11:10
-($splice0) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => {
     const label = $splice0()("hi");
     const row = (size) => {
         const css = "font-size: " + size + "px";
@@ -15,4 +18,5 @@
         </div>);
     };
     return <div style="padding: 0">{row(12)}</div>;
+});
 }

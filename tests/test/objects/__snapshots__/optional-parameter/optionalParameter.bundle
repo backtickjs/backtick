@@ -1,16 +1,62 @@
-const $cs0 = ($splice0, $splice1, $splice2) => ({
-  named: $splice0()("hi"),
-  explicit: $splice0()(undefined),
-  omitted: $splice0()(),
-  supplied: $splice1()($splice2()),
-  fallback: $splice1()(undefined),
-  omittedCallback: $splice1()(),
-});
-const $cs1 = () => (name) => {
-  return name?.concat("!");
+const $modules = {
+  "1i6s8vesd5nbi:24:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1, $splice2) => ({
+      named: $splice0()("hi"),
+      explicit: $splice0()(undefined),
+      omitted: $splice0()(),
+      supplied: $splice1()($splice2()),
+      fallback: $splice1()(undefined),
+      omittedCallback: $splice1()(),
+    });
+  },
+  "1i6s8vesd5nbi:8:14": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (name) => {
+      return name?.concat("!");
+    };
+  },
+  "1i6s8vesd5nbi:16:20": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (cb) => {
+      return cb?.() ?? 0;
+    };
+  },
+  "1i6s8vesd5nbi:14:15": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => () => 2;
+  },
 };
-const $cs2 = () => (cb) => {
-  return cb?.() ?? 0;
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
 };
-const $cs3 = () => () => 2;
+const $cs0 = $require("1i6s8vesd5nbi:24:4").default;
+const $cs1 = $require("1i6s8vesd5nbi:8:14").default;
+const $cs2 = $require("1i6s8vesd5nbi:16:20").default;
+const $cs3 = $require("1i6s8vesd5nbi:14:15").default;
 export default $cs0($cs1, $cs2, $cs3);

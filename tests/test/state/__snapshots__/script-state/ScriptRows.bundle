@@ -1,27 +1,70 @@
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<span style=font-size:16px>`);
 import { createComponent as $i0 } from "solid-js";
 import { createSignal as $i1 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
-const $cs1 = ($splice0) =>
-  (() => {
-    var _el$ = _tmpl$();
-    _el$.$$click = () => {
-      const row = $splice0()("one");
-      row.label[1](row.label[0]() + " !!!");
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "26efeom523wsc:15:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(
+      `<span style=font-size:16px>`,
+    );
+    exports.default = ($splice0) =>
+      (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => {
+          const row = $splice0()("one");
+          row.label[1](row.label[0]() + " !!!");
+        };
+        (0, web_3.insert)(_el$, () => $splice0()("one").label[0]());
+        return _el$;
+      })();
+    (0, web_2.delegateEvents)(["click"]);
+  },
+  "26efeom523wsc:11:16": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => (label) => {
+      return {
+        label: $splice0()(label),
+      };
     };
-    _$insert(_el$, () => $splice0()("one").label[0]());
-    return _el$;
-  })();
-const $cs2 = ($splice0) => (label) => {
-  return {
-    label: $splice0()(label),
-  };
+  },
 };
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1uptcsn9236u2:352:9").default;
+const $cs1 = $require("26efeom523wsc:15:9").default;
+const $cs2 = $require("26efeom523wsc:11:16").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $cs2(() => $i1)),
 );
-_$delegateEvents(["click"]);

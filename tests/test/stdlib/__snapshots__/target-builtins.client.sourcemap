@@ -1,23 +1,23 @@
 // 25:33
-($splice0, $splice1) =>   → 25:36 $createRoot(()…
-$splice0()                → 25:36 $createRoot(()…
-(                         → 25:47 (
-()                        → 25:48 () 
-=>                        → 25:51 =>
-$splice1()                → 25:54 $greet())`),…
-()                        → 25:60 ()
-)                         → 25:62 )
+($splice0, $splice1) => $splice0()  → 25:36 $createRoot(()…
+(                                   → 25:47 (
+()                                  → 25:48 () 
+=>                                  → 25:51 =>
+$splice1()                          → 25:54 $greet())`),…
+()                                  → 25:60 ()
+)                                   → 25:62 )
+);                                  → 25:63 `),…
 
 // 32:22
-($splice0, $splice1) =>   → 32:25 $createRoot(()…
-$splice0()                → 32:25 $createRoot(()…
-(                         → 32:36 (
-()                        → 32:37 () 
-=>                        → 32:40 =>
-$splice1()                → 32:43 $storage.get("greeting"))`),…
-.                         → 32:51 .
-get                       → 32:52 get
-(                         → 32:55 (
-"greeting"                → 32:56 "greeting"
-)                         → 32:66 )
-)                         → 32:67 )
+($splice0, $splice1) => $splice0()  → 32:25 $createRoot(()…
+(                                   → 32:36 (
+()                                  → 32:37 () 
+=>                                  → 32:40 =>
+$splice1()                          → 32:43 $storage.get("greeting"))`),…
+.                                   → 32:51 .
+get                                 → 32:52 get
+(                                   → 32:55 (
+"greeting"                          → 32:56 "greeting"
+)                                   → 32:66 )
+)                                   → 32:67 )
+);                                  → 32:68 `),…

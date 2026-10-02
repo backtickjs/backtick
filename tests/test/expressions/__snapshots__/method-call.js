@@ -8,8 +8,9 @@ it("methodCall", async (t) => {
     cs.create(
       "163oncfaq7kkj:9:4",
       { params: [] },
-      '() => {\n    const greeting = "Hello";\n    return greeting.concat(", ", "World").toUpperCase();\n}',
-      '{"version":3,"file":"method-call.test.jsx","sourceRoot":"","sources":["expressions/method-call.test.tsx"],"names":[],"mappings":"AAQO;IACD,MAAM,QAAQ,GAAG,OAAO,CAAC;IACzB,OAAO,QAAQ,CAAC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAAC,WAAW,EAAE,CAAC;AACtD,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const greeting = "Hello";\n    return greeting.concat(", ", "World").toUpperCase();\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAQO;IACD,MAAMA,QAAQ,GAAG,OAAO;IACxB,OAAOA,QAAQ,CAACC,MAAM,CAAC,IAAI,EAAE,OAAO,CAAC,CAACC,WAAW,EAAE;AACrD,CAAC","names":["greeting","concat","toUpperCase"],"ignoreList":[],"sources":["expressions/method-call.test.tsx"]}',
+      [],
     ),
   );
 });

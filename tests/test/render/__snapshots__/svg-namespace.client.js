@@ -1,8 +1,15 @@
 // 17:10
-() => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <circle cx="5" cy="5" r="4" fill="none" stroke="currentColor"/>);
+}
 
 // 20:22
-($splice0, $tag1) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $tag1) => {
     const Dot = (props) => (<circle cx={props.x} cy="5" r="2">
       <title>{"dot " + props.x}</title>
     </circle>);
@@ -16,4 +23,5 @@
         </foreignObject>
       </svg>
     </div>);
+});
 }

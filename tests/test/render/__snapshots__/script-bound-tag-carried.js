@@ -13,8 +13,9 @@ async function Panel(props) {
   return cs.create(
     "1lcdaamjc0iij:15:9",
     { params: [{ kind: "splice", value: props, bindings: [] }] },
-    '($splice0) => {\n    const Badge = (p) => <i>{"panel " + p.n}</i>;\n    return (<section>\n        <Badge n={0}/>\n        {$splice0().body}\n      </section>);\n}',
-    '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC5D,OAAO,CACL,CAAC,OAAO,CACN;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACZ;QAAA,CAAC,UAAM,CAAC,IAAI,CACd;MAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<section>`);\nexports.default = $splice0 => {\n    const Badge = p => (() => {\n        var _el$ = _tmpl$();\n        (0, web_3.insert)(_el$, () => "panel " + p.n);\n        return _el$;\n    })();\n    return (() => {\n        var _el$2 = _tmpl$2();\n        (0, web_3.insert)(_el$2, (0, web_2.createComponent)(Badge, {\n            n: 0\n        }), null);\n        (0, web_3.insert)(_el$2, () => $splice0().body, null);\n        return _el$2;\n    })();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcYA,QAAA;IACR,MAAMC,KAAK,GAAIC,CAAgB;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAAS,QAAQ,GAAGD,CAAC,CAACI,CAAC;QAAA,OAAAH,IAAA;IAAA,IAAK;IAC3D;QAAA,IAAAI,KAAA,GAAAC,OAAA;QAAAH,gBAAA,EAAAE,KAAA,EAAAE,yBAAA,EAEKR,KAAK;YAACK,CAAC,EAAE;SAAC;QAAAD,gBAAA,EAAAE,KAAA,QACVP,QAAA,EAAM,CAACU,IAAI;QAAA,OAAAH,KAAA;IAAA;AAGlB,CAAC","names":["$splice0","Badge","p","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2","_$createComponent","body"],"ignoreList":[],"sources":["render/script-bound-tag-carried.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 // A script handed to `Panel` as a prop, naming a function the script around it
@@ -37,16 +38,18 @@ const scriptBoundTagCarried = cs.create(
                 { kind: "capture", key: "count$1lcdaamjc0iij$2" },
               ],
             },
-            '($capture0, $capture1) => <$capture0 n={$capture1[0]()}>\n              <u>{"kid " + $capture1[0]()}</u>\n            </$capture0>',
-            '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AA2CqB,0BAAA,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAC5B;cAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAC7B;YAAA,EAAE,SAAK,CAAC"}',
+            '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<u>`);\nexports.default = ($capture0, $capture1) => (0, web_2.createComponent)($capture0, {\n    get n() {\n        return $capture1[0]();\n    },\n    get children() {\n        var _el$ = _tmpl$();\n        (0, web_3.insert)(_el$, () => "kid " + $capture1[0]());\n        return _el$;\n    }\n});\n}',
+            '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA2CqB,CAAAA,SAAA,EAAAC,SAAA,KAAAC,yBAAA,EAACF,SAAK;IAAA,IAACG,CAACA;QAAA,OAAEF,SAAK,CAAC,CAAC,CAAC,EAAE;IAAA;IAAA,IAAAG;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QACvB,MAAM,GAAGJ,SAAK,CAAC,CAAC,CAAC,EAAE;QAAA,OAAAI,IAAA;IAAA;CAAA,CACjB","names":["$capture0","$capture1","_$createComponent","n","children","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["render/script-bound-tag-carried.test.tsx"]}',
+            ["solid-js/web"],
           ),
         }),
         bindings: ["count$1lcdaamjc0iij$2", "Badge$1lcdaamjc0iij$3"],
       },
     ],
   },
-  '($splice0, $splice1) => {\n    const count = $splice0()(0);\n    const Badge = (p) => (<b>\n      {"outer " + p.n}\n      {p.children}\n    </b>);\n    return (<div>\n      {$splice1(count, Badge)}\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n}',
-  '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AA6BiC;IAC/B,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,CAAC,CAAuC,EAAE,EAAE,CAAC,CACzD,CAAC,CAAC,CACA;MAAA,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,QAAQ,CACb;IAAA,EAAE,CAAC,CAAC,CACL,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CACE,sBAOF,CACA;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<div><button>more`);\nexports.default = ($splice0, $splice1) => {\n    const count = $splice0()(0);\n    const Badge = p => (() => {\n        var _el$ = _tmpl$();\n        (0, web_3.insert)(_el$, () => "outer " + p.n, null);\n        (0, web_3.insert)(_el$, () => p.children, null);\n        return _el$;\n    })();\n    return (() => {\n        var _el$2 = _tmpl$2(), _el$3 = _el$2.firstChild;\n        (0, web_3.insert)(_el$2, () => $splice1(count, Badge), _el$3);\n        _el$3.$$click = () => count[1](count[0]() + 1);\n        return _el$2;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA6BiC,CAAAA,QAAA,EAAAC,QAAA;IAC/B,MAAMC,KAAK,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAC9B,MAAMG,KAAK,GAAIC,CAAuC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAEjD,QAAQ,GAAGD,CAAC,CAACI,CAAC;QAAAD,gBAAA,EAAAF,IAAA,QACdD,CAAC,CAACK,QAAQ;QAAA,OAAAJ,IAAA;IAAA,IAEd;IAED;QAAA,IAAAK,KAAA,GAAAC,OAAA,IAAAC,KAAA,GAAAF,KAAA,CAAAG,UAAA;QAAAN,gBAAA,EAAAG,KAAA,QAGMT,QAAA,CAAAC,KAAA,EAAAC,KAAA,CAOF,EAAAS,KAAA;QAAAA,KAAA,CAAAE,OAAA,GACiB,MAAMZ,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QAAA,OAAAQ,KAAA;IAAA;AAGrD,CAAC","names":["$splice0","$splice1","count","Badge","p","_el$","_tmpl$","_$insert","n","children","_el$2","_tmpl$2","_el$3","firstChild","$$click"],"ignoreList":[],"sources":["render/script-bound-tag-carried.test.tsx"]}',
+  ["solid-js/web"],
 );
 it("scriptBoundTagCarried", async (t) => {
   await snapshotCase(t, "scriptBoundTagCarried", scriptBoundTagCarried);

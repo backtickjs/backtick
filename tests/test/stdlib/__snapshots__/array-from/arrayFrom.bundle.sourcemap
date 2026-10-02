@@ -1,5 +1,4 @@
-(          → stdlib/array-from.test.tsx 16:8 {…
-) => {     → stdlib/array-from.test.tsx 16:8 {…
+() => {    → stdlib/array-from.test.tsx 16:8 {…
 const      → stdlib/array-from.test.tsx 17:7 const 
 doubled    → stdlib/array-from.test.tsx 17:13 doubled
  =         → stdlib/array-from.test.tsx 17:20  = 
@@ -11,7 +10,6 @@ from       → stdlib/array-from.test.tsx 17:29 from
 length     → stdlib/array-from.test.tsx 17:36 length
 :          → stdlib/array-from.test.tsx 17:42 : 
 4          → stdlib/array-from.test.tsx 17:44 4
-}          → stdlib/array-from.test.tsx 17:45  },…
 ,          → stdlib/array-from.test.tsx 17:47 , 
 (          → stdlib/array-from.test.tsx 17:49 (
 _          → stdlib/array-from.test.tsx 17:50 _
@@ -34,7 +32,6 @@ from       → stdlib/array-from.test.tsx 18:27 from
 length     → stdlib/array-from.test.tsx 18:34 length
 :          → stdlib/array-from.test.tsx 18:40 : 
 0          → stdlib/array-from.test.tsx 18:42 0
-}          → stdlib/array-from.test.tsx 18:43  },…
 ,          → stdlib/array-from.test.tsx 18:45 , 
 (          → stdlib/array-from.test.tsx 18:47 (
 _          → stdlib/array-from.test.tsx 18:48 _
@@ -55,7 +52,6 @@ from       → stdlib/array-from.test.tsx 19:28 from
 length     → stdlib/array-from.test.tsx 19:35 length
 :          → stdlib/array-from.test.tsx 19:41 : 
 2          → stdlib/array-from.test.tsx 19:43 2
-}          → stdlib/array-from.test.tsx 19:44  },…
 ,          → stdlib/array-from.test.tsx 19:46 , 
 (          → stdlib/array-from.test.tsx 19:48 (
 value      → stdlib/array-from.test.tsx 19:49 value

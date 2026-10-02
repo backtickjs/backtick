@@ -11,8 +11,9 @@ it("compoundAssignment", async (t) => {
     cs.create(
       "23v4b48bi2lxc:12:4",
       { params: [] },
-      '() => {\n    let n = 10;\n    n += 5;\n    n -= 3;\n    n *= 2;\n    n /= 4;\n    n %= 4;\n    let text = "a";\n    text += "b";\n    let total = 1;\n    const answered = (total += 2);\n    let x = 1;\n    x += x = 5;\n    return [n, text, answered, total, x];\n}',
-      '{"version":3,"file":"compound-assignment.test.jsx","sourceRoot":"","sources":["expressions/compound-assignment.test.tsx"],"names":[],"mappings":"AAWO;IACD,IAAI,CAAC,GAAG,EAAE,CAAC;IACX,CAAC,IAAI,CAAC,CAAC;IACP,CAAC,IAAI,CAAC,CAAC;IACP,CAAC,IAAI,CAAC,CAAC;IACP,CAAC,IAAI,CAAC,CAAC;IACP,CAAC,IAAI,CAAC,CAAC;IACP,IAAI,IAAI,GAAG,GAAG,CAAC;IACf,IAAI,IAAI,GAAG,CAAC;IACZ,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,MAAM,QAAQ,GAAG,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC;IAC9B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC;IACX,OAAO,CAAC,CAAC,EAAE,IAAI,EAAE,QAAQ,EAAE,KAAK,EAAE,CAAC,CAAC,CAAC;AACvC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let n = 10;\n    n += 5;\n    n -= 3;\n    n *= 2;\n    n /= 4;\n    n %= 4;\n    let text = "a";\n    text += "b";\n    let total = 1;\n    const answered = total += 2;\n    let x = 1;\n    x += x = 5;\n    return [n, text, answered, total, x];\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,CAAC,GAAG,EAAE;IACVA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACNA,CAAC,IAAI,CAAC;IACN,IAAIC,IAAI,GAAG,GAAG;IACdA,IAAI,IAAI,GAAG;IACX,IAAIC,KAAK,GAAG,CAAC;IACb,MAAMC,QAAQ,GAAID,KAAK,IAAI,CAAE;IAC7B,IAAIE,CAAC,GAAG,CAAC;IACTA,CAAC,IAAIA,CAAC,GAAG,CAAC;IACV,OAAO,CAACJ,CAAC,EAAEC,IAAI,EAAEE,QAAQ,EAAED,KAAK,EAAEE,CAAC,CAAC;AACtC,CAAC","names":["n","text","total","answered","x"],"ignoreList":[],"sources":["expressions/compound-assignment.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -1,5 +1,8 @@
 // 12:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const numbers = JSON.stringify([1, 2, 3]);
     const text = JSON.stringify("hi");
     const flag = JSON.stringify(true);
@@ -16,4 +19,5 @@
         JSON.stringify(back) +
         "|" +
         JSON.stringify(JSON.parse(held)));
+});
 }

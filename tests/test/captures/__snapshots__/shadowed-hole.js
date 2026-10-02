@@ -13,8 +13,9 @@ function wrapShadowed(fragment) {
   return cs.create(
     "1wiy7dknp0llv:15:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    "($splice0) => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $splice0();\n    }\n}",
-    '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AAcY;IACR,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,CAAC;QACC,MAAM,KAAK,GAAG,CAAC,CAAC;QAChB,OAAO,KAAK,GAAG,UAAS,CAAC;IAC3B,CAAC;AACH,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const total = 1;\n    {\n        const total = 2;\n        return total + $splice0();\n    }\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAcYA,QAAA;IACR,MAAMC,KAAK,GAAG,CAAC;IACf;QACE,MAAMA,KAAK,GAAG,CAAC;QACf,OAAOA,KAAK,GAAGD,QAAA,EAAS;IAC1B;AACF,CAAC","names":["$splice0","total"],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
+    [],
   );
 }
 it("shadowedHole", async (t) => {
@@ -31,8 +32,9 @@ it("shadowedHole", async (t) => {
               cs.create(
                 "1wiy7dknp0llv:28:22",
                 { params: [] },
-                "() => 10",
-                '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AA2ByB,MAAA,EAAE"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 10;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBA2ByB,QAAE","names":[],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
@@ -43,16 +45,18 @@ it("shadowedHole", async (t) => {
               cs.create(
                 "1wiy7dknp0llv:28:48",
                 { params: [] },
-                "() => 20",
-                '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BmD,MAAA,EAAE"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 20;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBA2BmD,QAAE","names":[],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
           },
         ],
       },
-      "($splice0, $splice1) => $splice0() + $splice1()",
-      '{"version":3,"file":"shadowed-hole.test.jsx","sourceRoot":"","sources":["captures/shadowed-hole.test.tsx"],"names":[],"mappings":"AA2BO,wBAAA,UAAC,GAAyB,UAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAC,GAAyBC,QAAA,EAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["captures/shadowed-hole.test.tsx"]}',
+      [],
     ),
   );
 });

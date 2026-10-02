@@ -1,7 +1,15 @@
 // 9:10
-() => <hr />
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <hr />);
+}
 
 // 16:14
-($tag0) => <div>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($tag0) => <div>
         <$tag0 />
-      </div>
+      </div>);
+}

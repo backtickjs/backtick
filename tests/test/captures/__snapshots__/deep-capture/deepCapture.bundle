@@ -1,15 +1,77 @@
-const $cs0 = ($splice0, $splice1) => $splice0() + $splice1();
-const $cs1 = ($splice0, $splice1) => {
-  const outer = $splice0();
-  return $splice1(outer);
+const $modules = {
+  "22sufdxid1i7s:28:39": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0() + $splice1();
+  },
+  "22sufdxid1i7s:18:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => {
+      const outer = $splice0();
+      return $splice1(outer);
+    };
+  },
+  "22sufdxid1i7s:28:49": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 1;
+  },
+  "22sufdxid1i7s:20:13": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $capture1) => {
+      const middle = 10;
+      return middle + $splice0($capture1);
+    };
+  },
+  "22sufdxid1i7s:22:24": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($capture0) => $capture0;
+  },
+  "22sufdxid1i7s:28:66": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 2;
+  },
 };
-const $cs2 = () => 1;
-const $cs3 = ($splice0, $capture1) => {
-  const middle = 10;
-  return middle + $splice0($capture1);
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
 };
-const $cs4 = ($capture0) => $capture0;
-const $cs5 = () => 2;
+const $cs0 = $require("22sufdxid1i7s:28:39").default;
+const $cs1 = $require("22sufdxid1i7s:18:9").default;
+const $cs2 = $require("22sufdxid1i7s:28:49").default;
+const $cs3 = $require("22sufdxid1i7s:20:13").default;
+const $cs4 = $require("22sufdxid1i7s:22:24").default;
+const $cs5 = $require("22sufdxid1i7s:28:66").default;
 export default $cs0(
   () => $cs1($cs2, (outer) => $cs3($cs4, outer)),
   () => $cs1($cs5, (outer) => $cs3($cs4, outer)),

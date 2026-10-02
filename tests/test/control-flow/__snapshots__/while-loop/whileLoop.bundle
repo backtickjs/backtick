@@ -1,13 +1,35 @@
-const $cs0 = () => {
-  let i = 0;
-  let total = 0;
-  while (i < 5) {
-    total = total + i;
-    if (i === 3) {
+const $modules = {
+  "1qmqxi23sdk0m:9:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let i = 0;
+      let total = 0;
+      while (i < 5) {
+        total = total + i;
+        if (i === 3) {
+          return total;
+        }
+        i = i + 1;
+      }
       return total;
-    }
-    i = i + 1;
-  }
-  return total;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1qmqxi23sdk0m:9:4").default;
 export default $cs0();

@@ -133,8 +133,9 @@ describe("a page's import map", () => {
     const drawing = cs.create(
       "imports:1:0",
       { params: [] },
-      "() => <button onclick={() => {}}>{String(1)}</button>",
+      "(module, exports, require) => {\nexports.default = () => <button onclick={() => {}}>{String(1)}</button>;\n}",
       '{"version":3,"sources":[],"names":[],"mappings":""}',
+      [],
     );
     const bundle = await bundler.build({
       input: drawing,

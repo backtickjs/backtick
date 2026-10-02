@@ -1,12 +1,34 @@
-const $cs0 = () => {
-  return [
-    Array.isArray([]),
-    Array.isArray([1, 2]),
-    Array.isArray("ab"),
-    Array.isArray({
-      length: 0,
-    }),
-    Array.isArray(null),
-  ];
+const $modules = {
+  "311zee6pw10s9:11:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      return [
+        Array.isArray([]),
+        Array.isArray([1, 2]),
+        Array.isArray("ab"),
+        Array.isArray({
+          length: 0,
+        }),
+        Array.isArray(null),
+      ];
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("311zee6pw10s9:11:4").default;
 export default $cs0();

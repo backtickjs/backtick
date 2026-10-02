@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
+import type { CompiledScript } from "./compileScript.js";
 import type { Diagnostic } from "./diagnostics.js";
 import {
   type EmittedScript,
@@ -14,12 +15,34 @@ import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
 import { mangle } from "./unmangle.js";
 
+/** What `cs.create` is handed for a script: which it is, and what it runs. */
+export interface RuntimeScript {
+  id: string;
+  metadata: ts.Expression;
+  emitted: EmittedScript;
+}
+
+/** A script as the client gets it, `cs.create(id, metadata, code, map, dependencies)`. */
+export function createCall(
+  ts: typeof import("typescript"),
+  { id, metadata }: RuntimeScript,
+  { code, map, dependencies }: CompiledScript,
+): ts.Expression {
+  const string = (text: string) => ts.factory.createStringLiteral(text);
+  return call(ts, "cs", "create", [
+    string(id),
+    metadata,
+    string(code),
+    string(map),
+    ts.factory.createArrayLiteralExpression(dependencies.map(string)),
+  ]);
+}
+
 export interface RewrittenScript {
   virtual: ts.Node;
-  runtime: ts.Node;
-  // what the client runs, as `runtime` carries it (null where the script did
-  // not parse)
-  emitted: EmittedScript | null;
+  // what the client runs (null where the script did not parse, which is left
+  // as written)
+  runtime: RuntimeScript | null;
   sourceMaps: Map<ts.Node, SourceRange>; // virtual -> source range
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
@@ -30,7 +53,6 @@ export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
   fileHash: string,
-  sourceName: string,
   bindings: BindingResolution,
   params: readonly ResolvedParam[] = [],
 ): RewrittenScript {
@@ -47,8 +69,7 @@ export function rewriteScript(
         ts.factory.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword),
       ),
     ]),
-    runtime: sourceNode,
-    emitted: null,
+    runtime: null,
     sourceMaps: new Map(),
     codeInformation: new Map(),
     diagnostics,
@@ -176,22 +197,13 @@ export function rewriteScript(
   const emitted = emitScript(
     ts,
     clientScript,
-    sourceName,
     params.map(paramName),
     scriptEdits(clientScript, bindings, params),
   );
 
-  const runtime = call(ts, "cs", "create", [
-    ts.factory.createStringLiteral(id),
-    metadata,
-    string(emitted.code),
-    string(emitted.map),
-  ]);
-
   return {
     virtual,
-    runtime,
-    emitted,
+    runtime: { id, metadata, emitted },
     sourceMaps,
     codeInformation: state.codeInformation,
     diagnostics,

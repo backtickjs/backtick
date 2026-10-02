@@ -10,8 +10,9 @@ it("objectValues", async (t) => {
     cs.create(
       "1lmwvcf4zc2ir:11:4",
       { params: [] },
-      '() => {\n    const prices = { apple: 1, pear: 2 };\n    return {\n        values: Object.values(prices),\n        holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")],\n    };\n}',
-      '{"version":3,"file":"object-values.test.jsx","sourceRoot":"","sources":["stdlib/object-values.test.tsx"],"names":[],"mappings":"AAUO;IACD,MAAM,MAAM,GAAG,EAAE,KAAK,EAAE,CAAC,EAAE,IAAI,EAAE,CAAC,EAAE,CAAC;IACrC,OAAO;QACL,MAAM,EAAE,MAAM,CAAC,MAAM,CAAC,MAAM,CAAC;QAC7B,KAAK,EAAE,CAAC,MAAM,CAAC,MAAM,CAAC,MAAM,EAAE,MAAM,CAAC,EAAE,MAAM,CAAC,MAAM,CAAC,MAAM,EAAE,MAAM,CAAC,CAAC;KACtE,CAAC;AACJ,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const prices = {\n        apple: 1,\n        pear: 2\n    };\n    return {\n        values: Object.values(prices),\n        holds: [Object.hasOwn(prices, "pear"), Object.hasOwn(prices, "plum")]\n    };\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,MAAMA,MAAM,GAAG;QAAEC,KAAK,EAAE,CAAC;QAAEC,IAAI,EAAE;KAAG;IACpC,OAAO;QACLC,MAAM,EAAEC,MAAM,CAACD,MAAM,CAACH,MAAM,CAAC;QAC7BK,KAAK,EAAE,CAACD,MAAM,CAACE,MAAM,CAACN,MAAM,EAAE,MAAM,CAAC,EAAEI,MAAM,CAACE,MAAM,CAACN,MAAM,EAAE,MAAM,CAAC;KACrE;AACH,CAAC","names":["prices","apple","pear","values","Object","holds","hasOwn"],"ignoreList":[],"sources":["stdlib/object-values.test.tsx"]}',
+      [],
     ),
   );
 });

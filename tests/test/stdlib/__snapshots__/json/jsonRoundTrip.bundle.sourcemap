@@ -1,5 +1,4 @@
-(          → stdlib/json.test.tsx 12:8 {…
-) => {     → stdlib/json.test.tsx 12:8 {…
+() => {    → stdlib/json.test.tsx 12:8 {…
 const      → stdlib/json.test.tsx 13:7 const 
 numbers    → stdlib/json.test.tsx 13:13 numbers
  =         → stdlib/json.test.tsx 13:20  = 
@@ -51,7 +50,6 @@ a          → stdlib/json.test.tsx 16:37 a
 b          → stdlib/json.test.tsx 16:43 b
 :          → stdlib/json.test.tsx 16:44 : 
 "two"      → stdlib/json.test.tsx 16:46 "two"
-}          → stdlib/json.test.tsx 16:51  });…
 )          → stdlib/json.test.tsx 16:53 )
 ;          → stdlib/json.test.tsx 16:54 ;
 const      → stdlib/json.test.tsx 17:7 const 

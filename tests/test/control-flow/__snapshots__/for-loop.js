@@ -10,8 +10,9 @@ it("forLoop", async (t) => {
     cs.create(
       "1z8sn9rs7fbwb:11:4",
       { params: [] },
-      "() => {\n    let total = 0;\n    for (let i = 0; i < 5; i = i + 1) {\n        total = total + i;\n    }\n    return total;\n}",
-      '{"version":3,"file":"for-loop.test.jsx","sourceRoot":"","sources":["control-flow/for-loop.test.tsx"],"names":[],"mappings":"AAUO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;IACpB,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let total = 0;\n    for (let i = 0; i < 5; i = i + 1) {\n        total = total + i;\n    }\n    return total;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAIA,KAAK,GAAG,CAAC;IACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAChCD,KAAK,GAAGA,KAAK,GAAGC,CAAC;IACnB;IACA,OAAOD,KAAK;AACd,CAAC","names":["total","i"],"ignoreList":[],"sources":["control-flow/for-loop.test.tsx"]}',
+      [],
     ),
   );
 });

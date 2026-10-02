@@ -12,21 +12,24 @@ function guard(fragment) {
   return cs.create(
     "3jzoitmu8iit8:13:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    '($splice0) => (flag) => {\n    if (flag) {\n        return $splice0();\n    }\n    return "skipped";\n}',
-    '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AAYY,cAAA,CAAC,IAAa,EAAE,EAAE;IAC1B,IAAI,IAAI,EAAE,CAAC;QACT,OAAO,UAAS,CAAC;IACnB,CAAC;IACD,OAAO,SAAS,CAAC;AACnB,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => flag => {\n    if (flag) {\n        return $splice0();\n    }\n    return "skipped";\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAYYA,QAAA,IAACC,IAAa;IACtB,IAAIA,IAAI,EAAE;QACR,OAAOD,QAAA,EAAS;IAClB;IACA,OAAO,SAAS;AAClB,CAAC","names":["$splice0","flag"],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
+    [],
   );
 }
 const ok = cs.create(
   "3jzoitmu8iit8:21:11",
   { params: [] },
-  '() => "evaluated"',
-  '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AAoBc,MAAA,WAAW"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "evaluated";\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAoBc,iBAAW","names":[],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
+  [],
 );
 const broken = cs.create(
   "3jzoitmu8iit8:23:15",
   { params: [] },
-  '() => {\n    throw "the guarded fragment must never evaluate";\n}',
-  '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AAsBkB;IAChB,MAAM,0CAA0C,CAAC;AACnD,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    throw "the guarded fragment must never evaluate";\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkB;IAChB,MAAM,0CAA0C;AAClD,CAAC","names":[],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
+  [],
 );
 it("spliceLaziness", async (t) => {
   await snapshotCase(
@@ -40,8 +43,9 @@ it("spliceLaziness", async (t) => {
           { kind: "splice", value: guard(broken), bindings: [] },
         ],
       },
-      "($splice0, $splice1) => ({\n    taken: $splice0()(true),\n    skipped: $splice1()(false),\n})",
-      '{"version":3,"file":"splice-laziness.test.jsx","sourceRoot":"","sources":["splices/splice-laziness.test.tsx"],"names":[],"mappings":"AA8BO,wBAAA,CAAC;IACF,KAAK,EAAE,UAAC,CAAY,IAAI,CAAC;IACzB,OAAO,EAAE,UAAC,CAAgB,KAAK,CAAC;CACjC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    taken: $splice0()(true),\n    skipped: $splice1()(false)\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA8BO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEF,QAAA,EAAC,CAAY,IAAI,CAAC;IACzBG,OAAO,EAAEF,QAAA,EAAC,CAAgB,KAAK;CAChC,CAAC","names":["$splice0","$splice1","taken","skipped"],"ignoreList":[],"sources":["splices/splice-laziness.test.tsx"]}',
+      [],
     ),
   );
 });

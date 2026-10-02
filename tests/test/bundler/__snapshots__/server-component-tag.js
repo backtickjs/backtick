@@ -8,8 +8,9 @@ function Rule() {
   return cs.create(
     "3pcm93ncujvif:9:9",
     { params: [] },
-    "() => <hr />",
-    '{"version":3,"file":"server-component-tag.test.jsx","sourceRoot":"","sources":["bundler/server-component-tag.test.tsx"],"names":[],"mappings":"AAQY,MAAA,CAAC,EAAE,CAAC,AAAD,EAAG"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<hr>`);\nexports.default = () => _tmpl$();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAQY,MAAAA,MAAA,EAAM","names":["_tmpl$"],"ignoreList":[],"sources":["bundler/server-component-tag.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("refuses a server component as a tag in a script", async () => {
@@ -19,8 +20,9 @@ it("refuses a server component as a tag in a script", async () => {
       input: cs.create(
         "3pcm93ncujvif:16:13",
         { params: [{ kind: "tag", value: Rule }] },
-        "($tag0) => <div>\n        <$tag0 />\n      </div>",
-        '{"version":3,"file":"server-component-tag.test.jsx","sourceRoot":"","sources":["bundler/server-component-tag.test.tsx"],"names":[],"mappings":"AAegB,WAAA,CAAC,GAAG,CACZ;QAAA,CAAC,KAAI,CAAC,AAAD,EACP;MAAA,EAAE,GAAG,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $tag0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag0, {}));\n    return _el$;\n})();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAegBA,KAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACPJ,KAAI;IAAA,OAAAC,IAAA;AAAA,IACD","names":["$tag0","_el$","_tmpl$","_$insert","_$createComponent"],"ignoreList":[],"sources":["bundler/server-component-tag.test.tsx"]}',
+        ["solid-js/web"],
       ),
       external: {},
     }),

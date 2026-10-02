@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 const held = cs.create(
   "xwewmj2gozc5:6:13",
   { params: [] },
-  "() => (Tag) => <Tag />",
-  '{"version":3,"file":"script-element-bound-tag.test.jsx","sourceRoot":"","sources":["typecheck-errors/script-element-bound-tag.test.tsx"],"names":[],"mappings":"AAKgB,MAAA,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC,AAAD,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = () => Tag => (0, web_1.createComponent)(Tag, {});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAKgB,MAACA,GAAW,IAAAC,yBAAA,EAAMD,GAAG,KAAG","names":["Tag","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/script-element-bound-tag.test.tsx"]}',
+  ["solid-js/web"],
 );

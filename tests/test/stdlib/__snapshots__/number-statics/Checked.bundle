@@ -1,39 +1,72 @@
-import { template as _$template } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 import { createComponent as $i0 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
-const $cs1 = () => {
-  const positive = Number.EPSILON > 0;
-  const largest = Number.MAX_VALUE > 1e308;
-  const safe =
-    Number.MAX_SAFE_INTEGER === 9007199254740991 &&
-    Number.MIN_SAFE_INTEGER === -9007199254740991 &&
-    Number.MIN_VALUE > 0 &&
-    Number.isSafeInteger(3) &&
-    !Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1);
-  const whole = Number.isInteger(2);
-  const fractional = Number.isInteger(2.5);
-  const written = Number.isFinite("2");
-  return (() => {
-    var _el$ = _tmpl$();
-    _$insert(
-      _el$,
-      whole +
-        " " +
-        fractional +
-        " " +
-        written +
-        " " +
-        positive +
-        " " +
-        largest +
-        " " +
-        safe,
-    );
-    return _el$;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "1o8290c5hfi65:9:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);
+    exports.default = () => {
+      const positive = Number.EPSILON > 0;
+      const largest = Number.MAX_VALUE > 1e308;
+      const safe =
+        Number.MAX_SAFE_INTEGER === 9007199254740991 &&
+        Number.MIN_SAFE_INTEGER === -9007199254740991 &&
+        Number.MIN_VALUE > 0 &&
+        Number.isSafeInteger(3) &&
+        !Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1);
+      const whole = Number.isInteger(2);
+      const fractional = Number.isInteger(2.5);
+      const written = Number.isFinite("2");
+      return (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(
+          _el$,
+          whole +
+            " " +
+            fractional +
+            " " +
+            written +
+            " " +
+            positive +
+            " " +
+            largest +
+            " " +
+            safe,
+        );
+        return _el$;
+      })();
+    };
+  },
 };
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1uptcsn9236u2:352:9").default;
+const $cs1 = $require("1o8290c5hfi65:9:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(),

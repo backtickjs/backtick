@@ -1,42 +1,64 @@
 import { createSignal as $i0 } from "solid-js";
-const $cs0 = ($splice0) => () => {
-  const held = $splice0()("waiting");
-  window
-    .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
-      signal: window.AbortSignal.timeout(3000),
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw "answered " + response.status;
-      }
-      return response.json();
-    })
-    .then((value) => {
-      held[1](value === null ? "null" : "a value");
-    })
-    .catch((error) => {
-      held[1]("failed — " + String(error));
+const $modules = {
+  "cwjgymif0jr:15:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
     });
-  window
-    .fetch("/cases", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "Math.trunc",
-        passed: true,
-      }),
-    })
-    .then((response) => response.text())
-    .then(
-      (text) => {
-        held[1](text);
-      },
-      (error) => {
-        held[1](String(error));
-      },
-    );
-  return held[0]();
+    exports.default = ($splice0) => () => {
+      const held = $splice0()("waiting");
+      window
+        .fetch("/cases/built-ins/Math/trunc/Math.trunc_Success", {
+          signal: window.AbortSignal.timeout(3000),
+        })
+        .then((response) => {
+          if (response.status !== 200) {
+            throw "answered " + response.status;
+          }
+          return response.json();
+        })
+        .then((value) => {
+          held[1](value === null ? "null" : "a value");
+        })
+        .catch((error) => {
+          held[1]("failed — " + String(error));
+        });
+      window
+        .fetch("/cases", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: "Math.trunc",
+            passed: true,
+          }),
+        })
+        .then((response) => response.text())
+        .then(
+          (text) => {
+            held[1](text);
+          },
+          (error) => {
+            held[1](String(error));
+          },
+        );
+      return held[0]();
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("cwjgymif0jr:15:4").default;
 export default $cs0(() => $i0);

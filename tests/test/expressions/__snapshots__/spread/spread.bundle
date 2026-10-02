@@ -1,9 +1,31 @@
-const $cs0 = () => {
-  const front = [1, 2];
-  const back = [3];
-  const none = [];
-  const all = [0, ...front, ...none, ...back, 4];
-  const twice = [...all, ...all];
-  return all.join(",") + "|" + twice.length;
+const $modules = {
+  "umu4jsb4aovz:12:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      const front = [1, 2];
+      const back = [3];
+      const none = [];
+      const all = [0, ...front, ...none, ...back, 4];
+      const twice = [...all, ...all];
+      return all.join(",") + "|" + twice.length;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("umu4jsb4aovz:12:4").default;
 export default $cs0();

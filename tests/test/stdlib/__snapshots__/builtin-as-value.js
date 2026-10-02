@@ -15,8 +15,9 @@ it("builtinAsValue", async (t) => {
     cs.create(
       "1n7k5w76rpsyr:16:4",
       { params: [] },
-      "() => {\n    const floor = Math.floor;\n    const apply = (f, n) => f(n);\n    return floor(3.5) + apply(Math.ceil, 3.5);\n}",
-      '{"version":3,"file":"builtin-as-value.test.jsx","sourceRoot":"","sources":["stdlib/builtin-as-value.test.tsx"],"names":[],"mappings":"AAeO;IACD,MAAM,KAAK,GAAG,IAAI,CAAC,KAAK,CAAC;IACzB,MAAM,KAAK,GAAG,CAAC,CAAwB,EAAE,CAAS,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAC5D,OAAO,KAAK,CAAC,GAAG,CAAC,GAAG,KAAK,CAAC,IAAI,CAAC,IAAI,EAAE,GAAG,CAAC,CAAC;AAC5C,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const floor = Math.floor;\n    const apply = (f, n) => f(n);\n    return floor(3.5) + apply(Math.ceil, 3.5);\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAeO;IACD,MAAMA,KAAK,GAAGC,IAAI,CAACD,KAAK;IACxB,MAAME,KAAK,GAAGA,CAACC,CAAwB,EAAEC,CAAS,KAAKD,CAAC,CAACC,CAAC,CAAC;IAC3D,OAAOJ,KAAK,CAAC,GAAG,CAAC,GAAGE,KAAK,CAACD,IAAI,CAACI,IAAI,EAAE,GAAG,CAAC;AAC3C,CAAC","names":["floor","Math","apply","f","n","ceil"],"ignoreList":[],"sources":["stdlib/builtin-as-value.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -14,8 +14,9 @@ const SharedCounter = async ({ size }) =>
   cs.create(
     "3j3w79mbd5wgp:16:2",
     { params: [{ kind: "splice", value: size, bindings: [] }] },
-    '($splice0) => <span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {\n        $splice0()[1]($splice0()[0]() + 1);\n    }}>\n    press\n  </span>',
-    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAeK,cAAA,CAAC,IAAI,CACN,KAAK,CAAC,CAAC,aAAa,GAAG,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;QACZ,UAAK,CAAC,CAAC,CAAC,CAAC,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;IAC3B,CAAC,CAAC,CAEF;;EACF,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>press`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n        $splice0()[1]($splice0()[0]() + 1);\n    };\n    (0, web_4.effect)(_$p => (0, web_3.style)(_el$, "font-size: " + $splice0()[0]() + "px", _$p));\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAeKA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAEQ;QACPH,QAAA,EAAK,CAAC,CAAC,CAAC,CAACA,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC1B,CAAC;IAAAI,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGD,QAAA,EAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAK,GAAA;IAAA,OAAAJ,IAAA;AAAA,IAMnC","names":["$splice0","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
+    ["solid-js/web"],
   );
 async function SharingPanel() {
   return cs.create(
@@ -29,8 +30,9 @@ async function SharingPanel() {
             size: cs.create(
               "3j3w79mbd5wgp:30:33",
               { params: [{ kind: "capture", key: "size$3j3w79mbd5wgp$0" }] },
-              "($capture0) => $capture0",
-              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA6BoC,eAAA,SAAI"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBA6BoCA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
+              [],
             ),
           }),
           bindings: ["size$3j3w79mbd5wgp$0"],
@@ -41,16 +43,18 @@ async function SharingPanel() {
             size: cs.create(
               "3j3w79mbd5wgp:31:33",
               { params: [{ kind: "capture", key: "size$3j3w79mbd5wgp$0" }] },
-              "($capture0) => $capture0",
-              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA8BoC,eAAA,SAAI"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBA8BoCA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
+              [],
             ),
           }),
           bindings: ["size$3j3w79mbd5wgp$0"],
         },
       ],
     },
-    "($splice0, $splice1, $splice2) => {\n    const size = $splice0()(16);\n    return (<div>\n        {$splice1(size)}\n        {$splice2(size)}\n      </div>);\n}",
-    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAyBY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,cAAsC,CACvC;QAAA,CAAC,cAAsC,CACzC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1, $splice2) => {\n    const size = $splice0()(16);\n    return (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => $splice1(size), null);\n        (0, web_2.insert)(_el$, () => $splice2(size), null);\n        return _el$;\n    })();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAyBY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAMC,IAAI,GAAGH,QAAA,EAAa,CAAC,EAAE,CAAC;IAC9B;QAAA,IAAAI,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAEKH,QAAA,CAAAE,IAAA,CAAsC;QAAAG,gBAAA,EAAAF,IAAA,QACtCF,QAAA,CAAAC,IAAA,CAAsC;QAAA,OAAAC,IAAA;IAAA;AAG7C,CAAC","names":["$splice0","$splice1","$splice2","size","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["state/local-state-prop.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 describe("local state", () => {

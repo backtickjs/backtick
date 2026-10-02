@@ -11,8 +11,9 @@ it("tsExpectError", async (t) => {
     cs.create(
       "353rib4gy05pn:12:4",
       { params: [] },
-      '() => {\n    const count = "one";\n    return count;\n}',
-      '{"version":3,"file":"ts-expect-error.test.jsx","sourceRoot":"","sources":["expressions/ts-expect-error.test.tsx"],"names":[],"mappings":"AAWO;IAED,MAAM,KAAK,GAAW,KAAK,CAAC;IAC5B,OAAO,KAAK,CAAC;AACf,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const count = "one";\n    return count;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IAED,MAAMA,KAAK,GAAW,KAAK;IAC3B,OAAOA,KAAK;AACd,CAAC","names":["count"],"ignoreList":[],"sources":["expressions/ts-expect-error.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -1,5 +1,8 @@
 // 16:5
-($splice0) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => {
     const said = $splice0()("");
     return (<form onsubmit={(event) => {
             event.preventDefault();
@@ -11,4 +14,5 @@
             {said[0]()}
           </button>
         </form>);
+});
 }

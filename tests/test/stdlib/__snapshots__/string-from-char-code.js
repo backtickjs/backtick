@@ -8,8 +8,9 @@ async function Written() {
   return cs.create(
     "rfc8jtzlhm6q:8:9",
     { params: [] },
-    "() => {\n    return (<span>\n        {String.fromCharCode(72, 105) + String.fromCharCode(0xd83d, 0xde00)}\n      </span>);\n}",
-    '{"version":3,"file":"string-from-char-code.test.jsx","sourceRoot":"","sources":["stdlib/string-from-char-code.test.tsx"],"names":[],"mappings":"AAOY;IACR,OAAO,CACL,CAAC,IAAI,CACH;QAAA,CAAC,MAAM,CAAC,YAAY,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,YAAY,CAAC,MAAM,EAAE,MAAM,CAAC,CACrE;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>Hi\uD83D\uDE00`);\nexports.default = () => {\n    return _tmpl$();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAOY;IACR,OAAAA,MAAA;AAKF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/string-from-char-code.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("Written", async (t) => {

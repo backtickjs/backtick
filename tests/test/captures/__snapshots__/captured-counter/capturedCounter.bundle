@@ -1,9 +1,31 @@
-const $cs0 = () => {
-  let count = 0;
-  const bump = () => {
-    count = count + 1;
-    return count;
-  };
-  return bump() + bump();
+const $modules = {
+  "2s7xqailmdcpa:11:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let count = 0;
+      const bump = () => {
+        count = count + 1;
+        return count;
+      };
+      return bump() + bump();
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2s7xqailmdcpa:11:4").default;
 export default $cs0();

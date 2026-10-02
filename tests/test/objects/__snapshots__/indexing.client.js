@@ -1,29 +1,69 @@
 // 11:33
-($splice0) => $splice0()(() => [5, 31, 7]["0"])
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0()(() => [5, 31, 7]["0"]));
+}
 
 // 12:33
-($splice0) => $splice0()(() => "abc"["0"])
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0()(() => "abc"["0"]));
+}
 
 // 15:22
-($splice0) => $splice0()(() => ({ x: 1 })[0])
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0()(() => ({ x: 1 })[0]));
+}
 
 // 19:22
-($splice0) => $splice0()(() => 7[0])
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0()(() => 7[0]));
+}
 
 // 27:7
-() => [5, 31, 7][9]
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => [5, 31, 7][9]);
+}
 
 // 28:7
-() => [5, 31, 7][1.5]
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => [5, 31, 7][1.5]);
+}
 
 // 29:7
-() => [5, 31, 7][-1]
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => [5, 31, 7][-1]);
+}
 
 // 30:7
-() => ({ x: 1 })["y"]
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => ({ x: 1 })["y"]);
+}
 
 // 31:7
-() => "abc"[9]
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => "abc"[9]);
+}
 
 // 34:35
-($splice0, $splice1) => $splice0()(() => $splice1())
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => $splice0()(() => $splice1()));
+}

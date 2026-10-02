@@ -1,5 +1,8 @@
 // 16:10
-($splice0, $tag1) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $tag1) => {
     const names = $splice0()(["a", "b", "c"]);
     const rotate = () => {
         const held = names[0]();
@@ -13,4 +16,5 @@
           </$tag1>
         </div>
       </div>);
+});
 }

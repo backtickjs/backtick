@@ -29,8 +29,9 @@ describe("a prop", () => {
       cs.create(
         "3bxd5p1c8e0pp:32:29",
         { params: [] },
-        '() => <a href="/counter" id="press">\n      go\n    </a>',
-        '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA+BgC,MAAA,CAAC,CAAC,CAAC,IAAI,CAAC,UAAU,CAAC,EAAE,CAAC,OAAO,CACvD;;IACF,EAAE,CAAC,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<a href=/counter id=press>go`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBA+BgC,MAAAA,MAAA,EAExB","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     assert.deepEqual(attributes(link), { href: "/counter", id: "press" });
@@ -45,8 +46,9 @@ describe("an svg tag", () => {
       cs.create(
         "3bxd5p1c8e0pp:44:29",
         { params: [] },
-        "() => <div>\n      <svg>\n        <path />\n      </svg>\n    </div>",
-        '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA2CgC,MAAA,CAAC,GAAG,CAC9B;MAAA,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,AAAD,EACP;MAAA,EAAE,GAAG,CACP;IAAA,EAAE,GAAG,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><svg><path>`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBA2CgC,MAAAA,MAAA,EAItB","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     const path = root.querySelector("path");
@@ -64,8 +66,9 @@ describe("an attribute's case", () => {
       cs.create(
         "3bxd5p1c8e0pp:61:28",
         { params: [] },
-        '() => <svg viewBox="0 0 279 38"/>',
-        '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA4D+B,MAAA,CAAC,GAAG,CAAC,OAAO,CAAC,YAAY,EAAG"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<svg viewBox="0 0 279 38">`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBA4D+B,MAAAA,MAAA,EAA4B","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     assert.deepEqual(attributes(svg), { viewBox: "0 0 279 38" });
@@ -78,8 +81,9 @@ describe("an attribute's case", () => {
       cs.create(
         "3bxd5p1c8e0pp:69:28",
         { params: [] },
-        '() => <svg>\n      <path stroke-width={2} fill-rule="evenodd"/>\n      <filter color-interpolation-filters="sRGB"/>\n    </svg>',
-        '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AAoE+B,MAAA,CAAC,GAAG,CAC7B;MAAA,CAAC,IAAI,CAAC,YAAY,CAAC,CAAC,CAAC,CAAC,CAAC,SAAS,CAAC,SAAS,EAC1C;MAAA,CAAC,MAAM,CAAC,2BAA2B,CAAC,MAAM,EAC5C;IAAA,EAAE,GAAG,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<svg><path stroke-width=2 fill-rule=evenodd></path><filter color-interpolation-filters=sRGB>`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoE+B,MAAAA,MAAA,EAGrB","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     assert.deepEqual(attributes(svg.querySelector("path")), {
@@ -96,8 +100,9 @@ describe("an attribute's case", () => {
       cs.create(
         "3bxd5p1c8e0pp:84:28",
         { params: [] },
-        '() => <svg>\n      <linearGradient gradientTransform="rotate(90)"/>\n      <feTurbulence numOctaves={3}/>\n    </svg>',
-        '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AAmF+B,MAAA,CAAC,GAAG,CAC7B;MAAA,CAAC,cAAc,CAAC,iBAAiB,CAAC,YAAY,EAC9C;MAAA,CAAC,YAAY,CAAC,UAAU,CAAC,CAAC,CAAC,CAAC,EAC9B;IAAA,EAAE,GAAG,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<svg><linearGradient gradientTransform=rotate(90)></linearGradient><feTurbulence numOctaves=3>`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBAmF+B,MAAAA,MAAA,EAGrB","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     assert.deepEqual(attributes(svg.children[0]), {
@@ -110,8 +115,9 @@ describe("an attribute's case", () => {
       cs.create(
         "3bxd5p1c8e0pp:95:28",
         { params: [] },
-        "() => <div tabIndex={2}/>",
-        '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AA8F+B,MAAA,CAAC,GAAG,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div tabindex=2>`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBA8F+B,MAAAA,MAAA,EAAoB","names":["_tmpl$"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     assert.deepEqual(attributes(div), { tabindex: "2" });
@@ -124,8 +130,9 @@ describe("a field's value", () => {
     return cs.create(
       "3bxd5p1c8e0pp:104:11",
       { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-      '($splice0) => {\n    const text = $splice0()("first");\n    const isOn = $splice0()(false);\n    return (<div>\n          <input aria-label="text" value={text[0]()}/>\n          <input type="checkbox" aria-label="on" checked={isOn[0]()}/>\n          <button onclick={() => {\n            text[1]("second");\n            isOn[1](true);\n        }}>\n            write\n          </button>\n        </div>);\n}',
-      '{"version":3,"file":"attributes.test.jsx","sourceRoot":"","sources":["render/attributes.test.tsx"],"names":[],"mappings":"AAuGc;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,OAAO,CAAC,CAAC;IACpC,MAAM,IAAI,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAK,CAAC,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1C;UAAA,CAAC,KAAK,CAAC,IAAI,CAAC,UAAU,CAAC,UAAU,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,EAC1D;UAAA,CAAC,MAAM,CACL,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,CAAC;YAClB,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QAChB,CAAC,CAAC,CAEF;;UACF,EAAE,MAAM,CACV;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><input aria-label=text><input type=checkbox aria-label=on><button>write`);\nexports.default = $splice0 => {\n    const text = $splice0()("first");\n    const isOn = $splice0()(false);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling, _el$4 = _el$3.nextSibling;\n        _el$4.$$click = () => {\n            text[1]("second");\n            isOn[1](true);\n        };\n        (0, web_3.effect)(() => _el$2.value = text[0]());\n        (0, web_3.effect)(() => _el$3.checked = isOn[0]());\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAuGcA,QAAA;IACR,MAAMC,IAAI,GAAGD,QAAA,EAAa,CAAC,OAAO,CAAC;IACnC,MAAME,IAAI,GAAGF,QAAA,EAAa,CAAC,KAAK,CAAC;IACjC;QAAA,IAAAG,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA;QAAAC,KAAA,CAAAC,OAAA,GAKe;YACPT,IAAI,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC;YACjBC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;QACf,CAAC;QAAAS,gBAAA,QAAAN,KAAA,CAAAO,KAAA,GAN6BX,IAAI,CAAC,CAAC,CAAC,EAAE;QAAAU,gBAAA,QAAAJ,KAAA,CAAAM,OAAA,GACOX,IAAI,CAAC,CAAC,CAAC,EAAE;QAAA,OAAAC,IAAA;IAAA;AAW/D,CAAC","names":["$splice0","text","isOn","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","$$click","_$effect","value","checked"],"ignoreList":[],"sources":["render/attributes.test.tsx"]}',
+      ["solid-js/web"],
     );
   }
   it("follows a write after the field was edited", async () => {

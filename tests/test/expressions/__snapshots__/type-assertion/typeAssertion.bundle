@@ -1,5 +1,27 @@
-const $cs0 = ($splice0) => {
-  const page = JSON.parse($splice0());
-  return page.rows[0] + " of " + page.count;
+const $modules = {
+  "3amzui83z49rq:19:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      const page = JSON.parse($splice0());
+      return page.rows[0] + " of " + page.count;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3amzui83z49rq:19:4").default;
 export default $cs0(() => '{"rows":["one","two"],"count":2}');

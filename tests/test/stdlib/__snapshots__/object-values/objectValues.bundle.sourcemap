@@ -1,5 +1,4 @@
-(        → stdlib/object-values.test.tsx 11:8 {…
-) => {   → stdlib/object-values.test.tsx 11:8 {…
+() => {  → stdlib/object-values.test.tsx 11:8 {…
 const    → stdlib/object-values.test.tsx 12:7 const 
 prices   → stdlib/object-values.test.tsx 12:13 prices
  =       → stdlib/object-values.test.tsx 12:19  = 
@@ -11,7 +10,6 @@ apple    → stdlib/object-values.test.tsx 12:24 apple
 pear     → stdlib/object-values.test.tsx 12:34 pear
 :        → stdlib/object-values.test.tsx 12:38 : 
 2        → stdlib/object-values.test.tsx 12:40 2
-}        → stdlib/object-values.test.tsx 12:41  };…
 ;        → stdlib/object-values.test.tsx 12:43 ;
 return   → stdlib/object-values.test.tsx 13:7 return 
 {        → stdlib/object-values.test.tsx 13:14 {

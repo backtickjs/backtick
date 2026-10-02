@@ -1,11 +1,33 @@
-const $cs0 = () => {
-  let i = 0;
-  for (;;) {
-    if (i === 4) {
-      break;
-    }
-    i = i + 1;
-  }
-  return i;
+const $modules = {
+  "3voddrkfnxnd9:10:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let i = 0;
+      for (;;) {
+        if (i === 4) {
+          break;
+        }
+        i = i + 1;
+      }
+      return i;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3voddrkfnxnd9:10:4").default;
 export default $cs0();

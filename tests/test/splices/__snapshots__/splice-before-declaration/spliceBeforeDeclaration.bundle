@@ -1,12 +1,58 @@
-const $cs0 = ($splice0, $splice1) => $splice0() + $splice1();
-const $cs1 = ($splice0) => {
-  const before = 1;
-  const spliced = $splice0();
-  const after = 2;
-  return before + spliced + after;
+const $modules = {
+  "1xi8jyc89buh5:28:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0() + $splice1();
+  },
+  "1xi8jyc89buh5:16:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      const before = 1;
+      const spliced = $splice0();
+      const after = 2;
+      return before + spliced + after;
+    };
+  },
+  "1xi8jyc89buh5:28:18": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 10;
+  },
+  "1xi8jyc89buh5:28:40": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 20;
+  },
 };
-const $cs2 = () => 10;
-const $cs3 = () => 20;
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1xi8jyc89buh5:28:4").default;
+const $cs1 = $require("1xi8jyc89buh5:16:9").default;
+const $cs2 = $require("1xi8jyc89buh5:28:18").default;
+const $cs3 = $require("1xi8jyc89buh5:28:40").default;
 export default $cs0(
   () => $cs1($cs2),
   () => $cs1($cs3),

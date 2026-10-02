@@ -9,8 +9,9 @@ it("partialReturnScript", async (t) => {
     cs.create(
       "x79h35ggz599:10:4",
       { params: [] },
-      '() => {\n    let n = 1;\n    if (n === 2) {\n        return "some";\n    }\n}',
-      '{"version":3,"file":"partial-return.test.jsx","sourceRoot":"","sources":["control-flow/partial-return.test.tsx"],"names":[],"mappings":"AASO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;QACZ,OAAO,MAAM,CAAC;IAChB,CAAC;AACH,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let n = 1;\n    if (n === 2) {\n        return "some";\n    }\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBASO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIA,CAAC,KAAK,CAAC,EAAE;QACX,OAAO,MAAM;IACf;AACF,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/partial-return.test.tsx"]}',
+      [],
     ),
   );
 });
@@ -21,8 +22,9 @@ it("partialReturnArrow", async (t) => {
     cs.create(
       "x79h35ggz599:23:4",
       { params: [] },
-      '() => {\n    const pick = (b) => {\n        if (b) {\n            return "taken";\n        }\n    };\n    return [pick(true), pick(false)];\n}',
-      '{"version":3,"file":"partial-return.test.jsx","sourceRoot":"","sources":["control-flow/partial-return.test.tsx"],"names":[],"mappings":"AAsBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAU,EAAE,EAAE;QAC1B,IAAI,CAAC,EAAE,CAAC;YACN,OAAO,OAAO,CAAC;QACjB,CAAC;IACH,CAAC,CAAC;IACF,OAAO,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC;AACnC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const pick = b => {\n        if (b) {\n            return "taken";\n        }\n    };\n    return [pick(true), pick(false)];\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAsBO;IACD,MAAMA,IAAI,GAAIC,CAAU;QACtB,IAAIA,CAAC,EAAE;YACL,OAAO,OAAO;QAChB;IACF,CAAC;IACD,OAAO,CAACD,IAAI,CAAC,IAAI,CAAC,EAAEA,IAAI,CAAC,KAAK,CAAC,CAAC;AAClC,CAAC","names":["pick","b"],"ignoreList":[],"sources":["control-flow/partial-return.test.tsx"]}',
+      [],
     ),
   );
 });

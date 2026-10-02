@@ -1,27 +1,73 @@
-const $cs0 = ($splice0, $splice1, $splice2) => ({
-  found: $splice0()({
-    x: 5,
-  }),
-  missing: $splice0()(null),
-  deep: $splice1()({
-    inner: {
-      z: 7,
-    },
-  }),
-  cut: $splice1()({
-    inner: null,
-  }),
-  top: $splice1()(null),
-  loud: $splice2()("hi"),
-  silent: $splice2()(null),
-});
-const $cs1 = () => (p) => {
-  return p?.x;
+const $modules = {
+  "2dtorvijco8u0:24:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1, $splice2) => ({
+      found: $splice0()({
+        x: 5,
+      }),
+      missing: $splice0()(null),
+      deep: $splice1()({
+        inner: {
+          z: 7,
+        },
+      }),
+      cut: $splice1()({
+        inner: null,
+      }),
+      top: $splice1()(null),
+      loud: $splice2()("hi"),
+      silent: $splice2()(null),
+    });
+  },
+  "2dtorvijco8u0:8:13": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (p) => {
+      return p?.x;
+    };
+  },
+  "2dtorvijco8u0:12:13": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (o) => {
+      return o?.inner?.z;
+    };
+  },
+  "2dtorvijco8u0:16:14": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (s) => {
+      return s?.concat("!");
+    };
+  },
 };
-const $cs2 = () => (o) => {
-  return o?.inner?.z;
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
 };
-const $cs3 = () => (s) => {
-  return s?.concat("!");
-};
+const $cs0 = $require("2dtorvijco8u0:24:4").default;
+const $cs1 = $require("2dtorvijco8u0:8:13").default;
+const $cs2 = $require("2dtorvijco8u0:12:13").default;
+const $cs3 = $require("2dtorvijco8u0:16:14").default;
 export default $cs0($cs1, $cs2, $cs3);

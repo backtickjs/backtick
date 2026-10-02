@@ -1,6 +1,5 @@
 // 8:15
-() =>    → 8:18 (name?:…
-(        → 8:18 (
+() => (  → 8:18 (name?:…
 name     → 8:19 name
 )        → 8:32 ) 
 =>       → 8:34 =>
@@ -14,16 +13,16 @@ concat   → 9:16 concat
 )        → 9:26 )
 ;        → 9:27 ;
 }        → 10:1 }
+);       → 10:2 `;…
 
 // 14:16
-() =>   → 14:19 () => 
-()      → 14:19 () 
-=>      → 14:22 =>
-2       → 14:25 2
+() => ()   → 14:19 ()…
+=>         → 14:22 =>
+2          → 14:25 2
+);         → 14:26 `;…
 
 // 16:21
-() =>    → 16:24 (cb?:…
-(        → 16:24 (
+() => (  → 16:24 (cb?:…
 cb       → 16:25 cb
 )        → 16:42 ) 
 =>       → 16:44 =>
@@ -36,47 +35,48 @@ cb       → 17:10 cb
 0        → 17:20 0
 ;        → 17:21 ;
 }        → 18:1 }
+);       → 18:2 `;…
 
 // 24:5
-($splice0, $splice1, $splice2) =>   → 24:8 ({…
-(                                   → 24:8 (
-{                                   → 24:9 {
-named                               → 25:7 named
-:                                   → 25:12 : 
-$splice0()                          → 25:14 $greet("hi"),…
-(                                   → 25:20 (
-"hi"                                → 25:21 "hi"
-)                                   → 25:25 )
-,                                   → 25:26 ,
-explicit                            → 26:7 explicit
-:                                   → 26:15 : 
-$splice0()                          → 26:17 $greet(undefined),…
-(                                   → 26:23 (
-undefined                           → 26:24 undefined
-)                                   → 26:33 )
-,                                   → 26:34 ,
-omitted                             → 27:7 omitted
-:                                   → 27:14 : 
-$splice0()                          → 27:16 $greet(),…
-()                                  → 27:22 ()
-,                                   → 27:24 ,
-supplied                            → 28:7 supplied
-:                                   → 28:15 : 
-$splice1()                          → 28:17 $callIfGiven($double),…
-(                                   → 28:29 (
-$splice2()                          → 28:30 $double),…
-)                                   → 28:37 )
-,                                   → 28:38 ,
-fallback                            → 29:7 fallback
-:                                   → 29:15 : 
-$splice1()                          → 29:17 $callIfGiven(undefined),…
-(                                   → 29:29 (
-undefined                           → 29:30 undefined
-)                                   → 29:39 )
-,                                   → 29:40 ,
-omittedCallback                     → 30:7 omittedCallback
-:                                   → 30:22 : 
-$splice1()                          → 30:24 $callIfGiven(),…
-()                                  → 30:36 ()
-,                                   → 30:38 ,
-)                                   → 31:6 )
+($splice0, $splice1, $splice2) => (  → 24:8 ({…
+{                                    → 24:9 {
+named                                → 25:7 named
+:                                    → 25:12 : 
+$splice0()                           → 25:14 $greet("hi"),…
+(                                    → 25:20 (
+"hi"                                 → 25:21 "hi"
+)                                    → 25:25 )
+,                                    → 25:26 ,
+explicit                             → 26:7 explicit
+:                                    → 26:15 : 
+$splice0()                           → 26:17 $greet(undefined),…
+(                                    → 26:23 (
+undefined                            → 26:24 undefined
+)                                    → 26:33 )
+,                                    → 26:34 ,
+omitted                              → 27:7 omitted
+:                                    → 27:14 : 
+$splice0()                           → 27:16 $greet(),…
+()                                   → 27:22 ()
+,                                    → 27:24 ,
+supplied                             → 28:7 supplied
+:                                    → 28:15 : 
+$splice1()                           → 28:17 $callIfGiven($double),…
+(                                    → 28:29 (
+$splice2()                           → 28:30 $double),…
+)                                    → 28:37 )
+,                                    → 28:38 ,
+fallback                             → 29:7 fallback
+:                                    → 29:15 : 
+$splice1()                           → 29:17 $callIfGiven(undefined),…
+(                                    → 29:29 (
+undefined                            → 29:30 undefined
+)                                    → 29:39 )
+,                                    → 29:40 ,
+omittedCallback                      → 30:7 omittedCallback
+:                                    → 30:22 : 
+$splice1()                           → 30:24 $callIfGiven(),…
+()                                   → 30:36 ()
+,                                    → 30:38 ,
+)                                    → 31:6 )
+);                                   → 31:7 `,…

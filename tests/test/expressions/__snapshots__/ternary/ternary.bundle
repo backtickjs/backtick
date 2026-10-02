@@ -1,8 +1,38 @@
-const $cs0 = ($splice0) => ({
-  absent: $splice0()(null),
-  present: $splice0()(4),
-});
-const $cs1 = () => (n) => {
-  return n === null ? 0 : n + 1;
+const $modules = {
+  "uekyc2sf8mzc:15:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => ({
+      absent: $splice0()(null),
+      present: $splice0()(4),
+    });
+  },
+  "uekyc2sf8mzc:7:13": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (n) => {
+      return n === null ? 0 : n + 1;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("uekyc2sf8mzc:15:4").default;
+const $cs1 = $require("uekyc2sf8mzc:7:13").default;
 export default $cs0($cs1);

@@ -26,8 +26,9 @@ async function Swatch(props) {
         { kind: "splice", value: label, bindings: [] },
       ],
     },
-    "($splice0, $splice1) => <span class={$splice0()}>{$splice1()}</span>",
-    '{"version":3,"file":"component-host-props.test.jsx","sourceRoot":"","sources":["components/component-host-props.test.tsx"],"names":[],"mappings":"AAqBY,wBAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,UAAO,CAAC,CAAC,CAAC,UAAM,CAAC,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_4.insert)(_el$, $splice1);\n    (0, web_3.effect)(() => (0, web_2.className)(_el$, $splice0()));\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAqBY,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAuBD,QAAA;IAAAI,gBAAA,QAAAC,mBAAA,EAAAJ,IAAA,EAAVF,QAAA,EAAO;IAAA,OAAAE,IAAA;AAAA,IAAiB","names":["$splice0","$splice1","_el$","_tmpl$","_$insert","_$effect","_$className"],"ignoreList":[],"sources":["components/component-host-props.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("componentHostProps", async (t) => {
@@ -48,8 +49,9 @@ it("componentHostProps", async (t) => {
           },
         ],
       },
-      "($splice0) => <div>\n      {$splice0()}\n    </div>",
-      '{"version":3,"file":"component-host-props.test.jsx","sourceRoot":"","sources":["components/component-host-props.test.tsx"],"names":[],"mappings":"AA4BO,cAAA,CAAC,GAAG,CACL;MAAA,CAAC,UAAmE,CACtE;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IACG","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-host-props.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

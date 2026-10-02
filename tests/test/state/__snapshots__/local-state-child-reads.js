@@ -24,8 +24,9 @@ const ReadingRow = async ({ id, selected }) =>
         { kind: "splice", value: id, bindings: [] },
       ],
     },
-    '($splice0, $splice1) => <div>\n  <span style={"font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"}>\n    {"row " + $splice1() + " of " + $splice0()[0]()}\n  </span>\n  {$splice0()[0]() === $splice1() ? <span>marker</span> : null}\n</div>',
-    '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAyBS,wBAAA,CAAC,GAAG,CACX;EAAA,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,aAAa,GAAG,CAAC,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,GAAG,IAAI,CAAC,CACrE;IAAA,CAAC,MAAM,GAAG,UAAG,GAAG,MAAM,GAAG,UAAS,CAAC,CAAC,CAAC,EAAE,CACzC;EAAA,EAAE,IAAI,CACN;EAAA,CAAC,UAAS,CAAC,CAAC,CAAC,EAAE,KAAK,UAAG,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,MAAM,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CACtD;AAAA,EAAE,GAAG,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nconst web_5 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>marker`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n    (0, web_5.insert)(_el$2, () => "row " + $splice1() + " of " + $splice0()[0]());\n    (0, web_5.insert)(_el$, (() => {\n        var _c$ = (0, web_4.memo)(() => $splice0()[0]() === $splice1());\n        return () => _c$() ? _tmpl$2() : null;\n    })(), null);\n    (0, web_3.effect)(_$p => (0, web_2.style)(_el$2, "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px", _$p));\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;;kBAyBS,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,gBAAA,EAAAF,KAAA,QAEJ,MAAM,GAAGH,QAAA,EAAG,GAAG,MAAM,GAAGD,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE;IAAAM,gBAAA,EAAAJ,IAAA;QAAA,IAAAK,GAAA,GAAAC,cAAA,QAExCR,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,QAAA,EAAG;QAAA,aAAtBM,GAAA,KAAAE,OAAA,KAA+C,IAAI;IAAA;IAAAC,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAR,KAAA,EAHvC,aAAa,IAAIJ,QAAA,EAAS,CAAC,CAAC,CAAC,EAAE,KAAKC,QAAA,EAAG,GAAG,EAAE,GAAG,EAAE,CAAC,GAAG,IAAI,EAAAU,GAAA;IAAA,OAAAT,IAAA;AAAA,IAIlE","names":["$splice0","$splice1","_el$","_tmpl$","_el$2","firstChild","_$insert","_c$","_$memo","_tmpl$2","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+    ["solid-js/web"],
   );
 async function ReadingPanel() {
   return cs.create(
@@ -39,16 +40,18 @@ async function ReadingPanel() {
             id: cs.create(
               "2qf83pi6ieetw:39:28",
               { params: [] },
-              "() => 0",
-              '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAsC+B,MAAA,CAAC"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 0;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAsC+B,OAAC","names":[],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+              [],
             ),
             selected: cs.create(
               "2qf83pi6ieetw:39:45",
               {
                 params: [{ kind: "capture", key: "selected$2qf83pi6ieetw$0" }],
               },
-              "($capture0) => $capture0",
-              '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAsCgD,eAAA,SAAQ"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAsCgDA,SAAA,IAAAA,SAAQ","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+              [],
             ),
           }),
           bindings: ["selected$2qf83pi6ieetw$0"],
@@ -59,24 +62,27 @@ async function ReadingPanel() {
             id: cs.create(
               "2qf83pi6ieetw:40:28",
               { params: [] },
-              "() => 1",
-              '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAuC+B,MAAA,CAAC"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAuC+B,OAAC","names":[],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+              [],
             ),
             selected: cs.create(
               "2qf83pi6ieetw:40:45",
               {
                 params: [{ kind: "capture", key: "selected$2qf83pi6ieetw$0" }],
               },
-              "($capture0) => $capture0",
-              '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAuCgD,eAAA,SAAQ"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAuCgDA,SAAA,IAAAA,SAAQ","names":["$capture0"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+              [],
             ),
           }),
           bindings: ["selected$2qf83pi6ieetw$0"],
         },
       ],
     },
-    "($splice0, $splice1, $splice2) => {\n    const selected = $splice0()(0);\n    return (<div>\n        <span onclick={() => selected[1](1)}>select</span>\n        {$splice1(selected)}\n        {$splice2(selected)}\n      </div>);\n}",
-    '{"version":3,"file":"local-state-child-reads.test.jsx","sourceRoot":"","sources":["state/local-state-child-reads.test.tsx"],"names":[],"mappings":"AAiCY;IACR,MAAM,QAAQ,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAClC,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,IAAI,CACjD;QAAA,CAAC,kBAAsD,CACvD;QAAA,CAAC,kBAAsD,CACzD;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>select`);\nexports.default = ($splice0, $splice1, $splice2) => {\n    const selected = $splice0()(0);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n        _el$2.$$click = () => selected[1](1);\n        (0, web_3.insert)(_el$, () => $splice1(selected), null);\n        (0, web_3.insert)(_el$, () => $splice2(selected), null);\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAiCY,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACR,MAAMC,QAAQ,GAAGH,QAAA,EAAa,CAAC,CAAC,CAAC;IACjC;QAAA,IAAAI,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;QAAAD,KAAA,CAAAE,OAAA,GAEmB,MAAML,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;QAAAM,gBAAA,EAAAL,IAAA,QAClCH,QAAA,CAAAE,QAAA,CAAsD;QAAAM,gBAAA,EAAAL,IAAA,QACtDF,QAAA,CAAAC,QAAA,CAAsD;QAAA,OAAAC,IAAA;IAAA;AAG7D,CAAC","names":["$splice0","$splice1","$splice2","selected","_el$","_tmpl$","_el$2","firstChild","$$click","_$insert"],"ignoreList":[],"sources":["state/local-state-child-reads.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 // What one `ReadingRow` draws, in the three positions it read the signal from: a

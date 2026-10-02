@@ -7,18 +7,21 @@ const hostValue = 5;
 export const host = cs.create(
   "2t0yx6qaqtfpp:9:20",
   { params: [] },
-  "() => {\n    return hostValue + 1;\n}",
-  '{"version":3,"file":"unknown-identifier.test.jsx","sourceRoot":"","sources":["typecheck-errors/unknown-identifier.test.tsx"],"names":[],"mappings":"AAQuB;IAErB,OAAO,SAAS,GAAG,CAAC,CAAC;AACvB,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    return hostValue + 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAQuB;IAErB,OAAOA,SAAS,GAAG,CAAC;AACtB,CAAC","names":["hostValue"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
+  [],
 );
 export const assigned = cs.create(
   "2t0yx6qaqtfpp:14:24",
   { params: [] },
-  "() => {\n    count = 1;\n}",
-  '{"version":3,"file":"unknown-identifier.test.jsx","sourceRoot":"","sources":["typecheck-errors/unknown-identifier.test.tsx"],"names":[],"mappings":"AAa2B;IAEzB,KAAK,GAAG,CAAC,CAAC;AACZ,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    count = 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAa2B;IAEzBA,KAAK,GAAG,CAAC;AACX,CAAC","names":["count"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
+  [],
 );
 export const global = cs.create(
   "2t0yx6qaqtfpp:19:22",
   { params: [] },
-  "() => window.location.href",
-  '{"version":3,"file":"unknown-identifier.test.jsx","sourceRoot":"","sources":["typecheck-errors/unknown-identifier.test.tsx"],"names":[],"mappings":"AAkByB,MAAA,MAAM,CAAC,QAAQ,CAAC,IAAI"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => window.location.href;\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAkByB,MAAAA,MAAM,CAACC,QAAQ,CAACC,IAAI","names":["window","location","href"],"ignoreList":[],"sources":["typecheck-errors/unknown-identifier.test.tsx"]}',
+  [],
 );

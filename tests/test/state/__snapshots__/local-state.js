@@ -14,8 +14,9 @@ async function Stepper() {
   return cs.create(
     "2d5qp9itzo9r0:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    '($splice0) => {\n    const size = $splice0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n}',
-    '{"version":3,"file":"local-state.test.jsx","sourceRoot":"","sources":["state/local-state.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>press`);\nexports.default = $splice0 => {\n    const size = $splice0()(16);\n    return (() => {\n        var _el$ = _tmpl$();\n        _el$.$$click = () => {\n            size[1](size[0]() + 1);\n        };\n        (0, web_4.effect)(_$p => (0, web_3.style)(_el$, "font-size: " + size[0]() + "px", _$p));\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBAaYA,QAAA;IACR,MAAMC,IAAI,GAAGD,QAAA,EAAa,CAAC,EAAE,CAAC;IAC9B;QAAA,IAAAE,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GAGa;YACPH,IAAI,CAAC,CAAC,CAAC,CAACA,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACxB,CAAC;QAAAI,gBAAA,EAAAC,GAAA,IAAAC,eAAA,EAAAL,IAAA,EAHM,aAAa,GAAGD,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,EAAAK,GAAA;QAAA,OAAAJ,IAAA;IAAA;AAQ7C,CAAC","names":["$splice0","size","_el$","_tmpl$","$$click","_$effect","_$p","_$style"],"ignoreList":[],"sources":["state/local-state.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 describe("local state", () => {

@@ -18,8 +18,9 @@ it("splicedComparison", async (t) => {
           { kind: "splice", value: high, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => ({\n    under: $splice0() < $splice1(),\n    atMost: $splice0() <= $splice1(),\n    over: $splice1() > $splice0(),\n    between: $splice0() < $splice1() && $splice1() > $splice0(),\n})",
-      '{"version":3,"file":"spliced-comparison.test.jsx","sourceRoot":"","sources":["splices/spliced-comparison.test.tsx"],"names":[],"mappings":"AAcO,wBAAA,CAAC;IACF,KAAK,EAAE,UAAI,GAAG,UAAK;IACnB,MAAM,EAAE,UAAI,IAAI,UAAK;IACrB,IAAI,EAAE,UAAK,GAAG,UAAI;IAClB,OAAO,EAAE,UAAI,GAAG,UAAK,IAAI,UAAK,GAAG,UAAI;CACtC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    under: $splice0() < $splice1(),\n    atMost: $splice0() <= $splice1(),\n    over: $splice1() > $splice0(),\n    between: $splice0() < $splice1() && $splice1() > $splice0()\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAcO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEF,QAAA,EAAI,GAAGC,QAAA,EAAK;IACnBE,MAAM,EAAEH,QAAA,EAAI,IAAIC,QAAA,EAAK;IACrBG,IAAI,EAAEH,QAAA,EAAK,GAAGD,QAAA,EAAI;IAClBK,OAAO,EAAEL,QAAA,EAAI,GAAGC,QAAA,EAAK,IAAIA,QAAA,EAAK,GAAGD,QAAA;CAClC,CAAC","names":["$splice0","$splice1","under","atMost","over","between"],"ignoreList":[],"sources":["splices/spliced-comparison.test.tsx"]}',
+      [],
     ),
   );
 });

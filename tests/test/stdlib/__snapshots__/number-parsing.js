@@ -9,8 +9,9 @@ async function Parsed() {
   return cs.create(
     "28kni4l69t7vb:9:9",
     { params: [] },
-    '() => {\n    const whole = Number.parseInt("42px");\n    const based = Number.parseInt("ff", 16);\n    const fractional = Number.parseFloat("1.5");\n    return <span>{whole + based + fractional + ""}</span>;\n}',
-    '{"version":3,"file":"number-parsing.test.jsx","sourceRoot":"","sources":["stdlib/number-parsing.test.tsx"],"names":[],"mappings":"AAQY;IACR,MAAM,KAAK,GAAG,MAAM,CAAC,QAAQ,CAAC,MAAM,CAAC,CAAC;IACtC,MAAM,KAAK,GAAG,MAAM,CAAC,QAAQ,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC;IACxC,MAAM,UAAU,GAAG,MAAM,CAAC,UAAU,CAAC,KAAK,CAAC,CAAC;IAC5C,OAAO,CAAC,IAAI,CAAC,CAAC,KAAK,GAAG,KAAK,GAAG,UAAU,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC;AACxD,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>298.5`);\nexports.default = () => {\n    const whole = Number.parseInt("42px");\n    const based = Number.parseInt("ff", 16);\n    const fractional = Number.parseFloat("1.5");\n    return _tmpl$();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAQY;IACR,MAAMA,KAAK,GAAGC,MAAM,CAACC,QAAQ,CAAC,MAAM,CAAC;IACrC,MAAMC,KAAK,GAAGF,MAAM,CAACC,QAAQ,CAAC,IAAI,EAAE,EAAE,CAAC;IACvC,MAAME,UAAU,GAAGH,MAAM,CAACI,UAAU,CAAC,KAAK,CAAC;IAC3C,OAAAC,MAAA;AACF,CAAC","names":["whole","Number","parseInt","based","fractional","parseFloat","_tmpl$"],"ignoreList":[],"sources":["stdlib/number-parsing.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("Parsed", async (t) => {

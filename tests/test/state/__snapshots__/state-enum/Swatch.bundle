@@ -1,22 +1,64 @@
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
 import { createComponent as $i0 } from "solid-js";
 import { createSignal as $i1 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
-const $cs1 = ($splice0, $splice1, $splice2, $splice3) => {
-  const held = $splice0()($splice1());
-  return (() => {
-    var _el$ = _tmpl$();
-    _el$.$$click = () => held[1]($splice2());
-    _$insert(_el$, () => $splice3()(held[0]()));
-    return _el$;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "133ie16u4j0dm:24:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);
+    exports.default = ($splice0, $splice1, $splice2, $splice3) => {
+      const held = $splice0()($splice1());
+      return (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => held[1]($splice2());
+        (0, web_3.insert)(_el$, () => $splice3()(held[0]()));
+        return _el$;
+      })();
+    };
+    (0, web_2.delegateEvents)(["click"]);
+  },
+  "133ie16u4j0dm:19:48": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => (c) => {
+      return c === $splice0() ? "blue" : "red";
+    };
+  },
 };
-const $cs2 = ($splice0) => (c) => {
-  return c === $splice0() ? "blue" : "red";
+const $exports = {
+  "solid-js/web": $module0,
 };
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1uptcsn9236u2:352:9").default;
+const $cs1 = $require("133ie16u4j0dm:24:9").default;
+const $cs2 = $require("133ie16u4j0dm:19:48").default;
 export default $cs0(
   () => $i0,
   () =>
@@ -27,4 +69,3 @@ export default $cs0(
       () => $cs2(() => 1),
     ),
 );
-_$delegateEvents(["click"]);

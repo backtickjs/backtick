@@ -13,14 +13,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 const originX = cs.create(
   "3hhvicr225pmx:14:16",
   { params: [] },
-  "() => 1",
-  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAamB,MAAA,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAamB,OAAC","names":[],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
+  [],
 );
 const label = cs.create(
   "3hhvicr225pmx:16:14",
   { params: [] },
-  '() => "origin"',
-  '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAeiB,MAAA,QAAQ"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "origin";\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAeiB,cAAQ","names":[],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
+  [],
 );
 const point = { x: originX, label };
 it("splicedContainer", async (t) => {
@@ -30,8 +32,9 @@ it("splicedContainer", async (t) => {
     cs.create(
       "3hhvicr225pmx:21:44",
       { params: [{ kind: "splice", value: point, bindings: [] }] },
-      "($splice0) => $splice0().x + 1",
-      '{"version":3,"file":"spliced-container.test.jsx","sourceRoot":"","sources":["splices/spliced-container.test.tsx"],"names":[],"mappings":"AAoB+C,cAAA,UAAM,CAAC,CAAC,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0().x + 1;\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAoB+CA,QAAA,IAAAA,QAAA,EAAM,CAACC,CAAC,GAAG,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["splices/spliced-container.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -10,8 +10,9 @@ async function Written() {
   return cs.create(
     "7lcft72v2y3x:10:9",
     { params: [] },
-    "() => {\n    return (<span>{String.fromCodePoint(72, 105) + String.fromCodePoint()}</span>);\n}",
-    '{"version":3,"file":"string-from-code-point.test.jsx","sourceRoot":"","sources":["stdlib/string-from-code-point.test.tsx"],"names":[],"mappings":"AASY;IACR,OAAO,CACL,CAAC,IAAI,CAAC,CAAC,MAAM,CAAC,aAAa,CAAC,EAAE,EAAE,GAAG,CAAC,GAAG,MAAM,CAAC,aAAa,EAAE,CAAC,EAAE,IAAI,CAAC,CACtE,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>Hi`);\nexports.default = () => {\n    return _tmpl$();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBASY;IACR,OAAAA,MAAA;AAGF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/string-from-code-point.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("Written", async (t) => {

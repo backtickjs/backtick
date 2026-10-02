@@ -10,8 +10,9 @@ it("reservedKeyScript", async (t) => {
     cs.create(
       "28g09xvp2p10c:8:45",
       { params: [] },
-      '() => ({ "#": "value" })',
-      '{"version":3,"file":"reserved-key-script.test.jsx","sourceRoot":"","sources":["objects/reserved-key-script.test.tsx"],"names":[],"mappings":"AAOgD,MAAA,CAAC,EAAE,GAAG,EAAE,OAAO,EAAE,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => ({\n    "#": "value"\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAOgD,OAAC;IAAE,GAAG,EAAE;CAAS,CAAC","names":[],"ignoreList":[],"sources":["objects/reserved-key-script.test.tsx"]}',
+      [],
     ),
   );
 });

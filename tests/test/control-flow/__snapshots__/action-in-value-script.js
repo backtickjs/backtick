@@ -5,14 +5,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 const valueScriptEffects = cs.create(
   "1zk77nyjrl50d:7:41",
   { params: [] },
-  "() => {\n    const x = 1;\n}",
-  '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["control-flow/action-in-value-script.test.tsx"],"names":[],"mappings":"AAM4C;IAC1C,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const x = 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAM4C;IAC1C,MAAMA,CAAC,GAAG,CAAC;AACb,CAAC","names":["x"],"ignoreList":[],"sources":["control-flow/action-in-value-script.test.tsx"]}',
+  [],
 );
 const ping = cs.create(
   "1zk77nyjrl50d:11:33",
   { params: [] },
-  "() => () => {\n    let n = 0;\n    n = 1;\n}",
-  '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["control-flow/action-in-value-script.test.tsx"],"names":[],"mappings":"AAUoC,MAAA,GAAG,EAAE;IACvC,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => () => {\n    let n = 0;\n    n = 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAUoC;IAClC,IAAIA,CAAC,GAAG,CAAC;IACTA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/action-in-value-script.test.tsx"]}',
+  [],
 );
 it("actionInValueScript", async (t) => {
   await snapshotCase(
@@ -26,8 +28,9 @@ it("actionInValueScript", async (t) => {
           { kind: "splice", value: ping, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => (b) => {\n    let n = 0;\n    $splice0();\n    if (b) {\n        $splice1()();\n        n = 1;\n    }\n    return n;\n}",
-      '{"version":3,"file":"action-in-value-script.test.jsx","sourceRoot":"","sources":["control-flow/action-in-value-script.test.tsx"],"names":[],"mappings":"AAmBO,wBAAA,CAAC,CAAU,EAAE,EAAE;IAChB,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,UAAmB,CAAC;IACpB,IAAI,CAAC,EAAE,CAAC;QACN,UAAK,EAAE,CAAC;QACR,CAAC,GAAG,CAAC,CAAC;IACR,CAAC;IACD,OAAO,CAAC,CAAC;AACX,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => b => {\n    let n = 0;\n    $splice0();\n    if (b) {\n        $splice1()();\n        n = 1;\n    }\n    return n;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAmBO,CAAAA,QAAA,EAAAC,QAAA,KAACC,CAAU;IACZ,IAAIC,CAAC,GAAG,CAAC;IACTH,QAAA,EAAmB;IACnB,IAAIE,CAAC,EAAE;QACLD,QAAA,EAAK,EAAE;QACPE,CAAC,GAAG,CAAC;IACP;IACA,OAAOA,CAAC;AACV,CAAC","names":["$splice0","$splice1","b","n"],"ignoreList":[],"sources":["control-flow/action-in-value-script.test.tsx"]}',
+      [],
     ),
   );
 });

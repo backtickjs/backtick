@@ -1,5 +1,8 @@
 // 12:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const rounded = Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
     const edges = Math.floor(-1.5) + "," + Math.ceil(-1.5) + "," + Math.trunc(-1.5);
     const picks = Math.min(3, 1, 2) + "," + Math.max(3, 1, 2) + "," + Math.abs(-4);
@@ -18,4 +21,5 @@
         (Math.PI > 3.14) +
         "," +
         (Math.E > 2.71));
+});
 }

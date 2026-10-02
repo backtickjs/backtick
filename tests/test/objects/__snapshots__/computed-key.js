@@ -12,8 +12,9 @@ it("computedKey", async (t) => {
     cs.create(
       "27b2r7injyzq0:13:4",
       { params: [] },
-      '() => {\n    const base = { a: 1, b: 2 };\n    const name = "b";\n    return {\n        ...base,\n        [name]: 9,\n        ["c" + "d"]: 3,\n        a: 4,\n    };\n}',
-      '{"version":3,"file":"computed-key.test.jsx","sourceRoot":"","sources":["objects/computed-key.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IAC5B,MAAM,IAAI,GAAG,GAAG,CAAC;IACjB,OAAO;QACL,GAAG,IAAI;QACP,CAAC,IAAI,CAAC,EAAE,CAAC;QACT,CAAC,GAAG,GAAG,GAAG,CAAC,EAAE,CAAC;QACd,CAAC,EAAE,CAAC;KACL,CAAC;AACJ,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const base = {\n        a: 1,\n        b: 2\n    };\n    const name = "b";\n    return {\n        ...base,\n        [name]: 9,\n        ["c" + "d"]: 3,\n        a: 4\n    };\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAYO;IACD,MAAMA,IAAI,GAAG;QAAEC,CAAC,EAAE,CAAC;QAAEC,CAAC,EAAE;KAAG;IAC3B,MAAMC,IAAI,GAAG,GAAG;IAChB,OAAO;QACL,GAAGH,IAAI;QACP,CAACG,IAAI,GAAG,CAAC;QACT,CAAC,GAAG,GAAG,GAAG,GAAG,CAAC;QACdF,CAAC,EAAE;KACJ;AACH,CAAC","names":["base","a","b","name"],"ignoreList":[],"sources":["objects/computed-key.test.tsx"]}',
+      [],
     ),
   );
 });

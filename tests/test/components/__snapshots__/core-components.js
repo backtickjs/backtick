@@ -8,8 +8,9 @@ it("coreComponents", async (t) => {
     cs.create(
       "3l2na8sxw8878:9:4",
       { params: [] },
-      '() => <div style="padding: 8px">\n      <span style="font-size: 12px" onclick={() => { }}>\n        hi\n      </span>\n      <img src="https://example.com/a.png"/>\n    </div>',
-      '{"version":3,"file":"core-components.test.jsx","sourceRoot":"","sources":["components/core-components.test.tsx"],"names":[],"mappings":"AAQO,MAAA,CAAC,GAAG,CAAC,KAAK,CAAC,cAAc,CAC1B;MAAA,CAAC,IAAI,CAAC,KAAK,CAAC,iBAAiB,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,CAC9C;;MACF,EAAE,IAAI,CACN;MAAA,CAAC,GAAG,CAAC,GAAG,CAAC,2BAA2B,EACtC;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div style=padding:8px><span style=font-size:12px>hi</span><img src=https://example.com/a.png>`);\nexports.default = () => (() => {\n    var _el$ = _tmpl$(), _el$2 = _el$.firstChild;\n    _el$2.$$click = () => { };\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAQO;IAAA,IAAAA,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAD,KAAA,CAAAE,OAAA,GACsC,QAAO,CAAC;IAAA,OAAAJ,IAAA;AAAA,IAI3C","names":["_el$","_tmpl$","_el$2","firstChild","$$click"],"ignoreList":[],"sources":["components/core-components.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

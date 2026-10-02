@@ -7,8 +7,9 @@ import { For } from "@backtickjs/solid-js";
 const Badge = cs.create(
   "j2gfou1pgla3:7:14",
   { params: [] },
-  "() => (props) => <b>{props.n}</b>",
-  '{"version":3,"file":"client-component-on-host.test.jsx","sourceRoot":"","sources":["typecheck-errors/client-component-on-host.test.tsx"],"names":[],"mappings":"AAMiB,MAAA,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => props.n);\n    return _el$;\n})();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAMiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAASD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
+  ["solid-js/web"],
 );
 // @ts-expect-error: JSX element type 'For' does not have any construct or call signatures.
 export const forOnHost = _jsx(For, { each: [1, 2], children: (n) => n });
@@ -23,6 +24,7 @@ export const inScript = cs.create(
       { kind: "tag", value: Badge },
     ],
   },
-  "($tag0, $tag1) => <$tag0 each={[1, 2]}>{(n) => <$tag1 n={n}/>}</$tag0>",
-  '{"version":3,"file":"client-component-on-host.test.jsx","sourceRoot":"","sources":["typecheck-errors/client-component-on-host.test.tsx"],"names":[],"mappings":"AAe2B,kBAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG,CAAC,EAAE,KAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = ($tag0, $tag1) => (0, web_1.createComponent)($tag0, {\n    each: [1, 2],\n    children: n => (0, web_1.createComponent)($tag1, {\n        n: n\n    })\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAe2B,CAAAA,KAAA,EAAAC,KAAA,KAAAC,yBAAA,EAACF,KAAG;IAACG,IAAI,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC;IAAAC,QAAA,EAAIC,CAAC,IAAAH,yBAAA,EAAMD,KAAK;QAACI,CAAC,EAAEA;KAAC;CAAI,CAAO","names":["$tag0","$tag1","_$createComponent","each","children","n"],"ignoreList":[],"sources":["typecheck-errors/client-component-on-host.test.tsx"]}',
+  ["solid-js/web"],
 );

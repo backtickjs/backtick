@@ -7,20 +7,23 @@ import { snapshotCase } from "../snapshotCase.ts";
 const pick = cs.create(
   "2dtorvijco8u0:8:13",
   { params: [] },
-  "() => (p) => {\n    return p?.x;\n}",
-  '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["objects/optional-chain.test.tsx"],"names":[],"mappings":"AAOgB,MAAA,CAAC,CAAuB,EAAE,EAAE;IAC1C,OAAO,CAAC,EAAE,CAAC,CAAC;AACd,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => p => {\n    return p?.x;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAOgB,MAACA,CAAuB;IACtC,OAAOA,CAAC,EAAEC,CAAC;AACb,CAAC","names":["p","x"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
+  [],
 );
 const deep = cs.create(
   "2dtorvijco8u0:12:13",
   { params: [] },
-  "() => (o) => {\n    return o?.inner?.z;\n}",
-  '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["objects/optional-chain.test.tsx"],"names":[],"mappings":"AAWgB,MAAA,CAAC,CAAyC,EAAE,EAAE;IAC5D,OAAO,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC;AACrB,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => o => {\n    return o?.inner?.z;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAWgB,MAACA,CAAyC;IACxD,OAAOA,CAAC,EAAEC,KAAK,EAAEC,CAAC;AACpB,CAAC","names":["o","inner","z"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
+  [],
 );
 const shout = cs.create(
   "2dtorvijco8u0:16:14",
   { params: [] },
-  '() => (s) => {\n    return s?.concat("!");\n}',
-  '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["objects/optional-chain.test.tsx"],"names":[],"mappings":"AAeiB,MAAA,CAAC,CAAgB,EAAE,EAAE;IACpC,OAAO,CAAC,EAAE,MAAM,CAAC,GAAG,CAAC,CAAC;AACxB,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => s => {\n    return s?.concat("!");\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAeiB,MAACA,CAAgB;IAChC,OAAOA,CAAC,EAAEC,MAAM,CAAC,GAAG,CAAC;AACvB,CAAC","names":["s","concat"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
+  [],
 );
 it("optionalChain", async (t) => {
   await snapshotCase(
@@ -35,8 +38,9 @@ it("optionalChain", async (t) => {
           { kind: "splice", value: shout, bindings: [] },
         ],
       },
-      '($splice0, $splice1, $splice2) => ({\n    found: $splice0()({ x: 5 }),\n    missing: $splice0()(null),\n    deep: $splice1()({ inner: { z: 7 } }),\n    cut: $splice1()({ inner: null }),\n    top: $splice1()(null),\n    loud: $splice2()("hi"),\n    silent: $splice2()(null),\n})',
-      '{"version":3,"file":"optional-chain.test.jsx","sourceRoot":"","sources":["objects/optional-chain.test.tsx"],"names":[],"mappings":"AAuBO,kCAAA,CAAC;IACF,KAAK,EAAE,UAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO,EAAE,UAAK,CAAC,IAAI,CAAC;IACpB,IAAI,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAChC,GAAG,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,IAAI,EAAE,CAAC;IAC3B,GAAG,EAAE,UAAK,CAAC,IAAI,CAAC;IAChB,IAAI,EAAE,UAAM,CAAC,IAAI,CAAC;IAClB,MAAM,EAAE,UAAM,CAAC,IAAI,CAAC;CACrB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => ({\n    found: $splice0()({\n        x: 5\n    }),\n    missing: $splice0()(null),\n    deep: $splice1()({\n        inner: {\n            z: 7\n        }\n    }),\n    cut: $splice1()({\n        inner: null\n    }),\n    top: $splice1()(null),\n    loud: $splice2()("hi"),\n    silent: $splice2()(null)\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAuBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,MAAC;IACFC,KAAK,EAAEH,QAAA,EAAK,CAAC;QAAEI,CAAC,EAAE;KAAG,CAAC;IACtBC,OAAO,EAAEL,QAAA,EAAK,CAAC,IAAI,CAAC;IACpBM,IAAI,EAAEL,QAAA,EAAK,CAAC;QAAEM,KAAK,EAAE;YAAEC,CAAC,EAAE;SAAC;KAAI,CAAC;IAChCC,GAAG,EAAER,QAAA,EAAK,CAAC;QAAEM,KAAK,EAAE;KAAM,CAAC;IAC3BG,GAAG,EAAET,QAAA,EAAK,CAAC,IAAI,CAAC;IAChBU,IAAI,EAAET,QAAA,EAAM,CAAC,IAAI,CAAC;IAClBU,MAAM,EAAEV,QAAA,EAAM,CAAC,IAAI;CACpB,CAAC","names":["$splice0","$splice1","$splice2","found","x","missing","deep","inner","z","cut","top","loud","silent"],"ignoreList":[],"sources":["objects/optional-chain.test.tsx"]}',
+      [],
     ),
   );
 });

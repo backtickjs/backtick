@@ -1,35 +1,62 @@
 // 32:30
-() => <a href="/counter" id="press">
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <a href="/counter" id="press">
       go
-    </a>
+    </a>);
+}
 
 // 44:30
-() => <div>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <div>
       <svg>
         <path />
       </svg>
-    </div>
+    </div>);
+}
 
 // 61:29
-() => <svg viewBox="0 0 279 38"/>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <svg viewBox="0 0 279 38"/>);
+}
 
 // 69:29
-() => <svg>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <svg>
       <path stroke-width={2} fill-rule="evenodd"/>
       <filter color-interpolation-filters="sRGB"/>
-    </svg>
+    </svg>);
+}
 
 // 84:29
-() => <svg>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <svg>
       <linearGradient gradientTransform="rotate(90)"/>
       <feTurbulence numOctaves={3}/>
-    </svg>
+    </svg>);
+}
 
 // 95:29
-() => <div tabIndex={2}/>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => <div tabIndex={2}/>);
+}
 
 // 104:12
-($splice0) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => {
     const text = $splice0()("first");
     const isOn = $splice0()(false);
     return (<div>
@@ -42,4 +69,5 @@
             write
           </button>
         </div>);
+});
 }

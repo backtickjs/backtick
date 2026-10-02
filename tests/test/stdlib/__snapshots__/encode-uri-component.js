@@ -10,8 +10,9 @@ async function Encoded() {
   return cs.create(
     "3tch88psikxru:10:9",
     { params: [] },
-    '() => {\n    return (<span>\n        {"/at?q=" +\n            encodeURIComponent("a b+c&d#\u00E9") +\n            "&page=" +\n            encodeURIComponent(2.5) +\n            " " +\n            decodeURIComponent("a%20b%2Bc%26d%23%C3%A9")}\n      </span>);\n}',
-    '{"version":3,"file":"encode-uri-component.test.jsx","sourceRoot":"","sources":["stdlib/encode-uri-component.test.tsx"],"names":[],"mappings":"AASY;IACR,OAAO,CACL,CAAC,IAAI,CACH;QAAA,CAAC,QAAQ;YACP,kBAAkB,CAAC,WAAW,CAAC;YAC/B,QAAQ;YACR,kBAAkB,CAAC,GAAG,CAAC;YACvB,GAAG;YACH,kBAAkB,CAAC,wBAAwB,CAAC,CAChD;MAAA,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>/at?q=a%20b%2Bc%26d%23%C3%A9&amp;page=2.5 a b+c&amp;d#\u00E9`);\nexports.default = () => {\n    return _tmpl$();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBASY;IACR,OAAAA,MAAA;AAUF,CAAC","names":["_tmpl$"],"ignoreList":[],"sources":["stdlib/encode-uri-component.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("Encoded", async (t) => {

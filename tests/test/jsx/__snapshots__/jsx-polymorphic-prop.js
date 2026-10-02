@@ -8,8 +8,9 @@ function make(n) {
   return cs.create(
     "365uagjo5wofp:9:9",
     { params: [{ kind: "splice", value: n, bindings: [] }] },
-    "($splice0) => () => $splice0()",
-    '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx/jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"AAQY,cAAA,GAAG,EAAE,CAAC,UAAE"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => $splice0();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAQYA,QAAA,UAAMA,QAAA,EAAE","names":["$splice0"],"ignoreList":[],"sources":["jsx/jsx-polymorphic-prop.test.tsx"]}',
+    [],
   );
 }
 it("jsxPolymorphicProp", async (t) => {
@@ -24,8 +25,9 @@ it("jsxPolymorphicProp", async (t) => {
           { kind: "splice", value: make(2), bindings: [] },
         ],
       },
-      "($splice0, $splice1) => <div>\n      <span onclick={$splice0()}/>\n      <span onclick={$splice1()}/>\n    </div>",
-      '{"version":3,"file":"jsx-polymorphic-prop.test.jsx","sourceRoot":"","sources":["jsx/jsx-polymorphic-prop.test.tsx"],"names":[],"mappings":"AAeO,wBAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,UAAU,CAAC,EAC1B;MAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,UAAU,CAAC,EAC5B;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span></span><span>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling;\n    (0, web_3.addEventListener)(_el$2, "click", $splice0(), true);\n    (0, web_3.addEventListener)(_el$3, "click", $splice1(), true);\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAeO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA;IAAAC,0BAAA,EAAAJ,KAAA,WACcJ,QAAA,EAAU;IAAAQ,0BAAA,EAAAF,KAAA,WACVL,QAAA,EAAU;IAAA,OAAAC,IAAA;AAAA,IACrB","names":["$splice0","$splice1","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_$addEventListener"],"ignoreList":[],"sources":["jsx/jsx-polymorphic-prop.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

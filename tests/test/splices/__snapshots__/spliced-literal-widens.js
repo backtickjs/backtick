@@ -33,8 +33,9 @@ it("splicedLiteralWidens", async (t) => {
           { kind: "splice", value: Color.Blue, bindings: [] },
         ],
       },
-      "($splice0, $splice1, $splice2, $splice3) => {\n    const n = $splice0()($splice1());\n    n[1](6);\n    const c = $splice0()($splice2());\n    c[1]($splice3());\n}",
-      '{"version":3,"file":"spliced-literal-widens.test.jsx","sourceRoot":"","sources":["splices/spliced-literal-widens.test.tsx"],"names":[],"mappings":"AA2BO;IACD,MAAM,CAAC,GAAG,UAAa,CAAC,UAAK,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACR,MAAM,CAAC,GAAG,UAAa,CAAC,UAAC,CAAY,CAAC;IACtC,CAAC,CAAC,CAAC,CAAC,CAAC,UAAC,CAAa,CAAC;AACtB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3) => {\n    const n = $splice0()($splice1());\n    n[1](6);\n    const c = $splice0()($splice2());\n    c[1]($splice3());\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAMC,CAAC,GAAGJ,QAAA,EAAa,CAACC,QAAA,EAAK,CAAC;IAC9BG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACP,MAAMC,CAAC,GAAGL,QAAA,EAAa,CAACE,QAAA,EAAC,CAAY;IACrCG,CAAC,CAAC,CAAC,CAAC,CAACF,QAAA,EAAC,CAAa;AACrB,CAAC","names":["$splice0","$splice1","$splice2","$splice3","n","c"],"ignoreList":[],"sources":["splices/spliced-literal-widens.test.tsx"]}',
+      [],
     ),
   );
 });

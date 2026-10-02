@@ -1,10 +1,35 @@
-import { template as _$template } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<p>`);
-const $cs0 = ($splice0) =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$insert(_el$, $splice0);
-    return _el$;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "3ilsptqylvqsp:11:24": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);
+    exports.default = ($splice0) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(_el$, $splice0);
+        return _el$;
+      })();
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3ilsptqylvqsp:11:24").default;
 export default $cs0(() => "& \u003c > \" ' \u003c/script> \u003c!-- -->");

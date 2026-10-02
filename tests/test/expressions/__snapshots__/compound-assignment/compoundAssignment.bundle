@@ -1,16 +1,38 @@
-const $cs0 = () => {
-  let n = 10;
-  n += 5;
-  n -= 3;
-  n *= 2;
-  n /= 4;
-  n %= 4;
-  let text = "a";
-  text += "b";
-  let total = 1;
-  const answered = (total += 2);
-  let x = 1;
-  x += x = 5;
-  return [n, text, answered, total, x];
+const $modules = {
+  "23v4b48bi2lxc:12:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let n = 10;
+      n += 5;
+      n -= 3;
+      n *= 2;
+      n /= 4;
+      n %= 4;
+      let text = "a";
+      text += "b";
+      let total = 1;
+      const answered = (total += 2);
+      let x = 1;
+      x += x = 5;
+      return [n, text, answered, total, x];
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("23v4b48bi2lxc:12:4").default;
 export default $cs0();

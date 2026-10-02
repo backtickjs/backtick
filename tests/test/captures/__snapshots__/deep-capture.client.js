@@ -1,23 +1,47 @@
 // 18:10
-($splice0, $splice1) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => {
     const outer = $splice0();
     return $splice1(outer);
+});
 }
 
 // 20:14
-($splice0, $capture1) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $capture1) => {
     const middle = 10;
     return middle + $splice0($capture1);
+});
 }
 
 // 22:25
-($capture0) => $capture0
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($capture0) => $capture0);
+}
 
 // 28:40
-($splice0, $splice1) => $splice0() + $splice1()
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => $splice0() + $splice1());
+}
 
 // 28:50
-() => 1
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => 1);
+}
 
 // 28:67
-() => 2
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => 2);
+}

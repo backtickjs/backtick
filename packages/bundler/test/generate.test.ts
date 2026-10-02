@@ -15,12 +15,16 @@ const appending =
 
 test("the output is a module whose default export is the value", async () => {
   const bundle = await bundler.build({ input: 42, external: {} });
-  assert.equal(bundle.generate({ format: "es" }).code, "export default (42);");
+  // After the module table, empty, and its `require`.
+  assert.match(
+    bundle.generate({ format: "es" }).code,
+    /\nexport default \(42\);$/,
+  );
 });
 
 test("a map is written only where one is asked for", async () => {
   const bundle = await bundler.build({ input: 42, external: {} });
-  const code = "export default (42);";
+  const { code } = bundle.generate({ format: "es" });
   assert.deepEqual(bundle.generate({ format: "es" }), { code, map: null });
   assert.deepEqual(bundle.generate({ format: "es", sourcemap: false }), {
     code,
@@ -44,9 +48,9 @@ test("a plugin's statements follow the value", async () => {
     external: {},
     plugins: [appending("globalThis.appended = true;")],
   });
-  assert.equal(
+  assert.match(
     bundle.generate({ format: "es" }).code,
-    ["export default (1);", "globalThis.appended = true;"].join("\n"),
+    /\nexport default \(1\);\nglobalThis\.appended = true;$/,
   );
 });
 
@@ -70,7 +74,8 @@ test("a plugin is given the code and the bundle's id", async () => {
       },
     ],
   });
-  assert.deepEqual(seen, ["export default (1);", "bundle.jsx"]);
+  assert.match(seen[0]!, /\nexport default \(1\);$/);
+  assert.equal(seen[1], "bundle.jsx");
 });
 
 test("a script's import from a package the client doesn't provide is refused", async () => {

@@ -1,46 +1,82 @@
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { setAttribute as _$setAttribute } from "solid-js/web";
-import { effect as _$effect } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select</span><div>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<a>`);
 import { createComponent as $i0 } from "solid-js";
 import { createSignal as $i1 } from "solid-js";
 import { createSelector as $i2 } from "solid-js";
 import { For as $i3 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
-const $cs1 = ($splice0, $splice1, $tag2) => {
-  const selected = $splice0()(0);
-  const isSelected = $splice1()(selected[0]);
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild,
-      _el$3 = _el$2.nextSibling;
-    _el$2.$$click = () => selected[1](1);
-    _$insert(
-      _el$3,
-      _$createComponent($tag2, {
-        each: [0, 1, 2],
-        children: (id) =>
-          (() => {
-            var _el$4 = _tmpl$2();
-            _$insert(_el$4, "row " + id);
-            _$effect(() =>
-              _$setAttribute(
-                _el$4,
-                "href",
-                isSelected(id) ? "#open" : "#closed",
-              ),
-            );
-            return _el$4;
-          })(),
-      }),
-    );
-    return _el$;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "22k5zjmfkrtpf:14:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    const web_4 = require("solid-js/web");
+    const web_5 = require("solid-js/web");
+    const web_6 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(
+        `<div><span>select</span><div>`,
+      ),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<a>`);
+    exports.default = ($splice0, $splice1, $tag2) => {
+      const selected = $splice0()(0);
+      const isSelected = $splice1()(selected[0]);
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _el$2.$$click = () => selected[1](1);
+        (0, web_5.insert)(
+          _el$3,
+          (0, web_6.createComponent)($tag2, {
+            each: [0, 1, 2],
+            children: (id) =>
+              (() => {
+                var _el$4 = _tmpl$2();
+                (0, web_5.insert)(_el$4, "row " + id);
+                (0, web_4.effect)(() =>
+                  (0, web_3.setAttribute)(
+                    _el$4,
+                    "href",
+                    isSelected(id) ? "#open" : "#closed",
+                  ),
+                );
+                return _el$4;
+              })(),
+          }),
+        );
+        return _el$;
+      })();
+    };
+    (0, web_2.delegateEvents)(["click"]);
+  },
 };
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1uptcsn9236u2:352:9").default;
+const $cs1 = $require("22k5zjmfkrtpf:14:9").default;
 export default $cs0(
   () => $i0,
   () =>
@@ -50,4 +86,3 @@ export default $cs0(
       $i3,
     ),
 );
-_$delegateEvents(["click"]);

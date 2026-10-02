@@ -17,8 +17,9 @@ it("scriptBoundTagParam", async (t) => {
             value: cs.create(
               "2vonkhcq0yva8:16:13",
               { params: [{ kind: "capture", key: "Row$2vonkhcq0yva8$1" }] },
-              "($capture0) => <$capture0 n={1}/>",
-              '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-param.test.tsx"],"names":[],"mappings":"AAegB,eAAA,CAAC,SAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $capture0 => (0, web_1.createComponent)($capture0, {\n    n: 1\n});\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;;kBAegBA,SAAA,IAAAC,yBAAA,EAACD,SAAG;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-param.test.tsx"]}',
+              ["solid-js/web"],
             ),
             bindings: ["Row$2vonkhcq0yva8$1"],
           },
@@ -27,15 +28,17 @@ it("scriptBoundTagParam", async (t) => {
             value: cs.create(
               "2vonkhcq0yva8:17:13",
               { params: [{ kind: "capture", key: "Row$2vonkhcq0yva8$1" }] },
-              "($capture0) => <$capture0 n={2}/>",
-              '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-param.test.tsx"],"names":[],"mappings":"AAgBgB,eAAA,CAAC,SAAG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $capture0 => (0, web_1.createComponent)($capture0, {\n    n: 2\n});\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;;kBAgBgBA,SAAA,IAAAC,yBAAA,EAACD,SAAG;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-param.test.tsx"]}',
+              ["solid-js/web"],
             ),
             bindings: ["Row$2vonkhcq0yva8$1"],
           },
         ],
       },
-      '($splice0, $splice1) => {\n    const twice = (Row) => (<ul>\n          {$splice0(Row)}\n          {$splice1(Row)}\n        </ul>);\n    return twice((p) => <li>{"row " + p.n}</li>);\n}',
-      '{"version":3,"file":"script-bound-tag-param.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-param.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,KAAK,GAAG,CAAC,GAAsC,EAAE,EAAE,CAAC,CACxD,CAAC,EAAE,CACD;UAAA,CAAC,aAAoB,CACrB;UAAA,CAAC,aAAoB,CACvB;QAAA,EAAE,EAAE,CAAC,CACN,CAAC;IACF,OAAO,KAAK,CAAC,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,MAAM,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC;AAC9D,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<ul>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<li>`);\nexports.default = ($splice0, $splice1) => {\n    const twice = Row => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => $splice0(Row), null);\n        (0, web_2.insert)(_el$, () => $splice1(Row), null);\n        return _el$;\n    })();\n    return twice(p => (() => {\n        var _el$2 = _tmpl$2();\n        (0, web_2.insert)(_el$2, () => "row " + p.n);\n        return _el$2;\n    })());\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAYO,CAAAA,QAAA,EAAAC,QAAA;IACD,MAAMC,KAAK,GAAIC,GAAsC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAEhDJ,QAAA,CAAAG,GAAA,CAAoB;QAAAG,gBAAA,EAAAF,IAAA,QACpBH,QAAA,CAAAE,GAAA,CAAoB;QAAA,OAAAC,IAAA;IAAA,IAExB;IACD,OAAOF,KAAK,CAAEK,CAAgB;QAAA,IAAAC,KAAA,GAAAC,OAAA;QAAAH,gBAAA,EAAAE,KAAA,QAAU,MAAM,GAAGD,CAAC,CAACG,CAAC;QAAA,OAAAF,KAAA;IAAA,IAAM,CAAC;AAC7D,CAAC","names":["$splice0","$splice1","twice","Row","_el$","_tmpl$","_$insert","p","_el$2","_tmpl$2","n"],"ignoreList":[],"sources":["captures/script-bound-tag-param.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

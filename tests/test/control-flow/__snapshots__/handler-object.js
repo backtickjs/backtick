@@ -6,14 +6,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 const beep = cs.create(
   "1dqhax1do6u08:8:27",
   { params: [] },
-  "() => {\n    let n = 0;\n    n = 1;\n}",
-  '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAO8B;IAC5B,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let n = 0;\n    n = 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAO8B;IAC5B,IAAIA,CAAC,GAAG,CAAC;IACTA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/handler-object.test.tsx"]}',
+  [],
 );
 const onTap = cs.create(
   "1dqhax1do6u08:13:44",
   { params: [{ kind: "splice", value: beep, bindings: [] }] },
-  "($splice0) => (id) => {\n    $splice0();\n}",
-  '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAY+C,cAAA,CAAC,EAAU,EAAE,EAAE;IAC5D,UAAK,CAAC;AACR,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => id => {\n    $splice0();\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAY+CA,QAAA,IAACC,EAAU;IACxDD,QAAA,EAAK;AACP,CAAC","names":["$splice0","id"],"ignoreList":[],"sources":["control-flow/handler-object.test.tsx"]}',
+  [],
 );
 it("handlerObject", async (t) => {
   await snapshotCase(
@@ -22,8 +24,9 @@ it("handlerObject", async (t) => {
     cs.create(
       "1dqhax1do6u08:21:4",
       { params: [{ kind: "splice", value: onTap, bindings: [] }] },
-      "($splice0) => {\n    const handlers = {\n        tap: $splice0(),\n        hold: $splice0(),\n    };\n    return handlers;\n}",
-      '{"version":3,"file":"handler-object.test.jsx","sourceRoot":"","sources":["control-flow/handler-object.test.tsx"],"names":[],"mappings":"AAoBO;IACD,MAAM,QAAQ,GAAG;QACf,GAAG,EAAE,UAAM;QACX,IAAI,EAAE,UAAM;KACb,CAAC;IACF,OAAO,QAAQ,CAAC;AAClB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const handlers = {\n        tap: $splice0(),\n        hold: $splice0()\n    };\n    return handlers;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAoBOA,QAAA;IACD,MAAMC,QAAQ,GAAG;QACfC,GAAG,EAAEF,QAAA,EAAM;QACXG,IAAI,EAAEH,QAAA;KACP;IACD,OAAOC,QAAQ;AACjB,CAAC","names":["$splice0","handlers","tap","hold"],"ignoreList":[],"sources":["control-flow/handler-object.test.tsx"]}',
+      [],
     ),
   );
 });

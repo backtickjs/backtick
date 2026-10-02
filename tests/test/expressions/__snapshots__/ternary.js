@@ -6,8 +6,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const pick = cs.create(
   "uekyc2sf8mzc:7:13",
   { params: [] },
-  "() => (n) => {\n    return n === null ? 0 : n + 1;\n}",
-  '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["expressions/ternary.test.tsx"],"names":[],"mappings":"AAMgB,MAAA,CAAC,CAAgB,EAAE,EAAE;IACnC,OAAO,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC;AAChC,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => n => {\n    return n === null ? 0 : n + 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAMgB,MAACA,CAAgB;IAC/B,OAAOA,CAAC,KAAK,IAAI,GAAG,CAAC,GAAGA,CAAC,GAAG,CAAC;AAC/B,CAAC","names":["n"],"ignoreList":[],"sources":["expressions/ternary.test.tsx"]}',
+  [],
 );
 it("ternary", async (t) => {
   await snapshotCase(
@@ -16,8 +17,9 @@ it("ternary", async (t) => {
     cs.create(
       "uekyc2sf8mzc:15:4",
       { params: [{ kind: "splice", value: pick, bindings: [] }] },
-      "($splice0) => ({\n    absent: $splice0()(null),\n    present: $splice0()(4),\n})",
-      '{"version":3,"file":"ternary.test.jsx","sourceRoot":"","sources":["expressions/ternary.test.tsx"],"names":[],"mappings":"AAcO,cAAA,CAAC;IACF,MAAM,EAAE,UAAK,CAAC,IAAI,CAAC;IACnB,OAAO,EAAE,UAAK,CAAC,CAAC,CAAC;CAClB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    absent: $splice0()(null),\n    present: $splice0()(4)\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAcOA,QAAA,KAAC;IACFC,MAAM,EAAED,QAAA,EAAK,CAAC,IAAI,CAAC;IACnBE,OAAO,EAAEF,QAAA,EAAK,CAAC,CAAC;CACjB,CAAC","names":["$splice0","absent","present"],"ignoreList":[],"sources":["expressions/ternary.test.tsx"]}',
+      [],
     ),
   );
 });

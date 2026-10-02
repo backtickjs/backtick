@@ -1,49 +1,119 @@
-import { template as _$template } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<i>`),
-  _tmpl$3 = /*#__PURE__*/ _$template(`<p>`),
-  _tmpl$4 = /*#__PURE__*/ _$template(`<h2>`);
-const $cs0 = ($splice0, $splice1, $tag2) =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$insert(
-      _el$,
-      _$createComponent($tag2, {
-        title: "host",
-      }),
-      null,
-    );
-    _$insert(_el$, $splice0, null);
-    _$insert(_el$, $splice1, null);
-    return _el$;
-  })();
-const $cs1 = ($splice0, $splice1) => {
-  const Card = (props) =>
-    (() => {
-      var _el$2 = _tmpl$2();
-      _$insert(_el$2, () => $splice0() + props.n);
-      return _el$2;
-    })();
-  return (() => {
-    var _el$3 = _tmpl$3();
-    _$insert(_el$3, () => $splice1(Card));
-    return _el$3;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1frijc9i1kpaq:26:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);
+    exports.default = ($splice0, $splice1, $tag2) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(
+          _el$,
+          (0, web_3.createComponent)($tag2, {
+            title: "host",
+          }),
+          null,
+        );
+        (0, web_2.insert)(_el$, $splice0, null);
+        (0, web_2.insert)(_el$, $splice1, null);
+        return _el$;
+      })();
+  },
+  "1frijc9i1kpaq:16:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>`);
+    exports.default = ($splice0, $splice1) => {
+      const Card = (props) =>
+        (() => {
+          var _el$ = _tmpl$();
+          (0, web_2.insert)(_el$, () => $splice0() + props.n);
+          return _el$;
+        })();
+      return (() => {
+        var _el$2 = _tmpl$2();
+        (0, web_2.insert)(_el$2, () => $splice1(Card));
+        return _el$2;
+      })();
+    };
+  },
+  "1frijc9i1kpaq:28:18": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => "a";
+  },
+  "1frijc9i1kpaq:18:17": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    exports.default = ($capture0) =>
+      (0, web_1.createComponent)($capture0, {
+        n: 1,
+      });
+  },
+  "1frijc9i1kpaq:29:18": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => "b";
+  },
+  "1frijc9i1kpaq:11:13": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<h2>`);
+    exports.default = () => (props) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(_el$, () => props.title);
+        return _el$;
+      })();
+  },
 };
-const $cs2 = () => "a";
-const $cs3 = ($capture0) =>
-  _$createComponent($capture0, {
-    n: 1,
-  });
-const $cs4 = () => "b";
-const $cs5 = () => (props) =>
-  (() => {
-    var _el$4 = _tmpl$4();
-    _$insert(_el$4, () => props.title);
-    return _el$4;
-  })();
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1frijc9i1kpaq:26:4").default;
+const $cs1 = $require("1frijc9i1kpaq:16:9").default;
+const $cs2 = $require("1frijc9i1kpaq:28:18").default;
+const $cs3 = $require("1frijc9i1kpaq:18:17").default;
+const $cs4 = $require("1frijc9i1kpaq:29:18").default;
+const $cs5 = $require("1frijc9i1kpaq:11:13").default;
 export default $cs0(
   () => $cs1($cs2, $cs3),
   () => $cs1($cs4, $cs3),

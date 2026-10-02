@@ -1,18 +1,40 @@
-const $cs0 = () => {
-  let n = 3;
-  n **= 2;
-  n <<= 1;
-  n >>= 2;
-  n >>>= 1;
-  n &= 7;
-  n |= 8;
-  n ^= 1;
-  let a = null;
-  a ??= 4;
-  let b = false;
-  b ||= true;
-  let c = true;
-  c &&= false;
-  return [n, a, b, c];
+const $modules = {
+  "3g7ol1xnrqdpp:46:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let n = 3;
+      n **= 2;
+      n <<= 1;
+      n >>= 2;
+      n >>>= 1;
+      n &= 7;
+      n |= 8;
+      n ^= 1;
+      let a = null;
+      a ??= 4;
+      let b = false;
+      b ||= true;
+      let c = true;
+      c &&= false;
+      return [n, a, b, c];
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3g7ol1xnrqdpp:46:4").default;
 export default $cs0();

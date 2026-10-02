@@ -18,15 +18,17 @@ it("splicedFunctionParam", async (t) => {
             value: cs.create(
               "yz0kiroonaez:15:21",
               { params: [] },
-              "() => () => 2",
-              '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["splices/spliced-function-param.test.tsx"],"names":[],"mappings":"AAcwB,MAAA,GAAG,EAAE,CAAC,CAAC"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => () => 2;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAcwB,YAAM,CAAC","names":[],"ignoreList":[],"sources":["splices/spliced-function-param.test.tsx"]}',
+              [],
             ),
             bindings: [],
           },
         ],
       },
-      "($splice0) => {\n    const apply = (f) => f() + 1;\n    return apply($splice0());\n}",
-      '{"version":3,"file":"spliced-function-param.test.jsx","sourceRoot":"","sources":["splices/spliced-function-param.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,KAAK,GAAG,CAAC,CAAe,EAAE,EAAE,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IAC3C,OAAO,KAAK,CAAC,UAAC,CAAc,CAAC;AAC/B,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const apply = f => f() + 1;\n    return apply($splice0());\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAYOA,QAAA;IACD,MAAMC,KAAK,GAAIC,CAAe,IAAKA,CAAC,EAAE,GAAG,CAAC;IAC1C,OAAOD,KAAK,CAACD,QAAA,EAAC,CAAc;AAC9B,CAAC","names":["$splice0","apply","f"],"ignoreList":[],"sources":["splices/spliced-function-param.test.tsx"]}',
+      [],
     ),
   );
 });

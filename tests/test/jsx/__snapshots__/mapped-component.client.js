@@ -1,9 +1,17 @@
 // 26:5
-($splice0, $splice1, $tag2) => <div>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1, $tag2) => <div>
       <$tag2 each={$splice0()}>
         {(row) => $splice1(row)}
       </$tag2>
-    </div>
+    </div>);
+}
 
 // 28:29
-($capture0) => <span>{"row " + $capture0}</span>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($capture0) => <span>{"row " + $capture0}</span>);
+}

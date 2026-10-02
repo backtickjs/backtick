@@ -11,14 +11,16 @@ async function ScriptRows() {
   const build = cs.create(
     "26efeom523wsc:11:16",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    "($splice0) => (label) => {\n    return { label: $splice0()(label) };\n}",
-    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAUmB,cAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,UAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => label => {\n    return {\n        label: $splice0()(label)\n    };\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAUmBA,QAAA,IAACC,KAAa;IAC7B,OAAO;QAAEA,KAAK,EAAED,QAAA,EAAa,CAACC,KAAK;KAAG;AACxC,CAAC","names":["$splice0","label"],"ignoreList":[],"sources":["state/script-state.test.tsx"]}',
+    [],
   );
   return cs.create(
     "26efeom523wsc:15:9",
     { params: [{ kind: "splice", value: build, bindings: [] }] },
-    '($splice0) => <span style="font-size: 16px" onclick={() => {\n        const row = $splice0()("one");\n        row.label[1](row.label[0]() + " !!!");\n    }}>\n    {$splice0()("one").label[0]()}\n  </span>',
-    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAcY,cAAA,CAAC,IAAI,CACb,KAAK,CAAC,iBAAiB,CACvB,OAAO,CAAC,CAAC,GAAG,EAAE;QACZ,MAAM,GAAG,GAAG,UAAM,CAAC,KAAK,CAAC,CAAC;QAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;IACxC,CAAC,CAAC,CAEF;IAAA,CAAC,UAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAC3B;EAAA,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span style=font-size:16px>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    _el$.$$click = () => {\n        const row = $splice0()("one");\n        row.label[1](row.label[0]() + " !!!");\n    };\n    (0, web_3.insert)(_el$, () => $splice0()("one").label[0]());\n    return _el$;\n})();\n(0, web_2.delegateEvents)(["click"]);\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAcYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAD,IAAA,CAAAE,OAAA,GAEC;QACP,MAAMC,GAAG,GAAGJ,QAAA,EAAM,CAAC,KAAK,CAAC;QACzBI,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,CAACD,GAAG,CAACC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC;IACvC,CAAC;IAAAC,gBAAA,EAAAL,IAAA,QAEAD,QAAA,EAAM,CAAC,KAAK,CAAC,CAACK,KAAK,CAAC,CAAC,CAAC,EAAE;IAAA,OAAAJ,IAAA;AAAA,IACpB","names":["$splice0","_el$","_tmpl$","$$click","row","label","_$insert"],"ignoreList":[],"sources":["state/script-state.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("ScriptRows", async (t) => {

@@ -1,48 +1,84 @@
-import { template as _$template } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<em>`);
 import { createSignal as $i0 } from "solid-js";
 import { For as $i1 } from "solid-js";
-const $cs0 = ($splice0, $tag1) => {
-  const asked = $splice0()(0);
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild;
-    _$insert(_el$2, () => "asked " + asked[0]());
-    _$insert(
-      _el$,
-      _$createComponent($tag1, {
-        more: () => {
-          asked[1](asked[0]() + 1);
-          return asked[0]() < 5;
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "3mqkkm2axxnw5:32:22": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`);
+    exports.default = ($splice0, $tag1) => {
+      const asked = $splice0()(0);
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        (0, web_3.insert)(_el$2, () => "asked " + asked[0]());
+        (0, web_3.insert)(
+          _el$,
+          (0, web_2.createComponent)($tag1, {
+            more: () => {
+              asked[1](asked[0]() + 1);
+              return asked[0]() < 5;
+            },
+          }),
+          null,
+        );
+        return _el$;
+      })();
+    };
+  },
+  "3mqkkm2axxnw5:20:20": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);
+    exports.default = ($splice0, $splice1, $tag2) => (props) => {
+      const items = $splice0()([]);
+      const started = window.setTimeout(() => {
+        if (props.more()) {
+          items[1]($splice1());
+        }
+      }, 0);
+      return (0, web_3.createComponent)($tag2, {
+        get each() {
+          return items[0]();
         },
-      }),
-      null,
-    );
-    return _el$;
-  })();
+        children: (item) =>
+          (() => {
+            var _el$ = _tmpl$();
+            (0, web_2.insert)(_el$, item);
+            return _el$;
+          })(),
+      });
+    };
+  },
 };
-const $cs1 = ($splice0, $splice1, $tag2) => (props) => {
-  const items = $splice0()([]);
-  const started = window.setTimeout(() => {
-    if (props.more()) {
-      items[1]($splice1());
-    }
-  }, 0);
-  return _$createComponent($tag2, {
-    get each() {
-      return items[0]();
-    },
-    children: (item) =>
-      (() => {
-        var _el$3 = _tmpl$2();
-        _$insert(_el$3, item);
-        return _el$3;
-      })(),
-  });
+const $exports = {
+  "solid-js/web": $module0,
 };
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3mqkkm2axxnw5:32:22").default;
+const $cs1 = $require("3mqkkm2axxnw5:20:20").default;
 export default $cs0(
   () => $i0,
   $cs1(

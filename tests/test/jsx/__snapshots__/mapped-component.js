@@ -31,16 +31,18 @@ it("mappedComponent", async (t) => {
             value: cs.create(
               "3kr2wp8s6e8ma:28:28",
               { params: [{ kind: "capture", key: "row$3kr2wp8s6e8ma$0" }] },
-              '($capture0) => <span>{"row " + $capture0}</span>',
-              '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA2B+B,eAAA,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,SAAG,CAAC,EAAE,IAAI,CAAC"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = $capture0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, "row " + $capture0);\n    return _el$;\n})();\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA2B+BA,SAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAO,MAAM,GAAGD,SAAG;IAAA,OAAAC,IAAA;AAAA,IAAQ","names":["$capture0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
+              ["solid-js/web"],
             ),
             bindings: ["row$3kr2wp8s6e8ma$0"],
           },
           { kind: "tag", value: For },
         ],
       },
-      "($splice0, $splice1, $tag2) => <div>\n      <$tag2 each={$splice0()}>\n        {(row) => $splice1(row)}\n      </$tag2>\n    </div>",
-      '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AAyBO,+BAAA,CAAC,GAAG,CACL;MAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,UAAK,CAAC,CACf;QAAA,CAAC,CAAC,GAAW,EAAE,EAAE,CAAC,aAAkC,CACtD;MAAA,EAAE,KAAG,CACP;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1, $tag2) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag2, {\n        get each() {\n            return $splice0();\n        },\n        children: row => $splice1(row)\n    }));\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,KAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACAJ,KAAG;QAAA,IAACK,IAAIA;YAAA,OAAEP,QAAA,EAAK;QAAA;QAAAQ,QAAA,EACZC,GAAW,IAAKR,QAAA,CAAAQ,GAAA;KAAkC;IAAA,OAAAN,IAAA;AAAA,IAElD","names":["$splice0","$splice1","$tag2","_el$","_tmpl$","_$insert","_$createComponent","each","children","row"],"ignoreList":[],"sources":["jsx/mapped-component.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

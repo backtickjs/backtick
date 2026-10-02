@@ -14,15 +14,17 @@ it("nestedScripts", async (t) => {
             value: cs.create(
               "2jjdjdr7m395y:11:15",
               { params: [{ kind: "capture", key: "x$2jjdjdr7m395y$0" }] },
-              "($capture0) => $capture0",
-              '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"AAUkB,eAAA,SAAC"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAUkBA,SAAA,IAAAA,SAAC","names":["$capture0"],"ignoreList":[],"sources":["captures/nested-scripts.test.tsx"]}',
+              [],
             ),
             bindings: ["x$2jjdjdr7m395y$0"],
           },
         ],
       },
-      "($splice0) => {\n    const x = 0;\n    return $splice0(x);\n}",
-      '{"version":3,"file":"nested-scripts.test.jsx","sourceRoot":"","sources":["captures/nested-scripts.test.tsx"],"names":[],"mappings":"AAQO;IACD,MAAM,CAAC,GAAG,CAAC,CAAC;IACZ,OAAO,WAAC,CAAQ;AAClB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const x = 0;\n    return $splice0(x);\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAQOA,QAAA;IACD,MAAMC,CAAC,GAAG,CAAC;IACX,OAAOD,QAAA,CAAAC,CAAA,CAAC;AACV,CAAC","names":["$splice0","x"],"ignoreList":[],"sources":["captures/nested-scripts.test.tsx"]}',
+      [],
     ),
   );
 });

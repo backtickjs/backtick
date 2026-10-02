@@ -10,8 +10,9 @@ function addOwnTotal(lhs, rhs) {
         { kind: "splice", value: rhs, bindings: [] },
       ],
     },
-    "($splice0, $splice1) => {\n    let total = 0;\n    total = total + $splice0();\n    total = total + $splice1();\n    return total;\n}",
-    '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAMY;IACR,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,GAAG,KAAK,GAAG,UAAI,CAAC;IACrB,KAAK,GAAG,KAAK,GAAG,UAAI,CAAC;IACrB,OAAO,KAAK,CAAC;AACf,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    let total = 0;\n    total = total + $splice0();\n    total = total + $splice1();\n    return total;\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAMY,CAAAA,QAAA,EAAAC,QAAA;IACR,IAAIC,KAAK,GAAG,CAAC;IACbA,KAAK,GAAGA,KAAK,GAAGF,QAAA,EAAI;IACpBE,KAAK,GAAGA,KAAK,GAAGD,QAAA,EAAI;IACpB,OAAOC,KAAK;AACd,CAAC","names":["$splice0","$splice1","total"],"ignoreList":[],"sources":["captures/shadowing.test.tsx"]}',
+    [],
   );
 }
 it("shadowing", async (t) => {
@@ -28,8 +29,9 @@ it("shadowing", async (t) => {
               cs.create(
                 "3ujapqmnmm2ra:21:27",
                 { params: [{ kind: "capture", key: "total$3ujapqmnmm2ra$1" }] },
-                "($capture0) => $capture0",
-                '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAoB8B,eAAA,SAAK"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBAoB8BA,SAAA,IAAAA,SAAK","names":["$capture0"],"ignoreList":[],"sources":["captures/shadowing.test.tsx"]}',
+                [],
               ),
               100,
             ),
@@ -37,8 +39,9 @@ it("shadowing", async (t) => {
           },
         ],
       },
-      "($splice0) => {\n    const total = 1;\n    return $splice0(total);\n}",
-      '{"version":3,"file":"shadowing.test.jsx","sourceRoot":"","sources":["captures/shadowing.test.tsx"],"names":[],"mappings":"AAkBO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,eAAC,CAA8B;AACxC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const total = 1;\n    return $splice0(total);\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAkBOA,QAAA;IACD,MAAMC,KAAK,GAAG,CAAC;IACf,OAAOD,QAAA,CAAAC,KAAA,CAAC;AACV,CAAC","names":["$splice0","total"],"ignoreList":[],"sources":["captures/shadowing.test.tsx"]}',
+      [],
     ),
   );
 });

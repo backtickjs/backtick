@@ -1,26 +1,48 @@
-const $cs0 = () => {
-  const rounded =
-    Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
-  const edges =
-    Math.floor(-1.5) + "," + Math.ceil(-1.5) + "," + Math.trunc(-1.5);
-  const picks =
-    Math.min(3, 1, 2) + "," + Math.max(3, 1, 2) + "," + Math.abs(-4);
-  return (
-    rounded +
-    "|" +
-    edges +
-    "|" +
-    picks +
-    "|" +
-    Math.sqrt(9) +
-    "," +
-    Math.sign(-8) +
-    "," +
-    Math.fround(1.5) +
-    "|" +
-    (Math.PI > 3.14) +
-    "," +
-    (Math.E > 2.71)
-  );
+const $modules = {
+  "1j4uiiyebx17u:12:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      const rounded =
+        Math.round(2.5) + "," + Math.round(-2.5) + "," + Math.round(-0.5);
+      const edges =
+        Math.floor(-1.5) + "," + Math.ceil(-1.5) + "," + Math.trunc(-1.5);
+      const picks =
+        Math.min(3, 1, 2) + "," + Math.max(3, 1, 2) + "," + Math.abs(-4);
+      return (
+        rounded +
+        "|" +
+        edges +
+        "|" +
+        picks +
+        "|" +
+        Math.sqrt(9) +
+        "," +
+        Math.sign(-8) +
+        "," +
+        Math.fround(1.5) +
+        "|" +
+        (Math.PI > 3.14) +
+        "," +
+        (Math.E > 2.71)
+      );
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1j4uiiyebx17u:12:4").default;
 export default $cs0();

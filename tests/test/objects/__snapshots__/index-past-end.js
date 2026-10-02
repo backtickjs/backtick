@@ -12,8 +12,9 @@ it("indexPastEnd", async (t) => {
     cs.create(
       "3821as72cvvin:13:4",
       { params: [] },
-      '() => {\n    const names = ["zero", "one"];\n    return names[9];\n}',
-      '{"version":3,"file":"index-past-end.test.jsx","sourceRoot":"","sources":["objects/index-past-end.test.tsx"],"names":[],"mappings":"AAYO;IACD,MAAM,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;IAC9B,OAAO,KAAK,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const names = ["zero", "one"];\n    return names[9];\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAYO;IACD,MAAMA,KAAK,GAAG,CAAC,MAAM,EAAE,KAAK,CAAC;IAC7B,OAAOA,KAAK,CAAC,CAAC,CAAC;AACjB,CAAC","names":["names"],"ignoreList":[],"sources":["objects/index-past-end.test.tsx"]}',
+      [],
     ),
   );
 });

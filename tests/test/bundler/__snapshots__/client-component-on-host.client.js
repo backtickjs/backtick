@@ -1,2 +1,6 @@
 // 9:15
-() => (props) => <b>{props.n}</b>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => (props) => <b>{props.n}</b>);
+}

@@ -1,4 +1,29 @@
-import { template as _$template } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>hi`);
-const $cs0 = () => _tmpl$();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "3x1f5ri4d7p5:11:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>hi`);
+    exports.default = () => _tmpl$();
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3x1f5ri4d7p5:11:4").default;
 export default $cs0();

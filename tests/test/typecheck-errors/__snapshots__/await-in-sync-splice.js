@@ -12,7 +12,8 @@ export function greeting() {
     {
       params: [{ kind: "splice", value: await fetchGreeting(), bindings: [] }],
     },
-    '($splice0) => $splice0() + "!"',
-    '{"version":3,"file":"await-in-sync-splice.test.jsx","sourceRoot":"","sources":["typecheck-errors/await-in-sync-splice.test.tsx"],"names":[],"mappings":"AAWY,cAAA,UAAC,GAA0B,GAAG"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + "!";\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAWYA,QAAA,IAAAA,QAAA,EAAC,GAA0B,GAAG","names":["$splice0"],"ignoreList":[],"sources":["typecheck-errors/await-in-sync-splice.test.tsx"]}',
+    [],
   );
 }

@@ -3,11 +3,12 @@ import { createRequire, type LoadHook, type ResolveHook } from "node:module";
 import { dirname, relative } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { transpile } from "@backtickjs/compiler";
+import { solid } from "@backtickjs/solid-js/plugin";
 import ts from "typescript";
 
 // A `.tsx` test file, compiled the way a project's own build compiles one: its
-// JSX and `cs` scripts through the Backtick compiler; Solid compiles each
-// bundle. Node strips types from `.ts` itself, and runs no `.tsx` at all.
+// JSX and `cs` scripts through the Backtick compiler, each script then through
+// Solid's. Node strips types from `.ts` itself, and runs no `.tsx` at all.
 //
 // Diagnostics are left to the typecheck suite, as a build would leave them to
 // the editor: a test file that has some still runs.
@@ -24,7 +25,14 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   const fileName = relative(testsRoot, path);
   return {
     format: "module",
-    source: transpile(ts, fileName, sourceText, "@backtickjs/solid-js"),
+    source: transpile(
+      ts,
+      fileName,
+      sourceText,
+      "@backtickjs/solid-js",
+      undefined,
+      { plugins: [solid()] },
+    ),
     shortCircuit: true,
   };
 };

@@ -10,8 +10,9 @@ it("jsxStatic", async (t) => {
     cs.create(
       "3x1f5ri4d7p5:11:4",
       { params: [] },
-      "() => <div>\n      <span>hi</span>\n    </div>",
-      '{"version":3,"file":"jsx-static.test.jsx","sourceRoot":"","sources":["jsx/jsx-static.test.tsx"],"names":[],"mappings":"AAUO,MAAA,CAAC,GAAG,CACL;MAAA,CAAC,IAAI,CAAC,EAAE,EAAE,IAAI,CAChB;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>hi`);\nexports.default = () => _tmpl$();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;kBAUO,MAAAA,MAAA,EAEG","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/jsx-static.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

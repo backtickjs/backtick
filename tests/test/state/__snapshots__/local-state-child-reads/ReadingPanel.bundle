@@ -1,52 +1,131 @@
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { style as _$style } from "solid-js/web";
-import { effect as _$effect } from "solid-js/web";
-import { memo as _$memo } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<div><span>`),
-  _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
 import { createComponent as $i0 } from "solid-js";
 import { createSignal as $i1 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
-const $cs1 = ($splice0, $splice1, $splice2) => {
-  const selected = $splice0()(0);
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild;
-    _el$2.$$click = () => selected[1](1);
-    _$insert(_el$, () => $splice1(selected), null);
-    _$insert(_el$, () => $splice2(selected), null);
-    return _el$;
-  })();
-};
-const $cs2 = ($splice0, $splice1) =>
-  (() => {
-    var _el$3 = _tmpl$2(),
-      _el$4 = _el$3.firstChild;
-    _$insert(_el$4, () => "row " + $splice1() + " of " + $splice0()[0]());
-    _$insert(
-      _el$3,
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "2qf83pi6ieetw:34:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>select`);
+    exports.default = ($splice0, $splice1, $splice2) => {
+      const selected = $splice0()(0);
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        _el$2.$$click = () => selected[1](1);
+        (0, web_3.insert)(_el$, () => $splice1(selected), null);
+        (0, web_3.insert)(_el$, () => $splice2(selected), null);
+        return _el$;
+      })();
+    };
+    (0, web_2.delegateEvents)(["click"]);
+  },
+  "2qf83pi6ieetw:26:6": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    const web_4 = require("solid-js/web");
+    const web_5 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>`),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>marker`);
+    exports.default = ($splice0, $splice1) =>
       (() => {
-        var _c$ = _$memo(() => $splice0()[0]() === $splice1());
-        return () => (_c$() ? _tmpl$3() : null);
-      })(),
-      null,
-    );
-    _$effect((_$p) =>
-      _$style(
-        _el$4,
-        "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px",
-        _$p,
-      ),
-    );
-    return _el$3;
-  })();
-const $cs3 = ($capture0) => $capture0;
-const $cs4 = () => 0;
-const $cs5 = ($capture0) => $capture0;
-const $cs6 = () => 1;
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild;
+        (0, web_5.insert)(
+          _el$2,
+          () => "row " + $splice1() + " of " + $splice0()[0](),
+        );
+        (0, web_5.insert)(
+          _el$,
+          (() => {
+            var _c$ = (0, web_4.memo)(() => $splice0()[0]() === $splice1());
+            return () => (_c$() ? _tmpl$2() : null);
+          })(),
+          null,
+        );
+        (0, web_3.effect)((_$p) =>
+          (0, web_2.style)(
+            _el$2,
+            "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px",
+            _$p,
+          ),
+        );
+        return _el$;
+      })();
+  },
+  "2qf83pi6ieetw:39:45": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($capture0) => $capture0;
+  },
+  "2qf83pi6ieetw:39:28": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 0;
+  },
+  "2qf83pi6ieetw:40:45": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($capture0) => $capture0;
+  },
+  "2qf83pi6ieetw:40:28": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 1;
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1uptcsn9236u2:352:9").default;
+const $cs1 = $require("2qf83pi6ieetw:34:9").default;
+const $cs2 = $require("2qf83pi6ieetw:26:6").default;
+const $cs3 = $require("2qf83pi6ieetw:39:45").default;
+const $cs4 = $require("2qf83pi6ieetw:39:28").default;
+const $cs5 = $require("2qf83pi6ieetw:40:45").default;
+const $cs6 = $require("2qf83pi6ieetw:40:28").default;
 export default $cs0(
   () => $i0,
   () =>
@@ -64,4 +143,3 @@ export default $cs0(
         ),
     ),
 );
-_$delegateEvents(["click"]);

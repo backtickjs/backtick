@@ -17,8 +17,9 @@ it("typeAssertion", async (t) => {
     cs.create(
       "3amzui83z49rq:19:4",
       { params: [{ kind: "splice", value: answered, bindings: [] }] },
-      '($splice0) => {\n    const page = JSON.parse($splice0());\n    return page.rows[0] + " of " + page.count;\n}',
-      '{"version":3,"file":"type-assertion.test.jsx","sourceRoot":"","sources":["expressions/type-assertion.test.tsx"],"names":[],"mappings":"AAkBO;IACD,MAAM,IAAI,GAAG,IAAI,CAAC,KAAK,CAAC,UAAS,CAAsC,CAAC;IAExE,OAAO,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,GAAG,MAAM,GAAG,IAAI,CAAC,KAAK,CAAC;AAC5C,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const page = JSON.parse($splice0());\n    return page.rows[0] + " of " + page.count;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAkBOA,QAAA;IACD,MAAMC,IAAI,GAAGC,IAAI,CAACC,KAAK,CAACH,QAAA,EAAS,CAAsC;IAEvE,OAAOC,IAAI,CAACG,IAAI,CAAC,CAAC,CAAC,GAAG,MAAM,GAAGH,IAAI,CAACI,KAAK;AAC3C,CAAC","names":["$splice0","page","JSON","parse","rows","count"],"ignoreList":[],"sources":["expressions/type-assertion.test.tsx"]}',
+      [],
     ),
   );
 });

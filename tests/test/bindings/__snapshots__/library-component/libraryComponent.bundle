@@ -1,23 +1,48 @@
-import { template as _$template } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<span>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<b>+`);
 import { createSignal as $i0 } from "solid-js";
 import { Button as $i1 } from "acme-ui";
-const $cs0 = ($splice0, $tag1) => {
-  const count = $splice0()(0);
-  return _$createComponent($tag1, {
-    variant: "primary",
-    get icon() {
-      return _tmpl$2();
-    },
-    onClick: () => count[1](count[0]() + 1),
-    get children() {
-      var _el$ = _tmpl$();
-      _$insert(_el$, () => "Pressed " + count[0]() + " times");
-      return _el$;
-    },
-  });
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "z7pf43t1b5za:21:16": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<b>+`);
+    exports.default = ($splice0, $tag1) => {
+      const count = $splice0()(0);
+      return (0, web_2.createComponent)($tag1, {
+        variant: "primary",
+        get icon() {
+          return _tmpl$2();
+        },
+        onClick: () => count[1](count[0]() + 1),
+        get children() {
+          var _el$ = _tmpl$();
+          (0, web_3.insert)(_el$, () => "Pressed " + count[0]() + " times");
+          return _el$;
+        },
+      });
+    };
+  },
 };
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("z7pf43t1b5za:21:16").default;
 export default $cs0(() => $i0, $i1);

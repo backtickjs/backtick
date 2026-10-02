@@ -10,8 +10,9 @@ it("objectEntries", async (t) => {
     cs.create(
       "txb5yf5uyd2o:11:4",
       { params: [] },
-      '() => {\n    const held = { n: 1, q: "ada" };\n    const written = Object.fromEntries(Object.entries(held).map((pair) => [pair[0], JSON.stringify(pair[1])]));\n    return written.n + " " + written.q;\n}',
-      '{"version":3,"file":"object-entries.test.jsx","sourceRoot":"","sources":["stdlib/object-entries.test.tsx"],"names":[],"mappings":"AAUO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,KAAK,EAAE,CAAC;IAChC,MAAM,OAAO,GAAG,MAAM,CAAC,WAAW,CAChC,MAAM,CAAC,OAAO,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACvE,CAAC;IACF,OAAO,OAAO,CAAC,CAAC,GAAG,GAAG,GAAG,OAAO,CAAC,CAAC,CAAC;AACrC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const held = {\n        n: 1,\n        q: "ada"\n    };\n    const written = Object.fromEntries(Object.entries(held).map(pair => [pair[0], JSON.stringify(pair[1])]));\n    return written.n + " " + written.q;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,MAAMA,IAAI,GAAG;QAAEC,CAAC,EAAE,CAAC;QAAEC,CAAC,EAAE;KAAO;IAC/B,MAAMC,OAAO,GAAGC,MAAM,CAACC,WAAW,CAChCD,MAAM,CAACE,OAAO,CAACN,IAAI,CAAC,CAACO,GAAG,CAAEC,IAAI,IAAK,CAACA,IAAI,CAAC,CAAC,CAAC,EAAEC,IAAI,CAACC,SAAS,CAACF,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACvE;IACD,OAAOL,OAAO,CAACF,CAAC,GAAG,GAAG,GAAGE,OAAO,CAACD,CAAC;AACpC,CAAC","names":["held","n","q","written","Object","fromEntries","entries","map","pair","JSON","stringify"],"ignoreList":[],"sources":["stdlib/object-entries.test.tsx"]}',
+      [],
     ),
   );
 });

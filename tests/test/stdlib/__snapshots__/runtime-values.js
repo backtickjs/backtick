@@ -13,8 +13,9 @@ it("runtimeValues", async (t) => {
           { kind: "splice", value: { k: 3 }, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => ({\n    list: $splice0(),\n    obj: $splice1(),\n})",
-      '{"version":3,"file":"runtime-values.test.jsx","sourceRoot":"","sources":["stdlib/runtime-values.test.tsx"],"names":[],"mappings":"AAQO,wBAAA,CAAC;IACF,IAAI,EAAE,UAAC;IACP,GAAG,EAAE,UAAC;CACP,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    list: $splice0(),\n    obj: $splice1()\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAQO,CAAAA,QAAA,EAAAC,QAAA,MAAC;IACFC,IAAI,EAAEF,QAAA,EAAC;IACPG,GAAG,EAAEF,QAAA;CACN,CAAC","names":["$splice0","$splice1","list","obj"],"ignoreList":[],"sources":["stdlib/runtime-values.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -13,8 +13,9 @@ it("negation", async (t) => {
     cs.create(
       "3ucocch4sr77y:14:4",
       { params: [] },
-      "() => (count) => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n}",
-      '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["expressions/negation.test.tsx"],"names":[],"mappings":"AAaO,MAAA,CAAC,KAAa,EAAE,EAAE;IACnB,MAAM,KAAK,GAAG,CAAC,CAAC,CAAC;IACjB,MAAM,IAAI,GAAG,CAAC,KAAK,CAAC;IACpB,OAAO,KAAK,GAAG,IAAI,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => count => {\n    const floor = -1;\n    const step = -count;\n    return floor + step + -2;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAaO,MAACA,KAAa;IACf,MAAMC,KAAK,GAAG,CAAC,CAAC;IAChB,MAAMC,IAAI,GAAG,CAACF,KAAK;IACnB,OAAOC,KAAK,GAAGC,IAAI,GAAG,CAAC,CAAC;AAC1B,CAAC","names":["count","floor","step"],"ignoreList":[],"sources":["expressions/negation.test.tsx"]}',
+      [],
     ),
   );
 });
@@ -26,8 +27,9 @@ it("negativeZero", async (t) => {
     cs.create(
       "3ucocch4sr77y:27:4",
       { params: [] },
-      "() => {\n    return 1 / -0;\n}",
-      '{"version":3,"file":"negation.test.jsx","sourceRoot":"","sources":["expressions/negation.test.tsx"],"names":[],"mappings":"AA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC;AAChB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    return 1 / -0;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA0BO;IACD,OAAO,CAAC,GAAG,CAAC,CAAC;AACf,CAAC","names":[],"ignoreList":[],"sources":["expressions/negation.test.tsx"]}',
+      [],
     ),
   );
 });

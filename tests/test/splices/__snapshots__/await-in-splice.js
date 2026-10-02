@@ -19,8 +19,9 @@ it("awaitInSplice", async (t) => {
           { kind: "splice", value: await fetchGreeting(), bindings: [] },
         ],
       },
-      '($splice0) => $splice0() + "!"',
-      '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["splices/await-in-splice.test.tsx"],"names":[],"mappings":"AAa4C,cAAA,UAAC,GAA0B,GAAG"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + "!";\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAa4CA,QAAA,IAAAA,QAAA,EAAC,GAA0B,GAAG","names":["$splice0"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
+      [],
     ),
   );
 });
@@ -35,8 +36,9 @@ it("awaitInStatementsSplice", async (t) => {
           { kind: "splice", value: await fetchGreeting(), bindings: [] },
         ],
       },
-      '($splice0) => {\n    const greeting = $splice0();\n    return greeting + "!";\n}',
-      '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["splices/await-in-splice.test.tsx"],"names":[],"mappings":"AAoBO;IACD,MAAM,QAAQ,GAAG,UAAC,CAAwB;IAC1C,OAAO,QAAQ,GAAG,GAAG,CAAC;AACxB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const greeting = $splice0();\n    return greeting + "!";\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAoBOA,QAAA;IACD,MAAMC,QAAQ,GAAGD,QAAA,EAAC;IAClB,OAAOC,QAAQ,GAAG,GAAG;AACvB,CAAC","names":["$splice0","greeting"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
+      [],
     ),
   );
 });
@@ -47,8 +49,9 @@ export async function rows() {
   const response = cs.create(
     "1vub2b42i0si4:32:46",
     { params: [] },
-    '() => fetch("/rows")',
-    '{"version":3,"file":"await-in-splice.test.jsx","sourceRoot":"","sources":["splices/await-in-splice.test.tsx"],"names":[],"mappings":"AA+BiD,MAAA,KAAK,CAAC,OAAO,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => fetch("/rows");\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBA+BiD,MAAAA,KAAK,CAAC,OAAO,CAAC","names":["fetch"],"ignoreList":[],"sources":["splices/await-in-splice.test.tsx"]}',
+    [],
   );
   return response;
 }

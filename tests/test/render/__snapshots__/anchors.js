@@ -35,8 +35,9 @@ async function Rows() {
         { kind: "tag", value: For },
       ],
     },
-    '($splice0, $tag1) => {\n    const ids = $splice0()([1, 2, 3]);\n    const clear = () => {\n        ids[1]([]);\n    };\n    return (<>\n        <span onclick={clear}>clear</span>\n        <$tag1 each={ids[0]()}>{(id) => <span>{"row " + id}</span>}</$tag1>\n      </>);\n}',
-    '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AA+BY;IACR,MAAM,GAAG,GAAG,UAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAC/C,MAAM,KAAK,GAAG,GAAG,EAAE;QACjB,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IACb,CAAC,CAAC;IACF,OAAO,CACL,EACE;QAAA,CAAC,IAAI,CAAC,OAAO,CAAC,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,IAAI,CACjC;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAU,EAAE,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,EAAE,CAAC,EAAE,IAAI,CAAC,CAAC,EAAE,KAAG,CACxE;MAAA,GAAG,CACJ,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nconst web_4 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>clear`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = ($splice0, $tag1) => {\n    const ids = $splice0()([1, 2, 3]);\n    const clear = () => {\n        ids[1]([]);\n    };\n    return [(() => {\n            var _el$ = _tmpl$();\n            _el$.$$click = clear;\n            return _el$;\n        })(), (0, web_4.createComponent)($tag1, {\n            get each() {\n                return ids[0]();\n            },\n            children: id => (() => {\n                var _el$2 = _tmpl$2();\n                (0, web_3.insert)(_el$2, "row " + id);\n                return _el$2;\n            })()\n        })];\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;;kBA+BY,CAAAA,QAAA,EAAAC,KAAA;IACR,MAAMC,GAAG,GAAGF,QAAA,EAAa,CAAW,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IAC9C,MAAMG,KAAK,GAAGA,GAAA;QACZD,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;IACZ,CAAC;IACD;YAAA,IAAAE,IAAA,GAAAC,MAAA;YAAAD,IAAA,CAAAE,OAAA,GAEmBH,KAAK;YAAA,OAAAC,IAAA;QAAA,MAAAG,yBAAA,EACnBN,KAAG;YAAA,IAACO,IAAIA;gBAAA,OAAEN,GAAG,CAAC,CAAC,CAAC,EAAE;YAAA;YAAAO,QAAA,EAAIC,EAAU;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAC,gBAAA,EAAAF,KAAA,EAAY,MAAM,GAAGD,EAAE;gBAAA,OAAAC,KAAA;YAAA;SAAQ;AAGtE,CAAC","names":["$splice0","$tag1","ids","clear","_el$","_tmpl$","$$click","_$createComponent","each","children","id","_el$2","_tmpl$2","_$insert"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("Rows", async (t) => {
@@ -85,8 +86,9 @@ async function drawAt(value, parent, selector) {
           { kind: "splice", value: selector, bindings: [] },
         ],
       },
-      "($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()((dispose) => {\n    const parent = document.getElementById($splice1());\n    $splice2()(parent, $splice3(), parent.querySelector($splice4()));\n    return dispose;\n})",
-      '{"version":3,"file":"anchors.test.jsx","sourceRoot":"","sources":["render/anchors.test.tsx"],"names":[],"mappings":"AA0FoC,sDAAA,UAAW,CAAC,CAAC,OAAmB,EAAE,EAAE;IACpE,MAAM,MAAM,GAAG,QAAQ,CAAC,cAAc,CAAC,UAAG,CAAE,CAAC;IAC7C,UAAO,CAAC,MAAM,EAAE,UAAM,EAAE,MAAM,CAAC,aAAa,CAAC,UAAS,CAAC,CAAC,CAAC;IACzD,OAAO,OAAO,CAAC;AACjB,CAAC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()(dispose => {\n    const parent = document.getElementById($splice1());\n    $splice2()(parent, $splice3(), parent.querySelector($splice4()));\n    return dispose;\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA0FoC,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAJ,QAAA,EAAW,CAAEK,OAAmB;IAChE,MAAMC,MAAM,GAAGC,QAAQ,CAACC,cAAc,CAACP,QAAA,EAAG,CAAE;IAC5CC,QAAA,EAAO,CAACI,MAAM,EAAEH,QAAA,EAAM,EAAEG,MAAM,CAACG,aAAa,CAACL,QAAA,EAAS,CAAC,CAAC;IACxD,OAAOC,OAAO;AAChB,CAAC,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","dispose","parent","document","getElementById","querySelector"],"ignoreList":[],"sources":["render/anchors.test.tsx"]}',
+      [],
     ),
   );
   undo.push(unmount);

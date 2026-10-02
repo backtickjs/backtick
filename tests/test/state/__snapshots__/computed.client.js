@@ -1,5 +1,8 @@
 // 28:9
-($splice0, $splice1) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const doubled = $splice1()(() => {
         window.console.log();
@@ -11,10 +14,14 @@
               <p>{"b " + doubled()}</p>
               <p>{"c " + doubled()}</p>
             </div>);
+});
 }
 
 // 56:9
-($splice0, $splice1) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const isBig = $splice1()(() => n[0]() > 2);
     const label = () => {
@@ -25,4 +32,5 @@
               <button onclick={() => n[1](n[0]() + 1)}>add</button>
               <p>{label()}</p>
             </div>);
+});
 }

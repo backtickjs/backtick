@@ -10,8 +10,9 @@ function add(lhs, rhs) {
         { kind: "splice", value: rhs, bindings: [] },
       ],
     },
-    "($splice0, $splice1) => $splice0() + $splice1()",
-    '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAMY,wBAAA,UAAI,GAAG,UAAI"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAMY,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAI,GAAGC,QAAA,EAAI","names":["$splice0","$splice1"],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
+    [],
   );
 }
 it("deepNestedScripts", async (t) => {
@@ -28,22 +29,25 @@ it("deepNestedScripts", async (t) => {
               cs.create(
                 "2rqwzcdfi281b:11:54",
                 { params: [] },
-                "() => 1",
-                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUyD,MAAA,CAAC"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBAUyD,OAAC","names":[],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
+                [],
               ),
               cs.create(
                 "2rqwzcdfi281b:11:61",
                 { params: [] },
-                "() => 2",
-                '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgE,MAAA,CAAC"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 2;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBAUgE,OAAC","names":[],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
           },
         ],
       },
-      "($splice0) => $splice0()",
-      '{"version":3,"file":"deep-nested-scripts.test.jsx","sourceRoot":"","sources":["captures/deep-nested-scripts.test.tsx"],"names":[],"mappings":"AAUgD,cAAA,UAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUgDA,QAAA,IAAAA,QAAA,EAAC","names":["$splice0"],"ignoreList":[],"sources":["captures/deep-nested-scripts.test.tsx"]}',
+      [],
     ),
   );
 });

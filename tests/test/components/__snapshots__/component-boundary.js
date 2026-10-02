@@ -14,8 +14,9 @@ async function TextLabel(props) {
   return cs.create(
     "3ouwrs0p0z6cs:14:9",
     { params: [{ kind: "splice", value: text, bindings: [] }] },
-    "($splice0) => <span>{$splice0()}</span>",
-    '{"version":3,"file":"component-boundary.test.jsx","sourceRoot":"","sources":["components/component-boundary.test.tsx"],"names":[],"mappings":"AAaY,cAAA,CAAC,IAAI,CAAC,CAAC,UAAK,CAAC,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAaYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAOD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAa","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-boundary.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("componentBoundary", async (t) => {
@@ -38,8 +39,9 @@ it("componentBoundary", async (t) => {
           },
         ],
       },
-      "($splice0, $splice1) => <div>\n      {$splice0()}\n      {$splice1()}\n    </div>",
-      '{"version":3,"file":"component-boundary.test.jsx","sourceRoot":"","sources":["components/component-boundary.test.tsx"],"names":[],"mappings":"AAoBO,wBAAA,CAAC,GAAG,CACL;MAAA,CAAC,UAA6B,CAC9B;MAAA,CAAC,UAA6B,CAChC;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0, null);\n    (0, web_2.insert)(_el$, $splice1, null);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAoBO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EACAF,QAAA;IAAAI,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IACG","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-boundary.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

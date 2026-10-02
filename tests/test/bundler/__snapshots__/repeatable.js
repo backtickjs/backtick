@@ -11,28 +11,32 @@ import { bundle } from "../evaluate.ts";
 const doubled = cs.create(
   "2h0tu4lbov8kg:12:16",
   { params: [] },
-  "() => (n) => n * 2",
-  '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAWmB,MAAA,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => n => n * 2;\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAWmB,MAACA,CAAS,IAAKA,CAAC,GAAG,CAAC","names":["n"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+  [],
 );
 const pair = cs.create(
   "2h0tu4lbov8kg:13:13",
   { params: [] },
-  "() => (n) => (m) => n + m",
-  '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAYgB,MAAA,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,CAAS,EAAE,EAAE,CAAC,CAAC,GAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => n => m => n + m;\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAYgB,MAACA,CAAS,IAAMC,CAAS,IAAKD,CAAC,GAAGC,CAAC","names":["n","m"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+  [],
 );
 function Card(props) {
   return cs.create(
     "2h0tu4lbov8kg:16:9",
     { params: [{ kind: "splice", value: props, bindings: [] }] },
-    "($splice0) => <h2>{$splice0().title}</h2>",
-    '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAeY,cAAA,CAAC,EAAE,CAAC,CAAC,UAAM,CAAC,KAAK,CAAC,EAAE,EAAE,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<h2>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => $splice0().title);\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAeYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAKD,QAAA,EAAM,CAACI,KAAK;IAAA,OAAAH,IAAA;AAAA,IAAM","names":["$splice0","_el$","_tmpl$","_$insert","title"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 const shared = cs.create(
   "2h0tu4lbov8kg:19:15",
   { params: [] },
-  '() => "shared"',
-  '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAkBkB,MAAA,QAAQ"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "shared";\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAkBkB,cAAQ","names":[],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+  [],
 );
 const page = () =>
   cs.create(
@@ -45,8 +49,9 @@ const page = () =>
           value: cs.create(
             "2h0tu4lbov8kg:24:31",
             { params: [{ kind: "capture", key: "rows$2h0tu4lbov8kg$4" }] },
-            "($capture0) => $capture0.length",
-            '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAuBkC,eAAA,SAAI,CAAC,MAAM"}',
+            '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0.length;\n}',
+            '{"version":3,"file":"module.jsx","mappings":";;;kBAuBkCA,SAAA,IAAAA,SAAI,CAACC,MAAM","names":["$capture0","length"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+            [],
           ),
           bindings: ["rows$2h0tu4lbov8kg$4"],
         },
@@ -66,8 +71,9 @@ const page = () =>
         { kind: "tag", value: For },
       ],
     },
-    "($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6, $tag7) => {\n    const count = $splice0()(1);\n    const rows = [1, 2, 3];\n    const total = count[0]() + $splice1(rows);\n    return (<section>\n      {$splice2(rows)}\n      {$splice3(rows)}\n      <p>{$splice4(rows)(count[0]())}</p>\n      <p>{$splice5(rows)(1)(2)}</p>\n      <p>{$splice6(rows)}</p>\n      <p>{total}</p>\n      <ul>\n        <$tag7 each={rows}>{(row) => <li>{row + count[0]()}</li>}</$tag7>\n      </ul>\n    </section>);\n}",
-    '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AAoBsB;IACpB,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,IAAI,GAAG,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACvB,MAAM,KAAK,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,cAAC,CAAkB;IAC9C,OAAO,CACL,CAAC,OAAO,CACN;MAAA,CAAC,cAA6B,CAC9B;MAAA,CAAC,cAA4B,CAC7B;MAAA,CAAC,CAAC,CAAC,CAAC,cAAQ,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAC5B;MAAA,CAAC,CAAC,CAAC,CAAC,cAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CACnB;MAAA,CAAC,CAAC,CAAC,CAAC,cAAO,CAAC,EAAE,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,EAAE,CAAC,CACb;MAAA,CAAC,EAAE,CACD;QAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,GAAW,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,GAAG,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC,EAAE,KAAG,CACtE;MAAA,EAAE,EAAE,CACN;IAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<section><p></p><p></p><p></p><p></p><ul>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<li>`);\nexports.default = ($splice0, $splice1, $splice2, $splice3, $splice4, $splice5, $splice6, $tag7) => {\n    const count = $splice0()(1);\n    const rows = [1, 2, 3];\n    const total = count[0]() + $splice1(rows);\n    return (() => {\n        var _el$ = _tmpl$(), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling, _el$4 = _el$3.nextSibling, _el$5 = _el$4.nextSibling, _el$6 = _el$5.nextSibling;\n        (0, web_3.insert)(_el$, () => $splice2(rows), _el$2);\n        (0, web_3.insert)(_el$, () => $splice3(rows), _el$2);\n        (0, web_3.insert)(_el$2, () => $splice4(rows)(count[0]()));\n        (0, web_3.insert)(_el$3, () => $splice5(rows)(1)(2));\n        (0, web_3.insert)(_el$4, () => $splice6(rows));\n        (0, web_3.insert)(_el$5, total);\n        (0, web_3.insert)(_el$6, (0, web_2.createComponent)($tag7, {\n            each: rows,\n            children: row => (() => {\n                var _el$7 = _tmpl$2();\n                (0, web_3.insert)(_el$7, () => row + count[0]());\n                return _el$7;\n            })()\n        }));\n        return _el$;\n    })();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAoBsB,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,QAAA,EAAAC,KAAA;IACpB,MAAMC,KAAK,GAAGR,QAAA,EAAa,CAAC,CAAC,CAAC;IAC9B,MAAMS,IAAI,GAAG,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACtB,MAAMC,KAAK,GAAGF,KAAK,CAAC,CAAC,CAAC,EAAE,GAAGP,QAAA,CAAAQ,IAAA,CAAC;IAC5B;QAAA,IAAAE,IAAA,GAAAC,MAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAG,WAAA,EAAAC,KAAA,GAAAF,KAAA,CAAAC,WAAA,EAAAE,KAAA,GAAAD,KAAA,CAAAD,WAAA,EAAAG,KAAA,GAAAD,KAAA,CAAAF,WAAA;QAAAI,gBAAA,EAAAT,IAAA,QAEKT,QAAA,CAAAO,IAAA,CAA6B,EAAAI,KAAA;QAAAO,gBAAA,EAAAT,IAAA,QAC7BR,QAAA,CAAAM,IAAA,CAA4B,EAAAI,KAAA;QAAAO,gBAAA,EAAAP,KAAA,QACzBT,QAAA,CAAAK,IAAA,CAAQ,CAACD,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC;QAAAY,gBAAA,EAAAL,KAAA,QACpBV,QAAA,CAAAI,IAAA,CAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;QAAAW,gBAAA,EAAAH,KAAA,QACXX,QAAA,CAAAG,IAAA,CAAO;QAAAW,gBAAA,EAAAF,KAAA,EACPR,KAAK;QAAAU,gBAAA,EAAAD,KAAA,EAAAE,yBAAA,EAENd,KAAG;YAACe,IAAI,EAAEb,IAAI;YAAAc,QAAA,EAAIC,GAAW;gBAAA,IAAAC,KAAA,GAAAC,OAAA;gBAAAN,gBAAA,EAAAK,KAAA,QAAUD,GAAG,GAAGhB,KAAK,CAAC,CAAC,CAAC,EAAE;gBAAA,OAAAiB,KAAA;YAAA;SAAM;QAAA,OAAAd,IAAA;IAAA;AAItE,CAAC","names":["$splice0","$splice1","$splice2","$splice3","$splice4","$splice5","$splice6","$tag7","count","rows","total","_el$","_tmpl$","_el$2","firstChild","_el$3","nextSibling","_el$4","_el$5","_el$6","_$insert","_$createComponent","each","children","row","_el$7","_tmpl$2"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+    ["solid-js/web"],
   );
 const code = async (value) => (await bundle(value)).code;
 it("bundles the same every time, with scripts in it", async () => {
@@ -78,8 +84,9 @@ it("bundles the same every time, with scripts in it", async () => {
     cs.create(
       "2h0tu4lbov8kg:46:13",
       { params: [{ kind: "splice", value: doubled, bindings: [] }] },
-      "($splice0) => $splice0()(1)",
-      '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AA6CgB,cAAA,UAAQ,CAAC,CAAC,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0()(1);\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA6CgBA,QAAA,IAAAA,QAAA,EAAQ,CAAC,CAAC,CAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+      [],
     ),
   );
   await code(
@@ -91,8 +98,9 @@ it("bundles the same every time, with scripts in it", async () => {
           { kind: "splice", value: shared, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => $splice0()(1)(2) + $splice1().length",
-      '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AA8CgB,wBAAA,UAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,UAAO,CAAC,MAAM"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0()(1)(2) + $splice1().length;\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA8CgB,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAGC,QAAA,EAAO,CAACC,MAAM","names":["$splice0","$splice1","length"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+      [],
     ),
   );
   await code(
@@ -107,8 +115,9 @@ it("bundles the same every time, with scripts in it", async () => {
           },
         ],
       },
-      "($splice0) => $splice0()",
-      '{"version":3,"file":"repeatable.test.jsx","sourceRoot":"","sources":["bundler/repeatable.test.tsx"],"names":[],"mappings":"AA+CgB,cAAA,UAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA+CgBA,QAAA,IAAAA,QAAA,EAAC","names":["$splice0"],"ignoreList":[],"sources":["bundler/repeatable.test.tsx"]}',
+      [],
     ),
   );
   assert.equal(await code(page()), first);

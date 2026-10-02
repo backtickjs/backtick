@@ -1,5 +1,4 @@
-(        → objects/computed-key.test.tsx 13:8 {…
-) => {   → objects/computed-key.test.tsx 13:8 {…
+() => {  → objects/computed-key.test.tsx 13:8 {…
 const    → objects/computed-key.test.tsx 14:7 const 
 base     → objects/computed-key.test.tsx 14:13 base
  =       → objects/computed-key.test.tsx 14:17  = 
@@ -11,7 +10,6 @@ a        → objects/computed-key.test.tsx 14:22 a
 b        → objects/computed-key.test.tsx 14:28 b
 :        → objects/computed-key.test.tsx 14:29 : 
 2        → objects/computed-key.test.tsx 14:31 2
-}        → objects/computed-key.test.tsx 14:32  };…
 ;        → objects/computed-key.test.tsx 14:34 ;
 const    → objects/computed-key.test.tsx 15:7 const 
 name     → objects/computed-key.test.tsx 15:13 name

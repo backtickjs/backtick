@@ -9,8 +9,9 @@ it("earlyReturn", async (t) => {
     cs.create(
       "33mpmt8iae2c7:10:4",
       { params: [] },
-      "() => {\n    let n = 0;\n    if (n === 0) {\n        return;\n    }\n    n = 1;\n}",
-      '{"version":3,"file":"early-return.test.jsx","sourceRoot":"","sources":["control-flow/early-return.test.tsx"],"names":[],"mappings":"AASO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;QACZ,OAAO;IACT,CAAC;IACD,CAAC,GAAG,CAAC,CAAC;AACR,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let n = 0;\n    if (n === 0) {\n        return;\n    }\n    n = 1;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBASO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIA,CAAC,KAAK,CAAC,EAAE;QACX;IACF;IACAA,CAAC,GAAG,CAAC;AACP,CAAC","names":["n"],"ignoreList":[],"sources":["control-flow/early-return.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -6,14 +6,16 @@ const make = (f) =>
   cs.create(
     "c2jul89zo389:9:2",
     { params: [{ kind: "splice", value: f, bindings: [] }] },
-    "($splice0) => {\n    return $splice0()(1)[0]();\n}",
-    '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["stdlib/builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAQK;IACD,OAAO,UAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;AACpB,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    return $splice0()(1)[0]();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAQKA,QAAA;IACD,OAAOA,QAAA,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;AACnB,CAAC","names":["$splice0"],"ignoreList":[],"sources":["stdlib/builtin-hole-sharing.test.tsx"]}',
+    [],
   );
 const wrapped = cs.create(
   "c2jul89zo389:13:16",
   { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-  "($splice0) => (n) => $splice0()(n + 10)",
-  '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["stdlib/builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAYmB,cAAA,CAAC,CAAS,EAAE,EAAE,CAAC,UAAa,CAAC,CAAC,GAAG,EAAE,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => n => $splice0()(n + 10);\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAYmBA,QAAA,IAACC,CAAS,IAAKD,QAAA,EAAa,CAACC,CAAC,GAAG,EAAE,CAAC","names":["$splice0","n"],"ignoreList":[],"sources":["stdlib/builtin-hole-sharing.test.tsx"]}',
+  [],
 );
 it("builtinHoleSharing", async (t) => {
   await snapshotCase(
@@ -27,8 +29,9 @@ it("builtinHoleSharing", async (t) => {
           { kind: "splice", value: make(wrapped), bindings: [] },
         ],
       },
-      "($splice0, $splice1) => {\n    return $splice0() + $splice1();\n}",
-      '{"version":3,"file":"builtin-hole-sharing.test.jsx","sourceRoot":"","sources":["stdlib/builtin-hole-sharing.test.tsx"],"names":[],"mappings":"AAkBO;IACD,OAAO,UAAC,GAAuB,UAAC,CAAgB;AAClD,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    return $splice0() + $splice1();\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAkBO,CAAAA,QAAA,EAAAC,QAAA;IACD,OAAOD,QAAA,EAAC,GAAuBC,QAAA,EAAC;AAClC,CAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["stdlib/builtin-hole-sharing.test.tsx"]}',
+      [],
     ),
   );
 });

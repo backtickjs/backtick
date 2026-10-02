@@ -1,5 +1,8 @@
 // 13:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const rows = [3, 1, 2];
     const sorted = rows.toSorted((a, b) => a - b);
     const reversed = rows.toReversed();
@@ -14,4 +17,5 @@
         inserted.join(",") +
         "|" +
         rows.join(","));
+});
 }

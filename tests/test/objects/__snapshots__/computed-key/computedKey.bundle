@@ -1,14 +1,36 @@
-const $cs0 = () => {
-  const base = {
-    a: 1,
-    b: 2,
-  };
-  const name = "b";
-  return {
-    ...base,
-    [name]: 9,
-    ["c" + "d"]: 3,
-    a: 4,
-  };
+const $modules = {
+  "27b2r7injyzq0:13:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      const base = {
+        a: 1,
+        b: 2,
+      };
+      const name = "b";
+      return {
+        ...base,
+        [name]: 9,
+        ["c" + "d"]: 3,
+        a: 4,
+      };
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("27b2r7injyzq0:13:4").default;
 export default $cs0();

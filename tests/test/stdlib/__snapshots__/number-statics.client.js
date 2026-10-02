@@ -1,5 +1,8 @@
 // 9:10
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const positive = Number.EPSILON > 0;
     const largest = Number.MAX_VALUE > 1e308;
     const safe = Number.MAX_SAFE_INTEGER === 9007199254740991 &&
@@ -23,4 +26,5 @@
             " " +
             safe}
       </span>);
+});
 }

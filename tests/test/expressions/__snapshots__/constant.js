@@ -8,8 +8,9 @@ it("constant", async (t) => {
     cs.create(
       "1e4ingeabxazf:6:36",
       { params: [] },
-      "() => 1",
-      '{"version":3,"file":"constant.test.jsx","sourceRoot":"","sources":["expressions/constant.test.tsx"],"names":[],"mappings":"AAKuC,MAAA,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 1;\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAKuC,OAAC","names":[],"ignoreList":[],"sources":["expressions/constant.test.tsx"]}',
+      [],
     ),
   );
 });

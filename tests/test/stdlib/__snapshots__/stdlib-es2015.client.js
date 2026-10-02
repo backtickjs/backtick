@@ -1,5 +1,8 @@
 // 12:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const xs = [3, 8, 12, 5];
     const word = "backtick";
     return {
@@ -14,4 +17,5 @@
         codePoint: "\u{1F600}".codePointAt(0),
         keys: Object.keys({ a: 1, b: 2 }),
     };
+});
 }

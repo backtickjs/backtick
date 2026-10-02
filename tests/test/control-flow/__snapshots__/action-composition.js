@@ -6,14 +6,16 @@ import { snapshotCase } from "../snapshotCase.ts";
 const effects = cs.create(
   "3q2gz79xhvvfp:8:30",
   { params: [] },
-  "() => {\n    const x = 1;\n}",
-  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAOiC;IAC/B,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const x = 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAOiC;IAC/B,MAAMA,CAAC,GAAG,CAAC;AACb,CAAC","names":["x"],"ignoreList":[],"sources":["control-flow/action-composition.test.tsx"]}',
+  [],
 );
 const composed = cs.create(
   "3q2gz79xhvvfp:12:31",
   { params: [{ kind: "splice", value: effects, bindings: [] }] },
-  "($splice0) => {\n    $splice0();\n}",
-  '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAWkC;IAChC,UAAQ,CAAC;AACX,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    $splice0();\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAWkCA,QAAA;IAChCA,QAAA,EAAQ;AACV,CAAC","names":["$splice0"],"ignoreList":[],"sources":["control-flow/action-composition.test.tsx"]}',
+  [],
 );
 it("actionComposition", async (t) => {
   await snapshotCase(
@@ -22,8 +24,9 @@ it("actionComposition", async (t) => {
     cs.create(
       "3q2gz79xhvvfp:20:4",
       { params: [{ kind: "splice", value: composed, bindings: [] }] },
-      "($splice0) => {\n    $splice0();\n}",
-      '{"version":3,"file":"action-composition.test.jsx","sourceRoot":"","sources":["control-flow/action-composition.test.tsx"],"names":[],"mappings":"AAmBO;IACD,UAAS,CAAC;AACZ,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    $splice0();\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAmBOA,QAAA;IACDA,QAAA,EAAS;AACX,CAAC","names":["$splice0"],"ignoreList":[],"sources":["control-flow/action-composition.test.tsx"]}',
+      [],
     ),
   );
 });

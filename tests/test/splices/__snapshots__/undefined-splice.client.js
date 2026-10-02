@@ -1,8 +1,20 @@
 // 13:33
-($splice0, $splice1) => $splice0()(() => $splice1())
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => $splice0()(() => $splice1()));
+}
 
 // 18:36
-($splice0, $splice1) => $splice0()(() => $splice1())
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => $splice0()(() => $splice1()));
+}
 
 // 25:37
-($splice0, $splice1) => $splice0()(() => $splice1())
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => $splice0()(() => $splice1()));
+}

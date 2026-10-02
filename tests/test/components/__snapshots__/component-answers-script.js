@@ -14,8 +14,9 @@ async function Panel() {
   return cs.create(
     "3bpy25n6ucj1q:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    "($splice0) => {\n    const n = $splice0()(2);\n    return <em>{n[0]()}</em>;\n}",
-    '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["components/component-answers-script.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC3B,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>`);\nexports.default = $splice0 => {\n    const n = $splice0()(2);\n    return (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => n[0]());\n        return _el$;\n    })();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAaYA,QAAA;IACR,MAAMC,CAAC,GAAGD,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1B;QAAA,IAAAE,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAAYD,CAAC,CAAC,CAAC,CAAC,EAAE;QAAA,OAAAC,IAAA;IAAA;AACpB,CAAC","names":["$splice0","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("componentAnswersScript", async (t) => {
@@ -25,8 +26,9 @@ it("componentAnswersScript", async (t) => {
     cs.create(
       "3bpy25n6ucj1q:24:4",
       { params: [{ kind: "splice", value: _jsx(Panel, {}), bindings: [] }] },
-      "($splice0) => <div>{$splice0()}</div>",
-      '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["components/component-answers-script.test.tsx"],"names":[],"mappings":"AAuBO,cAAA,CAAC,GAAG,CAAC,CAAC,UAAc,CAAC,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAuBOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAqB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-script.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

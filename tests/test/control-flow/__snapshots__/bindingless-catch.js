@@ -10,8 +10,9 @@ it("bindinglessCatch", async (t) => {
     cs.create(
       "1lr2275tf95wm:11:4",
       { params: [] },
-      '() => {\n    try {\n        throw "boom";\n    }\n    catch {\n        return "caught";\n    }\n}',
-      '{"version":3,"file":"bindingless-catch.test.jsx","sourceRoot":"","sources":["control-flow/bindingless-catch.test.tsx"],"names":[],"mappings":"AAUO;IACD,IAAI,CAAC;QACH,MAAM,MAAM,CAAC;IACf,CAAC;IAAC,MAAM,CAAC;QACP,OAAO,QAAQ,CAAC;IAClB,CAAC;AACH,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    try {\n        throw "boom";\n    }\n    catch {\n        return "caught";\n    }\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAI;QACF,MAAM,MAAM;IACd,CAAC;IAAC,MAAM;QACN,OAAO,QAAQ;IACjB;AACF,CAAC","names":[],"ignoreList":[],"sources":["control-flow/bindingless-catch.test.tsx"]}',
+      [],
     ),
   );
 });

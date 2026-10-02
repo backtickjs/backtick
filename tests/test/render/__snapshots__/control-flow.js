@@ -22,8 +22,9 @@ const indexed = cs.create(
       { kind: "tag", value: Index },
     ],
   },
-  '($splice0, $tag1) => <ul>\n  <$tag1 each={$splice0()}>\n    {(row, index) => <li>{index + ": " + row()}</li>}\n  </$tag1>\n</ul>',
-  '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAmBmB,qBAAA,CAAC,EAAE,CACpB;EAAA,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,UAAK,CAAC,CACjB;IAAA,CAAC,CAAC,GAAiB,EAAE,KAAa,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,KAAK,GAAG,IAAI,GAAG,GAAG,EAAE,CAAC,EAAE,EAAE,CAAC,CACxE;EAAA,EAAE,KAAK,CACT;AAAA,EAAE,EAAE,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<ul>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<li>`);\nexports.default = ($splice0, $tag1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag1, {\n        get each() {\n            return $splice0();\n        },\n        children: (row, index) => (() => {\n            var _el$2 = _tmpl$2();\n            (0, web_2.insert)(_el$2, () => index + ": " + row());\n            return _el$2;\n        })()\n    }));\n    return _el$;\n})();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAmBmB,CAAAA,QAAA,EAAAC,KAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EAChBJ,KAAK;QAAA,IAACK,IAAIA;YAAA,OAAEN,QAAA,EAAK;QAAA;QAAAO,QAAA,EACfA,CAACC,GAAiB,EAAEC,KAAa;YAAA,IAAAC,KAAA,GAAAC,OAAA;YAAAP,gBAAA,EAAAM,KAAA,QAAUD,KAAK,GAAG,IAAI,GAAGD,GAAG,EAAE;YAAA,OAAAE,KAAA;QAAA;KAAM;IAAA,OAAAR,IAAA;AAAA,IAErE","names":["$splice0","$tag1","_el$","_tmpl$","_$insert","_$createComponent","each","children","row","index","_el$2","_tmpl$2"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+  ["solid-js/web"],
 );
 const switched = cs.create(
   "dqrga485l5pm:26:17",
@@ -33,8 +34,9 @@ const switched = cs.create(
       { kind: "tag", value: Match },
     ],
   },
-  "($tag0, $tag1) => <$tag0 fallback={<p>none</p>}>\n  <$tag1 when={1 > 2}>\n    <p>wrong</p>\n  </$tag1>\n  <$tag1 when={2 > 1}>\n    <p>right</p>\n  </$tag1>\n</$tag0>",
-  '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAyBoB,kBAAA,CAAC,KAAM,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC,CAAC,CAAC,CAChD;EAAA,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CACjB;IAAA,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CACb;EAAA,EAAE,KAAK,CACP;EAAA,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CACjB;IAAA,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CACb;EAAA,EAAE,KAAK,CACT;AAAA,EAAE,KAAM,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>wrong`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>right`), _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<p>none`);\nexports.default = ($tag0, $tag1) => (0, web_2.createComponent)($tag0, {\n    get fallback() {\n        return _tmpl$3();\n    },\n    get children() {\n        return [(0, web_2.createComponent)($tag1, {\n                when: 1 > 2,\n                get children() {\n                    return _tmpl$();\n                }\n            }), (0, web_2.createComponent)($tag1, {\n                when: 2 > 1,\n                get children() {\n                    return _tmpl$2();\n                }\n            })];\n    }\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAyBoB,CAAAA,KAAA,EAAAC,KAAA,KAAAC,yBAAA,EAACF,KAAM;IAAA,IAACG,QAAQA;QAAA,OAAAC,OAAA;IAAA;IAAA,IAAAC;QAAA,QAAAH,yBAAA,EACjCD,KAAK;gBAACK,IAAI,EAAE,CAAC,GAAG,CAAC;gBAAA,IAAAD;oBAAA,OAAAE,MAAA;gBAAA;aAAA,GAAAL,yBAAA,EAGjBD,KAAK;gBAACK,IAAI,EAAE,CAAC,GAAG,CAAC;gBAAA,IAAAD;oBAAA,OAAAG,OAAA;gBAAA;aAAA;IAAA;CAAA,CAGX","names":["$tag0","$tag1","_$createComponent","fallback","_tmpl$3","children","when","_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+  ["solid-js/web"],
 );
 const caught = cs.create(
   "dqrga485l5pm:35:15",
@@ -45,28 +47,32 @@ const caught = cs.create(
         value: cs.create(
           "dqrga485l5pm:36:4",
           { params: [] },
-          '() => {\n    throw "drawn wrong";\n}',
-          '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAmCO;IACH,MAAM,aAAa,CAAC;AACtB,CAAC"}',
+          '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    throw "drawn wrong";\n};\n}',
+          '{"version":3,"file":"module.jsx","mappings":";;;kBAmCO;IACH,MAAM,aAAa;AACrB,CAAC","names":[],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+          [],
         ),
         bindings: [],
       },
       { kind: "tag", value: ErrorBoundary },
     ],
   },
-  "($splice0, $tag1) => <$tag1 fallback={<p>caught</p>}>{$splice0()}</$tag1>",
-  '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAkCkB,qBAAA,CAAC,KAAa,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,MAAM,EAAE,CAAC,CAAC,CAAC,CAAC,CACxD,UAGF,CAAC,EAAE,KAAa,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>caught`);\nexports.default = ($splice0, $tag1) => (0, web_2.createComponent)($tag1, {\n    get fallback() {\n        return _tmpl$();\n    },\n    get children() {\n        return $splice0();\n    }\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAkCkB,CAAAA,QAAA,EAAAC,KAAA,KAAAC,yBAAA,EAACD,KAAa;IAAA,IAACE,QAAQA;QAAA,OAAAC,MAAA;IAAA;IAAA,IAAAC;QAAA,OACvCL,QAAA,EAGF;IAAA;CAAA,CAAiB","names":["$splice0","$tag1","_$createComponent","fallback","_tmpl$","children"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+  ["solid-js/web"],
 );
 const suspended = cs.create(
   "dqrga485l5pm:41:18",
   { params: [{ kind: "tag", value: Suspense }] },
-  "($tag0) => <$tag0 fallback={<p>loading</p>}>\n  <p>loaded</p>\n</$tag0>",
-  '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AAwCqB,WAAA,CAAC,KAAQ,CAAC,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,CACtD;EAAA,CAAC,CAAC,CAAC,MAAM,EAAE,CAAC,CACd;AAAA,EAAE,KAAQ,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>loaded`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>loading`);\nexports.default = $tag0 => (0, web_2.createComponent)($tag0, {\n    get fallback() {\n        return _tmpl$2();\n    },\n    get children() {\n        return _tmpl$();\n    }\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAwCqBA,KAAA,IAAAC,yBAAA,EAACD,KAAQ;IAAA,IAACE,QAAQA;QAAA,OAAAC,OAAA;IAAA;IAAA,IAAAC;QAAA,OAAAC,MAAA;IAAA;CAAA,CAE5B","names":["$tag0","_$createComponent","fallback","_tmpl$2","children","_tmpl$"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+  ["solid-js/web"],
 );
 const portaled = cs.create(
   "dqrga485l5pm:45:17",
   { params: [{ kind: "tag", value: Portal }] },
-  "($tag0) => <div>\n  <p>here</p>\n  <$tag0>\n    <p>elsewhere</p>\n  </$tag0>\n</div>",
-  '{"version":3,"file":"control-flow.test.jsx","sourceRoot":"","sources":["render/control-flow.test.tsx"],"names":[],"mappings":"AA4CoB,WAAA,CAAC,GAAG,CACtB;EAAA,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC,CACV;EAAA,CAAC,KAAM,CACL;IAAA,CAAC,CAAC,CAAC,SAAS,EAAE,CAAC,CACjB;EAAA,EAAE,KAAM,CACV;AAAA,EAAE,GAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>elsewhere`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<div><p>here`);\nexports.default = $tag0 => (() => {\n    var _el$ = _tmpl$2(), _el$2 = _el$.firstChild;\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag0, {\n        get children() {\n            return _tmpl$();\n        }\n    }), null);\n    return _el$;\n})();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA4CoBA,KAAA;IAAA,IAAAC,IAAA,GAAAC,OAAA,IAAAC,KAAA,GAAAF,IAAA,CAAAG,UAAA;IAAAC,gBAAA,EAAAJ,IAAA,EAAAK,yBAAA,EAEjBN,KAAM;QAAA,IAAAO;YAAA,OAAAC,MAAA;QAAA;KAAA;IAAA,OAAAP,IAAA;AAAA,IAGH","names":["$tag0","_el$","_tmpl$2","_el$2","firstChild","_$insert","_$createComponent","children","_tmpl$"],"ignoreList":[],"sources":["render/control-flow.test.tsx"]}',
+  ["solid-js/web"],
 );
 describe("control flow in a script", () => {
   it("draws each position with Index", async () => {

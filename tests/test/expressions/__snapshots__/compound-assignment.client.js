@@ -1,5 +1,8 @@
 // 12:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     let n = 10;
     n += 5;
     n -= 3;
@@ -13,4 +16,5 @@
     let x = 1;
     x += x = 5;
     return [n, text, answered, total, x];
+});
 }

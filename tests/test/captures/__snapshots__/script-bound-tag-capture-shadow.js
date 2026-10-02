@@ -8,8 +8,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const Card = cs.create(
   "1frijc9i1kpaq:11:13",
   { params: [] },
-  "() => (props) => <h2>{props.title}</h2>",
-  '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAUgB,MAAA,CAAC,KAAwB,EAAE,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,KAAK,CAAC,KAAK,CAAC,EAAE,EAAE,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<h2>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => props.title);\n    return _el$;\n})();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAUgB,MAACA,KAAwB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAAUD,KAAK,CAACI,KAAK;IAAA,OAAAH,IAAA;AAAA,IAAM","names":["props","_el$","_tmpl$","_$insert","title"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+  ["solid-js/web"],
 );
 // Instantiated twice with different labels, so the enclosing script is
 // polymorphic and its nested script's captures arrive through a thunk.
@@ -24,15 +25,17 @@ function labelled(label) {
           value: cs.create(
             "1frijc9i1kpaq:18:17",
             { params: [{ kind: "capture", key: "Card$1frijc9i1kpaq$1" }] },
-            "($capture0) => <$capture0 n={1}/>",
-            '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAiBoB,eAAA,CAAC,SAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+            '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $capture0 => (0, web_1.createComponent)($capture0, {\n    n: 1\n});\n}',
+            '{"version":3,"file":"module.jsx","mappings":";;;;kBAiBoBA,SAAA,IAAAC,yBAAA,EAACD,SAAI;IAACE,CAAC,EAAE;CAAC,CAAI","names":["$capture0","_$createComponent","n"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+            ["solid-js/web"],
           ),
           bindings: ["Card$1frijc9i1kpaq$1"],
         },
       ],
     },
-    "($splice0, $splice1) => {\n    const Card = (props) => <i>{$splice0() + props.n}</i>;\n    return <p>{$splice1(Card)}</p>;\n}",
-    '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,IAAI,GAAG,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,UAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACjE,OAAO,CAAC,CAAC,CAAC,CAAC,cAAqB,CAAC,EAAE,CAAC,CAAC,CAAC;AACxC,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = ($splice0, $splice1) => {\n    const Card = props => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, () => $splice0() + props.n);\n        return _el$;\n    })();\n    return (() => {\n        var _el$2 = _tmpl$2();\n        (0, web_2.insert)(_el$2, () => $splice1(Card));\n        return _el$2;\n    })();\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAeY,CAAAA,QAAA,EAAAC,QAAA;IACR,MAAMC,IAAI,GAAIC,KAAoB;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,QAASJ,QAAA,EAAM,GAAGG,KAAK,CAACI,CAAC;QAAA,OAAAH,IAAA;IAAA,IAAK;IAChE;QAAA,IAAAI,KAAA,GAAAC,OAAA;QAAAH,gBAAA,EAAAE,KAAA,QAAWP,QAAA,CAAAC,IAAA,CAAqB;QAAA,OAAAM,KAAA;IAAA;AAClC,CAAC","names":["$splice0","$splice1","Card","props","_el$","_tmpl$","_$insert","n","_el$2","_tmpl$2"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("scriptBoundTagCaptureShadow", async (t) => {
@@ -49,8 +52,9 @@ it("scriptBoundTagCaptureShadow", async (t) => {
               cs.create(
                 "1frijc9i1kpaq:28:18",
                 { params: [] },
-                '() => "a"',
-                '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA2BqB,MAAA,GAAG"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "a";\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
@@ -61,8 +65,9 @@ it("scriptBoundTagCaptureShadow", async (t) => {
               cs.create(
                 "1frijc9i1kpaq:29:18",
                 { params: [] },
-                '() => "b"',
-                '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AA4BqB,MAAA,GAAG"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "b";\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBA4BqB,SAAG","names":[],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
@@ -70,8 +75,9 @@ it("scriptBoundTagCaptureShadow", async (t) => {
           { kind: "tag", value: Card },
         ],
       },
-      '($splice0, $splice1, $tag2) => <div>\n      <$tag2 title="host"/>\n      {$splice0()}\n      {$splice1()}\n    </div>',
-      '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAyBO,+BAAA,CAAC,GAAG,CACL;MAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;MAAA,CAAC,UAAoB,CACrB;MAAA,CAAC,UAAoB,CACvB;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1, $tag2) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, (0, web_3.createComponent)($tag2, {\n        title: "host"\n    }), null);\n    (0, web_2.insert)(_el$, $splice0, null);\n    (0, web_2.insert)(_el$, $splice1, null);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAyBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,KAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACAJ,KAAI;QAACK,KAAK;KAAA;IAAAF,gBAAA,EAAAF,IAAA,EACVH,QAAA;IAAAK,gBAAA,EAAAF,IAAA,EACAF,QAAA;IAAA,OAAAE,IAAA;AAAA,IACG","names":["$splice0","$splice1","$tag2","_el$","_tmpl$","_$insert","_$createComponent","title"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });
@@ -85,8 +91,9 @@ it("scriptBoundTagScope", async (t) => {
     cs.create(
       "1frijc9i1kpaq:41:4",
       { params: [{ kind: "tag", value: Card }] },
-      '($tag0) => {\n    const twice = (Card) => (<div>\n          <Card n={1}/>\n          <Card n={2}/>\n        </div>);\n    return (<section>\n          <$tag0 title="host"/>\n          {twice((props) => (<i>{"row " + props.n}</i>))}\n        </section>);\n}',
-      '{"version":3,"file":"script-bound-tag-capture-shadow.test.jsx","sourceRoot":"","sources":["captures/script-bound-tag-capture-shadow.test.tsx"],"names":[],"mappings":"AAwCO;IACD,MAAM,KAAK,GAAG,CAAC,IAA2C,EAAE,EAAE,CAAC,CAC7D,CAAC,GAAG,CACF;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACX;UAAA,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACb;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;IAEF,OAAO,CACL,CAAC,OAAO,CACN;UAAA,CAAC,KAAI,CAAC,KAAK,CAAC,MAAM,EAClB;UAAA,CAAC,KAAK,CAAC,CAAC,KAAoB,EAAE,EAAE,CAAC,CAC/B,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAC1B,CAAC,CACJ;QAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<section>`), _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<i>`);\nexports.default = $tag0 => {\n    const twice = Card => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, (0, web_3.createComponent)(Card, {\n            n: 1\n        }), null);\n        (0, web_2.insert)(_el$, (0, web_3.createComponent)(Card, {\n            n: 2\n        }), null);\n        return _el$;\n    })();\n    return (() => {\n        var _el$2 = _tmpl$2();\n        (0, web_2.insert)(_el$2, (0, web_3.createComponent)($tag0, {\n            title: "host"\n        }), null);\n        (0, web_2.insert)(_el$2, () => twice(props => (() => {\n            var _el$3 = _tmpl$3();\n            (0, web_2.insert)(_el$3, () => "row " + props.n);\n            return _el$3;\n        })()), null);\n        return _el$2;\n    })();\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAwCOA,KAAA;IACD,MAAMC,KAAK,GAAIC,IAA2C;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EAErDJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAAF,gBAAA,EAAAF,IAAA,EAAAG,yBAAA,EACTJ,IAAI;YAACK,CAAC,EAAE;SAAC;QAAA,OAAAJ,IAAA;IAAA,IAEb;IAED;QAAA,IAAAK,KAAA,GAAAC,OAAA;QAAAJ,gBAAA,EAAAG,KAAA,EAAAF,yBAAA,EAEKN,KAAI;YAACU,KAAK;SAAA;QAAAL,gBAAA,EAAAG,KAAA,QACVP,KAAK,CAAEU,KAAoB;YAAA,IAAAC,KAAA,GAAAC,OAAA;YAAAR,gBAAA,EAAAO,KAAA,QACtB,MAAM,GAAGD,KAAK,CAACJ,CAAC;YAAA,OAAAK,KAAA;QAAA,IACrB,CAAC;QAAA,OAAAJ,KAAA;IAAA;AAGR,CAAC","names":["$tag0","twice","Card","_el$","_tmpl$","_$insert","_$createComponent","n","_el$2","_tmpl$2","title","props","_el$3","_tmpl$3"],"ignoreList":[],"sources":["captures/script-bound-tag-capture-shadow.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

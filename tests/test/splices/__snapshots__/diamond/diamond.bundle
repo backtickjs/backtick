@@ -1,14 +1,68 @@
-const $cs0 = ($splice0) => {
-  return $splice0() + $splice0();
+const $modules = {
+  "23y608t6y2wp3:24:11": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      return $splice0() + $splice0();
+    };
+  },
+  "23y608t6y2wp3:20:11": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      return $splice0() + $splice0();
+    };
+  },
+  "23y608t6y2wp3:16:11": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      return $splice0() + $splice0();
+    };
+  },
+  "23y608t6y2wp3:12:11": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      return $splice0() + $splice0();
+    };
+  },
+  "23y608t6y2wp3:10:11": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => 1;
+  },
 };
-const $cs1 = ($splice0) => {
-  return $splice0() + $splice0();
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
 };
-const $cs2 = ($splice0) => {
-  return $splice0() + $splice0();
-};
-const $cs3 = ($splice0) => {
-  return $splice0() + $splice0();
-};
-const $cs4 = () => 1;
+const $cs0 = $require("23y608t6y2wp3:24:11").default;
+const $cs1 = $require("23y608t6y2wp3:20:11").default;
+const $cs2 = $require("23y608t6y2wp3:16:11").default;
+const $cs3 = $require("23y608t6y2wp3:12:11").default;
+const $cs4 = $require("23y608t6y2wp3:10:11").default;
 export default $cs0(() => $cs1(() => $cs2(() => $cs3($cs4))));

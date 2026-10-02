@@ -1,25 +1,24 @@
 // 11:17
-($splice0) =>   → 11:20 (label:…
-(               → 11:20 (
-label           → 11:21 label
-)               → 11:34 ) 
-=>              → 11:36 =>
- {              → 11:38  {
-return          → 12:5 return 
-{               → 12:12 { 
-label           → 12:14 label
-:               → 12:19 : 
-$splice0()      → 12:21 $createSignal(label)…
-(               → 12:34 (
-label           → 12:35 label
-)               → 12:40 )
- }              → 12:41  }
-;               → 12:43 ;
-}               → 13:3 }
+($splice0) => (  → 11:20 (label:…
+label            → 11:21 label
+)                → 11:34 ) 
+=>               → 11:36 =>
+ {               → 11:38  {
+return           → 12:5 return 
+{                → 12:12 { 
+label            → 12:14 label
+:                → 12:19 : 
+$splice0()       → 12:21 $createSignal(label)…
+(                → 12:34 (
+label            → 12:35 label
+)                → 12:40 )
+ }               → 12:41  }
+;                → 12:43 ;
+}                → 13:3 }
+);               → 13:4 `;…
 
 // 15:10
-($splice0) =>      → 15:13 <span…
-<                  → 15:13 <
+($splice0) => <    → 15:13 <span…
 span               → 15:14 span
 style              → 16:5 style
 =                  → 16:10 =
@@ -74,3 +73,4 @@ label              → 22:20 label
 </                 → 23:3 </
 span               → 23:5 span
 >                  → 23:9 >
+);                 → 23:10 `;…

@@ -1,5 +1,8 @@
 // 14:10
-($splice0, $tag1) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $tag1) => {
     const ids = $splice0()([1, 2, 3, 4, 5]);
     const swap = () => {
         const held = ids[0]();
@@ -17,4 +20,5 @@
           </tbody>
         </table>
       </div>);
+});
 }

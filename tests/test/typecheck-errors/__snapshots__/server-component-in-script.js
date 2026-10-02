@@ -7,44 +7,50 @@ async function Row({ label }) {
   return cs.create(
     "2vpefhygm6190:8:9",
     { params: [{ kind: "splice", value: label, bindings: [] }] },
-    "($splice0) => <li>{$splice0()}</li>",
-    '{"version":3,"file":"server-component-in-script.test.jsx","sourceRoot":"","sources":["typecheck-errors/server-component-in-script.test.tsx"],"names":[],"mappings":"AAOY,cAAA,CAAC,EAAE,CAAC,CAAC,UAAM,CAAC,EAAE,EAAE,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<li>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAOYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAKD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAY","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 function Title({ text }) {
   return cs.create(
     "2vpefhygm6190:12:9",
     { params: [{ kind: "splice", value: text, bindings: [] }] },
-    "($splice0) => <h1>{$splice0()}</h1>",
-    '{"version":3,"file":"server-component-in-script.test.jsx","sourceRoot":"","sources":["typecheck-errors/server-component-in-script.test.tsx"],"names":[],"mappings":"AAWY,cAAA,CAAC,EAAE,CAAC,CAAC,UAAK,CAAC,EAAE,EAAE,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<h1>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAKD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAW","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 function Rule() {
   return cs.create(
     "2vpefhygm6190:16:9",
     { params: [] },
-    "() => <hr />",
-    '{"version":3,"file":"server-component-in-script.test.jsx","sourceRoot":"","sources":["typecheck-errors/server-component-in-script.test.tsx"],"names":[],"mappings":"AAeY,MAAA,CAAC,EAAE,CAAC,AAAD,EAAG"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<hr>`);\nexports.default = () => _tmpl$();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAeY,MAAAA,MAAA,EAAM","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
 export const clientOnly = cs.create(
   "2vpefhygm6190:20:26",
   { params: [{ kind: "tag", value: Row }] },
-  '($tag0) => <$tag0 label="a"/>',
-  '{"version":3,"file":"server-component-in-script.test.jsx","sourceRoot":"","sources":["typecheck-errors/server-component-in-script.test.tsx"],"names":[],"mappings":"AAmB6B,WAAA,CAAC,KAAG,CAAC,KAAK,CAAC,GAAG,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {\n    label: "a"\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAmB6BA,KAAA,IAAAC,yBAAA,EAACD,KAAG;IAACE,KAAK;CAAA,CAAO","names":["$tag0","_$createComponent","label"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+  ["solid-js/web"],
 );
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
 export const hybrid = cs.create(
   "2vpefhygm6190:23:22",
   { params: [{ kind: "tag", value: Title }] },
-  '($tag0) => <$tag0 text="Week"/>',
-  '{"version":3,"file":"server-component-in-script.test.jsx","sourceRoot":"","sources":["typecheck-errors/server-component-in-script.test.tsx"],"names":[],"mappings":"AAsByB,WAAA,CAAC,KAAK,CAAC,IAAI,CAAC,MAAM,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {\n    text: "Week"\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAsByBA,KAAA,IAAAC,yBAAA,EAACD,KAAK;IAACE,IAAI;CAAA,CAAU","names":["$tag0","_$createComponent","text"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+  ["solid-js/web"],
 );
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
 export const noProps = cs.create(
   "2vpefhygm6190:26:23",
   { params: [{ kind: "tag", value: Rule }] },
-  "($tag0) => <$tag0 />",
-  '{"version":3,"file":"server-component-in-script.test.jsx","sourceRoot":"","sources":["typecheck-errors/server-component-in-script.test.tsx"],"names":[],"mappings":"AAyB0B,WAAA,CAAC,KAAI,CAAC,AAAD,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAyB0BA,KAAA,IAAAC,yBAAA,EAACD,KAAI,KAAG","names":["$tag0","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/server-component-in-script.test.tsx"]}',
+  ["solid-js/web"],
 );

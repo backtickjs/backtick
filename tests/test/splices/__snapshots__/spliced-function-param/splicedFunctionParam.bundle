@@ -1,6 +1,36 @@
-const $cs0 = ($splice0) => {
-  const apply = (f) => f() + 1;
-  return apply($splice0());
+const $modules = {
+  "yz0kiroonaez:13:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      const apply = (f) => f() + 1;
+      return apply($splice0());
+    };
+  },
+  "yz0kiroonaez:15:21": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => () => 2;
+  },
 };
-const $cs1 = () => () => 2;
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("yz0kiroonaez:13:4").default;
+const $cs1 = $require("yz0kiroonaez:15:21").default;
 export default $cs0($cs1);

@@ -13,8 +13,9 @@ it("objectIndex", async (t) => {
     cs.create(
       "o3ttyh4dq4dw:15:4",
       { params: [{ kind: "splice", value: rates, bindings: [] }] },
-      '($splice0) => (currency) => {\n    const table = $splice0();\n    const asked = table[currency] ?? 0;\n    const usd = table["usd"] ?? 0;\n    return asked + usd;\n}',
-      '{"version":3,"file":"object-index.test.jsx","sourceRoot":"","sources":["objects/object-index.test.tsx"],"names":[],"mappings":"AAcO,cAAA,CAAC,QAAgB,EAAE,EAAE;IACtB,MAAM,KAAK,GAAG,UAAM,CAAC;IACrB,MAAM,KAAK,GAAG,KAAK,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC;IACnC,MAAM,GAAG,GAAG,KAAK,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC;IAC9B,OAAO,KAAK,GAAG,GAAG,CAAC;AACrB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => currency => {\n    const table = $splice0();\n    const asked = table[currency] ?? 0;\n    const usd = table["usd"] ?? 0;\n    return asked + usd;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAcOA,QAAA,IAACC,QAAgB;IAClB,MAAMC,KAAK,GAAGF,QAAA,EAAM;IACpB,MAAMG,KAAK,GAAGD,KAAK,CAACD,QAAQ,CAAC,IAAI,CAAC;IAClC,MAAMG,GAAG,GAAGF,KAAK,CAAC,KAAK,CAAC,IAAI,CAAC;IAC7B,OAAOC,KAAK,GAAGC,GAAG;AACpB,CAAC","names":["$splice0","currency","table","asked","usd"],"ignoreList":[],"sources":["objects/object-index.test.tsx"]}',
+      [],
     ),
   );
 });

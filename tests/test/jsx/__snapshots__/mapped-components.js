@@ -7,8 +7,9 @@ async function Row({ label }) {
   return cs.create(
     "3muqirg3sfmdb:8:9",
     { params: [{ kind: "splice", value: label, bindings: [] }] },
-    "($splice0) => <span>{$splice0()}</span>",
-    '{"version":3,"file":"mapped-components.test.jsx","sourceRoot":"","sources":["jsx/mapped-components.test.tsx"],"names":[],"mappings":"AAOY,cAAA,CAAC,IAAI,CAAC,CAAC,UAAM,CAAC,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAOYA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAOD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAc","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-components.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 // The same list, but each item is a component invocation rather than an
@@ -30,8 +31,9 @@ it("mappedComponents", async (t) => {
           },
         ],
       },
-      "($splice0) => <div>{$splice0()}</div>",
-      '{"version":3,"file":"mapped-components.test.jsx","sourceRoot":"","sources":["jsx/mapped-components.test.tsx"],"names":[],"mappings":"AAkBO,cAAA,CAAC,GAAG,CAAC,CAAC,UAAsD,CAAC,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAkBOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAA6D","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-components.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

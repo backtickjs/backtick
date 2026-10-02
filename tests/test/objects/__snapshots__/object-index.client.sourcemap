@@ -1,38 +1,38 @@
 // 15:5
-($splice0) =>   → 15:8 (currency:…
-(               → 15:8 (
-currency        → 15:9 currency
-)               → 15:25 ) 
-=>              → 15:27 =>
- {              → 15:29  {
-const           → 16:7 const 
-table           → 16:13 table
- =              → 16:18  = 
-$splice0()      → 16:21 $rates;…
-;               → 16:27 ;
-const           → 17:7 const 
-asked           → 17:13 asked
- =              → 17:18  = 
-table           → 17:21 table
-[               → 17:26 [
-currency        → 17:27 currency
-]               → 17:35 ]
- ??             → 17:36  ?? 
-0               → 17:40 0
-;               → 17:41 ;
-const           → 18:7 const 
-usd             → 18:13 usd
- =              → 18:16  = 
-table           → 18:19 table
-[               → 18:24 [
-"usd"           → 18:25 "usd"
-]               → 18:30 ]
- ??             → 18:31  ?? 
-0               → 18:35 0
-;               → 18:36 ;
-return          → 19:7 return 
-asked           → 19:14 asked
- +              → 19:19  + 
-usd             → 19:22 usd
-;               → 19:25 ;
-}               → 20:5 }
+($splice0) => (  → 15:8 (currency:…
+currency         → 15:9 currency
+)                → 15:25 ) 
+=>               → 15:27 =>
+ {               → 15:29  {
+const            → 16:7 const 
+table            → 16:13 table
+ =               → 16:18  = 
+$splice0()       → 16:21 $rates;…
+;                → 16:27 ;
+const            → 17:7 const 
+asked            → 17:13 asked
+ =               → 17:18  = 
+table            → 17:21 table
+[                → 17:26 [
+currency         → 17:27 currency
+]                → 17:35 ]
+ ??              → 17:36  ?? 
+0                → 17:40 0
+;                → 17:41 ;
+const            → 18:7 const 
+usd              → 18:13 usd
+ =               → 18:16  = 
+table            → 18:19 table
+[                → 18:24 [
+"usd"            → 18:25 "usd"
+]                → 18:30 ]
+ ??              → 18:31  ?? 
+0                → 18:35 0
+;                → 18:36 ;
+return           → 19:7 return 
+asked            → 19:14 asked
+ +               → 19:19  + 
+usd              → 19:22 usd
+;                → 19:25 ;
+}                → 20:5 }
+);               → 20:6 `,…

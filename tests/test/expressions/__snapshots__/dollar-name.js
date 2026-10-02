@@ -9,8 +9,9 @@ function add(lhs) {
   return cs.create(
     "sl458m2swc6c:10:9",
     { params: [{ kind: "splice", value: lhs, bindings: [] }] },
-    "($splice0) => $splice0() + 2",
-    '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"AASY,cAAA,UAAI,GAAG,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0() + 2;\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBASYA,QAAA,IAAAA,QAAA,EAAI,GAAG,CAAC","names":["$splice0"],"ignoreList":[],"sources":["expressions/dollar-name.test.tsx"]}',
+    [],
   );
 }
 it("dollarName", async (t) => {
@@ -27,16 +28,18 @@ it("dollarName", async (t) => {
               cs.create(
                 "sl458m2swc6c:19:19",
                 { params: [{ kind: "capture", key: "foo$$sl458m2swc6c$0" }] },
-                "($capture0) => $capture0",
-                '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"AAkBsB,eAAA,SAAI"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => $capture0;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBAkBsBA,SAAA,IAAAA,SAAI","names":["$capture0"],"ignoreList":[],"sources":["expressions/dollar-name.test.tsx"]}',
+                [],
               ),
             ),
             bindings: ["foo$$sl458m2swc6c$0"],
           },
         ],
       },
-      "($splice0) => {\n    const foo$ = 1;\n    return $splice0(foo$);\n}",
-      '{"version":3,"file":"dollar-name.test.jsx","sourceRoot":"","sources":["expressions/dollar-name.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC;IACf,OAAO,cAAC,CAAgB;AAC1B,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const foo$ = 1;\n    return $splice0(foo$);\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAgBOA,QAAA;IACD,MAAMC,IAAI,GAAG,CAAC;IACd,OAAOD,QAAA,CAAAC,IAAA,CAAC;AACV,CAAC","names":["$splice0","foo$"],"ignoreList":[],"sources":["expressions/dollar-name.test.tsx"]}',
+      [],
     ),
   );
 });

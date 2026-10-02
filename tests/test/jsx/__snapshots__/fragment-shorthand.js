@@ -11,8 +11,9 @@ it("fragmentShorthand", async (t) => {
     cs.create(
       "17cnce59u5ivv:12:4",
       { params: [] },
-      "() => <div>\n      {<>\n          <span>a</span>\n          <span>b</span>\n        </>}\n    </div>",
-      '{"version":3,"file":"fragment-shorthand.test.jsx","sourceRoot":"","sources":["jsx/fragment-shorthand.test.tsx"],"names":[],"mappings":"AAWO,MAAA,CAAC,GAAG,CACL;MAAA,CACE,EACE;UAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACb;UAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACf;QAAA,GACF,CACF;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>a`), _tmpl$3 = /*#__PURE__*/ (0, web_1.template)(`<span>b`);\nexports.default = () => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, [_tmpl$2(), _tmpl$3()]);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAWO;IAAA,IAAAA,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,GAAAG,OAAA,IAAAC,OAAA;IAAA,OAAAJ,IAAA;AAAA,IAOG","names":["_el$","_tmpl$","_$insert","_tmpl$2","_tmpl$3"],"ignoreList":[],"sources":["jsx/fragment-shorthand.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

@@ -1,12 +1,42 @@
-const $cs0 = ($splice0) => ({
-  missing: $splice0()(null),
-  present: $splice0()("hi"),
-  bare: null,
-});
-const $cs1 = () => (value) => {
-  if (value === null) {
-    return "-";
-  }
-  return value;
+const $modules = {
+  "2nnj6ebvkk8vj:20:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => ({
+      missing: $splice0()(null),
+      present: $splice0()("hi"),
+      bare: null,
+    });
+  },
+  "2nnj6ebvkk8vj:7:57": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => (value) => {
+      if (value === null) {
+        return "-";
+      }
+      return value;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2nnj6ebvkk8vj:20:4").default;
+const $cs1 = $require("2nnj6ebvkk8vj:7:57").default;
 export default $cs0($cs1);

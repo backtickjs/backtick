@@ -1,5 +1,8 @@
 // 13:31
-($splice0, $splice1, $splice2, $splice3, $splice4) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1, $splice2, $splice3, $splice4) => {
     const count = $splice0()(0);
     const Badge = (props) => <b>{"n " + props.n}</b>;
     return (<div>
@@ -9,27 +12,52 @@
       {$splice4(count, Badge)}
       <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>);
+});
 }
 
 // 19:10
-($capture0, $capture1) => <$capture0 n={$capture1[0]()}/>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($capture0, $capture1) => <$capture0 n={$capture1[0]()}/>);
+}
 
 // 21:11
-($splice0, $capture1, $capture2) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $capture1, $capture2) => {
     const skipped = 10;
     return $splice0($capture1, $capture2);
+});
 }
 
 // 23:20
-($capture0, $capture1) => <$capture0 n={$capture1[0]() + 100}/>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($capture0, $capture1) => <$capture0 n={$capture1[0]() + 100}/>);
+}
 
 // 26:10
-($splice0, $capture1, $capture2) => <section>{$splice0($capture1, $capture2)}</section>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $capture1, $capture2) => <section>{$splice0($capture1, $capture2)}</section>);
+}
 
 // 26:25
-($capture0, $capture1) => <$capture0 n={$capture1[0]() + 1000}/>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($capture0, $capture1) => <$capture0 n={$capture1[0]() + 1000}/>);
+}
 
 // 28:11
-($tag0, $capture1, $capture2) => <$tag0 each={[1, 2]}>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($tag0, $capture1, $capture2) => <$tag0 each={[1, 2]}>
           {(m) => <$capture1 n={m * $capture2[0]()}/>}
-        </$tag0>
+        </$tag0>);
+}

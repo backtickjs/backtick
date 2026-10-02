@@ -1,6 +1,8 @@
 import type ts from "typescript";
+import { compileScript, type Plugin } from "./compileScript.js";
 import { parseSourceFile } from "./parseFile.js";
 import { rewriteFile } from "./rewriteFile.js";
+import { createCall } from "./rewriteScript.js";
 
 export interface TransformOptions {
   /**
@@ -9,12 +11,18 @@ export interface TransformOptions {
    * TypeScript's name.
    */
   readonly sourceName?: (fileName: string) => string;
+  /**
+   * The framework's compile steps, run in series over each script: Solid's
+   * adapter's `solid()`. None by default, which leaves a script's JSX for a
+   * bundle's own plugins.
+   */
+  readonly plugins?: readonly Plugin[];
 }
 
 export function transform(
   ts: typeof import("typescript"),
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
-  { sourceName = (fileName) => fileName }: TransformOptions = {},
+  { sourceName = (fileName) => fileName, plugins = [] }: TransformOptions = {},
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
     const parsedFile = parseSourceFile(ts, sourceFile);
@@ -22,11 +30,7 @@ export function transform(
       return sourceFile;
     }
 
-    const rewrittenFile = rewriteFile(
-      ts,
-      parsedFile,
-      sourceName(sourceFile.fileName),
-    );
+    const rewrittenFile = rewriteFile(ts, parsedFile);
 
     if (addDiagnostic) {
       for (const diagnostic of rewrittenFile.diagnostics) {
@@ -42,10 +46,18 @@ export function transform(
       }
     }
 
+    // Each script as the client gets it; one that didn't parse is left as
+    // written.
+    const name = sourceName(sourceFile.fileName);
     const byStart = new Map<number, ts.Node>();
-    for (const [template, script] of rewrittenFile.scripts) {
-      const start = template.getStart(rewrittenFile.sourceFile);
-      byStart.set(start, script.runtime);
+    for (const [template, { runtime }] of rewrittenFile.scripts) {
+      if (runtime !== null) {
+        const compiled = compileScript(ts, runtime.emitted, name, plugins);
+        byStart.set(
+          template.getStart(rewrittenFile.sourceFile),
+          createCall(ts, runtime, compiled),
+        );
+      }
     }
 
     const visit: ts.Visitor = (node) => {

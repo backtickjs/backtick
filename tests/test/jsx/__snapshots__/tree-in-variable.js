@@ -14,8 +14,9 @@ const HeldRow = async () =>
   cs.create(
     "3cjyucql1m4dw:13:28",
     { params: [] },
-    "() => <span>x</span>",
-    '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAY+B,MAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>x`);\nexports.default = () => _tmpl$();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAY+B,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+    ["solid-js/web"],
   );
 const heldElement = cs.create(
   "3cjyucql1m4dw:15:20",
@@ -26,21 +27,24 @@ const heldElement = cs.create(
         value: cs.create(
           "3cjyucql1m4dw:16:17",
           { params: [] },
-          "() => <div />",
-          '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAeoB,MAAA,CAAC,GAAG,CAAC,AAAD,EAAG"}',
+          '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = () => _tmpl$();\n}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;;kBAeoB,MAAAA,MAAA,EAAO","names":["_tmpl$"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+          ["solid-js/web"],
         ),
         bindings: [],
       },
     ],
   },
-  "($splice0) => () => {\n    const tree = $splice0();\n    return tree;\n}",
-  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAcuB,cAAA,GAAG,EAAE;IAC1B,MAAM,IAAI,GAAG,UAAC,CAAc;IAC5B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const tree = $splice0();\n    return tree;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAcuBA,QAAA;IACrB,MAAMC,IAAI,GAAGD,QAAA,EAAC;IACd,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+  [],
 );
 const heldComponent = cs.create(
   "3cjyucql1m4dw:20:22",
   { params: [{ kind: "splice", value: _jsx(HeldRow, {}), bindings: [] }] },
-  "($splice0) => () => {\n    const tree = $splice0();\n    return tree;\n}",
-  '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AAmByB,cAAA,GAAG,EAAE;IAC5B,MAAM,IAAI,GAAG,UAAC,CAAgB;IAC9B,OAAO,IAAI,CAAC;AACd,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => {\n    const tree = $splice0();\n    return tree;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAmByBA,QAAA;IACvB,MAAMC,IAAI,GAAGD,QAAA,EAAC;IACd,OAAOC,IAAI;AACb,CAAC","names":["$splice0","tree"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+  [],
 );
 it("treeInVariable", async (t) => {
   await snapshotCase(
@@ -54,8 +58,9 @@ it("treeInVariable", async (t) => {
           { kind: "splice", value: heldComponent, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => <div>\n      {$splice0()()}\n      {$splice1()()}\n    </div>",
-      '{"version":3,"file":"tree-in-variable.test.jsx","sourceRoot":"","sources":["jsx/tree-in-variable.test.tsx"],"names":[],"mappings":"AA4BO,wBAAA,CAAC,GAAG,CACL;MAAA,CAAC,UAAY,EAAE,CACf;MAAA,CAAC,UAAc,EAAE,CACnB;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => $splice0()(), null);\n    (0, web_2.insert)(_el$, () => $splice1()(), null);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBA4BO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QACAF,QAAA,EAAY,EAAE;IAAAI,gBAAA,EAAAF,IAAA,QACdD,QAAA,EAAc,EAAE;IAAA,OAAAC,IAAA;AAAA,IACb","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/tree-in-variable.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

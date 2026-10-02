@@ -1,27 +1,60 @@
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<button>`);
 import { createSignal as $i0 } from "solid-js";
-const $cs0 = ($splice0) => {
-  const c = $splice0()(10);
-  return (() => {
-    var _el$ = _tmpl$();
-    _el$.$$click = () => {
-      c.add(5);
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "21rbgxcosm7y3:24:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<button>`);
+    exports.default = ($splice0) => {
+      const c = $splice0()(10);
+      return (() => {
+        var _el$ = _tmpl$();
+        _el$.$$click = () => {
+          c.add(5);
+        };
+        (0, web_3.insert)(_el$, () => c.get());
+        return _el$;
+      })();
     };
-    _$insert(_el$, () => c.get());
-    return _el$;
-  })();
+    (0, web_2.delegateEvents)(["click"]);
+  },
+  "21rbgxcosm7y3:10:16": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => (initial) => {
+      const count = $splice0()(initial);
+      return {
+        get: () => count[0](),
+        add: (n) => {
+          count[1](count[0]() + n);
+        },
+      };
+    };
+  },
 };
-const $cs1 = ($splice0) => (initial) => {
-  const count = $splice0()(initial);
-  return {
-    get: () => count[0](),
-    add: (n) => {
-      count[1](count[0]() + n);
-    },
-  };
+const $exports = {
+  "solid-js/web": $module0,
 };
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("21rbgxcosm7y3:24:4").default;
+const $cs1 = $require("21rbgxcosm7y3:10:16").default;
 export default $cs0(() => $cs1(() => $i0));
-_$delegateEvents(["click"]);

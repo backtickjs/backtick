@@ -10,8 +10,9 @@ it("forHeaderParts", async (t) => {
     cs.create(
       "2espgmzktnj99:11:4",
       { params: [] },
-      '() => {\n    let i = 0;\n    let seen = "";\n    for (; i < 3;) {\n        seen = seen + i;\n        i = i + 1;\n    }\n    return seen;\n}',
-      '{"version":3,"file":"for-header-parts.test.jsx","sourceRoot":"","sources":["control-flow/for-header-parts.test.tsx"],"names":[],"mappings":"AAUO;IACD,IAAI,CAAC,GAAG,CAAC,CAAC;IACV,IAAI,IAAI,GAAG,EAAE,CAAC;IACd,OAAO,CAAC,GAAG,CAAC,GAAI,CAAC;QACf,IAAI,GAAG,IAAI,GAAG,CAAC,CAAC;QAChB,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC;IACZ,CAAC;IACD,OAAO,IAAI,CAAC;AACd,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let i = 0;\n    let seen = "";\n    for (; i < 3;) {\n        seen = seen + i;\n        i = i + 1;\n    }\n    return seen;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAIA,CAAC,GAAG,CAAC;IACT,IAAIC,IAAI,GAAG,EAAE;IACb,OAAOD,CAAC,GAAG,CAAC,GAAI;QACdC,IAAI,GAAGA,IAAI,GAAGD,CAAC;QACfA,CAAC,GAAGA,CAAC,GAAG,CAAC;IACX;IACA,OAAOC,IAAI;AACb,CAAC","names":["i","seen"],"ignoreList":[],"sources":["control-flow/for-header-parts.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -15,8 +15,9 @@ function sandwich(fragment) {
   return cs.create(
     "1xi8jyc89buh5:16:9",
     { params: [{ kind: "splice", value: fragment, bindings: [] }] },
-    "($splice0) => {\n    const before = 1;\n    const spliced = $splice0();\n    const after = 2;\n    return before + spliced + after;\n}",
-    '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AAeY;IACR,MAAM,MAAM,GAAG,CAAC,CAAC;IACjB,MAAM,OAAO,GAAG,UAAS,CAAC;IAC1B,MAAM,KAAK,GAAG,CAAC,CAAC;IAChB,OAAO,MAAM,GAAG,OAAO,GAAG,KAAK,CAAC;AAClC,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const before = 1;\n    const spliced = $splice0();\n    const after = 2;\n    return before + spliced + after;\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAeYA,QAAA;IACR,MAAMC,MAAM,GAAG,CAAC;IAChB,MAAMC,OAAO,GAAGF,QAAA,EAAS;IACzB,MAAMG,KAAK,GAAG,CAAC;IACf,OAAOF,MAAM,GAAGC,OAAO,GAAGC,KAAK;AACjC,CAAC","names":["$splice0","before","spliced","after"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+    [],
   );
 }
 it("spliceBeforeDeclaration", async (t) => {
@@ -33,8 +34,9 @@ it("spliceBeforeDeclaration", async (t) => {
               cs.create(
                 "1xi8jyc89buh5:28:18",
                 { params: [] },
-                "() => 10",
-                '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BqB,MAAA,EAAE"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 10;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBA2BqB,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
@@ -45,16 +47,18 @@ it("spliceBeforeDeclaration", async (t) => {
               cs.create(
                 "1xi8jyc89buh5:28:40",
                 { params: [] },
-                "() => 20",
-                '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2B2C,MAAA,EAAE"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 20;\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;kBA2B2C,QAAE","names":[],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+                [],
               ),
             ),
             bindings: [],
           },
         ],
       },
-      "($splice0, $splice1) => $splice0() + $splice1()",
-      '{"version":3,"file":"splice-before-declaration.test.jsx","sourceRoot":"","sources":["splices/splice-before-declaration.test.tsx"],"names":[],"mappings":"AA2BO,wBAAA,UAAC,GAAqB,UAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => $splice0() + $splice1();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBA2BO,CAAAA,QAAA,EAAAC,QAAA,KAAAD,QAAA,EAAC,GAAqBC,QAAA,EAAC","names":["$splice0","$splice1"],"ignoreList":[],"sources":["splices/splice-before-declaration.test.tsx"]}',
+      [],
     ),
   );
 });

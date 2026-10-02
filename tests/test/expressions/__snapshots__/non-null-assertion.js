@@ -11,8 +11,9 @@ it("nonNullAssertion", async (t) => {
     cs.create(
       "bid8r58d3fdk:12:4",
       { params: [] },
-      "() => {\n    const rows = [1, 2, 3];\n    const first = rows.find((row) => row > 1);\n    return first * 10;\n}",
-      '{"version":3,"file":"non-null-assertion.test.jsx","sourceRoot":"","sources":["expressions/non-null-assertion.test.tsx"],"names":[],"mappings":"AAWO;IACD,MAAM,IAAI,GAAG,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC;IACvB,MAAM,KAAK,GAAG,IAAI,CAAC,IAAI,CAAC,CAAC,GAAG,EAAE,EAAE,CAAC,GAAG,GAAG,CAAC,CAAE,CAAC;IAE3C,OAAO,KAAK,GAAG,EAAE,CAAC;AACpB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const rows = [1, 2, 3];\n    const first = rows.find(row => row > 1);\n    return first * 10;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,MAAMA,IAAI,GAAG,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC;IACtB,MAAMC,KAAK,GAAGD,IAAI,CAACE,IAAI,CAAEC,GAAG,IAAKA,GAAG,GAAG,CAAC,CAAE;IAE1C,OAAOF,KAAK,GAAG,EAAE;AACnB,CAAC","names":["rows","first","find","row"],"ignoreList":[],"sources":["expressions/non-null-assertion.test.tsx"]}',
+      [],
     ),
   );
 });

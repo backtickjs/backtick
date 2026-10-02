@@ -6,8 +6,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const orDash = cs.create(
   "2nnj6ebvkk8vj:7:57",
   { params: [] },
-  '() => (value) => {\n    if (value === null) {\n        return "-";\n    }\n    return value;\n}',
-  '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["expressions/null-literal.test.tsx"],"names":[],"mappings":"AAM4D,MAAA,CAC1D,KAAoB,EACpB,EAAE;IACF,IAAI,KAAK,KAAK,IAAI,EAAE,CAAC;QACnB,OAAO,GAAG,CAAC;IACb,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => value => {\n    if (value === null) {\n        return "-";\n    }\n    return value;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAM4D,MAC1DA,KAAoB;IAEpB,IAAIA,KAAK,KAAK,IAAI,EAAE;QAClB,OAAO,GAAG;IACZ;IACA,OAAOA,KAAK;AACd,CAAC","names":["value"],"ignoreList":[],"sources":["expressions/null-literal.test.tsx"]}',
+  [],
 );
 it("nullLiteral", async (t) => {
   await snapshotCase(
@@ -16,8 +17,9 @@ it("nullLiteral", async (t) => {
     cs.create(
       "2nnj6ebvkk8vj:20:4",
       { params: [{ kind: "splice", value: orDash, bindings: [] }] },
-      '($splice0) => ({\n    missing: $splice0()(null),\n    present: $splice0()("hi"),\n    bare: null,\n})',
-      '{"version":3,"file":"null-literal.test.jsx","sourceRoot":"","sources":["expressions/null-literal.test.tsx"],"names":[],"mappings":"AAmBO,cAAA,CAAC;IACF,OAAO,EAAE,UAAO,CAAC,IAAI,CAAC;IACtB,OAAO,EAAE,UAAO,CAAC,IAAI,CAAC;IACtB,IAAI,EAAE,IAAI;CACX,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    missing: $splice0()(null),\n    present: $splice0()("hi"),\n    bare: null\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAmBOA,QAAA,KAAC;IACFC,OAAO,EAAED,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBE,OAAO,EAAEF,QAAA,EAAO,CAAC,IAAI,CAAC;IACtBG,IAAI,EAAE;CACP,CAAC","names":["$splice0","missing","present","bare"],"ignoreList":[],"sources":["expressions/null-literal.test.tsx"]}',
+      [],
     ),
   );
 });

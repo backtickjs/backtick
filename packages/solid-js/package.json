@@ -32,7 +32,7 @@
   },
   "scripts": {
     "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
-    "build": "tspc -b --noCheck",
+    "build": "tspc -b --noCheck --force",
     "dev": "tspc -b --noCheck --watch",
     "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",

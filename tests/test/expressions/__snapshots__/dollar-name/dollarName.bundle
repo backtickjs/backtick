@@ -1,7 +1,45 @@
-const $cs0 = ($splice0) => {
-  const foo$ = 1;
-  return $splice0(foo$);
+const $modules = {
+  "sl458m2swc6c:17:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      const foo$ = 1;
+      return $splice0(foo$);
+    };
+  },
+  "sl458m2swc6c:10:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => $splice0() + 2;
+  },
+  "sl458m2swc6c:19:19": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($capture0) => $capture0;
+  },
 };
-const $cs1 = ($splice0) => $splice0() + 2;
-const $cs2 = ($capture0) => $capture0;
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("sl458m2swc6c:17:4").default;
+const $cs1 = $require("sl458m2swc6c:10:9").default;
+const $cs2 = $require("sl458m2swc6c:19:19").default;
 export default $cs0((foo$) => $cs1(() => $cs2(foo$)));

@@ -15,8 +15,9 @@ it("rendersNothing", async (t) => {
     cs.create(
       "10057hli8r1op:13:42",
       { params: [{ kind: "splice", value: _jsx(Absent, {}), bindings: [] }] },
-      "($splice0) => <div>{$splice0()}</div>",
-      '{"version":3,"file":"renders-nothing.test.jsx","sourceRoot":"","sources":["components/renders-nothing.test.tsx"],"names":[],"mappings":"AAY6C,cAAA,CAAC,GAAG,CAAC,CAAC,UAAe,CAAC,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAY6CA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAsB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/renders-nothing.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

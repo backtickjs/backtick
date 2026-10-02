@@ -1,5 +1,4 @@
-(            → stdlib/object-entries.test.tsx 11:8 {…
-) => {       → stdlib/object-entries.test.tsx 11:8 {…
+() => {      → stdlib/object-entries.test.tsx 11:8 {…
 const        → stdlib/object-entries.test.tsx 12:7 const 
 held         → stdlib/object-entries.test.tsx 12:13 held
  =           → stdlib/object-entries.test.tsx 12:17  = 
@@ -11,7 +10,6 @@ n            → stdlib/object-entries.test.tsx 12:22 n
 q            → stdlib/object-entries.test.tsx 12:28 q
 :            → stdlib/object-entries.test.tsx 12:29 : 
 "ada"        → stdlib/object-entries.test.tsx 12:31 "ada"
-}            → stdlib/object-entries.test.tsx 12:36  };…
 ;            → stdlib/object-entries.test.tsx 12:38 ;
 const        → stdlib/object-entries.test.tsx 13:7 const 
 written      → stdlib/object-entries.test.tsx 13:13 written

@@ -9,8 +9,9 @@ const text = `& < > " ' </script> <!-- -->`;
 const scriptCloseText = cs.create(
   "3ilsptqylvqsp:11:24",
   { params: [{ kind: "splice", value: text, bindings: [] }] },
-  "($splice0) => <p>{$splice0()}</p>",
-  '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAU2B,cAAA,CAAC,CAAC,CAAC,CAAC,UAAK,CAAC,EAAE,CAAC,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAU2BA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAID,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAU","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
+  ["solid-js/web"],
 );
 const drawn = [];
 afterEach(() => drawn.splice(0).forEach((container) => container.remove()));
@@ -32,8 +33,9 @@ async function draw(element) {
           { kind: "splice", value: id, bindings: [] },
         ],
       },
-      "($splice0, $splice1, $splice2) => $splice0()(() => $splice1(), document.getElementById($splice2()))",
-      '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAwBO,kCAAA,UAAO,CAAC,GAAG,EAAE,CAAC,UAAQ,EAAE,QAAQ,CAAC,cAAc,CAAC,UAAG,CAAgB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1, $splice2) => $splice0()(() => $splice1(), document.getElementById($splice2()));\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAwBO,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA,KAAAF,QAAA,EAAO,CAAC,MAAMC,QAAA,EAAQ,EAAEE,QAAQ,CAACC,cAAc,CAACF,QAAA,EAAG,CAAgB,CAAC","names":["$splice0","$splice1","$splice2","document","getElementById"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
+      [],
     ),
   );
   return container;
@@ -48,16 +50,18 @@ describe("a page's client entry", () => {
       cs.create(
         "3ilsptqylvqsp:37:29",
         { params: [] },
-        "() => <p>first</p>",
-        '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAoCgC,MAAA,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>first`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoCgC,MAAAA,MAAA,EAAY","names":["_tmpl$"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     const second = await draw(
       cs.create(
         "3ilsptqylvqsp:38:30",
         { params: [] },
-        "() => <p>second</p>",
-        '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAqCiC,MAAA,CAAC,CAAC,CAAC,MAAM,EAAE,CAAC,CAAC"}',
+        '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>second`);\nexports.default = () => _tmpl$();\n}',
+        '{"version":3,"file":"module.jsx","mappings":";;;;;kBAqCiC,MAAAA,MAAA,EAAa","names":["_tmpl$"],"ignoreList":[],"sources":["page/render.test.tsx"]}',
+        ["solid-js/web"],
       ),
     );
     assert.equal(first.textContent, "first");

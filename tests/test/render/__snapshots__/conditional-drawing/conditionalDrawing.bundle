@@ -1,39 +1,77 @@
-import { template as _$template } from "solid-js/web";
-import { memo as _$memo } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div><span></span><section>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<em>shown`),
-  _tmpl$3 = /*#__PURE__*/ _$template(`<i>waiting`);
 import { createSignal as $i0 } from "solid-js";
-const $cs0 = ($splice0, $tag1) => {
-  const builds = $splice0()(0);
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild,
-      _el$3 = _el$2.nextSibling;
-    _$insert(_el$2, () => "builds " + builds[0]());
-    _$insert(
-      _el$3,
-      _$createComponent($tag1, {
-        again: () => {
-          builds[1](builds[0]() + 1);
-          return builds[0]() < 5;
-        },
-      }),
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "2u9nfrz55jzvf:42:27": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(
+      `<div><span></span><section>`,
     );
-    return _el$;
-  })();
+    exports.default = ($splice0, $tag1) => {
+      const builds = $splice0()(0);
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        (0, web_3.insert)(_el$2, () => "builds " + builds[0]());
+        (0, web_3.insert)(
+          _el$3,
+          (0, web_2.createComponent)($tag1, {
+            again: () => {
+              builds[1](builds[0]() + 1);
+              return builds[0]() < 5;
+            },
+          }),
+        );
+        return _el$;
+      })();
+    };
+  },
+  "2u9nfrz55jzvf:30:13": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>shown`),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<i>waiting`);
+    exports.default = ($splice0) => (props) => {
+      const shown = $splice0()(false);
+      const started = window.setTimeout(() => {
+        if (props.again()) {
+          shown[1](true);
+        }
+      }, 0);
+      return (0, web_2.memo)(() =>
+        (0, web_2.memo)(() => !!shown[0]())() ? _tmpl$() : _tmpl$2(),
+      );
+    };
+  },
 };
-const $cs1 = ($splice0) => (props) => {
-  const shown = $splice0()(false);
-  const started = window.setTimeout(() => {
-    if (props.again()) {
-      shown[1](true);
-    }
-  }, 0);
-  return _$memo(() => (_$memo(() => !!shown[0]())() ? _tmpl$2() : _tmpl$3()));
+const $exports = {
+  "solid-js/web": $module0,
 };
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2u9nfrz55jzvf:42:27").default;
+const $cs1 = $require("2u9nfrz55jzvf:30:13").default;
 export default $cs0(
   () => $i0,
   $cs1(() => $i0),

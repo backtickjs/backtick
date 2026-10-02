@@ -81,42 +81,43 @@ $tag1                   → 40:76 For>…
 )                       → 41:10 …
 ;                       → 42:6 ;
 }                       → 43:3 }
+);                      → 43:4 `;…
 
 // 91:34
-($splice0, $splice1, $splice2, $splice3, $splice4) =>   → 91:37 $createRoot((dispose:…
-$splice0()                                              → 91:37 $createRoot((dispose:…
-(                                                       → 91:48 (
-(                                                       → 91:49 (
-dispose                                                 → 91:50 dispose
-)                                                       → 91:69 ) 
-=>                                                      → 91:71 =>
- {                                                      → 91:73  {
-const                                                   → 92:5 const 
-parent                                                  → 92:11 parent
- =                                                      → 92:17  = 
-document                                                → 92:20 document
-.                                                       → 92:28 .
-getElementById                                          → 92:29 getElementById
-(                                                       → 92:43 (
-$splice1()                                              → 92:44 $id)!;…
-)                                                       → 92:47 )
-;                                                       → 92:49 ;
-$splice2()                                              → 93:5 $insert(parent,…
-(                                                       → 93:12 (
-parent                                                  → 93:13 parent
-,                                                       → 93:19 , 
-$splice3()                                              → 93:21 $value,…
-,                                                       → 93:27 , 
-parent                                                  → 93:29 parent
-.                                                       → 93:35 .
-querySelector                                           → 93:36 querySelector
-(                                                       → 93:49 (
-$splice4()                                              → 93:50 $selector));…
-)                                                       → 93:59 )
-)                                                       → 93:60 )
-;                                                       → 93:61 ;
-return                                                  → 94:5 return 
-dispose                                                 → 94:12 dispose
-;                                                       → 94:19 ;
-}                                                       → 95:3 }
-)                                                       → 95:4 )
+($splice0, $splice1, $splice2, $splice3, $splice4) => $splice0()  → 91:37 $createRoot((dispose:…
+(                                                                 → 91:48 (
+(                                                                 → 91:49 (
+dispose                                                           → 91:50 dispose
+)                                                                 → 91:69 ) 
+=>                                                                → 91:71 =>
+ {                                                                → 91:73  {
+const                                                             → 92:5 const 
+parent                                                            → 92:11 parent
+ =                                                                → 92:17  = 
+document                                                          → 92:20 document
+.                                                                 → 92:28 .
+getElementById                                                    → 92:29 getElementById
+(                                                                 → 92:43 (
+$splice1()                                                        → 92:44 $id)!;…
+)                                                                 → 92:47 )
+;                                                                 → 92:49 ;
+$splice2()                                                        → 93:5 $insert(parent,…
+(                                                                 → 93:12 (
+parent                                                            → 93:13 parent
+,                                                                 → 93:19 , 
+$splice3()                                                        → 93:21 $value,…
+,                                                                 → 93:27 , 
+parent                                                            → 93:29 parent
+.                                                                 → 93:35 .
+querySelector                                                     → 93:36 querySelector
+(                                                                 → 93:49 (
+$splice4()                                                        → 93:50 $selector));…
+)                                                                 → 93:59 )
+)                                                                 → 93:60 )
+;                                                                 → 93:61 ;
+return                                                            → 94:5 return 
+dispose                                                           → 94:12 dispose
+;                                                                 → 94:19 ;
+}                                                                 → 95:3 }
+)                                                                 → 95:4 )
+);                                                                → 95:5 `);…

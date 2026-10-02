@@ -20,7 +20,6 @@ export interface RewrittenFile {
 export function rewriteFile(
   ts: typeof import("typescript"),
   parsedFile: ParsedFile,
-  sourceName = parsedFile.sourceFile.fileName,
 ): RewrittenFile {
   const sourceFile = parsedFile.sourceFile;
 
@@ -44,7 +43,6 @@ export function rewriteFile(
       ts,
       script,
       fileHash,
-      sourceName,
       bindings,
       params.get(script),
     );

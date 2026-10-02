@@ -1,11 +1,23 @@
 // 14:42
-($splice0) => $splice0() + "!"
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => $splice0() + "!");
+}
 
 // 21:5
-($splice0) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => {
     const greeting = $splice0();
     return greeting + "!";
+});
 }
 
 // 32:47
-() => fetch("/rows")
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => fetch("/rows"));
+}

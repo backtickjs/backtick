@@ -1,10 +1,32 @@
-const $cs0 = () => {
-  let i = 0;
-  let seen = "";
-  for (; i < 3; ) {
-    seen = seen + i;
-    i = i + 1;
-  }
-  return seen;
+const $modules = {
+  "2espgmzktnj99:11:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let i = 0;
+      let seen = "";
+      for (; i < 3; ) {
+        seen = seen + i;
+        i = i + 1;
+      }
+      return seen;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2espgmzktnj99:11:4").default;
 export default $cs0();

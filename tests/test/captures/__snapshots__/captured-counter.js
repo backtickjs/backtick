@@ -10,8 +10,9 @@ it("capturedCounter", async (t) => {
     cs.create(
       "2s7xqailmdcpa:11:4",
       { params: [] },
-      "() => {\n    let count = 0;\n    const bump = () => {\n        count = count + 1;\n        return count;\n    };\n    return bump() + bump();\n}",
-      '{"version":3,"file":"captured-counter.test.jsx","sourceRoot":"","sources":["captures/captured-counter.test.tsx"],"names":[],"mappings":"AAUO;IACD,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,MAAM,IAAI,GAAG,GAAG,EAAE;QAChB,KAAK,GAAG,KAAK,GAAG,CAAC,CAAC;QAClB,OAAO,KAAK,CAAC;IACf,CAAC,CAAC;IACF,OAAO,IAAI,EAAE,GAAG,IAAI,EAAE,CAAC;AACzB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let count = 0;\n    const bump = () => {\n        count = count + 1;\n        return count;\n    };\n    return bump() + bump();\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,IAAIA,KAAK,GAAG,CAAC;IACb,MAAMC,IAAI,GAAGA,GAAA;QACXD,KAAK,GAAGA,KAAK,GAAG,CAAC;QACjB,OAAOA,KAAK;IACd,CAAC;IACD,OAAOC,IAAI,EAAE,GAAGA,IAAI,EAAE;AACxB,CAAC","names":["count","bump"],"ignoreList":[],"sources":["captures/captured-counter.test.tsx"]}',
+      [],
     ),
   );
 });

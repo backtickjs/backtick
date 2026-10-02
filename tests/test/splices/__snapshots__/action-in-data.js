@@ -6,8 +6,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const action = cs.create(
   "1es21es7404j7:7:15",
   { params: [] },
-  "() => {\n    const x = 1;\n}",
-  '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["splices/action-in-data.test.tsx"],"names":[],"mappings":"AAMkB;IAChB,MAAM,CAAC,GAAG,CAAC,CAAC;AACd,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const x = 1;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAMkB;IAChB,MAAMA,CAAC,GAAG,CAAC;AACb,CAAC","names":["x"],"ignoreList":[],"sources":["splices/action-in-data.test.tsx"]}',
+  [],
 );
 it("actionInData", async (t) => {
   await snapshotCase(
@@ -21,8 +22,9 @@ it("actionInData", async (t) => {
           { kind: "splice", value: { press: action }, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => {\n    const list = $splice0();\n    const map = $splice1();\n    return list.length + Object.keys(map).length;\n}",
-      '{"version":3,"file":"action-in-data.test.jsx","sourceRoot":"","sources":["splices/action-in-data.test.tsx"],"names":[],"mappings":"AAcO;IACD,MAAM,IAAI,GAAG,UAAC,CAAW;IACzB,MAAM,GAAG,GAAG,UAAC,CAAoB;IACjC,OAAO,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC,MAAM,CAAC;AAC/C,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => {\n    const list = $splice0();\n    const map = $splice1();\n    return list.length + Object.keys(map).length;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAcO,CAAAA,QAAA,EAAAC,QAAA;IACD,MAAMC,IAAI,GAAGF,QAAA,EAAC;IACd,MAAMG,GAAG,GAAGF,QAAA,EAAC;IACb,OAAOC,IAAI,CAACE,MAAM,GAAGC,MAAM,CAACC,IAAI,CAACH,GAAG,CAAC,CAACC,MAAM;AAC9C,CAAC","names":["$splice0","$splice1","list","map","length","Object","keys"],"ignoreList":[],"sources":["splices/action-in-data.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -11,16 +11,18 @@ async function Label() {
   return cs.create(
     "25fkbgn23t8ej:11:9",
     { params: [] },
-    "() => <>counted</>",
-    '{"version":3,"file":"component-answers-children.test.jsx","sourceRoot":"","sources":["components/component-answers-children.test.tsx"],"names":[],"mappings":"AAUY,MAAA,EAAE,OAAO,GAAG"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => "counted";\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAUY,eAAY","names":[],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
+    [],
   );
 }
 async function Pair() {
   return cs.create(
     "25fkbgn23t8ej:15:9",
     { params: [] },
-    "() => <>\n    <em>one</em>\n    <em>two</em>\n  </>",
-    '{"version":3,"file":"component-answers-children.test.jsx","sourceRoot":"","sources":["components/component-answers-children.test.tsx"],"names":[],"mappings":"AAcY,MAAA,EACR;IAAA,CAAC,EAAE,CAAC,GAAG,EAAE,EAAE,CACX;IAAA,CAAC,EAAE,CAAC,GAAG,EAAE,EAAE,CACb;EAAA,GAAG"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<em>one`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<em>two`);\nexports.default = () => [_tmpl$(), _tmpl$2()];\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAcY,OAAAA,MAAA,IAAAC,OAAA,GAGP","names":["_tmpl$","_tmpl$2"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 it("componentAnswersChildren", async (t) => {
@@ -35,8 +37,9 @@ it("componentAnswersChildren", async (t) => {
           { kind: "splice", value: _jsx(Pair, {}), bindings: [] },
         ],
       },
-      "($splice0, $splice1) => <div>\n      {$splice0()}\n      {$splice1()}\n    </div>",
-      '{"version":3,"file":"component-answers-children.test.jsx","sourceRoot":"","sources":["components/component-answers-children.test.tsx"],"names":[],"mappings":"AAwBO,wBAAA,CAAC,GAAG,CACL;MAAA,CAAC,UAAc,CACf;MAAA,CAAC,UAAa,CAChB;IAAA,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = ($splice0, $splice1) => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0, null);\n    (0, web_2.insert)(_el$, $splice1, null);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAwBO,CAAAA,QAAA,EAAAC,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EACAF,QAAA;IAAAI,gBAAA,EAAAF,IAAA,EACAD,QAAA;IAAA,OAAAC,IAAA;AAAA,IACG","names":["$splice0","$splice1","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-answers-children.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

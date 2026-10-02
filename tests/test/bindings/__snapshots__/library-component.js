@@ -23,16 +23,18 @@ const counter = cs.create(
       { kind: "tag", value: Button },
     ],
   },
-  '($splice0, $tag1) => {\n    const count = $splice0()(0);\n    return (<$tag1 variant="primary" icon={<b>+</b>} onClick={() => count[1](count[0]() + 1)}>\n      <span>{"Pressed " + count[0]() + " times"}</span>\n    </$tag1>);\n}',
-  '{"version":3,"file":"library-component.test.jsx","sourceRoot":"","sources":["bindings/library-component.test.tsx"],"names":[],"mappings":"AAoBmB;IACjB,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,KAAM,CACL,OAAO,CAAC,SAAS,CACjB,IAAI,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CACf,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAExC;MAAA,CAAC,IAAI,CAAC,CAAC,UAAU,GAAG,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ,CAAC,EAAE,IAAI,CAClD;IAAA,EAAE,KAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`), _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<b>+`);\nexports.default = ($splice0, $tag1) => {\n    const count = $splice0()(0);\n    return (0, web_2.createComponent)($tag1, {\n        variant: "primary",\n        get icon() {\n            return _tmpl$2();\n        },\n        onClick: () => count[1](count[0]() + 1),\n        get children() {\n            var _el$ = _tmpl$();\n            (0, web_3.insert)(_el$, () => "Pressed " + count[0]() + " times");\n            return _el$;\n        }\n    });\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAoBmB,CAAAA,QAAA,EAAAC,KAAA;IACjB,MAAMC,KAAK,GAAGF,QAAA,EAAa,CAAC,CAAC,CAAC;IAC9B,OAAAG,yBAAA,EACGF,KAAM;QACLG,OAAO;QAAA,IACPC,IAAIA;YAAA,OAAAC,OAAA;QAAA;QACJC,OAAO,EAAEA,GAAA,GAAML,KAAK,CAAC,CAAC,CAAC,CAACA,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QAAA,IAAAM;YAAA,IAAAC,IAAA,GAAAC,MAAA;YAAAC,gBAAA,EAAAF,IAAA,QAEhC,UAAU,GAAGP,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,QAAQ;YAAA,OAAAO,IAAA;QAAA;KAAA;AAG/C,CAAC","names":["$splice0","$tag1","count","_$createComponent","variant","icon","_tmpl$2","onClick","children","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["bindings/library-component.test.tsx"]}',
+  ["solid-js/web"],
 );
 // A prop the library doesn't take a value for, caught as Solid would.
 // @ts-expect-error: Type '"large"' is not assignable to type '"primary" | "ghost"'.
 export const wrongVariant = cs.create(
   "z7pf43t1b5za:36:28",
   { params: [{ kind: "tag", value: Button }] },
-  '($tag0) => <$tag0 variant="large" onClick={() => { }}>\n  Save\n</$tag0>',
-  '{"version":3,"file":"library-component.test.jsx","sourceRoot":"","sources":["bindings/library-component.test.tsx"],"names":[],"mappings":"AAmC+B,WAAA,CAAC,KAAM,CAAC,OAAO,CAAC,OAAO,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAE,CAAC,CAAC,CACvE;;AACF,EAAE,KAAM,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {\n    variant: "large",\n    onClick: () => { },\n    children: "Save"\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAmC+BA,KAAA,IAAAC,yBAAA,EAACD,KAAM;IAACE,OAAO;IAASC,OAAO,EAAEA,GAAA,KAAO,CAAC;IAAAC,QAAA;CAAA,CAE/D","names":["$tag0","_$createComponent","variant","onClick","children"],"ignoreList":[],"sources":["bindings/library-component.test.tsx"]}',
+  ["solid-js/web"],
 );
 it("libraryComponent", async (t) => {
   await snapshotCase(t, "libraryComponent", counter);

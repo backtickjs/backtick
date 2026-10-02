@@ -1,5 +1,8 @@
 // 30:9
-($splice0, $splice1) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $splice1) => () => {
     const n = $splice0()(1);
     const size = $splice1()(() => ({ isBig: n[0]() > 2, n: n[0]() }), undefined, { equals: (previous, next) => previous.isBig === next.isBig });
     const label = () => {
@@ -10,10 +13,14 @@
               <button onclick={() => n[1](n[0]() + 1)}>add</button>
               <p>{label()}</p>
             </div>);
+});
 }
 
 // 64:9
-($splice0) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => () => {
     const point = $splice0()({ x: 1 }, { equals: (previous, next) => previous.x === next.x });
     const label = () => {
         window.console.log();
@@ -25,10 +32,14 @@
               </button>
               <p>{label()}</p>
             </div>);
+});
 }
 
 // 91:9
-($splice0) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => () => {
     const n = $splice0()(1, {
         equals: (previous, next) => {
             window.console.log(previous, next);
@@ -36,10 +47,14 @@
         },
     });
     return <button onclick={() => n[1](2)}>{"n " + n[0]()}</button>;
+});
 }
 
 // 110:9
-($splice0) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => () => {
     const n = $splice0()(1);
     const label = () => {
         window.console.log();
@@ -49,10 +64,14 @@
               <button onclick={() => n[1](1)}>same</button>
               <p>{label()}</p>
             </div>);
+});
 }
 
 // 132:9
-($splice0) => () => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => () => {
     const point = $splice0()({ x: 1 });
     const label = () => {
         window.console.log();
@@ -64,4 +83,5 @@
               </button>
               <p>{label()}</p>
             </div>);
+});
 }

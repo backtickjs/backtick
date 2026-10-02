@@ -20,16 +20,18 @@ it("mappedElements", async (t) => {
               cs.create(
                 "rkwygfa87yuf:15:43",
                 { params: [{ kind: "splice", value: item, bindings: [] }] },
-                "($splice0) => <span>{$splice0()}</span>",
-                '{"version":3,"file":"mapped-elements.test.jsx","sourceRoot":"","sources":["jsx/mapped-elements.test.tsx"],"names":[],"mappings":"AAc8C,cAAA,CAAC,IAAI,CAAC,CAAC,UAAK,CAAC,EAAE,IAAI,CAAC"}',
+                '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+                '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAc8CA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAOD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAa","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-elements.test.tsx"]}',
+                ["solid-js/web"],
               ),
             ),
             bindings: [],
           },
         ],
       },
-      "($splice0) => <div>{$splice0()}</div>",
-      '{"version":3,"file":"mapped-elements.test.jsx","sourceRoot":"","sources":["jsx/mapped-elements.test.tsx"],"names":[],"mappings":"AAcO,cAAA,CAAC,GAAG,CAAC,CAAC,UAAwD,CAAC,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAcOA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAA+D","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["jsx/mapped-elements.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

@@ -14,8 +14,9 @@ async function Inner() {
   return cs.create(
     "2l5eb0u3jx2g5:14:9",
     { params: [] },
-    "() => <span>x</span>",
-    '{"version":3,"file":"component-nesting.test.jsx","sourceRoot":"","sources":["components/component-nesting.test.tsx"],"names":[],"mappings":"AAaY,MAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>x`);\nexports.default = () => _tmpl$();\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;;;kBAaY,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["components/component-nesting.test.tsx"]}',
+    ["solid-js/web"],
   );
 }
 async function Outer() {
@@ -28,8 +29,9 @@ it("componentNesting", async (t) => {
     cs.create(
       "2l5eb0u3jx2g5:22:44",
       { params: [{ kind: "splice", value: _jsx(Outer, {}), bindings: [] }] },
-      "($splice0) => <div>{$splice0()}</div>",
-      '{"version":3,"file":"component-nesting.test.jsx","sourceRoot":"","sources":["components/component-nesting.test.tsx"],"names":[],"mappings":"AAqB+C,cAAA,CAAC,GAAG,CAAC,CAAC,UAAc,CAAC,EAAE,GAAG,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);\nexports.default = $splice0 => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, $splice0);\n    return _el$;\n})();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAqB+CA,QAAA;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,EAAMD,QAAA;IAAA,OAAAC,IAAA;AAAA,IAAqB","names":["$splice0","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["components/component-nesting.test.tsx"]}',
+      ["solid-js/web"],
     ),
   );
 });

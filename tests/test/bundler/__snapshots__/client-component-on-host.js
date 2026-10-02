@@ -9,8 +9,9 @@ import { For } from "@backtickjs/solid-js";
 const Badge = cs.create(
   "135u7j9c37e3n:9:14",
   { params: [] },
-  "() => (props) => <b>{props.n}</b>",
-  '{"version":3,"file":"client-component-on-host.test.jsx","sourceRoot":"","sources":["bundler/client-component-on-host.test.tsx"],"names":[],"mappings":"AAQiB,MAAA,CAAC,KAAoB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<b>`);\nexports.default = () => props => (() => {\n    var _el$ = _tmpl$();\n    (0, web_2.insert)(_el$, () => props.n);\n    return _el$;\n})();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAQiB,MAACA,KAAoB;IAAA,IAAAC,IAAA,GAAAC,MAAA;IAAAC,gBAAA,EAAAF,IAAA,QAASD,KAAK,CAACI,CAAC;IAAA,OAAAH,IAAA;AAAA,IAAK","names":["props","_el$","_tmpl$","_$insert","n"],"ignoreList":[],"sources":["bundler/client-component-on-host.test.tsx"]}',
+  ["solid-js/web"],
 );
 it("refuses a client import as a tag on the host", async () => {
   await assert.rejects(

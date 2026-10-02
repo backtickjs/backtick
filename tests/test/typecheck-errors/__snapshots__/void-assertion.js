@@ -5,6 +5,7 @@ const one = 1;
 const asserted = cs.create(
   "3mgqg6v7h2mni:7:17",
   { params: [{ kind: "splice", value: one, bindings: [] }] },
-  '($splice0) => {\n    const a = $splice0();\n    return "" + a;\n}',
-  '{"version":3,"file":"void-assertion.test.jsx","sourceRoot":"","sources":["typecheck-errors/void-assertion.test.tsx"],"names":[],"mappings":"AAMoB;IAElB,MAAM,CAAC,GAAG,UAAY,CAAC;IACvB,OAAO,EAAE,GAAG,CAAC,CAAC;AAChB,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const a = $splice0();\n    return "" + a;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAMoBA,QAAA;IAElB,MAAMC,CAAC,GAAGD,QAAA,EAAY;IACtB,OAAO,EAAE,GAAGC,CAAC;AACf,CAAC","names":["$splice0","a"],"ignoreList":[],"sources":["typecheck-errors/void-assertion.test.tsx"]}',
+  [],
 );

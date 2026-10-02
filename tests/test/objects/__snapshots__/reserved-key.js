@@ -10,8 +10,9 @@ it("reservedKey", async (t) => {
     cs.create(
       "2a27difszbs8:8:39",
       { params: [{ kind: "splice", value: { "#": "value" }, bindings: [] }] },
-      "($splice0) => () => $splice0()",
-      '{"version":3,"file":"reserved-key.test.jsx","sourceRoot":"","sources":["objects/reserved-key.test.tsx"],"names":[],"mappings":"AAO0C,cAAA,GAAG,EAAE,CAAC,UAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => () => $splice0();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAO0CA,QAAA,UAAMA,QAAA,EAAC","names":["$splice0"],"ignoreList":[],"sources":["objects/reserved-key.test.tsx"]}',
+      [],
     ),
   );
 });

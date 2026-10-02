@@ -6,6 +6,7 @@ const point = { x: 1, y: 2 };
 export default cs.create(
   "2p3ed6wqsrdah:8:15",
   { params: [{ kind: "splice", value: point, bindings: [] }] },
-  '($splice0) => (name) => {\n    const coins = [5, 31, 7];\n    const first = coins["0"];\n    const wrong = coins[name];\n    const which = $splice0()[name];\n    return first + wrong + which;\n}',
-  '{"version":3,"file":"index-wrong-key.test.jsx","sourceRoot":"","sources":["typecheck-errors/index-wrong-key.test.tsx"],"names":[],"mappings":"AAOkB,cAAA,CAAC,IAAY,EAAE,EAAE;IACjC,MAAM,KAAK,GAAG,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC;IACzB,MAAM,KAAK,GAAG,KAAK,CAAC,GAAG,CAAC,CAAC;IAEzB,MAAM,KAAK,GAAG,KAAK,CAAC,IAAI,CAAC,CAAC;IAE1B,MAAM,KAAK,GAAG,UAAM,CAAC,IAAI,CAAC,CAAC;IAC3B,OAAO,KAAK,GAAG,KAAK,GAAG,KAAK,CAAC;AAC/B,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => name => {\n    const coins = [5, 31, 7];\n    const first = coins["0"];\n    const wrong = coins[name];\n    const which = $splice0()[name];\n    return first + wrong + which;\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAOkBA,QAAA,IAACC,IAAY;IAC7B,MAAMC,KAAK,GAAG,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC;IACxB,MAAMC,KAAK,GAAGD,KAAK,CAAC,GAAG,CAAC;IAExB,MAAME,KAAK,GAAGF,KAAK,CAACD,IAAI,CAAC;IAEzB,MAAMI,KAAK,GAAGL,QAAA,EAAM,CAACC,IAAI,CAAC;IAC1B,OAAOE,KAAK,GAAGC,KAAK,GAAGC,KAAK;AAC9B,CAAC","names":["$splice0","name","coins","first","wrong","which"],"ignoreList":[],"sources":["typecheck-errors/index-wrong-key.test.tsx"]}',
+  [],
 );

@@ -17,15 +17,17 @@ it("capturedObjectAssignment", async (t) => {
             value: cs.create(
               "385xpgt8q0ek2:14:21",
               { params: [{ kind: "capture", key: "counter$385xpgt8q0ek2$0" }] },
-              "($capture0) => () => {\n    $capture0.count += 1;\n}",
-              '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captures/captured-object-assignment.test.tsx"],"names":[],"mappings":"AAawB,eAAA,GAAG,EAAE;IACrB,SAAO,CAAC,KAAK,IAAI,CAAC,CAAC;AACrB,CAAC"}',
+              '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $capture0 => () => {\n    $capture0.count += 1;\n};\n}',
+              '{"version":3,"file":"module.jsx","mappings":";;;kBAawBA,SAAA;IAChBA,SAAO,CAACC,KAAK,IAAI,CAAC;AACpB,CAAC","names":["$capture0","count"],"ignoreList":[],"sources":["captures/captured-object-assignment.test.tsx"]}',
+              [],
             ),
             bindings: ["counter$385xpgt8q0ek2$0"],
           },
         ],
       },
-      "($splice0) => {\n    const counter = { count: 0 };\n    const bump = $splice0(counter);\n    bump();\n    bump();\n    return counter.count;\n}",
-      '{"version":3,"file":"captured-object-assignment.test.jsx","sourceRoot":"","sources":["captures/captured-object-assignment.test.tsx"],"names":[],"mappings":"AAWO;IACD,MAAM,OAAO,GAAG,EAAE,KAAK,EAAE,CAAC,EAAE,CAAC;IAC7B,MAAM,IAAI,GAAG,iBAAC,CAEV;IACJ,IAAI,EAAE,CAAC;IACP,IAAI,EAAE,CAAC;IACP,OAAO,OAAO,CAAC,KAAK,CAAC;AACvB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const counter = {\n        count: 0\n    };\n    const bump = $splice0(counter);\n    bump();\n    bump();\n    return counter.count;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWOA,QAAA;IACD,MAAMC,OAAO,GAAG;QAAEC,KAAK,EAAE;KAAG;IAC5B,MAAMC,IAAI,GAAGH,QAAA,CAAAC,OAAA,CAAC;IAGdE,IAAI,EAAE;IACNA,IAAI,EAAE;IACN,OAAOF,OAAO,CAACC,KAAK;AACtB,CAAC","names":["$splice0","counter","count","bump"],"ignoreList":[],"sources":["captures/captured-object-assignment.test.tsx"]}',
+      [],
     ),
   );
 });

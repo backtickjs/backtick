@@ -8,8 +8,9 @@ async function Panel() {
   return cs.create(
     "2413tlntseciz:8:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
-    "($splice0) => {\n    const n = $splice0()(2);\n    n[1](3);\n}",
-    '{"version":3,"file":"component-answers-action.test.jsx","sourceRoot":"","sources":["typecheck-errors/component-answers-action.test.tsx"],"names":[],"mappings":"AAOY;IACR,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC"}',
+    '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => {\n    const n = $splice0()(2);\n    n[1](3);\n};\n}',
+    '{"version":3,"file":"module.jsx","mappings":";;;kBAOYA,QAAA;IACR,MAAMC,CAAC,GAAGD,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1BC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC","names":["$splice0","n"],"ignoreList":[],"sources":["typecheck-errors/component-answers-action.test.tsx"]}',
+    [],
   );
 }
 // @ts-expect-error: 'Panel' cannot be used as a JSX component.

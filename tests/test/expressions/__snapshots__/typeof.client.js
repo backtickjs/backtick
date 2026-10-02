@@ -1,5 +1,8 @@
 // 12:5
-($splice0) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => {
     const count = $splice0()(0);
     return [
         typeof undefined,
@@ -13,10 +16,15 @@
         typeof Math.floor,
         typeof count,
     ];
+});
 }
 
 // 35:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const measure = (v) => typeof v === "string" ? v.length : v * 2;
     return [measure("abc"), measure(4)];
+});
 }

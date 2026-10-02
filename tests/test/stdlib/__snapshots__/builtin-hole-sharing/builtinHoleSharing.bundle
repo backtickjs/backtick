@@ -1,11 +1,49 @@
 import { createSignal as $i0 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => {
-  return $splice0() + $splice1();
+const $modules = {
+  "c2jul89zo389:19:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => {
+      return $splice0() + $splice1();
+    };
+  },
+  "c2jul89zo389:9:2": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      return $splice0()(1)[0]();
+    };
+  },
+  "c2jul89zo389:13:16": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => (n) => $splice0()(n + 10);
+  },
 };
-const $cs1 = ($splice0) => {
-  return $splice0()(1)[0]();
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
 };
-const $cs2 = ($splice0) => (n) => $splice0()(n + 10);
+const $cs0 = $require("c2jul89zo389:19:4").default;
+const $cs1 = $require("c2jul89zo389:9:2").default;
+const $cs2 = $require("c2jul89zo389:13:16").default;
 export default $cs0(
   () => $cs1(() => $i0),
   () => $cs1(() => $cs2(() => $i0)),

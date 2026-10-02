@@ -1,2 +1,6 @@
 // 13:43
-($splice0) => <div>{$splice0()}</div>
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0) => <div>{$splice0()}</div>);
+}

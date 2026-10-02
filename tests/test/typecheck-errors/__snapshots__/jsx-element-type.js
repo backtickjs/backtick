@@ -13,16 +13,18 @@ import { For } from "@backtickjs/solid-js";
 export const tag = cs.create(
   "1giuj76msk4u3:14:19",
   { params: [] },
-  '() => <div class="a"/>',
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAasB,MAAA,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div class=a>`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBAasB,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // `blink` is not a tag this target declares
 // @ts-expect-error: Property 'blink' does not exist on type 'JSX.IntrinsicElements'.
 export const undeclared = cs.create(
   "1giuj76msk4u3:18:26",
   { params: [] },
-  "() => <blink />",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAiB6B,MAAA,CAAC,KAAK,CAAC,AAAD,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<blink>`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBAiB6B,MAAAA,MAAA,EAAS","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // A capitalised tag is looked up as a binding, and `ElementType` is what says
 // which bindings may stand there.
@@ -32,21 +34,24 @@ const NotATag = { id: "View" };
 export const wrongKind = cs.create(
   "1giuj76msk4u3:25:25",
   { params: [{ kind: "tag", value: NotATag }] },
-  "($tag0) => <$tag0 />",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAwB4B,WAAA,CAAC,KAAO,CAAC,AAAD,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAwB4BA,KAAA,IAAAC,yBAAA,EAACD,KAAO,KAAG","names":["$tag0","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // ─── what arranges rather than draws ──────────────────────────────────
 export const shorthand = cs.create(
   "1giuj76msk4u3:28:25",
   { params: [] },
-  "() => <>\n  <span>a</span>\n</>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AA2B4B,MAAA,EAC1B;EAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACf;AAAA,GAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>a`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBA2B4B,MAAAA,MAAA,EAEzB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 export const list = cs.create(
   "1giuj76msk4u3:32:20",
   { params: [{ kind: "tag", value: For }] },
-  "($tag0) => <$tag0 each={[]}>{(n) => <i>{n}</i>}</$tag0>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AA+BuB,WAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,EAAc,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,KAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<i>`);\nexports.default = $tag0 => (0, web_3.createComponent)($tag0, {\n    each: [],\n    children: n => (() => {\n        var _el$ = _tmpl$();\n        (0, web_2.insert)(_el$, n);\n        return _el$;\n    })()\n});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBA+BuBA,KAAA,IAAAC,yBAAA,EAACD,KAAG;IAACE,IAAI,EAAE,EAAc;IAAAC,QAAA,EAAIC,CAAC;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAC,gBAAA,EAAAF,IAAA,EAASD,CAAC;QAAA,OAAAC,IAAA;IAAA;CAAK,CAAO","names":["$tag0","_$createComponent","each","children","n","_el$","_tmpl$","_$insert"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // ─── what the app wrote: a server component, on the host ──────────────
 const Panel = async () => null;
@@ -57,16 +62,18 @@ export const component = _jsx(Panel, {});
 export const strayProp = cs.create(
   "1giuj76msk4u3:41:25",
   { params: [] },
-  "() => <div nosuch={1}/>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAwC4B,MAAA,CAAC,GAAG,CAAC,MAAM,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div nosuch=1>`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBAwC4B,MAAAA,MAAA,EAAkB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // `class` is a string, and a number is not one
 // @ts-expect-error: Type 'number' is not assignable to type 'string'.
 export const wrongType = cs.create(
   "1giuj76msk4u3:45:25",
   { params: [] },
-  "() => <div class={1}/>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AA4C4B,MAAA,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div class=1>`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBA4C4B,MAAAA,MAAA,EAAiB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // `<>` is the fragment, and `<Fragment>` a tag like any other: here it names
 // nothing
@@ -74,25 +81,29 @@ export const wrongType = cs.create(
 export const named = cs.create(
   "1giuj76msk4u3:50:21",
   { params: [{ kind: "tag", value: Fragment }] },
-  "($tag0) => <$tag0 />",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAiDwB,WAAA,CAAC,KAAQ,CAAC,AAAD,EAAG"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nexports.default = $tag0 => (0, web_1.createComponent)($tag0, {});\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;kBAiDwBA,KAAA,IAAAC,yBAAA,EAACD,KAAQ,KAAG","names":["$tag0","_$createComponent"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs.create(
   "1giuj76msk4u3:53:20",
   { params: [] },
-  "() => <div>hello</div>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAoDuB,MAAA,CAAC,GAAG,CAAC,KAAK,EAAE,GAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>hello`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBAoDuB,MAAAA,MAAA,EAAgB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 export const number = cs.create(
   "1giuj76msk4u3:54:22",
   { params: [] },
-  "() => <div>{1}</div>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAqDyB,MAAA,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>1`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBAqDyB,MAAAA,MAAA,EAAc","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );
 export const nested = cs.create(
   "1giuj76msk4u3:55:22",
   { params: [] },
-  "() => <div>\n  <span>a</span>\n</div>",
-  '{"version":3,"file":"jsx-element-type.test.jsx","sourceRoot":"","sources":["typecheck-errors/jsx-element-type.test.tsx"],"names":[],"mappings":"AAsDyB,MAAA,CAAC,GAAG,CAC3B;EAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACf;AAAA,EAAE,GAAG,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div><span>a`);\nexports.default = () => _tmpl$();\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;;;kBAsDyB,MAAAA,MAAA,EAEnB","names":["_tmpl$"],"ignoreList":[],"sources":["typecheck-errors/jsx-element-type.test.tsx"]}',
+  ["solid-js/web"],
 );

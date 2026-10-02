@@ -1,5 +1,8 @@
 // 12:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const coins = [1, 2, 3, 4];
     return {
         at: [coins.at(0), coins.at(-1), coins.at(9)],
@@ -11,4 +14,5 @@
         reduceRight: coins.reduceRight((text, n) => text + n, ""),
         unchanged: coins,
     };
+});
 }

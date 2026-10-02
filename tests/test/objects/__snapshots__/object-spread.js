@@ -16,8 +16,9 @@ it("objectSpread", async (t) => {
     cs.create(
       "31uvwz3g4bdt1:17:4",
       { params: [] },
-      "() => {\n    const base = { a: 1, b: 2 };\n    const over = { b: 9 };\n    return {\n        ...base,\n        ...over,\n        c: 3,\n    };\n}",
-      '{"version":3,"file":"object-spread.test.jsx","sourceRoot":"","sources":["objects/object-spread.test.tsx"],"names":[],"mappings":"AAgBO;IACD,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IAC5B,MAAM,IAAI,GAAG,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACtB,OAAO;QACL,GAAG,IAAI;QACP,GAAG,IAAI;QACP,CAAC,EAAE,CAAC;KACL,CAAC;AACJ,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const base = {\n        a: 1,\n        b: 2\n    };\n    const over = {\n        b: 9\n    };\n    return {\n        ...base,\n        ...over,\n        c: 3\n    };\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAgBO;IACD,MAAMA,IAAI,GAAG;QAAEC,CAAC,EAAE,CAAC;QAAEC,CAAC,EAAE;KAAG;IAC3B,MAAMC,IAAI,GAAG;QAAED,CAAC,EAAE;KAAG;IACrB,OAAO;QACL,GAAGF,IAAI;QACP,GAAGG,IAAI;QACPC,CAAC,EAAE;KACJ;AACH,CAAC","names":["base","a","b","over","c"],"ignoreList":[],"sources":["objects/object-spread.test.tsx"]}',
+      [],
     ),
   );
 });

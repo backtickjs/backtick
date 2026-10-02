@@ -1,4 +1,5 @@
 import remapping from "@jridgewell/remapping";
+import { encodedMap, FlattenMap } from "@jridgewell/trace-mapping";
 import type { Spliceable } from "@backtickjs/core";
 import { buildBundle } from "./bundle/buildBundle.js";
 import { printBundle } from "./print/printBundle.js";
@@ -65,8 +66,12 @@ export const bundler = {
   }: BuildOptions): Promise<Bundle> {
     const printed = printBundle(await buildBundle(input, external));
     let code = printed.code;
-    // Latest first, as `remapping` reads a chain of maps.
-    const maps = [printed.map];
+    // Latest first, as `remapping` reads a chain of maps. The bundle's own is
+    // an index map, which `remapping` reads flattened.
+    const maps =
+      plugins.length === 0
+        ? [printed.map]
+        : [JSON.stringify(encodedMap(new FlattenMap(printed.map)))];
     for (const plugin of plugins) {
       const result = await plugin(code, ID);
       code = result.code;
@@ -77,9 +82,10 @@ export const bundler = {
         if (sourcemap === false) {
           return { code, map: null };
         }
-        const map = remapping(maps, () => null, {
-          excludeContent: true,
-        }).toString();
+        const map =
+          maps.length === 1
+            ? maps[0]!
+            : remapping(maps, () => null, { excludeContent: true }).toString();
         if (sourcemap === "hidden") {
           return { code, map };
         }

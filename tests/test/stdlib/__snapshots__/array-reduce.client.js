@@ -1,5 +1,8 @@
 // 13:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const prices = [4.5, 3.25, 2];
     const total = prices.reduce((sum, price) => sum + price, 0);
     const names = ["a", "b", "c"];
@@ -10,4 +13,5 @@
         joined +
         "|" +
         empty.reduce((sum, one) => sum + one, 0));
+});
 }

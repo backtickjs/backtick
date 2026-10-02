@@ -25,8 +25,9 @@ it("spliceImportedValue", async (t) => {
     cs.create(
       "1vr745dtaiti0:23:47",
       { params: [{ kind: "splice", value: sep, bindings: [] }] },
-      "($splice0) => $splice0()",
-      '{"version":3,"file":"splice-imported-value.test.jsx","sourceRoot":"","sources":["splices/splice-imported-value.test.tsx"],"names":[],"mappings":"AAsBkD,cAAA,UAAI"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => $splice0();\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAsBkDA,QAAA,IAAAA,QAAA,EAAI","names":["$splice0"],"ignoreList":[],"sources":["splices/splice-imported-value.test.tsx"]}',
+      [],
     ),
   );
 });

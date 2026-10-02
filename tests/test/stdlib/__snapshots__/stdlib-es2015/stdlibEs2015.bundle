@@ -1,20 +1,42 @@
-const $cs0 = () => {
-  const xs = [3, 8, 12, 5];
-  const word = "backtick";
-  return {
-    found: xs.find((x) => x > 7),
-    missing: xs.find((x) => x > 100) === undefined,
-    at: xs.findIndex((x) => x > 7),
-    nowhere: xs.findIndex((x) => x > 100),
-    includes: word.includes("tick"),
-    startsWith: word.startsWith("back"),
-    endsWith: word.endsWith("tick", 4),
-    repeated: "ab".repeat(3),
-    codePoint: "\u{1F600}".codePointAt(0),
-    keys: Object.keys({
-      a: 1,
-      b: 2,
-    }),
-  };
+const $modules = {
+  "s2q4937fji9l:12:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      const xs = [3, 8, 12, 5];
+      const word = "backtick";
+      return {
+        found: xs.find((x) => x > 7),
+        missing: xs.find((x) => x > 100) === undefined,
+        at: xs.findIndex((x) => x > 7),
+        nowhere: xs.findIndex((x) => x > 100),
+        includes: word.includes("tick"),
+        startsWith: word.startsWith("back"),
+        endsWith: word.endsWith("tick", 4),
+        repeated: "ab".repeat(3),
+        codePoint: "\u{1F600}".codePointAt(0),
+        keys: Object.keys({
+          a: 1,
+          b: 2,
+        }),
+      };
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("s2q4937fji9l:12:4").default;
 export default $cs0();

@@ -10,8 +10,9 @@ it("arrayIndex", async (t) => {
     cs.create(
       "2nqckix5uoswz:11:4",
       { params: [] },
-      "() => {\n    const coins = [5, 31, 7];\n    let total = 0;\n    for (let i = 0; i < coins.length; i = i + 1) {\n        total = total + coins[i];\n    }\n    return total;\n}",
-      '{"version":3,"file":"array-index.test.jsx","sourceRoot":"","sources":["stdlib/array-index.test.tsx"],"names":[],"mappings":"AAUO;IACD,MAAM,KAAK,GAAG,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC,CAAC;IACzB,IAAI,KAAK,GAAG,CAAC,CAAC;IACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,KAAK,CAAC,MAAM,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QAC5C,KAAK,GAAG,KAAK,GAAG,KAAK,CAAC,CAAC,CAAC,CAAC;IAC3B,CAAC;IACD,OAAO,KAAK,CAAC;AACf,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const coins = [5, 31, 7];\n    let total = 0;\n    for (let i = 0; i < coins.length; i = i + 1) {\n        total = total + coins[i];\n    }\n    return total;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IACD,MAAMA,KAAK,GAAG,CAAC,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC;IACxB,IAAIC,KAAK,GAAG,CAAC;IACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGF,KAAK,CAACG,MAAM,EAAED,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAC3CD,KAAK,GAAGA,KAAK,GAAGD,KAAK,CAACE,CAAC,CAAC;IAC1B;IACA,OAAOD,KAAK;AACd,CAAC","names":["coins","total","i","length"],"ignoreList":[],"sources":["stdlib/array-index.test.tsx"]}',
+      [],
     ),
   );
 });

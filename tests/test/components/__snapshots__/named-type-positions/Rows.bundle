@@ -1,49 +1,84 @@
-import { template as _$template } from "solid-js/web";
-import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>add</span><div>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
 import { createComponent as $i0 } from "solid-js";
 import { createSignal as $i1 } from "solid-js";
 import { For as $i2 } from "solid-js";
-const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
-const $cs1 = ($splice0, $tag1) => {
-  const rows = $splice0()([]);
-  const add = (row) => {
-    rows[1]([row]);
-  };
-  const label = (row) => {
-    return row.label;
-  };
-  return (() => {
-    var _el$ = _tmpl$(),
-      _el$2 = _el$.firstChild,
-      _el$3 = _el$2.nextSibling;
-    _el$2.$$click = () =>
-      add({
-        id: 1,
-        label: "one",
-      });
-    _$insert(
-      _el$3,
-      _$createComponent($tag1, {
-        get each() {
-          return rows[0]();
-        },
-        children: (row) =>
-          (() => {
-            var _el$4 = _tmpl$2();
-            _$insert(_el$4, () => label(row));
-            return _el$4;
-          })(),
-      }),
-    );
-    return _el$;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "1uptcsn9236u2:352:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+  },
+  "3njqkp1magllx:19:9": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    const web_4 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(
+        `<div><span>add</span><div>`,
+      ),
+      _tmpl$2 = /*#__PURE__*/ (0, web_1.template)(`<span>`);
+    exports.default = ($splice0, $tag1) => {
+      const rows = $splice0()([]);
+      const add = (row) => {
+        rows[1]([row]);
+      };
+      const label = (row) => {
+        return row.label;
+      };
+      return (() => {
+        var _el$ = _tmpl$(),
+          _el$2 = _el$.firstChild,
+          _el$3 = _el$2.nextSibling;
+        _el$2.$$click = () =>
+          add({
+            id: 1,
+            label: "one",
+          });
+        (0, web_3.insert)(
+          _el$3,
+          (0, web_4.createComponent)($tag1, {
+            get each() {
+              return rows[0]();
+            },
+            children: (row) =>
+              (() => {
+                var _el$4 = _tmpl$2();
+                (0, web_3.insert)(_el$4, () => label(row));
+                return _el$4;
+              })(),
+          }),
+        );
+        return _el$;
+      })();
+    };
+    (0, web_2.delegateEvents)(["click"]);
+  },
 };
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1uptcsn9236u2:352:9").default;
+const $cs1 = $require("3njqkp1magllx:19:9").default;
 export default $cs0(
   () => $i0,
   () => $cs1(() => $i1, $i2),
 );
-_$delegateEvents(["click"]);

@@ -1,5 +1,4 @@
-(        → expressions/operators.test.tsx 33:8 {…
-) => {   → expressions/operators.test.tsx 33:8 {…
+() => {  → expressions/operators.test.tsx 33:8 {…
 const    → expressions/operators.test.tsx 34:7 const 
 s        → expressions/operators.test.tsx 34:13 s
  =       → expressions/operators.test.tsx 34:14  = 
@@ -16,7 +15,6 @@ a        → expressions/operators.test.tsx 35:46 a
 b        → expressions/operators.test.tsx 35:52 b
 :        → expressions/operators.test.tsx 35:53 : 
 2        → expressions/operators.test.tsx 35:55 2
-}        → expressions/operators.test.tsx 35:56  };…
 ;        → expressions/operators.test.tsx 35:58 ;
 const    → expressions/operators.test.tsx 36:7 const 
 deleted  → expressions/operators.test.tsx 36:13 deleted

@@ -11,8 +11,9 @@ it("forNestedShadowing", async (t) => {
     cs.create(
       "lj6vk8127ex6:12:4",
       { params: [] },
-      '() => {\n    let out = "";\n    for (let i = 0; i < 2; i = i + 1) {\n        const i = "-";\n        for (let j = 0; j < 2; j = j + 1) {\n            out = out + i + j;\n        }\n    }\n    return out;\n}',
-      '{"version":3,"file":"for-nested-shadowing.test.jsx","sourceRoot":"","sources":["control-flow/for-nested-shadowing.test.tsx"],"names":[],"mappings":"AAWO;IACD,IAAI,GAAG,GAAG,EAAE,CAAC;IACb,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,MAAM,CAAC,GAAG,GAAG,CAAC;QACd,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;YACjC,GAAG,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC,CAAC;QACpB,CAAC;IACH,CAAC;IACD,OAAO,GAAG,CAAC;AACb,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let out = "";\n    for (let i = 0; i < 2; i = i + 1) {\n        const i = "-";\n        for (let j = 0; j < 2; j = j + 1) {\n            out = out + i + j;\n        }\n    }\n    return out;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,GAAG,GAAG,EAAE;IACZ,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAChC,MAAMA,CAAC,GAAG,GAAG;QACb,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;YAChCF,GAAG,GAAGA,GAAG,GAAGC,CAAC,GAAGC,CAAC;QACnB;IACF;IACA,OAAOF,GAAG;AACZ,CAAC","names":["out","i","j"],"ignoreList":[],"sources":["control-flow/for-nested-shadowing.test.tsx"]}',
+      [],
     ),
   );
 });

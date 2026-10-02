@@ -36,7 +36,6 @@ typeof     → expressions/typeof.test.tsx 21:9 typeof
 a          → expressions/typeof.test.tsx 21:18 a
 :          → expressions/typeof.test.tsx 21:19 : 
 1          → expressions/typeof.test.tsx 21:21 1
-}          → expressions/typeof.test.tsx 21:22  },…
 ,          → expressions/typeof.test.tsx 21:24 ,…
 typeof (   → expressions/typeof.test.tsx 22:9 typeof (
 n          → expressions/typeof.test.tsx 22:18 n

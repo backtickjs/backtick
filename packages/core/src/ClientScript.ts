@@ -26,14 +26,18 @@ export interface ClientScript {
   // the files' contents are identical, and then the scripts are the same.
   readonly id: string;
   readonly metadata: Metadata;
-  // The script as the client runs it, compiled when the host was: an
-  // expression, `($splice0, …) => body`, JSX kept, whose parameters are
-  // `metadata.params`. The same for every script with its id, where
-  // `metadata` is one call's.
+  // The script as the client runs it, compiled when the host was: a module
+  // table's entry, `(module, exports, require) => { … }`, as webpack's and
+  // Metro's are, whose default export is `($splice0, …) => body`, its
+  // parameters `metadata.params`; JSX kept unless its framework compiled it
+  // too. The same for every script with its id, where `metadata` is one
+  // call's.
   readonly code: string;
   // The code's source map, as JSON, into the host file. It carries no
   // `sourcesContent`: the host file is the server's.
   readonly map: string;
+  // The modules its code requires, by specifier, as Metro records a module's.
+  readonly dependencies: readonly string[];
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -50,6 +54,7 @@ export function create(
   metadata: Metadata,
   code: string,
   map: string,
+  dependencies: readonly string[],
 ): ClientScript {
   return {
     "@backtickjs": "ClientScript",
@@ -57,5 +62,6 @@ export function create(
     metadata,
     code,
     map,
+    dependencies,
   };
 }

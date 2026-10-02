@@ -24,8 +24,9 @@ it("timers", async (t) => {
     cs.create(
       "24wbmcspf2ydv:25:4",
       { params: [] },
-      "() => {\n    const stop = window.clearInterval;\n    const repeating = window.setInterval(() => 0, 1000);\n    stop(repeating);\n    window.clearTimeout(window.setTimeout(() => 0, 1000));\n}",
-      '{"version":3,"file":"timers.test.jsx","sourceRoot":"","sources":["stdlib/timers.test.tsx"],"names":[],"mappings":"AAwBO;IACD,MAAM,IAAI,GAAG,MAAM,CAAC,aAAa,CAAC;IAClC,MAAM,SAAS,GAAG,MAAM,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC;IACpD,IAAI,CAAC,SAAS,CAAC,CAAC;IAChB,MAAM,CAAC,YAAY,CAAC,MAAM,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,CAAC,EAAE,IAAI,CAAC,CAAC,CAAC;AACxD,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const stop = window.clearInterval;\n    const repeating = window.setInterval(() => 0, 1000);\n    stop(repeating);\n    window.clearTimeout(window.setTimeout(() => 0, 1000));\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAwBO;IACD,MAAMA,IAAI,GAAGC,MAAM,CAACC,aAAa;IACjC,MAAMC,SAAS,GAAGF,MAAM,CAACG,WAAW,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC;IACnDJ,IAAI,CAACG,SAAS,CAAC;IACfF,MAAM,CAACI,YAAY,CAACJ,MAAM,CAACK,UAAU,CAAC,MAAM,CAAC,EAAE,IAAI,CAAC,CAAC;AACvD,CAAC","names":["stop","window","clearInterval","repeating","setInterval","clearTimeout","setTimeout"],"ignoreList":[],"sources":["stdlib/timers.test.tsx"]}',
+      [],
     ),
   );
 });

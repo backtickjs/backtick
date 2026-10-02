@@ -1,8 +1,30 @@
-const $cs0 = () => {
-  try {
-    throw "boom";
-  } catch {
-    return "caught";
-  }
+const $modules = {
+  "1lr2275tf95wm:11:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      try {
+        throw "boom";
+      } catch {
+        return "caught";
+      }
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("1lr2275tf95wm:11:4").default;
 export default $cs0();

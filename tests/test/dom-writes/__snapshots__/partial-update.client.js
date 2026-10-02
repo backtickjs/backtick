@@ -1,5 +1,8 @@
 // 15:10
-($splice0, $tag1) => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (($splice0, $tag1) => {
     const rows = [1, 2, 3, 4].map((id) => ({
         id: id,
         label: $splice0()("row " + id),
@@ -22,4 +25,5 @@
           </tbody>
         </table>
       </div>);
+});
 }

@@ -11,8 +11,9 @@ it("loopJumps", async (t) => {
     cs.create(
       "28bjtc1esuow3:12:4",
       { params: [] },
-      '() => {\n    let out = "";\n    for (let i = 0; i < 5; i = i + 1) {\n        if (i === 1) {\n            continue;\n        }\n        while (true) {\n            out = out + i;\n            break;\n        }\n        if (i === 3) {\n            break;\n        }\n    }\n    return out;\n}',
-      '{"version":3,"file":"loop-jumps.test.jsx","sourceRoot":"","sources":["control-flow/loop-jumps.test.tsx"],"names":[],"mappings":"AAWO;IACD,IAAI,GAAG,GAAG,EAAE,CAAC;IACb,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,CAAC,GAAG,CAAC,EAAE,CAAC;QACjC,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;YACZ,SAAS;QACX,CAAC;QACD,OAAO,IAAI,EAAE,CAAC;YACZ,GAAG,GAAG,GAAG,GAAG,CAAC,CAAC;YACd,MAAM;QACR,CAAC;QACD,IAAI,CAAC,KAAK,CAAC,EAAE,CAAC;YACZ,MAAM;QACR,CAAC;IACH,CAAC;IACD,OAAO,GAAG,CAAC;AACb,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    let out = "";\n    for (let i = 0; i < 5; i = i + 1) {\n        if (i === 1) {\n            continue;\n        }\n        while (true) {\n            out = out + i;\n            break;\n        }\n        if (i === 3) {\n            break;\n        }\n    }\n    return out;\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAWO;IACD,IAAIA,GAAG,GAAG,EAAE;IACZ,KAAK,IAAIC,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAG,CAAC,EAAEA,CAAC,GAAGA,CAAC,GAAG,CAAC,EAAE;QAChC,IAAIA,CAAC,KAAK,CAAC,EAAE;YACX;QACF;QACA,OAAO,IAAI,EAAE;YACXD,GAAG,GAAGA,GAAG,GAAGC,CAAC;YACb;QACF;QACA,IAAIA,CAAC,KAAK,CAAC,EAAE;YACX;QACF;IACF;IACA,OAAOD,GAAG;AACZ,CAAC","names":["out","i"],"ignoreList":[],"sources":["control-flow/loop-jumps.test.tsx"]}',
+      [],
     ),
   );
 });

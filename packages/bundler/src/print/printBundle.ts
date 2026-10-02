@@ -1,10 +1,20 @@
-import { addMapping, GenMapping, toEncodedMap } from "@jridgewell/gen-mapping";
-import { eachMapping, TraceMap } from "@jridgewell/trace-mapping";
 import type { BundleTree } from "../bundle/buildBundle.js";
 import type { ClientScript } from "@backtickjs/core";
-import { importDeclaration } from "./code.js";
+import { importDeclaration, string } from "./code.js";
 
 const MODULE_ID = "bundle.jsx";
+
+// A module table's `require`: a module's exports, its entry run the first time
+// it is asked for.
+const RUNTIME = `const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = { exports: {} };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};`;
 
 /**
  * A bundle tree as a module whose default export is the tree's root: the value
@@ -12,12 +22,13 @@ const MODULE_ID = "bundle.jsx";
  * once plugins have transformed the module (they may add statements after it);
  * what a caller gets is `generate`'s, in the format they asked for.
  *
- * The module is JSX: its imports, each script, and the root, for the
- * framework's compiler to compile as it compiles any module; its imports are
- * the client's to resolve, through an import map in a page.
+ * The module is its imports, a module table of its scripts, and the root. A
+ * script's JSX, where its framework didn't compile it when its host was built,
+ * is kept for the framework's compiler to compile as it compiles any module.
+ * Its imports are the client's to resolve, through an import map in a page.
  *
- * Its map leads into the host files its scripts were written in: each
- * script's own map, moved to where the script stands in the module. What the
+ * Its map leads into the host files its scripts were written in: an index
+ * map, each script's own map a section where the script stands. What the
  * bundler wrote around the scripts maps to nothing, since no source wrote it.
  */
 export function printBundle(tree: BundleTree): { code: string; map: string } {
@@ -26,10 +37,33 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
   for (const { from, name, local } of names.imports.values()) {
     module.line(importDeclaration(from, name, local));
   }
-  for (const [label, script] of tree.scripts) {
-    module.write(`const ${label} = `);
+  // Each script a module table's entry, as webpack's and Metro's are: its body
+  // under its id, run once by `$require`. The modules they require are the
+  // client's, each imported whole, once.
+  const scripts = new Map(
+    tree.scripts.map(([, script]) => [script.id, script]),
+  );
+  const dependencies = [
+    ...new Set([...scripts.values()].flatMap((script) => script.dependencies)),
+  ];
+  dependencies.forEach((specifier, index) =>
+    module.line(`import * as $module${index} from ${string(specifier)};`),
+  );
+  module.line("const $modules = {");
+  for (const [id, script] of scripts) {
+    module.write(`${string(id)}: `);
     module.script(script);
-    module.line(";");
+    module.line(",");
+  }
+  module.line("};");
+  module.line("const $exports = {");
+  dependencies.forEach((specifier, index) =>
+    module.line(`${string(specifier)}: $module${index},`),
+  );
+  module.line("};");
+  module.line(RUNTIME);
+  for (const [label, script] of tree.scripts) {
+    module.line(`const ${label} = $require(${string(script.id)}).default;`);
   }
   // Parenthesized, so a root that is a function isn't a declaration.
   module.write(`export default (${tree.root});`);
@@ -42,7 +76,7 @@ class ModuleWriter {
   code = "";
   #line = 0;
   #column = 0;
-  #map = new GenMapping({ file: MODULE_ID });
+  #sections: { offset: { line: number; column: number }; map: object }[] = [];
 
   write(text: string): void {
     this.code += text;
@@ -59,32 +93,21 @@ class ModuleWriter {
     this.write(`${text}\n`);
   }
 
-  // A script's code, with its map's segments moved to where it stands: its
-  // first line by where it starts on this one, the rest by line alone.
+  // A script's code, its map a section of the module's where it starts.
   script({ code, map }: ClientScript): void {
-    const line = this.#line;
-    const start = this.#column;
-    eachMapping(new TraceMap(map), (segment) => {
-      if (segment.source === null) {
-        return;
-      }
-      const first = segment.generatedLine === 1;
-      addMapping(this.#map, {
-        generated: {
-          line: line + segment.generatedLine,
-          column: (first ? start : 0) + segment.generatedColumn,
-        },
-        source: segment.source,
-        original: {
-          line: segment.originalLine,
-          column: segment.originalColumn,
-        },
-      });
+    this.#sections.push({
+      offset: { line: this.#line, column: this.#column },
+      map: JSON.parse(map) as object,
     });
     this.write(code);
   }
 
+  // An index map: each script's own map, at its offset, decoded by no one here.
   map(): string {
-    return JSON.stringify(toEncodedMap(this.#map));
+    return JSON.stringify({
+      version: 3,
+      file: MODULE_ID,
+      sections: this.#sections,
+    });
   }
 }

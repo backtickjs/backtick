@@ -1,5 +1,27 @@
-const $cs0 = () => {
-  const count = "one";
-  return count;
+const $modules = {
+  "353rib4gy05pn:12:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      const count = "one";
+      return count;
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("353rib4gy05pn:12:4").default;
 export default $cs0();

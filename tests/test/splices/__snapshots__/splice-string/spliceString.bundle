@@ -1,2 +1,24 @@
-const $cs0 = ($splice0) => $splice0();
+const $modules = {
+  "6r4m74y7k80e:10:40": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => $splice0();
+  },
+};
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("6r4m74y7k80e:10:40").default;
 export default $cs0(() => 'say "hi"\n\\done');

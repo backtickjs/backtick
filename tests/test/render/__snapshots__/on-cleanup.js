@@ -31,8 +31,9 @@ describe("onCleanup", () => {
         cs.create(
           "21q0kwf707rdb:35:8",
           { params: [{ kind: "splice", value: onCleanup, bindings: [] }] },
-          "($splice0) => () => {\n    $splice0()(() => window.console.log());\n    return <p>drawn</p>;\n}",
-          '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAkCW,cAAA,GAAG,EAAE;IACN,UAAU,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;IACvC,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,CAAC;AACtB,CAAC"}',
+          '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>drawn`);\nexports.default = $splice0 => () => {\n    $splice0()(() => window.console.log());\n    return _tmpl$();\n};\n}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;;kBAkCWA,QAAA;IACDA,QAAA,EAAU,CAAC,MAAMC,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE,CAAC;IACtC,OAAAC,MAAA;AACF,CAAC","names":["$splice0","window","console","log","_tmpl$"],"ignoreList":[],"sources":["render/on-cleanup.test.tsx"]}',
+          ["solid-js/web"],
         ),
       ),
     );
@@ -52,8 +53,9 @@ describe("onCleanup", () => {
               { kind: "splice", value: onCleanup, bindings: [] },
             ],
           },
-          "($splice0, $splice1, $splice2) => () => {\n    const n = $splice0()(1);\n    const doubled = $splice1()(() => {\n        $splice2()(() => window.console.log());\n        return n[0]() * 2;\n    });\n    return <button onclick={() => n[1](n[0]() + 1)}>{doubled()}</button>;\n}",
-          '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAgDW,kCAAA,GAAG,EAAE;IACN,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,MAAM,OAAO,GAAG,UAAW,CAAC,GAAG,EAAE;QAC/B,UAAU,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC;QACvC,OAAO,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;IACpB,CAAC,CAAC,CAAC;IACH,OAAO,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,EAAE,MAAM,CAAC,CAAC;AACvE,CAAC"}',
+          '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nconst web_3 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<button>`);\nexports.default = ($splice0, $splice1, $splice2) => () => {\n    const n = $splice0()(1);\n    const doubled = $splice1()(() => {\n        $splice2()(() => window.console.log());\n        return n[0]() * 2;\n    });\n    return (() => {\n        var _el$ = _tmpl$();\n        _el$.$$click = () => n[1](n[0]() + 1);\n        (0, web_3.insert)(_el$, doubled);\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;;;;kBAgDW,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAMC,CAAC,GAAGH,QAAA,EAAa,CAAC,CAAC,CAAC;IAC1B,MAAMI,OAAO,GAAGH,QAAA,EAAW,CAAC;QAC1BC,QAAA,EAAU,CAAC,MAAMG,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE,CAAC;QACtC,OAAOJ,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC;IACnB,CAAC,CAAC;IACF;QAAA,IAAAK,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GAAwB,MAAMP,CAAC,CAAC,CAAC,CAAC,CAACA,CAAC,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QAAAQ,gBAAA,EAAAH,IAAA,EAAGJ,OAAO;QAAA,OAAAI,IAAA;IAAA;AAC1D,CAAC","names":["$splice0","$splice1","$splice2","n","doubled","window","console","log","_el$","_tmpl$","$$click","_$insert"],"ignoreList":[],"sources":["render/on-cleanup.test.tsx"]}',
+          ["solid-js/web"],
         ),
       ),
     );
@@ -84,8 +86,9 @@ describe("onCleanup", () => {
               { kind: "splice", value: onCleanup, bindings: [] },
             ],
           },
-          "($splice0, $splice1, $splice2) => () => {\n    const timer = $splice0()(0);\n    $splice1()(() => {\n        timer[1](window.setInterval(() => window.console.log(), 5));\n    });\n    $splice2()(() => window.clearInterval(timer[0]()));\n    return <p>ticking</p>;\n}",
-          '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAkFW,kCAAA,GAAG,EAAE;IACN,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,UAAQ,CAAC,GAAG,EAAE;QACZ,KAAK,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,WAAW,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IAC9D,CAAC,CAAC,CAAC;IACH,UAAU,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,aAAa,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACnD,OAAO,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC;AACxB,CAAC"}',
+          '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<p>ticking`);\nexports.default = ($splice0, $splice1, $splice2) => () => {\n    const timer = $splice0()(0);\n    $splice1()(() => {\n        timer[1](window.setInterval(() => window.console.log(), 5));\n    });\n    $splice2()(() => window.clearInterval(timer[0]()));\n    return _tmpl$();\n};\n}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;;kBAkFW,CAAAA,QAAA,EAAAC,QAAA,EAAAC,QAAA;IACD,MAAMC,KAAK,GAAGH,QAAA,EAAa,CAAC,CAAC,CAAC;IAC9BC,QAAA,EAAQ,CAAC;QACPE,KAAK,CAAC,CAAC,CAAC,CAACC,MAAM,CAACC,WAAW,CAAC,MAAMD,MAAM,CAACE,OAAO,CAACC,GAAG,EAAE,EAAE,CAAC,CAAC,CAAC;IAC7D,CAAC,CAAC;IACFL,QAAA,EAAU,CAAC,MAAME,MAAM,CAACI,aAAa,CAACL,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC;IAClD,OAAAM,MAAA;AACF,CAAC","names":["$splice0","$splice1","$splice2","timer","window","setInterval","console","log","clearInterval","_tmpl$"],"ignoreList":[],"sources":["render/on-cleanup.test.tsx"]}',
+          ["solid-js/web"],
         ),
       ),
     );
@@ -102,8 +105,9 @@ describe("onCleanup", () => {
         cs.create(
           "21q0kwf707rdb:105:8",
           { params: [{ kind: "splice", value: onCleanup, bindings: [] }] },
-          "($splice0) => () => {\n    return (<button onclick={() => $splice0()(() => window.console.log())}>\n              press\n            </button>);\n}",
-          '{"version":3,"file":"on-cleanup.test.jsx","sourceRoot":"","sources":["render/on-cleanup.test.tsx"],"names":[],"mappings":"AAwGW,cAAA,GAAG,EAAE;IACN,OAAO,CACL,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,UAAU,CAAC,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,EAAE,CAAC,CAAC,CAC5D;;YACF,EAAE,MAAM,CAAC,CACV,CAAC;AACJ,CAAC"}',
+          '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nconst web_1 = require("solid-js/web");\nconst web_2 = require("solid-js/web");\nvar _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<button>press`);\nexports.default = $splice0 => () => {\n    return (() => {\n        var _el$ = _tmpl$();\n        _el$.$$click = () => $splice0()(() => window.console.log());\n        return _el$;\n    })();\n};\n(0, web_2.delegateEvents)(["click"]);\n}',
+          '{"version":3,"file":"module.jsx","mappings":";;;;;;kBAwGWA,QAAA;IACD;QAAA,IAAAC,IAAA,GAAAC,MAAA;QAAAD,IAAA,CAAAE,OAAA,GACmB,MAAMH,QAAA,EAAU,CAAC,MAAMI,MAAM,CAACC,OAAO,CAACC,GAAG,EAAE,CAAC;QAAA,OAAAL,IAAA;IAAA;AAIjE,CAAC","names":["$splice0","_el$","_tmpl$","$$click","window","console","log"],"ignoreList":[],"sources":["render/on-cleanup.test.tsx"]}',
+          ["solid-js/web"],
         ),
       ),
     );

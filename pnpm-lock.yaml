@@ -264,9 +264,6 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@jridgewell/gen-mapping':
-        specifier: ^0.3.13
-        version: 0.3.13
       '@jridgewell/remapping':
         specifier: ^2.3.5
         version: 2.3.5
@@ -292,6 +289,9 @@ importers:
       '@jridgewell/gen-mapping':
         specifier: ^0.3.13
         version: 0.3.13
+      '@jridgewell/remapping':
+        specifier: ^2.3.5
+        version: 2.3.5
       '@jridgewell/trace-mapping':
         specifier: ^0.3.31
         version: 0.3.31

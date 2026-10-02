@@ -1,17 +1,55 @@
-const $cs0 = ($splice0) => ({
-  missing: $splice0()(null, true),
-  loud: $splice0()("!hi", true),
-  quiet: $splice0()("!hi", false),
-  plain: $splice0()("zz", false),
-});
-const $cs1 = ($splice0) => (text, upper) => {
-  if (upper && text !== null) {
-    return text.toUpperCase();
-  }
-  if ($splice0() && text !== null && text.charAt(0) === "!") {
-    return text.concat("?");
-  }
-  return "none";
+const $modules = {
+  "g29mnwu0pbnr:27:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => ({
+      missing: $splice0()(null, true),
+      loud: $splice0()("!hi", true),
+      quiet: $splice0()("!hi", false),
+      plain: $splice0()("zz", false),
+    });
+  },
+  "g29mnwu0pbnr:10:71": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => (text, upper) => {
+      if (upper && text !== null) {
+        return text.toUpperCase();
+      }
+      if ($splice0() && text !== null && text.charAt(0) === "!") {
+        return text.concat("?");
+      }
+      return "none";
+    };
+  },
+  "g29mnwu0pbnr:8:24": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => true;
+  },
 };
-const $cs2 = () => true;
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("g29mnwu0pbnr:27:4").default;
+const $cs1 = $require("g29mnwu0pbnr:10:71").default;
+const $cs2 = $require("g29mnwu0pbnr:8:24").default;
 export default $cs0(() => $cs1($cs2));

@@ -6,8 +6,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const leaf = cs.create(
   "2g4us6n03x6jl:7:13",
   { params: [] },
-  "() => 7",
-  '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"AAMgB,MAAA,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => 7;\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAMgB,OAAC","names":[],"ignoreList":[],"sources":["splices/deduplicated-scripts.test.tsx"]}',
+  [],
 );
 it("deduplicatedScripts", async (t) => {
   await snapshotCase(
@@ -16,8 +17,9 @@ it("deduplicatedScripts", async (t) => {
     cs.create(
       "2g4us6n03x6jl:10:47",
       { params: [{ kind: "splice", value: leaf, bindings: [] }] },
-      "($splice0) => ({ a: $splice0(), b: $splice0() })",
-      '{"version":3,"file":"deduplicated-scripts.test.jsx","sourceRoot":"","sources":["splices/deduplicated-scripts.test.tsx"],"names":[],"mappings":"AASkD,cAAA,CAAC,EAAE,CAAC,EAAE,UAAK,EAAE,CAAC,EAAE,UAAK,EAAE,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    a: $splice0(),\n    b: $splice0()\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBASkDA,QAAA,KAAC;IAAEC,CAAC,EAAED,QAAA,EAAK;IAAEE,CAAC,EAAEF,QAAA;CAAO,CAAC","names":["$splice0","a","b"],"ignoreList":[],"sources":["splices/deduplicated-scripts.test.tsx"]}',
+      [],
     ),
   );
 });

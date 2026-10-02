@@ -1,5 +1,4 @@
-(        → expressions/operators.test.tsx 71:8 {…
-) => {   → expressions/operators.test.tsx 71:8 {…
+() => {  → expressions/operators.test.tsx 71:8 {…
 const    → expressions/operators.test.tsx 72:7 const 
 o        → expressions/operators.test.tsx 72:13 o
  =       → expressions/operators.test.tsx 72:14  = 
@@ -7,7 +6,6 @@ o        → expressions/operators.test.tsx 72:13 o
 n        → expressions/operators.test.tsx 72:19 n
 :        → expressions/operators.test.tsx 72:20 : 
 1        → expressions/operators.test.tsx 72:22 1
-}        → expressions/operators.test.tsx 72:23  };…
 ;        → expressions/operators.test.tsx 72:25 ;
 const    → expressions/operators.test.tsx 73:7 const 
 list     → expressions/operators.test.tsx 73:13 list

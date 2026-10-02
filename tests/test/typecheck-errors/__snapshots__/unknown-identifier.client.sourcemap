@@ -6,6 +6,7 @@ hostValue  → 11:10 hostValue
 1          → 11:22 1
 ;          → 11:23 ;
 }          → 12:1 }
+);         → 12:2 `;…
 
 // 14:25
 () => {  → 14:28 {…
@@ -14,11 +15,12 @@ count    → 16:3 count
 1        → 16:11 1
 ;        → 16:12 ;
 }        → 17:1 }
+);       → 17:2 `;…
 
 // 19:23
-() =>     → 19:26 window.location.href`;…
-window    → 19:26 window
-.         → 19:32 .
-location  → 19:33 location
-.         → 19:41 .
-href      → 19:42 href
+() => window  → 19:26 window.location.href`;…
+.             → 19:32 .
+location      → 19:33 location
+.             → 19:41 .
+href          → 19:42 href
+);            → 19:46 `;…

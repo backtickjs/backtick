@@ -9,8 +9,9 @@ it("prefixNot", async (t) => {
     cs.create(
       "3rwumhu91n08h:10:4",
       { params: [] },
-      '() => (ready, count) => {\n    if (!ready) {\n        return "waiting";\n    }\n    return !(count > 3) ? "room left" : "full";\n}',
-      '{"version":3,"file":"prefix-not.test.jsx","sourceRoot":"","sources":["expressions/prefix-not.test.tsx"],"names":[],"mappings":"AASO,MAAA,CAAC,KAAc,EAAE,KAAa,EAAE,EAAE;IACnC,IAAI,CAAC,KAAK,EAAE,CAAC;QACX,OAAO,SAAS,CAAC;IACnB,CAAC;IACD,OAAO,CAAC,CAAC,KAAK,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,WAAW,CAAC,CAAC,CAAC,MAAM,CAAC;AAC7C,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => (ready, count) => {\n    if (!ready) {\n        return "waiting";\n    }\n    return !(count > 3) ? "room left" : "full";\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBASO,OAACA,KAAc,EAAEC,KAAa;IAC/B,IAAI,CAACD,KAAK,EAAE;QACV,OAAO,SAAS;IAClB;IACA,OAAO,EAAEC,KAAK,GAAG,CAAC,CAAC,GAAG,WAAW,GAAG,MAAM;AAC5C,CAAC","names":["ready","count"],"ignoreList":[],"sources":["expressions/prefix-not.test.tsx"]}',
+      [],
     ),
   );
 });

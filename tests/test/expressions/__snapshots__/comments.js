@@ -10,8 +10,9 @@ it("comments", async (t) => {
     cs.create(
       "3lcac8ezsyzi3:11:4",
       { params: [] },
-      '() => {\n    const count = 1;\n    if (count === 1) {\n        return "one";\n    }\n    return "many";\n}',
-      '{"version":3,"file":"comments.test.jsx","sourceRoot":"","sources":["expressions/comments.test.tsx"],"names":[],"mappings":"AAUO;IAED,MAAM,KAAK,GAAG,CAAC,CAAC;IAEhB,IAAI,KAAK,KAAK,CAAC,EAAE,CAAC;QAEhB,OAAO,KAAK,CAAC;IACf,CAAC;IAID,OAAO,MAAM,CAAC;AAChB,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => {\n    const count = 1;\n    if (count === 1) {\n        return "one";\n    }\n    return "many";\n};\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAUO;IAED,MAAMA,KAAK,GAAG,CAAC;IAEf,IAAIA,KAAK,KAAK,CAAC,EAAE;QAEf,OAAO,KAAK;IACd;IAIA,OAAO,MAAM;AACf,CAAC","names":["count"],"ignoreList":[],"sources":["expressions/comments.test.tsx"]}',
+      [],
     ),
   );
 });

@@ -1,6 +1,28 @@
-const $cs0 = () => {
-  let n = 0;
-  const last = (n++, n + 10);
-  return [n, last];
+const $modules = {
+  "3g7ol1xnrqdpp:89:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let n = 0;
+      const last = (n++, n + 10);
+      return [n, last];
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3g7ol1xnrqdpp:89:4").default;
 export default $cs0();

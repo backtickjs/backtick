@@ -1,5 +1,8 @@
 // 9:5
-() => {
+(module, exports, require) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (() => {
     const message = "boom";
     try {
         throw message;
@@ -10,4 +13,5 @@
         }
         return "caught something else";
     }
+});
 }

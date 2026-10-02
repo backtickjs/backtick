@@ -17,8 +17,9 @@ it("spliceOrder", async (t) => {
           { kind: "splice", value: ++count, bindings: [] },
         ],
       },
-      "($splice0, $splice1) => ({ a: $splice0(), b: $splice1() })",
-      '{"version":3,"file":"splice-order.test.jsx","sourceRoot":"","sources":["splices/splice-order.test.tsx"],"names":[],"mappings":"AAU0C,wBAAA,CAAC,EAAE,CAAC,EAAE,UAAM,EAAE,CAAC,EAAE,UAAC,EAAW,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = ($splice0, $splice1) => ({\n    a: $splice0(),\n    b: $splice1()\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAU0C,CAAAA,QAAA,EAAAC,QAAA,MAAC;IAAEC,CAAC,EAAEF,QAAA,EAAM;IAAEG,CAAC,EAAEF,QAAA;CAAY,CAAC","names":["$splice0","$splice1","a","b"],"ignoreList":[],"sources":["splices/splice-order.test.tsx"]}',
+      [],
     ),
   );
 });

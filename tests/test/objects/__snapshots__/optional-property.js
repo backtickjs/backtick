@@ -7,8 +7,9 @@ import { snapshotCase } from "../snapshotCase.ts";
 const read = cs.create(
   "1pn78z89zmc5d:8:13",
   { params: [] },
-  "() => (o) => {\n    return [o.label, o.inner?.z ?? 0];\n}",
-  '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["objects/optional-property.test.tsx"],"names":[],"mappings":"AAOgB,MAAA,CAAC,CAA4C,EAAE,EAAE;IAC/D,OAAO,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC,KAAK,EAAE,CAAC,IAAI,CAAC,CAAC,CAAC;AACpC,CAAC"}',
+  '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = () => o => {\n    return [o.label, o.inner?.z ?? 0];\n};\n}',
+  '{"version":3,"file":"module.jsx","mappings":";;;kBAOgB,MAACA,CAA4C;IAC3D,OAAO,CAACA,CAAC,CAACC,KAAK,EAAED,CAAC,CAACE,KAAK,EAAEC,CAAC,IAAI,CAAC,CAAC;AACnC,CAAC","names":["o","label","inner","z"],"ignoreList":[],"sources":["objects/optional-property.test.tsx"]}',
+  [],
 );
 it("optionalProperty", async (t) => {
   await snapshotCase(
@@ -17,8 +18,9 @@ it("optionalProperty", async (t) => {
     cs.create(
       "1pn78z89zmc5d:16:4",
       { params: [{ kind: "splice", value: read, bindings: [] }] },
-      '($splice0) => ({\n    present: $splice0()({ label: "a", inner: { z: 3 } }),\n    partial: $splice0()({ label: "b", inner: {} }),\n    omitted: $splice0()({ label: "c" }),\n})',
-      '{"version":3,"file":"optional-property.test.jsx","sourceRoot":"","sources":["objects/optional-property.test.tsx"],"names":[],"mappings":"AAeO,cAAA,CAAC;IACF,OAAO,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC;IAC/C,OAAO,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,KAAK,EAAE,EAAE,EAAE,CAAC;IACzC,OAAO,EAAE,UAAK,CAAC,EAAE,KAAK,EAAE,GAAG,EAAE,CAAC;CAC/B,CAAC"}',
+      '(module, exports, require) => {\n"use strict";\nObject.defineProperty(exports, "__esModule", { value: true });\nexports.default = $splice0 => ({\n    present: $splice0()({\n        label: "a",\n        inner: {\n            z: 3\n        }\n    }),\n    partial: $splice0()({\n        label: "b",\n        inner: {}\n    }),\n    omitted: $splice0()({\n        label: "c"\n    })\n});\n}',
+      '{"version":3,"file":"module.jsx","mappings":";;;kBAeOA,QAAA,KAAC;IACFC,OAAO,EAAED,QAAA,EAAK,CAAC;QAAEE,KAAK,EAAE,GAAG;QAAEC,KAAK,EAAE;YAAEC,CAAC,EAAE;SAAC;KAAI,CAAC;IAC/CC,OAAO,EAAEL,QAAA,EAAK,CAAC;QAAEE,KAAK,EAAE,GAAG;QAAEC,KAAK,EAAE;KAAI,CAAC;IACzCG,OAAO,EAAEN,QAAA,EAAK,CAAC;QAAEE,KAAK,EAAE;KAAK;CAC9B,CAAC","names":["$splice0","present","label","inner","z","partial","omitted"],"ignoreList":[],"sources":["objects/optional-property.test.tsx"]}',
+      [],
     ),
   );
 });

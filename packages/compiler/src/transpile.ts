@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import { transform } from "./transform.js";
+import { type TransformOptions, transform } from "./transform.js";
 
 /**
  * One standalone file, run through the transform.
@@ -31,6 +31,7 @@ export function transpile(
   sourceText: string,
   jsxImportSource: string,
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
+  options?: TransformOptions,
 ): string {
   const { outputText } = ts.transpileModule(sourceText, {
     fileName,
@@ -42,7 +43,7 @@ export function transpile(
       sourceMap: false,
       verbatimModuleSyntax: true,
     },
-    transformers: { before: [transform(ts, addDiagnostic)] },
+    transformers: { before: [transform(ts, addDiagnostic, options)] },
   });
   return outputText;
 }

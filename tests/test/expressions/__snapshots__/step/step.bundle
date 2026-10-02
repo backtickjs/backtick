@@ -1,12 +1,34 @@
-const $cs0 = () => {
-  let total = 0;
-  for (let i = 0; i < 3; i++) {
-    total = total + i;
-  }
-  let n = 0.1;
-  const before = n++;
-  const after = ++n;
-  const down = n--;
-  return [total, before, after, down, n];
+const $modules = {
+  "l4vdws2hl3xc:12:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => {
+      let total = 0;
+      for (let i = 0; i < 3; i++) {
+        total = total + i;
+      }
+      let n = 0.1;
+      const before = n++;
+      const after = ++n;
+      const down = n--;
+      return [total, before, after, down, n];
+    };
+  },
 };
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("l4vdws2hl3xc:12:4").default;
 export default $cs0();

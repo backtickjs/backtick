@@ -1,7 +1,37 @@
-const $cs0 = ($splice0) => {
-  const stored = $splice0();
-  const caught = $splice0()();
-  return 1;
+const $modules = {
+  "2qb372nig0g3z:17:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0) => {
+      const stored = $splice0();
+      const caught = $splice0()();
+      return 1;
+    };
+  },
+  "2qb372nig0g3z:11:35": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = () => () => "hi";
+  },
 };
-const $cs1 = () => () => "hi";
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("2qb372nig0g3z:17:4").default;
+const $cs1 = $require("2qb372nig0g3z:11:35").default;
 export default $cs0($cs1);

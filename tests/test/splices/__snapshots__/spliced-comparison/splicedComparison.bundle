@@ -1,9 +1,31 @@
-const $cs0 = ($splice0, $splice1) => ({
-  under: $splice0() < $splice1(),
-  atMost: $splice0() <= $splice1(),
-  over: $splice1() > $splice0(),
-  between: $splice0() < $splice1() && $splice1() > $splice0(),
-});
+const $modules = {
+  "3jdm2y7f9tpf:15:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    exports.default = ($splice0, $splice1) => ({
+      under: $splice0() < $splice1(),
+      atMost: $splice0() <= $splice1(),
+      over: $splice1() > $splice0(),
+      between: $splice0() < $splice1() && $splice1() > $splice0(),
+    });
+  },
+};
+const $exports = {};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3jdm2y7f9tpf:15:4").default;
 export default $cs0(
   () => 3,
   () => 9,

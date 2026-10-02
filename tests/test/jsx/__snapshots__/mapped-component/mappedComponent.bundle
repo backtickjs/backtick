@@ -1,27 +1,62 @@
-import { template as _$template } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
 import { For as $i0 } from "solid-js";
-const $cs0 = ($splice0, $splice1, $tag2) =>
-  (() => {
-    var _el$ = _tmpl$();
-    _$insert(
-      _el$,
-      _$createComponent($tag2, {
-        get each() {
-          return $splice0();
-        },
-        children: (row) => $splice1(row),
-      }),
-    );
-    return _el$;
-  })();
-const $cs1 = ($capture0) =>
-  (() => {
-    var _el$2 = _tmpl$2();
-    _$insert(_el$2, "row " + $capture0);
-    return _el$2;
-  })();
+import * as $module0 from "solid-js/web";
+const $modules = {
+  "3kr2wp8s6e8ma:26:4": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    const web_3 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<div>`);
+    exports.default = ($splice0, $splice1, $tag2) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(
+          _el$,
+          (0, web_3.createComponent)($tag2, {
+            get each() {
+              return $splice0();
+            },
+            children: (row) => $splice1(row),
+          }),
+        );
+        return _el$;
+      })();
+  },
+  "3kr2wp8s6e8ma:28:28": (module, exports, require) => {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true,
+    });
+    const web_1 = require("solid-js/web");
+    const web_2 = require("solid-js/web");
+    var _tmpl$ = /*#__PURE__*/ (0, web_1.template)(`<span>`);
+    exports.default = ($capture0) =>
+      (() => {
+        var _el$ = _tmpl$();
+        (0, web_2.insert)(_el$, "row " + $capture0);
+        return _el$;
+      })();
+  },
+};
+const $exports = {
+  "solid-js/web": $module0,
+};
+const $require = (id) => {
+  if (!(id in $exports)) {
+    const module = {
+      exports: {},
+    };
+    $exports[id] = module.exports;
+    $modules[id](module, module.exports, $require);
+    $exports[id] = module.exports;
+  }
+  return $exports[id];
+};
+const $cs0 = $require("3kr2wp8s6e8ma:26:4").default;
+const $cs1 = $require("3kr2wp8s6e8ma:28:28").default;
 export default $cs0(() => [1, 2, 3], $cs1, $i0);
