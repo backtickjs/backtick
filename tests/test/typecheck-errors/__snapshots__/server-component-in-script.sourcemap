@@ -28,7 +28,7 @@ hr                                        → hr
 cs.lift(((__cs_Row = cs.splice(Row)) =>   → cs`
 <                                         → <
 ul                                        → ul
->{                                        → >
+>{                                        → >\n  
 <                                         → <
 __cs_Row                                  → Row
                                           →  
@@ -37,7 +37,7 @@ label                                     → label
 "a"                                       → "a"
 }                                         → 
 />                                        →  />
-}</                                       → </
+}</                                       → \n</
 ul                                        → ul
 >                                         → >
 )())                                      → `
@@ -54,11 +54,11 @@ text                                      → text
 cs.lift(((__cs_Rule = cs.splice(Rule)) => → cs`
 <                                         → <
 div                                       → div
->{                                        → >
+>{                                        → >\n  
 <                                         → <
 __cs_Rule                                 → Rule
  />                                       →  />
-}</                                       → </
+}</                                       → \n</
 div                                       → div
 >                                         → >
 )())                                      → `

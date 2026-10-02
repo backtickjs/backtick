@@ -85,10 +85,7 @@ export async function TodoList() {
           <For each={showing()}>
             {(task) =>
               ${(
-                <Task
-                  task={cs`task`}
-                  onPress={cs`() => onPress(task.label)`}
-                />
+                <Task task={cs`task`} onPress={cs`() => onPress(task.label)`} />
               )}
             }
           </For>

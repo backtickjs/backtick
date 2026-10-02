@@ -38,8 +38,8 @@ async function ReadingPanel() {
     return (
       <div>
         <span onclick={() => selected[1](1)}>select</span>
-        {${<ReadingRow id={cs`0`} selected={cs`selected`} />}}
-        {${<ReadingRow id={cs`1`} selected={cs`selected`} />}}
+        {${(<ReadingRow id={cs`0`} selected={cs`selected`} />)}}
+        {${(<ReadingRow id={cs`1`} selected={cs`selected`} />)}}
       </div>
     );
   }`;

@@ -17,30 +17,36 @@ const card =
 export async function GameCard({ game }: { game: Client<Game> }) {
   return cs`<li style={$card + ($game.isLive ? "#86efac" : "#e4e4e7")}>
     <div style="display: grid; gap: 5px; flex: 1">
-      {${(
-        <TeamLine
-          rank={cs`$game.awayRank`}
-          name={cs`$game.awayName`}
-          score={cs`$game.awayScore`}
-          hasBall={cs`$game.possession === "away"`}
-          isTrailing={cs`$game.awayScore < $game.homeScore`}
-        />
-      )}}
-      {${(
-        <TeamLine
-          rank={cs`$game.homeRank`}
-          name={cs`$game.homeName`}
-          score={cs`$game.homeScore`}
-          hasBall={cs`$game.possession === "home"`}
-          isTrailing={cs`$game.homeScore < $game.awayScore`}
-        />
-      )}}
+      {
+        ${(
+          <TeamLine
+            rank={cs`$game.awayRank`}
+            name={cs`$game.awayName`}
+            score={cs`$game.awayScore`}
+            hasBall={cs`$game.possession === "away"`}
+            isTrailing={cs`$game.awayScore < $game.homeScore`}
+          />
+        )}
+      }
+      {
+        ${(
+          <TeamLine
+            rank={cs`$game.homeRank`}
+            name={cs`$game.homeName`}
+            score={cs`$game.homeScore`}
+            hasBall={cs`$game.possession === "home"`}
+            isTrailing={cs`$game.homeScore < $game.awayScore`}
+          />
+        )}
+      }
     </div>
 
     <div style="display: grid; gap: 3px; justify-items: end; text-align: right">
       <span
-        style={"font-size: 13px; font-variant-numeric: tabular-nums; color: " +
-          ($game.isLive ? "#15803d" : "#71717a")}
+        style={
+          "font-size: 13px; font-variant-numeric: tabular-nums; color: " +
+          ($game.isLive ? "#15803d" : "#71717a")
+        }
       >
         {$game.clock}
       </span>

@@ -65,7 +65,7 @@ export async function Scoreboard() {
 
         <ul style="display: grid; gap: 8px; margin: 0; padding: 0; list-style: none">
           <For each={rows[0]()}>
-            {(game) => ${<GameCard game={cs`game`} />}}
+            {(game) => ${(<GameCard game={cs`game`} />)}}
           </For>
         </ul>
 

@@ -91,7 +91,7 @@ span                    → span
 >                       → >
 }{                      → \n        {
 cs.splice(              → ${ [-semantic]
-<ReadingRow id={        → <ReadingRow id={
+(<ReadingRow id={       → (<ReadingRow id={
 cs.lift((() =>          → cs`
 0                       → 0
 )())                    → `
@@ -99,11 +99,11 @@ cs.lift((() =>          → cs`
 cs.lift((() =>          → cs`
 __cs_selected           → selected
 )())                    → `
-} />                    → } />
+} />)                   → } />)
 )                       → } [-semantic]
 }{                      → }\n        {
 cs.splice(              → ${ [-semantic]
-<ReadingRow id={        → <ReadingRow id={
+(<ReadingRow id={       → (<ReadingRow id={
 cs.lift((() =>          → cs`
 1                       → 1
 )())                    → `
@@ -111,7 +111,7 @@ cs.lift((() =>          → cs`
 cs.lift((() =>          → cs`
 __cs_selected           → selected
 )())                    → `
-} />                    → } />
+} />)                   → } />)
 )                       → } [-semantic]
 }</                     → }\n      </
 div                     → div

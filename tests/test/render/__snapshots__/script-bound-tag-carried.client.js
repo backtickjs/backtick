@@ -20,7 +20,7 @@
     </div>);
 }
 
-// 42:17
+// 43:19
 ($capture0, $capture1) => <$capture0 n={$capture1[0]()}>
-            <u>{"kid " + $capture1[0]()}</u>
-          </$capture0>
+              <u>{"kid " + $capture1[0]()}</u>
+            </$capture0>

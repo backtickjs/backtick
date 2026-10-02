@@ -6,7 +6,7 @@ import { cs } from "@backtickjs/core";
 // refused when bundling, pointing at the splice it belongs in.
 function Rule() {
   return cs.create(
-    "1aynf5e446fh:9:9",
+    "3pcm93ncujvif:9:9",
     { params: [] },
     "() => <hr />",
     '{"version":3,"file":"server-component-tag.test.jsx","sourceRoot":"","sources":["bundler/server-component-tag.test.tsx"],"names":[],"mappings":"AAQY,MAAA,CAAC,EAAE,CAAC,AAAD,EAAG"}',
@@ -17,10 +17,10 @@ it("refuses a server component as a tag in a script", async () => {
     bundler.build({
       // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
       input: cs.create(
-        "1aynf5e446fh:16:13",
+        "3pcm93ncujvif:16:13",
         { params: [{ kind: "tag", value: Rule }] },
-        "($tag0) => <div><$tag0 /></div>",
-        '{"version":3,"file":"server-component-tag.test.jsx","sourceRoot":"","sources":["bundler/server-component-tag.test.tsx"],"names":[],"mappings":"AAegB,WAAA,CAAC,GAAG,CAAC,CAAC,KAAI,CAAC,AAAD,EAAG,EAAE,GAAG,CAAC"}',
+        "($tag0) => <div>\n        <$tag0 />\n      </div>",
+        '{"version":3,"file":"server-component-tag.test.jsx","sourceRoot":"","sources":["bundler/server-component-tag.test.tsx"],"names":[],"mappings":"AAegB,WAAA,CAAC,GAAG,CACZ;QAAA,CAAC,KAAI,CAAC,AAAD,EACP;MAAA,EAAE,GAAG,CAAC"}',
       ),
       external: {},
     }),

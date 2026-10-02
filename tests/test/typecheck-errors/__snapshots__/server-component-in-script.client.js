@@ -8,10 +8,14 @@
 () => <hr />
 
 // 20:27
-($tag0) => <ul><$tag0 label="a"/></ul>
+($tag0) => <ul>
+  <$tag0 label="a"/>
+</ul>
 
-// 23:23
+// 25:23
 ($tag0) => <$tag0 text="Week"/>
 
-// 26:24
-($tag0) => <div><$tag0 /></div>
+// 28:24
+($tag0) => <div>
+  <$tag0 />
+</div>

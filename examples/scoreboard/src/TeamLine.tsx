@@ -29,9 +29,11 @@ export async function TeamLine({
     <span style="font-size: 15px">{$name + ($hasBall ? " 🏈" : "")}</span>
 
     <span
-      style={"font-size: 17px; font-weight: 600;" +
+      style={
+        "font-size: 17px; font-weight: 600;" +
         " font-variant-numeric: tabular-nums; color: " +
-        ($isTrailing ? "#a1a1aa" : "#18181b")}
+        ($isTrailing ? "#a1a1aa" : "#18181b")
+      }
     >
       {$score}
     </span>

@@ -28,8 +28,8 @@ async function SharingPanel() {
     const size = $createSignal(16);
     return (
       <div>
-        {${<SharedCounter size={cs`size`} />}}
-        {${<SharedCounter size={cs`size`} />}}
+        {${(<SharedCounter size={cs`size`} />)}}
+        {${(<SharedCounter size={cs`size`} />)}}
       </div>
     );
   }`;

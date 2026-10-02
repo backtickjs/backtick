@@ -28,7 +28,7 @@ const svgNamespace = cs`{
     <div>
       <a href="/shapes">{"shapes"}</a>
       <svg viewBox="0 0 30 10" width="120">
-        {${<Ring />}}
+        {${(<Ring />)}}
         <For each={[10, 20]}>{(x: number) => <Dot x={x} />}</For>
         <foreignObject x="0" y="0" width="10" height="10">
           <p>{"html again"}</p>

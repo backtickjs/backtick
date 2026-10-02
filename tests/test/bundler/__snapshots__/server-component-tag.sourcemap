@@ -6,11 +6,11 @@ hr                                        → hr
 cs.lift(((__cs_Rule = cs.splice(Rule)) => → cs`
 <                                         → <
 div                                       → div
->{                                        → >
+>{                                        → >\n        
 <                                         → <
 __cs_Rule                                 → Rule
  />                                       →  />
-}</                                       → </
+}</                                       → \n      </
 div                                       → div
 >                                         → >
 )())                                      → `

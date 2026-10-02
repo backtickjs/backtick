@@ -63,7 +63,9 @@ export async function WeatherCard() {
           {/* The array the server fetched, drawn directly. The median is a
               number the server worked out, handed to each row as it is. */}
           <For each={$days}>
-            {(day) => ${<Day day={cs`day`} show={cs`show`} median={median} />}}
+            {(day) =>
+              ${(<Day day={cs`day`} show={cs`show`} median={median} />)}
+            }
           </For>
         </ul>
 

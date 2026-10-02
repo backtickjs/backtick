@@ -16,10 +16,12 @@ export async function Task({
     >
       <span style="font-size: 17px">{$task.isDone ? "☑" : "☐"}</span>
       <span
-        style={"font-size: 17px; color: " +
+        style={
+          "font-size: 17px; color: " +
           ($task.isDone ? "#a1a1aa" : "#18181b") +
           "; text-decoration: " +
-          ($task.isDone ? "line-through" : "none")}
+          ($task.isDone ? "line-through" : "none")
+        }
       >
         {$task.label}
       </span>

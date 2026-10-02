@@ -109,7 +109,7 @@ width                                     → width
 }                                         → 
 >{                                        → >\n        {
 cs.splice(                                → ${ [-semantic]
-<Ring />                                  → <Ring />
+(<Ring />)                                → (<Ring />)
 )                                         → } [-semantic]
 }{                                        → }\n        
 <                                         → <

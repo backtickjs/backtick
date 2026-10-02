@@ -50,19 +50,19 @@ return                  → return
 div                     → div
 >{                      → >\n        {
 cs.splice(              → ${ [-semantic]
-<SharedCounter size={   → <SharedCounter size={
+(<SharedCounter size={  → (<SharedCounter size={
 cs.lift((() =>          → cs`
 __cs_size               → size
 )())                    → `
-} />                    → } />
+} />)                   → } />)
 )                       → } [-semantic]
 }{                      → }\n        {
 cs.splice(              → ${ [-semantic]
-<SharedCounter size={   → <SharedCounter size={
+(<SharedCounter size={  → (<SharedCounter size={
 cs.lift((() =>          → cs`
 __cs_size               → size
 )())                    → `
-} />                    → } />
+} />)                   → } />)
 )                       → } [-semantic]
 }</                     → }\n      </
 div                     → div

@@ -32,7 +32,7 @@ export function createImport<T>({
   name: string;
   from: string;
   version: string;
-}): ClientImport<T> {
+}): Client<T> {
   return {
     "@backtickjs": "ClientImport",
     name,
