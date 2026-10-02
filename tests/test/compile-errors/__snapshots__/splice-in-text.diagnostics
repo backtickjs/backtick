@@ -1,3 +1,3 @@
-5:47-5:54 error TS0: This `${…}` is in text, not code, so it isn't spliced. As an element's child, write it in braces: `{${…}}`.
-6:52-6:59 error TS0: This `${…}` is in text, not code, so it isn't spliced. As an element's child, write it in braces: `{${…}}`.
-8:6-8:13 error TS0: This `${…}` is in text, not code, so it isn't spliced. As an element's child, write it in braces: `{${…}}`.
+6:47-6:61 error TS0: This `${…}` is in text, not code, so it isn't spliced. As an element's child, write it in braces: `{${…}}`.
+7:52-7:66 error TS0: This `${…}` is in text, not code, so it isn't spliced. As an element's child, write it in braces: `{${…}}`.
+9:6-9:20 error TS0: This `${…}` is in text, not code, so it isn't spliced. As an element's child, write it in braces: `{${…}}`.

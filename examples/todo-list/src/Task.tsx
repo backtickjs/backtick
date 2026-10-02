@@ -1,35 +1,28 @@
-import { cs } from "@backtickjs/core";
-import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
+import { type Client, cs } from "@backtickjs/core";
 
-// One row of the list. Its props are `Prop<T>`, so each takes what the server
-// wrote or a script standing in for it — and what this draws is whichever
-// arrived. Pressing it redraws this row and nothing else, because a script is
-// what the list hands down: the list around it never re-renders.
+// One row of the list, drawn by a script: the list hands it the task as a
+// client value, so pressing it redraws this row and nothing else.
 export async function Task({
-  label,
-  isDone,
+  task,
   onPress,
 }: {
-  label: Prop<string>;
-  isDone: Prop<boolean>;
-  onPress: Prop<() => void>;
+  task: Client<{ label: string; isDone: boolean }>;
+  onPress: Client<() => void>;
 }) {
-  return (
-    <li>
-      <button
-        onclick={onPress}
-        style="background: none; border: 0; cursor: pointer; display: flex; gap: 10px; padding: 6px 0; font: inherit"
+  return cs`<li>
+    <button
+      onclick={$onPress}
+      style="background: none; border: 0; cursor: pointer; display: flex; gap: 10px; padding: 6px 0; font: inherit"
+    >
+      <span style="font-size: 17px">{$task.isDone ? "☑" : "☐"}</span>
+      <span
+        style={"font-size: 17px; color: " +
+          ($task.isDone ? "#a1a1aa" : "#18181b") +
+          "; text-decoration: " +
+          ($task.isDone ? "line-through" : "none")}
       >
-        <span style="font-size: 17px">{cs`$isDone ? "☑" : "☐"`}</span>
-        <span
-          style={cs`"font-size: 17px; color: " +
-            ($isDone ? "#a1a1aa" : "#18181b") +
-            "; text-decoration: " +
-            ($isDone ? "line-through" : "none")`}
-        >
-          {label}
-        </span>
-      </button>
-    </li>
-  );
+        {$task.label}
+      </span>
+    </button>
+  </li>`;
 }

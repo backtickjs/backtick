@@ -1,0 +1,1 @@
+12:15 error TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules.

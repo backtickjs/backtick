@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 import { createSignal, For, onCleanup, onMount } from "@backtickjs/solid-js";
 import { GameCard } from "./GameCard.js";
 import { load, POLL_MS, SLATE_PATH } from "./scores.js";
-import type { Game, Slate } from "./scores.js";
+import type { Slate } from "./scores.js";
 
 const page =
   "display: grid; gap: 12px; padding: 24px; max-width: 460px;" +
@@ -65,20 +65,7 @@ export async function Scoreboard() {
 
         <ul style="display: grid; gap: 8px; margin: 0; padding: 0; list-style: none">
           <For each={rows[0]()}>
-            {(game: Game) => (
-              <GameCard
-                awayRank={game.awayRank}
-                awayName={game.awayName}
-                awayScore={game.awayScore}
-                homeRank={game.homeRank}
-                homeName={game.homeName}
-                homeScore={game.homeScore}
-                clock={game.clock}
-                isLive={game.isLive}
-                possession={game.possession}
-                detail={game.detail}
-              />
-            )}
+            {(game) => ${<GameCard game={cs`game`} />}}
           </For>
         </ul>
 

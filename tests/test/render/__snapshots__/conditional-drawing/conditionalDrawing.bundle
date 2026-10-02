@@ -25,18 +25,16 @@ const $cs0 = ($splice0, $tag1) => {
     return _el$;
   })();
 };
-const $cs1 = ($splice0, $splice1) => {
+const $cs1 = ($splice0) => (props) => {
   const shown = $splice0()(false);
   const started = window.setTimeout(() => {
-    if ($splice1()()) {
+    if (props.again()) {
       shown[1](true);
     }
   }, 0);
   return _$memo(() => (_$memo(() => !!shown[0]())() ? _tmpl$2() : _tmpl$3()));
 };
-const $expn0 = () => ($arg0) =>
-  $cs1(
-    () => $i0,
-    () => $arg0.again,
-  );
-export default $cs0(() => $i0, $expn0());
+export default $cs0(
+  () => $i0,
+  $cs1(() => $i0),
+);

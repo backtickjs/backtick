@@ -24,6 +24,9 @@ it("scriptComponentNestedProp", async (t) => {
   await snapshotCase(
     t,
     "scriptComponentNestedProp",
-    cs`<Greeting person={{ firstName: "ada" }} />`,
+    cs`{
+      const Greet = $Greeting;
+      return <Greet person={{ firstName: "ada" }} />;
+    }`,
   );
 });

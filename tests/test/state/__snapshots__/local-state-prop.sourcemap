@@ -1,73 +1,71 @@
-cs.lift((() =>                            → cs`
-"font-size: "                             → "font-size: "
- +                                        →  + 
-cs.splice(                                →  [-semantic]
-(size)                                    → $size
-)                                         →  [-semantic]
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- +                                        →  + 
-"px"                                      → "px"
-)())                                      → `
-cs.lift((() =>                            → cs`
-() => {\n                                 → () => {\n      
-cs.splice(                                →  [-semantic]
-(size)                                    → $size
-)                                         →  [-semantic]
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-cs.splice(                                →  [-semantic]
-(size)                                    → $size
-)                                         →  [-semantic]
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-)                                         → )
-;                                         → ;
-\n}                                       → \n    }
-)())                                      → `
-cs.lift(((__cs_SharedCounter = cs.splice(SharedCounter)) => {\n    → cs`{\n    
-const                                     → const 
-__cs_size                                 → size
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-(                                         → (
-16                                        → 16
-)                                         → )
-;                                         → ;
-\n                                        → \n    
-return                                    → return 
-<                                         → (\n      <
-div                                       → div
->{                                        → >\n        
-<                                         → <
-__cs_SharedCounter                        → SharedCounter
-                                          →  
-size                                      → size
-={                                        → ={
-__cs_size                                 → size
-}                                         → }
-/>                                        →  />
-}{                                        → \n        
-<                                         → <
-__cs_SharedCounter                        → SharedCounter
-                                          →  
-size                                      → size
-={                                        → ={
-__cs_size                                 → size
-}                                         → }
-/>                                        →  />
-}</                                       → \n      </
-div                                       → div
->                                         → >\n    )
-;                                         → ;
-\n})())                                   → \n  }`
+cs.lift((() =>          → cs`
+"font-size: "           → "font-size: "
+ +                      →  + 
+cs.splice(              →  [-semantic]
+(size)                  → $size
+)                       →  [-semantic]
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+"px"                    → "px"
+)())                    → `
+cs.lift((() =>          → cs`
+() => {\n               → () => {\n      
+cs.splice(              →  [-semantic]
+(size)                  → $size
+)                       →  [-semantic]
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+cs.splice(              →  [-semantic]
+(size)                  → $size
+)                       →  [-semantic]
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1                       → 1
+)                       → )
+;                       → ;
+\n}                     → \n    }
+)())                    → `
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_size               → size
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+16                      → 16
+)                       → )
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → (\n      <
+div                     → div
+>{                      → >\n        {
+cs.splice(              → ${ [-semantic]
+<SharedCounter size={   → <SharedCounter size={
+cs.lift((() =>          → cs`
+__cs_size               → size
+)())                    → `
+} />                    → } />
+)                       → } [-semantic]
+}{                      → }\n        {
+cs.splice(              → ${ [-semantic]
+<SharedCounter size={   → <SharedCounter size={
+cs.lift((() =>          → cs`
+__cs_size               → size
+)())                    → `
+} />                    → } />
+)                       → } [-semantic]
+}</                     → }\n      </
+div                     → div
+>                       → >\n    )
+;                       → ;
+\n})())                 → \n  }`

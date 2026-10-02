@@ -1,0 +1,64 @@
+cs.lift((() =>                            → cs`
+<                                         → <
+li                                        → li
+>{                                        → >{
+cs.splice(                                →  [-semantic]
+(label)                                   → $label
+)                                         →  [-semantic]
+}</                                       → }</
+li                                        → li
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+h1                                        → h1
+>{                                        → >{
+cs.splice(                                →  [-semantic]
+(text)                                    → $text
+)                                         →  [-semantic]
+}</                                       → }</
+h1                                        → h1
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+hr                                        → hr
+ />                                       →  />
+)())                                      → `
+cs.lift(((__cs_Row = cs.splice(Row)) =>   → cs`
+<                                         → <
+ul                                        → ul
+>{                                        → >
+<                                         → <
+__cs_Row                                  → Row
+                                          →  
+label                                     → label
+={                                        → =
+"a"                                       → "a"
+}                                         → 
+/>                                        →  />
+}</                                       → </
+ul                                        → ul
+>                                         → >
+)())                                      → `
+cs.lift(((__cs_Title = cs.splice(Title)) => → cs`
+<                                         → <
+__cs_Title                                → Title
+                                          →  
+text                                      → text
+={                                        → =
+"Week"                                    → "Week"
+}                                         → 
+/>                                        →  />
+)())                                      → `
+cs.lift(((__cs_Rule = cs.splice(Rule)) => → cs`
+<                                         → <
+div                                       → div
+>{                                        → >
+<                                         → <
+__cs_Rule                                 → Rule
+ />                                       →  />
+}</                                       → </
+div                                       → div
+>                                         → >
+)())                                      → `

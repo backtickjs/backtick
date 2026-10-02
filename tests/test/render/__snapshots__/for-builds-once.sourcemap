@@ -1,4 +1,15 @@
-cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n    
+cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
+(                                         → (
+__cs_props                                → props
+:                                         → : 
+{\n                                       → { 
+more                                      → more
+:                                         → : 
+() =>                                     → () => 
+boolean                                   → boolean
+;                                         → 
+\n}                                       →  }
+) => {\n                                  → ) => {\n  
 const                                     → const 
 __cs_items                                → items
  =                                        →  = 
@@ -12,7 +23,7 @@ string                                    → string
 []                                        → []
 )                                         → )
 ;                                         → ;
-\n                                        → \n\n    
+\n                                        → \n\n  
 const                                     → const 
 __cs_started                              → started
  =                                        →  = 
@@ -21,14 +32,14 @@ window                                    → window
 .                                         → .
 setTimeout                                → setTimeout
 (                                         → (
-() => {\n                                 → () => {\n      
+() => {\n                                 → () => {\n    
 if (                                      → if (
-cs.splice(                                →  [-semantic]
-(more)                                    → $more
-)                                         →  [-semantic]
+__cs_props                                → props
+.                                         → .
+more                                      → more
 ()                                        → ()
 )                                         → ) 
-{\n                                       → {\n        
+{\n                                       → {\n      
 __cs_items                                → items
 [                                         → [
 1                                         → 1
@@ -39,13 +50,13 @@ cs.splice(                                →  [-semantic]
 )                                         →  [-semantic]
 )                                         → )
 ;                                         → ;
-\n        }                               → \n      }
-\n    }                                   → \n    }
+\n        }                               → \n    }
+\n    }                                   → \n  }
 ,                                         → , 
 0                                         → 0
 )                                         → )
 ;                                         → ;
-\n                                        → \n\n    
+\n                                        → \n\n  
 return                                    → return 
 <                                         → <
 __cs_For                                  → For
@@ -75,7 +86,8 @@ em                                        → em
 __cs_For                                  → For
 >                                         → >
 ;                                         → ;
-\n})())                                   → \n  }`
+\n}                                       → \n}
+)())                                      → `
 cs.lift(((__cs_WaitingList = cs.splice(WaitingList)) => {\n    → cs`{\n  
 const                                     → const 
 __cs_asked                                → asked

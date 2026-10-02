@@ -2,11 +2,11 @@ import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-// A component tag written inside a client script. `Card` is a name no scope in
-// the script binds, so it splices as the host binding, and what a splice holds
-// that is a function is its expansion: the component run once against one
-// opaque hole for the argument it takes, with a field read off that hole
-// wherever it read a prop. The tag is a call of it.
+// A host component spliced into a client script and used as a tag under the
+// script's own name for it. What a splice holds that is a function is its
+// expansion: the component run once against one opaque hole for the argument
+// it takes, with a field read off that hole wherever it read a prop. The tag is
+// a call of it.
 //
 // Each prop goes as a thunk and the drawing calls it where it reads it, which
 // is what keeps a prop a prop: an argument is evaluated once where it is
@@ -22,15 +22,15 @@ it("scriptComponent", async (t) => {
     t,
     "scriptComponent",
     cs.create(
-      "t5r0so0w4r80:27:4",
+      "kb4jgh2qale6:27:4",
       {
         params: [
-          { kind: "tag", value: Card },
-          { kind: "tag", value: Badge },
+          { kind: "splice", value: Card, bindings: [] },
+          { kind: "splice", value: Badge, bindings: [] },
         ],
       },
-      '($tag0, $tag1) => {\n    return (<div>\n          <$tag0 title="totals"/>\n          <$tag1 />\n        </div>);\n}',
-      '{"version":3,"file":"script-component.test.jsx","sourceRoot":"","sources":["components/script-component.test.tsx"],"names":[],"mappings":"AA0BO;IACD,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,KAAI,CAAC,KAAK,CAAC,QAAQ,EACpB;UAAA,CAAC,KAAK,CAAC,AAAD,EACR;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+      '($splice0, $splice1) => {\n    const Heading = $splice0();\n    const New = $splice1();\n    return (<div>\n          <Heading title="totals"/>\n          <New />\n        </div>);\n}',
+      '{"version":3,"file":"script-component.test.jsx","sourceRoot":"","sources":["components/script-component.test.tsx"],"names":[],"mappings":"AA0BO;IACD,MAAM,OAAO,GAAG,UAAK,CAAC;IACtB,MAAM,GAAG,GAAG,UAAM,CAAC;IACnB,OAAO,CACL,CAAC,GAAG,CACF;UAAA,CAAC,OAAO,CAAC,KAAK,CAAC,QAAQ,EACvB;UAAA,CAAC,GAAG,CAAC,AAAD,EACN;QAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
     ),
   );
 });

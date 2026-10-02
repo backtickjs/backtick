@@ -5,7 +5,6 @@ import { createSignal, For } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 import { settled } from "./dom.ts";
-import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 import { evaluate } from "../evaluate.ts";
 
 // The same claim as `evaluateBuildsOnce`, with no bundle in it.
@@ -18,17 +17,17 @@ import { evaluate } from "../evaluate.ts";
 // one: once it stops saying yes, nothing is written and nothing runs again.
 const answerItems = ["one", "two"];
 
-async function WaitingList({ more }: { more: Prop<() => boolean> }) {
-  return cs.lift(((__cs_For = cs.splice(For)) => {
+const WaitingList = cs.lift(((__cs_For = cs.splice(For)) => (__cs_props: {
+    more: () => boolean;
+}) => {
     const __cs_items = cs.splice((createSignal))<string[]>([]);
     const __cs_started = cs.globalThis.window.setTimeout(() => {
-        if (cs.splice((more))()) {
+        if (__cs_props.more()) {
             __cs_items[1](cs.splice((answerItems)));
         }
     }, 0);
     return <__cs_For each={__cs_items[0]()}>{(__cs_item: string) => <em>{__cs_item}</em>}</__cs_For>;
 })());
-}
 
 const forBuildsOnce = cs.lift(((__cs_WaitingList = cs.splice(WaitingList)) => {
     const __cs_asked = cs.splice((createSignal))(0);

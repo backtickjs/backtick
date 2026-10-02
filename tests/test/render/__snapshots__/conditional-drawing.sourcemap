@@ -1,4 +1,15 @@
-cs.lift((() => {\n                        → cs`{\n    
+cs.lift((() =>                            → cs`
+(                                         → (
+__cs_props                                → props
+:                                         → : 
+{\n                                       → { 
+again                                     → again
+:                                         → : 
+() =>                                     → () => 
+boolean                                   → boolean
+;                                         → 
+\n}                                       →  }
+) => {\n                                  → ) => {\n  
 const                                     → const 
 __cs_shown                                → shown
  =                                        →  = 
@@ -9,7 +20,7 @@ cs.splice(                                →  [-semantic]
 false                                     → false
 )                                         → )
 ;                                         → ;
-\n                                        → \n\n    
+\n                                        → \n\n  
 const                                     → const 
 __cs_started                              → started
  =                                        →  = 
@@ -18,14 +29,14 @@ window                                    → window
 .                                         → .
 setTimeout                                → setTimeout
 (                                         → (
-() => {\n                                 → () => {\n      
+() => {\n                                 → () => {\n    
 if (                                      → if (
-cs.splice(                                →  [-semantic]
-(again)                                   → $again
-)                                         →  [-semantic]
+__cs_props                                → props
+.                                         → .
+again                                     → again
 ()                                        → ()
 )                                         → ) 
-{\n                                       → {\n        
+{\n                                       → {\n      
 __cs_shown                                → shown
 [                                         → [
 1                                         → 1
@@ -34,13 +45,13 @@ __cs_shown                                → shown
 true                                      → true
 )                                         → )
 ;                                         → ;
-\n        }                               → \n      }
-\n    }                                   → \n    }
+\n        }                               → \n    }
+\n    }                                   → \n  }
 ,                                         → , 
 0                                         → 0
 )                                         → )
 ;                                         → ;
-\n                                        → \n\n    
+\n                                        → \n\n  
 return                                    → return 
 <>{                                       → <>{
 __cs_shown                                → shown
@@ -62,7 +73,8 @@ i                                         → i
 >                                         → >
 }</>                                      → }</>
 ;                                         → ;
-\n})())                                   → \n  }`
+\n}                                       → \n}
+)())                                      → `
 cs.lift(((__cs_Held = cs.splice(Held)) => {\n    → cs`{\n  
 const                                     → const 
 __cs_builds                               → builds

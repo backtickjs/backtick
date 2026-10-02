@@ -24,14 +24,14 @@ const $cs0 = ($splice0, $tag1) => {
     return _el$;
   })();
 };
-const $cs1 = ($splice0, $splice1, $splice2, $tag3) => {
+const $cs1 = ($splice0, $splice1, $tag2) => (props) => {
   const items = $splice0()([]);
   const started = window.setTimeout(() => {
-    if ($splice1()()) {
-      items[1]($splice2());
+    if (props.more()) {
+      items[1]($splice1());
     }
   }, 0);
-  return _$createComponent($tag3, {
+  return _$createComponent($tag2, {
     get each() {
       return items[0]();
     },
@@ -43,11 +43,11 @@ const $cs1 = ($splice0, $splice1, $splice2, $tag3) => {
       })(),
   });
 };
-const $expn0 = () => ($arg0) =>
+export default $cs0(
+  () => $i0,
   $cs1(
     () => $i0,
-    () => $arg0.more,
     () => ["one", "two"],
     $i1,
-  );
-export default $cs0(() => $i0, $expn0());
+  ),
+);

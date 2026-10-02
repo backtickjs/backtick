@@ -60,26 +60,10 @@ export async function WeatherCard() {
         </div>
 
         <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">
-          {/* The array the server fetched, drawn directly. */}
+          {/* The array the server fetched, drawn directly. The median is a
+              number the server worked out, handed to each row as it is. */}
           <For each={$days}>
-            {(day: {
-              weekday: string;
-              symbol: string;
-              high: number;
-              low: number;
-            }) => (
-              <Day
-                weekday={day.weekday}
-                symbol={day.symbol}
-                high={show(day.high)}
-                low={show(day.low)}
-                // The median is a number the server worked out and spliced in.
-                // The comparison is the client's, because which rows are warm
-                // has to survive nothing changing — it is just the same test
-                // run per row.
-                isAboveMedian={day.high > $median}
-              />
-            )}
+            {(day) => ${<Day day={cs`day`} show={cs`show`} median={median} />}}
           </For>
         </ul>
 

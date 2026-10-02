@@ -49,10 +49,10 @@ const $cs0 = ($tag0) => {
     return _el$2;
   })();
 };
-const $expn0 = () => ($arg0) =>
+const $cs1 = () => (props) =>
   (() => {
     var _el$4 = _tmpl$4();
-    _$insert(_el$4, () => $arg0.title);
+    _$insert(_el$4, () => props.title);
     return _el$4;
   })();
-export default $cs0($expn0());
+export default $cs0($cs1());

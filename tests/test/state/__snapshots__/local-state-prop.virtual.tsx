@@ -24,9 +24,9 @@ const SharedCounter = async ({ size }: { size: Client<Signal<number>> }) => (
 );
 
 async function SharingPanel() {
-  return cs.lift(((__cs_SharedCounter = cs.splice(SharedCounter)) => {
+  return cs.lift((() => {
     const __cs_size = cs.splice((createSignal))(16);
-    return <div>{<__cs_SharedCounter size={__cs_size}/>}{<__cs_SharedCounter size={__cs_size}/>}</div>;
+    return <div>{cs.splice(<SharedCounter size={cs.lift((() => __cs_size)())} />)}{cs.splice(<SharedCounter size={cs.lift((() => __cs_size)())} />)}</div>;
 })());
 }
 

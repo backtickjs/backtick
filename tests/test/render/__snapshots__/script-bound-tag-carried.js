@@ -1,3 +1,4 @@
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
@@ -10,7 +11,7 @@ import { evaluate } from "../evaluate.ts";
 // handed beside it.
 async function Panel(props) {
   return cs.create(
-    "3flh7j79x7tgi:14:9",
+    "2p2gase46aptr:14:9",
     { params: [{ kind: "splice", value: props, bindings: [] }] },
     '($splice0) => {\n    const Badge = (p) => <i>{"panel " + p.n}</i>;\n    return (<section>\n        <Badge n={0}/>\n        {$splice0().body}\n      </section>);\n}',
     '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,KAAK,GAAG,CAAC,CAAgB,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC5D,OAAO,CACL,CAAC,OAAO,CACN;QAAA,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EACZ;QAAA,CAAC,UAAM,CAAC,IAAI,CACd;MAAA,EAAE,OAAO,CAAC,CACX,CAAC;AACJ,CAAC"}',
@@ -21,30 +22,31 @@ async function Panel(props) {
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
 const scriptBoundTagCarried = cs.create(
-  "3flh7j79x7tgi:29:30",
+  "2p2gase46aptr:29:30",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
       {
         kind: "splice",
-        value: cs.create(
-          "3flh7j79x7tgi:42:12",
-          {
-            params: [
-              { kind: "capture", key: "Badge$3flh7j79x7tgi$3" },
-              { kind: "capture", key: "count$3flh7j79x7tgi$2" },
-            ],
-          },
-          '($capture0, $capture1) => <$capture0 n={$capture1[0]()}>\n            <u>{"kid " + $capture1[0]()}</u>\n          </$capture0>',
-          '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAyCe,0BAAA,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CACxB;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAC7B;UAAA,EAAE,SAAK,CAAC"}',
-        ),
-        bindings: ["count$3flh7j79x7tgi$2", "Badge$3flh7j79x7tgi$3"],
+        value: _jsx(Panel, {
+          body: cs.create(
+            "2p2gase46aptr:42:16",
+            {
+              params: [
+                { kind: "capture", key: "Badge$2p2gase46aptr$3" },
+                { kind: "capture", key: "count$2p2gase46aptr$2" },
+              ],
+            },
+            '($capture0, $capture1) => <$capture0 n={$capture1[0]()}>\n            <u>{"kid " + $capture1[0]()}</u>\n          </$capture0>',
+            '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AAyCmB,0BAAA,CAAC,SAAK,CAAC,CAAC,CAAC,CAAC,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAC5B;YAAA,CAAC,CAAC,CAAC,CAAC,MAAM,GAAG,SAAK,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAC7B;UAAA,EAAE,SAAK,CAAC"}',
+          ),
+        }),
+        bindings: ["count$2p2gase46aptr$2", "Badge$2p2gase46aptr$3"],
       },
-      { kind: "tag", value: Panel },
     ],
   },
-  '($splice0, $splice1, $tag2) => {\n    const count = $splice0()(0);\n    const Badge = (p) => (<b>\n      {"outer " + p.n}\n      {p.children}\n    </b>);\n    return (<div>\n      <$tag2 body={$splice1(count, Badge)}/>\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n}',
-  '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AA4BiC;IAC/B,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,CAAC,CAAuC,EAAE,EAAE,CAAC,CACzD,CAAC,CAAC,CACA;MAAA,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,QAAQ,CACb;IAAA,EAAE,CAAC,CAAC,CACL,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,KAAK,CACJ,IAAI,CAAC,CACH,sBAGF,CAAC,EAEH;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  '($splice0, $splice1) => {\n    const count = $splice0()(0);\n    const Badge = (p) => (<b>\n      {"outer " + p.n}\n      {p.children}\n    </b>);\n    return (<div>\n      {$splice1(count, Badge)}\n      <button onclick={() => count[1](count[0]() + 1)}>more</button>\n    </div>);\n}',
+  '{"version":3,"file":"script-bound-tag-carried.test.jsx","sourceRoot":"","sources":["render/script-bound-tag-carried.test.tsx"],"names":[],"mappings":"AA4BiC;IAC/B,MAAM,KAAK,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC/B,MAAM,KAAK,GAAG,CAAC,CAAuC,EAAE,EAAE,CAAC,CACzD,CAAC,CAAC,CACA;MAAA,CAAC,QAAQ,GAAG,CAAC,CAAC,CAAC,CACf;MAAA,CAAC,CAAC,CAAC,QAAQ,CACb;IAAA,EAAE,CAAC,CAAC,CACL,CAAC;IAEF,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,sBAMC,CACF;MAAA,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC,CAAC,IAAI,EAAE,MAAM,CAC/D;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
 );
 it("scriptBoundTagCarried", async (t) => {
   await snapshotCase(t, "scriptBoundTagCarried", scriptBoundTagCarried);

@@ -24,6 +24,9 @@ it("scriptComponentNestedProp", async (t) => {
   await snapshotCase(
     t,
     "scriptComponentNestedProp",
-    cs.lift(((__cs_Greeting = cs.splice(Greeting)) => <__cs_Greeting person={{ firstName: "ada" }}/>)()),
+    cs.lift((() => {
+    const __cs_Greet = cs.splice((Greeting));
+    return <__cs_Greet person={{ firstName: "ada" }}/>;
+})()),
   );
 });

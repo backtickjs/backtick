@@ -23,13 +23,17 @@ async function Panel(props: { body: Prop<JSX.Element> }) {
 // holds. It lands inside `Panel`'s script, whose own `Badge` is in scope there
 // — and still calls the one it was written under, since that is the binding it
 // carries. The tag holds children too, read through the same record.
-const scriptBoundTagCarried = cs.lift(((__cs_Panel = cs.splice(Panel)) => {
+const scriptBoundTagCarried = cs.lift((() => {
     const __cs_count = cs.splice((createSignal))(0);
     const __cs_Badge = (__cs_p: {
         n: number;
         children: JSX.Element;
     }) => <b>{"outer " + __cs_p.n}{__cs_p.children}</b>;
-    return <div>{<__cs_Panel body={cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]()}>{<u>{"kid " + __cs_count[0]()}</u>}</__cs_Badge>)()))}/>}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>;
+    return <div>{cs.splice((
+        <Panel
+          body={cs.lift((() => <__cs_Badge n={__cs_count[0]()}>{<u>{"kid " + __cs_count[0]()}</u>}</__cs_Badge>)())}
+        />
+      ))}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>;
 })());
 
 it("scriptBoundTagCarried", async (t) => {

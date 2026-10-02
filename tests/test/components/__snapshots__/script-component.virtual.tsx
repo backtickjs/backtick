@@ -3,11 +3,11 @@ import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
-// A component tag written inside a client script. `Card` is a name no scope in
-// the script binds, so it splices as the host binding, and what a splice holds
-// that is a function is its expansion: the component run once against one
-// opaque hole for the argument it takes, with a field read off that hole
-// wherever it read a prop. The tag is a call of it.
+// A host component spliced into a client script and used as a tag under the
+// script's own name for it. What a splice holds that is a function is its
+// expansion: the component run once against one opaque hole for the argument
+// it takes, with a field read off that hole wherever it read a prop. The tag is
+// a call of it.
 //
 // Each prop goes as a thunk and the drawing calls it where it reads it, which
 // is what keeps a prop a prop: an argument is evaluated once where it is
@@ -24,8 +24,10 @@ it("scriptComponent", async (t) => {
   await snapshotCase(
     t,
     "scriptComponent",
-    cs.lift(((__cs_Card = cs.splice(Card), __cs_Badge = cs.splice(Badge)) => {
-    return <div>{<__cs_Card title={"totals"}/>}{<__cs_Badge />}</div>;
+    cs.lift((() => {
+    const __cs_Heading = cs.splice((Card));
+    const __cs_New = cs.splice((Badge));
+    return <div>{<__cs_Heading title={"totals"}/>}{<__cs_New />}</div>;
 })()),
   );
 });

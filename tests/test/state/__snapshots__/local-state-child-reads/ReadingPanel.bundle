@@ -2,77 +2,86 @@ import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
 import { style as _$style } from "solid-js/web";
 import { effect as _$effect } from "solid-js/web";
-import { insert as _$insert } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";
+import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<div><span>`),
   _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
 import { createSignal as $i0 } from "solid-js";
 const $Component = (props) => props.body();
-const $cs0 = ($splice0, $tag1) => {
+const $cs0 = ($splice0, $splice1, $splice2) => {
   const selected = $splice0()(0);
   return (() => {
     var _el$ = _tmpl$(),
       _el$2 = _el$.firstChild;
     _el$2.$$click = () => selected[1](1);
-    _$insert(
-      _el$,
-      _$createComponent($tag1, {
-        id: 0,
-        selected: selected,
-      }),
-      null,
-    );
-    _$insert(
-      _el$,
-      _$createComponent($tag1, {
-        id: 1,
-        selected: selected,
-      }),
-      null,
-    );
+    _$insert(_el$, () => $splice1(selected), null);
+    _$insert(_el$, () => $splice2(selected), null);
     return _el$;
   })();
 };
 const $cs1 = ($splice0, $splice1) =>
   "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px";
-const $cs2 = ($splice0, $splice1) =>
+const $cs2 = ($capture0) => $capture0;
+const $cs3 = () => 0;
+const $cs4 = ($splice0, $splice1) =>
   "row " + $splice0() + " of " + $splice1()[0]();
-const $cs3 = ($splice0, $splice1, $splice2) =>
+const $cs5 = ($splice0, $splice1, $splice2) =>
   $splice0()[0]() === $splice1() ? $splice2() : null;
-const $expn0 = () => ($arg0) =>
-  (() => {
-    var _el$3 = _tmpl$2(),
-      _el$4 = _el$3.firstChild;
-    _$insert(_el$4, () =>
-      $cs2(
-        () => $arg0.id,
-        () => $arg0.selected,
-      ),
-    );
-    _$insert(
-      _el$3,
-      () =>
-        $cs3(
-          () => $arg0.selected,
-          () => $arg0.id,
-          () => _tmpl$3(),
-        ),
-      null,
-    );
-    _$effect((_$p) =>
-      _$style(
-        _el$4,
-        $cs1(
-          () => $arg0.selected,
-          () => $arg0.id,
-        ),
-        _$p,
-      ),
-    );
-    return _el$3;
-  })();
+const $cs6 = ($capture0) => $capture0;
+const $cs7 = () => 1;
 export default _$createComponent($Component, {
-  body: () => $cs0(() => $i0, $expn0()),
+  body: () =>
+    $cs0(
+      () => $i0,
+      (selected) =>
+        (() => {
+          var _el$3 = _tmpl$2(),
+            _el$4 = _el$3.firstChild;
+          _$insert(_el$4, () => $cs4($cs3, () => $cs2(selected)));
+          _$insert(
+            _el$3,
+            () =>
+              $cs5(
+                () => $cs2(selected),
+                $cs3,
+                () => _tmpl$3(),
+              ),
+            null,
+          );
+          _$effect((_$p) =>
+            _$style(
+              _el$4,
+              $cs1(() => $cs2(selected), $cs3),
+              _$p,
+            ),
+          );
+          return _el$3;
+        })(),
+      (selected) =>
+        (() => {
+          var _el$6 = _tmpl$2(),
+            _el$7 = _el$6.firstChild;
+          _$insert(_el$7, () => $cs4($cs7, () => $cs6(selected)));
+          _$insert(
+            _el$6,
+            () =>
+              $cs5(
+                () => $cs6(selected),
+                $cs7,
+                () => _tmpl$3(),
+              ),
+            null,
+          );
+          _$effect((_$p) =>
+            _$style(
+              _el$7,
+              $cs1(() => $cs6(selected), $cs7),
+              _$p,
+            ),
+          );
+          return _el$6;
+        })(),
+    ),
 });
 _$delegateEvents(["click"]);

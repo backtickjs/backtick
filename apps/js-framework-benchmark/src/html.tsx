@@ -5,7 +5,7 @@ import { solid } from "@backtickjs/solid-js/plugin";
 import { Main } from "./Main.js";
 
 const bundle = await bundler.build({
-  input: cs`$render(() => <Main />, document.getElementById("main")!)`,
+  input: cs`$render(() => ${<Main />}, document.getElementById("main")!)`,
   external: { "solid-js": "1.9.14" },
   plugins: [solid()],
 });

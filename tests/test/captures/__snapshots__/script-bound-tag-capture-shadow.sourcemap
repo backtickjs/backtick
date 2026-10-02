@@ -1,3 +1,24 @@
+cs.lift((() =>                            → cs`
+(                                         → (
+__cs_props                                → props
+:                                         → : 
+{\n                                       → { 
+title                                     → title
+:                                         → : 
+string                                    → string
+;                                         → 
+\n}                                       →  }
+) =>                                      → ) => 
+<                                         → <
+h2                                        → h2
+>{                                        → >{
+__cs_props                                → props
+.                                         → .
+title                                     → title
+}</                                       → }</
+h2                                        → h2
+>                                         → >
+)())                                      → `
 cs.lift((() => {\n                        → cs`{\n    
 const                                     → const 
 __cs_Card                                 → Card

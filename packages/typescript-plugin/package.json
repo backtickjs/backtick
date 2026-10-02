@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
+    "@backtickjs/solid-js": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   },

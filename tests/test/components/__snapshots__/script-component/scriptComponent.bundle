@@ -4,17 +4,19 @@ import { createComponent as _$createComponent } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<h2>`),
   _tmpl$3 = /*#__PURE__*/ _$template(`<span>new`);
-const $cs0 = ($tag0, $tag1) => {
+const $cs0 = ($splice0, $splice1) => {
+  const Heading = $splice0();
+  const New = $splice1();
   return (() => {
     var _el$ = _tmpl$();
     _$insert(
       _el$,
-      _$createComponent($tag0, {
+      _$createComponent(Heading, {
         title: "totals",
       }),
       null,
     );
-    _$insert(_el$, _$createComponent($tag1, {}), null);
+    _$insert(_el$, _$createComponent(New, {}), null);
     return _el$;
   })();
 };
@@ -25,4 +27,7 @@ const $expn0 = () => ($arg0) =>
     return _el$2;
   })();
 const $expn1 = () => () => _tmpl$3();
-export default $cs0($expn0(), $expn1());
+export default $cs0(
+  () => $expn0(),
+  () => $expn1(),
+);

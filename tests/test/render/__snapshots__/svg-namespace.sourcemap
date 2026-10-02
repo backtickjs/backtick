@@ -28,7 +28,7 @@ stroke                                    → stroke
 }                                         → 
 />                                        →  />
 )())                                      → `
-cs.lift(((__cs_Ring = cs.splice(Ring), __cs_For = cs.splice(For)) => {\n    → cs`{\n  
+cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n  
 const                                     → const 
 __cs_Dot                                  → Dot
  =                                        →  = 
@@ -107,11 +107,11 @@ width                                     → width
 ={                                        → =
 "120"                                     → "120"
 }                                         → 
->{                                        → >\n        
-<                                         → <
-__cs_Ring                                 → Ring
- />                                       →  />
-}{                                        → \n        
+>{                                        → >\n        {
+cs.splice(                                → ${ [-semantic]
+<Ring />                                  → <Ring />
+)                                         → } [-semantic]
+}{                                        → }\n        
 <                                         → <
 __cs_For                                  → For
                                           →  

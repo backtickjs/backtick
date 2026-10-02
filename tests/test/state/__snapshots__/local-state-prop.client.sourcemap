@@ -32,39 +32,37 @@ $splice0()      → 19:16 $size[0]()…
 }               → 20:5 }
 
 // 27:10
-($splice0, $tag1) => {  → 27:13 {…
-const                   → 28:5 const 
-size                    → 28:11 size
- =                      → 28:15  = 
-$splice0()              → 28:18 $createSignal(16);…
-(                       → 28:31 (
-16                      → 28:32 16
-)                       → 28:34 )
-;                       → 28:35 ;
-return                  → 29:5 return 
-(                       → 29:12 (
-<                       → 30:7 <
-div                     → 30:8 div
->                       → 30:11 >
-<                       → 31:9 <
-$tag1                   → 31:10 SharedCounter…
-size                    → 31:24 size
-=                       → 31:28 =
-{                       → 31:29 {
-size                    → 31:30 size
-}                       → 31:34 }
-/>                      → 31:35  />…
-<                       → 32:9 <
-$tag1                   → 32:10 SharedCounter…
-size                    → 32:24 size
-=                       → 32:28 =
-{                       → 32:29 {
-size                    → 32:30 size
-}                       → 32:34 }
-/>                      → 32:35  />…
-</                      → 33:7 </
-div                     → 33:9 div
->                       → 33:12 >
-)                       → 33:13 …
-;                       → 34:6 ;
-}                       → 35:3 }
+($splice0, $splice1, $splice2) => {  → 27:13 {…
+const                                → 28:5 const 
+size                                 → 28:11 size
+ =                                   → 28:15  = 
+$splice0()                           → 28:18 $createSignal(16);…
+(                                    → 28:31 (
+16                                   → 28:32 16
+)                                    → 28:34 )
+;                                    → 28:35 ;
+return                               → 29:5 return 
+(                                    → 29:12 (
+<                                    → 30:7 <
+div                                  → 30:8 div
+>                                    → 30:11 >
+{                                    → 31:9 {
+$splice1(size)                       → 31:10 ${<SharedCounter…
+}                                    → 31:46 }
+{                                    → 32:9 {
+$splice2(size)                       → 32:10 ${<SharedCounter…
+}                                    → 32:46 }
+</                                   → 33:7 </
+div                                  → 33:9 div
+>                                    → 33:12 >
+)                                    → 33:13 …
+;                                    → 34:6 ;
+}                                    → 35:3 }
+
+// 31:33
+($capture0) =>   → 31:36 size`}…
+$capture0        → 31:36 size`}…
+
+// 32:33
+($capture0) =>   → 32:36 size`}…
+$capture0        → 32:36 size`}…

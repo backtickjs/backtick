@@ -1,7 +1,9 @@
 // 27:5
-($tag0, $tag1) => {
+($splice0, $splice1) => {
+    const Heading = $splice0();
+    const New = $splice1();
     return (<div>
-          <$tag0 title="totals"/>
-          <$tag1 />
+          <Heading title="totals"/>
+          <New />
         </div>);
 }

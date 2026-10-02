@@ -1,2 +1,5 @@
 // 27:5
-($tag0) => <$tag0 person={{ firstName: "ada" }}/>
+($splice0) => {
+    const Greet = $splice0();
+    return <Greet person={{ firstName: "ada" }}/>;
+}

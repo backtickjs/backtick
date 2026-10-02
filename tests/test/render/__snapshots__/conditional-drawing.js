@@ -25,21 +25,14 @@ import { evaluate } from "../evaluate.ts";
 // `builds` is the page's, so it survives a rebuild and counts them. It also
 // ends one: once it stops saying yes, nothing is written and nothing runs
 // again. Without that, this case does not stop.
-async function Held({ again }) {
-  return cs.create(
-    "19wmlt4siguvo:32:9",
-    {
-      params: [
-        { kind: "splice", value: createSignal, bindings: [] },
-        { kind: "splice", value: again, bindings: [] },
-      ],
-    },
-    "($splice0, $splice1) => {\n    const shown = $splice0()(false);\n    const started = window.setTimeout(() => {\n        if ($splice1()()) {\n            shown[1](true);\n        }\n    }, 0);\n    return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;\n}",
-    '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["render/conditional-drawing.test.tsx"],"names":[],"mappings":"AA+BY;IACR,MAAM,KAAK,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAEnC,MAAM,OAAO,GAAG,MAAM,CAAC,UAAU,CAAC,GAAG,EAAE;QACrC,IAAI,UAAM,EAAE,EAAE,CAAC;YACb,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QACjB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,KAAK,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC;AAC7D,CAAC"}',
-  );
-}
+const Held = cs.create(
+  "2u9nfrz55jzvf:30:13",
+  { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
+  "($splice0) => (props) => {\n    const shown = $splice0()(false);\n    const started = window.setTimeout(() => {\n        if (props.again()) {\n            shown[1](true);\n        }\n    }, 0);\n    return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;\n}",
+  '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["render/conditional-drawing.test.tsx"],"names":[],"mappings":"AA6BgB,cAAA,CAAC,KAA+B,EAAE,EAAE;IAClD,MAAM,KAAK,GAAG,UAAa,CAAC,KAAK,CAAC,CAAC;IAEnC,MAAM,OAAO,GAAG,MAAM,CAAC,UAAU,CAAC,GAAG,EAAE;QACrC,IAAI,KAAK,CAAC,KAAK,EAAE,EAAE,CAAC;YAClB,KAAK,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC;QACjB,CAAC;IACH,CAAC,EAAE,CAAC,CAAC,CAAC;IAEN,OAAO,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,KAAK,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,EAAE,CAAC,CAAC,CAAC,GAAG,CAAC;AAC7D,CAAC"}',
+);
 const conditionalDrawing = cs.create(
-  "19wmlt4siguvo:45:27",
+  "2u9nfrz55jzvf:42:27",
   {
     params: [
       { kind: "splice", value: createSignal, bindings: [] },
@@ -47,7 +40,7 @@ const conditionalDrawing = cs.create(
     ],
   },
   '($splice0, $tag1) => {\n    const builds = $splice0()(0);\n    return (<div>\n      <span>{"builds " + builds[0]()}</span>\n      <section>\n        <$tag1 again={() => {\n            builds[1](builds[0]() + 1);\n            return builds[0]() < 5;\n        }}/>\n      </section>\n    </div>);\n}',
-  '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["render/conditional-drawing.test.tsx"],"names":[],"mappings":"AA4C8B;IAC5B,MAAM,MAAM,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAEhC,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,SAAS,GAAG,MAAM,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACrC;MAAA,CAAC,OAAO,CACN;QAAA,CAAC,KAAI,CACH,KAAK,CAAC,CAAC,GAAG,EAAE;YACV,MAAM,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YAC3B,OAAO,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACzB,CAAC,CAAC,EAEN;MAAA,EAAE,OAAO,CACX;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+  '{"version":3,"file":"conditional-drawing.test.jsx","sourceRoot":"","sources":["render/conditional-drawing.test.tsx"],"names":[],"mappings":"AAyC8B;IAC5B,MAAM,MAAM,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAEhC,OAAO,CACL,CAAC,GAAG,CACF;MAAA,CAAC,IAAI,CAAC,CAAC,SAAS,GAAG,MAAM,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,IAAI,CACrC;MAAA,CAAC,OAAO,CACN;QAAA,CAAC,KAAI,CACH,KAAK,CAAC,CAAC,GAAG,EAAE;YACV,MAAM,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;YAC3B,OAAO,MAAM,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC;QACzB,CAAC,CAAC,EAEN;MAAA,EAAE,OAAO,CACX;IAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
 );
 describe("a component whose drawing is a conditional", () => {
   it("is built once, and draws the branch the write chose", async () => {

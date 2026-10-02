@@ -38,14 +38,14 @@ const $cs3 = ($capture0) =>
     n: 1,
   });
 const $cs4 = () => "b";
-const $expn0 = () => ($arg0) =>
+const $cs5 = () => (props) =>
   (() => {
     var _el$4 = _tmpl$4();
-    _$insert(_el$4, () => $arg0.title);
+    _$insert(_el$4, () => props.title);
     return _el$4;
   })();
 export default $cs0(
   () => $cs1($cs2, $cs3),
   () => $cs1($cs4, $cs3),
-  $expn0(),
+  $cs5(),
 );

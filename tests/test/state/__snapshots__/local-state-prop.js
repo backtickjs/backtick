@@ -13,13 +13,13 @@ import { children, drawn, fontSize } from "./dom.ts";
 const SharedCounter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
-      "2fkkj1luwrgzm:17:11",
+      "21asyyklgxxq8:17:11",
       { params: [{ kind: "splice", value: size, bindings: [] }] },
       '($splice0) => "font-size: " + $splice0()[0]() + "px"',
       '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAgBc,cAAA,aAAa,GAAG,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI"}',
     ),
     onclick: cs.create(
-      "2fkkj1luwrgzm:18:13",
+      "21asyyklgxxq8:18:13",
       { params: [{ kind: "splice", value: size, bindings: [] }] },
       "($splice0) => () => {\n    $splice0()[1]($splice0()[0]() + 1);\n}",
       '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAiBgB,cAAA,GAAG,EAAE;IACf,UAAK,CAAC,CAAC,CAAC,CAAC,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
@@ -28,15 +28,38 @@ const SharedCounter = async ({ size }) =>
   });
 async function SharingPanel() {
   return cs.create(
-    "2fkkj1luwrgzm:27:9",
+    "21asyyklgxxq8:27:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
-        { kind: "tag", value: SharedCounter },
+        {
+          kind: "splice",
+          value: _jsx(SharedCounter, {
+            size: cs.create(
+              "21asyyklgxxq8:31:32",
+              { params: [{ kind: "capture", key: "size$21asyyklgxxq8$0" }] },
+              "($capture0) => $capture0",
+              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA8BmC,eAAA,SAAI"}',
+            ),
+          }),
+          bindings: ["size$21asyyklgxxq8$0"],
+        },
+        {
+          kind: "splice",
+          value: _jsx(SharedCounter, {
+            size: cs.create(
+              "21asyyklgxxq8:32:32",
+              { params: [{ kind: "capture", key: "size$21asyyklgxxq8$0" }] },
+              "($capture0) => $capture0",
+              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA+BmC,eAAA,SAAI"}',
+            ),
+          }),
+          bindings: ["size$21asyyklgxxq8$0"],
+        },
       ],
     },
-    "($splice0, $tag1) => {\n    const size = $splice0()(16);\n    return (<div>\n        <$tag1 size={size}/>\n        <$tag1 size={size}/>\n      </div>);\n}",
-    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA0BY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,KAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC1B;QAAA,CAAC,KAAa,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,EAC5B;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    "($splice0, $splice1, $splice2) => {\n    const size = $splice0()(16);\n    return (<div>\n        {$splice1(size)}\n        {$splice2(size)}\n      </div>);\n}",
+    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA0BY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,cAAoC,CACrC;QAAA,CAAC,cAAoC,CACvC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
   );
 }
 describe("local state", () => {

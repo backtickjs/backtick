@@ -1,14 +1,24 @@
-cs.lift(((__cs_Greeting = cs.splice(Greeting)) => → cs`
-<                                         → <
-__cs_Greeting                             → Greeting
-                                          →  
-person                                    → person
-={                                        → ={
-{                                         → { 
-firstName                                 → firstName
-:                                         → : 
-"ada"                                     → "ada"
- }                                        →  }
-}                                         → }
-/>                                        →  />
-)())                                      → `
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_Greet              → Greet
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(Greeting)              → $Greeting
+)                       →  [-semantic]
+;                       → ;
+\n                      → \n      
+return                  → return 
+<                       → <
+__cs_Greet              → Greet
+                        →  
+person                  → person
+={                      → ={
+{                       → { 
+firstName               → firstName
+:                       → : 
+"ada"                   → "ada"
+ }                      →  }
+}                       → }
+/>                      →  />
+;                       → ;
+\n})())                 → \n    }`

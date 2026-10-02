@@ -1,15 +1,15 @@
-// 32:10
-($splice0, $splice1) => {
+// 30:14
+($splice0) => (props) => {
     const shown = $splice0()(false);
     const started = window.setTimeout(() => {
-        if ($splice1()()) {
+        if (props.again()) {
             shown[1](true);
         }
     }, 0);
     return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;
 }
 
-// 45:28
+// 42:28
 ($splice0, $tag1) => {
     const builds = $splice0()(0);
     return (<div>

@@ -410,8 +410,17 @@ export async function buildBundle(
       param.kind === "capture" ? [] : [param],
     );
     for (const [index, { kind, value: arg }] of splices.entries()) {
-      // A tag is handed over as the value it names, as its script reads it.
+      // A tag is handed over as the value it names, as its script reads it: a
+      // client component. A server component is host code, used in a splice.
       if (kind === "tag") {
+        if (typeof arg === "function") {
+          const name = arg.name;
+          throw new Error(
+            `\`<${name}>\` is a server component, so it can't be a tag in a ` +
+              "script, whose tags are client components. Use it in a splice: " +
+              `\`{\${<${name} />}}\`.`,
+          );
+        }
         parts.push(await render(arg, scope));
         continue;
       }

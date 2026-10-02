@@ -4,7 +4,6 @@ import { cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 import { evaluate } from "../evaluate.ts";
 
 // A block whose drawing is a conditional, and a write that answers it.
@@ -28,19 +27,17 @@ import { evaluate } from "../evaluate.ts";
 // `builds` is the page's, so it survives a rebuild and counts them. It also
 // ends one: once it stops saying yes, nothing is written and nothing runs
 // again. Without that, this case does not stop.
-async function Held({ again }: { again: Prop<() => boolean> }) {
-  return cs`{
-    const shown = $createSignal(false);
+const Held = cs`(props: { again: () => boolean }) => {
+  const shown = $createSignal(false);
 
-    const started = window.setTimeout(() => {
-      if ($again()) {
-        shown[1](true);
-      }
-    }, 0);
+  const started = window.setTimeout(() => {
+    if (props.again()) {
+      shown[1](true);
+    }
+  }, 0);
 
-    return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;
-  }`;
-}
+  return <>{shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;
+}`;
 
 const conditionalDrawing = cs`{
   const builds = $createSignal(0);

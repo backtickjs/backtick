@@ -37,13 +37,13 @@ const scriptBoundTagCarried = cs`{
 
   return (
     <div>
-      <Panel
-        body={
-          ${cs`<Badge n={count[0]()}>
+      {${(
+        <Panel
+          body={cs`<Badge n={count[0]()}>
             <u>{"kid " + count[0]()}</u>
           </Badge>`}
-        }
-      />
+        />
+      )}}
       <button onclick={() => count[1](count[0]() + 1)}>more</button>
     </div>
   );

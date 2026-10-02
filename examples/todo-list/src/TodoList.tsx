@@ -83,13 +83,14 @@ export async function TodoList() {
 
         <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">
           <For each={showing()}>
-            {(task: { label: string; isDone: boolean }) => (
-              <Task
-                label={task.label}
-                isDone={task.isDone}
-                onPress={() => onPress(task.label)}
-              />
-            )}
+            {(task) =>
+              ${(
+                <Task
+                  task={cs`task`}
+                  onPress={cs`() => onPress(task.label)`}
+                />
+              )}
+            }
           </For>
         </ul>
       </div>

@@ -472,6 +472,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      '@backtickjs/solid-js':
+        specifier: workspace:*
+        version: link:../solid-js
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

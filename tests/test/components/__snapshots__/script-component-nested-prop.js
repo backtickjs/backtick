@@ -21,10 +21,10 @@ it("scriptComponentNestedProp", async (t) => {
     t,
     "scriptComponentNestedProp",
     cs.create(
-      "3l3kfzos4omxz:27:4",
-      { params: [{ kind: "tag", value: Greeting }] },
-      '($tag0) => <$tag0 person={{ firstName: "ada" }}/>',
-      '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["components/script-component-nested-prop.test.tsx"],"names":[],"mappings":"AA0BO,WAAA,CAAC,KAAQ,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG"}',
+      "1a3txuunxwctl:27:4",
+      { params: [{ kind: "splice", value: Greeting, bindings: [] }] },
+      '($splice0) => {\n    const Greet = $splice0();\n    return <Greet person={{ firstName: "ada" }}/>;\n}',
+      '{"version":3,"file":"script-component-nested-prop.test.jsx","sourceRoot":"","sources":["components/script-component-nested-prop.test.tsx"],"names":[],"mappings":"AA0BO;IACD,MAAM,KAAK,GAAG,UAAS,CAAC;IACxB,OAAO,CAAC,KAAK,CAAC,MAAM,CAAC,CAAC,EAAE,SAAS,EAAE,KAAK,EAAE,CAAC,EAAG,CAAC;AACjD,CAAC"}',
     ),
   );
 });

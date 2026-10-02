@@ -1,14 +1,22 @@
 // 27:5
-($tag0) =>   → 27:8 <Greeting…
-<            → 27:8 <
-$tag0        → 27:9 Greeting…
-person       → 27:18 person
-=            → 27:24 =
-{            → 27:25 {
-{            → 27:26 { 
-firstName    → 27:28 firstName
-:            → 27:37 : 
-"ada"        → 27:39 "ada"
- }           → 27:44  }
-}            → 27:46 }
-/>           → 27:47  />`,…
+($splice0) => {  → 27:8 {…
+const            → 28:7 const 
+Greet            → 28:13 Greet
+ =               → 28:18  = 
+$splice0()       → 28:21 $Greeting;…
+;                → 28:30 ;
+return           → 29:7 return 
+<                → 29:14 <
+Greet            → 29:15 Greet
+person           → 29:21 person
+=                → 29:27 =
+{                → 29:28 {
+{                → 29:29 { 
+firstName        → 29:31 firstName
+:                → 29:40 : 
+"ada"            → 29:42 "ada"
+ }               → 29:47  }
+}                → 29:49 }
+/>               → 29:50  />;…
+;                → 29:53 ;
+}                → 30:5 }

@@ -1,5 +1,5 @@
-import { cs } from "@backtickjs/core";
-import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
+import { type Client, cs } from "@backtickjs/core";
+import type { Game } from "./scores.js";
 import { TeamLine } from "./TeamLine.js";
 
 // Left open on purpose: the card's border colour is the one thing about it the
@@ -12,61 +12,39 @@ const card =
 // down on the right.
 //
 // Nothing here is decided on the server: the same card draws a kickoff time, a
-// third quarter and a final, because which of those it is arrives in `clock`
+// third quarter and a final, because which of those it is arrives in `game`
 // and changes under it between polls.
-export async function GameCard({
-  awayRank,
-  awayName,
-  awayScore,
-  homeRank,
-  homeName,
-  homeScore,
-  clock,
-  isLive,
-  possession,
-  detail,
-}: {
-  awayRank: Prop<number>;
-  awayName: Prop<string>;
-  awayScore: Prop<number>;
-  homeRank: Prop<number>;
-  homeName: Prop<string>;
-  homeScore: Prop<number>;
-  clock: Prop<string>;
-  isLive: Prop<boolean>;
-  possession: Prop<string>;
-  detail: Prop<string>;
-}) {
-  return (
-    <li style={cs`$card + ($isLive ? "#86efac" : "#e4e4e7")`}>
-      <div style="display: grid; gap: 5px; flex: 1">
+export async function GameCard({ game }: { game: Client<Game> }) {
+  return cs`<li style={$card + ($game.isLive ? "#86efac" : "#e4e4e7")}>
+    <div style="display: grid; gap: 5px; flex: 1">
+      {${(
         <TeamLine
-          rank={awayRank}
-          name={awayName}
-          score={awayScore}
-          hasBall={cs`$possession === "away"`}
-          isTrailing={cs`$awayScore < $homeScore`}
+          rank={cs`$game.awayRank`}
+          name={cs`$game.awayName`}
+          score={cs`$game.awayScore`}
+          hasBall={cs`$game.possession === "away"`}
+          isTrailing={cs`$game.awayScore < $game.homeScore`}
         />
+      )}}
+      {${(
         <TeamLine
-          rank={homeRank}
-          name={homeName}
-          score={homeScore}
-          hasBall={cs`$possession === "home"`}
-          isTrailing={cs`$homeScore < $awayScore`}
+          rank={cs`$game.homeRank`}
+          name={cs`$game.homeName`}
+          score={cs`$game.homeScore`}
+          hasBall={cs`$game.possession === "home"`}
+          isTrailing={cs`$game.homeScore < $game.awayScore`}
         />
-      </div>
+      )}}
+    </div>
 
-      <div style="display: grid; gap: 3px; justify-items: end; text-align: right">
-        {/* Time remaining, in the colour that says whether it is running. */}
-        <span
-          style={cs`"font-size: 13px; font-variant-numeric: tabular-nums;" +
-            " color: " +
-            ($isLive ? "#15803d" : "#71717a")`}
-        >
-          {clock}
-        </span>
-        <span style="font-size: 12px; color: #a1a1aa">{detail}</span>
-      </div>
-    </li>
-  );
+    <div style="display: grid; gap: 3px; justify-items: end; text-align: right">
+      <span
+        style={"font-size: 13px; font-variant-numeric: tabular-nums; color: " +
+          ($game.isLive ? "#15803d" : "#71717a")}
+      >
+        {$game.clock}
+      </span>
+      <span style="font-size: 12px; color: #a1a1aa">{$game.detail}</span>
+    </div>
+  </li>`;
 }

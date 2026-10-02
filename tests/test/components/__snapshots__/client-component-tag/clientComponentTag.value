@@ -1,0 +1,11 @@
+<div>
+  <b>
+    {"badge 1"}
+  </b>
+  <b>
+    {"badge 2"}
+  </b>
+  <button>
+    {"double"}
+  </button>
+</div>

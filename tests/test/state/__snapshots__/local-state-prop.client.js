@@ -7,10 +7,16 @@
 }
 
 // 27:10
-($splice0, $tag1) => {
+($splice0, $splice1, $splice2) => {
     const size = $splice0()(16);
     return (<div>
-        <$tag1 size={size}/>
-        <$tag1 size={size}/>
+        {$splice1(size)}
+        {$splice2(size)}
       </div>);
 }
+
+// 31:33
+($capture0) => $capture0
+
+// 32:33
+($capture0) => $capture0
