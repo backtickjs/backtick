@@ -2,7 +2,6 @@ import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import { call, varDeclList } from "./nodeFactory.js";
 import { isComponentTag } from "./isComponentTag.js";
-import { isFragmentTag } from "./isFragmentTag.js";
 import { jsxText } from "./jsxText.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -595,8 +594,9 @@ function rewriteNodeImpl(
       properties = opening.attributes.properties;
     }
 
-    // `<>` and `<Fragment>` lower the same way
-    const isFragment = opening === null || isFragmentTag(tagName);
+    // `<>` is the fragment; a `<Fragment>` is a tag like any other, naming
+    // whatever `Fragment` is in scope.
+    const isFragment = opening === null;
     // A component tag is written mangled: the script's own binding of that
     // name, or, for a host tag, the alias declared around the script as the
     // tag spliced — a server component with its props lowered to their client

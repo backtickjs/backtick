@@ -3,6 +3,7 @@ import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { flattenScripts } from "./flattenScripts.js";
 import { hashText } from "./hashText.js";
+import { hostElementDiagnostics } from "./hostElements.js";
 import type { ParsedFile } from "./parseFile.js";
 import { resolveBindings } from "./resolveBindings.js";
 import { type RewrittenScript, rewriteScript } from "./rewriteScript.js";
@@ -54,6 +55,8 @@ export function rewriteFile(
     }
     diagnostics.push(...rewritten.diagnostics);
   }
+
+  diagnostics.push(...hostElementDiagnostics(ts, sourceFile));
 
   return { sourceFile, scripts, sourceMaps, codeInformation, diagnostics };
 }

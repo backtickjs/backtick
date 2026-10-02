@@ -1,9 +1,8 @@
-19:30 error TS2339: Property 'blink' does not exist on type 'JSX.IntrinsicElements'.
-26:30 error TS2604: JSX element type 'NotATag' does not have any construct or call signatures.
-26:30 error TS2786: 'NotATag' cannot be used as a JSX component.
+18:30 error TS2339: Property 'blink' does not exist on type 'JSX.IntrinsicElements'.
+25:30 error TS2604: JSX element type 'NotATag' does not have any construct or call signatures.
+25:30 error TS2786: 'NotATag' cannot be used as a JSX component.
   Its type '{ id: string; }' is not a valid JSX element type.
-46:34 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'HTMLAttributes<HTMLDivElement>'.
+41:34 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'HTMLAttributes<HTMLDivElement>'.
   Property 'nosuch' does not exist on type 'HTMLAttributes<HTMLDivElement>'.
-50:34 error TS2322: Type 'number' is not assignable to type 'string'.
-54:47 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'IntrinsicAttributes & { children?: unknown; }'.
-  Property 'nosuch' does not exist on type 'IntrinsicAttributes & { children?: unknown; }'.
+45:34 error TS2322: Type 'number' is not assignable to type 'string'.
+50:25 error TS2304: Cannot find name 'Fragment'.

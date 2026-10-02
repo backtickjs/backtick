@@ -1,6 +1,5 @@
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
-import { Fragment } from "@backtickjs/solid-js/jsx-runtime";
 
 // What the JSX namespace admits, and what it refuses, in a script.
 //
@@ -26,8 +25,6 @@ const NotATag = { id: "View" };
 export const wrongKind = cs.lift(((__cs_NotATag = cs.splice(NotATag)) => <__cs_NotATag />)());
 
 // ─── what arranges rather than draws ──────────────────────────────────
-export const fragment = cs.lift((() => <Fragment>{<span>a</span>}</Fragment>)());
-
 export const shorthand = cs.lift((() => <>{<span>a</span>}</>)());
 
 export const list = cs.lift(((__cs_For = cs.splice(For)) => <__cs_For each={[] as number[]}>{__cs_n => <i>{__cs_n}</i>}</__cs_For>)());
@@ -45,9 +42,10 @@ export const strayProp = cs.lift((() => <div nosuch={1}/>)());
 // @ts-expect-error: Type 'number' is not assignable to type 'string'.
 export const wrongType = cs.lift((() => <div class={1}/>)());
 
-// a fragment takes children and nothing else
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'IntrinsicAttributes & { children?: unknown; }'.
-export const strayFragmentProp = cs.lift((() => <Fragment nosuch={1}/>)());
+// `<>` is the fragment, and `<Fragment>` a tag like any other: here it names
+// nothing
+// @ts-expect-error: Cannot find name 'Fragment'.
+export const named = cs.lift(((__cs_Fragment = cs.splice(Fragment)) => <__cs_Fragment />)());
 
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs.lift((() => <div>hello</div>)());

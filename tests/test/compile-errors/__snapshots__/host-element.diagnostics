@@ -1,0 +1,5 @@
+9:25-9:28 error TS0: `<div>` is drawn by the client, so it belongs in a script: cs`<div>…</div>`.
+10:24-10:25 error TS0: `<p>` is drawn by the client, so it belongs in a script: cs`<p>…</p>`.
+13:6-13:10 error TS0: `<span>` is drawn by the client, so it belongs in a script: cs`<span>…</span>`.
+16:37-16:39 error TS0: `<li>` is drawn by the client, so it belongs in a script: cs`<li>…</li>`.
+17:24-17:33 error TS0: `<my-widget>` is drawn by the client, so it belongs in a script: cs`<my-widget>…</my-widget>`.

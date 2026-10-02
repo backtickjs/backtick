@@ -1,7 +1,6 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
 import { isComponentTag } from "./isComponentTag.js";
-import { isFragmentTag } from "./isFragmentTag.js";
 
 /**
  * A single lexical-scope pass over every client script in a file. It produces
@@ -456,11 +455,7 @@ export function resolveBindings(
             ? [opening.tagName, node.closingElement.tagName]
             : [opening.tagName];
       for (const tag of tags) {
-        if (
-          ts.isIdentifier(tag) &&
-          isComponentTag(tag.text) &&
-          !isFragmentTag(tag.text)
-        ) {
+        if (ts.isIdentifier(tag) && isComponentTag(tag.text)) {
           if (resolve(tag.text, scopes) === null) {
             // Its own parameter, even where the script also splices the
             // binding as `$Name`: a tag is handed over as its value, a splice

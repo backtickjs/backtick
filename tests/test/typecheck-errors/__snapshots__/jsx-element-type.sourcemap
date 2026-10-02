@@ -19,19 +19,6 @@ __cs_NotATag                              → NotATag
  />                                       →  />
 )())                                      → `
 cs.lift((() =>                            → cs`
-<                                         → <
-Fragment                                  → Fragment
->{                                        → >\n  
-<                                         → <
-span                                      → span
->a</                                      → >a</
-span                                      → span
->                                         → >
-}</                                       → \n</
-Fragment                                  → Fragment
->                                         → >
-)())                                      → `
-cs.lift((() =>                            → cs`
 <>{                                       → <>\n  
 <                                         → <
 span                                      → span
@@ -85,15 +72,10 @@ class                                     → class
 }                                         → }
 />                                        →  />
 )())                                      → `
-cs.lift((() =>                            → cs`
+cs.lift(((__cs_Fragment = cs.splice(Fragment)) => → cs`
 <                                         → <
-Fragment                                  → Fragment
-                                          →  
-nosuch                                    → nosuch
-={                                        → ={
-1                                         → 1
-}                                         → }
-/>                                        →  />
+__cs_Fragment                             → Fragment
+ />                                       →  />
 )())                                      → `
 cs.lift((() =>                            → cs`
 <                                         → <

@@ -1,6 +1,5 @@
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
-import { Fragment } from "@backtickjs/solid-js/jsx-runtime";
 
 // What the JSX namespace admits, and what it refuses, in a script.
 //
@@ -26,10 +25,6 @@ const NotATag = { id: "View" };
 export const wrongKind = cs`<NotATag />`;
 
 // ─── what arranges rather than draws ──────────────────────────────────
-export const fragment = cs`<Fragment>
-  <span>a</span>
-</Fragment>`;
-
 export const shorthand = cs`<>
   <span>a</span>
 </>`;
@@ -49,9 +44,10 @@ export const strayProp = cs`<div nosuch={1} />`;
 // @ts-expect-error: Type 'number' is not assignable to type 'string'.
 export const wrongType = cs`<div class={1} />`;
 
-// a fragment takes children and nothing else
-// @ts-expect-error: Type '{ nosuch: number; }' is not assignable to type 'IntrinsicAttributes & { children?: unknown; }'.
-export const strayFragmentProp = cs`<Fragment nosuch={1} />`;
+// `<>` is the fragment, and `<Fragment>` a tag like any other: here it names
+// nothing
+// @ts-expect-error: Cannot find name 'Fragment'.
+export const named = cs`<Fragment />`;
 
 // ─── children, which are structure ────────────────────────────────────
 export const text = cs`<div>hello</div>`;
