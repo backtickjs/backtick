@@ -142,7 +142,8 @@ describe("captures", () => {
           "const script = cs`{ const foo = (a: number) => a; const x = 1; " +
             "return ${cs`foo(x)`}; }`;",
         ),
-        ["foo$hash$0", "x$hash$1"],
+        // Counted in source order: `a` is declared between them.
+        ["foo$hash$0", "x$hash$2"],
       );
     });
 
@@ -163,6 +164,59 @@ describe("captures", () => {
             'return ${cs`{ const s = "a"; return s.concat(y); }`}; }`;',
         ),
         ["y$hash$0"],
+      );
+    });
+  });
+
+  // Syntax the resolver reads as the language does, whether or not the rest
+  // of the compiler accepts it yet.
+  describe("any declaration binds", () => {
+    it("a destructured name", () => {
+      assert.deepStrictEqual(
+        nested(
+          "const script = cs`{ const { a, b: [c] } = { a: 1, b: [2] }; " +
+            "return ${cs`a + c`}; }`;",
+        ),
+        ["a$hash$0", "c$hash$1"],
+      );
+    });
+
+    it("a function declaration, before it is written", () => {
+      assert.deepStrictEqual(
+        nested(
+          "const script = cs`{ const g = ${cs`f()`}; function f() { return 1; } }`;",
+        ),
+        ["f$hash$1"],
+      );
+    });
+
+    it("a class, a `var` and a `for…of` binding", () => {
+      assert.deepStrictEqual(
+        nested(
+          "const script = cs`{ class C {} var v = 1; " +
+            "for (const item of [1]) { ${cs`[C, v, item]`}; } }`;",
+        ),
+        ["C$hash$0", "v$hash$1", "item$hash$2"],
+      );
+    });
+
+    it("a catch binding, in its handler only", () => {
+      assert.deepStrictEqual(
+        nested(
+          "const script = cs`{ try {} catch (error) { ${cs`error`}; } " +
+            "${cs`error`}; }`;",
+        ),
+        ["error$hash$0"],
+      );
+    });
+
+    it("a name only a type spells binds nothing", () => {
+      assert.deepStrictEqual(
+        nested(
+          "const script = cs`{ const n = 1; " +
+            "${cs`((f: (n: string) => void) => n)`}; }`;",
+        ),
+        ["n$hash$0"],
       );
     });
   });

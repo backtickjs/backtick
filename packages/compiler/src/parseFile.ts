@@ -37,6 +37,8 @@ export interface BracedSplice {
   key: string;
   // client scripts nested in the host expression
   scripts: ClientScript[];
+  // where the script reads it, in the placeholder text
+  refs: ts.Identifier[];
 }
 
 export interface UnbracedSplice {
@@ -48,6 +50,8 @@ export interface UnbracedSplice {
   key: string;
   // a shorthand names a single binding, so it nests no scripts
   scripts: [];
+  // where the script reads it, in the placeholder text
+  refs: ts.Identifier[];
 }
 
 export function parseSourceText(
@@ -134,14 +138,13 @@ function getDirectScripts(
   return scripts;
 }
 
-// A splice per first reference in the placeholder text, in source order: a
-// `$0splice<n>` placeholder resolves to its template span's braced splice,
-// and any other `$x` identifier mints an unbraced splice, deduplicated by
-// spelling. A component tag mints one as well, under the `$Name` key that
-// binding's shorthand would use. Property names and declaration names are not
-// references (a `$`-prefixed declaration is rejected at rewrite time), and
-// nested scripts are already placeholders in this text, so the walk scans only
-// the script's own body.
+// A splice per first reference in the placeholder text, in source order, and
+// every reference to it: a `$0splice<n>` placeholder resolves to its template
+// span's braced splice, and any other `$x` identifier mints an unbraced
+// splice, deduplicated by spelling. Property, attribute and declaration names
+// are not references (a `$`-prefixed declaration is rejected at rewrite time),
+// and nested scripts are already placeholders in this text, so the walk scans
+// only the script's own body.
 function getDirectSplices(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
@@ -165,9 +168,19 @@ function getDirectSplices(
       visit(node.initializer);
       return;
     }
-    if (ts.isVariableDeclaration(node) || ts.isParameter(node)) {
+    if (
+      ts.isVariableDeclaration(node) ||
+      ts.isParameter(node) ||
+      ts.isBindingElement(node)
+    ) {
       if (node.initializer) {
         visit(node.initializer);
+      }
+      return;
+    }
+    if (ts.isJsxAttribute(node)) {
+      if (node.initializer) {
+        visit(node.initializer); // the name is not a reference
       }
       return;
     }
@@ -175,11 +188,14 @@ function getDirectSplices(
       visit(node.block); // the catch binding is not a reference
       return;
     }
+    if (ts.isIdentifier(node) && splices[node.text] != null) {
+      splices[node.text]!.refs.push(node);
+      return;
+    }
     if (
       ts.isIdentifier(node) &&
       node.text.startsWith("$") &&
-      node.text.length > 1 &&
-      splices[node.text] == null
+      node.text.length > 1
     ) {
       const key = node.text;
       if (key.startsWith("$0splice")) {
@@ -195,6 +211,7 @@ function getDirectSplices(
             expression: span.expression,
             key,
             scripts: [],
+            refs: [node],
           };
           splices[key] = splice;
           splice.scripts = getDirectScripts(ts, splice, sourceFile);
@@ -205,6 +222,7 @@ function getDirectSplices(
           expression: ts.factory.createIdentifier(key.slice(1)),
           key,
           scripts: [],
+          refs: [node],
         };
       }
       return;
