@@ -51,3 +51,18 @@ span                        → span
 >                           → >\n    )
 ;                           → ;
 \n})())                     → \n  }`
+cs.lift((() =>              → cs`
+<                           → <
+div                         → div
+>{                          → >\n  {
+cs.splice(                  → ${ [-semantic]
+(<OwnCounter />)            → (<OwnCounter />)
+)                           → } [-semantic]
+}{                          → }\n  {
+cs.splice(                  → ${ [-semantic]
+(<OwnCounter />)            → (<OwnCounter />)
+)                           → } [-semantic]
+}</                         → }\n</
+div                         → div
+>                           → >
+)())                        → `

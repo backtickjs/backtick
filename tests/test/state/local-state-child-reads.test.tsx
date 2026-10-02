@@ -23,14 +23,12 @@ const ReadingRow = async ({
 }: {
   id: Client<number>;
   selected: Client<Signal<number>>;
-}) => (
-  <div>
-    <span style={cs`"font-size: " + ($selected[0]() === $id ? 20 : 16) + "px"`}>
-      {cs`"row " + $id + " of " + $selected[0]()`}
-    </span>
-    {cs`$selected[0]() === $id ? ${(<span>marker</span>)} : null`}
-  </div>
-);
+}) => cs`<div>
+  <span style={"font-size: " + ($selected[0]() === $id ? 20 : 16) + "px"}>
+    {"row " + $id + " of " + $selected[0]()}
+  </span>
+  {$selected[0]() === $id ? <span>marker</span> : null}
+</div>`;
 
 async function ReadingPanel() {
   return cs`{

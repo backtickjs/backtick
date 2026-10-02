@@ -5,64 +5,51 @@ import {
   ErrorBoundary,
   Index,
   Match,
-  Portal,
   Suspense,
   Switch,
 } from "@backtickjs/solid-js";
+import { Portal } from "@backtickjs/solid-js/web";
 import { evaluate } from "../evaluate.ts";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// Solid's control flow written in host JSX, around what scripts draw: each is
-// a server component, so the host can write it where a page is laid out.
+// Solid's control flow in a script, as Solid types and draws it.
 
 const rows = ["first", "second"];
 
-const indexed = (
-  <ul>
-    <Index each={cs`$rows`}>
-      {cs`(row: () => string, index: number) => (
-        <li>{index + ": " + row()}</li>
-      )`}
-    </Index>
-  </ul>
-);
+const indexed = cs`<ul>
+  <Index each={$rows}>
+    {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}
+  </Index>
+</ul>`;
 
-const switched = (
-  <Switch fallback={<p>none</p>}>
-    <Match when={cs`1 > 2`}>
-      <p>wrong</p>
-    </Match>
-    <Match when={cs`2 > 1`}>
-      <p>right</p>
-    </Match>
-  </Switch>
-);
+const switched = cs`<Switch fallback={<p>none</p>}>
+  <Match when={1 > 2}>
+    <p>wrong</p>
+  </Match>
+  <Match when={2 > 1}>
+    <p>right</p>
+  </Match>
+</Switch>`;
 
-const caught = (
-  <ErrorBoundary fallback={<p>caught</p>}>
-    {cs`{
-      throw "drawn wrong";
-    }`}
-  </ErrorBoundary>
-);
+const caught = cs`<ErrorBoundary fallback={<p>caught</p>}>{
+  ${cs`{
+    throw "drawn wrong";
+  }`}
+}</ErrorBoundary>`;
 
-const suspended = (
-  <Suspense fallback={<p>loading</p>}>
-    <p>loaded</p>
-  </Suspense>
-);
+const suspended = cs`<Suspense fallback={<p>loading</p>}>
+  <p>loaded</p>
+</Suspense>`;
 
-const portaled = (
-  <div>
-    <p>here</p>
-    <Portal>
-      <p>elsewhere</p>
-    </Portal>
-  </div>
-);
+const portaled = cs`<div>
+  <p>here</p>
+  <Portal>
+    <p>elsewhere</p>
+  </Portal>
+</div>`;
 
-describe("control flow in host JSX", () => {
+describe("control flow in a script", () => {
   it("draws each position with Index", async () => {
     render(await evaluate(() => indexed));
     assert.deepEqual(

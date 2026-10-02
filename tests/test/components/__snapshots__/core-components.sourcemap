@@ -1,3 +1,37 @@
-cs.lift((() =>   → cs`
-() => {\n}       → () => {}
-)())             → `
+cs.lift((() =>               → cs`
+<                            → <
+div                          → div
+                             →  
+style                        → style
+={                           → =
+"padding: 8px"               → "padding: 8px"
+}                            → 
+>{                           → >\n      
+<                            → <
+span                         → span
+                             →  
+style                        → style
+={                           → =
+"font-size: 12px"            → "font-size: 12px"
+}                            → 
+                             →  
+onclick                      → onclick
+={                           → ={
+() => {\n}                   → () => {}
+}                            → }
+>\n        hi\n      </      → >\n        hi\n      </
+span                         → span
+>                            → >
+}{                           → \n      
+<                            → <
+img                          → img
+                             →  
+src                          → src
+={                           → =
+"https://example.com/a.png"  → "https://example.com/a.png"
+}                            → 
+/>                           →  />
+}</                          → \n    </
+div                          → div
+>                            → >
+)())                         → `

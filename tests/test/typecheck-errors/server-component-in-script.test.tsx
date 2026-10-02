@@ -17,14 +17,10 @@ function Rule() {
 }
 
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
-export const clientOnly = cs`<ul>
-  <Row label="a" />
-</ul>`;
+export const clientOnly = cs`<Row label="a" />`;
 
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
 export const hybrid = cs`<Title text="Week" />`;
 
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
-export const noProps = cs`<div>
-  <Rule />
-</div>`;
+export const noProps = cs`<Rule />`;

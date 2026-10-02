@@ -1,1 +1,126 @@
-
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+                                          →  
+class                                     → class
+={                                        → =
+"a"                                       → "a"
+}                                         → 
+/>                                        →  />
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+blink                                     → blink
+ />                                       →  />
+)())                                      → `
+cs.lift(((__cs_NotATag = cs.splice(NotATag)) => → cs`
+<                                         → <
+__cs_NotATag                              → NotATag
+ />                                       →  />
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+Fragment                                  → Fragment
+>{                                        → >\n  
+<                                         → <
+span                                      → span
+>a</                                      → >a</
+span                                      → span
+>                                         → >
+}</                                       → \n</
+Fragment                                  → Fragment
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<>{                                       → <>\n  
+<                                         → <
+span                                      → span
+>a</                                      → >a</
+span                                      → span
+>                                         → >
+}</>                                      → \n</>
+)())                                      → `
+cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
+[]                                        → []
+ as                                       →  as 
+number                                    → number
+[]                                        → []
+}                                         → }
+>{                                        → >{
+__cs_n                                    → n
+ =>                                       → ) => 
+<                                         → <
+i                                         → i
+>{                                        → >{
+__cs_n                                    → n
+}</                                       → }</
+i                                         → i
+>                                         → >
+}</                                       → }</
+__cs_For                                  → For
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+                                          →  
+nosuch                                    → nosuch
+={                                        → ={
+1                                         → 1
+}                                         → }
+/>                                        →  />
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+                                          →  
+class                                     → class
+={                                        → ={
+1                                         → 1
+}                                         → }
+/>                                        →  />
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+Fragment                                  → Fragment
+                                          →  
+nosuch                                    → nosuch
+={                                        → ={
+1                                         → 1
+}                                         → }
+/>                                        →  />
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+>hello</                                  → >hello</
+div                                       → div
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+>{                                        → >{
+1                                         → 1
+}</                                       → }</
+div                                       → div
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+>{                                        → >\n  
+<                                         → <
+span                                      → span
+>a</                                      → >a</
+span                                      → span
+>                                         → >
+}</                                       → \n</
+div                                       → div
+>                                         → >
+)())                                      → `

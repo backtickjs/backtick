@@ -1,1 +1,18 @@
-
+cs.lift((() =>   → cs`
+<                → <
+span             → span
+>x</             → >x</
+span             → span
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >{
+cs.splice(       → ${ [-semantic]
+(<Outer />)      → (<Outer />)
+)                → } [-semantic]
+}</              → }</
+div              → div
+>                → >
+)())             → `

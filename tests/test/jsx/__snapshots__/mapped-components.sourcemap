@@ -1,1 +1,22 @@
-
+cs.lift((() =>                            → cs`
+<                                         → <
+span                                      → span
+>{                                        → >{
+cs.splice(                                →  [-semantic]
+(label)                                   → $label
+)                                         →  [-semantic]
+}</                                       → }</
+span                                      → span
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+>{                                        → >{
+cs.splice(                                → ${ [-semantic]
+componentLabels.map((item) => <Row label={item} />)→ componentLabels.map((item) => <Row label={item} />)
+)                                         → } [-semantic]
+}</                                       → }</
+div                                       → div
+>                                         → >
+)())                                      → `

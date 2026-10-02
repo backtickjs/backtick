@@ -1,14 +1,14 @@
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { addEventListener as _$addEventListener } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(
   `<div style=padding:8px><span style=font-size:12px>hi</span><img src=https://example.com/a.png>`,
 );
-const $cs0 = () => () => {};
-export default (() => {
-  var _el$ = _tmpl$(),
-    _el$2 = _el$.firstChild;
-  _$addEventListener(_el$2, "click", $cs0(), true);
-  return _el$;
-})();
+const $cs0 = () =>
+  (() => {
+    var _el$ = _tmpl$(),
+      _el$2 = _el$.firstChild;
+    _el$2.$$click = () => {};
+    return _el$;
+  })();
+export default $cs0();
 _$delegateEvents(["click"]);

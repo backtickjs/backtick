@@ -19,10 +19,17 @@ __cs_label         → label
 \n}                → \n  }
 )())               → `
 cs.lift((() =>     → cs`
+<                  → <
+span               → span
+                   → \n    
+style              → style
+={                 → =
 "font-size: 16px"  → "font-size: 16px"
-)())               → `
-cs.lift((() =>     → cs`
-() => {\n          → () => {\n        
+}                  → 
+                   → \n    
+onclick            → onclick
+={                 → ={
+() => {\n          → () => {\n      
 const              → const 
 __cs_row           → row
  =                 →  = 
@@ -33,7 +40,7 @@ cs.splice(         →  [-semantic]
 "one"              → "one"
 )                  → )
 ;                  → ;
-\n                 → \n        
+\n                 → \n      
 __cs_row           → row
 .                  → .
 label              → label
@@ -52,9 +59,9 @@ label              → label
 " !!!"             → " !!!"
 )                  → )
 ;                  → ;
-\n}                → \n      }
-)())               → `
-cs.lift((() =>     → cs`
+\n}                → \n    }
+}                  → }
+>{                 → \n  >\n    {
 cs.splice(         →  [-semantic]
 (build)            → $build
 )                  →  [-semantic]
@@ -67,4 +74,7 @@ label              → label
 0                  → 0
 ]                  → ]
 ()                 → ()
+}</                → }\n  </
+span               → span
+>                  → >
 )())               → `

@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/solid-js/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
@@ -6,20 +6,28 @@ import { createSignal } from "@backtickjs/solid-js";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
-// State belongs to the script that declares it, and a script entry is applied
-// once per place that reaches it — so two `<OwnCounter />` tags are two
-// applications of one entry, and each declares a signal of its own.
+// State belongs to the script that declares it, and a declared script is called
+// once per place that reaches it — so two `<OwnCounter />` splices are two calls
+// of one script, and each declares a signal of its own.
 async function OwnCounter() {
   return cs.create(
-    "2vruvr5rxa3mr:13:9",
+    "3i5bqg6nv7j1v:13:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     '($splice0) => {\n    const size = $splice0()(16);\n    return (<span style={"font-size: " + size[0]() + "px"} onclick={() => {\n            size[1](size[0]() + 1);\n        }}>\n        press\n      </span>);\n}',
     '{"version":3,"file":"local-state-instances.test.jsx","sourceRoot":"","sources":["state/local-state-instances.test.tsx"],"names":[],"mappings":"AAYY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,IAAI,CACH,KAAK,CAAC,CAAC,aAAa,GAAG,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACxC,OAAO,CAAC,CAAC,GAAG,EAAE;YACZ,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;QACzB,CAAC,CAAC,CAEF;;MACF,EAAE,IAAI,CAAC,CACR,CAAC;AACJ,CAAC"}',
   );
 }
-const instances = _jsxs("div", {
-  children: [_jsx(OwnCounter, {}), _jsx(OwnCounter, {})],
-});
+const instances = cs.create(
+  "3i5bqg6nv7j1v:28:18",
+  {
+    params: [
+      { kind: "splice", value: _jsx(OwnCounter, {}), bindings: [] },
+      { kind: "splice", value: _jsx(OwnCounter, {}), bindings: [] },
+    ],
+  },
+  "($splice0, $splice1) => <div>\n  {$splice0()}\n  {$splice1()}\n</div>",
+  '{"version":3,"file":"local-state-instances.test.jsx","sourceRoot":"","sources":["state/local-state-instances.test.tsx"],"names":[],"mappings":"AA2BqB,wBAAA,CAAC,GAAG,CACvB;EAAA,CAAC,UAAmB,CACpB;EAAA,CAAC,UAAmB,CACtB;AAAA,EAAE,GAAG,CAAC"}',
+);
 describe("local state", () => {
   it("two invocations of one component hold independent signals", async () => {
     const view = await drawn(instances);

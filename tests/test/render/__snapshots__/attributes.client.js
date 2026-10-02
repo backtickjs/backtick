@@ -1,4 +1,34 @@
-// 113:12
+// 32:30
+() => <a href="/counter" id="press">
+      go
+    </a>
+
+// 44:30
+() => <div>
+      <svg>
+        <path />
+      </svg>
+    </div>
+
+// 61:29
+() => <svg viewBox="0 0 279 38"/>
+
+// 69:29
+() => <svg>
+      <path stroke-width={2} fill-rule="evenodd"/>
+      <filter color-interpolation-filters="sRGB"/>
+    </svg>
+
+// 84:29
+() => <svg>
+      <linearGradient gradientTransform="rotate(90)"/>
+      <feTurbulence numOctaves={3}/>
+    </svg>
+
+// 95:29
+() => <div tabIndex={2}/>
+
+// 104:12
 ($splice0) => {
     const text = $splice0()("first");
     const isOn = $splice0()(false);

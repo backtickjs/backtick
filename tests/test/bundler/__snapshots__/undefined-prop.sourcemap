@@ -1,4 +1,22 @@
 cs.lift((() =>   → cs`
+<                → <
+button           → button
+                 →  
+ref              → ref
+={               → ={
+cs.splice(       →  [-semantic]
+(ref)            → $ref
+)                →  [-semantic]
+}                → }
+>{               → >{
+cs.splice(       →  [-semantic]
+(label)          → $label
+)                →  [-semantic]
+}</              → }</
+button           → button
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
 __cs_el          → el
  =>              → ) => 
 cs.splice(       →  [-semantic]

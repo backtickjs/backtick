@@ -1,25 +1,18 @@
-import {
-  jsx as _jsx,
-  Fragment as _Fragment,
-  jsxs as _jsxs,
-} from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
-// `<>…</>` and `<Fragment>` are one component: the JSX transform imports
-// `Fragment` from the configured `jsxImportSource`, and the jsx-runtime
-// re-exports the core component under that name. The shorthand needs no
-// import.
+// `<>…</>` in a script is Solid's fragment: its children where it stands, and no
+// node of its own. Solid takes one only at the top of an expression, so a child
+// that is one is written in braces.
 it("fragmentShorthand", async (t) => {
   await snapshotCase(
     t,
     "fragmentShorthand",
-    _jsx("div", {
-      children: _jsxs(_Fragment, {
-        children: [
-          _jsx("span", { children: "a" }),
-          _jsx("span", { children: "b" }),
-        ],
-      }),
-    }),
+    cs.create(
+      "17cnce59u5ivv:12:4",
+      { params: [] },
+      "() => <div>\n      {<>\n          <span>a</span>\n          <span>b</span>\n        </>}\n    </div>",
+      '{"version":3,"file":"fragment-shorthand.test.jsx","sourceRoot":"","sources":["jsx/fragment-shorthand.test.tsx"],"names":[],"mappings":"AAWO,MAAA,CAAC,GAAG,CACL;MAAA,CACE,EACE;UAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACb;UAAA,CAAC,IAAI,CAAC,CAAC,EAAE,IAAI,CACf;QAAA,GACF,CACF;IAAA,EAAE,GAAG,CAAC"}',
+    ),
   );
 });

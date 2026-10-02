@@ -1,1 +1,11 @@
-
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >{
+cs.splice(       → ${ [-semantic]
+(<Absent />)     → (<Absent />)
+)                → } [-semantic]
+}</              → }</
+div              → div
+>                → >
+)())             → `

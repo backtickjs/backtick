@@ -1,71 +1,125 @@
-// 38:18
-($splice0) =>   → 38:21 $orders`}>…
-$splice0()      → 38:21 $orders`}>…
-
-// 39:10
-($splice0) =>    → 39:13 (order:…
-(                → 39:13 (
-order            → 39:14 order
-)                → 39:26 ) 
-=>               → 39:28 =>
-$splice0(order)  → 40:11 ${(…
-
-// 43:22
-($capture0) =>              → 43:25 "https://img.example.com/"…
-"https://img.example.com/"  → 43:25 "https://img.example.com/"
- +                          → 43:51  + 
-$capture0                   → 43:54 order.id…
-.                           → 43:59 .
-id                          → 43:60 id
- +                          → 43:62  + 
-".png"                      → 43:65 ".png"
-
-// 46:22
-($capture0) =>   → 46:25 order.customer.name`}</span>…
-$capture0        → 46:25 order.customer.name`}</span>…
-.                → 46:30 .
-customer         → 46:31 customer
-.                → 46:39 .
-name             → 46:40 name
-
-// 47:22
-($capture0) =>   → 47:25 order.customer.city`}</span>…
-$capture0        → 47:25 order.customer.city`}</span>…
-.                → 47:30 .
-customer         → 47:31 customer
-.                → 47:39 .
-city             → 47:40 city
-
-// 48:26
-($capture0) =>   → 48:29 order.items`}>…
-$capture0        → 48:29 order.items`}>…
-.                → 48:34 .
-items            → 48:35 items
-
-// 49:18
-($splice0) =>   → 49:21 (item:…
-(               → 49:21 (
-item            → 49:22 item
-)               → 49:32 ) 
-=>              → 49:34 =>
-$splice0(item)  → 50:19 ${(<span>{cs`item.sku…
-
-// 50:29
-($capture0) =>   → 50:32 item.sku…
-$capture0        → 50:32 item.sku…
-.                → 50:36 .
-sku              → 50:37 sku
- +               → 50:40  + 
-" x"             → 50:43 " x"
- +               → 50:47  + 
-$capture0        → 50:50 item.qty`}</span>)}`}…
-.                → 50:54 .
-qty              → 50:55 qty
-
-// 52:22
-($capture0) =>   → 52:25 "$"…
-"$"              → 52:25 "$"
- +               → 52:28  + 
-$capture0        → 52:31 order.total`}</span>…
-.                → 52:36 .
-total            → 52:37 total
+// 37:5
+($splice0, $tag1) =>        → 37:8 <div>…
+<                           → 37:8 <
+div                         → 37:9 div
+>                           → 37:12 >
+<                           → 38:7 <
+$tag1                       → 38:8 For…
+each                        → 38:12 each
+=                           → 38:16 =
+{                           → 38:17 {
+$splice0()                  → 38:18 $orders}>…
+}                           → 38:25 }
+>                           → 38:26 >
+{                           → 39:9 {
+(                           → 39:10 (
+order                       → 39:11 order
+)                           → 39:23 ) 
+=>                          → 39:25 =>
+(                           → 39:28 (
+<                           → 40:11 <
+div                         → 40:12 div
+>                           → 40:15 >
+<                           → 41:13 <
+img                         → 41:14 img
+src                         → 41:18 src
+=                           → 41:21 =
+{                           → 41:22 {
+"https://img.example.com/"  → 41:23 "https://img.example.com/"
+ +                          → 41:49  + 
+order                       → 41:52 order
+.                           → 41:57 .
+id                          → 41:58 id
+ +                          → 41:60  + 
+".png"                      → 41:63 ".png"
+}                           → 41:69 }
+alt                         → 41:71 alt
+=                           → 41:74 =
+""                          → 41:75 ""
+/>                          → 41:77  />…
+<                           → 42:13 <
+span                        → 42:14 span
+>                           → 42:18 >
+{                           → 42:19 {
+order                       → 42:20 order
+.                           → 42:25 .
+customer                    → 42:26 customer
+.                           → 42:34 .
+name                        → 42:35 name
+}                           → 42:39 }
+</                          → 42:40 </
+span                        → 42:42 span
+>                           → 42:46 >
+<                           → 43:13 <
+span                        → 43:14 span
+>                           → 43:18 >
+{                           → 43:19 {
+order                       → 43:20 order
+.                           → 43:25 .
+customer                    → 43:26 customer
+.                           → 43:34 .
+city                        → 43:35 city
+}                           → 43:39 }
+</                          → 43:40 </
+span                        → 43:42 span
+>                           → 43:46 >
+<                           → 44:13 <
+$tag1                       → 44:14 For…
+each                        → 44:18 each
+=                           → 44:22 =
+{                           → 44:23 {
+order                       → 44:24 order
+.                           → 44:29 .
+items                       → 44:30 items
+}                           → 44:35 }
+>                           → 44:36 >
+{                           → 45:15 {
+(                           → 45:16 (
+item                        → 45:17 item
+)                           → 45:27 ) 
+=>                          → 45:29 =>
+<                           → 45:32 <
+span                        → 45:33 span
+>                           → 45:37 >
+{                           → 45:38 {
+item                        → 45:39 item
+.                           → 45:43 .
+sku                         → 45:44 sku
+ +                          → 45:47  + 
+" x"                        → 45:50 " x"
+ +                          → 45:54  + 
+item                        → 45:57 item
+.                           → 45:61 .
+qty                         → 45:62 qty
+}                           → 45:65 }
+</                          → 45:66 </
+span                        → 45:68 span
+>                           → 45:72 >
+}                           → 45:73 }
+</                          → 46:13 </
+$tag1                       → 46:15 For>…
+>                           → 46:18 >
+<                           → 47:13 <
+span                        → 47:14 span
+>                           → 47:18 >
+{                           → 47:19 {
+"$"                         → 47:20 "$"
+ +                          → 47:23  + 
+order                       → 47:26 order
+.                           → 47:31 .
+total                       → 47:32 total
+}                           → 47:37 }
+</                          → 47:38 </
+span                        → 47:40 span
+>                           → 47:44 >
+</                          → 48:11 </
+div                         → 48:13 div
+>                           → 48:16 >
+)                           → 48:17 …
+}                           → 49:10 }
+</                          → 50:7 </
+$tag1                       → 50:9 For>…
+>                           → 50:12 >
+</                          → 51:5 </
+div                         → 51:7 div
+>                           → 51:10 >

@@ -1,13 +1,12 @@
-// 28:18
-($splice0, $splice1) => "font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"
+// 26:7
+($splice0, $splice1) => <div>
+  <span style={"font-size: " + ($splice0()[0]() === $splice1() ? 20 : 16) + "px"}>
+    {"row " + $splice1() + " of " + $splice0()[0]()}
+  </span>
+  {$splice0()[0]() === $splice1() ? <span>marker</span> : null}
+</div>
 
-// 29:8
-($splice0, $splice1) => "row " + $splice0() + " of " + $splice1()[0]()
-
-// 31:6
-($splice0, $splice1, $splice2) => $splice0()[0]() === $splice1() ? $splice2() : null
-
-// 36:10
+// 34:10
 ($splice0, $splice1, $splice2) => {
     const selected = $splice0()(0);
     return (<div>
@@ -17,14 +16,14 @@
       </div>);
 }
 
-// 41:29
+// 39:29
 () => 0
 
-// 41:46
+// 39:46
 ($capture0) => $capture0
 
-// 42:29
+// 40:29
 () => 1
 
-// 42:46
+// 40:46
 ($capture0) => $capture0

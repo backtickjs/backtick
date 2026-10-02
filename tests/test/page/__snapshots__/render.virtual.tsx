@@ -1,21 +1,21 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { cs } from "@backtickjs/core";
+import { type Client, cs } from "@backtickjs/core";
+import type { JSXElement } from "@backtickjs/solid-js";
 import { render } from "@backtickjs/solid-js/web";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // Text a page's markup would end early on, were the bundle written into it.
 const text = `& < > " ' </script> <!-- -->`;
-const scriptCloseText = <p>{text}</p>;
+const scriptCloseText = cs.lift((() => <p>{cs.splice((text))}</p>)());
 
 const drawn: Element[] = [];
 afterEach(() => drawn.splice(0).forEach((container) => container.remove()));
 
 // A page as its server writes it: a container, and the client entry drawing
 // into it, run as its module script would be.
-async function draw(element: JSX.Element): Promise<Element> {
+async function draw(element: Client<JSXElement>): Promise<Element> {
   const id = `app-${drawn.length}`;
   const container = document.createElement("div");
   container.id = id;
@@ -34,8 +34,8 @@ describe("a page's client entry", () => {
   });
 
   it("draws each bundle into its own container", async () => {
-    const first = await draw(<p>first</p>);
-    const second = await draw(<p>second</p>);
+    const first = await draw(cs.lift((() => <p>first</p>)()));
+    const second = await draw(cs.lift((() => <p>second</p>)()));
     assert.equal(first.textContent, "first");
     assert.equal(second.textContent, "second");
   });
@@ -43,6 +43,6 @@ describe("a page's client entry", () => {
 
 describe("what each case compiles and bundles to", () => {
   it("scriptCloseText", async (t) => {
-    await snapshotCase(t, "scriptCloseText", scriptCloseText as JSX.Element);
+    await snapshotCase(t, "scriptCloseText", scriptCloseText);
   });
 });

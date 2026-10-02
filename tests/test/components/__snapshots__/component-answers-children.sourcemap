@@ -1,1 +1,33 @@
-
+cs.lift((() =>   → cs`
+<>counted</>     → <>counted</>
+)())             → `
+cs.lift((() =>   → cs`
+<>{              → <>\n    
+<                → <
+em               → em
+>one</           → >one</
+em               → em
+>                → >
+}{               → \n    
+<                → <
+em               → em
+>two</           → >two</
+em               → em
+>                → >
+}</>             → \n  </>
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n      {
+cs.splice(       → ${ [-semantic]
+(<Label />)      → (<Label />)
+)                → } [-semantic]
+}{               → }\n      {
+cs.splice(       → ${ [-semantic]
+(<Pair />)       → (<Pair />)
+)                → } [-semantic]
+}</              → }\n    </
+div              → div
+>                → >
+)())             → `

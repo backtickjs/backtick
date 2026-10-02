@@ -1,28 +1,26 @@
 import { template as _$template } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<li>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<ul>`);
+import { createComponent as _$createComponent } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<ul>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<li>`);
 import { Index as $i0 } from "solid-js";
-const $cs0 = ($splice0) => $splice0();
-const $cs1 = () => (row, index) =>
+const $cs0 = ($splice0, $tag1) =>
   (() => {
     var _el$ = _tmpl$();
-    _$insert(_el$, () => index + ": " + row());
+    _$insert(
+      _el$,
+      _$createComponent($tag1, {
+        get each() {
+          return $splice0();
+        },
+        children: (row, index) =>
+          (() => {
+            var _el$2 = _tmpl$2();
+            _$insert(_el$2, () => index + ": " + row());
+            return _el$2;
+          })(),
+      }),
+    );
     return _el$;
   })();
-export default (() => {
-  var _el$2 = _tmpl$2();
-  _$insert(
-    _el$2,
-    _$createComponent($i0, {
-      get each() {
-        return $cs0(() => ["first", "second"]);
-      },
-      get children() {
-        return $cs1();
-      },
-    }),
-  );
-  return _el$2;
-})();
+export default $cs0(() => ["first", "second"], $i0);

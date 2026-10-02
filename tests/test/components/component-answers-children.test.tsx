@@ -1,4 +1,5 @@
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A component stands exactly where its tag did, so what it may answer with is
@@ -7,25 +8,23 @@ import { snapshotCase } from "../snapshotCase.ts";
 // them in a fragment, which is the one drawing that holds them and draws no
 // node of its own.
 async function Label() {
-  return <>counted</>;
+  return cs`<>counted</>`;
 }
 
 async function Pair() {
-  return (
-    <>
-      <em>one</em>
-      <em>two</em>
-    </>
-  );
+  return cs`<>
+    <em>one</em>
+    <em>two</em>
+  </>`;
 }
 
 it("componentAnswersChildren", async (t) => {
   await snapshotCase(
     t,
     "componentAnswersChildren",
-    <div>
-      <Label />
-      <Pair />
-    </div>,
+    cs`<div>
+      {${(<Label />)}}
+      {${(<Pair />)}}
+    </div>`,
   );
 });

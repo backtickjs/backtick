@@ -1,17 +1,30 @@
-cs.lift((() =>                            → cs`
+cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
+<                                         → <
+div                                       → div
+>{                                        → >\n      
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
 cs.splice(                                →  [-semantic]
 (orders)                                  → $orders
 )                                         →  [-semantic]
-)())                                      → `
-cs.lift((() =>                            → cs`
+}                                         → }
+>{                                        → >\n        {
 (                                         → (
 __cs_order                                → order
 :                                         → : 
 Order                                     → Order
-) =>                                      → ) =>\n          
-cs.splice(                                → ${ [-semantic]
-(\n            <div>\n              <img\n                src={→ (\n            <div>\n              <img\n                src={
-cs.lift((() =>                            → cs`
+) =>                                      → ) => 
+<                                         → (\n          <
+div                                       → div
+>{                                        → >\n            
+<                                         → <
+img                                       → img
+                                          →  
+src                                       → src
+={                                        → ={
 "https://img.example.com/"                → "https://img.example.com/"
  +                                        →  + 
 __cs_order                                → order
@@ -19,39 +32,56 @@ __cs_order                                → order
 id                                        → id
  +                                        →  + 
 ".png"                                    → ".png"
-)())                                      → `
-}\n                alt=""\n              />\n              <span>{→ }\n                alt=""\n              />\n              <span>{
-cs.lift((() =>                            → cs`
+}                                         → }
+                                          →  
+alt                                       → alt
+={                                        → =
+""                                        → ""
+}                                         → 
+/>                                        →  />
+}{                                        → \n            
+<                                         → <
+span                                      → span
+>{                                        → >{
 __cs_order                                → order
 .                                         → .
 customer                                  → customer
 .                                         → .
 name                                      → name
-)())                                      → `
-}</span>\n              <span>{           → }</span>\n              <span>{
-cs.lift((() =>                            → cs`
+}</                                       → }</
+span                                      → span
+>                                         → >
+}{                                        → \n            
+<                                         → <
+span                                      → span
+>{                                        → >{
 __cs_order                                → order
 .                                         → .
 customer                                  → customer
 .                                         → .
 city                                      → city
-)())                                      → `
-}</span>\n              <For each={       → }</span>\n              <For each={
-cs.lift((() =>                            → cs`
+}</                                       → }</
+span                                      → span
+>                                         → >
+}{                                        → \n            
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
 __cs_order                                → order
 .                                         → .
 items                                     → items
-)())                                      → `
-}>\n                {                     → }>\n                {
-cs.lift((() =>                            → cs`
+}                                         → }
+>{                                        → >\n              {
 (                                         → (
 __cs_item                                 → item
 :                                         → : 
 Item                                      → Item
-) =>                                      → ) =>\n                  
-cs.splice(                                → ${ [-semantic]
-(<span>{                                  → (<span>{
-cs.lift((() =>                            → cs`
+) =>                                      → ) => 
+<                                         → <
+span                                      → span
+>{                                        → >{
 __cs_item                                 → item
 .                                         → .
 sku                                       → sku
@@ -61,18 +91,31 @@ sku                                       → sku
 __cs_item                                 → item
 .                                         → .
 qty                                       → qty
-)())                                      → `
-}</span>)                                 → }</span>)
-)                                         → } [-semantic]
-)())                                      → `
-}\n              </For>\n              <span>{→ }\n              </For>\n              <span>{
-cs.lift((() =>                            → cs`
+}</                                       → }</
+span                                      → span
+>                                         → >
+}</                                       → }\n            </
+__cs_For                                  → For
+>                                         → >
+}{                                        → \n            
+<                                         → <
+span                                      → span
+>{                                        → >{
 "$"                                       → "$"
  +                                        →  + 
 __cs_order                                → order
 .                                         → .
 total                                     → total
-)())                                      → `
-}</span>\n            </div>\n          ) → }</span>\n            </div>\n          )
-)                                         → } [-semantic]
+}</                                       → }</
+span                                      → span
+>                                         → >
+}</                                       → \n          </
+div                                       → div
+>                                         → >\n        )
+}</                                       → }\n      </
+__cs_For                                  → For
+>                                         → >
+}</                                       → \n    </
+div                                       → div
+>                                         → >
 )())                                      → `

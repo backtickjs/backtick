@@ -10,10 +10,10 @@ import { snapshotCase } from "../snapshotCase.ts";
 // value says which entry and what to hand it, and that is the whole of what an
 // instance-to-be is. There was once a second way to say it — naming the entry,
 // and calling what that named — and this is the case it existed for.
-const HeldRow = async () => <span>x</span>;
+const HeldRow = async () => cs.lift((() => <span>x</span>)());
 
 const heldElement = cs.lift((() => () => {
-    const __cs_tree = cs.splice((<div />));
+    const __cs_tree = cs.splice(cs.lift((() => <div />)()));
     return __cs_tree;
 })());
 
@@ -26,9 +26,6 @@ it("treeInVariable", async (t) => {
   await snapshotCase(
     t,
     "treeInVariable",
-    <div>
-      {cs.lift((() => cs.splice((heldElement))())())}
-      {cs.lift((() => cs.splice((heldComponent))())())}
-    </div>,
+    cs.lift((() => <div>{cs.splice((heldElement))()}{cs.splice((heldComponent))()}</div>)()),
   );
 });

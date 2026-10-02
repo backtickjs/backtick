@@ -89,7 +89,11 @@ __cs_count                                → count
 )                                         → } [-semantic]
 }{                                        → \n      }\n      {
 cs.splice(                                → ${ [-semantic]
-(<section>{                               → (<section>{
+cs.lift((() =>                            → cs`
+<                                         → <
+section                                   → section
+>{                                        → >{
+cs.splice(                                → ${ [-semantic]
 cs.lift((() =>                            → cs`
 <                                         → <
 __cs_Badge                                → Badge
@@ -106,7 +110,11 @@ __cs_count                                → count
 }                                         → }
 />                                        →  />
 )())                                      → `
-}</section>)                              → }</section>)
+)                                         → } [-semantic]
+}</                                       → }</
+section                                   → section
+>                                         → >
+)())                                      → `
 )                                         → } [-semantic]
 }{                                        → }\n      {\n        
 cs.splice(                                → ${ [-semantic]

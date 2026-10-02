@@ -1,3 +1,4 @@
 import { template as _$template } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>hi`);
-export default _tmpl$();
+const $cs0 = () => _tmpl$();
+export default $cs0();

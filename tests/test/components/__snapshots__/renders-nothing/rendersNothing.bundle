@@ -1,8 +1,10 @@
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div>`);
-export default (() => {
-  var _el$ = _tmpl$();
-  _$insert(_el$, null);
-  return _el$;
-})();
+const $cs0 = ($splice0) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _$insert(_el$, $splice0);
+    return _el$;
+  })();
+export default $cs0(() => null);

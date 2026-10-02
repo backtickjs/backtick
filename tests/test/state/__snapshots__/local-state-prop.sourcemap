@@ -1,4 +1,9 @@
 cs.lift((() =>          → cs`
+<                       → <
+span                    → span
+                        → \n    
+style                   → style
+={                      → ={
 "font-size: "           → "font-size: "
  +                      →  + 
 cs.splice(              →  [-semantic]
@@ -10,8 +15,10 @@ cs.splice(              →  [-semantic]
 ()                      → ()
  +                      →  + 
 "px"                    → "px"
-)())                    → `
-cs.lift((() =>          → cs`
+}                       → }
+                        → \n    
+onclick                 → onclick
+={                      → ={
 () => {\n               → () => {\n      
 cs.splice(              →  [-semantic]
 (size)                  → $size
@@ -32,6 +39,10 @@ cs.splice(              →  [-semantic]
 )                       → )
 ;                       → ;
 \n}                     → \n    }
+}                       → }
+>\n    press\n  </      → \n  >\n    press\n  </
+span                    → span
+>                       → >
 )())                    → `
 cs.lift((() => {\n      → cs`{\n    
 const                   → const 

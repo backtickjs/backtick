@@ -23,7 +23,7 @@ const scriptBoundTagCapture = cs`{
           return ${cs`<Badge n={count[0]() + 100} />`};
         }`}
       }
-      {${(<section>{cs`<Badge n={count[0]() + 1000} />`}</section>)}}
+      {${cs`<section>{${cs`<Badge n={count[0]() + 1000} />`}}</section>`}}
       {
         ${cs`<For each={[1, 2]}>
           {(m: number) => <Badge n={m * count[0]()} />}

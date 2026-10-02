@@ -6,9 +6,9 @@ import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
 import { children, drawn, fontSize } from "./dom.ts";
 
-// State belongs to the script that declares it, and a script entry is applied
-// once per place that reaches it — so two `<OwnCounter />` tags are two
-// applications of one entry, and each declares a signal of its own.
+// State belongs to the script that declares it, and a declared script is called
+// once per place that reaches it — so two `<OwnCounter />` splices are two calls
+// of one script, and each declares a signal of its own.
 async function OwnCounter() {
   return cs`{
     const size = $createSignal(16);
@@ -25,12 +25,10 @@ async function OwnCounter() {
   }`;
 }
 
-const instances = (
-  <div>
-    <OwnCounter />
-    <OwnCounter />
-  </div>
-);
+const instances = cs`<div>
+  {${(<OwnCounter />)}}
+  {${(<OwnCounter />)}}
+</div>`;
 
 describe("local state", () => {
   it("two invocations of one component hold independent signals", async () => {

@@ -1,5 +1,10 @@
 import { template as _$template } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(
-  `<p>&amp; &lt; > " ' &lt;/script> &lt;!-- -->`,
-);
-export default _tmpl$();
+import { insert as _$insert } from "solid-js/web";
+var _tmpl$ = /*#__PURE__*/ _$template(`<p>`);
+const $cs0 = ($splice0) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _$insert(_el$, $splice0);
+    return _el$;
+  })();
+export default $cs0(() => "& \u003c > \" ' \u003c/script> \u003c!-- -->");

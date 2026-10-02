@@ -1,25 +1,26 @@
 import { template as _$template } from "solid-js/web";
 import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<em>`),
-  _tmpl$2 = /*#__PURE__*/ _$template(`<div>`);
+var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
+  _tmpl$2 = /*#__PURE__*/ _$template(`<em>`);
 import { createSignal as $i0 } from "solid-js";
 const $Component = (props) => props.body();
-const $cs0 = ($splice0) => {
-  const n = $splice0()(2);
-  return (() => {
+const $cs0 = ($splice0) =>
+  (() => {
     var _el$ = _tmpl$();
-    _$insert(_el$, () => n[0]());
+    _$insert(_el$, $splice0);
     return _el$;
   })();
+const $cs1 = ($splice0) => {
+  const n = $splice0()(2);
+  return (() => {
+    var _el$2 = _tmpl$2();
+    _$insert(_el$2, () => n[0]());
+    return _el$2;
+  })();
 };
-export default (() => {
-  var _el$2 = _tmpl$2();
-  _$insert(
-    _el$2,
-    _$createComponent($Component, {
-      body: () => $cs0(() => $i0),
-    }),
-  );
-  return _el$2;
-})();
+export default $cs0(() =>
+  _$createComponent($Component, {
+    body: () => $cs1(() => $i0),
+  }),
+);

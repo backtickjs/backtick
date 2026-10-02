@@ -3,7 +3,6 @@ import { it } from "node:test";
 import { cs, type Client } from "@backtickjs/core";
 import { createSignal, For } from "@backtickjs/solid-js";
 import { bundle } from "../evaluate.ts";
-import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 
 // A bundle is a function of what was spliced alone: bundling it again, or after
 // other bundles, writes the same code. Scripts are where most of the bundler's
@@ -13,8 +12,8 @@ import type { Prop } from "@backtickjs/solid-js/jsx-runtime";
 const doubled = cs.lift((() => (__cs_n: number) => __cs_n * 2)());
 const pair = cs.lift((() => (__cs_n: number) => (__cs_m: number) => __cs_n + __cs_m)());
 
-function Card(props: { readonly title: Prop<string> }) {
-  return <h2>{props.title}</h2>;
+function Card(props: { readonly title: string | Client<string> }) {
+  return cs.lift((() => <h2>{cs.splice((props)).title}</h2>)());
 }
 
 const shared = cs.lift((() => "shared")());

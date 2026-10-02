@@ -1,1 +1,21 @@
-
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n      {\n        
+<>{              → <>\n          
+<                → <
+span             → span
+>a</             → >a</
+span             → span
+>                → >
+}{               → \n          
+<                → <
+span             → span
+>b</             → >b</
+span             → span
+>                → >
+}</>             → \n        </>
+}</              → \n      }\n    </
+div              → div
+>                → >
+)())             → `

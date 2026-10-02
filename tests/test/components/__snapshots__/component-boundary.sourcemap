@@ -1,1 +1,26 @@
-
+cs.lift((() =>              → cs`
+<                           → <
+span                        → span
+>{                          → >{
+cs.splice(                  →  [-semantic]
+(text)                      → $text
+)                           →  [-semantic]
+}</                         → }</
+span                        → span
+>                           → >
+)())                        → `
+cs.lift((() =>              → cs`
+<                           → <
+div                         → div
+>{                          → >\n      {
+cs.splice(                  → ${ [-semantic]
+(<TextLabel text="one" />)  → (<TextLabel text="one" />)
+)                           → } [-semantic]
+}{                          → }\n      {
+cs.splice(                  → ${ [-semantic]
+(<TextLabel text="two" />)  → (<TextLabel text="two" />)
+)                           → } [-semantic]
+}</                         → }\n    </
+div                         → div
+>                           → >
+)())                        → `

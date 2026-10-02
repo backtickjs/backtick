@@ -1,8 +1,8 @@
-// 11:43
+// 7:16
 ($splice0) => () => {
     const x = 1;
     return $splice0(x);
 }
 
-// 13:28
-($capture0) => () => $capture0
+// 9:12
+($capture0) => <span onclick={() => $capture0}/>

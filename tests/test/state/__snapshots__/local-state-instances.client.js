@@ -7,3 +7,9 @@
         press
       </span>);
 }
+
+// 28:19
+($splice0, $splice1) => <div>
+  {$splice0()}
+  {$splice1()}
+</div>

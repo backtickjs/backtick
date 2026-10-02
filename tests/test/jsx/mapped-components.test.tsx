@@ -1,10 +1,11 @@
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 const componentLabels = ["alpha", "beta", "gamma"];
 
 async function Row({ label }: { label: string }) {
-  return <span>{label}</span>;
+  return cs`<span>{$label}</span>`;
 }
 
 // The same list, but each item is a component invocation rather than an
@@ -15,10 +16,6 @@ it("mappedComponents", async (t) => {
   await snapshotCase(
     t,
     "mappedComponents",
-    <div>
-      {componentLabels.map((item) => (
-        <Row label={item} />
-      ))}
-    </div>,
+    cs`<div>{${componentLabels.map((item) => <Row label={item} />)}}</div>`,
   );
 });

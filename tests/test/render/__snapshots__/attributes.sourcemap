@@ -1,3 +1,112 @@
+cs.lift((() =>                      → cs`
+<                                   → <
+a                                   → a
+                                    →  
+href                                → href
+={                                  → =
+"/counter"                          → "/counter"
+}                                   → 
+                                    →  
+id                                  → id
+={                                  → =
+"press"                             → "press"
+}                                   → 
+>\n      go\n    </                 → >\n      go\n    </
+a                                   → a
+>                                   → >
+)())                                → `
+cs.lift((() =>                      → cs`
+<                                   → <
+div                                 → div
+>{                                  → >\n      
+<                                   → <
+svg                                 → svg
+>{                                  → >\n        
+<                                   → <
+path                                → path
+ />                                 →  />
+}</                                 → \n      </
+svg                                 → svg
+>                                   → >
+}</                                 → \n    </
+div                                 → div
+>                                   → >
+)())                                → `
+cs.lift((() =>                      → cs`
+<                                   → <
+svg                                 → svg
+                                    →  
+viewBox                             → viewBox
+={                                  → =
+"0 0 279 38"                        → "0 0 279 38"
+}                                   → 
+/>                                  →  />
+)())                                → `
+cs.lift((() =>                      → cs`
+<                                   → <
+svg                                 → svg
+>{                                  → >\n      
+<                                   → <
+path                                → path
+                                    →  
+stroke-width                        → stroke-width
+={                                  → ={
+2                                   → 2
+}                                   → }
+                                    →  
+fill-rule                           → fill-rule
+={                                  → =
+"evenodd"                           → "evenodd"
+}                                   → 
+/>                                  →  />
+}{                                  → \n      
+<                                   → <
+filter                              → filter
+                                    →  
+color-interpolation-filters         → color-interpolation-filters
+={                                  → =
+"sRGB"                              → "sRGB"
+}                                   → 
+/>                                  →  />
+}</                                 → \n    </
+svg                                 → svg
+>                                   → >
+)())                                → `
+cs.lift((() =>                      → cs`
+<                                   → <
+svg                                 → svg
+>{                                  → >\n      
+<                                   → <
+linearGradient                      → linearGradient
+                                    →  
+gradientTransform                   → gradientTransform
+={                                  → =
+"rotate(90)"                        → "rotate(90)"
+}                                   → 
+/>                                  →  />
+}{                                  → \n      
+<                                   → <
+feTurbulence                        → feTurbulence
+                                    →  
+numOctaves                          → numOctaves
+={                                  → ={
+3                                   → 3
+}                                   → }
+/>                                  →  />
+}</                                 → \n    </
+svg                                 → svg
+>                                   → >
+)())                                → `
+cs.lift((() =>                      → cs`
+<                                   → <
+div                                 → div
+                                    →  
+tabIndex                            → tabIndex
+={                                  → ={
+2                                   → 2
+}                                   → }
+/>                                  →  />
+)())                                → `
 cs.lift((() => {\n                  → cs`{\n      
 const                               → const 
 __cs_text                           → text

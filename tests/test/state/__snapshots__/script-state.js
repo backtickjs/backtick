@@ -9,31 +9,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 // another signal, which is what lets a script build a row that carries its own.
 async function ScriptRows() {
   const build = cs.create(
-    "385ryajbwsmy3:11:16",
+    "26efeom523wsc:11:16",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     "($splice0) => (label) => {\n    return { label: $splice0()(label) };\n}",
     '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAUmB,cAAA,CAAC,KAAa,EAAE,EAAE;IACjC,OAAO,EAAE,KAAK,EAAE,UAAa,CAAC,KAAK,CAAC,EAAE,CAAC;AACzC,CAAC"}',
   );
-  return _jsx("span", {
-    style: cs.create(
-      "385ryajbwsmy3:17:13",
-      { params: [] },
-      '() => "font-size: 16px"',
-      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAgBgB,MAAA,iBAAiB"}',
-    ),
-    onclick: cs.create(
-      "385ryajbwsmy3:18:15",
-      { params: [{ kind: "splice", value: build, bindings: [] }] },
-      '($splice0) => () => {\n    const row = $splice0()("one");\n    row.label[1](row.label[0]() + " !!!");\n}',
-      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAiBkB,cAAA,GAAG,EAAE;IACf,MAAM,GAAG,GAAG,UAAM,CAAC,KAAK,CAAC,CAAC;IAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;AACxC,CAAC"}',
-    ),
-    children: cs.create(
-      "385ryajbwsmy3:23:7",
-      { params: [{ kind: "splice", value: build, bindings: [] }] },
-      '($splice0) => $splice0()("one").label[0]()',
-      '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAsBU,cAAA,UAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE"}',
-    ),
-  });
+  return cs.create(
+    "26efeom523wsc:15:9",
+    { params: [{ kind: "splice", value: build, bindings: [] }] },
+    '($splice0) => <span style="font-size: 16px" onclick={() => {\n        const row = $splice0()("one");\n        row.label[1](row.label[0]() + " !!!");\n    }}>\n    {$splice0()("one").label[0]()}\n  </span>',
+    '{"version":3,"file":"script-state.test.jsx","sourceRoot":"","sources":["state/script-state.test.tsx"],"names":[],"mappings":"AAcY,cAAA,CAAC,IAAI,CACb,KAAK,CAAC,iBAAiB,CACvB,OAAO,CAAC,CAAC,GAAG,EAAE;QACZ,MAAM,GAAG,GAAG,UAAM,CAAC,KAAK,CAAC,CAAC;QAC1B,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,GAAG,MAAM,CAAC,CAAC;IACxC,CAAC,CAAC,CAEF;IAAA,CAAC,UAAM,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,EAAE,CAC3B;EAAA,EAAE,IAAI,CAAC"}',
+  );
 }
 it("ScriptRows", async (t) => {
   await snapshotCase(t, "ScriptRows", _jsx(ScriptRows, {}));

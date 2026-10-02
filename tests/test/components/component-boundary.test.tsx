@@ -1,4 +1,5 @@
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A server component's invocation is an instance boundary, so it hoists into a
@@ -9,16 +10,17 @@ import { snapshotCase } from "../snapshotCase.ts";
 // The component leaves no named trace: the payload carries `Text`, never
 // `TextLabel`.
 async function TextLabel(props: { text: string }) {
-  return <span>{props.text}</span>;
+  const text = props.text;
+  return cs`<span>{$text}</span>`;
 }
 
 it("componentBoundary", async (t) => {
   await snapshotCase(
     t,
     "componentBoundary",
-    <div>
-      <TextLabel text="one" />
-      <TextLabel text="two" />
-    </div>,
+    cs`<div>
+      {${(<TextLabel text="one" />)}}
+      {${(<TextLabel text="two" />)}}
+    </div>`,
   );
 });

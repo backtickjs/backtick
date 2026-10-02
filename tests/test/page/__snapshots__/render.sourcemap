@@ -1,4 +1,15 @@
 cs.lift((() =>   → cs`
+<                → <
+p                → p
+>{               → >{
+cs.splice(       →  [-semantic]
+(text)           → $text
+)                →  [-semantic]
+}</              → }</
+p                → p
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
 cs.splice(       →  [-semantic]
 (render)         → $render
 )                →  [-semantic]
@@ -20,4 +31,18 @@ cs.splice(       →  [-semantic]
  as              →  as 
 HTMLElement      → HTMLElement
 )                → )
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+p                → p
+>first</         → >first</
+p                → p
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+p                → p
+>second</        → >second</
+p                → p
+>                → >
 )())             → `

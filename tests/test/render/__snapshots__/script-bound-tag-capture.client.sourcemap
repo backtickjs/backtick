@@ -41,8 +41,8 @@ $splice1(count, Badge)                                   → 19:8 ${cs`<Badge…
 $splice2(count, Badge)                                   → 21:9 ${cs`{…
 }                                                        → 25:7 }
 {                                                        → 26:7 {
-$splice3(count, Badge)                                   → 26:8 ${(<section>{cs`<Badge…
-}                                                        → 26:69 }
+$splice3(count, Badge)                                   → 26:8 ${cs`<section>{${cs`<Badge…
+}                                                        → 26:74 }
 {                                                        → 27:7 {
 $splice4(count, Badge)                                   → 28:9 ${cs`<For…
 }                                                        → 31:7 }
@@ -123,22 +123,34 @@ $capture1                   → 23:33 count[0]()…
 }                           → 23:49 }
 />                          → 23:50  />`};…
 
-// 26:21
-($capture0, $capture1) =>   → 26:24 <Badge…
-<                           → 26:24 <
-$capture0                   → 26:25 Badge…
-n                           → 26:31 n
-=                           → 26:32 =
-{                           → 26:33 {
-$capture1                   → 26:34 count[0]()…
-[                           → 26:39 [
-0                           → 26:40 0
-]                           → 26:41 ]
-()                          → 26:42 ()
- +                          → 26:44  + 
-1000                        → 26:47 1000
-}                           → 26:51 }
-/>                          → 26:52  />`}</section>)}}…
+// 26:10
+($splice0, $capture1, $capture2) =>   → 26:13 <section>{${cs`<Badge…
+<                                     → 26:13 <
+section                               → 26:14 section
+>                                     → 26:21 >
+{                                     → 26:22 {
+$splice0($capture1, $capture2)        → 26:23 ${cs`<Badge…
+}                                     → 26:61 }
+</                                    → 26:62 </
+section                               → 26:64 section
+>                                     → 26:71 >
+
+// 26:25
+($capture0, $capture1) =>   → 26:28 <Badge…
+<                           → 26:28 <
+$capture0                   → 26:29 Badge…
+n                           → 26:35 n
+=                           → 26:36 =
+{                           → 26:37 {
+$capture1                   → 26:38 count[0]()…
+[                           → 26:43 [
+0                           → 26:44 0
+]                           → 26:45 ]
+()                          → 26:46 ()
+ +                          → 26:48  + 
+1000                        → 26:51 1000
+}                           → 26:55 }
+/>                          → 26:56  />`}}</section>`}}…
 
 // 28:11
 ($tag0, $capture1, $capture2) =>   → 28:14 <For…

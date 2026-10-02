@@ -6,5 +6,5 @@
     </span>
   </>)
 
-// 21:49
-($splice0) => $splice0()("x")
+// 21:43
+($splice0) => <div>{$splice0()("x")}</div>

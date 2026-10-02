@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { Client } from "@backtickjs/core";
+import type { JSXElement } from "@backtickjs/solid-js";
 import { evaluate } from "../evaluate.ts";
 import { render } from "@solidjs/testing-library";
 
@@ -11,7 +12,7 @@ import { render } from "@solidjs/testing-library";
 // the host was told, which is the whole of what a host would have drawn.
 
 // What an element drew, as the one element it put in the page.
-export async function drawn(value: JSX.Element): Promise<Element> {
+export async function drawn(value: Client<JSXElement>): Promise<Element> {
   const { container } = render(await evaluate(() => value));
   const node = container.firstElementChild;
   assert.ok(node !== null, "expected a rendered element");

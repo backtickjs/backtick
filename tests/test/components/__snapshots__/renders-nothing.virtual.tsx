@@ -1,4 +1,5 @@
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A server component can render nothing. The invocation is still an instance —
@@ -9,11 +10,5 @@ async function Absent() {
 }
 
 it("rendersNothing", async (t) => {
-  await snapshotCase(
-    t,
-    "rendersNothing",
-    <div>
-      <Absent />
-    </div>,
-  );
+  await snapshotCase(t, "rendersNothing", cs.lift((() => <div>{cs.splice((<Absent />))}</div>)()));
 });

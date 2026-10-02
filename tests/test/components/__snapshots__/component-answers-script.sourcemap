@@ -24,3 +24,14 @@ em                      → em
 >                       → >
 ;                       → ;
 \n})())                 → \n  }`
+cs.lift((() =>          → cs`
+<                       → <
+div                     → div
+>{                      → >{
+cs.splice(              → ${ [-semantic]
+(<Panel />)             → (<Panel />)
+)                       → } [-semantic]
+}</                     → }</
+div                     → div
+>                       → >
+)())                    → `

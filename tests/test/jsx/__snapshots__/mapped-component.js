@@ -1,4 +1,3 @@
-import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import { it } from "node:test";
 import { cs } from "@backtickjs/core";
 import { For } from "@backtickjs/solid-js";
@@ -22,38 +21,26 @@ it("mappedComponent", async (t) => {
   await snapshotCase(
     t,
     "mappedComponent",
-    _jsx("div", {
-      children: _jsx(For, {
-        each: cs.create(
-          "1sxi0mwqvirfh:27:17",
-          { params: [{ kind: "splice", value: rows, bindings: [] }] },
-          "($splice0) => $splice0()",
-          '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA0BoB,cAAA,UAAK"}',
-        ),
-        children: cs.create(
-          "1sxi0mwqvirfh:28:9",
+    cs.create(
+      "3kr2wp8s6e8ma:26:4",
+      {
+        params: [
+          { kind: "splice", value: rows, bindings: [] },
           {
-            params: [
-              {
-                kind: "splice",
-                value: _jsx("span", {
-                  children: cs.create(
-                    "1sxi0mwqvirfh:28:39",
-                    {
-                      params: [{ kind: "capture", key: "row$1sxi0mwqvirfh$0" }],
-                    },
-                    '($capture0) => "row " + $capture0',
-                    '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA2B0C,eAAA,MAAM,GAAG,SAAG"}',
-                  ),
-                }),
-                bindings: ["row$1sxi0mwqvirfh$0"],
-              },
-            ],
+            kind: "splice",
+            value: cs.create(
+              "3kr2wp8s6e8ma:28:28",
+              { params: [{ kind: "capture", key: "row$3kr2wp8s6e8ma$0" }] },
+              '($capture0) => <span>{"row " + $capture0}</span>',
+              '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA2B+B,eAAA,CAAC,IAAI,CAAC,CAAC,MAAM,GAAG,SAAG,CAAC,EAAE,IAAI,CAAC"}',
+            ),
+            bindings: ["row$3kr2wp8s6e8ma$0"],
           },
-          "($splice0) => (row) => $splice0(row)",
-          '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AA2BY,cAAA,CAAC,GAAW,EAAE,EAAE,CAAC,aAAC"}',
-        ),
-      }),
-    }),
+          { kind: "tag", value: For },
+        ],
+      },
+      "($splice0, $splice1, $tag2) => <div>\n      <$tag2 each={$splice0()}>\n        {(row) => $splice1(row)}\n      </$tag2>\n    </div>",
+      '{"version":3,"file":"mapped-component.test.jsx","sourceRoot":"","sources":["jsx/mapped-component.test.tsx"],"names":[],"mappings":"AAyBO,+BAAA,CAAC,GAAG,CACL;MAAA,CAAC,KAAG,CAAC,IAAI,CAAC,CAAC,UAAK,CAAC,CACf;QAAA,CAAC,CAAC,GAAW,EAAE,EAAE,CAAC,aAAkC,CACtD;MAAA,EAAE,KAAG,CACP;IAAA,EAAE,GAAG,CAAC"}',
+    ),
   );
 });

@@ -1,4 +1,12 @@
 cs.lift((() =>          → cs`
+<                       → <
+div                     → div
+>{                      → >\n  
+<                       → <
+span                    → span
+                        →  
+style                   → style
+={                      → ={
 "font-size: "           → "font-size: "
  + (                    →  + 
 cs.splice(              →  [-semantic]
@@ -19,8 +27,8 @@ cs.splice(              →  [-semantic]
 )                       → 
  +                      →  + 
 "px"                    → "px"
-)())                    → `
-cs.lift((() =>          → cs`
+}                       → }
+>{                      → >\n    {
 "row "                  → "row "
  +                      →  + 
 cs.splice(              →  [-semantic]
@@ -36,8 +44,10 @@ cs.splice(              →  [-semantic]
 0                       → 0
 ]                       → ]
 ()                      → ()
-)())                    → `
-cs.lift((() =>          → cs`
+}</                     → }\n  </
+span                    → span
+>                       → >
+}{                      → \n  {
 cs.splice(              →  [-semantic]
 (selected)              → $selected
 )                       →  [-semantic]
@@ -50,11 +60,16 @@ cs.splice(              →  [-semantic]
 (id)                    → $id
 )                       →  [-semantic]
  ?                      →  ? 
-cs.splice(              → ${ [-semantic]
-(<span>marker</span>)   → (<span>marker</span>)
-)                       → } [-semantic]
+<                       → <
+span                    → span
+>marker</               → >marker</
+span                    → span
+>                       → >
  :                      →  : 
 null                    → null
+}</                     → }\n</
+div                     → div
+>                       → >
 )())                    → `
 cs.lift((() => {\n      → cs`{\n    
 const                   → const 

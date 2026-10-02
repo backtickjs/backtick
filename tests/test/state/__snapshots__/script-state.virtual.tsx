@@ -12,17 +12,10 @@ async function ScriptRows() {
     return { label: cs.splice((createSignal))(__cs_label) };
 })());
 
-  return (
-    <span
-      style={cs.lift((() => "font-size: 16px")())}
-      onclick={cs.lift((() => () => {
+  return cs.lift((() => <span style={"font-size: 16px"} onclick={() => {
     const __cs_row = cs.splice((build))("one");
     __cs_row.label[1](__cs_row.label[0]() + " !!!");
-})())}
-    >
-      {cs.lift((() => cs.splice((build))("one").label[0]())())}
-    </span>
-  );
+}}>{cs.splice((build))("one").label[0]()}</span>)());
 }
 
 it("ScriptRows", async (t) => {

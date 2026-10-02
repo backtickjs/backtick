@@ -11,24 +11,15 @@ import { children, drawn, fontSize } from "./dom.ts";
 // signal is an ordinary client value — the prop takes it the way it takes any other —
 // which is what makes a write through either child reach the same storage.
 const SharedCounter = async ({ size }) =>
-  _jsx("span", {
-    style: cs.create(
-      "3mxg87ug543ri:17:11",
-      { params: [{ kind: "splice", value: size, bindings: [] }] },
-      '($splice0) => "font-size: " + $splice0()[0]() + "px"',
-      '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAgBc,cAAA,aAAa,GAAG,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI"}',
-    ),
-    onclick: cs.create(
-      "3mxg87ug543ri:18:13",
-      { params: [{ kind: "splice", value: size, bindings: [] }] },
-      "($splice0) => () => {\n    $splice0()[1]($splice0()[0]() + 1);\n}",
-      '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAiBgB,cAAA,GAAG,EAAE;IACf,UAAK,CAAC,CAAC,CAAC,CAAC,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;AAC3B,CAAC"}',
-    ),
-    children: "press",
-  });
+  cs.create(
+    "3j3w79mbd5wgp:16:2",
+    { params: [{ kind: "splice", value: size, bindings: [] }] },
+    '($splice0) => <span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {\n        $splice0()[1]($splice0()[0]() + 1);\n    }}>\n    press\n  </span>',
+    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAeK,cAAA,CAAC,IAAI,CACN,KAAK,CAAC,CAAC,aAAa,GAAG,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,IAAI,CAAC,CACzC,OAAO,CAAC,CAAC,GAAG,EAAE;QACZ,UAAK,CAAC,CAAC,CAAC,CAAC,UAAK,CAAC,CAAC,CAAC,EAAE,GAAG,CAAC,CAAC,CAAC;IAC3B,CAAC,CAAC,CAEF;;EACF,EAAE,IAAI,CAAC"}',
+  );
 async function SharingPanel() {
   return cs.create(
-    "3mxg87ug543ri:27:9",
+    "3j3w79mbd5wgp:26:9",
     {
       params: [
         { kind: "splice", value: createSignal, bindings: [] },
@@ -36,30 +27,30 @@ async function SharingPanel() {
           kind: "splice",
           value: _jsx(SharedCounter, {
             size: cs.create(
-              "3mxg87ug543ri:31:33",
-              { params: [{ kind: "capture", key: "size$3mxg87ug543ri$0" }] },
+              "3j3w79mbd5wgp:30:33",
+              { params: [{ kind: "capture", key: "size$3j3w79mbd5wgp$0" }] },
               "($capture0) => $capture0",
-              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA8BoC,eAAA,SAAI"}',
+              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA6BoC,eAAA,SAAI"}',
             ),
           }),
-          bindings: ["size$3mxg87ug543ri$0"],
+          bindings: ["size$3j3w79mbd5wgp$0"],
         },
         {
           kind: "splice",
           value: _jsx(SharedCounter, {
             size: cs.create(
-              "3mxg87ug543ri:32:33",
-              { params: [{ kind: "capture", key: "size$3mxg87ug543ri$0" }] },
+              "3j3w79mbd5wgp:31:33",
+              { params: [{ kind: "capture", key: "size$3j3w79mbd5wgp$0" }] },
               "($capture0) => $capture0",
-              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA+BoC,eAAA,SAAI"}',
+              '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA8BoC,eAAA,SAAI"}',
             ),
           }),
-          bindings: ["size$3mxg87ug543ri$0"],
+          bindings: ["size$3j3w79mbd5wgp$0"],
         },
       ],
     },
     "($splice0, $splice1, $splice2) => {\n    const size = $splice0()(16);\n    return (<div>\n        {$splice1(size)}\n        {$splice2(size)}\n      </div>);\n}",
-    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AA0BY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,cAAsC,CACvC;QAAA,CAAC,cAAsC,CACzC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
+    '{"version":3,"file":"local-state-prop.test.jsx","sourceRoot":"","sources":["state/local-state-prop.test.tsx"],"names":[],"mappings":"AAyBY;IACR,MAAM,IAAI,GAAG,UAAa,CAAC,EAAE,CAAC,CAAC;IAC/B,OAAO,CACL,CAAC,GAAG,CACF;QAAA,CAAC,cAAsC,CACvC;QAAA,CAAC,cAAsC,CACzC;MAAA,EAAE,GAAG,CAAC,CACP,CAAC;AACJ,CAAC"}',
   );
 }
 describe("local state", () => {

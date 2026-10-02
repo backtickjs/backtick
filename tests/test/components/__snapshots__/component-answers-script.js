@@ -12,7 +12,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // draw nothing.
 async function Panel() {
   return cs.create(
-    "3t9qtypqc1fe7:14:9",
+    "3bpy25n6ucj1q:14:9",
     { params: [{ kind: "splice", value: createSignal, bindings: [] }] },
     "($splice0) => {\n    const n = $splice0()(2);\n    return <em>{n[0]()}</em>;\n}",
     '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["components/component-answers-script.test.tsx"],"names":[],"mappings":"AAaY;IACR,MAAM,CAAC,GAAG,UAAa,CAAC,CAAC,CAAC,CAAC;IAC3B,OAAO,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE,CAAC,CAAC;AAC3B,CAAC"}',
@@ -22,6 +22,11 @@ it("componentAnswersScript", async (t) => {
   await snapshotCase(
     t,
     "componentAnswersScript",
-    _jsx("div", { children: _jsx(Panel, {}) }),
+    cs.create(
+      "3bpy25n6ucj1q:24:4",
+      { params: [{ kind: "splice", value: _jsx(Panel, {}), bindings: [] }] },
+      "($splice0) => <div>{$splice0()}</div>",
+      '{"version":3,"file":"component-answers-script.test.jsx","sourceRoot":"","sources":["components/component-answers-script.test.tsx"],"names":[],"mappings":"AAuBO,cAAA,CAAC,GAAG,CAAC,CAAC,UAAc,CAAC,EAAE,GAAG,CAAC"}',
+    ),
   );
 });

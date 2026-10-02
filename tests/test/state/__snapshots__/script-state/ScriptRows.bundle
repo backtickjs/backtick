@@ -1,32 +1,26 @@
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { style as _$style } from "solid-js/web";
-import { effect as _$effect } from "solid-js/web";
+import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
-import { addEventListener as _$addEventListener } from "solid-js/web";
-var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
+var _tmpl$ = /*#__PURE__*/ _$template(`<span style=font-size:16px>`);
 import { createSignal as $i0 } from "solid-js";
-const $cs0 = () => "font-size: 16px";
-const $cs1 = ($splice0) => () => {
-  const row = $splice0()("one");
-  row.label[1](row.label[0]() + " !!!");
-};
-const $cs2 = ($splice0) => (label) => {
+const $Component = (props) => props.body();
+const $cs0 = ($splice0) =>
+  (() => {
+    var _el$ = _tmpl$();
+    _el$.$$click = () => {
+      const row = $splice0()("one");
+      row.label[1](row.label[0]() + " !!!");
+    };
+    _$insert(_el$, () => $splice0()("one").label[0]());
+    return _el$;
+  })();
+const $cs1 = ($splice0) => (label) => {
   return {
     label: $splice0()(label),
   };
 };
-const $cs3 = ($splice0) => $splice0()("one").label[0]();
-export default (() => {
-  var _el$ = _tmpl$();
-  _$addEventListener(
-    _el$,
-    "click",
-    $cs1(() => $cs2(() => $i0)),
-    true,
-  );
-  _$insert(_el$, () => $cs3(() => $cs2(() => $i0)));
-  _$effect((_$p) => _$style(_el$, $cs0(), _$p));
-  return _el$;
-})();
+export default _$createComponent($Component, {
+  body: () => $cs0(() => $cs1(() => $i0)),
+});
 _$delegateEvents(["click"]);

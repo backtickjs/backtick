@@ -1,12 +1,11 @@
-// 17:12
-($splice0) => "font-size: " + $splice0()[0]() + "px"
+// 16:3
+($splice0) => <span style={"font-size: " + $splice0()[0]() + "px"} onclick={() => {
+        $splice0()[1]($splice0()[0]() + 1);
+    }}>
+    press
+  </span>
 
-// 18:14
-($splice0) => () => {
-    $splice0()[1]($splice0()[0]() + 1);
-}
-
-// 27:10
+// 26:10
 ($splice0, $splice1, $splice2) => {
     const size = $splice0()(16);
     return (<div>
@@ -15,8 +14,8 @@
       </div>);
 }
 
-// 31:34
+// 30:34
 ($capture0) => $capture0
 
-// 32:34
+// 31:34
 ($capture0) => $capture0

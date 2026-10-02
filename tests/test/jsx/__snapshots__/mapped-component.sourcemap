@@ -1,21 +1,39 @@
-cs.lift((() =>   → cs`
-cs.splice(       →  [-semantic]
-(rows)           → $rows
-)                →  [-semantic]
-)())             → `
-cs.lift((() =>   → cs`
-(                → (
-__cs_row         → row
-:                → : 
-number           → number
-) =>             → ) => 
-cs.splice(       → ${ [-semantic]
-(<span>{         → (<span>{
-cs.lift((() =>   → cs`
-"row "           → "row "
- +               →  + 
-__cs_row         → row
-)())             → `
-}</span>)        → }</span>)
-)                → } [-semantic]
-)())             → `
+cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
+<                                         → <
+div                                       → div
+>{                                        → >\n      
+<                                         → <
+__cs_For                                  → For
+                                          →  
+each                                      → each
+={                                        → ={
+cs.splice(                                →  [-semantic]
+(rows)                                    → $rows
+)                                         →  [-semantic]
+}                                         → }
+>{                                        → >\n        {
+(                                         → (
+__cs_row                                  → row
+:                                         → : 
+number                                    → number
+) =>                                      → ) => 
+cs.splice(                                → ${ [-semantic]
+cs.lift((() =>                            → cs`
+<                                         → <
+span                                      → span
+>{                                        → >{
+"row "                                    → "row "
+ +                                        →  + 
+__cs_row                                  → row
+}</                                       → }</
+span                                      → span
+>                                         → >
+)())                                      → `
+)                                         → } [-semantic]
+}</                                       → }\n      </
+__cs_For                                  → For
+>                                         → >
+}</                                       → \n    </
+div                                       → div
+>                                         → >
+)())                                      → `

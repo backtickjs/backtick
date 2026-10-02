@@ -1,4 +1,3 @@
-import { jsx as _jsx } from "@backtickjs/solid-js/jsx-runtime";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cs } from "@backtickjs/core";
@@ -7,7 +6,12 @@ import { evaluate } from "../evaluate.ts";
 import { snapshotCase } from "../snapshotCase.ts";
 // Text a page's markup would end early on, were the bundle written into it.
 const text = `& < > " ' </script> <!-- -->`;
-const scriptCloseText = _jsx("p", { children: text });
+const scriptCloseText = cs.create(
+  "3ilsptqylvqsp:11:24",
+  { params: [{ kind: "splice", value: text, bindings: [] }] },
+  "($splice0) => <p>{$splice0()}</p>",
+  '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAU2B,cAAA,CAAC,CAAC,CAAC,CAAC,UAAK,CAAC,EAAE,CAAC,CAAC"}',
+);
 const drawn = [];
 afterEach(() => drawn.splice(0).forEach((container) => container.remove()));
 // A page as its server writes it: a container, and the client entry drawing
@@ -20,7 +24,7 @@ async function draw(element) {
   drawn.push(container);
   await evaluate(
     cs.create(
-      "13kggozl76hsb:25:4",
+      "3ilsptqylvqsp:25:4",
       {
         params: [
           { kind: "splice", value: render, bindings: [] },
@@ -40,8 +44,22 @@ describe("a page's client entry", () => {
     assert.equal(container.querySelector("p")?.textContent, text);
   });
   it("draws each bundle into its own container", async () => {
-    const first = await draw(_jsx("p", { children: "first" }));
-    const second = await draw(_jsx("p", { children: "second" }));
+    const first = await draw(
+      cs.create(
+        "3ilsptqylvqsp:37:29",
+        { params: [] },
+        "() => <p>first</p>",
+        '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAoCgC,MAAA,CAAC,CAAC,CAAC,KAAK,EAAE,CAAC,CAAC"}',
+      ),
+    );
+    const second = await draw(
+      cs.create(
+        "3ilsptqylvqsp:38:30",
+        { params: [] },
+        "() => <p>second</p>",
+        '{"version":3,"file":"render.test.jsx","sourceRoot":"","sources":["page/render.test.tsx"],"names":[],"mappings":"AAqCiC,MAAA,CAAC,CAAC,CAAC,MAAM,EAAE,CAAC,CAAC"}',
+      ),
+    );
     assert.equal(first.textContent, "first");
     assert.equal(second.textContent, "second");
   });

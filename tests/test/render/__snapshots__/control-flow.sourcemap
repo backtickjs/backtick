@@ -1,44 +1,168 @@
-cs.lift((() =>          → cs`
-cs.splice(              →  [-semantic]
-(rows)                  → $rows
-)                       →  [-semantic]
-)())                    → `
-cs.lift((() =>          → cs`
-(                       → (
-__cs_row                → row
-:                       → : 
-() =>                   → () => 
-string                  → string
-,                       → , 
-__cs_index              → index
-:                       → : 
-number                  → number
-) =>                    → ) => 
-<                       → (\n        <
-li                      → li
->{                      → >{
-__cs_index              → index
- +                      →  + 
-": "                    → ": "
- +                      →  + 
-__cs_row                → row
-()                      → ()
-}</                     → }</
-li                      → li
->                       → >\n      )
-)())                    → `
-cs.lift((() =>          → cs`
-1                       → 1
- >                      →  > 
-2                       → 2
-)())                    → `
-cs.lift((() =>          → cs`
-2                       → 2
- >                      →  > 
-1                       → 1
-)())                    → `
-cs.lift((() => {\n      → cs`{\n      
-throw                   → throw 
-"drawn wrong"           → "drawn wrong"
-;                       → ;
-\n})())                 → \n    }`
+cs.lift(((__cs_Index = cs.splice(Index)) => → cs`
+<                                         → <
+ul                                        → ul
+>{                                        → >\n  
+<                                         → <
+__cs_Index                                → Index
+                                          →  
+each                                      → each
+={                                        → ={
+cs.splice(                                →  [-semantic]
+(rows)                                    → $rows
+)                                         →  [-semantic]
+}                                         → }
+>{                                        → >\n    {
+(                                         → (
+__cs_row                                  → row
+:                                         → : 
+() =>                                     → () => 
+string                                    → string
+,                                         → , 
+__cs_index                                → index
+:                                         → : 
+number                                    → number
+) =>                                      → ) => 
+<                                         → <
+li                                        → li
+>{                                        → >{
+__cs_index                                → index
+ +                                        →  + 
+": "                                      → ": "
+ +                                        →  + 
+__cs_row                                  → row
+()                                        → ()
+}</                                       → }</
+li                                        → li
+>                                         → >
+}</                                       → }\n  </
+__cs_Index                                → Index
+>                                         → >
+}</                                       → \n</
+ul                                        → ul
+>                                         → >
+)())                                      → `
+cs.lift(((__cs_Switch = cs.splice(Switch), __cs_Match = cs.splice(Match)) => → cs`
+<                                         → <
+__cs_Switch                               → Switch
+                                          →  
+fallback                                  → fallback
+={                                        → ={
+<                                         → <
+p                                         → p
+>none</                                   → >none</
+p                                         → p
+>                                         → >
+}                                         → }
+>{                                        → >\n  
+<                                         → <
+__cs_Match                                → Match
+                                          →  
+when                                      → when
+={                                        → ={
+1                                         → 1
+ >                                        →  > 
+2                                         → 2
+}                                         → }
+>{                                        → >\n    
+<                                         → <
+p                                         → p
+>wrong</                                  → >wrong</
+p                                         → p
+>                                         → >
+}</                                       → \n  </
+__cs_Match                                → Match
+>                                         → >
+}{                                        → \n  
+<                                         → <
+__cs_Match                                → Match
+                                          →  
+when                                      → when
+={                                        → ={
+2                                         → 2
+ >                                        →  > 
+1                                         → 1
+}                                         → }
+>{                                        → >\n    
+<                                         → <
+p                                         → p
+>right</                                  → >right</
+p                                         → p
+>                                         → >
+}</                                       → \n  </
+__cs_Match                                → Match
+>                                         → >
+}</                                       → \n</
+__cs_Switch                               → Switch
+>                                         → >
+)())                                      → `
+cs.lift(((__cs_ErrorBoundary = cs.splice(ErrorBoundary)) => → cs`
+<                                         → <
+__cs_ErrorBoundary                        → ErrorBoundary
+                                          →  
+fallback                                  → fallback
+={                                        → ={
+<                                         → <
+p                                         → p
+>caught</                                 → >caught</
+p                                         → p
+>                                         → >
+}                                         → }
+>{                                        → >{\n  
+cs.splice(                                → ${ [-semantic]
+cs.lift((() => {\n                        → cs`{\n    
+throw                                     → throw 
+"drawn wrong"                             → "drawn wrong"
+;                                         → ;
+\n})())                                   → \n  }`
+)                                         → } [-semantic]
+}</                                       → \n}</
+__cs_ErrorBoundary                        → ErrorBoundary
+>                                         → >
+)())                                      → `
+cs.lift(((__cs_Suspense = cs.splice(Suspense)) => → cs`
+<                                         → <
+__cs_Suspense                             → Suspense
+                                          →  
+fallback                                  → fallback
+={                                        → ={
+<                                         → <
+p                                         → p
+>loading</                                → >loading</
+p                                         → p
+>                                         → >
+}                                         → }
+>{                                        → >\n  
+<                                         → <
+p                                         → p
+>loaded</                                 → >loaded</
+p                                         → p
+>                                         → >
+}</                                       → \n</
+__cs_Suspense                             → Suspense
+>                                         → >
+)())                                      → `
+cs.lift(((__cs_Portal = cs.splice(Portal)) => → cs`
+<                                         → <
+div                                       → div
+>{                                        → >\n  
+<                                         → <
+p                                         → p
+>here</                                   → >here</
+p                                         → p
+>                                         → >
+}{                                        → \n  
+<                                         → <
+__cs_Portal                               → Portal
+>{                                        → >\n    
+<                                         → <
+p                                         → p
+>elsewhere</                              → >elsewhere</
+p                                         → p
+>                                         → >
+}</                                       → \n  </
+__cs_Portal                               → Portal
+>                                         → >
+}</                                       → \n</
+div                                       → div
+>                                         → >
+)())                                      → `

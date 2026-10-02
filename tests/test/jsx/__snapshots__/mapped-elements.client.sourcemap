@@ -1,0 +1,23 @@
+// 15:5
+($splice0) =>   → 15:8 <div>{${elementLabels.map((item)…
+<               → 15:8 <
+div             → 15:9 div
+>               → 15:12 >
+{               → 15:13 {
+$splice0()      → 15:14 ${elementLabels.map((item)…
+}               → 15:70 }
+</              → 15:71 </
+div             → 15:73 div
+>               → 15:76 >
+
+// 15:44
+($splice0) =>   → 15:47 <span>{$item}</span>`)}}</div>`,…
+<               → 15:47 <
+span            → 15:48 span
+>               → 15:52 >
+{               → 15:53 {
+$splice0()      → 15:54 $item}</span>`)}}</div>`,…
+}               → 15:59 }
+</              → 15:60 </
+span            → 15:62 span
+>               → 15:66 >

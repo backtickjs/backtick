@@ -1,1 +1,18 @@
-
+cs.lift((() =>    → cs`
+<                 → <
+span              → span
+>hi</             → >hi</
+span              → span
+>                 → >
+)())              → `
+cs.lift((() =>    → cs`
+<                 → <
+div               → div
+>{                → >{
+cs.splice(        → ${ [-semantic]
+[shared, shared]  → [shared, shared]
+)                 → } [-semantic]
+}</               → }</
+div               → div
+>                 → >
+)())              → `

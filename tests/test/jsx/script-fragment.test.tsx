@@ -18,5 +18,5 @@ const listed = cs`(name: string) => (
 )`;
 
 it("scriptFragment", async (t) => {
-  await snapshotCase(t, "scriptFragment", <div>{cs`$listed("x")`}</div>);
+  await snapshotCase(t, "scriptFragment", cs`<div>{$listed("x")}</div>`);
 });

@@ -1,16 +1,17 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cs } from "@backtickjs/core";
+import { type Client, cs } from "@backtickjs/core";
 import { createSignal } from "@backtickjs/solid-js";
 import { render, screen } from "@solidjs/testing-library";
 import { userEvent } from "@testing-library/user-event";
 import { snapshotCase } from "../snapshotCase.ts";
-import type { JSX, Prop } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
+import type { JSXElement } from "@backtickjs/solid-js";
 import { evaluate } from "../evaluate.ts";
 
 // A host component whose script declares its own `Badge`, and draws what it was
 // handed beside it.
-async function Panel(props: { body: Prop<JSX.Element> }) {
+async function Panel(props: { body: Client<JSXElement> }) {
   return cs`{
     const Badge = (p: { n: number }) => <i>{"panel " + p.n}</i>;
     return (

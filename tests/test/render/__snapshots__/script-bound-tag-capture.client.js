@@ -23,7 +23,10 @@
 // 23:20
 ($capture0, $capture1) => <$capture0 n={$capture1[0]() + 100}/>
 
-// 26:21
+// 26:10
+($splice0, $capture1, $capture2) => <section>{$splice0($capture1, $capture2)}</section>
+
+// 26:25
 ($capture0, $capture1) => <$capture0 n={$capture1[0]() + 1000}/>
 
 // 28:11

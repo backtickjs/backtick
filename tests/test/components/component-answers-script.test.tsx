@@ -21,8 +21,6 @@ it("componentAnswersScript", async (t) => {
   await snapshotCase(
     t,
     "componentAnswersScript",
-    <div>
-      <Panel />
-    </div>,
+    cs`<div>{${(<Panel />)}}</div>`,
   );
 });

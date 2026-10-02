@@ -42,13 +42,19 @@ const $cs3 = ($capture0, $capture1) =>
       return $capture1[0]() + 100;
     },
   });
-const $cs4 = ($capture0, $capture1) =>
+const $cs4 = ($splice0, $capture1, $capture2) =>
+  (() => {
+    var _el$4 = _tmpl$3();
+    _$insert(_el$4, () => $splice0($capture1, $capture2));
+    return _el$4;
+  })();
+const $cs5 = ($capture0, $capture1) =>
   _$createComponent($capture0, {
     get n() {
       return $capture1[0]() + 1000;
     },
   });
-const $cs5 = ($tag0, $capture1, $capture2) =>
+const $cs6 = ($tag0, $capture1, $capture2) =>
   _$createComponent($tag0, {
     each: [1, 2],
     children: (m) =>
@@ -62,12 +68,7 @@ export default $cs0(
   () => $i0,
   (count, Badge) => $cs1(Badge, count),
   (count, Badge) => $cs2($cs3, Badge, count),
-  (count, Badge) =>
-    (() => {
-      var _el$4 = _tmpl$3();
-      _$insert(_el$4, () => $cs4(Badge, count));
-      return _el$4;
-    })(),
-  (count, Badge) => $cs5($i1, Badge, count),
+  (count, Badge) => $cs4($cs5, Badge, count),
+  (count, Badge) => $cs6($i1, Badge, count),
 );
 _$delegateEvents(["click"]);

@@ -1,1 +1,29 @@
-
+cs.lift((() =>                            → cs`
+<                                         → <
+span                                      → span
+                                          →  
+class                                     → class
+={                                        → ={
+cs.splice(                                →  [-semantic]
+(accent)                                  → $accent
+)                                         →  [-semantic]
+}                                         → }
+>{                                        → >{
+cs.splice(                                →  [-semantic]
+(label)                                   → $label
+)                                         →  [-semantic]
+}</                                       → }</
+span                                      → span
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
+<                                         → <
+div                                       → div
+>{                                        → >\n      {
+cs.splice(                                → ${ [-semantic]
+(<Swatch palette={new Palette("danger")} label={() => "one"} />)→ (<Swatch palette={new Palette("danger")} label={() => "one"} />)
+)                                         → } [-semantic]
+}</                                       → }\n    </
+div                                       → div
+>                                         → >
+)())                                      → `

@@ -4,3 +4,32 @@ cs.splice(       →  [-semantic]
 (n)              → $n
 )                →  [-semantic]
 )())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n      
+<                → <
+span             → span
+                 →  
+onclick          → onclick
+={               → ={
+cs.splice(       → ${ [-semantic]
+make(1)          → make(1)
+)                → } [-semantic]
+}                → }
+/>               →  />
+}{               → \n      
+<                → <
+span             → span
+                 →  
+onclick          → onclick
+={               → ={
+cs.splice(       → ${ [-semantic]
+make(2)          → make(2)
+)                → } [-semantic]
+}                → }
+/>               →  />
+}</              → \n    </
+div              → div
+>                → >
+)())             → `

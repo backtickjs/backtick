@@ -12,16 +12,12 @@ import { children, drawn, fontSize } from "./dom.ts";
 // draws the pair, handed to each child as a prop, so both read one storage. The
 // signal is an ordinary client value — the prop takes it the way it takes any other —
 // which is what makes a write through either child reach the same storage.
-const SharedCounter = async ({ size }: { size: Client<Signal<number>> }) => (
-  <span
-    style={cs.lift((() => "font-size: " + cs.splice((size))[0]() + "px")())}
-    onclick={cs.lift((() => () => {
+const SharedCounter = async ({ size }: { size: Client<Signal<number>> }) =>
+  cs.lift((() => <span style={"font-size: " + cs.splice((size))[0]() + "px"} onclick={() => {
     cs.splice((size))[1](cs.splice((size))[0]() + 1);
-})())}
-  >
+}}>
     press
-  </span>
-);
+  </span>)());
 
 async function SharingPanel() {
   return cs.lift((() => {

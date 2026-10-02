@@ -1,4 +1,5 @@
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // Invocations nest, and each one is an instance. `Outer` renders `Inner`, which
@@ -10,7 +11,7 @@ import { snapshotCase } from "../snapshotCase.ts";
 // entry, sharing one instance and therefore one lifetime for any state they
 // declared.
 async function Inner() {
-  return <span>x</span>;
+  return cs.lift((() => <span>x</span>)());
 }
 
 async function Outer() {
@@ -18,11 +19,5 @@ async function Outer() {
 }
 
 it("componentNesting", async (t) => {
-  await snapshotCase(
-    t,
-    "componentNesting",
-    <div>
-      <Outer />
-    </div>,
-  );
+  await snapshotCase(t, "componentNesting", cs.lift((() => <div>{cs.splice((<Outer />))}</div>)()));
 });

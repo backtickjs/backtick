@@ -23,10 +23,6 @@ it("mappedComponent", async (t) => {
   await snapshotCase(
     t,
     "mappedComponent",
-    <div>
-      <For each={cs.lift((() => cs.splice((rows)))())}>
-        {cs.lift((() => (__cs_row: number) => cs.splice((<span>{cs.lift((() => "row " + __cs_row)())}</span>)))())}
-      </For>
-    </div>,
+    cs.lift(((__cs_For = cs.splice(For)) => <div>{<__cs_For each={cs.splice((rows))}>{(__cs_row: number) => cs.splice(cs.lift((() => <span>{"row " + __cs_row}</span>)()))}</__cs_For>}</div>)()),
   );
 });

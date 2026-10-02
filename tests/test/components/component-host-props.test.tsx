@@ -1,10 +1,11 @@
 import { it } from "node:test";
+import { cs } from "@backtickjs/core";
 import { snapshotCase } from "../snapshotCase.ts";
 
 // A component's props are the host's own. It runs while bundling and consumes
 // them there, so they never cross and need not be able to: a class instance and
 // a host function are both fine here, where either would be refused in a
-// `<div>`'s props.
+// script.
 //
 // This is why a drawing's props are `unknown` rather than what a client value
 // may be — crossing is a tag's requirement, checked where a tag lowers.
@@ -16,15 +17,17 @@ class Palette {
 }
 
 async function Swatch(props: { palette: Palette; label: () => string }) {
-  return <span class={props.palette.accent}>{props.label()}</span>;
+  const accent = props.palette.accent;
+  const label = props.label();
+  return cs`<span class={$accent}>{$label}</span>`;
 }
 
 it("componentHostProps", async (t) => {
   await snapshotCase(
     t,
     "componentHostProps",
-    <div>
-      <Swatch palette={new Palette("danger")} label={() => "one"} />
-    </div>,
+    cs`<div>
+      {${(<Swatch palette={new Palette("danger")} label={() => "one"} />)}}
+    </div>`,
   );
 });

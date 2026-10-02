@@ -5,62 +5,31 @@ import {
   ErrorBoundary,
   Index,
   Match,
-  Portal,
   Suspense,
   Switch,
 } from "@backtickjs/solid-js";
+import { Portal } from "@backtickjs/solid-js/web";
 import { evaluate } from "../evaluate.ts";
 import { render, screen } from "@solidjs/testing-library";
 import { snapshotCase } from "../snapshotCase.ts";
 
-// Solid's control flow written in host JSX, around what scripts draw: each is
-// a server component, so the host can write it where a page is laid out.
+// Solid's control flow in a script, as Solid types and draws it.
 
 const rows = ["first", "second"];
 
-const indexed = (
-  <ul>
-    <Index each={cs.lift((() => cs.splice((rows)))())}>
-      {cs.lift((() => (__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li>)())}
-    </Index>
-  </ul>
-);
+const indexed = cs.lift(((__cs_Index = cs.splice(Index)) => <ul>{<__cs_Index each={cs.splice((rows))}>{(__cs_row: () => string, __cs_index: number) => <li>{__cs_index + ": " + __cs_row()}</li>}</__cs_Index>}</ul>)());
 
-const switched = (
-  <Switch fallback={<p>none</p>}>
-    <Match when={cs.lift((() => 1 > 2)())}>
-      <p>wrong</p>
-    </Match>
-    <Match when={cs.lift((() => 2 > 1)())}>
-      <p>right</p>
-    </Match>
-  </Switch>
-);
+const switched = cs.lift(((__cs_Switch = cs.splice(Switch), __cs_Match = cs.splice(Match)) => <__cs_Switch fallback={<p>none</p>}>{<__cs_Match when={1 > 2}>{<p>wrong</p>}</__cs_Match>}{<__cs_Match when={2 > 1}>{<p>right</p>}</__cs_Match>}</__cs_Switch>)());
 
-const caught = (
-  <ErrorBoundary fallback={<p>caught</p>}>
-    {cs.lift((() => {
+const caught = cs.lift(((__cs_ErrorBoundary = cs.splice(ErrorBoundary)) => <__cs_ErrorBoundary fallback={<p>caught</p>}>{cs.splice(cs.lift((() => {
     throw "drawn wrong";
-})())}
-  </ErrorBoundary>
-);
+})()))}</__cs_ErrorBoundary>)());
 
-const suspended = (
-  <Suspense fallback={<p>loading</p>}>
-    <p>loaded</p>
-  </Suspense>
-);
+const suspended = cs.lift(((__cs_Suspense = cs.splice(Suspense)) => <__cs_Suspense fallback={<p>loading</p>}>{<p>loaded</p>}</__cs_Suspense>)());
 
-const portaled = (
-  <div>
-    <p>here</p>
-    <Portal>
-      <p>elsewhere</p>
-    </Portal>
-  </div>
-);
+const portaled = cs.lift(((__cs_Portal = cs.splice(Portal)) => <div>{<p>here</p>}{<__cs_Portal>{<p>elsewhere</p>}</__cs_Portal>}</div>)());
 
-describe("control flow in host JSX", () => {
+describe("control flow in a script", () => {
   it("draws each position with Index", async () => {
     render(await evaluate(() => indexed));
     assert.deepEqual(

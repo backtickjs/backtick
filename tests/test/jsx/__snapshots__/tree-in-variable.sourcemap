@@ -1,10 +1,21 @@
 cs.lift((() =>   → cs`
+<                → <
+span             → span
+>x</             → >x</
+span             → span
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
 () => {\n        → () => {\n  
 const            → const 
 __cs_tree        → tree
  =               →  = 
 cs.splice(       → ${ [-semantic]
-(<div />)        → (<div />)
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+ />              →  />
+)())             → `
 )                → } [-semantic]
 ;                → ;
 \n               → \n  
@@ -29,14 +40,19 @@ __cs_tree        → tree
 \n}              → \n}
 )())             → `
 cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n      {
 cs.splice(       →  [-semantic]
 (heldElement)    → $heldElement
 )                →  [-semantic]
 ()               → ()
-)())             → `
-cs.lift((() =>   → cs`
+}{               → }\n      {
 cs.splice(       →  [-semantic]
 (heldComponent)  → $heldComponent
 )                →  [-semantic]
 ()               → ()
+}</              → }\n    </
+div              → div
+>                → >
 )())             → `

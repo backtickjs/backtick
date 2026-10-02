@@ -24,6 +24,19 @@ __cs_n                                    → n
 __cs_m                                    → m
 )())                                      → `
 cs.lift((() =>                            → cs`
+<                                         → <
+h2                                        → h2
+>{                                        → >{
+cs.splice(                                →  [-semantic]
+(props)                                   → $props
+)                                         →  [-semantic]
+.                                         → .
+title                                     → title
+}</                                       → }</
+h2                                        → h2
+>                                         → >
+)())                                      → `
+cs.lift((() =>                            → cs`
 "shared"                                  → "shared"
 )())                                      → `
 cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n  
