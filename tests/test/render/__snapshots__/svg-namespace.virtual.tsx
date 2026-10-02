@@ -17,11 +17,11 @@ async function Ring() {
   return cs.lift((() => <circle cx={"5"} cy={"5"} r={"4"} fill={"none"} stroke={"currentColor"}/>)());
 }
 
-const svgNamespace = cs.lift(((__cs_For = cs.splice(For)) => {
+const svgNamespace = cs.lift((() => {
     const __cs_Dot = (__cs_props: {
         x: number;
     }) => (<circle cx={__cs_props.x} cy={"5"} r={"2"}>{<title>{"dot " + __cs_props.x}</title>}</circle>);
-    return (<div>{<a href={"/shapes"}>{"shapes"}</a>}{<svg viewBox={"0 0 30 10"} width={"120"}>{cs.splice((<Ring />))}{<__cs_For each={[10, 20]}>{(__cs_x: number) => <__cs_Dot x={__cs_x}/>}</__cs_For>}{<foreignObject x={"0"} y={"0"} width={"10"} height={"10"}>{<p>{"html again"}</p>}</foreignObject>}</svg>}</div>);
+    return (<div>{<a href={"/shapes"}>{"shapes"}</a>}{<svg viewBox={"0 0 30 10"} width={"120"}>{cs.splice((<Ring />))}{(void For, cs.splice(For)({ each: [10, 20], children: (__cs_x: number) => <__cs_Dot x={__cs_x}/> }))}{<foreignObject x={"0"} y={"0"} width={"10"} height={"10"}>{<p>{"html again"}</p>}</foreignObject>}</svg>}</div>);
 })());
 
 it("svgNamespace", async (t) => {

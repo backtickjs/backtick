@@ -1,128 +1,131 @@
-cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n    
-const                                     → const 
-__cs_names                                → names
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-<                                         → <
-string                                    → string
-[]                                        → []
->(                                        → >(
-[                                         → [
-"a"                                       → "a"
-,                                         → , 
-"b"                                       → "b"
-,                                         → , 
-"c"                                       → "c"
-]                                         → ]
-)                                         → )
-;                                         → ;
-\n                                        → \n    
-const                                     → const 
-__cs_rotate                               → rotate
- =                                        →  = 
-() => {\n                                 → () => {\n      
-const                                     → const 
-__cs_held                                 → held
- =                                        →  = 
-__cs_names                                → names
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-;                                         → ;
-\n                                        → \n      
-__cs_names                                → names
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-[                                         → [
-__cs_held                                 → held
-[                                         → [
-2                                         → 2
-]                                         → ]
-,                                         → , 
-__cs_held                                 → held
-[                                         → [
-0                                         → 0
-]                                         → ]
-,                                         → , 
-__cs_held                                 → held
-[                                         → [
-1                                         → 1
-]                                         → ]
-]                                         → ]
-)                                         → )
-;                                         → ;
-\n    }                                   → \n    }
-;                                         → ;
-\n                                        → \n    
-return                                    → return 
-(                                         → (\n      
-<                                         → <
-div                                       → div
->{                                        → >\n        
-<                                         → <
-span                                      → span
-                                          →  
-onclick                                   → onclick
-={                                        → ={
-__cs_rotate                               → rotate
-}                                         → }
->rotate</                                 → >rotate</
-span                                      → span
->                                         → >
-}{                                        → \n        
-<                                         → <
-div                                       → div
->{                                        → >\n          
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-__cs_names                                → names
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}                                         → }
->{                                        → >\n            {
-(                                         → (
-__cs_name                                 → name
-:                                         → : 
-string                                    → string
-,                                         → , 
-__cs_index                                → index
-:                                         → : 
-() =>                                     → () => 
-number                                    → number
-) =>                                      → ) => 
-(                                         → (\n              
-<                                         → <
-span                                      → span
->{                                        → >{
-__cs_name                                 → name
- +                                        →  + 
-" at "                                    → " at "
- +                                        →  + 
-__cs_index                                → index
-()                                        → ()
-}</                                       → }</
-span                                      → span
->                                         → >
-)                                         → \n            )
-}</                                       → }\n          </
-__cs_For                                  → For
->                                         → >
-}</                                       → \n        </
-div                                       → div
->                                         → >
-}</                                       → \n      </
-div                                       → div
->                                         → >
-)                                         → \n    )
-;                                         → ;
-\n})())                                   → \n  }`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_names              → names
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+<                       → <
+string                  → string
+[]                      → []
+>(                      → >(
+[                       → [
+"a"                     → "a"
+,                       → , 
+"b"                     → "b"
+,                       → , 
+"c"                     → "c"
+]                       → ]
+)                       → )
+;                       → ;
+\n                      → \n    
+const                   → const 
+__cs_rotate             → rotate
+ =                      →  = 
+() => {\n               → () => {\n      
+const                   → const 
+__cs_held               → held
+ =                      →  = 
+__cs_names              → names
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+;                       → ;
+\n                      → \n      
+__cs_names              → names
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+[                       → [
+__cs_held               → held
+[                       → [
+2                       → 2
+]                       → ]
+,                       → , 
+__cs_held               → held
+[                       → [
+0                       → 0
+]                       → ]
+,                       → , 
+__cs_held               → held
+[                       → [
+1                       → 1
+]                       → ]
+]                       → ]
+)                       → )
+;                       → ;
+\n    }                 → \n    }
+;                       → ;
+\n                      → \n    
+return                  → return 
+(                       → (\n      
+<                       → <
+div                     → div
+>{                      → >\n        
+<                       → <
+span                    → span
+                        →  
+onclick                 → onclick
+={                      → ={
+__cs_rotate             → rotate
+}                       → }
+>rotate</               → >rotate</
+span                    → span
+>                       → >
+}{                      → \n        
+<                       → <
+div                     → div
+>{                      → >\n          
+(void                   → <For each={names[0]()}>\n            {(name: string, index: () => number) => (\n              <span>{name + " at " + index()}</span>\n            )}\n          </ [-semantic -navigation -verification]
+For                     → For
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+For                     → For
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → For 
+each                    → each
+:                       → ={
+__cs_names              → names
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+, children:             → >\n            {
+(                       → (
+__cs_name               → name
+:                       → : 
+string                  → string
+,                       → , 
+__cs_index              → index
+:                       → : 
+() =>                   → () => 
+number                  → number
+) =>                    → ) => 
+(                       → (\n              
+<                       → <
+span                    → span
+>{                      → >{
+__cs_name               → name
+ +                      →  + 
+" at "                  → " at "
+ +                      →  + 
+__cs_index              → index
+()                      → ()
+}</                     → }</
+span                    → span
+>                       → >
+)                       → \n            )
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+}</                     → \n        </
+div                     → div
+>                       → >
+}</                     → \n      </
+div                     → div
+>                       → >
+)                       → \n    )
+;                       → ;
+\n})())                 → \n  }`

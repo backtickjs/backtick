@@ -39,12 +39,12 @@ const Held = cs.lift((() => (__cs_props: {
     return <>{__cs_shown[0]() ? <em>shown</em> : <i>waiting</i>}</>;
 })());
 
-const conditionalDrawing = cs.lift(((__cs_Held = cs.splice(Held)) => {
+const conditionalDrawing = cs.lift((() => {
     const __cs_builds = cs.splice((createSignal))(0);
-    return (<div>{<span>{"builds " + __cs_builds[0]()}</span>}{<section>{<__cs_Held again={() => {
-        __cs_builds[1](__cs_builds[0]() + 1);
-        return __cs_builds[0]() < 5;
-    }}/>}</section>}</div>);
+    return (<div>{<span>{"builds " + __cs_builds[0]()}</span>}{<section>{cs.splice(Held)({ again: () => {
+            __cs_builds[1](__cs_builds[0]() + 1);
+            return __cs_builds[0]() < 5;
+        } })}</section>}</div>);
 })());
 
 describe("a component whose drawing is a conditional", () => {

@@ -1,188 +1,191 @@
-cs.lift((() =>                            → cs`
-<                                         → <
-circle                                    → circle
-                                          →  
-cx                                        → cx
-={                                        → =
-"5"                                       → "5"
-}                                         → 
-                                          →  
-cy                                        → cy
-={                                        → =
-"5"                                       → "5"
-}                                         → 
-                                          →  
-r                                         → r
-={                                        → =
-"4"                                       → "4"
-}                                         → 
-                                          →  
-fill                                      → fill
-={                                        → =
-"none"                                    → "none"
-}                                         → 
-                                          →  
-stroke                                    → stroke
-={                                        → =
-"currentColor"                            → "currentColor"
-}                                         → 
-/>                                        →  />
-)())                                      → `
-cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n  
-const                                     → const 
-__cs_Dot                                  → Dot
- =                                        →  = 
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-x                                         → x
-:                                         → : 
-number                                    → number
-;                                         → 
-\n    }                                   →  }
-) =>                                      → ) => 
-(                                         → (\n    
-<                                         → <
-circle                                    → circle
-                                          →  
-cx                                        → cx
-={                                        → ={
-__cs_props                                → props
-.                                         → .
-x                                         → x
-}                                         → }
-                                          →  
-cy                                        → cy
-={                                        → =
-"5"                                       → "5"
-}                                         → 
-                                          →  
-r                                         → r
-={                                        → =
-"2"                                       → "2"
-}                                         → 
->{                                        → >\n      
-<                                         → <
-title                                     → title
->{                                        → >{
-"dot "                                    → "dot "
- +                                        →  + 
-__cs_props                                → props
-.                                         → .
-x                                         → x
-}</                                       → }</
-title                                     → title
->                                         → >
-}</                                       → \n    </
-circle                                    → circle
->                                         → >
-)                                         → \n  )
-;                                         → ;
-\n                                        → \n\n  
-return                                    → return 
-(                                         → (\n    
-<                                         → <
-div                                       → div
->{                                        → >\n      
-<                                         → <
-a                                         → a
-                                          →  
-href                                      → href
-={                                        → =
-"/shapes"                                 → "/shapes"
-}                                         → 
->{                                        → >{
-"shapes"                                  → "shapes"
-}</                                       → }</
-a                                         → a
->                                         → >
-}{                                        → \n      
-<                                         → <
-svg                                       → svg
-                                          →  
-viewBox                                   → viewBox
-={                                        → =
-"0 0 30 10"                               → "0 0 30 10"
-}                                         → 
-                                          →  
-width                                     → width
-={                                        → =
-"120"                                     → "120"
-}                                         → 
->{                                        → >\n        {
-cs.splice(                                → ${ [-semantic]
-(<Ring />)                                → (<Ring />)
-)                                         → } [-semantic]
-}{                                        → }\n        
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-[                                         → [
-10                                        → 10
-,                                         → , 
-20                                        → 20
-]                                         → ]
-}                                         → }
->{                                        → >{
-(                                         → (
-__cs_x                                    → x
-:                                         → : 
-number                                    → number
-) =>                                      → ) => 
-<                                         → <
-__cs_Dot                                  → Dot
-                                          →  
-x                                         → x
-={                                        → ={
-__cs_x                                    → x
-}                                         → }
-/>                                        →  />
-}</                                       → }</
-__cs_For                                  → For
->                                         → >
-}{                                        → \n        
-<                                         → <
-foreignObject                             → foreignObject
-                                          →  
-x                                         → x
-={                                        → =
-"0"                                       → "0"
-}                                         → 
-                                          →  
-y                                         → y
-={                                        → =
-"0"                                       → "0"
-}                                         → 
-                                          →  
-width                                     → width
-={                                        → =
-"10"                                      → "10"
-}                                         → 
-                                          →  
-height                                    → height
-={                                        → =
-"10"                                      → "10"
-}                                         → 
->{                                        → >\n          
-<                                         → <
-p                                         → p
->{                                        → >{
-"html again"                              → "html again"
-}</                                       → }</
-p                                         → p
->                                         → >
-}</                                       → \n        </
-foreignObject                             → foreignObject
->                                         → >
-}</                                       → \n      </
-svg                                       → svg
->                                         → >
-}</                                       → \n    </
-div                                       → div
->                                         → >
-)                                         → \n  )
-;                                         → ;
-\n})())                                   → \n}`
+cs.lift((() =>          → cs`
+<                       → <
+circle                  → circle
+                        →  
+cx                      → cx
+={                      → =
+"5"                     → "5"
+}                       → 
+                        →  
+cy                      → cy
+={                      → =
+"5"                     → "5"
+}                       → 
+                        →  
+r                       → r
+={                      → =
+"4"                     → "4"
+}                       → 
+                        →  
+fill                    → fill
+={                      → =
+"none"                  → "none"
+}                       → 
+                        →  
+stroke                  → stroke
+={                      → =
+"currentColor"          → "currentColor"
+}                       → 
+/>                      →  />
+)())                    → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_Dot                → Dot
+ =                      →  = 
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+x                       → x
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+(                       → (\n    
+<                       → <
+circle                  → circle
+                        →  
+cx                      → cx
+={                      → ={
+__cs_props              → props
+.                       → .
+x                       → x
+}                       → }
+                        →  
+cy                      → cy
+={                      → =
+"5"                     → "5"
+}                       → 
+                        →  
+r                       → r
+={                      → =
+"2"                     → "2"
+}                       → 
+>{                      → >\n      
+<                       → <
+title                   → title
+>{                      → >{
+"dot "                  → "dot "
+ +                      →  + 
+__cs_props              → props
+.                       → .
+x                       → x
+}</                     → }</
+title                   → title
+>                       → >
+}</                     → \n    </
+circle                  → circle
+>                       → >
+)                       → \n  )
+;                       → ;
+\n                      → \n\n  
+return                  → return 
+(                       → (\n    
+<                       → <
+div                     → div
+>{                      → >\n      
+<                       → <
+a                       → a
+                        →  
+href                    → href
+={                      → =
+"/shapes"               → "/shapes"
+}                       → 
+>{                      → >{
+"shapes"                → "shapes"
+}</                     → }</
+a                       → a
+>                       → >
+}{                      → \n      
+<                       → <
+svg                     → svg
+                        →  
+viewBox                 → viewBox
+={                      → =
+"0 0 30 10"             → "0 0 30 10"
+}                       → 
+                        →  
+width                   → width
+={                      → =
+"120"                   → "120"
+}                       → 
+>{                      → >\n        {
+cs.splice(              → ${ [-semantic]
+(<Ring />)              → (<Ring />)
+)                       → } [-semantic]
+}{                      → }\n        
+(void                   → <For each={[10, 20]}>{(x: number) => <Dot x={x} />}</ [-semantic -navigation -verification]
+For                     → For
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+For                     → For
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → For 
+each                    → each
+:                       → ={
+[                       → [
+10                      → 10
+,                       → , 
+20                      → 20
+]                       → ]
+, children:             → >{
+(                       → (
+__cs_x                  → x
+:                       → : 
+number                  → number
+) =>                    → ) => 
+<                       → <
+__cs_Dot                → Dot
+                        →  
+x                       → x
+={                      → ={
+__cs_x                  → x
+}                       → }
+/>                      →  />
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+}{                      → \n        
+<                       → <
+foreignObject           → foreignObject
+                        →  
+x                       → x
+={                      → =
+"0"                     → "0"
+}                       → 
+                        →  
+y                       → y
+={                      → =
+"0"                     → "0"
+}                       → 
+                        →  
+width                   → width
+={                      → =
+"10"                    → "10"
+}                       → 
+                        →  
+height                  → height
+={                      → =
+"10"                    → "10"
+}                       → 
+>{                      → >\n          
+<                       → <
+p                       → p
+>{                      → >{
+"html again"            → "html again"
+}</                     → }</
+p                       → p
+>                       → >
+}</                     → \n        </
+foreignObject           → foreignObject
+>                       → >
+}</                     → \n      </
+svg                     → svg
+>                       → >
+}</                     → \n    </
+div                     → div
+>                       → >
+)                       → \n  )
+;                       → ;
+\n})())                 → \n}`

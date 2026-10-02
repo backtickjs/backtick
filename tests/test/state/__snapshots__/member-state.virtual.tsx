@@ -17,14 +17,14 @@ type Row = {
 // What a signal starts at is the other half of this: the initial is a call
 // here, not data, which is what a signal declared where it is evaluated allows.
 async function MemberRows() {
-  return cs.lift(((__cs_For = cs.splice(For)) => {
+  return cs.lift((() => {
     const __cs_build = (__cs_from: number) => {
         return cs.globalThis.Array.from({ length: 3 }, (__cs__, __cs_at) => {
             return { id: __cs_from + __cs_at, label: cs.splice((createSignal))("row " + (__cs_from + __cs_at)) };
         });
     };
     const __cs_held = cs.splice((createSignal))(__cs_build(1));
-    return (<div>{<ul class={"rows"}>{<__cs_For each={__cs_held[0]()}>{(__cs_row: Row) => (<li onclick={() => __cs_row.label[1]("pressed")}>{__cs_row.label[0]()}</li>)}</__cs_For>}</ul>}</div>);
+    return (<div>{<ul class={"rows"}>{(void For, cs.splice(For)({ each: __cs_held[0](), children: (__cs_row: Row) => (<li onclick={() => __cs_row.label[1]("pressed")}>{__cs_row.label[0]()}</li>) }))}</ul>}</div>);
 })());
 }
 

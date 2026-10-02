@@ -34,6 +34,6 @@ it("largeData", async (t) => {
   await snapshotCase(
     t,
     "largeData",
-    cs.lift(((__cs_For = cs.splice(For)) => <div>{<__cs_For each={cs.splice((orders))}>{(__cs_order: Order) => (<div>{<img src={"https://img.example.com/" + __cs_order.id + ".png"} alt={""}/>}{<span>{__cs_order.customer.name}</span>}{<span>{__cs_order.customer.city}</span>}{<__cs_For each={__cs_order.items}>{(__cs_item: Item) => <span>{__cs_item.sku + " x" + __cs_item.qty}</span>}</__cs_For>}{<span>{"$" + __cs_order.total}</span>}</div>)}</__cs_For>}</div>)()),
+    cs.lift((() => <div>{(void For, cs.splice(For)({ each: cs.splice((orders)), children: (__cs_order: Order) => (<div>{<img src={"https://img.example.com/" + __cs_order.id + ".png"} alt={""}/>}{<span>{__cs_order.customer.name}</span>}{<span>{__cs_order.customer.city}</span>}{(void For, cs.splice(For)({ each: __cs_order.items, children: (__cs_item: Item) => <span>{__cs_item.sku + " x" + __cs_item.qty}</span> }))}{<span>{"$" + __cs_order.total}</span>}</div>) }))}</div>)()),
   );
 });

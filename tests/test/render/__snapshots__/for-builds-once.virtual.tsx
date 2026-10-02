@@ -17,7 +17,7 @@ import { evaluate } from "../evaluate.ts";
 // one: once it stops saying yes, nothing is written and nothing runs again.
 const answerItems = ["one", "two"];
 
-const WaitingList = cs.lift(((__cs_For = cs.splice(For)) => (__cs_props: {
+const WaitingList = cs.lift((() => (__cs_props: {
     more: () => boolean;
 }) => {
     const __cs_items = cs.splice((createSignal))<string[]>([]);
@@ -26,15 +26,15 @@ const WaitingList = cs.lift(((__cs_For = cs.splice(For)) => (__cs_props: {
             __cs_items[1](cs.splice((answerItems)));
         }
     }, 0);
-    return <__cs_For each={__cs_items[0]()}>{(__cs_item: string) => <em>{__cs_item}</em>}</__cs_For>;
+    return (void For, cs.splice(For)({ each: __cs_items[0](), children: (__cs_item: string) => <em>{__cs_item}</em> }));
 })());
 
-const forBuildsOnce = cs.lift(((__cs_WaitingList = cs.splice(WaitingList)) => {
+const forBuildsOnce = cs.lift((() => {
     const __cs_asked = cs.splice((createSignal))(0);
-    return (<div>{<span>{"asked " + __cs_asked[0]()}</span>}{<__cs_WaitingList more={() => {
-        __cs_asked[1](__cs_asked[0]() + 1);
-        return __cs_asked[0]() < 5;
-    }}/>}</div>);
+    return (<div>{<span>{"asked " + __cs_asked[0]()}</span>}{cs.splice(WaitingList)({ more: () => {
+            __cs_asked[1](__cs_asked[0]() + 1);
+            return __cs_asked[0]() < 5;
+        } })}</div>);
 })());
 
 it("forBuildsOnce", async (t) => {

@@ -15,4 +15,4 @@ export const forOnHost = <For each={[1, 2]}>{(n: number) => n}</For>;
 export const badgeOnHost = <Badge n={1} />;
 
 // In a script, both are what they are on the client.
-export const inScript = cs.lift(((__cs_For = cs.splice(For), __cs_Badge = cs.splice(Badge)) => <__cs_For each={[1, 2]}>{__cs_n => <__cs_Badge n={__cs_n}/>}</__cs_For>)());
+export const inScript = cs.lift((() => (void For, cs.splice(For)({ each: [1, 2], children: __cs_n => cs.splice(Badge)({ n: __cs_n }) })))());

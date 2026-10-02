@@ -29,12 +29,12 @@ import type { JSX } from "@backtickjs/solid-js/jsx-runtime";
 // The anchor tests below draw this into a target that is already holding
 // something and empty it, which a claim to the whole target would take with it.
 async function Rows() {
-  return cs.lift(((__cs_For = cs.splice(For)) => {
+  return cs.lift((() => {
     const __cs_ids = cs.splice((createSignal))<number[]>([1, 2, 3]);
     const __cs_clear = () => {
         __cs_ids[1]([]);
     };
-    return (<>{<span onclick={__cs_clear}>clear</span>}{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => <span>{"row " + __cs_id}</span>}</__cs_For>}</>);
+    return (<>{<span onclick={__cs_clear}>clear</span>}{(void For, cs.splice(For)({ each: __cs_ids[0](), children: (__cs_id: number) => <span>{"row " + __cs_id}</span> }))}</>);
 })());
 }
 

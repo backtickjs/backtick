@@ -1,39 +1,42 @@
-cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
-<                                         → <
-div                                       → div
->{                                        → >\n      
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-cs.splice(                                →  [-semantic]
-(rows)                                    → $rows
-)                                         →  [-semantic]
-}                                         → }
->{                                        → >\n        {
-(                                         → (
-__cs_row                                  → row
-:                                         → : 
-number                                    → number
-) =>                                      → ) => 
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
-<                                         → <
-span                                      → span
->{                                        → >{
-"row "                                    → "row "
- +                                        →  + 
-__cs_row                                  → row
-}</                                       → }</
-span                                      → span
->                                         → >
-)())                                      → `
-)                                         → } [-semantic]
-}</                                       → }\n      </
-__cs_For                                  → For
->                                         → >
-}</                                       → \n    </
-div                                       → div
->                                         → >
-)())                                      → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n      
+(void            → <For each={$rows}>\n        {(row: number) => ${cs`<span>{"row " + row}</span>`}}\n      </ [-semantic -navigation -verification]
+For              → For
+,                →  [-semantic -navigation -verification]
+cs.splice(       →  [-semantic -navigation]
+For              → For
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{                → For 
+each             → each
+:                → ={
+cs.splice(       →  [-semantic]
+(rows)           → $rows
+)                →  [-semantic]
+, children:      → >\n        {
+(                → (
+__cs_row         → row
+:                → : 
+number           → number
+) =>             → ) => 
+cs.splice(       → ${ [-semantic]
+cs.lift((() =>   → cs`
+<                → <
+span             → span
+>{               → >{
+"row "           → "row "
+ +               →  + 
+__cs_row         → row
+}</              → }</
+span             → span
+>                → >
+)())             → `
+)                → } [-semantic]
+ }               → 
+))               → > [-semantic -navigation -verification]
+}</              → \n    </
+div              → div
+>                → >
+)())             → `

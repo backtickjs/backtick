@@ -1,188 +1,191 @@
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_count                                → count
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-(                                         → (
-0                                         → 0
-)                                         → )
-;                                         → ;
-\n                                        → \n  
-const                                     → const 
-__cs_Badge                                → Badge
- =                                        →  = 
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-n                                         → n
-:                                         → : 
-number                                    → number
-;                                         → 
-\n    }                                   →  }
-) =>                                      → ) => 
-<                                         → <
-b                                         → b
->{                                        → >{
-"n "                                      → "n "
- +                                        →  + 
-__cs_props                                → props
-.                                         → .
-n                                         → n
-}</                                       → }</
-b                                         → b
->                                         → >
-;                                         → ;
-\n                                        → \n\n  
-return                                    → return 
-(                                         → (\n    
-<                                         → <
-div                                       → div
->{                                        → >\n      {
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
-<                                         → <
-__cs_Badge                                → Badge
-                                          →  
-n                                         → n
-={                                        → ={
-__cs_count                                → count
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}                                         → }
-/>                                        →  />
-)())                                      → `
-)                                         → } [-semantic]
-}{                                        → }\n      {\n        
-cs.splice(                                → ${ [-semantic]
-cs.lift((() => {\n                        → cs`{\n          
-const                                     → const 
-__cs_skipped                              → skipped
- =                                        →  = 
-10                                        → 10
-;                                         → ;
-\n                                        → \n          
-return                                    → return 
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
-<                                         → <
-__cs_Badge                                → Badge
-                                          →  
-n                                         → n
-={                                        → ={
-__cs_count                                → count
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- +                                        →  + 
-100                                       → 100
-}                                         → }
-/>                                        →  />
-)())                                      → `
-)                                         → } [-semantic]
-;                                         → ;
-\n})())                                   → \n        }`
-)                                         → } [-semantic]
-}{                                        → \n      }\n      {
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
-<                                         → <
-section                                   → section
->{                                        → >{
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
-<                                         → <
-__cs_Badge                                → Badge
-                                          →  
-n                                         → n
-={                                        → ={
-__cs_count                                → count
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- +                                        →  + 
-1000                                      → 1000
-}                                         → }
-/>                                        →  />
-)())                                      → `
-)                                         → } [-semantic]
-}</                                       → }</
-section                                   → section
->                                         → >
-)())                                      → `
-)                                         → } [-semantic]
-}{                                        → }\n      {\n        
-cs.splice(                                → ${ [-semantic]
-cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-[                                         → [
-1                                         → 1
-,                                         → , 
-2                                         → 2
-]                                         → ]
-}                                         → }
->{                                        → >\n          {
-(                                         → (
-__cs_m                                    → m
-:                                         → : 
-number                                    → number
-) =>                                      → ) => 
-<                                         → <
-__cs_Badge                                → Badge
-                                          →  
-n                                         → n
-={                                        → ={
-__cs_m                                    → m
- *                                        →  * 
-__cs_count                                → count
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}                                         → }
-/>                                        →  />
-}</                                       → }\n        </
-__cs_For                                  → For
->                                         → >
-)())                                      → `
-)                                         → } [-semantic]
-}{                                        → \n      }\n      
-<                                         → <
-button                                    → button
-                                          →  
-onclick                                   → onclick
-={                                        → ={
-() =>                                     → () => 
-__cs_count                                → count
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-__cs_count                                → count
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-)                                         → )
-}                                         → }
->more</                                   → >more</
-button                                    → button
->                                         → >
-}</                                       → \n    </
-div                                       → div
->                                         → >
-)                                         → \n  )
-;                                         → ;
-\n})())                                   → \n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_count              → count
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+0                       → 0
+)                       → )
+;                       → ;
+\n                      → \n  
+const                   → const 
+__cs_Badge              → Badge
+ =                      →  = 
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → <
+b                       → b
+>{                      → >{
+"n "                    → "n "
+ +                      →  + 
+__cs_props              → props
+.                       → .
+n                       → n
+}</                     → }</
+b                       → b
+>                       → >
+;                       → ;
+\n                      → \n\n  
+return                  → return 
+(                       → (\n    
+<                       → <
+div                     → div
+>{                      → >\n      {
+cs.splice(              → ${ [-semantic]
+cs.lift((() =>          → cs`
+<                       → <
+__cs_Badge              → Badge
+                        →  
+n                       → n
+={                      → ={
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+}                       → }
+/>                      →  />
+)())                    → `
+)                       → } [-semantic]
+}{                      → }\n      {\n        
+cs.splice(              → ${ [-semantic]
+cs.lift((() => {\n      → cs`{\n          
+const                   → const 
+__cs_skipped            → skipped
+ =                      →  = 
+10                      → 10
+;                       → ;
+\n                      → \n          
+return                  → return 
+cs.splice(              → ${ [-semantic]
+cs.lift((() =>          → cs`
+<                       → <
+__cs_Badge              → Badge
+                        →  
+n                       → n
+={                      → ={
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+100                     → 100
+}                       → }
+/>                      →  />
+)())                    → `
+)                       → } [-semantic]
+;                       → ;
+\n})())                 → \n        }`
+)                       → } [-semantic]
+}{                      → \n      }\n      {
+cs.splice(              → ${ [-semantic]
+cs.lift((() =>          → cs`
+<                       → <
+section                 → section
+>{                      → >{
+cs.splice(              → ${ [-semantic]
+cs.lift((() =>          → cs`
+<                       → <
+__cs_Badge              → Badge
+                        →  
+n                       → n
+={                      → ={
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1000                    → 1000
+}                       → }
+/>                      →  />
+)())                    → `
+)                       → } [-semantic]
+}</                     → }</
+section                 → section
+>                       → >
+)())                    → `
+)                       → } [-semantic]
+}{                      → }\n      {\n        
+cs.splice(              → ${ [-semantic]
+cs.lift((() =>          → cs`
+(void                   → <For each={[1, 2]}>\n          {(m: number) => <Badge n={m * count[0]()} />}\n        </ [-semantic -navigation -verification]
+For                     → For
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+For                     → For
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → For 
+each                    → each
+:                       → ={
+[                       → [
+1                       → 1
+,                       → , 
+2                       → 2
+]                       → ]
+, children:             → >\n          {
+(                       → (
+__cs_m                  → m
+:                       → : 
+number                  → number
+) =>                    → ) => 
+<                       → <
+__cs_Badge              → Badge
+                        →  
+n                       → n
+={                      → ={
+__cs_m                  → m
+ *                      →  * 
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+}                       → }
+/>                      →  />
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+)())                    → `
+)                       → } [-semantic]
+}{                      → \n      }\n      
+<                       → <
+button                  → button
+                        →  
+onclick                 → onclick
+={                      → ={
+() =>                   → () => 
+__cs_count              → count
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_count              → count
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1                       → 1
+)                       → )
+}                       → }
+>more</                 → >more</
+button                  → button
+>                       → >
+}</                     → \n    </
+div                     → div
+>                       → >
+)                       → \n  )
+;                       → ;
+\n})())                 → \n}`

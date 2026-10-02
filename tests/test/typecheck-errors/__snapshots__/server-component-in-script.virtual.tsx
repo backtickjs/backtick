@@ -17,10 +17,10 @@ function Rule() {
 }
 
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
-export const clientOnly = cs.lift(((__cs_Row = cs.splice(Row)) => <__cs_Row label={"a"}/>)());
+export const clientOnly = cs.lift((() => cs.splice(Row)({ label: "a" }))());
 
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
-export const hybrid = cs.lift(((__cs_Title = cs.splice(Title)) => <__cs_Title text={"Week"}/>)());
+export const hybrid = cs.lift((() => cs.splice(Title)({ text: "Week" }))());
 
 // @ts-expect-error: not assignable to parameter of type 'Spliceable'.
-export const noProps = cs.lift(((__cs_Rule = cs.splice(Rule)) => <__cs_Rule />)());
+export const noProps = cs.lift((() => cs.splice(Rule)({}))());

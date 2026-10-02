@@ -13,10 +13,12 @@ function lift<T>(_: T): Client<T> {
 
 // A constraint that is `unknown` for a value that splices, rather than
 // `Spliceable` itself or an intersection with it: either of those keeps a
-// literal a literal instead of widening it.
+// literal a literal instead of widening it. What can't be spliced is refused
+// once, where it is written, and is `any` after: refused, `T` falls back to
+// `Spliceable`, which splices to `unknown`.
 function splice<T extends [T] extends [Spliceable] ? unknown : Spliceable>(
   _: T,
-): Spliced<T> {
+): unknown extends Spliced<T> ? any : Spliced<T> {
   throw new Error(
     "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

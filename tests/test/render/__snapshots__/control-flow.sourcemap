@@ -1,168 +1,190 @@
-cs.lift(((__cs_Index = cs.splice(Index)) => → cs`
-<                                         → <
-ul                                        → ul
->{                                        → >\n  
-<                                         → <
-__cs_Index                                → Index
-                                          →  
-each                                      → each
-={                                        → ={
-cs.splice(                                →  [-semantic]
-(rows)                                    → $rows
-)                                         →  [-semantic]
-}                                         → }
->{                                        → >\n    {
-(                                         → (
-__cs_row                                  → row
-:                                         → : 
-() =>                                     → () => 
-string                                    → string
-,                                         → , 
-__cs_index                                → index
-:                                         → : 
-number                                    → number
-) =>                                      → ) => 
-<                                         → <
-li                                        → li
->{                                        → >{
-__cs_index                                → index
- +                                        →  + 
-": "                                      → ": "
- +                                        →  + 
-__cs_row                                  → row
-()                                        → ()
-}</                                       → }</
-li                                        → li
->                                         → >
-}</                                       → }\n  </
-__cs_Index                                → Index
->                                         → >
-}</                                       → \n</
-ul                                        → ul
->                                         → >
-)())                                      → `
-cs.lift(((__cs_Switch = cs.splice(Switch), __cs_Match = cs.splice(Match)) => → cs`
-<                                         → <
-__cs_Switch                               → Switch
-                                          →  
-fallback                                  → fallback
-={                                        → ={
-<                                         → <
-p                                         → p
->none</                                   → >none</
-p                                         → p
->                                         → >
-}                                         → }
->{                                        → >\n  
-<                                         → <
-__cs_Match                                → Match
-                                          →  
-when                                      → when
-={                                        → ={
-1                                         → 1
- >                                        →  > 
-2                                         → 2
-}                                         → }
->{                                        → >\n    
-<                                         → <
-p                                         → p
->wrong</                                  → >wrong</
-p                                         → p
->                                         → >
-}</                                       → \n  </
-__cs_Match                                → Match
->                                         → >
-}{                                        → \n  
-<                                         → <
-__cs_Match                                → Match
-                                          →  
-when                                      → when
-={                                        → ={
-2                                         → 2
- >                                        →  > 
-1                                         → 1
-}                                         → }
->{                                        → >\n    
-<                                         → <
-p                                         → p
->right</                                  → >right</
-p                                         → p
->                                         → >
-}</                                       → \n  </
-__cs_Match                                → Match
->                                         → >
-}</                                       → \n</
-__cs_Switch                               → Switch
->                                         → >
-)())                                      → `
-cs.lift(((__cs_ErrorBoundary = cs.splice(ErrorBoundary)) => → cs`
-<                                         → <
-__cs_ErrorBoundary                        → ErrorBoundary
-                                          →  
-fallback                                  → fallback
-={                                        → ={
-<                                         → <
-p                                         → p
->caught</                                 → >caught</
-p                                         → p
->                                         → >
-}                                         → }
->{                                        → >{\n  
-cs.splice(                                → ${ [-semantic]
-cs.lift((() => {\n                        → cs`{\n    
-throw                                     → throw 
-"drawn wrong"                             → "drawn wrong"
-;                                         → ;
-\n})())                                   → \n  }`
-)                                         → } [-semantic]
-}</                                       → \n}</
-__cs_ErrorBoundary                        → ErrorBoundary
->                                         → >
-)())                                      → `
-cs.lift(((__cs_Suspense = cs.splice(Suspense)) => → cs`
-<                                         → <
-__cs_Suspense                             → Suspense
-                                          →  
-fallback                                  → fallback
-={                                        → ={
-<                                         → <
-p                                         → p
->loading</                                → >loading</
-p                                         → p
->                                         → >
-}                                         → }
->{                                        → >\n  
-<                                         → <
-p                                         → p
->loaded</                                 → >loaded</
-p                                         → p
->                                         → >
-}</                                       → \n</
-__cs_Suspense                             → Suspense
->                                         → >
-)())                                      → `
-cs.lift(((__cs_Portal = cs.splice(Portal)) => → cs`
-<                                         → <
-div                                       → div
->{                                        → >\n  
-<                                         → <
-p                                         → p
->here</                                   → >here</
-p                                         → p
->                                         → >
-}{                                        → \n  
-<                                         → <
-__cs_Portal                               → Portal
->{                                        → >\n    
-<                                         → <
-p                                         → p
->elsewhere</                              → >elsewhere</
-p                                         → p
->                                         → >
-}</                                       → \n  </
-__cs_Portal                               → Portal
->                                         → >
-}</                                       → \n</
-div                                       → div
->                                         → >
-)())                                      → `
+cs.lift((() =>          → cs`
+<                       → <
+ul                      → ul
+>{                      → >\n  
+(void                   → <Index each={$rows}>\n    {(row: () => string, index: number) => <li>{index + ": " + row()}</li>}\n  </ [-semantic -navigation -verification]
+Index                   → Index
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+Index                   → Index
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Index 
+each                    → each
+:                       → ={
+cs.splice(              →  [-semantic]
+(rows)                  → $rows
+)                       →  [-semantic]
+, children:             → >\n    {
+(                       → (
+__cs_row                → row
+:                       → : 
+() =>                   → () => 
+string                  → string
+,                       → , 
+__cs_index              → index
+:                       → : 
+number                  → number
+) =>                    → ) => 
+<                       → <
+li                      → li
+>{                      → >{
+__cs_index              → index
+ +                      →  + 
+": "                    → ": "
+ +                      →  + 
+__cs_row                → row
+()                      → ()
+}</                     → }</
+li                      → li
+>                       → >
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+}</                     → \n</
+ul                      → ul
+>                       → >
+)())                    → `
+cs.lift((() =>          → cs`
+(void                   → <Switch fallback={<p>none</p>}>\n  <Match when={1 > 2}>\n    <p>wrong</p>\n  </Match>\n  <Match when={2 > 1}>\n    <p>right</p>\n  </Match>\n</ [-semantic -navigation -verification]
+Switch                  → Switch
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+Switch                  → Switch
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Switch 
+fallback                → fallback
+:                       → ={
+<                       → <
+p                       → p
+>none</                 → >none</
+p                       → p
+>                       → >
+, children: [           → >\n  
+(void                   → <Match when={1 > 2}>\n    <p>wrong</p>\n  </ [-semantic -navigation -verification]
+Match                   → Match
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+Match                   → Match
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Match 
+when                    → when
+:                       → ={
+1                       → 1
+ >                      →  > 
+2                       → 2
+, children:             → >\n    
+<                       → <
+p                       → p
+>wrong</                → >wrong</
+p                       → p
+>                       → >
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+,                       → \n  
+(void                   → <Match when={2 > 1}>\n    <p>right</p>\n  </ [-semantic -navigation -verification]
+Match                   → Match
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+Match                   → Match
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Match 
+when                    → when
+:                       → ={
+2                       → 2
+ >                      →  > 
+1                       → 1
+, children:             → >\n    
+<                       → <
+p                       → p
+>right</                → >right</
+p                       → p
+>                       → >
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+] }                     → 
+))                      → > [-semantic -navigation -verification]
+)())                    → `
+cs.lift((() =>          → cs`
+(void                   → <ErrorBoundary fallback={<p>caught</p>}>{\n  ${cs`{\n    throw "drawn wrong";\n  }`}\n}</ [-semantic -navigation -verification]
+ErrorBoundary           → ErrorBoundary
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+ErrorBoundary           → ErrorBoundary
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → ErrorBoundary 
+fallback                → fallback
+:                       → ={
+<                       → <
+p                       → p
+>caught</               → >caught</
+p                       → p
+>                       → >
+, children:             → >{\n  
+cs.splice(              → ${ [-semantic]
+cs.lift((() => {\n      → cs`{\n    
+throw                   → throw 
+"drawn wrong"           → "drawn wrong"
+;                       → ;
+\n})())                 → \n  }`
+)                       → } [-semantic]
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+)())                    → `
+cs.lift((() =>          → cs`
+(void                   → <Suspense fallback={<p>loading</p>}>\n  <p>loaded</p>\n</ [-semantic -navigation -verification]
+Suspense                → Suspense
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+Suspense                → Suspense
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Suspense 
+fallback                → fallback
+:                       → ={
+<                       → <
+p                       → p
+>loading</              → >loading</
+p                       → p
+>                       → >
+, children:             → >\n  
+<                       → <
+p                       → p
+>loaded</               → >loaded</
+p                       → p
+>                       → >
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+)())                    → `
+cs.lift((() =>          → cs`
+<                       → <
+div                     → div
+>{                      → >\n  
+<                       → <
+p                       → p
+>here</                 → >here</
+p                       → p
+>                       → >
+}{                      → \n  
+(void                   → <Portal>\n    <p>elsewhere</p>\n  </ [-semantic -navigation -verification]
+Portal                  → Portal
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+Portal                  → Portal
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{ children:             → Portal>\n    
+<                       → <
+p                       → p
+>elsewhere</            → >elsewhere</
+p                       → p
+>                       → >
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+}</                     → \n</
+div                     → div
+>                       → >
+)())                    → `

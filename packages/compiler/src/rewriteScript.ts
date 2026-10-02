@@ -8,12 +8,11 @@ import {
   paramName,
   scriptEdits,
 } from "./emitScript.js";
-import { call, iife, parameter } from "./nodeFactory.js";
+import { call, iife } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution, ResolvedParam } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 import type { SourceRange } from "./SourceRange.js";
-import { mangle } from "./unmangle.js";
 
 /** What `cs.create` is handed for a script: which it is, and what it runs. */
 export interface RuntimeScript {
@@ -167,17 +166,6 @@ export function rewriteScript(
     ),
   });
 
-  // The host tags it names, each declared spliced: a parameter defaulted to
-  // `cs.splice(Day)`, so the script's JSX reads it as the client sees it.
-  const hostTags = params
-    .filter((param) => param.kind === "tag")
-    .map(({ key }) =>
-      parameter(
-        ts,
-        mangle(key),
-        call(ts, "cs", "splice", [ts.factory.createIdentifier(key)]),
-      ),
-    );
   const body = rewritten.virtual as ts.Block | ts.Expression;
   // A splice that awaits is the host's `await`, where the template is: where
   // the host may await, the script's function is async, and awaited there;
@@ -187,7 +175,7 @@ export function rewriteScript(
     Object.values(clientScript.splices).some(
       (splice) => splice.kind === "braced" && hasAwait(ts, splice.expression),
     );
-  const run = iife(ts, hostTags, body, awaits);
+  const run = iife(ts, [], body, awaits);
   const virtual = call(ts, "cs", "lift", [
     awaits ? ts.factory.createAwaitExpression(run) : run,
   ]);

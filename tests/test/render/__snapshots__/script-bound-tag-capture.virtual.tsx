@@ -18,7 +18,7 @@ const scriptBoundTagCapture = cs.lift((() => {
     return (<div>{cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]()}/>)()))}{cs.splice(cs.lift((() => {
     const __cs_skipped = 10;
     return cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]() + 100}/>)()));
-})()))}{cs.splice(cs.lift((() => <section>{cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]() + 1000}/>)()))}</section>)()))}{cs.splice(cs.lift(((__cs_For = cs.splice(For)) => <__cs_For each={[1, 2]}>{(__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count[0]()}/>}</__cs_For>)()))}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>);
+})()))}{cs.splice(cs.lift((() => <section>{cs.splice(cs.lift((() => <__cs_Badge n={__cs_count[0]() + 1000}/>)()))}</section>)()))}{cs.splice(cs.lift((() => (void For, cs.splice(For)({ each: [1, 2], children: (__cs_m: number) => <__cs_Badge n={__cs_m * __cs_count[0]()}/> })))()))}{<button onclick={() => __cs_count[1](__cs_count[0]() + 1)}>more</button>}</div>);
 })());
 
 it("scriptBoundTagCapture", async (t) => {

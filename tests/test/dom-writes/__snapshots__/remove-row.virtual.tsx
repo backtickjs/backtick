@@ -11,9 +11,9 @@ import { evaluate } from "../evaluate.ts";
 // after it close up by staying where they are, so what is written is the one
 // removal.
 async function RemovableRows() {
-  return cs.lift(((__cs_For = cs.splice(For)) => {
+  return cs.lift((() => {
     const __cs_ids = cs.splice((createSignal))<number[]>([1, 2, 3, 4, 5]);
-    return (<table>{<tbody>{<__cs_For each={__cs_ids[0]()}>{(__cs_id: number) => (<tr id={"row-" + __cs_id}>{<td>{<button onclick={() => __cs_ids[1](__cs_ids[0]().filter(__cs_each => __cs_each !== __cs_id))}>{"remove " + __cs_id}</button>}</td>}</tr>)}</__cs_For>}</tbody>}</table>);
+    return (<table>{<tbody>{(void For, cs.splice(For)({ each: __cs_ids[0](), children: (__cs_id: number) => (<tr id={"row-" + __cs_id}>{<td>{<button onclick={() => __cs_ids[1](__cs_ids[0]().filter(__cs_each => __cs_each !== __cs_id))}>{"remove " + __cs_id}</button>}</td>}</tr>) }))}</tbody>}</table>);
 })());
 }
 

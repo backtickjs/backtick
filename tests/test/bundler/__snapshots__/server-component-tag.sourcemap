@@ -1,16 +1,19 @@
-cs.lift((() =>                            → cs`
-<                                         → <
-hr                                        → hr
- />                                       →  />
-)())                                      → `
-cs.lift(((__cs_Rule = cs.splice(Rule)) => → cs`
-<                                         → <
-div                                       → div
->{                                        → >\n        
-<                                         → <
-__cs_Rule                                 → Rule
- />                                       →  />
-}</                                       → \n      </
-div                                       → div
->                                         → >
-)())                                      → `
+cs.lift((() =>   → cs`
+<                → <
+hr               → hr
+ />              →  />
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n        
+cs.splice(       →  [-semantic -navigation]
+Rule             → Rule
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{}               → Rule
+)                →  /> [-semantic -navigation -verification]
+}</              → \n      </
+div              → div
+>                → >
+)())             → `

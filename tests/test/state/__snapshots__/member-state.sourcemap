@@ -1,141 +1,144 @@
-cs.lift(((__cs_For = cs.splice(For)) => {\n    → cs`{\n    
-const                                     → const 
-__cs_build                                → build
- =                                        →  = 
-(                                         → (
-__cs_from                                 → from
-:                                         → : 
-number                                    → number
-) => {\n                                  → ) => {\n      
-return                                    → return 
-cs.globalThis.                            → 
-Array                                     → Array
-.                                         → .
-from                                      → from
-(                                         → (
-{                                         → { 
-length                                    → length
-:                                         → : 
-3                                         → 3
- }                                        →  }
-,                                         → , 
-(                                         → (
-__cs__                                    → _
-,                                         → , 
-__cs_at                                   → at
-) => {\n                                  → ) => {\n        
-return                                    → return 
-{                                         → { 
-id                                        → id
-:                                         → : 
-__cs_from                                 → from
- +                                        →  + 
-__cs_at                                   → at
-,                                         → , 
-label                                     → label
-:                                         → : 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-(                                         → (
-"row "                                    → "row "
- +                                        →  + 
-(                                         → (
-__cs_from                                 → from
- +                                        →  + 
-__cs_at                                   → at
-)                                         → )
-)                                         → )
- }                                        →  }
-;                                         → ;
-\n        }                               → \n      }
-)                                         → )
-;                                         → ;
-\n    }                                   → \n    }
-;                                         → ;
-\n                                        → \n\n    
-const                                     → const 
-__cs_held                                 → held
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-(                                         → (
-__cs_build                                → build
-(                                         → (
-1                                         → 1
-)                                         → )
-)                                         → )
-;                                         → ;
-\n                                        → \n\n    
-return                                    → return 
-(                                         → (\n      
-<                                         → <
-div                                       → div
->{                                        → >\n        
-<                                         → <
-ul                                        → ul
-                                          →  
-class                                     → class
-={                                        → =
-"rows"                                    → "rows"
-}                                         → 
->{                                        → >\n          
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-__cs_held                                 → held
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}                                         → }
->{                                        → >\n            {
-(                                         → (
-__cs_row                                  → row
-:                                         → : 
-Row                                       → Row
-) =>                                      → ) => 
-(                                         → (\n              
-<                                         → <
-li                                        → li
-                                          →  
-onclick                                   → onclick
-={                                        → ={
-() =>                                     → () => 
-__cs_row                                  → row
-.                                         → .
-label                                     → label
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-"pressed"                                 → "pressed"
-)                                         → )
-}                                         → }
->{                                        → >{
-__cs_row                                  → row
-.                                         → .
-label                                     → label
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}</                                       → }</
-li                                        → li
->                                         → >
-)                                         → \n            )
-}</                                       → }\n          </
-__cs_For                                  → For
->                                         → >
-}</                                       → \n        </
-ul                                        → ul
->                                         → >
-}</                                       → \n      </
-div                                       → div
->                                         → >
-)                                         → \n    )
-;                                         → ;
-\n})())                                   → \n  }`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_build              → build
+ =                      →  = 
+(                       → (
+__cs_from               → from
+:                       → : 
+number                  → number
+) => {\n                → ) => {\n      
+return                  → return 
+cs.globalThis.          → 
+Array                   → Array
+.                       → .
+from                    → from
+(                       → (
+{                       → { 
+length                  → length
+:                       → : 
+3                       → 3
+ }                      →  }
+,                       → , 
+(                       → (
+__cs__                  → _
+,                       → , 
+__cs_at                 → at
+) => {\n                → ) => {\n        
+return                  → return 
+{                       → { 
+id                      → id
+:                       → : 
+__cs_from               → from
+ +                      →  + 
+__cs_at                 → at
+,                       → , 
+label                   → label
+:                       → : 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+"row "                  → "row "
+ +                      →  + 
+(                       → (
+__cs_from               → from
+ +                      →  + 
+__cs_at                 → at
+)                       → )
+)                       → )
+ }                      →  }
+;                       → ;
+\n        }             → \n      }
+)                       → )
+;                       → ;
+\n    }                 → \n    }
+;                       → ;
+\n                      → \n\n    
+const                   → const 
+__cs_held               → held
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+__cs_build              → build
+(                       → (
+1                       → 1
+)                       → )
+)                       → )
+;                       → ;
+\n                      → \n\n    
+return                  → return 
+(                       → (\n      
+<                       → <
+div                     → div
+>{                      → >\n        
+<                       → <
+ul                      → ul
+                        →  
+class                   → class
+={                      → =
+"rows"                  → "rows"
+}                       → 
+>{                      → >\n          
+(void                   → <For each={held[0]()}>\n            {(row: Row) => (\n              <li onclick={() => row.label[1]("pressed")}>{row.label[0]()}</li>\n            )}\n          </ [-semantic -navigation -verification]
+For                     → For
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+For                     → For
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → For 
+each                    → each
+:                       → ={
+__cs_held               → held
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+, children:             → >\n            {
+(                       → (
+__cs_row                → row
+:                       → : 
+Row                     → Row
+) =>                    → ) => 
+(                       → (\n              
+<                       → <
+li                      → li
+                        →  
+onclick                 → onclick
+={                      → ={
+() =>                   → () => 
+__cs_row                → row
+.                       → .
+label                   → label
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+"pressed"               → "pressed"
+)                       → )
+}                       → }
+>{                      → >{
+__cs_row                → row
+.                       → .
+label                   → label
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+}</                     → }</
+li                      → li
+>                       → >
+)                       → \n            )
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+}</                     → \n        </
+ul                      → ul
+>                       → >
+}</                     → \n      </
+div                     → div
+>                       → >
+)                       → \n    )
+;                       → ;
+\n})())                 → \n  }`

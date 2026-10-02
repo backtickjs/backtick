@@ -1,197 +1,201 @@
-cs.lift((() =>                            → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-title                                     → title
-:                                         → : 
-string                                    → string
-;                                         → 
-\n}                                       →  }
-) =>                                      → ) => 
-<                                         → <
-h2                                        → h2
->{                                        → >{
-__cs_props                                → props
-.                                         → .
-title                                     → title
-}</                                       → }</
-h2                                        → h2
->                                         → >
-)())                                      → `
-cs.lift((() => {\n                        → cs`{\n    
-const                                     → const 
-__cs_Card                                 → Card
- =                                        →  = 
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-n                                         → n
-:                                         → : 
-number                                    → number
-;                                         → 
-\n    }                                   →  }
-) =>                                      → ) => 
-<                                         → <
-i                                         → i
->{                                        → >{
-cs.splice(                                →  [-semantic]
-(label)                                   → $label
-)                                         →  [-semantic]
- +                                        →  + 
-__cs_props                                → props
-.                                         → .
-n                                         → n
-}</                                       → }</
-i                                         → i
->                                         → >
-;                                         → ;
-\n                                        → \n    
-return                                    → return 
-<                                         → <
-p                                         → p
->{                                        → >{
-cs.splice(                                → ${ [-semantic]
-cs.lift((() =>                            → cs`
-<                                         → <
-__cs_Card                                 → Card
-                                          →  
-n                                         → n
-={                                        → ={
-1                                         → 1
-}                                         → }
-/>                                        →  />
-)())                                      → `
-)                                         → } [-semantic]
-}</                                       → }</
-p                                         → p
->                                         → >
-;                                         → ;
-\n})())                                   → \n  }`
-cs.lift(((__cs_Card = cs.splice(Card)) => → cs`
-<                                         → <
-div                                       → div
->{                                        → >\n      
-<                                         → <
-__cs_Card                                 → Card
-                                          →  
-title                                     → title
-={                                        → =
-"host"                                    → "host"
-}                                         → 
-/>                                        →  />
-}{                                        → \n      {
-cs.splice(                                → ${ [-semantic]
-labelled(                                 → labelled(
-cs.lift((() =>                            → cs`
-"a"                                       → "a"
-)())                                      → `
-)                                         → )
-)                                         → } [-semantic]
-}{                                        → }\n      {
-cs.splice(                                → ${ [-semantic]
-labelled(                                 → labelled(
-cs.lift((() =>                            → cs`
-"b"                                       → "b"
-)())                                      → `
-)                                         → )
-)                                         → } [-semantic]
-}</                                       → }\n    </
-div                                       → div
->                                         → >
-)())                                      → `
-cs.lift(((__cs_Card = cs.splice(Card)) => {\n    → cs`{\n      
-const                                     → const 
-__cs_twice                                → twice
- =                                        →  = 
-(                                         → (
-__cs_Card                                 → Card
-:                                         → : 
-(                                         → (
-props                                     → props
-:                                         → : 
-{\n                                       → { 
-n                                         → n
-:                                         → : 
-number                                    → number
-;                                         → 
-\n    }                                   →  }
-) =>                                      → ) => 
-JSX                                       → JSX
-.                                         → .
-Element                                   → Element
-) =>                                      → ) => 
-(                                         → (\n        
-<                                         → <
-div                                       → div
->{                                        → >\n          
-<                                         → <
-__cs_Card                                 → Card
-                                          →  
-n                                         → n
-={                                        → ={
-1                                         → 1
-}                                         → }
-/>                                        →  />
-}{                                        → \n          
-<                                         → <
-__cs_Card                                 → Card
-                                          →  
-n                                         → n
-={                                        → ={
-2                                         → 2
-}                                         → }
-/>                                        →  />
-}</                                       → \n        </
-div                                       → div
->                                         → >
-)                                         → \n      )
-;                                         → ;
-\n                                        → \n\n      
-return                                    → return 
-(                                         → (\n        
-<                                         → <
-section                                   → section
->{                                        → >\n          
-<                                         → <
-__cs_Card                                 → Card
-                                          →  
-title                                     → title
-={                                        → =
-"host"                                    → "host"
-}                                         → 
-/>                                        →  />
-}{                                        → \n          {
-__cs_twice                                → twice
-(                                         → (
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-n                                         → n
-:                                         → : 
-number                                    → number
-;                                         → 
-\n        }                               →  }
-) =>                                      → ) => 
-(                                         → (\n            
-<                                         → <
-i                                         → i
->{                                        → >{
-"row "                                    → "row "
- +                                        →  + 
-__cs_props                                → props
-.                                         → .
-n                                         → n
-}</                                       → }</
-i                                         → i
->                                         → >
-)                                         → \n          )
-)                                         → )
-}</                                       → }\n        </
-section                                   → section
->                                         → >
-)                                         → \n      )
-;                                         → ;
-\n})())                                   → \n    }`
+cs.lift((() =>          → cs`
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+title                   → title
+:                       → : 
+string                  → string
+;                       → 
+\n}                     →  }
+) =>                    → ) => 
+<                       → <
+h2                      → h2
+>{                      → >{
+__cs_props              → props
+.                       → .
+title                   → title
+}</                     → }</
+h2                      → h2
+>                       → >
+)())                    → `
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_Card               → Card
+ =                      →  = 
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+<                       → <
+i                       → i
+>{                      → >{
+cs.splice(              →  [-semantic]
+(label)                 → $label
+)                       →  [-semantic]
+ +                      →  + 
+__cs_props              → props
+.                       → .
+n                       → n
+}</                     → }</
+i                       → i
+>                       → >
+;                       → ;
+\n                      → \n    
+return                  → return 
+<                       → <
+p                       → p
+>{                      → >{
+cs.splice(              → ${ [-semantic]
+cs.lift((() =>          → cs`
+<                       → <
+__cs_Card               → Card
+                        →  
+n                       → n
+={                      → ={
+1                       → 1
+}                       → }
+/>                      →  />
+)())                    → `
+)                       → } [-semantic]
+}</                     → }</
+p                       → p
+>                       → >
+;                       → ;
+\n})())                 → \n  }`
+cs.lift((() =>          → cs`
+<                       → <
+div                     → div
+>{                      → >\n      
+cs.splice(              →  [-semantic -navigation]
+Card                    → Card
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Card 
+title                   → title
+:                       → =
+"host"                  → "host"
+ }                      → 
+)                       →  title="host" /> [-semantic -navigation -verification]
+}{                      → \n      {
+cs.splice(              → ${ [-semantic]
+labelled(               → labelled(
+cs.lift((() =>          → cs`
+"a"                     → "a"
+)())                    → `
+)                       → )
+)                       → } [-semantic]
+}{                      → }\n      {
+cs.splice(              → ${ [-semantic]
+labelled(               → labelled(
+cs.lift((() =>          → cs`
+"b"                     → "b"
+)())                    → `
+)                       → )
+)                       → } [-semantic]
+}</                     → }\n    </
+div                     → div
+>                       → >
+)())                    → `
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_twice              → twice
+ =                      →  = 
+(                       → (
+__cs_Card               → Card
+:                       → : 
+(                       → (
+props                   → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n    }                 →  }
+) =>                    → ) => 
+JSX                     → JSX
+.                       → .
+Element                 → Element
+) =>                    → ) => 
+(                       → (\n        
+<                       → <
+div                     → div
+>{                      → >\n          
+<                       → <
+__cs_Card               → Card
+                        →  
+n                       → n
+={                      → ={
+1                       → 1
+}                       → }
+/>                      →  />
+}{                      → \n          
+<                       → <
+__cs_Card               → Card
+                        →  
+n                       → n
+={                      → ={
+2                       → 2
+}                       → }
+/>                      →  />
+}</                     → \n        </
+div                     → div
+>                       → >
+)                       → \n      )
+;                       → ;
+\n                      → \n\n      
+return                  → return 
+(                       → (\n        
+<                       → <
+section                 → section
+>{                      → >\n          
+cs.splice(              →  [-semantic -navigation]
+Card                    → Card
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Card 
+title                   → title
+:                       → =
+"host"                  → "host"
+ }                      → 
+)                       →  title="host" /> [-semantic -navigation -verification]
+}{                      → \n          {
+__cs_twice              → twice
+(                       → (
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n        }             →  }
+) =>                    → ) => 
+(                       → (\n            
+<                       → <
+i                       → i
+>{                      → >{
+"row "                  → "row "
+ +                      →  + 
+__cs_props              → props
+.                       → .
+n                       → n
+}</                     → }</
+i                       → i
+>                       → >
+)                       → \n          )
+)                       → )
+}</                     → }\n        </
+section                 → section
+>                       → >
+)                       → \n      )
+;                       → ;
+\n})())                 → \n    }`

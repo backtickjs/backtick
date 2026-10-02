@@ -27,7 +27,7 @@ it("scriptBoundTagCaptureShadow", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagCaptureShadow",
-    cs.lift(((__cs_Card = cs.splice(Card)) => <div>{<__cs_Card title={"host"}/>}{cs.splice(labelled(cs.lift((() => "a")())))}{cs.splice(labelled(cs.lift((() => "b")())))}</div>)()),
+    cs.lift((() => <div>{cs.splice(Card)({ title: "host" })}{cs.splice(labelled(cs.lift((() => "a")())))}{cs.splice(labelled(cs.lift((() => "b")())))}</div>)()),
   );
 });
 
@@ -38,11 +38,11 @@ it("scriptBoundTagScope", async (t) => {
   await snapshotCase(
     t,
     "scriptBoundTagScope",
-    cs.lift(((__cs_Card = cs.splice(Card)) => {
+    cs.lift((() => {
     const __cs_twice = (__cs_Card: (props: {
         n: number;
     }) => JSX.Element) => (<div>{<__cs_Card n={1}/>}{<__cs_Card n={2}/>}</div>);
-    return (<section>{<__cs_Card title={"host"}/>}{__cs_twice((__cs_props: {
+    return (<section>{cs.splice(Card)({ title: "host" })}{__cs_twice((__cs_props: {
             n: number;
         }) => (<i>{"row " + __cs_props.n}</i>))}</section>);
 })()),

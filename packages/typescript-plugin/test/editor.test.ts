@@ -151,10 +151,8 @@ const texts = (spans: readonly { textSpan: ts.TextSpan }[] | undefined) =>
 
 // A client component held on the host, used as a tag inside a script, is the
 // host's binding to an editor: what it reaches, renames and colors as, whatever
-// the virtual code writes the tag as.
-//
-// To do: the compiler's alias for a host tag answers for it instead (see the
-// editor phase of `docs/markup-in-scripts.md`).
+// the virtual code writes the tag as (`cs.splice(Card)({ … })`, each tag's own
+// name mapped to it).
 describe("a host tag in a script, in the editor", () => {
   const declaration = inTags("Card =");
   const cardTags = [
@@ -163,7 +161,7 @@ describe("a host tag in a script, in the editor", () => {
     inTags("</Card", 0, 2),
   ];
 
-  it.todo("goes to the host binding's declaration", () => {
+  it("goes to the host binding's declaration", () => {
     for (const position of cardTags) {
       const definitions = tagsService.getDefinitionAtPosition(
         tagsFixture,
@@ -177,7 +175,7 @@ describe("a host tag in a script, in the editor", () => {
     }
   });
 
-  it.todo("renames the host binding and every tag naming it together", () => {
+  it("renames the host binding and every tag naming it together", () => {
     for (const from of [declaration, inTags("</Card", 0, 2)]) {
       const locations = tagsService.findRenameLocations(
         tagsFixture,
@@ -195,7 +193,7 @@ describe("a host tag in a script, in the editor", () => {
     }
   });
 
-  it.todo("colors nothing in a comment above the tag", () => {
+  it("colors nothing in a comment above the tag", () => {
     const start = inTags("// a comment above the tag");
     const end = tagsSource.indexOf("\n", start);
     const { spans } = tagsService.getEncodedSemanticClassifications(
@@ -212,7 +210,7 @@ describe("a host tag in a script, in the editor", () => {
     assert.deepEqual(inComment, []);
   });
 
-  it.todo("refuses a server component, under its tag", () => {
+  it("refuses a server component, under its tag", () => {
     const diagnostics = tagsService.getSemanticDiagnostics(tagsFixture);
     assert.deepEqual(
       diagnostics.map(({ start, length }) =>

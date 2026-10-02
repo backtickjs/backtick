@@ -1,101 +1,106 @@
-cs.lift((() =>                            → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-n                                         → n
-:                                         → : 
-number                                    → number
-;                                         → 
-\n}                                       →  }
-) =>                                      → ) => 
-<                                         → <
-b                                         → b
->{                                        → >{
-"badge "                                  → "badge "
- +                                        →  + 
-__cs_props                                → props
-.                                         → .
-n                                         → n
-}</                                       → }</
-b                                         → b
->                                         → >
-)())                                      → `
-cs.lift(((__cs_For = cs.splice(For), __cs_Badge = cs.splice(Badge)) => {\n    → cs`{\n  
-const                                     → const 
-__cs_scale                                → scale
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-(                                         → (
-1                                         → 1
-)                                         → )
-;                                         → ;
-\n                                        → \n  
-return                                    → return 
-(                                         → (\n    
-<                                         → <
-div                                       → div
->{                                        → >\n      
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-[                                         → [
-1                                         → 1
-,                                         → , 
-2                                         → 2
-]                                         → ]
-}                                         → }
->{                                        → >{
-__cs_n                                    → n
- =>                                       → ) => 
-<                                         → <
-__cs_Badge                                → Badge
-                                          →  
-n                                         → n
-={                                        → ={
-__cs_n                                    → n
- *                                        →  * 
-__cs_scale                                → scale
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}                                         → }
-/>                                        →  />
-}</                                       → }</
-__cs_For                                  → For
->                                         → >
-}{                                        → \n      
-<                                         → <
-button                                    → button
-                                          →  
-onclick                                   → onclick
-={                                        → ={
-() =>                                     → () => 
-__cs_scale                                → scale
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-__cs_scale                                → scale
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- *                                        →  * 
-2                                         → 2
-)                                         → )
-}                                         → }
->double</                                 → >double</
-button                                    → button
->                                         → >
-}</                                       → \n    </
-div                                       → div
->                                         → >
-)                                         → \n  )
-;                                         → ;
-\n})())                                   → \n}`
+cs.lift((() =>          → cs`
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+n                       → n
+:                       → : 
+number                  → number
+;                       → 
+\n}                     →  }
+) =>                    → ) => 
+<                       → <
+b                       → b
+>{                      → >{
+"badge "                → "badge "
+ +                      →  + 
+__cs_props              → props
+.                       → .
+n                       → n
+}</                     → }</
+b                       → b
+>                       → >
+)())                    → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_scale              → scale
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+1                       → 1
+)                       → )
+;                       → ;
+\n                      → \n  
+return                  → return 
+(                       → (\n    
+<                       → <
+div                     → div
+>{                      → >\n      
+(void                   → <For each={[1, 2]}>{(n) => <Badge n={n * scale[0]()} />}</ [-semantic -navigation -verification]
+For                     → For
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+For                     → For
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → For 
+each                    → each
+:                       → ={
+[                       → [
+1                       → 1
+,                       → , 
+2                       → 2
+]                       → ]
+, children:             → >{
+__cs_n                  → n
+ =>                     → ) => 
+cs.splice(              →  [-semantic -navigation]
+Badge                   → Badge
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → Badge 
+n                       → n
+:                       → ={
+__cs_n                  → n
+ *                      →  * 
+__cs_scale              → scale
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ }                      → 
+)                       →  n={n * scale[0]()} /> [-semantic -navigation -verification]
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+}{                      → \n      
+<                       → <
+button                  → button
+                        →  
+onclick                 → onclick
+={                      → ={
+() =>                   → () => 
+__cs_scale              → scale
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_scale              → scale
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ *                      →  * 
+2                       → 2
+)                       → )
+}                       → }
+>double</               → >double</
+button                  → button
+>                       → >
+}</                     → \n    </
+div                     → div
+>                       → >
+)                       → \n  )
+;                       → ;
+\n})())                 → \n}`

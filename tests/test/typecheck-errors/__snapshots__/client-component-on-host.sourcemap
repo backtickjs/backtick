@@ -1,48 +1,53 @@
-cs.lift((() =>                            → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-n                                         → n
-:                                         → : 
-number                                    → number
-;                                         → 
-\n}                                       →  }
-) =>                                      → ) => 
-<                                         → <
-b                                         → b
->{                                        → >{
-__cs_props                                → props
-.                                         → .
-n                                         → n
-}</                                       → }</
-b                                         → b
->                                         → >
-)())                                      → `
-cs.lift(((__cs_For = cs.splice(For), __cs_Badge = cs.splice(Badge)) => → cs`
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-[                                         → [
-1                                         → 1
-,                                         → , 
-2                                         → 2
-]                                         → ]
-}                                         → }
->{                                        → >{
-__cs_n                                    → n
- =>                                       → ) => 
-<                                         → <
-__cs_Badge                                → Badge
-                                          →  
-n                                         → n
-={                                        → ={
-__cs_n                                    → n
-}                                         → }
-/>                                        →  />
-}</                                       → }</
-__cs_For                                  → For
->                                         → >
-)())                                      → `
+cs.lift((() =>   → cs`
+(                → (
+__cs_props       → props
+:                → : 
+{\n              → { 
+n                → n
+:                → : 
+number           → number
+;                → 
+\n}              →  }
+) =>             → ) => 
+<                → <
+b                → b
+>{               → >{
+__cs_props       → props
+.                → .
+n                → n
+}</              → }</
+b                → b
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
+(void            → <For each={[1, 2]}>{(n) => <Badge n={n} />}</ [-semantic -navigation -verification]
+For              → For
+,                →  [-semantic -navigation -verification]
+cs.splice(       →  [-semantic -navigation]
+For              → For
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{                → For 
+each             → each
+:                → ={
+[                → [
+1                → 1
+,                → , 
+2                → 2
+]                → ]
+, children:      → >{
+__cs_n           → n
+ =>              → ) => 
+cs.splice(       →  [-semantic -navigation]
+Badge            → Badge
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{                → Badge 
+n                → n
+:                → ={
+__cs_n           → n
+ }               → 
+)                →  n={n} /> [-semantic -navigation -verification]
+ }               → 
+))               → > [-semantic -navigation -verification]
+)())             → `

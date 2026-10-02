@@ -597,10 +597,8 @@ function rewriteNodeImpl(
     // `<>` is the fragment; a `<Fragment>` is a tag like any other, naming
     // whatever `Fragment` is in scope.
     const isFragment = opening === null;
-    // A component tag is written mangled: the script's own binding of that
-    // name, or, for a host tag, the alias declared around the script as the
-    // tag spliced — a server component with its props lowered to their client
-    // values, a client import as what it is on the client.
+    // A component tag is the script's own binding of that name, written
+    // mangled, or a host tag, which no scope binds: written as a call (below).
     const component = !isFragment && isComponentTag(tagName);
 
     // In source order, because a host may care that `type` precedes `value`.
@@ -688,6 +686,81 @@ function rewriteNodeImpl(
           ),
         );
       }
+    }
+
+    // A host tag is a call: the host value as the client sees it, given its
+    // props as JSX would give them, `cs.splice(Name)({ … })`. Each name is
+    // mapped to the one written at that tag, so the editor reaches the host
+    // binding from it.
+    if (
+      component &&
+      opening !== null &&
+      !state.bindings.has(opening.tagName as ts.Identifier)
+    ) {
+      const name = (source: ts.Node): ts.Identifier => {
+        const written = ts.factory.createIdentifier(tagName);
+        state.mappings.set(written, source);
+        return written;
+      };
+      const children = virtualChildren.map((child) =>
+        ts.isJsxText(child)
+          ? ts.factory.createStringLiteral(jsxText(child.text)!)
+          : (child as ts.JsxExpression).expression!,
+      );
+      const props = ts.factory.createObjectLiteralExpression(
+        [
+          ...attributes.map((attribute) => {
+            const property = ts.factory.createPropertyAssignment(
+              attribute.name as ts.Identifier,
+              (attribute.initializer as ts.JsxExpression).expression!,
+            );
+            state.mappings.set(property, state.mappings.get(attribute)!);
+            return property;
+          }),
+          ...(children.length === 0
+            ? []
+            : [
+                ts.factory.createPropertyAssignment(
+                  "children",
+                  children.length === 1
+                    ? children[0]!
+                    : ts.factory.createArrayLiteralExpression(children),
+                ),
+              ]),
+        ],
+        false,
+      );
+      // The tag as a value, reported under its name: what isn't a component
+      // is refused there, as JSX refuses it.
+      const callee = call(ts, "cs", "splice", [name(opening.tagName)]);
+      state.mappings.set(callee, opening.tagName);
+      state.codeInformation.set(callee, { semantic: false, navigation: false });
+      const element = ts.factory.createCallExpression(callee, undefined, [
+        props,
+      ]);
+      // A closing tag names the binding too, read before the call so a rename
+      // or a reference reaches it as well.
+      const virtual = ts.isJsxElement(node)
+        ? ts.factory.createParenthesizedExpression(
+            ts.factory.createCommaListExpression([
+              ts.factory.createVoidExpression(
+                name(node.closingElement.tagName),
+              ),
+              element,
+            ]),
+          )
+        : element;
+      // The call itself is no feature of the element: nothing of the wrapper
+      // hovers, navigates or is reported. What the props are given is, so a
+      // missing prop is reported under the tag's name, as JSX reports it.
+      state.mappings.set(virtual, node);
+      state.codeInformation.set(virtual, {
+        semantic: false,
+        navigation: false,
+        verification: false,
+      });
+      state.mappings.set(props, opening.tagName);
+      return { virtual };
     }
 
     const props = ts.factory.createJsxAttributes(attributes);

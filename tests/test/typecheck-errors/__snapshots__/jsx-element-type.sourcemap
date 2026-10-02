@@ -1,108 +1,117 @@
-cs.lift((() =>                            → cs`
-<                                         → <
-div                                       → div
-                                          →  
-class                                     → class
-={                                        → =
-"a"                                       → "a"
-}                                         → 
-/>                                        →  />
-)())                                      → `
-cs.lift((() =>                            → cs`
-<                                         → <
-blink                                     → blink
- />                                       →  />
-)())                                      → `
-cs.lift(((__cs_NotATag = cs.splice(NotATag)) => → cs`
-<                                         → <
-__cs_NotATag                              → NotATag
- />                                       →  />
-)())                                      → `
-cs.lift((() =>                            → cs`
-<>{                                       → <>\n  
-<                                         → <
-span                                      → span
->a</                                      → >a</
-span                                      → span
->                                         → >
-}</>                                      → \n</>
-)())                                      → `
-cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-[]                                        → []
- as                                       →  as 
-number                                    → number
-[]                                        → []
-}                                         → }
->{                                        → >{
-__cs_n                                    → n
- =>                                       → ) => 
-<                                         → <
-i                                         → i
->{                                        → >{
-__cs_n                                    → n
-}</                                       → }</
-i                                         → i
->                                         → >
-}</                                       → }</
-__cs_For                                  → For
->                                         → >
-)())                                      → `
-cs.lift((() =>                            → cs`
-<                                         → <
-div                                       → div
-                                          →  
-nosuch                                    → nosuch
-={                                        → ={
-1                                         → 1
-}                                         → }
-/>                                        →  />
-)())                                      → `
-cs.lift((() =>                            → cs`
-<                                         → <
-div                                       → div
-                                          →  
-class                                     → class
-={                                        → ={
-1                                         → 1
-}                                         → }
-/>                                        →  />
-)())                                      → `
-cs.lift(((__cs_Fragment = cs.splice(Fragment)) => → cs`
-<                                         → <
-__cs_Fragment                             → Fragment
- />                                       →  />
-)())                                      → `
-cs.lift((() =>                            → cs`
-<                                         → <
-div                                       → div
->hello</                                  → >hello</
-div                                       → div
->                                         → >
-)())                                      → `
-cs.lift((() =>                            → cs`
-<                                         → <
-div                                       → div
->{                                        → >{
-1                                         → 1
-}</                                       → }</
-div                                       → div
->                                         → >
-)())                                      → `
-cs.lift((() =>                            → cs`
-<                                         → <
-div                                       → div
->{                                        → >\n  
-<                                         → <
-span                                      → span
->a</                                      → >a</
-span                                      → span
->                                         → >
-}</                                       → \n</
-div                                       → div
->                                         → >
-)())                                      → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+                 →  
+class            → class
+={               → =
+"a"              → "a"
+}                → 
+/>               →  />
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+blink            → blink
+ />              →  />
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic -navigation]
+NotATag          → NotATag
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{}               → NotATag
+)                →  /> [-semantic -navigation -verification]
+)())             → `
+cs.lift((() =>   → cs`
+<>{              → <>\n  
+<                → <
+span             → span
+>a</             → >a</
+span             → span
+>                → >
+}</>             → \n</>
+)())             → `
+cs.lift((() =>   → cs`
+(void            → <For each={[] as number[]}>{(n) => <i>{n}</i>}</ [-semantic -navigation -verification]
+For              → For
+,                →  [-semantic -navigation -verification]
+cs.splice(       →  [-semantic -navigation]
+For              → For
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{                → For 
+each             → each
+:                → ={
+[]               → []
+ as              →  as 
+number           → number
+[]               → []
+, children:      → >{
+__cs_n           → n
+ =>              → ) => 
+<                → <
+i                → i
+>{               → >{
+__cs_n           → n
+}</              → }</
+i                → i
+>                → >
+ }               → 
+))               → > [-semantic -navigation -verification]
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+                 →  
+nosuch           → nosuch
+={               → ={
+1                → 1
+}                → }
+/>               →  />
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+                 →  
+class            → class
+={               → ={
+1                → 1
+}                → }
+/>               →  />
+)())             → `
+cs.lift((() =>   → cs`
+cs.splice(       →  [-semantic -navigation]
+Fragment         → Fragment
+)                →  [-semantic -navigation]
+(                →  [-semantic -navigation -verification]
+{}               → Fragment
+)                →  /> [-semantic -navigation -verification]
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>hello</         → >hello</
+div              → div
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >{
+1                → 1
+}</              → }</
+div              → div
+>                → >
+)())             → `
+cs.lift((() =>   → cs`
+<                → <
+div              → div
+>{               → >\n  
+<                → <
+span             → span
+>a</             → >a</
+span             → span
+>                → >
+}</              → \n</
+div              → div
+>                → >
+)())             → `

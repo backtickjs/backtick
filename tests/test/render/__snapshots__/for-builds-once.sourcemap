@@ -1,160 +1,165 @@
-cs.lift(((__cs_For = cs.splice(For)) =>   → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n                                       → { 
-more                                      → more
-:                                         → : 
-() =>                                     → () => 
-boolean                                   → boolean
-;                                         → 
-\n}                                       →  }
-) => {\n                                  → ) => {\n  
-const                                     → const 
-__cs_items                                → items
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-<                                         → <
-string                                    → string
-[]                                        → []
->(                                        → >(
-[]                                        → []
-)                                         → )
-;                                         → ;
-\n                                        → \n\n  
-const                                     → const 
-__cs_started                              → started
- =                                        →  = 
-cs.globalThis.                            → 
-window                                    → window
-.                                         → .
-setTimeout                                → setTimeout
-(                                         → (
-() => {\n                                 → () => {\n    
-if (                                      → if (
-__cs_props                                → props
-.                                         → .
-more                                      → more
-()                                        → ()
-)                                         → ) 
-{\n                                       → {\n      
-__cs_items                                → items
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-cs.splice(                                →  [-semantic]
-(answerItems)                             → $answerItems
-)                                         →  [-semantic]
-)                                         → )
-;                                         → ;
-\n        }                               → \n    }
-\n    }                                   → \n  }
-,                                         → , 
-0                                         → 0
-)                                         → )
-;                                         → ;
-\n                                        → \n\n  
-return                                    → return 
-<                                         → <
-__cs_For                                  → For
-                                          →  
-each                                      → each
-={                                        → ={
-__cs_items                                → items
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}                                         → }
->{                                        → >{
-(                                         → (
-__cs_item                                 → item
-:                                         → : 
-string                                    → string
-) =>                                      → ) => 
-<                                         → <
-em                                        → em
->{                                        → >{
-__cs_item                                 → item
-}</                                       → }</
-em                                        → em
->                                         → >
-}</                                       → }</
-__cs_For                                  → For
->                                         → >
-;                                         → ;
-\n}                                       → \n}
-)())                                      → `
-cs.lift(((__cs_WaitingList = cs.splice(WaitingList)) => {\n    → cs`{\n  
-const                                     → const 
-__cs_asked                                → asked
- =                                        →  = 
-cs.splice(                                →  [-semantic]
-(createSignal)                            → $createSignal
-)                                         →  [-semantic]
-(                                         → (
-0                                         → 0
-)                                         → )
-;                                         → ;
-\n                                        → \n\n  
-return                                    → return 
-(                                         → (\n    
-<                                         → <
-div                                       → div
->{                                        → >\n      
-<                                         → <
-span                                      → span
->{                                        → >{
-"asked "                                  → "asked "
- +                                        →  + 
-__cs_asked                                → asked
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
-}</                                       → }</
-span                                      → span
->                                         → >
-}{                                        → \n      
-<                                         → <
-__cs_WaitingList                          → WaitingList
-                                          → \n        
-more                                      → more
-={                                        → ={
-() => {\n                                 → () => {\n          
-__cs_asked                                → asked
-[                                         → [
-1                                         → 1
-]                                         → ]
-(                                         → (
-__cs_asked                                → asked
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-)                                         → )
-;                                         → ;
-\n                                        → \n          
-return                                    → return 
-__cs_asked                                → asked
-[                                         → [
-0                                         → 0
-]                                         → ]
-()                                        → ()
- <                                        →  < 
-5                                         → 5
-;                                         → ;
-\n    }                                   → \n        }
-}                                         → }
-/>                                        → \n      />
-}</                                       → \n    </
-div                                       → div
->                                         → >
-)                                         → \n  )
-;                                         → ;
-\n})())                                   → \n}`
+cs.lift((() =>          → cs`
+(                       → (
+__cs_props              → props
+:                       → : 
+{\n                     → { 
+more                    → more
+:                       → : 
+() =>                   → () => 
+boolean                 → boolean
+;                       → 
+\n}                     →  }
+) => {\n                → ) => {\n  
+const                   → const 
+__cs_items              → items
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+<                       → <
+string                  → string
+[]                      → []
+>(                      → >(
+[]                      → []
+)                       → )
+;                       → ;
+\n                      → \n\n  
+const                   → const 
+__cs_started            → started
+ =                      →  = 
+cs.globalThis.          → 
+window                  → window
+.                       → .
+setTimeout              → setTimeout
+(                       → (
+() => {\n               → () => {\n    
+if (                    → if (
+__cs_props              → props
+.                       → .
+more                    → more
+()                      → ()
+)                       → ) 
+{\n                     → {\n      
+__cs_items              → items
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+cs.splice(              →  [-semantic]
+(answerItems)           → $answerItems
+)                       →  [-semantic]
+)                       → )
+;                       → ;
+\n        }             → \n    }
+\n    }                 → \n  }
+,                       → , 
+0                       → 0
+)                       → )
+;                       → ;
+\n                      → \n\n  
+return                  → return 
+(void                   → <For each={items[0]()}>{(item: string) => <em>{item}</em>}</ [-semantic -navigation -verification]
+For                     → For
+,                       →  [-semantic -navigation -verification]
+cs.splice(              →  [-semantic -navigation]
+For                     → For
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → For 
+each                    → each
+:                       → ={
+__cs_items              → items
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+, children:             → >{
+(                       → (
+__cs_item               → item
+:                       → : 
+string                  → string
+) =>                    → ) => 
+<                       → <
+em                      → em
+>{                      → >{
+__cs_item               → item
+}</                     → }</
+em                      → em
+>                       → >
+ }                      → 
+))                      → > [-semantic -navigation -verification]
+;                       → ;
+\n}                     → \n}
+)())                    → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_asked              → asked
+ =                      →  = 
+cs.splice(              →  [-semantic]
+(createSignal)          → $createSignal
+)                       →  [-semantic]
+(                       → (
+0                       → 0
+)                       → )
+;                       → ;
+\n                      → \n\n  
+return                  → return 
+(                       → (\n    
+<                       → <
+div                     → div
+>{                      → >\n      
+<                       → <
+span                    → span
+>{                      → >{
+"asked "                → "asked "
+ +                      →  + 
+__cs_asked              → asked
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+}</                     → }</
+span                    → span
+>                       → >
+}{                      → \n      
+cs.splice(              →  [-semantic -navigation]
+WaitingList             → WaitingList
+)                       →  [-semantic -navigation]
+(                       →  [-semantic -navigation -verification]
+{                       → WaitingList\n        
+more                    → more
+:                       → ={
+() => {\n               → () => {\n          
+__cs_asked              → asked
+[                       → [
+1                       → 1
+]                       → ]
+(                       → (
+__cs_asked              → asked
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ +                      →  + 
+1                       → 1
+)                       → )
+;                       → ;
+\n                      → \n          
+return                  → return 
+__cs_asked              → asked
+[                       → [
+0                       → 0
+]                       → ]
+()                      → ()
+ <                      →  < 
+5                       → 5
+;                       → ;
+\n        }             → \n        }
+ }                      → 
+)                       → \n        more={() => {\n          asked[1](asked[0]() + 1);\n          return asked[0]() < 5;\n        }}\n      /> [-semantic -navigation -verification]
+}</                     → \n    </
+div                     → div
+>                       → >
+)                       → \n  )
+;                       → ;
+\n})())                 → \n}`
