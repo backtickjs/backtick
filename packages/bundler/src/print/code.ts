@@ -8,18 +8,16 @@ import semver from "semver";
 const IDENTIFIER = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 
 /**
- * What a bundle imports, keyed by specifier and export, each bound once; the
- * packages it may import them from, which the client provides, by version;
- * and whether it draws a script a component drew (see `componentElement`).
+ * What a bundle imports, keyed by specifier and export, each bound once; and
+ * the packages it may import them from, which the client provides, by version.
  */
 export interface Names {
   readonly imports: Map<string, { from: string; name: string; local: string }>;
   readonly external: Readonly<Record<string, string>>;
-  usesComponent: boolean;
 }
 
 export function createNames(external: Readonly<Record<string, string>>): Names {
-  return { imports: new Map(), external, usesComponent: false };
+  return { imports: new Map(), external };
 }
 
 // A string, as a literal: `<` escaped, so no `</script>` or `<!--` appears
@@ -119,13 +117,4 @@ export function importDeclaration(
 ): string {
   const exported = IDENTIFIER.test(name) ? name : string(name);
   return `import { ${exported} as ${local} } from ${string(from)};`;
-}
-
-/**
- * A script a component drew, as an element: `<$Component body={() => …} />`,
- * a component whose body is that call, so it runs the way a component's does.
- */
-export function componentElement(names: Names, body: string): string {
-  names.usesComponent = true;
-  return `<$Component body={${thunk(body)}} />`;
 }

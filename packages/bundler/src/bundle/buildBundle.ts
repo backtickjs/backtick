@@ -20,7 +20,6 @@ import {
   imported,
   literal,
   object,
-  componentElement,
   thunk,
   undefinedValue,
 } from "../print/code.js";
@@ -329,12 +328,10 @@ export async function buildBundle(
   const renderJsx = async (jsx: JsxElement, scope: Scope): Promise<string> => {
     const type = jsx.type;
     if (typeof type === "function" && !isClientImport(type)) {
-      const expansion = await expandJsxElement(jsx, type, elementExpansions);
-      // A script is what runs on the client; anything else it answered (another
-      // component's element, a list, nothing) has no setup of its own to guard.
-      return isClientScript(expansion)
-        ? componentElement(names, await render(expansion, scope))
-        : render(expansion, scope);
+      return render(
+        await expandJsxElement(jsx, type, elementExpansions),
+        scope,
+      );
     }
     // An element and a client component (an import, or a script answering
     // one) are client code, so on the host they can't be tags: they are tags

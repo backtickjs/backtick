@@ -1,6 +1,5 @@
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { style as _$style } from "solid-js/web";
 import { effect as _$effect } from "solid-js/web";
 import { memo as _$memo } from "solid-js/web";
@@ -8,9 +7,10 @@ import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div><span>select`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<div><span>`),
   _tmpl$3 = /*#__PURE__*/ _$template(`<span>marker`);
-import { createSignal as $i0 } from "solid-js";
-const $Component = (props) => props.body();
-const $cs0 = ($splice0, $splice1, $splice2) => {
+import { createComponent as $i0 } from "solid-js";
+import { createSignal as $i1 } from "solid-js";
+const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs1 = ($splice0, $splice1, $splice2) => {
   const selected = $splice0()(0);
   return (() => {
     var _el$ = _tmpl$(),
@@ -21,7 +21,7 @@ const $cs0 = ($splice0, $splice1, $splice2) => {
     return _el$;
   })();
 };
-const $cs1 = ($splice0, $splice1) =>
+const $cs2 = ($splice0, $splice1) =>
   (() => {
     var _el$3 = _tmpl$2(),
       _el$4 = _el$3.firstChild;
@@ -43,22 +43,25 @@ const $cs1 = ($splice0, $splice1) =>
     );
     return _el$3;
   })();
-const $cs2 = ($capture0) => $capture0;
-const $cs3 = () => 0;
-const $cs4 = ($capture0) => $capture0;
-const $cs5 = () => 1;
-export default _$createComponent($Component, {
-  body: () =>
-    $cs0(
-      () => $i0,
+const $cs3 = ($capture0) => $capture0;
+const $cs4 = () => 0;
+const $cs5 = ($capture0) => $capture0;
+const $cs6 = () => 1;
+export default $cs0(
+  () => $i0,
+  () =>
+    $cs1(
+      () => $i1,
       (selected) =>
-        _$createComponent($Component, {
-          body: () => $cs1(() => $cs2(selected), $cs3),
-        }),
+        $cs0(
+          () => $i0,
+          () => $cs2(() => $cs3(selected), $cs4),
+        ),
       (selected) =>
-        _$createComponent($Component, {
-          body: () => $cs1(() => $cs4(selected), $cs5),
-        }),
+        $cs0(
+          () => $i0,
+          () => $cs2(() => $cs5(selected), $cs6),
+        ),
     ),
-});
+);
 _$delegateEvents(["click"]);

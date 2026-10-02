@@ -1,10 +1,12 @@
 import {
   createJsxElement,
+  cs,
   type Client,
   type JsxElementOf,
   type JsxElementTypeOf,
 } from "@backtickjs/core";
 import type { JSX as Solid } from "solid-js";
+import { createComponent } from "./index.js";
 
 export declare namespace JSX {
   export type FunctionMaybe<T = unknown> = Solid.FunctionMaybe<T>;
@@ -338,12 +340,16 @@ export function Fragment(props: { children?: unknown }): Client<Solid.Element> {
   return [props.children] as unknown as Client<Solid.Element>;
 }
 
+// A component, run on the client as Solid runs one, through `createComponent`:
+// untracked, so what it reads while it sets up doesn't build it again where it
+// stands.
 export function jsx(
   type: JSX.ElementType,
   props: unknown,
 ): Client<Solid.Element> {
   // Core's element, as this adapter types it: a stand-in for a Solid element.
-  return createJsxElement(type, props) as Client<Solid.Element>;
+  const element = createJsxElement(type, props) as Client<Solid.Element>;
+  return cs`$createComponent(() => $element, {})`;
 }
 
 export const jsxs = jsx;

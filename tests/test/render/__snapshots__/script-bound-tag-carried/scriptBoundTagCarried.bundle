@@ -8,7 +8,7 @@ var _tmpl$ = /*#__PURE__*/ _$template(`<b>`),
   _tmpl$4 = /*#__PURE__*/ _$template(`<section>`),
   _tmpl$5 = /*#__PURE__*/ _$template(`<u>`);
 import { createSignal as $i0 } from "solid-js";
-const $Component = (props) => props.body();
+import { createComponent as $i1 } from "solid-js";
 const $cs0 = ($splice0, $splice1) => {
   const count = $splice0()(0);
   const Badge = (p) =>
@@ -26,7 +26,8 @@ const $cs0 = ($splice0, $splice1) => {
     return _el$2;
   })();
 };
-const $cs1 = ($splice0) => {
+const $cs1 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs2 = ($splice0) => {
   const Badge = (p) =>
     (() => {
       var _el$4 = _tmpl$3();
@@ -46,7 +47,7 @@ const $cs1 = ($splice0) => {
     return _el$5;
   })();
 };
-const $cs2 = ($capture0, $capture1) =>
+const $cs3 = ($capture0, $capture1) =>
   _$createComponent($capture0, {
     get n() {
       return $capture1[0]();
@@ -60,11 +61,12 @@ const $cs2 = ($capture0, $capture1) =>
 export default $cs0(
   () => $i0,
   (count, Badge) =>
-    _$createComponent($Component, {
-      body: () =>
-        $cs1(() => ({
-          body: $cs2(Badge, count),
+    $cs1(
+      () => $i1,
+      () =>
+        $cs2(() => ({
+          body: $cs3(Badge, count),
         })),
-    }),
+    ),
 );
 _$delegateEvents(["click"]);

@@ -1,18 +1,18 @@
 import { template as _$template } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { className as _$className } from "solid-js/web";
 import { effect as _$effect } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<span>`);
-const $Component = (props) => props.body();
+import { createComponent as $i0 } from "solid-js";
 const $cs0 = ($splice0) =>
   (() => {
     var _el$ = _tmpl$();
     _$insert(_el$, $splice0);
     return _el$;
   })();
-const $cs1 = ($splice0, $splice1) =>
+const $cs1 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs2 = ($splice0, $splice1) =>
   (() => {
     var _el$2 = _tmpl$2();
     _$insert(_el$2, $splice1);
@@ -20,11 +20,12 @@ const $cs1 = ($splice0, $splice1) =>
     return _el$2;
   })();
 export default $cs0(() =>
-  _$createComponent($Component, {
-    body: () =>
-      $cs1(
+  $cs1(
+    () => $i0,
+    () =>
+      $cs2(
         () => "danger",
         () => "one",
       ),
-  }),
+  ),
 );

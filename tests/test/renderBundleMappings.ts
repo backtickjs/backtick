@@ -5,6 +5,13 @@ import { decodedMappings, TraceMap } from "@jridgewell/trace-mapping";
 const escape = (text: string): string =>
   text.replace(/\\/g, "\\\\").replace(/\t/g, "\\t");
 
+// A source as the compiler named it: a test file by its path under this
+// directory, a package's file (`@backtickjs/solid-js/src/…`) by its package's.
+const sourcePath = (source: string): string =>
+  source.startsWith("@")
+    ? join(import.meta.dirname, "../node_modules", source)
+    : join(import.meta.dirname, source);
+
 // A bundle's source map as `<generated>  → file line:column <source>`, as
 // `renderClientMappings` reads a script's: a segment of the bundle, and the
 // host text it maps to, read from the file under this directory. What the
@@ -15,10 +22,9 @@ export function renderBundleMappings(code: string, map: string): string {
   const lines = (index: number): string[] => {
     let text = sources.get(index);
     if (text === undefined) {
-      text = readFileSync(
-        join(import.meta.dirname, traced.sources[index]!),
-        "utf8",
-      ).split("\n");
+      text = readFileSync(sourcePath(traced.sources[index]!), "utf8").split(
+        "\n",
+      );
       sources.set(index, text);
     }
     return text;

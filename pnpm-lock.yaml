@@ -406,12 +406,24 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:^0.1.0
         version: link:../bundler
+      '@backtickjs/prettier-plugin':
+        specifier: workspace:*
+        version: link:../prettier-plugin
+      '@backtickjs/tsc':
+        specifier: workspace:^0.1.0
+        version: link:../tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: workspace:^0.1.0
+        version: link:../tspatch-plugin
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

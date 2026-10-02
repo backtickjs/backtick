@@ -1,10 +1,17 @@
 import { template as _$template } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div>`);
+import { createComponent as $i0 } from "solid-js";
 const $cs0 = ($splice0) =>
   (() => {
     var _el$ = _tmpl$();
     _$insert(_el$, $splice0);
     return _el$;
   })();
-export default $cs0(() => null);
+const $cs1 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+export default $cs0(() =>
+  $cs1(
+    () => $i0,
+    () => null,
+  ),
+);

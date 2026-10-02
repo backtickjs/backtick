@@ -1,11 +1,11 @@
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-import { createSignal as $i0 } from "solid-js";
-const $Component = (props) => props.body();
-const $cs0 = ($splice0, $splice1, $splice2, $splice3) => {
+import { createComponent as $i0 } from "solid-js";
+import { createSignal as $i1 } from "solid-js";
+const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs1 = ($splice0, $splice1, $splice2, $splice3) => {
   const held = $splice0()($splice1());
   return (() => {
     var _el$ = _tmpl$();
@@ -14,16 +14,17 @@ const $cs0 = ($splice0, $splice1, $splice2, $splice3) => {
     return _el$;
   })();
 };
-const $cs1 = ($splice0) => (c) => {
+const $cs2 = ($splice0) => (c) => {
   return c === $splice0() ? "blue" : "red";
 };
-export default _$createComponent($Component, {
-  body: () =>
-    $cs0(
-      () => $i0,
+export default $cs0(
+  () => $i0,
+  () =>
+    $cs1(
+      () => $i1,
       () => 0,
       () => 1,
-      () => $cs1(() => 1),
+      () => $cs2(() => 1),
     ),
-});
+);
 _$delegateEvents(["click"]);

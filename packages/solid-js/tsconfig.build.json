@@ -4,6 +4,10 @@
     // The DOM's declarations are what the builtins here are typed with.
     "lib": ["esnext", "dom", "dom.iterable"],
     "emitDeclarationOnly": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "plugins": [
+      // Build with `tspc`, not `tsc`: `jsx()` is a script.
+      { "transform": "@backtickjs/tspatch-plugin" }
+    ]
   }
 }

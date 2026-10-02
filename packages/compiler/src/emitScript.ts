@@ -111,6 +111,7 @@ export function scriptEdits(
 export function emitScript(
   ts: typeof import("typescript"),
   script: ClientScript,
+  sourceName: string,
   params: readonly string[],
   edits: ReadonlyMap<number, Edit>,
 ): EmittedScript {
@@ -213,17 +214,25 @@ export function emitScript(
   const code = output.outputText
     .replace(/\n\/\/# sourceMappingURL=.*$/, "")
     .replace(/;\s*$/, "");
-  return { code, map: moved(output.sourceMapText!, sourceFile, start) };
+  return {
+    code,
+    map: moved(output.sourceMapText!, sourceFile, sourceName, start),
+  };
 }
 
 // A map into the script's text, moved to where the script starts in the host
 // file: every line down by the script's line, and the script's first line
-// across by its column. Named as the host file was, not relative to an output
-// file there is none of, so maps from files in different directories can be
+// across by its column. Named by `sourceName`, not relative to an output file
+// there is none of, so maps from files in different directories can be
 // combined.
-function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
+function moved(
+  map: string,
+  sourceFile: ts.SourceFile,
+  sourceName: string,
+  start: number,
+): string {
   const { line, character } = sourceFile.getLineAndCharacterOfPosition(start);
-  const into = new GenMapping({ file: sourceFile.fileName });
+  const into = new GenMapping({ file: sourceName });
   eachMapping(new TraceMap(map), (mapping) => {
     if (mapping.originalLine === null) {
       addMapping(into, {
@@ -240,7 +249,7 @@ function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
         line: mapping.generatedLine,
         column: mapping.generatedColumn,
       },
-      source: sourceFile.fileName,
+      source: sourceName,
       // Lines are 1-based here, columns 0-based.
       original: {
         line: mapping.originalLine + line,
@@ -254,7 +263,7 @@ function moved(map: string, sourceFile: ts.SourceFile, start: number): string {
   // TypeScript's own map, with only where it points changed.
   return JSON.stringify({
     ...(JSON.parse(map) as object),
-    sources: [sourceFile.fileName],
+    sources: [sourceName],
     mappings: toEncodedMap(into).mappings,
   });
 }

@@ -30,6 +30,7 @@ export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
   fileHash: string,
+  sourceName: string,
   bindings: BindingResolution,
   params: readonly ResolvedParam[] = [],
 ): RewrittenScript {
@@ -175,6 +176,7 @@ export function rewriteScript(
   const emitted = emitScript(
     ts,
     clientScript,
+    sourceName,
     params.map(paramName),
     scriptEdits(clientScript, bindings, params),
   );

@@ -15,7 +15,7 @@ it("refuses a client import as a tag on the host", async () => {
     bundler.build({
       // @ts-expect-error: JSX element type 'For' does not have any construct or call signatures.
       input: <For each={[1]}>{(n: number) => n}</For>,
-      external: {},
+      external: { "solid-js": "1.9.14" },
     }),
     {
       message:
@@ -29,7 +29,7 @@ it("refuses a script as a tag on the host", async () => {
     bundler.build({
       // @ts-expect-error: JSX element type 'Badge' does not have any construct or call signatures.
       input: <Badge n={1} />,
-      external: {},
+      external: { "solid-js": "1.9.14" },
     }),
     {
       message:

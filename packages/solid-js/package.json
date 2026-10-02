@@ -31,8 +31,9 @@
     }
   },
   "scripts": {
-    "build": "tsc -b",
-    "dev": "tsc -b --watch",
+    "typecheck": "backtick-tsc -p tsconfig.build.json --noEmit",
+    "build": "tspc -b --noCheck",
+    "dev": "tspc -b --noCheck --watch",
     "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
@@ -46,10 +47,19 @@
   },
   "devDependencies": {
     "@backtickjs/bundler": "workspace:^0.1.0",
+    "@backtickjs/prettier-plugin": "workspace:*",
+    "@backtickjs/tsc": "workspace:^0.1.0",
+    "@backtickjs/tspatch-plugin": "workspace:^0.1.0",
     "@types/babel__core": "^7.20.5",
     "prettier": "^3.6.2",
+    "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },
   "peerDependencies": {},
-  "peerDependenciesMeta": {}
+  "peerDependenciesMeta": {},
+  "prettier": {
+    "plugins": [
+      "@backtickjs/prettier-plugin"
+    ]
+  }
 }

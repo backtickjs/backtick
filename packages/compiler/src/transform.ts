@@ -2,9 +2,19 @@ import type ts from "typescript";
 import { parseSourceFile } from "./parseFile.js";
 import { rewriteFile } from "./rewriteFile.js";
 
+export interface TransformOptions {
+  /**
+   * What a script's source map names its host file, given TypeScript's name for
+   * it: for a build whose file names are paths on its own machine. By default,
+   * TypeScript's name.
+   */
+  readonly sourceName?: (fileName: string) => string;
+}
+
 export function transform(
   ts: typeof import("typescript"),
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
+  { sourceName = (fileName) => fileName }: TransformOptions = {},
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
     const parsedFile = parseSourceFile(ts, sourceFile);
@@ -12,7 +22,11 @@ export function transform(
       return sourceFile;
     }
 
-    const rewrittenFile = rewriteFile(ts, parsedFile);
+    const rewrittenFile = rewriteFile(
+      ts,
+      parsedFile,
+      sourceName(sourceFile.fileName),
+    );
 
     if (addDiagnostic) {
       for (const diagnostic of rewrittenFile.diagnostics) {

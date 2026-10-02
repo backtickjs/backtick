@@ -26,11 +26,6 @@ export function printBundle(tree: BundleTree): { code: string; map: string } {
   for (const { from, name, local } of names.imports.values()) {
     module.line(importDeclaration(from, name, local));
   }
-  // A component whose body is the function it is handed: what draws a script
-  // a component drew (see `componentElement`). Declared where one is.
-  if (names.usesComponent) {
-    module.line("const $Component = (props) => props.body();");
-  }
   for (const [label, script] of tree.scripts) {
     module.write(`const ${label} = `);
     module.script(script);

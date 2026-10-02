@@ -1,14 +1,14 @@
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 import { memo as _$memo } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(
   `<button id=row style=display:flex;gap:8px><span style=font-weight:700></span><span>`,
 );
-import { createSignal as $i0 } from "solid-js";
-const $Component = (props) => props.body();
-const $cs0 = ($splice0) => {
+import { createComponent as $i0 } from "solid-js";
+import { createSignal as $i1 } from "solid-js";
+const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs1 = ($splice0) => {
   const count = $splice0()(0);
   return (() => {
     var _el$ = _tmpl$(),
@@ -20,7 +20,8 @@ const $cs0 = ($splice0) => {
     return _el$;
   })();
 };
-export default _$createComponent($Component, {
-  body: () => $cs0(() => $i0),
-});
+export default $cs0(
+  () => $i0,
+  () => $cs1(() => $i1),
+);
 _$delegateEvents(["click"]);

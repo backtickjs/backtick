@@ -1,0 +1,140 @@
+cs.lift((() => {\n                       → cs`{\n    
+const                                    → const 
+__cs_shown                               → shown
+ =                                       →  = 
+cs.splice(                               →  [-semantic]
+(createSignal)                           → $createSignal
+)                                        →  [-semantic]
+(                                        → (
+false                                    → false
+)                                        → )
+;                                        → ;
+\n                                       → \n\n    
+const                                    → const 
+__cs_started                             → started
+ =                                       →  = 
+cs.globalThis.                           → 
+window                                   → window
+.                                        → .
+setTimeout                               → setTimeout
+(                                        → (
+() => {\n                                → () => {\n      
+if (                                     → if (
+cs.splice(                               →  [-semantic]
+(again)                                  → $again
+)                                        →  [-semantic]
+()                                       → ()
+)                                        → ) 
+{\n                                      → {\n        
+__cs_shown                               → shown
+[                                        → [
+1                                        → 1
+]                                        → ]
+(                                        → (
+true                                     → true
+)                                        → )
+;                                        → ;
+\n        }                              → \n      }
+\n    }                                  → \n    }
+,                                        → , 
+0                                        → 0
+)                                        → )
+;                                        → ;
+\n                                       → \n\n    
+const                                    → const 
+__cs_read                                → read
+ =                                       →  = 
+__cs_shown                               → shown
+[                                        → [
+0                                        → 0
+]                                        → ]
+()                                       → ()
+;                                        → ;
+\n                                       → \n    
+return                                   → return 
+<                                        → <
+em                                       → em
+>{                                       → >{
+"read "                                  → "read "
+ +                                       →  + 
+__cs_read                                → read
+}</                                      → }</
+em                                       → em
+>                                        → >
+;                                        → ;
+\n})())                                  → \n  }`
+cs.lift((() => {\n                       → cs`{\n  
+const                                    → const 
+__cs_builds                              → builds
+ =                                       →  = 
+cs.splice(                               →  [-semantic]
+(createSignal)                           → $createSignal
+)                                        →  [-semantic]
+(                                        → (
+0                                        → 0
+)                                        → )
+;                                        → ;
+\n                                       → \n  
+return                                   → return 
+(                                        → (\n    
+<                                        → <
+div                                      → div
+>{                                       → >\n      
+<                                        → <
+span                                     → span
+>{                                       → >{
+"builds "                                → "builds "
+ +                                       →  + 
+__cs_builds                              → builds
+[                                        → [
+0                                        → 0
+]                                        → ]
+()                                       → ()
+}</                                      → }</
+span                                     → span
+>                                        → >
+}{                                       → \n      
+<                                        → <
+section                                  → section
+>{                                       → >{\n        
+cs.splice(                               → ${ [-semantic]
+(\n          <Held\n            again={  → (\n          <Held\n            again={
+cs.lift((() =>                           → cs`
+() => {\n                                → () => {\n              
+__cs_builds                              → builds
+[                                        → [
+1                                        → 1
+]                                        → ]
+(                                        → (
+__cs_builds                              → builds
+[                                        → [
+0                                        → 0
+]                                        → ]
+()                                       → ()
+ +                                       →  + 
+1                                        → 1
+)                                        → )
+;                                        → ;
+\n                                       → \n              
+return                                   → return 
+__cs_builds                              → builds
+[                                        → [
+0                                        → 0
+]                                        → ]
+()                                       → ()
+ <                                       →  < 
+5                                        → 5
+;                                        → ;
+\n}                                      → \n            }
+)())                                     → `
+}\n          />\n        )               → }\n          />\n        )
+)                                        → } [-semantic]
+}</                                      → \n      }</
+section                                  → section
+>                                        → >
+}</                                      → \n    </
+div                                      → div
+>                                        → >
+)                                        → \n  )
+;                                        → ;
+\n})())                                  → \n}`

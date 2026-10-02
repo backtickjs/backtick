@@ -1,9 +1,8 @@
 import { template as _$template } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<div>`),
   _tmpl$2 = /*#__PURE__*/ _$template(`<span>x`);
-const $Component = (props) => props.body();
+import { createComponent as $i0 } from "solid-js";
 const $cs0 = ($splice0, $splice1) =>
   (() => {
     var _el$ = _tmpl$();
@@ -20,13 +19,15 @@ const $cs3 = ($splice0) => () => {
   const tree = $splice0();
   return tree;
 };
-const $cs4 = () => _tmpl$2();
+const $cs4 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs5 = () => _tmpl$2();
 export default $cs0(
   () => $cs1($cs2),
   () =>
     $cs3(() =>
-      _$createComponent($Component, {
-        body: () => $cs4(),
-      }),
+      $cs4(
+        () => $i0,
+        () => $cs5(),
+      ),
     ),
 );

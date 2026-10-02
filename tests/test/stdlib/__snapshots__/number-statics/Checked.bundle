@@ -1,9 +1,9 @@
 import { template as _$template } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span>`);
-const $Component = (props) => props.body();
-const $cs0 = () => {
+import { createComponent as $i0 } from "solid-js";
+const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs1 = () => {
   const positive = Number.EPSILON > 0;
   const largest = Number.MAX_VALUE > 1e308;
   const safe =
@@ -34,6 +34,7 @@ const $cs0 = () => {
     return _el$;
   })();
 };
-export default _$createComponent($Component, {
-  body: () => $cs0(),
-});
+export default $cs0(
+  () => $i0,
+  () => $cs1(),
+);

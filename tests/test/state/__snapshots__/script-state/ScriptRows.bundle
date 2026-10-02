@@ -1,11 +1,11 @@
 import { template as _$template } from "solid-js/web";
 import { delegateEvents as _$delegateEvents } from "solid-js/web";
-import { createComponent as _$createComponent } from "solid-js/web";
 import { insert as _$insert } from "solid-js/web";
 var _tmpl$ = /*#__PURE__*/ _$template(`<span style=font-size:16px>`);
-import { createSignal as $i0 } from "solid-js";
-const $Component = (props) => props.body();
-const $cs0 = ($splice0) =>
+import { createComponent as $i0 } from "solid-js";
+import { createSignal as $i1 } from "solid-js";
+const $cs0 = ($splice0, $splice1) => $splice0()(() => $splice1(), {});
+const $cs1 = ($splice0) =>
   (() => {
     var _el$ = _tmpl$();
     _el$.$$click = () => {
@@ -15,12 +15,13 @@ const $cs0 = ($splice0) =>
     _$insert(_el$, () => $splice0()("one").label[0]());
     return _el$;
   })();
-const $cs1 = ($splice0) => (label) => {
+const $cs2 = ($splice0) => (label) => {
   return {
     label: $splice0()(label),
   };
 };
-export default _$createComponent($Component, {
-  body: () => $cs0(() => $cs1(() => $i0)),
-});
+export default $cs0(
+  () => $i0,
+  () => $cs1(() => $cs2(() => $i1)),
+);
 _$delegateEvents(["click"]);
