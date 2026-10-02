@@ -33,16 +33,19 @@ export function parameter(
   );
 }
 
-/** ((<params>) => <body>)() */
+/** ([async ](<params>) => <body>)() */
 export function iife(
   ts: typeof import("typescript"),
   params: ts.ParameterDeclaration[],
   body: ts.ConciseBody,
+  isAsync = false,
 ): ts.CallExpression {
   return ts.factory.createCallExpression(
     ts.factory.createParenthesizedExpression(
       ts.factory.createArrowFunction(
-        undefined,
+        isAsync
+          ? [ts.factory.createModifier(ts.SyntaxKind.AsyncKeyword)]
+          : undefined,
         undefined,
         params,
         undefined,

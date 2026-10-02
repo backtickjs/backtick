@@ -140,7 +140,16 @@ export function rewriteScript(
       ),
     );
   const body = rewritten.virtual as ts.Block | ts.Expression;
-  const virtual = call(ts, "cs", "lift", [iife(ts, hostTags, body)]);
+  // A splice that awaits is the host's `await`, where the template is: the
+  // script's function is async, and awaited there, so it typechecks only
+  // where the host may await.
+  const awaits = Object.values(clientScript.splices).some(
+    (splice) => splice.kind === "braced" && hasAwait(ts, splice.expression),
+  );
+  const run = iife(ts, hostTags, body, awaits);
+  const virtual = call(ts, "cs", "lift", [
+    awaits ? ts.factory.createAwaitExpression(run) : run,
+  ]);
 
   sourceMaps.set(virtual, scriptRange);
 
@@ -166,4 +175,16 @@ export function rewriteScript(
     codeInformation: state.codeInformation,
     diagnostics,
   };
+}
+
+// An `await` in host code, but not one inside a function it holds, which is
+// that function's own, nor in a nested script, which is checked as its own.
+function hasAwait(ts: typeof import("typescript"), node: ts.Node): boolean {
+  if (ts.isAwaitExpression(node)) {
+    return true;
+  }
+  if (ts.isFunctionLike(node) || ts.isTaggedTemplateExpression(node)) {
+    return false;
+  }
+  return ts.forEachChild(node, (child) => hasAwait(ts, child)) ?? false;
 }

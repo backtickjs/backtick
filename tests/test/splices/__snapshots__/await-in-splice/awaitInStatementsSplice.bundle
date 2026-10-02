@@ -1,0 +1,5 @@
+const $cs0 = ($splice0) => {
+  const greeting = $splice0();
+  return greeting + "!";
+};
+export default $cs0(() => "hello");
